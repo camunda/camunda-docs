@@ -14,4 +14,4 @@ Currently supported markers:
 
 - [Multi-instance](multi-instance/multi-instance.md)
 - [Compensation](compensation-handler/compensation-handler.md)
-- [Ad-hoc](ad-hoc/ad-hoc.md)
+- [Ad-hoc](ad-hoc-subprocesses/ad-hoc-subprocesses.md)

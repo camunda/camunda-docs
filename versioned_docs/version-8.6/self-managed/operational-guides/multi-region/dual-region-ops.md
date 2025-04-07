@@ -154,12 +154,12 @@ In our example, we went with port-forwarding to a localhost, but other alternati
 
 1. Use the [REST API](../../../apis-tools/camunda-api-rest/camunda-api-rest-overview.md) to retrieve the list of the remaining brokers
 
-```bash
-kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 8080:8080 -n $CAMUNDA_NAMESPACE_SURVIVING
+   ```bash
+   kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 8080:8080 -n $CAMUNDA_NAMESPACE_SURVIVING
 
-curl -L -X GET 'http://localhost:8080/v2/topology' \
-  -H 'Accept: application/json'
-```
+   curl -L -X GET 'http://localhost:8080/v2/topology' \
+     -H 'Accept: application/json'
+   ```
 
 <details>
   <summary>Example output</summary>
@@ -293,16 +293,32 @@ curl -L -X GET 'http://localhost:8080/v2/topology' \
 
 2. Port-forward the service of the Zeebe Gateway to access the [management REST API](../../zeebe-deployment/configuration/gateway.md#managementserver)
 
-```bash
-kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
-```
+   ```bash
+   kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
+   ```
 
 3. Based on the [Cluster Scaling APIs](../../zeebe-deployment/operations/cluster-scaling.md), send a request to the Zeebe Gateway to redistribute the load to the remaining brokers, thereby removing the lost brokers.
-   In our example, we have lost region 1 and with that our uneven brokers. This means we will have to redistribute to our existing even brokers.
+   Depending on which region was lost, the load must be redistributed to the remaining brokers, either the even or odd numbered ones. In our example, we have lost `region 1` and with it our uneven brokers. This means we will have to redistribute to our existing even brokers. Make sure to only run the correct one based on the surviving region's brokers.
 
-```bash
-curl -XPOST 'http://localhost:9600/actuator/cluster/brokers?force=true' -H 'Content-Type: application/json' -d '["0", "2", "4", "6"]'
-```
+  <Tabs queryString="lost-region">
+    <TabItem value="redistribute-to-even" label="Redistribute to even brokers" default>
+
+    ```bash
+    curl -XPOST 'http://localhost:9600/actuator/cluster/brokers?force=true' -H 'Content-Type: application/json' -d '["0", "2", "4", "6"]'
+    ```
+
+    </TabItem>
+    <TabItem value="redistribute-to-odd" label="Redistribute to odd brokers">
+
+    ```bash
+    curl -XPOST 'http://localhost:9600/actuator/cluster/brokers?force=true' -H 'Content-Type: application/json' -d '["1", "3", "5", "7"]'
+    ```
+
+    </TabItem>
+
+  </Tabs>
+
+Using the `force=true` parameter reduces the replication factor accordingly.
 
 #### Verification
 

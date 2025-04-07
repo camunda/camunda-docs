@@ -34,28 +34,6 @@ Example for environment variable:
 
 Default context-path is `/`.
 
-## Multi-tenancy
-
-Multi-tenancy in the context of Camunda 8 refers to the ability of Camunda 8 to serve multiple distinct [tenants](/self-managed/identity/user-guide/tenants/managing-tenants.md) or
-clients within a single installation.
-
-From version 8.3 onwards, Tasklist has been enhanced to support multi-tenancy for Self-Managed setups. More information about
-the feature can be found in [the multi-tenancy documentation](../concepts/multi-tenancy.md).
-
-### Configuration
-
-For those running a Self-Managed Camunda 8 environment, configuring multi-tenancy in Tasklist requires specific settings:
-
-| Name                                   | Description                                                                                                                                                              | Default value |
-| :------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
-| camunda.tasklist.multi-tenancy.enabled | Activates the multi-tenancy feature within the Tasklist app. This setting can also be overridden using the environment variable `CAMUNDA_TASKLIST_MULTITENANCY_ENABLED`. | false         |
-
-### Troubleshooting
-
-To ensure seamless integration and functionality, the multi-tenancy feature must also be enabled across **all** associated components [if not configured in Helm](/self-managed/concepts/multi-tenancy.md) so users can view any data from tenants for which they have authorizations configured in Identity.
-
-Find more information (including links to individual component configuration) on the [multi-tenancy concepts page](/self-managed/concepts/multi-tenancy.md).
-
 ## Elasticsearch or OpenSearch
 
 Tasklist stores and reads data from Elasticsearch or OpenSearch.
@@ -134,6 +112,20 @@ camunda.tasklist:
     url: https://localhost:9200
     ssl:
       selfSigned: true
+```
+
+#### Disable Elasticsearch deprecation logging
+
+When using an Elasticsearch version ≥8.16.0 it is recommended to turn off deprecation logging for the Elasticsearch cluster.
+
+```shell
+curl -X PUT "http://localhost:9200/_cluster/settings" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "persistent": {
+      "logger.org.elasticsearch.deprecation": "OFF"
+    }
+  }'
 ```
 
 ## Zeebe Broker connection

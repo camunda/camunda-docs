@@ -9,10 +9,6 @@ The Camunda Best Practices distill our experience with BPMN and DMN on the Camun
 
 Please note that, like the core product, Camunda extends the same guarantee to Best Practices. However, we cannot ensure the absolute accuracy or timeliness of the information provided, and any liability for damages resulting from the application of these recommendations is disclaimed.
 
-:::caution Camunda 8
-In general, best practices apply to Camunda 8, but there are also some specific Camunda 7 practices in their own section below.
-:::
-
 ## Project management Best Practices
 
 <DocCardList items={[{type:"link", href:"/docs/next/components/best-practices/management/following-the-customer-success-path/", label: "The Customer Success Path", docId:"components/best-practices/management/following-the-customer-success-path"},
@@ -84,39 +80,4 @@ type:"link", href:"/docs/next/components/best-practices/modeling/choosing-the-dm
 {
 type:"link", href:"/docs/next/components/best-practices/operations/reporting-about-processes/", label: "Process Reporting", docId:"components/best-practices/operations/reporting-about-processes"
 }
-]}/>
-
-## Camunda 7-specific Best Practices
-
-<DocCardList items={[{type:"link", href:"/docs/next/components/best-practices/architecture/deciding-about-your-stack-c7/", label: "Tech Stack Decisions", docId:"components/best-practices/architecture/deciding-about-your-stack-c7"},
-{
-type:"link", href:"/docs/next/components/best-practices/architecture/sizing-your-environment-c7/", label: "Environment Sizing", docId:"components/best-practices/architecture/sizing-your-environment-c7"
-}
-]}/>
-
-### Development
-
-<DocCardList items={[{type:"link", href:"/docs/next/components/best-practices/development/invoking-services-from-the-process-c7/", label: "Service Invocation", docId:"components/best-practices/development/invoking-services-from-the-process-c7"},
-{
-type:"link", href:"/docs/next/components/best-practices/development/understanding-transaction-handling-c7/", label: "Transaction Handling", docId:"components/best-practices/development/understanding-transaction-handling-c7"
-},
-{
-type:"link", href:"/docs/next/components/best-practices/development/testing-process-definitions-c7/", label: "Testing process definitions in Camunda 7", docId:"components/best-practices/development/testing-process-definitions-c7"
-}
-]}/>
-
-### Operations
-
-<DocCardList items={[{type:"link", href:"/docs/next/components/best-practices/operations/operating-camunda-c7/", label: "Operating Camunda 7", docId:"components/best-practices/operations/operating-camunda-c7"},
-{
-type:"link", href:"/docs/next/components/best-practices/operations/performance-tuning-camunda-c7/", label: "Performance Tuning", docId:"components/best-practices/operations/performance-tuning-camunda-c7",
-},
-{
-type:"link", href:"/docs/next/components/best-practices/operations/securing-camunda-c7/", label: "Securing Camunda 7", docId:"components/best-practices/operations/securing-camunda-c7"
-}
-]}/>
-
-### Other
-
-<DocCardList items={[{type:"link", href:"/docs/next/components/best-practices/architecture/extending-human-task-management-c7/", label: "Extending Human Task Management", docId:"components/best-practices/architecture/extending-human-task-management-c7"},
 ]}/>

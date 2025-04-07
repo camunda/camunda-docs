@@ -1,0 +1,46 @@
+---
+name: Validate URLs with Muffet
+
+description: |
+  Validates a page of URLs with Muffet.
+
+  Unlike most tools, Muffet will check the status of an anchor on a page, not just the page itself.
+
+inputs:
+  url_to_validate:
+    description: URL of a page containing links to check with Muffet
+    required: true
+
+  muffet_version:
+    default: v2.10.8
+    description: Version tag of Muffet CLI tool
+    required: false
+
+runs:
+  using: composite
+  steps:
+    - name: Echo inputs
+      shell: bash
+      run: |
+        echo "Inputs"
+        echo "-----"
+        echo "Muffet version  : ${{ inputs.muffet_version }}"
+        echo "URL to validate : ${{ inputs.url_to_validate }}"
+    - name: Restore cache
+      uses: actions/cache@v3
+      id: tool-cache-muffet
+      with:
+        path: /usr/local/bin/muffet
+        key: ${{ runner.os }}-tool-cache-muffet-${{ inputs.muffet_version }}
+    - name: Setup Muffet
+      shell: bash
+      if: ${{ steps.tool-cache-muffet.outputs.cache-hit != 'true' }}
+      run: |-
+        curl -sSL -o /usr/local/bin/muffet_linux_amd64.tar.gz https://github.com/raviqqe/muffet/releases/download/${{ inputs.muffet_version }}/muffet_linux_amd64.tar.gz
+        tar -xvf /usr/local/bin/muffet_linux_amd64.tar.gz -C /usr/local/bin
+        chmod +x /usr/local/bin/muffet
+        muffet --version
+    - name: Validate URLs
+      shell: bash
+      run: |-
+        muffet --one-page-only --verbose ${{ inputs.url_to_validate }}

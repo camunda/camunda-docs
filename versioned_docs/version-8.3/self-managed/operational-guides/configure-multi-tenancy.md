@@ -32,7 +32,7 @@ enabled in **all** required components, see:
 - [Zeebe](../../../self-managed/zeebe-deployment/configuration/gateway-config/#zeebegatewaymultitenancy)
 - [Operate](../../../self-managed/operate-deployment/operate-configuration/#multi-tenancy)
 - [Tasklist](../../../self-managed/tasklist-deployment/tasklist-configuration/#multi-tenancy)
-- [Optimize]($optimize$/self-managed/optimize-deployment/configuration/multi-tenancy/)
+- [Optimize](/self-managed/optimize-deployment/configuration/multi-tenancy.md)
 - [Connectors](../../../self-managed/connectors-deployment/connectors-configuration/#multi-tenancy)
 
 Unexpected behavior may occur if multi-tenancy is only enabled in some components.

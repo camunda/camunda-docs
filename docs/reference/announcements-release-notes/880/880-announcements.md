@@ -46,6 +46,10 @@ New migration guides will also be provided to support you when migrating from a 
 Additional upgrade considerations are necessary for deployments that use custom scripts, such as Docker containers, manual installations, or custom-developed Kubernetes deployments. For these deployments, customers can either continue to deploy with their original 8.7 topology and upgrade each component independently, or adopt our Helm chart approach for the upgrade, which allows for unifying the deployment into a single JAR or container executable.
 :::
 
+### Versioning changes in Elasticsearch
+
+As of the 8.8 release, Camunda is compatible with Elasticsearch 8.16+ and no longer supports older Elasticsearch versions. See [supported environments](/reference/supported-environments.md).
+
 ## Key changes
 
 ### API updates <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
@@ -99,6 +103,33 @@ For more information about the key attribute type change, see
 the [8.7 API key attributes overview][camunda8-api-overview].
 
 [camunda8-api-overview]: /versioned_docs/version-8.7/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#api-key-attributes
+
+### Camunda Exporter <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+
+Camunda web applications used importers and archivers to consume, aggregate, and archive historical data provided by the Elasticsearch (ES) or OpenSearch (OS) exporters.
+
+![87-orchestration-cluster-state](../../img/87-orchestration-cluster-state.png)
+
+With the Camunda 8.8 release, a new Camunda Exporter is introduced. That brings the importing and archiving logic of web components (Tasklist and Operate) closer to the distributed platform (Zeebe). This simplifies the installation, enables scalability for the web applications, reduces latency when showing runtime and historical data, and reduces data duplication (resource consumption).
+
+![brown-field-without-optimize](../../img/brown-field-orchestration-cluster-without-optimize.png)
+
+The new Camunda Exporter helps us achieve a more streamlined architecture, better performance, and improved stability (especially concerning ES/OS).
+For more details about this project, see the related [blog post](https://camunda.com/blog/2025/02/one-exporter-to-rule-them-all-exploring-camunda-exporter/).
+
+### Harmonized index schema
+
+The existing data schema in the secondary storage has been harmonized, to be used by all Camunda components.
+
+- This removes unnecessary duplications over multiple indices due to the previous architecture.
+- With this change, several Operate indices can and will be used by Tasklist.
+- New indices have been created to integrate Identity into the system.
+
+![Harmonized indices schema](../../img/harmonized-indices-schema.png)
+
+<!-- :::info
+Learn more about these updates in Streamlined Deployment with 8.7.
+::: -->
 
 ### Camunda Java client and Camunda Spring SDK
 

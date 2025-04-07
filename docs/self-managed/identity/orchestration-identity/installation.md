@@ -11,6 +11,12 @@ Identity is included by default with the deployment of any [Orchestration cluste
 
 Identity for Orchestration clusters is available via [Helm install](/self-managed/setup/install.md), and for local development via [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md).
 
+:::note
+
+The following guides are on Identity configuration in Self-Managed environments. For information on Identity use and management, see the [user guides](/components/identity/identity-introduction.md).
+
+:::
+
 ## Initial configuration
 
 Following the default installation for [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md) will result in a cluster with the following:
@@ -66,7 +72,7 @@ Any other users included in the initialization `user` list will also be granted 
 
 ### Enable API authentication and authorizations
 
-In Camunda 8 Run installations, basic authentication is enabled on the Camunda web applications, but the API is unprotected, and authorizations are disabled. API protection and authorizations can both be enabled by modifying your `application.yaml` or environment variables:
+In Camunda 8 Run installations, basic authentication is enabled on the Camunda web applications, but the API is unprotected, and [authorizations](/components/identity/authorization.md) are disabled. API protection and authorizations can both be enabled by modifying your `application.yaml` or environment variables:
 
 <Tabs>
   <TabItem value="helm" label="Helm properties">

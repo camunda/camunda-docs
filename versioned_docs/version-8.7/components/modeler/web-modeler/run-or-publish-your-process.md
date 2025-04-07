@@ -37,7 +37,7 @@ To deploy, click **Deploy** in the upper right corner of the modeling screen:
 
 ![The deploy dialog of a BPMN diagram](img/web-modeler-deploy.png)
 
-In Self-Managed, you can deploy your diagram to the cluster defined in your Web Modeler [configuration](/self-managed/modeler/web-modeler/configuration/configuration.md#clusters). You should have the `Zeebe` [role](/self-managed/identity/user-guide/roles/add-assign-role.md#add-a-role) assigned in Identity to be authorized to deploy.
+In Self-Managed, you can deploy your diagram to the cluster defined in your Web Modeler [configuration](/self-managed/modeler/web-modeler/configuration/configuration.md#clusters). You should have the `Zeebe` [role](/self-managed/identity/user-guide/roles/manage-roles.md#add-a-role) assigned in Identity to be authorized to deploy.
 
 ### Before deploying a process
 
@@ -128,7 +128,7 @@ Read more in the [timers documentation](../bpmn/timer-events/timer-events.md).
 - Use [Operate](../../operate/operate-introduction.md) to help you diagnose any problems with the process.
 
 :::tip
-You can also define the success of your processes by setting key performance indicators (KPIs) for your process using [Optimize]($optimize$/components/what-is-optimize).
+You can also define the success of your processes by setting key performance indicators (KPIs) for your process using [Optimize](/components/optimize/what-is-optimize.md).
 :::
 
 ## Publishing a process
@@ -137,23 +137,15 @@ Publishing a process means that you make it available to other users inside and 
 
 You have the following options to publish a process:
 
-- [Deploy a process](#deploy-a-process)
-  - [Before deploying a process](#before-deploying-a-process)
-- [Run a process](#run-a-process)
-  - [Test run using Play mode](#test-run-using-play-mode)
-  - [Run manually from Modeler](#run-manually-from-modeler)
-  - [Schedule via timer](#schedule-via-timer)
-  - [Best practices for running a process](#best-practices-for-running-a-process)
-- [Publishing a process](#publishing-a-process)
-  - [Deploy to run programmatically](#deploy-to-run-programmatically)
-  - [Publish via webhook](#publish-via-webhook)
-  - [Publish to Tasklist](#publish-to-tasklist)
-  - [Publish via a public form](#publish-via-a-public-form)
-    - [Deploy process to the public](#deploy-process-to-the-public)
-    - [Get the public link and share it](#get-the-public-link-and-share-it)
-  - [Listen to message or signal events](#listen-to-message-or-signal-events)
-  - [Best practices for publishing a process](#best-practices-for-publishing-a-process)
-  - [Missing client credentials](#missing-client-credentials)
+- [Deploy to run programmatically](#deploy-to-run-programmatically)
+- [Publish via webhook](#publish-via-webhook)
+- [Publish to Tasklist](#publish-to-tasklist)
+- [Publish via a public form](#publish-via-a-public-form)
+  - [Deploy process to the public](#deploy-process-to-the-public)
+  - [Get the public link and share it](#get-the-public-link-and-share-it)
+- [Listen to message or signal events](#listen-to-message-or-signal-events)
+- [Best practices for publishing a process](#best-practices-for-publishing-a-process)
+- [Missing client credentials](#missing-client-credentials)
 
 ### Deploy to run programmatically
 

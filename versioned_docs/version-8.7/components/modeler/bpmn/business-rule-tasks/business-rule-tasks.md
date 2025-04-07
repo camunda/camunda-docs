@@ -27,7 +27,7 @@ internal DMN decision engine. Once the decision is made, the process instance co
 If the decision evaluation is unsuccessful, an [incident](/components/concepts/incidents.md) is
 raised at the business rule task. When the incident is resolved, the decision is evaluated again.
 
-## Defining a called decision
+## Defining a called decision {#defining-a-task}
 
 A called decision links the business rule task to a DMN decision, either to
 a [decision table](/components/modeler/dmn/decision-table.md) or to

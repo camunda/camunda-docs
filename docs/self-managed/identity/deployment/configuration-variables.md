@@ -119,7 +119,6 @@ Identity uses feature flag environment variables to enable and disable features;
 | Environment variable         | Description                                                     | Default value |
 | ---------------------------- | --------------------------------------------------------------- | ------------- |
 | RESOURCE_PERMISSIONS_ENABLED | Controls the resource authorizations feature.                   | false         |
-| MULTITENANCY_ENABLED         | Controls the multi tenancy feature.                             | false         |
 | USER_RESTRICTIONS_ENABLED    | Controls the user task access restrictions feature in Tasklist. | true          |
 
 :::note

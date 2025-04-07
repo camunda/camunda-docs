@@ -13,7 +13,7 @@ You must especially rewrite code that does the following:
 
 - Uses the Client API (to start process instances for example).
 - Implements [service tasks](/components/modeler/bpmn/service-tasks/service-tasks.md), which can be:
-  - [External tasks](/components/best-practices/development/invoking-services-from-the-process-c7.md#external-tasks), where workers subscribe to the engine.
+  - External tasks, where workers subscribe to the engine.
   - [Java code attached to a service task](https://docs.camunda.org/manual/latest/user-guide/process-engine/delegation-code/) and called by the engine directly (in-VM).
 
 This guide helps you do this if your code is written in Java, and covers the following:
@@ -39,7 +39,7 @@ The pattern catalog was kicked off and will be filled in Q2 of 2025.
 ## OpenRewrite recipes
 
 :::info
-First recipes will be delivered throughout Q2 of 2025, and Camunda plans a first release **with Camunda 8.8 (October 2024)**. Iterative improvements will follow after.
+First recipes will be delivered throughout Q2 of 2025, and Camunda plans a first release **with Camunda 8.8 (October 2025)**. Iterative improvements will follow after.
 :::
 
 [OpenRewrite](https://docs.openrewrite.org/) is an open-source framework that can automate refactorings by so-called recipes. It is provided with an Apache License, making it easy to adopt in any context. Technically, to [run recipes](https://docs.openrewrite.org/running-recipes), you need to add a Maven plugin to your build.
@@ -69,7 +69,7 @@ For example, to run a recipe to convert JavaDelegates to Spring-based Job Worker
 
 Those recipes might work out-of-the-box for your environment, but most often they need to be adjusted to your code patterns. In this case, use the existing patterns as a basis to make your own adjustments or extensions.
 
-You can find the existing recipes on GitHub at [https://github.com/camunda-community-hub/camunda-7-to-8-code-conversion](https://github.com/camunda-community-hub/camunda-7-to-8-code-conversion).
+You can find the existing recipes on [GitHub](https://github.com/camunda-community-hub/camunda-7-to-8-code-conversion).
 
 ## Diagram converter
 
