@@ -48,7 +48,7 @@ Either walk yourself through the prompts or provide all information to the cli
 
 - `csap setup` will guide you interactively.
 
-- Assuming your [Camunda Cluster's API credentials](https://docs.camunda.io/docs/guides/setup-client-connection-credentials/) are sourced in your shell environment, this will do the configuration for you:
+- Assuming your [Camunda cluster's API credentials](/guides/setup-client-connection-credentials.md) are sourced in your shell environment, this will do the configuration for you:
 
 ```shell
 csap setup --for rfc \
@@ -58,17 +58,17 @@ csap setup --for rfc \
 
 #### Manual configuration
 
-1. Find the matching `.war` archive for the targeted Camunda 8 SaaS version on the [respective Github release page](https://github.com/camunda/sap-rfc-connector/releases).  
+1. Find the matching `.war` archive for the targeted Camunda 8 SaaS version on the [respective GitHub release page](https://github.com/camunda/sap-rfc-connector/releases).  
    The version follows the format `<C8 version major>.<C8 version minor>.<RFC connector version>`.  
    Examples:
 
    - `rfc-8.6.0.war` is the RFC Connector in version `0` for C8 SaaS version `8.6`
    - `rfc-8.5.1.war` is the RFC Connector in version `1` for C8 SaaS version `8.5`
 
-2. Download the matching `mtad.yaml.example` file also from [the Github release page](https://github.com/camunda/sap-rfc-connector/releases).
+2. Download the matching `mtad.yaml.example` file also from [the GitHub release page](https://github.com/camunda/sap-rfc-connector/releases).
    Adjust the values for the credentials (`client ID`, `client secret`, etc.) to match those of the API client of the targeted Camunda 8 SaaS environment and rename it to `mtad.yaml`.
 
-3. Donwload the connector template from [the Github release page](https://github.com/camunda/sap-rfc-connector/releases).
+3. Donwload the connector template from [the GitHub release page](https://github.com/camunda/sap-rfc-connector/releases).
 
 ### Deploying to BTP
 

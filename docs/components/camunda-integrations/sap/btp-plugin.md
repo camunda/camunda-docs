@@ -85,7 +85,7 @@ On SAP BTP:
 | **Containers**   |                                |                                  |                                                                                                                                                                                                                          |
 |                  | Group                          | :x:                              |                                                                                                                                                                                                                          |
 |                  | Dynamic list                   | :x:                              |                                                                                                                                                                                                                          |
-|                  | iFrame                         | :x:                              |                                                                                                                                                                                                                          |
+|                  | iframe                         | :x:                              |                                                                                                                                                                                                                          |
 | **Action**       |                                |                                  |                                                                                                                                                                                                                          |
 |                  | Button                         | :x:                              |                                                                                                                                                                                                                          |
 
@@ -101,7 +101,7 @@ Either walk yourself through the prompts or provide all information to the cli
 
 - `csap setup` will guide you interactively.
 
-- Assuming your [Camunda Cluster's API credentials](https://docs.camunda.io/docs/guides/setup-client-connection-credentials/) are sourced in your shell environment, this will do the configuration for you:
+- Assuming your [Camunda cluster's API credentials](/guides/setup-client-connection-credentials.md) are sourced in your shell environment, this will do the configuration for you:
 
 ```shell
 csap setup --for btp-plugin \
