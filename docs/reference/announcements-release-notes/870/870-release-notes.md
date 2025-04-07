@@ -20,6 +20,7 @@ These release notes identify the new features included in 8.7, including [alpha 
 | 8 April 2025           | 13 October 2026              | -            | -            | -            |
 
 ### Camunda SAP Integration
+
 Camunda now offers a robust SAP integration featuring an OData connector for seamless API interactions, an RFC connector for BAPI/function module access, and a dedicated plugin enabling SAP BTP services within BPMN workflows. This solution ensures compliance with IT governance standards using SAP BTP (Business Technology Platform) and the SAP Cloud Connector for enterprise-grade reliability.
 
 To learn more about this feature, see [Camunda SAP Integration](/components/camunda-integrations/sap/camunda-sap-integration.md).
@@ -66,6 +67,8 @@ We have provided a consolidated view of all webhooks, message queue subscription
 We are pleased to announce the release of the Reference Architecture packages for AWS EKS (single-region) and Red Hat OpenShift on AWS (ROSA) in both single and dual-region configurations.  
 These packages offer a standardized Reference Architecture that includes implementation requirements, Terraform templates, Helm configurations, deployment pipelines, and operational procedures.  
 Additionally, we have enhanced the user experience by improving test coverage for the documented procedures.
+
+As part of this effort, the previously used repositories [camunda-tf-eks-module](https://github.com/camunda/camunda-tf-eks-module) and [camunda-tf-rosa](https://github.com/camunda/camunda-tf-rosa) were deprecated and merged into a new consolidated repository: [camunda-deployment-references](https://github.com/camunda/camunda-deployment-references).
 
 <!--- https://github.com/camunda/product-hub/issues/2522 --->
 
