@@ -656,10 +656,10 @@ module.exports = {
             id: "components/camunda-integrations/sap/sap-integration",
           },
           items: [
-            "components/camunda-integrations/sap/sap-integration",
             "components/camunda-integrations/sap/odata-connector",
             "components/camunda-integrations/sap/rfc-connector",
             "components/camunda-integrations/sap/btp-plugin",
+            "components/camunda-integrations/sap/csap-cli",
           ],
         },
       ],
