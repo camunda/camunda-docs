@@ -10,7 +10,7 @@ This guide provides detailed instructions for configuring and managing secrets w
 
 ## Internal Secrets
 
-These secrets are used by Camunda applications. They are created and managed by the Helm Chart unless explicitly configured.
+These secrets are used by Camunda applications. They are created and managed by the Helm chart unless explicitly configured.
 
 | **Secret**                           | **Chart Values Key**                                                                                                          | **Purpose**                                                       | **Default Behavior**            |
 | ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- | ------------------------------- |
