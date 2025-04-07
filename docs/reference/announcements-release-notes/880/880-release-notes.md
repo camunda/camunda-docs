@@ -39,12 +39,14 @@ To learn more about these features, see [ad-hoc subprocesses](/components/modele
 
 <!-- https://github.com/camunda/product-hub/issues/2585 -->
 
-### Advanced User Task Listeners for Updating Events <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span> {#listeners}
+### Advanced User Task Listeners for Updating Events <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span> {#listeners}
 
 Advanced User Task Listeners for Updating Events allow you to define listeners that trigger whenever certain task properties or variables change.
 
 - These listeners generate jobs similar to other event-based task listeners, granting direct access to task data as well as the ability to accept or roll back updates (in certain scenarios).
 - Operators can also view, manage, and resolve incidents caused by these listeners in Operate, ensuring a unified and transparent approach to handling task changes.
+
+To learn more about this feature, see [advanced user task listeners for updating events](/components/concepts/user-task-listeners.md).
 
 <!-- https://github.com/camunda/product-hub/issues/2750 -->
 

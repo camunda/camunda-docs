@@ -29,12 +29,6 @@ We are excited to announce the addition of the [dual-region reference architectu
 
 Step through [a detailed tutorial for deploying two Red Hat OpenShift on AWS (ROSA) cluster with Hosted Control Plane (HCP) in two different regions](/self-managed/setup/deploy/amazon/openshift/terraform-setup-dual-region.md). It is specifically tailored for deploying Camunda 8 using Terraform, a widely-used Infrastructure as Code (IaC) tool.
 
-<!--- https://github.com/camunda/product-hub/issues/2501  --->
-
-### Advanced user task listeners for updating events <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span>
-
-Camunda introduces [advanced user task listeners for updating events](/components/concepts/user-task-listeners.md), enabling developers to define listeners that trigger whenever certain task properties or variables change. These listeners generate jobs similar to other event-based task listeners, granting direct access to task data as well as the ability to accept or roll back updates (in certain scenarios). Operators can also view, manage, and resolve incidents caused by these listeners in Operate, ensuring a unified and transparent approach to handling task changes.
-
 <!--- https://github.com/camunda/product-hub/issues/2585 --->
 
 ### Bulk publish to shared resources <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
