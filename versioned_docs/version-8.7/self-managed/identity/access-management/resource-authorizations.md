@@ -1,16 +1,39 @@
 ---
-id: managing-resource-authorizations
-title: "Managing resource authorizations"
-sidebar_label: "Managing resource authorizations"
-description: "Learn about the methods to control resource access within the Identity application."
+id: resource-authorizations
+title: "Resource Authorizations"
+sidebar_label: "Resource Authorizations"
+description: "Learn about the methods to control resource access."
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-In this guide you will learn about the methods to control resource access within the Identity application.
+**Resource Authorizations** allow you to configure resource-level access to entities in Camunda 8. The following **resource authorizations** are currently supported:
 
-## Creating resource authorizations
+| Resource type | Permissions               | Resource ID                   | Description                                                       |
+| ------------- | ------------------------- | ----------------------------- | ----------------------------------------------------------------- |
+| Process       | `Read`                    | Process ID or `*` (wildcard)  | Show Process Definition and Process Instance Data in Operate UI   |
+| Process       | `Delete`                  | Process ID or `*` (wildcard)  | Delete Process Definitions via Operate UI                         |
+| Process       | `Update process instance` | Process ID or `*` (wildcard)  | Update Process Instance data via Operate UI                       |
+| Process       | `Delete process instance` | Process ID or `*` (wildcard)  | Delete Process Instance via Operate UI                            |
+| Process       | `Start process instance`  | Process ID or `*` (wildcard)  | Start Process Instance via Tasklist UI                            |
+| Decision      | `Read`                    | Decision ID or `*` (wildcard) | Show Decision Definition and Decision Instance Data in Operate UI |
+| Decision      | `Delete`                  | Decision ID or `*` (wildcard) | Delete Decision Definitions via Operate UI                        |
+
+:::note
+Resource authorizations are disabled by default and can be enabled by the use of environment variables. This feature must be enabled in all required components, see:
+
+- [Identity feature flags](/self-managed/identity/deployment/configuration-variables/#feature-flags)
+- [Operate resource based permissions](/self-managed/operate-deployment/operate-authentication/?authentication=identity#resource-based-permissions)
+- [Tasklist resource based permissions](/self-managed/tasklist-deployment/tasklist-authentication/?authentication=identity#resource-based-permissions)
+
+Also a [database must be configured](<(/self-managed/identity/deployment-troubleshooting/configuration-variables.md#database-configuration)>) for Identity.
+
+:::
+
+**Resource Authorizations** are only supported when running Identity with KeyCloak as IdP.
+
+## Managing resource authorizations
 
 Resource authorizations can be configured for an individual user or a group. Below we show you how to create authorizations
 for both:
@@ -65,7 +88,7 @@ Want to apply an authorization to a wide range of resources? We support a wildca
 Partial matching, for example `my-resource*`, is not supported.
 :::
 
-4):. Select the permissions you would like to assign, and click **Create**:
+4. Select the permissions you would like to assign, and click **Create**:
 
 ![create-authorization-for-user-modal-3](../img/create-authorization-for-user-modal-3.png)
 
