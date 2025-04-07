@@ -1,5 +1,5 @@
 ---
-id: starting-configuration-for-identity
+id: starting-configuration
 title: "Starting configuration for Identity"
 sidebar_label: "Starting configuration"
 description: "Understand the set of base configurations to operate Identity correctly."

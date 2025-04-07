@@ -1,18 +1,11 @@
 ---
 id: manage-roles
-title: Manage users and roles
-sidebar_label: "Manage users and roles"
-description: "Use Identity to manage users and roles"
+title: Manage roles
+sidebar_label: "Manage roles"
+description: "Use Identity to manage roles"
 ---
 
-Access to the components within Camunda 8 can be controlled by the roles assigned to a user.
-
-Roles are a way to group sets of [permissions](/self-managed/identity/user-guide/roles/manage-permissions.md). Roles can be assigned to users.
-
-:::caution Write access needed
-To add and assign a role to a user, you need to have write access to Identity.
-Read our [guide on managing user access](/self-managed/identity/user-guide/authorizations/managing-user-access.md) to learn more.
-:::
+# Role management
 
 ## Add a role
 
@@ -65,3 +58,7 @@ To delete an assigned role from a user, take the following steps:
 4. Click the trash icon next to the role.
 
 On confirmation, the modal will close, the table will update, and the role will be removed from the user.
+
+# Next steps
+
+Roles are a way to group sets of [permissions](/self-managed/identity/user-guide/roles/manage-permissions.md).

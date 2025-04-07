@@ -5,7 +5,7 @@ sidebar_label: "Resource management"
 description: "Identity manages resources like users, groups, roles, and tenants. But where are they saved?"
 ---
 
-Identity manages resources like users, groups, roles, and tenants. But where are they saved and how are they referenced?
+When using Keycloak as IdP, Identity uses the following Keycloak resources:
 
 | Identity resource             | Keycloak resource (and how it is filtered)      |
 | ----------------------------- | ----------------------------------------------- |

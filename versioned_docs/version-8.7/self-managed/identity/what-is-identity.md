@@ -2,29 +2,21 @@
 id: what-is-identity
 title: "What is Identity?"
 sidebar_label: "What is Identity?"
-description: "Identity is the component within the Camunda 8 stack responsible for authentication and authorization."
+description: "Identity is the component within the Camunda 8 self-managed stack responsible for authentication and authorization."
 ---
 
-Identity is the component within the Camunda 8 stack responsible for authentication and authorization. It allows you to manage:
+Identity is the component within the Camunda 8 self-managed stack responsible for authentication and authorization. It offers the following capabilities:
 
-- Applications
-- APIs
-- Roles
-- Permissions
-
-For example, using Identity you can:
-
-- [Manage roles](/self-managed/identity/user-guide/roles/manage-roles.md), which is a way to group sets of permissions which can be assigned to users using the Identity UI.
-- [Manage permissions](/self-managed/identity/user-guide/roles/manage-permissions.md) to control the level of access a user or an application has to a particular component.
-- [Manage groups](/self-managed/identity/user-guide/groups/manage-groups.md) to apply a set of roles and authorizations to users.
-- [Manage resource authorizations](/self-managed/identity/user-guide/authorizations/managing-resource-authorizations.md) to control resource access within the Identity application.
-- [Utilize configuration variables](/self-managed/identity/deployment/configuration-variables.md).
+- [Configure](/self-managed/identity/configuration/identity-configuration-overview.md) to either use KeyCloak or a generic OIDC provider as IdP
+- [Authenticate](/self-managed/identity/authentication.md) users via the IdP log-in screen or services via Machine2Machine tokens
+- [Organize](/self-managed/application-user-group-role-management/identity-application-user-group-role-management-overview.md) your **Users** in **Groups**, or **Roles**
+- [Manage Access](/self-managed/identity/access-management/access-management-overview.md) to Camunda 8 via...
+  - **APIs** represent the different Camunda 8 components (e.g., Operate, Tasklist). Each APIs defines for itself a set of [**permissions**](/self-managed/identity/access-management/access-management-overview.md#available-permissions) that can be used to control access to it
+  - [**Permissions**](/self-managed/identity/access-management/access-management-overview.md#available-permissions) can be [organized in **Roles**](/self-managed/identity/access-management/manage-permissions.md#managing-permissions-for-roles), which can be assigned to **Users** either directly or via **Groups**. Additonally, **permissions** can be [assigned](/self-managed/identity/access-management/manage-permissions.md#managing-permissions-for-applications) to your [custom **Application** (e.g., job worker)](/self-managed/identity/application-user-group-role-management/manage-applications.md)
+  - Optionally, you can grant more fine-grined access control to Camunda 8 resources to **Users** or **Groups** using [**resource authorizations**](/self-managed/identity/access-management/resource-authorizations.md#overview)
+- Isolate data access for your custom **Applications** or **Users** [using **Tenants**](/self-managed/identity/managing-tenants.md)
+- Use [**mapping rules**](/self-managed/identity/mapping-rules.md) to integrate Camunda Identity concepts to your existing OIDC-based IdP
 
 ## Next steps
 
-If you're new to Identity, we suggest reviewing our [getting started guide](./getting-started/install-identity.md).
-
-You can use Identity for authentication with Keycloak. The following guidance can be used during platform installation and deployment:
-
-- [Use existing Keycloak](/self-managed/setup/guides/using-existing-keycloak.md)
-- [Connect to an OIDC provider](/self-managed/setup/guides/connect-to-an-oidc-provider.md)
+If you're new to Identity, find out how to access Identity by visiting [first steps](/self-managed/identity/install-identity.md).
