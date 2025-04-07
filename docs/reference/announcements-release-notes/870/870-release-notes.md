@@ -41,23 +41,14 @@ Develop reusable assets in a pro-code environment, push them to your version con
 
 Camunda now offers a robust SAP integration featuring an OData Connector for seamless API interactions, an RFC connector for BAPI/function module access, and a dedicated plugin enabling SAP BTP services within BPMN workflows. This solution ensures compliance with IT governance standards using SAP BTP (Business Technology Platform) and the SAP Cloud Connector for enterprise-grade reliability.
 
-<!--- https://github.com/camunda/product-hub/issues/2415 https://github.com/camunda/product-hub/issues/2649 https://github.com/camunda/product-hub/issues/2650 https://github.com/camunda/product-hub/issues/2578 --->
+### Connector manage and run <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span> {#manage-connectors}
 
-### Cluster connector management in Console <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Console">Console</span> {#manage-connectors}
+Connector manage and run provides a consolidated view of your running inbound Connector [webhooks, message queue subscriptions, and polling subscriptions](/reference/glossary.md#inbound-connector) for efficient monitoring and management.
 
-Cluster connector management allows you to monitor and manage your running inbound connector [webhooks, message queue subscriptions, and polling subscriptions](/reference/glossary.md#inbound-connector).
-
-- To open the **Connector Management** page, on the cluster **Overview** tab, click **Manage** on the Connectors component tile.
-- Use this feature to check your inbound connectors are healthy and running, and troubleshoot unhealthy connectors.
-- For example, you can see if a connector instance is unhealthy, and use the activity log to troubleshoot and resolve issues.
+- Real-time alerts will notify operators when Connectors are not running, preventing unnoticed downtimes.
+- Use this feature to check your inbound Connectors are healthy and running, and troubleshoot unhealthy Connectors.
 
 To learn more about this feature, see [manage your connectors](/components/console/manage-clusters/manage-connectors.md).
-
-<!-- https://github.com/camunda/product-hub/issues/2521 -->
-
-### Connector Manage + Run (SaaS) <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span>
-
-We have provided a consolidated view of all webhooks, message queue subscriptions, and polling subscriptions for efficient monitoring and management. We have also implemented real-time alerts to notify operators when Connectors are not running, preventing unnoticed downtimes. [Learn more about managing Connectors](/components/console/manage-clusters/manage-connectors.md).
 
 <!-- https://github.com/camunda/product-hub/issues/2647 https://github.com/camunda/product-hub/issues/1063 -->
 

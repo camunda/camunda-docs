@@ -50,9 +50,9 @@ To learn more about this feature, see [advanced user task listeners for updating
 
 <!-- https://github.com/camunda/product-hub/issues/2750 -->
 
-### Connector management multiple Connector Runtimes <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Console">Console</span> {#connector-management}
+### Connector manage and run supports multiple Connector Runtimes<span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Console">Console</span> {#connector-management}
 
-Cluster connector management in Console now supports managing multiple Connector Runtime instances.
+Connector manage and run in Console now supports managing multiple Connector Runtime instances.
 
 To learn more about this feature, see [manage your connectors](/components/console/manage-clusters/manage-connectors.md).
 
