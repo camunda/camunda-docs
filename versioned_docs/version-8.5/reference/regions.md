@@ -48,7 +48,6 @@ To learn more about each region code/location, refer to [AWS regions and availab
 
 ### Known limitations
 
-The following limitations currently exist for AWS regions:
+The following limitation currently exists for AWS regions:
 
-- Backups are stored on GCP.
 - HTTP connectors continue to route through GCP.

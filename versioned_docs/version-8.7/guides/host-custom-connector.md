@@ -85,7 +85,7 @@ docker run --rm --name=CustomConnectorInSMWithKeyCloak \
     -e CAMUNDA_IDENTITY_AUDIENCE=operate-api \
     -e CAMUNDA_IDENTITY_ISSUER_BACKEND_URL=http://keycloak:8080/auth/realms/camunda-platform \
     -e CAMUNDA_IDENTITY_CLIENT_ID=connectors \
-    -e CAMUNDA_IDENTITY_CLIENT_SECRET=<YOUR_OPERATE_SECRET> \
+    -e CAMUNDA_IDENTITY_CLIENT_SECRET=<CONNECTORS_CLIENT_SECRET> \
     -e CAMUNDA_OPERATE_CLIENT_URL=http://operate:8080 \
         camunda/connectors-bundle:<desired-version>
 ```

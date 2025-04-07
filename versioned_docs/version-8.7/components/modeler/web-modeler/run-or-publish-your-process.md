@@ -37,7 +37,7 @@ To deploy, click **Deploy** in the upper right corner of the modeling screen:
 
 ![The deploy dialog of a BPMN diagram](img/web-modeler-deploy.png)
 
-In Self-Managed, you can deploy your diagram to the cluster defined in your Web Modeler [configuration](/self-managed/modeler/web-modeler/configuration/configuration.md#clusters). You should have the `Zeebe` [role](/self-managed/identity/user-guide/roles/add-assign-role.md#add-a-role) assigned in Identity to be authorized to deploy.
+In Self-Managed, you can deploy your diagram to the cluster defined in your Web Modeler [configuration](/self-managed/modeler/web-modeler/configuration/configuration.md#clusters). You should have the `Zeebe` [role](/self-managed/identity/user-guide/roles/manage-roles.md#add-a-role) assigned in Identity to be authorized to deploy.
 
 ### Before deploying a process
 
@@ -128,7 +128,7 @@ Read more in the [timers documentation](../bpmn/timer-events/timer-events.md).
 - Use [Operate](../../operate/operate-introduction.md) to help you diagnose any problems with the process.
 
 :::tip
-You can also define the success of your processes by setting key performance indicators (KPIs) for your process using [Optimize]($optimize$/components/what-is-optimize).
+You can also define the success of your processes by setting key performance indicators (KPIs) for your process using [Optimize](/components/optimize/what-is-optimize.md).
 :::
 
 ## Publishing a process

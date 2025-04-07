@@ -37,6 +37,7 @@ Create an additional custom configuration for the schema manager with the follow
 zeebe.broker.exporters.elasticsearch:
   className: io.camunda.zeebe.exporter.ElasticsearchExporter
   args:
+    url: https://localhost:9200
     index:
       createTemplate: true
     retention:
@@ -52,6 +53,12 @@ camunda:
       username: camunda-admin
       password: camunda123
       healthCheckEnabled: false
+      url: https://localhost:9200
+      # If custom SSL configuration is necessary
+      ssl:
+        selfSigned=true
+        verifyHostname=false
+        certificatePath=PATH_TO_CA_CERT
     archiver:
       # Optional, only if ILM is enabled
       ilmEnabled: true
@@ -61,10 +68,18 @@ camunda:
       username: camunda-admin
       password: camunda123
       healthCheckEnabled: false
+      url: https://localhost:9200
+      # If custom SSL configuration is necessary
+      ssl:
+        selfSigned=true
+        verifyHostname=false
+        certificatePath=PATH_TO_CA_CERT
     archiver:
       # Optional, only if ILM is enabled
       ilmEnabled: true
 ```
+
+For additional configuration options available, please take a look at the respective guides from [Operate](../../operate-deployment/operate-configuration/), [Tasklist](../../tasklist-deployment/tasklist-configuration/), and [Zeebe Elasticsearch Exporter](../../zeebe-deployment/exporters/elasticsearch-exporter/).
 
 #### Start the schema manager
 
@@ -139,6 +154,7 @@ Create a configuration for the Camunda single application with the following val
 zeebe.broker.exporters.elasticsearch:
   className: io.camunda.zeebe.exporter.ElasticsearchExporter
   args:
+    url: https://localhost:9200
     index:
       createTemplate: false
     retention:
@@ -155,10 +171,22 @@ camunda:
       username: camunda-app
       password: camunda123
       healthCheckEnabled: false
+      url: https://localhost:9200
+      # If custom SSL configuration is necessary
+      ssl:
+        selfSigned=true
+        verifyHostname=false
+        certificatePath=PATH_TO_CA_CERT
     zeebeElasticsearch:
       # Example assuming an existing user called 'camunda-app' with the privileges described in 2.1
       username: camunda-app
       password: camunda123
+      url: https://localhost:9200
+      # If custom SSL configuration is necessary
+      ssl:
+        selfSigned=true
+        verifyHostname=false
+        certificatePath=PATH_TO_CA_CERT
     archiver:
       ilmEnabled: false
       ilmManagePolicy: false
@@ -170,10 +198,22 @@ camunda:
       username: camunda-app
       password: camunda123
       healthCheckEnabled: false
+      url: https://localhost:9200
+      # If custom SSL configuration is necessary
+      ssl:
+        selfSigned=true
+        verifyHostname=false
+        certificatePath=PATH_TO_CA_CERT
     zeebeElasticsearch:
       # Example assuming an existing user called 'camunda-app' with the privileges described in 2.1
       username: camunda-app
       password: camunda123
+      url: https://localhost:9200
+      # If custom SSL configuration is necessary
+      ssl:
+        selfSigned=true
+        verifyHostname=false
+        certificatePath=PATH_TO_CA_CERT
     archiver:
       ilmEnabled: false
     migration:
@@ -325,6 +365,12 @@ camunda:
       username: camunda-admin
       password: camunda123
       healthCheckEnabled: false
+      url: https://localhost:9200
+      # If custom SSL configuration is necessary
+      ssl:
+        selfSigned=true
+        verifyHostname=false
+        certificatePath=PATH_TO_CA_CERT
   tasklist:
     backup:
       # Example assuming an existing snapshot repository 'els-test'
@@ -334,8 +380,16 @@ camunda:
       username: camunda-admin
       password: camunda123
       healthCheckEnabled: false
+      url: https://localhost:9200
+      # If custom SSL configuration is necessary
+      ssl:
+        selfSigned=true
+        verifyHostname=false
+        certificatePath=PATH_TO_CA_CERT
 
 ```
+
+For additional configuration options available, please take a look at the respective guides from [Operate](../../operate-deployment/operate-configuration/), [Tasklist](../../tasklist-deployment/tasklist-configuration/), and [Zeebe Elasticsearch Exporter](../../zeebe-deployment/exporters/elasticsearch-exporter/).
 
 ### 2. Start the backup application
 

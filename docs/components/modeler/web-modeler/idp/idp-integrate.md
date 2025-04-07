@@ -9,7 +9,7 @@ import IdpElementImg from './img/idp-diagram-element.png';
 Integrate your published document extraction templates into your end-to-end processes in Web Modeler.
 
 :::tip
-Not sure how to start integrating IDP? See [example IDP integration](idp-example.md) for a simple process example.
+New to IDP integration? See the [example IDP integration](idp-example.md) for a worked example of a simple IDP process.
 :::
 
 ## Create and configure an IDP task
@@ -33,6 +33,10 @@ Specify the document object variable used for document handling, provided as a [
 For example, if you have uploaded a document via form upload using a `documents` **Key**, you can specify `documents[1]` to retrieve the first document in the array.
 
 Example: `documents[1]`.
+
+:::info
+To learn more about storing, tracking, and managing documents in Camunda 8, see [document handling](/components/concepts/document-handling.md).
+:::
 
 ## Provider authentication
 

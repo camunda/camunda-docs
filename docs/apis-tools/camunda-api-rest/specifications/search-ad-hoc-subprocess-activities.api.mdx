@@ -1,0 +1,342 @@
+---
+id: search-ad-hoc-subprocess-activities
+title: "Search activatable activities (alpha)"
+description: "Search for activatable activities within ad-hoc subprocesses based on given criteria."
+sidebar_label: "Search activatable activities (alpha)"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Search activatable activities (alpha)"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/element-instances/ad-hoc-activities/search"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Search for activatable activities within ad-hoc subprocesses based on given criteria.
+
+Note that this API currently requires filters for both process definition key and ad-hoc
+subprocess ID and does not support paging or sorting.
+
+:::note
+This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
+in future releases.
+:::
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          description: "Ad-hoc subprocess activities search request.",
+          type: "object",
+          required: ["filter"],
+          properties: {
+            filter: {
+              description: "The ad-hoc subprocess activity search filters.",
+              allOf: [
+                {
+                  description: "Flow node instance filter.",
+                  type: "object",
+                  required: ["processDefinitionKey", "adHocSubprocessId"],
+                  properties: {
+                    processDefinitionKey: {
+                      description: "The process definition key.",
+                      type: "string",
+                    },
+                    adHocSubprocessId: {
+                      description: "The ad-hoc subprocess element ID.",
+                      type: "string",
+                    },
+                  },
+                  title: "AdHocSubprocessActivityFilter",
+                },
+              ],
+            },
+          },
+          title: "AdHocSubprocessActivitySearchQuery",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The ad-hoc subprocess activities search result.\n",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            properties: {
+              items: {
+                description: "The matching ad-hoc subprocess activities.",
+                type: "array",
+                items: {
+                  type: "object",
+                  properties: {
+                    processDefinitionKey: {
+                      description:
+                        "The process definition key associated to this activity.",
+                      type: "string",
+                    },
+                    processDefinitionId: {
+                      description:
+                        "The process definition ID associated to this activity.",
+                      type: "string",
+                    },
+                    adHocSubprocessId: {
+                      description: "The ad-hoc subprocess element ID.",
+                      type: "string",
+                    },
+                    elementId: {
+                      description: "The element ID for this activity.",
+                      type: "string",
+                    },
+                    elementName: {
+                      description: "The element name for this activity.",
+                      type: "string",
+                    },
+                    type: {
+                      description:
+                        "Type of activity with a defined set of values.",
+                      type: "string",
+                      enum: [
+                        "UNSPECIFIED",
+                        "PROCESS",
+                        "SUB_PROCESS",
+                        "EVENT_SUB_PROCESS",
+                        "INTERMEDIATE_CATCH_EVENT",
+                        "INTERMEDIATE_THROW_EVENT",
+                        "BOUNDARY_EVENT",
+                        "SERVICE_TASK",
+                        "RECEIVE_TASK",
+                        "USER_TASK",
+                        "MANUAL_TASK",
+                        "TASK",
+                        "MULTI_INSTANCE_BODY",
+                        "CALL_ACTIVITY",
+                        "BUSINESS_RULE_TASK",
+                        "SCRIPT_TASK",
+                        "SEND_TASK",
+                        "UNKNOWN",
+                      ],
+                    },
+                    documentation: {
+                      description: "The documentation for this activity.",
+                      type: "string",
+                    },
+                    tenantId: {
+                      description: "The tenant ID for this activity.",
+                      type: "string",
+                    },
+                  },
+                  title: "AdHocSubprocessActivityResult",
+                },
+              },
+            },
+            title: "AdHocSubprocessActivitySearchQueryResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description:
+        "The ad-hoc subprocess activities search query failed. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>
