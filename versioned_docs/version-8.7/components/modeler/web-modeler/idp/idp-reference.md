@@ -11,8 +11,10 @@ import IdpIconCautionImg from './img/idp-validation-icon-caution.png';
 import IdpIconFailImg from './img/idp-validation-icon-fail.png';
 import IdpValidationExampleImg from './img/idp-validation-example.png';
 import IdpDocumentStorageImg from './img/idp-document-storage.png';
+import IdpTableDataImg from './img/idp-table-data.png';
 import TickImg from '/static/img/icon-list-tick.png';
 import CrossImg from '/static/img/icon-list-cross.png';
+
 
 Technical reference information for IDP, including technical architecture, supported documents, and known limitations.
 
@@ -98,6 +100,72 @@ You can choose from the following supported LLM extraction models during [data e
 | Llama 3 70B Instruct | [Meta](https://www.meta.com/gb/)           | [Meta's Llama in Amazon Bedrock](https://aws.amazon.com/bedrock/llama/)                                 |
 | Llama 3 8B Instruct  | [Meta](https://www.meta.com/gb/)           | [Meta's Llama in Amazon Bedrock](https://aws.amazon.com/bedrock/llama/)                                 |
 | Titan Text Premier   | [Amazon AWS](https://docs.aws.amazon.com/) | [Amazon Titan Text models](https://docs.aws.amazon.com/bedrock/latest/userguide/titan-text-models.html) |
+
+:::note
+
+Amazon Bedrock LLM extraction models are only available in specific regions.
+
+- You must ensure your selected cluster region supports the LLM extraction model you want to use. For example, if you using the `eu-central-1` region, you cannot use Claude 3 Haiku as it is only available in US regions.
+- If you have chosen a model not supported in your region, you will receive a 403 "You don't have access to the model with the specified model ID" exception error.
+
+For current regional support information, refer to [supported foundation models in Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html).
+
+:::
+
+## Table data extraction {#table-data}
+
+IDP can extract table data using LLM foundation models to identify and structure tabular data based on your prompts.
+
+### Default JSON extraction format
+
+When extracting repeated elements from a document, the extraction defaults to JSON format unless instructed.
+
+In this format:
+
+- Table data is represented as an array of objects.
+- Each object corresponds to a row.
+- Column names are used as object keys, with values mapped accordingly.
+
+#### Example JSON output
+
+<img src={IdpTableDataImg} alt="Architecture diagram of IDP" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}}/>
+
+**Prompt:** "Extract a list of name and ages of patients on floor 1".
+
+```json
+[
+  {
+    "name": "Kaitlin Jones",
+    "age": 41
+  },
+  {
+    "name": "Thomas Hampton",
+    "age": 57
+  }
+]
+```
+
+### CSV extraction
+
+To extract table data in CSV format, specify this in the prompt. The output is then structured in a CSV-compatible format.
+
+#### Example CSV output
+
+**Prompt:** "Extract a list of name and ages of patients on floor 1 as CSV".
+
+```csv
+Name,Age
+Katlin Jones,41
+Thomas Hampton,57
+```
+
+### Customize table data extraction
+
+You can further refine table extraction by:
+
+- Explicitly specifying column headers.
+- Defining delimiter preferences for CSV.
+- Requesting additional context for ambiguous data.
 
 ## Access rights and permissions
 

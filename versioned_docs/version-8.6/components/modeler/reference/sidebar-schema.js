@@ -13,7 +13,6 @@ module.exports = {
         "components/modeler/reference/modeling-guidance/rules/error-reference",
         "components/modeler/reference/modeling-guidance/rules/escalation-reference",
         "components/modeler/reference/modeling-guidance/rules/feel",
-        "components/modeler/reference/modeling-guidance/rules/history-time-to-live",
         "components/modeler/reference/modeling-guidance/rules/message-reference",
       ],
     },
