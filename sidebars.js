@@ -1039,6 +1039,7 @@ module.exports = {
             "self-managed/setup/guides/prefix-elasticsearch-indices",
             "self-managed/setup/guides/multi-namespace-deployment",
             "self-managed/setup/guides/installing-payment-app-example",
+            "self-managed/setup/guides/secret-management",
           ],
         },
       ],
