@@ -1,24 +1,27 @@
 ---
-id: managing-mapping-rules
-title: "Managing mapping rules"
-sidebar_label: "Managing mapping rules"
-description: "Manage mapping rules within Identity to support the assigning of Camunda entities to your users."
+id: mapping-rules
+title: "Mapping rules"
+sidebar_label: "Mapping rules"
+description: "Map your auth data to Camunda-specific data using mapping rules."
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-In this guide, you will learn how to manage mapping rules in Identity and how to control the Camunda entities related to
-them.
-
-:::tip
-To learn more about the concept of mapping rules, see
-the [mapping rules documentation](../../../concepts/mapping-rules.md).
+:::info
+Mapping rules are only available for Camunda 8 Self-Managed with [OIDC-based authentication](/self-managed/identity/authentication/connect-to-an-oidc-provider.md).
 :::
+
+Mapping rules are designed to allow you to map Camunda-specific data to your users by using the claims on your JWT token. You can map two types of data:
+
+1. Tenants
+2. Roles
+
+# Configuring mapping rules
 
 1. Log in to the Identity UI and navigate to the **Mappings** tab.
 
-![mapping-rule-management-tab](../img/mapping-rule-management-tab.png)
+![mapping-rule-management-tab](./img/mapping-rule-management-tab.png)
 
 :::info
 The `Default` mapping rule is created during startup using the [IDENTITY_INITIAL_CLAIM_NAME and
@@ -36,7 +39,7 @@ values={[{label: 'Add', value: 'add', },{label: 'Update', value: 'update', },{la
 1. Click the **Add mapping** button and select the type of mapping to create. You can create a mapping for a role or
    tenant.
 
-![mapping-rule-add](../img/mapping-rule-add-mapping.png)
+![mapping-rule-add](./img/mapping-rule-add-mapping.png)
 
 2. Fill in the fields for the mapping rule and click **Create**.
 
@@ -49,11 +52,11 @@ The operator option is used to define how we evaluate the rules against your tok
 
 :::
 
-![mapping-rule-add-modal](../img/mapping-rule-add-mapping-modal.png)
+![mapping-rule-add-modal](./img/mapping-rule-add-mapping-modal.png)
 
 The created mapping rule can be seen in the table.
 
-![mapping-rule-refreshed-table](../img/mapping-rule-refreshed-table.png)
+![mapping-rule-refreshed-table](./img/mapping-rule-refreshed-table.png)
 
 </TabItem>
 <TabItem value="update">
@@ -72,7 +75,7 @@ update the type of mapping rule.
 
 Click on the **trash can** icon on the row of the mapping rule you want to delete and confirm.
 
-![mapping-rule-delete-modal](../img/mapping-rule-delete-modal.png)
+![mapping-rule-delete-modal](./img/mapping-rule-delete-modal.png)
 
 After confirming, the mapping rule is deleted and no longer appears in the table.
 

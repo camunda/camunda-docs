@@ -1,22 +1,47 @@
 ---
-id: incorporate-applications
-title: "Incorporate applications"
-sidebar_label: "Incorporate applications"
-description: "Use Identity to create an application and assign a permission to an application."
+id: applications
+title: "Applications"
+sidebar_label: "Applications"
 ---
 
-In this guide we will show you how to use Identity to create an application and assign a permission to an application.
+In Identity, an Application represents an entity that can request Identity to authenticate a user or a service.
 
-:::tip Want to learn more about applications?
-Head over to our documentation on [applications](/self-managed/concepts/access-control/applications.md) to find out more.
+For Camunda 8 to work, a set of Applications are preconfigured. These preconfigured applications are:
+
+- Connectors
+- Identity
+- Operate
+- Optimize
+- Tasklist
+- Web Modeler
+- Zeebe
+
+As a user of Identity, you can add own Applications.
+
+## Types of applications
+
+There are three types of applications in Identity:
+
+- Confidential
+- Machine-to-machine
+- Public
+
+A type is selected when [creating the application](#add-an-application) based on
+its ability to securely store and use secrets, as well as the mode of authentication it uses.
+
+| Type         | Secret | User login flow | M2M authentication |
+| ------------ | ------ | --------------- | ------------------ |
+| Confidential | Yes    | Yes             | Yes                |
+| M2M          | Yes    | No              | Yes                |
+| Public       | No     | Yes             | No                 |
+
+:::note
+See more details on OAuth client types [here](https://oauth.net/2/client-types/), and more information specifically on confidential and public applications [here](https://auth0.com/docs/get-started/applications/confidential-and-public-applications).
 :::
 
-:::caution Write access needed
-To add an application and assign a permission to an application, you need to have write access to Identity.
-Read our [guide on managing user access](/self-managed/identity/user-guide/authorizations/managing-user-access.md) to learn more.
-:::
+## Managing applications
 
-## Add an application
+### Add an application
 
 1. Log in to the Identity UI and navigate to the **Applications** tab:
 
@@ -36,7 +61,7 @@ and client secret depending on the selected [type](/self-managed/concepts/access
 
 ![add-application-refreshed-table](../img/add-application-refreshed-table.png)
 
-## Assigning a permission an application
+### Assigning a permission an application
 
 To assign a permission to an application using Identity, take the following steps:
 
@@ -51,3 +76,7 @@ To assign a permission to an application using Identity, take the following step
 On confirmation, the modal will close, the table will update, and your assigned permissions will be shown:
 
 ![assign-a-permission-application-refreshed-table](../img/assign-a-permission-application-refreshed-table.png)
+
+## Permissions
+
+You can control the access an application has by assigning [permissions](/self-managed/identity/access-management/access-management-overview.md) to an application.
