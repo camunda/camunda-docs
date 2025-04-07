@@ -133,7 +133,7 @@ In this format:
 ]
 ```
 
-### CSV Extraction
+### CSV extraction
 
 To extract table data in CSV format, specify this in the prompt. The output is then structured in a CSV-compatible format.
 
