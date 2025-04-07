@@ -13,8 +13,7 @@ The BTP plugin connects to Camunda 8 SaaS to provide:
 
 ## Prerequisites
 
-- locally, for configuring via `csap` only (see below): [Node.js >= 20 LTS](https://nodejs.org/en/about/previous-releases)
-
+- Locally, for configuring via `csap` only (see below): [Node.js >= 20 LTS](https://nodejs.org/en/about/previous-releases)
 - We recommend creating an API client for your Camunda SaaS cluster with the full scope: `Zeebe,Tasklist,Operate,Optimize,Secrets`.
 
 On SAP BTP:
@@ -27,22 +26,21 @@ On SAP BTP:
 - [Entitlements](https://help.sap.com/docs/btp/sap-business-technology-platform/managing-entitlements-and-quotas-using-cockpit) for:
 
   - BTP PostgreSQL, hyperscaler option
-    - check that the [available BTP PostgreSQL, hyperscaler option, configuration options](https://help.sap.com/docs/postgresql-on-sap-btp/postgresql-on-sap-btp-hyperscaler-option/parameters) match your sizing plan, e.g. for multi-region DBs or high availability
-    - the BTP plugin defaults to a minimum, only specifying PostgreSQL version 16 (see `/core/pg-options.json`) and a single DB instance, with no high availability
+    - Ensure the [available BTP PostgreSQL, hyperscaler option, and configuration options](https://help.sap.com/docs/postgresql-on-sap-btp/postgresql-on-sap-btp-hyperscaler-option/parameters) match your sizing plan. For example, for multi-region databases or high availability, the BTP plugin defaults to a minimum, only specifying PostgreSQL version 16 (see `/core/pg-options.json`) and a single database instance, with no high availability.
   - [Destination Service](https://discovery-center.cloud.sap/serviceCatalog/destination?service_plan=lite&region=all&commercialModel=btpea), `lite` plan
   - [Connectivity Service](https://discovery-center.cloud.sap/serviceCatalog/connectivity-service?region=all), `lite` plan
   - [Authorization and Trust Management Service](https://discovery-center.cloud.sap/serviceCatalog/authorization-and-trust-management-service?region=all), `application` plan
 
 ## Features
 
-- just model User Tasks, they are picked up automatically and run/rendered by the BTP plugin
+- Model user tasks - they are picked up automatically and run/rendered by the BTP plugin.
 
 ![Camunda Forms in Fiori](./img/forms-fiori.png)
 
-- equip the very last User Task with a custom header `final-user-task` and the value
+- Equip the last user task with a custom header `final-user-task` and the value:
 
-  - `success` to display the last user task on the "happy path"
-  - `fail` to use that user task to communicate a failed process to the user
+  - `success` to display the last user task on the "happy path".
+  - `fail` to use that user task to communicate a failed process to the user.
 
   ![screenshot of header variable in Modeler](./img/sap-btp-plugin-final-user-task-header.png)
 
@@ -54,8 +52,10 @@ On SAP BTP:
 
 ## Camunda Forms in SAP Fiori
 
-- Layout: single row layout only, ![image-20250219112232376](./img/froms-no-columns.png)
-- No custom properties. ![image-20250219112156011](./img/forms-no-custom-properties.png)
+- Layout: Single row layout only:
+  ![image-20250219112232376](./img/froms-no-columns.png)
+- No custom properties:
+  ![image-20250219112156011](./img/forms-no-custom-properties.png)
 
 ### Supported form features and properties
 
@@ -91,13 +91,13 @@ On SAP BTP:
 
 ## Configuration and deployment
 
-We strongly recommend to [use `csap`](./csap-cli.md) for setting up the BTP plugin. A manual configuration is cumbersome and error-prone, as it requires not only building all parts of the plugin, but also configuring the "glue" between them in various files. Instead, let `csap` do the heavy lifting for you.
+[Use `csap`](./csap-cli.md) for setting up the BTP plugin, as a manual configuration is cumbersome and error-prone.
 
-In Camunda, no setup/config work is necessary to use the BTP plugin.
+With Camunda, no setup/config work is necessary to use the BTP plugin.
 
-### Configuring the BTP Plugin using `csap`
+### Configuring the BTP plugin using `csap`
 
-Either walk yourself through the prompts or provide all information to the cli
+Either walk yourself through the prompts or provide all information to the CLI:
 
 - `csap setup` will guide you interactively.
 
@@ -110,7 +110,7 @@ csap setup --for btp-plugin \
 	--btpRoute camunda-btp-plugin.cfapps.eu10-004.hana.ondemand.com
 ```
 
-The host name provided as `btpRoute` will be the URL to the BTP Plugin's app; following the example above: `https://camunda-btp-plugin.cfapps.eu10-004.hana.ondemand.com`
+The host name provided as `btpRoute` will be the URL to the BTP plugin's app; following the example above: `https://camunda-btp-plugin.cfapps.eu10-004.hana.ondemand.com`.
 
 ### Deploying to BTP
 
@@ -122,36 +122,36 @@ API endpoint: https://api.cf. ...
 ...
 ```
 
-2. `cd` to the folder `csap` logs after a successful build, e.g. `/tmp/camunda/8.6/sap-btp-plugin`
-3. issue `cf deploy mta_archives/*.mtar`
-   - add the `-f` switch to force update, e.g. by deploying the same version again, e.g. `cf deploy mta_archives/*.mtar -f`
-   - consider adding `--delete-services` to recreate eventually failed service creation of previous deployment, e.g. `cf deploy mta_archives/*.mtar -f --delete-services`
+2. `cd` to the folder `csap` logs after a successful build, for example, `/tmp/camunda/8.6/sap-btp-plugin`
+3. Issue `cf deploy mta_archives/*.mtar`
+   - Add the `-f` switch to force an update, for example, by deploying the same version again (`cf deploy mta_archives/*.mtar -f`).
+   - Consider adding `--delete-services` to recreate eventually failed service creation of previous deployment. For example, `cf deploy mta_archives/*.mtar -f --delete-services`.
 
-For advanced deployment configuration, consider working with your SAP practice, starting from the created `mta.yaml` deployment descriptor (in the `$TMP` folder as output by `csap`)
+For advanced deployment configuration, consider working with your SAP practice, starting from the created `mta.yaml` deployment descriptor (in the `$TMP` folder as output by `csap`).
 
-## Working with the BTP Plugin
+## Working with the BTP plugin
 
-- describe "one-user multi-page flow" here
+- Describe "one-user multi-page flow" here
 
-After deployment, the BTP Plugin is available at the `btpRoute` provided: `https://<btpRoute>`. If called manually, e.g. in the browser, it will redirect automatically to `/app/index.html?channelId=<unique id>` . The `<unique id>` aka "channel ID" links the output device to the BTP Plugin, representing a dedicated "output channel".
+After deployment, the BTP plugin is available at the `btpRoute` provided: `https://<btpRoute>`. If called manually (for example, in the browser) it will redirect automatically to `/app/index.html?channelId=<unique id>` . The `<unique id>` or "channel ID" links the output device to the BTP plugin, representing a dedicated "output channel".
 
 ### Starting a BPMN process in the browser
 
-Start any Camunda BPMN Process manually via the "hamburger" in the menu bar.
+Start any Camunda BPMN process manually via the menu bar.
 
 ![BTP Plugin UI to start process](./img/sap-btp-plugin-start-process.png)
 
-In the Popup, enter the ID of the BPMN to run.
+In the popup, enter the ID of the BPMN to run.
 
 ![start process in Fiori app](./img/sap-btp-plugin-process-id.png)
 
-Alternatively, the process can be auto-started by directly calling the URL
+Alternatively, the process can be auto-started by directly calling the URL:
 
 `https://<btp plugin url>/index.html?channelId=<random id>&run=fiori-bupa-search`
 
 ### Starting a BPMN process via API
 
-Make `POST` http call to `https://<btpRoute>/backend/inbound` with this defined payload:
+Make a `POST` http call to `https://<btpRoute>/backend/inbound` with this defined payload:
 
 ```json
 {
@@ -165,4 +165,4 @@ Make `POST` http call to `https://<btpRoute>/backend/inbound` with this defined 
 }
 ```
 
-The advantage over Camunda REST API: use authentication realm between BTP and S/4 / ECC, no need for adminstrating additional credentials.
+The advantage over Camunda REST API: use the authentication realm between BTP and S/4 / ECC, there is no need for adminstrating additional credentials.

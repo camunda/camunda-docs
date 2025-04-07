@@ -22,7 +22,7 @@ The CLI supports the following SAP integration modules:
 1. **BTP plugin**: Enables rendering task forms in Fiori and provides BTP integration.
 2. **OData Connector**: Facilitates interaction with S/4HANA or ECC systems from a BPMN model.
 3. **RFC Connector**: Allows querying BAPIs and Remote Function Modules on SAP ECC systems.
-4. **All Modules**: Configures all available modules.
+4. **All modules**: Configures all available modules.
 
 ## Installation
 

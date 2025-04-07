@@ -46,15 +46,15 @@ Currently, only `BasicAuthentication` is supported on the Destination by the SAP
 
 ## Configuration and deployment
 
-A descriptor file is required to deploy the SAP OData Connector to a space in a SAP BTP subaccount. An exemplary deployment descriptor `mtad.yaml.example` is provided by Camunda. This is a standard format in SAP BTP's Cloud Foundry environment to describe the application that needs deployment.
+A descriptor file is required to deploy the SAP OData Connector to a space in a SAP BTP subaccount. An exemplary deployment descriptor `mtad.yaml.example` is provided by Camunda. This is a standard format in SAP BTP's Cloud Foundry environment to describe the application requiring deployment.
 
-### Configuring the OData connector
+### Configuring the OData Connector
 
-You can either configure the OData connector via [the `csap` cli](./csap-cli.md) (recommended) or manually. The advantage of using `csap` is that it pulls together all necessary files and adjusts them to your BTP environment automatically, using the info you provided in the prompts or via command line switches.
+Configure the OData Connector via [the `csap` cli](./csap-cli.md) (recommended) or manually. The advantage of using `csap` is that it pulls together all necessary files and adjusts them to your BTP environment automatically, using the information you provided in the prompts or via command line switches.
 
-#### using `csap`
+#### Using `csap`
 
-Either walk yourself through the prompts or provide all information to the cli
+Either walk yourself through the prompts or provide all information to the CLI:
 
 - `csap setup` will guide you interactively.
 
