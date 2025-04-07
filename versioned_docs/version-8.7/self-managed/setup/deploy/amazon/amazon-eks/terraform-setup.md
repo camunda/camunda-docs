@@ -36,7 +36,7 @@ If you are completely new to Terraform and the idea of IaC, read through the [Te
   - Request increases if needed via the AWS console ([guide](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html)), costs are only for resources used.
 - This guide uses GNU/Bash for all the shell commands listed.
 
-For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/.tool-versions) file in the repository. It contains an up-to-date list of versions that we also use for testing.
+For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/.tool-versions) file in the repository. It contains an up-to-date list of versions that Camunda also uses for testing.
 
 ### Considerations
 
@@ -307,7 +307,7 @@ The module will be locally sourced, meaning within your cloned repository you ca
    </p>
    </details>
 
-3. Customize the cluster setup. The module offers various input options that allow you to further customize the cluster configuration. For a comprehensive list of available options and detailed usage instructions, refer to the [EKS module documentation](https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/aws/modules/eks-cluster/README.md).
+3. Customize the cluster setup. The module offers various input options that allow you to further customize the cluster configuration. For a comprehensive list of available options and detailed usage instructions, refer to the [EKS module](https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/aws/modules/eks-cluster/README.md) documentation.
 
 ### PostgreSQL module setup
 
@@ -359,7 +359,7 @@ We separated the cluster and PostgreSQL modules to offer you more customization 
    </TabItem>
    </Tabs>
 
-2. Customize the Aurora cluster setup through various input options. Refer to the [Aurora module documentation](https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/aws/modules/aurora/README.md) for more details on other customization options.
+2. Customize the Aurora cluster setup through various input options. Refer to the [Aurora module](https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/aws/modules/aurora/README.md) documentation for more details on other customization options.
 
 ### OpenSearch module setup
 
@@ -426,7 +426,7 @@ Using Amazon OpenSearch Service requires [setting up a new Camunda installation]
    </TabItem>
    </Tabs>
 
-2. Customize the cluster setup using various input options. For a full list of available parameters, see the [OpenSearch module documentation](https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/aws/modules/opensearch/README.md).
+2. Customize the cluster setup using various input options. For a full list of available parameters, see the [OpenSearch module](https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/aws/modules/opensearch/README.md) documentation.
 
 :::tip
 
