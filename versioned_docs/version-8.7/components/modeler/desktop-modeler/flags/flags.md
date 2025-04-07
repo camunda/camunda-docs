@@ -69,7 +69,7 @@ Flags passed as command line arguments take precedence over those configured via
 | "disable-cmmn"                                                | true                                |
 | "disable-dmn"                                                 | false                               |
 | "disable-form"                                                | false                               |
-| "disable-rpa"                                                 | true                                |
+| "disable-rpa"                                                 | false                               |
 | ["disable-httl-hint"](#disable-history-time-to-live-hint)     | false                               |
 | ["default-httl"](#default-history-time-to-live)               | false                               |
 | "disable-platform"                                            | false                               |
