@@ -167,6 +167,9 @@ RewriteRule ^docs/next/apis-tools/zeebe-api-rest/zeebe-api-rest-overview/?$ /doc
 RewriteRule ^docs/next/apis-tools/zeebe-api-rest/zeebe-api-rest-authentication/?$ /docs/next/apis-tools/camunda-api-rest/camunda-api-rest-authentication/$1 [R=301,L]
 RewriteRule ^docs/next/apis-tools/zeebe-api-rest/zeebe-api-tutorial/?$ /docs/next/apis-tools/camunda-api-rest/camunda-api-rest-overview/$1 [R=301,L]
 
+# Remove Tasklist GraphQL API in 8.8
+RewriteRule ^docs/next/apis-tools/tasklist-api/(.*)$ /docs/next/apis-tools/camunda-api-rest/camunda-api-rest-overview/ [R=301,L]
+
 #---------------------------------------------------------------------------------
 #   8.7: content moves introduced prior to the release of version 8.7.
 #---------------------------------------------------------------------------------
@@ -193,6 +196,15 @@ RewriteRule ^docs/8.6/apis-tools/community-clients/go-client/(.*)$ https://githu
 
 # Remove meta page
 RewriteRule ^meta/ / [R=301,L]
+
+# Reroute element templates and HTTL to C7 docs
+RewriteRule ^docs/components/modeler/desktop-modeler/element-templates/c7-defining-templates/(.*)$ https://docs.camunda.org/manual/latest/modeler/element-templates/ [R=301,L]
+RewriteRule ^docs/8.6/components/modeler/desktop-modeler/element-templates/c7-defining-templates/(.*)$ https://docs.camunda.org/manual/latest/modeler/element-templates/ [R=301,L]
+RewriteRule ^docs/8.5/components/modeler/desktop-modeler/element-templates/c7-defining-templates/(.*)$ https://docs.camunda.org/manual/latest/modeler/element-templates/ [R=301,L]
+
+RewriteRule ^docs/components/modeler/reference/modeling-guidance/rules/history-time-to-live/(.*)$ https://docs.camunda.org/manual/latest/modeler/history-time-to-live/ [R=301,L]
+RewriteRule ^docs/8.6/components/modeler/reference/modeling-guidance/rules/history-time-to-live/(.*)$ https://docs.camunda.org/manual/latest/modeler/history-time-to-live/ [R=301,L]
+RewriteRule ^docs/8.5/components/modeler/reference/modeling-guidance/rules/history-time-to-live/(.*)$ https://docs.camunda.org/manual/latest/modeler/history-time-to-live/ [R=301,L]
 
 # Remove event ingestion from 3.14
 RewriteRule ^optimize/apis-tools/optimize-api/event-ingestion/(.*)$ /optimize/apis-tools/optimize-api/overview/$1 [R=301,L]

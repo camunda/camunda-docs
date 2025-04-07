@@ -27,6 +27,7 @@ module.exports = {
         "guides/configuring-out-of-the-box-connectors",
         "guides/use-connectors-in-hybrid-mode",
         "guides/host-custom-connectors",
+        "guides/document-handling",
       ],
       Improve: [
         "guides/improve-processes-with-optimize",
@@ -62,6 +63,7 @@ module.exports = {
         "components/concepts/what-is-camunda-8",
         "components/concepts/clusters",
         "components/concepts/processes",
+        "components/concepts/process-applications",
         "components/concepts/job-workers",
         "components/concepts/execution-listeners",
         "components/concepts/user-task-listeners",
@@ -256,6 +258,7 @@ module.exports = {
             "components/modeler/desktop-modeler/model-your-first-diagram",
             "components/modeler/desktop-modeler/connect-to-camunda-8",
             "components/modeler/desktop-modeler/start-instance",
+            "components/modeler/desktop-modeler/process-applications",
             "components/modeler/desktop-modeler/use-connectors",
             "components/modeler/desktop-modeler/variables",
             {
@@ -269,7 +272,6 @@ module.exports = {
                 "components/modeler/desktop-modeler/element-templates/configuring-templates",
                 "components/modeler/desktop-modeler/element-templates/using-templates",
                 "components/modeler/desktop-modeler/element-templates/defining-templates",
-                "components/modeler/desktop-modeler/element-templates/c7-defining-templates",
                 "components/modeler/desktop-modeler/element-templates/additional-resources",
               ],
             },
@@ -1174,6 +1176,12 @@ module.exports = {
         "self-managed/concepts/mapping-rules",
         "self-managed/concepts/elasticsearch-privileges",
         "self-managed/concepts/opensearch-privileges",
+        {
+          "Document handling": [
+            "self-managed/concepts/document-handling/getting-started",
+            "self-managed/concepts/document-handling/document-storage-configuration",
+          ],
+        },
       ],
     },
     {

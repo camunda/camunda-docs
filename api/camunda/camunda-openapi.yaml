@@ -1359,9 +1359,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/ProcessDefinitionFlowNodeStatisticsResult"
+                $ref: "#/components/schemas/ProcessDefinitionFlowNodeStatisticsQueryResult"
         "400":
           $ref: "#/components/responses/InvalidData"
         "401":
@@ -2210,22 +2208,22 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /roles/{roleKey}:
+  /roles/{roleId}:
     get:
       tags:
         - Role
       operationId: getRole
       summary: Get role (Work-in-Progress)
       description: |
-        Get a role by its key.
+        Get a role by its ID.
 
         This API is in a Work-in-Progress state and will undergo potential breaking changes until
         its release with an upcoming minor release.
       parameters:
-        - name: roleKey
+        - name: roleId
           in: path
           required: true
-          description: The role key.
+          description: The role ID.
           schema:
             type: string
       responses:
@@ -2240,28 +2238,28 @@ paths:
         "403":
           $ref: "#/components/responses/Forbidden"
         "404":
-          description: The role with the given key was not found.
+          description: The role with the given ID was not found.
           content:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
-    patch:
+    put:
       tags:
         - Role
       operationId: updateRole
       summary: Update role (Work-in-Progress)
       description: |
-        Update a role with the given key.
+        Update a role with the given ID.
 
         This API is in a Work-in-Progress state and will undergo potential breaking changes until
         its release with an upcoming minor release.
       parameters:
-        - name: roleKey
+        - name: roleId
           in: path
           required: true
-          description: The key of the role to update.
+          description: The ID of the role to update.
           schema:
             type: string
       requestBody:
@@ -2271,14 +2269,18 @@ paths:
             schema:
               $ref: "#/components/schemas/RoleUpdateRequest"
       responses:
-        "204":
+        "200":
           description: The role was updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RoleUpdateResult"
         "400":
           $ref: "#/components/responses/InvalidData"
         "401":
           $ref: "#/components/responses/Unauthorized"
         "404":
-          description: The role with the roleKey is not found.
+          description: The role with the ID is not found.
           content:
             application/problem+json:
               schema:
@@ -2291,15 +2293,15 @@ paths:
       operationId: deleteRole
       summary: Delete role (Work-in-Progress)
       description: |
-        Deletes the role with the given key.
+        Deletes the role with the given ID.
 
         This API is in a Work-in-Progress state and will undergo potential breaking changes until
         its release with an upcoming minor release.
       parameters:
-        - name: roleKey
+        - name: roleId
           in: path
           required: true
-          description: The key of the role to delete.
+          description: The ID of the role to delete.
           schema:
             type: string
       responses:
@@ -2308,7 +2310,52 @@ paths:
         "401":
           $ref: "#/components/responses/Unauthorized"
         "404":
-          description: The role with the roleKey was not found.
+          description: The role with the ID was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /roles/{roleId}/users/{username}:
+    put:
+      tags:
+        - Role
+      operationId: addUserToRole
+      summary: Assign a user to a role (Work-in-Progress)
+      description: |
+        Assigns a user to a role.
+
+        This API is in a Work-in-Progress state and will undergo potential breaking changes until
+        its release with an upcoming minor release.
+      parameters:
+        - name: roleId
+          in: path
+          required: true
+          description: The role ID.
+          schema:
+            type: string
+        - name: username
+          in: path
+          required: true
+          description: The user username.
+          schema:
+            type: string
+      responses:
+        "202":
+          description: The user was assigned successfully to the role.
+        "400":
+          $ref: "#/components/responses/InvalidData"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          description: The role or user with the given ID or username was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "409":
+          description: The user with the given ID is already assigned to the role.
           content:
             application/problem+json:
               schema:
@@ -2390,7 +2437,7 @@ paths:
       operationId: getGroup
       summary: Get group (Work-in-Progress)
       description: |
-        Get a group by its key.
+        Get a group by its ID.
 
         This API is in a Work-in-Progress state and will undergo potential breaking changes until
         its release with an upcoming minor release.
@@ -2398,7 +2445,7 @@ paths:
         - name: groupId
           in: path
           required: true
-          description: The group key.
+          description: The group ID.
           schema:
             type: string
       responses:
@@ -2413,20 +2460,20 @@ paths:
         "403":
           $ref: "#/components/responses/Forbidden"
         "404":
-          description: The group with the given key was not found.
+          description: The group with the given ID was not found.
           content:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
-    patch:
+    put:
       tags:
         - Group
       operationId: updateGroup
       summary: Update group (Work-in-Progress)
       description: |
-        Update a group with the given key.
+        Update a group with the given ID.
 
         This API is in a Work-in-Progress state and will undergo potential breaking changes until
         its release with an upcoming minor release.
@@ -2434,7 +2481,7 @@ paths:
         - name: groupId
           in: path
           required: true
-          description: The key of the group to update.
+          description: The ID of the group to update.
           schema:
             type: string
       requestBody:
@@ -2444,14 +2491,18 @@ paths:
             schema:
               $ref: "#/components/schemas/GroupUpdateRequest"
       responses:
-        "204":
+        "200":
           description: The group was updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GroupUpdateResult"
         "400":
           $ref: "#/components/responses/InvalidData"
         "401":
           $ref: "#/components/responses/Unauthorized"
         "404":
-          description: The group with the groupKey is not found.
+          description: The group with the given ID was not found.
           content:
             application/problem+json:
               schema:
@@ -2481,15 +2532,15 @@ paths:
         "401":
           $ref: "#/components/responses/Unauthorized"
         "404":
-          description: The group with the provided ID was not found.
+          description: The group with the given ID was not found.
           content:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /groups/{groupKey}/users/{userKey}:
-    post:
+  /groups/{groupId}/users/{username}:
+    put:
       tags:
         - Group
       operationId: addUserToGroup
@@ -2500,16 +2551,16 @@ paths:
         This API is in a Work-in-Progress state and will undergo potential breaking changes until
         its release with an upcoming minor release.
       parameters:
-        - name: groupKey
+        - name: groupId
           in: path
           required: true
-          description: The group key.
+          description: The group ID.
           schema:
             type: string
-        - name: userKey
+        - name: username
           in: path
           required: true
-          description: The user key.
+          description: The user username.
           schema:
             type: string
       responses:
@@ -2520,13 +2571,13 @@ paths:
         "403":
           $ref: "#/components/responses/Forbidden"
         "404":
-          description: The group or user with the given key was not found.
+          description: The group or user with the given ID or username was not found.
           content:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         "409":
-          description: The user with the given key is already assigned to the group.
+          description: The user with the given ID is already assigned to the group.
           content:
             application/problem+json:
               schema:
@@ -2544,16 +2595,16 @@ paths:
         This API is in a Work-in-Progress state and will undergo potential breaking changes until
         its release with an upcoming minor release.
       parameters:
-        - name: groupKey
+        - name: groupId
           in: path
           required: true
-          description: The group key.
+          description: The group ID.
           schema:
             type: string
-        - name: userKey
+        - name: username
           in: path
           required: true
-          description: The user key.
+          description: The user username.
           schema:
             type: string
       responses:
@@ -2564,7 +2615,7 @@ paths:
         "403":
           $ref: "#/components/responses/Forbidden"
         "404":
-          description: The group or user with the given key was not found, or the user is not assigned to this group.
+          description: The group or user with the given ID was not found, or the user is not assigned to this group.
           content:
             application/problem+json:
               schema:
@@ -2646,7 +2697,51 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /mapping-rules/{mappingKey}:
+  /mapping-rules/{mappingId}:
+    put:
+      tags:
+        - Mapping rule
+      operationId: updateMappingRule
+      summary: Update mapping rule
+      description: |
+        Update a mapping rule.
+      parameters:
+        - name: mappingId
+          in: path
+          required: true
+          description: The id of the mapping rule to update.
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MappingRuleUpdateRequest"
+      responses:
+        "200":
+          description: The mapping rule was updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MappingRuleUpdateResult"
+        "400":
+          $ref: "#/components/responses/InvalidData"
+        "403":
+          description: |
+            The request to update a mapping rule was denied.
+            More details are provided in the response body.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "404":
+          description: The request to update a mapping rule was denied.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
     delete:
       tags:
         - Mapping rule
@@ -2658,7 +2753,7 @@ paths:
         This API is in a Work-in-Progress state and will undergo potential breaking changes until
         its release with an upcoming minor release.
       parameters:
-        - name: mappingKey
+        - name: mappingId
           in: path
           required: true
           description: The key of the mapping rule to delete.
@@ -2671,6 +2766,36 @@ paths:
           $ref: "#/components/responses/Unauthorized"
         "404":
           description: The mapping rule with the mappingKey was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+    get:
+      tags:
+        - Mapping rule
+      operationId: getMappingRule
+      summary: Get a mapping rule (Work-in-Progress)
+      description: |
+        Gets the mapping rule with the given ID.
+
+        This API is in a Work-in-Progress state and will undergo potential breaking changes till
+        its release with an upcoming minor release.
+      parameters:
+        - name: mappingId
+          in: path
+          required: true
+          description: The ID of the mapping rule to get.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: The mapping rule was returned successfully.
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          description: The mapping rule with the mappingId was not found.
           content:
             application/problem+json:
               schema:
@@ -4543,6 +4668,13 @@ components:
           description: The batch operation ID.
           allOf:
             - $ref: "#/components/schemas/StringFilterProperty"
+        errorMessage:
+          description: The error message related to the process.
+          allOf:
+            - $ref: "#/components/schemas/StringFilterProperty"
+        hasRetriesLeft:
+          description: Whether the process has failed jobs with retries left.
+          type: boolean
     ProcessInstanceVariableFilterRequest:
       description: Process instance variable filter.
       type: object
@@ -4627,6 +4759,15 @@ components:
           description: The process instance search filters.
           allOf:
             - $ref: "#/components/schemas/BaseProcessInstanceFilter"
+    ProcessDefinitionFlowNodeStatisticsQueryResult:
+      description: Process definition flow node statistics query response.
+      type: object
+      properties:
+        items:
+          description: The flow node statistics.
+          type: array
+          items:
+            $ref: "#/components/schemas/ProcessDefinitionFlowNodeStatisticsResult"
     ProcessDefinitionFlowNodeStatisticsResult:
       description: Process definition flow node statistics response.
       type: object
@@ -5514,6 +5655,9 @@ components:
         name:
           type: string
           description: The name of the mapping.
+        mappingId:
+          type: string
+          description: The ID of the mapping.
     CamundaUserResult:
       type: object
       properties:
@@ -5614,31 +5758,60 @@ components:
     RoleCreateRequest:
       type: "object"
       properties:
+        roleId:
+          type: "string"
+          description: The ID of the new role.
         name:
           type: "string"
           description: The display name of the new role.
+        description:
+          type: "string"
+          description: The description of the new role.
+      required:
+        - roleId
+        - name
     RoleCreateResult:
       type: object
       properties:
         roleKey:
           description: The key of the created role.
           type: string
+        roleId:
+          description: The ID of the created role.
+          type: string
+        name:
+          description: The display name of the created role.
+          type: string
+        description:
+          description: The description of the created role.
+          type: string
     RoleUpdateRequest:
       type: object
       properties:
-        changeset:
-          description: The set of changed role attributes.
-          allOf:
-            - $ref: "#/components/schemas/RoleChangeset"
+        name:
+          type: "string"
+          description: The display name of the new role.
+        description:
+          type: "string"
+          description: The description of the new role.
       required:
-        - changeset
-    RoleChangeset:
-      description: A set of changed role attributes.
+        - name
+        - description
+    RoleUpdateResult:
       type: object
       properties:
+        roleKey:
+          type: string
+          description: The key of the updated role.
         name:
           type: string
-          description: The updated display name of the role.
+          description: The display name of the updated role.
+        description:
+          type: string
+          description: The description of the updated role.
+        roleId:
+          type: string
+          description: The ID of the updated role.
     RoleResult:
       description: Role search response item.
       type: object
@@ -5736,6 +5909,24 @@ components:
         name:
           type: string
           description: The updated display name of the group.
+        description:
+          type: string
+          description: The updated description of the group.
+    GroupUpdateResult:
+      type: object
+      properties:
+        groupId:
+          type: string
+          description: The unique external group ID.
+        name:
+          type: string
+          description: The name of the group.
+        description:
+          type: string
+          description: The description of the group.
+        groupKey:
+          type: string
+          description: The unique system-generated internal group key.
     GroupResult:
       description: Group search response item.
       type: object
@@ -5797,8 +5988,7 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/GroupResult"
-
-    MappingRuleCreateRequest:
+    MappingRuleCreateUpdateRequest:
       type: object
       properties:
         claimName:
@@ -5810,15 +6000,25 @@ components:
         name:
           type: string
           description: The name of the mapping.
-        id:
-          type: string
-          description: The unique external id of the mapping.
       required:
         - claimName
         - claimValue
         - name
-        - id
-    MappingRuleCreateResult:
+    MappingRuleCreateRequest:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/MappingRuleCreateUpdateRequest"
+      properties:
+        mappingId:
+          type: string
+          description: The unique external id of the mapping.
+      required:
+        - mappingId
+    MappingRuleUpdateRequest:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/MappingRuleCreateUpdateRequest"
+    MappingRuleCreateUpdateResult:
       type: object
       properties:
         claimName:
@@ -5830,12 +6030,20 @@ components:
         name:
           type: string
           description: The name of the mapping.
-        id:
+        mappingId:
           type: string
           description: The unique external id of the mapping.
         mappingKey:
           description: The key of the created mapping rule.
           type: string
+    MappingRuleCreateResult:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/MappingRuleCreateUpdateResult"
+    MappingRuleUpdateResult:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/MappingRuleCreateUpdateResult"
     MappingSearchQueryResult:
       type: object
       allOf:
@@ -5858,6 +6066,9 @@ components:
         name:
           type: string
           description: The name of the mapping.
+        mappingId:
+          type: string
+          description: The ID of the mapping.
         mappingKey:
           description: The key of the created mapping rule.
           type: string
