@@ -76,14 +76,6 @@ In BPMN, you can simply model a loop:
 
 This exclusive gateway contains the expression to decide if to continue or exit the loop. The gateway can be before or after the loop.
 
-There is also a specific loop task marker in BPMN:
-
-<div bpmn="workflow-patterns/loop-marker.bpmn" />
-
-:::note
-The loop task marker event is supported in Camunda 7, but not yet in Camunda 8. It is on the roadmap and will eventually be available in Camunda 8.
-:::
-
 ### Static parallel branches
 
 Imagine you want some tasks known during design time to be carried out in parallel. Refer to [Workflow Pattern 2: Parallel Split](http://www.workflowpatterns.com/patterns/control/new/wcp2.php) and [Workflow Pattern 33: Generalized AND-Join](http://www.workflowpatterns.com/patterns/control/new/wcp33.php): "The divergence of a branch into two or more parallel branches each of which execute concurrently" plus "the convergence of two or more branches into a single subsequent branch."
@@ -210,10 +202,6 @@ You can find more information in [our documentation about messages](/components/
 
 Sometimes, a subprocess needs to communicate with its parent process without ending the subprocess yet. BPMN allows this by an [escalation event](/components/modeler/bpmn/bpmn-coverage.md).
 
-:::note
-The escalation event is supported in Camunda 7, but not yet in Camunda 8. It is on the roadmap and will eventually be available in Camunda 8.
-:::
-
 <div bpmn="workflow-patterns/escalation.bpmn" callouts="event" />
 
 <span className="callout">1</span>
@@ -227,10 +215,6 @@ The subprocess can raise the escalation any time:
 ### Broadcasts and engine-wide events
 
 While messages are always targeted at one specific process instance, you might also want to inform many processes about an event at once. For example, you might regularly adjust certain customer scoring rules that always should be taken into account immediately. This can be implemented using the [signal event](/components/modeler/bpmn/bpmn-coverage.md).
-
-:::note
-The escalation event is supported in Camunda 7, but not yet in Camunda 8. It is on the roadmap and will eventually be available in Camunda 8.
-:::
 
 <div bpmn="workflow-patterns/signal-catch.bpmn" callouts="signal"/>
 
