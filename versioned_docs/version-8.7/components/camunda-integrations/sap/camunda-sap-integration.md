@@ -1,49 +1,59 @@
 ---
 id: sap-integration
 title: SAP integration
-description: "Camunda's SAP integration consists of several modules that can be used independently of one another: SAP OData, RFC, and BTP."
+description: "Camunda's SAP integration consists of several modules that can be used independently of one another: SAP OData connector, RFC Outbound connector, and BTP Plugin."
 ---
 
-Camunda's SAP integration consists of several modules that can be used independently of one another: SAP OData, RFC, and BTP.
+Use Camunda's SAP integration to integrate SAP S/4HANA or ECC functionality in Camunda processes and integrate them with SAP BTP services.
 
-- [SAP OData outbound Connector](./odata-connector.md): Interact with a S/4HANA or ECC System via OData v2 + v4 APIs, directly from your BPMN model.
-- [SAP RFC outbound Connector](./rfc-connector.md): Query BAPIs and remote-enabled function modules on SAP ECC systems.
-- [SAP BTP plugin](./btp-plugin.md)
-  - Use [Tasklist's](/components/tasklist/introduction-to-tasklist.md) forms in the Fiori UI
-  - Operate SAP BTP services from [BPMN tasks](/components/modeler/bpmn/bpmn.md)
-  - Inbound proxy endpoint to start process instances of BPMN models, including custom variables
+## About the integration
 
-These features run in the customer's [SAP BTP instance](https://www.sap.com/products/technology-platform.html). They do not require a proprietary Camunda setup, and instead re-use an existing infrastructure with minimal prerequisites.
+Camunda's SAP integration consists of several modules that can be used independently of one another.
+| Module | What it does |
+|:-------|:-------------|
+|[SAP OData outbound connector](./odata-connector.md)|Enable interaction with a SAP S/4HANA or ECC System via OData v2 + v4 APIs, directly from your BPMN model.|
+|[SAP RFC outbound connector](./rfc-connector.md)|Query Business Application Programming Interfaces (BAPIs) and remote-enabled function modules on SAP ECC systems.|
+|[SAP BTP plugin](./btp-plugin.md)| - Use [Tasklist's](/components/tasklist/introduction-to-tasklist.md) forms in the Fiori UI. <br/> - Trigger and manage SAP BTP services from [BPMN tasks](/components/modeler/bpmn/bpmn.md). <br/> - Start BPMN process instances via inbound proxy endpoints, with support for custom variables.|
+
+These features run within the customer's [SAP BTP instance](https://www.sap.com/products/technology-platform.html), requiring no proprietary Camunda setup. Instead, they leverage existing infrastructure with minimal prerequisites.
 
 ![SAP integration overview](./img/sap-integration-overview.png)
 
-For preparing the SAP integration modules for deployment, [use `csap`](./csap-cli.md). It is a command line interface, offering commodity operations to setup all necessary aspects of each module.
+Use [`csap`](./csap-cli.md) to prepare SAP integration modules for deployment. It's a command-line interface (CLI) that provides all the essential setup operations for each module
 
 ## Technical requirements
 
-All SAP integration artifacts have the following technical requirements:
+To integrate SAP systems with Camunda, all integration artifacts must meet the following requirements:
 
-- Camunda version 8.5+
-- They run on SAP BTP, Cloud Foundry environment, and thus [need the respective service](https://discovery-center.cloud.sap/serviceCatalog/cloud-foundry-runtime?region=all).
-- [(free) Destination Service](https://discovery-center.cloud.sap/serviceCatalog/destination?region=all&service_plan=lite&commercialModel=btpea) for system and service connectivity.
-- If the S/4 or ECC system is located on-premises:
-  - [(free) Connectivity Service](https://discovery-center.cloud.sap/serviceCatalog/connectivity-service?region=all)
-  - [SAP Cloud Connector](https://help.sap.com/docs/connectivity/sap-btp-connectivity-cf/cloud-connector) configured and connected to both S/4 ECC and the BTP subaccount where the Camunda SAP integration artifacts will run.
-- Technical user with respective access right to the S/4 and/or ECC system.
+- **Camunda version** <br/>
+  Camunda 8.5+
 
-### SAP OData Connector
+- **SAP BTP and Cloud Foundry**
+
+  - The integration runs on SAP BTP, Cloud Foundry environment, that requires the [appropriate service](https://discovery-center.cloud.sap/serviceCatalog/cloud-foundry-runtime?region=all) setup.
+  - [(Free) Destination Service](https://discovery-center.cloud.sap/serviceCatalog/destination?region=all&service_plan=lite&commercialModel=btpea) for system and service connectivity.
+
+- **On-Premises SAP S/4HANA or ECC Systems _(if applicable)_**<br/>
+  If the SAP S/4HANA or ECC system is hosted on-premises, the following additional components are required:
+
+  - [(Free) Connectivity Service](https://discovery-center.cloud.sap/serviceCatalog/connectivity-service?region=all) for secure communication.
+  - [SAP Cloud Connector](https://help.sap.com/docs/connectivity/sap-btp-connectivity-cf/cloud-connector), properly configured and connected to both, the SAP S/4HANA or ECC system and the BTP subaccount where the Camunda SAP integration artifacts will run.
+
+- A **technical user** with the necessary access rights to the SAP S/4HANA and/or ECC system.
+
+### SAP OData connector
 
 No additional requirements.
 
-### SAP RFC Connector
+### SAP RFC connector
 
-- [(free) SAP Authorization and Trust Management Service](https://discovery-center.cloud.sap/serviceCatalog/authorization-and-trust-management-service?region=all)
+- [(Free) SAP Authorization and Trust Management Service](https://discovery-center.cloud.sap/serviceCatalog/authorization-and-trust-management-service?region=all) to manage user authorizations and trust to identity providers.
 
 ### SAP BTP integration
 
-- [(free) SAP Authorization and Trust Management Service](https://discovery-center.cloud.sap/serviceCatalog/authorization-and-trust-management-service?region=all)
+- [(Free) SAP Authorization and Trust Management Service](https://discovery-center.cloud.sap/serviceCatalog/authorization-and-trust-management-service?region=all)
 - [PostgreSQL on SAP BTP, hyperscaler option](https://discovery-center.cloud.sap/serviceCatalog/postgresql-hyperscaler-option?region=all)
 
-For scaling out and up, either add multiple instances of an integration module (for example, the SAP OData Connector) or equip an integration module with more runtime memory (for example, the SAP BTP plugin).
+For scaling out and up, either add multiple instances of an integration module (for example, the SAP OData connector) or equip an integration module with more runtime memory (for example, the SAP BTP plugin).
 
-For more sophisticated tuning, all mechanisms of BTP can be applied (such as the [(free) Application Autoscaler](https://discovery-center.cloud.sap/serviceCatalog/application-autoscaler?service_plan=standard&region=all&commercialModel=btpea)), as all SAP integration artifacts fully adhere to the BTP cloud-based development standards and can be fully configured just as any custom developed apps on BTP.
+For advanced tuning, you can use all SAP BTP mechanisms, including the [(Free) Application Autoscaler.](https://discovery-center.cloud.sap/serviceCatalog/application-autoscaler?service_plan=standard&region=all&commercialModel=btpea). SAP integration artifacts follow SAP BTP cloud development standards and are fully configurable like any custom SAP BTP app.
