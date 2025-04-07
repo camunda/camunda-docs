@@ -8,7 +8,6 @@ description: "A comprehensive guide on configuring and managing secrets in Camun
 
 This guide provides detailed instructions for configuring and managing secrets when using the official Helm chart.
 
----
 
 ## Internal Secrets
 
