@@ -17,6 +17,8 @@ These features run in the customer's [SAP BTP instance](https://www.sap.com/prod
 
 ![SAP integration overview](./img/sap-integration-overview.png)
 
+For preparing the SAP integration modules for deployment, [use `csap`](./csap-cli.md). It is a command line interface, offering commodity operations to setup all necessary aspects of each module.
+
 ## Technical requirements
 
 All SAP integration artifacts have the following technical requirements:
