@@ -9,6 +9,8 @@ After installing OpenJDK, ensure `JAVA_HOME` is set by running `java -version` i
 If no version of Java is found, follow your chosen installation's instructions for setting `JAVA_HOME` before continuing.
 :::
 
+### Install and start Camunda 8 Run
+
 import {C8Run} from "@site/src/components/CamundaDistributions";
 
 1. Download the latest release of <C8Run/> for your operating system and architecture. Opening the .tgz file extracts the Camunda 8 Run script into a new directory.
