@@ -198,6 +198,9 @@ RewriteRule ^docs/8.6/apis-tools/community-clients/go-client/(.*)$ https://githu
 # Remove meta page
 RewriteRule ^meta/ / [R=301,L]
 
+# Move SAP docs into Camunda integrations
+RewriteRule ^docs/components/early-access/sap/?$ /docs/components/camunda-integrations/sap/$1 [R=301,L]
+
 # Reroute element templates and HTTL to C7 docs
 RewriteRule ^docs/components/modeler/desktop-modeler/element-templates/c7-defining-templates/(.*)$ https://docs.camunda.org/manual/latest/modeler/element-templates/ [R=301,L]
 RewriteRule ^docs/8.6/components/modeler/desktop-modeler/element-templates/c7-defining-templates/(.*)$ https://docs.camunda.org/manual/latest/modeler/element-templates/ [R=301,L]
