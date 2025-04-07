@@ -19,18 +19,6 @@ These release notes identify the new features included in 8.7, including [alpha 
 | ---------------------- | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------- | --------------------------------------------------------------------------- |
 | 8 April 2025           | 13 October 2026              | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.8.0-alpha3)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.8.0-alpha3)</li></ul> | [Release blog](https://camunda.com/blog/2025/04/camunda-8-7-release/) | [Update guide](/self-managed/operational-guides/update-guide/860-to-870.md) |
 
-### Added dual-region reference architecture for OpenShift <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
-
-We are excited to announce the addition of the [dual-region reference architecture for Red Hat OpenShift](/self-managed/setup/deploy/openshift/dual-region.md). This new architecture leverages Submariner, a cloud-native technology based on IPSec, to enable inter-cluster communication and service discovery across regions. Learn more about [dual-region operational procedures](/self-managed/operational-guides/multi-region/dual-region-ops.md).
-
-<!--- https://github.com/camunda/product-hub/issues/2501  --->
-
-### Added dual-region ROSA HCP cluster with Terraform <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
-
-Step through [a detailed tutorial for deploying two Red Hat OpenShift on AWS (ROSA) cluster with Hosted Control Plane (HCP) in two different regions](/self-managed/setup/deploy/amazon/openshift/terraform-setup-dual-region.md). It is specifically tailored for deploying Camunda 8 using Terraform, a widely-used Infrastructure as Code (IaC) tool.
-
-<!--- https://github.com/camunda/product-hub/issues/2585 --->
-
 ### Bulk publish to shared resources <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
 
 Develop reusable assets in a pro-code environment, push them to your version control system, then publish them to your Web Modeler environment so anyone in your organization can reuse them with newly modified endpoints.
@@ -75,6 +63,18 @@ Self-managed customers now have [full control over JWT configurations](/self-man
 We have extended Camunda's [document handling](/components/concepts/document-handling.md) capabilities by introducing robust integrations and support for AWS S3, local file systems, and document operations within Zeebe. This version enhances document management by providing additional support for secure storage, retrieval, and integration with Connectors, improving the efficiency and scalability of document-dependent workflows.
 
 <!-- https://github.com/camunda/product-hub/issues/2555 -->
+
+### Dual-region reference architecture for OpenShift <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+
+We are excited to announce the addition of the [dual-region reference architecture for Red Hat OpenShift](/self-managed/setup/deploy/openshift/dual-region.md). This new architecture leverages Submariner, a cloud-native technology based on IPSec, to enable inter-cluster communication and service discovery across regions. Learn more about [dual-region operational procedures](/self-managed/operational-guides/multi-region/dual-region-ops.md).
+
+<!--- https://github.com/camunda/product-hub/issues/2501  --->
+
+### Dual-region ROSA HCP cluster with Terraform <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+
+Step through [a detailed tutorial for deploying two Red Hat OpenShift on AWS (ROSA) cluster with Hosted Control Plane (HCP) in two different regions](/self-managed/setup/deploy/amazon/openshift/terraform-setup-dual-region.md). It is specifically tailored for deploying Camunda 8 using Terraform, a widely-used Infrastructure as Code (IaC) tool.
+
+<!--- https://github.com/camunda/product-hub/issues/2585 --->
 
 ### End-to-end organization process landscape <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler"> Desktop Modeler</span>
 
