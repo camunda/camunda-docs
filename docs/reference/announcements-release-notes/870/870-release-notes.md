@@ -124,33 +124,33 @@ Create and append tasks with resources available in the current project and proc
 
 ### Known bugs in the 8.7.0 release
 
-- **https://github.com/camunda/issues/issues/932**: When changing the element type of an inbound start event connector to blank start event type, then the inbound connector properties are not removed
+- **https://github.com/camunda/issues/issues/932**: When changing the element type of an inbound start event Connector to a blank start event type, the inbound Connector properties are not removed.
   - Affects: Web Modeler
-  - Work-around: Delete and re-create the BPMN element
-- **https://github.com/camunda/camunda/issues/26079**: Fields in AI-generated user forms may not be editable for certain Chrome browser versions
+  - Work-around: Delete and re-create the BPMN element.
+- **https://github.com/camunda/camunda/issues/26079**: Fields in AI-generated user forms may not be editable for certain Chrome browser versions.
   - Affects: Web Modeler / Tasklist
-  - Work-around: Manually recreate the form
-- **https://github.com/camunda/camunda/issues/29755**: Tasklist backups do not complete if the request for taking a snapshot times out
+  - Work-around: Manually recreate the form.
+- **https://github.com/camunda/camunda/issues/29755**: Tasklist backups do not complete if the request for taking a snapshot times out.
   - Affects: Tasklist
-  - Work-around: Retry taking a backup; increase backup frequency
-- **https://github.com/camunda/camunda/issues/29182**: Operate backups do not complete if the request for taking a snapshot times out
+  - Work-around: Retry taking a backup; increase backup frequency.
+- **https://github.com/camunda/camunda/issues/29182**: Operate backups do not complete if the request for taking a snapshot times out.
   - Affects: Operate
-  - Work-around: Retry taking a backup; increase backup frequency
-- **https://github.com/camunda/camunda/issues/28498**: In rare situations, PDFs cannot be previews due to the used browser
+  - Work-around: Retry taking a backup; increase backup frequency.
+- **https://github.com/camunda/camunda/issues/28498**: In rare situations, PDFs cannot be previewed due to the used browser.
   - Affects: Tasklist
-  - Work-around: Use a different browser; clear browser cache
-- **https://github.com/camunda/camunda-platform-helm/issues/3135**: Incomplete Connectors configuration for Entra ID usage
+  - Work-around: Use a different browser; clear browser cache.
+- **https://github.com/camunda/camunda-platform-helm/issues/3135**: Incomplete Connectors configuration for Entra ID usage.
   - Affects: Connectors
-  - Work-around: Set an enviornment variable with the token scope for Operate (see [issue](https://github.com/camunda/camunda-platform-helm/issues/3135))
-- **https://github.com/camunda/camunda/issues/29526**: Files are not uploaded to the document storage when starting a process from the Web Modeler
-  - Affects: Document Handling / Web Modeler
-  - Work-around: Start the process from Tasklist or REST API
-- **https://github.com/camunda/camunda/issues/25443**: File picker does not display the name of the uploaded file for completed tasks
+  - Work-around: Set an environment variable with the token scope for Operate (see [issue](https://github.com/camunda/camunda-platform-helm/issues/3135)).
+- **https://github.com/camunda/camunda/issues/29526**: Files are not uploaded to the document storage when starting a process from Web Modeler.
+  - Affects: Document handling / Web Modeler
+  - Work-around: Start the process from Tasklist or REST API.
+- **https://github.com/camunda/camunda/issues/25443**: File picker does not display the name of the uploaded file for completed tasks.
   - Affects: Tasklist
-  - Work-around: File name can be viewed in Operate
-- **https://github.com/camunda/camunda/issues/28375**: File upload fails to AWS Storage due to non UTF-8 whitespace character in filename
+  - Work-around: File name can be viewed in Operate.
+- **https://github.com/camunda/camunda/issues/28375**: File upload fails to AWS storage due to non UTF-8 whitespace character in filename.
   - Affects: Tasklist
-  - Workaround: When using a AWS S3 Storage use UTF-8 compatible characters
+  - Work-around: When using AWS S3 storage, use UTF-8 compatible characters.
 
 ## 8.7.0-alpha5
 
