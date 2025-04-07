@@ -797,7 +797,7 @@ We will also use this step to verify connectivity to the database from the creat
 3. Save the following manifest to a file, for example, `setup-postgres-create-db.yml`:
 
    ```yaml reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region/setup-postgres-create-db.yml
+   https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/aws/kubernetes/eks-single-region/setup-postgres-create-db.yml
    ```
 
 4. Apply the manifest:
