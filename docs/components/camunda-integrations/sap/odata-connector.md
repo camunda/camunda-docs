@@ -351,4 +351,4 @@ If the SAP OData Connector encounters an error, the boundary event will catch th
 
 - Ensure the connection from the Cloud Foundry environment via the destination to the SAP systems works. Using the [Terminal in Business Application Studio](https://community.sap.com/t5/technology-blogs-by-sap/how-to-check-the-connectivity-to-your-backend-system-in-business/ba-p/13479832) is a quick way to verify this.
 - Validate requests first in an API client before trying with the SAP OData Connector in Modeler. Then, copy over to the element template fields. This saves time and reduces potential error.
-- Any payload size <= 2.5MB can be considered safe.
+- Any payload size less than or equal to 2.5 MB can be considered safe.
