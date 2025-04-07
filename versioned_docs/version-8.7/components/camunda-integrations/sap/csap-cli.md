@@ -51,8 +51,8 @@ mv csap-x86_64-unknown-linux-gnu /usr/local/bin/csap
 :::tip
 If macOS mistakenly flags the `csap` command as malware when run from the terminal, follow these steps to allow the CLI to run:
 
-1. Open the macOS **System Settings.**
-2. Go to **Privacy & Security.**
+1. Open the macOS **System Settings**.
+2. Go to **Privacy & Security**.
 3. If `csap` appears under **Security**, click **Open Anyway**.
    :::
 

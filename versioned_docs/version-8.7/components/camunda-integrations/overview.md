@@ -4,7 +4,7 @@ title: "Overview"
 description: "Learn more about Camunda integrations, such as Camunda's SAP integration."
 ---
 
-Camunda Integrations are capabilities that enable Camunda’s process automation platform to seamlessly interact with various external systems, services, and technologies. By leveraging these integrations, you can design workflows that orchestrate business logic both within Camunda and across other platforms or applications—creating end-to-end process automation solutions.
+Camunda integrations are capabilities that enable Camunda’s process automation platform to seamlessly interact with various external systems, services, and technologies. By leveraging these integrations, you can design workflows that orchestrate business logic both within Camunda and across other platforms or applications—creating end-to-end process automation solutions.
 
 Currently, this consists of Camunda's SAP integration, including:
 

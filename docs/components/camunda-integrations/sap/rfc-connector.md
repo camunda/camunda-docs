@@ -4,7 +4,8 @@ title: SAP RFC Connector
 description: "The SAP RFC Connector is a Java Spring Boot application that runs on SAP BTP."
 ---
 
-The SAP RFC [Connector](/components/connectors/introduction.md) is a [protocol and outbound Connector](/components/connectors/connector-types.md). This Connector is a Java Spring Boot application that runs as a `.war` on SAP Business Technology Platform (BTP).
+The SAP RFC [Connector](/components/connectors/introduction.md) is a [protocol and outbound Connector](/components/connectors/connector-types.md).<br/>
+This Connector is a Java Spring Boot application that runs as a `.war` on the SAP Business Technology Platform (BTP).
 
 It connects to Camunda 8 SaaS, and utilizes SAP BTP's [Destination](https://learning.sap.com/learning-journeys/administrating-sap-business-technology-platform/using-destinations) and [Connectivity](https://help.sap.com/docs/connectivity/sap-btp-connectivity-cf/what-is-sap-btp-connectivity) concepts to query a SAP system via the RFC protocol to interact with remote-enabled Function Modules and BAPIs.
 
@@ -16,7 +17,8 @@ For a standard overview of the steps involved in the SAP RFC Connector, see the 
 
 ## Prerequisites
 
-- We recommend creating an API client for your Camunda SaaS cluster with the full scope: `Zeebe,Tasklist,Operate,Optimize,Secrets`.
+- **Camunda API Client** <br/>
+  [Create an API client](/components/console/manage-clusters/manage-api-clients.md) for your Camunda SaaS cluster with the full scope: `Zeebe,Tasklist,Operate,Optimize,Secrets`
 
 To run the SAP RFC Connector, the following SAP infrastructure setup is required:
 
@@ -44,9 +46,11 @@ You can either configure the RFC connector via [the `csap` cli](./csap-cli.md) (
 
 #### Using `csap`
 
-Either walk yourself through the prompts or provide all information to the cli
+Use CSAP CLI in either<br/>
+**Interactive mode:** by following the on-screen prompts OR<br/>
+**Non-interactive mode:** by providing all required parameters directly to the CLI.
 
-- `csap setup` will guide you interactively.
+Use the command `csap setup` will guide you interactively.
 
 - Assuming your [Camunda cluster's API credentials](/guides/setup-client-connection-credentials.md) are sourced in your shell environment, this will do the configuration for you:
 
@@ -66,7 +70,7 @@ csap setup --for rfc \
    - `rfc-8.5.1.war` is the RFC Connector in version `1` for C8 SaaS version `8.5`
 
 2. Download the matching `mtad.yaml.example` file also from [the GitHub release page](https://github.com/camunda/sap-rfc-connector/releases).
-   Adjust the values for the credentials (`client ID`, `client secret`, etc.) to match those of the API client of the targeted Camunda 8 SaaS environment and rename it to `mtad.yaml`.
+   Adjust the values for the credentials (such as client ID and client secret) to match those of the API client of the targeted Camunda 8 SaaS environment and rename it to `mtad.yaml`.
 
 3. Donwload the connector template from [the GitHub release page](https://github.com/camunda/sap-rfc-connector/releases).
 
@@ -91,7 +95,7 @@ Application "sap-rfc-connector" started and available at "some.url.hana.ondemand
 
 ### Deployment in Camunda 8 SaaS
 
-- If using Web Modeler, [import the SAP RFC Connector's element template](/components/connectors/manage-connector-templates.md#importing-existing-connector-templates) contained in the repository in `element-templates/sap-rfc-connector.json` for design use.
+- If using Web Modeler, [import the SAP RFC Connector's element template](/components/connectors/manage-connector-templates.md#importing-existing-connector-templates) contained in the repository in `element-templates/sap-rfc-connector.json` for use in your process design.
 
 ![sap-rfc-connector-task-in-model](./img/sap-rfc-connector-task-in-model.png)
 

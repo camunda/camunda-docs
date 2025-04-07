@@ -1,7 +1,7 @@
 ---
 id: csap-cli
-title: CSAP setup command line utility
-description: "Learn about CSAP, a CLI to configure all SAP integration artifacts for deployment."
+title: CSAP CLI command line utility
+description: "Learn about CSAP, the CLI to configure all SAP integration artifacts for deployment."
 ---
 
 The Camunda SAP Integration CLI (`csap`) is a command-line tool designed to simplify the setup of Camunda's SAP integration modules. It provides a streamlined process for configuring and building these modules for deployment.
@@ -19,16 +19,16 @@ The Camunda SAP Integration CLI (`csap`) is a command-line tool designed to simp
 
 The CLI supports the following SAP integration modules:
 
-1. **BTP plugin**: Enables rendering task forms in Fiori and provides BTP integration.
-2. **OData Connector**: Facilitates interaction with S/4HANA or ECC systems from a BPMN model.
-3. **RFC Connector**: Allows querying BAPIs and Remote Function Modules on SAP ECC systems.
+1. **SAP OData Connector**: Facilitates interaction with SAP S/4HANA or ECC systems from a BPMN model.
+2. **SAP RFC Connector**: Allows querying BAPIs and Remote Function Modules on SAP ECC systems.
+3. **BTP plugin**: Enables rendering task forms in Fiori and provides BTP integration.
 4. **All modules**: Configures all available modules.
 
 ## Installation
 
-To use the CLI, download the binary matching your operating system and architecture from the [releases](https://github.com/camunda/csap-cli/releases) section of its repository:
+To use the CLI, download the binary matching your operating system and architecture from the [releases](https://github.com/camunda/sap-csap-cli/releases) section of its repository:
 
-1. Navigate to the [releases](https://github.com/camunda/csap-cli/releases) page.
+1. Navigate to the [releases](https://github.com/camunda/sap-csap-cli/releases) page.
 2. Download the binary for your platform:
    - For Linux: `csap-x86_64-unknown-linux-gnu`
    - For macOS (Intel): `csap-x86_64-apple-darwin`
@@ -48,6 +48,14 @@ mv csap-x86_64-unknown-linux-gnu /usr/local/bin/csap
 1. Rename the binary to `csap.exe` if necessary.
 2. Add the directory containing `csap.exe` to your system's `PATH`.
 
+:::tip
+If macOS mistakenly flags the `csap` command as malware when run from the terminal, follow these steps to allow the CLI to run:
+
+1. Open the macOS **System Settings**.
+2. Go to **Privacy & Security**.
+3. If `csap` appears under **Security**, click **Open Anyway**.
+   :::
+
 ## Usage
 
 The CLI provides a `setup` command to prepare one of Camunda's SAP integration modules for deployment. You can run the command interactively or provide all required options as command-line switches.
@@ -60,7 +68,7 @@ Run the following command to start the interactive setup:
 csap setup
 ```
 
-The CLI will prompt you for all necessary inputs, such as the SAP integration module, Camunda version, deployment option, and credentials.
+The CLI will guide you through prompts to collect all required inputs, including the SAP integration module, Camunda version, deployment method, and credentials.
 
 ### Command-line options
 
