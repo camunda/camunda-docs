@@ -21,9 +21,9 @@ These release notes identify the new features included in 8.8, including [alpha 
 
 ## 8.8.0-alpha3
 
-| Release date  | Changelog(s)                                                                                                                                                                               | Blog                                                                               |
-| :------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------- |
-| 08 April 2025 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.8.0-alpha3)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.8.0-alpha3)</li></ul> | [Release blog](https://camunda.com/blog/2025/04/camunda-alpha-release-april-2025/) |
+| Release date  | Changelog(s)                                                                                                                                                                               | Blog |
+| :------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--- |
+| 08 April 2025 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.8.0-alpha3)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.8.0-alpha3)</li></ul> | -    |
 
 <!-- https://github.com/camunda/product-hub/issues/2630 -->
 
