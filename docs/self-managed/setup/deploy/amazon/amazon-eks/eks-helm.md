@@ -16,12 +16,14 @@ Lastly you'll verify that the connection to your Self-Managed Camunda 8 environm
 ## Requirements
 
 - A Kubernetes cluster; see the [eksctl](./eksctl.md) or [Terraform](./terraform-setup.md) guide.
-- [Helm (3.16+)](https://helm.sh/docs/intro/install/)
-- [kubectl (1.30+)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
-- [jq (1.7+)](https://jqlang.github.io/jq/download/) to interact with some variables.
+- [Helm](https://helm.sh/docs/intro/install/)
+- [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
+- [jq](https://jqlang.github.io/jq/download/) to interact with some variables.
 - [GNU envsubst](https://www.gnu.org/software/gettext/manual/html_node/envsubst-Invocation.html) to generate manifests.
 - (optional) Domain name/[hosted zone](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-working-with.html) in Route53. This allows you to expose Camunda 8 and connect via community-supported [zbctl](https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md) or [Camunda Modeler](https://camunda.com/download/modeler/).
 - A namespace to host the Camunda Platform, in this guide we will reference `camunda` as the target namespace.
+
+For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file in the repository. It contains an up-to-date list of versions that we also use for testing.
 
 ### Considerations
 
@@ -54,7 +56,11 @@ To streamline the execution of the subsequent commands, it is recommended to exp
 The following are the required environment variables with some example values:
 
 ```bash reference
-https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7/procedure/chart-env.sh
+https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region/procedure/setting-region.sh
+```
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/chart-env.sh
 ```
 
 ### Export database values
@@ -72,7 +78,7 @@ Verify the configuration of your environment variables by running the following 
 <TabItem value="standard">
 
 ```bash reference
-https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7/procedure/check-env-variables.sh
+https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region/procedure/check-env-variables.sh
 ```
 
 </TabItem>
@@ -80,7 +86,7 @@ https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7/
 <TabItem value="irsa">
 
 ```bash reference
-https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7-irsa/procedure/check-env-variables.sh
+https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region-irsa/procedure/check-env-variables.sh
 ```
 
 </TabItem>
@@ -112,9 +118,9 @@ export DOMAIN_NAME=camunda.example.com
 # The email address for Let's Encrypt registration
 export MAIL=admin@camunda.example.com
 # Helm chart versions for Ingress components
-export INGRESS_HELM_CHART_VERSION="4.11.2"
-export EXTERNAL_DNS_HELM_CHART_VERSION="1.15.0"
-export CERT_MANAGER_HELM_CHART_VERSION="1.15.3"
+export INGRESS_HELM_CHART_VERSION="4.12.1"
+export EXTERNAL_DNS_HELM_CHART_VERSION="1.16.0"
+export CERT_MANAGER_HELM_CHART_VERSION="1.17.1"
 ```
 
 Additionally, obtain these values by following the guide for either [eksctl](./eks-helm.md) or [Terraform](./terraform-setup.md), as they will be needed in later steps:
@@ -250,7 +256,7 @@ The annotation `kubernetes.io/tls-acme=true` will be [interpreted by cert-manage
 :::
 
 ```yaml reference
-https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7/helm-values/values-domain.yml
+https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region/helm-values/values-domain.yml
 ```
 
 :::danger Exposure of the Zeebe Gateway
@@ -271,7 +277,7 @@ Before installing the Helm chart, create Kubernetes secrets to store the Keycloa
 To create the secrets, run the following commands:
 
 ```bash reference
-https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7/procedure/create-external-db-secrets.sh
+https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region/procedure/create-setup-db-secret.sh
 ```
 
 </TabItem>
@@ -279,7 +285,7 @@ https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7/
 <TabItem value="without-domain-std" label="Standard without domain">
 
 ```hcl reference
-https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7/helm-values/values-no-domain.yml
+https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region/helm-values/values-no-domain.yml
 ```
 
 #### Reference the credentials in secrets
@@ -289,7 +295,7 @@ Before installing the Helm chart, create Kubernetes secrets to store the Keycloa
 To create the secrets, run the following commands:
 
 ```bash reference
-https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7/procedure/create-external-db-secrets.sh
+https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region/procedure/create-external-db-secrets.sh
 ```
 
   </TabItem>
@@ -303,7 +309,7 @@ The annotation `kubernetes.io/tls-acme=true` will be [interpreted by cert-manage
 :::
 
 ```hcl reference
-https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7-irsa/helm-values/values-domain.yml
+https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region-irsa/helm-values/values-domain.yml
 ```
 
 :::danger Exposure of the Zeebe Gateway
@@ -322,7 +328,7 @@ By default, authorization is enabled to ensure secure access to Zeebe. Typically
   <TabItem value="without-domain-irsa" label="IRSA without domain">
 
 ```hcl reference
-https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7-irsa/helm-values/values-no-domain.yml
+https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region-irsa/helm-values/values-no-domain.yml
 ```
 
   </TabItem>
@@ -408,18 +414,14 @@ identity:
 
 Once you've prepared the `values.yml` file, run the following `envsubst` command to substitute the environment variables with their actual values:
 
-```bash
-# generate the final values
-envsubst < values.yml > generated-values.yml
-
-# print the result
-cat generated-values.yml
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/assemble-envsubst-values.sh
 ```
 
 Next, store various passwords in a Kubernetes secret, which will be used by the Helm chart. Below is an example of how to set up the required secret. You can use `openssl` to generate random secrets and store them in environment variables:
 
 ```bash reference
-https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7/procedure/generate-passwords.sh
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/generate-passwords.sh
 ```
 
 Use these environment variables in the `kubectl` command to create the secret.
@@ -427,7 +429,7 @@ Use these environment variables in the `kubectl` command to create the secret.
 - The `smtp-password` should be replaced with the appropriate external value ([see how it's used by Web Modeler](/self-managed/modeler/web-modeler/configuration/configuration.md#smtp--email)).
 
 ```bash reference
-https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7/procedure/create-identity-secret.sh
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/create-identity-secret.sh
 ```
 
 ### 3. Install Camunda 8 using Helm
@@ -435,7 +437,7 @@ https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7/
 Now that the `generated-values.yml` is ready, you can install Camunda 8 using Helm. Run the following command:
 
 ```bash reference
-https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7/procedure/install-chart.sh
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/install-chart.sh
 ```
 
 This command:
@@ -452,17 +454,8 @@ This guide uses `helm upgrade --install` as it runs install on initial deploymen
 
 You can track the progress of the installation using the following command:
 
-```bash
-watch -n 5 '
-  kubectl get pods -n camunda --output=wide;
-  if [ $(kubectl get pods -n camunda --field-selector=status.phase!=Running -o name | wc -l) -eq 0 ] &&
-     [ $(kubectl get pods -n camunda -o json | jq -r ".items[] | select(.status.containerStatuses[]?.ready == false)" | wc -l) -eq 0 ];
-  then
-    echo "All pods are Running and Healthy - Installation completed!";
-  else
-    echo "Some pods are not Running or Healthy";
-  fi
-'
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/check-deployment-ready.sh
 ```
 
 <details>
@@ -622,6 +615,9 @@ Console:
 
 ### Use the token
 
+<Tabs groupId="c8-connectivity">
+  <TabItem value="rest-api" label="REST API" default>
+
 For a detailed guide on generating and using a token, please conduct the relevant documentation on [authenticating with the REST API](./../../../../../apis-tools/camunda-api-rest/camunda-api-rest-authentication.md?environment=self-managed).
 
 <Tabs groupId="domain">
@@ -654,20 +650,10 @@ export ZEEBE_AUTHORIZATION_SERVER_URL=http://localhost:18080/auth/realms/camunda
 
 </Tabs>
 
-Generate a temporary token to access the REST API, then capture the value of the `access_token` property and store it as your token.
+Generate a temporary token to access the REST API, then capture the value of the `access_token` property and store it as your token. Use the stored token (referred to as `TOKEN` in this case) to interact with the REST API and display the cluster topology:
 
-```shell
-export TOKEN=$(curl --location --request POST "${ZEEBE_AUTHORIZATION_SERVER_URL}" \
---header "Content-Type: application/x-www-form-urlencoded" \
---data-urlencode "client_id=${ZEEBE_CLIENT_ID}" \
---data-urlencode "client_secret=${ZEEBE_CLIENT_SECRET}" \
---data-urlencode "grant_type=client_credentials" | jq '.access_token' -r)
-```
-
-Use the stored token, in our case `TOKEN`, to use the REST API to print the cluster topology.
-
-```shell
-curl --header "Authorization: Bearer ${TOKEN}" "${ZEEBE_ADDRESS_REST}/v2/topology"
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/check-zeebe-cluster-topology.sh
 ```
 
 ...and results in the following output:
@@ -676,88 +662,57 @@ curl --header "Authorization: Bearer ${TOKEN}" "${ZEEBE_ADDRESS_REST}/v2/topolog
   <summary>Example output</summary>
   <summary>
 
-```shell
-{
-  "brokers": [
-    {
-      "nodeId": 0,
-      "host": "camunda-zeebe-0.camunda-zeebe",
-      "port": 26501,
-      "partitions": [
-        {
-          "partitionId": 1,
-          "role": "leader",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 2,
-          "role": "follower",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 3,
-          "role": "follower",
-          "health": "healthy"
-        }
-      ],
-      "version": "8.6.0"
-    },
-    {
-      "nodeId": 1,
-      "host": "camunda-zeebe-1.camunda-zeebe",
-      "port": 26501,
-      "partitions": [
-        {
-          "partitionId": 1,
-          "role": "follower",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 2,
-          "role": "leader",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 3,
-          "role": "follower",
-          "health": "healthy"
-        }
-      ],
-      "version": "8.6.0"
-    },
-    {
-      "nodeId": 2,
-      "host": "camunda-zeebe-2.camunda-zeebe",
-      "port": 26501,
-      "partitions": [
-        {
-          "partitionId": 1,
-          "role": "follower",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 2,
-          "role": "follower",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 3,
-          "role": "leader",
-          "health": "healthy"
-        }
-      ],
-      "version": "8.6.0"
-    }
-  ],
-  "clusterSize": 3,
-  "partitionsCount": 3,
-  "replicationFactor": 3,
-  "gatewayVersion": "8.6.0"
-}
+```json reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/check-zeebe-cluster-topology-output.json
 ```
 
   </summary>
 </details>
+
+  </TabItem>
+  <TabItem value="modeler" label="Desktop Modeler">
+
+Follow our existing [Modeler guide on deploying a diagram](/self-managed/modeler/desktop-modeler/deploy-to-self-managed.md). Below are the helper values required to be filled in Modeler:
+
+<Tabs groupId="domain" defaultValue="with" queryString values={
+[
+{label: 'With domain', value: 'with' },
+{label: 'Without domain', value: 'without' },
+]}>
+
+<TabItem value="with">
+
+The following values are required for the OAuth authentication:
+
+- **Cluster endpoint:** `https://zeebe.$DOMAIN_NAME`, replacing `$DOMAIN_NAME` with your domain
+- **Client ID:** Retrieve the client ID value from the identity page of your created M2M application
+- **Client Secret:** Retrieve the client secret value from the Identity page of your created M2M application
+- **OAuth Token URL:** `https://$DOMAIN_NAME/auth/realms/camunda-platform/protocol/openid-connect/token`, replacing `$DOMAIN_NAME` with your domain
+- **Audience:** `zeebe-api`, the default for Camunda 8 Self-Managed
+
+</TabItem>
+
+<TabItem value="without">
+
+This requires port-forwarding the Zeebe Gateway to be able to connect to the cluster:
+
+```shell
+kubectl port-forward services/camunda-zeebe-gateway 26500:26500 --namespace camunda
+```
+
+The following values are required for OAuth authentication:
+
+- **Cluster endpoint:** `http://localhost:26500`
+- **Client ID:** Retrieve the client ID value from the identity page of your created M2M application
+- **Client Secret:** Retrieve the client secret value from the Identity page of your created M2M application
+- **OAuth Token URL:** `http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token`
+- **Audience:** `zeebe-api`, the default for Camunda 8 Self-Managed
+
+</TabItem>
+</Tabs>
+
+</TabItem>
+</Tabs>
 
 ## Test the installation with payment example application
 
@@ -773,4 +728,4 @@ To get more familiar with our product stack, visit the following topics:
 
 - [Operate](/components/operate/operate-introduction.md)
 - [Tasklist](/components/tasklist/introduction-to-tasklist.md)
-- [Optimize]($optimize$/components/what-is-optimize)
+- [Optimize](/components/optimize/what-is-optimize.md)

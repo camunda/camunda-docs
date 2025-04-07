@@ -55,7 +55,7 @@ Alternatively, the same setup can run with a single AWS EC2 instance, but be awa
 
 - An AWS account to create any resources within AWS.
   - On a high level, permissions are required on the **ec2**, **iam**, **elasticloadbalancing**, **kms**, **logs**, and **es** level.
-  - For a more fine-grained view of the permissions, check this [example policy](https://github.com/camunda/camunda-deployment-references/blob/main/aws/ec2/example/policy.json).
+  - For a more fine-grained view of the permissions, check this [example policy](https://github.com/camunda/camunda-deployment-references/tree/main/aws/ec2/example/policy.json).
 - Terraform (1.7+)
 - Unix based Operating System (OS) with ssh and sftp
   - Windows may be used with [Cygwin](https://www.cygwin.com/) or [Windows WSL](https://learn.microsoft.com/en-us/windows/wsl/install) but has not been tested
@@ -303,7 +303,7 @@ The update process can be automated using the `all-in-one-install.sh` script, wh
 
 ### Monitoring
 
-Our default way of exposing metrics is in the Prometheus format, please conduct the general [metrisc related documentation](/self-managed/zeebe-deployment/operations/metrics.md) to learn more how to scrape Camunda 8.
+Our default way of exposing metrics is in the Prometheus format, please conduct the general [metrics related documentation](/self-managed/operational-guides/monitoring/metrics.md) to learn more how to scrape Camunda 8.
 
 In an AWS environment, you can leverage CloudWatch not only for log collection but also for gathering [Prometheus metrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContainerInsights-Prometheus-metrics.html). It's important to note that while Camunda natively supports Grafana and Prometheus, integrating CloudWatch for metric visualization is possible but requires additional configuration.
 

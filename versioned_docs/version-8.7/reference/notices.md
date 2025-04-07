@@ -8,6 +8,30 @@ description: "Let's take a closer look at security notices, reporting vulnerabil
 
 Camunda publishes security notices after fixes are available.
 
+### Notice 16
+
+#### Publication date
+
+March 14th, 2025
+
+#### Product affected
+
+Camunda Zeebe
+
+#### Impact
+
+Some Camunda Zeebe versions were affected by a vulnerability that allowed a malicious attacker to craft network packets that could crash the gateway.
+
+#### How to determine if the installation is affected
+
+You are using Camunda Zeebe 8.6.0 - 8.6.11
+
+#### Solution
+
+Camunda has provided the following release which contains a fix:
+
+- [Camunda Zeebe 8.6.12](https://github.com/camunda/camunda/releases/tag/8.6.12)
+
 ### Notice 15
 
 #### Publication date
@@ -50,16 +74,18 @@ The version of `koa` used by Camunda Web Modeler was affected by the following v
 
 #### How to determine if the installation is affected
 
-You are using Camunda Web Modeler version ≤ 8.3.16, ≤ 8.4.14, ≤ 8.5.15, or ≤ 8.6.7.
+You are using Camunda Web Modeler Self-Managed version ≤ 8.3.16, ≤ 8.4.14, ≤ 8.5.15, or ≤ 8.6.7.
 
 #### Solution
 
 Camunda has provided the following releases which contain the fix:
 
-- Camunda Web Modeler 8.3.17
-- Camunda Web Modeler 8.4.15
-- Camunda Web Modeler 8.5.16
-- Camunda Web Modeler 8.6.8
+- Camunda Web Modeler Self-Managed 8.3.17
+- Camunda Web Modeler Self-Managed 8.4.15
+- Camunda Web Modeler Self-Managed 8.5.16
+- Camunda Web Modeler Self-Managed 8.6.8
+
+The fix was deployed to Web Modeler SaaS on February 14, 2025, 08:50 CET.
 
 ### Notice 13
 
