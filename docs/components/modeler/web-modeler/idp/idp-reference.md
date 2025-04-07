@@ -99,6 +99,17 @@ You can choose from the following supported LLM extraction models during [data e
 | Llama 3 8B Instruct  | [Meta](https://www.meta.com/gb/)           | [Meta's Llama in Amazon Bedrock](https://aws.amazon.com/bedrock/llama/)                                 |
 | Titan Text Premier   | [Amazon AWS](https://docs.aws.amazon.com/) | [Amazon Titan Text models](https://docs.aws.amazon.com/bedrock/latest/userguide/titan-text-models.html) |
 
+:::note
+
+Amazon Bedrock LLM extraction models are only available in specific regions.
+
+- You must ensure your selected cluster region supports the LLM extraction model you want to use. For example, if you using the `eu-central-1` region, you cannot use Claude 3 Haiku as it is only available in US regions.
+- If you have chosen a model not supported in your region, you will receive a 403 "You don't have access to the model with the specified model ID" exception error.
+
+For current regional support information, refer to [supported foundation models in Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html).
+
+:::
+
 ## Access rights and permissions
 
 Access to IDP features is determined by your Web Modeler user role and associated [access rights and permissions](/components/modeler/web-modeler/collaboration.md#access-rights-and-permissions).
