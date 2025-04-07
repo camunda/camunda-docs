@@ -19,6 +19,19 @@ These release notes identify the new features included in 8.7, including [alpha 
 | ---------------------- | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------- | --------------------------------------------------------------------------- |
 | 8 April 2025           | 13 October 2026              | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.8.0-alpha3)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.8.0-alpha3)</li></ul> | [Release blog](https://camunda.com/blog/2025/04/camunda-8-7-release/) | [Update guide](/self-managed/operational-guides/update-guide/860-to-870.md) |
 
+### AWS EKS and AWS OpenShift (ROSA) reference architecture <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+
+Camunda is pleased to announce the release of the Reference Architecture packages for AWS EKS (single-region) and Red Hat OpenShift on AWS (ROSA) in both single and dual-region configurations.
+
+- These packages offer a standardized Reference Architecture that includes implementation requirements, Terraform templates, Helm configurations, deployment pipelines, and operational procedures.
+- Additionally, we have enhanced the user experience by improving test coverage for the documented procedures.
+
+:::note
+As part of this effort, the previously used repositories [camunda-tf-eks-module](https://github.com/camunda/camunda-tf-eks-module) and [camunda-tf-rosa](https://github.com/camunda/camunda-tf-rosa) were deprecated and merged into a new consolidated repository: [camunda-deployment-references](https://github.com/camunda/camunda-deployment-references).
+:::
+
+<!--- https://github.com/camunda/product-hub/issues/2522 --->
+
 ### Bulk publish to shared resources <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
 
 Develop reusable assets in a pro-code environment, push them to your version control system, then publish them to your Web Modeler environment so anyone in your organization can reuse them with newly modified endpoints.
@@ -41,16 +54,6 @@ Connector manage and run provides a consolidated view of your running inbound Co
 To learn more about this feature, see [manage your connectors](/components/console/manage-clusters/manage-connectors.md).
 
 <!-- https://github.com/camunda/product-hub/issues/2647 https://github.com/camunda/product-hub/issues/1063 -->
-
-### Convert AWS EKS and AWS OpenShift (ROSA) guides to reference architecture format <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
-
-We are pleased to announce the release of the Reference Architecture packages for AWS EKS (single-region) and Red Hat OpenShift on AWS (ROSA) in both single and dual-region configurations.  
-These packages offer a standardized Reference Architecture that includes implementation requirements, Terraform templates, Helm configurations, deployment pipelines, and operational procedures.  
-Additionally, we have enhanced the user experience by improving test coverage for the documented procedures.
-
-As part of this effort, the previously used repositories [camunda-tf-eks-module](https://github.com/camunda/camunda-tf-eks-module) and [camunda-tf-rosa](https://github.com/camunda/camunda-tf-rosa) were deprecated and merged into a new consolidated repository: [camunda-deployment-references](https://github.com/camunda/camunda-deployment-references).
-
-<!--- https://github.com/camunda/product-hub/issues/2522 --->
 
 ### Custom JWKS and JWT Algorithms Support <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
