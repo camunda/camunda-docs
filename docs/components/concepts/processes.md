@@ -22,7 +22,7 @@ However, if you haven't yet, design the process:
 
 ## BPMN
 
-Camunda uses **[Business Process Model and Notation (BPMN)](/components/modeler/bpmn/bpmn.md)** to represent processes. The visual nature of BPMN enables greater collaboration between different teams, and is employed by numerous organizations globally.
+Camunda uses **[Business Process Model and Notation (BPMN) 2.0](/components/modeler/bpmn/bpmn.md)** to represent processes. The visual nature of BPMN enables greater collaboration between different teams, and is employed by numerous organizations globally.
 
 ![process example](./assets/order-process.png)
 
