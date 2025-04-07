@@ -16,7 +16,7 @@ For a standard overview of the steps involved in the SAP RFC Connector, see the 
 
 ## Prerequisites
 
-- on Camunda side: recommendation: create an API client for your Camunda SaaS cluster with the full scope: `Zeebe,Tasklist,Operate,Optimize,Secrets`
+- We recommend creating an API client for your Camunda SaaS cluster with the full scope: `Zeebe,Tasklist,Operate,Optimize,Secrets`.
 
 To run the SAP RFC Connector, the following SAP infrastructure setup is required:
 

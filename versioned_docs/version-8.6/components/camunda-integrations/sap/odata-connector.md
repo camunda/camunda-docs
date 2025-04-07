@@ -18,7 +18,7 @@ For a standard overview of the steps involved in the SAP OData Connector, see th
 
 ## Prerequisites
 
-- on Camunda side: recommendation: create an API client for your Camunda SaaS cluster with the full scope: `Zeebe,Tasklist,Operate,Optimize,Secrets`
+- We recommend creating an API client for your Camunda SaaS cluster with the full scope: `Zeebe,Tasklist,Operate,Optimize,Secrets`.
 
 To run the SAP OData Connector Docker image, the following SAP infrastructure setup is required:
 
@@ -52,13 +52,12 @@ A descriptor file is required to deploy the SAP OData Connector to a space in a 
 
 You can either configure the OData connector via [the `csap` cli](./csap-cli.md) (recommended) or manually. The advantage of using `csap` is that it pulls together all necessary files and adjusts them to your BTP environment automatically, using the info you provided in the prompts or via command line switches.
 
-#### using `csap`
+#### Using `csap`
 
-Either walk yourself through the prompts or provide all information to the cli
+Either walk yourself through the prompts or provide all information to the CLI:
 
 - `csap setup` will guide you interactively.
-
-- Assuming your [Camunda Cluster's API credentials](https://docs.camunda.io/docs/guides/setup-client-connection-credentials/) are sourced in your shell environment, this will do the configuration for you:
+- Assuming your [Camunda cluster's API credentials](/guides/setup-client-connection-credentials.md) are sourced in your shell environment, this will do the configuration for you:
 
 ```shell
 csap setup --for odata \
@@ -77,10 +76,9 @@ Take the following steps:
    - `8.6.0` is the OData Connector in version `0` for C8 SaaS version `8.6`
    - `8.5.1` is the OData Connector in version `1` for C8 SaaS version `8.5`
 
-2. Download the matching mtad.yaml.example from [the OData connector's Github release page](https://github.com/camunda/sap-odata-connector/releases).
-   Adjust the values for the credentials (`client ID`, client secret, etc.) to match those of the API client of the targeted Camunda 8 SaaS environment and rename it to `mtad.yaml`.
+2. Download the matching `mtad.yaml.example` from [the OData Connector's GitHub release page](https://github.com/camunda/sap-odata-connector/releases). Adjust the values for the credentials (`client ID`, client secret, etc.) to match those of the API client of the targeted Camunda 8 SaaS environment and rename it to `mtad.yaml`.
 3. Adjust the names of the SAP BTP Destination and Connectivity instances to your liking - both will be created automatically for you upon deployment. If instances of the same name in your subaccount of any of the two services exist, they will be reused.
-4. Download the connector template from [the OData connector's Github release page](https://github.com/camunda/sap-odata-connector/releases).
+4. Download the Connector template from [the OData Connector's GitHub release page](https://github.com/camunda/sap-odata-connector/releases).
 
 ### Deploying to BTP
 
