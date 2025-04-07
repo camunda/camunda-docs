@@ -349,13 +349,13 @@ cd clusters
 
 1. Configure user access to the clusters. By default, the user who creates an OpenShift cluster has administrative access. If you want to grant access to other users, follow the [Red Hat documentation for granting admin rights to users](https://docs.openshift.com/rosa/cloud_experts_tutorials/cloud-experts-getting-started/cloud-experts-getting-started-admin-rights.html) when the cluster will be created.
 
-1. Customize the clusters setup. The module offers various input options that allow you to further customize the cluster configuration. For a comprehensive list of available options and detailed usage instructions, refer to the [ROSA module documentation](https://github.com/camunda/camunda-deployment-references/tree/feature/migrate-dual-region-rosa/aws/modules/rosa-hcp/README.md).
+1. Customize the clusters setup. The module offers various input options that allow you to further customize the cluster configuration. For a comprehensive list of available options and detailed usage instructions, refer to the [ROSA module documentation](https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa/aws/modules/rosa-hcp/README.md).
 
 :::caution Camunda Terraform module
 
 This ROSA module is based on the [official Red Hat Terraform module for ROSA HCP](https://registry.terraform.io/modules/terraform-redhat/rosa-hcp/rhcs/latest). Please be aware of potential differences and choices in implementation between this module and the official one.
 
-Consult the [Camunda ROSA module documentation](https://github.com/camunda/camunda-deployment-references/tree/feature/migrate-dual-region-rosa/aws/modules/rosa-hcp/README.md) for more information.
+Consult the [Camunda ROSA module documentation](https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa/aws/modules/rosa-hcp/README.md) for more information.
 
 :::
 
