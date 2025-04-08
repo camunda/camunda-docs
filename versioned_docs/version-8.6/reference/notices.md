@@ -8,6 +8,37 @@ description: "Let's take a closer look at security notices, reporting vulnerabil
 
 Camunda publishes security notices after fixes are available.
 
+### Notice 18
+
+#### Publication date
+
+April 8th, 2025
+
+#### Product affected
+
+Camunda Optimize
+
+#### Impact
+
+Camunda Optimize was affected by a vulnerability that allowed an attacker to modify a JWT (JSON Web Token) so that they would be given improper access to Optimize.
+
+#### How to determine if the installation is affected
+
+You are using Camunda Optimize ≤ 8.4.15, ≤ 8.5.12, ≤ 8.6.6, ≤ 8.7.0, ≤ 3.11.20, ≤ 3.12.15, ≤ 3.13.12, ≤ 3.14.3, ≤ 3.15.0.
+
+#### Solution
+
+Camunda has provided the following release which contains a fix:
+
+- [Camunda Optimize 8.4.16](https://github.com/camunda/camunda-optimize/releases/tag/3.12.16)
+- [Camunda Optimize 8.5.13](https://github.com/camunda/camunda-optimize/releases/tag/3.13.13)
+- [Camunda Optimize 8.6.7](https://github.com/camunda/camunda/releases/tag/8.6.7-optimize)
+- [Camunda Optimize 8.7.0](https://github.com/camunda/camunda/releases/tag/8.7.0-optimize)
+- [Camunda Optimize 3.12.16](https://github.com/camunda/camunda-optimize/releases/tag/3.12.16)
+- [Camunda Optimize 3.13.13](https://github.com/camunda/camunda-optimize/releases/tag/3.13.13)
+- [Camunda Optimize 3.14.21](https://github.com/camunda/camunda-optimize/releases/tag/3.14.4)
+- [Camunda Optimize 3.15.1](https://github.com/camunda/camunda-optimize/releases/tag/3.15.1)
+
 ### Notice 17
 
 #### Publication date
