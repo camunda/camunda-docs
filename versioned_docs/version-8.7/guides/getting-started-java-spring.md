@@ -50,7 +50,7 @@ If no version of Java is found, follow your chosen installation's instructions f
 Next, create a new Spring Boot project:
 
 1. Go to [https://start.spring.io/](https://start.spring.io/) to get started.
-2. Under **Project**, select **Maven**. Under **Language**, select **Java**. Under **Spring Boot**, select the latest non-SNAPSHOT version (currently 3.4.1).
+2. Under **Project**, select **Maven**. Under **Language**, select **Java**. Under **Spring Boot**, select the latest non-SNAPSHOT version (currently 3.4.4).
 3. Under **Project Metadata**, configure the following or use the [pre-filled shortcut](https://start.spring.io/#!type=maven-project&language=java&packaging=jar&groupId=io.camunda.demo&artifactId=process_payments&name=Process%20payments&description=Process%20payments%20with%20Camunda&packageName=io.camunda.demo.process_payments):
    1. **Group**: `io.camunda.demo`
    2. **Artifact**: `process_payments`
@@ -96,7 +96,7 @@ To deploy your process, take the following steps:
 4. Change the **Cluster endpoint** to `http://localhost:26500`, with no authentication.
 5. Click **Deploy**.
 
-When you open Operate at http://localhost:8080/operate/, you should now note the process deployed to your local Self-Managed setup.
+When you open Operate at http://localhost:8080/operate/ (or http://localhost:8081 when using Camunda 8 Run with Docker Compose), you should now note the process deployed to your local Self-Managed setup.
 
 ## Step 4: Run your process from Desktop Modeler
 

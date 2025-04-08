@@ -53,7 +53,7 @@ kubectl create namespace orchestration
 
 - **Namespace `management`:** We will install [Identity](/self-managed/identity/what-is-identity.md), [Console](/self-managed/console-deployment/overview.md), and all the [Web Modeler](/self-managed/modeler/web-modeler/installation.md) components.
 
-- **Namespace `orchestration`**: We will install [Zeebe](/self-managed/zeebe-deployment/zeebe-installation.md), the Camunda web applications ([Operate](/self-managed/operate-deployment/install-and-start.md), [Tasklist](/self-managed/tasklist-deployment/install-and-start.md), and [Optimize](/$optimize$/self-managed/optimize-deployment/install-and-start.md)), along with [Connectors](/self-managed/connectors-deployment/install-and-start.md).
+- **Namespace `orchestration`**: We will install [Zeebe](/self-managed/zeebe-deployment/zeebe-installation.md), the Camunda web applications ([Operate](/self-managed/operate-deployment/install-and-start.md), [Tasklist](/self-managed/tasklist-deployment/install-and-start.md), and [Optimize](/self-managed/optimize-deployment/install-and-start.md)), along with [Connectors](/self-managed/connectors-deployment/install-and-start.md).
 
 Each component is installed by the Helm chart automatically, and does not need to be installed separately.
 
