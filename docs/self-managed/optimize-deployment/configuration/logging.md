@@ -27,7 +27,7 @@ reference as follows:
 - Optimize update:
 
 ```xml
-<Logger name="io.camunda.optimize.update" level="info" />
+<Logger name="io.camunda.optimize.upgrade" level="info" />
 ```
 
 - Communication to Elasticsearch:
