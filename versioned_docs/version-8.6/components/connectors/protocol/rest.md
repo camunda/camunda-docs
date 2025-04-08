@@ -226,7 +226,7 @@ To avoid this, set the `skipEncoding` value to `"true"` in the element template 
 
 The HTTP response will be available in a temporary local object variable. This variable can be mapped to the process by specifying the **Result variable**.
 
-The following fields are available in the returned object variable:
+The following variables are available in the context of the response expression:
 
 - **status**: Response status
 - **body**: Response body of your request
