@@ -1,21 +1,34 @@
 ---
-id: manage-users-roles-to-group
-title: "Manage users and roles in a group"
-description: "Groups are a way to apply a set of roles and authorizations to users. Use Identity to manage users and roles in a group."
+id: manage-groups
+title: "Manage groups"
+description: "Groups are a way to apply a set of roles and permissions to users. Use Identity to create a group."
 ---
 
-[Users](/self-managed/identity/user-guide/roles/manage-roles.md) and [roles](/self-managed/identity/user-guide/roles/manage-roles.md) can be added or removed from groups.
+Groups are a way to group a set of members. A set of [roles](/self-managed/identity/user-guide/roles/manage-roles.md) can be mapped to groups.
 
-:::tip Want to learn more about groups?
-Head over to our documentation on [groups](/self-managed/identity/user-guide/groups/manage-groups.md) to learn more.
-:::
+# Group Management
 
-## Assign members to a group
+## Create a group
 
-:::caution Write access needed
-To assign a user to a group, you must have write access to Identity.
-Read our [guide on managing user access](/self-managed/identity/user-guide/authorizations/managing-user-access.md) to learn more.
-:::
+To create a group, take the following steps:
+
+1. Navigate to the **Groups** tab.
+
+2. Click the **Create group** button located on the top right of the table and a modal will open.
+
+3. Fill in the name of the group and click **Create group**.
+
+On confirmation, the modal closes, the table updates, and your new group is shown.
+
+## Modify or delete a group
+
+1. Navigate to the **Groups** tab.
+
+2. Use the pencil icon to edit the group or the trash icon to remove a group.
+
+# User assignment to groups
+
+## Add users to a group
 
 1. Navigate to the **Groups** tab. Select the group you would like to assign a member to from the table.
 
@@ -33,12 +46,9 @@ On confirmation, the modal closes, the table updates, and your assigned members 
 
 On confirmation, the modal closes, the table updates, and your member is removed from the group.
 
-## Assign roles to a group
+# Role assignment to groups
 
-:::caution Write access needed
-To assign a role to a group, you must have write access to Identity.
-Read our [guide on managing user access](/self-managed/identity/user-guide/authorizations/managing-user-access.md) to learn more.
-:::
+## Assign roles to a group
 
 1. Navigate to the **Groups** tab. Select the group you would like to assign a role to from the table, and click on the **Roles** tab.
 
@@ -57,3 +67,7 @@ On confirmation, the modal closes, the table updates, and your assigned roles ar
 3. Click the trash icon next to the user you want to remove from the group.
 
 On confirmation, the modal closes, the table updates, and your role is removed from the group.
+
+# Next steps
+
+Groups are a way to group sets of [authorizations](../access-management/managing-resource-authorizations.md).

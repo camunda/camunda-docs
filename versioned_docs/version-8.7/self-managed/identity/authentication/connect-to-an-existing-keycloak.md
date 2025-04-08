@@ -83,6 +83,36 @@ To connect Identity to an existing Keycloak instance, take the following steps f
 Identity creates a base set of configurations required to function successfully. To understand more about what is created and why, see [the starting configuration](/self-managed/identity/deployment/starting-configuration.md).
 :::
 
+## Adjustments to Helm Values file
+
+The only change required to use the existing Keycloak is configuring the following values in the Camunda 8 Self-Managed Helm chart:
+
+```yaml
+# File: existing-keycloak-values.yaml
+global:
+  identity:
+    keycloak:
+      url:
+        # This will produce the following URL "https://keycloak.stage.svc.cluster.local:8443".
+        # Also the host could be outside the Kubernetes cluster like "keycloak.stage.example.com".
+        protocol: "https"
+        host: "keycloak.stage.svc.cluster.local"
+        port: "8443"
+      auth:
+        adminUser: "admin"
+        existingSecret: "stage-keycloak"
+        existingSecretKey: "admin-password"
+
+identityKeycloak:
+  enabled: false
+```
+
+Then, use the custom values file to [deploy Camunda 8](/self-managed/setup/install.md) as usual.
+
+```sh
+helm install camunda camunda/camunda-platform -f existing-keycloak-values.yaml
+```
+
 ## Considerations
 
 When connecting Identity to a shared realm, accurately determining what clients should and should not be displayed in the Identity UI is not possible. Therefore, the clients in the realm you connect Identity to will be shown in the Identity UI and can

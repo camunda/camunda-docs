@@ -1,7 +1,7 @@
 ---
-id: incorporate-applications
-title: "Incorporate applications"
-sidebar_label: "Incorporate applications"
+id: manage-applications
+title: "Manage applications"
+sidebar_label: "Manage applications"
 description: "Use Identity to create an application and assign a permission to an application."
 ---
 
