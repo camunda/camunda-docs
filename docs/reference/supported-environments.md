@@ -167,8 +167,8 @@ Certain dependencies used by Camunda 8, however, may have a shorter maintenance 
 
 ### Spring
 
-The Camunda Orchestration Cluster is a Spring Boot application, and leverages Spring Boot (and the wider Spring ecosystem) to execute fundamental functionality such as application configuration, REST infrastructure (including security), production ready features, etc.
+The **Camunda Orchestration Cluster** is a Spring Boot application, and leverages Spring Boot (and the wider Spring ecosystem) to execute fundamental functionality such as application configuration, REST infrastructure (including security), production ready features, etc.
 
-Spring, however, has a shorter maintenance window than Camunda for its OSS offering: versions are only supported for 12 months, versus Camunda's 18 months. To circumvent this, Spring (and Spring Boot) versions may also receive minor updates on supported Camunda versions as part of our normal patch release cycle.
+Spring, however, has a shorter maintenance window than Camunda for its OSS offering: versions are only supported for 12 months, versus Camunda's 18 months. To circumvent this, Spring (and Spring Boot) versions may also receive minor updates on supported **Camunda Orchestration Cluster** versions as part of our normal patch release cycle.
 
-As such, Camunda guarantees that the latest patch of a supported Camunda Orchestration Cluster version uses a supported Spring (and Spring Boot) versions.
+As such, Camunda strives to ensure that the latest patch of a supported **Camunda Orchestration Cluster** version uses a supported Spring (and Spring Boot) versions.
