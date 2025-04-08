@@ -21,15 +21,13 @@ reference as follows:
 - Optimize runtime environment:
 
 ```xml
-<Logger name="io.camunda.optimize" level="${env:OPTIMIZE_LOG_LEVEL:-info}" />
+<Logger name="io.camunda.optimize" level="info" />
 ```
 
 - Optimize update:
 
 ```xml
-<Logger name="io.camunda.optimize.update" level="${env:UPGRADE_LOG_LEVEL:-info}">
-  <appender-ref ref="UPGRADE"/>
-</Logger>
+<Logger name="io.camunda.optimize.update" level="info" />
 ```
 
 - Communication to Elasticsearch:
