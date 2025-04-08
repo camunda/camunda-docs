@@ -26,8 +26,8 @@ Camunda SaaS manages storage for you by integrating with [**Google Cloud Platfor
 
 If you're deploying Camunda in a Self-managed environment, document storage must be configured manually. To learn more, visit the following guides:
 
-<DocCardList items={[{type:"link", href:"/docs/next/self-managed/concepts/document-handling/getting-started/", label: "Getting started on Self-Managed", docId:"self-managed/concepts/document-handling/getting-started"},
-{type:"link", href:"/docs/next/self-managed/concepts/document-handling/document-storage-configuration/", label: "Storage configuration", docId:"self-managed/concepts/document-handling/document-storage-configuration"}
+<DocCardList items={[{type:"link", href:"/docs/self-managed/concepts/document-handling/getting-started/", label: "Getting started on Self-Managed", docId:"self-managed/concepts/document-handling/getting-started"},
+{type:"link", href:"/docs/self-managed/concepts/document-handling/document-storage-configuration/", label: "Storage configuration", docId:"self-managed/concepts/document-handling/document-storage-configuration"}
 ]}/>
 
 ## Use cases and capabilities
@@ -36,5 +36,5 @@ Document handling can be beneficial for different process use cases, such as upl
 
 Step through all of these capabilities in the guide below:
 
-<DocCardList items={[{type:"link", href:"/docs/8.7/guides/document-handling/", label: "Store, track and manage documents", docId:"guides/document-handling"}
+<DocCardList items={[{type:"link", href:"/docs/guides/document-handling/", label: "Store, track and manage documents", docId:"guides/document-handling"}
 ]}/>

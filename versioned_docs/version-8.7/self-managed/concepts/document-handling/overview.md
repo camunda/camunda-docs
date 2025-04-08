@@ -26,5 +26,5 @@ Document handling can be beneficial for different process use cases, such as upl
 
 Step through all of these capabilities in the guide below:
 
-<DocCardList items={[{type:"link", href:"/docs/8.7/guides/document-handling/", label: "Store, track and manage documents", docId:"guides/document-handling"}
+<DocCardList items={[{type:"link", href:"/docs/guides/document-handling/", label: "Store, track and manage documents", docId:"guides/document-handling"}
 ]}/>
