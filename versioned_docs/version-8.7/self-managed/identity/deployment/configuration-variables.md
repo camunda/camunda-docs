@@ -54,7 +54,7 @@ import Licensing from '../../../self-managed/react-components/licensing.md'
 For more information on integrating with an OpenID Connect provider, see the [OIDC documentation](/self-managed/setup/guides/connect-to-an-oidc-provider.md).
 
 :::note
-Claims are name/value pairs used to represent an individual identity. Configure your initial claim and value to match the claim used with your OIDC provider. For example, to use your Microsoft Entra unique account ID, set `IDENTITY_INITIAL_CLAIM_NAME` to `oid`, and `IDENTITY_INITIAL_CLAIM_VALUE` to the ID.
+Claims are name/value pairs used to represent an individual identity. Configure your initial claim and value to match the claim used with your OIDC provider. For example, to use your Microsoft Entra ID unique user ID, set `IDENTITY_INITIAL_CLAIM_NAME` to `oid`, and `IDENTITY_INITIAL_CLAIM_VALUE` to the ID.
 
 Once set, you cannot update your initial claim name and value using environment or Helm values. You must change these values directly in the database.
 :::
@@ -63,7 +63,7 @@ Once set, you cannot update your initial claim name and value using environment 
 | ------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
 | `IDENTITY_INITIAL_CLAIM_NAME`         | The type of claim used to identify the initial user. Examples can include `oid`, `name` or `email`.                                                            | `oid`                                             |
 | `IDENTITY_INITIAL_CLAIM_VALUE`        | The value of the claim specified in `IDENTITY_INITIAL_CLAIM_NAME`. For the default `oid`, the value usually corresponds to the unique ID of your user account. | `f81d4fae-7dec-11d0-a765-00a0c91e6bf6`            |
-| `CAMUNDA_IDENTITY_TYPE`               | Specifies the authentication provider type (`GENERIC` for standard OIDC providers, `MICROSOFT` for Azure AD).                                                  | `GENERIC` or `MICROSOFT`                          |
+| `CAMUNDA_IDENTITY_TYPE`               | Specifies the authentication provider type (`GENERIC` for standard OIDC providers, `MICROSOFT` for Microsoft Entra ID).                                        | `GENERIC` or `MICROSOFT`                          |
 | `CAMUNDA_IDENTITY_BASE_URL`           | The base URL of the Camunda Identity service where OIDC authentication requests are handled.                                                                   | `https://identity.camunda.example.com`            |
 | `CAMUNDA_IDENTITY_ISSUER`             | The Issuer URL of the identity provider used to retrieve OIDC metadata.                                                                                        | `https://login.microsoftonline.com/{tenant}/v2.0` |
 | `CAMUNDA_IDENTITY_ISSUER_BACKEND_URL` | The backend-facing issuer URL used for token verification by Camunda services.                                                                                 | `https://login.microsoftonline.com/{tenant}/v2.0` |
