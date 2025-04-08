@@ -40,10 +40,10 @@ The document extraction template used in this example uses the following extract
 
 In the first step of the process, a [user task](/components/modeler/bpmn/user-tasks/user-tasks.md) and linked [form](/components/modeler/forms/camunda-forms-reference.md) allows a document to be uploaded in Tasklist.
 
-<img src={IdpFilepickerImg} alt="The File picker element" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}} />
+<img src={IdpFilepickerImg} alt="The Filepicker element" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}} />
 
-- The form uses the [File picker](/components/modeler/forms/form-element-library/forms-element-library-filepicker.md) form element to upload a document.
-- The File picker element **Key** is set to `documents`. This is then bound to the **Document** input in the document extraction template.
+- The form uses the [Filepicker](/components/modeler/forms/form-element-library/forms-element-library-filepicker.md) form element to upload a document.
+- The Filepicker element **Key** is set to `documents`. This is then bound to the **Document** input in the document extraction template.
 
 :::info
 You can also use the [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md) to upload documents for IDP. To learn more about storing, tracking, and managing documents in Camunda 8, see [document handling](/components/concepts/document-handling.md).
