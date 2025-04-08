@@ -75,7 +75,7 @@ You can find the existing recipes on [GitHub](https://github.com/camunda-communi
 
 Your BPMN and DMN models need to be adjusted.
 
-The [Diagram Converter](../migration-tooling/) takes care of most changes. Depending on how you refactor your code and what elements of Camunda 7 you have used, you can extend or customize the diagram converter to suit your needs.
+The [Diagram Converter](/guides/migrating-from-camunda-7/code-conversion.md#diagram-converter) takes care of most changes. Depending on how you refactor your code and what elements of Camunda 7 you have used, you can extend or customize the diagram converter to suit your needs.
 
 If your models also contain JUEL expressions, which are not supported in Camunda 8, they also need to be converted.
 
