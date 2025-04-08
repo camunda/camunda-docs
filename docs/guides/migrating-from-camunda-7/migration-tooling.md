@@ -27,7 +27,7 @@ Camunda provides the following migration tools:
 Camunda is developing the **Migration Analyzer**, a tool to gain a first understanding of migration tasks. This tool is based on the existing [diagram converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/backend-diagram-converter), which can be used via CLI to produce a CSV file with tasks in your model. Our consultants then import this data into a [Google Spreadsheet template](https://docs.google.com/spreadsheets/d/1ZUxGhj1twgTnXadbopw1CvZg_ZvDnB2VXRQDSrKtmcM/edit?gid=6013418#gid=6013418) to analyze what tasks need to be done to migrate.
 
 :::info
-The [existing diagram converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/backend-diagram-converter) can be used today. UI and reporting will be added amd documentation will be extended. The initial release is **planned for 8.8**. Iterative improvements will follow.
+The [existing diagram converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/backend-diagram-converter) can be used today. UI and reporting will be added and documentation will be extended. The initial release is **planned for 8.8**. Iterative improvements will follow.
 :::
 
 For example, the following image shows a sample report.
@@ -57,11 +57,15 @@ Migrate currently running process instances. Running means that these process in
 
 **Requirements and limitations:**
 
+// TODO this is an important deep link - we need to create a headline here
+
 - The Runtime Data Migrator needs to access the Camunda 7 database.
 - The Runtime Data Migrator needs to access Camunda 8 APIs (which means you can also use this tool when you run on SaaS).
 - Multiple Instance is not supported, so process instances that are currently waiting in a multiple instance task cannot be migrated and need to be moved out of that state in Camunda 7 beforehand.
 
 If you need to adjust your process models before migration, you can use [process version migration](https://docs.camunda.org/manual/7.22/user-guide/process-engine/process-instance-migration/) in the Camunda 7 environment to migrate process instances to versions that are migratable to Camunda 8. An interesting strategy can be to define dedicated migration states you want your process instances to pile up in. Another common strategy is to use [process instance modification](https://docs.camunda.org/manual/7.22/user-guide/process-engine/process-instance-modification/) in the Camunda 7 environment to move out of states that are not migratable (for example, process instances within a multiple instance task).
+
+// TODO pile up: mention the job pause feature in Camunda 7
 
 ### History migration mode (copying audit log data)
 
@@ -98,6 +102,8 @@ With this approach, the duration of history migration doesn't block big bang mig
 ### Customization of Data Migrator
 
 You might need to customize the data migration, especially if you used complex data formats in C7 (for example, Java objects) that need to be converted to something Camunda 8 can handle (for example, JSON). As part of this step, you might also need to extract big payloads and binaries (like documents) into an external data store and reference it from the process (using, for example, upcoming document handling possibilities).
+
+// TODO link to document handling docs
 
 ## Code Converter
 
