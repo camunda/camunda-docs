@@ -9,7 +9,7 @@ import IdpElementImg from './img/idp-diagram-element.png';
 Integrate your published document extraction templates into your end-to-end processes in Web Modeler.
 
 :::tip
-Not sure how to start integrating IDP? See [example IDP integration](idp-example.md) for a simple process example.
+New to IDP integration? See the [example IDP integration](idp-example.md) for a worked example of a simple IDP process.
 :::
 
 ## Create and configure an IDP task

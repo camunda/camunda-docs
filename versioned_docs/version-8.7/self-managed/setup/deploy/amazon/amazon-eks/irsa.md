@@ -94,8 +94,8 @@ The troubleshooting script provides essential checks but may not capture all pot
 
 To troubleshoot in an environment identical to your pod, deploy a debug pod with the necessary service account. Here are examples of debug manifests you can customize for your needs:
 
-- [OpenSearch client pod](https://github.com/camunda/camunda-tf-eks-module/blob/main/modules/fixtures/opensearch-client.yml)
-- [PostgreSQL client pod](https://github.com/camunda/camunda-tf-eks-module/blob/main/modules/fixtures/postgres-client.yml)
+- [OpenSearch client pod](https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/aws/modules/fixtures/opensearch-client.yml)
+- [PostgreSQL client pod](https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/aws/modules/fixtures/postgres-client.yml)
 
 1. Adapt the manifests to use the specific `serviceAccountName` (e.g., `aurora-access-sa`) you want to test.
 2. Insert a sleep timer in the command to allow time to exec into the pod for live debugging.
@@ -132,7 +132,7 @@ Verify that PostgreSQL roles are correctly configured to support IAM-based authe
 
 To test connectivity:
 
-- Run a manual connection test using the [PostgreSQL client manifest](https://raw.githubusercontent.com/camunda/camunda-tf-eks-module/refs/heads/main/modules/fixtures/postgres-client.yml).
+- Run a manual connection test using the [PostgreSQL client manifest](https://raw.githubusercontent.com/camunda/camunda-deployment-references/refs/heads/main/aws/modules/fixtures/postgres-client.yml).
 - Use `psql` within the pod to verify the correct roles are assigned. Run:
   ```bash
   SELECT * FROM pg_roles WHERE rolname='<your-username>';

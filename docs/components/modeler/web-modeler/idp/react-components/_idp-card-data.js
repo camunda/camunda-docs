@@ -22,11 +22,11 @@ export const configCards = [
       "Check prerequisites required for IDP such as AWS IAM user permissions and Amazon S3 bucket access.",
   },
   {
-    link: "./idp-configuration#idp-docker-example",
-    title: "Example Docker deployment",
+    link: "./idp-configuration#examples",
+    title: "Example IDP deployment",
     image: IconExample,
     description:
-      "Learn how you can deploy and run Camunda 8 IDP in a local development environment.",
+      "Deploy and run Camunda 8 IDP in a local development environment using Camunda 8 Run or Docker.",
   },
 ];
 
@@ -37,7 +37,7 @@ export const gettingStartedCards = [
     title: "IDP applications",
     image: IconIdpApplication,
     description:
-      "Create an IDP application in which to store and manage your IDP document extraction templates.",
+      "Start by creating an IDP application in which to store and manage your IDP document extraction templates.",
   },
   {
     link: "./idp-document-extraction",
