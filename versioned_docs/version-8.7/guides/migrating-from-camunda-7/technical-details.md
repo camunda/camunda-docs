@@ -5,7 +5,7 @@ sidebar_label: Technical details
 description: "Understand technical details (e.g. BPMN Schema differences) from Camunda 7 to Camunda 8."
 ---
 
-Technical details around the differences between Camunda 7 and Camunda 8 BPMN and DMN models, including the logic also implemented in the [Diagram Converter](../migration-tooling/).
+Technical details around the differences between Camunda 7 and Camunda 8 BPMN and DMN models, including the logic also implemented in the [Diagram Converter](/guides/migrating-from-camunda-7/code-conversion.md#diagram-converter).
 
 ## Adjusting BPMN models
 
@@ -13,7 +13,7 @@ Ensure your BPMN process models are adjusted as follows to migrate them from Cam
 
 - The namespace of extensions has changed from `http://camunda.org/schema/1.0/bpmn` to `http://camunda.org/schema/zeebe/1.0`.
 - `modeler:executionPlatform` has been set to `Camunda Cloud`. Prior to this change, you will see `Camunda Platform`, indicating designed compatibility with Camunda 7.
-- `modeler:executionPlatformVersion` has been set to `8.2.0`. Prior to this change, you will see `7.19.0` or similar.
+- `modeler:executionPlatformVersion` has been set to `8.7.0`. Prior to this change, you will see `7.19.0` or similar.
 - Different configuration attributes are used between platform versions, as described for each BPMN element below.
 - Camunda 8 has a _different coverage_ of BPMN elements (see [Camunda 8 BPMN coverage](/components/modeler/bpmn/bpmn-coverage.md) versus [Camunda 7 BPMN coverage](https://docs.camunda.org/manual/latest/reference/bpmn20/)), which might require some model changes. Note that the coverage of Camunda 8 will increase over time.
 
@@ -31,7 +31,7 @@ The following attributes/elements **cannot** be migrated:
 - `camunda:asyncAfter`: Every task in Zeebe is always asyncBefore and asyncAfter.
 - `camunda:exclusive`: Jobs are always exclusive in Zeebe.
 - `camunda:jobPriority`: There is no way to prioritize jobs in Zeebe (yet).
-- `camunda:failedJobRetryTimeCycle`: You cannot yet configure the retry time cycle. Alternatively, you can [modify your code](/apis-tools/zeebe-api/gateway-service.md#input-failjobrequest) to use the `retryBackOff` timeout (in ms) for the next retry.
+- `camunda:failedJobRetryTimeCycle`: You cannot yet configure the retry time cycle, only the configured retries will be taken into account. Alternatively, you can [modify your code](/apis-tools/zeebe-api/gateway-service.md#input-failjobrequest) to use the `retryBackOff` timeout (in ms) for the next retry.
 
 ### Processes
 
@@ -53,17 +53,21 @@ A service task might have **attached Java code**. In this case, the following at
 - `camunda:delegateExpression`
 - `camunda:expression` and `camunda:resultVariable`
 
-The topic `camunda-7-adapter` is set.
+These other changes are performed:
+
+- The topic `camunda-7-adapter` is set.
 
 - `camunda:failedJobRetryTimeCycle`: Here, the amount of defined retries is set to the `zeebe:taskDefinition retries` attribute.
 
 A service task might leverage **external tasks** instead. In this case, the following attributes/elements are migrated:
 
 - `camunda:topic` becomes `zeebe:taskDefinition type`.
+- `camunda:type="external"` is removed
 
 The following attributes/elements **cannot** be migrated:
 
 - `camunda:taskPriority`
+- `camunda:errorEventDefinition`
 
 Service tasks using `camunda:connector` will be migrated with the following changes:
 
@@ -101,6 +105,7 @@ The following is **not** possible:
 
 In Camunda 7, you have [different ways to provide forms for user tasks](https://docs.camunda.org/manual/latest/user-guide/task-forms/):
 
+- Generated Forms (modelled directly in the process)
 - Embedded Task Forms (embedded custom HTML and JavaScript)
 - External Task Forms (link to custom applications)
 - [Camunda Forms](/guides/utilizing-forms.md)
@@ -161,6 +166,8 @@ The following attributes are **not** yet supported:
 - `camunda:mapDecisionResult` (no mapping happens)
 - `camunda:decisionRefTenantId`
 
+`camunda:mapDecisionResult` is not required anymore as there is no explicit mapping. Instead, the result from the DMN is taken as-is.
+
 A business rule task can also _behave like a service task_ to allow integration of third-party rule engines. In this case, all attributes described above for the service task migration can also be converted.
 
 ### Call activities
@@ -176,7 +183,7 @@ Call activities are generally supported in Zeebe. The following attributes/eleme
   :::
 - `camunda:calledElementVersionTag` to `zeebe:calledElement versionTag`
 - Data mapping
-  - `camunda:in` to `zeebe:input`
+  - `camunda:in` to `zeebe:input` (except below mentioned part)
   - `camunda:out` to `zeebe:output`
 
 The following attributes/elements **cannot** be migrated:
@@ -184,6 +191,7 @@ The following attributes/elements **cannot** be migrated:
 - `camunda:calledElementVersion`: Zeebe does not support the `version` binding type.
 - `camunda:variableMappingClass`: You cannot execute code to do variable mapping in Zeebe.
 - `camunda:variableMappingDelegateExpression`: You cannot execute code to do variable mapping in Zeebe.
+- `camunda:in businessKey`: Business keys do not yet exist in Camunda 8
 
 ### Script task
 
@@ -191,9 +199,9 @@ The following attributes/elements **cannot** be migrated:
 
 Only FEEL scripts can be executed by Zeebe. The converter will create internal scripts as long as you are using FEEL scripts.
 
-If you require a different scripting language, a script task can behave like normal service tasks instead, which means you must run a job worker that can execute scripts. One available option is to use the [Zeebe Script Worker](https://github.com/camunda-community-hub/zeebe-script-worker), provided as a community extension.
+If you require a different scripting language, a script task can behave like normal service tasks instead, which means you must run a job worker that can execute scripts. One available option is to use the [Script Connector](https://github.com/camunda-community-hub/script-connector), provided as a community extension.
 
-If you do this, the following attributes/elements are migrated:
+If you do this, the following attributes/elements are migrated to headers:
 
 - `camunda:scriptFormat`
 - `camunda:script`
@@ -213,7 +221,7 @@ Message correlation works slightly different between the two products:
 This means you must inspect and adjust **all** message receive events or receive tasks in your model to define a reasonable `correlationKey`. You also must adjust your client code accordingly.
 :::
 
-The `bpmn message name` is used in both products and doesn't need migration.
+The `bpmn:message name` is used in both products and doesn't need migration.
 
 ### Multi-instance activities
 
@@ -223,7 +231,9 @@ For implementation, the only current limitation is that a loop cardinality is no
 
 These elements **cannot** be migrated:
 
-- `bpmn:loopCardinality`
+// TODO does this need an example?
+
+- `bpmn:loopCardinality`: This can eventually be replaced with a feel script iterating a defined number range.
 
 These elements can still be used:
 
@@ -238,11 +248,13 @@ Additionally, there is now a built-in way to collect results using `zeebe:loopCh
 
 ## Adjusting DMN models
 
+// TODO now that the diagram converter can convert DMN, what needs to be adjusted?
+
 The DMN engine in Camunda 8 is more modern than in Camunda 7, which leads to some small differences. To evaluate Camunda 7 DMN files in Camunda 8, change the following in the XML:
 
 `modeler:executionPlatform` should be set to `Camunda Cloud`. Prior to this change, you will see `Camunda Platform`, indicating designed compatibility with Camunda 7.
 
-`modeler:executionPlatformVersion` should be set to `8.2.0`. Prior to this change, you will see `7.19.0` or similar.
+`modeler:executionPlatformVersion` should be set to `8.7.0`. Prior to this change, you will see `7.19.0` or similar.
 
 :::info
 Web Modeler will automatically update `modeler:executionPlatform` and `modeler:executionPlatformVersion` to the correct values when you upload a DMN file.
