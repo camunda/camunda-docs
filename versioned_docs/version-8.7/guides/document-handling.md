@@ -17,7 +17,7 @@ In this guide we will cover three main use cases:
 
 ## Upload a document to a BPMN process
 
-You can implement document uploads in your BPMN processes using [forms](#document-upload-via-a-form), [inbound Connectors](#document-upload-via-inbound-webhook-connector), and [Camunda 8 REST API](../apis-tools/camunda-api-rest/specifications/create-document.api.mdx).
+You can implement document uploads in your BPMN processes using [forms](#build-a-form-for-document-upload), [inbound Connectors](#upload-a-document-via-inbound-webhook-connector), and [Camunda 8 REST API](../apis-tools/camunda-api-rest/specifications/create-document.api.mdx).
 
 ### Build a form for document upload
 
@@ -170,5 +170,5 @@ This allows you to extract specific data from a high volume of documents using a
 
 Learn more about this in the IDP documentation:
 
-<DocCardList items={[{type:"link", href:"/docs/8.7/components/modeler/web-modeler/idp/idp-example/", label: "IDP integration", docId:"components/modeler/web-modeler/idp/idp-example"}
+<DocCardList items={[{type:"link", href:"/docs/components/modeler/web-modeler/idp/idp-example/", label: "IDP integration", docId:"components/modeler/web-modeler/idp/idp-example"}
 ]}/>

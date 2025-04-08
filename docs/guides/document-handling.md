@@ -17,7 +17,7 @@ In this guide we will cover three main use cases:
 
 ## Upload a document to a BPMN process
 
-You can implement document uploads in your BPMN processes using [forms](#document-upload-via-a-form), [inbound Connectors](#document-upload-via-inbound-webhook-connector), and [Camunda 8 REST API](../apis-tools/camunda-api-rest/specifications/create-document.api.mdx).
+You can implement document uploads in your BPMN processes using [forms](#build-a-form-for-document-upload), [inbound Connectors](#upload-a-document-via-inbound-webhook-connector), and [Camunda 8 REST API](../apis-tools/camunda-api-rest/specifications/create-document.api.mdx).
 
 ### Build a form for document upload
 
