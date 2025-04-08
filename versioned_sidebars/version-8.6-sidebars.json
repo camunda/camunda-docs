@@ -217,7 +217,6 @@
                 "components/modeler/desktop-modeler/element-templates/configuring-templates",
                 "components/modeler/desktop-modeler/element-templates/using-templates",
                 "components/modeler/desktop-modeler/element-templates/defining-templates",
-                "components/modeler/desktop-modeler/element-templates/c7-defining-templates",
                 "components/modeler/desktop-modeler/element-templates/additional-resources"
               ]
             },
@@ -398,7 +397,6 @@
                 "components/modeler/reference/modeling-guidance/rules/error-reference",
                 "components/modeler/reference/modeling-guidance/rules/escalation-reference",
                 "components/modeler/reference/modeling-guidance/rules/feel",
-                "components/modeler/reference/modeling-guidance/rules/history-time-to-live",
                 "components/modeler/reference/modeling-guidance/rules/message-reference"
               ]
             }
@@ -1666,7 +1664,8 @@
             "self-managed/setup/guides/running-custom-connectors",
             "self-managed/setup/guides/prefix-elasticsearch-indices",
             "self-managed/setup/guides/multi-namespace-deployment",
-            "self-managed/setup/guides/installing-payment-app-example"
+            "self-managed/setup/guides/installing-payment-app-example",
+            "self-managed/setup/guides/secret-management"
           ]
         }
       ],

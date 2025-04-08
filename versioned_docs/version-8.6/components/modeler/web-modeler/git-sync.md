@@ -4,7 +4,7 @@ title: Git sync
 description: Connect Web Modeler to your Git repositories to keep your projects synced.
 ---
 
-Organization owners and administrators can connect their Web Modeler process applications to GitHub, allowing users to keep their Web Modeler, Desktop Modeler, and official version control projects synced.
+Organization owners and administrators can connect their Web Modeler process applications to GitHub and GitLab, allowing users to keep their Web Modeler, Desktop Modeler, and official version control projects synced.
 
 Once the basic integration is configured by an organization owner or organization administrator, project administrators and editors can use the built-in button to pull changes from GitHub, integrate contributions from Desktop Modeler users, and merge their own work.
 

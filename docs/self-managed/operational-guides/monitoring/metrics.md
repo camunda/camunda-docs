@@ -8,6 +8,19 @@ When operating a distributed system like Camunda 8, it is important to put prope
 which provides a convenient facade that allows exporting metrics to [one or more supported implementations](https://docs.micrometer.io/micrometer/reference/implementations.html)
 (e.g. Prometheus, OpenTelemetry, Datadog, Dynatrace, etc.).
 
+## Accessing metrics
+
+Metrics are meant to be accessed directly via your chosen monitoring system, where they are aggregated. This is because they are stored purely in-memory in
+Camunda. As such, they need to be consumed by your monitoring system before they can be accessed. Broadly speaking, this will happen in one of two ways,
+via polling (the default), or pushing.
+
+A **polling** system (such as Prometheus) will poll an endpoint exposed by Camunda at a regular interval. Each request constitute a data point
+for each metric. When working with such systems, configure the polling interval to get information fast enough, without overwhelming Camunda
+itself (which still has to serve this data) or having to store too much data in your monitoring system itself. Additionally, this means exposing the Camunda
+endpoint to your external monitoring system.
+
+When using a **pushing** system (such as OpenTelemetry), Camunda is configured to asynchronously push metric updates to an external endpoint at a regular interval. This implies that the system is accessible to Camunda via the network, so you will most likely want to ensure communication is secured. Similarly to the polling approach, balance how fast you are pushing (and thus getting updates/data points), without overwhelming your external system.
+
 ## Configuration
 
 Configuration for metrics is done via the [built-in Spring Boot Micrometer configuration, as documented here](https://docs.spring.io/spring-boot/reference/actuator/metrics.html).

@@ -32,7 +32,7 @@ If you are completely new to Terraform and the idea of IaC, read through the [Te
 - [jq](https://jqlang.github.io/jq/download/) to interact with some Terraform variables.
 - This guide uses GNU/Bash for all the shell commands listed.
 
-For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file in the repository. It contains an up-to-date list of versions that we also use for testing.
+For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/.tool-versions) file in the repository. It contains an up-to-date list of versions that we also use for testing.
 
 ### Considerations
 
@@ -77,13 +77,13 @@ Following this tutorial and steps will result in:
 
 ### Obtain a copy of the reference architecture
 
-The first step is to download a copy of the reference architecture from the [GitHub repository](https://github.com/camunda/camunda-deployment-references/blob/main/aws/openshift/rosa-hcp-single-region/). This archive will be used throughout the rest of this documentation, the reference architecture are versioned using the same Camunda versions (`stable/8.x`).
+The first step is to download a copy of the reference architecture from the [GitHub repository](https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/aws/openshift/rosa-hcp-single-region/). This material will be used throughout the rest of this documentation, the reference architecture is versioned using the same Camunda versions (`stable/8.x`).
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/openshift/rosa-hcp-single-region/procedure/get-your-copy.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/aws/openshift/rosa-hcp-single-region/procedure/get-your-copy.sh
 ```
 
-With the reference architecture downloaded and extracted, you can proceed with the remaining steps outlined in this documentation. Ensure that you are in the correct directory before continuing with further instructions.
+With the reference architecture copied, you can proceed with the remaining steps outlined in this documentation. Ensure that you are in the correct directory before continuing with further instructions.
 
 ### Terraform prerequisites
 
@@ -168,7 +168,7 @@ This S3 bucket will now securely store your Terraform state files with versionin
 Once the S3 bucket is created, configure your `config.tf` file to use the S3 backend for managing the Terraform state:
 
 ```hcl reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/openshift/rosa-hcp-single-region/config.tf
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/aws/openshift/rosa-hcp-single-region/config.tf
 ```
 
 #### Initialize Terraform
@@ -193,7 +193,7 @@ This module sets up the foundational configuration for ROSA HCP and Terraform us
 
 We will leverage [Terraform modules](https://developer.hashicorp.com/terraform/language/modules), which allow us to abstract resources into reusable components, simplifying infrastructure management.
 
-The [Camunda-provided module](https://github.com/camunda/camunda-deployment-references/tree/main/aws/openshift/rosa-hcp-single-region) is publicly available and serves as a robust starting point for deploying a Red Hat OpenShift cluster on AWS using a Hosted Control Plane. It is highly recommended to review this module before implementation to understand its structure and capabilities.
+The [Camunda-provided module](https://github.com/camunda/camunda-deployment-references/tree/stable/8.7/aws/openshift/rosa-hcp-single-region) is publicly available and serves as a robust starting point for deploying a Red Hat OpenShift cluster on AWS using a Hosted Control Plane. It is highly recommended to review this module before implementation to understand its structure and capabilities.
 
 Please note that this module is based on the official [ROSA HCP Terraform module documentation](https://docs.openshift.com/rosa/rosa_hcp/terraform/rosa-hcp-creating-a-cluster-quickly-terraform.html). It is presented as an example for running Camunda 8 in ROSA. For advanced use cases or custom setups, we encourage you to use the official module, which includes vendor-supported features.
 
@@ -271,6 +271,8 @@ To set up a ROSA cluster, certain prerequisites must be configured on your AWS a
 
 #### Set up the ROSA cluster module
 
+0. Ensure that you are in the [reference architecture directory of the cloned repository](#obtain-a-copy-of-the-reference-architecture): `./aws/openshift/rosa-hcp-single-region`
+
 1. Edit the `cluster.tf` file in the same directory as your `config.tf` file:
 
    :::note Configure your cluster
@@ -285,14 +287,14 @@ To set up a ROSA cluster, certain prerequisites must be configured on your AWS a
    :::
 
    ```hcl reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/aws/openshift/rosa-hcp-single-region/cluster.tf
+   https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/aws/openshift/rosa-hcp-single-region/cluster.tf
    ```
 
    :::caution Camunda Terraform module
 
    This ROSA module is based on the [official Red Hat Terraform module for ROSA HCP](https://registry.terraform.io/modules/terraform-redhat/rosa-hcp/rhcs/latest). Please be aware of potential differences and choices in implementation between this module and the official one.
 
-   We invite you to consult the [Camunda ROSA module documentation](https://github.com/camunda/camunda-deployment-references/tree/main/aws/modules/rosa-hcp/README.md) for more information.
+   We invite you to consult the [Camunda ROSA module documentation](https://github.com/camunda/camunda-deployment-references/tree/stable/8.7/aws/modules/rosa-hcp/README.md) for more information.
 
    :::
 
@@ -304,7 +306,7 @@ To set up a ROSA cluster, certain prerequisites must be configured on your AWS a
 
 3. Configure user access to the cluster. By default, the user who creates the OpenShift cluster has administrative access. If you want to grant access to other users, follow the [Red Hat documentation for granting admin rights to users](https://docs.openshift.com/rosa/cloud_experts_tutorials/cloud-experts-getting-started/cloud-experts-getting-started-admin-rights.html) when the cluster is created.
 
-4. Customize the cluster setup. The module offers various input options that allow you to further customize the cluster configuration. For a comprehensive list of available options and detailed usage instructions, refer to the [ROSA module documentation](https://github.com/camunda/camunda-deployment-references/tree/main/aws/modules/rosa-hcp/README.md).
+4. Customize the cluster setup. The module offers various input options that allow you to further customize the cluster configuration. For a comprehensive list of available options and detailed usage instructions, refer to the [ROSA module documentation](https://github.com/camunda/camunda-deployment-references/tree/stable/8.7/aws/modules/rosa-hcp/README.md).
 
 ### Define outputs
 
@@ -340,7 +342,7 @@ Terraform will now create the OpenShift cluster with all the necessary configura
 
 Depending on the installation path you have chosen, you can find the reference files used on this page:
 
-- **Standard installation:** [Reference Files](https://github.com/camunda/camunda-deployment-references/tree/main/aws/openshift/rosa-hcp-single-region/)
+- **Standard installation:** [Reference Files](https://github.com/camunda/camunda-deployment-references/tree/stable/8.7/aws/openshift/rosa-hcp-single-region/)
 
 ## 2. Preparation for Camunda 8 installation
 
@@ -351,7 +353,7 @@ You can access the created OpenShift cluster using the following steps:
 Set up the required environment variables:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/openshift/rosa-hcp-single-region/procedure/gather-cluster-login-id.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/aws/openshift/rosa-hcp-single-region/procedure/gather-cluster-login-id.sh
 ```
 
 If you want to give cluster administrator access to the created user, this is not required for a standard installation but can be useful for debugging:
