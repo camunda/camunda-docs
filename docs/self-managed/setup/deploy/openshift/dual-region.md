@@ -100,37 +100,37 @@ Later in this guide, we will refer to it as **first cluster**.
 
 :::
 
-0. This part of the guide uses a generic reference architecture, you can find all the [acm files here](https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa/generic/openshift/dual-region/procedure/acm/).
+0. This part of the guide uses a generic reference architecture, you can find all the [acm files here](https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/dual-region/procedure/acm/).
 
 1. Reference each cluster context name and ensure that each cluster's context name matches the corresponding cluster name. If the context name does not match, you will need to rename it to follow this guide.
 
    ```bash reference
-    https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa//generic/openshift/dual-region/procedure/set-cluster-names.sh
+    https://github.com/camunda/camunda-deployment-references/blob/main//generic/openshift/dual-region/procedure/set-cluster-names.sh
    ```
 
 2. The following manifest will create a namespace for the management cluster, enable the [open-cluster-management operator](https://open-cluster-management.io/) and the [associated subscription](https://docs.openshift.com/container-platform/4.17/operators/admin/olm-adding-operators-to-cluster.html#olm-installing-operator-from-operatorhub-using-cli_olm-adding-operators-to-a-cluster).
 
    ```yaml reference
-   https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa/generic/openshift/dual-region/procedure/acm/install-manifest.yml
+   https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/dual-region/procedure/acm/install-manifest.yml
    ```
 
    Save this manifest as `install-manifest.yml` then apply it to enable ACM:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa/generic/openshift/dual-region/procedure/acm/install-acm.sh
+   https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/dual-region/procedure/acm/install-acm.sh
    ```
 
    Verify that the installation succeeded:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa/generic/openshift/dual-region/procedure/acm/verify-acm.sh
+   https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/dual-region/procedure/acm/verify-acm.sh
    ```
 
 3. With the ACM operator now enabled on the first cluster, the next step is to create the [Multicluster Global Hub](https://docs.redhat.com/en/documentation/red_hat_advanced_cluster_management_for_kubernetes/2.12/html-single/install/index#installing-from-the-cli). This feature allows you to import and manage one or more hub clusters from a single central hub cluster.
    In this setup, the first cluster will act as the central hub, managing the second cluster. This capability enables the deployment and management of components on the second cluster directly from the first cluster.
 
    ```yaml reference
-   https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa/generic/openshift/dual-region/procedure/acm/multi-cluster-hub.yml
+   https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/dual-region/procedure/acm/multi-cluster-hub.yml
    ```
 
    :::caution Known issue: may not work correctly with the manifest
@@ -144,13 +144,13 @@ Later in this guide, we will refer to it as **first cluster**.
    Save this manifest as `multi-cluster-hub.yml` then apply it to enable ACM:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa/generic/openshift/dual-region/procedure/acm/install-multi-cluster-hub.sh
+   https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/dual-region/procedure/acm/install-multi-cluster-hub.sh
    ```
 
    Wait until the status shows as "Running." This process can take up to 10 minutes:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa/generic/openshift/dual-region/procedure/acm/verify-multi-cluster-hub.sh
+   https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/dual-region/procedure/acm/verify-multi-cluster-hub.sh
    ```
 
    :::caution Security consideration
@@ -167,19 +167,19 @@ Later in this guide, we will refer to it as **first cluster**.
 4. With the MultiClusterHub created, the last step is to create a `ManagedClusterSet` which is a group of managed clusters. With a `ManagedClusterSet`, you can manage access to all of the managed clusters in the group together
 
    ```yaml reference
-   https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa/generic/openshift/dual-region/procedure/acm/managed-cluster-set.yml
+   https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/dual-region/procedure/acm/managed-cluster-set.yml
    ```
 
    Save this manifest as `managed-cluster-set.yml` then apply it to enable ACM:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa/generic/openshift/dual-region/procedure/acm/install-managed-cluster-set.sh
+   https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/dual-region/procedure/acm/install-managed-cluster-set.sh
    ```
 
    Verify that the ManagedClusterSet has been created, at this step, only `local-cluster` will be listed:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa/generic/openshift/dual-region/procedure/acm/verify-managed-cluster-set.sh
+   https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/dual-region/procedure/acm/verify-managed-cluster-set.sh
    ```
 
 5. After creating the Managed Cluster Set, the next step is to import clusters into the set.
@@ -189,7 +189,7 @@ Later in this guide, we will refer to it as **first cluster**.
      Save the following file as `managed-cluster.yml.tpl`:
 
      ```yaml reference
-     https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa/generic/openshift/dual-region/procedure/acm/managed-cluster.yml.tpl
+     https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/dual-region/procedure/acm/managed-cluster.yml.tpl
      ```
 
    - The cluster’s associated addon configuration will be managed using the following manifest.
@@ -197,7 +197,7 @@ Later in this guide, we will refer to it as **first cluster**.
      Save it as `klusterlet-config.yml.tpl`:
 
      ```yaml reference
-     https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa/generic/openshift/dual-region/procedure/acm/klusterlet-config.yml.tpl
+     https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/dual-region/procedure/acm/klusterlet-config.yml.tpl
      ```
 
    - To import a cluster, you must store the associated authentication token.
@@ -205,19 +205,19 @@ Later in this guide, we will refer to it as **first cluster**.
      Save the following file as `auto-import-cluster-secret.yml.tpl`:
 
      ```yaml reference
-     https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa/generic/openshift/dual-region/procedure/acm/auto-import-cluster-secret.yml.tpl
+     https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/dual-region/procedure/acm/auto-import-cluster-secret.yml.tpl
      ```
 
    - Finally, import each cluster into the Managed Cluster Set and verify that they can be reached and managed successfully:
 
      ```bash reference
-     https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa/generic/openshift/dual-region/procedure/acm/initiate-cluster-set.sh
+     https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/dual-region/procedure/acm/initiate-cluster-set.sh
      ```
 
    - Once all the clusters are imported, verify that all of them are available and reachable:
 
      ```bash reference
-     https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa/generic/openshift/dual-region/procedure/acm/verify-managed-cluster-set.sh
+     https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/dual-region/procedure/acm/verify-managed-cluster-set.sh
      ```
 
 ### Submariner
@@ -242,21 +242,21 @@ This guide does not cover handling overlapping CIDRs. However, this can be achie
 
 Installing Submariner in OpenShift **requires** [Advanced Cluster Management](#advanced-cluster-management) to be configured, with each cluster added to the management cluster.
 
-0. This part of the guide uses a generic reference architecture, you can find all the [submariner files here](https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa/generic/openshift/dual-region/procedure/submariner/).
+0. This part of the guide uses a generic reference architecture, you can find all the [submariner files here](https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/dual-region/procedure/submariner/).
 
 1. Ensure cluster context names match:
    _(Skip this step if already completed as part of [Advanced Cluster Management](#advanced-cluster-management).)_  
    Verify that each cluster's context name matches its corresponding cluster name. If the context name does not match, rename it to align with this guide.
 
    ```bash reference
-    https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa//generic/openshift/dual-region/procedure/set-cluster-names.sh
+    https://github.com/camunda/camunda-deployment-references/blob/main//generic/openshift/dual-region/procedure/set-cluster-names.sh
    ```
 
 2. Verify dedicated broker nodes:
    Confirm that each cluster has nodes labeled for Submariner gateway functionality:
 
    ```bash reference
-    https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa//generic/openshift/dual-region/procedure/submariner/list-nodes-brokers.sh
+    https://github.com/camunda/camunda-deployment-references/blob/main//generic/openshift/dual-region/procedure/submariner/list-nodes-brokers.sh
    ```
 
    If no nodes are labeled, you need to label at least one node in each cluster. For better reliability, consider dedicating a node as the broker.
@@ -265,7 +265,7 @@ Installing Submariner in OpenShift **requires** [Advanced Cluster Management](#a
    Select the first node and apply the required label:
 
    ```bash reference
-    https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa//generic/openshift/dual-region/procedure/submariner/label-nodes-brokers.sh
+    https://github.com/camunda/camunda-deployment-references/blob/main//generic/openshift/dual-region/procedure/submariner/label-nodes-brokers.sh
    ```
 
 3. Deployment of Submariner on the clusters:
@@ -273,7 +273,7 @@ Installing Submariner in OpenShift **requires** [Advanced Cluster Management](#a
    - Save the following file as `submariner.yml.tpl`:
 
      ```yaml reference
-     https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa/generic/openshift/dual-region/procedure/submariner/submariner.yml.tpl
+     https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/dual-region/procedure/submariner/submariner.yml.tpl
      ```
 
      :::note Cluster naming
@@ -287,13 +287,13 @@ Installing Submariner in OpenShift **requires** [Advanced Cluster Management](#a
    - Then apply it on the management cluster:
 
      ```bash reference
-       https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa//generic/openshift/dual-region/procedure/submariner/install-submariner.sh
+       https://github.com/camunda/camunda-deployment-references/blob/main//generic/openshift/dual-region/procedure/submariner/install-submariner.sh
      ```
 
    - Wait for the brokers to become ready. This may take up to 10 minutes. You can check the broker status using the following command:
 
      ```bash reference
-       https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa//generic/openshift/dual-region/procedure/submariner/verify-submariner.sh
+       https://github.com/camunda/camunda-deployment-references/blob/main//generic/openshift/dual-region/procedure/submariner/verify-submariner.sh
      ```
 
 4. After deploying Submariner, check that the clusters can communicate with each other by using the `subctl` utility. Keep in mind that it might take several minutes before all status indicators turn green.
@@ -301,13 +301,13 @@ Installing Submariner in OpenShift **requires** [Advanced Cluster Management](#a
    If you don’t have the `subctl` CLI installed, you can follow the [installation instructions here](https://submariner.io/operations/deployment/) or execute the following commands:
 
    ```bash reference
-     https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa//generic/openshift/dual-region/procedure/submariner/install-subctl.sh
+     https://github.com/camunda/camunda-deployment-references/blob/main//generic/openshift/dual-region/procedure/submariner/install-subctl.sh
    ```
 
    Now, verify communication between the clusters with the following script:
 
    ```bash reference
-     https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa//generic/openshift/dual-region/procedure/submariner/verify-subctl.sh
+     https://github.com/camunda/camunda-deployment-references/blob/main//generic/openshift/dual-region/procedure/submariner/verify-subctl.sh
    ```
 
    If everything is set up correctly, you should observe in the output of each cluster context the following statuses:
@@ -319,7 +319,7 @@ Installing Submariner in OpenShift **requires** [Advanced Cluster Management](#a
       <summary>Example Submariner check successfull output</summary>
 
    ```text reference
-   https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa/generic/openshift/dual-region/procedure/submariner/output.txt
+   https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/dual-region/procedure/submariner/output.txt
    ```
 
     </details>
@@ -328,7 +328,7 @@ For more comprehensive details regarding the verification tests for Submariner u
 
 **Debugging the Submariner setup:**
 
-If you are experiencing connectivity issues, we recommend spawning a pod in the `default` namespace that contains networking debugging tools. You can find an [example here](https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa/generic/openshift/dual-region/procedure/submariner/debug-utils-submariner.yml).  
+If you are experiencing connectivity issues, we recommend spawning a pod in the `default` namespace that contains networking debugging tools. You can find an [example here](https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/dual-region/procedure/submariner/debug-utils-submariner.yml).  
 With this pod, you will be able to check flow openings, service resolution, and other network-related aspects.  
 Troubleshooting requires examining all the underlying mechanisms of Submariner. Therefore, we also encourage you to read the [Submariner troubleshooting guide](https://submariner.io/operations/troubleshooting/).
 
@@ -342,7 +342,7 @@ Before proceeding with the installation, ensure the required information is avai
 Review and adjust the following environment script to match your specific configuration:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa/generic/openshift/dual-region/procedure/chart-env.sh
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/dual-region/procedure/chart-env.sh
 ```
 
 _If you are unsure about the values of the backup bucket, please refer to the [S3 backup bucket module setup](/self-managed/setup/deploy/amazon/openshift/terraform-setup-dual-region.md#s3-backup-bucket-module-setup) as a reference for implementation._
@@ -368,7 +368,7 @@ The Elasticsearch backup [bucket is tied to a specific region](https://docs.aws.
 The following script will create the required namespaces and secrets used to reference the bucket access.
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa/generic/openshift/dual-region/procedure/setup-namespaces-secrets.sh
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/dual-region/procedure/setup-namespaces-secrets.sh
 ```
 
 Save it as `setup-namespaces-secrets.sh` and execute it:
@@ -383,7 +383,7 @@ chmod +x setup-namespaces-secrets.sh
 Before deploying, some values in the value files need to be updated. To assist with generating these values, save the following Bash script as `generate-zeebe-helm-values.sh`:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa/generic/openshift/dual-region/procedure/generate-zeebe-helm-values.sh
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/dual-region/procedure/generate-zeebe-helm-values.sh
 ```
 
 Then, source the output of the script. By doing so, we can reuse the values later for substitution, instead of manually adjusting the values files. You will be prompted to specify the number of Zeebe brokers (total number of Zeebe brokers in both Kubernetes clusters), for a dual-region setup we recommend `8`, resulting in four brokers per region:
@@ -409,7 +409,7 @@ Throughout this guide, you will add and merge values into these files to configu
 
 - Save the following file as both `values-region-1.yml` and `values-region-2.yml` to serve as the base configuration:
   ```yaml reference
-  https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa/generic/openshift/dual-region/helm-values/values-base.yml
+  https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/dual-region/helm-values/values-base.yml
   ```
 
 :::warning Merging YAML files
@@ -425,12 +425,12 @@ Set up the region ID using a unique integer for each region:
 
 - Add the following YAML configuration to your `values-region-1.yml`:
   ```yaml reference
-  https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa/generic/openshift/dual-region/helm-values/values-region-1.yml
+  https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/dual-region/helm-values/values-region-1.yml
   ```
 - Add the following YAML configuration to your `values-region-2.yml`:
 
   ```yaml reference
-  https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa/generic/openshift/dual-region/helm-values/values-region-2.yml
+  https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/dual-region/helm-values/values-region-2.yml
   ```
 
 **Security Context Constraints (SCCs)**
@@ -445,7 +445,7 @@ For custom configurations or specific requirements, please refer to the [install
 Once you've prepared each region's value file (`values-region-1.yml` and `values-region-2.yml`) file, run the following `envsubst` command to substitute the environment variables with their actual values:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa/generic/openshift/dual-region/procedure/assemble-envsubst-values.sh
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/dual-region/procedure/assemble-envsubst-values.sh
 ```
 
 ### Install Camunda 8 using Helm
@@ -453,7 +453,7 @@ https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-du
 With the value files for each region configured, you can now install Camunda 8 using Helm. Execute the following commands:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa/generic/openshift/dual-region/procedure/install-chart.sh
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/dual-region/procedure/install-chart.sh
 ```
 
 This command:
@@ -475,7 +475,7 @@ This guide uses `helm upgrade --install` as it runs install on initial deploymen
 Once Camunda is deployed across the two clusters, the next step is to expose each service to Submariner so it can be resolved by the other cluster:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa/generic/openshift/dual-region/procedure/export-services-submariner.sh
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/dual-region/procedure/export-services-submariner.sh
 ```
 
 Alternatively, you can manage each service individually using the `ServiceExport` Custom Resource Definition (CRD).
@@ -496,13 +496,13 @@ metadata:
 For each cluster, verify the status of the exported services with this script:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa/generic/openshift/dual-region/procedure/verify-exported-services.sh
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/dual-region/procedure/verify-exported-services.sh
 ```
 
 To monitor the progress of the installation, save and execute the following script:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa/generic/openshift/dual-region/procedure/check-deployment-ready.sh
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/dual-region/procedure/check-deployment-ready.sh
 ```
 
 Save it as `check-deployment-ready.sh`, make it executable, and run it:
@@ -517,7 +517,7 @@ chmod +x check-deployment-ready.sh
 The following script will port-forward the Zeebe Gateway via `kubectl` from one of your clusters. Zeebe is stretching over both clusters and is `active-active`, meaning it doesn't matter which Zeebe Gateway to use to interact with your Zeebe cluster.
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa/generic/kubernetes/dual-region/procedure/check-zeebe-cluster-topology.sh
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/dual-region/procedure/check-zeebe-cluster-topology.sh
 ```
 
 Make sure that your output contains all eight brokers from the two regions:
@@ -526,7 +526,7 @@ Make sure that your output contains all eight brokers from the two regions:
       <summary>Example output</summary>
 
 ```json reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa/generic/kubernetes/dual-region/procedure/check-zeebe-cluster-topology-output.json
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/dual-region/procedure/check-zeebe-cluster-topology-output.json
 ```
 
    </details>
