@@ -156,3 +156,19 @@ You can also use newer versions of Desktop and Web Modeler with older versions o
 </TabItem>
 
 </Tabs>
+
+## Dependency maintenance policies
+
+Camunda provides [a standard support policy](https://camunda.com/release-policy/) of 18 months for a particular minor version, from the date it is released.
+During this time, patches are regularly released which contain security and bug fixes, some of which may come from dependency updates. As such, for the
+vast majority of dependencies, Camunda _only_ applies patch updates.
+
+Certain dependencies used by Camunda 8, however, may have a shorter maintenance policy than Camunda itself. For those dependencies which are integral to its functionality, Camunda adopts a different update policy.
+
+### Spring
+
+The Camunda Orchestration Cluster is a Spring Boot application, and leverages Spring Boot (and the wider Spring ecosystem) to execute fundamental functionality such as application configuration, REST infrastructure (including security), production ready features, etc.
+
+Spring, however, has a shorter maintenance window than Camunda for its OSS offering: versions are only supported for 12 months, versus Camunda's 18 months. To circumvent this, Spring (and Spring Boot) versions may also receive minor updates on supported Camunda versions as part of our normal patch release cycle.
+
+As such, Camunda guarantees that the latest patch of a supported Camunda Orchestration Cluster version uses a supported Spring (and Spring Boot) versions.
