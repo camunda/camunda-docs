@@ -61,7 +61,7 @@ To learn more about this feature, see [manage your connectors](/components/conso
 
 ### Custom JWKS and JWT Algorithms Support <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-Self-managed customers now have [full control over JWT configurations](/self-managed/modeler/web-modeler/configuration/configuration.md) for enhanced security and compatibility.
+Self-Managed customers now have [full control over JWT configurations](/self-managed/modeler/web-modeler/configuration/configuration.md) for enhanced security and compatibility.
 
 <!--- https://github.com/camunda/web-modeler/issues/11571 --->
 
