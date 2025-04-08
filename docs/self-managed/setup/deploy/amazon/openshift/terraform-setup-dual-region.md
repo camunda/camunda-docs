@@ -71,7 +71,7 @@ Following this tutorial and steps will result in:
 The first step is to download a copy of the reference architecture from the [GitHub repository](https://github.com/camunda/camunda-deployment-references/blob/main/aws/openshift/rosa-hcp-dual-region/). This material will be used throughout the rest of this documentation, the reference architecture is versioned using the same Camunda versions (`stable/8.x`).
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa/aws/openshift/rosa-hcp-dual-region/procedure/get-your-copy.sh
+https://github.com/camunda/camunda-deployment-references/blob/main/aws/openshift/rosa-hcp-dual-region/procedure/get-your-copy.sh
 ```
 
 With the reference architecture copied, you can proceed with the remaining steps outlined in this documentation. Ensure that you are in the correct directory before continuing with further instructions.
@@ -597,7 +597,7 @@ You can now access the created OpenShift clusters.
 1.  Set up the required environment variables from the OpenShift terraform module:
 
     ```bash reference
-    https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa/aws/openshift/rosa-hcp-dual-region/procedure/gather-cluster-login-id.sh
+    https://github.com/camunda/camunda-deployment-references/blob/main/aws/openshift/rosa-hcp-dual-region/procedure/gather-cluster-login-id.sh
     ```
 
 1.  Give cluster administrator role to the created user for each cluster:
@@ -629,7 +629,7 @@ You can now access the created OpenShift clusters.
 1.  Verify your connection to the clusters with `oc`:
 
     ```bash reference
-    https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa/aws/openshift/rosa-hcp-dual-region/procedure/verify-cluster-nodes.sh
+    https://github.com/camunda/camunda-deployment-references/blob/main/aws/openshift/rosa-hcp-dual-region/procedure/verify-cluster-nodes.sh
     ```
 
 In the remainder of the guide, different namespaces will be created following the needs of the dual-region architecture.
