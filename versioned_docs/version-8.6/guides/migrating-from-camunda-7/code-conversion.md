@@ -13,7 +13,7 @@ You must especially rewrite code that does the following:
 
 - Uses the Client API (to start process instances for example).
 - Implements [service tasks](/components/modeler/bpmn/service-tasks/service-tasks.md), which can be:
-  - [External tasks](/components/best-practices/development/invoking-services-from-the-process-c7.md#external-tasks), where workers subscribe to the engine.
+  - [External tasks](https://docs.camunda.org/manual/latest/user-guide/process-engine/external-tasks/#the-external-task-pattern), where workers subscribe to the engine.
   - [Java code attached to a service task](https://docs.camunda.org/manual/latest/user-guide/process-engine/delegation-code/) and called by the engine directly (in-VM).
 
 This guide helps you do this if your code is written in Java, and covers the following:
@@ -106,10 +106,10 @@ For example, to migrate an existing Spring Boot application, take the following 
 
 2. Adjust configuration:
 
-   - Set [Camunda 8 credentials](../../apis-tools/spring-zeebe-sdk/configuration.md) (for example, in `src/main/resources/application.yaml`) and point it to an existing Zeebe cluster.
+   - Set [Camunda 8 credentials](/apis-tools/spring-zeebe-sdk/getting-started.md#configuring-the-camunda-8-connection) (for example, in `src/main/resources/application.yaml`) and point it to an existing Zeebe cluster.
    - Remove existing Camunda 7 settings.
 
-3. Add `@ZeebeDeployment(resources = "classpath*:**/*.bpmn")` to automatically deploy all BPMN models.
+3. Add `@Deployment(resources = "classpath*:**/*.bpmn")` to automatically deploy all BPMN models.
 
 4. Adjust your source code and process model as described below.
 
@@ -123,7 +123,7 @@ If this affects large parts of your code base, you could write a small abstracti
 
 [External task workers](https://docs.camunda.org/manual/latest/user-guide/process-engine/external-tasks/) in Camunda 7 are conceptually comparable to [job workers](/components/concepts/job-workers.md) in Camunda 8. This means they are generally easier to migrate.
 
-The "external task topic" from Camunda 7 is directly translated into a "task type name" in Camunda 8, therefore `camunda:topic` gets `zeebe:taskDefinition type` in your BPMN model.
+The "external task topic" from Camunda 7 is directly translated into a "task type name" in Camunda 8, therefore `camunda:topic` becomes `zeebe:taskDefinition type` in your BPMN model.
 
 The [Camunda 7 Adapter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/camunda-7-adapter) picks up your `@ExternalTaskHandler` beans, wraps them into a JobWorker, and subscribes to the `camunda:topic` you defined as `zeebe:taskDefinition type`.
 
