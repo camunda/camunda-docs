@@ -144,11 +144,11 @@ While setting up Camunda 8 is not part of the core migration journey, it is a pr
 
 There are a small number of core decisions that will influence your overall migration journey. Although you might make them later in your journey once you have a better understanding of the consequences, Camunda presents them here so that you have them top of mind for the remainder of this guide.
 
-### Drain-out vs big bang
+### Drain out vs big bang
 
 There are two possible migration scenarios: Drain out and big bang.
 
-![A diagram showing drain-out vs big-bang migration scenarios](../img/drain-out-vs-big-bang.png)
+![A diagram showing drain out vs big-bang migration scenarios](../img/drain-out-vs-big-bang.png)
 
 Both are valid approaches. Let's briefly look at the differences.
 
@@ -160,7 +160,7 @@ Let's look at the pros and cons of each approach.
 
 **Drain out**
 
-![A diagram showing the drain-out scenario](../img/drain-out.png)
+![A diagram showing the drain out scenario](../img/drain-out.png)
 
 Pros:
 
@@ -319,7 +319,7 @@ While Camunda sees a lot of value in doing both tasks at the same time - as you 
 
 ## <span className="callout">5</span>Migrate data (optional)
 
-With your solution code migrated, you also need to look at your production data. Camunda currently develops the **[Data Migrator](./migration-tooling.md)** to be used for this (**planned to be available with 8.8**). You might need to customize the data migrator, especially if you used complex data formats in C7 (for example, Java objects) that need to be converted to something Camunda 8 can handle (for example, JSON). As part of this step you might also need to extract big payloads and binaries (such as documents) into an external data store and reference it from the process (using for example upcoming document handling possibilities).
+With your solution code migrated, you also need to look at your production data. Camunda currently develops the **[Data Migrator](./migration-tooling.md#data-migrator)** to be used for this (**planned to be available with 8.8**). You might need to customize the data migrator, especially if you used complex data formats in C7 (for example, Java objects) that need to be converted to something Camunda 8 can handle (for example, JSON). As part of this step you might also need to extract big payloads and binaries (such as documents) into an external data store and reference it from the process (using for example upcoming document handling possibilities).
 
 Data to be migrated includes **runtime instances, audit data, and optimize data**. Let's look at it one by one.
 
@@ -333,7 +333,7 @@ Runtime instance migration has limitations, check [migration tooling](./migratio
 
 <!-- TODO: Expand -->
 
-Migrating runtime instances is only necessary if you target a big bang migration for your process solution (keep in mind that "bing bang" in this context means to switch one process solution from Camunda 7 to Camunda 8 on a defined point in time - it doesn't mean that you have to migrate all your processes at once). If you drain out your Camunda 7 processes, or if they are typically very short-lived, you do not need runtime instance migration.
+Migrating runtime instances is only necessary if you target a big bang migration for your process solution (keep in mind that "big bang" in this context means to switch one process solution from Camunda 7 to Camunda 8 on a defined point in time - it doesn't mean that you have to migrate all your processes at once). If you drain out your Camunda 7 processes, or if they are typically very short-lived, you do not need runtime instance migration.
 
 The Data Migrator needs to access the Camunda 7 database, but just uses Camunda 8 APIs, which means you can also use this tool when you run on SaaS.
 
@@ -361,7 +361,7 @@ After you migrated the solution and prepared and tested the data migration (if n
 
 - **Big bang**: In a big bang scenario, you will typically shutdown the old solution (or at least parts of it for the process under migration), then run the runtime instance migration to make sure all waiting process instances are transferred to the Camunda 8 solution. After this step succeeded, you can start up the new solution and route traffic to it. This approach assumes there can be a downtime of the application. If that is not an option, another alternative is to startup the C8 solution in parallel and just switch the traffic routing without downtime, and then start to migrate runtime instances afterwards.
 
-Audit data migration can run after the switch has happened, after a successful drain-out (in parallel to normal operations) or of course during the downtime of a big bang. The best approach depends on the amount of data and the possibility for downtimes.
+Audit data migration can run after the switch has happened, after a successful drain out (in parallel to normal operations) or of course during the downtime of a big bang. The best approach depends on the amount of data and the possibility for downtimes.
 
 ## <span className="callout">7</span>Decommission Camunda 7 solution
 
