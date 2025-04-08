@@ -163,12 +163,12 @@ Camunda provides [a standard support policy](https://camunda.com/release-policy/
 During this time, patches are regularly released which contain security and bug fixes, some of which may come from dependency updates. As such, for the
 vast majority of dependencies, Camunda _only_ applies patch updates.
 
-Certain dependencies used by Camunda 8, however, may have a shorter maintenance policy than Camunda itself. For those dependencies which are integral to its functionality, Camunda adopts a different update policy.
+Certain dependencies used by Camunda 8, however, may have a shorter maintenance policy than Camunda itself. For those dependencies which are integral to its functionality, Camunda may adopt a different update policy, as listed below.
 
 ### Spring
 
-The **Camunda Orchestration Cluster** is a Spring Boot application, and leverages Spring Boot (and the wider Spring ecosystem) to execute fundamental functionality such as application configuration, REST infrastructure (including security), production ready features, etc.
+Many server side components, such as the **Camunda Orchestration Cluster**, are Spring Boot applications, and leverage Spring Boot (and the wider Spring ecosystem) to execute fundamental functionality such as application configuration, REST infrastructure (including security), production ready features, etc.
 
-Spring, however, has a shorter maintenance window than Camunda for its OSS offering: versions are only supported for 12 months, versus Camunda's 18 months. To circumvent this, Spring (and Spring Boot) versions may also receive minor updates on supported **Camunda Orchestration Cluster** versions as part of our normal patch release cycle.
+Spring, however, has a shorter maintenance window than Camunda for its OSS offering: versions are only supported for 12 months, versus Camunda's 18 months. To circumvent this, server side components of Camunda 8 patch releases also update Spring (and Spring Boot) minor versions, such that the latest patch release of these components uses a supported Spring version.
 
-As such, Camunda strives to ensure that the latest patch of a supported **Camunda Orchestration Cluster** version uses a supported Spring (and Spring Boot) versions.
+As for libraries and SDKs meant to be included in third-party applications, Camunda follows a best effort policy to balance compatibility and securing Spring-dependent libraries.
