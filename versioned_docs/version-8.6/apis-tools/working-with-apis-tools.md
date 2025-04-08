@@ -35,7 +35,7 @@ Camunda 8 provides several official clients based on this API. Official clients 
 
 Official clients have been developed and tested by Camunda. They also add convenience functions (e.g. thread handling for job workers) on top of the core API.
 
-<DocCardList items={[{type:"link", href:"/docs/apis-tools/java-client/", label: "Java client", docId:"apis-tools/java-client/index"}
+<DocCardList items={[{type:"link", href:"/docs/8.6/apis-tools/java-client/", label: "Java client", docId:"apis-tools/java-client/index"}
 ]}/>
 
 :::note
@@ -50,18 +50,18 @@ Camunda 8 components have APIs to enable polyglot developers to work with in the
 
 ### API Reference
 
-<DocCardList items={[{type:"link", href:"/docs/apis-tools/administration-api/administration-api-reference/", label: "Administration API (REST)", docId:"apis-tools/administration-api/administration-api-reference"},
+<DocCardList items={[{type:"link", href:"/docs/8.6/apis-tools/administration-api/administration-api-reference/", label: "Administration API (REST)", docId:"apis-tools/administration-api/administration-api-reference"},
 {
-type:"link", href:"/docs/apis-tools/camunda-api-rest/camunda-api-rest-overview/", label: "Camunda 8 API (REST)", docId:"apis-tools/camunda-api-rest/camunda-api-rest-overview"
+type:"link", href:"/docs/8.6/apis-tools/camunda-api-rest/camunda-api-rest-overview/", label: "Camunda 8 API (REST)", docId:"apis-tools/camunda-api-rest/camunda-api-rest-overview"
 },
 {
-type:"link", href:"/optimize/apis-tools/optimize-api/optimize-api-authentication/", label: "Optimize API (REST)", description: "Get, delete, and export reports and dashboards, enable and disable sharing, and more."
+type:"link", href:"/docs/8.6/apis-tools/optimize-api/optimize-api-authentication/", label: "Optimize API (REST)", description: "Get, delete, and export reports and dashboards, enable and disable sharing, and more."
 },
 {
-type:"link", href:"/docs/apis-tools/web-modeler-api/overview/", label: "Web Modeler API (REST)", docId:"apis-tools/web-modeler-api/overview"
+type:"link", href:"/docs/8.6/apis-tools/web-modeler-api/overview/", label: "Web Modeler API (REST)", docId:"apis-tools/web-modeler-api/overview"
 },
 {
-type:"link", href:"/docs/apis-tools/zeebe-api/overview/", label: "Zeebe API (gRPC)", docId:"apis-tools/zeebe-api/grpc"
+type:"link", href:"/docs/8.6/apis-tools/zeebe-api/overview/", label: "Zeebe API (gRPC)", docId:"apis-tools/zeebe-api/grpc"
 }
 ]}/>
 
@@ -71,9 +71,9 @@ Additionally, visit our documentation on [Operate](../self-managed/operate-deplo
 
 ### SDKs
 
-<DocCardList items={[{type:"link", href:"/docs/apis-tools/spring-zeebe-sdk/getting-started/", label: "Spring Zeebe", docId:"apis-tools/spring-zeebe-sdk/getting-started"},
+<DocCardList items={[{type:"link", href:"/docs/8.6/apis-tools/spring-zeebe-sdk/getting-started/", label: "Spring Zeebe", docId:"apis-tools/spring-zeebe-sdk/getting-started"},
 {
-type:"link", href:"/docs/next/apis-tools/node-js-sdk/", label: "Node.js", docId:"apis-tools/node-js-sdk"
+type:"link", href:"/docs/8.6/apis-tools/node-js-sdk/", label: "Node.js", docId:"apis-tools/node-js-sdk"
 },
 ]}/>
 
@@ -106,13 +106,13 @@ Camunda 8 provides APIs and JavaScript libraries to allow frontend developers to
 <DocCardList items={[
 {
 type: "link",
-href: "/docs/apis-tools/frontend-development/task-applications/introduction-to-task-applications",
+href: "/docs/8.6/apis-tools/frontend-development/task-applications/introduction-to-task-applications",
 label: "Task applications",
 docId:"apis-tools/frontend-development/task-applications/introduction-to-task-applications"
 },
 {
 type: "link",
-href: "/docs/apis-tools/frontend-development/forms/introduction-to-forms",
+href: "/docs/8.6/apis-tools/frontend-development/forms/introduction-to-forms",
 label: "Forms",
 docId: "apis-tools/frontend-development/forms/introduction-to-forms"
 }

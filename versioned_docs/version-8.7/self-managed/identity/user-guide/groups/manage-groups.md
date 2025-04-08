@@ -10,19 +10,13 @@ Groups are a way to apply a set of [roles](/self-managed/identity/user-guide/rol
 
 To create a group, take the following steps:
 
-1. Navigate to the **Groups** tab:
+1. Navigate to the **Groups** tab.
 
-![create-group-tab](../img/create-group-tab.png)
+2. Click the **Create group** button located on the top right of the table and a modal will open.
 
-2. Click the **Add Group** button located on the top right of the table and a modal will open.
+3. Fill in the name of the group and click **Create group**.
 
-3. Fill in the name of the group and click **Add**:
-
-![create-group-modal-2](../img/create-group-modal-2.png)
-
-On confirmation, the modal closes, the table updates, and your new group is shown:
-
-![create-group-refreshed-table](../img/create-group-refreshed-table.png)
+On confirmation, the modal closes, the table updates, and your new group is shown.
 
 ## Modify or delete a group
 

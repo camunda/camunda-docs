@@ -1038,7 +1038,8 @@ You can, for example, allow the user to model and configure the following **REST
       "type": "Hidden",
       "value": "http",
       "binding": {
-        "type": "zeebe:taskDefinition:type"
+        "type": "zeebe:taskDefinition",
+        "property": "type"
       }
     },
     {
