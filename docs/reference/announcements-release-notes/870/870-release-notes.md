@@ -61,7 +61,7 @@ To learn more about this feature, see [manage your connectors](/components/conso
 
 ### Custom JWKS and JWT Algorithms Support <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-Self-managed customers now have [full control over JWT configurations](/self-managed/modeler/web-modeler/configuration/configuration.md) for enhanced security and compatibility.
+Self-Managed customers now have [full control over JWT configurations](/self-managed/modeler/web-modeler/configuration/configuration.md) for enhanced security and compatibility.
 
 <!--- https://github.com/camunda/web-modeler/issues/11571 --->
 
@@ -145,7 +145,7 @@ Create and append tasks with resources available in the current project and proc
 - **https://github.com/camunda/camunda/issues/29526**: Files are not uploaded to the document storage when starting a process with a start form from Web Modeler or Play.
   - Affects: Document handling / Web Modeler
   - Work-around: Start the process from Tasklist or REST API.
-- **https://github.com/camunda/camunda/issues/25443**: File picker does not display the name of the uploaded file for completed tasks.
+- **https://github.com/camunda/camunda/issues/25443**: Filepicker does not display the name of the uploaded file for completed tasks.
   - Affects: Tasklist
   - Work-around: File name can be viewed in Operate.
 - **https://github.com/camunda/camunda/issues/28375**: File upload fails to AWS storage due to non UTF-8 whitespace character in filename.

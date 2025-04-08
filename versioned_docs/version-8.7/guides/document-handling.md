@@ -7,7 +7,7 @@ keywords: ["document handling"]
 
 import DocCardList from '@theme/DocCardList';
 
-Offering robust [document handling](/components/concepts/document-handling.md) capabilities within Camunda, users can efficiently manage large volumes of binary data such as PDFs and images across both development and production environments.
+Offering robust [document handling](/components/concepts/document-handling.md) capabilities within Camunda SaaS and Self-Managed, users can efficiently manage large volumes of binary data such as PDFs and images across both development and production environments.
 
 In this guide we will cover three main use cases:
 
@@ -56,13 +56,21 @@ It always returns an array of objects, either a user uploads a single document o
 
 Single document uploads are accessible using `value[1]` (since [FEEL](../components/modeler/feel/what-is-feel.md) uses 1-based indexing).
 
-### Upload a document via inbound Webhook connector
+### Upload a document via inbound webhook connector
 
 Documents can be added to a process using the [inbound](../components//connectors/connector-types.md#inbound-connectors) [HTTP webhook Connector](/components/connectors/protocol/http-webhook.md).
 
 You can pass the documents in both the response expression and the result expression, where the `documents` object contains the references for created documents. Below, review an example of a webhook configuration:
 
 ![Example payload of inbound webhook connector](./img/inbound-webhook-connector-example.png)
+
+In this example, the result expression may look as follows:
+
+```
+{
+  applicationDocument: documents[1]
+}
+```
 
 The document reference received as an output of one Connector should be stored in process variables by using the result expression or result variable.
 

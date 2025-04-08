@@ -13,13 +13,6 @@ You can store, track, and manage binary data, like PDFs, images and other file t
 
 Storage must be configured according to your infrastructure and operational needs.
 
-## Storage integration and configuration
-
-You can configure document storage based on your deployment setup and production requirements.
-Supported options include an external cloud storage such as Google Cloud Platform (GCP) or AWS S3, local file storage or an in-memory storage.
-
-Learn how to set it up in the [storage configuration guide](configuration.md).
-
 ## Use cases and capabilities
 
 Document handling can be beneficial for different process use cases, such as uploading a document to a BPMN process, displaying and downloading a document, sending a document to an external system via a Connector, and automating documents with [intelligent document processing](/components/modeler/web-modeler/idp/idp-example.md).
@@ -28,3 +21,10 @@ Step through all of these capabilities in the guide below:
 
 <DocCardList items={[{type:"link", href:"/docs/guides/document-handling/", label: "Store, track and manage documents", docId:"guides/document-handling"}
 ]}/>
+
+## Storage integration and configuration
+
+You can configure document storage based on your deployment setup and production requirements.
+Supported options include an external cloud storage such as Google Cloud Platform (GCP) or AWS S3, local file storage or an in-memory storage.
+
+Learn how to set it up in the [storage configuration guide](configuration.md).
