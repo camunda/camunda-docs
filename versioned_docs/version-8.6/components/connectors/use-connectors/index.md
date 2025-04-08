@@ -72,7 +72,18 @@ If you set `result` inside the `Result variable` field of the REST outbound Conn
       "server": "nginx",
       "content-type": "text/html; charset=UTF-8"
     },
-    "body": "<h1>Hello, World!</h1>",
+    "body": {
+      "orderNumber": "1234",
+      "date": "2025-04-01",
+      "customerId": "567",
+      "address": {
+        "streetAddress": "1234 Elm Street",
+        "city": "Paris",
+        "state": "CA",
+        "postalCode": "90210",
+        "country": "USA"
+      }
+    },
     "reason": "OK",
     "document": null
   }
@@ -89,6 +100,7 @@ To ensure process isolation, note that Connectors do not have access to process 
 
 :::note
 While using this field, a process variable with the name `response` is reserved.
+It should only be used when a connector returns atomic values like a string or a number.
 :::
 
 #### Example
@@ -97,7 +109,18 @@ If you set `{ "bodyReceived": body }` inside the `Result Expression` field of th
 
 ```json
 {
-  "bodyReceived": "<h1>Hello, World!</h1>"
+  "bodyReceived": {
+    "orderNumber": "1234",
+    "date": "2025-04-01",
+    "customerId": "567",
+    "address": {
+      "streetAddress": "1234 Elm Street",
+      "city": "Paris",
+      "state": "CA",
+      "postalCode": "90210",
+      "country": "USA"
+    }
+  }
 }
 ```
 

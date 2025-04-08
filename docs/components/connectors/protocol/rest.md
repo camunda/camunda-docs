@@ -256,8 +256,6 @@ To avoid this, set the `skipEncoding` value to `"true"` in the XML. This disable
 
 ## Response
 
-The HTTP response will be available in a temporary local object variable. This variable can be mapped to the process by specifying the **Result variable**.
-
 The following variables are available in the context of the response expression:
 
 - **status**: Response status.

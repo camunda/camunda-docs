@@ -6,14 +6,20 @@ description: Learn how to use Connectors in Web Modeler by creating a Connector 
 
 Any task can be transformed into a Connector task. This guide details the basic functionality all Connectors share.
 
-Find the available Connectors in Camunda 8 SaaS and how to use them in detail in the [out-of-the-box Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) documentation. Additionally, learn how you can visit the [Camunda Marketplace](/components/modeler/web-modeler/camunda-marketplace.md) to add Connectors from your BPMN diagram.
+Find the available Connectors in Camunda 8 SaaS and how to use them in detail in
+the [out-of-the-box Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md)
+documentation. Additionally, learn how you can visit
+the [Camunda Marketplace](/components/modeler/web-modeler/camunda-marketplace.md) to add Connectors from your BPMN
+diagram.
 
 :::info
 Learn how to [install connectors in Self-Managed](/self-managed/connectors-deployment/install-and-start.md).
 :::
 
 :::note
-New to modeling with Camunda? The steps below assume some experience with Camunda modeling tools. [Model your first diagram](/components/modeler/web-modeler/model-your-first-diagram.md) to learn how to work with Web Modeler.
+New to modeling with Camunda? The steps below assume some experience with Camunda modeling
+tools. [Model your first diagram](/components/modeler/web-modeler/model-your-first-diagram.md) to learn how to work with
+Web Modeler.
 :::
 
 ## Using secrets
@@ -25,8 +31,11 @@ New to modeling with Camunda? The steps below assume some experience with Camund
 You can use sensitive information in your Connectors without exposing it in your BPMN processes by referencing secrets.
 Use the Console component to [create and manage secrets](/components/console/manage-clusters/manage-secrets.md).
 
-You can reference a secret like `MY_API_KEY` with `{{secrets.MY_API_KEY}}` in any Connector field in the properties panel that supports this.
-Each of the [out-of-the-box Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) details which fields support secrets.
+You can reference a secret like `MY_API_KEY` with `{{secrets.MY_API_KEY}}` in any Connector field in the properties
+panel that supports this.
+Each of
+the [out-of-the-box Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md)
+details which fields support secrets.
 
 Secrets are **not variables** and must be wrapped in double quotes as follows when used in a FEEL expression:
 
@@ -42,10 +51,13 @@ Using the secrets placeholder syntax, you can use secrets in any part of a text,
 
 This example assumes there is a process variable `baseUrl` and a configured secret `TENANT_ID`.
 
-The engine will resolve the `baseUrl` variable and pass on the secrets placeholder to the Connector. Assuming the `baseUrl` variable resolves to `my.company.domain`,
-the Connector receives the input `"https://my.company.domain/{{secrets.TENANT_ID}}/accounting"`. The Connector then replaces the secrets placeholder upon execution.
+The engine will resolve the `baseUrl` variable and pass on the secrets placeholder to the Connector. Assuming the
+`baseUrl` variable resolves to `my.company.domain`,
+the Connector receives the input `"https://my.company.domain/{{secrets.TENANT_ID}}/accounting"`. The Connector then
+replaces the secrets placeholder upon execution.
 
-For further details on how secrets are implemented in Connectors, consult our [Connector SDK documentation](/components/connectors/custom-built-connectors/connector-sdk.md#secrets).
+For further details on how secrets are implemented in Connectors, consult
+our [Connector SDK documentation](/components/connectors/custom-built-connectors/connector-sdk.md#secrets).
 
 :::note Warning
 `secrets.*` is a reserved syntax. Don't use this for other purposes than referencing your secrets in Connector fields.
@@ -54,7 +66,8 @@ Using this in other areas can lead to unexpected results and incidents.
 
 ## Variable/response mapping
 
-When a **Connector** is expected to return a result, **Connectors** feature a dedicated section known as `Response Mapping`,
+When a **Connector** is expected to return a result, **Connectors** feature a dedicated section known as
+`Response Mapping`,
 comprising two essential fields: `Result Variable` and `Result Expression`.
 These fields export responses from external **Connector** calls into process variables.
 
@@ -76,7 +89,18 @@ If you set `result` inside the `Result variable` field of the REST outbound Conn
       "server": "nginx",
       "content-type": "text/html; charset=UTF-8"
     },
-    "body": "<h1>Hello, World!</h1>",
+    "body": {
+      "orderNumber": "1234",
+      "date": "2025-04-01",
+      "customerId": "567",
+      "address": {
+        "streetAddress": "1234 Elm Street",
+        "city": "Paris",
+        "state": "CA",
+        "postalCode": "90210",
+        "country": "USA"
+      }
+    },
     "reason": "OK",
     "document": null
   }
@@ -93,15 +117,28 @@ To ensure process isolation, note that Connectors do not have access to process 
 
 :::note
 While using this field, a process variable with the name `response` is reserved.
+It should only be used when a connector returns atomic values like a string or a number.
 :::
 
 #### Example
 
-If you set `{ "bodyReceived": body }` inside the `Result Expression` field of the REST outbound Connector, this variable is available:
+If you set `{ "bodyReceived": body }` inside the `Result Expression` field of the REST outbound Connector, this variable
+is available:
 
 ```json
 {
-  "bodyReceived": "<h1>Hello, World!</h1>"
+  "bodyReceived": {
+    "orderNumber": "1234",
+    "date": "2025-04-01",
+    "customerId": "567",
+    "address": {
+      "streetAddress": "1234 Elm Street",
+      "city": "Paris",
+      "state": "CA",
+      "postalCode": "90210",
+      "country": "USA"
+    }
+  }
 }
 ```
 
@@ -111,7 +148,8 @@ The `Activation` section pertains specifically to [inbound](/components/connecto
 
 ### Correlation key (process)
 
-This field is instrumental in specifying which variable within a **Connector** should function as the process correlation key.
+This field is instrumental in specifying which variable within a **Connector** should function as the process
+correlation key.
 Learn more about [message correlation](components/concepts/messages.md#message-correlation-overview).
 
 ### Correlation key (payload)
@@ -127,12 +165,14 @@ Leaving this field empty may result in identical messages being submitted and pr
 ### Condition
 
 Utilized for validating conditions against the incoming message payload, this field enables the filtering
-of payloads that can initiate a process. Leaving this field empty results in all incoming messages triggering a new process,
+of payloads that can initiate a process. Leaving this field empty results in all incoming messages triggering a new
+process,
 except those failing pre-validation checks, such as HMAC signature verification for specific Connectors.
 
 ### Example
 
-Imagine your Connector makes an external call to an arbitrary weather service. The weather service returns the following response:
+Imagine your Connector makes an external call to an arbitrary weather service. The weather service returns the following
+response:
 
 ```json
 {
@@ -162,9 +202,11 @@ Imagine your Connector makes an external call to an arbitrary weather service. T
 }
 ```
 
-If you declare a variable `myWeatherResponse` in the `Result Variable` field, the entire response is mapped to the declared variable.
+If you declare a variable `myWeatherResponse` in the `Result Variable` field, the entire response is mapped to the
+declared variable.
 
-Now, let's imagine that you wish to extract only temperature into a process variable `berlinWeather` and wind speed into `berlinWindSpeed`. Let's also imagine you need weather in Fahrenheit declared in `berlinWeatherInFahrenheit`.
+Now, let's imagine that you wish to extract only temperature into a process variable `berlinWeather` and wind speed into
+`berlinWindSpeed`. Let's also imagine you need weather in Fahrenheit declared in `berlinWeatherInFahrenheit`.
 
 In that case, you could declare `Result Expression` as follows:
 
@@ -178,10 +220,15 @@ In that case, you could declare `Result Expression` as follows:
 
 ## BPMN errors and failing jobs {#bpmn-errors}
 
-Being able to deal with exceptional cases is a common requirement for business process models. Read more about our general best practices around this topic in [dealing with exceptions](/components/best-practices/development/dealing-with-problems-and-exceptions.md).
+Being able to deal with exceptional cases is a common requirement for business process models. Read more about our
+general best practices around this topic
+in [dealing with exceptions](/components/best-practices/development/dealing-with-problems-and-exceptions.md).
 
-Connectors share this requirement for exception handling like any other task in a model. However, Connectors define reusable runtime behavior that is not aware of your specific business use case. Thus, they can not determine if an exceptional case is a technical or business error.
-Therefore, a Connector's runtime behavior cannot throw BPMN errors, but only technical errors. However, those technical errors can optionally contain an error code as structured data that can be reused when configuring a Connector task.
+Connectors share this requirement for exception handling like any other task in a model. However, Connectors define
+reusable runtime behavior that is not aware of your specific business use case. Thus, they can not determine if an
+exceptional case is a technical or business error.
+Therefore, a Connector's runtime behavior cannot throw BPMN errors, but only technical errors. However, those technical
+errors can optionally contain an error code as structured data that can be reused when configuring a Connector task.
 
 :::note
 There may be situations where technical errors cannot be detected by the runtime and they must be thrown explicitly.
@@ -189,23 +236,38 @@ There may be situations where technical errors cannot be detected by the runtime
 
 ### Error expression
 
-To support flexible exception handling, the [out-of-the-box Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) allow users to define an **Error Expression** in the **Error Handling** section at the bottom of the properties panel.
+To support flexible exception handling,
+the [out-of-the-box Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) allow
+users to define an **Error Expression** in the **Error Handling** section at the bottom of the properties panel.
 
-The example below uses this property to automatically inform the right group of people depending on the result of an HTTP request against an internal website. If the website returns a valid result, this data is passed on to the regular team.
-In case of a [404](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404) website response, the administrator is informed, so they can check why the website cannot be reached. HTTP responses with status [500](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500)
+The example below uses this property to automatically inform the right group of people depending on the result of an
+HTTP request against an internal website. If the website returns a valid result, this data is passed on to the regular
+team.
+In case of a [404](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404) website response, the administrator is
+informed, so they can check why the website cannot be reached. HTTP responses with
+status [500](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500)
 indicate internal website errors, which is why the website team is informed.
 
 ![feel Connectors](../img/use-connectors-error-general.png)
 
-The **Error Expression** property requires a [FEEL](/components/modeler/feel/what-is-feel.md) expression that yields a BPMN error object in the end. The BPMN error object can be an empty [context](/components/modeler/feel/language-guide/feel-data-types.md#context),
-[null](/components/modeler/feel/language-guide/feel-data-types.md#null), or a context containing at least a non-empty `errorType` and a non-empty `code` if the error type is `bpmnError`. You can use all available functionality provided by FEEL to produce this result.
+The **Error Expression** property requires a [FEEL](/components/modeler/feel/what-is-feel.md) expression that yields a
+BPMN error object in the end. The BPMN error object can be an
+empty [context](/components/modeler/feel/language-guide/feel-data-types.md#context),
+[null](/components/modeler/feel/language-guide/feel-data-types.md#null), or a context containing at least a non-empty
+`errorType` and a non-empty `code` if the error type is `bpmnError`. You can use all available functionality provided by
+FEEL to produce this result.
 
 Use the provided FEEL functions:
 
-- [`bpmnError`](#function-bpmnerror) to create a BPMN error object. This triggers a [ThrowError call](/components/best-practices/development/dealing-with-problems-and-exceptions.md) to the workflow engine.
-- [`jobError`](#function-jobError) to create a fail job object. This triggers a [FailJob call](/components/best-practices/development/dealing-with-problems-and-exceptions.md) to the workflow engine.
+- [`bpmnError`](#function-bpmnerror) to create a BPMN error object. This triggers
+  a [ThrowError call](/components/best-practices/development/dealing-with-problems-and-exceptions.md) to the workflow
+  engine.
+- [`jobError`](#function-jobError) to create a fail job object. This triggers
+  a [FailJob call](/components/best-practices/development/dealing-with-problems-and-exceptions.md) to the workflow
+  engine.
 
-The `bpmnError` FEEL function optionally allows you to pass variables as the third parameter. You can combine this with a boundary event to use the variables in condition expressions when handling the error event. Example FEEL expression:
+The `bpmnError` FEEL function optionally allows you to pass variables as the third parameter. You can combine this with
+a boundary event to use the variables in condition expressions when handling the error event. Example FEEL expression:
 
 ```
 if response.body.status = "failed" then bpmnError("FAILED", "The action failed", response.body) else null
@@ -215,10 +277,13 @@ Within the FEEL expression, you access the following temporary variables:
 
 - The result of the Connector in `response`.
 - The job of the invocation in `job` with the fields: `retries`
-- Any result variables created by the **Result Variable** and **Result Expression** properties (see the [REST Connector](/components/connectors/protocol/rest.md#response), for example).
-- The technical exception that potentially occurred in `error`, containing a `message` and optionally a `code`. The code is only available if the Connector's runtime behavior provided a code in the exception it threw.
+- Any result variables created by the **Result Variable** and **Result Expression** properties (see
+  the [REST Connector](/components/connectors/protocol/rest.md#response), for example).
+- The technical exception that potentially occurred in `error`, containing a `message` and optionally a `code`. The code
+  is only available if the Connector's runtime behavior provided a code in the exception it threw.
 
-Building on that, you can cover those use cases with BPMN errors that you consider as exceptional. This can build on technical exceptions thrown by a Connector as well as regular results returned by the external system you integrated.
+Building on that, you can cover those use cases with BPMN errors that you consider as exceptional. This can build on
+technical exceptions thrown by a Connector as well as regular results returned by the external system you integrated.
 The [example expressions](#bpmn-error-examples) below can serve as templates for such scenarios.
 
 ### Function bpmnError()
@@ -287,7 +352,8 @@ jobError("job failed")
 
 #### HTTP errors to BPMN errors
 
-Using the [REST Connector](/components/connectors/protocol/rest.md), you can handle HTTP errors directly in your business process model by setting a Header named `errorExpression` with the following value:
+Using the [REST Connector](/components/connectors/protocol/rest.md), you can handle HTTP errors directly in your
+business process model by setting a Header named `errorExpression` with the following value:
 
 ```feel
 if error.code = "404" then
@@ -300,12 +366,17 @@ else
   null
 ```
 
-This will create BPMN errors for HTTP requests that return with a status [404](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404) or [500](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500).
-You can extend that list to all HTTP errors you can handle as business use cases, e.g. by informing a website administrator directly via Slack using the [Slack Connector](/components/connectors/out-of-the-box-connectors/slack.md).
+This will create BPMN errors for HTTP requests that return with a
+status [404](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404)
+or [500](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500).
+You can extend that list to all HTTP errors you can handle as business use cases, e.g. by informing a website
+administrator directly via Slack using the [Slack Connector](/components/connectors/out-of-the-box-connectors/slack.md).
 
 #### Response value to BPMN error
 
-Using the [REST Connector](/components/connectors/protocol/rest.md) or any other Connector that returns a result, you can handle a response as BPMN error based on its value, by setting a Header named `errorExpression` with the following value:
+Using the [REST Connector](/components/connectors/protocol/rest.md) or any other Connector that returns a result, you
+can handle a response as BPMN error based on its value, by setting a Header named `errorExpression` with the following
+value:
 
 ```feel
 if response.body.main.humidity < 0 then
@@ -313,8 +384,10 @@ if response.body.main.humidity < 0 then
 else null
 ```
 
-This is assuming you requested data from a local weather station and received a value that is technically valid for the REST Connector.
-However, you could define that for your business case a humidity value below `0` must be an error that should be checked manually.
+This is assuming you requested data from a local weather station and received a value that is technically valid for the
+REST Connector.
+However, you could define that for your business case a humidity value below `0` must be an error that should be checked
+manually.
 You could automatically send a message to a technician to check the weather station.
 
 #### Generic Header to transform a ConnectorException to a BPMN Error
@@ -322,7 +395,7 @@ You could automatically send a message to a technician to check the weather stat
 If the Connector throws a `ConnectorException` like:
 
 ```java
-  throw new ConnectorException("HUMIDITY-FAIL", "Received invalid humidity");
+  throw new ConnectorException("HUMIDITY-FAIL","Received invalid humidity");
 ```
 
 Then you can transform this exception to a BPMN error with this expression in a Header item named `errorExpression`:
@@ -335,7 +408,8 @@ if is defined(error) then bpmnError(error.code, error.message) else null
 
 #### HTTP errors to fail job
 
-Using the [REST Connector](/components/connectors/protocol/rest.md), you can handle HTTP errors directly in your business process model by setting a header named `errorExpression` with the following value:
+Using the [REST Connector](/components/connectors/protocol/rest.md), you can handle HTTP errors directly in your
+business process model by setting a header named `errorExpression` with the following value:
 
 ```feel
 if error.code = "404" then
@@ -348,5 +422,8 @@ else
   null
 ```
 
-This will allow you to control the job failure for HTTP requests that return with status [404](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404) or [504](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/504).
-You can extend that list to all HTTP errors you can handle as a custom fail job; for example, to go to 0 retries instantly or increase the retry timeout.
+This will allow you to control the job failure for HTTP requests that return with
+status [404](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404)
+or [504](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/504).
+You can extend that list to all HTTP errors you can handle as a custom fail job; for example, to go to 0 retries
+instantly or increase the retry timeout.
