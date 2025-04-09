@@ -315,9 +315,9 @@ If more than one Camunda Tasklist instance is accessible by users for a failover
 
 Automatic migration is enabled by default in all Tasklist deployments, including the Importer.
 
-| Name                                        | Description                                             | Default value |
-| ------------------------------------------- | ------------------------------------------------------- | ------------- |
-| camunda.tasklist.migration.migrationEnabled | Enables the migration process                           | true          |
+| Name                                        | Description                                              | Default value |
+| ------------------------------------------- | -------------------------------------------------------- | ------------- |
+| camunda.tasklist.migration.migrationEnabled | Enables the migration process                            | true          |
 | camunda.tasklist.migration.reindexBatchSize | The batch size of documents to re-index during migration | 5000          |
 | camunda.tasklist.migration.slices           | How many slices should the re-index be divided into      | 0 (auto)      |
 
