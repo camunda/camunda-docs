@@ -24,33 +24,33 @@ Camunda provides the following migration tools:
 
 ## Migration Analyzer
 
-The **Migration Analyzer** is a tool to gain a first understanding of migration tasks. It analyzes Camunda 7 model files (BPMN or DMN) and derives a list of tasks you will need to do when migrating those models to Camunda 8.
+The **Migration Analyzer** helps you get a first understanding of migration tasks when moving from Camunda 7 to Camunda 8. It analyzes Camunda 7 model files (BPMN or DMN) and generates a list of tasks required for the migration.
 
-In a second step, it can also convert those filese from the Camunda 7 to the Camunda 8 format. For example, it adjusts the namespace or adjust XML property names if they have changed.
+In a second step, it can also convert these files from the Camunda 7 format to the Camunda 8 format. For example, it updates namespaces or renames XML properties if needed.
 
 The identified tasks are grouped by severity:
 
-- INFO: Just a feedback that some elements need to change, but they can be converted automatically
-- REVIEW: A hint, that the automatic conversion did some work, that requires at least a review. For example, there is a simplified conversion of expressions that always need a human eye.
-- TASK: You have to adjust the converted model or add additional information to make it work with Camunda 8.
-- WARNING: You will have to look into this finding. A warning could for example indicate, that an element of the original process is not (yet) supported by Camunda 8.
+- **INFO**: Informational feedback. These elements are changed automatically.
+- **REVIEW**: Changes were made automatically, but should be reviewed. For example, expressions are simplified, which always require a human check.
+- **TASK**: Manual changes are required to make the model work in Camunda 8.
+- **WARNING**: Manual investigation needed. Warnings often indicate that elements from the original process are not yet supported in Camunda 8.
 
-This allows you to focus on important findings. You can further group tasks by their type, so for example changing a JavaDelegate to a JobWorker might occur 100 times in your codebase, but is still one and the same pattern.
+This allows you to focus on the most important findings. Tasks can also be grouped by type. For example, changing a `JavaDelegate` to a `JobWorker` might appear 100 times in your codebase, but still represents just one recurring pattern.
 
 You can use the Migration Analyzer in the following ways:
 
-- **Web Interface**: An interactive web-based wizard, implemented as a Java Spring Boot + React application. This can be installed
-  - locally as Java jar,
-  - using Docker, or
-  - consumed as SaaS from our free hosted version.
-- **CLI**: A Command-Line Interface for the Migration Analyzer, implemented as a Java application.
+- **Web Interface**: A wizard-like UI built with Java (Spring Boot) and React. Available:
+  - locally as a Java JAR,
+  - via Docker, or
+  - as a free hosted SaaS version.
+- **CLI**: A command-line interface implemented in Java.
 
-The results of the analysis is provided as:
+The results are available as:
 
-- **XSLS**: Microsoft Excel file, that includes pre-built Pivot tables to drill into the data properly,
-- **CSV**: As comma-separated list, which can be imported into any spreadsheet tool you like to use.
+- **XLSX**: A Microsoft Excel file, including pre-built PivotTables for data exploration.
+- **CSV**: A plain-text comma-separated file, compatible with any spreadsheet tool.
 
-Let's go over this step-by-step:
+Let's go through this step-by-step:
 
 - [How to install?](#installation)
 - [How to analyze your models?](#analyzing-your-models-using-the-web-interface)
@@ -58,57 +58,68 @@ Let's go over this step-by-step:
 
 ### Installation
 
-Please refer to the [Installation Guide](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer#installation) for local installation.
+Please refer to the [Installation Guide](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer#installation) for local setup instructions.
 
-For a free SaaS version that can be used right away, just navigate to [https://diagram-converter.consulting-sandbox.camunda.cloud/](https://diagram-converter.consulting-sandbox.camunda.cloud/).
+To get started right away, try the free SaaS version:  
+[https://diagram-converter.consulting-sandbox.camunda.cloud/](https://diagram-converter.consulting-sandbox.camunda.cloud/)
 
 ### Analyzing your models using the Web Interface
 
-After [local installation](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer#installation), you can access the Migration Analyzer via [http://localhost:8080/](http://localhost:8080/) (or you use the [SaaS deployment](https://diagram-converter.consulting-sandbox.camunda.cloud/) that doesn't require any local installation).
+After [local installation](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer#installation), open [http://localhost:8080/](http://localhost:8080/).  
+Or use the [SaaS deployment](https://diagram-converter.consulting-sandbox.camunda.cloud/) (no local setup required).
 
-The wizard should be self-explantory. You simply upload one or more models and click **analyze**:
+The wizard is straightforward. Upload one or more models and click **Analyze**:
 
 ![A screenshot of the Migration Analyzer tool](../img/analyzer-screenshot1.png)
 
-Now you can:
+You can now:
 
-- Download the analyzer result as Microsoft Excel file
-- Download the analyzer result as CSV file
-- Download the converted models either indicidually or as complete ZIP file.
+- Download the analyzer results as Microsoft Excel file
+- Download the analyzer results as CSV file
+- Download the converted models (individually or as ZIP)
 
-Let's explore how to use those results.
+Let’s take a closer look at how to use those results.
 
 ### Understanding analyzer results using Microsoft Excel
 
 ![The MS Excel result](../img/analyzer-result-excel.png)
 
-The XLSX file contains three tabs:
+The XLSX file includes three tabs:
 
-- AnalysisSummary: Some PivotTables and Diagrams showing typical analysis tasks. Feel free to adjust to your needs.
-- PivotTable: One big pivot table that allows to dynamically explore the data set. Feel free to adjust to your needs.
-- AnalysisResults: The raw data provided by the analysis step. This can also be copied in any other spreadhseet or crunched in the way that is helpful to you.
+- **AnalysisSummary**: PivotTables and charts that summarize typical migration tasks.
+- **PivotTable**: A large PivotTable for dynamic data exploration.
+- **AnalysisResults**: The raw data from the analysis, which you can copy, import, or further process.
 
-Note that this file can be either opened with a local installation of Microsoft Excel or the online equivalent in Office 365.
+You can open the file using Microsoft Excel (desktop or Office 365).
 
-### Understanding analyzer results using Google Sheets or Libre Office
+### Understanding analyzer results using Google Sheets or LibreOffice
 
-You can also open/import the XSLX file into Google Sheets, Libre Office, Open Office, or the tool of your choice. The plain data is corretly imported, but the pivot table logic gets removed. This might be totally OK for your use case, otherwise please use the appropriate wizard in your tool to re-create the pivot tables.
+You can also open the XLSX file in Google Sheets, LibreOffice, OpenOffice, or similar tools. The raw data will be imported correctly, but PivotTables will not be preserved.
 
-The best way to work with other tools is to create your own template file in this tool and then copy and paste the analysis data from the downloaded Excel file (take everything from the AnalysisResults tab).
+In this case:
 
-If you use Google Sheets you can for example leverage this [Google Spreadsheet template](https://docs.google.com/spreadsheets/d/1ZUxGhj1twgTnXadbopw1CvZg_ZvDnB2VXRQDSrKtmcM/edit?gid=6013418#gid=6013418) that the Camunda consultants are sometimes using.
+1. Create your own PivotTable in the tool.
+2. Or copy the contents of the **AnalysisResults** tab into your own spreadsheet.
+
+For Google Sheets, consider using this [Google Spreadsheet template](https://docs.google.com/spreadsheets/d/1ZUxGhj1twgTnXadbopw1CvZg_ZvDnB2VXRQDSrKtmcM/edit?gid=6013418#gid=6013418) created by Camunda consultants.
 
 ![The Google Sheet](../img/analyzer-screenshot.png)
 
 ### Understanding analyzer results using any other tool via CSV
 
-Instead of copy and pasting data from the XSLX file, you can of course also just download the results as CSV and important this into the tool of your choice.
+Alternatively, download the results as a CSV file and import them directly into your preferred tool.
 
 ### Analyzing your models using the CLI
 
-You can also use a command line tool if you prefer. This can be useful if you want to convert many files in different locations.
+If you prefer the command line, the CLI tool is ideal for batch conversions or automation.
 
-After [local installation](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer#installation), the CLI can be called and prints a help:
+After [installation](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer#installation), run the CLI:
+
+```shell
+java -jar camunda-7-to-8-migration-analyzer-cli.jar local
+```
+
+This shows a help message:
 
 ```shell
 java -jar camunda-7-to-8-migration-analyzer-cli.jar local
@@ -161,19 +172,27 @@ Options:
 
 ### Converting your models
 
-As indicated above, the Migration Analyzer can also convert your Camunda 7 BPMN and CMN models to be executable with Camunda 8.
+As mentioned, the Migration Analyzer can also convert BPMN and DMN models for use with Camunda 8.
 
-It therefore will adjust the XML files and for example change the namespace. Refer to [technical details](../technical-details.md) to understand details around those conversions.
+This includes:
 
-The analyzer can provide converted diagrams via the web interface or CLI.
+- Updating namespaces
+- Adjusting XML structure and properties
+- Transforming expressions
 
-Note that you can extend or customize the converter to suit your needs, see [Extending the Migration Analyzer](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer?tab=readme-ov-file#how-to-extend-diagram-conversion) for details.
+Refer to [technical details](../technical-details.md) to understand more details around those conversions.
 
-If your models also contain JUEL expressions, which are not supported in Camunda 8, they also need to be converted. Simple expressions are [directly converted by this code](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer/blob/main/core/src/main/java/org/camunda/community/migration/converter/expression/ExpressionTransformer.java). You can check what it can already do in the respective [test case](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer/blob/main/core/src/test/java/org/camunda/community/migration/converter/ExpressionTransformerTest.java). You can also extend the transformer to suit your needs.
+Converted files can be downloaded via the web interface or generated via the CLI.
 
-// document the expression transformer instead of referencing code
+You can also extend the conversion logic. See [Extending the Migration Analyzer](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer?tab=readme-ov-file#how-to-extend-diagram-conversion) for details.
 
-Note that the [FEEL copilot](https://feel-copilot.camunda.com/) might be very helpful to rewrite more complex expressions for you.
+### Expression conversion
+
+JUEL expressions used in Camunda 7 are not supported in Camunda 8. The Migration Analyzer tries to convert simple expressions automatically (see [ExpressionTransformer](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer/blob/main/core/src/main/java/org/camunda/community/migration/converter/expression/ExpressionTransformer.java). For an overview of what’s supported, see the [ExpressionTransformer test case](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer/blob/main/core/src/test/java/org/camunda/community/migration/converter/ExpressionTransformerTest.java).
+
+More complex expressions may require manual rewriting. The [FEEL Copilot](https://feel-copilot.camunda.com/) can help with this.
+
+You can also customize or extend the transformer logic as needed.
 
 ## Data Migrator
 
