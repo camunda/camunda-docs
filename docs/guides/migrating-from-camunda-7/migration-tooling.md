@@ -15,26 +15,165 @@ The migration tooling is currently under development, with an initial release pl
 
 Camunda provides the following migration tools:
 
-| Migration tool                                | Description                                                                                                                                                                                                 |
-| :-------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **[Migration Analyzer](#migration-analyzer)** | Helps you gain a first understanding of migration tasks. Available for local installation (requires Java) or [hosted as a free SaaS offering](https://diagram-converter.consulting-sandbox.camunda.cloud/). |
-| **[Data Migrator](#data-migrator)**           | Copies active Camunda 7 runtime instances and existing audit trail data (history) to Camunda 8.                                                                                                             |
-| **[Code Converter](#code-converter)**         | Supported by a mixture of diagram conversion tools, code conversion patterns, and automatable refactoring recipes.                                                                                          |
-| **[Camunda 7 Adapter](#camunda-7-adapter)**   | Run existing Camunda 7 delegation code directly in a Camunda 8 environment.                                                                                                                                 |
+| Migration tool                                | Description                                                                                                                                                                                        |
+| :-------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **[Migration Analyzer](#migration-analyzer)** | Gain a first understanding of migration tasks. Available for local installation (Java or Docker) or [hosted as a free SaaS offering](https://diagram-converter.consulting-sandbox.camunda.cloud/). |
+| **[Data Migrator](#data-migrator)**           | Copies active Camunda 7 runtime instances and existing audit trail data (history) to Camunda 8.                                                                                                    |
+| **[Code Converter](#code-converter)**         | Supported by a mixture of diagram conversion tools, code conversion patterns, and automatable refactoring recipes.                                                                                 |
+| **[Camunda 7 Adapter](#camunda-7-adapter)**   | Run existing Camunda 7 delegation code directly in a Camunda 8 environment.                                                                                                                        |
 
 ## Migration Analyzer
 
-Camunda is developing the **Migration Analyzer**, a tool to gain a first understanding of migration tasks. This tool is based on the existing [diagram converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/backend-diagram-converter), which can be used via CLI to produce a CSV file with tasks in your model. Our consultants then import this data into a [Google Spreadsheet template](https://docs.google.com/spreadsheets/d/1ZUxGhj1twgTnXadbopw1CvZg_ZvDnB2VXRQDSrKtmcM/edit?gid=6013418#gid=6013418) to analyze what tasks need to be done to migrate.
+The **Migration Analyzer** is a tool to gain a first understanding of migration tasks. It analyzes Camunda 7 model files (BPMN or DMN) and derives a list of tasks you will need to do when migrating those models to Camunda 8.
 
-:::info
-The [existing diagram converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/backend-diagram-converter) can be used today. UI and reporting will be added and documentation will be extended. The initial release is **planned for 8.8**. Iterative improvements will follow.
-:::
+In a second step, it can also convert those filese from the Camunda 7 to the Camunda 8 format. For example, it adjusts the namespace or adjust XML property names if they have changed.
 
-For example, the following image shows a sample report.
+The identified tasks are grouped by severity:
 
-![A screenshot of the Migration Analyzer tool](../img/analyzer-screenshot.png)
+- INFO: Just a feedback that some elements need to change, but they can be converted automatically
+- REVIEW: A hint, that the automatic conversion did some work, that requires at least a review. For example, there is a simplified conversion of expressions that always need a human eye.
+- TASK: You have to adjust the converted model or add additional information to make it work with Camunda 8.
+- WARNING: You will have to look into this finding. A warning could for example indicate, that an element of the original process is not (yet) supported by Camunda 8.
 
-Performing this analysis will help you understand what needs to be done to migrate.
+This allows you to focus on important findings. You can further group tasks by their type, so for example changing a JavaDelegate to a JobWorker might occur 100 times in your codebase, but is still one and the same pattern.
+
+You can use the Migration Analyzer in the following ways:
+
+- **Web Interface**: An interactive web-based wizard, implemented as a Java Spring Boot + React application. This can be installed
+  - locally as Java jar,
+  - using Docker, or
+  - consumed as SaaS from our free hosted version.
+- **CLI**: A Command-Line Interface for the Migration Analyzer, implemented as a Java application.
+
+The results of the analysis is provided as:
+
+- **XSLS**: Microsoft Excel file, that includes pre-built Pivot tables to drill into the data properly,
+- **CSV**: As comma-separated list, which can be imported into any spreadsheet tool you like to use.
+
+Let's go over this step-by-step:
+
+- [How to install?](#installation)
+- [How to analyze your models?](#analyzing-your-models-using-the-web-interface)
+- [How to convert your models?](#converting-your-models)
+
+### Installation
+
+Please refer to the [Installation Guide](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer#installation) for local installation.
+
+For a free SaaS version that can be used right away, just navigate to [https://diagram-converter.consulting-sandbox.camunda.cloud/](https://diagram-converter.consulting-sandbox.camunda.cloud/).
+
+### Analyzing your models using the Web Interface
+
+After [local installation](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer#installation), you can access the Migration Analyzer via [http://localhost:8080/](http://localhost:8080/) (or you use the [SaaS deployment](https://diagram-converter.consulting-sandbox.camunda.cloud/) that doesn't require any local installation).
+
+The wizard should be self-explantory. You simply upload one or more models and click **analyze**:
+
+![A screenshot of the Migration Analyzer tool](../img/analyzer-screenshot1.png)
+
+Now you can:
+
+- Download the analyzer result as Microsoft Excel file
+- Download the analyzer result as CSV file
+- Download the converted models either indicidually or as complete ZIP file.
+
+Let's explore how to use those results.
+
+### Understanding analyzer results using Microsoft Excel
+
+![The MS Excel result](../img/analyzer-result-excel.png)
+
+The XLSX file contains three tabs:
+
+- AnalysisSummary: Some PivotTables and Diagrams showing typical analysis tasks. Feel free to adjust to your needs.
+- PivotTable: One big pivot table that allows to dynamically explore the data set. Feel free to adjust to your needs.
+- AnalysisResults: The raw data provided by the analysis step. This can also be copied in any other spreadhseet or crunched in the way that is helpful to you.
+
+Note that this file can be either opened with a local installation of Microsoft Excel or the online equivalent in Office 365.
+
+### Understanding analyzer results using Google Sheets or Libre Office
+
+You can also open/import the XSLX file into Google Sheets, Libre Office, Open Office, or the tool of your choice. The plain data is corretly imported, but the pivot table logic gets removed. This might be totally OK for your use case, otherwise please use the appropriate wizard in your tool to re-create the pivot tables.
+
+The best way to work with other tools is to create your own template file in this tool and then copy and paste the analysis data from the downloaded Excel file (take everything from the AnalysisResults tab).
+
+If you use Google Sheets you can for example leverage this [Google Spreadsheet template](https://docs.google.com/spreadsheets/d/1ZUxGhj1twgTnXadbopw1CvZg_ZvDnB2VXRQDSrKtmcM/edit?gid=6013418#gid=6013418) that the Camunda consultants are sometimes using.
+
+![The Google Sheet](../img/analyzer-screenshot.png)
+
+### Understanding analyzer results using any other tool via CSV
+
+Instead of copy and pasting data from the XSLX file, you can of course also just download the results as CSV and important this into the tool of your choice.
+
+### Analyzing your models using the CLI
+
+You can also use a command line tool if you prefer. This can be useful if you want to convert many files in different locations.
+
+After [local installation](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer#installation), the CLI can be called and prints a help:
+
+```shell
+java -jar camunda-7-to-8-migration-analyzer-cli.jar local
+Missing required parameter: '<file>'
+Usage: backend-diagram-converter-cli local [-dhoV] [--check] [--csv]
+       [--delegate-execution-as-job-type] [--disable-append-elements]
+       [--disable-default-job-type] [--md] [-nr]
+       [--default-job-type=<defaultJobType>]
+       [--platform-version=<platformVersion>] [--prefix=<prefix>] <file>
+Converts the diagram from the given directory or file
+
+Execute as:
+
+java -Dfile.encoding=UTF-8 -jar backend-diagram-converter-cli.jar local
+
+Parameter:
+      <file>                 The file to convert or directory to search in
+Options:
+      --check                If enabled, no converted diagrams are exported
+      --csv                  If enabled, a CSV file will be created containing
+                               the conversions results
+      --xslx                 If enabled, a XSLX file will be created containing
+                               the analysis results
+  -d, --documentation        If enabled, messages are also appended to
+                               documentation
+      --default-job-type=<defaultJobType>
+                             If set, the default value from the
+                               'converter-properties.properties' for the job
+                               type is overridden
+      --delegate-execution-as-job-type, --delegate-expression-as-job-type
+                             If enabled, sets the delegate expression as the
+                               job type
+      --disable-append-elements
+                             Disables adding conversion messages to the bpmn xml
+      --disable-default-job-type
+                             Disables the default job type
+  -h, --help                 Show this help message and exit.
+      --md, --markdown       If enabled, a markdown file will be created
+                               containing the results for all conversions
+      -nr, --not-recursive   If enabled, recursive search in subfolders will be
+                               omitted
+  -o, --override             If enabled, existing files are overridden
+      --platform-version=<platformVersion>
+                             Semantic version of the target platform, defaults
+                               to latest version
+      --prefix=<prefix>      Prefix for the name of the generated file
+                               Default: converted-c8-
+  -V, --version              Print version information and exit.
+```
+
+### Converting your models
+
+As indicated above, the Migration Analyzer can also convert your Camunda 7 BPMN and CMN models to be executable with Camunda 8.
+
+It therefore will adjust the XML files and for example change the namespace. Refer to [technical details](../technical-details.md) to understand details around those conversions.
+
+The analyzer can provide converted diagrams via the web interface or CLI.
+
+Note that you can extend or customize the converter to suit your needs, see [Extending the Migration Analyzer](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer?tab=readme-ov-file#how-to-extend-diagram-conversion) for details.
+
+If your models also contain JUEL expressions, which are not supported in Camunda 8, they also need to be converted. Simple expressions are [directly converted by this code](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer/blob/main/core/src/main/java/org/camunda/community/migration/converter/expression/ExpressionTransformer.java). You can check what it can already do in the respective [test case](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer/blob/main/core/src/test/java/org/camunda/community/migration/converter/ExpressionTransformerTest.java). You can also extend the transformer to suit your needs.
+
+// document the expression transformer instead of referencing code
+
+Note that the [FEEL copilot](https://feel-copilot.camunda.com/) might be very helpful to rewrite more complex expressions for you.
 
 ## Data Migrator
 
