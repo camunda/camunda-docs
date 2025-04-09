@@ -328,7 +328,7 @@ the environment variable.
 ## Legacy Zeebe records
 
 With the introduction of the Camunda Exporter, the Elasticsearch and OpenSearch Exporter no longer exports all record types by default.
-Meaning that not all `zeebe-record` indices will be populated.
+Meaning that not all `zeebe-record` indices will be created and populated.
 
 The record types that continue to be exported by default are the following:
 
@@ -337,6 +337,6 @@ The record types that continue to be exported by default are the following:
 - `PROCESS_INSTANCE`
 - `VARIABLE`
 - `USER_TASK`
-- `VARIABLE`
+- `INCIDENT`
 
 If there is still need for other record types to be exported you can still do so by enabling the configuration property [exportLegacyRecords](#configuration)
