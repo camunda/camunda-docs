@@ -224,9 +224,7 @@ To avoid this, set the `skipEncoding` value to `"true"` in the element template 
 
 ## Response
 
-The HTTP response will be available in a temporary local `response` variable. This variable can be mapped to the process by specifying the **Result variable**.
-
-The following fields are available in the `response` variable:
+The following variables are available in the context of the response expression:
 
 - **status**: Response status
 - **body**: Response body of your request
