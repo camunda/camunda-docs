@@ -85,6 +85,14 @@ Automation leaders can visualize all automation projects through a single, hiera
 
 <!-- https://github.com/camunda/product-hub/issues/2611 -->
 
+### Integrate additional Kubernetes definitions <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+
+The Camunda 8 Helm chart now allows custom Kubernetes manifests to be injected into your `values.yaml`. This enables you to add additional Kubernetes resources such as ConfigMaps, Deployments, or Services into your deployment without modifying the Helm chart itself.
+
+For more information, visit the [documentation on injecting Kubernetes manifests](/self-managed/setup/guides/add-extra-manifests.md).
+
+<!--- https://github.com/camunda/product-hub/issues/2464 --->
+
 ### Intelligent Document Processing (IDP) <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span> {#idp}
 
 Use intelligent document processing (IDP) to integrate automated document processing into your end-to-end processes.
