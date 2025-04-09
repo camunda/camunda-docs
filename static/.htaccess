@@ -219,6 +219,16 @@ RewriteRule ^optimize/self-managed/optimize-deployment/configuration/event-based
 # Moved API endpoint in 8.6
 RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/report-error-for-job/?$ /docs/apis-tools/camunda-api-rest/specifications/throw-job-error/ [R=301,L]
 
+# Restructure announcements and release notes for 8.7
+RewriteRule ^docs/reference/announcements/announcements-850/?$ /docs/8.7/reference/announcements-release-notes/850/850-announcements/$1 [R=301,L]
+RewriteRule ^docs/reference/release-notes/850/?$ /docs/8.7/reference/announcements-release-notes/850/850-release-notes/$1 [R=301,L]
+RewriteRule ^docs/reference/announcements/announcements-860/?$ /docs/8.7/reference/announcements-release-notes/860/860-announcements/$1 [R=301,L]
+RewriteRule ^docs/reference/release-notes/860/?$ /docs/8.7/reference/announcements-release-notes/860/860-release-notes/$1 [R=301,L]
+RewriteRule ^docs/reference/release-notes/870/?$ /docs/8.7/reference/announcements-release-notes/870/870-release-notes/$1 [R=301,L]
+RewriteRule ^docs/reference/release-policy/?$ /docs/8.7/reference/announcements-release-notes/release-policy/$1 [R=301,L]
+RewriteRule ^docs/reference/release-notes/release-notes/?$ /docs/8.7/reference/announcements-release-notes/overview/$1 [R=301,L]
+RewriteRule ^docs/reference/announcements/?$ /docs/8.7/reference/announcements-release-notes/overview/$1 [R=301,L]
+
 # Restructure announcements and release notes for 8.6
 RewriteRule ^docs/reference/announcements/announcements-850/?$ /docs/reference/announcements-release-notes/850/850-announcements/$1 [R=301,L]
 RewriteRule ^docs/reference/release-notes/850/?$ /docs/reference/announcements-release-notes/850/850-release-notes/$1 [R=301,L]
