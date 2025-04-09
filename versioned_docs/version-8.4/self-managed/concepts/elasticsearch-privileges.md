@@ -8,8 +8,8 @@ If you implement Camunda 8 with Elasticsearch as a service provider, the followi
 ## Cluster privileges
 
 - `monitor` - Required to check the Elasticsearch cluster health. This privilege provides read-only cluster operations permissions.
-- `manage_index_templates` - Creates the necessary index templates when Operate, Tasklist, and Optimize are started for the first time, or when updating to a newer version of Camunda 8. Once the index templates are created, you can stop the Component, remove this privilege, and then start Component again.
-- `manage_ilm` - _Required when index lifecycle management (ILM) is enabled._ Required to create the necessary ILM policies when Operate, Tasklist, and Optimize are started for the first time, or when updating to a newer version of Camunda 8. Once the ILM policies are created, you can stop the Component, remove this privilege, and then start the Component again.
+- `manage_index_templates` - Creates the necessary index templates when Zeebe, Operate, Tasklist, and Optimize are started for the first time, or when updating to a newer version of Camunda 8. Once the index templates are created, you can stop the Component, remove this privilege, and then start Component again.
+- `manage_ilm` - _Required when index lifecycle management (ILM) is enabled._ Required to create the necessary ILM policies when Zeebe, Operate, and Tasklist are started for the first time, or when updating to a newer version of Camunda 8. Once the ILM policies are created, you can stop the Component, remove this privilege, and then start the Component again.
 
 ### Backup privileges
 
