@@ -169,6 +169,6 @@ Certain dependencies used by Camunda 8, however, may have a shorter maintenance 
 
 Many server side components, such as the **Camunda Orchestration Cluster**, are Spring Boot applications, and leverage Spring Boot (and the wider Spring ecosystem) to execute fundamental functionality such as application configuration, REST infrastructure (including security), production ready features, etc.
 
-Spring, however, has a shorter maintenance window than Camunda for its OSS offering: versions are only supported for 12 months, versus Camunda's 18 months. To circumvent this, server side components of Camunda 8 patch releases also update Spring (and Spring Boot) minor versions, such that the latest patch release of these components uses a supported Spring version.
+However, Spring has a shorter maintenance window than Camunda for its open-source software (OSS) offering. Versions are only supported for 12 months, versus Camunda's 18 months. To circumvent this, server-side components of Camunda 8 patch releases also update Spring (and Spring Boot) minor versions, such that the latest patch release of these components uses a supported Spring version.
 
-As for libraries and SDKs meant to be included in third-party applications, Camunda follows a best effort policy to balance compatibility and securing Spring-dependent libraries.
+As for libraries and SDKs meant to be included in third-party applications, Camunda follows a best effort policy to balance compatibility and secure Spring-dependent libraries.
