@@ -159,11 +159,11 @@ You can also use newer versions of Desktop and Web Modeler with older versions o
 
 ## Dependency maintenance policies
 
-Camunda provides [a standard support policy](https://camunda.com/release-policy/) of 18 months for a particular minor version, from the date it is released.
-During this time, patches are regularly released which contain security and bug fixes, some of which may come from dependency updates. As such, for the
-vast majority of dependencies, Camunda _only_ applies patch updates.
+Camunda provides [a standard support policy](https://camunda.com/release-policy/) of 18 months for a particular minor version from the date it is released.
+During this time, patches are regularly released containing security and bug fixes, some of which may come from dependency updates. Therefore, for the
+vast majority of dependencies Camunda _only_ applies patch updates.
 
-Certain dependencies used by Camunda 8, however, may have a shorter maintenance policy than Camunda itself. For those dependencies which are integral to its functionality, Camunda may adopt a different update policy, as listed below.
+However, certain dependencies used by Camunda 8 may have a shorter maintenance policy than Camunda itself. Camunda may adopt a different update policy for these dependencies, as listed below.
 
 ### Spring
 
