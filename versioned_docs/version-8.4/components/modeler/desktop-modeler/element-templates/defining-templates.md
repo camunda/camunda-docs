@@ -13,12 +13,16 @@ Templates are defined in template descriptor files as a JSON array:
     "name": "Template 1",
     "id": "sometemplate",
     "description": "some description",
+    "keywords": [
+      "search alias",
+      "create action"
+    ],
     "version": 1,
     "appliesTo": [
       "bpmn:Task"
     ],
     "elementType": {
-      "value": "bpmn:ServiceTask",
+      "value": "bpmn:ServiceTask"
     },
     "properties": [
       ...
@@ -49,6 +53,7 @@ Example:
 - `name : String`: Name of the template. Shown in the element template selection modal and in the properties panel (after applying an element template).
 - `id : String`: ID of the template.
 - `description : String`: Optional description of the template. Shown in the element template selection modal and in the properties panel (after applying an element template).
+- `keywords: Array<String>`: Optional list of keywords. Can be used to help users find this template. Keywords are used for search and filtering but are not displayed in the UI.
 - `documentationRef : String`: Optional URL pointing to a template documentation. Shown in the properties panel (after applying an element template).
 - `version : Integer`: Optional version of the template. If you add a version to a template, it is considered unique based on its ID and version. Two templates can have the same ID if their version is different.
 - `appliesTo : Array<String>`: List of BPMN types the template can be applied to.
