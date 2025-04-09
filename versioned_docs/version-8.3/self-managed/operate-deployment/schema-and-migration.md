@@ -85,9 +85,9 @@ Automatic migration is enabled by default. It can be disabled by setting the con
 `camunda.operate.migration.migrationEnabled = false`
 
 :::note
-When running multiple instances of the Operate application and/or the Operate Importer the `camunda.operate.migration.migrationEnabled` property should be enabled only on one of the instances. Even though the migration processes themselves are idempotent, there is a chance that one of the instances fail to apply the migration.
+When running multiple instances of Operate or the Operate Importer, the `camunda.operate.migration.migrationEnabled` property should be enabled only on one of the instances. Even though the migration processes themselves are idempotent, there is a chance one of the instances fails to apply the migration.
 
-As a side effect of this, there is a possibility that Elasticsearch index settings are left modified with `refresh_interval=-1` causing the data not to be refreshed thus not visible.
+As a side effect of this, there is a possibility Elasticsearch index settings are left modified with `refresh_interval=-1`, causing the data to not be refreshed and thus not visible.
 
 :::
 
