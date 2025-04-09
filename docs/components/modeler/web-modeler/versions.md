@@ -102,13 +102,13 @@ You can create a new diagram by copying a specific version.
 1. Select **Copy to...**.
 1. Choose a project/folder and select **Copy here** to create the new diagram in the chosen folder.
 
-## Rename a version
+## Update a version
 
-You can rename a version at any time.
+You can update a version name and description at any time.
 
 1. In the sidebar **Versions** list, hover over the version you want to rename.
 1. Select the three vertical dots to open the actions menu.
-1. Select **Edit name** and enter a new name for the version.
+1. Select **Edit** and enter a new name and/or description for the version.
 
 ## Delete a version
 

@@ -32,7 +32,7 @@ When you open the versions page (use the **Show versions** button in the **Versi
 You can perform the following actions on a process application version:
 
 1. Restore as latest, useful for reverting changes, making further edits, [git syncing](/components/modeler/web-modeler/git-sync.md), downloading, or using Play.
-2. Edit name
+2. Edit
 3. Deploy, especially after the version has been [reviewed](/components/modeler/web-modeler/process-application-pipeline.md#review).
 4. Download
 5. Delete
