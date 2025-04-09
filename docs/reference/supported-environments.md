@@ -165,10 +165,10 @@ vast majority of dependencies Camunda _only_ applies patch updates.
 
 However, certain dependencies used by Camunda 8 may have a shorter maintenance policy than Camunda itself. Camunda may adopt a different update policy for these dependencies, as listed below.
 
-### Spring
+### Spring Boot
 
-Many server side components, such as the **Camunda Orchestration Cluster**, are Spring Boot applications, and leverage Spring Boot (and the wider Spring ecosystem) to execute fundamental functionality such as application configuration, REST infrastructure (including security), production ready features, etc.
+The **Camunda Orchestration Cluster** is a Spring Boot application and leverages Spring Boot to execute fundamental functionality such as application configuration, REST infrastructure (including security), production ready features, etc.
 
-However, Spring has a shorter maintenance window than Camunda for its open-source software (OSS) offering. Versions are only supported for 12 months, versus Camunda's 18 months. To circumvent this, server-side components of Camunda 8 patch releases also update Spring (and Spring Boot) minor versions, such that the latest patch release of these components uses a supported Spring version.
+However, Spring Boot has a shorter maintenance window than Camunda for its open-source software (OSS) offering. [Versions are only supported for 13 months](https://spring.io/projects/spring-boot#support), versus Camunda's 18 months. To circumvent this, the **Orchestration Cluster** patch releases also update Spring Boot minor versions, such that the latest patch release of these components uses a supported Spring version.
 
 As for libraries and SDKs meant to be included in third-party applications, Camunda follows a best effort policy to balance compatibility and secure Spring-dependent libraries.
