@@ -100,7 +100,7 @@ To ensure process isolation, note that Connectors do not have access to process 
 
 :::note
 While using this field, a process variable with the name `response` is reserved.
-It should only be used when a connector returns atomic values like a string or a number.
+It should only be used when a Connector returns atomic values like a string or a number.
 :::
 
 #### Example
@@ -306,7 +306,7 @@ jobError("job failed")
 
 #### HTTP errors to BPMN errors
 
-Using the [REST Connector](/components/connectors/protocol/rest.md), you can handle HTTP errors directly in your business process model by setting a Header named `errorExpression` with the following value:
+Using the [REST Connector](/components/connectors/protocol/rest.md), you can handle HTTP errors directly in your business process model by setting a header named `errorExpression` with the following value:
 
 ```feel
 if error.code = "404" then
@@ -320,11 +320,11 @@ else
 ```
 
 This will create BPMN errors for HTTP requests that return with a status [404](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404) or [500](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500).
-You can extend that list to all HTTP errors you can handle as business use cases, e.g. by informing a website administrator directly via Slack using the [Slack Connector](/components/connectors/out-of-the-box-connectors/slack.md).
+You can extend that list to all HTTP errors you can handle as business use cases, for example by informing a website administrator directly via Slack using the [Slack Connector](/components/connectors/out-of-the-box-connectors/slack.md).
 
 #### Response value to BPMN error
 
-Using the [REST Connector](/components/connectors/protocol/rest.md) or any other Connector that returns a result, you can handle a response as BPMN error based on its value, by setting a Header named `errorExpression` with the following value:
+Using the [REST Connector](/components/connectors/protocol/rest.md) or any other Connector that returns a result, you can handle a response as a BPMN error based on its value, by setting a header named `errorExpression` with the following value:
 
 ```feel
 if response.body.main.humidity < 0 then

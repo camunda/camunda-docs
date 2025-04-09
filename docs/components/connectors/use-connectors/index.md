@@ -117,7 +117,7 @@ To ensure process isolation, note that Connectors do not have access to process 
 
 :::note
 While using this field, a process variable with the name `response` is reserved.
-It should only be used when a connector returns atomic values like a string or a number.
+It should only be used when a Connector returns atomic values like a string or a number.
 :::
 
 #### Example
@@ -222,10 +222,10 @@ In that case, you could declare `Result Expression` as follows:
 
 Being able to deal with exceptional cases is a common requirement for business process models. Read more about our
 general best practices around this topic
-in [dealing with exceptions](/components/best-practices/development/dealing-with-problems-and-exceptions.md).
+in [dealing with problems and exceptions](/components/best-practices/development/dealing-with-problems-and-exceptions.md).
 
 Connectors share this requirement for exception handling like any other task in a model. However, Connectors define
-reusable runtime behavior that is not aware of your specific business use case. Thus, they can not determine if an
+reusable runtime behavior that is not aware of your specific business use case. Thus, they cannot determine if an
 exceptional case is a technical or business error.
 Therefore, a Connector's runtime behavior cannot throw BPMN errors, but only technical errors. However, those technical
 errors can optionally contain an error code as structured data that can be reused when configuring a Connector task.
@@ -353,7 +353,7 @@ jobError("job failed")
 #### HTTP errors to BPMN errors
 
 Using the [REST Connector](/components/connectors/protocol/rest.md), you can handle HTTP errors directly in your
-business process model by setting a Header named `errorExpression` with the following value:
+business process model by setting a header named `errorExpression` with the following value:
 
 ```feel
 if error.code = "404" then
@@ -369,13 +369,13 @@ else
 This will create BPMN errors for HTTP requests that return with a
 status [404](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404)
 or [500](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500).
-You can extend that list to all HTTP errors you can handle as business use cases, e.g. by informing a website
+You can extend that list to all HTTP errors you can handle as business use cases, for example by informing a website
 administrator directly via Slack using the [Slack Connector](/components/connectors/out-of-the-box-connectors/slack.md).
 
 #### Response value to BPMN error
 
 Using the [REST Connector](/components/connectors/protocol/rest.md) or any other Connector that returns a result, you
-can handle a response as BPMN error based on its value, by setting a Header named `errorExpression` with the following
+can handle a response as a BPMN error based on its value, by setting a header named `errorExpression` with the following
 value:
 
 ```feel
