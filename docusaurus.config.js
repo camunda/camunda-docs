@@ -218,7 +218,7 @@ module.exports = {
       },
     ],
     [
-      // Zeebe REST API docs generation (removed at v8.7)
+      // Zeebe REST API docs generation
       "docusaurus-plugin-openapi-docs",
       {
         id: "api-zeebe-openapi",
@@ -235,7 +235,13 @@ module.exports = {
             label: "Unused but required field",
             baseUrl: "Unused but required field",
             versions: {
-              // Removed after 8.6
+              8.7: {
+                specPath: "api/zeebe/version-8.7/zeebe-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.7/apis-tools/zeebe-api-rest/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
               8.6: {
                 specPath: "api/zeebe/version-8.6/zeebe-openapi.yaml",
                 outputDir:
@@ -418,7 +424,7 @@ module.exports = {
               href: "https://camunda.com/blog/tag/camunda-platform-8/",
             },
             {
-              label: "Release cycle",
+              label: "Release policy",
               to: "docs/reference/announcements-release-notes/release-policy",
             },
           ],
@@ -523,16 +529,13 @@ module.exports = {
             current: {
               label: "8.8 (unreleased)",
             },
-            8.7: {
-              label: "8.7 (unreleased)",
+            8.6: {
+              banner: "none",
             },
             8.5: {
               banner: "none",
             },
             8.4: {
-              banner: "none",
-            },
-            8.3: {
               banner: "none",
             },
           },
@@ -549,10 +552,10 @@ module.exports = {
             "/docs/**/assets/**",
             "/docs/**/tags/**",
             "/docs/next/**",
-            "/docs/8.7/**",
             "/docs/8.3/**",
             "/docs/8.4/**",
             "/docs/8.5/**",
+            "/docs/8.6/**",
           ],
         },
       },
