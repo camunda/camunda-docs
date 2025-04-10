@@ -73,14 +73,16 @@ On this screen you can now:
 - Download the analyzer results as CSV file
 - Download the converted models (individually or as ZIP)
 
-Note that identified tasks are grouped by severity:
+Analysis results contain a list of items, where each row represents an action item required for migrating your solution to Camunda 8. Those items are grouped by severity:
 
-- **INFO**: Informational feedback. These elements are changed automatically.
-- **REVIEW**: Changes were made automatically, but should be reviewed. For example, expressions are simplified, which always require a human check.
+- **INFO**: No action needed. Diagram conversion can successfully map attributes to the Camunda 8 implementation.
+- **REVIEW**: The convertion will modify some expressions or attributes. Please verify that the intended functionality remains unchanged.
+- **WARNING**: A Camunda 7 concept can not be directly mapped to a Camunda 8 equivalent. Consider reviewing the Camunda 8 roadmap or exploring possible workarounds.
 - **TASK**: Manual changes are required to make the model work in Camunda 8.
-- **WARNING**: Manual investigation needed. Warnings often indicate that elements from the original process are not yet supported in Camunda 8.
 
 This allows you to focus on the most important findings. Tasks can also be grouped by type. For example, changing a `JavaDelegate` to a `JobWorker` might appear 100 times in your codebase, but still represents just one recurring pattern.
+
+Pivot tables can help you identify tasks that appear multiple times across different files, providing a comprehensive overview of migration efforts.
 
 Let’s take a closer look at how to use those results.
 
