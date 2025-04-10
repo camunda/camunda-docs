@@ -81,7 +81,7 @@ If your models also contain JUEL expressions, which are not supported in Camunda
 
 Simple expressions are [directly converted by this code in the Diagram Converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/blob/main/backend-diagram-converter/core/src/main/java/org/camunda/community/migration/converter/expression/ExpressionTransformer.java). This can be extended to suit your needs.
 
-// document the expression transformer instead of referencing code
+// TODO document the expression transformer instead of referencing code
 
 You can use the [FEEL copilot](https://feel-copilot.camunda.com/) to rewrite more complex expressions for you.
 
