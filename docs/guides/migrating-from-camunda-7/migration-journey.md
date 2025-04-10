@@ -49,9 +49,9 @@ But first, let's understand orientation in more detail.
 
 ### Analyze your solution
 
-Camunda is developing the **Migration Analyzer**, a tool to understand migration tasks. This tool is based on the existing [diagram converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/backend-diagram-converter), which can be used via CLI to produce a CSV file with tasks in your model. Our consultants then import this data into a [Google Spreadsheet template](https://docs.google.com/spreadsheets/d/1ZUxGhj1twgTnXadbopw1CvZg_ZvDnB2VXRQDSrKtmcM/edit?gid=6013418#gid=6013418) to analyze what tasks need to be done to migrate. The following screenshot shows a sample report.
+Use the [**Migration Analyzer**](./migration-tooling.md#migration-analyzer) to understand migration tasks.
 
-![A screenshot from the Migration Analyzer tool](../img/analyzer-screenshot.png)
+![Sample results from the Migration Analyzer tool](../img/analyzer-result-excel.png)
 
 To add some real-world flavor: In a customer scenario, our consultants ran 400 BPMN files through the tool, resulting in roughly 12,000 lines of findings. Analyzing those lines using the spreadsheet reduced that number to roughly 30 different types of tasks, making the migration project manageable.
 
@@ -286,19 +286,15 @@ This step is optional and can also be skipped, either because the codebase is al
 
 Your BPMN and DMN models need to be adjusted.
 
-The [Diagram Converter](./migration-tooling.md) takes care of most changes. Depending on how you refactor your code and what elements of Camunda 7 you have used, you can extend or customize the diagram converter to suit your needs.
+The [Migration Analyzer](./migration-tooling.md#migration-analyzer) can do most changes for you. Depending on how you refactor your code and what elements of Camunda 7 you have used, you can extend or customize the diagram convertion to suit your needs.
 
-You can dive into the [technical details of model differences](./technical-details.md) if you are interested in more detail.
+You can dive into the [technical details of model differences](./migration-tooling.md#extending-the-conversion-logic) if you are interested in more detail.
 
 ### Convert expressions
 
 Your models might contain JUEL expressions, which are not supported in Camunda 8.
 
-Simple expressions are [directly converted by this code in the Diagram Converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/blob/main/backend-diagram-converter/core/src/main/java/org/camunda/community/migration/converter/expression/ExpressionTransformer.java).
-
-// TODO do not link to this code directly, instead create an extensive documentation about the concept
-
-You can use the [FEEL copilot](https://feel-copilot.camunda.com/) to rewrite more complex expressions for you.
+Simple expressions are directly converted by the [Migration Analyzer](./migration-tooling.md#expression-conversion). You can also use the [FEEL copilot](https://feel-copilot.camunda.com/) to rewrite more complex expressions for you.
 
 Check the [code conversion patterns section](./code-conversion.md) for more complicated scenarios.
 
