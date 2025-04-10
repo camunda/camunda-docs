@@ -298,7 +298,7 @@ camunda:
 
 #### Max message size
 
-A custom `maxMessageSize` allows the client to receive larger or smaller responses from Zeebe. Technically, it specifies the `maxInboundMessageSize` of the gRPC channel (default 4MB):
+A custom `maxMessageSize` allows the client to receive larger or smaller responses from Zeebe. Technically, it specifies the `maxInboundMessageSize` of the gRPC channel (default 5MB):
 
 ```yaml
 camunda:

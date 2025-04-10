@@ -15,9 +15,9 @@ These release notes identify the new features included in 8.7, including [alpha 
 
 ## 8.7 minor
 
-| Scheduled release date | Scheduled end of maintenance | Changelog(s)                                                                                                                                                                               | Release blog                                                          | Update guide                                                                |
-| ---------------------- | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| 8 April 2025           | 13 October 2026              | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.8.0-alpha3)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.8.0-alpha3)</li></ul> | [Release blog](https://camunda.com/blog/2025/04/camunda-8-7-release/) | [Update guide](/self-managed/operational-guides/update-guide/860-to-870.md) |
+| Scheduled release date | Scheduled end of maintenance | Changelog(s)                                                                                                                                                                 | Release blog                                                          | Update guide                                                                |
+| ---------------------- | ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| 8 April 2025           | 13 October 2026              | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.7.0)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.7.0)</li></ul> | [Release blog](https://camunda.com/blog/2025/04/camunda-8-7-release/) | [Update guide](/self-managed/operational-guides/update-guide/860-to-870.md) |
 
 ### AWS EKS and AWS OpenShift (ROSA) reference architecture <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
@@ -61,7 +61,7 @@ To learn more about this feature, see [manage your connectors](/components/conso
 
 ### Custom JWKS and JWT Algorithms Support <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-Self-managed customers now have [full control over JWT configurations](/self-managed/modeler/web-modeler/configuration/configuration.md) for enhanced security and compatibility.
+Self-Managed customers now have [full control over JWT configurations](/self-managed/modeler/web-modeler/configuration/configuration.md) for enhanced security and compatibility.
 
 <!--- https://github.com/camunda/web-modeler/issues/11571 --->
 
@@ -88,6 +88,14 @@ Step through [a detailed tutorial for deploying two Red Hat OpenShift on AWS (RO
 Automation leaders can visualize all automation projects through a single, hierarchical source of truth of approved processes. Specifically, there are new features for copying reviewed process application versions to a central project where every org member can be invited with a single click. Now, users can more easily communicate their automation efforts and maximize asset reuse.
 
 <!-- https://github.com/camunda/product-hub/issues/2611 -->
+
+### Integrate additional Kubernetes definitions <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+
+The Camunda 8 Helm chart now allows custom Kubernetes manifests to be injected into your `values.yaml`. This enables you to add additional Kubernetes resources such as ConfigMaps, Deployments, or Services into your deployment without modifying the Helm chart itself.
+
+For more information, visit the [documentation on injecting Kubernetes manifests](/self-managed/setup/guides/add-extra-manifests.md).
+
+<!--- https://github.com/camunda/product-hub/issues/2464 --->
 
 ### Intelligent Document Processing (IDP) <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span> {#idp}
 
@@ -124,33 +132,18 @@ Create and append tasks with resources available in the current project and proc
 
 ### Known bugs in the 8.7.0 release
 
-- **https://github.com/camunda/issues/issues/932**: When changing the element type of an inbound start event Connector to a blank start event type, the inbound Connector properties are not removed.
-  - Affects: Web Modeler
-  - Work-around: Delete and re-create the BPMN element.
-- **https://github.com/camunda/camunda/issues/26079**: Fields in AI-generated user forms may not be editable for certain Chrome browser versions.
-  - Affects: Web Modeler / Tasklist
-  - Work-around: Manually recreate the form.
-- **https://github.com/camunda/camunda/issues/29755**: Tasklist backups do not complete if the request for taking a snapshot times out.
-  - Affects: Tasklist
-  - Work-around: Retry taking a backup; increase backup frequency.
-- **https://github.com/camunda/camunda/issues/29182**: Operate backups do not complete if the request for taking a snapshot times out.
-  - Affects: Operate
-  - Work-around: Retry taking a backup; increase backup frequency.
-- **https://github.com/camunda/camunda/issues/28498**: In rare situations, PDFs cannot be previewed due to the used browser.
-  - Affects: Tasklist
-  - Work-around: Use a different browser; clear browser cache.
-- **https://github.com/camunda/camunda-platform-helm/issues/3135**: Incomplete Connectors configuration for Entra ID usage.
-  - Affects: Connectors
-  - Work-around: Set an environment variable with the token scope for Operate (see [issue](https://github.com/camunda/camunda-platform-helm/issues/3135)).
-- **https://github.com/camunda/camunda/issues/29526**: Files are not uploaded to the document storage when starting a process with a start form from Web Modeler or Play.
-  - Affects: Document handling / Web Modeler
-  - Work-around: Start the process from Tasklist or REST API.
-- **https://github.com/camunda/camunda/issues/25443**: File picker does not display the name of the uploaded file for completed tasks.
-  - Affects: Tasklist
-  - Work-around: File name can be viewed in Operate.
-- **https://github.com/camunda/camunda/issues/28375**: File upload fails to AWS storage due to non UTF-8 whitespace character in filename.
-  - Affects: Tasklist
-  - Work-around: When using AWS S3 storage, use UTF-8 compatible characters.
+| Bug / issue                                                                                                                                              | Description                                                                                                                                                                                                                                                                                                                                        |
+| :------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [XML keeps inbound.type after changing element (#932)](https://github.com/camunda/issues/issues/932)                                                     | <p>When changing the element type of an inbound start event Connector to a blank start event type, the inbound Connector properties are not removed.</p><p><ul><li>**Affects:** Web Modeler</li><li>**Workaround**: Delete and re-create the BPMN element.</li></ul></p>                                                                           |
+| [Fields in Tasklist are not editable for AI-Generated forms (#26079)](https://github.com/camunda/camunda/issues/26079)                                   | <p>Fields in AI-generated user forms may not be editable for certain Chrome browser versions.</p><p><ul><li>**Affects:** Web Modeler and Tasklist</li><li>**Workaround**: Manually recreate the form.</li></ul></p>                                                                                                                                |
+| [Tasklist backups do not complete if the request for taking a snapshot times out (#29755)](https://github.com/camunda/camunda/issues/29755)              | <p>Tasklist backups do not complete if the request for taking a snapshot times out.</p><p><ul><li>**Affects:** Tasklist</li><li>**Workaround**: Retry taking a backup; increase backup frequency.</li></ul></p>                                                                                                                                    |
+| [Operate backups do not complete if the request for taking a snapshot times out (#29182)](https://github.com/camunda/camunda/issues/29182)               | <p>Operate backups do not complete if the request for taking a snapshot times out.</p><p><ul><li>**Affects:** Operate</li><li>**Workaround**: Retry taking a backup; increase backup frequency.</li></ul></p>                                                                                                                                      |
+| [PDFs cannot be previewed or downloaded in Firefox, Chrome, or Edge (#28498)](https://github.com/camunda/camunda/issues/28498)                           | <p>In rare situations, PDFs cannot be previewed due to the used browser.</p><p><ul><li>**Affects:** Tasklist</li><li>**Workaround**: Use a different browser; clear browser cache.</li></ul></p>                                                                                                                                                   |
+| [Connectors config using EntraId (OIDC) for 8.7.0-alpha5 incorrect (#3135)](https://github.com/camunda/camunda-platform-helm/issues/3135)                | <p>Incomplete Connectors configuration for Entra ID usage.</p><p><ul><li>**Affects:** Connectors</li><li>**Workaround**: Set an environment variable with the token scope for Operate (see [issue](https://github.com/camunda/camunda-platform-helm/issues/3135)).</li></ul></p>                                                                   |
+| [Uploaded files are not uploaded to the document storage when starting a process from Modeler (#29526)](https://github.com/camunda/camunda/issues/29526) | <p>Files are not uploaded to the document storage when starting a process with a start form from Web Modeler or Play.</p><p><ul><li>**Affects:** Document handling and Web Modeler</li><li>**Workaround**: Start the process from Tasklist or the REST API.</li></ul></p>                                                                          |
+| [File picker does not display the name of the uploaded file for completed tasks (#25443)](https://github.com/camunda/camunda/issues/25443)               | <p>File picker does not display the name of the uploaded file for completed tasks.</p><p><ul><li>**Affects:** Tasklist</li><li>**Workaround**: File name can be viewed in Operate.</li></ul></p>                                                                                                                                                   |
+| [File upload fails to AWS storage due to non-standard space in filename (#28375)](https://github.com/camunda/camunda/issues/28375)                       | <p>File upload fails to AWS storage due to non UTF-8 whitespace character in filename.</p><p><ul><li>**Affects:** Tasklist</li><li>**Workaround**: When using AWS S3 storage, use UTF-8 compatible characters.</li></ul></p>                                                                                                                       |
+| [Failed to replay batch at 'LoggedEvent (#30810)'](https://github.com/camunda/camunda/issues/30810)                                                      | <p>When updating from `8.6.13` to `8.7.0`, Zeebe processing can stop after the update in some situations, where multi-instance elements are used.</p><p><ul><li>**Affects:** Zeebe</li><li>**Workaround**: This issue is fixed in `8.7.1`. When affected, going to `8.7.1` fully mitigates the issue. There is no risk of data loss.</li></ul></p> |
 
 ## 8.7.0-alpha5
 
