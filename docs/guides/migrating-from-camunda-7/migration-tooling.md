@@ -28,15 +28,6 @@ The **Migration Analyzer** helps you get a first understanding of migration task
 
 In a second step, it can also convert these files from the Camunda 7 format to the Camunda 8 format. For example, it updates namespaces or renames XML properties if needed.
 
-The identified tasks are grouped by severity:
-
-- **INFO**: Informational feedback. These elements are changed automatically.
-- **REVIEW**: Changes were made automatically, but should be reviewed. For example, expressions are simplified, which always require a human check.
-- **TASK**: Manual changes are required to make the model work in Camunda 8.
-- **WARNING**: Manual investigation needed. Warnings often indicate that elements from the original process are not yet supported in Camunda 8.
-
-This allows you to focus on the most important findings. Tasks can also be grouped by type. For example, changing a `JavaDelegate` to a `JobWorker` might appear 100 times in your codebase, but still represents just one recurring pattern.
-
 You can use the Migration Analyzer in the following ways:
 
 - **Web Interface**: A wizard-like UI built with Java (Spring Boot) and React. Available:
@@ -47,7 +38,7 @@ You can use the Migration Analyzer in the following ways:
 
 The results are available as:
 
-- **XLSX**: A Microsoft Excel file, including pre-built PivotTables for data exploration.
+- **XLSX**: A Microsoft Excel file, including pre-built pivot tables for data exploration.
 - **CSV**: A plain-text comma-separated file, compatible with any spreadsheet tool.
 
 Let's go through this step-by-step:
@@ -68,15 +59,28 @@ To get started right away, try the free SaaS version:
 After [local installation](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer#installation), open [http://localhost:8080/](http://localhost:8080/).  
 Or use the [SaaS deployment](https://diagram-converter.consulting-sandbox.camunda.cloud/) (no local setup required).
 
-The wizard is straightforward. Upload one or more models and click **Analyze**:
+The wizard is straightforward. Upload one or more models:
 
-![A screenshot of the Migration Analyzer tool](../img/analyzer-screenshot1.png)
+![Upload your models](../img/analyzer-screenshot-1.png)
 
-You can now:
+Click **Analyze and convert**:
 
-- Download the analyzer results as Microsoft Excel file
+![See results](../img/analyzer-screenshot-2.png)
+
+On this screen you can now:
+
+- Download the analyzer results as Microsoft Excel file (XSLX)
 - Download the analyzer results as CSV file
 - Download the converted models (individually or as ZIP)
+
+Note that identified tasks are grouped by severity:
+
+- **INFO**: Informational feedback. These elements are changed automatically.
+- **REVIEW**: Changes were made automatically, but should be reviewed. For example, expressions are simplified, which always require a human check.
+- **TASK**: Manual changes are required to make the model work in Camunda 8.
+- **WARNING**: Manual investigation needed. Warnings often indicate that elements from the original process are not yet supported in Camunda 8.
+
+This allows you to focus on the most important findings. Tasks can also be grouped by type. For example, changing a `JavaDelegate` to a `JobWorker` might appear 100 times in your codebase, but still represents just one recurring pattern.
 
 Let’s take a closer look at how to use those results.
 
@@ -86,43 +90,42 @@ Let’s take a closer look at how to use those results.
 
 The XLSX file includes three tabs:
 
-- **AnalysisSummary**: PivotTables and charts that summarize typical migration tasks.
-- **PivotTable**: A large PivotTable for dynamic data exploration.
+- **AnalysisSummary**: Pivot tables and charts that summarize typical migration tasks.
+- **PivotTable**: A large pivot table for dynamic data exploration.
 - **AnalysisResults**: The raw data from the analysis, which you can copy, import, or further process.
 
 You can open the file using Microsoft Excel (desktop or Office 365).
 
 ### Understanding analyzer results using Google Sheets or LibreOffice
 
-You can also open the XLSX file in Google Sheets, LibreOffice, OpenOffice, or similar tools. The raw data will be imported correctly, but PivotTables will not be preserved.
+You can also open the XLSX file in Google Sheets, LibreOffice, OpenOffice, or similar tools. The raw data will be imported correctly, but pivot tables will not be preserved.
+
+Alternatively, download the results as a CSV file and import them directly into your preferred tool.
 
 In this case:
 
-1. Create your own PivotTable in the tool.
+1. Create your own pivot table in the tool.
 2. Or copy the contents of the **AnalysisResults** tab into your own spreadsheet.
 
 For Google Sheets, consider using this [Google Spreadsheet template](https://docs.google.com/spreadsheets/d/1ZUxGhj1twgTnXadbopw1CvZg_ZvDnB2VXRQDSrKtmcM/edit?gid=6013418#gid=6013418) created by Camunda consultants.
 
 ![The Google Sheet](../img/analyzer-screenshot.png)
 
-### Understanding analyzer results using any other tool via CSV
-
-Alternatively, download the results as a CSV file and import them directly into your preferred tool.
-
 ### Analyzing your models using the CLI
 
-If you prefer the command line, the CLI tool is ideal for batch conversions or automation.
+If you prefer the command line over a web interface, the CLI tool is for you. It is ideal for batch conversions or automation.
 
 After [installation](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer#installation), run the CLI:
 
 ```shell
-java -jar camunda-7-to-8-migration-analyzer-cli.jar local
+java -jar camunda-7-to-8-migration-analyzer-cli.jar local myDiagram.bpmn --xlsx
 ```
 
-This shows a help message:
+You can also prompt a help message that will guide you through all parameters:
 
 ```shell
 java -jar camunda-7-to-8-migration-analyzer-cli.jar local
+
 Missing required parameter: '<file>'
 Usage: backend-diagram-converter-cli local [-dhoV] [--check] [--csv]
        [--delegate-execution-as-job-type] [--disable-append-elements]
@@ -180,7 +183,7 @@ This includes:
 - Adjusting XML structure and properties
 - Transforming expressions
 
-Refer to [technical details](../technical-details.md) to understand more details around those conversions.
+Refer to [technical details](technical-details.md) to understand more details around those conversions.
 
 Converted files can be downloaded via the web interface or generated via the CLI.
 
