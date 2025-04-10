@@ -15,12 +15,12 @@ The migration tooling is currently under development, with an initial release pl
 
 Camunda provides the following migration tools:
 
-| Migration tool                                | Description                                                                                                                                                                                        |
-| :-------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **[Migration Analyzer](#migration-analyzer)** | Gain a first understanding of migration tasks. Available for local installation (Java or Docker) or [hosted as a free SaaS offering](https://diagram-converter.consulting-sandbox.camunda.cloud/). |
-| **[Data Migrator](#data-migrator)**           | Copies active Camunda 7 runtime instances and existing audit trail data (history) to Camunda 8.                                                                                                    |
-| **[Code Converter](#code-converter)**         | Supported by a mixture of diagram conversion tools, code conversion patterns, and automatable refactoring recipes.                                                                                 |
-| **[Camunda 7 Adapter](#camunda-7-adapter)**   | Run existing Camunda 7 delegation code directly in a Camunda 8 environment.                                                                                                                        |
+| Migration tool                                | Description                                                                                                                                                                                         |
+| :-------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **[Migration Analyzer](#migration-analyzer)** | Gain a first understanding of migration tasks. Available for local installation (Java or Docker) or [hosted as a free SaaS offering](https://migration-analyzer.consulting-sandbox.camunda.cloud/). |
+| **[Data Migrator](#data-migrator)**           | Copies active Camunda 7 runtime instances and existing audit trail data (history) to Camunda 8.                                                                                                     |
+| **[Code Converter](#code-converter)**         | Supported by a mixture of diagram conversion tools, code conversion patterns, and automatable refactoring recipes.                                                                                  |
+| **[Camunda 7 Adapter](#camunda-7-adapter)**   | Run existing Camunda 7 delegation code directly in a Camunda 8 environment.                                                                                                                         |
 
 ## Migration Analyzer
 
@@ -52,12 +52,12 @@ Let's go through this step-by-step:
 Please refer to the [Installation Guide](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer#installation) for local setup instructions.
 
 To get started right away, try the free SaaS version:  
-[https://diagram-converter.consulting-sandbox.camunda.cloud/](https://diagram-converter.consulting-sandbox.camunda.cloud/)
+[https://migration-analyzer.consulting-sandbox.camunda.cloud/](https://migration-analyzer.consulting-sandbox.camunda.cloud/)
 
 ### Analyzing your models using the Web Interface
 
 After [local installation](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer#installation), open [http://localhost:8080/](http://localhost:8080/).  
-Or use the [SaaS deployment](https://diagram-converter.consulting-sandbox.camunda.cloud/) (no local setup required).
+Or use the [SaaS deployment](https://migration-analyzer.consulting-sandbox.camunda.cloud/) (no local setup required).
 
 The wizard is straightforward. Upload one or more models:
 
@@ -127,7 +127,7 @@ You can also prompt a help message that will guide you through all parameters:
 java -jar camunda-7-to-8-migration-analyzer-cli.jar local
 
 Missing required parameter: '<file>'
-Usage: backend-diagram-converter-cli local [-dhoV] [--check] [--csv]
+Usage: camunda-7-to-8-migration-analyzer-cli local [-dhoV] [--check] [--csv]
        [--delegate-execution-as-job-type] [--disable-append-elements]
        [--disable-default-job-type] [--md] [-nr]
        [--default-job-type=<defaultJobType>]
@@ -136,7 +136,7 @@ Converts the diagram from the given directory or file
 
 Execute as:
 
-java -Dfile.encoding=UTF-8 -jar backend-diagram-converter-cli.jar local
+java -Dfile.encoding=UTF-8 -jar camunda-7-to-8-migration-analyzer-cli.jar local
 
 Parameter:
       <file>                 The file to convert or directory to search in
@@ -183,15 +183,17 @@ This includes:
 - Adjusting XML structure and properties
 - Transforming expressions
 
-Refer to [technical details](technical-details.md) to understand more details around those conversions.
+Refer to [technical details](./technical-details.md) to understand more details around those conversions.
 
 Converted files can be downloaded via the web interface or generated via the CLI.
+
+### Extending the conversion logic
 
 You can also extend the conversion logic. See [Extending the Migration Analyzer](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer?tab=readme-ov-file#how-to-extend-diagram-conversion) for details.
 
 ### Expression conversion
 
-JUEL expressions used in Camunda 7 are not supported in Camunda 8. The Migration Analyzer tries to convert simple expressions automatically (see [ExpressionTransformer](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer/blob/main/core/src/main/java/org/camunda/community/migration/converter/expression/ExpressionTransformer.java). For an overview of what’s supported, see the [ExpressionTransformer test case](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer/blob/main/core/src/test/java/org/camunda/community/migration/converter/ExpressionTransformerTest.java).
+JUEL expressions used in Camunda 7 are not supported in Camunda 8. The Migration Analyzer tries to convert simple expressions automatically (see [ExpressionTransformer](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer/blob/main/core/src/main/java/org/camunda/community/migration/converter/expression/ExpressionTransformer.java)). For an overview of what’s supported, see the [ExpressionTransformer test case](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer/blob/main/core/src/test/java/org/camunda/community/migration/converter/ExpressionTransformerTest.java).
 
 More complex expressions may require manual rewriting. The [FEEL Copilot](https://feel-copilot.camunda.com/) can help with this.
 
