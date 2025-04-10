@@ -1189,7 +1189,6 @@ module.exports = {
               ],
             },
             "self-managed/console-deployment/telemetry",
-            "components/console/manage-clusters/cluster-connectors",
           ],
           Zeebe: [
             "self-managed/zeebe-deployment/zeebe-installation",

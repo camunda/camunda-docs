@@ -9,7 +9,7 @@ Camunda Console (Self-Managed) provides a centralized interface for monitoring a
 
 Console gives you real-time insights into orchestration clusters and helps reduce the operational overhead of managing distributed systems.
 
-**Key Features**
+## Key features
 
 - **Cluster Status Dashboard**: Monitor the health and status of core components such as Zeebe, Operate, Tasklist, Optimize, and Identity.
 - **Cluster Telemetry**: Collect and view component metrics as a simple monitoring interface.
@@ -19,12 +19,10 @@ Console gives you real-time insights into orchestration clusters and helps reduc
 - **Basic SSO Integration**: Support for OIDC-based login via Identity when configured.
 - **Usage Visibility**: Gain insights into how your Camunda Self-Managed environment is being used.
 
-## [Cluster Connectors](https://docs.camunda.io/docs/components/console/manage-clusters/cluster-connectors/)
+## Connector management
 
-The Cluster Connectors feature enables Console to connect to remote Camunda Orcherstration clusters securely over HTTPS. It supports:
+You can [manage your Connectors](/components/console/manage-clusters/manage-connectors.md) via Console. This feature allows Console to connect to remote Camunda Orchestration clusters securely over HTTPS.
 
-- Monitoring of inbound connector webhooks, message queue subscriptions, and polling subscriptions.
-- Health checks for connectors with visibility into which ones are running or failing.
-- Troubleshooting via activity logs for diagnosing connector issues.
-
-Camunda Console (Self-Managed) is available as a container image. Refer to the [installation guide](/self-managed/setup/overview.md) for instructions on deploying it.
+- Monitor your inbound connector webhooks, message queue subscriptions, and polling subscriptions.
+- Check Connector health and which Connectors are running or failing.
+- Troubleshoot and diagnose Connector issues via activity logs.
