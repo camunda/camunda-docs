@@ -154,7 +154,7 @@ To extract table data in CSV format, specify this in the prompt. The output is t
 
 ```csv
 Name,Age
-Katlin Jones,41
+Kaitlin Jones,41
 Thomas Hampton,57
 ```
 
