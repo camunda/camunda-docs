@@ -60,13 +60,17 @@ If macOS mistakenly flags the `csap` command as malware when run from the termin
 
 The CLI provides a `setup` command to prepare one of Camunda's SAP integration modules for deployment. You can run the command interactively or provide all required options as command-line switches.
 
+## Usage
+
+The CLI provides a `setup` command to prepare one of Camunda's SAP integration modules for deployment. You can run the command interactively or provide all required options as command-line switches.
+
 ### Authentication token
 
 Under the hood, `csap` uses the GitHub API to query for releases. The [GitHub API has a rate limit](https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api) for unauthenticated requests. It is thus advisable to provide a GitHub access token to the environment `csap` is run in.
 
 #### Local use
 
-A personal GitHub access token can be obtained in multiple ways. Either [statically by generating one](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token) or dynamically by using the `gh` cli to login (`gh auth login`), which in turn produces an access token.
+A personal GitHub access token can be obtained in multiple ways. Either [statically by generating one](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token) or dynamically by using the `gh` CLI to log in (`gh auth login`), which in turn produces an access token.
 
 Then, inject the token into your (shell) environment as the variable `GH_TOKEN`. `csap` will automatically pick up the token from `GH_TOKEN` and use it for subsequent requests.
 
@@ -90,9 +94,9 @@ export GH_TOKEN=$(gh auth token)
 
 #### CI/CD use
 
-If your CI/CD environment isn't GitHub, the same requirement as for [Local use](#Local-use) holds up: an access token from GitHub must be obtained to authenticate requests to the GitHub API from `csap`.
+If your CI/CD environment isn't GitHub, like [local use](#local-use) an access token from GitHub must be obtained to authenticate requests to the GitHub API from `csap`.
 
-For GitHub actions/pipelines, all runs are provided a `GITHUB_TOKEN` automatically. So it is only a matter of declaring that to the respective run of `csap` via the `env` YAML declaration.
+For GitHub actions/pipelines, all runs are provided a `GITHUB_TOKEN` automatically. Declare this to the respective run of `csap` via the `env` YAML declaration:
 
 ```yaml
 jobs:
@@ -105,7 +109,7 @@ jobs:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
-See `csap`'s own [GitHub action for Pull Requests](https://github.com/camunda/sap-csap-cli/blob/ad10ecf8017ab18e2d4fbd2089f7fb5d1d17fa12/.github/workflows/pr.yml#L46) as an example.
+Review csap's [GitHub action for pull requests](https://github.com/camunda/sap-csap-cli/blob/ad10ecf8017ab18e2d4fbd2089f7fb5d1d17fa12/.github/workflows/pr.yml#L46) as an example.
 
 ### Interactive mode
 
