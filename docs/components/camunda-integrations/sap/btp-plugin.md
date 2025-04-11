@@ -96,7 +96,7 @@ Custom properties are not supported:<br/>
 
 [Use `csap`](./csap-cli.md) for setting up the BTP plugin, as a manual configuration is cumbersome and error-prone.
 
-With Camunda, no setup/config work is necessary to use the BTP plugin.
+Within Camunda, no setup/config work is necessary to use the BTP plugin.
 
 ### Configuring the BTP plugin using `csap`
 
@@ -158,13 +158,13 @@ Make a `POST` http call to `https://<btpRoute>/backend/inbound` with this define
 
 ```json
 {
-	"bpmnProcessId": "processId", # ex above: fiori-bupa-search
+  "bpmnProcessId": "processId", # ex above: fiori-bupa-search
   "user": "beck@renegade.org", # unique id of the user
   "wait": false, # or true to wait for the BPMN run to finish and get the result back
-	"variables": { # optional
-		"some_key": "some_value",
-		"some_other_key": 10
-	}
+    "variables": { # optional
+    "some_key": "some_value",
+    "some_other_key": 10
+  }
 }
 ```
 
