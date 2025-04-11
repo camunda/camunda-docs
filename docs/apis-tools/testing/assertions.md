@@ -24,6 +24,10 @@ Camunda executes BPMN processes asynchronously. For testing, this means that the
 The assertions handle the asynchronous behavior and wait until the expected property is fulfilled. Only if the property is not fulfilled within the given time, the assertion fails.
 :::
 
+:::tip
+CPT provides the most common assertions. However, if you miss an assertion, you can easily implement a [custom assertion](#custom-assertions) yourself.
+:::
+
 ## Configuration
 
 Assertions can be configured globally using `CamundaAssert`.
@@ -240,4 +244,44 @@ Assert that the process instance has the given variables. The assertion fails if
 ```java
 Map<String, Object> expectedVariables = //
 assertThat(processInstance).hasVariables(expectedVariables);
+```
+
+## Custom assertions
+
+You can build your own assertions similar to the assertions from CPT.
+
+- Use the preconfigured Camunda client to retrieve the process data.
+- Use [AssertJ](https://github.com/assertj/assertj)'s assertions to verify the expected properties.
+- Use [Awaitility](http://www.awaitility.org/) around verifications to compensate delays until the data is available.
+
+```java
+@Test
+void shouldCreateUserTask() {
+    // given: the process is deployed
+    // when: create a process instance
+
+    // then
+    Awaitility.await()
+        .ignoreException(ClientException.class)
+        .untilAsserted(
+            () -> {
+                final List<UserTask> userTasks = getUserTasks(processInstanceKey);
+                assertThat(userTasks).hasSize(1);
+
+                final UserTask userTask = userTasks.getFirst();
+                assertThat(userTask)
+                    .returns("task", UserTask::getName)
+                    .returns("me", UserTask::getAssignee);
+            });
+}
+
+// helper method
+private List<UserTask> getUserTasks(final long processInstanceKey) {
+    return client
+        .newUserTaskSearchRequest()
+        .filter(filter -> filter.processInstanceKey(processInstanceKey).state(UserTaskState.CREATED))
+        .send()
+        .join()
+        .items();
+}
 ```

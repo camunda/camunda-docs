@@ -55,7 +55,7 @@ Register the JUnit extension in your test class with enabled Connectors:
 public class MyProcessTest {
 
     @RegisterExtension
-    private final CamundaProcessTestExtension extension =
+    private static final CamundaProcessTestExtension EXTENSION =
         new CamundaProcessTestExtension().withConnectorsEnabled(true);
 }
 ```
@@ -117,7 +117,7 @@ Add your secrets when you register the JUnit extension:
 public class MyProcessTest {
 
     @RegisterExtension
-    private final CamundaProcessTestExtension extension =
+    private static final CamundaProcessTestExtension EXTENSION =
         new CamundaProcessTestExtension()
             .withConnectorsEnabled(true)
             .withConnectorsSecret("GITHUB_TOKEN", "ghp_secret")
@@ -236,7 +236,7 @@ Set the Docker image name and version of your custom Connector bundle when you r
 public class MyProcessTest {
 
     @RegisterExtension
-    private final CamundaProcessTestExtension extension =
+    private static final CamundaProcessTestExtension EXTENSION =
         new CamundaProcessTestExtension()
             .withConnectorsEnabled(true)
             .withConnectorsDockerImageName("my-org/my-connectors")
