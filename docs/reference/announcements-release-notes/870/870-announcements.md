@@ -9,8 +9,8 @@ import DeployDiagramImg from '../../img/deploy-diagram-modal.png';
 
 Supported environment changes and breaking changes or deprecations for the Camunda 8.7 release are summarized below.
 
-| Scheduled release date | Scheduled end of maintenance | Release notes                                                                        | Blog                                                                                            |
-| :--------------------- | :--------------------------- | :----------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------- |
+| Scheduled release date | Scheduled end of maintenance | Release notes                                                                        | Blog                                                                            |
+| :--------------------- | :--------------------------- | :----------------------------------------------------------------------------------- | :------------------------------------------------------------------------------ |
 | 8 April 2025           | 13 October 2026              | [8.7 release notes](/reference/announcements-release-notes/870/870-release-notes.md) | [Announcing Camunda 8.7](https://camunda.com/blog/2025/04/camunda-8-7-release/) |
 
 <!--- [Ad-hoc subprocesses](#)
@@ -96,10 +96,10 @@ The Zeebe Java client will not be developed further and will only receive bug fi
 
 ### Connectors
 
-Starting with 8.7, the Connector runtime will stop using the deprecated community [Spring Zeebe library](https://github.com/camunda-community-hub/spring-zeebe) to communicate with the core APIs of Camunda. The new [Camunda Spring Boot SDK](/apis-tools/spring-zeebe-sdk/getting-started.md) will be used instead.
+Starting with 8.7, the Connector runtime will stop using the deprecated community [Spring Zeebe library](https://github.com/camunda-community-hub/spring-zeebe) to communicate with the core APIs of Camunda. The new [Spring Zeebe SDK](/apis-tools/spring-zeebe-sdk/getting-started.md) will be used instead.
 
 Although the official SDK is largely compatible with the community library, some changes might be required in the configuration of Self-Managed Connector deployments.
 
-We recommend updating the configuration to match the new property format of the Camunda Spring Boot SDK to avoid any issues. The old properties will be removed in a future release.
+We recommend updating the configuration to match the new property format of the [Spring Zeebe SDK](/apis-tools/spring-zeebe-sdk/getting-started.md) to avoid any issues. The old properties will be removed in a future release.
 
 For more information, see the [update guide](/self-managed/operational-guides/update-guide/860-to-870.md#connectors) and the [Connectors configuration guide](/self-managed/connectors-deployment/connectors-configuration.md).
