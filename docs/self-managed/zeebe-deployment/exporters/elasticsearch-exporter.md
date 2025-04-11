@@ -53,14 +53,15 @@ exporters:
 The exporter can be configured by providing `args`. The table below explains all the different
 options, and the default values for these options:
 
-| Option           | Description                                                                              | Default                 |
-| ---------------- | ---------------------------------------------------------------------------------------- | ----------------------- |
-| url              | Valid URLs as comma-separated string                                                     | `http://localhost:9200` |
-| requestTimeoutMs | Request timeout (in ms) for the Elasticsearch. client                                    | `30000`                 |
-| index            | Refer to [Index](#index) for the index configuration options.                            |                         |
-| bulk             | Refer to [Bulk](#bulk) for the bulk configuration options.                               |                         |
-| retention        | Refer to [Retention](#retention) for the retention configuration options                 |                         |
-| authentication   | Refer to [Authentication](#authentication) for the authentication configuration options. |                         |
+| Option              | Description                                                                              | Default                 |
+| ------------------- | ---------------------------------------------------------------------------------------- | ----------------------- |
+| url                 | Valid URLs as comma-separated string                                                     | `http://localhost:9200` |
+| requestTimeoutMs    | Request timeout (in ms) for the Elasticsearch. client                                    | `30000`                 |
+| exportLegacyRecords | Enable export of record types listed in `index` configuration section.                   | `false`                 |
+| index               | Refer to [Index](#index) for the index configuration options.                            |                         |
+| bulk                | Refer to [Bulk](#bulk) for the bulk configuration options.                               |                         |
+| retention           | Refer to [Retention](#retention) for the retention configuration options                 |                         |
+| authentication      | Refer to [Authentication](#authentication) for the authentication configuration options. |                         |
 
 <Tabs groupId="configuration" defaultValue="index" queryString values={[{label: 'Index', value: 'index' },{label: 'Bulk', value: 'bulk' },{label: 'Retention', value: 'retention' },{label: 'Authentication', value: 'authentication' }]} >
 
