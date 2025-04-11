@@ -8,7 +8,7 @@ The Camunda SAP Integration CLI (`csap`) is a command-line tool designed to simp
 
 ## Features
 
-- Distributed as a standalone binary. No local Deno installation required.
+- Distributed as a standalone binary - no local installation required.
 - Interactive prompts for configuration.
 - Command-line switches for automation.
 - Support for multiple SAP integration modules.
@@ -126,9 +126,9 @@ This will guide you through the setup process interactively.
 
 ```bash
 $> csap setup --for btp-plugin \
-	--camunda 8.7 \
-	--deployment SaaS \
-	--btpRoute my-btp-route.cfapps.eu10-004.hana.ondemand.com \
+  --camunda 8.7 \
+  --deployment SaaS \
+  --btpRoute my-btp-route.cfapps.eu10-004.hana.ondemand.com \
   --clusterId 64ecb347-dd50-49c9-ace2-20c9f6b0798d
   --region syd-2
   --clientId dIsfmFEB47_-Dt2uMlYdw-B_72stz.Yh \
@@ -143,8 +143,8 @@ This command sets up the BTP plugin for Camunda version 8.7 with all required op
 
 ```bash
 $> csap setup --for all \
-	--camunda 8.6 \
-	--deployment SaaS \
+  --camunda 8.6 \
+  --deployment SaaS \
 
 # ...
 
