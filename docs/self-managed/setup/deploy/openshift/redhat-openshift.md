@@ -391,9 +391,9 @@ If you deploy Camunda 8 (and related infrastructure) with permissive SCCs out of
   </TabItem>
 </Tabs>
 
-### Writing permissions of pods for logs
+### Writing pod permissions for logs
 
-OpenShift security policies often restrict writing to files within containers. This can cause Camunda pods to fail to write to the filesystem which is typically required for writing log in files.
+OpenShift security policies often restrict writing to files within containers. This can cause Camunda pods to fail to write to the filesystem, which is typically required for writing log in files.
 
 Instead, we configure the environment to output logs to `stdout` and `stderr` only, which are supported by OpenShift logging infrastructure.
 
