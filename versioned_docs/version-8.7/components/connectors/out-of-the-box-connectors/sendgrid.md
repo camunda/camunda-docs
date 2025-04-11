@@ -39,7 +39,7 @@ To make the **SendGrid Email Connector** executable, you need to fill out all th
 7. Leave **Content Type** to **text/plain** (or alternatively to **text/html** if you intend to provide an HTML body to your email).
 8. Provide a text (or HTML) **Body** for your email.
 9. **Attachments** is a list of camunda documents to include as part of your **new email**.
-   - To work with documents you must upload them first, [using the Camunda REST API](/apis-tools/camunda-api-rest/specifications/create-document.api.mdx) for example.
+   - To work with documents you must upload them first, [using the Camunda 8 REST API](/apis-tools/camunda-api-rest/specifications/create-document.api.mdx) for example.
    - The result of the endpoint must then be assigned to a variable in **Start Process Instance** so you can use the list of these variables in the **Attachments** field.
 
 :::note
@@ -106,7 +106,7 @@ To make the **SendGrid Email Template Connector** executable, fill out all the m
 7. Copy the ID of the template and paste it in the **Template ID field**.
 8. Provide the test data in the **Template Data** field as a [FEEL context expression](/components/modeler/feel/language-guide/feel-context-expressions.md):
 9. **Attachments** is a list of camunda documents to include as part of your **new email**.
-   - To work with documents you must upload them first, [using the Camunda REST API](/apis-tools/camunda-api-rest/specifications/create-document.api.mdx) for example.
+   - To work with documents you must upload them first, [using the Camunda 8 REST API](/apis-tools/camunda-api-rest/specifications/create-document.api.mdx) for example.
    - The result of the endpoint must then be assigned to a variable in **Start Process Instance** so you can use the list of these variables in the **Attachments** field.
 
 ```text

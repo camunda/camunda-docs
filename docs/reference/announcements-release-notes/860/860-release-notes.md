@@ -97,7 +97,7 @@ Viewing a BKM in Operate is not supported yet.
 The Go and zbctl clients are moved to the [Camunda Community Hub](https://github.com/camunda-community-hub) following the introduction of the Camunda 8 REST API for Process Management.
 
 - These clients are no longer officially supported by Camunda, as [announced on our blog](https://camunda.com/blog/2024/09/deprecating-zbctl-and-go-clients/).
-- Use the REST API for easier interaction with the Zeebe engine, and work with it in the same way as any other REST service. <!--- Camunda REST API? --->
+- Use the REST API for easier interaction with the Zeebe engine, and work with it in the same way as any other REST service. <!--- Camunda 8 REST API? --->
 - Use the OpenAPI definition, the supported Postman collection, or cURL to get started implementing API requests in your code. We also recommend trying the new clients and SDKs.
 
 :::note

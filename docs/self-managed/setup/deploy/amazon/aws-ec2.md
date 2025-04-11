@@ -275,7 +275,7 @@ cd camunda-deployment-references-main/aws/ec2/terraform
 terraform output -raw alb_endpoint
 ```
 
-3. Use the [Camunda REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md) to communicate with Camunda:
+3. Use the [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md) to communicate with Camunda:
 
 Follow the example in the [REST API documentation](/apis-tools/camunda-api-rest/camunda-api-rest-authentication.md) to authenticate and retrieve the cluster topology.
 
