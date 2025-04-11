@@ -31,10 +31,10 @@ The default configuration is not suitable for a standalone gateway node. To run 
 
 We provide templates that contain all possible configuration settings, along with explanations for each setting, though you may find it easier to search through our [broker](broker.md) and [gateway](gateway.md) configuration documentation to adjust the templates:
 
-- [`config/application.yaml` Standalone Broker (with embedded gateway)](https://github.com/camunda/camunda/blob/main/dist/src/main/config/application.yaml) - Default configuration containing only the most common configuration settings. Use this as the basis for a single broker deployment for test or development.
+- [`config/application.yaml` Standalone Broker (with embedded gateway)](https://github.com/camunda/camunda/blob/8.7.0/dist/src/main/config/application.yaml) - Default configuration containing only the most common configuration settings. Use this as the basis for a single broker deployment for test or development.
 - [`config/broker.standalone.yaml.template` Standalone Broker (with embedded gateway)](https://github.com/camunda/camunda/blob/main/dist/src/main/config/broker.standalone.yaml.template) - Complete configuration template for a standalone broker with embedded gateway. Use this as the basis for a single broker deployment for test or development.
-- [`config/broker.yaml.template` Broker Node (without embedded gateway)](https://github.com/camunda/camunda/blob/main/dist/src/main/config/broker.yaml.template) - Complete configuration template for a broker node without embedded gateway. Use this as the basis for deploying multiple broker nodes as part of a cluster.
-- [`config/gateway.yaml.template`](https://github.com/camunda/camunda/blob/main/dist/src/main/config/gateway.yaml.template) - Complete configuration template for a standalone gateway.
+- [`config/broker.yaml.template` Broker Node (without embedded gateway)](https://github.com/camunda/camunda/blob/8.7.0/dist/src/main/config/broker.yaml.template) - Complete configuration template for a broker node without embedded gateway. Use this as the basis for deploying multiple broker nodes as part of a cluster.
+- [`config/gateway.yaml.template`](https://github.com/camunda/camunda/blob/8.7.0/dist/src/main/config/gateway.yaml.template) - Complete configuration template for a standalone gateway.
 
 :::note
 These templates also include the corresponding environment variables to use for every setting.

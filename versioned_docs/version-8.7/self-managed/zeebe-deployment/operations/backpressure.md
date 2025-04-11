@@ -34,7 +34,7 @@ The limit and inflight count are calculated per partition.
 Zeebe uses adaptive algorithms from [concurrency-limits](https://github.com/Netflix/concurrency-limits) to dynamically calculate the limit.
 Configure Zeebe with one of the backpressure algorithms in the following sections.
 
-The default values can be found in the [Zeebe Broker standalone configuration template](https://github.com/camunda/camunda/blob/main/dist/src/main/config/broker.standalone.yaml.template) or in the [Zeebe Broker configuration template](https://github.com/camunda/camunda/blob/main/dist/src/main/config/broker.yaml.template) in the `# backpressure` section.
+The default values can be found in the [Zeebe Broker standalone configuration template](https://github.com/camunda/camunda/blob/8.7.0/dist/src/main/config/broker.standalone.yaml.template) or in the [Zeebe Broker configuration template](https://github.com/camunda/camunda/blob/8.7.0/dist/src/main/config/broker.yaml.template) in the `# backpressure` section.
 
 #### Fixed limit
 
