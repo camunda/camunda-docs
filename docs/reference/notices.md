@@ -215,7 +215,7 @@ Tasklist
 
 #### Impact
 
-The REST API functionality of Tasklist 8.2.0 and 8.2.1 allows unauthenticated access to the following methods/URLs:
+The REST API functionality of Tasklist 8.2.0 and 8.2.1 allows unauthenticated access to the following methods/URLs: <!--- Are we referring to the Tasklist REST API? --->
 
 - GET /v1/tasks/\{taskId}
 - POST /v1/tasks/search

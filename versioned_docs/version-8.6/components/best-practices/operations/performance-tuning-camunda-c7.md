@@ -387,7 +387,7 @@ In this bonus section, we share some anecdotes which might inspire you when tryi
 
 ### Session context memory consumption
 
-In one customer scenario, the REST API was used heavily with basic authentication enabled. The client did not reuse the REST connection and opened a new one for every request, including the authentication information.
+In one customer scenario, the <!--- Which REST API? ---> REST API was used heavily with basic authentication enabled. The client did not reuse the REST connection and opened a new one for every request, including the authentication information.
 
 On the server side, there was no special configuration given, which means that for every authentication there was a SessionContext created with a certain timeout. This SessionContext was never reused and the default timeout was relatively high (30 minutes in Tomcat). As a result, all this SessionContexts plugged up the memory which ultimately lead to garbage collection cycles being so long, that the whole system was basically just doing garbage collection most of the time.
 

@@ -11,6 +11,8 @@ For the communication between client and gateway, a mix of REST and [gRPC](https
 
 Note that while gRPC requires HTTP/2, the REST API can work with either HTTP/1.1 or HTTP/2.
 
+<!--- Which REST API are we referring to above? --->
+
 ## What is gRPC?
 
 gRPC was first developed by Google and is now an open source project and part of the Cloud Native Computing Foundation.

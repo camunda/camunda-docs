@@ -22,7 +22,7 @@ You do not need big hardware to run Camunda. The hardware requirements are basic
 1. The container/application server you want to use (refer to [deciding about your Camunda 7 stack](../deciding-about-your-stack-c7/)).
 2. Things you do in [Delegation Code](https://docs.camunda.org/manual/latest/user-guide/process-engine/delegation-code/) like service tasks. For example, when calling SOAP WebServices or when doing complex calculations in Java, more CPU time is consumed within the delegation code (your code) than in Camunda.
 
-The only way to get reliable figures for your project and environment is to do load testing on a close-to-production environment. We recommend doing this if in doubt. Steering the REST API via load generator tools like JMeter is relatively easy.
+The only way to get reliable figures for your project and environment is to do load testing on a close-to-production environment. We recommend doing this if in doubt. Steering <!--- Which REST API? ---> the REST API via load generator tools like JMeter is relatively easy.
 
 From the Camunda perspective, there are a number of aspects to look at:
 

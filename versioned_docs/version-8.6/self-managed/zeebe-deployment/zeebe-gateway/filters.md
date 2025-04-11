@@ -7,7 +7,7 @@ description: "All communication from a client to a broker must first pass throug
 
 :::danger
 
-Filters are only applied to the REST API of the gateway, and do not affect any gRPC calls.
+Filters are only applied to the <!--- Which REST API? ---> REST API of the gateway, and do not affect any gRPC calls.
 
 For gRPC-related middleware, review the [gateway interceptors documentation](interceptors.md).
 
@@ -75,7 +75,7 @@ dispatching to the broker.
 
 :::note
 
-Camunda 8 relies on [Identity](../../identity/user-guide/tenants/managing-tenants.md) for tenant management and, as of 8.5.0, the REST API component of
+Camunda 8 relies on [Identity](../../identity/user-guide/tenants/managing-tenants.md) for tenant management and, as of 8.5.0, the <!--- Which REST API? ---> REST API component of
 the Zeebe Gateway does not support custom tenant-providing filters.
 
 :::

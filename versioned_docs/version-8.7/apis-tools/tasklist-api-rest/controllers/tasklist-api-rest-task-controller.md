@@ -129,7 +129,7 @@ Endpoint to assign a task with `taskId` to `assignee` or the active user. Return
 [`TaskAssignRequest`](../schemas/requests/task-assign-request.mdx) - `[Optional]`
 
 :::note
-When using the REST API with a JWT authentication token, the following request body parameters may be used.
+When using the Tasklist REST API with a JWT authentication token, the following request body parameters may be used.
 :::
 
 #### HTTP request example
