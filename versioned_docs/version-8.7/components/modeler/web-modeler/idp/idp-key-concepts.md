@@ -21,7 +21,7 @@ Documents are typically classified as containing either structured or unstructur
 <div class="double-column-container">
 <div class="double-column-left"  style={{marginRight: '30px'}}>
 
-<img src={IdpStructuredDocumentImg} alt="Example structured document" width="600px" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}}/>
+<img src={IdpStructuredDocumentImg} alt="Example structured document" class="img-noborder img-600 img-transparent" />
 
 </div>
 <div class="double-column-right">
@@ -46,7 +46,7 @@ Example structured documents include:
 <div class="double-column-container">
 <div class="double-column-left"  style={{marginRight: '30px'}}>
 
-<img src={IdpUnstructuredDocumentImg} alt="Example unstructured document" width="600px" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}}/>
+<img src={IdpUnstructuredDocumentImg} alt="Example unstructured document" class="img-noborder img-600 img-transparent" />
 
 </div>
 <div class="double-column-right">
@@ -91,7 +91,7 @@ LLM Foundation models are large-scale, pre-trained AI models that can be adapted
 
 Extraction fields are the data fields you want to extract from a document, such as an invoice ID, date, customer name, and so on.
 
-<img src={IdpExtractionFieldImg} alt="Example structured document" width="800px" style={{marginTop: '0'}}/>
+<img src={IdpExtractionFieldImg} class="img-800" alt="Example structured document" />
 
 - You must add a separate field for each piece of information you want to extract from a document.
 - For example, for an invoice, add a separate field for the invoice ID, date, customer name, invoice amount, and so on.

@@ -23,11 +23,11 @@ Cluster connector management allows you to monitor and manage your running inbou
 
 To open the **Connector Management** page, on the cluster **Overview** tab, click **Manage** on the Connectors component tile.
 
-<img src={ManageImg} alt="Manage connectors on the Connectors component tile" style={{marginTop: '0'}}/>
+<img src={ManageImg} alt="Manage connectors on the Connectors component tile" />
 
 The **Connector Management** page provides an overview of the inbound connectors running on a cluster:
 
-<img src={ConnectorManagementImg} alt="Connector management page" style={{marginTop: '0'}}/>
+<img src={ConnectorManagementImg} alt="Connector management page" />
 
 - Each inbound connector running on the cluster is shown on a separate row.
 - **Name**: The name of the connector. Click to view details of the connector instances for this connector.
@@ -41,7 +41,7 @@ The **Connector Management** page provides an overview of the inbound connectors
 
 Select an individual connector to view the running instances for the connector.
 
-<img src={ConnectorDetailsImg} alt="Connector management page" style={{marginTop: '0'}}/>
+<img src={ConnectorDetailsImg} alt="Connector management page" />
 
 - Each connector process instance is shown on a separate row.
 - **Connectors instance ID**: The ID of the connector instance. Click to view further details for an individual connector instance.
@@ -56,7 +56,7 @@ Select an individual connector to view the running instances for the connector.
 
 Select an individual connector running instance to view additional details and troubleshoot issues.
 
-<img src={ConnectorProcessDetailsImg} alt="Connector management page." style={{marginTop: '0'}}/>
+<img src={ConnectorProcessDetailsImg} alt="Connector management page." />
 
 ### Activity log
 
@@ -64,7 +64,7 @@ Shows details of the last ten activities recorded for the connector, such as an 
 
 For example, the following activity log shows that there is an exception caused by an invalid URL in a Kafka connector.
 
-<img src={ConnectorProcessErrorImg} alt="Connector management page" style={{marginTop: '0', width: '600px'}}/>
+<img src={ConnectorProcessErrorImg} alt="Connector management page" class="img-600"/>
 
 ### Properties
 

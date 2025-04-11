@@ -16,7 +16,7 @@ New to IDP integration? See the [example IDP integration](idp-example.md) for a 
 
 You can apply a published document extraction template to a task or event via the append menu. For example:
 
-<img src={IdpElementImg} alt="An overview of intelligent document processing" style={{width: '900px', border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}} />
+<img src={IdpElementImg} class="img-900" alt="An overview of intelligent document processing" />
 
 - **From the canvas:** Select an element and click the **Change element** icon to change an existing element, or use the append feature to add a new element to the diagram.
 - **From the properties panel:** Navigate to the **Template** section and click **Select**.
