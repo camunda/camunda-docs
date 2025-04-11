@@ -230,6 +230,8 @@ The [RPA solution](/components/rpa/overview.md) is graduating to [production-rea
 
 As RPA tasks are now available within BPMN diagrams for automation, users can now implement, troubleshoot, and maintain automation RPA scripts in Desktop Modeler, and deploy and manage RPA files in Zeebe. This major update introduces a suite of powerful features designed to enhance the development, deployment, and management of [RPA scripts](/components/rpa/getting-started.md).
 
+We recommend reviewing the [current known issues for RPA](https://github.com/camunda/rpa-worker/discussions/categories/known-issues) to ensure environment compatibility.
+
 <!-- https://github.com/camunda/product-hub/issues/2533 -->
 
 ### Web Modeler governance and change control
