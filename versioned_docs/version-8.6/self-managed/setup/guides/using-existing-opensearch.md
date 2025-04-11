@@ -19,7 +19,7 @@ Otherwise, if it is intended to connect to Amazon OpenSearch Service with basic 
 ## Values file
 
 :::note
-Not all Optimize features are supported when using OpenSearch as a database, including backups (up to 8.6.6). For a full list of the features that are currently supported, please refer to the [Camunda 8](https://github.com/camunda/issues/issues/635) OpenSearch features.
+Not all Optimize features are supported when using OpenSearch as a database, including backups (up to 8.6.6). For a full list of the features that are currently supported, refer to the [Camunda 8](https://github.com/camunda/issues/issues/635) OpenSearch features.
 :::
 
 The following values can be configured in the Camunda 8 Self-Managed Helm chart in order to use Amazon OpenSearch Service:
