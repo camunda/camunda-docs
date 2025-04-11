@@ -61,4 +61,4 @@ No additional requirements.
 
 For scaling out and up, either add multiple instances of an integration module (for example, the SAP OData Connector) or equip an integration module with more runtime memory (for example, the SAP BTP plugin).
 
-For advanced tuning, you can use all SAP BTP mechanisms, including the [(Free) Application Autoscaler.](https://discovery-center.cloud.sap/serviceCatalog/application-autoscaler?service_plan=standard&region=all&commercialModel=btpea). SAP integration artifacts follow SAP BTP cloud development standards and are fully configurable like any custom SAP BTP app.
+For advanced tuning, you can use all SAP BTP mechanisms, including the [(Free) Application Autoscaler](https://discovery-center.cloud.sap/serviceCatalog/application-autoscaler?service_plan=standard&region=all&commercialModel=btpea). SAP integration artifacts follow SAP BTP cloud development standards and are fully configurable like any custom SAP BTP app.
