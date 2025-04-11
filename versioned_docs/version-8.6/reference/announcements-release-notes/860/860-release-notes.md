@@ -97,7 +97,7 @@ Viewing a BKM in Operate is not supported yet.
 The Go and zbctl clients are moved to the [Camunda Community Hub](https://github.com/camunda-community-hub) following the introduction of the Camunda 8 REST API for Process Management.
 
 - These clients are no longer officially supported by Camunda, as [announced on our blog](https://camunda.com/blog/2024/09/deprecating-zbctl-and-go-clients/).
-- Use the REST API for easier interaction with the Zeebe engine, and work with it in the same way as any other REST service.
+- Use the <!--- Which REST API? ---> REST API for easier interaction with the Zeebe engine, and work with it in the same way as any other REST service.
 - Use the OpenAPI definition, the supported Postman collection, or cURL to get started implementing API requests in your code. We also recommend trying the new clients and SDKs.
 
 :::note
@@ -161,7 +161,7 @@ With this change, the alpha Play infrastructure hosted in our SaaS environment i
 
 Zeebe endpoints are integrated into the Camunda 8 REST API to make building process applications easier.
 
-- Installation and onboarding to Camunda 8 is improved as gRPC is no longer required. Introducing Zeebe endpoints in the REST API eliminates the need for gRPC, making adoption easier than ever.
+- Installation and onboarding to Camunda 8 is improved as gRPC is no longer required. Introducing Zeebe endpoints in the <!--- Which REST API? ---> REST API eliminates the need for gRPC, making adoption easier than ever.
 - Developers can now seamlessly transition from gRPC to REST with the assurance of using the same endpoints.
 - For easy migration use the officially supported Camunda SDKs.
 
@@ -399,7 +399,7 @@ In Operate, the visualization of the executed path of a process instance is impr
 
 <!-- https://github.com/camunda/web-modeler/issues/9730 -->
 
-You can now [enable TLS-encrypted communication](/self-managed/modeler/web-modeler/configuration/ssl.md) between Web Modeler, the REST API, and websockets.
+You can now [enable TLS-encrypted communication](/self-managed/modeler/web-modeler/configuration/ssl.md) between Web Modeler, the <!--- Which REST API? ---> REST API, and websockets.
 
 ### API orchestration getting started journey <span class="badge badge--long" title="This feature affects Connectors">Connectors</span>
 

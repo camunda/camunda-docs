@@ -124,6 +124,8 @@ In such a test case, you want to test the executable BPMN process definition, pl
 
 In the example above, this is the worker code and the REST API:
 
+<!--- Which REST API are we referring to here? --->
+
 ![Process test scope example](testing-process-definitions-assets/process-test-scope-example.png)
 
 Workflow engine-independent business code should _not_ be included in the tests. In the Twitter example, the `TwitterService` will be mocked, and the `TwitterWorker` will still read process variables and call this mock. This way, you can make test the process model, the glue code, and the data flow in your process test.
