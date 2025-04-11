@@ -1,8 +1,7 @@
 import React from "react";
 import { useActiveVersion } from "@docusaurus/plugin-content-docs/client";
 
-const C8RunBaseURL =
-"https://github.com/camunda/camunda/releases/tag";
+const C8RunBaseURL = "https://github.com/camunda/camunda/releases/tag";
 
 const getVersion = () => {
   const docsVersion = useActiveVersion();

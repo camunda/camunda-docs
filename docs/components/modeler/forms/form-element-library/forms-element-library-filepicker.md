@@ -14,16 +14,16 @@ A form element to select files.
 
 #### General
 
-- **Field label**: Label displayed on top of the file picker.
+- **Field label**: Label displayed on top of the Filepicker.
   - It can either be an [expression](../../feel/language-guide/feel-expressions-introduction.md), plain text, or [templating syntax](../configuration/forms-config-templating-syntax.md).
 - **Supported file formats**: [Comma-separated list of supported file formats.](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#unique_file_type_specifiers)
   - It can either be an [expression](../../feel/language-guide/feel-expressions-introduction.md) or plain text.
 - **Upload multiple files**: Allows the user to upload multiple files at once.
   - It can be dynamically set using an [expression](../../feel/language-guide/feel-expressions-introduction.md).
 - **Key**: Binds the field to a form variable, refer to the [data binding documentation](../configuration/forms-config-data-binding.md).
-- **Read only**: Makes the file picker read-only, meaning the user can't change but only read its state.
+- **Read only**: Makes the Filepicker read-only, meaning the user can't change but only read its state.
   - It can be dynamically set using an [expression](../../feel/language-guide/feel-expressions-introduction.md).
-- **Disabled**: Disables the file picker, for use during development.
+- **Disabled**: Disables the Filepicker, for use during development.
 
 #### Condition
 
@@ -38,7 +38,7 @@ A form element to select files.
 
 Given that one of the following properties is set, the form will only submit when the respective condition is fulfilled. Otherwise, a validation error will be displayed.
 
-- **Required**: File picker must have a selected file.
+- **Required**: Filepicker must have a selected file.
 
 ## Reference uploaded files
 
@@ -49,7 +49,7 @@ Single file uploads are accessible using `value[1]` (since [FEEL](../../feel/wha
 
 ## Additional guides
 
-Design process applications for document handling with the File picker component.
+Design process applications for document handling with the Filepicker component.
 
 <DocCardList items={[{type:"link", href:"/docs/next/guides/document-handling/", label: "Store, track and manage documents", docId:"guides/document-handling"}
 ]}/>

@@ -30,7 +30,7 @@ For example, 1.2+ means support for the minor version 2, and any higher minors (
 ## Desktop Modeler
 
 - Windows 7 / 10
-- Mac OS X 10.11
+- macOS X 10.11
 - Ubuntu LTS (latest)
 
 ## Clients

@@ -13,7 +13,7 @@ Desktop modeler recognizes [process applications](../../concepts/process-applica
 For instance, a consumer loan approval process application might contain:
 
 - A main BPMN process (for example, `consumer-loan-application.bpmn`) to define the workflow.
-- DMN decision tables (for example, `interest-rate-calculation.dmn`, `credit-score-calculation.dmn`) for business rules.
+- DMN decisions (for example, `interest-rate-calculation.dmn`, `credit-score-calculation.dmn`) for business rules.
 - Forms (for example, `loan-application-review.form`) for user interactions.
 
 The structure of your project may vary depending on the implementation language. For example, a standard Java/Maven might be structured as follows:
@@ -32,12 +32,12 @@ consumer-loan-application/
 │   │       ├── dmn/
 │   │       │   ├── interest-rate-calculation.dmn
 │   │       │   └── credit-score-calculation.dmn
-│   │       ├── form/
-│   │       │   └── loan-application-review.form
-│   │       └── .process-application
+│   │       └── form/
+│   │           └── loan-application-review.form
 │   └── test/
 │       └── java/
 │           └── ...
+├── .process-application
 ├── pom.xml
 └── README.md
 ```
