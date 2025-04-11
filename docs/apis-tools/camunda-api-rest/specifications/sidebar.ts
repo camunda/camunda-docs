@@ -88,6 +88,24 @@ const sidebar: SidebarsConfig = {
           label: "Search batch operations",
           className: "api-method post",
         },
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/cancel-batch-operation",
+          label: "Cancel Batch operation",
+          className: "api-method put",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/pause-batch-operation",
+          label: "Pause Batch operation",
+          className: "api-method put",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/resume-batch-operation",
+          label: "Resume Batch operation",
+          className: "api-method put",
+        },
       ],
     },
     {
@@ -486,6 +504,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/get-process-instance-statistics",
+          label: "Get process instance statistics",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/search-process-instances",
           label: "Search process instances",
           className: "api-method post",
@@ -579,6 +603,12 @@ const sidebar: SidebarsConfig = {
           id: "apis-tools/camunda-api-rest/specifications/add-user-to-role",
           label: "Assign a user to a role (Work-in-Progress)",
           className: "api-method put",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/remove-user-from-role",
+          label: "Unassign a user from a role (Work-in-Progress)",
+          className: "api-method delete",
         },
         {
           type: "doc",
