@@ -231,7 +231,7 @@ For implementation, the only current limitation is that a loop cardinality is no
 
 These elements **cannot** be migrated:
 
-[//]: # (// TODO does this need an example?)
+<!-- TODO does this need an example? -->
 
 - `bpmn:loopCardinality`: This can eventually be replaced with a feel script iterating a defined number range.
 
@@ -248,7 +248,7 @@ Additionally, there is now a built-in way to collect results using `zeebe:loopCh
 
 ## Adjusting DMN models
 
-[//]: # (// TODO now that the diagram converter can convert DMN, what needs to be adjusted?)
+<!-- TODO now that the diagram converter can convert DMN, what needs to be adjusted? -->
 
 The DMN engine in Camunda 8 is more modern than in Camunda 7, which leads to some small differences. To evaluate Camunda 7 DMN files in Camunda 8, change the following in the XML:
 
