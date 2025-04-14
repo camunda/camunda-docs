@@ -11,6 +11,48 @@ Configuration properties can be defined as environment variables using [Spring B
 For example, the property `camunda.client.zeebe.defaults.max-jobs-active` is represented by the environment variable `CAMUNDA_CLIENT_ZEEBE_DEFAULTS_MAXJOBSACTIVE`.
 :::
 
+## Modes
+
+The Spring SDK has modes with meaningful defaults that are aligned with the distributions' default connection details.
+
+:::note
+The defaults being applied by the modes are overwritten by _any_ other property being set, including legacy/deprecated properties.
+
+Please check your configuration and logs to avoid unwanted overriding.
+:::
+
+### SaaS
+
+Activate it by setting:
+
+```yaml
+camunda:
+  client:
+    mode: saas
+```
+
+This will apply these defaults:
+
+```yaml reference referenceLinkText="Source" title="SaaS mode"
+https://github.com/camunda/camunda/blob/stable/8.7/clients/spring-boot-starter-camunda-sdk/src/main/resources/modes/saas.yaml
+```
+
+### Self-managed
+
+Activate it by setting:
+
+```yaml
+camunda:
+  client:
+    mode: self-managed
+```
+
+This will apply these defaults:
+
+```yaml reference referenceLinkText="Source" title="Self-managed mode"
+https://github.com/camunda/camunda/blob/stable/8.7/clients/spring-boot-starter-camunda-sdk/src/main/resources/modes/self-managed.yaml
+```
+
 ## Job worker configuration options
 
 ### Job type
