@@ -461,7 +461,7 @@ There are different ways to configure the mapping within Amazon OpenSearch Servi
   Use the following `curl` command to update the OpenSearch internal database and authorize the IAM role for access. Replace placeholders with your specific values:
 
   ```bash reference
-  https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/aws/kubernetes/eks-single-region-irsa/setup-opensearch-fgac.yml#L28-L42
+  https://github.com/camunda/camunda-deployment-references/blob/infraex-642-v3/aws/kubernetes/eks-single-region-irsa/setup-opensearch-fgac.yml#L28-L42
   ```
 
   - Replace `OPENSEARCH_MASTER_USERNAME` and `OPENSEARCH_MASTER_PASSWORD` with your OpenSearch domain admin credentials.
