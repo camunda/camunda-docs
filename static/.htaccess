@@ -77,7 +77,7 @@ RewriteRule ^docs/8.2/(.*)$ https://unsupported.docs.camunda.io/8.2/docs/$1 [R=3
 RewriteRule ^optimize/3.10.0/(.*)$ https://unsupported.docs.camunda.io/8.2/optimize/$1 [R=301,L]
 
 # Timeless classics.
-# rules required after update to docusaurs 2.0.0-beta.15 see https://github.com/camunda-cloud/camunda-cloud-documentation/pull/531
+# rules required after update to docusaurus 2.0.0-beta.15 see https://github.com/camunda-cloud/camunda-cloud-documentation/pull/531
 ## index pages are not served as /index/ anymore but /index.html
 RewriteRule ^(.*)/index/$ /$1 [R=301,L]
 ## tags do not exist anymore, redirect to main page
@@ -170,6 +170,27 @@ RewriteRule ^docs/next/apis-tools/zeebe-api-rest/zeebe-api-tutorial/?$ /docs/nex
 
 # Remove Tasklist GraphQL API in 8.8
 RewriteRule ^docs/next/apis-tools/tasklist-api/(.*)$ /docs/next/apis-tools/camunda-api-rest/camunda-api-rest-overview/ [R=301,L]
+
+# Move V2 REST endpoints in 8.8
+RewriteRule ^docs/next/apis-tools/camunda-api-rest/specifications/get-cluster-topology/?$ docs/next/apis-tools/camunda-api-rest/specifications/get-topology/$1 [R=301,L]
+RewriteRule ^docs/next/apis-tools/camunda-api-rest/specifications/get-status-of-camunda-license/?$ docs/next/apis-tools/camunda-api-rest/specifications/get-license/$1 [R=301,L]
+RewriteRule ^docs/next/apis-tools/camunda-api-rest/specifications/update-a-job/?$ ^docs/next/apis-tools/camunda-api-rest/specifications/update-job/$1 [R=301,L]
+RewriteRule ^docs/next/apis-tools/camunda-api-rest/specifications/query-incidents-alpha/?$ docs/next/apis-tools/camunda-api-rest/specifications/search-incidents/$1 [R=301,L]
+RewriteRule ^docs/next/apis-tools/camunda-api-rest/specifications/get-incident-by-key-alpha/?$ docs/next/apis-tools/camunda-api-rest/specifications/get-incident/$1 [R=301,L]
+RewriteRule ^docs/next/apis-tools/camunda-api-rest/specifications/query-user-tasks-alpha/?$ docs/next/apis-tools/camunda-api-rest/specifications/search-user-task/$1 [R=301,L]
+RewriteRule ^docs/next/apis-tools/camunda-api-rest/specifications/pin-internal-clock-alpha/?$ docs/next/apis-tools/camunda-api-rest/specifications/pin-clock/$1 [R=301,L]
+RewriteRule ^docs/next/apis-tools/camunda-api-rest/specifications/reset-internal-clock-alpha/?$ docs/next/apis-tools/camunda-api-rest/specifications/reset-clock/$1 [R=301,L]
+RewriteRule ^docs/next/apis-tools/camunda-api-rest/specifications/query-process-instances-alpha/?$ docs/next/apis-tools/camunda-api-rest/specifications/search-process-instances/$1 [R=301,L]
+RewriteRule ^docs/next/apis-tools/camunda-api-rest/specifications/query-flow-node-instances-alpha/?$ docs/next/apis-tools/camunda-api-rest/specifications/search-flow-node-instances/$1 [R=301,L]
+RewriteRule ^docs/next/apis-tools/camunda-api-rest/specifications/query-decision-definitions-alpha/?$ docs/next/apis-tools/camunda-api-rest/specifications/search-decision-definitions/$1 [R=301,L]
+RewriteRule ^docs/next/apis-tools/camunda-api-rest/specifications/get-decision-definition-xml-alpha/?$ docs/next/apis-tools/camunda-api-rest/specifications/get-decision-definition-xml/$1 [R=301,L]
+RewriteRule ^docs/next/apis-tools/camunda-api-rest/specifications/query-decision-requirements-alpha/?$ docs/next/apis-tools/camunda-api-rest/specifications/search-decision-requirements/$1 [R=301,L]
+RewriteRule ^docs/next/apis-tools/camunda-api-rest/specifications/query-decision-instances-alpha/?$ docs/next/apis-tools/camunda-api-rest/specifications/search-decision-instances/$1 [R=301,L]
+RewriteRule ^docs/next/apis-tools/camunda-api-rest/specifications/publish-a-message/?$ docs/next/apis-tools/camunda-api-rest/specifications/publish-message/$1 [R=301,L]
+RewriteRule ^docs/next/apis-tools/camunda-api-rest/specifications/correlate-a-message/?$ docs/next/apis-tools/camunda-api-rest/specifications/correlate-message/$1 [R=301,L]
+RewriteRule ^docs/next/apis-tools/camunda-api-rest/specifications/find-all-users/?$ docs/next/apis-tools/camunda-api-rest/specifications/search-users/$1 [R=301,L]
+RewriteRule ^docs/next/apis-tools/camunda-api-rest/specifications/deploy-resources/?$ docs/next/apis-tools/camunda-api-rest/specifications/create-deployment/$1 [R=301,L]
+RewriteRule ^docs/next/apis-tools/camunda-api-rest/specifications/update-element-instance-variables/?$ docs/next/apis-tools/camunda-api-rest/specifications/create-element-instance-variables/$1 [R=301,L]
 
 #---------------------------------------------------------------------------------
 #   8.7: content moves introduced prior to the release of version 8.7.
@@ -330,7 +351,6 @@ RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/upload-document-alp
 
 # Rename Web Modeler milestones to versions
 RewriteRule ^docs/components/modeler/web-modeler/milestones/?$ /docs/components/modeler/web-modeler/versions/$1 [R=301,L]
-
 
 #---------------------------------------------------------------------------------
 #   8.6: content moves introduced prior to the release of version 8.6.
