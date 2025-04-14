@@ -82,7 +82,7 @@ Migrating to Camunda 8 gives you additional advantages, which might raise priori
 - You need performance at scale and/or improved resilience.
 - You need certain features that can only be found in Camunda 8 (for example, BPMN message buffering, improved multi-instance handling, the new Connectors framework, RPA, IDP, or the improved collaboration features in Web Modeler).
 
-[//]: # "// TODO: Link to conceptual differences"
+<!-- TODO Link to conceptual differences -->
 
 ### When not to migrate?
 
@@ -126,7 +126,7 @@ Furthermore, you can use the [migration tooling](./migration-tooling.md) and rel
 
 To run any solution on Camunda 8, you must have a running Camunda 8 installation.
 
-[//]: # '// TODO mention that SaaS is also a "running installation" in that sense'
+<!-- TODO mention that SaaS is also a "running installation" in that sense -->
 
 If you used an embedded engine with Camunda 7 in the past, this model is no longer possible (see [conceptual differences between Camunda 7 and Camunda 8](./conceptual-differences.md)). This might be new to your organization to operate Camunda in addition to your solution itself. The most successful operating model is to have a central team in the organization caring about Camunda, offering it as a self-service platform to others. This is also described in our [process automation Center of Excellence playbook](https://camunda.com/process-orchestration/automation-center-of-excellence/).
 
@@ -178,7 +178,7 @@ Pros:
 - No data migration required.
 - Easy fallback to old solution in case of problems.
 
-[//]: # '// TODO "No data migration required" is too generic, go into details (no process data migration required)'
+<!-- TODO "No data migration required" is too generic, go into details (no process data migration required) -->
 
 Cons:
 
