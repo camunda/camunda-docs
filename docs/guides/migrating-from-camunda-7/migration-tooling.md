@@ -222,7 +222,7 @@ Migrate currently running process instances. Running means that these process in
 
 **Requirements and limitations:**
 
-// TODO this is an important deep link - we need to create a headline here
+<!-- TODO this is an important deep link - we need to create a headline here -->
 
 - The Runtime Data Migrator needs to access the Camunda 7 database.
 - The Runtime Data Migrator needs to access Camunda 8 APIs (which means you can also use this tool when you run on SaaS).
@@ -230,7 +230,7 @@ Migrate currently running process instances. Running means that these process in
 
 If you need to adjust your process models before migration, you can use [process version migration](https://docs.camunda.org/manual/7.22/user-guide/process-engine/process-instance-migration/) in the Camunda 7 environment to migrate process instances to versions that are migratable to Camunda 8. An interesting strategy can be to define dedicated migration states you want your process instances to pile up in. Another common strategy is to use [process instance modification](https://docs.camunda.org/manual/7.22/user-guide/process-engine/process-instance-modification/) in the Camunda 7 environment to move out of states that are not migratable (for example, process instances within a multiple instance task).
 
-// TODO pile up: mention the job pause feature in Camunda 7
+<!-- TODO pile up: mention the job pause feature in Camunda 7 -->
 
 ### History migration mode (copying audit log data)
 
@@ -268,7 +268,7 @@ With this approach, the duration of history migration doesn't block big bang mig
 
 You might need to customize the data migration, especially if you used complex data formats in C7 (for example, Java objects) that need to be converted to something Camunda 8 can handle (for example, JSON). As part of this step, you might also need to extract big payloads and binaries (like documents) into an external data store and reference it from the process (using, for example, upcoming document handling possibilities).
 
-// TODO link to document handling docs
+<!-- TODO link to document handling docs -->
 
 ## Code Converter
 
