@@ -137,7 +137,7 @@ The following attributes/elements can be migrated:
     Camunda 8 only supports the `latest`, `deployment`, and `versionTag` [binding types](/components/best-practices/modeling/choosing-the-resource-binding-type.md) for user task forms.
     :::
 
-// TODO this note box looks weird, maybe this can be improved
+[//]: # (// TODO this note box looks weird, maybe this can be improved)
 
 The following attributes/elements **cannot** yet be migrated:
 
@@ -163,7 +163,7 @@ The following attributes/elements can be migrated:
   :::
 - `camunda:decisionRefVersionTag` to `zeebe:calledDecision versionTag`
 
-// TODO this note box looks weird, maybe this can be improved
+[//]: # (// TODO this note box looks weird, maybe this can be improved)
 
 The following attributes are **not** yet supported:
 
@@ -236,7 +236,7 @@ For implementation, the only current limitation is that a loop cardinality is no
 
 These elements **cannot** be migrated:
 
-// TODO does this need an example?
+[//]: # (// TODO does this need an example?)
 
 - `bpmn:loopCardinality`: This can eventually be replaced with a feel script iterating a defined number range.
 

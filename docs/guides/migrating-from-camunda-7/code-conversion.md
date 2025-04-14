@@ -81,7 +81,7 @@ If your models also contain JUEL expressions, which are not supported in Camunda
 
 Simple expressions are [directly converted by this code in the Diagram Converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/blob/main/backend-diagram-converter/core/src/main/java/org/camunda/community/migration/converter/expression/ExpressionTransformer.java). This can be extended to suit your needs.
 
-// TODO document the expression transformer instead of referencing code
+[//]: # (// TODO document the expression transformer instead of referencing code)
 
 You can use the [FEEL copilot](https://feel-copilot.camunda.com/) to rewrite more complex expressions for you.
 
@@ -117,7 +117,7 @@ For example, to migrate an existing Spring Boot application, take the following 
 
 ### Client API
 
-// TODO link to the Zeebe / Camunda API, call it Camunda 8 API, is the mentioning of the protocol still required?
+[//]: # (// TODO link to the Zeebe / Camunda API, call it Camunda 8 API, is the mentioning of the protocol still required?)
 
 The Zeebe API (for example, the workflow engine API - start process instances, subscribe to tasks, or complete them) has been completely redesigned and is not compatible with Camunda 7. While conceptually similar, the API uses different method names, data structures, and protocols.
 
@@ -147,7 +147,7 @@ The [Camunda 7 Adapter](https://github.com/camunda-community-hub/camunda-7-to-8-
 
 You can use this worker directly, but more often it might serve as a starting point or simply be used for inspiration.
 
-// TODO naming inconsistency
+[//]: # (// TODO naming inconsistency)
 
 The [Camunda 7 to Camunda 8 Converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/backend-diagram-converter) will adjust the service tasks in your BPMN model automatically for this adapter.
 

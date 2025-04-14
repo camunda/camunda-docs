@@ -48,7 +48,7 @@ Camunda 8 uses [Friendly-Enough Expression Language (FEEL)](/components/modeler/
 
 Most expressions can be converted (see [this code in the diagram converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/blob/main/backend-diagram-converter/core/src/main/java/org/camunda/community/migration/converter/expression/ExpressionTransformer.java) as a starting point), some might need to be completely rewritten, and some might require an additional service task to prepare necessary data (which may have been calculated on the fly when using Camunda 7).
 
-// TODO extensive docs for the diagram converter
+[//]: # (// TODO extensive docs for the diagram converter)
 
 You can also use the [FEEL copilot](https://feel-copilot.camunda.com/) to rewrite complex expressions for you.
 
@@ -71,9 +71,9 @@ There are several differences between how [multi-tenancy](/self-managed/concepts
 4. [Tenant checks in Camunda 7](https://docs.camunda.org/manual/develop/user-guide/process-engine/multi-tenancy/#disable-the-transparent-access-restrictions) can be disabled to perform admin/maintenance operations. This can't be done in Camunda 8, but an admin user can be authorized to all tenants, which would result in the same thing.
 5. If a user tries to trigger a command on a resource mapped to multiple tenants in Camunda 7, an exception is thrown, and [the `tenantId` must be explicitly provided](https://docs.camunda.org/manual/develop/user-guide/process-engine/multi-tenancy/#run-commands-for-a-tenant). However, the Camunda 7 engine will try to infer the correct `tenantId` as much as possible. Users in Camunda 7 that are authorized for multiple tenants may perform a lot more operations without providing a `tenantId`. This inference in the Zeebe Broker doesn't happen in Camunda 8, and Zeebe asks users to provide the `tenantId` explicitly.
 
-// TODO could 1 be less relevant?
+[//]: # (// TODO could 1 be less relevant?)
 
-// TODO reference roadmap item for shared resources tenant
+[//]: # (// TODO reference roadmap item for shared resources tenant)
 
 ## Process solutions using Spring Boot
 
@@ -84,7 +84,7 @@ With Camunda 7, a frequented architecture to build a process solution (also know
 - Camunda Spring Boot Starter with embedded engine
 - Glue code implemented in Java delegates (being Spring beans)
 
-// TODO Camunda Run as reference architecture?
+[//]: # (// TODO Camunda Run as reference architecture?)
 
 This is visualized on the left-hand side of the following image. With Camunda 8, a comparable process solution would look like the right-hand side of the picture and leverage:
 
@@ -101,7 +101,7 @@ The packaging of a process solution is the same with Camunda 7 and Camunda 8. Yo
 
 ![Process Solution Packaging](../img/process-solution-packaging.png)
 
-// TODO image quality of embedded bpmn model
+[//]: # (// TODO image quality of embedded bpmn model)
 
 :::note
 Process solution definition is taken from [Practical Process Automation](https://processautomationbook.com/).
@@ -145,11 +145,11 @@ Besides Spring Boot, there are other environments used to build process solution
 
 Camunda 8 doesn't provide integration into Jakarta EE application servers like Camunda 7 does. Instead, Jakarta EE applications need to manually add the Zeebe client library. The implications are comparable to what is described for Spring Boot applications in this guide.
 
-// TODO mention what is on the left side and the right side of the picture below
+[//]: # (// TODO mention what is on the left side and the right side of the picture below)
 
 ![A diagram showing a container-managed engine](../img/architecture-container-managed.png)
 
-// TODO the titles of the boxes could be more explicit
+[//]: # (// TODO the titles of the boxes could be more explicit)
 
 ### CDI or OSGI
 
@@ -161,7 +161,7 @@ When you run your application in Node.js or C#, for example, you exchange one re
 
 ![A diagram showing a polygot application architecture](../img/architecture-polyglot.png)
 
-// TODO the titles of the boxes could be more explicit
+[//]: # (// TODO the titles of the boxes could be more explicit)
 
 ## Plugins
 
