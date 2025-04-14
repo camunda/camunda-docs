@@ -28,7 +28,7 @@ When a broker is connected to the cluster for the first time, it fetches the top
 
 To ensure fault tolerance, Zeebe replicates data across servers using the [raft protocol](<https://en.wikipedia.org/wiki/Raft_(computer_science)>).
 
-Data is divided into partitions (shards). Each partition has a number of replicas. Among the replica set, a **leader** is determined by the raft protocol, which takes in requests and performs all of the processing. All other brokers are passive **followers**. When the leader becomes unavailable, the followers transparently select a new leader.
+Data is divided into partitions (shards). Each partition has a number of replicas. Among the replica set, a **leader** is determined by the raft protocol, which takes in requests and performs all the processing. All other brokers are passive **followers**. When the leader becomes unavailable, the followers transparently select a new leader.
 
 Each broker in the cluster may be both leader and follower at the same time for different partitions. In an ideal world, this leads to client traffic distributed evenly across all brokers.
 
@@ -44,6 +44,13 @@ To reach a well-distributed leadership again, the [Rebalancing API](../../../sel
 
 ## Commit
 
-Before a new record on a partition can be processed, it must be replicated to a quorum (typically majority) of brokers. This procedure is called **commit**. Committing ensures a record is durable, even in case of complete data loss on an individual broker. The exact semantics of committing are defined by the raft protocol.
+Before a new record on a partition can be processed, it must be replicated to a quorum (typically majority) of brokers, and this majority of followers has to confirm the received record. When the leader received these confirmations from half or more of its followers, the leader **commits** the record. Committing ensures a record is durable, even in case of complete data loss on an individual broker. The exact semantics of committing are defined by the raft protocol.
 
 ![cluster](assets/commit.png)
+
+Some examples for common replication factors:
+
+| Replication factor | Description           | Quorum                                                     | Use case                                                                                                                                                                         |
+| :----------------: | --------------------- | ---------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|         3          | 1 leader, 2 followers | half or more of 2 followers is 1 follower that confirmed   | single region, 3 availability zones                                                                                                                                              |
+|         4          | 1 leader, 3 followers | half or more of 3 followers are 2 followers that confirmed | dual region, records always replicated to both regions [following the recommended setup](../../../self-managed/concepts/multi-region/dual-region.md#zeebe-cluster-configuration) |
