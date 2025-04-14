@@ -179,9 +179,13 @@ When the purge cluster operation is executed, the following steps are taken:
   - The exporter is closed via `Exporter#close`.
 - Partitions are bootstrapped and nodes rejoin the partitions with the same configuration as before the purge.
 
-:::note `Exporter#open(Context)` is not called during the purge operation. :::
+:::note 
+`Exporter#open(Context)` is not called during the purge operation. 
+:::
 
 When an exporter is purged, it is expected to delete all data, but not schemas.
 In the case that an exporter exports to a database, only the records are deleted, not the tables themselves.
 
-:::note All resources required for purging need to be closed afterwards to avoid memory leaks. :::
+:::note 
+All resources required for purging need to be closed afterwards to avoid memory leaks. 
+:::
