@@ -1460,6 +1460,37 @@ paths:
         "500":
           $ref: "#/components/responses/InternalServerError"
 
+  /process-instances/{processInstanceKey}/statistics/flownode-instances:
+    post:
+      tags:
+        - Process instance
+      operationId: getProcessInstanceStatistics
+      summary: Get process instance statistics
+      description: |
+        Get statistics about flow nodes by the process instance key.
+      parameters:
+        - name: processInstanceKey
+          in: path
+          required: true
+          description: The assigned key of the process instance, which acts as a unique identifier for this process instance.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: The process instance statistics result.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProcessInstanceFlowNodeStatisticsQueryResult"
+        "400":
+          $ref: "#/components/responses/InvalidData"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+
   /process-instances/search:
     post:
       tags:
@@ -2356,6 +2387,44 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "409":
           description: The user with the given ID is already assigned to the role.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+    delete:
+      tags:
+        - Role
+      operationId: removeUserFromRole
+      summary: Unassign a user from a role (Work-in-Progress)
+      description: |
+        Unassigns a user from a role.
+
+        This API is in a Work-in-Progress state and will undergo potential breaking changes until
+        its release with an upcoming minor release.
+      parameters:
+        - name: roleId
+          in: path
+          required: true
+          description: The role ID.
+          schema:
+            type: string
+        - name: username
+          in: path
+          required: true
+          description: The user username.
+          schema:
+            type: string
+      responses:
+        "202":
+          description: The user was unassigned successfully from the role.
+        "400":
+          $ref: "#/components/responses/InvalidData"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          description: The role or user with the given ID or username was not found.
           content:
             application/problem+json:
               schema:
@@ -3790,6 +3859,123 @@ paths:
         "500":
           $ref: "#/components/responses/InternalServerError"
 
+  /batch-operations/{batchOperationKey}/cancel:
+    put:
+      tags:
+        - Batch operation
+      operationId: cancelBatchOperation
+      summary: Cancel Batch operation
+      description: Cancels a running batch operation.
+      parameters:
+        - name: batchOperationKey
+          in: path
+          required: true
+          description: |
+            The key of the batch operation.
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              nullable: true
+        required: false
+      responses:
+        "202":
+          description: The batch operation cancel request was accepted.
+          content: {}
+        "400":
+          $ref: "#/components/responses/InvalidData"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          description: Not found. The batch operation was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+
+  /batch-operations/{batchOperationKey}/pause:
+    put:
+      tags:
+        - Batch operation
+      operationId: pauseBatchOperation
+      summary: Pause Batch operation
+      description: Pauses a running batch operation.
+      parameters:
+        - name: batchOperationKey
+          in: path
+          required: true
+          description: |
+            The key of the batch operation.
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              nullable: true
+        required: false
+      responses:
+        "202":
+          description: The batch operation pause request was accepted.
+          content: {}
+        "400":
+          $ref: "#/components/responses/InvalidData"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          description: Not found. The batch operation was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+
+  /batch-operations/{batchOperationKey}/resume:
+    put:
+      tags:
+        - Batch operation
+      operationId: resumeBatchOperation
+      summary: Resume Batch operation
+      description: Resumes a paused batch operation.
+      parameters:
+        - name: batchOperationKey
+          in: path
+          required: true
+          description: |
+            The key of the batch operation.
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              nullable: true
+        required: false
+      responses:
+        "202":
+          description: The batch operation resume request was accepted.
+          content: {}
+        "400":
+          $ref: "#/components/responses/InvalidData"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          description: Not found. The batch operation was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+
 components:
   schemas:
     TenantCreateRequest:
@@ -4475,6 +4661,11 @@ components:
           type: array
           items:
             type: string
+        $notIn:
+          description: Checks if the property matches none of the provided values.
+          type: array
+          items:
+            type: string
     AdvancedStringFilter:
       title: Advanced filter
       description: Advanced string filter.
@@ -4514,6 +4705,38 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/ProcessInstanceStateEnum"
+        $like:
+          description: |
+            Checks if the property matches the provided like value.
+
+            Supported wildcard characters are:
+
+            * `*`: matches zero, one, or multiple characters.
+            * `?`: matches one, single character.
+
+            Wildcard characters can be escaped with backslash, for instance: `\*`.
+          type: string
+    AdvancedFlowNodeInstanceStateFilter:
+      title: Advanced filter
+      description: Advanced FlowNodeInstanceStateEnum filter.
+      type: object
+      properties:
+        $eq:
+          description: Checks for equality with the provided value.
+          allOf:
+            - $ref: "#/components/schemas/FlowNodeInstanceStateEnum"
+        $neq:
+          description: Checks for inequality with the provided value.
+          allOf:
+            - $ref: "#/components/schemas/FlowNodeInstanceStateEnum"
+        $exists:
+          description: Checks if the current property exists.
+          type: boolean
+        $in:
+          description: Checks if the property matches any of the provided values.
+          type: array
+          items:
+            $ref: "#/components/schemas/FlowNodeInstanceStateEnum"
         $like:
           description: |
             Checks if the property matches the provided like value.
@@ -4589,6 +4812,16 @@ components:
           allOf:
             - $ref: "#/components/schemas/ProcessInstanceStateEnum"
         - $ref: "#/components/schemas/AdvancedProcessInstanceStateFilter"
+    FlowNodeInstanceStateFilterProperty:
+      description: FlowNodeInstanceStateEnum property with full advanced search capabilities.
+      type: object
+      oneOf:
+        - type: string
+          title: Exact match
+          description: Matches the value exactly.
+          allOf:
+            - $ref: "#/components/schemas/FlowNodeInstanceStateEnum"
+        - $ref: "#/components/schemas/AdvancedFlowNodeInstanceStateFilter"
     DateTimeFilterProperty:
       description: Date-time property with full advanced search capabilities.
       type: object
@@ -4675,6 +4908,21 @@ components:
         hasRetriesLeft:
           description: Whether the process has failed jobs with retries left.
           type: boolean
+        flowNodeInstanceState:
+          description: The state of the flow node instances associated with the process instance.
+          allOf:
+            - $ref: "#/components/schemas/FlowNodeInstanceStateFilterProperty"
+        flowNodeId:
+          description: The flow node ID associated with the process instance.
+          allOf:
+            - $ref: "#/components/schemas/StringFilterProperty"
+        hasFlowNodeInstanceIncident:
+          description: Whether the flow node instance has an incident or not.
+          type: boolean
+        incidentErrorHashCode:
+          description: The incident error hash code, associated with this process.
+          type: integer
+          format: int32
     ProcessInstanceVariableFilterRequest:
       description: Process instance variable filter.
       type: object
@@ -4751,6 +4999,12 @@ components:
         - ACTIVE
         - COMPLETED
         - TERMINATED
+    FlowNodeInstanceStateEnum:
+      description: Flow node states, one of ACTIVE, COMPLETED, TERMINATED.
+      enum:
+        - ACTIVE
+        - COMPLETED
+        - TERMINATED
     ProcessDefinitionFlowNodeStatisticsQuery:
       description: Process definition flow node statistics request.
       type: object
@@ -4767,9 +5021,18 @@ components:
           description: The flow node statistics.
           type: array
           items:
-            $ref: "#/components/schemas/ProcessDefinitionFlowNodeStatisticsResult"
-    ProcessDefinitionFlowNodeStatisticsResult:
-      description: Process definition flow node statistics response.
+            $ref: "#/components/schemas/ProcessFlowNodeStatisticsResult"
+    ProcessInstanceFlowNodeStatisticsQueryResult:
+      description: Process definition flow node statistics query response.
+      type: object
+      properties:
+        items:
+          description: The flow node statistics.
+          type: array
+          items:
+            $ref: "#/components/schemas/ProcessFlowNodeStatisticsResult"
+    ProcessFlowNodeStatisticsResult:
+      description: Process flow node statistics response.
       type: object
       properties:
         flowNodeId:
@@ -4848,11 +5111,8 @@ components:
           type: string
         state:
           description: State of flow node instance as defined set of values.
-          type: string
-          enum:
-            - ACTIVE
-            - COMPLETED
-            - TERMINATED
+          allOf:
+            - $ref: "#/components/schemas/FlowNodeInstanceStateFilterProperty"
         type:
           description: Type of flow node as defined set of values.
           type: string
@@ -4969,11 +5229,8 @@ components:
             - UNKNOWN
         state:
           description: State of flow node instance as defined set of values.
-          type: string
-          enum:
-            - ACTIVE
-            - COMPLETED
-            - TERMINATED
+          allOf:
+            - "$ref": "#/components/schemas/FlowNodeInstanceStateEnum"
         hasIncident:
           description: Shows whether this flow node instance has an incident. If true also an incidentKey is provided.
           type: boolean
@@ -7683,6 +7940,11 @@ components:
         resourceKey:
           description: The unique key of this resource.
           type: string
+    BatchOperationTypeEnum:
+      description: The type of the batch operation.
+      type: string
+      enum:
+        - PROCESS_CANCELLATION
     BatchOperationCreatedResult:
       type: object
       properties:
@@ -7690,9 +7952,7 @@ components:
           description: Key of the batch operation.
           type: string
         batchOperationType:
-          description: The type of the batch operation.
-          type: string
-          example: PROCESS_CANCELLATION
+          $ref: "#/components/schemas/BatchOperationTypeEnum"
     BatchOperationSearchQuerySortRequest:
       type: object
       properties:
@@ -7702,7 +7962,7 @@ components:
           enum:
             - batchOperationKey
             - operationType
-            - status
+            - state
             - startDate
             - endDate
         order:
@@ -7732,13 +7992,10 @@ components:
           description: The batch operation key.
           type: string
         operationType:
+          $ref: "#/components/schemas/BatchOperationTypeEnum"
+        state:
           type: string
-          description: The operation type of the batch operation.
-          enum:
-            - PROCESS_CANCELLATION
-        status:
-          type: string
-          description: The status of the batch operation.
+          description: The state of the batch operation.
           enum:
             - CREATED
             - ACTIVE
@@ -7762,8 +8019,8 @@ components:
         batchOperationKey:
           description: Key of the batch operation.
           type: string
-        status:
-          description: The status of the batch operation.
+        state:
+          description: The state of the batch operation.
           type: string
           enum:
             - CREATED
@@ -7773,9 +8030,7 @@ components:
             - COMPLETED_WITH_ERRORS
             - CANCELED
         batchOperationType:
-          description: The type of the batch operation.
-          type: string
-          example: PROCESS_CANCELLATION
+          $ref: "#/components/schemas/BatchOperationTypeEnum"
         startDate:
           type: string
           description: The start date of the batch operation.
@@ -7815,12 +8070,13 @@ components:
         itemKey:
           description: Key of the item, e.g. a process instance key.
           type: string
-        status:
-          description: Status of the item.
+        state:
+          description: State of the item.
           type: string
           enum:
             - ACTIVE
             - COMPLETED
+            - CANCELED
             - FAILED
   responses:
     InternalServerError:
