@@ -201,7 +201,7 @@ camunda.tasklist:
 ## Monitoring and health probes
 
 Tasklist includes the [Spring Boot Actuator](https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html#production-ready) inside, which
-provides the number of monitoring possibilities (e.g. health check (http://localhost:8080/actuator/health) and metrics (http://localhost:8080/actuator/prometheus) endpoints).
+provides the number of monitoring possibilities (e.g. health check (http://localhost:9600/actuator/health) and metrics (http://localhost:9600/actuator/prometheus) endpoints).
 
 Tasklist uses the following Actuator configuration by default:
 
@@ -220,11 +220,11 @@ management.endpoints.web.exposure.include: health, prometheus, loggers, usage-me
 
 With this configuration, the following endpoints are available for use out of the box:
 
-`<server>:8080/actuator/prometheus` Prometheus metrics
+`<server>:9600/actuator/prometheus` Prometheus metrics
 
-`<server>:8080/actuator/health/liveness` Liveness probe
+`<server>:9600/actuator/health/liveness` Liveness probe
 
-`<server>:8080/actuator/health/readiness` Readiness probe
+`<server>:9600/actuator/health/readiness` Readiness probe
 
 ### Example snippets to use Tasklist probes in Kubernetes
 
@@ -236,7 +236,7 @@ For details to set Kubernetes probes parameters, see [Kubernetes configure probe
 readinessProbe:
   httpGet:
     path: /actuator/health/readiness
-    port: 8080
+    port: 9600
   initialDelaySeconds: 30
   periodSeconds: 30
 ```
@@ -247,7 +247,7 @@ readinessProbe:
 livenessProbe:
   httpGet:
     path: /actuator/health/liveness
-    port: 8080
+    port: 9600
   initialDelaySeconds: 30
   periodSeconds: 30
 ```
@@ -302,7 +302,7 @@ The log level for Tasklist can be changed by following the [Setting a Log Level]
 #### Set all Tasklist loggers to DEBUG
 
 ```shell
-curl 'http://localhost:8080/actuator/loggers/io.camunda.tasklist' -i -X POST \
+curl 'http://localhost:9600/actuator/loggers/io.camunda.tasklist' -i -X POST \
 -H 'Content-Type: application/json' \
 -d '{"configuredLevel":"debug"}'
 ```
