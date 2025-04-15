@@ -54,7 +54,7 @@ Running a dual-region configuration requires users to detect and manage any regi
   - In that guide, we're showcasing Kubernetes dual-region installation, based on the following tools:
     - [Helm (3.x)](https://helm.sh/docs/intro/install/) for installing and upgrading the [Camunda Helm chart](https://artifacthub.io/packages/helm/camunda/camunda-platform).
     - [Kubectl (1.30.x)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the Kubernetes cluster.
-- `cURL` or similar to interact with the <!--- Which REST API? ---> REST API.
+- `cURL` or similar to interact with the [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md).
 
 ## Terminology
 
@@ -536,7 +536,7 @@ curl -XPOST 'http://localhost:9600/actuator/exporters/elasticsearchregion1/disab
 
 #### Verification
 
-Port-forwarding the Zeebe Gateway via `kubectl` for the <!--- Which REST API? ---> REST API and listing all exporters will reveal their current status.
+Port-forwarding the Zeebe Gateway via `kubectl` for the REST API and listing all exporters will reveal their current status.
 
 ```bash
 kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING

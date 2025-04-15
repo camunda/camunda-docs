@@ -57,7 +57,7 @@ Running a dual-region configuration requires users to detect and manage any regi
   - In that guide, we're showcasing Kubernetes dual-region installation, based on the following tools:
     - [Helm (3.x)](https://helm.sh/docs/intro/install/) for installing and upgrading the [Camunda Helm chart](https://artifacthub.io/packages/helm/camunda/camunda-platform).
     - [Kubectl (1.30.x)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the Kubernetes cluster.
-- `cURL` or similar to interact with the <!--- Which REST API? ---> REST API.
+- `cURL` or similar to interact with the [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md).
 
 ## Terminology
 
@@ -185,7 +185,7 @@ The following alternatives to port-forwarding are possible:
 
 In our example, we went with port-forwarding to a localhost, but other alternatives can also be used.
 
-1. Use the [REST API](../../../apis-tools/camunda-api-rest/camunda-api-rest-overview.md) to retrieve the list of the remaining brokers
+1. Use the [Camunda 8 REST API](../../../apis-tools/camunda-api-rest/camunda-api-rest-overview.md) to retrieve the list of the remaining brokers
 
    ```bash
    kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 8080:8080 -n $CAMUNDA_NAMESPACE_SURVIVING
@@ -569,7 +569,7 @@ desired={<Six viewBox="140 40 680 500" />}
 
 #### Verification
 
-Port-forwarding the Zeebe Gateway via `kubectl` for the <!--- Which REST API? ---> REST API and listing all exporters will reveal their current status.
+Port-forwarding the Zeebe Gateway via `kubectl` for the REST API and listing all exporters will reveal their current status.
 
 ```bash
 kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
@@ -1275,7 +1275,7 @@ desired={<Twelve viewBox="140 40 680 500" />}
 
 #### Verification
 
-Port-forwarding the Zeebe Gateway via `kubectl` for the <!--- Which REST API? ---> REST API and listing all exporters will reveal their current status.
+Port-forwarding the Zeebe Gateway via `kubectl` for the REST API and listing all exporters will reveal their current status.
 
 ```bash
 kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
@@ -1370,7 +1370,7 @@ desired={<Fourteen viewBox="140 40 680 500" />}
 #### How to get there
 
 1. Based on the base Helm values file `camunda-values.yml` in `aws/dual-region/kubernetes`, you have to extract the `clusterSize` and `replicationFactor` as you have to re-add the brokers to the Zeebe cluster.
-2. Port-forwarding the Zeebe Gateway via `kubectl` for the <!--- Which REST API? ---> REST API allows you to send a Cluster API call to add the new brokers to the Zeebe cluster with the previous information on size and replication.
+2. Port-forwarding the Zeebe Gateway via `kubectl` for the REST API allows you to send a Cluster API call to add the new brokers to the Zeebe cluster with the previous information on size and replication.
    E.g. in our case the `clusterSize` is 8 and `replicationFactor` is 4 meaning we have to list all broker IDs starting from 0 to 7 and set the correct `replicationFactor` in the query.
 
    ```bash
@@ -1384,7 +1384,7 @@ desired={<Fourteen viewBox="140 40 680 500" />}
 
 #### Verification
 
-Port-forwarding the Zeebe Gateway via `kubectl` for the <!--- Which REST API? ---> REST API and checking the Cluster API endpoint will show the status of the last change.
+Port-forwarding the Zeebe Gateway via `kubectl` for the REST API and checking the Cluster API endpoint will show the status of the last change.
 
 ```bash
 kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
