@@ -11,22 +11,13 @@ import TabItem from "@theme/TabItem";
 
 CPT is based on [JUnit 5](https://junit.org/junit5/) and [Testcontainers](https://java.testcontainers.org/). It provides a managed isolated runtime to execute your process tests on your local machine. The runtime uses the Camunda Docker images and includes the following components:
 
-- Camunda (Zeebe, Operate, Tasklist)
+- Camunda
 - Connectors
-- Elasticsearch
 
 :::danger Disclaimer
 CPT is in an [alpha version](/components/early-access/alpha/alpha-features.md#alpha).
 
 For a mature testing library, take a look at [Zeebe Process Test](/apis-tools/java-client/zeebe-process-test.md).
-:::
-
-:::note Limitations
-CPT is in an early stage. It doesn't contain all features, and it is not optimized yet. Be aware of the following limitations:
-
-- Slow test execution (~40 seconds per test case)
-- Only basic assertions
-
 :::
 
 ## Prerequisites
@@ -210,21 +201,21 @@ io:
     process:
       test:
         # Change the version of the Camunda Docker image
-        camundaVersion: 8.6.0
+        camunda-version: 8.8.0
         # Change the Camunda Docker image
         camunda-docker-image-name: camunda/camunda
         # Set additional Camunda environment variables
         camunda-env-vars:
           env_1: value_1
-        # Expose addition Camunda ports
-        camundaExposedPorts:
+        # Expose additional Camunda ports
+        camunda-exposed-ports:
           - 4567
         # Enable Connectors
         connectors-enabled: true
         # Change the Connectors Docker image
         connectors-docker-image-name: camunda/connectors
         # Change version of the Connectors Docker image
-        connectors-docker-image-version: 8.6.0
+        connectors-docker-image-version: 8.8.0
         # Set additional Connectors environment variables
         connectors-env-vars:
           env_1: value_1
@@ -240,11 +231,10 @@ io:
 You can change the version by setting the following properties in a `/camunda-container-runtime.properties` file:
 
 ```properties
-camunda.version=8.6.0
-elasticsearch.version=8.13.4
+camunda.version=8.8.0
 ```
 
-For more configuration options, you can register the JUnit extension manually and use the fluent builder to override the default:
+For more configuration options, you can register the JUnit extension manually and use the fluent builder to override the defaults:
 
 ```java
 package com.example;
@@ -256,22 +246,22 @@ import org.junit.jupiter.api.extension.RegisterExtension;
 public class MyProcessTest {
 
     @RegisterExtension
-    private final CamundaProcessTestExtension extension =
+    private static final CamundaProcessTestExtension EXTENSION =
         new CamundaProcessTestExtension()
             // Change the version of the Camunda Docker image
-            .withCamundaVersion("8.6.0")
+            .withCamundaVersion("8.8.0")
             // Change the Camunda Docker image
             .withCamundaDockerImageName("camunda/camunda")
             // Set additional Camunda environment variables
             .withCamundaEnv("env_1", "value_1")
-            // Expose addition Camunda ports
+            // Expose additional Camunda ports
             .withCamundaExposedPort(4567)
             // Enable Connectors
             .withConnectorsEnabled(true)
             // Change the Connectors Docker image
             .withConnectorsDockerImageName("camunda/connectors")
             // Change version of the Connectors Docker image
-            .withConnectorsDockerImageVersion("8.6.0")
+            .withConnectorsDockerImageVersion("8.8.0")
             // Set additional Connectors environment variables
             .withConnectorsEnv("env_1", "value_1")
             // Set Connectors secrets
@@ -287,13 +277,10 @@ public class MyProcessTest {
 
 The test runtime uses [SLF4J](https://www.slf4j.org/) as the logging framework. If needed, you can enable the logging for the following packages:
 
-- `io.camunda.process.test` - The test runtime
-- `tc.camunda` - The Camunda Docker container
-- `tc.connectors` - The Connectors Docker container
-- `tc.elasticsearch` - The Elasticsearch Docker container
-- `org.testcontainers` - The Testcontainers framework
-
-For most cases, the log level `warn` (warning) is sufficient.
+- `io.camunda.process.test` - The test runtime (recommended level `info`)
+- `tc.camunda` - The Camunda Docker container (recommended level `error`)
+- `tc.connectors` - The Connectors Docker container (recommended level `error`)
+- `org.testcontainers` - The Testcontainers framework (recommended level `warn`)
 
 ## Examples
 
