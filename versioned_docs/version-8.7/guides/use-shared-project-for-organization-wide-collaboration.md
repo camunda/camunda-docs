@@ -37,23 +37,9 @@ To create a shared project as a space for your organization's resources:
 5. (optional) Enter an invitation message in the text box below your invites.
 6. Select **Send invite**. This will invite the users to both the organization and project. Once your colleague clicks **Accept invitation**, they can access the shared project with the assigned role and permissions.
 
-## Assign project roles to collaborators
+## Assign project roles and organization roles to collaborators
 
-By default, invited collaborators will become **Editors**. To understand what permissions each role has, review [access rights and permissions](/components/modeler/web-modeler/collaboration.md#access-rights-and-permissions).
-
-1. To change the role of a user, under **Collaborators** select the three vertical dots to the right of the collaborator name.
-2. Select **Change role**. You may select Project Admin, Editor, Commenter, or Viewer.
-
-## Assign organization roles to collaborators
-
-While above we assigned roles specific to the project, you can also assign roles specific to the entire organization:
-
-1. Select the **Open Organizations** icon in the top right corner of your screen. Next to **Active Organization** select **Manage**.
-2. Here, within **Organization management**, select **Users > Add new user**.
-3. Enter the user's email address and [assign the appropriate role](/components/console/manage-organization/manage-users.md). For example, the **Developer** role is typically a good default option to provide the user with full access to Console, Operate, and Tasklist without deletion privileges.
-4. Click **Add**.
-   - An email is sent to the email you provided.
-   - Your colleague must click **Join** to join the organization.
+To understand what permissions each role has, review [access rights and permissions](/components/modeler/web-modeler/collaboration.md#access-rights-and-permissions). You can also [assign roles specific to the entire organization](/components/console/manage-organization/manage-users.md). For example, the **Developer** role is typically a good default option to provide the user with full access to Console, Operate, and Tasklist without deletion privileges.
 
 If you previously invited collaborators to your organization _and_ project in the section prior, select the three vertical dots to the right of the users' name and select **Edit user**. Check which roles the user should be assigned and select **Confirm**.
 
@@ -107,7 +93,16 @@ To access the associated README file for a process within the shared project:
 
 ## Next steps
 
-Organization owners and administrators can connect their Web Modeler process applications to GitHub and GitLab, allowing users to keep their Web Modeler, Desktop Modeler, and official version control projects synced.
+Organization owners and administrators can connect their Web Modeler process applications to GitHub and GitLab, allowing users to keep their Web Modeler, Desktop Modeler, and official version control projects synced:
+
+![process org landscape architecture](./img/process-org-landscape-architecture.png)
+
+To keep your process landscape up to date with all changes in production, take the following steps:
+
+1. Sync the process application to the feature branch of subfolder in a repository.
+2. Merge the feature branch to main.
+3. Begin the [CI/CD pipeline](/guides/devops-lifecycle/integrate-web-modeler-in-ci-cd.md).
+4. Sync your main branch to the shared project as part of the CI/CD pipeline.
 
 Once the basic integration is configured by an organization owner or organization administrator, project administrators and editors can use the built-in button to pull changes from GitHub, integrate contributions from Desktop Modeler users, and merge their own work.
 
