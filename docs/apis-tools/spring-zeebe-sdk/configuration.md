@@ -8,18 +8,22 @@ This page uses YAML examples to show configuration properties. Alternate methods
 :::note
 Configuration properties can be defined as environment variables using [Spring Boot conventions](https://docs.spring.io/spring-boot/reference/features/external-config.html#features.external-config.typesafe-configuration-properties.relaxed-binding.environment-variables). To define an environment variable, convert the configuration property to uppercase, remove any dashes `-`, and replace any delimiters `.` with underscore `_`.
 
-For example, the property `camunda.client.zeebe.defaults.max-jobs-active` is represented by the environment variable `CAMUNDA_CLIENT_ZEEBE_DEFAULTS_MAXJOBSACTIVE`.
+For example, the property `camunda.client.worker.defaults.max-jobs-active` is represented by the environment variable `CAMUNDA_CLIENT_WORKER_DEFAULTS_MAXJOBSACTIVE`.
 :::
 
 ## Modes
 
 The Spring SDK has modes with meaningful defaults aligned with the distribution's default connection details.
 
+Each mode is made for a setup of Camunda 8.
+
 :::note
 The defaults applied by the modes are overwritten by _any_ other set property, including legacy/deprecated properties. Check your configuration and logs to avoid unwanted override.
 :::
 
 ### SaaS
+
+This allows you to easily connect to a Camunda instance in our SaaS offering as the URLs are templated.
 
 Activate by setting:
 
@@ -37,6 +41,8 @@ https://github.com/camunda/camunda/blob/main/clients/spring-boot-starter-camunda
 
 ### Self-Managed
 
+This allows you to connect to a self-managed instance that is protected with JWT authentication. The default URLs are configured to be aligned with all Camunda distributions using `localhost` addresses.
+
 Activate by setting:
 
 ```yaml
@@ -52,6 +58,8 @@ https://github.com/camunda/camunda/blob/main/clients/spring-boot-starter-camunda
 ```
 
 ### Basic
+
+This allows you to connect to a self-managed instance that is protected with basic authentication. The default URLs are configured to be aligned with all Camunda distributions using `localhost` addresses.
 
 Activate by setting:
 
