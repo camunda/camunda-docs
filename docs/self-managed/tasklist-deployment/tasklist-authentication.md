@@ -127,7 +127,7 @@ Be aware a JWT token is intended to be used for M2M communication and is therefo
 
 1. [Add an application in Identity](/self-managed/identity/user-guide/additional-features/incorporate-applications.md).
 2. [Add permissions to an application](/self-managed/identity/user-guide/additional-features/incorporate-applications.md) for Tasklist API.
-3. Obtain a token to access the <!--- Which REST API? ---> REST API.
+3. Obtain a token to access the Tasklist REST API.
    You will need:
    - `client_id` and `client_secret` from Identity application you created.
    - URL of the authorization server will look like: `http://<keycloak_host>:<port>/auth/realms/camunda-platform/protocol/openid-connect/token`, where host and port reference Keycloak URL (e.g. `localhost:18080`).

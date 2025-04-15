@@ -177,7 +177,7 @@ using a JWT access token in an authorization header `Authorization: Bearer <JWT>
 1. [Add an application in Identity](/self-managed/identity/user-guide/additional-features/incorporate-applications.md).
 2. [Add permissions to an application](/self-managed/identity/user-guide/additional-features/incorporate-applications.md)
    for Operate API.
-3. Obtain a token to access the <!--- Which REST API? ---> REST API.
+3. Obtain a token to access the Tasklist REST API.
    You will need:
    - `client_id` and `client_secret` from Identity application you created.
    - URL of the authorization server will look
