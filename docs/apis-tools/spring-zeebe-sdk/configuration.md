@@ -13,17 +13,15 @@ For example, the property `camunda.client.zeebe.defaults.max-jobs-active` is rep
 
 ## Modes
 
-The Spring SDK has modes with meaningful defaults that are aligned with the distributions' default connection details.
+The Spring SDK has modes with meaningful defaults aligned with the distribution's default connection details.
 
 :::note
-The defaults being applied by the modes are overwritten by _any_ other property being set, including legacy/deprecated properties.
-
-Please check your configuration and logs to avoid unwanted overriding.
+The defaults applied by the modes are overwritten by _any_ other set property, including legacy/deprecated properties. Check your configuration and logs to avoid unwanted override.
 :::
 
 ### SaaS
 
-Activate it by setting:
+Activate by setting:
 
 ```yaml
 camunda:
@@ -31,15 +29,15 @@ camunda:
     mode: saas
 ```
 
-This will apply these defaults:
+This applies the following defaults:
 
 ```yaml reference referenceLinkText="Source" title="SaaS mode"
 https://github.com/camunda/camunda/blob/main/clients/spring-boot-starter-camunda-sdk/src/main/resources/modes/saas.yaml
 ```
 
-### Self-managed
+### Self-Managed
 
-Activate it by setting:
+Activate by setting:
 
 ```yaml
 camunda:
@@ -47,7 +45,7 @@ camunda:
     mode: self-managed
 ```
 
-This will apply these defaults:
+This applies the following defaults:
 
 ```yaml reference referenceLinkText="Source" title="Self-managed mode"
 https://github.com/camunda/camunda/blob/main/clients/spring-boot-starter-camunda-sdk/src/main/resources/modes/self-managed.yaml
@@ -55,7 +53,7 @@ https://github.com/camunda/camunda/blob/main/clients/spring-boot-starter-camunda
 
 ### Basic
 
-Activate it by setting:
+Activate by setting:
 
 ```yaml
 camunda:
@@ -63,7 +61,7 @@ camunda:
     mode: basic
 ```
 
-This will apply these defaults:
+This applies the following defaults:
 
 ```yaml reference referenceLinkText="Source" title="Basic mode"
 https://github.com/camunda/camunda/blob/main/clients/spring-boot-starter-camunda-sdk/src/main/resources/modes/basic.yaml
