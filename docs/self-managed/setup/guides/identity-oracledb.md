@@ -10,11 +10,11 @@ import TabItem from "@theme/TabItem";
 
 ## Overview
 
-For those with company requirements preventing them from using postgresql.
+This guide is intended for customers those internal policies or compliance requirements prevent the use of PostgreSQL.
 
 ## Scope
 
-For this guide, we will not focus on Optimize or Web Modeler, which normally would also connect to postgresql. These components should be disabled since they will not work without postgresql.
+This documentation focuses solely on components of Camunda 8 that can operate without PostgreSQL. Components such as Optimize and Web Modeler, which require PostgreSQL for proper functionality, are excluded from this guide and should be disabled in environments where PostgreSQL is not used.
 
 ```yaml
 postgresql:
@@ -65,6 +65,7 @@ identity:
     enabled: false
   externalDatabase:
     enabled: true
+  # These three configuration options are added so that spring knows to connect to oracledb using it's client library
   env:
     - name: SPRING_DATASOURCE_URL
       value: "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=tcps)(HOST=oracle.example.com)(PORT=2484))(CONNECT_DATA=(SERVICE_NAME=orcl)))"
@@ -72,13 +73,16 @@ identity:
       value: oracle.jdbc.OracleDriver
     - name: JAVA_TOOL_OPTIONS
       value: $JAVA_OPTS
+  # Overriding identity.command is required so that the new driver in /app will be loaded upon startup.
   command:
     - /bin/sh
     - -c
+  # the wget command downloads the odbc driver, and the -cp option loads the jar in the classpath so that the module is loaded. It could be replaced with an initContainer or by loading a volume that already has the odbc driver inside.
   args:
     - |
       wget https://download.oracle.com/otn-pub/otn_software/jdbc/237/ojdbc17.jar -O /app/ojdbc.jar
       java -cp "/app/ojdbc.jar:/app/identity.jar" org.springframework.boot.loader.launch.JarLauncher
+  # Extra volumes are mounted for any TLS certs necessary for the database:
   extraVolumeMounts:
     - name: "keystore-secret"
       secret:
@@ -129,45 +133,6 @@ spring:
 </TabItem>
 
 </Tabs>
-
-## Breakdown of values.yaml configuration
-
-1. Overriding `identity.command` is required so that the new driver in `/app` will be loaded upon startup.
-
-```yaml
-command:
-  - /bin/sh
-  - -c
-args:
-  - |
-    wget https://download.oracle.com/otn-pub/otn_software/jdbc/237/ojdbc17.jar -O /app/ojdbc.jar
-    java -cp "/app/ojdbc.jar:/app/identity.jar" org.springframework.boot.loader.launch.JarLauncher
-```
-
-2. the wget command downloads the odbc driver, and the `-cp` option loads the jar in the classpath so that the module is loaded. This wget command could be replaced with an initContainer or by loading a volume that already has the odbc driver inside.
-
-3. These configuration options are added so that spring knows to connect to oracledb using it's client library
-
-```yaml
-- name: SPRING_DATASOURCE_URL
-  value: "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=tcps)(HOST=oracle.example.com)(PORT=2484))(CONNECT_DATA=(SERVICE_NAME=orcl)))"
-- name: SPRING_DATASOURCE_DRIVER_CLASS_NAME
-  value: oracle.jdbc.OracleDriver
-- name: JAVA_TOOL_OPTIONS
-  value: $JAVA_OPTS
-```
-
-4. Extra volumes are mounted for any TLS certs necessary for the database:
-
-```yaml
-extraVolumeMounts:
-  - name: "keystore-secret"
-    secret:
-      secretName: "keystore-secret"
-extraVolumes:
-  - name: "keystore-secret"
-    mountPath: "/usr/local/certificates"
-```
 
 ## Troubleshooting tips
 
