@@ -59,7 +59,7 @@ If you are deploying Camunda 8 with Ingress configuration, make sure to add addi
 4. Execute the following command:
 
 ```sh
-helm install camunda-platform camunda/camunda-platform \
+helm install camunda-platform camunda/camunda-platform --version $HELM_CHART_VERSION \
     -f camunda-platform-core-kind-values.yaml
 ```
 
