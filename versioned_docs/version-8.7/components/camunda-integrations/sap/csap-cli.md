@@ -48,18 +48,6 @@ mv csap-x86_64-unknown-linux-gnu /usr/local/bin/csap
 1. Rename the binary to `csap.exe` if necessary.
 2. Add the directory containing `csap.exe` to your system's `PATH`.
 
-:::tip
-If macOS mistakenly flags the `csap` command as malware when run from the terminal, follow these steps to allow the CLI to run:
-
-1. Open the macOS **System Settings**.
-2. Go to **Privacy & Security**.
-3. If `csap` appears under **Security**, click **Open Anyway**.
-   :::
-
-## Usage
-
-The CLI provides a `setup` command to prepare one of Camunda's SAP integration modules for deployment. You can run the command interactively or provide all required options as command-line switches.
-
 ## Usage
 
 The CLI provides a `setup` command to prepare one of Camunda's SAP integration modules for deployment. You can run the command interactively or provide all required options as command-line switches.
