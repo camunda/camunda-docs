@@ -10,6 +10,8 @@ import CrossImg from '/static/img/icon-list-cross.png';
 
 Configure IDP for your Camunda 8 setup and make sure IDP can access the required components and credentials.
 
+Test change for PM session.
+
 ## Known limitations
 
 The current known limitations of IDP are as follows:
