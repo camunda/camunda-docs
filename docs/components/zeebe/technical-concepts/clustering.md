@@ -44,7 +44,7 @@ To reach a well-distributed leadership again, the [Rebalancing API](../../../sel
 
 ## Commit
 
-Before a new record on a partition can be processed, it must be replicated to a quorum (typically majority) of brokers, and this majority of followers has to confirm the received record. When the leader received these confirmations from half or more of its followers, the leader **commits** the record. Committing ensures a record is durable, even in case of complete data loss on an individual broker. The exact semantics of committing are defined by the raft protocol.
+Before a new record on a partition can be processed, it must be replicated to a quorum of brokers, and this majority of followers has to confirm the received record. When the leader received these confirmations from half or more of its followers, the leader **commits** the record. Committing ensures a record is durable, even in case of complete data loss on an individual broker. The exact semantics of committing are defined by the raft protocol.
 
 ![cluster](assets/commit.png)
 
