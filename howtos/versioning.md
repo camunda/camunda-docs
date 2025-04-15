@@ -9,7 +9,7 @@ Depending on the version, location of source files and sidebar navigation defini
 | Instance | Version(s)         | Source path                                       | Sidebars path                                                         |
 | -------- | ------------------ | ------------------------------------------------- | --------------------------------------------------------------------- |
 | `docs`   | Next               | [/docs/](../docs/)                                | [sidebars.js](../sidebars.js)                                         |
-| `docs`   | 8.0, 1.3, 1.2, ... | [/versioned_docs/version-\*/](../versioned_docs/) | [versioned_sidebars/version-\*-sidebars.json](../versioned_sidebars/) |
+| `docs`   | 8.7, 8.6, 8.5, ... | [/versioned_docs/version-\*/](../versioned_docs/) | [versioned_sidebars/version-\*-sidebars.json](../versioned_sidebars/) |
 
 ## Create new version
 
