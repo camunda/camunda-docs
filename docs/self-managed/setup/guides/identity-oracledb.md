@@ -86,7 +86,6 @@ identity:
   extraVolumes:
     - name: "keystore-secret"
       mountPath: "/usr/local/certificates"
-# this section depends on how you get the jar into the volume. Can be initContainer, can be existing volume.
 ```
 
 </TabItem>
