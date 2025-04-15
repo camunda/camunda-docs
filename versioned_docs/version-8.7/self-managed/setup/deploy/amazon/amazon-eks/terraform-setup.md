@@ -187,25 +187,25 @@ Now, follow these steps to create the S3 bucket with versioning enabled:
 2. Run the following command to create an S3 bucket for storing your Terraform state. Make sure to use a unique bucket name and set the `AWS_REGION` environment variable beforehand:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/infraex-642-v3/aws/kubernetes/eks-single-region/procedure/s3-bucket-creation.sh
+   https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/aws/common/procedure/s3-bucket/s3-bucket-creation.sh
    ```
 
 3. Enable versioning on the S3 bucket to track changes and protect the state file from accidental deletions or overwrites:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/infraex-642-v3/aws/kubernetes/eks-single-region/procedure/s3-bucket-versioning.sh
+   https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/aws/common/procedure/s3-bucket/s3-bucket-versioning.sh
    ```
 
 4. Secure the bucket by blocking public access:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/infraex-642-v3/aws/kubernetes/eks-single-region/procedure/s3-bucket-private.sh
+   https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/aws/common/procedure/s3-bucket/s3-bucket-private.sh
    ```
 
 5. Verify versioning is enabled on the bucket:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/infraex-642-v3/aws/kubernetes/eks-single-region/procedure/s3-bucket-verify.sh
+   https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/aws/common/procedure/s3-bucket/s3-bucket-verify.sh
    ```
 
 This S3 bucket will now securely store your Terraform state files with versioning enabled.
@@ -217,7 +217,7 @@ Once your authentication is set up, you can initialize your Terraform project. T
 Configure the backend and download the necessary provider plugins:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/infraex-642-v3/aws/kubernetes/eks-single-region/procedure/s3-bucket-tf-init.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/aws/common/procedure/s3-bucket/s3-bucket-tf-init.sh
 ```
 
 Terraform will connect to the S3 bucket to manage the state file, ensuring remote and persistent storage.
@@ -446,7 +446,7 @@ We strongly recommend managing sensitive information such as the OpenSearch, Aur
 2. Preform a final initialization for anything changed throughout the guide:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/infraex-642-v3/aws/kubernetes/eks-single-region/procedure/s3-bucket-tf-init.sh#L7
+   https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/aws/common/procedure/s3-bucket/s3-bucket-tf-init.sh#L7
    ```
 
 3. Plan the configuration files:
