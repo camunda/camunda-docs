@@ -169,3 +169,9 @@ extraVolumes:
   - name: "keystore-secret"
     mountPath: "/usr/local/certificates"
 ```
+
+## Troubleshooting tips
+
+- Exec into container confirm java process has the keystore path
+- Confirm certificate exists in the mounted location on the filesystem
+- Test connection from pod to database with simple tool(s) JDBC tool, ping, curl, etc
