@@ -72,13 +72,13 @@ identity:
       value: oracle.jdbc.OracleDriver
     - name: JAVA_TOOL_OPTIONS
       value: $JAVA_OPTS
-   command:
-     - /bin/sh
-     - -c
-   args:
-     - |
-       wget https://download.oracle.com/otn-pub/otn_software/jdbc/237/ojdbc17.jar -O /app/ojdbc.jar
-       java -cp "/app/ojdbc.jar:/app/identity.jar" org.springframework.boot.loader.launch.JarLauncher
+  command:
+    - /bin/sh
+    - -c
+  args:
+    - |
+      wget https://download.oracle.com/otn-pub/otn_software/jdbc/237/ojdbc17.jar -O /app/ojdbc.jar
+      java -cp "/app/ojdbc.jar:/app/identity.jar" org.springframework.boot.loader.launch.JarLauncher
   extraVolumeMounts:
     - name: "keystore-secret"
       secret:
