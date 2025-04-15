@@ -96,7 +96,7 @@ identity:
 spring:
   datasource:
     url: jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=tcps)(HOST=oracle.example.com)(PORT=2484))(CONNECT_DATA=(SERVICE_NAME=orcl)))
-    driverClassName: oracle.jdbc.OracleDriver
+    driver-class-name: oracle.jdbc.OracleDriver
 ```
 
 </TabItem>
