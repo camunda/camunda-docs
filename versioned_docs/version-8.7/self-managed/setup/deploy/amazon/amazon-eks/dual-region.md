@@ -498,15 +498,13 @@ Use the following to set the environment variable ZEEBE_BROKER_EXPORTERS_ELASTIC
 From the terminal context of `aws/dual-region/kubernetes`, execute the following:
 
 ```shell
-helm install $HELM_RELEASE_NAME camunda/camunda-platform \
-  --version $HELM_CHART_VERSION \
+helm install $HELM_RELEASE_NAME camunda/camunda-platform --version $HELM_CHART_VERSION \
   --kube-context $CLUSTER_0 \
   --namespace $CAMUNDA_NAMESPACE_0 \
   -f camunda-values.yml \
   -f region0/camunda-values.yml
 
-helm install $HELM_RELEASE_NAME camunda/camunda-platform \
-  --version $HELM_CHART_VERSION \
+helm install $HELM_RELEASE_NAME camunda/camunda-platform --version $HELM_CHART_VERSION\
   --kube-context $CLUSTER_1 \
   --namespace $CAMUNDA_NAMESPACE_1 \
   -f camunda-values.yml \
