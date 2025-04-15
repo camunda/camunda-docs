@@ -25,7 +25,7 @@ The assertions handle the asynchronous behavior and wait until the expected prop
 :::
 
 :::tip
-CPT provides the most common assertions. However, if you miss an assertion, you can easily implement a [custom assertion](#custom-assertions) yourself.
+CPT provides the most common assertions. However, if you miss an assertion you can implement a [custom assertion](#custom-assertions) yourself.
 :::
 
 ## Configuration
