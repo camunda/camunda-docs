@@ -1050,7 +1050,7 @@ module.exports = {
             "self-managed/setup/guides/multi-namespace-deployment",
             "self-managed/setup/guides/installing-payment-app-example",
             "self-managed/setup/guides/secret-management",
-            "self-managed/setup/guides/identity-oracledb",
+            "self-managed/setup/guides/identity-alternative-db",
           ],
         },
       ],
