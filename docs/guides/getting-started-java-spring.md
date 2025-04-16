@@ -126,7 +126,7 @@ Add the following Maven dependency to your Spring Boot Starter project's pom.xml
 
 ### Configure the Camunda client
 
-1. [Rename your `src/main/resources/application.properties` file to `application.yaml`](https://mvnrepository.com/artifact/io.camunda/spring-boot-starter-camunda-sdk).
+1. Rename your `src/main/resources/application.properties` file to `application.yaml`.
 2. Paste the following settings to connect to the Self-Managed Zeebe Broker:
 
 ```yaml
