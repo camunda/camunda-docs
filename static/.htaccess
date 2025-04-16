@@ -193,7 +193,7 @@ RewriteRule ^docs/next/apis-tools/camunda-api-rest/specifications/deploy-resourc
 RewriteRule ^docs/next/apis-tools/camunda-api-rest/specifications/update-element-instance-variables/?$ docs/next/apis-tools/camunda-api-rest/specifications/create-element-instance-variables/$1 [R=301,L]
 
 # Remove Camunda exporter from 8.7 docs
-RewriteRule ^docs/self-managed/zeebe-deployment/exporters/camunda-exporter/?$ docs/self-managed/zeebe-deployment/exporters/install-zeebe-exporters/ [R=301,L]
+RewriteRule ^docs/self-managed/zeebe-deployment/exporters/camunda-exporter/?$ /docs/self-managed/zeebe-deployment/exporters/install-zeebe-exporters/ [R=301,L]
 
 #---------------------------------------------------------------------------------
 #   8.7: content moves introduced prior to the release of version 8.7.
