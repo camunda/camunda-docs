@@ -6,12 +6,7 @@ description: "Find out how to update to a new version of Optimize without losing
 
 These documents guide you through the process of migrating your Optimize from one Optimize minor version to the other.
 
-If you want to update Optimize by several versions, you cannot do that at once, but you need to perform the updates in sequential order. For instance, if you want to update from 8.6 to 8.8, you need to update first from 8.6 to 8.7, then from 8.7 to 8.8. The following table shows the recommended update paths to the latest version:`
-
-| Update from | Recommended update path to 8.8 |
-| ----------- | ------------------------------ |
-| 8.8         | You are on the latest version. |
-| 8.6         | Rolling update to 8.8          |
+When updating from one minor version to the next, you do not need to update to each patch version along the way. However, do not skip minor versions when updating.
 
 ## Migration instructions
 
