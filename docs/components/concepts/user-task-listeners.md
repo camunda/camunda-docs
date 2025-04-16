@@ -10,8 +10,8 @@ A user task listener allows users to react to specific user task lifecycle event
 
 User task listeners provide flexibility and control over user task behavior:
 
-- They can react to user task lifecycle events, such as assigning and completing.
-- They can access user task data, such as the assignee, to execute task-specific business logic.
+- They can react to user task lifecycle events, such as assigning, updating and completing.
+- They can access user task data, such as the assignee or priority, to execute task-specific business logic.
 - They can dynamically correct user task data during execution, allowing adjustments to key attributes such as the assignee, due date, and priority.
 - They can deny state transitions, rolling back the task to its previous state, which enables validation of task lifecycle changes.
 
@@ -55,7 +55,7 @@ Each user task listener has the following properties:
 | Property    | Description                                                                                                  |
 | :---------- | :----------------------------------------------------------------------------------------------------------- |
 | `eventType` | Specifies the user task event that triggers the listener. Supported values are `assigning` and `completing`. |
-| `type`      | The name of the job type.                                                                                    |
+| `Listener type`      | The name of the user task listener job type.                                                                                    |
 | `retries`   | The number of retries for the user task listener job.                                                        |
 
 :::note
