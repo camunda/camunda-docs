@@ -18,7 +18,7 @@ This worked example demonstrates how a published [document extraction template](
 
 In this example, a process is set up with the following steps:
 
-<img src={IdpExampleImg} alt="An example process diagram with three steps" style={{width: '800px', border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}} />
+<img src={IdpExampleImg} class="img-800" alt="An example process diagram with three steps" />
 
 1. **Upload document**: A PDF document is uploaded manually in Tasklist.
 1. **Extract data**: A published document extraction template automatically extracts the required data from the PDF document.
@@ -34,13 +34,13 @@ The document extraction template used in this example uses the following extract
 | invoiceCustomer | String     | The invoice customer.     |
 | invoiceId       | String     | The invoice ID.           |
 
-<img src={IdpTemplateImg} alt="An example process diagram with three steps" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}} />
+<img src={IdpTemplateImg} alt="An example process diagram with three steps" />
 
 ## Upload document
 
 In the first step of the process, a [user task](/components/modeler/bpmn/user-tasks/user-tasks.md) and linked [form](/components/modeler/forms/camunda-forms-reference.md) allows a document to be uploaded in Tasklist.
 
-<img src={IdpFilepickerImg} alt="The Filepicker element" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}} />
+<img src={IdpFilepickerImg} alt="The Filepicker element" />
 
 - The form uses the [Filepicker](/components/modeler/forms/form-element-library/forms-element-library-filepicker.md) form element to upload a document.
 - The Filepicker element **Key** is set to `documents`. This is then bound to the **Document** input in the document extraction template.
@@ -53,7 +53,7 @@ You can also use the [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-a
 
 In this step, the document extraction template is [applied to a task](idp-integrate.md#create-and-configure-an-idp-task) to automatically extract data from the uploaded document.
 
-<img src={IdpExtractImg} alt="Document extraction step" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}} />
+<img src={IdpExtractImg} alt="Document extraction step" />
 
 - **Input message data**: The **Document** input uses the FEEL expression `documents[1]` to get the first document in the FEEL array, as per the uploaded document **Key**.
 - **Output mapping**: The extracted data is stored as JSON in a **Result variable** named `idpResult`.
@@ -74,7 +74,7 @@ For example, viewing the process in Operate shows the data was accurately extrac
 }
 ```
 
-<img src={IdpResultsImg} alt="Document extraction step" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}} />
+<img src={IdpResultsImg} alt="Document extraction step" />
 
 :::note
 This step in the process could be one of many types of element, depending on what you want to do with the extraction results. For example, you might want to display, check, or summarize the extracted data, or route to further actions in the process depending on the document data extracted by IDP.
