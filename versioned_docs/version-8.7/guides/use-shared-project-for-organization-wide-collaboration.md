@@ -37,7 +37,7 @@ To create a shared project as a space for your organization's resources:
 5. (optional) Enter an invitation message in the text box below your invites.
 6. Select **Send invite**. This will invite the users to both the organization and project. Once your colleague clicks **Accept invitation**, they can access the shared project with the assigned role and permissions.
 
-## Assign project roles and organization roles to collaborators
+## Assign project and organization roles to collaborators
 
 To understand what permissions each role has, review [access rights and permissions](/components/modeler/web-modeler/collaboration.md#access-rights-and-permissions). You can also [assign roles specific to the entire organization](/components/console/manage-organization/manage-users.md). For example, the **Developer** role is typically a good default option to provide the user with full access to Console, Operate, and Tasklist without deletion privileges.
 
@@ -99,7 +99,7 @@ Organization owners and administrators can connect their Web Modeler process app
 
 To keep your process landscape up to date with all changes in production, take the following steps:
 
-1. Sync the process application to the feature branch of subfolder in a repository.
+1. Sync the process application to the feature branch of a subfolder in a repository.
 2. Merge the feature branch to main.
 3. Begin the [CI/CD pipeline](/guides/devops-lifecycle/integrate-web-modeler-in-ci-cd.md).
 4. Sync your main branch to the shared project as part of the CI/CD pipeline.
