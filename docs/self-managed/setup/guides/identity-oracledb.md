@@ -1,8 +1,8 @@
 ---
 id: identity-oracledb
-title: "Using OracleDB with Identity for OIDC"
-sidebar_label: "OracleDB with Identity for OIDC"
-description: "Configure Identity to use OracleDB with OIDC"
+title: "Using Different DBs with Identity for OIDC"
+sidebar_label: "Different DBs with Identity for OIDC"
+description: "Configure Identity to use other DBs with OIDC"
 ---
 
 import Tabs from "@theme/Tabs";
@@ -42,7 +42,9 @@ We tested with the following versions
 
 ## Configuration
 
-<Tabs groupId="featured" defaultValue="envVars" queryString values={
+### Oracle
+
+<Tabs groupId="oracle-config" defaultValue="envVars" queryString values={
 [
 {label: 'Environment variables', value: 'envVars' },
 {label: 'values.yaml', value: 'valuesYaml' },
@@ -51,9 +53,11 @@ We tested with the following versions
 <TabItem value="envVars">
 
 ```sh
-SPRING_DATASOURCE_URL="jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=tcps)(HOST=oracle.example.com)(PORT=2484))(CONNECT_DATA=(SERVICE_NAME=orcl)))"
+SPRING_DATASOURCE_URL="jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=tcps)(HOST=${IDENTITY_DATABASE_HOST:})(PORT=${IDENTITY_DATABASE_PORT:}))(CONNECT_DATA=(SERVICE_NAME=${IDENTITY_DATABASE_NAME:})))"
 SPRING_DATASOURCE_DRIVER_CLASS_NAME=oracle.jdbc.OracleDriver
+SPRING_JPA_DATABASE=oracle
 JAVA_TOOL_OPTIONS=$JAVA_OPTS
+
 ```
 
 </TabItem>
@@ -68,11 +72,13 @@ identity:
   # These three configuration options are added so that spring knows to connect to oracledb using it's client library
   env:
     - name: SPRING_DATASOURCE_URL
-      value: "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=tcps)(HOST=oracle.example.com)(PORT=2484))(CONNECT_DATA=(SERVICE_NAME=orcl)))"
+      value: "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=tcps)(HOST=${IDENTITY_DATABASE_HOST:})(PORT=${IDENTITY_DATABASE_PORT:}))(CONNECT_DATA=(SERVICE_NAME=${IDENTITY_DATABASE_NAME:})))"
     - name: SPRING_DATASOURCE_DRIVER_CLASS_NAME
       value: oracle.jdbc.OracleDriver
     - name: JAVA_TOOL_OPTIONS
       value: $JAVA_OPTS
+    - name: SPRING_JPA_DATABASE
+      value: oracle
   # Overriding identity.command is required so that the new driver in /app will be loaded upon startup.
   command:
     - /bin/sh
@@ -100,35 +106,79 @@ spring:
   datasource:
     url: jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=tcps)(HOST=oracle.example.com)(PORT=2484))(CONNECT_DATA=(SERVICE_NAME=orcl)))
     driver-class-name: oracle.jdbc.OracleDriver
+  jpa:
+    database: oracle
 ```
 
 </TabItem>
-
 </Tabs>
 
-## Env vars by database type
+### MSSQL
 
-<Tabs groupId="databases" defaultValue="OracleDB" queryString values={
+<Tabs groupId="mssql-config" defaultValue="envVars" queryString values={
 [
-{label: 'OracleDB', value: 'OracleDB' },
-{label: 'MSSQL', value: 'MSSQL' },
+{label: 'Environment variables', value: 'envVars' },
+{label: 'values.yaml', value: 'valuesYaml' },
+{label: 'application.yaml', value: 'applicationYaml' },
 ]}>
-<TabItem value="OracleDB">
+<TabItem value="envVars">
 
-| Env var                             | Value                                                                                                                                                                                 |
-| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| SPRING_DATASOURCE_URL               | `jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=tcps)(HOST=${IDENTITY_DATABASE_HOST:})(PORT=${IDENTITY_DATABASE_PORT:}))(CONNECT_DATA=(SERVICE_NAME=${IDENTITY_DATABASE_NAME:})))` |
-| SPRING_DATASOURCE_DRIVER_CLASS_NAME | oracle.jdbc.OracleDriver                                                                                                                                                              |
-| SPRING_JPA_DATABASE                 | oracle                                                                                                                                                                                |
+```sh
+SPRING_DATASOURCE_URL="url: jdbc:sqlserver://${IDENTITY_DATABASE_HOST:}:${IDENTITY_DATABASE_PORT:};databaseName=${IDENTITY_DATABASE_NAME:};encrypt=true;hostNameInCertificate={CACERT_/CN};trustServerCertificate=false"
+SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.microsoft.sqlserver.jdbc.SQLServerDriver
+SPRING_JPA_DATABASE=sql_server
+JAVA_TOOL_OPTIONS=$JAVA_OPTS
+```
 
 </TabItem>
-<TabItem value="MSSQL">
+<TabItem value="valuesYaml">
 
-| Env var                             | Value                                                                                                                                                                                              |
-| ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| SPRING_DATASOURCE_URL               | `url: jdbc:sqlserver://${IDENTITY_DATABASE_HOST:}:${IDENTITY_DATABASE_PORT:};databaseName=${IDENTITY_DATABASE_NAME:};encrypt=true;hostNameInCertificate={CACERT_/CN};trustServerCertificate=false` |
-| SPRING_DATASOURCE_DRIVER_CLASS_NAME | com.microsoft.sqlserver.jdbc.SQLServerDriver                                                                                                                                                       |
-| SPRING_JPA_DATABASE                 | sql_server                                                                                                                                                                                         |
+```yaml
+identity:
+  keycloak:
+    enabled: false
+  externalDatabase:
+    enabled: true
+  # These three configuration options are added so that spring knows to connect to oracledb using it's client library
+  env:
+    - name: SPRING_DATASOURCE_URL
+      value: "url: jdbc:sqlserver://${IDENTITY_DATABASE_HOST:}:${IDENTITY_DATABASE_PORT:};databaseName=${IDENTITY_DATABASE_NAME:};encrypt=true;hostNameInCertificate={CACERT_/CN};trustServerCertificate=false"
+    - name: SPRING_DATASOURCE_DRIVER_CLASS_NAME
+      value: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    - name: SPRING_JPA_DATABASE
+      value: sql_server
+    - name: JAVA_TOOL_OPTIONS
+      value: $JAVA_OPTS
+  # Overriding identity.command is required so that the new driver in /app will be loaded upon startup.
+  command:
+    - /bin/sh
+    - -c
+  # the wget command downloads the odbc driver, and the -cp option loads the jar in the classpath so that the module is loaded. It could be replaced with an initContainer or by loading a volume that already has the odbc driver inside.
+  args:
+    - |
+      wget https://download.oracle.com/otn-pub/otn_software/jdbc/237/ojdbc17.jar -O /app/ojdbc.jar
+      java -cp "/app/ojdbc.jar:/app/identity.jar" org.springframework.boot.loader.launch.JarLauncher
+  # Extra volumes are mounted for any TLS certs necessary for the database:
+  extraVolumeMounts:
+    - name: "keystore-secret"
+      secret:
+        secretName: "keystore-secret"
+  extraVolumes:
+    - name: "keystore-secret"
+      mountPath: "/usr/local/certificates"
+```
+
+</TabItem>
+<TabItem value="applicationYaml">
+
+```yaml
+spring:
+  datasource:
+    url: jdbc:sqlserver://${IDENTITY_DATABASE_HOST:}:${IDENTITY_DATABASE_PORT:};databaseName=${IDENTITY_DATABASE_NAME:};encrypt=true;hostNameInCertificate={CACERT_/CN};trustServerCertificate=false
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  jpa:
+    database: sql_server
+```
 
 </TabItem>
 
