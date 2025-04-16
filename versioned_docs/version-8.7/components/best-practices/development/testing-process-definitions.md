@@ -126,7 +126,7 @@ In such a test case, you want to test the executable BPMN process definition, pl
 - Expressions (FEEL) used in your process model for gateway decisions or input/output mappings
 - Other glue code, for example, a REST API that does data mapping and delegates to the workflow engine
 
-In the example above, this is the worker code and the <!--- Which REST API? ---> REST API:
+In the example above, this is the worker code and the REST API:
 
 ![Process test scope example](testing-process-definitions-assets/process-test-scope-example.png)
 
@@ -208,7 +208,7 @@ void testTweetApproved() throws Exception {
 }
 ```
 
-1. Create a new process instance. You may want to use some glue code to start your process (e.g. the <!--- Which REST API? ---> REST API facade), or also create helper methods within your test class.
+1. Create a new process instance. You may want to use some glue code to start your process (e.g. the REST API facade), or also create helper methods within your test class.
 
 2. Drive the process to its next waitstate, e.g. by completing a waiting user task. You may extract boilerplate code into helper methods as shown below.
 
