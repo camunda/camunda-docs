@@ -407,7 +407,7 @@ module.exports = {
             },
             {
               label: "Release policy",
-              to: "docs/reference/announcements-release-notes/release-policy",
+              to: "docs/reference/release-policy",
             },
           ],
         },
