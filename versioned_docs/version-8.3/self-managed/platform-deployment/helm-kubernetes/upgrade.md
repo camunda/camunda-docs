@@ -385,11 +385,11 @@ Zeebe Gateway authentication is now enabled by default.
 
 To authenticate:
 
-1. [Create a client credential](/docs/guides/setup-client-connection-credentials.md).
-2. [Assign permissions to the application](/docs/self-managed/identity/user-guide/authorizations/managing-resource-authorizations.md).
+1. [Create a client credential](/guides/setup-client-connection-credentials.md).
+2. [Assign permissions to the application](/self-managed/identity/user-guide/authorizations/managing-resource-authorizations.md).
 3. Connect with:
 
-- [Desktop Modeler](/docs/components/modeler/desktop-modeler/connect-to-camunda-8.md).
+- [Desktop Modeler](/components/modeler/desktop-modeler/connect-to-camunda-8.md).
 - [Zeebe client (zbctl)](/docs/self-managed/zeebe-deployment/security/secure-client-communication/#zbctl).
 
 ### v8.2.0 (Minor)

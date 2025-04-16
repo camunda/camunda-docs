@@ -36,7 +36,7 @@ To create a form for public access, follow these steps:
 3. Name your form.
 4. Design your form using the **component palette**.
 
-Once ready, return to your process. You can read more about form creation in the [form guide](/docs/guides/utilizing-forms.md).
+Once ready, return to your process. You can read more about form creation in the [form guide](/guides/utilizing-forms.md).
 
 ## Embed form in start event
 
