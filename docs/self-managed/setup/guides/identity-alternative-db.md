@@ -1,5 +1,5 @@
 ---
-id: identity-oracledb
+id: identity-alternative-db
 title: "Using Different DBs with Identity for OIDC"
 sidebar_label: "Different DBs with Identity for OIDC"
 description: "Configure Identity to use other DBs with OIDC"
