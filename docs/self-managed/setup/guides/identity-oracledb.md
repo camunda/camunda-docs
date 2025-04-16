@@ -40,6 +40,20 @@ We tested with the following versions
 | 8.6.13          | Oracle 19C (Preferred) | 21.3.0.0       |
 | 8.6.13          | SQL Server 2019        | 12.10.0.jre11  |
 
+## Provisioning the driver
+
+The Oracle and MSSQL drivers are not provided by default in each of the Camunda 8 distributions. Therefore, we must download the drivers and supply them for the application to load.
+
+1. Download the appropriate driver:
+
+- For Oracle: https://download.oracle.com/otn-pub/otn_software/jdbc/237/ojdbc17.jar
+- For MSSQL: https://learn.microsoft.com/en-us/sql/connect/jdbc/download-microsoft-jdbc-driver-for-sql-server?view=sql-server-ver16
+- or https://go.microsoft.com/fwlink/?linkid=2310307
+
+2. When starting the application, set `-cp "/app/ojdbc.jar:/app/identity.jar"` in the `java` command during startup.
+
+3. If using docker or kubernetes, ensure that the folder with the library is properly mounted as a volume.
+
 ## Configuration
 
 ### Oracle
