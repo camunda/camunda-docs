@@ -13,9 +13,7 @@ For example, the property `camunda.client.zeebe.defaults.max-jobs-active` is rep
 
 ## Modes
 
-The Spring SDK has modes with meaningful defaults aligned with the distribution's default connection details.
-
-Each mode is made for a setup of Camunda 8.
+The Spring SDK has modes with meaningful defaults aligned with the distribution's default connection details. Each mode is made for a Camunda 8 setup, and only one mode may be used at a time.
 
 :::note
 The defaults applied by the modes are overwritten by _any_ other set property, including legacy/deprecated properties. Check your configuration and logs to avoid unwanted override.
@@ -23,7 +21,7 @@ The defaults applied by the modes are overwritten by _any_ other set property, i
 
 ### SaaS
 
-This allows you to easily connect to a Camunda instance in our SaaS offering as the URLs are templated.
+This allows you to connect to a Camunda instance in our SaaS offering as the URLs are templated.
 
 Activate by setting:
 
@@ -41,7 +39,7 @@ https://github.com/camunda/camunda/blob/stable/8.7/clients/spring-boot-starter-c
 
 ### Self-Managed
 
-This allows you to connect to a self-managed instance that is protected with JWT authentication. The default URLs are configured to be aligned with all Camunda distributions using `localhost` addresses.
+This allows you to connect to a Self-Managed instance protected with JWT authentication. The default URLs are configured to align with all Camunda distributions using `localhost` addresses.
 
 Activate by setting:
 
