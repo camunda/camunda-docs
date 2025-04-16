@@ -38,13 +38,13 @@ For SaaS: `https://${REGION}.operate.camunda.io/${CLUSTER_ID}/swagger-ui.html`, 
 Find your region and cluster id under **Connection information** in your client credentials (revealed when you click on your client under the **API** tab within your cluster).
 :::
 
-:::warning
-**Limitation for Operate API v.1**
+:::warning Limitation for Operate API v.1
 
-Swagger UI may display incorrect `id` and `key` values for data created on Zeebe partitions >= 4. In case precise ids are going to be copied and used in another queries, consider using other REST API client, e.g. Postman or the `curl` command.
-The reason is that Zeebe may create `key` values that are greater than JavaScript's `Number.MAX_SAFE_INTEGER` (2^53-1) and Swagger UI may display such values incorrectly.
+The Swagger UI may display incorrect `id` and `key` values for data created on Zeebe partitions >= 4. If you plan to copy and use precise IDs in other queries, consider using another REST API client, such as Postman or the `curl` command.
 
-Query API of Camunda API v.2, available as alpha feature starting from Camunda 8.6 and to be released in Camunda 8.8, returns `id` and `key` values as strings, so this limitation does not apply.
+This is because Zeebe may create `key` values greater than JavaScript's `Number.MAX_SAFE_INTEGER` (2^53-1) and the Swagger UI may display such values incorrectly.
+
+The query API of the Camunda 8 API v.2 (available as alpha feature starting from Camunda 8.6 and to be released in Camunda 8.8) returns `id` and `key` values as strings, so this limitation does not apply.
 :::
 
 ## Multi-tenancy
