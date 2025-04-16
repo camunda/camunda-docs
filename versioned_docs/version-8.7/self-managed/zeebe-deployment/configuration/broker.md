@@ -838,10 +838,6 @@ An example configuration for the Elasticsearch exporter can be found [here](../e
 
 An example configuration for the OpenSearch exporter can be found [here](../exporters/opensearch-exporter.md#example).
 
-### zeebe.broker.exporters.camundaExporter (Camunda Exporter)
-
-An example configuration for the Camunda exporter can be found [here](../exporters/camunda-exporter.md#example).
-
 ### zeebe.broker.processing
 
 | Field              | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | Example Value |
