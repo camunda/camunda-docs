@@ -150,7 +150,8 @@ RewriteRule ^optimize/3.11.0/self-managed/(.*)$ /docs/8.3/self-managed/$1 [R=301
 #---------------------------------------------------------------------------------
 
 # Move document handling content
-
+RewriteRule ^docs/next/components/concepts/document-handling/(.*)$ /docs/next/components/document-handling/getting-started/ [R=301,L]
+RewriteRule ^docs/next/guides/document-handling/(.*)$ /docs/next/components/document-handling/getting-started/ [R=301,L]
 
 # Remove Tasklist GraphQL API in 8.8
 RewriteRule ^docs/next/apis-tools/tasklist-api/(.*)$ /docs/next/apis-tools/camunda-api-rest/camunda-api-rest-overview/ [R=301,L]
