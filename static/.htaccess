@@ -54,54 +54,54 @@ RewriteRule ^(.*\.(yaml|bpmn|xml|png|jpeg|jpg|yml|pdf|svg|graphqls|diff))/$ /$1 
 ##################################################################################
 
 ## Reabsorbed Optimize docs
-RewriteRule ^optimize/3.11.0/apis-tools/optimize-api/(.*)$ /docs/8.3/apis-tools/optimize-api/$1 [R=301,L]
-RewriteRule ^optimize/3.11.0/components/(.*)$ /docs/8.3/components/optimize/$1 [R=301,L]
-RewriteRule ^optimize/3.11.0/self-managed/(.*)$ /docs/8.3/self-managed/$1 [R=301,L]
+RewriteRule ^optimize/apis-tools/optimize-api/(.*)$ /8.3/docs/apis-tools/optimize-api/$1 [R=301,L]
+RewriteRule ^optimize/components/(.*)$ /8.3/docs/components/optimize/$1 [R=301,L]
+RewriteRule ^optimize/self-managed/(.*)$ /8.3/docs/self-managed/$1 [R=301,L]
 
 ##################################################################################
 # 3. Specific content moves
 ##################################################################################
 
 #remove SM Architecture page
-RewriteRule ^docs/8.3/self-managed/platform-architecture/overview/?$ /docs/8.3/self-managed/about-self-managed/$1 [R=301,L]
+RewriteRule ^docs/self-managed/platform-architecture/overview/?$ /8.3/docs/self-managed/about-self-managed/$1 [R=301,L]
 
-RewriteRule ^docs/8.3/self-managed/operational-guides/update-guide/800-to-810/?$ /docs/8.3/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
-RewriteRule ^docs/8.3/self-managed/operational-guides/update-guide/130-to-800/?$ /docs/8.3/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
-RewriteRule ^docs/8.3/self-managed/operational-guides/update-guide/810-to-820/?$ /docs/8.3/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
+RewriteRule ^docs/self-managed/operational-guides/update-guide/800-to-810/?$ /8.3/docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
+RewriteRule ^docs/self-managed/operational-guides/update-guide/130-to-800/?$ /8.3/docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
+RewriteRule ^docs/self-managed/operational-guides/update-guide/810-to-820/?$ /8.3/docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
 
 # Remove Cawemo
-RewriteRule ^docs/8.3/guides/migrating-from-cawemo/?$ https://docs.camunda.org/enterprise/announcement/#cawemo-saas-announcements [R=301,L]
+RewriteRule ^docs/guides/migrating-from-cawemo/?$ https://docs.camunda.org/enterprise/announcement/#cawemo-saas-announcements [R=301,L]
 
 
 # Remove updating-tasklist pages
-RewriteRule ^docs/8.3/components/tasklist/userguide/updating-tasklist-cloud/?$ /docs/8.3/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
-RewriteRule ^docs/8.3/self-managed/tasklist-deployment/updating-tasklist/?$ /docs/8.3/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
+RewriteRule ^docs/components/tasklist/userguide/updating-tasklist-cloud/?$ /8.3/docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
+RewriteRule ^docs/self-managed/tasklist-deployment/updating-tasklist/?$ /8.3/docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
 
 # Remove "new web modeler" page, re-route to launch-web-modeler rather than launch-cloud-modeler
-RewriteRule ^docs/8.3/components/modeler/web-modeler/new-web-modeler/?$ /docs/8.3/components/modeler/web-modeler/launch-web-modeler/$1 [R=301,L]
-RewriteRule ^docs/8.3/components/modeler/web-modeler/launch-cloud-modeler/?$ /docs/8.3/components/modeler/web-modeler/launch-web-modeler/$1 [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/new-web-modeler/?$ /8.3/docs/components/modeler/web-modeler/launch-web-modeler/$1 [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/launch-cloud-modeler/?$ /8.3/docs/components/modeler/web-modeler/launch-web-modeler/$1 [R=301,L]
 
 # Remove updating-operate pages
-RewriteRule ^docs/8.3/components/operate/userguide/updating-operate/?$ /docs/8.3/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
-RewriteRule ^docs/8.3/self-managed/operate-deployment/updating-operate/?$ /docs/8.3/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
+RewriteRule ^docs/components/operate/userguide/updating-operate/?$ /8.3/docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
+RewriteRule ^docs/self-managed/operate-deployment/updating-operate/?$ /8.3/docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
 
 # Rename whitelist to allowlist
-RewriteRule ^docs/8.3/components/console/manage-clusters/manage-ip-whitelists/?$ /docs/8.3/components/console/manage-clusters/manage-ip-allowlists/$1 [R=301,L]
+RewriteRule ^docs/components/console/manage-clusters/manage-ip-whitelists/?$ /8.3/docs/components/console/manage-clusters/manage-ip-allowlists/$1 [R=301,L]
 
 # Move install-zeebe-exporters
-RewriteRule ^docs/8.3/self-managed/platform-deployment/helm-kubernetes/guides/install-zeebe-exporters/?$ /docs/8.3/self-managed/zeebe-deployment/exporters/install-zeebe-exporters/$1 [R=301,L]
+RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/guides/install-zeebe-exporters/?$ /8.3/docs/self-managed/zeebe-deployment/exporters/install-zeebe-exporters/$1 [R=301,L]
 
 # Rename Console API
-RewriteRule ^docs/8.3/apis-tools/console-api-reference/?$ /docs/8.3/apis-tools/administration-api-reference/$1 [R=301,L]
+RewriteRule ^docs/apis-tools/console-api-reference/?$ /8.3/docs/apis-tools/administration-api-reference/$1 [R=301,L]
 
 # Remove Operate feedback page
-RewriteRule ^docs/8.3/components/operate/userguide/operate-feedback-and-questions/?$ /contact/$1 [R=301,L]
+RewriteRule ^docs/components/operate/userguide/operate-feedback-and-questions/?$ /contact/$1 [R=301,L]
 
 # Redirect to Connectors overview upon deprecation of Power Automate Connector
-RewriteRule ^docs/8.3/components/connectors/out-of-the-box-connectors/power-automate/?$ /docs/8.3/components/connectors/out-of-the-box-connectors/available-connectors-overview/ [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/power-automate/?$ /8.3/docs/components/connectors/out-of-the-box-connectors/available-connectors-overview/ [R=301,L]
 
 # Early access to alpha features
-RewriteRule ^docs/8.3/reference/early-access/?$ /docs/8.3/reference/alpha-features/ [R=301,L]
+RewriteRule ^docs/reference/early-access/?$ /8.3/docs/reference/alpha-features/ [R=301,L]
 
 ##################################################################################
 #
