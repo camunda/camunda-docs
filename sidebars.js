@@ -1050,7 +1050,6 @@ module.exports = {
             "self-managed/setup/guides/multi-namespace-deployment",
             "self-managed/setup/guides/installing-payment-app-example",
             "self-managed/setup/guides/secret-management",
-            "self-managed/setup/guides/identity-alternative-db",
           ],
         },
       ],
@@ -1349,6 +1348,7 @@ module.exports = {
                         "self-managed/identity/user-guide/configuration/configure-external-identity-provider",
                         "self-managed/identity/user-guide/configuration/configure-logging",
                         "self-managed/identity/user-guide/configuration/connect-to-an-existing-keycloak",
+                        "self-managed/identity/user-guide/configuration/alternative-db",
                       ],
                     },
                     {
