@@ -74,13 +74,17 @@ Given these environment variables, you can instantiate the client as follows:
 ```java
 CamundaClient client =
     CamundaClient.newClientBuilder()
-        .grpcAddress(System.getenv("CAMUNDA_GRPC_ADDRESS"))
-        .restAddress(System.getenv("CAMUNDA_REST_ADDRESS"))
+        .grpcAddress(URI.create(System.getenv("CAMUNDA_GRPC_ADDRESS")))
+        .restAddress(URI.create(System.getenv("CAMUNDA_REST_ADDRESS")))
         .build();
 ```
 
 :::note
 Ensure you provide `grpcAddress` and `restAddress` in absolute URI format: `scheme://host(:port)`.
+
+The default URIs are:
+* `grpcAddress`: http://localhost:26500
+* `restAddress`: http://localhost:8080
 :::
 
 ## Javadoc
