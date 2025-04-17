@@ -35,10 +35,10 @@ optimize:
 
 We tested with the following versions
 
-| Camunda Version | Database Version       | Driver Version |
-| --------------- | ---------------------- | -------------- |
-| 8.6.13          | Oracle 19C (Preferred) | 21.3.0.0       |
-| 8.6.13          | SQL Server 2019        | 12.10.0.jre11  |
+| Camunda Version | Database Version | Driver Version |
+| --------------- | ---------------- | -------------- |
+| 8.6.13          | Oracle 19C       | 21.3.0.0       |
+| 8.6.13          | SQL Server 2019  | 12.10.0.jre11  |
 
 ## Provisioning the driver
 
