@@ -150,7 +150,7 @@ module.exports = {
           label: "Use cases",
           link: {
             type: "doc",
-            id: "components/document-handling/use-cases/overview",
+            id: "components/document-handling/use-cases/use-cases",
           },
           items: [
             "components/document-handling/use-cases/upload-document-to-bpmn-process",
