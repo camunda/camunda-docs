@@ -7,7 +7,7 @@ keywords: ["document handling"]
 
 import DocCardList from '@theme/DocCardList';
 
-Offering robust [document handling](/components/concepts/document-handling.md) capabilities within Camunda SaaS and Self-Managed, users can efficiently manage large volumes of binary data such as PDFs and images across both development and production environments.
+Offering robust [document handling](/components/document-handling/getting-started.md) capabilities within Camunda SaaS and Self-Managed, users can efficiently manage large volumes of binary data such as PDFs and images across both development and production environments.
 
 In this section we will cover three main use cases:
 

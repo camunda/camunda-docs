@@ -99,7 +99,7 @@ Log X
 ### Documents
 
 :::note
-Documents can be created by multiple components. Visit our [concepts page](/components/concepts/document-handling.md) to learn how Camunda handles binary data.
+Documents can be created by multiple components. Visit our [concepts page](/components/document-handling/getting-started.md) to learn how Camunda handles binary data.
 :::
 
 Documents managed by Camunda can be consumed or created by an RPA script. Use `Download Documents` to resolve a document descriptor to a file and `Upload Documents` to create a document descriptor from a file.
