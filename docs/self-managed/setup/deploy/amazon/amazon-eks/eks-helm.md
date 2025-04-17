@@ -650,7 +650,7 @@ export ZEEBE_AUTHORIZATION_SERVER_URL=http://localhost:18080/auth/realms/camunda
 
 </Tabs>
 
-Generate a temporary token to access the <!--- Which REST API? ---> REST API, then capture the value of the `access_token` property and store it as your token. Use the stored token (referred to as `TOKEN` in this case) to interact with the REST API and display the cluster topology:
+Generate a temporary token to access the Camunda 8 REST API, then capture the value of the `access_token` property and store it as your token. Use the stored token (referred to as `TOKEN` in this case) to interact with the Camunda 8 REST API and display the cluster topology:
 
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/check-zeebe-cluster-topology.sh

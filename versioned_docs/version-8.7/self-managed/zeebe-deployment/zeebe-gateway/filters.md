@@ -73,13 +73,6 @@ all incoming calls to the target broker, but it is possible to stop
 the message from being filtered by other filters, and even block it from
 dispatching to the broker.
 
-:::note
-
-Camunda 8 relies on [Identity](../../identity/user-guide/tenants/managing-tenants.md) for tenant management and, as of 8.5.0, the <!--- Which REST API? ---> REST API component of
-the Zeebe Gateway does not support custom tenant-providing filters.
-
-:::
-
 ## Compiling your filter
 
 Our source code for the filter class can now be compiled. There are many
