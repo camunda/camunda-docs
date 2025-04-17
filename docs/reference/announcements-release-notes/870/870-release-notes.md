@@ -371,9 +371,9 @@ To learn more about migration, see [process instance migration](/components/conc
 
 <!-- https://github.com/camunda/product-hub/issues/1314 -->
 
-### Replay scenarios <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Modeler">Modeler</span>
+### Replay scenarios <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Modeler">Modeler</span>
 
-You can now use Play to quickly repeat manual test suites by recording and playing back process instances as scenarios.
+In Camunda 8 SaaS, you can now use Play to quickly repeat manual test suites by recording and playing back process instances as scenarios.
 
 For example, you can validate your process by creating and rerunning scenarios for different paths to check the process works as expected after any diagram changes are made.
 
