@@ -55,12 +55,12 @@ options, and the default values for these options:
 
 | Option                | Description                                                                              | Default                 |
 | --------------------- | ---------------------------------------------------------------------------------------- | ----------------------- |
-| url                   | Valid URLs as comma-separated string                                                     | `http://localhost:9200` |
-| requestTimeoutMs      | Request timeout (in ms) for the Elasticsearch. client                                    | `30000`                 |
-| index                 | Refer to [Index](#index) for the index configuration options.                            |                         |
-| bulk                  | Refer to [Bulk](#bulk) for the bulk configuration options.                               |                         |
-| retention             | Refer to [Retention](#retention) for the retention configuration options                 |                         |
-| authentication        | Refer to [Authentication](#authentication) for the authentication configuration options. |                         |
+| url                   | Valid URLs as comma-separated string.                                                    | `http://localhost:9200` |
+| requestTimeoutMs      | Request timeout (in ms) for Elasticsearch. client                                        | `30000`                 |
+| index                 | Refer to [index](#index) for the index configuration options.                            |                         |
+| bulk                  | Refer to [bulk](#bulk) for the bulk configuration options.                               |                         |
+| retention             | Refer to [retention](#retention) for the retention configuration options.                |                         |
+| authentication        | Refer to [authentication](#authentication) for the authentication configuration options. |                         |
 | includeEnabledRecords | If `true` all enabled record types will be exported.                                     | `false`                 |
 
 <Tabs groupId="configuration" defaultValue="index" queryString values={[{label: 'Index', value: 'index' },{label: 'Bulk', value: 'bulk' },{label: 'Retention', value: 'retention' },{label: 'Authentication', value: 'authentication' }]} >
@@ -304,8 +304,7 @@ the environment variable.
 
 ## Legacy Zeebe records
 
-With the introduction of the Camunda Exporter, the Elasticsearch and OpenSearch Exporter no longer exports all record types by default.
-Meaning that not all `zeebe-record` indices will be created and populated.
+With the introduction of the Camunda Exporter, the Elasticsearch and OpenSearch Exporter no longer export all record types by default. Therefore, not all `zeebe-record` indices will be populated.
 
 The record types that continue to be exported by default are the following:
 
@@ -316,4 +315,4 @@ The record types that continue to be exported by default are the following:
 - `USER_TASK`
 - `INCIDENT`
 
-If there is still need for other record types to be exported you can still do so by enabling the configuration property [includeEnabledRecords](#configuration)
+To export other record types, enable the [includeEnabledRecords](#configuration) configuration property.

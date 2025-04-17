@@ -55,12 +55,12 @@ options, and the default values for these options:
 
 | Option                | Description                                                                              | Default                 |
 | --------------------- | ---------------------------------------------------------------------------------------- | ----------------------- |
-| url                   | Valid URLs as comma-separated string                                                     | `http://localhost:9200` |
+| url                   | Valid URLs as comma-separated string.                                                    | `http://localhost:9200` |
 | requestTimeoutMs      | Request timeout (in ms) for the OpenSearch client.                                       | `30000`                 |
-| index                 | Refer to [Index](#index) for the index configuration options.                            |                         |
-| bulk                  | Refer to [Bulk](#bulk) for the bulk configuration options.                               |                         |
-| retention             | Refer to [Retention](#retention) for the retention configuration options.                |                         |
-| authentication        | Refer to [Authentication](#authentication) for the authentication configuration options. |                         |
+| index                 | Refer to [tndex](#index) for the index configuration options.                            |                         |
+| bulk                  | Refer to [bulk](#bulk) for the bulk configuration options.                               |                         |
+| retention             | Refer to [retention](#retention) for the retention configuration options.                |                         |
+| authentication        | Refer to [authentication](#authentication) for the authentication configuration options. |                         |
 | aws                   | Refer to [AWS](#aws) for the AWS configuration options.                                  |                         |
 | includeEnabledRecords | If `true` all enabled record types will be exported.                                     | `false`                 |
 
@@ -327,8 +327,7 @@ the environment variable.
 
 ## Legacy Zeebe records
 
-With the introduction of the Camunda Exporter, the Elasticsearch and OpenSearch Exporter no longer exports all record types by default.
-As a result, fewer indices will be created for storing Zeebe data.
+With the introduction of the Camunda Exporter, the Elasticsearch and OpenSearch Exporter no longer export all record types by default. Therefore, fewer indices will be created to store Zeebe data.
 
 The record types that continue to be exported by default are the following:
 
@@ -339,4 +338,4 @@ The record types that continue to be exported by default are the following:
 - `USER_TASK`
 - `INCIDENT`
 
-If there is still need for other record types to be exported you can still do so by enabling the configuration property [includeEnabledRecords](#configuration)
+To export other record types, enable the [includeEnabledRecords](#configuration) configuration property.
