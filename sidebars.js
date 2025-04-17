@@ -27,7 +27,6 @@ module.exports = {
         "guides/configuring-out-of-the-box-connectors",
         "guides/use-connectors-in-hybrid-mode",
         "guides/host-custom-connectors",
-        "guides/document-handling",
       ],
       Improve: [
         "guides/improve-processes-with-optimize",
@@ -82,7 +81,6 @@ module.exports = {
         "components/concepts/backups",
         "components/concepts/resource-deletion",
         "components/concepts/resource-authorizations",
-        "components/concepts/document-handling",
         {
           "Access control": [
             "components/concepts/access-control/user-groups",
@@ -140,6 +138,39 @@ module.exports = {
     },
     {
       type: "category",
+      label: "Document handling",
+      link: {
+        type: "doc",
+        id: "components/document-handling/getting-started",
+      },
+      items: [
+        "components/document-handling/storage-options",
+        {
+          type: "category",
+          label: "Use cases",
+          link: {
+            type: "doc",
+            id: "components/document-handling/use-cases/overview",
+          },
+          items: [
+            "components/document-handling/use-cases/upload-document-to-bpmn-process",
+            "components/document-handling/use-cases/display-and-download-document",
+            "components/document-handling/use-cases/send-document-to-external-system-via-connector",
+          ],
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Robotic Process Automation (RPA)",
+      link: {
+        type: "doc",
+        id: "components/rpa/overview",
+      },
+      items: ["components/rpa/getting-started", "components/rpa/production"],
+    },
+    {
+      type: "category",
       label: "Intelligent document processing (IDP)",
       link: {
         type: "doc",
@@ -173,15 +204,6 @@ module.exports = {
         "components/modeler/web-modeler/idp/idp-key-concepts",
         "components/modeler/web-modeler/idp/idp-reference",
       ],
-    },
-    {
-      type: "category",
-      label: "Robotic Process Automation (RPA)",
-      link: {
-        type: "doc",
-        id: "components/rpa/overview",
-      },
-      items: ["components/rpa/getting-started", "components/rpa/production"],
     },
     {
       type: "category",
