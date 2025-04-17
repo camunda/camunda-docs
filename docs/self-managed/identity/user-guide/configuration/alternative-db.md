@@ -63,7 +63,7 @@ The Oracle driver is not provided by default in each of the Camunda 8 distributi
 <TabItem value="envVars">
 
 ```sh
-SPRING_DATASOURCE_URL="jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=tcps)(HOST=${IDENTITY_DATABASE_HOST:})(PORT=${IDENTITY_DATABASE_PORT:}))(CONNECT_DATA=(SERVICE_NAME=${IDENTITY_DATABASE_NAME:})))"
+SPRING_DATASOURCE_URL="jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=tcps)(HOST=${IDENTITY_DATABASE_HOST:})(PORT=${IDENTITY_DATABASE_PORT:}))(CONNECT_DATA=(SERVICE_NAME=${IDENTITY_DATABASE_NAME:}))(SECURITY=(SSL_SERVER_CERT_DN=\"CN={CERT_CN}, O={CERT_ORG},L={..},ST={..},C={..}\")))"
 SPRING_DATASOURCE_DRIVER_CLASS_NAME=oracle.jdbc.OracleDriver
 SPRING_JPA_DATABASE=oracle
 JAVA_TOOL_OPTIONS=$JAVA_OPTS
@@ -82,7 +82,7 @@ identity:
   # These three configuration options are added so that spring knows to connect to oracledb using it's client library
   env:
     - name: SPRING_DATASOURCE_URL
-      value: "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=tcps)(HOST=${IDENTITY_DATABASE_HOST:})(PORT=${IDENTITY_DATABASE_PORT:}))(CONNECT_DATA=(SERVICE_NAME=${IDENTITY_DATABASE_NAME:})))"
+      value: 'jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=tcps)(HOST=${IDENTITY_DATABASE_HOST:})(PORT=${IDENTITY_DATABASE_PORT:}))(CONNECT_DATA=(SERVICE_NAME=${IDENTITY_DATABASE_NAME:}))(SECURITY=(SSL_SERVER_CERT_DN="CN={CERT_CN}, O={CERT_ORG},L={..},ST={..},C={..}")))'
     - name: SPRING_DATASOURCE_DRIVER_CLASS_NAME
       value: oracle.jdbc.OracleDriver
     - name: JAVA_TOOL_OPTIONS
@@ -114,7 +114,7 @@ identity:
 ```yaml
 spring:
   datasource:
-    url: jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=tcps)(HOST=oracle.example.com)(PORT=2484))(CONNECT_DATA=(SERVICE_NAME=orcl)))
+    url: jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=tcps)(HOST=${IDENTITY_DATABASE_HOST:})(PORT=${IDENTITY_DATABASE_PORT:}))(CONNECT_DATA=(SERVICE_NAME=${IDENTITY_DATABASE_NAME:}))(SECURITY=(SSL_SERVER_CERT_DN=\"CN={CERT_CN}, O={CERT_ORG},L={..},ST={..},C={..}\")))
     driver-class-name: oracle.jdbc.OracleDriver
   jpa:
     database: oracle
