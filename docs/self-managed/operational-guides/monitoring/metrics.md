@@ -2,6 +2,7 @@
 id: metrics
 title: "Metrics"
 keywords: ["observability", "metrics", "monitoring", "monitor"]
+Description: "Learn about Camunda distributed system monitoring metrics using the Micrometer library as a facade for exporting metrics."
 ---
 
 For distributed system monitoring, Camunda uses the [Micrometer](https://micrometer.io/) library as a facade to export metrics to [supported implementations](https://docs.micrometer.io/micrometer/reference/implementations.html) such as Prometheus, OpenTelemetry, Datadog, and Dynatrace for example.
