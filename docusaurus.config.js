@@ -301,10 +301,10 @@ module.exports = {
       darkTheme: themes.dracula,
     },
     navbar: {
-      title: "Camunda 8 Docs",
+      title: "Docs",
       logo: {
         alt: "Camunda 8 Docs",
-        src: "img/black-C.png",
+        src: "img/logo-camunda-black.svg",
         srcDark: "img/light-C.png",
       },
       items: [

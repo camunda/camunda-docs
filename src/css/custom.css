@@ -46,6 +46,11 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   --ifm-tabs-padding-horizontal: 15px;
 }
 
+.navbar__title {
+  padding-left: 10px;
+  font-size: 18px;
+}
+
 a {
   text-decoration: none;
 }
