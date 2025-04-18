@@ -36,7 +36,7 @@ jobs:
         with:
           refresh-message-position: true
           message: |
-            :construction: The preview environment for the commit ${{ github.sha }} is being built. This usually takes 15-20 minutes.
+            :construction: The preview environment for the commit ${{ github.sha }} is being built. This usually takes 8-10 minutes.
 
       - name: Install Dependencies
         run: npm ci
@@ -97,4 +97,4 @@ jobs:
         with:
           refresh-message-position: true
           message: |
-            The preview environment relating to the commit ${{ github.sha }} has successfully been deployed. You can access it at [https://${{ env.BUCKET_NAME }}/pr-${{ github.event.number }}/index.html](https://${{ env.BUCKET_NAME }}/pr-${{ github.event.number }}/index.html)
+            The preview environment relating to the commit ${{ github.sha }} has successfully been deployed. You can access it at [https://${{ env.BUCKET_NAME }}/pr-${{ github.event.number }}/](https://${{ env.BUCKET_NAME }}/pr-${{ github.event.number }}/)
