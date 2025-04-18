@@ -148,7 +148,7 @@ RewriteRule ^optimize/3.11.0/self-managed/(.*)$ /docs/8.3/self-managed/$1 [R=301
 ##################################################################################
 
 #---------------------------------------------------------------------------------
-#   8.8: content moves introduced prior to the release of version 8.7.
+#   8.8: content moves introduced prior to the release of version 8.8.
 #---------------------------------------------------------------------------------
 
 # Remove Tasklist GraphQL API in 8.8
@@ -193,6 +193,9 @@ RewriteRule ^docs/next/apis-tools/camunda-api-rest/specifications/correlate-a-me
 RewriteRule ^docs/next/apis-tools/camunda-api-rest/specifications/find-all-users/?$ docs/next/apis-tools/camunda-api-rest/specifications/search-users/$1 [R=301,L]
 RewriteRule ^docs/next/apis-tools/camunda-api-rest/specifications/deploy-resources/?$ docs/next/apis-tools/camunda-api-rest/specifications/create-deployment/$1 [R=301,L]
 RewriteRule ^docs/next/apis-tools/camunda-api-rest/specifications/update-element-instance-variables/?$ docs/next/apis-tools/camunda-api-rest/specifications/create-element-instance-variables/$1 [R=301,L]
+
+# Remove Camunda exporter from 8.7 docs
+RewriteRule ^docs/self-managed/zeebe-deployment/exporters/camunda-exporter/?$ /docs/self-managed/zeebe-deployment/exporters/install-zeebe-exporters/ [R=301,L]
 
 #---------------------------------------------------------------------------------
 #   8.7: content moves introduced prior to the release of version 8.7.
