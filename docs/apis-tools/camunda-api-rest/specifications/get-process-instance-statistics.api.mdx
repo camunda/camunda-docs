@@ -1,12 +1,12 @@
 ---
 id: get-process-instance-statistics
 title: "Get process instance statistics"
-description: "Get statistics about flow nodes by the process instance key."
+description: "Get statistics about elements by the process instance key."
 sidebar_label: "Get process instance statistics"
 hide_title: true
 hide_table_of_contents: true
-api: eJztWE1z2zYQ/Ss7OCVTWpQTJ0150zhxqn6kru20B9cHEFyJiEGAAUDLGg3/e2cJUqJF2vU0nZ500EgiF/t2se8tyN0wz5eOJdfs3BqBzoHUznMtkN1EzJRouZdGzzOWsCX61mje2lx67qXzUjgWsQydsLIkc5awj+jBbW8DT03lYaHMCrTJ0EG6Bp8jlHuocIvryV+aRazklhfo0VJ0G6Z5gSxh5cMAfsY1i5gkwJL7nEXM4tdKWsxY4m2F+1Fd5QjcObnUmBEUmMVoGBGscily4MI74A44VFp+rRBkhtrLhUQLC2PB59INFk9YxJzIseAs2TC/Lilw563US1bXNxSjK4126Oj+q+mUvoZxDramt50WXaU8AQmjPWpPLnhZKimaesVfHPnZ9OJ4CNBVO8OF1JIu7orTB/paoV1DFzABtvmY9AsKT3WyxBIvQzbSY+HG8xnz33PIreVNMcc9dAGPRvn8+Gj5J5MhEfrpIOfvmwoHHhBHwp474BaBL5cWl9xj1oPsShwxLry8w3EEbzxXoKsiRUv0C7bbKruOkttIeghSe1yiZRFbGFtwHy69PSFMQasVPpLXPmpn/e24UotGFI9UfR94a97q518kaopSoX92pp35t6ZaR8xLr3BHxrOWTLs2eNFwhNUjxl3LGi76nTS2W1lH7OSJnnAnM8wg456DdKCNhzuuZPZELyitSRUW3/1TT5jBebCEDD2XCoKGqP8Fw7TZRLi+ODuFH07efH/zIve+dEkcr1ariV2II8ykN3Zi7DK2C0Efsns5gascLULB15Ai8CxrWg5XsFMnuBKFXEgB3nQ9uQmGChOOhKelHe7uN9xeHSsrB8fUDD5fzLuuvpZ6OYRu1iw4VSdhzTmWpIrrW7ar8RB0H8VVRcFt/7zpAdQRo2ZW9dJ4hIevXw18Ey1+vLo6h+ACBDWv/tlEQJREIbUsqoIlJ9NpxAp+H/69nU5r8kkVf0YmGvC+VFw31NpPR2oojMWWP5PQHtrHif+mMsbKpdzHneyLky6+Dxl1gjoeFxQ9LqDzoLi4dUFJwCufE2qQDwiLTRBcuYPIDiI7iOxxkb0e8v3M2FRmGeqGnlu9tUcXV8qs8HB4HXR10NWjunoz9jQ400C7bImHaK2xYISorMWMXlnU9vWxw26FF7h40NpBawetDbVWR6xAnxuadpXGNdShsVLC4lZOR9uXyHgznEXV8W4oEdPbJb1c7pbQXAjtXTfSqqxiCdsEldVJHG9y43ydbEpjfR3fUQnvuJU8VYG4dDuosWOZMoKrPEQ6rDbdoLlZtwunvKh0xuEdXHy4vIKP3OOKr5vdJ8iHrt9N301HvZLpIx5n53MIGQau9vpH55YawajbYPwcx80MzaGorPTrS1oWtidFbtHOKirYlkMtXuOd/gcjFrU/zjpm/fTnVUMOqRemWd6SZBgIVQWtC5FPJ8dDQp7PG10JUxSVbpqrXsJK+hx4LzGhKucpoYgpKVC7hvrtnLMz+yXcgT8CIhxPqCiBOV1PXUqfV+lEmCIWYdn2O1UmjQsuddxCuPh09uvnT+9nR7/MTz98uvxwdDyZTvy9b5Inzhdc9+KgMe4Tg8j93De7o+XbJ8BtBT3e+7hUXGriVJP6ppXlNRvIkkUsGR0SPwh6RJs3Uauva7bZpNzhZ6vqmi43M1CWXN/s5NjoN5OOfmcsWXDl9mfN/a14cdFOpV/C/zaBHt29btaq101vURX9YxG7xfX4cL2+qSOWI8/QNjkHw5kQWPqei8HomSS6baXnv12SuP4GZ16ALg==
-sidebar_class_name: "post api-method"
+api: eJztWMFy2zYQ/RUMTsmUFuXESVPeNI6Tqk0zru20B9cHEFyJiEGAAZaWNRr+e2cJUqJF2nUnnZ500EgiF/t2se8tyN1wFEvPk2t+7qwE75kyHoWRwG8ibktwApU184wnfAnYGs1bm0sUqDwq6XnEM/DSqZLMecI/AjK/vc1EaitkoKEAg56la4Y5sHIPk93CevKX4REvhRMFIDiKbcONKIAnvHwI/yusecQVwZUCcx5xB98q5SDjCboK9mO6yoEJ79XSQEZQzC5Gw4jYKlcyZ0KiZ8IzwSqjvlXAVAYG1UKBYwvrGObKDxZPeMS9zKEQPNlwXJcUuEenzJLX9Q3F6EtrPHi6/2o6pa9hnIOt6W2mA19pJCBpDYJBciHKUivZVCv+6snPphfHQ4D9WneF6YN8q8CtWRcsgbW52PQrSKQaOeIHqpCJQij8eC5D7z13wjnRlHF8fRfqSITPj61dTCx+Kr75+6asofhEjLDRngkHTCyXDpYCIevhdXWNuJCo7mDcP1oUmpmqSMER54Ltdvd9x8M2jp5/ZRCW4HjEF9YVAsOltyeEKGmthkdy2sfsrL8XVRnZqOCRUu/Dbs1bwfzrJG1RasBnZ9mZf1+adcRRoYYd/87C6l3Du2iowesR2649Ddb8TpLaLawjfvKE/O9UBhnLBAqmPDMW2Z3QKntC9qWzqYbih3+S/4ydB0uWAQqlWZANtbpgmDYbyK4vPpyyn07e/HjzIkcsfRLHq9Vq4hbyCDKF1k2sW8ZuIelDdi8n7CoHB6wQa5YCE1mmCFNothMk8yVItVCSoe3abxMMlSV0/6fVHO7u99ZeFSunBufRjH25mHcNfK3McgjdrFkIqk7CmwMrSbUwt3xX4iHoPoqvikK4/tHSA6gjTv2r6qXxCAtfvxr4Jlr8fHV1zoILJm0GD44hAqIkCmVUURU8OZlOI16I+/Dv7XRak0+q+DMyMQzuSy1MQ639dJRhhXXQ8mcSGkP73PDfVMY6tVT7uJN9adLF9yGjTlDH44KiJwPwyLSQtz4oiYkKc0IN8mHSQROE0P4gsoPIDiJ7XGSvh3z/YF2qsgxMQ8+t3tqjS2htV3A4vA66OujqUV29GXsanBlGu+yIh+CcdcxKWTkHGb2o6O2bYofdCi9w8aC1g9YOWhtqrY54AZjbdqzVDJww5wmPWzUdbd8f481w6lTHuzFE3L5Y7lbQAAjcXTe7qpzmCd8EjdVJHG9y67FONqV1WMd3VMA74ZRIdaAt3Q5a7DimrRS6uTxWa7pBA7JuD05FUZlMsHfs4uzyin0UCCuxbvaeIB+6fjd9Nx31SqaPeJydz1nIMDC11z06t9QGRt0G4+c4boZlHmTlFK4vaVnYnhSEAzerqF5bBrV4jXf6H4x41P740PHqlz+vGmoos7DN8pYiw0CoKuB8iHw6OR7S8XzeqEraoqhM01rNkq0U5kz0EpO68kgJRVwrCcY3xG8Hmp3Zp3CH/REQ2fGEihKY03XUpcK8SifSFrEMy7bfqbZpXAhl4hbCx6ez3758fj87+jQ/Pft8eXZ0PJlO8B6b5EvrsRCmFwdNa5+YOO7nvtkdLN876G3rh3CPcamFMsSoJvFNq8lrPtAkj3gyOgt+EPJQmDdRK65rvtmkwsMXp+uaLjfTTp5c3+y02Ig3U55+ZzxZCO33J8r9fXhx0c6eX7L/bc48unndXNWsm8aiK/rHI34L6/ERen1TRzwHkYFrcg6GMymhxJ6LwYCZ9Lntoh/PSFh/AyZpdsI=
+sidebar_class_name: "get api-method"
 info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
 custom_edit_url: null
 hide_send_button: true
@@ -27,12 +27,12 @@ import Heading from "@theme/Heading";
 ></Heading>
 
 <MethodEndpoint
-  method={"post"}
-  path={"/process-instances/{processInstanceKey}/statistics/flownode-instances"}
+  method={"get"}
+  path={"/process-instances/{processInstanceKey}/statistics/element-instances"}
   context={"endpoint"}
 ></MethodEndpoint>
 
-Get statistics about flow nodes by the process instance key.
+Get statistics about elements by the process instance key.
 
 <Heading
   id={"request"}
@@ -65,52 +65,51 @@ Get statistics about flow nodes by the process instance key.
       content: {
         "application/json": {
           schema: {
-            description:
-              "Process definition flow node statistics query response.",
+            description: "Process instance element statistics query response.",
             type: "object",
             properties: {
               items: {
-                description: "The flow node statistics.",
+                description: "The element statistics.",
                 type: "array",
                 items: {
-                  description: "Process flow node statistics response.",
+                  description: "Process element statistics response.",
                   type: "object",
                   properties: {
-                    flowNodeId: {
+                    elementId: {
                       description:
-                        "The flow node ID for which the results are aggregated.",
+                        "The element ID for which the results are aggregated.",
                       type: "string",
                     },
                     active: {
                       description:
-                        "The total number of active instances of the flow node.",
+                        "The total number of active instances of the element.",
                       type: "integer",
                       format: "int64",
                     },
                     canceled: {
                       description:
-                        "The total number of canceled instances of the flow node.",
+                        "The total number of canceled instances of the element.",
                       type: "integer",
                       format: "int64",
                     },
                     incidents: {
                       description:
-                        "The total number of incidents for the flow node.",
+                        "The total number of incidents for the element.",
                       type: "integer",
                       format: "int64",
                     },
                     completed: {
                       description:
-                        "The total number of completed instances of the flow node.",
+                        "The total number of completed instances of the element.",
                       type: "integer",
                       format: "int64",
                     },
                   },
-                  title: "ProcessFlowNodeStatisticsResult",
+                  title: "ProcessElementStatisticsResult",
                 },
               },
             },
-            title: "ProcessInstanceFlowNodeStatisticsQueryResult",
+            title: "ProcessInstanceElementStatisticsQueryResult",
           },
         },
       },
