@@ -54,7 +54,7 @@ elasticsearch:
 Install Camunda Management cluster with Helm:
 
 ```bash
-helm install camunda camunda/camunda-platform \
+helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION \
   -n camunda-main \
   -f camunda-main.yaml
 ```
@@ -144,7 +144,7 @@ postgresql:
 Then, install as usual:
 
 ```bash
-helm install camunda camunda/camunda-platform \
+helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION \
   -n camunda-team02 \
   -f camunda-team02.yaml
 ```

@@ -610,8 +610,7 @@ Additionally, execute the following Helm command to disable Operate and Tasklist
 From the terminal context of `aws/dual-region/kubernetes` execute:
 
 ```bash
-helm install $HELM_RELEASE_NAME camunda/camunda-platform \
-  --version $HELM_CHART_VERSION \
+helm install $HELM_RELEASE_NAME camunda/camunda-platform --version $HELM_CHART_VERSION \
   --kube-context $CLUSTER_RECREATED \
   --namespace $CAMUNDA_NAMESPACE_RECREATED \
   -f camunda-values.yml \

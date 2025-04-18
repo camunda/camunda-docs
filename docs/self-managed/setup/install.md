@@ -5,6 +5,8 @@ sidebar_label: "Install"
 description: "Camunda provides continuously improved Helm charts, of which are not cloud provider-specific so you can choose your Kubernetes provider."
 ---
 
+import { HelmChartInstall } from "@site/src/components/CamundaDistributions";
+
 :::note
 The 13.0.0-alpha2 Helm chart released with Camunda 8.8.0-alpha2 establishes a new default setup to support 8.8 [Identity management updates](/reference/announcements-release-notes/880/880-release-notes.md#identity-management-updates-saasself-managed). Currently, this setup is limited to the following components:
 
@@ -154,9 +156,7 @@ Once this is completed, you are ready to install the Helm chart hosted in the of
 
 To install the available Camunda 8 components inside a Kubernetes cluster, you can simply run:
 
-```shell
-helm install camunda camunda/camunda-platform
-```
+<HelmChartInstall />
 
 You can also add the `-n` flag to specify in which Kubernetes namespace the components should be installed.
 
@@ -212,7 +212,7 @@ To ensure you're installing the most current version of both the chart and its a
 
 ```shell
 # This will install the latest Camunda Helm chart with the latest applications/dependencies.
-helm install camunda camunda/camunda-platform \
+helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION \
     --values https://helm.camunda.io/camunda-platform/values/values-latest.yaml
 ```
 

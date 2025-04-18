@@ -5,6 +5,8 @@ sidebar_label: "Install"
 description: "Camunda provides continuously improved Helm charts, of which are not cloud provider-specific so you can choose your Kubernetes provider."
 ---
 
+import { HelmChartInstall } from "@site/src/components/CamundaDistributions";
+
 We recommend using Kubernetes and Helm to deploy and run Camunda 8 Self-Managed in production.
 
 There are many ways you can provision and configure a Kubernetes cluster, and there are a number of architectural choices you need to make. Will your workers run in the Kubernetes cluster or external to it? You will need to configure your Kubernetes cluster and modify this to suit the architecture you are building.
@@ -92,9 +94,7 @@ Once this is completed, we will be ready to install the Helm chart hosted in the
 
 To install the available Camunda 8 components inside a Kubernetes cluster, you can simply run:
 
-```shell
-helm install camunda camunda/camunda-platform
-```
+<HelmChartInstall />
 
 You can also add the `-n` flag to specify in which Kubernetes namespace the components should be installed.
 
@@ -150,7 +150,7 @@ To ensure you're installing the most current version of both the chart and its a
 
 ```shell
 # This will install the latest Camunda Helm chart with the latest applications/dependencies.
-helm install camunda camunda/camunda-platform \
+helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION \
     --values https://helm.camunda.io/camunda-platform/values/values-latest.yaml
 ```
 

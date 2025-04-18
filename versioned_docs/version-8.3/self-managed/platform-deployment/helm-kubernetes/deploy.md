@@ -5,6 +5,8 @@ sidebar_label: "Deploy"
 description: "Camunda provides continuously improved Helm charts which are not cloud provider-specific, so you can choose your Kubernetes provider."
 ---
 
+import { HelmChartInstall } from "@site/src/components/CamundaDistributions";
+
 Camunda provides continuously improved Helm charts which are not cloud provider-specific, so you can choose your Kubernetes provider. The charts are available in [Camunda Helm repository](https://artifacthub.io/packages/helm/camunda/camunda-platform) and we encourage you to [report issues](https://github.com/camunda/camunda-platform-helm/issues) if you find any of them.
 
 ## What is Helm?
@@ -57,9 +59,7 @@ Once this is completed, we are ready to install the Helm chart hosted in the off
 
 To install the available Camunda 8 components inside a Kubernetes cluster, you can simply run:
 
-```bash
-helm install camunda camunda/camunda-platform
-```
+<HelmChartInstall />
 
 You can also add the `-n` flag to specify in which Kubernetes namespace the components should be installed.
 
@@ -122,7 +122,7 @@ To have the latest version of the chart and applications/dependencies at any tim
 
 ```bash
 # This will install the latest Camunda Helm chart with the latest applications/dependencies of it (currently it's v8.3.x).
-helm install camunda camunda/camunda-platform \
+helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION \
     --values https://helm.camunda.io/camunda-platform/values/values-latest.yaml
 ```
 
@@ -238,7 +238,7 @@ postgresql:
 Assuming you have saved your configuration in `modeler-values.yaml`, install the Helm chart by running the following:
 
 ```
-helm install --values modeler-values.yaml camunda camunda/camunda-platform
+helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION --values modeler-values.yaml
 ```
 
 ### Troubleshooting the installation

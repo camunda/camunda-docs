@@ -46,7 +46,7 @@ connectors:
       subPath: custom-connector-0.0.1-with-dependencies.jar
 ```
 
-After modification, you can run `helm install ... ` as usual.
+After modification, you can run [Helm install](../install.md#install-camunda-helm-chart) as usual.
 These changes copy a custom Connector JAR before the Connector runtime starts.
 
 The `appropriate/curl` is not the only image option for the `initContainers`. There are other `curl`-based alternatives you can use; for example, `curlimages/curl`. Check `args` configuration with your vendor.
