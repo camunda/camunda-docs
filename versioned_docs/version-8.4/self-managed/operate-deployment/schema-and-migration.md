@@ -74,14 +74,21 @@ Automatic migration is enabled by default. It can be disabled by setting the con
 
 `camunda.operate.migration.migrationEnabled = false`
 
+:::note
+When running multiple instances of Operate or the Operate Importer, the `camunda.operate.migration.migrationEnabled` property should be enabled only on one of the instances. Even though the migration processes themselves are idempotent, there is a chance one of the instances fails to apply the migration.
+
+As a side effect of this, there is a possibility Elasticsearch/OpenSearch index settings are left modified with `refresh_interval=-1`, causing the data to not be refreshed and thus not visible.
+
+:::
+
 The following migration settings may affect the duration of the migration process:
 
-1. You can set the batch size for reindex of the documents. This can reduce the time needed to reindex the data.
+1. You can set the batch size for re-index of the documents. This can reduce the time needed to re-index the data.
    Small document size means big batch size, while big document size means small batch size.
 
 `camunda.operate.migration.reindexBatchSize = 5000` (Between 1 and 10.000, Default: 5.000)
 
-2. In how many slices should the reindex be divided. For each shard used by the index, you normally use a slice.
+2. In how many slices should the re-index be divided. For each shard used by the index, you normally use a slice.
    Elasticsearch decides how many slices are used if the value is set to 0 (automatic).
 
 `camunda.operate.migration.slices = 0` - Must be positive. Default is 0 (automatic).
