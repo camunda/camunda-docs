@@ -48,7 +48,7 @@ In case the problem persists after those retries, an _incident_ is created and C
 
 However, if a crucial system goes down you might end up spamming people with thousands of process instances running into the same incident.
 
-This is why typically **a passive solution is preferred**, which queries for (new) incidents from the outside, leveraging the Camunda (Java or REST) API and taking the desired action. The most common way is to query the number of incidents by the tool of your choice using the <!--- Which REST API? ---> REST API: `GET incident/count`. More information can be found in the [REST API](https://docs.camunda.org/manual/latest/reference/rest/incident/get-query-count/). We prefer the REST API over more low level technologies (like JMX or PMI), as this typically works best in any environment.
+This is why typically **a passive solution is preferred**, which queries for (new) incidents from the outside, leveraging the Camunda (Java or REST) API and taking the desired action. The most common way is to query the number of incidents by the tool of your choice using the REST API: `GET incident/count`. More information can be found in the [REST API](https://docs.camunda.org/manual/latest/reference/rest/incident/get-query-count/). We prefer the REST API over more low level technologies (like JMX or PMI), as this typically works best in any environment.
 
 Now you can easily batch multiple incidents into one email or delegate alarming to existing tools like Nagios or Icinga. An additional advantage is that you eventually already have proper alarming groups defined in such a tool.
 
