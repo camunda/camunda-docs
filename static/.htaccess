@@ -75,6 +75,7 @@ RewriteRule ^docs/8.1/(.*)$ https://unsupported.docs.camunda.io/8.1/docs/$1 [R=3
 RewriteRule ^optimize/3.9.0/(.*)$ https://unsupported.docs.camunda.io/8.1/optimize/$1 [R=301,L]
 RewriteRule ^docs/8.2/(.*)$ https://unsupported.docs.camunda.io/8.2/docs/$1 [R=301,L]
 RewriteRule ^optimize/3.10.0/(.*)$ https://unsupported.docs.camunda.io/8.2/optimize/$1 [R=301,L]
+RewriteRule ^docs/8.3/(.*)$ https://unsupported.docs.camunda.io/8.3/docs/$1 [R=301,L]
 
 # Timeless classics.
 # rules required after update to docusaurus 2.0.0-beta.15 see https://github.com/camunda-cloud/camunda-cloud-documentation/pull/531
@@ -137,6 +138,7 @@ RewriteRule ^optimize/3.13.0/self-managed/(.*)$ /docs/8.5/self-managed/$1 [R=301
 RewriteRule ^optimize/3.12.0/apis-tools/optimize-api/(.*)$ /docs/8.4/apis-tools/optimize-api/$1 [R=301,L]
 RewriteRule ^optimize/3.12.0/components/(.*)$ /docs/8.4/components/optimize/$1 [R=301,L]
 RewriteRule ^optimize/3.12.0/self-managed/(.*)$ /docs/8.4/self-managed/$1 [R=301,L]
+## Leaving these 3.11.0/8.3 redirects to rewrite optimize requests before they get to unsupported site.
 RewriteRule ^optimize/3.11.0/apis-tools/optimize-api/(.*)$ /docs/8.3/apis-tools/optimize-api/$1 [R=301,L]
 RewriteRule ^optimize/3.11.0/components/(.*)$ /docs/8.3/components/optimize/$1 [R=301,L]
 RewriteRule ^optimize/3.11.0/self-managed/(.*)$ /docs/8.3/self-managed/$1 [R=301,L]
@@ -380,7 +382,6 @@ RewriteRule ^docs/apis-tools/console-sm-api/(.*)$ /docs/apis-tools/administratio
 RewriteRule ^docs/self-managed/platform-architecture/overview/?$ /docs/self-managed/about-self-managed/$1 [R=301,L]
 RewriteRule ^docs/8.5/self-managed/platform-architecture/overview/?$ /docs/8.5/self-managed/about-self-managed/$1 [R=301,L]
 RewriteRule ^docs/8.4/self-managed/platform-architecture/overview/?$ /docs/8.4/self-managed/about-self-managed/$1 [R=301,L]
-RewriteRule ^docs/8.3/self-managed/platform-architecture/overview/?$ /docs/8.3/self-managed/about-self-managed/$1 [R=301,L]
 
 # remove tasklist API + Spring Zeebe tutorial
 RewriteRule ^docs/apis-tools/tasklist-api-rest/tasklist-api-rest-tutorial/?$ /docs/apis-tools/tasklist-api-rest/tasklist-api-rest-overview/$1 [R=301,L]
@@ -394,17 +395,12 @@ RewriteRule ^docs/8.4/self-managed/operational-guides/update-guide/800-to-810/?$
 RewriteRule ^docs/8.4/self-managed/operational-guides/update-guide/130-to-800/?$ /docs/8.4/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
 RewriteRule ^docs/8.4/self-managed/operational-guides/update-guide/810-to-820/?$ /docs/8.4/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
 
-RewriteRule ^docs/8.3/self-managed/operational-guides/update-guide/800-to-810/?$ /docs/8.3/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
-RewriteRule ^docs/8.3/self-managed/operational-guides/update-guide/130-to-800/?$ /docs/8.3/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
-RewriteRule ^docs/8.3/self-managed/operational-guides/update-guide/810-to-820/?$ /docs/8.3/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
-
 # redirect new-context-pad to context-pad
 RewriteRule ^docs/components/modeler/web-modeler/new-context-pad/?$ /docs/components/modeler/web-modeler/context-pad/$1 [R=301,L]
 
 # Remove Cawemo
 RewriteRule ^docs/guides/migrating-from-cawemo/?$ https://docs.camunda.org/enterprise/announcement/#cawemo-saas-announcements [R=301,L]
 RewriteRule ^docs/8.4/guides/migrating-from-cawemo/?$ https://docs.camunda.org/enterprise/announcement/#cawemo-saas-announcements [R=301,L]
-RewriteRule ^docs/8.3/guides/migrating-from-cawemo/?$ https://docs.camunda.org/enterprise/announcement/#cawemo-saas-announcements [R=301,L]
 
 # Move Help Center
 RewriteRule ^docs/guides/camunda-help-center/(.*)$ /docs/reference/camunda-help-center/$1 [R=301,L]
@@ -417,12 +413,10 @@ RewriteRule ^optimize/self-managed/optimize-deployment/configuration/telemetry/(
 RewriteRule ^docs/components/tasklist/userguide/updating-tasklist-cloud/?$ /docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
 RewriteRule ^docs/8.5/components/tasklist/userguide/updating-tasklist-cloud/?$ /docs/8.5/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
 RewriteRule ^docs/8.4/components/tasklist/userguide/updating-tasklist-cloud/?$ /docs/8.4/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
-RewriteRule ^docs/8.3/components/tasklist/userguide/updating-tasklist-cloud/?$ /docs/8.3/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
 
 RewriteRule ^docs/self-managed/tasklist-deployment/updating-tasklist/?$ /docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
 RewriteRule ^docs/8.5/self-managed/tasklist-deployment/updating-tasklist/?$ /docs/8.5/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
 RewriteRule ^docs/8.4/self-managed/tasklist-deployment/updating-tasklist/?$ /docs/8.4/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
-RewriteRule ^docs/8.3/self-managed/tasklist-deployment/updating-tasklist/?$ /docs/8.3/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
 
 # Remove community Node Zeebe page
 RewriteRule ^docs/apis-tools/community-clients/javascript/?$ /docs/apis-tools/node-js-sdk/$1 [R=301,L]
@@ -432,11 +426,9 @@ RewriteRule ^docs/8.5/apis-tools/community-clients/javascript/?$ /docs/8.5/apis-
 RewriteRule ^docs/components/modeler/web-modeler/new-web-modeler/?$ /docs/components/modeler/web-modeler/launch-web-modeler/$1 [R=301,L]
 RewriteRule ^docs/8.5/components/modeler/web-modeler/new-web-modeler/?$ /docs/8.5/components/modeler/web-modeler/launch-web-modeler/$1 [R=301,L]
 RewriteRule ^docs/8.4/components/modeler/web-modeler/new-web-modeler/?$ /docs/8.4/components/modeler/web-modeler/launch-web-modeler/$1 [R=301,L]
-RewriteRule ^docs/8.3/components/modeler/web-modeler/new-web-modeler/?$ /docs/8.3/components/modeler/web-modeler/launch-web-modeler/$1 [R=301,L]
 RewriteRule ^docs/components/modeler/web-modeler/launch-cloud-modeler/?$ /docs/components/modeler/web-modeler/launch-web-modeler/$1 [R=301,L]
 RewriteRule ^docs/8.5/components/modeler/web-modeler/launch-cloud-modeler/?$ /docs/8.5/components/modeler/web-modeler/launch-web-modeler/$1 [R=301,L]
 RewriteRule ^docs/8.4/components/modeler/web-modeler/launch-cloud-modeler/?$ /docs/8.4/components/modeler/web-modeler/launch-web-modeler/$1 [R=301,L]
-RewriteRule ^docs/8.3/components/modeler/web-modeler/launch-cloud-modeler/?$ /docs/8.3/components/modeler/web-modeler/launch-web-modeler/$1 [R=301,L]
 
 ## optimize splitting of upgrade guides
 RewriteRule ^optimize/self-managed/optimize-deployment/migration-update/2.1-to-2.2/?$ /optimize/self-managed/optimize-deployment/migration-update/camunda-7/2.1-to-2.2/ [R=301,L]
@@ -511,11 +503,9 @@ RewriteRule ^api/tasklist/docs/(.*)$ /docs/apis-tools/tasklist-api-rest/specific
 # Remove updating-operate pages
 RewriteRule ^docs/components/operate/userguide/updating-operate/?$ /docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
 RewriteRule ^docs/8.4/components/operate/userguide/updating-operate/?$ /docs/8.4/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
-RewriteRule ^docs/8.3/components/operate/userguide/updating-operate/?$ /docs/8.3/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
 
 RewriteRule ^docs/self-managed/operate-deployment/updating-operate/?$ /docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
 RewriteRule ^docs/8.4/self-managed/operate-deployment/updating-operate/?$ /docs/8.4/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
-RewriteRule ^docs/8.3/self-managed/operate-deployment/updating-operate/?$ /docs/8.3/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
 
 # Consolidate SM troubleshooting pages
 RewriteRule ^docs/self-managed/platform-deployment/troubleshooting/?$ /docs/self-managed/operational-guides/troubleshooting/$1 [R=301,L]
@@ -523,19 +513,16 @@ RewriteRule ^docs/self-managed/platform-deployment/troubleshooting/?$ /docs/self
 # Rename whitelist to allowlist
 RewriteRule ^docs/components/console/manage-clusters/manage-ip-whitelists/?$ /docs/components/console/manage-clusters/manage-ip-allowlists/$1 [R=301,L]
 RewriteRule ^docs/8.4/components/console/manage-clusters/manage-ip-whitelists/?$ /docs/8.4/components/console/manage-clusters/manage-ip-allowlists/$1 [R=301,L]
-RewriteRule ^docs/8.3/components/console/manage-clusters/manage-ip-whitelists/?$ /docs/8.3/components/console/manage-clusters/manage-ip-allowlists/$1 [R=301,L]
 
 # Move install-zeebe-exporters
 RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/guides/install-zeebe-exporters/?$ /docs/self-managed/zeebe-deployment/exporters/install-zeebe-exporters/$1 [R=301,L]
 RewriteRule ^docs/8.4/self-managed/platform-deployment/helm-kubernetes/guides/install-zeebe-exporters/?$ /docs/8.4/self-managed/zeebe-deployment/exporters/install-zeebe-exporters/$1 [R=301,L]
-RewriteRule ^docs/8.3/self-managed/platform-deployment/helm-kubernetes/guides/install-zeebe-exporters/?$ /docs/8.3/self-managed/zeebe-deployment/exporters/install-zeebe-exporters/$1 [R=301,L]
 
 # Rename Console API
 RewriteRule ^docs/apis-tools/console-api/?$ /docs/apis-tools/administration-api/$1 [R=301,L]
 RewriteRule ^docs/8.4/apis-tools/console-api/?$ /docs/8.4/apis-tools/administration-api/$1 [R=301,L]
 RewriteRule ^docs/apis-tools/console-api/console-api-reference/?$ /docs/apis-tools/administration-api/administration-api-reference/$1 [R=301,L]
 RewriteRule ^docs/8.4/apis-tools/console-api/console-api-reference/?$ /docs/8.4/apis-tools/administration-api/administration-api-reference/$1 [R=301,L]
-RewriteRule ^docs/8.3/apis-tools/console-api-reference/?$ /docs/8.3/apis-tools/administration-api-reference/$1 [R=301,L]
 
 RewriteRule ^docs/apis-tools/console-api/authentication/?$ /docs/apis-tools/administration-api/authentication/$1 [R=301,L]
 RewriteRule ^docs/8.4/apis-tools/console-api/authentication/?$ /docs/8.4/apis-tools/administration-api/authentication/$1 [R=301,L]
@@ -547,12 +534,10 @@ RewriteRule ^docs/8.4/components/modeler/forms/form-element-library/forms-elemen
 # Remove Operate feedback page
 RewriteRule ^docs/components/operate/userguide/operate-feedback-and-questions/?$ /contact/$1 [R=301,L]
 RewriteRule ^docs/8.4/components/operate/userguide/operate-feedback-and-questions/?$ /contact/$1 [R=301,L]
-RewriteRule ^docs/8.3/components/operate/userguide/operate-feedback-and-questions/?$ /contact/$1 [R=301,L]
 
 # Redirect to Connectors overview upon deprecation of Power Automate Connector
 RewriteRule ^docs/components/connectors/out-of-the-box-connectors/power-automate/?$ /docs/components/connectors/out-of-the-box-connectors/available-connectors-overview/ [R=301,L]
 RewriteRule ^docs/8.4/components/connectors/out-of-the-box-connectors/power-automate/?$ /docs/8.4/components/connectors/out-of-the-box-connectors/available-connectors-overview/ [R=301,L]
-RewriteRule ^docs/8.3/components/connectors/out-of-the-box-connectors/power-automate/?$ /docs/8.3/components/connectors/out-of-the-box-connectors/available-connectors-overview/ [R=301,L]
 
 #---------------------------------------------------------------------------------
 #   8.4: content moves introduced prior to the release of version 8.4.
@@ -568,120 +553,6 @@ RewriteRule ^docs/components/operate/userguide/updating-operate-cloud/?$ /docs/s
 
 # Early access to alpha features
 RewriteRule ^docs/reference/early-access/?$ /docs/reference/alpha-features/ [R=301,L]
-RewriteRule ^docs/8.3/reference/early-access/?$ /docs/8.3/reference/alpha-features/ [R=301,L]
-
-#---------------------------------------------------------------------------------
-#   8.3: content moves introduced prior to the release of version 8.3.
-#---------------------------------------------------------------------------------
-
-RewriteRule ^docs/guides/update-guide/connectors/(.*)$ /docs/components/connectors/custom-built-connectors/update-guide/$1 [R=301,L]
-RewriteRule ^docs/guides/update-guide/(.*)$ /docs/self-managed/operational-guides/update-guide/$1 [R=301,L]
-RewriteRule ^docs/self-managed/backup-restore/(.*)$ /docs/self-managed/operational-guides/backup-restore/$1 [R=301,L]
-RewriteRule ^docs/self-managed/troubleshooting/log-levels/(.*)$ /docs/self-managed/operational-guides/troubleshooting/log-levels$1 [R=301,L]
-
-# Condense Connectors
-RewriteRule ^docs/components/connectors/out-of-the-box-connectors/amazon-sns-inbound/(.*)$ /docs/components/connectors/out-of-the-box-connectors/amazon-sns/$1 [R=301,L]
-RewriteRule ^docs/components/connectors/out-of-the-box-connectors/amazon-sqs-inbound/(.*)$ /docs/components/connectors/out-of-the-box-connectors/amazon-sqs/$1 [R=301,L]
-RewriteRule ^docs/components/connectors/out-of-the-box-connectors/amazon-eventbridge-webhook/(.*)$ /docs/components/connectors/out-of-the-box-connectors/amazon-eventbridge/$1 [R=301,L]
-RewriteRule ^docs/components/connectors/out-of-the-box-connectors/github-webhook/(.*)$ /docs/components/connectors/out-of-the-box-connectors/github/$1 [R=301,L]
-RewriteRule ^docs/components/connectors/out-of-the-box-connectors/kafka-inbound/(.*)$ /docs/components/connectors/out-of-the-box-connectors/kafka/$1 [R=301,L]
-RewriteRule ^docs/components/connectors/out-of-the-box-connectors/rabbitmq-inbound/(.*)$ /docs/components/connectors/out-of-the-box-connectors/rabbitmq/$1 [R=301,L]
-RewriteRule ^docs/components/connectors/out-of-the-box-connectors/slack-inbound/(.*)$ /docs/components/connectors/out-of-the-box-connectors/slack/$1 [R=301,L]
-RewriteRule ^docs/components/connectors/out-of-the-box-connectors/twilio-webhook/(.*)$ /docs/components/connectors/out-of-the-box-connectors/twilio/$1 [R=301,L]
-
-# Remove public API page
-RewriteRule ^docs/apis-tools/public-api/(.*)$ /docs/apis-tools/working-with-apis-tools/$1 [R=301,L]
-
-# Restructure Identity Concepts
-RewriteRule ^docs/next/self-managed/concepts/access-control/apis/(.*)$ /docs/next/self-managed/identity/user-guide/additional-features/adding-an-api/$1 [R=301,L]
-RewriteRule ^docs/self-managed/concepts/access-control/apis/(.*)$ /docs/self-managed/identity/user-guide/additional-features/adding-an-api/$1 [R=301,L]
-
-RewriteRule ^docs/next/self-managed/concepts/access-control/groups/?(.*)$ /docs/next/self-managed/identity/user-guide/groups/create-group/$1 [R=301,L]
-RewriteRule ^docs/self-managed/concepts/access-control/groups/?(.*)$ /docs/self-managed/identity/user-guide/groups/create-group/$1 [R=301,L]
-
-RewriteRule ^docs/next/self-managed/concepts/access-control/roles/?(.*)$ /docs/next/self-managed/identity/user-guide/roles/add-assign-role/$1 [R=301,L]
-RewriteRule ^docs/self-managed/concepts/access-control/roles/?(.*)$ /docs/self-managed/identity/user-guide/roles/add-assign-role/$1 [R=301,L]
-
-RewriteRule ^docs/next/self-managed/concepts/access-control/users/?(.*)$ /docs/next/self-managed/identity/user-guide/roles/add-assign-role/$1 [R=301,L]
-RewriteRule ^docs/self-managed/concepts/access-control/users/?(.*)$ /docs/self-managed/identity/user-guide/roles/add-assign-role/$1 [R=301,L]
-
-RewriteRule ^docs/next/self-managed/concepts/authentication/m2m-tokens/(.*)$ /docs/next/self-managed/identity/user-guide/authorizations/generating-m2m-tokens/$1 [R=301,L]
-RewriteRule ^docs/self-managed/concepts/authentication/m2m-tokens/(.*)$ /docs/self-managed/identity/user-guide/authorizations/generating-m2m-tokens/$1 [R=301,L]
-
-RewriteRule ^docs/next/self-managed/concepts/access-control/permissions/(.*)$ /docs/next/self-managed/identity/user-guide/roles/add-assign-permission/$1 [R=301,L]
-RewriteRule ^docs/self-managed/concepts/access-control/permissions/(.*)$ /docs/self-managed/identity/user-guide/roles/add-assign-permission/$1 [R=301,L]
-
-# Remove feedback & support page
-RewriteRule ^docs/components/console/console-troubleshooting/feedback-and-support/(.*)$ /contact/$1 [R=301,L]
-
-# Branding redirects
-RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/aws-dynamodb/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/amazon-dynamodb/$1 [R=301,L]
-RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-dynamodb/(.*)$ /docs/components/connectors/out-of-the-box-connectors/amazon-dynamodb/$1 [R=301,L]
-
-RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/aws-eventbridge/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/amazon-eventbridge/$1 [R=301,L]
-RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-eventbridge/(.*)$ /docs/components/connectors/out-of-the-box-connectors/amazon-eventbridge/$1 [R=301,L]
-
-RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/aws-eventbridge-webhook/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/amazon-eventbridge-webhook/$1 [R=301,L]
-RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-eventbridge-webhook/(.*)$ /docs/components/connectors/out-of-the-box-connectors/amazon-eventbridge-webhook/$1 [R=301,L]
-
-RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/aws-sns/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/amazon-sns/$1 [R=301,L]
-RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-sns/(.*)$ /docs/components/connectors/out-of-the-box-connectors/amazon-sns/$1 [R=301,L]
-
-RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/aws-sns-inbound/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/amazon-sns-inbound/$1 [R=301,L]
-RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-sns-inbound/(.*)$ /docs/components/connectors/out-of-the-box-connectors/amazon-sns-inbound/$1 [R=301,L]
-
-RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/aws-sqs/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/amazon-sqs/$1 [R=301,L]
-RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-sqs/(.*)$ /docs/components/connectors/out-of-the-box-connectors/amazon-sqs/$1 [R=301,L]
-
-RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/aws-sqs-inbound/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/amazon-sqs-inbound/$1 [R=301,L]
-RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-sqs-inbound/(.*)$ /docs/components/connectors/out-of-the-box-connectors/amazon-sqs-inbound/$1 [R=301,L]
-
-# Remove orphaned Tasklist page
-RewriteRule ^docs/next/self-managed/tasklist-deployment/tasklist-api/(.*)$ /docs/next/apis-tools/tasklist-api/tasklist-api-overview/$1 [R=301,L]
-RewriteRule ^docs/self-managed/tasklist-deployment/tasklist-api/(.*)$ /docs/apis-tools/tasklist-api/tasklist-api-overview/$1 [R=301,L]
-
-# Rename Modeler Camunda 8
-RewriteRule ^docs/next/components/modeler/desktop-modeler/connect-to-camunda-platform-8/(.*)$ /docs/next/components/modeler/desktop-modeler/connect-to-camunda-8/$1 [R=301,L]
-RewriteRule ^docs/components/modeler/desktop-modeler/connect-to-camunda-platform-8/(.*)$ /docs/components/modeler/desktop-modeler/connect-to-camunda-8/$1 [R=301,L]
-
-# Rename Concepts Camunda 8
-RewriteRule ^docs/next/components/concepts/what-is-camunda-platform-8/(.*)$ /docs/next/components/concepts/what-is-camunda-8/$1 [R=301,L]
-RewriteRule ^docs/components/concepts/what-is-camunda-platform-8/(.*)$ /docs/components/concepts/what-is-camunda-8/$1 [R=301,L]
-
-# Renaming Guides
-RewriteRule ^docs/guides/migrating-from-camunda-platform-7(.*)$ /docs/guides/migrating-from-camunda-7$1 [R=301,L]
-RewriteRule ^docs/next/guides/migrating-from-camunda-platform-7(.*)$ /docs/guides/migrating-from-camunda-7$1 [R=301,L]
-
-# rename Professional Plan to Starter Plan
-RewriteRule ^docs/next/components/console/manage-plan/upgrade-to-professional-plan/(.*)$ /docs/next/components/console/manage-plan/upgrade-to-starter-plan/$1 [R=301,L]
-RewriteRule ^docs/components/console/manage-plan/upgrade-to-professional-plan/(.*)$ /docs/components/console/manage-plan/upgrade-to-starter-plan/$1 [R=301,L]
-
-RewriteRule ^docs/next/components/console/manage-plan/cancel-professional-subscription/(.*)$ /docs/next/components/console/manage-plan/cancel-starter-subscription/$1 [R=301,L]
-RewriteRule ^docs/components/console/manage-plan/cancel-professional-subscription/(.*)$ /docs/components/console/manage-plan/cancel-starter-subscription/$1 [R=301,L]
-
-# rename Desktop Modeler reference to Camunda Cloud
-RewriteRule ^docs/next/components/modeler/desktop-modeler/connect-to-camunda-cloud/(.*)$ /docs/next/components/modeler/desktop-modeler/connect-to-camunda-platform-8/$1 [R=301,L]
-RewriteRule ^docs/components/modeler/desktop-modeler/connect-to-camunda-cloud/(.*)$ /docs/components/modeler/desktop-modeler/connect-to-camunda-platform-8/$1 [R=301,L]
-
-# API Endpoints to API Orchestration
-RewriteRule ^docs/guides/orchestrate-api-endpoints(.*)$ /docs/guides/orchestrate-apis$1 [R=301,L]
-
-# Remove OSS section
-RewriteRule ^docs/components/zeebe/open-source(.*)$ /docs/components/zeebe/zeebe-overview/ [R=301,L]
-
-# interceptors
-RewriteRule ^docs/self-managed/zeebe-deployment/interceptors(.*)$ /docs/self-managed/zeebe-deployment/zeebe-gateway/interceptors/$1 [R=301,L]
-
-# Console restructure
-RewriteRule ^docs/components/console/manage-organization/update-billing-reservations(.*)$ /docs/components/console/manage-plan/update-billing-reservations/$1 [R=301,L]
-RewriteRule ^docs/components/console/manage-organization/update-creditcard(.*)$ /docs/components/console/manage-plan/update-creditcard/$1 [R=301,L]
-
-# Connectors TEMPLATE removal
-RewriteRule ^docs/components/connectors/out-of-the-box-connectors/template/(.*)$ /docs/components/connectors/out-of-the-box-connectors/available-connectors-overview/$1 [R=301,L]
-
-# Modeler start instance and deploy page renaming and merging
-RewriteRule ^docs/components/modeler/web-modeler/start-instance/?$ /docs/components/modeler/web-modeler/run-or-publish-your-process/ [R=301,L]
-RewriteRule ^docs/components/modeler/web-modeler/save-and-deploy/?$ /docs/components/modeler/web-modeler/run-or-publish-your-process/#deploy-a-process [R=301,L,NE]
 
 ##################################################################################
 #
