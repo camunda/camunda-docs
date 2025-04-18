@@ -96,4 +96,4 @@ The priority defines urgency of a task in relation to others.
 
 Tasklist users may view and download files displayed in the task's form.
 
-See additional details and limitations in [document handling](/components/concepts/document-handling.md).
+See additional details and limitations in [document handling](/components/document-handling/getting-started.md).

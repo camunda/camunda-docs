@@ -401,4 +401,4 @@ DOCUMENT_DEFAULT_STORE_ID=local
 ## Storage policies
 
 - **Maximum upload size for one or multiple files**: 10 MB
-- **File expiration time/time-to-live (TTL) policy**: 30 days by default. A custom expiration date can be specified via the [Document upload API](../../../apis-tools/camunda-api-rest/specifications/create-document.api.mdx).
+- **File expiration time/time-to-live (TTL) policy**: 30 days by default. A custom expiration date can be specified via the [document upload API](../../../apis-tools/camunda-api-rest/specifications/create-document.api.mdx).

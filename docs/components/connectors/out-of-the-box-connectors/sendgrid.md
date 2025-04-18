@@ -43,7 +43,7 @@ To make the **SendGrid Email Connector** executable, you need to fill out all th
    - The result of the endpoint must then be assigned to a variable in **Start Process Instance** so you can use the list of these variables in the **Attachments** field.
 
 :::note
-Starting from version 8.7.0, the SendGrid Connector provides attachment support. See additional details and limitations in [document handling](/components/concepts/document-handling.md).
+Starting from version 8.7.0, the SendGrid Connector provides attachment support. See additional details and limitations in [document handling](/components/document-handling/getting-started.md).
 :::
 
 ### SendGrid Email Template Connector
