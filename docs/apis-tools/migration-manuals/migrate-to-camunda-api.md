@@ -325,9 +325,11 @@ The following conventions apply to all attributes:
 </TabItem>
 </Tabs>
 
+## Operate API
+
 ### Decision definition
 
-#### Search decision definition
+#### Search decision definitions
 
 - **V1 endpoint**: `POST http://localhost:8080/v1/decision-definitions/search`
 - **V2 endpoint**: `POST http://localhost:8080/v2/decision-definitions/search`
@@ -344,26 +346,28 @@ The following conventions apply to all attributes:
 - Request structure changes as outlined in [general changes][].
   - `searchAfter` has been moved under `page`.
   - `size` is now the `limit` in the `page` object.
-  - `filter.key` of type `int64` is now `filter.decisionDefinitionKey` of type `string`
-  - `filter.decisionRequirementsKey` of type `int64` is now of type `string`
-- Removed attributes
-  - `filter.decisionId` - Use `decisionDefinitionId` instead.
-  - `filter.decisionRequirementsName` - Can no longer be used for filtering.
-  - `filter.decisionRequirementsVersion` - Can no longer be used for filtering.
+- Renamed attributes in the `filter` object
+  - `key` of type `int64` is now `filter.decisionDefinitionKey` of type `string`
+  - `decisionRequirementsKey` of type `int64` is now of type `string`
+- Removed attributes from the `filter` object
+  - `decisionId` - Use `decisionDefinitionId` instead.
+  - `decisionRequirementsName` - Can no longer be used for filtering.
+  - `decisionRequirementsVersion` - Can no longer be used for filtering.
 
 </TabItem>
 
 <TabItem value='output-adjustments'>
 
 - Response structure changes as outlined in [general changes][].
-  - `sortValues` do not exist per result item. Instead, the `page` object contains `firstSortValues` and `lastSortValues`, referring to the `sortValues` of the first and last item of the result set.
-  - `total` is moved under the `page` object as `totalItems`
-  - `items[].key` of type int64 is now `items[].decisionDefinitionKey` of type `string`
-  - `items[].decisionRequirementsKey` of type `int64` is now of type `string`
-- Removed attributes
-  - `items[].decisionId` - Use `decisionDefinitionId` instead.
-  - `items[].decisionRequirementsName` - Can be fetched using the **get decision requirements** endpoint with `decisionRequirementsKey`.
-  - `items[].decisionRequirementsVersion` - Can be fetched using the **get decision requirements** endpoint with `decisionRequirementsKey`.
+  - `total` is moved under the `page` object as `totalItems`.
+  - `sortValues` - Use `lastSortValues` in the `page` object instead.
+- Renamed attributes in the objects of the `items` array
+  - `key` of type `int64` - Use `decisionDefinitionKey` of type `string`.
+  - `decisionRequirementsKey` of type `int64` - This is now of type `string`.
+  - `decisionId` - Use `decisionDefinitionId` instead.
+- Removed attributes in the objects of the `items` array
+  - `decisionRequirementsName` - Can be fetched using the **get decision requirements** endpoint with `decisionRequirementsKey`.
+  - `decisionRequirementsVersion` - Can be fetched using the **get decision requirements** endpoint with `decisionRequirementsKey`.
 
 </TabItem>
 </Tabs>
@@ -388,13 +392,7 @@ The following conventions apply to all attributes:
 
 <TabItem value='output-adjustments'>
 
-- Response structure changes as outlined in [general changes][].
-  - `key` of type int64 is now `decisionDefinitionKey` of type `string`
-  - `decisionRequirementsKey` of type `int64` is now of type `string`
-- Removed attributes
-  - `decisionId` - Use `decisionDefinitionId` instead.
-  - `decisionRequirementsName` - Can be fetched using the **get decision requirements** endpoint with `decisionRequirementsKey`.
-  - `decisionRequirementsVersion` - Can be fetched using the **get decision requirements** endpoint with `decisionRequirementsKey`.
+- Except for the response structure changes, all adjustments from [search decision definitions](#search-decision-definitions) apply.
 
 </TabItem>
 </Tabs>
