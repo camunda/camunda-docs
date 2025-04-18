@@ -56,7 +56,7 @@ If you require more retained backups or more frequent backups, contact your Cust
 
 The backup operations can be performed programmatically using the Administration API.
 This provides the flexibility to seamlessly integrate backup-related tasks with your existing systems and automation workflows.
-For detailed information on using the API, refer to the [Administration API reference](/docs/apis-tools/administration-api/administration-api-reference.md).
+For detailed information on using the API, refer to the [Administration API reference](/apis-tools/administration-api-reference.md).
 
 ## Restore
 
