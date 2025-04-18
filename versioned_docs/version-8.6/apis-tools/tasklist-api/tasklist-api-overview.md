@@ -11,7 +11,7 @@ Learn the basics on how to consume the Tasklist GraphQL API. Read more about how
 :::info
 The GraphQL API is deprecated. To ensure a smooth transition, we'll continue to support our GraphQL API for a period of time, giving you an opportunity to migrate to the new REST API version at your own pace.
 
-Review the [Tasklist REST API](../tasklist-api-rest/tasklist-api-rest-overview.md). The REST API offers more functionality than the GraphQL API, and a more streamlined and efficient way of interacting with our service.
+Review the [Tasklist REST API](../tasklist-api-rest/tasklist-api-rest-overview.md). The Tasklist REST API offers more functionality than the GraphQL API, and a more streamlined and efficient way of interacting with our service.
 :::
 
 ## Endpoint

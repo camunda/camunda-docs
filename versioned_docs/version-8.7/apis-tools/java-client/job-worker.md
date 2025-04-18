@@ -14,7 +14,7 @@ keywords: ["backpressure", "back-pressure", "back pressure"]
 The Java client provides a job worker that handles polling for available jobs. This allows you to focus on writing code to handle the activated jobs.
 
 :::caution REST API limitation
-The 8.6.0 Java client cannot maintain the long-lived polling connections required for job polling via the REST API. For example, this applies when:
+The 8.6.0 Java client cannot maintain the long-lived polling connections required for job polling via the Camunda 8 REST API. For example, this applies when:
 
 - Performing long-polling job activation when activating jobs larger than the maximum message size.
 - Receiving additional job activation requests from the same Java client while the long-polling connection is still open.
@@ -22,7 +22,7 @@ The 8.6.0 Java client cannot maintain the long-lived polling connections require
 - Receiving additional job activation requests from a Java client running on a different JVM while the long-polling connection is still open.
 
 If you encounter this issue, consider switching to the Zeebe gRPC protocol for job activation, or use job
-activation via the REST API with long polling disabled.
+activation via the Camunda 8 REST API with long polling disabled.
 :::
 
 On `open`, the job worker waits `pollInterval` milliseconds and then polls for `maxJobsActive` jobs. It then continues with the following schedule:
