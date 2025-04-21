@@ -61,7 +61,7 @@ Usage telemetry data includes limited product usage data to help make better pro
 
 - AI Usage: Camunda's AI features, currently available in SaaS only, are clearly labeled as AI features. For Enterprise organizations, these features must be enabled by the customer via opt-in in the [Console](/components/console/manage-organization/enable-alpha-features.md#enable-ai-powered-features). Depending on the feature, they may collect different information.
   - Camunda [Docs AI](/components/modeler/web-modeler/advanced-modeling/camunda-docs-ai.md) records the entire conversation to provide ongoing support.
-  - Camunda [Copilots](/docs/components/early-access/alpha/bpmn-copilot/bpmn-copilot.md) only gather usage telemetry data. Camunda automatically logs all information sent to and from our AI models for system monitoring by a limited set of operators. Camunda will only use the data from free users for product and model improvement.
+  - Camunda [Copilots](/components/early-access/alpha/bpmn-copilot/bpmn-copilot.md) only gather usage telemetry data. Camunda automatically logs all information sent to and from our AI models for system monitoring by a limited set of operators. Camunda will only use the data from free users for product and model improvement.
 
 ### Example
 

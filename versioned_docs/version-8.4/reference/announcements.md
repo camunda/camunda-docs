@@ -63,7 +63,7 @@ were deprecated in `8.4`. Please use the dedicated Camunda Identity properties o
 
 ### Versioning changes in Elasticsearch
 
-As of the 8.4 release, Camunda is compatible with Elasticsearch 8.9+ and no longer supports older Elasticsearch versions. See [supported environments](/docs/reference/supported-environments.md).
+As of the 8.4 release, Camunda is compatible with Elasticsearch 8.9+ and no longer supports older Elasticsearch versions. See [supported environments](/reference/supported-environments.md).
 
 ### Support for Amazon OpenSearch
 
@@ -131,7 +131,7 @@ Use `v1` instead, see [migration hints](/apis-tools/web-modeler-api/index.md#mig
 
 ### Versioning changes in Elasticsearch
 
-As of the 8.3 release, Camunda is compatible with Elasticsearch 8.8+ and no longer supports Elasticsearch 7.x. See [supported environments](/docs/reference/supported-environments.md).
+As of the 8.3 release, Camunda is compatible with Elasticsearch 8.8+ and no longer supports Elasticsearch 7.x. See [supported environments](/reference/supported-environments.md).
 
 ### Versioning changes in Helm chart
 

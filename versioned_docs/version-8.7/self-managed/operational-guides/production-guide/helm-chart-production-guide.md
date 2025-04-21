@@ -819,4 +819,4 @@ If you would like to run benchmarks on the platform, refer to the Camunda 8 benc
 
 ### Reference architectures
 
-You can lean more about Camunda production deployment and available deployment architectures in [Camunda Deployment Reference Architecture](/docs/self-managed/reference-architecture/reference-architecture.md) section of our documentation.
+You can lean more about Camunda production deployment and available deployment architectures in [Camunda Deployment Reference Architecture](/self-managed/reference-architecture/reference-architecture.md) section of our documentation.

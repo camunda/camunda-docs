@@ -25,7 +25,7 @@ Using BPMN in Modeler, you can create more BPMN 2.0 elements like task types and
 
 For example, [service tasks](/components/modeler/bpmn/service-tasks/service-tasks.md) within Camunda 8 require you to set a task type and implement [job workers](/components/concepts/job-workers.md) to perform a particular task in a process.
 
-Review [the BPMN 2.0 coverage documentation](docs/components/modeler/bpmn/bpmn-coverage.md) for a complete list of BPMN elements supported by our modeling tools.
+Review [the BPMN 2.0 coverage documentation](/components/modeler/bpmn/bpmn-coverage.md) for a complete list of BPMN elements supported by our modeling tools.
 
 Additionally, visit [creating readable process models](/components/best-practices/modeling/creating-readable-process-models.md) for general guidelines on modeling with BPMN.
 
