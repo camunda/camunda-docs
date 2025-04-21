@@ -230,6 +230,8 @@ The [RPA solution](/components/rpa/overview.md) is graduating to [production-rea
 
 As RPA tasks are now available within BPMN diagrams for automation, users can now implement, troubleshoot, and maintain automation RPA scripts in Desktop Modeler, and deploy and manage RPA files in Zeebe. This major update introduces a suite of powerful features designed to enhance the development, deployment, and management of [RPA scripts](/components/rpa/getting-started.md).
 
+We recommend reviewing the [current known issues for RPA](https://github.com/camunda/rpa-worker/discussions/categories/known-issues) to ensure environment compatibility.
+
 <!-- https://github.com/camunda/product-hub/issues/2533 -->
 
 ### Web Modeler governance and change control
@@ -369,9 +371,9 @@ To learn more about migration, see [process instance migration](/components/conc
 
 <!-- https://github.com/camunda/product-hub/issues/1314 -->
 
-### Replay scenarios <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Modeler">Modeler</span>
+### Replay scenarios <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Modeler">Modeler</span>
 
-You can now use Play to quickly repeat manual test suites by recording and playing back process instances as scenarios.
+In Camunda 8 SaaS, you can now use Play to quickly repeat manual test suites by recording and playing back process instances as scenarios.
 
 For example, you can validate your process by creating and rerunning scenarios for different paths to check the process works as expected after any diagram changes are made.
 

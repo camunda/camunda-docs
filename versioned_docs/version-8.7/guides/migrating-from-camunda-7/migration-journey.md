@@ -82,7 +82,7 @@ Migrating to Camunda 8 gives you additional advantages, which might raise priori
 - You need performance at scale and/or improved resilience.
 - You need certain features that can only be found in Camunda 8 (for example, BPMN message buffering, improved multi-instance handling, the new Connectors framework, RPA, IDP, or the improved collaboration features in Web Modeler).
 
-// TODO: Link to conceptual differences
+<!-- TODO Link to conceptual differences -->
 
 ### When not to migrate?
 
@@ -95,7 +95,7 @@ You might wonder if there are cases where migration doesn't make sense? Camunda 
 
 Because of the improved core architecture of Camunda 8, features need to be re-added to Camunda 8 step-by-step. That means the current Camunda 8 version might not yet have sufficient feature parity for your scenario to migrate. Prominent examples are task listeners (which will be introduced with 8.8) or the business key (planned for 8.9).
 
-// TODO link to specific product board features
+<!-- TODO link to specific product board features -->
 
 If your solution requires those features, it might make sense to wait for the Camunda 8 version that will provide these features. You can **[check the public feature roadmap](https://roadmap.camunda.com/) to understand timelines**.
 
@@ -105,7 +105,7 @@ The Camunda version to target might differ per process solution. For example, Pr
 
 For example, targeting the 8.9 release doesn't mean you wait for it to happen before thinking about migration. Typically, you can already perform analysis (which you might need to do anyway to understand the right target version), which is also important to plan your project and apply for the required budget on time. Doing the migration tasks can also happen before the actual release, either independently or based on early alpha versions.
 
-// TODO highlight the paragraph
+<!-- TODO highlight the paragraph -->
 
 ![A diagram showing the on-time targeted version](../img/starting-ontime.png)
 
@@ -126,7 +126,7 @@ Furthermore, you can use the [migration tooling](./migration-tooling.md) and rel
 
 To run any solution on Camunda 8, you must have a running Camunda 8 installation.
 
-// TODO mention that SaaS is also a "running installation" in that sense
+<!-- TODO mention that SaaS is also a "running installation" in that sense -->
 
 If you used an embedded engine with Camunda 7 in the past, this model is no longer possible (see [conceptual differences between Camunda 7 and Camunda 8](./conceptual-differences.md)). This might be new to your organization to operate Camunda in addition to your solution itself. The most successful operating model is to have a central team in the organization caring about Camunda, offering it as a self-service platform to others. This is also described in our [process automation Center of Excellence playbook](https://camunda.com/process-orchestration/automation-center-of-excellence/).
 
@@ -166,7 +166,7 @@ Both are valid approaches. Let's briefly look at the differences.
 
 Let's look at the pros and cons of each approach.
 
-// TODO strategies as deep links
+<!-- TODO strategies as deep links -->
 
 **Drain out**
 
@@ -178,7 +178,7 @@ Pros:
 - No data migration required.
 - Easy fallback to old solution in case of problems.
 
-// TODO "No data migration required" is too generic, go into details (no process data migration required)
+<!-- TODO No data migration required" is too generic, go into details (no process data migration required) -->
 
 Cons:
 
@@ -202,7 +202,7 @@ Cons:
 - Complexity of the necessary data migration might drive effort.
 - Might require downtime.
 
-// TODO mention that we are building a process instance migration tool
+<!-- TODO mention that we are building a process instance migration tool -->
 
 There are some scenarios where process instances are short-lived, and the big bang approach can simply drain out existing instances and then restart without the need for data migration, making migration simpler.
 
@@ -357,7 +357,7 @@ It is important to note, that audit data can exist for ended processes from the 
 
 If you need to preserve audit data and want to transfer it to Camunda 8, you can also use the [Data Migrator](./migration-tooling.md). Migrating audit **data comes with limitations** (most prominently that you need to run Camunda 8 with **RDBMS**, a feature that is planned to be introduced with 8.9).
 
-// TODO use a deep link here as well
+<!-- TODO use a deep link here as well -->
 
 Migrating audit data is optional. If you need to do it, consider that audit data migration might need to look at a huge amount of data, which can take time to migrate. But you can run audit data migration beside the normal operations after a successful big bang migration over a period of time, which helps you to keep downtimes low.
 
@@ -367,7 +367,7 @@ The process intelligence tool Optimize keeps a lot of audit data to allow variou
 
 Optimize data migration **is currently not yet possible**, but this is planned on the roadmap.
 
-// TODO link to the roadmap item
+<!-- TODO link to the roadmap item -->
 
 ## <span className="callout">6</span>Roll out
 

@@ -378,6 +378,9 @@ identityKeycloak:
   # extraEnvVars:
   #   ...
 
+postgresql:
+  enabled: true
+
 webModeler:
   # Remove this part
 

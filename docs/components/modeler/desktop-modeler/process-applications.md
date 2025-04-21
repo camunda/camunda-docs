@@ -7,6 +7,8 @@ description: In Desktop Modeler a process application is a folder that contains 
 import GroupingImg from './img/process-applications/grouping.png'
 import LinkResourcesImg from './img/process-applications/link-resources.png'
 import OverlayImg from './img/process-applications/overlay.png'
+import DeployImg from './img/process-applications/deploy.png'
+import StartInstanceImg from './img/process-applications/start-instance.png'
 
 Desktop modeler recognizes [process applications](../../concepts/process-applications.md) you build and offers you advanced editor intelligence, deployment, and execution features within the context of such an application. To identify the boundaries of a process application, Desktop Modeler searches for a `.process-application` file in the root of your project.
 
@@ -70,3 +72,19 @@ Any file within a process application can be linked as a resource. Linking a res
 - Manually by setting the process, decision, or form ID in the properties panel
 
 <p><img src={LinkResourcesImg} alt="Linking resources by using the replace feature" /></p>
+
+## Deploying a process application
+
+Process applications can be deployed using the [deploy feature](./connect-to-camunda-8.md). When deploying a process application, all files that are part of the process application will be deployed.
+
+<p><img src={DeployImg} alt="Deploying a process application" /></p>
+
+## Starting a process instance
+
+:::note
+Before starting a process instance, all process application files will be deployed to reflect the state of the process application.
+:::
+
+For any process of a process application an instance can be started using the [start instance feature](./start-instance.md).
+
+<p><img src={StartInstanceImg} alt="Starting an instance of a main process" /></p>

@@ -303,7 +303,7 @@ The update process can be automated using the `all-in-one-install.sh` script, wh
 
 ### Monitoring
 
-Our default way of exposing metrics is in the Prometheus format, please conduct the general [metrics related documentation](/self-managed/operational-guides/monitoring/metrics.md) to learn more how to scrape Camunda 8.
+Camunda metrics are exposed by default using the Prometheus format. To learn more about how to scrape Camunda 8, see [metrics](/self-managed/operational-guides/monitoring/metrics.md).
 
 In an AWS environment, you can leverage CloudWatch not only for log collection but also for gathering [Prometheus metrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContainerInsights-Prometheus-metrics.html). It's important to note that while Camunda natively supports Grafana and Prometheus, integrating CloudWatch for metric visualization is possible but requires additional configuration.
 

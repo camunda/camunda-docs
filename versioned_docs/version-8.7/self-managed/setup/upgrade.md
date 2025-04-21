@@ -41,6 +41,10 @@ Use the recommended Helm CLI version for your Helm chart when upgrading. The Hel
 
 Configuration adjustments may be required when upgrading to a new version of the Helm chart. Before beginning your upgrade, ensure you have implemented any changes required by your new version.
 
+:::note
+With the 8.7 release, no special configuration is required to update Helm from 8.6 to 8.7. Review the full [8.6 to 8.7 update guide](/self-managed/operational-guides/update-guide/860-to-870.md) for additional details.
+:::
+
 <Tabs groupId="upgrades" defaultValue="8.6" queryString values={
 [
 {label: 'From Camunda 8.5 to 8.6', value: '8.6', },
