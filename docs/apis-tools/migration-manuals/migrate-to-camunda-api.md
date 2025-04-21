@@ -347,10 +347,11 @@ The following conventions apply to all attributes:
   - `searchAfter` has been moved under `page`.
   - `size` is now the `limit` in the `page` object.
 - Renamed attributes in the `filter` object
-  - `key` of type `int64` is now `filter.decisionDefinitionKey` of type `string`
-  - `decisionRequirementsKey` of type `int64` is now of type `string`
-- Removed attributes from the `filter` object
+  - `id` - Use `decisionDefinitionKey` instead.
+  - `key` of type `int64` - Use `decisionDefinitionKey` of type `string`.
   - `decisionId` - Use `decisionDefinitionId` instead.
+  - `decisionRequirementsKey` of type `int64` - This is now of type `string`.
+- Removed attributes from the `filter` object
   - `decisionRequirementsName` - Can no longer be used for filtering.
   - `decisionRequirementsVersion` - Can no longer be used for filtering.
 
@@ -362,9 +363,10 @@ The following conventions apply to all attributes:
   - `total` is moved under the `page` object as `totalItems`.
   - `sortValues` - Use `lastSortValues` in the `page` object instead.
 - Renamed attributes in the objects of the `items` array
+  - `id` - Use `decisionDefinitionKey` instead.
   - `key` of type `int64` - Use `decisionDefinitionKey` of type `string`.
-  - `decisionRequirementsKey` of type `int64` - This is now of type `string`.
   - `decisionId` - Use `decisionDefinitionId` instead.
+  - `decisionRequirementsKey` of type `int64` - This is now of type `string`.
 - Removed attributes in the objects of the `items` array
   - `decisionRequirementsName` - Can be fetched using the **get decision requirements** endpoint with `decisionRequirementsKey`.
   - `decisionRequirementsVersion` - Can be fetched using the **get decision requirements** endpoint with `decisionRequirementsKey`.
