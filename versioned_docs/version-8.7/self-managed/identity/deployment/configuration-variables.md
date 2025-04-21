@@ -148,9 +148,9 @@ Multi-tenancy in the context of Camunda 8 refers to the ability of Camunda 8 to 
 
 The following configuration is required to enable multi-tenancy in Identity:
 
-| Environment variable                    | Description                                                                                                               | Default value |
-| --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| `CAMUNDA_IDENTITY_MULTITENANCY_ENABLED` | Controls the multi-tenancy feature within Identity. This can be set in helm via `camunda.tasklist.multi-tenancy.enabled`. | `false`       |
+| Environment variable   | Description                                                                                                               | Default value |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| `MULTITENANCY_ENABLED` | Controls the multi-tenancy feature within Identity. This can be set in helm via `camunda.tasklist.multi-tenancy.enabled`. | `false`       |
 
 With multi-tenancy enabled, the following variables can be used to configure additional [tenants](/self-managed/identity/user-guide/tenants/managing-tenants.md). To add additional tenants, increment the `0` value for each variable (for example, `IDENTITY_TENANTS_1_NAME`).
 
@@ -181,9 +181,9 @@ identity:
           application-id: test-application
 ```
 
-## Configure clients
+## Configure applications
 
-The following variables can be used to configure [clients](/self-managed/identity/user-guide/additional-features/incorporate-applications.md). To add additional clients, increment the `0` value for each variable (for example, `KEYCLOAK_CLIENTS_1_NAME`).
+The following variables can be used to configure [applications](/self-managed/identity/user-guide/additional-features/incorporate-applications.md). To add additional applications, increment the `0` value for each variable (for example, `KEYCLOAK_CLIENTS_1_NAME`).
 
 | Environment variable                                  | Description                                                           | Default value            |
 | ----------------------------------------------------- | --------------------------------------------------------------------- | ------------------------ |
@@ -214,7 +214,7 @@ keycloak:
       secret: your-secret
       type: M2M
       permissions:
-        - resource-server-id: : zeebe-api
+        - resource-server-id: zeebe-api
           definition: write:*
 ```
 
