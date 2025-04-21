@@ -192,7 +192,7 @@ canonicalUrl: "/docs/apis-tools/operate-api/overview"
 
 The `canonicalUrl` must match the path of a document exactly. Follow these rules to ensure that a `canonicalUrl` matches an existing document:
 
-- Specify the entire relative URL, including the documentation instance root (e.g. `/docs` vs `/optimize`). Example: use `/docs/apis-tools/operate-api/overview`, instead of `/apis-tools/operate-api/overview`.
+- Specify the entire relative URL, including `/docs`. Example: use `/docs/apis-tools/operate-api/overview`, instead of `/apis-tools/operate-api/overview`.
 - **Do** lead with a slash.
 - Do **not** trail with a slash.
 
