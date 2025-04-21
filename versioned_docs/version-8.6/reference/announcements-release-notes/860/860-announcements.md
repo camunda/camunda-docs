@@ -162,7 +162,7 @@ We are introducing a new base path for both the Operate and Tasklist **web appli
 
 ### Zeebe, Operate, Tasklist, and Optimize released from single repository
 
-To harmonize and simplify, and also to prepare for the [streamlined Orchestration Cluster Architecture](https://camunda.com/blog/2024/04/simplified-deployment-options-accelerated-getting-started-experience/), `Zeebe`, `Operate`, `Tasklist`, and `Optimize` are developed and released from a single repository going forward: https://github.com/camunda/camunda. This prepares for `Zeebe`, `Operate`, `Tasklist`, and a new, Orchestration Cluster level Identity forming the [Orchestration Cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) application starting with Camunda 8.8.
+To harmonize and simplify, and also to prepare for the [streamlined Orchestration Cluster Architecture](https://camunda.com/blog/2024/04/simplified-deployment-options-accelerated-getting-started-experience/), `Zeebe`, `Operate`, `Tasklist`, and `Optimize` are developed and released from a single repository going forward: https://github.com/camunda/camunda. This prepares for `Zeebe`, `Operate`, `Tasklist`, and a new, Orchestration Cluster level Identity forming the [Orchestration Cluster](/docs/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) application starting with Camunda 8.8.
 
 This change has the following implications:
 
