@@ -1078,3 +1078,28 @@ ul ol {
   margin-right: 7px;
   background-color: transparent;
 }
+
+/* Mini TOC styling */
+
+ul.table-of-contents:before {
+  content: "On this page";
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #525860;
+  padding-left: 6px;
+}
+.table-of-contents__link--active {
+  color: var(--ifm-font-color-base);
+  border-left: 4px solid var(--ifm-link-color);
+  margin-left: -16px;
+  padding-left: 12px;
+  font-weight: 500;
+}
+ul ul .table-of-contents__link--active {
+  color: var(--ifm-font-color-base);
+  border-left: 4px solid var(--ifm-link-color);
+  margin-left: -32px;
+  padding-left: 24px;
+  font-weight: 500;
+}
