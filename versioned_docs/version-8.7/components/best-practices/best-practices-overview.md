@@ -17,7 +17,7 @@ In general, best practices apply to Camunda 8, but there are also some specific 
 
 <DocCardList items={[{type:"link", href:"/docs/8.7/components/best-practices/management/following-the-customer-success-path/", label: "The Customer Success Path", docId:"components/best-practices/management/following-the-customer-success-path"},
 {
-type:"link", href:"/best-practices/management/doing-a-proper-poc/", label: "Proper POC Execution", docId:"components/best-practices/management/doing-a-proper-poc"
+type:"link", href:"/docs/8.7/components/best-practices/management/doing-a-proper-poc/", label: "Proper POC Execution", docId:"components/best-practices/management/doing-a-proper-poc"
 }
 ]}/>
 
