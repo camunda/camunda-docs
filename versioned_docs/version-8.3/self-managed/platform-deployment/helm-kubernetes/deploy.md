@@ -144,7 +144,7 @@ Find all available configurable options at the official Camunda Helm [values doc
 
 #### Disable Connectors
 
-To disable Connectors, pass the `connectors.enabled: false` value when deploying Camunda Helm Chart.
+To disable Connectors, pass the `connectors.enabled: false` value when deploying Camunda Helm chart.
 
 #### Polling authentication mode
 

@@ -203,9 +203,9 @@ By default, the IAM OIDC Provider is not enabled. The following command will ena
 eksctl utils associate-iam-oidc-provider --cluster $CLUSTER_NAME --approve --region $REGION
 ```
 
-## Install ingress-nginx controller
+## Install Ingress-NGINX controller
 
-```
+```shell
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 helm install ingress-nginx ingress-nginx/ingress-nginx
 ```

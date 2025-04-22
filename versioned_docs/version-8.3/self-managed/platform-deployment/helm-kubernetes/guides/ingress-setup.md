@@ -20,7 +20,7 @@ Camunda 8 Helm chart doesn't manage or deploy Ingress controllers, it only deplo
 
 ## Preparation
 
-- An Ingress controller should be deployed in advance. The examples below use the [ingress-nginx controller](https://github.com/kubernetes/ingress-nginx), but any Ingress controller could be used by setting `ingress.className`.
+- An Ingress controller should be deployed in advance. The examples below use the [Ingress-NGINX controller](https://github.com/kubernetes/ingress-nginx), but any Ingress controller could be used by setting `ingress.className`.
 - TLS configuration is not handled in the examples because it varies between different workflows. It could be configured directly using `ingress.tls` options or via an external tool like [Cert-Manager](https://github.com/cert-manager/cert-manager) using `ingress.annotations`. For more details, check available [configuration options](https://artifacthub.io/packages/helm/camunda/camunda-platform#configuration).
 
 ## Configuration
@@ -209,7 +209,7 @@ Ingress resources require the cluster to have an [Ingress controller](https://ku
 
 ### Example local configuration
 
-An Ingress controller is also required when working on a local Camunda 8 installation. Take a look at an Ingress controller configuration using the [ingress-nginx controller](https://kubernetes.github.io/ingress-nginx/deploy/#bare-metal-clusters/):
+An Ingress controller is also required when working on a local Camunda 8 installation. Take a look at an Ingress controller configuration using the [Ingress-NGINX controller](https://kubernetes.github.io/ingress-nginx/deploy/#bare-metal-clusters/):
 
 ```yaml
 # ingress_nginx_values.yml
@@ -225,15 +225,15 @@ controller:
     enabled: false
 ```
 
-To install this [ingress-nginx controller](https://github.com/kubernetes/ingress-nginx) to your local cluster, execute the following command:
+To install this [Ingress-NGINX controller](https://github.com/kubernetes/ingress-nginx) to your local cluster, execute the following command:
 
 ```shell
 helm install -f ingress_nginx_values.yml \
 ingress-nginx ingress-nginx \
---repo https://kubernetes.github.io/ingress-nginx \
---version "4.9.0" \
---namespace ingress-nginx \
---create-namespace
+  --repo https://kubernetes.github.io/ingress-nginx \
+  --version "4.9.0" \
+  --namespace ingress-nginx \
+  --create-namespace
 ```
 
 ## Troubleshooting
