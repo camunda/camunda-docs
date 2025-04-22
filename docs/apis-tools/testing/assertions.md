@@ -193,6 +193,14 @@ Assert that the given BPMN elements of the process instance are active. The asse
 assertThat(processInstance).hasActiveElements("task_A", "task_B");
 ```
 
+### hasActiveElement
+
+Assert that the BPMN element of the process instance is active the given amount of times. The assertion fails if the element is not active or not exactly the given amount of times.
+
+```java
+assertThat(processInstance).hasActiveElement("task_A", 2);
+```
+
 ### hasActiveElementsExactly
 
 Assert that only the given BPMN elements are active. The assertion fails if at least one element is not active, or other elements are active.
@@ -227,6 +235,14 @@ Assert that the given BPMN elements of the process instance are completed. The a
 assertThat(processInstance).hasCompletedElements("task_A", "task_B");
 ```
 
+### hasCompletedElement
+
+Assert that the BPMN element of the process instance is completed the given amount of times. The assertion fails if the element is not completed or not exactly the given amount of times.
+
+```java
+assertThat(processInstance).hasCompletedElement("task_A", 2);
+```
+
 ### hasCompletedElementsInOrder
 
 Assert that the given BPMN elements are completed in order. Elements that do not match any of the given element IDs are ignored. The assertion fails if at least one of the elements is not completed,
@@ -242,22 +258,6 @@ Assert that the given BPMN elements of the process instance are terminated. The 
 
 ```java
 assertThat(processInstance).hasTerminatedElements("task_A", "task_B");
-```
-
-### hasActiveElement
-
-Assert that the BPMN element of the process instance is active the given amount of times. The assertion fails if the element is not active or not exactly the given amount of times.
-
-```java
-assertThat(processInstance).hasActiveElement("task_A", 2);
-```
-
-### hasCompletedElement
-
-Assert that the BPMN element of the process instance is completed the given amount of times. The assertion fails if the element is not completed or not exactly the given amount of times.
-
-```java
-assertThat(processInstance).hasCompletedElement("task_A", 2);
 ```
 
 ### hasTerminatedElement
