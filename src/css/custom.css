@@ -46,6 +46,17 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   --ifm-tabs-padding-horizontal: 15px;
 }
 
+.docMainContainer_TBSr {
+  padding-left: 20px;
+}
+
+.DocSearch-Button {
+  border: 1px solid transparent !important;
+}
+[data-theme="dark"] .DocSearch-Button {
+  border: 1px solid #333 !important;
+}
+
 .navbar__title {
   padding-left: 10px;
   font-size: 18px;
@@ -396,11 +407,12 @@ body {
   color: #ffffff;
   border-radius: 20px !important;
   margin-right: 10px;
-  border: none;
+  border: 1px solid #fc5d0d;
 }
 .try-free:hover {
   background-color: #171c29;
   color: #ffffff;
+  border: 1px solid #171c29;
 }
 
 [data-theme="dark"] .try-free {
