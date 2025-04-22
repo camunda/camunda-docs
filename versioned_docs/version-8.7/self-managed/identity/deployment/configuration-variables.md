@@ -162,8 +162,10 @@ With multi-tenancy enabled, the following variables can be used to configure add
 | `IDENTITY_TENANTS_0_MEMBERS_0_APPLICATIONID` | If adding an **application** as a member of the tenant, the application ID. If additional members have been added to the tenant, ensure the second `0` value matches that of its type (for example, `IDENTITY_TENANTS_0_MEMBERS_1_APPLICATIONID`). | `zeebe`       |
 | `IDENTITY_TENANTS_0_MEMBERS_0_USERNAME`      | If adding a **user** as a member of the tenant, the username. If additional members have been added to the tenant, ensure the second `0` value matches that of its type (for example, `IDENTITY_TENANTS_0_MEMBERS_1_USERNAME`).                    | `user-name`   |
 | `IDENTITY_TENANTS_0_MEMBERS_0_GROUPNAME`     | If adding a **group** as a member of the tenant, the name of the group. If additional members have been added to the tenant, ensure the second `0` value matches that of its type (for example, `IDENTITY_TENANTS_0_MEMBERS_1_GROUPNAME`).         | `group-name`  |
-| `IDENTITY_ENVIRONMENT_TENANTS_0_NAME`        | Needs description.                                                                                                                                                                                                                                 | Default       |
-| `IDENTITY_ENVIRONMENT_TENANTS_0_TENANTID`    | Needs description.                                                                                                                                                                                                                                 | `<default>`   |
+
+:::note
+Each property will only apply if `TYPE` is set accordingly. For example, `IDENTITY_TENANTS_0_MEMBERS_0_USERNAME` will only function if `TYPE` is set to `USER`.
+:::
 
 When converting the above variables for use in the Helm chart, ensure multiple tenants or members are added as a list. For example, a valid `application.yaml` configuration might look like the following:
 
