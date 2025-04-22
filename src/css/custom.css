@@ -453,6 +453,7 @@ body {
   width: 100%;
   border-radius: 8px;
   background: white;
+  border: none !important;
 }
 .homeSearch .DocSearch-Button:hover {
   height: 55px;
@@ -477,12 +478,12 @@ body {
 }
 [data-theme="dark"] .homeSearch .DocSearch-Button {
   background-color: transparent;
-  border: 2px solid rgb(40, 40, 40);
+  border: 2px solid rgb(40, 40, 40) !important;
 }
 
 [data-theme="dark"] .homeSearch .DocSearch-Button:hover {
   background-color: transparent;
-  border: 2px solid var(--ifm-color-primary);
+  border: 2px solid var(--ifm-color-primary) !important;
   box-shadow: 0px 8px 16px 4px #78a9ff33;
 }
 
