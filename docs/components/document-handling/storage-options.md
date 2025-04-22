@@ -5,8 +5,6 @@ description: "Understand how Camunda SaaS manages storage for you, how you can c
 keywords: ["document handling"]
 ---
 
-import DocCardList from '@theme/DocCardList';
-
 ## SaaS
 
 Camunda SaaS manages storage for you by integrating with [**Google Cloud Platform (GCP)**](https://cloud.google.com/storage) and [**AWS S3**](https://aws.amazon.com/s3/) bucket storage.
@@ -18,8 +16,4 @@ Camunda SaaS manages storage for you by integrating with [**Google Cloud Platfor
 
 ## Self-Managed
 
-If you're deploying Camunda in a Self-Managed environment, document storage must be configured manually. To learn more, visit the following guides:
-
-<DocCardList items={[{type:"link", href:"/docs/next/self-managed/concepts/document-handling/getting-started/", label: "Getting started with Self-Managed", docId:"self-managed/concepts/document-handling/getting-started"},
-{type:"link", href:"/docs/next/self-managed/concepts/document-handling/document-storage-configuration/", label: "Storage configuration", docId:"self-managed/concepts/document-handling/document-storage-configuration"}
-]}/>
+If you're deploying Camunda in a Self-Managed environment, document storage must be configured manually. To learn more, visit the [Self-Managed configuration docs](/self-managed/concepts/document-handling/configuration/overview.md).
