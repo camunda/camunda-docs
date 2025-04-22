@@ -1,11 +1,3 @@
-function optimizeLink(label, href) {
-  return {
-    type: "link",
-    label: label,
-    href: `/optimize/next/${href}`,
-  };
-}
-
 module.exports = {
   Guides: [
     "guides/introduction-to-camunda",
@@ -35,6 +27,7 @@ module.exports = {
         "guides/configuring-out-of-the-box-connectors",
         "guides/use-connectors-in-hybrid-mode",
         "guides/host-custom-connectors",
+        "guides/document-handling",
       ],
       Improve: [
         "guides/improve-processes-with-optimize",
@@ -70,6 +63,7 @@ module.exports = {
         "components/concepts/what-is-camunda-8",
         "components/concepts/clusters",
         "components/concepts/processes",
+        "components/concepts/process-applications",
         "components/concepts/job-workers",
         "components/concepts/execution-listeners",
         "components/concepts/user-task-listeners",
@@ -116,6 +110,7 @@ module.exports = {
           "Manage clusters": [
             "components/console/manage-clusters/create-cluster",
             "components/console/manage-clusters/manage-cluster",
+            "components/console/manage-clusters/cluster-connectors",
             "components/console/manage-clusters/manage-api-clients",
             "components/console/manage-clusters/manage-secrets",
             "components/console/manage-clusters/manage-alerts",
@@ -145,7 +140,43 @@ module.exports = {
     },
     {
       type: "category",
-      label: "RPA",
+      label: "Intelligent document processing (IDP)",
+      link: {
+        type: "doc",
+        id: "components/modeler/web-modeler/idp",
+      },
+      items: [
+        "components/modeler/web-modeler/idp/idp-configuration",
+        "components/modeler/web-modeler/idp/idp-applications",
+        {
+          type: "category",
+          label: "Document extraction",
+          link: {
+            type: "doc",
+            id: "components/modeler/web-modeler/idp/idp-document-extraction",
+          },
+          items: [
+            // "components/modeler/web-modeler/idp/idp-structured-extraction",
+            "components/modeler/web-modeler/idp/idp-unstructured-extraction",
+          ],
+        },
+        // "components/modeler/web-modeler/idp/idp-document-automation",
+        {
+          type: "category",
+          label: "Integrate IDP into your processes",
+          link: {
+            type: "doc",
+            id: "components/modeler/web-modeler/idp/idp-integrate",
+          },
+          items: ["components/modeler/web-modeler/idp/idp-example"],
+        },
+        "components/modeler/web-modeler/idp/idp-key-concepts",
+        "components/modeler/web-modeler/idp/idp-reference",
+      ],
+    },
+    {
+      type: "category",
+      label: "Robotic Process Automation (RPA)",
       link: {
         type: "doc",
         id: "components/rpa/overview",
@@ -192,34 +223,6 @@ module.exports = {
                 "components/modeler/web-modeler/play-your-process",
               ],
             },
-            {
-              type: "category",
-              label: "Intelligent document processing",
-              link: {
-                type: "doc",
-                id: "components/modeler/web-modeler/idp",
-              },
-              items: [
-                "components/modeler/web-modeler/idp/idp-configuration",
-                "components/modeler/web-modeler/idp/idp-applications",
-                {
-                  type: "category",
-                  label: "Document extraction",
-                  link: {
-                    type: "doc",
-                    id: "components/modeler/web-modeler/idp/idp-document-extraction",
-                  },
-                  items: [
-                    // "components/modeler/web-modeler/idp/idp-structured-extraction",
-                    "components/modeler/web-modeler/idp/idp-unstructured-extraction",
-                  ],
-                },
-                // "components/modeler/web-modeler/idp/idp-document-automation",
-                "components/modeler/web-modeler/idp/idp-integrate",
-                "components/modeler/web-modeler/idp/idp-key-concepts",
-                "components/modeler/web-modeler/idp/idp-reference",
-              ],
-            },
             "components/modeler/web-modeler/camunda-marketplace",
             "components/modeler/web-modeler/versions",
             "components/modeler/web-modeler/token-simulation",
@@ -229,6 +232,7 @@ module.exports = {
                 "components/modeler/web-modeler/advanced-modeling/call-activity-linking",
                 "components/modeler/web-modeler/advanced-modeling/form-linking",
                 "components/modeler/web-modeler/advanced-modeling/publish-public-processes",
+                "components/modeler/web-modeler/advanced-modeling/process-documentation-with-readme-files",
                 {
                   "AI features": [
                     "components/modeler/web-modeler/advanced-modeling/refactoring-suggestions",
@@ -254,6 +258,7 @@ module.exports = {
             "components/modeler/desktop-modeler/model-your-first-diagram",
             "components/modeler/desktop-modeler/connect-to-camunda-8",
             "components/modeler/desktop-modeler/start-instance",
+            "components/modeler/desktop-modeler/process-applications",
             "components/modeler/desktop-modeler/use-connectors",
             "components/modeler/desktop-modeler/variables",
             {
@@ -267,7 +272,6 @@ module.exports = {
                 "components/modeler/desktop-modeler/element-templates/configuring-templates",
                 "components/modeler/desktop-modeler/element-templates/using-templates",
                 "components/modeler/desktop-modeler/element-templates/defining-templates",
-                "components/modeler/desktop-modeler/element-templates/c7-defining-templates",
                 "components/modeler/desktop-modeler/element-templates/additional-resources",
               ],
             },
@@ -331,6 +335,7 @@ module.exports = {
                 "components/modeler/bpmn/embedded-subprocesses/embedded-subprocesses",
                 "components/modeler/bpmn/call-activities/call-activities",
                 "components/modeler/bpmn/event-subprocesses/event-subprocesses",
+                "components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses",
               ],
             },
             {
@@ -338,7 +343,6 @@ module.exports = {
                 "components/modeler/bpmn/markers",
                 "components/modeler/bpmn/multi-instance/multi-instance",
                 "components/modeler/bpmn/compensation-handler/compensation-handler",
-                "components/modeler/bpmn/ad-hoc/ad-hoc",
               ],
             },
           ],
@@ -411,6 +415,7 @@ module.exports = {
             },
             "components/connectors/protocol/graphql",
             "components/connectors/protocol/http-webhook",
+            "components/connectors/out-of-the-box-connectors/hubspot",
             "components/connectors/out-of-the-box-connectors/hugging-face",
             "components/connectors/out-of-the-box-connectors/kafka",
             {
@@ -453,6 +458,7 @@ module.exports = {
               items: [
                 "components/connectors/custom-built-connectors/connector-template-generator",
                 "components/connectors/manage-connector-templates",
+                "components/connectors/custom-built-connectors/create-connector-from-rest",
               ],
             },
             "components/connectors/custom-built-connectors/connector-sdk",
@@ -509,141 +515,63 @@ module.exports = {
         },
       ],
       Optimize: [
-        optimizeLink("What is Optimize?", "components/what-is-optimize/"),
+        "components/optimize/what-is-optimize",
 
         {
           "User guide": [
-            optimizeLink(
-              "Collections, dashboards, and reports",
-              "components/userguide/collections-dashboards-reports/"
-            ),
-            optimizeLink(
-              "User permissions",
-              "components/userguide/user-permissions/"
-            ),
-            optimizeLink("Data sources", "components/userguide/data-sources/"),
+            "components/optimize/userguide/collections-dashboards-reports",
+            "components/optimize/userguide/user-permissions",
+            "components/optimize/userguide/data-sources",
 
             {
               Dashboards: [
-                optimizeLink(
-                  "Creating dashboards",
-                  "components/userguide/creating-dashboards/"
-                ),
-                optimizeLink("Edit mode", "components/userguide/edit-mode/"),
-                optimizeLink("View mode", "components/userguide/view-mode/"),
+                "components/optimize/userguide/creating-dashboards",
+                "components/optimize/userguide/edit-mode",
+                "components/optimize/userguide/view-mode",
               ],
             },
-
             {
               "Dashboards maintained by Camunda": [
-                optimizeLink(
-                  "Process dashboards",
-                  "components/userguide/process-dashboards/"
-                ),
-                optimizeLink(
-                  "Instant process dashboards",
-                  "components/userguide/instant-process-dashboards/"
-                ),
+                "components/optimize/userguide/process-dashboards",
+                "components/optimize/userguide/instant-process-dashboards",
               ],
             },
-
-            optimizeLink(
-              "Creating reports",
-              "components/userguide/creating-reports/"
-            ),
-            optimizeLink("Process KPIs", "components/userguide/process-KPIs/"),
+            "components/optimize/userguide/creating-reports",
+            "components/optimize/userguide/process-KPIs",
 
             {
               "Process analysis": [
-                optimizeLink(
-                  "Overview",
-                  "components/userguide/process-analysis/process-analysis-overview/"
-                ),
-                optimizeLink(
-                  "Task analysis",
-                  "components/userguide/process-analysis/task-analysis/"
-                ),
-                optimizeLink(
-                  "Branch analysis",
-                  "components/userguide/process-analysis/branch-analysis/"
-                ),
-                optimizeLink(
-                  "User task analytics",
-                  "components/userguide/process-analysis/user-task-analytics/"
-                ),
+                "components/optimize/userguide/process-analysis/process-analysis-overview",
+                "components/optimize/userguide/process-analysis/task-analysis",
+                "components/optimize/userguide/process-analysis/branch-analysis",
+                "components/optimize/userguide/process-analysis/user-task-analytics",
                 {
                   "Report analysis": [
-                    optimizeLink(
-                      "Report process analysis",
-                      "components/userguide/process-analysis/report-analysis/overview/"
-                    ),
-
+                    "components/optimize/userguide/process-analysis/report-analysis/overview",
                     {
                       "Edit mode": [
-                        optimizeLink(
-                          "Overview",
-                          "components/userguide/process-analysis/report-analysis/edit-mode/"
-                        ),
-                        optimizeLink(
-                          "Select process definitions",
-                          "components/userguide/process-analysis/report-analysis/select-process-definitions/"
-                        ),
-                        optimizeLink(
-                          "Define reports",
-                          "components/userguide/process-analysis/report-analysis/define-reports/"
-                        ),
-                        optimizeLink(
-                          "Measures",
-                          "components/userguide/process-analysis/report-analysis/measures/"
-                        ),
-                        optimizeLink(
-                          "Compare target values",
-                          "components/userguide/process-analysis/report-analysis/compare-target-values/"
-                        ),
-                        optimizeLink(
-                          "Process instance parts",
-                          "components/userguide/process-analysis/report-analysis/process-instance-parts/"
-                        ),
-                        optimizeLink(
-                          "Configure reports",
-                          "components/userguide/process-analysis/report-analysis/configure-reports/"
-                        ),
+                        "components/optimize/userguide/process-analysis/report-analysis/edit-mode",
+                        "components/optimize/userguide/process-analysis/report-analysis/select-process-definitions",
+                        "components/optimize/userguide/process-analysis/report-analysis/define-reports",
+                        "components/optimize/userguide/process-analysis/report-analysis/measures",
+                        "components/optimize/userguide/process-analysis/report-analysis/compare-target-values",
+                        "components/optimize/userguide/process-analysis/report-analysis/process-instance-parts",
+                        "components/optimize/userguide/process-analysis/report-analysis/configure-reports",
                       ],
                     },
 
-                    optimizeLink(
-                      "View mode",
-                      "components/userguide/process-analysis/report-analysis/view-mode/"
-                    ),
+                    "components/optimize/userguide/process-analysis/report-analysis/view-mode",
                   ],
                 },
 
                 {
                   Filters: [
-                    optimizeLink(
-                      "Overview",
-                      "components/userguide/process-analysis/filters/"
-                    ),
-                    optimizeLink(
-                      "Metadata filters",
-                      "components/userguide/process-analysis/metadata-filters/"
-                    ),
-                    optimizeLink(
-                      "Instance state filters",
-                      "components/userguide/process-analysis/instance-state-filters/"
-                    ),
-                    optimizeLink(
-                      "Flow node filters",
-                      "components/userguide/process-analysis/flow-node-filters/"
-                    ),
-                    optimizeLink(
-                      "Process instance filters",
-                      "components/userguide/process-analysis/process-instance-filters/"
-                    ),
-                    optimizeLink(
-                      "Variable filters",
-                      "components/userguide/process-analysis/variable-filters/"
-                    ),
+                    "components/optimize/userguide/process-analysis/filters",
+                    "components/optimize/userguide/process-analysis/metadata-filters",
+                    "components/optimize/userguide/process-analysis/instance-state-filters",
+                    "components/optimize/userguide/process-analysis/flow-node-filters",
+                    "components/optimize/userguide/process-analysis/process-instance-filters",
+                    "components/optimize/userguide/process-analysis/variable-filters",
                   ],
                 },
               ],
@@ -651,26 +579,11 @@ module.exports = {
 
             {
               "Additional features": [
-                optimizeLink(
-                  "Alerts",
-                  "components/userguide/additional-features/alerts/"
-                ),
-                optimizeLink(
-                  "Export and import",
-                  "components/userguide/additional-features/export-import/"
-                ),
-                optimizeLink(
-                  "Variable labeling",
-                  "components/userguide/additional-features/variable-labeling/"
-                ),
-                optimizeLink(
-                  "Process variants comparison",
-                  "components/userguide/additional-features/process-variants-comparison/"
-                ),
-                optimizeLink(
-                  "Machine learning-ready data set",
-                  "components/userguide/additional-features/ml-dataset/"
-                ),
+                "components/optimize/userguide/additional-features/alerts",
+                "components/optimize/userguide/additional-features/export-import",
+                "components/optimize/userguide/additional-features/variable-labeling",
+                "components/optimize/userguide/additional-features/process-variants-comparison",
+                "components/optimize/userguide/additional-features/ml-dataset",
               ],
             },
           ],
@@ -731,6 +644,30 @@ module.exports = {
     },
     {
       type: "category",
+      label: "Camunda integrations",
+      link: {
+        type: "doc",
+        id: "components/camunda-integrations/overview",
+      },
+      items: [
+        {
+          type: "category",
+          label: "SAP",
+          link: {
+            type: "doc",
+            id: "components/camunda-integrations/sap/sap-integration",
+          },
+          items: [
+            "components/camunda-integrations/sap/odata-connector",
+            "components/camunda-integrations/sap/rfc-connector",
+            "components/camunda-integrations/sap/btp-plugin",
+            "components/camunda-integrations/sap/csap-cli",
+          ],
+        },
+      ],
+    },
+    {
+      type: "category",
       label: "Early access",
       link: {
         type: "doc",
@@ -745,20 +682,6 @@ module.exports = {
             id: "components/early-access/alpha/alpha-features",
           },
           items: [
-            {
-              type: "category",
-              label: "SAP",
-              link: {
-                type: "doc",
-                id: "components/early-access/alpha/sap/sap-integration",
-              },
-              items: [
-                "components/early-access/alpha/sap/sap-integration",
-                "components/early-access/alpha/sap/odata-connector",
-                "components/early-access/alpha/sap/rfc-connector",
-                "components/early-access/alpha/sap/btp-plugin",
-              ],
-            },
             {
               type: "category",
               label: "BPMN Copilot",
@@ -784,83 +707,36 @@ module.exports = {
         require("./docs/apis-tools/camunda-api-rest/sidebar-schema"),
         {
           "Optimize API (REST)": [
-            optimizeLink("Overview", "apis-tools/optimize-api/overview/"),
-            optimizeLink(
-              "Authentication",
-              "apis-tools/optimize-api/optimize-api-authentication/"
-            ),
-            optimizeLink(
-              "Tutorial",
-              "apis-tools/optimize-api/optimize-api-tutorial/"
-            ),
-
+            "apis-tools/optimize-api/overview",
+            "apis-tools/optimize-api/optimize-api-authentication",
+            "apis-tools/optimize-api/optimize-api-tutorial",
             {
               Configuration: [
-                optimizeLink(
-                  "Enable sharing",
-                  "apis-tools/optimize-api/configuration/enable-sharing/"
-                ),
-                optimizeLink(
-                  "Disable sharing",
-                  "apis-tools/optimize-api/configuration/disable-sharing/"
-                ),
+                "apis-tools/optimize-api/configuration/enable-sharing",
+                "apis-tools/optimize-api/configuration/disable-sharing",
               ],
             },
 
             {
               Dashboard: [
-                optimizeLink(
-                  "Get dashboard IDs",
-                  "apis-tools/optimize-api/dashboard/get-dashboard-ids/"
-                ),
-                optimizeLink(
-                  "Delete dashboards",
-                  "apis-tools/optimize-api/dashboard/delete-dashboard/"
-                ),
-                optimizeLink(
-                  "Export dashboard definitions",
-                  "apis-tools/optimize-api/dashboard/export-dashboard-definitions/"
-                ),
+                "apis-tools/optimize-api/dashboard/get-dashboard-ids",
+                "apis-tools/optimize-api/dashboard/delete-dashboard",
+                "apis-tools/optimize-api/dashboard/export-dashboard-definitions",
               ],
             },
 
             {
               Report: [
-                optimizeLink(
-                  "Get report IDs",
-                  "apis-tools/optimize-api/report/get-report-ids/"
-                ),
-                optimizeLink(
-                  "Delete reports",
-                  "apis-tools/optimize-api/report/delete-report/"
-                ),
-                optimizeLink(
-                  "Export report definitions",
-                  "apis-tools/optimize-api/report/export-report-definitions/"
-                ),
-                optimizeLink(
-                  "Export report result data",
-                  "apis-tools/optimize-api/report/get-data-export/"
-                ),
+                "apis-tools/optimize-api/report/get-report-ids",
+                "apis-tools/optimize-api/report/delete-report",
+                "apis-tools/optimize-api/report/export-report-definitions",
+                "apis-tools/optimize-api/report/get-data-export",
               ],
             },
-
-            optimizeLink(
-              "External variable ingestion",
-              "apis-tools/optimize-api/external-variable-ingestion/"
-            ),
-            optimizeLink(
-              "Health readiness",
-              "apis-tools/optimize-api/health-readiness/"
-            ),
-            optimizeLink(
-              "Import entities",
-              "apis-tools/optimize-api/import-entities/"
-            ),
-            optimizeLink(
-              "Variable labeling",
-              "apis-tools/optimize-api/variable-labeling/"
-            ),
+            "apis-tools/optimize-api/external-variable-ingestion",
+            "apis-tools/optimize-api/health-readiness",
+            "apis-tools/optimize-api/import-entities",
+            "apis-tools/optimize-api/variable-labeling",
           ],
         },
         require("./docs/apis-tools/web-modeler-api/sidebar-schema"),
@@ -1170,17 +1046,56 @@ module.exports = {
             "self-managed/setup/guides/add-extra-manifests",
             "self-managed/setup/guides/air-gapped-installation",
             "self-managed/setup/guides/running-custom-connectors",
+            "self-managed/setup/guides/prefix-elasticsearch-indices",
             "self-managed/setup/guides/multi-namespace-deployment",
             "self-managed/setup/guides/installing-payment-app-example",
+            "self-managed/setup/guides/secret-management",
           ],
         },
       ],
     },
     {
-      "Reference architecture": [
-        "self-managed/reference-architecture/reference-architecture",
-        "self-managed/reference-architecture/kubernetes",
-        "self-managed/reference-architecture/manual",
+      type: "category",
+      label: "Reference architecture",
+      link: {
+        type: "doc",
+        id: "self-managed/reference-architecture/reference-architecture",
+      },
+      items: [
+        {
+          type: "category",
+          label: "Kubernetes",
+          link: {
+            type: "doc",
+            id: "self-managed/reference-architecture/kubernetes",
+          },
+          items: [
+            {
+              "AWS EKS": [
+                "self-managed/setup/deploy/amazon/amazon-eks/eks-terraform",
+                "self-managed/setup/deploy/amazon/amazon-eks/eks-helm",
+                "self-managed/setup/deploy/amazon/amazon-eks/dual-region",
+              ],
+            },
+            {
+              Openshift: [
+                "self-managed/setup/deploy/amazon/openshift/terraform-setup",
+                "self-managed/setup/deploy/openshift/redhat-openshift",
+                "self-managed/setup/deploy/amazon/openshift/terraform-setup-dual-region",
+                "self-managed/setup/deploy/openshift/redhat-openshift-dual-region",
+              ],
+            },
+          ],
+        },
+        {
+          type: "category",
+          label: "Manual JAR",
+          link: {
+            type: "doc",
+            id: "self-managed/reference-architecture/manual",
+          },
+          items: ["self-managed/setup/deploy/amazon/aws-ec2"],
+        },
       ],
     },
     {
@@ -1221,7 +1136,7 @@ module.exports = {
           },
           items: [
             "self-managed/operational-guides/backup-restore/optimize-backup",
-            "self-managed/operational-guides/backup-restore/operate-tasklist-backup",
+            "self-managed/operational-guides/backup-restore/webapps-backup",
             "self-managed/operational-guides/backup-restore/zeebe-backup-and-restore",
             "self-managed/operational-guides/backup-restore/modeler-backup-and-restore",
           ],
@@ -1272,6 +1187,12 @@ module.exports = {
         "self-managed/concepts/mapping-rules",
         "self-managed/concepts/elasticsearch-privileges",
         "self-managed/concepts/opensearch-privileges",
+        {
+          "Document handling": [
+            "self-managed/concepts/document-handling/getting-started",
+            "self-managed/concepts/document-handling/document-storage-configuration",
+          ],
+        },
       ],
     },
     {
@@ -1373,59 +1294,37 @@ module.exports = {
           ],
 
           Optimize: [
-            optimizeLink(
-              "Installation",
-              "self-managed/optimize-deployment/install-and-start/"
-            ),
-
+            "self-managed/optimize-deployment/install-and-start",
             {
               Configuration: [
-                optimizeLink(
-                  "Getting started",
-                  "self-managed/optimize-deployment/configuration/getting-started/"
-                ),
-
+                "self-managed/optimize-deployment/configuration/getting-started",
                 {
                   "System configuration": [
-                    optimizeLink(
-                      "Overview",
-                      "self-managed/optimize-deployment/configuration/system-configuration/"
-                    ),
-                    optimizeLink(
-                      "Camunda 8 system configuration",
-                      "self-managed/optimize-deployment/configuration/system-configuration-platform-8/"
-                    ),
+                    "self-managed/optimize-deployment/configuration/system-configuration",
+                    "self-managed/optimize-deployment/configuration/system-configuration-platform-8",
                   ],
                 },
-
-                optimizeLink(
-                  "Logging",
-                  "self-managed/optimize-deployment/configuration/logging/"
-                ),
-                optimizeLink(
-                  "Security instructions",
-                  "self-managed/optimize-deployment/configuration/security-instructions/"
-                ),
-                optimizeLink(
-                  "Shared Elasticsearch/OpenSearch cluster",
-                  "self-managed/optimize-deployment/configuration/shared-elasticsearch-cluster/"
-                ),
-                optimizeLink(
-                  "History cleanup",
-                  "self-managed/optimize-deployment/configuration/history-cleanup/"
-                ),
-                optimizeLink(
-                  "Localization",
-                  "self-managed/optimize-deployment/configuration/localization/"
-                ),
-                optimizeLink(
-                  "Object and list variable support",
-                  "self-managed/optimize-deployment/configuration/object-variables/"
-                ),
-                optimizeLink(
-                  "Multi-tenancy",
-                  "self-managed/optimize-deployment/configuration/multi-tenancy/"
-                ),
+                "self-managed/optimize-deployment/configuration/logging",
+                "self-managed/optimize-deployment/configuration/security-instructions",
+                "self-managed/optimize-deployment/configuration/shared-elasticsearch-cluster",
+                "self-managed/optimize-deployment/configuration/history-cleanup",
+                "self-managed/optimize-deployment/configuration/localization",
+                "self-managed/optimize-deployment/configuration/object-variables",
+                "self-managed/optimize-deployment/configuration/multi-tenancy",
+              ],
+            },
+            {
+              "Migration & update": [
+                "self-managed/optimize-deployment/migration-update/camunda-8/instructions",
+                "self-managed/optimize-deployment/migration-update/camunda-8/8.6-to-8.7",
+                "self-managed/optimize-deployment/migration-update/camunda-8/3.13_8.5-to-8.6",
+                "self-managed/optimize-deployment/migration-update/camunda-8/3.12_8.4-to-3.13_8.5",
+                "self-managed/optimize-deployment/migration-update/camunda-8/3.11_8.3-to-3.12_8.4",
+                "self-managed/optimize-deployment/migration-update/camunda-8/3.10-to-3.11_8.3",
+                "self-managed/optimize-deployment/migration-update/camunda-8/3.9-to-3.10",
+                "self-managed/optimize-deployment/migration-update/camunda-8/3.9-preview-1-to-3.9",
+                "self-managed/optimize-deployment/migration-update/camunda-8/3.8-to-3.9-preview-1",
+                "self-managed/optimize-deployment/migration-update/camunda-8/3.7-to-3.8",
               ],
             },
           ],
@@ -1453,14 +1352,14 @@ module.exports = {
                     },
                     {
                       Roles: [
-                        "self-managed/identity/user-guide/roles/add-assign-role",
-                        "self-managed/identity/user-guide/roles/add-assign-permission",
+                        "self-managed/identity/user-guide/roles/manage-roles",
+                        "self-managed/identity/user-guide/roles/manage-permissions",
                       ],
                     },
                     {
                       Groups: [
-                        "self-managed/identity/user-guide/groups/create-group",
-                        "self-managed/identity/user-guide/groups/assign-users-roles-to-group",
+                        "self-managed/identity/user-guide/groups/manage-groups",
+                        "self-managed/identity/user-guide/groups/manage-users-roles-to-group",
                       ],
                     },
                     {

@@ -1,8 +1,8 @@
 ---
 id: configure-db-custom-headers
 title: "Configure custom headers"
-sidebar_label: "Configure custom headers"
-description: "Learn how to configure DB client custom headers"
+sidebar_label: "Configure custom HTTP headers"
+description: "Learn how to configure DB client custom HTTP headers"
 ---
 
 import Tabs from "@theme/Tabs";
@@ -92,8 +92,7 @@ The following examples add the new `my-plugin` JAR to the `application.yaml` for
 <Tabs groupId="db" defaultValue="elasticsearch" values={
 [
 {label: 'Elasticsearch', value: 'elasticsearch' },
-{label: 'OpenSearch', value: 'opensearch' },
-{label: 'Camunda Exporter', value: 'camundaExporter' }
+{label: 'OpenSearch', value: 'opensearch' }
 ]
 }>
 
@@ -189,21 +188,6 @@ Due to technical limitations, Optimize currently allows registering up to 5 plug
 
 </TabItem>
 
-<TabItem value='camundaExporter'>
-
-#### Configure Zeebe Exporter
-
-:::note
-The following configuration uses the default name `camundaExporter`. To use a custom name, update `CAMUNDAEXPORTER` in the provided environment variables to match the name defined in your exporter [configuration](/self-managed/zeebe-deployment/exporters/camunda-exporter.md).
-:::
-
-```yaml
-- ZEEBE_BROKER_EXPORTERS_CAMUNDAEXPORTER_ARGS_CONNECT_INTERCEPTORPLUGINS_0_ID=my-plugin
-- ZEEBE_BROKER_EXPORTERS_CAMUNDAEXPORTER_ARGS_CONNECT_INTERCEPTORPLUGINS_0_CLASSNAME=com.myplugin.MyCustomHeaderPlugin
-- ZEEBE_BROKER_EXPORTERS_CAMUNDAEXPORTER_ARGS_CONNECT_INTERCEPTORPLUGINS_0_JARPATH=/usr/local/plugin/plg.jar
-```
-
-</TabItem>
 </Tabs>
 
 ## Troubleshooting

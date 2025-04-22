@@ -105,7 +105,7 @@ The `management.server` configuration allows you to configure the management ser
 | Field     | Description                                                                                                                                                                                                                                                                           | Example value |
 | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
 | host      | Sets the host the management server binds to. This setting can also be overridden using the environment variable `MANAGEMENT_SERVER_HOST`.                                                                                                                                            | 0.0.0.0       |
-| port      | Sets the port the management server binds to. This setting can also be overridden using the environment variable `MANAGEMENT_SERVER_PORT`.                                                                                                                                            | 8080          |
+| port      | Sets the port the management server binds to. This setting can also be overridden using the environment variable `MANAGEMENT_SERVER_PORT`.                                                                                                                                            | 9600          |
 | base-path | The context path prefix for all management endpoints. For example, if you configure `/zeebe`, your actuator endpoints will be at `http://localhost:9600/zeebe/actuator/configprops`. This setting can also be overridden using the environment variable `MANAGEMENT_SERVER_BASEPATH`. | `/`           |
 
 #### YAML snippet
@@ -284,12 +284,12 @@ The Zeebe configuration properties for Camunda Identity are deprecated as of ver
 Camunda Identity properties or the [corresponding environment variables](../../identity/deployment/configuration-variables.md#core-configuration).
 :::
 
-| Field            | Description                                                                                                                                                                                          | Example value                                     |
-| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
-| issuerBackendUrl | The URL to the auth provider backend, used to validate tokens. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_SECURITY_AUTHENTICATION_IDENTITY_ISSUERBACKENDURL`. | http://keycloak:8080/auth/realms/camunda-platform |
-| audience         | The required audience of the auth token. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_SECURITY_AUTHENTICATION_IDENTITY_AUDIENCE`.                               | zeebe-api                                         |
-| type             | The identity auth type to apply, one of `keycloak` or `auth0`. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_SECURITY_AUTHENTICATION_IDENTITY_TYPE`.             | keycloak                                          |
-| baseUrl          | The URL to the Identity instance. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_SECURITY_AUTHENTICATION_IDENTITY_BASEURL`.                                       | http://identity:8084                              |
+| Field            | Description                                                                                                                                                                                          | Example value                                      |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
+| issuerBackendUrl | The URL to the auth provider backend, used to validate tokens. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_SECURITY_AUTHENTICATION_IDENTITY_ISSUERBACKENDURL`. | http://keycloak:18080/auth/realms/camunda-platform |
+| audience         | The required audience of the auth token. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_SECURITY_AUTHENTICATION_IDENTITY_AUDIENCE`.                               | zeebe-api                                          |
+| type             | The identity auth type to apply, one of `keycloak` or `auth0`. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_SECURITY_AUTHENTICATION_IDENTITY_TYPE`.             | keycloak                                           |
+| baseUrl          | The URL to the Identity instance. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_SECURITY_AUTHENTICATION_IDENTITY_BASEURL`.                                       | http://identity:8084                               |
 
 #### YAML snippet
 
@@ -298,7 +298,7 @@ security:
   authentication:
     mode: identity
     identity:
-      issuerBackendUrl: http://keycloak:8080/auth/realms/camunda-platform
+      issuerBackendUrl: http://keycloak:18080/auth/realms/camunda-platform
       audience: zeebe-api
       type: keycloak
 ```
@@ -487,32 +487,4 @@ filters:
   id: null
   jarPath: null
   className: null
-```
-
-### zeebe.gateway.multiTenancy
-
-Multi-tenancy in Zeebe can be configured with the following configuration properties.
-Multi-tenancy is disabled by default.
-Read more [in the multi-tenancy documentation](../../../self-managed/concepts/multi-tenancy.md).
-
-:::note
-For now, multi-tenancy is only supported in combination with Identity.
-To use multi-tenancy, you must set [`authentication.mode`](#zeebegatewayclustersecurityauthentication) to `'identity'` and specify the
-`camunda.identity.baseUrl` property or the [corresponding Camunda Identity environment variable](../../identity/deployment/configuration-variables.md#core-configuration)
-as well.
-:::
-
-:::note
-If you are using an embedded gateway, refer to the [broker configuration guide](./broker.md#multitenancy-configuration).
-:::
-
-| Field   | Description                                                                                                                                     | Example value |
-| ------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| enabled | Enables multi-tenancy for the cluster. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_MULTITENANCY_ENABLED`. | true          |
-
-#### YAML snippet
-
-```yaml
-multiTenancy:
-  enabled: true
 ```

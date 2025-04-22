@@ -222,13 +222,9 @@ To avoid this, set the `skipEncoding` value to `"true"` in the element template 
 
 - **Read timeout in seconds** is the amount of time the client will wait to read data from the server after the connection has been made. The default is also set to 20 seconds. To allow an unlimited wait time for slow responses, set this to 0.
 
-- **Write timeout in seconds** controls how long the client will wait to successfully send data to the server. The default setting for this is 0, indicating that there is no limit and the client will wait indefinitely for the operation to complete.
-
 ## Response
 
-The HTTP response will be available in a temporary local `response` variable. This variable can be mapped to the process by specifying the **Result variable**.
-
-The following fields are available in the `response` variable:
+The following variables are available in the context of the response expression:
 
 - **status**: Response status
 - **body**: Response body of your request

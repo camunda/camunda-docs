@@ -30,7 +30,7 @@ For example, 1.2+ means support for the minor version 2, and any higher minors (
 ## Desktop Modeler
 
 - Windows 10 / 11
-- Mac OS 12 / 13 / 14 / 15
+- macOS 12 / 13 / 14 / 15
 - Ubuntu LTS (latest)
 
 ## Clients
@@ -40,7 +40,7 @@ For example, 1.2+ means support for the minor version 2, and any higher minors (
 - **Zeebe Go Client**: Go 1.13+
 - **zbctl**: Windows, macOS, and Linux (latest)
 - **Connector SDK**: OpenJDK 17+
-- **Spring SDK**: Spring Boot 3.2.x (for the exact version, check the [version matrix](/apis-tools/spring-zeebe-sdk/getting-started.md#version-compatibility).)
+- **Spring SDK**: Check the [version matrix](/apis-tools/spring-zeebe-sdk/getting-started.md#version-compatibility)
 - **Helm CLI**: 3.14.x (for the exact version, check the [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/))
 
 ## Camunda 8 Self-Managed
@@ -81,6 +81,10 @@ For details on typical volume type usage, refer to the following examples specif
 - [Amazon EKS](/self-managed/setup/deploy/amazon/amazon-eks/amazon-eks.md#volume-performance)
 - [Microsoft AKS](/self-managed/setup/deploy/azure/microsoft-aks.md#volume-performance)
 - [Google GKE](/self-managed/setup/deploy/gcp/google-gke.md#volume-performance)
+
+### Helm charts version matrix
+
+Camunda Helm chart version `10.x.x` works with Camunda version `8.5.x`. Check the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/camunda-8.5/) for more details.
 
 ## Component requirements
 
@@ -127,3 +131,19 @@ You can also use newer versions of Desktop and Web Modeler with older Zeebe vers
 ## Camunda 7 & Optimize version matrix
 
 See https://docs.camunda.org/enterprise/download/#camunda-optimize.
+
+## Dependency maintenance policies
+
+Camunda provides [a standard support policy](https://camunda.com/release-policy/) of 18 months for a particular minor version from the date it is released.
+During this time, patches are regularly released containing security and bug fixes, some of which may come from dependency updates. Therefore, for the
+vast majority of dependencies Camunda _only_ applies patch updates.
+
+However, certain dependencies used by Camunda 8 may have a shorter maintenance policy than Camunda itself. Camunda may adopt a different update policy for these dependencies, as listed below.
+
+### Spring
+
+**Zeebe** is a Spring Boot application and leverage Spring Boot to execute fundamental functionality such as application configuration, REST infrastructure (including security), production ready features, etc.
+
+However, Spring Boot has a shorter maintenance window than Camunda for its open-source software (OSS) offering. [Versions are only supported for 13 months](https://spring.io/projects/spring-boot#support), versus Camunda's 18 months. To circumvent this, **Zeebe** patch releases also update Spring Boot minor versions, such that the latest patch release of these components uses a supported Spring version.
+
+As for libraries and SDKs meant to be included in third-party applications, Camunda follows a best effort policy to balance compatibility and secure Spring-dependent libraries.

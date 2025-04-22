@@ -36,7 +36,7 @@ While stepping through this guide, you can visit our [sample repository](https:/
 Before getting started, ensure you have the following in your local environment:
 
 - Access to your preferred code editor or IDE
-- [OpenJDK 21+](https://openjdk.org/install/)
+- [OpenJDK 21+](https://openjdk.org/install/) and [Maven 3](https://maven.apache.org/index.html)
 - [Camunda 8 Desktop Modeler](/components/modeler/desktop-modeler/index.md) and [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md)
 
 :::note
@@ -50,7 +50,7 @@ If no version of Java is found, follow your chosen installation's instructions f
 Next, create a new Spring Boot project:
 
 1. Go to [https://start.spring.io/](https://start.spring.io/) to get started.
-2. Under **Project**, select **Maven**. Under **Language**, select **Java**. Under **Spring Boot**, select the latest non-SNAPSHOT version (currently 3.4.1).
+2. Under **Project**, select **Maven**. Under **Language**, select **Java**. Under **Spring Boot**, select the latest non-SNAPSHOT version (currently 3.4.4).
 3. Under **Project Metadata**, configure the following or use the [pre-filled shortcut](https://start.spring.io/#!type=maven-project&language=java&packaging=jar&groupId=io.camunda.demo&artifactId=process_payments&name=Process%20payments&description=Process%20payments%20with%20Camunda&packageName=io.camunda.demo.process_payments):
    1. **Group**: `io.camunda.demo`
    2. **Artifact**: `process_payments`
@@ -72,7 +72,7 @@ Next, we'll create a BPMN diagram to represent the transaction model shown at th
 
 1. Open Desktop Modeler.
 2. Click **Create a new diagram** in Camunda 8.
-3. In the properties panel, under the **General** section:
+3. Toggle the properties panel from the Window menu if it is not already visible, and make the following changes in the **General** section:
    - Name your diagram `Process payments`
    - Set the ID to `process-payments`
 4. Add a start event, and name it `Payment request received`.
@@ -82,22 +82,23 @@ Next, we'll create a BPMN diagram to represent the transaction model shown at th
    2. **Script/Result variable**: `totalWithTax`
    3. **Script/FEEL expression**: `total * 1.1` (this represents the tax applied to the transaction.)
 7. Append a task named `Charge credit card`.
-8. Click on the task and click the wrench-shaped icon to change the type of task to a service task. In the properties panel, change the **Task definition/Type** to `charge-credit-card`.
+8. Click on the task and click the wrench-shaped icon to change the type of task to a service task. In the properties panel, change the **Task definition/Job type** to `charge-credit-card`.
 9. Append an end event named `Payment executed`.
 10. Save this BPMN file to your Spring project in `src/main/resources`, and name it `process-payments.bpmn`.
 
-## Step 3: Deploy your process
+## Step 3: Deploy your process from Desktop Modeler
 
 To deploy your process, take the following steps:
 
-1. Open Desktop Modeler and click the rocket icon in the bottom left corner.
-2. Change the **Deployment name** to `process-payments`, and ensure the **Target** is `Camunda 8 Self-Managed`.
-3. Change the **Cluster endpoint** to `http://localhost:26500/`, with no authentication.
-4. Click **Deploy**.
+1. Open Desktop Modeler and ensure the desired Camunda 8 version is targeted in the bottom left corner. You can change the desired version by clicking on the version, selecting a new one, and selecting **Apply**.
+2. Click the rocket icon in the bottom left corner.
+3. Change the **Deployment name** to `process-payments`, and ensure the **Target** is `Camunda 8 Self-Managed`.
+4. Change the **Cluster endpoint** to `http://localhost:26500`, with no authentication.
+5. Click **Deploy**.
 
-When you open Operate at http://localhost:8080/operate/, you should now note the process deployed to your local Self-Managed setup.
+When you open Operate at http://localhost:8080/operate/ (or http://localhost:8081 when using Camunda 8 Run with Docker Compose), you should now note the process deployed to your local Self-Managed setup.
 
-## Step 4: Run your process from Modeler
+## Step 4: Run your process from Desktop Modeler
 
 To run your process, take the following steps:
 
@@ -113,7 +114,7 @@ To implement a service task, take the following steps:
 
 ### Configure Spring Boot Starter
 
-Add the following Maven dependency to your Spring Boot Starter project, replacing `x` with the latest patch level available:
+Add the following Maven dependency to your Spring Boot Starter project's pom.xml file, replacing `x` with [the latest patch level available](https://mvnrepository.com/artifact/io.camunda/spring-boot-starter-camunda-sdk):
 
 ```xml
 <dependency>
@@ -123,9 +124,10 @@ Add the following Maven dependency to your Spring Boot Starter project, replacin
 </dependency>
 ```
 
-### Configure the Zeebe client
+### Configure the Camunda client
 
-Open your `src/main/resources/application.yaml` file, and paste the following snippet to connect to the Self-Managed Zeebe Broker:
+1. [Rename your `src/main/resources/application.properties` file to `application.yaml`](https://mvnrepository.com/artifact/io.camunda/spring-boot-starter-camunda-sdk).
+2. Paste the following settings to connect to the Self-Managed Zeebe Broker:
 
 ```yaml
 camunda:
@@ -178,6 +180,8 @@ To check your work, visit our [sample repository](https://github.com/camunda/cam
 :::
 
 In your terminal, run `mvn spring-boot:run`, where you should see the `charging credit card` output. In Operate, refresh if needed, and note the payment has executed.
+
+Since the application is now running a worker subscribed to the workflow engine, it will not exit until you hit `Ctrl+C`.
 
 ## Step 6: Start a process instance
 
@@ -239,9 +243,9 @@ To check your work, visit our [sample repository](https://github.com/camunda/cam
 
 Re-run the application in your terminal with `mvn spring-boot:run` to see the process run, and note the instance history in Operate.
 
-## Step 7: Deploy the process
+## Step 7: Deploy your process upon application start
 
-To deploy your process, take the following steps:
+To deploy your process upon application start, take the following steps:
 
 1. Decorate the `ProcessPaymentsApplication` class with `@Deployment(resources = "classpath:process-payments.bpmn")` in `ProcessPaymentsApplication.java`:
 

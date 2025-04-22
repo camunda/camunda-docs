@@ -44,28 +44,6 @@ To change the values for http header for security reasons, you can use the confi
 | camunda.operate.websecurity.httpStrictTransportSecurityMaxAgeInSeconds   | See [Spring description](https://docs.spring.io/spring-security/site/docs/5.2.0.RELEASE/reference/html/default-security-headers-2.html#webflux-headers-hsts) | 63,072,000 (two years)                                                                                                                                                                                                                                                                                           |
 | camunda.operate.websecurity.httpStrictTransportSecurityIncludeSubDomains | See [Spring description](https://docs.spring.io/spring-security/site/docs/5.2.0.RELEASE/reference/html/default-security-headers-2.html#webflux-headers-hsts) | true                                                                                                                                                                                                                                                                                                             |
 
-## Multi-tenancy
-
-Multi-tenancy in the context of Camunda 8 refers to the ability of Camunda 8 to serve multiple distinct [tenants](/self-managed/identity/user-guide/tenants/managing-tenants.md) or
-clients within a single installation.
-
-From version 8.3 onwards, Operate has been enhanced to support multi-tenancy for Self-Managed setups. More information about
-the feature can be found in [the multi-tenancy documentation](../concepts/multi-tenancy.md).
-
-The following configuration is required to enable multi-tenancy in Operate:
-
-| YAML path                            | Environment variable                 | Description                                         | Default value |
-| ------------------------------------ | ------------------------------------ | --------------------------------------------------- | ------------- |
-| camunda.operate.multiTenancy.enabled | CAMUNDA_OPERATE_MULTITENANCY_ENABLED | Activates the multi-tenancy feature within Operate. | false         |
-
-The same rules apply to the [Operate API](../../apis-tools/operate-api/overview.md#multi-tenancy).
-
-:::note
-To ensure seamless integration and functionality, the multi-tenancy feature must also be enabled across **all** associated components [if not configured in Helm](/self-managed/concepts/multi-tenancy.md) so users can view any data from tenants for which they have authorizations configured in Identity.
-
-Find more information (including links to individual component configuration) on the [multi-tenancy concepts page](/self-managed/concepts/multi-tenancy.md).
-:::
-
 ### Securing Operate - Zeebe interaction
 
 While executing user operations, Operate communicates with Zeebe using the Zeebe Java client. For Zeebe to know whether operations are allowed to be executed
@@ -150,6 +128,20 @@ camunda.operate:
     url: https://localhost:9200
     ssl:
       selfSigned: true
+```
+
+#### Disable Elasticsearch deprecation logging
+
+When using an Elasticsearch version 8.16.0+ it is recommended to turn off deprecation logging for the Elasticsearch cluster.
+
+```shell
+curl -X PUT "http://localhost:9200/_cluster/settings" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "persistent": {
+      "logger.org.elasticsearch.deprecation": "OFF"
+    }
+  }'
 ```
 
 ### Settings for OpenSearch
@@ -349,22 +341,13 @@ management.endpoints.web.exposure.include: health, prometheus, loggers, usage-me
 
 With this configuration, the following endpoints are available for use out of the box:
 
-`<server>:8080/actuator/prometheus` Prometheus metrics
+`<server>:9600/actuator/prometheus` Prometheus metrics
 
-`<server>:8080/actuator/health/liveness` Liveness probe
+`<server>:9600/actuator/health/liveness` Liveness probe
 
-`<server>:8080/actuator/health/readiness` Readiness probe
+`<server>:9600/actuator/health/readiness` Readiness probe
 
 This configuration may be overwritten by changing the corresponding configuration parameters values.
-
-### Versions before 0.25.0
-
-In versions before 0.25.0, management endpoints look different. Therefore, we recommend reconfiguring for next versions.
-
-| Name      | Before 0.25.0    | Starting with 0.25.0       |
-| --------- | ---------------- | -------------------------- |
-| Readiness | /api/check       | /actuator/health/readiness |
-| Liveness  | /actuator/health | /actuator/health/liveness  |
 
 ## Logging
 
@@ -413,7 +396,7 @@ The log level for Operate can be changed by following the [Setting a Log Level](
 #### Set all Operate loggers to DEBUG
 
 ```shell
-curl 'http://localhost:8080/actuator/loggers/io.camunda.operate' -i -X POST \
+curl 'http://localhost:9600/actuator/loggers/io.camunda.operate' -i -X POST \
 -H 'Content-Type: application/json' \
 -d '{"configuredLevel":"debug"}'
 ```

@@ -159,3 +159,7 @@ curl --request GET 'http://localhost:8080/v2/topology'  \
   --cookie cookie.txt \
   --header 'Content-Type: application/json'
 ```
+
+### Authentication via cookie with the Java client
+
+To access Camunda APIs in a Camunda 8 Run environment with the Java client, you'll need to [manually retrieve and send a cookie](/self-managed/setup/deploy/local/c8run.md#use-camunda-apis-with-the-java-client).

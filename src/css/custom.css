@@ -692,8 +692,8 @@ span.callout + p::after {
   border-color: #dedede;
   border-width: 1px;
   height: auto;
-  margin-top: 20px;
-  margin-bottom: 10px;
+  margin-top: 10px;
+  margin-bottom: 20px;
   padding: 20px;
 }
 
@@ -707,6 +707,31 @@ span.callout + p::after {
   max-height: 1.8rem;
   margin: 0;
   padding: 0;
+}
+
+/* Images without border */
+.theme-doc-markdown img.img-noborder {
+  border: none;
+  padding: 0;
+}
+
+/* Specific image width*/
+.theme-doc-markdown img.img-900 {
+  width: 900px;
+}
+.theme-doc-markdown img.img-800 {
+  width: 800px;
+}
+.theme-doc-markdown img.img-700 {
+  width: 700px;
+}
+.theme-doc-markdown img.img-600 {
+  width: 600px;
+}
+
+/* Transparent image background */
+.theme-doc-markdown img.img-transparent {
+  background-color: transparent;
 }
 
 /* Unsupported versions in the versions selector */
@@ -1022,4 +1047,34 @@ ul ol {
 .list-cross li {
   padding-left: 10px;
   margin-bottom: 25px;
+}
+
+.unique-tabs {
+  border: none;
+  gap: 8px;
+}
+
+.unique-tabs .tabs__item--active {
+  background-color: var(--ifm-tabs-color-active);
+  border-radius: var(--ifm-global-radius);
+  color: #fff;
+}
+
+.child-tab-content {
+  padding: 16px;
+  border: 1px solid #dedede;
+  border-radius: 8px;
+}
+
+/* Green tick list and orange cross in tables */
+.theme-doc-markdown table img.table-tick,
+.theme-doc-markdown table img.table-cross,
+.theme-doc-markdown img.table-tick,
+.theme-doc-markdown img.table-cross {
+  width: 15px;
+  border: none;
+  padding: 0;
+  margin: 0;
+  margin-right: 7px;
+  background-color: transparent;
 }

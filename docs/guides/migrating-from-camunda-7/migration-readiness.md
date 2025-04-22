@@ -68,6 +68,8 @@ Never cast to Camunda implementation classes, use any ThreadLocal object, or inf
 
 The resulting delegate can be migrated to a Camunda 8 API, or reused by the adapter provided in [this migration community extension](https://github.com/camunda-community-hub/camunda-7-to-8-migration/).
 
+<!-- TODO use the link to the new repo -->
+
 ## No transaction managers
 
 You should not trust ACID [transaction managers](https://blog.bernd-ruecker.com/achieving-consistency-without-transaction-managers-7cb480bd08c) to glue together the workflow engine with your business code.
@@ -102,9 +104,8 @@ public class OrderFulfillmentRestController {
     // TODO: Somehow extract data from orderPayload
     OrderData orderData = OrderData.from(orderPayload);
 
-    ProcessInstance pi = camunda.getRuntimeService() //
-        .startProcessInstanceByKey("orderFulfillment", //
-            Variables.putValue("order", orderData));
+    ProcessInstance pi = camunda.getRuntimeService()
+        .startProcessInstanceByKey("orderFulfillment", Variables.putValue("order", orderData));
 
     response.setStatus(HttpServletResponse.SC_ACCEPTED);
     return ResponseEntity.accepted().body(StatusDto.of("pending"));
@@ -190,7 +191,7 @@ With FEEL, you can evaluate that data structure directly and have an expression 
 
 Additionally, you can even hook in FEEL as the scripting language in Camunda 7 (as explained in [Scripting with DMN inside BPMN](https://camunda.com/blog/2018/07/dmn-scripting/) or [User Task Assignment based on a DMN Decision Table](https://camunda.com/blog/2020/05/camunda-bpm-user-task-assignment-based-on-a-dmn-decision-table/)).
 
-However, more commonly you will keep using JUEL in Camunda 7. If you write simple expressions, they can be migrated automatically, as you can see in [the test case](https://github.com/camunda-community-hub/camunda-7-to-8-migration/blob/main/modeler-plugin-7-to-8-converter/client/JuelToFeelConverter.test.js) of the [migration community extension](https://github.com/camunda-community-hub/camunda-7-to-8-migration). You should avoid more complex expressions if possible.
+However, more commonly you will keep using JUEL in Camunda 7. If you write simple expressions, they can be migrated automatically, as you can see in [the test case](https://github.com/camunda-community-hub/camunda-7-to-8-migration/blob/main/backend-diagram-converter/core/src/test/java/org/camunda/community/migration/converter/ExpressionTransformerTest.java) of the migration community extension. You should avoid more complex expressions if possible.
 
 Very often, a good workaround to achieve this is to adjust the output mapping of your Java delegate to prepare data in a form that allows for easy expressions.
 

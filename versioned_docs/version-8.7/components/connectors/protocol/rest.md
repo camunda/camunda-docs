@@ -30,70 +30,57 @@ All the mandatory and non-mandatory fields will be covered in the upcoming secti
 
 ### Configure a proxy server in Self-Managed
 
-In Camunda Self-Managed you can configure the Connector to use an HTTP or HTTPS proxy server, by using the `JAVA_OPTS` environment variable or the following environment variables.
+In Camunda Self-Managed you can configure the Connector to use an HTTP or HTTPS proxy server.
 
-For example:
+Depending on how you want the proxy to be used, configure it using either JVM properties or environment variables.
 
-```
-JAVA_OPTS=-Dhttp.proxyHost=proxy -Dhttp.proxyPort=3128 -Dhttps.proxyHost=proxy -Dhttps.proxyPort=3128 -Dhttp.nonProxyHosts=OTHER_DOMAIN
-```
+The difference between these two configuration types is the scope of the configuration:
 
-or
-
-```
-CONNECTOR_HTTP_PROXY_HOST=proxy; CONNECTOR_HTTP_PROXY_PORT=3128; CONNECTOR_HTTPS_PROXY_HOST=proxy; CONNECTOR_HTTPS_PROXY_PORT=3128; CONNECTOR_HTTP_PROXY_NON_PROXY_HOSTS=OTHER_DOMAIN;
-```
+| Configuration type                                                                        | Scope                                                                                                                                                  | Example                                                                                                                                                                                  |
+| :---------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [JVM properties](https://docs.oracle.com/javase/8/docs/technotes/guides/net/proxies.html) | JVM, **the whole runtime** will be affected. **Any HTTP client** used internally (for example, in a connector, or the Zeebe client) might be affected. | `-Dhttp.proxyHost=proxy -Dhttp.proxyPort=3128 -Dhttps.proxyHost=proxy -Dhttps.proxyPort=3128 -Dhttp.nonProxyHosts=OTHER_DOMAIN`                                                          |
+| Environment variables                                                                     | Connector, **only the Connector (and REST-based connectors)** will be affected                                                                         | `CONNECTOR_HTTP_PROXY_HOST=proxy; CONNECTOR_HTTP_PROXY_PORT=3128; CONNECTOR_HTTPS_PROXY_HOST=proxy; CONNECTOR_HTTPS_PROXY_PORT=3128; CONNECTOR_HTTP_PROXY_NON_PROXY_HOSTS=OTHER_DOMAIN;` |
 
 :::note
-To ensure Camunda can properly access Camunda components, non-proxy hosts must contain `camunda-platform-zeebe|camunda-platform-keycloak`.
+To ensure Camunda can properly access Camunda components when using JVM properties, non-proxy hosts must contain `camunda-platform-zeebe|camunda-platform-keycloak`.
 :::
 
-#### HTTP
+#### HTTP/HTTPS properties
 
-To specify the proxy as an HTTP protocol handler, set the following standard JVM properties:
+Depending on the **target URL**, you can set the proxy as an HTTP or HTTPS protocol handler. A target URL such as `http://example.com` will use the HTTP protocol handler, while a target URL such as `https://example.com` will use the HTTPS protocol handler.
 
-| Property             | Description                                                                                                                                                                                                                                                                                                                        |
-| :------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `http.proxyHost`     | The host name of the proxy server.                                                                                                                                                                                                                                                                                                 |
-| `http.proxyPort`     | The port number (default is 80).                                                                                                                                                                                                                                                                                                   |
-| `http.nonProxyHosts` | <p> _(optional)_ A list of hosts to connect to directly, bypassing the proxy.</p><p><ul><li>Specify as a list of patterns, separated by <code>&#124</code>.</li><li>Patterns can start or end with a `*` for wildcards.</li><li>Any host matching one of these patterns uses a direct connection instead of a proxy.</li></ul></p> |
-| `http.user`          | _(optional)_ The username to log in to the proxy.                                                                                                                                                                                                                                                                                  |
-| `http.password`      | _(optional)_ The password to log in to the proxy.                                                                                                                                                                                                                                                                                  |
+##### JVM properties
 
-As an alternative to using JVM properties, the proxy settings can also be set with environment variables:
+You can set the following standard JVM properties for HTTP and HTTPS:
 
-```bash
-CONNECTOR_HTTP_PROXY_HOST
-CONNECTOR_HTTP_PROXY_PORT
-CONNECTOR_HTTP_PROXY_NON_PROXY_HOSTS
-CONNECTOR_HTTP_PROXY_USER
-CONNECTOR_HTTP_PROXY_PASSWORD
-```
+| Property (HTTP target URL) | Property (HTTPS target URL)                         | Description                                                                                                                                                                                                                                                                                                                     |
+| :------------------------- | :-------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `http.proxyHost`           | `https.proxyHost`                                   | The host name of the proxy server.                                                                                                                                                                                                                                                                                              |
+| `http.proxyPort`           | `https.proxyPort`                                   | The port number (default is 80).                                                                                                                                                                                                                                                                                                |
+| `http.nonProxyHosts`       | `http.nonProxyHosts` (similar to the HTTP property) | <p> _(optional)_ A list of hosts to connect to directly, bypassing the proxy.</p><p><ul><li>Specify as a list of patterns, separated by <code>\|</code>.</li><li>Patterns can start or end with a `*` for wildcards.</li><li>Any host matching one of these patterns uses a direct connection instead of a proxy.</li></ul></p> |
 
-#### HTTPS
+Some HTTP clients might offer more properties to configure the proxy. For example, the [Apache HTTP client](https://hc.apache.org/httpcomponents-client-5.4.x/current/apidocs/org/apache/hc/client5/http/impl/classic/HttpClientBuilder.html) used in the REST Connector offers the following properties:
 
-To specify the proxy as an HTTPS (HTTP over SSL) protocol handler, set the following standard JVM properties:
+| Property (HTTP target URL) | Property (HTTPS target URL) | Description                                       |
+| :------------------------- | :-------------------------- | :------------------------------------------------ |
+| `http.proxyUser`           | `https.proxyUser`           | _(optional)_ The username to log in to the proxy. |
+| `http.proxyPassword`       | `https.proxyPassword`       | _(optional)_ The password to log in to the proxy. |
 
-| Property             | Description                                                                                                                                                                                                                                                                                                                        |
-| :------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `https.proxyHost`    | The host name of the proxy server.                                                                                                                                                                                                                                                                                                 |
-| `https.proxyPort`    | The port number (default is 443).                                                                                                                                                                                                                                                                                                  |
-| `http.nonProxyHosts` | <p> _(optional)_ A list of hosts to connect to directly, bypassing the proxy.</p><p><ul><li>Specify as a list of patterns, separated by <code>&#124</code>.</li><li>Patterns can start or end with a `*` for wildcards.</li><li>Any host matching one of these patterns uses a direct connection instead of a proxy.</li></ul></p> |
-| `https.user`         | _(optional)_ The username to log in to the proxy.                                                                                                                                                                                                                                                                                  |
-| `https.password`     | _(optional)_ The password to log in to the proxy.                                                                                                                                                                                                                                                                                  |
+##### Environment variables
 
 As an alternative to using JVM properties, the proxy settings can also be set with environment variables:
 
-```bash
-CONNECTOR_HTTPS_PROXY_HOST
-CONNECTOR_HTTPS_PROXY_PORT
-CONNECTOR_HTTP_PROXY_NON_PROXY_HOSTS
-CONNECTOR_HTTPS_PROXY_USER
-CONNECTOR_HTTPS_PROXY_PASSWORD
-```
+| Property (HTTP target URL)       | Property (HTTPS target URL)                                     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| :------------------------------- | :-------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `CONNECTOR_HTTP_PROXY_HOST`      | `CONNECTOR_HTTPS_PROXY_HOST`                                    | The host name of the proxy server.                                                                                                                                                                                                                                                                                                                                                                                                                |
+| `CONNECTOR_HTTP_PROXY_PORT`      | `CONNECTOR_HTTPS_PROXY_PORT`                                    | The port number (default is 80).                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| `CONNECTOR_HTTP_NON_PROXY_HOSTS` | `CONNECTOR_HTTP_NON_PROXY_HOSTS` (similar to the HTTP property) | <p> _(optional)_ A list of hosts to connect to directly, bypassing the proxy.</p><p><ul><li>Specify as a list of patterns, separated by <code>\|</code>.</li><li>Patterns can start or end with a `*` for wildcards.</li><li>Any host matching one of these patterns uses a direct connection instead of a proxy.</li></ul>The REST Connector will also use the exception list provided by the `http.nonProxyHosts` JVM property if existing.</p> |
+| `CONNECTOR_HTTP_PROXY_USER`      | `CONNECTOR_HTTPS_PROXY_USER`                                    | _(optional)_ The username to log in to the proxy.                                                                                                                                                                                                                                                                                                                                                                                                 |
+| `CONNECTOR_HTTP_PROXY_PASSWORD`  | `CONNECTOR_HTTPS_PROXY_PASSWORD`                                | _(optional)_ The password to log in to the proxy.                                                                                                                                                                                                                                                                                                                                                                                                 |
+| `CONNECTOR_HTTP_PROXY_SCHEME`    | `CONNECTOR_HTTPS_PROXY_SCHEME`                                  | _(optional)_ The scheme of the proxy server. This allows you to the `https` protocol to contact your proxy. The default is `http`.                                                                                                                                                                                                                                                                                                                |
 
 :::note
-The HTTPS protocol handler also uses the `http.nonProxyHosts` or `CONNECTOR_HTTP_PROXY_NON_PROXY_HOSTS` property to specify non-proxy hosts.
+The HTTPS properties also use the `http.nonProxyHosts` or `CONNECTOR_HTTP_NON_PROXY_HOSTS` property to specify non-proxy hosts.
 :::
 
 | Proxy config set | nonProxyHost config set | valid login provided      | domain1.com (proxied site, no auth required) | domain2.com (proxied site, auth required) | domain3.com (nonProxyHost site) |
@@ -245,6 +232,16 @@ Secrets are currently not supported in the body of a **REST Connector**.
 }
 ```
 
+#### File upload
+
+To upload a file, you can take advantage of [Camunda document handling](/components/concepts/document-handling.md).
+
+Depending on the `Content-Type`, the file will be uploaded as a binary or a JSON object (base64 encoded).
+
+- **Binary**: The file will be uploaded as a binary object. The `Content-Type` header **must** be set to `multipart/form-data`. The body must a map, where the key is the name of the file field and the value is a document reference.
+  ![connectors-rest-upload](../../../../../docs/images/connectors/connectors-rest-upload.png)
+- **JSON**: The file will be uploaded as a JSON object. The `Content-Type` header **must** be set to `application/json` (this is the default). The body must be a map, where the key is the name of the file field and the value is a document reference, similar to the binary upload. The file will be **base64 encoded** and included in the JSON object.
+
 ### Encoding
 
 In certain scenarios, such as when working with APIs that require pre-encoded URL elements, the REST Connector's default behavior may inadvertently modify encoded segments.
@@ -257,13 +254,9 @@ To avoid this, set the `skipEncoding` value to `"true"` in the XML. This disable
 
 - **Read timeout in seconds** is the amount of time the client will wait to read data from the server after the connection has been made. The default is also set to 20 seconds. To allow an unlimited wait time for slow responses, set this to 0.
 
-- **Write timeout in seconds** controls how long the client will wait to successfully send data to the server. The default setting for this is 0, indicating that there is no limit and the client will wait indefinitely for the operation to complete.
-
 ## Response
 
-The HTTP response will be available in a temporary local `response` variable. This variable can be mapped to the process by specifying the **Result variable**.
-
-The following fields are available in the `response` variable:
+The following fields are available in the returned object variable:
 
 - **status**: Response status.
 - **body**: Response body of your request.

@@ -30,7 +30,7 @@ For example, 1.2+ means support for the minor version 2, and any higher minors (
 ## Desktop Modeler
 
 - Windows 10 / 11
-- Mac OS 12 / 13 / 14 / 15
+- macOS 12 / 13 / 14 / 15
 - Ubuntu LTS (latest)
 
 ## Clients
@@ -38,7 +38,7 @@ For example, 1.2+ means support for the minor version 2, and any higher minors (
 - **Zeebe Java Client**: OpenJDK 8+
 - **Spring Zeebe SDK**: OpenJDK 17+
 - **Connector SDK**: OpenJDK 17+
-- **Spring SDK**: Spring Boot 3.3.x (for the exact version, check the [version matrix](/apis-tools/spring-zeebe-sdk/getting-started.md#version-compatibility).)
+- **Spring SDK**: Check the [version matrix](/apis-tools/spring-zeebe-sdk/getting-started.md#version-compatibility)
 - **Helm CLI**: 3.14.x (for the exact version, check the [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).)
 
 ## Camunda 8 Self-Managed
@@ -80,16 +80,9 @@ For details on typical volume type usage, refer to the following examples specif
 - [Microsoft AKS](/self-managed/setup/deploy/azure/microsoft-aks.md#volume-performance)
 - [Google GKE](/self-managed/setup/deploy/gcp/google-gke.md#volume-performance)
 
-### Helm version matrix
+### Helm charts version matrix
 
-As of the Camunda 8.4 release, the Camunda 8 Helm chart version is independent from the application version (for example, the Camunda 8.4 release uses the Helm chart version 9.0.0). The Helm chart is updated with each application release.
-
-| Camunda version | Helm chart version                                                                       |
-| --------------- | ---------------------------------------------------------------------------------------- |
-| Camunda 8.6.x   | [Helm chart 11.x](https://helm.camunda.io/camunda-platform/version-matrix/camunda-8.6/)  |
-| Camunda 8.5.x   | [Helm chart 10.x](https://helm.camunda.io/camunda-platform/version-matrix/camunda-8.5/)  |
-| Camunda 8.4.x   | [Helm chart 9.x](https://helm.camunda.io/camunda-platform/version-matrix/camunda-8.4/)   |
-| Camunda 8.3.x   | [Helm chart 8.3.x](https://helm.camunda.io/camunda-platform/version-matrix/camunda-8.3/) |
+Camunda Helm chart version `11.x.x` works with Camunda version `8.6.x`. Check the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/camunda-8.6/) for more details.
 
 ## Component requirements
 
@@ -106,7 +99,7 @@ Requirements for the components can be seen below:
 | Web Modeler | -            | PostgreSQL 13.x, 14.x, 15.x, 16.x or Amazon Aurora PostgreSQL 13.x, 14.x, 15.x, 16.x                                                                                                                              |
 | Console     | -            | -                                                                                                                                                                                                                 |
 
-\*Not all Optimize features are supported when using OpenSearch as a database, including backups. For a full list of the features that are currently supported, please refer to the [Camunda 8](https://github.com/camunda/issues/issues/635) OpenSearch features.
+\*Not all Optimize features are supported when using OpenSearch as a database, including backups (up to 8.6.6). For a full list of the features that are currently supported, refer to the [Camunda 8](https://github.com/camunda/issues/issues/635) OpenSearch features.
 
 When running Elasticsearch, you must have the [appropriate Elasticsearch privileges](/self-managed/concepts/elasticsearch-privileges.md).
 
@@ -141,3 +134,19 @@ From version `8.6.0` forward, Zeebe, Operate, and Tasklist must run on on the ex
 :::note
 You can also use newer versions of Desktop and Web Modeler with older Zeebe versions.
 :::
+
+## Dependency maintenance policies
+
+Camunda provides [a standard support policy](https://camunda.com/release-policy/) of 18 months for a particular minor version from the date it is released.
+During this time, patches are regularly released containing security and bug fixes, some of which may come from dependency updates. Therefore, for the
+vast majority of dependencies Camunda _only_ applies patch updates.
+
+However, certain dependencies used by Camunda 8 may have a shorter maintenance policy than Camunda itself. Camunda may adopt a different update policy for these dependencies, as listed below.
+
+### Spring
+
+**Zeebe**, **Operate**, **Tasklist**, and **Optimize** are Spring Boot applications, and leverage Spring Boot to execute fundamental functionality such as application configuration, REST infrastructure (including security), production ready features, etc.
+
+However, Spring Boot has a shorter maintenance window than Camunda for its open-source software (OSS) offering. [Versions are only supported for 13 months](https://spring.io/projects/spring-boot#support), versus Camunda's 18 months. To circumvent this, patch releases for these server-side components also update Spring Boot minor versions, such that the latest patch release of these components uses a supported Spring version.
+
+As for libraries and SDKs meant to be included in third-party applications, Camunda follows a best effort policy to balance compatibility and secure Spring-dependent libraries.

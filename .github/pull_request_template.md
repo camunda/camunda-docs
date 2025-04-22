@@ -10,7 +10,7 @@
 
 - [ ] This is a bug fix, security concern, or something that needs **urgent release support**. (add `bug` or `support` label)
 - [ ] This is already available but undocumented and should be released within a week. (add `available & undocumented` label)
-- [ ] This is on a **specific schedule** and the assignee will coordinate a release with the DevEx team. (create draft PR and/or add `hold` label)
+- [ ] This is on a **specific schedule** and the assignee will coordinate a release with the Documentation team. (create draft PR and/or add `hold` label)
 - [ ] This is part of a scheduled **alpha or minor**. (add alpha or minor label)
 - [ ] There is **no urgency** with this change (add `low prio` label)
 
@@ -18,9 +18,7 @@
 
 <!-- Camunda maintains 18 months of minor versions. Backporting your change to multiple versions is common. -->
 
-- [ ] My changes are for **an upcoming minor release** and:
-  - [ ] are in the `/docs` directory (version 8.8).
-  - [ ] are in the `/versioned_docs/version-8.7/` directory (version 8.7).
+- [ ] My changes are for **an upcoming minor release** and are in the `/docs` directory (version 8.8).
 - [ ] My changes are for an **already released minor** and are in a `/versioned_docs` directory.
 
 <!-- UNCOMMENT THIS SECTION IF APPLICABLE. Adding or removing pages requires extra steps.

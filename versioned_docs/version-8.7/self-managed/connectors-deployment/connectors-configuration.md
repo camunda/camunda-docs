@@ -40,6 +40,8 @@ For example, the Java configuration property`camunda.client.zeebe.grpc-address` 
 
 To use Camunda 8 SaaS, specify the connection properties:
 
+##### Environment variables
+
 ```bash
 CAMUNDA_CLIENT_MODE=saas
 CAMUNDA_CLIENT_CLUSTERID=xxx
@@ -48,7 +50,22 @@ CAMUNDA_CLIENT_AUTH_CLIENTSECRET=xxx
 CAMUNDA_CLIENT_REGION=bru-2
 ```
 
+##### YAML configuration
+
+```yaml
+camunda:
+  client:
+    mode: saas
+    cluster-id: xxx
+    auth:
+      client-id: xxx
+      client-secret: xxx
+    region: bru-2
+```
+
 To use inbound connectors, specify the Operate connection properties:
+
+##### Environment variables
 
 ```bash
 OPERATE_CLIENT_PROFILE=saas
@@ -58,12 +75,40 @@ OPERATE_CLIENT_CLIENTID=xxx
 OPERATE_CLIENT_CLIENTSECRET=xxx
 ```
 
+##### YAML configuration
+
+```yaml
+operate:
+  client:
+    profile: saas
+    region: bru-2
+    clusterId: xxx
+    client-id: xxx
+    client-secret: xxx
+```
+
 If you don't need to use inbound connectors, you can disable them and remove the need for an Operate connection. This will lead to inability to use inbound capabilities like webhooks.
+
+##### Environment variables
 
 ```bash
 CAMUNDA_CONNECTOR_POLLING_ENABLED=false
 CAMUNDA_CONNECTOR_WEBHOOK_ENABLED=false
 OPERATE_CLIENT_ENABLED=false
+```
+
+##### YAML configuration
+
+```yaml
+camunda:
+  connector:
+    polling:
+      enabled: false
+    webhook:
+      enabled: false
+operate:
+  client:
+    enabled: false
 ```
 
 If you are connecting a local Connector runtime to a SaaS cluster, you may want to review our [guide to using Connectors in hybrid mode](/guides/use-connectors-in-hybrid-mode.md).
@@ -74,19 +119,45 @@ If you are connecting a local Connector runtime to a SaaS cluster, you may want 
 
 Specify the connection properties to connect to a self-managed Zeebe instance:
 
+##### Environment variables
+
 ```bash
 CAMUNDA_CLIENT_MODE=self-managed
 CAMUNDA_CLIENT_ZEEBE_GRPCADDRESS=http://localhost:26500
 CAMUNDA_CLIENT_ZEEBE_RESTADDRESS=http://localhost:8080
 ```
 
+##### YAML configuration
+
+```yaml
+camunda:
+  client:
+    mode: self-managed
+    zeebe:
+      grpc-address: http://localhost:26500
+      rest-address: http://localhost:8080
+```
+
 If using an HTTPS connection, you may need to provide a certificate to validate the gateway's certificate chain.
+
+##### Environment variables
 
 ```bash
 CAMUNDA_CLIENT_ZEEBE_CACERTIFICATEPATH=/path/to/certificate.pem
 ```
 
+##### YAML configuration
+
+```yaml
+camunda:
+  client:
+    zeebe:
+      ca-certificate-path: /path/to/certificate.pem
+```
+
 Depending on the authentication method used by the Zeebe instance, you may need to provide authentication properties:
+
+##### Environment variables
 
 ```bash
 CAMUNDA_CLIENT_AUTH_CLIENTID=xxx
@@ -95,9 +166,23 @@ CAMUNDA_CLIENT_AUTH_ISSUER=http://localhost:18080/auth/realms/camunda-platform/p
 CAMUNDA_CLIENT_AUTH_AUDIENCE=zeebe-api
 ```
 
+##### YAML configuration
+
+```yaml
+camunda:
+  client:
+    auth:
+      client-id: xxx
+      client-secret: xxx
+      issuer: http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
+      audience: zeebe-api
+```
+
 See the [Spring Zeebe SDK documentation](../../../apis-tools/spring-zeebe-sdk/getting-started#self-managed) for more information on authentication properties.
 
 Connect to Operate locally using username and password:
+
+##### Environment variables
 
 ```bash
 OPERATE_CLIENT_PROFILE=simple
@@ -106,7 +191,20 @@ OPERATE_CLIENT_USERNAME=demo
 OPERATE_CLIENT_PASSWORD=demo
 ```
 
+##### YAML configuration
+
+```yaml
+operate:
+  client:
+    profile: simple
+    base-url: http://localhost:8081
+    username: demo
+    password: demo
+```
+
 Connect to Operate in a Self-Managed environment using OAuth 2.0 credentials:
+
+##### Environment variables
 
 ```bash
 OPERATE_CLIENT_PROFILE=oidc
@@ -118,12 +216,42 @@ OPERATE_CLIENT_CLIENTSECRET=xxx
 OPERATE_CLIENT_SCOPE=xxx # optional
 ```
 
+##### YAML configuration
+
+```yaml
+operate:
+  client:
+    profile: oidc
+    base-url: http://localhost:8081
+    auth-url: http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
+    audience: operate-api
+    client-id: xxx
+    client-secret: xxx
+    scope: xxx # optional
+```
+
 If you don't need to use inbound connectors, you can disable them and remove the need for an Operate connection. This will lead to inability to use inbound capabilities like webhooks.
+
+##### Environment variables
 
 ```bash
 CAMUNDA_CONNECTOR_POLLING_ENABLED=false
 CAMUNDA_CONNECTOR_WEBHOOK_ENABLED=false
 OPERATE_CLIENT_ENABLED=false
+```
+
+##### YAML configuration
+
+```yaml
+camunda:
+  connector:
+    polling:
+      enabled: false
+    webhook:
+      enabled: false
+operate:
+  client:
+    enabled: false
 ```
 
 </TabItem>
@@ -304,8 +432,8 @@ The Connector Runtime uses the following environment variables to configure mult
 
 | Name                                       | Description                                                                                                                                                                              | Default value |
 | ------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| ZEEBE_CLIENT_DEFAULT-TENANT-ID             | The default tenant ID used to communicate with Zeebe. Changing this value will set a new default tenant ID used for fetching jobs and publishing messages.                               | `<default>`   |
-| ZEEBE_CLIENT_DEFAULT-JOB-WORKER-TENANT-IDS | The default tenant IDs (comma separated) used to activate jobs. To run the Connector Runtime in a setup where a single runtime serves multiple tenants, add each tenant ID to this list. | `<default>`   |
+| ZEEBE_CLIENT_DEFAULT_TENANT_ID             | The default tenant ID used to communicate with Zeebe. Changing this value will set a new default tenant ID used for fetching jobs and publishing messages.                               | `<default>`   |
+| ZEEBE_CLIENT_DEFAULT_JOB_WORKER_TENANT_IDS | The default tenant IDs (comma separated) used to activate jobs. To run the Connector Runtime in a setup where a single runtime serves multiple tenants, add each tenant ID to this list. | `<default>`   |
 
 If you are using an embedded version of the Connector Runtime, you can specify the tenant information in your Spring configuration like in this example `application.properties` file:
 
@@ -323,8 +451,16 @@ to be configured individually using the following environment variables.
 If you want to use outbound Connectors for a single tenant that is different
 from the default tenant, you can specify a different default tenant ID using:
 
+It is possible to adjust the polling interval of Connectors polling process definitions to Operate by setting the environment variable `CAMUNDA_CONNECTOR_POLLING_INTERVAL`. This variable allows you to control how often Connectors fetch the process definitions, with the interval specified in milliseconds. For example, setting `CAMUNDA_CONNECTOR_POLLING_INTERVAL=20000` will configure the Connectors to poll every 20 seconds.
+
+Example:
+
+```
+CAMUNDA_CONNECTOR_POLLING_INTERVAL=10000
+```
+
 ```bash
-ZEEBE_CLIENT_DEFAULT-TENANT-ID=myTenant
+ZEEBE_CLIENT_DEFAULT_TENANT_ID=myTenant
 ```
 
 This will change the default tenant ID used for fetching jobs and publishing messages
@@ -339,10 +475,10 @@ To run the Connector Runtime in a setup where a single runtime
 serves multiple tenants, add each tenant ID to the list of the default job workers:
 
 ```bash
-ZEEBE_CLIENT_DEFAULT-JOB-WORKER-TENANT-IDS=`myTenant, otherTenant`
+ZEEBE_CLIENT_DEFAULT_JOB_WORKER_TENANT_IDS=`myTenant, otherTenant`
 ```
 
-In this case, the `ZEEBE_CLIENT_DEFAULT-TENANT-ID` will **not** be used for the
+In this case, the `ZEEBE_CLIENT_DEFAULT_TENANT_ID` will **not** be used for the
 configuration of job workers.
 
 ### Inbound Connector configuration
@@ -360,6 +496,15 @@ To ensure seamless integration and functionality, the multi-tenancy feature must
 Find more information (including links to individual component configuration) on the [multi-tenancy concepts page](/self-managed/concepts/multi-tenancy.md).
 
 ## Logging
+
+### Changing the log level
+
+The log level can be changed globally by setting the environment variable `LOGGING_LEVEL_IO_CAMUNDA_CONNECTOR=DEBUG`. This changes the default log level for the `io.camunda.connector` package
+to `DEBUG`.
+
+You can can use this package based log level approach also with custom Connectors by providing your package (`my.package`) via this variable: `LOGGING_LEVEL_MY_PACKAGE=DEBUG`.
+
+To change the log level for all packages, change it for the `root` logger: `LOGGING_LEVEL_ROOT=DEBUG`.
 
 ### Google Stackdriver (JSON) logging
 

@@ -11,6 +11,8 @@ There are many ways you can provision and configure a Kubernetes cluster, and th
 
 Camunda provides continuously improved Helm charts, of which are not cloud provider-specific so you can choose your Kubernetes provider. The charts are available in the [Camunda Helm repository](https://artifacthub.io/packages/helm/camunda/camunda-platform) and we encourage you to [report issues](https://github.com/camunda/camunda-platform-helm/issues).
 
+You can also visit our Kubernetes [Camunda production deployment](../operational-guides/production-guide/helm-chart-production-guide.md) guide to learn about deploying Camunda Orchestration cluster in production environments with Helm charts.
+
 ## What is Helm?
 
 [Helm](https://helm.sh/) is a package manager for Kubernetes resources. Helm allows us to install a set of components by simply referencing a package name and allowing us to override configurations to accommodate these packages to different scenarios.
@@ -45,7 +47,7 @@ The existing Helm charts use the Elasticsearch configurations by default. The He
 
 For example, `CAMUNDA_OPERATE_ELASTICSEARCH_URL` becomes `CAMUNDA_OPERATE_OPENSEARCH_URL`. In the case of Optimize, please make sure all variables have the proper `CAMUNDA_OPTIMIZE` prefix, i.e. `OPTIMIZE_ELASTICSEARCH_HTTP_PORT` becomes `CAMUNDA_OPTIMIZE_OPENSEARCH_HTTP_PORT`.
 
-Refer to the [Operate](/self-managed/operate-deployment/operate-configuration.md#settings-for-opensearch), [Tasklist](/self-managed/tasklist-deployment/tasklist-configuration.md#elasticsearch-or-opensearch) and [Optimize]($optimize$/self-managed/optimize-deployment/configuration/system-configuration/#opensearch) configuration documentation for additional component configuration parameters to update.
+Refer to the [Operate](/self-managed/operate-deployment/operate-configuration.md#settings-for-opensearch), [Tasklist](/self-managed/tasklist-deployment/tasklist-configuration.md#elasticsearch-or-opensearch) and [Optimize](/self-managed/optimize-deployment/configuration/system-configuration.md#opensearch) configuration documentation for additional component configuration parameters to update.
 :::
 
 ![Camunda 8 Self-Managed Architecture Diagram](../assets/camunda-platform-8-self-managed-architecture-diagram-combined-ingress.png)
@@ -220,7 +222,7 @@ helm install camunda camunda/camunda-platform --version 8.1 \
 By default, Camunda services deployed in a cluster are not accessible from outside the cluster. However, you can choose from several methods to connect to these services:
 
 - **Port forwarding:** This method allows you to direct traffic from your local machine to the cluster, making it possible to access Camunda services directly. For detailed instructions, refer to [accessing components without Ingress](/self-managed/setup/guides/accessing-components-without-ingress.md).
-- **Ingress configuration:** You can set up the NGINX Ingress controller to manage external service access. For detailed instructions, refer to the [Ingress setup guide](/self-managed/setup/guides/ingress-setup.md).
+- **Ingress configuration:** You can set up the NGINX Ingress controller to manage external service access. This can be done by combining components Ingress in a single domain or configuring separate Ingress for each component. For detailed instructions, refer to [combined and separated Ingress setup](/self-managed/setup/guides/ingress-setup.md).
 - **EKS cluster installation:** For those deploying Camunda 8 on an Amazon EKS cluster, refer to [installing Camunda 8 on an EKS cluster](/self-managed/setup/deploy/amazon/amazon-eks/eks-helm.md).
 
 ## Configure license key
@@ -365,7 +367,7 @@ console:
 For more details, check [Console Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#console-parameters).
 
 :::note
-Console Self-Managed requires the Identity component to authenticate. Camunda Helm Chart installs Identity by default. When logging in to Console when using port-forward, port-forward the Keycloak service `kubectl port-forward svc/<RELEASE-NAME>-keycloak 18080:80` or configure Identity with Ingress as described in the [Ingress setup guide](/self-managed/setup/guides/ingress-setup.md).
+Console Self-Managed requires the Identity component to authenticate. Camunda Helm Chart installs Identity by default. When logging in to Console when using port-forward, port-forward Keycloak service `kubectl port-forward svc/<RELEASE-NAME>-keycloak 18080:80` or configure Identity with Ingress as described in [combined and separated Ingress setup](/self-managed/setup/guides/ingress-setup.md).
 
 :::
 

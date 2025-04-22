@@ -49,7 +49,7 @@ If you haven't already, follow [this guide](/self-managed/setup/deploy/local/doc
 1. Use the `docker-compose.yaml` file in [this repository](https://github.com/camunda/camunda-platform).
 2. Clone this repo and run `docker compose up -d` in your terminal to start your environment.
 
-::note
+:::note
 For Camunda versions earlier than 8.6, the `docker compose up -d` command is only available to enterprise customers with access to Camunda's private registry. From version 8.6 onwards, `docker compose up -d` is available for all users, as Web Modeler images are publicly available.
 :::
 

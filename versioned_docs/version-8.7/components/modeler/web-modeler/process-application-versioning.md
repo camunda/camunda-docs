@@ -34,6 +34,8 @@ You can perform the following actions on a process application version:
 1. Restore as latest, useful for reverting changes, making further edits, [git syncing](/components/modeler/web-modeler/git-sync.md), downloading, or using Play.
 2. Edit name
 3. Deploy, especially after the version has been [reviewed](/components/modeler/web-modeler/process-application-pipeline.md#review).
-4. Delete
+4. Download
+5. Delete
+6. Copy, creates a new process application with the files from the version.
 
 ![Version actions](img/versions/web-modeler-version-actions.png)
