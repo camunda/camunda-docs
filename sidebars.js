@@ -1210,9 +1210,26 @@ module.exports = {
         "self-managed/concepts/elasticsearch-privileges",
         "self-managed/concepts/opensearch-privileges",
         {
-          "Document handling": [
-            "self-managed/concepts/document-handling/getting-started",
-            "self-managed/concepts/document-handling/document-storage-configuration",
+          type: "category",
+          label: "Document handling",
+          link: {
+            type: "doc",
+            id: "self-managed/concepts/document-handling/getting-started",
+          },
+          items: [
+            {
+              type: "category",
+              label: "Configuration",
+              link: {
+                type: "doc",
+                id: "self-managed/concepts/document-handling/configuration/overview",
+              },
+              items: [
+                "self-managed/concepts/document-handling/configuration/camunda-8-run",
+                "self-managed/concepts/document-handling/configuration/docker",
+                "self-managed/concepts/document-handling/configuration/helm",
+              ],
+            },
           ],
         },
       ],
