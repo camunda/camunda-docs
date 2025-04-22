@@ -527,7 +527,10 @@ module.exports = {
           // 👋 When cutting a new version, remove the banner for maintained versions by adding an entry. Remove the entry to versions >18 months old.
           versions: {
             current: {
-              label: "8.8 (unreleased)",
+              label: "8.9 (unreleased)",
+            },
+            8.7: {
+              banner: "none",
             },
             8.6: {
               banner: "none",
@@ -555,6 +558,7 @@ module.exports = {
             "/docs/8.4/**",
             "/docs/8.5/**",
             "/docs/8.6/**",
+            "/docs/8.7/**",
           ],
         },
       },
