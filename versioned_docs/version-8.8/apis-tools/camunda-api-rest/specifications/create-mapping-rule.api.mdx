@@ -1,0 +1,297 @@
+---
+id: create-mapping-rule
+title: "Create mapping rule"
+description: "Create a new mapping rule"
+sidebar_label: "Create mapping rule"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWNty2zYQ/ZUdPLVTmpQTp035pjpO6zYXjy2nD44eIHAlIgEBBgAtazT8984ClERZ8mXS9k2e8YiXxd7OOSC5S+b5zLH8hr3ndS31DGyjkI0TZmq03EujzwuWM2GRe+xsLskkYQU6YWVNNixnp8ECOGicQ9Vz9lmzhFn81qDzv5liwfIlE0Z71J4OeV0rKUKk7IsjV0vmRIkVpyO/qJHlzEy+oPAsYVypj1OW3+zeqS1l7CW6EEBxWX3gFfacOG+lnu0kPioRNK8QzBR8iRCWgjdURMraJPr6xFXzTGe3ZPqgN/1dSXUNTVnbxmZKiwXBtil0K9EuzjhhXnpFgXrYRaiu64J7vIzAsHZ8v4VdSIL/Odk2Wn5rEPDOo9VcgSyezH0T4bE81xm2cb2rjXYxxReDY/rZTabPP5hzB5G/BbhGCHRu2ii1SKllByJ+LxGT/4Mha6d/4WI/tF9xsS6pA7WPNoG6nQqx5kkRuEZFDTxCw2gTWHgyGOzPrrbmVhZYQME9B+lAG084yOIRttXWTBRWP+2ybjvAEC6iJRTouVQQOQfcQTScYAFSw83l21P49eTVL+MfSu9rl2fZfD5P7VQcYSG9samxs8xOBf2T3Y8pjEq0BMQCJgi8KCTF5Ao2bAZXo5BTKYhEPtYakqF2p2GXf1wK8e4uU6bGVtyznDVW7hBnCNeX5yAL1F5OF4TyTuiwZsoJnZzxiWl8PlFcf2Ub4J+i5xBcU1Xcrqm1HaBNmPPcN70ymNQeZ2j7+UvtX77YS/0/RqMLiC5AmAJhaiz4UrpVICqiklpWTcXyk8GAdHAXz34eDFrySYg/oxINeFcrrgO17pcjNVTGYsefUJjUznMt/itkjJUzeT9uuiXCjsRvYkUrQb3cL6juxYE4J1ZvGDu7e4FaYpF+1u83xTngtqdHqUNCq8cHTEyxiKQ9iPIgyoMo94vy5N+L8qCwg8IOCntAYa/2vUcONVCXwzsyWmssGCEaa7GAeSlVcE8fMavYnRoPT7OD1g5ae0hr9GWJvjQ0zKqNC9ThvmQ5y7on1xE9uRxLmEN7i9aFj/vGKpazZZRLm2fZsjTOt/myNta32S1hccut5BMVGUi3o6xWdFFGcFXGkLuw0Y3+9/UprxpdcHgNl2dXI/ide5zzRWgjhdx2/XrwerDXK5k+4HF4cQ6xwki63kawckuK3us2Gj/HcUvf0g5FY6VfXNGy2J4Jcot22FDn12To4gXvdB6NWNIdvF1R5M+/RwFl2sQuNwPFszte1VGCvYnEhmK9Ecy9i90sZXNVb1kF6k5NyLQj1m7NRAC0LjZpkB7vkvjiPGhRmKpqdNiQ9Qzm0pfAez0UqnGeepcwJQVqFwrqElqZvYt34FOMCMcp4R9JutqHZ9KXzSQVpspEXLb+nSgzySouddaFcNnp8P31hzfDo3fnp2cfrs6OjtNB6u986DPppOK6n0d82+u/692vtzfcfWIm3KHv8c5nteJSU8NDLctOm+sRYafNcdLp64YtlxPu8NqqtqXL3xq0C5bfjDdypLM2YSXyAm0Q81eaKbHTmN7RiMKTeeTAzvivTVYrhkJg7R+1Hfe2l4uPVyMibzfrrkxBayyf0xycz1nOGI3XaXXQRLi2ZIrrWcNnZBt90t8/2DMn7w==
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Create mapping rule"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/mapping-rules"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Create a new mapping rule
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          allOf: [
+            {
+              type: "object",
+              properties: {
+                claimName: {
+                  type: "string",
+                  description: "The name of the claim to map.",
+                },
+                claimValue: {
+                  type: "string",
+                  description: "The value of the claim to map.",
+                },
+                name: {
+                  type: "string",
+                  description: "The name of the mapping.",
+                },
+              },
+              required: ["claimName", "claimValue", "name"],
+              title: "MappingRuleCreateUpdateRequest",
+            },
+          ],
+          properties: {
+            mappingId: {
+              type: "string",
+              description: "The unique external id of the mapping.",
+            },
+          },
+          required: ["mappingId"],
+          title: "MappingRuleCreateRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "201": {
+      description: "The mapping rule was created successfully.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            allOf: [
+              {
+                type: "object",
+                properties: {
+                  claimName: {
+                    type: "string",
+                    description: "The name of the claim to map.",
+                  },
+                  claimValue: {
+                    type: "string",
+                    description: "The value of the claim to map.",
+                  },
+                  name: {
+                    type: "string",
+                    description: "The name of the mapping.",
+                  },
+                  mappingId: {
+                    type: "string",
+                    description: "The unique external id of the mapping.",
+                  },
+                  mappingKey: {
+                    description: "The key of the created mapping rule.",
+                    type: "string",
+                  },
+                },
+                title: "MappingRuleCreateUpdateResult",
+              },
+            ],
+            title: "MappingRuleCreateResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description:
+        "The request to create a mapping rule was denied.\nMore details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The request to create a mapping rule was denied.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

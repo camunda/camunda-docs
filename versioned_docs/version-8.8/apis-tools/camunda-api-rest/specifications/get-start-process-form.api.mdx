@@ -1,0 +1,306 @@
+---
+id: get-start-process-form
+title: "Get process start form"
+description: "Get the start form of a process."
+sidebar_label: "Get process start form"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWU1z2zYQ/SsYnJIpLcqJk6a8afyRuh8ej+20B8cHEFyJiEGAAZaWNRr+984CpCRLVJJDD52pDhqJxGJ33+57pLhcchQzz7N7fu2sBO9ZAVNlFCpr+EPCbQ1O0MFlwTM+A7xF4bCzvbCu4gkvwEun6rAl4x8BGZbAPBmyqXUVs1MmWB33jD6bz+bKIjAsBVkqz8AUtVUG2VxpzazRC+YAG2eYVuYRiuDFj9jdC+PCgmfGIvNNXVuHDKocimJl/tnwhNfCiQoQHGFcciMq4BnvcjlbQf0dFjzhivKvBZY84Q6+NspBwTN0DWyDvCuhB8QeYTHiCfeyhErwbMlxUVMQj06ZGW/bB/Lma2s8eFp/Mx7T167HUCzlmW8keZ42elUJKCIeaQ2CQdov6lorGZqTfvHkZLmbhM2/gEQqhKNWooopIBhhkHo6lEdcZZdn1DnsEiOMW8gSTgv7vDQe3FHt7JOinqgCDKqpAvddp2sQe0rUFWFjcwezTfgTOK9iMXZ3d4t9BvQpoNZ20ZFmw6MyCDNwPGIUGE+9P+lRE2MGYwjv1cxAQbxI2LxUsmRComfCM8Eao742sFmNqXVRBXvq0SYcFWo6RXq7Ad9o5G1LC2/GJ8NJ9NycC/LbmCJheYPM2BXHhPdWKoFQsLnCkikkgrUJP9nHzlUrC4GCXJD2noRWxWg/MWtncw3VT7sEfRlgwq6jJSsAhdIsdpSKFg1z4pBh9zcXp+yXk3c/P7wqEWufpel8Ph+5qTyCQqF1I+tmqZtK+pDda7psgANWiQXLgYmiCIoXmq0lwXwNUk2VZGgDK7q0GfUiCu87egqr29Lf4E7j1M6VcsI+3Vz2VFgoM9sNHfZMBXU84yK3DWa5FuaRr1mxG3Q7im+qSrhFz/qXAUhvKLDZgLGH+2/f7PgmWvx6d3fNogsmbQFrQneBCESljKqaimcn43HCK/Ecj96Pxy35pI7/ABLD4LnWwgRqbcNRhlXWQcefAEwZj8LIf6sz1qmZ2o47eqHQjsRnEVEU6cn4eFhQdIsBj0wL+eijkphosKSoUT5MOghJCO0PIjuI7CCy/SJ7u8v3C+tyVRRgAj1XeutuXUJrO4fDzeugq4OuvqGrgX+YVxbjv8qDdA7SOUhnj3TeDT1ITQyjKjviIThnHbNSNs7RY1ip9OrJrY/d3bO++fB/0NpBa/9rrbUJrwBL240ow9gPS57xtFPT0Xqo6dPl0PSvTadxmOnBPfXTwsZpnvFl1FObpemytB7bbEnjxjZ9omY9CadEriNFaTnqrueTtlLocHqor7RAI8ke76moGlMI9oHdnN/esY8CYS4Woc4U8qXrD+MP40GvYRg67HFyfckiwtH2pK13S5IfdBuNf8RxGHl6kI1TuLilbbE8OQgHbtJQb1Zs6eIF73QcjXjS/bjoOfTb33eBBspMbdje0WE3Eb4xBeTj0fEu9a4vg4KkrarGhMuomcUxmNgAJnXjkQAlXCsJxgeSdyPk3uyPuML+6kaLxyNqSmROf/WcKSybfCRtlcq4bfWda5unlVAm7UL49HTy56ers8nRH5en51e350fHo/EInzGAr63HSpiNPGjc3k/71iP3bcjL9b3jPzag71iA8IxprYUKM8hQvmWn4ns+oGKe8GzPFD/gf0g6Md7z5TIXHj453bZ0+msDbsGz+4e1doPYC+Xpd8GzqdB+e+K/WcBXN927gdds4D3AIKDupDCLcMnQDR3xhD/SFHn4dUT70Ca8BFGAC/lF04mUUOOGk523AKS91dXw4zmJ5h93yPa7
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get process start form"}
+></Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/process-definitions/{processDefinitionKey}/form"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Get the start form of a process.
+
+Note that this endpoint will only return linked forms. This endpoint does not support embedded forms.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "processDefinitionKey",
+      in: "path",
+      required: true,
+      description: "The process key.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The form is successfully returned.\n",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            properties: {
+              tenantId: {
+                description: "The tenant ID of the form.",
+                type: "string",
+              },
+              formId: {
+                description: "The user-provided identifier of the form.",
+                type: "string",
+              },
+              schema: { description: "The form content.", type: "object" },
+              version: {
+                description: "The version of the the deployed form.",
+                type: "integer",
+                format: "int64",
+              },
+              formKey: {
+                description:
+                  "The assigned key, which acts as a unique identifier for this form.",
+                type: "string",
+              },
+            },
+            title: "FormResult",
+          },
+        },
+      },
+    },
+    "204": {
+      description:
+        "The process was found, but no form is associated with it.\n",
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "Not found",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

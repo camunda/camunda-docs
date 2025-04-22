@@ -1,0 +1,243 @@
+---
+id: migrate-process-instance
+title: "Migrate process instance"
+description: "Migrates a process instance to a new process definition."
+sidebar_label: "Migrate process instance"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Migrate process instance"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/process-instances/{processInstanceKey}/migration"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Migrates a process instance to a new process definition.
+This request can contain multiple mapping instructions to define mapping between the active
+process instance's elements and target process definition elements.
+
+Use this to upgrade a process instance to a new version of a process or to
+a different process definition, e.g. to keep your running instances up-to-date with the
+latest process improvements.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "processInstanceKey",
+      in: "path",
+      required: true,
+      description: "The key of the process instance that should be migrated.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            mappingInstructions: {
+              description:
+                "Element mappings from the source process instance to the target process instance.",
+              type: "array",
+              items: {
+                type: "object",
+                description:
+                  "The mapping instructions describe how to map elements from the source process definition to the target process definition.\n",
+                properties: {
+                  sourceElementId: {
+                    description: "The element ID to migrate from.",
+                    type: "string",
+                  },
+                  targetElementId: {
+                    description: "The element ID to migrate into.",
+                    type: "string",
+                  },
+                },
+                required: ["sourceElementId", "targetElementId"],
+                title: "MigrateProcessInstanceMappingInstruction",
+              },
+            },
+            operationReference: {
+              description:
+                "A reference key chosen by the user that will be part of all records resulting from this operation. Must be > 0 if provided.\n",
+              type: "integer",
+              format: "int64",
+              minimum: 1,
+            },
+            targetProcessDefinitionKey: {
+              description:
+                "The key of process definition to migrate the process instance to.",
+              type: "string",
+            },
+          },
+          required: ["targetProcessDefinitionKey", "mappingInstructions"],
+          title: "ProcessInstanceMigrationInstruction",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "204": { description: "The process instance is migrated." },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The process instance is not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

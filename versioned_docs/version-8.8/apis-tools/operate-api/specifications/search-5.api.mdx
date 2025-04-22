@@ -1,0 +1,231 @@
+---
+id: search-5
+title: "Search decision requirements"
+description: "Search decision requirements"
+sidebar_label: "Search decision requirements"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWEtz2zYQ/iuYvbhNGT0cK3V4UxJnxm0mdi21PTieDgSuJCQkwACgHJXD/95ZgKIoiUrsTC993Ehgd/FhH98uWYLjCwvxLbxGIa3U6gY/FdJghspZuItA52i4k1pdJhCDRW7E8o8RRGDwU4HWvdTJGuISErTCyJwkIYaJl2P4mWd5ihYiEFo5VI5EeZ6nUnij/Q+W5EuwYokZpye3zhFi0LMPKBxEkBuC4CRa2p3L1KH5upxMWjLWGakWUEXwEdetdakcLtBABHNtMu7C0vMzkkw6/HHZbVTxDDs3VmisDPf74onPTknaoNWFEfjumDmHiivXCYJ2pUtpqTOQVQRW/okPRBKiPJ7vepobw9cQgXSY2cMIEAarjXu4xmFsMe32sDbJDpR6JwJURUbZO568ggheX0xewV3bGRMCVLVXfinQrI/5qMnXuIRxmh7m9ThN2SYzmGlps+8SnPMidYz8zKRlw8H3EMGKpwW5nSBMaEfPmUFXGIUJS6V1R2un+xiuklrfa5M5f+CodVYd6pE/s47II4+gQDJuBapEqgWbrZlP8vYZ3vBtEzWoBepQ+YhUdxsIwWidgQ/HEgUgpLCLJHqUI6KvovWZswc354tvg3vgtx20ZHaLtvdeTTVboGNuiUzhZ+cFIiZ0vvZr/jKkcELGf6M3e8KkcpqdtAr1JAj23it/AZujkPOaZZld6iJNWMadWHqjLcVd0d43uS8Ee484buFSrbQUyF4WViq0lm3qjhrC6elo+OOLF+fDZ8/Pn49Gg1C4bzy/b3PwMAC1xGzNanrdCs/W7Ahtty617SANPQ8behwNOi571OZ+rleeaQzaXCsbWOR0MOjIoUIItH9jV9wn2EcS7//NcrcR1J0s1NrjOqDTjqcP8loLxQ3aInX2CBiSPOtKo9fccSbViqcyOZ5LudGzFLMfHptT1nFX2AeGI0Nra7o8iIRU1nEljoTJL3wpRBfGaNO44VkHIWgzk0mCatcHT/pP/vnXPTu87jvt2BtdqORfd91RV5KPry9ZK50ZeoX/QLb7OVwURrq170Yz5AbNU0/Kt3dVVILQ+qNE/3YXPWJMAbqBW2rqbbm23hncLSGG/mrYT0zSD30cCIEhXvYACpNCDGXwaBX3++VSW1fFZa6Nq3yLNZLP6vGZ9kI0/VgMMaRa8HQZztsFO10iow3qDTTp0IRCcQ+n98hzeTPHbsydD84HnZZI9IiVbTZs7SydyzvtBOFOS1UYdkJ0JiQXLr2JyLZj5PJnpJYR2h5cXV/cjKcXTycXk8nl1TvqJXRcrVdFO1FurNQQPSB6D0KwkX6zSdCffp/6ZKLkv9l+nl+Er5rd4Ucm7e8of97geCPfStYXad6btj3Yb8pbmW0vbtVCGLgG+0Nj6V27P4I1pvZGLvLfXHtX1QV05f9XILsuZqkUFLbD4GrG/QDGuHByhX6AFJp85DBhudF+c1PJ9MQ2ZufasEwr6TQB8prO6IKyfqm1CyCJm7jw+RqKhgJo437//v6+J3hWqIT3hM7IDakUqKwPTu3at/VKtKecaGEbban9e9/gHA0qgf3akO3vDFMw7A16g1BB1mVctQ76CkfsOK3JRYefXT9PuVRk1CMsa/q4hdWQ9EwCm6jSH6TABLdQljNu8VeTVhUtf6IPcSKvLXEEYoMl8iTkQshLeBW4/umUIDSj/OHETKQYNMZCYO6+KHvXYsHrq8mUyqn+l5XphHQMv6f/XPweYqDU867wde7XSki5WhS+EUCwScXHC/JF46+9WvW32pCDWrcQlmWQmOqPqKpqU5Tg6D18XvwFBsjDHA==
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/operate-api/specifications/operate-public-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Search decision requirements"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/v1/drd/search"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Search decision requirements
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    description: "Search examples",
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            filter: {
+              type: "object",
+              properties: {
+                id: { type: "string" },
+                key: { type: "integer", format: "int64" },
+                decisionRequirementsId: { type: "string" },
+                name: { type: "string" },
+                version: { type: "integer", format: "int32" },
+                resourceName: { type: "string" },
+                tenantId: { type: "string" },
+              },
+              title: "DecisionRequirements",
+            },
+            size: { type: "integer", format: "int32" },
+            searchAfter: { type: "array", items: { type: "object" } },
+            sort: {
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  field: { type: "string" },
+                  order: { type: "string", enum: ["ASC", "DESC"] },
+                },
+                title: "Sort",
+              },
+            },
+          },
+          title: "QueryDecisionRequirements",
+        },
+        examples: {
+          All: {
+            description: "All decision requirements (default size is 10)",
+            value: {},
+          },
+          "Size of returned list": {
+            description:
+              "Search decision requirements and return list of size 5",
+            value: { size: 5 },
+          },
+          Sort: {
+            description:
+              "Search decision requirements and sort ascending by name",
+            value: { sort: [{ field: "name", order: "ASC" }] },
+          },
+          "Sort and size": {
+            description:
+              "Search decision requirements, sort descending by name, and return list of size 5",
+            value: { size: 5, sort: [{ field: "name", order: "DESC" }] },
+          },
+          "Sort and page": {
+            description:
+              "Search decision requirements, sort ascending by name, and return page of size 5.\nTo get the next page, copy the value of 'sortValues' into 'searchAfter' value.\nSort specification should match the searchAfter specification.",
+            value: {
+              size: 5,
+              sort: [{ field: "name", order: "ASC" }],
+              searchAfter: ["Invoice Business Decisions", "2251799813686550"],
+            },
+          },
+          "Filter and sort ": {
+            description: "Filter by version and sort by decisionRequirementsId",
+            value: {
+              filter: { version: 1 },
+              size: 50,
+              sort: [{ field: "decisionRequirementsId", order: "ASC" }],
+            },
+          },
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "Success",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            properties: {
+              items: {
+                type: "array",
+                items: {
+                  type: "object",
+                  properties: {
+                    id: { type: "string" },
+                    key: { type: "integer", format: "int64" },
+                    decisionRequirementsId: { type: "string" },
+                    name: { type: "string" },
+                    version: { type: "integer", format: "int32" },
+                    resourceName: { type: "string" },
+                    tenantId: { type: "string" },
+                  },
+                  title: "DecisionRequirements",
+                },
+              },
+              sortValues: { type: "array", items: { type: "object" } },
+              total: { type: "integer", format: "int64" },
+            },
+            title: "ResultsDecisionRequirements",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "Data invalid",
+      content: {
+        "application/problem+json": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden",
+      content: {
+        "*/*": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "Not Found",
+      content: {
+        "*/*": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "API application error",
+      content: {
+        "application/problem+json": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

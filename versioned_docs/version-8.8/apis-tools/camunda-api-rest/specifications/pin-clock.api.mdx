@@ -1,0 +1,168 @@
+---
+id: pin-clock
+title: "Pin internal clock (alpha)"
+description: "Set a precise, static time for the Zeebe engine’s internal clock."
+sidebar_label: "Pin internal clock (alpha)"
+hide_title: true
+hide_table_of_contents: true
+api: eJztV8FuGzcQ/ZUBTwm63lVSJ033pjpJ6yINDFtugFo+jLgjLRMuuSG5lgVhgf5Gf69fUgyptWRLRnMo0IsN2BbJ4bwZvjcjci0CLrwor8SJtvKLuM6EbclhUNacVqIUrTJpJRMVeelUy0uiFBcUAKF1JJWnDHzAoCQE1RDMrYNQE/xBNCMgs1CG/v7zLw/KBHIGNUh2mU/Np5pMNI0ToDy0yhiqMlABHDWojAcM0cS3JNVcUZVA0FRQWfJgbACsbtBIyqdmYkHWaBYU97BltgPQdD7AjDYogAtUBpYq1IBgaBntfcCmzadmasqyNDbQ1Exq5YFM1VplAkeJBq5QtzXCnDB0jq6fFdI2rTVkgi8InV4doZTkfRHt0t+jjbXPm+p5zKDBFcfju9lnkgHCEP3UKAPzjo3BkSb05PMY0dSITDj62pEPP9lqJcp1HCpHlSiD6ygT0ppAJvAStq1WMvJZfPbM3Fp4WVOD/CmsWhKlsBFdZKJ1zH5Q5OPqcBo8uM/+pCagW+SQmQxlgFora2iU1sqTtKbynM2yVrLeIcDXttPVloJcZEMQLI4FOZGJuXUNhjT1+lj0fbaT4dVOWNeZCCpo3h1FeqbMeToZ0fdpm2+t8Smdl6Pjw4mk0JbowXeRs3mn9WoQSbCH5Hcw43xqRJ+J49HoMFDr7I2qqIIKA7KOWLs3qFU8h0dYa52daWq+22fvPsAYzpIlVBRQaUisAnpIhjOqOOyr8/cn8OPxqx+un9UhtL4siuVymbu5PKJKBety6xaFm0v+ZbvnOUxqcjSIFatKMSZq2OplOB85nNcmbGB28yjafxFbXL2TpA9OmcWuGDqn9prQGC7PT0FVZIKar5RZ7EPHPXPsNPvAme1COdNovjBRG/Hsgz5E8V3ToFuBnR8A6DPB3a/bSeMRMX//cs83y+KXyeQMkguQthoaKHfDBMRJNMqopmtEeTwaZaLB2zR6PRr17JMZ/4ZMDNBtq9FEaT1MRxlorKONfmJiyvjAnfU/YsY6tVAPcfNY4UMhb0T8NmWUyvjVoYIam+33CTlnHVgpO+eo4q6jo3su5gF70zOTFp9q7anWnmptv9b6TDQUahuvfl1UDoZalKKQm1ugJ3dDjq+Ma9E5LUqxTlXSl0Wxrq0PfblurQt9ccMU3KBTONNJeLycqmlQibYSdZw+xBYvGGxoyOIEm85UCG/g/N3FBH7GQEtcxdNjyPuu34zejA56ZdNHPI7PTiFlmLS2U/+DWy7kg26T8bc47vtrPkjZORVWF7wtHc+M0JEbd3zidxrY4EXvPE5GItt8eD8o49dPk0gu967z7f3w3S027abytve5UdTb3KbpzRVqL2Kmj5xPKY7yF/vKOzuNBSRt03QmdlGzGC7UW39Sdz5w5pnQSpLxMRwmdgf2Q1qB3xMivMiZvSSxoXkuVKi7WS5tU8i07e7/TNtZwQ+GYgPhi5Pxb5cf346PPpyevPt48e7oRT7Kw22Ip9RaHxo0O3GcKfPggQLP4q39+cO019uvj6dn0P/5DNpUSKDbULQaVbx9R8WsN33rSsjhXZt6z5VYr2fo6dLpvufprx25lSivrretikd9JmrCilxsdF9oxUpNrB9NGJbNdcfwe0+sPht2jKWkNjxie++ywR3hrvOeXU64vjevu8ZWvNXhkl9+uBSlEPxMZyexbcS5tdBoFh0u2Da55J9/ANM0hSQ=
+sidebar_class_name: "put api-method"
+info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Pin internal clock (alpha)"}
+></Heading>
+
+<MethodEndpoint
+  method={"put"}
+  path={"/clock"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Set a precise, static time for the Zeebe engine’s internal clock.
+When the clock is pinned, it remains at the specified time and does not advance.
+To change the time, the clock must be pinned again with a new timestamp.
+
+:::note
+This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
+in future releases.
+:::
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            timestamp: {
+              description:
+                "The exact time in epoch milliseconds to which the clock should be pinned.",
+              type: "integer",
+              format: "int64",
+            },
+          },
+          required: ["timestamp"],
+          title: "ClockPinRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "204": {
+      description:
+        "The clock was successfully pinned to the specified time in epoch milliseconds.\n",
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

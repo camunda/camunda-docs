@@ -1,0 +1,283 @@
+---
+id: correlate-message
+title: "Correlate message"
+description: "Publishes a message and correlates it to a subscription."
+sidebar_label: "Correlate message"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWd9v2zYQ/lcIPm2YYrltunV6c9N0c9ekRuJsD0keKPFksaVIlT/iGIb+9+FEyZatOM2APdqAIdN3vOPdfd9JPq+pYwtLk1t6AdayBdD7iOoKDHNCqymnCc20MSCZg04johxsZkSFKjShM59KYQuwhJEy6BCmONlstEQ44jRhxPp0s3N0p6b5RkloRYQl1mcZWJt7iXuWQkpiwHmjiCuA5MJYRyqjUYcIZR1TGZBvsGrEnfONY06WwhWjOzXvSYUlSjuS+jwHA3x0p24sNPurEMhGExSvtFDN2S0o3gkscQVzJGOKpNA3RCNq4LsH695rvqLJulkKA5wmzniIaKaVA+VQxKpKiqyJPP5qMZNrarMCSoaf3KoCmlCdfoXM0YhWBqviBFiUKlYCXncL0Y8SNQizhEMuFHAiQgbfzy4uuwQ25239WGeEWtA6or2C/AWrp530i4bJ13k//wOrCJiceeloQtHFAzOCpTKEcjiEjRrG8en6yyXhOvMlpi+ijHOBe5ic9TITkryfO+WlRENBXkfUgWLKIbr3/WMYQUpybciyEFmxgy1hO5gAfyLQPVfoSzhcdvw626buKkCF1jXqGbCVVjYk5fV4/HxuhO2j3GmiFRBtSKkNDAhi6X8A3mGfvUr3fLfSCIu0BCnx+gOuCnenhhylw8Ltgv5w1ebbqk0/HD7jU3BvRQeh/mzQTxlsI562Ab/E8IFUPdPSho5/gDSL7AtAOz2ErcroB8GBE84c69rkA5OCjw4DqDI6lVD+8iMgTcgsaBIOjglJQpFDi0LFNDSp26uPZ+T307e/3f9UOFfZJI6Xy+XI5NkJcOG0GWmziE2e4Rv1fh6ReQEGSMlW2I63jYFs4UNsBZnIRYZUcSHW5jCYxRdhr5GuB3zPtSkZ9jVvxODGOCE3V1MiOCgn8pVQi6Hrnd7IUu1dkkqmvtFtPYdO971YX5bMbOC066COqHXM+V4YVCgHCzD98wvl3rwe2EZY/Dmfz0gwQTLNoWmMrsBGGBxhEKVQovQlTU7H44iW7DGsfh2Pa7SJFX9BJIrAYyWZCneWvXCECt0tWGsC66jyP1VGG7EQ+35HO9xqQfwhRNQR6s0Q7x+1SQXnoBp4kvaxoGMVk1Iv4cirI6+OvHqGV6dDvF9qfDLzih+pc6TOkToHqPP2qWe8iSKYZYM4BGO0ITrLvDH4TFkIufnd0Plu71kBi0euHbl25NqQa81PSFdonJRV2jbQYa6gCY27aVHcG5fQiFowD2Bw5ram3kia0HVgTZ3E8brQ1tXJutLG1fEDlmRnWoLiwK4ONVJnTBbB87B6KGhGQW1UZ6z0ijPyjlydX8/JH8zBkq2abKLLXdPvxu/GT1pF1QMWJ7MpCREG7PX6QWcWif2k2aD8EsN1fY+JzLwRbnWN20J6UmAGzMRjATaYaP011nEdlGjUfvjYIeXTP/Om2NjLrrZjvPNHVlaBiWHstgXZ/qxsK+kXbWfg1JsUCJXr5pgtuIYBoyEwNmRoPHo1BPJs2vAx02XpVdOU1aKZEBDWS2AmvXWYuIhKkYGy/Wg6tc9BQv4OHsmrERY/ILTrxQvhCp+OMl3GWdi2uaZSp3HJhIpbFzY+m1zcXH6YnHyenp1fXp+fvBqNR+7RNUlGrpRM9c/RjTh605WdaNfbm9Bx5tyfObc4d/Do4koyoRBdTeHWbTO67eZcdhe1OO0PLeWWrtcps3BjZF3j1989mBVNbu+3YMZVHdECGAfT9K9vDerPQllO5ngOVJcezzOYM9ZRt2OSZVC5Z3Xve4119uV6jnxth+ql5rjHsCUO3NkSx8r4rwXubtpA892aSqYWHoGU0GATX/8CsHqx6Q==
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Correlate message"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/messages/correlation"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Publishes a message and correlates it to a subscription.
+If correlation is successful it will return the first process instance key the message correlated with.
+The message is not buffered.
+Use the publish message endpoint to send messages that can be buffered.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            name: {
+              description: "The message name as defined in the BPMN process\n",
+              type: "string",
+            },
+            correlationKey: {
+              description: "The correlation key of the message",
+              type: "string",
+              default: "",
+            },
+            variables: {
+              description: "The message variables as JSON document",
+              additionalProperties: true,
+              type: "object",
+              nullable: true,
+            },
+            tenantId: {
+              description: "the tenant for which the message is published",
+              type: "string",
+              nullable: true,
+            },
+          },
+          title: "MessageCorrelationRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The message is correlated to one or more process instances",
+      content: {
+        "application/json": {
+          schema: {
+            description:
+              "The message key of the correlated message, as well as the first process instance key it\ncorrelated with.\n",
+            type: "object",
+            properties: {
+              tenantId: {
+                description: "The tenant ID of the correlated message",
+                type: "string",
+              },
+              messageKey: {
+                description: "The key of the correlated message",
+                type: "string",
+              },
+              processInstanceKey: {
+                description:
+                  "The key of the first process instance the message correlated with",
+                type: "string",
+              },
+            },
+            title: "MessageCorrelationResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "Not found",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

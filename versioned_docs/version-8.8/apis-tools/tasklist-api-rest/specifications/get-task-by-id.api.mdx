@@ -1,0 +1,235 @@
+---
+id: get-task-by-id
+title: "Get a task"
+description: "Get one task by id. Returns task or error when task does not exist."
+sidebar_label: "Get a task"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWN1zGjcQ/1d29NJkegbSup0OLx1s45QmsTOAm5l6PIk4LZziO+ki6SAMw//eWUl3gKE2TvPYJ4S0H7/d2y9pxRyfWda9ZWNu79ldwgTa1MjSSa1Yl71GB1ohOG7vYbIEKVowRFcZZcOeNoDGaAOLDFXYEhotKO0Av0rrWixhukTDSeJAsC6boSNlZ8uBYAkrueEFOjSEYsUUL5B1GQnyx5JQlNxl7CG0cYYwuAA9BZcFgKTK4JdKGhSs60yFCbNphgVn3RVzy5IkW2ekmrH1+o6IbamVRUvnP3U69LOr5FqBrdIUrQXjzUZBWlKtHCpH9Lwsc5l669qfLTGt9pXqyWdMHVlryBdOBpVS7AM7ZGal5JcKQQpUTk4lml2r10l02zGyiHKPnRYXOJVK1l/pKVE3Fk343IMLmBpdeIFn799dgWgEedml0eS/q29CGJm9oNSgd/MFd0dI+kDxuOC2MRQ8Pwp4YZBUCKBQmfMclSN1nygoW7WSsSzwE0wl5uJl0K6LMsf/pD9IeBJBo2gPA7dWzhQe6cfKoiE1bSlI+iLTIC1EGQKc3o+BkTvKNpJuiXQ/+7i4Vvmyzj5UVUHF5XzY7437Fyxh59fv3r/tx3Xv6rz/1i8vewNa3K0TNtWmeIPLp1EMcYoGVYrbpgCxe3tocUwk74kJRYWDwDLXSxRBJAyCqfSH/EgFrqZIwGXSQkzupT+u8ryB8RcaK0NpiFikcjhD8zSYeWD9bogCIO4Chl9PCaK0l9oU/WKCQuC2xyZa58jVHsqB3SjGyEb/glL6DL9HcAYDMk/7mJtiom+K0PNDIIrYqj+PJ9qeyoHYybZ4PlDWcZXitwOSUQLIJ1L/gcYHeBwqrtwxIU35GagpmLm1OpW+9C2ky3azXlR4XD0jmaJCEJT24Vtv8r6JKTo9cbLAEPp5rhc35fEKAsdJVT5HTcqVkLTz2uiqtFuauDF8eVBRwwMzz7SnSjos7KGxYUsf9cDnqqOi/CxtkrpBgcpxt1tCGjfWRfbP67OPH66Hb/pDlrC/+/2z/sebUX/4cdwbvfGVtTRSG+mW+2PO2LfacBpKTVX39xbQYSZnGQbMc55X6FdbmzVzC3phHprkCFrlS2/qZz2BhTb3aE4m3KLYSLdQcMVnKGi4POdFpQQnh+yVyUIqWZCdnYQV/GtYv+p0yNtTXuWOdX/pkL+cdDmxUkIN43zH1ms6Ou38vG+6H2Qy7otUiaaQ1tdbp4GHua/pLC9GmE9Parxk3MtHZsHS6EmOxY/PnQmpr1b2iFbRUxCPwGXcgcHSoEXlAuQ/xuP3EIRBqkXTqsO0Xk++LbikCf4rpyhL4LTTAakE2YAWOPxwxgUM8UuF1v0QWInodJfoSju41JUSDQlXAqwGmgB3G87PP1HGFmgtnx1RE3oQDoKFpdFzKbzOiZE4hS3iXfM8uU7Tyhga2CmNYk19WmffS2hq9s0NDbjaQK71fVXCC2zNWglIBbmeQbTEUoXeCj4vo4m60/2o66mIVG4uFvEKVYdbU6s/hcvQp7rHT8nV/0fe/5H3eOR5a12m45XbX7VdxrqsPX/V9rW3vQqRtWYJs2jm9R28MjnrslWIm3W33V5l2rp1d1Vq44h4zo2kCu+Dhc5CgMc6zHKd8txvH+qFdLB9xeu9H0DQHqYubR6I+63zW+egJCL9FymbmN/IyZwrD19lPPFBSf6ZwGJahb55u2Kp1vcSWff2LmET5AbNyT1Nhrd326QjEhn8UzNsxoRS0iz5EMm5p4sNklcuo8t+SGnKfN9M+ZzLPPZW8O3oXWxHaV5ZekShsI9vKNT33w5G45NRfzQaXF/VrykR0HoXfwMvusk7xV8CPBGrqS/rnPrzwzgMKGqqPftW482ldTDsj8bkzX2f1xR0HQW6My5PnD6pbHD+Vi2jNmx4KUW+hGYQgkllpaLWHOdlystcq5mVArdHC6ngb8QJ1rWSpz6yQniTmbbbbi8Wi1YaB49UF+SWXKZIU0O3eY56G3eSB8xCp7bhltr/b5v6DtCOgmybpM7rSyCbvwqBbl3B1ZYWemzjHvtDl602tf47PcnFj+3wq2uXOZeKIHnjVrFO3BLO8CxgWcK68UnuLokZf8tWKwrWG5Ov17T9pUKzDIlRFwifMUJaWgvWnfLc4iOmvRjG17uXcPh17yDqOq3U0pemvKJ/LGE+rOuXxDUNwBlygcaDCoe9NMXSbbHtveZRUjdl9HWfQv4fTN5SZA==
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/tasklist-api-rest/specifications/tasklist-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get a task"}
+></Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/v1/tasks/{taskId}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Get one task by id. Returns task or error when task does not exist.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "taskId",
+      in: "path",
+      description: "The ID of the task.",
+      required: true,
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "On success returned.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            properties: {
+              id: {
+                type: "string",
+                description: "The unique identifier of the task.",
+              },
+              name: { type: "string", description: "The name of the task." },
+              taskDefinitionId: {
+                type: "string",
+                description: "User task ID from the BPMN definition.",
+              },
+              processName: {
+                type: "string",
+                description: "The name of the process.",
+              },
+              creationDate: {
+                type: "string",
+                description:
+                  "When was the task created (renamed equivalent of `Task.creationTime` field).",
+              },
+              completionDate: {
+                type: "string",
+                description:
+                  "When was the task completed (renamed equivalent of `Task.completionTime` field).",
+              },
+              assignee: {
+                type: "string",
+                description: "The username/id of who is assigned to the task.",
+              },
+              taskState: {
+                type: "string",
+                description: "The state of the task.",
+                readOnly: true,
+                enum: ["CREATED", "COMPLETED", "CANCELED", "FAILED"],
+              },
+              formKey: {
+                type: "string",
+                description: "Reference to the task form.",
+              },
+              formId: {
+                type: "string",
+                description:
+                  "Reference to the ID of a deployed form. If the form is not deployed, this property is null.",
+              },
+              formVersion: {
+                type: "integer",
+                description:
+                  "Reference to the version of a deployed form. If the form is not deployed, this property is null.",
+                format: "int64",
+              },
+              isFormEmbedded: {
+                type: "boolean",
+                description:
+                  "Is the form embedded for this task? If there is no form, this property is null.",
+              },
+              processDefinitionKey: {
+                type: "string",
+                description:
+                  "Reference to process definition (renamed equivalent of `Task.processDefinitionId` field).",
+              },
+              processInstanceKey: {
+                type: "string",
+                description:
+                  "Reference to process instance id (renamed equivalent of `Task.processInstanceId` field).",
+              },
+              tenantId: {
+                type: "string",
+                description: "The tenant ID associated with the task.",
+              },
+              dueDate: {
+                type: "string",
+                description: "The due date for the task.",
+                format: "date-time",
+              },
+              followUpDate: {
+                type: "string",
+                description: "The follow-up date for the task.",
+                format: "date-time",
+              },
+              candidateGroups: {
+                type: "array",
+                description: "The candidate groups for the task.",
+                items: { type: "string" },
+              },
+              candidateUsers: {
+                type: "array",
+                description: "The candidate users for the task.",
+                items: { type: "string" },
+              },
+              implementation: {
+                type: "string",
+                enum: ["JOB_WORKER", "ZEEBE_USER_TASK"],
+              },
+              priority: {
+                description:
+                  "The priority of a user task. The higher the value the higher the priority. Applicable only for job worker-based user tasks managed by Camunda.",
+                type: "integer",
+                minimum: 0,
+                maximum: 100,
+                default: 50,
+              },
+            },
+            title: "TaskResponse",
+          },
+        },
+      },
+    },
+    "403": {
+      description:
+        "User has no permission to access the task (Self-managed only).",
+      content: {
+        "application/problem+json": {
+          schema: {
+            type: "object",
+            properties: {
+              status: {
+                type: "integer",
+                description:
+                  "An integer that represents the HTTP status code of the error response. For example, 400 indicates a 'Bad Request' error, 404 indicates a 'Not Found' error, and so on.",
+                format: "int32",
+              },
+              message: {
+                type: "string",
+                description:
+                  "A string that provides a brief description of the error that occurred.",
+              },
+              instance: {
+                type: "string",
+                description:
+                  "Error instance UUID for lookup (e.g., in log messages).",
+              },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+    "404": {
+      description:
+        "An error is returned when the task with the `taskId` is not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            type: "object",
+            properties: {
+              status: {
+                type: "integer",
+                description:
+                  "An integer that represents the HTTP status code of the error response. For example, 400 indicates a 'Bad Request' error, 404 indicates a 'Not Found' error, and so on.",
+                format: "int32",
+              },
+              message: {
+                type: "string",
+                description:
+                  "A string that provides a brief description of the error that occurred.",
+              },
+              instance: {
+                type: "string",
+                description:
+                  "Error instance UUID for lookup (e.g., in log messages).",
+              },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

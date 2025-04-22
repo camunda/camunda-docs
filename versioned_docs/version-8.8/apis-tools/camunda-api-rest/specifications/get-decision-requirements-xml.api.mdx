@@ -1,0 +1,275 @@
+---
+id: get-decision-requirements-xml
+title: "Get decision requirements XML"
+description: "Returns decision requirements as XML."
+sidebar_label: "Get decision requirements XML"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWN9v2zYQ/lcO99RiiuW06dbpzUjTLltSBGm6FcjyQJFniw1FqiQVxzD0vw8k5R+J5aIDhj35wbB+HO+7O34fSd0SPZs5LG7xHXHppNFg6VsrLdWkvcO7DE1Dlnlp9LnAAmfkV5bXW4ZfLi8wQ0GOW9kEYyzwmnxrtQMx5BmYgy+XF6O/NWbYMMtq8mRDJEvUrCYsUAzg/EELzFAG9w3zFWbYOxVYeNvS8xhuKgLmnJxpEnBPCzBT8BUNx5TBvJK8AsZTfAxaLb+1BFKQ9nIqycLUWPCV3GQ1wgwdr6hmWCzRL5oQuvNW6hl23V0I0DVGO3Lh/avxOPztBvnl8uK7sYF04FrOyblpq9QCbKwuiVRBbrQn7WMI9Ojzx1qF6/2BdV2GJ/uCaax5kIIECOZZQNbGwwNTUoyeYrGmUZJHduSNNaWi+qevLvjZxn4KMIGrZAmCPJMKTPmVuA8FT4YlCZAabq/fn8KvJ29+uXtRed+4Is/n8/nITvkRCemNHRk7y+2Uh1+wezmCm4osQc0WUBIwIWTAZCok1JD1khy4hricSg7exGr3YUMoUKplX6oUVmDnevCmkM8LmuHU2Jp5LLC1ckcKE/h8fb6i0ULq2S50HDNlrQo+WGlaX5SK6XvsMvTSq0HQ5yiurWtm1yx/CtBl6Dzz7VYaKLWnGdnt+KX2r1/t+A60+O3m5gqSC+BG0EYMPVBIopZa1m2Nxcl4nGHNHtPdz+NxF3yGGf+BTDTQY6OYjtR6no7UUBtLPX9iYlI7zzT/r2bGWDmTz3FH2G3mAnsSv0sZrQR1PCyooGRyHhTj9y4pCVjrq4Ca5APcUgyCKXcQ2UFkB5HtF9nrXb6/N7aUQpCO9Fzrrd+6mFJmTofN66Crg66+o6uT4c1r+Dw6l76KADP5QDqerecsyW1qWi1GcLlJ0wGzW8dKqePI1ckYSiMWO+fYgzwP8jzIcy3PN0MfaxMNoco28JCsNRYM5621JMKnrIruwyfjCrvfFw9aO2jtoLV9WusyrMlXpm93xf6Ur7DAfLUTHm3vhPlyT6Oqi12YDB3Zh1Vrq7UKC1wmTXVFni8r43xXLBtjfZc/hAl7YFayUiWahtdJeytOKcOZio+H5ja8CP2zVc6nrG61YPAWrs8+3cAH5mnOFrHWAfKp67fjt+NBr8F0j8fJ1TmkDBMzt1aLldsg+0G3yfhHHMdOmiPeWukXn8KwVJ6SmCU7acP8rBnT40Xv4T4ZYdZfvF/x6Pe/biIVpJ6aOLynxG4gYVbIuhT5eHS8S7+r86gibuq61XEp1bN0RmJbiXHVOh8SylBJTtpFovf9zpXZRXoDfyZEOB6FSUnMWa2gM+mrthxxU+c8DVv/l8qUec2kznsIl59OLj9/fDc5ujg/Pfv46ezoeDQe+Ucfk2+M8zXTW3F8IL/nzDfQ5V1utpF/0fDtJyq2KhvFpA7UiRkue7Hd4qDYMMNif1846O0u6zVzi8tlyRx9tqrrwuNvLdkFFrd3G4lFTQrpwrXAYsqUe95C3k7wRQ8pXsL/01gerFP/kOlFXCxUG+4ww3tafKdr3t11GVbEBNmYdbKecE6N3/Kz7h4Hwa2XwQ9nQSn/ABhzYUc=
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get decision requirements XML"}
+></Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/decision-requirements/{decisionRequirementsKey}/xml"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Returns decision requirements as XML.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "decisionRequirementsKey",
+      in: "path",
+      required: true,
+      description:
+        "The assigned key of the decision requirements, which acts as a unique identifier for this decision.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description:
+        "The XML of the decision requirements is successfully returned.\n",
+      content: { "text/xml": { schema: { type: "string" } } },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description:
+        "The decision requirements with the given key was not found. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

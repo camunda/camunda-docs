@@ -1,0 +1,279 @@
+---
+id: get-process-definition-xml
+title: "Get process definition XML"
+description: "Returns process definition as XML."
+sidebar_label: "Get process definition XML"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWEtz2zYQ/is7e0qmNCknTprypnGc1K2d8ThOmxnXBxBYiYhBgAFAyRoN/3sHIPWwRLU5tDcdNOJjsd++PmC5S/Rs6jC/xxtrODkHgiZSSy+NxocETU2WhZtLgTlOyfdi79dSX6+vMEFBjltZx2U53pJvrHZQ7+kE5uDr9VX6l8YEa2ZZRZ5sMGCJmlWEOda7CL/TAhOUQXHNfIkJWvreSEsCc28b2kW/KwmYc3KqScAjLcBMwJc0YE0C81LyEhj3LljGoNHye0MgBWkvJ5IsTIwFX8q1Mykm6HhJFcN8iX5RB5udt1JPsW0fgnGuNtqRC+9fjUbhb9/Ar9dXh+0C6cA1PDydNEotwMaAkujixo32pH3EpyefPVUqXB+2qm0TfDU6G7ZkAH7OHExMowUUjQdhyIE2Hko2o032dq2oFQs5+jc7zg5FpLZmJgUJEMyzEIEAOWNKivQ5GqtrJXmsyqy2plBU/fTNmR3s5wBjuOkkQZBnUoEpvhH3IemdYEECpIb72w/n8MvZm58fXpTe1y7Psvl8ntoJPyEhvbGpsdPMTnj4BbmXKdyVZAkqtoCCgAkRY8hUcKgm6yU5cDVxOZEcvFmlPBoTAtRFsw9VZ1bgxnrxJpC7AU1wYmzFPObYWLnHwjF8ub1clfJC6uk+dFwzYY0KOlhhGp8XiulHbBP00qtB0F0U11QVs9s02wJoE3Se+WbLDZTa05Tstv1S+9ev9nSHsvj17u4GOhXAjaBnhAxAwYlKalk1FeZno1GCFXvq7t6ORm3QGTL+A55ooKdaMR1La9cdqaEylvr6iY5J7TzT/L/KjLFyKndxU2w3ucC+iN93Hq0IdTpMqLBLkvOgGH90HZOANb4MqB19gFuKRjDljiQ7kuxIssMke71f7x+MLaQQpGN5rvnWH11MKTOn4+F15NWRV//AqwNdqSAuXexFpS+jzqmckY79fGhPA8Nii5rC9cYzB8xudZJSx5WrjhwKIxZ7zeuRkUdGHhm5ZuSboe+zsYYQZRvqkKw1FgznjbUkwhe0Wn9ErrD7o/DItSPXjlw7xLU2wYp8afrJWhyI+RJzzHo2nWxGMi5bDs3F2jj7SdCRna3GaI1VmOOyo1ObZ9myNM63+bI21rfZLORqxqxkheoqNLzuaLcqJ2U4U/HxUFrDizCrW7l7zqpGCwbv4Pbi8x18ZJ7mbBHDHCCfq343ejca1BpED2gc31xC52FXlFsbxUptYPyg2k74RxTH4Z0j3ljpF5/Dsi48BTFLdtyE1KyLpceL2sN9J4RJf/FhVUK//XkXq0DqiYnL+2rYNyRkhazrLB+lp/uVd3MZCcRNVTU67qJ62rVHbMsxrhrng0MJKslJu1jj/Wx1JXbVvYE/OkQ4TUNSuspZbZ5T6cumSLmpMt4tW/8XyhRZxaTOegiXnY+vv3x6Pz65ujy/+PT54uQ0HaX+yUfna+N8xfSWHR/JD80dB2bJy83x8aNj5T5FW0PJtvdt2TPsHgcYhgnmB2bPgWQPSU+Ue1wuC+boi1VtGx5/b8guML9/2PAqElFIF64F5hOm3O6YetuxF7f9QPsl/P/D68Hw9A+ZXsTdQTXhDhN8pMWhkXz70CZYEhNko7ud6Jhzqv2WkvWEOtBrvd99vAi8+BvZEXme
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get process definition XML"}
+></Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/process-definitions/{processDefinitionKey}/xml"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Returns process definition as XML.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "processDefinitionKey",
+      in: "path",
+      required: true,
+      description:
+        "The assigned key of the process definition, which acts as a unique identifier for this process.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description:
+        "The XML of the process definition is successfully returned.\n",
+      content: { "text/xml": { schema: { type: "string" } } },
+    },
+    "204": {
+      description: "The process definition was found but does not have XML.\n",
+      content: { "text/plain": { schema: { type: "string" } } },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description:
+        "The decision with the given key was not found. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

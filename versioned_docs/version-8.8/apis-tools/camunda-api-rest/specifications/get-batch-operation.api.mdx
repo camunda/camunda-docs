@@ -1,0 +1,248 @@
+---
+id: get-batch-operation
+title: "Get batch operation"
+description: "Get batch operation by key."
+sidebar_label: "Get batch operation"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWEtz2zYQ/isYnJIpLSmpk6a8MTKTqHFsjyQnB9fjAcGViJgEGGBpWaPhf+8sSMmWRMduprf6oBEfi/329S2IXXEUc8fDC/5eoMyYKcEKVEbzy4BvbkYpD/kc0MucbkQCnoKTVpX+LuQfAVmyrYYlS3YNyx4PeCmsKADBEtyKa1EAD3mypfIzLHnAFSkrBWY84BZ+VMpCykO0FewiTjMg9czMGGawC977m2x0MoNC8HDFcVkSpEOr9JzX9SWpd6XRDhy9fz0Y0N8+xK5TC+HYzFQ6Jb+k0QgaaaUoy1xJL9P/7mj5ah/eJN9BIgXEkkZUDfh+IPZM+fywpzzY9S7gDgVCt0P+1ZN1BRx0VVCRDMdxNI2PeMCj4XT0NeYBP4vOJ/7J8PTL2XE83b6++jaafrqKx+PT8YSeRyfD+Dg+4pd1sOPx1EN2GUvG/IKtZ+PTYTyZXDWYx9F0dHrCAz6OJ6fHX+Or0clwdBSfTKnQUWFOOt7vWRSTsiaWFo/aeO4idsbXIkt/HuSZsYVAHnKSO0BVACGBTp+OAzr9NZSNiJsaFPnQVE0Ft5BKI8zBdmIiLWC6KhKwhKsQCseIBUJpSJnSDDPlKAbyWuk5K62R4NyWMUrj76+3DfkgVA7pv7Fk14ZFpmTGZl4PSyuKGoNbkJUn7QMhYi+gN++xBKSoHJDIkgkLzALRFFLqYLSuEDJTGl4+4sXQFGUO+KuOuEpSrGZVni+ZXOtiKNx1ZwDrh4p33DY2XtckdPhQayutuVEp+DISTDmmDbIbkauf9bbSmiSH4rf9HrcNELGzRpKlgELlrOl9TDjWCCZNvVyMPwzZn4dv/rh8kSGWLuz3F4tFz87kAaQKje0ZO+/bmaQfyb3ssWkGlrKyZAkwkaaKMEXO7roqcyVINVOSofEpbM32DaXZG37ekrFtSbs83CShsmovnxE7H4+YSkGjmi2pBPeg/ZqZqHLSIRJTYZjkQl/zu2w+Rv6IuaoohN1sCNsAbfevXGcB7hRRV0V+mk7PWKOCSZMCmxnb0LoFIicKpVVBzfZwMAh4IW6bu7eDQU06KeNP8EQzuC1zocV9lq7dUZoVxkJbP94xpR0KLf+rzBir5moXt7fFrLaIjxqP1oQ6fNq3Qkupxz4Xnin1TKn/OaXedO1RkWYUZUt1CNYay4yUlbWQ0nafw/rrYo1N5wVw2NTiM9eeufbMtX2u1QEvADPTHuv94RwzHvK+370O7j5n+6u9c2lNZ2qwN+uDfGVzHvJVQ6I67PdXmXFYh6vSWKz7N5ShG2GVSPKmLul1Q7Z1EeVGitw/7komvaBpwdrJoSgqnQr2jo3jyZR9FAgLsfTBJcht1e8G7wadWkn0AY3R2Yg1HjaleK89rNUSz7tPfl74KYr9/MGBrKzC5YSWtYMAEBZsVFFCNiXS4nntfmzihXjQXnxYF85f36Y+90rPjF/e1sC+IZQVsK6xfNB7tV9vZyNPG2mKotK+d+o5WyjMmLjnmMwrh+RQwHMlgY4c4Wa6sxY7bt6wrw0ie9WjpDSVs26Zc4VZlfSkKfqyWbb5T3KT9AuhdL+FcP1h9OX85Cg6OB4N45NJfPCqN+jhLXrnS+OwEPqeHR2TqV1/V3e7xSODrDYlCLfYL3OhNBWJ92XV8uiC7/KIBzzcn/BcBi0ZLvhqlQgH5zava3r8owK75OHF5R13PNlS5eg65eFM5G53HnbfhxfjdnL2kj1lStbpVPtQ6KXncF7RHQ/4NU2nOiZWNY11MhApWG9tIxdJCSXe07A3JiMmbBrSx5hK+B/77BX+
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get batch operation"}
+></Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/batch-operations/{batchOperationKey}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Get batch operation by key.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "batchOperationKey",
+      in: "path",
+      required: true,
+      description: "The key of the batch operation.\n",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The batch operation was found.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            properties: {
+              batchOperationKey: {
+                description: "Key of the batch operation.",
+                type: "string",
+              },
+              state: {
+                description: "The state of the batch operation.",
+                type: "string",
+                enum: [
+                  "CREATED",
+                  "ACTIVE",
+                  "PAUSED",
+                  "COMPLETED",
+                  "COMPLETED_WITH_ERRORS",
+                  "CANCELED",
+                ],
+              },
+              batchOperationType: {
+                description: "The type of the batch operation.",
+                type: "string",
+                enum: ["PROCESS_CANCELLATION", "RESOLVE_INCIDENT"],
+                title: "BatchOperationTypeEnum",
+              },
+              startDate: {
+                type: "string",
+                description: "The start date of the batch operation.",
+                format: "date-time",
+              },
+              endDate: {
+                type: "string",
+                description: "The end date of the batch operation.",
+                format: "date-time",
+              },
+              operationsTotalCount: {
+                type: "integer",
+                description:
+                  "The total number of items contained in this stacking process.",
+                format: "int32",
+              },
+              operationsFailedCount: {
+                type: "integer",
+                description:
+                  "The number of items which failed during execution of the batch operation. (e.g. because they are rejected by the machine)",
+                format: "int32",
+              },
+              operationsCompletedCount: {
+                type: "integer",
+                description: "The number of successfully completed tasks.",
+                format: "int32",
+              },
+            },
+            title: "BatchOperationResponse",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The batch operation is not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

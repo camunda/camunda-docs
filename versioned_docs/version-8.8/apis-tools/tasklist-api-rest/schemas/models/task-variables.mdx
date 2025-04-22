@@ -1,0 +1,94 @@
+---
+id: task-variables
+title: TaskVariables
+hide_table_of_contents: false
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{
+        fontWeight: "normal",
+        fontSize: ".5em",
+        color: "var(--ifm-color-secondary-darkest)",
+      }}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{ fontSize: "1.5em", paddingLeft: "4px" }}
+      target="_blank"
+      href={props.url}
+      title={"Specified by " + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span class={"badge badge--" + props.class}>{props.text}</span>
+  </>
+);
+
+Filter task by Variables
+
+<Tabs groupId="schema" defaultValue="schema" values={
+[
+{label:'Schema',value: 'schema'},
+{label:'Example value',value: 'example'}
+]
+}>
+<TabItem value='schema'>
+
+```graphql
+{
+    "name": string,
+    "value": string,
+    "operator": Operator
+}
+```
+
+</TabItem>
+
+<TabItem value='example'>
+
+```json
+{
+  "name": "variableName",
+  "value": "\"variable_value\"",
+  "operator": "eq"
+}
+```
+
+</TabItem>
+</Tabs>
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskVariables.<b>name</b></code>](#)<Bullet />`string` <Badge class="secondary" text="non-null"/>
+
+> The name of the variable
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskVariables.<b>value</b></code>](#)<Bullet />`string` <Badge class="secondary" text="non-null"/>
+
+> The value of the variable. When specifying the variable value, it's crucial to maintain consistency with JSON values (serialization for the complex objects such as list) and ensure that strings remain appropriately formatted.
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskVariables.<b>operator</b></code>](#)<Bullet />[`Operator`](../enums/operator.mdx) <Badge class="secondary" text="non-null"/> <Badge class="secondary" text="enum"/>
+
+> Define the search operator to use for the variable
+
+### Member of
+
+[`TaskSearchRequest`](../requests/task-search-request.mdx) <Badge class="secondary" text="object"/>

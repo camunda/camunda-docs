@@ -1,0 +1,2709 @@
+---
+id: cancel-process-instances-batch-operation
+title: "Create a batch operation to cancel process instances"
+description: "Cancels multiple running process instances."
+sidebar_label: "Create a batch operation to cancel process instances"
+hide_title: true
+hide_table_of_contents: true
+api: eJztXeFy2zYSfhUMJj/SnizZbnJNdb7cOLLS6urYHltJZ87y1BAJiWhAkAFA2zqPZu4h7gnvSW4WICVKohQ5sROl3s5cryIXu8Bi98MCWK5vqWVDQ5vn9EQnATeGCGUsUwGnFzWapFwzKxLVCWmTBvBY5nSdnMy8YjaIjgtCWqMhN4EWqfvVpC3XyJA4k1akkhOdKSXUkKRz8ky9B601/5BxY18l4Yg2b91PoXlImwMmDa/RIFGWKwvvWJpKETixjT8MSLulJoh4zOC/ZrsxPzpiONNBRAZCWq7rtEaZlMcD2jy/e0s7Sjlt0qT/Bw/sCk6vmOELw/44u1TDNFjBjRugZdoeMMsXx9iNOHGvScgsXzUmaL9lRey6A8xH5FrYiAwyKQkLr6BjYdGzgKWsL6SAHlT1L1E8F5K/MVYLNaQ1Okh0zCxt0rCQB82FlUDVvmGBJTFYz4LRvIGn3BAbcXLFZMYJB2o5qtNx7XbCYr/oqVfeApvJ+4n8tdX8hH9YVHAr4sF7QwaJJvxDxqQo9Ab9THVyJUIe+g6XJKxSx7hGn6iPiBLqHoXxG2GsWSpPDBz7INOaKzu1Dt+sJKefJJIz5XgO7SK/nzVnlmtiI6ZIkMQp08Ik6h5GMKwy/RlxxfTcr1xZMcrD5PpBxiirxlgS9jAjFOpjdjGxhzh3UKZGJBlUiC3bCtOajWiNCstjZ3rr9Gc8Hl9MwQIAqyti/tq570neDTq+GNcoV+FyPOQqRDRENEQ0RDR8HGho7FIsXAw97UeQcS7WPwP6tsrihwXKz8TE5cPJA2TLayRRHKZqv9XtvGvXSOv4zclhu9s+qJFu+/RN52i/2z4AVlxlMeyOPCGt0QklrdEpKS3NzjKlufn5BLheOglfEr03WKX3tWZs9BAfYqX6Ygi3Wfp0S4p4XwGSHxn8zKiBQ247PdVTZ1maJtrykFwLGQZMhySImGaB5doQpnkTqL4nl99fNicM/8114pRQgzVsckIybVh3Tf5RauKIjVDDMp3rwW8VcgOmSJ8TbgKWuq7ZiPRZ8N5IZqJa7hteQU1y2et9f+kPYWYReXbxqVJs1UIUMdNRgQjzw5o5+5tHu98ibiO3oAuzuFBFzBBGNJcMNCxytqA0lViIgqnliikLx1RV5ubfks7BKj8/c6Pd6KXtk9YPL7zypGtdXq+YEUFJDfMcv/Tu4aE2Ct880s47LugpsZ27i1c5NH+m/LGz2NXWgVh8Rywuo7EHrSr8vWJasL7kS1bgBYyd0K+/ki8cjRc81oYGxeKKuT9i8cT4CpaVzurmvHp8HjkrmCD8I/wj/CP8/6nhf1wr3Zyee5gt4HJ5LP8uh0nP79TfxDozSmcJf+WjatR9z3OzrYji7wy+/TnY+YbQFxETEfMTEbPkns6Klkd4KQONnqzpmp56Me57z1eemaJnomeiZ36SZ7Ylj7my63om9+TomeiZ6JkP5Zn9mWzFZefFjopMsh/x4BhPDtCn8eTgMZwc1CjXOtFvuDFsuCypDihI7Ekm13I2KZQLGwwETARMBEwEzEcAmBEzp9xqwc0hH1TkRU5zG6bXbpDRMGBC8pD8kfSN76T2XIjkA1tt33x2S3m2PNnPZdgUdjW/tTSEGZMEgtlCP+W+rXNg267oyDecGZgPx2vNPGhi0jLNfWp64NKZ2IT0wE3R60PnCG7OOL/pRXUDlYrZgp+VLVil2MpNR0635ECmWMA6B5+9cuHmAzcf3zpO4ubjEYDo2puPOYwtZ10v34gs3Da5HGu1mFxdZekFURsOgn5hJmol4ZJ9yISfPzSKmIlIkIS8VgHk06SRklihLB86sJp8GCWU/WHXmX3p1J/PXYR7ZVHQ4qwl5iIO+EAoseoWoFhVwgklXgTg0oJLCy4tj2NpWQDKo8ps7SVQCTmHCJYIlgiWCJaPESzfcW2cbtfEyytPvwoyOz4UnsPMz4bLpRH21wHQvDvkqevEd18D95bvOe4bCVdK2vzyJCu7/1C1SVYKvc/CJB8R9BBVSVaK/NLr2oqt98whb45Ld4HFLhveFRmJZUMMKDGgxIASA8rHGFAu/35gETLx0wHEN8S3+/x0YLz0q1lP+1pwGRq6Bl4menG0zstBq0QKY2FgDJgqZsVVUU2BDHWSpQbiyb5QPCQZYBc5PiUyGYqgTtoMPlpwUolQTjVOAUQYwkE3efWckKdcwZ2MHNUIU6GjzGUU+hUDP8MTLcfAxTArzEDw0KFkN0m3JL/ikgzc4Ce8Lp8k+pIEkmUGusDnu7x/dOD7TP73n/+SmDMoCN0kT22JIfTGfOdIn5ZszbOevI4zk0NLvaf2+vplT+3x+GX7hsWp5M29Bo9fQlcvLy+hQnRP3fYUIT1fJa9Hm6SXZ4n0aM2/KQoJwcud3R/yp08SDQ/O4Rcht6RXdYvk+eUvfr/a6VEyrt2lxW6P1kivXDkJCKzOOBkDn4ueGrux9FQXLsuKyVoopQ07EOtWyb1MEmNHkv+9R1MWhkINtyC9sEl2t9Obv5GY6aFQ5Uc9+hJk7UkxaQg2ueV+bIFtN0koTACEMLdCEVC5V6NTuE/Y2WtIsT6niF2VyjTlOyebONY7uz84vnfjCMboFES4gFvPpp+JT1aIa7xKcCB0IDmQ78EF58uK+d5ruDfgSjCwqam48UHkMhnjQ4rb9dMEGvJtSxY31waMb1b5hOw1MunnwT/Lf+ful748SixvkrfO1WHzK/lNLucJDNDzDxIVum6CGY+IiFOIElKu3VZTBbxGAD3c0hiwzEU1QpFIDKOtq0RmMdT2vRI6UXCNbWZirbuWrcGK7uvGdFjD+GPqwBrGWMMYaxhjRXdEQ0RDRENEQ6zo/pDfbX3tWtJY0f0hVIoV3Tf9HHez9InfaGFFd8wIwIwAvDHDjIBvEouxonvhrFjRHeEf4R/hH+EfK7pvFPoiYiJiYkV39Ez0zEfsmVjRHT0TPXOzPBMruuPJAfr0t+DTeHKAFd0RMBEwETARMDcbMLGi+zefGbgRxaOxojtWdMeK7humVMwWxIruuPnAzcdG4SRuPh4BiGJFdycWK7rj0oJLCy4tuLR89ZpyWNEdwRLBEsESwRIruj8cgGJFd6zo/ulCsaI7VnTHgBIDSgwoMaD8cwWUWNEd8Q3xbdMruq8sllPcSYz9B7omTZTxNri7vbvepwjaf5VLruG6Jgh4ankIIw4SZfNLH5amUgSOvAF1zOGZCSIes5IKlvjC7PcRlZDzK5/M/FznKg12lmPXva6s0TNK+dp8p0keJ6fHrfbZ2e+t/aNW+/Bwv9s5PqI1eto+Oz581/69c9TqHLSPunRmnud7NEn1qCZpuT1LeMpNJm0+e8+2t1ej8eRibX4GfdpfnbxJNCcht0xIt6pN7Tgvx18YCOkn4cgvJktmOdVJX/L4L4uzPRdTQjE5oMzlFvX/GSweQNj30s9PX7fIT8+e/3jxNLI2Nc1G4/r6uq4HwRYPhU10PdHDhh4E8D+g+65OuhHX3FXn7nMCpdJBJpNkal/EpDwQAxGUUsVdZ2BuZxbLJcZpc+OZt4XJ7iTTYjGOJm9PO8TdQYrBCNaFBdGuzYDB5DYp6yeZbfYlU+/p1CIWhc5LMVkcM10GxZKAvDBjttbuap43WNUv3e4J8Szc9albQoobUxAEg4iFEjG4xbPt7RqN2Y3/9dft7THwhBlfYySK8JtUMuWtdW44QpF4ard1fxnsDf2eZibRYijm5dbpHADDwwM/osIfd6r9sQBMCbEaLBEiJCyzEUj17kMCzV0nmDQroBSdDJ3s0TvZD4v2/jrRfRGGXDnznPibgCDNEiZlcr0yREG/Qr965H71vCqY3FfuKkSDHfrkqSRw27qQXEdCTiLNQnbueBgooq+hry3ztXGNxtxGSUibNE2MMx1mI9qkjdydtiYfSTXczm1rsnMzjQCeS+l+0Ro1XMPdhDv9yrSkTXrrHWrcbDRuo8TYcfMWjjLHjatdOleSEV57xysMSiYBk5Hv1OLEwgtVKozYYnGmQkZekNP2WZf8zCy/Zu7cjILIWdYvtl9sV3IF0iUc9086xI/Qm2UJKgq24POVbD3xOozdcYnhQaaFHZ1Bs/wggjPN9X4GczMxl1ye4+7OsBwRreX/8bowon/+1nV2ADCXlzF7lYSj/A+90dk/owRnL8+2tn/c2v2pu/O8+Xynufuivv3jzr9o6W+LrCLKS+5PvzeZKX0MfxOrXJ94avMlczgvSmGW37ralpOTlIvqKmzTBsvLQc3TVBWmmdIslsgonbrMfBs+fT7/CaQfdPXXilM9lT76mGG1NKHZs12SfbxdcWY+y3pJQtsKgkkSRxXz8lXmCh5z6nV/0fEcLRAt8OtYoLtcEmqQOFzNF8pFhIb5L0TT7frO4qJ80nGxRZDEcaZcgKmGeUZSCfEDmZn8FkaKgCvj4Dc3tYLs0L8h+XjITh1WK7+kFnHlUNgo69eDJG4Evtnk//sy6TdiJlQjF2Earf03b48O9rcOO6320Vl7a6e+Xbc3eTHLxNiYqXI/3AEvYQtntTYhfs1fONY18wq5ncbctOXamOk1pM6Uym/cZrnMRLOW39hGKplwtzJu+Ld5eHJOF8KTwlFKAQoE/uUQ5aKWhxnn9Pa2zwx/q+V4DI8/ZFyPaPP8YgoC8As+KOEs5B6i3ju7aflhbbmj+ykqLNwywIWdb7Hv7iVW0l6U4rCT47MuDCYJ3W1D7HyJanZNa+7fTQr3jKkfYfPWP7ulkqlh5lHA84R//g96++y9
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Create a batch operation to cancel process instances"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/process-instances/batch-operations/cancellation"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Cancels multiple running process instances.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          description: "Process instance search filter.",
+          allOf: [
+            {
+              description: "Process instance search filter.",
+              type: "object",
+              allOf: [
+                {
+                  description: "Base process instance search filter.",
+                  type: "object",
+                  properties: {
+                    startDate: {
+                      description: "The start date.",
+                      allOf: [
+                        {
+                          description:
+                            "Date-time property with full advanced search capabilities.",
+                          type: "object",
+                          oneOf: [
+                            {
+                              type: "string",
+                              format: "date-time",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced date-time filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $gt: {
+                                  description:
+                                    "Greater than comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $gte: {
+                                  description:
+                                    "Greater than or equal comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $lt: {
+                                  description:
+                                    "Lower than comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $lte: {
+                                  description:
+                                    "Lower than or equal comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    type: "string",
+                                    format: "date-time",
+                                  },
+                                },
+                              },
+                            },
+                          ],
+                          title: "DateTimeFilterProperty",
+                        },
+                      ],
+                    },
+                    endDate: {
+                      description: "The end date.",
+                      allOf: [
+                        {
+                          description:
+                            "Date-time property with full advanced search capabilities.",
+                          type: "object",
+                          oneOf: [
+                            {
+                              type: "string",
+                              format: "date-time",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced date-time filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $gt: {
+                                  description:
+                                    "Greater than comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $gte: {
+                                  description:
+                                    "Greater than or equal comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $lt: {
+                                  description:
+                                    "Lower than comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $lte: {
+                                  description:
+                                    "Lower than or equal comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    type: "string",
+                                    format: "date-time",
+                                  },
+                                },
+                              },
+                            },
+                          ],
+                          title: "DateTimeFilterProperty",
+                        },
+                      ],
+                    },
+                    state: {
+                      description: "The process instance state.",
+                      allOf: [
+                        {
+                          description:
+                            "ProcessInstanceStateEnum property with full advanced search capabilities.",
+                          type: "object",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                              allOf: [
+                                {
+                                  description:
+                                    "The state, one of ACTIVE, COMPLETED, TERMINATED.",
+                                  enum: ["ACTIVE", "COMPLETED", "TERMINATED"],
+                                  title: "ProcessInstanceStateEnum",
+                                },
+                              ],
+                            },
+                            {
+                              title: "Advanced filter",
+                              description:
+                                "Advanced ProcessInstanceStateEnum filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "The state, one of ACTIVE, COMPLETED, TERMINATED.",
+                                      enum: [
+                                        "ACTIVE",
+                                        "COMPLETED",
+                                        "TERMINATED",
+                                      ],
+                                      title: "ProcessInstanceStateEnum",
+                                    },
+                                  ],
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "The state, one of ACTIVE, COMPLETED, TERMINATED.",
+                                      enum: [
+                                        "ACTIVE",
+                                        "COMPLETED",
+                                        "TERMINATED",
+                                      ],
+                                      title: "ProcessInstanceStateEnum",
+                                    },
+                                  ],
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "The state, one of ACTIVE, COMPLETED, TERMINATED.",
+                                    enum: ["ACTIVE", "COMPLETED", "TERMINATED"],
+                                    title: "ProcessInstanceStateEnum",
+                                  },
+                                },
+                                $like: {
+                                  description:
+                                    "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                  type: "string",
+                                },
+                              },
+                            },
+                          ],
+                          title: "ProcessInstanceStateFilterProperty",
+                        },
+                      ],
+                    },
+                    hasIncident: {
+                      type: "boolean",
+                      description:
+                        "Whether this process instance has a related incident or not.",
+                    },
+                    tenantId: {
+                      description: "The tenant ID.",
+                      allOf: [
+                        {
+                          description:
+                            "String property with full advanced search capabilities.",
+                          type: "object",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced string filter.",
+                              allOf: [
+                                {
+                                  title: "Advanced filter",
+                                  description: "Basic advanced string filter.",
+                                  type: "object",
+                                  properties: {
+                                    $eq: {
+                                      description:
+                                        "Checks for equality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $neq: {
+                                      description:
+                                        "Checks for inequality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $exists: {
+                                      description:
+                                        "Checks if the current property exists.",
+                                      type: "boolean",
+                                    },
+                                    $in: {
+                                      description:
+                                        "Checks if the property matches any of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                    $notIn: {
+                                      description:
+                                        "Checks if the property matches none of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                  },
+                                },
+                                {
+                                  type: "object",
+                                  properties: {
+                                    $like: {
+                                      description:
+                                        "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                      type: "string",
+                                    },
+                                  },
+                                },
+                              ],
+                            },
+                          ],
+                          title: "StringFilterProperty",
+                        },
+                      ],
+                    },
+                    variables: {
+                      description: "The process instance variables.",
+                      type: "array",
+                      items: {
+                        description: "Process instance variable filter.",
+                        type: "object",
+                        properties: {
+                          name: {
+                            description: "Name of the variable.",
+                            type: "string",
+                          },
+                          value: {
+                            description: "The value of the variable.",
+                            allOf: [
+                              {
+                                description:
+                                  "String property with full advanced search capabilities.",
+                                type: "object",
+                                oneOf: [
+                                  {
+                                    type: "string",
+                                    title: "Exact match",
+                                    description: "Matches the value exactly.",
+                                  },
+                                  {
+                                    title: "Advanced filter",
+                                    description: "Advanced string filter.",
+                                    allOf: [
+                                      {
+                                        title: "Advanced filter",
+                                        description:
+                                          "Basic advanced string filter.",
+                                        type: "object",
+                                        properties: {
+                                          $eq: {
+                                            description:
+                                              "Checks for equality with the provided value.",
+                                            type: "string",
+                                          },
+                                          $neq: {
+                                            description:
+                                              "Checks for inequality with the provided value.",
+                                            type: "string",
+                                          },
+                                          $exists: {
+                                            description:
+                                              "Checks if the current property exists.",
+                                            type: "boolean",
+                                          },
+                                          $in: {
+                                            description:
+                                              "Checks if the property matches any of the provided values.",
+                                            type: "array",
+                                            items: { type: "string" },
+                                          },
+                                          $notIn: {
+                                            description:
+                                              "Checks if the property matches none of the provided values.",
+                                            type: "array",
+                                            items: { type: "string" },
+                                          },
+                                        },
+                                      },
+                                      {
+                                        type: "object",
+                                        properties: {
+                                          $like: {
+                                            description:
+                                              "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                            type: "string",
+                                          },
+                                        },
+                                      },
+                                    ],
+                                  },
+                                ],
+                                title: "StringFilterProperty",
+                              },
+                            ],
+                          },
+                        },
+                        required: ["name", "value"],
+                        title: "ProcessInstanceVariableFilterRequest",
+                      },
+                    },
+                    processInstanceKey: {
+                      description: "The key of this process instance.",
+                      allOf: [
+                        {
+                          description:
+                            "String property with basic advanced search capabilities.",
+                          type: "object",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Basic advanced string filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "string",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "string",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: { type: "string" },
+                                },
+                                $notIn: {
+                                  description:
+                                    "Checks if the property matches none of the provided values.",
+                                  type: "array",
+                                  items: { type: "string" },
+                                },
+                              },
+                            },
+                          ],
+                          title: "BasicStringFilterProperty",
+                        },
+                      ],
+                    },
+                    parentProcessInstanceKey: {
+                      description: "The parent process instance key.",
+                      allOf: [
+                        {
+                          description:
+                            "String property with basic advanced search capabilities.",
+                          type: "object",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Basic advanced string filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "string",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "string",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: { type: "string" },
+                                },
+                                $notIn: {
+                                  description:
+                                    "Checks if the property matches none of the provided values.",
+                                  type: "array",
+                                  items: { type: "string" },
+                                },
+                              },
+                            },
+                          ],
+                          title: "BasicStringFilterProperty",
+                        },
+                      ],
+                    },
+                    parentElementInstanceKey: {
+                      description: "The parent element instance key.",
+                      allOf: [
+                        {
+                          description:
+                            "String property with basic advanced search capabilities.",
+                          type: "object",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Basic advanced string filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "string",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "string",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: { type: "string" },
+                                },
+                                $notIn: {
+                                  description:
+                                    "Checks if the property matches none of the provided values.",
+                                  type: "array",
+                                  items: { type: "string" },
+                                },
+                              },
+                            },
+                          ],
+                          title: "BasicStringFilterProperty",
+                        },
+                      ],
+                    },
+                    batchOperationId: {
+                      description: "The batch operation ID.",
+                      allOf: [
+                        {
+                          description:
+                            "String property with full advanced search capabilities.",
+                          type: "object",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced string filter.",
+                              allOf: [
+                                {
+                                  title: "Advanced filter",
+                                  description: "Basic advanced string filter.",
+                                  type: "object",
+                                  properties: {
+                                    $eq: {
+                                      description:
+                                        "Checks for equality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $neq: {
+                                      description:
+                                        "Checks for inequality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $exists: {
+                                      description:
+                                        "Checks if the current property exists.",
+                                      type: "boolean",
+                                    },
+                                    $in: {
+                                      description:
+                                        "Checks if the property matches any of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                    $notIn: {
+                                      description:
+                                        "Checks if the property matches none of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                  },
+                                },
+                                {
+                                  type: "object",
+                                  properties: {
+                                    $like: {
+                                      description:
+                                        "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                      type: "string",
+                                    },
+                                  },
+                                },
+                              ],
+                            },
+                          ],
+                          title: "StringFilterProperty",
+                        },
+                      ],
+                    },
+                    errorMessage: {
+                      description: "The error message related to the process.",
+                      allOf: [
+                        {
+                          description:
+                            "String property with full advanced search capabilities.",
+                          type: "object",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced string filter.",
+                              allOf: [
+                                {
+                                  title: "Advanced filter",
+                                  description: "Basic advanced string filter.",
+                                  type: "object",
+                                  properties: {
+                                    $eq: {
+                                      description:
+                                        "Checks for equality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $neq: {
+                                      description:
+                                        "Checks for inequality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $exists: {
+                                      description:
+                                        "Checks if the current property exists.",
+                                      type: "boolean",
+                                    },
+                                    $in: {
+                                      description:
+                                        "Checks if the property matches any of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                    $notIn: {
+                                      description:
+                                        "Checks if the property matches none of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                  },
+                                },
+                                {
+                                  type: "object",
+                                  properties: {
+                                    $like: {
+                                      description:
+                                        "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                      type: "string",
+                                    },
+                                  },
+                                },
+                              ],
+                            },
+                          ],
+                          title: "StringFilterProperty",
+                        },
+                      ],
+                    },
+                    hasRetriesLeft: {
+                      description:
+                        "Whether the process has failed jobs with retries left.",
+                      type: "boolean",
+                    },
+                    elementInstanceState: {
+                      description:
+                        "The state of the element instances associated with the process instance.",
+                      allOf: [
+                        {
+                          description:
+                            "ElementInstanceStateEnum property with full advanced search capabilities.",
+                          type: "object",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                              allOf: [
+                                {
+                                  description:
+                                    "Element states, one of ACTIVE, COMPLETED, TERMINATED.",
+                                  enum: ["ACTIVE", "COMPLETED", "TERMINATED"],
+                                  title: "ElementInstanceStateEnum",
+                                },
+                              ],
+                            },
+                            {
+                              title: "Advanced filter",
+                              description:
+                                "Advanced ElementInstanceStateEnum filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "Element states, one of ACTIVE, COMPLETED, TERMINATED.",
+                                      enum: [
+                                        "ACTIVE",
+                                        "COMPLETED",
+                                        "TERMINATED",
+                                      ],
+                                      title: "ElementInstanceStateEnum",
+                                    },
+                                  ],
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "Element states, one of ACTIVE, COMPLETED, TERMINATED.",
+                                      enum: [
+                                        "ACTIVE",
+                                        "COMPLETED",
+                                        "TERMINATED",
+                                      ],
+                                      title: "ElementInstanceStateEnum",
+                                    },
+                                  ],
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "Element states, one of ACTIVE, COMPLETED, TERMINATED.",
+                                    enum: ["ACTIVE", "COMPLETED", "TERMINATED"],
+                                    title: "ElementInstanceStateEnum",
+                                  },
+                                },
+                                $like: {
+                                  description:
+                                    "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                  type: "string",
+                                },
+                              },
+                            },
+                          ],
+                          title: "ElementInstanceStateFilterProperty",
+                        },
+                      ],
+                    },
+                    elementId: {
+                      description:
+                        "The element ID associated with the process instance.",
+                      allOf: [
+                        {
+                          description:
+                            "String property with full advanced search capabilities.",
+                          type: "object",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced string filter.",
+                              allOf: [
+                                {
+                                  title: "Advanced filter",
+                                  description: "Basic advanced string filter.",
+                                  type: "object",
+                                  properties: {
+                                    $eq: {
+                                      description:
+                                        "Checks for equality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $neq: {
+                                      description:
+                                        "Checks for inequality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $exists: {
+                                      description:
+                                        "Checks if the current property exists.",
+                                      type: "boolean",
+                                    },
+                                    $in: {
+                                      description:
+                                        "Checks if the property matches any of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                    $notIn: {
+                                      description:
+                                        "Checks if the property matches none of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                  },
+                                },
+                                {
+                                  type: "object",
+                                  properties: {
+                                    $like: {
+                                      description:
+                                        "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                      type: "string",
+                                    },
+                                  },
+                                },
+                              ],
+                            },
+                          ],
+                          title: "StringFilterProperty",
+                        },
+                      ],
+                    },
+                    hasElementInstanceIncident: {
+                      description:
+                        "Whether the element instance has an incident or not.",
+                      type: "boolean",
+                    },
+                    incidentErrorHashCode: {
+                      description:
+                        "The incident error hash code, associated with this process.",
+                      type: "integer",
+                      format: "int32",
+                    },
+                  },
+                  title: "BaseProcessInstanceFilter",
+                },
+              ],
+              properties: {
+                processDefinitionId: {
+                  description: "The process definition ID.",
+                  allOf: [
+                    {
+                      description:
+                        "String property with full advanced search capabilities.",
+                      type: "object",
+                      oneOf: [
+                        {
+                          type: "string",
+                          title: "Exact match",
+                          description: "Matches the value exactly.",
+                        },
+                        {
+                          title: "Advanced filter",
+                          description: "Advanced string filter.",
+                          allOf: [
+                            {
+                              title: "Advanced filter",
+                              description: "Basic advanced string filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "string",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "string",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: { type: "string" },
+                                },
+                                $notIn: {
+                                  description:
+                                    "Checks if the property matches none of the provided values.",
+                                  type: "array",
+                                  items: { type: "string" },
+                                },
+                              },
+                            },
+                            {
+                              type: "object",
+                              properties: {
+                                $like: {
+                                  description:
+                                    "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                  type: "string",
+                                },
+                              },
+                            },
+                          ],
+                        },
+                      ],
+                      title: "StringFilterProperty",
+                    },
+                  ],
+                },
+                processDefinitionName: {
+                  description: "The process definition name.",
+                  allOf: [
+                    {
+                      description:
+                        "String property with full advanced search capabilities.",
+                      type: "object",
+                      oneOf: [
+                        {
+                          type: "string",
+                          title: "Exact match",
+                          description: "Matches the value exactly.",
+                        },
+                        {
+                          title: "Advanced filter",
+                          description: "Advanced string filter.",
+                          allOf: [
+                            {
+                              title: "Advanced filter",
+                              description: "Basic advanced string filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "string",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "string",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: { type: "string" },
+                                },
+                                $notIn: {
+                                  description:
+                                    "Checks if the property matches none of the provided values.",
+                                  type: "array",
+                                  items: { type: "string" },
+                                },
+                              },
+                            },
+                            {
+                              type: "object",
+                              properties: {
+                                $like: {
+                                  description:
+                                    "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                  type: "string",
+                                },
+                              },
+                            },
+                          ],
+                        },
+                      ],
+                      title: "StringFilterProperty",
+                    },
+                  ],
+                },
+                processDefinitionVersion: {
+                  description: "The process definition version.",
+                  allOf: [
+                    {
+                      description:
+                        "Integer property with advanced search capabilities.",
+                      type: "object",
+                      oneOf: [
+                        {
+                          type: "integer",
+                          format: "int32",
+                          title: "Exact match",
+                          description: "Matches the value exactly.",
+                        },
+                        {
+                          title: "Advanced filter",
+                          description: "Advanced integer (int32) filter.",
+                          type: "object",
+                          properties: {
+                            $eq: {
+                              description:
+                                "Checks for equality with the provided value.",
+                              type: "integer",
+                              format: "int32",
+                            },
+                            $neq: {
+                              description:
+                                "Checks for inequality with the provided value.",
+                              type: "integer",
+                              format: "int32",
+                            },
+                            $exists: {
+                              description:
+                                "Checks if the current property exists.",
+                              type: "boolean",
+                            },
+                            $gt: {
+                              description:
+                                "Greater than comparison with the provided value.",
+                              type: "integer",
+                              format: "int32",
+                            },
+                            $gte: {
+                              description:
+                                "Greater than or equal comparison with the provided value.",
+                              type: "integer",
+                              format: "int32",
+                            },
+                            $lt: {
+                              description:
+                                "Lower than comparison with the provided value.",
+                              type: "integer",
+                              format: "int32",
+                            },
+                            $lte: {
+                              description:
+                                "Lower than or equal comparison with the provided value.",
+                              type: "integer",
+                              format: "int32",
+                            },
+                            $in: {
+                              description:
+                                "Checks if the property matches any of the provided values.",
+                              type: "array",
+                              items: { type: "integer", format: "int32" },
+                            },
+                          },
+                        },
+                      ],
+                      title: "IntegerFilterProperty",
+                    },
+                  ],
+                },
+                processDefinitionVersionTag: {
+                  description: "The process definition version tag.",
+                  allOf: [
+                    {
+                      description:
+                        "String property with full advanced search capabilities.",
+                      type: "object",
+                      oneOf: [
+                        {
+                          type: "string",
+                          title: "Exact match",
+                          description: "Matches the value exactly.",
+                        },
+                        {
+                          title: "Advanced filter",
+                          description: "Advanced string filter.",
+                          allOf: [
+                            {
+                              title: "Advanced filter",
+                              description: "Basic advanced string filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "string",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "string",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: { type: "string" },
+                                },
+                                $notIn: {
+                                  description:
+                                    "Checks if the property matches none of the provided values.",
+                                  type: "array",
+                                  items: { type: "string" },
+                                },
+                              },
+                            },
+                            {
+                              type: "object",
+                              properties: {
+                                $like: {
+                                  description:
+                                    "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                  type: "string",
+                                },
+                              },
+                            },
+                          ],
+                        },
+                      ],
+                      title: "StringFilterProperty",
+                    },
+                  ],
+                },
+                processDefinitionKey: {
+                  description: "The process definition key.",
+                  allOf: [
+                    {
+                      description:
+                        "String property with basic advanced search capabilities.",
+                      type: "object",
+                      oneOf: [
+                        {
+                          type: "string",
+                          title: "Exact match",
+                          description: "Matches the value exactly.",
+                        },
+                        {
+                          title: "Advanced filter",
+                          description: "Basic advanced string filter.",
+                          type: "object",
+                          properties: {
+                            $eq: {
+                              description:
+                                "Checks for equality with the provided value.",
+                              type: "string",
+                            },
+                            $neq: {
+                              description:
+                                "Checks for inequality with the provided value.",
+                              type: "string",
+                            },
+                            $exists: {
+                              description:
+                                "Checks if the current property exists.",
+                              type: "boolean",
+                            },
+                            $in: {
+                              description:
+                                "Checks if the property matches any of the provided values.",
+                              type: "array",
+                              items: { type: "string" },
+                            },
+                            $notIn: {
+                              description:
+                                "Checks if the property matches none of the provided values.",
+                              type: "array",
+                              items: { type: "string" },
+                            },
+                          },
+                        },
+                      ],
+                      title: "BasicStringFilterProperty",
+                    },
+                  ],
+                },
+              },
+              title: "ProcessInstanceFilterFields",
+            },
+            {
+              type: "object",
+              properties: {
+                $or: {
+                  description:
+                    'Defines a list of alternative filter groups combined using OR logic. Each object in the array is evaluated independently, and the filter matches if any one of them is satisfied.\n\nTop-level fields and the `$or` clause are combined using AND logic — meaning: (top-level filters) AND (any of the `$or` filters) must match.\n<br>\n<em>Example:</em>\n\n```json\n{\n  "state": "ACTIVE",\n  "tenantId": 123,\n  "$or": [\n    { "processDefinitionId": "process_v1" },\n    { "processDefinitionId": "process_v2", "hasIncident": true }\n  ]\n}\n```\nThis matches process instances that:\n\n<ul style="padding-left: 20px; margin-left: 20px;">\n  <li style="list-style-type: disc;">are in <em>ACTIVE</em> state</li>\n  <li style="list-style-type: disc;">have tenant ID equal to <em>123</em></li>\n  <li style="list-style-type: disc;">and match either:\n    <ul style="padding-left: 20px; margin-left: 20px;">\n      <li style="list-style-type: circle;"><code>processDefinitionId</code> is <em>process_v1</em>, or</li>\n      <li style="list-style-type: circle;"><code>processDefinitionId</code> is <em>process_v2</em> and <code>hasIncident</code> is <em>true</em></li>\n    </ul>\n  </li>\n</ul>\n<br>\n<p>Note: Using complex <code>$or</code> conditions may impact performance, use with caution in high-volume environments.\n',
+                  type: "array",
+                  items: {
+                    description: "Process instance search filter.",
+                    type: "object",
+                    allOf: [
+                      {
+                        description: "Base process instance search filter.",
+                        type: "object",
+                        properties: {
+                          startDate: {
+                            description: "The start date.",
+                            allOf: [
+                              {
+                                description:
+                                  "Date-time property with full advanced search capabilities.",
+                                type: "object",
+                                oneOf: [
+                                  {
+                                    type: "string",
+                                    format: "date-time",
+                                    title: "Exact match",
+                                    description: "Matches the value exactly.",
+                                  },
+                                  {
+                                    title: "Advanced filter",
+                                    description: "Advanced date-time filter.",
+                                    type: "object",
+                                    properties: {
+                                      $eq: {
+                                        description:
+                                          "Checks for equality with the provided value.",
+                                        type: "string",
+                                        format: "date-time",
+                                      },
+                                      $neq: {
+                                        description:
+                                          "Checks for inequality with the provided value.",
+                                        type: "string",
+                                        format: "date-time",
+                                      },
+                                      $exists: {
+                                        description:
+                                          "Checks if the current property exists.",
+                                        type: "boolean",
+                                      },
+                                      $gt: {
+                                        description:
+                                          "Greater than comparison with the provided value.",
+                                        type: "string",
+                                        format: "date-time",
+                                      },
+                                      $gte: {
+                                        description:
+                                          "Greater than or equal comparison with the provided value.",
+                                        type: "string",
+                                        format: "date-time",
+                                      },
+                                      $lt: {
+                                        description:
+                                          "Lower than comparison with the provided value.",
+                                        type: "string",
+                                        format: "date-time",
+                                      },
+                                      $lte: {
+                                        description:
+                                          "Lower than or equal comparison with the provided value.",
+                                        type: "string",
+                                        format: "date-time",
+                                      },
+                                      $in: {
+                                        description:
+                                          "Checks if the property matches any of the provided values.",
+                                        type: "array",
+                                        items: {
+                                          type: "string",
+                                          format: "date-time",
+                                        },
+                                      },
+                                    },
+                                  },
+                                ],
+                                title: "DateTimeFilterProperty",
+                              },
+                            ],
+                          },
+                          endDate: {
+                            description: "The end date.",
+                            allOf: [
+                              {
+                                description:
+                                  "Date-time property with full advanced search capabilities.",
+                                type: "object",
+                                oneOf: [
+                                  {
+                                    type: "string",
+                                    format: "date-time",
+                                    title: "Exact match",
+                                    description: "Matches the value exactly.",
+                                  },
+                                  {
+                                    title: "Advanced filter",
+                                    description: "Advanced date-time filter.",
+                                    type: "object",
+                                    properties: {
+                                      $eq: {
+                                        description:
+                                          "Checks for equality with the provided value.",
+                                        type: "string",
+                                        format: "date-time",
+                                      },
+                                      $neq: {
+                                        description:
+                                          "Checks for inequality with the provided value.",
+                                        type: "string",
+                                        format: "date-time",
+                                      },
+                                      $exists: {
+                                        description:
+                                          "Checks if the current property exists.",
+                                        type: "boolean",
+                                      },
+                                      $gt: {
+                                        description:
+                                          "Greater than comparison with the provided value.",
+                                        type: "string",
+                                        format: "date-time",
+                                      },
+                                      $gte: {
+                                        description:
+                                          "Greater than or equal comparison with the provided value.",
+                                        type: "string",
+                                        format: "date-time",
+                                      },
+                                      $lt: {
+                                        description:
+                                          "Lower than comparison with the provided value.",
+                                        type: "string",
+                                        format: "date-time",
+                                      },
+                                      $lte: {
+                                        description:
+                                          "Lower than or equal comparison with the provided value.",
+                                        type: "string",
+                                        format: "date-time",
+                                      },
+                                      $in: {
+                                        description:
+                                          "Checks if the property matches any of the provided values.",
+                                        type: "array",
+                                        items: {
+                                          type: "string",
+                                          format: "date-time",
+                                        },
+                                      },
+                                    },
+                                  },
+                                ],
+                                title: "DateTimeFilterProperty",
+                              },
+                            ],
+                          },
+                          state: {
+                            description: "The process instance state.",
+                            allOf: [
+                              {
+                                description:
+                                  "ProcessInstanceStateEnum property with full advanced search capabilities.",
+                                type: "object",
+                                oneOf: [
+                                  {
+                                    type: "string",
+                                    title: "Exact match",
+                                    description: "Matches the value exactly.",
+                                    allOf: [
+                                      {
+                                        description:
+                                          "The state, one of ACTIVE, COMPLETED, TERMINATED.",
+                                        enum: [
+                                          "ACTIVE",
+                                          "COMPLETED",
+                                          "TERMINATED",
+                                        ],
+                                        title: "ProcessInstanceStateEnum",
+                                      },
+                                    ],
+                                  },
+                                  {
+                                    title: "Advanced filter",
+                                    description:
+                                      "Advanced ProcessInstanceStateEnum filter.",
+                                    type: "object",
+                                    properties: {
+                                      $eq: {
+                                        description:
+                                          "Checks for equality with the provided value.",
+                                        allOf: [
+                                          {
+                                            description:
+                                              "The state, one of ACTIVE, COMPLETED, TERMINATED.",
+                                            enum: [
+                                              "ACTIVE",
+                                              "COMPLETED",
+                                              "TERMINATED",
+                                            ],
+                                            title: "ProcessInstanceStateEnum",
+                                          },
+                                        ],
+                                      },
+                                      $neq: {
+                                        description:
+                                          "Checks for inequality with the provided value.",
+                                        allOf: [
+                                          {
+                                            description:
+                                              "The state, one of ACTIVE, COMPLETED, TERMINATED.",
+                                            enum: [
+                                              "ACTIVE",
+                                              "COMPLETED",
+                                              "TERMINATED",
+                                            ],
+                                            title: "ProcessInstanceStateEnum",
+                                          },
+                                        ],
+                                      },
+                                      $exists: {
+                                        description:
+                                          "Checks if the current property exists.",
+                                        type: "boolean",
+                                      },
+                                      $in: {
+                                        description:
+                                          "Checks if the property matches any of the provided values.",
+                                        type: "array",
+                                        items: {
+                                          description:
+                                            "The state, one of ACTIVE, COMPLETED, TERMINATED.",
+                                          enum: [
+                                            "ACTIVE",
+                                            "COMPLETED",
+                                            "TERMINATED",
+                                          ],
+                                          title: "ProcessInstanceStateEnum",
+                                        },
+                                      },
+                                      $like: {
+                                        description:
+                                          "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                        type: "string",
+                                      },
+                                    },
+                                  },
+                                ],
+                                title: "ProcessInstanceStateFilterProperty",
+                              },
+                            ],
+                          },
+                          hasIncident: {
+                            type: "boolean",
+                            description:
+                              "Whether this process instance has a related incident or not.",
+                          },
+                          tenantId: {
+                            description: "The tenant ID.",
+                            allOf: [
+                              {
+                                description:
+                                  "String property with full advanced search capabilities.",
+                                type: "object",
+                                oneOf: [
+                                  {
+                                    type: "string",
+                                    title: "Exact match",
+                                    description: "Matches the value exactly.",
+                                  },
+                                  {
+                                    title: "Advanced filter",
+                                    description: "Advanced string filter.",
+                                    allOf: [
+                                      {
+                                        title: "Advanced filter",
+                                        description:
+                                          "Basic advanced string filter.",
+                                        type: "object",
+                                        properties: {
+                                          $eq: {
+                                            description:
+                                              "Checks for equality with the provided value.",
+                                            type: "string",
+                                          },
+                                          $neq: {
+                                            description:
+                                              "Checks for inequality with the provided value.",
+                                            type: "string",
+                                          },
+                                          $exists: {
+                                            description:
+                                              "Checks if the current property exists.",
+                                            type: "boolean",
+                                          },
+                                          $in: {
+                                            description:
+                                              "Checks if the property matches any of the provided values.",
+                                            type: "array",
+                                            items: { type: "string" },
+                                          },
+                                          $notIn: {
+                                            description:
+                                              "Checks if the property matches none of the provided values.",
+                                            type: "array",
+                                            items: { type: "string" },
+                                          },
+                                        },
+                                      },
+                                      {
+                                        type: "object",
+                                        properties: {
+                                          $like: {
+                                            description:
+                                              "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                            type: "string",
+                                          },
+                                        },
+                                      },
+                                    ],
+                                  },
+                                ],
+                                title: "StringFilterProperty",
+                              },
+                            ],
+                          },
+                          variables: {
+                            description: "The process instance variables.",
+                            type: "array",
+                            items: {
+                              description: "Process instance variable filter.",
+                              type: "object",
+                              properties: {
+                                name: {
+                                  description: "Name of the variable.",
+                                  type: "string",
+                                },
+                                value: {
+                                  description: "The value of the variable.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "String property with full advanced search capabilities.",
+                                      type: "object",
+                                      oneOf: [
+                                        {
+                                          type: "string",
+                                          title: "Exact match",
+                                          description:
+                                            "Matches the value exactly.",
+                                        },
+                                        {
+                                          title: "Advanced filter",
+                                          description:
+                                            "Advanced string filter.",
+                                          allOf: [
+                                            {
+                                              title: "Advanced filter",
+                                              description:
+                                                "Basic advanced string filter.",
+                                              type: "object",
+                                              properties: {
+                                                $eq: {
+                                                  description:
+                                                    "Checks for equality with the provided value.",
+                                                  type: "string",
+                                                },
+                                                $neq: {
+                                                  description:
+                                                    "Checks for inequality with the provided value.",
+                                                  type: "string",
+                                                },
+                                                $exists: {
+                                                  description:
+                                                    "Checks if the current property exists.",
+                                                  type: "boolean",
+                                                },
+                                                $in: {
+                                                  description:
+                                                    "Checks if the property matches any of the provided values.",
+                                                  type: "array",
+                                                  items: { type: "string" },
+                                                },
+                                                $notIn: {
+                                                  description:
+                                                    "Checks if the property matches none of the provided values.",
+                                                  type: "array",
+                                                  items: { type: "string" },
+                                                },
+                                              },
+                                            },
+                                            {
+                                              type: "object",
+                                              properties: {
+                                                $like: {
+                                                  description:
+                                                    "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                                  type: "string",
+                                                },
+                                              },
+                                            },
+                                          ],
+                                        },
+                                      ],
+                                      title: "StringFilterProperty",
+                                    },
+                                  ],
+                                },
+                              },
+                              required: ["name", "value"],
+                              title: "ProcessInstanceVariableFilterRequest",
+                            },
+                          },
+                          processInstanceKey: {
+                            description: "The key of this process instance.",
+                            allOf: [
+                              {
+                                description:
+                                  "String property with basic advanced search capabilities.",
+                                type: "object",
+                                oneOf: [
+                                  {
+                                    type: "string",
+                                    title: "Exact match",
+                                    description: "Matches the value exactly.",
+                                  },
+                                  {
+                                    title: "Advanced filter",
+                                    description:
+                                      "Basic advanced string filter.",
+                                    type: "object",
+                                    properties: {
+                                      $eq: {
+                                        description:
+                                          "Checks for equality with the provided value.",
+                                        type: "string",
+                                      },
+                                      $neq: {
+                                        description:
+                                          "Checks for inequality with the provided value.",
+                                        type: "string",
+                                      },
+                                      $exists: {
+                                        description:
+                                          "Checks if the current property exists.",
+                                        type: "boolean",
+                                      },
+                                      $in: {
+                                        description:
+                                          "Checks if the property matches any of the provided values.",
+                                        type: "array",
+                                        items: { type: "string" },
+                                      },
+                                      $notIn: {
+                                        description:
+                                          "Checks if the property matches none of the provided values.",
+                                        type: "array",
+                                        items: { type: "string" },
+                                      },
+                                    },
+                                  },
+                                ],
+                                title: "BasicStringFilterProperty",
+                              },
+                            ],
+                          },
+                          parentProcessInstanceKey: {
+                            description: "The parent process instance key.",
+                            allOf: [
+                              {
+                                description:
+                                  "String property with basic advanced search capabilities.",
+                                type: "object",
+                                oneOf: [
+                                  {
+                                    type: "string",
+                                    title: "Exact match",
+                                    description: "Matches the value exactly.",
+                                  },
+                                  {
+                                    title: "Advanced filter",
+                                    description:
+                                      "Basic advanced string filter.",
+                                    type: "object",
+                                    properties: {
+                                      $eq: {
+                                        description:
+                                          "Checks for equality with the provided value.",
+                                        type: "string",
+                                      },
+                                      $neq: {
+                                        description:
+                                          "Checks for inequality with the provided value.",
+                                        type: "string",
+                                      },
+                                      $exists: {
+                                        description:
+                                          "Checks if the current property exists.",
+                                        type: "boolean",
+                                      },
+                                      $in: {
+                                        description:
+                                          "Checks if the property matches any of the provided values.",
+                                        type: "array",
+                                        items: { type: "string" },
+                                      },
+                                      $notIn: {
+                                        description:
+                                          "Checks if the property matches none of the provided values.",
+                                        type: "array",
+                                        items: { type: "string" },
+                                      },
+                                    },
+                                  },
+                                ],
+                                title: "BasicStringFilterProperty",
+                              },
+                            ],
+                          },
+                          parentElementInstanceKey: {
+                            description: "The parent element instance key.",
+                            allOf: [
+                              {
+                                description:
+                                  "String property with basic advanced search capabilities.",
+                                type: "object",
+                                oneOf: [
+                                  {
+                                    type: "string",
+                                    title: "Exact match",
+                                    description: "Matches the value exactly.",
+                                  },
+                                  {
+                                    title: "Advanced filter",
+                                    description:
+                                      "Basic advanced string filter.",
+                                    type: "object",
+                                    properties: {
+                                      $eq: {
+                                        description:
+                                          "Checks for equality with the provided value.",
+                                        type: "string",
+                                      },
+                                      $neq: {
+                                        description:
+                                          "Checks for inequality with the provided value.",
+                                        type: "string",
+                                      },
+                                      $exists: {
+                                        description:
+                                          "Checks if the current property exists.",
+                                        type: "boolean",
+                                      },
+                                      $in: {
+                                        description:
+                                          "Checks if the property matches any of the provided values.",
+                                        type: "array",
+                                        items: { type: "string" },
+                                      },
+                                      $notIn: {
+                                        description:
+                                          "Checks if the property matches none of the provided values.",
+                                        type: "array",
+                                        items: { type: "string" },
+                                      },
+                                    },
+                                  },
+                                ],
+                                title: "BasicStringFilterProperty",
+                              },
+                            ],
+                          },
+                          batchOperationId: {
+                            description: "The batch operation ID.",
+                            allOf: [
+                              {
+                                description:
+                                  "String property with full advanced search capabilities.",
+                                type: "object",
+                                oneOf: [
+                                  {
+                                    type: "string",
+                                    title: "Exact match",
+                                    description: "Matches the value exactly.",
+                                  },
+                                  {
+                                    title: "Advanced filter",
+                                    description: "Advanced string filter.",
+                                    allOf: [
+                                      {
+                                        title: "Advanced filter",
+                                        description:
+                                          "Basic advanced string filter.",
+                                        type: "object",
+                                        properties: {
+                                          $eq: {
+                                            description:
+                                              "Checks for equality with the provided value.",
+                                            type: "string",
+                                          },
+                                          $neq: {
+                                            description:
+                                              "Checks for inequality with the provided value.",
+                                            type: "string",
+                                          },
+                                          $exists: {
+                                            description:
+                                              "Checks if the current property exists.",
+                                            type: "boolean",
+                                          },
+                                          $in: {
+                                            description:
+                                              "Checks if the property matches any of the provided values.",
+                                            type: "array",
+                                            items: { type: "string" },
+                                          },
+                                          $notIn: {
+                                            description:
+                                              "Checks if the property matches none of the provided values.",
+                                            type: "array",
+                                            items: { type: "string" },
+                                          },
+                                        },
+                                      },
+                                      {
+                                        type: "object",
+                                        properties: {
+                                          $like: {
+                                            description:
+                                              "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                            type: "string",
+                                          },
+                                        },
+                                      },
+                                    ],
+                                  },
+                                ],
+                                title: "StringFilterProperty",
+                              },
+                            ],
+                          },
+                          errorMessage: {
+                            description:
+                              "The error message related to the process.",
+                            allOf: [
+                              {
+                                description:
+                                  "String property with full advanced search capabilities.",
+                                type: "object",
+                                oneOf: [
+                                  {
+                                    type: "string",
+                                    title: "Exact match",
+                                    description: "Matches the value exactly.",
+                                  },
+                                  {
+                                    title: "Advanced filter",
+                                    description: "Advanced string filter.",
+                                    allOf: [
+                                      {
+                                        title: "Advanced filter",
+                                        description:
+                                          "Basic advanced string filter.",
+                                        type: "object",
+                                        properties: {
+                                          $eq: {
+                                            description:
+                                              "Checks for equality with the provided value.",
+                                            type: "string",
+                                          },
+                                          $neq: {
+                                            description:
+                                              "Checks for inequality with the provided value.",
+                                            type: "string",
+                                          },
+                                          $exists: {
+                                            description:
+                                              "Checks if the current property exists.",
+                                            type: "boolean",
+                                          },
+                                          $in: {
+                                            description:
+                                              "Checks if the property matches any of the provided values.",
+                                            type: "array",
+                                            items: { type: "string" },
+                                          },
+                                          $notIn: {
+                                            description:
+                                              "Checks if the property matches none of the provided values.",
+                                            type: "array",
+                                            items: { type: "string" },
+                                          },
+                                        },
+                                      },
+                                      {
+                                        type: "object",
+                                        properties: {
+                                          $like: {
+                                            description:
+                                              "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                            type: "string",
+                                          },
+                                        },
+                                      },
+                                    ],
+                                  },
+                                ],
+                                title: "StringFilterProperty",
+                              },
+                            ],
+                          },
+                          hasRetriesLeft: {
+                            description:
+                              "Whether the process has failed jobs with retries left.",
+                            type: "boolean",
+                          },
+                          elementInstanceState: {
+                            description:
+                              "The state of the element instances associated with the process instance.",
+                            allOf: [
+                              {
+                                description:
+                                  "ElementInstanceStateEnum property with full advanced search capabilities.",
+                                type: "object",
+                                oneOf: [
+                                  {
+                                    type: "string",
+                                    title: "Exact match",
+                                    description: "Matches the value exactly.",
+                                    allOf: [
+                                      {
+                                        description:
+                                          "Element states, one of ACTIVE, COMPLETED, TERMINATED.",
+                                        enum: [
+                                          "ACTIVE",
+                                          "COMPLETED",
+                                          "TERMINATED",
+                                        ],
+                                        title: "ElementInstanceStateEnum",
+                                      },
+                                    ],
+                                  },
+                                  {
+                                    title: "Advanced filter",
+                                    description:
+                                      "Advanced ElementInstanceStateEnum filter.",
+                                    type: "object",
+                                    properties: {
+                                      $eq: {
+                                        description:
+                                          "Checks for equality with the provided value.",
+                                        allOf: [
+                                          {
+                                            description:
+                                              "Element states, one of ACTIVE, COMPLETED, TERMINATED.",
+                                            enum: [
+                                              "ACTIVE",
+                                              "COMPLETED",
+                                              "TERMINATED",
+                                            ],
+                                            title: "ElementInstanceStateEnum",
+                                          },
+                                        ],
+                                      },
+                                      $neq: {
+                                        description:
+                                          "Checks for inequality with the provided value.",
+                                        allOf: [
+                                          {
+                                            description:
+                                              "Element states, one of ACTIVE, COMPLETED, TERMINATED.",
+                                            enum: [
+                                              "ACTIVE",
+                                              "COMPLETED",
+                                              "TERMINATED",
+                                            ],
+                                            title: "ElementInstanceStateEnum",
+                                          },
+                                        ],
+                                      },
+                                      $exists: {
+                                        description:
+                                          "Checks if the current property exists.",
+                                        type: "boolean",
+                                      },
+                                      $in: {
+                                        description:
+                                          "Checks if the property matches any of the provided values.",
+                                        type: "array",
+                                        items: {
+                                          description:
+                                            "Element states, one of ACTIVE, COMPLETED, TERMINATED.",
+                                          enum: [
+                                            "ACTIVE",
+                                            "COMPLETED",
+                                            "TERMINATED",
+                                          ],
+                                          title: "ElementInstanceStateEnum",
+                                        },
+                                      },
+                                      $like: {
+                                        description:
+                                          "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                        type: "string",
+                                      },
+                                    },
+                                  },
+                                ],
+                                title: "ElementInstanceStateFilterProperty",
+                              },
+                            ],
+                          },
+                          elementId: {
+                            description:
+                              "The element ID associated with the process instance.",
+                            allOf: [
+                              {
+                                description:
+                                  "String property with full advanced search capabilities.",
+                                type: "object",
+                                oneOf: [
+                                  {
+                                    type: "string",
+                                    title: "Exact match",
+                                    description: "Matches the value exactly.",
+                                  },
+                                  {
+                                    title: "Advanced filter",
+                                    description: "Advanced string filter.",
+                                    allOf: [
+                                      {
+                                        title: "Advanced filter",
+                                        description:
+                                          "Basic advanced string filter.",
+                                        type: "object",
+                                        properties: {
+                                          $eq: {
+                                            description:
+                                              "Checks for equality with the provided value.",
+                                            type: "string",
+                                          },
+                                          $neq: {
+                                            description:
+                                              "Checks for inequality with the provided value.",
+                                            type: "string",
+                                          },
+                                          $exists: {
+                                            description:
+                                              "Checks if the current property exists.",
+                                            type: "boolean",
+                                          },
+                                          $in: {
+                                            description:
+                                              "Checks if the property matches any of the provided values.",
+                                            type: "array",
+                                            items: { type: "string" },
+                                          },
+                                          $notIn: {
+                                            description:
+                                              "Checks if the property matches none of the provided values.",
+                                            type: "array",
+                                            items: { type: "string" },
+                                          },
+                                        },
+                                      },
+                                      {
+                                        type: "object",
+                                        properties: {
+                                          $like: {
+                                            description:
+                                              "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                            type: "string",
+                                          },
+                                        },
+                                      },
+                                    ],
+                                  },
+                                ],
+                                title: "StringFilterProperty",
+                              },
+                            ],
+                          },
+                          hasElementInstanceIncident: {
+                            description:
+                              "Whether the element instance has an incident or not.",
+                            type: "boolean",
+                          },
+                          incidentErrorHashCode: {
+                            description:
+                              "The incident error hash code, associated with this process.",
+                            type: "integer",
+                            format: "int32",
+                          },
+                        },
+                        title: "BaseProcessInstanceFilter",
+                      },
+                    ],
+                    properties: {
+                      processDefinitionId: {
+                        description: "The process definition ID.",
+                        allOf: [
+                          {
+                            description:
+                              "String property with full advanced search capabilities.",
+                            type: "object",
+                            oneOf: [
+                              {
+                                type: "string",
+                                title: "Exact match",
+                                description: "Matches the value exactly.",
+                              },
+                              {
+                                title: "Advanced filter",
+                                description: "Advanced string filter.",
+                                allOf: [
+                                  {
+                                    title: "Advanced filter",
+                                    description:
+                                      "Basic advanced string filter.",
+                                    type: "object",
+                                    properties: {
+                                      $eq: {
+                                        description:
+                                          "Checks for equality with the provided value.",
+                                        type: "string",
+                                      },
+                                      $neq: {
+                                        description:
+                                          "Checks for inequality with the provided value.",
+                                        type: "string",
+                                      },
+                                      $exists: {
+                                        description:
+                                          "Checks if the current property exists.",
+                                        type: "boolean",
+                                      },
+                                      $in: {
+                                        description:
+                                          "Checks if the property matches any of the provided values.",
+                                        type: "array",
+                                        items: { type: "string" },
+                                      },
+                                      $notIn: {
+                                        description:
+                                          "Checks if the property matches none of the provided values.",
+                                        type: "array",
+                                        items: { type: "string" },
+                                      },
+                                    },
+                                  },
+                                  {
+                                    type: "object",
+                                    properties: {
+                                      $like: {
+                                        description:
+                                          "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                        type: "string",
+                                      },
+                                    },
+                                  },
+                                ],
+                              },
+                            ],
+                            title: "StringFilterProperty",
+                          },
+                        ],
+                      },
+                      processDefinitionName: {
+                        description: "The process definition name.",
+                        allOf: [
+                          {
+                            description:
+                              "String property with full advanced search capabilities.",
+                            type: "object",
+                            oneOf: [
+                              {
+                                type: "string",
+                                title: "Exact match",
+                                description: "Matches the value exactly.",
+                              },
+                              {
+                                title: "Advanced filter",
+                                description: "Advanced string filter.",
+                                allOf: [
+                                  {
+                                    title: "Advanced filter",
+                                    description:
+                                      "Basic advanced string filter.",
+                                    type: "object",
+                                    properties: {
+                                      $eq: {
+                                        description:
+                                          "Checks for equality with the provided value.",
+                                        type: "string",
+                                      },
+                                      $neq: {
+                                        description:
+                                          "Checks for inequality with the provided value.",
+                                        type: "string",
+                                      },
+                                      $exists: {
+                                        description:
+                                          "Checks if the current property exists.",
+                                        type: "boolean",
+                                      },
+                                      $in: {
+                                        description:
+                                          "Checks if the property matches any of the provided values.",
+                                        type: "array",
+                                        items: { type: "string" },
+                                      },
+                                      $notIn: {
+                                        description:
+                                          "Checks if the property matches none of the provided values.",
+                                        type: "array",
+                                        items: { type: "string" },
+                                      },
+                                    },
+                                  },
+                                  {
+                                    type: "object",
+                                    properties: {
+                                      $like: {
+                                        description:
+                                          "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                        type: "string",
+                                      },
+                                    },
+                                  },
+                                ],
+                              },
+                            ],
+                            title: "StringFilterProperty",
+                          },
+                        ],
+                      },
+                      processDefinitionVersion: {
+                        description: "The process definition version.",
+                        allOf: [
+                          {
+                            description:
+                              "Integer property with advanced search capabilities.",
+                            type: "object",
+                            oneOf: [
+                              {
+                                type: "integer",
+                                format: "int32",
+                                title: "Exact match",
+                                description: "Matches the value exactly.",
+                              },
+                              {
+                                title: "Advanced filter",
+                                description: "Advanced integer (int32) filter.",
+                                type: "object",
+                                properties: {
+                                  $eq: {
+                                    description:
+                                      "Checks for equality with the provided value.",
+                                    type: "integer",
+                                    format: "int32",
+                                  },
+                                  $neq: {
+                                    description:
+                                      "Checks for inequality with the provided value.",
+                                    type: "integer",
+                                    format: "int32",
+                                  },
+                                  $exists: {
+                                    description:
+                                      "Checks if the current property exists.",
+                                    type: "boolean",
+                                  },
+                                  $gt: {
+                                    description:
+                                      "Greater than comparison with the provided value.",
+                                    type: "integer",
+                                    format: "int32",
+                                  },
+                                  $gte: {
+                                    description:
+                                      "Greater than or equal comparison with the provided value.",
+                                    type: "integer",
+                                    format: "int32",
+                                  },
+                                  $lt: {
+                                    description:
+                                      "Lower than comparison with the provided value.",
+                                    type: "integer",
+                                    format: "int32",
+                                  },
+                                  $lte: {
+                                    description:
+                                      "Lower than or equal comparison with the provided value.",
+                                    type: "integer",
+                                    format: "int32",
+                                  },
+                                  $in: {
+                                    description:
+                                      "Checks if the property matches any of the provided values.",
+                                    type: "array",
+                                    items: { type: "integer", format: "int32" },
+                                  },
+                                },
+                              },
+                            ],
+                            title: "IntegerFilterProperty",
+                          },
+                        ],
+                      },
+                      processDefinitionVersionTag: {
+                        description: "The process definition version tag.",
+                        allOf: [
+                          {
+                            description:
+                              "String property with full advanced search capabilities.",
+                            type: "object",
+                            oneOf: [
+                              {
+                                type: "string",
+                                title: "Exact match",
+                                description: "Matches the value exactly.",
+                              },
+                              {
+                                title: "Advanced filter",
+                                description: "Advanced string filter.",
+                                allOf: [
+                                  {
+                                    title: "Advanced filter",
+                                    description:
+                                      "Basic advanced string filter.",
+                                    type: "object",
+                                    properties: {
+                                      $eq: {
+                                        description:
+                                          "Checks for equality with the provided value.",
+                                        type: "string",
+                                      },
+                                      $neq: {
+                                        description:
+                                          "Checks for inequality with the provided value.",
+                                        type: "string",
+                                      },
+                                      $exists: {
+                                        description:
+                                          "Checks if the current property exists.",
+                                        type: "boolean",
+                                      },
+                                      $in: {
+                                        description:
+                                          "Checks if the property matches any of the provided values.",
+                                        type: "array",
+                                        items: { type: "string" },
+                                      },
+                                      $notIn: {
+                                        description:
+                                          "Checks if the property matches none of the provided values.",
+                                        type: "array",
+                                        items: { type: "string" },
+                                      },
+                                    },
+                                  },
+                                  {
+                                    type: "object",
+                                    properties: {
+                                      $like: {
+                                        description:
+                                          "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                        type: "string",
+                                      },
+                                    },
+                                  },
+                                ],
+                              },
+                            ],
+                            title: "StringFilterProperty",
+                          },
+                        ],
+                      },
+                      processDefinitionKey: {
+                        description: "The process definition key.",
+                        allOf: [
+                          {
+                            description:
+                              "String property with basic advanced search capabilities.",
+                            type: "object",
+                            oneOf: [
+                              {
+                                type: "string",
+                                title: "Exact match",
+                                description: "Matches the value exactly.",
+                              },
+                              {
+                                title: "Advanced filter",
+                                description: "Basic advanced string filter.",
+                                type: "object",
+                                properties: {
+                                  $eq: {
+                                    description:
+                                      "Checks for equality with the provided value.",
+                                    type: "string",
+                                  },
+                                  $neq: {
+                                    description:
+                                      "Checks for inequality with the provided value.",
+                                    type: "string",
+                                  },
+                                  $exists: {
+                                    description:
+                                      "Checks if the current property exists.",
+                                    type: "boolean",
+                                  },
+                                  $in: {
+                                    description:
+                                      "Checks if the property matches any of the provided values.",
+                                    type: "array",
+                                    items: { type: "string" },
+                                  },
+                                  $notIn: {
+                                    description:
+                                      "Checks if the property matches none of the provided values.",
+                                    type: "array",
+                                    items: { type: "string" },
+                                  },
+                                },
+                              },
+                            ],
+                            title: "BasicStringFilterProperty",
+                          },
+                        ],
+                      },
+                    },
+                    title: "ProcessInstanceFilterFields",
+                  },
+                },
+              },
+            },
+          ],
+          title: "ProcessInstanceFilter",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "202": {
+      description: "The batch operation request was accepted.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            properties: {
+              batchOperationKey: {
+                description: "Key of the batch operation.",
+                type: "string",
+              },
+              batchOperationType: {
+                description: "The type of the batch operation.",
+                type: "string",
+                enum: ["PROCESS_CANCELLATION", "RESOLVE_INCIDENT"],
+                title: "BatchOperationTypeEnum",
+              },
+            },
+            title: "BatchOperationCreatedResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description:
+        "The process instance batch operation failed. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

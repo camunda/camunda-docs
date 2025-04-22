@@ -1,0 +1,177 @@
+---
+id: get-statistics
+title: "Get flow node statistic by process instance id"
+description: "Get flow node statistic by process instance id"
+sidebar_label: "Get flow node statistic by process instance id"
+hide_title: true
+hide_table_of_contents: true
+api: eJzlV0tv20YQ/iuLObUpLcpJWgS8+WAHborYsFz0YOiwWo7EjcldZncoVSD434NZPkyZNAr7VsQXax/z+uab2WENJHcekge4dVah99fGkzQKYR2BLdFJ0tZcp5DADmlFkrQnrTxEUEonCyR0LF6DkQVCAo94hAi0gQRKSRlEkKJXTpesBxL4gkdht6JsrQndm4vA4fdKO0whIVdhBF5lWEhIaqBjyaq1Idyhgwi21hWS2q0/PkLTrFncl9Z49Czxfrnkf6emV5Vimwtxh1Q544UfwhFb6wRlKHZ6j2biXSR2zlYlpmJzFNvcHoSxKTIIyhpCQ2xMlmWuVcAr/ubZYj2NQTonA0CEhR/t2803VMSoOkaddBuHVKT3mo6cgOGuJ6fNboLsfYZCpwwuBzJ4GUI7ZFplYd+hr3LyQjoUcrdzuJOEKTRRawtn8Z4aIksyF6YqNujYZCs8AOYnbsxkLQLFd3NM32i0F3+tWW2UTtGQf6PdQX6gzX+EaYsyR3p7nL386wJtIiBNOVu7yu3hq01xVMAN/0Xwca5Srs1e5joVXJLo6WWel85ucix+e5HvL/CaK6+ah38cxYf3DF+B3ssdTisgpLLrH3OH7cbkYITLpXPWQY/EhykSV9ZtdJqiOcXgXfzu/x/ux2m4d23CkVPvbeUUCmNJbG1l0p+DBb/P1cPF7bUYBSwwCPwEeDQReFSV03QMj/wGpUN3xo988rBuohqUtY8aw2r9vJd9Rhq9Q8Nry4/o8xdWaOZXgZTZbtYIEwZlkEC8P4+7+2dDA4zrRzw2sR9PJB7dvh9HKpdDAnULfZPEcZ1ZT01Sl9ZRAxHspdNyk7fI81mb9q2scsY5t0rmYXuuQ/MBDzx9G2aCtNYXDDHbOFX3aflpOauJr76g5Yk2T3oyonJWT3t5VlMYj/o0rvheG3SfuqfhpNRfwvjWzXI3t5d3F/eXZ6vL1er65ms/13VyTXRCh0FL52JwiNftJehvX/VM/vOf+8A6bbY2iHfsuwlTJ4rbapNrxaFMA7ZChlmunzukSUev5HNy8S/Rq+Unu7BGk2XeB0lytmImZNZSO1lxYUsVctgSiYPySRwfDoeFkkVlUrlQtmAQcq3Q+IBjh9tf3U70TDi1yg/S2oZ17HCLDo3CuFPkY9bKRG6DPV8sF8uWVZ4KaUaGXl1gJzAOGSP8l+Iyl9qwmeBz3RXfA+zP2z51Wn4QQdKO+qMKXEddIT1AXW+kx79d3jS8/b1CF1rGU92FKk21598pJFuZe5w4ODRY+OWu+zz4Vbz8CTEbT09ucwxVn1e8gih8qbTfK826iSBDmaILXrUnF0phSSOZyYDPdTW0rM+X9xCBrBi1Adln3A/aZ/2p6/bGvX1E0zSDe8RrdrBpfgCU8bjw
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/operate-api/specifications/operate-public-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get flow node statistic by process instance id"}
+></Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/v1/process-instances/{key}/statistics"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Get flow node statistic by process instance id
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "key",
+      in: "path",
+      description: "Key of process instance",
+      required: true,
+      schema: { type: "integer", format: "int64" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description:
+        "Success. Returns statistics for the given process instance, grouped by flow nodes",
+      content: {
+        "application/json": {
+          schema: {
+            type: "array",
+            items: {
+              type: "object",
+              properties: {
+                activityId: {
+                  type: "string",
+                  description:
+                    "The id of the flow node for which the results are aggregated",
+                },
+                active: {
+                  type: "integer",
+                  description:
+                    "The total number of active instances of the flow node",
+                  format: "int64",
+                },
+                canceled: {
+                  type: "integer",
+                  description:
+                    "The total number of canceled instances of the flow node",
+                  format: "int64",
+                },
+                incidents: {
+                  type: "integer",
+                  description:
+                    "The total number of incidents for the flow node",
+                  format: "int64",
+                },
+                completed: {
+                  type: "integer",
+                  description:
+                    "The total number of completed instances of the flow node",
+                  format: "int64",
+                },
+              },
+              title: "FlowNodeStatistics",
+            },
+          },
+        },
+      },
+    },
+    "400": {
+      description: "Invalid request",
+      content: {
+        "application/problem+json": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden",
+      content: {
+        "*/*": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "Requested resource not found",
+      content: {
+        "application/problem+json": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "API application error",
+      content: {
+        "application/problem+json": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

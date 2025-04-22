@@ -1,0 +1,414 @@
+---
+id: search-user-task-variables
+title: "Search user task variables"
+description: "Search for user task variables based on given criteria."
+sidebar_label: "Search user task variables"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Search user task variables"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/user-tasks/{userTaskKey}/variables/search"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Search for user task variables based on given criteria.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "userTaskKey",
+      in: "path",
+      required: true,
+      description: "The key of the user task.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          allOf: [
+            {
+              type: "object",
+              properties: {
+                page: {
+                  description: "Pagination criteria.",
+                  allOf: [
+                    {
+                      type: "object",
+                      properties: {
+                        from: {
+                          description:
+                            "The index of items to start searching from.",
+                          type: "integer",
+                          format: "int32",
+                        },
+                        limit: {
+                          description:
+                            "The maximum number of items to return in one request.",
+                          type: "integer",
+                          format: "int32",
+                          default: 100,
+                        },
+                        searchAfter: {
+                          description:
+                            "Items to search after. Correlates to the `lastSortValues` property of a previous search response.",
+                          type: "array",
+                          items: { type: "object" },
+                        },
+                        searchBefore: {
+                          description:
+                            "Items to search before. Correlates to the `firstSortValues` property of a previous search response.",
+                          type: "array",
+                          items: { type: "object" },
+                        },
+                      },
+                      title: "SearchQueryPageRequest",
+                    },
+                  ],
+                  type: "object",
+                },
+              },
+              title: "SearchQueryRequest",
+            },
+          ],
+          description: "User task search query request.",
+          type: "object",
+          properties: {
+            sort: {
+              description: "Sort field criteria.",
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  field: {
+                    description: "The field to sort by.",
+                    type: "string",
+                    enum: [
+                      "value",
+                      "name",
+                      "tenantId",
+                      "variableKey",
+                      "scopeKey",
+                      "processInstanceKey",
+                    ],
+                  },
+                  order: {
+                    description:
+                      "The order in which to sort the related field.",
+                    type: "string",
+                    enum: ["ASC", "DESC"],
+                    default: "ASC",
+                    title: "SortOrderEnum",
+                  },
+                },
+                required: ["field"],
+                title: "UserTaskVariableSearchQuerySortRequest",
+              },
+            },
+            filter: {
+              description: "The user task variable search filters.",
+              allOf: [
+                {
+                  description: "The user task variable search filters.",
+                  type: "object",
+                  properties: {
+                    name: {
+                      description: "Name of the variable.",
+                      allOf: [
+                        {
+                          description:
+                            "String property with full advanced search capabilities.",
+                          type: "object",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced string filter.",
+                              allOf: [
+                                {
+                                  title: "Advanced filter",
+                                  description: "Basic advanced string filter.",
+                                  type: "object",
+                                  properties: {
+                                    $eq: {
+                                      description:
+                                        "Checks for equality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $neq: {
+                                      description:
+                                        "Checks for inequality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $exists: {
+                                      description:
+                                        "Checks if the current property exists.",
+                                      type: "boolean",
+                                    },
+                                    $in: {
+                                      description:
+                                        "Checks if the property matches any of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                    $notIn: {
+                                      description:
+                                        "Checks if the property matches none of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                  },
+                                },
+                                {
+                                  type: "object",
+                                  properties: {
+                                    $like: {
+                                      description:
+                                        "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                      type: "string",
+                                    },
+                                  },
+                                },
+                              ],
+                            },
+                          ],
+                          title: "StringFilterProperty",
+                        },
+                      ],
+                    },
+                  },
+                  title: "VariableUserTaskFilterRequest",
+                },
+              ],
+            },
+          },
+          title: "UserTaskVariableSearchQueryRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The user task variables search response.\n",
+      content: {
+        "application/json": {
+          schema: {
+            description: "Variable search query response.",
+            type: "object",
+            allOf: [
+              {
+                type: "object",
+                properties: {
+                  page: {
+                    description:
+                      "Pagination information about the search results.",
+                    allOf: [
+                      {
+                        description:
+                          "Pagination information about the search results.",
+                        type: "object",
+                        properties: {
+                          totalItems: {
+                            description: "Total items matching the criteria.",
+                            type: "integer",
+                            format: "int64",
+                          },
+                          firstSortValues: {
+                            description:
+                              "The sort values of the first item in the result set. Use this in the `searchBefore` field of an ensuing request.",
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                          lastSortValues: {
+                            description:
+                              "The sort values of the last item in the result set. Use this in the `searchAfter` field of an ensuing request.",
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                        },
+                        title: "SearchQueryPageResponse",
+                      },
+                    ],
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                description: "The matching variables.",
+                type: "array",
+                items: {
+                  description: "Variable search response item.",
+                  type: "object",
+                  properties: {
+                    name: {
+                      description: "Name of this variable.",
+                      type: "string",
+                    },
+                    value: {
+                      description: "Value of this variable.",
+                      type: "string",
+                    },
+                    fullValue: {
+                      description: "Full value of this variable.",
+                      type: "string",
+                    },
+                    tenantId: {
+                      description: "Tenant ID of this variable.",
+                      type: "string",
+                    },
+                    isTruncated: {
+                      description: "Whether the value is truncated or not.",
+                      type: "boolean",
+                    },
+                    variableKey: {
+                      description: "The key for this variable.",
+                      type: "string",
+                    },
+                    scopeKey: {
+                      description: "The key of the scope of this variable.",
+                      type: "string",
+                    },
+                    processInstanceKey: {
+                      description:
+                        "The key of the process instance of this variable.",
+                      type: "string",
+                    },
+                  },
+                  title: "VariableResult",
+                },
+              },
+            },
+            title: "VariableSearchQueryResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>
