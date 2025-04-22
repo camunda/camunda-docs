@@ -25,4 +25,4 @@ Elements that support different types can be reconfigured by clicking on the cor
 
 ![properties panel](img/properties-panel.png)
 
-1. Once you finish modeling and configuring your diagram, you can deploy it to a [Camunda 8 cluster](./connect-to-camunda-8.md).
+5. Once you finish modeling and configuring your diagram, you can deploy it to a [Camunda 8 cluster](./connect-to-camunda-8.md).
