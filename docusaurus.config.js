@@ -305,7 +305,7 @@ module.exports = {
       logo: {
         alt: "Camunda 8 Docs",
         src: "img/logo-camunda-black.svg",
-        srcDark: "img/light-C.png",
+        srcDark: "img/logo-light.svg",
       },
       items: [
         {
@@ -356,6 +356,12 @@ module.exports = {
           docId: "reference/overview",
           label: "Reference",
           position: "left",
+        },
+        {
+          to: "https://camunda.com/download",
+          position: "right",
+          className: "button button--primary button--md try-free",
+          label: "Try Free",
         },
       ],
     },

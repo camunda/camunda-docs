@@ -387,6 +387,22 @@ body {
   color: #000;
 }
 
+.try-free {
+  background-color: #fc5d0d;
+  font-family: "IBM Plex Sans", Sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  fill: #ffffff;
+  color: #ffffff;
+  border-radius: 20px !important;
+  margin-right: 10px;
+  border: none;
+}
+.try-free:hover {
+  background-color: #171c29;
+  color: #ffffff;
+}
+
 /* Landing page search bar */
 
 .homeSearch {
