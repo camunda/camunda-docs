@@ -46,15 +46,24 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   --ifm-tabs-padding-horizontal: 15px;
 }
 
+/* Add padding to main content column */
 .docMainContainer_TBSr {
   padding-left: 20px;
 }
 
+/* Search border */
 .DocSearch-Button {
   border: 1px solid transparent !important;
 }
 [data-theme="dark"] .DocSearch-Button {
   border: 1px solid #333 !important;
+}
+/* Adjust size of menu caret to be smaller (previously 2rem) */
+.menu__caret:before {
+  background: var(--ifm-menu-link-sublist-icon) 50%/1.3rem 1.3rem;
+}
+.menu__link--sublist-caret:after {
+  background: var(--ifm-menu-link-sublist-icon) 50%/1.3rem 1.3rem;
 }
 
 .navbar__title {
