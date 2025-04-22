@@ -14,7 +14,8 @@ const getVersion = () => {
     let chartVersion = `${Number(camundaMinorVersion) + 5}`;
     // Helm --version does not support regex or glob patterns.
     // So for non-stable versions, we need to set full version name like "13.0.0-alpha".
-    if (["current", "next"].includes(docsVersion.name)) {
+    // In Docusaurus config, we refer to unreleased version under the URL path "/next/" as "current".
+    if (docsVersion.name === "current") {
       chartVersion = chartVersion.concat(".0.0-alpha");
     }
     return `^${chartVersion}`;
