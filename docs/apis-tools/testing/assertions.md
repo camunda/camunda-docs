@@ -140,6 +140,22 @@ Assert that the process instance is created and either active, completed, or ter
 assertThat(processInstance).isCreated();
 ```
 
+### hasActiveIncidents
+
+Assert that the process instance has at least one active incident. The assertion fails if there is no active incident.
+
+```java
+assertThat(processInstance).hasActiveIncidents();
+```
+
+### hasNoActiveIncidents
+
+Assert that the process instance has no active incidents. The assertion fails if there is any active incident.
+
+```java
+assertThat(processInstance).hasNoActiveIncidents();
+```
+
 ## Element instance assertions
 
 You can verify the element instance states and other properties using `CamundaAssert.assertThat(processInstance)`. Use the BPMN element ID or a `ElementSelector` to identify the elements.
@@ -177,22 +193,6 @@ Assert that the given BPMN elements of the process instance are active. The asse
 assertThat(processInstance).hasActiveElements("task_A", "task_B");
 ```
 
-### hasCompletedElements
-
-Assert that the given BPMN elements of the process instance are completed. The assertion fails if at least one element is active, terminated, or not entered.
-
-```java
-assertThat(processInstance).hasCompletedElements("task_A", "task_B");
-```
-
-### hasTerminatedElements
-
-Assert that the given BPMN elements of the process instance are terminated. The assertion fails if at least one element is active, completed, or not entered.
-
-```java
-assertThat(processInstance).hasTerminatedElements("task_A", "task_B");
-```
-
 ### hasActiveElement
 
 Assert that the BPMN element of the process instance is active the given amount of times. The assertion fails if the element is not active or not exactly the given amount of times.
@@ -201,12 +201,63 @@ Assert that the BPMN element of the process instance is active the given amount 
 assertThat(processInstance).hasActiveElement("task_A", 2);
 ```
 
+### hasActiveElementsExactly
+
+Assert that only the given BPMN elements are active. The assertion fails if at least one element is not active, or other elements are active.
+
+```java
+assertThat(processInstance).hasActiveElementsExactly("task_A", "task_B");
+```
+
+### hasNoActiveElements
+
+Assert that the given BPMN elements are not active. The assertion fails if at least one element is active.
+
+```java
+assertThat(processInstance).hasNoActiveElements("task_A", "task_B");
+```
+
+### hasNotActivatedElements
+
+Assert that the given BPMN elements are not activated (i.e. not entered). The assertion fails if at least one element is active, completed, or terminated.
+
+This assertion does not wait for the given activities.
+
+```java
+assertThat(processInstance).hasNotActivatedElements("task_A", "task_B");
+```
+
+### hasCompletedElements
+
+Assert that the given BPMN elements of the process instance are completed. The assertion fails if at least one element is active, terminated, or not entered.
+
+```java
+assertThat(processInstance).hasCompletedElements("task_A", "task_B");
+```
+
 ### hasCompletedElement
 
 Assert that the BPMN element of the process instance is completed the given amount of times. The assertion fails if the element is not completed or not exactly the given amount of times.
 
 ```java
 assertThat(processInstance).hasCompletedElement("task_A", 2);
+```
+
+### hasCompletedElementsInOrder
+
+Assert that the given BPMN elements are completed in order. Elements that do not match any of the given element IDs are ignored. The assertion fails if at least one of the elements is not completed,
+or the order is not correct.
+
+```java
+assertThat(processInstance).hasCompletedElementsInOrder("task_A", "task_B");
+```
+
+### hasTerminatedElements
+
+Assert that the given BPMN elements of the process instance are terminated. The assertion fails if at least one element is active, completed, or not entered.
+
+```java
+assertThat(processInstance).hasTerminatedElements("task_A", "task_B");
 ```
 
 ### hasTerminatedElement
