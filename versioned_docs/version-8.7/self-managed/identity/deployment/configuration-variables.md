@@ -51,7 +51,7 @@ import Licensing from '../../../self-managed/react-components/licensing.md'
 
 ## OIDC configuration
 
-For more information on integrating with an OpenID Connect provider, see the [OIDC documentation](/self-managed/setup/guides/connect-to-an-oidc-provider.md).
+To learn more about integrating with an OpenID Connect provider, see [connect to an OpenID Connect provider](/self-managed/setup/guides/connect-to-an-oidc-provider.md).
 
 :::note
 Claims are name/value pairs used to represent an individual identity. Configure your initial claim and value to match the claim used with your OIDC provider. For example, to use your Microsoft Entra ID unique user ID, set `IDENTITY_INITIAL_CLAIM_NAME` to `oid`, and `IDENTITY_INITIAL_CLAIM_VALUE` to the ID.
