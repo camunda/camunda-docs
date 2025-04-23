@@ -728,6 +728,9 @@ span.callout + p::after {
 .theme-doc-markdown img.img-600 {
   width: 600px;
 }
+.theme-doc-markdown img.img-500 {
+  width: 500px;
+}
 
 /* Transparent image background */
 .theme-doc-markdown img.img-transparent {
