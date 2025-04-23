@@ -114,8 +114,6 @@ spring:
 
 ```sh
 SPRING_DATASOURCE_URL="jdbc:sqlserver://${IDENTITY_DATABASE_HOST:}:${IDENTITY_DATABASE_PORT:};databaseName=${IDENTITY_DATABASE_NAME:};encrypt=true;hostNameInCertificate={CACERT_/CN};trustServerCertificate=false"
-SPRING_DATASOURCE_USERNAME=user
-SPRING_DATASOURCE_PASSWORD=AStrongPassword
 SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.microsoft.sqlserver.jdbc.SQLServerDriver
 SPRING_JPA_DATABASE=sql_server
 JAVA_TOOL_OPTIONS=$JAVA_OPTS
@@ -132,10 +130,6 @@ identity:
   env:
     - name: SPRING_DATASOURCE_URL
       value: "jdbc:sqlserver://${IDENTITY_DATABASE_HOST:}:${IDENTITY_DATABASE_PORT:};databaseName=${IDENTITY_DATABASE_NAME:};encrypt=true;hostNameInCertificate={CACERT_/CN};trustServerCertificate=false"
-    - name: SPRING_DATASOURCE_USERNAME
-      value: user
-    - name: SPRING_DATASOURCE_PASSWORD
-      value: AStrongPassword
     - name: SPRING_DATASOURCE_DRIVER_CLASS_NAME
       value: com.microsoft.sqlserver.jdbc.SQLServerDriver
     - name: SPRING_JPA_DATABASE
