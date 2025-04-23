@@ -325,6 +325,80 @@ The following conventions apply to all attributes:
 </TabItem>
 </Tabs>
 
+## Operate API
+
+### Decision definition
+
+#### Search decision definitions
+
+- **V1 endpoint**: `POST http://localhost:8080/v1/decision-definitions/search`
+- **V2 endpoint**: `POST http://localhost:8080/v2/decision-definitions/search`
+
+<Tabs groupId="search-decision-definitions" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments'},
+{label: 'Output adjustments', value: 'output-adjustments'},
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+- Request structure changes as outlined in [general changes][].
+  - `searchAfter` has been moved under `page`.
+  - `size` is now the `limit` in the `page` object.
+- Renamed attributes in the `filter` object
+  - `id` - Use `decisionDefinitionKey` instead.
+  - `key` of type `int64` - Use `decisionDefinitionKey` of type `string`.
+  - `decisionId` - Use `decisionDefinitionId` instead.
+  - `decisionRequirementsKey` of type `int64` - This is now of type `string`.
+- Removed attributes from the `filter` object
+  - `decisionRequirementsName` - Can no longer be used for filtering.
+  - `decisionRequirementsVersion` - Can no longer be used for filtering.
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+- Response structure changes as outlined in [general changes][].
+  - `total` is moved under the `page` object as `totalItems`.
+  - `sortValues` - Use `lastSortValues` in the `page` object instead.
+- Renamed attributes in the objects of the `items` array
+  - `id` - Use `decisionDefinitionKey` instead.
+  - `key` of type `int64` - Use `decisionDefinitionKey` of type `string`.
+  - `decisionId` - Use `decisionDefinitionId` instead.
+  - `decisionRequirementsKey` of type `int64` - This is now of type `string`.
+- Removed attributes in the objects of the `items` array
+  - `decisionRequirementsName` - Can be fetched using the **get decision requirements** endpoint with `decisionRequirementsKey`.
+  - `decisionRequirementsVersion` - Can be fetched using the **get decision requirements** endpoint with `decisionRequirementsKey`.
+
+</TabItem>
+</Tabs>
+
+#### Get decision definition
+
+- **V1 endpoint**: `GET http://localhost:8080/v1/decision-definitions/{key}`
+- **V2 endpoint**: `GET http://localhost:8080/v2/decision-definitions/{decisionDefinitionKey}`
+
+<Tabs groupId="get-decision-definition" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments'},
+{label: 'Output adjustments', value: 'output-adjustments'},
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+- No input adjustments.
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+- Except for the response structure changes, all adjustments from [search decision definitions](#search-decision-definitions) apply.
+
+</TabItem>
+</Tabs>
+
 <!--- TODO: open questions and related resources --->
 
 <!--- TODO: insert link to C8 REST API guidelines --->
