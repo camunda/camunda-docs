@@ -75,16 +75,32 @@ identity:
   # the wget command downloads the odbc driver, and the -cp option loads the jar in the classpath so that the module is loaded. It could be replaced with an initContainer or by loading a volume that already has the odbc driver inside.
   args:
     - |
-      wget https://download.oracle.com/otn-pub/otn_software/jdbc/237/ojdbc17.jar -O /app/ojdbc.jar
-      java -cp "/app/ojdbc.jar:/app/identity.jar" org.springframework.boot.loader.launch.JarLauncher
+      java -cp "/extraDrivers/ojdbc.jar:/app/identity.jar" org.springframework.boot.loader.launch.JarLauncher
   # Extra volumes are mounted for any TLS certs necessary for the database:
   extraVolumeMounts:
     - name: "keystore-secret"
       secret:
         secretName: "keystore-secret"
+    - name: jdbcdrivers
+      mountPath: /extraDrivers
   extraVolumes:
     - name: "keystore-secret"
       mountPath: "/usr/local/certificates"
+    - name: jdbcdrivers
+      emptyDir: {}
+  initContainers:
+    - name: fetch-jdbc-drivers
+      image: wget
+      imagePullPolicy: "Always"
+      command:
+        [
+          "sh",
+          "-c",
+          "wget https://download.oracle.com/otn-pub/otn_software/jdbc/237/ojdbc17.jar -O /extraDrivers/odbc.jar",
+        ]
+      volumeMounts:
+        - name: jdbcdrivers
+          mountPath: /extraDrivers
 ```
 
 </TabItem>
