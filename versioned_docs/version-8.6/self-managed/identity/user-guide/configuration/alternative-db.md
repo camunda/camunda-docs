@@ -104,6 +104,10 @@ spring:
 
 ### MSSQL
 
+#### Provisioning the driver
+
+The driver for MSSQL is provided by default in identity, so there is no need to download it or supply it in the classpath.
+
 <Tabs groupId="mssql-config" defaultValue="envVars" queryString values={
 [
 {label: 'Environment variables', value: 'envVars' },
