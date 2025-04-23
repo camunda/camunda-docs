@@ -9,7 +9,7 @@ All distributions of Camunda Optimize come with a predefined set of configuratio
 You can see a sample configuration file with all possible configuration fields
 and their default values [here](service-config.yaml).
 
-In the following section, you will find descriptions and default values of the configuration fields with their respective YAML path.
+In the following section, you will find descriptions and default values of the configuration fields with their respective YAML path and environment variable.
 
 :::note Heads Up
 For changes in the configuration to take effect, you need to restart Optimize!
