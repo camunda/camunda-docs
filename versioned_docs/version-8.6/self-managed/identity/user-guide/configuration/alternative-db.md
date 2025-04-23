@@ -12,28 +12,9 @@ import TabItem from "@theme/TabItem";
 
 This guide is intended for customers those internal policies or compliance requirements prevent the use of PostgreSQL.
 
-## Scope
-
-This documentation focuses solely on components of Camunda 8 that can operate without PostgreSQL. Components such as Optimize and Web Modeler, which require PostgreSQL for proper functionality, are excluded from this guide and should be disabled in environments where PostgreSQL is not used.
-
-```yaml
-postgresql:
-  enabled: false
-identityKeycloak:
-  enabled: false
-identityPostgresql:
-  enabled: false
-webModeler:
-  enabled: false
-webModelerPostgresql:
-  enabled: false
-optimize:
-  enabled: false
-```
-
 ## Versions
 
-We tested with the following versions
+Identity is tested against the following alternative relational databases:
 
 | Camunda Version | Database Version | Driver Version |
 | --------------- | ---------------- | -------------- |
@@ -75,8 +56,6 @@ JAVA_TOOL_OPTIONS=$JAVA_OPTS
 
 ```yaml
 identity:
-  keycloak:
-    enabled: false
   externalDatabase:
     enabled: true
   # These three configuration options are added so that spring knows to connect to oracledb using it's client library
@@ -147,8 +126,6 @@ JAVA_TOOL_OPTIONS=$JAVA_OPTS
 
 ```yaml
 identity:
-  keycloak:
-    enabled: false
   externalDatabase:
     enabled: true
   # These three configuration options are added so that spring knows to connect to oracledb using it's client library
