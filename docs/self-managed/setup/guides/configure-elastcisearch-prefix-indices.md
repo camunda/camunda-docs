@@ -45,28 +45,23 @@ CAMUNDA_OPTIMIZE_ZEEBE_NAME=custom-zeebe
 <TabItem value="valuesYaml">
 
 ```yaml
-elasticsearch:
-  prefix: custom-zeebe
+global:
+  elasticsearch:
+    prefix: custom-zeebe
 
 operate:
   env:
     - name: CAMUNDA_OPERATE_ELASTICSEARCH_INDEXPREFIX
-      value: custom
-    - name: CAMUNDA_OPERATE_ZEEBEELASTICSEARCH_PREFIX
-      value: custom-zeebe
+      value: custom-webapp
   migration:
     env:
       - name: CAMUNDA_OPERATE_ELASTICSEARCH_INDEXPREFIX
-        value: custom-operate
-      - name: CAMUNDA_OPERATE_ZEEBEELASTICSEARCH_PREFIX
-        value: custom-zeebe
+        value: custom-webapp
 
 tasklist:
   env:
     - name: CAMUNDA_TASKLIST_ELASTICSEARCH_INDEXPREFIX
-      value: custom
-    - name: CAMUNDA_TASKLIST_ZEEBEELASTICSEARCH_PREFIX
-      value: custom-zeebe
+      value: custom-webapp
 
 optimize:
   env:
@@ -74,8 +69,6 @@ optimize:
       value: custom-optimize
   migration:
     env:
-      - name: CAMUNDA_OPTIMIZE_ELASTICSEARCH_SETTINGS_INDEX_PREFIX
-        value: custom-optimize
       - name: CAMUNDA_OPTIMIZE_ZEEBE_NAME
         value: custom-zeebe
 ```

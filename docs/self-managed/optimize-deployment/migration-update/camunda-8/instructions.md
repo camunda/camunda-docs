@@ -4,18 +4,9 @@ title: "Instructions"
 description: "Find out how to update to a new version of Optimize without losing your reports and dashboards."
 ---
 
-Optimize releases two new minor versions a year. These documents guide you through the process of migrating your Optimize from one Optimize minor version to the other.
+These documents guide you through the process of migrating your Optimize from one Optimize minor version to the other.
 
-If you want to update Optimize by several versions, you cannot do that at once, but you need to perform the updates in sequential order. For instance, if you want to update from 3.7 to 3.10, you need to update first from 3.7 to 3.8, then from 3.8 to 3.9, and finally from 3.9 to 3.10. The following table shows the recommended update paths to the latest version:
-
-| Update from        | Recommended update path to 8.6 |
-| ------------------ | ------------------------------ |
-| 8.6                | You are on the latest version. |
-| 3.7 - 3.13.x/8.5.x | Rolling update to 8.6          |
-
-:::note Heads Up!
-Starting with version 8.6, separate artifacts are provided for Camunda 7 and Camunda 8. Moving forward, Camunda 8 users should adhere to the 8.x.x versioning format.
-:::
+When updating from one minor version to the next, you do not need to update to each patch version along the way. However, do not skip minor versions when updating.
 
 ## Migration instructions
 

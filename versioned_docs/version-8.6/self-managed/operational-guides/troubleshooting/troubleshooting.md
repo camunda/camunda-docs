@@ -105,6 +105,7 @@ Before using it, clone the `c8-sm-checks` repository to your local environment b
 
 ```bash
 git clone https://github.com/camunda/c8-sm-checks.git
+git checkout tags/v1.2.1
 cd c8-sm-checks
 ```
 

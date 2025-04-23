@@ -35,7 +35,7 @@ A form element to select files.
 
 Given that one of the following properties is set, the form will only submit when the respective condition is fulfilled. Otherwise, a validation error will be displayed.
 
-- **Required**: File picker must have a selected file.
+- **Required**: Filepicker must have a selected file.
 
 ## Reference uploaded files
 
@@ -46,7 +46,7 @@ Single file uploads are accessible using `value[1]` (since [FEEL](../../feel/wha
 
 ## Additional guides
 
-Design process applications for document handling with the File picker component.
+Design process applications for document handling with the Filepicker component.
 
 <DocCardList items={[{type:"link", href:"/docs/components/concepts/document-handling/", label: "Document handling", docId:"components/concepts/document-handling"}
 ]}/>

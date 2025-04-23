@@ -18,7 +18,7 @@
 
 /**
  * @typedef {object} CurrentPlugin
- * @property {"/docs"|"/optimize"} path
+ * @property {"/docs"} path
  * @property {Array<PluginVersion>} versions
  *
  * @typedef {object} PluginVersion
@@ -117,7 +117,7 @@ function determineCanonicalFromDoc(currentDoc, currentPlugin) {
     .find((doc) => doc.id === id);
 
   if (match) {
-    if (/(optimize|docs)\/((next|[0-9\.]+)\/)/.test(match.path)) {
+    if (/docs\/((next|[0-9\.]+)\/)/.test(match.path)) {
       // This finds docs whose matches are non-latest versions.
       //  These docs would probably benefit from adding canonical frontmatter.
       console.log(

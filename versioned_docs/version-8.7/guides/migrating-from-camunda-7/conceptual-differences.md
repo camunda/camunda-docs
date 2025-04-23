@@ -82,7 +82,7 @@ This is visualized on the left-hand side of the following image. With Camunda 8,
 
 - Java
 - Spring Boot
-- Spring Zeebe Starter (embedding the Zeebe client)
+- [Spring Zeebe SDK](../../apis-tools/spring-zeebe-sdk/getting-started.md) (embedding the Zeebe client)
 - Glue code implemented as workers (being Spring beans)
 
 ![Diagram showing the spring boot architecture](../img/architecture-spring-boot.png)
@@ -143,7 +143,7 @@ Due to limited adoption, there is no support for CDI or OSGI in Camunda 8. A lig
 
 ### Polyglot applications (C#, Node.js)
 
-When you run your application in Node.js or C#, for example, you exchange one remote engine (Camunda 7) with another (Camunda 8). As Zeebe comes with a different API, you need to adjust your source code. Zeebe does not use REST as API technology, but gRPC, and you will need to leverage a [client library](apis-tools/working-with-apis-tools.md#deploy-processes-start-process-instances-and-more-using-zeebe-client-libraries) instead.
+When you run your application in Node.js or C#, for example, you exchange one remote engine (Camunda 7) with another (Camunda 8). As Zeebe comes with a different API, you need to adjust your source code.
 
 ![A diagram showing a polygot application architecture](../img/architecture-polyglot.png)
 
