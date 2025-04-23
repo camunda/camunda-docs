@@ -1,12 +1,13 @@
 notify "Updating docusaurus.config.js..."
 
 # Update `url` to include `unsupported`
+#  Note that this introduces one line that reads "unsupported.unsupported.docs.camunda.io" but that line gets removed in a later step.
 sed -i '' "s/docs.camunda.io/unsupported.docs.camunda.io/" docusaurus.config.js
 
 # Update footer social icons based on the new baseUrl
 sed -i '' "s/src= \"\/img\//src=\"\/$ARCHIVED_VERSION\/img\//g" docusaurus.config.js
 
-# Update announcment bar to show a version warning.
+# Update announcement bar to show a version warning.
 #   Find the announcementBar block and replace it with a new one.
 sed -i '' "/announcementBar: {/,/    },/c\\
     announcementBar: {\\
@@ -32,9 +33,8 @@ sed -i '' '/algolia: {/,/    },/d' docusaurus.config.js
 # Replace the `docs` block with one that limits to only the isolated version
 sed -i '' "/^        docs: {/,/^        },/c\\
         docs: {\\
-          lastVersion: \"$ARCHIVED_VERSION\",\\
+          lastVersion: currentVersion,\\
           includeCurrentVersion: false,\\
-          beforeDefaultRemarkPlugins: [versionedLinks],\\
           versions: {\\
             \"$ARCHIVED_VERSION\": {\\
               label: \"$ARCHIVED_VERSION\",\\

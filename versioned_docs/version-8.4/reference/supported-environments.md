@@ -30,7 +30,7 @@ For example, 1.2+ means support for the minor version 2, and any higher minors (
 ## Desktop Modeler
 
 - Windows 7 / 10 / 11
-- Mac OS X 10.11 / 12 / 13 / 14
+- macOS X 10.11 / 12 / 13 / 14
 - Ubuntu LTS (latest)
 
 ## Clients
@@ -127,3 +127,19 @@ You can also use newer versions of Desktop and Web Modeler with older Zeebe vers
 ## Camunda 7 & Optimize version matrix
 
 See https://docs.camunda.org/enterprise/download/#camunda-optimize.
+
+## Dependency maintenance policies
+
+Camunda provides [a standard support policy](https://camunda.com/release-policy/) of 18 months for a particular minor version from the date it is released.
+During this time, patches are regularly released containing security and bug fixes, some of which may come from dependency updates. Therefore, for the
+vast majority of dependencies Camunda _only_ applies patch updates.
+
+However, certain dependencies used by Camunda 8 may have a shorter maintenance policy than Camunda itself. Camunda may adopt a different update policy for these dependencies, as listed below.
+
+### Spring
+
+**Zeebe** is a Spring Boot application and leverage Spring Boot to execute fundamental functionality such as application configuration, REST infrastructure (including security), production ready features, etc.
+
+However, Spring Boot has a shorter maintenance window than Camunda for its open-source software (OSS) offering. [Versions are only supported for 13 months](https://spring.io/projects/spring-boot#support), versus Camunda's 18 months. To circumvent this, **Zeebe** patch releases also update Spring Boot minor versions, such that the latest patch release of these components uses a supported Spring version.
+
+As for libraries and SDKs meant to be included in third-party applications, Camunda follows a best effort policy to balance compatibility and secure Spring-dependent libraries.

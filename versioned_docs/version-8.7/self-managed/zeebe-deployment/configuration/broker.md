@@ -102,7 +102,7 @@ The `management.server` configuration allows you to configure the management ser
 | Field     | Description                                                                                                                                                                                                                                                                           | Example value |
 | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
 | host      | Sets the host the management server binds to. This setting can also be overridden using the environment variable `MANAGEMENT_SERVER_HOST`.                                                                                                                                            | 0.0.0.0       |
-| port      | Sets the port the management server binds to. This setting can also be overridden using the environment variable `MANAGEMENT_SERVER_PORT`.                                                                                                                                            | 8080          |
+| port      | Sets the port the management server binds to. This setting can also be overridden using the environment variable `MANAGEMENT_SERVER_PORT`.                                                                                                                                            | 9600          |
 | base-path | The context path prefix for all management endpoints. For example, if you configure `/zeebe`, your actuator endpoints will be at `http://localhost:9600/zeebe/actuator/configprops`. This setting can also be overridden using the environment variable `MANAGEMENT_SERVER_BASEPATH`. | `/`           |
 
 #### YAML snippet
@@ -837,10 +837,6 @@ An example configuration for the Elasticsearch exporter can be found [here](../e
 ### zeebe.broker.exporters.opensearch (OpenSearch Exporter)
 
 An example configuration for the OpenSearch exporter can be found [here](../exporters/opensearch-exporter.md#example).
-
-### zeebe.broker.exporters.camundaExporter (Camunda Exporter)
-
-An example configuration for the Camunda exporter can be found [here](../exporters/camunda-exporter.md#example).
 
 ### zeebe.broker.processing
 

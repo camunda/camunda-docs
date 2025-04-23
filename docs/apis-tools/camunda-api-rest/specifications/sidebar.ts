@@ -88,6 +88,24 @@ const sidebar: SidebarsConfig = {
           label: "Search batch operations",
           className: "api-method post",
         },
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/cancel-batch-operation",
+          label: "Cancel Batch operation",
+          className: "api-method put",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/pause-batch-operation",
+          label: "Pause Batch operation",
+          className: "api-method put",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/resume-batch-operation",
+          label: "Resume Batch operation",
+          className: "api-method put",
+        },
       ],
     },
     {
@@ -234,27 +252,21 @@ const sidebar: SidebarsConfig = {
       items: [
         {
           type: "doc",
-          id: "apis-tools/camunda-api-rest/specifications/create-element-instance-variables",
-          label: "Update element instance variables",
-          className: "api-method put",
-        },
-      ],
-    },
-    {
-      type: "category",
-      label: "Flow node instance",
-      items: [
-        {
-          type: "doc",
-          id: "apis-tools/camunda-api-rest/specifications/search-flow-node-instances",
-          label: "Search flow node instances",
+          id: "apis-tools/camunda-api-rest/specifications/search-element-instances",
+          label: "Search element instances",
           className: "api-method post",
         },
         {
           type: "doc",
-          id: "apis-tools/camunda-api-rest/specifications/get-flow-node-instance",
-          label: "Get flow node instance",
+          id: "apis-tools/camunda-api-rest/specifications/get-element-instance",
+          label: "Get element instance",
           className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/create-element-instance-variables",
+          label: "Update element instance variables",
+          className: "api-method put",
         },
       ],
     },
@@ -486,6 +498,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/get-process-instance-statistics",
+          label: "Get process instance statistics",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/search-process-instances",
           label: "Search process instances",
           className: "api-method post",
@@ -500,6 +518,13 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/cancel-process-instances-batch-operation",
           label: "Create a batch operation to cancel process instances",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/resolve-incidents-batch-operation",
+          label:
+            "Create a batch operation to resolve incidents of process instances",
           className: "api-method post",
         },
         {
@@ -582,6 +607,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/remove-user-from-role",
+          label: "Unassign a user from a role (Work-in-Progress)",
+          className: "api-method delete",
+        },
+        {
+          type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/search-roles",
           label: "Search roles (Work-in-Progress)",
           className: "api-method post",
@@ -657,6 +688,12 @@ const sidebar: SidebarsConfig = {
           id: "apis-tools/camunda-api-rest/specifications/remove-mapping-rule-from-tenant",
           label: "Remove a mapping rule from a tenant",
           className: "api-method delete",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/search-mappings-for-tenant",
+          label: "Search mappings for tenant",
+          className: "api-method post",
         },
         {
           type: "doc",

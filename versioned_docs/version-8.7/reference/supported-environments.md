@@ -38,7 +38,7 @@ For example, 1.2+ means support for the minor version 2, and any higher minors (
 - **Zeebe Java Client**: OpenJDK 8+
 - **Spring Zeebe SDK**: OpenJDK 17+
 - **Connector SDK**: OpenJDK 17+
-- **Spring SDK**: Spring Boot 3.4.x (for the exact version, check the [version matrix](/apis-tools/spring-zeebe-sdk/getting-started.md#version-compatibility).)
+- **Spring SDK**: Check the [version matrix](/apis-tools/spring-zeebe-sdk/getting-started.md#version-compatibility)
 - **Helm CLI**: 3.14.x (for the exact version, check the [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).)
 
 ## Camunda 8 Self-Managed
@@ -99,7 +99,7 @@ Requirements for the components can be seen below:
 | Web Modeler | -            | PostgreSQL 13.x, 14.x, 15.x, 16.x, 17.x or Amazon Aurora PostgreSQL 13.x, 14.x, 15.x, 16.x                                                                                                                        |
 | Console     | -            | -                                                                                                                                                                                                                 |
 
-\*Not all Optimize features are supported when using OpenSearch as a database, including backups. For a full list of the features that are currently supported, please refer to the [Camunda 8](https://github.com/camunda/issues/issues/635) OpenSearch features.
+\*Not all Optimize features are supported when using OpenSearch as a database. For a full list of the features that are currently supported, refer to the [Camunda 8](https://github.com/camunda/issues/issues/635) OpenSearch features.
 
 When running Elasticsearch, you must have the [appropriate Elasticsearch privileges](/self-managed/concepts/elasticsearch-privileges.md).
 
@@ -128,3 +128,19 @@ From version `8.6.0` forward, Zeebe, Operate, and Tasklist must run on on the ex
 :::note
 You can also use newer versions of Desktop and Web Modeler with older Zeebe versions.
 :::
+
+## Dependency maintenance policies
+
+Camunda provides [a standard support policy](https://camunda.com/release-policy/) of 18 months for a particular minor version from the date it is released.
+During this time, patches are regularly released containing security and bug fixes, some of which may come from dependency updates. Therefore, for the
+vast majority of dependencies Camunda _only_ applies patch updates.
+
+However, certain dependencies used by Camunda 8 may have a shorter maintenance policy than Camunda itself. Camunda may adopt a different update policy for these dependencies, as listed below.
+
+### Spring
+
+**Zeebe**, **Operate**, **Tasklist**, and **Optimize** are Spring Boot applications, and leverage Spring Boot to execute fundamental functionality such as application configuration, REST infrastructure (including security), production ready features, etc.
+
+However, Spring Boot has a shorter maintenance window than Camunda for its open-source software (OSS) offering. [Versions are only supported for 13 months](https://spring.io/projects/spring-boot#support), versus Camunda's 18 months. To circumvent this, patch releases for these server-side components also update Spring Boot minor versions, such that the latest patch release of these components uses a supported Spring version.
+
+As for libraries and SDKs meant to be included in third-party applications, Camunda follows a best effort policy to balance compatibility and secure Spring-dependent libraries.
