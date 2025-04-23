@@ -44,10 +44,10 @@ configuration](#component-specific-configuration) to ensure the components are c
    - Client ID
    - Client secret
    - Audience
-4. Set the following environment variables or Helm values for the component you are configuring an app for:
+4. Using the following examples, set either the listed environment variables or Helm values for the component you are configuring an app for. For configuration requirements, see [OIDC configuration variables](/self-managed/identity/deployment/configuration-variables.md#oidc-configuration).
 
-:::note
-You can connect to your OIDC provider through either environment variables or Helm values. Ensure only one configuration option is used.
+:::caution
+Although you can connect to your OIDC provider using either environment variables or Helm values, you must only use one of these configuration options.
 :::
 
 <Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Environment variables', value: 'env' },{label: 'Helm values', value: 'helm' }]} >
@@ -140,10 +140,10 @@ Ensure you register a new application for each component.
    Redirect URIs serve as an approved list of destinations across identity providers. Only the URLs specified in the redirect URIs configuration will be permitted as valid redirection targets for authentication responses. This security measure ensures that tokens and authorization codes are only sent to pre-approved locations, preventing potential unauthorized access or token theft.
    :::
 5. [Create a new client secret](https://learn.microsoft.com/en-gb/entra/identity-platform/quickstart-register-app?tabs=client-secret#add-credentials), and note the new secret's value for later use. The secret ID is not needed, only the secret value is required.
-6. Set the following environment variables or Helm values for the component you are configuring an app for:
+6. Using the following examples, set either the listed environment variables or Helm values for the component you are configuring an app for. For configuration requirements, see [Identity OIDC configuration variables](/self-managed/identity/deployment/configuration-variables.md#oidc-configuration).
 
-:::note
-You can connect to your OIDC provider through either environment variables or Helm values. Ensure only one configuration option is used.
+:::caution
+Although you can connect to your OIDC provider using either environment variables or Helm values, you must only use one of these configuration options.
 :::
 
 <Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Environment variables', value: 'env' },{label: 'Helm values', value: 'helm' }]} >
