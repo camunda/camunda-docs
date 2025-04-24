@@ -59,7 +59,7 @@ Or using YAML:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: camunda-secret
+  name: operate-secret
   namespace: camunda
 type: Opaque
 stringData:
@@ -74,7 +74,11 @@ kubectl apply -f my-secret.yaml
 
 ### Referencing secrets in `values.yaml`
 
-To reference a secret in the `values.yaml`, it's recommended to use the `existingSecret.name` and `existingSecretKey`.
+Depending on the structure of the secret key, there are two ways to reference a secret in the values.yaml file:
+
+#### Option 1: Using existingSecret.name
+
+Use this approach when the chart expects the secret to be split into a name and key.
 
 ```yaml
 global:
@@ -82,8 +86,21 @@ global:
     auth:
       operate:
         existingSecret:
-          name: camunda-secret
+          name: operate-secret
         existingSecretKey: operate-secret-key
+```
+
+#### Option 2: Using existingSecret
+
+In some cases, the chart expects the secret name directly and a reference to the specific key as a separate field.
+
+```yaml
+global:
+  identity:
+    keycloak:
+      auth:
+        existingSecret: keycloak-secret
+        adminPassword: admin-password-key
 ```
 
 ## TLS secrets

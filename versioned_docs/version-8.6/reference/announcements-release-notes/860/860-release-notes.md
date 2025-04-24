@@ -399,7 +399,7 @@ In Operate, the visualization of the executed path of a process instance is impr
 
 <!-- https://github.com/camunda/web-modeler/issues/9730 -->
 
-You can now [enable TLS-encrypted communication](/self-managed/modeler/web-modeler/configuration/ssl.md) between Web Modeler, the REST API, and websockets.
+You can now [enable TLS-encrypted communication](/self-managed/modeler/web-modeler/configuration/ssl.md#configuring-secure-connections-between-web-modeler-components) between the different Web Modeler components (`webapp`, `restapi`, and `websockets`).
 
 ### API orchestration getting started journey <span class="badge badge--long" title="This feature affects Connectors">Connectors</span>
 

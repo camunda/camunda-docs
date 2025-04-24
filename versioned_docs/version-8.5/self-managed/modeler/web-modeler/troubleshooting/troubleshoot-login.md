@@ -10,7 +10,7 @@ Web Modeler Self-Managed is available to [enterprise customers](/reference/licen
 
 Logging in to Web Modeler doesn't work as expected and shows an error or a blank page when accessing the application.
 
-To further debug this issue, check the [log output](docs/self-managed/modeler/web-modeler/configuration/logging.md) of the `modeler-restapi` and `modeler-webapp` services for errors and warnings.
+To further debug this issue, check the [log output](/self-managed/modeler/web-modeler/configuration/logging.md) of the `modeler-restapi` and `modeler-webapp` services for errors and warnings.
 
 ## Unique constraint violation
 

@@ -424,7 +424,7 @@ module.exports = {
               href: "https://camunda.com/blog/tag/camunda-platform-8/",
             },
             {
-              label: "Release cycle",
+              label: "Release policy",
               to: "docs/reference/announcements-release-notes/release-policy",
             },
           ],
@@ -552,7 +552,6 @@ module.exports = {
             "/docs/**/assets/**",
             "/docs/**/tags/**",
             "/docs/next/**",
-            "/docs/8.3/**",
             "/docs/8.4/**",
             "/docs/8.5/**",
             "/docs/8.6/**",

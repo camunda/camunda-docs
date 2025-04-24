@@ -198,6 +198,7 @@ Refer to [Configuration of the restapi component](../../../self-managed/modeler/
 - Duplicate file names are not allowed for the same file type.
 - Characters with special meaning to Git (for example, `/`), or characters disallowed by Git, are not allowed in either branch or file names.
 - Any `.json` file is treated as a Connector template, and the operation will fail if it is not. If the remote repository stores any `.json` files that are not Connector templates, place them in a subfolder to be automatically ignored by the synchronization process.
+- Git sync only supports `.md` files that are named exactly `README.md` (case sensitive). Git sync supports multiple `README.md` in a repository (including in subfolders).
 - When synchronizing for the first time with a remote repository that already contains commits, Web Modeler will attempt to select a main process with a file name that matches its own main process. If there is no matching process, Web Modeler will select a process at random from the available `.bpmn` files. In the event that no `.bpmn` files exist in the remote repository, Web Modeler will not proceed, and will instead display an error message. Ensure the main process is correctly assigned, especially in cases where a random process has been selected.
 - Actions which alter the SHA of the commit to which Web Modeler is synced (for example, squash) may cause synchronization errors.
 - Timeouts may occur during a sync. In the event of a timeout, close the modal and retry the synchronization.

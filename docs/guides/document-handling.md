@@ -7,7 +7,7 @@ keywords: ["document handling"]
 
 import DocCardList from '@theme/DocCardList';
 
-Offering robust [document handling](/components/concepts/document-handling.md) capabilities within Camunda, users can efficiently manage large volumes of binary data such as PDFs and images across both development and production environments.
+Offering robust [document handling](/components/concepts/document-handling.md) capabilities within Camunda SaaS and Self-Managed, users can efficiently manage large volumes of binary data such as PDFs and images across both development and production environments.
 
 In this guide we will cover three main use cases:
 
@@ -56,13 +56,21 @@ It always returns an array of objects, either a user uploads a single document o
 
 Single document uploads are accessible using `value[1]` (since [FEEL](../components/modeler/feel/what-is-feel.md) uses 1-based indexing).
 
-### Upload a document via inbound Webhook connector
+### Upload a document via inbound webhook connector
 
 Documents can be added to a process using the [inbound](../components//connectors/connector-types.md#inbound-connectors) [HTTP webhook Connector](/components/connectors/protocol/http-webhook.md).
 
 You can pass the documents in both the response expression and the result expression, where the `documents` object contains the references for created documents. Below, review an example of a webhook configuration:
 
 ![Example payload of inbound webhook connector](./img/inbound-webhook-connector-example.png)
+
+In this example, the result expression may look as follows, where `applicationDocument` can be later used by the process to retrieve documents:
+
+```
+{
+  applicationDocument: documents[1]
+}
+```
 
 The document reference received as an output of one Connector should be stored in process variables by using the result expression or result variable.
 
@@ -115,16 +123,15 @@ The result variable will have the following structure:
 }
 ```
 
-Here, we use the configuration of the image on the initial steps and assign the portion containing the documents to `applicationDocument`. This can be later used by the process to retrieve documents.
-
 ## Display and download a document
 
 ### Build a form for document preview and downloading
 
 To display and allow downloading of a document you can use the [document preview component](/components/modeler/forms/form-element-library/forms-element-library-document-preview.md) in [forms](/components/modeler/forms/camunda-forms-reference.md).
 
-The document preview component offers preview of PDF documents and images.
-Other document types are listed without the preview and show the file name with the option to download the file.
+:::note
+The document preview component offers previews in forms of PDF documents and images as the most common file types. Other document types are supported, but listed without the preview and show the file name with the option to download the file.
+:::
 
 In the component's configuration, provide a document reference as an array of document metadata.
 

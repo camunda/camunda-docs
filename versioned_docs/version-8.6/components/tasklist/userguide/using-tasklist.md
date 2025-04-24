@@ -39,7 +39,7 @@ The queue shows the preview of available tasks with the following information:
 
 - Task name
 - Name of the process the task belongs to
-- Task context description ([it can be optionally configured](/docs/components/concepts/variables.md#context-variable))
+- Task context description ([it can be optionally configured](/components/concepts/variables.md#context-variable))
 - Assignee
 - Priority
 - Creation date

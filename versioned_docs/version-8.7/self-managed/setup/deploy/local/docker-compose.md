@@ -89,7 +89,7 @@ docker compose down
 ### Web Modeler
 
 :::info
-Non-production installations of Web Modeler are restricted to five collaborators per project. Refer to the [licensing documentation](/docs/reference/licenses.md) for more information.
+Non-production installations of Web Modeler are restricted to five collaborators per project. Refer to the [licensing documentation](/reference/licenses.md) for more information.
 :::
 
 #### Standalone setup
@@ -211,30 +211,3 @@ per line. The secrets will then be available in the Connector runtime in the for
 To add custom Connectors, create a new Docker Image bundling them as described in the [Connectors repository](https://github.com/camunda/connectors).
 
 Alternatively, you can mount new Connector JARs as volumes into the `/opt/app` folder by adding this to the Docker Compose file. Keep in mind that the Connector JARs must include all necessary dependencies inside the JAR.
-
-## Kibana
-
-A [Kibana](https://www.elastic.co/kibana/) profile is available in the provided configuration files to support inspection and exploration of the Camunda 8 data in Elasticsearch.
-
-Enable the profile by adding `--profile kibana` to your Docker Compose command:
-
-```shell
-docker compose --profile kibana up -d
-```
-
-This profile will start Kibana in addition to the default components. Kibana can be used to explore the records exported by Zeebe into Elasticsearch, or to discover the data in Elasticsearch used by the other components (for example, Operate).
-
-Navigate to the Kibana web application and explore the data without login credentials:
-
-- Kibana: [http://localhost:5601](http://localhost:5601)
-
-:::note
-
-You need to configure the index patterns in Kibana before you can explore the data.
-
-- Go to `Management > Stack Management > Kibana > Index Patterns`.
-- Create a new index pattern. For example, `zeebe-record-*` matches the exported records.
-  - If you don't see any indexes then make sure to export some data first (e.g. deploy a process). The indexes of the records are created when the first record of this type is exported.
-- Go to `Analytics > Discover` and select the index pattern.
-
-:::
