@@ -1,8 +1,8 @@
 ---
 id: alternative-db
 title: "Use an alternative database for Identity OIDC"
-sidebar_label: "Different DBs with Identity for OIDC"
-description: "Configure Identity to use other DBs with OIDC"
+sidebar_label: "Use an alternative database for Identity OIDC"
+description: "You can use alternative databases to PostgreSQL to configure Identity with OIDC"
 ---
 
 import Tabs from "@theme/Tabs";
