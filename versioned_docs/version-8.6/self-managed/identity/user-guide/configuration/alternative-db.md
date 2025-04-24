@@ -1,6 +1,6 @@
 ---
 id: alternative-db
-title: "Using Different DBs with Identity for OIDC"
+title: "Use an alternative database for Identity OIDC"
 sidebar_label: "Different DBs with Identity for OIDC"
 description: "Configure Identity to use other DBs with OIDC"
 ---
@@ -8,32 +8,28 @@ description: "Configure Identity to use other DBs with OIDC"
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-## Overview
+Use an alternative database for Identity OIDC if your internal policies or compliance requirements prevent the use of PostgreSQL.
 
-This guide is intended for customers those internal policies or compliance requirements prevent the use of PostgreSQL.
-
-## Versions
+## Database versions
 
 Identity is tested against the following alternative relational databases:
 
-| Camunda Version | Database Version | Driver Version |
+| Camunda version | Database version | Driver version |
 | --------------- | ---------------- | -------------- |
 | 8.6.13          | Oracle 19C       | 21.3.0.0       |
 | 8.6.13          | SQL Server 2019  | 12.10.0.jre11  |
 
-## Configuration
+## Oracle database configuration
 
-### Oracle
+### Driver provision
 
-#### Provisioning the driver
+As the Oracle driver is not provided by default in each of the Camunda 8 distributions, you must download the driver and supply it for the application to load.
 
-The Oracle driver is not provided by default in each of the Camunda 8 distributions. Therefore, we must download the driver and supply it for the application to load.
+1. Download the appropriate Oracle driver: https://download.oracle.com/otn-pub/otn_software/jdbc/237/ojdbc17.jar.
 
-1. Download the appropriate driver: https://download.oracle.com/otn-pub/otn_software/jdbc/237/ojdbc17.jar
+2. When starting the application, set `-cp "/app/ojdbc.jar:/app/identity.jar"` in the `java` command during startup. This is only required for Oracle.
 
-2. When starting the application, set `-cp "/app/ojdbc.jar:/app/identity.jar"` in the `java` command during startup. Only necessary for Oracle.
-
-3. If using docker or kubernetes, ensure that the folder with the library is properly mounted as a volume.
+3. If you are using docker or kubernetes, ensure that the folder with the library is properly mounted as a volume.
 
 <Tabs groupId="oracle-config" defaultValue="envVars" queryString values={
 [
@@ -118,11 +114,11 @@ spring:
 </TabItem>
 </Tabs>
 
-### MSSQL
+## MSSQL database configuration
 
-#### Provisioning the driver
+### Driver provision
 
-The driver for MSSQL is provided by default in identity, so there is no need to download it or supply it in the classpath.
+As the driver for MSSQL is provided by default in identity, you do not need to download it or supply it in the classpath.
 
 <Tabs groupId="mssql-config" defaultValue="envVars" queryString values={
 [
@@ -184,8 +180,12 @@ spring:
 
 </Tabs>
 
-## Troubleshooting tips
+## Troubleshooting
 
-- Exec into container confirm java process has the keystore path
-- Confirm certificate exists in the mounted location on the filesystem
-- Test connection from pod to database with simple tool(s) JDBC tool, ping, curl, etc
+The following troubleshooting tips are provided to help you with common issues:
+
+| Tip                      | Description                                                                                                                                                                                  |
+| :----------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Check Keystore path      | Access (or "exec into") the running container where the application is deployed and confirm that the Java process running inside the container is configured with the correct keystore path. |
+| Check certificates       | Confirm that any SSL/TLS certificate required for secure communication with the database exists in the mounted location on the filesystem.                                                   |
+| Test database connection | Test and verify the connection from the pod to the database using simple tools and utilities, such as JDBC tool, ping, curl, and so on.                                                      |
