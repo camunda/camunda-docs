@@ -3,7 +3,7 @@ module.exports = {
     "components/modeler/feel/what-is-feel",
     "components/modeler/feel/language-guide/feel-data-types",
     "components/modeler/feel/language-guide/feel-unary-tests",
-    "components/modeler/feel/feel-copilot",
+    "components/modeler/feel/feel-playground",
     {
       Expressions: [
         "components/modeler/feel/language-guide/feel-expressions-introduction",
