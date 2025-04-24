@@ -47,12 +47,23 @@ With the 8.7 release, no special configuration is required to update Helm from 8
 
 <Tabs groupId="upgrades" defaultValue="8.6" queryString values={
 [
+{label: 'From Camunda 8.6 to 8.7', value: '8.7', },
 {label: 'From Camunda 8.5 to 8.6', value: '8.6', },
 {label: 'From Camunda 8.4 to 8.5', value: '8.5', },
 {label: 'From Camunda 8.3 to 8.4', value: '8.4', },
 {label: 'From Camunda 8.2 to 8.3', value: '8.3', },
 ]
 }>
+
+<TabItem value='8.7'>
+
+### Helm chart 12.0.0+
+
+The structure of the 12.0.0+ versino of the Helm Charts is simiar to 11.0.0+ and no breaking changes have been introduced between 8.6 and 8.7.
+
+The structure of the Helm Charts in version 12.0.0+ is similar to that of version 11.0.0+, with no breaking changes introduced between versions 8.6 and 8.7.
+
+</TabItem>
 
 <TabItem value='8.6'>
 
