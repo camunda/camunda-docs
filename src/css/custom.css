@@ -47,6 +47,10 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   --ifm-tabs-padding-horizontal: 15px;
 }
 
+.footer--dark {
+  --ifm-footer-background-color: #161616;
+}
+
 /* Add padding to main content column */
 .docMainContainer_TBSr {
   padding-left: 20px;
@@ -69,13 +73,6 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
 
 a {
   text-decoration: none;
-}
-
-/* Dark Mode > Kapa AI */
-
-[data-theme="dark"] .mantine-k0race {
-  border: 1px solid #767676;
-  box-shadow: 0px 8px 16px 4px rgba(120, 169, 255, 0.2);
 }
 
 /* Dark Mode > Search */
