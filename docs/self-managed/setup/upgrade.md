@@ -55,9 +55,7 @@ Configuration adjustments may be required when upgrading to a new version of the
 
 ### Helm chart 12.0.0+
 
-The structure of the 12.0.0+ versino of the Helm Charts is simiar to 11.0.0+ and no breaking changes have been introduced between 8.6 and 8.7.
-
-The structure of the Helm Charts in version 12.0.0+ is similar to that of version 11.0.0+, with no breaking changes introduced between versions 8.6 and 8.7.
+The structure of the Helm charts in version 12.0.0+ is similar to that of version 11.0.0+, with no breaking changes introduced between versions 8.6 and 8.7.
 
 </TabItem>
 
