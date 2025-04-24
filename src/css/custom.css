@@ -23,6 +23,7 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   --ifm-heading-font-family: IBM Plex Sans, -apple-system, blinkmacsystemfont,
     Segoe UI, roboto, oxygen-sans, ubuntu, cantarell, Helvetica Neue, sans-serif;
   --ifm-leading: calc(var(--ifm-leading-desktop) * 1rem);
+  --ifm-alert-border-radius: 0;
 }
 
 /* Dark mode */
