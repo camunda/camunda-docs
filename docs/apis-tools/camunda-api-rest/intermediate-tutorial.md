@@ -80,10 +80,23 @@ const camundaApiUrl = process.env.CAMUNDA_REST_ADDRESS;
 5. On the next line, script the API endpoint to list the existing roles:
 
 ```javascript
-const url = `${camundaApiUrl}/roles/search`;
+const url = `${camundaApiUrl}/deployments`;
 ```
 
-6. Configure your POST request to the appropriate endpoint, including an authorization header based on the previously acquired `accessToken`:
+6. We will now configure the variables representing the BPMN file and its form data. This may look different depending on which resources you choose to deploy, but reflects the block-scoped local variables and append method to insert a set of objects for the BPMN resource of this tutorial:
+
+```javascript
+const formData = new FormData();
+// Read the BPMN file and add it to the form data
+const bpmnFilePath = path.resolve("resources/calculate-sales-tax.bpmn");
+const fileContent = fs.readFileSync(bpmnFilePath);
+formData.append("resources", fileContent, {
+  filename: "calculate-sales-tax.bpmn",
+  contentType: "application/xml",
+});
+```
+
+7. Configure your POST request to the appropriate endpoint, including an authorization header based on the previously acquired `accessToken`:
 
 ```javascript
 const options = {
@@ -92,24 +105,24 @@ const options = {
   headers: {
     Accept: "application/json",
     Authorization: `Bearer ${accessToken}`,
+    ...formData.getHeaders(),
   },
-  data: {},
+  data: formData,
 };
 ```
 
-7. Call the endpoint, process the results from the API call, and emit an error message from the server if necessary:
+8. Call the endpoint, process the results from the API call, and emit an error message from the server if necessary:
 
 ```javascript
 try {
-  // Call the endpoint.
   const response = await axios(options);
+  const deployedResources = response.data.deployments;
 
-  // Process the results from the API call.
-  const results = response.data;
-
-  // Emit roles to output.
-  results.items.forEach((x) =>
-    console.log(`Role Name: ${x.name}; key: ${x.key}`)
+  // Emit deployed resources
+  deployedResources.forEach((x) =>
+    console.log(
+      `Process Definition Key: ${x.processDefinition.processDefinitionKey}; Process Definition Id: ${x.processDefinition.processDefinitionId}`
+    )
   );
 } catch (error) {
   // Emit an error from the server.
@@ -117,25 +130,25 @@ try {
 }
 ```
 
-8. In your terminal, run `node cli.js camunda8 list`.
+9. In your terminal, run `node cli.js processInstances deploy`.
 
 :::note
-This `list` command is connected to the `listRoles` function at the bottom of the `camunda-8.js` file, and executed by the `cli.js` file. While we will work with roles in this tutorial, you may add additional arguments depending on the API calls you would like to make.
+This `deploy` command is connected to the `deployResources` function at the bottom of the `camunda-process-instances.js` file, and executed by the `cli.js` file. While we will work with roles in this tutorial, you may add additional arguments depending on the API calls you would like to make.
 :::
 
-The existing roles (if any) will now output. If you have an invalid API name or action name, or no arguments provided, or improper/insufficient credentials configured, an error message will output as outlined in the `cli.js` file. If no action is provided, it will default to "assign" everywhere, except when unassigning a user.
+The existing process definition key and ID will now output. If you have an invalid API name or action name, or no arguments provided, or improper/insufficient credentials configured, an error message will output as outlined in the `cli.js` file.
 
-## Create a role (POST)
+## Create and start a process instance (POST)
 
-To create a role, take the following steps:
+To create and start a process instance based on the process instance key obtained in the request above, take the following steps:
 
 1. Outline your function, similar to the steps above:
 
 ```javascript
-async function createRole([roleName]) {
+async function createInstance([processDefinitionKey]) {
   const accessToken = await getAccessToken(authorizationConfiguration);
   const camundaApiUrl = process.env.CAMUNDA_REST_ADDRESS;
-  const url = `${camundaApiUrl}/roles`;
+  const url = `${camundaApiUrl}/process-instances`;
 }
 ```
 
@@ -150,7 +163,10 @@ const options = {
     Authorization: `Bearer ${accessToken}`,
   },
   data: {
-    name: roleName,
+    processDefinitionKey: processDefinitionKey,
+    variables: {
+      total: 90.0,
+    },
   },
 };
 ```
@@ -160,31 +176,27 @@ const options = {
 ```javascript
 try {
   const response = await axios(options);
+  const processInstance = response.data;
 
-  // Process the results from the API call.
-  const newRole = response.data;
-
-  // Emit new role to output.
-  console.log(`Role added! Name: ${roleName}. Key: ${newRole.roleKey}.`);
+  console.log(`Process Instance Key: ${processInstance.processInstanceKey}`);
 } catch (error) {
-  // Emit an error from the server.
   console.error(error.message);
 }
 ```
 
-4. In your terminal, run `node cli.js camunda8 create <name>`, where `<name>` is the name of the new role.
+4. In your terminal, run `node cli.js processInstances create <key>`, where `<key>` is the process definition key.
 
-## Retrieve a role (GET)
+## Retrieve a process instance (GET)
 
-To retrieve a role, take the following steps:
+To retrieve a process instance by the process instance key, take the following steps:
 
 1. Outline your function, similar to the steps above:
 
 ```javascript
-async function getRole([roleKey]) {
+async function viewInstance([processInstanceKey]) {
   const accessToken = await getAccessToken(authorizationConfiguration);
   const camundaApiUrl = process.env.CAMUNDA_REST_ADDRESS;
-  const url = `${camundaApiUrl}/roles/${roleKey}`;
+  const url = `${camundaApiUrl}/process-instances/${processInstanceKey}`;
 }
 ```
 
@@ -205,74 +217,22 @@ const options = {
 
 ```javascript
 try {
-  // Call the endpoint.
   const response = await axios(options);
-
-  // Process the results from the API call.
   const results = response.data;
 
-  // Emit role to output.
-  console.log(`Role Name: ${results.name}; Key: ${results.key};`);
+  console.log(
+    `Process instance name: ${results.processDefinitionName}; State: ${results.state};`
+  );
 } catch (error) {
-  // Emit an error from the server.
   console.error(error.message);
 }
 ```
 
-4. In your terminal, run `node cli.js camunda8 view <role>`, where `<role>` is the role key.
-
-## Delete a role (DELETE)
-
-To delete a role, take the following steps:
-
-1. Outline your function, similar to the steps above:
-
-```javascript
-async function deleteRole([roleKey]) {
-  const accessToken = await getAccessToken(authorizationConfiguration);
-  const camundaApiUrl = process.env.CAMUNDA_REST_ADDRESS;
-  const url = `${camundaApiUrl}/roles/${roleKey}`;
-}
-```
-
-2. Configure the API call:
-
-```javascript
-const options = {
-  method: "DELETE",
-  url,
-  headers: {
-    Accept: "application/json",
-    Authorization: `Bearer ${accessToken}`,
-  },
-};
-```
-
-3. Process the results from the API call. For example:
-
-```javascript
-try {
-  // Call the delete endpoint.
-  const response = await axios(options);
-
-  // Process the results from the API call.
-  if (response.status === 204) {
-    console.log("Role deleted!");
-  } else {
-    // Emit an unexpected error message.
-    console.error("Unable to delete this role!");
-  }
-} catch (error) {
-  // Emit an error from the server.
-  console.error(error.message);
-}
-```
-
-4. In your terminal, run `node cli.js camunda8 delete <role>`, where `<role>` is the role key.
+4. In your terminal, run `node cli.js processInstances view <key>`, where `<key>` is the process instance key.
 
 ## If you get stuck
 
-Having trouble configuring your API calls or want to examine an example of the completed tutorial? Navigate to the `completed` folder in the [GitHub repository](https://github.com/camunda/camunda-api-tutorials/tree/main/completed), where you can view an example `camunda-8.js` file.
+Having trouble configuring your API calls or want to examine an example of the completed tutorial? Navigate to the `completed` folder in the [GitHub repository](https://github.com/camunda/camunda-api-tutorials/tree/main/completed), where you can view an example `camunda-process-instances.js` file.
 
 ## Next steps
 
