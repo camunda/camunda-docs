@@ -400,7 +400,7 @@ camunda:
 This disables an intentional security mechanism and should only be used in development environments with no Identity installed.
 :::
 
-To allow users to assign other users to tasks, set the configuration property `camunda.tasklist.feature-flag.allow-non-self-assignment` for `true`.
+To allow users to assign other users to tasks, set the configuration property `camunda.tasklist.feature-flag.allow-non-self-assignment` to `true`.
 
 ```yaml
 camunda:
