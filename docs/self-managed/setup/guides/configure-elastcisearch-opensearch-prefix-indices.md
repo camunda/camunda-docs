@@ -20,8 +20,6 @@ Changing the index prefix after a Camunda instance has been running will create 
 
 ## Prefix Elasticsearch indices
 
-Select the section below to view examples for Elasticsearch index prefixes.
-
 <Tabs groupId="featured" defaultValue="envVars" queryString values={
 [
 {label: 'Environment variables', value: 'envVars' },
@@ -112,8 +110,6 @@ camunda:
 
 ## Prefix OpenSearch indices
 
-Select the section below to view examples for OpenSearch index prefixes.
-
 <Tabs groupId="searchEngineOps" defaultValue="envVars" values={[
 { label: 'Environment variables', value: 'envVars' },
 { label: 'values.yaml', value: 'valuesYaml' },
@@ -135,8 +131,8 @@ CAMUNDA_OPTIMIZE_ZEEBE_NAME=custom-zeebe
 
 ````
 </TabItem>
-
 <TabItem value="valuesYaml">
+
 ```yaml
 global:
   opensearch:
