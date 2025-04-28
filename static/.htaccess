@@ -55,11 +55,9 @@ RewriteRule ^(.*\.(yaml|bpmn|xml|png|jpeg|jpg|yml|pdf|svg|graphqls|diff))/$ /$1 
 
 # Numbered aliases for vNext. These are temporary, until this version becomes current.
 RewriteRule ^docs/8.8/(.*)$ /docs/next/$1 [R=302,L]
-RewriteRule ^optimize/3.16.0/(.*)$ /optimize/next/$1 [R=302,L]
 
 # For linking from our apps - redirect URLs with the current version to URLs with no version
 RewriteRule ^docs/8.7/(.*)$ /docs/$1 [R=302,L]
-RewriteRule ^optimize/3.15.0/(.*)$ /optimize/$1 [R=302,L]
 
 ## Archived versions. Note that the URL is adjusted to staging in the publish-stage workflow.
 RewriteRule ^docs/0.25/(.*)$ https://unsupported.docs.camunda.io/0.25/docs/$1 [R=301,L]

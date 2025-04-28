@@ -364,7 +364,7 @@ operate:
         defaultMode: 420
 ```
 
-The actual configuration properties can be reviewed [in the Operate configuration documentation](docs/self-managed/operate-deployment/operate-configuration.md#zeebe-broker-connection).
+The actual configuration properties can be reviewed [in the Operate configuration documentation](/self-managed/operate-deployment/operate-configuration.md#zeebe-broker-connection).
 
 For Tasklist:
 
@@ -389,6 +389,6 @@ tasklist:
         defaultMode: 420
 ```
 
-The actual configuration properties can be reviewed [in the Tasklist configuration documentation](docs/self-managed/tasklist-deployment/tasklist-configuration.md#zeebe-broker-connection).
+The actual configuration properties can be reviewed [in the Tasklist configuration documentation](/self-managed/tasklist-deployment/tasklist-configuration.md#zeebe-broker-connection).
 
 5. Configure all other applications running inside the cluster and connecting to the Zeebe Gateway to also use TLS.

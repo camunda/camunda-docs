@@ -29,7 +29,7 @@ Find an overview in the [Connectors Bundle project](https://github.com/camunda/c
 Operate, Tasklist, and Optimize use Elasticsearch as its underlying data store. Therefore you have to download and run Elasticsearch.
 
 :::note
-Please ensure to check compatability of [supported environments](/docs/reference/supported-environments.md) for your self-managed installation.
+Please ensure to check compatability of [supported environments](/reference/supported-environments.md) for your self-managed installation.
 :::
 
 To run Elasticsearch, execute the following commands:

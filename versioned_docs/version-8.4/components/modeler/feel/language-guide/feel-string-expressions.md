@@ -24,7 +24,7 @@ An addition concatenates the strings. The result is a string containing the char
 :::tip
 
 The concatenation is only available for string values. For other types, you can use
-the [`string()`](/docs/components/modeler/feel/builtin-functions/feel-built-in-functions-conversion.md#stringfrom) function to convert
+the [`string()`](/components/modeler/feel/builtin-functions/feel-built-in-functions-conversion.md#stringfrom) function to convert
 the value into a string first.
 
 ```feel
