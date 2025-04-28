@@ -209,7 +209,7 @@ The code within the handler method needs to be synchronously executed, as the co
 When using `autoComplete` you can:
 
 - Return a `Map`, `String`, `InputStream`, or `Object`, which will then be added to the process variables.
-- Throw a `CamundaBpmnError`, which results in a BPMN error being sent to Zeebe.
+- Throw a `BpmnError`, which results in a BPMN error being sent to Zeebe.
 - Throw any other `Exception` that leads in a failure handed over to Zeebe.
 
 ```java
@@ -221,7 +221,7 @@ public Map<String, Object> handleJobFoo(final ActivatedJob job) {
     return variablesMap;
   } else {
    // problem shall be indicated to the process:
-   throw new CamundaBpmnError("DOESNT_WORK", "This does not work because...");
+   throw new BpmnError("DOESNT_WORK", "This does not work because...");
   }
 }
 ```
@@ -298,20 +298,50 @@ public ProcessVariables foo(@VariablesAsType ProcessVariables variables, @Custom
 }
 ```
 
-### Throwing `CamundaBpmnError`s
+### Throwing `BpmnError`s
 
-Whenever your code hits a problem that should lead to a [BPMN error](/components/modeler/bpmn/error-events/error-events.md) being raised, you can throw a `CamundaBpmnError` to provide the error code used in BPMN:
+Whenever your code hits a problem that should lead to a [BPMN error](/components/modeler/bpmn/error-events/error-events.md) being raised, you can throw a `BpmnError` to provide the error code used in BPMN:
 
 ```java
 @JobWorker(type = "foo")
 public void handleJobFoo() {
   // some work
-  if (!successful) {
+  if (businessError) {
    // problem shall be indicated to the process:
-   throw new CamundaBpmnError("DOESNT_WORK", "This does not work because...");
+   throw CamundaError.bpmnError("ERROR_CODE", "Some explanation why this does not work");
+   // this is a static function that returns an instance of BpmnError
   }
 }
 ```
+
+### Failing jobs in a controlled way
+
+Whenever you want a job to fail in a controlled way, you can throw a `JobError` and provide parameters like `variables`, `retries` and `retryBackoff`:
+
+```java
+@JobWorker(type = "foo")
+public void handleJobFoo() {
+  try {
+   // some work
+  } catch(Exception e) {
+   // problem shall be indicated to the process:
+   throw CamundaError.jobError("Error message", new ErrorVariables(), null, Duration.ofSeconds(10), e);
+   // this is a static function that returns an instance of JobError
+  }
+}
+```
+
+The JobError takes 5 parameters:
+
+- `errorMessage`: String
+- `variables`: Object _(optional)_, default `null`
+- `retries`: Integer _(optional)_, defaults to `job.getRetries() - 1`
+- `retryBackoff`: Duration _(optional)_, defaults to `PT0S`
+- `cause`: Exception _(optional)_, defaults to `null`
+
+:::note
+When the job error is sent to the engine, the stacktrace of the job error will become the actual error message. The provided cause will be visible in Operate.
+:::
 
 ## Additional configuration options
 
