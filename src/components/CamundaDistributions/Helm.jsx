@@ -50,10 +50,10 @@ const HelmChartInstall = () => {
         {versionEnvVar}
         helm install camunda camunda/camunda-platform {versionArg}
       </CodeBlock>
-      In the rest of the docmentaion we will use{" "}
+      In the rest of the documentation we will use{" "}
       <code>--version $HELM_CHART_VERSION</code> to reference the Helm chart
-      version. For more details about Helm chart version, check{" "}
-      <a href="#versioning">the versioning section</a>.
+      version. For more details about Helm chart version, see{" "}
+      <a href="#versioning">versioning</a>.
       <br />
       <br />
     </>
