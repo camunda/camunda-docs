@@ -19,6 +19,50 @@ These release notes identify the new features included in 8.8, including [alpha 
 | ---------------------- | ---------------------------- | ------------ | ------------ | ------------ |
 | 14 October 2025        | 13 April 2027                | -            | -            | -            |
 
+## 8.8.0-alpha4
+
+| Release date | Changelog(s)                                                                                                                                                                               | Blog |
+| :----------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--- |
+| 13 May 2025  | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.8.0-alpha4)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.8.0-alpha4)</li></ul> | -    |
+
+### AI Agent Connector
+
+<!-- https://github.com/camunda/product-hub/issues/2779 and https://github.com/camunda/product-hub/issues/2744 -->
+
+- Memory management and tools orchestration
+- Long-term memory support to the AI agent connector. Automatically triggers RAG logic to retrieve relevant past conversations. Simplifies memory management by removing the need for manual data handling and custom retrieval logic.
+
+### Camunda Process Test H2 support as a data layer <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span> {#h2support}
+
+<!-- https://github.com/camunda/product-hub/issues/2687 -->
+
+Camunda Process Test now supports [H2](https://www.h2database.com/html/main.html) as the default embedded data layer, streamlining the developer experience for Spring Boot and plain Java projects.
+
+- H2 is now automatically provisioned when integrating the Camunda Process Test libraries, eliminating manual database configuration and reducing memory footprint.
+- Process testing becomes faster to set up, simpler to maintain, and easier to integrate into your continuous integration workflows.
+
+### FEEL Copilot and Playground <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span> {#feelcopilot}
+
+<!-- https://github.com/camunda/product-hub/issues/2450 -->
+
+Web Modeler (SaaS) now includes the integrated FEEL Copilot and FEEL Playground.
+
+- FEEL Copilot: Use generative AI to create and debug executable FEEL (Friendly Enough Expression Language) expressions.
+- FEEL Playground: Test and validate your FEEL expressions using process variables and process context, making it easier for you to develop business logic in Camunda.
+
+:::note
+You can also use the [standalone FEEL Copilot tool (alpha)](https://feel-copilot.camunda.com/) for a fully-featured Copilot.
+:::
+
+### Hubspot Connector <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span> {#hubspotalpha4}
+
+<!-- https://github.com/camunda/product-hub/issues/2398 -->
+
+Hubspot Connector updates include:
+
+- The Get contact by ID operation now supports [properties](/components/connectors/out-of-the-box-connectors/hubspot.md#get-contact-by-id) and default contact properties.
+- The new [Enroll contact to workflow](/components/connectors/out-of-the-box-connectors/hubspot.md#enroll-contact-to-workflow) operation allows you to enroll contacts into a specified workflow.
+
 ## 8.8.0-alpha3
 
 | Release date  | Changelog(s)                                                                                                                                                                               | Blog |
