@@ -20,6 +20,16 @@ Make sure you have the following information for your existing PostgreSQL instan
 - password: `examplePassword`
 - name of the database: `camunda`
 
+## Database setup
+
+Make sure to have created the relevant databases in your PostgreSQL instance. Here are the databases that we will create for this guide:
+
+```SQL
+CREATE DATABASE "web-modeler";
+CREATE DATABASE "keycloak";
+CREATE DATABASE "identity";
+```
+
 ### Creating Secrets
 
 Once you have the above infromation, it is best to create a Kubernetes secret for the database password, so you do not have to refer to sensitive information in plain text within your values.yaml.
@@ -56,12 +66,13 @@ identity:
     database: "identity"
 
 identityKeycloak:
+  # disable internal psql
+  postgresql:
+    enabled: false
   auth:
     adminUser: postgres
     existingSecret: "camunda-psql-db"
     existingSecretPasswordKey: "password"
-  postgresql:
-    enabled: false
   externalDatabase:
     host: "db.example.com"
     port: 5432
