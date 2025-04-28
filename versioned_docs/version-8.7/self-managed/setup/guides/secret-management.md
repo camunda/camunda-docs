@@ -72,6 +72,8 @@ Apply it with:
 kubectl apply -f my-secret.yaml
 ```
 
+For a full set of Identity secrets see the [installation guide](https://docs.camunda.io/docs/self-managed/setup/install/#create-identity-secrets).
+
 ### Referencing secrets in `values.yaml`
 
 Depending on the structure of the secret key, there are two ways to reference a secret in the values.yaml file:
