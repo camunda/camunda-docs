@@ -373,6 +373,7 @@ module.exports = {
             "components/connectors/connector-types",
             "components/connectors/use-connectors/inbound",
             "components/connectors/use-connectors/outbound",
+            "components/connectors/use-connectors/intrinsic-functions",
           ],
         },
         {
