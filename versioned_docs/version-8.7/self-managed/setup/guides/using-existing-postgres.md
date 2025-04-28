@@ -1,10 +1,16 @@
 ---
 id: using-existing-postgres
-title: "Using PostgreSQL"
+title: "Using existing PostgreSQL"
 description: "Learn how to use an Amazon OpenSearch Service instance in Camunda 8 Self-Managed deployment."
 ---
 
-Camunda 8 Self-Managed has three components that use PostgreSQL: Identity, Keycloak, and WebModeler. For more details, review the [architecture](../../about-self-managed.md#architecture) documentation.
+Camunda 8 Self-Managed has three components that use PostgreSQL:
+
+- Identity
+- Keycloak
+- WebModeler
+
+For more details, review the [architecture](../../about-self-managed.md#architecture) documentation.
 
 This guide steps through using an existing PostgreSQL instance. By default, [Helm chart deployment](/self-managed/setup/overview.md) creates a new PostgreSQL instance, but it's possible to use an existing, external PostgreSQL Service instead.
 
