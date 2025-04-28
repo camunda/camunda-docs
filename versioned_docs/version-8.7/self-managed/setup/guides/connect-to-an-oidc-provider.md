@@ -116,6 +116,8 @@ global:
         audience: <Audience from Step 3>
 ```
 
+You can also [store the client secrets in a Kubernetes secret and reference that in the Helm values](https://docs.camunda.io/docs/self-managed/setup/install/#create-identity-secrets).
+
 </TabItem>
 </Tabs>
 
