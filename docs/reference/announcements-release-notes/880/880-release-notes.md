@@ -32,27 +32,53 @@ These release notes identify the new features included in 8.8, including [alpha 
 - Memory management and tools orchestration
 - Long-term memory support to the AI agent connector. Automatically triggers RAG logic to retrieve relevant past conversations. Simplifies memory management by removing the need for manual data handling and custom retrieval logic.
 
-### Camunda Process Test H2 support as a data layer <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span> {#h2support}
+### Camunda Process Test H2 data layer support <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Zeebe</span> {#h2support}
 
 <!-- https://github.com/camunda/product-hub/issues/2687 -->
 
-Camunda Process Test now supports [H2](https://www.h2database.com/html/main.html) as the default embedded data layer, streamlining the developer experience for Spring Boot and plain Java projects.
+Camunda Process Test now supports using the [H2 Database Engine](https://www.h2database.com/html/main.html) as the default embedded data layer.
 
 - H2 is now automatically provisioned when integrating the Camunda Process Test libraries, eliminating manual database configuration and reducing memory footprint.
-- Process testing becomes faster to set up, simpler to maintain, and easier to integrate into your continuous integration workflows.
+- H2 support streamlines the developer experience for your Spring Boot and plain Java projects. Process testing is now faster to set up, simpler to maintain, and easier to integrate with your continuous integration workflows.
 
-### FEEL Copilot and Playground <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span> {#feelcopilot}
+To learn more about Camunda Process Test, see [Zeebe Process Test](/apis-tools/java-client/zeebe-process-test.md).
+
+### Connector manage and run supports multiple runtimes<span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Console">Console</span> {#connector-management}
+
+<!-- https://github.com/camunda/product-hub/issues/2750 -->
+
+Connector manage and run now supports management of multiple Connector Runtime instances.
+
+To learn more about this feature, see [manage your connectors](/components/console/manage-clusters/manage-connectors.md).
+
+### FEEL Copilot (alpha) <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span> {#feelcopilot}
 
 <!-- https://github.com/camunda/product-hub/issues/2450 -->
 
-Web Modeler (SaaS) now includes the integrated FEEL Copilot and FEEL Playground.
+Web Modeler (SaaS) now includes an integrated FEEL Copilot.
 
-- FEEL Copilot: Use generative AI to create and debug executable FEEL (Friendly Enough Expression Language) expressions.
-- FEEL Playground: Test and validate your FEEL expressions using process variables and process context, making it easier for you to develop business logic in Camunda.
+- Use generative AI to create and debug executable FEEL (Friendly Enough Expression Language) expressions.
+- ...
+
+To learn more about this alpha feature, see...
 
 :::note
-You can also use the [standalone FEEL Copilot tool (alpha)](https://feel-copilot.camunda.com/) for a fully-featured Copilot.
+
+- The FEEL Copilot is an alpha feature, allowing you to test and participate in development by sharing your feedback. To learn more about alpha features and their limitations, see [alpha features](/components/early-access/alpha/alpha-features.md).
+- You can also use the fully-featured [standalone FEEL Copilot tool (alpha)](https://feel-copilot.camunda.com/).
+
 :::
+
+### FEEL Playground <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span> {#feelplayground}
+
+<!-- https://github.com/camunda/product-hub/issues/2450 -->
+
+Web Modeler (SaaS and Self-Managed) now includes an integrated FEEL Playground.
+
+- The FEEL Playground is integrated into the popup FEEL editor.
+- Test and validate your FEEL expressions using process variables and process context, making it easier for you to develop business logic in Camunda.
+
+To learn more about this feature, see...
 
 ### Hubspot Connector <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span> {#hubspotalpha4}
 
@@ -60,8 +86,10 @@ You can also use the [standalone FEEL Copilot tool (alpha)](https://feel-copilot
 
 Hubspot Connector updates include:
 
-- The Get contact by ID operation now supports [properties](/components/connectors/out-of-the-box-connectors/hubspot.md#get-contact-by-id) and default contact properties.
+- The [Get contact by ID](/components/connectors/out-of-the-box-connectors/hubspot.md#get-contact-by-id) operation now supports the retrieval of properties and default contact properties.
 - The new [Enroll contact to workflow](/components/connectors/out-of-the-box-connectors/hubspot.md#enroll-contact-to-workflow) operation allows you to enroll contacts into a specified workflow.
+
+To learn more about this Connector, see [HubSpot Connector](/components/connectors/out-of-the-box-connectors/hubspot.md).
 
 ## 8.8.0-alpha3
 
@@ -91,14 +119,6 @@ Advanced User Task Listeners for Updating Events allow you to define listeners t
 - Operators can also view, manage, and resolve incidents caused by these listeners in Operate, ensuring a unified and transparent approach to handling task changes.
 
 To learn more about this feature, see [advanced user task listeners for updating events](/components/concepts/user-task-listeners.md).
-
-<!-- https://github.com/camunda/product-hub/issues/2750 -->
-
-### Connector manage and run supports multiple Connector Runtimes<span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Console">Console</span> {#connector-management}
-
-Connector manage and run in Console now supports managing multiple Connector Runtime instances.
-
-To learn more about this feature, see [manage your connectors](/components/console/manage-clusters/manage-connectors.md).
 
 <!-- https://github.com/camunda/product-hub/issues/2398 -->
 
