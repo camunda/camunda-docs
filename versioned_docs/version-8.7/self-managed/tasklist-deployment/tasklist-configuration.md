@@ -331,35 +331,6 @@ If more than one Camunda Tasklist instance is accessible by users for a failover
 | :------------------------------------------- | :--------------------------------------------------------- | :------------ |
 | camunda.tasklist.persistent.sessions.enabled | Enables the persistence of user sessions in Elasticsearch. | false         |
 
-## Migrations
-
-Automatic migration is enabled by default in all Tasklist deployments, including the Importer.
-
-| Name                                        | Description                                             | Default value |
-| ------------------------------------------- | ------------------------------------------------------- | ------------- |
-| camunda.tasklist.migration.migrationEnabled | Enables the migration process                           | true          |
-| camunda.tasklist.migration.reindexBatchSize | The batch size of documents to reindex during migration | 5000          |
-| camunda.tasklist.migration.slices           | How many slices should the reindex be divided into      | 0 (auto)      |
-
-:::note
-When running multiple instances of the Tasklist application and/or the Tasklist Importer the `camunda.tasklist.migration.migrationEnabled` property should be enabled only on one of the instances. Even though the migration processes themselves are idempotent, there is a chance that one of the instances fail to apply the migration.
-
-As a side effect of this, there is a possibility that Elasticsearch/OpenSearch index settings are left modified with `refresh_interval=-1` causing the data not to be refreshed thus not visible.
-
-:::
-
-The above configuration properties have an effect on the duration of the migration process in the following way:
-
-1. You can set the batch size for reindex of the documents. This can reduce the time needed to reindex the data.
-   Small document size means big batch size, while big document size means small batch size.
-
-`camunda.tasklist.migration.reindexBatchSize = 5000` (Between 1 and 10.000, Default: 5.000)
-
-2. In how many slices should the reindex be divided. For each shard used by the index, you normally use a slice.
-   Elasticsearch decides how many slices are used if the value is set to 0 (automatic).
-
-`camunda.tasklist.migration.slices = 0` - Must be positive. Default is 0 (automatic).
-
 ## Example of application.yml file
 
 The following snippet represents the default Tasklist configuration, which is shipped with the distribution. It can be found inside the `config` folder (`/usr/local/tasklist/config/application.yml`) and can be used to adjust Tasklist to your needs.
