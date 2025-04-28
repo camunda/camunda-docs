@@ -1,7 +1,7 @@
 ---
 id: camunda-8-api-intermediate-tutorial
 title: Intermediate tutorial
-sidebar-label: Intermediate
+sidebar_label: Intermediate
 description: "Step through our intermediate Camunda 8 API tutorial to deploy resources, create and start a process instance, and view a process instance by its key."
 ---
 

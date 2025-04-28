@@ -1,6 +1,7 @@
 ---
 id: camunda-8-api-tutorial
-title: Tutorial
+title: Beginner tutorial
+sidebar_label: Beginner
 description: "New to the Camunda 8 API? Step through our tutorial to list all roles, create a role, retrieve a role, and delete a role."
 ---
 
