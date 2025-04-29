@@ -10,7 +10,7 @@ import TabItem from "@theme/TabItem";
 
 ## Overview
 
-Index prefixes allow you to append a unique identifier to each search index (Elasticsearch or OpenSearch), making it easier to organize and retrieve relevant information by structuring your data. With a consistent prefix, all related indices are easily identifiable, simplifying queries and data management.
+Index prefixes allow you to append a unique identifier to each search index, such as in Elasticsearch or OpenSearch, making it easier to organize and retrieve relevant information by structuring your data. With a consistent prefix, all related indices are easily identifiable, simplifying queries and data management.
 
 Using index prefixes in Camunda ensures data isolation by allowing multiple Camunda instances to run on a shared cluster without accessing each other’s data. This is crucial for maintaining separation in multi-instance and multi-tenant environments, and when testing different configurations.
 
