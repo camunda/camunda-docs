@@ -130,9 +130,6 @@ CAMUNDA_OPERATE_ZEEBEOPENSEARCH_PREFIX=custom-zeebe
 CAMUNDA_TASKLIST_OPENSEARCH_INDEXPREFIX=custom
 CAMUNDA_TASKLIST_ZEEBEOPENSEARCH_PREFIX=custom-zeebe
 
-CAMUNDA_OPTIMIZE_OPENSEARCH_SETTINGS_INDEX_PREFIX=custom-optimize
-CAMUNDA_OPTIMIZE_ZEEBE_NAME=custom-zeebe
-
 ````
 </TabItem>
 
@@ -156,14 +153,6 @@ tasklist:
     - name: CAMUNDA_TASKLIST_OPENSEARCH_INDEXPREFIX
       value: custom-webapp
 
-optimize:
-  env:
-    - name: CAMUNDA_OPTIMIZE_OPENSEARCH_SETTINGS_INDEX_PREFIX
-      value: custom-optimize
-  migration:
-    env:
-      - name: CAMUNDA_OPTIMIZE_ZEEBE_NAME
-        value: custom-zeebe
 ````
 
 </TabItem>
@@ -186,13 +175,6 @@ camunda:
   tasklist:
     opensearch:
       indexPrefix: custom
-    zeebeOpensearch:
-      prefix: custom-zeebe
-  optimize:
-    opensearch:
-      settings:
-        index:
-          prefix: custom-optimize
     zeebeOpensearch:
       prefix: custom-zeebe
 ```
