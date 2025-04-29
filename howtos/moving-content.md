@@ -32,6 +32,36 @@ RewriteRule ^old/path$ /new/path/ [options]
 
 You'll find many examples of redirect rules in the `.htaccess` file. Following are some guidelines to help you write new rules.
 
+#### Example redirect rules
+
+##### Redirecting a single page to a different URL
+
+`RewriteRule ^docs/old-path/old-doc/?$ /docs/new-path/new-doc/ [R=301,L]`
+
+- Allows for an optional terminating `/` in the match (left side of the rule).
+- Redirects to a URL that always terminates in a slash (right side of the rule).
+- Does not include any capture groups on the left side of the rule, so none are referenced on the right side of the rule.
+
+##### Redirecting a "folder" of docs to a different "folder"
+
+`RewriteRule ^docs/old-path/(.*)$ /docs/new-path/$1 [R=301,L]`
+
+- Captures a group in the match for any child of the `old-path` (left side of the rule).
+- Appends that captured group to the `new-path` in the target (right side of the rule).
+
+##### Accounting for multiple versions
+
+```
+RewriteRule ^docs/8.7/path/old-doc?$ /docs/8.7/path/new-doc/ [R=301,L]
+RewriteRule ^docs/path/old-doc?$ /docs/path/new-doc/ [R=301,L]
+```
+
+or
+
+`RewriteRule ^docs/(8.7/)?path/old-doc?$ /docs/$1path/new-doc/ [R=301,L]`
+
+We do not have a preference between specifying one rule per version, vs one rule that captures multiple versions. You may use whichever best suits your scenario.
+
 #### Order rules by version descending
 
 Add rules to the top of the `.htaccess` file, or co-located with rules for the same version of the docs. This prevents old rules from accidentally overriding new rules. It also makes it easier for maintainers to identify rules that might be ready for pruning.
