@@ -52,7 +52,10 @@ If no version of Java is found, follow your chosen installation's instructions f
 
 If startup is successful, a browser window for Operate will open automatically. Alternatively, you can access Operate at [http://localhost:8080/operate](http://localhost:8080/operate)
 
-Alternatively, you can start Camunda 8 Run using Docker: - On Mac and Linux: `./start.sh --docker` - On Windows: `.\c8run.exe start --docker`
+Alternatively, you can start Camunda 8 Run using Docker:
+
+- On Mac and Linux: `./start.sh --docker`
+- On Windows: `.\c8run.exe start --docker`
 
 When started with Docker, Operate will be available at [http://localhost:8081](http://localhost:8081)
 
