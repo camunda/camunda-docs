@@ -178,7 +178,15 @@
         "type": "doc",
         "id": "components/rpa/overview"
       },
-      "items": ["components/rpa/getting-started", "components/rpa/production"]
+      "items": [
+        "components/rpa/getting-started",
+        "components/rpa/production",
+        {
+          "type": "link",
+          "label": "RPA Library specifications",
+          "href": "https://camunda.github.io/rpa-python-libraries/"
+        }
+      ]
     },
     {
       "type": "category",
