@@ -26,6 +26,15 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   --ifm-alert-border-radius: 0;
 }
 
+.markdown {
+  --ifm-h1-vertical-rhythm-top: 4;
+  --ifm-h2-vertical-rhythm-top: 2.5;
+  --ifm-h3-vertical-rhythm-top: 2;
+  --ifm-heading-vertical-rhythm-top: 1.25;
+  --ifm-h1-vertical-rhythm-bottom: 1.25;
+  --ifm-heading-vertical-rhythm-bottom: 0.7;
+}
+
 /* Dark mode */
 [data-theme="dark"]:root {
   --ifm-color-primary: #78a9ff;
@@ -901,8 +910,8 @@ a.table-of-contents__link.toc-highlight > span.badge {
 
 /* Page titles */
 .markdown h1:first-child {
-  font-weight: 600;
-  font-size: 2.5rem;
+  font-weight: 500;
+  font-size: 2.2rem;
 }
 h1 {
   padding-top: 10px;
@@ -914,8 +923,8 @@ h1.openapi__heading {
 }
 /* Main page headings */
 h2 {
-  font-size: 28px;
-  font-weight: 600;
+  font-size: 1.7rem;
+  font-weight: 500;
   border-bottom: 1px solid #dedede;
   margin-bottom: 20px;
   padding-bottom: 10px;
@@ -986,8 +995,8 @@ h2 .badge--cloud:nth-of-type(1) {
 h3 {
   margin-bottom: 0.8rem;
   margin-top: 2.2rem;
-  font-weight: 500;
-  font-size: 1.6rem;
+  font-weight: 450;
+  font-size: 1.3rem;
 }
 /* Second level page heading modifications for home page cards */
 h3.featuresTitle_src-pages-styles-module,
@@ -1017,7 +1026,7 @@ h3 .badge--long:nth-of-type(1) {
   margin-left: 5px;
 }
 h4 {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   margin-top: 2rem;
   font-weight: 500;
   margin-bottom: 1rem;
