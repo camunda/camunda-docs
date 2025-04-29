@@ -509,7 +509,7 @@ The following conventions apply to all attributes:
   - `searchAfter` has been moved under `page`.
   - `size` is now the `limit` in the `page` object.
 - Renamed attributes in the `filter` object
-  - `id` - Use `decisionRequirementsId` instead.
+  - `id` - Use `decisionRequirementsKey` instead.
   - `key` of type `int64` - Use `decisionRequirementsKey` of type `string`.
   - `name` - Use `decisionRequirementsName` instead.
 - Removed attributes in the `filter` object
@@ -523,7 +523,7 @@ The following conventions apply to all attributes:
   - `total` is moved under the `page` object as `totalItems`.
   - `sortValues` - Use `lastSortValues` in the `page` object instead.
 - Renamed attributes in the objects of the `items` array
-  - `id` - Use `decisionRequirementsId` instead.
+  - `id` - Use `decisionRequirementsKey` instead.
   - `key` of type `int64` - Use `decisionRequirementsKey` of type `string`.
   - `name` - Use `decisionRequirementsName` instead.
 
