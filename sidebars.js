@@ -1207,6 +1207,7 @@ module.exports = {
                 "self-managed/console-deployment/configuration/ssl",
               ],
             },
+            "self-managed/console-deployment/usage-metrics",
             "self-managed/console-deployment/telemetry",
           ],
           Zeebe: [
