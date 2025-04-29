@@ -20,8 +20,9 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   --ifm-breadcrumb-item-background-active: none;
   --ifm-breadcrumb-color-active: var(--ifm-font-color-base);
   --ifm-menu-color: var(--ifm-color-emphasis-800);
-  --ifm-heading-font-family: IBM Plex Sans, -apple-system, blinkmacsystemfont,
-    Segoe UI, roboto, oxygen-sans, ubuntu, cantarell, Helvetica Neue, sans-serif;
+  --ifm-heading-font-family:
+    IBM Plex Sans, -apple-system, blinkmacsystemfont, Segoe UI, roboto,
+    oxygen-sans, ubuntu, cantarell, Helvetica Neue, sans-serif;
   --ifm-leading: calc(var(--ifm-leading-desktop) * 1rem);
 }
 

@@ -664,7 +664,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/MappingSearchQueryResult"
 
-  /tenants/{tenantId}/groups/{groupKey}:
+  /tenants/{tenantId}/groups/{groupId}:
     put:
       tags:
         - Tenant
@@ -678,7 +678,7 @@ paths:
           description: The unique identifier of the tenant.
           schema:
             type: string
-        - name: groupKey
+        - name: groupId
           in: path
           required: true
           description: The unique identifier of the group.
@@ -713,7 +713,7 @@ paths:
           description: The unique identifier of the tenant.
           schema:
             type: string
-        - name: groupKey
+        - name: groupId
           in: path
           required: true
           description: The unique identifier of the group.
@@ -1631,6 +1631,42 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/ProcessInstanceFilter"
+      responses:
+        "202":
+          description: The batch operation request was accepted.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchOperationCreatedResult"
+        "400":
+          description: >
+            The process instance batch operation failed.
+            More details are provided in the response body.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+
+  /process-instances/batch-operations/migration:
+    post:
+      tags:
+        - Process instance
+      operationId: migrateProcessInstancesBatchOperation
+      summary: Create a batch operation to migrate process instances
+      description: |
+        Migrate multiple instances of process instances.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProcessInstanceMigrationBatchOperationInstruction"
       responses:
         "202":
           description: The batch operation request was accepted.
@@ -2747,6 +2783,89 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "404":
           description: The group or user with the given ID was not found, or the user is not assigned to this group.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /groups/{groupId}/mapping-rules/{mappingId}:
+    put:
+      tags:
+        - Group
+      operationId: addMappingToGroup
+      summary: Assign a mapping rule to a group (Work-in-Progress)
+      description: |
+        Assigns a mapping rule to a group.
+
+        This API is in a Work-in-Progress state and will undergo potential breaking changes until
+        its release with an upcoming minor release.
+      parameters:
+        - name: groupId
+          in: path
+          required: true
+          description: The group ID.
+          schema:
+            type: string
+        - name: mappingId
+          in: path
+          required: true
+          description: The mapping rule ID.
+          schema:
+            type: string
+      responses:
+        "202":
+          description: The mapping rule was assigned successfully to the group.
+        "400":
+          $ref: "#/components/responses/InvalidData"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          description: The group or mapping rule with the given ID was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "409":
+          description: The mapping rule with the given ID is already assigned to the group.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+    delete:
+      tags:
+        - Group
+      operationId: unassignMappingFromGroup
+      summary: Unassign a mapping rule from a group (Work-in-Progress)
+      description: |
+        Unassigns a mapping rule from a group.
+
+        This API is in a Work-in-Progress state and will undergo potential breaking changes until
+        its release with an upcoming minor release.
+      parameters:
+        - name: groupId
+          in: path
+          required: true
+          description: The group ID.
+          schema:
+            type: string
+        - name: mappingId
+          in: path
+          required: true
+          description: The mapping rule ID.
+          schema:
+            type: string
+      responses:
+        "202":
+          description: The mapping rule was unassigned successfully from the group.
+        "400":
+          $ref: "#/components/responses/InvalidData"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          description: The group or mapping rule with the given ID was not found, or the mapping rule is not assigned to this group.
           content:
             application/problem+json:
               schema:
@@ -4244,7 +4363,7 @@ components:
         filter:
           description: The user task variable search filters.
           allOf:
-            - $ref: "#/components/schemas/VariableUserTaskFilterRequest"
+            - $ref: "#/components/schemas/UserTaskVariableFilterRequest"
     UserTaskSearchQueryResult:
       description: User task search query response.
       type: object
@@ -4313,12 +4432,12 @@ components:
           type: array
           description: Process instance variables associated with the user task.
           items:
-            $ref: "#/components/schemas/UserTaskVariableFilterRequest"
+            $ref: "#/components/schemas/VariableValueFilterRequest"
         localVariables:
           type: array
           description: Local variables associated with the user task.
           items:
-            $ref: "#/components/schemas/UserTaskVariableFilterRequest"
+            $ref: "#/components/schemas/VariableValueFilterRequest"
         userTaskKey:
           type: string
           description: The key for this user task.
@@ -4331,7 +4450,7 @@ components:
         elementInstanceKey:
           type: string
           description: The key of the element instance.
-    UserTaskVariableFilterRequest:
+    VariableValueFilterRequest:
       type: object
       properties:
         name:
@@ -4344,7 +4463,7 @@ components:
       required:
         - name
         - value
-    VariableUserTaskFilterRequest:
+    UserTaskVariableFilterRequest:
       description: The user task variable search filters.
       type: object
       properties:
@@ -4933,7 +5052,7 @@ components:
           description: The process instance variables.
           type: array
           items:
-            $ref: "#/components/schemas/ProcessInstanceVariableFilterRequest"
+            $ref: "#/components/schemas/VariableValueFilterRequest"
         processInstanceKey:
           description: The key of this process instance.
           allOf:
@@ -5039,20 +5158,6 @@ components:
               type: array
               items:
                 $ref: "#/components/schemas/ProcessInstanceFilterFields"
-    ProcessInstanceVariableFilterRequest:
-      description: Process instance variable filter.
-      type: object
-      properties:
-        name:
-          description: Name of the variable.
-          type: string
-        value:
-          description: The value of the variable.
-          allOf:
-            - $ref: "#/components/schemas/StringFilterProperty"
-      required:
-        - name
-        - value
     ProcessInstanceSearchQueryResult:
       description: Process instance search response.
       type: object
@@ -7842,8 +7947,20 @@ components:
             The unique identifier of the created process instance; to be used wherever a request
             needs a process instance key (e.g. CancelProcessInstanceRequest).
           type: string
+    ProcessInstanceMigrationBatchOperationInstruction:
+      type: object
+      properties:
+        filter:
+          $ref: "#/components/schemas/ProcessInstanceFilter"
+        migrationPlan:
+          $ref: "#/components/schemas/ProcessInstanceMigrationInstruction"
+      required:
+        - filter
+        - migrationPlan
     ProcessInstanceMigrationInstruction:
       type: object
+      description: |
+        The migration instructions describe how to migrate a process instance from one process definition to another.
       properties:
         mappingInstructions:
           description: Element mappings from the source process instance to the target process instance.
@@ -8064,6 +8181,7 @@ components:
       enum:
         - PROCESS_CANCELLATION
         - RESOLVE_INCIDENT
+        - MIGRATE_PROCESS_INSTANCE
     BatchOperationCreatedResult:
       type: object
       properties:
