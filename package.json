@@ -71,7 +71,7 @@
     "lint-staged": "^15.5.1",
     "playwright": "^1.52.0",
     "prettier": "3.5.3",
-    "replace-in-file": "^7.2.0"
+    "replace-in-file": "^8.3.0"
   },
   "lint-staged": {
     "*.{css,js,json,MD,md,mdx,yaml,yml}": "prettier --write"
