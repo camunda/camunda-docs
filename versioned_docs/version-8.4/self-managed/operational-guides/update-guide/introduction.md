@@ -7,8 +7,12 @@ These documents guide you through the process of updating your Camunda 8
 application or server installation from one Camunda 8 version to the other.
 
 :::note
-When updating from one minor version to the next, you do not need to update to each **patch** version along the way. However, do not skip **minor** versions when updating.
-:::
+When updating from one minor version to the next, you must adhere to the following procedure:
+
+1. Update to latest available patch version of the minor you are currently using (e.g., given you are on `8.5.1`, go to `8.5.10` given `10` is the latest available patch)
+2. Update to the latest patch version of the following minor (e.g., given you are on `8.5.10`, go to `8.6.5` given `8.6.5` is the latest available `8.6.x` version)
+3. **Never** skip a minor version (e.g., **never** go directly from `8.5.x` to `8.7.x`, skipping `8.6.x`)
+   :::
 
 Depending on your amount of data, run a minor version for at least 24 hours before updating to the next version.
 
