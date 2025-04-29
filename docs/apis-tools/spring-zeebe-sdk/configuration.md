@@ -340,7 +340,7 @@ The JobError takes 5 parameters:
 - `cause`: Exception _(optional)_, defaults to `null`
 
 :::note
-When the job error is sent to the engine, the stacktrace of the job error will become the actual error message. The provided cause will be visible in Operate.
+The job error is sent to the engine by the SDK calling the [Fail Job API](/apis-tools/camunda-api-rest/specifications/fail-job.api.mdx). The stacktrace of the job error will become the actual error message. The provided cause will be visible in Operate.
 :::
 
 ## Additional configuration options
