@@ -27,10 +27,9 @@ These release notes identify the new features included in 8.8, including [alpha 
 
 ### AI Agent Connector
 
-<!-- https://github.com/camunda/product-hub/issues/2779 and https://github.com/camunda/product-hub/issues/2744 -->
+<!-- https://github.com/camunda/product-hub/issues/2744 -->
 
-- Memory management and tools orchestration
-- Long-term memory support to the AI agent connector. Automatically triggers RAG logic to retrieve relevant past conversations. Simplifies memory management by removing the need for manual data handling and custom retrieval logic.
+Long-term memory support to the AI agent connector. Automatically triggers RAG logic to retrieve relevant past conversations. Simplifies memory management by removing the need for manual data handling and custom retrieval logic.
 
 ### Camunda Process Test H2 data layer support <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Zeebe</span> {#h2support}
 
@@ -41,7 +40,7 @@ Camunda Process Test now supports using the [H2 Database Engine](https://www.h2d
 - H2 is now automatically provisioned when integrating the Camunda Process Test libraries, eliminating manual database configuration and reducing memory footprint.
 - H2 support streamlines the developer experience for your Spring Boot and plain Java projects. Process testing is now faster to set up, simpler to maintain, and easier to integrate with your continuous integration workflows.
 
-To learn more about Camunda Process Test, see [Zeebe Process Test](/apis-tools/java-client/zeebe-process-test.md).
+To learn more about Camunda Process Test, see [Camunda Process Test](/apis-tools/testing/getting-started.md).
 
 ### Connector manage and run supports multiple runtimes<span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Console">Console</span> {#connector-management}
 
