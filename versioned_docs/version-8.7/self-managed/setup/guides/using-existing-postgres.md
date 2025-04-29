@@ -24,9 +24,8 @@ Make sure you have the following information for your existing PostgreSQL instan
 - port: `5432`
 - username: `postgres`
 - password: `examplePassword`
-- name of the database: `camunda`
 
-## Database setup
+### Database setup
 
 Make sure to have created the relevant databases in your PostgreSQL instance. Here are the databases that we will create for this guide:
 
