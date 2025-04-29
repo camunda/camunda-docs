@@ -24,6 +24,7 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
     Segoe UI, roboto, oxygen-sans, ubuntu, cantarell, Helvetica Neue, sans-serif;
   --ifm-leading: calc(var(--ifm-leading-desktop) * 1rem);
   --ifm-alert-border-radius: 0;
+  --ifm-breadcrumb-padding-horizontal: 0rem;
 }
 
 .markdown {
@@ -58,6 +59,12 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
 
 .footer--dark {
   --ifm-footer-background-color: #161616;
+}
+
+@media (min-width: 996px) {
+  .theme-doc-version-badge {
+    display: none;
+  }
 }
 
 /* Add padding to main content column */
@@ -910,8 +917,8 @@ a.table-of-contents__link.toc-highlight > span.badge {
 
 /* Page titles */
 .markdown h1:first-child {
-  font-weight: 500;
-  font-size: 2.2rem;
+  font-weight: 600;
+  font-size: 2rem;
 }
 h1 {
   padding-top: 10px;
@@ -923,8 +930,8 @@ h1.openapi__heading {
 }
 /* Main page headings */
 h2 {
-  font-size: 1.7rem;
-  font-weight: 500;
+  font-size: 1.5rem;
+  font-weight: 600;
   border-bottom: 1px solid #dedede;
   margin-bottom: 20px;
   padding-bottom: 10px;
@@ -1065,10 +1072,15 @@ ul ol {
   border-bottom: 1px solid #dedede;
 }
 .tabs__item--active {
-  background-color: #f7f7f7;
+  background-color: transparent;
 }
 .tabs__item:hover {
-  background-color: #f7f7f7;
+  background-color: transparent;
+  color: black;
+}
+.tabs__item--active:hover {
+  background-color: transparent;
+  color: var(--ifm-color-primary);
 }
 .openapi-tabs__response-list-container {
   border-bottom: none;
