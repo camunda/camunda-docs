@@ -186,7 +186,7 @@ module.exports = {
         "components/rpa/production",
         {
           type: "link",
-          label: "RPA Library specifications",
+          label: "RPA library specifications",
           href: "https://camunda.github.io/rpa-python-libraries/",
         },
       ],
