@@ -70,6 +70,7 @@ When linking internally from one document to another, follow these guidelines:
 
 > [!NOTE]
 > If you add/edit a link that goes to `docs/path/file.md`, and you see the error `[all.markdownLinksDontCrossVersions] Exclude the docs/ prefix in markdown links, unless you intend to link only to vNext. Consider using [...](/path/file.md) instead of [...](docs/path/file.md).` ([example](https://github.com/camunda/camunda-docs/pull/5606#discussion_r2052977180)), you have two options:
+>
 > 1. Consider using `[...](/path/file.md)` instead of `[...](docs/path/file.md)`. For example, `/components/components-overview.md` rather than `/docs/components/components-overview.md`. The latter will force Docusaurus to link to the _vNext_ documentation, instead of the current version.
 > 2. If you're linking to vNext on purpose, just ignore the linting error. It won't prevent a green PR.
 
