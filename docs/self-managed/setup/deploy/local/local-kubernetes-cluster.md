@@ -57,7 +57,7 @@ If you are deploying Camunda 8 with Ingress configuration, make sure to add addi
 3. Install Camunda 8 using the `camunda-platform-core-kind-values.yaml` file you downloaded previously. This file might contain additional values if you are adding Ingress, TLS, or using a variety of other configuration properties. See [Camunda Helm chart parameters](https://artifacthub.io/packages/helm/camunda/camunda-platform#parameters). Execute the following command:
 
 ```sh
-helm install camunda-platform camunda/camunda-platform \
+helm install camunda-platform camunda/camunda-platform --version $HELM_CHART_VERSION \
     -f camunda-platform-core-kind-values.yaml
 ```
 

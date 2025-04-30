@@ -12,9 +12,10 @@ const currentVersion = "8.7";
 
 /** @type {Array<UnsupportedVersion>} */
 const unsupportedVersions = [
-  // 👋 When archiving a version, move it from the above array into here, and edit it!
+  // 👋 When archiving a version, add it into here!
   //   `label` appears in the top navbar version selector.
   //   `urlSuffix` gets appended to the target `unsupported.docs.camunda.io/` URL.
+  { label: "8.3", urlSuffix: "8.3" },
   { label: "8.2 / 3.10.0", urlSuffix: "8.2" },
   { label: "8.1 / 3.9.0", urlSuffix: "8.1" },
   { label: "8.0 / 3.8.0", urlSuffix: "8.0" },

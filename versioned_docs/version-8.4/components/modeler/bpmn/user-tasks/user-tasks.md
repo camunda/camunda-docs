@@ -36,7 +36,7 @@ Depending on your use case, three different types of form references can be used
    To link a user task to a Camunda Form, you have to specify the ID of the Camunda Form as the `formId` attribute of the task's `zeebe:formDefinition` extension element (see the [XML representation](#camunda-form-linked)).
    Form ID references always refer to the latest deployed version of the Camunda Form.
 
-   You can read more about Camunda Forms in the [Camunda Forms guide](/guides/utilizing-forms.md) or the [Camunda Forms reference](/docs/components/modeler/forms/camunda-forms-reference.md) to explore all configuration options for form elements.
+   You can read more about Camunda Forms in the [Camunda Forms guide](/guides/utilizing-forms.md) or the [Camunda Forms reference](/components/modeler/forms/camunda-forms-reference.md) to explore all configuration options for form elements.
 
 2. **Camunda Forms (embedded)** can be used to embed a form's JSON configuration directly into the BPMN process XML as a `zeebe:UserTaskForm` extension element of the process element.
    The embedded form can be referenced via the `formKey` attribute (see [XML representation](#camunda-form-embedded)).
@@ -61,7 +61,7 @@ The assignee attribute must adhere to the userId field’s case-sensitivity requ
 Note that in SaaS, all user IDs are converted to lowercase by default, as they are based on email addresses.
 :::
 
-Typically, the assignee, candidate users, and candidate groups are defined as [static values](/docs/components/concepts/expressions.md#expressions-vs-static-values) (e.g. `some_username`, `some_username, another_username` and
+Typically, the assignee, candidate users, and candidate groups are defined as [static values](/components/concepts/expressions.md#expressions-vs-static-values) (e.g. `some_username`, `some_username, another_username` and
 `sales, operations`), but they can also be defined as
 [expressions](/components/concepts/expressions.md) (e.g. `= book.author` and `= remove(reviewers, book.author)` and `= reviewer_roles`). The expressions are evaluated on activating the user task and must result in a
 `string` for the assignee and a `list of strings` for the candidate users and a `list of strings` for the candidate groups.

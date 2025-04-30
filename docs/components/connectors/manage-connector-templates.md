@@ -35,7 +35,7 @@ Take the following steps to create a new Connector template:
 
 ## Publish a Connector template
 
-After finalizing your Connector, click **Publish** to activate it within the project context. Assign a distinct version name for effective version management.
+After finalizing your Connector, click **Publish** to activate it within the project context. Assign a distinct version name for effective version management. Use the description field to provide details about what changes where introduced from the previous version.
 
 ![Publishing a template](img/connector-templates/create-connector-template-3.png)
 

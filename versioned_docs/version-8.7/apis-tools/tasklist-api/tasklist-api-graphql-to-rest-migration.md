@@ -86,8 +86,8 @@ Please note that several field names in request body and response were changed i
 - in response:
   - [`Task.creationTime`](/apis-tools/tasklist-api/objects/task.mdx#code-style-fontweight-normal-taskbcreationtimebcodestring--) ⇒ [`TaskSearchResponse.creationDate`](/apis-tools/tasklist-api-rest/schemas/responses/task-search-response.mdx#code-style-fontweight-normal-tasksearchresponsebcreationdatebcodestring-)
   - [`Task.completionTime`](/apis-tools/tasklist-api/objects/task.mdx#code-style-fontweight-normal-taskbcompletiontimebcodestring-) ⇒ [`TaskSearchResponse.completionDate`](/apis-tools/tasklist-api-rest/schemas/responses/task-search-response.mdx#code-style-fontweight-normal-tasksearchresponsebcompletiondatebcodestring)
-  - [`Task.processDefinitionId`](/apis-tools/tasklist-api/objects/task.mdx#code-style-fontweight-normal-taskbprocessdefinitionidbcodestring-) ⇒ [`TaskSearchResponse.processDefinitionKey`](docs/apis-tools/tasklist-api-rest/schemas/responses/task-search-response.mdx#code-style-fontweight-normal-tasksearchresponsebprocessdefinitionkeybcodestring)
-  - [`Task.processInstanceId`](/apis-tools/tasklist-api/objects/task.mdx#code-style-fontweight-normal-taskbprocessinstanceidbcodestring-) ⇒ [`TaskSearchResponse.processInstanceKey`](docs/apis-tools/tasklist-api-rest/schemas/responses/task-search-response.mdx#code-style-fontweight-normal-tasksearchresponsebprocessinstancekeybcodestring)
+  - [`Task.processDefinitionId`](/apis-tools/tasklist-api/objects/task.mdx#code-style-fontweight-normal-taskbprocessdefinitionidbcodestring-) ⇒ [`TaskSearchResponse.processDefinitionKey`](/apis-tools/tasklist-api-rest/schemas/responses/task-search-response.mdx#code-style-fontweight-normal-tasksearchresponsebprocessdefinitionkeybcodestring)
+  - [`Task.processInstanceId`](/apis-tools/tasklist-api/objects/task.mdx#code-style-fontweight-normal-taskbprocessinstanceidbcodestring-) ⇒ [`TaskSearchResponse.processInstanceKey`](/apis-tools/tasklist-api-rest/schemas/responses/task-search-response.mdx#code-style-fontweight-normal-tasksearchresponsebprocessinstancekeybcodestring)
 
 :::
 
