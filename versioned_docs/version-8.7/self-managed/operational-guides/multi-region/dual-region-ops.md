@@ -57,7 +57,7 @@ Running a dual-region configuration requires users to detect and manage any regi
   - In that guide, we're showcasing Kubernetes dual-region installation, based on the following tools:
     - [Helm (3.x)](https://helm.sh/docs/intro/install/) for installing and upgrading the [Camunda Helm chart](https://artifacthub.io/packages/helm/camunda/camunda-platform).
     - [Kubectl (1.30.x)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the Kubernetes cluster.
-- `cURL` or similar to interact with the REST API.
+- `cURL` or similar to interact with the [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md).
 
 ## Terminology
 
