@@ -50,6 +50,43 @@ Connector manage and run now supports management of multiple Connector Runtime i
 
 To learn more about this feature, see [manage your connectors](/components/console/manage-clusters/manage-connectors.md).
 
+### Connectors
+
+The following Connector enhancements are included in this release.
+
+#### Email Connector {#emailalpha4}
+
+<!-- https://github.com/camunda/connectors/pull/4657 -->
+
+The Email Connector now exposes the `Message-ID` provided by the client in the connector response payload.
+
+This allows for improved traceability, easier correlation between sent messages and logs, and better integration with downstream systems that rely on `Message-ID`.
+
+For example:
+
+```json
+{
+  "sent": true,
+  "subject": "Email subject"
+  "messageId": "<abc123@clientdomain.com>"
+}
+```
+
+:::note
+This change is backwards-compatible and does not require any action. You can now optionally use the `messageId` field for enhanced tracking when parsing connector responses.
+:::
+
+#### Hubspot Connector {#hubspotalpha4}
+
+<!-- https://github.com/camunda/product-hub/issues/2398 -->
+
+Hubspot Connector enhancements include:
+
+- The [Get contact by ID](/components/connectors/out-of-the-box-connectors/hubspot.md#get-contact-by-id) operation now supports the retrieval of properties and default contact properties.
+- The new [Enroll contact to workflow](/components/connectors/out-of-the-box-connectors/hubspot.md#enroll-contact-to-workflow) operation allows you to enroll contacts into a specified workflow.
+
+To learn more about this Connector, see [HubSpot Connector](/components/connectors/out-of-the-box-connectors/hubspot.md).
+
 ### FEEL Copilot (alpha) <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span> {#feelcopilot}
 
 <!-- https://github.com/camunda/product-hub/issues/2450 -->
@@ -78,17 +115,6 @@ Web Modeler (SaaS and Self-Managed) now includes an integrated FEEL Playground.
 - Test and validate your FEEL expressions using process variables and process context, making it easier for you to develop business logic in Camunda.
 
 To learn more about this feature, see...
-
-### Hubspot Connector <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span> {#hubspotalpha4}
-
-<!-- https://github.com/camunda/product-hub/issues/2398 -->
-
-Hubspot Connector updates include:
-
-- The [Get contact by ID](/components/connectors/out-of-the-box-connectors/hubspot.md#get-contact-by-id) operation now supports the retrieval of properties and default contact properties.
-- The new [Enroll contact to workflow](/components/connectors/out-of-the-box-connectors/hubspot.md#enroll-contact-to-workflow) operation allows you to enroll contacts into a specified workflow.
-
-To learn more about this Connector, see [HubSpot Connector](/components/connectors/out-of-the-box-connectors/hubspot.md).
 
 ## 8.8.0-alpha3
 
