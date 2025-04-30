@@ -67,6 +67,16 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   }
 }
 
+/* Match alert colours to Camunda brand colours */
+:root {
+  --ifm-color-success-dark: rgb(12, 176, 96);
+  --ifm-color-success-contrast-background: rgb(239, 247, 239);
+  --ifm-color-info-dark: rgb(0, 114, 206);
+  --ifm-color-info-contrast-background: rgb(244, 249, 254);
+  --ifm-color-warning-dark: rgb(252 93 13);
+  --ifm-color-warning-contrast-background: rgb(252, 243, 238);
+}
+
 /* Add padding to main content column */
 .docMainContainer_TBSr {
   padding-left: 20px;
