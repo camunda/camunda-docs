@@ -120,10 +120,10 @@ The following configuration parameters define the settings:
 | camunda.tasklist.elasticsearch.numberOfReplicas | How many replicas Elasticsearch uses for all Tasklist indices. | 0             |
 
 These values are applied only on first startup of Tasklist or during version update. After the Tasklist
-ELS schema is created, settings may be adjusted directly in the ELS template, and
+ELS schema is created, settings may be adjusted directly in the ELS template:
 
-- changes to `camunda.tasklist.elasticsearch.numberOfShards` will only be applied to new indices. The number of shards for existing indices will not change.
-- changes to `camunda.tasklist.elasticsearch.numberOfReplicas` will be applied to both existing and new indices.
+- Changes to `camunda.tasklist.elasticsearch.numberOfShards` will only be applied to new indices. The number of shards for existing indices will not change.
+- Changes to `camunda.tasklist.elasticsearch.numberOfReplicas` will be applied to both existing and new indices.
 
 ### Snippet from application.yml
 
