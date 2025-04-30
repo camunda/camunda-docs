@@ -63,10 +63,16 @@ As such, when a new version is cut, it results in unused sidebar sub-tree `.js` 
 
 When linking internally from one document to another, follow these guidelines:
 
+- Always include the `.md` extension in the path.
 - Use a relative path to the target markdown file if it is in the same subtree as the source file. [See example](https://github.com/camunda/camunda-docs/blob/930a0c384b48be27d0bc66216015404f67716f61/docs/components/console/introduction-to-console.md?plain=1#L10).
 - Use an absolute path to the target markdown file if it is in a different subtree than the source file. [See example](https://github.com/camunda/camunda-docs/blob/930a0c384b48be27d0bc66216015404f67716f61/docs/apis-clients/community-clients/spring.md?plain=1#L8).
-  - Refrain from using `/docs/<version>` when using an absolute path. For example, use `/components/components-overview.md` rather than `/docs/components/components-overview.md`. The latter will force Docusaurus to link to the vNext documentation, instead of the current version.
-- Always include the `.md` extension in the path.
+  - Refrain from using `/docs/<version>` when using an absolute path. See note below.
+
+> [!NOTE]
+> If you add/edit a link that goes to `docs/path/file.md`, and you see the error `[all.markdownLinksDontCrossVersions] Exclude the docs/ prefix in markdown links, unless you intend to link only to vNext. Consider using [...](/path/file.md) instead of [...](docs/path/file.md).` ([example](https://github.com/camunda/camunda-docs/pull/5606#discussion_r2052977180)), you have two options:
+>
+> 1. Consider using `[...](/path/file.md)` instead of `[...](docs/path/file.md)`. For example, `/components/components-overview.md` rather than `/docs/components/components-overview.md`. The latter will force Docusaurus to link to the _vNext_ documentation, instead of the current version.
+> 2. If you're linking to vNext on purpose, just ignore the linting error. It won't prevent a green PR.
 
 ## Adding a new documentation page
 
