@@ -246,6 +246,25 @@ camunda.operate:
     gatewayAddress: localhost:26500
 ```
 
+### Intra-cluster secure connection
+
+You can enable intra-cluster TLS secured connections between Operate and Zeebe by applying the following configuration properties.
+
+| Name                                                | Description                                                                                                         | Example value                     |
+| :-------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------ | :-------------------------------- |
+| zeebe.gateway.cluster.initialContactPoints          | Zeebe Gateway initial contact points.                                                                               | [gateway-0:26502,gateway-1:26502] |
+| zeebe.gateway.cluster.security.enabled              | Connection should be secure via Transport Layer Security (TLS).                                                     | true                              |
+| zeebe.gateway.cluster.security.certificateChainPath | Path to certificate used by Zeebe. This is necessary when the certificate isn't registered in the operating system. | /path/to/cert.pem                 |
+| zeebe.gateway.cluster.security.privateKeyPath       | Path to certificate's key used by Zeebe.                                                                            | /path/to/private.key              |
+| zeebe.gateway.cluster.advertisedHost                | Advertised hostname in the cluster                                                                                  | operate                           |
+| zeebe.gateway.cluster.memberId                      | Member id for the cluster                                                                                           | operate                           |
+
+For extended configuration and guidelines refer to [Secure Cluster Communication](../zeebe-deployment/security/secure-cluster-communication.md) and [Gateway Configuration](../zeebe-deployment/configuration/gateway.md)
+
+:::note
+Intra-cluster TLS secured connections are available from Operate 8.7.2.
+:::
+
 ## Zeebe Elasticsearch or OpenSearch exporter
 
 :::note
