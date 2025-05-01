@@ -22,7 +22,7 @@ To use the [backup feature](/self-managed/operational-guides/backup-restore/back
 - `create_snapshot` - Creates a backup, or snapshot, of a running cluster.
 - `monitor_snapshot` - Provides read-only permissions to list and view snapshot details.
 
-Review details on [standalone backup application](/self-managed/concepts/elasticsearch-without-cluster-privileges.md#standalone-backup-application) for additional details.
+Review [standalone backup application](/self-managed/concepts/elasticsearch-without-cluster-privileges.md#standalone-backup-application) for additional details.
 
 ### Update privileges
 
