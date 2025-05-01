@@ -77,6 +77,13 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   --ifm-color-warning-contrast-background: rgb(252, 243, 238);
 }
 
+.page-description {
+  font-size: 18px;
+  font-weight: 500;
+  margin-top: -15px;
+  margin-bottom: 40px !important;
+}
+
 /* Add padding to main content column */
 .docMainContainer_TBSr {
   padding-left: 20px;
