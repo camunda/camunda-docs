@@ -2,12 +2,12 @@
 id: diagnostics
 title: "Diagnostics"
 sidebar_label: "Diagnostics"
-description: "Get diagnostics and logs from a helm chart deployment."
+description: "Get diagnostics and logs from a Helm chart deployment."
 ---
 
 ## Diagnostics collection script
 
-This script automates the process of gathering logs and diagnostics from a Camunda Helm Chart deployment running in a Kubernetes cluster. It collects all relevant information—including pod logs, events, and resource details—into a single directory, and outputs it in a .zip file to make it easy sharing these information with the Camunda Support team.
+This script automates the process of gathering logs and diagnostics from a Camunda Helm chart deployment running in a Kubernetes cluster. It collects all relevant information—including pod logs, events, and resource details—into a single directory, and outputs it in a .zip file to make it easy sharing these information with the Camunda Support team.
 
 ### What the script collects
 
@@ -24,15 +24,15 @@ The script outputs the following data from your namespace and creates a :
 
 1. Save the script below as e.g. `camunda-collect-diagnostics.sh`.
 2. Replace <NAMESPACE> with the namespace of your Camunda deployment
-4. Make the script executable.
-   ```bash
-   chmod +x camunda-collect-diagnostics.sh
-  ```
-5. Run the script.
-  ```bash
-  ./camunda-collect-diagnostics.sh
-  ```
-6. Share the archive with Camunda Support
+3. Make the script executable.
+```bash
+chmod +x camunda-collect-diagnostics.sh
+```
+4. Run the script.
+```bash
+./camunda-collect-diagnostics.sh
+```
+5. Share the generated `.zip` archive with Camunda Support
 
 ### Diagnostic collection script
 
