@@ -491,6 +491,95 @@ The following conventions apply to all attributes:
 </TabItem>
 </Tabs>
 
+#### Search decision requirements
+
+- **V1 endpoint**: `POST http://localhost:8080/v1/drd/search`
+- **V2 endpoint**: `POST http://localhost:8080/v2/decision-requirements/search`
+
+<Tabs groupId="search-decision-requirements" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments'},
+{label: 'Output adjustments', value: 'output-adjustments'},
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+- Request structure changes as outlined in [general changes][].
+  - `searchAfter` has been moved under `page`.
+  - `size` is now the `limit` in the `page` object.
+- Renamed attributes in the `filter` object
+  - `id` - Use `decisionRequirementsKey` instead.
+  - `key` of type `int64` - Use `decisionRequirementsKey` of type `string`.
+  - `name` - Use `decisionRequirementsName` instead.
+- Removed attributes in the `filter` object
+  - `resourceName` - Can no longer be used for filtering.
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+- Response structure changes as outlined in [general changes][].
+  - `total` is moved under the `page` object as `totalItems`.
+  - `sortValues` - Use `lastSortValues` in the `page` object instead.
+- Renamed attributes in the objects of the `items` array
+  - `id` - Use `decisionRequirementsKey` instead.
+  - `key` of type `int64` - Use `decisionRequirementsKey` of type `string`.
+  - `name` - Use `decisionRequirementsName` instead.
+
+</TabItem>
+</Tabs>
+
+#### Get decision requirements by key
+
+- **V1 endpoint**: `GET http://localhost:8080/v1/drd/{key}`
+- **V2 endpoint**: `GET http://localhost:8080/v2/decision-requirements/{decisionRequirementsKey}`
+
+<Tabs groupId="get-decision-requirements-by-key" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments'},
+{label: 'Output adjustments', value: 'output-adjustments'},
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+- No input adjustments.
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+- Except for the response structure changes, all adjustments from [search decision requirements](#search-decision-requirements) apply.
+
+</TabItem>
+</Tabs>
+
+#### Get decision requirements as XML by key
+
+- **V1 endpoint**: `GET http://localhost:8080/v1/drd/{key}/xml`
+- **V2 endpoint**: `GET http://localhost:8080/v2/decision-requirements/{decisionRequirementsKey}/xml`
+
+<Tabs groupId="get-decision-requirements-by-key" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments'},
+{label: 'Output adjustments', value: 'output-adjustments'},
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+- No input adjustments.
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+- No output adjustments.
+
+</TabItem>
+</Tabs>
+
 <!--- TODO: open questions and related resources --->
 
 <!--- TODO: insert link to C8 REST API guidelines --->
