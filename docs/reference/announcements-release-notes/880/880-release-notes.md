@@ -52,15 +52,11 @@ To learn more about this feature, see [manage your connectors](/components/conso
 
 ### Connectors
 
-The following Connector enhancements are included in this release.
-
 #### Email Connector {#emailalpha4}
 
 <!-- https://github.com/camunda/connectors/pull/4657 -->
 
-The Email Connector now exposes the `Message-ID` provided by the client in the connector response payload.
-
-This allows for improved traceability, easier correlation between sent messages and logs, and better integration with downstream systems that rely on `Message-ID`.
+The Email Connector now exposes the `Message-ID` provided by the client in the connector response payload. This allows for improved traceability, easier correlation between sent messages and logs, and better integration with downstream systems that rely on `Message-ID`.
 
 For example:
 
@@ -115,6 +111,17 @@ Web Modeler (SaaS and Self-Managed) now includes an integrated FEEL Playground.
 - Test and validate your FEEL expressions using process variables and process context, making it easier for you to develop business logic in Camunda.
 
 To learn more about this feature, see...
+
+### Web Modeler cluster basic authentication <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
+
+<!-- https://github.com/camunda/web-modeler/issues/13707 -->
+
+As well as bearer token and client credentials authentication, you can now configure Web Modeler in Self-Managed to use basic authentication for cluster access.
+
+- To use basic authentication, set the `CAMUNDA_MODELER_CLUSTERS_0_AUTHENTICATION` environment variable value to `BASIC`.
+- Web Modeler sends a username and password with every request to one of the cluster components (Zeebe, Operate, Tasklist).
+
+To learn more about this feature, see [available authentication methods](/self-managed/modeler/web-modeler/configuration/configuration.md#available-authentication-methods).
 
 ## 8.8.0-alpha3
 
