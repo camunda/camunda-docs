@@ -321,13 +321,13 @@ Automatic migration is enabled by default in all Tasklist deployments, including
 | camunda.tasklist.migration.slices           | How many slices should the reindex be divided into      | 0 (auto)      |
 
 :::note
-When running multiple instances of the Tasklist application and/or the Tasklist Importer the `camunda.tasklist.migration.migrationEnabled` property should be enabled only on one of the instances. Even though the migration processes themselves are idempotent, there is a chance that one of the instances fail to apply the migration.
+When running multiple instances of Tasklist or the Tasklist Importer, the `camunda.tasklist.migration.migrationEnabled` property should be enabled on only one of the instances. Though the migration processes themselves are idempotent, there is a chance one of the instances fails to apply the migration.
 
-As a side effect of this, there is a possibility that Elasticsearch/OpenSearch index settings are left modified with `refresh_interval=-1` causing the data not to be refreshed thus not visible.
+As a side effect of this, there is a possibility Elasticsearch/OpenSearch index settings are left modified with `refresh_interval=-1`, causing the data to not be refreshed, and thus not visible.
 
 :::
 
-The above configuration properties have an effect on the duration of the migration process in the following way:
+The configuration properties above have an effect on the duration of the migration process in the following way:
 
 1. You can set the batch size for reindex of the documents. This can reduce the time needed to reindex the data.
    Small document size means big batch size, while big document size means small batch size.
