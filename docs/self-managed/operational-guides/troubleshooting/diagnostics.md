@@ -23,7 +23,7 @@ The script outputs the following data from your namespace and creates a :
 ### Usage
 
 1. Save the script below as e.g. `camunda-collect-diagnostics.sh`.
-2. Replace <NAMESPACE> with the namespace of your Camunda deployment.
+. Replace `<NAMESPACE>` &lt;NAMESPACE&gt; with the namespace of your Camunda deployment.
 3. Make the script executable.
 
 ```bash
@@ -31,6 +31,7 @@ chmod +x camunda-collect-diagnostics.sh
 ```
 
 4. Run the script.
+
 ```bash
 ./camunda-collect-diagnostics.sh
 ```
