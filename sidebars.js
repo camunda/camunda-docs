@@ -1014,6 +1014,18 @@ module.exports = {
                 "self-managed/setup/deploy/amazon/aws-ec2",
               ],
               "Microsoft (Azure)": [
+                {
+                  type: "category",
+                  label: "Azure AKS",
+                  link: {
+                    type: "doc",
+                    id: "self-managed/setup/deploy/azure/azure-aks/azure-aks",
+                  },
+                  items: [
+                    "self-managed/setup/deploy/azure/azure-aks/aks-terraform",
+                    "self-managed/setup/deploy/azure/azure-aks/aks-helm",
+                  ],
+                },
                 "self-managed/setup/deploy/azure/microsoft-aks",
               ],
               "Google (GCP)": ["self-managed/setup/deploy/gcp/google-gke"],
