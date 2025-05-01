@@ -17,7 +17,7 @@ Make sure you keep the generated client credentials in a safe place. The **Clien
 :::
 
 - In this tutorial, we utilize a JavaScript-written [GitHub repository](https://github.com/camunda/camunda-api-tutorials) to write and run requests. Clone this repo before getting started.
-- The first request we will run is a request to deploy one or more resources (such as processes, decision models, or forms). For the purposes of this tutorial, we have preconfigured a BPMN diagram and converted this into XML. This diagram, `calculate-sales-tax.bpmn`, can be found in the GitHub repository above within the `resources` folder. The BPMN diagram itself represents a process to calculate the total sales tax for a given purchase.
+- The first request we will run is a request to deploy one or more resources (such as processes, decision models, or forms). For the purposes of this tutorial, we have preconfigured a BPMN diagram and converted this into XML. This diagram, `calculate-sales-tax.bpmn`, can be found in the GitHub repository above within the `resources` folder. The BPMN diagram itself represents a process to calculate the total sales tax for a given purchase. You can take a closer look at this diagram by opening it in [Modeler](/components/modeler/about-modeler.md).
 - Ensure you have [Node.js](https://nodejs.org/en/download) installed as this will be used for methods that can be called by the CLI (outlined later in this guide). Run `npm install` to ensure you have updated dependencies.
 
 ## Getting started
@@ -71,7 +71,7 @@ async function deployResources() {
 }
 ```
 
-4. Using your generated client credentials from [prerequisites](#prerequisites), capture your Zeebe API URL beneath your call for an access token by defining `camundaApiUrl`:
+4. Using your generated client credentials from [prerequisites](#prerequisites), capture your Camunda 8 REST API URL beneath your call for an access token by defining `camundaApiUrl`:
 
 ```javascript
 const camundaApiUrl = process.env.CAMUNDA_REST_ADDRESS;
@@ -95,6 +95,10 @@ formData.append("resources", fileContent, {
   contentType: "application/xml",
 });
 ```
+
+:::note
+The `resources` name must be exact according to the API requirements, the path to the file (`const bpmnFilePath = path.resolve("resources/calculate-sales-tax.bpmn");`) must be correct, and `contentType` must be `application/xml` to ensure the upload will not fail.
+:::
 
 7. Configure your POST request to the appropriate endpoint, including an authorization header based on the previously acquired `accessToken`:
 
@@ -171,6 +175,10 @@ const options = {
 };
 ```
 
+:::note
+The request will succeed if the variable names are different, but the process instance itself will not function as expected.
+:::
+
 3. Process the results from the API call. For example:
 
 ```javascript
@@ -184,7 +192,7 @@ try {
 }
 ```
 
-4. In your terminal, run `node cli.js processInstances create <key>`, where `<key>` is the process definition key.
+4. In your terminal, run `node cli.js processInstances create <key>`, where `<key>` is the process definition key. The `processInstanceKey` will now display in the output. Capture this key for a future method.
 
 ## Retrieve a process instance (GET)
 
@@ -228,7 +236,7 @@ try {
 }
 ```
 
-4. In your terminal, run `node cli.js processInstances view <key>`, where `<key>` is the process instance key.
+4. In your terminal, run `node cli.js processInstances view <key>`, where `<key>` is the process instance key. The `processDefinitionName` and `state` will then display in the output.
 
 ## If you get stuck
 
