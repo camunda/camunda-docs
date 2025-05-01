@@ -1,8 +1,8 @@
 ---
 id: prefix-elasticsearch-opensearch-indices
-title: "Prefix Elasticsearch and Opensearch indices"
-sidebar_label: "Prefix Elasticsearch and Opensearch indices"
-description: "Configure Elasticsearch and Opensearch index prefixes to structure your data, and ensure data isolation."
+title: "Prefix Elasticsearch and OpenSearch indices"
+sidebar_label: "Prefix Elasticsearch and OpenSearch indices"
+description: "Configure Elasticsearch and OpenSearch index prefixes to structure your data, and ensure data isolation."
 ---
 
 import Tabs from "@theme/Tabs";
