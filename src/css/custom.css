@@ -94,7 +94,7 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
 }
 .navbar__title {
   padding-left: 10px;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 a {
@@ -1101,11 +1101,9 @@ ul ol {
 
 /* lighter menu font  */
 .menu__list-item-collapsible .menu__link:hover,
-.menu__list-item-collapsible .menu__link--active,
-.menu__link--active:not(.menu__link--sublist) {
+.menu__list-item-collapsible .menu__link--active {
   font-weight: 600;
 }
-
 /* double column div layout  */
 .double-column-container {
   display: flex;

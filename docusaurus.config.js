@@ -302,7 +302,7 @@ module.exports = {
       darkTheme: themes.dracula,
     },
     navbar: {
-      title: "Docs",
+      title: "Camunda 8 Docs",
       logo: {
         alt: "Camunda 8 Docs",
         src: "img/logo-camunda-black.svg",
