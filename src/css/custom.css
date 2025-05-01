@@ -1109,6 +1109,9 @@ ul ol {
 .menu__link--active {
   color: var(--ifm-menu-color-active); /* Blue text color */
   font-weight: 600; /* Bold font weight */
+  border-left: 4px solid var(--ifm-link-color);
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }
 
 /* Only reset styling for parent categories that aren't the current page */
@@ -1117,6 +1120,7 @@ ul ol {
   > .menu__link {
   color: inherit; /* Default text color */
   font-weight: normal; /* Normal font weight */
+  border-left: 0;
 }
 /* double column div layout  */
 .double-column-container {
