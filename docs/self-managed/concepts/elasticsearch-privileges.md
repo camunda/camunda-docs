@@ -3,7 +3,7 @@ id: elasticsearch-privileges
 title: "Elasticsearch privileges"
 ---
 
-If you implement Camunda 8 with Elasticsearch as a service provider, the following [privileges](https://www.elastic.co/guide/en/elasticsearch/reference/current/security-privileges.html) may be required:
+If you implement Camunda 8 with Elasticsearch as a service provider, the following privileges may be required:
 
 ## Cluster privileges
 
