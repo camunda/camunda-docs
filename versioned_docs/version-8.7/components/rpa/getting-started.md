@@ -8,15 +8,14 @@ description: "Learn how to create your first script, test your script, and autom
 New to RPA? Visit the [overview page](/components/rpa/overview.md) to get familiar with Robotic Process Automation (RPA) capabilities.
 :::
 
+:::note
+Before getting started, review the [current known issues for RPA](https://github.com/camunda/rpa-worker/discussions/categories/known-issues) to ensure environment compatibility.
+:::
+
 The RPA worker is available on all major platforms (Windows, Linux, and Mac). This allows you to automate your applications on their native platforms. In most cases, this will be Windows. For console applications or browser automation, you can use a more light-weight distribution, such as the [Docker image](/self-managed/setup/deploy/other/docker.md).
 
 ## Create your first script
 
-<!-- TODO(marstamm): The modeler flag is only required in the alpha releases. Remove this caution for 8.7 minor relase -->
-
-:::caution
-In Camunda Modeler 5.33.1, the RPA editor is enabled only if the `--no-disable-rpa` flag is set. Visit the [Modeler documentation](/components/modeler/desktop-modeler/flags/flags.md) to learn about setting flags.
-:::
 To get started with RPA, you first need to write an RPA script. [Camunda Modeler](/components/modeler/about-modeler.md) offers an interface for editing and testing your scripts:
 
 1. **Download Camunda Modeler**: Download the latest version of Camunda Modeler from the [Camunda website](https://camunda.com/download/modeler/). As RPA scripts are run locally on your machine, the RPA editor is only available in [Desktop Modeler](/components/modeler/desktop-modeler/index.md).

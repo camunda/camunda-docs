@@ -62,6 +62,12 @@ A process cannot execute unless it is known by the broker. Deployment is the pro
 
 - [Zeebe Deployment](/apis-tools/zeebe-api/gateway-service.md#deployresource-rpc)
 
+### Element
+
+A BPMN element is part of a [process](#process), defining one part of its BPMN model. Elements are the building blocks of a process and comprise [flow nodes](#flow-node), sequence flows, participants, data objects, and more.
+
+- [BPMN elements](/components/modeler/bpmn/bpmn-primer.md#bpmn-elements)
+
 ### Event
 
 An event represents a state change associated with an aspect of an executing process instance. Events capture variable changes, state transition in process elements, etc. An event is represented by a timestamp, the variable name, and variable value. Events are stored in an append-only log.
@@ -79,6 +85,10 @@ An execution listener is a mechanism that allows users to execute custom logic a
 An exporter represents a sink to which Zeebe will submit all records within the log. This gives users of Zeebe an opportunity to persist records with the log for future use as this data will not be available after log compaction.
 
 - [Exporter](/self-managed/concepts/exporters.md)
+
+### Flow node
+
+Flow nodes refer to a specific subset of BPMN [elements](#element). They comprise events, activities, and gateways. Other elements, such as sequence flows, participants, and data objects, are not considered flow nodes.
 
 ### Follower
 

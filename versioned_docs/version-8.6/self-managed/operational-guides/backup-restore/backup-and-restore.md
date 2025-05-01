@@ -8,9 +8,6 @@ keywords: ["backup", "backups"]
 :::note
 If the Camunda application(s) cannot access Elasticsearch with cluster-level privileges, it is possible to run the backup of Operate and Tasklist indices (steps 2, 3, 5 and 6 from the backup procedure below) as a standalone application separate from the main application (see [standalone backup application](/self-managed/concepts/elasticsearch-without-cluster-privileges.md#standalone-backup-application)).
 :::
-:::note
-This release introduces breaking changes for [Operate and Tasklist](./operate-tasklist-backup.md), as well as [Optimize](./optimize-backup.md).
-:::
 
 You can use the backup feature of Camunda 8 Self-Managed to regularly back up the state of all of its components (Zeebe, Operate, Tasklist, and Optimize) without any downtime (except Web Modeler, see [the Web Modeler backup and restore documentation](./modeler-backup-and-restore.md)).
 In case of failures that lead to data loss, you can recover the cluster from a backup.

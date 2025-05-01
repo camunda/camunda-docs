@@ -18,15 +18,6 @@ Our Algolia API key, app ID, and index name are configured in `./docusaurus.conf
 
 Configuration of Algolia's index and crawler can be edited with the [Algolia Crawler](https://crawler.algolia.com/).
 
-Currently, the only unique change to our configuration is that we specify multiple `pathsToMatch` to accommodate our multiple docs instances:
-
-```
-      pathsToMatch: [
-        "https://docs.camunda.io/docs/**",
-        "https://docs.camunda.io/optimize/**",
-      ],
-```
-
 ### Troubleshooting
 
 Take a closer look at [Algolia's index of our documentation](https://dashboard.algolia.com/).

@@ -363,11 +363,11 @@ management.endpoints.web.exposure.include: health, prometheus, loggers, usage-me
 
 With this configuration, the following endpoints are available for use out of the box:
 
-`<server>:8080/actuator/prometheus` Prometheus metrics
+`<server>:9600/actuator/prometheus` Prometheus metrics
 
-`<server>:8080/actuator/health/liveness` Liveness probe
+`<server>:9600/actuator/health/liveness` Liveness probe
 
-`<server>:8080/actuator/health/readiness` Readiness probe
+`<server>:9600/actuator/health/readiness` Readiness probe
 
 This configuration may be overwritten by changing the corresponding configuration parameters values.
 
@@ -418,7 +418,7 @@ The log level for Operate can be changed by following the [Setting a Log Level](
 #### Set all Operate loggers to DEBUG
 
 ```shell
-curl 'http://localhost:8080/actuator/loggers/io.camunda.operate' -i -X POST \
+curl 'http://localhost:9600/actuator/loggers/io.camunda.operate' -i -X POST \
 -H 'Content-Type: application/json' \
 -d '{"configuredLevel":"debug"}'
 ```

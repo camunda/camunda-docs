@@ -8,6 +8,7 @@ description: "Use the Camunda 8 Run single application script to set up a local 
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import {C8Run} from "@site/src/components/CamundaDistributions";
 
 :::note
 Camunda 8 Run is not supported for production use.
@@ -39,11 +40,11 @@ If no version of Java is found, follow your chosen installation's instructions f
 
 ## Install and start Camunda 8 Run
 
-1. Download the [latest release of Camunda 8 Run](https://github.com/camunda/camunda/releases/tag/8.7.0-alpha5) for your operating system and architecture. Opening the .tgz file extracts the Camunda 8 Run script into a new directory.
+1. Download the latest release of <C8Run/> for your operating system and architecture. Opening the .tgz file extracts the Camunda 8 Run script into a new directory.
 2. Navigate to the new `c8run` directory.
 3. Start Camunda 8 Run by running one of the following in your terminal:
-   - `./start.sh`: start Camunda 8 Run as a Java application.
-   - `./start.sh --docker`: start Camunda 8 Run via Docker Compose.
+   - `./start.sh` (or `.\c8run.exe start` on Windows): start Camunda 8 Run as a Java application.
+   - `./start.sh --docker` (or `.\c8run.exe start -docker` on Windows): start Camunda 8 Run via Docker Compose.
 
 When successful, a new Operate window automatically opens.
 
@@ -55,22 +56,25 @@ If Camunda 8 Run fails to start, run the [shutdown script](#shut-down-camunda-8-
 
 The following command line arguments are available:
 
-| Argument                   | Description                                                                                                                                                                                              |
-| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--config <path>`          | Applies the specified Zeebe [`application.yaml`](/self-managed/zeebe-deployment/configuration/configuration.md).                                                                                         |
-| `--detached`               | Starts Camunda 8 Run as a detached process.                                                                                                                                                              |
-| `--keystore <arg>`         | Configure the TLS certificate for HTTPS. If not specified, use HTTP. For more information, see [enabling TLS](#enable-tls).                                                                              |
-| `--keystorePassword <arg>` | Provide the password to use with a JKS keystore file.                                                                                                                                                    |
-| `--port <arg>`             | Configure the Camunda core port to the value provided (default: 8080).                                                                                                                                   |
-| `--log-level <arg>`        | Set a different log level for the Camunda core.                                                                                                                                                          |
-| `--docker`                 | Download and run the Camunda Docker Compose distribution. Any additional options are not supported at this time, and will be ignored.                                                                    |
-| `--disable-elasticsearch`  | Do not start the built-in Elasticsearch. Ensure another Elasticsearch instance is provided via `--config`. See the [external Elasticsearch](#start-external-elasticsearch) options for more information. |
+| Argument                   | Description                                                                                                                                                                                                                                   |
+| -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--config <path>`          | Applies the specified Zeebe [`application.yaml`](/self-managed/zeebe-deployment/configuration/configuration.md).                                                                                                                              |
+| `--keystore <arg>`         | Configure the TLS certificate for HTTPS. If not specified, use HTTP. For more information, see [enabling TLS](#enable-tls).                                                                                                                   |
+| `--keystorePassword <arg>` | Provide the password to use with a JKS keystore file.                                                                                                                                                                                         |
+| `--port <arg>`             | Configure the Camunda core port to the value provided (default: 8080).                                                                                                                                                                        |
+| `--log-level <arg>`        | Set a different log level for the Camunda core.                                                                                                                                                                                               |
+| `--docker`                 | Download and run the Camunda Docker Compose distribution. Any additional options are not supported at this time, and will be ignored. See the [shutdown script](#shut-down-camunda-8-run) for information on stopping the Docker application. |
+| `--disable-elasticsearch`  | Do not start the built-in Elasticsearch. Ensure another Elasticsearch instance is provided via `--config`. See the [external Elasticsearch](#start-external-elasticsearch) options for more information.                                      |
 
 ## Work with Camunda 8 Run
 
 ### Access Camunda components
 
 All Camunda 8 Run components can be accessed using the username/password combination `demo`/`demo`.
+
+:::note
+The URLs for the Docker Compose application can be found in the [Docker Compose](/self-managed/setup/deploy/local/docker-compose.md#access-components) documentation.
+:::
 
 Tasklist and Operate are available at:
 
@@ -111,7 +115,7 @@ Once configured correctly, your Connectors are available for use in Modeler.
 
 ### Use Camunda APIs
 
-Camunda 8 Run authenticates with the [Tasklist](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md), [Operate](/docs/apis-tools/operate-api/overview.md), and [Zeebe](/apis-tools/zeebe-api/grpc.md) APIs, as well as the unified [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md), by including cookie headers in each request. This cookie can be obtained by using the API endpoint `/api/login`.
+Camunda 8 Run authenticates with the [Tasklist](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md), [Operate](/apis-tools/operate-api/overview.md), and [Zeebe](/apis-tools/zeebe-api/grpc.md) APIs, as well as the unified [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md), by including cookie headers in each request. This cookie can be obtained by using the API endpoint `/api/login`.
 
 To authenticate and begin making requests, take the following steps:
 
@@ -180,7 +184,9 @@ zeebeClient
 
 ## Shut down Camunda 8 Run
 
-To shut down Camunda 8 Run and end all running processes, run `./shutdown.sh` (or `.\c8run.exe stop` on Windows) from the C8Run directory.
+To shut down Camunda 8 Run and end all running processes, run `./shutdown.sh` (or `.\c8run.exe stop` on Windows) from the `c8run` directory.
+
+The Camunda 8 Run Docker distribution can be shut down using `./shutdown.sh --docker` (or `.\c8run.exe stop -docker` on Windows).
 
 ## Advanced options
 

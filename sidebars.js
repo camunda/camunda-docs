@@ -27,6 +27,7 @@ module.exports = {
         "guides/configuring-out-of-the-box-connectors",
         "guides/use-connectors-in-hybrid-mode",
         "guides/host-custom-connectors",
+        "guides/document-handling",
       ],
       Improve: [
         "guides/improve-processes-with-optimize",
@@ -62,6 +63,7 @@ module.exports = {
         "components/concepts/what-is-camunda-8",
         "components/concepts/clusters",
         "components/concepts/processes",
+        "components/concepts/process-applications",
         "components/concepts/job-workers",
         "components/concepts/execution-listeners",
         "components/concepts/user-task-listeners",
@@ -179,7 +181,15 @@ module.exports = {
         type: "doc",
         id: "components/rpa/overview",
       },
-      items: ["components/rpa/getting-started", "components/rpa/production"],
+      items: [
+        "components/rpa/getting-started",
+        "components/rpa/production",
+        {
+          type: "link",
+          label: "RPA library specifications",
+          href: "https://camunda.github.io/rpa-python-libraries/",
+        },
+      ],
     },
     {
       type: "category",
@@ -256,6 +266,7 @@ module.exports = {
             "components/modeler/desktop-modeler/model-your-first-diagram",
             "components/modeler/desktop-modeler/connect-to-camunda-8",
             "components/modeler/desktop-modeler/start-instance",
+            "components/modeler/desktop-modeler/process-applications",
             "components/modeler/desktop-modeler/use-connectors",
             "components/modeler/desktop-modeler/variables",
             {
@@ -269,7 +280,6 @@ module.exports = {
                 "components/modeler/desktop-modeler/element-templates/configuring-templates",
                 "components/modeler/desktop-modeler/element-templates/using-templates",
                 "components/modeler/desktop-modeler/element-templates/defining-templates",
-                "components/modeler/desktop-modeler/element-templates/c7-defining-templates",
                 "components/modeler/desktop-modeler/element-templates/additional-resources",
               ],
             },
@@ -642,6 +652,30 @@ module.exports = {
     },
     {
       type: "category",
+      label: "Camunda integrations",
+      link: {
+        type: "doc",
+        id: "components/camunda-integrations/overview",
+      },
+      items: [
+        {
+          type: "category",
+          label: "SAP",
+          link: {
+            type: "doc",
+            id: "components/camunda-integrations/sap/sap-integration",
+          },
+          items: [
+            "components/camunda-integrations/sap/odata-connector",
+            "components/camunda-integrations/sap/rfc-connector",
+            "components/camunda-integrations/sap/btp-plugin",
+            "components/camunda-integrations/sap/csap-cli",
+          ],
+        },
+      ],
+    },
+    {
+      type: "category",
       label: "Early access",
       link: {
         type: "doc",
@@ -656,20 +690,6 @@ module.exports = {
             id: "components/early-access/alpha/alpha-features",
           },
           items: [
-            {
-              type: "category",
-              label: "SAP",
-              link: {
-                type: "doc",
-                id: "components/early-access/alpha/sap/sap-integration",
-              },
-              items: [
-                "components/early-access/alpha/sap/sap-integration",
-                "components/early-access/alpha/sap/odata-connector",
-                "components/early-access/alpha/sap/rfc-connector",
-                "components/early-access/alpha/sap/btp-plugin",
-              ],
-            },
             {
               type: "category",
               label: "BPMN Copilot",
@@ -1037,6 +1057,7 @@ module.exports = {
             "self-managed/setup/guides/prefix-elasticsearch-indices",
             "self-managed/setup/guides/multi-namespace-deployment",
             "self-managed/setup/guides/installing-payment-app-example",
+            "self-managed/setup/guides/secret-management",
           ],
         },
       ],
@@ -1174,6 +1195,12 @@ module.exports = {
         "self-managed/concepts/mapping-rules",
         "self-managed/concepts/elasticsearch-privileges",
         "self-managed/concepts/opensearch-privileges",
+        {
+          "Document handling": [
+            "self-managed/concepts/document-handling/getting-started",
+            "self-managed/concepts/document-handling/document-storage-configuration",
+          ],
+        },
       ],
     },
     {
@@ -1188,6 +1215,7 @@ module.exports = {
                 "self-managed/console-deployment/configuration/ssl",
               ],
             },
+            "self-managed/console-deployment/usage-metrics",
             "self-managed/console-deployment/telemetry",
           ],
           Zeebe: [

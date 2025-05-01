@@ -57,7 +57,7 @@ Running a dual-region configuration requires users to detect and manage any regi
   - In that guide, we're showcasing Kubernetes dual-region installation, based on the following tools:
     - [Helm (3.x)](https://helm.sh/docs/intro/install/) for installing and upgrading the [Camunda Helm chart](https://artifacthub.io/packages/helm/camunda/camunda-platform).
     - [Kubectl (1.30.x)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the Kubernetes cluster.
-- `cURL` or similar to interact with the REST API.
+- `cURL` or similar to interact with the [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md).
 
 ## Terminology
 
@@ -331,13 +331,27 @@ In our example, we went with port-forwarding to a localhost, but other alternati
     ```
 
 3.  Based on the [Cluster Scaling APIs](../../zeebe-deployment/operations/cluster-scaling.md), send a request to the Zeebe Gateway to redistribute the load to the remaining brokers, thereby removing the lost brokers.
-    In our example, we have lost region 1 and with that our uneven brokers. This means we will have to redistribute to our existing even brokers.
+    Depending on which region was lost, the load must be redistributed to the remaining brokers, either the even or odd numbered ones. In our example, we have lost `region 1` and with it our uneven brokers. This means we will have to redistribute to our existing even brokers. Make sure to only run the correct one based on the surviving region's brokers.
+
+  <Tabs queryString="lost-region">
+    <TabItem value="redistribute-to-even" label="Redistribute to even brokers" default>
 
     ```bash
     curl -XPOST 'http://localhost:9600/actuator/cluster/brokers?force=true' -H 'Content-Type: application/json' -d '["0", "2", "4", "6"]'
     ```
 
-    Using the `force=true` parameter reduces the replication factor accordingly.
+    </TabItem>
+    <TabItem value="redistribute-to-odd" label="Redistribute to odd brokers">
+
+    ```bash
+    curl -XPOST 'http://localhost:9600/actuator/cluster/brokers?force=true' -H 'Content-Type: application/json' -d '["1", "3", "5", "7"]'
+    ```
+
+    </TabItem>
+
+  </Tabs>
+
+Using the `force=true` parameter reduces the replication factor accordingly.
 
 #### Verification
 
@@ -639,8 +653,7 @@ This step is equivalent to applying for the region to be recreated:
 From the terminal context of `aws/dual-region/kubernetes` execute:
 
 ```bash
-helm install $HELM_RELEASE_NAME camunda/camunda-platform \
-  --version $HELM_CHART_VERSION \
+helm install $HELM_RELEASE_NAME camunda/camunda-platform --version $HELM_CHART_VERSION \
   --kube-context $CLUSTER_RECREATED \
   --namespace $CAMUNDA_NAMESPACE_RECREATED \
   -f camunda-values.yml \

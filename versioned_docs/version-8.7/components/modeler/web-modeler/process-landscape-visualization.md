@@ -21,7 +21,7 @@ To open the process landscape view, click **View landscape** from any of the fol
 
 - Project view
 - Folder view
-- [Process application](/docs/components/modeler/web-modeler/process-applications.md) view
+- [Process application](/components/modeler/web-modeler/process-applications.md) view
 
 ![process landscape visualization button](img/process-landscape-view-button.png)
 

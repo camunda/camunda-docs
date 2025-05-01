@@ -63,7 +63,7 @@ were deprecated in `8.4`. Please use the dedicated Camunda Identity properties o
 
 ### Versioning changes in Elasticsearch
 
-As of the 8.4 release, Camunda is compatible with Elasticsearch 8.9+ and no longer supports older Elasticsearch versions. See [supported environments](/docs/reference/supported-environments.md).
+As of the 8.4 release, Camunda is compatible with Elasticsearch 8.9+ and no longer supports older Elasticsearch versions. See [supported environments](/reference/supported-environments.md).
 
 ### Support for Amazon OpenSearch
 
@@ -131,7 +131,7 @@ Use `v1` instead, see [migration hints](/apis-tools/web-modeler-api/index.md#mig
 
 ### Versioning changes in Elasticsearch
 
-As of the 8.3 release, Camunda is compatible with Elasticsearch 8.8+ and no longer supports Elasticsearch 7.x. See [supported environments](/docs/reference/supported-environments.md).
+As of the 8.3 release, Camunda is compatible with Elasticsearch 8.8+ and no longer supports Elasticsearch 7.x. See [supported environments](/reference/supported-environments.md).
 
 ### Versioning changes in Helm chart
 
@@ -158,6 +158,14 @@ Web Modeler versions 8.2.7 to 8.2.12 are affected by [camunda/issues#677](https:
 If you are using one of these versions, you should first update to Web Modeler 8.2.13 (or a subsequent patch version) before upgrading to a later minor version (8.3 or higher).
 
 If your current version of Web Modeler is 8.2.6 or earlier, you may directly upgrade to a later minor version.
+
+### Breaking changes to the backup API
+
+This release introduces breaking changes, including:
+
+- The [get backup state API and response codes](/self-managed/operational-guides/backup-restore/operate-tasklist-backup.md#get-backup-state-api).
+- The backup URL has changed to `/backups`. For example, `curl 'http://localhost:8080/actuator/backups'` (rather than the previously used `backup`).
+- `backupId` must be of integer type now instead of string, which is in sync with Zeebe `backupId` requirements.
 
 ### Do not update to Camunda 8.2.22
 

@@ -11,6 +11,9 @@ import IdpIconCautionImg from './img/idp-validation-icon-caution.png';
 import IdpIconFailImg from './img/idp-validation-icon-fail.png';
 import IdpValidationExampleImg from './img/idp-validation-example.png';
 import IdpDocumentStorageImg from './img/idp-document-storage.png';
+import IdpTableDataImg from './img/idp-table-data.png';
+import TickImg from '/static/img/icon-list-tick.png';
+import CrossImg from '/static/img/icon-list-cross.png';
 
 Technical reference information for IDP, including technical architecture, supported documents, and known limitations.
 
@@ -20,7 +23,7 @@ IDP offers a composable architecture that allows you to customize and extend IDP
 
 IDP allows you to create, configure, and publish a **document extraction template**. This is a type of [connector template](/components/connectors/custom-built-connectors/connector-templates.md).
 
-<img src={IdpArchitectureImg} alt="Architecture diagram of IDP" width="550px" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}}/>
+<img src={IdpArchitectureImg} alt="Architecture diagram of IDP" class="img-noborder img-600" />
 
 The document extraction template integrates with Camunda document handling connectors and APIs such as [Amazon S3](/components/connectors/out-of-the-box-connectors/amazon-s3.md), [Amazon Textract](/components/connectors/out-of-the-box-connectors/amazon-textract.md), [Amazon Comprehend](/components/connectors/out-of-the-box-connectors/amazon-comprehend.md), and [Amazon Bedrock](/components/connectors/out-of-the-box-connectors/amazon-bedrock.md) to retrieve, analyze, and process documents.
 
@@ -40,7 +43,7 @@ The document extraction template integrates with Camunda document handling conne
 
 IDP stores documents as follows during the different extraction stages:
 
-<img src={IdpDocumentStorageImg} alt="IDP document storage diagram" width="800px" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}}/>
+<img src={IdpDocumentStorageImg} alt="IDP document storage diagram" class="img-noborder img-800"/>
 
 1. Web Modeler: [Uploaded sample documents](idp-unstructured-extraction.md#upload-documents) are stored within Web Modeler itself (SaaS) or the database (Self-Managed).
 1. Cluster: During [extraction testing](idp-unstructured-extraction.md#extract-fields) (for example, when you click **Extract document**) the document is stored in the cluster using the [document handling](/components/concepts/document-handling.md) API.
@@ -97,6 +100,98 @@ You can choose from the following supported LLM extraction models during [data e
 | Llama 3 8B Instruct  | [Meta](https://www.meta.com/gb/)           | [Meta's Llama in Amazon Bedrock](https://aws.amazon.com/bedrock/llama/)                                 |
 | Titan Text Premier   | [Amazon AWS](https://docs.aws.amazon.com/) | [Amazon Titan Text models](https://docs.aws.amazon.com/bedrock/latest/userguide/titan-text-models.html) |
 
+:::note
+
+Amazon Bedrock LLM extraction models are only available in specific regions.
+
+- You must ensure your selected cluster region supports the LLM extraction model you want to use. For example, if you are using the `eu-central-1` region, you cannot use Claude 3 Haiku as it is only available in US regions.
+- If you have chosen a model not supported in your region, you will receive a 403 "You don't have access to the model with the specified model ID" exception error.
+
+For current regional support information, refer to [supported foundation models in Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html).
+
+:::
+
+## Table data extraction {#table-data}
+
+IDP can extract table data using LLM foundation models to identify and structure tabular data based on your prompts.
+
+### Default JSON extraction format
+
+When extracting repeated elements from a document, the extraction defaults to JSON format unless instructed.
+
+In this format:
+
+- Table data is represented as an array of objects.
+- Each object corresponds to a row.
+- Column names are used as object keys, with values mapped accordingly.
+
+#### Example JSON output
+
+<img src={IdpTableDataImg} alt="Architecture diagram of IDP" />
+
+**Prompt:** "Extract a list of name and ages of patients on floor 1".
+
+```json
+[
+  {
+    "name": "Kaitlin Jones",
+    "age": 41
+  },
+  {
+    "name": "Thomas Hampton",
+    "age": 57
+  }
+]
+```
+
+### CSV extraction
+
+To extract table data in CSV format, specify this in the prompt. The output is then structured in a CSV-compatible format.
+
+#### Example CSV output
+
+**Prompt:** "Extract a list of name and ages of patients on floor 1 as CSV".
+
+```csv
+Name,Age
+Kaitlin Jones,41
+Thomas Hampton,57
+```
+
+### Customize table data extraction
+
+You can further refine table extraction by:
+
+- Explicitly specifying column headers.
+- Defining delimiter preferences for CSV.
+- Requesting additional context for ambiguous data.
+
+## Access rights and permissions
+
+Access to IDP features is determined by your Web Modeler user role and associated [access rights and permissions](/components/modeler/web-modeler/collaboration.md#access-rights-and-permissions).
+
+For example, users with a Viewer or Commenter role only have read-only access to IDP features, and cannot upload documents, manage extraction fields, or publish document extraction templates.
+
+| Feature                                   |                             Viewer/Commenter                              |                         Editor/Project Admin                          |                              Super-user                               |
+| :---------------------------------------- | :-----------------------------------------------------------------------: | :-------------------------------------------------------------------: | :-------------------------------------------------------------------: |
+| View IDP application                      |   <img src={TickImg} class="table-tick" alt="Can access" width="15px"/>   | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> |
+| View document extraction                  |   <img src={TickImg} class="table-tick" alt="Can access" width="15px"/>   | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> |
+| View documents                            |   <img src={TickImg} class="table-tick" alt="Can access" width="15px"/>   | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> |
+| View extraction fields/prompts            |   <img src={TickImg} class="table-tick" alt="Can access" width="15px"/>   | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> |
+| View validate extraction                  |   <img src={TickImg} class="table-tick" alt="Can access" width="15px"/>   | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> |
+| Create/edit/delete IDP application        | <img src={CrossImg} class="table-tick" alt="Cannot access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> |
+| Create/edit/delete document extraction    | <img src={CrossImg} class="table-tick" alt="Cannot access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> |
+| Upload/delete documents                   | <img src={CrossImg} class="table-tick" alt="Cannot access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> |
+| Add/edit/delete extraction fields/prompts | <img src={CrossImg} class="table-tick" alt="Cannot access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> |
+| Extract data                              | <img src={CrossImg} class="table-tick" alt="Cannot access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> |
+| Save as test case                         | <img src={CrossImg} class="table-tick" alt="Cannot access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> |
+| Validate extraction (test documents)      | <img src={CrossImg} class="table-tick" alt="Cannot access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> |
+| Publish template                          | <img src={CrossImg} class="table-tick" alt="Cannot access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> |
+| View versions                             | <img src={CrossImg} class="table-tick" alt="Cannot access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> |
+| Manage versions (edit, restore, delete)   | <img src={CrossImg} class="table-tick" alt="Cannot access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> |
+
+**Key:** <img src={TickImg} class="table-tick" alt="Can access" width="15px" style={{marginLeft: '10px', marginRight: '5px'}}/>Full access | <img src={CrossImg} class="table-cross" alt="Cannot access" width="15px" style={{marginLeft: '10px', marginRight: '5px'}}/>Read-only access
+
 ## Validation status {#status}
 
 During validation, a validation status is shown for extraction fields to indicate the accuracy of the extracted data.
@@ -111,7 +206,7 @@ During validation, a validation status is shown for extraction fields to indicat
 
 The following example shows the results of a partially successful extraction against three documents.
 
-<img src={IdpValidationExampleImg} alt="Example validation results table" style={{marginTop: '0'}} />
+<img src={IdpValidationExampleImg} alt="Example validation results table" />
 
 The expanded `contract_start_date` field shows that each document returned different validation results.
 

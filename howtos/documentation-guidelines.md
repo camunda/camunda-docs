@@ -29,98 +29,50 @@ In the spirit of "Always Progress," if you are confident you know what change ne
 - Name markdown files according to the title. This makes it easier to find a file. Example: **Introduction to Camunda 8** --> `introduction-to-camunda-8.md`. Avoid non-alphanumeric characters in titles. Use the file name as an internal document ID to reference in [the appropriate sidebars file](#sidebar-navigation).
 - Subcategories have to be placed in their own sub-directories. Example: `Guides` > `Get started with Spring` can be found in `/guides/getting-started-java-spring.md`.
 
-## Instances: Docs vs Optimize vs Interactive API Explorers
-
-Due to a difference in version numbers, the documentation is split into [multiple Docusaurus "instances"](https://docusaurus.io/docs/docs-multi-instance):
-
-- Optimize documentation lives in the `optimize` instance.
-- Each API with an interactive explorer based on an OpenAPI spec lives in its own instance.
-- The remaining documentation lives in the main `docs` instance.
-
 ## Versions
 
-[The Optimize and Docs instances of the documentation](#instances-docs-vs-optimize-vs-interactive-api-explorers) each contain documentation for multiple versions:
+Different versions are sourced from different paths:
 
-| Instance   | Version(s)                  | Source path                                                         |
-| ---------- | --------------------------- | ------------------------------------------------------------------- |
-| `docs`     | Next                        | [/docs/](../docs/)                                                  |
-| `docs`     | 8.7, 8.6, 8.5, ...          | [/versioned_docs/version-\*/](../versioned_docs/)                   |
-| `optimize` | Next                        | [/optimize/](../optimize/)                                          |
-| `optimize` | 3.15.0, 3.14.0, 3.13.0, ... | [/optimize_versioned_docs/version-\*/](../optimize_versioned_docs/) |
+| Instance | Version(s)         | Source path                                       |
+| -------- | ------------------ | ------------------------------------------------- |
+| `docs`   | Next               | [/docs/](../docs/)                                |
+| `docs`   | 8.7, 8.6, 8.5, ... | [/versioned_docs/version-\*/](../versioned_docs/) |
 
 When edits are intended to apply to both the current version _and beyond_, they should be made in both the most recent versioned folder and the "Next" version folder.
 
-### Version alignment
-
-Specific Optimize versions are aligned with Camunda versions as follows:
-
-| Camunda version | Optimize version |
-| --------------- | ---------------- |
-| 8.8             | 3.16.0           |
-| 8.7             | 3.15.0           |
-| 8.6             | 3.14.0           |
-| 8.5             | 3.13.0           |
-| 8.4             | 3.12.0           |
-| 8.3             | 3.11.0           |
-
 ### Interactive API Explorer versions
 
-The instances associated with an interactive API Explorer only contain one version. Each of these instances live in the `/api/` root folder, in a folder named for the API.
+There is a separate source spec for each version of each API Explorer. Each API's source spec lives in the `/api/` root folder, in a folder named for the API. Next versions of the spec live in the root of that folder; older versions of the spec live in child folders named by version number.
 
 ## Sidebar navigation
 
-[Sidebar navigation](https://docusaurus.io/docs/sidebar) of the documentation is managed in the sidebars files. [Each instance of the documentation](#instances-docs-vs-optimize) has its own sidebars file:
+[Sidebar navigation](https://docusaurus.io/docs/sidebar) of the documentation is managed in the sidebars files. [Each version of the documentation](#versions) has its own sidebars file:
 
-| Instance   | Version(s)                  | Sidebars path                                                                             |
-| ---------- | --------------------------- | ----------------------------------------------------------------------------------------- |
-| `docs`     | Next                        | [/docs/sidebars.js](../sidebars.js)                                                       |
-| `docs`     | 8.7, 8.6, 8.5, ...          | [/versioned_sidebars/version-\*-sidebars.json](../versioned_sidebars/)                    |
-| `optimize` | Next                        | [/optimize/sidebars.js](../optimize_sidebars.js)                                          |
-| `optimize` | 3.15.0, 3.14.0, 3.13.0, ... | [/optimize_versioned_sidebars/version-\*-sidebars.json/](../optimize_versioned_sidebars/) |
+| Instance | Version(s)         | Sidebars path                                                          |
+| -------- | ------------------ | ---------------------------------------------------------------------- |
+| `docs`   | Next               | [/docs/sidebars.js](../sidebars.js)                                    |
+| `docs`   | 8.7, 8.6, 8.5, ... | [/versioned_sidebars/version-\*-sidebars.json](../versioned_sidebars/) |
 
-### Sidebar items
+### Sidebar file type
 
-The large object in each sidebars file contains two different types of items:
+JavaScript is a better format for a sidebars file, because it allows us to import sub-trees from a file defined somewhere else; however Docusaurus only supports a JSON sidebars file for the "next" version of the docs. Numbered versions of the docs are required to be JSON rather than JavaScript.
 
-- Items within the same [documentation instance](#instances-docs-vs-optimize) are [linked by the path to the target .md file](https://github.com/camunda/camunda-docs/blob/89993fbc1446c203324f38139ae7eb40e19b14ac/versioned_sidebars/version-8.1-sidebars.json#L5):
-  ```json
-  "guides/introduction-to-camunda",
-  ```
-- Items in the opposite [documentation instance](#instances-docs-vs-optimize) are [linked by an object containing the title and URL of the target document](https://github.com/camunda/camunda-docs/blob/89993fbc1446c203324f38139ae7eb40e19b14ac/versioned_sidebars/version-8.1-sidebars.json#L331-L335):
-  ```json
-  {
-    "type": "link",
-    "label": "What is Optimize?",
-    "href": "/optimize/components/what-is-optimize/"
-  },
-  ```
-
-> **Note**
-> The "next" versions of the docs are JavaScript rather than JSON. As such, [cross-instance sidebar items in these files](https://github.com/camunda/camunda-docs/blob/main/sidebars.js#L266) call a helper function instead of emitting the entire cross-instance object for each item.
-
-### Synchronization of sidebars
-
-Several sections of the sidebar navigation are shared across the Optimize and main sections of the docs: Components, Self-Managed, and APIs & Clients. For these sections, the structure of the sidebars should always match across instances. [When they drift](./versioning.md#sidebar-drift), it appears to the user as differences in the sidebar navigation depending on which page they're viewing.
-
-Any PRs that make a structural change to one of the instance's sidebars file in a shared section should make the same structural change to the other instance's sidebars file. This typically appears as a link to the target .md file in one file, and an object containing the target title and URL in the other file.
-
-> **Note**
-> Changes outside of the shared sections do not need to be synchronized to the corresponding Optimize sidebars file.
+As such, when a new version is cut, it results in unused sidebar sub-tree `.js` files scattered throughout the codebase. Be aware that these exist, to avoid attempting to change a sidebars file that has no effect.
 
 ## Internal links
 
 When linking internally from one document to another, follow these guidelines:
 
-- If the source and target document are within the same instance (i.e. both are in `docs` or both are in `optimize`):
-  - Use a relative path to the target markdown file if it is in the same subtree as the source file. [See example](https://github.com/camunda/camunda-docs/blob/930a0c384b48be27d0bc66216015404f67716f61/docs/components/console/introduction-to-console.md?plain=1#L10).
-  - Use an absolute path to the target markdown file if it is in a different subtree than the source file. [See example](https://github.com/camunda/camunda-docs/blob/930a0c384b48be27d0bc66216015404f67716f61/docs/apis-clients/community-clients/spring.md?plain=1#L8).
-  - Always include the `.md` extension in the path.
-  - Refrain from using `/docs/<version>` when preceding a link. For example, use `/components/components-overview.md` rather than `/docs/next/components/components-overview.md`, unless you are intentionally linking to a particular version of the documentation.
-- If the source and target document are in different instances (i.e. one is in `docs` and the other is in `optimize`):
-  - If the source is in `docs` and the target is in `optimize`, use the `$optimize$` token to prefix the URL. [See example](https://github.com/camunda/camunda-docs/blob/930a0c384b48be27d0bc66216015404f67716f61/docs/guides/setting-up-development-project.md?plain=1#L17).
-  - If the source is in `optimize` and the target is in `docs`, use the `$docs$` token to prefix the URL. [See example](https://github.com/camunda/camunda-docs/blob/930a0c384b48be27d0bc66216015404f67716f61/optimize/components/what-is-optimize.md?plain=1#L8).
-  - Use the browser-facing _URL_ to the target document, instead of the path to the target's `.md` file.
-  - Do not include the `.md` extension on the target path.
+- Always include the `.md` extension in the path.
+- Use a relative path to the target markdown file if it is in the same subtree as the source file. [See example](https://github.com/camunda/camunda-docs/blob/930a0c384b48be27d0bc66216015404f67716f61/docs/components/console/introduction-to-console.md?plain=1#L10).
+- Use an absolute path to the target markdown file if it is in a different subtree than the source file. [See example](https://github.com/camunda/camunda-docs/blob/930a0c384b48be27d0bc66216015404f67716f61/docs/apis-clients/community-clients/spring.md?plain=1#L8).
+  - Refrain from using `/docs/<version>` when using an absolute path. See note below.
+
+> [!NOTE]
+> If you add/edit a link that goes to `docs/path/file.md`, and you see the error `[all.markdownLinksDontCrossVersions] Exclude the docs/ prefix in markdown links, unless you intend to link only to vNext. Consider using [...](/path/file.md) instead of [...](docs/path/file.md).` ([example](https://github.com/camunda/camunda-docs/pull/5606#discussion_r2052977180)), you have two options:
+>
+> 1. Consider using `[...](/path/file.md)` instead of `[...](docs/path/file.md)`. For example, `/components/components-overview.md` rather than `/docs/components/components-overview.md`. The latter will force Docusaurus to link to the _vNext_ documentation, instead of the current version.
+> 2. If you're linking to vNext on purpose, just ignore the linting error. It won't prevent a green PR.
 
 ## Adding a new documentation page
 
@@ -129,21 +81,12 @@ When linking internally from one document to another, follow these guidelines:
    ```json
    " components/components-overview",
    ```
-3. If the doc is [in one of the shared sections](#synchronization-of-sidebars), add a parallel change to [the other instance's corresponding sidebars file](#sidebar-navigation). [Example](https://github.com/camunda/camunda-docs/blob/main/optimize_versioned_sidebars/version-3.9.0-sidebars.json#L3-L7):
-   ```json
-   {
-     "type": "link",
-     "label": "Overview Components",
-     "href": "/docs/components/"
-   },
-   ```
 
 ## Moving an existing page
 
 1. Identify the page, pages, or directory and relocate it in the file structure.
 2. Update [the corresponding sidebars file(s)](#sidebar-navigation) to fit the new location.
-3. If the doc is [in one of the shared sections](#synchronization-of-sidebars), update [the opposite instance's corresponding sidebars file(s)](#sidebar-navigation).
-4. Add necessary redirect/rewrite rules to the top of `.htaccess`.
+3. Add necessary redirect/rewrite rules to the top of `.htaccess`.
 
 See [Redirect rules](#redirect-rules) for information on testing `.htaccess` rules.
 
@@ -151,8 +94,7 @@ See [Redirect rules](#redirect-rules) for information on testing `.htaccess` rul
 
 1. Identify the page, pages, or directory and delete it in the file structure.
 2. Update [the corresponding sidebars file(s)](#sidebar-navigation).
-3. If the doc is [in one of the shared sections](#synchronization-of-sidebars), update [the opposite instance's corresponding sidebars file(s)](#sidebar-navigation).
-4. Add necessary redirect/rewrite rules to the top of `.htaccess` to redirect users to appropriate relevant content on another page.
+3. Add necessary redirect/rewrite rules to the top of `.htaccess` to redirect users to appropriate relevant content on another page.
 
 See [Redirect rules](#redirect-rules) for information on testing `.htaccess` rules.
 

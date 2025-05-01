@@ -57,7 +57,7 @@ To use this operation, enable the [Google Directions API](https://developers.goo
 3. (Optional) In the **Input** section, set **Region Code** (i.e `US`). You can find supported region codes [here](https://developers.google.com/maps/documentation/address-validation/coverage).
 4. (Optional) In the **Input** section, set **Locality**, an incorporated city or town political entity (i.e `Mountain View`).
 5. In the **Input** section, set **Address**, an incorporated city or town political entity (i.e `1600 Amphitheatre Pkwy`).
-6. In the **Output** section set **Result Variable** or **Result Expression**. Refer to the [response mapping documentation](/docs/components/connectors/use-connectors/index.md#response-mapping) to learn more.
+6. In the **Output** section set **Result Variable** or **Result Expression**. Refer to the [response mapping documentation](/components/connectors/use-connectors/index.md#response-mapping) to learn more.
 7. Find a full example of the **Google Maps Platform Connector** response [here](https://developers.google.com/maps/documentation/address-validation/requests-validate-address#address_validation_response). To get postal address and formatted address, set to **Result Expression** in the FEEL expression:
 
 ```
@@ -96,7 +96,7 @@ In this way, the response of this method will contain a mapping from the variabl
 4. In the **Input** section, set **Origin**, the place ID value that you want to use as the starting point for calculating distance.
 5. Select the unit system to use when displaying results from the **Units** dropdown in the **Input** section.
 6. Select the transportation mode to use when calculating distances and directions from the **Mode** dropdown in the **Input** section.
-7. In the **Output** section, set **Result Variable** or **Result Expression**. Refer to the [response mapping documentation](/docs/components/connectors/use-connectors/index.md#response-mapping) to learn more.
+7. In the **Output** section, set **Result Variable** or **Result Expression**. Refer to the [response mapping documentation](/components/connectors/use-connectors/index.md#response-mapping) to learn more.
 8. Find a full example of the **Google Maps Platform Connector** response [here](https://developers.google.com/maps/documentation/directions/start#getting-directions). To get a distance, set **Result Expression** in the FEEL expression:
 
 ```

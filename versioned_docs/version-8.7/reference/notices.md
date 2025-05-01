@@ -8,6 +8,70 @@ description: "Let's take a closer look at security notices, reporting vulnerabil
 
 Camunda publishes security notices after fixes are available.
 
+### Notice 18
+
+#### Publication date
+
+April 8th, 2025
+
+#### Product affected
+
+Camunda Optimize
+
+#### Impact
+
+Camunda Optimize was affected by a vulnerability that allowed an attacker to modify a JWT (JSON Web Token) so that they would be given improper access to Optimize.
+
+#### How to determine if the installation is affected
+
+You are using Camunda Optimize ≤ 8.4.15, ≤ 8.5.12, ≤ 8.6.6, ≤ 8.7.0, ≤ 3.11.20, ≤ 3.12.15, ≤ 3.13.12, ≤ 3.14.3, ≤ 3.15.1.
+
+#### Solution
+
+Camunda has provided the following release which contains a fix:
+
+- [Camunda Optimize 8.4.16](https://github.com/camunda/camunda-optimize/releases/tag/3.12.16)
+- [Camunda Optimize 8.5.13](https://github.com/camunda/camunda-optimize/releases/tag/3.13.13)
+- [Camunda Optimize 8.6.7](https://github.com/camunda/camunda/releases/tag/8.6.7-optimize)
+- [Camunda Optimize 8.7.0](https://github.com/camunda/camunda/releases/tag/8.7.0-optimize)
+- [Camunda Optimize 3.12.16](https://github.com/camunda/camunda-optimize/releases/tag/3.12.16)
+- [Camunda Optimize 3.13.13](https://github.com/camunda/camunda-optimize/releases/tag/3.13.13)
+- [Camunda Optimize 3.14.4](https://github.com/camunda/camunda-optimize/releases/tag/3.14.4)
+- [Camunda Optimize 3.15.2](https://github.com/camunda/camunda-optimize/releases/tag/3.15.2)
+
+### Notice 17
+
+#### Publication date
+
+April 8th, 2025
+
+#### Product affected
+
+Camunda Zeebe
+
+#### Impact
+
+When parsing unknown fields in the Protobuf Java Lite and Full library, a maliciously crafted message can cause a StackOverflow error and lead to a
+program crash.
+
+- As Zeebe makes extensive use of Protobuf, this could lead to denial-of-service (DoS) issues on the server side.
+- This issue allows an attacker to send specific payloads that will always result in `StackOverflowException`. This could lead to gateway performance issues and affect system availability.
+- Although the gateway will not crash, it will spend more time working on these requests. An attacker could use this opportunity to slow it down and make it unusable by sending a large number of requests within a short time frame.
+
+No data is leaked, lost, or corrupted. This issue only affects application availability.
+
+[Learn more about this CVE at the GitHub Advisory Database](https://github.com/advisories/GHSA-735f-pc8j-v9w8).
+
+#### How to determine if the installation is affected
+
+You are using Camunda Zeebe 8.6.11.
+
+#### Solution
+
+Camunda has provided the following release which contains a fix:
+
+- [Camunda Zeebe 8.6.13](https://github.com/camunda/camunda/releases/tag/8.6.13)
+
 ### Notice 16
 
 #### Publication date
@@ -151,7 +215,7 @@ Tasklist
 
 #### Impact
 
-The REST API functionality of Tasklist 8.2.0 and 8.2.1 allows unauthenticated access to the following methods/URLs:
+The Tasklist REST API functionality of Tasklist 8.2.0 and 8.2.1 allows unauthenticated access to the following methods/URLs:
 
 - GET /v1/tasks/\{taskId}
 - POST /v1/tasks/search

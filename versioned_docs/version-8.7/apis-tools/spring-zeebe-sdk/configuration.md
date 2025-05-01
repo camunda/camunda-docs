@@ -11,6 +11,50 @@ Configuration properties can be defined as environment variables using [Spring B
 For example, the property `camunda.client.zeebe.defaults.max-jobs-active` is represented by the environment variable `CAMUNDA_CLIENT_ZEEBE_DEFAULTS_MAXJOBSACTIVE`.
 :::
 
+## Modes
+
+The Spring SDK has modes with meaningful defaults aligned with the distribution's default connection details. Each mode is made for a Camunda 8 setup, and only one mode may be used at a time.
+
+:::note
+The defaults applied by the modes are overwritten by _any_ other set property, including legacy/deprecated properties. Check your configuration and logs to avoid unwanted override.
+:::
+
+### SaaS
+
+This allows you to connect to a Camunda instance in our SaaS offering as the URLs are templated.
+
+Activate by setting:
+
+```yaml
+camunda:
+  client:
+    mode: saas
+```
+
+This applies the following defaults:
+
+```yaml reference referenceLinkText="Source" title="SaaS mode"
+https://github.com/camunda/camunda/blob/stable/8.7/clients/spring-boot-starter-camunda-sdk/src/main/resources/modes/saas.yaml
+```
+
+### Self-Managed
+
+This allows you to connect to a Self-Managed instance protected with JWT authentication. The default URLs are configured to align with all Camunda distributions using `localhost` addresses.
+
+Activate by setting:
+
+```yaml
+camunda:
+  client:
+    mode: self-managed
+```
+
+This applies the following defaults:
+
+```yaml reference referenceLinkText="Source" title="Self-managed mode"
+https://github.com/camunda/camunda/blob/stable/8.7/clients/spring-boot-starter-camunda-sdk/src/main/resources/modes/self-managed.yaml
+```
+
 ## Job worker configuration options
 
 ### Job type
@@ -298,7 +342,7 @@ camunda:
 
 #### Max message size
 
-A custom `maxMessageSize` allows the client to receive larger or smaller responses from Zeebe. Technically, it specifies the `maxInboundMessageSize` of the gRPC channel (default 4MB):
+A custom `maxMessageSize` allows the client to receive larger or smaller responses from Zeebe. Technically, it specifies the `maxInboundMessageSize` of the gRPC channel (default 5MB):
 
 ```yaml
 camunda:

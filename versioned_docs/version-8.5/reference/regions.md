@@ -10,7 +10,7 @@ When you [create a cluster](/components/console/manage-clusters/create-cluster.m
 
 The following regions are available for customers on Trial, Starter, and Enterprise Plans. Enterprise customers can also discuss custom regions with their Customer Success Manager.
 
-<img src={RegionMapImg} alt="World map showing the location of each GCP and AWS region" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}}/>
+<img src={RegionMapImg} alt="World map showing the location of each GCP and AWS region" class="img-noborder"/>
 
 :::note
 
@@ -48,7 +48,6 @@ To learn more about each region code/location, refer to [AWS regions and availab
 
 ### Known limitations
 
-The following limitations currently exist for AWS regions:
+The following limitation currently exists for AWS regions:
 
-- Backups are stored on GCP.
 - HTTP connectors continue to route through GCP.

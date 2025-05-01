@@ -15,9 +15,134 @@ These release notes identify the new features included in 8.7, including [alpha 
 
 ## 8.7 minor
 
-| Scheduled release date | Scheduled end of maintenance | Changelog(s) | Release blog | Update guide |
-| ---------------------- | ---------------------------- | ------------ | ------------ | ------------ |
-| 8 April 2025           | 13 October 2026              | -            | -            | -            |
+| Scheduled release date | Scheduled end of maintenance | Changelog(s)                                                                                                                                                                 | Release blog                                                          | Update guide                                                                |
+| ---------------------- | ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| 8 April 2025           | 13 October 2026              | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.7.0)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.7.0)</li></ul> | [Release blog](https://camunda.com/blog/2025/04/camunda-8-7-release/) | [Update guide](/self-managed/operational-guides/update-guide/860-to-870.md) |
+
+### AWS EKS and AWS OpenShift (ROSA) reference architecture <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+
+Camunda is pleased to announce the release of the Reference Architecture packages for AWS EKS (single-region) and Red Hat OpenShift on AWS (ROSA) in both single and dual-region configurations.
+
+- These packages offer a standardized Reference Architecture that includes implementation requirements, Terraform templates, Helm configurations, deployment pipelines, and operational procedures.
+- Additionally, we have enhanced the user experience by improving test coverage for the documented procedures.
+
+:::note
+As part of this effort, the previously used repositories [camunda-tf-eks-module](https://github.com/camunda/camunda-tf-eks-module) and [camunda-tf-rosa](https://github.com/camunda/camunda-tf-rosa) were deprecated and merged into a new consolidated repository: [camunda-deployment-references](https://github.com/camunda/camunda-deployment-references).
+:::
+
+<!--- https://github.com/camunda/product-hub/issues/2522 --->
+
+### Bulk publish to shared resources <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
+
+Develop reusable assets in a pro-code environment, push them to your version control system, then publish them to your Web Modeler environment so anyone in your organization can reuse them with newly modified endpoints.
+
+<!--- https://github.com/camunda/product-hub/issues/2635 --->
+
+### Camunda SAP integration <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+
+Camunda now offers a robust SAP integration featuring:
+
+- An OData Connector for seamless API interactions.
+- An RFC connector for BAPI/function module access.
+- A dedicated plugin enabling SAP BTP services within BPMN workflows.
+
+This solution ensures compliance with IT governance standards using SAP BTP (Business Technology Platform) and the SAP Cloud Connector for enterprise-grade reliability.
+
+### Connector manage and run <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span> {#manage-connectors}
+
+Connector manage and run provides a consolidated view of your running inbound Connector [webhooks, message queue subscriptions, and polling subscriptions](/reference/glossary.md#inbound-connector) for efficient monitoring and management.
+
+- Real-time alerts will notify operators when Connectors are not running, preventing unnoticed downtimes.
+- Use this feature to check your inbound Connectors are healthy and running, and troubleshoot unhealthy Connectors.
+
+To learn more about this feature, see [manage your connectors](/components/console/manage-clusters/manage-connectors.md).
+
+<!-- https://github.com/camunda/product-hub/issues/2647 https://github.com/camunda/product-hub/issues/1063 -->
+
+### Custom JWKS and JWT Algorithms Support <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+
+Self-Managed customers now have [full control over JWT configurations](/self-managed/modeler/web-modeler/configuration/configuration.md) for enhanced security and compatibility.
+
+<!--- https://github.com/camunda/web-modeler/issues/11571 --->
+
+### Document handling <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+
+We have extended Camunda's [document handling](/components/concepts/document-handling.md) capabilities by introducing robust integrations and support for AWS S3, local file systems, and document operations within Zeebe. This version enhances document management by providing additional support for secure storage, retrieval, and integration with Connectors, improving the efficiency and scalability of document-dependent workflows.
+
+<!-- https://github.com/camunda/product-hub/issues/2555 -->
+
+### Dual-region reference architecture for OpenShift <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+
+We are excited to announce the addition of the [dual-region reference architecture for Red Hat OpenShift](/self-managed/setup/deploy/openshift/dual-region.md). This new architecture leverages Submariner, a cloud-native technology based on IPSec, to enable inter-cluster communication and service discovery across regions. Learn more about [dual-region operational procedures](/self-managed/operational-guides/multi-region/dual-region-ops.md).
+
+<!--- https://github.com/camunda/product-hub/issues/2501  --->
+
+### Dual-region ROSA HCP cluster with Terraform <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+
+Step through [a detailed tutorial for deploying two Red Hat OpenShift on AWS (ROSA) cluster with Hosted Control Plane (HCP) in two different regions](/self-managed/setup/deploy/amazon/openshift/terraform-setup-dual-region.md). It is specifically tailored for deploying Camunda 8 using Terraform, a widely-used Infrastructure as Code (IaC) tool.
+
+<!--- https://github.com/camunda/product-hub/issues/2585 --->
+
+### End-to-end organization process landscape <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler"> Desktop Modeler</span>
+
+Automation leaders can visualize all automation projects through a single, hierarchical source of truth of approved processes. Specifically, there are new features for copying reviewed process application versions to a central project where every org member can be invited with a single click. Now, users can more easily communicate their automation efforts and maximize asset reuse.
+
+<!-- https://github.com/camunda/product-hub/issues/2611 -->
+
+### Integrate additional Kubernetes definitions <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+
+The Camunda 8 Helm chart now allows custom Kubernetes manifests to be injected into your `values.yaml`. This enables you to add additional Kubernetes resources such as ConfigMaps, Deployments, or Services into your deployment without modifying the Helm chart itself.
+
+For more information, visit the [documentation on injecting Kubernetes manifests](/self-managed/setup/guides/add-extra-manifests.md).
+
+<!--- https://github.com/camunda/product-hub/issues/2464 --->
+
+### Intelligent Document Processing (IDP) <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span> {#idp}
+
+Use intelligent document processing (IDP) to integrate automated document processing into your end-to-end processes.
+
+- IDP uses artificial intelligence (AI) and machine learning (ML) to identify, extract, and organize data from your structured and unstructured documents into a structured format you can use in your processes.
+- For example, you can use IDP to extract data from invoices and other document types in your document processing workflow.
+
+To learn more about this feature, see [intelligent document processing](/components/modeler/web-modeler/intelligent-document-processing.md).
+
+### Process applications in Desktop Modeler <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span>
+
+We have enabled developers to manage and work with multi-file BPMN projects directly within Desktop Modeler. This feature brings familiar IDE-like project management capabilities to Modeler, aligning with Web Modeler concepts, projects, and process applications.
+
+<!--- https://github.com/camunda/product-hub/issues/2458 --->
+
+### Process application versioning, README, and review <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
+
+You can now track changes and deploy the right version of the process application to the right environment, keep your process documentation updated, [versioned](/components/modeler/web-modeler/process-application-versioning.md), and [readable for everyone](/components/modeler/web-modeler/advanced-modeling/process-documentation-with-readme-files.md), and enjoy a smooth, out-of-the-box experience ensuring all changes to processes are formally [reviewed](/components/modeler/web-modeler/process-application-pipeline.md#review) and approved.
+
+<!--- https://github.com/camunda/product-hub/issues/2016 https://github.com/camunda/product-hub/issues/2565 https://github.com/camunda/product-hub/issues/2054 --->
+
+### Task appending framework <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Modeler">Modeler</span>
+
+Create and append tasks with resources available in the current project and process application. Find the available processes, decisions, and forms in the append menu to directly create a task linked to the resource.
+
+<!-- https://github.com/camunda/product-hub/issues/2608 -->
+
+### Unified deployment experience from Web Modeler <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
+
+[Authenticate deployments](/components/modeler/web-modeler/process-application-versioning.md) with your existing user tokens, rather than entering shared secrets. This further simplifies the deployment process beyond our 8.6 release.
+
+<!--- https://github.com/camunda/product-hub/issues/2073 --->
+
+### Known bugs in the 8.7.0 release
+
+| Bug / issue                                                                                                                                              | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| :------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [XML keeps inbound.type after changing element (#932)](https://github.com/camunda/issues/issues/932)                                                     | <p>When changing the element type of an inbound start event Connector to a blank start event type, the inbound Connector properties are not removed.</p><p><ul><li>**Affects:** Web Modeler</li><li>**Workaround**: Delete and re-create the BPMN element.</li></ul></p>                                                                                                                                                                                                                                                                                                                 |
+| [Fields in Tasklist are not editable for AI-Generated forms (#26079)](https://github.com/camunda/camunda/issues/26079)                                   | <p>Fields in AI-generated user forms may not be editable for certain Chrome browser versions.</p><p><ul><li>**Affects:** Web Modeler and Tasklist</li><li>**Workaround**: Manually recreate the form.</li></ul></p>                                                                                                                                                                                                                                                                                                                                                                      |
+| [PDFs cannot be previewed or downloaded in Firefox, Chrome, or Edge (#28498)](https://github.com/camunda/camunda/issues/28498)                           | <p>In rare situations, PDFs cannot be previewed due to the used browser.</p><p><ul><li>**Affects:** Tasklist</li><li>**Workaround**: Use a different browser; clear browser cache.</li></ul></p>                                                                                                                                                                                                                                                                                                                                                                                         |
+| [Connectors config using EntraId (OIDC) for 8.7.0-alpha5 incorrect (#3135)](https://github.com/camunda/camunda-platform-helm/issues/3135)                | <p>Incomplete Connectors configuration for Entra ID usage.</p><p><ul><li>**Affects:** Connectors</li><li>**Workaround**: Set an environment variable with the token scope for Operate (see [issue](https://github.com/camunda/camunda-platform-helm/issues/3135)).</li></ul></p>                                                                                                                                                                                                                                                                                                         |
+| [Uploaded files are not uploaded to the document storage when starting a process from Modeler (#29526)](https://github.com/camunda/camunda/issues/29526) | <p>Files are not uploaded to the document storage when starting a process with a start form from Web Modeler or Play.</p><p><ul><li>**Affects:** Document handling and Web Modeler</li><li>**Workaround**: Start the process from Tasklist or the Tasklist REST API.</li></ul></p>                                                                                                                                                                                                                                                                                                       |
+| [File picker does not display the name of the uploaded file for completed tasks (#25443)](https://github.com/camunda/camunda/issues/25443)               | <p>File picker does not display the name of the uploaded file for completed tasks.</p><p><ul><li>**Affects:** Tasklist</li><li>**Workaround**: File name can be viewed in Operate.</li></ul></p>                                                                                                                                                                                                                                                                                                                                                                                         |
+| [File upload fails to AWS storage due to non-standard space in filename (#28375)](https://github.com/camunda/camunda/issues/28375)                       | <p>File upload fails to AWS storage due to non UTF-8 whitespace character in filename.</p><p><ul><li>**Affects:** Tasklist</li><li>**Workaround**: When using AWS S3 storage, use UTF-8 compatible characters.</li></ul></p>                                                                                                                                                                                                                                                                                                                                                             |
+| [Failed to replay batch at 'LoggedEvent (#30810)'](https://github.com/camunda/camunda/issues/30810)                                                      | <p>When updating from `8.6.13` to `8.7.0`, Zeebe processing can stop after the update in some situations, where multi-instance elements are used.</p><p><ul><li>**Affects:** Zeebe</li><li>**Workaround**: This issue is fixed in `8.7.1`. When affected, going to `8.7.1` fully mitigates the issue. There is no risk of data loss.</li></ul></p>                                                                                                                                                                                                                                       |
+| [Zeebe backups fail when using Self-Managed environment in Azure with Managed Identity](https://github.com/camunda/camunda/issues/30860)                 | <p>When performing Zeebe backups with Azure and Managed Identity in a self-managed environment, Zeebe fails to load the application default credentials that are provided at runtime, preventing backups from taking place.</p><p><ul><li>**Affects:** Zeebe</li><li>**Workaround**: When using Azure backups with in a SM environment, the configuration for the Azure store should be set as environment variables as detailed [here](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md#azure-backup-store) instead of using Managed Identity.</li></ul></p> |
 
 ## 8.7.0-alpha5
 
@@ -84,7 +209,7 @@ To learn more about this feature, see [intelligent document processing](/compone
 
 ### Play multi-tenancy <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-Play multi-tenancy allows you to have an isolated, dedicated testing environment without additional cost. This feature is available for Web Modeler in Self-Managed environments.
+Use your existing development cluster with tenancy so multiple teams can develop on the same cluster without impacting each other. This feature is available for Web Modeler in Self-Managed environments.
 
 <!-- https://github.com/camunda/product-hub/issues/2653 -->
 
@@ -104,6 +229,8 @@ To learn more about this feature, see [process landscape visualization](/compone
 The [RPA solution](/components/rpa/overview.md) is graduating to [production-ready](/components/rpa/production.md), empowering customers to deploy robust, scalable, and maintainable automation workflows seamlessly.
 
 As RPA tasks are now available within BPMN diagrams for automation, users can now implement, troubleshoot, and maintain automation RPA scripts in Desktop Modeler, and deploy and manage RPA files in Zeebe. This major update introduces a suite of powerful features designed to enhance the development, deployment, and management of [RPA scripts](/components/rpa/getting-started.md).
+
+We recommend reviewing the [current known issues for RPA](https://github.com/camunda/rpa-worker/discussions/categories/known-issues) to ensure environment compatibility.
 
 <!-- https://github.com/camunda/product-hub/issues/2533 -->
 
@@ -244,9 +371,9 @@ To learn more about migration, see [process instance migration](/components/conc
 
 <!-- https://github.com/camunda/product-hub/issues/1314 -->
 
-### Replay scenarios <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Modeler">Modeler</span>
+### Replay scenarios <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Modeler">Modeler</span>
 
-You can now use Play to quickly repeat manual test suites by recording and playing back process instances as scenarios.
+In Camunda 8 SaaS, you can now use Play to quickly repeat manual test suites by recording and playing back process instances as scenarios.
 
 For example, you can validate your process by creating and rerunning scenarios for different paths to check the process works as expected after any diagram changes are made.
 
@@ -362,13 +489,13 @@ To learn more about this feature, see [HTTP Webhook Connector](/components/conne
 
 ### Connector Runtime <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span>
 
-#### Spring SDK and Camunda REST API Migration
+#### Spring SDK and Camunda 8 REST API Migration
 
 :::note
-This feature was originally released with 8.7.0-alpha3, and is no longer available in 8.7.0. The Camunda REST API migration is now available in [8.8.0-alpha1](/reference/announcements-release-notes/880/880-announcements.md#spring-sdk-and-camunda-rest-api-migration). For more information, see the Camunda 8.7 and 8.8 [release update blog](https://camunda.com/blog/2025/01/camunda-87-88-release-update/).
+This feature was originally released with 8.7.0-alpha3, and is no longer available in 8.7.0. The Camunda 8 REST API migration is now available in [8.8.0-alpha1](/reference/announcements-release-notes/880/880-announcements.md#spring-sdk-and-camunda-rest-api-migration). For more information, see the Camunda 8.7 and 8.8 [release update blog](https://camunda.com/blog/2025/01/camunda-87-88-release-update/).
 :::
 
-The Connectors experience is enhanced with the migration from the Spring Zeebe to the Camunda REST API, and the removal of dependency on the Operate client.
+The Connectors experience is enhanced with the migration from the Spring Zeebe to the Camunda 8 REST API, and the removal of dependency on the Operate client.
 
 #### Testing Support migration
 

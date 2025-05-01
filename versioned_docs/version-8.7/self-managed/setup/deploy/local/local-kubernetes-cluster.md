@@ -57,7 +57,7 @@ If you are deploying Camunda 8 with Ingress configuration, make sure to add addi
 3. Install Camunda 8 using the `camunda-platform-core-kind-values.yaml` file you downloaded previously. This file might contain additional values if you are adding Ingress, TLS, or using a variety of other configuration properties. See [Camunda Helm chart parameters](https://artifacthub.io/packages/helm/camunda/camunda-platform#parameters). Execute the following command:
 
 ```sh
-helm install camunda-platform camunda/camunda-platform \
+helm install camunda-platform camunda/camunda-platform --version $HELM_CHART_VERSION \
     -f camunda-platform-core-kind-values.yaml
 ```
 
@@ -107,7 +107,9 @@ To get a full list of the deployed Camunda components and their network properti
 
 <TabItem value="ingress">
   
-Camunda 8 Self-Managed has multiple web applications and gRPC services. These can be accessed using Kubernetes Ingress. For more information, refer to the [Ingress setup guide](/self-managed/setup/guides/ingress-setup.md).
+Camunda 8 Self-Managed has multiple web applications and gRPC services. Both can be accessed using Kubernetes Ingress.
+
+In this example, we will use a combined Ingress configuration. For more information, refer to [combined and separated Ingress setup](/self-managed/setup/guides/ingress-setup.md).
 
 ## Prerequisites
 

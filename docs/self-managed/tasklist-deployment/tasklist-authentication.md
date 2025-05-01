@@ -127,7 +127,7 @@ Be aware a JWT token is intended to be used for M2M communication and is therefo
 
 1. [Add an application in Identity](/self-managed/identity/user-guide/additional-features/incorporate-applications.md).
 2. [Add permissions to an application](/self-managed/identity/user-guide/additional-features/incorporate-applications.md) for Tasklist API.
-3. Obtain a token to access the REST API.
+3. Obtain a token to access the Tasklist REST API.
    You will need:
    - `client_id` and `client_secret` from Identity application you created.
    - URL of the authorization server will look like: `http://<keycloak_host>:<port>/auth/realms/camunda-platform/protocol/openid-connect/token`, where host and port reference Keycloak URL (e.g. `localhost:18080`).
@@ -160,9 +160,9 @@ Take the `access_token` value from the response object and store it as your toke
 curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer <TOKEN>" http://localhost:8080/v1/tasks/search
 ```
 
-### User task access restrictions
+## User task access restrictions
 
-To use this resource, the **User Task Access Restrictions** feature must be [enabled on Identity](/self-managed/concepts/access-control/user-task-access-restrictions.md). When it is active, Tasklist applies additional security measures to filter tasks based on user identity and authorization. The tasks displayed are restricted based on the candidate groups, candidate users, and assignee associated with the logged-in user. The benefits of this resource are:
+User task access restrictions are enabled by default. To disable, set the [`userAccessRestrictionsEnabled` Tasklist environment variable](/self-managed/tasklist-deployment/tasklist-authentication.md?authentication=identity#configure-identity) to `false`. When enabled, Tasklist applies additional security measures to only show tasks based on the logged-in users identity. The tasks displayed are restricted based on the candidate groups, candidate users, and assignee associated with the logged-in user. The benefits of this resource are:
 
 - Enhanced security: Users only see tasks for which they have the necessary permissions, improving security and preventing unauthorized access.
 - Tasklist customization: The Tasklist interface is tailored to display only relevant tasks for each user, providing a personalized and streamlined experience.

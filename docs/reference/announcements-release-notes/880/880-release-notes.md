@@ -19,6 +19,57 @@ These release notes identify the new features included in 8.8, including [alpha 
 | ---------------------- | ---------------------------- | ------------ | ------------ | ------------ |
 | 14 October 2025        | 13 April 2027                | -            | -            | -            |
 
+## 8.8.0-alpha3
+
+| Release date  | Changelog(s)                                                                                                                                                                               | Blog |
+| :------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--- |
+| 08 April 2025 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.8.0-alpha3)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.8.0-alpha3)</li></ul> | -    |
+
+<!-- https://github.com/camunda/product-hub/issues/2630 -->
+
+### Ad-hoc subprocess activation API & completion configuration <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span> {#adhocsubprocess}
+
+Agentic process orchestration enhancements include:
+
+- An optional `completionCondition` boolean expression for ad-hoc subprocesses that is evaluated every time an inner element is completed. A `cancelRemainingInstances` boolean attribute can also be configured to influence the ad-hoc subprocess behavior when the completion condition is met.
+- An [Activate activities within an ad-hoc subprocess](/apis-tools/camunda-api-rest/specifications/activate-ad-hoc-subprocess-activities.api.mdx) API used to activate selected activities within an ad-hoc subprocess.
+- A [Search activatable activities (alpha)](/apis-tools/camunda-api-rest/specifications/search-ad-hoc-subprocess-activities.api.mdx) API used to search for activatable activities within ad-hoc subprocesses.
+
+To learn more about these features, see [ad-hoc subprocesses](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md).
+
+<!-- https://github.com/camunda/product-hub/issues/2585 -->
+
+### Advanced User Task Listeners for Updating Events <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span> {#listeners}
+
+Advanced User Task Listeners for Updating Events allow you to define listeners that trigger whenever certain task properties or variables change.
+
+- These listeners generate jobs similar to other event-based task listeners, granting direct access to task data as well as the ability to accept or roll back updates (in certain scenarios).
+- Operators can also view, manage, and resolve incidents caused by these listeners in Operate, ensuring a unified and transparent approach to handling task changes.
+
+To learn more about this feature, see [advanced user task listeners for updating events](/components/concepts/user-task-listeners.md).
+
+<!-- https://github.com/camunda/product-hub/issues/2750 -->
+
+### Connector manage and run supports multiple Connector Runtimes<span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Console">Console</span> {#connector-management}
+
+Connector manage and run in Console now supports managing multiple Connector Runtime instances.
+
+To learn more about this feature, see [manage your connectors](/components/console/manage-clusters/manage-connectors.md).
+
+<!-- https://github.com/camunda/product-hub/issues/2398 -->
+
+### HubSpot Connector <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span> {#hubspot}
+
+Use the new outbound HubSpot Connector to connect your BPMN service with [HubSpot](https://hubspot.com/) and manage your HubsSpot contacts, companies, and deals.
+
+This Connector supports the following operations:
+
+- Contacts: Get all contacts, Get contact by id, Get multiple contacts by id, Search contact, Create contact, Update contact, Delete contact.
+- Companies: Get all companies, Get company by id, Search company, Get all contacts of a company, Add contact to company, Remove contact from company, Create company, Delete company.
+- Deals: Get all deals, Get deal by id, Search deal, Delete deal.
+
+To learn more about this Connector, see [HubSpot Connector](/components/connectors/out-of-the-box-connectors/hubspot.md).
+
 ## 8.8.0-alpha2
 
 | Release date  | Changelog(s)                                                                                                                                                                               | Blog                                                                               |
@@ -151,6 +202,6 @@ Camunda backups have been improved and made easier to use. The web application b
 
 ### Connector Runtime <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span>
 
-#### Spring SDK and Camunda REST API Migration
+#### Spring SDK and Camunda 8 REST API Migration
 
-The Connectors experience is enhanced with the migration from the Spring Zeebe to the Camunda REST API, and the removal of dependency on the Operate client.
+The Connectors experience is enhanced with the migration from the Spring Zeebe to the Camunda 8 REST API, and the removal of dependency on the Operate client.

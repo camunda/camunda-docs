@@ -8,20 +8,20 @@ The Zeebe Gateway supports [Camunda Identity](../../identity/what-is-identity.md
 
 In the Camunda 8 Self-Managed Helm chart, authentication is enabled by default via Camunda Identity.
 
-### Camunda Identity authorization
+## Camunda Identity authorization
 
 [Camunda Identity](../../identity/what-is-identity.md)-based OAuth token validation can be enabled by setting `security.authentication.mode` to `identity` and providing the corresponding `camunda.identity.*` properties. You can find more details about these in the [Camunda Identity documentation](../../identity/deployment/configuration-variables.md#core-configuration).
 
 The Camunda 8 Self-Managed Helm chart is already fully preconfigured by default.
 
-#### YAML snippet
+### YAML snippet
 
 ```yaml
 security:
   authentication:
     mode: identity
     identity:
-      issuerBackendUrl: http://keycloak:8080/auth/realms/camunda-platform
+      issuerBackendUrl: http://keycloak:18080/auth/realms/camunda-platform
       audience: zeebe-api
       type: keycloak
 ```
