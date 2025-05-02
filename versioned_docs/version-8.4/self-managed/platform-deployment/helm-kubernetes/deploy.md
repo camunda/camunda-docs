@@ -5,6 +5,8 @@ sidebar_label: "Deploy"
 description: "Camunda provides continuously improved Helm charts, of which are not cloud provider-specific so you can choose your Kubernetes provider."
 ---
 
+import { HelmChartInstall } from "@site/src/components/CamundaDistributions";
+
 Camunda provides continuously improved Helm charts, of which are not cloud provider-specific so you can choose your Kubernetes provider. The charts are available in the [Camunda Helm repository](https://artifacthub.io/packages/helm/camunda/camunda-platform) and we encourage you to [report issues](https://github.com/camunda/camunda-platform-helm/issues).
 
 ## What is Helm?
@@ -73,9 +75,7 @@ Once this is completed, we will be ready to install the Helm chart hosted in the
 
 To install the available Camunda 8 components inside a Kubernetes cluster, you can simply run:
 
-```bash
-helm install camunda camunda/camunda-platform
-```
+<HelmChartInstall />
 
 You can also add the `-n` flag to specify in which Kubernetes namespace the components should be installed.
 
@@ -131,7 +131,7 @@ To ensure you're installing the most current version of both the chart and its a
 
 ```bash
 # This will install the latest Camunda Helm chart with the latest applications/dependencies.
-helm install camunda camunda/camunda-platform \
+helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION \
     --values https://helm.camunda.io/camunda-platform/values/values-latest.yaml
 ```
 

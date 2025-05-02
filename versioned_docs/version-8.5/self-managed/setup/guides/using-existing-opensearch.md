@@ -67,5 +67,5 @@ global:
 Use the custom values file to [deploy Camunda 8](/self-managed/setup/overview.md) as usual:
 
 ```sh
-helm install camunda camunda/camunda-platform -f existing-elasticsearch-values.yaml
+helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION -f existing-elasticsearch-values.yaml
 ```

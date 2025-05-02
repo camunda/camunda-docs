@@ -68,6 +68,5 @@ jobs:
           branch: update-rest-doc
           delete-branch: true
           team-reviewers: camunda/tech-writers
-          reviewers: pepopowitz
           base: main
           labels: deploy
