@@ -1,0 +1,9 @@
+extends: substitution
+message: "Exclude the `docs/` prefix in markdown links, unless you intend to link only to vNext. Consider using `%s` instead of `%s`."
+level: warning
+nonword: true
+scope: raw
+swap:
+  # Captures any links that start with `docs/` (or `/docs/`) and include a .md extension.
+  #   These are links that would cross versions into vNext.
+  - "(\\[[^\\]]*\\]\\()\\/?docs(\\/[^\\)]*\\.md[^\\)]*\\))": "$1$2"

@@ -454,7 +454,7 @@ module.exports = {
     },
     algolia: {
       // These keys are for our new standalone algolia instance!
-      apiKey: "d701d38126d1a43866047d3ab97680d1",
+      apiKey: "60d0065ccc1e161fc992f4abc248e74d",
       appId: "6KYF3VMCXZ",
       indexName: "camunda",
       placeholder: "Search Camunda 8 docs",
@@ -552,7 +552,6 @@ module.exports = {
             "/docs/**/assets/**",
             "/docs/**/tags/**",
             "/docs/next/**",
-            "/docs/8.3/**",
             "/docs/8.4/**",
             "/docs/8.5/**",
             "/docs/8.6/**",

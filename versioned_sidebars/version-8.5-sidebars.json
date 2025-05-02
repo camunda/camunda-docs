@@ -1279,6 +1279,7 @@
             "self-managed/console-deployment/overview",
             "self-managed/console-deployment/installation",
             "self-managed/console-deployment/configuration",
+            "self-managed/console-deployment/usage-metrics",
             "self-managed/console-deployment/telemetry"
           ],
           "Zeebe": [

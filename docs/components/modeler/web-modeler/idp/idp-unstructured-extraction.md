@@ -186,13 +186,13 @@ You can restore a version to revert to a previous snapshot of a document extract
 1. Select the three vertical dots to open the actions menu.
 1. Select **Restore as latest**.
 
-### Rename a version
+### Update a version
 
-You can rename a version at any time.
+You can update a version name and description at any time.
 
 1. In the sidebar **Versions** list, hover over the version you want to rename.
 1. Select the three vertical dots to open the actions menu.
-1. Select **Edit name** and enter a new name for the version.
+1. Select **Edit** and enter a new name and/or description for the version.
 
 ### Delete a version
 

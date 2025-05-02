@@ -206,6 +206,23 @@ module.exports = {
     },
     {
       type: "category",
+      label: "Robotic Process Automation (RPA)",
+      link: {
+        type: "doc",
+        id: "components/rpa/overview",
+      },
+      items: [
+        "components/rpa/getting-started",
+        "components/rpa/production",
+        {
+          type: "link",
+          label: "RPA library specifications",
+          href: "https://camunda.github.io/rpa-python-libraries/",
+        },
+      ],
+    },
+    {
+      type: "category",
       label: "Modeler",
       link: {
         type: "doc",
@@ -1222,6 +1239,7 @@ module.exports = {
                 "self-managed/console-deployment/configuration/ssl",
               ],
             },
+            "self-managed/console-deployment/usage-metrics",
             "self-managed/console-deployment/telemetry",
           ],
           Zeebe: [

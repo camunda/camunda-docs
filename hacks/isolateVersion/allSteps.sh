@@ -1,9 +1,8 @@
 #!/bin/bash   
 set -e # exit at first error
 
-# Before running this script make sure these versions are correct!
-ARCHIVED_VERSION="8.1"
-ARCHIVED_OPTIMIZE_VERSION="3.9.0"
+# Before running this script make sure this version is correct!
+ARCHIVED_VERSION="8.3"
 
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
@@ -24,8 +23,10 @@ then
   exit 0
 fi
 
-# Used for debugging purposes. If you only want to test one step, Pass the step number in as an argument.
+# Used for debugging purposes. If you only want to test one step, pass the step number in as an argument.
 #  example: `./allSteps.sh 1` will only run the first step.
+# To run all steps, pass no arguments, i.e. `./allSteps.sh`.
+
 script_index=$1
 
 script_directory=$(cd "$(dirname "$0")" && pwd)
@@ -59,7 +60,7 @@ if [[ "$script_index" == 7 || -z "$script_index" ]]; then
 fi
 
 if [[ "$script_index" == 8 || -z "$script_index" ]]; then
-  source $script_directory/8-configureOptimizeDocs.sh
+  source $script_directory/8-updateCurrentVersion.sh
 fi
 
 notify "Automated steps are complete! For ease of review, consider PR'ing the deletion commits separate from the rest of the changes."
