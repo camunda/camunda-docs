@@ -1,15 +1,15 @@
 ---
 id: blueprism
-title: Blue Prism Connector
+title: Blue Prism connector
 description: Orchestrate your Blue Prism queue items from your BPMN process.
 sidebar_label: Blue Prism
 ---
 
-The **Blue Prism Connector** allows you to orchestrate a Blue Prism queue from your BPMN process with [Blue Prism RPA](https://www.blueprism.com/).
+The **Blue Prism connector** allows you to orchestrate a Blue Prism queue from your BPMN process with [Blue Prism RPA](https://www.blueprism.com/).
 
-To start using the Connector, you must have a running Blue Prism instance configured API service. Refer to the [official documentation page](https://bpdocs.blueprism.com/bp-7-1/en-us/Guides/bp-api/api-introduction.htm) to learn more about how to install and configure Blue Prism API service.
+To start using the connector, you must have a running Blue Prism instance configured API service. Refer to the [official documentation page](https://bpdocs.blueprism.com/bp-7-1/en-us/Guides/bp-api/api-introduction.htm) to learn more about how to install and configure Blue Prism API service.
 
-## Create a Blue Prism Connector task
+## Create a Blue Prism connector task
 
 import ConnectorTask from '../../../components/react-components/connector-task.md'
 
@@ -17,36 +17,36 @@ import ConnectorTask from '../../../components/react-components/connector-task.m
 
 ## Authentication
 
-You can choose among the available **Blue Prism Connector** authentication types according to your authentication requirements.
+You can choose among the available **Blue Prism connector** authentication types according to your authentication requirements.
 
 ### Bearer token authentication
 
-#### Create a new Connector secret
+#### Create a new connector secret
 
 We advise you to keep your **Bearer Token** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
 1. Follow our [guide for creating secrets](../../console/manage-clusters/manage-secrets.md).
-2. Name your secret (i.e `BLUE_PRISM_BEARER_TOKEN`) so you can reference it later in the Connector.
+2. Name your secret (i.e `BLUE_PRISM_BEARER_TOKEN`) so you can reference it later in the connector.
 
 #### Configure the bearer token
 
-Select the **Blue Prism Connector** and fill out the following properties under the **Authentication** section:
+Select the **Blue Prism connector** and fill out the following properties under the **Authentication** section:
 
 1. Click **Bearer Token** in the **Authentication** section.
 2. Set **Bearer** to the secret you created (i.e. `{{secrets.BLUE_PRISM_BEARER_TOKEN}}`).
 
 ### OAuth Client Credentials Flow
 
-#### Create a new Connector secret
+#### Create a new connector secret
 
 We advise you to keep your **Client ID** and **Client secret** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
 1. Follow our [guide for creating secrets](../../console/manage-clusters/manage-secrets.md).
-2. Name your secret (i.e `BLUE_PRISM_CLIENT_ID`) so you can reference it later in the Connector.
+2. Name your secret (i.e `BLUE_PRISM_CLIENT_ID`) so you can reference it later in the connector.
 
 #### Configure the OAuth Token
 
-Select the **Blue Prism Connector** and fill out the following properties under the **Authentication** section:
+Select the **Blue Prism connector** and fill out the following properties under the **Authentication** section:
 
 1. Select **OAuth 2.0 client credentials** in the **Authentication** section.
 2. Set **Identity token provider URL** to identity provider configured for your Blue Prism instance.
@@ -57,7 +57,7 @@ Find more information about the OAuth client credentials flow in the [RFC refere
 
 ## Operation types
 
-The **Blue Prism Connector** currently supports two operation types in the **Operation type** dropdown list: _Get item from a queue by ID_ and _Create work queue item_.
+The **Blue Prism connector** currently supports two operation types in the **Operation type** dropdown list: _Get item from a queue by ID_ and _Create work queue item_.
 
 ### Get item from a queue by ID
 
@@ -147,7 +147,7 @@ Response example:
 }
 ```
 
-### Using Blue Prism Connector best practice
+### Using Blue Prism connector best practice
 
 There is no guarantee a queue item will be processed right away. In that case, we suggest building your BPMN diagram to periodically retry polling.
 To learn more, refer to an entry _Solution with Timer and Loop_ at [Camunda BPMN examples](https://camunda.com/bpmn/examples/) page.

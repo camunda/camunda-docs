@@ -1,20 +1,20 @@
 ---
 id: connector-template-generator
 title: Generate a connector template
-description: Learn how to generate connector templates for easier custom Connector creation.
+description: Learn how to generate connector templates for easier custom connector creation.
 ---
 
 You can configure and automatically generate a custom [Connector template](/components/connectors/custom-built-connectors/connector-templates.md) in Web Modeler.
 
 You can start from a blank template or import an existing API definition such as an [OpenAPI specification](https://swagger.io/resources/open-api/), [Swagger specification](https://swagger.io/resources/open-api/), or a [Postman collection](https://www.postman.com/collection/). For example, download a Postman collection as a YAML file, import this into the generator, and choose which methods to include in the generated template.
 
-## Generate a Connector template
+## Generate a connector template
 
-To generate a Connector template:
+To generate a connector template:
 
 1. Select the Modeler project you want to create the template in.
-1. Click **Create new**, and select **Connector template** to open the **Create new Connector template** screen.
-   ![fCreate the new Connector template](./img/configure-template-details.png)
+1. Click **Create new**, and select **Connector template** to open the **Create new connector template** screen.
+   ![fCreate the new connector template](./img/configure-template-details.png)
 
 1. Select the template starting point.
 
@@ -48,8 +48,8 @@ To generate a Connector template:
    1. After the import is complete, select which actions to include in the template from the generated list of supported methods.
       ![List of imported methods](./img/Imported-methods.png)
 
-1. Click **Create template** to create and open the newly generated Connector template in the [template editor](/components/connectors/manage-connector-templates.md).
+1. Click **Create template** to create and open the newly generated connector template in the [template editor](/components/connectors/manage-connector-templates.md).
 
 :::info
-For more information on working with and configuring Connector templates, see [Connector templates](/components/connectors/custom-built-connectors/connector-templates.md).
+For more information on working with and configuring connector templates, see [Connector templates](/components/connectors/custom-built-connectors/connector-templates.md).
 :::
