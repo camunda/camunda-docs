@@ -55,4 +55,4 @@ You can download the form's JSON definition (or copy it to the clipboard) from t
 
 You can download the template's JSON definition by clicking the download button in the toolbar:
 
-<img src={DownloadConnectorTemplateImg} style={{width: 220}} alt="Download a Connector template's JSON definition" />
+<img src={DownloadConnectorTemplateImg} style={{width: 220}} alt="Download a connector template's JSON definition" />

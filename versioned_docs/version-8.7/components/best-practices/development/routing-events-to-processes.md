@@ -100,7 +100,7 @@ A conditional event's condition expression is evaluated at it's "scope" creation
 Most events actually occur somewhere external to the workflow engine and need to be routed to it. The core workflow engine is by design not concerned with the technical part of receiving external messages, but you can receive messages and route them to the workflow engine by the following ways:
 
 - Using API: Receive the message by means of your platform-specific activities such as connecting to a AMQP queue or processing a REST request and then route it to the process.
-- Using Connectors: Configure a Connector to receive messages such as Kafka records and rote it to the process. Note that this possibility works for Camunda 8 only.
+- Using connectors: Configure a connector to receive messages such as Kafka records and rote it to the process. Note that this possibility works for Camunda 8 only.
 
 ### Starting process instance by BPMN process ID
 
