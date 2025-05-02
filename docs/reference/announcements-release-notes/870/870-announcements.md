@@ -96,10 +96,10 @@ The Zeebe Java client will not be developed further and will only receive bug fi
 
 ### Connectors
 
-Starting with 8.7, the Connector runtime will stop using the deprecated community [Spring Zeebe library](https://github.com/camunda-community-hub/spring-zeebe) to communicate with the core APIs of Camunda. The new [Spring Zeebe SDK](/apis-tools/spring-zeebe-sdk/getting-started.md) will be used instead.
+Starting with 8.7, the connector runtime will stop using the deprecated community [Spring Zeebe library](https://github.com/camunda-community-hub/spring-zeebe) to communicate with the core APIs of Camunda. The new [Spring Zeebe SDK](/apis-tools/spring-zeebe-sdk/getting-started.md) will be used instead.
 
-Although the official SDK is largely compatible with the community library, some changes might be required in the configuration of Self-Managed Connector deployments.
+Although the official SDK is largely compatible with the community library, some changes might be required in the configuration of Self-Managed connector deployments.
 
 We recommend updating the configuration to match the new property format of the [Spring Zeebe SDK](/apis-tools/spring-zeebe-sdk/getting-started.md) to avoid any issues. The old properties will be removed in a future release.
 
-For more information, see the [update guide](/self-managed/operational-guides/update-guide/860-to-870.md#connectors) and the [Connectors configuration guide](/self-managed/connectors-deployment/connectors-configuration.md).
+For more information, see the [update guide](/self-managed/operational-guides/update-guide/860-to-870.md#connectors) and the [connectors configuration guide](/self-managed/connectors-deployment/connectors-configuration.md).
