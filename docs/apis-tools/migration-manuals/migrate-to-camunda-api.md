@@ -325,6 +325,37 @@ The following conventions apply to all attributes:
 </TabItem>
 </Tabs>
 
+### Variable
+
+#### Get a variable
+
+- **V1 endpoint**: `GET http://localhost:8080/v1/variables/{variableId}`
+- **V2 endpoint**: `GET http://localhost:8080/v2/variables/{variableKey}`
+
+<Tabs groupId="get-a-variable" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments'},
+{label: 'Output adjustments', value: 'output-adjustments'},
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+- `variableId` - Use `variableKey` as this refers to the unique system identifier of the variable.
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+- Renamed attributes
+  - `id` - Use `variableKey` as this refers to the unique system identifier of the variable.
+  - `value` - Use `fullValue` instead.
+- Removed attributes
+  - `draft` - Draft variables are not supported in V2 anymore, see also the [save draft variables](#save-task-draft-variables) endpoint for further details.
+
+</TabItem>
+</Tabs>
+
 ## Operate API
 
 ### Decision definition
@@ -576,6 +607,73 @@ The following conventions apply to all attributes:
 <TabItem value='output-adjustments'>
 
 - No output adjustments.
+
+</TabItem>
+</Tabs>
+
+### Variable
+
+#### Search variables for process instances
+
+- **V1 endpoint**: `POST http://localhost:8080/v1/variables/search`
+- **V2 endpoint**: `POST http://localhost:8080/v2/variables/search`
+
+<Tabs groupId="search-variables-for-process-instances" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments'},
+{label: 'Output adjustments', value: 'output-adjustments'},
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+- Response structure changes as outlined in [general changes][].
+  - `searchAfter` has been moved under `page`.
+  - `size` is now the `limit` in the `page` object.
+- Renamed attributes in the `filter` object
+  - `key` of type `int64` - Use `variableKey` of type `string`.
+  - `processInstanceKey` of type `int64` - This is now of type `string`.
+  - `scopeKey` of type `int64` - This is now of type `string`.
+  - `truncated` - Use `isTruncated` instead.
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+- Response structure changes as outlined in [general changes][].
+  - `total` is moved under the `page` object as `totalItems`.
+  - `sortValues` - Use `lastSortValues` in the `page` object instead.
+- Renamed attributes in the objects of the `items` array
+  - `key` of type `int64` - Use `variableKey` of type `string`.
+  - `processInstanceKey` of type `int64` - This is now of type `string`.
+  - `scopeKey` of type `int64` - This is now of type `string`.
+  - `truncated` - Use `isTruncated` instead.
+  - `value` - If `isTruncated` is `true`, use `value` for the truncated value or `fullValue` for the full value. If `isTruncated` is `false` use `value` for the full value.
+
+</TabItem>
+</Tabs>
+
+#### Get variable by key
+
+- **V1 endpoint**: `GET http://localhost:8080/v1/variables/{key}`
+- **V2 endpoint**: `GET http://localhost:8080/v2/variables/{variableKey}`
+
+<Tabs groupId="get-variable-by-key" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments'},
+{label: 'Output adjustments', value: 'output-adjustments'},
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+- No input adjustments.
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+- Except for the response structure changes, all adjustments from [search variables for process instances](#search-variables-for-process-instances) apply.
 
 </TabItem>
 </Tabs>
