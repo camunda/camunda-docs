@@ -2,7 +2,7 @@
 id: camunda-8-api-intermediate-tutorial
 title: Intermediate tutorial
 sidebar_label: Intermediate
-description: "Step through our intermediate Camunda 8 API tutorial to deploy resources, create and start a process instance, and view a process instance by its key."
+description: "Step through this intermediate Camunda 8 API tutorial to deploy resources, create and start a process instance, and view a process instance by its key."
 ---
 
 In this tutorial, we'll step through examples to highlight the capabilities of the Camunda 8 API, such as deploying resources, creating and starting a process instance, and viewing a process instance by its key.
