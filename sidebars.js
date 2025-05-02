@@ -1468,7 +1468,7 @@ module.exports = {
           label: "Document handling",
           link: {
             type: "doc",
-            id: "self-managed/concepts/document-handling/getting-started",
+            id: "self-managed/document-handling/getting-started",
           },
           items: [
             {
@@ -1476,12 +1476,12 @@ module.exports = {
               label: "Configuration",
               link: {
                 type: "doc",
-                id: "self-managed/concepts/document-handling/configuration/overview",
+                id: "self-managed/document-handling/configuration/overview",
               },
               items: [
-                "self-managed/concepts/document-handling/configuration/camunda-8-run",
-                "self-managed/concepts/document-handling/configuration/docker",
-                "self-managed/concepts/document-handling/configuration/helm",
+                "self-managed/document-handling/configuration/camunda-8-run",
+                "self-managed/document-handling/configuration/docker",
+                "self-managed/document-handling/configuration/helm",
               ],
             },
           ],
