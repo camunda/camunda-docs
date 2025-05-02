@@ -8,8 +8,70 @@ This page uses YAML examples to show configuration properties. Alternate methods
 :::note
 Configuration properties can be defined as environment variables using [Spring Boot conventions](https://docs.spring.io/spring-boot/reference/features/external-config.html#features.external-config.typesafe-configuration-properties.relaxed-binding.environment-variables). To define an environment variable, convert the configuration property to uppercase, remove any dashes `-`, and replace any delimiters `.` with underscore `_`.
 
-For example, the property `camunda.client.zeebe.defaults.max-jobs-active` is represented by the environment variable `CAMUNDA_CLIENT_ZEEBE_DEFAULTS_MAXJOBSACTIVE`.
+For example, the property `camunda.client.worker.defaults.max-jobs-active` is represented by the environment variable `CAMUNDA_CLIENT_WORKER_DEFAULTS_MAXJOBSACTIVE`.
 :::
+
+## Modes
+
+The Spring SDK has modes with meaningful defaults aligned with the distribution's default connection details. Each mode is made for a Camunda 8 setup, and only one mode may be used at a time.
+
+:::note
+The defaults applied by the modes are overwritten by _any_ other set property, including legacy/deprecated properties. Check your configuration and logs to avoid unwanted override.
+:::
+
+### SaaS
+
+This allows you to connect to a Camunda instance in our SaaS offering as the URLs are templated.
+
+Activate by setting:
+
+```yaml
+camunda:
+  client:
+    mode: saas
+```
+
+This applies the following defaults:
+
+```yaml reference referenceLinkText="Source" title="SaaS mode"
+https://github.com/camunda/camunda/blob/main/clients/spring-boot-starter-camunda-sdk/src/main/resources/modes/saas.yaml
+```
+
+### Self-Managed
+
+This allows you to connect to a Self-Managed instance protected with JWT authentication. The default URLs are configured to align with all Camunda distributions using `localhost` addresses.
+
+Activate by setting:
+
+```yaml
+camunda:
+  client:
+    mode: self-managed
+```
+
+This applies the following defaults:
+
+```yaml reference referenceLinkText="Source" title="Self-managed mode"
+https://github.com/camunda/camunda/blob/main/clients/spring-boot-starter-camunda-sdk/src/main/resources/modes/self-managed.yaml
+```
+
+### Basic
+
+This allows you to connect to a Self-Managed instance protected with basic authentication. The default URLs are configured to align with all Camunda distributions using `localhost` addresses.
+
+Activate by setting:
+
+```yaml
+camunda:
+  client:
+    mode: basic
+```
+
+This applies the following defaults:
+
+```yaml reference referenceLinkText="Source" title="Basic mode"
+https://github.com/camunda/camunda/blob/main/clients/spring-boot-starter-camunda-sdk/src/main/resources/modes/basic.yaml
+```
 
 ## Job worker configuration options
 
@@ -147,7 +209,7 @@ The code within the handler method needs to be synchronously executed, as the co
 When using `autoComplete` you can:
 
 - Return a `Map`, `String`, `InputStream`, or `Object`, which will then be added to the process variables.
-- Throw a `CamundaBpmnError`, which results in a BPMN error being sent to Zeebe.
+- Throw a `BpmnError`, which results in a BPMN error being sent to Zeebe.
 - Throw any other `Exception` that leads in a failure handed over to Zeebe.
 
 ```java
@@ -159,7 +221,7 @@ public Map<String, Object> handleJobFoo(final ActivatedJob job) {
     return variablesMap;
   } else {
    // problem shall be indicated to the process:
-   throw new CamundaBpmnError("DOESNT_WORK", "This does not work because...");
+   throw new BpmnError("DOESNT_WORK", "This does not work because...");
   }
 }
 ```
@@ -236,20 +298,50 @@ public ProcessVariables foo(@VariablesAsType ProcessVariables variables, @Custom
 }
 ```
 
-### Throwing `CamundaBpmnError`s
+### Throwing `BpmnError`s
 
-Whenever your code hits a problem that should lead to a [BPMN error](/components/modeler/bpmn/error-events/error-events.md) being raised, you can throw a `CamundaBpmnError` to provide the error code used in BPMN:
+Whenever your code hits a problem that should lead to a [BPMN error](/components/modeler/bpmn/error-events/error-events.md) being raised, you can throw a `BpmnError` to provide the error code used in BPMN:
 
 ```java
 @JobWorker(type = "foo")
 public void handleJobFoo() {
   // some work
-  if (!successful) {
+  if (businessError) {
    // problem shall be indicated to the process:
-   throw new CamundaBpmnError("DOESNT_WORK", "This does not work because...");
+   throw CamundaError.bpmnError("ERROR_CODE", "Some explanation why this does not work");
+   // this is a static function that returns an instance of BpmnError
   }
 }
 ```
+
+### Failing jobs in a controlled way
+
+Whenever you want a job to fail in a controlled way, you can throw a `JobError` and provide parameters like `variables`, `retries` and `retryBackoff`:
+
+```java
+@JobWorker(type = "foo")
+public void handleJobFoo() {
+  try {
+   // some work
+  } catch(Exception e) {
+   // problem shall be indicated to the process:
+   throw CamundaError.jobError("Error message", new ErrorVariables(), null, Duration.ofSeconds(10), e);
+   // this is a static function that returns an instance of JobError
+  }
+}
+```
+
+The JobError takes 5 parameters:
+
+- `errorMessage`: String
+- `variables`: Object _(optional)_, default `null`
+- `retries`: Integer _(optional)_, defaults to `job.getRetries() - 1`
+- `retryBackoff`: Duration _(optional)_, defaults to `PT0S`
+- `cause`: Exception _(optional)_, defaults to `null`
+
+:::note
+The job error is sent to the engine by the SDK calling the [Fail Job API](/apis-tools/camunda-api-rest/specifications/fail-job.api.mdx). The stacktrace of the job error will become the actual error message. The provided cause will be visible in Operate.
+:::
 
 ## Additional configuration options
 

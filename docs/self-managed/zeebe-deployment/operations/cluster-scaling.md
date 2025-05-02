@@ -149,7 +149,7 @@ This step is optional, but it is useful when you are testing to see if scaling w
 Port-forward to access the Zeebe Gateway if required:
 
 ```
-kubectl port-forward svc/camunda-zeebe-gateway 26500:26500
+kubectl port-forward svc/camunda-zeebe-gateway 8080:8080
 ```
 
 Run the following command to see the current status of the cluster:
@@ -161,43 +161,159 @@ curl -L 'http://localhost:8080/v2/topology' \
 
 The response would show that partitions are distributed to new brokers:
 
+<details>
+  <summary>Example response</summary>
+
+```json
+{
+  "brokers": [
+    {
+      "nodeId": 0,
+      "host": "zeebe-scaling-demo-zeebe-0.zeebe-scaling-demo-zeebe.zeebe-scaling-demo",
+      "port": 26501,
+      "partitions": [
+        {
+          "partitionId": 1,
+          "role": "leader",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 5,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 6,
+          "role": "follower",
+          "health": "healthy"
+        }
+      ],
+      "version": "8.8.0"
+    },
+    {
+      "nodeId": 1,
+      "host": "zeebe-scaling-demo-zeebe-1.zeebe-scaling-demo-zeebe.zeebe-scaling-demo",
+      "port": 26501,
+      "partitions": [
+        {
+          "partitionId": 1,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 2,
+          "role": "leader",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 6,
+          "role": "leader",
+          "health": "healthy"
+        }
+      ],
+      "version": "8.8.0"
+    },
+    {
+      "nodeId": 2,
+      "host": "zeebe-scaling-demo-zeebe-2.zeebe-scaling-demo-zeebe.zeebe-scaling-demo",
+      "port": 26501,
+      "partitions": [
+        {
+          "partitionId": 1,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 2,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 3,
+          "role": "leader",
+          "health": "healthy"
+        }
+      ],
+      "version": "8.8.0"
+    },
+    {
+      "nodeId": 3,
+      "host": "zeebe-scaling-demo-zeebe-3.zeebe-scaling-demo-zeebe.zeebe-scaling-demo",
+      "port": 26501,
+      "partitions": [
+        {
+          "partitionId": 2,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 3,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 4,
+          "role": "leader",
+          "health": "healthy"
+        }
+      ],
+      "version": "8.8.0"
+    },
+    {
+      "nodeId": 4,
+      "host": "zeebe-scaling-demo-zeebe-4.zeebe-scaling-demo-zeebe.zeebe-scaling-demo",
+      "port": 26501,
+      "partitions": [
+        {
+          "partitionId": 3,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 4,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 5,
+          "role": "leader",
+          "health": "healthy"
+        }
+      ],
+      "version": "8.8.0"
+    },
+    {
+      "nodeId": 5,
+      "host": "zeebe-scaling-demo-zeebe-5.zeebe-scaling-demo-zeebe.zeebe-scaling-demo",
+      "port": 26501,
+      "partitions": [
+        {
+          "partitionId": 4,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 5,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 6,
+          "role": "follower",
+          "health": "healthy"
+        }
+      ],
+      "version": "8.8.0"
+    }
+  ],
+  "clusterSize": 6,
+  "partitionsCount": 6,
+  "replicationFactor": 3,
+  "gatewayVersion": "8.8.0"
+}
 ```
-Cluster size: 6
-Partitions count: 6
-Replication factor: 3
-Gateway version: 8.4.0-SNAPSHOT
-Brokers:
-  Broker 0 - zeebe-scaling-demo-zeebe-0.zeebe-scaling-demo-zeebe.zeebe-scaling-demo.svc:26501
-    Version: 8.4.0-SNAPSHOT
-    Partition 1 : Leader, Healthy
-    Partition 5 : Follower, Healthy
-    Partition 6 : Follower, Healthy
-  Broker 1 - zeebe-scaling-demo-zeebe-1.zeebe-scaling-demo-zeebe.zeebe-scaling-demo.svc:26501
-    Version: 8.4.0-SNAPSHOT
-    Partition 1 : Follower, Healthy
-    Partition 2 : Leader, Healthy
-    Partition 6 : Leader, Healthy
-  Broker 2 - zeebe-scaling-demo-zeebe-2.zeebe-scaling-demo-zeebe.zeebe-scaling-demo.svc:26501
-    Version: 8.4.0-SNAPSHOT
-    Partition 1 : Follower, Healthy
-    Partition 2 : Follower, Healthy
-    Partition 3 : Leader, Healthy
-  Broker 3 - zeebe-scaling-demo-zeebe-3.zeebe-scaling-demo-zeebe.zeebe-scaling-demo.svc:26501
-    Version: 8.4.0-SNAPSHOT
-    Partition 2 : Follower, Healthy
-    Partition 3 : Follower, Healthy
-    Partition 4 : Leader, Healthy
-  Broker 4 - zeebe-scaling-demo-zeebe-4.zeebe-scaling-demo-zeebe.zeebe-scaling-demo.svc:26501
-    Version: 8.4.0-SNAPSHOT
-    Partition 3 : Follower, Healthy
-    Partition 4 : Follower, Healthy
-    Partition 5 : Leader, Healthy
-  Broker 5 - zeebe-scaling-demo-zeebe-5.zeebe-scaling-demo-zeebe.zeebe-scaling-demo.svc:26501
-    Version: 8.4.0-SNAPSHOT
-    Partition 4 : Follower, Healthy
-    Partition 5 : Follower, Healthy
-    Partition 6 : Follower, Healthy
-```
+
+</details>
 
 ## Scale down
 
@@ -259,43 +375,151 @@ curl -L 'http://localhost:8080/v2/topology' \
 
 The response would show that the partitions are moved away from brokers `3`, `4`, and `5`:
 
+<details>
+  <summary>Example response</summary>
+
+```json
+{
+   "brokers": [{
+         "nodeId": 0,
+         "host": "zeebe-scaling-demo-zeebe-0.zeebe-scaling-demo-zeebe.zeebe-scaling-demo",
+         "port": 26501,
+         "partitions": [{
+               "partitionId": 1,
+               "role": "leader",
+               "health": "healthy"
+            },
+            {
+               "partitionId": 2,
+               "role": "follower",
+               "health": "healthy"
+            },
+            {
+               "partitionId": 3,
+               "role": "follower",
+               "health": "healthy"
+            },
+            {
+               "partitionId": 4,
+               "role": "leader",
+               "health": "healthy"
+            } {
+               "partitionId": 5,
+               "role": "follower",
+               "health": "healthy"
+            },
+            {
+               "partitionId": 6,
+               "role": "follower",
+               "health": "healthy"
+            }
+         ],
+         "version": "8.8.0"
+      },
+      {
+         "nodeId": 1,
+         "host": "zeebe-scaling-demo-zeebe-1.zeebe-scaling-demo-zeebe.zeebe-scaling-demo",
+         "port": 26501,
+         "partitions": [{
+               "partitionId": 1,
+               "role": "follower",
+               "health": "healthy"
+            },
+            {
+               "partitionId": 2,
+               "role": "leader",
+               "health": "healthy"
+            },
+            {
+               "partitionId": 3,
+               "role": "follower",
+               "health": "healthy"
+            },
+            {
+               "partitionId": 4,
+               "role": "follower",
+               "health": "healthy"
+            },
+            {
+               "partitionId": 5,
+               "role": "leader",
+               "health": "healthy"
+            },
+            {
+               "partitionId": 6,
+               "role": "leader",
+               "health": "healthy"
+            }
+         ],
+         "version": "8.8.0"
+      },
+      {
+         "nodeId": 2,
+         "host": "zeebe-scaling-demo-zeebe-2.zeebe-scaling-demo-zeebe.zeebe-scaling-demo",
+         "port": 26501,
+         "partitions": [{
+               "partitionId": 1,
+               "role": "follower",
+               "health": "healthy"
+            },
+            {
+               "partitionId": 2,
+               "role": "follower",
+               "health": "healthy"
+            },
+            {
+               "partitionId": 3,
+               "role": "leader",
+               "health": "healthy"
+            },
+            {
+               "partitionId": 4,
+               "role": "follower",
+               "health": "healthy"
+            },
+            {
+               "partitionId": 5,
+               "role": "follower",
+               "health": "healthy"
+            },
+            {
+               "partitionId": 6,
+               "role": "follower",
+               "health": "healthy"
+            }
+         ],
+         "version": "8.8.0"
+      },
+      {
+         "nodeId": 3,
+         "host": "zeebe-scaling-demo-zeebe-3.zeebe-scaling-demo-zeebe.zeebe-scaling-demo",
+         "port": 26501,
+         "partitions": [],
+         "version": "8.8.0"
+      },
+      {
+         "nodeId": 4,
+         "host": "zeebe-scaling-demo-zeebe-4.zeebe-scaling-demo-zeebe.zeebe-scaling-demo",
+         "port": 26501,
+         "partitions": [],
+         "version": "8.8.0"
+      },
+      {
+         "nodeId": 5,
+         "host": "zeebe-scaling-demo-zeebe-5.zeebe-scaling-demo-zeebe.zeebe-scaling-demo",
+         "port": 26501,
+         "partitions": [],
+         "version": "8.8.0"
+      }
+   ],
+   "clusterSize": 3,
+   "partitionsCount": 6,
+   "replicationFactor": 3,
+   "gatewayVersion": "8.8.0"
+}
 ```
-Cluster size: 3
-Partitions count: 6
-Replication factor: 3
-Gateway version: 8.4.0-SNAPSHOT
-Brokers:
-  Broker 0 - zeebe-scaling-demo-zeebe-0.zeebe-scaling-demo-zeebe.zeebe-scaling-demo.svc:26501
-    Version: 8.4.0-SNAPSHOT
-    Partition 1 : Leader, Healthy
-    Partition 2 : Follower, Healthy
-    Partition 3 : Follower, Healthy
-    Partition 4 : Leader, Healthy
-    Partition 5 : Follower, Healthy
-    Partition 6 : Follower, Healthy
-  Broker 1 - zeebe-scaling-demo-zeebe-1.zeebe-scaling-demo-zeebe.zeebe-scaling-demo.svc:26501
-    Version: 8.4.0-SNAPSHOT
-    Partition 1 : Follower, Healthy
-    Partition 2 : Leader, Healthy
-    Partition 3 : Follower, Healthy
-    Partition 4 : Follower, Healthy
-    Partition 5 : Leader, Healthy
-    Partition 6 : Leader, Healthy
-  Broker 2 - zeebe-scaling-demo-zeebe-2.zeebe-scaling-demo-zeebe.zeebe-scaling-demo.svc:26501
-    Version: 8.4.0-SNAPSHOT
-    Partition 1 : Follower, Healthy
-    Partition 2 : Follower, Healthy
-    Partition 3 : Leader, Healthy
-    Partition 4 : Follower, Healthy
-    Partition 5 : Follower, Healthy
-    Partition 6 : Follower, Healthy
-  Broker 3 - zeebe-scaling-demo-zeebe-3.zeebe-scaling-demo-zeebe.zeebe-scaling-demo.svc:26501
-    Version: 8.4.0-SNAPSHOT
-  Broker 4 - zeebe-scaling-demo-zeebe-4.zeebe-scaling-demo-zeebe.zeebe-scaling-demo.svc:26501
-    Version: 8.4.0-SNAPSHOT
-  Broker 5 - zeebe-scaling-demo-zeebe-5.zeebe-scaling-demo-zeebe.zeebe-scaling-demo.svc:26501
-    Version: 8.4.0-SNAPSHOT
-```
+
+</details>
 
 ### 4. Shut down the brokers when the scaling operation has completed
 

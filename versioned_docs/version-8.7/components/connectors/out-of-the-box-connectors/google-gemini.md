@@ -197,7 +197,7 @@ import google.auth
 import google.auth.transport.requests
 from google.oauth2 import service_account
 # Scopes required to execute 'create' endpoind with Google Drive API
-SCOPES = ['https://www.googleapis.com/auth/drive', 'https://www.googleapis.com/auth/drive.file', 'https://www.googleapis.com/auth/drive.appdata']
+SCOPES = ['https://www.googleapis.com/auth/cloud-platform', 'https://www.googleapis.com/auth/generative-language.retriever']
 # File with keys
 SERVICE_ACCOUNT_FILE = 'google-service-account-creds.json'
 credentials = service_account.Credentials.from_service_account_file(SERVICE_ACCOUNT_FILE, scopes=SCOPES)
@@ -220,7 +220,7 @@ Assuming you have created an OAuth client, you can download key files from the G
 from google_auth_oauthlib.flow import InstalledAppFlow
 import pprint
 
-SCOPES = ['https://www.googleapis.com/auth/drive', 'https://www.googleapis.com/auth/documents']
+SCOPES = ['https://www.googleapis.com/auth/cloud-platform', 'https://www.googleapis.com/auth/generative-language.retriever']
 OAUTH_KEYS = './oauth-keys.json' # path to your file with OAuth credentials
 
 def main():

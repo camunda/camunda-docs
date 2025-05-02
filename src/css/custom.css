@@ -20,8 +20,9 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   --ifm-breadcrumb-item-background-active: none;
   --ifm-breadcrumb-color-active: var(--ifm-font-color-base);
   --ifm-menu-color: var(--ifm-color-emphasis-800);
-  --ifm-heading-font-family: IBM Plex Sans, -apple-system, blinkmacsystemfont,
-    Segoe UI, roboto, oxygen-sans, ubuntu, cantarell, Helvetica Neue, sans-serif;
+  --ifm-heading-font-family:
+    IBM Plex Sans, -apple-system, blinkmacsystemfont, Segoe UI, roboto,
+    oxygen-sans, ubuntu, cantarell, Helvetica Neue, sans-serif;
   --ifm-leading: calc(var(--ifm-leading-desktop) * 1rem);
 }
 
@@ -692,8 +693,8 @@ span.callout + p::after {
   border-color: #dedede;
   border-width: 1px;
   height: auto;
-  margin-top: 20px;
-  margin-bottom: 10px;
+  margin-top: 10px;
+  margin-bottom: 20px;
   padding: 20px;
 }
 
@@ -707,6 +708,31 @@ span.callout + p::after {
   max-height: 1.8rem;
   margin: 0;
   padding: 0;
+}
+
+/* Images without border */
+.theme-doc-markdown img.img-noborder {
+  border: none;
+  padding: 0;
+}
+
+/* Specific image width*/
+.theme-doc-markdown img.img-900 {
+  width: 900px;
+}
+.theme-doc-markdown img.img-800 {
+  width: 800px;
+}
+.theme-doc-markdown img.img-700 {
+  width: 700px;
+}
+.theme-doc-markdown img.img-600 {
+  width: 600px;
+}
+
+/* Transparent image background */
+.theme-doc-markdown img.img-transparent {
+  background-color: transparent;
 }
 
 /* Unsupported versions in the versions selector */
@@ -1052,4 +1078,29 @@ ul ol {
   margin: 0;
   margin-right: 7px;
   background-color: transparent;
+}
+
+/* Mini TOC styling */
+
+ul.table-of-contents:before {
+  content: "On this page";
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #525860;
+  padding-left: 6px;
+}
+.table-of-contents__link--active {
+  color: var(--ifm-font-color-base);
+  border-left: 4px solid var(--ifm-link-color);
+  margin-left: -16px;
+  padding-left: 12px;
+  font-weight: 500;
+}
+ul ul .table-of-contents__link--active {
+  color: var(--ifm-font-color-base);
+  border-left: 4px solid var(--ifm-link-color);
+  margin-left: -32px;
+  padding-left: 24px;
+  font-weight: 500;
 }

@@ -57,9 +57,9 @@ The `server` configuration allows you to configure the main REST server. Below a
 
 #### server.compression
 
-| Field   | Description                                                                                                                                                 | Example value |
-| ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| enabled | If true, enables compression of responses for the REST API. This setting can also be overridden using the environment variable `SERVER_COMPRESION_ENABLED`. | false         |
+| Field   | Description                                                                                                                                                           | Example value |
+| ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| enabled | If true, enables compression of responses for the Camunda 8 REST API. This setting can also be overridden using the environment variable `SERVER_COMPRESION_ENABLED`. | false         |
 
 #### server.ssl
 
@@ -67,7 +67,7 @@ Allows you to configure the SSL security for the REST server.
 
 | Field                   | Description                                                                                                                                                                     | Example value |
 | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| enabled                 | If true, enables TLS for the REST API. This setting can also be overridden using the environment variable `SERVER_SSL_ENABLED`.                                                 | false         |
+| enabled                 | If true, enables TLS for the Camunda 8 REST API. This setting can also be overridden using the environment variable `SERVER_SSL_ENABLED`.                                       | false         |
 | certificate             | The path to a PEM encoded certificate. This setting can also be overridden using the environment variable `SERVER_SSL_CERTIFICATE`.                                             |               |
 | certificate-private-key | The path to a PKCS1 or PKCS8 private key for the configured certificate. This setting can also be overridden using the environment variable `SERVER_SSL_CERTIFICATEPRIVATEKEY`. |               |
 
@@ -105,7 +105,7 @@ The `management.server` configuration allows you to configure the management ser
 | Field     | Description                                                                                                                                                                                                                                                                           | Example value |
 | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
 | host      | Sets the host the management server binds to. This setting can also be overridden using the environment variable `MANAGEMENT_SERVER_HOST`.                                                                                                                                            | 0.0.0.0       |
-| port      | Sets the port the management server binds to. This setting can also be overridden using the environment variable `MANAGEMENT_SERVER_PORT`.                                                                                                                                            | 8080          |
+| port      | Sets the port the management server binds to. This setting can also be overridden using the environment variable `MANAGEMENT_SERVER_PORT`.                                                                                                                                            | 9600          |
 | base-path | The context path prefix for all management endpoints. For example, if you configure `/zeebe`, your actuator endpoints will be at `http://localhost:9600/zeebe/actuator/configprops`. This setting can also be overridden using the environment variable `MANAGEMENT_SERVER_BASEPATH`. | `/`           |
 
 #### YAML snippet

@@ -26,7 +26,7 @@ IDP uses artificial intelligence (AI) and machine learning (ML) to identify, ext
 
 For example, use IDP to extract and use data from invoices and other document types in your document processing workflow.
 
-<img src={IdpOverviewImg} class="fade-in-bottom-image" alt="An overview of intelligent document processing" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}} />
+<img src={IdpOverviewImg} class="fade-in-bottom-image img-noborder" alt="An overview of intelligent document processing" />
 
 ## Configure IDP
 

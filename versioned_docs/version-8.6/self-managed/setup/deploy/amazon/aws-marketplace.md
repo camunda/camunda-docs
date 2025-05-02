@@ -406,7 +406,7 @@ tar xf $(pwd)/* && find $(pwd) -maxdepth 1 -type f -delete
 Run the Helm chart:
 
 ```shell
-helm install camunda \
+helm install camunda --version $HELM_CHART_VERSION \
     --namespace camunda \
     -f ../values.yaml \
     -f ../values-aws.yaml \
