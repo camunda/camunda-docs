@@ -21,7 +21,7 @@ Lastly you'll verify that the connection to your Self-Managed Camunda 8 environm
 - [jq](https://jqlang.github.io/jq/download/) to interact with some variables.
 - [GNU envsubst](https://www.gnu.org/software/gettext/manual/html_node/envsubst-Invocation.html) to generate manifests.
 - (optional) Domain name/[hosted zone](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-working-with.html) in Route53. This allows you to expose Camunda 8 and connect via community-supported [zbctl](https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md) or [Camunda Modeler](https://camunda.com/download/modeler/).
-- A namespace to host the Camunda Platform, in this guide we will reference `camunda` as the target namespace.
+- A namespace to host the Camunda Platform.
 
 For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file in the repository. It contains an up-to-date list of versions that we also use for testing.
 
@@ -62,6 +62,9 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/chart-env.sh
 ```
+
+- `CAMUNDA_NAMESPACE` is the Kubernetes namespace where Camunda will be installed.
+- `CAMUNDA_RELEASE_NAME` is the name of the Helm release associated with this Camunda installation.
 
 ### Export database values
 
@@ -510,8 +513,8 @@ export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identit
 Identity and Keycloak must be port-forwarded to be able to connect to the cluster.
 
 ```shell
-kubectl port-forward services/camunda-identity 8080:80 --namespace camunda
-kubectl port-forward services/camunda-keycloak 18080:80 --namespace camunda
+kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-identity" 8080:80 --namespace "$CAMUNDA_NAMESPACE"
+kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-keycloak" 18080:80 --namespace "$CAMUNDA_NAMESPACE"
 ```
 
 1. Open Identity in your browser at `http://localhost:8080`. You will be redirected to Keycloak and prompted to log in with a username and password.
@@ -531,17 +534,17 @@ export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identit
 
 ```shell
 Operate:
-> kubectl port-forward svc/camunda-operate  8081:80 --namespace camunda
+> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-operate"  8081:80 --namespace "$CAMUNDA_NAMESPACE"
 Tasklist:
-> kubectl port-forward svc/camunda-tasklist 8082:80 --namespace camunda
+> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-tasklist" 8082:80 --namespace "$CAMUNDA_NAMESPACE"
 Optimize:
-> kubectl port-forward svc/camunda-optimize 8083:80 --namespace camunda
+> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-optimize" 8083:80 --namespace "$CAMUNDA_NAMESPACE"
 Connectors:
-> kubectl port-forward svc/camunda-connectors 8086:8080 --namespace camunda
+> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-connectors" 8086:8080 --namespace "$CAMUNDA_NAMESPACE"
 WebModeler:
-> kubectl port-forward svc/camunda-web-modeler-webapp 8084:80 --namespace camunda
+> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-web-modeler-webapp" 8084:80 --namespace "$CAMUNDA_NAMESPACE"
 Console:
-> kubectl port-forward svc/camunda-console 8085:80 --namespace camunda
+> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-console" 8085:80 --namespace "$CAMUNDA_NAMESPACE"
 ```
 
 </summary>
@@ -572,7 +575,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 This requires to port-forward the Zeebe Gateway to be able to connect to the cluster.
 
 ```shell
-kubectl port-forward services/camunda-zeebe-gateway 8080:8080 --namespace camunda
+kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-zeebe-gateway" 8080:8080 --namespace "$CAMUNDA_NAMESPACE"
 ```
 
 Export the following environment variables:
@@ -632,7 +635,7 @@ The following values are required for the OAuth authentication:
 This requires port-forwarding the Zeebe Gateway to be able to connect to the cluster:
 
 ```shell
-kubectl port-forward services/camunda-zeebe-gateway 26500:26500 --namespace camunda
+kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-zeebe-gateway" 26500:26500 --namespace "$CAMUNDA_NAMESPACE"
 ```
 
 The following values are required for OAuth authentication:
