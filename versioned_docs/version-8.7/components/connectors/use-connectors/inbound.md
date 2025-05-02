@@ -125,7 +125,7 @@ For example, given that your correlation key is defined with `requestIdValue` pr
 
 See the [webhook documentation](/components/connectors/protocol/http-webhook.md) or the documentation of [other connector types](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) for more details.
 
-## connector deduplication
+## Connector deduplication
 
 In the simplest case, each inbound connector element in a BPMN diagram corresponds to a unique endpoint, event consumer, or a polling task.
 However, sometimes you might want to have multiple BPMN elements listening to the same event source. For example, you might want to link multiple connector events to the same message queue consumer and activate only one of them based on the message content.
