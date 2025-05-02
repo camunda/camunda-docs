@@ -453,9 +453,15 @@ body {
 [data-theme="dark"] .try-free {
   border-color: rgb(255, 255, 255);
   transition: 0.3s;
-  color: rgb(255, 255, 255) !important;
+  color: rgb(255, 255, 255);
   background-color: transparent;
   border: 1px solid white;
+}
+
+[data-theme="dark"] .try-free:hover {
+  background-color: #ffffff;
+  color: var(--ifm-color-black);
+  border: 1px solid #171c29;
 }
 
 .dropdown {

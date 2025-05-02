@@ -363,6 +363,8 @@ module.exports = {
           position: "right",
           className: "button button--primary button--md try-free",
           label: "Try Free",
+          title: "Try Free",
+          "aria-label": "Try Free",
         },
       ],
     },
