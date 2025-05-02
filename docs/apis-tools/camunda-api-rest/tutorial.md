@@ -5,6 +5,8 @@ sidebar_label: Beginner
 description: "New to the Camunda 8 API? Step through our tutorial to list all roles, create a role, retrieve a role, and delete a role."
 ---
 
+<span class="badge badge--beginner">Beginner</span>
+
 In this tutorial, we'll step through examples to highlight the capabilities of the Camunda 8 API, such as listing all roles, creating a role, retrieving a role, and deleting a role.
 
 ## Prerequisites

@@ -5,30 +5,28 @@ sidebar_label: Intermediate
 description: "Step through this intermediate Camunda 8 API tutorial to deploy resources, create and start a process instance, and view a process instance by its key."
 ---
 
+<span class="badge badge--intermediate">Intermediate</span>
+
 In this tutorial, we'll step through examples to highlight the capabilities of the Camunda 8 API, such as deploying resources, creating and starting a process instance, and viewing a process instance by its key.
+
+This tutorial is intended for intermediate users of the Camunda 8 API, using more sophisticated API calls and multipart requests. If you are new to the Camunda 8 API, we recommend starting with the [beginner tutorial](/apis-tools/camunda-api-rest/tutorial.md).
 
 ## Prerequisites
 
-- If you haven't done so already, [create a cluster](/guides/create-cluster.md).
-- Upon cluster creation, [create your first client](/guides/setup-client-connection-credentials.md). Ensure you check the `Zeebe` client scope box.
+| Requirement                                                                     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| :------------------------------------------------------------------------------ | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Create a cluster](/guides/create-cluster.md)                                   | If you haven't done so already, create a cluster.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| [Create your first client](/guides/setup-client-connection-credentials.md)      | Upon cluster creation, create your first client. Ensure you check the `Zeebe` client scope box. Make sure you keep the generated client credentials in a safe place. The **Client secret** will not be shown again. For your convenience, you can also download the client information to your computer.                                                                                                                                                                                                                                                              |
+| Clone the [GitHub repository](https://github.com/camunda/camunda-api-tutorials) | In this tutorial, we use a JavaScript-written [GitHub repository](https://github.com/camunda/camunda-api-tutorials) to write and run requests. Clone this repo before getting started.                                                                                                                                                                                                                                                                                                                                                                                |
+| Prepare resources                                                               | The first request we will run is a request to deploy one or more resources (such as processes, decision models, or forms). For the purposes of this tutorial, we have preconfigured a BPMN diagram and converted this into XML. This diagram, `calculate-sales-tax.bpmn`, can be found in the GitHub repository above within the `resources` folder. The BPMN diagram itself represents a process to calculate the total sales tax for a given purchase. You can take a closer look at this diagram by opening it in [Modeler](/components/modeler/about-modeler.md). |
+| [Node.js](https://nodejs.org/en/download)                                       | Ensure you have [Node.js](https://nodejs.org/en/download) installed as this will be used for methods that can be called by the CLI (outlined later in this guide). Run `npm install` to ensure you have updated dependencies.                                                                                                                                                                                                                                                                                                                                         |
+| Authenticate                                                                    | You need authentication to access the API endpoints. Find more information in [Camunda 8 authentication](./camunda-api-rest-authentication.md), and the section below.                                                                                                                                                                                                                                                                                                                                                                                                |
 
-:::note
-Make sure you keep the generated client credentials in a safe place. The **Client secret** will not be shown again. For your convenience, you can also download the client information to your computer.
-:::
-
-- In this tutorial, we utilize a JavaScript-written [GitHub repository](https://github.com/camunda/camunda-api-tutorials) to write and run requests. Clone this repo before getting started.
-- The first request we will run is a request to deploy one or more resources (such as processes, decision models, or forms). For the purposes of this tutorial, we have preconfigured a BPMN diagram and converted this into XML. This diagram, `calculate-sales-tax.bpmn`, can be found in the GitHub repository above within the `resources` folder. The BPMN diagram itself represents a process to calculate the total sales tax for a given purchase. You can take a closer look at this diagram by opening it in [Modeler](/components/modeler/about-modeler.md).
-- Ensure you have [Node.js](https://nodejs.org/en/download) installed as this will be used for methods that can be called by the CLI (outlined later in this guide). Run `npm install` to ensure you have updated dependencies.
-
-## Getting started
-
-- You need authentication to access the API endpoints. Find more information [here](./camunda-api-rest-authentication.md).
-
-## Set up authentication
+### Set up authentication
 
 If you're interested in how we use a library to handle auth for our code, or to get started, examine the `auth.js` file in the GitHub repository. This file contains a function named `getAccessToken` which executes an OAuth 2.0 protocol to retrieve authentication credentials based on your client ID and client secret. Then, we return the actual token that can be passed as an authorization header in each request.
 
-To set up your credentials, create an `.env` file which will be protected by the `.gitignore` file. You will need to add the following:
+To set up your credentials, create an `.env` file which will be protected by the `.gitignore` file. Add the following environment variables:
 
 - `CAMUNDA_CLIENT_ID`
 - `CAMUNDA_CLIENT_SECRET`
@@ -37,7 +35,7 @@ To set up your credentials, create an `.env` file which will be protected by the
 
 These keys will be consumed by the `auth.js` file to execute the OAuth protocol, and should be saved when you generate your client credentials in [prerequisites](#prerequisites).
 
-Examine the existing `.env.example` file for an example of how your `.env` file should look upon completion. Do not place your credentials in the `.env.example` file, as this example file is not protected by the `.gitignore`.
+See the existing `.env.example` file for an example of how your `.env` file should look upon completion. Do not place your credentials in the `.env.example` file, as this example file is not protected by the `.gitignore`.
 
 :::note
 
@@ -137,7 +135,7 @@ try {
 9. In your terminal, run `node cli.js processInstances deploy`.
 
 :::note
-This `deploy` command is connected to the `deployResources` function at the bottom of the `camunda-process-instances.js` file, and executed by the `cli.js` file. While we will work with roles in this tutorial, you may add additional arguments depending on the API calls you would like to make.
+This `deploy` command is connected to the `deployResources` function at the bottom of the `camunda-process-instances.js` file, and executed by the `cli.js` file. While we will work with roles in this tutorial, you may add additional arguments depending on the API requests you want to make.
 :::
 
 The existing process definition key and ID will now output. If you have an invalid API name or action name, or no arguments provided, or improper/insufficient credentials configured, an error message will output as outlined in the `cli.js` file.
@@ -238,7 +236,7 @@ try {
 
 4. In your terminal, run `node cli.js processInstances view <key>`, where `<key>` is the process instance key. The `processDefinitionName` and `state` will then display in the output.
 
-## If you get stuck
+## Troubleshooting
 
 Having trouble configuring your API calls or want to examine an example of the completed tutorial? Navigate to the `completed` folder in the [GitHub repository](https://github.com/camunda/camunda-api-tutorials/tree/main/completed), where you can view an example `camunda-process-instances.js` file.
 
