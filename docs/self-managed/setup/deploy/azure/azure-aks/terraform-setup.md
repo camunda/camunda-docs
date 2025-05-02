@@ -89,12 +89,12 @@ Following this tutorial will result in:
 
 ### Obtain a copy of the reference architecture
 
-The first step is to download a copy of the reference architecture from the [GitHub repository](https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/). This material will be used throughout the rest of this documentation. The reference architectures are versioned using the same Camunda versions (`stable/8.x`).
+The first step is to download a copy of the reference architecture from the [GitHub repository](https://github.com/camunda/camunda-deployment-references/blob/main/azure/common/). This material will be used throughout the rest of this documentation. The reference architectures are versioned using the same Camunda versions (`stable/8.x`).
 
 The provided reference architecture repository allows you to directly reuse and extend the existing Terraform example base. This sample implementation is flexible to extend to your own needs without the potential limitations of a Terraform module maintained by a third party.
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/camunda/camunda-deployment-references/main/azure/kubernetes/aks-single-region/procedure/get-your-copy.sh | bash
+curl -sSL https://raw.githubusercontent.com/camunda/camunda-deployment-references/main/azure/common/procedure/get-your-copy.sh | bash
 ```
 
 With the reference architecture copied, you can proceed with the remaining steps outlined in this documentation. Ensure that you are in the correct directory before continuing with further instructions.
@@ -130,14 +130,44 @@ You can further change the region and other preferences and explore different [a
 
 - For production environments, we recommend using a dedicated Azure AD user or service principal. You can create one and assign appropriate roles via the [Azure Portal](https://portal.azure.com/) or with the Azure CLI.
 
+To create a new service principal and assign it the necessary permissions:
+
+```bash
+az ad sp create-for-rbac \
+  --name "camunda-tf-sp" \
+  --role Contributor \
+  --scopes /subscriptions/<your-subscription-id>
+```
+
+This will return a JSON object with `appId`, `password`, and `tenant`. These values are required for login using the service principal:
+
+```bash
+az login --service-principal \
+  -u <appId> \
+  -p <password> \
+  --tenant <tenant-id>
+```
+
+Use the `appId` as the value for `terraform_sp_app_id` in your `terraform.tfvars`.
+
+:::warning
+
+Microsoft Accounts (MSA) such as those ending in `@outlook.com` or `@gmail.com` cannot be granted Key Vault permissions because they lack an Entra ID object ID. In such cases, you must use a service principal to authenticate Terraform.
+
+:::
+
 #### Create an Azure Storage Account for Terraform state management
 
 Before setting up Terraform, you need to create an Azure Storage Account and container to store the state file. This is important for collaboration and to prevent issues like state file corruption.
 
-To start, set the region as an environment variable upfront to avoid repeating it in each command:
+To start, set the required values as environment variables upfront to avoid repeating them in each command:
 
 ```bash
-export AZURE_LOCATION=<your-region>
+export AZURE_LOCATION=<your-region>                             # e.g. westeurope
+export RESOURCE_GROUP_NAME="camunda-tf-rg"
+export AZURE_STORAGE_ACCOUNT_NAME="camundatfstate$RANDOM"       # must be globally unique
+export AZURE_STORAGE_CONTAINER_NAME="tfstate"
+export AZURE_TF_KEY="camunda-terraform/terraform.tfstate"
 ```
 
 Replace `<your-region>` with your chosen Azure region (for example, `westeurope`).
@@ -149,28 +179,59 @@ Now, follow these steps to create the storage account with versioning enabled:
 2. Run the following script to create a storage account and container for storing your Terraform state. Make sure to use a globally unique name for the storage account:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/storage-account/storage-account-creation.sh
+   https://github.com/camunda/camunda-deployment-references/blob/main/azure/common/procedure/storage-account/storage-account-creation.sh
    ```
 
 3. Enable blob versioning to track changes and protect the state file from accidental deletions or overwrites:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/storage-account/storage-account-versioning.sh
+   https://github.com/camunda/camunda-deployment-references/blob/main/azure/common/procedure/storage-account/storage-account-versioning.sh
    ```
 
-4. Secure the storage account by enforcing private access:
+4. Verify versioning is enabled on the blob container:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/storage-account/storage-account-private.sh
-   ```
-
-5. Verify versioning is enabled on the blob container:
-
-   ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/storage-account/storage-account-verify.sh
+   https://github.com/camunda/camunda-deployment-references/blob/main/azure/common/procedure/storage-account/storage-account-verify.sh
    ```
 
 This Azure Storage Account will now securely store your Terraform state files with versioning enabled.
+
+Great — here’s how you can clearly explain the purpose and impact of each variable in a `terraform.tfvars` file, along with guidance on how to find the values.
+
+#### Creating terraform.tfvars
+
+To configure your deployment, create a `terraform.tfvars` file in the root of the `aks-single-region` folder. This file defines critical environment-specific settings like your Azure subscription and the Service Principal used for authentication.
+
+Example:
+
+```hcl
+subscription_id     = "00000000-0000-0000-0000-000000000000"
+terraform_sp_app_id = "00000000-0000-0000-0000-000000000000"
+```
+
+##### subscription_id
+
+This value specifies the Azure Subscription ID in which all infrastructure will be deployed, including the AKS cluster, PostgreSQL Flexible Server, and Key Vault. To retrieve your current subscription ID, you can run the following command:
+
+```shell
+az account show --query "id" -o tsv
+```
+
+It is essential to ensure this ID is correct, as Terraform will use it to determine where resources are provisioned. Providing an incorrect subscription ID can result in resources being created in the wrong environment or permission-related failures during deployment.
+
+##### terraform_sp_app_id
+
+This is the Application (client) ID of the Azure Service Principal that Terraform uses for authentication. It is required to configure access policies in services such as Key Vault, particularly when using customer-managed keys (CMK) with AKS.
+
+If you created a Service Principal manually, you can retrieve its application ID with the following command:
+
+```shell
+az ad sp list --display-name "<your-service-principal-name>" --query "[0].appId" -o tsv
+```
+
+If you're already using a Service Principal to authenticate (for example, with `az login --service-principal`), this value corresponds to the `appId` you supplied during login.
+
+This value is critical because Terraform uses it to assign the necessary permissions for interacting with encryption keys and other protected resources. If the ID is incorrect or omitted, key-related configurations may fail, and AKS will be unable to use CMK for securing cluster secrets.
 
 #### Initialize Terraform
 
@@ -179,7 +240,7 @@ Once your authentication is set up, you can initialize your Terraform project. T
 Configure the backend and download the necessary provider plugins:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/storage-account/storage-account-tf-init.sh
+https://github.com/camunda/camunda-deployment-references/blob/main/azure/common/procedure/storage-account/storage-account-tf-init.sh
 ```
 
 Terraform will connect to the Azure storage container to manage the state file, ensuring remote and persistent storage.
@@ -284,7 +345,7 @@ We strongly recommend managing sensitive information such as the PostgreSQL user
 2. Perform a final initialization for anything changed throughout the guide:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/storage-account/storage-account-tf-init.sh#L7
+https://github.com/camunda/camunda-deployment-references/blob/main/azure/common/procedure/storage-account/storage-account-tf-init.sh#L7
 ```
 
 3. Plan the configuration files:
@@ -327,18 +388,6 @@ kubectl create namespace camunda
 
 In the remainder of the guide, we reference the `camunda` namespace to create some required resources in the Kubernetes cluster, such as secrets or one-time setup jobs.
 
-### Export values for the Helm chart
-
-After configuring and deploying your infrastructure with Terraform, follow these instructions to export key values for use in Helm charts to deploy [Camunda 8 on Kubernetes](./aks-helm.md).
-
-The following command will export the required outputs as environment variables. You may need to omit some if you have chosen not to use certain modules. These values will be necessary for deploying Camunda 8 with Helm charts:
-
-```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/export-helm-values.sh
-```
-
-Ensure that you use the actual values you passed to the Terraform module during the setup of PostgreSQL.
-
 ### Configure the database and associated access
 
 As you now have a database, you need to create dedicated databases for each Camunda component and an associated user that has configured access. Follow these steps to create the database users and configure access.
@@ -353,7 +402,7 @@ The choice depends on your infrastructure setup and security preferences. In thi
 1. In your terminal, set the necessary environment variables that will be substituted in the setup manifest:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/vars-create-db.sh
+https://github.com/camunda/camunda-deployment-references/blob/main/azure/common/procedure/vars-create-db.sh
 ```
 
 A **Kubernetes job** will connect to the database and create the necessary users with the required privileges. The script installs the necessary dependencies and runs SQL commands to create the users and assign them the correct roles and privileges.
@@ -361,7 +410,7 @@ A **Kubernetes job** will connect to the database and create the necessary users
 2. Create a secret that references the environment variables:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/create-setup-db-secret.sh
+https://github.com/camunda/camunda-deployment-references/blob/main/azure/common/procedure/create-setup-db-secret.sh
 ```
 
 This command creates a secret named `setup-db-secret` and dynamically populates it with the values from your environment variables.
@@ -377,7 +426,7 @@ This should display the secret with the base64 encoded values.
 3. Save the following manifest to a file, for example, `setup-postgres-create-db.yml`.
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/manifests/setup-postgres-create-db.yml
+https://github.com/camunda/camunda-deployment-references/blob/main/azure/common/manifests/setup-postgres-create-db.yml
 ```
 
 4. Apply the manifest:
