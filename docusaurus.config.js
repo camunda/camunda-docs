@@ -359,7 +359,7 @@ module.exports = {
           position: "left",
         },
         {
-          to: "https://camunda.com/download",
+          to: "https://camunda.com/download?utm_source=docs.camunda.io&utm_medium=referral&utm_content=tryfreebutton",
           position: "right",
           className: "button button--primary button--md try-free",
           label: "Try Free",
