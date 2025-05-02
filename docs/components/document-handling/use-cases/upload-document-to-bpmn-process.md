@@ -40,7 +40,7 @@ Only logged-in users can upload files.
 Uploaded documents can be referenced later in the process.
 
 Filepicker's output variable is an array of objects with document metadata.
-It always returns an array of objects, either a user uploads a single document or multiple documents.
+It always returns an array of objects, whether a user uploads a single document or multiple documents.
 
 Single document uploads are accessible using `value[1]` (since [FEEL](/components/modeler/feel/what-is-feel.md) uses 1-based indexing).
 
@@ -65,7 +65,7 @@ The document reference received as an output of one Connector should be stored i
 To call the webhook sending a file, for example:
 
 ```curl
-curl --location 'https://lpp-1.connectors.dev.ultrawombat.com/e424e404-39d2-4dcf-9937-a1ebde177d7c/inbound/uploadDocument' \
+curl --location 'https://some.dev.environment/uploadDocument' \
 --form 'file=@"/path-to-file/file.pdf"'
 ```
 

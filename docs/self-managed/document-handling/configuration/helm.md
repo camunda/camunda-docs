@@ -11,7 +11,6 @@ Helm offers external cloud file bucket storage options (recommended for producti
 
   - [**Google Cloud Platform (GCP)**](https://cloud.google.com/storage)
   - [**AWS S3**](https://aws.amazon.com/s3/).
-  - Configuring these buckets for production use is recommended when deploying with [Helm](/self-managed/setup/install.md).
 
 - **In-memory** storage can be used to store documents during the application's runtime. When the application is stopped, documents are lost. In-memory storage is not suitable for production use, as pods and memory are not shared across components. Files stored in memory are not persisted and will be lost on application restart.
 

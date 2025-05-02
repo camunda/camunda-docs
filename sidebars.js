@@ -144,7 +144,6 @@ module.exports = {
         id: "components/document-handling/getting-started",
       },
       items: [
-        "components/document-handling/storage-options",
         {
           type: "category",
           label: "Use cases",
@@ -1209,29 +1208,6 @@ module.exports = {
         "self-managed/concepts/mapping-rules",
         "self-managed/concepts/elasticsearch-privileges",
         "self-managed/concepts/opensearch-privileges",
-        {
-          type: "category",
-          label: "Document handling",
-          link: {
-            type: "doc",
-            id: "self-managed/concepts/document-handling/getting-started",
-          },
-          items: [
-            {
-              type: "category",
-              label: "Configuration",
-              link: {
-                type: "doc",
-                id: "self-managed/concepts/document-handling/configuration/overview",
-              },
-              items: [
-                "self-managed/concepts/document-handling/configuration/camunda-8-run",
-                "self-managed/concepts/document-handling/configuration/docker",
-                "self-managed/concepts/document-handling/configuration/helm",
-              ],
-            },
-          ],
-        },
       ],
     },
     {
@@ -1465,6 +1441,29 @@ module.exports = {
             {
               "Desktop Modeler": [
                 "self-managed/modeler/desktop-modeler/deploy-to-self-managed",
+              ],
+            },
+          ],
+        },
+        {
+          type: "category",
+          label: "Document handling",
+          link: {
+            type: "doc",
+            id: "self-managed/concepts/document-handling/getting-started",
+          },
+          items: [
+            {
+              type: "category",
+              label: "Configuration",
+              link: {
+                type: "doc",
+                id: "self-managed/concepts/document-handling/configuration/overview",
+              },
+              items: [
+                "self-managed/concepts/document-handling/configuration/camunda-8-run",
+                "self-managed/concepts/document-handling/configuration/docker",
+                "self-managed/concepts/document-handling/configuration/helm",
               ],
             },
           ],

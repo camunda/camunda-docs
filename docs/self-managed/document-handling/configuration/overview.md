@@ -11,9 +11,15 @@ The following section outlines supported storage options, their intended use cas
 
 Jump to the environment configuration options below:
 
-- [Camunda 8 Run](/self-managed/concepts/document-handling/configuration/camunda-8-run.md)
-- [Docker Compose](/self-managed/concepts/document-handling/configuration/docker.md)
-- [Helm](/self-managed/concepts/document-handling/configuration/helm.md)
+- [Camunda 8 Run](/self-managed/document-handling/configuration/camunda-8-run.md)
+- [Docker Compose](/self-managed/document-handling/configuration/docker.md)
+- [Helm](/self-managed/document-handling/configuration/helm.md)
+
+:::note
+
+Camunda 8 Run is a fast way for users to test the capabilities of the platform, but it is not necessarily scalable. Docker Compose is not recommended for use in production. Therefore, Helm is currently the **only** option to deploy the platform in a Self-Managed environment for production.
+
+:::
 
 ## Supported storage options
 
@@ -31,4 +37,4 @@ Jump to the environment configuration options below:
 ## Storage policies
 
 - **Maximum upload size for one or multiple files**: 10 MB
-- **File expiration time/time-to-live (TTL) policy**: 30 days by default. A custom expiration date can be specified via the [document upload API](/apis-tools/camunda-api-rest/specifications/create-document.api.mdx).
+- **File expiration time/time-to-live (TTL) policy**: With Self-Managed, users may define their own lifecycle policies. A custom expiration date can be specified via the [document upload API](/apis-tools/camunda-api-rest/specifications/create-document.api.mdx).

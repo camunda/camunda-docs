@@ -7,13 +7,13 @@ keywords: ["document handling"]
 
 import DocCardList from '@theme/DocCardList';
 
-Offering robust [document handling](/components/document-handling/getting-started.md) capabilities within Camunda SaaS and Self-Managed, users can efficiently manage large volumes of binary data such as PDFs and images across both development and production environments.
+Offering robust [document handling](/components/document-handling/getting-started.md) capabilities within Camunda 8, users can efficiently manage large volumes of binary data such as PDFs and images across both development and production environments in SaaS and Self-Managed.
 
 In this section we will cover three main use cases:
 
-- [Upload a document to a BPMN process](/components/document-handling/use-cases/upload-document-to-bpmn-process.md);
-- [Display and download a document](/components/document-handling/use-cases/display-and-download-document.md);
-- [Send a document to an external system via a Connector](/components/document-handling/use-cases/send-document-to-external-system.md).
+- [Upload a document to a BPMN process](/components/document-handling/use-cases/upload-document-to-bpmn-process.md)
+- [Display and download a document](/components/document-handling/use-cases/display-and-download-document.md)
+- [Send a document to an external system via a Connector](/components/document-handling/use-cases/send-document-to-external-system.md)
 
 ## Automate documents with intelligent document processing
 
