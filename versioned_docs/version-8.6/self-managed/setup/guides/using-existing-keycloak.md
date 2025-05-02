@@ -39,5 +39,5 @@ identityKeycloak:
 Then, use the custom values file to [deploy Camunda 8](/self-managed/setup/install.md) as usual.
 
 ```sh
-helm install camunda camunda/camunda-platform -f existing-keycloak-values.yaml
+helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION -f existing-keycloak-values.yaml
 ```

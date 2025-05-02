@@ -166,7 +166,7 @@ identity:
 When installing the chart, run the following:
 
 ```shell
-helm install camunda camunda/camunda-platform --skip-crds --version "$CHART_VERSION" -f values.yaml -f openshift.yaml
+helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION --skip-crds -f values.yaml -f openshift.yaml
 ```
 
 #### Helm 3.2.0 and greater
@@ -257,7 +257,7 @@ identity:
 Now, when installing the chart, you can do so by running the following:
 
 ```shell
-helm install camunda camunda/camunda-platform --skip-crds --version "$CHART_VERSION" \
+helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION --skip-crds \
     -f values.yaml -f openshift.yaml --post-renderer ./patch.sh
 ```
 
@@ -364,7 +364,7 @@ operate:
         defaultMode: 420
 ```
 
-The actual configuration properties can be reviewed [in the Operate configuration documentation](docs/self-managed/operate-deployment/operate-configuration.md#zeebe-broker-connection).
+The actual configuration properties can be reviewed [in the Operate configuration documentation](/self-managed/operate-deployment/operate-configuration.md#zeebe-broker-connection).
 
 For Tasklist:
 
@@ -389,6 +389,6 @@ tasklist:
         defaultMode: 420
 ```
 
-The actual configuration properties can be reviewed [in the Tasklist configuration documentation](docs/self-managed/tasklist-deployment/tasklist-configuration.md#zeebe-broker-connection).
+The actual configuration properties can be reviewed [in the Tasklist configuration documentation](/self-managed/tasklist-deployment/tasklist-configuration.md#zeebe-broker-connection).
 
 5. Configure all other applications running inside the cluster and connecting to the Zeebe Gateway to also use TLS.

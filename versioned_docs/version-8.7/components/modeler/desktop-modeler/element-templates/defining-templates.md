@@ -370,11 +370,11 @@ Configures an [input mapping](../../../../concepts/variables/#input-mappings).
 
 #### `zeebe:output`
 
-| **Binding `type`**          | `zeebe:output`                                                             |
-| --------------------------- | -------------------------------------------------------------------------- |
-| **Valid property `type`'s** | `String`<br /> `Text`<br />`Hidden`<br />`Dropdown``Boolean`<br />`Number` |
-| **Binding parameters**      | `source`: The source of the output parameter                               |
-| **Mapping result**          | `<zeebe:output target="[userInput]" source="[source] />`                   |
+| **Binding `type`**          | `zeebe:output`                                                                   |
+| --------------------------- | -------------------------------------------------------------------------------- |
+| **Valid property `type`'s** | `String`<br /> `Text`<br />`Hidden`<br />`Dropdown`<br />`Boolean`<br />`Number` |
+| **Binding parameters**      | `source`: The source of the output parameter                                     |
+| **Mapping result**          | `<zeebe:output target="[userInput]" source="[source] />`                         |
 
 Configures an [output mapping](../../../../concepts/variables/#output-mappings).
 

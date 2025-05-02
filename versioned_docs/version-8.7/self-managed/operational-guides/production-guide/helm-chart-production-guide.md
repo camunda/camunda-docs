@@ -71,10 +71,10 @@ helm repo add camunda https://helm.camunda.io
 # This will update the chart repository. Please make sure to run this command before every install or upgrade
 helm repo update
 # This will install the latest Camunda Helm chart in the management namespace with the latest applications/dependencies.
-helm install camunda camunda/camunda-platform -n management \
+helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION -n management \
     --values management-values.yaml
 # This will install the latest Camunda Helm chart in the Orchestration namespace with the latest applications/dependencies.
-helm install camunda camunda/camunda-platform -n orchestration \
+helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION -n orchestration \
     --values orchestration-values.yaml
 ```
 
@@ -819,4 +819,4 @@ If you would like to run benchmarks on the platform, refer to the Camunda 8 benc
 
 ### Reference architectures
 
-You can lean more about Camunda production deployment and available deployment architectures in [Camunda Deployment Reference Architecture](/docs/self-managed/reference-architecture/reference-architecture.md) section of our documentation.
+You can lean more about Camunda production deployment and available deployment architectures in [Camunda Deployment Reference Architecture](/self-managed/reference-architecture/reference-architecture.md) section of our documentation.
