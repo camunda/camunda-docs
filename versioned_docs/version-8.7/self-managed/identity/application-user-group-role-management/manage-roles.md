@@ -61,4 +61,4 @@ On confirmation, the modal will close, the table will update, and the role will 
 
 # Next steps
 
-Roles are a way to group sets of [permissions](/self-managed/identity/user-guide/roles/manage-permissions.md).
+Roles are a way to group sets of [permissions](versioned_docs/version-8.7/self-managed/identity/access-management/manage-permissions.md).

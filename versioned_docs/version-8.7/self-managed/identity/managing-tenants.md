@@ -12,8 +12,8 @@ Multi-tenancy in the context of Camunda 8 refers to the ability of Camunda 8 to 
 
 **Precondition**: **Multi-tenancy** is disabled by default. In order to enable this feature, you must:
 
-1. Enable [`MULTITENANCY_ENABLED` feature flag](/self-managed/identity/deployment-troubleshooting/configuration-variables.md#feature-flags)
-2. [Configure a database](/self-managed/identity/deployment-troubleshooting/configuration-variables.md#database-configuration)
+1. Enable [`MULTITENANCY_ENABLED` feature flag](/self-managed/identity/miscellaneous/configuration-variables.md#feature-flags)
+2. [Configure a database](/self-managed/identity/miscellaneous/configuration-variables.md#database-configuration)
 
 ## Managing tenants
 

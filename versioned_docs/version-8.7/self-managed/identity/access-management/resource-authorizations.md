@@ -27,7 +27,7 @@ Resource authorizations are disabled by default and can be enabled by the use of
 - [Operate resource based permissions](/self-managed/operate-deployment/operate-authentication/?authentication=identity#resource-based-permissions)
 - [Tasklist resource based permissions](/self-managed/tasklist-deployment/tasklist-authentication/?authentication=identity#resource-based-permissions)
 
-Also a [database must be configured](<(/self-managed/identity/deployment-troubleshooting/configuration-variables.md#database-configuration)>) for Identity.
+Also a [database must be configured](/self-managed/identity/miscellaneous/configuration-variables.md#database-configuration) for Identity.
 
 :::
 
