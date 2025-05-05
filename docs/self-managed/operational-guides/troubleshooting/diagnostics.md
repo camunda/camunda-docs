@@ -23,34 +23,45 @@ The script outputs the following data from your namespace and creates a :
 ### Usage
 
 1. Save the script below as e.g. `camunda-collect-diagnostics.sh`.
-2. Replace `<NAMESPACE>` with the namespace of your Camunda deployment.
-3. Make the script executable.
+2. Make the script executable:
 
 ```bash
 chmod +x camunda-collect-diagnostics.sh
 ```
 
-4. Run the script.
+3. Execute the script replacing <namespace> with the namespace of your Camunda deployment:
 
 ```bash
-./camunda-collect-diagnostics.sh
+./camunda-collect-diagnostics.sh --namespace <namespace>
 ```
 
-5. Share the generated `.zip` archive with Camunda Support.
+4. Share the generated `.zip` archive with Camunda Support.
 
 ### Diagnostic collection script
 
 ```bash
 #!/bin/bash
 
-# Define namespace
-namespace=<NAMESPACE>
+# Parse arguments
+while [[ "$#" -gt 0 ]]; do
+  case $1 in
+    --namespace) namespace="$2"; shift ;;
+    *) echo "Unknown parameter passed: $1"; exit 1 ;;
+  esac
+  shift
+done
 
-# Check if NAMESPACE is set
-if [[ "$namespace" == "NAMESPACE" ]]; then
-  echo "ERROR: Please set the 'namespace' variable in the script before running it."
+# Check if namespace is provided
+if [[ -z "$namespace" ]]; then
+  echo "ERROR: Namespace not provided. Please run the script with the --namespace parameter."
   echo "Example:"
-  echo "  namespace=\"camunda-platform\""
+  echo "  ./camunda-collect-diagnostics.sh --namespace camunda-platform"
+  exit 1
+fi
+
+# Check if namespace exists
+if ! kubectl get namespace "$namespace" > /dev/null 2>&1; then
+  echo "ERROR: Namespace '$namespace' does not exist in the cluster."
   exit 1
 fi
 
@@ -82,6 +93,12 @@ kubectl get events -n "$namespace" --sort-by='.lastTimestamp' > events.txt
 echo "  - Collecting Persistent Volume Claims (PVCs) descriptions (storage claims in the namespace)."
 kubectl describe pvc -n "$namespace" > pvc-describe.txt
 
+echo "  - Collecting Persistent Volumes (PVs) descriptions (underlying storage volumes)."
+for pvc in $(kubectl get pvc -n "$namespace" --no-headers -o custom-columns=":spec.volumeName"); do
+  echo "    - Collecting information for PV: $pvc"
+  kubectl describe pv "$pvc" >> pv-describe.txt
+done
+
 echo "  - Collecting service information (list of services in the namespace)."
 kubectl get svc -n "$namespace" > services.txt
 
@@ -100,14 +117,6 @@ kubectl describe ing -n "$namespace" > ingresses-describe.txt
 echo "  - Collecting config map information (configuration data stored in the namespace)."
 kubectl get cm -n "$namespace" -o yaml > configmaps.yaml
 
-# Collect Persistent Volumes (PVs) relevant to the namespace
-echo "  - Collecting Persistent Volumes (PVs):"
-for pvc in $(kubectl get pvc -n "$namespace" --no-headers -o custom-columns=":spec.volumeName"); do
-  echo "    - Collecting information for PV: $pvc"
-  kubectl describe pv "$pvc" >> pv-describe.txt
-done
-
-# Get nodes relevant to the namespace
 echo "  - Collecting node information:"
 for node in $(kubectl get pods -n "$namespace" -o wide --no-headers | awk '{print $7}' | sort | uniq); do
   echo "    - Collecting information for node: $node"
@@ -115,7 +124,6 @@ for node in $(kubectl get pods -n "$namespace" -o wide --no-headers | awk '{prin
   echo "" >> node-describe.txt
 done
 
-# Collect logs and descriptions for each pod
 echo "  - Collecting logs and descriptions for each pod..."
 for pod in $(kubectl get pod -n "$namespace" --no-headers -o custom-columns=":metadata.name"); do
   echo "    - Collecting logs for pod: $pod"
