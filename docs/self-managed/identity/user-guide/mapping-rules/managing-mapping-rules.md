@@ -8,73 +8,63 @@ description: "Manage mapping rules within Identity to support the assigning of C
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-In this guide, you will learn how to manage mapping rules in Identity and how to control the Camunda entities related to
-them.
+In this guide, you will learn how to manage mapping rules in Identity and how to control the Camunda entities related to them.
 
 :::tip
-To learn more about the concept of mapping rules, see
-the [mapping rules documentation](../../../concepts/mapping-rules.md).
+To learn more about the concept of mapping rules, see the [mapping rules documentation](../../../concepts/mapping-rules.md).
 :::
 
 1. Log in to the Identity UI and navigate to the **Mappings** tab.
 
 ![mapping-rule-management-tab](../img/mapping-rule-management-tab.png)
 
-:::info
-The `Default` mapping rule is created during startup using the [IDENTITY_INITIAL_CLAIM_NAME and
-IDENTITY_INITIAL_CLAIM_VALUE environment variables](../../deployment/configuration-variables.md#oidc-configuration) to
-allow an initial user access to the Identity UI. Once you have
-access to the Identity UI, configure the additional mapping rules to ensure your users have
-the correct access to the Camunda components.
-:::
-
-<Tabs groupId="mappingRuleAction" defaultValue="add" queryString
-values={[{label: 'Add', value: 'add', },{label: 'Update', value: 'update', },{label: 'Delete', value: 'delete', },]} >
+<Tabs groupId="mappingRuleAction" defaultValue="add" queryString values={[
+{label: 'Add', value: 'add'},
+{label: 'Update', value: 'update'},
+{label: 'Delete', value: 'delete'}
+]}>
 
 <TabItem value="add">
 
-1. Click the **Add mapping** button and select the type of mapping to create. You can create a mapping for a role or
-   tenant.
+1. Click the **Create a mapping** button.
 
-![mapping-rule-add](../img/mapping-rule-add-mapping.png)
+2. Fill in the required fields:
 
-2. Fill in the fields for the mapping rule and click **Create**.
+- **Mapping ID**: A unique identifier for the mapping.
+- **Mapping name**: A user-friendly name.
+- **Claim name** and **Claim value**: These define the JWT claim rule to match.
 
-:::note
+![mapping-rule-add-mapping-modal](../img/mapping-rule-add-mapping-modal.png)
 
-The operator option is used to define how we evaluate the rules against your tokens. The options are:
+3. Click **Create a mapping** to save.
 
-- **Contains**: Used for array-based claims, such as a list of roles.
-- **Equals**: Used for string-based claims, such as a string ID.
-
-:::
-
-![mapping-rule-add-modal](../img/mapping-rule-add-mapping-modal.png)
-
-The created mapping rule can be seen in the table.
+The new mapping will appear in the list.
 
 ![mapping-rule-refreshed-table](../img/mapping-rule-refreshed-table.png)
 
 </TabItem>
+
 <TabItem value="update">
 
-1. Click the pencil icon on the row of the mapping rule you want to update.
+1. Click the **pencil** icon in the mapping row you want to edit.
 
-2. Update the fields for the mapping rule and click **Update**.
+![mapping-rule-edit-icon](../img/mapping-rule-edit-icon.png)
 
-:::note
-You can only update the entities applied by the mapping rule along with the claims used to map the entities. You cannot
-update the type of mapping rule.
-:::
+2. Update the desired fields and click **Update Mapping**.
+
+![mapping-rule-edit-modal](../img/mapping-rule-edit-modal.png)
 
 </TabItem>
+
 <TabItem value="delete">
 
-Click on the **trash can** icon on the row of the mapping rule you want to delete and confirm.
+1. Click the **trash can** icon on the row of the mapping rule you want to delete.
+
+2. Confirm the deletion in the pop-up.
 
 ![mapping-rule-delete-modal](../img/mapping-rule-delete-modal.png)
 
-After confirming, the mapping rule is deleted and no longer appears in the table.
+After confirming, the rule is deleted and disappears from the table.
 
 </TabItem>
 
