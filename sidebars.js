@@ -1388,6 +1388,8 @@ module.exports = {
                     {
                       "Mapping rules": [
                         "self-managed/identity/user-guide/mapping-rules/managing-mapping-rules",
+                        "self-managed/identity/user-guide/mapping-rules/mapping-rule-authorizations",
+                        "self-managed/identity/user-guide/mapping-rules/assign-mappings-to-tenants",
                       ],
                     },
                     {
