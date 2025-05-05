@@ -21,7 +21,7 @@ With Camunda 8, you can design a process using both [Desktop Modeler and Web Mod
 1. From Web Modeler, select **Create new project**.
 2. Name your project and select **Create new > BPMN diagram**.
    ![blank project create bpmn diagram](./img/blank-project.png)
-3. Give your model a descriptive name and ID within the **General** tab inside the properties panel on the right side of the screen. For example, you may name the diagram `Process invoice` with an ID of `process_invoice`. A task's ID in BPMN is a unique identifier used for internal reference for that specific task within the process diagram.
+3. Ensure you are in [**Implement** mode](/components/modeler/web-modeler/implement-your-process.md). Give your model a descriptive name and ID within the **General** tab inside the properties panel on the right side of the screen. For example, you may name the diagram `Process invoice` with an ID of `process_invoice`. A task's ID in BPMN is a unique identifier used for internal reference for that specific task within the process diagram.
 4. Create a task by dragging the rectangular task icon from the palette, or by clicking the existing start event, hovering over the `+` icon, and selecting the task icon. Ensure an arrow connects the start event to the task.
 
 :::note
@@ -69,6 +69,10 @@ To invite collaborators to your process, ensure they have the proper permissions
 5. Select **Add user** and find your colleague you added to your organization. Assign their role with the dropdown and select **Send invites**.
    ![add new user](./img/invite-collaborators.png)
 6. After your colleague selects **Accept invitation**, they will have access to the project based on the role you assigned. To understand what permissions each role has, review [access rights and permissions](/components/modeler/web-modeler/collaboration.md#access-rights-and-permissions).
+
+:::note
+Additionally, you may invite users who are not yet part of a SaaS organization to a project. They will automatically be invited to the organization with the roles of "developer" and "analyst" and have access to the Web Modeler project after accepting the invitation.
+:::
 
 As a next step, learn more about ensuring clarity, reusability, and governance within your organization in [using a shared project for organization-wide collaboration](/guides/use-shared-project-for-organization-wide-collaboration.md).
 
