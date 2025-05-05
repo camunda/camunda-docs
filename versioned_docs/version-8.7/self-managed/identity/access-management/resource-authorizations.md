@@ -12,11 +12,11 @@ import TabItem from "@theme/TabItem";
 
 | Resource type | Permissions               | Resource ID                   | Description                                                       |
 | ------------- | ------------------------- | ----------------------------- | ----------------------------------------------------------------- |
-| Process       | `Read`                    | Process ID or `*` (wildcard)  | Show Process Definition and Process Instance Data in Operate UI   |
+| Process       | `Read`                    | Process ID or `*` (wildcard)  | Show Process Definition and Process instance Data in Operate UI   |
 | Process       | `Delete`                  | Process ID or `*` (wildcard)  | Delete Process Definitions via Operate UI                         |
-| Process       | `Update process instance` | Process ID or `*` (wildcard)  | Update Process Instance data via Operate UI                       |
-| Process       | `Delete process instance` | Process ID or `*` (wildcard)  | Delete Process Instance via Operate UI                            |
-| Process       | `Start process instance`  | Process ID or `*` (wildcard)  | Start Process Instance via Tasklist UI                            |
+| Process       | `Update process instance` | Process ID or `*` (wildcard)  | Update Process instance data via Operate UI                       |
+| Process       | `Delete process instance` | Process ID or `*` (wildcard)  | Delete Process instance via Operate UI                            |
+| Process       | `Start process instance`  | Process ID or `*` (wildcard)  | Start Process instance via Tasklist UI                            |
 | Decision      | `Read`                    | Decision ID or `*` (wildcard) | Show Decision Definition and Decision Instance Data in Operate UI |
 | Decision      | `Delete`                  | Decision ID or `*` (wildcard) | Delete Decision Definitions via Operate UI                        |
 
@@ -31,7 +31,7 @@ Also a [database must be configured](/self-managed/identity/miscellaneous/config
 
 :::
 
-**Resource Authorizations** are only supported when running Identity with KeyCloak as IdP.
+**Resource Authorizations** are only supported when running Identity with Keycloak as IdP.
 
 ## Managing resource authorizations
 
