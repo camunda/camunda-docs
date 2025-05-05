@@ -110,6 +110,8 @@ global:
         audience: <Audience from Step 3>
 ```
 
+You can also [store the client secrets in a Kubernetes secret](/self-managed/setup/install.md#create-identity-secrets) and reference this in the Helm values.
+
 </TabItem>
 </Tabs>
 
