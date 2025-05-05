@@ -223,7 +223,7 @@ RewriteRule ^docs/self-managed/zeebe-deployment/exporters/camunda-exporter/?$ /d
 # Restructure Identity Docs (8.7)
 RewriteRule ^docs/self-managed/setup/guides/using-existing-keycloak/?$ /docs/self-managed/identity/configuration/connect-to-an-existing-keycloak/ [R=301,L]
 RewriteRule ^docs/self-managed/setup/guides/connect-to-an-oidc-provider/?$ /docs/self-managed/identity/configuration/connect-to-an-oidc-provider/ [R=301,L]
-RewriteRule ^docs/self-managed/concepts/access-control/applications/?$ /docs/self-managed/identity/identity/application-user-group-role-management/applications/ [R=301,L]
+RewriteRule ^docs/self-managed/concepts/access-control/applications/?$ /docs/self-managed/identity/application-user-group-role-management/applications/ [R=301,L]
 RewriteRule ^docs/self-managed/concepts/access-control/resource-authorizations/?$ /docs/self-managed/identity/access-management/resource-authorizations/ [R=301,L]
 RewriteRule ^docs/self-managed/concepts/access-control/user-task-access-restrictions/?$ /docs/self-managed/tasklist-deployment/user-task-access-restrictions/ [R=301,L]
 RewriteRule ^docs/self-managed/concepts/mapping-rules/?$ /docs/self-managed/identity/mapping-rules/ [R=301,L]
@@ -248,6 +248,7 @@ RewriteRule ^docs/self-managed/identity/deployment/application-monitoring/?$ /do
 RewriteRule ^docs/self-managed/identity/deployment/starting-configuration-for-identity/?$ /docs/self-managed/identity/miscellaneous/starting-configuration/ [R=301,L]
 RewriteRule ^docs/self-managed/identity/deployment/resource-management/?$ /docs/self-managed/identity/miscellaneous/resource-management/ [R=301,L]
 RewriteRule ^docs/self-managed/identity/troubleshooting/troubleshoot-identity/?$ /docs/self-managed/identity/miscellaneous/troubleshoot-identity/ [R=301,L]
+RewriteRule ^docs/self-managed/concepts/access-control/apis/?$ /docs/self-managed/identity/access-management/access-management-overview [R=301,L]
 
 # Remove V2 REST user search API from 8.7 and 8.8 docs
 RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/find-all-users/?$ /docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api/ [R=301,L]
