@@ -316,7 +316,7 @@ The following environment variables can be used to configure the default secret 
 
 <TabItem value='helm'>
 
-Connector secrets can be used in Helm charts by following the [managing secrets in Helm charts](self-managed/setup/guides/secret-management.md).
+Connector secrets can be used in Helm charts. Review the documentation on [managing secrets in Helm charts](self-managed/setup/guides/secret-management.md) for additional details.
 
 </TabItem>
 
