@@ -118,7 +118,7 @@ echo "  - Collecting config map information (configuration data stored in the na
 kubectl get cm -n "$namespace" -o yaml > configmaps.yaml
 
 echo "  - Collecting node information:"
-for node in $(kubectl get pods -n "$namespace" -o wide --no-headers | awk '{print $7}' | sort | uniq); do
+for node in $(kubectl get pods -n "$namespace" -o custom-columns=":spec.nodeName" --no-headers | sort | uniq); do
   echo "    - Collecting information for node: $node"
   kubectl describe node "$node" >> node-describe.txt
   echo "" >> node-describe.txt
