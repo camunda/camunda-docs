@@ -72,6 +72,8 @@ Apply it with:
 kubectl apply -f my-secret.yaml
 ```
 
+For additional details on Identity secrets, visit the [installation guide](/self-managed/setup/install.md#create-identity-secrets).
+
 ### Referencing secrets in `values.yaml`
 
 Depending on the structure of the secret key, there are two ways to reference a secret in the values.yaml file:

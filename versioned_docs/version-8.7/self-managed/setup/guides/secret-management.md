@@ -72,7 +72,7 @@ Apply it with:
 kubectl apply -f my-secret.yaml
 ```
 
-For a full set of Identity secrets see the [installation guide](https://docs.camunda.io/docs/self-managed/setup/install/#create-identity-secrets).
+For additional details on Identity secrets, visit the [installation guide](/self-managed/setup/install.md#create-identity-secrets).
 
 ### Referencing secrets in `values.yaml`
 
