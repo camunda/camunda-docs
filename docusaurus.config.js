@@ -19,8 +19,8 @@ module.exports = {
   customFields: {
     canonicalUrlRoot: docsSiteUrl,
   },
-  onBrokenLinks: "warn",
-  onBrokenMarkdownLinks: "warn",
+  onBrokenLinks: "throw",
+  onBrokenMarkdownLinks: "throw",
   favicon: "img/favicon.ico",
   organizationName: "camunda", // Usually your GitHub org/user name.
   projectName: "camunda-docs", // Usually your repo name.
