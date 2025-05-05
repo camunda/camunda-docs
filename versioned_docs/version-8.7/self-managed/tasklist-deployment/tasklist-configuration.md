@@ -36,7 +36,7 @@ Default context-path is `/`.
 
 ## Multi-tenancy
 
-Multi-tenancy in the context of Camunda 8 refers to the ability of Camunda 8 to serve multiple distinct [tenants](/self-managed/identity/user-guide/tenants/managing-tenants.md) or
+Multi-tenancy in the context of Camunda 8 refers to the ability of Camunda 8 to serve multiple distinct [tenants](/self-managed/identity/managing-tenants.md) or
 clients within a single installation.
 
 From version 8.3 onwards, Tasklist has been enhanced to support multi-tenancy for Self-Managed setups. More information about

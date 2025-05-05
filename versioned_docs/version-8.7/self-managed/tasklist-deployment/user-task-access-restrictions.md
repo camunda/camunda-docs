@@ -11,7 +11,7 @@ This configuration does not affect API users. When retrieving tasks using the AP
 :::
 
 User task access restrictions are used in Tasklist to control task access for a
-user or a [group](/self-managed/identity/user-guide/groups/manage-groups.md). The currently logged-in user needs to be either in the `Assignee` field, in the `Candidate users` field, or a member of the `Candidate groups` as defined in the BPMN definition to see the task in the Tasklist.
+user or a [group](/self-managed/identity/application-user-group-role-management/manage-groups.md). The currently logged-in user needs to be either in the `Assignee` field, in the `Candidate users` field, or a member of the `Candidate groups` as defined in the BPMN definition to see the task in the Tasklist.
 
 For example, if a task has a candidate group named `Team A` and a candidate user named `example`, only the users that belong to `Team A` and the user `example` will have access to the task.
 

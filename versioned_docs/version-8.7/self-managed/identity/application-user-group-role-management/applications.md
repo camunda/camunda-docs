@@ -50,14 +50,14 @@ See more details on OAuth client types [here](https://oauth.net/2/client-types/)
 2. Click the **Add application** button located on the top right of the table and a modal will open.
 
 3. Fill in a name for your application. For this guide we will use a set of example values.
-   Select the type of your application based on our [guide](/self-managed/concepts/access-control/applications.md#types-of-applications).
+   Select the type of your application based on our [guide](/self-managed/identity/application-user-group-role-management/applications.md#types-of-applications).
    Depending on the selected type, you might need to enter at least one redirect URI. When you have inserted the required
    details, click **Add**:
 
 ![add-application-modal-2](../img/add-application-modal-2.png)
 
 On confirmation, the modal will close, the list will update, and your new application will be shown. Click on your new application to view the details. This includes your generated client ID
-and client secret depending on the selected [type](/self-managed/concepts/access-control/applications.md#types-of-applications).
+and client secret depending on the selected [type](/self-managed/identity/application-user-group-role-management/applications.md#types-of-applications).
 
 ![add-application-refreshed-table](../img/add-application-refreshed-table.png)
 
