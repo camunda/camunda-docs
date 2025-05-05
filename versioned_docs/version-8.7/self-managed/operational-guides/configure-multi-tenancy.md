@@ -26,7 +26,7 @@ Visit [the Helm chart configuration](https://artifacthub.io/packages/helm/camund
 Without Helm charts, multi-tenancy can be enabled using environment variables. This feature **must** be
 enabled in **all** required components, see:
 
-- [Identity](../../../self-managed/identity/deployment/configuration-variables/#feature-flags)
+- [Identity](/self-managed/identity/miscellaneous/configuration-variables.md#feature-flags)
 - [Zeebe](../../../self-managed/zeebe-deployment/configuration/gateway-config/#zeebegatewaymultitenancy)
 - [Operate](../../../self-managed/operate-deployment/operate-configuration/#multi-tenancy)
 - [Tasklist](../../../self-managed/tasklist-deployment/tasklist-configuration/#multi-tenancy)
