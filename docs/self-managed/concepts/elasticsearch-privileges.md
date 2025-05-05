@@ -8,7 +8,7 @@ If you implement Camunda 8 with Elasticsearch as a service provider, the followi
 ## Cluster privileges
 
 :::note Running Elasticsearch with limited cluster privileges
-If an application cannot be granted cluster privileges, the schema manager can be run as a standalone application separate from the main application. In this setup, the single application does not need cluster privileges. To learn more, see [Elasticsearch without cluster privileges](./elasticsearch-without-cluster-privileges.md).
+If an application cannot be granted cluster privileges, the schema manager can be run as a standalone application separate from the main application. In this setup, the single application does not need cluster privileges.
 :::
 
 - `monitor` - Required to check the Elasticsearch cluster health. This privilege provides read-only cluster operations permissions.
