@@ -4,7 +4,7 @@ title: "Manage groups"
 description: "Groups are a way to apply a set of roles and permissions to users. Use Identity to create a group."
 ---
 
-Groups are a way to group a set of members. A set of [roles](/self-managed/identity/user-guide/roles/manage-roles.md) can be mapped to groups.
+Groups are a way to group a set of members. A set of [roles](/self-managed/identity/application-user-group-role-management/manage-roles.md) can be mapped to groups.
 
 # Group Management
 
@@ -67,7 +67,3 @@ On confirmation, the modal closes, the table updates, and your assigned roles ar
 3. Click the trash icon next to the user you want to remove from the group.
 
 On confirmation, the modal closes, the table updates, and your role is removed from the group.
-
-# Next steps
-
-Groups are a way to group sets of [authorizations](../access-management/managing-resource-authorizations.md).

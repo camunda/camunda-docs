@@ -9,7 +9,7 @@ import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
 :::info
-Mapping rules are only available for Camunda 8 Self-Managed with [OIDC-based authentication](/self-managed/identity/authentication/connect-to-an-oidc-provider.md).
+Mapping rules are only available for Camunda 8 Self-Managed with [OIDC-based authentication](/self-managed/identity/configuration/connect-to-an-oidc-provider.md).
 :::
 
 Mapping rules are designed to allow you to map Camunda-specific data to your users by using the claims on your JWT token. You can map two types of data:
@@ -25,7 +25,7 @@ Mapping rules are designed to allow you to map Camunda-specific data to your use
 
 :::info
 The `Default` mapping rule is created during startup using the [IDENTITY_INITIAL_CLAIM_NAME and
-IDENTITY_INITIAL_CLAIM_VALUE environment variables](../../deployment/configuration-variables.md#oidc-configuration) to
+IDENTITY_INITIAL_CLAIM_VALUE environment variables](/self-managed/identity/miscellaneous/configuration-variables.md#oidc-configuration) to
 allow an initial user access to the Identity UI. Once you have
 access to the Identity UI, configure the additional mapping rules to ensure your users have
 the correct access to the Camunda components.
