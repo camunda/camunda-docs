@@ -20,7 +20,7 @@ const features = [
     imageUrl: "img/home-components.png",
     url: "/docs/components/",
     description:
-      "How to use components including Console, Modeler, Zeebe, Operate, and Optimize.",
+      "Learn how to use Camunda 8 components, features, and integrations.",
   },
   {
     title: "Self-Managed",
