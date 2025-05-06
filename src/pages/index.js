@@ -16,11 +16,11 @@ const features = [
       "New to Camunda 8? Create an account and start modeling your first process.",
   },
   {
-    title: "Components",
+    title: "Using Camunda",
     imageUrl: "img/home-components.png",
     url: "/docs/components/",
     description:
-      "Explore components such as Console, Modeler, Zeebe, Operate, and Optimize.",
+      "How to use components including Console, Modeler, Zeebe, Operate, and Optimize.",
   },
   {
     title: "Self-Managed",
