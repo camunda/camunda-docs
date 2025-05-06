@@ -7,7 +7,7 @@ description: "Get diagnostics and logs from a Helm chart deployment."
 
 ## Diagnostics collection script
 
-This script automates the process of gathering logs and diagnostics from a Camunda Helm chart deployment running in a Kubernetes cluster. It collects all relevant information—including pod logs, events, and resource details—into a single directory, and outputs it in a .zip file to make it easy sharing these information with the Camunda Support team.
+This script automates the process of gathering logs and diagnostics from a Camunda Helm chart deployment running in a Kubernetes cluster. The script collects all relevant information (including pod logs, events, and resource details) into a single directory, and outputs it in a .zip file to make it easier to share this information with the Camunda Support team.
 
 ### What the script collects
 
