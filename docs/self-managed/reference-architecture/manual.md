@@ -30,7 +30,7 @@ This section includes deployment reference architectures for manual setups:
 
 ## Considerations
 
-- This overview page focuses on deploying the [orchestration cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster), the single JAR compromised of Identity, Operate, Optimize, Tasklist, and Zeebe, as well as the Connectors runtime. Web Modeler and Console deployments are not included.
+- This overview page focuses on deploying the [orchestration cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster), the single JAR compromised of Identity, Operate, Optimize, Tasklist, and Zeebe, as well as the connectors runtime. Web Modeler and Console deployments are not included.
 - General guidance and examples focuses on **unix** users, but can be adapted by Windows users with options like [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) or included `batch` files.
 - The Optimize importer is not highly available and must only run once within the whole setup.
 
