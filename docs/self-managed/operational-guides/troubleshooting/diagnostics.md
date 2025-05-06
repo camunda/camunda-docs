@@ -22,7 +22,7 @@ The script outputs the following data from your namespace and creates a zip file
 
 ### Usage
 
-1. Save the script below as e.g. `camunda-collect-diagnostics.sh`.
+1. Save the following script as `camunda-collect-diagnostics.sh` for example.
 2. Make the script executable:
 
 ```bash
