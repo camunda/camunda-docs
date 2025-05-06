@@ -161,6 +161,7 @@ Providing secrets to the runtime environment can be achieved in different ways, 
 <Tabs groupId="connectorTemplateInbound" defaultValue="default" queryString values={
 [
 {label: 'Default secret provider', value: 'default' },
+{label: 'Secrets in Helm charts', value: 'helm' },
 {label: 'Secrets in Docker images', value: 'docker' },
 {label: 'Secrets in manual installations', value: 'manual' },
 {label: 'Custom secret provider', value: 'custom' },
@@ -186,6 +187,12 @@ The following environment variables can be used to configure the default secret 
 | ------------------------------------------------------ | ------------------------------------------------------------------------ | ------------- |
 | `CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_ENABLED` | Whether the default secret provider is enabled.                          | `true`        |
 | `CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_PREFIX`  | The prefix applied to the secret name before looking up the environment. | `""`          |
+
+</TabItem>
+
+<TabItem value='helm'>
+
+Connector secrets can be used in Helm charts. Review the documentation on [managing secrets in Helm charts](self-managed/setup/guides/secret-management.md) for additional details.
 
 </TabItem>
 
