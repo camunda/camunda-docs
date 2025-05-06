@@ -1689,6 +1689,42 @@ paths:
         "500":
           $ref: "#/components/responses/InternalServerError"
 
+  /process-instances/batch-operations/modification:
+    post:
+      tags:
+        - Process instance
+      operationId: modifyProcessInstancesBatchOperation
+      summary: Create a batch operation to modify process instances
+      description: |
+        Modify multiple process instances.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProcessInstanceModificationBatchOperationInstruction"
+      responses:
+        "202":
+          description: The batch operation request was accepted.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchOperationCreatedResult"
+        "400":
+          description: >
+            The process instance batch operation failed.
+            More details are provided in the response body.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+
   /process-instances/{processInstanceKey}/migration:
     post:
       tags:
@@ -2706,6 +2742,51 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+  /groups/{groupId}/users/search:
+    post:
+      tags:
+        - Group
+      operationId: searchUsersForGroup
+      summary: Search group users (Work-in-Progress)
+      description: |
+        Search users assigned to a group.
+
+        This API is in a Work-in-Progress state and will undergo potential breaking changes until
+        its release with an upcoming minor release.
+      parameters:
+        - name: groupId
+          in: path
+          required: true
+          description: The group ID.
+          schema:
+            type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserSearchQueryRequest"
+      responses:
+        "200":
+          description: The users assigned to the group.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserSearchResult"
+        "400":
+          $ref: "#/components/responses/InvalidData"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          description: The group with the given ID was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
   /groups/{groupId}/users/{username}:
     put:
       tags:
@@ -2959,7 +3040,7 @@ paths:
         - name: mappingId
           in: path
           required: true
-          description: The id of the mapping rule to update.
+          description: The ID of the mapping rule to update.
           schema:
             type: string
       requestBody:
@@ -2998,7 +3079,7 @@ paths:
       operationId: deleteMappingRule
       summary: Delete a mapping rule (Work-in-Progress)
       description: |
-        Deletes the mapping rule with the given key.
+        Deletes the mapping rule with the given ID.
 
         This API is in a Work-in-Progress state and will undergo potential breaking changes until
         its release with an upcoming minor release.
@@ -3006,7 +3087,7 @@ paths:
         - name: mappingId
           in: path
           required: true
-          description: The key of the mapping rule to delete.
+          description: The ID of the mapping rule to delete.
           schema:
             type: string
       responses:
@@ -3015,7 +3096,7 @@ paths:
         "401":
           $ref: "#/components/responses/Unauthorized"
         "404":
-          description: The mapping rule with the mappingKey was not found.
+          description: The mapping rule with the mappingId was not found.
           content:
             application/problem+json:
               schema:
@@ -4637,16 +4718,23 @@ components:
           description: Name of this variable.
           type: string
         value:
-          description: Value of this variable.
+          description: |
+            Value of this variable. If `isTruncated` is `true`, this value is truncated. Use
+            `fullValue` to get the full value instead.
           type: string
         fullValue:
-          description: Full value of this variable.
+          description: |
+            Full value of this variable. If `isTruncated` is `true`, this value resembles the full
+            variable value. Otherwise, this is empty and `value` contains the full value.
           type: string
         tenantId:
           description: Tenant ID of this variable.
           type: string
         isTruncated:
-          description: Whether the value is truncated or not.
+          description: |
+            Whether the value is truncated or not. If this is `true`, the `fullValue` contains the
+            full variable value and `value` is a truncated view. Otherwise, `value` contains the
+            full value.
           type: boolean
         variableKey:
           description: The key for this variable.
@@ -5025,7 +5113,7 @@ components:
           title: Exact match
           description: Matches the value exactly.
         - $ref: "#/components/schemas/AdvancedDateTimeFilter"
-    BaseProcessInstanceFilter:
+    BaseProcessInstanceFilterFields:
       description: Base process instance search filter.
       type: object
       properties:
@@ -5091,11 +5179,52 @@ components:
           description: The incident error hash code, associated with this process.
           type: integer
           format: int32
+    ProcessDefinitionStatisticsFilter:
+      description: Process definition statistics search filter.
+      allOf:
+        - $ref: "#/components/schemas/BaseProcessInstanceFilterFields"
+        - type: object
+          properties:
+            $or:
+              description: |
+                Defines a list of alternative filter groups combined using OR logic. Each object in the array is evaluated independently, and the filter matches if any one of them is satisfied.
+
+                Top-level fields and the `$or` clause are combined using AND logic — meaning: (top-level filters) AND (any of the `$or` filters) must match.
+                <br>
+                <em>Example:</em>
+
+                ```json
+                {
+                  "state": "ACTIVE",
+                  "tenantId": 123,
+                  "$or": [
+                    { "processInstanceId": "process_v1" },
+                    { "processInstanceId": "process_v2", "hasIncident": true }
+                  ]
+                }
+                ```
+                This matches process instances that:
+
+                <ul style="padding-left: 20px; margin-left: 20px;">
+                  <li style="list-style-type: disc;">are in <em>ACTIVE</em> state</li>
+                  <li style="list-style-type: disc;">have tenant ID equal to <em>123</em></li>
+                  <li style="list-style-type: disc;">and match either:
+                    <ul style="padding-left: 20px; margin-left: 20px;">
+                      <li style="list-style-type: circle;"><code>processInstanceId</code> is <em>process_v1</em>, or</li>
+                      <li style="list-style-type: circle;"><code>processInstanceId</code> is <em>process_v2</em> and <code>hasIncident</code> is <em>true</em></li>
+                    </ul>
+                  </li>
+                </ul>
+                <br>
+                <p>Note: Using complex <code>$or</code> conditions may impact performance, use with caution in high-volume environments.
+              type: array
+              items:
+                $ref: "#/components/schemas/BaseProcessInstanceFilterFields"
     ProcessInstanceFilterFields:
       description: Process instance search filter.
       type: object
       allOf:
-        - $ref: "#/components/schemas/BaseProcessInstanceFilter"
+        - $ref: "#/components/schemas/BaseProcessInstanceFilterFields"
       properties:
         processDefinitionId:
           description: The process definition ID.
@@ -5231,9 +5360,9 @@ components:
       type: object
       properties:
         filter:
-          description: The process instance search filters.
+          description: The process definition statistics search filters.
           allOf:
-            - $ref: "#/components/schemas/BaseProcessInstanceFilter"
+            - $ref: "#/components/schemas/ProcessDefinitionStatisticsFilter"
     ProcessDefinitionElementStatisticsQueryResult:
       description: Process definition element statistics query response.
       type: object
@@ -6085,7 +6214,6 @@ components:
           description: The field to sort by.
           type: string
           enum:
-            - mappingKey
             - mappingId
             - claimName
             - claimValue
@@ -6375,22 +6503,15 @@ components:
     GroupUpdateRequest:
       type: object
       properties:
-        changeset:
-          description: The set of changed group attributes.
-          allOf:
-            - $ref: "#/components/schemas/GroupChangeset"
-      required:
-        - changeset
-    GroupChangeset:
-      description: A set of changed group attributes.
-      type: object
-      properties:
         name:
           type: string
-          description: The updated display name of the group.
+          description: The new name of the group.
         description:
           type: string
-          description: The updated description of the group.
+          description: The new description of the group.
+      required:
+        - name
+        - description
     GroupUpdateResult:
       type: object
       properties:
@@ -6416,9 +6537,15 @@ components:
         groupKey:
           type: string
           description: The group key.
-        assignedMemberKeys:
+        groupId:
+          type: string
+          description: The group ID.
+        description:
+          type: string
+          description: The group description.
+        assignedMemberIds:
           type: array
-          description: The set of keys of members assigned to the group.
+          description: The IDs of members assigned to the group.
           items:
             type: string
     GroupSearchQuerySortRequest:
@@ -6491,7 +6618,7 @@ components:
       properties:
         mappingId:
           type: string
-          description: The unique external id of the mapping.
+          description: The unique ID of the mapping.
       required:
         - mappingId
     MappingRuleUpdateRequest:
@@ -6512,10 +6639,7 @@ components:
           description: The name of the mapping.
         mappingId:
           type: string
-          description: The unique external id of the mapping.
-        mappingKey:
-          description: The key of the created mapping rule.
-          type: string
+          description: The unique ID of the mapping.
     MappingRuleCreateResult:
       type: object
       allOf:
@@ -6549,9 +6673,6 @@ components:
         mappingId:
           type: string
           description: The ID of the mapping.
-        mappingKey:
-          description: The key of the created mapping rule.
-          type: string
 
     TopologyResponse:
       description: The response of a topology request.
@@ -8179,9 +8300,10 @@ components:
       description: The type of the batch operation.
       type: string
       enum:
-        - PROCESS_CANCELLATION
+        - CANCEL_PROCESS_INSTANCE
         - RESOLVE_INCIDENT
         - MIGRATE_PROCESS_INSTANCE
+        - MODIFY_PROCESS_INSTANCE
     BatchOperationCreatedResult:
       type: object
       properties:
@@ -8240,6 +8362,7 @@ components:
             - COMPLETED
             - COMPLETED_WITH_ERRORS
             - CANCELED
+            - INCOMPLETED
     BatchOperationSearchQueryResult:
       type: object
       allOf:
@@ -8266,6 +8389,7 @@ components:
             - COMPLETED
             - COMPLETED_WITH_ERRORS
             - CANCELED
+            - INCOMPLETED
         batchOperationType:
           $ref: "#/components/schemas/BatchOperationTypeEnum"
         startDate:
@@ -8315,6 +8439,38 @@ components:
             - COMPLETED
             - CANCELED
             - FAILED
+    ProcessInstanceModificationBatchOperationInstruction:
+      type: object
+      description: |
+        The process instance filter to define on which process instances tokens should be moved,
+        as well as mapping instructions which active element instances should be terminated and which
+        new element instances should be activated
+      properties:
+        filter:
+          $ref: "#/components/schemas/ProcessInstanceFilter"
+        moveInstructions:
+          description: Instructions describing which elements should be activated in which scopes and which variables should be created.
+          type: array
+          items:
+            $ref: "#/components/schemas/ProcessInstanceModificationMoveBatchOperationInstruction"
+      required:
+        - filter
+        - moveInstructions
+    ProcessInstanceModificationMoveBatchOperationInstruction:
+      description: |-
+        Instructions describing a move operation. This instruction will terminate all active elementInstance
+        at sourceElementId and activate a new element instance for each terminated one at targetElementId.
+      type: object
+      properties:
+        sourceElementId:
+          description: The ID of the element that should be terminated.
+          type: string
+        targetElementId:
+          description: The ID of the element that should be activated.
+          type: string
+      required:
+        - sourceElementId
+        - targetElementId
   responses:
     InternalServerError:
       description: >
