@@ -11,7 +11,7 @@ This script automates the process of gathering logs and diagnostics from a Camun
 
 ### What the script collects
 
-The script outputs the following data from your namespace and creates a :
+The script outputs the following data from your namespace and creates a zip file containing the following:
 
 - **Pod Information**: Current and previous logs and full pod descriptions.
 - **Cluster Events**: Sorted by time to help identify recent issues.
