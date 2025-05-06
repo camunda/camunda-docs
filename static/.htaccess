@@ -190,6 +190,10 @@ RewriteRule ^docs/next/apis-tools/camunda-api-rest/specifications/update-element
 # Remove Camunda exporter from 8.7 docs
 RewriteRule ^docs/self-managed/zeebe-deployment/exporters/camunda-exporter/?$ /docs/self-managed/zeebe-deployment/exporters/install-zeebe-exporters/ [R=301,L]
 
+# Remove V2 REST user search API from 8.7 and 8.8 docs
+RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/find-all-users/?$ /docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api/ [R=301,L]
+RewriteRule ^docs/8.6/apis-tools/camunda-api-rest/specifications/find-all-users/?$ /docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api/ [R=301,L]
+
 #---------------------------------------------------------------------------------
 #   8.7: content moves introduced prior to the release of version 8.7.
 #---------------------------------------------------------------------------------

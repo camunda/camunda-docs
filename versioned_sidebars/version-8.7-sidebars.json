@@ -485,7 +485,8 @@
           "items": [
             "components/connectors/connector-types",
             "components/connectors/use-connectors/inbound",
-            "components/connectors/use-connectors/outbound"
+            "components/connectors/use-connectors/outbound",
+            "components/connectors/use-connectors/intrinsic-functions"
           ]
         },
         {
@@ -1145,18 +1146,6 @@
                       "type": "doc",
                       "id": "apis-tools/camunda-api-rest/specifications/create-document-link",
                       "label": "Create document link",
-                      "className": "api-method post"
-                    }
-                  ]
-                },
-                {
-                  "type": "category",
-                  "label": "User",
-                  "items": [
-                    {
-                      "type": "doc",
-                      "id": "apis-tools/camunda-api-rest/specifications/find-all-users",
-                      "label": "Query users (alpha)",
                       "className": "api-method post"
                     }
                   ]

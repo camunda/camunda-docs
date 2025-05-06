@@ -5,7 +5,7 @@ description: "Learn more about integration, secure management, and efficient sto
 keywords: ["document handling"]
 ---
 
-Camunda 8 provides built-in support for storing, tracking, and managing documents using Camunda Forms, Connectors, Tasklist, and the [Camunda 8 REST API](/apis-tools/camunda-api-rest/specifications/create-documents.api.mdx) in both SaaS and Self-Managed.
+Camunda 8 provides built-in support for storing, tracking, and managing documents using Camunda Forms, connectors, Tasklist, and the [Camunda 8 REST API](/apis-tools/camunda-api-rest/specifications/create-documents.api.mdx) in both SaaS and Self-Managed.
 
 :::note
 For a closer look at storage options for handling documents in Self-Managed environments, visit the [Self-Managed configuration docs](/self-managed/document-handling/configuration/overview.md).
@@ -15,7 +15,7 @@ Document handling is automatically integrated into each SaaS cluster, allowing y
 
 ## Use cases and capabilities
 
-Document handling can be beneficial for different process use cases, such as uploading a document to a BPMN process, displaying and downloading a document, sending a document to an external system via a Connector, and automating documents with [intelligent document processing](/components/modeler/web-modeler/idp/idp-example.md).
+Document handling can be beneficial for different process use cases, such as uploading a document to a BPMN process, displaying and downloading a document, sending a document to an external system via a connector, and automating documents with [intelligent document processing](/components/modeler/web-modeler/idp/idp-example.md).
 
 Step through all of these capabilities in the [use cases](/components/document-handling/use-cases/overview.md) section.
 

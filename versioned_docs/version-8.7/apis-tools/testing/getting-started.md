@@ -289,7 +289,7 @@ The test runtime uses [SLF4J](https://www.slf4j.org/) as the logging framework. 
 
 - `io.camunda.process.test` - The test runtime
 - `tc.camunda` - The Camunda Docker container
-- `tc.connectors` - The Connectors Docker container
+- `tc.connectors` - The connectors Docker container
 - `tc.elasticsearch` - The Elasticsearch Docker container
 - `org.testcontainers` - The Testcontainers framework
 
