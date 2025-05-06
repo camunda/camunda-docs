@@ -204,7 +204,7 @@ The following attributes/elements **cannot** be migrated:
 
 Only FEEL scripts can be executed by Zeebe. The converter will create internal scripts as long as you are using FEEL scripts.
 
-If you require a different scripting language, a script task can behave like normal service tasks instead, which means you must run a job worker that can execute scripts. One available option is to use the [Script Connector](https://github.com/camunda-community-hub/script-connector), provided as a community extension.
+If you require a different scripting language, a script task can behave like normal service tasks instead, which means you must run a job worker that can execute scripts. One available option is to use the [Script connector](https://github.com/camunda-community-hub/script-connector), provided as a community extension.
 
 If you do this, the following attributes/elements are migrated to headers:
 

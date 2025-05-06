@@ -1,7 +1,7 @@
 ---
 id: host-custom-connectors
-title: Host custom Connectors
-description: "Learn how to host a custom Connector developed with Connector SDK."
+title: Host custom connectors
+description: "Learn how to host a custom connector developed with Connector SDK."
 ---
 
 This guide explains how to host your own **Connectors** developed with [Connector SDK](/components/connectors/custom-built-connectors/connector-sdk.md).
@@ -9,17 +9,17 @@ This guide explains how to host your own **Connectors** developed with [Connecto
 ## Prerequisites
 
 - Ensure you have to have a working Camunda cluster in SaaS or Self-Managed.
-- Ensure you have a distribution version of your Connector in the form of "fat" `jar` file.
+- Ensure you have a distribution version of your connector in the form of "fat" `jar` file.
 
 For the purpose of this guide, we will be using a generic [Connector template](https://github.com/camunda/connector-template-outbound)
 as a reference. Clone the repository, and execute `mvn clean verify package`.
 This will produce a file called `target/connector-template-0.1.0-SNAPSHOT-with-dependencies.jar`. In this guide,
 we will refer this file as `connector.jar`.
 
-## Wiring your Connector with a Camunda cluster
+## Wiring your connector with a Camunda cluster
 
 This approach is equivalent to the [hybrid mode](./use-connectors-in-hybrid-mode.md), except you don't need to override
-existing Connectors and instead add a new one. You need to have a running Camunda cluster, and a pair
+existing connectors and instead add a new one. You need to have a running Camunda cluster, and a pair
 of `Client ID`/`Client Secret` with `Zeebe` and `Operate` scopes.
 Learn more about [how to obtain required credentials](/components/console/manage-clusters/manage-api-clients.md).
 
@@ -37,10 +37,10 @@ docker run --rm --name=CustomConnectorInSaaS \
         camunda/connectors-bundle:<desired-version>
 ```
 
-The line `-v $PWD/connector.jar:/opt/app/connector.jar` binds a volume with your Connector at the path `$PWD/connector.jar`
+The line `-v $PWD/connector.jar:/opt/app/connector.jar` binds a volume with your connector at the path `$PWD/connector.jar`
 of you local machine.
 
-## Wiring your Connector with Camunda Docker instance (without Keycloak)
+## Wiring your connector with Camunda Docker instance (without Keycloak)
 
 This option is applicable if you launch your cluster in a Self-Managed version with
 [Camunda Docker Compose variant without Keycloak](https://github.com/camunda/camunda-distributions/tree/main/docker-compose).
@@ -63,7 +63,7 @@ docker run --rm --name=CustomConnectorInSMCore \
 Exact values of the environment variables related to Zeebe, Operate, or network may depend on your own configuration.
 :::
 
-## Wiring your Connector with Camunda Docker instance (with Keycloak)
+## Wiring your connector with Camunda Docker instance (with Keycloak)
 
 This option is applicable if you launch your cluster in a Self-Managed version with
 [Camunda Platform Docker Compose variant with Keycloak](https://github.com/camunda/camunda-distributions/tree/main/docker-compose).
@@ -95,7 +95,7 @@ Exact values of the environment variables related to Zeebe, Operate, Keycloak, o
 your own configuration.
 :::
 
-## Wiring your Connector with Camunda Helm charts
+## Wiring your connector with Camunda Helm charts
 
 There are multiple ways to configure a Helm/Kubernetes Self-Managed cluster.
 Refer to the [official guide](/self-managed/setup/overview.md) to learn more.
@@ -107,7 +107,7 @@ and forwarded Zeebe, Operate, and Keycloak ports:
 - `kubectl port-forward svc/camunda-operate 8081:80`
 - `kubectl port-forward svc/camunda-keycloak 18080:80`
 
-Now, you need to obtain both Zeebe and Connectors' Operate OAuth clients. You can do it with `kubectl get secret camunda-zeebe-identity-secret -o jsonpath="{.data.*}" | base64 --decode`
+Now, you need to obtain both Zeebe and connectors' Operate OAuth clients. You can do it with `kubectl get secret camunda-zeebe-identity-secret -o jsonpath="{.data.*}" | base64 --decode`
 and `kubectl get secret camunda-connectors-identity-secret -o jsonpath="{.data.*}" | base64 --decode` respectively.
 
 Run the following command:
