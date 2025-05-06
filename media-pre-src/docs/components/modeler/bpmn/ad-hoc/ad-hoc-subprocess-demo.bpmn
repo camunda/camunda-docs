@@ -12,7 +12,7 @@
       <bpmn:incoming>Flow_0ofj339</bpmn:incoming>
       <bpmn:outgoing>Flow_0n50uei</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:adHocSubProcess id="Activity_0h1xev6" name="Ad-hoc subprocess">
+    <bpmn:adHocSubProcess id="Activity_0h1xev6" name="Ad-hoc sub-process">
       <bpmn:extensionElements>
         <zeebe:adHoc activeElementsCollection="=activeElements" />
       </bpmn:extensionElements>

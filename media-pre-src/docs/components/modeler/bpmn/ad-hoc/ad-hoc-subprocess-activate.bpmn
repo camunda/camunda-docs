@@ -15,7 +15,7 @@
         <bpmn:targetRef>DataObjectReference_1fwsvm3</bpmn:targetRef>
       </bpmn:dataOutputAssociation>
     </bpmn:userTask>
-    <bpmn:adHocSubProcess id="Activity_0h1xev6" name="Ad-hoc subprocess">
+    <bpmn:adHocSubProcess id="Activity_0h1xev6" name="Ad-hoc sub-process">
       <bpmn:extensionElements />
       <bpmn:incoming>Flow_0n50uei</bpmn:incoming>
       <bpmn:outgoing>Flow_0m5piby</bpmn:outgoing>
