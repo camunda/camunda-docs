@@ -186,11 +186,11 @@ To use the new context pad, configure your `flags.json` as follows:
 
 ![New context pad](./img/new-context-pad.png)
 
-### Disable Connector templates
+### Disable connector templates
 
 <span class="badge badge--cloud">Camunda 8 only</span>
 
-To [disable automatic Connector template fetching](../use-connectors.md#automatic-connector-template-fetching), configure your `flags.json` as follows:
+To [disable automatic connector template fetching](../use-connectors.md#automatic-connector-template-fetching), configure your `flags.json` as follows:
 
 ```json
 {
