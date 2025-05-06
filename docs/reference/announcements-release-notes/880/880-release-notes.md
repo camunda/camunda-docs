@@ -25,12 +25,6 @@ These release notes identify the new features included in 8.8, including [alpha 
 | :----------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--- |
 | 13 May 2025  | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.8.0-alpha4)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.8.0-alpha4)</li></ul> | -    |
 
-### AI Agent Connector
-
-<!-- https://github.com/camunda/product-hub/issues/2744 -->
-
-Long-term memory support to the AI agent connector. Automatically triggers RAG logic to retrieve relevant past conversations. Simplifies memory management by removing the need for manual data handling and custom retrieval logic.
-
 ### Camunda Process Test H2 data layer support <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Zeebe</span> {#h2support}
 
 <!-- https://github.com/camunda/product-hub/issues/2687 -->
