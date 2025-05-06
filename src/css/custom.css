@@ -20,10 +20,20 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   --ifm-breadcrumb-item-background-active: none;
   --ifm-breadcrumb-color-active: var(--ifm-font-color-base);
   --ifm-menu-color: var(--ifm-color-emphasis-800);
-  --ifm-heading-font-family:
-    IBM Plex Sans, -apple-system, blinkmacsystemfont, Segoe UI, roboto,
-    oxygen-sans, ubuntu, cantarell, Helvetica Neue, sans-serif;
+  --ifm-heading-font-family: IBM Plex Sans, -apple-system, blinkmacsystemfont,
+    Segoe UI, roboto, oxygen-sans, ubuntu, cantarell, Helvetica Neue, sans-serif;
   --ifm-leading: calc(var(--ifm-leading-desktop) * 1rem);
+  --ifm-alert-border-radius: 0;
+  --ifm-breadcrumb-padding-horizontal: 0rem;
+}
+
+.markdown {
+  --ifm-h1-vertical-rhythm-top: 4;
+  --ifm-h2-vertical-rhythm-top: 2.5;
+  --ifm-h3-vertical-rhythm-top: 2.4;
+  --ifm-heading-vertical-rhythm-top: 1.25;
+  --ifm-h1-vertical-rhythm-bottom: 1.25;
+  --ifm-heading-vertical-rhythm-bottom: 0.9;
 }
 
 /* Dark mode */
@@ -47,15 +57,55 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   --ifm-tabs-padding-horizontal: 15px;
 }
 
-a {
-  text-decoration: none;
+.footer--dark {
+  --ifm-footer-background-color: #161616;
 }
 
-/* Dark Mode > Kapa AI */
+@media (min-width: 996px) {
+  .theme-doc-version-badge {
+    display: none;
+  }
+}
 
-[data-theme="dark"] .mantine-k0race {
-  border: 1px solid #767676;
-  box-shadow: 0px 8px 16px 4px rgba(120, 169, 255, 0.2);
+/* Match alert colours to Camunda brand colours */
+:root {
+  --ifm-color-success-dark: rgb(12, 176, 96);
+  --ifm-color-success-contrast-background: rgb(239, 247, 239);
+  --ifm-color-info-dark: rgb(0, 114, 206);
+  --ifm-color-info-contrast-background: rgb(244, 249, 254);
+  --ifm-color-warning-dark: rgb(252 93 13);
+  --ifm-color-warning-contrast-background: rgb(252, 243, 238);
+}
+
+.page-description {
+  font-size: 18px;
+  font-weight: 500;
+  margin-top: -15px;
+  margin-bottom: 40px !important;
+}
+
+/* Add padding to main content column */
+.docMainContainer_TBSr {
+  padding-left: 20px;
+}
+
+/* Search border */
+.DocSearch-Button {
+  border: 1px solid transparent !important;
+}
+
+/* Adjust size of menu caret to be smaller (previously 2rem) */
+.menu__caret:before,
+.menu__link--sublist-caret:after {
+  background: var(--ifm-menu-link-sublist-icon) 50%/1.3rem 1.3rem;
+}
+.navbar__title {
+  padding-left: 10px;
+  font-size: 16px;
+}
+
+a {
+  text-decoration: none;
 }
 
 /* Dark Mode > Search */
@@ -81,7 +131,7 @@ a {
 }
 
 [data-theme="dark"] .DocSearch-Button {
-  border: 1px solid #48484a;
+  border: 1px solid #48484a !important;
 }
 
 [data-theme="dark"] .hero__subtitle {
@@ -383,6 +433,50 @@ body {
   color: #000;
 }
 
+.try-free {
+  background-color: #fc5d0d;
+  font-family: "IBM Plex Sans", Sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  fill: #ffffff;
+  color: #ffffff;
+  border-radius: 20px !important;
+  margin-right: 10px;
+  border: 1px solid #fc5d0d;
+}
+.try-free:hover {
+  background-color: #171c29;
+  color: #ffffff;
+  border: 1px solid #171c29;
+}
+
+[data-theme="dark"] .try-free {
+  border-color: rgb(255, 255, 255);
+  transition: 0.3s;
+  color: rgb(255, 255, 255);
+  background-color: transparent;
+  border: 1px solid white;
+}
+
+[data-theme="dark"] .try-free:hover {
+  background-color: #ffffff;
+  color: var(--ifm-color-black);
+  border: 1px solid #171c29;
+}
+
+.dropdown {
+  background-color: #edeef0;
+  border-radius: 15px !important;
+  padding: 2px 10px;
+  font-size: 14px;
+  margin-right: 10px;
+}
+
+[data-theme="dark"] .dropdown {
+  background-color: transparent;
+  border: 2px solid #333;
+}
+
 /* Landing page search bar */
 
 .homeSearch {
@@ -396,6 +490,7 @@ body {
   width: 100%;
   border-radius: 8px;
   background: white;
+  border: none !important;
 }
 .homeSearch .DocSearch-Button:hover {
   height: 55px;
@@ -420,12 +515,12 @@ body {
 }
 [data-theme="dark"] .homeSearch .DocSearch-Button {
   background-color: transparent;
-  border: 2px solid rgb(40, 40, 40);
+  border: 2px solid rgb(40, 40, 40) !important;
 }
 
 [data-theme="dark"] .homeSearch .DocSearch-Button:hover {
   background-color: transparent;
-  border: 2px solid var(--ifm-color-primary);
+  border: 2px solid var(--ifm-color-primary) !important;
   box-shadow: 0px 8px 16px 4px #78a9ff33;
 }
 
@@ -846,7 +941,7 @@ a.table-of-contents__link.toc-highlight > span.badge {
 /* Page titles */
 .markdown h1:first-child {
   font-weight: 600;
-  font-size: 2.5rem;
+  font-size: 2rem;
 }
 h1 {
   padding-top: 10px;
@@ -858,7 +953,7 @@ h1.openapi__heading {
 }
 /* Main page headings */
 h2 {
-  font-size: 28px;
+  font-size: 1.5rem;
   font-weight: 600;
   border-bottom: 1px solid #dedede;
   margin-bottom: 20px;
@@ -931,7 +1026,7 @@ h3 {
   margin-bottom: 0.8rem;
   margin-top: 2.2rem;
   font-weight: 500;
-  font-size: 1.6rem;
+  font-size: 1.3rem;
 }
 /* Second level page heading modifications for home page cards */
 h3.featuresTitle_src-pages-styles-module,
@@ -961,11 +1056,22 @@ h3 .badge--long:nth-of-type(1) {
   margin-left: 5px;
 }
 h4 {
-  font-size: 1.3rem;
+  font-size: 1.15rem;
   margin-top: 2rem;
   font-weight: 500;
   margin-bottom: 1rem;
 }
+h4 .badge--long {
+  margin-bottom: 0;
+  font-size: 12px;
+  margin-left: 5px;
+  vertical-align: middle;
+}
+h4 .badge--long:nth-of-type(1) {
+  margin-left: 5px;
+  margin-bottom: 0;
+}
+
 /* API reference modifications for new H3 style */
 h4.openapi-security__summary-header {
   margin-top: 0;
@@ -1000,10 +1106,15 @@ ul ol {
   border-bottom: 1px solid #dedede;
 }
 .tabs__item--active {
-  background-color: #f7f7f7;
+  background-color: transparent;
 }
 .tabs__item:hover {
-  background-color: #f7f7f7;
+  background-color: transparent;
+  color: black;
+}
+.tabs__item--active:hover {
+  background-color: transparent;
+  color: var(--ifm-color-primary);
 }
 .openapi-tabs__response-list-container {
   border-bottom: none;
@@ -1012,13 +1123,29 @@ ul ol {
   border-bottom: none;
 }
 
-/* lighter menu font  */
-.menu__list-item-collapsible .menu__link:hover,
-.menu__list-item-collapsible .menu__link--active,
-.menu__link--active:not(.menu__link--sublist) {
-  font-weight: 600;
+/* Reset all menu items to default styling */
+.menu__link {
+  color: inherit; /* Default text color */
+  font-weight: normal; /* Normal font weight */
 }
 
+/* Style any active page (including categories) with blue text */
+.menu__link--active {
+  color: var(--ifm-menu-color-active); /* Blue text color */
+  font-weight: 600; /* Bold font weight */
+  border-left: 4px solid var(--ifm-link-color);
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+/* Only reset styling for parent categories that aren't the current page */
+.menu__link--sublist:not(.menu__link--active),
+.menu__list-item-collapsible:not(.menu__list-item-collapsible--active)
+  > .menu__link {
+  color: inherit; /* Default text color */
+  font-weight: normal; /* Normal font weight */
+  border-left: 0;
+}
 /* double column div layout  */
 .double-column-container {
   display: flex;

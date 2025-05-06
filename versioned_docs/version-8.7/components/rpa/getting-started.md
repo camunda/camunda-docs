@@ -55,7 +55,7 @@ Once you are happy with your script and have tested it locally, you can start au
 2. **Add RPA to your process**:
 
    1. In Camunda Modeler, create a new BPMN file or open an existing one.
-   2. Add a new task and change it to an "RPA Connector".
+   2. Add a new task and change it to an "RPA connector".
       ![A screenshot of appending a RPA Task](img/create-new-task.png)
    3. Configure the task with the script ID from the previous step. Add any input mappings required for your script to work.
       ![A screenshot of configuring a RPA Task](img/rpa-task-configuration.png)
