@@ -29,6 +29,7 @@ module.exports = {
         "components/modeler/feel/builtin-functions/feel-built-in-functions-range",
         "components/modeler/feel/builtin-functions/feel-built-in-functions-string",
         "components/modeler/feel/builtin-functions/feel-built-in-functions-temporal",
+        "components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous",
       ],
     },
   ],
