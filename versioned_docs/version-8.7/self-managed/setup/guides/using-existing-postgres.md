@@ -16,6 +16,10 @@ This guide steps through using an existing PostgreSQL instance. By default, [Hel
 
 ## Preparation
 
+### Supported Version
+
+To check the most supported version of PostgreSQL, please check the [supported environments](/reference/supported-environments.md) page
+
 ### Authentication
 
 Make sure you have the following information for your existing PostgreSQL instance. For the sake of this guide, sample values will be used:
@@ -35,7 +39,7 @@ CREATE DATABASE "keycloak";
 CREATE DATABASE "identity";
 ```
 
-### Creating Secrets
+### Creating Kubernetes Secrets
 
 Once you have the above infromation, it is best to create a Kubernetes secret for the database password, so you do not have to refer to sensitive information in plain text within your values.yaml.
 
@@ -71,13 +75,6 @@ identity:
     database: "identity"
 
 identityKeycloak:
-  # disable internal psql
-  postgresql:
-    enabled: false
-  auth:
-    adminUser: postgres
-    existingSecret: "camunda-psql-db"
-    existingSecretPasswordKey: "password"
   externalDatabase:
     host: "db.example.com"
     port: 5432
@@ -85,4 +82,11 @@ identityKeycloak:
     existingSecret: "camunda-psql-db"
     existingSecretKey: "password"
     database: "keycloak"
+  auth:
+    adminUser: postgres
+    existingSecret: "camunda-psql-db"
+    existingSecretPasswordKey: "password"
+  # disable internal psql for keycloak
+  postgresql:
+    enabled: false
 ```
