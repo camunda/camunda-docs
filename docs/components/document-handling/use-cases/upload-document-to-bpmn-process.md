@@ -112,3 +112,13 @@ The result variable will have the following structure:
  ]
 }
 ```
+
+## Upload a document using the Camunda 8 API
+
+You can also upload a document to your Camunda 8 cluster using the Camunda 8 API.
+
+:::note
+This is currently supported for document stores of type: [AWS, GCP, in-memory (non-production), local (non-production)](/self-managed/document-handling/configuration/overview.md).
+:::
+
+Learn more about [uploading a single document](/apis-tools/camunda-api-rest/specifications/create-document.mdx) and [uploading multiple documents](/apis-tools/camunda-api-rest/specifications/create-documents.mdx) using the Camunda 8 API.

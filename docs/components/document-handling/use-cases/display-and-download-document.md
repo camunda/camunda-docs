@@ -43,3 +43,13 @@ A document can be displayed in a user task form in [Tasklist](/components/taskli
 When a user opens the task, they can view and download the document directly from the form.
 
 ![Document preview for task in Tasklist](./img/task-with-document-preview-tasklist.png)
+
+## Download a document using the Camunda 8 API
+
+You can also download a document from your Camunda 8 cluster using the Camunda 8 API.
+
+:::note
+This is currently supported for document stores of type: [AWS, GCP, in-memory (non-production), local (non-production)](/self-managed/document-handling/configuration/overview.md).
+:::
+
+Learn more about this request in the [Camunda 8 API docs](/apis-tools/camunda-api-rest/specifications/get-document.mdx).
