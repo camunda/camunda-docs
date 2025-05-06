@@ -5,7 +5,7 @@ description: "Learn how to build a form for document upload, upload a document f
 keywords: ["document handling"]
 ---
 
-You can implement document uploads in your BPMN processes using [forms](#build-a-form-for-document-upload), [inbound Connectors](#upload-a-document-via-inbound-webhook-connector), and the [Camunda 8 REST API](/apis-tools/camunda-api-rest/specifications/create-document.api.mdx).
+You can implement document uploads in your BPMN processes using [forms](#build-a-form-for-document-upload), [inbound connectors](#upload-a-document-via-inbound-webhook-connector), and the [Camunda 8 REST API](/apis-tools/camunda-api-rest/specifications/create-document.api.mdx).
 
 ## Build a form for document upload
 
@@ -46,7 +46,7 @@ Single document uploads are accessible using `value[1]` (since [FEEL](/component
 
 ## Upload a document via inbound webhook connector
 
-Documents can be added to a process using the [inbound](/components//connectors/connector-types.md#inbound-connectors) [HTTP webhook Connector](/components/connectors/protocol/http-webhook.md).
+Documents can be added to a process using the [inbound](/components//connectors/connector-types.md#inbound-connectors) [HTTP webhook connector](/components/connectors/protocol/http-webhook.md).
 
 You can pass the documents in both the response expression and the result expression, where the `documents` object contains the references for created documents. Below, review an example of a webhook configuration:
 
@@ -60,7 +60,7 @@ In this example, the result expression may look as follows, where `applicationDo
 }
 ```
 
-The document reference received as an output of one Connector should be stored in process variables by using the result expression or result variable.
+The document reference received as an output of one connector should be stored in process variables by using the result expression or result variable.
 
 To call the webhook sending a file, for example:
 

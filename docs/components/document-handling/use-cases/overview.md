@@ -1,7 +1,7 @@
 ---
 id: use-cases
 title: Use cases
-description: "Learn how to upload a document to a BPMN process, display and download a document in a user task, and send a document to an external system via a Connector."
+description: "Learn how to upload a document to a BPMN process, display and download a document in a user task, and send a document to an external system via a connector."
 keywords: ["document handling"]
 ---
 
@@ -13,7 +13,7 @@ In this section we will cover three main use cases:
 
 - [Upload a document to a BPMN process](/components/document-handling/use-cases/upload-document-to-bpmn-process.md)
 - [Display and download a document](/components/document-handling/use-cases/display-and-download-document.md)
-- [Send a document to an external system via a Connector](/components/document-handling/use-cases/send-document-to-external-system.md)
+- [Send a document to an external system via a connector](/components/document-handling/use-cases/send-document-to-external-system.md)
 
 ## Automate documents with intelligent document processing
 

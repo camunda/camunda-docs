@@ -1,19 +1,19 @@
 ---
 id: send-document-to-external-system-via-connector
-title: Send a document to an external system via a Connector
-description: "Learn more about outbound Connectors that support document handling."
+title: Send a document to an external system via a connector
+description: "Learn more about outbound connectors that support document handling."
 keywords: ["document handling"]
 ---
 
-You can reference a document in an [outbound Connector](/components/connectors/connector-types.md#outbound-connectors). Connectors can use variables with document metadata as an input. The format of inputs will depend on the Connector, as each Connector has a different input structure.
+You can reference a document in an [outbound connector](/components/connectors/connector-types.md#outbound-connectors). Connectors can use variables with document metadata as an input. The format of inputs will depend on the connector, as each connector has a different input structure.
 
-The [Connector SDK](/components/connectors/custom-built-connectors/connector-sdk.md) provides document support in property/variable bindings.
+The [connector SDK](/components/connectors/custom-built-connectors/connector-sdk.md) provides document support in property/variable bindings.
 
-In most cases for the following outbound Connectors, you can include a **Request body** under **Payload** in the properties panel to send with your request:
+In most cases for the following outbound connectors, you can include a **Request body** under **Payload** in the properties panel to send with your request:
 
 ![example REST configuration](./img/rest-outbound-document.png)
 
-## Outbound Connectors that support document handling
+## Outbound connectors that support document handling
 
 | Connector                                                                               | Support details                                                                                                                                                                                                                |
 | --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
