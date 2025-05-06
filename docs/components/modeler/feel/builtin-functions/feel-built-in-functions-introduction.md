@@ -29,4 +29,5 @@ This section is split into functions based on their primary operational data typ
 - [Range](./feel-built-in-functions-range.md)
 
 Additionally, there are [conversion](./feel-built-in-functions-conversion.md) functions that allow
-you to construct new values of a data type (factory functions).
+you to construct new values of a data type (factory functions). Functions not matching any
+of the above categories are listed in the [miscellaneous](./feel-built-in-functions-miscellaneous.md) section.
