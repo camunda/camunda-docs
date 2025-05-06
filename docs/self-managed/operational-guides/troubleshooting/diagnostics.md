@@ -29,7 +29,7 @@ The script outputs the following data from your namespace and creates a zip file
 chmod +x camunda-collect-diagnostics.sh
 ```
 
-3. Execute the script replacing `<namespace>` with the namespace of your Camunda deployment:
+3. Execute the script, replacing `<namespace>` with the namespace of your Camunda deployment:
 
 ```bash
 ./camunda-collect-diagnostics.sh --namespace <namespace>
