@@ -14,7 +14,7 @@ To generate a connector template:
 
 1. Select the Modeler project you want to create the template in.
 1. Click **Create new**, and select **Connector template** to open the **Create new connector template** screen.
-   ![fCreate the new connector template](./img/configure-template-details.png)
+   ![Create the new connector template](./img/configure-template-details.png)
 
 1. Select the template starting point.
 
