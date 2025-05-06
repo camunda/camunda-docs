@@ -711,11 +711,11 @@ module.exports = {
     "apis-tools/working-with-apis-tools",
     {
       APIs: [
+        require("./docs/apis-tools/camunda-api-rest/sidebar-schema"),
         require("./docs/apis-tools/administration-api/sidebar-schema"),
         require("./docs/apis-tools/administration-sm-api/sidebar-schema"),
-        require("./docs/apis-tools/camunda-api-rest/sidebar-schema"),
         {
-          "Optimize API (REST)": [
+          "Optimize API": [
             "apis-tools/optimize-api/overview",
             "apis-tools/optimize-api/optimize-api-authentication",
             "apis-tools/optimize-api/optimize-api-tutorial",
