@@ -90,21 +90,27 @@ With the 8.8 release, the deprecated Tasklist GraphQL API will be removed from t
 Learn more about these updates in Upcoming API Changes in Camunda 8.
 ::: -->
 
-#### Removed: Deprecated OpenAPI objects
+#### Removed: Deprecated and streamlined OpenAPI objects
 
 :::warning
 With the Camunda 8.8 release, deprecated API objects containing number keys have been removed, including the
 corresponding `application/vnd.camunda.api.keys.number+json` content type header.
 :::
 
-In previous releases, entity keys were transitioned from `integer (int64)` to `string` types, and deprecated
-`integer (int64)` keys were still supported. As of the 8.8 release, support for `integer (int64)` keys has been removed.
+n previous releases, entity keys transitioned from `integer (int64)` to `string` types. The API still supported deprecated
+`integer (int64)` keys. With the 8.8 release, the API only supports `string` keys.
 
-To update to Camunda 8.8, API objects using `integer (int64)` keys must be updated to use `string` keys and the
+To update to Camunda 8.8, you must update API objects using `integer (int64)` keys to use `string` keys and the
 `application/json` header.
 
 For more information about the key attribute type change, see
 the [8.7 API key attributes overview][camunda8-api-overview].
+
+Beyond key attributes, the API streamlines the variable search functionality, introduced as an alpha feature in 8.6. The OpenAPI objects
+`ProcessInstanceVariableFilterRequest` and `UserTaskVariableFilterRequest` now come as a single `VariableValueFilterRequest`.
+Furthermore, the `VariableUserTaskFilterRequest` now is the `UserTaskVariableFilterRequest` so it aligns with other requests.
+
+If you're generating a custom REST API client from the OpenAPI spec, you need to adjust your code after re-generating the API models.
 
 [camunda8-api-overview]: /versioned_docs/version-8.7/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#api-key-attributes
 
