@@ -325,7 +325,7 @@ The following conventions apply to all attributes:
 </TabItem>
 </Tabs>
 
-### Variable
+### Variables
 
 #### Get a variable
 
@@ -349,7 +349,6 @@ The following conventions apply to all attributes:
 
 - Renamed attributes
   - `id` - Use `variableKey` as this refers to the unique system identifier of the variable.
-  - `value` - Use `fullValue` instead.
 - Removed attributes
   - `draft` - Draft variables are not supported in V2 anymore, see also the [save draft variables](#save-task-draft-variables) endpoint for further details.
 
