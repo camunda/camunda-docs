@@ -170,7 +170,7 @@ Additionally, the Zeebe Gateway should be configured to use an encrypted connect
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/helm-values/connectors-route.yml
 ```
 
-The actual configuration properties can be reviewed [in the Connectors configuration documentation](/self-managed/connectors-deployment/connectors-configuration.md#zeebe-broker-connection).
+The actual configuration properties can be reviewed [in the connectors configuration documentation](/self-managed/connectors-deployment/connectors-configuration.md#zeebe-broker-connection).
 
 1. Configure all other applications running inside the cluster and connecting to the Zeebe Gateway to also use TLS.
 
@@ -247,7 +247,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/opens
 
 #### Enable Enterprise components
 
-Some components are not enabled by default in this deployment. For more information on how to configure and enable these components, refer to [configuring Enterprise components and Connectors](/self-managed/setup/install.md#configuring-enterprise-components-and-connectors).
+Some components are not enabled by default in this deployment. For more information on how to configure and enable these components, refer to [configuring Enterprise components and connectors](/self-managed/setup/install.md#configuring-enterprise-components-and-connectors).
 
 #### Fill your deployment with actual values
 

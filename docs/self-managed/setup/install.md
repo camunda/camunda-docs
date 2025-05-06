@@ -40,7 +40,7 @@ The following charts will be installed as part of Camunda 8 Self-Managed:
 - **Tasklist**: Deploys the Tasklist component to work with user tasks.
 - **Optimize**: Deploys the Optimize component to analyze the historic process executions.
 - **Identity**: Deploys the Identity component responsible for authentication and authorization.
-- **Connectors**: Deploys the Connectors component responsible for inbound and outbound integration with external systems.
+- **Connectors**: Deploys the connectors component responsible for inbound and outbound integration with external systems.
 - **Elasticsearch**: Deploys an Elasticsearch cluster with two nodes.
 - **Web Modeler**: Deploys the Web Modeler component that allows you to model BPMN processes in a collaborative way.
   - _Note_: The chart is disabled by default and needs to be [enabled explicitly](#install-web-modeler).
@@ -293,7 +293,7 @@ Camunda 8 components without a valid license may display **Non-Production Licens
 
 ### Install Connectors
 
-The **Connector runtime** comes enabled by default. To start using Connectors, install Connector element templates. Learn more in our documentation for [Web Modeler](/components/connectors/manage-connector-templates.md) or [Desktop Modeler](/components/modeler/desktop-modeler/element-templates/configuring-templates.md).
+The **Connector runtime** comes enabled by default. To start using connectors, install connector element templates. Learn more in our documentation for [Web Modeler](/components/connectors/manage-connector-templates.md) or [Desktop Modeler](/components/modeler/desktop-modeler/element-templates/configuring-templates.md).
 
 Find all available configurable options at the official Camunda Helm [values docs](https://artifacthub.io/packages/helm/camunda/camunda-platform#connectors-parameters).
 
@@ -303,7 +303,7 @@ To disable Connectors, pass the `connectors.enabled: false` value when deploying
 
 #### Polling authentication mode
 
-Connectors use the [Operate API](/apis-tools/operate-api/overview.md) to fetch process definitions containing inbound Connectors. Depending on your Camunda architecture, you may want to choose one of the following values for the `inbound.mode`:
+Connectors use the [Operate API](/apis-tools/operate-api/overview.md) to fetch process definitions containing inbound connectors. Depending on your Camunda architecture, you may want to choose one of the following values for the `inbound.mode`:
 
 - `disabled` - Polling from Operate is disabled. Connector runtime will support only outbound interactions, such as HTTP REST calls.
 - `credentials` - Connector runtime will attempt to authenticate to the Operate API with password-based basic HTTP authentication.
