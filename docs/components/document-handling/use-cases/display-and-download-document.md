@@ -7,9 +7,9 @@ keywords: ["document handling"]
 
 In this section, learn how to build a form for document preview and download, and display and download a document from a user task in Tasklist.
 
-## Build a form for document preview and downloading
+## Build a form for document preview and download
 
-To display and allow downloading of a document you can use the [document preview component](/components/modeler/forms/form-element-library/forms-element-library-document-preview.md) in [forms](/components/modeler/forms/camunda-forms-reference.md).
+To display and allow downloading of a document you can use the [document preview component](/components/modeler/forms/form-element-library/forms-element-library-document-preview.md) in [forms](/components/modeler/forms/camunda-forms-reference.md). While this example focuses on [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md), you can also build a form for document preview and download in [Desktop Modeler](/components/modeler/desktop-modeler/index.md).
 
 :::note
 The document preview component offers previews in forms of PDF documents and images as the most common file types. Other document types are supported, but listed without the preview and show the file name with the option to download the file.
