@@ -131,15 +131,15 @@ To learn more about this feature, see [available authentication methods](/self-m
 
 <!-- https://github.com/camunda/product-hub/issues/2630 -->
 
-### Ad-hoc subprocess activation API & completion configuration <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span> {#adhocsubprocess}
+### Ad-hoc sub-process activation API & completion configuration <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span> {#adhocsubprocess}
 
 Agentic process orchestration enhancements include:
 
-- An optional `completionCondition` boolean expression for ad-hoc subprocesses that is evaluated every time an inner element is completed. A `cancelRemainingInstances` boolean attribute can also be configured to influence the ad-hoc subprocess behavior when the completion condition is met.
-- An [Activate activities within an ad-hoc subprocess](/apis-tools/camunda-api-rest/specifications/activate-ad-hoc-subprocess-activities.api.mdx) API used to activate selected activities within an ad-hoc subprocess.
-- A [Search activatable activities (alpha)](/apis-tools/camunda-api-rest/specifications/search-ad-hoc-subprocess-activities.api.mdx) API used to search for activatable activities within ad-hoc subprocesses.
+- An optional `completionCondition` boolean expression for ad-hoc sub-processes that is evaluated every time an inner element is completed. A `cancelRemainingInstances` boolean attribute can also be configured to influence the ad-hoc sub-process behavior when the completion condition is met.
+- An [Activate activities within an ad-hoc sub-process](/apis-tools/camunda-api-rest/specifications/activate-ad-hoc-subprocess-activities.api.mdx) API used to activate selected activities within an ad-hoc sub-process.
+- A [Search activatable activities (alpha)](/apis-tools/camunda-api-rest/specifications/search-ad-hoc-subprocess-activities.api.mdx) API used to search for activatable activities within ad-hoc sub-processes.
 
-To learn more about these features, see [ad-hoc subprocesses](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md).
+To learn more about these features, see [ad-hoc sub-processes](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md).
 
 <!-- https://github.com/camunda/product-hub/issues/2585 -->
 
