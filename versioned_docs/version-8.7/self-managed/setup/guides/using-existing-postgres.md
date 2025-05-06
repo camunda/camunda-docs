@@ -8,7 +8,7 @@ Camunda 8 Self-Managed has three components that use PostgreSQL:
 
 - Identity
 - Keycloak
-- WebModeler
+- Web Modeler
 
 For more details, review the [architecture](../../about-self-managed.md#architecture) documentation.
 
@@ -48,6 +48,8 @@ A secret for the existing PostgreSQL instance can be created like this:
 ```bash
 kubectl create secret generic camunda-psql-db --from-literal=password=examplePassword -n camunda
 ```
+
+This secret will exist outside the Helm chart and will not be effected on subsequent `helm upgrade` commands.
 
 ## Values file
 
@@ -90,3 +92,8 @@ identityKeycloak:
   postgresql:
     enabled: false
 ```
+
+## Common Pitfalls
+
+- If the database for keycloak is misconfigured, you will notice that other applications will output a `401` error code in the logs since they are not able to correctly authenticate against keycloak.
+- If you have not created the databases in your external PostgreSQL instance, then you will notice a `database missing` error in the logs of the respective component.
