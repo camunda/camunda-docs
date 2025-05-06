@@ -2,17 +2,19 @@
 id: prefix-elasticsearch-opensearch-indices
 title: "Prefix Elasticsearch and OpenSearch indices"
 sidebar_label: "Prefix Elasticsearch and OpenSearch indices"
-description: "Configure Elasticsearch and OpenSearch index prefixes to structure your data, and ensure data isolation."
+description: "Configure Elasticsearch and OpenSearch index prefixes to structure your data and ensure data isolation."
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
+Configure Elasticsearch and OpenSearch index prefixes to structure your data and ensure data isolation.
+
 ## Overview
 
 Index prefixes allow you to append a unique identifier to each search index, such as in Elasticsearch or OpenSearch, making it easier to organize and retrieve relevant information by structuring your data. With a consistent prefix, all related indices are easily identifiable, simplifying queries and data management.
 
-Using index prefixes in Camunda ensures data isolation by allowing multiple Camunda instances to run on a shared cluster without accessing each other’s data. This is crucial for maintaining separation in multi-instance and multi-tenant environments, and when testing different configurations.
+Use index prefixes in Camunda to ensure data isolation by allowing multiple Camunda instances to run on a shared cluster without accessing each other’s data. This is crucial for maintaining separation in multi-instance and multi-tenant environments, and when testing different configurations.
 
 :::note
 Changing the index prefix after a Camunda instance has been running will create new empty indices with the new prefix. There is no built-in migration support between old and new prefixes.
