@@ -331,25 +331,25 @@ module.exports = {
         {
           type: "doc",
           docId: "guides/introduction-to-camunda",
-          label: "Guides",
+          label: "Get started",
           position: "left",
         },
         {
           type: "doc",
           docId: "components/components-overview",
-          label: "Components",
-          position: "left",
-        },
-        {
-          type: "doc",
-          docId: "apis-tools/working-with-apis-tools",
-          label: "APIs & Tools",
+          label: "Using Camunda",
           position: "left",
         },
         {
           type: "doc",
           docId: "self-managed/about-self-managed",
           label: "Self-Managed",
+          position: "left",
+        },
+        {
+          type: "doc",
+          docId: "apis-tools/working-with-apis-tools",
+          label: "APIs & Tools",
           position: "left",
         },
         {

@@ -300,6 +300,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/search-users-for-group",
+          label: "Search group users (Work-in-Progress)",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/add-user-to-group",
           label: "Assign a user to a group (Work-in-Progress)",
           className: "api-method put",
@@ -543,6 +549,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/migrate-process-instances-batch-operation",
           label: "Create a batch operation to migrate process instances",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/modify-process-instances-batch-operation",
+          label: "Create a batch operation to modify process instances",
           className: "api-method post",
         },
         {
