@@ -77,6 +77,12 @@ Hubspot Connector enhancements include:
 
 To learn more about this Connector, see [HubSpot Connector](/components/connectors/out-of-the-box-connectors/hubspot.md).
 
+### Desktop Modeler settings <span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span>
+
+<!-- https://github.com/camunda/product-hub/issues/2491 -->
+
+The new **Settings** window in Desktop Modeler allows you to configure the application and customize your modeling experience. You can select your default execution platform version, along with other options that were previously only available as flags.
+
 ### FEEL Copilot (alpha) <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span> {#feelcopilot}
 
 <!-- https://github.com/camunda/product-hub/issues/2450 -->
