@@ -4,7 +4,7 @@ title: "Using existing PostgreSQL"
 description: "Learn how to use an Amazon OpenSearch Service instance in Camunda 8 Self-Managed deployment."
 ---
 
-Camunda 8 Self-Managed has three components that use PostgreSQL:
+Three Camunda 8 Self-Managed components use PostgreSQL:
 
 - Identity
 - Keycloak
@@ -14,11 +14,11 @@ For more details, review the [architecture](../../about-self-managed.md#architec
 
 This guide steps through using an existing PostgreSQL instance. By default, [Helm chart deployment](/self-managed/setup/overview.md) creates a new PostgreSQL instance, but it's possible to use an existing, external PostgreSQL Service instead.
 
-## Preparation
+## Prerequisites
 
-### Supported Version
+### Supported version
 
-To check the most supported version of PostgreSQL, please check the [supported environments](/reference/supported-environments.md) page
+To confirm the supported version of PostgreSQL, check the [supported environments](/reference/supported-environments.md) page.
 
 ### Authentication
 
@@ -31,7 +31,7 @@ Make sure you have the following information for your existing PostgreSQL instan
 
 ### Database setup
 
-Make sure to have created the relevant databases in your PostgreSQL instance. Here are the databases that we will create for this guide:
+Ensure you have created the relevant databases in your PostgreSQL instance. For this guide, we will create the following databases:
 
 ```SQL
 CREATE DATABASE "web-modeler";
@@ -39,9 +39,9 @@ CREATE DATABASE "keycloak";
 CREATE DATABASE "identity";
 ```
 
-### Creating Kubernetes Secrets
+### Creating Kubernetes secrets
 
-Once you have the above infromation, it is best to create a Kubernetes secret for the database password, so you do not have to refer to sensitive information in plain text within your values.yaml.
+Once you have confirmed the above, create a Kubernetes secret for the database password so you do not have to refer to sensitive information in plain text within your `values.yaml`.
 
 A secret for the existing PostgreSQL instance can be created like this:
 
@@ -49,7 +49,7 @@ A secret for the existing PostgreSQL instance can be created like this:
 kubectl create secret generic camunda-psql-db --from-literal=password=examplePassword -n camunda
 ```
 
-This secret will exist outside the Helm chart and will not be effected on subsequent `helm upgrade` commands.
+This secret will exist outside the Helm chart and will not be affected on subsequent `helm upgrade` commands.
 
 ## Values file
 
@@ -93,7 +93,7 @@ identityKeycloak:
     enabled: false
 ```
 
-## Common Pitfalls
+## Common pitfalls
 
-- If the database for keycloak is misconfigured, you will notice that other applications will output a `401` error code in the logs since they are not able to correctly authenticate against keycloak.
-- If you have not created the databases in your external PostgreSQL instance, then you will notice a `database missing` error in the logs of the respective component.
+- If the database for Keycloak is misconfigured, other applications will output a `401` error code in the logs as they are not able to correctly authenticate against Keycloak.
+- If you have not created the databases in your external PostgreSQL instance, a `database missing` error will output in the logs of the respective component.
