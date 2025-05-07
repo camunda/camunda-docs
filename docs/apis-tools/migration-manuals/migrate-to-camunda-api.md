@@ -145,7 +145,7 @@ The following conventions apply to all attributes:
   - `draft` - Draft variables are not supported in V2 anymore, see also the [save draft variables](#save-task-draft-variables) endpoint for further details.
 - Added attributes
   - `scopeKey` - Variables belong to a specific scope, for example, the process instance or the element instance of a user task. This value represents the scope the variables is related to.
-  - `processInstanceKey` - A variable belongs to process instance and this value represents the unique system identifier of that instance.
+  - `processInstanceKey` - A variable belongs to a process instance and this value represents the unique system identifier of that instance.
   - `tenantId` - Variables can belong to a dedicated tenant and this value represents the one it belongs to. See [multi-tenancy][] for further details.
 
 </TabItem>
@@ -350,6 +350,9 @@ The following conventions apply to all attributes:
   - `id` - Use `variableKey` as this refers to the unique system identifier of the variable.
 - Removed attributes
   - `draft` - Draft variables are not supported in V2 anymore, see also the [save draft variables](#save-task-draft-variables) endpoint for further details.
+- Added attributes
+  - `scopeKey` - Variables belong to a specific scope, for example, the process instance or the element instance of a user task. This value represents the scope the variables is related to.
+  - `processInstanceKey` - A variable belongs to a process instance and this value represents the unique system identifier of that instance.
 
 </TabItem>
 </Tabs>
