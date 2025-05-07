@@ -670,7 +670,9 @@ The following conventions apply to all attributes:
 
 <TabItem value='output-adjustments'>
 
-- Except for the response structure changes, all adjustments from [search variables for process instances](#search-variables-for-process-instances) apply.
+- All adjustments from [search variables for process instances](#search-variables-for-process-instances) apply, with the following exceptions:
+  - Response structure changes.
+  - `truncated` is removed because this endpoint always returns the full variable value.
 
 </TabItem>
 </Tabs>
