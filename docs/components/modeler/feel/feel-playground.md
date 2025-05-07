@@ -11,12 +11,13 @@ import PlaygroundIconWarningImg from './assets/feel-playground-validation-warnin
 import PlaygroundIconErrorImg from './assets/feel-playground-validation-error.png';
 import PlaygroundExampleInvalidImg from './assets/feel-playground-example-invalid-expression.png';
 import PlaygroundExampleJsonWarningImg from './assets/feel-playground-example-warning-json.png';
+import PlaygroundExampleJsonErrorImg from './assets/feel-playground-example-error-json.png';
 
 Use the FEEL Playground to validate and troubleshoot your FEEL expressions when modeling process diagrams in Web Modeler.
 
 ## About FEEL Playground
 
-When using the [FEEL expression language](/components/modeler/feel/what-is-feel.md), you must specify a valid expression. The FEEL Playground provides you with a space to test and validate your FEEL expressions with contextual sample data.
+When using the [FEEL expression language](/components/modeler/feel/what-is-feel.md) in Camunda, your FEEL expressions must be valid. The FEEL Playground allows you to test and validate your FEEL expressions using sample contextual data.
 
 The FEEL Playground is integrated into the popup FEEL editor:
 
@@ -31,7 +32,7 @@ The FEEL Playground is integrated into the popup FEEL editor:
 - **FEEL Copilot**: Open the [FEEL Copilot (alpha feature)](/components/early-access/alpha/alpha-features.md) to chat with the AI FEEL Copilot and get help with generating expressions.
 
 :::note
-The latest FEEL engine version is always used to validate FEEL expressions.
+The latest version of the [FEEL Scala engine](/components/modeler/feel/what-is-feel.md#feel-engines) is used to validate FEEL expressions in the FEEL Playground.
 :::
 
 ## Validate your FEEL expression {#validate}
@@ -56,23 +57,38 @@ FEEL Playground validation results are shown as follows for each panel:
 | <img src={PlaygroundIconErrorImg} alt="Error icon" className="inline-image" />     | Error   | <p>The validation did not complete due to an error.</p><p>For example, you might need to check your sample contextual data JSON is formed correctly.</p>                                                                                                                                                                                               |
 
 :::tip
-Hover over an icon to see more details about the status, such as why the FEEL expression is invalid for example.
+Hover over a status icon to see more information, such as the reason why the FEEL expression is invalid.
 :::
 
 ## Validation examples
-
-The following examples illustrate a few of the validation results you might obtain:
 
 ### Example valid FEEL expression
 
 <img src={PlaygroundExampleImg} alt="Example image showing the FEEL Playground Sample Data and Result of a FEEL expression validation" class="img-600"/>
 
-- In this example, both the FEEL expression syntax and the contextual data are valid, and the correct result is shown.
+- In this example, both the FEEL expression syntax and the contextual data are valid.
+- The expression is evaluated, and a valid "Approved" result is returned.
 
 ### Example invalid FEEL expression
 
 <img src={PlaygroundExampleInvalidImg} alt="Example image showing the FEEL Playground Sample Data and Result of a FEEL expression validation" class="img-600"/>
 
-- In this example, the FEEL expression shows an error status to indicate it did not pass validation.
-- The error is caused by an extra "else" at the end of the expression. Removing this would then result in a valid expression.
+- In this example, the **FEEL expression** shows an error status to indicate it did not pass validation.
+- The error is caused by an extraneous "else" at the end of the expression, meaning it is not a valid FEEL expression syntax.
 - Hovering over the icon provides more detail on what is causing the error, for example "Expression evaluation failed: Unrecognized token in Expression".
+
+### Example data warning
+
+<img src={PlaygroundExampleJsonWarningImg} alt="Example image showing the FEEL Playground Sample Data and Result of a FEEL expression validation" class="img-600"/>
+
+- In this example, the **Result** shows a warning status to indicate it did not pass validation.
+- The warning is caused by an invalid type in the contextual data, as the `hasJob` value must be a boolean value for the `hasJob = true` expression to be valid.
+- The warning text provides an explanation of why the warning occurred, and where to check for an error.
+
+### Example JSON error
+
+<img src={PlaygroundExampleJsonErrorImg} alt="Example image showing the FEEL Playground Sample Data and Result of a FEEL expression validation" class="img-600"/>
+
+- In this example, the **Context** shows an error status to indicate it did not pass validation.
+- The error is caused by an extra comma character after the last key-pair, which is not a valid JSON format.
+- Hovering over the icon provides more detail on what is causing the error, for example "Invalid JSON: Expected double-quoted property name in JSON at position 98 (line 7 column 1)".
