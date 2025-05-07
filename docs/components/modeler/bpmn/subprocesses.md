@@ -13,4 +13,4 @@ Currently supported elements:
 - [Embedded subprocess](embedded-subprocesses/embedded-subprocesses.md)
 - [Call activities](call-activities/call-activities.md)
 - [Event subprocess](event-subprocesses/event-subprocesses.md)
-- [Ad-hoc subprocess](ad-hoc-subprocesses/ad-hoc-subprocesses.md)
+- [Ad-hoc sub-process](ad-hoc-subprocesses/ad-hoc-subprocesses.md)

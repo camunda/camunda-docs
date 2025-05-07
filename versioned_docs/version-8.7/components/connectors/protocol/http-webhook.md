@@ -1,22 +1,22 @@
 ---
 id: http-webhook
-title: HTTP Webhook Connector
+title: HTTP Webhook connector
 sidebar_label: HTTP Webhook
 description: Start a process instance with your custom webhook configuration, triggered by an external HTTP call.
 ---
 
-The **HTTP Webhook Connector** is an inbound Connector that allows you to start a BPMN process instance triggered by external HTTP call.
+The **HTTP Webhook connector** is an inbound connector that allows you to start a BPMN process instance triggered by external HTTP call.
 
-## Create an HTTP Webhook Connector event
+## Create an HTTP Webhook connector event
 
-1. Start building your BPMN diagram. You can use HTTP Webhook Connector with either **Start Event** or **Intermediate Catch Event** building blocks.
+1. Start building your BPMN diagram. You can use HTTP Webhook connector with either **Start Event** or **Intermediate Catch Event** building blocks.
 2. Select the applicable element and change its template to an HTTP Webhook.
 3. Fill in all required properties.
 4. Complete your BPMN diagram.
 5. Deploy the diagram to activate the webhook.
 6. Navigate to the **Webhooks** tab in the properties panel to see the webhook URL.
 
-## Make your HTTP Webhook Connector executable
+## Make your HTTP Webhook connector executable
 
 1. In the **Webhook Configuration** section, configure the **Webhook ID**. By default, **Webhook ID** is pre-filled with a random value. This value will be part of the Webhook URL. You will find more details about HTTP Webhook URLs [below](#activate-the-http-webhook-connector-by-deploying-your-diagram).
 2. Configure [**HMAC authentication**](https://en.wikipedia.org/wiki/HMAC) if required in the **Authentication** section:
@@ -65,7 +65,7 @@ The **HTTP Webhook Connector** is an inbound Connector that allows you to start 
        Signature Data: `https://example.com/webhook{"id":123456,"name":"John Doe","age":30}`
        The `Signature Data` will then be used to calculate the HMAC signature using the provided secret key and hash algorithm.
 
-3. Configure authorization if required in the **Authorization** section. The HTTP Webhook Connector supports the following authorization methods:
+3. Configure authorization if required in the **Authorization** section. The HTTP Webhook connector supports the following authorization methods:
 
 - **Basic** - The incoming requests must contain an `Authorization` header that contains the word `Basic` followed by a space and a base64-encoded string username:password.
 
@@ -100,13 +100,13 @@ The **HTTP Webhook Connector** is an inbound Connector that allows you to start 
 The **Correlation** section allows you to configure the message correlation parameters.
 
 :::note
-The **Correlation** section is not applicable for the plain **start event** element template of the Webhook Connector. Plain **start events** are triggered by process instance creation and do not rely on message correlation.
+The **Correlation** section is not applicable for the plain **start event** element template of the Webhook connector. Plain **start events** are triggered by process instance creation and do not rely on message correlation.
 :::
 
 #### Correlation key
 
 - **Correlation key (process)** is a FEEL expression that defines the correlation key for the subscription. This corresponds to the **Correlation key** property of a regular **Message Intermediate Catch Event**.
-- **Correlation key (payload)** is a FEEL expression used to extract the correlation key from the incoming message. This expression is evaluated in the Connector Runtime and the result is used to correlate the message.
+- **Correlation key (payload)** is a FEEL expression used to extract the correlation key from the incoming message. This expression is evaluated in the connector Runtime and the result is used to correlate the message.
 
 For example, given that your correlation key is defined with `orderId` process variable, and the request body contains `{"orderId": "123"}`, your correlation key settings will look like this:
 
@@ -118,7 +118,7 @@ Learn more about correlation keys in the [messages guide](../../../concepts/mess
 #### Message ID expression
 
 The **Message ID expression** is an optional field that allows you to extract the message ID from the incoming request. The message ID serves as a unique identifier for the message and is used for message correlation.
-This expression is evaluated in the Connector Runtime and the result is used to correlate the message.
+This expression is evaluated in the connector Runtime and the result is used to correlate the message.
 
 In most cases, it is not necessary to configure the **Message ID expression**. However, it is useful if you want to ensure message deduplication or achieve a certain message correlation behavior.
 Learn more about how message IDs influence message correlation in the [messages guide](../../../concepts/messages#message-correlation-overview).
@@ -134,7 +134,7 @@ For example, if you want to set the message ID to the value of the `transactionI
 The **Message TTL** is an optional field that allows you to set the time-to-live (TTL) for the correlated messages. TTL defines the time for which the message is buffered in Zeebe before being correlated to the process instance (if it can't be correlated immediately).
 The value is specified as an ISO 8601 duration. For example, `PT1H` sets the TTL to one hour. Learn more about the TTL concept in Zeebe in the [message correlation guide](../../../concepts/messages#message-buffering).
 
-## Activate the HTTP Webhook Connector by deploying your diagram
+## Activate the HTTP Webhook connector by deploying your diagram
 
 Once you click the **Deploy** button, your HTTP Webhook will be activated and publicly available.
 You can trigger it by making a POST request to the generated URL.
@@ -143,23 +143,23 @@ URLs of the exposed HTTP Webhooks adhere to the following pattern:
 
 `http(s)://<base URL>/inbound/<webhook ID>>`
 
-- `<base URL>` is the URL of Connectors component deployment. When using the Camunda 8 SaaS offering, this will typically contain your **region Id** and **cluster Id**, found in your client credentials under the **API** tab within your cluster.
-- `<webhook ID>` is the ID (path) you configured in the properties of your HTTP Webhook Connector.
+- `<base URL>` is the URL of connectors component deployment. When using the Camunda 8 SaaS offering, this will typically contain your **region Id** and **cluster Id**, found in your client credentials under the **API** tab within your cluster.
+- `<webhook ID>` is the ID (path) you configured in the properties of your HTTP Webhook connector.
 
-If you make changes to your HTTP Webhook Connector configuration, you need to redeploy the BPMN diagram for the changes to take effect.
+If you make changes to your HTTP Webhook connector configuration, you need to redeploy the BPMN diagram for the changes to take effect.
 
-When you click on the event with HTTP Webhook Connector applied to it, a new **Webhooks** tab will appear in the properties panel.
-This tab displays the URL of the HTTP Webhook Connector for every cluster where you have deployed your BPMN diagram.
+When you click on the event with HTTP Webhook connector applied to it, a new **Webhooks** tab will appear in the properties panel.
+This tab displays the URL of the HTTP Webhook connector for every cluster where you have deployed your BPMN diagram.
 
 :::note
 The **Webhooks** tab is only supported in Web Modeler as part of the Camunda 8 SaaS offering.
-You can still use HTTP Webhook Connector in Desktop Modeler, or with your Camunda 8 Self-Managed.
-In that case, HTTP Webhook Connector deployments and URLs will not be displayed in Modeler.
+You can still use HTTP Webhook connector in Desktop Modeler, or with your Camunda 8 Self-Managed.
+In that case, HTTP Webhook connector deployments and URLs will not be displayed in Modeler.
 :::
 
 ### Example
 
-Give a use-case when you need to configure a GitHub webhook with an **HTTP Webhook Connector** in such a way that: (1) your BPMN process starts on every opened PR, and (2) the PR URL is exposed as a process variable.
+Give a use-case when you need to configure a GitHub webhook with an **HTTP Webhook connector** in such a way that: (1) your BPMN process starts on every opened PR, and (2) the PR URL is exposed as a process variable.
 Let's say you choose `mySecretKey` as a shared secret passphrase. GitHub [declares](https://docs.github.com/en/developers/webhooks-and-events/webhooks/securing-your-webhooks) that they use `X-Hub-Signature-256` header for `SHA-256` HMAC.
 Therefore, you would need to set the following:
 
@@ -176,7 +176,7 @@ Therefore, you would need to set the following:
 ### How to configure API key authorization
 
 External callers can provide an API key anywhere in the requests. Some webhook providers use an `Authorization` header, while others pass the API key in the request body.
-To support any scenario, you can configure the HTTP Webhook Connector to extract the API key from the request.
+To support any scenario, you can configure the HTTP Webhook connector to extract the API key from the request.
 
 Use the **API Key locator** field to provide a FEEL expression that will be evaluated against the request to extract the API key.
 The result of this expression will be used as the API key and compared against the expected API key value.
@@ -258,15 +258,15 @@ In this particular case, the if statement is evaluated to true, the extracted ro
 
 If you provide _["admin"]_ for **Required roles**, the message _can be correlated_.
 
-If you provide _["superadmin"]_ or _["admin","superadmin"]_, for **Required roles**, for example, the message _can NOT be correlated_ and the Connector will throw an exception.
+If you provide _["superadmin"]_ or _["admin","superadmin"]_, for **Required roles**, for example, the message _can NOT be correlated_ and the connector will throw an exception.
 
 :::note
-For GitHub, there is a simplified [GitHub Webhook Connector](/components/connectors/out-of-the-box-connectors/github.md).
+For GitHub, there is a simplified [GitHub Webhook connector](/components/connectors/out-of-the-box-connectors/github.md).
 :::
 
-## Return data from your HTTP Webhook Connector
+## Return data from your HTTP Webhook connector
 
-Below, find several ways to return data from your Webhook Connector.
+Below, find several ways to return data from your Webhook connector.
 
 ### Verification expression
 
@@ -302,15 +302,15 @@ You can also use FEEL expressions to modify the data you return.
 ### Response expression
 
 :::note
-Prior to 8.6, the HTTP Webhook Connector supported a [response body expression](</versioned_docs/version-8.5/components/connectors/protocol/http-webhook.md#Response Body Expression>).
+Prior to 8.6, the HTTP Webhook connector supported a [response body expression](</versioned_docs/version-8.5/components/connectors/protocol/http-webhook.md#Response Body Expression>).
 As of 8.6, this was replaced with a more powerful construct that allows control over
 not only the response body, but also the headers and the HTTP status returned by
-the Connector.
+the connector.
 :::
 
 #### Use the request
 
-You can use a response expression to return data after the webhook has been invoked. You can use FEEL to return the request body, headers, and the HTTP status to the client invoking the Webhook Connector endpoint.
+You can use a response expression to return data after the webhook has been invoked. You can use FEEL to return the request body, headers, and the HTTP status to the client invoking the Webhook connector endpoint.
 
 For example, given a webhook request with the payload body:
 
@@ -357,10 +357,10 @@ You can also use FEEL expressions to modify the data you return.
 
 #### Use the `correlation` object
 
-When using the Webhook Connector with a start event that correlates a message, you can access the `correlation` object in the response expression.
+When using the Webhook connector with a start event that correlates a message, you can access the `correlation` object in the response expression.
 In addition to the `request` object you have access to the `correlation` result.
 
-The data available via the `correlation` object depends on the type of BPMN element you are using the Webhook Connector with.
+The data available via the `correlation` object depends on the type of BPMN element you are using the Webhook connector with.
 
 A start event with a message definition uses message publishing internally to correlate an incoming request with Zeebe. A successful correlation will therefore lead to a published message and the `correlation` object will contain the following properties:
 

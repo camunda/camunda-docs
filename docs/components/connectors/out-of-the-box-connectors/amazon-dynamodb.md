@@ -1,30 +1,30 @@
 ---
 id: amazon-dynamodb
 sidebar_label: AWS DynamoDB
-title: Amazon DynamoDB Connector
-description: Use the Amazon DynamoDB Connector to connect your BPMN service with Amazon Web Service's DynamoDB Service, and work with tables and items using this service.
+title: Amazon DynamoDB connector
+description: Use the Amazon DynamoDB connector to connect your BPMN service with Amazon Web Service's DynamoDB Service, and work with tables and items using this service.
 ---
 
-The **Amazon DynamoDB Connector** allows you to connect your BPMN service with Amazon Web Service's [DynamoDB Service](https://aws.amazon.com/dynamodb/). This can be useful for performing CRUD operations on Amazon DynamoDB tables from within a BPMN process.
+The **Amazon DynamoDB connector** allows you to connect your BPMN service with Amazon Web Service's [DynamoDB Service](https://aws.amazon.com/dynamodb/). This can be useful for performing CRUD operations on Amazon DynamoDB tables from within a BPMN process.
 
 ## Prerequisites
 
-To use the **Amazon DynamoDB Connector**, you need to have an AWS account with an access key and secret key to access DynamoDB, as well as a region where your DynamoDB instance is located. You can create an account and obtain the access and secret keys from the [AWS Console](https://aws.amazon.com/console/).
+To use the **Amazon DynamoDB connector**, you need to have an AWS account with an access key and secret key to access DynamoDB, as well as a region where your DynamoDB instance is located. You can create an account and obtain the access and secret keys from the [AWS Console](https://aws.amazon.com/console/).
 
 :::note
 Use Camunda secrets to store credentials so you don't expose sensitive information directly from the process. Refer to [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
 :::
 
-## Create an Amazon DynamoDB Connector task
+## Create an Amazon DynamoDB connector task
 
 import ConnectorTask from '../../../components/react-components/connector-task.md'
 
 <ConnectorTask/>
 
-## Make your Amazon DynamoDB Connector executable
+## Make your Amazon DynamoDB connector executable
 
-To work with **Amazon DynamoDB Connector**, choose the required operation type in the **Operation** section and complete the
-mandatory fields highlighted in red in the Connector properties panel on the right side of the screen.
+To work with **Amazon DynamoDB connector**, choose the required operation type in the **Operation** section and complete the
+mandatory fields highlighted in red in the connector properties panel on the right side of the screen.
 
 :::note
 All the mandatory and non-mandatory fields depending on the authentication selection you choose are covered in the upcoming sections.
@@ -59,24 +59,24 @@ Choose one of the following methods:
 
 Choose an applicable authentication type from the **Authentication** dropdown. Learn more about authentication types in the related [appendix entry](#aws-authentication-types).
 
-If you select **credentials** to access the **Amazon DynamoDB service**, the Connector requires the appropriate credentials. The following authentication options are available:
+If you select **credentials** to access the **Amazon DynamoDB service**, the connector requires the appropriate credentials. The following authentication options are available:
 
 - **Access key**: Provide an access key of a user with permissions to the Amazon DynamoDB service.
 - **Secret key**: Provide the secret key of the user with the access key provided above.
 
-The Access Key and Secret Key are required properties and must be provided to use the Connector. If these properties are not set, the Connector will not be able to authenticate with the [DynamoDB Service](https://aws.amazon.com/dynamodb/).
+The Access Key and Secret Key are required properties and must be provided to use the connector. If these properties are not set, the connector will not be able to authenticate with the [DynamoDB Service](https://aws.amazon.com/dynamodb/).
 
 For more information on authentication and security in Amazon DynamoDB, refer to the [AWS documentation](https://docs.aws.amazon.com/dynamodb/index.html).
 
 ## Configuration
 
-The **Region** property in the **Configuration** section specifies the AWS region in which the DynamoDB table exists or will be created. This property is required and must be set to use the Connector.
+The **Region** property in the **Configuration** section specifies the AWS region in which the DynamoDB table exists or will be created. This property is required and must be set to use the connector.
 
 For more information on AWS regions, refer to the [AWS documentation](https://docs.aws.amazon.com/general/latest/gr/rande.html).
 
 ## Input
 
-The **Input** section of the **Amazon DynamoDB Connector** specifies the input data for the [selected operation](#operation). The input data varies depending on the [operation type](#operation) and [method](#method) selected.
+The **Input** section of the **Amazon DynamoDB connector** specifies the input data for the [selected operation](#operation). The input data varies depending on the [operation type](#operation) and [method](#method) selected.
 
 ### Table operations
 
@@ -158,7 +158,7 @@ For the **Table** operation type, the following input data is required:
 ### Item operations
 
 :::note
-The **Amazon DynamoDB Connector** does not currently support binary data types. If binary data is input during the creation or update of items, it will be saved as a string.
+The **Amazon DynamoDB connector** does not currently support binary data types. If binary data is input during the creation or update of items, it will be saved as a string.
 
 When updating items, if an attribute of type SET is updated, it will be overwritten and saved as a list type. Consider these limitations to prevent unintended data structure modifications in your DynamoDB tables.
 :::
@@ -244,9 +244,9 @@ When updating items, if an attribute of type SET is updated, it will be overwrit
 
 ## Response Mapping
 
-When using the DynamoDB Connector, the response from the DynamoDB Connector will be available in a temporary local `response` variable. This variable can be mapped to the process by specifying the **Result Variable**.
+When using the DynamoDB connector, the response from the DynamoDB connector will be available in a temporary local `response` variable. This variable can be mapped to the process by specifying the **Result Variable**.
 
-For example, if you use the **Update Item** method in the DynamoDB Connector, the response may look like this:
+For example, if you use the **Update Item** method in the DynamoDB connector, the response may look like this:
 
 ```json
 {
@@ -269,7 +269,7 @@ In this example, the `response` variable contains an `Attributes` object with th
 
 The following fields are available in the `response` variable:
 
-- `action`: The action that was performed by the DynamoDB Connector.
+- `action`: The action that was performed by the DynamoDB connector.
 - `status`: The status of the response, which will be "OK" if the operation was successful.
 - `response`: The response from the DynamoDB service, which will contain the updated attributes of the specified item.
 
@@ -292,17 +292,17 @@ The syntax for accessing attributes in the **Result Expression** may vary depend
 
 ## Error handling
 
-The **Amazon DynamoDB Connector** may throw the following exceptions:
+The **Amazon DynamoDB connector** may throw the following exceptions:
 
 - AwsDynamoDbConnectionException: Thrown if there is an error connecting to DynamoDB.
 - AwsDynamoDbExecutionException: Thrown if there is an error executing a DynamoDB operation.
-- AwsDynamoDbConfigurationException: Thrown if the Connector is not properly configured.
+- AwsDynamoDbConfigurationException: Thrown if the connector is not properly configured.
 
 All of these checked exceptions are wrapped in a `RuntimeException`, so be prepared to handle this type of exception as well.
 
 ## Troubleshooting
 
-If you are having issues with the **Amazon DynamoDB Connector**, try the following:
+If you are having issues with the **Amazon DynamoDB connector**, try the following:
 
 - Ensure your AWS credentials are correct.
 - Ensure your DynamoDB table exists and is located in the specified region.
@@ -312,9 +312,9 @@ If you are having issues with the **Amazon DynamoDB Connector**, try the followi
 
 For more information on Amazon DynamoDB, visit the [official documentation](https://docs.aws.amazon.com/dynamodb/).
 
-## Using DynamoDB Connector best practice
+## Using DynamoDB connector best practice
 
-When using the DynamoDB Connector in a BPMN process, it is important to keep in mind that there is no guarantee that a requested item will be retrieved or updated immediately. In this case, it is recommended to build your BPMN diagram to periodically retry polling until the item is available.
+When using the DynamoDB connector in a BPMN process, it is important to keep in mind that there is no guarantee that a requested item will be retrieved or updated immediately. In this case, it is recommended to build your BPMN diagram to periodically retry polling until the item is available.
 
 :::note
 To avoid performance issues, it is recommended to limit the number of retries.
@@ -326,7 +326,7 @@ To learn more about implementing retry logic in your BPMN diagram, you can refer
 
 ### AWS authentication types
 
-There are two options to authenticate the Connector with AWS:
+There are two options to authenticate the connector with AWS:
 
 - Choose **Credentials** in the **Authentication** dropdown if you have a valid pair of access and secret keys provided by your AWS account administrator. This option is applicable for both SaaS and Self-Managed users.
 - Choose **Default Credentials Chain (Hybrid/Self-Managed only)** in the **Authentication** dropdown if your system is configured as an implicit authentication mechanism, such as role-based authentication, credentials supplied via environment variables, or files on target host. This option is applicable only for Self-Managed or hybrid distribution. This approach uses the [Default Credential Provider Chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html) to resolve required credentials.
