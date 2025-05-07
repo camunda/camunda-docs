@@ -337,5 +337,6 @@ The record types that continue to be exported by default are the following:
 - `VARIABLE`
 - `USER_TASK`
 - `INCIDENT`
+- `JOB`
 
 To export other record types, enable the [includeEnabledRecords](#configuration) configuration property.
