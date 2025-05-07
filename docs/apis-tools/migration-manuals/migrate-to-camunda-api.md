@@ -139,9 +139,8 @@ The following conventions apply to all attributes:
 - Response structure changes as outlined in [general changes][].
 - Renamed attributes
   - `id` - Use `variableKey` as this refers to the unique system identifier of the variable.
-  - `value` - Use `fullValue` as this represents the full variable value in case the `value` is only a preview due to size constraints. If the `value` is not a preview, the `fullValue` is empty.
-  - `previewValue` - Use `value` as this always represents the variable value. This can be a preview value due to size constraints. In that case, the `fullValue` contains the full variable value.
-  - `isValueTruncated` - Use `isTruncated` as a replacement
+  - `previewValue` - Use `value` as this always represents the variable value. This can be a truncated value due to size constraints.
+  - `isValueTruncated` - Use `isTruncated` as a replacement. If the value of `isTruncated` is `true` and you need the full value, please see the [get a variable](#get-a-variable) endpoint.
 - Removed attributes
   - `draft` - Draft variables are not supported in V2 anymore, see also the [save draft variables](#save-task-draft-variables) endpoint for further details.
 - Added attributes
@@ -647,7 +646,6 @@ The following conventions apply to all attributes:
   - `processInstanceKey` of type `int64` - This is now of type `string`.
   - `scopeKey` of type `int64` - This is now of type `string`.
   - `truncated` - Use `isTruncated` instead.
-  - `value` - If `isTruncated` is `true`, use `value` for the truncated value or `fullValue` for the full value. If `isTruncated` is `false` use `value` for the full value.
 
 </TabItem>
 </Tabs>
