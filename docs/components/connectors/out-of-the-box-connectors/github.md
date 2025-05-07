@@ -1,6 +1,6 @@
 ---
 id: github
-title: GitHub Connector
+title: GitHub connector
 sidebar_label: GitHub
 description: Manage GitHub issues and releases from your BPMN process.
 ---
@@ -10,24 +10,24 @@ import TabItem from "@theme/TabItem";
 
 <Tabs groupId="github" defaultValue="outbound" queryString values={
 [
-{label: 'GitHub Connector', value: 'outbound' },
-{label: 'GitHub Webhook Connector', value: 'inbound' }
+{label: 'GitHub connector', value: 'outbound' },
+{label: 'GitHub Webhook connector', value: 'inbound' }
 ]}>
 
 <TabItem value='outbound'>
 
-The **GitHub Connector** is an outbound Connector that allows you to connect your BPMN service with [GitHub](https://github.com/) to manage [GitHub](https://github.com/) issues and releases.
+The **GitHub connector** is an outbound connector that allows you to connect your BPMN service with [GitHub](https://github.com/) to manage [GitHub](https://github.com/) issues and releases.
 
 ## Prerequisites
 
-To use the **GitHub Connector**, you must have a GitHub instance and an [access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) of a user or a service account on whose behalf a BPMN process will be executed.
+To use the **GitHub connector**, you must have a GitHub instance and an [access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) of a user or a service account on whose behalf a BPMN process will be executed.
 
 :::note
 Use Camunda secrets to avoid exposing your GitHub access token credentials as plain text.
 Refer to our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
 :::
 
-## Create a GitHub Connector task
+## Create a GitHub connector task
 
 import ConnectorTask from '../../../components/react-components/connector-task.md'
 
@@ -39,7 +39,7 @@ In the **Authentication** section, provide a **GitHub access token**.
 
 ## Select operation to execute
 
-The **GitHub Connector** currently supports the following operations.
+The **GitHub connector** currently supports the following operations.
 
 ### Issues
 
@@ -270,27 +270,27 @@ The **GitHub Connector** currently supports the following operations.
 - **Page:** The page number of the results to fetch.
 - **Results per page:** The number of results per page.
 
-## Handle Connector response
+## Handle connector response
 
-The **GitHub Connector** is a protocol Connector, meaning it is built on top of the **HTTP REST Connector**, therefore
+The **GitHub connector** is a protocol connector, meaning it is built on top of the **HTTP REST connector**, therefore
 handling response is still applicable [as described](/components/connectors/protocol/rest.md#response).
 
 </TabItem>
 
 <TabItem value='inbound'>
 
-The **GitHub Webhook Connector** is an inbound Connector that allows you to start a BPMN process instance triggered by a [GitHub event](https://docs.github.com/en/developers/webhooks-and-events/webhooks/about-webhooks).
+The **GitHub Webhook connector** is an inbound connector that allows you to start a BPMN process instance triggered by a [GitHub event](https://docs.github.com/en/developers/webhooks-and-events/webhooks/about-webhooks).
 
-## Create a GitHub Webhook Connector task
+## Create a GitHub Webhook connector task
 
-1. Start building your BPMN diagram. You can use GitHub Webhook Connector with either **Start Event** or **Intermediate Catch Event** building blocks.
+1. Start building your BPMN diagram. You can use GitHub Webhook connector with either **Start Event** or **Intermediate Catch Event** building blocks.
 2. Select the applicable element and change its template to a GitHub Webhook.
 3. Fill in all required properties.
 4. Complete your BPMN diagram.
 5. Deploy the diagram to activate the webhook.
 6. Navigate to the **Webhooks** tab in the properties panel on the right side of the screen to observe the webhook URL.
 
-## Make your GitHub Webhook Connector for receiving messages executable
+## Make your GitHub Webhook connector for receiving messages executable
 
 1. In the **Webhook Configuration** section, configure the **Webhook ID**. By default, **Webhook ID** is pre-filled with a random value. This value will be part of the Webhook URL. You will find more details about GitHub Webhook URLs [below](#activate-the-github-webhook-connector-by-deploying-your-diagram).
 2. Set the **GitHub secret**. This is a shared secret key that has to be defined in both your BPMN and GitHub webhook configuration page. The value is used to calculate HMAC authentication signature.
@@ -310,13 +310,13 @@ The **GitHub Webhook Connector** is an inbound Connector that allows you to star
 The **Correlation** section allows you to configure the message correlation parameters.
 
 :::note
-The **Correlation** section is not applicable for the plain **start event** element template of the GitHub Webhook Connector. Plain **start events** are triggered by process instance creation and do not rely on message correlation.
+The **Correlation** section is not applicable for the plain **start event** element template of the GitHub Webhook connector. Plain **start events** are triggered by process instance creation and do not rely on message correlation.
 :::
 
 ### Correlation keys
 
 - **Correlation key (process)** is a FEEL expression that defines the correlation key for the subscription. This corresponds to the **Correlation key** property of a regular **message intermediate catch event**.
-- **Correlation key (payload)** is a FEEL expression used to extract the correlation key from the incoming message. This expression is evaluated in the Connector Runtime and the result is used to correlate the message.
+- **Correlation key (payload)** is a FEEL expression used to extract the correlation key from the incoming message. This expression is evaluated in the connector Runtime and the result is used to correlate the message.
 
 For example, given that your correlation key is defined with `pullRequestId` process variable, and the request body contains `{"pull_request": {"id": 123}}`, your correlation key settings will look like this:
 
@@ -328,7 +328,7 @@ Learn more about correlation keys in the [messages guide](../../../concepts/mess
 #### Message ID expression
 
 The **Message ID expression** is an optional field that allows you to extract the message ID from the incoming message. The message ID serves as a unique identifier for the message and is used for message correlation.
-This expression is evaluated in the Connector Runtime and the result is used to correlate the message.
+This expression is evaluated in the connector Runtime and the result is used to correlate the message.
 
 In most cases, it is not necessary to configure the **Message ID expression**. However, it is useful if you want to ensure message deduplication or achieve certain message correlation behavior.
 Learn more about how message IDs influence message correlation in the [messages guide](../../../concepts/messages#message-correlation-overview).
@@ -344,7 +344,7 @@ For example, if you want to set the message ID to the value of the `pull_request
 The **Message TTL** is an optional field that allows you to set the time-to-live (TTL) for the correlated messages. TTL defines the time for which the message is buffered in Zeebe before being correlated to the process instance (if it can't be correlated immediately).
 The value is specified as an ISO 8601 duration. For example, `PT1H` sets the TTL to one hour. Learn more about the TTL concept in Zeebe in the [message correlation guide](../../../concepts/messages#message-buffering).
 
-## Activate the GitHub Webhook Connector by deploying your diagram
+## Activate the GitHub Webhook connector by deploying your diagram
 
 Once you click the **Deploy** button, your GitHub Webhook will be activated and publicly available.
 
@@ -352,18 +352,18 @@ URLs of the exposed GitHub Webhooks adhere to the following pattern:
 
 `http(s)://<base URL>/inbound/<webhook ID>>`
 
-- `<base URL>` is the URL of Connectors component deployment. When using the Camunda 8 SaaS offering, this will typically contain your **region Id** and **cluster Id**, found in your client credentials under the **API** tab within your cluster.
-- `<webhook ID>` is the ID (path) you configured in the properties of your GitHub Webhook Connector.
+- `<base URL>` is the URL of connectors component deployment. When using the Camunda 8 SaaS offering, this will typically contain your **region Id** and **cluster Id**, found in your client credentials under the **API** tab within your cluster.
+- `<webhook ID>` is the ID (path) you configured in the properties of your GitHub Webhook connector.
 
-If you make changes to your GitHub Webhook Connector configuration, you need to redeploy the BPMN diagram for the changes to take effect.
+If you make changes to your GitHub Webhook connector configuration, you need to redeploy the BPMN diagram for the changes to take effect.
 
-When you click on the event with GitHub Webhook Connector applied to it, a new **Webhooks** tab will appear in the properties panel.
-This tab displays the URL of the GitHub Webhook Connector for every cluster where you have deployed your BPMN diagram.
+When you click on the event with GitHub Webhook connector applied to it, a new **Webhooks** tab will appear in the properties panel.
+This tab displays the URL of the GitHub Webhook connector for every cluster where you have deployed your BPMN diagram.
 
 :::note
 The **Webhooks** tab is only supported in Web Modeler as part of the Camunda 8 SaaS offering.
-You can still use GitHub Webhook Connector in Desktop Modeler, or with your Camunda 8 Self-Managed.
-In that case, GitHub Webhook Connector deployments and URLs will not be displayed in Modeler.
+You can still use GitHub Webhook connector in Desktop Modeler, or with your Camunda 8 Self-Managed.
+In that case, GitHub Webhook connector deployments and URLs will not be displayed in Modeler.
 :::
 
 ## Configure GitHub

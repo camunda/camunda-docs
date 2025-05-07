@@ -12,7 +12,7 @@ Find technical documentation for our library of prebuilt Camunda connectors.
 <SearchableTable />
 
 :::tip
-Don't see the connector you need? Build your own [custom Connector](/components/connectors/custom-built-connectors/build-connector.md), or explore the [Camunda MarketPlace](https://marketplace.camunda.com/) for more connectors developed by Camunda, Partners, and the Community.
+Don't see the connector you need? Build your own [custom connector](/components/connectors/custom-built-connectors/build-connector.md), or explore the [Camunda MarketPlace](https://marketplace.camunda.com/) for more connectors developed by Camunda, Partners, and the Community.
 :::
 
 <Marketplace/>

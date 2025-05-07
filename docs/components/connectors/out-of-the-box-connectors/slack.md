@@ -1,6 +1,6 @@
 ---
 id: slack
-title: Slack Connector
+title: Slack connector
 sidebar_label: Slack
 description: Send messages to channels or users in your Slack workspace from your BPMN process.
 ---
@@ -16,21 +16,21 @@ import TabItem from "@theme/TabItem";
 
 <TabItem value='outbound'>
 
-The **Slack Connector** is an outbound Connector that allows you to send messages to channels or users in your [Slack](https://slack.com) workspace from your BPMN process.
+The **Slack connector** is an outbound connector that allows you to send messages to channels or users in your [Slack](https://slack.com) workspace from your BPMN process.
 
 ## Prerequisites
 
-To use the Slack Connector, a Slack app must be registered with the Slack workspace you would like to send messages to. A respective OAuth token needs to be configured as a secret in your cluster. Follow [these steps in the appendix](#appendix) to learn how to set this up.
+To use the Slack connector, a Slack app must be registered with the Slack workspace you would like to send messages to. A respective OAuth token needs to be configured as a secret in your cluster. Follow [these steps in the appendix](#appendix) to learn how to set this up.
 
-## Create a Slack Connector task
+## Create a Slack connector task
 
 import ConnectorTask from '../../../components/react-components/connector-task.md'
 
 <ConnectorTask/>
 
-## Make your Slack Connector executable
+## Make your Slack connector executable
 
-To make the **Slack Connector** executable, fill out the mandatory fields highlighted in red in the properties panel on the right side of the screen.
+To make the **Slack connector** executable, fill out the mandatory fields highlighted in red in the properties panel on the right side of the screen.
 
 ### Authentication
 
@@ -109,7 +109,7 @@ The result of the endpoint must then be assigned to a variable in **Start Proces
 :::
 
 :::note
-Starting from version 8.7.0, the Slack Connector works with document handling to support adding attachments and increasing template versions. See additional details and limitations in [document handling](/components/concepts/document-handling.md).
+Starting from version 8.7.0, the Slack connector works with document handling to support adding attachments and increasing template versions. See additional details and limitations in [document handling](/components/concepts/document-handling.md).
 :::
 
 The **Channel/User Name** and **Message** can either be given [static values](/components/concepts/expressions.md#expressions-vs-static-values), or FEEL expressions. FEEL expressions can be used to [access process variables or dynamically create values](/components/concepts/expressions.md). This can be handy if a process variable is used to store the relevant channel or if the message needs to be composed dynamically, for example:
@@ -134,7 +134,7 @@ Slack's [guidance on formatting](https://api.slack.com/reference/surfaces/format
 
 ## Slack API response
 
-The **Slack Connector** exposes the Slack API response as a [local variable](/components/concepts/variables.md#variable-scopes) called `response`.
+The **Slack connector** exposes the Slack API response as a [local variable](/components/concepts/variables.md#variable-scopes) called `response`.
 Response contents are method-specific.
 
 ### Create channel
@@ -178,10 +178,10 @@ You can use an Output Mapping to map the response:
 
 ## Appendix
 
-To use the **Slack Connector**, the following prerequisites need to be set up.
+To use the **Slack connector**, the following prerequisites need to be set up.
 
-1. [Slack workspace](#use-a-well-known-slack-workspace) - The workspace the **Slack Connector** will communicate with.
-2. [Slack basic app with bot token configured](#configure-a-basic-slack-app) - The **Slack Connector** will communicate through this Slack app with the workspace. You can consider the Slack app as _Slack bot representing the Camunda platform_.
+1. [Slack workspace](#use-a-well-known-slack-workspace) - The workspace the **Slack connector** will communicate with.
+2. [Slack basic app with bot token configured](#configure-a-basic-slack-app) - The **Slack connector** will communicate through this Slack app with the workspace. You can consider the Slack app as _Slack bot representing the Camunda platform_.
 3. [Slack bot token stored as secret](#store-slack-bot-token-as-secret) - The secret will store the Slack bot token and can be used to reference it from BPMN processes without revealing it in the BPMN `xml`.
 
 ### Use a well-known Slack workspace
@@ -194,7 +194,7 @@ A Slack workspace consists of channels in which workspace members can communicat
 You can only install a Slack app to a workspace in which you are a member or that you own. It is not possible if you have guest-only permissions. See the [guide to apps in Slack](https://slack.com/help/articles/360001537467-Guide-to-apps-in-Slack) for more details.
 :::
 
-The **Slack Connector** communicates through a Slack app with a concrete Slack workspace. For example, when sending a Slack message, the message will be posted by the Slack app. For the **Slack Connector** to work, you need to perform the following steps:
+The **Slack connector** communicates through a Slack app with a concrete Slack workspace. For example, when sending a Slack message, the message will be posted by the Slack app. For the **Slack connector** to work, you need to perform the following steps:
 
 1. [Create a Slack app](https://api.slack.com/apps).
 2. [Request required scopes](https://api.slack.com/scopes) - The scopes represent what your app can and cannot do (for example, posting messages).
@@ -203,34 +203,34 @@ The **Slack Connector** communicates through a Slack app with a concrete Slack w
 3. [Install the Slack app to your workspace](https://api.slack.com/authentication/basics#installing).
 4. [Invite the Slack app to your workspace via /invite](https://slack.com/help/articles/201259356-Slash-commands-in-Slack#h_01EPZ2Z81EJ67RA2BGDKZ9M1AN).
 
-Once the app is set up, copy the [bot token](https://api.slack.com/authentication/token-types) of the app. It is represented as a string and begins with `xoxb-`. This is the OAuth Bearer token, which the **Slack Connector** will use to authenticate with the Slack API.
+Once the app is set up, copy the [bot token](https://api.slack.com/authentication/token-types) of the app. It is represented as a string and begins with `xoxb-`. This is the OAuth Bearer token, which the **Slack connector** will use to authenticate with the Slack API.
 
 ### Store Slack bot token as secret
 
-The **Slack Connector** uses an OAuth bearer token (for example, the Slack app bot token) to authenticate with the Slack API.
+The **Slack connector** uses an OAuth bearer token (for example, the Slack app bot token) to authenticate with the Slack API.
 
 We advise you to keep your Slack bot token safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
 1. Follow our [guide for creating secrets](/components/console/manage-clusters/manage-secrets.md).
-2. Name your secret `SLACK_OAUTH_TOKEN` so you can reference it later in the Connector.
+2. Name your secret `SLACK_OAUTH_TOKEN` so you can reference it later in the connector.
 
 </TabItem>
 
 <TabItem value='inbound'>
 
-The **Slack inbound Connector** is a Connector that allows you to start or continue
+The **Slack inbound connector** is a connector that allows you to start or continue
 a BPMN process triggered by a [Slack](https://slack.com/) message.
 
-## Create a Slack inbound Connector task
+## Create a Slack inbound connector task
 
-1. Start building your BPMN diagram. You can use the **Slack inbound Connector** with either a **Start Event** or **Intermediate Catch Event**.
-2. Select the applicable element and change its template to a **Slack Inbound Connector**.
+1. Start building your BPMN diagram. You can use the **Slack inbound connector** with either a **Start Event** or **Intermediate Catch Event**.
+2. Select the applicable element and change its template to a **Slack Inbound connector**.
 3. Fill in all required properties.
 4. Complete your BPMN diagram.
 5. Deploy the diagram to activate the webhook.
 6. Navigate to the **Webhooks** tab in the properties panel to see the webhook URL.
 
-## Make your Slack inbound Connector for receiving event notifications executable
+## Make your Slack inbound connector for receiving event notifications executable
 
 1. In the **Webhook Configuration** section, configure the **Webhook ID**. By default, **Webhook ID** is pre-filled with a random value. This value will be a part of the Slack event subscription or slash command URL.
 2. In the **Webhook Configuration** section, configure the **Slack signing secret**. This value is unique to your Slack application and used to validate a Slack payload integrity. Read more about signing secrets in the [Slack documentation](https://api.slack.com/authentication/verifying-requests-from-slack).
@@ -244,13 +244,13 @@ a BPMN process triggered by a [Slack](https://slack.com/) message.
 The **Correlation** section allows you to configure the message correlation parameters.
 
 :::note
-The **Correlation** section is not applicable for the plain **start event** element template of the Slack Connector. Plain **start events** are triggered by process instance creation and do not rely on message correlation.
+The **Correlation** section is not applicable for the plain **start event** element template of the Slack connector. Plain **start events** are triggered by process instance creation and do not rely on message correlation.
 :::
 
 #### Correlation keys
 
 - **Correlation key (process)** is a FEEL expression that defines the correlation key for the subscription. This corresponds to the **Correlation key** property of a regular **message intermediate catch event**.
-- **Correlation key (payload)** is a FEEL expression used to extract the correlation key from the incoming message. This expression is evaluated in the Connector Runtime and the result is used to correlate the message.
+- **Correlation key (payload)** is a FEEL expression used to extract the correlation key from the incoming message. This expression is evaluated in the connector Runtime and the result is used to correlate the message.
 
 For example, given your correlation key is defined with `myCorrelationKey` process variable, and the request body contains `"event": {"text": "12345"}`, your correlation key settings will look like this:
 
@@ -262,7 +262,7 @@ Learn more about correlation keys in the [messages guide](../../../concepts/mess
 #### Message ID expression
 
 The **Message ID expression** is an optional field that allows you to extract the message ID from the incoming request. The message ID serves as a unique identifier for the message and is used for message correlation.
-This expression is evaluated in the Connector Runtime and the result is used to correlate the message.
+This expression is evaluated in the connector Runtime and the result is used to correlate the message.
 
 In most cases, it is not necessary to configure the **Message ID expression**. However, it is useful if you want to ensure message deduplication or achieve a certain message correlation behavior.
 Learn more about how message IDs influence message correlation in the [messages guide](../../../concepts/messages#message-correlation-overview).
@@ -278,7 +278,7 @@ For example, to set the message ID to the value of the `text` field of the incom
 The **Message TTL** is an optional field that allows you to set the time-to-live (TTL) for the correlated messages. TTL defines the time for which the message is buffered in Zeebe before being correlated to the process instance (if it can't be correlated immediately).
 The value is specified as an ISO 8601 duration. For example, `PT1H` sets the TTL to one hour. Learn more about the TTL concept in Zeebe in the [message correlation guide](../../../concepts/messages#message-buffering).
 
-## Make your Slack inbound Connector for receiving slash command notifications executable
+## Make your Slack inbound connector for receiving slash command notifications executable
 
 1. In the **Webhook Configuration** section, configure the **Webhook ID**. By default, **Webhook ID** is pre-filled with a random value. This value will be a part of the Slack event subscription or slash command URL.
 2. In the **Webhook Configuration** section, configure the **Slack signing secret**. This value is unique to your Slack application and used to validate a Slack payload integrity. Read more about signing secrets in the [Slack documentation](https://api.slack.com/authentication/verifying-requests-from-slack).
@@ -287,10 +287,10 @@ The value is specified as an ISO 8601 duration. For example, `PT1H` sets the TTL
 5. In the **Variable expression** section, fill the field to map specific fields from the response into process variables using [FEEL](/components/modeler/feel/what-is-feel.md).
    The following example will extract both Slack message sender ID and text from Slack `/test hello` command: `={senderId: connectorData.user_id, text: connectorData.text}`.
 
-When using the **Slack inbound Connector** with an **Intermediate Catch Event**, fill in the **Correlation key (process)** and **Correlation key (payload)**.
+When using the **Slack inbound connector** with an **Intermediate Catch Event**, fill in the **Correlation key (process)** and **Correlation key (payload)**.
 
 - **Correlation key (process)** is a FEEL expression that defines the correlation key for the subscription. This corresponds to the **Correlation key** property of a regular **Message Intermediate Catch Event**.
-- **Correlation key (payload)** is a FEEL expression used to extract the correlation key from the incoming message. This expression is evaluated in the Connector Runtime and the result is used to correlate the message.
+- **Correlation key (payload)** is a FEEL expression used to extract the correlation key from the incoming message. This expression is evaluated in the connector Runtime and the result is used to correlate the message.
 
 For example, given that your correlation key is defined with `myCorrelationKey` process variable, and the request body contains `text=hello}`, your correlation key settings will look like this:
 
@@ -299,25 +299,25 @@ For example, given that your correlation key is defined with `myCorrelationKey` 
 
 Learn more about correlation keys in the [messages guide](../../../concepts/messages).
 
-## Activate the Slack inbound Connector by deploying your diagram
+## Activate the Slack inbound connector by deploying your diagram
 
-Once you click the **Deploy** button, your **Slack inbound Connector** will be activated and publicly available.
+Once you click the **Deploy** button, your **Slack inbound connector** will be activated and publicly available.
 
-URLs of the exposed **Slack inbound Connector** adhere to the following pattern:
+URLs of the exposed **Slack inbound connector** adhere to the following pattern:
 
 `https://<base URL>/inbound/<webhook ID>`
 
-- `<base URL>` is the URL of Connectors component deployment. When using the Camunda 8 SaaS offering, this will typically contain your **region Id** and **cluster Id**, found in your client credentials under the **API** tab within your cluster.
-- `<webhook ID>` is the ID (path) you configured in the properties of your **Slack inbound Connector**.
+- `<base URL>` is the URL of connectors component deployment. When using the Camunda 8 SaaS offering, this will typically contain your **region Id** and **cluster Id**, found in your client credentials under the **API** tab within your cluster.
+- `<webhook ID>` is the ID (path) you configured in the properties of your **Slack inbound connector**.
 
-If you make changes to your **Slack Inbound Connector** configuration, you need to redeploy the BPMN diagram for the changes to take effect.
+If you make changes to your **Slack Inbound connector** configuration, you need to redeploy the BPMN diagram for the changes to take effect.
 
-When you click on the event with **Slack inbound Connector** applied to it, a new **Webhooks** tab will appear in the properties panel. This tab displays the URL of the **Slack inbound Connector** for every cluster where you have deployed your BPMN diagram.
+When you click on the event with **Slack inbound connector** applied to it, a new **Webhooks** tab will appear in the properties panel. This tab displays the URL of the **Slack inbound connector** for every cluster where you have deployed your BPMN diagram.
 
 :::note
 The **Webhooks** tab is only supported in Web Modeler as part of the Camunda 8 SaaS offering.
-You can still use Slack inbound Connectors in Desktop Modeler, or with your Camunda 8 Self-Managed.
-In that case, Slack inbound Connector deployments and URLs will not be displayed in Modeler.
+You can still use Slack inbound connectors in Desktop Modeler, or with your Camunda 8 Self-Managed.
+In that case, Slack inbound connector deployments and URLs will not be displayed in Modeler.
 :::
 
 ## Wiring with Slack
@@ -353,7 +353,7 @@ This is a simplified guide. For a full guide, refer to the [official Slack docum
 
 ### Integrity
 
-Each Slack message is signed with HMAC using a Slack signing key. The **Slack inbound Connector** verifies HMAC integrity
+Each Slack message is signed with HMAC using a Slack signing key. The **Slack inbound connector** verifies HMAC integrity
 for every incoming request. Read more about signing secrets in the
 [Slack documentation](https://api.slack.com/authentication/verifying-requests-from-slack).
 
