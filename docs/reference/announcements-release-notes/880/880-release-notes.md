@@ -36,15 +36,15 @@ Camunda Process Test now supports using the [H2 Database Engine](https://www.h2d
 
 To learn more about Camunda Process Test, see [Camunda Process Test](/apis-tools/testing/getting-started.md).
 
-### Connector manage and run supports multiple runtimes<span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Console">Console</span> {#connector-management}
+### Connector manage and run supports multiple runtimes <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Console">Console</span> {#connector-management}
 
 <!-- https://github.com/camunda/product-hub/issues/2750 -->
 
-Connector manage and run now supports management of multiple Connector Runtime instances.
+Connector manage and run in Console now supports management of multiple Connector Runtime instances.
 
 To learn more about this feature, see [manage your connectors](/components/console/manage-clusters/manage-connectors.md).
 
-### Connectors
+### Connectors <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span> {#connectorsalpha4}
 
 #### Email Connector {#emailalpha4}
 
@@ -77,40 +77,11 @@ Hubspot Connector enhancements include:
 
 To learn more about this Connector, see [HubSpot Connector](/components/connectors/out-of-the-box-connectors/hubspot.md).
 
-### Desktop Modeler settings <span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span>
+### Desktop Modeler settings <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span>
 
 <!-- https://github.com/camunda/product-hub/issues/2491 -->
 
 The new **Settings** window in Desktop Modeler allows you to configure the application and customize your modeling experience. You can select your default execution platform version, along with other options that were previously only available as flags.
-
-### FEEL Copilot (alpha) <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span> {#feelcopilot}
-
-<!-- https://github.com/camunda/product-hub/issues/2450 -->
-
-Web Modeler (SaaS) now includes an integrated FEEL Copilot.
-
-- Use generative AI to create and debug executable FEEL (Friendly Enough Expression Language) expressions.
-- ...
-
-To learn more about this alpha feature, see...
-
-:::note
-
-- The FEEL Copilot is an alpha feature, allowing you to test and participate in development by sharing your feedback. To learn more about alpha features and their limitations, see [alpha features](/components/early-access/alpha/alpha-features.md).
-- You can also use the fully-featured [standalone FEEL Copilot tool (alpha)](https://feel-copilot.camunda.com/).
-
-:::
-
-### FEEL Playground <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span> {#feelplayground}
-
-<!-- https://github.com/camunda/product-hub/issues/2450 -->
-
-Web Modeler (SaaS and Self-Managed) now includes an integrated FEEL Playground.
-
-- The FEEL Playground is integrated into the popup FEEL editor.
-- Test and validate your FEEL expressions using process variables and process context, making it easier for you to develop business logic in Camunda.
-
-To learn more about this feature, see...
 
 ### Web Modeler cluster basic authentication <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
 
