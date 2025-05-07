@@ -300,6 +300,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/search-users-for-group",
+          label: "Search group users (Work-in-Progress)",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/add-user-to-group",
           label: "Assign a user to a group (Work-in-Progress)",
           className: "api-method put",
@@ -308,6 +314,18 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/unassign-user-from-group",
           label: "Unassign a user from a group (Work-in-Progress)",
+          className: "api-method delete",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/add-mapping-to-group",
+          label: "Assign a mapping rule to a group (Work-in-Progress)",
+          className: "api-method put",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/unassign-mapping-from-group",
+          label: "Unassign a mapping rule from a group (Work-in-Progress)",
           className: "api-method delete",
         },
         {
@@ -525,6 +543,18 @@ const sidebar: SidebarsConfig = {
           id: "apis-tools/camunda-api-rest/specifications/resolve-incidents-batch-operation",
           label:
             "Create a batch operation to resolve incidents of process instances",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/migrate-process-instances-batch-operation",
+          label: "Create a batch operation to migrate process instances",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/modify-process-instances-batch-operation",
+          label: "Create a batch operation to modify process instances",
           className: "api-method post",
         },
         {

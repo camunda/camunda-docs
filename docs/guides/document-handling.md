@@ -1,7 +1,7 @@
 ---
 id: document-handling
 title: "Store, track, and manage documents"
-description: "Get started with document handling by uploading a document to a BPMN process, displaying and downloading a document in a user task, and sending a document to an external system via a Connector."
+description: "Get started with document handling by uploading a document to a BPMN process, displaying and downloading a document in a user task, and sending a document to an external system via a connector."
 keywords: ["document handling"]
 ---
 
@@ -13,11 +13,11 @@ In this guide we will cover three main use cases:
 
 - [Upload a document to a BPMN process](#upload-a-document-to-a-bpmn-process);
 - [Display and download a document](#display-and-download-a-document);
-- [Send a document to an external system via a Connector](#send-a-document-to-an-external-system-via-a-connector).
+- [Send a document to an external system via a connector](#send-a-document-to-an-external-system-via-a-connector).
 
 ## Upload a document to a BPMN process
 
-You can implement document uploads in your BPMN processes using [forms](#build-a-form-for-document-upload), [inbound Connectors](#upload-a-document-via-inbound-webhook-connector), and [Camunda 8 REST API](../apis-tools/camunda-api-rest/specifications/create-document.api.mdx).
+You can implement document uploads in your BPMN processes using [forms](#build-a-form-for-document-upload), [inbound connectors](#upload-a-document-via-inbound-webhook-connector), and [Camunda 8 REST API](../apis-tools/camunda-api-rest/specifications/create-document.api.mdx).
 
 ### Build a form for document upload
 
@@ -58,7 +58,7 @@ Single document uploads are accessible using `value[1]` (since [FEEL](../compone
 
 ### Upload a document via inbound webhook connector
 
-Documents can be added to a process using the [inbound](../components//connectors/connector-types.md#inbound-connectors) [HTTP webhook Connector](/components/connectors/protocol/http-webhook.md).
+Documents can be added to a process using the [inbound](../components//connectors/connector-types.md#inbound-connectors) [HTTP webhook connector](/components/connectors/protocol/http-webhook.md).
 
 You can pass the documents in both the response expression and the result expression, where the `documents` object contains the references for created documents. Below, review an example of a webhook configuration:
 
@@ -72,7 +72,7 @@ In this example, the result expression may look as follows, where `applicationDo
 }
 ```
 
-The document reference received as an output of one Connector should be stored in process variables by using the result expression or result variable.
+The document reference received as an output of one connector should be stored in process variables by using the result expression or result variable.
 
 To call the webhook sending a file, for example:
 
@@ -145,17 +145,17 @@ When a user opens the task, they can view and download the document directly fro
 
 ![Document preview for task in Tasklist](./img/task-with-document-preview-tasklist.png)
 
-## Send a document to an external system via a Connector
+## Send a document to an external system via a connector
 
-You can reference a document in an [outbound Connector](../components//connectors/connector-types.md#outbound-connectors). Connectors can use variables with document metadata as an input. The format of inputs will depend on the Connector, as each Connector has a different input structure.
+You can reference a document in an [outbound connector](../components//connectors/connector-types.md#outbound-connectors). connectors can use variables with document metadata as an input. The format of inputs will depend on the connector, as each connector has a different input structure.
 
 The [Connector SDK](/components/connectors/custom-built-connectors/connector-sdk.md) provides document support in property/variable bindings.
 
-In most cases for the following outbound Connectors, you can include a **Request body** under **Payload** in the properties panel to send with your request:
+In most cases for the following outbound connectors, you can include a **Request body** under **Payload** in the properties panel to send with your request:
 
 ![example REST configuration](./img/rest-outbound-document.png)
 
-### Outbound Connectors that support document handling
+### Outbound connectors that support document handling
 
 | Connector                                                                               | Support details                                                                                                                                                                                                                |
 | --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |

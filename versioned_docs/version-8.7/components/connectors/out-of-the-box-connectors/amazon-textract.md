@@ -1,6 +1,6 @@
 ---
 id: amazon-textract
-title: Amazon Textract Connector
+title: Amazon Textract connector
 sidebar_label: AWS Textract
 description: Extract printed text, handwriting, layout elements, and data from any document.
 ---
@@ -8,26 +8,26 @@ description: Extract printed text, handwriting, layout elements, and data from a
 import ConnectorTask from '../../../components/react-components/connector-task.md'
 
 :::info
-The **Amazon Textract Connector** is available for `8.6.0` or later.
+The **Amazon Textract connector** is available for `8.6.0` or later.
 :::
 
-The **Amazon Textract Connector** allows you to integrate your BPMN service with [Amazon Textract](https://aws.amazon.com/textract/) to extract text from documents.
+The **Amazon Textract connector** allows you to integrate your BPMN service with [Amazon Textract](https://aws.amazon.com/textract/) to extract text from documents.
 
 ## Prerequisites
 
-To use this Connector, you'll need an **AWS IAM Access Key** and **Secret Key** with the appropriate Textract permissions. Refer to the [AWS Textract Developer Guide](https://docs.aws.amazon.com/textract/latest/dg/getting-started.html) for setup instructions.
+To use this connector, you'll need an **AWS IAM Access Key** and **Secret Key** with the appropriate Textract permissions. Refer to the [AWS Textract Developer Guide](https://docs.aws.amazon.com/textract/latest/dg/getting-started.html) for setup instructions.
 
 :::note
 Use **Camunda secrets** to avoid exposing your AWS IAM credentials as plain text. See [manage secrets](components/console/manage-clusters/manage-secrets.md).
 :::
 
-## Create an Amazon Textract Connector task
+## Create an Amazon Textract connector task
 
 <ConnectorTask/>
 
-## Make your Amazon Textract Connector executable
+## Make your Amazon Textract connector executable
 
-To execute the Connector, you must ensure all mandatory fields are correctly filled.
+To execute the connector, you must ensure all mandatory fields are correctly filled.
 
 ### Authentication
 
@@ -125,25 +125,25 @@ Specify the **Document Version** if you need to process a specific version of th
 Mandatory only for **Real-time** execution with **Camunda Document** location type.
 
 :::note
-To work with document you must upload them first, [using the REST API](/apis-tools/camunda-api-rest/specifications/create-document.api.mdx) for example.
+To work with document you must upload them first, [using the Camunda 8 REST API](/apis-tools/camunda-api-rest/specifications/create-document.api.mdx) for example.
 The result of the endpoint must then be assigned to a variable in **Start Process Instance** so you can use the variable in the **Document** field.
 :::
 
 ## Response
 
-The response from the **Amazon Textract Connector** mirrors the AWS Textract service’s response. The type of response you receive depends on the execution mode selected:
+The response from the **Amazon Textract connector** mirrors the AWS Textract service’s response. The type of response you receive depends on the execution mode selected:
 
 - **[Real-time Execution Response](https://docs.aws.amazon.com/textract/latest/dg/API_AnalyzeDocument.html#API_AnalyzeDocument_ResponseSyntax)**: Provides immediate analysis for single-page documents.
 - **[Polling Execution Response](https://docs.aws.amazon.com/textract/latest/dg/API_GetDocumentAnalysis.html#API_GetDocumentAnalysis_ResponseSyntax)**: Returns chunks of data in a paginated format for multi-page or complex documents.
 - **[Asynchronous Execution Response](https://docs.aws.amazon.com/textract/latest/dg/API_StartDocumentAnalysis.html#API_StartDocumentAnalysis_ResponseSyntax)**: Used for batch processing where results are returned later through job completion.
 
 :::note
-Starting from version 8.7.0, the Amazon Textract Connector can read the input document directly from the Camunda document store. Review the **Document** field in the properties panel where the document reference can be provided. See additional details and limitations in [document handling](/components/concepts/document-handling.md).
+Starting from version 8.7.0, the Amazon Textract connector can read the input document directly from the Camunda document store. Review the **Document** field in the properties panel where the document reference can be provided. See additional details and limitations in [document handling](/components/concepts/document-handling.md).
 :::
 
-### Use the Textract Connector response in your process
+### Use the Textract connector response in your process
 
-The **Amazon Textract Connector** provides the same response structure as the AWS Textract API. You can map fields from the response to process variables, depending on your needs.
+The **Amazon Textract connector** provides the same response structure as the AWS Textract API. You can map fields from the response to process variables, depending on your needs.
 
 For example, to extract specific fields using **Result Expression** and **Result Variable**:
 
@@ -152,7 +152,7 @@ For example, to extract specific fields using **Result Expression** and **Result
 Use output mapping to align this response with process variables:
 
 1. Use **Result Variable** to store the response in a process variable. For example, `myResultVariable`. This approach stores the entire Textract message as a process variable named `myResultVariable`.
-2. Use **Result Expression** to map fields from the response into process variables. This approach allows for more granularity. Instead of storing the entire response in one variable, you can extract specific fields from the **Textract Connector** message and assign them to different process variables. This is particularly useful when you are only interested in certain parts of the message, or when different parts of the message need to be used separately in your process.
+2. Use **Result Expression** to map fields from the response into process variables. This approach allows for more granularity. Instead of storing the entire response in one variable, you can extract specific fields from the **Textract connector** message and assign them to different process variables. This is particularly useful when you are only interested in certain parts of the message, or when different parts of the message need to be used separately in your process.
 
 Example:
 

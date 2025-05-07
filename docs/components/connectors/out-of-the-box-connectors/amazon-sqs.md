@@ -1,6 +1,6 @@
 ---
 id: amazon-sqs
-title: Amazon Simple Queue Service Connector
+title: Amazon Simple Queue Service connector
 sidebar_label: AWS SQS
 description: Send messages to Amazon Simple Queue Service (SQS) from your BPMN process.
 ---
@@ -16,11 +16,11 @@ import TabItem from "@theme/TabItem";
 
 <TabItem value='outbound'>
 
-The **Amazon SQS Connector** is an outbound Connector that allows you to connect your BPMN service with [Amazon Simple Queue Service (SQS)](https://aws.amazon.com/sqs/) to send messages.
+The **Amazon SQS connector** is an outbound connector that allows you to connect your BPMN service with [Amazon Simple Queue Service (SQS)](https://aws.amazon.com/sqs/) to send messages.
 
 ## Prerequisites
 
-To use the **Amazon SQS Connector**, you need to have an SQS Queue, IAM key, and secret pair with the `sqs:SendMessage` policy relative to your SQS.
+To use the **Amazon SQS connector**, you need to have an SQS Queue, IAM key, and secret pair with the `sqs:SendMessage` policy relative to your SQS.
 
 :::note
 
@@ -28,15 +28,15 @@ Use Camunda secrets to avoid exposing your AWS IAM credentials as plain text. Re
 
 :::
 
-## Create an Amazon SQS Connector task
+## Create an Amazon SQS connector task
 
 import ConnectorTask from '../../../components/react-components/connector-task.md'
 
 <ConnectorTask/>
 
-## Make your Amazon SQS Connector for sending messages executable
+## Make your Amazon SQS connector for sending messages executable
 
-To make your Amazon SQS Connector for sending messages executable, take the following steps:
+To make your Amazon SQS connector for sending messages executable, take the following steps:
 
 1. Choose an applicable authentication type from the **Authentication** dropdown. Learn more about authentication types in the related [appendix entry](#aws-authentication-types).
 2. Set the relevant IAM key and secret pair in the **Authentication** section. For example, `{{secrets.MY_AWS_ACCESS_KEY}}`. The value can be plain text, but this is not recommended due to security concerns.
@@ -45,9 +45,9 @@ To make your Amazon SQS Connector for sending messages executable, take the foll
 5. (Optional) In the **Input message data** section, fill out the field **Message attributes** to set optional message metadata. This field requires FEEL input. Refer to the relevant [appendix](#what-are-the-message-attributes-and-how-can-i-set-them) section to find out more about this field.
 6. (FIFO only) If you are using a queue of type **FIFO**, a [**Message Group ID** must be provided](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagegroupid-property.html). An optional **Message Deduplication ID** can be provided as well, depending on how you [configured](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagededuplicationid-property.html) the message deduplication of the queue.
 
-## Amazon SQS Connector response
+## Amazon SQS connector response
 
-The **Amazon SQS Connector** returns the SQS message identifier of a newly created message.
+The **Amazon SQS connector** returns the SQS message identifier of a newly created message.
 The response contains a `messageId` variable.
 
 You can use an output mapping to map the response:
@@ -66,7 +66,7 @@ You can use an output mapping to map the response:
 ### What are the message attributes and how can I set them?
 
 Amazon SQS lets you include structured metadata (such as timestamps, geospatial data, signatures, and identifiers) with messages using message attributes.
-The **Amazon SQS Connector** allows you to include non-binary message attributes in the section **Input message data**. The message attribute value must be composed to be compliant with Amazon SQS [message attribute data format](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html#sqs-message-attributes).
+The **Amazon SQS connector** allows you to include non-binary message attributes in the section **Input message data**. The message attribute value must be composed to be compliant with Amazon SQS [message attribute data format](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html#sqs-message-attributes).
 
 Example of a valid message attribute as a FEEL value:
 
@@ -83,13 +83,13 @@ Example of a valid message attribute as a FEEL value:
 }
 ```
 
-### How do I store AWS IAM Secrets for my SQS Connector?
+### How do I store AWS IAM Secrets for my SQS connector?
 
 Store your AWS IAM credentials as Camunda secrets to avoid exposing sensitive information. Follow our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
 
 ### AWS authentication types
 
-There are two options to authenticate the Connector with AWS:
+There are two options to authenticate the connector with AWS:
 
 - Choose **Credentials** in the **Authentication** dropdown if you have a valid pair of access and secret keys provided by your AWS account administrator. This option is applicable for both SaaS and Self-Managed users.
 - Choose **Default Credentials Chain (Hybrid/Self-Managed only)** in the **Authentication** dropdown if your system is configured as an implicit authentication mechanism, such as role-based authentication, credentials supplied via environment variables, or files on target host. This option is applicable only for Self-Managed or hybrid distribution. This approach uses the [Default Credential Provider Chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html) to resolve required credentials.
@@ -98,29 +98,29 @@ There are two options to authenticate the Connector with AWS:
 
 <TabItem value='inbound'>
 
-The **Amazon SQS Inbound Connector** is an inbound Connector that allows you to start or continue
+The **Amazon SQS Inbound connector** is an inbound connector that allows you to start or continue
 a BPMN process triggered by [Amazon Simple Queue Service (SQS)](https://aws.amazon.com/sqs/).
 
 ## Prerequisites
 
-Before using the Amazon SQS inbound Connector, ensure you have the following:
+Before using the Amazon SQS inbound connector, ensure you have the following:
 
 1. An active SQS Queue in your AWS account.
 2. IAM credentials with the necessary permissions to receive messages from the SQS Queue. Use Camunda secrets to store your AWS IAM credentials securely. Refer to the [Camunda secrets documentation](/components/console/manage-clusters/manage-secrets.md) for more details.
 
-## Create an SQS inbound Connector task
+## Create an SQS inbound connector task
 
 To receive messages from Amazon SQS in your process, follow these steps:
 
-1. Start building your BPMN diagram. You can use the **Amazon SNS Inbound Connector** with either **Start Event** or **Intermediate Catch Event** building blocks.
-2. Select the appropriate element and change its template to an SQS inbound Connector.
-3. Fill in all the required properties for the Connector, such as the AWS region, SQS Queue URL, and the visibility timeout.
+1. Start building your BPMN diagram. You can use the **Amazon SNS Inbound connector** with either **Start Event** or **Intermediate Catch Event** building blocks.
+2. Select the appropriate element and change its template to an SQS inbound connector.
+3. Fill in all the required properties for the connector, such as the AWS region, SQS Queue URL, and the visibility timeout.
 4. Complete your BPMN diagram by adding other necessary elements and connectors.
-5. Deploy the diagram to activate the SQS Inbound Connector.
+5. Deploy the diagram to activate the SQS Inbound connector.
 
-## Configure the SQS inbound Connector
+## Configure the SQS inbound connector
 
-To configure the SQS inbound Connector and receive messages from your SQS Queue, follow these steps:
+To configure the SQS inbound connector and receive messages from your SQS Queue, follow these steps:
 
 1. Choose an applicable authentication type from the **Authentication** dropdown. Learn more about authentication types in the related [appendix entry](#aws-authentication-types-1).
 2. Set the relevant IAM key and secret pair in the **Authentication** section. For example, `{{secrets.MY_AWS_ACCESS_KEY}}`. The value can be plain text, but this is not recommended due to security concerns.
@@ -133,12 +133,12 @@ To configure the SQS inbound Connector and receive messages from your SQS Queue,
 
 ### Activation condition
 
-**Activation condition** is an optional FEEL expression field that allows for fine-tuning of the Connector activation.
+**Activation condition** is an optional FEEL expression field that allows for fine-tuning of the connector activation.
 For example, if an external message has the body `{"messageId": 1, "body": "Hi team", "messageAttributes":{"key":{"stringValue":"value"}}...}`, the **Activation Condition** value might look like `=(messageAttributes.key.stringValue="value")`. Leave this field empty to receive all messages every time.
 
 By default, messages with unmatched activation conditions are not deleted from the queue. They become available for consumers again after the visibility timeout expires. You can set up a dead-letter queue where messages are forwarded after a certain number of delivery attempts.
 
-You can also configure the Amazon SQS inbound Connector to delete messages from the queue if they don't match the activation condition. In this case, the message will not end up in the dead-letter queue.
+You can also configure the Amazon SQS inbound connector to delete messages from the queue if they don't match the activation condition. In this case, the message will not end up in the dead-letter queue.
 To delete messages that don't match the activation condition, check the **Consume unmatched events** box.
 
 | **Consume unmatched events** box | Activation condition | Outcome                                                                                          |
@@ -153,13 +153,13 @@ To delete messages that don't match the activation condition, check the **Consum
 The **Correlation** section allows you to configure the message correlation parameters.
 
 :::note
-The **Correlation** section is not applicable for the plain **start event** element template of the Amazon SQS Connector. Plain **start events** are triggered by process instance creation and do not rely on message correlation.
+The **Correlation** section is not applicable for the plain **start event** element template of the Amazon SQS connector. Plain **start events** are triggered by process instance creation and do not rely on message correlation.
 :::
 
 #### Correlation key
 
 - **Correlation key (process)** is a FEEL expression that defines the correlation key for the subscription. This corresponds to the **Correlation key** property of a regular **Message Intermediate Catch Event**.
-- **Correlation key (payload)** is a FEEL expression used to extract the correlation key from the incoming message. This expression is evaluated in the Connector Runtime and the result is used to correlate the message.
+- **Correlation key (payload)** is a FEEL expression used to extract the correlation key from the incoming message. This expression is evaluated in the connector Runtime and the result is used to correlate the message.
 
 Example for correlation and activation condition properties (correlation by ID in the body and activation condition by message attribute):
 
@@ -202,7 +202,7 @@ Learn more about correlation keys in the [messages guide](../../../concepts/mess
 #### Message ID expression
 
 The **Message ID expression** is an optional field that allows you to extract the message ID from the incoming message. The message ID serves as a unique identifier for the message and is used for message correlation.
-This expression is evaluated in the Connector Runtime and the result is used to correlate the message.
+This expression is evaluated in the connector Runtime and the result is used to correlate the message.
 
 In most cases, it is not necessary to configure the **Message ID expression**. However, it is useful if you want to ensure message deduplication or achieve certain message correlation behavior.
 Learn more about how message IDs influence message correlation in the [messages guide](../../../concepts/messages#message-correlation-overview).
@@ -220,21 +220,21 @@ The value is specified as an ISO 8601 duration. For example, `PT1H` sets the TTL
 
 ### Deduplication
 
-The **Deduplication** section allows you to configure the Connector deduplication parameters.
+The **Deduplication** section allows you to configure the connector deduplication parameters.
 
-Not to be confused with **message deduplication**, **Connector deduplication** is a mechanism in the Connector Runtime that determines how many SQS subscriptions are created if there are multiple occurrences of the **Amazon SQS Consumer Connector** in the BPMN diagram.
+Not to be confused with **message deduplication**, **Connector deduplication** is a mechanism in the connector Runtime that determines how many SQS subscriptions are created if there are multiple occurrences of the **Amazon SQS Consumer connector** in the BPMN diagram.
 
-By default, the Connector runtime deduplicates Connectors based on properties, so elements with the same subscription properties only result in one subscription. Learn more about deduplication in the [deduplication guide](../use-connectors/inbound.md#connector-deduplication).
+By default, the connector runtime deduplicates connectors based on properties, so elements with the same subscription properties only result in one subscription. Learn more about deduplication in the [deduplication guide](../use-connectors/inbound.md#connector-deduplication).
 
 To customize the deduplication behavior, check the **Manual mode** checkbox and configure the custom deduplication ID.
 
-## Activate the SQS inbound Connector
+## Activate the SQS inbound connector
 
-Once you click the **Deploy** button, your SQS inbound Connector will be activated and publicly available. Whenever the SQS inbound Connector receives a new message, a new BPMN process will be created.
+Once you click the **Deploy** button, your SQS inbound connector will be activated and publicly available. Whenever the SQS inbound connector receives a new message, a new BPMN process will be created.
 
-## Amazon SQS Connector response
+## Amazon SQS connector response
 
-The **Amazon SQS Connector** provides the SQS message as a response. Utilize output mapping to align this response with process variables:
+The **Amazon SQS connector** provides the SQS message as a response. Utilize output mapping to align this response with process variables:
 
 1. Use **Result Variable** to store the response in a process variable. For example, `myResultVariable`. This approach stores the entire SQS message as a process variable named `myResultVariable`.
 2. Use **Result Expression** to map fields from the response into process variables. This approach allows for more granularity. Instead of storing the entire response in one variable, you can extract specific fields from the SQS message and assign them to different process variables. This is particularly useful when you are only interested in certain parts of the message, or when different parts of the message need to be used separately in your process.
@@ -282,7 +282,7 @@ Learn more about **Variable mapping** [here](../use-connectors/index.md).
 
 ### AWS authentication types
 
-There are two options to authenticate the Connector with AWS:
+There are two options to authenticate the connector with AWS:
 
 - Choose **Credentials** in the **Authentication** dropdown if you have a valid pair of access and secret keys provided by your AWS account administrator. This option is applicable for both SaaS and Self-Managed users.
 - Choose **Default Credentials Chain (Hybrid/Self-Managed only)** in the **Authentication** dropdown if your system is configured as an implicit authentication mechanism, such as role-based authentication, credentials supplied via environment variables, or files on target host. This option is applicable only for Self-Managed or hybrid distribution. This approach uses the [Default Credential Provider Chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html) to resolve required credentials.
@@ -290,9 +290,9 @@ There are two options to authenticate the Connector with AWS:
 ## Next Steps
 
 - Explore more about [Amazon Simple Queue Service (SQS)](https://aws.amazon.com/sqs/) and its capabilities.
-- Learn about [other Connectors available](./available-connectors-overview.md) in Camunda to integrate with different systems and services.
-- Learn more about [using Connectors](../use-connectors/index.md).
-- Learn more about [inbound Connectors](../use-connectors/inbound.md).
+- Learn about [other connectors available](./available-connectors-overview.md) in Camunda to integrate with different systems and services.
+- Learn more about [using connectors](../use-connectors/index.md).
+- Learn more about [inbound connectors](../use-connectors/inbound.md).
 
 </TabItem>
 

@@ -1,7 +1,7 @@
 ---
 id: manage-connector-templates
-title: Manage Connector templates
-description: Manage your Connector templates in Web Modeler.
+title: Manage connector templates
+description: Manage your connector templates in Web Modeler.
 ---
 
 export const UploadIcon = () => <span style={{verticalAlign: "text-top"}}><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><path d="M0 0h24v24H0z" fill="none"></path><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z" fill="currentColor"></path></svg></span>;
@@ -10,9 +10,9 @@ export const UploadIcon = () => <span style={{verticalAlign: "text-top"}}><svg x
 
 You can create and manage [Connector templates](/components/connectors/custom-built-connectors/connector-templates.md) just as any other asset in a Web Modeler project.
 
-## Create a Connector template
+## Create a connector template
 
-Take the following steps to create a new Connector template:
+Take the following steps to create a new connector template:
 
 1. Navigate to the project of your choice in Web Modeler and click **New**.
 
@@ -20,7 +20,7 @@ Take the following steps to create a new Connector template:
 
    ![Creating a new template](img/connector-templates/create-connector-template-1.png)
 
-3. You will be taken to the **Connector template editor** screen. In this screen, you can define the Connector template by writing the template JSON. The template editor supports you in writing the template by providing autocompletion, error highlighting, and a live preview.
+3. You will be taken to the **Connector template editor** screen. In this screen, you can define the connector template by writing the template JSON. The template editor supports you in writing the template by providing autocompletion, error highlighting, and a live preview.
 
    ![Template editor anatomy](img/connector-templates/create-connector-template-2.png)
 
@@ -33,20 +33,20 @@ Take the following steps to create a new Connector template:
 
    On every valid change, the template is saved automatically. If there are errors in the JSON file, the template will not be saved. Ensure all [errors are resolved](#fixing-template-problems) for the template to save successfully.
 
-## Publish a Connector template
+## Publish a connector template
 
-After finalizing your Connector, click **Publish** to activate it within the project context. Assign a distinct version name for effective version management.
+After finalizing your connector, click **Publish** to activate it within the project context. Assign a distinct version name for effective version management. Use the description field to provide details about what changes where introduced from the previous version.
 
 ![Publishing a template](img/connector-templates/create-connector-template-3.png)
 
-As a [user with elevated access](/components/modeler/web-modeler/collaboration.md#elevated-access), you can publish a Connector template version within the organization context, enabling all organization members to use it in their diagrams.
+As a [user with elevated access](/components/modeler/web-modeler/collaboration.md#elevated-access), you can publish a connector template version within the organization context, enabling all organization members to use it in their diagrams.
 To do so, click **Publish > Publish to organization** on the editor screen or promote a template version via the [versions list](#versioning-connector-templates).
 
 ![Promoting a template](img/connector-templates/create-connector-template-4.png)
 
-### Manage published Connector templates
+### Manage published connector templates
 
-After publishing, a Connector template version can be applied across all models within the same project or organization, depending on its publication status. You can review the publication status of template versions in the [versions list](#versioning-connector-templates).
+After publishing, a connector template version can be applied across all models within the same project or organization, depending on its publication status. You can review the publication status of template versions in the [versions list](#versioning-connector-templates).
 
 On the Web Modeler home page, you can find an overview of all shared resources within your organization.
 
@@ -54,7 +54,7 @@ On the Web Modeler home page, you can find an overview of all shared resources w
 
 - View additional details about the published version.
 - Open the resource's versions list (if they are in [super-user mode](/components/modeler/web-modeler/collaboration.md#super-user-mode) or are a [project admin or editor](/components/modeler/web-modeler/collaboration.md#access-rights-and-permissions) of the resource's project).
-- Unpublish a Connector template directly from this view.
+- Unpublish a connector template directly from this view.
 
 ![Manage published templates - elevated access](img/connector-templates/manage-connector-templates-org-privileges.png)
 
@@ -65,14 +65,14 @@ Organization members without special organization permissions can:
 
 ![Manage published templates - no special organization permissions](img/connector-templates/manage-connector-templates-no-org-privileges.png)
 
-### Versioning Connector templates
+### Versioning connector templates
 
-You can version your Connector templates [similar to diagrams](/components/modeler/web-modeler/versions.md).
+You can version your connector templates [similar to diagrams](/components/modeler/web-modeler/versions.md).
 
-If you publish a new version of a Connector template and an older version is already being used in diagrams, the user can either:
+If you publish a new version of a connector template and an older version is already being used in diagrams, the user can either:
 
-- [Update the diagram elements](/components/modeler/desktop-modeler/element-templates/using-templates.md#updating-templates) to use the most recent version of the Connector template. You cannot undo this action.
-- Continue using the older version of the Connector template in their diagrams.
+- [Update the diagram elements](/components/modeler/desktop-modeler/element-templates/using-templates.md#updating-templates) to use the most recent version of the connector template. You cannot undo this action.
+- Continue using the older version of the connector template in their diagrams.
 
 ## JSON editor features
 
@@ -106,17 +106,17 @@ If there are problems at the root level of the JSON (such as a missing or misspe
 
 ![Some connector template problems highlighted in the first line](img/connector-templates/fix-connector-template-problems-2.png)
 
-## Importing an existing Connector template
+## Importing an existing connector template
 
 If you have created templates for Desktop Modeler and want to reuse them in Web Modeler, you need to make some adjustments to the template files:
 
-1. **Split the files**. Web Modeler maintains a 1:1 relation between Connector templates and files. Since Desktop Modeler allows you to keep multiple template definitions in single file, you must split the file in advance to one file per template before uploading.
-2. **Remove the brackets**. Remove the list brackets from the Connector template file before uploading. Even if a template file for Desktop Modeler contains only a single template, it is always wrapped in a list.
+1. **Split the files**. Web Modeler maintains a 1:1 relation between connector templates and files. Since Desktop Modeler allows you to keep multiple template definitions in single file, you must split the file in advance to one file per template before uploading.
+2. **Remove the brackets**. Remove the list brackets from the connector template file before uploading. Even if a template file for Desktop Modeler contains only a single template, it is always wrapped in a list.
 3. **Be aware that the ID and name of the template from the original file will be ignored.** A new ID is auto-assigned to ensure consistency and uniqueness in Web Modeler.
 
 Once your file follows the requirements, you can upload it. There are two ways to do so:
 
-1. Upload it as a _new Connector template_ via the <UploadIcon /> **Upload files** action in the projects view. This will auto-generate a new ID for the template.
+1. Upload it as a _new connector template_ via the <UploadIcon /> **Upload files** action in the projects view. This will auto-generate a new ID for the template.
 
    ![Uploading a new template via file upload](img/connector-templates/upload-files.png)
 
@@ -125,5 +125,5 @@ Once your file follows the requirements, you can upload it. There are two ways t
    ![Updating a template via file upload](img/connector-templates/replace-via-upload.png)
 
 :::info Desktop Modeler support
-The Connector template editor is currently only available in Web Modeler. Refer to the [Desktop Modeler documentation](/components/modeler/desktop-modeler/element-templates/about-templates.md) for instructions on configuring Connector templates in Desktop Modeler.
+The connector template editor is currently only available in Web Modeler. Refer to the [Desktop Modeler documentation](/components/modeler/desktop-modeler/element-templates/about-templates.md) for instructions on configuring connector templates in Desktop Modeler.
 :::

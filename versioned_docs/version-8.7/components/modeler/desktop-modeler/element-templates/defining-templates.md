@@ -59,7 +59,7 @@ Example:
 - `elementType : Object`: Optional type of the element. If you configure `elementType` on a template, the element is replaced with the specified type when a user applies the template.
 - `properties : Array<Object>`: List of properties of the template.
 
-## Creating and editing Connector templates
+## Creating and editing connector templates
 
 Connector templates are a specific kind of element template. You can edit them with visual preview and edit support like formatting, code completion, and error highlighting in [Web Modeler](/components/connectors/manage-connector-templates.md).
 
@@ -129,7 +129,7 @@ Let us consider the following example that defines a template for a mail sending
 ```json
 {
   "$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema/resources/schema.json",
-  "name": "REST Connector",
+  "name": "REST connector",
   "id": "io.camunda.examples.RestConnector",
   "description": "A REST API invocation task.",
   "appliesTo": ["bpmn:ServiceTask"],
@@ -370,11 +370,11 @@ Configures an [input mapping](../../../../concepts/variables/#input-mappings).
 
 #### `zeebe:output`
 
-| **Binding `type`**          | `zeebe:output`                                                             |
-| --------------------------- | -------------------------------------------------------------------------- |
-| **Valid property `type`'s** | `String`<br /> `Text`<br />`Hidden`<br />`Dropdown``Boolean`<br />`Number` |
-| **Binding parameters**      | `source`: The source of the output parameter                               |
-| **Mapping result**          | `<zeebe:output target="[userInput]" source="[source] />`                   |
+| **Binding `type`**          | `zeebe:output`                                                                   |
+| --------------------------- | -------------------------------------------------------------------------------- |
+| **Valid property `type`'s** | `String`<br /> `Text`<br />`Hidden`<br />`Dropdown`<br />`Boolean`<br />`Number` |
+| **Binding parameters**      | `source`: The source of the output parameter                                     |
+| **Mapping result**          | `<zeebe:output target="[userInput]" source="[source] />`                         |
 
 Configures an [output mapping](../../../../concepts/variables/#output-mappings).
 

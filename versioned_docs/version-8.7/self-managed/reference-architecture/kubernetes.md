@@ -46,7 +46,7 @@ The database is not depicted in the diagram, as we recommend handling it externa
 ### Kubernetes
 
 :::note
-The reference architecture overview describes the difference between the [Orchestration cluster and Web Modeler and Console](/docs/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console), and provides additional information on application communication.
+The reference architecture overview describes the difference between the [Orchestration cluster and Web Modeler and Console](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console), and provides additional information on application communication.
 :::
 
 A [multi-namespace deployment](/self-managed/setup/guides/multi-namespace-deployment.md) is recommended. For more information, see the [components](#components) section.

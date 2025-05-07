@@ -335,9 +335,9 @@ zeebe:
       ioThreadCount: "3"
 ```
 
-Next, for each environment variable, we need to find the configuration option in the [Zeebe configuration](docs/self-managed/zeebe-deployment/configuration/broker.md) section of our documentation.
+Next, for each environment variable, we need to find the configuration option in the [Zeebe configuration](/self-managed/zeebe-deployment/configuration/broker.md) section of our documentation.
 
-For `ZEEBE_BROKER_DATA_BACKUP_S3_BUCKETNAME`, we will search this page for anything relating to S3 or bucket name. In this case, the option is in [Zeebe S3 Backup](docs/self-managed/zeebe-deployment/configuration/broker.md#zeebebrokerdatabackups3)
+For `ZEEBE_BROKER_DATA_BACKUP_S3_BUCKETNAME`, we will search this page for anything relating to S3 or bucket name. In this case, the option is in [Zeebe S3 Backup](/self-managed/zeebe-deployment/configuration/broker.md#zeebebrokerdatabackups3)
 with the name `zeebe.broker.data.backup.s3.bucketName`.
 
 In our `config` file, add the `data` section under `zeebe.broker`:

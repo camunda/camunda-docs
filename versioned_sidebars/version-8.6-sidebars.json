@@ -995,18 +995,6 @@
                 },
                 {
                   "type": "category",
-                  "label": "User",
-                  "items": [
-                    {
-                      "type": "doc",
-                      "id": "apis-tools/camunda-api-rest/specifications/find-all-users",
-                      "label": "Query users (alpha)",
-                      "className": "api-method post"
-                    }
-                  ]
-                },
-                {
-                  "type": "category",
                   "label": "Resource",
                   "items": [
                     {
@@ -1662,7 +1650,7 @@
             "self-managed/setup/guides/add-extra-manifests",
             "self-managed/setup/guides/air-gapped-installation",
             "self-managed/setup/guides/running-custom-connectors",
-            "self-managed/setup/guides/prefix-elasticsearch-indices",
+            "self-managed/setup/guides/prefix-elasticsearch-opensearch-indices",
             "self-managed/setup/guides/multi-namespace-deployment",
             "self-managed/setup/guides/installing-payment-app-example",
             "self-managed/setup/guides/secret-management"
@@ -1764,6 +1752,7 @@
             "self-managed/console-deployment/overview",
             "self-managed/console-deployment/installation",
             "self-managed/console-deployment/configuration",
+            "self-managed/console-deployment/usage-metrics",
             "self-managed/console-deployment/telemetry"
           ],
           "Zeebe": [
@@ -1892,7 +1881,8 @@
                     "self-managed/identity/user-guide/configuration/making-identity-production-ready",
                     "self-managed/identity/user-guide/configuration/configure-external-identity-provider",
                     "self-managed/identity/user-guide/configuration/configure-logging",
-                    "self-managed/identity/user-guide/configuration/connect-to-an-existing-keycloak"
+                    "self-managed/identity/user-guide/configuration/connect-to-an-existing-keycloak",
+                    "self-managed/identity/user-guide/configuration/alternative-db"
                   ]
                 },
                 {

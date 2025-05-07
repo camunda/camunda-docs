@@ -1,25 +1,25 @@
 ---
 id: google-gemini
-title: Google Gemini Connector
+title: Google Gemini connector
 sidebar_label: Google Gemini
 description: The Gemini large language models (LLMs) that are used by Gemini for Google Cloud are trained on datasets of publicly available code, Google Cloud-specific material, and other relevant technical information in addition to the datasets used to train the Gemini [foundation models](https://storage.googleapis.com/deepmind-media/gemini/gemini_1_report.pdf).
 ---
 
 :::info
-The **Google Gemini Connector** is available for `8.7.0` or later.
+The **Google Gemini connector** is available for `8.7.0` or later.
 :::
 
-The **Google Gemini Connector** is an outbound Connector that allows you to access Gemini multimodal models from Google. It is capable of understanding virtually any input, and can combine different types of information in a BPMN process.
+The **Google Gemini connector** is an outbound connector that allows you to access Gemini multimodal models from Google. It is capable of understanding virtually any input, and can combine different types of information in a BPMN process.
 
-## Create a Google Gemini Connector task
+## Create a Google Gemini connector task
 
 import ConnectorTask from '../../../components/react-components/connector-task.md'
 
 <ConnectorTask/>
 
-## Make your Google Gemini Connector executable
+## Make your Google Gemini connector executable
 
-To execute this Connector, ensure all mandatory fields are correctly filled.
+To execute this connector, ensure all mandatory fields are correctly filled.
 
 :::note
 All the mandatory and non-mandatory fields and required settings depending on the operation selection you choose are covered in the upcoming sections.
@@ -176,7 +176,7 @@ For example:
 
 ### Google authentication types
 
-The **Google Gemini Connector** currently supports two methods for authentication and authorization:
+The **Google Gemini connector** currently supports two methods for authentication and authorization:
 
 - Based on a short-lived JWT bearer token.
 - Based on a refresh token.
@@ -197,7 +197,7 @@ import google.auth
 import google.auth.transport.requests
 from google.oauth2 import service_account
 # Scopes required to execute 'create' endpoind with Google Drive API
-SCOPES = ['https://www.googleapis.com/auth/drive', 'https://www.googleapis.com/auth/drive.file', 'https://www.googleapis.com/auth/drive.appdata']
+SCOPES = ['https://www.googleapis.com/auth/cloud-platform', 'https://www.googleapis.com/auth/generative-language.retriever']
 # File with keys
 SERVICE_ACCOUNT_FILE = 'google-service-account-creds.json'
 credentials = service_account.Credentials.from_service_account_file(SERVICE_ACCOUNT_FILE, scopes=SCOPES)
@@ -220,7 +220,7 @@ Assuming you have created an OAuth client, you can download key files from the G
 from google_auth_oauthlib.flow import InstalledAppFlow
 import pprint
 
-SCOPES = ['https://www.googleapis.com/auth/drive', 'https://www.googleapis.com/auth/documents']
+SCOPES = ['https://www.googleapis.com/auth/cloud-platform', 'https://www.googleapis.com/auth/generative-language.retriever']
 OAUTH_KEYS = './oauth-keys.json' # path to your file with OAuth credentials
 
 def main():
