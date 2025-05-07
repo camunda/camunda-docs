@@ -256,10 +256,10 @@ You can enable intra-cluster TLS secured connections between Operate and Zeebe b
 | zeebe.gateway.cluster.security.enabled              | Connection should be secure via Transport Layer Security (TLS).                                                     | true                              |
 | zeebe.gateway.cluster.security.certificateChainPath | Path to certificate used by Zeebe. This is necessary when the certificate isn't registered in the operating system. | /path/to/cert.pem                 |
 | zeebe.gateway.cluster.security.privateKeyPath       | Path to certificate's key used by Zeebe.                                                                            | /path/to/private.key              |
-| zeebe.gateway.cluster.advertisedHost                | Advertised hostname in the cluster                                                                                  | operate                           |
-| zeebe.gateway.cluster.memberId                      | Member id for the cluster                                                                                           | operate                           |
+| zeebe.gateway.cluster.advertisedHost                | Advertised hostname in the cluster.                                                                                 | operate                           |
+| zeebe.gateway.cluster.memberId                      | Member ID for the cluster.                                                                                          | operate                           |
 
-For extended configuration and guidelines refer to [Secure Cluster Communication](../zeebe-deployment/security/secure-cluster-communication.md) and [Gateway Configuration](../zeebe-deployment/configuration/gateway.md)
+For extended configuration and guidelines, refer to [secure cluster communication](../zeebe-deployment/security/secure-cluster-communication.md) and [gateway configuration](../zeebe-deployment/configuration/gateway.md).
 
 :::note
 Intra-cluster TLS secured connections are available from Operate 8.7.2.
