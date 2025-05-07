@@ -258,9 +258,9 @@ For more information, see the [BPMN Copilot documentation](/components/early-acc
 
 <!-- https://github.com/camunda/product-hub/issues/2511 -->
 
-### Ad-hoc subprocesses
+### Ad-hoc sub-processes
 
-A new [ad-hoc subprocess](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) BPMN element is now supported. This new kind of subprocess allows more flexible process flows with a compact visual representation. It is the first step towards dynamic processes and execution of ad-hoc activities.
+A new [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) BPMN element is now supported. This new kind of subprocess allows more flexible process flows with a compact visual representation. It is the first step towards dynamic processes and execution of ad-hoc activities.
 
 <!-- https://github.com/camunda/product-hub/issues/2546 -->
 
