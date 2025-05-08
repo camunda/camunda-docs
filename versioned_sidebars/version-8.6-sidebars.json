@@ -1645,6 +1645,7 @@
             "self-managed/setup/guides/using-existing-keycloak",
             "self-managed/setup/guides/using-existing-elasticsearch",
             "self-managed/setup/guides/using-existing-opensearch",
+            "self-managed/setup/guides/using-existing-postgres",
             "self-managed/setup/guides/configure-db-custom-headers",
             "self-managed/setup/guides/connect-to-an-oidc-provider",
             "self-managed/setup/guides/add-extra-manifests",
