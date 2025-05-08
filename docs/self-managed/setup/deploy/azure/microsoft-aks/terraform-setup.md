@@ -30,25 +30,114 @@ For the exact tool versions we’ve tested against, see the [.tool-versions](htt
 
 ### Considerations
 
-This setup provides a basic foundation for getting started with Camunda 8 on Azure AKS, but it is not fully optimized for performance or resilience. It serves as a good starting point for building out a production-ready environment by incorporating [IaC tooling](https://developer.hashicorp.com/terraform/tutorials/azure-get-started/infrastructure-as-code).
+This setup provides a basic foundation for getting started with Camunda 8 on AKS, but it is not fully optimized for performance. It serves as a good starting point for building out a production-ready environment by incorporating [IaC tooling](https://developer.hashicorp.com/terraform/tutorials/azure-get-started/infrastructure-as-code).
 
-To try out Camunda 8 or for development purposes, consider signing up for our [SaaS offering](https://camunda.com/platform/). If you already have an Azure AKS cluster, you can skip ahead to the [Helm guide](./aks-helm.md).
+To try out Camunda 8 or for development purposes, consider signing up for our [SaaS offering](https://camunda.com/platform/). If you already have an AKS cluster, you can skip ahead to the [Helm guide](./aks-helm.md).
 
 To keep this guide simple and focused, certain best practices are referenced via links to additional documentation, allowing you to explore each area in more detail when you're ready.
+
+### Azure Security Issues and Resolutions
 
 The following security considerations were relaxed to streamline adoption and development. These should be reassessed and hardened before deploying to production. The following items were identified using [Trivy](https://trivy.dev/) and can be looked up in the [Aqua vulnerability database](https://avd.aquasec.com/).
 
 These concessions are intentional in this reference infrastructure to simplify onboarding, allow internal-only access, and minimize friction during evaluation. They are not appropriate for production and must be revisited.
 
-```
-AVD-AZU-0047 #(CRITICAL): Security group rule allows unrestricted ingress from any IP address.
-AVD-AZU-0041 #(CRITICAL): Cluster does not limit API access to specific IP addresses.
-AVD-AZU-0013 #(CRITICAL): Vault network ACL does not block access by default.
+This section explains common security findings in Azure deployments and provides guidance on how to address them.
 
-AVD-AZU-0042 #(HIGH): RBAC is not enabled on cluster
+<details>
+<summary><strong>AVD-AZU-0047 (CRITICAL): Security group rule allows unrestricted ingress from any IP address</strong></summary>
 
-AVD-AZU-0040 #(MEDIUM): Cluster does not have logging enabled via OMS Agent.
-```
+#### Reasoning
+
+This finding indicates that a security group has been configured with a rule that allows incoming traffic from any IP address (0.0.0.0/0). This creates a significant security risk as it exposes your resources to potential attacks from anywhere on the internet.
+
+#### Potential Resolution
+
+1. Restrict incoming traffic to specific IP addresses or CIDR ranges that need access
+2. For management access, limit SSH/RDP to your company's IP ranges
+3. Use just-in-time access for administrative purposes
+4. Implement a bastion host/jump box for secure access
+5. Consider using Azure Private Link for private connectivity
+
+> **Documentation Note:** While allowing 0.0.0.0/0 simplifies testing, this should never be used in production environments. For automated testing purposes, consider using dedicated testing subscriptions with regular cleanup procedures.
+
+</details>
+
+<details>
+<summary><strong>AVD-AZU-0041 (CRITICAL): Cluster does not limit API access to specific IP addresses</strong></summary>
+
+#### Reasoning
+
+This finding shows that your Kubernetes cluster's API server is accessible from any IP address. The API server is the control plane for Kubernetes and unrestricted access increases the risk of unauthorized access and potential attacks.
+
+#### Potential Resolution
+
+1. Configure authorized IP ranges for the Kubernetes API server
+2. Use the `--api-server-authorized-ip-ranges` parameter to restrict access
+3. Implement private clusters where the API server has no public IP
+4. Use Azure Private Link to access the API server privately
+5. Enable Azure AD integration for additional authentication
+
+> **Documentation Note:** While open API access simplifies testing and development, production clusters should always restrict API server access to known IP ranges.
+
+</details>
+
+<details>
+<summary><strong>AVD-AZU-0013 (CRITICAL): Vault network ACL does not block access by default</strong></summary>
+
+#### Reasoning
+
+This finding indicates that your Azure Key Vault network access controls are not configured to deny access by default. This means that unless specifically restricted, traffic can reach your Key Vault from any source.
+
+#### Potential Resolution
+
+1. Enable the "Deny" default action for network ACLs
+2. Configure specific allowed IP ranges or virtual networks
+3. Use Private Endpoint for Key Vault access
+4. Use service endpoints to restrict access to specific Azure services
+5. Implement "Purge Protection" and "Soft Delete" for additional security
+
+> **Documentation Note:** Default deny configurations provide better security posture but may complicate initial setup and testing. For automated testing environments, clearly document these exceptions.
+
+</details>
+
+<details>
+<summary><strong>AVD-AZU-0042 (HIGH): RBAC is not enabled on cluster</strong></summary>
+
+#### Reasoning
+
+This finding indicates that Role-Based Access Control (RBAC) is not enabled on your Kubernetes cluster. Without RBAC, you cannot properly control who has what permissions in your cluster, potentially leading to privilege escalation or unauthorized access.
+
+#### Potential Resolution
+
+1. Enable RBAC when creating new clusters (this is now the default in AKS)
+2. For existing clusters, upgrade to a version that supports RBAC
+3. Implement Azure AD integration with RBAC
+4. Create and assign the appropriate roles to users and service principals
+5. Follow the principle of least privilege when assigning permissions
+
+> **Documentation Note:** While disabling RBAC simplifies testing by reducing permission barriers, this significantly reduces security and should never be done in production. For testing purposes, consider using dedicated test users with appropriate RBAC roles instead.
+
+</details>
+
+<details>
+<summary><strong>AVD-AZU-0040 (MEDIUM): Cluster does not have logging enabled via OMS Agent</strong></summary>
+
+#### Reasoning
+
+This finding indicates that comprehensive logging is not enabled on your Kubernetes cluster using the OMS (Operations Management Suite) Agent. Without proper logging, you have limited visibility into cluster operations, making it difficult to detect and respond to security incidents.
+
+#### Potential Resolution
+
+1. Enable Azure Monitor for containers on your AKS cluster
+2. Configure the OMS Agent to collect container logs and metrics
+3. Set up Log Analytics workspace for centralized log storage
+4. Create custom queries and alerts based on collected logs
+5. Consider implementing Azure Security Center for enhanced monitoring
+
+> **Documentation Note:** While disabling logging simplifies testing environments and reduces costs, production environments should always have comprehensive logging enabled. For testing purposes, consider using a shared Log Analytics workspace with appropriate retention policies.
+
+</details>
 
 :::warning
 
@@ -60,7 +149,7 @@ This approach allows you to extend and customize the codebase according to your 
 
 :::danger Cost management
 
-Following this guide will incur costs on your Azure account, including charges for Azure Kubernetes Service (AKS) node pools (virtual machine instances), Azure Managed Disks for persistent volumes, and Azure DNS zones for domain resolution. For more information, refer to the [Azure AKS pricing page](https://azure.microsoft.com/pricing/details/kubernetes-service/) and the [Azure pricing calculator](https://azure.microsoft.com/pricing/calculator/), as costs depend on region and configuration choices.
+Following this guide will incur costs on your Azure account, including charges for Azure Kubernetes Service (AKS), the compute (virtual machine instances) for the underlying nodes, Azure Managed Disks for persistent volumes, and Azure DNS zones for domain resolution. For more information, refer to the [AKS pricing page](https://azure.microsoft.com/pricing/details/kubernetes-service/) and the [Azure pricing calculator](https://azure.microsoft.com/pricing/calculator/), as costs depend on region and configuration choices.
 
 :::
 
@@ -86,12 +175,12 @@ Following this tutorial will result in:
 
 ### Obtain a copy of the reference architecture
 
-The first step is to download a copy of the reference architecture from the [GitHub repository](https://github.com/camunda/camunda-deployment-references/blob/main/azure/common/). This material will be used throughout the rest of this documentation. The reference architectures are versioned using the same Camunda versions (`stable/8.x`).
+The first step is to download a copy of the reference architecture of the [GitHub repository](https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/). This material will be used throughout the rest of this documentation. The reference architectures are versioned using the same Camunda versions (`stable/8.x`).
 
 The provided reference architecture repository allows you to directly reuse and extend the existing Terraform example base. This sample implementation is flexible to extend to your own needs without the potential limitations of a Terraform module maintained by a third party.
 
-```bash
-curl -sSL https://raw.githubusercontent.com/camunda/camunda-deployment-references/main/azure/common/procedure/get-your-copy.sh | bash
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/get-your-copy.sh
 ```
 
 With the reference architecture copied, you can proceed with the remaining steps outlined in this documentation. Ensure that you are in the correct directory before continuing with further instructions.
@@ -145,7 +234,7 @@ az login --service-principal \
   --tenant <tenant-id>
 ```
 
-Use the `appId` as the value for `terraform_sp_app_id` in your `terraform.tfvars`.
+Note that the `appId` will be needed as a value for `terraform_sp_app_id` when creating `terraform.tfvars` in a later step.
 
 :::warning
 
@@ -226,6 +315,18 @@ az ad sp list --display-name "<your-service-principal-name>" --query "[0].appId"
 
 If you're already using a Service Principal to authenticate (for example, with `az login --service-principal`), this value corresponds to the `appId` you supplied during login.
 
+When using a user account, you'll need the user's object ID rather than an application ID. You can retrieve this with:
+
+```shell
+az ad user show --id user@example.com --query id -o tsv
+```
+
+The key considerations when using a user account instead of a Service Principal are:
+
+The user must have sufficient permissions in Azure to perform the Terraform operations
+Authentication will be tied to the user's credentials rather than service principal credentials
+For automation scenarios, a Service Principal is still recommended as it doesn't rely on personal credentials
+
 This value is critical because Terraform uses it to assign the necessary permissions for interacting with encryption keys and other protected resources. If the ID is incorrect or omitted, key-related configurations may fail, and AKS will be unable to use CMK for securing cluster secrets.
 
 #### Initialize Terraform
@@ -295,8 +396,6 @@ This module is **enabled by default**. To opt out, you must:
 - Remove the `postgres_db` block from `main.tf`
 - Manually provide credentials and PostgreSQL endpoints for the Helm chart
 
-Let me know if you'd like this split out into docs-ready MDX format or have a similar summary for the `network`, `aks`, or `kms` modules.
-
 ### Execution
 
 :::note Secret management
@@ -325,13 +424,13 @@ terraform plan -out cluster.plan # describe what will be created
 terraform apply cluster.plan     # apply the creation
 ```
 
-Terraform will now create the Azure AKS cluster with all the necessary configurations. The completion of this process may require approximately 20–30 minutes.
+Terraform will now create the AKS cluster with all the necessary configurations. The completion of this process may require approximately 20–30 minutes.
 
 ## 2. Preparation for Camunda 8 installation
 
 ### Access the created AKS cluster
 
-You can gain access to the Azure AKS cluster using the `Azure CLI` with the following command:
+You can gain access to the AKS cluster using the `Azure CLI` with the following command:
 
 ```bash
 az aks get-credentials --resource-group <your-resource-group> --name <your-cluster-name> --overwrite-existing

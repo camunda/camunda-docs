@@ -1,5 +1,5 @@
 ---
-id: azure-aks
+id: microsoft-aks
 title: "Azure AKS"
 description: "Deploy Camunda 8 Self-Managed on Azure AKS"
 ---
@@ -11,6 +11,8 @@ Azure Kubernetes Service ([Azure AKS](https://azure.microsoft.com/products/kuber
 container orchestration service for deploying and scaling Kubernetes applications in the cloud.
 
 Camunda 8 Self-Managed can be deployed on any Kubernetes cluster using [Helm charts](/self-managed/setup/install.md). Deployment requirements, including cloud provider-specific information, are available in our [Kubernetes deployment reference](/self-managed/reference-architecture/kubernetes.md).
+
+#volume-performance
 
 ## Guides
 

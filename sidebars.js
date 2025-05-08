@@ -1019,11 +1019,11 @@ module.exports = {
                   label: "Azure AKS",
                   link: {
                     type: "doc",
-                    id: "self-managed/setup/deploy/azure/azure-aks/azure-aks",
+                    id: "self-managed/setup/deploy/azure/microsoft-aks/microsoft-aks",
                   },
                   items: [
-                    "self-managed/setup/deploy/azure/azure-aks/aks-terraform",
-                    "self-managed/setup/deploy/azure/azure-aks/aks-helm",
+                    "self-managed/setup/deploy/azure/microsoft-aks/aks-terraform",
+                    "self-managed/setup/deploy/azure/microsoft-aks/aks-helm",
                   ],
                 },
               ],
