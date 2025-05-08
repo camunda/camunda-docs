@@ -35,7 +35,7 @@ To use the FEEL Copilot in Web Modeler, take the following steps:
 
 <img src={FeelCopilotPanel} alt="FEEL Copilot panel within the FEEL popup" width="500px" />
 
-6. In the chat box, enter your prompt. A prompt should be a simple, clear, and concise request. For example, "Find the difference between two dates" or "Get the name from {“name”: “Alice”, "id", 123}". Note that more complex requests may take longer to process.
+6. In the chat box, enter your prompt. A prompt should be a simple, clear, and concise request. For example, "Find the difference between two dates" or "Get the name from \{"name": "Alice", "id", 123\}". Note that more complex requests may take longer to process.
 7. Wait for the FEEL Copilot to respond. This typically takes between 15-30 seconds, depending on the prompt.
 8. Click "Use expression" to save the expression to the FEEL popup.
 
@@ -48,7 +48,7 @@ Timeouts can occur during this step if your query is too complex.
 ### Generate FEEL expressions
 
 Check if a number is greater than 10
-What would this Java be in FEEL {input.trim().toUpperCase().replace(” “, “\_”);
+What would this Java be in FEEL: input.trim().toUpperCase().replace(" ", "\_");
 
 ### Translate Code to FEEL
 
@@ -65,7 +65,7 @@ Make it more compact
 ### Explain FEEL
 
 How does this work?
-What does {FEEL function} do?
+What does [FEEL function] do?
 Document how this FEEL expression works
 
 ### Examples
