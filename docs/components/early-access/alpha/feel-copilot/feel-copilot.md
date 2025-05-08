@@ -5,6 +5,8 @@ sidebar_label: FEEL Copilot
 description: "Chat with the AI FEEL Copilot for help generating FEEL (Friendly Enough Expression Language) expressions in Web Modeler."
 ---
 
+import OpenFeelCopilot from './img/open-feel-copilot.png';
+
 Chat with the AI FEEL Copilot for help generating FEEL (Friendly Enough Expression Language) expressions in [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md).
 
 :::note Terms of use
@@ -25,6 +27,9 @@ To use the FEEL Copilot in Web Modeler, take the following steps:
 2. Log in to [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md).
 3. Click **New project > Create new > BPMN diagram**
 4. Open a FEEL Popup. In a new diagram, you can click the Start Event (the circle in the diagram), then the + sign next to "Outputs" in the right sidebar. Click "Variable assignment value", then the two overlapping squares on the right side of the field.
+
+<img src={OpenFeelCopilot} alt="FEEL popup icon in properties panel" width="500px" />
+
 5. Click the arrow next to FEEL Copilot to open it
 6. In the chat box, enter your prompt. A prompt should be a simple, clear, and concise request. For example, "Find the difference between two dates" or "Get the name from {“name”: “Alice”, "id", 123}". Note that more complex requests may take longer to process.
 7. Wait for the FEEL Copilot to respond. This typically takes between 15-30 seconds, depending on the prompt.
@@ -38,7 +43,7 @@ Timeouts can occur during this step if your query is too complex.
 ### Generate FEEL expressions
 
 Check if a number is greater than 10
-What would this Java be in FEEL {input.trim().toUpperCase().replace(” “, “_”);
+What would this Java be in FEEL {input.trim().toUpperCase().replace(” “, “\_”);
 
 ### Translate Code to FEEL
 
