@@ -1,16 +1,16 @@
 ---
 id: amazon-s3
 sidebar_label: AWS S3
-title: Amazon S3 Connector
+title: Amazon S3 connector
 description: Interact with Amazon S3 services from your BPMN process.
 ---
 
-The **Amazon S3 Connector** is an outbound Connector that allows you to interact
+The **Amazon S3 connector** is an outbound connector that allows you to interact
 with [Amazon Simple Storage Service (Amazon S3)](https://aws.amazon.com/S3/) from your BPMN process.
 
 ## Prerequisites
 
-To use the **Amazon S3 Connector**, you will need an AWS account with an access key and secret key.
+To use the **Amazon S3 connector**, you will need an AWS account with an access key and secret key.
 
 The key will need the following permissions:
 
@@ -25,7 +25,7 @@ Use Camunda secrets to store credentials and avoid exposing sensitive informatio
 See [managing secrets](/components/console/manage-clusters/manage-secrets.md).
 :::
 
-## Create an Amazon S3 Connector task
+## Create an Amazon S3 connector task
 
 import ConnectorTask from '../../../components/react-components/connector-task.md'
 
@@ -52,7 +52,7 @@ credentials:
 - **Secret key**: Provide the secret key of the user with the access key provided above.
 
 :::note
-The **Access key** and the **Secret key** are required properties and must be provided to use the Connector.
+The **Access key** and the **Secret key** are required properties and must be provided to use the connector.
 :::
 
 ## Region
@@ -61,7 +61,7 @@ In the **Region** field, enter the region of the deployed endpoint.
 
 ## Action
 
-The Amazon S3 Connector supports the following actions:
+The Amazon S3 connector supports the following actions:
 
 - `Upload Document`
 - `Download Document`
@@ -93,7 +93,7 @@ The following JSON response is returned after a successful document upload opera
 - `link`: The document link.
 
 :::note
-Starting from version 8.7.0, the Amazon S3 Connector supports uploading documents from (or downloading documents to) the Camunda document store. Review the **Document** field in the properties panel where the document reference can be provided. See additional details and limitations in [document handling](/components/concepts/document-handling.md).
+Starting from version 8.7.0, the Amazon S3 connector supports uploading documents from (or downloading documents to) the Camunda document store. Review the **Document** field in the properties panel where the document reference can be provided. See additional details and limitations in [document handling](/components/concepts/document-handling.md).
 :::
 
 #### Example Response

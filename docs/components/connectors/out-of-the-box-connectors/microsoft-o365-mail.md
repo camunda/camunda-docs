@@ -1,15 +1,15 @@
 ---
 id: microsoft-o365-mail
-title: Microsoft 365 Connector
+title: Microsoft 365 connector
 sidebar_label: Microsoft 365
 description: Send and read Microsoft 365 emails from your BPMN process.
 ---
 
-The **Microsoft 365 Connector** is an outbound Connector that allows you to connect your BPMN service with [Microsoft 365](https://outlook.office.com/mail/) mail to send, read e-mails, and manage folders.
+The **Microsoft 365 connector** is an outbound connector that allows you to connect your BPMN service with [Microsoft 365](https://outlook.office.com/mail/) mail to send, read e-mails, and manage folders.
 
 ## Prerequisites
 
-- To use the **Microsoft 365 Connector**, you must have a [Microsoft 365](https://outlook.office.com/mail/) mail instance.
+- To use the **Microsoft 365 connector**, you must have a [Microsoft 365](https://outlook.office.com/mail/) mail instance.
 - You might also need to have sufficient access rights at [Microsoft Entra](https://entra.microsoft.com) to create a new app;
   set [Microsoft Graph](https://developer.microsoft.com/en-us/graph) permissions and assign an app to u user.
 
@@ -20,7 +20,7 @@ Use Camunda secrets to avoid exposing your Microsoft credentials as plain text.
 Refer to our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
 :::
 
-## Create a Microsoft 365 Connector task
+## Create a Microsoft 365 connector task
 
 import ConnectorTask from '../../../components/react-components/connector-task.md'
 
@@ -111,7 +111,7 @@ Related Microsoft Graph API: [user: sendMail](https://learn.microsoft.com/en-us/
 5. Pass an array of emails into the **To recipients** field, for example `["myuser1@mycompany.com", "myuser2@mycompany.com"]`.
 6. (Optional) Pass an array of emails into the **CC recipients** field, for example `["myuser3@mycompany.com", "myuser4@mycompany.com"]`.
 
-## Handle Connector response
+## Handle connector response
 
-The **Microsoft 365 Connector** is a protocol Connector, meaning it is built on top of the **HTTP REST Connector**, therefore
+The **Microsoft 365 connector** is a protocol connector, meaning it is built on top of the **HTTP REST connector**, therefore
 [handling response is still applicable](/components/connectors/protocol/rest.md#response).

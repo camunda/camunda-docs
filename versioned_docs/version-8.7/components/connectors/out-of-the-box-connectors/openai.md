@@ -1,16 +1,16 @@
 ---
 id: openai
-title: OpenAI Connector
+title: OpenAI connector
 sidebar_label: OpenAI
-description: Send messages to OpenAI from your BPMN process using the OpenAI Connector Connector.
+description: Send messages to OpenAI from your BPMN process using the OpenAI connector connector.
 ---
 
-The **OpenAI Connector** is an outbound Connector that allows you to use [ChatGPT](https://platform.openai.com/docs/guides/chat/chat-completions-beta)
+The **OpenAI connector** is an outbound connector that allows you to use [ChatGPT](https://platform.openai.com/docs/guides/chat/chat-completions-beta)
 or [Moderation API](https://platform.openai.com/docs/guides/moderation/moderation) in your BPMN process.
 
 ## Prerequisites
 
-To use the **OpenAI Connector**, create an OpenAI account and create an API key.
+To use the **OpenAI connector**, create an OpenAI account and create an API key.
 
 Refer to the [OpenAI Platform](https://platform.openai.com/docs/quickstart) documentation for a detailed setup guide.
 
@@ -18,26 +18,26 @@ Refer to the [OpenAI Platform](https://platform.openai.com/docs/quickstart) docu
 Use Camunda secrets to avoid exposing your sensitive data, such as your OpenAI API key, as plain text. Follow our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
 :::note
 
-## Create an OpenAI Connector task
+## Create an OpenAI connector task
 
 import ConnectorTask from '../../../components/react-components/connector-task.md'
 
 <ConnectorTask/>
 
-## Make your OpenAI Connector executable
+## Make your OpenAI connector executable
 
-To work with the **OpenAI Connector**, fill all mandatory fields.
+To work with the **OpenAI connector**, fill all mandatory fields.
 
 ## Authentication
 
-To use the **OpenAI Connector**, obtain an API key from OpenAI. To create an OpenAI account and learn more about API keys, visit the [OpenAI Platform](https://platform.openai.com/) documentation.
+To use the **OpenAI connector**, obtain an API key from OpenAI. To create an OpenAI account and learn more about API keys, visit the [OpenAI Platform](https://platform.openai.com/) documentation.
 
-### Create a new Connector secret
+### Create a new connector secret
 
 Keep your **API key** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
 1. Follow our [guide for creating secrets](/components/console/manage-clusters/manage-secrets.md).
-2. Name your secret (i.e `OPENAI_API_KEY`) so you can reference it later in the Connector.
+2. Name your secret (i.e `OPENAI_API_KEY`) so you can reference it later in the connector.
 
 ### Configure the API key
 
@@ -45,7 +45,7 @@ Select the **OpenAI API key** field in the **Authentication** section and set it
 
 ## Operations
 
-The **OpenAI Connector** currently supports two operation types in the **Operation** dropdown list: **Chat** and **Moderation**.
+The **OpenAI connector** currently supports two operation types in the **Operation** dropdown list: **Chat** and **Moderation**.
 
 ## Chat
 
@@ -88,7 +88,7 @@ OpenAI API doesn't store message history for ChatGPT. Therefore, it is up to you
 The **Chat history** input field may contain the history of previous messages or examples of the desired behavior.
 Following the translation example above, you can provide some translation examples to make the expectations clearer.
 
-Chat history consumed by this Connector follows the chat format described in the corresponding part of [OpenAI documentation](https://platform.openai.com/docs/guides/chat/introduction).
+Chat history consumed by this connector follows the chat format described in the corresponding part of [OpenAI documentation](https://platform.openai.com/docs/guides/chat/introduction).
 
 ### Prompt
 

@@ -711,11 +711,11 @@ module.exports = {
     "apis-tools/working-with-apis-tools",
     {
       APIs: [
+        require("./docs/apis-tools/camunda-api-rest/sidebar-schema"),
         require("./docs/apis-tools/administration-api/sidebar-schema"),
         require("./docs/apis-tools/administration-sm-api/sidebar-schema"),
-        require("./docs/apis-tools/camunda-api-rest/sidebar-schema"),
         {
-          "Optimize API (REST)": [
+          "Optimize API": [
             "apis-tools/optimize-api/overview",
             "apis-tools/optimize-api/optimize-api-authentication",
             "apis-tools/optimize-api/optimize-api-tutorial",
@@ -1055,7 +1055,7 @@ module.exports = {
             "self-managed/setup/guides/add-extra-manifests",
             "self-managed/setup/guides/air-gapped-installation",
             "self-managed/setup/guides/running-custom-connectors",
-            "self-managed/setup/guides/prefix-elasticsearch-indices",
+            "self-managed/setup/guides/prefix-elasticsearch-opensearch-indices",
             "self-managed/setup/guides/multi-namespace-deployment",
             "self-managed/setup/guides/installing-payment-app-example",
             "self-managed/setup/guides/secret-management",
@@ -1175,6 +1175,7 @@ module.exports = {
         {
           Troubleshooting: [
             "self-managed/operational-guides/troubleshooting/troubleshooting",
+            "self-managed/operational-guides/troubleshooting/diagnostics",
           ],
         },
       ],

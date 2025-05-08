@@ -59,7 +59,7 @@ A connector consists of the actual Java code, and the Modeler user interface.
 
 :::note
 
-- If you are only using prebuilt Connectors in Modeler, you only need to understand how to configure and use a Connector in the Modeler interface via the properties panel on the right side of the screen.
+- If you are only using prebuilt connectors in Modeler, you only need to understand how to configure and use a connector in the Modeler interface via the properties panel on the right side of the screen.
 - Connector templates are a specific type of [element template](/components/modeler/desktop-modeler/element-templates/about-templates.md), that can also be used when creating custom connectors using the [Connector SDK](connector-sdk.md).
 
 :::
