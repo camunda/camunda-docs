@@ -117,7 +117,13 @@ These values are applied only on first startup of Tasklist or during version upd
 ELS schema is created, settings may be adjusted directly in the ELS template:
 
 - Changes to `camunda.tasklist.elasticsearch.numberOfShards` will not be applied to existing indices and index templates.
-- Changes to `camunda.tasklist.elasticsearch.numberOfReplicas` will be applied to both existing and new indices.
+- Changes to `camunda.tasklist.elasticsearch.numberOfReplicas` will be applied to existing indices and index templates.
+
+:::warning
+
+Due to a known [bug](https://github.com/camunda/camunda/issues/31238), changes to `camunda.tasklist.elasticsearch.numberOfReplicas` are currently not applied to index templates.
+
+:::
 
 ### Snippet from application.yml
 
