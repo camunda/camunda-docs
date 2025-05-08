@@ -1083,8 +1083,7 @@
                 "self-managed/platform-deployment/helm-kubernetes/guides/installing-payment-app-example"
               ]
             },
-            "self-managed/platform-deployment/troubleshooting",
-            "self-managed/platform-deployment/diagnostics"
+            "self-managed/platform-deployment/troubleshooting"
           ]
         },
         "self-managed/platform-deployment/docker",
@@ -1128,7 +1127,8 @@
         },
         {
           "Troubleshooting": [
-            "self-managed/operational-guides/troubleshooting/log-levels"
+            "self-managed/operational-guides/troubleshooting/log-levels",
+            "self-managed/operational-guides/troubleshooting/diagnostics"
           ]
         }
       ]
