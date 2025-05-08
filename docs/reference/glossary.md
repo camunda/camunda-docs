@@ -179,11 +179,7 @@ A message contains information to be delivered to interested parties during exec
 
 ### Orchestration cluster
 
-An orchestration cluster includes Zeebe, Operate, Tasklist, Optimize, and Connectors. Previously [automation cluster](#automation-cluster).
-
-### Orchestration core
-
-An orchestration core or orchestration cluster core includes Zeebe, Operate, Tasklist, Optimize, and Identity.
+An orchestration cluster includes Zeebe, Operate, Tasklist, and an orchestration cluster-level Identity. With these, it can autonomously execute process workloads, serve the relevant frontend UIs, ensure authentication and authorization, and serve the gRPC and REST APIs. Previously [automation cluster](#automation-cluster).
 
 ### Outbound Connector
 
