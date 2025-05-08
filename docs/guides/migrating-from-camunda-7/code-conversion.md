@@ -27,13 +27,13 @@ This guide helps you do this if your code is written in Java, and covers the fol
 
 The Camunda 7 and Camunda 8 APIs share many similarities, but several aspects have been modernized in Camunda 8. Some of these changes are structural:
 
-- API endpoints for retrieving or searching resources have been streamlined. Instead of separate endpoints (e.g., `GET /resource` and `GET /resource/count`), Camunda 8 uses a single `POST /search` endpoint.
+- API endpoints for retrieving or searching resources are streamlined. Instead of separate endpoints (for example, `GET /resource` and `GET /resource/count`), Camunda 8 uses a single `POST /search` endpoint.
 - In Camunda 8, the `tenantId` is passed in the request body rather than as a path parameter, reducing the need for multiple endpoint variants as seen in Camunda 7.
 - Camunda 8 does not have separate API endpoints for historic data.
 
-To help you understand the differences between the two APIs, the table below maps the complete Camunda 7 REST API to its Camunda 8 counterparts and highlights key differences. For example, it explains why a specific endpoint or parameter may no longer be available—or whether it's planned for future implementation.
-
-For more details, visit the [Camunda 7 to 8 API Mapping Guide](https://camunda-community-hub.github.io/camunda-7-to-8-code-conversion/).
+:::info
+To help you understand the differences between the two APIs, the [Camunda 7 to 8 API Mapping Guide](https://camunda-community-hub.github.io/camunda-7-to-8-code-conversion/) maps the complete Camunda 7 REST API to its Camunda 8 counterparts and highlights key differences. For example, why a specific endpoint or parameter is no longer available, or if it is planned for future implementation.
+:::
 
 ## Code conversion patterns
 
