@@ -65,9 +65,12 @@ As a result, the process instance is banned from the workflow engine, while it's
 
 Banning the process instance is a safety mechanism to safeguard against incorrect execution of the process and to prevent a single error from jamming the entire partition's stream processor.
 
-- The workflow engine skips commands that are applicable to executing a banned process instance.
-- A banned process instance will not continue to execute. There is no way to continue the execution of a banned process instance.
-- You can still cancel a banned process instance, as commands related to canceling a banned process instance are not skipped.
+- A banned process instance will not continue to execute.
+- A banned process instance cannot be recovered.
+- You can still cancel a banned process instance.
+
+Internally, the workflow engine skips commands that are applicable to executing a banned process instance.
+Commands related to canceling a banned process instance are not skipped.
 
 ## Handling backpressure
 
