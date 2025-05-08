@@ -1,7 +1,7 @@
 ---
 id: amazon-eventbridge
 sidebar_label: AWS EventBridge
-title: Amazon EventBridge Connector
+title: Amazon EventBridge connector
 description: Send events to Amazon EventBridge from your BPMN process.
 ---
 
@@ -10,33 +10,33 @@ import TabItem from "@theme/TabItem";
 
 <Tabs groupId="awseventbridge" defaultValue="outbound" queryString values={
 [
-{label: 'Amazon EventBridge Connector', value: 'outbound' },
-{label: 'Amazon EventBridge Webhook Connector', value: 'inbound' }
+{label: 'Amazon EventBridge connector', value: 'outbound' },
+{label: 'Amazon EventBridge Webhook connector', value: 'inbound' }
 ]}>
 
 <TabItem value='outbound'>
 
-The **Amazon EventBridge Connector** integrates your BPMN service with [Amazon EventBridge](https://aws.amazon.com/eventbridge/), enabling the sending of events from your workflows for further processing or routing to other AWS services. It provides seamless event-driven integration within your business processes.
+The **Amazon EventBridge connector** integrates your BPMN service with [Amazon EventBridge](https://aws.amazon.com/eventbridge/), enabling the sending of events from your workflows for further processing or routing to other AWS services. It provides seamless event-driven integration within your business processes.
 
 For more information, refer to the [Amazon EventBridge documentation](https://docs.aws.amazon.com/eventbridge/index.html).
 
 ## Prerequisites
 
-Before using the **Amazon EventBridge Connector**, ensure you have the necessary permissions in your AWS account to send events to EventBridge. You will need an access key and secret key of a user with the appropriate permissions. Refer to the [AWS documentation](https://docs.aws.amazon.com/eventbridge/latest/userguide/auth-and-access-control-eventbridge.html) for more information.
+Before using the **Amazon EventBridge connector**, ensure you have the necessary permissions in your AWS account to send events to EventBridge. You will need an access key and secret key of a user with the appropriate permissions. Refer to the [AWS documentation](https://docs.aws.amazon.com/eventbridge/latest/userguide/auth-and-access-control-eventbridge.html) for more information.
 
 :::note
 Use Camunda secrets to avoid exposing your AWS IAM credentials as plain text. Refer to our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
 :::
 
-## Create an Amazon EventBridge Connector task
+## Create an Amazon EventBridge connector task
 
 import ConnectorTask from '../../../components/react-components/connector-task.md'
 
 <ConnectorTask/>
 
-## Configure the Amazon EventBridge Connector
+## Configure the Amazon EventBridge connector
 
-Follow these steps to configure the Amazon EventBridge Connector:
+Follow these steps to configure the Amazon EventBridge connector:
 
 1. Choose an applicable authentication type from the **Authentication** dropdown. Learn more about authentication types in the related [appendix entry](#aws-authentication-types).
 2. In the **Authentication** section, enter the relevant IAM key and secret pair of the user with permissions to send events to [Amazon EventBridge](https://aws.amazon.com/eventbridge).
@@ -49,9 +49,9 @@ Follow these steps to configure the Amazon EventBridge Connector:
 6. (Optional) In the **Output Mapping** section, you can set a **Result variable** or **Result expression**. Refer to the [response mapping documentation](/components/connectors/use-connectors/index.md#response-mapping) to learn more.
 7. (Optional) In the **Error Handling** section, define the **Error expression** to handle errors that may occur during the event sending process. Refer to the [response mapping documentation](/components/connectors/use-connectors/index.md#bpmn-errors-and-failing-jobs) to learn more.
 
-## Amazon EventBridge Connector response
+## Amazon EventBridge connector response
 
-The **Amazon EventBridge Connector** returns the [original response](https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutEvents.html) from the Amazon EventBridge service, including the **sdkResponseMetadata** and **sdkHttpMetadata**. Here is an example of the response:
+The **Amazon EventBridge connector** returns the [original response](https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutEvents.html) from the Amazon EventBridge service, including the **sdkResponseMetadata** and **sdkHttpMetadata**. Here is an example of the response:
 
 ```json
 {
@@ -88,7 +88,7 @@ The **Amazon EventBridge Connector** returns the [original response](https://doc
 
 ### AWS authentication types
 
-There are two options to authenticate the Connector with AWS:
+There are two options to authenticate the connector with AWS:
 
 - Choose **Credentials** in the **Authentication** dropdown if you have a valid pair of access and secret keys provided by your AWS account administrator. This option is applicable for both SaaS and Self-Managed users.
 - Choose **Default Credentials Chain (Hybrid/Self-Managed only)** in the **Authentication** dropdown if your system is configured as an implicit authentication mechanism, such as role-based authentication, credentials supplied via environment variables, or files on target host. This option is applicable only for Self-Managed or hybrid distribution. This approach uses the [Default Credential Provider Chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html) to resolve required credentials.
@@ -96,34 +96,34 @@ There are two options to authenticate the Connector with AWS:
 ## Next steps
 
 - [Amazon EventBridge documentation](https://docs.aws.amazon.com/eventbridge/)
-- Learn about [other Connectors available](./available-connectors-overview.md) in Camunda to integrate with different systems and services.
-- Learn more about [using Connectors](../use-connectors/index.md).
+- Learn about [other connectors available](./available-connectors-overview.md) in Camunda to integrate with different systems and services.
+- Learn more about [using connectors](../use-connectors/index.md).
 
 </TabItem>
 
 <TabItem value='inbound'>
 
-The **Amazon EventBridge Webhook Connector** is an inbound Connector enabling you to start a BPMN process instance triggered by an event from [Amazon EventBridge](https://aws.amazon.com/eventbridge/).
+The **Amazon EventBridge Webhook connector** is an inbound connector enabling you to start a BPMN process instance triggered by an event from [Amazon EventBridge](https://aws.amazon.com/eventbridge/).
 
-## Create an Amazon EventBridge Webhook Connector task
+## Create an Amazon EventBridge Webhook connector task
 
-1. Start building your BPMN diagram. You can use the **Amazon EventBridge Webhook Connector** with either a **Start Event** or an **Intermediate Catch Event** building block.
-2. Select the applicable element and change its template to an **Amazon EventBridge Connector**.
+1. Start building your BPMN diagram. You can use the **Amazon EventBridge Webhook connector** with either a **Start Event** or an **Intermediate Catch Event** building block.
+2. Select the applicable element and change its template to an **Amazon EventBridge connector**.
 3. Fill in all required properties.
 4. Complete your BPMN diagram.
 5. Deploy the diagram to activate the event trigger.
 
-## Configure the Amazon EventBridge Webhook Connector
+## Configure the Amazon EventBridge Webhook connector
 
 ### Fill properties in the Webhook Configuration section
 
 1. Choose one of the required methods in the **Webhook method** property. For example, if you know the webhook will be triggered by the **POST** method, choose **POST**. Alternatively, if it is not essential to specify a specific method for the webhook trigger, select **ANY**.
-2. Configure the **Webhook ID**. By default, the **Webhook ID** is pre-filled with a random value. This value will be part of the Webhook URL. For more details about Webhook URLs, refer to the section below on [activating the Amazon EventBridge Webhook Connector by deploying your diagram](#activate-the-amazon-eventbridge-connector-by-deploying-your-diagram).
+2. Configure the **Webhook ID**. By default, the **Webhook ID** is pre-filled with a random value. This value will be part of the Webhook URL. For more details about Webhook URLs, refer to the section below on [activating the Amazon EventBridge Webhook connector by deploying your diagram](#activate-the-amazon-eventbridge-connector-by-deploying-your-diagram).
 3. (Optional) Fill in the **Event Bus Name** property if you want to specify a specific event bus to subscribe to. If left empty, the default event bus will be used.
 
 ### Fill properties in the Authorization section
 
-The Amazon EventBridge Webhook Connector supports four types of authorization:
+The Amazon EventBridge Webhook connector supports four types of authorization:
 
 - **None (without authorization)**: No authentication is required for the webhook. Anyone can trigger the webhook without any credentials.
 
@@ -149,7 +149,7 @@ The Amazon EventBridge Webhook Connector supports four types of authorization:
 
 - **API Key**: This authorization type requires the following properties to be filled:
   - **API Key**: The API key that needs to be provided in the request to authenticate the webhook.
-  - **API Key Locator**: A FEEL expression that extracts the API key from the request. This expression is evaluated in the Connector Runtime to retrieve the API key from the incoming request. For example, the API Key Locator could be:
+  - **API Key Locator**: A FEEL expression that extracts the API key from the request. This expression is evaluated in the connector Runtime to retrieve the API key from the incoming request. For example, the API Key Locator could be:
   ```
   =split(request.headers.authorization, " ")[2]
   ```
@@ -187,13 +187,13 @@ the Activation Condition value might look like this:
 =(get value(request.body, "detail-type")="MyEvent" and request.body.detail.status="received")
 ```
 
-This condition will trigger the Amazon EventBridge Webhook Connector only when the detail-type is "MyEvent" and the status is "received".
+This condition will trigger the Amazon EventBridge Webhook connector only when the detail-type is "MyEvent" and the status is "received".
 
-2. When using the **Amazon EventBridge Webhook Connector** with an **Intermediate Catch Event**, fill in the **Correlation key (process)** and **Correlation key (payload)**.
+2. When using the **Amazon EventBridge Webhook connector** with an **Intermediate Catch Event**, fill in the **Correlation key (process)** and **Correlation key (payload)**.
 
 - **Correlation key (process)** is a FEEL expression that defines the correlation key for the subscription. This corresponds to the **Correlation key** property of a regular **Message Intermediate Catch Event**.
 
-- **Correlation key (payload)** is a FEEL expression used to extract the correlation key from the incoming message. This expression is evaluated in the Connector Runtime, and the result is used to correlate the message.
+- **Correlation key (payload)** is a FEEL expression used to extract the correlation key from the incoming message. This expression is evaluated in the connector Runtime, and the result is used to correlate the message.
 
 - **Message ID expression** and **Message TTL** are optional properties that can be used to set the message ID and time-to-live for the incoming message. Refer to the [message ID expression](#message-id-expression) and [message TTL](#message-ttl) sections for more information.
 
@@ -224,7 +224,7 @@ your correlation key settings will look like this:
 #### Message ID expression
 
 The **Message ID expression** is an optional field that allows you to extract the message ID from the incoming message. The message ID serves as a unique identifier for the message and is used for message correlation.
-This expression is evaluated in the Connector Runtime and the result is used to correlate the message.
+This expression is evaluated in the connector Runtime and the result is used to correlate the message.
 
 In most cases, it is not necessary to configure the **Message ID expression**. However, it is useful if you want to ensure message deduplication or achieve a certain message correlation behavior. Learn more about how message IDs influence message correlation in the [messages guide](../../../concepts/messages#message-correlation-overview).
 
@@ -239,28 +239,28 @@ For example, if you want to set the message ID to the value of the `detail.trans
 The **Message TTL** is an optional field that allows you to set the time-to-live (TTL) for the correlated messages. TTL defines the time for which the message is buffered in Zeebe before being correlated to the process instance (if it can't be correlated immediately).
 The value is specified as an ISO 8601 duration. For example, `PT1H` sets the TTL to one hour. Learn more about the TTL concept in Zeebe in the [message correlation guide](../../../concepts/messages#message-buffering).
 
-## Activate the Amazon EventBridge Connector by deploying your diagram
+## Activate the Amazon EventBridge connector by deploying your diagram
 
-Once you click **Deploy**, your Amazon EventBridge Webhook Connector will be activated and ready to receive events.
+Once you click **Deploy**, your Amazon EventBridge Webhook connector will be activated and ready to receive events.
 
 The URLs of the exposed Amazon EventBridge Webhooks adhere to the following pattern:
 
 `http(s)://<base URL>/webhooks/<webhook ID>`
 
-- `<base URL>` is the URL of the Connectors component deployment. When using the Camunda 8 SaaS offering, this will typically contain your **region Id** and **cluster Id**, found in your client credentials under the **API** tab within your cluster.
-- `<webhook ID>` is the ID (path) you configured in the properties of your Amazon EventBridge Webhook Connector.
+- `<base URL>` is the URL of the connectors component deployment. When using the Camunda 8 SaaS offering, this will typically contain your **region Id** and **cluster Id**, found in your client credentials under the **API** tab within your cluster.
+- `<webhook ID>` is the ID (path) you configured in the properties of your Amazon EventBridge Webhook connector.
 
 :::note
-If you make changes to your Amazon EventBridge Webhook Connector configuration, redeploy the BPMN diagram for the changes to take effect.
+If you make changes to your Amazon EventBridge Webhook connector configuration, redeploy the BPMN diagram for the changes to take effect.
 :::
 
-When you click on the event with the Amazon EventBridge Webhook Connector applied to it, a new **Webhooks** tab will appear in the properties panel.
-This tab displays the URL of the Amazon EventBridge Webhook Connector for every cluster where you have deployed your BPMN diagram.
+When you click on the event with the Amazon EventBridge Webhook connector applied to it, a new **Webhooks** tab will appear in the properties panel.
+This tab displays the URL of the Amazon EventBridge Webhook connector for every cluster where you have deployed your BPMN diagram.
 
 :::note
 The **Webhooks** tab is only supported in Web Modeler as part of the Camunda 8 SaaS offering.
-You can still use the Amazon EventBridge Webhook Connector in Desktop Modeler or with Camunda 8 Self-Managed.
-In that case, Amazon EventBridge Webhook Connector deployments and URLs will not be displayed in Modeler.
+You can still use the Amazon EventBridge Webhook connector in Desktop Modeler or with Camunda 8 Self-Managed.
+In that case, Amazon EventBridge Webhook connector deployments and URLs will not be displayed in Modeler.
 :::
 
 ## Output mapping
@@ -268,7 +268,7 @@ In that case, Amazon EventBridge Webhook Connector deployments and URLs will not
 The **Output mapping** section allows you to configure the mapping of the event payload to the process variables.
 
 - Use the **Result variable** to store the event data in a process variable. For example, `myEventPayload`.
-- Use the **Result expression** to map specific fields from the event payload into process variables using [FEEL](/components/modeler/feel/what-is-feel.md). For example, given the Amazon EventBridge Connector is triggered with an event payload like:
+- Use the **Result expression** to map specific fields from the event payload into process variables using [FEEL](/components/modeler/feel/what-is-feel.md). For example, given the Amazon EventBridge connector is triggered with an event payload like:
 
 ```
 {
@@ -315,8 +315,8 @@ To configure Amazon EventBridge, follow the steps below:
 
 - Learn more about [Amazon EventBridge](https://aws.amazon.com/eventbridge/) and its capabilities.
 - Explore other [Connectors available](./available-connectors-overview.md) in Camunda to integrate with different systems and services.
-- Learn more about using Connectors [here](../use-connectors/index.md).
-- Learn more about inbound Connectors [here](../use-connectors/inbound.md).
+- Learn more about using connectors [here](../use-connectors/index.md).
+- Learn more about inbound connectors [here](../use-connectors/inbound.md).
 
 </TabItem>
 

@@ -181,7 +181,15 @@ module.exports = {
         type: "doc",
         id: "components/rpa/overview",
       },
-      items: ["components/rpa/getting-started", "components/rpa/production"],
+      items: [
+        "components/rpa/getting-started",
+        "components/rpa/production",
+        {
+          type: "link",
+          label: "RPA library specifications",
+          href: "https://camunda.github.io/rpa-python-libraries/",
+        },
+      ],
     },
     {
       type: "category",
@@ -373,6 +381,7 @@ module.exports = {
             "components/connectors/connector-types",
             "components/connectors/use-connectors/inbound",
             "components/connectors/use-connectors/outbound",
+            "components/connectors/use-connectors/intrinsic-functions",
           ],
         },
         {
@@ -702,11 +711,11 @@ module.exports = {
     "apis-tools/working-with-apis-tools",
     {
       APIs: [
+        require("./docs/apis-tools/camunda-api-rest/sidebar-schema"),
         require("./docs/apis-tools/administration-api/sidebar-schema"),
         require("./docs/apis-tools/administration-sm-api/sidebar-schema"),
-        require("./docs/apis-tools/camunda-api-rest/sidebar-schema"),
         {
-          "Optimize API (REST)": [
+          "Optimize API": [
             "apis-tools/optimize-api/overview",
             "apis-tools/optimize-api/optimize-api-authentication",
             "apis-tools/optimize-api/optimize-api-tutorial",
@@ -1046,7 +1055,7 @@ module.exports = {
             "self-managed/setup/guides/add-extra-manifests",
             "self-managed/setup/guides/air-gapped-installation",
             "self-managed/setup/guides/running-custom-connectors",
-            "self-managed/setup/guides/prefix-elasticsearch-indices",
+            "self-managed/setup/guides/prefix-elasticsearch-opensearch-indices",
             "self-managed/setup/guides/multi-namespace-deployment",
             "self-managed/setup/guides/installing-payment-app-example",
             "self-managed/setup/guides/secret-management",
@@ -1166,6 +1175,7 @@ module.exports = {
         {
           Troubleshooting: [
             "self-managed/operational-guides/troubleshooting/troubleshooting",
+            "self-managed/operational-guides/troubleshooting/diagnostics",
           ],
         },
       ],
@@ -1207,6 +1217,7 @@ module.exports = {
                 "self-managed/console-deployment/configuration/ssl",
               ],
             },
+            "self-managed/console-deployment/usage-metrics",
             "self-managed/console-deployment/telemetry",
           ],
           Zeebe: [

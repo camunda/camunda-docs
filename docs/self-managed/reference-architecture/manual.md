@@ -30,7 +30,7 @@ This section includes deployment reference architectures for manual setups:
 
 ## Considerations
 
-- This overview page focuses on deploying the [orchestration cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster), the single JAR compromised of Identity, Operate, Optimize, Tasklist, and Zeebe, as well as the Connectors runtime. Web Modeler and Console deployments are not included.
+- This overview page focuses on deploying the [orchestration cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster), the single JAR compromised of Identity, Operate, Optimize, Tasklist, and Zeebe, as well as the connectors runtime. Web Modeler and Console deployments are not included.
 - General guidance and examples focuses on **unix** users, but can be adapted by Windows users with options like [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) or included `batch` files.
 - The Optimize importer is not highly available and must only run once within the whole setup.
 
@@ -65,7 +65,7 @@ The orchestration core is packaged as a single JAR file and includes the followi
 The core facilitates:
 
 1. **gRPC communication**: For client workers.
-2. **HTTP endpoints**: Used by the REST API and Web UI.
+2. **HTTP endpoints**: Used by the Camunda 8 REST API and Web UI.
 
 Both types of endpoints can be routed through a load balancer to maintain availability, ensuring that the system remains accessible even if a machine becomes unavailable. While using a load balancer is optional, it is recommended for enhanced availability and security. Alternatively, you can expose static machines, ports, and IPs directly. However, direct exposure is generally discouraged due to security concerns.
 

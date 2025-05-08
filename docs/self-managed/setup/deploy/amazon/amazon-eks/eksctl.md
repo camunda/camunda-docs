@@ -354,10 +354,11 @@ kubectl get nodes
 Create a namespace for Camunda:
 
 ```shell
-kubectl create namespace camunda
+export CAMUNDA_NAMESPACE="camunda"
+kubectl create namespace "$CAMUNDA_NAMESPACE"
 ```
 
-In the remainder of the guide, we reference the `camunda` namespace to create some required resources in the Kubernetes cluster, such as secrets or one-time setup jobs.
+In the remainder of the guide, we reference the `CAMUNDA_NAMESPACE` variable as the namespace to create some required resources in the Kubernetes cluster, such as secrets or one-time setup jobs.
 
 ### Check existing StorageClasses
 
@@ -767,7 +768,7 @@ We will also use this step to verify connectivity to the database from the creat
 2. Create a secret that references the environment variables:
 
    ```bash
-   kubectl create secret generic setup-db-secret --namespace camunda \
+   kubectl create secret generic setup-db-secret --namespace "$CAMUNDA_NAMESPACE" \
      --from-literal=AURORA_ENDPOINT="$DB_HOST" \
      --from-literal=AURORA_PORT="5432" \
      --from-literal=AURORA_DB_NAME="postgres" \
@@ -789,7 +790,7 @@ We will also use this step to verify connectivity to the database from the creat
    After running the above command, you can verify that the secret was created successfully by using:
 
    ```bash
-   kubectl get secret setup-db-secret -o yaml --namespace camunda
+   kubectl get secret setup-db-secret -o yaml --namespace "$CAMUNDA_NAMESPACE"
    ```
 
    This should display the secret with the base64 encoded values.
@@ -803,7 +804,7 @@ We will also use this step to verify connectivity to the database from the creat
 4. Apply the manifest:
 
    ```bash
-   kubectl apply -f setup-postgres-create-db.yml --namespace camunda
+   kubectl apply -f setup-postgres-create-db.yml --namespace "$CAMUNDA_NAMESPACE"
    ```
 
    Once the secret is created, the **Job** manifest from the previous step can consume this secret to securely access the database credentials.
@@ -811,7 +812,7 @@ We will also use this step to verify connectivity to the database from the creat
 5. Once the job is created, monitor its progress using:
 
    ```bash
-   kubectl get job/create-setup-user-db --namespace camunda --watch
+   kubectl get job/create-setup-user-db --namespace "$CAMUNDA_NAMESPACE" --watch
    ```
 
    Once the job shows as `Completed`, the users and databases will have been successfully created.
@@ -819,14 +820,14 @@ We will also use this step to verify connectivity to the database from the creat
 6. View the logs of the job to confirm that the users were created and privileges were granted successfully:
 
    ```bash
-   kubectl logs job/create-setup-user-db --namespace camunda
+   kubectl logs job/create-setup-user-db --namespace "$CAMUNDA_NAMESPACE"
    ```
 
 7. Cleanup the resources:
 
    ```bash
-   kubectl delete job create-setup-user-db --namespace camunda
-   kubectl delete secret setup-db-secret --namespace camunda
+   kubectl delete job create-setup-user-db --namespace "$CAMUNDA_NAMESPACE"
+   kubectl delete secret setup-db-secret --namespace "$CAMUNDA_NAMESPACE"
    ```
 
    Running these commands will clean up both the job and the secret, ensuring that no unnecessary resources remain in the cluster.

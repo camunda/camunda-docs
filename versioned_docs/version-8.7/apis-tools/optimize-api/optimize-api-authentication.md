@@ -61,7 +61,7 @@ All Optimize API requests except [the health readiness](./health-readiness.md) e
 2. [Add an M2M application in Identity](/self-managed/identity/user-guide/additional-features/incorporate-applications.md).
 3. [Add permissions to this application](/self-managed/identity/user-guide/additional-features/incorporate-applications.md) for **Optimize API**.
 4. Capture the `Client ID` and `Client Secret` from the application in Identity.
-5. [Generate a token](/self-managed/identity/user-guide/authorizations/generating-m2m-tokens.md) to access the REST API. Provide the `client_id` and `client_secret` from the values you previously captured in Identity.
+5. [Generate a token](/self-managed/identity/user-guide/authorizations/generating-m2m-tokens.md) to access the Optimize REST API. Provide the `client_id` and `client_secret` from the values you previously captured in Identity.
    ```shell
    curl --location --request POST 'http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token' \
    --header 'Content-Type: application/x-www-form-urlencoded' \

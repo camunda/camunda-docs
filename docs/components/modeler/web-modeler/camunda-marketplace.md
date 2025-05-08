@@ -6,21 +6,21 @@ description: "Visit the Camunda Marketplace to browse available resources, and i
 
 Discover the **Camunda Marketplace**, your go-to destination for leveraging various contributions from the Camunda community, trusted partners, and the Camunda team.
 
-Follow our intuitive guides to explore and harness Connectors and blueprints using Web Modeler. If you prefer to utilize these resources within Desktop Modeler, download them directly from the [Camunda Marketplace website](https://marketplace.camunda.com).
+Follow our intuitive guides to explore and harness connectors and blueprints using Web Modeler. If you prefer to utilize these resources within Desktop Modeler, download them directly from the [Camunda Marketplace website](https://marketplace.camunda.com).
 
 If you are a **[Web Modeler Self-Managed](/self-managed/modeler/web-modeler/installation.md)** user, be aware that your organization may restrict access to marketplace resources. If you are unsure about your organization's access, contact your organization's owner for clarification.
 
-## Browse Marketplace Connectors
+## Browse Marketplace connectors
 
 :::note
-Connectors created by partners or the community are not part of the commercial Camunda product. Camunda does not support these Connectors as part of its commercial services to enterprise customers. Please evaluate each client to make sure it meets your requirements before using.
+Connectors created by partners or the community are not part of the commercial Camunda product. Camunda does not support these connectors as part of its commercial services to enterprise customers. Please evaluate each client to make sure it meets your requirements before using.
 :::
 
 To navigate to the Camunda Marketplace, take the following steps:
 
 1. Log in to your Camunda account.
 2. Click on an existing project, or create a new project by clicking **New project > Create new > BPMN diagram**.
-3. While modeling your BPMN diagram, you can incorporate Marketplace Connectors from the append menu. The append menu can be accessed in three ways:
+3. While modeling your BPMN diagram, you can incorporate Marketplace connectors from the append menu. The append menu can be accessed in three ways:
 
 - From the canvas, select an element and click the **Change element** icon.
 - From the properties panel on the right side of the screen, navigate to the **Template** section and click **Select**.
@@ -29,30 +29,30 @@ To navigate to the Camunda Marketplace, take the following steps:
 
 4. Click the **blue shop icon** next to Change element to open the Camunda Marketplace modal.
    ![marketplace icon](./img/marketplace-icon.png)
-5. Browse [available Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md), tick the boxes on the left side of the modal to implement filters, and search for a specific Connector by typing in the **Search for a connector** search bar.
+5. Browse [available connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md), tick the boxes on the left side of the modal to implement filters, and search for a specific connector by typing in the **Search for a connector** search bar.
    ![camunda marketplace](./img/connector-marketplace.png)
 
 :::note
-Want to learn more about a Connector before applying it to your diagram? Every Connector in the Camunda Marketplace offers additional documentation by clicking the **Documentation** link inside the Connector's box. This will open a new tab in your browser of the [Camunda Marketplace](https://marketplace.camunda.com/) and additional details for the Connector you selected.
+Want to learn more about a connector before applying it to your diagram? Every connector in the Camunda Marketplace offers additional documentation by clicking the **Documentation** link inside the connector's box. This will open a new tab in your browser of the [Camunda Marketplace](https://marketplace.camunda.com/) and additional details for the connector you selected.
 :::
 
-## Download a Connector to your diagram
+## Download a connector to your diagram
 
-Once you find a Connector you want to integrate into your BPMN diagram, click **Download to project**. The resource is then downloaded from the Camunda Marketplace into your project.
+Once you find a connector you want to integrate into your BPMN diagram, click **Download to project**. The resource is then downloaded from the Camunda Marketplace into your project.
 
-Scroll down in the change type context menu and click on your downloaded Connector to change the type of existing task. You can then add the required details in the properties panel on the right side of the screen.
+Scroll down in the change type context menu and click on your downloaded connector to change the type of existing task. You can then add the required details in the properties panel on the right side of the screen.
 
 After downloading, you may view a modal reading **Connector already exists**:
 
-- By clicking **Save as copy**, you are not overwriting the current Connector. Instead, you are saving this as a new file you can edit.
-- By clicking **Replace resource**, you are replacing the current Connector. If you are downloading a Connector from the Camunda Marketplace, it is read-only and you can view it if you are opening the template using the Camunda template editor. To edit the Connector, click **Customize template** to duplicate this template.
+- By clicking **Save as copy**, you are not overwriting the current connector. Instead, you are saving this as a new file you can edit.
+- By clicking **Replace resource**, you are replacing the current connector. If you are downloading a connector from the Camunda Marketplace, it is read-only and you can view it if you are opening the template using the Camunda template editor. To edit the connector, click **Customize template** to duplicate this template.
 
 :::note
-You can also host custom Connectors developed with [Connector SDK](/components/connectors/custom-built-connectors/connector-sdk.md). Instead of viewing **Download to project**, it may read [**Learn more about self-hosted Connectors**](/guides/host-custom-connector.md).
+You can also host custom connectors developed with [Connector SDK](/components/connectors/custom-built-connectors/connector-sdk.md). Instead of viewing **Download to project**, it may read [**Learn more about self-hosted connectors**](/guides/host-custom-connector.md).
 
-For the out-of-the-box Connectors provided by Camunda, the Connectors Bundle project provides a set of all Connector templates related to one release version. These are templates that are reusing the Camunda Connectors via the [Protocol Connector Approach](/components/connectors/protocol/rest.md).
+For the out-of-the-box connectors provided by Camunda, the connectors Bundle project provides a set of all connector templates related to one release version. These are templates that are reusing the Camunda connectors via the [Protocol connector Approach](/components/connectors/protocol/rest.md).
 
-This means a developer created a template and reused one of the Camunda Connector runtimes. Only for these templates is direct **Download to project** available.
+This means a developer created a template and reused one of the Camunda connector runtimes. Only for these templates is direct **Download to project** available.
 :::
 
 ## Browse Marketplace blueprints
@@ -68,6 +68,6 @@ This means a developer created a template and reused one of the Camunda Connecto
 
 ## Additional resources
 
-- Learn more about our available [out-of-the-box Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md).
+- Learn more about our available [out-of-the-box connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md).
 - Understand different [Connector types](/components/connectors/connector-types.md).
 - Learn how to modify BPMN elements with [Connector templates](/components/connectors/custom-built-connectors/connector-templates.md) to create custom modeling experiences.

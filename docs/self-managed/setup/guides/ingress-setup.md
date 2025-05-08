@@ -104,7 +104,7 @@ The configuration above only contains the Ingress-related values under `Console`
 Incorporate the custom values mentioned in the example above into the value file you're using to deploy Camunda as outlined in [deploying Camunda 8](/self-managed/setup/install.md):
 
 ```shell
-helm install demo camunda/camunda-platform -f values-combined-ingress.yaml
+helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION -f values-combined-ingress.yaml
 ```
 
 Once deployed, you can access the Camunda 8 components on:

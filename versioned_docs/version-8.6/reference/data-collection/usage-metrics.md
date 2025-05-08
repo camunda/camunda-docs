@@ -46,3 +46,5 @@ For **task users**, follow the steps provided in the [Tasklist guide](/self-mana
 :::note
 If you are not running Tasklist or Operate, there is currently no way to retrieve usage metrics until future releases. Regardless, the metrics still need to be factored into any enterprise agreement and count towards any task user pricing.
 :::
+
+With Console installed, it may be easier to access usage metrics from Operate and Tasklist. Perform the steps described above via the corresponding [Console usage metrics documentation](../../self-managed/console-deployment/usage-metrics.md).

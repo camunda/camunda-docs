@@ -80,7 +80,7 @@ Migrating to Camunda 8 gives you additional advantages, which might raise priori
 
 - You want to leverage a SaaS offering (for example, to reduce the effort for hardware or infrastructure setup and maintenance).
 - You need performance at scale and/or improved resilience.
-- You need certain features that can only be found in Camunda 8 (for example, BPMN message buffering, improved multi-instance handling, the new Connectors framework, RPA, IDP, or the improved collaboration features in Web Modeler).
+- You need certain features that can only be found in Camunda 8 (for example, BPMN message buffering, improved multi-instance handling, the new connectors framework, RPA, IDP, or the improved collaboration features in Web Modeler).
 
 <!-- TODO Link to conceptual differences -->
 

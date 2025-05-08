@@ -12,7 +12,7 @@ All Administration Self-Managed API requests require authentication. To authenti
 1. [Add an M2M application in Identity](/self-managed/identity/user-guide/additional-features/incorporate-applications.md).
 2. [Add permissions to this application](/self-managed/identity/user-guide/additional-features/incorporate-applications.md) for **Administration Self-Managed API**.
 3. Capture the `Client ID` and `Client Secret` from the application in Identity.
-4. [Generate a token](/self-managed/identity/user-guide/authorizations/generating-m2m-tokens.md) to access the REST API. Provide the `client_id` and `client_secret` from the values you previously captured in Identity.
+4. [Generate a token](/self-managed/identity/user-guide/authorizations/generating-m2m-tokens.md) to access the Administration REST API. Provide the `client_id` and `client_secret` from the values you previously captured in Identity.
    ```shell
    curl --location --request POST 'http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token' \
    --header 'Content-Type: application/x-www-form-urlencoded' \

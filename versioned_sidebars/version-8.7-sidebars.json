@@ -178,7 +178,15 @@
         "type": "doc",
         "id": "components/rpa/overview"
       },
-      "items": ["components/rpa/getting-started", "components/rpa/production"]
+      "items": [
+        "components/rpa/getting-started",
+        "components/rpa/production",
+        {
+          "type": "link",
+          "label": "RPA library specifications",
+          "href": "https://camunda.github.io/rpa-python-libraries/"
+        }
+      ]
     },
     {
       "type": "category",
@@ -477,7 +485,8 @@
           "items": [
             "components/connectors/connector-types",
             "components/connectors/use-connectors/inbound",
-            "components/connectors/use-connectors/outbound"
+            "components/connectors/use-connectors/outbound",
+            "components/connectors/use-connectors/intrinsic-functions"
           ]
         },
         {
@@ -1137,18 +1146,6 @@
                       "type": "doc",
                       "id": "apis-tools/camunda-api-rest/specifications/create-document-link",
                       "label": "Create document link",
-                      "className": "api-method post"
-                    }
-                  ]
-                },
-                {
-                  "type": "category",
-                  "label": "User",
-                  "items": [
-                    {
-                      "type": "doc",
-                      "id": "apis-tools/camunda-api-rest/specifications/find-all-users",
-                      "label": "Query users (alpha)",
                       "className": "api-method post"
                     }
                   ]
@@ -1833,11 +1830,12 @@
             "self-managed/setup/guides/add-extra-manifests",
             "self-managed/setup/guides/using-existing-elasticsearch",
             "self-managed/setup/guides/using-existing-opensearch",
+            "self-managed/setup/guides/using-existing-postgres",
             "self-managed/setup/guides/configure-db-custom-headers",
             "self-managed/setup/guides/connect-to-an-oidc-provider",
             "self-managed/setup/guides/air-gapped-installation",
             "self-managed/setup/guides/running-custom-connectors",
-            "self-managed/setup/guides/prefix-elasticsearch-indices",
+            "self-managed/setup/guides/prefix-elasticsearch-opensearch-indices",
             "self-managed/setup/guides/multi-namespace-deployment",
             "self-managed/setup/guides/installing-payment-app-example",
             "self-managed/setup/guides/secret-management"
@@ -1999,6 +1997,7 @@
                 "self-managed/console-deployment/configuration/ssl"
               ]
             },
+            "self-managed/console-deployment/usage-metrics",
             "self-managed/console-deployment/telemetry"
           ],
           "Zeebe": [

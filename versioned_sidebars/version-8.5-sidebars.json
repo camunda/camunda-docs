@@ -1187,10 +1187,11 @@
             "self-managed/setup/guides/add-extra-manifests",
             "self-managed/setup/guides/using-existing-elasticsearch",
             "self-managed/setup/guides/using-existing-opensearch",
+            "self-managed/setup/guides/using-existing-postgres",
             "self-managed/setup/guides/connect-to-an-oidc-provider",
             "self-managed/setup/guides/air-gapped-installation",
             "self-managed/setup/guides/running-custom-connectors",
-            "self-managed/setup/guides/prefix-elasticsearch-indices",
+            "self-managed/setup/guides/prefix-elasticsearch-opensearch-indices",
             "self-managed/setup/guides/multi-namespace-deployment",
             "self-managed/setup/guides/installing-payment-app-example"
           ]
@@ -1279,6 +1280,7 @@
             "self-managed/console-deployment/overview",
             "self-managed/console-deployment/installation",
             "self-managed/console-deployment/configuration",
+            "self-managed/console-deployment/usage-metrics",
             "self-managed/console-deployment/telemetry"
           ],
           "Zeebe": [
