@@ -19,7 +19,7 @@ Camunda provides the following migration tools:
 | :-------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **[Migration Analyzer](#migration-analyzer)** | Gain a first understanding of migration tasks. Available for local installation (Java or Docker) or [hosted as a free SaaS offering](https://migration-analyzer.consulting-sandbox.camunda.cloud/). |
 | **[Data Migrator](#data-migrator)**           | Copies active Camunda 7 runtime instances and existing audit trail data (history) to Camunda 8.                                                                                                     |
-| **[Code Converter](#code-converter)**         | Supported by a mixture of diagram conversion tools, code conversion patterns, and automatable refactoring recipes.                                                                                  |
+| **[Code Converter](./code-conversion.md)**    | Supported by a mixture of diagram conversion tools, code conversion patterns, and automatable refactoring recipes.                                                                                  |
 | **[Camunda 7 Adapter](#camunda-7-adapter)**   | Run existing Camunda 7 delegation code directly in a Camunda 8 environment.                                                                                                                         |
 
 ## Migration Analyzer
@@ -269,10 +269,6 @@ With this approach, the duration of history migration doesn't block big bang mig
 You might need to customize the data migration, especially if you used complex data formats in C7 (for example, Java objects) that need to be converted to something Camunda 8 can handle (for example, JSON). As part of this step, you might also need to extract big payloads and binaries (like documents) into an external data store and reference it from the process (using, for example, upcoming document handling possibilities).
 
 <!-- TODO link to document handling docs -->
-
-## Code Converter
-
-Code conversion is described in [Code Conversion](./code-conversion.md).
 
 ## Camunda 7 Adapter
 
