@@ -57,17 +57,17 @@ This command can in turn be processed, completing the service task and driving t
 
 ## Unexpected error handling
 
-When the workflow engine encounters an unexpected error while processing a command, then it rejects the command.
-If the command is related to a process instance, then it additionally publishes an error event, applying it to the state machine.
+When the workflow engine encounters an unexpected error while processing a command, it rejects the command.
+If the command is related to a process instance, it additionally publishes an error event, applying it to the state machine.
 As a result, the process instance is banned from the workflow engine, while it's data remains accessible.
 
 ### Banned process instance
 
-Banning the process instance is a safety mechanism to safeguard against incorrect execution of the process and prevents a single error from jamming the entire partition's stream processor.
-The workflow engine skips commands that are applicable to executing a banned process instance.
-This means that a banned process instance will not continue to execute.
-There is no way to continue the execution of a banned process instance.
-You can still cancel a banned process instance, because commands related to canceling a banned process instance are not skipped.
+Banning the process instance is a safety mechanism to safeguard against incorrect execution of the process and to prevent a single error from jamming the entire partition's stream processor.
+
+- The workflow engine skips commands that are applicable to executing a banned process instance.
+- A banned process instance will not continue to execute. There is no way to continue the execution of a banned process instance.
+- You can still cancel a banned process instance, as commands related to canceling a banned process instance are not skipped.
 
 ## Handling backpressure
 
