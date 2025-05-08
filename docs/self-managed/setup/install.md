@@ -63,6 +63,10 @@ Refer to the [Operate](/self-managed/operate-deployment/operate-configuration.md
 
 When installing the [camunda-platform](https://artifacthub.io/packages/helm/camunda/camunda-platform) Helm chart, all components shown on the architectural diagram above are installed.
 
+:::note
+Helm also supports document storage and management with [document handling](/self-managed/document-handling/overview.md).
+:::
+
 ## Versioning
 
 Starting from the Camunda v8.4 (January 2024), the Camunda 8 **Helm chart** version is decoupled from the version of the application (e.g., the chart version is 9.0.0 and the application version is 8.4.x).

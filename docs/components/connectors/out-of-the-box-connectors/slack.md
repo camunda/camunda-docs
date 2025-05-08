@@ -109,7 +109,7 @@ The result of the endpoint must then be assigned to a variable in **Start Proces
 :::
 
 :::note
-Starting from version 8.7.0, the Slack connector works with document handling to support adding attachments and increasing template versions. See additional details and limitations in [document handling](/components/concepts/document-handling.md).
+Starting from version 8.7.0, the Slack connector works with document handling to support adding attachments and increasing template versions. See additional details and limitations in [document handling](/components/document-handling/getting-started.md).
 :::
 
 The **Channel/User Name** and **Message** can either be given [static values](/components/concepts/expressions.md#expressions-vs-static-values), or FEEL expressions. FEEL expressions can be used to [access process variables or dynamically create values](/components/concepts/expressions.md). This can be handy if a process variable is used to store the relevant channel or if the message needs to be composed dynamically, for example:

@@ -25,6 +25,8 @@ Camunda 8 Run includes the following:
 - Connectors
 - Elasticsearch
 
+Camunda 8 Run also supports document storage and management with [document handling](/self-managed/document-handling/overview.md).
+
 ## Prerequisites
 
 - **OpenJDK 21+**: Required for running Camunda 8 as a Java application.

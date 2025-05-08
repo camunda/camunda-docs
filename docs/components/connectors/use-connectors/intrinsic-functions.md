@@ -15,7 +15,7 @@ You can only use intrinsic functions with [outbound connectors](/components/conn
 
 ## Use cases
 
-A common use case is to transform a [Camunda document](/components/concepts/document-handling.md) to a specific format when using a REST connector.
+A common use case is to transform a [Camunda document](/components/document-handling/getting-started.md) to a specific format when using a REST connector.
 
 For example:
 
