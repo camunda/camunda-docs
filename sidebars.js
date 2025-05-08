@@ -1026,7 +1026,6 @@ module.exports = {
                     "self-managed/setup/deploy/azure/azure-aks/aks-helm",
                   ],
                 },
-                "self-managed/setup/deploy/azure/microsoft-aks",
               ],
               "Google (GCP)": ["self-managed/setup/deploy/gcp/google-gke"],
               "Red Hat (OpenShift)": [

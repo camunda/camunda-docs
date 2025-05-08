@@ -4,10 +4,7 @@ title: "Deploy an AKS cluster with Terraform (advanced)"
 description: "Deploy an Azure Kubernetes Service (AKS) cluster with a Terraform module for a quick Camunda 8 setup."
 ---
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
-
-This guide provides a detailed tutorial for deploying a Microsoft Azure Kubernetes Service (AKS) cluster, tailored specifically for deploying Camunda 8 using Terraform, a popular Infrastructure as Code (IaC) tool.
+This guide provides a detailed tutorial for deploying an Azure Kubernetes Service (AKS) cluster, tailored specifically for deploying Camunda 8 using Terraform, a popular Infrastructure as Code (IaC) tool.
 
 This guide is designed to help you leverage the power of Infrastructure as Code (IaC) to streamline and reproduce your cloud infrastructure setup. By walking through the essentials of setting up an AKS cluster, and provisioning managed Azure resources such as Azure Database for PostgreSQL, this guide demonstrates how to use Terraform with Azure. It makes the process accessible even to those new to Terraform or IaC concepts. It utilizes Azure-managed services where available, offering these as optional components for added convenience and maintainability.
 
@@ -25,24 +22,23 @@ If you are completely new to Terraform and the concept of IaC, consider reading 
 - [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with your AKS cluster.
 - [jq](https://stedolan.github.io/jq/download/) to parse and manipulate JSON (e.g. Terraform outputs).
 - **Azure service quotas**
-  - Ensure you have at least **3 Public IP addresses** (one per Availability Zone in the region you choose).
   - Check your quotas for **Virtual Networks**, **vCPU cores**, and **Storage Accounts** in the target region: [Azure subscription and service limits](https://learn.microsoft.com/azure/azure-resource-manager/management/azure-subscription-service-limits).
   - If you hit a limit, request an increase via the Azure portal: [Request a quota increase](https://learn.microsoft.com/azure/azure-resource-manager/management/subscribe-quota-increase-request).
 - This guide uses **GNU Bash** for all shell commands.
 
 For the exact tool versions we’ve tested against, see the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file in the repository.
 
-For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file in the repository. It contains an up-to-date list of versions that we also use for testing.
-
 ### Considerations
 
-This setup provides a basic foundation for getting started with Camunda 8 on Azure AKS, but it is not optimized for performance or resilience. It serves as a good starting point for building out a production-ready environment by incorporating [IaC tooling](https://developer.hashicorp.com/terraform/tutorials/azure-get-started/infrastructure-as-code).
+This setup provides a basic foundation for getting started with Camunda 8 on Azure AKS, but it is not fully optimized for performance or resilience. It serves as a good starting point for building out a production-ready environment by incorporating [IaC tooling](https://developer.hashicorp.com/terraform/tutorials/azure-get-started/infrastructure-as-code).
 
 To try out Camunda 8 or for development purposes, consider signing up for our [SaaS offering](https://camunda.com/platform/). If you already have an Azure AKS cluster, you can skip ahead to the [Helm guide](./aks-helm.md).
 
 To keep this guide simple and focused, certain best practices are referenced via links to additional documentation, allowing you to explore each area in more detail when you're ready.
 
 The following security considerations were relaxed to streamline adoption and development. These should be reassessed and hardened before deploying to production. The following items were identified using [Trivy](https://trivy.dev/) and can be looked up in the [Aqua vulnerability database](https://avd.aquasec.com/).
+
+These concessions are intentional in this reference infrastructure to simplify onboarding, allow internal-only access, and minimize friction during evaluation. They are not appropriate for production and must be revisited.
 
 ```
 AVD-AZU-0047 #(CRITICAL): Security group rule allows unrestricted ingress from any IP address.
@@ -70,14 +66,15 @@ Following this guide will incur costs on your Azure account, including charges f
 
 ### Outcome
 
-<!-- Replace the diagram assets with AKS equivalents exported as image and PDF -->
-<!-- To export: click on the frame > "Export Image" > as PDF and as JPG (low res), then save it in the ./assets/ folder -->
-
-<!-- No OpenSearch equivalent is provisioned in this setup. -->
-<!-- Azure Entra ID integration and managed identity support will be added later. -->
-
 _Infrastructure diagram for a single-region AKS setup (click on the image to open the PDF version)_
-[![Infrastructure Diagram AKS Single-Region](./assets/aks-single-region.jpg)](./assets/aks-single-region.pdf)
+[![Infrastructure Diagram AKS Single-Region](./assets/aks-single-region.png)](./assets/aks-single-region.pdf)
+
+:::caution
+
+The vnet and the subnets are sized according to standard Azure recommendations by default.
+Due to Azure CNI, every pod will get assigned a real internal IP. While the defaults are more than sufficient for this guide, if you expect a large number of pods in a single subnet, consider using a larger subnet for AKS like /23 or /22.
+
+:::
 
 Following this tutorial will result in:
 
@@ -158,7 +155,7 @@ Microsoft Accounts (MSA) such as those ending in `@outlook.com` or `@gmail.com` 
 
 #### Create an Azure Storage Account for Terraform state management
 
-Before setting up Terraform, you need to create an Azure Storage Account and container to store the state file. This is important for collaboration and to prevent issues like state file corruption.
+Before setting up Terraform, you should create an Azure Storage Account and container to store the state file. This is important for collaboration and to prevent issues like state file corruption. This should be in a separate resource group from the main infrastructure.
 
 To start, set the required values as environment variables upfront to avoid repeating them in each command:
 
@@ -176,27 +173,25 @@ Now, follow these steps to create the storage account with versioning enabled:
 
 1. Open your terminal and ensure the Azure CLI is installed and you're logged in.
 
-2. Run the following script to create a storage account and container for storing your Terraform state. Make sure to use a globally unique name for the storage account:
+2. Run the following script to create a storage account and container for storing your Terraform state. Make sure that you have chosen a globally unique name for the storage account before:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/azure/common/procedure/storage-account/storage-account-creation.sh
+   https://github.com/camunda/camunda-deployment-references/blob/azure-docs-adjustments/azure/common/procedure/storage-account/storage-account-creation.sh
    ```
 
 3. Enable blob versioning to track changes and protect the state file from accidental deletions or overwrites:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/azure/common/procedure/storage-account/storage-account-versioning.sh
+   https://github.com/camunda/camunda-deployment-references/blob/azure-docs-adjustments/azure/common/procedure/storage-account/storage-account-versioning.sh
    ```
 
 4. Verify versioning is enabled on the blob container:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/azure/common/procedure/storage-account/storage-account-verify.sh
+   https://github.com/camunda/camunda-deployment-references/blob/azure-docs-adjustments/azure/common/procedure/storage-account/storage-account-verify.sh
    ```
 
 This Azure Storage Account will now securely store your Terraform state files with versioning enabled.
-
-Great — here’s how you can clearly explain the purpose and impact of each variable in a `terraform.tfvars` file, along with guidance on how to find the values.
 
 #### Creating terraform.tfvars
 
@@ -240,97 +235,67 @@ Once your authentication is set up, you can initialize your Terraform project. T
 Configure the backend and download the necessary provider plugins:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/azure/common/procedure/storage-account/storage-account-tf-init.sh
+https://github.com/camunda/camunda-deployment-references/blob/azure-docs-adjustments/azure/common/procedure/storage-account/storage-account-tf-init.sh
 ```
 
 Terraform will connect to the Azure storage container to manage the state file, ensuring remote and persistent storage.
 
-### AKS cluster module setup
+### Terraform setup
 
-This module establishes the foundational configuration for Azure access and Terraform.
+This reference architecture uses [Terraform modules](https://developer.hashicorp.com/terraform/language/modules) to deploy all required Azure infrastructure for running Camunda 8 in a production-grade AKS environment. It includes:
 
-We will utilize [Terraform modules](https://developer.hashicorp.com/terraform/language/modules), which allow us to abstract resources into reusable components, streamlining our infrastructure management and following Terraform best practices.
+- A Virtual Network (VNet) and three subnets (AKS, database, private endpoint)
+- Network Security Group (NSG) for AKS
+- Azure Kubernetes Service (AKS) cluster with system and user node pools across 3 AZs
+- Azure PostgreSQL Flexible Server with high availability and private endpoint
+- Azure Key Vault with encryption key and a user-assigned managed identity for AKS secrets (KMS)
 
-The reference architecture comes with an example module implementation of the [AKS cluster](https://github.com/camunda/camunda-deployment-references/blob/main/azure/modules/aks-cluster/) and offers a robust starting point for deploying an AKS cluster. It is highly recommended to review this module prior to implementation to understand its structure and capabilities.
+#### 1. Main configuration
 
-The module will be locally sourced, meaning within your cloned repository you can make adjustments to the AKS module directly, and the changes will immediately apply to your setup.
+The main deployment logic is defined in [`main.tf`](https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/main.tf). It instantiates all modules and exposes several **customizable values** via the `locals` block:
 
-#### Set up the AKS cluster module
+```hcl
+locals {
+  resource_prefix     = var.resource_prefix_placeholder # Change this to a name of your choice
+  resource_group_name = ""                              # Change this to a name of your choice, if not provided, it will be set to resource_prefix-rg, if provided, it will be used as the resource group name
+  location            = "swedencentral"                 # Change this to your desired Azure region
+  kubernetes_version = "1.30"                           # Change this to your desired Kubernetes version (aks - major.minor)
 
-1. The `cluster.tf` in your chosen reference contains a basic setup referencing a local Terraform module with the cluster configuration. The following shows said file, which you can adjust within your cloned setup to suit your needs.
+  db_admin_username = "secret_user"    # Replace with your desired PostgreSQL username
+  db_admin_password = "secretvalue%23" # Replace with your desired PostgreSQL password, password must contain at least one letter, one number, and one special character.
 
-```hcl reference
-https://github.com/camunda/camunda-deployment-references/blob/main/azure/modules/aks/cluster.tf
+  camunda_database_keycloak   = "camunda_keycloak"   # Name of your camunda database for Keycloak
+  camunda_database_identity   = "camunda_identity"   # Name of your camunda database for Identity
+  camunda_database_webmodeler = "camunda_webmodeler" # Name of your camunda database for WebModeler
+
+  # Connection configuration
+  camunda_keycloak_db_username   = "keycloak_db"   # This is the username that will be used for connection to the DB on Keycloak db
+  camunda_identity_db_username   = "identity_db"   # This is the username that will be used for connection to the DB on Identity db
+  camunda_webmodeler_db_username = "webmodeler_db" # This is the username that will be used for connection to the DB on WebModeler db
+
+  camunda_keycloak_db_password   = "secretvalue%24" # Replace with a password that will be used for connection to the DB on Keycloak db
+  camunda_identity_db_password   = "secretvalue%25" # Replace with a password that will be used for connection to the DB on Identity db
+  camunda_webmodeler_db_password = "secretvalue%26" # Replace with a password that will be used for connection to the DB on WebModeler db
+}
 ```
 
-2. Configure user access to the cluster. By default, the identity that creates the Azure AKS cluster has administrative access via role-based access control (RBAC).
+These values control database user setup, naming, passwords, and the general cluster configuration. Sensitive values are used by downstream provisioning jobs and Helm secrets.
 
-<details>
-  <summary>Grant cluster access to other users</summary>
-  <p>
+The modules deployed are:
 
-To grant other users access to the cluster, you can assign them Azure roles using Azure Active Directory (Entra ID) integration and Kubernetes RBAC.
+- `network`: Virtual network, AKS subnet, DB subnet, and private endpoint subnet
+- `kms`: Key Vault, encryption key, and UAMI for AKS secret encryption
+- `aks`: Cluster deployment with system and user node pools across AZs
+- `postgres_db`: High-availability PostgreSQL Flexible Server, private DNS, and endpoint
 
-This architecture does not currently enable Entra ID integration, but you can manage Kubernetes access through the `az role assignment` and `kubectl` tools:
+#### 2. PostgreSQL module
 
-1. Ensure the user has access to the Azure resource group or subscription, typically via the `Azure Kubernetes Service RBAC Cluster Admin` or `Contributor` role.
+This module is **enabled by default**. To opt out, you must:
 
-2. Then, apply Kubernetes RoleBindings or ClusterRoleBindings to control in-cluster permissions:
+- Remove the `postgres_db` block from `main.tf`
+- Manually provide credentials and PostgreSQL endpoints for the Helm chart
 
-```yaml
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: reader-binding
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: view
-subjects:
-  - kind: User
-    name: "<user-object-id>"
-    apiGroup: rbac.authorization.k8s.io
-```
-
-Replace `<user-object-id>` with the Azure AD object ID of the user.
-
-For more detailed instructions, refer to the [AKS access control documentation](https://learn.microsoft.com/azure/aks/manage-azure-rbac).
-
-  </p>
-</details>
-
-3. Customize the cluster setup. The module offers various input options that allow you to further customize the cluster configuration. For a comprehensive list of available options and detailed usage instructions, refer to the [AKS module documentation](https://github.com/camunda/camunda-deployment-references/blob/main/azure/modules/aks-cluster/README.md).
-
-### PostgreSQL module setup
-
-:::info Optional module
-
-If you don't want to use this module, you can skip this section. However, you may need to adjust the remaining instructions to remove references to this module.
-
-If you choose not to use this module, you must either provide a managed PostgreSQL service or use the internal deployment by the Camunda Helm chart in Kubernetes.
-
-Additionally, you must delete the `db.tf` file within your chosen reference as it will otherwise create the resources.
-:::
-
-We separated the cluster and PostgreSQL modules to offer you more customization options.
-
-#### Set up the Azure PostgreSQL module
-
-1. The `db.tf` in your chosen reference contains a basic Azure Database for PostgreSQL setup referencing a local Terraform module. The following shows said file, which you can adjust within your cloned setup to suit your needs.
-
-```hcl reference
-https://github.com/camunda/camunda-deployment-references/blob/main/azure/modules/postgres-db/db.tf
-```
-
-2. Customize the PostgreSQL setup through various input options. Refer to the [Azure PostgreSQL module documentation](https://github.com/camunda/camunda-deployment-references/blob/main/azure/modules/postgresql/README.md) for more details on other customization options.
-
-### Define outputs
-
-**Terraform** allows you to define outputs, which make it easier to retrieve important values generated during execution, such as database endpoints and other necessary configurations for Helm setup.
-
-Each module definition set up in the reference contains an output definition at the end of the file. You can adjust them to your needs.
-
-Outputs allow you to easily reference values like the **PostgreSQL** endpoint and other configuration data needed in subsequent steps or scripts, streamlining your deployment process.
+Let me know if you'd like this split out into docs-ready MDX format or have a similar summary for the `network`, `aks`, or `kms` modules.
 
 ### Execution
 
@@ -345,7 +310,7 @@ We strongly recommend managing sensitive information such as the PostgreSQL user
 2. Perform a final initialization for anything changed throughout the guide:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/azure/common/procedure/storage-account/storage-account-tf-init.sh#L7
+https://github.com/camunda/camunda-deployment-references/blob/azure-docs-adjustments/azure/common/procedure/storage-account/storage-account-tf-init.sh#L11-L15
 ```
 
 3. Plan the configuration files:
@@ -360,7 +325,7 @@ terraform plan -out cluster.plan # describe what will be created
 terraform apply cluster.plan     # apply the creation
 ```
 
-Terraform will now create the Azure AKS cluster with all the necessary configurations. The completion of this process may require approximately 20–30 minutes for each component.
+Terraform will now create the Azure AKS cluster with all the necessary configurations. The completion of this process may require approximately 20–30 minutes.
 
 ## 2. Preparation for Camunda 8 installation
 
@@ -372,7 +337,7 @@ You can gain access to the Azure AKS cluster using the `Azure CLI` with the foll
 az aks get-credentials --resource-group <your-resource-group> --name <your-cluster-name> --overwrite-existing
 ```
 
-Replace `<your-resource-group>` and `<your-cluster-name>` with the actual values from your setup.
+Replace `<your-resource-group>` and `<your-cluster-name>` with the actual values you have input in the root main.tf. `<your-cluster-name>` will be `<your-resource-prefix>-aks`.
 
 After updating the kubeconfig, you can verify your connection to the cluster with `kubectl`:
 
@@ -392,17 +357,12 @@ In the remainder of the guide, we reference the `camunda` namespace to create so
 
 As you now have a database, you need to create dedicated databases for each Camunda component and an associated user that has configured access. Follow these steps to create the database users and configure access.
 
-You can access the created database in two ways:
-
-1. **Bastion host:** Set up a bastion host within the same virtual network to securely access the database.
-2. **Pod within the AKS cluster:** Deploy a pod in your AKS cluster equipped with the necessary tools to connect to the database.
-
-The choice depends on your infrastructure setup and security preferences. In this guide, we'll use a pod within the AKS cluster to configure the database.
+Due to the tight NSG rules in this example, the only way to access the database is through the AKS cluster.
 
 1. In your terminal, set the necessary environment variables that will be substituted in the setup manifest:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/azure/common/procedure/vars-create-db.sh
+https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/vars-create-db.sh
 ```
 
 A **Kubernetes job** will connect to the database and create the necessary users with the required privileges. The script installs the necessary dependencies and runs SQL commands to create the users and assign them the correct roles and privileges.
@@ -410,7 +370,7 @@ A **Kubernetes job** will connect to the database and create the necessary users
 2. Create a secret that references the environment variables:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/azure/common/procedure/create-setup-db-secret.sh
+https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/create-setup-db-secret.sh
 ```
 
 This command creates a secret named `setup-db-secret` and dynamically populates it with the values from your environment variables.
@@ -426,7 +386,7 @@ This should display the secret with the base64 encoded values.
 3. Save the following manifest to a file, for example, `setup-postgres-create-db.yml`.
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/azure/common/manifests/setup-postgres-create-db.yml
+https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/manifests/setup-postgres-create-db.yml
 ```
 
 4. Apply the manifest:
@@ -459,6 +419,31 @@ kubectl delete secret setup-db-secret --namespace camunda
 ```
 
 Running these commands cleans up both the job and the secret, ensuring that no unnecessary resources remain in the cluster.
+
+### Configure a high-performance StorageClass
+
+Camunda 8 requires high IOPS for performance-critical components like **Zeebe**, so it is important to use Azure **PremiumV2** disks rather than the default `Standard_LRS`.
+
+This step defines a custom `StorageClass` that:
+
+- Uses **PremiumV2_LRS** Azure Managed Disks
+- Sets a **`Retain`** reclaim policy
+- Uses `WaitForFirstConsumer` volume binding
+- Becomes the default StorageClass for the cluster
+
+#### Apply the StorageClass
+
+```yaml reference
+https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/manifests/storage-class.yml
+```
+
+Apply it using:
+
+```bash
+kubectl apply -f azure/kubernetes/aks-single-region/manifests/storage-class.yml
+```
+
+This must be applied **before installing the Camunda Helm chart** so that PersistentVolumeClaims (PVCs) are provisioned with the correct performance characteristics.
 
 ## 2. Install Camunda 8 using the Helm chart
 

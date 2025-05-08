@@ -28,18 +28,6 @@ While this guide is primarily tailored for UNIX systems, it can also be run unde
 
 Multi-tenancy is disabled by default and is not covered further in this guide. If you decide to enable it, you may use the same PostgreSQL instance and add an extra database for multi-tenancy purposes.
 
-<!-- OpenSearch is not included in the AKS setup, so compatibility notes are omitted. -->
-
-## Architecture
-
-<!-- OpenSearch and Aurora are not included in the AKS setup; references omitted accordingly. -->
-
-Note the [existing architecture](../../../../about-self-managed.md#architecture) extended by deploying a public Load Balancer with TLS termination via the [nginx ingress controller](https://kubernetes.github.io/ingress-nginx/user-guide/tls/).
-
-Additionally, two components ([external-dns](https://github.com/kubernetes-sigs/external-dns) and [cert-manager](https://cert-manager.io/)) handle requesting the TLS certificate from [Let's Encrypt](https://letsencrypt.org/) and configuring Azure DNS to confirm domain ownership and update the DNS records to expose the Camunda 8 deployment.
-
-![Camunda 8 Self-Managed Azure Architecture Diagram](./assets/camunda-8-self-managed-architecture-azure.png)
-
 ## Export environment variables
 
 To streamline the execution of the subsequent commands, it is recommended to export multiple environment variables.
@@ -80,19 +68,6 @@ Start by creating a `values.yml` file to store the configuration for your enviro
 ```yaml reference
 https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/helm-values/values-no-domain.yml
 ```
-
-<!-- Domain-specific configuration (Ingress, cert-manager) is not currently supported in the Azure reference and is intentionally omitted. -->
-
-:::danger Exposure of the Zeebe Gateway
-
-Publicly exposing the Zeebe Gateway without proper authorization can pose significant security risks. To avoid this, consider disabling the Ingress for the Zeebe Gateway by setting the following values to `false` in your configuration file:
-
-- `zeebeGateway.ingress.grpc.enabled`
-- `zeebeGateway.ingress.rest.enabled`
-
-By default, authorization is enabled to ensure secure access to Zeebe. Typically, only internal components need direct access to Zeebe, making it unnecessary to expose the gateway externally.
-
-:::
 
 #### Reference the credentials in secrets
 
