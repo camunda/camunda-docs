@@ -1,7 +1,7 @@
 ---
 id: introduction-to-camunda
-title: Introduction to Camunda 8
-sidebar_label: Introduction to Camunda 8
+title: Get started with Camunda 8
+sidebar_label: Get started with Camunda 8
 slug: /guides/
 description: "Learn about Camunda 8, a platform that delivers scalable, on-demand process automation as-a-service, paired with tools for collaborative modeling and operations."
 ---
