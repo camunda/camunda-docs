@@ -1089,6 +1089,12 @@ module.exports = {
               ],
             },
             {
+              "Microsoft AKS": [
+                "self-managed/setup/deploy/azure/microsoft-aks/aks-terraform",
+                "self-managed/setup/deploy/azure/microsoft-aks/aks-helm",
+              ],
+            },
+            {
               Openshift: [
                 "self-managed/setup/deploy/amazon/openshift/terraform-setup",
                 "self-managed/setup/deploy/openshift/redhat-openshift",
