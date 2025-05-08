@@ -10,7 +10,7 @@ Chat with the AI FEEL Copilot for help generating FEEL (Friendly Enough Expressi
 :::note Terms of use
 By using this tool, you agree to Camunda's use of the anonymized input and output data and anonymized feedback to improve it.
 
-While your latest BPMN diagram will be saved in your account, Camunda does not save your prompts and the resulting BPMN diagrams.
+Camunda does not save your prompts and the resulting FEEL expressions to your account.
 :::
 
 ## Get started
@@ -32,4 +32,6 @@ To use the FEEL Copilot in Web Modeler, take the following steps:
 Timeouts can occur during this step if your query is too complex.
 :::
 
+## Limitations
 
+- The FEEL Copilot only supports prompts up to approximately 4 MB in size.
