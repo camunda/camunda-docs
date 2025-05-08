@@ -91,16 +91,14 @@ Camunda Helm chart version `13.x.x` works with Camunda version `8.8.x`. Check th
 
 Requirements for the components can be seen below:
 
-| Component   | Java version | Other requirements                                                                                                                                                                                                |
-| ----------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Zeebe       | OpenJDK 21+  | Elasticsearch 8.16+<br/>Amazon OpenSearch 2.9+ (requires use of [OpenSearch exporter](../self-managed/zeebe-deployment/exporters/opensearch-exporter.md))                                                         |
-| Operate     | OpenJDK 21+  | Elasticsearch 8.16+<br/>Amazon OpenSearch 2.9+                                                                                                                                                                    |
-| Tasklist    | OpenJDK 21+  | Elasticsearch 8.16+<br/>Amazon OpenSearch 2.9+                                                                                                                                                                    |
-| Identity    | OpenJDK 17+  | Keycloak 25.x, 26.x<br/>PostgreSQL 14.x, 15.x or Amazon Aurora PostgreSQL 13.x, 14.x, 15.x (required for [certain features](/self-managed/identity/deployment/configuration-variables.md#database-configuration)) |
-| Optimize    | OpenJDK 21+  | Elasticsearch 8.16+<br/>Amazon OpenSearch 2.9+                                                                                                                                                                    |
-| Connectors  | OpenJDK 21+  |                                                                                                                                                                                                                   |
-| Web Modeler | -            | PostgreSQL 13.x, 14.x, 15.x, 16.x, 17.x or Amazon Aurora PostgreSQL 13.x, 14.x, 15.x, 16.x                                                                                                                        |
-| Console     | -            | -                                                                                                                                                                                                                 |
+| Component                                                  | Java version | Other requirements                                                                                                                                                                                                |
+| ---------------------------------------------------------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Orchestration Cluster (Zeebe, Operate, Tasklist, Identity) | OpenJDK 21+  | Elasticsearch 8.16+<br/>Amazon OpenSearch 2.9+ (requires use of [OpenSearch exporter](../self-managed/zeebe-deployment/exporters/opensearch-exporter.md))                                                         |
+| Optimize                                                   | OpenJDK 21+  | Elasticsearch 8.16+<br/>Amazon OpenSearch 2.9+                                                                                                                                                                    |
+| Connectors                                                 | OpenJDK 21+  |                                                                                                                                                                                                                   |
+| Management Identity                                        | OpenJDK 17+  | Keycloak 25.x, 26.x<br/>PostgreSQL 14.x, 15.x or Amazon Aurora PostgreSQL 13.x, 14.x, 15.x (required for [certain features](/self-managed/identity/deployment/configuration-variables.md#database-configuration)) |
+| Web Modeler                                                | -            | PostgreSQL 13.x, 14.x, 15.x, 16.x, 17.x or Amazon Aurora PostgreSQL 13.x, 14.x, 15.x, 16.x                                                                                                                        |
+| Self-Managed Console                                       | -            | -                                                                                                                                                                                                                 |
 
 When running Elasticsearch, you must have the [appropriate Elasticsearch privileges](/self-managed/concepts/elasticsearch-privileges.md).
 
@@ -147,7 +145,7 @@ From version `8.8.0` forward, Zeebe, Operate, Tasklist and Identity must run on 
 
 | Design                                     | [Orchestration Cluster](../self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) | [Management](../self-managed/reference-architecture/reference-architecture.md#web-modeler-and-console) |
 | ------------------------------------------ | --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| Web Modeler 8.8.x<br/> Desktop Modeler TBD | (Zeebe, Operate, Tasklist, Identity) 8.8.x, <br/>Connectors 8.8.x, Optimize 8.8.x                               | Console SM Identity 8.8.x, Self-Managed Console 8.8.x                                                  |
+| Web Modeler 8.8.x<br/> Desktop Modeler TBD | (Zeebe, Operate, Tasklist, Identity) 8.8.x, <br/>Connectors 8.8.x, Optimize 8.8.x                               | Management Identity 8.8.x, Self-Managed Console 8.8.x                                                  |
 
 :::note
 You can also use newer versions of Desktop and Web Modeler with older versions of the Orchestration Cluster.
@@ -156,19 +154,3 @@ You can also use newer versions of Desktop and Web Modeler with older versions o
 </TabItem>
 
 </Tabs>
-
-## Dependency maintenance policies
-
-Camunda provides [a standard support policy](https://camunda.com/release-policy/) of 18 months for a particular minor version from the date it is released.
-During this time, patches are regularly released containing security and bug fixes, some of which may come from dependency updates. Therefore, for the
-vast majority of dependencies Camunda _only_ applies patch updates.
-
-However, certain dependencies used by Camunda 8 may have a shorter maintenance policy than Camunda itself. Camunda may adopt a different update policy for these dependencies, as listed below.
-
-### Spring Boot
-
-The **Camunda Orchestration Cluster** is a Spring Boot application and leverages Spring Boot to execute fundamental functionality such as application configuration, REST infrastructure (including security), production ready features, etc.
-
-However, Spring Boot has a shorter maintenance window than Camunda for its open-source software (OSS) offering. [Versions are only supported for 13 months](https://spring.io/projects/spring-boot#support), versus Camunda's 18 months. To circumvent this, the **Orchestration Cluster** patch releases also update Spring Boot minor versions, such that the latest patch release of these components uses a supported Spring version.
-
-As for libraries and SDKs meant to be included in third-party applications, Camunda follows a best effort policy to balance compatibility and secure Spring-dependent libraries.

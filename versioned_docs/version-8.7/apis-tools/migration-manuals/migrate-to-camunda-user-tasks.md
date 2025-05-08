@@ -170,7 +170,7 @@ Repeat these steps for all user tasks in the process. Then, deploy the process t
 ## How Tasklist API (V1) compares to Camunda 8 API (V2)
 
 :::note
-The Tasklist REST API is deprecated and will be deleted with the 8.9 release.
+The Tasklist REST API is deprecated with the 8.8 release and will be deleted with the 8.10 release.
 :::
 
 The following table provides a breakdown of which operations are supported in which API, and for which user tasks.

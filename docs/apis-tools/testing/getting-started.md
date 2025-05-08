@@ -279,7 +279,7 @@ The test runtime uses [SLF4J](https://www.slf4j.org/) as the logging framework. 
 
 - `io.camunda.process.test` - The test runtime (recommended level `info`)
 - `tc.camunda` - The Camunda Docker container (recommended level `error`)
-- `tc.connectors` - The Connectors Docker container (recommended level `error`)
+- `tc.connectors` - The connectors Docker container (recommended level `error`)
 - `org.testcontainers` - The Testcontainers framework (recommended level `warn`)
 
 ## Examples

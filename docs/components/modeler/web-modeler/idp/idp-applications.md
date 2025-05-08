@@ -13,8 +13,8 @@ Create and manage your IDP document extraction templates in an **IDP application
 
 ## Create an IDP application
 
-:::warning
-Clusters with basic authentication or client credentials authentication are currently not supported for IDP applications.
+:::caution
+Clusters configured to use basic authentication or client credentials authentication are currently not supported for use with IDP applications. You must use another value from the list of [available authentication methods](../../../../self-managed/modeler/web-modeler/configuration/configuration.md#available-authentication-methods) for compatibility.
 :::
 
 To create an IDP application:

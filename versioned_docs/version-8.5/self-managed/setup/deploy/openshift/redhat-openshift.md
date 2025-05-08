@@ -59,18 +59,18 @@ To deploy Camunda 8 on OpenShift:
 
    ```shell
    # List of available versions: https://helm.camunda.io/camunda-platform/version-matrix/
-   export CHART_VERSION="<DESIRED_CHART_VERSION>"
+   export HELM_CHART_VERSION="<DESIRED_CHART_VERSION>"
 
-   # Make sure to set CHART_VERSION to match the chart version you want to install.
-   helm pull camunda/camunda-platform --version "$CHART_VERSION" --untar --untardir "/tmp/camunda-platform-$CHART_VERSION"
+   # Make sure to set HELM_CHART_VERSION to match the chart version you want to install.
+   helm pull camunda/camunda-platform --version "$HELM_CHART_VERSION" --untar --untardir "/tmp/camunda-platform-$HELM_CHART_VERSION"
    ```
 
 5. Install the Camunda chart with the patched SCCs (`/tmp/camunda-platform-CHART_VERSION/camunda-platform/openshift/values.yaml`) and the post-renderer script (`/tmp/camunda-platform-CHART_VERSION/camunda-platform/openshift/patch.sh`):
 
    ```shell
-   helm install camunda camunda/camunda-platform --skip-crds --version "$CHART_VERSION" \
-       --values "/tmp/camunda-platform-$CHART_VERSION/camunda-platform/openshift/values.yaml"   \
-       --post-renderer bash --post-renderer-args "/tmp/camunda-platform-$CHART_VERSION/camunda-platform/openshift/patch.sh"
+   helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION --skip-crds \
+       --values "/tmp/camunda-platform-$HELM_CHART_VERSION/camunda-platform/openshift/values.yaml"   \
+       --post-renderer bash --post-renderer-args "/tmp/camunda-platform-$HELM_CHART_VERSION/camunda-platform/openshift/patch.sh"
    ```
 
    You can customize the values by providing your own values in addition to the OpenShift values file.

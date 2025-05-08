@@ -236,8 +236,7 @@ Please use the following to change the existing environment variable ZEEBE_BROKE
 4. From the terminal context of `aws/dual-region/kubernetes`, execute the following:
 
 ```bash
-helm install $HELM_RELEASE_NAME camunda/camunda-platform \
-  --version $HELM_CHART_VERSION \
+helm install $HELM_RELEASE_NAME camunda/camunda-platform --version $HELM_CHART_VERSION \
   --kube-context $CLUSTER_SURVIVING \
   --namespace $CAMUNDA_NAMESPACE_FAILOVER \
   -f camunda-values.yml \
@@ -502,8 +501,7 @@ Lastly, the `installationType` is set to `failBack` to switch the behavior of Ze
 1. From the terminal context of `aws/dual-region/kubernetes` execute:
 
 ```bash
-helm install $HELM_RELEASE_NAME camunda/camunda-platform \
-  --version $HELM_CHART_VERSION \
+helm install $HELM_RELEASE_NAME camunda/camunda-platform --version $HELM_CHART_VERSION \
   --kube-context $CLUSTER_RECREATED \
   --namespace $CAMUNDA_NAMESPACE_RECREATED \
   -f camunda-values.yml \

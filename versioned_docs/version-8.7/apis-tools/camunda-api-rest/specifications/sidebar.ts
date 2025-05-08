@@ -296,18 +296,6 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
-      label: "User",
-      items: [
-        {
-          type: "doc",
-          id: "apis-tools/camunda-api-rest/specifications/find-all-users",
-          label: "Query users (alpha)",
-          className: "api-method post",
-        },
-      ],
-    },
-    {
-      type: "category",
       label: "Resource",
       items: [
         {

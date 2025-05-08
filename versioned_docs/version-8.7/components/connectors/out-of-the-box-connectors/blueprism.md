@@ -7,7 +7,7 @@ sidebar_label: Blue Prism
 
 The **Blue Prism Connector** allows you to orchestrate a Blue Prism queue from your BPMN process with [Blue Prism RPA](https://www.blueprism.com/).
 
-To start using the Connector, you must have a running Blue Prism instance configured API service. Refer to the [official documentation page](https://bpdocs.blueprism.com/bp-7-1/en-us/Guides/bp-api/api-introduction.htm) to learn more about how to install and configure Blue Prism API service.
+To start using the Connector, you must have a running Blue Prism instance configured API service. Refer to the [official documentation page](https://docs.blueprism.com/en-US/bundle/blue-prism-enterprise-7-4/page/Guides/bp-api/api-introduction.htm) to learn more about how to install and configure Blue Prism API service.
 
 ## Create a Blue Prism Connector task
 
@@ -62,7 +62,7 @@ The **Blue Prism Connector** currently supports two operation types in the **Ope
 ### Get item from a queue by ID
 
 This operation allows you to return details of a specified item from a work queue.
-It matches directly to respective Blue Prism API endpoint - [`Return details of a specified item from a work queue`](https://bpdocs.blueprism.com/bp-7-1/en-us/api-spec-7-1-2.html#tag/Work-Queues/paths/~1api~1v7~1workqueues~1%7BworkQueueId%7D~1items~1%7BworkQueueItemId%7D/get).
+It matches directly to respective Blue Prism API endpoint - [`Return details of a specified item from a work queue`](https://docs.blueprism.com/en-US/bundle/blue_prism_API_7_3_0_OpenAPI/page/index.html#tag/Work-Queues/operation/getWorkQueueItemFromWorkQueue).
 
 #### Usage
 
@@ -116,7 +116,7 @@ Response example:
 ### Create work queue item
 
 This operation allows you to create work queue items in the specified queue.
-It matches directly to respective Blue Prism API endpoint - [`Create work queue items`](https://bpdocs.blueprism.com/bp-7-1/en-us/api-spec-7-1-2.html#tag/Work-Queues/paths/~1api~1v7~1workqueues~1%7BworkQueueId%7D~1items~1batch/post).
+It matches directly to respective Blue Prism API endpoint - [`Create work queue items`](https://docs.blueprism.com/en-US/bundle/blue_prism_API_7_3_0_OpenAPI/page/index.html#tag/Work-Queues/operation/createWorkQueueItems).
 
 #### Usage
 

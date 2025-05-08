@@ -52,13 +52,13 @@ Most expressions can be converted (see [this code in the diagram converter](http
 
 You can also use the [FEEL copilot](https://feel-copilot.camunda.com/) to rewrite complex expressions for you.
 
-### Different Connector infrastructure
+### Different connector infrastructure
 
 Through Camunda Connect, Camunda 7 provides an HTTP and a SOAP HTTP [Connector](https://docs.camunda.org/manual/latest/reference/connect/). Camunda 8 offers multiple [Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) out-of-the-box on a completely different codebase.
 
-To migrate existing Connectors, consider the following options:
+To migrate existing connectors, consider the following options:
 
-- Use the [REST protocol Connector](components/connectors/protocol/rest.md) to leverage an out-of-the-box Connector.
+- Use the [REST protocol connector](components/connectors/protocol/rest.md) to leverage an out-of-the-box connector.
 - Create a small bridging layer via custom [job workers](/components/concepts/job-workers.md).
 
 ### Multi-tenancy
