@@ -32,13 +32,9 @@ Multi-tenancy is disabled by default and is not covered further in this guide. I
 
 To streamline the execution of the subsequent commands, it is recommended to export multiple environment variables.
 
-### Export the region and Helm chart version
+### Export the Helm chart version
 
 The following are the required environment variables with some example values:
-
-```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/setting-region.sh
-```
 
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/chart-env.sh
