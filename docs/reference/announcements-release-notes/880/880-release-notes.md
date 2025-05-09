@@ -40,17 +40,17 @@ To learn more about Camunda Process Test, see [Camunda Process Test](/apis-tools
 
 <!-- https://github.com/camunda/product-hub/issues/2750 -->
 
-Connector manage and run in Console now supports management of multiple Connector Runtime instances.
+Connector manage and run in Console now supports management of multiple connector runtime instances.
 
 To learn more about this feature, see [manage your connectors](/components/console/manage-clusters/manage-connectors.md).
 
 ### Connectors <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span> {#connectorsalpha4}
 
-#### Email Connector {#emailalpha4}
+#### Email connector {#emailalpha4}
 
 <!-- https://github.com/camunda/connectors/pull/4657 -->
 
-The Email Connector now exposes the `Message-ID` provided by the client in the connector response payload. This allows for improved traceability, easier correlation between sent messages and logs, and better integration with downstream systems that rely on `Message-ID`.
+The Email connector now exposes the `Message-ID` provided by the client in the connector response payload. This allows for improved traceability, easier correlation between sent messages and logs, and better integration with downstream systems that rely on `Message-ID`.
 
 For example:
 
@@ -66,16 +66,16 @@ For example:
 This change is backwards-compatible and does not require any action. You can now optionally use the `messageId` field for enhanced tracking when parsing connector responses.
 :::
 
-#### Hubspot Connector {#hubspotalpha4}
+#### Hubspot connector {#hubspotalpha4}
 
 <!-- https://github.com/camunda/product-hub/issues/2398 -->
 
-Hubspot Connector enhancements include:
+Hubspot connector enhancements include:
 
 - The [Get contact by ID](/components/connectors/out-of-the-box-connectors/hubspot.md#get-contact-by-id) operation now supports the retrieval of properties and default contact properties.
 - The new [Enroll contact to workflow](/components/connectors/out-of-the-box-connectors/hubspot.md#enroll-contact-to-workflow) operation allows you to enroll contacts into a specified workflow.
 
-To learn more about this Connector, see [HubSpot Connector](/components/connectors/out-of-the-box-connectors/hubspot.md).
+To learn more about this connector, see [HubSpot connector](/components/connectors/out-of-the-box-connectors/hubspot.md).
 
 ### Desktop Modeler settings <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span>
 
@@ -125,17 +125,17 @@ To learn more about this feature, see [advanced user task listeners for updating
 
 <!-- https://github.com/camunda/product-hub/issues/2398 -->
 
-### HubSpot Connector <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span> {#hubspot}
+### HubSpot connector <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span> {#hubspot}
 
-Use the new outbound HubSpot Connector to connect your BPMN service with [HubSpot](https://hubspot.com/) and manage your HubsSpot contacts, companies, and deals.
+Use the new outbound HubSpot connector to connect your BPMN service with [HubSpot](https://hubspot.com/) and manage your HubsSpot contacts, companies, and deals.
 
-This Connector supports the following operations:
+This connector supports the following operations:
 
 - Contacts: Get all contacts, Get contact by id, Get multiple contacts by id, Search contact, Create contact, Update contact, Delete contact.
 - Companies: Get all companies, Get company by id, Search company, Get all contacts of a company, Add contact to company, Remove contact from company, Create company, Delete company.
 - Deals: Get all deals, Get deal by id, Search deal, Delete deal.
 
-To learn more about this Connector, see [HubSpot Connector](/components/connectors/out-of-the-box-connectors/hubspot.md).
+To learn more about this connector, see [HubSpot connector](/components/connectors/out-of-the-box-connectors/hubspot.md).
 
 ## 8.8.0-alpha2
 
