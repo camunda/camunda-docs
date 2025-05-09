@@ -35,16 +35,27 @@ import Licensing from '../../../self-managed/react-components/licensing.md'
 
 ## OIDC configuration
 
-Claims are name/value pairs used to represent an individual identity. Configure your initial claim and value to match the claim used with your OIDC provider. For example, to use your Microsoft Entra unique account ID, set `IDENTITY_INITIAL_CLAIM_NAME` to `oid`, and `IDENTITY_INITIAL_CLAIM_VALUE` to the ID.
+To learn more about integrating with an OpenID Connect provider, see [connect to an OpenID Connect provider](/self-managed/setup/guides/connect-to-an-oidc-provider.md).
 
 :::note
+Claims are name/value pairs used to represent an individual identity. Configure your initial claim and value to match the claim used with your OIDC provider. For example, to use your Microsoft Entra ID unique user ID, set `IDENTITY_INITIAL_CLAIM_NAME` to `oid`, and `IDENTITY_INITIAL_CLAIM_VALUE` to the ID.
+
 Once set, you cannot update your initial claim name and value using environment or Helm values. You must change these values directly in the database.
 :::
 
-| Environment variable           | Description                                                                                                                                     | Default value |
-| ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| `IDENTITY_INITIAL_CLAIM_NAME`  | The type of claim to use for the initial user. Examples can include `oid`, `name` or `email`.                                                   | `oid`         |
-| `IDENTITY_INITIAL_CLAIM_VALUE` | The value of the claim to use for the initial user. For the default `oid`, the value usually corresponds to the unique ID of your user account. |               |
+| Environment variable                  | Description                                                                                                                                                    | Example value                                     |
+| ------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
+| `IDENTITY_INITIAL_CLAIM_NAME`         | The type of claim used to identify the initial user. Examples can include `oid`, `name` or `email`.                                                            | `oid`                                             |
+| `IDENTITY_INITIAL_CLAIM_VALUE`        | The value of the claim specified in `IDENTITY_INITIAL_CLAIM_NAME`. For the default `oid`, the value usually corresponds to the unique ID of your user account. | `f81d4fae-7dec-11d0-a765-00a0c91e6bf6`            |
+| `CAMUNDA_IDENTITY_TYPE`               | Specifies the authentication provider type (`GENERIC` for standard OIDC providers, `MICROSOFT` for Microsoft Entra ID).                                        | `GENERIC` or `MICROSOFT`                          |
+| `CAMUNDA_IDENTITY_BASE_URL`           | The base URL of the Camunda Identity service where OIDC authentication requests are handled.                                                                   | `https://identity.camunda.example.com`            |
+| `CAMUNDA_IDENTITY_ISSUER`             | The Issuer URL of the identity provider used to retrieve OIDC metadata.                                                                                        | `https://login.microsoftonline.com/{tenant}/v2.0` |
+| `CAMUNDA_IDENTITY_ISSUER_BACKEND_URL` | The backend-facing issuer URL used for token verification by Camunda services.                                                                                 | `https://login.microsoftonline.com/{tenant}/v2.0` |
+| `CAMUNDA_IDENTITY_CLIENT_ID`          | The client ID registered in the identity provider for Camunda authentication.                                                                                  | `your-client-id`                                  |
+| `CAMUNDA_IDENTITY_CLIENT_SECRET`      | The client Secret associated with the client ID used for authentication.                                                                                       | `your-client-secret`                              |
+| `CAMUNDA_IDENTITY_AUDIENCE`           | The expected audience claim (`aud`) in the identity provider's tokens.                                                                                         | `your-audience`                                   |
+| `SPRING_PROFILES_ACTIVE`              | Activates the OIDC profile in the Spring application context.                                                                                                  | `oidc`                                            |
+|  |
 
 ## Component configuration
 
