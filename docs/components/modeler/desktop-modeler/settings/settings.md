@@ -4,22 +4,25 @@ title: Settings
 description: "Use the Settings window to configure the application and its plugins in one place."
 ---
 
-Use the Settings window to configure the application and its plugins in one central place, making it easy to manage preferences and defaults.
+import SettingsImg from './img/settings.png';
 
-## Usage
+Configure and manage your Desktop Modeler application and plugin preferences and defaults via the **Settings** window.
 
-Open the settings window from the application menu or using the `Cmd/Ctrl + ,` keyboard shortcut.
+## Manage Desktop Modeler settings
 
-![settings](./img/settings.png)
+Open the **Settings** window either from the application menu or by using the `Cmd/Ctrl + ,` keyboard shortcut.
 
-Changes are saved automatically. If a restart is required to apply them, a warning will be displayed.
+<img src={SettingsImg} alt="Settings window" class="img-noborder img-600"/>
 
-If external documentation is available for a setting, you can access it by clicking the blue icon next to the setting name.
+- Changes are saved automatically. If a restart is required to apply your changes, a warning is displayed.
+- Open additional documentation links for a setting by clicking the blue icon next to the setting name.
 
 ## Settings JSON file
 
-Your settings are saved in `settings.json` file in the [user data directory](../search-paths/search-paths.md#user-data-directory).
+Your settings are saved in a `settings.json` file in the [user data directory](../search-paths/search-paths.md#user-data-directory).
 
-Only the settings which have been modified are stored in this file.
+Only the settings you have changed are stored in this file.
 
-You can edit this file directly or transfer it between modeler instances. If you modify it, a restart is required for the changes to take effect.
+:::note
+You can transfer this file between modeler instances. If you change this file, a restart is required for your changes to be applied.
+:::
