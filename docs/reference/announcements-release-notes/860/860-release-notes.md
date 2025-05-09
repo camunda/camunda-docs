@@ -104,11 +104,11 @@ The Go and zbctl clients are moved to the [Camunda Community Hub](https://github
 Interested in maintaining these community projects? Contact us by completing the [Maintainer Proposal form](https://github.com/Camunda-Community-Hub/community/issues/new/choose) in the Camunda Community Hub.
 :::
 
-### Email Connector <span class="badge badge--long" title="This feature affects Connectors">Connectors</span>
+### Email connector <span class="badge badge--long" title="This feature affects connectors">Connectors</span>
 
 <!-- https://github.com/camunda/product-hub/issues/2430 -->
 
-The new Email Connector allows you to integrate your BPMN service with any email server using POP3, IMAP, or SMTP. You can use this Connector to automate the retrieval, deletion, search, and organization of emails directly within your processes.
+The new Email connector allows you to integrate your BPMN service with any email server using POP3, IMAP, or SMTP. You can use this connector to automate the retrieval, deletion, search, and organization of emails directly within your processes.
 
 ### Encryption at rest <span class="badge badge--long" title="This feature affects SaaS">SaaS</span> <span class="badge badge--long" title="This feature affects Console">Console</span>
 
@@ -246,7 +246,7 @@ Web Modeler now supports DMN models and Forms inside [Marketplace blueprints](ht
 - These blueprints can now showcase even more ways to implement common business processes, and illustrate best practices for process modeling and implementation.
 - To learn more about browsing Marketplace blueprints, see [browse marketplace blueprints](/components/modeler/web-modeler/camunda-marketplace.md#browse-marketplace-blueprints).
 
-### Share Connectors within the project and organization in Self-Managed <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+### Share connectors within the project and organization in Self-Managed <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
 <!-- https://github.com/camunda/product-hub/issues/2223 -->
 
@@ -297,13 +297,13 @@ If activated, you might see more backpressure in cases where exporters are not e
 | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
 | 12 August 2024 | - [ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.6.0-alpha4) <br /> - [ Connectors ](https://github.com/camunda/connectors/releases/tag/8.6.0-alpha4) | [Release blog](https://camunda.com/blog/2024/08/camunda-alpha-release-august-2024/) |
 
-### Using Camunda 8 Connectors in Desktop Modeler <span class="badge badge--long" title="This feature affects Modeler">Modeler</span>
+### Using Camunda 8 connectors in Desktop Modeler <span class="badge badge--long" title="This feature affects Modeler">Modeler</span>
 
 <!-- https://github.com/camunda/product-hub/issues/2253 -->
 
-Modeler now offers templates in BPMN diagrams for pre-built Camunda 8 Connectors. This ensures you can easily connect to a growing list of services and protocols, out of the box.
+Modeler now offers templates in BPMN diagrams for pre-built Camunda 8 connectors. This ensures you can easily connect to a growing list of services and protocols, out of the box.
 
-- To learn more about this feature, see [use Connectors](/components/modeler/desktop-modeler/use-connectors.md).
+- To learn more about this feature, see [use connectors](/components/modeler/desktop-modeler/use-connectors.md).
 - To disable this feature, configure the [`disable-connector-templates` flag](/components/modeler/desktop-modeler/flags/flags.md#disable-connector-templates).
 
 <!-- Via https://github.com/camunda/camunda-docs/pull/4187 -->
@@ -317,11 +317,11 @@ The Help Center now features a step-by-step guide to complete our [human task or
 - Users get a glimpse into the user experience for at-scale adoption.
 - Enterprise architects get a picture of how Camunda's out-of-the-box Tasklist fits into their architecture.
 
-### Amazon AWS Bedrock Connector <span class="badge badge--long" title="This feature affects Connectors">Connectors</span>
+### Amazon AWS Bedrock connector <span class="badge badge--long" title="This feature affects connectors">Connectors</span>
 
 <!-- https://github.com/camunda/product-hub/issues/2404 -->
 
-This new Connector allows you to leverage the power of the Amazon AWS Bedrock LLM service, allowing users to:
+This new connector allows you to leverage the power of the Amazon AWS Bedrock LLM service, allowing users to:
 
 - Make a customized request to any models available in the region using the Amazon `InvokeModel` function.
 - Create a full conversation using the **Converse** method.
@@ -344,7 +344,7 @@ You can now synchronize process applications with GitHub using a native integrat
 - After an admin approves and configures the basic integration, you can select a path to synchronize with in a GitHub repository.
 - You can pull changes from GitHub to integrate contributions from Desktop Modeler users, make changes, and begin the process to make a pull request so every change is properly reviewed and approved.
 
-Do you use another tool such as GitLab or Bitbucket? [Contact us](/reference/contact.md) to make your request. Until then, you can use our Connectors system and the CI/CD blueprint on the Marketplace.
+Do you use another tool such as GitLab or Bitbucket? [Contact us](/reference/contact.md) to make your request. Until then, you can use our connectors system and the CI/CD blueprint on the Marketplace.
 
 ### Persist data across sessions
 
@@ -354,7 +354,7 @@ Don't Repeat Yourself (DRY). Play now supports an end-to-end journey for saving 
 
 - Save example data to the BPMN diagram while playing your process so anyone can use it.
 - Any user can use this example data in their sessions, eliminating the need for tedious form-fills or copy-pasting.
-- Connector example data is now available to help define output variables or mock Connectors.
+- Connector example data is now available to help define output variables or mock connectors.
 
 ### Out-of-the-box (OOTB) product development lifecycle (PDLC) happy path <span class="badge badge--long" title="This feature affects Modeler">Modeler</span>
 
@@ -401,11 +401,11 @@ In Operate, the visualization of the executed path of a process instance is impr
 
 You can now [enable TLS-encrypted communication](/self-managed/modeler/web-modeler/configuration/ssl.md#configuring-secure-connections-between-web-modeler-components) between the different Web Modeler components (`webapp`, `restapi`, and `websockets`).
 
-### API orchestration getting started journey <span class="badge badge--long" title="This feature affects Connectors">Connectors</span>
+### API orchestration getting started journey <span class="badge badge--long" title="This feature affects connectors">Connectors</span>
 
 <!-- https://github.com/camunda/product-hub/issues/2348 -->
 
-New platform users interested in orchestrating API endpoints now have a high-level in-product explanation of Camunda's Connector functionality.
+New platform users interested in orchestrating API endpoints now have a high-level in-product explanation of Camunda's connector functionality.
 
 ### Remove "Cloud" as a user-facing term <span class="badge badge--long" title="This feature affects Modeler">Modeler</span><span class="badge badge--long" title="This feature affects Console">Console</span> <span class="badge badge--long" title="This feature affects SaaS">SaaS</span>
 
@@ -435,17 +435,17 @@ Let AI teach you how to prevent and fix the incidents you run into while playing
 
 The Help Center now features a step-by-step guide to complete the [API orchestration tutorial](/guides/getting-started-orchestrate-apis.md). To use this guide, you must have cookies enabled.
 
-### Message queue inbound Connectors message acknowledgement configuration <span class="badge badge--long" title="This feature affects Connectors">Connectors</span>
+### Message queue inbound connectors message acknowledgement configuration <span class="badge badge--long" title="This feature affects connectors">Connectors</span>
 
 <!-- https://github.com/camunda/product-hub/issues/2157 -->
 
 Enhance BPMN workflow reliability with selective message acknowledgement, enabling precise error handling and notification for unmatched messages through RabbitMQ's dead letter queue configuration. Control the message acknowledgement process so acknowledgements are sent only if the message is both correlated to a process instance and meets the activation condition.
 
-### New inbound intermediate element template property - `Message TTL` <span class="badge badge--long" title="This feature affects Connectors">Connectors</span>
+### New inbound intermediate element template property - `Message TTL` <span class="badge badge--long" title="This feature affects connectors">Connectors</span>
 
 <!-- https://github.com/camunda/connectors/issues/1406 -->
 
-Time-to-live (TTL) is now configurable for inbound Connectors via a property in all inbound intermediate element templates called `Message TTL`. The new default value for TTL is 0. Read more about [message buffering](/components/concepts/messages.md#message-buffering) and [message correlation](/components/concepts/messages.md#message-correlation-overview).
+Time-to-live (TTL) is now configurable for inbound connectors via a property in all inbound intermediate element templates called `Message TTL`. The new default value for TTL is 0. Read more about [message buffering](/components/concepts/messages.md#message-buffering) and [message correlation](/components/concepts/messages.md#message-correlation-overview).
 
 ### Incident copilot alpha <span class="badge badge--long" title="This feature affects Play">Play</span>
 
@@ -457,13 +457,13 @@ Let AI teach you how to prevent and fix the incidents you run into while playing
 - Advice on how to update your model to prevent issues while developing
 - An open conversation to continue asking more questions
 
-### MS SQL, MySQL, and PostgreSQL outbound JDBC Connector <span class="badge badge--long" title="This feature affects Connectors">Connectors</span>
+### MS SQL, MySQL, and PostgreSQL outbound JDBC connector <span class="badge badge--long" title="This feature affects connectors">Connectors</span>
 
 <!-- https://github.com/camunda/product-hub/issues/2213 -->
 
-Offering seamless data exchange between Camunda 8 and databases, the [new database Connector](/components/connectors/out-of-the-box-connectors/sql.md) for Camunda 8 simplifies data exchange with MySQL, MS SQL, and PostgreSQL databases, allowing you to read and write data directly within your Camunda processes.
+Offering seamless data exchange between Camunda 8 and databases, the [new database connector](/components/connectors/out-of-the-box-connectors/sql.md) for Camunda 8 simplifies data exchange with MySQL, MS SQL, and PostgreSQL databases, allowing you to read and write data directly within your Camunda processes.
 
-This integration enables a wide range of process blueprints and use cases to be executed on the Camunda platform without any additional installation or development. With the new Camunda Connector, you can now seamlessly integrate database operations into your workflows. This feature reduces complexity, enhances security, and lowers maintenance costs by providing a robust and efficient method for data exchange directly within the Camunda platform.
+This integration enables a wide range of process blueprints and use cases to be executed on the Camunda platform without any additional installation or development. With the new Camunda connector, you can now seamlessly integrate database operations into your workflows. This feature reduces complexity, enhances security, and lowers maintenance costs by providing a robust and efficient method for data exchange directly within the Camunda platform.
 
 ### Create Camunda Wizard <span class="badge badge--long" title="This feature affects Modeler">Modeler</span>
 
@@ -481,13 +481,13 @@ Web Modeler Self Managed is now free to use for anyone. Now packaged as part of 
 
 There is one limitation: each Modeler project can have up to five users.
 
-### Amazon SageMaker <span class="badge badge--long" title="This feature affects Connectors">Connectors</span>
+### Amazon SageMaker <span class="badge badge--long" title="This feature affects connectors">Connectors</span>
 
 <!-- https://github.com/camunda/product-hub/issues/2325 -->
 
 Integrate ML cases in your existing processes with [Amazon SageMaker](/components/connectors/out-of-the-box-connectors/amazon-sagemaker.md).
 
-You can now effortlessly integrate machine learning functionalities into your workflows with the release of the Amazon SageMaker Connector. With this new Connector, directly harness Amazon SageMaker's machine learning services within Camunda, streamlining the process and allowing for greater focus on process enhancement and innovation.
+You can now effortlessly integrate machine learning functionalities into your workflows with the release of the Amazon SageMaker connector. With this new connector, directly harness Amazon SageMaker's machine learning services within Camunda, streamlining the process and allowing for greater focus on process enhancement and innovation.
 
 ### Process application MVP <span class="badge badge--long" title="This feature affects Modeler">Modeler</span>
 
@@ -505,7 +505,7 @@ The [process application](/components/modeler/web-modeler/process-applications.m
 
 <!-- https://github.com/camunda/product-hub/issues/2014 -->
 
-Developing and releasing Camunda processes in compliance with your organization's policies often creates a long-running, sometimes complex process across many endpoints - a great use case for an orchestrator like Camunda. Camunda is taking the first steps to orchestrate the development lifecycle using its own engine, relevant Connectors, and a [customizable blueprint](https://marketplace.camunda.com/en-US/apps/439170/cicd-pipeline) that you can modify to fit your needs.
+Developing and releasing Camunda processes in compliance with your organization's policies often creates a long-running, sometimes complex process across many endpoints - a great use case for an orchestrator like Camunda. Camunda is taking the first steps to orchestrate the development lifecycle using its own engine, relevant connectors, and a [customizable blueprint](https://marketplace.camunda.com/en-US/apps/439170/cicd-pipeline) that you can modify to fit your needs.
 
 ### Process application MVP (SaaS only) <span class="badge badge--long" title="This feature affects Modeler">Modeler</span> <span class="badge badge--long" title="This feature affects SaaS">SaaS</span>
 
