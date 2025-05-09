@@ -206,7 +206,7 @@ You can also customize or extend the transformer logic as needed.
 The data migrator can copy runtime and audit data from Camunda 7 to Camunda 8.
 
 :::info
-Camunda is developing the Data Migrator with a first release planned for **Camunda 8.8 (October 2025)**. Iterative improvements might follow.
+Camunda is developing the Data Migrator with a first release planned for **Camunda 8.8 (October 2025)**. Iterative improvements will follow. You can check the current state and track progress in the [Github repository https://github.com/camunda/c7-data-migrator/tree/main](https://github.com/camunda/c7-data-migrator/tree/main).
 :::
 
 ![data-migration](../img/data-migration.png)
