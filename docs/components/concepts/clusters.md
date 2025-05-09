@@ -81,5 +81,5 @@ You can resume a paused cluster at any time, which typically takes five to ten m
   - Cluster configuration settings (for example, API Clients, connector secrets, and IP allowlists) are saved so you can easily resume a cluster.
 
 :::tip
-To prevent auto-pause, [upgrade your Free Trial plan](https://camunda.com/pricing/) to a Starter or Enterprise plan.
+To prevent auto-pause, [upgrade your Free Trial plan](https://camunda.com/pricing/) to Enterprise plan.
 :::
