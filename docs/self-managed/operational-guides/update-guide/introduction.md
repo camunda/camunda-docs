@@ -48,10 +48,3 @@ Update from 8.3.x to 8.4.0
 
 [Release notes](https://github.com/camunda/camunda-platform/releases/tag/8.4.0) |
 [Release blog](https://camunda.com/blog/2024/01/camunda-8-4-simplifying-installation-enhancing-user-experience/)
-
-## [Camunda 8.2 to Camunda 8.3](../820-to-830)
-
-Update from 8.2.x to 8.3.0
-
-[Release notes](https://github.com/camunda/camunda-platform/releases/tag/8.3.0) |
-[Release blog](https://camunda.com/blog/2023/10/camunda-8-3-scaling-automation-maximize-value/)

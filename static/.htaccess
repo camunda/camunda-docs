@@ -149,6 +149,10 @@ RewriteRule ^optimize/3.11.0/self-managed/(.*)$ /docs/8.3/self-managed/$1 [R=301
 #   8.8: content moves introduced prior to the release of version 8.8.
 #---------------------------------------------------------------------------------
 
+# Remove 8.3 leftovers
+RewriteRule ^docs/self-managed/operational-guides/update-guide/820-to-830/(.*)$ https://unsupported.docs.camunda.io/8.3/docs/self-managed/operational-guides/update-guide/820-to-830/ [R=301,L]
+RewriteRule ^docs/8.7/self-managed/operational-guides/update-guide/820-to-830/(.*)$ https://unsupported.docs.camunda.io/8.3/docs/self-managed/operational-guides/update-guide/820-to-830/ [R=301,L]
+
 # Rename indices page
 RewriteRule ^docs/self-managed/setup/guides/prefix-elasticsearch-indices/(.*)$ /docs/self-managed/setup/guides/prefix-elasticsearch-opensearch-indices/ [R=301,L]
 RewriteRule ^docs/8.7/self-managed/setup/guides/prefix-elasticsearch-indices/(.*)$ /docs/8.7/self-managed/setup/guides/prefix-elasticsearch-opensearch-indices/ [R=301,L]
