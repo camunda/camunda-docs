@@ -144,9 +144,7 @@ The following conventions apply to all attributes:
 - Removed attributes
   - `draft` - Draft variables are not supported in V2 anymore, see also the [save draft variables](#save-task-draft-variables) endpoint for further details.
 - Added attributes
-  - `scopeKey` - Variables belong to a specific scope, for example, the process instance or the element instance of a user task. This value represents the scope the variables is related to.
-  - `processInstanceKey` - A variable belongs to a process instance and this value represents the unique system identifier of that instance.
-  - `tenantId` - Variables can belong to a dedicated tenant and this value represents the one it belongs to. See [multi-tenancy][] for further details.
+  - Please consult the [V2 endpoint documentation page](../camunda-api-rest/specifications/search-user-task-variables.api.mdx) for all new attributes.
 
 </TabItem>
 </Tabs>
@@ -186,9 +184,7 @@ The following conventions apply to all attributes:
   - `includeVariables` - The endpoint does not return variables. Use the [search task variables](#search-task-variables) endpoint to retrieve them.
   - `implementation` - The V2 API supports only Camunda user tasks.
 - Added attributes
-  - `userTaskKey` - Filter for specific user tasks by their unique system identifiers.
-  - `processDefinitionId` - Filter for user tasks by the user-provided unique identifier of the process.
-  - `elementInstanceKey` - Find tasks by the unique system identifier of the instance of the BPMN element that created the user task.
+  - Please consult the [V2 endpoint documentation page](../camunda-api-rest/specifications/search-user-tasks.api.mdx) for all new attributes.
 
 </TabItem>
 
@@ -210,9 +206,7 @@ The following conventions apply to all attributes:
   - `formVersion` - Use the [get user task form endpoint][] to retrieve form data bound to this user task. The `formKey` references the form of a specific `formId`, linked to this user task in a specific version.
   - `formId` - Use the [get user task form endpoint][] to retrieve form data bound to this user task. The `formKey` references the form of a specific `formId`, linked to this user task in a specific version.
 - Added attributes
-  - `customHeaders` - Any user-provided custom header values provided for the user task.
-  - `externalFormReference` - The user-provided reference to an external form for the user task. Previously, the `formKey` encoded this value.
-  - `processDefinitionVersion` - The version of the process this user task belongs to.
+  - Please consult the [V2 endpoint documentation page](../camunda-api-rest/specifications/search-user-tasks.api.mdx) for all new attributes.
 
 </TabItem>
 
@@ -260,7 +254,7 @@ The following conventions apply to all attributes:
 - Adjusted attributes
   - `variables` - Provide the variables as a proper JSON object instead of an array of objects with a `name` and a serialized JSON string `value`.
 - Added attributes
-  - `action` - Provide any custom lifecycle for this action or use the default value of `"assign"`.
+  - Please consult the [V2 endpoint documentation page](../camunda-api-rest/specifications/complete-user-task.api.mdx) for all new attributes.
 
 </TabItem>
 
@@ -288,7 +282,7 @@ The following conventions apply to all attributes:
 - Renamed attributes
   - `allowOverrideAssignment` - Use `allowOverride`, this still refers to allowing to override any existing assignee.
 - Added attributes
-  - `action` - Provide any custom lifecycle for this action or use the default value of `"assign"`.
+  - Please consult the [V2 endpoint documentation page](../camunda-api-rest/specifications/assign-user-task.api.mdx) for all new attributes.
 
 </TabItem>
 
@@ -328,8 +322,8 @@ The following conventions apply to all attributes:
 
 #### Get a variable
 
-- **V1 endpoint**: `GET http://localhost:8080/v1/variables/{variableId}`
-- **V2 endpoint**: `GET http://localhost:8080/v2/variables/{variableKey}`
+- **V1 endpoint**: `GET /v1/variables/{variableId}`
+- **V2 endpoint**: `GET /v2/variables/{variableKey}`
 
 <Tabs groupId="get-a-variable" defaultValue="input-adjustments" queryString values={
 [
@@ -351,8 +345,7 @@ The following conventions apply to all attributes:
 - Removed attributes
   - `draft` - Draft variables are not supported in V2 anymore, see also the [save draft variables](#save-task-draft-variables) endpoint for further details.
 - Added attributes
-  - `scopeKey` - Variables belong to a specific scope, for example, the process instance or the element instance of a user task. This value represents the scope the variables is related to.
-  - `processInstanceKey` - A variable belongs to a process instance and this value represents the unique system identifier of that instance.
+  - Please consult the [V2 endpoint documentation page](../camunda-api-rest/specifications/get-variable.api.mdx) for all new attributes.
 
 </TabItem>
 </Tabs>
@@ -363,8 +356,8 @@ The following conventions apply to all attributes:
 
 #### Search decision definitions
 
-- **V1 endpoint**: `POST http://localhost:8080/v1/decision-definitions/search`
-- **V2 endpoint**: `POST http://localhost:8080/v2/decision-definitions/search`
+- **V1 endpoint**: `POST /v1/decision-definitions/search`
+- **V2 endpoint**: `POST /v2/decision-definitions/search`
 
 <Tabs groupId="search-decision-definitions" defaultValue="input-adjustments" queryString values={
 [
@@ -408,8 +401,8 @@ The following conventions apply to all attributes:
 
 #### Get decision definition
 
-- **V1 endpoint**: `GET http://localhost:8080/v1/decision-definitions/{key}`
-- **V2 endpoint**: `GET http://localhost:8080/v2/decision-definitions/{decisionDefinitionKey}`
+- **V1 endpoint**: `GET /v1/decision-definitions/{key}`
+- **V2 endpoint**: `GET /v2/decision-definitions/{decisionDefinitionKey}`
 
 <Tabs groupId="get-decision-definition" defaultValue="input-adjustments" queryString values={
 [
@@ -433,8 +426,8 @@ The following conventions apply to all attributes:
 
 #### Search decision instances
 
-- **V1 endpoint**: `POST http://localhost:8080/v1/decision-instances/search`
-- **V2 endpoint**: `POST http://localhost:8080/v2/decision-instances/search`
+- **V1 endpoint**: `POST /v1/decision-instances/search`
+- **V2 endpoint**: `POST /v2/decision-instances/search`
 
 <Tabs groupId="search-decision-instances" defaultValue="input-adjustments" queryString values={
 [
@@ -487,8 +480,8 @@ The following conventions apply to all attributes:
 
 #### Get decision instance by id
 
-- **V1 endpoint**: `GET http://localhost:8080/v1/decision-instances/{id}`
-- **V2 endpoint**: `GET http://localhost:8080/v2/decision-instances/{decisionInstanceId}`
+- **V1 endpoint**: `GET /v1/decision-instances/{id}`
+- **V2 endpoint**: `GET /v2/decision-instances/{decisionInstanceId}`
 
 <Tabs groupId="get-decision-instance-by-id" defaultValue="input-adjustments" queryString values={
 [
@@ -525,8 +518,8 @@ The following conventions apply to all attributes:
 
 #### Search decision requirements
 
-- **V1 endpoint**: `POST http://localhost:8080/v1/drd/search`
-- **V2 endpoint**: `POST http://localhost:8080/v2/decision-requirements/search`
+- **V1 endpoint**: `POST /v1/drd/search`
+- **V2 endpoint**: `POST /v2/decision-requirements/search`
 
 <Tabs groupId="search-decision-requirements" defaultValue="input-adjustments" queryString values={
 [
@@ -564,8 +557,8 @@ The following conventions apply to all attributes:
 
 #### Get decision requirements by key
 
-- **V1 endpoint**: `GET http://localhost:8080/v1/drd/{key}`
-- **V2 endpoint**: `GET http://localhost:8080/v2/decision-requirements/{decisionRequirementsKey}`
+- **V1 endpoint**: `GET /v1/drd/{key}`
+- **V2 endpoint**: `GET /v2/decision-requirements/{decisionRequirementsKey}`
 
 <Tabs groupId="get-decision-requirements-by-key" defaultValue="input-adjustments" queryString values={
 [
@@ -589,8 +582,8 @@ The following conventions apply to all attributes:
 
 #### Get decision requirements as XML by key
 
-- **V1 endpoint**: `GET http://localhost:8080/v1/drd/{key}/xml`
-- **V2 endpoint**: `GET http://localhost:8080/v2/decision-requirements/{decisionRequirementsKey}/xml`
+- **V1 endpoint**: `GET /v1/drd/{key}/xml`
+- **V2 endpoint**: `GET /v2/decision-requirements/{decisionRequirementsKey}/xml`
 
 <Tabs groupId="get-decision-requirements-by-key" defaultValue="input-adjustments" queryString values={
 [
@@ -616,8 +609,8 @@ The following conventions apply to all attributes:
 
 #### Search variables for process instances
 
-- **V1 endpoint**: `POST http://localhost:8080/v1/variables/search`
-- **V2 endpoint**: `POST http://localhost:8080/v2/variables/search`
+- **V1 endpoint**: `POST /v1/variables/search`
+- **V2 endpoint**: `POST /v2/variables/search`
 
 <Tabs groupId="search-variables-for-process-instances" defaultValue="input-adjustments" queryString values={
 [
@@ -655,8 +648,8 @@ The following conventions apply to all attributes:
 
 #### Get variable by key
 
-- **V1 endpoint**: `GET http://localhost:8080/v1/variables/{key}`
-- **V2 endpoint**: `GET http://localhost:8080/v2/variables/{variableKey}`
+- **V1 endpoint**: `GET /v1/variables/{key}`
+- **V2 endpoint**: `GET /v2/variables/{variableKey}`
 
 <Tabs groupId="get-variable-by-key" defaultValue="input-adjustments" queryString values={
 [
