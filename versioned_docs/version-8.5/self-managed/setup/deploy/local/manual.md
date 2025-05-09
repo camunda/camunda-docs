@@ -18,7 +18,7 @@ Make sure to configure the web applications to use a port that is available. By 
 
 ## Download a compatible set of Camunda 8 components
 
-Tasklist, Operate and Zeebe distributions are available for download on the [release page](https://github.com/camunda/camunda/releases). Every release contains a set of compatible versions of the various components, ensure you download and use compatible versions.
+Tasklist, Operate and Zeebe distributions are available for download on the [release page](https://github.com/camunda/camunda-platform/releases). Every release contains a set of compatible versions of the various components, ensure you download and use compatible versions.
 
 All Connector-related resources are available on [Maven Central](https://search.maven.org/search?q=g:io.camunda.connector). Make sure to download `*-jar-with-dependencies.jar` files in order to run Connectors locally including their necessary dependencies.
 Note that some out-of-the-box Connectors are licensed under the [Camunda Self-Managed Free Edition license](https://camunda.com/legal/terms/cloud-terms-and-conditions/camunda-cloud-self-managed-free-edition-terms/).
