@@ -8,18 +8,18 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
-      label: "Ad-hoc subprocess",
+      label: "Ad-hoc sub-process",
       items: [
         {
           type: "doc",
-          id: "apis-tools/camunda-api-rest/specifications/search-ad-hoc-subprocess-activities",
+          id: "apis-tools/camunda-api-rest/specifications/search-ad-hoc-sub-process-activities",
           label: "Search activatable activities (alpha)",
           className: "api-method post",
         },
         {
           type: "doc",
-          id: "apis-tools/camunda-api-rest/specifications/activate-ad-hoc-subprocess-activities",
-          label: "Activate activities within an ad-hoc subprocess",
+          id: "apis-tools/camunda-api-rest/specifications/activate-ad-hoc-sub-process-activities",
+          label: "Activate activities within an ad-hoc sub-process",
           className: "api-method post",
         },
       ],
@@ -306,6 +306,18 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/search-mapping-rules-for-group",
+          label: "Search group mapping rules (Work-in-Progress)",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/search-roles-for-group",
+          label: "Search group roles (Work-in-Progress)",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/add-user-to-group",
           label: "Assign a user to a group (Work-in-Progress)",
           className: "api-method put",
@@ -314,6 +326,18 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/unassign-user-from-group",
           label: "Unassign a user from a group (Work-in-Progress)",
+          className: "api-method delete",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/add-application-to-group",
+          label: "Assign an application to a group (Work-in-Progress)",
+          className: "api-method put",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/unassign-application-from-group",
+          label: "Unassign an application from a group (Work-in-Progress)",
           className: "api-method delete",
         },
         {
@@ -569,6 +593,12 @@ const sidebar: SidebarsConfig = {
           label: "Modify process instance",
           className: "api-method post",
         },
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/get-process-instance-call-hierarchy",
+          label: "Get call hierarchy for process instance",
+          className: "api-method get",
+        },
       ],
     },
     {
@@ -631,6 +661,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/search-users-for-role",
+          label: "Search role users (Work-in-Progress)",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/add-user-to-role",
           label: "Assign a user to a role (Work-in-Progress)",
           className: "api-method put",
@@ -643,9 +679,45 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/add-application-to-role",
+          label: "Assign an application to a role (Work-in-Progress)",
+          className: "api-method put",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/remove-application-from-role",
+          label: "Unassign an application from a role (Work-in-Progress)",
+          className: "api-method delete",
+        },
+        {
+          type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/search-roles",
           label: "Search roles (Work-in-Progress)",
           className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/add-group-to-role",
+          label: "Assign a group to a role (Work-in-Progress)",
+          className: "api-method put",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/remove-group-from-role",
+          label: "Unassign a group from a role (Work-in-Progress)",
+          className: "api-method delete",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/add-mapping-to-role",
+          label: "Assign a mapping to a role (Work-in-Progress)",
+          className: "api-method put",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/remove-mapping-from-role",
+          label: "Unassign a mapping from a role (Work-in-Progress)",
+          className: "api-method delete",
         },
       ],
     },
@@ -709,6 +781,24 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/search-groups-for-tenant",
+          label: "Search groups for tenant",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/assign-application-to-tenant",
+          label: "Assign a user to a tenant",
+          className: "api-method put",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/remove-application-from-tenant",
+          label: "Remove an application from a tenant",
+          className: "api-method delete",
+        },
+        {
+          type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/assign-mapping-rule-to-tenant",
           label: "Assign a mapping rule to a tenant",
           className: "api-method put",
@@ -735,6 +825,18 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/remove-group-from-tenant",
           label: "Remove a group from a tenant",
+          className: "api-method delete",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/assign-role-to-tenant",
+          label: "Assign a role to a tenant",
+          className: "api-method put",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/remove-role-from-tenant",
+          label: "Remove a role from a tenant",
           className: "api-method delete",
         },
         {
