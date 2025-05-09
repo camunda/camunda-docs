@@ -50,7 +50,7 @@ Most expressions can be converted (see [this code in the diagram converter](http
 
 <!-- TODO extensive docs for the diagram converter -->
 
-You can also use the [FEEL copilot](https://feel-copilot.camunda.com/) to rewrite complex expressions for you.
+You can also use the [FEEL Copilot](/components/early-access/alpha/feel-copilot/feel-copilot) to rewrite complex expressions for you.
 
 ### Different Connector infrastructure
 
