@@ -1016,7 +1016,7 @@ module.exports = {
               "Microsoft (Azure)": [
                 {
                   type: "category",
-                  label: "Azure AKS",
+                  label: "Microsoft AKS",
                   link: {
                     type: "doc",
                     id: "self-managed/setup/deploy/azure/microsoft-aks/microsoft-aks",
