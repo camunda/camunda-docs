@@ -1,12 +1,12 @@
 ---
-id: get-group
-title: "Get group (Work-in-Progress)"
-description: "Get a group by its ID."
-sidebar_label: "Get group (Work-in-Progress)"
+id: remove-role-from-tenant
+title: "Remove a role from a tenant"
+description: "Removes a single role from a specified tenant without deleting the role."
+sidebar_label: "Remove a role from a tenant"
 hide_title: true
 hide_table_of_contents: true
-api: eJztWEtz2zYQ/is7OCVTmpQTp01509iOqzbNeGylOdg+gOCKRAwCDB6WNRr+984SlK1IsuPO9NKpDhqKXOz7+0Bil8zzyrH8ip1ZE1p2kzDTouVeGj0pWc4q9FGSsBKdsLIlEcvZGXrgUJEMigVI72Bykl7raz2tpYPx+QSkA6mBwxdjbw+kPji3prLoHDjPPQLXJcylUhB0ibYy0BqP2kuuoLDIb6WuQNRcV+ggaC/VtSYvFhVyhzCXvgauIbTCNLS2kdrYlTi91ixhLbe8QY+WUlwyzRuknCjoSckSJimTlvuaJczityAtliz3NuBmutMah2QnJylLmBM1NpzlS+YXLRl13kpdsa67IVOuNdqhI/mb0YguT5mTDlwQAp2bBaUWYNEHq7EkJ8Joqgip87ZVUvR9yb46srFci2GjNb1hh9yKGlaxgPTYkNEhXlN8ReGpRpY67mWMNpZoM6unq0HrU9Ylsah/4OKfKN/i4lGX4PZyVepCtyF+ufba85R1XcK89ApXpbtAF5RnXUeSo9Hh7vYRXtB5UFzcOrjjSpbAg68JwrFRICyWEdHumXa21hQKm59+1NYxnMeVUKLnUkFsIXA35FNgSYS7uvhwDL8evfvl5lXtfevyLJvP56mdiQMspTc2NbbK7EzQj9a9TmFao0Vo+AIKBF6WknxyBY/gANeikDMpwBvwNcIQNlDNI9ueR1aUbvdoZmzDPctZsHKrZWP4fDEB2VdxtiCWb7nudWacOpYzXpjg80Jxfcse2/ojYIzBhabhdgFmtsNBlzDascJaGkxqjxXa9fil9m/f7ATdb9PpOUQTIEyJMDMWPG2TgyNKopFaNqFh+dFolLCG38e7n0ejHufU8RdkogHvW8V1BOBGOlJDYywO+OkTk9p5rsW/1RljZSU3/X5PsQHEJzGjFcnebuP9g7GFLEvUPTwf+CYdaOOBK2Xmz26Te17tefW/59XRc98e/ScUGazkHWqYnMCcR3bNTNB7bu25tefWk9x6t+u7fqyBqmwJh2itsWCECNZiCfNaqt48feuvfA8vtYjFPdf2XNtzbZtrXcIa9LUZ5hH9ud7XLGdZ/xpz2XI4QHZ0MEd7tzrvB6tYzpaRMF2eZcvaON/ly9ZY32V31I07biUvVMQgiSOxVoBRRnDVP97VOBLQCXiV0DFvgi45vIeL08spnHGPcx7PuOTye9PvR+9HO63S0ics0lglZhhht7YVrMwSp3eajYtfYrgfYjgUwUq/uCS1WJ4CuUU7DlT8BzgM/nrrdB8XsWT482EFkt+/TPs+Sz0zvfrQ7+1AqCtoXYx8lB5uY+t80lNEmKYJut8ndTUMhNYSEyo4TwklTEmB2uHjhOPB7ccogb+iRzhMqSkROavtsZK+DkUqTJOJqPZwLZQpsoZLnQ0uXHY8/vPzp5PxwcfJ8emny9ODw3SU+nvfJ98a5xuu1+KgOVr8Gnu1OSd7vZn48vEV8d+Yvw0Q8Xjvs1ZxqQm0fW2XA4ev4vDHsYTlqzHQTTIQ8YotlwV3+NmqrqPH3wLaBcuvbh552xO9lI7+lyyfceU2h3frZXt1MYz5XsPmSG9nsMNDrhf9XqEC3bGE3dKk62Fw1d10CauRl2j7eKJ0LAS2fk1va4hHPHvY2s5OiSB/A/GncJ0=
-sidebar_class_name: "get api-method"
+api: eJztWEtz2zYQ/is7OCVTRlQSp0150zh2606a8ThKe3B9AImViAQEGGBpWaPhf+8sQMqyJWdy8FEHDUVwn9jvw2M3guQyiOJazNFKS+ImE65FL0k7e6FEITw27havnMFz75pBKhMKQ+V1y2KiEFdRKICEoO3SIHhnEBbeNTzUYqUXGhVQ1IaVptp1BAoNkrZLoDppTEQmWullg4Seo9oIKxsUhUiaF0pkQrPDVlItMuHxe6c9KlGQ7/BxVPMaobP6e4egFVriIDy4RfSXLLLHUNXYSFFsBK1bdhbIa7sUfZ9t/XN0z+l9zPZp3zdsP7TOBgz8/c30hB/7PuJUr2SA0FUVhrDojFlDKptKNdjNt8/EyXR62FTr3a1WqEBJkqADWEdwK41WHGvlLKElVpVta3QVQZK33pUGm1++Braz2UnpoYMZXCZJUEhSG3DlV6wIZIAkWKICbeH66vwUfj9599vNi5qoDUWer1ariV9Ur1Bpcn7i/DL3i4p/LPdyAvMaPUIj11AiSKU0+5SGE2rRk8YworACcnE+hrCB533ynxXZWIEUFiNxq3xfn8d1ysTC+UaSKETn9R4vZvDl6mIs/3qE+gPXUWchO8M2ZOk6Kkoj7TcuFGkyB50+9hK6ppF+PaLroYM+E4EkdTtpCG0Jl+h349eW3r7Zs82w+HM+v4RkAiqnEBbOA9U6jI44iUZb3XSNKE6m00w08i69/Tqd9myTK/4TmVjAu9ZIG6H1OB1toXEeB/zExLQNJG31XJVxXi/1Y78TXgnGWogBxB9SRn3fR0K93cf7ufOlVgpthCfwYoGBRlZJY9wKj7w68urIqx/w6sCe98kRLFxnVeLVcKZw/n4jtFuJI7uO7Dqy6wl2vTt0DJxZ4Fn2jEP03nlwVdV5jwpWtTbRPJ8yt8f2tK0lLB65duTakWv7XOsz0SDVju/T8dKL8aJLtShEnjawkG/GO26f804W8k26dPZ8TUR/O96IO29EITaJRH2R55vaBeqLTes89fktV+hWei1Lk3DJnxPZRhAZV0kThw8Vkz/wtXdM8lQ2nVUS3sPV2ec5/CEJV3IdJ5ddPjT9fvp+etAqiz5hcXZ5ASnDBMWd5WE0yzw/aDYJ/4zheKUOWHVe0/ozq6XpKVF69LOOq7GFyOAvWuf3JCSy4c/5CJy//p3H2mu7cFF9wMB+IFwV9CFFPp283sfb5UWkTeWaprNx7bTL2CsBuZNYZbpAnFAmjK7QhojsoU0xin1MX+Cf5BFeT7goCTnjkrnUVHflpHJNXiW17bM0rswbqW0+uAj56ezvL58+zF59vDg9+/T57NXryXRCdxSTb12gRtqdOFI/COSDPhAd7B1t7neN52wjDXUkvKO8NVJbRlacgM3AvOuhqRREJoqd/lIkH48NPZ+bbGDQtdhsShnwizd9z8PfO/RrUVzf3BMuMlTpwP+VKBbShMeNod2EX1wNLaSX8JPNqoN5DYPSriP3TcdvIhPfcL3bO+N+1vPH9sMZ/3Fkwwz3N30mapQKfZy/9HFWVdjSjtqTRwom9nZ9/XD28Wx+Jvr+f5kOLg4=
+sidebar_class_name: "delete api-method"
 info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
 custom_edit_url: null
 hide_send_button: true
@@ -23,19 +23,16 @@ import Heading from "@theme/Heading";
 <Heading
   as={"h1"}
   className={"openapi__heading"}
-  children={"Get group (Work-in-Progress)"}
+  children={"Remove a role from a tenant"}
 ></Heading>
 
 <MethodEndpoint
-  method={"get"}
-  path={"/groups/{groupId}"}
+  method={"delete"}
+  path={"/tenants/{tenantId}/roles/{roleId}"}
   context={"endpoint"}
 ></MethodEndpoint>
 
-Get a group by its ID.
-
-This API is in a Work-in-Progress state and will undergo potential breaking changes until
-its release with an upcoming minor release.
+Removes a single role from a specified tenant without deleting the role.
 
 <Heading
   id={"request"}
@@ -47,10 +44,17 @@ its release with an upcoming minor release.
 <ParamsDetails
   parameters={[
     {
-      name: "groupId",
+      name: "tenantId",
       in: "path",
       required: true,
-      description: "The group ID.",
+      description: "The unique identifier of the tenant.",
+      schema: { type: "string" },
+    },
+    {
+      name: "roleId",
+      in: "path",
+      required: true,
+      description: "The unique identifier of the role.",
       schema: { type: "string" },
     },
   ]}
@@ -62,29 +66,11 @@ its release with an upcoming minor release.
   id={undefined}
   label={undefined}
   responses={{
-    "200": {
-      description: "The group is successfully returned.",
-      content: {
-        "application/json": {
-          schema: {
-            description: "Group search response item.",
-            type: "object",
-            properties: {
-              name: { type: "string", description: "The group name." },
-              groupKey: { type: "string", description: "The group key." },
-              groupId: { type: "string", description: "The group ID." },
-              description: {
-                type: "string",
-                description: "The group description.",
-              },
-            },
-            title: "GroupResult",
-          },
-        },
-      },
+    "204": {
+      description: "The role was successfully removed from the tenant.",
     },
-    "401": {
-      description: "The request lacks valid authentication credentials.",
+    "400": {
+      description: "The provided data is not valid.",
       content: {
         "application/problem+json": {
           schema: {
@@ -166,7 +152,7 @@ its release with an upcoming minor release.
       },
     },
     "404": {
-      description: "The group with the given ID was not found.",
+      description: "Not found. The tenant or role was not found.",
       content: {
         "application/problem+json": {
           schema: {
