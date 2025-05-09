@@ -139,11 +139,11 @@ Below is an example of the JSON response returned when a specific email is read:
   "htmlBody": "<html>Any Html Content</html>",
   "headers": [
     {
-      "header": "header1",
+      "key": "header1",
       "value": "example"
     },
     {
-      "header": "header2",
+      "key": "header2",
       "value": "test"
     }
   ],
@@ -417,11 +417,11 @@ The following JSON structure shows an expected response after a successful email
   "htmlBody": "<html>Any Html Content</html>",
   "headers": [
     {
-      "header": "header1",
+      "key": "header1",
       "value": "example"
     },
     {
-      "header": "header2",
+      "key": "header2",
       "value": "test"
     }
   ],
@@ -646,11 +646,11 @@ instance:
   "htmlBody": "<html>Hello</html>",
   "headers": [
     {
-      "header": "header1",
+      "key": "header1",
       "value": "example"
     },
     {
-      "header": "header2",
+      "key": "header2",
       "value": "test"
     }
   ],
