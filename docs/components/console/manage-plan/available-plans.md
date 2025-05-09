@@ -4,11 +4,7 @@ title: Available plans
 description: "Let's take a closer look at Camunda's current plan options."
 ---
 
-To sign up for Camunda 8, visit the [sign up page](https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral).
+To sign up for Camunda 8, visit the [sign up page](https://accounts.cloud.camunda.io/signup).
 
-There is a free trial and two plans available for Camunda 8:
-
-- Starter (formerly Professional)
-- Enterprise
-
+<!-- this needs changes, we don't even have a cloud product  -->
 For more information on Camunda 8 plans, visit the Camunda 8 [product page](https://camunda.com/products/cloud/).
