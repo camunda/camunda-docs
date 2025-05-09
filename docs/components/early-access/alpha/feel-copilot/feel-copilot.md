@@ -20,6 +20,8 @@ Camunda does not save your prompts and the resulting FEEL expressions to your ac
 
 :::warning
 Clicking "Use Expression" on a FEEL Copilot response will overwrite existing work.
+
+The FEEL Copilot can produce errors. Please check its output before saving its results to your diagram.
 :::
 
 To use the FEEL Copilot in Web Modeler, take the following steps:
