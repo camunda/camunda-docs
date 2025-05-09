@@ -49,32 +49,32 @@ Timeouts can occur during this step if your query is too complex.
 
 ### Generate FEEL expressions
 
-Check if a number is greater than 10
-What would this Java be in FEEL: input.trim().toUpperCase().replace(" ", "\_");
+- Check if a number is greater than 10
+- What would this Java be in FEEL: input.trim().toUpperCase().replace(" ", "\_");
 
 ### Translate Code to FEEL
 
-Translate from JUEL
-Translate from Python
-Translate from JavaScript
+- Translate from JUEL
+- Translate from Python
+- Translate from JavaScript
 
 ### Debugging & Refactoring FEEL
 
-Fix this expression
-Why am I getting a null response?
-Make it more compact
+- Fix this expression
+- Why am I getting a null response?
+- Make it more compact
 
 ### Explain FEEL
 
-How does this work?
-What does [FEEL function] do?
-Document how this FEEL expression works
+- How does this work?
+- What does [FEEL function] do?
+- Document how this FEEL expression works
 
 ### Examples
 
-What can the FEEL Copilot do? (list of use cases)
-Give me sample input data
-Give me an example FEEL expression
+- What can the FEEL Copilot do? (list of use cases)
+- Give me sample input data
+- Give me an example FEEL expression
 
 ### Limitations
 
