@@ -103,11 +103,11 @@ This release contains the following limitations:
       2. The OpenSearch configuration in Helm charts will be provided in one of our future Helm releases.
 - In **Connectors `8.4.x`**
   - **Missing feature**
-    - **Description:** Custom OIDC provider support for Connectors is missing
+    - **Description:** Custom OIDC provider support for connectors is missing
     - **Reference:** https://github.com/camunda/issues/issues/569
     - **Mitigation:**
       1. Feature is planned to be delivered with an upcoming patch release. Please see [issue](https://github.com/camunda/issues/issues/569) for latest progress.
-      2. [Disable Connectors component](/self-managed/setup/guides/connect-to-an-oidc-provider.md#configuration) when configuring a custom OIDC provider.
+      2. [Disable connectors component](/self-managed/setup/guides/connect-to-an-oidc-provider.md#configuration) when configuring a custom OIDC provider.
 
 ### Key changes
 
