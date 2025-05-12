@@ -292,6 +292,7 @@ module.exports = {
                 "components/modeler/desktop-modeler/telemetry/telemetry",
               ],
             },
+            "components/modeler/desktop-modeler/settings/settings",
             "components/modeler/desktop-modeler/troubleshooting",
           ],
         },
