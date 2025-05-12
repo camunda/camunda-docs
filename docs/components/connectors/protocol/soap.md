@@ -1,25 +1,25 @@
 ---
 id: soap
-title: SOAP Connector
+title: SOAP connector
 sidebar_label: SOAP
-description: The SOAP Connector allows you to connect your BPMN process with SOAP services.
+description: The SOAP connector allows you to connect your BPMN process with SOAP services.
 ---
 
 :::note
-The **SOAP Connector** is only supported by Self-Managed and Hybrid Camunda 8 instances.
+The **SOAP connector** is only supported by Self-Managed and Hybrid Camunda 8 instances.
 :::
 
 **Simple Object Access Protocol (SOAP)** is a messaging protocol specification for exchanging structured
 information in the implementation of web services in computer networks.
 
-The **SOAP Connector** allows you to interact with [SOAP](https://www.w3.org/TR/soap/) service endpoints
+The **SOAP connector** allows you to interact with [SOAP](https://www.w3.org/TR/soap/) service endpoints
 from your BPMN process.
 
 ## Prerequisites
 
-To use the **SOAP Connector**, ensure you have an active SOAP service.
+To use the **SOAP connector**, ensure you have an active SOAP service.
 
-## Create a SOAP Connector task
+## Create a SOAP connector task
 
 import ConnectorTask from '../../../components/react-components/connector-task.md'
 
@@ -45,7 +45,7 @@ Use **WSS username token** in the **Authentication** dropdown when the requested
 Enter **Username**, **Password**, and indicate if the password is encoded.
 
 :::note
-The **SOAP Connector** currently supports only `SHA-1` password encoding.
+The **SOAP connector** currently supports only `SHA-1` password encoding.
 :::
 
 ### WSS signature

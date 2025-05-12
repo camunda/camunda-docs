@@ -1,15 +1,15 @@
 ---
 id: microsoft-teams
-title: Microsoft Teams Connector
+title: Microsoft Teams connector
 sidebar_label: Microsoft Teams
-description: Work with Microsoft Teams from your BPMN process using the Microsoft Teams Connector. Learn about authentication, conversation type and method, and more.
+description: Work with Microsoft Teams from your BPMN process using the Microsoft Teams connector. Learn about authentication, conversation type and method, and more.
 ---
 
-The **Microsoft Teams Connector** is an outbound Connector that allows you to connect your BPMN process with [Microsoft Teams](https://www.microsoft.com/microsoft-teams/) to manage interactions.
+The **Microsoft Teams connector** is an outbound connector that allows you to connect your BPMN process with [Microsoft Teams](https://www.microsoft.com/microsoft-teams/) to manage interactions.
 
 ## Prerequisites
 
-To use the **Microsoft Teams Connector**, you need to have a [Microsoft Teams](https://www.microsoft.com/microsoft-teams/) account and
+To use the **Microsoft Teams connector**, you need to have a [Microsoft Teams](https://www.microsoft.com/microsoft-teams/) account and
 relevant [permissions](https://support.microsoft.com/en-us/office/manage-team-settings-92d238e6-0ae2-447e-af90-40b1052c4547)
 or the registered application in the [Azure Active Directory](https://aad.portal.azure.com/) (visit [how to register the app](https://learn.microsoft.com/en-us/graph/auth-register-app-v2) for more information) alongside
 the relevant [Microsoft Graph API permissions](https://learn.microsoft.com/en-us/graph/permissions-reference).
@@ -18,16 +18,16 @@ the relevant [Microsoft Graph API permissions](https://learn.microsoft.com/en-us
 Use Camunda secrets to store credentials so you don't expose sensitive information directly from the process. See [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
 :::
 
-## Create a Microsoft Teams Connector task
+## Create a Microsoft Teams connector task
 
 import ConnectorTask from '../../../components/react-components/connector-task.md'
 
 <ConnectorTask/>
 
-## Make your Microsoft Teams Connector executable
+## Make your Microsoft Teams connector executable
 
 To work with Microsoft Teams, choose the required connection type in the **Authentication** section and complete the
-mandatory fields highlighted in red in the Connector properties panel on the right side of the screen.
+mandatory fields highlighted in red in the connector properties panel on the right side of the screen.
 
 :::note
 All the mandatory and non-mandatory fields depending on the authentication selection you choose are covered in the
@@ -36,11 +36,11 @@ upcoming sections.
 
 ## Authentication
 
-Choose among the available Microsoft Teams Connectors according to your authentication requirements.
-The Microsoft Teams Connector uses the [Microsoft Graph API](https://learn.microsoft.com/en-us/graph/overview). Visit the [Microsoft Graph auth overview](https://learn.microsoft.com/en-us/graph/auth/) for more information on the Microsoft Graph API authentication.
+Choose among the available Microsoft Teams connectors according to your authentication requirements.
+The Microsoft Teams connector uses the [Microsoft Graph API](https://learn.microsoft.com/en-us/graph/overview). Visit the [Microsoft Graph auth overview](https://learn.microsoft.com/en-us/graph/auth/) for more information on the Microsoft Graph API authentication.
 
 First, you must have a user account with Microsoft Teams with the necessary permissions. See more at
-in [Microsoft Teams overview](https://learn.microsoft.com/microsoftteams/teams-overview). If you don't have administration roles and permissions, ask your Microsoft Teams administrator to add required permissions to work with the **Microsoft Teams Connector**.
+in [Microsoft Teams overview](https://learn.microsoft.com/microsoftteams/teams-overview). If you don't have administration roles and permissions, ask your Microsoft Teams administrator to add required permissions to work with the **Microsoft Teams connector**.
 
 Next, you will choose the type of connection.
 
@@ -86,7 +86,7 @@ For a **Client credentials** type authentication, take the following steps:
 4. Set the **Secret ID** field: the client secret that you created in the app registration portal for your app.
 
 :::note
-With **Client credentials** type authentication, some methods of the **Microsoft Teams Connector** may not be available. Find more details in the [chat methods table](#chat-methods) and [channel methods table](#channel-methods).
+With **Client credentials** type authentication, some methods of the **Microsoft Teams connector** may not be available. Find more details in the [chat methods table](#chat-methods) and [channel methods table](#channel-methods).
 :::
 
 ## Conversation type and method
@@ -162,21 +162,22 @@ The **members** property must contain a list of members:
 
 #### Properties
 
-|        Property         |                                                                                        Methods                                                                                         | Required |   Type   |                                                      Description                                                       |
-| :---------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------: | :------: | :--------------------------------------------------------------------------------------------------------------------: |
-|        Group ID         | Create channel <br/> Get channel <br/> List channels <br/> Send message to channel <br/> Get channel message <br/> List channel messages <br/> List message replies <br/> List members |   Yes    |  string  |                                                Microsoft Teams group ID                                                |
-|       Channel ID        |           Get channel <br/> List channels <br/> Send message to channel <br/> Get channel message <br/> List channel messages <br/> List message replies <br/> List members            |   Yes    |  string  |                                               Microsoft Teams channel ID                                               |
-|      Display name       |                                                                                     Create channel                                                                                     |    No    |  string  |                                     Displayed name of new Microsoft Teams channel                                      |
-|       Description       |                                                                                     Create channel                                                                                     |    No    |   text   |                                       Description of new Microsoft Teams channel                                       |
-| Channel membership type |                                                                                     Create channel                                                                                     |   Yes    | dropdown | See [teams-channels-overview](https://learn.microsoft.com/microsoftteams/teams-channels-overview) for more information |
-|          Owner          |                                                                Create channel (if Channel membership type != STANDARD)                                                                 |   Yes    |  string  |                        Channel owner; Microsoft Teams user ID or Microsoft Teams principal name                        |
-|         Filter          |                                                                                     List channels                                                                                      |    No    |  string  |    The search filter. [Learn more about filtering](https://learn.microsoft.com/en-us/graph/filter-query-parameter)     |
-|         Content         |                                                                                Send message to channel                                                                                 |   Yes    |   text   |                                           Content that will be sent to chat                                            |
-|      Content Type       |                                                                                Send message to channel                                                                                 |   Yes    | dropdown |                                              Content type of body message                                              |
-|       Message ID        |                                                                                  Get channel message                                                                                   |   Yes    |  string  |                                        Message ID of Microsoft Teams in channel                                        |
-|           Top           |                                                                                 List channel messages                                                                                  |    No    | numbers  |                                       Controls the number of items per response                                        |
-|      With replies       |                                                                                 List channel messages                                                                                  |   Yes    | boolean  |        Choose **FALSE** for get messages without replies<br/>Choose **FALSE** for get messages without replies         |
-|       Message ID        |                                                                                  List message replies                                                                                  |   Yes    |  string  |                                           Microsoft Teams channel message ID                                           |
+|        Property         |                                                                                        Methods                                                                                         | Required |       Type        |                                                      Description                                                       |
+| :---------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------: | :---------------: | :--------------------------------------------------------------------------------------------------------------------: |
+|        Group ID         | Create channel <br/> Get channel <br/> List channels <br/> Send message to channel <br/> Get channel message <br/> List channel messages <br/> List message replies <br/> List members |   Yes    |      string       |                                                Microsoft Teams group ID                                                |
+|       Channel ID        |           Get channel <br/> List channels <br/> Send message to channel <br/> Get channel message <br/> List channel messages <br/> List message replies <br/> List members            |   Yes    |      string       |                                               Microsoft Teams channel ID                                               |
+|      Display name       |                                                                                     Create channel                                                                                     |    No    |      string       |                                     Displayed name of new Microsoft Teams channel                                      |
+|       Description       |                                                                                     Create channel                                                                                     |    No    |       text        |                                       Description of new Microsoft Teams channel                                       |
+| Channel membership type |                                                                                     Create channel                                                                                     |   Yes    |     dropdown      | See [teams-channels-overview](https://learn.microsoft.com/microsoftteams/teams-channels-overview) for more information |
+|          Owner          |                                                                Create channel (if Channel membership type != STANDARD)                                                                 |   Yes    |      string       |                        Channel owner; Microsoft Teams user ID or Microsoft Teams principal name                        |
+|         Filter          |                                                                                     List channels                                                                                      |    No    |      string       |    The search filter. [Learn more about filtering](https://learn.microsoft.com/en-us/graph/filter-query-parameter)     |
+|         Content         |                                                                                Send message to channel                                                                                 |   Yes    |       text        |                                           Content that will be sent to chat                                            |
+|      Content Type       |                                                                                Send message to channel                                                                                 |   Yes    |     dropdown      |                                              Content type of body message                                              |
+|       Message ID        |                                                                                  Get channel message                                                                                   |   Yes    |      string       |                                        Message ID of Microsoft Teams in channel                                        |
+|           Top           |                                                                                 List channel messages                                                                                  |    No    |      numbers      |                                       Controls the number of items per response                                        |
+|      With replies       |                                                                                 List channel messages                                                                                  |   Yes    |      boolean      |        Choose **FALSE** for get messages without replies<br/>Choose **FALSE** for get messages without replies         |
+|       Message ID        |                                                                                  List message replies                                                                                  |   Yes    |      string       |                                           Microsoft Teams channel message ID                                           |
+|        Documents        |                                                                        List of documents to attach to a message                                                                        |    No    | List of documents |                                           Microsoft Teams channel message ID                                           |
 
 #### Channel methods
 
@@ -191,9 +192,9 @@ The **members** property must contain a list of members:
 |  List message replies   |                                        true                                        |                                              true                                               | [https://learn.microsoft.com/en-us/graph/api/chatmessage-list-replies](https://learn.microsoft.com/en-us/graph/api/chatmessage-list-replies?view=graph-rest-1.0&tabs=http) |
 |      List members       |                                       false                                        |                                              true                                               | [https://learn.microsoft.com/en-us/graph/api/channel-list-members](https://learn.microsoft.com/en-us/graph/api/channel-list-members?view=graph-rest-1.0&tabs=http)         |
 
-## Microsoft Teams Connector response
+## Microsoft Teams connector response
 
-The **Microsoft Teams Connector** returns the Microsoft Graph API response in `result` wrapper:
+The **Microsoft Teams connector** returns the Microsoft Graph API response in `result` wrapper:
 
 ```json
 {

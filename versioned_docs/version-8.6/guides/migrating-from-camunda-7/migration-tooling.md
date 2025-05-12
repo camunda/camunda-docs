@@ -27,7 +27,7 @@ Camunda provides the following migration tools:
 Camunda is developing the **Migration Analyzer**, a tool to gain a first understanding of migration tasks. This tool is based on the existing [diagram converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/backend-diagram-converter), which can be used via CLI to produce a CSV file with tasks in your model. Our consultants then import this data into a [Google Spreadsheet template](https://docs.google.com/spreadsheets/d/1ZUxGhj1twgTnXadbopw1CvZg_ZvDnB2VXRQDSrKtmcM/edit?gid=6013418#gid=6013418) to analyze what tasks need to be done to migrate.
 
 :::info
-The [existing diagram converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/backend-diagram-converter) can be used today. UI and reporting will be added amd documentation will be extended. The initial release is **planned for 8.8**. Iterative improvements will follow.
+The [existing diagram converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/backend-diagram-converter) can be used today. UI and reporting will be added and documentation will be extended. The initial release is **planned for 8.8**. Iterative improvements will follow.
 :::
 
 For example, the following image shows a sample report.
@@ -41,7 +41,7 @@ Performing this analysis will help you understand what needs to be done to migra
 The data migrator can copy runtime and audit data from Camunda 7 to Camunda 8.
 
 :::info
-Camunda is developing the Data Migrator with a first release planned for **Camunda 8.8 (October 2024)**. Iterative improvements might follow.
+Camunda is developing the Data Migrator with a first release planned for **Camunda 8.8 (October 2025)**. Iterative improvements might follow.
 :::
 
 ![data-migration](../img/data-migration.png)

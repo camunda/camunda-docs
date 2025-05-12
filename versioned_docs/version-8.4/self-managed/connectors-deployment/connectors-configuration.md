@@ -235,8 +235,8 @@ for the configuration of multi-tenancy.
 
 | Name                                       | Description                                                     | Default value |
 | ------------------------------------------ | --------------------------------------------------------------- | ------------- |
-| ZEEBE_CLIENT_DEFAULT-TENANT-ID             | The default tenant id used to communicate with Zeebe            | `<default>`   |
-| ZEEBE_CLIENT_DEFAULT-JOB-WORKER-TENANT-IDS | The default tenants ids (comma separated) used to activate jobs | `<default>`   |
+| ZEEBE_CLIENT_DEFAULT_TENANT_ID             | The default tenant id used to communicate with Zeebe            | `<default>`   |
+| ZEEBE_CLIENT_DEFAULT_JOB-WORKER_TENANT_IDS | The default tenants ids (comma separated) used to activate jobs | `<default>`   |
 
 If you are using an embedded version of the Connector Runtime you can specify the tenant information
 in your Spring configuration like in this example `application.properties` file:
@@ -256,7 +256,7 @@ If you want to use outbound Connectors for a single tenant that is different
 from the `<default>` tenant you can specify a different default tenant id using:
 
 ```bash
-ZEEBE_CLIENT_DEFAULT-TENANT-ID=tenant1
+ZEEBE_CLIENT_DEFAULT_TENANT_ID=tenant1
 ```
 
 This will change the default tenant id used for fetching jobs and publishing messages
@@ -271,10 +271,10 @@ If you want to run the Connector Runtime in a setup where a single runtime
 serves multiple tenants you have to add each tenant id to the list of the default job workers:
 
 ```bash
-ZEEBE_CLIENT_DEFAULT-JOB-WORKER-TENANT-IDS=tenant1, tenant2
+ZEEBE_CLIENT_DEFAULT_JOB_WORKER_TENANT_IDS=tenant1, tenant2
 ```
 
-In this case the `ZEEBE_CLIENT_DEFAULT-TENANT-ID` will **not** be used for the
+In this case the `ZEEBE_CLIENT_DEFAULT_TENANT_ID` will **not** be used for the
 configuration of job workers.
 
 ### Inbound Connector config
@@ -293,6 +293,17 @@ To ensure seamless integration and functionality, the multi-tenancy feature must
 Find more information (including links to individual component configuration) on the [multi-tenancy concepts page](/self-managed/concepts/multi-tenancy.md).
 
 ## Logging
+
+## Logging
+
+### Changing the log level
+
+The log level can be changed globally by setting the environment variable `LOGGING_LEVEL_IO_CAMUNDA_CONNECTOR=DEBUG`. This changes the default log level for the `io.camunda.connector` package
+to `DEBUG`.
+
+You can can use this package based log level approach also with custom Connectors by providing your package (`my.package`) via this variable: `LOGGING_LEVEL_MY_PACKAGE=DEBUG`.
+
+To change the log level for all packages, change it for the `root` logger: `LOGGING_LEVEL_ROOT=DEBUG`.
 
 ### Google Stackdriver (JSON) logging
 

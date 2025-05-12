@@ -1,0 +1,239 @@
+---
+id: cancel-batch-operation
+title: "Cancel Batch operation"
+description: "Cancels a running batch operation."
+sidebar_label: "Cancel Batch operation"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWN9v2zYQ/lcOfGoxxXLbdOv05qbp5qHrgtTZHrI8UNTZYkuRKknFMQT978OR8i/JHQpsjw4QWD+O393xvo8Ur2WerxzL7tlb7kUJpkbLvTSaPSRsdzMvWMYE1wJVMPtjZ5WwAp2wsg53GbsKRg442EZrqVeQH+NOWMJqbnmFHi05bpnmFbKM5UfI84IlTBJkzX3JEmbxayMtFizztsGh30WJ8AU38MzY3heCwhUXG5i/ew5mCb7EUSx/UwJOlFhxlrXMb2oKxHkr9Yp13UP0is6/NcWGLITRHrWnS17XSoqAk352FEQ7hjL5ZxSeJUw3SvFcYYy+67rDhJZcOQxPXG20Q0cIL6cv6Wec5iAJiHWBPlJYcwdcCKw9FjTZ+5DJ6eV0ehq1tuZRFlhAwT0H6UAbD49cyQHIUd61NbnC6odx/scOZnATLaFAz6WCOC/AHUTDHAuQGu5v31/Bz5evf3p4VnpfuyxN1+v1xC7FBRbSGzsxdpXapaB/sns+gUWJFqHiG8gReFFI8skVJVSj9RIduBqFXEoB3gQa9GEDFSlyYFiu/eB9MYf8SNjS2Ip7lrHGypESZnB3OwdZoPZyuSEljFyHMUveKMLguWl8liuuv7AuYV56ddLp0ItrqorbzZbixw66hDnPfXOQBpPa4wrtYfxS+1cvR9hEi18XixuIECBMgbA0Fnwp3dYRJVFJLaumYtnldJqwij/Fux+n044wqeLfkYkGfKoV15HVg3SkhspY7PkTEpPaeaL+/1QZY+VKDv1OWLevBetJ/C5m1HVRUK/GfH9vbC6LAnWg506avaq4UmY9FOdZV2ddnXV1qKvLMd8/Gg9L0+gi6mq4E9LWp3cmZ3md5XWW1zfk9frUd+BMA82yJR6itfQpLURjLRawLqUK8AKd2/ru97XIxbPWzlo7a22stS5hFfrS0BG6bgJz6ECbsTRsXxe77cul7fAI3KXxcEenVLSP2wNzYxXLWBul1GVp2pbG+S5ra2N9lz5SnR65lXTgDGWl11FyWyopI7gKj0+VlF7QqXyb6hWvGl1weAO3158W8Av3uOabMMXk8hj6zfTN9CQqmX4DcXYzh5hhJOTBIrGFJbWfhI3G3wMcTvQORWOl33yiYXF6cuQW7ayhsuyI0vsL6KE9EYxY0l+839Lnt78WgQG0wN3uuwXXT7yqgzwDD5cmQPcsGQdJFUPrYlbTyYsxI2/mQVjCVFWjw+qqV7CWvgR+kLRQjfOUbMKUFKhd4H7fYdmafYhv4M/oEV5MqGCRVdtFdSV92eQTYapUxGG731yZPK241GnvwqVXs9/vPr6bXXyYX11//HR98WIynfgnHyamNs5XXB/FEToWw47TIOWDbsv3tZX6wnl88mmtuNREpZBV22vung01xxKWnWg89bJ7SHrp3LO2zbnDO6u6jh5/bdBuWHb/sFdakGYhHV1vmzr/ktKz277/8xz+Q/PqZM79Q643YSFQDd2xhH3Bzak+W/fQJaxEXqANOUSzqxjpxYLA9jCjtleXbEfMQtfpG7ZH3wGkw92ieHO3IFX1HbbKFDTU8jX1/Pg6Rm7qWK2sjc9aprheNXxFthGS/v4B0i8sQw==
+sidebar_class_name: "put api-method"
+info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Cancel Batch operation"}
+></Heading>
+
+<MethodEndpoint
+  method={"put"}
+  path={"/batch-operations/{batchOperationId}/cancel"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Cancels a running batch operation.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "batchOperationId",
+      in: "path",
+      required: true,
+      description: "The key (or operate legacy ID) of the batch operation.\n",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    content: {
+      "application/json": { schema: { type: "object", nullable: true } },
+    },
+    required: false,
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "202": {
+      description: "The batch operation cancel request was accepted.",
+      content: {},
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "Not found. The batch operation was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

@@ -46,7 +46,7 @@ The included components are:
 - [Zeebe](/components/zeebe/zeebe-overview.md): A workflow engine for orchestrating microservices and managing stateful, long-running business processes.
 - [Operate](/components/operate/operate-introduction.md): A monitoring tool for visualizing and troubleshooting workflows running in Zeebe.
 - [Tasklist](/components/tasklist/introduction-to-tasklist.md): A user interface for managing and completing human tasks within workflows.
-- [Optimize]($optimize$/components/what-is-optimize/): An analytics tool for generating reports and insights based on workflow data.
+- [Optimize](/components/optimize/what-is-optimize.md): An analytics tool for generating reports and insights based on workflow data.
 - [Identity](/self-managed/identity/what-is-identity.md): A service for managing user authentication and authorization.
 - [Connectors](/components/connectors/introduction.md): Pre-built integrations for connecting Zeebe with external systems and services.
 
@@ -111,9 +111,7 @@ Kubernetes is a powerful orchestration platform for containerized applications. 
 - Best for teams with experience in managing containerized environments.
 - A steeper learning curve but offers scalable and highly resilient platform.
 
-For more information and guides, see the reference for [Kubernetes](/self-managed/setup/install.md).
-
-<!-- TODO add link or card for AWS ref arch -->
+For more information and guides, see the reference for [Kubernetes](/self-managed/reference-architecture/kubernetes.md).
 
 ### Containers
 
@@ -135,9 +133,7 @@ For organizations that prefer traditional infrastructure, reference architecture
 - Applicable for high availability but requires more detailed planning.
 - Best for teams with expertise in managing physical servers or virtual machines.
 
-For more information and guides, see the reference for [manual setups](./manual/manual.md).
-
-<!-- TODO add link or card for AWS EC2 -->
+For more information and guides, see the reference for [manual setups](/self-managed/reference-architecture/manual.md).
 
 ### Local development
 

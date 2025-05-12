@@ -1,12 +1,74 @@
 ---
 id: notices
 title: "Security notices"
-description: "Let's take a closer look at security notices, reporting vulnerabilities, and addiitonal security information."
+description: "Let's take a closer look at security notices, reporting vulnerabilities, and additional security information."
 ---
 
 ## Security notices
 
 Camunda publishes security notices after fixes are available.
+
+### Notice 15
+
+#### Publication date
+
+April 8th, 2025
+
+#### Product affected
+
+Camunda Optimize
+
+#### Impact
+
+Some Camunda Zeebe versions were affected by a vulnerability that allowed a malicious attacker to craft network packets that could crash the gateway.
+
+#### How to determine if the installation is affected
+
+You are using Camunda Optimize ≤ 8.4.15, ≤ 8.5.12, ≤ 8.6.6, ≤ 8.7.0, ≤ 3.11.20, ≤ 3.12.15, ≤ 3.13.12, ≤ 3.14.3, ≤ 3.15.0
+
+#### Solution
+
+Camunda has provided the following release which contains a fix:
+
+- [Camunda Optimize 8.4.16](https://github.com/camunda/camunda-optimize/releases/tag/3.12.16)
+- [Camunda Optimize 8.5.13](https://github.com/camunda/camunda-optimize/releases/tag/3.13.13)
+- [Camunda Optimize 8.6.7](https://github.com/camunda/camunda/releases/tag/8.6.7-optimize)
+- [Camunda Optimize 8.7.0](https://github.com/camunda/camunda/releases/tag/8.7.0-optimize)
+- [Camunda Optimize 3.12.16](https://github.com/camunda/camunda-optimize/releases/tag/3.12.16)
+- [Camunda Optimize 3.13.13](https://github.com/camunda/camunda-optimize/releases/tag/3.13.13)
+- [Camunda Optimize 3.14.21](https://github.com/camunda/camunda-optimize/releases/tag/3.14.4)
+- [Camunda Optimize 3.15.1](https://github.com/camunda/camunda-optimize/releases/tag/3.15.1)
+
+### Notice 14
+
+#### Publication date
+
+March 11th, 2025
+
+#### Product affected
+
+Camunda Web Modeler
+
+#### Impact
+
+The version of `koa` used by Camunda Web Modeler was affected by the following vulnerability:
+
+- https://nvd.nist.gov/vuln/detail/CVE-2025-25200
+
+#### How to determine if the installation is affected
+
+You are using Camunda Web Modeler Self-Managed version ≤ 8.3.16, ≤ 8.4.14, ≤ 8.5.15, or ≤ 8.6.7.
+
+#### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Camunda Web Modeler Self-Managed 8.3.17
+- Camunda Web Modeler Self-Managed 8.4.15
+- Camunda Web Modeler Self-Managed 8.5.16
+- Camunda Web Modeler Self-Managed 8.6.8
+
+The fix was deployed to Web Modeler SaaS on February 14, 2025, 08:50 CET.
 
 ### Notice 13
 

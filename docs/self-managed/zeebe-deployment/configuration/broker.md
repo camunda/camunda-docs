@@ -54,9 +54,9 @@ The `server` configuration allows you to configure the main REST server. Below a
 
 #### server.compression
 
-| Field   | Description                                                                                                                                                 | Example value |
-| ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| enabled | If true, enables compression of responses for the REST API. This setting can also be overridden using the environment variable `SERVER_COMPRESION_ENABLED`. | false         |
+| Field   | Description                                                                                                                                                           | Example value |
+| ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| enabled | If true, enables compression of responses for the Camunda 8 REST API. This setting can also be overridden using the environment variable `SERVER_COMPRESION_ENABLED`. | false         |
 
 #### server.ssl
 
@@ -64,7 +64,7 @@ Allows you to configure the SSL security for the REST server.
 
 | Field                   | Description                                                                                                                                                                     | Example value |
 | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| enabled                 | If true, enables TLS for the REST API. This setting can also be overridden using the environment variable `SERVER_SSL_ENABLED`.                                                 | false         |
+| enabled                 | If true, enables TLS for the Camunda 8 REST API. This setting can also be overridden using the environment variable `SERVER_SSL_ENABLED`.                                       | false         |
 | certificate             | The path to a PEM encoded certificate. This setting can also be overridden using the environment variable `SERVER_SSL_CERTIFICATE`.                                             |               |
 | certificate-private-key | The path to a PKCS1 or PKCS8 private key for the configured certificate. This setting can also be overridden using the environment variable `SERVER_SSL_CERTIFICATEPRIVATEKEY`. |               |
 
@@ -102,7 +102,7 @@ The `management.server` configuration allows you to configure the management ser
 | Field     | Description                                                                                                                                                                                                                                                                           | Example value |
 | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
 | host      | Sets the host the management server binds to. This setting can also be overridden using the environment variable `MANAGEMENT_SERVER_HOST`.                                                                                                                                            | 0.0.0.0       |
-| port      | Sets the port the management server binds to. This setting can also be overridden using the environment variable `MANAGEMENT_SERVER_PORT`.                                                                                                                                            | 8080          |
+| port      | Sets the port the management server binds to. This setting can also be overridden using the environment variable `MANAGEMENT_SERVER_PORT`.                                                                                                                                            | 9600          |
 | base-path | The context path prefix for all management endpoints. For example, if you configure `/zeebe`, your actuator endpoints will be at `http://localhost:9600/zeebe/actuator/configprops`. This setting can also be overridden using the environment variable `MANAGEMENT_SERVER_BASEPATH`. | `/`           |
 
 #### YAML snippet
@@ -160,19 +160,25 @@ network:
 
 ### zeebe.broker.network.security
 
-| Field                | Description                                                                                                                                                                                 | Example Value |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| enabled              | Enables TLS authentication between this gateway and other nodes in the cluster. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_SECURITY_ENABLED`. | false         |
-| certificateChainPath | Sets the path to the certificate chain file. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_SECURITY_CERTIFICATECHAINPATH`.                       |               |
-| privateKeyPath       | Sets the path to the private key file location. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_SECURITY_PRIVATEKEYPATH`.                          |               |
+| Field                | Description                                                                                                                                                                                                  | Example Value |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
+| enabled              | Enables TLS authentication between this gateway and other nodes in the cluster. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_SECURITY_ENABLED`.                  | false         |
+| certificateChainPath | Sets the path to the certificate chain file. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_SECURITY_CERTIFICATECHAINPATH`.                                        |               |
+| privateKeyPath       | Sets the path to the private key file location. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_SECURITY_PRIVATEKEYPATH`.                                           |               |
+| keyStore             | Configures the keystore file containing both the certificate chain and the private key; currently only supports PKCS12 format.                                                                               |               |
+| keyStore.filePath    | The path for keystore file; This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_SECURITY_KEYSTORE_FILEPATH`.                                                            | /path/key.pem |
+| keyStore.password    | Sets the password for the keystore file, if not set it is assumed there is no password; This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_SECURITY_KEYSTORE_PASSWORD` | changeme      |
 
 #### YAML snippet
 
 ```yaml
 security:
   enabled: false
-  certificateChainPath:
-  privateKeyPath:
+  certificateChainPath: null
+  privateKeyPath: null
+  keyStore:
+    filePath: null
+    password: null
 ```
 
 ### zeebe.broker.network.commandApi
@@ -909,11 +915,11 @@ The Zeebe configuration properties for Camunda Identity are deprecated as of ver
 Camunda Identity properties or the [corresponding environment variables](../../identity/deployment/configuration-variables.md#core-configuration).
 :::
 
-| Field            | Description                                                                                                                                                                                                 | Example value                                     |
-| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
-| issuerBackendUrl | The URL to the auth provider backend, used to validate tokens. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_SECURITY_AUTHENTICATION_IDENTITY_ISSUERBACKENDURL`. | http://keycloak:8080/auth/realms/camunda-platform |
-| audience         | The required audience of the auth token. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_SECURITY_AUTHENTICATION_IDENTITY_AUDIENCE`.                               | zeebe-api                                         |
-| baseUrl          | The URL to the Identity instance. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_SECURITY_AUTHENTICATION_IDENTITY_BASEURL`.                                       | http://identity:8084                              |
+| Field            | Description                                                                                                                                                                                                 | Example value                                      |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
+| issuerBackendUrl | The URL to the auth provider backend, used to validate tokens. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_SECURITY_AUTHENTICATION_IDENTITY_ISSUERBACKENDURL`. | http://keycloak:18080/auth/realms/camunda-platform |
+| audience         | The required audience of the auth token. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_SECURITY_AUTHENTICATION_IDENTITY_AUDIENCE`.                               | zeebe-api                                          |
+| baseUrl          | The URL to the Identity instance. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_SECURITY_AUTHENTICATION_IDENTITY_BASEURL`.                                       | http://identity:8084                               |
 
 ##### YAML snippet
 
@@ -922,7 +928,7 @@ security:
   authentication:
     mode: identity
     identity:
-      issuerBackendUrl: http://keycloak:8080/auth/realms/camunda-platform
+      issuerBackendUrl: http://keycloak:18080/auth/realms/camunda-platform
       audience: zeebe-api
       type: keycloak
 ```

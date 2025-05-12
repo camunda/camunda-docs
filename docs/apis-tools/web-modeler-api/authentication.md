@@ -11,6 +11,12 @@ import TabItem from "@theme/TabItem";
 
 All Web Modeler API requests require authentication. To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) depending on your environment and include it in each request.
 
+:::note
+Clients using a valid generated token have access to all resources within an organization, similar to [super-user mode](/components/modeler/web-modeler/collaboration.md#super-user-mode).
+
+While there's no project-level access control enforced in the API, access is still dependent on the [CRUD operations assigned](#generate-a-token).
+:::
+
 ## Generate a token
 
 <Tabs groupId="environment" defaultValue="saas" queryString values={
@@ -22,7 +28,7 @@ All Web Modeler API requests require authentication. To authenticate, generate a
 <TabItem value='saas'>
 
 1. Create client credentials by clicking **Console > Organization > Administration API > Create new credentials**.
-2. Add permissions to this client for **Web Modeler API**.
+2. Add permissions to this client for **Web Modeler API** with the needed CRUD permissions.
 3. Once you have created the client, capture the following values required to generate a token:
    <!-- this comment convinces the markdown processor to still treat the table as a table, but without adding surrounding paragraphs. 🤷 -->
    | Name                     | Environment variable name        | Default value                                |
@@ -61,9 +67,9 @@ All Web Modeler API requests require authentication. To authenticate, generate a
 <TabItem value='self-managed'>
 
 1. [Add an M2M application in Identity](/self-managed/identity/user-guide/additional-features/incorporate-applications.md).
-2. [Add permissions to this application](/self-managed/identity/user-guide/additional-features/incorporate-applications.md) for **Web Modeler API**.
+2. [Add permissions to this application](/self-managed/identity/user-guide/additional-features/incorporate-applications.md) for **Web Modeler API** with the needed [CRUD permissions](../../self-managed/identity/user-guide/roles/manage-permissions.md#preset-permissions).
 3. Capture the `Client ID` and `Client Secret` from the application in Identity.
-4. [Generate a token](/self-managed/identity/user-guide/authorizations/generating-m2m-tokens.md) to access the REST API. Provide the `client_id` and `client_secret` from the values you previously captured in Identity.
+4. [Generate a token](/self-managed/identity/user-guide/authorizations/generating-m2m-tokens.md) to access the Web Modeler REST API. Provide the `client_id` and `client_secret` from the values you previously captured in Identity.
    ```shell
    curl --location --request POST 'http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token' \
    --header 'Content-Type: application/x-www-form-urlencoded' \

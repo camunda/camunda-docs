@@ -69,6 +69,7 @@ Flags passed as command line arguments take precedence over those configured via
 | "disable-cmmn"                                                | true                                |
 | "disable-dmn"                                                 | false                               |
 | "disable-form"                                                | false                               |
+| "disable-rpa"                                                 | false                               |
 | ["disable-httl-hint"](#disable-history-time-to-live-hint)     | false                               |
 | ["default-httl"](#default-history-time-to-live)               | false                               |
 | "disable-platform"                                            | false                               |
@@ -108,7 +109,7 @@ As a result, the app will only allow users to model BPMN diagrams.
 
 <span class="badge badge--platform">Camunda 7 only</span>
 
-To disable the [history time to live hint](../../reference/modeling-guidance/rules/history-time-to-live.md) in scenarios where the engine configures HTTL, configure `flags.json`:
+To disable the [history time to live](https://docs.camunda.org/manual/latest/modeler/history-time-to-live/) hint in scenarios where the engine configures HTTL, configure `flags.json`:
 
 ```js
 {
@@ -120,7 +121,7 @@ To disable the [history time to live hint](../../reference/modeling-guidance/rul
 
 <span class="badge badge--platform">Camunda 7 only</span>
 
-To set a default [history time to live](../../reference/modeling-guidance/rules/history-time-to-live.md) value to be used in newly created models, configure `flags.json`:
+To set a default [history time to live](https://docs.camunda.org/manual/latest/modeler/history-time-to-live/) value to be used in newly created models, configure `flags.json`:
 
 ```js
 {
@@ -185,11 +186,11 @@ To use the new context pad, configure your `flags.json` as follows:
 
 ![New context pad](./img/new-context-pad.png)
 
-### Disable Connector templates
+### Disable connector templates
 
 <span class="badge badge--cloud">Camunda 8 only</span>
 
-To [disable automatic Connector template fetching](../use-connectors.md#automatic-connector-template-fetching), configure your `flags.json` as follows:
+To [disable automatic connector template fetching](../use-connectors.md#automatic-connector-template-fetching), configure your `flags.json` as follows:
 
 ```json
 {

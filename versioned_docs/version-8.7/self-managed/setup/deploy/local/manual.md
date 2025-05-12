@@ -18,10 +18,10 @@ Make sure to configure the web applications to use a port that is available. By 
 
 ## Download a compatible set of Camunda 8 components
 
-Tasklist, Operate and Zeebe distributions are available for download on the [release page](https://github.com/camunda/camunda-platform/releases). Every release contains a set of compatible versions of the various components, ensure you download and use compatible versions.
+Tasklist, Operate and Zeebe distributions are available for download on the [release page](https://github.com/camunda/camunda/releases). Every release contains a set of compatible versions of the various components, ensure you download and use compatible versions.
 
-All Connector-related resources are available on [Maven Central](https://search.maven.org/search?q=g:io.camunda.connector). Make sure to download `*-jar-with-dependencies.jar` files in order to run Connectors locally including their necessary dependencies.
-Note that some out-of-the-box Connectors are licensed under the [Camunda Self-Managed Free Edition license](https://camunda.com/legal/terms/cloud-terms-and-conditions/camunda-cloud-self-managed-free-edition-terms/).
+All connector-related resources are available on [Maven Central](https://search.maven.org/search?q=g:io.camunda.connector). Make sure to download `*-jar-with-dependencies.jar` files in order to run connectors locally including their necessary dependencies.
+Note that some out-of-the-box connectors are licensed under the [Camunda Self-Managed Free Edition license](https://camunda.com/legal/terms/cloud-terms-and-conditions/camunda-cloud-self-managed-free-edition-terms/).
 Find an overview in the [Connectors Bundle project](https://github.com/camunda/connectors-bundle).
 
 ## Download and run Elasticsearch
@@ -186,15 +186,15 @@ If you've already developed user tasks in Zeebe, you can see these on the left p
 
 ![tasklist-start-screen](../../../setup/assets/tasklist-start-screen_light.png)
 
-## Run Connectors
+## Run connectors
 
 ### Bundle
 
-Bundle includes runtime with all available Camunda Connectors.
+Bundle includes runtime with all available Camunda connectors.
 
 The [Connector runtime bundle](https://repo1.maven.org/maven2/io/camunda/connector/connector-runtime-bundle/) picks up
-outbound Connectors available on the `classpath` automatically.
-It uses the default configuration specified by a Connector through its `@OutboundConnector` and `@InboundConnector` annotations.
+outbound connectors available on the `classpath` automatically.
+It uses the default configuration specified by a connector through its `@OutboundConnector` and `@InboundConnector` annotations.
 
 Consider the following file structure:
 
@@ -204,21 +204,21 @@ Consider the following file structure:
 └── my-custom-connector-0.1.0-SNAPSHOT-with-dependencies.jar
 ```
 
-To start Connectors bundle with all custom Connectors locally, run:
+To start Connectors bundle with all custom connectors locally, run:
 
 ```shell
 java -cp "/home/user/bundle-with-connector/*" "io.camunda.connector.runtime.app.ConnectorRuntimeApplication"
 ```
 
-This starts a Zeebe client, registering the defined Connector as a job worker. By default, it connects to a local Zeebe instance at port `26500`.
+This starts a Zeebe client, registering the defined connector as a job worker. By default, it connects to a local Zeebe instance at port `26500`.
 
 ### Runtime-only
 
-Runtime-only variant is useful when you wish to run only specific Connectors.
+Runtime-only variant is useful when you wish to run only specific connectors.
 
 The [Connector runtime bundle](https://repo1.maven.org/maven2/io/camunda/connector/connector-runtime-application/) picks up
-outbound Connectors available on the `classpath` automatically.
-It uses the default configuration specified by a Connector through its `@OutboundConnector` and `@InboundConnector` annotations.
+outbound connectors available on the `classpath` automatically.
+It uses the default configuration specified by a connector through its `@OutboundConnector` and `@InboundConnector` annotations.
 
 Consider the following file structure:
 
@@ -228,13 +228,13 @@ Consider the following file structure:
 └── my-custom-connector-0.1.0-SNAPSHOT-with-dependencies.jar
 ```
 
-To start Connector runtime with all custom Connectors locally, run:
+To start connector runtime with all custom connectors locally, run:
 
 ```shell
 java -cp "/home/user/runtime-only-with-connector/*" "io.camunda.connector.runtime.app.ConnectorRuntimeApplication"
 ```
 
-This starts a Zeebe client, registering the defined Connector as a job worker. By default, it connects to a local Zeebe instance at port `26500`.
+This starts a Zeebe client, registering the defined connector as a job worker. By default, it connects to a local Zeebe instance at port `26500`.
 
 ### Configuring runtime
 
@@ -247,7 +247,7 @@ A local setup of Identity in Camunda 8 is not yet supported out-of-the-box, use 
 
 ## Run Optimize
 
-The installation of Optimize is described in [Optimize Setup]($optimize$/self-managed/optimize-deployment/install-and-start). A local setup in Camunda 8 is not yet supported out-of-the-box, use [Docker](/self-managed/setup/deploy/other/docker.md#optimize) instead.
+The installation of Optimize is described in [Optimize Setup](/self-managed/optimize-deployment/install-and-start.md). A local setup in Camunda 8 is not yet supported out-of-the-box, use [Docker](/self-managed/setup/deploy/other/docker.md#optimize) instead.
 
 ## Run Web Modeler
 

@@ -57,7 +57,7 @@ Running a dual-region configuration requires users to detect and manage any regi
   - In that guide, we're showcasing Kubernetes dual-region installation, based on the following tools:
     - [Helm (3.x)](https://helm.sh/docs/intro/install/) for installing and upgrading the [Camunda Helm chart](https://artifacthub.io/packages/helm/camunda/camunda-platform).
     - [Kubectl (1.30.x)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the Kubernetes cluster.
-- `cURL` or similar to interact with the REST API.
+- `cURL` or similar to interact with the [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md).
 
 ## Terminology
 
@@ -92,7 +92,7 @@ For the failback procedure, the recreated region must not include any active Cam
 The following procedures assume the following dual-region deployment for:
 
 - **AWS:** the deployment has been created using [AWS setup guide](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md#deploy-camunda-8-to-the-clusters) and you have your own copy of the [c8-multi-region](https://github.com/camunda/c8-multi-region) repository and previously completed changes in the `camunda-values.yml` to adjust them in your setup.
-  Follow the [dual-region cluster deployment](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md#deploy-camunda-8-to-the-clusters) guide to install Camunda 8, configure a dual-region setup, and have the general environment variables (see [environment prerequisites](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md#environment-prerequisites) already set up.
+  Follow the [dual-region cluster deployment](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md#deploy-camunda-8-to-the-clusters) guide to install Camunda 8, configure a dual-region setup, and have the general environment variables (see [environment prerequisites](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md#environment-prerequisites) already set up).
 
 - **OpenShift:** the deployment has been created using [OpenShift setup guide](/self-managed/setup/deploy/openshift/dual-region.md#deploying-camunda-8-via-helm-charts-in-a-dual-region-setup) and previously completed changes in your `generated-values-region-1.yml` and `generated-values-region-2.yml` to adjust them in your setup.
 
@@ -185,10 +185,10 @@ The following alternatives to port-forwarding are possible:
 
 In our example, we went with port-forwarding to a localhost, but other alternatives can also be used.
 
-1. Use the [REST API](../../../apis-tools/camunda-api-rest/camunda-api-rest-overview.md) to retrieve the list of the remaining brokers
+1. Use the [Camunda 8 REST API](../../../apis-tools/camunda-api-rest/camunda-api-rest-overview.md) to retrieve the list of the remaining brokers
 
    ```bash
-   kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 8080:8080 -n $CAMUNDA_NAMESPACE_SURVIVING
+   kubectl --context $CLUSTER_SURVIVING port-forward services/$CAMUNDA_RELEASE_NAME-zeebe-gateway 8080:8080 -n $CAMUNDA_NAMESPACE_SURVIVING
 
    curl -L -X GET 'http://localhost:8080/v2/topology' \
    -H 'Accept: application/json'
@@ -327,22 +327,38 @@ In our example, we went with port-forwarding to a localhost, but other alternati
 2.  Port-forward the service of the Zeebe Gateway to access the [management REST API](../../zeebe-deployment/configuration/gateway.md#managementserver)
 
     ```bash
-    kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
+    kubectl --context $CLUSTER_SURVIVING port-forward services/$CAMUNDA_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
     ```
 
 3.  Based on the [Cluster Scaling APIs](../../zeebe-deployment/operations/cluster-scaling.md), send a request to the Zeebe Gateway to redistribute the load to the remaining brokers, thereby removing the lost brokers.
-    In our example, we have lost region 1 and with that our uneven brokers. This means we will have to redistribute to our existing even brokers.
+    Depending on which region was lost, the load must be redistributed to the remaining brokers, either the even or odd numbered ones. In our example, we have lost `region 1` and with it our uneven brokers. This means we will have to redistribute to our existing even brokers. Make sure to only run the correct one based on the surviving region's brokers.
+
+  <Tabs queryString="lost-region">
+    <TabItem value="redistribute-to-even" label="Redistribute to even brokers" default>
 
     ```bash
     curl -XPOST 'http://localhost:9600/actuator/cluster/brokers?force=true' -H 'Content-Type: application/json' -d '["0", "2", "4", "6"]'
     ```
+
+    </TabItem>
+    <TabItem value="redistribute-to-odd" label="Redistribute to odd brokers">
+
+    ```bash
+    curl -XPOST 'http://localhost:9600/actuator/cluster/brokers?force=true' -H 'Content-Type: application/json' -d '["1", "3", "5", "7"]'
+    ```
+
+    </TabItem>
+
+  </Tabs>
+
+Using the `force=true` parameter reduces the replication factor accordingly.
 
 #### Verification
 
 Port-forwarding the Zeebe Gateway via `kubectl` and printing the topology should reveal that the cluster size has decreased to 4, partitions have been redistributed over the remaining brokers, and new leaders have been elected.
 
 ```bash
-kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 8080:8080 -n $CAMUNDA_NAMESPACE_SURVIVING
+kubectl --context $CLUSTER_SURVIVING port-forward services/$CAMUNDA_RELEASE_NAME-zeebe-gateway 8080:8080 -n $CAMUNDA_NAMESPACE_SURVIVING
 
 curl -L -X GET 'http://localhost:8080/v2/topology' \
   -H 'Accept: application/json'
@@ -481,7 +497,7 @@ curl -L -X GET 'http://localhost:8080/v2/topology' \
 You can also use the Zeebe Gateway's REST API to ensure the scaling progress has been completed. For better output readability, we use [jq](https://jqlang.github.io/jq/).
 
 ```bash
-kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
+kubectl --context $CLUSTER_SURVIVING port-forward services/$CAMUNDA_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
 curl -XGET 'http://localhost:9600/actuator/cluster' | jq .lastChange
 ```
 
@@ -525,7 +541,7 @@ desired={<Six viewBox="140 40 680 500" />}
 1. Port-forward the service of the Zeebe Gateway for the [management REST API](../../zeebe-deployment/configuration/gateway.md#managementserver)
 
    ```bash
-   kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
+   kubectl --context $CLUSTER_SURVIVING port-forward services/$CAMUNDA_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
    ```
 
 2. List all exporters to find the corresponding ID. Alternatively, you can check your Helm chart `camunda-values.yml` file, which lists the exporters as those that had to be configured explicitly.
@@ -556,7 +572,7 @@ desired={<Six viewBox="140 40 680 500" />}
 Port-forwarding the Zeebe Gateway via `kubectl` for the REST API and listing all exporters will reveal their current status.
 
 ```bash
-kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
+kubectl --context $CLUSTER_SURVIVING port-forward services/$CAMUNDA_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
 curl -XGET 'http://localhost:9600/actuator/exporters'
 ```
 
@@ -637,7 +653,7 @@ This step is equivalent to applying for the region to be recreated:
 From the terminal context of `aws/dual-region/kubernetes` execute:
 
 ```bash
-helm install $HELM_RELEASE_NAME camunda/camunda-platform \
+helm install $CAMUNDA_RELEASE_NAME camunda/camunda-platform \
   --version $HELM_CHART_VERSION \
   --kube-context $CLUSTER_RECREATED \
   --namespace $CAMUNDA_NAMESPACE_RECREATED \
@@ -659,7 +675,7 @@ Follow the installation steps **recreated region**:
 
   ```bash
   helm upgrade --install \
-  "$HELM_RELEASE_NAME" camunda/camunda-platform \
+  "$CAMUNDA_RELEASE_NAME" camunda/camunda-platform \
   --version "$HELM_CHART_VERSION" \
   --kube-context "$CLUSTER_RECREATED" \
   --namespace "$CAMUNDA_NAMESPACE_RECREATED" \
@@ -692,7 +708,7 @@ It is expected that the Zeebe broker pods will not reach the "Ready" state since
 Port-forwarding the Zeebe Gateway via `kubectl` and printing the topology should reveal that the new Zeebe brokers are recognized but yet a full member of the Zeebe cluster.
 
 ```bash
-kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 8080:8080 -n $CAMUNDA_NAMESPACE_SURVIVING
+kubectl --context $CLUSTER_SURVIVING port-forward services/$CAMUNDA_RELEASE_NAME-zeebe-gateway 8080:8080 -n $CAMUNDA_NAMESPACE_SURVIVING
 
 curl -L -X GET 'http://localhost:8080/v2/topology' \
   -H 'Accept: application/json'
@@ -885,14 +901,14 @@ This step **does not** affect the process instances in any way. Process informat
 1. Disable Operate and Tasklist by scaling to 0:
 
    ```bash
-   kubectl --context $CLUSTER_SURVIVING scale -n $CAMUNDA_NAMESPACE_SURVIVING deployments/$HELM_RELEASE_NAME-operate --replicas 0
-   kubectl --context $CLUSTER_SURVIVING scale -n $CAMUNDA_NAMESPACE_SURVIVING deployments/$HELM_RELEASE_NAME-tasklist --replicas 0
+   kubectl --context $CLUSTER_SURVIVING scale -n $CAMUNDA_NAMESPACE_SURVIVING deployments/$CAMUNDA_RELEASE_NAME-operate --replicas 0
+   kubectl --context $CLUSTER_SURVIVING scale -n $CAMUNDA_NAMESPACE_SURVIVING deployments/$CAMUNDA_RELEASE_NAME-tasklist --replicas 0
    ```
 
 2. Disable the Zeebe Elasticsearch exporters in Zeebe via kubectl using the [exporting API](./../../zeebe-deployment/operations/management-api.md#exporting-api):
 
    ```bash
-   kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
+   kubectl --context $CLUSTER_SURVIVING port-forward services/$CAMUNDA_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
    curl -i localhost:9600/actuator/exporting/pause -XPOST
    # The successful response should be:
    # HTTP/1.1 204 No Content
@@ -903,7 +919,7 @@ This step **does not** affect the process instances in any way. Process informat
 For Operate and Tasklist, you can confirm that the deployments have successfully scaled down by listing those and indicating `0/0` ready:
 
 ```bash
-kubectl --context $CLUSTER_SURVIVING get deployments $HELM_RELEASE_NAME-operate $HELM_RELEASE_NAME-tasklist -n $CAMUNDA_NAMESPACE_SURVIVING
+kubectl --context $CLUSTER_SURVIVING get deployments $CAMUNDA_RELEASE_NAME-operate $CAMUNDA_RELEASE_NAME-tasklist -n $CAMUNDA_NAMESPACE_SURVIVING
 # NAME               READY   UP-TO-DATE   AVAILABLE   AGE
 # camunda-operate    0/0     0            0           23m
 # camunda-tasklist   0/0     0            0           23m
@@ -1188,7 +1204,7 @@ The base Helm values file `camunda-values.yml` in `aws/dual-region/kubernetes` c
 1. Upgrade the normal Camunda environment in `CAMUNDA_NAMESPACE_SURVIVING` and `REGION_SURVIVING` to deploy Operate and Tasklist:
 
    ```bash
-   helm upgrade $HELM_RELEASE_NAME camunda/camunda-platform \
+   helm upgrade $CAMUNDA_RELEASE_NAME camunda/camunda-platform \
    --version $HELM_CHART_VERSION \
    --kube-context $CLUSTER_SURVIVING \
    --namespace $CAMUNDA_NAMESPACE_SURVIVING \
@@ -1199,7 +1215,7 @@ The base Helm values file `camunda-values.yml` in `aws/dual-region/kubernetes` c
 2. Upgrade the new region environment in `CAMUNDA_NAMESPACE_RECREATED` and `REGION_RECREATED` to deploy Operate and Tasklist:
 
    ```bash
-   helm upgrade $HELM_RELEASE_NAME camunda/camunda-platform \
+   helm upgrade $CAMUNDA_RELEASE_NAME camunda/camunda-platform \
    --version $HELM_CHART_VERSION \
    --kube-context $CLUSTER_RECREATED \
    --namespace $CAMUNDA_NAMESPACE_RECREATED \
@@ -1253,7 +1269,7 @@ desired={<Twelve viewBox="140 40 680 500" />}
 1. Initialize the new exporter for the recreated region by sending an API request via the Zeebe Gateway:
 
    ```bash
-   kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
+   kubectl --context $CLUSTER_SURVIVING port-forward services/$CAMUNDA_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
    curl -XPOST 'http://localhost:9600/actuator/exporters/elasticsearchregion1/enable' -H 'Content-Type: application/json' -d '{"initializeFrom" : "elasticsearchregion0"}'
    ```
 
@@ -1262,7 +1278,7 @@ desired={<Twelve viewBox="140 40 680 500" />}
 Port-forwarding the Zeebe Gateway via `kubectl` for the REST API and listing all exporters will reveal their current status.
 
 ```bash
-kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
+kubectl --context $CLUSTER_SURVIVING port-forward services/$CAMUNDA_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
 curl -XGET 'http://localhost:9600/actuator/exporters'
 ```
 
@@ -1323,7 +1339,7 @@ desired={<Thirteen viewBox="140 40 680 500" />}
 1. Reactivate the exporters by sending the [exporting API](./../../zeebe-deployment/operations/management-api.md#exporting-api) activation request via the Zeebe Gateway:
 
    ```bash
-   kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
+   kubectl --context $CLUSTER_SURVIVING port-forward services/$CAMUNDA_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
    curl -i localhost:9600/actuator/exporting/resume -XPOST
    # The successful response should be:
    # HTTP/1.1 204 No Content
@@ -1358,7 +1374,7 @@ desired={<Fourteen viewBox="140 40 680 500" />}
    E.g. in our case the `clusterSize` is 8 and `replicationFactor` is 4 meaning we have to list all broker IDs starting from 0 to 7 and set the correct `replicationFactor` in the query.
 
    ```bash
-   kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
+   kubectl --context $CLUSTER_SURVIVING port-forward services/$CAMUNDA_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
    curl -XPOST 'http://localhost:9600/actuator/cluster/brokers?replicationFactor=4' -H 'Content-Type: application/json' -d '["0", "1", "2", "3", "4", "5", "6", "7"]'
    ```
 
@@ -1371,7 +1387,7 @@ desired={<Fourteen viewBox="140 40 680 500" />}
 Port-forwarding the Zeebe Gateway via `kubectl` for the REST API and checking the Cluster API endpoint will show the status of the last change.
 
 ```bash
-kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
+kubectl --context $CLUSTER_SURVIVING port-forward services/$CAMUNDA_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
 curl -XGET 'http://localhost:9600/actuator/cluster' | jq .lastChange
 ```
 

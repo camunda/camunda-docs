@@ -18,6 +18,10 @@ The different components of Web Modeler Self-Managed can be configured using env
 
 ### Database
 
+:::note
+Web Modeler does not support the use of custom schemas in versions prior to `8.7.0`.
+:::
+
 Web Modeler requires a PostgreSQL database as persistent data storage (other database systems are currently not supported).
 
 | Environment variable                  | Description                                           | Example value                                            |
@@ -70,7 +74,7 @@ Refer to the [advanced Identity configuration guide](./identity.md) for addition
 
 ### Zeebe Client
 
-Web Modeler uses the [Zeebe Java client](/docs/apis-tools/java-client/index.md) to connect to Zeebe.
+Web Modeler uses the [Zeebe Java client](/apis-tools/java-client/index.md) to connect to Zeebe.
 To customize the client configuration, you can provide optional environment variables.
 
 | Environment variable          | Description                                                                                              | Example value                    | Default Value                |

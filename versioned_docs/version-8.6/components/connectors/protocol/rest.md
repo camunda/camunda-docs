@@ -61,6 +61,13 @@ To specify the proxy as an HTTPS (HTTP over SSL) protocol handler, set the follo
 The HTTPS protocol handler also uses the `http.nonProxyHosts` property to specify non-proxy hosts.
 :::
 
+| Proxy config set | nonProxyHost config set | valid login provided      | domain1.com (proxied site, no auth required) | domain2.com (proxied site, auth required) | domain3.com (nonProxyHost site) |
+| ---------------- | ----------------------- | ------------------------- | -------------------------------------------- | ----------------------------------------- | ------------------------------- |
+| ❌               | N/A                     | N/A                       | no proxy                                     | no proxy                                  | no proxy                        |
+| ✅               | ❌                      | ✅                        | proxy                                        | proxy                                     | proxy                           |
+| ✅               | ✅                      | ❌ (incorrect or missing) | proxy                                        | Auth error                                | no proxy                        |
+| ✅               | ✅                      | ✅                        | proxy                                        | proxy                                     | no proxy                        |
+
 ### Authentication
 
 You can choose among the available authentication type according to your authentication requirements.
@@ -203,26 +210,30 @@ Secrets are currently not supported in the body of a **REST Connector**.
 }
 ```
 
+### Encoding
+
+In certain scenarios, such as when working with APIs that require pre-encoded URL elements, the REST Connector's default behavior may inadvertently modify encoded segments.
+
+To avoid this, set the `skipEncoding` value to `"true"` in the element template XML. This disables the automatic decoding and re-encoding process, ensuring the URL is sent to the server exactly as provided. This flag is available since 8.6.10.
+
 ### Network communication timeouts
 
 - **Connection timeout in seconds** determines the time frame in which the client will try to establish a connection with the server. If you do not specify a value, the system uses the default of 20 seconds. For cases where you need to wait indefinitely, set this value to 0.
 
 - **Read timeout in seconds** is the amount of time the client will wait to read data from the server after the connection has been made. The default is also set to 20 seconds. To allow an unlimited wait time for slow responses, set this to 0.
 
-- **Write timeout in seconds** controls how long the client will wait to successfully send data to the server. The default setting for this is 0, indicating that there is no limit and the client will wait indefinitely for the operation to complete.
-
 ## Response
 
-The HTTP response will be available in a temporary local `response` variable. This variable can be mapped to the process by specifying the **Result variable**.
-
-The following fields are available in the `response` variable:
+The following variables are available in the context of the response expression:
 
 - **status**: Response status
 - **body**: Response body of your request
 - **headers**: Response headers
 
 :::note
-If your endpoint returns multiple Set-Cookie headers and you need to capture all of them, set `groupSetCookieHeaders` to `true` to aggregate them into a list.
+If your endpoint returns multiple Set-Cookie headers and you need to capture them all, enable the groupSetCookieHeaders option in the element template XML by setting it to true. This will aggregate the headers into a list.
+
+This feature was introduced in version 8.6.7 and is enabled by default starting from 8.6.10. Versions 8.6.0 to 8.6.6 do not support this feature.
 :::
 
 ## Output mapping

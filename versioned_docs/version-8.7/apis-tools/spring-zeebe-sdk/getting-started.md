@@ -8,9 +8,10 @@ This project allows you to leverage Zeebe APIs ([gRPC](/apis-tools/zeebe-api/grp
 
 ## Version compatibility
 
-| Zeebe Spring SDK version | JDK  | Camunda version | Bundled Spring Boot version |
+| Spring Zeebe SDK version | JDK  | Camunda version | Bundled Spring Boot version |
 | ------------------------ | ---- | --------------- | --------------------------- |
-| 8.6.x                    | ≥ 17 | 8.6.x           | 3.3.x                       |
+| 8.6.x (< 8.6.14)         | ≥ 17 | 8.6.x           | 3.3.x                       |
+| 8.6.x (>= 8.6.14)        | ≥ 17 | 8.6.x           | 3.4.x                       |
 | 8.7.x                    | ≥ 17 | 8.7.x           | 3.4.x                       |
 
 ## Add the Spring Zeebe SDK to your project
@@ -27,7 +28,7 @@ Add the following Maven dependency to your Spring Boot Starter project, replacin
 
 ## Enable the Java Compiler `-parameters`-flag
 
-If you don't want to specify annotation values just as the process variable name on the [variable](#using-variable) annotation, the Java compiler flag `-parameters` is required.
+If you don't want to specify annotation values just as the process variable name on the [variable](configuration.md#using-variable) annotation, the Java compiler flag `-parameters` is required.
 
 If you are using Maven you can enable this with the Compiler plugin:
 
@@ -82,8 +83,9 @@ camunda:
     auth:
       client-id: <your client id>
       client-secret: <your client secret>
-    cluster-id: <your cluster id>
-    region: <your cluster region id>
+    cloud:
+      cluster-id: <your cluster id>
+      region: <your cluster region id>
 ```
 
 ### Self-Managed
@@ -97,7 +99,7 @@ camunda:
     auth:
       client-id: <your client id>
       client-secret: <your client secret>
-      issuer: http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
+      token-url: http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
 ```
 
 If you have different endpoints for your applications or want to disable a client, configure the following:
@@ -106,12 +108,11 @@ If you have different endpoints for your applications or want to disable a clien
 camunda:
   client:
     mode: self-managed
-    tenant-ids:
-      - <default>
+    tenant-id: <default>
     auth:
       client-id: <your client id>
       client-secret: <your client secret>
-      issuer: http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
+      token-url: http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
     zeebe:
       enabled: true
       grpc-address: http://localhost:26500
@@ -165,4 +166,4 @@ See [the configuration documentation](/apis-tools/spring-zeebe-sdk/configuration
 
 ## Writing test cases
 
-To learn more about writing test cases using Zeebe Process Test, see [Zeebe Spring SDK integration](../java-client/zeebe-process-test.md#zeebe-spring-sdk-integration).
+To learn more about writing test cases using Zeebe Process Test, see [Spring Zeebe SDK integration](../java-client/zeebe-process-test.md#zeebe-spring-sdk-integration).

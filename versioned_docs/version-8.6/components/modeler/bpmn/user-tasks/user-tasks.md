@@ -4,7 +4,7 @@ title: "User tasks"
 description: "A user task is used to model work that needs to be done by a human actor."
 ---
 
-A user task is used to model work that needs to be done by a human and is assisted by a business process execution engine or software application. This differs from [manual tasks](/components/modeler/bpmn/manual-tasks/manual-tasks.md), which are not assisted by external tooling.
+A user task is used to model work that needs to be done by a human and is assisted by a workflow engine or software application. This differs from [manual tasks](/components/modeler/bpmn/manual-tasks/manual-tasks.md), which are not assisted by external tooling.
 
 When the process instance arrives at a user task, a new user task instance is created at Zeebe.
 The process instance stops at this point and waits until the user task instance is completed.
@@ -46,7 +46,7 @@ Note that in SaaS, all user IDs are converted to lowercase by default, as they a
 :::
 
 :::info
-Assignment resources can also be used for set user task restrictions ([SaaS](/components/concepts/access-control/user-task-access-restrictions.md)/[Self-Managed](docs/self-managed/concepts/access-control/user-task-access-restrictions.md)), where users will see only the tasks they have authorization to work on.
+Assignment resources can also be used for set user task restrictions ([SaaS](/components/concepts/access-control/user-task-access-restrictions.md)/[Self-Managed](/self-managed/concepts/access-control/user-task-access-restrictions.md)), where users will see only the tasks they have authorization to work on.
 :::
 
 Typically, the assignee, candidate users, and candidate groups are defined as [static values](/components/concepts/expressions.md#expressions-vs-static-values) (e.g. `some_username`, `some_username, another_username` and

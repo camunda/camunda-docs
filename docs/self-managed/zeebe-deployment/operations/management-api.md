@@ -71,6 +71,10 @@ When **enabled**, records are exported to the exporter. The log is compacted onl
 
 The OpenAPI spec for this API can be found [here](https://github.com/camunda/camunda/blob/main/dist/src/main/resources/api/cluster/exporter-api.yaml).
 
+:::note
+The `camunda‐zeebe‐gateway` service on port 9600 exposes the exporter endpoints.
+:::
+
 <Tabs groupId="exporters" defaultValue="enable" queryString values={[{label: 'Enable an exporter', value: 'enable' },{label: 'Disable an exporter', value: 'disable' }, {label: 'Monitor', value: 'monitor'}]} >
 
 <TabItem value="enable">

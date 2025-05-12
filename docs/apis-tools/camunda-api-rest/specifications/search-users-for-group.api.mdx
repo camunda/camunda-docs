@@ -1,0 +1,457 @@
+---
+id: search-users-for-group
+title: "Search group users (Work-in-Progress)"
+description: "Search users assigned to a group."
+sidebar_label: "Search group users (Work-in-Progress)"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Search group users (Work-in-Progress)"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/groups/{groupId}/users/search"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Search users assigned to a group.
+
+This API is in a Work-in-Progress state and will undergo potential breaking changes until
+its release with an upcoming minor release.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "groupId",
+      in: "path",
+      required: true,
+      description: "The group ID.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          allOf: [
+            {
+              type: "object",
+              properties: {
+                page: {
+                  description: "Pagination criteria.",
+                  allOf: [
+                    {
+                      type: "object",
+                      properties: {
+                        from: {
+                          description:
+                            "The index of items to start searching from.",
+                          type: "integer",
+                          format: "int32",
+                        },
+                        limit: {
+                          description:
+                            "The maximum number of items to return in one request.",
+                          type: "integer",
+                          format: "int32",
+                          default: 100,
+                        },
+                        searchAfter: {
+                          description:
+                            "Items to search after. Correlates to the `lastSortValues` property of a previous search response.",
+                          type: "array",
+                          items: { type: "object" },
+                        },
+                        searchBefore: {
+                          description:
+                            "Items to search before. Correlates to the `firstSortValues` property of a previous search response.",
+                          type: "array",
+                          items: { type: "object" },
+                        },
+                      },
+                      title: "SearchQueryPageRequest",
+                    },
+                  ],
+                  type: "object",
+                },
+              },
+              title: "SearchQueryRequest",
+            },
+          ],
+          type: "object",
+          properties: {
+            sort: {
+              description: "Sort field criteria.",
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  field: {
+                    description: "The field to sort by.",
+                    type: "string",
+                    enum: ["username", "name", "email"],
+                  },
+                  order: {
+                    description:
+                      "The order in which to sort the related field.",
+                    type: "string",
+                    enum: ["ASC", "DESC"],
+                    default: "ASC",
+                    title: "SortOrderEnum",
+                  },
+                },
+                required: ["field"],
+                title: "UserSearchQuerySortRequest",
+              },
+            },
+            filter: {
+              description: "The user search filters.",
+              allOf: [
+                {
+                  description: "User search filter.",
+                  type: "object",
+                  properties: {
+                    username: {
+                      description: "The username of the user.",
+                      type: "string",
+                    },
+                    name: {
+                      description: "The name of the user.",
+                      type: "string",
+                    },
+                    email: {
+                      description: "The email of the user.",
+                      type: "string",
+                    },
+                  },
+                  title: "UserFilterRequest",
+                },
+              ],
+            },
+          },
+          title: "UserSearchQueryRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The users assigned to the group.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            allOf: [
+              {
+                type: "object",
+                properties: {
+                  page: {
+                    description:
+                      "Pagination information about the search results.",
+                    allOf: [
+                      {
+                        description:
+                          "Pagination information about the search results.",
+                        type: "object",
+                        properties: {
+                          totalItems: {
+                            description: "Total items matching the criteria.",
+                            type: "integer",
+                            format: "int64",
+                          },
+                          firstSortValues: {
+                            description:
+                              "The sort values of the first item in the result set. Use this in the `searchBefore` field of an ensuing request.",
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                          lastSortValues: {
+                            description:
+                              "The sort values of the last item in the result set. Use this in the `searchAfter` field of an ensuing request.",
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                        },
+                        title: "SearchQueryPageResponse",
+                      },
+                    ],
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                description: "The matching users.",
+                type: "array",
+                items: {
+                  type: "object",
+                  properties: {
+                    username: {
+                      description: "The username of the user.",
+                      type: "string",
+                    },
+                    name: {
+                      description: "The name of the user.",
+                      type: "string",
+                    },
+                    email: {
+                      description: "The email of the user.",
+                      type: "string",
+                    },
+                    userKey: {
+                      description: "The key of the user.",
+                      type: "string",
+                    },
+                  },
+                  title: "UserResult",
+                },
+              },
+            },
+            title: "UserSearchResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The group with the given ID was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

@@ -46,7 +46,7 @@ The included components are:
 - [Zeebe](/components/zeebe/zeebe-overview.md): A workflow engine for orchestrating microservices and managing stateful, long-running business processes.
 - [Operate](/components/operate/operate-introduction.md): A monitoring tool for visualizing and troubleshooting workflows running in Zeebe.
 - [Tasklist](/components/tasklist/introduction-to-tasklist.md): A user interface for managing and completing human tasks within workflows.
-- [Optimize]($optimize$/components/what-is-optimize/): An analytics tool for generating reports and insights based on workflow data.
+- [Optimize](/components/optimize/what-is-optimize.md): An analytics tool for generating reports and insights based on workflow data.
 - [Identity](/self-managed/identity/what-is-identity.md): A service for managing user authentication and authorization.
 - [Connectors](/components/connectors/introduction.md): Pre-built integrations for connecting Zeebe with external systems and services.
 
@@ -97,7 +97,7 @@ If running a single instance is preferred, make sure to implement [regular backu
 ## Available reference architectures
 
 :::note Documentation Update in Progress
-This is a work in progress as the existing documentation is updated to provide better general guidance on the topic. The Docker and manual documentation may point to older guides.
+This is a work in progress as the existing documentation is updated to provide better general guidance on the topic. The Docker and Manual documentation may point to older guides.
 :::
 
 Choosing the right reference architecture depends on various factors such as the organization's goals, existing infrastructure, and specific requirements. The following guides are available to help choose and guide deployments:
@@ -111,9 +111,7 @@ Kubernetes is a powerful orchestration platform for containerized applications. 
 - Best for teams with experience in managing containerized environments.
 - A steeper learning curve but offers scalable and highly resilient platform.
 
-For more information and guides, see the reference for [Kubernetes](/self-managed/setup/install.md).
-
-<!-- TODO add link or card for AWS ref arch -->
+For more information and guides, see the reference for [Kubernetes](/self-managed/reference-architecture/kubernetes.md).
 
 ### Containers
 

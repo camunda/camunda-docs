@@ -41,14 +41,27 @@ Use the recommended Helm CLI version for your Helm chart when upgrading. The Hel
 
 Configuration adjustments may be required when upgrading to a new version of the Helm chart. Before beginning your upgrade, ensure you have implemented any changes required by your new version.
 
+:::note
+With the 8.7 release, no special configuration is required to update Helm from 8.6 to 8.7. Review the full [8.6 to 8.7 update guide](/self-managed/operational-guides/update-guide/860-to-870.md) for additional details.
+:::
+
 <Tabs groupId="upgrades" defaultValue="8.6" queryString values={
 [
+{label: 'From Camunda 8.6 to 8.7', value: '8.7', },
 {label: 'From Camunda 8.5 to 8.6', value: '8.6', },
 {label: 'From Camunda 8.4 to 8.5', value: '8.5', },
 {label: 'From Camunda 8.3 to 8.4', value: '8.4', },
 {label: 'From Camunda 8.2 to 8.3', value: '8.3', },
 ]
 }>
+
+<TabItem value='8.7'>
+
+### Helm chart 12.0.0+
+
+The structure of the Helm charts in version 12.0.0+ is similar to that of version 11.0.0+, with no breaking changes introduced between versions 8.6 and 8.7.
+
+</TabItem>
 
 <TabItem value='8.6'>
 
@@ -96,7 +109,7 @@ With this change, there is no need to do extra steps with the post-renderer. You
 
 #### New base path for Operate and Tasklist web applications
 
-We have introduced a new base path for both the Operate and Tasklist web applications. The new base path for Operate is `/operate`, and for Tasklist, it is `/tasklist`. For more information, see the 8.6 [announcements](/reference/announcements/860.md#new-base-path-for-operate-and-tasklist-web-applications).
+We have introduced a new base path for both the Operate and Tasklist web applications. The new base path for Operate is `/operate`, and for Tasklist, it is `/tasklist`. For more information, see the 8.6 [announcements](/reference/announcements-release-notes/860/860-announcements.md#new-base-path-for-operate-and-tasklist-web-applications).
 
 </TabItem>
 

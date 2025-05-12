@@ -11,6 +11,50 @@ Configuration properties can be defined as environment variables using [Spring B
 For example, the property `camunda.client.zeebe.defaults.max-jobs-active` is represented by the environment variable `CAMUNDA_CLIENT_ZEEBE_DEFAULTS_MAXJOBSACTIVE`.
 :::
 
+## Modes
+
+The Spring SDK has modes with meaningful defaults aligned with the distribution's default connection details. Each mode is made for a Camunda 8 setup, and only one mode may be used at a time.
+
+:::note
+The defaults applied by the modes are overwritten by _any_ other set property, including legacy/deprecated properties. Check your configuration and logs to avoid unwanted override.
+:::
+
+### SaaS
+
+This allows you to connect to a Camunda instance in our SaaS offering as the URLs are templated.
+
+Activate by setting:
+
+```yaml
+camunda:
+  client:
+    mode: saas
+```
+
+This applies the following defaults:
+
+```yaml reference referenceLinkText="Source" title="SaaS mode"
+https://github.com/camunda/camunda/blob/stable/8.7/clients/spring-boot-starter-camunda-sdk/src/main/resources/modes/saas.yaml
+```
+
+### Self-Managed
+
+This allows you to connect to a Self-Managed instance protected with JWT authentication. The default URLs are configured to align with all Camunda distributions using `localhost` addresses.
+
+Activate by setting:
+
+```yaml
+camunda:
+  client:
+    mode: self-managed
+```
+
+This applies the following defaults:
+
+```yaml reference referenceLinkText="Source" title="Self-managed mode"
+https://github.com/camunda/camunda/blob/stable/8.7/clients/spring-boot-starter-camunda-sdk/src/main/resources/modes/self-managed.yaml
+```
+
 ## Job worker configuration options
 
 ### Job type
@@ -259,33 +303,15 @@ For a full set of configuration options, see [CamundaClientConfigurationProperti
 
 Authenticate with the cluster using the following alternative methods:
 
-#### Username & Password
+#### Credentials cache path
 
-You can authenticate with the cluster using username and password authentication.
-
-```yaml
-camunda:
-  client:
-    mode: self-managed
-    auth:
-      username: <your username>
-      password: <your password>
-```
-
-#### Keystore & Truststore
-
-You can authenticate with the cluster using Java's Keystore and Truststore.
+You can define the credentials cache path of the zeebe client, the property contains directory path and file name:
 
 ```yaml
 camunda:
   client:
-    mode: self-managed
     auth:
-      keystore-path: <your keystore path>
-      keystore-password: <your keystore password>
-      keystore-key-password: <your keystore key password>
-      truststore-path: <your truststore path>
-      truststore-password: <your truststore password>
+      credentials-cache-path: /tmp/credentials
 ```
 
 ### Zeebe
@@ -316,7 +342,7 @@ camunda:
 
 #### Max message size
 
-A custom `maxMessageSize` allows the client to receive larger or smaller responses from Zeebe. Technically, it specifies the `maxInboundMessageSize` of the gRPC channel (default 4MB):
+A custom `maxMessageSize` allows the client to receive larger or smaller responses from Zeebe. Technically, it specifies the `maxInboundMessageSize` of the gRPC channel (default 5MB):
 
 ```yaml
 camunda:
@@ -554,9 +580,19 @@ When using multi-tenancy, the Zeebe client will connect to the `<default>` tenan
 ```yaml
 camunda:
   client:
-    tenant-ids:
-      - <default>
-      - foo
+    tenant-id: foo
+```
+
+To control which tenants your job workers should use, you can configure:
+
+```yaml
+camunda:
+  client:
+    zeebe:
+      defaults:
+        tenant-ids:
+          - <default>
+          - foo
 ```
 
 Additionally, you can set tenant ids on job worker level by using the annotation:
@@ -577,31 +613,6 @@ camunda:
             - <default>
             - foo
 ```
-
-### Custom identity provider security context
-
-If you require configuring SSL context exclusively for your identity provider:
-
-```yaml
-camunda:
-  client:
-    auth:
-      keystore-path: /path/to/keystore.p12
-      keystore-password: password
-      keystore-key-password: password
-      truststore-path: /path/to/truststore.jks
-      truststore-password: password
-```
-
-- **keystore-path**: Path to client's KeyStore; can be both in JKS or PKCS12 formats
-- **keystore-password**: KeyStore password
-- **keystore-key-password**: Key material password
-- **truststore-path**: Path to client's TrustStore
-- **truststore-password**: TrustStore password
-
-When the properties are not specified, the default SSL context is applied. For example, if you configure an application with
-`javax.net.ssl.*` or `spring.ssl.*`, the latter is applied. If both `camunda.client.auth.*` and either `javax.net.ssl.*`
-or `spring.ssl.*` properties are defined, the `camunda.client.auth.*` takes precedence.
 
 ## Observing metrics
 

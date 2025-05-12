@@ -27,7 +27,7 @@ Add the following Maven dependency to your Spring Boot Starter project, replacin
 
 ## Enable the Java Compiler `-parameters`-flag
 
-If you don't want to specify annotation values just as the process variable name on the [variable](#using-variable) annotation, the Java compiler flag `-parameters` is required.
+If you don't want to specify annotation values just as the process variable name on the [variable](configuration.md#using-variable) annotation, the Java compiler flag `-parameters` is required.
 
 If you are using Maven you can enable this with the Compiler plugin:
 
@@ -107,8 +107,7 @@ If you have different endpoints for your applications or want to disable a clien
 camunda:
   client:
     mode: self-managed
-    tenant-ids:
-      - <default>
+    tenant-id: <default>
     auth:
       client-id: <your client id>
       client-secret: <your client secret>
@@ -164,4 +163,4 @@ See [the configuration documentation](/apis-tools/spring-zeebe-sdk/configuration
 
 ## Writing test cases
 
-To learn more about writing test cases using Zeebe Process Test, see [Zeebe Spring SDK integration](../java-client/zeebe-process-test.md#zeebe-spring-sdk-integration).
+To learn more about writing test cases using Zeebe Process Test, see [Spring Zeebe SDK integration](../java-client/zeebe-process-test.md#zeebe-spring-sdk-integration).

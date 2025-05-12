@@ -5,11 +5,15 @@ sidebar_label: "Install"
 description: "Camunda provides continuously improved Helm charts, of which are not cloud provider-specific so you can choose your Kubernetes provider."
 ---
 
+import { HelmChartInstall } from "@site/src/components/CamundaDistributions";
+
 We recommend using Kubernetes and Helm to deploy and run Camunda 8 Self-Managed in production.
 
 There are many ways you can provision and configure a Kubernetes cluster, and there are a number of architectural choices you need to make. Will your workers run in the Kubernetes cluster or external to it? You will need to configure your Kubernetes cluster and modify this to suit the architecture you are building.
 
 Camunda provides continuously improved Helm charts, of which are not cloud provider-specific so you can choose your Kubernetes provider. The charts are available in the [Camunda Helm repository](https://artifacthub.io/packages/helm/camunda/camunda-platform) and we encourage you to [report issues](https://github.com/camunda/camunda-platform-helm/issues).
+
+You can also visit our Kubernetes [Camunda production deployment](../operational-guides/production-guide/helm-chart-production-guide.md) guide to learn about deploying Camunda Orchestration cluster in production environments with Helm charts.
 
 ## What is Helm?
 
@@ -29,7 +33,7 @@ The following charts will be installed as part of Camunda 8 Self-Managed:
 - **Tasklist**: Deploys the Tasklist component to work with user tasks.
 - **Optimize**: Deploys the Optimize component to analyze the historic process executions.
 - **Identity**: Deploys the Identity component responsible for authentication and authorization.
-- **Connectors**: Deploys the Connectors component responsible for inbound and outbound integration with external systems.
+- **Connectors**: Deploys the connectors component responsible for inbound and outbound integration with external systems.
 - **Elasticsearch**: Deploys an Elasticsearch cluster with two nodes.
 - **Web Modeler**: Deploys the Web Modeler component that allows you to model BPMN processes in a collaborative way.
   - _Note_: The chart is disabled by default and needs to be [enabled explicitly](#install-web-modeler).
@@ -45,7 +49,7 @@ The existing Helm charts use the Elasticsearch configurations by default. The He
 
 For example, `CAMUNDA_OPERATE_ELASTICSEARCH_URL` becomes `CAMUNDA_OPERATE_OPENSEARCH_URL`. In the case of Optimize, please make sure all variables have the proper `CAMUNDA_OPTIMIZE` prefix, i.e. `OPTIMIZE_ELASTICSEARCH_HTTP_PORT` becomes `CAMUNDA_OPTIMIZE_OPENSEARCH_HTTP_PORT`.
 
-Refer to the [Operate](/self-managed/operate-deployment/operate-configuration.md#settings-for-opensearch), [Tasklist](/self-managed/tasklist-deployment/tasklist-configuration.md#elasticsearch-or-opensearch) and [Optimize]($optimize$/self-managed/optimize-deployment/configuration/system-configuration/#opensearch) configuration documentation for additional component configuration parameters to update.
+Refer to the [Operate](/self-managed/operate-deployment/operate-configuration.md#settings-for-opensearch), [Tasklist](/self-managed/tasklist-deployment/tasklist-configuration.md#elasticsearch-or-opensearch) and [Optimize](/self-managed/optimize-deployment/configuration/system-configuration.md#opensearch) configuration documentation for additional component configuration parameters to update.
 :::
 
 ![Camunda 8 Self-Managed Architecture Diagram](../assets/camunda-platform-8-self-managed-architecture-diagram-combined-ingress.png)
@@ -145,9 +149,7 @@ Once this is completed, you are ready to install the Helm chart hosted in the of
 
 To install the available Camunda 8 components inside a Kubernetes cluster, you can simply run:
 
-```shell
-helm install camunda camunda/camunda-platform
-```
+<HelmChartInstall />
 
 You can also add the `-n` flag to specify in which Kubernetes namespace the components should be installed.
 
@@ -203,7 +205,7 @@ To ensure you're installing the most current version of both the chart and its a
 
 ```shell
 # This will install the latest Camunda Helm chart with the latest applications/dependencies.
-helm install camunda camunda/camunda-platform \
+helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION \
     --values https://helm.camunda.io/camunda-platform/values/values-latest.yaml
 ```
 
@@ -220,7 +222,7 @@ helm install camunda camunda/camunda-platform --version 8.1 \
 By default, Camunda services deployed in a cluster are not accessible from outside the cluster. However, you can choose from several methods to connect to these services:
 
 - **Port forwarding:** This method allows you to direct traffic from your local machine to the cluster, making it possible to access Camunda services directly. For detailed instructions, refer to [accessing components without Ingress](/self-managed/setup/guides/accessing-components-without-ingress.md).
-- **Ingress configuration:** You can set up the NGINX Ingress controller to manage external service access. For detailed instructions, refer to the [Ingress setup guide](/self-managed/setup/guides/ingress-setup.md).
+- **Ingress configuration:** You can set up the NGINX Ingress controller to manage external service access. This can be done by combining components Ingress in a single domain or configuring separate Ingress for each component. For detailed instructions, refer to [combined and separated Ingress setup](/self-managed/setup/guides/ingress-setup.md).
 - **EKS cluster installation:** For those deploying Camunda 8 on an Amazon EKS cluster, refer to [installing Camunda 8 on an EKS cluster](/self-managed/setup/deploy/amazon/amazon-eks/eks-helm.md).
 
 ## Configure license key
@@ -282,23 +284,23 @@ Camunda 8 components without a valid license may display **Non-Production Licens
 
 ## Configuring Web Modeler, Console, and Connectors
 
-### Install Connectors
+### Install connectors
 
-The **Connector runtime** comes enabled by default. To start using Connectors, install Connector element templates. Learn more in our documentation for [Web Modeler](/components/connectors/manage-connector-templates.md) or [Desktop Modeler](/components/modeler/desktop-modeler/element-templates/configuring-templates.md).
+The **Connector runtime** comes enabled by default. To start using connectors, install connector element templates. Learn more in our documentation for [Web Modeler](/components/connectors/manage-connector-templates.md) or [Desktop Modeler](/components/modeler/desktop-modeler/element-templates/configuring-templates.md).
 
 Find all available configurable options at the official Camunda Helm [values docs](https://artifacthub.io/packages/helm/camunda/camunda-platform#connectors-parameters).
 
-#### Disable Connectors
+#### Disable connectors
 
-To disable Connectors, pass the `connectors.enabled: false` value when deploying Camunda Helm Chart.
+To disable connectors, pass the `connectors.enabled: false` value when deploying Camunda Helm Chart.
 
 #### Polling authentication mode
 
-Connectors use the [Operate API](/apis-tools/operate-api/overview.md) to fetch process definitions containing inbound Connectors. Depending on your Camunda architecture, you may want to choose one of the following values for the `inbound.mode`:
+Connectors use the [Operate API](/apis-tools/operate-api/overview.md) to fetch process definitions containing inbound connectors. Depending on your Camunda architecture, you may want to choose one of the following values for the `inbound.mode`:
 
 - `disabled` - Polling from Operate is disabled. Connector runtime will support only outbound interactions, such as HTTP REST calls.
 - `credentials` - Connector runtime will attempt to authenticate to the Operate API with password-based basic HTTP authentication.
-- `oauth` - _(Recommended and enabled by default)_ the Connector runtime will attempt to authenticate to the Operate API with an OAuth 2.0 provider. Camunda offers Keycloak as a default OAuth provider.
+- `oauth` - _(Recommended and enabled by default)_ the connector runtime will attempt to authenticate to the Operate API with an OAuth 2.0 provider. Camunda offers Keycloak as a default OAuth provider.
 
 For more details, check [Connectors Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#connectors-parameters).
 
@@ -365,7 +367,7 @@ console:
 For more details, check [Console Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#console-parameters).
 
 :::note
-Console Self-Managed requires the Identity component to authenticate. Camunda Helm Chart installs Identity by default. When logging in to Console when using port-forward, port-forward the Keycloak service `kubectl port-forward svc/<RELEASE-NAME>-keycloak 18080:80` or configure Identity with Ingress as described in the [Ingress setup guide](/self-managed/setup/guides/ingress-setup.md).
+Console Self-Managed requires the Identity component to authenticate. Camunda Helm Chart installs Identity by default. When logging in to Console when using port-forward, port-forward Keycloak service `kubectl port-forward svc/<RELEASE-NAME>-keycloak 18080:80` or configure Identity with Ingress as described in [combined and separated Ingress setup](/self-managed/setup/guides/ingress-setup.md).
 
 :::
 

@@ -9,7 +9,7 @@ Zeebe clients connect to brokers via a stateless gateway.
 For the communication between client and gateway, a mix of REST and [gRPC](https://grpc.io/) is used. The gRPC protocol is defined using Protocol Buffers v3 ([proto3](https://developers.google.com/protocol-buffers/docs/proto3)), and you can find it in the
 [Zeebe repository](https://github.com/camunda/camunda/tree/main/zeebe/gateway-protocol). There, you will also find the OpenAPI v3 spec for the REST portion of the gateway API.
 
-Note that while gRPC requires HTTP/2, the REST API can work with either HTTP/1.1 or HTTP/2.
+Note that while gRPC requires HTTP/2, the [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md) can work with either HTTP/1.1 or HTTP/2.
 
 ## What is gRPC?
 
@@ -28,10 +28,6 @@ gRPC has many beneficial features that make it a good fit for Zeebe, including:
 ## Supported clients
 
 Currently, Zeebe officially supports a gRPC client in [Java](/apis-tools/java-client/index.md).
-
-:::note
-As of 8.5.0, the Go client does not support the REST API of the gateway.
-:::
 
 [Community clients](/apis-tools/community-clients/index.md) have been created in other languages, including C#, Ruby, and JavaScript.
 

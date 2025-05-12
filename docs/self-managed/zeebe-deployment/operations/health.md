@@ -55,7 +55,7 @@ If it is unhealthy, it may mean three things:
 - **It is partially unhealthy**: One or more partitions could be unhealthy, while the rest of them are able to process processes.
 - **It is completely dead**
 
-[Metrics](metrics.md) give more insight into which partition is healthy or unhealthy.
+[Metrics](/self-managed/operational-guides/monitoring/metrics.md) give more insight into which partition is healthy or unhealthy.
 When a broker becomes unhealthy, it's recommended to check the logs to see what went wrong.
 
 (The default broker port can be configured using environment variables - respectively `MANAGEMENT_SERVER_PORT` and `MANAGEMENT_SERVER_ADDRESS` - or system properties - respectively `-Dmanagement.server.port=` or `-Dmanagement.server.address=` - to configure them)

@@ -111,11 +111,7 @@ client.newWorker().jobType("retrieveMoney")
 
 <!-- NEEDS ATTENTION -->
 
-:::caution
-[Spring Zeebe](https://github.com/camunda-community-hub/spring-zeebe) is a community-maintained project.
-:::
-
-The community-maintained [Spring Zeebe integration](https://github.com/camunda-community-hub/spring-zeebe) provides a more elegant way of writing this, but also uses a normal worker from the Java client underneath. In this case, your code might look like this:
+The [Spring Zeebe SDK](/apis-tools/spring-zeebe-sdk/getting-started.md) provides a more elegant way of writing this, but also uses a normal worker from the Java client underneath. In this case, your code might look like this:
 
 ```java
 @JobWorker(type = "retrieveMoney", autoComplete = false)
@@ -132,11 +128,7 @@ ZeebeClient client = ZeebeClient.newClientBuilder()
   .build();
 ```
 
-Or, in the community-maintained Spring Zeebe project:
-
-```properties
-zeebe.client.worker.threads=5
-```
+In the Spring Zeebe SDK, you can do this using a [configuration](/apis-tools/spring-zeebe-sdk/configuration.md#execution-threads).
 
 Now, you can **leverage blocking code** for your REST call, for example, the `RestTemplate` inside Spring:
 

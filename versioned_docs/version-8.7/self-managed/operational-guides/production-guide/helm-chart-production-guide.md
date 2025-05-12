@@ -1,15 +1,13 @@
 ---
 id: helm-chart-production-guide
-title: "Helm chart Production guide"
-sidebar_label: "Helm chart Production Guide"
-description: "Learn how to set up the helm chart in a production setting."
+title: "Camunda production installation guide with Kubernetes and Helm"
+sidebar_label: "Production installation guide"
+description: "Learn how to set up Camunda in Kubernetes with the Helm chart in a production setting."
 ---
 
-## Overview
+The following is a **scenario-based, production focused, step-by-step guide** for setting up the [Camunda Helm chart](https://artifacthub.io/packages/helm/camunda/camunda-platform). It provides a resilient, production-ready architecture for Camunda 8, and minimizes complexity while offering a reliable foundation for most production use cases.
 
-The following is a **scenario-based, production focused, step-by-step guide** for setting up the [Camunda Helm chart](https://helm.camunda.io/). It provides a resilient, production-ready architecture for Camunda 8, and minimizes complexity while offering a reliable foundation for most production use cases.
-
-While this guide uses AWS as a reference, the steps are applicable to other [supported cloud providers](/reference/supported-environments.md#deployment-options) and their comparable services. Upon completion, you will be familiar with all of the necessary requirements for having a production ready Camunda Helm chart.
+While this guide uses AWS as a reference, the steps are applicable to other [supported Kubernetes distributions](/reference/supported-environments.md#deployment-options) and their comparable services. Upon completion, you will be familiar with all of the necessary requirements for having a production ready Camunda Helm chart.
 
 ## Prerequisites
 
@@ -21,11 +19,11 @@ Before proceeding with the setup, ensure the following requirements are met:
 - **TLS Certificates**: Obtain valid X.509 certificates for your domain from a trusted Certificate Authority.
 - **External Dependencies**: Provision the following external dependencies:
   - **Amazon Aurora PostgreSQL**: For persistent data storage required for the Web Modeler component. For step-by-step instructions, see the [Aurora PostgreSQL module setup](/self-managed/setup/deploy/amazon/amazon-eks/terraform-setup.md#postgresql-module-setup) guide.
-  - **Amazon OpenSearch**: To provide a datastore for Zeebe, the Camunda 8 process orchestration engine. For step-by-step instructions, see the [OpenSearch domain](/self-managed/setup/deploy/amazon/amazon-eks/eksctl.md#4-opensearch-domain) guide.
+  - **Amazon OpenSearch**: The secondary datastore for Zeebe, the Camunda 8 process orchestration engine. For step-by-step instructions, see the [OpenSearch](/self-managed/setup/deploy/amazon/amazon-eks/eksctl.md#4-opensearch-domain) guide.
   - **AWS Simple Active Directory**: For simple OIDC authentication. See the [AWS Simple Active Directory](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/directory_simple_ad.html) documentation for more information.
 - **Ingress NGINX**: Ensure the [ingress-nginx](https://github.com/kubernetes/ingress-nginx) controller is set up in the cluster.
 - **AWS OpenSearch Snapshot Repository** - To store the backups of the Camunda web applications. This repository must be configured with OpenSearch to take backups which are stored in Amazon S3. See the [official AWS guide](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-snapshot-registerdirectory.html) for detailed steps.
-- **Amazon S3** - An additional bucket will be used to store backups of the Zeebe brokers.
+- **Amazon S3** - An additional bucket to store backup files of the Zeebe brokers.
 - **Resource Planning**: Make sure you have understood the considerations for [sizing Camunda Clusters](/components/best-practices/architecture/sizing-your-environment.md#camunda-8-self-managed), and have evaluated sufficient CPU, memory, and storage necessary for the deployment.
 
 Ensure all prerequisites are in place to avoid issues during installation or when upgrading in a production environment.
@@ -36,7 +34,7 @@ For more information about the Camunda 8 architecture, refer to the [Self-Manage
 
 Below is the high-level architecture diagram for the base production setup:
 
-# ![Architecture Diagram](./img/architecture.png)
+![Architecture Diagram](./img/architecture.png)
 
 ## Installation and configuration
 
@@ -53,7 +51,7 @@ kubectl create namespace orchestration
 
 - **Namespace `management`:** We will install [Identity](/self-managed/identity/what-is-identity.md), [Console](/self-managed/console-deployment/overview.md), and all the [Web Modeler](/self-managed/modeler/web-modeler/installation.md) components.
 
-- **Namespace `orchestration`**: We will install [Zeebe](/self-managed/zeebe-deployment/zeebe-installation.md), the Camunda web applications ([Operate](/self-managed/operate-deployment/install-and-start.md), [Tasklist](/self-managed/tasklist-deployment/install-and-start.md), and [Optimize](/$optimize$/self-managed/optimize-deployment/install-and-start.md)), along with [Connectors](/self-managed/connectors-deployment/install-and-start.md).
+- **Namespace `orchestration`**: We will install [Zeebe](/self-managed/zeebe-deployment/zeebe-installation.md), the Camunda web applications ([Operate](/self-managed/operate-deployment/install-and-start.md), [Tasklist](/self-managed/tasklist-deployment/install-and-start.md), and [Optimize](/self-managed/optimize-deployment/install-and-start.md)), along with [Connectors](/self-managed/connectors-deployment/install-and-start.md).
 
 Each component is installed by the Helm chart automatically, and does not need to be installed separately.
 
@@ -73,10 +71,10 @@ helm repo add camunda https://helm.camunda.io
 # This will update the chart repository. Please make sure to run this command before every install or upgrade
 helm repo update
 # This will install the latest Camunda Helm chart in the management namespace with the latest applications/dependencies.
-helm install camunda camunda/camunda-platform -n management \
+helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION -n management \
     --values management-values.yaml
 # This will install the latest Camunda Helm chart in the Orchestration namespace with the latest applications/dependencies.
-helm install camunda camunda/camunda-platform -n orchestration \
+helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION -n orchestration \
     --values orchestration-values.yaml
 ```
 
@@ -207,10 +205,10 @@ For more information, see how to [connect to an OpenID Connect provider](/self-m
 :::note
 To allow for easier testing, the Camunda Helm chart provides databases as an external dependency, such as [Bitnami Elasticsearch Helm chart](https://artifacthub.io/packages/helm/bitnami/elasticsearch) and the [Bitnami PostgreSQL Helm chart](https://artifacthub.io/packages/helm/bitnami/postgresql). These dependency charts should be disabled in a production setting, and production databases should be used instead.
 
-This guide replaces the Bitnami Elasticsearch dependency chart with Amazon OpenSearch, and replaces the the Bitnami PostgreSQL dependency chart with Amazon Aurora PostgreSQL.
+This guide disables the Bitnami Elasticsearch dependency chart and uses Amazon OpenSearch. It also disables the Bitnami PostgreSQL dependency chart and uses Amazon Aurora PostgreSQL instead.
 :::
 
-You should have one Amazon OpenSearch instance and one Amazon Aurora PostgreSQL instance (with two databases) ready to use, complete with a username, password, and URL. If these have not been configured, see the [prerequisites](#prerequisites) for requirements.
+You should have one Amazon OpenSearch instance and one Amazon Aurora PostgreSQL instance (with two databases) ready to use, complete with a username, password, and URL for each datastore. If these have not been configured, see the [prerequisites](#prerequisites) for requirements.
 
 #### Connecting to Amazon OpenSearch
 
@@ -326,7 +324,7 @@ The following resources and configuration options are important to keep in mind 
   - `zeebe.replicationFactor`: the [number of replicas](/components/zeebe/technical-concepts/partitions.md#replication) that each partition replicates to
 
   :::note
-  `zeebe.partitionCount` does not yet support dynamic scaling. You will not be able to modify it on future upgrades. It is better to over-provision the partitions to allow potential growth as dynamic partitioning isn't possible yet.
+  `zeebe.partitionCount` does not yet support dynamic scaling. You will not be able to modify this property. It is better to over-provision the partitions to allow potential growth as dynamic partitioning isn't possible yet.
   :::
 
 - Ensure the resources (CPU and memory) are appropriate for your workload size. For example, the resource limits can be changed for Zeebe by modifying the following values:
@@ -381,7 +379,7 @@ The following resources and configuration options are important to keep in mind 
       maxUnavailable: 1
   ```
 
-- Version management: Stay on a stable Camunda and Kubernetes version. Follow Camunda’s [release notes](/reference/release-notes/release-notes.md) for security patches or critical updates.
+- Version management: Stay on a stable Camunda and Kubernetes version. Follow Camunda’s [release notes](/reference/announcements-release-notes/870/870-release-notes.md) for security patches or critical updates.
 - Secrets should be created prior to installing the Helm chart so they can be referenced as existing secrets when installing the Helm chart. In this scenario, the secrets are auto-generated. The following can be added to both Helm values files:
 
   ```yaml
@@ -393,7 +391,7 @@ The following resources and configuration options are important to keep in mind 
 
   This generates a secret called `camunda-credentials`. It will include all the needed secret values for the Camunda Helm chart. The `camunda-credentials` generated secret will not be deleted if the Helm chart is uninstalled.
 
-  When upgrading the Helm chart, set `global.secrets.autoGenerated` to `false` when upgrading the chart. The same secret data will be required on upgrade.
+  When upgrading the Helm chart, set `global.secrets.autoGenerated` to `false` when upgrading the chart. This prevents overwriting access credentials with the auto-generation script. The same secrets data will be required on upgrade.
 
   :::note
   It best to store this secret in an external secret manager such as [Vault by HashiCorp](https://www.vaultproject.io/) in case of a total outage.
@@ -402,7 +400,6 @@ The following resources and configuration options are important to keep in mind 
   For more information, refer to the Kubernetes documentation on how to [create a secret](https://kubernetes.io/docs/concepts/configuration/secret/).
 
 - When upgrading the Camunda Helm chart, make sure to read the [upgrade guide](/self-managed/operational-guides/update-guide/introduction.md) and corresponding new version release notes before upgrading. Perform the upgrade on a test environment first before attempting in production.
-- Make sure to not store any state or important, long-term business data in the local file system of the container. A Pod is transient,meaning if the Pod is restarted, the data will be erased. It is better to create a volume and volume mount instead.
 
   The following is an example configuration for Zeebe to create persistent storage:
 
@@ -453,7 +450,7 @@ The following resources and configuration options are important to keep in mind 
   You should only enable the auto-mounting of a service account token when the application explicitly needs access to the Kubernetes API server, or you have created a service account with the exact permissions required for the application and bound it to the pod.
   :::
 
-- If you have a use case for enabling [Network Policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/) then it is recommended to do so.
+- [Network Policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/) can be enabled with Camunda Helm charts if needed by your infrastructure requirements.
 <!--Maybe link this to customer: https://github.com/ahmetb/kubernetes-network-policy-recipes-->
 - It is possible to have a pod security standard that is suited to your security constraints. This is enabled by modifying the Pod Security Admission. See the [Pod Security Admission](https://kubernetes.io/docs/concepts/security/pod-security-admission/) guide in the official Kubernetes documentation for more information.
 - By default, the Camunda Helm chart is configured to use a read-only root file system for the pod. It is advisable to retain this default setting, and no modifications are required in your Helm values files.
@@ -480,6 +477,9 @@ The following resources and configuration options are important to keep in mind 
   To add any other security constraints to your Helm values files, refer to the official [Kubernetes documentation](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/).
 
 - It is recommended to pull images exclusively from a private registry, such as [Amazon ECR](https://aws.amazon.com/ecr/), rather than directly from Docker Hub. Doing so enhances control over the images, avoids rate limits, and improves performance and reliability. Additionally, you can configure your cluster to pull images only from trusted registries. Tools like [Open Policy Agent](https://blog.openpolicyagent.org/securing-the-kubernetes-api-with-open-policy-agent-ce93af0552c3#3c6e) can be used to enforce this restriction.
+
+- Please refer to our [installing in an air-gapped environment guide](../../setup/guides/air-gapped-installation.md) when deploying Camunda in Air-gapped environments
+
 - Open Policy Agent can also be used to [allowlist Ingress hostnames](https://www.openpolicyagent.org/docs/latest/kubernetes-tutorial/#4-define-a-policy-and-load-it-into-opa-via-kubernetes).
 
 ### Observability and monitoring
@@ -498,10 +498,6 @@ The following resources and configuration options are important to keep in mind 
 ## Create a production `values.yaml`
 
 The following is a complete configuration example, taking all the above sections into consideration.
-
-:::note
-Please be advised that the current values files below contain unresolved issues which may impact functionality. Users are cautioned that implementation may result in unexpected behavior or errors.
-:::
 
 ### Example management configuration
 
@@ -820,3 +816,7 @@ To configure multiple Camunda Orchestration clusters in multiple namespaces, we 
 ### Running benchmarks
 
 If you would like to run benchmarks on the platform, refer to the Camunda 8 benchmark [community project](https://github.com/camunda-community-hub/camunda-8-benchmark).
+
+### Reference architectures
+
+You can lean more about Camunda production deployment and available deployment architectures in [Camunda Deployment Reference Architecture](/self-managed/reference-architecture/reference-architecture.md) section of our documentation.

@@ -100,7 +100,7 @@ A conditional event's condition expression is evaluated at it's "scope" creation
 Most events actually occur somewhere external to the workflow engine and need to be routed to it. The core workflow engine is by design not concerned with the technical part of receiving external messages, but you can receive messages and route them to the workflow engine by the following ways:
 
 - Using API: Receive the message by means of your platform-specific activities such as connecting to a AMQP queue or processing a REST request and then route it to the process.
-- Using Connectors: Configure a Connector to receive messages such as Kafka records and rote it to the process. Note that this possibility works for Camunda 8 only.
+- Using connectors: Configure a connector to receive messages such as Kafka records and rote it to the process. Note that this possibility works for Camunda 8 only.
 
 ### Starting process instance by BPMN process ID
 
@@ -216,7 +216,7 @@ Use some simple code on the sending side to route the message to a new process i
 @JobWorker(type="routeInput")
 public void routeInput(@Variable String invoiceId) {
   Map<String, Object> variables = new HashMap<String, Object>();
-  variables.put("invoiceId", execution.getVariable("invoiceId"));
+  variables.put("invoiceId", invoiceId);
   zeebeClient.newCreateInstanceCommand()
     .bpmnProcessId("invoice").latestVersion()
 	.variables(variables)
@@ -235,11 +235,12 @@ public void notifyOrder(@Variable String orderId, @Variable String paymentInform
   Map<String, Object> variables = new HashMap<String, Object>();
   variables.put("paymentInformation", paymentInformation);
 
-  execution.getProcessEngineServices().getRuntimeService()
-    .createMessageCorrelation("MsgPaymentReceived")
-    .processInstanceVariableEquals("orderId", orderId)
-    .setVariables(variables)
-    .correlate();
+  zeebeClient.newPublishMessageCommand()
+    .messageName("MsgPaymentReceived")
+    .corrlationKey(orderId)
+    .variables(variables)
+    .send()
+    .exceptionally( throwable -> { throw new RuntimeException("Could not publish message", throwable); });
 }
 ```
 

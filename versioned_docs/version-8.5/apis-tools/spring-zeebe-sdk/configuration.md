@@ -276,7 +276,7 @@ zeebe.client.worker.max-jobs-active=32
 zeebe.client.worker.threads=1
 ```
 
-For a full set of configuration options, see [ZeebeClientConfigurationProperties.java](https://github.com/camunda/camunda/blob/main/clients/spring-boot-starter-camunda-sdk/src/main/java/io/camunda/zeebe/spring/client/properties/ZeebeClientConfigurationProperties.java).
+For a full set of configuration options, see [ZeebeClientConfigurationProperties.java](https://github.com/camunda/camunda/blob/main/clients/spring-boot-starter-camunda-sdk/src/main/java/io/camunda/spring/client/properties/ZeebeClientConfigurationProperties.java).
 
 :::note
 We generally do not advise using a thread pool for workers, but rather implement asynchronous code, see [writing good workers](/components/best-practices/development/writing-good-workers.md) for additional details.
@@ -381,7 +381,7 @@ zeebe.client.message.timeToLive=PT2H
 
 ### Max message size
 
-A custom maxMessageSize (in bytes) allows the client to receive larger or smaller responses from Zeebe. Technically, it specifies the maxInboundMessageSize of the gRPC channel (default 4MB):
+A custom maxMessageSize (in bytes) allows the client to receive larger or smaller responses from Zeebe. Technically, it specifies the maxInboundMessageSize of the gRPC channel (default 5MB):
 
 ```properties
 zeebe.client.message.maxMessage-size=3145728

@@ -149,7 +149,8 @@ paths:
     post:
       tags:
         - Job
-      summary: Report error for job
+      operationId: throwJobError
+      summary: Throw error for job
       description: |
         Reports a business error (i.e. non-technical) that occurs while processing a job.
       parameters:
@@ -711,6 +712,17 @@ paths:
           description: The provided data is not valid.
         "500":
           description: An internal error occurred while processing the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "504":
+          description: |
+            The process instance creation request timed out in the gateway.
+
+            This can happen if the `awaitCompletion` request parameter is set to `true`
+            and the created process instance did not complete within the defined request timeout.
+            This often happens when the created instance is not fully automated or contains wait states.
           content:
             application/problem+json:
               schema:
@@ -1527,70 +1539,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
 
-  /users/search:
-    post:
-      tags:
-        - User
-      summary: "Query users (alpha)"
-      description: |
-        Search for users based on given criteria.
-
-        :::note
-        This endpoint is an [alpha feature](/reference/alpha-features.md) and not enabled on Camunda clusters out of the box.
-        See the [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)
-        for further details.
-        :::
-      operationId: "findAllUsers"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/UserSearchQueryRequest"
-        required: true
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/UserSearchResponse"
-            application/vnd.camunda.api.keys.number+json:
-              schema:
-                $ref: "#/components/schemas/UserSearchResponse"
-            application/vnd.camunda.api.keys.string+json:
-              schema:
-                $ref: "#/components/schemas/UserSearchResult"
-        "400":
-          description: "Bad request"
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetail"
-        "401":
-          description: "Unauthorized"
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetail"
-        "403":
-          description: "Forbidden"
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetail"
-        "404":
-          description: "Not found"
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetail"
-        "500":
-          description: "Internal server error"
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetail"
-
   /incidents/search:
     post:
       tags:
@@ -1811,7 +1759,7 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
 
   /element-instances/{elementInstanceKey}/variables:
-    post:
+    put:
       tags:
         - Element instance
       summary: Update element instance variables
@@ -4411,7 +4359,8 @@ components:
         awaitCompletion:
           description: |
             Wait for the process instance to complete. If the process instance completion does
-            not occur within the requestTimeout, the request will be closed. Disabled by default.
+            not occur within the requestTimeout, the request will be closed. This can lead to a 504
+            response status. Disabled by default.
           type: boolean
           default: false
         fetchVariables:

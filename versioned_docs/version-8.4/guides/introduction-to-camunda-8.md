@@ -1,7 +1,7 @@
 ---
 id: introduction-to-camunda
-title: Introduction to Camunda 8
-sidebar_label: Introduction to Camunda 8
+title: Get started with Camunda 8
+sidebar_label: Get started with Camunda 8
 slug: /guides/
 description: "Step through an introduction to Camunda 8, creating an account, modeling your first process, getting started with microservice orchestration, and more."
 ---
@@ -15,7 +15,7 @@ Camunda 8 consists of six [components](/components/components-overview.md):
 - [Zeebe](/components/zeebe/zeebe-overview.md) - The cloud-native process engine of Camunda 8.
 - [Tasklist](/components/tasklist/introduction-to-tasklist.md) - Complete tasks which require human input.
 - [Operate](/components/operate/operate-introduction.md) - Manage, monitor, and troubleshoot your processes.
-- [Optimize]($optimize$/components/what-is-optimize) - Improve your processes by identifying constraints in your system.
+- [Optimize](/components/optimize/what-is-optimize.md) - Improve your processes by identifying constraints in your system.
 
 For more conceptual information about Camunda 8, see [What is Camunda 8](components/concepts/what-is-camunda-8.md).
 For an on-demand demonstration of the product, visit [Camunda Academy](https://bit.ly/3CvooTX).

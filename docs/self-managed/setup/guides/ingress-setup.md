@@ -8,7 +8,7 @@ import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
 :::caution
-The separated Ingress configuration has been removed in Camunda version 8.7. This guide covers a **combined Ingress setup**.
+The separated Ingress configuration has been removed in Camunda version 8.8. This guide covers a **combined Ingress setup**.
 :::
 
 Camunda 8 Self-Managed has multiple web applications and gRPC services. Both can be accessed externally using Ingress with a **combined setup.** In this configuration, there are two Ingress objects: one Ingress object for all Camunda 8 web applications using a single domain. Each application has a sub-path, for example `camunda.example.com/operate`, and `camunda.example.com/optimize`, and another Ingress that uses gRPC protocol for Zeebe Gateway, for example `zeebe.camunda.example.com`.
@@ -104,7 +104,7 @@ The configuration above only contains the Ingress-related values under `Console`
 Incorporate the custom values mentioned in the example above into the value file you're using to deploy Camunda as outlined in [deploying Camunda 8](/self-managed/setup/install.md):
 
 ```shell
-helm install demo camunda/camunda-platform -f values-combined-ingress.yaml
+helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION -f values-combined-ingress.yaml
 ```
 
 Once deployed, you can access the Camunda 8 components on:

@@ -39,6 +39,10 @@ and how it can be configured by process developers. Connector templates are a sp
   </a>
 </div>
 
+:::tip
+To learn how to create a custom connector based on the Camunda REST connector, see [create a custom REST connector](create-connector-from-rest.md).
+:::
+
 ## Connector SDK
 
 [Create your own custom Java connectors](connector-sdk.md) using the connector SDK.
@@ -55,7 +59,7 @@ A connector consists of the actual Java code, and the Modeler user interface.
 
 :::note
 
-- If you are only using prebuilt Connectors in Modeler, you only need to understand how to configure and use a Connector in the Modeler interface via the properties panel on the right side of the screen.
+- If you are only using prebuilt connectors in Modeler, you only need to understand how to configure and use a connector in the Modeler interface via the properties panel on the right side of the screen.
 - Connector templates are a specific type of [element template](/components/modeler/desktop-modeler/element-templates/about-templates.md), that can also be used when creating custom connectors using the [Connector SDK](connector-sdk.md).
 
 :::

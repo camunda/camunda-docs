@@ -141,7 +141,7 @@ const SearchableTable = () => {
       image: AmazonBedrockImg,
     },
     {
-      name: "Asana Connector",
+      name: "Asana",
       description: "Manage Asana projects and tasks from your processes.",
       type: "Outbound",
       link: "../asana/",

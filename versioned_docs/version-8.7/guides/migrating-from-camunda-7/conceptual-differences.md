@@ -50,13 +50,13 @@ Most expressions can be converted (see [this code in the diagram converter](http
 
 You can also use the [FEEL copilot](https://feel-copilot.camunda.com/) to rewrite complex expressions for you.
 
-### Different Connector infrastructure
+### Different connector infrastructure
 
 Through Camunda Connect, Camunda 7 provides an HTTP and a SOAP HTTP [Connector](https://docs.camunda.org/manual/latest/reference/connect/). Camunda 8 offers multiple [Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) out-of-the-box on a completely different codebase.
 
-To migrate existing Connectors, consider the following options:
+To migrate existing connectors, consider the following options:
 
-- Use the [REST protocol Connector](components/connectors/protocol/rest.md) to leverage an out-of-the-box Connector.
+- Use the [REST protocol connector](components/connectors/protocol/rest.md) to leverage an out-of-the-box connector.
 - Create a small bridging layer via custom [job workers](/components/concepts/job-workers.md).
 
 ### Multi-tenancy
@@ -82,7 +82,7 @@ This is visualized on the left-hand side of the following image. With Camunda 8,
 
 - Java
 - Spring Boot
-- Spring Zeebe Starter (embedding the Zeebe client)
+- [Spring Zeebe SDK](../../apis-tools/spring-zeebe-sdk/getting-started.md) (embedding the Zeebe client)
 - Glue code implemented as workers (being Spring beans)
 
 ![Diagram showing the spring boot architecture](../img/architecture-spring-boot.png)
@@ -143,7 +143,7 @@ Due to limited adoption, there is no support for CDI or OSGI in Camunda 8. A lig
 
 ### Polyglot applications (C#, Node.js)
 
-When you run your application in Node.js or C#, for example, you exchange one remote engine (Camunda 7) with another (Camunda 8). As Zeebe comes with a different API, you need to adjust your source code. Zeebe does not use REST as API technology, but gRPC, and you will need to leverage a [client library](apis-tools/working-with-apis-tools.md#deploy-processes-start-process-instances-and-more-using-zeebe-client-libraries) instead.
+When you run your application in Node.js or C#, for example, you exchange one remote engine (Camunda 7) with another (Camunda 8). As Zeebe comes with a different API, you need to adjust your source code.
 
 ![A diagram showing a polygot application architecture](../img/architecture-polyglot.png)
 

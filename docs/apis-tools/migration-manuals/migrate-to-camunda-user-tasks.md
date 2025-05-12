@@ -14,7 +14,7 @@ import "../tasklist-api-rest/assets/css/condensedTable.module.css";
 import styles from "../tasklist-api-rest/assets/css/cleanImages.module.css";
 import CamundaUserTaskSelectionImg from '../tasklist-api-rest/assets/img/camunda-user-task-selection.png';
 
-Camunda 8.5 introduced a new [user task](/components/modeler/bpmn/user-tasks/user-tasks.md) implementation type: Camunda user task.
+Camunda 8.7 introduced a new [user task](/components/modeler/bpmn/user-tasks/user-tasks.md) implementation type: Camunda user task ([formerly named Zeebe user task](/reference/announcements-release-notes/870/870-release-notes.md#zeebe-user-tasks-modeling-migration-support-saasself-managedmodeler)).
 
 Camunda user tasks have several benefits compared to Job worked-based user tasks, including:
 
@@ -170,7 +170,7 @@ Repeat these steps for all user tasks in the process. Then, deploy the process t
 ## How Tasklist API (V1) compares to Camunda 8 API (V2)
 
 :::note
-The Tasklist REST API is deprecated and will be deleted with the 8.9 release.
+The Tasklist REST API is [deprecated with the 8.8 release and will be deleted with the 8.10 release](/reference/announcements-release-notes/880/880-announcements.md#deprecated-operate-and-tasklist-v1-rest-apis).
 :::
 
 The following table provides a breakdown of which operations are supported in which API, and for which user tasks.
@@ -239,7 +239,7 @@ The following table outlines the respective endpoints. Click the endpoints to fo
             </a>
         </td>
         <td>
-            <a href="../../camunda-api-rest/specifications/find-user-tasks">
+            <a href="../../camunda-api-rest/specifications/search-user-tasks">
                 <code>POST /user-tasks/search</code>
             </a>
         </td>

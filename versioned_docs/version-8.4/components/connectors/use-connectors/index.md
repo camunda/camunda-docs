@@ -6,7 +6,7 @@ description: Learn how to use Connectors in Web Modeler by creating a Connector 
 
 Any task can be transformed into a Connector task. This guide details the basic functionality all Connectors share.
 
-Find the available Connectors in Camunda 8 SaaS and how to use them in detail in the [out-of-the-box Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) documentation. Additionally, learn how you can visit the [Camunda Marketplace](/docs/components/modeler/web-modeler/camunda-marketplace.md) to add Connectors from your BPMN diagram.
+Find the available Connectors in Camunda 8 SaaS and how to use them in detail in the [out-of-the-box Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) documentation. Additionally, learn how you can visit the [Camunda Marketplace](/components/modeler/web-modeler/camunda-marketplace.md) to add Connectors from your BPMN diagram.
 
 :::note
 New to modeling with Camunda? The steps below assume some experience with Camunda modeling tools. [Model your first diagram](/components/modeler/web-modeler/model-your-first-diagram.md) to learn how to work with Web Modeler.
@@ -253,7 +253,7 @@ jobError("job failed")
 
 #### HTTP errors to BPMN errors
 
-Using the [REST Connector](/components/connectors/protocol/rest.md), you can handle HTTP errors directly in your business process model by setting a Header named `errorExpression` with the following value:
+Using the [REST Connector](/components/connectors/protocol/rest.md), you can handle HTTP errors directly in your business process model by setting a header named `errorExpression` with the following value:
 
 ```feel
 if error.code = "404" then
@@ -267,11 +267,11 @@ else
 ```
 
 This will create BPMN errors for HTTP requests that return with a status [404](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404) or [500](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500).
-You can extend that list to all HTTP errors you can handle as business use cases, e.g. by informing a website administrator directly via Slack using the [Slack Connector](/components/connectors/out-of-the-box-connectors/slack.md).
+You can extend that list to all HTTP errors you can handle as business use cases, for example by informing a website administrator directly via Slack using the [Slack Connector](/components/connectors/out-of-the-box-connectors/slack.md).
 
 #### Response value to BPMN error
 
-Using the [REST Connector](/components/connectors/protocol/rest.md) or any other Connector that returns a result, you can handle a response as BPMN error based on its value, by setting a Header named `errorExpression` with the following value:
+Using the [REST Connector](/components/connectors/protocol/rest.md) or any other Connector that returns a result, you can handle a response as a BPMN error based on its value, by setting a header named `errorExpression` with the following value:
 
 ```feel
 if response.body.main.humidity < 0 then

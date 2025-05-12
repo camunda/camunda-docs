@@ -34,28 +34,6 @@ Example for environment variable:
 
 Default context-path is `/`.
 
-## Multi-tenancy
-
-Multi-tenancy in the context of Camunda 8 refers to the ability of Camunda 8 to serve multiple distinct [tenants](/self-managed/identity/user-guide/tenants/managing-tenants.md) or
-clients within a single installation.
-
-From version 8.3 onwards, Tasklist has been enhanced to support multi-tenancy for Self-Managed setups. More information about
-the feature can be found in [the multi-tenancy documentation](../concepts/multi-tenancy.md).
-
-### Configuration
-
-For those running a Self-Managed Camunda 8 environment, configuring multi-tenancy in Tasklist requires specific settings:
-
-| Name                                   | Description                                                                                                                                                              | Default value |
-| :------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
-| camunda.tasklist.multi-tenancy.enabled | Activates the multi-tenancy feature within the Tasklist app. This setting can also be overridden using the environment variable `CAMUNDA_TASKLIST_MULTITENANCY_ENABLED`. | false         |
-
-### Troubleshooting
-
-To ensure seamless integration and functionality, the multi-tenancy feature must also be enabled across **all** associated components [if not configured in Helm](/self-managed/concepts/multi-tenancy.md) so users can view any data from tenants for which they have authorizations configured in Identity.
-
-Find more information (including links to individual component configuration) on the [multi-tenancy concepts page](/self-managed/concepts/multi-tenancy.md).
-
 ## Elasticsearch or OpenSearch
 
 Tasklist stores and reads data from Elasticsearch or OpenSearch.
@@ -136,6 +114,20 @@ camunda.tasklist:
       selfSigned: true
 ```
 
+#### Disable Elasticsearch deprecation logging
+
+When using an Elasticsearch version ≥8.16.0 it is recommended to turn off deprecation logging for the Elasticsearch cluster.
+
+```shell
+curl -X PUT "http://localhost:9200/_cluster/settings" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "persistent": {
+      "logger.org.elasticsearch.deprecation": "OFF"
+    }
+  }'
+```
+
 ## Zeebe Broker connection
 
 Tasklist needs a connection to the Zeebe Broker to start the import.
@@ -201,7 +193,7 @@ camunda.tasklist:
 ## Monitoring and health probes
 
 Tasklist includes the [Spring Boot Actuator](https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html#production-ready) inside, which
-provides the number of monitoring possibilities (e.g. health check (http://localhost:8080/actuator/health) and metrics (http://localhost:8080/actuator/prometheus) endpoints).
+provides the number of monitoring possibilities (e.g. health check (http://localhost:9600/actuator/health) and metrics (http://localhost:9600/actuator/prometheus) endpoints).
 
 Tasklist uses the following Actuator configuration by default:
 
@@ -220,11 +212,11 @@ management.endpoints.web.exposure.include: health, prometheus, loggers, usage-me
 
 With this configuration, the following endpoints are available for use out of the box:
 
-`<server>:8080/actuator/prometheus` Prometheus metrics
+`<server>:9600/actuator/prometheus` Prometheus metrics
 
-`<server>:8080/actuator/health/liveness` Liveness probe
+`<server>:9600/actuator/health/liveness` Liveness probe
 
-`<server>:8080/actuator/health/readiness` Readiness probe
+`<server>:9600/actuator/health/readiness` Readiness probe
 
 ### Example snippets to use Tasklist probes in Kubernetes
 
@@ -236,7 +228,7 @@ For details to set Kubernetes probes parameters, see [Kubernetes configure probe
 readinessProbe:
   httpGet:
     path: /actuator/health/readiness
-    port: 8080
+    port: 9600
   initialDelaySeconds: 30
   periodSeconds: 30
 ```
@@ -247,7 +239,7 @@ readinessProbe:
 livenessProbe:
   httpGet:
     path: /actuator/health/liveness
-    port: 8080
+    port: 9600
   initialDelaySeconds: 30
   periodSeconds: 30
 ```
@@ -302,7 +294,7 @@ The log level for Tasklist can be changed by following the [Setting a Log Level]
 #### Set all Tasklist loggers to DEBUG
 
 ```shell
-curl 'http://localhost:8080/actuator/loggers/io.camunda.tasklist' -i -X POST \
+curl 'http://localhost:9600/actuator/loggers/io.camunda.tasklist' -i -X POST \
 -H 'Content-Type: application/json' \
 -d '{"configuredLevel":"debug"}'
 ```
@@ -378,4 +370,19 @@ To disable CSRF protection, set the configuration property `camunda.tasklist.csr
 camunda:
   tasklist:
     csrfPreventionEnabled: false
+```
+
+## Allow non-self assignment
+
+:::danger
+This disables an intentional security mechanism and should only be used in development environments with no Identity installed.
+:::
+
+To allow users to assign other users to tasks, set the configuration property `camunda.tasklist.feature-flag.allow-non-self-assignment` to `true`.
+
+```yaml
+camunda:
+  tasklist:
+    feature-flag:
+      allow-non-self-assignment: true
 ```

@@ -139,14 +139,13 @@ The following conventions apply to all attributes:
 - Response structure changes as outlined in [general changes][].
 - Renamed attributes
   - `id` - Use `variableKey` as this refers to the unique system identifier of the variable.
-  - `value` - Use `fullValue` as this represents the full variable value in case the `value` is only a preview due to size constraints. If the `value` is not a preview, the `fullValue` is empty.
-  - `previewValue` - Use `value` as this always represents the variable value. This can be a preview value due to size constraints. In that case, the `fullValue` contains the full variable value.
-  - `isValueTruncated` - Use `isTruncated` as a replacement
+  - `previewValue` - Use `value` as this always represents the variable value. This can be a truncated value due to size constraints.
+  - `isValueTruncated` - Use `isTruncated` as a replacement. If the value of `isTruncated` is `true` and you need the full value, please see the [get a variable](#get-a-variable) endpoint.
 - Removed attributes
   - `draft` - Draft variables are not supported in V2 anymore, see also the [save draft variables](#save-task-draft-variables) endpoint for further details.
 - Added attributes
   - `scopeKey` - Variables belong to a specific scope, for example, the process instance or the element instance of a user task. This value represents the scope the variables is related to.
-  - `processInstanceKey` - A variable belongs to process instance and this value represents the unique system identifier of that instance.
+  - `processInstanceKey` - A variable belongs to a process instance and this value represents the unique system identifier of that instance.
   - `tenantId` - Variables can belong to a dedicated tenant and this value represents the one it belongs to. See [multi-tenancy][] for further details.
 
 </TabItem>
@@ -321,6 +320,362 @@ The following conventions apply to all attributes:
 <TabItem value='output-adjustments'>
 
 - Except for the response structure changes, all adjustments from [search tasks](#search-tasks) apply.
+
+</TabItem>
+</Tabs>
+
+### Variables
+
+#### Get a variable
+
+- **V1 endpoint**: `GET http://localhost:8080/v1/variables/{variableId}`
+- **V2 endpoint**: `GET http://localhost:8080/v2/variables/{variableKey}`
+
+<Tabs groupId="get-a-variable" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments'},
+{label: 'Output adjustments', value: 'output-adjustments'},
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+- `variableId` - Use `variableKey` as this refers to the unique system identifier of the variable.
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+- Renamed attributes
+  - `id` - Use `variableKey` as this refers to the unique system identifier of the variable.
+- Removed attributes
+  - `draft` - Draft variables are not supported in V2 anymore, see also the [save draft variables](#save-task-draft-variables) endpoint for further details.
+- Added attributes
+  - `scopeKey` - Variables belong to a specific scope, for example, the process instance or the element instance of a user task. This value represents the scope the variables is related to.
+  - `processInstanceKey` - A variable belongs to a process instance and this value represents the unique system identifier of that instance.
+
+</TabItem>
+</Tabs>
+
+## Operate API
+
+### Decision definition
+
+#### Search decision definitions
+
+- **V1 endpoint**: `POST http://localhost:8080/v1/decision-definitions/search`
+- **V2 endpoint**: `POST http://localhost:8080/v2/decision-definitions/search`
+
+<Tabs groupId="search-decision-definitions" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments'},
+{label: 'Output adjustments', value: 'output-adjustments'},
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+- Request structure changes as outlined in [general changes][].
+  - `searchAfter` has been moved under `page`.
+  - `size` is now the `limit` in the `page` object.
+- Renamed attributes in the `filter` object
+  - `id` - Use `decisionDefinitionKey` instead.
+  - `key` of type `int64` - Use `decisionDefinitionKey` of type `string`.
+  - `decisionId` - Use `decisionDefinitionId` instead.
+  - `decisionRequirementsKey` of type `int64` - This is now of type `string`.
+- Removed attributes from the `filter` object
+  - `decisionRequirementsName` - Can no longer be used for filtering.
+  - `decisionRequirementsVersion` - Can no longer be used for filtering.
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+- Response structure changes as outlined in [general changes][].
+  - `total` is moved under the `page` object as `totalItems`.
+  - `sortValues` - Use `lastSortValues` in the `page` object instead.
+- Renamed attributes in the objects of the `items` array
+  - `id` - Use `decisionDefinitionKey` instead.
+  - `key` of type `int64` - Use `decisionDefinitionKey` of type `string`.
+  - `decisionId` - Use `decisionDefinitionId` instead.
+  - `decisionRequirementsKey` of type `int64` - This is now of type `string`.
+- Removed attributes in the objects of the `items` array
+  - `decisionRequirementsName` - Can be fetched using the **get decision requirements** endpoint with `decisionRequirementsKey`.
+  - `decisionRequirementsVersion` - Can be fetched using the **get decision requirements** endpoint with `decisionRequirementsKey`.
+
+</TabItem>
+</Tabs>
+
+#### Get decision definition
+
+- **V1 endpoint**: `GET http://localhost:8080/v1/decision-definitions/{key}`
+- **V2 endpoint**: `GET http://localhost:8080/v2/decision-definitions/{decisionDefinitionKey}`
+
+<Tabs groupId="get-decision-definition" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments'},
+{label: 'Output adjustments', value: 'output-adjustments'},
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+- No input adjustments.
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+- Except for the response structure changes, all adjustments from [search decision definitions](#search-decision-definitions) apply.
+
+</TabItem>
+</Tabs>
+
+#### Search decision instances
+
+- **V1 endpoint**: `POST http://localhost:8080/v1/decision-instances/search`
+- **V2 endpoint**: `POST http://localhost:8080/v2/decision-instances/search`
+
+<Tabs groupId="search-decision-instances" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments'},
+{label: 'Output adjustments', value: 'output-adjustments'},
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+- Request structure changes as outlined in [general changes][].
+  - `searchAfter` has been moved under `page`.
+  - `size` is now the `limit` in the `page` object.
+- Renamed attributes in the `filter` object
+  - `id` - Use `decisionInstanceId` instead.
+  - `key` of type `int64` - Use `decisionInstanceKey` of type `string`.
+  - `processDefinitionKey` of type `int64` - This is now of type `string`.
+  - `processInstanceKey` of type `int64` - This is now of type `string`.
+  - `decisionId` - Use `decisionDefinitionId` instead.
+  - `decisionName` - Use `decisionDefinitionName` instead.
+  - `decisionVersion` - Use `decisionDefinitionVersion` instead.
+  - `decisionType` - Use `decisionDefinitionType` instead.
+- Removed attributes in the `filter` object
+  - `result` - Can no longer be used for filtering.
+  - `evaluatedInputs` - Can no longer be used for filtering.
+  - `evaluatedOutputs` - Can no longer be used for filtering.
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+- Response structure changes as outlined in [general changes][].
+  - `total` is moved under the `page` object as `totalItems`.
+  - `sortValues` - Use `lastSortValues` in the `page` object instead.
+- Renamed attributes in the objects of the `items` array
+  - `id` - Use `decisionInstanceId` instead.
+  - `key` of type `int64` - Use `decisionInstanceKey` of type `string`.
+  - `processDefinitionKey` of type `int64` - This is now of type `string`.
+  - `processInstanceKey` of type `int64` - This is now of type `string`.
+  - `decisionId` - Use `decisionDefinitionId` instead.
+  - `decisionName` - Use `decisionDefinitionName` instead.
+  - `decisionVersion` - Use `decisionDefinitionVersion` instead.
+  - `decisionType` - Use `decisionDefinitionType` instead.
+- Removed attributes in the objects of the `items` array
+  - `evaluatedInputs` - The endpoint does not serve this information anymore.
+  - `evaluatedOutputs` - The endpoint does not serve this information anymore.
+
+</TabItem>
+</Tabs>
+
+#### Get decision instance by id
+
+- **V1 endpoint**: `GET http://localhost:8080/v1/decision-instances/{id}`
+- **V2 endpoint**: `GET http://localhost:8080/v2/decision-instances/{decisionInstanceId}`
+
+<Tabs groupId="get-decision-instance-by-id" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments'},
+{label: 'Output adjustments', value: 'output-adjustments'},
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+- No input adjustments.
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+- The adjustments from [search decision instances](#search-decision-instances) apply, with the following exceptions:
+  - Response structure changes.
+  - `evaluatedInputs` - Present in the response payload.
+  - `evaluatedOutputs` - Present in the response payload and moved under `matchedRules`.
+- Renamed attributes in the `evaluatedInputs` object
+  - `id` - Use `inputId` instead.
+  - `name` - Use `inputName` instead.
+  - `value` - Use `inputValue` instead.
+- Renamed attributes in the `evaluatedOutputs` object
+  - `id` - Use `outputId` instead.
+  - `name` - Use `outputName` instead.
+  - `value` - Use `outputValue` instead.
+  - `ruleId` - Moved under the objects of the `matchedRules` array.
+  - `ruleIndex` - Moved under the objects of the `matchedRules` array.
+
+</TabItem>
+</Tabs>
+
+#### Search decision requirements
+
+- **V1 endpoint**: `POST http://localhost:8080/v1/drd/search`
+- **V2 endpoint**: `POST http://localhost:8080/v2/decision-requirements/search`
+
+<Tabs groupId="search-decision-requirements" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments'},
+{label: 'Output adjustments', value: 'output-adjustments'},
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+- Request structure changes as outlined in [general changes][].
+  - `searchAfter` has been moved under `page`.
+  - `size` is now the `limit` in the `page` object.
+- Renamed attributes in the `filter` object
+  - `id` - Use `decisionRequirementsKey` instead.
+  - `key` of type `int64` - Use `decisionRequirementsKey` of type `string`.
+  - `name` - Use `decisionRequirementsName` instead.
+- Removed attributes in the `filter` object
+  - `resourceName` - Can no longer be used for filtering.
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+- Response structure changes as outlined in [general changes][].
+  - `total` is moved under the `page` object as `totalItems`.
+  - `sortValues` - Use `lastSortValues` in the `page` object instead.
+- Renamed attributes in the objects of the `items` array
+  - `id` - Use `decisionRequirementsKey` instead.
+  - `key` of type `int64` - Use `decisionRequirementsKey` of type `string`.
+  - `name` - Use `decisionRequirementsName` instead.
+
+</TabItem>
+</Tabs>
+
+#### Get decision requirements by key
+
+- **V1 endpoint**: `GET http://localhost:8080/v1/drd/{key}`
+- **V2 endpoint**: `GET http://localhost:8080/v2/decision-requirements/{decisionRequirementsKey}`
+
+<Tabs groupId="get-decision-requirements-by-key" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments'},
+{label: 'Output adjustments', value: 'output-adjustments'},
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+- No input adjustments.
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+- Except for the response structure changes, all adjustments from [search decision requirements](#search-decision-requirements) apply.
+
+</TabItem>
+</Tabs>
+
+#### Get decision requirements as XML by key
+
+- **V1 endpoint**: `GET http://localhost:8080/v1/drd/{key}/xml`
+- **V2 endpoint**: `GET http://localhost:8080/v2/decision-requirements/{decisionRequirementsKey}/xml`
+
+<Tabs groupId="get-decision-requirements-by-key" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments'},
+{label: 'Output adjustments', value: 'output-adjustments'},
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+- No input adjustments.
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+- No output adjustments.
+
+</TabItem>
+</Tabs>
+
+### Variable
+
+#### Search variables for process instances
+
+- **V1 endpoint**: `POST http://localhost:8080/v1/variables/search`
+- **V2 endpoint**: `POST http://localhost:8080/v2/variables/search`
+
+<Tabs groupId="search-variables-for-process-instances" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments'},
+{label: 'Output adjustments', value: 'output-adjustments'},
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+- Response structure changes as outlined in [general changes][].
+  - `searchAfter` has been moved under `page`.
+  - `size` is now the `limit` in the `page` object.
+- Renamed attributes in the `filter` object
+  - `key` of type `int64` - Use `variableKey` of type `string`.
+  - `processInstanceKey` of type `int64` - This is now of type `string`.
+  - `scopeKey` of type `int64` - This is now of type `string`.
+  - `truncated` - Use `isTruncated` instead.
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+- Response structure changes as outlined in [general changes][].
+  - `total` is moved under the `page` object as `totalItems`.
+  - `sortValues` - Use `lastSortValues` in the `page` object instead.
+- Renamed attributes in the objects of the `items` array
+  - `key` of type `int64` - Use `variableKey` of type `string`.
+  - `processInstanceKey` of type `int64` - This is now of type `string`.
+  - `scopeKey` of type `int64` - This is now of type `string`.
+  - `truncated` - Use `isTruncated` instead.
+
+</TabItem>
+</Tabs>
+
+#### Get variable by key
+
+- **V1 endpoint**: `GET http://localhost:8080/v1/variables/{key}`
+- **V2 endpoint**: `GET http://localhost:8080/v2/variables/{variableKey}`
+
+<Tabs groupId="get-variable-by-key" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments'},
+{label: 'Output adjustments', value: 'output-adjustments'},
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+- No input adjustments.
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+- All adjustments from [search variables for process instances](#search-variables-for-process-instances) apply, with the following exceptions:
+  - Response structure changes.
+  - `truncated` is removed because this endpoint always returns the full variable value.
 
 </TabItem>
 </Tabs>

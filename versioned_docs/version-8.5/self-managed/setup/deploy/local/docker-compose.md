@@ -10,7 +10,7 @@ import {DockerCompose} from "@site/src/components/CamundaDistributions";
 
 A Docker Compose configuration to run Camunda Self-Managed components (Zeebe, Operate, Tasklist, Optimize, Identity, and Connectors).
 
-:::danger
+:::note
 While the [Docker images](/self-managed/setup/deploy/other/docker.md) themselves are supported for production usage, the Docker Compose files are designed to be used by developers to run an environment locally, and are not designed to be used in production. We recommend [Kubernetes](/self-managed/setup/install.md) for production use cases.
 :::
 
@@ -31,15 +31,18 @@ To start a complete instance of Camunda 8 Self-Managed environment locally:
 docker compose up -d
 ```
 
+:::note
+For Camunda versions earlier than 8.6, the `docker compose up -d` command is only available to enterprise customers with access to Camunda's private registry. From version 8.6 onwards, `docker compose up -d` is available for all users, as Web Modeler images are publicly available.
+:::
+
 3. Wait for the environment to initialize. This may take several minutes. Monitor the logs, especially the Keycloak container log, to ensure the components have started.
 
 ### Configuration options
 
-Running `docker compose up -d` starts all Camunda components, including Identity. The [Camunda Self-Managed repository](https://github.com/camunda/camunda-self-managed) also contains additional configuration files for lightweight development.
+Running `docker compose up -d` starts all Camunda components, including Identity. The [Camunda Distributions repository](https://github.com/camunda/camunda-distributions) also contains additional configuration files for lightweight development.
 
 - **docker-compose.yaml:** Contains the following Camunda 8 Components: Zeebe, Operate, Tasklist, Connectors, Optimize, Identity, Elasticsearch, Keycloak, and PostgreSQL.
 - **docker-compose-core.yaml:** Contains Camunda 8 Orchestration cluster components: Zeebe, Tasklist, Operate, and Connectors.
-- **docker-compose-web-modeler.yaml:** Contains the Camunda 8 Web Modeler standalone installation. For more information, see the [Web Modeler instructions](#web-modeler).
 
 To start Camunda with an alternate configuration, specify a file using the following command:
 
@@ -88,26 +91,8 @@ docker compose down
 ### Web Modeler
 
 :::info
-Non-production installations of Web Modeler are restricted to five collaborators per project. Refer to the [licensing documentation](/docs/reference/licenses.md) for more information.
+Non-production installations of Web Modeler are restricted to five collaborators per project. Refer to the [licensing documentation](/reference/licenses.md) for more information.
 :::
-
-#### Standalone setup
-
-Web Modeler can be run independently using Identity, Keycloak and Postgres as dependencies.
-
-The following command uses the provided `docker-compose-web-modeler.yaml` configuration file to only start Web Modeler and its dependencies:
-
-```shell
-docker compose -f docker-compose-web-modeler.yaml up -d
-```
-
-Once running, Web Modeler can be accessed at [http://localhost:8070](http://localhost:8070).
-
-To tear down the environment (including all data and volumes), run the following command:
-
-```shell
-docker compose -f docker-compose-web-modeler.yaml down -v
-```
 
 #### Deploy or execute a process
 
@@ -212,30 +197,3 @@ per line. The secrets will then be available in the Connector runtime in the for
 To add custom Connectors, create a new Docker Image bundling them as described in the [Connectors repository](https://github.com/camunda/connectors).
 
 Alternatively, you can mount new Connector JARs as volumes into the `/opt/app` folder by adding this to the Docker Compose file. Keep in mind that the Connector JARs must include all necessary dependencies inside the JAR.
-
-## Kibana
-
-A [Kibana](https://www.elastic.co/kibana/) profile is available in the provided configuration files to support inspection and exploration of the Camunda 8 data in Elasticsearch.
-
-Enable the profile by adding `--profile kibana` to your Docker Compose command:
-
-```shell
-docker compose --profile kibana up -d
-```
-
-This profile will start Kibana in addition to the default components. Kibana can be used to explore the records exported by Zeebe into Elasticsearch, or to discover the data in Elasticsearch used by the other components (for example, Operate).
-
-Navigate to the Kibana web application and explore the data without login credentials:
-
-- Kibana: [http://localhost:5601](http://localhost:5601)
-
-:::note
-
-You need to configure the index patterns in Kibana before you can explore the data.
-
-- Go to `Management > Stack Management > Kibana > Index Patterns`.
-- Create a new index pattern. For example, `zeebe-record-*` matches the exported records.
-  - If you don't see any indexes then make sure to export some data first (e.g. deploy a process). The indexes of the records are created when the first record of this type is exported.
-- Go to `Analytics > Discover` and select the index pattern.
-
-:::

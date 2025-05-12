@@ -5,6 +5,7 @@ import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import styles from "./styles.module.css";
+import AlgoliaSearchBox from "@theme/SearchBar";
 
 const features = [
   {
@@ -15,11 +16,11 @@ const features = [
       "New to Camunda 8? Create an account and start modeling your first process.",
   },
   {
-    title: "Components",
+    title: "Using Camunda",
     imageUrl: "img/home-components.png",
     url: "/docs/components/",
     description:
-      "Explore components such as Console, Modeler, Zeebe, Operate, and Optimize.",
+      "Learn how to use Camunda 8 components, features, and integrations.",
   },
   {
     title: "Self-Managed",
@@ -92,6 +93,9 @@ function Home() {
         <div className="container">
           <h1 className="hero__title">{siteConfig.title}</h1>
           <p className="hero__subtitle">{siteConfig.tagline}</p>
+          <div className="homeSearch">
+            <AlgoliaSearchBox />
+          </div>
           <div className={clsx("row", styles.buttonsWrapper)}>
             <div className={clsx("", styles.buttons)}>
               <Link
@@ -157,7 +161,9 @@ function Home() {
                   "button button--outline button--secondary button--lg button--hero get-started-use-case get-started-use-case-2",
                   styles.getStarted
                 )}
-                to={useBaseUrl("docs/reference/release-notes/")}
+                to={useBaseUrl(
+                  "docs/reference/announcements-release-notes/overview/"
+                )}
               >
                 Release notes
               </Link>

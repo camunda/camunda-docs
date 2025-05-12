@@ -7,7 +7,9 @@ description: "Step through authentication options that can be used to access Cam
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-All Camunda 8 REST API requests require authentication. To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) depending on your environment and include it in each request.
+All Camunda 8 REST API requests require authentication.
+
+In most environments, authenticate requests by generating a [JSON Web Token (JWT)](https://jwt.io/introduction/) and include the token in each request. In a C8Run environment, use [cookie authentication](#authentication-via-cookie-c8run-only).
 
 ## Generate a token
 
@@ -62,7 +64,7 @@ All Camunda 8 REST API requests require authentication. To authenticate, generat
 1. [Add an M2M application in Identity](/self-managed/identity/user-guide/additional-features/incorporate-applications.md).
 2. [Add permissions to this application](/self-managed/identity/user-guide/additional-features/incorporate-applications.md) for **Camunda 8 REST API**.
 3. Capture the `Client ID` and `Client Secret` from the application in Identity.
-4. [Generate a token](/self-managed/identity/user-guide/authorizations/generating-m2m-tokens.md) to access the REST API. Provide the `client_id` and `client_secret` from the values you previously captured in Identity.
+4. [Generate a token](/self-managed/identity/user-guide/authorizations/generating-m2m-tokens.md) to access the Camunda 8 REST API. Provide the `client_id` and `client_secret` from the values you previously captured in Identity.
    ```shell
    curl --location --request POST 'http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token' \
    --header 'Content-Type: application/x-www-form-urlencoded' \
@@ -138,3 +140,26 @@ A successful response includes [information about the cluster](/apis-tools/camun
 ## Token expiration
 
 Access tokens expire according to the `expires_in` property of a successful authentication response. After this duration, in seconds, you must request a new access token.
+
+## Authentication via cookie (C8Run only)
+
+Cookie authentication is required to access the Camunda 8 REST API in a C8Run environment. The cookie can be obtained by using the API endpoint `/api/login`. Take the following steps:
+
+1. Log in as user 'demo' and store the cookie in the file `cookie.txt`:
+
+```shell
+curl --request POST 'http://localhost:8080/api/login?username=demo&password=demo' \
+  --cookie-jar cookie.txt
+```
+
+2. Send the cookie (as a header) in each API request. In this case, request all process instances:
+
+```shell
+curl --request GET 'http://localhost:8080/v2/topology'  \
+  --cookie cookie.txt \
+  --header 'Content-Type: application/json'
+```
+
+### Authentication via cookie with the Java client
+
+To access Camunda APIs in a Camunda 8 Run environment with the Java client, you'll need to [manually retrieve and send a cookie](/self-managed/setup/deploy/local/c8run.md#use-camunda-apis-with-the-java-client).

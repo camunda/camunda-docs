@@ -1,14 +1,14 @@
 ---
 id: polling
-title: HTTP Polling Connector
+title: HTTP Polling connector
 sidebar_label: HTTP Polling
-description: The HTTP Polling Connector polls an endpoint at regular intervals, enabling periodic data fetching as an intermediate step in your BPMN processes.
+description: The HTTP Polling connector polls an endpoint at regular intervals, enabling periodic data fetching as an intermediate step in your BPMN processes.
 ---
 
-The **HTTP Polling Connector** polls an endpoint at regular intervals, enabling periodic data fetching as an intermediate step in your BPMN processes. This Connector is built on top of the [REST Connector](../protocol/rest.md), ensuring consistent functionality and reliability.
+The **HTTP Polling connector** polls an endpoint at regular intervals, enabling periodic data fetching as an intermediate step in your BPMN processes. This connector is built on top of the [REST connector](../protocol/rest.md), ensuring consistent functionality and reliability.
 
 :::caution
-If you use the HTTP Polling Connector, ensure you do not have any instance variable named in the list below, as these are reserved words for this Connector:
+If you use the HTTP Polling connector, ensure you do not have any instance variable named in the list below, as these are reserved words for this connector:
 
 - body, url, method, headers, authentication, queryParameters, connectionTimeoutInSeconds, httpRequestInterval
 
@@ -22,36 +22,36 @@ Ensure that you have:
 - Necessary credentials if the endpoint demands authentication.
 
 :::note Execution Exception Handling
-If the HTTP Polling Connector encounters an execution exception while polling, it will ignore the exception and attempt to execute the request again after the next interval delay. Ensure to monitor your logs for any recurring issues.
+If the HTTP Polling connector encounters an execution exception while polling, it will ignore the exception and attempt to execute the request again after the next interval delay. Ensure to monitor your logs for any recurring issues.
 
 :::
 
-## Setting up the HTTP Polling Connector
+## Setting up the HTTP Polling connector
 
 1. Add an **Intermediate Event** to your BPMN diagram.
-2. Change its template to the **HTTP Polling Connector**.
+2. Change its template to the **HTTP Polling connector**.
 3. Populate all mandatory fields, like the endpoint URL, polling interval, and required headers.
 4. Complete your BPMN diagram.
-5. Deploy the diagram to activate the **HTTP Polling Connector**.
+5. Deploy the diagram to activate the **HTTP Polling connector**.
 
-## Configuring the HTTP Polling Connector
+## Configuring the HTTP Polling connector
 
 ### Authentication
 
-Navigate to the **Authentication** section and select your desired **Authentication type** (e.g., Basic, OAuth). Refer to the [Authentication section of the REST Connector documentation](docs/components/connectors/protocol/rest.md#authentication) for a comprehensive guide.
+Navigate to the **Authentication** section and select your desired **Authentication type** (e.g., Basic, OAuth). Refer to the [Authentication section of the REST connector documentation](/components/connectors/protocol/rest.md#authentication) for a comprehensive guide.
 
 ### HTTP polling configuration
 
 - **Method**: Choose the HTTP method for your request, e.g., GET, POST, PUT.
 - **URL**: Enter the URL of the targeted HTTP endpoint.
-- **Headers** (Optional): Input required headers as per the external service. Learn more about headers in the [REST Connector headers](docs/components/connectors/protocol/rest.md#http-headers) section.
-- **Query Parameters** (Optional): Add necessary query parameters for the endpoint. More details can be found in the [REST Connector query parameters](docs/components/connectors/protocol/rest.md#query-parameters) section.
+- **Headers** (Optional): Input required headers as per the external service. Learn more about headers in the [REST connector headers](/components/connectors/protocol/rest.md#http-headers) section.
+- **Query Parameters** (Optional): Add necessary query parameters for the endpoint. More details can be found in the [REST connector query parameters](/components/connectors/protocol/rest.md#query-parameters) section.
 - **Interval** (Optional): Set the frequency for polling the endpoint in ISO 8601 durations format. The default interval is 50 seconds. Review [how to configure a time duration](../../modeler/bpmn/timer-events/timer-events.md#time-duration) for details.
-- **Connection Timeout**: Define how long (in seconds) the Connector waits before timing out. Further information on this can be found [here](docs/components/connectors/protocol/rest.md#connection-timeout).
+- **Connection Timeout**: Define how long (in seconds) the connector waits before timing out. Further information on this can be found [here](/components/connectors/protocol/rest.md#connection-timeout).
 
 ### Payload configuration (optional)
 
-In the **Payload** section, you can include a **request body**. Learn more about this [here](docs/components/connectors/protocol/rest.md#request-body).
+In the **Payload** section, you can include a **request body**. Learn more about this [here](/components/connectors/protocol/rest.md#request-body).
 
 ### Condition to proceed
 
@@ -77,9 +77,9 @@ In the **Payload** section, you can include a **request body**. Learn more about
 
 For more information about correlation keys, review the [messages guide](../../../concepts/messages).
 
-## Handling HTTP Connector responses
+## Handling HTTP connector responses
 
-The response from any HTTP Connector contains the status, headers, and body. Learn more about the response structure [here](docs/components/connectors/protocol/rest.md#response).
+The response from any HTTP connector contains the status, headers, and body. Learn more about the response structure [here](/components/connectors/protocol/rest.md#response).
 
 To structure and utilize the response:
 
@@ -95,8 +95,8 @@ Monitor a GitHub issue to see when it's closed and if it has a specific label ('
 #### Steps
 
 1. Drag an intermediate event onto your BPMN diagram.
-2. Choose the HTTP Polling Connector template.
-3. Configure the Connector with the relevant details:
+2. Choose the HTTP Polling connector template.
+3. Configure the connector with the relevant details:
    - **URL**: `https://api.github.com/repos/[YourRepoOwner]/[YourRepoName]/issues/[IssueNumber]`
    - **Authorization Type**: Bearer token
    - **Bearer token**: `{{secrets.BEARER_TOKEN}}`
@@ -127,13 +127,13 @@ In this scenario, once the issue #212 titled **Important Issue** is closed, the 
 
 ### Scenario 2: Monitoring product stock levels
 
-Suppose you're overseeing an e-commerce platform. It's vital to ensure certain popular products remain stocked to guarantee user satisfaction. Avoiding stock-outs is essential to prevent lost sales and keep customers happy. With Camunda's HTTP Polling Connector, you can maintain a real-time stock level check.
+Suppose you're overseeing an e-commerce platform. It's vital to ensure certain popular products remain stocked to guarantee user satisfaction. Avoiding stock-outs is essential to prevent lost sales and keep customers happy. With Camunda's HTTP Polling connector, you can maintain a real-time stock level check.
 
 #### Steps
 
 1. Drag an intermediate event onto your BPMN diagram.
-2. Choose the HTTP Polling Connector template.
-3. Configure the Connector as follows:
+2. Choose the HTTP Polling connector template.
+3. Configure the connector as follows:
    - **URL**: `https://inventory.yourstore.com/api/v2/products/12345/stock`
    - **Authorization Type**: Basic Authentication
    - **Username**: `[YourInventoryAPIUsername]`
@@ -162,7 +162,7 @@ Whenever the stock level of this particular product goes below 10 units, the BPM
 
 ## Next steps
 
-- Dive deeper into the [REST Connector](docs/components/connectors/protocol/rest.md) to understand its capabilities and configurations.
-- Explore [other Connectors available](../out-of-the-box-connectors/available-connectors-overview.md) in Camunda to integrate with various systems and services.
-- Get a comprehensive understanding of how to use Connectors in your BPMN processes [here](../use-connectors/index.md).
-- Learn about the specifics of inbound Connectors and how they can be used [here](../use-connectors/inbound.md).
+- Dive deeper into the [REST connector](/components/connectors/protocol/rest.md) to understand its capabilities and configurations.
+- Explore [other connectors available](../out-of-the-box-connectors/available-connectors-overview.md) in Camunda to integrate with various systems and services.
+- Get a comprehensive understanding of how to use connectors in your BPMN processes [here](../use-connectors/index.md).
+- Learn about the specifics of inbound connectors and how they can be used [here](../use-connectors/inbound.md).

@@ -61,7 +61,7 @@ All Tasklist API requests require authentication. To authenticate, generate a [J
 1. [Add an M2M application in Identity](/self-managed/identity/user-guide/additional-features/incorporate-applications.md).
 2. [Add permissions to this application](/self-managed/identity/user-guide/additional-features/incorporate-applications.md) for **Tasklist API**.
 3. Capture the `Client ID` and `Client Secret` from the application in Identity.
-4. [Generate a token](/self-managed/identity/user-guide/authorizations/generating-m2m-tokens.md) to access the REST API. Provide the `client_id` and `client_secret` from the values you previously captured in Identity.
+4. [Generate a token](/self-managed/identity/user-guide/authorizations/generating-m2m-tokens.md) to access the Tasklist REST API. Provide the `client_id` and `client_secret` from the values you previously captured in Identity.
    ```shell
    curl --location --request POST 'http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token' \
    --header 'Content-Type: application/x-www-form-urlencoded' \
@@ -139,3 +139,28 @@ A successful response includes [matching tasks](./specifications/search-tasks.ap
 ## Token expiration
 
 Access tokens expire according to the `expires_in` property of a successful authentication response. After this duration, in seconds, you must request a new access token.
+
+## Authentication via cookie (Self-Managed only)
+
+:::note
+When authenticating via cookie, note that Cross-Site Request Forgery (CSRF) protection must be disabled to allow this method of authentication. In a Camunda Self-Managed cluster, set the configuration property `camunda.tasklist.csrfPreventionEnabled` to `false`.
+:::
+
+Another way to access the Tasklist API in a Self-Managed cluster is to send cookie headers in each request. This works for scenarios where authentication is managed by Tasklist and not by Identity. The cookie can be obtained by using the API endpoint `/api/login`:
+
+**Example:**
+
+1. Log in as user 'demo' and store the cookie in the file `cookie.txt`.
+
+```shell
+curl --request POST 'http://localhost:8080/api/login?username=demo&password=demo' \
+   --cookie-jar cookie.txt
+```
+
+2. Send the cookie as a header in each API request. In this case, request all process definitions.
+
+```shell
+curl --request POST 'http://localhost:8080/v1/process-definitions/search' \
+   --cookie cookie.txt \
+   --header 'Content-Type: application/json' -d '{}'
+```

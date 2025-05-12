@@ -32,6 +32,7 @@ import EmbeddedSubprocessSvg from './assets/bpmn-symbols/embedded-subprocess.svg
 import CallActivitySvg from './assets/bpmn-symbols/call-activity.svg';
 import EventSubprocessSvg from './assets/bpmn-symbols/event-subprocess.svg'
 import TransactionalSubprocessSvg from './assets/bpmn-symbols/transactional-subprocess.svg'
+import AdHocSubprocessSvg from './assets/bpmn-symbols/ad-hoc-subprocess.svg'
 
 <div className="bpmn-symbol-container">
     <a href="../embedded-subprocesses/">
@@ -45,6 +46,9 @@ import TransactionalSubprocessSvg from './assets/bpmn-symbols/transactional-subp
     </a>
     <a href="#">
         <TransactionalSubprocessSvg />
+    </a>
+    <a href="../ad-hoc-subprocesses/">
+        <AdHocSubprocessSvg className="implemented" />
     </a>
 </div>
 
@@ -137,7 +141,7 @@ import AdHocSvg from './assets/bpmn-symbols/ad-hoc.svg'
     <a href="../compensation-handler/">
         <CompensationSvg className="implemented" />
     </a>
-    <a href="../ad-hoc/">
+    <a href="../ad-hoc-subprocesses/">
         <AdHocSvg className="implemented" />
     </a>
 </div>

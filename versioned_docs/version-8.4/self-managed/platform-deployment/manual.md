@@ -29,7 +29,7 @@ Find an overview in the [Connectors Bundle project](https://github.com/camunda/c
 Operate, Tasklist, and Optimize use Elasticsearch as its underlying data store. Therefore you have to download and run Elasticsearch.
 
 :::note
-Please ensure to check compatability of [supported environments](/docs/reference/supported-environments.md) for your self-managed installation.
+Please ensure to check compatability of [supported environments](/reference/supported-environments.md) for your self-managed installation.
 :::
 
 To run Elasticsearch, execute the following commands:
@@ -229,7 +229,7 @@ A local setup of Identity in Camunda 8 is not yet supported out-of-the-box, use 
 
 ## Run Optimize
 
-The installation of Optimize is described in [Optimize Setup]($optimize$/self-managed/optimize-deployment/install-and-start). A local setup in Camunda 8 is not yet supported out-of-the-box, use [Docker](../docker/#optimize) instead.
+The installation of Optimize is described in [Optimize Setup](/self-managed/optimize-deployment/install-and-start.md). A local setup in Camunda 8 is not yet supported out-of-the-box, use [Docker](docker.md#optimize) instead.
 
 ## Run Web Modeler
 
