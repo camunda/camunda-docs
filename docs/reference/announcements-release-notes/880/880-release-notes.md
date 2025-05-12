@@ -83,6 +83,8 @@ To learn more about this connector, see [HubSpot connector](/components/connecto
 
 The new **Settings** window in Desktop Modeler allows you to configure the application and customize your modeling experience. You can select your default execution platform version, along with other options that were previously only available as flags.
 
+To learn more about these settings, see [Desktop Modeler settings](/components/modeler/desktop-modeler/settings/settings.md).
+
 ### Web Modeler cluster basic authentication <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
 
 <!-- https://github.com/camunda/web-modeler/issues/13707 -->
@@ -92,7 +94,7 @@ As well as bearer token and client credentials authentication, you can now confi
 - To use basic authentication, set the `CAMUNDA_MODELER_CLUSTERS_0_AUTHENTICATION` environment variable value to `BASIC`.
 - Web Modeler sends a username and password with every request to one of the cluster components (Zeebe, Operate, Tasklist).
 
-To learn more about this feature, see [available authentication methods](/self-managed/modeler/web-modeler/configuration/configuration.md#available-authentication-methods).
+To learn more about basic authentication, see [available authentication methods](/self-managed/modeler/web-modeler/configuration/configuration.md#available-authentication-methods).
 
 ## 8.8.0-alpha3
 
