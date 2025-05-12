@@ -349,7 +349,7 @@ module.exports = {
         {
           type: "doc",
           docId: "apis-tools/working-with-apis-tools",
-          label: "APIs & Tools",
+          label: "APIs & tools",
           position: "left",
         },
         {
