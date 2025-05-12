@@ -592,6 +592,33 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GroupSearchQueryResult"
+  /tenants/{tenantId}/roles/search:
+    post:
+      tags:
+        - Tenant
+      operationId: searchRolesForTenant
+      summary: Search roles for tenant
+      description: Retrieves a filtered and sorted list of roles for a specified tenant.
+      parameters:
+        - name: tenantId
+          in: path
+          required: true
+          description: The unique identifier of the tenant.
+          schema:
+            type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RoleSearchQueryRequest"
+      responses:
+        "200":
+          description: The search result of roles for the tenant.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RoleSearchQueryResult"
   /tenants/{tenantId}/applications/{applicationId}:
     put:
       tags:
@@ -2549,12 +2576,9 @@ paths:
       tags:
         - Role
       operationId: createRole
-      summary: Create role (Work-in-Progress)
+      summary: Create role
       description: |
         Create a new role.
-
-        This API is in a Work-in-Progress state and will undergo potential breaking changes until
-        its release with an upcoming minor release.
       requestBody:
         content:
           application/json:
@@ -2581,12 +2605,9 @@ paths:
       tags:
         - Role
       operationId: getRole
-      summary: Get role (Work-in-Progress)
+      summary: Get role
       description: |
         Get a role by its ID.
-
-        This API is in a Work-in-Progress state and will undergo potential breaking changes until
-        its release with an upcoming minor release.
       parameters:
         - name: roleId
           in: path
@@ -2617,12 +2638,9 @@ paths:
       tags:
         - Role
       operationId: updateRole
-      summary: Update role (Work-in-Progress)
+      summary: Update role
       description: |
         Update a role with the given ID.
-
-        This API is in a Work-in-Progress state and will undergo potential breaking changes until
-        its release with an upcoming minor release.
       parameters:
         - name: roleId
           in: path
@@ -2659,12 +2677,9 @@ paths:
       tags:
         - Role
       operationId: deleteRole
-      summary: Delete role (Work-in-Progress)
+      summary: Delete role
       description: |
         Deletes the role with the given ID.
-
-        This API is in a Work-in-Progress state and will undergo potential breaking changes until
-        its release with an upcoming minor release.
       parameters:
         - name: roleId
           in: path
@@ -2690,12 +2705,9 @@ paths:
       tags:
         - Role
       operationId: searchUsersForRole
-      summary: Search role users (Work-in-Progress)
+      summary: Search role users
       description: |
         Search users assigned to a role.
-
-        This API is in a Work-in-Progress state and will undergo potential breaking changes until
-        its release with an upcoming minor release.
       parameters:
         - name: roleId
           in: path
@@ -2735,12 +2747,9 @@ paths:
       tags:
         - Role
       operationId: addUserToRole
-      summary: Assign a user to a role (Work-in-Progress)
+      summary: Assign a user to a role
       description: |
         Assigns a user to a role.
-
-        This API is in a Work-in-Progress state and will undergo potential breaking changes until
-        its release with an upcoming minor release.
       parameters:
         - name: roleId
           in: path
@@ -2779,12 +2788,9 @@ paths:
       tags:
         - Role
       operationId: removeUserFromRole
-      summary: Unassign a user from a role (Work-in-Progress)
+      summary: Unassign a user from a role
       description: |
         Unassigns a user from a role.
-
-        This API is in a Work-in-Progress state and will undergo potential breaking changes until
-        its release with an upcoming minor release.
       parameters:
         - name: roleId
           in: path
@@ -2818,12 +2824,9 @@ paths:
       tags:
         - Role
       operationId: addApplicationToRole
-      summary: Assign an application to a role (Work-in-Progress)
+      summary: Assign an application to a role
       description: |
         Assigns an application to a role.
-
-        This API is in a Work-in-Progress state and will undergo potential breaking changes until
-        its release with an upcoming minor release.
       parameters:
         - name: roleId
           in: path
@@ -2862,12 +2865,9 @@ paths:
       tags:
         - Role
       operationId: removeApplicationFromRole
-      summary: Unassign an application from a role (Work-in-Progress)
+      summary: Unassign an application from a role
       description: |
         Unassigns an application from a role.
-
-        This API is in a Work-in-Progress state and will undergo potential breaking changes until
-        its release with an upcoming minor release.
       parameters:
         - name: roleId
           in: path
@@ -2901,12 +2901,9 @@ paths:
       tags:
         - Role
       operationId: searchRoles
-      summary: Search roles (Work-in-Progress)
+      summary: Search roles
       description: |
         Search for roles based on given criteria.
-
-        This API is in a Work-in-Progress state and will undergo potential breaking changes until
-        its release with an upcoming minor release.
       requestBody:
         required: false
         content:
@@ -2937,12 +2934,9 @@ paths:
       tags:
         - Role
       operationId: addGroupToRole
-      summary: Assign a group to a role (Work-in-Progress)
+      summary: Assign a group to a role
       description: |
         Assigns a group to a role.
-
-        This API is in a Work-in-Progress state and will undergo potential breaking changes until
-        its release with an upcoming minor release.
       parameters:
         - name: roleId
           in: path
@@ -2981,12 +2975,9 @@ paths:
       tags:
         - Role
       operationId: removeGroupFromRole
-      summary: Unassign a group from a role (Work-in-Progress)
+      summary: Unassign a group from a role
       description: |
         Unassigns a group from a role.
-
-        This API is in a Work-in-Progress state and will undergo potential breaking changes until
-        its release with an upcoming minor release.
       parameters:
         - name: roleId
           in: path
@@ -3020,11 +3011,9 @@ paths:
       tags:
         - Role
       operationId: addMappingToRole
-      summary: Assign a mapping to a role (Work-in-Progress)
+      summary: Assign a mapping to a role
       description: |
         Assigns a mapping to a role.
-        This API is in a Work-in-Progress state and will undergo potential breaking changes until
-        its release with an upcoming minor release.
       parameters:
         - name: roleId
           in: path
@@ -3063,12 +3052,9 @@ paths:
       tags:
         - Role
       operationId: removeMappingFromRole
-      summary: Unassign a mapping from a role (Work-in-Progress)
+      summary: Unassign a mapping from a role
       description: |
         Unassigns a mapping from a role.
-
-        This API is in a Work-in-Progress state and will undergo potential breaking changes until
-        its release with an upcoming minor release.
       parameters:
         - name: roleId
           in: path
@@ -3097,18 +3083,57 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+  /roles/{roleId}/mapping-rules/search:
+    post:
+      tags:
+        - Role
+      operationId: searchMappingRulesForRole
+      summary: Search role mapping rules
+      description: |
+        Search mapping rules assigned to a role.
+      parameters:
+        - name: roleId
+          in: path
+          required: true
+          description: The role ID.
+          schema:
+            type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MappingSearchQueryRequest"
+      responses:
+        "200":
+          description: The mapping rules assigned to the role.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MappingSearchQueryResult"
+        "400":
+          $ref: "#/components/responses/InvalidData"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          description: The role with the given ID was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
 
   /groups:
     post:
       tags:
         - Group
       operationId: createGroup
-      summary: Create group (Work-in-Progress)
+      summary: Create group
       description: |
         Create a new group.
-
-        This API is in a Work-in-Progress state and will undergo potential breaking changes until
-        its release with an upcoming minor release.
       requestBody:
         content:
           application/json:
@@ -3134,12 +3159,9 @@ paths:
       tags:
         - Group
       operationId: getGroup
-      summary: Get group (Work-in-Progress)
+      summary: Get group
       description: |
         Get a group by its ID.
-
-        This API is in a Work-in-Progress state and will undergo potential breaking changes until
-        its release with an upcoming minor release.
       parameters:
         - name: groupId
           in: path
@@ -3170,12 +3192,9 @@ paths:
       tags:
         - Group
       operationId: updateGroup
-      summary: Update group (Work-in-Progress)
+      summary: Update group
       description: |
         Update a group with the given ID.
-
-        This API is in a Work-in-Progress state and will undergo potential breaking changes until
-        its release with an upcoming minor release.
       parameters:
         - name: groupId
           in: path
@@ -3212,12 +3231,9 @@ paths:
       tags:
         - Group
       operationId: deleteGroup
-      summary: Delete group (Work-in-Progress)
+      summary: Delete group
       description: |
         Deletes the group with the given ID.
-
-        This API is in a Work-in-Progress state and will undergo potential breaking changes until
-        its release with an upcoming minor release.
       parameters:
         - name: groupId
           in: path
@@ -3243,12 +3259,9 @@ paths:
       tags:
         - Group
       operationId: searchUsersForGroup
-      summary: Search group users (Work-in-Progress)
+      summary: Search group users
       description: |
         Search users assigned to a group.
-
-        This API is in a Work-in-Progress state and will undergo potential breaking changes until
-        its release with an upcoming minor release.
       parameters:
         - name: groupId
           in: path
@@ -3288,12 +3301,9 @@ paths:
       tags:
         - Group
       operationId: searchMappingRulesForGroup
-      summary: Search group mapping rules (Work-in-Progress)
+      summary: Search group mapping rules
       description: |
         Search mapping rules to a group.
-
-        This API is in a Work-in-Progress state and will undergo potential breaking changes until
-        its release with an upcoming minor release.
       parameters:
         - name: groupId
           in: path
@@ -3333,12 +3343,9 @@ paths:
       tags:
         - Group
       operationId: searchRolesForGroup
-      summary: Search group roles (Work-in-Progress)
+      summary: Search group roles
       description: |
         Search roles assigned to a group.
-
-        This API is in a Work-in-Progress state and will undergo potential breaking changes until
-        its release with an upcoming minor release.
       parameters:
         - name: groupId
           in: path
@@ -3378,12 +3385,9 @@ paths:
       tags:
         - Group
       operationId: addUserToGroup
-      summary: Assign a user to a group (Work-in-Progress)
+      summary: Assign a user to a group
       description: |
         Assigns a user to a group.
-
-        This API is in a Work-in-Progress state and will undergo potential breaking changes until
-        its release with an upcoming minor release.
       parameters:
         - name: groupId
           in: path
@@ -3422,12 +3426,9 @@ paths:
       tags:
         - Group
       operationId: unassignUserFromGroup
-      summary: Unassign a user from a group (Work-in-Progress)
+      summary: Unassign a user from a group
       description: |
         Unassigns a user from a group.
-
-        This API is in a Work-in-Progress state and will undergo potential breaking changes until
-        its release with an upcoming minor release.
       parameters:
         - name: groupId
           in: path
@@ -3461,12 +3462,9 @@ paths:
       tags:
         - Group
       operationId: addApplicationToGroup
-      summary: Assign an application to a group (Work-in-Progress)
+      summary: Assign an application to a group
       description: |
         Assigns an application to a group.
-
-        This API is in a Work-in-Progress state and will undergo potential breaking changes until
-        its release with an upcoming minor release.
       parameters:
         - name: groupId
           in: path
@@ -3505,12 +3503,9 @@ paths:
       tags:
         - Group
       operationId: unassignApplicationFromGroup
-      summary: Unassign an application from a group (Work-in-Progress)
+      summary: Unassign an application from a group
       description: |
         Unassigns an appliction from a group.
-
-        This API is in a Work-in-Progress state and will undergo potential breaking changes until
-        its release with an upcoming minor release.
       parameters:
         - name: groupId
           in: path
@@ -3544,12 +3539,9 @@ paths:
       tags:
         - Group
       operationId: addMappingToGroup
-      summary: Assign a mapping rule to a group (Work-in-Progress)
+      summary: Assign a mapping rule to a group
       description: |
         Assigns a mapping rule to a group.
-
-        This API is in a Work-in-Progress state and will undergo potential breaking changes until
-        its release with an upcoming minor release.
       parameters:
         - name: groupId
           in: path
@@ -3588,12 +3580,9 @@ paths:
       tags:
         - Group
       operationId: unassignMappingFromGroup
-      summary: Unassign a mapping rule from a group (Work-in-Progress)
+      summary: Unassign a mapping rule from a group
       description: |
         Unassigns a mapping rule from a group.
-
-        This API is in a Work-in-Progress state and will undergo potential breaking changes until
-        its release with an upcoming minor release.
       parameters:
         - name: groupId
           in: path
@@ -3627,12 +3616,9 @@ paths:
       tags:
         - Group
       operationId: searchGroups
-      summary: Search groups (Work-in-Progress)
+      summary: Search groups
       description: |
         Search for groups based on given criteria.
-
-        This API is in a Work-in-Progress state and will undergo potential breaking changes until
-        its release with an upcoming minor release.
       requestBody:
         required: false
         content:
@@ -3746,12 +3732,9 @@ paths:
       tags:
         - Mapping rule
       operationId: deleteMappingRule
-      summary: Delete a mapping rule (Work-in-Progress)
+      summary: Delete a mapping rule
       description: |
         Deletes the mapping rule with the given ID.
-
-        This API is in a Work-in-Progress state and will undergo potential breaking changes until
-        its release with an upcoming minor release.
       parameters:
         - name: mappingId
           in: path
@@ -3776,12 +3759,9 @@ paths:
       tags:
         - Mapping rule
       operationId: getMappingRule
-      summary: Get a mapping rule (Work-in-Progress)
+      summary: Get a mapping rule
       description: |
         Gets the mapping rule with the given ID.
-
-        This API is in a Work-in-Progress state and will undergo potential breaking changes till
-        its release with an upcoming minor release.
       parameters:
         - name: mappingId
           in: path
@@ -3808,12 +3788,9 @@ paths:
       tags:
         - Mapping rule
       operationId: searchMappings
-      summary: Search mappings (Work-in-Progress)
+      summary: Search mappings
       description: |
         Search for mapping rules based on given criteria.
-
-        This API is in a Work-in-Progress state and will undergo potential breaking changes until
-        its release with an upcoming minor release.
       requestBody:
         content:
           application/json:
@@ -7149,6 +7126,7 @@ components:
           enum:
             - roleKey
             - name
+            - roleId
         order:
           $ref: "#/components/schemas/SortOrderEnum"
       required:
@@ -7164,6 +7142,20 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/RoleSearchQuerySortRequest"
+        filter:
+          description: The role search filters.
+          allOf:
+            - $ref: "#/components/schemas/RoleFilterRequest"
+    RoleFilterRequest:
+      description: Role filter request
+      type: object
+      properties:
+        roleId:
+          description: The role ID search filters.
+          type: string
+        name:
+          description: The role name search filters.
+          type: string
     RoleSearchQueryResult:
       description: Role search response.
       type: object
@@ -7194,9 +7186,6 @@ components:
     GroupCreateResult:
       type: object
       properties:
-        groupKey:
-          description: The key of the created group.
-          type: string
         groupId:
           description: The ID of the created group.
           type: string
@@ -7230,9 +7219,6 @@ components:
         description:
           type: string
           description: The description of the group.
-        groupKey:
-          type: string
-          description: The unique system-generated internal group key.
     GroupResult:
       description: Group search response item.
       type: object
@@ -7240,9 +7226,6 @@ components:
         name:
           type: string
           description: The group name.
-        groupKey:
-          type: string
-          description: The group key.
         groupId:
           type: string
           description: The group ID.
@@ -7256,7 +7239,6 @@ components:
           description: The field to sort by.
           type: string
           enum:
-            - groupKey
             - name
             - groupId
         order:
