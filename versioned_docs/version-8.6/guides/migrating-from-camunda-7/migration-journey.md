@@ -91,7 +91,7 @@ You might wonder if there are cases where migration doesn't make sense? Camunda 
 
 ### Define your target Camunda version for migration
 
-Because of the improved core architecture of Camunda 8, features need to be re-added to Camunda 8 step-by-step. That means the current Camunda 8 version might not yet have sufficient feature parity for your scenario to migrate. Prominent examples are [task listeners](https://camunda.productboard.com/entity-detail/features/22641249), which will be introduced with 8.8.
+Because of the improved core architecture of Camunda 8, features need to be re-added to Camunda 8 step-by-step. That means the current Camunda 8 version might not yet have sufficient feature parity for your scenario to migrate. Prominent examples are [task listeners](https://roadmap.camunda.com/c/147-user-task-listeners-for-assigning-and-completing-events), which will be introduced with 8.8.
 
 If your solution requires this feature, it might make sense to wait for the Camunda 8 version that will provide it. You can **[check the public feature roadmap](https://roadmap.camunda.com/) to understand timelines**.
 
