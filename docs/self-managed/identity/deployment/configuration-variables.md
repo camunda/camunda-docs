@@ -29,7 +29,7 @@ As a Spring Boot application, Identity supports any standard
 
 ## Camunda Identity SDK configuration
 
-Below, find the names and values for the Identity SDK to ensure proper authentication and authorization with Identity and the Identity provider for all components.
+Below, find the names and values for the Identity SDK to ensure proper authentication and authorization with Identity and the Identity provider for Web Modeler and Optimize.
 
 | Environment variable                 | Property                                | Description                                                                                                                           | Default value                 |
 | ------------------------------------ | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- |
