@@ -21,4 +21,6 @@ Open the **Settings** window either from the application menu or by using the `C
 
 Your settings are saved in a `settings.json` file in the [user data directory](../search-paths/search-paths.md#user-data-directory).
 
+:::note
 Only the settings you have changed are stored in this file.
+:::
