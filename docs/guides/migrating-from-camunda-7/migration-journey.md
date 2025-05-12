@@ -93,13 +93,13 @@ You might wonder if there are cases where migration doesn't make sense? Camunda 
 
 ### Define your target Camunda version for migration
 
-Because of the improved core architecture of Camunda 8, features need to be re-added to Camunda 8 step-by-step. That means the current Camunda 8 version might not yet have sufficient feature parity for your scenario to migrate. Prominent examples are task listeners (which will be introduced with 8.8) or the business key (planned for 8.9).
+Because of the improved core architecture of Camunda 8, features need to be re-added to Camunda 8 step-by-step. That means the current Camunda 8 version might not yet have sufficient feature parity for your scenario to migrate. Prominent examples are [task listeners](https://camunda.productboard.com/entity-detail/features/22641249), which will be introduced with 8.8.
 
 <!-- TODO link to specific product board features -->
 
-If your solution requires those features, it might make sense to wait for the Camunda 8 version that will provide these features. You can **[check the public feature roadmap](https://roadmap.camunda.com/) to understand timelines**.
+If your solution requires this feature, it might make sense to wait for the Camunda 8 version that will provide it. You can **[check the public feature roadmap](https://roadmap.camunda.com/) to understand timelines**.
 
-The Camunda version to target might differ per process solution. For example, Process A might not need additional features and can migrate right away, but Process B might use the business key planned for 8.9. That means you wait for rolling out migration for Process B till that version. As Camunda is currently running [an architecture streamlining initiative](https://camunda.com/blog/2024/04/simplified-deployment-options-accelerated-getting-started-experience/) to improve the core architecture, which [will be released with Camunda 8.8](https://camunda.com/blog/2025/01/camunda-87-88-release-update/). Unless you have time pressure or momentum to lose, Camunda generally recommends waiting for this to happen and targeting a Camunda version \>= 8.8 for migration.
+The Camunda version to target might differ per process solution. For example, Process A might not need additional features and can migrate right away, but Process B might use the task listener planned for 8.8. That means you wait for rolling out migration for Process B till that version. As Camunda is currently running [an architecture streamlining initiative](https://camunda.com/blog/2024/04/simplified-deployment-options-accelerated-getting-started-experience/) to improve the core architecture, which [will be released with Camunda 8.8](https://camunda.com/blog/2025/01/camunda-87-88-release-update/). Unless you have time pressure or momentum to lose, Camunda generally recommends waiting for this to happen and targeting a Camunda version \>= 8.8 for migration.
 
 ![A diagram showing the targeted version](../img/target-version.png)
 
@@ -137,7 +137,7 @@ We want to unmask some typical misconceptions with Camunda 8:
 - Camunda 8 does **not** mean there needs to be one huge cluster to rule them all! But you can run big workloads on one cluster.
 - Camunda 8 does **not** need to be set up for horizontal scalability! But you can set this up if you want.
 
-You can run small Camunda 8 installations, one per solution if you like. They can all be Self-Managed, meaning they run in your own datacenter. With the [architecture streamlining and the RDBMS initiative](https://camunda.com/blog/2024/04/simplified-deployment-options-accelerated-getting-started-experience/), Camunda provides a very simple Java installation (single JAR) that removes installation complexity and is sufficient for many use cases (RDBMS is planned for release with Camunda 8.9).
+You can run small Camunda 8 installations, one per solution, if you like. They can all be Self-Managed, meaning they run in your own datacenter. With the [architecture streamlining and the RDBMS initiative](https://camunda.com/blog/2024/04/simplified-deployment-options-accelerated-getting-started-experience/), Camunda provides a very simple Java installation (single JAR) that removes installation complexity and is sufficient for many use cases (RDBMS support for a secondary data store is planned for release with Camunda 8.9).
 :::
 
 There are multiple ways to set up Camunda 8:
