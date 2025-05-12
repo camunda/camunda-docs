@@ -197,7 +197,7 @@ The following conventions apply to all attributes:
   - `processName` - Use `processDefinitionId`, this still refers to the user-provided identifier of the process.
 - Removed attributes
   - `isFirst` - This used to identify if the task was the first in the process.
-  - `variables` - Use the [search user task variables endpoint][] to retrieve variables for a user task.
+  - `variables` - Use the [search user task variables endpoint](#search-task-variables) to retrieve variables for a user task.
   - `implementation` - The V2 API supports only Camunda user tasks.
   - `isFormEmbedded` - The V2 API does not support embedded forms anymore.
   - `formVersion` - Use the [get user task form endpoint][] to retrieve form data bound to this user task. The `formKey` references the form of a specific `formId`, linked to this user task in a specific version.
