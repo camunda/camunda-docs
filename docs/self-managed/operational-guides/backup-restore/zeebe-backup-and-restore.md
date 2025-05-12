@@ -140,7 +140,8 @@ zeebe:
           basePath:
           createContainer:
           sasToken:
-          accountSasToken:
+            type:
+            value:
 ```
 
 Alternatively, you can configure backup store using environment variables:
@@ -158,15 +159,10 @@ Alternatively, you can configure backup store using environment variables:
   This configuration is true by default and should be generally not used
   unless some authentication key is being used that does not have
   container level permissions.
-- `ZEEBE_BROKER_DATA_BACKUP_AZURE_SASTOKEN` - The [SAS token](https://learn.microsoft.com/en-us/azure/storage/common/storage-sas-overview?toc=/azure/storage/blobs/toc.json&bc=/azure/storage/blobs/breadcrumb/toc.json) can be used for user delegation and service SAS tokens for
-  authentication. Note that user delegation and service SAS tokens do not
-  support the creation of containers, therefore `createContainer`
-  configuration will be overridden to false if `sasToken` is configured. The
-  user must make sure that the container already exists, or it will lead to
-  a runtime error.
-- `ZEEBE_BROKER_DATA_BACKUP_AZURE_ACCOUNTSASTOKEN` - Defines the account
-  SAS token to use. Unlike the user delegation and service SAS tokens, the
-  account SAS token does support the creation of containers.
+- `ZEEBE_BROKER_DATA_BACKUP_AZURE_SASTOKEN_TYPE` - This setting defines the
+  [saas token](https://learn.microsoft.com/en-us/rest/api/storageservices/delegate-access-with-shared-access-signature) to use. These can be of user delegation, service or account type. Note that user delegation and service SAS tokens do not support the creation of containers, therefore `createContainer` configuration will be
+  overridden to `false` if `sasToken.type` is configured either as "delegation" or "service". In this case the user must make sure that the container already exists, or it will lead to a runtime error. The SAS token must be of the following types: "delegation", "service" or "account".
+- `ZEEBE_BROKER_DATA_BACKUP_AZURE_SASTOKEN_VALUE` - Specifies the key value of the SAS token.
 
 #### Backup encryption
 
