@@ -22,7 +22,3 @@ Open the **Settings** window either from the application menu or by using the `C
 Your settings are saved in a `settings.json` file in the [user data directory](../search-paths/search-paths.md#user-data-directory).
 
 Only the settings you have changed are stored in this file.
-
-:::note
-You can transfer this file between modeler instances. If you change this file, a restart is required for your changes to be applied.
-:::
