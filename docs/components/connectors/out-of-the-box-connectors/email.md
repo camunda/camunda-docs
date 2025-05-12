@@ -78,7 +78,7 @@ The task returns a list of emails in JSON format. Each email object contains the
 - `size`: The size of the email (in bytes).
 
 :::note
-Prior to version 8.8, messageId was stripped of its < and >. This is no longer the case as of version 8.8.
+Prior to version 8.8, messageId was stripped of its `<` and `>`. This is no longer the case as of version 8.8.
 :::
 
 #### Example Response
@@ -131,7 +131,7 @@ The task returns a JSON object containing detailed information about the email:
 - `receivedDateTime`: The email's reception datetime
 
 :::note
-Prior to version 8.8, messageId was stripped of its < and >. This is no longer the case as of version 8.8.
+Prior to version 8.8, messageId was stripped of its `<` and `>`. This is no longer the case as of version 8.8.
 :::
 
 :::note
@@ -198,7 +198,7 @@ After the deletion task is performed, a JSON object is returned to confirm the a
 - `messageId`: The identifier of the email message that was attempted to be deleted.
 
 :::note
-Prior to version 8.8, messageId was stripped of its < and >. This is no longer the case as of version 8.8.
+Prior to version 8.8, messageId was stripped of its `<` and `>`. This is no longer the case as of version 8.8.
 :::
 
 #### Example Response
@@ -411,7 +411,7 @@ The task returns a list of emails in JSON format. Each email object contains the
 - `size`: The size of the email in bytes.
 
 :::note
-Prior to version 8.8, messageId was stripped of its < and >. This is no longer the case as of version 8.8.
+Prior to version 8.8, messageId was stripped of its `<` and `>`. This is no longer the case as of version 8.8.
 :::
 
 #### Example Response
