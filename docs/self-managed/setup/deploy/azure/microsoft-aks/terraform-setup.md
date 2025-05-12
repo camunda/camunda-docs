@@ -197,9 +197,9 @@ Advanced users may want to handle this part differently and use a different back
 
 The [Azure Terraform provider](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs) is required to create resources in Azure. Before you can use the provider, you must authenticate it using your Azure credentials.
 
-:::caution Ownership of the created resources
+:::tip
 
-A user who creates resources in Azure will always retain administrative access to those resources, including any Kubernetes clusters created. It is recommended to create a dedicated Azure user or service principal for Terraform purposes, ensuring that the resources are managed and owned by that identity.
+Terraform should run under a dedicated service principal or managed identity with only the minimum RBAC roles it needs; access to Azure resources—including AKS cluster-admin credentials—is governed entirely by those RBAC assignments, not by who originally created the resources.
 
 :::
 
