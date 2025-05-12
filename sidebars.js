@@ -986,7 +986,6 @@ module.exports = {
         id: "self-managed/setup/overview",
       },
       items: [
-        "self-managed/setup/overview",
         {
           type: "doc",
           label: "Helm",
