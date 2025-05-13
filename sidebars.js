@@ -969,6 +969,10 @@ module.exports = {
     {
       type: "category",
       label: "Get started",
+      link: {
+        type: "doc",
+        id: "self-managed/get-started/index",
+      },
       items: [
         "self-managed/setup/deploy/local/c8run",
         "self-managed/setup/deploy/local/local-kubernetes-cluster",
