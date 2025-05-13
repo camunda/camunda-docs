@@ -50,7 +50,7 @@ camunda:
       region: <your region>
 ```
 
-The connectivity configuration does not further apply for the SaaS configuration.
+Other connectivity configuration does not further apply for the SaaS mode.
 
 ### Self-Managed
 
