@@ -104,6 +104,8 @@ To keep your process landscape up to date with all changes in production, take t
 3. Begin the [CI/CD pipeline](/guides/devops-lifecycle/integrate-web-modeler-in-ci-cd.md).
 4. Sync your main branch to the shared project as part of the CI/CD pipeline.
 
+Alternatively, you can trigger a quick automation like a GitHub Action to keep your process landscape updated.
+
 Once the basic integration is configured by an organization owner or organization administrator, project administrators and editors can use the built-in button to pull changes from GitHub, integrate contributions from Desktop Modeler users, and merge their own work.
 
 Learn more in Camunda's [Git sync documentation](/components/modeler/web-modeler/git-sync.md).
