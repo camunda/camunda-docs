@@ -1,7 +1,7 @@
 ---
 id: working-with-apis-tools
-title: "Working with APIs & tools"
-sidebar_label: "Working with APIs & tools"
+title: "APIs & tools"
+sidebar_label: "APIs & tools"
 description: "Learn more about the integration concepts involved in using the Camunda Zeebe client libraries, APIs, and SDKs to interact programmatically with Camunda 8."
 ---
 

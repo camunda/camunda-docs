@@ -322,6 +322,7 @@ module.exports = {
                 "components/modeler/desktop-modeler/telemetry/telemetry",
               ],
             },
+            "components/modeler/desktop-modeler/settings/settings",
             "components/modeler/desktop-modeler/troubleshooting",
           ],
         },
@@ -1085,7 +1086,7 @@ module.exports = {
             "self-managed/setup/guides/add-extra-manifests",
             "self-managed/setup/guides/air-gapped-installation",
             "self-managed/setup/guides/running-custom-connectors",
-            "self-managed/setup/guides/prefix-elasticsearch-opensearch-indices",
+            "self-managed/setup/guides/prefix-elasticsearch-indices",
             "self-managed/setup/guides/multi-namespace-deployment",
             "self-managed/setup/guides/installing-payment-app-example",
             "self-managed/setup/guides/secret-management",
@@ -1152,7 +1153,6 @@ module.exports = {
             "self-managed/operational-guides/update-guide/850-to-860",
             "self-managed/operational-guides/update-guide/840-to-850",
             "self-managed/operational-guides/update-guide/830-to-840",
-            "self-managed/operational-guides/update-guide/820-to-830",
             {
               Elasticsearch: [
                 "self-managed/operational-guides/update-guide/elasticsearch/7-to-8",
