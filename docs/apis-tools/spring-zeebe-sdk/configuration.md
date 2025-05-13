@@ -104,7 +104,7 @@ camunda:
 You must add the `http://` scheme to the URL to avoid a `java.lang.NullPointerException: target` error.
 :::
 
-#### REST over gRPC
+#### Prefer REST over gRPC
 
 If true, the Camunda Client will use REST instead of gRPC whenever possible to communicate with the Camunda APIs:
 
