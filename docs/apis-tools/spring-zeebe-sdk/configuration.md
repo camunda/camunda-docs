@@ -72,7 +72,7 @@ https://github.com/camunda/camunda/blob/main/clients/spring-boot-starter-camunda
 
 ## Connectivity
 
-To connection to Camunda is determined by `camunda.client.grpc-address` and `camunda.client.rest-address`
+The connection to Camunda API is determined by `camunda.client.grpc-address` and `camunda.client.rest-address`
 
 ### Camunda API connection
 
