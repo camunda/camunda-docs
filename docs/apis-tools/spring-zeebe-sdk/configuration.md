@@ -565,7 +565,7 @@ camunda:
 
 Ideally, you **don't** use blocking behavior like `send().join()`, as this is a blocking call to wait for the issued command to be executed on the workflow engine. While this is very straightforward to use and produces easy-to-read code, blocking code is limited in terms of scalability.
 
-This is why the worker above showed a different pattern (using `exceptionally`). Often, you might also want to use the `whenComplete` callback:
+This is why the worker sample above shows a different pattern (using `exceptionally`). Often, you might want to use the `whenComplete` callback:
 
 ```java
 send().whenComplete((result, exception) -> {})
