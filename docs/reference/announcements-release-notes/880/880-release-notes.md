@@ -21,9 +21,9 @@ These release notes identify the new features included in 8.8, including [alpha 
 
 ## 8.8.0-alpha4
 
-| Release date | Changelog(s)                                                                                                                                                                               | Blog |
-| :----------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--- |
-| 13 May 2025  | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.8.0-alpha4)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.8.0-alpha4)</li></ul> | -    |
+| Release date | Changelog(s)                                                                                                                                                                               | Blog                                                                             |
+| :----------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------- |
+| 13 May 2025  | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.8.0-alpha4)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.8.0-alpha4)</li></ul> | [Release blog](https://camunda.com/blog/2025/05/camunda-alpha-release-may-2025/) |
 
 ### Camunda Process Test H2 data layer support <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Zeebe</span> {#h2support}
 
