@@ -199,7 +199,7 @@ https://github.com/camunda/camunda/blob/main/clients/spring-boot-starter-camunda
 
 ### Basic authentication
 
-You can authenticate with the cluster using username and password authentication.
+You can authenticate with the cluster using Basic authentication, if the cluster is setup to use Basic authentication.
 
 To explicitly activate this method, you can set:
 
