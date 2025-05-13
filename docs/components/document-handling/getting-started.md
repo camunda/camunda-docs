@@ -32,3 +32,7 @@ Camunda SaaS manages storage for you by integrating with [**Google Cloud Platfor
 ### Self-Managed
 
 If you're deploying Camunda in a Self-Managed environment, document storage must be configured manually. To learn more, visit the [Self-Managed configuration docs](/self-managed/document-handling/configuration/overview.md).
+
+:::note
+For storage options in SaaS, you cannot combine AWS and GCP, but you can in Self-Managed (for example, a cluster on GCP and document storage on AWS). This may be the case based on your existing infrastructure. However, having a cluster and document storage by the same provider (GCP or AWS) is more practical. In this case, you may reduce latency, simplify configuration, and avoid potential cross-cloud data transfer costs.
+:::

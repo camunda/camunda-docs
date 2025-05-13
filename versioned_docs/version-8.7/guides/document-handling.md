@@ -77,7 +77,7 @@ The document reference received as an output of one connector should be stored i
 To call the webhook sending a file, for example:
 
 ```curl
-curl --location 'https://lpp-1.connectors.dev.ultrawombat.com/e424e404-39d2-4dcf-9937-a1ebde177d7c/inbound/uploadDocument' \
+curl --location 'https://some-dev-environment.com/inbound/uploadDocument' \
 --form 'file=@"/path-to-file/file.pdf"'
 ```
 
