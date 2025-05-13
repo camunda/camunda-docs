@@ -37,7 +37,7 @@ This applies the following defaults:
 https://github.com/camunda/camunda/blob/main/clients/spring-boot-starter-camunda-sdk/src/main/resources/modes/saas.yaml
 ```
 
-Now, you can simply supply the connection details to your Camunda SaaS instance:
+The only thing you need to configure then, are the connection details to your Camunda SaaS cluster:
 
 ```yaml
 camunda:
