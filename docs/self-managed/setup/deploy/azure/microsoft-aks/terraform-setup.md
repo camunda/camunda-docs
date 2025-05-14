@@ -91,11 +91,11 @@ This finding indicates that your Azure Key Vault network access controls are not
 
 #### Potential Resolution
 
-1. Enable the "Deny" default action for network ACLs
-2. Configure specific allowed IP ranges or virtual networks
-3. Use Private Endpoint for Key Vault access
-4. Use service endpoints to restrict access to specific Azure services
-5. Implement "Purge Protection" and "Soft Delete" for additional security
+1. Enable the ["Deny" default action](https://learn.microsoft.com/en-us/azure/key-vault/general/how-to-azure-key-vault-network-security) for network ACLs
+2. Allow [specific IP ranges or virtual networks](https://learn.microsoft.com/en-us/azure/key-vault/general/how-to-azure-key-vault-network-security)
+3. Use a [Private Endpoint](https://learn.microsoft.com/en-us/azure/key-vault/general/private-link-service) for Key Vault access
+4. Use [service endpoints](https://learn.microsoft.com/en-us/azure/key-vault/general/overview-vnet-service-endpoints) to limit Azure service access
+5. Enable [Soft Delete](https://learn.microsoft.com/en-us/azure/key-vault/general/soft-delete-overview) and [Purge Protection](https://learn.microsoft.com/en-us/azure/key-vault/general/soft-delete-overview) for recovery and data safety
 
 > **Note:** Default deny configurations provide better security posture but may complicate initial setup and testing. For automated testing environments, clearly document these exceptions.
 
@@ -110,11 +110,11 @@ This finding indicates that Role-Based Access Control (RBAC) is not enabled on y
 
 #### Potential Resolution
 
-1. Enable RBAC when creating new clusters (this is now the default in AKS)
-2. For existing clusters, upgrade to a version that supports RBAC
-3. Implement Azure AD integration with RBAC
-4. Create and assign the appropriate roles to users and service principals
-5. Follow the principle of least privilege when assigning permissions
+1. Enable [RBAC](https://learn.microsoft.com/en-us/azure/aks/manage-azure-rbac) when creating new clusters (this is now the default in AKS)
+2. For existing clusters, [upgrade to a version](https://learn.microsoft.com/en-us/azure/aks/upgrade-cluster) that supports RBAC
+3. Implement [Azure AD integration with RBAC](https://learn.microsoft.com/en-us/azure/aks/managed-aad)
+4. [Create and assign roles](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-portal) to users and service principals
+5. Follow the [principle of least privilege](https://learn.microsoft.com/en-us/security/zero-trust/deploy-least-privilege) when assigning permissions
 
 > **Note:** While disabling RBAC simplifies testing by reducing permission barriers, this significantly reduces security and should never be done in production. For testing purposes, consider using dedicated test users with appropriate RBAC roles instead.
 
@@ -129,11 +129,11 @@ This finding indicates that comprehensive logging is not enabled on your Kuberne
 
 #### Potential Resolution
 
-1. Enable Azure Monitor for containers on your AKS cluster
-2. Configure the OMS Agent to collect container logs and metrics
-3. Set up Log Analytics workspace for centralized log storage
-4. Create custom queries and alerts based on collected logs
-5. Consider implementing Azure Security Center for enhanced monitoring
+1. Enable [Azure Monitor for containers](https://learn.microsoft.com/en-us/azure/azure-monitor/containers/container-insights-overview) on your AKS cluster
+2. Configure the [OMS Agent](https://learn.microsoft.com/en-us/azure/azure-monitor/containers/container-insights-onboard#enable-using-azure-resource-manager-template-or-terraforms) to collect container logs and metrics
+3. Set up a [Log Analytics workspace](https://learn.microsoft.com/en-us/azure/azure-monitor/logs/log-analytics-workspace-overview) for centralized log storage
+4. Create [custom queries and alerts](https://learn.microsoft.com/en-us/azure/azure-monitor/logs/log-analytics-tutorial) based on collected logs
+5. Consider implementing [Microsoft Defender for Cloud](https://learn.microsoft.com/en-us/azure/defender-for-cloud/defender-for-containers-introduction) (formerly Azure Security Center) for enhanced monitoring and threat detection
 
 > **Note:** While disabling logging simplifies testing environments and reduces costs, production environments should always have comprehensive logging enabled. For testing purposes, consider using a shared Log Analytics workspace with appropriate retention policies.
 
