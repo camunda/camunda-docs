@@ -1346,6 +1346,13 @@ module.exports = {
               "Identity for Orchestration clusters": [
                 "self-managed/identity/orchestration-identity/installation",
                 "self-managed/identity/orchestration-identity/configuration",
+                {
+                  "Mapping rules": [
+                    "self-managed/identity/orchestration-identity/mapping-rules/managing-mapping-rules",
+                    "self-managed/identity/orchestration-identity/mapping-rules/mapping-rule-authorizations",
+                    "self-managed/identity/orchestration-identity/mapping-rules/assign-mappings-to-tenants",
+                  ],
+                },
               ],
             },
             {
@@ -1383,13 +1390,6 @@ module.exports = {
                     {
                       Tenants: [
                         "self-managed/identity/user-guide/tenants/managing-tenants",
-                      ],
-                    },
-                    {
-                      "Mapping rules": [
-                        "self-managed/identity/user-guide/mapping-rules/managing-mapping-rules",
-                        "self-managed/identity/user-guide/mapping-rules/mapping-rule-authorizations",
-                        "self-managed/identity/user-guide/mapping-rules/assign-mappings-to-tenants",
                       ],
                     },
                     {

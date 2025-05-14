@@ -11,7 +11,7 @@ import TabItem from "@theme/TabItem";
 This guide explains how to assign, update, or remove mapping rules from a tenant to grant access based on claim values.
 
 :::tip
-To learn more about mappings and tenants, see the [mapping rules documentation](../../../concepts/mapping-rules.md) and [tenant management documentation](../tenants/managing-tenants.md).
+To learn more about mappings and tenants, see the [mapping rules documentation](../../../concepts/mapping-rules.md) and [tenant management documentation](../../user-guide/tenants/managing-tenants.md).
 :::
 
 1. Log in to the Identity UI and go to the **Tenants** tab.
