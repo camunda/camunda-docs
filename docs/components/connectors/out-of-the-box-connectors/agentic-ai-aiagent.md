@@ -396,3 +396,30 @@ fromAi(
   { enum: ["first", "second"] }
 )
 ```
+
+### Tool Call Responses
+
+To collect the output of the called tool and pass it back to the agent, the task within the ad-hoc sub-process needs to
+set its output to the variable configured as `content` when setting up
+the [multi-instance execution](#modeling-the-tools-feedback-loop). Typically, this variable is called `toolCallResult`
+and can be used from every tool call within the ad-hoc sub-process as the multi-instance execution takes care of
+isolating individual tool calls.
+
+This can be achieved in multiple ways, depending on the used task:
+
+- as a [result variable](../use-connectors/index.md#result-variable) or
+  a [result expression](../use-connectors/index.md#result-expression) containing a `toolCallResult` key
+- as an [output mapping](../../concepts/variables.md#output-mappings) creating the `toolCallResult` variable or adding
+  to a part of the `toolCallResult` variable (e.g. an output mapping could be set to `toolCallResult.statusCode`)
+- as a [script task](../../modeler/bpmn/script-tasks/script-tasks.md) which sets the `toolCallResult` variable
+
+Tool call results can be either primitive values (e.g. a string) or complex ones, such as
+a [FEEL context](../../modeler/feel/language-guide/feel-context-expressions.md) which will be serialized to a JSON
+string before passing it to the LLM.
+
+#### Document support
+
+Similar to the [user prompt](#documents), tool call responses can contain
+[Camunda Document references](../../concepts/document-handling.md) within arbitrary structures (supporting the same file
+types as for the user prompt). When serializing the tool call response to JSON, document references will be transformed
+to a content block containing the plain text or base64 encoded document content before passing them to the LLM.
