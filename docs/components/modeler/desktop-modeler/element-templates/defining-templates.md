@@ -464,6 +464,18 @@ For `zeebe:calledElement` bindings, variable propagation is not supported. To pr
 
 :::
 
+#### `zeebe:userTask`
+
+| **Binding `type`**          | `zeebe:userTask`                                                     |
+| --------------------------- | -------------------------------------------------------------------- |
+| **Valid property `type`'s** | `Hidden`                                                             |
+| **Binding parameters**      |                                                                      |
+| **Mapping result**          | `<zeebe:userTabk />`                                                 |
+
+The `zeebe:userTask` binding allows you to configure the Implementation Type for a templated `bpmn:UserTask`. When present, it sets the task as a Camunda user task; when omitted, the task defaults to a Job worker.
+
+This binding is only valid on templates of `bpmn:UserTask` type.
+
 ### Optional bindings
 
 We support optional bindings that do not persist empty values in the underlying BPMN 2.0 XML.
