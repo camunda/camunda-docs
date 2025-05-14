@@ -103,7 +103,7 @@ As of Camunda 8.5.0, the generation naming scheme in Camunda 8 SaaS changed to n
 
 - The naming scheme used for the Camunda 8.5 generations is `Camunda <Major>.<Minor>+gen<N>`, where `N` is incremented with every atomic change to the component version set.
 
-- This decouples the generation name from the particular patch level of the components it contains, as some component versions such as Connectors are decoupled from other components.
+- This decouples the generation name from the particular patch level of the components it contains, as some component versions such as connectors are decoupled from other components.
 
 - You can learn about the particular component patch version changes in the update dialogue to the latest generation available.
 

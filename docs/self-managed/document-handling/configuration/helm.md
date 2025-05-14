@@ -18,7 +18,7 @@ If no storage configuration is provided, the default document storage is in-memo
 
 To change the storage to **Google Cloud Platform** or **AWS S3**, update the `values.yaml` file with a storage configuration parameters.
 
-Below is an example of storage configuration:
+Below is an example of storage configuration. While this example mixes GCP, AWS, and in-memory, this example represents part of the [default Helm chart values](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform-8.7/values.yaml). This example demonstrates the current default values and what they would need to change to enable the storage type of their preference:
 
 ```
 # Global configuration for variables which can be accessed by all sub charts

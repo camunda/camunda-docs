@@ -30,7 +30,7 @@ To set what storage should be used, accepted values for `DOCUMENT_DEFAULT_STORE_
 
 <TabItem value='aws'>
 
-By using **external cloud file bucket storage** with [**AWS S3**](https://aws.amazon.com/s3/), documents can be stored in a secure and scalable way. Buckets are integrated per cluster to ensure proper isolation and environment-specific management. The following file bucket storages are supported:
+By using **external cloud file bucket storage** with [**AWS S3**](https://aws.amazon.com/s3/), documents can be stored in a secure and scalable way. Buckets are integrated per cluster to ensure proper isolation and environment-specific management.
 
 | Credentials variable    | Required | Description                                                                                           |
 | ----------------------- | -------- | ----------------------------------------------------------------------------------------------------- |
