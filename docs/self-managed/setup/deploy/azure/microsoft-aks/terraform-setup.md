@@ -70,13 +70,13 @@ This finding indicates that a security group has been configured with a rule tha
 
 This finding shows that your Kubernetes cluster's API server is accessible from any IP address. The API server is the control plane for Kubernetes and unrestricted access increases the risk of unauthorized access and potential attacks.
 
-#### Potential Resolutions
+#### Potential Resolution
 
-1. Configure `api_server_access_profile` in Terraform’s `azurerm_kubernetes_cluster` to set `authorized_ip_ranges` (and optionally `subnet_id`/`vnet_integration_enabled`)
-2. Enable private-cluster mode with `private_cluster_enabled = true`
-3. Provision an `azurerm_private_endpoint` for the AKS Private Link service
-4. Enable Azure AD–based RBAC via the `role_based_access_control { azure_active_directory { … } }` block
-5. Restrict Network Security Group rules on the control-plane subnet to lock down API server access
+1. Configure [`api_server_access_profile`](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster#api_server_access_profile) in the `azurerm_kubernetes_cluster` resource to set `authorized_ip_ranges`.
+2. Enable private clusters via `private_cluster_enabled = true` on `azurerm_kubernetes_cluster` ([docs](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster#private_cluster_enabled)).
+3. Provision an [`azurerm_private_endpoint`](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint) for the AKS Private Link service.
+4. Enable Azure AD–based RBAC with a `role_based_access_control { azure_active_directory { … } }` block in `azurerm_kubernetes_cluster` ([docs](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster#role_based_access_control)).
+5. Lock down the control-plane subnet using [`azurerm_network_security_group`](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_group) and [`azurerm_network_security_rule`](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule).
 
 > **Documentation Note:** While open API access simplifies testing and development, production clusters should always restrict API server access to known IP ranges.
 
