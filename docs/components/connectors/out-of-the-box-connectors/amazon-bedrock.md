@@ -1,16 +1,16 @@
 ---
 id: amazon-bedrock
 sidebar_label: Amazon Bedrock
-title: Amazon Bedrock Connector
-description: Interact with the Amazon Bedrock Connector from your BPMN process.
+title: Amazon Bedrock connector
+description: Interact with the Amazon Bedrock connector from your BPMN process.
 ---
 
-The **Amazon Bedrock Connector** is an outbound Connector that allows you to interact with
+The **Amazon Bedrock connector** is an outbound connector that allows you to interact with
 [Amazon Bedrock](https://aws.amazon.com/bedrock/) from your BPMN process.
 
 ## Prerequisites
 
-To use the **Amazon Bedrock Connector**, you need to have an AWS account with an access key and secret key to
+To use the **Amazon Bedrock connector**, you need to have an AWS account with an access key and secret key to
 execute [`InvokeModel`](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModel.html) or
 [`Converse`](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html) actions.
 
@@ -25,7 +25,7 @@ Use Camunda secrets to store credentials and avoid exposing sensitive informatio
 to [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
 :::
 
-## Create an Amazon Bedrock Connector task
+## Create an Amazon Bedrock connector task
 
 import ConnectorTask from '../../../components/react-components/connector-task.md'
 
@@ -36,18 +36,18 @@ import ConnectorTask from '../../../components/react-components/connector-task.m
 Choose an applicable authentication type from the **Authentication** dropdown. Learn more about authentication types in
 the related [appendix entry](#aws-authentication-types).
 
-There are two options to authenticate the Connector with AWS:
+There are two options to authenticate the connector with AWS:
 
 - Choose **Credentials** in the **Authentication** dropdown if you have a valid pair of access and secret keys provided by your AWS account administrator. This option is applicable for both SaaS and Self-Managed users.
 - Choose **Default Credentials Chain (Hybrid/Self-Managed only)** in the **Authentication** dropdown if your system is configured as an implicit authentication mechanism, such as role-based authentication, credentials supplied via environment variables, or files on target host. This option is applicable only for Self-Managed or hybrid distributions. This approach uses the [Default Credential Provider Chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html) to resolve required credentials.
 
-If you select **Credentials** to access the **Amazon Bedrock Connector**, the Connector requires the appropriate
+If you select **Credentials** to access the **Amazon Bedrock connector**, the connector requires the appropriate
 credentials. The following authentication options are available:
 
 - **Access key**: Provide an access key of a user with permissions to the Amazon SageMaker `InvokeModel` and/or `Converse` actions.
 - **Secret key**: Provide the secret key of the user with the access key provided above.
 
-The **Access key** and the **Secret key** are required properties and must be provided to use the Connector.
+The **Access key** and the **Secret key** are required properties and must be provided to use the connector.
 
 For more information on authentication and security in Amazon Bedrock, refer to
 the [Amazon Bedrock security and privacy documentation](https://aws.amazon.com/bedrock/security-compliance/).
@@ -58,7 +58,7 @@ In the **Region** field write the region of the deployed endpoint.
 
 ## Action
 
-There are two possible actions with the Amazon Bedrock Connector: `InvokeModel` and `Converse`.
+There are two possible actions with the Amazon Bedrock connector: `InvokeModel` and `Converse`.
 
 ### InvokeModel
 
@@ -112,7 +112,7 @@ Ensure the model is available in your region, that your model can invoke the `Co
 
 - `New Message` is either the first message (to start a conversation) or is the next message from an already started conversation.
 - `Documents` is a list of documents to include as part of your **new message**.
-  - To work with documents you must upload them first, [using the REST API](/apis-tools/camunda-api-rest/specifications/create-document.api.mdx) for example.
+  - To work with documents you must upload them first, [using the Camunda 8 REST API](/apis-tools/camunda-api-rest/specifications/create-document.api.mdx) for example.
   - See [Amazon Bedrock supported document formats](https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-ds.html) for currently supported file formats.
   - The result of the endpoint must then be assigned to a variable in **Start Process Instance** so you can use the list of these variables in the **Documents** field.
 - `Message History` is the history of the conversation that should always be passed. If not set, this will be a new conversation.
@@ -129,5 +129,5 @@ The current implementation supports the assistant's responses only in text forma
 Ideally, the message's history must transit within the process and be the input of this `Converse` task with the new message.
 
 :::note
-Starting from version 8.7.0, the Amazon Bedrock Connector supports consuming documents as inputs for conversations. Review the **Document** field in the properties panel where the document reference can be provided. See additional details and limitations in [document handling](/components/concepts/document-handling.md).
+Starting from version 8.7.0, the Amazon Bedrock connector supports consuming documents as inputs for conversations. Review the **Document** field in the properties panel where the document reference can be provided. See additional details and limitations in [document handling](/components/concepts/document-handling.md).
 :::

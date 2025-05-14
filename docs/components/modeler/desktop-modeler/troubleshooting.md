@@ -70,6 +70,43 @@ Ensure your computer has access to the (remote) network.
 
 Secure connections to Zeebe require [HTTP/2 over TLS with protocol negotiation via ALPN](/self-managed/operational-guides/troubleshooting/troubleshooting.md#zeebe-ingress-grpc). Ensure your proxy supports these features and does not forcefully downgrade the connection to HTTP/1.
 
+### The connection to Zeebe should not happen through a proxy
+
+If you are using a proxy but do not want to connect to Zeebe through it, exclude Zeebe from proxying by adding it to the `NO_PROXY` environment variable:
+
+<Tabs groupId="os" defaultValue="windows" queryString values={
+[
+{label: 'Windows', value: 'windows' },
+{label: 'macOS', value: 'macos' },
+{label: 'Linux', value: 'linux' }
+]
+}>
+
+<TabItem value='windows'>
+
+```plain
+set NO_PROXY=localhost,127.0.0.1,some.intranet.host && "Camunda Modeler.exe"
+```
+
+</TabItem>
+
+<TabItem value='macos'>
+
+```plain
+NO_PROXY=localhost,127.0.0.1,some.intranet.host camunda-modeler
+```
+
+</TabItem>
+
+<TabItem value='linux'>
+
+```plain
+NO_PROXY=localhost,127.0.0.1,some.intranet.host camunda-modeler
+```
+
+</TabItem>
+</Tabs>
+
 ## Debug Zeebe connection issues
 
 You can connect to Zeebe via community-supported [`zbctl`](https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md) or another API client. However, connecting through Desktop Modeler fails.

@@ -1,23 +1,23 @@
 ---
 id: google-sheets
-title: Google Sheets Connector
+title: Google Sheets connector
 sidebar_label: Google Sheets
-description: Use the Google Sheets Connector to connect your BPMN service with Google Sheets.
+description: Use the Google Sheets connector to connect your BPMN service with Google Sheets.
 ---
 
-The **Google Sheets Connector** is an outbound Connector that allows you to work with an existing or new spreadsheet
+The **Google Sheets connector** is an outbound connector that allows you to work with an existing or new spreadsheet
 on [Google Drive](https://drive.google.com/) from your BPMN process.
 
 ## Prerequisites
 
-To start working with the **Google Sheets Connector**, a relevant OAuth token must be configured and stored as a secret
+To start working with the **Google Sheets connector**, a relevant OAuth token must be configured and stored as a secret
 in your cluster. The token must have permission to read/write and create a file from a desired Google Drive instance.
 Follow the steps from the [appendix](#appendix--faq) to find out more about creating an OAuth token and assigning relevant
 permissions.
 
-## Create a Google Sheets Connector task
+## Create a Google Sheets connector task
 
-Currently, the Google Sheets Connector supports next operations:
+Currently, the Google Sheets connector supports next operations:
 
 - [Add values to spreadsheet](#add-values-to-spreadsheet)
 - [Create empty column or row](#create-empty-column-or-row)
@@ -34,9 +34,9 @@ import ConnectorTask from '../../../components/react-components/connector-task.m
 
 <ConnectorTask/>
 
-## Make your Google Sheets Connector executable
+## Make your Google Sheets connector executable
 
-To make the **Google Sheets Connector** executable, fill out the mandatory fields highlighted in red in the properties
+To make the **Google Sheets connector** executable, fill out the mandatory fields highlighted in red in the properties
 panel.
 
 ### Add values to spreadsheet
@@ -244,9 +244,9 @@ The following fields are available in the response variable:
 
 ## Appendix & FAQ
 
-### How can I authenticate my Connector?
+### How can I authenticate my connector?
 
-The **Google Sheets Connector** currently supports two methods for authentication and authorization: based on
+The **Google Sheets connector** currently supports two methods for authentication and authorization: based on
 short-lived JWT bearer token, and based on refresh token.
 
 Google supports multiple ways to obtain both. Refer to

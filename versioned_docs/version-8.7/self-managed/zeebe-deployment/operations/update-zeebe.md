@@ -11,7 +11,9 @@ Zeebe versions can be updated:
 
 Since Zeebe 8.5, updates to a newer version can be rolling or offline. Zeebe 8.4 and older don't contain necessary safety checks that make rolling updates safe, and we recommend offline updates instead to ensure processing behaves correctly.
 
-Ensure to review the [update guide](/self-managed/operational-guides/update-guide/introduction.md) for general update procedures that need to be adhered to and to check if there are known issues for the specific update you are planning.
+:::info
+Review the [update guide](/self-managed/operational-guides/update-guide/introduction.md) for general update procedures you must follow and to check for known issues relating to the specific update you are planning.
+:::
 
 ## Rolling update
 

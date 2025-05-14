@@ -79,9 +79,9 @@ To ensure an appropriate sizing, [determine your influencing factors](../compone
 
 For details on typical volume type usage, refer to the following examples specific to cloud service providers:
 
-- [Amazon EKS](/self-managed/setup/deploy/amazon/amazon-eks/amazon-eks.md#volume-performance)
-- [Microsoft AKS](/self-managed/setup/deploy/azure/microsoft-aks/microsoft-aks.md#volume-performance)
-- [Google GKE](/self-managed/setup/deploy/gcp/google-gke.md#volume-performance)
+- [Amazon EKS](/self-managed/reference-architecture/kubernetes.md#amazon-eks)
+- [Microsoft AKS](/self-managed/reference-architecture/kubernetes.md#microsoft-aks)
+- [Google GKE](/self-managed/reference-architecture/kubernetes.md#google-gke)
 
 ### Helm charts version matrix
 
@@ -131,7 +131,6 @@ From version `8.6.0` forward, Zeebe, Operate, and Tasklist must run on on the ex
 | Desktop Modeler 5.28+ <br/> Web Modeler 8.6.x | (Zeebe, Operate, Tasklist) 8.6.x, Connectors 8.6.x, <br/>Identity 8.6.x, Console 8.6.x                  | Optimize 8.6.x |
 | Desktop Modeler 5.22+ <br/> Web Modeler 8.5.x | Zeebe 8.5.x, Operate 8.5.x, Tasklist 8.5.x, <br/>Identity 8.5.x, Connectors 8.5.x, Console 8.5.x        | Optimize 8.5.x |
 | Desktop Modeler 5.19+ <br/> Web Modeler 8.4.x | Zeebe 8.4.x, Operate 8.4.x, Tasklist 8.4.x, <br/>Identity 8.4.x, Connectors 8.4.x                       | Optimize 8.4.x |
-| Desktop Modeler 5.16+ <br/> Web Modeler 8.3.x | Zeebe 8.3.x, Operate 8.3.x, Tasklist 8.3.x, <br/>Identity 8.3.x, Connectors 8.3.x                       | Optimize 8.3.x |
 
 :::note
 You can also use newer versions of Desktop and Web Modeler with older Zeebe versions.
@@ -154,19 +153,3 @@ You can also use newer versions of Desktop and Web Modeler with older versions o
 </TabItem>
 
 </Tabs>
-
-## Dependency maintenance policies
-
-Camunda provides [a standard support policy](https://camunda.com/release-policy/) of 18 months for a particular minor version from the date it is released.
-During this time, patches are regularly released containing security and bug fixes, some of which may come from dependency updates. Therefore, for the
-vast majority of dependencies Camunda _only_ applies patch updates.
-
-However, certain dependencies used by Camunda 8 may have a shorter maintenance policy than Camunda itself. Camunda may adopt a different update policy for these dependencies, as listed below.
-
-### Spring Boot
-
-The **Camunda Orchestration Cluster** is a Spring Boot application and leverages Spring Boot to execute fundamental functionality such as application configuration, REST infrastructure (including security), production ready features, etc.
-
-However, Spring Boot has a shorter maintenance window than Camunda for its open-source software (OSS) offering. [Versions are only supported for 13 months](https://spring.io/projects/spring-boot#support), versus Camunda's 18 months. To circumvent this, the **Orchestration Cluster** patch releases also update Spring Boot minor versions, such that the latest patch release of these components uses a supported Spring version.
-
-As for libraries and SDKs meant to be included in third-party applications, Camunda follows a best effort policy to balance compatibility and secure Spring-dependent libraries.

@@ -500,13 +500,15 @@ Use the following to set the environment variable ZEEBE_BROKER_EXPORTERS_ELASTIC
 From the terminal context of `aws/dual-region/kubernetes`, execute the following:
 
 ```shell
-helm install $HELM_RELEASE_NAME camunda/camunda-platform --version $HELM_CHART_VERSION \
+helm install $CAMUNDA_RELEASE_NAME camunda/camunda-platform \
+  --version $HELM_CHART_VERSION \
   --kube-context $CLUSTER_0 \
   --namespace $CAMUNDA_NAMESPACE_0 \
   -f camunda-values.yml \
   -f region0/camunda-values.yml
 
-helm install $HELM_RELEASE_NAME camunda/camunda-platform --version $HELM_CHART_VERSION \
+helm install $CAMUNDA_RELEASE_NAME camunda/camunda-platform \
+  --version $HELM_CHART_VERSION \
   --kube-context $CLUSTER_1 \
   --namespace $CAMUNDA_NAMESPACE_1 \
   -f camunda-values.yml \
@@ -518,7 +520,7 @@ helm install $HELM_RELEASE_NAME camunda/camunda-platform --version $HELM_CHART_V
 1. Open a terminal and port-forward the Zeebe Gateway via `kubectl` from one of your clusters. Zeebe is stretching over both clusters and is `active-active`, meaning it doesn't matter which Zeebe Gateway to use to interact with your Zeebe cluster.
 
 ```shell
-kubectl --context "$CLUSTER_0" -n $CAMUNDA_NAMESPACE_0 port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 8080:8080
+kubectl --context "$CLUSTER_0" -n $CAMUNDA_NAMESPACE_0 port-forward services/$CAMUNDA_RELEASE_NAME-zeebe-gateway 8080:8080
 ```
 
 2. Open another terminal and use e.g. `cURL` to print the Zeebe cluster topology:

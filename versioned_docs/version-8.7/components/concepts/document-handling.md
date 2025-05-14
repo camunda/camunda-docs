@@ -7,13 +7,13 @@ keywords: ["document handling"]
 
 import DocCardList from '@theme/DocCardList';
 
-Camunda 8 SaaS and Self-Managed provide built-in support for storing, tracking, and managing documents using Camunda Forms, Connectors, Tasklist, and the [REST API](/apis-tools/camunda-api-rest/specifications/create-documents.api.mdx).
+Camunda 8 SaaS and Self-Managed provide built-in support for storing, tracking, and managing documents using Camunda Forms, connectors, Tasklist, and the [REST API](/apis-tools/camunda-api-rest/specifications/create-documents.api.mdx).
 
 Document handling is automatically integrated into each SaaS cluster, allowing you to manage binary data, like PDFs, images and other file types, across development and production environments without needing to configure or maintain storage infrastructure yourself.
 
 ## Use cases and capabilities
 
-Document handling can be beneficial for different process use cases, such as uploading a document to a BPMN process, displaying and downloading a document, sending a document to an external system via a Connector, and automating documents with [intelligent document processing](/components/modeler/web-modeler/idp/idp-example.md).
+Document handling can be beneficial for different process use cases, such as uploading a document to a BPMN process, displaying and downloading a document, sending a document to an external system via a connector, and automating documents with [intelligent document processing](/components/modeler/web-modeler/idp/idp-example.md).
 
 Step through all of these capabilities in the guide below:
 
@@ -28,7 +28,7 @@ Camunda SaaS manages storage for you by integrating with [**Google Cloud Platfor
 
 - Each cluster automatically includes one pre-configured storage bucket.
 - Clusters hosted on GCP use a GCP bucket; clusters hosted on AWS use an AWS S3 bucket.
-- **Maximum upload size for one or multiple files**: 10 MB
+- **Maximum upload size per request (whether you're uploading one or multiple files in that request)**: 10 MB
 - **File expiration time/time-to-live (TTL) policy**: 30 days. A custom expiration date can be specified via the [Document upload API](../../apis-tools/camunda-api-rest/specifications/create-document.api.mdx).
 
 ### Self-Managed
