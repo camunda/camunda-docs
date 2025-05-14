@@ -164,13 +164,14 @@ request when being part of a response interaction feedback loop. The value provi
 to the conversation memory and passed to the LLM call. In the example above, this would be the messages prefixed with
 `User:`.
 
-As the system prompt, the user prompt field supports a list of **User Prompt Parameters** with the same set of provided
+Like the system prompt, the user prompt field supports a list of **User Prompt Parameters** with the same set of
+provided
 default parameters.
 
 #### Documents
 
 :::note
-You can find examples how LLM provides accept document content blocks on
+You can find examples how LLM providers accept document content blocks on
 the [Anthropic](https://docs.anthropic.com/en/docs/build-with-claude/vision#base64-encoded-image-example)
 and [OpenAI](https://platform.openai.com/docs/guides/images-vision#giving-a-model-images-as-input)
 docs.
@@ -222,12 +223,13 @@ for tool resolution (see [Tool Resolution](#tool-resolution)). When entering the
 resolve the tools available in the ad-hoc sub-process and pass these to the LLM as part of the prompt.
 
 The **Tool Call Results** field needs to be configured to the result collection of the ad-hoc sub-process mult-instance
-execution (see (Modeling the tools feedback loop)[#modeling-the-tools-feedback-loop]), for example `=toolCallResults`.
+execution (see [Modeling the tools feedback loop](#modeling-the-tools-feedback-loop)). Example value:
+`=toolCallResults`.
 
 ### Memory
 
 As described above, the **Agent Context** is a crucial variable to make the feedback loop work. This needs to be aligned
-with the result variable/expression (see below). Example value `=agent.context`.
+with the result variable/expression (see below). Example value: `=agent.context`.
 
 The **Maximum messages** configuration allows specifying how many messages should be kept in the context and passed to
 the LLM on every call. Configuring this is a trade-off between cost/tokens and the context window supported by the used
@@ -255,7 +257,7 @@ part of the connector configuration.
 :::important
 Model parameters setting maximum values (such as maximum tokens) are directly passed to the provider API and are
 considered **per LLM request**, not for the whole conversation. Depending on the provider, the exact meaning of these
-parameters may vary. Please consider the linked provider documentation for more details.
+parameters may vary. Please consider the provider documentation linked in the element template for more details.
 :::
 
 This section allows you to configure a set of _optional_ model-specific parameters such as the temperature of the
@@ -359,15 +361,15 @@ agent process.
 
 For example, instead of the user task, you could also use another LLM connector to verify the response of the AI Agent.
 An example of such a pattern can be found in
-the [Fraud Detection Example](https://github.com/camunda/connectors/tree/main/connectors/agentic-ai/examples/fraud-detection)).
+the [Fraud Detection Example](https://github.com/camunda/connectors/tree/main/connectors/agentic-ai/examples/fraud-detection).
 :::
 
 Similar to the tools feedback loop, another feedback loop acting on the agent response can be added by re-entering the
 AI Agent connector with new information. You need to make sure to model your user prompt in a way that it adds the
 follow-up data instead of the initial request.
 
-For example, your **User Prompt** field could contain the following FEEL expression to make sure it acts some follow-up
-input if given:
+For example, your **User Prompt** field could contain the following FEEL expression to make sure it acts upon follow-up
+input:
 
 ```feel
 =if (is defined(followUpInput)) then followUpInput else initialUserInput
@@ -440,13 +442,13 @@ input/output mappings.
 
 The function itself does not implement any logic (it simply returns the first argument it receives), but provides a way
 to configure all the necessary metadata (e.g. description, type) to generate an input schema definition. The tools
-schema connector will collect all `fromAi` definitions within an activity and combine them into an input schema for
+schema resolution will collect all `fromAi` definitions within an activity and combine them into an input schema for
 the activity.
 
 :::important
 The first argument passed to the `fromAi` function must be a reference type (e.g. not a static string), referencing a
 value within the variable defined as **Input element** in the multi-instance configuration. In our examples, we
-typically use `toolCall` as ths input element. Example value: `toolCall.myParameter`.
+typically use `toolCall` as the input element. Example value: `toolCall.myParameter`.
 :::
 
 By utilizing the `fromAi` tool call as wrapper function around the actual value the connector can both
@@ -467,16 +469,19 @@ An example of `fromAi` function usage on a [REST outbound connector](../protocol
 
 The [`fromAi`](../../modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) FEEL function
 can be called with a varying number of parameters to define simple or complex inputs. The simplest form is to just pass
-a value:
+a value.
 
 ```feel
 fromAi(toolCall.url)
 ```
 
+This will make the LLM aware that it needs to provide a value for the `url` parameter. As the first value to `fromAi`
+needs to be a variable reference, the last segment of the reference will be used as parameter name (`url` in this case).
+
 To make a LLM understand the purpose of the input, you can add a description:
 
 ```feel
-fromAi(toolCall.url, "The URL to download the file from. Should be an RFC 3986 compliant HTTP/HTTPS URL.")
+fromAi(toolCall.url, "Fetches the contents of a given URL. Only accepts valid RFC 3986/RFC 7230 HTTP(s) URLs.")
 ```
 
 To define the type of the input, you can add a type (if no type is given, it will default to `string`):
@@ -498,6 +503,12 @@ fromAi(
   "string",
   { enum: ["first", "second"] }
 )
+```
+
+You can combine multiple parameters within the same FEEL expression, for example:
+
+```feel
+fromAi(toolCall.firstNumber, "The first number.", "number") + fromAi(toolCall.secondNumber, "The second number.", "number")
 ```
 
 ### Tool Call Responses
