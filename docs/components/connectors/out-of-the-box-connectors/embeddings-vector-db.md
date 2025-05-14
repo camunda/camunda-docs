@@ -163,11 +163,11 @@ The **Document source** can be either **Plain text** or a **Camunda document**.
 **Plain text** can be useful when you deal with small size data that can fit into a text field or a process instance variable. Input will be handled as a regular UTF-8 text.
 
 :::note
-A FEEL [string conversion function](/components/modeler/feel/builtin-functions/feel-built-in-functions-conversion/#stringfrom) might be useful if you have JSON input.
+A FEEL [string conversion function](/components/modeler/feel/builtin-functions/feel-built-in-functions-conversion.md#stringfrom) might be useful if you have JSON input.
 :::
 
 The **Camunda document** might be useful when you deal with larger document pipelines that come from
-[webhook or user tasks](/guides/document-handling). Input documents will be parsed with [Apache Tika](https://tika.apache.org/), so files
+[webhook or user tasks](/guides/document-handling.md). Input documents will be parsed with [Apache Tika](https://tika.apache.org/), so files
 can be of any Apache Tika-supported formats.
 
 ### Splitting
