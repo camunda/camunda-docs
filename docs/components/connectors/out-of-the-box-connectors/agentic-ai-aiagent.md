@@ -79,7 +79,146 @@ Agent: John Doe's credit card has been created successfully.
 
 ## Configuration
 
-## Modelling the tools feedback loop
+### Model
+
+### System Prompt
+
+:::important
+Currently, the system prompt is only added to the agent context once when the AI Agent connector is called for the first
+time. This means you can't alter the system prompt in follow-up interactions, even if you include different data in the
+input field. This might change in upcoming versions.
+:::
+
+The **System Prompt** is a crucial part of the AI Agent connector configuration. It defines the behavior and the goal of
+the agent and instructs the LLM on how to act. The connector provides a minimal system prompt example which can be used
+as a starting point, but you should consider customizing the system prompt to your needs.
+
+Within the system prompt field, you can use FEEL expressions, or you can inject parameters into the text by using
+`{{parameter}}` syntax to inject parameters defined in the **System Prompt Parameters** field (FEEL context).
+
+The AI Agent connector provides a set of default parameters `current_date`, `current_time`, `current_date_time` which
+you don't need to explicitly define.
+
+### User Prompt
+
+The **User Prompt** contains the actual request to the LLM. This could either contain the initial request or a follow-up
+request when being part of a user interaction feedback loop. The value provided as part of this field will be added to
+the conversation memory and passed to the LLM call. In the example above, this would be the messages prefixed with
+`User:`.
+
+As the system prompt, the user prompt field supports a list of **User Prompt Parameters** with the same set of provided
+default parameters.
+
+#### Documents
+
+:::note
+You can find examples how LLM provides accept document content blocks on
+the [Anthropic](https://docs.anthropic.com/en/docs/build-with-claude/vision#base64-encoded-image-example)
+and [OpenAI](https://platform.openai.com/docs/guides/images-vision#giving-a-model-images-as-input)
+docs.
+:::
+
+:::important
+File type support is depending on the LLM provider and model. Make sure to properly test your use case with the provider
+you are using.
+:::
+
+As part of the user prompt, it is possible to add a list
+of [Camunda Document references](../../concepts/document-handling.md) which will be
+internally resolved and passed to the LLM if the document type is supported. This greatly enhances the ability of the
+agent as it can directly interact with documents and images.
+
+This is possible as LLM APIs provide a way to spefify the user prompt as list of content blocks. If document references
+are passed, they will be resolved to a corresponding content block and passed as part of the user message.
+
+##### Supported document types
+
+:::important
+As these documents are stored as part of the conversational memory, their contents will be stored as process variable.
+Make sure to be aware of [variable size limitations](../../concepts/variables.md#variable-size-limitation) when dealing
+with large files.
+
+In the future, the AI Agent connector will support different ways of storing the conversation memory to allow more
+data-intensive use cases.
+:::
+
+Text files (MIME types starting with `text/` plus XML, JSON, and YAML files) will be passed as plain text content
+blocks.
+
+All other supported file types will be passed as base64 encoded content blocks:
+
+- PDF files
+- Images (jpg, png, gif, webp)
+
+Audio and video files might be supported in the future, but will currently lead to an error if passed. The same goes for
+all other unsupported file types.
+
+### Tools
+
+:::note
+This section can be kept empty if the AI Agent connector should be used without an accompanying ad-hoc sub-process.
+:::
+
+The **Ad-hoc sub-process ID** needs to be configured to the element ID of the ad-hoc sub-process which should be used
+for tool resolution (see [Tool Resolution](#tool-resolution)). When entering the AI Agent connector, the connector will
+resolve the tools available in the ad-hoc sub-process and pass these to the LLM as part of the prompt.
+
+The **Tool Call Results** field needs to be configured to the result collection of the ad-hoc sub-process mult-instance
+execution (see (Modeling the tools feedback loop)[#modeling-the-tools-feedback-loop]), for example `=toolCallResults`.
+
+### Memory
+
+As described above, the **Agent Context** is a crucial variable to make the feedback loop work. This needs to be aligned
+with the result variable/expression (see below). Example value `=agent.context`.
+
+The **Maximum messages** configuration allows specifying how many messages should be kept in the context and passed to
+the LLM on every call. Configuring this is a trade-off between cost/tokens and the context window supported by the used
+model.
+
+When the conversation exceeds the maximum number of messages, the connector will first evict tool call
+requests/responses from past feedback loops and then continue removing the oldest messages first. The system prompt will
+always be kept in the context.
+
+### Limits
+
+:::important
+Despite these limits, make sure to closely monitor the LLM API usage and costs and to set appropriate limits on the
+provider side.
+:::
+
+Allows setting limits for the agent interaction, such as the maximum number of model calls to prevent unexpected
+behavior or unexpected cost due to infinite loops.
+
+As a safeguard, the **Maximum model calls** limit will fall back to a default value of `10` if it is not configured as
+part of the connector configuration.
+
+### Model Parameters
+
+:::important
+Model parameters setting maximum values (such as maximum tokens) are directly passed to the provider API and are
+considered **per LLM request**, not for the whole conversation. Depending on the provider, the exact meaning of these
+parameters may vary. Please consider the linked provider documentation for more details.
+:::
+
+This section allows you to configure a set of _optional_ model-specific parameters such as the temperature of the
+responses. Depending
+on the selected provider, this will contain different fields.
+
+### Result Variable/Expression
+
+The result of the AI Agent connector is a context containing the following fields:
+
+- **context**: the updated **Agent Context**. Make sure to map this to a process variable to to re-inject this variable
+  in the **Agent Context** input field when your agent is part of a feedback loop.
+- **chatResponse**: the last response provided by the LLM
+- **toolCalls**: tool call requests provided by the LLM which need to be routed to the ad-hoc sub-process.
+
+:::note
+An easy approach to get started with modelling is to use the result variable (e.g. `agent`) and to configure the
+**Agent Context** to `agent.context`.
+:::
+
+## Modeling the tools feedback loop
 
 ## Tool Resolution
 
@@ -91,6 +230,24 @@ following screenshot, the activities marked in red are the ones that will be con
 
 As you can see, you are free to use any BPMN elements and connectors as tools and to model sub-flows within the ad-hoc
 sub-process.
+
+To resolve available tools the AI Agent connector will:
+
+- Read the BPMN model and look up the ad-hoc sub-process by the configured ID. If it cannot be found, the connector will
+  throw an error.
+- Iterate over all activities within the ad-hoc sub-process and check if they are root nodes (no incoming flows) and not
+  boundary events.
+- For each activity found, it will analyze the input/output mappings and look for the
+  [`fromAi`](../../modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) function calls
+  which define parameters which need to be provided by the LLM.
+- The connector will then create a tool definition for each activity found and pass these tool definitions to the LLM
+  as part of the prompt.
+
+:::note
+The [Anthropic](https://docs.anthropic.com/en/docs/build-with-claude/tool-use/overview) and
+[OpenAI](https://platform.openai.com/docs/guides/function-calling) docs contain good examples how tool/function calling
+works in combination with an LLM.
+:::
 
 ### Tool Definitions
 
@@ -189,7 +346,3 @@ fromAi(
   { enum: ["first", "second"] }
 )
 ```
-
-## Agent Response
-
-TBD
