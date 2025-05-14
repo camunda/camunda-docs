@@ -59,7 +59,7 @@ This finding indicates that a security group has been configured with a rule tha
 4. Implement a bastion host/jump box for secure access
 5. Consider using [Azure Private Link](https://learn.microsoft.com/en-us/azure/private-link/private-link-overview) for private connectivity.
 
-> **Documentation Note:** While allowing 0.0.0.0/0 simplifies testing, this should never be used in production environments. For automated testing purposes, consider using dedicated testing subscriptions with regular cleanup procedures.
+> **Note:** While allowing 0.0.0.0/0 simplifies testing, this should never be used in production environments. For automated testing purposes, consider using dedicated testing subscriptions with regular cleanup procedures.
 
 </details>
 
@@ -78,7 +78,7 @@ This finding shows that your Kubernetes cluster's API server is accessible from 
 4. Enable Azure AD–based RBAC with a `role_based_access_control { azure_active_directory { … } }` block in `azurerm_kubernetes_cluster` ([docs](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster#role_based_access_control)).
 5. Lock down the control-plane subnet using [`azurerm_network_security_group`](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_group) and [`azurerm_network_security_rule`](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule).
 
-> **Documentation Note:** While open API access simplifies testing and development, production clusters should always restrict API server access to known IP ranges.
+> **Note:** While open API access simplifies testing and development, production clusters should always restrict API server access to known IP ranges.
 
 </details>
 
@@ -97,7 +97,7 @@ This finding indicates that your Azure Key Vault network access controls are not
 4. Use service endpoints to restrict access to specific Azure services
 5. Implement "Purge Protection" and "Soft Delete" for additional security
 
-> **Documentation Note:** Default deny configurations provide better security posture but may complicate initial setup and testing. For automated testing environments, clearly document these exceptions.
+> **Note:** Default deny configurations provide better security posture but may complicate initial setup and testing. For automated testing environments, clearly document these exceptions.
 
 </details>
 
@@ -116,7 +116,7 @@ This finding indicates that Role-Based Access Control (RBAC) is not enabled on y
 4. Create and assign the appropriate roles to users and service principals
 5. Follow the principle of least privilege when assigning permissions
 
-> **Documentation Note:** While disabling RBAC simplifies testing by reducing permission barriers, this significantly reduces security and should never be done in production. For testing purposes, consider using dedicated test users with appropriate RBAC roles instead.
+> **Note:** While disabling RBAC simplifies testing by reducing permission barriers, this significantly reduces security and should never be done in production. For testing purposes, consider using dedicated test users with appropriate RBAC roles instead.
 
 </details>
 
@@ -135,7 +135,7 @@ This finding indicates that comprehensive logging is not enabled on your Kuberne
 4. Create custom queries and alerts based on collected logs
 5. Consider implementing Azure Security Center for enhanced monitoring
 
-> **Documentation Note:** While disabling logging simplifies testing environments and reduces costs, production environments should always have comprehensive logging enabled. For testing purposes, consider using a shared Log Analytics workspace with appropriate retention policies.
+> **Note:** While disabling logging simplifies testing environments and reduces costs, production environments should always have comprehensive logging enabled. For testing purposes, consider using a shared Log Analytics workspace with appropriate retention policies.
 
 </details>
 
