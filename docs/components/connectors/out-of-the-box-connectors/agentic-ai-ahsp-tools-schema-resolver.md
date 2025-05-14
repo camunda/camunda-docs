@@ -45,11 +45,11 @@ A tool definition consists of the following properties:
 - **description**: The description of the tool, telling an AI integration the purpose of the tool. If the
   **documentation** of the activity is set, it will be used as the description. Otherwise, the **name** of the activity
   will be used.
-- **inputSchema**: The input schema of the tool, describing the input parameters of the tool. This is a JSON schema
+- **inputSchema**: The input schema of the tool, describing the input parameters of the tool. This is a JSON Schema
   object. The connector will look for all input/output mappings of the activity and will create
-  a [JSON schema](https://json-schema.org/) based on the
+  a [JSON Schema](https://json-schema.org/) based on the
   [`fromAi`](../../modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) function calls
-  found in the mappings. If no `fromAi` function calls are found, an empty JSON schema object will be returned.
+  found in the mappings. If no `fromAi` function calls are found, an empty JSON Schema object will be returned.
 
 ## AI-generated parameters via `fromAi`
 
@@ -108,8 +108,8 @@ fromAi(toolCall.firstNumber, "The first number.", "number")
 fromAi(toolCall.shouldCalculate, "Defines if the calculation should be executed", "boolean")
 ```
 
-For more complex type definitions, the fourth parameter of the function allows you to specify a JSON schema (must be a
-FEEL context). Note that support for the JSON schema features is depending on the AI integration:
+For more complex type definitions, the fourth parameter of the function allows you to specify a JSON Schema (must be a
+FEEL context). Note that support for the JSON Schema features is depending on the AI integration:
 
 ```feel
 fromAi(
