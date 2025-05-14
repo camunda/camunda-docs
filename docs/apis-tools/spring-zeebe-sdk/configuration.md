@@ -749,7 +749,21 @@ camunda:
 
 ##### Control tenant usage
 
-To control which tenants your job workers should use, you can configure:
+Generally the [client default tenantId](#tenant-usage) is used for all job worker activations.
+
+To configure additional tenant ids to be used by all workers you can configure global worker defaults:
+
+```yaml
+camunda:
+  client:
+    worker:
+      defaults:
+        tenant-ids:
+          - <default>
+          - foo
+```
+
+Additionally, you can set tenant ids on job worker level by using the annotation:
 
 ```java
 @JobWorker(tenantIds="myOtherTenant")
@@ -758,7 +772,7 @@ public void foo() {
 }
 ```
 
-This can also be configured as property:
+You can also override the tenant ids for each worker:
 
 ```yaml
 camunda:
@@ -769,18 +783,6 @@ camunda:
           tenants-ids:
             - <default>
             - foo
-```
-
-To configure a global default, you can set:
-
-```yaml
-camunda:
-  client:
-    worker:
-      defaults:
-        tenant-ids:
-          - <default>
-          - foo
 ```
 
 ## Additional configuration options
