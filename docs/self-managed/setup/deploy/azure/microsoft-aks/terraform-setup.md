@@ -22,7 +22,7 @@ If you are completely new to Terraform and the concept of IaC, consider reading 
 - [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with your AKS cluster.
 - [jq](https://stedolan.github.io/jq/download/) to parse and manipulate JSON (e.g. Terraform outputs).
 - **Azure service quotas**
-  - Check your quotas for **Virtual Networks**, **vCPU cores**, and **Storage Accounts** in the target region: [Azure subscription and service limits](https://learn.microsoft.com/azure/azure-resource-manager/management/azure-subscription-service-limits).
+  - Check your quotas for **Virtual Networks**, **vCPU cores**, and **Storage Accounts** in your chosen target region: [Azure subscription and service limits](https://learn.microsoft.com/azure/azure-resource-manager/management/azure-subscription-service-limits).
   - If you hit a limit, request an increase via the Azure portal: [Request a quota increase](https://learn.microsoft.com/azure/azure-resource-manager/management/subscribe-quota-increase-request).
 - This guide uses **GNU Bash** for all shell commands.
 
