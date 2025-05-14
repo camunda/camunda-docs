@@ -800,7 +800,7 @@ const sidebar: SidebarsConfig = {
         {
           type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/assign-application-to-tenant",
-          label: "Assign a user to a tenant",
+          label: "Assign an application to a tenant",
           className: "api-method put",
         },
         {
