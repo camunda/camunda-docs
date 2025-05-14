@@ -34,14 +34,14 @@ The following prerequisites are required for IDP:
 
 The following requirements apply for IDP application clusters:
 
-| Requirement                                                    | Description                                                                                                                                                                                                                                                 |
-| :------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Connector secrets](#aws-secrets)                              | You must configure the required IDP AWS connector secrets on any cluster used with IDP.                                                                                                                                                                     |
-| [Document handling](/components/concepts/document-handling.md) | IDP requires a cluster that supports document handling. For example, a version 8.7 or higher cluster.                                                                                                                                                       |
-| Cluster health                                                 | IDP applications and projects are only fully operational when linked to a healthy, active cluster. If needed, you can select an unstable or unhealthy cluster when first creating an IDP application, and change to a stable cluster when one is available. |
+| Requirement                                                           | Description                                                                                                                                                                                                                                                 |
+| :-------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Connector secrets](#aws-secrets)                                     | You must configure the required IDP AWS connector secrets on any cluster used with IDP.                                                                                                                                                                     |
+| [Document handling](/components/document-handling/getting-started.md) | IDP requires a cluster that supports document handling. For example, a version 8.7 or higher cluster.                                                                                                                                                       |
+| Cluster health                                                        | IDP applications and projects are only fully operational when linked to a healthy, active cluster. If needed, you can select an unstable or unhealthy cluster when first creating an IDP application, and change to a stable cluster when one is available. |
 
 :::info
-To learn more about storing, tracking, and managing documents in Camunda 8, see [document handling](/components/concepts/document-handling.md).
+To learn more about storing, tracking, and managing documents in Camunda 8, see [document handling](/components/document-handling/getting-started.md).
 :::
 
 ## Configure IDP
@@ -98,7 +98,7 @@ To use [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md) to deploy and 
 
    1. Save and close the file.
 
-   1. Configure [document handling environment variables](/components/concepts/document-handling.md) for the Tasklist and Zeebe components (for example, in the `.env` file).
+   1. Configure [document handling environment variables](/components/document-handling/getting-started.md) for the Tasklist and Zeebe components (for example, in the `.env` file).
 
 1. Start Camunda 8 Run via Docker Compose. For example, run `./start.sh --docker` (or `.\c8run.exe start -docker` on Windows) in your terminal.
 
@@ -131,7 +131,7 @@ To use [Docker](/self-managed/setup/deploy/other/docker.md) to deploy and run Ca
 
    1. Save and close the file.
 
-1. Configure [document handling environment variables](/components/concepts/document-handling.md) for the Tasklist and Zeebe components.
+1. Configure [document handling environment variables](/components/document-handling/getting-started.md) for the Tasklist and Zeebe components.
 1. [Run Camunda 8 with Docker Compose](/self-managed/setup/deploy/local/docker-compose.md#run-camunda-8-with-docker-compose). For example, run the following command in the extracted directory:
 
    ```

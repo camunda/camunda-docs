@@ -149,6 +149,11 @@ RewriteRule ^optimize/3.11.0/self-managed/(.*)$ /docs/8.3/self-managed/$1 [R=301
 #   8.8: content moves introduced prior to the release of version 8.8.
 #---------------------------------------------------------------------------------
 
+# Move document handling content
+RewriteRule ^docs/next/components/concepts/document-handling/(.*)$ /docs/next/components/document-handling/getting-started/ [R=301,L]
+RewriteRule ^docs/next/guides/document-handling/(.*)$ /docs/next/components/document-handling/getting-started/ [R=301,L]
+RewriteRule ^docs/next/self-managed/concepts/document-handling/document-storage-configuration/(.*)$ /docs/next/self-managed/document-handling/configuration/overview/ [R=301,L]
+
 # Remove 8.3 leftovers
 RewriteRule ^docs/self-managed/operational-guides/update-guide/820-to-830/(.*)$ https://unsupported.docs.camunda.io/8.3/docs/self-managed/operational-guides/update-guide/820-to-830/ [R=301,L]
 RewriteRule ^docs/8.7/self-managed/operational-guides/update-guide/820-to-830/(.*)$ https://unsupported.docs.camunda.io/8.3/docs/self-managed/operational-guides/update-guide/820-to-830/ [R=301,L]

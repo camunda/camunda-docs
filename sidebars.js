@@ -27,7 +27,6 @@ module.exports = {
         "guides/configuring-out-of-the-box-connectors",
         "guides/use-connectors-in-hybrid-mode",
         "guides/host-custom-connectors",
-        "guides/document-handling",
       ],
       Improve: [
         "guides/improve-processes-with-optimize",
@@ -82,7 +81,6 @@ module.exports = {
         "components/concepts/backups",
         "components/concepts/resource-deletion",
         "components/concepts/resource-authorizations",
-        "components/concepts/document-handling",
         {
           "Access control": [
             "components/concepts/access-control/user-groups",
@@ -137,6 +135,38 @@ module.exports = {
           ],
         },
       ],
+    },
+    {
+      type: "category",
+      label: "Document handling",
+      link: {
+        type: "doc",
+        id: "components/document-handling/getting-started",
+      },
+      items: [
+        {
+          type: "category",
+          label: "Use cases",
+          link: {
+            type: "doc",
+            id: "components/document-handling/use-cases/use-cases",
+          },
+          items: [
+            "components/document-handling/use-cases/upload-document-to-bpmn-process",
+            "components/document-handling/use-cases/display-and-download-document",
+            "components/document-handling/use-cases/send-document-to-external-system-via-connector",
+          ],
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Robotic Process Automation (RPA)",
+      link: {
+        type: "doc",
+        id: "components/rpa/overview",
+      },
+      items: ["components/rpa/getting-started", "components/rpa/production"],
     },
     {
       type: "category",
@@ -1197,12 +1227,6 @@ module.exports = {
         "self-managed/concepts/mapping-rules",
         "self-managed/concepts/elasticsearch-privileges",
         "self-managed/concepts/opensearch-privileges",
-        {
-          "Document handling": [
-            "self-managed/concepts/document-handling/getting-started",
-            "self-managed/concepts/document-handling/document-storage-configuration",
-          ],
-        },
       ],
     },
     {
@@ -1437,6 +1461,29 @@ module.exports = {
             {
               "Desktop Modeler": [
                 "self-managed/modeler/desktop-modeler/deploy-to-self-managed",
+              ],
+            },
+          ],
+        },
+        {
+          type: "category",
+          label: "Document handling",
+          link: {
+            type: "doc",
+            id: "self-managed/document-handling/getting-started",
+          },
+          items: [
+            {
+              type: "category",
+              label: "Configuration",
+              link: {
+                type: "doc",
+                id: "self-managed/document-handling/configuration/overview",
+              },
+              items: [
+                "self-managed/document-handling/configuration/camunda-8-run",
+                "self-managed/document-handling/configuration/docker",
+                "self-managed/document-handling/configuration/helm",
               ],
             },
           ],
