@@ -16,9 +16,8 @@ sub-process defining the tools to be used, but can also be used independently.
 The core features provided by the AI Agent connector are:
 
 - Support for **different LLM providers**
-- **Conversational/short-term memory** handling to enable feedback loops. For example a user can ask follow-up questions
-  to
-  an agent response.
+- **Conversational/short-term memory** handling to enable feedback loops. For example, a user can ask follow-up
+  questions to an agent response.
 - **Tool calling** support to make the agent capable of interacting with tasks within the ad-hoc sub-process. This
   allows leveraging all Camunda features such as connectors and user tasks (human-in-the-loop). The AI Agent connector
   provides automatic **tool resolution** to identify the tools available in the ad-hoc sub-process.
@@ -42,9 +41,9 @@ connector task multiple times. Depending on your use case, the connector can be 
 As the agent preserves the context of the conversation, follow-up questions/tasks and handling of tool call results can
 relate to the previous interaction with the LLM, allowing the LLM to provide more relevant responses.
 
-A crucial concept to make this work is the **Agent context** process variable which contains all the needed information
-to allow re-entering the AI Agent connector task with the same context as before. This variable is both mapped as
-**input** and **output** variable of the connector and will be updated on each agent execution.
+A crucial concept to make this work is the **Agent context** process variable which contains all the necessary
+information to allow re-entering the AI Agent connector task with the same context as before. This variable is both
+mapped as **input** and **output** variable of the connector and will be updated on each agent execution.
 
 :::important
 When modelling an AI Agent, make sure to align the agent context input variable and the response variable/expression so
@@ -80,6 +79,57 @@ Agent: John Doe's credit card has been created successfully.
 ## Configuration
 
 ### Model
+
+:::note
+Use Camunda secrets to store credentials and avoid exposing sensitive information directly from the process. Refer
+to [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
+:::
+
+:::note
+Depending on the used model, you might need to adapt your prompts and the way you are using the AI Agent connector. Make
+sure to consult the provider-specific documentation and to test your use case with the provider you are using.
+:::
+
+The first step to configure on the AI Agent connector is the desired LLM provider and model. The connector currently
+supports the following providers with more being added in the future:
+
+- [Anthropic](http://anthropic.com/) (Claude models)
+- [AWS Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html)
+- [OpenAI](http://openai.com/)
+
+Depending on the selected provider, you can define a set of optional model parameters,
+see [Model Parameters](#model-parameters).
+
+#### Anthropic
+
+Provides support for [Anthropic's Messages API](https://docs.anthropic.com/en/api/messages). To
+get started, configure the desired model (see
+[documentation](https://docs.anthropic.com/en/docs/about-claude/models/all-models)) and an API key.
+
+#### Bedrock
+
+:::note
+Model availablilty depends on the region and the model you are using. You might need to first request the model to be
+available for your account.
+:::
+
+Provides support for models provided through
+the [AWS Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html) service through the
+[`Converse`](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html) API.
+
+For detailed documentation on the authentication configuration, see
+the [authentication section of the dedicated AWS Bedrock connector](./amazon-bedrock.md#authentication).
+
+For a list of **models**, please consult
+the [documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html).
+
+#### OpenAI
+
+Provides support for [OpenAI's Chat Completion API](https://platform.openai.com/docs/api-reference/chat). To get
+started, configure the desired **model** (see [documentation](https://platform.openai.com/docs/models)) and an
+**API key**.
+
+Optionally, you can configure an **organization ID** and/or **project ID** if needed for your account.
 
 ### System Prompt
 
@@ -142,13 +192,13 @@ In the future, the AI Agent connector will support different ways of storing the
 data-intensive use cases.
 :::
 
-Text files (MIME types starting with `text/` plus XML, JSON, and YAML files) will be passed as plain text content
-blocks.
+Text files (MIME types matching `text/*`, `application/xml`, `application/json`, or `application/yaml`) will be passed
+as plain text content blocks.
 
 All other supported file types will be passed as base64 encoded content blocks:
 
-- PDF files
-- Images (jpg, png, gif, webp)
+- PDF files (`application/pdf`)
+- Images (`image/jpg`, `image/png`, `image/gif`, `image/webp`)
 
 Audio and video files might be supported in the future, but will currently lead to an error if passed. The same goes for
 all other unsupported file types.
