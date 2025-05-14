@@ -27,7 +27,7 @@ can reference.
 1. Create a service task.
 2. [Apply](../use-connectors/outbound.md) the **Ad-Hoc Tools Schema** element template.
 3. Configure the **Ad-hoc sub-process ID** to reference the element ID of the ad-hoc sub-process.
-4. Configure [a result variable or a result expression](../use-connectors/#variableresponse-mapping) to map the
+4. Configure [a result variable or a result expression](../use-connectors/index.md#variableresponse-mapping) to map the
    connector results to process variables.
 
 ## Tool Definitions
