@@ -32,7 +32,7 @@ The core features provided by the AI Agent connector are:
 
 ## Concepts
 
-![agenticai-ai-agent-loop.png](../img/agenticai-ai-agent-loop.png)
+![agenticai-ai-agent-loop-overview.png](../img/agenticai-ai-agent-loop-overview.png)
 
 The basic concept of the AI Agent connector is to be used as part of a **feedback loop**, re-entering the AI Agent
 connector task multiple times. Depending on your use case, the connector can be part of different loops:
