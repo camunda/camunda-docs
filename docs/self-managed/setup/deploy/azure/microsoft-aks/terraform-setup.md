@@ -23,8 +23,8 @@ If you are completely new to Terraform and the concept of IaC, consider reading 
 - [jq](https://stedolan.github.io/jq/download/) to parse and manipulate JSON (e.g. Terraform outputs).
 - **Azure service quotas**
   - Check your quotas for **Virtual Networks**, **vCPU cores**, and **Storage Accounts** in the target region: [Azure subscription and service limits](https://learn.microsoft.com/azure/azure-resource-manager/management/azure-subscription-service-limits).
-  - If you hit a limit, request an increase via the Azure portal: [Request a quota increase](https://learn.microsoft.com/azure/azure-resource-manager/management/subscribe-quota-increase-request).
-- This guide uses **GNU Bash** for all shell commands.
+  - If you reach a limit, you can request an increase through the Azure portal: [Request a quota increase](https://learn.microsoft.com/en-us/azure/extended-zones/request-quota-increase).
+  - This guide uses **GNU Bash** for all shell commands.
 
 For the exact tool versions we’ve tested against, see the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file in the repository.
 
