@@ -120,7 +120,7 @@ Compatibility is only validated if the platform version is provided by both the 
 
 ```json
 {
-  ...
+  ...,
   "engines": {
     "camunda": ">8.5",
     "camundaDesktopModeler": ">=5.30",
