@@ -70,13 +70,13 @@ This finding indicates that a security group has been configured with a rule tha
 
 This finding shows that your Kubernetes cluster's API server is accessible from any IP address. The API server is the control plane for Kubernetes and unrestricted access increases the risk of unauthorized access and potential attacks.
 
-#### Potential Resolution
+#### Potential Resolutions
 
-1. Configure authorized IP ranges for the Kubernetes API server
-2. Use the `--api-server-authorized-ip-ranges` parameter to restrict access
-3. Implement private clusters where the API server has no public IP
-4. Use Azure Private Link to access the API server privately
-5. Enable Azure AD integration for additional authentication
+1. Configure `api_server_access_profile` in Terraform’s `azurerm_kubernetes_cluster` to set `authorized_ip_ranges` (and optionally `subnet_id`/`vnet_integration_enabled`)
+2. Enable private-cluster mode with `private_cluster_enabled = true`
+3. Provision an `azurerm_private_endpoint` for the AKS Private Link service
+4. Enable Azure AD–based RBAC via the `role_based_access_control { azure_active_directory { … } }` block
+5. Restrict Network Security Group rules on the control-plane subnet to lock down API server access
 
 > **Documentation Note:** While open API access simplifies testing and development, production clusters should always restrict API server access to known IP ranges.
 
