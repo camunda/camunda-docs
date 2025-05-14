@@ -36,7 +36,7 @@ To try out Camunda 8 or for development purposes, consider signing up for our [S
 
 To keep this guide simple and focused, certain best practices are referenced via links to additional documentation, allowing you to explore each area in more detail when you're ready.
 
-### Azure Security Issues and Resolutions
+#### Security
 
 The following security considerations were relaxed to streamline adoption and development. These should be reassessed and hardened before deploying to production. The following items were identified using [Trivy](https://trivy.dev/) and can be looked up in the [Aqua vulnerability database](https://avd.aquasec.com/).
 
@@ -49,7 +49,7 @@ This section explains common security findings in Azure deployments and provides
 
 #### Reasoning
 
-This finding indicates that a security group has been configured with a rule that allows incoming traffic from any IP address (0.0.0.0/0). This creates a significant security risk as it exposes your resources to potential attacks from anywhere on the internet.
+This rule permits inbound traffic from `0.0.0.0/0`, meaning any external source can reach the AKS subnet. It may expose workloads or future public IPs to unsolicited access, increasing the risk of compromise—especially if internal services are misconfigured.
 
 #### Potential Resolution
 
@@ -59,7 +59,7 @@ This finding indicates that a security group has been configured with a rule tha
 4. Implement a bastion host/jump box for secure access
 5. Consider using [Azure Private Link](https://learn.microsoft.com/en-us/azure/private-link/private-link-overview) for private connectivity.
 
-> **Note:** While allowing 0.0.0.0/0 simplifies testing, this should never be used in production environments. For automated testing purposes, consider using dedicated testing subscriptions with regular cleanup procedures.
+> **Note:** This doesn't affect the AKS control plane directly, but still weakens the overall network boundary.
 
 </details>
 
@@ -72,11 +72,11 @@ This finding shows that your Kubernetes cluster's API server is accessible from 
 
 #### Potential Resolution
 
-1. Configure [`api_server_access_profile`](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster#api_server_access_profile) in the `azurerm_kubernetes_cluster` resource to set `authorized_ip_ranges`.
-2. Enable private clusters via `private_cluster_enabled = true` on `azurerm_kubernetes_cluster` ([docs](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster#private_cluster_enabled)).
-3. Provision an [`azurerm_private_endpoint`](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint) for the AKS Private Link service.
-4. Enable Azure AD–based RBAC with a `role_based_access_control { azure_active_directory { … } }` block in `azurerm_kubernetes_cluster` ([docs](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster#role_based_access_control)).
-5. Lock down the control-plane subnet using [`azurerm_network_security_group`](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_group) and [`azurerm_network_security_rule`](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule).
+1. Configure `authorized_ip_ranges` in `api_server_access_profile` to restrict API server access. ([docs](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster#api_server_access_profile))
+2. Enable private cluster mode with `private_cluster_enabled = true`. ([docs](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster#private_cluster_enabled))
+3. Create an `azurerm_private_endpoint` for the AKS Private Link service. ([docs](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint))
+4. Enable Azure AD–based RBAC via `role_based_access_control { azure_active_directory { ... } }`. ([docs](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster#role_based_access_control))
+5. Use `azurerm_network_security_group` and `azurerm_network_security_rule` to restrict access to the control-plane subnet. ([NSG](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_group), [rule](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule))
 
 > **Note:** While open API access simplifies testing and development, production clusters should always restrict API server access to known IP ranges.
 
