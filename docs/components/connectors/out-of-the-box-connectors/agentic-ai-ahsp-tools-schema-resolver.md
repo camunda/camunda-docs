@@ -122,8 +122,10 @@ fromAi(
 
 ## Response Structure
 
-The connector returns a list of tool definitions in the following format. You can either configure a result variable to
-contain the whole response or use a result expression to map parts of the response into your process.
+The connector returns a list of tool definitions in the following format. Individual tool definitions are modeled after
+the [list tools response](https://modelcontextprotocol.io/specification/2025-03-26/server/tools#listing-tools) defined
+in the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) specification, so you should be able to directly
+use the definitions with different LLMs or transform them into the reuired format for your AI integration.
 
 ```json
 {
@@ -172,3 +174,6 @@ contain the whole response or use a result expression to map parts of the respon
   ]
 }
 ```
+
+You can either configure a result variable to contain the whole response or use a result expression to map parts of the
+response into your process.
