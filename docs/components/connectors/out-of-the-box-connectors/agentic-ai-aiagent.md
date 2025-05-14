@@ -5,6 +5,14 @@ title: AI Agent connector
 description: AI agent connector implementing a feedback loop using for user interactions and toolcalls with an LLM.
 ---
 
+:::important
+Make sure to check out the following resources for a more **hands-on guide** to the AI Agent integration:
+
+- [Intelligent by Design: A Step-by-Step Guide to AI Task Agents in Camunda](https://camunda.com/blog/2025/05/building-your-first-ai-agent-with-camunda-s-new-agentic-ai/)
+- [AI Email Support Agent Blueprint](https://marketplace.camunda.com/en-US/apps/522492/ai-email-support-agent) on the
+  Camunda Marketplace
+  :::
+
 Camunda has taken a systemic, future-ready approach for agentic AI by building on the proven foundation of BPMN. At the
 core of this approach is our use of the BPMN ad-hoc sub-process construct, which allows for tasks to be executed in any
 order, skipped, or repeated—all determined dynamically at runtime based on the context of the process instance.
@@ -270,6 +278,104 @@ An easy approach to get started with modelling is to use the result variable (e.
 
 ## Modeling the tools feedback loop
 
+After configuring the AI Agent connector, you can add an ad-hoc sub-process and the tools feedback loop to connect your
+agent to the tools it needs to fulfill its purpose.
+
+### Add the ad-hoc sub-process
+
+Start off by adding an ad-hoc sub-process and mark it as
+a [**parallel multi-instance**](../../modeler/bpmn/multi-instance/multi-instance.md). This will allow the process to
+execute the tools in parallel and to wait for all tool calls to finish before continuing with the process. Configure a
+descriptive ID for your ad-hoc sub-process and **configure it** under the [tools](#tools) section of the AI Agent
+connector.
+
+After adding the ad-hoc sub-process, model a loop into the sub-process and back to the AI Agent connector. You can mark
+the `no` flow of the `Contains tool calls?` gateway as the default flow.
+
+![aiagent-tools-loop-empty.png](../img/agenticai-tools-loop-empty.png)
+
+Next, configure the `yes` flow condition to be activated when the AI Agent response contains a list of tool calls.
+Assuming you used the suggested default values for the [result variable/expression](#result-variableexpression) you can
+configure the condition to:
+
+```feel
+not(agent.toolCalls = null) and count(agent.toolCalls) > 0
+```
+
+This will lead the process to route the execution through the ad-hoc sub-process when the LLM response requests to call
+one or more tools.
+
+### Configure multi-instance execution
+
+:::note
+Use the suggested values as a starting point and change them to your needs if needed or when dealing with multiple
+agents within the same process.
+:::
+
+As stated above, the ad-hoc sub-process needs to be configured as a **parallel multi-instance** sub-process. This
+ensures that:
+
+- Tools can be called **independently of each other**, each with its own set of input parameters. This also implies that
+  the same tool can be called **multiple times with different parameters** within the same ad-hoc sub-process execution.
+  For example, a _Lookup user_ tool could be called multiple times with different user IDs.
+- The process can **wait until all requested tools have been executed** before passing the results back to the AI
+  Agent/LLM. After all tools have been executed, results will be passed back to the AI Agent connector.
+
+The multi-instance configuration is the same for each agent configuration, and it will be possible to reuse a template
+to make this configuration easier. For the moment, you need to configure the following properties.
+
+- **Input collection**: set this to the list of tool calls your AI Agent connector returns, for example
+  `agent.toolCalls`.
+- **Input element**: this will contain the individual tool call including LLM-generated input parameters based on
+  the [tool definition](#tool-definitions). Suggested value: `toolCall`. This needs to be aligned with
+  the `fromAi` function calls in the tool definition.
+- **Output collection**: this will collect the results of all the requested tool calls. Suggested value:
+  `toolCallResults`. Make sure to pass this value as [Tool Call Results](#tools) in the AI Agent configuration.
+- **Output element**: this will collect the individual tool call result as returned by an individual tool
+  (see [Tool Call Responses](#tool-call-responses)). When changing ths `toolCallResult` to something else, make sure
+  to also change your tools to write to the updated variable name.
+  ```feel
+  {
+    id: toolCall._meta.id,
+    name: toolCall._meta.name,
+    content: toolCallResult
+  }
+  ```
+
+As a last step, you need to configure the element to activate to the ad-hoc sub-process. As we're using a multi-instance
+configuration, this is always a single task ID of the tool being executed in the individual instance. Configure
+**Active elements collection** to contain exactly `[toolCall._meta.name]`.
+
+After configuring all of the above, your ad-hoc sub-process configuration should look like the following:
+
+![agenticai-ad-hoc-sub-process-multi-instance.png](../img/agenticai-ad-hoc-sub-process-multi-instance.png)
+
+## Modeling a user feedback loop
+
+:::note
+How exactly this needs to be modeled highly depends on your use case. The example below is expecting a simple feedback
+action based on a user task, but this could also be interacting with other process flows or interacting with another
+agent.
+
+For example, instead of the user task, you could also use another LLM connector to verify the response of the AI Agent.
+An example of such a pattern can be found in
+the [Fraud Detection Example](https://github.com/camunda/connectors/tree/main/connectors/agentic-ai/examples/fraud-detection)).
+:::
+
+Similar to the tools feedback loop, another feedback loop acting on user feedback or other process interactions can
+easily
+be added by re-entering the AI Agent connector with new information. You need to make sure to model your user prompt in
+a way that it adds the follow-up data instead of the initial request.
+
+For example, your **User Prompt** field could contain the following FEEL expression to make sure it acts some follow-up
+input if given:
+
+```feel
+=if (is defined(followUpInput)) then followUpInput else initialUserInput
+```
+
+![agenticai-user-feedback-loop.png](../img/agenticai-user-feedback-loop.png)
+
 ## Tool Resolution
 
 When resolving the available tools within an ad-hoc sub-process, the AI Agent will take all activities into account
@@ -338,17 +444,15 @@ to configure all the necessary metadata (e.g. description, type) to generate an 
 schema connector will collect all `fromAi` definitions within an activity and combine them into an input schema for
 the activity.
 
-:::note
-The first argument passed to the `fromAi` function must be a reference type (e.g. not a static string) as this
-reference can be used by an AI integration to inject the value.
+:::important
+The first argument passed to the `fromAi` function must be a reference type (e.g. not a static string), referencing a
+value within the variable defined as **Input element** in the multi-instance configuration. In our examples, we
+typically use `toolCall` as ths input element. Example value: `toolCall.myParameter`.
 :::
 
-:::important
-It depends on the AI integration you are using in combination with the tool resolving, but for the `AI Agent` connector
-it is important that the input is referencing a variable which is used to store all the input parameters for an
-individual tool execution. For example `toolCall.myParameter` (`toolCall` containing all variables for the individual
-tool call).
-:::
+By utilizing the `fromAi` tool call as wrapper function around the actual value the connector can both
+**describe the parameter** for the LLM by generating a JSON Schema from the function calls and at the same time
+**utilize the LLM-generated value** as it can do with any other process variable.
 
 You can use the `fromAi` function in:
 
@@ -423,3 +527,11 @@ Similar to the [user prompt](#documents), tool call responses can contain
 [Camunda Document references](../../concepts/document-handling.md) within arbitrary structures (supporting the same file
 types as for the user prompt). When serializing the tool call response to JSON, document references will be transformed
 to a content block containing the plain text or base64 encoded document content before passing them to the LLM.
+
+## Additional Resources
+
+- [Intelligent by Design: A Step-by-Step Guide to AI Task Agents in Camunda](https://camunda.com/blog/2025/05/building-your-first-ai-agent-with-camunda-s-new-agentic-ai/)
+- [AI Email Support Agent Blueprint](https://marketplace.camunda.com/en-US/apps/522492/ai-email-support-agent) on the
+  Camunda Marketplace
+- the [examples directory](https://github.com/camunda/connectors/tree/main/connectors/agentic-ai/examples) of the
+  agentic AI integration contains a list of working examples you can use to get started
