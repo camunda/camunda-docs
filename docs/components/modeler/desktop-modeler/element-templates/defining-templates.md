@@ -58,7 +58,7 @@ Example:
 - `description : String`: Optional description of the template. Shown in the element template selection modal and in the properties panel (after applying an element template).
 - `keywords: Array<String>`: Optional list of keywords. Can be used to help users find this template. Keywords are used for search and filtering but are not displayed in the UI.
 - `documentationRef : String`: Optional URL pointing to a template documentation. Shown in the properties panel (after applying an element template).
-- `version : Integer`: Optional property to support [templates versioning and upgrading](#template-versioning). If you add a version to a template, it is considered unique based on its ID and version. Two templates can have the same ID if their version is different. 
+- `version : Integer`: Optional property to support [templates versioning and upgrading](#template-versioning). If you add a version to a template, it is considered unique based on its ID and version. Two templates can have the same ID if their version is different.
 - `engines : Object`: Optional dictionary of environments [compatible with the template](#template-compatibility). Environment version is specified with semantic versions range.
 - `appliesTo : Array<String>`: List of BPMN types the template can be applied to.
 - `elementType : Object`: Optional type of the element. If you configure `elementType` on a template, the element is replaced with the specified type when a user applies the template.
