@@ -5,6 +5,9 @@ sidebar_label: Vector database
 description: Embed, store, and retrieve LLM embeddings and store them in vector databases.
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 The **vector database connector** allows embedding, storing, and retrieving Large Language Model (LLM) embeddings. This enables building AI-based solutions for your organizations, such as context document search, long-term LLM memory, and agentic AI interaction.
 
 :::note
@@ -27,7 +30,13 @@ import ConnectorTask from '../../../components/react-components/connector-task.m
 
 ## Operations
 
-### Embed document
+<Tabs groupId="operations" defaultValue="embed" queryString values={
+[
+{label: 'Embed document', value: 'embed' },
+{label: 'Retrieve document', value: 'retrieve' },
+]}>
+
+<TabItem value='embed'>
 
 The **embed document** operation performs the following steps:
 
@@ -46,7 +55,9 @@ To perform this operation, enter the following:
 As a result of this operation, you will get an array of created embedding chunk IDs,
 for example `["d599ec62-fe51-4a91-bbf0-26e1241f9079", "a1fad021-5148-42b4-aa02-7de9d590e69c"]`.
 
-### Retrieve document
+</TabItem>
+
+<TabItem value='retrieve'>
 
 The **retrieve document** operation performs the following steps:
 
@@ -94,6 +105,10 @@ Camunda document reference metadata, similarity score, and the actual text conte
 }
 ```
 
+</TabItem>
+
+</Tabs>
+
 ## Embedding models
 
 ### Amazon Bedrock
@@ -105,7 +120,13 @@ The **vector database connector** uses [LangChain4j implementation](https://docs
 
 ## Vector stores
 
-### Elasticsearch
+<Tabs groupId="vector" defaultValue="elasticsearch" queryString values={
+[
+{label: 'Elasticsearch', value: 'elasticsearch' },
+{label: 'Amazon OpenSearch', value: 'amazon' },
+]}>
+
+<TabItem value='elasticsearch'>
 
 The **vector database connector** can use Elasticsearch as a vector store. The Elasticsearch version must be 8+.
 
@@ -118,7 +139,9 @@ Enter the following parameters:
 - - When embedding: If index is not present, the connector will create a new one.
 - - When retrieving: If the index is absent, the connector will raise an error.
 
-### Amazon OpenSearch
+</TabItem>
+
+<TabItem value='amazon'>
 
 - **Access key** and **Secret key**: Enter AWS IAM credentials for the user that has read/write access.
 - **Server URL**: An Amazon OpenSearch URL _without_ protocol, for example `my-opensearch.aws.com:port`.
@@ -126,6 +149,10 @@ Enter the following parameters:
 - **Index name**: Name of the index where you wish to store embeddings.
 - - When embedding: If index is not present, the connector will create a new one.
 - - When retrieving: If the index is absent, the connector will raise an error.
+
+</TabItem>
+
+</Tabs>
 
 ## Embedding document configuration
 
