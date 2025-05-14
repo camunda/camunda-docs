@@ -160,8 +160,8 @@ you don't need to explicitly define.
 ### User Prompt
 
 The **User Prompt** contains the actual request to the LLM. This could either contain the initial request or a follow-up
-request when being part of a user interaction feedback loop. The value provided as part of this field will be added to
-the conversation memory and passed to the LLM call. In the example above, this would be the messages prefixed with
+request when being part of a response interaction feedback loop. The value provided as part of this field will be added
+to the conversation memory and passed to the LLM call. In the example above, this would be the messages prefixed with
 `User:`.
 
 As the system prompt, the user prompt field supports a list of **User Prompt Parameters** with the same set of provided
@@ -350,22 +350,21 @@ After configuring all of the above, your ad-hoc sub-process configuration should
 
 ![agenticai-ad-hoc-sub-process-multi-instance.png](../img/agenticai-ad-hoc-sub-process-multi-instance.png)
 
-## Modeling a user feedback loop
+## Modeling a response interaction feedback loop
 
 :::note
 How exactly this needs to be modeled highly depends on your use case. The example below is expecting a simple feedback
-action based on a user task, but this could also be interacting with other process flows or interacting with another
-agent.
+action based on a user task, but this could also be interacting with other process flows or with another
+agent process.
 
 For example, instead of the user task, you could also use another LLM connector to verify the response of the AI Agent.
 An example of such a pattern can be found in
 the [Fraud Detection Example](https://github.com/camunda/connectors/tree/main/connectors/agentic-ai/examples/fraud-detection)).
 :::
 
-Similar to the tools feedback loop, another feedback loop acting on user feedback or other process interactions can
-easily
-be added by re-entering the AI Agent connector with new information. You need to make sure to model your user prompt in
-a way that it adds the follow-up data instead of the initial request.
+Similar to the tools feedback loop, another feedback loop acting on the agent response can be added by re-entering the
+AI Agent connector with new information. You need to make sure to model your user prompt in a way that it adds the
+follow-up data instead of the initial request.
 
 For example, your **User Prompt** field could contain the following FEEL expression to make sure it acts some follow-up
 input if given:
