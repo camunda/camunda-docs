@@ -44,6 +44,21 @@ It always returns an array of objects, whether a user uploads a single document 
 
 Single document uploads are accessible using `value[1]` (since [FEEL](/components/modeler/feel/what-is-feel.md) uses 1-based indexing).
 
+Refer to the example array below:
+
+```
+[
+  {
+    "documentId": "u123",
+    "endpoint": "https://api.example.com/documents/u123",
+    "metadata": {
+      "fileName": "Document.pdf",
+      "contentType": "application/pdf"
+    }
+  }
+]
+```
+
 ## Upload a document via inbound webhook connector
 
 Documents can be added to a process using the [inbound](/components//connectors/connector-types.md#inbound-connectors) [HTTP webhook connector](/components/connectors/protocol/http-webhook.md).
