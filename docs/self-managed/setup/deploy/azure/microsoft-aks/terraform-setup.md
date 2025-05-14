@@ -57,7 +57,7 @@ This finding indicates that a security group has been configured with a rule tha
 2. For management access, limit SSH/RDP to your company's IP ranges
 3. Use just-in-time access for administrative purposes
 4. Implement a bastion host/jump box for secure access
-5. Consider using Azure Private Link for private connectivity
+5. Consider using [Azure Private Link](https://learn.microsoft.com/en-us/azure/private-link/private-link-overview) for private connectivity.
 
 > **Documentation Note:** While allowing 0.0.0.0/0 simplifies testing, this should never be used in production environments. For automated testing purposes, consider using dedicated testing subscriptions with regular cleanup procedures.
 
