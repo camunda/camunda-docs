@@ -156,7 +156,7 @@ This finding indicates that comprehensive logging is not enabled on your Kuberne
 ### Outcome
 
 _Infrastructure diagram for a single-region AKS setup (click on the image to open the PDF version)_
-[![Infrastructure Diagram AKS Single-Region](./assets/aks-single-region.png)](./assets/aks-single-region.pdf)
+[![Infrastructure Diagram AKS Single-Region](./assets/aks-single-region.jpg)](./assets/aks-single-region.pdf)
 
 :::caution
 
@@ -164,12 +164,6 @@ The vnet and the subnets are sized according to standard Azure recommendations b
 Due to Azure CNI, every pod will get assigned a real internal IP. While the defaults are more than sufficient for this guide, if you expect a large number of pods in a single subnet, consider using a larger subnet for AKS like /23 or /22.
 
 :::
-
-Following this tutorial will result in:
-
-- An Azure Kubernetes Service (AKS) cluster with node pools provisioned and ready for Camunda 8 installation.
-- The [Azure Disk CSI driver](https://learn.microsoft.com/azure/aks/csi-storage-drivers) is installed and configured, used by the Camunda 8 Helm chart to create [persistent volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/).
-- An [Azure Database for PostgreSQL - Flexible Server](https://learn.microsoft.com/azure/postgresql/flexible-server/overview) instance provisioned to be used by the Camunda platform.
 
 ## 1. Configure Azure and initialize Terraform
 
@@ -203,7 +197,7 @@ Terraform should run under a dedicated service principal or managed identity wit
 
 :::
 
-You can further change the region and other preferences and explore different [authentication](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs#authenticating-via-the-azure-cli) methods:
+You can further change the region and other preferences and explore different [authentication methods](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/azure_cli):
 
 - For development or testing purposes, you can use the [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli). If you have configured your Azure CLI, Terraform will automatically detect and use those credentials.
   To configure the Azure CLI:
@@ -234,7 +228,7 @@ az login --service-principal \
   --tenant <tenant-id>
 ```
 
-Note that the `appId` will be needed as a value for `terraform_sp_app_id` when creating `terraform.tfvars` in a later step.
+Note that the `appId` will be needed as a value for `terraform_sp_app_id` in `terraform.tfvars` [in a later step.](#creating-terraformtfvars).
 
 :::warning
 
@@ -301,7 +295,7 @@ This value specifies the Azure Subscription ID in which all infrastructure will 
 az account show --query "id" -o tsv
 ```
 
-It is essential to ensure this ID is correct, as Terraform will use it to determine where resources are provisioned. Providing an incorrect subscription ID can result in resources being created in the wrong environment or permission-related failures during deployment.
+It is essential to ensure this ID is correct, as Terraform will use it to determine where resources are provisioned.
 
 ##### terraform_sp_app_id
 
@@ -331,7 +325,7 @@ This value is critical because Terraform uses it to assign the necessary permiss
 
 #### Initialize Terraform
 
-Once your authentication is set up, you can initialize your Terraform project. The previous steps configured a dedicated Azure Storage Account and container (`AZURE_STORAGE_ACCOUNT_NAME`, `AZURE_STORAGE_CONTAINER_NAME`) to store your state, and the following creates a backend key that will be used by your configuration.
+Once your authentication is set up, you can initialize your Terraform project. The [previous steps](#create-an-azure-storage-account-for-terraform-state-management) configured a dedicated Azure Storage Account and container (`AZURE_STORAGE_ACCOUNT_NAME`, `AZURE_STORAGE_CONTAINER_NAME`) to store your state...
 
 Configure the backend and download the necessary provider plugins:
 
@@ -433,7 +427,15 @@ Terraform will now create the AKS cluster with all the necessary configurations.
 You can gain access to the AKS cluster using the `Azure CLI` with the following command:
 
 ```bash
-az aks get-credentials --resource-group <your-resource-group> --name <your-cluster-name> --overwrite-existing
+# Extract values from terraform output
+RESOURCE_GROUP=$(terraform output -raw resource_group_name)
+CLUSTER_NAME=$(terraform output -raw aks_cluster_name)
+
+# Get credentials using Azure CLI
+az aks get-credentials \
+  --resource-group "$RESOURCE_GROUP" \
+  --name "$CLUSTER_NAME" \
+  --overwrite-existing
 ```
 
 Replace `<your-resource-group>` and `<your-cluster-name>` with the actual values you have input in the root main.tf. `<your-cluster-name>` will be `<your-resource-prefix>-aks`.
