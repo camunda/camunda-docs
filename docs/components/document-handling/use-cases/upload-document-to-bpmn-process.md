@@ -18,6 +18,21 @@ In the Filepicker configuration, you can specify whether users can upload a sing
 A designed form can be [linked](/components/modeler/web-modeler/advanced-modeling/form-linking.md) to a [user task](#upload-a-document-from-a-user-task-in-tasklist) or used to [start a process](#upload-a-document-to-start-a-process).
 Documents uploaded with the form can then be [referenced](#get-reference-to-an-uploaded-document) later in the process.
 
+The Filepicker always returns an array with metadata for a single or multiple files, for example:
+
+```json
+[
+  {
+    "documentId": "u123",
+    "endpoint": "https://api.example.com/documents/u123",
+    "metadata": {
+      "fileName": "Document.pdf",
+      "contentType": "application/pdf"
+    }
+  }
+]
+```
+
 ### Upload a document from a user task in Tasklist
 
 When the process is deployed and running, users can access and complete user tasks that include a form with the Filepicker component in [Tasklist](/components/tasklist/introduction-to-tasklist.md):
