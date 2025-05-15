@@ -997,104 +997,99 @@ module.exports = {
       ],
     },
     {
-      "Reference architecture": [
+      type: "category",
+      label: "Reference architecture",
+      link: {
+        type: "doc",
+        id: "self-managed/reference-architecture/reference-architecture",
+      },
+      items: [
         {
           type: "category",
-          label: "(Consolidated) Reference architecture",
+          label: "Kubernetes",
           link: {
             type: "doc",
-            id: "self-managed/reference-architecture/reference-architecture",
+            id: "self-managed/reference-architecture/kubernetes",
           },
           items: [
-            "self-managed/setup/overview",
             {
-              type: "category",
-              label: "Kubernetes",
-              link: {
-                type: "doc",
-                id: "self-managed/reference-architecture/kubernetes",
-              },
-              items: [
-                {
-                  "AWS EKS": [
-                    "self-managed/setup/deploy/amazon/amazon-eks/eks-terraform",
-                    "self-managed/setup/deploy/amazon/amazon-eks/eks-helm",
-                    "self-managed/setup/deploy/amazon/amazon-eks/dual-region",
-                  ],
-                },
-                {
-                  Openshift: [
-                    "self-managed/setup/deploy/amazon/openshift/terraform-setup",
-                    "self-managed/setup/deploy/openshift/redhat-openshift",
-                    "self-managed/setup/deploy/amazon/openshift/terraform-setup-dual-region",
-                    "self-managed/setup/deploy/openshift/redhat-openshift-dual-region",
-                  ],
-                },
+              "Amazon EKS": [
+                "self-managed/setup/deploy/amazon/amazon-eks/eks-terraform",
+                "self-managed/setup/deploy/amazon/amazon-eks/eks-helm",
+                "self-managed/setup/deploy/amazon/amazon-eks/dual-region",
               ],
             },
             {
-              type: "category",
-              label: "Manual JAR",
-              link: {
-                type: "doc",
-                id: "self-managed/reference-architecture/manual",
-              },
-              items: ["self-managed/setup/deploy/amazon/aws-ec2"],
-            },
-            {
-              "Amazon (AWS)": [
-                {
-                  type: "category",
-                  label: "Amazon EKS",
-                  link: {
-                    type: "doc",
-                    id: "self-managed/setup/deploy/amazon/amazon-eks/amazon-eks",
-                  },
-                  items: [
-                    "self-managed/setup/deploy/amazon/amazon-eks/eks-eksctl",
-                    "self-managed/setup/deploy/amazon/amazon-eks/eks-terraform",
-                    "self-managed/setup/deploy/amazon/amazon-eks/eks-helm",
-                    "self-managed/setup/deploy/amazon/amazon-eks/dual-region",
-                    "self-managed/setup/deploy/amazon/amazon-eks/irsa",
-                  ],
-                },
-                {
-                  type: "category",
-                  label: "ROSA",
-                  link: {
-                    type: "doc",
-                    id: "self-managed/setup/deploy/amazon/openshift/terraform-setup",
-                  },
-                  items: [
-                    "self-managed/setup/deploy/amazon/openshift/terraform-setup",
-                    "self-managed/setup/deploy/amazon/openshift/terraform-setup-dual-region",
-                  ],
-                },
-                {
-                  type: "category",
-                  label: "Amazon MarketPlace",
-                  link: {
-                    type: "doc",
-                    id: "self-managed/setup/deploy/amazon/aws-marketplace",
-                  },
-                  items: [],
-                },
-                "self-managed/setup/deploy/amazon/aws-ec2",
-              ],
-              "Microsoft (Azure)": [
-                "self-managed/setup/deploy/azure/microsoft-aks",
-              ],
-              "Google (GCP)": ["self-managed/setup/deploy/gcp/google-gke"],
-              "Red Hat (OpenShift)": [
+              Openshift: [
+                "self-managed/setup/deploy/amazon/openshift/terraform-setup",
                 "self-managed/setup/deploy/openshift/redhat-openshift",
+                "self-managed/setup/deploy/amazon/openshift/terraform-setup-dual-region",
                 "self-managed/setup/deploy/openshift/redhat-openshift-dual-region",
               ],
-              Other: [
-                "self-managed/setup/deploy/local/docker-compose",
-                "self-managed/setup/deploy/other/docker",
-                "self-managed/setup/deploy/local/manual",
+            },
+          ],
+        },
+        {
+          type: "category",
+          label: "Manual JAR",
+          link: {
+            type: "doc",
+            id: "self-managed/reference-architecture/manual",
+          },
+          items: ["self-managed/setup/deploy/amazon/aws-ec2"],
+        },
+        {
+          "Amazon (AWS)": [
+            {
+              type: "category",
+              label: "Amazon EKS",
+              link: {
+                type: "doc",
+                id: "self-managed/setup/deploy/amazon/amazon-eks/amazon-eks",
+              },
+              items: [
+                "self-managed/setup/deploy/amazon/amazon-eks/eks-eksctl",
+                "self-managed/setup/deploy/amazon/amazon-eks/eks-terraform",
+                "self-managed/setup/deploy/amazon/amazon-eks/eks-helm",
+                "self-managed/setup/deploy/amazon/amazon-eks/dual-region",
+                "self-managed/setup/deploy/amazon/amazon-eks/irsa",
               ],
             },
+            {
+              type: "category",
+              label: "ROSA",
+              link: {
+                type: "doc",
+                id: "self-managed/setup/deploy/amazon/openshift/terraform-setup",
+              },
+              items: [
+                "self-managed/setup/deploy/amazon/openshift/terraform-setup",
+                "self-managed/setup/deploy/amazon/openshift/terraform-setup-dual-region",
+              ],
+            },
+            {
+              type: "category",
+              label: "Amazon MarketPlace",
+              link: {
+                type: "doc",
+                id: "self-managed/setup/deploy/amazon/aws-marketplace",
+              },
+              items: [],
+            },
+            "self-managed/setup/deploy/amazon/aws-ec2",
+          ],
+          "Microsoft (Azure)": [
+            "self-managed/setup/deploy/azure/microsoft-aks",
+          ],
+          "Google (GCP)": ["self-managed/setup/deploy/gcp/google-gke"],
+          "Red Hat (OpenShift)": [
+            "self-managed/setup/deploy/openshift/redhat-openshift",
+            "self-managed/setup/deploy/openshift/redhat-openshift-dual-region",
+          ],
+          Other: [
+            "self-managed/setup/deploy/local/docker-compose",
+            "self-managed/setup/deploy/other/docker",
+            "self-managed/setup/deploy/local/manual",
           ],
         },
       ],
