@@ -152,12 +152,15 @@ RewriteRule ^optimize/3.11.0/self-managed/(.*)$ /docs/8.3/self-managed/$1 [R=301
 RewriteRule ^docs/next/components/concepts/document-handling/(.*)$ /docs/next/components/document-handling/getting-started/ [R=301,L]
 RewriteRule ^docs/next/guides/document-handling/(.*)$ /docs/next/components/document-handling/getting-started/ [R=301,L]
 RewriteRule ^docs/next/self-managed/concepts/document-handling/document-storage-configuration/(.*)$ /docs/next/self-managed/document-handling/configuration/overview/ [R=301,L]
+RewriteRule ^docs/next/components/document-handling/use-cases/use-cases/(.*)$ /docs/next/components/document-handling/use-cases/overview/ [R=301,L]
 RewriteRule ^docs/components/concepts/document-handling/(.*)$ /docs/components/document-handling/getting-started/ [R=301,L]
 RewriteRule ^docs/guides/document-handling/(.*)$ /docs/components/document-handling/getting-started/ [R=301,L]
 RewriteRule ^docs/self-managed/concepts/document-handling/document-storage-configuration/(.*)$ /docs/self-managed/document-handling/configuration/overview/ [R=301,L]
+RewriteRule ^docs/components/document-handling/use-cases/use-cases/(.*)$ /docs/components/document-handling/use-cases/overview/ [R=301,L]
 RewriteRule ^docs/8.7/components/concepts/document-handling/(.*)$ /docs/8.7/components/document-handling/getting-started/ [R=301,L]
 RewriteRule ^docs/8.7/guides/document-handling/(.*)$ /docs/8.7/components/document-handling/getting-started/ [R=301,L]
 RewriteRule ^docs/8.7/self-managed/concepts/document-handling/document-storage-configuration/(.*)$ /docs/8.7/self-managed/document-handling/configuration/overview/ [R=301,L]
+RewriteRule ^docs/8.7/components/document-handling/use-cases/use-cases/(.*)$ /docs/8.7/components/document-handling/use-cases/overview/ [R=301,L]
 
 
 # Remove 8.3 leftovers
