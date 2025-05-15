@@ -544,6 +544,13 @@ Apply it using:
 kubectl apply -f azure/kubernetes/aks-single-region/manifests/storage-class.yml
 ```
 
+Then remove the default attribute from the original StorageClass:
+
+```bash
+kubectl patch storageclass managed-csi \
+  -p '{"metadata":{"annotations":{"storageclass.kubernetes.io/is-default-class":"false"}}}'
+```
+
 This must be applied **before installing the Camunda Helm chart** so that PersistentVolumeClaims (PVCs) are provisioned with the correct performance characteristics.
 
 ## 2. Install Camunda 8 using the Helm chart
