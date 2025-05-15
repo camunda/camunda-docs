@@ -470,7 +470,7 @@ For `zeebe:calledElement` bindings, variable propagation is not supported. To pr
 | --------------------------- | -------------------------------------------------------------------- |
 | **Valid property `type`'s** | `Hidden`                                                             |
 | **Binding parameters**      |                                                                      |
-| **Mapping result**          | `<zeebe:userTabk />`                                                 |
+| **Mapping result**          | `<zeebe:userTask />`                                                 |
 
 The `zeebe:userTask` binding allows you to configure the implementation type for a templated `bpmn:UserTask`. When present, it sets the task as a Camunda user task; when omitted, the task defaults to a job worker.
 
