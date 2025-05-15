@@ -223,7 +223,7 @@ For more details, refer to the [Identity database configuration](../../../../ide
 
 ## Verify connectivity to Camunda 8
 
-First, you need an OAuth client to connect to the Camunda 8 cluster.
+First, we need an OAuth client to be able to connect to the Camunda 8 cluster.
 
 ### Generate an M2M token using Identity
 
