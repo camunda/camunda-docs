@@ -161,15 +161,6 @@ module.exports = {
     },
     {
       type: "category",
-      label: "Robotic Process Automation (RPA)",
-      link: {
-        type: "doc",
-        id: "components/rpa/overview",
-      },
-      items: ["components/rpa/getting-started", "components/rpa/production"],
-    },
-    {
-      type: "category",
       label: "Intelligent document processing (IDP)",
       link: {
         type: "doc",
