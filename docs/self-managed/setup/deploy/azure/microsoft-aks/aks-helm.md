@@ -4,6 +4,9 @@ title: "Install Camunda 8 on an AKS cluster"
 description: "Set up the Camunda 8 environment with Helm and an optional Ingress setup on Azure AKS."
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 This guide provides a comprehensive walkthrough for installing the Camunda 8 Helm chart on your existing Azure Kubernetes Service (AKS) cluster, as well as verifying that it is working as intended
 
 ## Requirements
