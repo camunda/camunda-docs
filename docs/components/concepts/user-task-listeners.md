@@ -24,6 +24,16 @@ User task listeners are useful in the following scenarios:
 - Notifying users of new task assignments with contextual information.
 - Reacting to task completions with custom logic.
 
+### Supported user task events
+
+User task listeners support the following events:
+
+- **Creating**: Triggered when creating a user task.
+- **Assigning**: Triggered when assigning a user task.
+- **Updating**: Triggered when updating a user task.
+- **Completing**: Triggered when completing a user task.
+- **Canceling**: Triggered when canceling a user task.
+
 ### Blocking behavior
 
 User task listeners operate in a blocking manner, meaning the user task lifecycle transition is paused until the task listener completes. This ensures that any corrections or validations defined by the task listener are fully applied before the task transition continues.
@@ -33,14 +43,6 @@ User task listeners operate in a blocking manner, meaning the user task lifecycl
 You can configure user task listeners per BPMN user task element.
 
 ### User task lifecycle
-
-User task listeners support the following events:
-
-- **Creating**: Triggered when creating a user task.
-- **Assigning**: Triggered when assigning a user task.
-- **Updating**: Triggered when updating a user task.
-- **Completing**: Triggered when completing a user task.
-- **Canceling**: Triggered when canceling a user task.
 
 A user task has the following lifecycle.
 A user task listener can react to the events highlighted in orange.
