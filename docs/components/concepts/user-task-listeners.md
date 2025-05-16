@@ -32,9 +32,9 @@ User task listeners operate in a blocking manner, meaning the user task lifecycl
 
 You can configure user task listeners per BPMN user task element.
 
-### Supported events
+### User task lifecycle
 
-Currently, user task listeners support the following events:
+User task listeners support the following events:
 
 - **Creating**: Triggered when creating a user task.
 - **Assigning**: Triggered when assigning a user task.
@@ -42,7 +42,41 @@ Currently, user task listeners support the following events:
 - **Completing**: Triggered when completing a user task.
 - **Canceling**: Triggered when canceling a user task.
 
-The events can be triggered in the following ways.
+A user task has the following lifecycle.
+A user task listener can react to the events highlighted in orange.
+
+```mermaid
+stateDiagram-v2
+    direction LR
+    [*] --> creating
+    creating --> created
+
+    created --> assigning
+    assigning --> created
+
+    created --> updating
+    updating --> created
+
+    created --> completing
+    completing --> created
+    completing --> completed
+
+    creating --> canceling
+    created --> canceling
+    assigning --> canceling
+    updating --> canceling
+    completing --> canceling
+    canceling --> canceled
+
+    classDef listenerEvent fill:#fc5d0d,color:white,font-weight:bold
+    class creating listenerEvent
+    class assigning listenerEvent
+    class updating listenerEvent
+    class completing listenerEvent
+    class canceling listenerEvent
+```
+
+These events can be triggered in the following ways.
 
 | Event        | Triggered                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | :----------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
