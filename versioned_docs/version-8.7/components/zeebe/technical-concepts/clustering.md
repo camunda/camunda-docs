@@ -48,10 +48,21 @@ Before a new record on a partition can be processed, it must be replicated to a 
 
 ![cluster](assets/commit.png)
 
-Some examples for common replication factors:
+A well-balanced replication will ensure, that records can be committed, even when one or more brokers will become unavailable, but the majority of brokers is still available. **Odd replication factors** [are recommended](partitions.md#replication).
 
-| Replication factor | Description           | Quorum                                                     | Use case                                                                                                                                                                                                                                                                  |
-| :----------------: | --------------------- | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|         3          | 1 leader, 2 followers | half or more of 2 followers is 1 follower that confirmed   | Single region, 3 availability zones.                                                                                                                                                                                                                                      |
-|         5          | 1 leader, 4 followers | half or more of 4 followers are 2 followers that confirmed | Single or dual region setup. Odd replication factors are favored over even factors. [Following the recommended dual region setup](../../../self-managed/concepts/multi-region/dual-region.md#zeebe-cluster-configuration), records are always replicated to both regions. |
-|         4          | 1 leader, 3 followers | half or more of 3 followers are 2 followers that confirmed | Exception for dual region with minimal replication, records always replicated to both regions [following the recommended setup](../../../self-managed/concepts/multi-region/dual-region.md#zeebe-cluster-configuration).                                                  |
+Some examples for common replication factors and their quorum:
+
+| Replication factor | Description           | Quorum                                                     | Use case                                                                         |
+| :----------------: | --------------------- | ---------------------------------------------------------- | -------------------------------------------------------------------------------- |
+|         3          | 1 leader, 2 followers | half or more of 2 followers is 1 follower that confirmed   | Single region, 3 availability zones. One broker can go down without losing data. |
+|         5          | 1 leader, 4 followers | half or more of 4 followers are 2 followers that confirmed | Allows a higher tolerance against the loss of 2 brokers                          |
+
+The only exception to have **even replication factors** is the [dual region setup](../../../self-managed/concepts/multi-region/dual-region.md). In this setup, an even replication factor ensures, that records are always replicated to both regions. And, in case of losing a whole region, every new request will be denied, as no replication can get a quorum anymore. All partitions will become unhealthy, operators start their [failover procedure](../../../self-managed/operational-guides/multi-region/dual-region-ops.md). No data is lost.
+
+Using odd replication factor in a dual region setup would favor some partitions, where the leader and the majority of followers live in the surviving region, against the partitions that have only a minority of followers survived. This may slow down to detect a region loss, as some process instances still continue while others are stuck.
+
+This is one example for replication and quorum, that is used in the [dual region setup guide](../../../self-managed/setup/deploy/amazon/amazon-eks/dual-region.md#content-elaboration):
+
+| Replication factor | Description           | Quorum                                                     | Use case                                                                                                                                                                                                                 |
+| :----------------: | --------------------- | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|         4          | 1 leader, 3 followers | half or more of 3 followers are 2 followers that confirmed | Exception for dual region with minimal replication, records always replicated to both regions [following the recommended setup](../../../self-managed/concepts/multi-region/dual-region.md#zeebe-cluster-configuration). |
