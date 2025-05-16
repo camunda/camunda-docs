@@ -70,7 +70,8 @@ To restore a Camunda 8 cluster from a backup, all components must be restored fr
 2. Confirm proper configuration (such as shards, replicas count, etc.)
 3. Stop Operate, Tasklist, and Optimize.
 4. Delete all indices.
-5. Restore the state of [Operate](/self-managed/operational-guides/backup-restore/operate-tasklist-backup.md), [Tasklist](/self-managed/operational-guides/backup-restore/operate-tasklist-backup.md), and [Optimize](/self-managed/operational-guides/backup-restore/optimize-backup.md).
-6. Restore `zeebe-records*` indices from Elasticsearch snapshot.
-7. Restore [Zeebe](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md).
-8. Start Zeebe, Operate, Tasklist, and Optimize.
+5. Delete the data directory of all Zeebe brokers
+6. Restore the state of [Operate](/self-managed/operational-guides/backup-restore/operate-tasklist-backup.md), [Tasklist](/self-managed/operational-guides/backup-restore/operate-tasklist-backup.md), and [Optimize](/self-managed/operational-guides/backup-restore/optimize-backup.md).
+7. Restore `zeebe-records*` indices from Elasticsearch snapshot.
+8. Restore [Zeebe](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md).
+9. Start Zeebe, Operate, Tasklist, and Optimize.
