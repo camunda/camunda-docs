@@ -36,9 +36,11 @@ You can configure user task listeners per BPMN user task element.
 
 Currently, user task listeners support the following events:
 
+- **Creating**: Triggered when creating a user task.
 - **Assigning**: Triggered when assigning a user task.
 - **Updating**: Triggered when updating a user task.
 - **Completing**: Triggered when completing a user task.
+- **Canceling**: Triggered when canceling a user task.
 
 The events can be triggered in the following ways.
 
