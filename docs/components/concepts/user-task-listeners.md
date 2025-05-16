@@ -24,24 +24,6 @@ User task listeners are useful in the following scenarios:
 - Notifying users of new task assignments with contextual information.
 - Reacting to task completions with custom logic.
 
-### Supported user task events
-
-User task listeners support the following events:
-
-- **Creating**: Triggered when creating a user task.
-- **Assigning**: Triggered when assigning a user task.
-- **Updating**: Triggered when updating a user task.
-- **Completing**: Triggered when completing a user task.
-- **Canceling**: Triggered when canceling a user task.
-
-### Blocking behavior
-
-User task listeners operate in a blocking manner, meaning the user task lifecycle transition is paused until the task listener completes. This ensures that any corrections or validations defined by the task listener are fully applied before the task transition continues.
-
-## Define a user task listener
-
-You can configure user task listeners per BPMN user task element.
-
 ### User task lifecycle
 
 A user task has the following lifecycle.
@@ -78,7 +60,11 @@ stateDiagram-v2
     class canceling listenerEvent
 ```
 
-### Lifecycle event triggers
+### Blocking behavior
+
+User task listeners operate in a blocking manner, meaning the user task lifecycle transition is paused until the task listener completes. This ensures that any corrections or validations defined by the task listener are fully applied before the task transition continues.
+
+## Trigger a user task listener
 
 The supported user task listener events can be triggered in the following ways.
 
@@ -89,6 +75,10 @@ The supported user task listener events can be triggered in the following ways.
 | `updating`   | <ul><li>When the [update user task API](/apis-tools/camunda-api-rest/specifications/update-user-task.api.mdx) is called. </li><li>When the [update element instance variables API](/apis-tools/camunda-api-rest/specifications/create-element-instance-variables.api.mdx) is called on a user task instance.</li><li>When the [set variables RPC](/apis-tools/zeebe-api/gateway-service.md#setvariables-rpc) is called on a user task instance.</li><li>When variables are set at a user task scope using the [Operate interface](/components/operate/userguide/resolve-incidents-update-variables.md).</li></ul> |
 | `completing` | <ul><li>When a user task is completed using the [Tasklist interface](/components/tasklist/userguide/managing-tasks.md#complete-a-task).</li><li>When the [complete user task API](/apis-tools/camunda-api-rest/specifications/complete-user-task.api.mdx) is called.</li></ul>                                                                                                                                                                                                                                                                                                                                    |
 | `canceling`  | <ul><li>When a process instance cancels a user task.</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+
+## Define a user task listener
+
+You can configure user task listeners per BPMN user task element.
 
 ### User task listener properties
 
