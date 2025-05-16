@@ -534,6 +534,8 @@ This step defines a custom `StorageClass` that:
 
 #### Apply the StorageClass
 
+Save the following as `storage-class.yml`:
+
 ```yaml reference
 https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/manifests/storage-class.yml
 ```
@@ -541,7 +543,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/azure/kuberne
 Apply it using:
 
 ```bash
-kubectl apply -f azure/kubernetes/aks-single-region/manifests/storage-class.yml
+kubectl apply -f storage-class.yml
 ```
 
 Then remove the default attribute from the original StorageClass:

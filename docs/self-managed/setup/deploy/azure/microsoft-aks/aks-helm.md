@@ -4,11 +4,7 @@ title: "Install Camunda 8 on an AKS cluster"
 description: "Set up the Camunda 8 environment with Helm and an optional Ingress setup on Azure AKS."
 ---
 
-<!-- (!) Note: Please ensure that this guide maintains a consistent structure and presentation style throughout, as with docs/self-managed/setup/deploy/openshift/terraform-setup.md. The user should have a similar experience when reading both guides. -->
-
-This guide provides a comprehensive walkthrough for installing the Camunda 8 Helm chart on your existing Azure Kubernetes Service (AKS) cluster. It also includes optional steps for DNS configuration and connecting external clients such as zbctl or Camunda Modeler.
-
-Lastly, you'll verify that the connection to your Self-Managed Camunda 8 environment is working.
+This guide provides a comprehensive walkthrough for installing the Camunda 8 Helm chart on your existing Azure Kubernetes Service (AKS) cluster, as well as verifying that it is working as intended
 
 ## Requirements
 
@@ -42,7 +38,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 ### Export database values
 
-When using standard authentication (username and password), specific environment variables must be set with valid values. Follow the guide for [Terraform](./terraform-setup.md#export-values-for-the-helm-chart) to set them correctly.
+When using standard authentication (username and password), specific environment variables must be set with valid values. Follow the guide for [Terraform](./terraform-setup.md#set-up-azure-authentication) to set them correctly.
 
 Verify the configuration of your environment variables by running the following loop:
 
@@ -65,25 +61,16 @@ Start by creating a `values.yml` file to store the configuration for your enviro
 https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/helm-values/values-no-domain.yml
 ```
 
-#### Reference the credentials in secrets
-
-Before installing the Helm chart, create Kubernetes secrets to store the Keycloak database authentication credentials.
-
-To create the secrets, run the following command:
-
-```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/create-setup-db-secret.sh
-```
-
 ### 2. Configure your deployment
 
 #### Enable Enterprise components
 
 Some components are not enabled by default in this deployment. For more information on how to configure and enable these components, refer to [configuring Web Modeler, Console, and Connectors](../../../install.md#configuring-web-modeler-console-and-connectors).
 
-#### Use internal Elasticsearch
+#### Elasticsearch options
 
-In the Azure setup, OpenSearch is not included. You must use the internal Elasticsearch deployment. This configuration enables the bundled Elasticsearch component within the Kubernetes cluster:
+Camunda Helm chart supports both internal and external Elasticsearch deployments. For production workloads, we recommend using an externally managed Elasticsearch service (for example, [Elastic Cloud on Azure](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/elastic.ec-azure-pp)
+). Note that Terraform support for Elastic Cloud on Azure can be restrictive but remains a viable option. In this guide, we default to the internal deployment of Elasticsearch.
 
 <details>
 <summary>Show configuration to enable internal Elasticsearch</summary>
@@ -201,8 +188,6 @@ You can track the progress of the installation using the following command:
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/check-deployment-ready.sh
 ```
 
-<!-- IRSA interaction note omitted — not applicable to Azure setup. -->
-
 #### Web Modeler
 
 Web Modeler uses PostgreSQL for its REST API. In the Azure setup, it connects to either the internal PostgreSQL instance or the managed Azure Database for PostgreSQL, depending on your configuration. No special JDBC wrapper is needed.
@@ -211,7 +196,7 @@ Refer to the [Web Modeler database configuration](../../../../modeler/web-modele
 
 #### Keycloak
 
-In the Azure setup, IAM role-based authentication like IRSA is not applicable. Keycloak connects to PostgreSQL either internally or externally using standard credentials. No custom JDBC wrapper or AWS-specific container image is required.
+In Azure, AWS-specific IRSA (IAM Roles for Service Accounts) does not apply. You can use Azure Workload Identity, but it hasn’t been tested with managed PostgreSQL and may not work out-of-the-box. Keycloak connects to PostgreSQL (internal or external) using standard credentials; no custom JDBC wrapper or AWS-specific container image is required.
 
 You may still use the [Camunda Keycloak images](https://hub.docker.com/r/camunda/keycloak) built upon [bitnami/keycloak](https://hub.docker.com/r/bitnami/keycloak), but the AWS JDBC wrapper is not relevant to this setup.
 
@@ -231,101 +216,104 @@ Generate an M2M token by following the steps outlined in the [Identity getting s
 
 Below is a summary of the necessary instructions:
 
-1. Port-forward Identity and Keycloak to access the UIs:
+Identity and Keycloak must be port-forwarded to be able to connect to the cluster.
 
-````bash
-kubectl port-forward services/camunda-identity 8080:80 --namespace camunda ```
-kubectl port-forward services/camunda-keycloak 18080:80 --namespace camunda ```
-````
-
-2. Open Identity in your browser at `http://localhost:8080`. You will be redirected to Keycloak and prompted to log in.
-3. Use `demo` as both the username and password.
-4. Select **Add application** and choose **M2M** as the type. Assign a name like "test."
-5. Select the newly created application. Then, under **Access to APIs > Assign permissions**, choose **Core API** and select "read" and "write" permissions.
-6. Retrieve the `client-id` and `client-secret` values:
-
-```bash
-export ZEEBE_CLIENT_ID='client-id'     # from Identity page
-export ZEEBE_CLIENT_SECRET='client-secret' # from Identity page
+```shell
+kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-identity" 8080:80 --namespace "$CAMUNDA_NAMESPACE"
+kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-keycloak" 18080:80 --namespace "$CAMUNDA_NAMESPACE"
 ```
 
-To access other Camunda services locally, port-forward them as needed:
+1. Open Identity in your browser at `http://localhost:8080`. You will be redirected to Keycloak and prompted to log in with a username and password.
+2. Use `demo` as both the username and password.
+3. Select **Add application** and select **M2M** as the type. Assign a name like "test."
+4. Select the newly created application. Then, select **Access to APIs > Assign permissions**, and select the **Core API** with "read" and "write" permission.
+5. Retrieve the `client-id` and `client-secret` values from the application details
+
+```shell
+export ZEEBE_CLIENT_ID='client-id' # retrieve the value from the identity page of your created m2m application
+export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identity page of your created m2m application
+```
 
 <details>
-<summary>Port-forward commands for service UIs</summary>
+<summary>To access the other services and their UIs, port-forward those Components as well:</summary>
+<summary>
 
-```bash
-# Operate
-kubectl port-forward svc/camunda-operate 8081:80 --namespace camunda
-
-# Tasklist
-kubectl port-forward svc/camunda-tasklist 8082:80 --namespace camunda
-
-# Optimize
-kubectl port-forward svc/camunda-optimize 8083:80 --namespace camunda
-
-# Connectors
-kubectl port-forward svc/camunda-connectors 8086:8080 --namespace camunda
-
-# Web Modeler
-kubectl port-forward svc/camunda-web-modeler-webapp 8084:80 --namespace camunda
-
-# Console
-kubectl port-forward svc/camunda-console 8085:80 --namespace camunda
+```shell
+Operate:
+> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-operate"  8081:80 --namespace "$CAMUNDA_NAMESPACE"
+Tasklist:
+> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-tasklist" 8082:80 --namespace "$CAMUNDA_NAMESPACE"
+Optimize:
+> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-optimize" 8083:80 --namespace "$CAMUNDA_NAMESPACE"
+Connectors:
+> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-connectors" 8086:8080 --namespace "$CAMUNDA_NAMESPACE"
+WebModeler:
+> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-web-modeler-webapp" 8084:80 --namespace "$CAMUNDA_NAMESPACE"
+Console:
+> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-console" 8085:80 --namespace "$CAMUNDA_NAMESPACE"
 ```
 
+</summary>
 </details>
 
 ### Use the token
 
-#### REST API
+<Tabs groupId="c8-connectivity">
+  <TabItem value="rest-api" label="REST API" default>
 
-For a detailed guide, see [REST API authentication](./../../../../../apis-tools/camunda-api-rest/camunda-api-rest-authentication.md?environment=self-managed).
+For a detailed guide on generating and using a token, please conduct the relevant documentation on [authenticating with the Camunda 8 REST API](./../../../../../apis-tools/camunda-api-rest/camunda-api-rest-authentication.md?environment=self-managed).
 
-1. Port-forward the Zeebe Gateway:
+This requires to port-forward the Zeebe Gateway to be able to connect to the cluster.
 
-```bash
-kubectl port-forward services/camunda-zeebe-gateway 8080:8080 --namespace camunda
+```shell
+kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-zeebe-gateway" 8080:8080 --namespace "$CAMUNDA_NAMESPACE"
 ```
 
-2. Export environment variables:
+Export the following environment variables:
+
+```shell reference
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/generic/kubernetes/single-region/procedure/export-verify-zeebe-local.sh
+```
+
+Generate a temporary token to access the Camunda 8 REST API, then capture the value of the `access_token` property and store it as your token. Use the stored token (referred to as `TOKEN` in this case) to interact with the Camunda 8 REST API and display the cluster topology:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/export-verify-zeebe-local.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/generic/kubernetes/single-region/procedure/check-zeebe-cluster-topology.sh
 ```
 
-3. Generate a temporary token and verify the cluster topology:
-
-```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/check-zeebe-cluster-topology.sh
-```
+...and results in the following output:
 
 <details>
-<summary>Example output</summary>
+  <summary>Example output</summary>
+  <summary>
 
 ```json reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/check-zeebe-cluster-topology-output.json
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/generic/kubernetes/single-region/procedure/check-zeebe-cluster-topology-output.json
 ```
 
+  </summary>
 </details>
+  </TabItem>
+  <TabItem value="modeler" label="Desktop Modeler">
 
-#### Desktop Modeler
+Follow our existing [Modeler guide on deploying a diagram](/self-managed/modeler/desktop-modeler/deploy-to-self-managed.md). Below are the helper values required to be filled in Modeler:
 
-Follow the [Modeler guide on deploying a diagram](/self-managed/modeler/desktop-modeler/deploy-to-self-managed.md). Use the following values for OAuth authentication:
+This requires port-forwarding the Zeebe Gateway to be able to connect to the cluster:
 
-1. Port-forward the Zeebe Gateway:
-
-```bash
-kubectl port-forward services/camunda-zeebe-gateway 26500:26500 --namespace camunda
+```shell
+kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-zeebe-gateway" 26500:26500 --namespace "$CAMUNDA_NAMESPACE"
 ```
 
-2. Use these values in Camunda Modeler:
+The following values are required for OAuth authentication:
 
 - **Cluster endpoint:** `http://localhost:26500`
-- **Client ID:** From your M2M app in Identity
-- **Client Secret:** From your M2M app in Identity
+- **Client ID:** Retrieve the client ID value from the identity page of your created M2M application
+- **Client Secret:** Retrieve the client secret value from the Identity page of your created M2M application
 - **OAuth Token URL:** `http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token`
-- **Audience:** `zeebe-api`
+- **Audience:** `zeebe-api`, the default for Camunda 8 Self-Managed
+
+</TabItem>
+</Tabs>
 
 ## Test the installation with payment example application
 
@@ -335,7 +323,8 @@ To test your installation with the deployment of a sample application, refer to 
 
 The following are some advanced configuration topics to consider for your cluster:
 
-- [Cluster autoscaling in AKS](https://learn.microsoft.com/azure/aks/cluster-autoscaler)
+- [Camunda Production Installation guide with Kubernetes and Helm](versioned_docs/version-8.7/self-managed/operational-guides/production-guide/helm-chart-production-guide.md)
+- [Cluster autoscaling](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/cloudprovider/aws/README.md)
 
 To get more familiar with our product stack, visit the following topics:
 
