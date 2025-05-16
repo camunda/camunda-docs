@@ -11,9 +11,9 @@ Offering robust [document handling](/components/document-handling/getting-starte
 
 In this section we will cover three main use cases:
 
-- [Upload a document to a BPMN process](/components/document-handling/use-cases/upload-document-to-bpmn-process.md)
-- [Display and download a document](/components/document-handling/use-cases/display-and-download-document.md)
-- [Send a document to an external system via a connector](/components/document-handling/use-cases/send-document-to-external-system.md)
+- [Upload a document to a BPMN process](/components/document-handling/upload-document-to-bpmn-process.md)
+- [Display and download a document](/components/document-handling/display-and-download-document.md)
+- [Send a document to an external system via a connector](/components/document-handling/send-document-to-external-system.md)
 
 ## Automate documents with intelligent document processing
 
