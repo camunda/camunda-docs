@@ -17,7 +17,7 @@ Document handling is automatically integrated into each SaaS cluster, allowing y
 
 Document handling can be beneficial for different process use cases, such as uploading a document to a BPMN process, displaying and downloading a document, sending a document to an external system via a connector, and automating documents with [intelligent document processing](/components/modeler/web-modeler/idp/idp-example.md).
 
-Step through all of these capabilities in the [use cases](/components/document-handling/use-cases/overview.md) section.
+Step through all of these capabilities in the [use cases](/components/document-handling/overview.md) section.
 
 ## Storage options
 
