@@ -100,6 +100,6 @@ To [complete a user task](./getting-started-orchestrate-human-tasks.md), navigat
 
 ## Next steps
 
-When building a form for a process, you can also use the [Filepicker form component](/components/modeler/forms/form-element-library/forms-element-library-filepicker.md) to allow users to upload files. Learn more in [building a form for document upload](/components/document-handling/use-cases/upload-document-to-bpmn-process.md#build-a-form-for-document-upload).
+When building a form for a process, you can also use the [Filepicker form component](/components/modeler/forms/form-element-library/forms-element-library-filepicker.md) to allow users to upload files. Learn more in [building a form for document upload](/components/document-handling/upload-document-to-bpmn-process.md#build-a-form-for-document-upload).
 
-Additionally, to display and allow document download, you can use the [document preview component](/components/modeler/forms/form-element-library/forms-element-library-document-preview.md) with your form. Learn more in [building a form for document preview and download](/components/document-handling/use-cases/display-and-download-document.md#build-a-form-for-document-preview-and-downloading).
+Additionally, to display and allow document download, you can use the [document preview component](/components/modeler/forms/form-element-library/forms-element-library-document-preview.md) with your form. Learn more in [building a form for document preview and download](/components/document-handling/display-and-download-document.md#build-a-form-for-document-preview-and-downloading).
