@@ -233,7 +233,6 @@ There are two types of incidents for task listeners:
 
 User task listeners have the following limitations:
 
-- **Limited events support**: Currently, only `assigning`, `updating`, and `completing` events are supported.
 - **No variable handling**: User task listener jobs cannot be completed if variables are provided.
 - **No BPMN error throwing**: Throwing BPMN errors from user task listener jobs is not supported.
 
