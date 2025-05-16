@@ -392,28 +392,3 @@ to base64(value: string): string
 to base64("FEEL")
 // "RkVFTA=="
 ```
-
-## is blank(string)
-
-<MarkerCamundaExtension></MarkerCamundaExtension>
-
-Returns `true` if the given string is blank (empty or contains only whitespaces).
-
-**Function signature**
-
-```feel
-is blank(string: string): boolean
-```
-
-**Examples**
-
-```feel
-is blank("")
-// true
-
-is blank(" ")
-// true
-
-is blank("hello world")
-// false
-```
