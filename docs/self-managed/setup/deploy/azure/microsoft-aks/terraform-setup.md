@@ -349,32 +349,9 @@ This reference architecture uses [Terraform modules](https://developer.hashicorp
 
 The main deployment logic is defined in [`main.tf`](https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/main.tf). It instantiates all modules and exposes several **customizable values** via the `locals` block:
 
-```hcl
-locals {
-  resource_prefix     = var.resource_prefix_placeholder # Change this to a name of your choice
-  resource_group_name = ""                              # Change this to a name of your choice, if not provided, it will be set to resource_prefix-rg, if provided, it will be used as the resource group name
-  location            = "swedencentral"                 # Change this to your desired Azure region
-  kubernetes_version = "1.30"                           # Change this to your desired Kubernetes version (aks - major.minor)
-
-  db_admin_username = "secret_user"    # Replace with your desired PostgreSQL username
-  db_admin_password = "secretvalue%23" # Replace with your desired PostgreSQL password, password must contain at least one letter, one number, and one special character.
-
-  camunda_database_keycloak   = "camunda_keycloak"   # Name of your camunda database for Keycloak
-  camunda_database_identity   = "camunda_identity"   # Name of your camunda database for Identity
-  camunda_database_webmodeler = "camunda_webmodeler" # Name of your camunda database for WebModeler
-
-  # Connection configuration
-  camunda_keycloak_db_username   = "keycloak_db"   # This is the username that will be used for connection to the DB on Keycloak db
-  camunda_identity_db_username   = "identity_db"   # This is the username that will be used for connection to the DB on Identity db
-  camunda_webmodeler_db_username = "webmodeler_db" # This is the username that will be used for connection to the DB on WebModeler db
-
-  camunda_keycloak_db_password   = "secretvalue%24" # Replace with a password that will be used for connection to the DB on Keycloak db
-  camunda_identity_db_password   = "secretvalue%25" # Replace with a password that will be used for connection to the DB on Identity db
-  camunda_webmodeler_db_password = "secretvalue%26" # Replace with a password that will be used for connection to the DB on WebModeler db
-}
+```hcl reference
+https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/main.tf
 ```
-
-These values control database user setup, naming, passwords, and the general cluster configuration. Sensitive values are used by downstream provisioning jobs and Helm secrets.
 
 The modules deployed are:
 
@@ -385,9 +362,17 @@ The modules deployed are:
 
 #### 2. PostgreSQL module
 
+This module exposes several **customizable values** via the `locals` block:
+
+```hcl reference
+https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/db.tf#L1-L18
+```
+
+These values control database user setup, naming, and passwords. Sensitive values are used by downstream provisioning jobs and Helm secrets.
+
 This module is **enabled by default**. To opt out, you must:
 
-- Remove the `postgres_db` block from `main.tf`
+- Remove the `db.tf` file from the root
 - Manually provide credentials and PostgreSQL endpoints for the Helm chart
 
 ### Execution
