@@ -5,8 +5,6 @@ sidebar_label: "Production installation guide"
 description: "Learn how to set up Camunda in Kubernetes with the Helm chart in a production setting."
 ---
 
-## Overview
-
 The following is a **scenario-based, production focused, step-by-step guide** for setting up the [Camunda Helm chart](https://artifacthub.io/packages/helm/camunda/camunda-platform). It provides a resilient, production-ready architecture for Camunda 8, and minimizes complexity while offering a reliable foundation for most production use cases.
 
 While this guide uses AWS as a reference, the steps are applicable to other [supported Kubernetes distributions](/reference/supported-environments.md#deployment-options) and their comparable services. Upon completion, you will be familiar with all of the necessary requirements for having a production ready Camunda Helm chart.
@@ -36,7 +34,7 @@ For more information about the Camunda 8 architecture, refer to the [Self-Manage
 
 Below is the high-level architecture diagram for the base production setup:
 
-# ![Architecture Diagram](./img/architecture.png)
+![Architecture Diagram](./img/architecture.png)
 
 ## Installation and configuration
 
@@ -73,10 +71,10 @@ helm repo add camunda https://helm.camunda.io
 # This will update the chart repository. Please make sure to run this command before every install or upgrade
 helm repo update
 # This will install the latest Camunda Helm chart in the management namespace with the latest applications/dependencies.
-helm install camunda camunda/camunda-platform -n management \
+helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION -n management \
     --values management-values.yaml
 # This will install the latest Camunda Helm chart in the Orchestration namespace with the latest applications/dependencies.
-helm install camunda camunda/camunda-platform -n orchestration \
+helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION -n orchestration \
     --values orchestration-values.yaml
 ```
 
@@ -821,4 +819,4 @@ If you would like to run benchmarks on the platform, refer to the Camunda 8 benc
 
 ### Reference architectures
 
-You can lean more about Camunda production deployment and available deployment architectures in [Camunda Deployment Reference Architecture](/docs/self-managed/reference-architecture/reference-architecture.md) section of our documentation.
+You can lean more about Camunda production deployment and available deployment architectures in [Camunda Deployment Reference Architecture](/self-managed/reference-architecture/reference-architecture.md) section of our documentation.

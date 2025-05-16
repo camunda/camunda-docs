@@ -19,6 +19,83 @@ These release notes identify the new features included in 8.8, including [alpha 
 | ---------------------- | ---------------------------- | ------------ | ------------ | ------------ |
 | 14 October 2025        | 13 April 2027                | -            | -            | -            |
 
+## 8.8.0-alpha4
+
+| Release date | Changelog(s)                                                                                                                                                                               | Blog                                                                             |
+| :----------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------- |
+| 13 May 2025  | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.8.0-alpha4)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.8.0-alpha4)</li></ul> | [Release blog](https://camunda.com/blog/2025/05/camunda-alpha-release-may-2025/) |
+
+### Camunda Process Test H2 data layer support <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Zeebe</span> {#h2support}
+
+<!-- https://github.com/camunda/product-hub/issues/2687 -->
+
+Camunda Process Test now supports using the [H2 Database Engine](https://www.h2database.com/html/main.html) as the default embedded data layer.
+
+- H2 is now automatically provisioned when integrating the Camunda Process Test libraries, eliminating manual database configuration and reducing memory footprint.
+- H2 support streamlines the developer experience for your Spring Boot and plain Java projects. Process testing is now faster to set up, simpler to maintain, and easier to integrate with your continuous integration workflows.
+
+To learn more about Camunda Process Test, see [Camunda Process Test](/apis-tools/testing/getting-started.md).
+
+### Connector manage and run supports multiple runtimes <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Console">Console</span> {#connector-management}
+
+<!-- https://github.com/camunda/product-hub/issues/2750 -->
+
+Connector manage and run in Console now supports management of multiple connector runtime instances.
+
+To learn more about this feature, see [manage your connectors](/components/console/manage-clusters/manage-connectors.md).
+
+### Connectors <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span> {#connectorsalpha4}
+
+#### Email connector {#emailalpha4}
+
+<!-- https://github.com/camunda/connectors/pull/4657 -->
+
+The Email connector now exposes the `Message-ID` provided by the client in the connector response payload. This allows for improved traceability, easier correlation between sent messages and logs, and better integration with downstream systems that rely on `Message-ID`.
+
+For example:
+
+```json
+{
+  "sent": true,
+  "subject": "Email subject"
+  "messageId": "<abc123@clientdomain.com>"
+}
+```
+
+:::note
+This change is backwards-compatible and does not require any action. You can now optionally use the `messageId` field for enhanced tracking when parsing connector responses.
+:::
+
+#### Hubspot connector {#hubspotalpha4}
+
+<!-- https://github.com/camunda/product-hub/issues/2398 -->
+
+Hubspot connector enhancements include:
+
+- The [Get contact by ID](/components/connectors/out-of-the-box-connectors/hubspot.md#get-contact-by-id) operation now supports the retrieval of properties and default contact properties.
+- The new [Enroll contact to workflow](/components/connectors/out-of-the-box-connectors/hubspot.md#enroll-contact-to-workflow) operation allows you to enroll contacts into a specified workflow.
+
+To learn more about this connector, see [HubSpot connector](/components/connectors/out-of-the-box-connectors/hubspot.md).
+
+### Desktop Modeler settings <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span>
+
+<!-- https://github.com/camunda/product-hub/issues/2491 -->
+
+The new **Settings** window in Desktop Modeler allows you to configure the application and customize your modeling experience. You can select your default execution platform version, along with other options that were previously only available as flags.
+
+To learn more about these settings, see [Desktop Modeler settings](/components/modeler/desktop-modeler/settings/settings.md).
+
+### Web Modeler cluster basic authentication <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
+
+<!-- https://github.com/camunda/web-modeler/issues/13707 -->
+
+As well as bearer token and client credentials authentication, you can now configure Web Modeler in Self-Managed to use basic authentication for cluster access.
+
+- To use basic authentication, set the `CAMUNDA_MODELER_CLUSTERS_0_AUTHENTICATION` environment variable value to `BASIC`.
+- Web Modeler sends a username and password with every request to one of the cluster components (Zeebe, Operate, Tasklist).
+
+To learn more about basic authentication, see [available authentication methods](/self-managed/modeler/web-modeler/configuration/configuration.md#available-authentication-methods).
+
 ## 8.8.0-alpha3
 
 | Release date  | Changelog(s)                                                                                                                                                                               | Blog |
@@ -27,15 +104,15 @@ These release notes identify the new features included in 8.8, including [alpha 
 
 <!-- https://github.com/camunda/product-hub/issues/2630 -->
 
-### Ad-hoc subprocess activation API & completion configuration <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span> {#adhocsubprocess}
+### Ad-hoc sub-process activation API & completion configuration <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span> {#adhocsubprocess}
 
 Agentic process orchestration enhancements include:
 
-- An optional `completionCondition` boolean expression for ad-hoc subprocesses that is evaluated every time an inner element is completed. A `cancelRemainingInstances` boolean attribute can also be configured to influence the ad-hoc subprocess behavior when the completion condition is met.
-- An [Activate activities within an ad-hoc subprocess](/apis-tools/camunda-api-rest/specifications/activate-ad-hoc-subprocess-activities.api.mdx) API used to activate selected activities within an ad-hoc subprocess.
-- A [Search activatable activities (alpha)](/apis-tools/camunda-api-rest/specifications/search-ad-hoc-subprocess-activities.api.mdx) API used to search for activatable activities within ad-hoc subprocesses.
+- An optional `completionCondition` boolean expression for ad-hoc sub-processes that is evaluated every time an inner element is completed. A `cancelRemainingInstances` boolean attribute can also be configured to influence the ad-hoc sub-process behavior when the completion condition is met.
+- An [Activate activities within an ad-hoc sub-process](/apis-tools/camunda-api-rest/specifications/activate-ad-hoc-sub-process-activities.api.mdx) API used to activate selected activities within an ad-hoc sub-process.
+- A [Search activatable activities (alpha)](/apis-tools/camunda-api-rest/specifications/search-ad-hoc-sub-process-activities.api.mdx) API used to search for activatable activities within ad-hoc sub-processes.
 
-To learn more about these features, see [ad-hoc subprocesses](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md).
+To learn more about these features, see [ad-hoc sub-processes](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md).
 
 <!-- https://github.com/camunda/product-hub/issues/2585 -->
 
@@ -48,27 +125,19 @@ Advanced User Task Listeners for Updating Events allow you to define listeners t
 
 To learn more about this feature, see [advanced user task listeners for updating events](/components/concepts/user-task-listeners.md).
 
-<!-- https://github.com/camunda/product-hub/issues/2750 -->
-
-### Connector manage and run supports multiple Connector Runtimes<span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Console">Console</span> {#connector-management}
-
-Connector manage and run in Console now supports managing multiple Connector Runtime instances.
-
-To learn more about this feature, see [manage your connectors](/components/console/manage-clusters/manage-connectors.md).
-
 <!-- https://github.com/camunda/product-hub/issues/2398 -->
 
-### HubSpot Connector <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span> {#hubspot}
+### HubSpot connector <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span> {#hubspot}
 
-Use the new outbound HubSpot Connector to connect your BPMN service with [HubSpot](https://hubspot.com/) and manage your HubsSpot contacts, companies, and deals.
+Use the new outbound HubSpot connector to connect your BPMN service with [HubSpot](https://hubspot.com/) and manage your HubsSpot contacts, companies, and deals.
 
-This Connector supports the following operations:
+This connector supports the following operations:
 
 - Contacts: Get all contacts, Get contact by id, Get multiple contacts by id, Search contact, Create contact, Update contact, Delete contact.
 - Companies: Get all companies, Get company by id, Search company, Get all contacts of a company, Add contact to company, Remove contact from company, Create company, Delete company.
 - Deals: Get all deals, Get deal by id, Search deal, Delete deal.
 
-To learn more about this Connector, see [HubSpot Connector](/components/connectors/out-of-the-box-connectors/hubspot.md).
+To learn more about this connector, see [HubSpot connector](/components/connectors/out-of-the-box-connectors/hubspot.md).
 
 ## 8.8.0-alpha2
 
@@ -202,6 +271,6 @@ Camunda backups have been improved and made easier to use. The web application b
 
 ### Connector Runtime <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span>
 
-#### Spring SDK and Camunda REST API Migration
+#### Spring SDK and Camunda 8 REST API Migration
 
-The Connectors experience is enhanced with the migration from the Spring Zeebe to the Camunda REST API, and the removal of dependency on the Operate client.
+The Connectors experience is enhanced with the migration from the Spring Zeebe to the Camunda 8 REST API, and the removal of dependency on the Operate client.

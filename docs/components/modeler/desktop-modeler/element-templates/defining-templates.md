@@ -13,6 +13,10 @@ Templates are defined in template descriptor files as a JSON array:
     "name": "Template 1",
     "id": "sometemplate",
     "description": "some description",
+    "keywords": [
+      "search alias",
+      "create action"
+    ],
     "version": 1,
     "engines": {
       "camunda": "^8.6"
@@ -21,7 +25,7 @@ Templates are defined in template descriptor files as a JSON array:
       "bpmn:Task"
     ],
     "elementType": {
-      "value": "bpmn:ServiceTask",
+      "value": "bpmn:ServiceTask"
     },
     "properties": [
       ...
@@ -52,6 +56,7 @@ Example:
 - `name : String`: Name of the template. Shown in the element template selection modal and in the properties panel on the right side of the screen (after applying an element template).
 - `id : String`: ID of the template.
 - `description : String`: Optional description of the template. Shown in the element template selection modal and in the properties panel (after applying an element template).
+- `keywords: Array<String>`: Optional list of keywords. Can be used to help users find this template. Keywords are used for search and filtering but are not displayed in the UI.
 - `documentationRef : String`: Optional URL pointing to a template documentation. Shown in the properties panel (after applying an element template).
 - `version : Integer`: Optional version of the template. If you add a version to a template, it is considered unique based on its ID and version. Two templates can have the same ID if their version is different.
 - `engines : Object`: Optional dictionary of environments compatible with the template. Environment version is specified with semantic versions range.
@@ -59,7 +64,7 @@ Example:
 - `elementType : Object`: Optional type of the element. If you configure `elementType` on a template, the element is replaced with the specified type when a user applies the template.
 - `properties : Array<Object>`: List of properties of the template.
 
-## Creating and editing Connector templates
+## Creating and editing connector templates
 
 Connector templates are a specific kind of element template. You can edit them with visual preview and edit support like formatting, code completion, and error highlighting in [Web Modeler](/components/connectors/manage-connector-templates.md).
 
@@ -129,7 +134,7 @@ Let us consider the following example that defines a template for a mail sending
 ```json
 {
   "$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema/resources/schema.json",
-  "name": "REST Connector",
+  "name": "REST connector",
   "id": "io.camunda.examples.RestConnector",
   "description": "A REST API invocation task.",
   "appliesTo": ["bpmn:ServiceTask"],
@@ -370,11 +375,11 @@ Configures an [input mapping](../../../../concepts/variables/#input-mappings).
 
 #### `zeebe:output`
 
-| **Binding `type`**          | `zeebe:output`                                                             |
-| --------------------------- | -------------------------------------------------------------------------- |
-| **Valid property `type`'s** | `String`<br /> `Text`<br />`Hidden`<br />`Dropdown``Boolean`<br />`Number` |
-| **Binding parameters**      | `source`: The source of the output parameter                               |
-| **Mapping result**          | `<zeebe:output target="[userInput]" source="[source] />`                   |
+| **Binding `type`**          | `zeebe:output`                                                                   |
+| --------------------------- | -------------------------------------------------------------------------------- |
+| **Valid property `type`'s** | `String`<br /> `Text`<br />`Hidden`<br />`Dropdown`<br />`Boolean`<br />`Number` |
+| **Binding parameters**      | `source`: The source of the output parameter                                     |
+| **Mapping result**          | `<zeebe:output target="[userInput]" source="[source] />`                         |
 
 Configures an [output mapping](../../../../concepts/variables/#output-mappings).
 

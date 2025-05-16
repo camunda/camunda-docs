@@ -2,38 +2,45 @@
 id: metrics
 title: "Metrics"
 keywords: ["observability", "metrics", "monitoring", "monitor"]
+Description: "Learn about Camunda distributed system monitoring metrics using the Micrometer library as a facade for exporting metrics."
 ---
 
-When operating a distributed system like Camunda 8, it is important to put proper monitoring in place. To facilitate this, Camunda leverages [Micrometer](https://micrometer.io/), a library
-which provides a convenient facade that allows exporting metrics to [one or more supported implementations](https://docs.micrometer.io/micrometer/reference/implementations.html)
-(e.g. Prometheus, OpenTelemetry, Datadog, Dynatrace, etc.).
+For distributed system monitoring, Camunda uses the [Micrometer](https://micrometer.io/) library as a facade to export metrics to [supported implementations](https://docs.micrometer.io/micrometer/reference/implementations.html) such as Prometheus, OpenTelemetry, Datadog, and Dynatrace.
 
-## Accessing metrics
+## Access metrics
 
-Metrics are meant to be accessed directly via your chosen monitoring system, where they are aggregated. This is because they are stored purely in-memory in
-Camunda. As such, they need to be consumed by your monitoring system before they can be accessed. Broadly speaking, this will happen in one of two ways,
-via polling (the default), or pushing.
+You can access your metrics data using your chosen monitoring implementation. Metrics data is only stored in-memory in Camunda, so it needs to be consumed and aggregated by a monitoring system.
 
-A **polling** system (such as Prometheus) will poll an endpoint exposed by Camunda at a regular interval. Each request constitute a data point
-for each metric. When working with such systems, configure the polling interval to get information fast enough, without overwhelming Camunda
-itself (which still has to serve this data) or having to store too much data in your monitoring system itself. Additionally, this means exposing the Camunda
-endpoint to your external monitoring system.
+Monitoring typically uses either a polling (default) or pushing system.
 
-When using a **pushing** system (such as OpenTelemetry), Camunda is configured to asynchronously push metric updates to an external endpoint at a regular interval. This implies that the system is accessible to Camunda via the network, so you will most likely want to ensure communication is secured. Similarly to the polling approach, balance how fast you are pushing (and thus getting updates/data points), without overwhelming your external system.
+### Polling
+
+The system (for example, Prometheus) polls an endpoint exposed by Camunda at a regular interval.
+
+- Each request constitutes a data point for each metric.
+- When working with such systems, configure the polling interval to get information quickly but without overwhelming Camunda itself (which still has to serve this data) or having to store too much data in your monitoring system itself.
+- Additionally, this means exposing the Camunda endpoint to your external monitoring system.
+
+### Pushing
+
+For a pushing system (for example, OpenTelemetry), Camunda is configured to asynchronously push metric updates to an external endpoint at a regular interval.
+
+- This implies that the system is accessible to Camunda via the network, so you should ensure communication is secure.
+- Similarly to the polling approach, balance how fast you are pushing (and getting updates/data points) without overwhelming your external system.
 
 ## Configuration
 
-Configuration for metrics is done via the [built-in Spring Boot Micrometer configuration, as documented here](https://docs.spring.io/spring-boot/reference/actuator/metrics.html).
+Configure your metrics using the built-in [Spring Boot Micrometer configuration](https://docs.spring.io/spring-boot/reference/actuator/metrics.html).
 
 ### Defaults
 
-Camunda comes built-in with support for [Prometheus](https://prometheus.io) and [OpenTelemetry](https://opentelemetry.io/). By default, it is configured to export only Prometheus metrics
-via [a scraping endpoint](https://docs.spring.io/spring-boot/reference/actuator/metrics.html#actuator.metrics.export.prometheus), and OpenTelemetry is disabled.
+Camunda includes built-in support for [Prometheus](https://prometheus.io) and [OpenTelemetry](https://opentelemetry.io/). By default, the configuration only exports Prometheus metrics via [a scraping endpoint](https://docs.spring.io/spring-boot/reference/actuator/metrics.html#actuator.metrics.export.prometheus), with OpenTelemetry disabled.
 
 #### Prometheus
 
-The scraping endpoint for Prometheus is located under the management context (by default `:9600/actuator/prometheus`). This is configured via the following
-properties:
+The scraping endpoint for Prometheus is located under the management context (default `:9600/actuator/prometheus`).
+
+Configure this via the following properties:
 
 ```yaml
 management:
@@ -41,7 +48,9 @@ management:
   prometheus.metrics.export.enabled: true
 ```
 
-In order to collect the metrics, Prometheus needs to be made aware of the new scraping endpoint. To do so, add the following scraping job:
+To collect metrics, you must define the new scraping endpoint for Prometheus.
+
+Add the following scraping job:
 
 ```
 - job_name: camunda
@@ -54,18 +63,24 @@ In order to collect the metrics, Prometheus needs to be made aware of the new sc
 ```
 
 :::warning
-If you've configured your management context to be over HTTPS, you will need to also update the scheme above. Same thing if you changed the management port.
+If you've configured your management context to use HTTPS, you must also update the `scheme` for the scraping job above. This also applies if you change the management port.
 :::
 
 :::note
-The scraping interval is 30s by default; this means, you will get new data points in Prometheus every 30s. This is a good default to minimize the storage requirements
-for Prometheus. If you want to run alerts or auto-scaling based on the provided metrics, then you may wish to configure a shorter interval. This will result in more data
-ingested however, so use at your own risk.
+
+The scraping interval is `30s` by default. This means you will get new data points in Prometheus every 30 seconds.
+
+- This is a good default to minimize the storage requirements for Prometheus.
+- To run alerts or auto-scaling based on the provided metrics, you can configure a shorter interval. As this results in more data
+  being ingested, use at your own risk.
+
 :::
 
 #### OpenTelemetry Protocol
 
-Zeebe also comes built-in with support to export metrics via OpenTelemetry (done through the `micrometer-registry-otlp`). To configure it, you would set the following properties:
+Zeebe also comes built-in with support to export metrics via OpenTelemetry (using the `micrometer-registry-otlp`).
+
+Configure this via the following properties:
 
 ```yaml
 management:
@@ -81,57 +96,58 @@ management:
         url: "https://otlp.example.com:4318/v1/metrics"
 ```
 
-You can find a more extensive list of configuration options for OTLP on the
-[Micrometer website](https://docs.micrometer.io/micrometer/reference/implementations/otlp.html#_configuring).
+For a complete list of configuration options for OTLP, refer to the [Micrometer](https://docs.micrometer.io/micrometer/reference/implementations/otlp.html#_configuring) documentation.
 
 :::warning
-When using the OTLP exporter, be sure to check the requirements of your target endpoint, as it may require additional configuration.
-For example, you may need to pass a client secret and ID for authentication via the `otlp.metrics.export.headers` options. Or your system
-may not support `cumulative` aggregation temporality, but instead require `delta` (e.g. Dynatrace).
+When using the OTLP exporter, check the requirements of your target endpoint, as it might require additional configuration. For example, you might need to pass a client secret and ID for authentication via the `otlp.metrics.export.headers` options, or your system might not support `cumulative` aggregation temporality and instead require `delta` (for example, Dynatrace).
 :::
 
-**Note that a wide variety of existing monitoring systems also support ingesting OpenTelemetry data (e.g. Dynatrace, Datadog, etc.).
-We recommend using it instead of the specific Micrometer implementations.**
+:::tip
+A wide variety of existing monitoring systems also support ingesting OpenTelemetry data (for example, Dynatrace, Datadog, and so on). Camunda recommends using these instead of the specific Micrometer implementations.
+:::
 
-### Using a different monitoring system
+### Use a different monitoring system
 
-To use a different monitoring system, refer to the [Spring Boot documentation](https://docs.spring.io/spring-boot/reference/actuator/metrics.html#actuator.metrics.export).
-Note that Zeebe only ships with built-in support for the [Prometheus](https://docs.spring.io/spring-boot/reference/actuator/metrics.html#actuator.metrics.export.prometheus)
+To use a different monitoring system, refer to the [Spring Boot](https://docs.spring.io/spring-boot/reference/actuator/metrics.html#actuator.metrics.export) documentation.
+Zeebe only ships with built-in support for the [Prometheus](https://docs.spring.io/spring-boot/reference/actuator/metrics.html#actuator.metrics.export.prometheus)
 and [OTLP](https://docs.spring.io/spring-boot/reference/actuator/metrics.html#actuator.metrics.export.otlp) systems.
 
-If you wish to use a different system, you would need to add the required dependencies to your Zeebe installation, specifically to the distribution's `lib/` folder.
+To use a different system, you must add the required dependencies to your Zeebe installation, specifically to the distribution's `lib/` folder.
 
 :::note
-When using the container image, you will need to add it to the following path based on your image:
+When using the container image, you must add it to the following paths, based on your image:
 
 - `camunda/zeebe`: `/usr/local/zeebe/lib`
 - `camunda/camunda`: `/usr/local/camunda/lib`
   :::
 
-For example, if you want to export to Datadog, you would download the `io.micrometer:micrometer-registry-datadog` JAR and place it in the `./lib` folder of the distribution.
-Running from the root of the distribution, you can leverage Maven to do this for you:
+For example, to export to Datadog, download the `io.micrometer:micrometer-registry-datadog` JAR and place it in the `./lib` folder of the distribution.
+
+Running from the root of the distribution, you can use Maven to do this for you:
 
 ```shell
 mvn dependency:copy -Dartifact=io.micrometer:micrometer-registry-datadog:1.14.4 -Dtransitive=false -DoutputDirectory=./lib
 ```
 
 :::note
-Make sure the version is the same as the Micrometer version used by Camunda. You can find this out by checking the distribution artifact on
-[Maven Central](https://central.sonatype.com/artifact/io.camunda/camunda-zeebe/dependencies).
+The version must be the same as the Micrometer version used by Camunda.
 
-Make sure to select the distribution version you're using, then filter for `micrometer` to get the expected Micrometer version.
+- Find this information by checking the distribution artifact on [Maven Central](https://central.sonatype.com/artifact/io.camunda/camunda-zeebe/dependencies).
+- Select the distribution version you are using, and filter for `micrometer` to get the expected Micrometer version.
+
 :::
 
-### Customizing metrics
+### Customize metrics
 
 You can modify and filter the metrics exposed in Camunda via configuration.
 
 #### Common tags
 
-[Tags provide a convenient way of aggregating metrics over common attributes](https://docs.spring.io/spring-boot/reference/actuator/metrics.html#actuator.metrics.customizing.common-tags).
-Via configuration, you can ensure that all metrics for a specific instance of Camunda share common tags. For example, let's say you deploy two different clusters, and want to differentiate them.
+[Tags provide a convenient way of aggregating metrics over common attributes](https://docs.spring.io/spring-boot/reference/actuator/metrics.html#actuator.metrics.customizing.common-tags). Via configuration, you can ensure that all metrics for a specific instance of Camunda share common tags.
 
-The first one could be configured as:
+For example, if you deployed two different clusters and wanted to differentiate them:
+
+The first cluster could be configured as:
 
 ```yaml
 management:
@@ -140,7 +156,7 @@ management:
       cluster: "foo"
 ```
 
-And the second one as:
+And the second cluster configured as:
 
 ```yaml
 management:
@@ -165,8 +181,7 @@ management:
 ```
 
 :::note
-Filtering applies not only to direct name matches (e.g. `zeebe.foo`), but as a prefix. Meaning any metric starting with the prefix `zeebe.foo` in the example
-above would also be filtered out, and wouldn't be exported.
+Filtering applies not only to direct name matches (for example, `zeebe.foo`), but as a prefix. This means any metric starting with the prefix `zeebe.foo` in the example would also be filtered out, and would not be exported.
 :::
 
 ## Available metrics
@@ -180,46 +195,47 @@ through Camunda:
 - [Logger metrics](https://docs.spring.io/spring-boot/reference/actuator/metrics.html#actuator.metrics.supported.logger)
 - [Spring MVC metrics](https://docs.spring.io/spring-boot/reference/actuator/metrics.html#actuator.metrics.supported.spring-mvc)
 
-Additionally, Camunda will expose several custom metrics, most of them under the `zeebe`, `atomix`, `operate`, `tasklist`, or `optimize` prefixes.
+Camunda also exposes several custom metrics, most of them under the `zeebe`, `atomix`, `operate`, `tasklist`, or `optimize` prefixes.
 
 :::note
 While all nodes in a Camunda cluster expose metrics, they will expose relevant metrics based on their role. For example, brokers will expose processing related metrics,
 while gateways will expose REST API relevant metrics.
 :::
 
-**Metrics related to process processing:**
+### Process processing metrics
 
-- `zeebe_stream_processor_records_total`: The number of events processed by the stream processor.
-  The `action` label separates processed, skipped, and written events.
-- `zeebe_exporter_events_total`: The number of events processed by the exporter processor.
-  The `action` label separates exported and skipped events.
-- `zeebe_element_instance_events_total`: The number of occurred process element instance events.
-  The `action` label separates the number of activated, completed, and terminated elements.
-  The `type` label separates different BPMN element types.
-- `zeebe_job_events_total`: The number of job events. The `action` label separates the number of
-  created, activated, timed out, completed, failed, and canceled jobs.
-- `zeebe_incident_events_total`: The number of incident events. The `action` label separates the number
-  of created and resolved incident events.
-- `zeebe_pending_incidents_total`: The number of currently pending incidents, i.e. not resolved.
+The following metrics are related to process processing:
 
-**Metrics related to performance:**
+| Metric                                 | Description                                                                                                                                                                                                |
+| :------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `zeebe_stream_processor_records_total` | The number of events processed by the stream processor. The `action` label separates processed, skipped, and written events.                                                                               |
+| `zeebe_exporter_events_total`          | The number of events processed by the exporter processor. The `action` label separates exported and skipped events.                                                                                        |
+| `zeebe_element_instance_events_total`  | The number of occurred process element instance events. The `action` label separates the number of activated, completed, and terminated elements. The `type` label separates different BPMN element types. |
+| `zeebe_job_events_total`               | The number of job events. The `action` label separates the number of created, activated, timed out, completed, failed, and canceled jobs.                                                                  |
+| `zeebe_incident_events_total`          | The number of incident events. The `action` label separates the number of created and resolved incident events.                                                                                            |
+| `zeebe_pending_incidents_total`        | The number of currently pending incidents, that is, not resolved.                                                                                                                                          |
 
-Zeebe has a backpressure mechanism by which it rejects requests when it receives more requests than it can handle without incurring high processing latency.
+### Performance metrics
+
+The following metrics are related to performance. For example, Zeebe has a backpressure mechanism to reject requests when it receives more requests than it can handle without incurring high processing latency.
 
 Monitor backpressure and processing latency of the commands using the following metrics:
 
-- `zeebe_dropped_request_count_total`: The number of user requests rejected by the broker due to backpressure.
-- `zeebe_backpressure_requests_limit`: The limit for the number of inflight requests used for backpressure.
-- `zeebe_stream_processor_latency_bucket`: The processing latency for commands and event.
+| Metric                                  | Description                                                             |
+| :-------------------------------------- | :---------------------------------------------------------------------- |
+| `zeebe_dropped_request_count_total`     | The number of user requests rejected by the broker due to backpressure. |
+| `zeebe_backpressure_requests_limit`     | The limit for the number of inflight requests used for backpressure.    |
+| `zeebe_stream_processor_latency_bucket` | The processing latency for commands and event.                          |
 
-**Metrics related to health:**
+### Health metrics
 
-The health of partitions in a broker can be monitored by the metric `zeebe_health`.
+The health of partitions in a broker can be monitored using the metric `zeebe_health`.
 
 ## Execution latency metrics
 
-The brokers can export optional execution latency metrics. To enable export of execution metrics, configure set the `ZEEBE_BROKER_EXECUTION_METRICS_EXPORTER_ENABLED` environment variable to `true` in
-your Zeebe [configuration file](/self-managed/zeebe-deployment/configuration/configuration.md).
+Brokers can export optional execution latency metrics.
+
+To enable export of execution metrics, set the `ZEEBE_BROKER_EXECUTION_METRICS_EXPORTER_ENABLED` environment variable to `true` in your Zeebe [configuration file](/self-managed/zeebe-deployment/configuration/configuration.md).
 
 ## Grafana
 
@@ -228,8 +244,11 @@ your Zeebe [configuration file](/self-managed/zeebe-deployment/configuration/con
 Zeebe comes with a pre-built dashboard, available in the repository:
 [monitor/grafana/zeebe.json](https://github.com/camunda/camunda/blob/main/monitor/grafana/zeebe.json).
 
-[Import](https://grafana.com/docs/grafana/latest/reference/export_import/#importing-a-dashboard) it into your Grafana instance and select the correct Prometheus data source (important if you have more than one). You will then be greeted with the following dashboard, which displays a healthy cluster topology, general throughput metrics, handled requests, exported events per second, disk and memory usage, and more.
+- [Import](https://grafana.com/docs/grafana/latest/reference/export_import/#importing-a-dashboard) the dashboard into your Grafana instance and select the correct Prometheus data source (if you have more than one).
+- The dashboard displays a healthy cluster topology, general throughput metrics, handled requests, exported events per second, disk and memory usage, and more.
 
 ![Grafana dashboard](assets/grafana-preview.png)
 
-You can also try out an [interactive version](https://snapshots.raintank.io/dashboard/snapshot/Vbu3EHQMTI5Onh5RKuiS5J7QSMd7Sp5V), where you can explore help messages for every panel and get a feel for what data is available.
+:::tip
+You can also try out an [interactive dashboard](https://snapshots.raintank.io/dashboard/snapshot/Vbu3EHQMTI5Onh5RKuiS5J7QSMd7Sp5V) to learn about each panel and get an understanding of available data.
+:::

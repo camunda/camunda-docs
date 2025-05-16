@@ -5,7 +5,7 @@ sidebar_label: "Gateway configuration"
 description: "Analyze how to configure the Zeebe Gateway, including byte sizes, time units, paths, and sample YAML snippets."
 ---
 
-The Zeebe Gateway can be configured similarly to the broker via the `application.yaml` file or environment variables. A complete gateway configuration template is available in the [Zeebe repository](https://github.com/camunda/camunda/blob/main/dist/src/main/config/gateway.yaml.template).
+The Zeebe Gateway can be configured similarly to the broker via the `application.yaml` file or environment variables. A complete gateway configuration template is available in the [Zeebe repository](https://github.com/camunda/camunda/blob/8.7.0/dist/src/main/config/gateway.yaml.template).
 
 :::info Configure an embedded gateway
 If you're configuring a gateway that is embedded inside a broker (i.e. you've set [`zeebe.broker.gateway.enable`](./broker.md#zeebebrokergateway)), then you must use `zeebe.broker.gateway.*` instead of `zeebe.gateway.*` for any of the configuration options below. For environment variables this means you must use `ZEEBE_BROKER_GATEWAY_*` instead of `ZEEBE_GATEWAY_*`.
@@ -57,9 +57,9 @@ The `server` configuration allows you to configure the main REST server. Below a
 
 #### server.compression
 
-| Field   | Description                                                                                                                                                 | Example value |
-| ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| enabled | If true, enables compression of responses for the REST API. This setting can also be overridden using the environment variable `SERVER_COMPRESION_ENABLED`. | false         |
+| Field   | Description                                                                                                                                                           | Example value |
+| ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| enabled | If true, enables compression of responses for the Camunda 8 REST API. This setting can also be overridden using the environment variable `SERVER_COMPRESION_ENABLED`. | false         |
 
 #### server.ssl
 
@@ -67,7 +67,7 @@ Allows you to configure the SSL security for the REST server.
 
 | Field                   | Description                                                                                                                                                                     | Example value |
 | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| enabled                 | If true, enables TLS for the REST API. This setting can also be overridden using the environment variable `SERVER_SSL_ENABLED`.                                                 | false         |
+| enabled                 | If true, enables TLS for the Camunda 8 REST API. This setting can also be overridden using the environment variable `SERVER_SSL_ENABLED`.                                       | false         |
 | certificate             | The path to a PEM encoded certificate. This setting can also be overridden using the environment variable `SERVER_SSL_CERTIFICATE`.                                             |               |
 | certificate-private-key | The path to a PKCS1 or PKCS8 private key for the configured certificate. This setting can also be overridden using the environment variable `SERVER_SSL_CERTIFICATEPRIVATEKEY`. |               |
 
@@ -105,7 +105,7 @@ The `management.server` configuration allows you to configure the management ser
 | Field     | Description                                                                                                                                                                                                                                                                           | Example value |
 | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
 | host      | Sets the host the management server binds to. This setting can also be overridden using the environment variable `MANAGEMENT_SERVER_HOST`.                                                                                                                                            | 0.0.0.0       |
-| port      | Sets the port the management server binds to. This setting can also be overridden using the environment variable `MANAGEMENT_SERVER_PORT`.                                                                                                                                            | 8080          |
+| port      | Sets the port the management server binds to. This setting can also be overridden using the environment variable `MANAGEMENT_SERVER_PORT`.                                                                                                                                            | 9600          |
 | base-path | The context path prefix for all management endpoints. For example, if you configure `/zeebe`, your actuator endpoints will be at `http://localhost:9600/zeebe/actuator/configprops`. This setting can also be overridden using the environment variable `MANAGEMENT_SERVER_BASEPATH`. | `/`           |
 
 #### YAML snippet

@@ -1,21 +1,21 @@
 ---
 id: asana
-title: Asana Connector
+title: Asana connector
 sidebar_label: Asana
-description: Manage Asana projects and tasks from your BPMN process. Learn how to create an Asana Connector task, and get started.
+description: Manage Asana projects and tasks from your BPMN process. Learn how to create an Asana connector task, and get started.
 ---
 
-The Asana Connector is an outbound protocol Connector that allows you to connect your BPMN service with [Asana](https://asana.com/) to get and create Asana tasks and projects.
+The Asana connector is an outbound protocol connector that allows you to connect your BPMN service with [Asana](https://asana.com/) to get and create Asana tasks and projects.
 
 ## Prerequisites
 
-To use the **Asana Connector**, you must have an Asana [personal access token](https://developers.asana.com/docs/personal-access-token).
+To use the **Asana connector**, you must have an Asana [personal access token](https://developers.asana.com/docs/personal-access-token).
 
 :::note
 Use Camunda secrets to avoid exposing your Asana personal access token as plain text. Refer to our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
 :::
 
-## Create an Asana Connector task
+## Create an Asana connector task
 
 import ConnectorTask from '../../../components/react-components/connector-task.md'
 
@@ -77,7 +77,7 @@ In the **Authentication** section, provide a **Personal access token**. [Read mo
 - **Asana API:** [Delete a project](https://developers.asana.com/reference/deleteproject).
 - **Project ID:** Globally unique identifier for the project.
 
-## Handle Connector response
+## Handle connector response
 
-The **Asana Connector** is a protocol Connector, meaning it is built on top of the **HTTP REST Connector**. Therefore,
+The **Asana connector** is a protocol connector, meaning it is built on top of the **HTTP REST connector**. Therefore,
 handling response is still applicable [as described](/components/connectors/protocol/rest.md#response).

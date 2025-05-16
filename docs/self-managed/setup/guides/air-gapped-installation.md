@@ -29,7 +29,6 @@ The following images must be available in your air-gapped environment:
 - [bitnami/keycloak](https://hub.docker.com/r/bitnami/keycloak)
 - [bitnami/os-shell](https://hub.docker.com/r/bitnami/os-shell/)
 - [bitnami/elasticsearch](https://hub.docker.com/r/bitnami/elasticsearch/)
-- [bitnami/kibana](https://hub.docker.com/r/bitnami/kibana/)
 - [Web Modeler images](/self-managed/setup/deploy/other/docker.md#component-images):
   - [camunda/web-modeler-restapi](https://hub.docker.com/r/camunda/web-modeler-restapi)
   - [camunda/web-modeler-webapp](https://hub.docker.com/r/camunda/web-modeler-webapp)
@@ -75,7 +74,7 @@ The package is self-contained and already includes the following dependencies:
 Install the Helm chart by either making it available on a [private repository](https://helm.sh/docs/topics/chart_repository/) that can be accessed from the air-gapped environment or by providing the downloaded chart archive locally to Helm, for example:
 
 ```shell
-helm install camunda ./camunda-platform-11.1.0.tgz
+helm install camunda --version $HELM_CHART_VERSION ./camunda-platform-11.1.0.tgz
 ```
 
 For supported versions, refer to [supported environments](/reference/supported-environments.md#camunda-8-self-managed).
@@ -225,5 +224,5 @@ postgresql:
 Afterwards, you can deploy Camunda using Helm and the custom values file.
 
 ```shell
-helm install my-camunda-platform camunda/camunda-platform -f values.yaml
+helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION -f values.yaml
 ```

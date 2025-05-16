@@ -37,7 +37,7 @@ The setup consists of:
     - three [EC2](https://aws.amazon.com/ec2/) instances using Ubuntu, one within each availability zone, which will run Camunda 8.
     - a [managed OpenSearch](https://aws.amazon.com/what-is/opensearch/) cluster stretched over the three availability zones.
   - a [Public Subnet](https://docs.aws.amazon.com/vpc/latest/userguide/configure-subnets.html), which allows direct access to the Internet via an [Internet Gateway](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html).
-    - (optional) an [Application Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html) (ALB) is used to expose the WebUIs like Operate, Tasklist, and Connectors, as well as the REST API to the outside world. This is done using sticky sessions, as generally requests are distributed round-robin across all EC2 instances.
+    - (optional) an [Application Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html) (ALB) is used to expose the WebUIs like Operate, Tasklist, and connectors, as well as the Camunda 8 REST API to the outside world. This is done using sticky sessions, as generally requests are distributed round-robin across all EC2 instances.
     - (optional) a [Network Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/introduction.html) (NLB) is used to expose the gRPC endpoint of the Zeebe Gateway, in case external applications require it.
     - (optional) a [Bastion Host](https://en.wikipedia.org/wiki/Bastion_host) to allow access to the private EC2 instances since they're not publicly exposed.
       - Alternatively, utilize the [AWS Client VPN](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/what-is.html) instead to reach the private subnet within the VPC. The setup requires extra work and certificates, but can be set up by following the [getting started tutorial by AWS](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/cvpn-getting-started.html).
@@ -233,7 +233,7 @@ During the first installation, you will be asked to confirm the connection to ea
 
 The Application Load Balancer (ALB) and the Network Load Balancer (NLB) can be accessed via the following Terraform outputs:
 
-- `terraform output alb_endpoint`: Access Operate (or the Connectors instance on port `9090`). The ALB is designed for handling Web UIs, such as Operate, Tasklist, Optimize, and Connectors.
+- `terraform output alb_endpoint`: Access Operate (or the connectors instance on port `9090`). The ALB is designed for handling Web UIs, such as Operate, Tasklist, Optimize, and connectors.
 - `terraform output nlb_endpoint`: Access the gRPC endpoint of the Zeebe gateway. The NLB is intended for managing the gRPC endpoint of the Zeebe Gateway. This is due to the difference of protocols with ALB focusing on HTTP and NLB on TCP.
 
 The two endpoints above use the publicly assigned hostname of AWS. Add your domain via CNAME records or use [Route53](https://aws.amazon.com/route53/) to map to the load balancers, allowing them to easily enable SSL. This will require extra work in the Terraform blueprint as it listens to HTTP by default.
@@ -275,7 +275,7 @@ cd camunda-deployment-references-main/aws/ec2/terraform
 terraform output -raw alb_endpoint
 ```
 
-3. Use the REST API to communicate with Camunda:
+3. Use the [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md) to communicate with Camunda:
 
 Follow the example in the [REST API documentation](/apis-tools/camunda-api-rest/camunda-api-rest-authentication.md) to authenticate and retrieve the cluster topology.
 
@@ -303,7 +303,7 @@ The update process can be automated using the `all-in-one-install.sh` script, wh
 
 ### Monitoring
 
-Our default way of exposing metrics is in the Prometheus format, please conduct the general [metrics related documentation](/self-managed/operational-guides/monitoring/metrics.md) to learn more how to scrape Camunda 8.
+Camunda metrics are exposed by default using the Prometheus format. To learn more about how to scrape Camunda 8, see [metrics](/self-managed/operational-guides/monitoring/metrics.md).
 
 In an AWS environment, you can leverage CloudWatch not only for log collection but also for gathering [Prometheus metrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContainerInsights-Prometheus-metrics.html). It's important to note that while Camunda natively supports Grafana and Prometheus, integrating CloudWatch for metric visualization is possible but requires additional configuration.
 

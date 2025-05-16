@@ -23,7 +23,7 @@ IDP offers a composable architecture that allows you to customize and extend IDP
 
 IDP allows you to create, configure, and publish a **document extraction template**. This is a type of [connector template](/components/connectors/custom-built-connectors/connector-templates.md).
 
-<img src={IdpArchitectureImg} alt="Architecture diagram of IDP" width="550px" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}}/>
+<img src={IdpArchitectureImg} alt="Architecture diagram of IDP" class="img-noborder img-600" />
 
 The document extraction template integrates with Camunda document handling connectors and APIs such as [Amazon S3](/components/connectors/out-of-the-box-connectors/amazon-s3.md), [Amazon Textract](/components/connectors/out-of-the-box-connectors/amazon-textract.md), [Amazon Comprehend](/components/connectors/out-of-the-box-connectors/amazon-comprehend.md), and [Amazon Bedrock](/components/connectors/out-of-the-box-connectors/amazon-bedrock.md) to retrieve, analyze, and process documents.
 
@@ -43,14 +43,14 @@ The document extraction template integrates with Camunda document handling conne
 
 IDP stores documents as follows during the different extraction stages:
 
-<img src={IdpDocumentStorageImg} alt="IDP document storage diagram" width="800px" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}}/>
+<img src={IdpDocumentStorageImg} alt="IDP document storage diagram" class="img-noborder img-800"/>
 
 1. Web Modeler: [Uploaded sample documents](idp-unstructured-extraction.md#upload-documents) are stored within Web Modeler itself (SaaS) or the database (Self-Managed).
-1. Cluster: During [extraction testing](idp-unstructured-extraction.md#extract-fields) (for example, when you click **Extract document**) the document is stored in the cluster using the [document handling](/components/concepts/document-handling.md) API.
+1. Cluster: During [extraction testing](idp-unstructured-extraction.md#extract-fields) (for example, when you click **Extract document**) the document is stored in the cluster using the [document handling](/components/document-handling/getting-started.md) API.
 1. Extraction: Finally, when you extract content using a document extraction template, it is stored in an [Amazon AWS S3 bucket](idp-configuration.md#prerequisites), where it can be accessed by AWS Textract.
 
 :::info
-To learn more about storing, tracking, and managing documents in Camunda 8, see [document handling](/components/concepts/document-handling.md).
+To learn more about storing, tracking, and managing documents in Camunda 8, see [document handling](/components/document-handling/getting-started.md).
 :::
 
 ## Document file formats {#file-formats}
@@ -127,7 +127,7 @@ In this format:
 
 #### Example JSON output
 
-<img src={IdpTableDataImg} alt="Architecture diagram of IDP" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}}/>
+<img src={IdpTableDataImg} alt="Architecture diagram of IDP" />
 
 **Prompt:** "Extract a list of name and ages of patients on floor 1".
 
@@ -154,7 +154,7 @@ To extract table data in CSV format, specify this in the prompt. The output is t
 
 ```csv
 Name,Age
-Katlin Jones,41
+Kaitlin Jones,41
 Thomas Hampton,57
 ```
 
@@ -206,7 +206,7 @@ During validation, a validation status is shown for extraction fields to indicat
 
 The following example shows the results of a partially successful extraction against three documents.
 
-<img src={IdpValidationExampleImg} alt="Example validation results table" style={{marginTop: '0'}} />
+<img src={IdpValidationExampleImg} alt="Example validation results table" />
 
 The expanded `contract_start_date` field shows that each document returned different validation results.
 

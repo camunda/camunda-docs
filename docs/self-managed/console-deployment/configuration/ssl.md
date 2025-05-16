@@ -46,8 +46,18 @@ SSL can be configured separately for the management routes using the `MANAGEMENT
 
 If you are using a custom (self-signed) TLS certificate in Console or Identity, configure Console to accept the certificate.
 
-Provide the path to the certificate file via the environment variable `NODE_EXTRA_CA_CERTS`:
+Create a secret with the value of the key being the filename:
 
-| Environment variable  | Description                                                                                                                                  | Example value              |
-| --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
-| `NODE_EXTRA_CA_CERTS` | The path to your self-signed TLS certificate. Ensure the provided path is accessible from the container (for example, via a mounted volume). | `/path/to/certificate.crt` |
+```bash
+kubectl create secret generic consoletls --from-file=console.crt=console.crt
+```
+
+Once the secret is created, it can be used in the values.yaml:
+
+```yaml
+console:
+  tls:
+    enabled: true
+    existingSecret: consoletls
+    certKeyFilename: console.crt
+```

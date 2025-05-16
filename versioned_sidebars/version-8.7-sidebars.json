@@ -26,8 +26,7 @@
         "guides/setup-client-connection-credentials",
         "guides/configuring-out-of-the-box-connectors",
         "guides/use-connectors-in-hybrid-mode",
-        "guides/host-custom-connectors",
-        "guides/document-handling"
+        "guides/host-custom-connectors"
       ],
       "Improve": [
         "guides/improve-processes-with-optimize",
@@ -81,7 +80,6 @@
         "components/concepts/backups",
         "components/concepts/resource-deletion",
         "components/concepts/resource-authorizations",
-        "components/concepts/document-handling",
         {
           "Access control": [
             "components/concepts/access-control/user-groups",
@@ -139,6 +137,29 @@
     },
     {
       "type": "category",
+      "label": "Document handling",
+      "link": {
+        "type": "doc",
+        "id": "components/document-handling/getting-started"
+      },
+      "items": [
+        {
+          "type": "category",
+          "label": "Use cases",
+          "link": {
+            "type": "doc",
+            "id": "components/document-handling/use-cases/use-cases"
+          },
+          "items": [
+            "components/document-handling/use-cases/upload-document-to-bpmn-process",
+            "components/document-handling/use-cases/display-and-download-document",
+            "components/document-handling/use-cases/send-document-to-external-system-via-connector"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "category",
       "label": "Intelligent document processing (IDP)",
       "link": {
         "type": "doc",
@@ -178,7 +199,15 @@
         "type": "doc",
         "id": "components/rpa/overview"
       },
-      "items": ["components/rpa/getting-started", "components/rpa/production"]
+      "items": [
+        "components/rpa/getting-started",
+        "components/rpa/production",
+        {
+          "type": "link",
+          "label": "RPA library specifications",
+          "href": "https://camunda.github.io/rpa-python-libraries/"
+        }
+      ]
     },
     {
       "type": "category",
@@ -477,7 +506,8 @@
           "items": [
             "components/connectors/connector-types",
             "components/connectors/use-connectors/inbound",
-            "components/connectors/use-connectors/outbound"
+            "components/connectors/use-connectors/outbound",
+            "components/connectors/use-connectors/intrinsic-functions"
           ]
         },
         {
@@ -1137,18 +1167,6 @@
                       "type": "doc",
                       "id": "apis-tools/camunda-api-rest/specifications/create-document-link",
                       "label": "Create document link",
-                      "className": "api-method post"
-                    }
-                  ]
-                },
-                {
-                  "type": "category",
-                  "label": "User",
-                  "items": [
-                    {
-                      "type": "doc",
-                      "id": "apis-tools/camunda-api-rest/specifications/find-all-users",
-                      "label": "Query users (alpha)",
                       "className": "api-method post"
                     }
                   ]
@@ -1833,6 +1851,7 @@
             "self-managed/setup/guides/add-extra-manifests",
             "self-managed/setup/guides/using-existing-elasticsearch",
             "self-managed/setup/guides/using-existing-opensearch",
+            "self-managed/setup/guides/using-existing-postgres",
             "self-managed/setup/guides/configure-db-custom-headers",
             "self-managed/setup/guides/connect-to-an-oidc-provider",
             "self-managed/setup/guides/air-gapped-installation",
@@ -1894,7 +1913,6 @@
             "self-managed/operational-guides/update-guide/850-to-860",
             "self-managed/operational-guides/update-guide/840-to-850",
             "self-managed/operational-guides/update-guide/830-to-840",
-            "self-managed/operational-guides/update-guide/820-to-830",
             {
               "Elasticsearch": [
                 "self-managed/operational-guides/update-guide/elasticsearch/7-to-8"
@@ -1956,7 +1974,8 @@
         },
         {
           "Troubleshooting": [
-            "self-managed/operational-guides/troubleshooting/troubleshooting"
+            "self-managed/operational-guides/troubleshooting/troubleshooting",
+            "self-managed/operational-guides/troubleshooting/diagnostics"
           ]
         }
       ]
@@ -1978,13 +1997,7 @@
         "self-managed/concepts/mapping-rules",
         "self-managed/concepts/elasticsearch-privileges",
         "self-managed/concepts/elasticsearch-without-cluster-privileges",
-        "self-managed/concepts/opensearch-privileges",
-        {
-          "Document handling": [
-            "self-managed/concepts/document-handling/getting-started",
-            "self-managed/concepts/document-handling/document-storage-configuration"
-          ]
-        }
+        "self-managed/concepts/opensearch-privileges"
       ]
     },
     {
@@ -1999,6 +2012,7 @@
                 "self-managed/console-deployment/configuration/ssl"
               ]
             },
+            "self-managed/console-deployment/usage-metrics",
             "self-managed/console-deployment/telemetry"
           ],
           "Zeebe": [
@@ -2056,7 +2070,6 @@
               },
               "items": [
                 "self-managed/zeebe-deployment/exporters/install-zeebe-exporters",
-                "self-managed/zeebe-deployment/exporters/camunda-exporter",
                 "self-managed/zeebe-deployment/exporters/elasticsearch-exporter",
                 "self-managed/zeebe-deployment/exporters/opensearch-exporter"
               ]
@@ -2206,6 +2219,29 @@
             {
               "Desktop Modeler": [
                 "self-managed/modeler/desktop-modeler/deploy-to-self-managed"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Document handling",
+          "link": {
+            "type": "doc",
+            "id": "self-managed/document-handling/getting-started"
+          },
+          "items": [
+            {
+              "type": "category",
+              "label": "Configuration",
+              "link": {
+                "type": "doc",
+                "id": "self-managed/document-handling/configuration/overview"
+              },
+              "items": [
+                "self-managed/document-handling/configuration/camunda-8-run",
+                "self-managed/document-handling/configuration/docker",
+                "self-managed/document-handling/configuration/helm"
               ]
             }
           ]

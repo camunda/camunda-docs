@@ -1407,8 +1407,21 @@ paths:
 
         The caller must provide a file name for each document, which will be used in case of a multi-status response
         to identify which documents failed to upload. The file name can be provided in the `Content-Disposition` header
-        of the file part or in the `fileName` field of the metadata part. If both are provided, the `fileName` field
-        takes precedence.
+        of the file part or in the `fileName` field of the metadata, which can be configured with
+        the `X-Document-Metadata` header for each file part. If both are provided, the `fileName` metadata field
+        takes precedence. For example, given the following headers for a file:
+        ```
+        Content-Disposition: form-data; name="files"; filename="bill.pdf"
+        X-Document-Metadata: {"fileName": "invoice.pdf", "size": 1234567}
+        ```
+
+        The filename will be `invoice.pdf`, but in the following example:
+        ```
+        Content-Disposition: form-data; name="files"; filename="bill.pdf"
+        X-Document-Metadata: {"size": 1234567}
+        ```
+
+        it would be `bill.pdf`.
 
         In case of a multi-status response, the response body will contain a list of `DocumentBatchProblemDetail` objects,
         each of which contains the file name of the document that failed to upload and the reason for the failure.
@@ -1612,70 +1625,6 @@ paths:
         "400":
           description: >
             The document link creation failed. More details are provided in the response body.
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetail"
-
-  /users/search:
-    post:
-      tags:
-        - User
-      summary: "Query users (alpha)"
-      description: |
-        Search for users based on given criteria.
-
-        :::note
-        This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and not enabled on Camunda clusters out of the box.
-        See the [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)
-        for further details.
-        :::
-      operationId: "findAllUsers"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/UserSearchQueryRequest"
-        required: true
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/UserSearchResult"
-            application/vnd.camunda.api.keys.number+json:
-              schema:
-                $ref: "#/components/schemas/UserSearchResponse"
-            application/vnd.camunda.api.keys.string+json:
-              schema:
-                $ref: "#/components/schemas/UserSearchResult"
-        "400":
-          description: "Bad request"
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetail"
-        "401":
-          description: "Unauthorized"
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetail"
-        "403":
-          description: "Forbidden"
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetail"
-        "404":
-          description: "Not found"
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetail"
-        "500":
-          description: "Internal server error"
           content:
             application/problem+json:
               schema:

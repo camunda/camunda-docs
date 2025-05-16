@@ -68,7 +68,7 @@ Never cast to Camunda implementation classes, use any ThreadLocal object, or inf
 
 The resulting delegate can be migrated to a Camunda 8 API, or reused by the adapter provided in [this migration community extension](https://github.com/camunda-community-hub/camunda-7-to-8-migration/).
 
-// TODO use the link to the new repo
+<!-- TODO use the link to the new repo -->
 
 ## No transaction managers
 

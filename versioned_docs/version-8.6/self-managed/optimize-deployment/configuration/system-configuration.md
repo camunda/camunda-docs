@@ -196,7 +196,7 @@ Define a secured connection to be able to communicate with a secured Elasticsear
 These settings are only relevant when operating Optimize with OpenSearch.
 
 :::note
-Not all Optimize features are supported when using OpenSearch as a database, including backups. For a full list of the features that are currently supported, please refer to the [Camunda 7](https://github.com/camunda/issues/issues/705) and [Camunda 8](https://github.com/camunda/issues/issues/635) OpenSearch features.
+Not all Optimize features are supported when using OpenSearch as a database, including backups (up to 8.6.6). For a full list of the features that are currently supported, refer to the [Camunda 7](https://github.com/camunda/issues/issues/705) and [Camunda 8](https://github.com/camunda/issues/issues/635) OpenSearch features.
 :::
 
 #### Connection settings
@@ -278,7 +278,7 @@ Settings influencing the process digest feature.
 Settings for automatic cleanup of historic process/decision instances based on their end time.
 
 :::note
-Two types of history cleanup are available for Camunda 8 users at this time - process data cleanup and external variable cleanup. For more information, see [History cleanup](/docs/self-managed/optimize-deployment/configuration/history-cleanup.md).
+Two types of history cleanup are available for Camunda 8 users at this time - process data cleanup and external variable cleanup. For more information, see [History cleanup](/self-managed/optimize-deployment/configuration/history-cleanup.md).
 :::
 
 | YAML path                                                                         | Default value | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |

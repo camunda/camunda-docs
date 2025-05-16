@@ -199,7 +199,7 @@ The following attributes/elements **cannot** be migrated:
 
 Only FEEL scripts can be executed by Zeebe. The converter will create internal scripts as long as you are using FEEL scripts.
 
-If you require a different scripting language, a script task can behave like normal service tasks instead, which means you must run a job worker that can execute scripts. One available option is to use the [Script Connector](https://github.com/camunda-community-hub/script-connector), provided as a community extension.
+If you require a different scripting language, a script task can behave like normal service tasks instead, which means you must run a job worker that can execute scripts. One available option is to use the [Script connector](https://github.com/camunda-community-hub/script-connector), provided as a community extension.
 
 If you do this, the following attributes/elements are migrated to headers:
 
@@ -231,7 +231,7 @@ For implementation, the only current limitation is that a loop cardinality is no
 
 These elements **cannot** be migrated:
 
-// TODO does this need an example?
+<!-- TODO does this need an example? -->
 
 - `bpmn:loopCardinality`: This can eventually be replaced with a feel script iterating a defined number range.
 
@@ -248,7 +248,7 @@ Additionally, there is now a built-in way to collect results using `zeebe:loopCh
 
 ## Adjusting DMN models
 
-// TODO now that the diagram converter can convert DMN, what needs to be adjusted?
+<!-- TODO now that the diagram converter can convert DMN, what needs to be adjusted? -->
 
 The DMN engine in Camunda 8 is more modern than in Camunda 7, which leads to some small differences. To evaluate Camunda 7 DMN files in Camunda 8, change the following in the XML:
 

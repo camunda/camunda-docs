@@ -40,9 +40,9 @@ A command represents an action to be taken or executed. Example commands include
 
 A reusable building block that performs the integration with an external system and works out of the box.
 
-The Connector might be uni or bidirectional and possibly include a [job worker](#job-worker).
+The connector might be uni or bidirectional and possibly include a [job worker](#job-worker).
 
-The boundary between Connectors and job workers can be fuzzy, but in general, Connectors connect to other active pieces of software. [Outbound](#outbound-connector), [inbound](#inbound-connector), or [protocol](#protocol-connector) Connectors are types of Connectors.
+The boundary between connectors and job workers can be fuzzy, but in general, connectors connect to other active pieces of software. [Outbound](#outbound-connector), [inbound](#inbound-connector), or [protocol](#protocol-connector) connectors are types of connectors.
 
 ### Correlation
 
@@ -62,6 +62,12 @@ A process cannot execute unless it is known by the broker. Deployment is the pro
 
 - [Zeebe Deployment](/apis-tools/zeebe-api/gateway-service.md#deployresource-rpc)
 
+### Element
+
+A BPMN element is part of a [process](#process), defining one part of its BPMN model. Elements are the building blocks of a process and comprise [flow nodes](#flow-node), sequence flows, participants, data objects, and more.
+
+- [BPMN elements](/components/modeler/bpmn/bpmn-primer.md#bpmn-elements)
+
 ### Event
 
 An event represents a state change associated with an aspect of an executing process instance. Events capture variable changes, state transition in process elements, etc. An event is represented by a timestamp, the variable name, and variable value. Events are stored in an append-only log.
@@ -80,6 +86,10 @@ An exporter represents a sink to which Zeebe will submit all records within the 
 
 - [Exporter](/self-managed/concepts/exporters.md)
 
+### Flow node
+
+Flow nodes refer to a specific subset of BPMN [elements](#element). They comprise events, activities, and gateways. Other elements, such as sequence flows, participants, and data objects, are not considered flow nodes.
+
 ### Follower
 
 In a clustered environment, a broker which is not a leader is a follower of a given partition. A follower can become the new leader when the old leader is no longer reachable.
@@ -94,20 +104,20 @@ Camunda 8 allows you to orchestrate processes with human tasks, which may be [us
 
 ### Hybrid mode
 
-Hybrid mode, or a hybrid Self-Managed distribution, allows you to run a separate instance of the Connectors runtime in a Self-Managed or local fashion. This instance can be attached to either a SaaS cluster, or another Self-Managed cluster with its own Connector runtime.
+Hybrid mode, or a hybrid Self-Managed distribution, allows you to run a separate instance of the connectors runtime in a Self-Managed or local fashion. This instance can be attached to either a SaaS cluster, or another Self-Managed cluster with its own connector runtime.
 
-For example, this is useful when working with services that must be isolated within a private network and cannot be exposed to the public internet, or if infrastructure amendments need to be applied to the Connector runtime, such as SSL certificates or mounted volumes.
+For example, this is useful when working with services that must be isolated within a private network and cannot be exposed to the public internet, or if infrastructure amendments need to be applied to the connector runtime, such as SSL certificates or mounted volumes.
 
-- [Use Connectors in hybrid mode](/guides/use-connectors-in-hybrid-mode.md)
+- [Use connectors in hybrid mode](/guides/use-connectors-in-hybrid-mode.md)
 
-### Inbound Connector
+### Inbound connector
 
 Inbound [Connectors](#connector) in Camunda 8 enable workflows to receive data or messages from external systems or services, making it possible to integrate workflows into a wider business process or system architecture.
 
-Inbound Connectors include three subtypes - [webhooks](#webhook), [subscriptions](#subscription), and [polling](#polling).
+Inbound connectors include three subtypes - [webhooks](#webhook), [subscriptions](#subscription), and [polling](#polling).
 
-Unlike [outbound Connectors](#outbound-connector), inbound Connectors are **stateful**. The Java code of the inbound Connector has a lifecycle suitable for long-running operations, such as listening for messages on a queue or waiting for a webhook to be called.
-Each element referencing an inbound Connector will lead to the creation of one inbound Connector instance. A process definition with one webhook start event and two additional webhooks as intermediate catch events would therefore lead to the creation of three inbound connector instances.
+Unlike [outbound connectors](#outbound-connector), inbound connectors are **stateful**. The Java code of the inbound connector has a lifecycle suitable for long-running operations, such as listening for messages on a queue or waiting for a webhook to be called.
+Each element referencing an inbound connector will lead to the creation of one inbound connector instance. A process definition with one webhook start event and two additional webhooks as intermediate catch events would therefore lead to the creation of three inbound connector instances.
 
 ### Incident
 
@@ -169,13 +179,13 @@ A message contains information to be delivered to interested parties during exec
 
 ### Orchestration cluster
 
-An orchestration cluster includes Zeebe, Operate, Tasklist, Optimize, and Connectors. Previously [automation cluster](#automation-cluster).
+An orchestration cluster includes Zeebe, Operate, Tasklist, Optimize, and connectors. Previously [automation cluster](#automation-cluster).
 
 ### Orchestration core
 
 An orchestration core or orchestration cluster core includes Zeebe, Operate, Tasklist, Optimize, and Identity.
 
-### Outbound Connector
+### Outbound connector
 
 Outbound [Connectors](#connector) in Camunda 8 allow workflows to trigger with external systems or services, making it possible to integrate workflows with other parts of a business process or system architecture.
 
@@ -185,11 +195,11 @@ A partition represents a logical grouping of data in a Zeebe Broker. This data i
 
 - [Partitions](/components/zeebe/technical-concepts/partitions.md)
 
-### Polling Connector
+### Polling connector
 
-An inbound polling Connector to periodically poll an external system or service for new data using HTTP polling.
+An inbound polling connector to periodically poll an external system or service for new data using HTTP polling.
 
-A Camunda workflow uses this type of Connector to retrieve data from a remote system that does not support real-time notifications or webhooks, but instead requires the client to periodically request updates.
+A Camunda workflow uses this type of connector to retrieve data from a remote system that does not support real-time notifications or webhooks, but instead requires the client to periodically request updates.
 
 ### Process
 
@@ -213,11 +223,11 @@ A process instance variable represents the execution state (i.e data) of a proce
 - [Variables](/components/concepts/variables.md)
 - [Data flow](/components/modeler/bpmn/data-flow.md)
 
-### Protocol Connector
+### Protocol connector
 
-Protocol Connectors are a type of [Connector](#connector) in Camunda that can serve as either [inbound](#inbound-connector) or [outbound](#outbound-connector) Connectors, supporting a variety of technical protocols. These Connectors are highly generic, designed to provide a flexible and customizable means of integrating with external systems and services.
+Protocol connectors are a type of [Connector](#connector) in Camunda that can serve as either [inbound](#inbound-connector) or [outbound](#outbound-connector) connectors, supporting a variety of technical protocols. These connectors are highly generic, designed to provide a flexible and customizable means of integrating with external systems and services.
 
-Protocol Connectors can be customized to meet the needs of specific use cases using element templates, with no additional coding or deployment required. Examples of protocol Connectors include HTTP REST, SOAP, GraphQL, as well as message queue Connectors.
+Protocol connectors can be customized to meet the needs of specific use cases using element templates, with no additional coding or deployment required. Examples of protocol connectors include HTTP REST, SOAP, GraphQL, as well as message queue connectors.
 
 ### Record
 
@@ -264,11 +274,11 @@ Soft pause exporting is a feature that allows you to continue exporting records 
 - [Exporting API](/self-managed/zeebe-deployment/operations/management-api.md)
 - [Backup and restore](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md)
 
-### Subscription inbound Connector
+### Subscription inbound connector
 
-An [inbound Connector](#inbound-connector) that subscribes to a message queue.
+An [inbound connector](#inbound-connector) that subscribes to a message queue.
 
-This way, a Camunda workflow can receive messages from an external system or service (like Kafka or RabbitMQ) using message queuing technology. This type of inbound Connector is commonly used in distributed systems where different components of the system need to communicate with each other asynchronously.
+This way, a Camunda workflow can receive messages from an external system or service (like Kafka or RabbitMQ) using message queuing technology. This type of inbound connector is commonly used in distributed systems where different components of the system need to communicate with each other asynchronously.
 
 ### User task
 
@@ -281,9 +291,9 @@ Camunda recommends using Camunda user tasks in your process definitions. With 8.
 - [User tasks](/components/modeler/bpmn/user-tasks/user-tasks.md)
 - [Migrate to Camunda user tasks](/apis-tools/migration-manuals/migrate-to-camunda-user-tasks.md)
 
-### Webhook Connector
+### Webhook connector
 
-Webhooks are a subtype of [inbound Connector](#inbound-connector).
+Webhooks are a subtype of [inbound connector](#inbound-connector).
 
 A webhook is a way for web applications to send real-time notifications or data to other applications or services when certain events occur. When a webhook is set up, the application sends a POST request containing data to a pre-configured URL, which triggers a workflow.
 

@@ -231,7 +231,7 @@ For implementation, the only current limitation is that a loop cardinality is no
 
 These elements **cannot** be migrated:
 
-// TODO does this need an example?
+<!-- TODO does this need an example? -->
 
 - `bpmn:loopCardinality`: This can eventually be replaced with a feel script iterating a defined number range.
 
