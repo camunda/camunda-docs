@@ -294,7 +294,7 @@ You can dive into the [technical details of model differences](./migration-tooli
 
 Your models might contain JUEL expressions, which are not supported in Camunda 8.
 
-Simple expressions are directly converted by the [Migration Analyzer](./migration-tooling.md#expression-conversion). You can also use the [FEEL copilot](https://feel-copilot.camunda.com/) to rewrite more complex expressions for you.
+Simple expressions are directly converted by the [Migration Analyzer](./migration-tooling.md#expression-conversion). You can also use the [FEEL Copilot](/components/early-access/alpha/feel-copilot/feel-copilot.md) to rewrite more complex expressions for you.
 
 Check the [code conversion patterns section](./code-conversion.md) for more complicated scenarios.
 
