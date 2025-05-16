@@ -28,7 +28,7 @@ When a broker is connected to the cluster for the first time, it fetches the top
 
 To ensure fault tolerance, Zeebe replicates data across servers using the [raft protocol](<https://en.wikipedia.org/wiki/Raft_(computer_science)>).
 
-Data is divided into partitions (shards). Each partition has a number of replicas. Among the replica set, a **leader** is determined by the raft protocol, which takes in requests and performs all the processing. All other brokers are passive **followers**. When the leader becomes unavailable, the followers transparently select a new leader.
+Data is divided into partitions (shards). Each partition has a number of replicas. Among the replica set, a **leader** is determined by the Raft protocol, which takes in requests and performs all the processing. All other brokers are passive **followers**. When the leader becomes unavailable, the followers transparently select a new leader.
 
 Each broker in the cluster may be both leader and follower at the same time for different partitions. In an ideal world, this leads to client traffic distributed evenly across all brokers.
 
@@ -50,12 +50,14 @@ Before a new record on a partition can be processed, it must be replicated to a 
 
 A well-balanced replication will ensure, that records can be committed, even when one or more brokers will become unavailable, but the majority of brokers is still available. **Odd replication factors** [are recommended](partitions.md#replication).
 
+A well-balanced replication will ensure, that records can be committed, even when one or more brokers will become unavailable, but the majority of brokers is still available. **Odd replication factors** [are recommended](partitions.md#replication).
+
 Some examples for common replication factors and their quorum:
 
-| Replication factor | Description           | Quorum                                                     | Use case                                                                         |
-| :----------------: | --------------------- | ---------------------------------------------------------- | -------------------------------------------------------------------------------- |
-|         3          | 1 leader, 2 followers | half or more of 2 followers is 1 follower that confirmed   | Single region, 3 availability zones. One broker can go down without losing data. |
-|         5          | 1 leader, 4 followers | half or more of 4 followers are 2 followers that confirmed | Allows a higher tolerance against the loss of 2 brokers                          |
+| Replication factor | Description           | Quorum                                                      | Use case                                                                         |
+| :----------------: | --------------------- | ----------------------------------------------------------- | -------------------------------------------------------------------------------- |
+|         3          | 1 leader, 2 followers | Half or more of 2 followers is 1 follower that confirmed.   | Single region, 3 availability zones. One broker can go down without losing data. |
+|         5          | 1 leader, 4 followers | Half or more of 4 followers are 2 followers that confirmed. | Allows a higher tolerance against the loss of 2 brokers.                         |
 
 The only exception to have **even replication factors** is the [dual region setup](../../../self-managed/concepts/multi-region/dual-region.md). In this setup, an even replication factor ensures, that records are always replicated to both regions. And, in case of losing a whole region, every new request will be denied, as no replication can get a quorum anymore. All partitions will become unhealthy, operators start their [failover procedure](../../../self-managed/operational-guides/multi-region/dual-region-ops.md). No data is lost.
 
@@ -63,6 +65,6 @@ Using odd replication factor in a dual region setup would favor some partitions,
 
 This is one example for replication and quorum, that is used in the [dual region setup guide](../../../self-managed/setup/deploy/amazon/amazon-eks/dual-region.md#content-elaboration):
 
-| Replication factor | Description           | Quorum                                                     | Use case                                                                                                                                                                                                                 |
-| :----------------: | --------------------- | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-|         4          | 1 leader, 3 followers | half or more of 3 followers are 2 followers that confirmed | Exception for dual region with minimal replication, records always replicated to both regions [following the recommended setup](../../../self-managed/concepts/multi-region/dual-region.md#zeebe-cluster-configuration). |
+| Replication factor | Description           | Quorum                                                      | Use case                                                                                                                                                                                                                 |
+| :----------------: | --------------------- | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|         4          | 1 leader, 3 followers | Half or more of 3 followers are 2 followers that confirmed. | Exception for dual-region with minimal replication, records always replicated to both regions [following the recommended setup](../../../self-managed/concepts/multi-region/dual-region.md#zeebe-cluster-configuration). |
