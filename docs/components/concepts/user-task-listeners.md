@@ -24,29 +24,63 @@ User task listeners are useful in the following scenarios:
 - Notifying users of new task assignments with contextual information.
 - Reacting to task completions with custom logic.
 
+### User task lifecycle
+
+A user task has the following lifecycle.
+A user task listener can react to the events highlighted in orange.
+
+```mermaid
+stateDiagram-v2
+    direction LR
+    [*] --> creating
+    creating --> created
+
+    created --> assigning
+    assigning --> created
+
+    created --> updating
+    updating --> created
+
+    created --> completing
+    completing --> created
+    completing --> completed
+
+    creating --> canceling
+    created --> canceling
+    assigning --> canceling
+    updating --> canceling
+    completing --> canceling
+    canceling --> canceled
+
+    classDef listenerEvent fill:#fc5d0d,color:white,font-weight:bold
+    class creating listenerEvent
+    class assigning listenerEvent
+    class updating listenerEvent
+    class completing listenerEvent
+    class canceling listenerEvent
+```
+
 ### Blocking behavior
 
 User task listeners operate in a blocking manner, meaning the user task lifecycle transition is paused until the task listener completes. This ensures that any corrections or validations defined by the task listener are fully applied before the task transition continues.
 
-## Define a user task listener
+## Trigger a user task listener
 
-You can configure user task listeners per BPMN user task element.
-
-### Supported events
-
-Currently, user task listeners support the following events:
-
-- **Assigning**: Triggered when assigning a user task.
-- **Updating**: Triggered when updating a user task.
-- **Completing**: Triggered when completing a user task.
-
-The events can be triggered in the following ways.
+The supported user task listener events can be triggered in the following ways.
 
 | Event        | Triggered                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | :----------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `creating`   | <ul><li>When a process instance reaches a user task.</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | `assigning`  | <ul><li>When the [assign user task API](/apis-tools/camunda-api-rest/specifications/assign-user-task.api.mdx) is called.</li><li>When activating a user task that [specifies an `assignee`](/components/modeler/bpmn/user-tasks/user-tasks.md#assignments) in the process.</li><li>When a user task is assigned using the [Tasklist interface](/components/tasklist/userguide/managing-tasks.md#assign-tasks).</li></ul>                                                                                                                                                                                          |
 | `updating`   | <ul><li>When the [update user task API](/apis-tools/camunda-api-rest/specifications/update-user-task.api.mdx) is called. </li><li>When the [update element instance variables API](/apis-tools/camunda-api-rest/specifications/create-element-instance-variables.api.mdx) is called on a user task instance.</li><li>When the [set variables RPC](/apis-tools/zeebe-api/gateway-service.md#setvariables-rpc) is called on a user task instance.</li><li>When variables are set at a user task scope using the [Operate interface](/components/operate/userguide/resolve-incidents-update-variables.md).</li></ul> |
 | `completing` | <ul><li>When a user task is completed using the [Tasklist interface](/components/tasklist/userguide/managing-tasks.md#complete-a-task).</li><li>When the [complete user task API](/apis-tools/camunda-api-rest/specifications/complete-user-task.api.mdx) is called.</li></ul>                                                                                                                                                                                                                                                                                                                                    |
+| `canceling`  | <ul><li>When a process instance cancels a user task.</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+
+Once triggered, the workflow engine creates a job that you can process using a job worker.
+
+## Define a user task listener
+
+You can configure user task listeners per BPMN user task element.
 
 ### User task listener properties
 
@@ -173,6 +207,13 @@ final JobHandler denyUserTaskLifecycleTransitionHandler =
             .send();
 ```
 
+Not all events can be denied. For example, it's not possible deny the creation or cancelation of a user task.
+Currently, user task listeners can deny the lifecycle transition for the following events:
+
+- `assigning`
+- `updating`
+- `completing`
+
 ## Expression evaluation and incident behavior
 
 ### Expression evaluation
@@ -192,7 +233,6 @@ There are two types of incidents for task listeners:
 
 User task listeners have the following limitations:
 
-- **Limited events support**: Currently, only `assigning`, `updating`, and `completing` events are supported.
 - **No variable handling**: User task listener jobs cannot be completed if variables are provided.
 - **No BPMN error throwing**: Throwing BPMN errors from user task listener jobs is not supported.
 
