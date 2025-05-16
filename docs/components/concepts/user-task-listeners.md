@@ -76,6 +76,8 @@ The supported user task listener events can be triggered in the following ways.
 | `completing` | <ul><li>When a user task is completed using the [Tasklist interface](/components/tasklist/userguide/managing-tasks.md#complete-a-task).</li><li>When the [complete user task API](/apis-tools/camunda-api-rest/specifications/complete-user-task.api.mdx) is called.</li></ul>                                                                                                                                                                                                                                                                                                                                    |
 | `canceling`  | <ul><li>When a process instance cancels a user task.</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 
+Once triggered, the workflow engine creates a job that you can process using a job worker.
+
 ## Define a user task listener
 
 You can configure user task listeners per BPMN user task element.
@@ -204,6 +206,13 @@ final JobHandler denyUserTaskLifecycleTransitionHandler =
             // highlight-end
             .send();
 ```
+
+Not all events can be denied. For example, it's not possible deny the creation or cancelation of a user task.
+Currently, user task listeners can deny the lifecycle transition for the following events:
+
+- `assigning`
+- `updating`
+- `completing`
 
 ## Expression evaluation and incident behavior
 
