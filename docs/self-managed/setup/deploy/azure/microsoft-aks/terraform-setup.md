@@ -16,7 +16,7 @@ If you are completely new to Terraform and the concept of IaC, consider reading 
 
 ## Requirements
 
-- An [Azure subscription](https://azure.microsoft.com/free/) to create any resources within Azure.
+- An [Azure subscription](https://azure.microsoft.com/free/) and the necessary permissions to create any resource within Azure.
 - [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli), a CLI tool for creating and managing Azure resources.
 - [Terraform](https://developer.hashicorp.com/terraform/downloads) for provisioning infrastructure as code.
 - [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with your AKS cluster.
