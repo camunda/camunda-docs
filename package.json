@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.3.0",
-    "@bpmn-io/form-js": "^1.15.1",
+    "@bpmn-io/form-js": "^1.15.2",
     "@docusaurus/core": "^3.7.0",
     "@docusaurus/faster": "^3.7.0",
     "@docusaurus/preset-classic": "^3.7.0",
