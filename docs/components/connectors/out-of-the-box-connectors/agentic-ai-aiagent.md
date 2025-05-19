@@ -77,27 +77,21 @@ Agent: John Doe's credit card has been created successfully.
 
 ## Configuration
 
-### Model
+### Model Provider
 
 :::note
 Use Camunda secrets to store credentials and avoid exposing sensitive information directly from the process. Refer
 to [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
 :::
 
-:::note
-Depending on the used model, you might need to adapt your prompts and the way you are using the AI Agent connector. Make
-sure to consult the provider-specific documentation and to test your use case with the provider you are using.
-:::
-
-The first step to configure on the AI Agent connector is the desired LLM provider and model. The connector currently
+The first step to configure on the AI Agent connector is the desired LLM provider. The connector currently
 supports the following providers with more being added in the future:
 
 - [Anthropic](http://anthropic.com/) (Claude models)
 - [AWS Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html)
 - [OpenAI](http://openai.com/)
 
-Depending on the selected provider, you can define a set of optional model parameters,
-see [Model Parameters](#model-parameters).
+Depending on the provider, the available authentication configurations will be different.
 
 #### Anthropic
 
@@ -129,6 +123,17 @@ started, configure the desired **model** (see [documentation](https://platform.o
 **API key**.
 
 Optionally, you can configure an **organization ID** and/or **project ID** if needed for your account.
+
+### Model
+
+The model section allows you to select the model to use with the configured provider, paired with a set of optional
+model parameters. Depending on the selected provider the fields available in this section may vary.
+
+Note that parameters setting maximum values (such as maximum tokens) are considered
+**per LLM request**, not for the whole conversation. Depending on the provider, the exact meaning of these
+parameters may vary.
+
+Please consult the provider documentation linked in the element template for more details on the specific fields.
 
 ### System Prompt
 
@@ -239,23 +244,11 @@ behavior or unexpected cost due to infinite loops.
 As a safeguard, the **Maximum model calls** limit will fall back to a default value of `10` if it is not configured as
 part of the connector configuration.
 
-### Model Parameters
-
-:::important
-Model parameters setting maximum values (such as maximum tokens) are directly passed to the provider API and are
-considered **per LLM request**, not for the whole conversation. Depending on the provider, the exact meaning of these
-parameters may vary. Please consider the provider documentation linked in the element template for more details.
-:::
-
-This section allows you to configure a set of _optional_ model-specific parameters such as the temperature of the
-responses. Depending
-on the selected provider, this will contain different fields.
-
 ### Result Variable/Expression
 
 The result of the AI Agent connector is a context containing the following fields:
 
-- **context**: the updated **Agent Context**. Make sure to map this to a process variable to to re-inject this variable
+- **context**: the updated **Agent Context**. Make sure to map this to a process variable and to re-inject this variable
   in the **Agent Context** input field when your agent is part of a feedback loop.
 - **chatResponse**: the last response provided by the LLM
 - **toolCalls**: tool call requests provided by the LLM which need to be routed to the ad-hoc sub-process.
