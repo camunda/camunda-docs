@@ -92,12 +92,16 @@ In this example, the result expression may look as follows, where `applicationDo
 
 The document reference received as an output of one connector should be stored in process variables by using the result expression or result variable.
 
-To call the webhook sending a file, take the following example. This example uses Postman to obtain the result, so your `user-agent` value may look different:
+To call the webhook sending a file, see the following example:
 
 ```curl
 curl --location 'https://some.dev.environment/uploadDocument' \
 --form 'file=@"/path-to-file/file.pdf"'
 ```
+
+:::note
+This example uses Postman to obtain the result, so your `user-agent` value may look different.
+:::
 
 The result variable will have the following structure:
 
