@@ -128,7 +128,7 @@ This finding indicates that Role-Based Access Control (RBAC) is not enabled on y
 2. For existing clusters, [upgrade to a version](https://learn.microsoft.com/en-us/azure/aks/upgrade-cluster) that supports RBAC
 3. Implement [Azure AD integration with RBAC](https://learn.microsoft.com/en-us/azure/aks/managed-aad)
 4. [Create and assign roles](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-portal) to users and service principals
-5. Follow the [principle of least privilege](https://learn.microsoft.com/en-us/security/zero-trust/deploy-least-privilege) when assigning permissions
+5. Follow the [principle of least privilege](https://learn.microsoft.com/en-us/security/zero-trust/develop/identity-iam-development-best-practices) when assigning permissions
 
 > **Note:** While disabling RBAC simplifies testing by reducing permission barriers, this significantly reduces security and should never be done in production. For testing purposes, consider using dedicated test users with appropriate RBAC roles instead.
 
@@ -158,7 +158,7 @@ This finding indicates that comprehensive logging is not enabled on your Kuberne
 _Infrastructure diagram for a single-region AKS setup (click on the image to open the PDF version)_
 [![Infrastructure Diagram AKS Single-Region](./assets/aks-single-region.jpg)](./assets/aks-single-region.pdf)
 
-:::caution
+:::note
 
 The vnet and the subnets are sized according to standard Azure recommendations by default.
 Due to Azure CNI, every pod will get assigned a real internal IP. While the defaults are more than sufficient for this guide, if you expect a large number of pods in a single subnet, consider using a larger subnet for AKS like /23 or /22.
@@ -242,12 +242,8 @@ Before setting up Terraform, you should create an Azure Storage Account and cont
 
 To start, set the required values as environment variables upfront to avoid repeating them in each command:
 
-```bash
-export AZURE_LOCATION=<your-region>                             # e.g. westeurope
-export RESOURCE_GROUP_NAME="camunda-tf-rg"
-export AZURE_STORAGE_ACCOUNT_NAME="camundatfstate$RANDOM"       # must be globally unique
-export AZURE_STORAGE_CONTAINER_NAME="tfstate"
-export AZURE_TF_KEY="camunda-terraform/terraform.tfstate"
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/azure/common/procedure/storage-account/storage-account-env-vars.sh
 ```
 
 Replace `<your-region>` with your chosen Azure region (for example, `westeurope`).
@@ -259,19 +255,19 @@ Now, follow these steps to create the storage account with versioning enabled:
 2. Run the following script to create a storage account and container for storing your Terraform state. Make sure that you have chosen a globally unique name for the storage account before:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/azure-docs-adjustments/azure/common/procedure/storage-account/storage-account-creation.sh
+   https://github.com/camunda/camunda-deployment-references/blob/main/azure/common/procedure/storage-account/storage-account-creation.sh
    ```
 
 3. Enable blob versioning to track changes and protect the state file from accidental deletions or overwrites:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/azure-docs-adjustments/azure/common/procedure/storage-account/storage-account-versioning.sh
+   https://github.com/camunda/camunda-deployment-references/blob/main/azure/common/procedure/storage-account/storage-account-versioning.sh
    ```
 
 4. Verify versioning is enabled on the blob container:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/azure-docs-adjustments/azure/common/procedure/storage-account/storage-account-verify.sh
+   https://github.com/camunda/camunda-deployment-references/blob/main/azure/common/procedure/storage-account/storage-account-verify.sh
    ```
 
 This Azure Storage Account will now securely store your Terraform state files with versioning enabled.
@@ -330,7 +326,7 @@ Once your authentication is set up, you can initialize your Terraform project. T
 Configure the backend and download the necessary provider plugins:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/azure-docs-adjustments/azure/common/procedure/storage-account/storage-account-tf-init.sh
+https://github.com/camunda/camunda-deployment-references/blob/main/azure/common/procedure/storage-account/storage-account-tf-init.sh
 ```
 
 Terraform will connect to the Azure storage container to manage the state file, ensuring remote and persistent storage.
@@ -388,7 +384,7 @@ We strongly recommend managing sensitive information such as the PostgreSQL user
 2. Perform a final initialization for anything changed throughout the guide:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/azure-docs-adjustments/azure/common/procedure/storage-account/storage-account-tf-init.sh#L11-L15
+https://github.com/camunda/camunda-deployment-references/blob/main/azure/common/procedure/storage-account/storage-account-tf-init.sh#L11-L15
 ```
 
 3. Plan the configuration files:

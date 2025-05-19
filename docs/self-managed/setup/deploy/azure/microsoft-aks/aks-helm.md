@@ -26,6 +26,8 @@ While this guide is primarily tailored for UNIX systems, it can also be run unde
 
 Multi-tenancy is disabled by default and is not covered further in this guide. If you decide to enable it, you may use the same PostgreSQL instance and add an extra database for multi-tenancy purposes.
 
+[Workload Identities](https://learn.microsoft.com/en-us/azure/aks/workload-identity-overview) offer a way to connect to Azure-managed PostgreSQL. However, they have not yet been tested with Web Modeler, Keycloak, or Identity, and may not work out of the box. Using them may require a custom JDBC driver.
+
 ## Export environment variables
 
 To streamline the execution of the subsequent commands, it is recommended to export multiple environment variables.
@@ -189,24 +191,6 @@ You can track the progress of the installation using the following command:
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/check-deployment-ready.sh
 ```
-
-#### Web Modeler
-
-Web Modeler uses PostgreSQL for its REST API. In the Azure setup, it connects to either the internal PostgreSQL instance or the managed Azure Database for PostgreSQL, depending on your configuration. No special JDBC wrapper is needed.
-
-Refer to the [Web Modeler database configuration](../../../../modeler/web-modeler/configuration/database.md) for more information on using PostgreSQL with Web Modeler.
-
-#### Keycloak
-
-In Azure, AWS-specific IRSA (IAM Roles for Service Accounts) does not apply. You can use Azure Workload Identity, but it hasn’t been tested with managed PostgreSQL and may not work out-of-the-box. Keycloak connects to PostgreSQL (internal or external) using standard credentials; no custom JDBC wrapper or AWS-specific container image is required.
-
-You may still use the [Camunda Keycloak images](https://hub.docker.com/r/camunda/keycloak) built upon [bitnami/keycloak](https://hub.docker.com/r/bitnami/keycloak), but the AWS JDBC wrapper is not relevant to this setup.
-
-#### Identity
-
-Identity uses PostgreSQL. In the Azure setup, it connects via standard JDBC to either the internal or managed PostgreSQL instance. No additional JDBC wrapper or cloud-specific driver is needed.
-
-For more details, refer to the [Identity database configuration](../../../../identity/deployment/configuration-variables.md).
 
 ## Verify connectivity to Camunda 8
 
