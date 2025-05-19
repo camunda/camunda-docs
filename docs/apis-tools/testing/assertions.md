@@ -297,6 +297,184 @@ Map<String, Object> expectedVariables = //
 assertThat(processInstance).hasVariables(expectedVariables);
 ```
 
+## User task assertions
+
+You can verify user tasks using `CamundaAssert.assertThat()`. Use a `UserTaskSelector` to identify the user task.
+
+### With user task selector
+
+Use a predefined `UserTaskSelector` from `io.camunda.process.test.api.assertions.UserTaskSelectors` or a custom implementation to identify the user task:
+
+```java
+// by user task id
+assertThat(byElementId("user-task-id")).isCompleted();
+
+// by user task name
+assertThat(byTaskName("User Task")).isCompleted();
+
+// you may optionally specify the process instance key:
+
+assertThat(byElementId("user-task-id", processInstanceKey)).isCompleted();
+assertThat(byTaskName("User Task", processInstanceKey)).isCompleted();
+```
+
+### Custom user task selector
+
+To create a custom selector you must implement the `UserTaskSelector` interface. Refer to `io.camunda.process.test.api.assertions.UserTaskSelectors` to see how the interface was implemented for the `byElementId` and `byTaskName` selectors.
+
+```java
+/** A selector for BPMN user task elements. */
+@FunctionalInterface
+public interface UserTaskSelector {
+
+  /**
+   * Checks if the element matches the selector.
+   *
+   * @param userTask the BPMN element
+   * @return {@code true} if the element matches, otherwise {@code false}
+   */
+  boolean test(UserTask userTask);
+
+  /**
+   * Returns a string representation of the selector. It is used to build the failure message of an
+   * assertion. Default: {@link Object#toString()}.
+   *
+   * @return the string representation
+   */
+  default String describe() {
+    return toString();
+  }
+
+  /**
+   * Applies the given filter to limit the search of user task that match the selector. Default: no
+   * filtering.
+   *
+   * @param filter the filter used to limit the user task search
+   */
+  default void applyFilter(final UserTaskFilter filter) {}
+}
+```
+
+### isCreated
+
+Asserts that the user task is created. The assertion fails if the task is in any other state.
+
+```java
+assertThat(userTaskSelector).isCreated();
+```
+
+### isCompleted
+
+Asserts that the user task is completed. The assertion fails if the task is in any other state.
+
+```java
+assertThat(userTaskSelector).isCompleted();
+```
+
+### isCanceled
+
+Asserts that the user task is canceled. The assertion fails if the task is in any other state.
+
+```java
+assertThat(userTaskSelector).isCanceled();
+```
+
+### isFailed
+
+Asserts that the user task is failed. The assertion fails if the task is in any other state.
+
+```java
+assertThat(userTaskSelector).isFailed();
+```
+
+### hasAssignee
+
+Asserts that the user task has the expected assignee.
+
+```java
+assertThat(userTaskSelector).hasAssignee("John Doe");
+```
+
+### hasPriority
+
+Asserts that the user task has the expected priority.
+
+```java
+assertThat(userTaskSelector).hasPriority(100);
+```
+
+### hasElementId
+
+Asserts that the user task has the expected BPMN element ID.
+
+```java
+assertThat(userTaskSelector).hasElementId("user-task-id");
+```
+
+### hasName
+
+Asserts that the user task has the expected name.
+
+```java
+assertThat(userTaskSelector).hasName("User Task");
+```
+
+### hasProcessInstanceKey
+
+Asserts that the user task has the expected process instance key.
+
+```java
+assertThat(userTaskSelector).hasProcessInstanceKey(1000L);
+```
+
+### hasDueDate
+
+Asserts that the user task has the expected due date.
+
+```java
+assertThat(userTaskSelector).hasDueDate("2023-10-01T00:00:00Z");
+```
+
+### hasCompletionDate
+
+Asserts that the user task has the expected completion date.
+
+```java
+assertThat(userTaskSelector).hasCompletionDate("2023-10-01T00:00:00Z");
+```
+
+### hasFollowUpDate
+
+Asserts that the user task has the expected follow-up date.
+
+```java
+assertThat(userTaskSelector).hasFollowUpDate("2023-10-01T00:00:00Z");
+```
+
+### hasCreationDate
+
+Asserts that the user task has the expected creation date.
+
+```java
+assertThat(userTaskSelector).hasCreationDate("2023-10-01T00:00:00Z");
+```
+
+### hasCandidateGroup
+
+Asserts that the user task has the expected candidate group.
+
+```java
+assertThat(userTaskSelector).hasCandidateGroup("groupA");
+```
+
+### hasCandidateGroups
+
+Asserts that the user task has the expected candidate groups.
+
+```java
+assertThat(userTaskSelector).hasCandidateGroups("groupA", "groupB", "groupC");
+```
+
 ## Custom assertions
 
 You can build your own assertions similar to the assertions from CPT.
