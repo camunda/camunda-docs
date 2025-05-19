@@ -26,7 +26,7 @@ servers:
         description: The schema of the Camunda 8 REST API server.
 
 tags:
-  - name: Ad-hoc subprocess
+  - name: Ad-hoc sub-process
   - name: Authentication
   - name: Authorization
   - name: Batch operation
@@ -565,7 +565,129 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UserSearchResult"
-
+  /tenants/{tenantId}/groups/search:
+    post:
+      tags:
+        - Tenant
+      operationId: searchGroupsForTenant
+      summary: Search groups for tenant
+      description: Retrieves a filtered and sorted list of groups for a specified tenant.
+      parameters:
+        - name: tenantId
+          in: path
+          required: true
+          description: The unique identifier of the tenant.
+          schema:
+            type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GroupSearchQueryRequest"
+      responses:
+        "200":
+          description: The search result of groups for the tenant.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GroupSearchQueryResult"
+  /tenants/{tenantId}/roles/search:
+    post:
+      tags:
+        - Tenant
+      operationId: searchRolesForTenant
+      summary: Search roles for tenant
+      description: Retrieves a filtered and sorted list of roles for a specified tenant.
+      parameters:
+        - name: tenantId
+          in: path
+          required: true
+          description: The unique identifier of the tenant.
+          schema:
+            type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RoleSearchQueryRequest"
+      responses:
+        "200":
+          description: The search result of roles for the tenant.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RoleSearchQueryResult"
+  /tenants/{tenantId}/applications/{applicationId}:
+    put:
+      tags:
+        - Tenant
+      operationId: assignApplicationToTenant
+      summary: Assign a user to a tenant
+      description: Assign a single user to a specified tenant.
+      parameters:
+        - name: tenantId
+          in: path
+          required: true
+          description: The unique identifier of the tenant.
+          schema:
+            type: string
+        - name: applicationId
+          in: path
+          required: true
+          description: The ID of the application to assign.
+          schema:
+            type: string
+      responses:
+        "204":
+          description: The application was successfully assigned to the tenant.
+        "400":
+          $ref: "#/components/responses/InvalidData"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          description: The tenant was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+    delete:
+      tags:
+        - Tenant
+      operationId: removeApplicationFromTenant
+      summary: Remove an application from a tenant
+      description: Removes a single application from a specified tenant.
+      parameters:
+        - name: tenantId
+          in: path
+          required: true
+          description: The unique identifier of the tenant.
+          schema:
+            type: string
+        - name: applicationId
+          in: path
+          required: true
+          description: The unique identifier of the application.
+          schema:
+            type: string
+      responses:
+        "204":
+          description: The application was successfully removed from the tenant.
+        "400":
+          $ref: "#/components/responses/InvalidData"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          description: The tenant does not exist or the application was not assigned to it.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
   /tenants/{tenantId}/mappings/{mappingId}:
     put:
       tags:
@@ -728,6 +850,76 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "404":
           description: Not found. The tenant or group was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+
+  /tenants/{tenantId}/roles/{roleId}:
+    put:
+      tags:
+        - Tenant
+      operationId: assignRoleToTenant
+      summary: Assign a role to a tenant
+      description: Assign a single role to a specified tenant.
+      parameters:
+        - name: tenantId
+          in: path
+          required: true
+          description: The unique identifier of the tenant.
+          schema:
+            type: string
+        - name: roleId
+          in: path
+          required: true
+          description: The unique identifier of the role.
+          schema:
+            type: string
+      responses:
+        "204":
+          description: The role was successfully assigned to the tenant.
+        "400":
+          $ref: "#/components/responses/InvalidData"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          description: Not found. The tenant or role was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+    delete:
+      tags:
+        - Tenant
+      operationId: removeRoleFromTenant
+      summary: Remove a role from a tenant
+      description: Removes a single role from a specified tenant without deleting the role.
+      parameters:
+        - name: tenantId
+          in: path
+          required: true
+          description: The unique identifier of the tenant.
+          schema:
+            type: string
+        - name: roleId
+          in: path
+          required: true
+          description: The unique identifier of the role.
+          schema:
+            type: string
+      responses:
+        "204":
+          description: The role was successfully removed from the tenant.
+        "400":
+          $ref: "#/components/responses/InvalidData"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          description: Not found. The tenant or role was not found.
           content:
             application/problem+json:
               schema:
@@ -1689,6 +1881,42 @@ paths:
         "500":
           $ref: "#/components/responses/InternalServerError"
 
+  /process-instances/batch-operations/modification:
+    post:
+      tags:
+        - Process instance
+      operationId: modifyProcessInstancesBatchOperation
+      summary: Create a batch operation to modify process instances
+      description: |
+        Modify multiple process instances.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProcessInstanceModificationBatchOperationInstruction"
+      responses:
+        "202":
+          description: The batch operation request was accepted.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchOperationCreatedResult"
+        "400":
+          description: >
+            The process instance batch operation failed.
+            More details are provided in the response body.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+
   /process-instances/{processInstanceKey}/migration:
     post:
       tags:
@@ -1761,6 +1989,44 @@ paths:
           description: The process instance is modified.
         "400":
           $ref: "#/components/responses/InvalidData"
+        "404":
+          description: The process instance is not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /process-instances/{processInstanceKey}/call-hierarchy:
+    get:
+      tags:
+        - Process instance
+      operationId: getProcessInstanceCallHierarchy
+      summary: Get call hierarchy for process instance
+      description: |
+        Returns the call hierarchy for a given process instance, showing its ancestry up to the root instance.
+      parameters:
+        - name: processInstanceKey
+          in: path
+          required: true
+          description: The key of the process instance to fetch the hierarchy for.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: The call hierarchy is successfully returned.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ProcessInstanceCallHierarchyEntry"
+        "400":
+          $ref: "#/components/responses/InvalidData"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
         "404":
           description: The process instance is not found.
           content:
@@ -2310,12 +2576,9 @@ paths:
       tags:
         - Role
       operationId: createRole
-      summary: Create role (Work-in-Progress)
+      summary: Create role
       description: |
         Create a new role.
-
-        This API is in a Work-in-Progress state and will undergo potential breaking changes until
-        its release with an upcoming minor release.
       requestBody:
         content:
           application/json:
@@ -2342,12 +2605,9 @@ paths:
       tags:
         - Role
       operationId: getRole
-      summary: Get role (Work-in-Progress)
+      summary: Get role
       description: |
         Get a role by its ID.
-
-        This API is in a Work-in-Progress state and will undergo potential breaking changes until
-        its release with an upcoming minor release.
       parameters:
         - name: roleId
           in: path
@@ -2378,12 +2638,9 @@ paths:
       tags:
         - Role
       operationId: updateRole
-      summary: Update role (Work-in-Progress)
+      summary: Update role
       description: |
         Update a role with the given ID.
-
-        This API is in a Work-in-Progress state and will undergo potential breaking changes until
-        its release with an upcoming minor release.
       parameters:
         - name: roleId
           in: path
@@ -2420,12 +2677,9 @@ paths:
       tags:
         - Role
       operationId: deleteRole
-      summary: Delete role (Work-in-Progress)
+      summary: Delete role
       description: |
         Deletes the role with the given ID.
-
-        This API is in a Work-in-Progress state and will undergo potential breaking changes until
-        its release with an upcoming minor release.
       parameters:
         - name: roleId
           in: path
@@ -2446,17 +2700,56 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+  /roles/{roleId}/users/search:
+    post:
+      tags:
+        - Role
+      operationId: searchUsersForRole
+      summary: Search role users
+      description: |
+        Search users assigned to a role.
+      parameters:
+        - name: roleId
+          in: path
+          required: true
+          description: The role ID.
+          schema:
+            type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserSearchQueryRequest"
+      responses:
+        "200":
+          description: The users assigned to the role.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserSearchResult"
+        "400":
+          $ref: "#/components/responses/InvalidData"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          description: The role with the given ID was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
   /roles/{roleId}/users/{username}:
     put:
       tags:
         - Role
       operationId: addUserToRole
-      summary: Assign a user to a role (Work-in-Progress)
+      summary: Assign a user to a role
       description: |
         Assigns a user to a role.
-
-        This API is in a Work-in-Progress state and will undergo potential breaking changes until
-        its release with an upcoming minor release.
       parameters:
         - name: roleId
           in: path
@@ -2495,12 +2788,9 @@ paths:
       tags:
         - Role
       operationId: removeUserFromRole
-      summary: Unassign a user from a role (Work-in-Progress)
+      summary: Unassign a user from a role
       description: |
         Unassigns a user from a role.
-
-        This API is in a Work-in-Progress state and will undergo potential breaking changes until
-        its release with an upcoming minor release.
       parameters:
         - name: roleId
           in: path
@@ -2529,17 +2819,91 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+  /roles/{roleId}/applications/{applicationId}:
+    put:
+      tags:
+        - Role
+      operationId: addApplicationToRole
+      summary: Assign an application to a role
+      description: |
+        Assigns an application to a role.
+      parameters:
+        - name: roleId
+          in: path
+          required: true
+          description: The role ID.
+          schema:
+            type: string
+        - name: applicationId
+          in: path
+          required: true
+          description: The application ID.
+          schema:
+            type: string
+      responses:
+        "202":
+          description: The application was assigned successfully to the role.
+        "400":
+          $ref: "#/components/responses/InvalidData"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          description: The role with the given ID was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "409":
+          description: The application with the given ID is already assigned to the role.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+    delete:
+      tags:
+        - Role
+      operationId: removeApplicationFromRole
+      summary: Unassign an application from a role
+      description: |
+        Unassigns an application from a role.
+      parameters:
+        - name: roleId
+          in: path
+          required: true
+          description: The role ID.
+          schema:
+            type: string
+        - name: applicationId
+          in: path
+          required: true
+          description: The application ID.
+          schema:
+            type: string
+      responses:
+        "202":
+          description: The application was unassigned successfully from the role.
+        "400":
+          $ref: "#/components/responses/InvalidData"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          description: The role or application with the given ID or username was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
   /roles/search:
     post:
       tags:
         - Role
       operationId: searchRoles
-      summary: Search roles (Work-in-Progress)
+      summary: Search roles
       description: |
         Search for roles based on given criteria.
-
-        This API is in a Work-in-Progress state and will undergo potential breaking changes until
-        its release with an upcoming minor release.
       requestBody:
         required: false
         content:
@@ -2565,18 +2929,211 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
+  /roles/{roleId}/groups/{groupId}:
+    put:
+      tags:
+        - Role
+      operationId: addGroupToRole
+      summary: Assign a group to a role
+      description: |
+        Assigns a group to a role.
+      parameters:
+        - name: roleId
+          in: path
+          required: true
+          description: The role ID.
+          schema:
+            type: string
+        - name: groupId
+          in: path
+          required: true
+          description: The group ID.
+          schema:
+            type: string
+      responses:
+        "202":
+          description: The group was assigned successfully to the role.
+        "400":
+          $ref: "#/components/responses/InvalidData"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          description: The role or group with the given ID was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "409":
+          description: The group with the given ID is already assigned to the role.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+    delete:
+      tags:
+        - Role
+      operationId: removeGroupFromRole
+      summary: Unassign a group from a role
+      description: |
+        Unassigns a group from a role.
+      parameters:
+        - name: roleId
+          in: path
+          required: true
+          description: The role ID.
+          schema:
+            type: string
+        - name: groupId
+          in: path
+          required: true
+          description: The group ID.
+          schema:
+            type: string
+      responses:
+        "202":
+          description: The group was unassigned successfully from the role.
+        "400":
+          $ref: "#/components/responses/InvalidData"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          description: The role or group with the given ID was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /roles/{roleId}/mappings/{mappingId}:
+    put:
+      tags:
+        - Role
+      operationId: addMappingToRole
+      summary: Assign a mapping to a role
+      description: |
+        Assigns a mapping to a role.
+      parameters:
+        - name: roleId
+          in: path
+          required: true
+          description: The role ID.
+          schema:
+            type: string
+        - name: mappingId
+          in: path
+          required: true
+          description: The mapping ID.
+          schema:
+            type: string
+      responses:
+        "202":
+          description: The mapping was assigned successfully to the role.
+        "400":
+          $ref: "#/components/responses/InvalidData"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          description: The role or mapping with the given ID was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "409":
+          description: The mapping with the given ID is already assigned to the role.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+    delete:
+      tags:
+        - Role
+      operationId: removeMappingFromRole
+      summary: Unassign a mapping from a role
+      description: |
+        Unassigns a mapping from a role.
+      parameters:
+        - name: roleId
+          in: path
+          required: true
+          description: The role ID.
+          schema:
+            type: string
+        - name: mappingId
+          in: path
+          required: true
+          description: The mapping ID.
+          schema:
+            type: string
+      responses:
+        "202":
+          description: The mapping was unassigned successfully from the role.
+        "400":
+          $ref: "#/components/responses/InvalidData"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          description: The role or mapping with the given ID was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /roles/{roleId}/mapping-rules/search:
+    post:
+      tags:
+        - Role
+      operationId: searchMappingRulesForRole
+      summary: Search role mapping rules
+      description: |
+        Search mapping rules assigned to a role.
+      parameters:
+        - name: roleId
+          in: path
+          required: true
+          description: The role ID.
+          schema:
+            type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MappingSearchQueryRequest"
+      responses:
+        "200":
+          description: The mapping rules assigned to the role.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MappingSearchQueryResult"
+        "400":
+          $ref: "#/components/responses/InvalidData"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          description: The role with the given ID was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
 
   /groups:
     post:
       tags:
         - Group
       operationId: createGroup
-      summary: Create group (Work-in-Progress)
+      summary: Create group
       description: |
         Create a new group.
-
-        This API is in a Work-in-Progress state and will undergo potential breaking changes until
-        its release with an upcoming minor release.
       requestBody:
         content:
           application/json:
@@ -2602,12 +3159,9 @@ paths:
       tags:
         - Group
       operationId: getGroup
-      summary: Get group (Work-in-Progress)
+      summary: Get group
       description: |
         Get a group by its ID.
-
-        This API is in a Work-in-Progress state and will undergo potential breaking changes until
-        its release with an upcoming minor release.
       parameters:
         - name: groupId
           in: path
@@ -2638,12 +3192,9 @@ paths:
       tags:
         - Group
       operationId: updateGroup
-      summary: Update group (Work-in-Progress)
+      summary: Update group
       description: |
         Update a group with the given ID.
-
-        This API is in a Work-in-Progress state and will undergo potential breaking changes until
-        its release with an upcoming minor release.
       parameters:
         - name: groupId
           in: path
@@ -2680,12 +3231,9 @@ paths:
       tags:
         - Group
       operationId: deleteGroup
-      summary: Delete group (Work-in-Progress)
+      summary: Delete group
       description: |
         Deletes the group with the given ID.
-
-        This API is in a Work-in-Progress state and will undergo potential breaking changes until
-        its release with an upcoming minor release.
       parameters:
         - name: groupId
           in: path
@@ -2706,17 +3254,140 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+  /groups/{groupId}/users/search:
+    post:
+      tags:
+        - Group
+      operationId: searchUsersForGroup
+      summary: Search group users
+      description: |
+        Search users assigned to a group.
+      parameters:
+        - name: groupId
+          in: path
+          required: true
+          description: The group ID.
+          schema:
+            type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserSearchQueryRequest"
+      responses:
+        "200":
+          description: The users assigned to the group.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserSearchResult"
+        "400":
+          $ref: "#/components/responses/InvalidData"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          description: The group with the given ID was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /groups/{groupId}/mapping-rules/search:
+    post:
+      tags:
+        - Group
+      operationId: searchMappingRulesForGroup
+      summary: Search group mapping rules
+      description: |
+        Search mapping rules to a group.
+      parameters:
+        - name: groupId
+          in: path
+          required: true
+          description: The group ID.
+          schema:
+            type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MappingSearchQueryRequest"
+      responses:
+        "200":
+          description: The mapping rules assigned to the group.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MappingSearchQueryResult"
+        "400":
+          $ref: "#/components/responses/InvalidData"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          description: The group with the given ID was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /groups/{groupId}/roles/search:
+    post:
+      tags:
+        - Group
+      operationId: searchRolesForGroup
+      summary: Search group roles
+      description: |
+        Search roles assigned to a group.
+      parameters:
+        - name: groupId
+          in: path
+          required: true
+          description: The group ID.
+          schema:
+            type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RoleSearchQueryRequest"
+      responses:
+        "200":
+          description: The roles assigned to the group.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RoleSearchQueryResult"
+        "400":
+          $ref: "#/components/responses/InvalidData"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          description: The group with the given ID was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
   /groups/{groupId}/users/{username}:
     put:
       tags:
         - Group
       operationId: addUserToGroup
-      summary: Assign a user to a group (Work-in-Progress)
+      summary: Assign a user to a group
       description: |
         Assigns a user to a group.
-
-        This API is in a Work-in-Progress state and will undergo potential breaking changes until
-        its release with an upcoming minor release.
       parameters:
         - name: groupId
           in: path
@@ -2755,12 +3426,9 @@ paths:
       tags:
         - Group
       operationId: unassignUserFromGroup
-      summary: Unassign a user from a group (Work-in-Progress)
+      summary: Unassign a user from a group
       description: |
         Unassigns a user from a group.
-
-        This API is in a Work-in-Progress state and will undergo potential breaking changes until
-        its release with an upcoming minor release.
       parameters:
         - name: groupId
           in: path
@@ -2789,17 +3457,91 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+  /groups/{groupId}/applications/{applicationId}:
+    put:
+      tags:
+        - Group
+      operationId: addApplicationToGroup
+      summary: Assign an application to a group
+      description: |
+        Assigns an application to a group.
+      parameters:
+        - name: groupId
+          in: path
+          required: true
+          description: The group ID.
+          schema:
+            type: string
+        - name: applicationId
+          in: path
+          required: true
+          description: The application ID.
+          schema:
+            type: string
+      responses:
+        "202":
+          description: The application was assigned successfully to the group.
+        "400":
+          $ref: "#/components/responses/InvalidData"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          description: The group with the given ID was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "409":
+          description: The application with the given ID is already assigned to the group.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+    delete:
+      tags:
+        - Group
+      operationId: unassignApplicationFromGroup
+      summary: Unassign an application from a group
+      description: |
+        Unassigns an appliction from a group.
+      parameters:
+        - name: groupId
+          in: path
+          required: true
+          description: The group ID.
+          schema:
+            type: string
+        - name: applicationId
+          in: path
+          required: true
+          description: The application ID.
+          schema:
+            type: string
+      responses:
+        "202":
+          description: The application was unassigned successfully from the group.
+        "400":
+          $ref: "#/components/responses/InvalidData"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          description: The group with the given ID was not found, or the application is not assigned to this group.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
   /groups/{groupId}/mapping-rules/{mappingId}:
     put:
       tags:
         - Group
       operationId: addMappingToGroup
-      summary: Assign a mapping rule to a group (Work-in-Progress)
+      summary: Assign a mapping rule to a group
       description: |
         Assigns a mapping rule to a group.
-
-        This API is in a Work-in-Progress state and will undergo potential breaking changes until
-        its release with an upcoming minor release.
       parameters:
         - name: groupId
           in: path
@@ -2838,12 +3580,9 @@ paths:
       tags:
         - Group
       operationId: unassignMappingFromGroup
-      summary: Unassign a mapping rule from a group (Work-in-Progress)
+      summary: Unassign a mapping rule from a group
       description: |
         Unassigns a mapping rule from a group.
-
-        This API is in a Work-in-Progress state and will undergo potential breaking changes until
-        its release with an upcoming minor release.
       parameters:
         - name: groupId
           in: path
@@ -2877,12 +3616,9 @@ paths:
       tags:
         - Group
       operationId: searchGroups
-      summary: Search groups (Work-in-Progress)
+      summary: Search groups
       description: |
         Search for groups based on given criteria.
-
-        This API is in a Work-in-Progress state and will undergo potential breaking changes until
-        its release with an upcoming minor release.
       requestBody:
         required: false
         content:
@@ -2959,7 +3695,7 @@ paths:
         - name: mappingId
           in: path
           required: true
-          description: The id of the mapping rule to update.
+          description: The ID of the mapping rule to update.
           schema:
             type: string
       requestBody:
@@ -2996,17 +3732,14 @@ paths:
       tags:
         - Mapping rule
       operationId: deleteMappingRule
-      summary: Delete a mapping rule (Work-in-Progress)
+      summary: Delete a mapping rule
       description: |
-        Deletes the mapping rule with the given key.
-
-        This API is in a Work-in-Progress state and will undergo potential breaking changes until
-        its release with an upcoming minor release.
+        Deletes the mapping rule with the given ID.
       parameters:
         - name: mappingId
           in: path
           required: true
-          description: The key of the mapping rule to delete.
+          description: The ID of the mapping rule to delete.
           schema:
             type: string
       responses:
@@ -3015,7 +3748,7 @@ paths:
         "401":
           $ref: "#/components/responses/Unauthorized"
         "404":
-          description: The mapping rule with the mappingKey was not found.
+          description: The mapping rule with the mappingId was not found.
           content:
             application/problem+json:
               schema:
@@ -3026,12 +3759,9 @@ paths:
       tags:
         - Mapping rule
       operationId: getMappingRule
-      summary: Get a mapping rule (Work-in-Progress)
+      summary: Get a mapping rule
       description: |
         Gets the mapping rule with the given ID.
-
-        This API is in a Work-in-Progress state and will undergo potential breaking changes till
-        its release with an upcoming minor release.
       parameters:
         - name: mappingId
           in: path
@@ -3058,12 +3788,9 @@ paths:
       tags:
         - Mapping rule
       operationId: searchMappings
-      summary: Search mappings (Work-in-Progress)
+      summary: Search mappings
       description: |
         Search for mapping rules based on given criteria.
-
-        This API is in a Work-in-Progress state and will undergo potential breaking changes until
-        its release with an upcoming minor release.
       requestBody:
         content:
           application/json:
@@ -3834,14 +4561,14 @@ paths:
   /element-instances/ad-hoc-activities/search:
     post:
       tags:
-        - Ad-hoc subprocess
-      operationId: searchAdHocSubprocessActivities
+        - Ad-hoc sub-process
+      operationId: searchAdHocSubProcessActivities
       summary: Search activatable activities (alpha)
       description: |
-        Search for activatable activities within ad-hoc subprocesses based on given criteria.
+        Search for activatable activities within ad-hoc sub-processes based on given criteria.
 
         Note that this API currently requires filters for both process definition key and ad-hoc
-        subprocess ID and does not support paging or sorting.
+        sub-process ID and does not support paging or sorting.
 
         :::note
         This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
@@ -3852,18 +4579,18 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/AdHocSubprocessActivitySearchQuery"
+              $ref: "#/components/schemas/AdHocSubProcessActivitySearchQuery"
       responses:
         "200":
           description: >
-            The ad-hoc subprocess activities search result.
+            The ad-hoc sub-process activities search result.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/AdHocSubprocessActivitySearchQueryResult"
+                $ref: "#/components/schemas/AdHocSubProcessActivitySearchQueryResult"
         "400":
           description: >
-            The ad-hoc subprocess activities search query failed.
+            The ad-hoc sub-process activities search query failed.
             More details are provided in the response body.
           content:
             application/problem+json:
@@ -3876,21 +4603,21 @@ paths:
         "500":
           $ref: "#/components/responses/InternalServerError"
 
-  /element-instances/ad-hoc-activities/{adHocSubprocessInstanceKey}/activation:
+  /element-instances/ad-hoc-activities/{adHocSubProcessInstanceKey}/activation:
     post:
       tags:
-        - Ad-hoc subprocess
-      operationId: activateAdHocSubprocessActivities
-      summary: Activate activities within an ad-hoc subprocess
+        - Ad-hoc sub-process
+      operationId: activateAdHocSubProcessActivities
+      summary: Activate activities within an ad-hoc sub-process
       description: |
-        Activates selected activities within an ad-hoc subprocess identified by element ID.
-        The provided element IDs must exist within the ad-hoc subprocess instance identified by the
-        provided adHocSubprocessInstanceKey.
+        Activates selected activities within an ad-hoc sub-process identified by element ID.
+        The provided element IDs must exist within the ad-hoc sub-process instance identified by the
+        provided adHocSubProcessInstanceKey.
       parameters:
-        - name: adHocSubprocessInstanceKey
+        - name: adHocSubProcessInstanceKey
           in: path
           required: true
-          description: The key of the ad-hoc subprocess instance that contains the activities.
+          description: The key of the ad-hoc sub-process instance that contains the activities.
           schema:
             type: string
       requestBody:
@@ -3898,10 +4625,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/AdHocSubprocessActivateActivitiesInstruction"
+              $ref: "#/components/schemas/AdHocSubProcessActivateActivitiesInstruction"
       responses:
         "204":
-          description: The ad-hoc subprocess instance is modified.
+          description: The ad-hoc sub-process instance is modified.
         "400":
           $ref: "#/components/responses/InvalidData"
         "401":
@@ -3910,8 +4637,8 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "404":
           description: |
-            The ad-hoc subprocess instance is not found or the provided key does not identify an
-            ad-hoc subprocess.
+            The ad-hoc sub-process instance is not found or the provided key does not identify an
+            ad-hoc sub-process.
           content:
             application/problem+json:
               schema:
@@ -3950,7 +4677,7 @@ paths:
         "500":
           $ref: "#/components/responses/InternalServerError"
 
-  /batch-operations/{batchOperationKey}:
+  /batch-operations/{batchOperationId}:
     get:
       tags:
         - Batch operation
@@ -3958,11 +4685,11 @@ paths:
       summary: Get batch operation
       description: Get batch operation by key.
       parameters:
-        - name: batchOperationKey
+        - name: batchOperationId
           in: path
           required: true
           description: |
-            The key of the batch operation.
+            The key (or operate legacy ID) of the batch operation.
           schema:
             type: string
       responses:
@@ -3987,7 +4714,7 @@ paths:
         "500":
           $ref: "#/components/responses/InternalServerError"
 
-  /batch-operations/{batchOperationKey}/items:
+  /batch-operations/{batchOperationId}/items:
     get:
       tags:
         - Batch operation
@@ -3995,11 +4722,11 @@ paths:
       summary: Get batch operation items
       description: Get items for a batch operation.
       parameters:
-        - name: batchOperationKey
+        - name: batchOperationId
           in: path
           required: true
           description: |
-            The key of the batch operation.
+            The key (or operate legacy ID) of the batch operation.
           schema:
             type: string
       responses:
@@ -4053,7 +4780,7 @@ paths:
         "500":
           $ref: "#/components/responses/InternalServerError"
 
-  /batch-operations/{batchOperationKey}/cancel:
+  /batch-operations/{batchOperationId}/cancel:
     put:
       tags:
         - Batch operation
@@ -4061,11 +4788,11 @@ paths:
       summary: Cancel Batch operation
       description: Cancels a running batch operation.
       parameters:
-        - name: batchOperationKey
+        - name: batchOperationId
           in: path
           required: true
           description: |
-            The key of the batch operation.
+            The key (or operate legacy ID) of the batch operation.
           schema:
             type: string
       requestBody:
@@ -4092,7 +4819,7 @@ paths:
         "500":
           $ref: "#/components/responses/InternalServerError"
 
-  /batch-operations/{batchOperationKey}/pause:
+  /batch-operations/{batchOperationId}/pause:
     put:
       tags:
         - Batch operation
@@ -4100,11 +4827,11 @@ paths:
       summary: Pause Batch operation
       description: Pauses a running batch operation.
       parameters:
-        - name: batchOperationKey
+        - name: batchOperationId
           in: path
           required: true
           description: |
-            The key of the batch operation.
+            The key (or operate legacy ID) of the batch operation.
           schema:
             type: string
       requestBody:
@@ -4131,7 +4858,7 @@ paths:
         "500":
           $ref: "#/components/responses/InternalServerError"
 
-  /batch-operations/{batchOperationKey}/resume:
+  /batch-operations/{batchOperationId}/resume:
     put:
       tags:
         - Batch operation
@@ -4139,11 +4866,11 @@ paths:
       summary: Resume Batch operation
       description: Resumes a paused batch operation.
       parameters:
-        - name: batchOperationKey
+        - name: batchOperationId
           in: path
           required: true
           description: |
-            The key of the batch operation.
+            The key (or operate legacy ID) of the batch operation.
           schema:
             type: string
       requestBody:
@@ -4628,26 +5355,38 @@ components:
           description: The matching variables.
           type: array
           items:
-            $ref: "#/components/schemas/VariableResult"
+            $ref: "#/components/schemas/VariableSearchResult"
+    VariableSearchResult:
+      description: Variable search response item.
+      type: object
+      allOf:
+        - "$ref": "#/components/schemas/VariableResultBase"
+      properties:
+        value:
+          description: Value of this variable. Can be truncated.
+          type: string
+        isTruncated:
+          description: Whether the value is truncated or not.
+          type: boolean
     VariableResult:
       description: Variable search response item.
+      type: object
+      allOf:
+        - "$ref": "#/components/schemas/VariableResultBase"
+      properties:
+        value:
+          description: Full value of this variable.
+          type: string
+    VariableResultBase:
+      description: Variable response item.
       type: object
       properties:
         name:
           description: Name of this variable.
           type: string
-        value:
-          description: Value of this variable.
-          type: string
-        fullValue:
-          description: Full value of this variable.
-          type: string
         tenantId:
           description: Tenant ID of this variable.
           type: string
-        isTruncated:
-          description: Whether the value is truncated or not.
-          type: boolean
         variableKey:
           description: The key for this variable.
           type: string
@@ -5025,7 +5764,7 @@ components:
           title: Exact match
           description: Matches the value exactly.
         - $ref: "#/components/schemas/AdvancedDateTimeFilter"
-    BaseProcessInstanceFilter:
+    BaseProcessInstanceFilterFields:
       description: Base process instance search filter.
       type: object
       properties:
@@ -5091,11 +5830,52 @@ components:
           description: The incident error hash code, associated with this process.
           type: integer
           format: int32
+    ProcessDefinitionStatisticsFilter:
+      description: Process definition statistics search filter.
+      allOf:
+        - $ref: "#/components/schemas/BaseProcessInstanceFilterFields"
+        - type: object
+          properties:
+            $or:
+              description: |
+                Defines a list of alternative filter groups combined using OR logic. Each object in the array is evaluated independently, and the filter matches if any one of them is satisfied.
+
+                Top-level fields and the `$or` clause are combined using AND logic — meaning: (top-level filters) AND (any of the `$or` filters) must match.
+                <br>
+                <em>Example:</em>
+
+                ```json
+                {
+                  "state": "ACTIVE",
+                  "tenantId": 123,
+                  "$or": [
+                    { "processInstanceId": "process_v1" },
+                    { "processInstanceId": "process_v2", "hasIncident": true }
+                  ]
+                }
+                ```
+                This matches process instances that:
+
+                <ul style="padding-left: 20px; margin-left: 20px;">
+                  <li style="list-style-type: disc;">are in <em>ACTIVE</em> state</li>
+                  <li style="list-style-type: disc;">have tenant ID equal to <em>123</em></li>
+                  <li style="list-style-type: disc;">and match either:
+                    <ul style="padding-left: 20px; margin-left: 20px;">
+                      <li style="list-style-type: circle;"><code>processInstanceId</code> is <em>process_v1</em>, or</li>
+                      <li style="list-style-type: circle;"><code>processInstanceId</code> is <em>process_v2</em> and <code>hasIncident</code> is <em>true</em></li>
+                    </ul>
+                  </li>
+                </ul>
+                <br>
+                <p>Note: Using complex <code>$or</code> conditions may impact performance, use with caution in high-volume environments.
+              type: array
+              items:
+                $ref: "#/components/schemas/BaseProcessInstanceFilterFields"
     ProcessInstanceFilterFields:
       description: Process instance search filter.
       type: object
       allOf:
-        - $ref: "#/components/schemas/BaseProcessInstanceFilter"
+        - $ref: "#/components/schemas/BaseProcessInstanceFilterFields"
       properties:
         processDefinitionId:
           description: The process definition ID.
@@ -5226,14 +6006,30 @@ components:
         - ACTIVE
         - COMPLETED
         - TERMINATED
+    ProcessInstanceCallHierarchyEntry:
+      type: object
+      required:
+        - processInstanceKey
+        - processDefinitionKey
+        - processDefinitionName
+      properties:
+        processInstanceKey:
+          type: string
+          description: The key of the process instance.
+        processDefinitionKey:
+          type: string
+          description: The key of the process definition.
+        processDefinitionName:
+          type: string
+          description: The name of the process definition (fall backs to the process definition ID if not available).
     ProcessDefinitionElementStatisticsQuery:
       description: Process definition element statistics request.
       type: object
       properties:
         filter:
-          description: The process instance search filters.
+          description: The process definition statistics search filters.
           allOf:
-            - $ref: "#/components/schemas/BaseProcessInstanceFilter"
+            - $ref: "#/components/schemas/ProcessDefinitionStatisticsFilter"
     ProcessDefinitionElementStatisticsQueryResult:
       description: Process definition element statistics query response.
       type: object
@@ -5470,38 +6266,38 @@ components:
         incidentKey:
           description: Incident key associated with this element instance.
           type: string
-    AdHocSubprocessActivitySearchQuery:
-      description: Ad-hoc subprocess activities search request.
+    AdHocSubProcessActivitySearchQuery:
+      description: Ad-hoc sub-process activities search request.
       type: object
       required:
         - filter
       properties:
         filter:
-          description: The ad-hoc subprocess activity search filters.
+          description: The ad-hoc sub-process activity search filters.
           allOf:
-            - $ref: "#/components/schemas/AdHocSubprocessActivityFilter"
-    AdHocSubprocessActivityFilter:
+            - $ref: "#/components/schemas/AdHocSubProcessActivityFilter"
+    AdHocSubProcessActivityFilter:
       description: Element instance filter.
       type: object
       required:
         - processDefinitionKey
-        - adHocSubprocessId
+        - adHocSubProcessId
       properties:
         processDefinitionKey:
           description: The process definition key.
           type: string
-        adHocSubprocessId:
-          description: The ad-hoc subprocess element ID.
+        adHocSubProcessId:
+          description: The ad-hoc sub-process element ID.
           type: string
-    AdHocSubprocessActivitySearchQueryResult:
+    AdHocSubProcessActivitySearchQueryResult:
       type: object
       properties:
         items:
-          description: The matching ad-hoc subprocess activities.
+          description: The matching ad-hoc sub-process activities.
           type: array
           items:
-            $ref: "#/components/schemas/AdHocSubprocessActivityResult"
-    AdHocSubprocessActivityResult:
+            $ref: "#/components/schemas/AdHocSubProcessActivityResult"
+    AdHocSubProcessActivityResult:
       type: object
       properties:
         processDefinitionKey:
@@ -5510,8 +6306,8 @@ components:
         processDefinitionId:
           description: The process definition ID associated to this activity.
           type: string
-        adHocSubprocessId:
-          description: The ad-hoc subprocess element ID.
+        adHocSubProcessId:
+          description: The ad-hoc sub-process element ID.
           type: string
         elementId:
           description: The element ID for this activity.
@@ -5547,17 +6343,17 @@ components:
         tenantId:
           description: The tenant ID for this activity.
           type: string
-    AdHocSubprocessActivateActivitiesInstruction:
+    AdHocSubProcessActivateActivitiesInstruction:
       type: object
       properties:
         elements:
           description: Activities to activate.
           type: array
           items:
-            $ref: "#/components/schemas/AdHocSubprocessActivateActivityReference"
+            $ref: "#/components/schemas/AdHocSubProcessActivateActivityReference"
       required:
         - elements
-    AdHocSubprocessActivateActivityReference:
+    AdHocSubProcessActivateActivityReference:
       type: object
       properties:
         elementId:
@@ -5849,6 +6645,14 @@ components:
       enum:
         - ACCESS
         - CREATE
+        - CREATE_BATCH_OPERATION_CANCEL_PROCESS_INSTANCE
+        - CREATE_BATCH_OPERATION_DELETE_PROCESS_INSTANCE
+        - CREATE_BATCH_OPERATION_MIGRATE_PROCESS_INSTANCE
+        - CREATE_BATCH_OPERATION_MODIFY_PROCESS_INSTANCE
+        - CREATE_BATCH_OPERATION_RESOLVE_INCIDENT
+        - CREATE_BATCH_OPERATION_DELETE_DECISION_INSTANCE
+        - CREATE_BATCH_OPERATION_DELETE_DECISION_DEFINITION
+        - CREATE_BATCH_OPERATION_DELETE_PROCESS_DEFINITION
         - CREATE_PROCESS_INSTANCE
         - CREATE_DECISION_INSTANCE
         - READ
@@ -5874,6 +6678,7 @@ components:
         - MAPPING_RULE
         - MESSAGE
         - BATCH
+        - BATCH_OPERATION
         - APPLICATION
         - SYSTEM
         - TENANT
@@ -5888,6 +6693,7 @@ components:
       description: The type of the owner of permissions.
       enum:
         - USER
+        - APPLICATION
         - ROLE
         - GROUP
         - MAPPING
@@ -6085,7 +6891,6 @@ components:
           description: The field to sort by.
           type: string
           enum:
-            - mappingKey
             - mappingId
             - claimName
             - claimValue
@@ -6301,6 +7106,12 @@ components:
         roleKey:
           type: string
           description: The role key.
+        roleId:
+          type: string
+          description: The role id.
+        description:
+          type: string
+          description: The description of the role.
         assignedMemberKeys:
           type: array
           description: The set of keys of members assigned to the role.
@@ -6315,6 +7126,7 @@ components:
           enum:
             - roleKey
             - name
+            - roleId
         order:
           $ref: "#/components/schemas/SortOrderEnum"
       required:
@@ -6330,6 +7142,20 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/RoleSearchQuerySortRequest"
+        filter:
+          description: The role search filters.
+          allOf:
+            - $ref: "#/components/schemas/RoleFilterRequest"
+    RoleFilterRequest:
+      description: Role filter request
+      type: object
+      properties:
+        roleId:
+          description: The role ID search filters.
+          type: string
+        name:
+          description: The role name search filters.
+          type: string
     RoleSearchQueryResult:
       description: Role search response.
       type: object
@@ -6360,9 +7186,6 @@ components:
     GroupCreateResult:
       type: object
       properties:
-        groupKey:
-          description: The key of the created group.
-          type: string
         groupId:
           description: The ID of the created group.
           type: string
@@ -6375,22 +7198,15 @@ components:
     GroupUpdateRequest:
       type: object
       properties:
-        changeset:
-          description: The set of changed group attributes.
-          allOf:
-            - $ref: "#/components/schemas/GroupChangeset"
-      required:
-        - changeset
-    GroupChangeset:
-      description: A set of changed group attributes.
-      type: object
-      properties:
         name:
           type: string
-          description: The updated display name of the group.
+          description: The new name of the group.
         description:
           type: string
-          description: The updated description of the group.
+          description: The new description of the group.
+      required:
+        - name
+        - description
     GroupUpdateResult:
       type: object
       properties:
@@ -6403,9 +7219,6 @@ components:
         description:
           type: string
           description: The description of the group.
-        groupKey:
-          type: string
-          description: The unique system-generated internal group key.
     GroupResult:
       description: Group search response item.
       type: object
@@ -6413,14 +7226,12 @@ components:
         name:
           type: string
           description: The group name.
-        groupKey:
+        groupId:
           type: string
-          description: The group key.
-        assignedMemberKeys:
-          type: array
-          description: The set of keys of members assigned to the group.
-          items:
-            type: string
+          description: The group ID.
+        description:
+          type: string
+          description: The group description.
     GroupSearchQuerySortRequest:
       type: object
       properties:
@@ -6428,7 +7239,6 @@ components:
           description: The field to sort by.
           type: string
           enum:
-            - groupKey
             - name
             - groupId
         order:
@@ -6454,9 +7264,12 @@ components:
       description: Group filter request
       type: object
       properties:
-        name:
+        groupId:
+          description: The group ID search filters.
           type: string
-          description: The name of the group.
+        name:
+          description: The group name search filters.
+          type: string
     GroupSearchQueryResult:
       description: Group search response.
       type: object
@@ -6491,7 +7304,7 @@ components:
       properties:
         mappingId:
           type: string
-          description: The unique external id of the mapping.
+          description: The unique ID of the mapping.
       required:
         - mappingId
     MappingRuleUpdateRequest:
@@ -6512,10 +7325,7 @@ components:
           description: The name of the mapping.
         mappingId:
           type: string
-          description: The unique external id of the mapping.
-        mappingKey:
-          description: The key of the created mapping rule.
-          type: string
+          description: The unique ID of the mapping.
     MappingRuleCreateResult:
       type: object
       allOf:
@@ -6549,9 +7359,6 @@ components:
         mappingId:
           type: string
           description: The ID of the mapping.
-        mappingKey:
-          description: The key of the created mapping rule.
-          type: string
 
     TopologyResponse:
       description: The response of a topology request.
@@ -7891,7 +8698,7 @@ components:
           default: false
         fetchVariables:
           description: |
-            List of variables names to be included in the response.
+            List of variables by name to be included in the response when awaitCompletion is set to true.
             If empty, all visible variables in the root scope will be returned.
           type: array
           items:
@@ -8179,9 +8986,10 @@ components:
       description: The type of the batch operation.
       type: string
       enum:
-        - PROCESS_CANCELLATION
+        - CANCEL_PROCESS_INSTANCE
         - RESOLVE_INCIDENT
         - MIGRATE_PROCESS_INSTANCE
+        - MODIFY_PROCESS_INSTANCE
     BatchOperationCreatedResult:
       type: object
       properties:
@@ -8197,7 +9005,6 @@ components:
           description: The field to sort by.
           type: string
           enum:
-            - batchOperationKey
             - operationType
             - state
             - startDate
@@ -8225,8 +9032,8 @@ components:
       description: Batch operation filter request.
       type: object
       properties:
-        batchOperationKey:
-          description: The batch operation key.
+        batchOperationId:
+          description: The key (or operate legacy ID) of the batch operation.
           type: string
         operationType:
           $ref: "#/components/schemas/BatchOperationTypeEnum"
@@ -8240,6 +9047,7 @@ components:
             - COMPLETED
             - COMPLETED_WITH_ERRORS
             - CANCELED
+            - INCOMPLETED
     BatchOperationSearchQueryResult:
       type: object
       allOf:
@@ -8253,8 +9061,8 @@ components:
     BatchOperationResponse:
       type: object
       properties:
-        batchOperationKey:
-          description: Key of the batch operation.
+        batchOperationId:
+          description: Key or (Operate Legacy ID = UUID) of the batch operation.
           type: string
         state:
           description: The state of the batch operation.
@@ -8266,6 +9074,7 @@ components:
             - COMPLETED
             - COMPLETED_WITH_ERRORS
             - CANCELED
+            - INCOMPLETED
         batchOperationType:
           $ref: "#/components/schemas/BatchOperationTypeEnum"
         startDate:
@@ -8301,11 +9110,14 @@ components:
     BatchOperationItemResponse:
       type: object
       properties:
-        batchOperationKey:
-          description: Key of the batch operation.
+        batchOperationId:
+          description: The key (or operate legacy ID) of the batch operation.
           type: string
         itemKey:
           description: Key of the item, e.g. a process instance key.
+          type: string
+        processInstanceKey:
+          description: the process instance key of the processed item.
           type: string
         state:
           description: State of the item.
@@ -8315,6 +9127,45 @@ components:
             - COMPLETED
             - CANCELED
             - FAILED
+        processedDate:
+          description: the date this item was processed. This can be either completed, canceled or failed.
+          type: string
+          format: date-time
+        errorMessage:
+          description: the error message from the engine in case of a failed operation.
+          type: string
+    ProcessInstanceModificationBatchOperationInstruction:
+      type: object
+      description: |
+        The process instance filter to define on which process instances tokens should be moved,
+        as well as mapping instructions which active element instances should be terminated and which
+        new element instances should be activated
+      properties:
+        filter:
+          $ref: "#/components/schemas/ProcessInstanceFilter"
+        moveInstructions:
+          description: Instructions describing which elements should be activated in which scopes and which variables should be created.
+          type: array
+          items:
+            $ref: "#/components/schemas/ProcessInstanceModificationMoveBatchOperationInstruction"
+      required:
+        - filter
+        - moveInstructions
+    ProcessInstanceModificationMoveBatchOperationInstruction:
+      description: |-
+        Instructions describing a move operation. This instruction will terminate all active elementInstance
+        at sourceElementId and activate a new element instance for each terminated one at targetElementId.
+      type: object
+      properties:
+        sourceElementId:
+          description: The ID of the element that should be terminated.
+          type: string
+        targetElementId:
+          description: The ID of the element that should be activated.
+          type: string
+      required:
+        - sourceElementId
+        - targetElementId
   responses:
     InternalServerError:
       description: >

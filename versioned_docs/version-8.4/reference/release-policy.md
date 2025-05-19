@@ -116,3 +116,19 @@ To learn more about the applications version included in the Helm chart, see the
 ### New Camunda 8 versions
 
 If you are running Camunda 8 Self-Managed, see the [update guide](/self-managed/operational-guides/update-guide/introduction.md) to learn how to update your Camunda 8 application or server installation to a newer version of Camunda 8.
+
+## Dependency maintenance policies
+
+Camunda provides [a standard support policy](https://camunda.com/release-policy/) of 18 months for a particular minor version from the date it is released.
+During this time, patches are regularly released containing security and bug fixes, some of which may come from dependency updates. Therefore, for the
+vast majority of dependencies Camunda _only_ applies patch updates.
+
+However, certain dependencies used by Camunda 8 may have a shorter maintenance policy than Camunda itself. Camunda may adopt a different update policy for these dependencies, as listed below.
+
+### Spring
+
+**Zeebe** is a Spring Boot application and leverage Spring Boot to execute fundamental functionality such as application configuration, REST infrastructure (including security), production ready features, etc.
+
+However, Spring Boot has a shorter maintenance window than Camunda for its open-source software (OSS) offering. [Versions are only supported for 13 months](https://spring.io/projects/spring-boot#support), versus Camunda's 18 months. To circumvent this, **Zeebe** patch releases also update Spring Boot minor versions, such that the latest patch release of these components uses a supported Spring version.
+
+As for libraries and SDKs meant to be included in third-party applications, Camunda follows a best effort policy to balance compatibility and secure Spring-dependent libraries.

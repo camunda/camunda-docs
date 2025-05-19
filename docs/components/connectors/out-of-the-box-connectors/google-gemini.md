@@ -1,25 +1,25 @@
 ---
 id: google-gemini
-title: Google Gemini Connector
+title: Google Gemini connector
 sidebar_label: Google Gemini
 description: The Gemini large language models (LLMs) that are used by Gemini for Google Cloud are trained on datasets of publicly available code, Google Cloud-specific material, and other relevant technical information in addition to the datasets used to train the Gemini [foundation models](https://storage.googleapis.com/deepmind-media/gemini/gemini_1_report.pdf).
 ---
 
 :::info
-The **Google Gemini Connector** is available for `8.7.0` or later.
+The **Google Gemini connector** is available for `8.7.0` or later.
 :::
 
-The **Google Gemini Connector** is an outbound Connector that allows you to access Gemini multimodal models from Google. It is capable of understanding virtually any input, and can combine different types of information in a BPMN process.
+The **Google Gemini connector** is an outbound connector that allows you to access Gemini multimodal models from Google. It is capable of understanding virtually any input, and can combine different types of information in a BPMN process.
 
-## Create a Google Gemini Connector task
+## Create a Google Gemini connector task
 
 import ConnectorTask from '../../../components/react-components/connector-task.md'
 
 <ConnectorTask/>
 
-## Make your Google Gemini Connector executable
+## Make your Google Gemini connector executable
 
-To execute this Connector, ensure all mandatory fields are correctly filled.
+To execute this connector, ensure all mandatory fields are correctly filled.
 
 :::note
 All the mandatory and non-mandatory fields and required settings depending on the operation selection you choose are covered in the upcoming sections.
@@ -176,7 +176,7 @@ For example:
 
 ### Google authentication types
 
-The **Google Gemini Connector** currently supports two methods for authentication and authorization:
+The **Google Gemini connector** currently supports two methods for authentication and authorization:
 
 - Based on a short-lived JWT bearer token.
 - Based on a refresh token.

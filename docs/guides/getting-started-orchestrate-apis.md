@@ -2,7 +2,7 @@
 id: orchestrate-apis
 title: Get started with API orchestration
 sidebar_label: APIs
-description: "Use Connectors to build low code process automation solutions"
+description: "Use connectors to build low code process automation solutions"
 keywords:
   [api endpoints, orchestration, getting started, user guide, connectors]
 ---
@@ -14,10 +14,10 @@ keywords:
 import clsx from "clsx";
 import SaasPrereqs from './react-components/\_saas-prerequisites.md'
 
-This guide will walk you through working with a REST Connector task as a first time Camunda 8 SaaS user. The REST Connector is a [protocol Connector](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md#protocol-connectors), where you can make a request to a REST API and use the response in the next steps of your process.
+This guide will walk you through working with a REST connector task as a first time Camunda 8 SaaS user. The REST connector is a [protocol connector](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md#protocol-connectors), where you can make a request to a REST API and use the response in the next steps of your process.
 
 :::note
-New to Connectors? Review our [introduction to Connectors](/components/connectors/introduction.md) to get familiar with their capabilities, and have a closer look at all of the available [out-of-the-box Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md).
+New to connectors? Review our [introduction to connectors](/components/connectors/introduction.md) to get familiar with their capabilities, and have a closer look at all of the available [out-of-the-box connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md).
 :::
 
 <details>
@@ -25,27 +25,27 @@ New to Connectors? Review our [introduction to Connectors](/components/connector
    <SaasPrereqs/>
 </details>
 
-The concept of a Connector consists of two parts: the business logic is implemented as a job worker, and the user interface during modeling is provided using an element template. In this guide, you will create a REST Connector task in your process, handle the HTTP response, and deploy your process. New to creating a process? Get started by [modeling your first diagram](/guides/model-your-first-process.md).
+The concept of a connector consists of two parts: the business logic is implemented as a job worker, and the user interface during modeling is provided using an element template. In this guide, you will create a REST connector task in your process, handle the HTTP response, and deploy your process. New to creating a process? Get started by [modeling your first diagram](/guides/model-your-first-process.md).
 
-## Step 1: Create a REST Connector task
+## Step 1: Create a REST connector task
 
-To use a **REST Connector** in your process, follow the steps below:
+To use a **REST connector** in your process, follow the steps below:
 
 1. Create a BPMN diagram. To do this, click **New project** within Modeler.
 2. Name your project and select **Create new > BPMN diagram**.
 3. Give your model a descriptive name and ID. On the right side of the page, expand the **General** section of the properties panel to find the name and ID fields. For this guide, we'll use `API Orchestration Tutorial` for the name and `api-orchestration-tutorial` for the ID.
-4. Use Web Modeler to design a BPMN flow with a Connector. Create a Connector by dragging the rectangular task element from the palette, or click the existing start event and the displayed task element to the right of the start event.
-5. Change the task type by clicking the wrench icon and select **REST Outbound Connector** in the **Connectors** section. Alternatively, you can directly choose a **REST Outbound Connector** by using the context pad.
+4. Use Web Modeler to design a BPMN flow with a connector. Create a connector by dragging the rectangular task element from the palette, or click the existing start event and the displayed task element to the right of the start event.
+5. Change the task type by clicking the wrench icon and select **REST Outbound connector** in the **Connectors** section. Alternatively, you can directly choose a **REST Outbound connector** by using the context pad.
 
    ![Blank task on Web Modeler canvas with properties panel open](img/connectors-blank-task.png)
 
 6. Add a descriptive name using the **General** section in the properties panel. For this guide, we'll use `Make a request`.
 
-## Step 2: Make your REST Connector executable
+## Step 2: Make your REST connector executable
 
 ![Connector on Web Modeler canvas with properties panel open](img/connectors-rest-red-properties.png)
 
-To make the **REST Connector** executable, fill out the mandatory **URL** field in the HTTP Endpoint section (highlighted in red) in the properties panel with `https://catfact.ninja/fact` so we can get a random cat fact from the [Cat Fact API](https://catfact.ninja/) for this example.
+To make the **REST connector** executable, fill out the mandatory **URL** field in the HTTP Endpoint section (highlighted in red) in the properties panel with `https://catfact.ninja/fact` so we can get a random cat fact from the [Cat Fact API](https://catfact.ninja/) for this example.
 
 ## Step 3: Handle your response
 
@@ -68,7 +68,7 @@ To deploy your process, take the following steps:
 
 Congratulations! You successfully built your first API orchestration solution with Camunda 8.
 
-Camunda 8 empowers users to automate processes faster. Connectors are reusable components that allow you to access APIs without writing code.
+Camunda 8 empowers users to automate processes faster. connectors are reusable components that allow you to access APIs without writing code.
 
 Don't want to build the process yourself? Click this button to create it from a template in Camunda 8 SaaS, or sign up first.
 
@@ -92,5 +92,5 @@ Don't want to build the process yourself? Click this button to create it from a 
 ## Additional resources and next steps
 
 - Learn more about Camunda 8 and what it can do by reading [What is Camunda 8](/components/concepts/what-is-camunda-8.md) or watching our [Overview video](https://bit.ly/3TjNEm7) in Camunda Academy.
-- [Learn about types of Connectors](/components/connectors/connector-types.md)
-- [Use Connectors in your BPMN process](/components/connectors/use-connectors/index.md)
+- [Learn about types of connectors](/components/connectors/connector-types.md)
+- [Use connectors in your BPMN process](/components/connectors/use-connectors/index.md)

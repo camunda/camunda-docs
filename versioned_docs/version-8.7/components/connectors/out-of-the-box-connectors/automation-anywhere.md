@@ -1,25 +1,25 @@
 ---
 id: automation-anywhere
-title: Automation Anywhere Connector
+title: Automation Anywhere connector
 description: Orchestrate your Automation Anywhere queue items from your BPMN process.
 sidebar_label: Automation Anywhere
 ---
 
-The **Automation Anywhere Connector** allows you to orchestrate an Automation Anywhere queue from your BPMN process with [Automation Anywhere RPA](https://www.automationanywhere.com/) to add work items to the queue and obtain work item results.
+The **Automation Anywhere connector** allows you to orchestrate an Automation Anywhere queue from your BPMN process with [Automation Anywhere RPA](https://www.automationanywhere.com/) to add work items to the queue and obtain work item results.
 
-To start using the Connector, you need an instance with a [license](https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/control-room/dashboards/cloud-administration-licenses.html) we configured via an API service. Refer to the [official documentation page](https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/aae-client/bot-creator/using-the-workbench/cloud-install.html) to learn more about installing and configuring the Automation Anywhere API service.
+To start using the connector, you need an instance with a [license](https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/control-room/dashboards/cloud-administration-licenses.html) we configured via an API service. Refer to the [official documentation page](https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/aae-client/bot-creator/using-the-workbench/cloud-install.html) to learn more about installing and configuring the Automation Anywhere API service.
 
 You also need a user account with the `AAE_Queue Admin` role to query and manage workload queues and work items in a Control Room. Read more about roles in the [official documentation](https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/control-room/administration/roles/cloud-system-created-roles.html).
 
-## Create an Automation Anywhere Connector task
+## Create an Automation Anywhere connector task
 
 import ConnectorTask from '../../../components/react-components/connector-task.md'
 
 <ConnectorTask/>
 
-## Make your Automation Anywhere Connector executable
+## Make your Automation Anywhere connector executable
 
-To work with Automation Anywhere, choose the required operation type in the **Operation** section and authentication type in the **Authentication** section and complete the mandatory fields highlighted in red in the Connector properties panel on the right side of the screen.
+To work with Automation Anywhere, choose the required operation type in the **Operation** section and authentication type in the **Authentication** section and complete the mandatory fields highlighted in red in the connector properties panel on the right side of the screen.
 
 :::note
 All the mandatory and non-mandatory fields depending on the authentication and operation selections you choose are covered in the upcoming sections.
@@ -27,19 +27,19 @@ All the mandatory and non-mandatory fields depending on the authentication and o
 
 ## Authentication
 
-You can choose among the available **Automation Anywhere Connector** authentication types according to your authentication requirements.
+You can choose among the available **Automation Anywhere connector** authentication types according to your authentication requirements.
 
 :::note
 We advise you to keep your authentications and secrets data safe and avoid exposing it in the BPMN XML file by creating a secret:
 
 1. Follow our [guide for creating secrets](/components/console/manage-clusters/manage-secrets.md).
-2. Name your secret (i.e `AUTOMATION_ANYWHERE_PASSWORD`) so you can reference it later in the Connector.
+2. Name your secret (i.e `AUTOMATION_ANYWHERE_PASSWORD`) so you can reference it later in the connector.
 
 :::
 
 ### _Authenticate (username and password)_ authentication
 
-Select the **Automation Anywhere Connector** and fill out the following properties under the **Authentication** section:
+Select the **Automation Anywhere connector** and fill out the following properties under the **Authentication** section:
 
 1. Select **Authenticate (username and password)** in the **Authentication** section.
 2. Set **Password** to `Password` to the secret you created (i.e. `{{secrets.AUTOMATION_ANYWHERE_PASSWORD}}`).
@@ -48,7 +48,7 @@ Select the **Automation Anywhere Connector** and fill out the following properti
 
 ### _Authenticate (username and API key)_ authentication
 
-Select the **Automation Anywhere Connector** and fill out the following properties under the **Authentication** section:
+Select the **Automation Anywhere connector** and fill out the following properties under the **Authentication** section:
 
 1. Select **Authenticate (username and API key)** in the **Authentication** section.
 2. Set **Password** to `Password` to the secret you created (i.e. `{{secrets.AUTOMATION_ANYWHERE_PASSWORD}}`).
@@ -56,7 +56,7 @@ Select the **Automation Anywhere Connector** and fill out the following properti
 
 ### _Authentication (refresh) token_ authentication
 
-Select the **Automation Anywhere Connector** and fill out the following properties under the **Authentication** section:
+Select the **Automation Anywhere connector** and fill out the following properties under the **Authentication** section:
 
 1. Select **Authentication (refresh) token** in the **Authentication** section.
 2. Set **Token** to `Token` to the secret you created (i.e. `{{secrets.AUTOMATION_ANYWHERE_TOKEN}}`). It can be an authentication or refresh token. Refer to [authentication API documentation](https://docs.automationanywhere.com/bundle/enterprise-v11.3/page/enterprise/topics/control-room/control-room-api/api-authentication.html) to learn how to generate an authentication token or observe the [refresh token API documentation](https://docs.automationanywhere.com/bundle/enterprise-v11.3/page/enterprise/topics/control-room/control-room-api/refresh-authentication-token.html) to learn how to generate a refresh token.
@@ -69,7 +69,7 @@ Select the **Automation Anywhere Connector** and fill out the following properti
 
 ## Operation types
 
-The **Automation Anywhere Connector** currently supports two operation types in the **Operation type** dropdown list: _Add work item to the queue_ and _Get work item result from queue by ID_.
+The **Automation Anywhere connector** currently supports two operation types in the **Operation type** dropdown list: _Add work item to the queue_ and _Get work item result from queue by ID_.
 
 ### Add work item to the queue
 
@@ -194,7 +194,7 @@ Response example:
 }
 ```
 
-## Using Automation Anywhere Connector best practice
+## Using Automation Anywhere connector best practice
 
 There is no guarantee a queue item will be processed right away. In that case, we suggest building your BPMN diagram to periodically retry polling.
 To learn more, refer to an entry _Solution with Timer and Loop_ on the [Camunda BPMN examples](https://camunda.com/bpmn/examples/) page.

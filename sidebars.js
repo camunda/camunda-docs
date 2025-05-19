@@ -27,7 +27,6 @@ module.exports = {
         "guides/configuring-out-of-the-box-connectors",
         "guides/use-connectors-in-hybrid-mode",
         "guides/host-custom-connectors",
-        "guides/document-handling",
       ],
       Improve: [
         "guides/improve-processes-with-optimize",
@@ -82,7 +81,6 @@ module.exports = {
         "components/concepts/backups",
         "components/concepts/resource-deletion",
         "components/concepts/resource-authorizations",
-        "components/concepts/document-handling",
         {
           "Access control": [
             "components/concepts/access-control/user-groups",
@@ -134,6 +132,29 @@ module.exports = {
         {
           Troubleshooting: [
             "components/console/console-troubleshooting/common-pitfalls",
+          ],
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Document handling",
+      link: {
+        type: "doc",
+        id: "components/document-handling/getting-started",
+      },
+      items: [
+        {
+          type: "category",
+          label: "Use cases",
+          link: {
+            type: "doc",
+            id: "components/document-handling/use-cases",
+          },
+          items: [
+            "components/document-handling/upload-document-to-bpmn-process",
+            "components/document-handling/display-and-download-document",
+            "components/document-handling/send-document-to-external-system-via-connector",
           ],
         },
       ],
@@ -292,6 +313,7 @@ module.exports = {
                 "components/modeler/desktop-modeler/telemetry/telemetry",
               ],
             },
+            "components/modeler/desktop-modeler/settings/settings",
             "components/modeler/desktop-modeler/troubleshooting",
           ],
         },
@@ -381,6 +403,7 @@ module.exports = {
             "components/connectors/connector-types",
             "components/connectors/use-connectors/inbound",
             "components/connectors/use-connectors/outbound",
+            "components/connectors/use-connectors/intrinsic-functions",
           ],
         },
         {
@@ -445,6 +468,7 @@ module.exports = {
             "components/connectors/out-of-the-box-connectors/sql",
             "components/connectors/out-of-the-box-connectors/twilio",
             "components/connectors/out-of-the-box-connectors/uipath",
+            "components/connectors/out-of-the-box-connectors/embeddings-vector-db",
             "components/connectors/out-of-the-box-connectors/whatsapp",
           ],
         },
@@ -710,11 +734,11 @@ module.exports = {
     "apis-tools/working-with-apis-tools",
     {
       APIs: [
+        require("./docs/apis-tools/camunda-api-rest/sidebar-schema"),
         require("./docs/apis-tools/administration-api/sidebar-schema"),
         require("./docs/apis-tools/administration-sm-api/sidebar-schema"),
-        require("./docs/apis-tools/camunda-api-rest/sidebar-schema"),
         {
-          "Optimize API (REST)": [
+          "Optimize API": [
             "apis-tools/optimize-api/overview",
             "apis-tools/optimize-api/optimize-api-authentication",
             "apis-tools/optimize-api/optimize-api-tutorial",
@@ -1121,7 +1145,6 @@ module.exports = {
             "self-managed/operational-guides/update-guide/850-to-860",
             "self-managed/operational-guides/update-guide/840-to-850",
             "self-managed/operational-guides/update-guide/830-to-840",
-            "self-managed/operational-guides/update-guide/820-to-830",
             {
               Elasticsearch: [
                 "self-managed/operational-guides/update-guide/elasticsearch/7-to-8",
@@ -1174,6 +1197,7 @@ module.exports = {
         {
           Troubleshooting: [
             "self-managed/operational-guides/troubleshooting/troubleshooting",
+            "self-managed/operational-guides/troubleshooting/diagnostics",
           ],
         },
       ],
@@ -1195,12 +1219,6 @@ module.exports = {
         "self-managed/concepts/mapping-rules",
         "self-managed/concepts/elasticsearch-privileges",
         "self-managed/concepts/opensearch-privileges",
-        {
-          "Document handling": [
-            "self-managed/concepts/document-handling/getting-started",
-            "self-managed/concepts/document-handling/document-storage-configuration",
-          ],
-        },
       ],
     },
     {
@@ -1435,6 +1453,29 @@ module.exports = {
             {
               "Desktop Modeler": [
                 "self-managed/modeler/desktop-modeler/deploy-to-self-managed",
+              ],
+            },
+          ],
+        },
+        {
+          type: "category",
+          label: "Document handling",
+          link: {
+            type: "doc",
+            id: "self-managed/document-handling/getting-started",
+          },
+          items: [
+            {
+              type: "category",
+              label: "Configuration",
+              link: {
+                type: "doc",
+                id: "self-managed/document-handling/configuration/overview",
+              },
+              items: [
+                "self-managed/document-handling/configuration/camunda-8-run",
+                "self-managed/document-handling/configuration/docker",
+                "self-managed/document-handling/configuration/helm",
               ],
             },
           ],

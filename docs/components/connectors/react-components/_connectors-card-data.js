@@ -21,7 +21,7 @@ import HubspotImg from "../img/connector-hubspot.png";
 export const gettingStartedCards = [
   {
     link: "../use-connectors",
-    title: "How to use Connectors",
+    title: "How to use connectors",
     image: IconPlayImg,
     description: "Create a connector task and start using connector secrets.",
   },
@@ -44,7 +44,7 @@ export const gettingStartedCards = [
 export const customConnectorCards = [
   {
     link: "../custom-built-connectors/build-connector",
-    title: "Custom Connectors",
+    title: "Custom connectors",
     image: IconConnectorCustomImg,
     description: "Learn how to build and deploy your own custom connectors.",
   },

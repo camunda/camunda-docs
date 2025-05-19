@@ -173,7 +173,6 @@ If unsure about who to pick, choose one of the corresponding team representative
 - Self-Managed/Distribution: @camunda/distribution
 - InfEx: @camunda/infrastructure-experience
 - Identity: @kevinCamunda
-- DevEx: @akeller
 - Product Management:
   - Core Orchestration and Core Platform topics: @felix-mueller
   - Task Automation: @crobbins215
@@ -181,7 +180,7 @@ If unsure about who to pick, choose one of the corresponding team representative
   - Embedded Intelligence, Onboarding and Migration: @bastiankoerber
   - Fallback: @bastiankoerber
 - Documentation: @camunda/tech-writers
-- Documentation infrastructure: @pepopowitz
+- Documentation infrastructure: @akeller (interim)
 - Fallback: @akeller
 
 As a reviewer, feel free to merge any PR you feel comfortable with after your review. If you have questions or concerns or feel that you are not the right person to review the PR, please make this transparent to the PR author so they can clarify.

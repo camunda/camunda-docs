@@ -149,6 +149,41 @@ RewriteRule ^optimize/3.11.0/self-managed/(.*)$ /docs/8.3/self-managed/$1 [R=301
 #   8.8: content moves introduced prior to the release of version 8.8.
 #---------------------------------------------------------------------------------
 
+# Move document handling content
+RewriteRule ^docs/next/components/concepts/document-handling/(.*)$ /docs/next/components/document-handling/getting-started/ [R=301,L]
+RewriteRule ^docs/next/guides/document-handling/(.*)$ /docs/next/components/document-handling/getting-started/ [R=301,L]
+RewriteRule ^docs/next/self-managed/concepts/document-handling/document-storage-configuration/(.*)$ /docs/next/self-managed/document-handling/configuration/overview/ [R=301,L]
+RewriteRule ^docs/next/components/document-handling/use-cases/use-cases/(.*)$ /docs/next/components/document-handling/use-cases/ [R=301,L]
+RewriteRule ^docs/next/components/document-handling/use-cases/display-and-download-document/(.*)$ /docs/next/components/document-handling/display-and-download-document/ [R=301,L]
+RewriteRule ^docs/next/components/document-handling/use-cases/send-document-to-external-system-via-connector/(.*)$ /docs/next/components/document-handling/send-document-to-external-system-via-connector/ [R=301,L]
+RewriteRule ^docs/next/components/document-handling/use-cases/upload-document-to-bpmn-process/(.*)$ /docs/next/components/document-handling/upload-document-to-bpmn-process/ [R=301,L]
+
+RewriteRule ^docs/components/concepts/document-handling/(.*)$ /docs/components/document-handling/getting-started/ [R=301,L]
+RewriteRule ^docs/guides/document-handling/(.*)$ /docs/components/document-handling/getting-started/ [R=301,L]
+RewriteRule ^docs/self-managed/concepts/document-handling/document-storage-configuration/(.*)$ /docs/self-managed/document-handling/configuration/overview/ [R=301,L]
+RewriteRule ^docs/components/document-handling/use-cases/use-cases/(.*)$ /docs/components/document-handling/use-cases/ [R=301,L]
+RewriteRule ^docs/components/document-handling/use-cases/display-and-download-document/(.*)$ /docs/components/document-handling/display-and-download-document/ [R=301,L]
+RewriteRule ^docs/components/document-handling/use-cases/send-document-to-external-system-via-connector/(.*)$ /docs/components/document-handling/send-document-to-external-system-via-connector/ [R=301,L]
+RewriteRule ^docs/components/document-handling/use-cases/upload-document-to-bpmn-process/(.*)$ /docs/components/document-handling/upload-document-to-bpmn-process/ [R=301,L]
+
+RewriteRule ^docs/8.7/components/concepts/document-handling/(.*)$ /docs/8.7/components/document-handling/getting-started/ [R=301,L]
+RewriteRule ^docs/8.7/guides/document-handling/(.*)$ /docs/8.7/components/document-handling/getting-started/ [R=301,L]
+RewriteRule ^docs/8.7/self-managed/concepts/document-handling/document-storage-configuration/(.*)$ /docs/8.7/self-managed/document-handling/configuration/overview/ [R=301,L]
+RewriteRule ^docs/8.7/components/document-handling/use-cases/use-cases/(.*)$ /docs/8.7/components/document-handling/use-cases/ [R=301,L]
+RewriteRule ^docs/8.7/components/document-handling/use-cases/display-and-download-document/(.*)$ /docs/8.7/components/document-handling/display-and-download-document/ [R=301,L]
+RewriteRule ^docs/8.7/components/document-handling/use-cases/send-document-to-external-system-via-connector/(.*)$ /docs/8.7/components/document-handling/send-document-to-external-system-via-connector/ [R=301,L]
+RewriteRule ^docs/8.7/components/document-handling/use-cases/upload-document-to-bpmn-process/(.*)$ /docs/8.7/components/document-handling/upload-document-to-bpmn-process/ [R=301,L]
+
+# Remove 8.3 leftovers
+RewriteRule ^docs/self-managed/operational-guides/update-guide/820-to-830/(.*)$ https://unsupported.docs.camunda.io/8.3/docs/self-managed/operational-guides/update-guide/820-to-830/ [R=301,L]
+RewriteRule ^docs/8.7/self-managed/operational-guides/update-guide/820-to-830/(.*)$ https://unsupported.docs.camunda.io/8.3/docs/self-managed/operational-guides/update-guide/820-to-830/ [R=301,L]
+
+# Rename indices page
+RewriteRule ^docs/self-managed/setup/guides/prefix-elasticsearch-opensearch-indices/(.*)$ /docs/self-managed/setup/guides/prefix-elasticsearch-indices/ [R=301,L]
+RewriteRule ^docs/8.7/self-managed/setup/guides/prefix-elasticsearch-opensearch-indices/(.*)$ /docs/8.7/self-managed/setup/guides/prefix-elasticsearch-indices/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/setup/guides/prefix-elasticsearch-opensearch-indices/(.*)$ /docs/8.6/self-managed/setup/guides/prefix-elasticsearch-indices/ [R=301,L]
+RewriteRule ^docs/8.5/self-managed/setup/guides/prefix-elasticsearch-opensearch-indices/(.*)$ /docs/8.5/self-managed/setup/guides/prefix-elasticsearch-indices/ [R=301,L]
+
 # Remove Tasklist GraphQL API in 8.8
 RewriteRule ^docs/next/apis-tools/tasklist-api/(.*)$ /docs/next/apis-tools/camunda-api-rest/camunda-api-rest-overview/ [R=301,L]
 
@@ -184,6 +219,13 @@ RewriteRule ^docs/next/apis-tools/camunda-api-rest/specifications/update-element
 
 # Remove Camunda exporter from 8.7 docs
 RewriteRule ^docs/self-managed/zeebe-deployment/exporters/camunda-exporter/?$ /docs/self-managed/zeebe-deployment/exporters/install-zeebe-exporters/ [R=301,L]
+
+# Remove V2 REST user search API from 8.7 and 8.8 docs
+RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/find-all-users/?$ /docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api/ [R=301,L]
+RewriteRule ^docs/8.6/apis-tools/camunda-api-rest/specifications/find-all-users/?$ /docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api/ [R=301,L]
+
+# Move SAP integrations page to a new folder
+RewriteRule ^docs/next/components/camunda-integrations/sap/?$ /docs/next/components/camunda-integrations/sap/sap-integration/ [R=301,L]
 
 #---------------------------------------------------------------------------------
 #   8.7: content moves introduced prior to the release of version 8.7.
@@ -335,6 +377,9 @@ RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/upload-document-alp
 
 # Rename Web Modeler milestones to versions
 RewriteRule ^docs/components/modeler/web-modeler/milestones/?$ /docs/components/modeler/web-modeler/versions/ [R=301,L]
+
+# Move SAP integrations page to a new folder
+RewriteRule ^docs/components/camunda-integrations/sap/?$ /docs/components/camunda-integrations/sap/sap-integration/ [R=301,L]
 
 #---------------------------------------------------------------------------------
 #   8.6: content moves introduced prior to the release of version 8.6.
