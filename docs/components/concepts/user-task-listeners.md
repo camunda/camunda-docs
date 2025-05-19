@@ -8,7 +8,7 @@ A user task listener allows users to react to specific user task lifecycle event
 
 ## About user task listeners
 
-User task listeners provide flexibility and control over user task behavior:
+User task listeners provide flexibility and control over [user task](/components/modeler/bpmn/user-tasks/user-tasks.md) behavior:
 
 - They can react to user task lifecycle events, such as assigning and completing.
 - They can access user task data, such as the assignee, to execute task-specific business logic.
