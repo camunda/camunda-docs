@@ -161,18 +161,6 @@ default parameters.
 
 #### Documents
 
-:::note
-You can find examples how LLM providers accept document content blocks on
-the [Anthropic](https://docs.anthropic.com/en/docs/build-with-claude/vision#base64-encoded-image-example)
-and [OpenAI](https://platform.openai.com/docs/guides/images-vision#giving-a-model-images-as-input)
-docs.
-:::
-
-:::important
-File type support is depending on the LLM provider and model. Make sure to properly test your use case with the provider
-you are using.
-:::
-
 As part of the user prompt, it is possible to add a list
 of [Camunda Document references](../../../self-managed/document-handling/overview.md) which will be
 internally resolved and passed to the LLM if the document type is supported. This greatly enhances the ability of the
@@ -180,6 +168,11 @@ agent as it can directly interact with documents and images.
 
 This is possible as LLM APIs provide a way to spefify the user prompt as list of content blocks. If document references
 are passed, they will be resolved to a corresponding content block and passed as part of the user message.
+
+You can find examples how LLM providers accept document content blocks on
+the [Anthropic](https://docs.anthropic.com/en/docs/build-with-claude/vision#base64-encoded-image-example)
+and [OpenAI](https://platform.openai.com/docs/guides/images-vision#giving-a-model-images-as-input)
+docs.
 
 ##### Supported document types
 
@@ -191,6 +184,9 @@ with large files.
 In the future, the AI Agent connector will support different ways of storing the conversation memory to allow more
 data-intensive use cases.
 :::
+
+File type support is depending on the LLM provider and model. Make sure to properly test your use case with the provider
+you are using.
 
 Text files (MIME types matching `text/*`, `application/xml`, `application/json`, or `application/yaml`) will be passed
 as plain text content blocks.
