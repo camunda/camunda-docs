@@ -9,25 +9,25 @@ Use the **AI Agent** outbound connector to allow AI agents to interact with Larg
 
 ## About this connector
 
-The AI Agent connector provides AI agents with LLM interaction/reasoning capabilities, and is designed to be used in combination with an ad-hoc sub-process and paired feedback loop for user interaction and tool selection.
+The AI Agent connector allows AI agents to integrate with an LLM to provide interaction/reasoning capabilities. It is designed to be used in combination with an ad-hoc sub-process and a paired feedback loop for user interaction and tool selection.
 
-For example, use this connector with an AI agent to autonomously select and execute ad-hoc sub-processes, by evaluating the current process context to determine which tasks are most relevant and which tools to select.
+For example, when building an AI agent you can integrate this connector so your AI agent can autonomously select and execute ad-hoc sub-processes, by evaluating the current process context and determining the most relevant tasks and tools to use.
 
 Core features include:
 
-- **LLM Provider support**: Support for different LLM providers, including OpenAI and Anthropic.
+- **LLM provider support**: Support for different LLM providers, including OpenAI and Anthropic.
 - **Memory**: Provides conversational/short-term memory handling to enable feedback loops. For example, a user can ask follow-up questions to an AI agent response.
-- **Tool selection**: Support for an AI agent to interact with tasks within an ad-hoc sub-process, allowing use of all Camunda features such as connectors and user tasks (human-in-the-loop). The AI Agent connector provides automatic **tool resolution** to identify the tools available in the ad-hoc sub-process.
+- **Tool selection**: Support for an AI agent to interact with tasks within an ad-hoc sub-process, allowing use of all Camunda features such as connectors and user tasks (human-in-the-loop). Automatic **tool resolution** allows an AI agent to identify the tools available in an ad-hoc sub-process.
 
 :::note
-The AI Agent connector can also be used independently, although it is designed to be used with an ad-hoc sub-process to define the tools an AI agent can use.
+You can also use the AI Agent connector independently, although it is designed to be used with an ad-hoc sub-process to define the tools an AI agent can use.
 :::
 
 :::info
-New to agentic AI orchestration? See [additional resources](#additional-resources) for hands-on examples of how to use the AI Agent connector.
+New to agentic AI orchestration? See [additional resources](#additional-resources) for examples of how you can use the AI Agent connector.
 :::
 
-## Concepts
+## How to use this connector
 
 ![agenticai-ai-agent-loop-overview.png](../img/agenticai-ai-agent-loop-overview.png)
 
