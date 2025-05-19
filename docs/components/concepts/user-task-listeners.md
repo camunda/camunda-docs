@@ -104,7 +104,9 @@ See [open a job worker](/apis-tools/java-client-examples/job-worker-open.md) for
 
 ### Accessing user task data
 
-User task-specific data, such as `assignee` and `priority`, is accessible through the job headers of the user task listener job. The following attributes can be retrieved using reserved header names:
+User task-specific data, such as `assignee` and `priority`, is accessible through the job headers of the user task listener job.
+These are merged together with the user task's [task headers](/components/modeler/bpmn/user-tasks/user-tasks.md#task-headers).
+The following attributes can be retrieved using reserved header names:
 
 | Attribute           | Header name                          |
 | :------------------ | :----------------------------------- |
