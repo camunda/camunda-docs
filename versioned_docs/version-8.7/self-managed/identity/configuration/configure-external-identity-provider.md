@@ -1,7 +1,7 @@
 ---
 id: configure-external-identity-provider
-title: "Configuring an external identity provider"
-sidebar_label: "Configuring an external identity provider"
+title: "Configuring an external identity provider through Keycloak"
+sidebar_label: "Configuring an external identity provider through Keycloak"
 description: "Learn how to configure an external identity provider like OpenID Connect, SAML, LDAP, or Active Directory."
 ---
 
@@ -10,7 +10,7 @@ The Identity UI does not offer support for configuring external identity provide
 identity provider directly in Keycloak Administrator Console.
 :::
 
-To configure an external identity provider like OpenID Connect, SAML, LDAP, or Active Directory, take the following steps:
+To configure an external identity provider like OpenID Connect, SAML, LDAP, or Active Directory through Keycloak, take the following steps:
 
 1. Log in to the Keycloak Administrator Console. Open the URL you have configured for Keycloak in your browser.
    :::tip

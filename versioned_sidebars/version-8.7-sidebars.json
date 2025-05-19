@@ -2125,7 +2125,7 @@
           ],
           "Identity": [
             "self-managed/identity/what-is-identity",
-            "self-managed/identity/install-identity",
+            "self-managed/identity/identity-first-steps",
             {
               "Configuration": [
                 "self-managed/identity/configuration/identity-configuration-overview",
