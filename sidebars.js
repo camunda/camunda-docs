@@ -468,7 +468,6 @@ module.exports = {
             "components/connectors/out-of-the-box-connectors/sql",
             "components/connectors/out-of-the-box-connectors/twilio",
             "components/connectors/out-of-the-box-connectors/uipath",
-            "components/connectors/out-of-the-box-connectors/embeddings-vector-db",
             "components/connectors/out-of-the-box-connectors/whatsapp",
           ],
         },
