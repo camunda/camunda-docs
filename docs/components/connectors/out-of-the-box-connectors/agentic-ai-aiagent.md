@@ -453,7 +453,7 @@ By utilizing the `fromAi` tool call as wrapper function around the actual value 
 
 You can use the `fromAi` function in:
 
-- Input & Output mappings (e.g Service Task, Script Task, User Task)
+- Input & Output mappings (e.g service task, script task, user task)
 - Custom input fields provided by an element template if an element template is applied to the activity as technically
   these are handled as input mappings.
 
