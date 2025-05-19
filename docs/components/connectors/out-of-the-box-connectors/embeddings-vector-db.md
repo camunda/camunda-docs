@@ -167,7 +167,7 @@ A FEEL [string conversion function](/components/modeler/feel/builtin-functions/f
 :::
 
 The **Camunda document** might be useful when you deal with larger document pipelines that come from
-[webhook or user tasks](/guides/document-handling.md). Input documents will be parsed with [Apache Tika](https://tika.apache.org/), so files
+[webhook or user tasks](/components/document-handling/getting-started.md). Input documents will be parsed with [Apache Tika](https://tika.apache.org/), so files
 can be of any Apache Tika-supported formats.
 
 ### Splitting
