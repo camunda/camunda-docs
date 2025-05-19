@@ -295,7 +295,7 @@ It is essential to ensure this ID is correct, as Terraform will use it to determ
 
 ##### terraform_sp_app_id
 
-This is the Application (client) ID of the Azure Service Principal that Terraform uses for authentication. It is required to configure access policies in services such as Key Vault, particularly when using customer-managed keys (CMK) with AKS.
+This is the Application (client) ID of the Azure Service Principal that Terraform uses for authentication. It **is required** to configure access policies in services such as Key Vault, particularly when using customer-managed keys (CMK) with AKS.
 
 If you created a Service Principal manually, you can retrieve its application ID with the following command:
 
