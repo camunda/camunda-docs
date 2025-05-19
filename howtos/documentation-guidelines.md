@@ -162,25 +162,25 @@ After the proposed change is finished, open a GitHub PR and assign reviewers bas
 
 If unsure about who to pick, choose one of the corresponding team representatives, and they will take care of delegating the issue:
 
+- Connectors: @camunda/connectors
 - Console: @ultraschuppi
 - Desktop Modeler: @camunda/modeling-dev
+- Identity: @kevinCamunda
+- Operate: @ThorbenLindhauer
+- Optimize: @RomanJRW
+- Self-Managed / Distribution: @camunda/distribution
+- Self-Managed / Infrastructure Experience: @camunda/infrastructure-experience
+- Tasklist: @camunda/human-task-orchestration
 - Web Modeler: @marcosbarbero @wollefitz
 - Zeebe: @npepinpe
-- Operate: @ThorbenLindhauer
-- Tasklist: @camunda/human-task-orchestration
-- Optimize: @RomanJRW
-- Connectors: @camunda/connectors
-- Self-Managed/Distribution: @camunda/distribution
-- InfEx: @camunda/infrastructure-experience
-- Identity: @kevinCamunda
 - Product Management:
-  - Core Orchestration and Core Platform topics: @felix-mueller
-  - Task Automation: @crobbins215
   - Business Application Integration: @toco-cam
+  - Core Orchestration and Core Platform topics: @felix-mueller
   - Embedded Intelligence, Onboarding and Migration: @bastiankoerber
+  - Task Automation: @crobbins215
   - Fallback: @bastiankoerber
 - Documentation: @camunda/tech-writers
-- Documentation infrastructure: @akeller (interim)
+- Documentation Infrastructure: @maxdanilov
 - Fallback: @akeller
 
 As a reviewer, feel free to merge any PR you feel comfortable with after your review. If you have questions or concerns or feel that you are not the right person to review the PR, please make this transparent to the PR author so they can clarify.

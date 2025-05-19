@@ -131,7 +131,7 @@ The Algolia crawler runs as soon as a production publish completes.
 
 ### How to manually trigger Algolia crawler
 
-Manually triggering the Algolia crawler is not intuitive(!!!) and requires [admin access](https://crawler.algolia.com/admin/users/login). Contact @akeller for assistance.
+Manually triggering the Algolia crawler is not intuitive and requires [admin access](https://crawler.algolia.com/admin/users/login). Contact @akeller for assistance.
 
 1. Login to the [Algolia dashboard](https://dashboard.algolia.com/apps/6KYF3VMCXZ/dashboard).
 2. In the bottom left corner, click ** Data sources **, and after the UI loads, click ** Crawler **. If the sidebar is collapsed, you may only see a database icon (it looks like a barrel) instead of **Data sources**.
