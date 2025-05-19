@@ -5,21 +5,27 @@ title: AI Agent connector
 description: AI agent connector implementing a feedback loop using for user interactions and toolcalls with an LLM.
 ---
 
-The **AI Agent connector** is an outbound connector that implements the Large Language Model (LLM) interaction paired
-with a feedback loop for user interactions and tool calls. It is designed to be used in combination with an ad-hoc
-sub-process defining the tools to be used, but can also be used independently.
+Use the **AI Agent** outbound connector to allow AI agents to interact with Large Language Models (LLMs).
 
-The core features provided by the AI Agent connector are:
+## About this connector
 
-- Support for **different LLM providers**
-- **Conversational/short-term memory** handling to enable feedback loops. For example, a user can ask follow-up
-  questions to an agent response.
-- **Tool calling** support to make the agent capable of interacting with tasks within the ad-hoc sub-process. This
-  allows leveraging all Camunda features such as connectors and user tasks (human-in-the-loop). The AI Agent connector
-  provides automatic **tool resolution** to identify the tools available in the ad-hoc sub-process.
+The AI Agent connector provides AI agents with LLM interaction/reasoning capabilities, and is designed to be used in combination with an ad-hoc sub-process and paired feedback loop for user interaction and tool selection.
 
-For hands-on examples of how to use the AI Agent connector, check out the links provided
-in [additional resources](#additional-resources).
+For example, use this connector with an AI agent to autonomously select and execute ad-hoc sub-processes, by evaluating the current process context to determine which tasks are most relevant and which tools to select.
+
+Core features include:
+
+- **LLM Provider support**: Support for different LLM providers, including OpenAI and Anthropic.
+- **Memory**: Provides conversational/short-term memory handling to enable feedback loops. For example, a user can ask follow-up questions to an AI agent response.
+- **Tool selection**: Support for an AI agent to interact with tasks within an ad-hoc sub-process, allowing use of all Camunda features such as connectors and user tasks (human-in-the-loop). The AI Agent connector provides automatic **tool resolution** to identify the tools available in the ad-hoc sub-process.
+
+:::note
+The AI Agent connector can also be used independently, although it is designed to be used with an ad-hoc sub-process to define the tools an AI agent can use.
+:::
+
+:::info
+New to agentic AI orchestration? See [additional resources](#additional-resources) for hands-on examples of how to use the AI Agent connector.
+:::
 
 ## Concepts
 
