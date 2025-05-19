@@ -5,6 +5,8 @@ sidebar_label: "Manage roles"
 description: "Use Identity to manage roles"
 ---
 
+Roles define what a user or application is allowed to do by grouping related [permissions](versioned_docs/version-8.7/self-managed/identity/access-management/manage-permissions.md) together. You can assign roles — either [directly to users](#assign-a-role-to-a-user) or [through Groups](/self-managed/identity/application-user-group-role-management/manage-groups.md#assign-roles-to-a-group) — to simplify and standardize access control across your system. Roles help you enforce consistent permission sets, reduce errors, and scale access management as your organization grows.
+
 # Role management
 
 ## Add a role
@@ -58,7 +60,3 @@ To delete an assigned role from a user, take the following steps:
 4. Click the trash icon next to the role.
 
 On confirmation, the modal will close, the table will update, and the role will be removed from the user.
-
-# Next steps
-
-Roles are a way to group sets of [permissions](versioned_docs/version-8.7/self-managed/identity/access-management/manage-permissions.md).

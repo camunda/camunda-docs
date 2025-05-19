@@ -249,6 +249,7 @@ RewriteRule ^docs/self-managed/identity/deployment/starting-configuration-for-id
 RewriteRule ^docs/self-managed/identity/deployment/resource-management/?$ /docs/self-managed/identity/miscellaneous/resource-management/ [R=301,L]
 RewriteRule ^docs/self-managed/identity/troubleshooting/troubleshoot-identity/?$ /docs/self-managed/identity/miscellaneous/troubleshoot-identity/ [R=301,L]
 RewriteRule ^docs/self-managed/concepts/access-control/apis/?$ /docs/self-managed/identity/access-management/access-management-overview [R=301,L]
+RewriteRule ^docs/self-managed/identity/install-identity/?$ /docs/self-managed/identity/identity-first-steps/ [R=301,L]
 
 # Remove V2 REST user search API from 8.7 and 8.8 docs
 RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/find-all-users/?$ /docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api/ [R=301,L]

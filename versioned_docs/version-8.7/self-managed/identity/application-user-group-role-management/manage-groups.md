@@ -4,7 +4,7 @@ title: "Manage groups"
 description: "Groups are a way to apply a set of roles and permissions to users. Use Identity to create a group."
 ---
 
-Groups are a way to group a set of members. A set of [roles](/self-managed/identity/application-user-group-role-management/manage-roles.md) can be mapped to groups.
+Groups allow you to efficiently manage access by organizing users (group members) and assigning [roles](/self-managed/identity/application-user-group-role-management/manage-roles.md). Instead of assigning roles to individual users, you can [map a set of roles to a group](#role-assignment-to-groups), and all group members will automatically inherit those permissions.
 
 # Group Management
 

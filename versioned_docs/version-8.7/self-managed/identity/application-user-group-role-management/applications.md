@@ -16,14 +16,14 @@ For Camunda 8 to work, a set of Applications are preconfigured. These preconfigu
 - Web Modeler
 - Zeebe
 
-As a user of Identity, you can add own Applications.
+As a user of Identity, you can add your own Applications. An example use-case would be to provide a service with M2M access to a Camunda API.
 
 ## Types of applications
 
-There are three types of applications in Identity:
+Aligning with the [OAuth 2.0 standard](https://oauth.net/2/client-types/), we distinguish _confidental_, and _public_ clients. We further categorize applications by usage pattern, introducing the _M2M_ application type in Identity, where systems communicate using _confidental_ clients without direct user interaction:
 
 - Confidential
-- Machine-to-machine
+- Machine-to-machine (M2M)
 - Public
 
 A type is selected when [creating the application](#add-an-application) based on
@@ -61,22 +61,6 @@ and client secret depending on the selected [type](/self-managed/identity/applic
 
 ![add-application-refreshed-table](../img/add-application-refreshed-table.png)
 
-### Assigning a permission an application
-
-To assign a permission to an application using Identity, take the following steps:
-
-1. Log in to the Identity UI and navigate to the **Applications** page and click on an application. Then, select the **Access to APIs** tab and click **Assign Permissions**:
-
-![assign-a-permission-application-tab](../img/assign-a-permission-application-tab.png)
-
-2. Select the API which contains the permission you want to assign.
-
-3. Select the permissions you would like to assign and click **Add**.
-
-On confirmation, the modal will close, the table will update, and your assigned permissions will be shown:
-
-![assign-a-permission-application-refreshed-table](../img/assign-a-permission-application-refreshed-table.png)
-
 ## Permissions
 
-You can control the access an application has by assigning [permissions](/self-managed/identity/access-management/access-management-overview.md) to an application.
+You can control the access an application has by [assigning permissions](/self-managed/identity/access-management/manage-permissions.md#assigning-a-permission-an-application) to an application. Please find an [overview of available permissions here](/self-managed/identity/access-management/access-management-overview.md).
