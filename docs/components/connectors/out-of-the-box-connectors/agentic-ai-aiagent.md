@@ -35,7 +35,7 @@ connector task multiple times. Depending on your use case, the connector can be 
   and their input parameters and pass these tool definitions to the LLM. The LLM will then generate a response, which
   might include tool calls (a request to call a tool paired with the input parameters). If tool calls are requested,
   the process can be modelled to pass these tool calls to the ad-hoc sub-process and to return the tool call results
-  to the AI Agent task by modelling the feedback loop as shown in the figure above.
+  to the AI Agent task by modelling the feedback loop as shown in the diagram above.
 
 As the agent preserves the context of the conversation, follow-up questions/tasks and handling of tool call results can
 relate to the previous interaction with the LLM, allowing the LLM to provide more relevant responses.
