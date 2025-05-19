@@ -5,14 +5,6 @@ title: AI Agent connector
 description: AI agent connector implementing a feedback loop using for user interactions and toolcalls with an LLM.
 ---
 
-:::important
-Make sure to check out the following resources for a more **hands-on guide** to the AI Agent integration:
-
-- [Intelligent by Design: A Step-by-Step Guide to AI Task Agents in Camunda](https://camunda.com/blog/2025/05/building-your-first-ai-agent-with-camunda-s-new-agentic-ai/)
-- [AI Email Support Agent Blueprint](https://marketplace.camunda.com/en-US/apps/522492/ai-email-support-agent) on the
-  Camunda Marketplace
-  :::
-
 The **AI Agent connector** is an outbound connector that implements the Large Language Model (LLM) interaction paired
 with a feedback loop for user interactions and tool calls. It is designed to be used in combination with an ad-hoc
 sub-process defining the tools to be used, but can also be used independently.
@@ -25,6 +17,9 @@ The core features provided by the AI Agent connector are:
 - **Tool calling** support to make the agent capable of interacting with tasks within the ad-hoc sub-process. This
   allows leveraging all Camunda features such as connectors and user tasks (human-in-the-loop). The AI Agent connector
   provides automatic **tool resolution** to identify the tools available in the ad-hoc sub-process.
+
+For hands-on examples of how to use the AI Agent connector, check out the links provided
+in [additional resources](#additional-resources).
 
 ## Concepts
 
@@ -535,7 +530,7 @@ Similar to the [user prompt](#documents), tool call responses can contain
 references will be transformed to a content block containing the plain text or base64 encoded document content before
 passing them to the LLM.
 
-## Additional Resources
+## Additional resources
 
 - [Intelligent by Design: A Step-by-Step Guide to AI Task Agents in Camunda](https://camunda.com/blog/2025/05/building-your-first-ai-agent-with-camunda-s-new-agentic-ai/)
 - [AI Email Support Agent Blueprint](https://marketplace.camunda.com/en-US/apps/522492/ai-email-support-agent) on the
