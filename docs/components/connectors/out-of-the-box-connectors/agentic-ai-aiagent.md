@@ -13,10 +13,6 @@ Make sure to check out the following resources for a more **hands-on guide** to 
   Camunda Marketplace
   :::
 
-Camunda has taken a systemic, future-ready approach for agentic AI by building on the proven foundation of BPMN. At the
-core of this approach is our use of the BPMN ad-hoc sub-process construct, which allows for tasks to be executed in any
-order, skipped, or repeated—all determined dynamically at runtime based on the context of the process instance.
-
 The **AI Agent connector** is an outbound connector that implements the Large Language Model (LLM) interaction paired
 with a feedback loop for user interactions and tool calls. It is designed to be used in combination with an ad-hoc
 sub-process defining the tools to be used, but can also be used independently.
