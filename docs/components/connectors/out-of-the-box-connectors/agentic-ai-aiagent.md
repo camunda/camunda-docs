@@ -179,7 +179,7 @@ you are using.
 :::
 
 As part of the user prompt, it is possible to add a list
-of [Camunda Document references](../../concepts/document-handling.md) which will be
+of [Camunda Document references](../../../self-managed/document-handling/overview.md) which will be
 internally resolved and passed to the LLM if the document type is supported. This greatly enhances the ability of the
 agent as it can directly interact with documents and images.
 
@@ -530,9 +530,10 @@ string before passing it to the LLM.
 #### Document support
 
 Similar to the [user prompt](#documents), tool call responses can contain
-[Camunda Document references](../../concepts/document-handling.md) within arbitrary structures (supporting the same file
-types as for the user prompt). When serializing the tool call response to JSON, document references will be transformed
-to a content block containing the plain text or base64 encoded document content before passing them to the LLM.
+[Camunda Document references](../../../self-managed/document-handling/overview.md) within arbitrary structures
+(supporting the same file types as for the user prompt). When serializing the tool call response to JSON, document
+references will be transformed to a content block containing the plain text or base64 encoded document content before
+passing them to the LLM.
 
 ## Additional Resources
 
