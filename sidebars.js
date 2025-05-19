@@ -149,24 +149,15 @@ module.exports = {
           label: "Use cases",
           link: {
             type: "doc",
-            id: "components/document-handling/use-cases/use-cases",
+            id: "components/document-handling/use-cases",
           },
           items: [
-            "components/document-handling/use-cases/upload-document-to-bpmn-process",
-            "components/document-handling/use-cases/display-and-download-document",
-            "components/document-handling/use-cases/send-document-to-external-system-via-connector",
+            "components/document-handling/upload-document-to-bpmn-process",
+            "components/document-handling/display-and-download-document",
+            "components/document-handling/send-document-to-external-system-via-connector",
           ],
         },
       ],
-    },
-    {
-      type: "category",
-      label: "Robotic Process Automation (RPA)",
-      link: {
-        type: "doc",
-        id: "components/rpa/overview",
-      },
-      items: ["components/rpa/getting-started", "components/rpa/production"],
     },
     {
       type: "category",
@@ -477,6 +468,7 @@ module.exports = {
             "components/connectors/out-of-the-box-connectors/sql",
             "components/connectors/out-of-the-box-connectors/twilio",
             "components/connectors/out-of-the-box-connectors/uipath",
+            "components/connectors/out-of-the-box-connectors/embeddings-vector-db",
             "components/connectors/out-of-the-box-connectors/whatsapp",
           ],
         },
