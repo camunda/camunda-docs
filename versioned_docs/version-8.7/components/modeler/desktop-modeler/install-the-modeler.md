@@ -26,3 +26,8 @@ To make Modeler the default editor for `.bpmn`, `.dmn`, `.rpa`, and `.form` file
 ### Linux
 
 To create a [desktop file](https://specifications.freedesktop.org/desktop-entry-spec/latest/) and make Modeler the default editor for `.bpmn`, `.dmn`, `.rpa`, and `.form` files, execute `support/xdg_register.sh` in your terminal.
+
+## Next steps
+
+- [Model your first diagram](/components/modeler/desktop-modeler/model-your-first-diagram.md)
+- [Use connectors](/components/modeler/desktop-modeler/use-connectors.md)
