@@ -174,21 +174,16 @@ For more information on optional model parameters, refer to the provider documen
 
 ### System Prompt
 
+The **System Prompt** is a crucial part of the AI Agent connector configuration, as it defines the behavior and goal of the agent, and instructs the LLM on how to act.
+
 :::important
-Currently, the system prompt is only added to the agent context once when the AI Agent connector is called for the first
-time. This means you can't alter the system prompt in follow-up interactions, even if you include different data in the
-input field. This might change in upcoming versions.
+Currently, the system prompt is only added to the agent context once, when the AI Agent connector is called for the first time. This means you cannot alter the system prompt in follow-up interactions, even if you include different data in the input field.
 :::
 
-The **System Prompt** is a crucial part of the AI Agent connector configuration. It defines the behavior and the goal of
-the agent and instructs the LLM on how to act. The connector provides a minimal system prompt example which can be used
-as a starting point, but you should consider customizing the system prompt to your needs.
-
-Within the system prompt field, you can use FEEL expressions, or you can inject parameters into the text by using
-`{{parameter}}` syntax to inject parameters defined in the **System Prompt Parameters** field (FEEL context).
-
-The AI Agent connector provides a set of default parameters `current_date`, `current_time`, `current_date_time` which
-you don't need to explicitly define.
+| Field                    | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| :----------------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| System Prompt            | Yes      | <p>Specify a system prompt to define how the LLM should act.</p><p><ul><li><p>A minimal system prompt example is provided as a starting point, but you should consider customizing the system prompt to meet your needs.</p></li><li><p>Within the **System Prompt** field, you can use FEEL expressions or inject parameters into the text. Use the `{{parameter}}` syntax to inject any parameters defined in the **System Prompt Parameters** field (FEEL context).</p><p>Example: `{{current_date_time}}`.</p></li></ul></p> |
+| System Prompt Parameters | No       | <p>Define a map of parameters you can use in `{{parameter}}` format in the **System Prompt** field.</p><p>A set of default parameters (`current_date`, `current_time`, `current_date_time`) is provided that you don't need to explicitly define in this field.</p>                                                                                                                                                                                                                                                              |
 
 ### User Prompt
 
