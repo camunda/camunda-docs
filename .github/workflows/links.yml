@@ -26,7 +26,7 @@ jobs:
         uses: lycheeverse/lychee-action@v2.4.1
         id: link-checker
         with:
-          fail: true
+          fail: false
           args: -c ./lychee-external-links.toml --base . --cache --max-cache-age 1d . --verbose --no-progress 'docs/**/*.md' 'versioned_docs/**/*.md'
           token: "${{ secrets.GITHUB_TOKEN }}"
 
@@ -36,8 +36,14 @@ jobs:
           path: .lycheecache
           key: cache-lychee-${{ env.DATEOFDAY }}
 
+      - name: Fail if checker failed in non-schedule triger mode
+        if: github.event_name != 'schedule' && steps.link-checker.outputs.exit_code != 0
+        run: |
+          echo "Link checker failed with exit code ${{ steps.link-checker.outputs.exit_code }}"
+          exit 1
+
       - name: Create Issue From File
-        if: ${{ github.event_name == 'schedule' && steps.link-checker.outputs.exit_code != 0 }}
+        if: github.event_name == 'schedule' && steps.link-checker.outputs.exit_code != 0
         uses: peter-evans/create-issue-from-file@v5
         with:
           title: Link Checker Report
