@@ -14,16 +14,13 @@ function preGenerateDocs(config) {
     ...addFrequentlyLinkedDocs(config.version),
   ];
 
-  (async () => {
-    const replaceModule = await import("replace-in-file");
-    const { replaceInFileSync } = replaceModule.default;
+  let updatedSpec = originalSpec;
 
-    replaceInFileSync({
-      files: config.specPath,
-      from: specUpdates.map((x) => x.from),
-      to: specUpdates.map((x) => x.to),
-    });
-  })();
+  for (const update of specUpdates) {
+    updatedSpec = updatedSpec.replace(update.from, update.to);
+  }
+
+  fs.writeFileSync(config.specPath, updatedSpec);
 }
 
 function postGenerateDocs(config) {

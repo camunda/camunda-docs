@@ -1,6 +1,6 @@
+const fs = require("fs");
+
 function makeServerDynamic(specFile) {
-  // The source spec has a hardcoded generated server URL.
-  //   We can make it dynamic so that the user can edit it and get more accurate code samples.
   console.log("making server dynamic....");
 
   // Note that `v1` is included in this path.
@@ -15,14 +15,14 @@ function makeServerDynamic(specFile) {
       schema:
         default: http
         description: The schema of the API server.`;
-  (async () => {
-    const { replaceInFileSync } = await import("replace-in-file");
-    replace.sync({
-      files: specFile,
-      // This regex includes the following `description` line, which becomes inaccurate when we make the server dynamic.
-      from: /^. - url:.*\n.   description:.*$/m,
-      to: dynamicServerDefinition,
-    });
-  })();
+
+  const content = fs.readFileSync(specFile, "utf8");
+  const updated = content.replace(
+    /^. - url:.*\n.   description:.*$/m,
+    dynamicServerDefinition
+  );
+
+  fs.writeFileSync(specFile, updated);
 }
+
 exports.makeServerDynamic = makeServerDynamic;

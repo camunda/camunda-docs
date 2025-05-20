@@ -1,3 +1,5 @@
+const fs = require("fs");
+
 const removeDuplicateVersionBadge = require("../remove-duplicate-version-badge");
 
 function preGenerateDocs(config) {
@@ -21,12 +23,12 @@ function hackChangesetDescription(specPath) {
   // This adjustment replaces the description of the `Changeset` schema with the current description of
   //   the `UserTaskUpdateRequest.changeset` property.
   console.log("hacking changeset description...");
-  (async () => {
-    const { replaceInFileSync } = await import("replace-in-file");
-    replaceInFileSync({
-      files: `${specPath}`,
-      from: /^      description: A map of changes.$/m,
-      to: `      description: |
+
+  const content = fs.readFileSync(specPath, "utf8");
+
+  const updated = content.replace(
+    /^ {6}description: A map of changes\.$/m,
+    `      description: |
           JSON object with changed task attribute values.
 
           The following attributes can be adjusted with this endpoint, additional attributes
@@ -41,7 +43,8 @@ function hackChangesetDescription(specPath) {
           the persisted attribute's value.
 
           The assignee cannot be adjusted with this endpoint, use the Assign task endpoint.
-          This ensures correct event emission for assignee changes.`,
-    });
-  })();
+          This ensures correct event emission for assignee changes.`
+  );
+
+  fs.writeFileSync(specPath, updated);
 }
