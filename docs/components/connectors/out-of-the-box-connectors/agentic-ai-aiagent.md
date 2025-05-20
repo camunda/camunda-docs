@@ -86,15 +86,19 @@ Agent: John Doe's credit card has been created successfully.
 
 The following prerequisites are required to use this connector:
 
-| Prerequisite                 | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| :--------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| LLM setup and authentication | <p>You must have previously set up an account with access and authentication details for the supported LLM model provider you want to use with this connector.</p><p><ul><li>[Anthropic](http://anthropic.com/) (Claude models)</li><li>[AWS Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html)</li><li>[OpenAI](http://openai.com/)</li></ul></p><p>For example, to use an LLM model provided by Amazon Bedrock, you must have an AWS account with an access key and secret key to execute `InvokeModel` or `Converse` actions.</p><p>For OpenAI, you must configure the [OpenAI model](https://platform.openai.com/docs/models) and obtain an OpenAI API key to use for authentication.</p> |
+| Prerequisite                                 | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| :------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Set up LLM model provider and authentication | <p>You must have previously set up an account with access and authentication details for the supported LLM model provider you want to use with this connector.</p><p>For example, to use an LLM model provided by Amazon Bedrock, you must have an AWS account with an access key and secret key to execute `InvokeModel` or `Converse` actions.</p><p>For OpenAI, you must configure the [OpenAI model](https://platform.openai.com/docs/models) and obtain an OpenAI API key to use for authentication.</p> |
 
 ## Configuration
 
 ### Model Provider
 
 Select and configure authentication for the LLM model **Provider** you want to use, from the following supported providers:
+
+- [Anthropic](http://anthropic.com/) (Claude models)
+- [AWS Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html)
+- [OpenAI](http://openai.com/)
 
 :::note notes
 
@@ -147,14 +151,26 @@ To learn more about authentication to the OpenAPI API, refer to [OpenAPI platfor
 
 ### Model
 
-The model section allows you to select the model to use with the configured provider, paired with a set of optional
-model parameters. Depending on the selected provider the fields available in this section may vary.
+Select the model you want to use for the selected provider, and specify any additional model parameters.
 
-Note that parameters setting maximum values (such as maximum tokens) are considered
-**per LLM request**, not for the whole conversation. Depending on the provider, the exact meaning of these
-parameters may vary.
+| Field                     | Required | Description                                                                                                                |
+| :------------------------ | :------- | :------------------------------------------------------------------------------------------------------------------------- |
+| Model                     | Yes      | <p>Specify the model ID for the model you want to use.</p><p>Example: `anthropic.claude-3-5-sonnet-20240620-v1:0`.</p>     |
+| Maximum tokens            | No       | The maximum number of tokens per request to allow in the generated response.                                               |
+| Maximum Completion Tokens | No       | The maximum number of tokens per request to generate before stopping.                                                      |
+| Temperature               | No       | Floating point number between 0 and 1. The higher the number, the more randomness will be injected into the response.      |
+| top P                     | No       | Floating point number between 0 and 1. Recommended for advanced use cases only (you usually only need to use temperature). |
+| top K                     | No       | Integer greater than 0. Recommended for advanced use cases only (you usually only need to use temperature).                |
 
-Please consult the provider documentation linked in the element template for more details on the specific fields.
+:::info
+For more information on optional model parameters, refer to the provider documentation links in the element template.
+:::
+:::note notes
+
+- Different model parameter fields are shown depending on the provider/model you select.
+- Parameters that set maximum values (such as maximum tokens) are considered **per LLM request**, not for the whole conversation. Depending on the provider, the exact meaning of these parameters may vary.
+
+:::
 
 ### System Prompt
 
