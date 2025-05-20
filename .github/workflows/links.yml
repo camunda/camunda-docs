@@ -10,14 +10,14 @@ jobs:
     name: links-check
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+      - uses: actions/checkout@v4
 
       - name: Get Current Date
         id: dateofday
         run: echo "DATEOFDAY=$(date +%Y-%m-%d)" >> "$GITHUB_ENV"
 
       - name: Restore lychee cache
-        uses: actions/cache/restore@d4323d4df104b026a6aa633fdb11d772146be0bf # v4
+        uses: actions/cache/restore@v4
         with:
           path: .lycheecache
           key: cache-lychee-${{ env.DATEOFDAY }}
@@ -30,7 +30,7 @@ jobs:
           token: "${{ secrets.GITHUB_TOKEN }}"
 
       - name: Cache links
-        uses: actions/cache/save@d4323d4df104b026a6aa633fdb11d772146be0bf # v4
+        uses: actions/cache/save@v4
         with:
           path: .lycheecache
           key: cache-lychee-${{ env.DATEOFDAY }}
