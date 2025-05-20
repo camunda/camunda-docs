@@ -23,7 +23,7 @@ jobs:
           key: cache-lychee-${{ env.DATEOFDAY }}
 
       - name: Link Checker
-        uses: lycheeverse/lychee-action@v1.9.0
+        uses: lycheeverse/lychee-action@v1.10.0
         with:
           fail: true
           args: -c ./lychee-external-links.toml --base . --cache --max-cache-age 1d . --verbose --no-progress 'docs/**/*.md' 'versioned_docs/**/*.md'
