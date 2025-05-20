@@ -6,7 +6,7 @@ on:
 jobs:
   tear-down-preview-env:
     if: github.event.label.name == 'deploy' || (github.event.action == 'closed' && contains( github.event.pull_request.labels.*.name, 'deploy'))
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
     name: teardown-preview-env
     steps:
