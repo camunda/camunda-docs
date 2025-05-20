@@ -2,6 +2,7 @@ name: Send message to Slack when a release is published
 on:
   release:
     types: [published]
+  workflow_dispatch: {}
 
 jobs:
   slack-send:
