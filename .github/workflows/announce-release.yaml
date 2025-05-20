@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - id: slack
-        uses: slackapi/slack-github-action@v1.25.0
+        uses: slackapi/slack-github-action@v1.27.1
         with:
           # This data can be any valid JSON from a previous step in the GitHub Action
           payload: |
