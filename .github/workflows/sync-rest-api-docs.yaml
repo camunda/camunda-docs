@@ -37,10 +37,10 @@ jobs:
 
       - name: Generate token
         id: generate_token
-        uses: tibdex/github-app-token@v2
+        uses: actions/create-github-app-token@v2
         with:
-          app_id: ${{ secrets.GH_APP_API_SYNC_ID }}
-          private_key: ${{ secrets.GH_APP_API_SYNC_KEY }}
+          app-id: ${{ secrets.GH_APP_API_SYNC_ID }}
+          private-key: ${{ secrets.GH_APP_API_SYNC_KEY }}
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
