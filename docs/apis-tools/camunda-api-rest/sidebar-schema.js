@@ -3,7 +3,12 @@
 module.exports = {
   "Orchestration Cluster API": [
     "apis-tools/camunda-api-rest/camunda-api-rest-overview",
-    "apis-tools/camunda-api-rest/camunda-api-rest-guidelines",
+    {
+      Guidelines: [
+        "apis-tools/camunda-api-rest/camunda-api-rest-guidelines-overview",
+        "apis-tools/camunda-api-rest/camunda-api-rest-guidelines-data",
+      ],
+    },
     "apis-tools/camunda-api-rest/camunda-api-rest-authentication",
     {
       Tutorials: [
