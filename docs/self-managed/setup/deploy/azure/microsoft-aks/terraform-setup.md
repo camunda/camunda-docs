@@ -521,18 +521,20 @@ Save the following as `storage-class.yml`:
 https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/manifests/storage-class.yml
 ```
 
-Apply it using:
-
-```bash
-kubectl apply -f storage-class.yml
-```
-
-Then remove the default attribute from the original StorageClass:
+**First, remove the default attribute from the original StorageClass:**
 
 ```bash
 kubectl patch storageclass managed-csi \
   -p '{"metadata":{"annotations":{"storageclass.kubernetes.io/is-default-class":"false"}}}'
 ```
+
+**Then, apply the new StorageClass:**
+
+```bash
+kubectl apply -f storage-class.yml
+```
+
+**Always verify with** `kubectl get storageclass` **afterwards.**
 
 This must be applied **before installing the Camunda Helm chart** so that PersistentVolumeClaims (PVCs) are provisioned with the correct performance characteristics.
 
