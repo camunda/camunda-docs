@@ -11,7 +11,7 @@ Multi-tenancy is currently only available for Camunda 8 Self-Managed with authen
 
 To successfully configure multi-tenancy, you must do the following:
 
-- Ensure Identity is configured with a [database](/self-managed/identity/deployment/configuration-variables.md#database-configuration).
+- Ensure Identity is configured with a [database](/self-managed/identity/miscellaneous/configuration-variables.md#database-configuration).
 - Enable the multi-tenancy flag globally through [Helm charts](/self-managed/setup/install.md) **or** via environment variables for each required component.
 
 Multi-tenancy must be enabled for each required component. Using the single global flag with Helm charts is recommended.
@@ -26,7 +26,7 @@ Visit [the Helm chart configuration](https://artifacthub.io/packages/helm/camund
 Without Helm charts, multi-tenancy can be enabled using environment variables. This feature **must** be
 enabled in **all** required components, see:
 
-- [Identity](../../../self-managed/identity/deployment/configuration-variables/#feature-flags)
+- [Identity](/self-managed/identity/miscellaneous/configuration-variables.md#feature-flags)
 - [Zeebe](../../../self-managed/zeebe-deployment/configuration/gateway-config/#zeebegatewaymultitenancy)
 - [Operate](../../../self-managed/operate-deployment/operate-configuration/#multi-tenancy)
 - [Tasklist](../../../self-managed/tasklist-deployment/tasklist-configuration/#multi-tenancy)
@@ -51,4 +51,4 @@ Helm charts throw an error if multi-tenancy is enabled, but no external database
 
 ### Solution: Configure Identity with a database
 
-Ensure Identity is configured with a [database](/self-managed/identity/deployment/configuration-variables.md#database-configuration).
+Ensure Identity is configured with a [database](/self-managed/identity/miscellaneous/configuration-variables.md#database-configuration).

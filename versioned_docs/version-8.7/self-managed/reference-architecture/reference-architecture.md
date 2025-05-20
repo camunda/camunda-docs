@@ -67,7 +67,7 @@ Additionally, Web Modeler and Console require the following:
 
 - [Identity](/self-managed/identity/what-is-identity.md): A service for managing user authentication and authorization.
 
-The Identity deployment is typically a shared entity between the orchestration cluster and Web Modeler and Console. For production environments, using an external [identity provider](/self-managed/setup/guides/connect-to-an-oidc-provider.md) is recommended.
+The Identity deployment is typically a shared entity between the orchestration cluster and Web Modeler and Console. For production environments, using an external [identity provider](/self-managed/identity/configuration/connect-to-an-oidc-provider.md) is recommended.
 
 ### Databases
 

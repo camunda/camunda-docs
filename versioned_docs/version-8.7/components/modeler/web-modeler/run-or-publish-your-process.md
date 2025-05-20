@@ -37,7 +37,7 @@ To deploy, click **Deploy** in the upper right corner of the modeling screen:
 
 ![The deploy dialog of a BPMN diagram](img/web-modeler-deploy.png)
 
-In Self-Managed, you can deploy your diagram to the cluster defined in your Web Modeler [configuration](/self-managed/modeler/web-modeler/configuration/configuration.md#clusters). You should have the `Zeebe` [role](/self-managed/identity/user-guide/roles/manage-roles.md#add-a-role) assigned in Identity to be authorized to deploy.
+In Self-Managed, you can deploy your diagram to the cluster defined in your Web Modeler [configuration](/self-managed/modeler/web-modeler/configuration/configuration.md#clusters). You should have the `Zeebe` [role](/self-managed/identity/application-user-group-role-management/manage-roles.md#add-a-role) assigned in Identity to be authorized to deploy.
 
 ### Before deploying a process
 
@@ -241,7 +241,7 @@ As soon as a matching event is received, a process instance will be started. To 
 - Make sure that the process is accessible to the appropriate users only.
 
 :::note
-When working on Camunda 8 Self-Managed, you can define access permissions on a per-process level using [Identity Resource Authorizations](../../../self-managed/identity/user-guide/authorizations/managing-resource-authorizations.md).
+When working on Camunda 8 Self-Managed, you can define access permissions on a per-process level using [Identity Resource Authorizations](../../../self-managed/identity/access-management/resource-authorizations.md).
 :::
 
 ### Missing client credentials

@@ -119,7 +119,7 @@ More information can be found in the [Ingress setup](/self-managed/setup/guides/
 
 Once secure HTTPS connections are enabled and correctly configured via Ingress, the next stage to consider is configuring authentication.
 
-This example uses AWS Simple Active Directory, which provides a subset implementation of a Microsoft Active Directory, and is compatible with our [Microsoft Entra ID](/self-managed/setup/guides/connect-to-an-oidc-provider.md) guide.
+This example uses AWS Simple Active Directory, which provides a subset implementation of a Microsoft Active Directory, and is compatible with our [Microsoft Entra ID](/self-managed/identity/configuration/connect-to-an-oidc-provider.md) guide.
 
 The following is an example configuration to add to your `values.yaml` files:
 
@@ -198,7 +198,7 @@ You must create a Kubernetes secret for all client secrets that exist in each ap
         redirectUrl: https://modeler.management-host.com
 ```
 
-For more information, see how to [connect to an OpenID Connect provider](/self-managed/setup/guides/connect-to-an-oidc-provider.md#configuration).
+For more information, see how to [connect to an OpenID Connect provider](/self-managed/identity/configuration/connect-to-an-oidc-provider.md#configuration).
 
 ### Connect external databases
 

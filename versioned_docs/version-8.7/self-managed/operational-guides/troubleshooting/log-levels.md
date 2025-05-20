@@ -24,4 +24,4 @@ Enable logging for each component of Camunda 8 using the following instructions:
 - [Operate](/self-managed/operate-deployment/operate-configuration.md#logging)
 - [Tasklist](/self-managed/tasklist-deployment/tasklist-configuration.md#logging)
 - [Web Modeler](/self-managed/modeler/web-modeler/configuration/logging.md)
-- [Identity](/self-managed/identity/user-guide/configuration/configure-logging.md)
+- [Identity](/self-managed/identity/miscellaneous/configure-logging.md)

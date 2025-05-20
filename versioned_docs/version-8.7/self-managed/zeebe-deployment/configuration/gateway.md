@@ -281,7 +281,7 @@ security:
 
 :::note
 The Zeebe configuration properties for Camunda Identity are deprecated as of version `8.4.0`. Use the dedicated
-Camunda Identity properties or the [corresponding SDK environment variables](../../identity/deployment/configuration-variables.md#camunda-identity-sdk-configuration).
+Camunda Identity properties or the [corresponding SDK environment variables](/self-managed/identity/miscellaneous/configuration-variables.md#camunda-identity-sdk-configuration).
 :::
 
 | Field            | Description                                                                                                                                                                                          | Example value                                     |
@@ -498,7 +498,7 @@ Read more [in the multi-tenancy documentation](../../../self-managed/concepts/mu
 :::note
 For now, multi-tenancy is only supported in combination with Identity.
 To use multi-tenancy, you must set [`authentication.mode`](#zeebegatewayclustersecurityauthentication) to `'identity'` and specify the
-`camunda.identity.baseUrl` property or the [corresponding Camunda Identity environment variable](../../identity/deployment/configuration-variables.md#core-configuration)
+`camunda.identity.baseUrl` property or the [corresponding Camunda Identity environment variable](/self-managed/identity/miscellaneous/configuration-variables.md#core-configuration)
 as well.
 :::
 

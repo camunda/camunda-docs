@@ -1,18 +1,13 @@
 ---
 id: manage-roles
-title: Manage users and roles
-sidebar_label: "Manage users and roles"
-description: "Use Identity to manage users and roles"
+title: Manage roles
+sidebar_label: "Manage roles"
+description: "Use Identity to manage roles"
 ---
 
-Access to the components within Camunda 8 can be controlled by the roles assigned to a user.
+Roles define what a user or application is allowed to do by grouping related [permissions](versioned_docs/version-8.7/self-managed/identity/access-management/manage-permissions.md) together. You can assign roles — either [directly to users](#assign-a-role-to-a-user) or [through Groups](/self-managed/identity/application-user-group-role-management/manage-groups.md#assign-roles-to-a-group) — to simplify and standardize access control across your system. Roles help you enforce consistent permission sets, reduce errors, and scale access management as your organization grows.
 
-Roles are a way to group sets of [permissions](/self-managed/identity/user-guide/roles/manage-permissions.md). Roles can be assigned to users.
-
-:::caution Write access needed
-To add and assign a role to a user, you need to have write access to Identity.
-Read our [guide on managing user access](/self-managed/identity/user-guide/authorizations/managing-user-access.md) to learn more.
-:::
+# Role management
 
 ## Add a role
 
