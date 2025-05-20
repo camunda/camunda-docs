@@ -36,11 +36,11 @@ To add additional clusters, increment the `0` value for each variable (`CAMUNDA_
 | `CAMUNDA_MODELER_CLUSTERS_0_URL_ZEEBE_REST`          | [Internal or external](#notes-on-host-names-and-port-numbers) address where the Zeebe REST API can be reached. | `http://camunda-zeebe-gateway:8080`, `https://camunda-zeebe-gateway:8080`   |
 | `CAMUNDA_MODELER_CLUSTERS_0_URL_OPERATE`             | [Internal or external](#notes-on-host-names-and-port-numbers) address where Operate can be reached.            | `http://camunda-operate:80`, `https://camunda-operate:80`                   |
 | `CAMUNDA_MODELER_CLUSTERS_0_URL_TASKLIST`            | [Internal or external](#notes-on-host-names-and-port-numbers) address where Tasklist can be reached.           | `http://camunda-tasklist:80`, `https://camunda-tasklist:80`                 |
-| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_URL`               | The address of your token issuer. Required for authentication `CLIENT_CREDENTIALS`.                            | `https://auth.example.com/token`                                            |
-| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_SCOPE`             | A list of the scopes to use with this cluster separated by spaces.                                             | `openid email profile`                                                      |
-| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_AUDIENCE_ZEEBE`    | The permission name for Zeebe.                                                                                 | `zeebe-api`                                                                 |
-| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_AUDIENCE_OPERATE`  | The permission name for Operate.                                                                               | `operate-api`                                                               |
-| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_AUDIENCE_TASKLIST` | The permission name for Tasklist.                                                                              | `tasklist-api`                                                              |
+| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_URL`               | The address of your token issuer. Only required for authentication type `CLIENT_CREDENTIALS`.                  | `https://auth.example.com/token`                                            |
+| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_SCOPE`             | [optional]<br/>A list of the scopes to use with this cluster separated by spaces.                              | `openid email profile`                                                      |
+| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_AUDIENCE_ZEEBE`    | The OAuth token audience for Zeebe. Only required for authentication type `CLIENT_CREDENTIALS`.                | `zeebe-api`                                                                 |
+| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_AUDIENCE_OPERATE`  | The OAuth token audience for Operate. Only required for authentication type `CLIENT_CREDENTIALS`.              | `operate-api`                                                               |
+| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_AUDIENCE_TASKLIST` | The OAuth token audience for Tasklist. Only required for authentication type `CLIENT_CREDENTIALS`.             | `tasklist-api`                                                              |
 
 #### Available authentication methods
 
