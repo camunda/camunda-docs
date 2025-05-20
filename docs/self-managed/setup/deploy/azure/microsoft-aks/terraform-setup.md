@@ -246,7 +246,7 @@ To start, set the required values as environment variables upfront to avoid repe
 https://github.com/camunda/camunda-deployment-references/blob/main/azure/common/procedure/storage-account/storage-account-env-vars.sh
 ```
 
-Replace `<your-region>` with your chosen Azure region (for example, `westeurope`).
+Define the value for `AZURE_LOCATION` with your chosen Azure region (for example, `westeurope`).
 
 Now, follow these steps to create the storage account with versioning enabled:
 
