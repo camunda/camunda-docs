@@ -33,7 +33,7 @@ jobs:
           echo "EOF" >> $GITHUB_ENV
 
       - name: Comment on PR if version updates are potentially missing
-        uses: thollander/actions-comment-pull-request@v2
+        uses: thollander/actions-comment-pull-request@v3
         if: ${{ env.MESSAGES != '' }}
         with:
           message: |
@@ -45,7 +45,7 @@ jobs:
           comment_tag: check-versions
 
       - name: Comment 'LGTM' on PR once potential version issues are resolved
-        uses: thollander/actions-comment-pull-request@v2
+        uses: thollander/actions-comment-pull-request@v3
         if: ${{ env.MESSAGES == '' }}
         with:
           message: |
