@@ -65,6 +65,16 @@ Start by creating a `values.yml` file to store the configuration for your enviro
 https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/helm-values/values-no-domain.yml
 ```
 
+#### Reference the credentials in secrets
+
+Before installing the Helm chart, create Kubernetes secrets to store the Keycloak database authentication credentials and the OpenSearch authentication credentials.
+
+To create the secrets, run the following commands:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/create-external-db-secrets.sh
+```
+
 ### 2. Configure your deployment
 
 #### Enable Enterprise components
