@@ -135,7 +135,6 @@ You can run scenarios on the process definition page by clicking either the **Ru
 
 ### Limitations {#scenarios-limitations}
 
-- Scenarios are currently only available in Camunda 8 SaaS.
 - Scenarios are stored in the browser's local storage, making them accessible only in the current browser and not usable outside of Play, in a different browser, or by a collaborator.
 - Call activities are not supported. Scenarios containing call activities cannot be executed successfully.
 - Scenario paths that include process modifications are not supported.
