@@ -1,11 +1,10 @@
 ---
-id: camunda-api-rest-guidelines-overview
-title: "Overview"
-description: "Learn about the basic guidelines, structures, and conventions of the Camunda 8 REST API."
+id: camunda-api-rest-guidelines-conventions
+title: "Conventions"
+description: "Learn about the basic conventions and structures of the Camunda 8 REST API."
 ---
 
 Camunda follows a mix of proposed standards and best practices for RESTful design and consistent implementation across all components.
-This guide details some of the foundations Camunda uses to build their C8 APIs.
 
 ## Naming conventions
 

@@ -5,8 +5,8 @@ module.exports = {
     "apis-tools/camunda-api-rest/camunda-api-rest-overview",
     {
       Guidelines: [
-        "apis-tools/camunda-api-rest/camunda-api-rest-guidelines-overview",
-        "apis-tools/camunda-api-rest/camunda-api-rest-guidelines-data",
+        "apis-tools/camunda-api-rest/guidelines/camunda-api-rest-guidelines-conventions",
+        "apis-tools/camunda-api-rest/guidelines/camunda-api-rest-guidelines-data",
       ],
     },
     "apis-tools/camunda-api-rest/camunda-api-rest-authentication",
