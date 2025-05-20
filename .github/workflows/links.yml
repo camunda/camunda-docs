@@ -17,7 +17,7 @@ jobs:
         run: echo "DATEOFDAY=$(date +%Y-%m-%d)" >> "$GITHUB_ENV"
 
       - name: Restore lychee cache
-        uses: actions/cache/restore@5a3ec84eff668545956fd18022155c47e93e2684 # v4
+        uses: actions/cache/restore@v4
         with:
           path: .lycheecache
           key: cache-lychee-${{ env.DATEOFDAY }}
@@ -30,7 +30,7 @@ jobs:
           token: "${{ secrets.GITHUB_TOKEN }}"
 
       - name: Cache links
-        uses: actions/cache/save@5a3ec84eff668545956fd18022155c47e93e2684 # v4
+        uses: actions/cache/save@v4
         with:
           path: .lycheecache
           key: cache-lychee-${{ env.DATEOFDAY }}
