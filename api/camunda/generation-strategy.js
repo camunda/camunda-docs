@@ -1,5 +1,4 @@
 const removeDuplicateVersionBadge = require("../remove-duplicate-version-badge");
-const replace = require("replace-in-file");
 const fs = require("fs");
 
 function preGenerateDocs(config) {
@@ -15,11 +14,16 @@ function preGenerateDocs(config) {
     ...addFrequentlyLinkedDocs(config.version),
   ];
 
-  replace.sync({
-    files: config.specPath,
-    from: specUpdates.map((x) => x.from),
-    to: specUpdates.map((x) => x.to),
-  });
+  (async () => {
+    const replaceModule = await import("replace-in-file");
+    const { replaceInFileSync } = replaceModule.default;
+
+    replaceInFileSync({
+      files: config.specPath,
+      from: specUpdates.map((x) => x.from),
+      to: specUpdates.map((x) => x.to),
+    });
+  })();
 }
 
 function postGenerateDocs(config) {

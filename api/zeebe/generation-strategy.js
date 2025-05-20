@@ -1,4 +1,3 @@
-const replace = require("replace-in-file");
 const removeDuplicateVersionBadge = require("../remove-duplicate-version-badge");
 
 function preGenerateDocs(config) {
@@ -22,24 +21,27 @@ function hackChangesetDescription(specPath) {
   // This adjustment replaces the description of the `Changeset` schema with the current description of
   //   the `UserTaskUpdateRequest.changeset` property.
   console.log("hacking changeset description...");
-  replace.sync({
-    files: `${specPath}`,
-    from: /^      description: A map of changes.$/m,
-    to: `      description: |
-        JSON object with changed task attribute values.
+  (async () => {
+    const { replaceInFileSync } = await import("replace-in-file");
+    replaceInFileSync({
+      files: `${specPath}`,
+      from: /^      description: A map of changes.$/m,
+      to: `      description: |
+          JSON object with changed task attribute values.
 
-        The following attributes can be adjusted with this endpoint, additional attributes
-        will be ignored:
+          The following attributes can be adjusted with this endpoint, additional attributes
+          will be ignored:
 
-        * \`candidateGroups\` - reset by providing an empty list
-        * \`candidateUsers\` - reset by providing an empty list
-        * \`dueDate\` - reset by providing an empty String
-        * \`followUpDate\` - reset by providing an empty String
+          * \`candidateGroups\` - reset by providing an empty list
+          * \`candidateUsers\` - reset by providing an empty list
+          * \`dueDate\` - reset by providing an empty String
+          * \`followUpDate\` - reset by providing an empty String
 
-        Providing any of those attributes with a \`null\` value or omitting it preserves
-        the persisted attribute's value.
+          Providing any of those attributes with a \`null\` value or omitting it preserves
+          the persisted attribute's value.
 
-        The assignee cannot be adjusted with this endpoint, use the Assign task endpoint.
-        This ensures correct event emission for assignee changes.`,
-  });
+          The assignee cannot be adjusted with this endpoint, use the Assign task endpoint.
+          This ensures correct event emission for assignee changes.`,
+    });
+  })();
 }

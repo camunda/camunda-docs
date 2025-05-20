@@ -1,5 +1,3 @@
-const replace = require("replace-in-file");
-
 function makeServerDynamic(specFile) {
   // The source spec has a hardcoded generated server URL.
   //   We can make it dynamic so that the user can edit it and get more accurate code samples.
@@ -17,11 +15,14 @@ function makeServerDynamic(specFile) {
       schema:
         default: http
         description: The schema of the API server.`;
-  replace.sync({
-    files: specFile,
-    // This regex includes the following `description` line, which becomes inaccurate when we make the server dynamic.
-    from: /^. - url:.*\n.   description:.*$/m,
-    to: dynamicServerDefinition,
-  });
+  (async () => {
+    const { replaceInFileSync } = await import("replace-in-file");
+    replace.sync({
+      files: specFile,
+      // This regex includes the following `description` line, which becomes inaccurate when we make the server dynamic.
+      from: /^. - url:.*\n.   description:.*$/m,
+      to: dynamicServerDefinition,
+    });
+  })();
 }
 exports.makeServerDynamic = makeServerDynamic;
