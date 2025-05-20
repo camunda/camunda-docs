@@ -8,7 +8,7 @@ jobs:
     steps:
       - name: Checkout last two commits of the PR
         # The last *two* commits are (1) everything in this branch, and (2) the parent of this branch.
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 2
 
