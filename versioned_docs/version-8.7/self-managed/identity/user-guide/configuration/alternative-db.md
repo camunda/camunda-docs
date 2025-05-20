@@ -16,8 +16,8 @@ Identity is tested against the following alternative relational databases:
 
 | Camunda version | Database version | Driver version |
 | --------------- | ---------------- | -------------- |
-| 8.6.13          | Oracle 19C       | 21.3.0.0       |
-| 8.6.13          | SQL Server 2019  | 12.10.0.jre11  |
+| 8.7.1           | Oracle 19C       | 21.3.0.0       |
+| 8.7.1           | SQL Server 2019  | 12.10.0.jre11  |
 
 ## Oracle database configuration
 
