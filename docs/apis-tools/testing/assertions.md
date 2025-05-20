@@ -311,6 +311,7 @@ assertThat(byTaskName("User Task")).isCompleted();
 // you may optionally specify the process instance key:
 assertThat(byElementId("user-task-id", processInstanceKey)).isCompleted();
 assertThat(byTaskName("User Task", processInstanceKey)).isCompleted();
+
 // custom selector implementation
 assertThat(userTask -> { .. }).isCompleted();
 ```
