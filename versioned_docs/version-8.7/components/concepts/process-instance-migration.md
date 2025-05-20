@@ -363,12 +363,13 @@ In the following cases, the process instance can't apply the migration plan and 
   - Each child instance of a multi-instance body should be migrated separately because they belong to another process instance.
   - It is not possible to migrate a parallel multi-instance body to a sequential multi-instance body and vice versa.
 - Joining parallel gateway limitations:
+
   - When migrating a process instance where a sequence flow leading to a joining parallel gateway was taken, all the following conditions must be met:
     - The target process definition must contain a joining parallel gateway that corresponds to the joining parallel gateway from the source process definition
     - The taken sequence flow in the source process must have a corresponding sequence flow in the target process with the same ID, and this sequence flow must remain connected to the joining parallel gateway
     - The number of incoming sequence flows to the joining parallel gateway must be the same in both the source and target process definitions
     - The diagram below illustrates how to correctly map taken sequence flows during migration while preserving their IDs and connections to the joining parallel gateway
-  ![Migrate taken sequence flow leading to joining parallel gateway](assets/process-instance-migration/migration-joining-parallel-gateway-scenario.png)
+      ![Migrate taken sequence flow leading to joining parallel gateway](assets/process-instance-migration/migration-joining-parallel-gateway-scenario.png)
 
 - Only [supported BPMN elements](#supported-bpmn-elements) can be migrated.
 - The following scenarios cannot be migrated:
