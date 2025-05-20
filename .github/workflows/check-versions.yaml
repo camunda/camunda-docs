@@ -42,7 +42,7 @@ jobs:
             ${{ env.MESSAGES }}
 
             You may have done this intentionally, but we wanted to point it out in case you didn't. You can read more about the versioning within our docs in our [documentation guidelines](https://github.com/camunda/camunda-docs/blob/c666b7e5e35bfe31468ce4ac679ea7b62ab86d73/howtos/documentation-guidelines.md#versions).
-          comment_tag: check-versions
+          comment-tag: check-versions
 
       - name: Comment 'LGTM' on PR once potential version issues are resolved
         uses: thollander/actions-comment-pull-request@v3
@@ -52,5 +52,5 @@ jobs:
             :wave: :robot: :white_check_mark: Looks like the changes were ported across versions, nice job! :tada:
 
             You can read more about the versioning within our docs in our [documentation guidelines](https://github.com/camunda/camunda-docs/blob/c666b7e5e35bfe31468ce4ac679ea7b62ab86d73/howtos/documentation-guidelines.md#versions).
-          comment_tag: check-versions
-          create_if_not_exists: false
+          comment-tag: check-versions
+          create-if-not-exists: false
