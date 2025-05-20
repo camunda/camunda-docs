@@ -5,61 +5,62 @@ title: AI Agent connector
 description: AI agent connector implementing a feedback loop using for user interactions and toolcalls with an LLM.
 ---
 
-Use the **AI Agent** outbound connector to allow AI agents to interact with Large Language Models (LLMs).
+Use the **AI Agent** outbound connector to integrate Large Language Models (LLMs) with AI agents.
 
 ## About this connector
 
-The AI Agent connector allows AI agents to integrate with an LLM to provide interaction/reasoning capabilities. It is designed to be used in combination with an ad-hoc sub-process and a paired feedback loop for user interaction and tool selection.
+The AI Agent connector enables AI agents to integrate with an LLM to provide interaction/reasoning capabilities. This connector is designed for use with an ad-hoc sub-process in a feedback loop, providing automated user interaction and tool selection.
 
-For example, when building an AI agent you can integrate this connector so your AI agent can autonomously select and execute ad-hoc sub-processes, by evaluating the current process context and determining the most relevant tasks and tools to use.
+For example, this connector enables an AI agent to autonomously select and execute ad-hoc sub-processes by evaluating the current process context and determining the relevant tasks and tools to use in response.
 
-Core features include:
+Core features include the following:
 
-- **LLM provider support**: Support for different LLM providers, including OpenAI and Anthropic.
-- **Memory**: Provides conversational/short-term memory handling to enable feedback loops. For example, a user can ask follow-up questions to an AI agent response.
-- **Tool selection**: Support for an AI agent to interact with tasks within an ad-hoc sub-process, allowing use of all Camunda features such as connectors and user tasks (human-in-the-loop). Automatic **tool resolution** allows an AI agent to identify the tools available in an ad-hoc sub-process.
+| Feature              | Description                                                                                                                                                                                                                                                                         |
+| :------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| LLM provider support | Supports a range of LLM providers, such as OpenAI and Anthropic.                                                                                                                                                                                                                    |
+| Memory               | Provides conversational/short-term memory handling to enable feedback loops. For example, this allows a user to ask follow-up questions to an AI agent response.                                                                                                                    |
+| Tool calling         | Support for an AI agent to interact with tasks within an ad-hoc sub-process, allowing use of all Camunda features such as connectors and user tasks (human-in-the-loop). Automatic **tool resolution** allows an AI agent to identify the tools available in an ad-hoc sub-process. |
 
 :::note
 You can also use the AI Agent connector independently, although it is designed to be used with an ad-hoc sub-process to define the tools an AI agent can use.
 :::
 
 :::info
-New to agentic AI orchestration? See [additional resources](#additional-resources) for examples of how you can use the AI Agent connector.
+New to agentic orchestration? See [additional resources](#additional-resources) for examples of how you can use the AI Agent connector.
 :::
 
 ## How to use this connector
 
+This connector is typically used in a feedback loop, with the connector task repeatedly looped back to during an AI agent process.
+
+For example, the following diagram shows a tool calling loop:
+
 ![agenticai-ai-agent-loop-overview.png](../img/agenticai-ai-agent-loop-overview.png)
 
-The basic concept of the AI Agent connector is to be used as part of a **feedback loop**, re-entering the AI Agent
-connector task multiple times. Depending on your use case, the connector can be part of different loops:
+1. A request is made to the AI agent connector task, where the LLM determines what action to take for the process to continue.
+1. If the AI agent decides that further action is needed, the process enters the ad-hoc sub-process and calls any tools deemed necessary to satisfactorily resolve the request.
+1. The process loops back and re-enters the AI agent connector task, where the LLM decides (with contextual memory) if more action is needed before the process can continue. The process loops repeatedly in this manner until the AI agent decides it is complete, and passes the AI agent response to the next step in the process.
 
-- **Response interaction loop:** after returning a response (and not calling any tools), the process can be modeled to
-  act upon the response. For example, the response can be presented to a user who might ask follow-up questions which
-  can be fed back to the AI Agent connector.
-- **Tool calling loop:** In combination with an ad-hoc sub-process, the AI Agent connector will resolve available tools
-  and their input parameters and pass these tool definitions to the LLM. The LLM will then generate a response, which
-  might include tool calls (a request to call a tool paired with the input parameters). If tool calls are requested,
-  the process can be modelled to pass these tool calls to the ad-hoc sub-process and to return the tool call results
-  to the AI Agent task by modelling the feedback loop as shown in the diagram above.
+### Feedback loop use cases
+
+Typical feedback loop use cases for this connector include the following:
+
+- **Tool calling:** In combination with an ad-hoc sub-process, the AI Agent connector will resolve available tools and their input parameters, and pass these tool definitions to the LLM. The LLM generates a response, that might include tool calls (a request to call a tool paired with the input parameters). If tool calls are requested, model the process to pass these tool calls to the ad-hoc sub-process and to return the tool call results to the AI Agent task by modelling the feedback loop.
+
+- **Response interaction:** After returning a response (and without calling any tools), model the process to act upon the response. For example, present the response to a user who can then ask follow-up questions back to the AI Agent connector.
 
 As the agent preserves the context of the conversation, follow-up questions/tasks and handling of tool call results can
 relate to the previous interaction with the LLM, allowing the LLM to provide more relevant responses.
 
-A crucial concept to make this work is the **Agent context** process variable which contains all the necessary
-information to allow re-entering the AI Agent connector task with the same context as before. This variable is both
-mapped as **input** and **output** variable of the connector and will be updated on each agent execution.
+An important concept to understand is the use of the **Agent context** process variable to store information required for allowing re-entry to the AI Agent connector task with the same context as before. This variable is mapped as both an **input** and **output** variable of the connector and updates with each agent execution.
 
 :::important
-When modelling an AI Agent, make sure to align the agent context input variable and the response variable/expression so
-that the context update is correctly passed to the next execution of the AI Agent connector task.
+When modelling an AI Agent, you must align the agent context input variable and the response variable/expression so that the context update is correctly passed to the next execution of the AI Agent connector task.
 :::
 
 ### Example conversation
 
-On a high level the conversation with the AI Agent connector, including both user and tool feedback loops, can look like
-the following. The conversation awareness provided by the agent context allows use cases like the user just responding
-with `Yes, please proceed` and the agent understanding what to do next.
+The following is a high-level example conversation with the AI Agent connector, including both user and tool feedback loops. The conversational awareness provided by the agent context allows use cases such as the user only responding with `Yes, please proceed`, with the agent understanding what to do next.
 
 ```
 # Initial input/user prompt
@@ -81,54 +82,68 @@ Tool Call Result: {"Create_Credit_Card": {"success": true}}
 Agent: John Doe's credit card has been created successfully.
 ```
 
+## Prerequisites
+
+The following prerequisites are required to use this connector:
+
+| Prerequisite                 | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| :--------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| LLM setup and authentication | <p>You must have previously set up an account with access and authentication details for the supported LLM model provider you want to use with this connector.</p><p><ul><li>[Anthropic](http://anthropic.com/) (Claude models)</li><li>[AWS Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html)</li><li>[OpenAI](http://openai.com/)</li></ul></p><p>For example, to use an LLM model provided by Amazon Bedrock, you must have an AWS account with an access key and secret key to execute `InvokeModel` or `Converse` actions.</p><p>For OpenAI, you must configure the [OpenAI model](https://platform.openai.com/docs/models) and obtain an OpenAI API key to use for authentication.</p> |
+
 ## Configuration
 
 ### Model Provider
 
-:::note
-Use Camunda secrets to store credentials and avoid exposing sensitive information directly from the process. Refer
-to [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
+Select and configure authentication for the LLM model **Provider** you want to use, from the following supported providers:
+
+:::note notes
+
+- Different setup/authentication fields are shown depending on the provider you select.
+- Use Camunda secrets to store credentials and avoid exposing sensitive information directly from the process. See [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
+
 :::
-
-The first step to configure on the AI Agent connector is the desired LLM provider. The connector currently
-supports the following providers with more being added in the future:
-
-- [Anthropic](http://anthropic.com/) (Claude models)
-- [AWS Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html)
-- [OpenAI](http://openai.com/)
-
-Depending on the provider, the available authentication configurations will be different.
 
 #### Anthropic
 
-Provides support for [Anthropic's Messages API](https://docs.anthropic.com/en/api/messages). To
-get started, configure the desired model (see
-[documentation](https://docs.anthropic.com/en/docs/about-claude/models/all-models)) and an API key.
+Select this option to use an Anthropic Claude LLM model (uses the [Anthropic Messages API](https://docs.anthropic.com/en/api/messages)).
+
+| Field             | Required | Description                                                                                                                   |
+| :---------------- | :------- | :---------------------------------------------------------------------------------------------------------------------------- |
+| Anthropic API Key | Yes      | Your Anthropic account API Key for authorization to the [Anthropic Messages API](https://docs.anthropic.com/en/api/messages). |
+
+:::info
+For more information about Anthropic Claude, refer to the [Claude models overview](https://docs.anthropic.com/en/docs/about-claude/models/all-models).
+:::
 
 #### Bedrock
 
-:::note
-Model availablilty depends on the region and the model you are using. You might need to first request the model to be
-available for your account.
+Select this option to use a model provided by the [AWS Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html) service, using the
+[Converse](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html) API.
+
+| Field          | Required | Description                                                                                                                                                                                                                |
+| :------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Region         | Yes      | The AWS region. Example: `us-east-1`                                                                                                                                                                                       |
+| Authentication | Yes      | Select the authentication type you want to use to authenticate the connector with AWS. To learn more about configuring AWS authentication, see [AWS Bedrock connector authentication](./amazon-bedrock.md#authentication). |
+
+Model availability depends on the region and model you use. You might need to request a model is made available for your account. To learn more about configuring access to foundation models, refer to [access to Amazon Bedrock foundation models](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access-modify.html).
+
+:::info
+For a list of models, refer to [supported foundation models in Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html).
 :::
-
-Provides support for models provided through
-the [AWS Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html) service through the
-[`Converse`](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html) API.
-
-For detailed documentation on the authentication configuration, see
-the [authentication section of the dedicated AWS Bedrock connector](./amazon-bedrock.md#authentication).
-
-For a list of **models**, please consult
-the [documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html).
 
 #### OpenAI
 
-Provides support for [OpenAI's Chat Completion API](https://platform.openai.com/docs/api-reference/chat). To get
-started, configure the desired **model** (see [documentation](https://platform.openai.com/docs/models)) and an
-**API key**.
+Select this option to use the [OpenAI Chat Completion API](https://platform.openai.com/docs/api-reference/chat).
 
-Optionally, you can configure an **organization ID** and/or **project ID** if needed for your account.
+| Field           | Required | Description                                                                                                                                              |
+| :-------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| OpenAI API Key  | Yes      | Your OpenAI account API Key for authorization.                                                                                                           |
+| Organization ID | No       | For members of multiple organizations. If you belong to multiple organizations, specify the organization ID to use for API requests with this connector. |
+| Project ID      | No       | If you access projects through a legacy user API key, specify the project ID to use for API requests with this connector.                                |
+
+:::info
+To learn more about authentication to the OpenAPI API, refer to [OpenAPI platform API reference](https://platform.openai.com/docs/api-reference/introduction).
+:::
 
 ### Model
 
