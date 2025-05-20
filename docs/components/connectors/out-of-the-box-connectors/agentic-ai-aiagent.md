@@ -180,36 +180,28 @@ The **System Prompt** is a crucial part of the AI Agent connector configuration,
 Currently, the system prompt is only added to the agent context once, when the AI Agent connector is called for the first time. This means you cannot alter the system prompt in follow-up interactions, even if you include different data in the input field.
 :::
 
-| Field                    | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| :----------------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| System Prompt            | Yes      | <p>Specify a system prompt to define how the LLM should act.</p><p><ul><li><p>A minimal system prompt example is provided as a starting point, but you should consider customizing the system prompt to meet your needs.</p></li><li><p>Within the **System Prompt** field, you can use FEEL expressions or inject parameters into the text. Use the `{{parameter}}` syntax to inject any parameters defined in the **System Prompt Parameters** field (FEEL context).</p><p>Example: `{{current_date_time}}`.</p></li></ul></p> |
-| System Prompt Parameters | No       | <p>Define a map of parameters you can use in `{{parameter}}` format in the **System Prompt** field.</p><p>A set of default parameters (`current_date`, `current_time`, `current_date_time`) is provided that you don't need to explicitly define in this field.</p>                                                                                                                                                                                                                                                              |
+| Field                    | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| :----------------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| System Prompt            | Yes      | <p>Specify a system prompt to define how the LLM should act.</p><p><ul><li><p>A minimal example system prompt is provided as a starting point for you to customize.</p></li><li><p>You can use FEEL expressions or inject parameters into the text in this field, using the `{{parameter}}` syntax to inject any parameters defined in the **System Prompt Parameters** field (FEEL context).</p><p>Example: `{{current_date_time}}`.</p></li></ul></p> |
+| System Prompt Parameters | No       | <p>Define a map of parameters you can use in `{{parameter}}` format in the **System Prompt** field.</p><p>The default parameters (`current_date`, `current_time`, `current_date_time`) do not need to be explicitly defined in this field.</p>                                                                                                                                                                                                          |
 
 ### User Prompt
 
-The **User Prompt** contains the actual request to the LLM. This could either contain the initial request or a follow-up
-request when being part of a response interaction feedback loop. The value provided as part of this field will be added
-to the conversation memory and passed to the LLM call. In the example above, this would be the messages prefixed with
-`User:`.
+The **User Prompt** contains the actual request to the LLM model.
 
-Like the system prompt, the user prompt field supports a list of **User Prompt Parameters** with the same set of
-provided
-default parameters.
+| Field                  | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| :--------------------- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| User Prompt            | Yes      | <p>This could either contain the initial request or a follow-up request as part of a response interaction feedback loop.</p><p><ul><li><p>The value provided as part of this field is added to the conversation memory and passed to the LLM call.</p></li><li><p>For example, in the [example conversation](#example-conversation), this would be the messages prefixed with `User:`.</p></li><li><p>You can use FEEL expressions or inject parameters into the text in this field, using the `{{parameter}}` syntax to inject any parameters defined in the **User Prompt Parameters** field (FEEL context).</p><p>Example: `{{current_date_time}}`.</p></li></ul></p> |
+| User Prompt Parameters | No       | <p>Define a map of parameters you can use in `{{parameter}}` format in the **User Prompt** field.</p><p>The default parameters (`current_date`, `current_time`, `current_date_time`) do not need to be explicitly defined in this field.</p>                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| Documents              | No       | <p>Add a [document references](../../../self-managed/document-handling/overview.md) list to allow an AI agent to interact with documents and images.</p><p><ul><li><p>This list is internally resolved and passed to the LLM model if the document type is supported.</p></li><li><p>LLM APIs provide a way to specify the user prompt as a list of content blocks. If document references are passed, they are resolved to a corresponding content block and passed as part of the user message.</p></li></ul></p>                                                                                                                                                      |
 
-#### Documents
+:::info
 
-As part of the user prompt, it is possible to add a list
-of [Camunda Document references](../../../self-managed/document-handling/overview.md) which will be
-internally resolved and passed to the LLM if the document type is supported. This greatly enhances the ability of the
-agent as it can directly interact with documents and images.
+- To learn more about storing, tracking, and managing documents in Camunda 8, see [document handling](/components/document-handling/getting-started.md).
+- For examples of how LLM providers accept document content blocks, refer to the [Anthropic](https://docs.anthropic.com/en/docs/build-with-claude/vision#base64-encoded-image-example) and [OpenAI](https://platform.openai.com/docs/guides/images-vision#giving-a-model-images-as-input)
+  documentation.
 
-This is possible as LLM APIs provide a way to spefify the user prompt as list of content blocks. If document references
-are passed, they will be resolved to a corresponding content block and passed as part of the user message.
-
-You can find examples how LLM providers accept document content blocks on
-the [Anthropic](https://docs.anthropic.com/en/docs/build-with-claude/vision#base64-encoded-image-example)
-and [OpenAI](https://platform.openai.com/docs/guides/images-vision#giving-a-model-images-as-input)
-docs.
+:::
 
 ##### Supported document types
 
