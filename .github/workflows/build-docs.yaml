@@ -22,7 +22,7 @@ jobs:
           NODE_OPTIONS: --max_old_space_size=8192
 
       - name: Check internal links
-        uses: untitaker/hyperlink@0.1.27
+        uses: untitaker/hyperlink@0.1.44
         with:
           args: build/
 
