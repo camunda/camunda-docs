@@ -7,6 +7,7 @@ on:
 
 jobs:
   add_assignees:
+    if: startsWith(github.actor, 'renovate') == false
     runs-on: ubuntu-latest
     steps:
       - uses: actions-ecosystem/action-add-assignees@v1
