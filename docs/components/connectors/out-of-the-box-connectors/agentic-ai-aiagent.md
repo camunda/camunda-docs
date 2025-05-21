@@ -25,14 +25,14 @@ Core features include the following:
 
 New to agentic orchestration?
 
-- See the [Example AI Agent connector integration](agentic-ai-aiagent-example.md) for a worked example of a simple Agent AI feedback loop model.
+- See the [example AI Agent connector integration](agentic-ai-aiagent-example.md) for a worked example of a simple Agent AI feedback loop model.
 - See [additional resources](#additional-resources) for examples of how you can use the AI Agent connector.
 
 :::
 
 ## How to use this connector
 
-This connector is typically used in a feedback loop, with the connector task repeatedly looped back to during an AI agent process.
+This connector is typically used in a [feedback loop](agentic-ai-aiagent-example.md), with the connector task repeatedly looped back to during an AI agent process.
 
 For example, the following diagram shows a tool calling loop:
 
@@ -87,9 +87,9 @@ Agent: John Doe's credit card has been created successfully.
 
 The following prerequisites are required to use this connector:
 
-| Prerequisite                                      | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| :------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Set up your LLM model provider and authentication | <p>You must have previously set up an account with access and authentication details for the supported LLM model provider you want to use with this connector.</p><p>For example, to use an LLM model provided by Amazon Bedrock, you must have an AWS account with an access key and secret key to execute `InvokeModel` or `Converse` actions.</p><p>For OpenAI, you must configure the [OpenAI model](https://platform.openai.com/docs/models) and obtain an OpenAI API key to use for authentication.</p> |
+| Prerequisite                                      | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| :------------------------------------------------ | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Set up your LLM model provider and authentication | <p>Prior to using this connector, you must have previously set up an account with access and authentication details for the supported LLM model provider you want to use.</p><p>For example:<ul><li><p>To use an LLM model provided by Amazon Bedrock, you must have an AWS account with an access key and secret key to execute `InvokeModel` or `Converse` actions.</p></li><li><p>For OpenAI, you must configure the [OpenAI model](https://platform.openai.com/docs/models) and obtain an OpenAI API key to use for authentication.</p></li></ul></p> |
 
 ## Configuration
 
@@ -104,7 +104,7 @@ Select and configure authentication for the LLM model **Provider** you want to u
 :::note
 
 - Different setup/authentication fields are shown depending on the provider you select.
-- Use Camunda secrets to store credentials and avoid exposing sensitive information directly from the process. See [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
+- Use [connector secrets](/components/console/manage-clusters/manage-secrets.md) to store credentials and avoid exposing sensitive information directly from the process.
 
 :::
 
@@ -117,7 +117,7 @@ Select this option to use an Anthropic Claude LLM model (uses the [Anthropic Mes
 | Anthropic API Key | Yes      | Your Anthropic account API Key for authorization to the [Anthropic Messages API](https://docs.anthropic.com/en/api/messages). |
 
 :::info
-For more information about Anthropic Claude, refer to the [Claude models overview](https://docs.anthropic.com/en/docs/about-claude/models/all-models).
+For more information about Anthropic Claude LLM models, refer to the [Claude models overview](https://docs.anthropic.com/en/docs/about-claude/models/all-models).
 :::
 
 #### Bedrock
@@ -133,7 +133,7 @@ Select this option to use a model provided by the [Amazon Bedrock](https://docs.
 Model availability depends on the region and model you use. You might need to request a model is made available for your account. To learn more about configuring access to foundation models, refer to [access to Amazon Bedrock foundation models](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access-modify.html).
 
 :::info
-For a list of models, refer to [supported foundation models in Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html).
+For a list of Amazon Bedrock LLM models, refer to [supported foundation models in Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html).
 :::
 
 #### OpenAI
@@ -156,21 +156,21 @@ Select the model you want to use for the selected provider, and specify any addi
 
 | Field                     | Required | Description                                                                                                                |
 | :------------------------ | :------- | :------------------------------------------------------------------------------------------------------------------------- |
-| Model                     | Yes      | <p>Specify the model ID for the model you want to use.</p><p>Example: `anthropic.claude-3-5-sonnet-20240620-v1:0`.</p>     |
+| Model                     | Yes      | <p>Specify the model ID for the model you want to use.</p><p>Example: `anthropic.claude-3-5-sonnet-20240620-v1:0`</p>      |
 | Maximum tokens            | No       | The maximum number of tokens per request to allow in the generated response.                                               |
 | Maximum Completion Tokens | No       | The maximum number of tokens per request to generate before stopping.                                                      |
 | Temperature               | No       | Floating point number between 0 and 1. The higher the number, the more randomness will be injected into the response.      |
 | top P                     | No       | Floating point number between 0 and 1. Recommended for advanced use cases only (you usually only need to use temperature). |
 | top K                     | No       | Integer greater than 0. Recommended for advanced use cases only (you usually only need to use temperature).                |
 
-:::info
-For more information on optional model parameters, refer to the provider documentation links in the element template.
-:::
 :::note notes
 
 - Different model parameter fields are shown depending on the provider/model you select.
 - Parameters that set maximum values (such as maximum tokens) are considered **per LLM request**, not for the whole conversation. Depending on the provider, the exact meaning of these parameters may vary.
 
+:::
+:::info
+For more information on each optional model parameter, refer to the provider documentation links in the element template UI.
 :::
 
 ### System Prompt
@@ -254,28 +254,43 @@ Despite these limits, you must closely monitor your LLM API usage and cost, and 
 
 Specify the process variables that you want to map and export the AI Agent connector response into.
 
+| Field             | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| :---------------- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Result variable   | Yes      | <p>The result of the AI Agent connector is a context containing the following fields:</p><p><ul><li><p>`context`: The updated **Agent Context**. Make sure you map this to a process variable and re-inject this variable in the **Agent Context** input field if your AI agent is part of a feedback loop.</p></li><li><p>`chatResponse`: The last response provided by the LLM.</p></li><li><p>`toolCalls`: Tool call requests provided by the LLM that need to be routed to the ad-hoc sub-process.</p></li></ul></p> |
+| Result expression | No       | In addition, you can choose to unpack the content of the response into multiple process variables using the **Result expression** field, as a [FEEL Context Expression](/components/concepts/expressions.md).                                                                                                                                                                                                                                                                                                            |
+
+:::tip
+An easy approach to get started with modeling your first AI Agent is to use the result variable (for example, `agent`) and configure the **Agent Context** as `agent.context`.
+:::
+
 :::info
 To learn more about output mapping, see [variable/response mapping](/docs/components/connectors/use-connectors/index.md#variableresponse-mapping).
 :::
 
-### Result Variable/Expression
+### Error handling
 
-The result of the AI Agent connector is a context containing the following fields:
+If an error occurs, the IDP extraction connector throws an error and includes the error response in the error variable in Operate.
 
-- **context**: the updated **Agent Context**. Make sure to map this to a process variable and to re-inject this variable
-  in the **Agent Context** input field when your agent is part of a feedback loop.
-- **chatResponse**: the last response provided by the LLM
-- **toolCalls**: tool call requests provided by the LLM which need to be routed to the ad-hoc sub-process.
+| Field            | Required | Description                                                                                                                                                        |
+| :--------------- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Error expression | No       | You can handle an AI Agent connector error using an Error Boundary Event and [error expressions](/components/connectors/use-connectors/index.md#error-expression). |
 
-:::note
-An easy approach to get started with modelling is to use the result variable (e.g. `agent`) and to configure the
-**Agent Context** to `agent.context`.
-:::
+### Retries
+
+Specify connector execution retry behavior if execution fails.
+
+| Field         | Required | Description                                                                                                                                     |
+| :------------ | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------- |
+| Retries       | No       | Specify the number of [retries](/components/connectors/use-connectors/outbound.md#retries) (times) the connector repeats execution if it fails. |
+| Retry backoff | No       | Specify a custom Retry backoff interval between retries instead of the default behavior of retrying immediately.                                |
+
+### Execution listeners
+
+Add and manage [execution listeners](/components/concepts/execution-listeners.md) to allow users to react to events in the workflow execution lifecycle by executing custom logic.
 
 ## Additional resources
 
-- [Intelligent by Design: A Step-by-Step Guide to AI Task Agents in Camunda](https://camunda.com/blog/2025/05/building-your-first-ai-agent-with-camunda-s-new-agentic-ai/)
+- [Intelligent by Design: A Step-by-Step Guide to AI Task Agents in Camunda](https://camunda.com/blog/2025/05/building-your-first-ai-agent-with-camunda-s-new-agentic-ai/).
 - [AI Email Support Agent Blueprint](https://marketplace.camunda.com/en-US/apps/522492/ai-email-support-agent) on the
-  Camunda Marketplace
-- the [examples directory](https://github.com/camunda/connectors/tree/main/connectors/agentic-ai/examples) of the
-  agentic AI integration contains a list of working examples you can use to get started
+  Camunda Marketplace.
+- The AI integration GitHub repository provides working [examples](https://github.com/camunda/connectors/tree/main/connectors/agentic-ai/examples) for getting started.
