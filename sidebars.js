@@ -997,6 +997,7 @@ module.exports = {
       },
       items: [
         "self-managed/setup/deploy/local/c8run",
+        "self-managed/setup/deploy/local/docker-compose",
         "self-managed/setup/deploy/local/local-kubernetes-cluster",
       ],
     },
@@ -1008,7 +1009,6 @@ module.exports = {
         id: "self-managed/setup/overview",
       },
       items: [
-        "self-managed/setup/overview",
         {
           type: "doc",
           label: "Helm",
@@ -1107,11 +1107,6 @@ module.exports = {
           "Red Hat (OpenShift)": [
             "self-managed/setup/deploy/openshift/redhat-openshift",
             "self-managed/setup/deploy/openshift/redhat-openshift-dual-region",
-          ],
-          Other: [
-            "self-managed/setup/deploy/local/docker-compose",
-            "self-managed/setup/deploy/other/docker",
-            "self-managed/setup/deploy/local/manual",
           ],
         },
       ],
