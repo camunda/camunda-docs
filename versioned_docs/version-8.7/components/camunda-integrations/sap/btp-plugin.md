@@ -136,7 +136,7 @@ For advanced deployment configuration, consider working with your SAP practice, 
 
 The BTP plugin provides a guided, one-user multi-page flow where a single user progresses through a sequence of steps to complete a task or workflow. It renders subsets of Camunda Forms, with each page representing a distinct part of the process.
 
-Model a User Task as usual and link a form to it. This will render the Camunda form at runtime in the SAP Fiori design system.
+Create a User task as you normally would and link a form to it. When the process runs, the form will be rendered using the SAP Fiori design system.
 
 ![a user task for SAP Fiori in Web Modeler](./img/sap-btp-plugin-model-user-task.png)
 
