@@ -27,11 +27,12 @@ function hackChangesetDescription(specPath) {
   const content = fs.readFileSync(specPath, "utf8");
 
   const updated = content.replace(
-    /^ {6}description: A map of changes\.$/m,
+    /^      description: A map of changes.$/m,
     `      description: |
         JSON object with changed task attribute values.
         The following attributes can be adjusted with this endpoint, additional attributes
         will be ignored:
+
         * \`candidateGroups\` - reset by providing an empty list
         * \`candidateUsers\` - reset by providing an empty list
         * \`dueDate\` - reset by providing an empty String
