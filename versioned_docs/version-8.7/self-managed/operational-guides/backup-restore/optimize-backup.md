@@ -80,7 +80,7 @@ GET actuator/backups/{backupId}
 Information about all existing Optimize backups can be retrieved by omitting the optional `backupId` parameter:
 
 ```
-GET actuator/backup
+GET actuator/backups
 ```
 
 ### Response
