@@ -278,13 +278,11 @@ Process instance migration allows you to migrate several scenarios for gateways:
 
 Joining parallel and inclusive gateways with taken incoming sequence flows, and which are still waiting for more incoming sequence flows, require a mapping instruction similar to active elements.
 
-When migrating a process instance where a sequence flow leading to a joining gateway was taken, all the following conditions must be met:
+For migrating joining gateways, the following conditions must be true:
 
 - The target process definition must contain a joining gateway that corresponds to the joining gateway from the source process definition
 - The taken sequence flow in the source process must have a corresponding sequence flow in the target process with the same ID, and this sequence flow must remain connected to the joining gateway
 - The number of incoming sequence flows to the joining gateway must be at least the same in both the source and target process definitions
-- The diagram below illustrates how to correctly map taken sequence flows during migration while preserving their IDs and connections to the joining parallel gateway
-  ![Migrate taken sequence flow leading to joining parallel gateway](assets/process-instance-migration/migration-joining-parallel-gateway-scenario.png)
 
 Consider the following example:
 The process instance is waiting at the joining parallel gateway, with an incoming sequence flow taken as the element `A` is completed. Element `B` is still active and waiting at the user task.
@@ -298,6 +296,11 @@ After the migration, the process instance will look like following:
 ![The instance waiting on service task B.](assets/process-instance-migration/migration-joining-gateway-after.png)
 
 In the example above, another element `C` is added before the joining gateway in the target process definition. To complete the process instance after the migration, element `C` must be completed. Process instance modification can be used to activate element `C` and complete it to reach the target gateway.
+
+:::tip
+The diagram below illustrates how to correctly map taken sequence flows during migration while preserving their IDs and connections to the joining parallel gateway
+  ![Migrate taken sequence flow leading to joining parallel gateway](assets/process-instance-migration/migration-joining-parallel-gateway-scenario.png)
+:::
 
 ## Process definitions and versions
 
