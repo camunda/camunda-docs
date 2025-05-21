@@ -16,7 +16,7 @@ Interested in migrating process solutions developed for Camunda 7 to run them on
 
 Camunda 8 consists of six [components](/components/components-overview.md). Together, these components form the complete Camunda 8 experience to design, automate, and improve your business processes.
 
-In the architecture diagram below, take a closer look at how these components work together. Don't worry if you're not sure about all the terminology yet, as this is merely a visual overview of how the components form a unified experience. Step through the [getting started section](#getting-started) below to get started with Camunda for the first time, or find additional details in [What is Camunda 8](components/concepts/what-is-camunda-8.md), and an on-demand demonstration of the product in [Camunda Academy](https://bit.ly/3CvooTX).
+In the architecture diagram below, take a closer look at how these components work together. Don't worry if you're not sure about all the terminology yet, as this is merely a visual overview of how the components form a unified experience. Step through the [getting started section](#getting-started) below to get started with Camunda for the first time, or find additional details in [What is Camunda 8](/components/components-overview.md), and an on-demand demonstration of the product in [Camunda Academy](https://bit.ly/3CvooTX).
 
 ![Architecture diagram for Camunda including all the components for SaaS](./img/ComponentsAndArchitecture_SaaS.png)
 

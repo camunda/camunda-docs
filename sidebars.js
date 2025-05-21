@@ -58,8 +58,13 @@ module.exports = {
   Components: [
     "components/components-overview",
     {
-      Concepts: [
-        "components/concepts/what-is-camunda-8",
+      type: "category",
+      label: "Concepts",
+      link: {
+        type: "doc",
+        id: "components/concepts/concepts-overview",
+      },
+      items: [
         "components/concepts/clusters",
         "components/concepts/processes",
         "components/concepts/process-applications",
@@ -88,8 +93,15 @@ module.exports = {
           ],
         },
       ],
-      Console: [
-        "components/console/introduction-to-console",
+    },
+    {
+      type: "category",
+      label: "Console",
+      link: {
+        type: "doc",
+        id: "components/console/introduction-to-console",
+      },
+      items: [
         {
           "Manage your organization": [
             "components/console/manage-organization/organization-settings",
@@ -499,8 +511,13 @@ module.exports = {
       ],
     },
     {
-      Zeebe: [
-        "components/zeebe/zeebe-overview",
+      type: "category",
+      label: "Zeebe",
+      link: {
+        type: "doc",
+        id: "components/zeebe/zeebe-overview",
+      },
+      items: [
         {
           "Technical concepts": [
             "components/zeebe/technical-concepts/technical-concepts-overview",
@@ -513,8 +530,15 @@ module.exports = {
           ],
         },
       ],
-      Operate: [
-        "components/operate/operate-introduction",
+    },
+    {
+      type: "category",
+      label: "Operate",
+      link: {
+        type: "doc",
+        id: "components/operate/operate-introduction",
+      },
+      items: [
         {
           "User guide": [
             "components/operate/userguide/basic-operate-navigation",
@@ -533,8 +557,15 @@ module.exports = {
           ],
         },
       ],
-      Tasklist: [
-        "components/tasklist/introduction-to-tasklist",
+    },
+    {
+      type: "category",
+      label: "Tasklist",
+      link: {
+        type: "doc",
+        id: "components/tasklist/introduction-to-tasklist",
+      },
+      items: [
         {
           "User guide": [
             "components/tasklist/userguide/using-tasklist",
@@ -546,9 +577,15 @@ module.exports = {
           ],
         },
       ],
-      Optimize: [
-        "components/optimize/what-is-optimize",
-
+    },
+    {
+      type: "category",
+      label: "Optimize",
+      link: {
+        type: "doc",
+        id: "components/optimize/what-is-optimize",
+      },
+      items: [
         {
           "User guide": [
             "components/optimize/userguide/collections-dashboards-reports",
@@ -629,15 +666,16 @@ module.exports = {
         type: "doc",
         id: "components/identity/identity-introduction",
       },
-      items: [
-        "components/identity/identity-introduction",
-        "components/identity/authorization",
-        "components/identity/user",
-      ],
+      items: ["components/identity/authorization", "components/identity/user"],
     },
     {
-      "Best Practices": [
-        "components/best-practices/best-practices-overview",
+      type: "category",
+      label: "Best Practices",
+      link: {
+        type: "doc",
+        id: "components/best-practices/best-practices-overview",
+      },
+      items: [
         {
           "Project management": [
             "components/best-practices/management/following-the-customer-success-path",
