@@ -5,7 +5,7 @@ sidebar_label: Installation
 description: "Learn how to install Camunda Desktop Modeler, a desktop application for modeling BPMN, DMN, and Forms and support building executable diagrams with Camunda."
 ---
 
-This document guides you through Desktop Modeler installation, our local modeler. Desktop Modeler is a desktop application for modeling BPMN, DMN, and Forms, and supports you in building executable diagrams with Camunda. Alternatively, you can use our cloud-based [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md).
+This document guides you through Desktop Modeler installation, our local modeler. Desktop Modeler is a desktop application for modeling BPMN, DMN, and Forms, and supports you in building executable diagrams with Camunda.
 
 ## Installation
 
@@ -25,7 +25,7 @@ To make Modeler the default editor for `.bpmn`, `.dmn`, `.rpa`, and `.form` file
 
 ### Linux
 
-To create a [desktop file](https://specifications.freedesktop.org/desktop-entry-spec/latest/) and make Modeler the default editor for `.bpmn`, `.dmn`, `.rpa`, and `.form` files, execute `support/xdg_register.sh` in your terminal.
+To register Modeler for `.bpmn`, `.dmn`, `.rpa`, and `.form` files, execute `support/xdg_register.sh` from your terminal.
 
 ## Next steps
 
