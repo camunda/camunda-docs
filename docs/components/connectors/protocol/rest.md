@@ -209,9 +209,11 @@ Similarly to the Query Parameters, the **HTTP headers** can be specified using t
 }
 ```
 
-:::note
+#### Content-Type
+
 If you do not set the `Content-Type` header in your HTTP headers, the connector will automatically set the `Content-Type` to `application/json`.
-:::
+
+If you set the `Content-Type` header to `multipart/form-data`, only body fields that are documents or plain strings will be sent as multipart form data. All other fields, e.g. json objects, will be ignored.
 
 ### Request body
 
