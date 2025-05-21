@@ -489,7 +489,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/azure/kuberne
 **First, remove the default attribute from the original StorageClass:**
 
 ```bash
-kubectl patch storageclass managed-csi \
+kubectl patch storageclass default \
   -p '{"metadata":{"annotations":{"storageclass.kubernetes.io/is-default-class":"false"}}}'
 ```
 

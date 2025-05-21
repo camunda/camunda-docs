@@ -67,7 +67,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/azure/kuberne
 
 #### Reference the credentials in secrets
 
-Before installing the Helm chart, create Kubernetes secrets to store the Keycloak database authentication credentials and the OpenSearch authentication credentials.
+Before installing the Helm chart, create Kubernetes secrets to store the Keycloak database authentication credentials.
 
 To create the secrets, run the following commands:
 
