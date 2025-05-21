@@ -189,28 +189,11 @@ Advanced users may want to handle this part differently and use a different back
 
 #### Set up Azure authentication
 
-The [Azure Terraform provider](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs) is required to create resources in Azure. Before you can use the provider, you must authenticate it using your Azure credentials.
+The [Azure Terraform provider](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs) requires authentication using Azure credentials before it can create resources.
 
-:::tip
+For all environments, create a dedicated Azure AD service principal and assign only the necessary permissions. You can create and assign roles via the [Azure Portal](https://portal.azure.com/) or with the Azure CLI.
 
-Terraform should run under a dedicated service principal or managed identity with only the minimum RBAC roles it needs; access to Azure resources—including AKS cluster-admin credentials—is governed entirely by those RBAC assignments, not by who originally created the resources.
-
-:::
-
-You can further change the region and other preferences and explore different [authentication methods](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/azure_cli):
-
-- For development or testing purposes, you can use the [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli). If you have configured your Azure CLI, Terraform will automatically detect and use those credentials.
-  To configure the Azure CLI:
-
-  ```bash
-  az login
-  ```
-
-  This command will open a browser window for interactive login, or use device code login in headless environments.
-
-- For production environments, we recommend using a dedicated Azure AD user or service principal. You can create one and assign appropriate roles via the [Azure Portal](https://portal.azure.com/) or with the Azure CLI.
-
-To create a new service principal and assign it the necessary permissions:
+To create a new service principal and assign it the required permissions:
 
 ```bash
 az ad sp create-for-rbac \
@@ -229,12 +212,6 @@ az login --service-principal \
 ```
 
 Note that the `appId` will be needed as a value for `terraform_sp_app_id` in `terraform.tfvars` [in a later step.](#creating-terraformtfvars).
-
-:::warning
-
-Microsoft Accounts (MSA) such as those ending in `@outlook.com` or `@gmail.com` cannot be granted Key Vault permissions because they lack an Entra ID object ID. In such cases, you must use a service principal to authenticate Terraform.
-
-:::
 
 #### Create an Azure Storage Account for Terraform state management
 
@@ -304,18 +281,6 @@ az ad sp list --display-name "<your-service-principal-name>" --query "[0].appId"
 ```
 
 If you're already using a Service Principal to authenticate (for example, with `az login --service-principal`), this value corresponds to the `appId` you supplied during login.
-
-When using a user account, you'll need the user's object ID rather than an application ID. You can retrieve this with:
-
-```shell
-az ad user show --id user@example.com --query id -o tsv
-```
-
-The key considerations when using a user account instead of a Service Principal are:
-
-The user must have sufficient permissions in Azure to perform the Terraform operations
-Authentication will be tied to the user's credentials rather than service principal credentials
-For automation scenarios, a Service Principal is still recommended as it doesn't rely on personal credentials
 
 This value is critical because Terraform uses it to assign the necessary permissions for interacting with encryption keys and other protected resources. If the ID is incorrect or omitted, key-related configurations may fail, and AKS will be unable to use CMK for securing cluster secrets.
 
