@@ -1,0 +1,238 @@
+---
+id: remove-application-from-role
+title: "Unassign an application from a role"
+description: "Unassigns an application from a role."
+sidebar_label: "Unassign an application from a role"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWEtz2zYQ/iuYPSVTRpQdJ3V50/jRquNmPLbcHlwdQHIpIgEBBgAlazj8750FKJuWZDf19KiDhiKw2Af2+7DEtuD4wkJyDzdaIswj0DUa7oRW0xwSMFjpJU7qWorMj14aXXnRCHK0mRE1jUICd4pbKxbKMq4Yf1rACqMrxpnREkd/K4ig5oZX6NCQ3RYUr5AsaYnTHCIQpK3mroQIDH5vhMEcEmca3DY5K9GrZdPzEURgsxIrDkkLbl2TSuuMUAvouujRysCxNxgbhvVvNuek0NZaWbQ0fzw+psfrSlfcsqbfSMyZbbIMrS0aKddhH10f8gi6CE7G4/0qa6OXIsec5dxxJixT2rEllyInnzOtHCpHSwe249roVGL101dLetpBaM8NTNh1kGQ5Oi4k0+lXzBzjlgXBFHMmFLu/uTxjv5x8+nn+rnSutkkcr1arkSmyD5gLp81Im0Vsiox+JPd+xGYlGmQVX7MUGc9zQTa5pIBqNE6gZbbGTBQiY0773ejdZrT/AV99JoJbhLfHxU952s5XBIU2FXeQQGPEDrgn7O5mykSOyoliLdRi17RfU/BGkg6e6sYlqeTqGyXKCSf3Gt22Ypuq4mbNdLHHQBeBddw1gzBAKIcLNEP/hXIfj3d0Eyx+m82uWVDBMp0jK7RhrhR2Y4iCqIQSVVNBcjIeR1Dxh/D2eTzuSCdl/AciUQwfaslVgPVWOEKxShvs8eMDE8o6rrL/KzPaiIXYtjuik2CTC+hBfB4i6rrOE+rjLt4vtUlFnqPy8GR0SqB1G1ZxKfUKD7w68OrAq1d4dbK/UPnqrc3zGihc6dUvxBKpzpJAY9FQCfcVknhX6EYdWHdg3YF1L7Lu077Pw4litMuGcIjGaMN0ljXGYM5WpZBePX1zbmz35S5g8cC1A9cOXNvlWhdBha7UdGPOUaJDf811JSQQU42zcRvut108II6N22f30Y4ulGiWm5txYyQk0AY6dUkct6W2rkvaWhvXxUvK1ZIbwVMZEErTgXYbOEmdcemH96WVJnxV7cM941Wjcs5O2c3F7Yz9yh2u+NpvM5l8rvp0fDreq5VEX9A4uZ6yEGEA5eCg2Kglxu9VG4R/RLG/fFvMGiPc+paWhe1JkRs0k4by8giW3p7XTu9BCKL+z+UGQr//NfMoEKrQfnmPhl1HKCtobPB8PDraRd711BMo01XVKJ9+tQjfPXwQWCYb6yigCKTIUFmP8b6RsRG7CjPsz2CRHY0oKQE5m8NzIVzZpKNMV3EWlj0+U6nTuOJCxb0JG59N/rj7cj75cDU9u/hye/HhaDQeuQfng6+1dRVXAz82bZ9Xuj7b8bdPdeQ/dI36dDl8cHEtuVAEIB9n21Pt3veQLESQPDaThmyjief9n3nUU+Ye2jblFu+M7Doa/t6gWUNyP39imKdkLiz9zyEpuLTbTaJhZO9u+nbSe7bVp9obST/I1dqTWjb0BhF8w/VTc4waWW/2YLd59QZHnu9fN+8iKJHnaPzuBJlJlmHtBqtf/FYgnj4enOcXVxezC+i6fwBBTRRG
+sidebar_class_name: "delete api-method"
+info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Unassign an application from a role"}
+></Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/roles/{roleId}/applications/{applicationId}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Unassigns an application from a role.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "roleId",
+      in: "path",
+      required: true,
+      description: "The role ID.",
+      schema: { type: "string" },
+    },
+    {
+      name: "applicationId",
+      in: "path",
+      required: true,
+      description: "The application ID.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "202": {
+      description: "The application was unassigned successfully from the role.",
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description:
+        "The role or application with the given ID or username was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

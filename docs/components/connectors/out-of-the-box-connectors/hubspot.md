@@ -1,15 +1,15 @@
 ---
 id: hubspot
-title: HubSpot Connector
+title: HubSpot connector
 sidebar_label: HubSpot
-description: Manage HubSpot contacts, companies and deals from your BPMN process. Learn about creating a HubSpot Connector task and get started.
+description: Manage HubSpot contacts, companies and deals from your BPMN process. Learn about creating a HubSpot connector task and get started.
 ---
 
-The **Hubspot Connector** is an outbound Connector that allows you to connect your BPMN service with [HubSpot](https://hubspot.com/) to manage HubsSpot contacts, companies, and deals.
+The **Hubspot connector** is an outbound connector that allows you to connect your BPMN service with [HubSpot](https://hubspot.com/) to manage HubsSpot contacts, companies, and deals.
 
 ## Prerequisites
 
-To use the **HubSpot Connector**, you must have a HubSpot account and a [Bearer token](https://knowledge.hubspot.com/integrations/how-do-i-get-my-hubspot-api-key) to authenticate requests.
+To use the **HubSpot connector**, you must have a HubSpot account and a [Bearer token](https://knowledge.hubspot.com/integrations/how-do-i-get-my-hubspot-api-key) to authenticate requests.
 
 When creating a private app, you must grant the permissions required to access the HubSpot API. Different operations require different permissions. To use all HubSpot connector operations, add the following permissions to your app:
 
@@ -27,7 +27,7 @@ When creating a private app, you must grant the permissions required to access t
 Use Camunda secrets to avoid exposing your token credentials as plain text. Refer to our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
 :::
 
-## Create a HubSpot Connector task
+## Create a HubSpot connector task
 
 import ConnectorTask from '../../../components/react-components/connector-task.md'
 
@@ -35,7 +35,7 @@ import ConnectorTask from '../../../components/react-components/connector-task.m
 
 ## Select operation to execute
 
-The **HubSpot Connector** currently supports the following operations.
+The **HubSpot connector** currently supports the following operations.
 
 ### Contacts
 
@@ -174,6 +174,6 @@ Adding elements to a list may take a few seconds to be reflected in the HubSpot 
 - **Workflow ID:** The workflow ID. You can retrieve the ID by sending a request to the [get all workflows endpoint](https://developers.hubspot.com/docs/reference/api/automation/create-manage-workflows/v3#get-all-workflows).
 - **Contact email:** The email of the contact to be enrolled to the workflow.
 
-## Handle Connector response
+## Handle connector response
 
-As the **HubSpot Connector** is a protocol Connector (built on top of the **HTTP REST Connector**) the handling response is still applicable [as described](/components/connectors/protocol/rest.md#response).
+As the **HubSpot connector** is a protocol connector (built on top of the **HTTP REST connector**) the handling response is still applicable [as described](/components/connectors/protocol/rest.md#response).

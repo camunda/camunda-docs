@@ -44,10 +44,10 @@ To use Camunda 8 SaaS, specify the connection properties:
 
 ```bash
 CAMUNDA_CLIENT_MODE=saas
-CAMUNDA_CLIENT_CLUSTERID=xxx
 CAMUNDA_CLIENT_AUTH_CLIENTID=xxx
 CAMUNDA_CLIENT_AUTH_CLIENTSECRET=xxx
-CAMUNDA_CLIENT_REGION=bru-2
+CAMUNDA_CLIENT_CLOUD_REGION=bru-2
+CAMUNDA_CLIENT_CLOUD_CLUSTERID=xxx
 ```
 
 ##### YAML configuration
@@ -56,11 +56,12 @@ CAMUNDA_CLIENT_REGION=bru-2
 camunda:
   client:
     mode: saas
-    cluster-id: xxx
     auth:
       client-id: xxx
       client-secret: xxx
-    region: bru-2
+    cloud:
+      region: bru-2
+      cluster-id: xxx
 ```
 
 If you are connecting a local connector runtime to a SaaS cluster, you may want to review our [guide to using connectors in hybrid mode](/guides/use-connectors-in-hybrid-mode.md).
@@ -112,7 +113,7 @@ Depending on the authentication method used by the Zeebe instance, you may need 
 ```bash
 CAMUNDA_CLIENT_AUTH_CLIENTID=xxx
 CAMUNDA_CLIENT_AUTH_CLIENTSECRET=xxx
-CAMUNDA_CLIENT_AUTH_ISSUER=http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
+CAMUNDA_CLIENT_AUTH_TOKENURL=http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
 CAMUNDA_CLIENT_AUTH_AUDIENCE=zeebe-api
 ```
 
@@ -124,7 +125,7 @@ camunda:
     auth:
       client-id: xxx
       client-secret: xxx
-      issuer: http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
+      token-url: http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
       audience: zeebe-api
 ```
 
@@ -161,6 +162,7 @@ Providing secrets to the runtime environment can be achieved in different ways, 
 <Tabs groupId="connectorTemplateInbound" defaultValue="default" queryString values={
 [
 {label: 'Default secret provider', value: 'default' },
+{label: 'Secrets in Helm charts', value: 'helm' },
 {label: 'Secrets in Docker images', value: 'docker' },
 {label: 'Secrets in manual installations', value: 'manual' },
 {label: 'Custom secret provider', value: 'custom' },
@@ -186,6 +188,12 @@ The following environment variables can be used to configure the default secret 
 | ------------------------------------------------------ | ------------------------------------------------------------------------ | ------------- |
 | `CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_ENABLED` | Whether the default secret provider is enabled.                          | `true`        |
 | `CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_PREFIX`  | The prefix applied to the secret name before looking up the environment. | `""`          |
+
+</TabItem>
+
+<TabItem value='helm'>
+
+Connector secrets can be used in Helm charts. Review the documentation on [managing secrets in Helm charts](self-managed/setup/guides/secret-management.md) for additional details.
 
 </TabItem>
 

@@ -1,21 +1,21 @@
 ---
 id: salesforce
-title: Salesforce Connector
+title: Salesforce connector
 sidebar_label: Salesforce
-description: Manage your Salesforce Instance from your BPMN process. Learn how to create a Salesforce Connector task, and get started.
+description: Manage your Salesforce Instance from your BPMN process. Learn how to create a Salesforce connector task, and get started.
 ---
 
-The **Salesforce Connector** is an outbound protocol Connector that allows you to connect your BPMN service with [Salesforce](https://salesforce.com/) to interact with the [Salesforce APIs](https://developer.salesforce.com/docs/apis).
+The **Salesforce connector** is an outbound protocol connector that allows you to connect your BPMN service with [Salesforce](https://salesforce.com/) to interact with the [Salesforce APIs](https://developer.salesforce.com/docs/apis).
 
 ## Prerequisites
 
-To use the **Salesforce Connector**, you must have a [Salesforce Connected App with OAuth 2.0 Client Credentials Flow](https://help.salesforce.com/s/articleView?id=sf.connected_app_client_credentials_setup.htm&type=5).
+To use the **Salesforce connector**, you must have a [Salesforce Connected App with OAuth 2.0 Client Credentials Flow](https://help.salesforce.com/s/articleView?id=sf.connected_app_client_credentials_setup.htm&type=5).
 
 :::note
 Use Camunda secrets to avoid exposing your _Salesforce Connected App_ client ID and client secret as plain text. Learn more in our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md).
 :::
 
-## Create a Salesforce Connector task
+## Create a Salesforce connector task
 
 import ConnectorTask from '../../../components/react-components/connector-task.md'
 
@@ -41,7 +41,7 @@ While the static access token is useful for getting started, it is recommended t
 
 ### Operation types
 
-Currently, this Connector supports two types of operation:
+Currently, this connector supports two types of operation:
 
 - [SOQL Query](https://developer.salesforce.com/docs/atlas.en-us.soql_sosl.meta/soql_sosl/sforce_api_calls_soql.htm)
 - [sObject records](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_list.htm)
@@ -127,7 +127,7 @@ As an update does not return a body, you will not be able to map any data from t
 
 As a delete does not return a body, you will not be able to map any data from the response back to the process.
 
-## Handle Connector response
+## Handle connector response
 
-The **Salesforce Connector** is a protocol Connector, meaning it is built on top of the **HTTP REST Connector**. Therefore,
+The **Salesforce connector** is a protocol connector, meaning it is built on top of the **HTTP REST connector**. Therefore,
 handling response is still applicable [as described](/components/connectors/protocol/rest.md#response).
