@@ -11,7 +11,7 @@ Use the **AI Agent** outbound connector to integrate Large Language Models (LLMs
 
 The AI Agent connector enables AI agents to integrate with an LLM to provide interaction/reasoning capabilities. This connector is designed for use with an ad-hoc sub-process in a feedback loop, providing automated user interaction and tool selection.
 
-For example, this connector enables an AI agent to autonomously select and execute ad-hoc sub-processes by evaluating the current process context and determining the relevant tasks and tools to use in response.
+For example, this connector enables an AI agent to autonomously select and execute ad-hoc sub-processes by evaluating the current process context and determining the relevant tasks and tools to use in response. You can also use the AI Agent connector independently, although it is designed to be used with an ad-hoc sub-process to define the tools an AI agent can use.
 
 Core features include the following:
 
@@ -21,12 +21,13 @@ Core features include the following:
 | Memory               | Provides conversational/short-term memory handling to enable feedback loops. For example, this allows a user to ask follow-up questions to an AI agent response.                                                                                                                    |
 | Tool calling         | Support for an AI agent to interact with tasks within an ad-hoc sub-process, allowing use of all Camunda features such as connectors and user tasks (human-in-the-loop). Automatic **tool resolution** allows an AI agent to identify the tools available in an ad-hoc sub-process. |
 
-:::note
-You can also use the AI Agent connector independently, although it is designed to be used with an ad-hoc sub-process to define the tools an AI agent can use.
-:::
+:::tip
 
-:::info
-New to agentic orchestration? See [additional resources](#additional-resources) for examples of how you can use the AI Agent connector.
+New to agentic orchestration?
+
+- See the [Example AI Agent connector integration](agentic-ai-aiagent-example.md) for a worked example of a simple Agent AI feedback loop model.
+- See [additional resources](#additional-resources) for examples of how you can use the AI Agent connector.
+
 :::
 
 ## How to use this connector
@@ -37,7 +38,7 @@ For example, the following diagram shows a tool calling loop:
 
 ![agenticai-ai-agent-loop-overview.png](../img/agenticai-ai-agent-loop-overview.png)
 
-1. A request is made to the AI agent connector task, where the LLM determines what action to take for the process to continue.
+1. A request is made to the AI agent connector task, where the LLM determines what action to take.
 1. If the AI agent decides that further action is needed, the process enters the ad-hoc sub-process and calls any tools deemed necessary to satisfactorily resolve the request.
 1. The process loops back and re-enters the AI agent connector task, where the LLM decides (with contextual memory) if more action is needed before the process can continue. The process loops repeatedly in this manner until the AI agent decides it is complete, and passes the AI agent response to the next step in the process.
 
@@ -86,9 +87,9 @@ Agent: John Doe's credit card has been created successfully.
 
 The following prerequisites are required to use this connector:
 
-| Prerequisite                                 | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| :------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Set up LLM model provider and authentication | <p>You must have previously set up an account with access and authentication details for the supported LLM model provider you want to use with this connector.</p><p>For example, to use an LLM model provided by Amazon Bedrock, you must have an AWS account with an access key and secret key to execute `InvokeModel` or `Converse` actions.</p><p>For OpenAI, you must configure the [OpenAI model](https://platform.openai.com/docs/models) and obtain an OpenAI API key to use for authentication.</p> |
+| Prerequisite                                      | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| :------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Set up your LLM model provider and authentication | <p>You must have previously set up an account with access and authentication details for the supported LLM model provider you want to use with this connector.</p><p>For example, to use an LLM model provided by Amazon Bedrock, you must have an AWS account with an access key and secret key to execute `InvokeModel` or `Converse` actions.</p><p>For OpenAI, you must configure the [OpenAI model](https://platform.openai.com/docs/models) and obtain an OpenAI API key to use for authentication.</p> |
 
 ## Configuration
 
@@ -97,10 +98,10 @@ The following prerequisites are required to use this connector:
 Select and configure authentication for the LLM model **Provider** you want to use, from the following supported providers:
 
 - [Anthropic](http://anthropic.com/) (Claude models)
-- [AWS Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html)
+- [Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html)
 - [OpenAI](http://openai.com/)
 
-:::note notes
+:::note
 
 - Different setup/authentication fields are shown depending on the provider you select.
 - Use Camunda secrets to store credentials and avoid exposing sensitive information directly from the process. See [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
@@ -121,13 +122,13 @@ For more information about Anthropic Claude, refer to the [Claude models overvie
 
 #### Bedrock
 
-Select this option to use a model provided by the [AWS Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html) service, using the
+Select this option to use a model provided by the [Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html) service, using the
 [Converse](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html) API.
 
-| Field          | Required | Description                                                                                                                                                                                                                |
-| :------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Region         | Yes      | The AWS region. Example: `us-east-1`                                                                                                                                                                                       |
-| Authentication | Yes      | Select the authentication type you want to use to authenticate the connector with AWS. To learn more about configuring AWS authentication, see [AWS Bedrock connector authentication](./amazon-bedrock.md#authentication). |
+| Field          | Required | Description                                                                                                                                                                                                                   |
+| :------------- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Region         | Yes      | The AWS region. Example: `us-east-1`                                                                                                                                                                                          |
+| Authentication | Yes      | Select the authentication type you want to use to authenticate the connector with AWS. To learn more about configuring AWS authentication, see [Amazon Bedrock connector authentication](./amazon-bedrock.md#authentication). |
 
 Model availability depends on the region and model you use. You might need to request a model is made available for your account. To learn more about configuring access to foundation models, refer to [access to Amazon Bedrock foundation models](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access-modify.html).
 
@@ -189,84 +190,73 @@ Currently, the system prompt is only added to the agent context once, when the A
 
 The **User Prompt** contains the actual request to the LLM model.
 
-| Field                  | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| :--------------------- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| User Prompt            | Yes      | <p>This could either contain the initial request or a follow-up request as part of a response interaction feedback loop.</p><p><ul><li><p>The value provided as part of this field is added to the conversation memory and passed to the LLM call.</p></li><li><p>For example, in the [example conversation](#example-conversation), this would be the messages prefixed with `User:`.</p></li><li><p>You can use FEEL expressions or inject parameters into the text in this field, using the `{{parameter}}` syntax to inject any parameters defined in the **User Prompt Parameters** field (FEEL context).</p><p>Example: `{{current_date_time}}`.</p></li></ul></p> |
-| User Prompt Parameters | No       | <p>Define a map of parameters you can use in `{{parameter}}` format in the **User Prompt** field.</p><p>The default parameters (`current_date`, `current_time`, `current_date_time`) do not need to be explicitly defined in this field.</p>                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| Documents              | No       | <p>Add a [document references](../../../self-managed/document-handling/overview.md) list to allow an AI agent to interact with documents and images.</p><p><ul><li><p>This list is internally resolved and passed to the LLM model if the document type is supported.</p></li><li><p>LLM APIs provide a way to specify the user prompt as a list of content blocks. If document references are passed, they are resolved to a corresponding content block and passed as part of the user message.</p></li></ul></p>                                                                                                                                                      |
+| Field                  | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| :--------------------- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| User Prompt            | Yes      | <p>This could either contain the initial request or a follow-up request as part of a response interaction feedback loop.</p><p><ul><li><p>The value provided as part of this field is added to the conversation memory and passed to the LLM call.</p></li><li><p>For example, in the [example conversation](#example-conversation), this would be the messages prefixed with `User:`.</p></li><li><p>You can use FEEL expressions or inject parameters into the text in this field, using the `{{parameter}}` syntax to inject any parameters defined in the **User Prompt Parameters** field (FEEL context).</p><p>Example: `{{current_date_time}}`.</p></li></ul></p>                                                                                                                                                                  |
+| User Prompt Parameters | No       | <p>Define a map of parameters you can use in `{{parameter}}` format in the **User Prompt** field.</p><p>The default parameters (`current_date`, `current_time`, `current_date_time`) do not need to be explicitly defined in this field.</p>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| Documents              | No       | <p>Add a [document references](../../../self-managed/document-handling/overview.md) list to allow an AI agent to interact with documents and images.</p><p><ul><li><p>This list is internally resolved and passed to the LLM model if the document type is supported.</p></li><li><p>LLM APIs provide a way to specify the user prompt as a list of content blocks. If document references are passed, they are resolved to a corresponding content block and passed as part of the user message.</p></li><li><p>For examples of how LLM providers accept document content blocks, refer to the [Anthropic](https://docs.anthropic.com/en/docs/build-with-claude/vision#base64-encoded-image-example) and [OpenAI](https://platform.openai.com/docs/guides/images-vision#giving-a-model-images-as-input) documentation.</p></li></ul></p> |
+
+#### Supported document types
+
+As file type support varies by LLM provider/model, you must test your document use case with the provider you are using.
+
+As documents are stored as part of the conversational memory, their contents are stored as process variables. Be aware of [variable size limitations](../../concepts/variables.md#variable-size-limitation) when dealing with large files.
+
+| File type         | Supported | Description                                                                                                                                                                        |
+| :---------------- | :-------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Text              | Yes       | Text files (MIME types matching `text/*`, `application/xml`, `application/json`, or `application/yaml`) are passed as plain text content blocks.                                   |
+| PDF               | Yes       | PDF files (MIME types matching `application/pdf`) are passed as base64 encoded content blocks.                                                                                     |
+| Image             | Yes       | Image files (MIME types matching `image/jpg`, `image/png`, `image/gif`, or `image/webp`) are passed as base64 encoded content blocks.                                              |
+| Audio/video/other | No        | Audio and video files are not currently supported, and will result in an error if passed. All other unsupported file types not listed here will also result in an error if passed. |
 
 :::info
-
-- To learn more about storing, tracking, and managing documents in Camunda 8, see [document handling](/components/document-handling/getting-started.md).
-- For examples of how LLM providers accept document content blocks, refer to the [Anthropic](https://docs.anthropic.com/en/docs/build-with-claude/vision#base64-encoded-image-example) and [OpenAI](https://platform.openai.com/docs/guides/images-vision#giving-a-model-images-as-input)
-  documentation.
-
+To learn more about storing, tracking, and managing documents in Camunda 8, see [document handling](/components/document-handling/getting-started.md).
 :::
-
-##### Supported document types
-
-:::important
-As these documents are stored as part of the conversational memory, their contents will be stored as process variable.
-Make sure to be aware of [variable size limitations](../../concepts/variables.md#variable-size-limitation) when dealing
-with large files.
-
-In the future, the AI Agent connector will support different ways of storing the conversation memory to allow more
-data-intensive use cases.
-:::
-
-File type support is depending on the LLM provider and model. Make sure to properly test your use case with the provider
-you are using.
-
-Text files (MIME types matching `text/*`, `application/xml`, `application/json`, or `application/yaml`) will be passed
-as plain text content blocks.
-
-All other supported file types will be passed as base64 encoded content blocks:
-
-- PDF files (`application/pdf`)
-- Images (`image/jpg`, `image/png`, `image/gif`, `image/webp`)
-
-Audio and video files might be supported in the future, but will currently lead to an error if passed. The same goes for
-all other unsupported file types.
 
 ### Tools
 
+Specify the tool resolution for an accompanying ad-hoc sub-process.
+
+| Field                 | Required | Description                                                                                                                                                                                                                                                                                                                     |
+| :-------------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Ad-hoc sub-process ID | No       | <p>Specify the element ID of the ad-hoc sub-process to use for tool resolution (see [Tool Resolution](agentic-ai-aiagent-example.md#tool-resolution)).</p><p>When entering the AI Agent connector, the connector resolves the tools available in the ad-hoc sub-process, and passes these to the LLM as part of the prompt.</p> |
+| Tool Call Results     | No       | <p>Specify the results collection of the ad-hoc sub-process multi-instance execution.</p><p>Example: `=toolCallResults`</p>                                                                                                                                                                                                     |
+
 :::note
-This section can be kept empty if the AI Agent connector should be used without an accompanying ad-hoc sub-process.
+
+- Leave this section empty if using this connector independently, without an accompanying ad-hoc sub-process.
+- To actually use the tools, you must model your process to include a tools feedback loop, routing into the ad-hoc sub-process and back to the AI agent connector. See [example tools feedback loop](agentic-ai-aiagent-example.md#tools-loop).
+
 :::
-
-The **Ad-hoc sub-process ID** needs to be configured to the element ID of the ad-hoc sub-process which should be used
-for tool resolution (see [Tool Resolution](#tool-resolution)). When entering the AI Agent connector, the connector will
-resolve the tools available in the ad-hoc sub-process and pass these to the LLM as part of the prompt.
-
-The **Tool Call Results** field needs to be configured to the result collection of the ad-hoc sub-process mult-instance
-execution (see [Modeling the tools feedback loop](#modeling-the-tools-feedback-loop)). Example value:
-`=toolCallResults`.
 
 ### Memory
 
-As described above, the **Agent Context** is a crucial variable to make the feedback loop work. This needs to be aligned
-with the result variable/expression (see below). Example value: `=agent.context`.
+Configure the Agent's short-term/conversational memory.
 
-The **Maximum messages** configuration allows specifying how many messages should be kept in the context and passed to
-the LLM on every call. Configuring this is a trade-off between cost/tokens and the context window supported by the used
-model.
-
-When the conversation exceeds the maximum number of messages, the connector will first evict tool call
-requests/responses from past feedback loops and then continue removing the oldest messages first. The system prompt will
-always be kept in the context.
+| Field            | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| :--------------- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Agent Context    | Yes      | <p>Specify an agent context variable to store all relevant data for the agent to support a feedback loop between user requests, tool calls, and LLM responses. Make sure this variable points to the `context` variable that is returned from the agent response.</p><p>This is an important variable required to make a feedback loop work correctly. This variable must be aligned with the Output mapping **Result variable** and **Result expression** for this connector.</p><p>Example: `=agent.context`</p> |
+| Maximum messages | No       | <p>Specify the maximum number of messages to keep in context and pass to the LLM on every call.</p><p><ul><li><p>Configuring this is a trade-off between cost/tokens and the context window supported by the used model.</p></li><li><p>When the conversation exceeds the maximum number of messages, the connector first removes tool call requests/responses from past feedback loops, and then continues removing oldest messages first. The system prompt is always kept in the context.</p></li></ul></p>     |
 
 ### Limits
 
-:::important
-Despite these limits, make sure to closely monitor the LLM API usage and costs and to set appropriate limits on the
-provider side.
+Set limits for the agent interaction to prevent unexpected behavior or unexpected cost due to infinite loops.
+
+| Field               | Required | Description                                                                                                                           |
+| :------------------ | :------- | :------------------------------------------------------------------------------------------------------------------------------------ |
+| Maximum model calls | No       | Specify the maximum number of model calls. As a safeguard, this limit defaults to a value of `10` if you do not configure this value. |
+
+:::caution
+Despite these limits, you must closely monitor your LLM API usage and cost, and set appropriate limits on the provider side.
 :::
 
-Allows setting limits for the agent interaction, such as the maximum number of model calls to prevent unexpected
-behavior or unexpected cost due to infinite loops.
+### Output mapping
 
-As a safeguard, the **Maximum model calls** limit will fall back to a default value of `10` if it is not configured as
-part of the connector configuration.
+Specify the process variables that you want to map and export the AI Agent connector response into.
+
+:::info
+To learn more about output mapping, see [variable/response mapping](/docs/components/connectors/use-connectors/index.md#variableresponse-mapping).
+:::
 
 ### Result Variable/Expression
 
@@ -281,267 +271,6 @@ The result of the AI Agent connector is a context containing the following field
 An easy approach to get started with modelling is to use the result variable (e.g. `agent`) and to configure the
 **Agent Context** to `agent.context`.
 :::
-
-## Modeling the tools feedback loop
-
-After configuring the AI Agent connector, you can add an ad-hoc sub-process and the tools feedback loop to connect your
-agent to the tools it needs to fulfill its purpose.
-
-### Add the ad-hoc sub-process
-
-Start off by adding an ad-hoc sub-process and mark it as
-a [**parallel multi-instance**](../../modeler/bpmn/multi-instance/multi-instance.md). This will allow the process to
-execute the tools in parallel and to wait for all tool calls to finish before continuing with the process. Configure a
-descriptive ID for your ad-hoc sub-process and **configure it** under the [tools](#tools) section of the AI Agent
-connector.
-
-After adding the ad-hoc sub-process, model a loop into the sub-process and back to the AI Agent connector. You can mark
-the `no` flow of the `Contains tool calls?` gateway as the default flow.
-
-![aiagent-tools-loop-empty.png](../img/agenticai-tools-loop-empty.png)
-
-Next, configure the `yes` flow condition to be activated when the AI Agent response contains a list of tool calls.
-Assuming you used the suggested default values for the [result variable/expression](#result-variableexpression) you can
-configure the condition to:
-
-```feel
-not(agent.toolCalls = null) and count(agent.toolCalls) > 0
-```
-
-This will lead the process to route the execution through the ad-hoc sub-process when the LLM response requests to call
-one or more tools.
-
-### Configure multi-instance execution
-
-:::note
-Use the suggested values as a starting point and change them to your needs if needed or when dealing with multiple
-agents within the same process.
-:::
-
-As stated above, the ad-hoc sub-process needs to be configured as a **parallel multi-instance** sub-process. This
-ensures that:
-
-- Tools can be called **independently of each other**, each with its own set of input parameters. This also implies that
-  the same tool can be called **multiple times with different parameters** within the same ad-hoc sub-process execution.
-  For example, a _Lookup user_ tool could be called multiple times with different user IDs.
-- The process can **wait until all requested tools have been executed** before passing the results back to the AI
-  Agent/LLM. After all tools have been executed, results will be passed back to the AI Agent connector.
-
-The multi-instance configuration is the same for each agent configuration, and it will be possible to reuse a template
-to make this configuration easier. For the moment, you need to configure the following properties.
-
-- **Input collection**: set this to the list of tool calls your AI Agent connector returns, for example
-  `agent.toolCalls`.
-- **Input element**: this will contain the individual tool call including LLM-generated input parameters based on
-  the [tool definition](#tool-definitions). Suggested value: `toolCall`. This needs to be aligned with
-  the `fromAi` function calls in the tool definition.
-- **Output collection**: this will collect the results of all the requested tool calls. Suggested value:
-  `toolCallResults`. Make sure to pass this value as [Tool Call Results](#tools) in the AI Agent configuration.
-- **Output element**: this will collect the individual tool call result as returned by an individual tool
-  (see [Tool Call Responses](#tool-call-responses)). When changing ths `toolCallResult` to something else, make sure
-  to also change your tools to write to the updated variable name.
-  ```feel
-  {
-    id: toolCall._meta.id,
-    name: toolCall._meta.name,
-    content: toolCallResult
-  }
-  ```
-
-As a last step, you need to configure the element to activate to the ad-hoc sub-process. As we're using a multi-instance
-configuration, this is always a single task ID of the tool being executed in the individual instance. Configure
-**Active elements collection** to contain exactly `[toolCall._meta.name]`.
-
-After configuring all of the above, your ad-hoc sub-process configuration should look like the following:
-
-![agenticai-ad-hoc-sub-process-multi-instance.png](../img/agenticai-ad-hoc-sub-process-multi-instance.png)
-
-## Modeling a response interaction feedback loop
-
-:::note
-How exactly this needs to be modeled highly depends on your use case. The example below is expecting a simple feedback
-action based on a user task, but this could also be interacting with other process flows or with another
-agent process.
-
-For example, instead of the user task, you could also use another LLM connector to verify the response of the AI Agent.
-An example of such a pattern can be found in
-the [Fraud Detection Example](https://github.com/camunda/connectors/tree/main/connectors/agentic-ai/examples/fraud-detection).
-:::
-
-Similar to the tools feedback loop, another feedback loop acting on the agent response can be added by re-entering the
-AI Agent connector with new information. You need to make sure to model your user prompt in a way that it adds the
-follow-up data instead of the initial request.
-
-For example, your **User Prompt** field could contain the following FEEL expression to make sure it acts upon follow-up
-input:
-
-```feel
-=if (is defined(followUpInput)) then followUpInput else initialUserInput
-```
-
-![agenticai-user-feedback-loop.png](../img/agenticai-user-feedback-loop.png)
-
-## Tool Resolution
-
-When resolving the available tools within an ad-hoc sub-process, the AI Agent will take all activities into account
-which **have no incoming flows** (root nodes within the ad-hoc sub-process) and **are not boundary events**. In the
-following screenshot, the activities marked in red are the ones that will be considered as tools:
-
-![agenticai-tool-resolution.png](../img/agenticai-tool-resolution.png)
-
-As you can see, you are free to use any BPMN elements and connectors as tools and to model sub-flows within the ad-hoc
-sub-process.
-
-To resolve available tools the AI Agent connector will:
-
-- Read the BPMN model and look up the ad-hoc sub-process by the configured ID. If it cannot be found, the connector will
-  throw an error.
-- Iterate over all activities within the ad-hoc sub-process and check if they are root nodes (no incoming flows) and not
-  boundary events.
-- For each activity found, it will analyze the input/output mappings and look for the
-  [`fromAi`](../../modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) function calls
-  which define parameters which need to be provided by the LLM.
-- The connector will then create a tool definition for each activity found and pass these tool definitions to the LLM
-  as part of the prompt.
-
-:::note
-The [Anthropic](https://docs.anthropic.com/en/docs/build-with-claude/tool-use/overview) and
-[OpenAI](https://platform.openai.com/docs/guides/function-calling) docs contain good examples how tool/function calling
-works in combination with an LLM.
-:::
-
-### Tool Definitions
-
-:::important
-When resolving a tool definition, the AI Agent connector will only consider the **root node** of the sub-flow.
-:::
-
-A tool definition consists of the following properties which will be passed to the LLM. The tool definition is closely
-modeled after the
-[list tools response](https://modelcontextprotocol.io/specification/2025-03-26/server/tools#listing-tools) as defined in
-the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/).
-
-- **name**: The name of the tool. This is the **ID of the activity** in the ad-hoc sub-process.
-- **description**: The description of the tool, telling an LLM the purpose of the tool. If the
-  **documentation** of the activity is set, it will be used as the description, otherwise the **name** of the activity
-  will be used. Make sure to provide a meaningful description to help the LLM understand the purpose of the tool.
-- **inputSchema**: The input schema of the tool, describing the input parameters of the tool. The connector will analyze
-  all input/output mappings of the activity and will create a [JSON Schema](https://json-schema.org/) based on the
-  [`fromAi`](../../modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) function calls
-  defined in these mappings. If no `fromAi` function calls are found, an empty JSON Schema object will be returned.
-
-:::note
-Provide as much context and guidance in tool definitions and input parameter definitions as you can to ensure the LLM
-selects the right tool and generates proper input values.
-
-You can find best practices for tool definitions on
-the [Anthropic docs](https://docs.anthropic.com/en/docs/build-with-claude/tool-use/implement-tool-use#example-of-a-good-tool-description).
-:::
-
-### AI-generated parameters via `fromAi`
-
-Within an activity, you can define parameters which should be AI-generated by tagging them with the
-[`fromAi`](../../modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) FEEL function in
-input/output mappings.
-
-The function itself does not implement any logic (it simply returns the first argument it receives), but provides a way
-to configure all the necessary metadata (e.g. description, type) to generate an input schema definition. The tools
-schema resolution will collect all `fromAi` definitions within an activity and combine them into an input schema for
-the activity.
-
-:::important
-The first argument passed to the `fromAi` function must be a reference type (e.g. not a static string), referencing a
-value within the variable defined as **Input element** in the multi-instance configuration. In our examples, we
-typically use `toolCall` as the input element. Example value: `toolCall.myParameter`.
-:::
-
-By utilizing the `fromAi` tool call as wrapper function around the actual value the connector can both
-**describe the parameter** for the LLM by generating a JSON Schema from the function calls and at the same time
-**utilize the LLM-generated value** as it can do with any other process variable.
-
-You can use the `fromAi` function in:
-
-- Input & Output mappings (e.g service task, script task, user task)
-- Custom input fields provided by an element template if an element template is applied to the activity as technically
-  these are handled as input mappings.
-
-An example of `fromAi` function usage on a [REST outbound connector](../protocol/rest.md):
-
-![agenticai-tool-resolution-fromAi.png](../img/agenticai-tool-resolution-fromAi.png)
-
-#### `fromAi` examples
-
-The [`fromAi`](../../modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) FEEL function
-can be called with a varying number of parameters to define simple or complex inputs. The simplest form is to just pass
-a value.
-
-```feel
-fromAi(toolCall.url)
-```
-
-This will make the LLM aware that it needs to provide a value for the `url` parameter. As the first value to `fromAi`
-needs to be a variable reference, the last segment of the reference will be used as parameter name (`url` in this case).
-
-To make a LLM understand the purpose of the input, you can add a description:
-
-```feel
-fromAi(toolCall.url, "Fetches the contents of a given URL. Only accepts valid RFC 3986/RFC 7230 HTTP(s) URLs.")
-```
-
-To define the type of the input, you can add a type (if no type is given, it will default to `string`):
-
-```feel
-fromAi(toolCall.firstNumber, "The first number.", "number")
-
-fromAi(toolCall.shouldCalculate, "Defines if the calculation should be executed", "boolean")
-```
-
-For more complex type definitions, the fourth parameter of the function allows you to specify a JSON Schema from a
-FEEL context. Note that support for the JSON Schema features is depending on the AI integration. You can find an
-extensive list of examples on the [JSON Schema documentation](https://json-schema.org/learn/miscellaneous-examples).
-
-```feel
-fromAi(
-  toolCall.myComplexObject,
-  "A complex object",
-  "string",
-  { enum: ["first", "second"] }
-)
-```
-
-You can combine multiple parameters within the same FEEL expression, for example:
-
-```feel
-fromAi(toolCall.firstNumber, "The first number.", "number") + fromAi(toolCall.secondNumber, "The second number.", "number")
-```
-
-### Tool Call Responses
-
-To collect the output of the called tool and pass it back to the agent, the task within the ad-hoc sub-process needs to
-set its output to the variable configured as `content` when setting up
-the [multi-instance execution](#modeling-the-tools-feedback-loop). Typically, this variable is called `toolCallResult`
-and can be used from every tool call within the ad-hoc sub-process as the multi-instance execution takes care of
-isolating individual tool calls.
-
-This can be achieved in multiple ways, depending on the used task:
-
-- as a [result variable](../use-connectors/index.md#result-variable) or
-  a [result expression](../use-connectors/index.md#result-expression) containing a `toolCallResult` key
-- as an [output mapping](../../concepts/variables.md#output-mappings) creating the `toolCallResult` variable or adding
-  to a part of the `toolCallResult` variable (e.g. an output mapping could be set to `toolCallResult.statusCode`)
-- as a [script task](../../modeler/bpmn/script-tasks/script-tasks.md) which sets the `toolCallResult` variable
-
-Tool call results can be either primitive values (e.g. a string) or complex ones, such as
-a [FEEL context](../../modeler/feel/language-guide/feel-context-expressions.md) which will be serialized to a JSON
-string before passing it to the LLM.
-
-#### Document support
-
-Similar to the [user prompt](#documents), tool call responses can contain
-[Camunda Document references](../../../self-managed/document-handling/overview.md) within arbitrary structures
-(supporting the same file types as for the user prompt). When serializing the tool call response to JSON, document
-references will be transformed to a content block containing the plain text or base64 encoded document content before
-passing them to the LLM.
 
 ## Additional resources
 
