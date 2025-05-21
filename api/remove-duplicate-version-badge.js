@@ -1,14 +1,16 @@
-const replace = require("replace-in-file");
+const fs = require("fs");
 
-function removeDuplicateVersionBadge(generatedInfoFilePath) {
-  // The generator adds a version badge to the Introduction file, but
-  //   we already have a version badge from the main docs layout.
+function removeDuplicateVersionBadge(filePath) {
   console.log("removing duplicate version badge...");
-  replace.sync({
-    files: generatedInfoFilePath,
-    from: /<span[^>]*\s*children=\{"Version: [^"]*"\}\s*>\n<\/span>\n/m,
-    to: "",
-  });
+
+  const content = fs.readFileSync(filePath, "utf8");
+
+  const updated = content.replace(
+    /<span[^>]*\s*children=\{"Version: [^"]*"\}\s*>\n<\/span>\n/m,
+    ""
+  );
+
+  fs.writeFileSync(filePath, updated);
 }
 
 module.exports = removeDuplicateVersionBadge;
