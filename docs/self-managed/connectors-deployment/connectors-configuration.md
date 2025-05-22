@@ -335,6 +335,13 @@ to be configured individually using the following environment variables.
 If you want to use outbound connectors for a single tenant that is different
 from the default tenant, you can specify a different default tenant ID using:
 
+```bash
+ZEEBE_CLIENT_DEFAULT_TENANT_ID=myTenant
+```
+
+This will change the default tenant ID used for fetching jobs and publishing messages
+to the tenant ID `myTenant`.
+
 It is possible to adjust the polling interval of connectors polling process definitions to Operate by setting the environment variable `CAMUNDA_CONNECTOR_POLLING_INTERVAL`. This variable allows you to control how often connectors fetch the process definitions, with the interval specified in milliseconds. For example, setting `CAMUNDA_CONNECTOR_POLLING_INTERVAL=20000` will configure the connectors to poll every 20 seconds.
 
 Example:
@@ -342,13 +349,6 @@ Example:
 ```
 CAMUNDA_CONNECTOR_POLLING_INTERVAL=10000
 ```
-
-```bash
-ZEEBE_CLIENT_DEFAULT_TENANT_ID=myTenant
-```
-
-This will change the default tenant ID used for fetching jobs and publishing messages
-to the tenant ID `myTenant`.
 
 :::note
 Inbound connectors will still be enabled for
