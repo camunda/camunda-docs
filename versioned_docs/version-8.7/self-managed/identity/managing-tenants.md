@@ -8,6 +8,8 @@ description: "Manage tenants within Identity to support the logical separation o
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
+- Isolate data access for your custom _Applications_ or _Users_ [using _Tenants_](/self-managed/identity/managing-tenants.md)
+
 Multi-tenancy in the context of Camunda 8 refers to the ability of Camunda 8 to serve multiple distinct tenants or clients within a single installation. For details on multi-tenancy, visit our [multi-tenancy documentation](/self-managed/concepts/multi-tenancy.md).
 
 **Precondition**: **Multi-tenancy** is disabled by default. In order to enable this feature, you must:
