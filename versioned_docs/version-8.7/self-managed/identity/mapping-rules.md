@@ -12,12 +12,14 @@ import TabItem from "@theme/TabItem";
 Mapping rules are only available for Camunda 8 Self-Managed with [OIDC-based authentication](/self-managed/identity/configuration/connect-to-an-oidc-provider.md).
 :::
 
+Use [_Mapping Rules_](/self-managed/identity/mapping-rules.md) to integrate Camunda Identity concepts to your existing OIDC-based IdP
+
 Mapping rules allow you to dynamically assign Identity entities to your users based on claims in your JWT tokens. You can assign two types of entities with mapping rules:
 
 1. Tenants
 2. Roles
 
-# Configuring mapping rules
+## Configuring mapping rules
 
 1. Log in to the Identity UI and navigate to the **Mappings** tab.
 

@@ -1,7 +1,7 @@
 ---
 id: application-monitoring
-title: "Monitor Identity"
-sidebar_label: "Monitor Identity"
+title: "Monitoring Identity"
+sidebar_label: "Monitoring Identity"
 description: "Understand how the Identity component operates in exposing the following endpoints."
 ---
 

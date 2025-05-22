@@ -7,8 +7,6 @@ description: "Use Identity to manage roles"
 
 Roles define what a user or application is allowed to do by grouping related [permissions](versioned_docs/version-8.7/self-managed/identity/access-management/manage-permissions.md) together. You can assign roles — either [directly to users](#assign-a-role-to-a-user) or [through Groups](/self-managed/identity/application-user-group-role-management/manage-groups.md#assign-roles-to-a-group) — to simplify and standardize access control across your system. Roles help you enforce consistent permission sets, reduce errors, and scale access management as your organization grows.
 
-# Role management
-
 ## Add a role
 
 To add a role, take the following steps:

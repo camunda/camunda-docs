@@ -1,7 +1,7 @@
 ---
 id: identity-application-user-group-role-management-overview
-title: "Users, applications, groups, and roles overview"
-sidebar_label: "Overview"
+title: "Manage users, groups, roles, and applications"
+sidebar_label: "Manage users, groups, roles, and applications"
 description: "Learn more about how Identity makes use of users, groups, and roles"
 ---
 

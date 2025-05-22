@@ -1,7 +1,7 @@
 ---
 id: troubleshoot-identity
-title: "Troubleshoot Identity"
-sidebar_label: "Troubleshoot Identity"
+title: "Troubleshooting Identity"
+sidebar_label: "Troubleshooting"
 description: "Learn about solutions to common issues in Identity, such as complications connecting to Keycloak."
 ---
 

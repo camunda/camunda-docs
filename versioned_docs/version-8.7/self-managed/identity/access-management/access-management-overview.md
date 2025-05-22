@@ -1,7 +1,7 @@
 ---
 id: access-management-overview
-title: Access Management Overview
-sidebar_label: "Overview"
+title: "Manage access"
+sidebar_label: "Manage access"
 description: "Access Management and Permissions overview"
 ---
 

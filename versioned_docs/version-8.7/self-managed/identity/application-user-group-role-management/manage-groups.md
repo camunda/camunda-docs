@@ -6,9 +6,9 @@ description: "Groups are a way to apply a set of roles and permissions to users.
 
 Groups allow you to efficiently manage access by organizing users (group members) and assigning [roles](/self-managed/identity/application-user-group-role-management/manage-roles.md). Instead of assigning roles to individual users, you can [map a set of roles to a group](#role-assignment-to-groups), and all group members will automatically inherit those permissions.
 
-# Group Management
+## Manage groups
 
-## Create a group
+### Create a group
 
 To create a group, take the following steps:
 
@@ -20,15 +20,15 @@ To create a group, take the following steps:
 
 On confirmation, the modal closes, the table updates, and your new group is shown.
 
-## Modify or delete a group
+### Modify or delete a group
 
 1. Navigate to the **Groups** tab.
 
 2. Use the pencil icon to edit the group or the trash icon to remove a group.
 
-# User assignment to groups
+## Manage group users
 
-## Add users to a group
+### Assign users to a group
 
 1. Navigate to the **Groups** tab. Select the group you would like to assign a member to from the table.
 
@@ -38,7 +38,7 @@ On confirmation, the modal closes, the table updates, and your new group is show
 
 On confirmation, the modal closes, the table updates, and your assigned members are shown.
 
-## Remove a user from a group
+### Remove a user from a group
 
 1. Navigate to the **Groups** tab.
 
@@ -46,9 +46,9 @@ On confirmation, the modal closes, the table updates, and your assigned members 
 
 On confirmation, the modal closes, the table updates, and your member is removed from the group.
 
-# Role assignment to groups
+## Manage group roles
 
-## Assign roles to a group
+### Assign roles to a group
 
 1. Navigate to the **Groups** tab. Select the group you would like to assign a role to from the table, and click on the **Roles** tab.
 
@@ -58,7 +58,7 @@ On confirmation, the modal closes, the table updates, and your member is removed
 
 On confirmation, the modal closes, the table updates, and your assigned roles are shown.
 
-## Remove a role from a group
+### Remove a role from a group
 
 1. Navigate to the **Groups** tab. Select the group.
 
