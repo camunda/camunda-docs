@@ -86,11 +86,11 @@ You can configure user task listeners per BPMN user task element.
 
 Each user task listener has the following properties:
 
-| Property    | Description                                                                                                  |
-| :---------- | :----------------------------------------------------------------------------------------------------------- |
-| `eventType` | Specifies the user task event that triggers the listener. Supported values are `assigning` and `completing`. |
-| `type`      | The name of the job type.                                                                                    |
-| `retries`   | The number of retries for the user task listener job.                                                        |
+| Property    | Description                                                                                                                                        |
+| :---------- | :------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `eventType` | Specifies the user task event that triggers the listener. Supported values are `creating`, `assigning`, `updating`, `completing`, and `canceling`. |
+| `type`      | The name of the job type.                                                                                                                          |
+| `retries`   | The number of retries for the user task listener job.                                                                                              |
 
 :::note
 If multiple user task listeners of the same `eventType` (such as multiple `assigning` listeners) are defined on the same user task, they are executed sequentially, one after the other, in the order they are defined in the BPMN model.
