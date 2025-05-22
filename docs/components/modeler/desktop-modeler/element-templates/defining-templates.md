@@ -84,7 +84,7 @@ The JSON schema versioning is backward-compatible, meaning that all versions inc
 
 ## Template versioning
 
-To support [template evolution](https://github.com/bpmn-io/element-templates/blob/main/docs/LIFE_CYCLE.md#overview) you can maintain a `version` property on your templates:
+To support [template evolution](https://github.com/bpmn-io/element-templates/blob/main/docs/LIFE_CYCLE.md#overview), maintain a `version` property on your templates:
 
 ```json
 {
