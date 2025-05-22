@@ -7,15 +7,15 @@ description: "Learn about fetching data using the Orchestration Cluster API."
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-All persistent resources like process definitions, user tasks, users, or tenants provide at least one endpoint to fetch related data. Most of those endpoints provide data with **near-real time consistency** queried from exported records, if records for the respective resource are exported by the engine. If resources are not based on exported records, such as license data or topology information, the data returned by those endpoints can reflect real time insights or static content. For resources like messages, signals, or the engine's internal clock, the engine does not persist any specific data and thus there is no Orchestration Cluster API to fetch them.
+Many Orchestration Cluster API resources like process definitions, user tasks, users, and tenants provide endpoints to fetch related data.
 
-Many resources offer search endpoints to query by POST method and a given query request object where applicable. The structure of such search requests always follows the same schema and so does the response, always returning a list of items matching the query criteria, accompanied by search result metadata.
-
-[Search requests](#search-requests) are forwarded as queries to the data stores that hold the exported records and the search results are returned in the format described in [search responses](#search-responses).
+Those resources can offer search endpoints to query by POST method and a given query request object where applicable. The structure of such [search requests](#search-requests) always follows the same schema and so do the [search responses](#search-responses), always returning a list of items matching the query criteria, accompanied by search result metadata.
 
 Resources can also support querying subordinate resources. For example, for users and groups, with group search being available at `POST /v2/groups/search`, a group's users can be retrieved using `POST /v2/groups/{groupId}/users/search`. Each resource determines independently if subordinate resources can be accessed this way.
 
 Search endpoints can also be used to access entity instances with a unique identifier directly. As an alternative, resources can also provide GET method endpoints for fetching the data of single instances. This is done by a specific key parameter in the URL path, for example `GET /v2/user-tasks/{userTaskKey}`.
+
+All those data retrieval endpoints offer near-real-time data consistency guarantees, providing runtime and historic data that has been processed by the defined [exporters](/self-managed/concepts/exporters.md).
 
 ## Search requests
 
