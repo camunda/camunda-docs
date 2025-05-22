@@ -1,7 +1,7 @@
 ---
 id: managing-tenants
-title: "Managing tenants"
-sidebar_label: "Managing tenants"
+title: "Manage tenants"
+sidebar_label: "Manage tenants"
 description: "Manage tenants within Identity to support the logical separation of your infrastructure."
 ---
 

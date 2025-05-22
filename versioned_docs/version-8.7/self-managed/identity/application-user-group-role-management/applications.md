@@ -1,7 +1,7 @@
 ---
 id: applications
-title: "Applications"
-sidebar_label: "Applications"
+title: "Manage applications"
+sidebar_label: "Manage applications"
 ---
 
 In Identity, an Application represents an entity that can request Identity to authenticate a user or a service.
