@@ -5,16 +5,16 @@ sidebar_label: "Identity"
 description: "Identity is the component within the Camunda 8 self-managed stack responsible for authentication and authorization."
 ---
 
-Use Identity in your Camunda 8 Self-Managed deployment for authentication, access, and authorization for your Camunda 8 users, resources, and the Camunda 8 API.
+Use Identity in Camunda 8 Self-Managed to manage authentication, access, and authorization for your Camunda 8 users, resources, and the Camunda 8 API.
 
 ## About Identity
 
 Identity is included by default in the [Docker Compose](/self-managed/setup/deploy/local/docker-compose.md) and [Helm](/self-managed/setup/install.md) deployments of Camunda 8 Self-Managed, and is configured by default to use a packaged Keycloak instance as an identity provider (IdP).
 
 - Administrators can use Identity to manage users, groups, roles, permissions, and applications within the Camunda 8 platform.
-- Identity supports both human users (interacting with Camunda UIs) and service applications (interacting with Camunda APIs, such as job workers) by providing secure authorization mechanisms based on OAuth 2.0 standards.
-- Users can log in through the login page provided by the IdP. Applications can authenticate using machine-to-machine (M2M) tokens.
-- You can also integrate Identity with an external generic OIDC provider or connect to an existing Keycloak installation.
+- Identity supports both users (interacting via Camunda UIs) and applications (interacting via Camunda APIs, such as job workers) with secure authorization based on OAuth 2.0 standards.
+- Users can log in to Camunda 8 component UIs via an IdP login page. Applications can authenticate via machine-to-machine (M2M) tokens.
+- You can also choose to integrate Identity with an external OIDC provider or connect to an existing Keycloak installation.
 
 ## Get started with Identity
 
