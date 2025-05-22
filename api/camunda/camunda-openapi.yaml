@@ -619,7 +619,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/RoleSearchQueryResult"
-  /tenants/{tenantId}/applications/{applicationId}:
+  /tenants/{tenantId}/applications/{clientId}:
     put:
       tags:
         - Tenant
@@ -633,15 +633,15 @@ paths:
           description: The unique identifier of the tenant.
           schema:
             type: string
-        - name: applicationId
+        - name: clientId
           in: path
           required: true
-          description: The ID of the application to assign.
+          description: The ID of the client to assign.
           schema:
             type: string
       responses:
         "204":
-          description: The application was successfully assigned to the tenant.
+          description: The client was successfully assigned to the tenant.
         "400":
           $ref: "#/components/responses/InvalidData"
         "403":
@@ -658,8 +658,8 @@ paths:
       tags:
         - Tenant
       operationId: removeApplicationFromTenant
-      summary: Remove an application from a tenant
-      description: Removes a single application from a specified tenant.
+      summary: Remove a client from a tenant
+      description: Removes a single client from a specified tenant.
       parameters:
         - name: tenantId
           in: path
@@ -667,7 +667,7 @@ paths:
           description: The unique identifier of the tenant.
           schema:
             type: string
-        - name: applicationId
+        - name: clientId
           in: path
           required: true
           description: The unique identifier of the application.
@@ -675,13 +675,13 @@ paths:
             type: string
       responses:
         "204":
-          description: The application was successfully removed from the tenant.
+          description: The client was successfully removed from the tenant.
         "400":
           $ref: "#/components/responses/InvalidData"
         "403":
           $ref: "#/components/responses/Forbidden"
         "404":
-          description: The tenant does not exist or the application was not assigned to it.
+          description: The tenant does not exist or the client was not assigned to it.
           content:
             application/problem+json:
               schema:
@@ -1675,6 +1675,37 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+
+  /process-instances/{processInstanceKey}/sequence-flows:
+    get:
+      tags:
+        - Process instance
+      operationId: getProcessInstanceSequenceFlows
+      summary: Get process instance sequence flows
+      description: |
+        Get sequence flows taken by the process instance.
+      parameters:
+        - name: processInstanceKey
+          in: path
+          required: true
+          description: The assigned key of the process instance, which acts as a unique identifier for this process instance.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: The process instance sequence flows result.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProcessInstanceSequenceFlowsQueryResult"
+        "400":
+          $ref: "#/components/responses/InvalidData"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
 
@@ -2819,14 +2850,14 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /roles/{roleId}/applications/{applicationId}:
+  /roles/{roleId}/clients/{clientId}:
     put:
       tags:
         - Role
-      operationId: addApplicationToRole
-      summary: Assign an application to a role
+      operationId: addClientToRole
+      summary: Assign a client to a role
       description: |
-        Assigns an application to a role.
+        Assigns a client to a role.
       parameters:
         - name: roleId
           in: path
@@ -2834,15 +2865,15 @@ paths:
           description: The role ID.
           schema:
             type: string
-        - name: applicationId
+        - name: clientId
           in: path
           required: true
-          description: The application ID.
+          description: The client ID.
           schema:
             type: string
       responses:
         "202":
-          description: The application was assigned successfully to the role.
+          description: The client was assigned successfully to the role.
         "400":
           $ref: "#/components/responses/InvalidData"
         "403":
@@ -2854,7 +2885,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         "409":
-          description: The application with the given ID is already assigned to the role.
+          description: The client with the given ID is already assigned to the role.
           content:
             application/problem+json:
               schema:
@@ -2864,10 +2895,10 @@ paths:
     delete:
       tags:
         - Role
-      operationId: removeApplicationFromRole
-      summary: Unassign an application from a role
+      operationId: removeClientFromRole
+      summary: Unassign a client from a role
       description: |
-        Unassigns an application from a role.
+        Unassigns a client from a role.
       parameters:
         - name: roleId
           in: path
@@ -2875,21 +2906,21 @@ paths:
           description: The role ID.
           schema:
             type: string
-        - name: applicationId
+        - name: clientId
           in: path
           required: true
-          description: The application ID.
+          description: The client ID.
           schema:
             type: string
       responses:
         "202":
-          description: The application was unassigned successfully from the role.
+          description: The client was unassigned successfully from the role.
         "400":
           $ref: "#/components/responses/InvalidData"
         "403":
           $ref: "#/components/responses/Forbidden"
         "404":
-          description: The role or application with the given ID or username was not found.
+          description: The role or client with the given ID or username was not found.
           content:
             application/problem+json:
               schema:
@@ -3457,14 +3488,14 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /groups/{groupId}/applications/{applicationId}:
+  /groups/{groupId}/clients/{clientId}:
     put:
       tags:
         - Group
-      operationId: addApplicationToGroup
-      summary: Assign an application to a group
+      operationId: addClientToGroup
+      summary: Assign a client to a group
       description: |
-        Assigns an application to a group.
+        Assigns a client to a group.
       parameters:
         - name: groupId
           in: path
@@ -3472,15 +3503,15 @@ paths:
           description: The group ID.
           schema:
             type: string
-        - name: applicationId
+        - name: clientId
           in: path
           required: true
-          description: The application ID.
+          description: The client ID.
           schema:
             type: string
       responses:
         "202":
-          description: The application was assigned successfully to the group.
+          description: The client was assigned successfully to the group.
         "400":
           $ref: "#/components/responses/InvalidData"
         "403":
@@ -3492,7 +3523,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         "409":
-          description: The application with the given ID is already assigned to the group.
+          description: The client with the given ID is already assigned to the group.
           content:
             application/problem+json:
               schema:
@@ -3502,10 +3533,10 @@ paths:
     delete:
       tags:
         - Group
-      operationId: unassignApplicationFromGroup
-      summary: Unassign an application from a group
+      operationId: unassignClientFromGroup
+      summary: Unassign a client from a group
       description: |
-        Unassigns an appliction from a group.
+        Unassigns a client from a group.
       parameters:
         - name: groupId
           in: path
@@ -3513,21 +3544,21 @@ paths:
           description: The group ID.
           schema:
             type: string
-        - name: applicationId
+        - name: clientId
           in: path
           required: true
-          description: The application ID.
+          description: The client ID.
           schema:
             type: string
       responses:
         "202":
-          description: The application was unassigned successfully from the group.
+          description: The client was unassigned successfully from the group.
         "400":
           $ref: "#/components/responses/InvalidData"
         "403":
           $ref: "#/components/responses/Forbidden"
         "404":
-          description: The group with the given ID was not found, or the application is not assigned to this group.
+          description: The group with the given ID was not found, or the client is not assigned to this group.
           content:
             application/problem+json:
               schema:
@@ -4896,6 +4927,34 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+  /batch-operation-items/search:
+    post:
+      tags:
+        - Batch operation
+      operationId: searchBatchOperationItems
+      summary: Search batch operation items
+      description: Search for batch operation items based on given criteria.
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchOperationItemSearchQuery"
+      responses:
+        "200":
+          description: The batch operation search result.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchOperationItemSearchQueryResult"
+        "400":
+          description: The provided data is not valid.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
 
 components:
   schemas:
@@ -6022,6 +6081,37 @@ components:
         processDefinitionName:
           type: string
           description: The name of the process definition (fall backs to the process definition ID if not available).
+    ProcessInstanceSequenceFlowsQueryResult:
+      description: Process instance sequence flows query response.
+      type: object
+      properties:
+        items:
+          description: The sequence flows.
+          type: array
+          items:
+            $ref: "#/components/schemas/ProcessInstanceSequenceFlowResult"
+    ProcessInstanceSequenceFlowResult:
+      description: Process instance sequence flow result.
+      type: object
+      properties:
+        sequenceFlowId:
+          type: string
+          description: The sequence flow ID.
+        processInstanceKey:
+          type: string
+          description: The key of this process instance.
+        processDefinitionKey:
+          type: string
+          description: The process definition key.
+        processDefinitionId:
+          type: string
+          description: The process definition ID.
+        elementId:
+          type: string
+          description: The element ID for this sequence flow, as provided in the BPMN process.
+        tenantId:
+          description: The tenant ID for this sequence flow.
+          type: string
     ProcessDefinitionElementStatisticsQuery:
       description: Process definition element statistics request.
       type: object
@@ -6693,7 +6783,7 @@ components:
       description: The type of the owner of permissions.
       enum:
         - USER
-        - APPLICATION
+        - CLIENT
         - ROLE
         - GROUP
         - MAPPING
@@ -9005,6 +9095,7 @@ components:
           description: The field to sort by.
           type: string
           enum:
+            - batchOperationId
             - operationType
             - state
             - startDate
@@ -9048,6 +9139,57 @@ components:
             - COMPLETED_WITH_ERRORS
             - CANCELED
             - INCOMPLETED
+    BatchOperationItemSearchQuerySortRequest:
+      type: object
+      properties:
+        field:
+          description: The field to sort by.
+          type: string
+          enum:
+            - batchOperationId
+            - itemKey
+            - processInstanceKey
+            - state
+        order:
+          $ref: "#/components/schemas/SortOrderEnum"
+      required:
+        - field
+    BatchOperationItemSearchQuery:
+      description: Batch operation item search request.
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/SearchQueryRequest"
+      properties:
+        sort:
+          description: Sort field criteria.
+          type: array
+          items:
+            $ref: "#/components/schemas/BatchOperationItemSearchQuerySortRequest"
+        filter:
+          description: The batch operation search filters.
+          allOf:
+            - $ref: "#/components/schemas/BatchOperationItemFilter"
+    BatchOperationItemFilter:
+      description: Batch operation item filter request.
+      type: object
+      properties:
+        batchOperationId:
+          description: The key (or operate legacy ID) of the batch operation.
+          type: string
+        itemKey:
+          description: The key of the item, e.g. a process instance key.
+          type: string
+        processInstanceKey:
+          description: The process instance key of the processed item.
+          type: string
+        state:
+          type: string
+          description: The state of the batch operation.
+          enum:
+            - ACTIVE
+            - COMPLETED
+            - CANCELED
+            - FAILED
     BatchOperationSearchQueryResult:
       type: object
       allOf:
