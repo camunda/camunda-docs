@@ -20,7 +20,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "prettier": "prettier",
-    "prepare": "husky install",
+    "prepare": "husky",
     "test": "jest",
     "test:regression": "playwright test spec/",
     "test:watch": "jest --watch",
