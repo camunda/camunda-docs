@@ -1,7 +1,7 @@
 ---
 id: what-is-identity
-title: "What is Identity?"
-sidebar_label: "What is Identity?"
+title: "Identity"
+sidebar_label: "Identity"
 description: "Identity is the component within the Camunda 8 self-managed stack responsible for authentication and authorization."
 ---
 

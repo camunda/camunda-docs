@@ -1,9 +1,11 @@
 ---
 id: identity-configuration-overview
-title: "Authentication, Keycloak and OIDC integration overview"
-sidebar_label: "Overview"
+title: "Configure Identity"
+sidebar_label: "Configure Identity"
 description: "Learn more about how Identity plays together with Keycloak and other OIDC IdP applications to provide authentication services"
 ---
+
+Authentication, Keycloak and OIDC integration overview
 
 The default deployment of Camunda 8 self-managed uses Keycloak as IdP (Identity Provider) backend.
 

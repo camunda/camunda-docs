@@ -1,7 +1,7 @@
 ---
 id: making-identity-production-ready
-title: "Making Identity production ready"
-sidebar_label: "Making Identity production ready"
+title: "Prepare Identity for production"
+sidebar_label: "Prepare Identity for production"
 description: "Consider the following topics when moving Identity into a production environment."
 ---
 

@@ -1,7 +1,7 @@
 ---
 id: configure-external-identity-provider
-title: "Configuring an external identity provider through Keycloak"
-sidebar_label: "Configuring an external identity provider through Keycloak"
+title: "Configure an external IdP using Keycloak"
+sidebar_label: "Configure an external IdP using Keycloak"
 description: "Learn how to configure an external identity provider like OpenID Connect, SAML, LDAP, or Active Directory."
 ---
 

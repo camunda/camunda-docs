@@ -1,7 +1,7 @@
 ---
 id: resource-management
-title: "Resource management"
-sidebar_label: "Resource management"
+title: "Keycloak resource management"
+sidebar_label: "Keycloak resource management"
 description: "Identity manages resources like users, groups, roles, and tenants. But where are they saved?"
 ---
 
