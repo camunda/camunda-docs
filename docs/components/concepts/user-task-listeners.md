@@ -223,7 +223,7 @@ final JobHandler denyUserTaskLifecycleTransitionHandler =
             .send();
 ```
 
-Not all events can be denied. For example, it's not possible deny the creation or cancelation of a user task.
+Not all events can be denied. For example, it's not possible to deny the creation or cancelation of a user task.
 Currently, user task listeners can deny the lifecycle transition for the following events:
 
 - `assigning`
