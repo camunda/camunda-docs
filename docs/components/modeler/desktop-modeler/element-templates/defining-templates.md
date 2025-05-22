@@ -143,7 +143,7 @@ You can also use this feature to explicitly specify a template’s incompatibili
 If no `engines` are specified, a template is considered compatible with any execution platform version.
 
 :::tip
-Check the [upstream documentation](https://github.com/bpmn-io/element-templates/blob/main/docs/LIFE_CYCLE.md#overview) to learn more about template evolution and life-cycle.
+Review the [upstream documentation](https://github.com/bpmn-io/element-templates/blob/main/docs/LIFE_CYCLE.md#overview) to learn more about template evolution and the life cycle.
 :::
 
 ## Supported BPMN types
