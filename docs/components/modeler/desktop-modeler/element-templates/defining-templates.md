@@ -93,7 +93,7 @@ To support [template evolution](https://github.com/bpmn-io/element-templates/blo
 }
 ```
 
-Once a template with a new `version` is available to users, the editor tooling will suggest them to upgrade, [preserving technical bindings](https://github.com/bpmn-io/element-templates/blob/main/docs/LIFE_CYCLE.md#upgrade-behavior) on a best effort basis.
+Once a template with a new `version` is available to users, the editor tooling suggests an upgrade, [preserving technical bindings](https://github.com/bpmn-io/element-templates/blob/main/docs/LIFE_CYCLE.md#upgrade-behavior) on a best effort basis.
 
 :::tip
 Versioning is an important corner stone of template evolution. Check the [upstream documentation](https://github.com/bpmn-io/element-templates/blob/main/docs/LIFE_CYCLE.md#overview) to understand foundations of our upgrade mechanism, and foundations on how the element template life-cycle works.
