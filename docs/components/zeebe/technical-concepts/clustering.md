@@ -48,20 +48,20 @@ Before a new record on a partition can be processed, it must be replicated to a 
 
 ![cluster](assets/commit.png)
 
-A well-balanced replication will ensure, that records can be committed, even when one or more brokers will become unavailable, but the majority of brokers is still available. **Odd replication factors** [are recommended](partitions.md#replication).
+A well-balanced replication ensures records can be committed even when one or more brokers will become unavailable, but the majority of brokers are still available. **Odd replication factors** [are recommended](partitions.md#replication).
 
-Some examples for common replication factors and their quorum:
+Examples for common replication factors and their quorum:
 
 | Replication factor | Description           | Quorum                                                      | Use case                                                                         |
 | :----------------: | --------------------- | ----------------------------------------------------------- | -------------------------------------------------------------------------------- |
 |         3          | 1 leader, 2 followers | Half or more of 2 followers is 1 follower that confirmed.   | Single region, 3 availability zones. One broker can go down without losing data. |
 |         5          | 1 leader, 4 followers | Half or more of 4 followers are 2 followers that confirmed. | Allows a higher tolerance against the loss of 2 brokers.                         |
 
-The only exception to have **even replication factors** is the [dual region setup](../../../self-managed/concepts/multi-region/dual-region.md). In this setup, an even replication factor ensures, that records are always replicated to both regions. And, in case of losing a whole region, every new request will be denied, as no replication can get a quorum anymore. All partitions will become unhealthy, operators start their [failover procedure](../../../self-managed/operational-guides/multi-region/dual-region-ops.md). No data is lost.
+The only exception to have **even replication factors** is the [dual region setup](../../../self-managed/concepts/multi-region/dual-region.md). In this setup, an even replication factor ensures records are always replicated to both regions. In the case of losing a whole region, every new request will be denied, as no replication can get a quorum anymore. All partitions will become unhealthy, and operators start their [failover procedure](../../../self-managed/operational-guides/multi-region/dual-region-ops.md). No data is lost.
 
-Using odd replication factor in a dual region setup would favor some partitions, where the leader and the majority of followers live in the surviving region, against the partitions that have only a minority of followers survived. This may slow down to detect a region loss, as some process instances still continue while others are stuck.
+Using an odd replication factor in a dual region setup would favor some partitions, where the leader and the majority of followers live in the surviving region, against the partitions that have only a minority of followers survived. This may slow down to detect a region loss, as some process instances still continue while others are stuck.
 
-This is one example for replication and quorum, that is used in the [dual region setup guide](../../../self-managed/setup/deploy/amazon/amazon-eks/dual-region.md#content-elaboration):
+Below is one example for replication and quorum used in the [dual region setup guide](../../../self-managed/setup/deploy/amazon/amazon-eks/dual-region.md#content-elaboration):
 
 | Replication factor | Description           | Quorum                                                      | Use case                                                                                                                                                                                                                 |
 | :----------------: | --------------------- | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
