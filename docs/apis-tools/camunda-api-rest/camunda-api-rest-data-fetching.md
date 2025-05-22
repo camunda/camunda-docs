@@ -1,13 +1,13 @@
 ---
-id: camunda-api-rest-guidelines-data
+id: camunda-api-rest-data-fetching
 title: "Data fetching"
-description: "Learn about the basic guidelines, structures, and conventions of the Camunda 8 REST API."
+description: "Learn about fetching data using the Orchestration Cluster API."
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-All persistent resources like process definitions, user tasks, users, or tenants provide at least one endpoint to fetch related data. Most of those endpoints provide data with **near-real time consistency** queried from exported records, if records for the respective resource are exported by the engine. If resources are not based on exported records, such as license data or topology information, the data returned by those endpoints can reflect real time insights or static content. For resources like messages, signals, or the engine's internal clock, the engine does not persist any specific data and thus there is no API to fetch them.
+All persistent resources like process definitions, user tasks, users, or tenants provide at least one endpoint to fetch related data. Most of those endpoints provide data with **near-real time consistency** queried from exported records, if records for the respective resource are exported by the engine. If resources are not based on exported records, such as license data or topology information, the data returned by those endpoints can reflect real time insights or static content. For resources like messages, signals, or the engine's internal clock, the engine does not persist any specific data and thus there is no Orchestration Cluster API to fetch them.
 
 Many resources offer search endpoints to query by POST method and a given query request object where applicable. The structure of such search requests always follows the same schema and so does the response, always returning a list of items matching the query criteria, accompanied by search result metadata.
 
@@ -100,7 +100,7 @@ This limits the result set returned in the response to 3 items, no matter how ma
 
 To provide an easy yet expressive way for users to search for and filter resources, search requests can contain more advanced filter criteria than fields being _equal_ to a target value.
 
-For example, this allows searching using logical (and, in) and comparison operators (greater than, less than). The list of generally supported advanced filter operators is described below. The supported operators depend on the endpoint and the type of the filter attribute. All endpoints document available operators for each attribute in the API specification.
+For example, this allows searching using logical (and, in) and comparison operators (greater than, less than). The list of generally supported advanced filter operators is described below. The supported operators depend on the endpoint and the type of the filter attribute. All endpoints document available operators for each attribute in the Orchestration Cluster API specification.
 
 #### Conditional Operators
 
@@ -197,7 +197,7 @@ The **page** object contains the pagination information that can be used in subs
 
 The `firstSortValues` field lists the criteria identifying the **first** entry of this page. This allows paging backward in the result set by copying them into the `searchBefore` attribute in a subsequent [search request](#search-requests). The `lastSortValues` field provides the same for the **last** entry of this page to allow paging forward using `searchAfter`. In detail, those arrays contain the values of the first or last item’s attributes, in the order defined in the search request’s `sort` object. The last element of the array is the item’s value of our internal tiebreaker attribute, typically the internal record’s key.
 
-The arrays `firstSortValues` and `lastSortValues` don't need to be interpreted by API consumers. For pagination to work as expected, they must be copied into subsequent requests unaltered.
+The arrays `firstSortValues` and `lastSortValues` don't need to be interpreted by Orchestration Cluster API consumers. For pagination to work as expected, they must be copied into subsequent requests unaltered.
 
 <details>
 <summary>Example</summary>
