@@ -78,12 +78,6 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/camunda-api-rest/specifications/get-batch-operation-items",
-          label: "Get batch operation items",
-          className: "api-method get",
-        },
-        {
-          type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/search-batch-operations",
           label: "Search batch operations",
           className: "api-method post",
@@ -320,6 +314,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/search-roles-for-group",
           label: "Search group roles",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/search-clients-for-group",
+          label: "Search group clients",
           className: "api-method post",
         },
         {
@@ -679,6 +679,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/search-clients-for-role",
+          label: "Search role clients",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/add-user-to-role",
           label: "Assign a user to a role",
           className: "api-method put",
@@ -799,6 +805,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/search-clients-for-tenant",
+          label: "Search clients for tenant",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/search-groups-for-tenant",
           label: "Search groups for tenant",
           className: "api-method post",
@@ -811,13 +823,13 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/camunda-api-rest/specifications/assign-application-to-tenant",
-          label: "Assign a user to a tenant",
+          id: "apis-tools/camunda-api-rest/specifications/assign-client-to-tenant",
+          label: "Assign a client to a tenant",
           className: "api-method put",
         },
         {
           type: "doc",
-          id: "apis-tools/camunda-api-rest/specifications/remove-application-from-tenant",
+          id: "apis-tools/camunda-api-rest/specifications/remove-client-from-tenant",
           label: "Remove a client from a tenant",
           className: "api-method delete",
         },

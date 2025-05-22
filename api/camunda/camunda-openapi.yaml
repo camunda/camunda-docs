@@ -557,14 +557,41 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UserSearchQueryRequest"
+              $ref: "#/components/schemas/TenantUserSearchQueryRequest"
       responses:
         "200":
           description: The search result of users for the tenant.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/UserSearchResult"
+                $ref: "#/components/schemas/TenantUserSearchResult"
+  /tenants/{tenantId}/clients/search:
+    post:
+      tags:
+        - Tenant
+      operationId: searchClientsForTenant
+      summary: Search clients for tenant
+      description: Retrieves a filtered and sorted list of clients for a specified tenant.
+      parameters:
+        - name: tenantId
+          in: path
+          required: true
+          description: The unique identifier of the tenant.
+          schema:
+            type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TenantClientSearchQueryRequest"
+      responses:
+        "200":
+          description: The search result of users for the tenant.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TenantClientSearchResult"
   /tenants/{tenantId}/groups/search:
     post:
       tags:
@@ -619,13 +646,13 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/RoleSearchQueryResult"
-  /tenants/{tenantId}/applications/{clientId}:
+  /tenants/{tenantId}/clients/{clientId}:
     put:
       tags:
         - Tenant
-      operationId: assignApplicationToTenant
-      summary: Assign a user to a tenant
-      description: Assign a single user to a specified tenant.
+      operationId: assignClientToTenant
+      summary: Assign a client to a tenant
+      description: Assign a client to a specified tenant.
       parameters:
         - name: tenantId
           in: path
@@ -657,7 +684,7 @@ paths:
     delete:
       tags:
         - Tenant
-      operationId: removeApplicationFromTenant
+      operationId: removeClientFromTenant
       summary: Remove a client from a tenant
       description: Removes a single client from a specified tenant.
       parameters:
@@ -2751,14 +2778,56 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UserSearchQueryRequest"
+              $ref: "#/components/schemas/RoleUserSearchQueryRequest"
       responses:
         "200":
           description: The users assigned to the role.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/UserSearchResult"
+                $ref: "#/components/schemas/RoleUserSearchResult"
+        "400":
+          $ref: "#/components/responses/InvalidData"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          description: The role with the given ID was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /roles/{roleId}/clients/search:
+    post:
+      tags:
+        - Role
+      operationId: searchClientsForRole
+      summary: Search role clients
+      description: |
+        Search clients assigned to a role.
+      parameters:
+        - name: roleId
+          in: path
+          required: true
+          description: The role ID.
+          schema:
+            type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RoleClientSearchQueryRequest"
+      responses:
+        "200":
+          description: The clients assigned to the role.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RoleClientSearchResult"
         "400":
           $ref: "#/components/responses/InvalidData"
         "401":
@@ -3305,14 +3374,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UserSearchQueryRequest"
+              $ref: "#/components/schemas/GroupUserSearchQueryRequest"
       responses:
         "200":
           description: The users assigned to the group.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/UserSearchResult"
+                $ref: "#/components/schemas/GroupUserSearchResult"
         "400":
           $ref: "#/components/responses/InvalidData"
         "401":
@@ -3397,6 +3466,48 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/RoleSearchQueryResult"
+        "400":
+          $ref: "#/components/responses/InvalidData"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          description: The group with the given ID was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /groups/{groupId}/clients/search:
+    post:
+      tags:
+        - Group
+      operationId: searchClientsForGroup
+      summary: Search group clients
+      description: |
+        Search clients assigned to a group.
+      parameters:
+        - name: groupId
+          in: path
+          required: true
+          description: The group ID.
+          schema:
+            type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GroupClientSearchQueryRequest"
+      responses:
+        "200":
+          description: The clients assigned to the group.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GroupClientSearchResult"
         "400":
           $ref: "#/components/responses/InvalidData"
         "401":
@@ -4738,43 +4849,6 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "404":
           description: The batch operation is not found.
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetail"
-        "500":
-          $ref: "#/components/responses/InternalServerError"
-
-  /batch-operations/{batchOperationId}/items:
-    get:
-      tags:
-        - Batch operation
-      operationId: getBatchOperationItems
-      summary: Get batch operation items
-      description: Get items for a batch operation.
-      parameters:
-        - name: batchOperationId
-          in: path
-          required: true
-          description: |
-            The key (or operate legacy ID) of the batch operation.
-          schema:
-            type: string
-      responses:
-        "200":
-          description: The batch operation items were found.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/BatchOperationItemSearchQueryResult"
-        "400":
-          description: The provided data is not valid.
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetail"
-        "404":
-          description: The batch operation was not found.
           content:
             application/problem+json:
               schema:
@@ -7009,13 +7083,16 @@ components:
       properties:
         username:
           description: The username of the user.
-          type: "string"
+          allOf:
+            - $ref: "#/components/schemas/StringFilterProperty"
         name:
           description: The name of the user.
-          type: "string"
+          allOf:
+            - $ref: "#/components/schemas/StringFilterProperty"
         email:
           description: The email of the user.
-          type: "string"
+          allOf:
+            - $ref: "#/components/schemas/StringFilterProperty"
     MappingFilterRequest:
       description: Mapping search filter.
       type: object
@@ -7129,6 +7206,82 @@ components:
         email:
           description: The email of the user.
           type: "string"
+    TenantClientResult:
+      type: object
+      properties:
+        clientId:
+          description: The ID of the client.
+          type: string
+    TenantClientSearchResult:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/SearchQueryResponse"
+      properties:
+        items:
+          description: The matching clients.
+          type: array
+          items:
+            $ref: "#/components/schemas/TenantClientResult"
+    TenantClientSearchQueryRequest:
+      allOf:
+        - $ref: "#/components/schemas/SearchQueryRequest"
+      type: object
+      properties:
+        sort:
+          description: Sort field criteria.
+          type: array
+          items:
+            $ref: "#/components/schemas/TenantClientSearchQuerySortRequest"
+    TenantClientSearchQuerySortRequest:
+      type: object
+      properties:
+        field:
+          description: The field to sort by.
+          type: string
+          enum:
+            - clientId
+        order:
+          $ref: "#/components/schemas/SortOrderEnum"
+      required:
+        - field
+    TenantUserResult:
+      type: object
+      properties:
+        username:
+          description: The username of the user.
+          type: string
+    TenantUserSearchResult:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/SearchQueryResponse"
+      properties:
+        items:
+          description: The matching users.
+          type: array
+          items:
+            $ref: "#/components/schemas/TenantUserResult"
+    TenantUserSearchQueryRequest:
+      allOf:
+        - $ref: "#/components/schemas/SearchQueryRequest"
+      type: object
+      properties:
+        sort:
+          description: Sort field criteria.
+          type: array
+          items:
+            $ref: "#/components/schemas/TenantUserSearchQuerySortRequest"
+    TenantUserSearchQuerySortRequest:
+      type: object
+      properties:
+        field:
+          description: The field to sort by.
+          type: string
+          enum:
+            - username
+        order:
+          $ref: "#/components/schemas/SortOrderEnum"
+      required:
+        - field
     RoleCreateRequest:
       type: "object"
       properties:
@@ -7147,9 +7300,6 @@ components:
     RoleCreateResult:
       type: object
       properties:
-        roleKey:
-          description: The key of the created role.
-          type: string
         roleId:
           description: The ID of the created role.
           type: string
@@ -7174,9 +7324,6 @@ components:
     RoleUpdateResult:
       type: object
       properties:
-        roleKey:
-          type: string
-          description: The key of the updated role.
         name:
           type: string
           description: The display name of the updated role.
@@ -7193,20 +7340,12 @@ components:
         name:
           type: string
           description: The role name.
-        roleKey:
-          type: string
-          description: The role key.
         roleId:
           type: string
           description: The role id.
         description:
           type: string
           description: The description of the role.
-        assignedMemberKeys:
-          type: array
-          description: The set of keys of members assigned to the role.
-          items:
-            type: string
     RoleSearchQuerySortRequest:
       type: object
       properties:
@@ -7214,7 +7353,6 @@ components:
           description: The field to sort by.
           type: string
           enum:
-            - roleKey
             - name
             - roleId
         order:
@@ -7257,7 +7395,82 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/RoleResult"
-
+    RoleUserResult:
+      type: object
+      properties:
+        username:
+          description: The username of the user.
+          type: string
+    RoleUserSearchResult:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/SearchQueryResponse"
+      properties:
+        items:
+          description: The matching users.
+          type: array
+          items:
+            $ref: "#/components/schemas/RoleUserResult"
+    RoleUserSearchQueryRequest:
+      allOf:
+        - $ref: "#/components/schemas/SearchQueryRequest"
+      type: object
+      properties:
+        sort:
+          description: Sort field criteria.
+          type: array
+          items:
+            $ref: "#/components/schemas/RoleUserSearchQuerySortRequest"
+    RoleUserSearchQuerySortRequest:
+      type: object
+      properties:
+        field:
+          description: The field to sort by.
+          type: string
+          enum:
+            - username
+        order:
+          $ref: "#/components/schemas/SortOrderEnum"
+      required:
+        - field
+    RoleClientResult:
+      type: object
+      properties:
+        clientId:
+          description: The ID of the client.
+          type: string
+    RoleClientSearchResult:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/SearchQueryResponse"
+      properties:
+        items:
+          description: The matching clients.
+          type: array
+          items:
+            $ref: "#/components/schemas/RoleClientResult"
+    RoleClientSearchQueryRequest:
+      allOf:
+        - $ref: "#/components/schemas/SearchQueryRequest"
+      type: object
+      properties:
+        sort:
+          description: Sort field criteria.
+          type: array
+          items:
+            $ref: "#/components/schemas/RoleClientSearchQuerySortRequest"
+    RoleClientSearchQuerySortRequest:
+      type: object
+      properties:
+        field:
+          description: The field to sort by.
+          type: string
+          enum:
+            - clientId
+        order:
+          $ref: "#/components/schemas/SortOrderEnum"
+      required:
+        - field
     GroupCreateRequest:
       type: "object"
       properties:
@@ -7371,6 +7584,82 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/GroupResult"
+    GroupUserResult:
+      type: object
+      properties:
+        username:
+          description: The username of the user.
+          type: string
+    GroupUserSearchResult:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/SearchQueryResponse"
+      properties:
+        items:
+          description: The matching members.
+          type: array
+          items:
+            $ref: "#/components/schemas/GroupUserResult"
+    GroupUserSearchQueryRequest:
+      allOf:
+        - $ref: "#/components/schemas/SearchQueryRequest"
+      type: object
+      properties:
+        sort:
+          description: Sort field criteria.
+          type: array
+          items:
+            $ref: "#/components/schemas/GroupUserSearchQuerySortRequest"
+    GroupUserSearchQuerySortRequest:
+      type: object
+      properties:
+        field:
+          description: The field to sort by.
+          type: string
+          enum:
+            - username
+        order:
+          $ref: "#/components/schemas/SortOrderEnum"
+      required:
+        - field
+    GroupClientResult:
+      type: object
+      properties:
+        clientId:
+          description: The ID of the client.
+          type: string
+    GroupClientSearchResult:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/SearchQueryResponse"
+      properties:
+        items:
+          description: The matching client IDs.
+          type: array
+          items:
+            $ref: "#/components/schemas/GroupClientResult"
+    GroupClientSearchQueryRequest:
+      allOf:
+        - $ref: "#/components/schemas/SearchQueryRequest"
+      type: object
+      properties:
+        sort:
+          description: Sort field criteria.
+          type: array
+          items:
+            $ref: "#/components/schemas/GroupClientSearchQuerySortRequest"
+    GroupClientSearchQuerySortRequest:
+      type: object
+      properties:
+        field:
+          description: The field to sort by.
+          type: string
+          enum:
+            - clientId
+        order:
+          $ref: "#/components/schemas/SortOrderEnum"
+      required:
+        - field
     MappingRuleCreateUpdateRequest:
       type: object
       properties:
