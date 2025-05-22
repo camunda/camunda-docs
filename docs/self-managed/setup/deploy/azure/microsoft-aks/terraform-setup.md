@@ -116,25 +116,6 @@ This finding indicates that your Azure Key Vault network access controls are not
 </details>
 
 <details>
-<summary><strong>AVD-AZU-0042 (HIGH): RBAC is not enabled on cluster</strong></summary>
-
-#### Reasoning
-
-This finding indicates that Role-Based Access Control (RBAC) is not enabled on your Kubernetes cluster. Without RBAC, you cannot properly control who has what permissions in your cluster, potentially leading to privilege escalation or unauthorized access.
-
-#### Potential Resolution
-
-1. Enable [RBAC](https://learn.microsoft.com/en-us/azure/aks/manage-azure-rbac) when creating new clusters (this is now the default in AKS)
-2. For existing clusters, [upgrade to a version](https://learn.microsoft.com/en-us/azure/aks/upgrade-cluster) that supports RBAC
-3. Implement [Azure AD integration with RBAC](https://learn.microsoft.com/en-us/azure/aks/managed-aad)
-4. [Create and assign roles](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-portal) to users and service principals
-5. Follow the [principle of least privilege](https://learn.microsoft.com/en-us/security/zero-trust/develop/identity-iam-development-best-practices) when assigning permissions
-
-> **Note:** While disabling RBAC simplifies testing by reducing permission barriers, this significantly reduces security and should never be done in production. For testing purposes, consider using dedicated test users with appropriate RBAC roles instead.
-
-</details>
-
-<details>
 <summary><strong>AVD-AZU-0040 (MEDIUM): Cluster does not have logging enabled via OMS Agent</strong></summary>
 
 #### Reasoning
