@@ -7,32 +7,30 @@ description: "Learn more about how Identity plays together with Keycloak and oth
 
 Configure your Camunda 8 Self-Managed Identity deployment.
 
-## About Identity Keycloak IdP configuration
+## Configure Identity IdP
 
-The default Camunda 8 Self-Managed deployment uses Keycloak as an IdP (Identity Provider). You can choose to:
+The default Camunda 8 Self-Managed deployment uses Keycloak as an identity provider (IdP).
 
-- **Use Keycloak** as an IdP, using the Camunda 8 self-managed Keycloak, your own existing Keycloak setup, or using Keycloak to integrate with external IdP services (for example, SAML, LDAP, or Active Directory).
+You can choose how to configure your Identity IdP from the following options:
 
-- **Replace Keycloak** and connect to an external OIDC provider.
+| IdP configuration                                                                     | Description                                                                                                      |
+| :------------------------------------------------------------------------------------ | :--------------------------------------------------------------------------------------------------------------- |
+| [Configure an external IdP using Keycloak](./configure-external-identity-provider.md) | Configure an external identity provider such as OpenID Connect, SAML, LDAP, or Active Directory, using Keycloak. |
+| [Connect to an existing Keycloak instance](./connect-to-an-existing-keycloak.md)      | Connect Identity to your existing Keycloak instance.                                                             |
+| [Connect to an external OIDC provider](./connect-to-an-oidc-provider.md)              | Connect to an OpenID Connect (OIDC) authentication provider to replace Keycloak.                                 |
 
 :::note
 Keycloak is started as a component in a [Docker Compose](/self-managed/setup/deploy/local/docker-compose.md) and [Helm](/self-managed/setup/install.md) Camunda 8 self-managed deployment.
 :::
 
-## Configure an external IdP using Keycloak
+## Authentication
 
-You can configure an external identity provider such as OpenID Connect, SAML, LDAP, or Active Directory using Keycloak.
+Learn more about Identity authentication. Based on your configuration, Users and Applications interacting with Camunda 8 will authenticate via the respective IdP following the OAuth 2.0 protocol, either by using a log-in page or by using M2M tokens.
 
-- [Configure an external IdP using Keycloak](./configure-external-identity-provider.md)
+- [Authentication](../authentication.md)
 
-## Connect to an existing Keycloak instance
+## Additional configuration
 
-In this guide, we'll demonstrate how to connect Identity to your existing Keycloak instance.
-
-- [already existing Keycloak](./connect-to-an-existing-keycloak.md)
-
-## Connect to an external OIDC provider
-
-To enable a smoother integration with your existing systems, Camunda supports connecting to an OpenID Connect (OIDC) authentication provider. A full list of supported and unsupported features when using an OIDC provider is available in the OIDC features table.
-
-- [external OIDC provider](./connect-to-an-oidc-provider.md)
+- [Configuration variables](../miscellaneous/configuration-variables.md)
+- [Configure logging](../miscellaneous/configure-logging.md)
+- [Starting configuration for Identity](../miscellaneous/starting-configuration.md)
