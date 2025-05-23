@@ -22,15 +22,3 @@ You can choose how to configure your Identity IdP from the following options:
 :::note
 Keycloak is started as a component in a [Docker Compose](/self-managed/setup/deploy/local/docker-compose.md) and [Helm](/self-managed/setup/install.md) Camunda 8 self-managed deployment.
 :::
-
-## Authentication
-
-Learn more about Identity authentication. Based on your configuration, Users and Applications interacting with Camunda 8 will authenticate via the respective IdP following the OAuth 2.0 protocol, either by using a log-in page or by using M2M tokens.
-
-- [Authentication](../authentication.md)
-
-## Additional configuration
-
-- [Configuration variables](../miscellaneous/configuration-variables.md)
-- [Configure logging](../miscellaneous/configure-logging.md)
-- [Starting configuration for Identity](../miscellaneous/starting-configuration.md)

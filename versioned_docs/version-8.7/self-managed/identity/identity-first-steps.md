@@ -1,7 +1,7 @@
 ---
 id: identity-first-steps
 title: "Get started with Identity"
-sidebar_label: "Get started with Identity"
+sidebar_label: "Get started"
 description: "Learn more about starting Identity, accessing the UI, default users, the home screen, and more."
 ---
 

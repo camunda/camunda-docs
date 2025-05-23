@@ -2144,13 +2144,10 @@
                 "self-managed/identity/configuration/configure-external-identity-provider",
                 "self-managed/identity/configuration/connect-to-an-existing-keycloak",
                 "self-managed/identity/configuration/connect-to-an-oidc-provider",
-                "self-managed/identity/authentication",
-                "self-managed/identity/miscellaneous/configuration-variables",
-                "self-managed/identity/miscellaneous/configure-logging",
-                "self-managed/identity/miscellaneous/starting-configuration",
                 "self-managed/identity/user-guide/configuration/alternative-db"
               ]
             },
+            "self-managed/identity/authentication",
             {
               "type": "category",
               "label": "Manage Identity",
@@ -2177,17 +2174,24 @@
                   },
                   "items": [
                     "self-managed/identity/access-management/manage-permissions",
-                    "self-managed/identity/access-management/resource-authorizations",
-                    "self-managed/identity/mapping-rules",
-                    "self-managed/identity/miscellaneous/resource-management"
+                    "self-managed/identity/access-management/resource-authorizations"
                   ]
                 },
-                "self-managed/identity/managing-tenants"
+                "self-managed/identity/managing-tenants",
+                "self-managed/identity/mapping-rules"
               ]
             },
-            "self-managed/identity/miscellaneous/making-identity-production-ready",
-            "self-managed/identity/miscellaneous/application-monitoring",
-            "self-managed/identity/miscellaneous/troubleshoot-identity"
+            {
+              "Reference": [
+                "self-managed/identity/miscellaneous/application-monitoring",
+                "self-managed/identity/miscellaneous/configuration-variables",
+                "self-managed/identity/miscellaneous/configure-logging",
+                "self-managed/identity/miscellaneous/making-identity-production-ready",
+                "self-managed/identity/miscellaneous/resource-management",
+                "self-managed/identity/miscellaneous/starting-configuration",
+                "self-managed/identity/miscellaneous/troubleshoot-identity"
+              ]
+            }
           ]
         },
         {
