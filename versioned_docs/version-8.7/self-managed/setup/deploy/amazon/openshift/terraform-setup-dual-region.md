@@ -272,13 +272,13 @@ this guide uses a dedicated [aws terraform provider](https://registry.terraform.
 
 1. Ensure you are in the [reference architecture directory of the cloned repository](#obtain-a-copy-of-the-reference-architecture): `./aws/openshift/rosa-hcp-dual-region`. Then, navigate into the `clusters` module:
 
-```bash
-ls
-# Example output:
-# clusters  peering backup_bucket
+   ```bash
+   ls
+   # Example output:
+   # clusters  peering backup_bucket
 
-cd clusters
-```
+   cd clusters
+   ```
 
 2. Configure your topology deployment, as you will use multiple regions, specify `CLUSTER_1_REGION` and `CLUSTER_2_REGION` with the target regions respectively.
 

@@ -170,7 +170,7 @@ This S3 bucket will now securely store your Terraform state files with versionin
 Once the S3 bucket is created, configure your `config.tf` file to use the S3 backend for managing the Terraform state:
 
 ```hcl reference
-https://github.com/camunda/camunda-deployment-references/blob/stable/8.6/aws/openshift/rosa-hcp-single-region/config.tf
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.6/aws/openshift/rosa-hcp-single-region/terraform/cluster/config.tf
 ```
 
 #### Initialize Terraform
@@ -195,7 +195,7 @@ This module sets up the foundational configuration for ROSA HCP and Terraform us
 
 We will leverage [Terraform modules](https://developer.hashicorp.com/terraform/language/modules), which allow us to abstract resources into reusable components, simplifying infrastructure management.
 
-The [Camunda-provided module](https://github.com/camunda/camunda-deployment-references/tree/stable/8.6/aws/openshift/rosa-hcp-single-region) is publicly available and serves as a robust starting point for deploying a Red Hat OpenShift cluster on AWS using a Hosted Control Plane. It is highly recommended to review this module before implementation to understand its structure and capabilities.
+The [Camunda-provided module](https://github.com/camunda/camunda-deployment-references/tree/stable/8.6/aws/openshift/rosa-hcp-single-region/terraform/cluster/) is publicly available and serves as a robust starting point for deploying a Red Hat OpenShift cluster on AWS using a Hosted Control Plane. It is highly recommended to review this module before implementation to understand its structure and capabilities.
 
 Please note that this module is based on the official [ROSA HCP Terraform module documentation](https://docs.openshift.com/rosa/rosa_hcp/terraform/rosa-hcp-creating-a-cluster-quickly-terraform.html). It is presented as an example for running Camunda 8 in ROSA. For advanced use cases or custom setups, we encourage you to use the official module, which includes vendor-supported features.
 
@@ -287,7 +287,7 @@ To set up a ROSA cluster, certain prerequisites must be configured on your AWS a
    :::
 
    ```hcl reference
-   https://github.com/camunda/camunda-deployment-references/blob/stable/8.6/aws/openshift/rosa-hcp-single-region/cluster.tf
+   https://github.com/camunda/camunda-deployment-references/blob/stable/8.6/aws/openshift/rosa-hcp-single-region/terraform/cluster/cluster.tf
 
    ```
 
