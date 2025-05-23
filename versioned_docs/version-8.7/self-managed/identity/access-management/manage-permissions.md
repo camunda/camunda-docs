@@ -5,11 +5,12 @@ sidebar_label: "Manage permissions"
 description: "Use Identity to manage permissions for a role"
 ---
 
-## Overview
+Manage permissions for roles and applications in Identity.
 
-Permissions can be granted to **Applications** or **Roles**. By granting a permission to a **role**, the respetive users carrying the role, or users that are part of a group with that role, will retrieve the respective access.
+- You can grant permissions to either [roles](../application-user-group-role-management/manage-roles.md) or [applications](../application-user-group-role-management/applications.md).
+- When a permission is granted to a role, all users assigned to the role and members of a group with the assigned role, are granted the respective access.
 
-## Managing permissions for roles
+## Manage role permissions
 
 ### Assign a permission to a role
 
@@ -35,15 +36,15 @@ To delete a permission from a role, take the following steps:
 
 On confirmation, the modal will close, the table will update, and the assigned permission will be removed from the role.
 
-## Managing permissions for applications
+## Manage application permissions
 
-### Assigning a permission an application
+### Assign a permission to an application
 
 To assign a permission to an application using Identity, take the following steps:
 
 1. Navigate to the **Applications** tab and click on an application. Then, select the **Access to APIs** tab and click **Assign Permissions**:
 
-![assign-a-permission-application-tab](../img/assign-a-permission-application-tab.png)
+   ![assign-a-permission-application-tab](../img/assign-a-permission-application-tab.png)
 
 2. Select the API which contains the permission you want to assign.
 

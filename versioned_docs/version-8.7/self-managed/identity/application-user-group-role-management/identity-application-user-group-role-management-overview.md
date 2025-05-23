@@ -16,15 +16,16 @@ In Identity, a user represents a human who interacts with any Camunda 8 user int
 
 ## Groups
 
-Use groups to manage user access by organizing users into groups (group members) and assigning group roles. Instead of assigning roles to individual users, map a set of roles to a group, with all group members automatically inheriting the set permissions.
+Use groups to manage user access by organizing users into groups (group members) and assigning roles. Instead of assigning roles to individual users, map a set of roles to a group, with all group members automatically inheriting the role permissions.
 
 - [Manage Groups](./manage-groups.md)
 
 ## Roles
 
-Roles allow you to simplify and standardize access control across your systemd. Roles define the actions a user or application can perform in Camunda 8 by grouping together a set of related [permissions](versioned_docs/version-8.7/self-managed/identity/access-management/manage-permissions.md).
+Use roles to simplify and standardize access control across your system, help enforce consistent permission sets, reduce errors, and scale access management as your organization grows.
 
-You can assign roles [directly to users](#assign-a-role-to-a-user) or [using groups](/self-managed/identity/application-user-group-role-management/manage-groups.md#assign-roles-to-a-group). Roles help you enforce consistent permission sets, reduce errors, and scale access management as your organization grows.
+Roles define the actions a user or application can perform in Camunda 8 by grouping together a set of related [permissions](../access-management/manage-permissions.md).
+You can assign roles [directly to a user](manage-roles.md#assign-a-role-to-a-user) or [using groups](/self-managed/identity/application-user-group-role-management/manage-groups.md#assign-roles-to-a-group).
 
 - [Manage roles](./manage-roles.md)
 
