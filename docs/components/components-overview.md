@@ -31,9 +31,9 @@ Deployment guides for Camunda 8 components are available in the [Self-Managed se
 
 [Camunda 8](https://camunda.io) orchestrates complex business processes that span people, systems, and devices. With Camunda, business users collaborate with developers to model and [automate end-to-end processes using BPMN-powered flowcharts](/guides/automating-a-process-using-bpmn.md), alongside DMN decision tables that promote speed, scale, and decision logic.
 
-## What use cases does Camunda 8 have?
+## Camunda 8 use cases
 
-### Orchestrate, observe, and analyze microservices & human tasks
+With Camunda 8, orchestrate, observe, and analyze microservices and human tasks.
 
 An end-to-end, automated business process typically requires multiple microservices to achieve an outcome. Software developers and architects often struggle to effectively communicate across multiple microservices, monitor their performance, and identify and resolve problems when they occur.
 
