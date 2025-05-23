@@ -5,7 +5,7 @@ sidebar_label: "Access and permissions"
 description: "Access Management and Permissions overview"
 ---
 
-Identity allows you to use permissions to manage access to Camunda 8.
+Manage and control access to Camunda 8 APIs and custom applications using permissions and roles.
 
 ## About permissions
 
@@ -14,7 +14,7 @@ When using and managing permissions, it is important to understand the following
 - APIs represent the different Camunda 8 components, such as Operate, Tasklist, and so on.
 - Each [API defines its own set of permissions](#permissions) that to control API access.
 - Permissions are [organized using roles](./manage-permissions.md#manage-permissions-for-roles) that can be assigned to users either directly or via Groups.
-- You can also [assign permissions to your custom Application](./manage-permissions.md#manage-permissions-for-applications), such as a job worker for example.
+- You can also [assign permissions to your custom application](./manage-permissions.md#manage-application-permissions), such as a job worker for example.
 
 :::note
 You can also use [resource authorizations](./resource-authorizations.md) to grant more fine-grained access control to Camunda 8 resources to users and groups.

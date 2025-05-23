@@ -15,7 +15,7 @@ You can choose how to configure your Identity IdP from the following options:
 
 | IdP configuration                                                                     | Description                                                                                                      |
 | :------------------------------------------------------------------------------------ | :--------------------------------------------------------------------------------------------------------------- |
-| [Configure an external IdP using Keycloak](./configure-external-identity-provider.md) | Configure an external identity provider such as OpenID Connect, SAML, LDAP, or Active Directory, using Keycloak. |
+| [Configure an external IdP using Keycloak](./configure-external-identity-provider.md) | Configure an external identity provider using Keycloak, such as OpenID Connect, SAML, LDAP, or Active Directory. |
 | [Connect to an existing Keycloak instance](./connect-to-an-existing-keycloak.md)      | Connect Identity to your existing Keycloak instance.                                                             |
 | [Connect to an external OIDC provider](./connect-to-an-oidc-provider.md)              | Connect to an OpenID Connect (OIDC) authentication provider to replace Keycloak.                                 |
 

@@ -5,7 +5,7 @@ sidebar_label: "Manage users, groups, roles, and applications"
 description: "Learn more about how Identity makes use of users, groups, and roles"
 ---
 
-Identity allows you to manage and organize your users (using groups and roles) and applications.
+Manage and organize your users and applications using groups and roles.
 
 ## About managing users in Identity
 

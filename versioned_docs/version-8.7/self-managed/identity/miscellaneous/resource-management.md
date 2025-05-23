@@ -5,10 +5,10 @@ sidebar_label: "Keycloak resource management"
 description: "Identity manages resources like users, groups, roles, and tenants. But where are they saved?"
 ---
 
-When using Keycloak as IdP, Identity uses the following Keycloak resources:
+When using Keycloak as an IdP, Identity uses the following Keycloak resources:
 
 | Identity resource             | Keycloak resource (and how it is filtered)      |
-| ----------------------------- | ----------------------------------------------- |
+| :---------------------------- | :---------------------------------------------- |
 | Application                   | Client (without authorization)                  |
 | Application/permissions       | Client/Service Account roles                    |
 | API                           | Client (with authorization)                     |
@@ -27,4 +27,4 @@ When using Keycloak as IdP, Identity uses the following Keycloak resources:
 | Tenant/Assigned group\*       | (not saved to Keycloak)                         |
 | Tenant/Assigned application\* | (not saved to Keycloak)                         |
 
-\* This resource is only activated with the according feature flag.
+\* This resource is only activated with the relevant feature flag.
