@@ -53,6 +53,6 @@ Once you are able to log in to Identity, you can start managing authentication, 
 - [Manage access and permissions](access-management/access-management-overview.md)
 - [Manage tenants](managing-tenants.md)
 
-:::note
-You can also [configure Identity](configuration/identity-configuration-overview.md) Keycloak and OIDC integration, and learn more about how Identity authentication works.
+:::info
+Learn more about how to [configure Identity](configuration/identity-configuration-overview.md) and [authentication](authentication.md).
 :::
