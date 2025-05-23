@@ -1,7 +1,7 @@
 ---
 id: resource-authorizations
 title: "Manage resource authorizations"
-sidebar_label: "Manage resource authorizations"
+sidebar_label: "Resource authorizations"
 description: "Learn about the methods to control resource access."
 ---
 
