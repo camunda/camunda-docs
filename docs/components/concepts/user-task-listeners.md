@@ -186,16 +186,12 @@ client.newWorker()
 
 #### On correcting the assignee
 
-The assignee can be corrected in the `creating` listener if and only if the process hasn't specified an assignee for this user task already.
-For example, if the user task's `assignee` expression evaluates to `null`.
+The assignee can be corrected in the `creating` listener if the process hasn't specified an assignee for this user task already. For example, if the user task's `assignee` expression evaluates to `null`.
 
 :::tip
-If you want to set an assignee when creating the user task:
+To set an assignee when creating the user task, review [specifying the assignee in the process](components/modeler/bpmn/user-tasks/user-tasks.md#assignments), or verify the assignee is not yet defined by the process by [accessing the `assignee` attribute in the job headers](#accessing-user-task-data).
 
-- favor [specifying the assignee in the process](components/modeler/bpmn/user-tasks/user-tasks.md#assignments)
-- or verify that the assignee is not yet defined by the process by [accessing the `assignee` attribute in the job headers](#accessing-user-task-data).
-
-If you want to change the assignee specified by the process, you can do so by correcting it in reaction to the `assigning` event.
+To change the assignee specified by the process, correct it with the `assigning` event.
 :::
 
 ### Denying the lifecycle transition
