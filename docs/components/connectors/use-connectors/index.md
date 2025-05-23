@@ -193,32 +193,28 @@ In that case, you could declare `Result Expression` as follows:
 
 ## Activation
 
-The `Activation` section pertains specifically to [inbound](/components/connectors/connector-types.md) **Connectors**.
+The `Activation` section pertains specifically to [inbound connectors](/components/connectors/connector-types.md).
 
-### Activation Condition
+### Activation condition
 
-Utilized for validating conditions against the incoming message payload, this field enables the filtering
-of payloads that can initiate a process. Leaving this field empty results in all incoming messages triggering a new
-process,
-except those failing pre-validation checks, such as HMAC signature verification for specific connectors.
+The activation condition validates conditions against the incoming message payload. This field enables filtering payloads that can initiate a process. Leaving this field empty results in all incoming messages triggering a new process, except those failing pre-validation checks, such as HMAC signature verification for specific connectors.
 
 ## Correlation
 
 ### Correlation key (process)
 
-This field is instrumental in specifying which variable within a **Connector** should function as the process
-correlation key.
+This field is instrumental in specifying which variable within a connector should function as the process correlation key.
 Learn more about [message correlation](components/concepts/messages.md#message-correlation-overview).
 
 ### Correlation key (payload)
 
-This field guides the **Connector** on how to extract a correlation value from the incoming message payload.
+This field guides the connector on how to extract a correlation value from the incoming message payload.
 
 ### Message ID expression
 
 This field extracts a unique message identifier from the incoming message payload. Messages sharing the same identifier
-within a defined TTL (Time To Live) will be correlated at most once.
-Leaving this field empty may result in identical messages being submitted and processed multiple times.
+within a defined TTL (time-to-live) will be correlated once at most.
+Leaving this field empty may result in identical messages submitted and processed multiple times.
 
 ## BPMN errors and failing jobs {#bpmn-errors}
 

@@ -12,12 +12,12 @@ Review our [list of existing inbound connectors](/components/connectors/out-of-t
 
 ## Creating the connector event
 
-Inbound connectors are modeled as **catch events** in BPMN. Connectors can be modeled as
+Inbound connectors are modeled as **catch events** in [BPMN](/components/modeler/bpmn/bpmn.md). Connectors can be modeled as:
 
-- **Start events** - to start a new process instance.
-- **Message start events** - to start a new process instance with a messageId to prevent duplicate process instance creation.
-- **Intermediate catch events** - to receive messages in an already running process instance.
-- **Boundary events** - to receive messages in an already running process instance, attached to a task.
+- **Start events** - Start a new process instance.
+- **Message start events** - Start a new process instance with a `messageId` to prevent duplicate process instance creation.
+- **Intermediate catch events** - Receive messages in an already running process instance.
+- **Boundary events** - Receive messages in an already running process instance, attached to a task.
 
 :::info
 If **idempotency** is a concern for the process creation and reprocessing of messages should never lead to a duplicate process instance creation, use the **message start event** element for an inbound connector as it relies on publishing a message.
