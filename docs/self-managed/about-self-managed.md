@@ -14,7 +14,7 @@ Camunda 8 Self-Managed is not Camunda 7. [Find Camunda 7 documentation here](htt
 
 Camunda 8 Self-Managed is a self-hosted alternative to using Camunda 8 SaaS. Building process automation solutions with Camunda 8 works similarly regardless of hosting and deployment.
 
-For more information on Camunda 8 SaaS, visit [What is Camunda 8?](../components/concepts/what-is-camunda-8.md) If you are new to Camunda 8, we recommend you start your journey with [Camunda 8 SaaS-based guides](../../guides/).
+For more information on Camunda 8 SaaS, visit [What is Camunda 8?](/components/components-overview.md) If you are new to Camunda 8, we recommend you start your journey with [Camunda 8 SaaS-based guides](../../guides/).
 
 The content in this section of the documentation includes:
 
