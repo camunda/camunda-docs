@@ -5,13 +5,14 @@ sidebar_label: "Configuration variables"
 description: "Learn more about core configuration, component configuration, database configuration, and feature flags."
 ---
 
-As a Spring Boot application, Identity supports any standard
-[Spring configuration](https://docs.spring.io/spring-boot/reference/features/external-config.html) method.
+As a Spring Boot application, Identity supports any standard [Spring configuration](https://docs.spring.io/spring-boot/reference/features/external-config.html) method.
 
 ## Core configuration
 
+The core configuration variables are as follows:
+
 | Environment variable                 | Description                                                                         | Default value                                                                                                                                                            |
-| ------------------------------------ | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| :----------------------------------- | :---------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `IDENTITY_AUTH_PROVIDER_BACKEND_URL` | Used to support container to container communication.                               | http://localhost:18080/auth/realms/camunda-platform                                                                                                                      |
 | `IDENTITY_AUTH_PROVIDER_ISSUER_URL`  | Used to denote the token issuer.                                                    | http://localhost:18080/auth/realms/camunda-platform                                                                                                                      |
 | `IDENTITY_BASE_PATH`                 | Used to configure Identity to run on a subpath (Requires HTTPs for `IDENTITY_URL`). |                                                                                                                                                                          |
@@ -29,10 +30,10 @@ As a Spring Boot application, Identity supports any standard
 
 ## Camunda Identity SDK configuration
 
-Below, find the names and values for the Identity SDK to ensure proper authentication and authorization with Identity and the Identity provider for all components.
+Use the following names and values for the Identity SDK to ensure proper authentication and authorization with Identity and the IdP for all components.
 
 | Environment variable                 | Property                                | Description                                                                                                                           | Default value                 |
-| ------------------------------------ | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- |
+| :----------------------------------- | :-------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------- |
 | `CAMUNDA_IDENTITY_ISSUERBACKENDURL`  | `camunda.identity.issuer-backend-url`   | The back-channel URL to the Identity provider, used for token verification.                                                           | -                             |
 | `CAMUNDA_IDENTITY_AUDIENCE`          | `camunda.identity.audience`             | The required audience of the auth token.                                                                                              | -                             |
 | `CAMUNDA_IDENTITY_TYPE`              | `camunda.identity.type`                 | Define what kind of authentication type you will use (`KEYCLOAK`, `MICROSOFT`, `GENERIC`).                                            | `KEYCLOAK`                    |
@@ -59,7 +60,7 @@ Once set, you cannot update your initial claim name and value using environment 
 :::
 
 | Environment variable           | Description                                                                                                                                     | Default value |
-| ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| :----------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
 | `IDENTITY_INITIAL_CLAIM_NAME`  | The type of claim to use for the initial user. Examples can include `oid`, `name` or `email`.                                                   | `oid`         |
 | `IDENTITY_INITIAL_CLAIM_VALUE` | The value of the claim to use for the initial user. For the default `oid`, the value usually corresponds to the unique ID of your user account. |               |
 
@@ -69,7 +70,7 @@ Identity supports component configuration using preset values. To configure a
 component for use within Identity, set two variables:
 
 | Environment variable                  | Description                                     | Default value |
-| ------------------------------------- | ----------------------------------------------- | ------------- |
+| :------------------------------------ | :---------------------------------------------- | :------------ |
 | `KEYCLOAK_INIT_<COMPONENT>_SECRET`    | The secret used for authentication flows.       | No default    |
 | `KEYCLOAK_INIT_<COMPONENT>_ROOT_URL`  | The root URL of where the component is hosted.  | No default    |
 | `KEYCLOAK_INIT_<COMPONENT>_CLIENT_ID` | The client to create and use for the component. | `<COMPONENT>` |
@@ -91,7 +92,7 @@ about [resource authorization](/self-managed/identity/access-management/resource
 and [multi-tenancy](/self-managed/concepts/multi-tenancy.md).
 
 | Environment variable         | Description                                         |
-| ---------------------------- | --------------------------------------------------- |
+| :--------------------------- | :-------------------------------------------------- |
 | `IDENTITY_DATABASE_HOST`     | The host of the database.                           |
 | `IDENTITY_DATABASE_PORT`     | The port of the database.                           |
 | `IDENTITY_DATABASE_NAME`     | The name of the database to connect to.             |
@@ -134,7 +135,7 @@ steps:
 Identity uses feature flag environment variables to enable and disable features; the supported flags are:
 
 | Environment variable         | Description                                   | Default value |
-| ---------------------------- | --------------------------------------------- | ------------- |
+| :--------------------------- | :-------------------------------------------- | :------------ |
 | RESOURCE_PERMISSIONS_ENABLED | Controls the resource authorizations feature. | false         |
 | MULTITENANCY_ENABLED         | Controls the multi-tenancy feature.           | false         |
 

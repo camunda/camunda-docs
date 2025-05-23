@@ -10,7 +10,7 @@ import IdentityLoginImg from './img/identity-login-page.png';
 Get started with Identity in Self-Managed by learning how to open and log in to the Identity interface.
 
 :::note
-Identity is included in the [Docker-Compose](/versioned_docs/version-8.7/self-managed/setup/deploy/local/docker-compose.md) and [HELM](/versioned_docs/version-8.7/self-managed/setup/install.md) based deployment of Camunda 8 Self-Managed. With the default configuration, Identity uses an included Keycloak container/pod.
+Identity is included in the [Docker-Compose](/versioned_docs/version-8.7/self-managed/setup/deploy/local/docker-compose.md) and [Helm](/versioned_docs/version-8.7/self-managed/setup/install.md) based deployment of Camunda 8 Self-Managed. With the default configuration, Identity uses an included Keycloak container/pod.
 :::
 
 ## Log in to Identity
@@ -22,13 +22,13 @@ Once Identity has successfully started, you can open the **Log in** page and log
 If you are running the default configuration, you can access the Identity interface via the following URLs:
 
 - [Docker-Compose](/versioned_docs/version-8.7/self-managed/setup/deploy/local/docker-compose.md): `http://localhost:8084/`
-- [HELM](/versioned_docs/version-8.7/self-managed/setup/install.md): Following your [`port-forward` or Ingress configuration](/self-managed/setup/guides/accessing-components-without-ingress.md)
+- [Helm](/versioned_docs/version-8.7/self-managed/setup/install.md): Follow your [`port-forward` or Ingress configuration](/self-managed/setup/guides/accessing-components-without-ingress.md)
 
 ## Default user
 
 In the default configuration, Identity creates a default example user during installation.
 
-You can use this example user account to log in as follows:
+You can log in with this example user account using the following credentials:
 
 ```text
 Username: demo

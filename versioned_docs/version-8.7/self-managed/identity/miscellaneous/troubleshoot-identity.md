@@ -5,7 +5,9 @@ sidebar_label: "Troubleshoot Identity"
 description: "Learn about solutions to common issues in Identity, such as complications connecting to Keycloak."
 ---
 
-## Problem: Identity pod crashloops/continually restarts
+Troubleshoot common issues with Identity in a Self-Managed deployment.
+
+## Identity pod crashloops/continually restarts
 
 If the Identity pod crash loops, or the pod continually restarts, it is likely that there is an issue with the connection to Keycloak.
 
@@ -41,7 +43,7 @@ If the Identity pod crash loops, or the pod continually restarts, it is likely t
    2022-07-04 15:52:09.252  WARN 1 --- [main] i.c.i.i.k.config.KeycloakConfiguration   : Retrying...
    ```
 
-## Problem: Identity is unable to connect to Keycloak
+## Identity is unable to connect to Keycloak
 
 If you are seeing an error message like the one below in your Identity service logs, there is an issue with the connection
 Identity is trying to make and the Keycloak service:
@@ -88,6 +90,6 @@ these options:
    3. In the `camunda-platform` realm, set `Require SSL` to `none` by following the steps in [SSL modes](https://www.keycloak.org/docs/latest/server_admin/#_ssl_modes) for your version of Keycloak.
    4. Restart the Identity service again. Identity should now start successfully
 
-:::danger
+:::danger warning
 We would only recommend that requirements for SSL are disabled in a development environment.
 :::

@@ -5,7 +5,7 @@ sidebar_label: "Identity"
 description: "Identity is the component within the Camunda 8 self-managed stack responsible for authentication and authorization."
 ---
 
-Use Identity in Camunda 8 Self-Managed to manage authentication, access, and authorization for your Camunda 8 users, resources, and the Camunda 8 API.
+Use Identity in Camunda 8 Self-Managed to manage authentication, access, and authorization for your users and applications.
 
 ## About Identity
 

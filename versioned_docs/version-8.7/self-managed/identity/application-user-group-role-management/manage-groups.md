@@ -4,7 +4,18 @@ title: "Manage groups"
 description: "Groups are a way to apply a set of roles and permissions to users. Use Identity to create a group."
 ---
 
-Use groups to manage user access by organizing users into groups (group members) and assigning [roles](../application-user-group-role-management/manage-roles.md). Instead of assigning roles to individual users, [map a set of roles to a group](#assign-roles-to-a-group), with all group members automatically inheriting the role permissions.
+Use groups and roles to manage and organize user access in Camunda 8.
+
+## About groups
+
+Organize your users into groups as an efficient and scalable way of controlling access in Camunda 8.
+
+- Instead of assigning roles to individual users, [map a set of roles to a group](#assign-roles-to-a-group).
+- All group members automatically inherit the role permissions of a group.
+
+:::note
+You do not create or manage users in Identity itself. Users are managed in Keycloak or your connected IdP.
+:::
 
 ## Manage groups
 

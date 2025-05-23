@@ -8,6 +8,8 @@ import ApplicationImg from '../img/add-application-modal-2.png';
 
 In Identity, an application represents an entity that can request Identity to authenticate a user or a service.
 
+## About applications
+
 Camunda 8 provides a set of preconfigured applications:
 
 - Connectors
@@ -18,7 +20,7 @@ Camunda 8 provides a set of preconfigured applications:
 - Web Modeler
 - Zeebe
 
-As a user of Identity, you can also add your own applications. For example, you can provide a service with M2M access to a Camunda 8 API, such as a custom job worker.
+As an Identity user you can also add your own custom applications. For example, you can provide a service with M2M access to a Camunda 8 API, such as a custom job worker.
 
 ## Application types
 
@@ -30,11 +32,11 @@ To align with the [OAuth 2.0 standard](https://oauth.net/2/client-types/), Camun
 
 The application type is selected when you [create an application](#add-an-application), based on its ability to securely store and use secrets, as well as the mode of authentication it uses.
 
-| Type         | Secret | User login flow | M2M authentication |
-| :----------- | :----- | :-------------- | :----------------- |
-| Confidential | Yes    | Yes             | Yes                |
-| M2M          | Yes    | No              | Yes                |
-| Public       | No     | Yes             | No                 |
+| Application type | Secret | User login flow | M2M authentication |
+| :--------------- | :----- | :-------------- | :----------------- |
+| Confidential     | Yes    | Yes             | Yes                |
+| M2M              | Yes    | No              | Yes                |
+| Public           | No     | Yes             | No                 |
 
 :::info
 
