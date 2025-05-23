@@ -1,0 +1,9 @@
+# This is a comment.
+# Each line is a file pattern followed by one or more owners.
+# If you'd like to be added as an owner, don't hesitate to reach out to one of the existing ones.
+
+# Docs components
+/docs/components/connectors*       @camunda/connectors
+/docs/components/rpa*              @marstamm
+/docs/components/tasklist*         @camunda/human-task-orchestration-dev
+/docs/components/zeebe*            @camunda/zeebe
