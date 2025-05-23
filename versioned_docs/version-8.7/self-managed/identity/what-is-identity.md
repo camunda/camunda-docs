@@ -18,15 +18,21 @@ Identity is included by default in the [Docker Compose](/self-managed/setup/depl
 
 ## Get started with Identity
 
-If you're new to Identity, learn how to open and log in to the Identity interface.
+If you're new to Identity, get started by learning how to open and log in to the Identity interface.
 
 - [Get started with Identity](identity-first-steps.md)
 
 ## Configure Identity
 
-Configure the Identity Keycloak and OIDC integration, and learn more about how Identity authentication works.
+Configure your Identity Keycloak and OIDC integration.
 
 - [Configure Identity](configuration/identity-configuration-overview.md)
+
+## Authentication
+
+Depending on your configuration, users and applications can authenticate with Camunda 8 via the IdP using the [OAuth 2.0 protocol](https://oauth.net/2/), using either a login page or M2M tokens.
+
+- [Authentication](authentication.md)
 
 ## Manage Identity
 
@@ -37,15 +43,12 @@ Manage and control access for your users and applications, using groups and role
 - [Manage tenants](managing-tenants.md)
 - [Mapping rules](mapping-rules.md)
 
-## Prepare Identity for production
-
-Learn more about what to consider when moving Identity into a production environment, such as ensuring your Keycloak instance is production-ready, and enabling Transport Layer Security (TLS) for Identity.
-
-- [Prepare Identity for production](miscellaneous/making-identity-production-ready.md)
-
-## Monitoring and troubleshooting Identity
-
-Learn how you can monitor the Identity component metrics and status, and how to troubleshoot and resolve common issues.
+## Reference
 
 - [Monitoring Identity](miscellaneous/application-monitoring.md)
-- [Troubleshooting Identity](miscellaneous/troubleshoot-identity.md)
+- [Configuration variables](miscellaneous/configuration-variables.md)
+- [Configure logging](miscellaneous/configure-logging.md)
+- [Prepare Identity for production](miscellaneous/making-identity-production-ready.md)
+- [Keycloak resource management](miscellaneous/resource-management.md)
+- [Starting configuration](miscellaneous/starting-configuration.md)
+- [Troubleshoot Identity](miscellaneous/troubleshoot-identity.md)

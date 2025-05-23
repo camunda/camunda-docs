@@ -1,6 +1,6 @@
 ---
 id: resource-authorizations
-title: "Manage resource authorizations"
+title: "Resource authorizations"
 sidebar_label: "Resource authorizations"
 description: "Learn about the methods to control resource access."
 ---
@@ -8,10 +8,14 @@ description: "Learn about the methods to control resource access."
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-**Resource Authorizations** allow you to configure resource-level access to entities in Camunda 8. The following **resource authorizations** are currently supported:
+Use resource authorizations to configure resource-level access to Camunda 8 entities.
+
+## Supported resource authorizations
+
+The following resource authorizations are currently supported:
 
 | Resource type | Permissions               | Resource ID                   | Description                                                       |
-| ------------- | ------------------------- | ----------------------------- | ----------------------------------------------------------------- |
+| :------------ | :------------------------ | :---------------------------- | :---------------------------------------------------------------- |
 | Process       | `Read`                    | Process ID or `*` (wildcard)  | Show Process Definition and Process instance Data in Operate UI   |
 | Process       | `Delete`                  | Process ID or `*` (wildcard)  | Delete Process Definitions via Operate UI                         |
 | Process       | `Update process instance` | Process ID or `*` (wildcard)  | Update Process instance data via Operate UI                       |
@@ -20,20 +24,20 @@ import TabItem from "@theme/TabItem";
 | Decision      | `Read`                    | Decision ID or `*` (wildcard) | Show Decision Definition and Decision Instance Data in Operate UI |
 | Decision      | `Delete`                  | Decision ID or `*` (wildcard) | Delete Decision Definitions via Operate UI                        |
 
+Resource Authorizations are only supported when running Identity with Keycloak as an IdP.
+
 :::note
-Resource authorizations are disabled by default and can be enabled by the use of environment variables. This feature must be enabled in all required components, see:
+Resource authorizations are disabled by default. You can enable them using environment variables. This feature must be enabled in all required components, see:
 
 - [Identity feature flags](/self-managed/identity/miscellaneous/configuration-variables.md#feature-flags)
 - [Operate resource based permissions](/self-managed/operate-deployment/operate-authentication.md#resource-based-permissions)
 - [Tasklist resource based permissions](/self-managed/tasklist-deployment/tasklist-authentication.md#resource-based-permissions)
 
-Also a [database must be configured](/self-managed/identity/miscellaneous/configuration-variables.md#database-configuration) for Identity.
+You must also [configure a database](/self-managed/identity/miscellaneous/configuration-variables.md#database-configuration) for Identity to use resource authorizations.
 
 :::
 
-**Resource Authorizations** are only supported when running Identity with Keycloak as IdP.
-
-## Managing resource authorizations
+## Manage resource authorizations
 
 Resource authorizations can be configured for an individual user or a group. Below we show you how to create authorizations
 for both:
