@@ -2144,7 +2144,7 @@
                 "self-managed/identity/configuration/configure-external-identity-provider",
                 "self-managed/identity/configuration/connect-to-an-existing-keycloak",
                 "self-managed/identity/configuration/connect-to-an-oidc-provider",
-                "self-managed/identity/user-guide/configuration/alternative-db"
+                "self-managed/identity/configuration/alternative-db"
               ]
             },
             "self-managed/identity/authentication",

@@ -20,5 +20,9 @@ You can choose how to configure your Identity IdP from the following options:
 | [Connect to an external OIDC provider](./connect-to-an-oidc-provider.md)              | Connect to an OpenID Connect (OIDC) authentication provider to replace Keycloak.                                 |
 
 :::note
+Identity relies on a PostgreSQL. When running Identity with an external OIDC provider, you can [connect to an alternative Database](./alternative-db.md) if your internal policies or compliance requirements prevent the use of PostgreSQL.
+:::
+
+:::note
 Keycloak is started as a component in a [Docker Compose](/self-managed/setup/deploy/local/docker-compose.md) and [Helm](/self-managed/setup/install.md) Camunda 8 self-managed deployment.
 :::
