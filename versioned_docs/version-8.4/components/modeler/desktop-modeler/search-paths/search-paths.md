@@ -31,7 +31,7 @@ The `camunda-modeler/resources` directory relative to the per-user application d
 
 - `%APPDATA%` on [Windows](https://www.pcworld.com/article/2690709/whats-in-the-hidden-windows-appdata-folder-and-how-to-find-it-if-you-need-it.html)
 - `$XDG_CONFIG_HOME` or `~/.config` on [Linux](https://wiki.archlinux.org/index.php/XDG_user_directories)
-- `~/Library/Application Support` on macOS
+- `/Library/Application Support` on macOS
 
 In our documentation we refer to it as `{USER_DATA_DIRECTORY}`.
 
