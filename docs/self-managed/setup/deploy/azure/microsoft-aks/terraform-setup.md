@@ -4,6 +4,9 @@ title: "Deploy an AKS cluster with Terraform (advanced)"
 description: "Deploy an Azure Kubernetes Service (AKS) cluster with a Terraform module for a quick Camunda 8 setup."
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 This guide provides a detailed tutorial for deploying an Azure Kubernetes Service (AKS) cluster, tailored specifically for deploying Camunda 8 using Terraform, a popular Infrastructure as Code (IaC) tool.
 
 This guide is designed to help you leverage the power of Infrastructure as Code (IaC) to streamline and reproduce your cloud infrastructure setup. By walking through the essentials of setting up an AKS cluster, and provisioning managed Azure resources such as Azure Database for PostgreSQL, this guide demonstrates how to use Terraform with Azure. It makes the process accessible even to those new to Terraform or IaC concepts. It utilizes Azure-managed services where available, offering these as optional components for added convenience and maintainability.
@@ -21,6 +24,7 @@ If you are completely new to Terraform and the concept of IaC, consider reading 
 - [Terraform](https://developer.hashicorp.com/terraform/downloads) for provisioning infrastructure as code.
 - [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with your AKS cluster.
 - [jq](https://stedolan.github.io/jq/download/) to parse and manipulate JSON (e.g. Terraform outputs).
+- (optional) Custom domain name/[DNS zone](https://learn.microsoft.com/en-us/azure/dns/dns-zones-records) in Azure DNS. This allows you to expose Camunda 8 endpoints and connect via community-supported [zbctl](https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md) or [Camunda Modeler](https://camunda.com/download/modeler/).
 - **Azure service quotas**
   - Check your quotas for **Virtual Networks**, **vCPU cores**, and **Storage Accounts** in the target region: [Azure subscription and service limits](https://learn.microsoft.com/azure/azure-resource-manager/management/azure-subscription-service-limits).
   - If you reach a limit, you can request an increase through the Azure portal: [Request a quota increase](https://learn.microsoft.com/en-us/azure/extended-zones/request-quota-increase).
@@ -234,12 +238,49 @@ This Azure Storage Account will now securely store your Terraform state files wi
 
 To configure your deployment, create a `terraform.tfvars` file in the root of the `aks-single-region` folder. This file defines critical environment-specific settings like your Azure subscription and the Service Principal used for authentication.
 
-Example:
+<Tabs groupId="domain" defaultValue="with-domain" queryString values={
+[
+{label: 'With domain', value: 'with-domain' },
+{label: 'Without domain', value: 'without-domain' },
+]}>
+
+<TabItem value="with-domain">
+
+```hcl
+subscription_id     = "00000000-0000-0000-0000-000000000000"
+terraform_sp_app_id = "00000000-0000-0000-0000-000000000000"
+dns_zone_id         = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/your-dns-resource-group/providers/Microsoft.Network/dnszones/yourdomain.com"
+```
+
+##### dns_zone_id
+
+This value specifies the full Azure resource ID of the DNS Zone used for managing your custom domain (e.g., `yourdomain.com`) with `external-dns`.
+
+It is **required** if you are deploying Camunda 8 with a domain name. Terraform uses this value to grant the necessary role-based access control (RBAC) permissions to the `external-dns` Kubernetes add-on, allowing it to create and update DNS records dynamically within your Azure DNS Zone.
+
+To retrieve the resource ID for your existing DNS Zone, run the following command:
+
+```shell
+az network dns zone show \
+  --name <yourdomain.com> \
+  --resource-group <your-dns-resource-group> \
+  --query "id" -o tsv
+```
+
+If this value is missing or incorrect, `external-dns` will not have permission to manage records, and DNS entries for your Camunda 8 endpoints will not be created.
+
+</TabItem>
+
+<TabItem value="without-domain">
 
 ```hcl
 subscription_id     = "00000000-0000-0000-0000-000000000000"
 terraform_sp_app_id = "00000000-0000-0000-0000-000000000000"
 ```
+
+</TabItem>
+
+</Tabs>
 
 ##### subscription_id
 
