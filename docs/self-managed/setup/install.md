@@ -1,7 +1,7 @@
 ---
 id: install
 title: "Camunda 8 Helm installation"
-sidebar_label: "Install"
+sidebar_label: "Helm"
 description: "Camunda provides continuously improved Helm charts, of which are not cloud provider-specific so you can choose your Kubernetes provider."
 ---
 
@@ -62,6 +62,10 @@ Refer to the [Operate](/self-managed/operate-deployment/operate-configuration.md
 ![Camunda 8 Self-Managed Architecture Diagram](../assets/camunda-platform-8-self-managed-architecture-diagram-combined-ingress.png)
 
 When installing the [camunda-platform](https://artifacthub.io/packages/helm/camunda/camunda-platform) Helm chart, all components shown on the architectural diagram above are installed.
+
+:::note
+Helm also supports document storage and management with [document handling](/self-managed/document-handling/overview.md).
+:::
 
 ## Versioning
 

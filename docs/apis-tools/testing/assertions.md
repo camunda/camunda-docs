@@ -297,6 +297,145 @@ Map<String, Object> expectedVariables = //
 assertThat(processInstance).hasVariables(expectedVariables);
 ```
 
+## User task assertions
+
+You can verify the user task states and other properties using `CamundaAssert.assertThat()`. Use a predefined `UserTaskSelector` from `io.camunda.process.test.api.assertions.UserTaskSelectors` or a custom implementation to identify the user task:
+
+```java
+// by BPMN element ID
+assertThat(byElementId("user-task-id")).isCompleted();
+
+// by user task name
+assertThat(byTaskName("User Task")).isCompleted();
+
+// you may optionally specify the process instance key:
+assertThat(byElementId("user-task-id", processInstanceKey)).isCompleted();
+assertThat(byTaskName("User Task", processInstanceKey)).isCompleted();
+
+// custom selector implementation
+assertThat(userTask -> { .. }).isCompleted();
+```
+
+### isCreated
+
+Asserts that the user task is created. The assertion fails if the task is in any other state.
+
+```java
+assertThat(byTaskName("User Task")).isCreated();
+```
+
+### isCompleted
+
+Asserts that the user task is completed. The assertion fails if the task is in any other state.
+
+```java
+assertThat(byTaskName("User Task")).isCompleted();
+```
+
+### isCanceled
+
+Asserts that the user task is canceled. The assertion fails if the task is in any other state.
+
+```java
+assertThat(byTaskName("User Task")).isCanceled();
+```
+
+### isFailed
+
+Asserts that the user task is failed. The assertion fails if the task is in any other state.
+
+```java
+assertThat(byTaskName("User Task")).isFailed();
+```
+
+### hasAssignee
+
+Asserts that the user task has the expected assignee.
+
+```java
+assertThat(byTaskName("User Task")).hasAssignee("John Doe");
+```
+
+### hasPriority
+
+Asserts that the user task has the expected priority.
+
+```java
+assertThat(byTaskName("User Task")).hasPriority(100);
+```
+
+### hasElementId
+
+Asserts that the user task has the expected BPMN element ID.
+
+```java
+assertThat(byTaskName("User Task")).hasElementId("user-task-id");
+```
+
+### hasName
+
+Asserts that the user task has the expected name.
+
+```java
+assertThat(byElementId("user-task-id")).hasName("User Task");
+```
+
+### hasProcessInstanceKey
+
+Asserts that the user task has the expected process instance key.
+
+```java
+assertThat(byTaskName("User Task")).hasProcessInstanceKey(processInstanceKey);
+```
+
+### hasDueDate
+
+Asserts that the user task has the expected due date.
+
+```java
+assertThat(byTaskName("User Task")).hasDueDate("2023-10-01T00:00:00Z");
+```
+
+### hasCompletionDate
+
+Asserts that the user task has the expected completion date.
+
+```java
+assertThat(byTaskName("User Task")).hasCompletionDate("2023-10-01T00:00:00Z");
+```
+
+### hasFollowUpDate
+
+Asserts that the user task has the expected follow-up date.
+
+```java
+assertThat(byTaskName("User Task")).hasFollowUpDate("2023-10-01T00:00:00Z");
+```
+
+### hasCreationDate
+
+Asserts that the user task has the expected creation date.
+
+```java
+assertThat(byTaskName("User Task")).hasCreationDate("2023-10-01T00:00:00Z");
+```
+
+### hasCandidateGroup
+
+Asserts that the user task has the expected candidate group.
+
+```java
+assertThat(byTaskName("User Task")).hasCandidateGroup("groupA");
+```
+
+### hasCandidateGroups
+
+Asserts that the user task has the expected candidate groups.
+
+```java
+assertThat(byTaskName("User Task")).hasCandidateGroups("groupA", "groupB", "groupC");
+```
+
 ## Custom assertions
 
 You can build your own assertions similar to the assertions from CPT.
