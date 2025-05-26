@@ -40,74 +40,124 @@ When to use it:
 - Simulate different outcomes of a job worker (success, BPMN error)
 - Mock disabled job workers or Connectors
 
-### Complete job
-
-The mock completes jobs with/without variables.
+### Mock a job worker
 
 ```java
 @Test
 void shouldCompleteJob() {
-    // given: mock job worker for the job type "send-email"
-    // 1) Complete jobs without variables
-    rocessTestContext.mockJobWorker("send-email").thenComplete();
-    
-    // 2) Complete jobs with variables
-    final Map<String, Object> variables = Map.of(
+    // given: mock a job worker
+    processTestContext.mockJobWorker("send-email").thenComplete();
+
+    // when: create a process instance
+    ProcessInstanceEvent processInstance = client
+        .newCreateInstanceCommand()
+        .processDefinitionKey(processDefinitionKey)
+        .send()
+        .join();
+
+    // then: the process completes successfully
+    assertThat(processInstance).isCompleted();
+}
+```
+
+### Mock a job worker with variables
+
+```java
+@Test
+void shouldCompleteJobWithVariables() {
+    // given: mock a job worker that completes with variables
+    Map<String, Object> variables = Map.of(
         "emailSent", true,
         "timestamp", "2024-01-01T10:00:00Z"
     );
     processTestContext.mockJobWorker("send-email").thenComplete(variables);
 
     // when: create a process instance
-    // then: verify that the process instance completed all tasks
+    ProcessInstanceEvent processInstance = createProcessInstance();
+
+    // then: the process has the expected variables
+    assertThat(processInstance)
+            .isCompleted()
+            .hasVariables(variables);
 }
 ```
 
-### Throw BPMN error
-
-The mock throws BPMN errors for jobs with the given error code and with/without variables.
+### Throw BPMN error with an error code
 
 ```java
 @Test
 void shouldThrowBpmnError() {
-    // given: mock job worker for the job type "validate-order"
-    // 1) Throw BPMN errors with error code "INVALID_ORDER"
-    processTestContext.mockJobWorker("validate-order").thenThrowBpmnError("INVALID_ORDER");
-
-    // 2) Throw BPMN errors with error code "INVALID_ORDER" and variables
-    final Map<String, Object> variables = Map.of(
-        "reason", "The order exceeds the item limit."
-    );
-    processTestContext
-        .mockJobWorker("validate-order")
-        .thenThrowBpmnError("INVALID_ORDER", variables);
+    // given: mock a job worker that throws a BPMN error
+    processTestContext.mockJobWorker("validate-order")
+        .thenThrowBpmnError("INVALID_ORDER");
 
     // when: create a process instance
-    // then: verify that the process instance handled the BPMN error
+    ProcessInstanceEvent processInstance = createProcessInstance();
+
+    // then: the process follows the error event path
+    assertThat(processInstance).hasCompletedElements("handle-invalid-order");
 }
 ```
 
-### Custom handler
-
-You can implement a custom handler to mock more complex behaviors.
+### Throw BPMN errors with an error code and variables
 
 ```java
 @Test
-void shouldUseCustomHandler() {
-    // given: mock job worker for the job type "calculate-discount"
-    processTestContext
-        .mockJobWorker("calculate-discount")
-        .withHandler(
-            (jobClient, job) -> {
-                final Map<String, Object> variables = job.getVariablesAsMap();
-                final double orderAmount = (double) variables.get("orderAmount");
-                final double discount = orderAmount > 100 ? 0.1 : 0.0;
-    
-                jobClient.newCompleteCommand(job).variable("discount", discount).send().join();
-            });
+void shouldThrowBpmnErrorWithVariables() {
+    Map<String, Object> variables = Map.of(
+            "invalidItem", "Well done steak"
+    );
+
+    // given: mock a job worker that throws a BPMN error
+    processTestContext.mockJobWorker("validate-order")
+        .thenThrowBpmnError("INVALID_ORDER", variables);
 
     // when: create a process instance
-    // then: verify that the process instance has the expected variables
+    ProcessInstanceEvent processInstance = createProcessInstance();
+
+    // then: verify that the process instance handled the BPMN error
+    assertThat(processInstance)
+            .hasCompletedElements("handle-invalid-order")
+            .hasVariables(variables);
+}
+```
+
+:::note
+When throwing BPMN errors with variables, make sure that you map them using an output expression or they won't be available in the parent scope.
+:::
+
+### Custom job handler
+
+For more complex scenarios, you can implement a custom job handler using `withHandler`:
+
+```java
+@Test
+void shouldCompleteJobWithCustomHandler() {
+    // given: mock a job worker with custom logic
+    processTestContext.mockJobWorker("calculate-discount")
+        .withHandler((jobClient, job) -> {
+            final Map<String, Object> variables = job.getVariablesAsMap();
+            final double orderAmount = (double) variables.get("orderAmount");
+            final double discount = orderAmount > 100 ? 0.1 : 0.0;
+
+            jobClient.newCompleteCommand(job)
+                .variable("discount", discount)
+                .send()
+                .join();
+        });
+
+    // when: create a process instance with order amount
+    ProcessInstanceEvent processInstance = client
+        .newCreateInstanceCommand()
+        .processDefinitionKey(processDefinitionKey)
+        .variable("orderAmount", 150.0)
+        .send()
+        .join();
+
+    // then: the discount is calculated correctly
+    assertThat(processInstance)
+            .isCompleted()
+            .hasVariable("discount", 0.1);
 }
 ```
 
@@ -122,22 +172,41 @@ When to use it:
 - Simulate different outcomes of a child process
 - Mock a non-existing child process
 
+### Mock a child process
+
 ```java
 @Test
 void shouldMockChildProcess() {
-    // given: mock child process with the process ID "payment-process"
-    // 1) Complete the child process without variables
+    // given: mock a child process
     processTestContext.mockChildProcess("payment-process");
 
-    // 2) Complete the child process with variables
-    final Map<String, Object> variables = Map.of(
+    // when: create a parent process instance
+    ProcessInstanceEvent processInstance = createProcessInstance();
+
+    // then: the parent process completes without executing the actual child process
+    assertThat(processInstance).isCompleted();
+}
+```
+
+### Mock a child process with variables
+
+```java
+@Test
+void shouldMockChildProcessWithVariables() {
+    // given: mock a child process that returns variables
+    Map<String, Object> variables = Map.of(
         "paymentStatus", "completed",
         "transactionId", "TXN-12345"
     );
     processTestContext.mockChildProcess("payment-process", variables);
 
-    // when: create a process instance
-    // then: verify that the process instance completed the call activity
+    // when: create a parent process instance
+    ProcessInstanceEvent processInstance = createProcessInstance();
+
+    // then: the parent process receives the child process variables
+    assertThat(processInstance)
+            .isCompleted()
+            .hasVariables(childProcessOutput);
 }
 ```
 
@@ -155,15 +224,247 @@ When to use it:
 ```java
 @Test
 void shouldMockDmnDecision() {
-    // given: mock DMN decision with the decision ID "credit-check-decision"
-    final Map<String, Object> variables = Map.of(
+    // given: mock a DMN decision
+    Map<String, Object> decisionResult = Map.of(
         "approved", true,
         "riskLevel", "low",
         "creditLimit", 5000
     );
-    processTestContext.mockDmnDecision("credit-check-decision", variables);
+    processTestContext.mockDmnDecision("credit-check-decision", decisionResult);
 
     // when: create a process instance
-    // then: verify that the process instance completed the business rule task
+    ProcessInstanceEvent processInstance = client
+        .newCreateInstanceCommand()
+        .processDefinitionKey(processDefinitionKey)
+        .variable("customerId", "CUST-123")
+        .send()
+        .join();
+
+    // then: the process receives the mocked decision result
+    assertThat(processInstance).hasVariables(decisionResult);
+}
+```
+
+:::note
+When mocking DMN decisions, the mock replaces any existing decision with the same ID. The mocked decision returns the specified variables regardless of the input provided to the business rule task.
+:::
+
+## Complete jobs
+
+Sometimes you need to complete a job that is already active in a process instance without mocking the job worker.
+
+When to use it:
+
+- Complete an active job to continue process execution
+- Test process behavior from a specific state
+
+:::note
+Job completion methods wait for the job to become active before completing it. If the job is not found within a timeout period, the test will fail.
+:::
+
+### Complete a job
+
+```java
+@Test
+void shouldCompleteJob() {
+    // given: a process instance with an active job
+    ProcessInstanceEvent processInstance = createProcessInstance();
+
+    assertThat(processInstance).hasActiveElements("send-notification");
+
+    // when: complete the job
+    processTestContext.completeJob("send-email");
+
+    // then: the process continues
+    assertThat(processInstance)
+            .isCompleted()
+            .hasCompletedElements("send-notification");
+}
+```
+
+### Complete a job with variables
+
+```java
+@Test
+void shouldCompleteJobWithVariables() {
+    // given: a process instance with an active job
+    ProcessInstanceEvent processInstance = createProcessInstance();
+
+    // when: complete the job with variables
+    Map<String, Object> variables = Map.of(
+        "notification-sent", true,
+        "recipients", List.of("user1@example.com", "user2@example.com")
+    );
+    processTestContext.completeJob("send-notification", variables);
+
+    // then: the process has the new variables
+    assertThat(processInstance)
+            .isCompleted()
+            .hasVariables(variables);
+}
+```
+
+## Throw BPMN errors from jobs
+
+You can throw BPMN errors from active jobs to test error handling paths in your process.
+
+When to use it:
+
+- Test error boundary events without mocking the job worker
+- Simulate failures in running process instances
+- Verify error handling logic
+
+:::note
+Error methods wait for the job to become active before raising an error. If the job is not found within a timeout period, the test will fail.
+:::
+
+### Throw BPMN error
+
+```java
+@Test
+void shouldThrowBpmnError() {
+    // given: a process instance with an active job
+    ProcessInstanceEvent processInstance = createProcessInstance();
+    assertThat(processInstance).hasActiveElements("validate-user");
+
+    // when: throw a BPMN error from the job
+    processTestContext.throwBpmnErrorFromJob("validate-job", "VALIDATION_FAILED");
+
+    // then: the error is caught and handled
+    assertThat(processInstance)
+            .isCompleted()
+            .hasCompletedElements("handle-validation-error");
+}
+```
+
+### Throw BPMN error with variables
+
+```java
+@Test
+void shouldThrowBpmnErrorWithVariables() {
+    // given: a process instance with an active job
+    ProcessInstanceEvent processInstance = createProcessInstance();
+
+    // when: throw a BPMN error with variables
+    Map<String, Object> errorVariables = Map.of(
+        "error-message", "Invalid customer data",
+        "error-code", "ERR_VALIDATION_001"
+    );
+    processTestContext.throwBpmnErrorFromJob("validate-data", "VALIDATION_FAILED", errorVariables);
+
+    // then: the error handler receives the variables
+    assertThat(processInstance)
+            .isCompleted()
+            .hasVariables(errorVariables);
+}
+```
+
+:::note
+When throwing BPMN errors with variables, make sure that you map them using an output expression or they won't be available in the parent scope.
+:::
+
+## Complete user tasks
+
+You can mock a User Task to simulate manual input programmatically.
+
+When to use it:
+
+- Complete tasks that require manual input.
+- Verify edge cases resulting from user errors.
+
+:::note
+User task completion methods wait for the user task to become active before completing it. If the user task is not found within a timeout period, the test will fail.
+:::
+
+### Complete user task
+
+```java
+@Test
+void shouldCompleteUserTaskByName() {
+    // given: a process instance with an active user task
+    ProcessInstanceEvent processInstance = createProcessInstance();
+    assertThat(processInstance).hasActiveElements("approve-request");
+
+    // when: complete the user task by name
+    processTestContext.completeUserTask("Approve Request");
+
+    // then: the process continues
+    assertThat(processInstance)
+            .isCompleted()
+            .hasCompletedElements("approve-request");
+}
+```
+
+### Complete user task with variables
+
+```java
+@Test
+void shouldCompleteUserTaskWithVariables() {
+    // given: a process instance with an active user task
+    ProcessInstanceEvent processInstance = createProcessInstance();
+
+    // when: complete the user task with variables
+    Map<String, Object> variables = Map.of(
+        "approved", true,
+        "comment", "Request approved by manager",
+        "approvedAmount", 5000.00
+    );
+    processTestContext.completeUserTask("Approve Request", variables);
+
+    // then: the process has the form data
+    assertThat(processInstance)
+            .isCompleted()
+            .hasVariables(variables);
+}
+```
+
+### Complete user task by selector
+
+For more precise user task selection, you can use one of the following selectors (for more information see [User Task Assertions](/apis-tools/testing/assertions/#user-task-assertions):
+
+- `UserTaskSelectors.byTaskName(String taskName)`
+- `UserTaskSelectors.byTaskName(String taskName, long processInstanceKey)`
+- `UserTaskSelectors.byElementId(String elementId)`
+- `UserTaskSelectors.byElementId(String elementId, long processInstanceKey)`
+
+```java
+@Test
+void shouldCompleteUserTaskByElementId() {
+    // given: a process instance with user tasks
+    ProcessInstanceEvent processInstance = createProcessInstance();
+
+    // when: complete a specific user task by element ID
+    processTestContext.completeUserTask(
+        UserTaskSelectors.byElementId("approve-request-task")
+    );
+
+    // then: the correct task is completed
+    assertThat(processInstance).hasCompletedElements("approve-request-task");
+}
+```
+
+### Complete user task by selector with variables
+
+```java
+@Test
+void shouldCompleteUserTaskByCustomSelector() {
+    // given: multiple process instances with user tasks
+    ProcessInstanceEvent targetInstance = createProcessInstance();
+    ProcessInstanceEvent otherInstance = createProcessInstance(); // another instance
+
+    // when: complete user task in specific instance
+    Map<String, Object> variables = Map.of("decision", "approved");
+    processTestContext.completeUserTask(
+        UserTaskSelectors.byTaskName("Approve Request", targetInstance.getProcessInstanceKey()),
+        variables
+    );
+
+    // then: only the target instance is affected
+    assertThat(targetInstance)
+            .isCompleted()
+            .hasVariable("decision", "approved");
+    assertThat(otherInstance)
+            .isActive()
+            .hasVariables(Collections.emptyMap());
 }
 ```
