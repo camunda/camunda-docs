@@ -26,7 +26,7 @@ While this guide is primarily tailored for UNIX systems, it can also be run unde
 
 Multi-tenancy is disabled by default and is not covered further in this guide. If you decide to enable it, you may use the same PostgreSQL instance and add an extra database for multi-tenancy purposes.
 
-[Workload Identities](https://learn.microsoft.com/en-us/azure/aks/workload-identity-overview) offer a way to connect to Azure-managed PostgreSQL. However, they have not yet been tested with Web Modeler, Keycloak, or Identity, and may not work out of the box. Using them may require a custom JDBC driver.
+[Workload Identities](https://learn.microsoft.com/en-us/azure/aks/workload-identity-overview) offer a way to connect to Azure-managed PostgresSQL. This is not supported yet by Camunda.
 
 ## Export environment variables
 
