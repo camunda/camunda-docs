@@ -356,6 +356,8 @@ RewriteRule ^docs/components/modeler/web-modeler/milestones/?$ /docs/components/
 # Move SAP integrations page to a new folder
 RewriteRule ^docs/components/camunda-integrations/sap/?$ /docs/components/camunda-integrations/sap/sap-integration/ [R=301,L]
 
+# Move mapping rules docs to new location in 8.8
+RewriteRule ^docs/self-managed/identity/user-guide/mapping-rules/managing-mapping-rules/?$ /docs/self-managed/identity/orchestration-identity/mapping-rules/managing-mapping-rules/ [R=301,L]
 #---------------------------------------------------------------------------------
 #   8.6: content moves introduced prior to the release of version 8.6.
 #---------------------------------------------------------------------------------
@@ -560,9 +562,9 @@ RewriteRule ^docs/reference/early-access/?$ /docs/reference/alpha-features/ [R=3
 #
 #  Hey friend! There's a good chance you've left the redirect party, come back!
 #
-#  If you're dropping new redirect rules at the bottom of this file, 
+#  If you're dropping new redirect rules at the bottom of this file,
 #    it must mean you're only applying them to the oldest supported version of the docs.
-#  If that's not the case, please add them higher in the file, 
+#  If that's not the case, please add them higher in the file,
 #    after the comment block associated with the version of your changes.
 #  This helps us keep track of when redirects are old enough to be removed.
 #
