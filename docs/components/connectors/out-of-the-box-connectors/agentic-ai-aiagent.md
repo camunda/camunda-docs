@@ -293,4 +293,4 @@ Add and manage [execution listeners](/components/concepts/execution-listeners.md
 - [Intelligent by Design: A Step-by-Step Guide to AI Task Agents in Camunda](https://camunda.com/blog/2025/05/building-your-first-ai-agent-with-camunda-s-new-agentic-ai/).
 - [AI Email Support Agent Blueprint](https://marketplace.camunda.com/en-US/apps/522492/ai-email-support-agent) on the
   Camunda Marketplace.
-- The AI integration GitHub repository provides working [examples](https://github.com/camunda/connectors/tree/main/connectors/agentic-ai/examples) for getting started.
+- AI integration GitHub repository [working examples](https://github.com/camunda/connectors/tree/main/connectors/agentic-ai/examples).

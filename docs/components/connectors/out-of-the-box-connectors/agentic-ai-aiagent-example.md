@@ -5,40 +5,35 @@ title: Example AI Agent connector integration
 description: AI agent connector implementing a feedback loop using for user interactions and toolcalls with an LLM.
 ---
 
-This worked example shows how you can integrate an [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) into a feedback loop model.
+This worked example shows how you can integrate an AI Agent connector into a feedback loop model.
 
 ## About this worked example
 
-This worked example demonstrates how to use an AI Agent tools feedback loop and a response interaction feedback loop. [/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#feedback-loop-use-cases]
+This worked example demonstrates how you can use the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) and an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) to model AI Agent [tools and response interaction feedback loops](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#feedback-loop-use-cases).
 
 ## Example tools feedback loop {#tools-loop}
 
-After configuring the AI Agent connector, you can add an ad-hoc sub-process and the tools feedback loop to connect your
-agent to the tools it needs to fulfill its purpose.
-
-### Add the ad-hoc sub-process
-
-Start off by adding an ad-hoc sub-process and mark it as
-a [**parallel multi-instance**](../../modeler/bpmn/multi-instance/multi-instance.md). This will allow the process to
-execute the tools in parallel and to wait for all tool calls to finish before continuing with the process. Configure a
-descriptive ID for your ad-hoc sub-process and **configure it** under the [tools](#tools) section of the AI Agent
-connector.
-
-After adding the ad-hoc sub-process, model a loop into the sub-process and back to the AI Agent connector. You can mark
-the `no` flow of the `Contains tool calls?` gateway as the default flow.
+First, an AI Agent connector is added and configured, and then an ad-hoc sub-process is added in a feedback loop to connect the agent to the tools it needs.
 
 ![aiagent-tools-loop-empty.png](../img/agenticai-tools-loop-empty.png)
 
-Next, configure the `yes` flow condition to be activated when the AI Agent response contains a list of tool calls.
-Assuming you used the suggested default values for the [result variable/expression](#result-variableexpression) you can
-configure the condition to:
+### Add ad-hoc sub-process and loop
 
-```feel
-not(agent.toolCalls = null) and count(agent.toolCalls) > 0
-```
+1. An ad-hoc sub-process is added and marked as a [parallel multi-instance](../../modeler/bpmn/multi-instance/multi-instance.md). This allows the process to execute the tools in parallel, and wait for all tool calls to complete before continuing with the process.
 
-This will lead the process to route the execution through the ad-hoc sub-process when the LLM response requests to call
-one or more tools.
+1. A descriptive ID is configured for the ad-hoc sub-process. This is then entered in the **Ad-hoc sub-process ID** field in the [tools](agentic-ai-aiagent.md#tools) section of the AI Agent connector.
+
+1. A loop is then modeled into the sub-process and back to the AI Agent connector.
+
+   - The `no` flow of the `Contains tool calls?` gateway is marked as the default flow.
+
+   - The `yes` flow condition is configured to be activated when the AI Agent response contains a list of tool calls. If the suggested default values for the [result variable/expression](#result-variableexpression) are used, this condition could be configured as follows:
+
+     ```feel
+     not(agent.toolCalls = null) and count(agent.toolCalls) > 0
+     ```
+
+     This means execution routes through the ad-hoc sub-process if the LLM response requests one or more tools to be called.
 
 ### Configure multi-instance execution
 

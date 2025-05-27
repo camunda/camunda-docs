@@ -418,7 +418,7 @@ module.exports = {
               "Agentic AI": [
                 {
                   type: "category",
-                  label: "Agentic AI",
+                  label: "AI Agent",
                   link: {
                     type: "doc",
                     id: "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent",
