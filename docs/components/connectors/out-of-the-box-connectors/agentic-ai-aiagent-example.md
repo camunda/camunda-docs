@@ -13,7 +13,7 @@ This worked example demonstrates how you can use the [AI Agent connector](/compo
 
 ## Example tools feedback loop {#tools-loop}
 
-First, an AI Agent connector is added and configured, and then an ad-hoc sub-process is added in a feedback loop to connect the agent to the tools it needs.
+First, an AI Agent connector is added and configured in the process diagram. Next, an ad-hoc sub-process is added in a feedback loop to connect the agent to the tools it needs.
 
 ![aiagent-tools-loop-empty.png](../img/agenticai-tools-loop-empty.png)
 
@@ -21,29 +21,25 @@ First, an AI Agent connector is added and configured, and then an ad-hoc sub-pro
 
 1. An ad-hoc sub-process is added and marked as a [parallel multi-instance](../../modeler/bpmn/multi-instance/multi-instance.md). This allows the process to execute the tools in parallel, and wait for all tool calls to complete before continuing with the process.
 
-1. A descriptive ID is configured for the ad-hoc sub-process. This is then entered in the **Ad-hoc sub-process ID** field in the [tools](agentic-ai-aiagent.md#tools) section of the AI Agent connector.
+1. A descriptive ID is configured for the ad-hoc sub-process. This can then be configured in the **Ad-hoc sub-process ID** field in the AI Agent connector [tools](agentic-ai-aiagent.md#tools) section.
 
-1. A loop is then modeled into the sub-process and back to the AI Agent connector.
+1. A loop is modeled into the sub-process and back to the AI Agent connector.
 
    - The `no` flow of the `Contains tool calls?` gateway is marked as the default flow.
 
-   - The `yes` flow condition is configured to be activated when the AI Agent response contains a list of tool calls. If the suggested default values for the [result variable/expression](#result-variableexpression) are used, this condition could be configured as follows:
+   - The `yes` flow condition is configured to activate when the AI Agent response contains a list of tool calls. For example, if the suggested default values for the [result variable/expression](#result-variableexpression) are used, this condition could be configured as follows:
 
      ```feel
      not(agent.toolCalls = null) and count(agent.toolCalls) > 0
      ```
 
-     This means execution routes through the ad-hoc sub-process if the LLM response requests one or more tools to be called.
+     The process execution routes through the ad-hoc sub-process if the LLM response requests one or more tools to be called.
 
 ### Configure multi-instance execution
 
-:::note
-Use the suggested values as a starting point and change them to your needs if needed or when dealing with multiple
-agents within the same process.
-:::
+The ad-hoc sub-process must be configured as a **parallel multi-instance** sub-process.
 
-As stated above, the ad-hoc sub-process needs to be configured as a **parallel multi-instance** sub-process. This
-ensures that:
+This means:
 
 - Tools can be called **independently of each other**, each with its own set of input parameters. This also implies that
   the same tool can be called **multiple times with different parameters** within the same ad-hoc sub-process execution.
@@ -53,6 +49,11 @@ ensures that:
 
 The multi-instance configuration is the same for each agent configuration, and it will be possible to reuse a template
 to make this configuration easier. For the moment, you need to configure the following properties.
+
+:::note
+Use the suggested values as a starting point and change them to your needs if needed or when dealing with multiple
+agents within the same process.
+:::
 
 - **Input collection**: set this to the list of tool calls your AI Agent connector returns, for example
   `agent.toolCalls`.
