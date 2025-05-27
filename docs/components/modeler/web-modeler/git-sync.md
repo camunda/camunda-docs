@@ -175,7 +175,7 @@ When using a self-hosted Azure DevOps Server instance, ensure the environment va
    - **Directory (tenant) ID:** Your MicroSoft Entra tenant unique identifier. Can also be found in the applications registration page.
    - **Private Key:** The contents of the private key used to generate the certificate in PEM format.
    - **Certificate:** The contents of the certificate used to register the application in PEM format.
-   - **Repository URL:** The base URL of the repository you want to sync with, for example `https://dev.azure.com/camunda/my-project/_git/example-repo`. The URL cannot contain the `.git` extension or a folder path. By default, the first repository you create will have the same name as the project and the URL won't explicitly have the project name in it, for example  `https://dev.azure.com/camunda/_git/example-repo`.
+   - **Repository URL:** The base URL of the repository you want to sync with, for example `https://dev.azure.com/camunda/my-project/_git/example-repo`. The URL cannot contain the `.git` extension or a folder path. By default, the first repository you create will have the same name as the project and the URL won't explicitly have the project name in it, for example `https://dev.azure.com/camunda/_git/example-repo`.
    - **Branch name:** The branch name to use for merging and managing changes.
    - **Path:** (optional) The path to the folder containing your process application files. If left empty, Web Modeler syncs with the root of the repository. This path is automatically created if it does not exist.
 
