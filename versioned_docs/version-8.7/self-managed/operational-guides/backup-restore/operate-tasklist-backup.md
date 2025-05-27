@@ -26,72 +26,8 @@ Operate provides an API to perform a backup and manage backups (list, check stat
 The backup API can be reached via the Actuator management port, which by default is the same as application HTTP port (and in turn defaults to 9600). The port may be reconfigured with the help of `management.server.port` configuration parameter.
 :::
 
-## Prerequisites
-
-Before you can use the backup and restore feature:
-
-1. The [Elasticsearch snapshot repository](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshot-restore.html) must be configured.
-2. Operate and Tasklist must be configured with the repository name using one of the following configuration options:
-
-<Tabs groupId="config" defaultValue="yaml" values={
-[
-{label: 'YAML file', value: 'yaml', },
-{label: 'Environment variables', value: 'env', },
-]
-}>
-
-<TabItem value='yaml'>
-
-#### Operate
-
-```yaml
-camunda:
-  operate:
-    backup:
-      repositoryName: <es snapshot repository name>
-```
-
-</TabItem>
-
-<TabItem value='env'>
-
-#### Operate
-
-```
-CAMUNDA_OPERATE_BACKUP_REPOSITORYNAME=<es snapshot repository name>
-```
-
-</TabItem>
-</Tabs>
-
-#### Tasklist
-
-<Tabs groupId="config" className="tabs-hidden" defaultValue="yaml" values={
-[
-{label: 'YAML file', value: 'yaml', },
-{label: 'Environment variables', value: 'env', },
-]
-}>
-
-<TabItem value='yaml'>
-
-```yaml
-camunda:
-  tasklist:
-    backup:
-      repositoryName: <es snapshot repository name>
-```
-
-</TabItem>
-
-<TabItem value='env'>
-
-```
-CAMUNDA_TASKLIST_BACKUP_REPOSITORYNAME=<es snapshot repository name>
-```
-
-</TabItem>
-</Tabs>
+<!-- TODO: Move Prerequisites to central page -->
+<!-- TODO: Move Config to config page. -->
 
 ## Create backup API
 
@@ -232,6 +168,8 @@ Response:
 | 404 Not Found    | Not a single snapshot corresponding to given ID exist.                                                                       |
 | 500 Server Error | All other errors, e.g. ES returned error response when attempting to execute the query.                                      |
 | 502 Bad Gateway  | Elasticsearch is not accessible, the request can be retried when it is back.                                                 |
+
+<!-- TODO: Move to central page -->
 
 ## Restore backup
 

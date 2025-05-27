@@ -14,17 +14,8 @@ camunda_optimize_123456_3.9.0_part_2_of_2
 
 Optimize provides an API to trigger a backup and retrieve information about a given backup's state. During backup creation Optimize can continue running. The backed up data can later be restored using the standard Elasticsearch snapshot restore API.
 
-## Prerequisites
-
-The following prerequisites must be set up before using the backup API:
-
-1. A snapshot repository of your choice must be registered with Elasticsearch.
-2. The repository name must be specified using the `CAMUNDA_OPTIMIZE_BACKUP_REPOSITORY_NAME` environment variable, or by adding it to your Optimize [`environment-config.yaml`](/self-managed/optimize-deployment/configuration/system-configuration.md):
-
-```yaml
-backup:
-  repositoryName: <repository name>
-```
+<!-- TODO: Move Prerequisites to central page -->
+<!-- TODO: Move Config to config page. -->
 
 ## Create backup API
 
