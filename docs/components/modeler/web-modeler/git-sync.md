@@ -158,7 +158,7 @@ Follow the [Add users to your organization documentation](https://learn.microsof
 Make sure that:
 - *Access level* is set to `Basic`.
 - Add this to all projects that will be using this integration.
-- *Azure DevOps Groups* is set to `Project Contributors` .
+- _Azure DevOps Groups_ is set to `Project Contributors` .
 
 <h3> Configure Azure in Web Modeler </h3>
 :::note
