@@ -156,7 +156,8 @@ Configure [scoped permissions](https://learn.microsoft.com/en-us/entra/identity-
 Follow the [Add users to your organization documentation](https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/add-organization-users?view=azure-devops&tabs=browser#add-users-to-your-organization) to be add the app that was created, as a user in your Azure DevOps organization.
 
 Make sure that:
-- *Access level* is set to `Basic`.
+
+- _Access level_ is set to `Basic`.
 - Add this to all projects that will be using this integration.
 - _Azure DevOps Groups_ is set to `Project Contributors` .
 
