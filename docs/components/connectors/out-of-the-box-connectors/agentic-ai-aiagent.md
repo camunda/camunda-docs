@@ -11,9 +11,9 @@ Use the **AI Agent** outbound connector to integrate Large Language Models (LLMs
 
 The AI Agent connector enables AI agents to integrate with an LLM to provide interaction/reasoning capabilities. This connector is designed for use with an ad-hoc sub-process in a feedback loop, providing automated user interaction and tool selection.
 
-For example, this connector enables an AI agent to autonomously select and execute ad-hoc sub-processes by evaluating the current process context and determining the relevant tasks and tools to use in response. You can also use the AI Agent connector independently, although it is designed to be used with an ad-hoc sub-process to define the tools an AI agent can use.
+For example, use this connector to enable an AI agent to autonomously select and execute ad-hoc sub-processes by evaluating the current process context and determining the relevant tasks and tools to use in response. You can also use the AI Agent connector independently, although it is designed to be used with an ad-hoc sub-process to define the tools an AI agent can use.
 
-Core features include the following:
+Core features include:
 
 | Feature              | Description                                                                                                                                                                                                                                                                         |
 | :------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

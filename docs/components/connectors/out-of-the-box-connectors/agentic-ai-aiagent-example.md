@@ -5,7 +5,11 @@ title: Example AI Agent connector integration
 description: AI agent connector implementing a feedback loop using for user interactions and toolcalls with an LLM.
 ---
 
-This worked example shows how you can integrate an [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) in a feedback loop model.
+This worked example shows how you can integrate an [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) into a feedback loop model.
+
+## About this worked example
+
+This worked example demonstrates how to use an AI Agent tools feedback loop and a response interaction feedback loop. [/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#feedback-loop-use-cases]
 
 ## Example tools feedback loop {#tools-loop}
 
