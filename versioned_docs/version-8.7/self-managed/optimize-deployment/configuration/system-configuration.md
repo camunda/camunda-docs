@@ -188,9 +188,19 @@ Define a secured connection to be able to communicate with a secured Elasticsear
 
 #### Elasticsearch backup settings
 
-| YAML path                | Default value | Description                                                              |
-| ------------------------ | ------------- | ------------------------------------------------------------------------ |
-| es.backup.repositoryName | ""            | The name of the snapshot repository to be used to back up Optimize data. |
+Following must be configured on the database itself:
+
+- [Elasticsearch snapshot repository](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshot-restore.html)
+
+Optimize is configured with the snapshot repository name to trigger database snapshots. This is important for coherent backups.
+
+Read more about the procedure and the need to trigger it through Camunda components in the [backup guide](/versioned_docs/version-8.7/self-managed/operational-guides/backup-restore/backup-and-restore.md).
+
+Optimize must be configured with the repository name:
+
+| YAML path                | Environment Variable                    | Default value | Description                                                              |
+| ------------------------ | --------------------------------------- | ------------- | ------------------------------------------------------------------------ |
+| es.backup.repositoryName | CAMUNDA_OPTIMIZE_BACKUP_REPOSITORY_NAME | ""            | The name of the snapshot repository to be used to back up Optimize data. |
 
 ### OpenSearch
 
@@ -242,11 +252,21 @@ Define a secured connection to be able to communicate with a secured OpenSearch 
 
 #### OpenSearch backup settings
 
-| YAML path                        | Default value | Description                                                              |
-| -------------------------------- | ------------- | ------------------------------------------------------------------------ |
-| opensearch.backup.repositoryName | ""            | The name of the snapshot repository to be used to back up Optimize data. |
+Following must be configured on the database itself:
 
-:::note
+- [OpenSearch snapshot repository](https://docs.opensearch.org/docs/latest/tuning-your-cluster/availability-and-recovery/snapshots/snapshot-restore/)
+
+Optimize is configured with the snapshot repository name to trigger database snapshots. This is important for coherent backups.
+
+Read more about the procedure and the need to trigger it through Camunda components in the [backup guide](/versioned_docs/version-8.7/self-managed/operational-guides/backup-restore/backup-and-restore.md).
+
+Optimize must be configured with the repository name:
+
+| YAML path                        | Environment Variable                    | Default value | Description                                                              |
+| -------------------------------- | --------------------------------------- | ------------- | ------------------------------------------------------------------------ |
+| opensearch.backup.repositoryName | CAMUNDA_OPTIMIZE_BACKUP_REPOSITORY_NAME | ""            | The name of the snapshot repository to be used to back up Optimize data. |
+
+:::warning
 The backup functionality is not yet supported for OpenSearch.
 :::
 
