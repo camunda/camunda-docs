@@ -21,7 +21,11 @@ The reasoning -->
 
 A backup of a Camunda 8 cluster consists of a backup of Zeebe, Operate, Tasklist, Optimize, and exported Zeebe records in Elasticsearch. Since the data of these applications are dependent on each other, it is important that the backup is consistent across all components. The backups of individual components taken independently may not form a consistent recovery point. Therefore, you must take the backup of a Camunda 8 cluster as a whole. To ensure a consistent backup, follow the process described below. Failing to do so will result in the loss of data and you might not even notice it. There is currently no way to verify this. <!-- TODO: Rewrite the last two lines -->
 
+<!-- TODO: Add part about being hot backups and what exactly that means. What's happening in the background etc. data overlap... -->
+
 ### Prerequisites
+
+<!-- TODO: add tool prerequsisites: curl, jq, kubectl -->
 
 Operate, Tasklist, and Optimize use Elasticsearch / OpenSearch as backend storage and use the snapshot feature of Elasticsearch / OpenSearch for backing up their state. Zeebe does not have an in-built API for its related indices but will need to use the snapshot API of Elasticsearch / OpenSearch directly.
 
@@ -136,6 +140,7 @@ Examples for Kubernetes approaches:
    # following will create a temporary alias within your terminal to overwrite the normal curl
    CAMUNDA_NAMESPACE=camunda <!-- TODO: double check consistent naming with our guides -->
    HELM_RELEASE_NAME=camunda
+   <!-- TODO: consider renaming kubecurl to curl to temporarily overwrite it locally, will allow to have the same commands for everything -->
    alias kubecurl="kubectl run curl --rm -i -n $CAMUNDA_NAMESPACE --restart=Never --image=alpine/curl -- -sS"
 
    kubecurl $HELM_RELEASE_NAME-operate:9600/actuator/health
@@ -166,61 +171,296 @@ Examples for Kubernetes approaches:
 
 To back up a Camunda 8 cluster, execute the following sequential steps:
 
-The following example will use the backup ID `1748353033` for the placeholder `x`.
+<!-- TODO: Rewrite actionable step names -->
+
+<!-- TODO: Explain why the certain order is so important; Basically, WebApps interchangable, overlap with Zeebe is important and softpause topic.
+
+Softpause = exported + but not deleted (log compacted) from Zeebe.
+Maybe in the form of like a short TL;DR
+WebApp Backup
+Export Pause
+Zeebe exports ("db" + partitions)
+Resume Pause
+-->
 
 ```bash
-<!-- TODO: Define all endpoints somehow -->
-export BACKUP_ID=1748353033 # date +%s
+<!-- TODO: Define all endpoints somehow - maybe specific per use case -->
+# Don't export the BACKUP_ID multiple times, it needs to be consistent with all backups for easier identification
+export BACKUP_ID=$(date +%s) # unix timestamp as unique always increasing ID
+export OPTIMIZE_MANAGEMENT_API=
+export OPERATE_MANAGEMENT_API=
+export TASKLIST_MANAGEMENT_API=
+export GATEWAY_MANAGEMENT_API=
 ```
 
 1. Trigger a backup `x` of Optimize.
 
-```bash
-curl -XPOST $OPTIMIZE_MANAGEMENT_API/actuator/backups \
-  -H "Content-Type: application/json" \
-  -d "{\"backupId\": $BACKUP_ID}"
-```
+   ```bash
+   curl -XPOST "$OPTIMIZE_MANAGEMENT_API/actuator/backups" \
+      -H "Content-Type: application/json" \
+      -d "{\"backupId\": $BACKUP_ID}"
+   ```
+
+   <details>
+      <summary>Example output</summary>
+      <summary>
+
+      <!-- TODO: You get the idea -->
+
+      </summary>
+   </details>
 
 2. Trigger a backup `x` of Operate. See [how to take an Operate backup](/self-managed/operational-guides/backup-restore/operate-tasklist-backup.md).
 
-```bash
-curl -XPOST $OPERATE_MANAGEMENT_API/actuator/backups \
-  -H "Content-Type: application/json" \
-  -d "{\"backupId\": $BACKUP_ID}"
-```
+   ```bash
+   curl -XPOST "$OPERATE_MANAGEMENT_API/actuator/backups" \
+      -H "Content-Type: application/json" \
+      -d "{\"backupId\": $BACKUP_ID}"
+   ```
+
+   <details>
+      <summary>Example output</summary>
+      <summary>
+
+      <!-- TODO: You get the idea -->
+
+      </summary>
+   </details>
 
 3. Trigger a backup `x` of Tasklist. See [how to take a Tasklist backup](/self-managed/operational-guides/backup-restore/operate-tasklist-backup.md).
 
-```bash
-curl -XPOST $TASKLIST_MANAGEMENT_API/actuator/backups \
-  -H "Content-Type: application/json" \
-  -d "{\"backupId\": $BACKUP_ID}"
-```
+   ```bash
+   curl -XPOST "$TASKLIST_MANAGEMENT_API/actuator/backups" \
+      -H "Content-Type: application/json" \
+      -d "{\"backupId\": $BACKUP_ID}"
+   ```
+
+   <details>
+      <summary>Example output</summary>
+      <summary>
+
+      <!-- TODO: You get the idea -->
+
+      </summary>
+   </details>
 
 4. Wait until the backup `x` of Optimize is complete. See [how to monitor an Optimize backup](/self-managed/operational-guides/backup-restore/optimize-backup.md).
+
+   ```bash
+   curl -s "$OPTIMIZE_MANAGEMENT_API/actuator/backups/$BACKUP_ID"
+   ```
+
+   <details>
+      <summary>Example output</summary>
+      <summary>
+
+      <!-- TODO: You get the idea -->
+
+      </summary>
+   </details>
+
+   Alternatively as a one-line to wait until the state is `COMPLETED` using a while loop and jq to parse the response JSON.
+
+   ```bash
+   while [[ "$(curl -s "$OPTIMIZE_MANAGEMENT_API/actuator/backups/$BACKUP_ID" | jq -r .state)" != "COMPLETED" ]]; do echo "Waiting..."; sleep 5; done; echo "Finished backup with ID $BACKUP_ID"
+   ```
+
 5. Wait until the backup `x` of Operate is complete. See [how to monitor an Operate backup](/self-managed/operational-guides/backup-restore/operate-tasklist-backup.md).
+
+   ```bash
+   curl -s "$OPERATE_MANAGEMENT_API/actuator/backups/$BACKUP_ID"
+   ```
+
+   <details>
+      <summary>Example output</summary>
+      <summary>
+
+      <!-- TODO: You get the idea -->
+
+      </summary>
+   </details>
+
+   Alternatively as a one-line to wait until the state is `COMPLETED` using a while loop and jq to parse the response JSON.
+
+   ```bash
+   while [[ "$(curl -s "$OPERATE_MANAGEMENT_API/actuator/backups/$BACKUP_ID" | jq -r .state)" != "COMPLETED" ]]; do echo "Waiting..."; sleep 5; done; echo "Finished backup with ID $BACKUP_ID"
+   ```
+
 6. Wait until the backup `x` of Tasklist is complete. See [how to monitor a Tasklist backup](/self-managed/operational-guides/backup-restore/operate-tasklist-backup.md).
+
+   ```bash
+   curl "$TASKLIST_MANAGEMENT_API/actuator/backups/$BACKUP_ID"
+   ```
+
+   <details>
+      <summary>Example output</summary>
+      <summary>
+
+      <!-- TODO: You get the idea -->
+
+      </summary>
+   </details>
+
+   Alternatively as a one-line to wait until the state is `COMPLETED` using a while loop and jq to parse the response JSON.
+
+   ```bash
+   while [[ "$(curl -s "$TASKLIST_MANAGEMENT_API/actuator/backups/$BACKUP_ID" | jq -r .state)" != "COMPLETED" ]]; do echo "Waiting..."; sleep 5; done; echo "Finished backup with ID $BACKUP_ID"
+   ```
+
 7. Soft pause exporting in Zeebe. See [Zeebe management API](/self-managed/zeebe-deployment/operations/management-api.md).
-8. Take a backup `x` of the exported Zeebe records in Elasticsearch using the Elasticsearch Snapshots API.
 
-```
+   ```bash
+   curl -XPOST "$GATEWAY_MANAGEMENT_API/actuator/exporting?soft=true"
+   ```
 
-PUT /_snapshot/my_repository/camunda_zeebe_records_backup_x
-{
-   "indices": "zeebe-record*",
-   "feature_states": ["none"]
-}
+   <details>
+      <summary>Example output</summary>
+      <summary>
 
-```
+      <!-- TODO: You get the idea -->
 
-By default, the indices are prefixed with `zeebe-record`. If you have configured a different prefix when configuring Elasticsearch exporter in Zeebe, use this instead.
+      </summary>
+   </details>
+
+
+8. Take a backup `x` of the exported Zeebe records in Elasticsearch / OpenSearch using the respective Snapshots API.
+
+   By default, the indices are prefixed with `zeebe-record`. If you have configured a different prefix when configuring Elasticsearch / OpenSearch exporter in Zeebe, use this instead.
+
+   <Tabs>
+      <TabItem value="elasticsearch" label="Elasticsearch" default>
+
+      [Elasticsearch documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-snapshot-create)
+
+      ```bash
+      curl -XPUT "$ELASTIC_ENDPOINT/_snapshot/$ELASTIC_SNAPSHOT_REPOSITORY/camunda_zeebe_records_backup_$BACKUP_ID?wait_for_completion=true" \
+      -H 'Content-Type: application/json' \
+      -d '{
+            "indices": "zeebe-record*",
+            "feature_states": ["none"]
+            }'
+      ```
+
+      <details>
+         <summary>Example output</summary>
+         <summary>
+
+         <!-- TODO: You get the idea -->
+
+         </summary>
+      </details>
+
+      </TabItem>
+      <TabItem value="opensearch" label="OpenSearch">
+
+      [OpenSearch documentation](https://docs.opensearch.org/docs/latest/api-reference/snapshots/create-snapshot/)
+
+      ```bash
+      curl -XPUT "$OPENSEARCH_ENDPOINT/_snapshot/$OPENSEARCH_SNAPSHOT_REPOSITORY/camunda_zeebe_records_backup_$BACKUP_ID?wait_for_completion=true" \
+      -H 'Content-Type: application/json' \
+      -d '{
+            "indices": "zeebe-record*"
+            }'
+      ```
+
+      <details>
+         <summary>Example output</summary>
+         <summary>
+
+         <!-- TODO: You get the idea -->
+
+         </summary>
+      </details>
+
+      </TabItem>
+   </Tabs>
 
 9. Wait until the backup `x` of the exported Zeebe records is complete before proceeding.
-   Take a backup `x` of Zeebe. See [how to take a Zeebe backup](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md).
-10. Wait until the backup `x` of Zeebe is completed before proceeding. See [how to monitor a Zeebe backup](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md).
-    Resume exporting in Zeebe. See [Zeebe management API](/self-managed/zeebe-deployment/operations/management-api.md).
 
-:::note
+   <Tabs>
+      <TabItem value="elasticsearch" label="Elasticsearch" default>
+
+      [Elasticsearch documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-snapshot-create)
+
+      ```bash
+      curl "$ELASTIC_ENDPOINT/_snapshot/$ELASTIC_SNAPSHOT_REPOSITORY/camunda_zeebe_records_backup_$BACKUP_ID/_status"
+      ```
+
+      <details>
+         <summary>Example output</summary>
+         <summary>
+
+         <!-- TODO: You get the idea -->
+
+         </summary>
+      </details>
+
+      </TabItem>
+      <TabItem value="opensearch" label="OpenSearch">
+
+      [OpenSearch documentation](https://docs.opensearch.org/docs/latest/api-reference/snapshots/get-snapshot-status/)
+
+      ```bash
+      curl -XPUT "$OPENSEARCH_ENDPOINT/_snapshot/$OPENSEARCH_SNAPSHOT_REPOSITORY/camunda_zeebe_records_backup_$BACKUP_ID/_status"
+      ```
+
+      <details>
+         <summary>Example output</summary>
+         <summary>
+
+         <!-- TODO: You get the idea -->
+
+         </summary>
+      </details>
+
+      </TabItem>
+   </Tabs>
+
+10. Take a backup `x` of Zeebe. See [how to take a Zeebe backup](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md).
+
+   ```bash
+   curl -XPOST "$GATEWAY_MANAGEMENT_API/actuator/backups" \
+      -H "Content-Type: application/json" \
+      -d "{\"backupId\": $BACKUP_ID}"
+   ```
+
+   <details>
+      <summary>Example output</summary>
+      <summary>
+
+      <!-- TODO: You get the idea -->
+
+      </summary>
+   </details>
+
+11. Wait until the backup `x` of Zeebe is completed before proceeding. See [how to monitor a Zeebe backup](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md).
+
+   ```bash
+   curl "$GATEWAY_MANAGEMENT_API/actuator/backups/$BACKUP_ID"
+   ```
+
+   <details>
+      <summary>Example output</summary>
+      <summary>
+
+      <!-- TODO: You get the idea -->
+
+      </summary>
+   </details>
+
+   Alternatively as a one-line to wait until the state is `COMPLETED` using a while loop and jq to parse the response JSON.
+
+   ```bash
+   while [[ "$(curl -s "$GATEWAY_MANAGEMENT_API/actuator/backups/$BACKUP_ID" | jq -r .state)" != "COMPLETED" ]]; do echo "Waiting..."; sleep 5; done; echo "Finished backup with ID $BACKUP_ID"
+   ```
+
+12. Resume exporting in Zeebe. See [Zeebe management API](/self-managed/zeebe-deployment/operations/management-api.md).
+
+```bash
+curl -XPOST "$GATEWAY_MANAGEMENT_API/actuator/exporting/resume"
+```
+
+:::warning
 If any of the steps above fail, you may have to restart with a new backup ID. Ensure Zeebe exporting is resumed if the backup process force quits in the middle of the process.
 :::
 
@@ -262,21 +502,21 @@ In that case, follow the described steps above and when you have your Elasticsea
       ELASTIC_SNAPSHOT_REPOSITORY=camunda_backup   # Your defined snapshot repository on Elasticsearch for Camunda backups
 
       # Get a list of all available snapshots
-      curl -XGET '$ELASTIC_ENDPOINT/_snapshot/$ELASTIC_SNAPSHOT_REPOSITORY/_all'
+      curl $ELASTIC_ENDPOINT/_snapshot/$ELASTIC_SNAPSHOT_REPOSITORY/_all
 
       # Get a list of all available snapshots and use jq to parse just the names for easier readability
-      curl -XGET '$ELASTIC_ENDPOINT/_snapshot/$ELASTIC_SNAPSHOT_REPOSITORY/_all' | jq -r '.snapshots[].snapshot'
+      curl $ELASTIC_ENDPOINT/_snapshot/$ELASTIC_SNAPSHOT_REPOSITORY/_all | jq -r '.snapshots[].snapshot'
       ```
 
       Ensure that all backups and parts exists for each component for your chosen backup ID.
 
       <details>
-      <summary>Example output</summary>
-      <summary>
+         <summary>Example output</summary>
+         <summary>
 
-      <!-- TODO: You get the idea -->
+         <!-- TODO: You get the idea -->
 
-      </summary>
+         </summary>
       </details>
    </TabItem>
 
@@ -291,10 +531,10 @@ In that case, follow the described steps above and when you have your Elasticsea
       OPENSEARCH_SNAPSHOT_REPOSITORY=camunda_backup   # Your defined snapshot repository on OpenSearch for Camunda backups
 
       # Get a list of all available snapshots
-      curl -XGET '$OPENSEARCH_ENDPOINT/_snapshot/$OPENSEARCH_SNAPSHOT_REPOSITORY/_all'
+      curl -XGET $OPENSEARCH_ENDPOINT/_snapshot/$OPENSEARCH_SNAPSHOT_REPOSITORY/_all
 
       # Get a list of all available snapshots and use jq to parse just the names for easier readability
-      curl -XGET '$OPENSEARCH_ENDPOINT/_snapshot/$OPENSEARCH_SNAPSHOT_REPOSITORY/_all' | jq -r '.snapshots[].snapshot'
+      curl -XGET $OPENSEARCH_ENDPOINT/_snapshot/$OPENSEARCH_SNAPSHOT_REPOSITORY/_all | jq -r '.snapshots[].snapshot'
       ```
 
       Ensure that all backups and parts exists for each component for your chosen backup ID.
