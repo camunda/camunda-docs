@@ -32,7 +32,7 @@ void shouldTriggerTimerEvent() {
 
 ## Mock job workers
 
-You can mock a job worker to simulate its behavior without invoking the actual worker. The mock handles all jobs of the given job type. 
+You can mock a job worker to simulate its behavior without invoking the actual worker. The mock handles all jobs of the given job type.
 
 When to use it:
 
@@ -42,12 +42,12 @@ When to use it:
 
 ### Complete job
 
-The mock completes jobs with/without variables. 
+The mock completes jobs with/without variables.
 
 ```java
 @Test
 void shouldCompleteJob() {
-    // given: mock job worker for the job type "send-email"    
+    // given: mock job worker for the job type "send-email"
     // 1) Complete jobs without variables
     rocessTestContext.mockJobWorker("send-email").thenComplete();
     
@@ -56,7 +56,7 @@ void shouldCompleteJob() {
         "emailSent", true,
         "timestamp", "2024-01-01T10:00:00Z"
     );
-    processTestContext.mockJobWorker("send-email").thenComplete(variables);    
+    processTestContext.mockJobWorker("send-email").thenComplete(variables);
 
     // when: create a process instance
     // then: verify that the process instance completed all tasks
@@ -70,7 +70,7 @@ The mock throws BPMN errors for jobs with the given error code and with/without 
 ```java
 @Test
 void shouldThrowBpmnError() {
-    // given: mock job worker for the job type "validate-order"    
+    // given: mock job worker for the job type "validate-order"
     // 1) Throw BPMN errors with error code "INVALID_ORDER"
     processTestContext.mockJobWorker("validate-order").thenThrowBpmnError("INVALID_ORDER");
 
@@ -113,7 +113,7 @@ void shouldUseCustomHandler() {
 
 ## Mock child processes
 
-You can mock a child process for a call activity to simulate its output without executing the actual child process. 
+You can mock a child process for a call activity to simulate its output without executing the actual child process.
 The mock deploys a dummy process with the given process ID that returns the given variables.
 
 When to use it:
@@ -143,7 +143,7 @@ void shouldMockChildProcess() {
 
 ## Mock DMN decisions
 
-You can mock a DMN decision for a business rule task to simulate its output without evaluating the actual DMN decision. 
+You can mock a DMN decision for a business rule task to simulate its output without evaluating the actual DMN decision.
 The mock deploys a dummy DMN decision with the given decision ID that returns the given variables.
 
 When to use it:
@@ -151,7 +151,6 @@ When to use it:
 - Test the process with the business rule task in isolation from the actual DMN decision
 - Simulate different outcomes of a DMN decision
 - Mock a non-existing DMN decision
-
 
 ```java
 @Test
