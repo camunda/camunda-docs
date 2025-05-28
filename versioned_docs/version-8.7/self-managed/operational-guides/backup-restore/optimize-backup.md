@@ -22,6 +22,8 @@ Optimize provides an API to trigger a backup and retrieve information about a gi
 Note that the backup API can be reached via the `/actuator` management port, which by default is `8092`.
 The configured context path does not apply to the management port.
 
+<!-- TODO: Context Path shit. While yes it's true from a local developer perspective. The helm chart defines also the base-path. -->
+
 The following endpoint can be used to trigger the backup process:
 
 ```
