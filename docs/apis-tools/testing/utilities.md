@@ -32,184 +32,139 @@ void shouldTriggerTimerEvent() {
 
 ## Mock job workers
 
-Job workers are external systems that execute jobs for service tasks. In a test, you can mock a job worker to simulate its behavior without implementing the actual worker logic.
+You can mock a job worker to simulate its behavior without invoking the actual worker. The mock handles all jobs of the given job type. 
 
 When to use it:
 
-- Test process flows without implementing the actual service task logic
-- Simulate different outcomes from a service task (success, BPMN errors, failures)
-- Verify that your process correctly handles service task results
+- Test the process in isolation from the actual job workers
+- Simulate different outcomes of a job worker (success, BPMN error)
+- Mock disabled job workers or Connectors
 
-### Basic job worker mocking
+### Complete job
 
-```java
-@Test
-void shouldCompleteServiceTask() {
-    // given: mock a job worker that completes jobs
-    processTestContext.mockJobWorker("send-email").thenComplete();
-
-    // when: create a process instance
-    ProcessInstanceEvent processInstance = client
-        .newCreateInstanceCommand()
-        .processDefinitionKey(processDefinitionKey)
-        .send()
-        .join();
-
-    // then: the process completes successfully
-    assertThat(processInstance).isCompleted();
-}
-```
-
-### Complete jobs with variables
+The mock completes jobs with/without variables. 
 
 ```java
 @Test
-void shouldCompleteServiceTaskWithVariables() {
-    // given: mock a job worker that completes jobs with variables
-    Map<String, Object> variables = Map.of(
+void shouldCompleteJob() {
+    // given: mock job worker for the job type "send-email"    
+    // 1) Complete jobs without variables
+    rocessTestContext.mockJobWorker("send-email").thenComplete();
+    
+    // 2) Complete jobs with variables
+    final Map<String, Object> variables = Map.of(
         "emailSent", true,
         "timestamp", "2024-01-01T10:00:00Z"
     );
-    processTestContext.mockJobWorker("send-email").thenComplete(variables);
+    processTestContext.mockJobWorker("send-email").thenComplete(variables);    
 
     // when: create a process instance
-    ProcessInstanceEvent processInstance = createProcessInstance();
-
-    // then: the process has the expected variables
-    assertThat(processInstance).hasVariables(variables);
+    // then: verify that the process instance completed all tasks
 }
 ```
 
-### Throw BPMN errors
+### Throw BPMN error
+
+The mock throws BPMN errors for jobs with the given error code and with/without variables.
 
 ```java
 @Test
 void shouldThrowBpmnError() {
-    // given: mock a job worker that throws a BPMN error
-    processTestContext.mockJobWorker("validate-order")
-        .thenThrowBpmnError("INVALID_ORDER");
+    // given: mock job worker for the job type "validate-order"    
+    // 1) Throw BPMN errors with error code "INVALID_ORDER"
+    processTestContext.mockJobWorker("validate-order").thenThrowBpmnError("INVALID_ORDER");
+
+    // 2) Throw BPMN errors with error code "INVALID_ORDER" and variables
+    final Map<String, Object> variables = Map.of(
+        "reason", "The order exceeds the item limit."
+    );
+    processTestContext
+        .mockJobWorker("validate-order")
+        .thenThrowBpmnError("INVALID_ORDER", variables);
 
     // when: create a process instance
-    ProcessInstanceEvent processInstance = createProcessInstance();
-
-    // then: the process follows the error event path
-    assertThat(processInstance).hasCompletedElements("handle-invalid-order");
+    // then: verify that the process instance handled the BPMN error
 }
 ```
 
-### Custom job handler
+### Custom handler
 
-For more complex scenarios, you can provide a custom job handler:
+You can implement a custom handler to mock more complex behaviors.
 
 ```java
 @Test
-void shouldUseCustomJobHandler() {
-    // given: mock a job worker with custom logic
-    processTestContext.mockJobWorker("calculate-discount")
-        .withHandler((jobClient, job) -> {
-            Map<String, Object> variables = job.getVariablesAsMap();
-            double orderAmount = (double) variables.get("orderAmount");
-            double discount = orderAmount > 100 ? 0.1 : 0.0;
+void shouldUseCustomHandler() {
+    // given: mock job worker for the job type "calculate-discount"
+    processTestContext
+        .mockJobWorker("calculate-discount")
+        .withHandler(
+            (jobClient, job) -> {
+                final Map<String, Object> variables = job.getVariablesAsMap();
+                final double orderAmount = (double) variables.get("orderAmount");
+                final double discount = orderAmount > 100 ? 0.1 : 0.0;
+    
+                jobClient.newCompleteCommand(job).variable("discount", discount).send().join();
+            });
 
-            jobClient.newCompleteCommand(job)
-                .variable("discount", discount)
-                .send()
-                .join();
-        });
-
-    // when: create a process instance with order amount
-    ProcessInstanceEvent processInstance = client
-        .newCreateInstanceCommand()
-        .processDefinitionKey(processDefinitionKey)
-        .variable("orderAmount", 150.0)
-        .send()
-        .join();
-
-    // then: the discount is calculated correctly
-    assertThat(processInstance).hasVariable("discount", 0.1);
+    // when: create a process instance
+    // then: verify that the process instance has the expected variables
 }
 ```
 
 ## Mock child processes
 
-Call activities invoke child processes. In a test, you can mock a child process to avoid deploying and executing the actual child process.
+You can mock a child process for a call activity to simulate its output without executing the actual child process. 
+The mock deploys a dummy process with the given process ID that returns the given variables.
 
 When to use it:
 
-- Test parent processes in isolation without their child processes
-- Simulate different outcomes from child processes
-- Speed up tests by avoiding complex child process execution
-
-### Basic child process mocking
+- Test the parent process in isolation from the actual child process
+- Simulate different outcomes of a child process
+- Mock a non-existing child process
 
 ```java
 @Test
 void shouldMockChildProcess() {
-    // given: mock a child process
+    // given: mock child process with the process ID "payment-process"
+    // 1) Complete the child process without variables
     processTestContext.mockChildProcess("payment-process");
 
-    // when: create a parent process instance
-    ProcessInstanceEvent processInstance = createProcessInstance();
-
-    // then: the parent process completes without executing the actual child process
-    assertThat(processInstance).isCompleted();
-}
-```
-
-### Mock child process with output variables
-
-```java
-@Test
-void shouldMockChildProcessWithVariables() {
-    // given: mock a child process that returns variables
-    Map<String, Object> childProcessOutput = Map.of(
+    // 2) Complete the child process with variables
+    final Map<String, Object> variables = Map.of(
         "paymentStatus", "completed",
         "transactionId", "TXN-12345"
     );
-    processTestContext.mockChildProcess("payment-process", childProcessOutput);
+    processTestContext.mockChildProcess("payment-process", variables);
 
-    // when: create a parent process instance
-    ProcessInstanceEvent processInstance = createProcessInstance();
-
-    // then: the parent process receives the child process variables
-    assertThat(processInstance).hasVariables(childProcessOutput);
+    // when: create a process instance
+    // then: verify that the process instance completed the call activity
 }
 ```
 
 ## Mock DMN decisions
 
-Business rule tasks evaluate DMN decisions. In a test, you can mock a DMN decision to return predefined results without deploying the actual decision table.
+You can mock a DMN decision for a business rule task to simulate its output without evaluating the actual DMN decision. 
+The mock deploys a dummy DMN decision with the given decision ID that returns the given variables.
 
 When to use it:
 
-- Test processes with business rule tasks without implementing complex decision logic
-- Simulate different decision outcomes
-- Focus on testing the process flow rather than the decision logic
+- Test the process with the business rule task in isolation from the actual DMN decision
+- Simulate different outcomes of a DMN decision
+- Mock a non-existing DMN decision
+
 
 ```java
 @Test
 void shouldMockDmnDecision() {
-    // given: mock a DMN decision
-    Map<String, Object> decisionResult = Map.of(
+    // given: mock DMN decision with the decision ID "credit-check-decision"
+    final Map<String, Object> variables = Map.of(
         "approved", true,
         "riskLevel", "low",
         "creditLimit", 5000
     );
-    processTestContext.mockDmnDecision("credit-check-decision", decisionResult);
+    processTestContext.mockDmnDecision("credit-check-decision", variables);
 
     // when: create a process instance
-    ProcessInstanceEvent processInstance = client
-        .newCreateInstanceCommand()
-        .processDefinitionKey(processDefinitionKey)
-        .variable("customerId", "CUST-123")
-        .send()
-        .join();
-
-    // then: the process receives the mocked decision result
-    assertThat(processInstance).hasVariables(decisionResult);
+    // then: verify that the process instance completed the business rule task
 }
 ```
-
-:::note
-When mocking DMN decisions, the mock replaces any existing decision with the same ID. The mocked decision returns the specified variables regardless of the input provided to the business rule task.
-:::
