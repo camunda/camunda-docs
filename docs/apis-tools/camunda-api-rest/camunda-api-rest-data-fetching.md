@@ -15,7 +15,7 @@ Resources can also support querying subordinate resources. For example, for user
 
 Search endpoints can also be used to access entity instances with a unique identifier directly. As an alternative, resources can also provide GET method endpoints for fetching the data of single instances. This is done by a specific key parameter in the URL path, for example `GET /v2/user-tasks/{userTaskKey}`.
 
-All those data retrieval endpoints offer near-real-time data consistency guarantees, providing runtime and historic data that has been processed by the defined [exporters](/self-managed/concepts/exporters.md).
+All those data retrieval endpoints offer near-real-time data consistency guarantees, providing runtime and historic data that has been processed by the [Camunda Exporter](/self-managed/zeebe-deployment/exporters/camunda-exporter.md`).
 
 ## Search requests
 
