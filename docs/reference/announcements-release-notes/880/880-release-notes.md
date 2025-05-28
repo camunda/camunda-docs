@@ -96,6 +96,14 @@ As well as bearer token and client credentials authentication, you can now confi
 
 To learn more about basic authentication, see [available authentication methods](/self-managed/modeler/web-modeler/configuration/configuration.md#available-authentication-methods).
 
+### Add description field to versions <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
+
+<!-- https://github.com/camunda/web-modeler/issues/12057 -->
+
+In addition to the version tag, there is a new dedicated description field on versions that serves as a change log or a Git commit message to track what changed and why. These enhancements are designed to make versioning more intuitive and collaborative—helping teams stay aligned and reducing ambiguity.
+
+To learn more about versions and the description field, see the [versions documentation](components/modeler/web-modeler/versions.md).
+
 ## 8.8.0-alpha3
 
 | Release date  | Changelog(s)                                                                                                                                                                               | Blog |
