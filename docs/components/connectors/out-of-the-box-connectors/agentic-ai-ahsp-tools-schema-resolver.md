@@ -22,7 +22,11 @@ This can be useful for:
 
 ## Prerequisites
 
-To use this connector, your process must contain an ad-hoc sub-process whose ID you can reference.
+The following prerequisites are required to use this connector:
+
+| Prerequisite       | Description                                                                 |
+| :----------------- | :-------------------------------------------------------------------------- |
+| Ad-hoc sub-process | Your process must contain an ad-hoc sub-process whose ID you can reference. |
 
 ## Create an Ad-Hoc Tools Schema connector task
 
