@@ -146,7 +146,7 @@ connection, see [database configuration](#database-configuration).
 
 ## Multi-tenancy
 
-Multi-tenancy in the context of Camunda 8 refers to the ability of Camunda 8 to serve multiple distinct tenants or clients within a single installation. For more information, including additional configuration requirements, see the [multi-tenancy documentation](/docs/self-managed/operational-guides/configure-multi-tenancy.md).
+Multi-tenancy in the context of Camunda 8 refers to the ability of Camunda 8 to serve multiple distinct tenants or clients within a single installation. For more information, including additional configuration requirements, see the [multi-tenancy documentation](/self-managed/operational-guides/configure-multi-tenancy.md).
 
 The following configuration is required to enable multi-tenancy in Identity:
 
