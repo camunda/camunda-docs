@@ -141,19 +141,19 @@ When successful, your project will display a new **Sync with GitLab** button.
 Web Modeler SaaS supports authenticating against `Microsoft Entra ID (global service)`. Other [national clouds](https://learn.microsoft.com/en-us/entra/identity-platform/authentication-national-cloud#microsoft-entra-authentication-endpoints) can be used in self-managed by setting the environment variable `CAMUNDA_MODELER_GITSYNC_AZURE_AUTHORITY_BASE_PATH`.
 :::
 
-Web Modeler requires an App to be registered in Microsoft Entra ID to sync changes with your Azure repository.
+Web Modeler requires an application to be registered in Microsoft Entra ID to sync changes with your Azure repository.
 
-Follow the [Microsoft Entra ID](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app) documentation to register an application.
+1. Follow the [Microsoft Entra ID](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app) documentation to register an application.
 
-Remember your `Application (client) ID` and `Directory (tenant) ID`, as we will need them later when configuring Web Modeler.
+2. Write down your `Application (client) ID` and `Directory (tenant) ID`.
 
-Configure your app to use [client-certificate credentials](https://learn.microsoft.com/en-us/entra/identity-platform/how-to-add-credentials?tabs=certificate). You will need a PEM-encoded, RSA-encrypted private key and a PEM-encoded certificate in `X509` format generated using that key. We will use both later when connection Web Modeler with your azure repositories.
+3. Configure your application to use [client-certificate credentials](https://learn.microsoft.com/en-us/entra/identity-platform/how-to-add-credentials?tabs=certificate). You need a PEM-encoded, RSA-encrypted private key and a PEM-encoded certificate in `X509` format generated from that key. You will need both later when configuring the connection in Web Modeler.
 
-Configure [scoped permissions](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-configure-app-access-web-apis) to your app so it can update the content of your azure repositories. In particular you need to make sure that `Azure DevOps > vso.code_write` is configured, and that Admin concent is not required.
+4. Configure [scoped permissions](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-configure-app-access-web-apis) to your app so it can update the content of your Azure repositories. Make sure that `Azure DevOps > vso.code_write` is configured, and that Admin connect is not required.
 
-<h3> Grant access to the App in the desired azure projects</h3>
+<h3> Grant access to the App in the desired Azure projects</h3>
 
-Follow the [Add users to your organization documentation](https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/add-organization-users?view=azure-devops&tabs=browser#add-users-to-your-organization) to be add the app that was created, as a user in your Azure DevOps organization.
+Follow the [documentation on how to add users](https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/add-organization-users?view=azure-devops&tabs=browser#add-users-to-your-organization) to add the created application to your Azure organization.
 
 Make sure that:
 
@@ -173,9 +173,9 @@ When using a self-hosted Azure DevOps Server instance, ensure the environment va
 3. Provide the following information in the **Configure Azure** modal:
 
    - **Application (client) ID:** Can be found in the applications registration page.
-   - **Directory (tenant) ID:** Your MicroSoft Entra tenant unique identifier. Can also be found in the applications registration page.
-   - **Private Key:** The contents of the private key used to generate the certificate in PEM format.
-   - **Certificate:** The contents of the certificate used to register the application in PEM format.
+   - **Directory (tenant) ID:** Your Microsoft Entra tenant unique identifier. Can also be found in the applications registration page.
+   - **Private Key:** The private key used to generate the certificate in PEM format.
+   - **Certificate:** The certificate used to register the application in PEM format.
    - **Repository URL:** The base URL of the repository you want to sync with, for example `https://dev.azure.com/camunda/my-project/_git/example-repo`. The URL cannot contain the `.git` extension or a folder path. By default, the first repository you create will have the same name as the project and the URL won't explicitly have the project name in it, for example `https://dev.azure.com/camunda/_git/example-repo`.
    - **Branch name:** The branch name to use for merging and managing changes.
    - **Path:** (optional) The path to the folder containing your process application files. If left empty, Web Modeler syncs with the root of the repository. This path is automatically created if it does not exist.
