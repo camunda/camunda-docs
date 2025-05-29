@@ -95,59 +95,44 @@ How you model this type of feedback loop greatly depends on your specific use ca
 
 ## Tool Resolution
 
-When resolving the available tools within an ad-hoc sub-process, the AI Agent will take all activities into account
-which **have no incoming flows** (root nodes within the ad-hoc sub-process) and **are not boundary events**. In the
-following screenshot, the activities marked in red are the ones that will be considered as tools:
+When resolving the available tools within an ad-hoc sub-process, the AI Agent will take all activities into account which **have no incoming flows** (root nodes within the ad-hoc sub-process) and **are not boundary events**.
+
+For example, in the following image the activities marked in red are the ones that will be considered as tools:
 
 ![agenticai-tool-resolution.png](../img/agenticai-tool-resolution.png)
 
-As you can see, you are free to use any BPMN elements and connectors as tools and to model sub-flows within the ad-hoc
-sub-process.
+You can use any BPMN elements and connectors as tools and to model sub-flows within the ad-hoc sub-process.
 
-To resolve available tools the AI Agent connector will:
+To resolve available tools the AI Agent connector:
 
-- Read the BPMN model and look up the ad-hoc sub-process by the configured ID. If it cannot be found, the connector will
-  throw an error.
-- Iterate over all activities within the ad-hoc sub-process and check if they are root nodes (no incoming flows) and not
-  boundary events.
-- For each activity found, it will analyze the input/output mappings and look for the
-  [`fromAi`](../../modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) function calls
-  which define parameters which need to be provided by the LLM.
-- The connector will then create a tool definition for each activity found and pass these tool definitions to the LLM
-  as part of the prompt.
+- Reads the BPMN model and looks up the ad-hoc sub-process using the configured ID. If not found, the connector throws an error.
+- Iterates over all activities within the ad-hoc sub-process and checks that they are root nodes (no incoming flows) and not boundary events.
+- For each activity found, analyzes the input/output mappings and looks for the [`fromAi`](../../modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) function calls that define the parameters that need to be provided by the LLM.
+- Creates a tool definition for each activity found, and passes these tool definitions to the LLM as part of the prompt.
 
 :::note
-The [Anthropic](https://docs.anthropic.com/en/docs/build-with-claude/tool-use/overview) and
-[OpenAI](https://platform.openai.com/docs/guides/function-calling) docs contain good examples how tool/function calling
-works in combination with an LLM.
+Refer to the [Anthropic](https://docs.anthropic.com/en/docs/build-with-claude/tool-use/overview) and [OpenAI](https://platform.openai.com/docs/guides/function-calling) documentation for examples of how tool/function calling works in combination with an LLM.
 :::
 
 ### Tool Definitions
 
 :::important
-When resolving a tool definition, the AI Agent connector will only consider the **root node** of the sub-flow.
+The AI Agent connector only considers the **root node** of the sub-flow when resolving a tool definition.
 :::
 
-A tool definition consists of the following properties which will be passed to the LLM. The tool definition is closely
-modeled after the
-[list tools response](https://modelcontextprotocol.io/specification/2025-03-26/server/tools#listing-tools) as defined in
-the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/).
+A tool definition consists of the following properties which will be passed to the LLM. The tool definition is closely modeled after the [list tools response](https://modelcontextprotocol.io/specification/2025-03-26/server/tools#listing-tools) as defined in the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/).
 
-- **name**: The name of the tool. This is the **ID of the activity** in the ad-hoc sub-process.
-- **description**: The description of the tool, telling an LLM the purpose of the tool. If the
-  **documentation** of the activity is set, it will be used as the description, otherwise the **name** of the activity
-  will be used. Make sure to provide a meaningful description to help the LLM understand the purpose of the tool.
-- **inputSchema**: The input schema of the tool, describing the input parameters of the tool. The connector will analyze
-  all input/output mappings of the activity and will create a [JSON Schema](https://json-schema.org/) based on the
-  [`fromAi`](../../modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) function calls
-  defined in these mappings. If no `fromAi` function calls are found, an empty JSON Schema object will be returned.
+| Property    | Description                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| :---------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| name        | The name of the tool. This is the **ID of the activity** in the ad-hoc sub-process.                                                                                                                                                                                                                                                                                                                                                                 |
+| description | The description of the tool, used to inform the LLM of the tool purpose. If the **documentation** of the activity is set, this is used as the description, otherwise the **name** of the activity is used. Make sure you provide a meaningful description to help the LLM understand the purpose of the tool.                                                                                                                                       |
+| inputSchema | The input schema of the tool, describing the input parameters of the tool. The connector will analyze all input/output mappings of the activity and create a [JSON Schema](https://json-schema.org/) based on the [`fromAi`](../../modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) function calls defined in these mappings. If no `fromAi` function calls are found, an empty JSON Schema object is returned. |
 
 :::note
 Provide as much context and guidance in tool definitions and input parameter definitions as you can to ensure the LLM
 selects the right tool and generates proper input values.
 
-You can find best practices for tool definitions on
-the [Anthropic docs](https://docs.anthropic.com/en/docs/build-with-claude/tool-use/implement-tool-use#example-of-a-good-tool-description).
+Refer to the [Anthropic documentation](https://docs.anthropic.com/en/docs/build-with-claude/tool-use/implement-tool-use#example-of-a-good-tool-description) for tool definition best practices.
 :::
 
 ### AI-generated parameters via `fromAi`
@@ -157,27 +142,23 @@ Within an activity, you can define parameters which should be AI-generated by ta
 input/output mappings.
 
 The function itself does not implement any logic (it simply returns the first argument it receives), but provides a way
-to configure all the necessary metadata (e.g. description, type) to generate an input schema definition. The tools
+to configure all the necessary metadata (for example, description, type) to generate an input schema definition. The tools
 schema resolution will collect all `fromAi` definitions within an activity and combine them into an input schema for
 the activity.
 
 :::important
-The first argument passed to the `fromAi` function must be a reference type (e.g. not a static string), referencing a
-value within the variable defined as **Input element** in the multi-instance configuration. In our examples, we
-typically use `toolCall` as the input element. Example value: `toolCall.myParameter`.
+The first argument passed to the `fromAi` function must be a reference type (for example, not a static string), referencing a
+value within the variable defined as **Input element** in the multi-instance configuration. In the examples provided, `toolCall` is typically used as the input element. Example value: `toolCall.myParameter`.
 :::
 
-By utilizing the `fromAi` tool call as wrapper function around the actual value the connector can both
-**describe the parameter** for the LLM by generating a JSON Schema from the function calls and at the same time
-**utilize the LLM-generated value** as it can do with any other process variable.
+By using the `fromAi` tool call as a wrapper function around the actual value, the connector can both **describe the parameter** for the LLM by generating a JSON Schema from the function calls and at the same time **utilize the LLM-generated value** as it can do with any other process variable.
 
 You can use the `fromAi` function in:
 
-- Input & Output mappings (e.g service task, script task, user task)
-- Custom input fields provided by an element template if an element template is applied to the activity as technically
-  these are handled as input mappings.
+- Input & Output mappings (for example, service task, script task, user task).
+- Custom input fields provided by an element template if an element template is applied to the activity as technically these are handled as input mappings.
 
-An example of `fromAi` function usage on a [REST outbound connector](../protocol/rest.md):
+For example, the following image shows an example of `fromAi` function usage on a [REST outbound connector](../protocol/rest.md):
 
 ![agenticai-tool-resolution-fromAi.png](../img/agenticai-tool-resolution-fromAi.png)
 
@@ -191,10 +172,10 @@ a value.
 fromAi(toolCall.url)
 ```
 
-This will make the LLM aware that it needs to provide a value for the `url` parameter. As the first value to `fromAi`
-needs to be a variable reference, the last segment of the reference will be used as parameter name (`url` in this case).
+This makes the LLM aware that it needs to provide a value for the `url` parameter. As the first value to `fromAi`
+needs to be a variable reference, the last segment of the reference is used as parameter name (`url` in this case).
 
-To make a LLM understand the purpose of the input, you can add a description:
+To make an LLM understand the purpose of the input, you can add a description:
 
 ```feel
 fromAi(toolCall.url, "Fetches the contents of a given URL. Only accepts valid RFC 3986/RFC 7230 HTTP(s) URLs.")
@@ -205,12 +186,11 @@ To define the type of the input, you can add a type (if no type is given, it wil
 ```feel
 fromAi(toolCall.firstNumber, "The first number.", "number")
 
-fromAi(toolCall.shouldCalculate, "Defines if the calculation should be executed", "boolean")
+fromAi(toolCall.shouldCalculate, "Defines if the calculation should be executed.", "boolean")
 ```
 
 For more complex type definitions, the fourth parameter of the function allows you to specify a JSON Schema from a
-FEEL context. Note that support for the JSON Schema features is depending on the AI integration. You can find an
-extensive list of examples on the [JSON Schema documentation](https://json-schema.org/learn/miscellaneous-examples).
+FEEL context. Note that support for the JSON Schema features depends on your AI integration. For a list of examples, refer to the [JSON Schema documentation](https://json-schema.org/learn/miscellaneous-examples).
 
 ```feel
 fromAi(
@@ -231,26 +211,26 @@ fromAi(toolCall.firstNumber, "The first number.", "number") + fromAi(toolCall.se
 
 To collect the output of the called tool and pass it back to the agent, the task within the ad-hoc sub-process needs to
 set its output to the variable configured as `content` when setting up
-the [multi-instance execution](#modeling-the-tools-feedback-loop). Typically, this variable is called `toolCallResult`
+the [multi-instance execution](#tools-loop). This variable is typically named `toolCallResult`
 and can be used from every tool call within the ad-hoc sub-process as the multi-instance execution takes care of
 isolating individual tool calls.
 
-This can be achieved in multiple ways, depending on the used task:
+Depending on the used task, this can be achieved in multiple ways, as:
 
-- as a [result variable](../use-connectors/index.md#result-variable) or
+- A [result variable](../use-connectors/index.md#result-variable) or
   a [result expression](../use-connectors/index.md#result-expression) containing a `toolCallResult` key
-- as an [output mapping](../../concepts/variables.md#output-mappings) creating the `toolCallResult` variable or adding
-  to a part of the `toolCallResult` variable (e.g. an output mapping could be set to `toolCallResult.statusCode`)
-- as a [script task](../../modeler/bpmn/script-tasks/script-tasks.md) which sets the `toolCallResult` variable
+- An [output mapping](../../concepts/variables.md#output-mappings) creating the `toolCallResult` variable or adding
+  to a part of the `toolCallResult` variable (for example, an output mapping could be set to `toolCallResult.statusCode`)
+- A [script task](../../modeler/bpmn/script-tasks/script-tasks.md) that sets the `toolCallResult` variable
 
-Tool call results can be either primitive values (e.g. a string) or complex ones, such as
-a [FEEL context](../../modeler/feel/language-guide/feel-context-expressions.md) which will be serialized to a JSON
+Tool call results can be either primitive values (for example, a string) or complex ones, such as
+a [FEEL context](../../modeler/feel/language-guide/feel-context-expressions.md) that is serialized to a JSON
 string before passing it to the LLM.
 
 #### Document support
 
-Similar to the [user prompt](#documents), tool call responses can contain
+Similar to the [user prompt](agentic-ai-aiagent.md#user-prompt) **Documents** field, tool call responses can contain
 [Camunda Document references](../../../self-managed/document-handling/overview.md) within arbitrary structures
-(supporting the same file types as for the user prompt). When serializing the tool call response to JSON, document
-references will be transformed to a content block containing the plain text or base64 encoded document content before
-passing them to the LLM.
+(supporting the same file types as for the user prompt).
+
+When serializing the tool call response to JSON, document references are transformed into a content block containing the plain text or base64 encoded document content, before being passed to the LLM.
