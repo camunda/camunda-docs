@@ -37,34 +37,26 @@ First, an AI Agent connector is added and configured in the process diagram. Nex
 
 ### Configure multi-instance execution
 
-The ad-hoc sub-process must be configured as a **parallel multi-instance** sub-process.
+The ad-hoc sub-process must be configured as a [parallel multi-instance](../../modeler/bpmn/multi-instance/multi-instance.md) sub-process.
 
-This means:
+This allows:
 
-- Tools can be called **independently of each other**, each with its own set of input parameters. This also implies that
-  the same tool can be called **multiple times with different parameters** within the same ad-hoc sub-process execution.
-  For example, a _Lookup user_ tool could be called multiple times with different user IDs.
-- The process can **wait until all requested tools have been executed** before passing the results back to the AI
-  Agent/LLM. After all tools have been executed, results will be passed back to the AI Agent connector.
+- Tools to be called **independently of each other**, each with its own set of input parameters. This also implies that the same tool can be called **multiple times with different parameters** within the same ad-hoc sub-process execution. For example, a _Lookup user_ tool could be called multiple times with different user IDs.
 
-The multi-instance configuration is the same for each agent configuration, and it will be possible to reuse a template
-to make this configuration easier. For the moment, you need to configure the following properties.
+- The process to **wait until all requested tools have been executed** before passing the results back to the AI Agent/LLM. After all tools have been executed, results are passed back to the AI Agent connector.
+
+#### Configure properties
+
+The following properties for the ad-hoc sub-process must be configured. You can use the following suggested values as a starting point and change as required or if dealing with multiple agents within the same process.
 
 :::note
-Use the suggested values as a starting point and change them to your needs if needed or when dealing with multiple
-agents within the same process.
+As multi-instance configuration is the same for each agent, you can reuse a template to make configuration easier.
 :::
 
-- **Input collection**: set this to the list of tool calls your AI Agent connector returns, for example
-  `agent.toolCalls`.
-- **Input element**: this will contain the individual tool call including LLM-generated input parameters based on
-  the [tool definition](#tool-definitions). Suggested value: `toolCall`. This needs to be aligned with
-  the `fromAi` function calls in the tool definition.
-- **Output collection**: this will collect the results of all the requested tool calls. Suggested value:
-  `toolCallResults`. Make sure to pass this value as [Tool Call Results](#tools) in the AI Agent configuration.
-- **Output element**: this will collect the individual tool call result as returned by an individual tool
-  (see [Tool Call Responses](#tool-call-responses)). When changing ths `toolCallResult` to something else, make sure
-  to also change your tools to write to the updated variable name.
+- **Input collection**: Set this to the list of tool calls your AI Agent connector returns, for example `agent.toolCalls`.
+- **Input element**: Contains the individual tool call, including LLM-generated input parameters based on the [tool definition](#tool-definitions). Suggested value: `toolCall`. This must be aligned with the `fromAi` function calls in the tool definition.
+- **Output collection**: Collects the results of all the requested tool calls. Suggested value: `toolCallResults`. Make sure you pass this value as [Tool Call Results](agentic-ai-aiagent.md#tools) in the AI Agent configuration.
+- **Output element**: Collects the individual tool call result as returned by an individual tool (see [Tool Call Responses](#tool-call-responses)). When changing this `toolCallResult` to a different value, make sure you also change your tools to write to the updated variable name.
   ```feel
   {
     id: toolCall._meta.id,
@@ -73,38 +65,33 @@ agents within the same process.
   }
   ```
 
-As a last step, you need to configure the element to activate to the ad-hoc sub-process. As we're using a multi-instance
-configuration, this is always a single task ID of the tool being executed in the individual instance. Configure
-**Active elements collection** to contain exactly `[toolCall._meta.name]`.
+As a final step, the element must be configured to activate the ad-hoc sub-process.
 
-After configuring all of the above, your ad-hoc sub-process configuration should look like the following:
+- When using a multi-instance configuration, this is always the single task ID of the tool being executed in the individual instance.
+- Configure **Active elements collection** to contain the exact `[toolCall._meta.name]`.
+
+For example, the completed ad-hoc sub-process configuration would look as follows:
 
 ![agenticai-ad-hoc-sub-process-multi-instance.png](../img/agenticai-ad-hoc-sub-process-multi-instance.png)
 
-## Modeling a response interaction feedback loop
+## Example response interaction feedback loop {#response-loop}
 
-:::note
-How exactly this needs to be modeled highly depends on your use case. The example below is expecting a simple feedback
-action based on a user task, but this could also be interacting with other process flows or with another
-agent process.
+Similar to the tools feedback loop, another feedback loop acting on the agent response can be added by re-entering the AI Agent connector with new information. You must model your user prompt so that it adds the follow-up data instead of the initial request.
 
-For example, instead of the user task, you could also use another LLM connector to verify the response of the AI Agent.
-An example of such a pattern can be found in
-the [Fraud Detection Example](https://github.com/camunda/connectors/tree/main/connectors/agentic-ai/examples/fraud-detection).
-:::
-
-Similar to the tools feedback loop, another feedback loop acting on the agent response can be added by re-entering the
-AI Agent connector with new information. You need to make sure to model your user prompt in a way that it adds the
-follow-up data instead of the initial request.
-
-For example, your **User Prompt** field could contain the following FEEL expression to make sure it acts upon follow-up
-input:
+For example, your **User Prompt** field could contain the following FEEL expression to make sure it acts upon follow-up input:
 
 ```feel
 =if (is defined(followUpInput)) then followUpInput else initialUserInput
 ```
 
 ![agenticai-user-feedback-loop.png](../img/agenticai-user-feedback-loop.png)
+
+:::note
+How you model this type of feedback loop greatly depends on your specific use case.
+
+- The example feedback loop expects a simple feedback action based on a user task, but this could also interact with other process flows or another agent process.
+- Instead of the user task, you could also use another LLM connector to verify the response of the AI Agent. For an example of this pattern, see the [fraud detection example](https://github.com/camunda/connectors/tree/main/connectors/agentic-ai/examples/fraud-detection).
+  :::
 
 ## Tool Resolution
 
