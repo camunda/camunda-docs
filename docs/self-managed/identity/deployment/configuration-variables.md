@@ -5,13 +5,14 @@ sidebar_label: "Configuration variables"
 description: "Learn more about core configuration, component configuration, database configuration, and feature flags."
 ---
 
-As a Spring Boot application, Identity supports any standard
-[Spring configuration](https://docs.spring.io/spring-boot/reference/features/external-config.html) method.
+As a Spring Boot application, Identity supports any standard [Spring configuration](https://docs.spring.io/spring-boot/reference/features/external-config.html) method.
 
 ## Core configuration
 
+The core configuration variables are as follows:
+
 | Environment variable                 | Description                                                                         | Default value                                                                                                                                                            |
-| ------------------------------------ | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| :----------------------------------- | :---------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `IDENTITY_AUTH_PROVIDER_BACKEND_URL` | Used to support container to container communication.                               | http://localhost:18080/auth/realms/camunda-platform                                                                                                                      |
 | `IDENTITY_AUTH_PROVIDER_ISSUER_URL`  | Used to denote the token issuer.                                                    | http://localhost:18080/auth/realms/camunda-platform                                                                                                                      |
 | `IDENTITY_BASE_PATH`                 | Used to configure Identity to run on a subpath (Requires HTTPs for `IDENTITY_URL`). |                                                                                                                                                                          |
@@ -29,10 +30,10 @@ As a Spring Boot application, Identity supports any standard
 
 ## Camunda Identity SDK configuration
 
-Below, find the names and values for the Identity SDK to ensure proper authentication and authorization with Identity and the Identity provider for Web Modeler and Optimize.
+Use the following names and values for the Identity SDK to ensure proper authentication and authorization with Identity and the IdP for all components.
 
 | Environment variable                 | Property                                | Description                                                                                                                           | Default value                 |
-| ------------------------------------ | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- |
+| :----------------------------------- | :-------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------- |
 | `CAMUNDA_IDENTITY_ISSUERBACKENDURL`  | `camunda.identity.issuer-backend-url`   | The back-channel URL to the Identity provider, used for token verification.                                                           | -                             |
 | `CAMUNDA_IDENTITY_AUDIENCE`          | `camunda.identity.audience`             | The required audience of the auth token.                                                                                              | -                             |
 | `CAMUNDA_IDENTITY_TYPE`              | `camunda.identity.type`                 | Define what kind of authentication type you will use (`KEYCLOAK`, `MICROSOFT`, `GENERIC`).                                            | `KEYCLOAK`                    |
@@ -59,7 +60,7 @@ Once set, you cannot update your initial claim name and value using environment 
 :::
 
 | Environment variable           | Description                                                                                                                                     | Default value |
-| ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| :----------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
 | `IDENTITY_INITIAL_CLAIM_NAME`  | The type of claim to use for the initial user. Examples can include `oid`, `name` or `email`.                                                   | `oid`         |
 | `IDENTITY_INITIAL_CLAIM_VALUE` | The value of the claim to use for the initial user. For the default `oid`, the value usually corresponds to the unique ID of your user account. |               |
 
@@ -69,7 +70,7 @@ Identity supports component configuration using preset values. To configure a
 component for use within Identity, set two variables:
 
 | Environment variable                  | Description                                     | Default value |
-| ------------------------------------- | ----------------------------------------------- | ------------- |
+| :------------------------------------ | :---------------------------------------------- | :------------ |
 | `KEYCLOAK_INIT_<COMPONENT>_SECRET`    | The secret used for authentication flows.       | No default    |
 | `KEYCLOAK_INIT_<COMPONENT>_ROOT_URL`  | The root URL of where the component is hosted.  | No default    |
 | `KEYCLOAK_INIT_<COMPONENT>_CLIENT_ID` | The client to create and use for the component. | `<COMPONENT>` |
@@ -87,11 +88,11 @@ for `WEBMODELER`, which is`web-modeler`.
 ## Database configuration
 
 Identity requires a database to store information
-about [resource authorization](/self-managed/concepts/access-control/resource-authorizations.md)
+about [resource authorization](/self-managed/identity/access-management/resource-authorizations.md)
 and [multi-tenancy](/self-managed/concepts/multi-tenancy.md).
 
 | Environment variable         | Description                                         |
-| ---------------------------- | --------------------------------------------------- |
+| :--------------------------- | :-------------------------------------------------- |
 | `IDENTITY_DATABASE_HOST`     | The host of the database.                           |
 | `IDENTITY_DATABASE_PORT`     | The port of the database.                           |
 | `IDENTITY_DATABASE_NAME`     | The name of the database to connect to.             |
@@ -134,13 +135,92 @@ steps:
 Identity uses feature flag environment variables to enable and disable features; the supported flags are:
 
 | Environment variable         | Description                                   | Default value |
-| ---------------------------- | --------------------------------------------- | ------------- |
+| :--------------------------- | :-------------------------------------------- | :------------ |
 | RESOURCE_PERMISSIONS_ENABLED | Controls the resource authorizations feature. | false         |
+| MULTITENANCY_ENABLED         | Controls the multi-tenancy feature.           | false         |
 
 :::note
 Setting either of the feature flags to `true` requires a database connection. To configure a database
 connection, see [database configuration](#database-configuration).
 :::
+
+## Multi-tenancy
+
+Multi-tenancy in the context of Camunda 8 refers to the ability of Camunda 8 to serve multiple distinct tenants or clients within a single installation. For more information, including additional configuration requirements, see the [multi-tenancy documentation](/docs/self-managed/operational-guides/configure-multi-tenancy.md).
+
+The following configuration is required to enable multi-tenancy in Identity:
+
+| Environment variable   | Description                                                                                                               | Default value |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| `MULTITENANCY_ENABLED` | Controls the multi-tenancy feature within Identity. This can be set in helm via `camunda.tasklist.multi-tenancy.enabled`. | `false`       |
+
+With multi-tenancy enabled, the following variables can be used to configure additional [tenants](/self-managed/identity/user-guide/tenants/managing-tenants.md). To add additional tenants, increment the `0` value for each variable (for example, `IDENTITY_TENANTS_1_NAME`).
+
+| Environment variable                         | Description                                                                                                                                                                                                                                        | Default value |
+| -------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| `IDENTITY_TENANTS_0_NAME`                    | A human-readable name for the tenant.                                                                                                                                                                                                              | Default       |
+| `IDENTITY_TENANTS_0_TENANTID`                | The tenant ID. The `<default>` tenant is automatically created during Identity startup.                                                                                                                                                            | `<default>`   |
+| `IDENTITY_TENANTS_0_MEMBERS_0_TYPE`          | The type of member to add to the tenant, one of `GROUP`, `USER`, or `APPLICATION`. Additional members can be added by incrementing the second `0` value (for example, `IDENTITY_TENANTS_0_MEMBERS_1_TYPE`.)                                        | `APPLICATION` |
+| `IDENTITY_TENANTS_0_MEMBERS_0_APPLICATIONID` | If adding an **application** as a member of the tenant, the application ID. If additional members have been added to the tenant, ensure the second `0` value matches that of its type (for example, `IDENTITY_TENANTS_0_MEMBERS_1_APPLICATIONID`). | `zeebe`       |
+| `IDENTITY_TENANTS_0_MEMBERS_0_USERNAME`      | If adding a **user** as a member of the tenant, the username. If additional members have been added to the tenant, ensure the second `0` value matches that of its type (for example, `IDENTITY_TENANTS_0_MEMBERS_1_USERNAME`).                    | `user-name`   |
+| `IDENTITY_TENANTS_0_MEMBERS_0_GROUPNAME`     | If adding a **group** as a member of the tenant, the name of the group. If additional members have been added to the tenant, ensure the second `0` value matches that of its type (for example, `IDENTITY_TENANTS_0_MEMBERS_1_GROUPNAME`).         | `group-name`  |
+
+:::note
+Each property will only apply if `TYPE` is set accordingly. For example, `IDENTITY_TENANTS_0_MEMBERS_0_USERNAME` will only function if `TYPE` is set to `USER`.
+:::
+
+When converting the above variables for use in the Helm chart, ensure multiple tenants or members are added as a list. For example, a valid `application.yaml` configuration might look like the following:
+
+```
+identity:
+   tenants:
+    - name: Tenant Name
+      tenantId: tenant-name
+      members:
+        - type: GROUP
+          group-name: "Test Group"
+        - type: USER
+          username: test-user
+        - type: APPLICATION
+          application-id: test-application
+```
+
+## Configure applications
+
+The following variables can be used to configure [applications](/self-managed/identity/user-guide/additional-features/incorporate-applications.md). To add additional applications, increment the `0` value for each variable (for example, `KEYCLOAK_CLIENTS_1_NAME`).
+
+| Environment variable                                  | Description                                                           | Default value            |
+| ----------------------------------------------------- | --------------------------------------------------------------------- | ------------------------ |
+| `KEYCLOAK_CLIENTS_0_NAME`                             | A human-readable name for the client.                                 | zeebe                    |
+| `KEYCLOAK_CLIENTS_0_ID`                               | The client ID.                                                        | `${ZEEBE_CLIENT_ID}`     |
+| `KEYCLOAK_CLIENTS_0_SECRET`                           | The client secret.                                                    | `${ZEEBE_CLIENT_SECRET}` |
+| `KEYCLOAK_CLIENTS_0_TYPE`                             | The type of client, one of `CONFIDENTIAL`, `PUBLIC`, or `M2M`.        | `M2M`                    |
+| `KEYCLOAK_CLIENTS_0_PERMISSIONS_0_RESOURCE_SERVER_ID` | The ID of the first resource that defined permissions will apply to.  | `zeebe-api`              |
+| `KEYCLOAK_CLIENTS_0_PERMISSIONS_0_DEFINITION`         | The permissions to apply to the first resource.                       | `write:*`                |
+| `KEYCLOAK_CLIENTS_0_PERMISSIONS_1_RESOURCE_SERVER_ID` | The ID of the second resource that defined permissions will apply to. | `operate-api`            |
+| `KEYCLOAK_CLIENTS_0_PERMISSIONS_1_DEFINITION`         | The permissions to apply to the second resource.                      | `write:*`                |
+| `KEYCLOAK_CLIENTS_0_PERMISSIONS_2_RESOURCE_SERVER_ID` | The ID of the third resource that defined permissions will apply to.  | `tasklist-api`           |
+| `KEYCLOAK_CLIENTS_0_PERMISSIONS_2_DEFINITION`         | The permissions to apply to the third resource.                       | `write:*`                |
+| `KEYCLOAK_CLIENTS_0_PERMISSIONS_3_RESOURCE_SERVER_ID` | The ID of the fourth resource that defined permissions will apply to. | `optimize-api`           |
+| `KEYCLOAK_CLIENTS_0_PERMISSIONS_3_DEFINITION`         | The permissions to apply to the fourth resource.                      | `write:*`                |
+| `KEYCLOAK_CLIENTS_0_PERMISSIONS_4_RESOURCE_SERVER_ID` | The ID of the fifth resource that defined permissions will apply to.  | `tasklist-api`           |
+| `KEYCLOAK_CLIENTS_0_PERMISSIONS_4_DEFINITION`         | The permissions to apply to the fifth resource.                       | `read:*`                 |
+| `KEYCLOAK_CLIENTS_0_PERMISSIONS_5_RESOURCE_SERVER_ID` | The ID of the sixth resource that defined permissions will apply to.  | `operate-api`            |
+| `KEYCLOAK_CLIENTS_0_PERMISSIONS_5_DEFINITION`         | The permissions to apply to the sixth resource.                       | `read:*`                 |
+
+When converting the above variables for use in the Helm chart, ensure multiple clients or permissions are added as a list. For example, a valid `application.yaml` configuration might look like the following:
+
+```
+keycloak:
+  clients:
+    - name: "Test Application"
+      id: test-application
+      secret: your-secret
+      type: M2M
+      permissions:
+        - resource-server-id: zeebe-api
+          definition: write:*
+```
 
 ## Logging
 
