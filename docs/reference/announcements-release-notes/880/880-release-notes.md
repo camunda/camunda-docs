@@ -85,6 +85,14 @@ The new **Settings** window in Desktop Modeler allows you to configure the appli
 
 To learn more about these settings, see [Desktop Modeler settings](/components/modeler/desktop-modeler/settings/settings.md).
 
+### Version description<span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
+
+<!-- https://github.com/camunda/web-modeler/issues/12057 -->
+
+Use the versions **Description** field to track changes alongside the version tag (for example, as a change log or Git commit message). This helps make versioning more intuitive and collaborative, keeps teams aligned, and reduces ambiguity.
+
+To learn more about versioning your diagrams, see [versions](components/modeler/web-modeler/versions.md).
+
 ### Web Modeler cluster basic authentication <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
 
 <!-- https://github.com/camunda/web-modeler/issues/13707 -->
@@ -95,14 +103,6 @@ As well as bearer token and client credentials authentication, you can now confi
 - Web Modeler sends a username and password with every request to one of the cluster components (Zeebe, Operate, Tasklist).
 
 To learn more about basic authentication, see [available authentication methods](/self-managed/modeler/web-modeler/configuration/configuration.md#available-authentication-methods).
-
-### Add description field to versions <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
-
-<!-- https://github.com/camunda/web-modeler/issues/12057 -->
-
-In addition to the version tag, there is a new dedicated description field on versions that serves as a change log or a Git commit message to track what changed and why. These enhancements are designed to make versioning more intuitive and collaborative—helping teams stay aligned and reducing ambiguity.
-
-To learn more about versions and the description field, see the [versions documentation](components/modeler/web-modeler/versions.md).
 
 ## 8.8.0-alpha3
 
