@@ -44,10 +44,10 @@ To use Camunda 8 SaaS, specify the connection properties:
 
 ```bash
 CAMUNDA_CLIENT_MODE=saas
-CAMUNDA_CLIENT_CLUSTERID=xxx
 CAMUNDA_CLIENT_AUTH_CLIENTID=xxx
 CAMUNDA_CLIENT_AUTH_CLIENTSECRET=xxx
-CAMUNDA_CLIENT_REGION=bru-2
+CAMUNDA_CLIENT_CLOUD_REGION=bru-2
+CAMUNDA_CLIENT_CLOUD_CLUSTERID=xxx
 ```
 
 ##### YAML configuration
@@ -56,11 +56,12 @@ CAMUNDA_CLIENT_REGION=bru-2
 camunda:
   client:
     mode: saas
-    cluster-id: xxx
     auth:
       client-id: xxx
       client-secret: xxx
-    region: bru-2
+    cloud:
+      region: bru-2
+      cluster-id: xxx
 ```
 
 If you are connecting a local connector runtime to a SaaS cluster, you may want to review our [guide to using connectors in hybrid mode](/guides/use-connectors-in-hybrid-mode.md).
@@ -112,7 +113,7 @@ Depending on the authentication method used by the Zeebe instance, you may need 
 ```bash
 CAMUNDA_CLIENT_AUTH_CLIENTID=xxx
 CAMUNDA_CLIENT_AUTH_CLIENTSECRET=xxx
-CAMUNDA_CLIENT_AUTH_ISSUER=http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
+CAMUNDA_CLIENT_AUTH_TOKENURL=http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
 CAMUNDA_CLIENT_AUTH_AUDIENCE=zeebe-api
 ```
 
@@ -124,7 +125,7 @@ camunda:
     auth:
       client-id: xxx
       client-secret: xxx
-      issuer: http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
+      token-url: http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
       audience: zeebe-api
 ```
 
@@ -334,6 +335,13 @@ to be configured individually using the following environment variables.
 If you want to use outbound connectors for a single tenant that is different
 from the default tenant, you can specify a different default tenant ID using:
 
+```bash
+ZEEBE_CLIENT_DEFAULT_TENANT_ID=myTenant
+```
+
+This will change the default tenant ID used for fetching jobs and publishing messages
+to the tenant ID `myTenant`.
+
 It is possible to adjust the polling interval of connectors polling process definitions to Operate by setting the environment variable `CAMUNDA_CONNECTOR_POLLING_INTERVAL`. This variable allows you to control how often connectors fetch the process definitions, with the interval specified in milliseconds. For example, setting `CAMUNDA_CONNECTOR_POLLING_INTERVAL=20000` will configure the connectors to poll every 20 seconds.
 
 Example:
@@ -341,13 +349,6 @@ Example:
 ```
 CAMUNDA_CONNECTOR_POLLING_INTERVAL=10000
 ```
-
-```bash
-ZEEBE_CLIENT_DEFAULT_TENANT_ID=myTenant
-```
-
-This will change the default tenant ID used for fetching jobs and publishing messages
-to the tenant ID `myTenant`.
 
 :::note
 Inbound connectors will still be enabled for

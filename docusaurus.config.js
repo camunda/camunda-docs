@@ -349,7 +349,7 @@ module.exports = {
         {
           type: "doc",
           docId: "apis-tools/working-with-apis-tools",
-          label: "APIs & Tools",
+          label: "APIs & tools",
           position: "left",
         },
         {
@@ -463,7 +463,7 @@ module.exports = {
     },
     algolia: {
       // These keys are for our new standalone algolia instance!
-      apiKey: "60d0065ccc1e161fc992f4abc248e74d",
+      apiKey: "68db7725a8410eace68419c29385ad1e",
       appId: "6KYF3VMCXZ",
       indexName: "camunda",
       placeholder: "Search Camunda 8 docs",

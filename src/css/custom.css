@@ -646,7 +646,7 @@ h3 .badge:nth-of-type(1) {
 }
 
 /* Between mobile and desktop sizes, the nav bar gets a little scrunchy. Scale things down a bit to make more space. */
-@media screen and (min-width: 996px) and (max-width: 1140px) {
+@media screen and (min-width: 990px) and (max-width: 1275px) {
   .navbar .navbar__title,
   .navbar .navbar__link {
     font-size: 0.9em;
@@ -655,6 +655,12 @@ h3 .badge:nth-of-type(1) {
   .navbar .navbar__item {
     padding: var(--ifm-navbar-item-padding-vertical)
       calc(0.5 * var(--ifm-navbar-item-padding-horizontal));
+  }
+}
+
+@media screen and (max-width: 1124px) {
+  .navbar .navbar__title {
+    display: none;
   }
 }
 

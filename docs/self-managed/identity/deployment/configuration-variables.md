@@ -27,6 +27,23 @@ As a Spring Boot application, Identity supports any standard
 | `KEYCLOAK_SETUP_CLIENT_ID`           | The client to use for authentication during setup of the provided Keycloak.         | admin-cli                                                                                                                                                                |
 | `KEYCLOAK_URL`                       | The URL of the Keycloak instance to use.                                            | http://localhost:18080/auth                                                                                                                                              |
 
+## Camunda Identity SDK configuration
+
+Below, find the names and values for the Identity SDK to ensure proper authentication and authorization with Identity and the Identity provider for Web Modeler and Optimize.
+
+| Environment variable                 | Property                                | Description                                                                                                                           | Default value                 |
+| ------------------------------------ | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- |
+| `CAMUNDA_IDENTITY_ISSUERBACKENDURL`  | `camunda.identity.issuer-backend-url`   | The back-channel URL to the Identity provider, used for token verification.                                                           | -                             |
+| `CAMUNDA_IDENTITY_AUDIENCE`          | `camunda.identity.audience`             | The required audience of the auth token.                                                                                              | -                             |
+| `CAMUNDA_IDENTITY_TYPE`              | `camunda.identity.type`                 | Define what kind of authentication type you will use (`KEYCLOAK`, `MICROSOFT`, `GENERIC`).                                            | `KEYCLOAK`                    |
+| `CAMUNDA_IDENTITY_BASEURL`           | `camunda.identity.base-url`             | The base URL of the Camunda Identity instance.                                                                                        | -                             |
+| `CAMUNDA_IDENTITY_ISSUER`            | `camunda.identity.issuer`               | The front-channel URL to the Identity provider, used for login redirect, fetching refresh tokens and logout.                          | -                             |
+| `CAMUNDA_IDENTITY_JWKSURL`           | `camunda.identity.jwks-url`             | Defines the JWKS URL, which is used by the services to validate the JWT tokens. If nothing is set, it will use the WellKnownEndpoint. | -                             |
+| `CAMUNDA_IDENTITY_CLIENTID`          | `camunda.identity.client-id`            | Defines the client ID, which is used by Zeebe in authentication flows.                                                                | -                             |
+| `CAMUNDA_IDENTITY_CLIENTSECRET`      | `camunda.identity.client-secret`        | The client secret for the Identity client.                                                                                            | -                             |
+| `CAMUNDA_IDENTITY_AUTHSCOPES`        | `camunda.identity.auth-scopes`          | Defines the scopes that should be applied to the token, provided as list separated by spaces.                                         | `openid email offline_access` |
+| `CAMUNDA_IDENTITY_USEBACKENDAUTHURL` | `camunda.identity.use-backend-auth-url` | Whether the fetching refresh tokens and logout will be performed against the `issuer` or the `issuer-backend-url`.                    | `false`                       |
+
 ## License configuration
 
 import Licensing from '../../../self-managed/react-components/licensing.md'

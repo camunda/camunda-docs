@@ -14,9 +14,9 @@ The source code for Zeebe, Operate, Tasklist, Identity, and Optimize is licensed
 
 The compiled software of these components is distributed under a proprietary license, which can be either the [Camunda Self-Managed Non-Production license](https://legal.camunda.com/#self-managed-non-production-terms) or the Camunda Self-Managed Enterprise Edition license (a copy of which you obtain when you contact Camunda). To use the software in production, [purchase the Camunda Self-Managed Enterprise Edition](https://camunda.com/platform/camunda-platform-enterprise-contact/).
 
-### Camunda Connectors
+### Camunda connectors
 
-The Connector SDK, REST Connector, Connector Runtime Docker image, and Connectors Bundle Docker image are licensed under the [Apache 2.0 license](https://www.apache.org/licenses/LICENSE-2.0). The source code of all other Connectors provided by Camunda out of the box is licensed under the [Camunda License v1](https://legal.camunda.com/licensing-and-other-legal-terms#camunda-license).
+The Connector SDK, REST connector, Connector Runtime Docker image, and Connectors Bundle Docker image are licensed under the [Apache 2.0 license](https://www.apache.org/licenses/LICENSE-2.0). The source code of all other connectors provided by Camunda out of the box is licensed under the [Camunda License v1](https://legal.camunda.com/licensing-and-other-legal-terms#camunda-license).
 
 The compiled software is distributed under a proprietary license, which can be either the [Camunda Self-Managed Non-Production license](https://legal.camunda.com/#self-managed-non-production-terms) or the Camunda Self-Managed Enterprise Edition license (a copy of which you obtain when you contact Camunda). To use the software in production, [purchase the Camunda Self-Managed Enterprise Edition](https://camunda.com/platform/camunda-platform-enterprise-contact/).
 
