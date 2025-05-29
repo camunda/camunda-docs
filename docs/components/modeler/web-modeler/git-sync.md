@@ -149,7 +149,7 @@ Web Modeler requires an application to be registered in Microsoft Entra ID to sy
 
 3. Configure your application to use [client-certificate credentials](https://learn.microsoft.com/en-us/entra/identity-platform/how-to-add-credentials?tabs=certificate). You need a PEM-encoded, RSA-encrypted private key and a PEM-encoded certificate in `X509` format generated from that key. You will need both later when configuring the connection in Web Modeler.
 
-4. Configure [scoped permissions](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-configure-app-access-web-apis) to your app so it can update the content of your Azure repositories. Make sure that `Azure DevOps > vso.code_write` is configured, and that Admin connect is not required.
+4. Configure [scoped permissions](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-configure-app-access-web-apis) to your app so it can update the content of your Azure repositories. Make sure that `Azure DevOps > vso.code_write` is configured, and that `Admin consent required` is set to `No`.
 
 <h3> Grant access to the App in the desired Azure projects</h3>
 
