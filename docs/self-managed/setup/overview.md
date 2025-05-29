@@ -14,12 +14,12 @@ This section provides an overview of the available recommendations for installin
 
 - [**Helm/Kubernetes**](./install.md) (Recommended): We recommend using Kubernetes and Helm to run Camunda 8 Self-Managed in production. With the right configuration, Camunda 8 Self-Managed can be deployed on any Certified Kubernetes distribution (cloud or on-premises). We also officially support a variety of providers like [Red Hat OpenShift](./deploy/openshift/redhat-openshift.md) and [Amazon EKS](./deploy/amazon/amazon-eks/amazon-eks.md).
 - [**Docker**](./deploy/other/docker.md): All Camunda components are available as [Docker images](https://hub.docker.com/u/camunda) and can be used in production on Linux systems.
-   - :warning: Windows or macOS are only supported for development environments, not for production.
+:warning: Windows or macOS are only supported for development environments, not for production.
 - [**Manual**](./deploy/local/manual.md): Run each Java application manually on virtual machines or bare-metal servers with a supported Java Virtual Machine (JVM). This method offers a significant amount of flexibility but requires manual configuration of component interactions. It is not recommended unless necessary, as you will need to configure the details for the components to interact correctly yourself. 
-   - :warning: Windows/Mac is **not** supported for production usage of Zeebe.
+:warning: Windows/Mac is **not** supported for production usage of Zeebe.
 
 :::info
- If you're looking to run Camunda 8 in a local environment for development or evaluation purposes, see [**Run locally**](../run-locally/index.md)
+If you're looking to run Camunda 8 in a local environment for development or evaluation purposes, see [**Run locally**](../run-locally/index.md)
 :::
 
 ## Supported environments
