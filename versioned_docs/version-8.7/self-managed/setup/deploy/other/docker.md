@@ -22,7 +22,7 @@ The provided Docker images are supported for production usage only on Linux syst
 | Zeebe                                     | [camunda/zeebe:latest](https://hub.docker.com/r/camunda/zeebe)                                                                                                                                                                                                                         | [Environment variables](/self-managed/zeebe-deployment/configuration/environment-variables.md)                  |
 | Operate                                   | [camunda/operate:latest](https://hub.docker.com/r/camunda/operate)                                                                                                                                                                                                                     | [Operate configuration](/self-managed/operate-deployment/operate-configuration.md)                              |
 | Tasklist                                  | [camunda/tasklist:latest](https://hub.docker.com/r/camunda/tasklist)                                                                                                                                                                                                                   | [Tasklist configuration](/self-managed/tasklist-deployment/tasklist-configuration.md)                           |
-| Identity                                  | [camunda/identity:latest](https://hub.docker.com/r/camunda/identity)                                                                                                                                                                                                                   | [Configuration variables](/self-managed/identity/deployment/configuration-variables.md)                         |
+| Identity                                  | [camunda/identity:latest](https://hub.docker.com/r/camunda/identity)                                                                                                                                                                                                                   | [Configuration variables](/self-managed/identity/miscellaneous/configuration-variables.md)                      |
 | Optimize                                  | [camunda/optimize:8-latest](https://hub.docker.com/r/camunda/optimize)                                                                                                                                                                                                                 | [Environment variables](/self-managed/optimize-deployment/install-and-start.md#available-environment-variables) |
 | Connectors                                | [camunda/connectors:latest](https://hub.docker.com/r/camunda/connectors)                                                                                                                                                                                                               | [Connectors configuration](/self-managed/connectors-deployment/connectors-configuration.md)                     |
 | Connectors Bundle                         | [camunda/connectors-bundle:latest](https://hub.docker.com/r/camunda/connectors-bundle)                                                                                                                                                                                                 | [Connectors configuration](/self-managed/connectors-deployment/connectors-configuration.md)                     |
@@ -154,16 +154,16 @@ For Optimize to import Zeebe data, Optimize must also be configured to be aware 
 
 ### Connectors
 
-Use the provided [Docker Compose](#docker-compose) files to execute all [out-of-the-box Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) automatically.
+Use the provided [Docker Compose](#docker-compose) files to execute all [out-of-the-box connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) automatically.
 This uses the [Connectors Bundle](https://hub.docker.com/r/camunda/connectors-bundle) Docker image.
 
-Note that some out-of-the-box Connectors are licensed under the
+Note that some out-of-the-box connectors are licensed under the
 [Camunda Self-Managed Free Edition license](https://camunda.com/legal/terms/cloud-terms-and-conditions/camunda-cloud-self-managed-free-edition-terms/).
 Find an overview in the [Connectors Bundle project](https://github.com/camunda/connectors-bundle).
 
-Refer to the [Connector installation guide](/self-managed/connectors-deployment/install-and-start.md) for details on how to provide the Connector templates for modeling.
+Refer to the [Connector installation guide](/self-managed/connectors-deployment/install-and-start.md) for details on how to provide the connector templates for modeling.
 
-#### Running single Connectors container
+#### Running single connectors container
 
 ```shell
 docker run --rm --name=MyConnectorsInstance \
@@ -176,19 +176,19 @@ docker run --rm --name=MyConnectorsInstance \
     camunda/connectors-bundle:latest
 ```
 
-#### Custom set of Connectors
+#### Custom set of connectors
 
-To add custom Connectors, you can build on top of our [Connectors base image](https://hub.docker.com/r/camunda/connectors/) that includes the pre-packaged runtime environment without any Connector.
-To use the image, at least one Connector must be added to the `classpath`. We recommend providing JARs with all dependencies bundled.
+To add custom connectors, you can build on top of our [Connectors base image](https://hub.docker.com/r/camunda/connectors/) that includes the pre-packaged runtime environment without any connector.
+To use the image, at least one connector must be added to the `classpath`. We recommend providing JARs with all dependencies bundled.
 
 :::caution
 
-As all Connectors share a single `classpath`, different versions of the same dependency can be available and cause conflicts.
-To prevent this, common dependencies like `jackson` can be shaded and relocated inside the Connector's JAR.
+As all connectors share a single `classpath`, different versions of the same dependency can be available and cause conflicts.
+To prevent this, common dependencies like `jackson` can be shaded and relocated inside the connector's JAR.
 
 :::
 
-You can add a Connector JAR by extending the base image with a JAR from a public URL:
+You can add a connector JAR by extending the base image with a JAR from a public URL:
 
 ```yml
 FROM camunda/connectors:x.y.z
@@ -196,7 +196,7 @@ FROM camunda/connectors:x.y.z
 ADD https://repo1.maven.org/maven2/io/camunda/connector/connector-http-json/x.y.z/connector-http-json-0..0-with-dependencies.jar /opt/app/
 ```
 
-You can also add a Connector JAR using volumes:
+You can also add a connector JAR using volumes:
 
 ```shell
 docker run --rm --name=connectors -d -v $PWD/connector.jar:/opt/app/ camunda/connectors:x.y.z

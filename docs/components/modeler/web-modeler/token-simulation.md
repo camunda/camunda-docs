@@ -4,7 +4,7 @@ title: Token simulation
 description: Use token simulation to get a deeper understanding of the BPMN execution semantics by playing, pausing, and stepping through your processes.
 ---
 
-Available in Modeler's **Design** mode, token simulation helps you to get a deeper understanding of the BPMN execution semantic and allows you to play, pause, and step through a process just like a BPMN 2.0 compliant engine would.
+Available in Modeler's [**Design** mode](/components/modeler/web-modeler/collaborate-with-modes.md), token simulation helps you to get a deeper understanding of the BPMN execution semantic and allows you to play, pause, and step through a process just like a BPMN 2.0 compliant engine would.
 
 :::tip
 

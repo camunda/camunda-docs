@@ -42,18 +42,18 @@ Develop reusable assets in a pro-code environment, push them to your version con
 
 Camunda now offers a robust SAP integration featuring:
 
-- An OData Connector for seamless API interactions.
+- An OData connector for seamless API interactions.
 - An RFC connector for BAPI/function module access.
 - A dedicated plugin enabling SAP BTP services within BPMN workflows.
 
-This solution ensures compliance with IT governance standards using SAP BTP (Business Technology Platform) and the SAP Cloud Connector for enterprise-grade reliability.
+This solution ensures compliance with IT governance standards using SAP BTP (Business Technology Platform) and the SAP Cloud connector for enterprise-grade reliability.
 
-### Connector manage and run <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span> {#manage-connectors}
+### Connector manage and run <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects connectors">Connectors</span> {#manage-connectors}
 
-Connector manage and run provides a consolidated view of your running inbound Connector [webhooks, message queue subscriptions, and polling subscriptions](/reference/glossary.md#inbound-connector) for efficient monitoring and management.
+Connector manage and run provides a consolidated view of your running inbound connector [webhooks, message queue subscriptions, and polling subscriptions](/reference/glossary.md#inbound-connector) for efficient monitoring and management.
 
-- Real-time alerts will notify operators when Connectors are not running, preventing unnoticed downtimes.
-- Use this feature to check your inbound Connectors are healthy and running, and troubleshoot unhealthy Connectors.
+- Real-time alerts will notify operators when connectors are not running, preventing unnoticed downtimes.
+- Use this feature to check your inbound connectors are healthy and running, and troubleshoot unhealthy connectors.
 
 To learn more about this feature, see [manage your connectors](/components/console/manage-clusters/manage-connectors.md).
 
@@ -67,7 +67,7 @@ Self-Managed customers now have [full control over JWT configurations](/self-man
 
 ### Document handling <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-We have extended Camunda's [document handling](/components/concepts/document-handling.md) capabilities by introducing robust integrations and support for AWS S3, local file systems, and document operations within Zeebe. This version enhances document management by providing additional support for secure storage, retrieval, and integration with Connectors, improving the efficiency and scalability of document-dependent workflows.
+We have extended Camunda's [document handling](/components/document-handling/getting-started.md) capabilities by introducing robust integrations and support for AWS S3, local file systems, and document operations within Zeebe. This version enhances document management by providing additional support for secure storage, retrieval, and integration with connectors, improving the efficiency and scalability of document-dependent workflows.
 
 <!-- https://github.com/camunda/product-hub/issues/2555 -->
 
@@ -134,11 +134,11 @@ Create and append tasks with resources available in the current project and proc
 
 | Bug / issue                                                                                                                                              | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 | :------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [XML keeps inbound.type after changing element (#932)](https://github.com/camunda/issues/issues/932)                                                     | <p>When changing the element type of an inbound start event Connector to a blank start event type, the inbound Connector properties are not removed.</p><p><ul><li>**Affects:** Web Modeler</li><li>**Workaround**: Delete and re-create the BPMN element.</li></ul></p>                                                                                                                                                                                                                                                                                                                 |
+| [XML keeps inbound.type after changing element (#932)](https://github.com/camunda/issues/issues/932)                                                     | <p>When changing the element type of an inbound start event connector to a blank start event type, the inbound connector properties are not removed.</p><p><ul><li>**Affects:** Web Modeler</li><li>**Workaround**: Delete and re-create the BPMN element.</li></ul></p>                                                                                                                                                                                                                                                                                                                 |
 | [Fields in Tasklist are not editable for AI-Generated forms (#26079)](https://github.com/camunda/camunda/issues/26079)                                   | <p>Fields in AI-generated user forms may not be editable for certain Chrome browser versions.</p><p><ul><li>**Affects:** Web Modeler and Tasklist</li><li>**Workaround**: Manually recreate the form.</li></ul></p>                                                                                                                                                                                                                                                                                                                                                                      |
 | [PDFs cannot be previewed or downloaded in Firefox, Chrome, or Edge (#28498)](https://github.com/camunda/camunda/issues/28498)                           | <p>In rare situations, PDFs cannot be previewed due to the used browser.</p><p><ul><li>**Affects:** Tasklist</li><li>**Workaround**: Use a different browser; clear browser cache.</li></ul></p>                                                                                                                                                                                                                                                                                                                                                                                         |
-| [Connectors config using EntraId (OIDC) for 8.7.0-alpha5 incorrect (#3135)](https://github.com/camunda/camunda-platform-helm/issues/3135)                | <p>Incomplete Connectors configuration for Entra ID usage.</p><p><ul><li>**Affects:** Connectors</li><li>**Workaround**: Set an environment variable with the token scope for Operate (see [issue](https://github.com/camunda/camunda-platform-helm/issues/3135)).</li></ul></p>                                                                                                                                                                                                                                                                                                         |
-| [Uploaded files are not uploaded to the document storage when starting a process from Modeler (#29526)](https://github.com/camunda/camunda/issues/29526) | <p>Files are not uploaded to the document storage when starting a process with a start form from Web Modeler or Play.</p><p><ul><li>**Affects:** Document handling and Web Modeler</li><li>**Workaround**: Start the process from Tasklist or the REST API.</li></ul></p>                                                                                                                                                                                                                                                                                                                |
+| [Connectors config using EntraId (OIDC) for 8.7.0-alpha5 incorrect (#3135)](https://github.com/camunda/camunda-platform-helm/issues/3135)                | <p>Incomplete connectors configuration for Entra ID usage.</p><p><ul><li>**Affects:** Connectors</li><li>**Workaround**: Set an environment variable with the token scope for Operate (see [issue](https://github.com/camunda/camunda-platform-helm/issues/3135)).</li></ul></p>                                                                                                                                                                                                                                                                                                         |
+| [Uploaded files are not uploaded to the document storage when starting a process from Modeler (#29526)](https://github.com/camunda/camunda/issues/29526) | <p>Files are not uploaded to the document storage when starting a process with a start form from Web Modeler or Play.</p><p><ul><li>**Affects:** Document handling and Web Modeler</li><li>**Workaround**: Start the process from Tasklist or the Tasklist REST API.</li></ul></p>                                                                                                                                                                                                                                                                                                       |
 | [File picker does not display the name of the uploaded file for completed tasks (#25443)](https://github.com/camunda/camunda/issues/25443)               | <p>File picker does not display the name of the uploaded file for completed tasks.</p><p><ul><li>**Affects:** Tasklist</li><li>**Workaround**: File name can be viewed in Operate.</li></ul></p>                                                                                                                                                                                                                                                                                                                                                                                         |
 | [File upload fails to AWS storage due to non-standard space in filename (#28375)](https://github.com/camunda/camunda/issues/28375)                       | <p>File upload fails to AWS storage due to non UTF-8 whitespace character in filename.</p><p><ul><li>**Affects:** Tasklist</li><li>**Workaround**: When using AWS S3 storage, use UTF-8 compatible characters.</li></ul></p>                                                                                                                                                                                                                                                                                                                                                             |
 | [Failed to replay batch at 'LoggedEvent (#30810)'](https://github.com/camunda/camunda/issues/30810)                                                      | <p>When updating from `8.6.13` to `8.7.0`, Zeebe processing can stop after the update in some situations, where multi-instance elements are used.</p><p><ul><li>**Affects:** Zeebe</li><li>**Workaround**: This issue is fixed in `8.7.1`. When affected, going to `8.7.1` fully mitigates the issue. There is no risk of data loss.</li></ul></p>                                                                                                                                                                                                                                       |
@@ -259,9 +259,9 @@ For more information, see the [BPMN Copilot documentation](/components/early-acc
 
 <!-- https://github.com/camunda/product-hub/issues/2511 -->
 
-### Ad-hoc subprocesses
+### Ad-hoc sub-processes
 
-A new [ad-hoc subprocess](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) BPMN element is now supported. This new kind of subprocess allows more flexible process flows with a compact visual representation. It is the first step towards dynamic processes and execution of ad-hoc activities.
+A new [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) BPMN element is now supported. This new kind of subprocess allows more flexible process flows with a compact visual representation. It is the first step towards dynamic processes and execution of ad-hoc activities.
 
 <!-- https://github.com/camunda/product-hub/issues/2546 -->
 
@@ -290,31 +290,31 @@ You can now use the Camunda 8 SaaS [Administration API](/apis-tools/administrati
 - This allows you to trigger automated simultaneous updates for multiple clusters via the API.
 - Send a PUT request to the Administration API `Update cluster` endpoint.
 
-### Connectors <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span>
+### Connectors <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects connectors">Connectors</span>
 
-New Connectors and enhancements are included in this release.
+New connectors and enhancements are included in this release.
 
 <!-- https://github.com/camunda/product-hub/issues/2552 -->
 
-#### AWS S3 Connector
+#### AWS S3 connector
 
-Use the new outbound Amazon S3 Connector to interact with [Amazon Simple Storage Service (Amazon S3)](https://aws.amazon.com/S3/) from your BPMN process.
+Use the new outbound Amazon S3 connector to interact with [Amazon Simple Storage Service (Amazon S3)](https://aws.amazon.com/S3/) from your BPMN process.
 
-This Connector supports the following operations:
+This connector supports the following operations:
 
 - **Upload Document**: Upload a document to an AWS S3 bucket.
 - **Download Document**: Download a document from an AWS S3 bucket.
 - **Delete Document**: Delete a document from an AWS S3 bucket.
 
-To learn more about this Connector, see [Amazon S3 Connector](/components/connectors/out-of-the-box-connectors/amazon-s3.md).
+To learn more about this connector, see [Amazon S3 connector](/components/connectors/out-of-the-box-connectors/amazon-s3.md).
 
 <!-- https://github.com/camunda/product-hub/issues/2399 -->
 
-#### Box Connector
+#### Box connector
 
-Use the new outbound Box Connector to interact with [Box.com](https://www.box.com/) account content from your BPMN process.
+Use the new outbound Box connector to interact with [Box.com](https://www.box.com/) account content from your BPMN process.
 
-This Connector supports the following operations:
+This connector supports the following operations:
 
 - **Download File**: Download files into the Camunda document store.
 - **Upload File**: Upload files from Camunda to Box.
@@ -324,7 +324,7 @@ This Connector supports the following operations:
 - **Delete Folder**: Delete folders from your Box account.
 - **Search**: Search file items using the Box search API.
 
-To learn more about this Connector, see [Box Connector](/components/connectors/out-of-the-box-connectors/box.md).
+To learn more about this connector, see [Box connector](/components/connectors/out-of-the-box-connectors/box.md).
 
 <!-- https://github.com/camunda/product-hub/issues/2555 -->
 <!-- https://github.com/camunda/product-hub/issues/2592 -->
@@ -339,7 +339,7 @@ New features are available as part of the enhanced document handling being deliv
 - The document reference is extended with a document hash as an additional security mechanism.
 - The AWS S3 document store is implemented.
 - User task attachments and a [document preview component](/components/modeler/forms/form-element-library/forms-element-library-document-preview.md) in forms are supported. This enhances document-centric human workflows with file preview and download support in forms, simplifying the handling of large data and documents.
-- Document handling support is added to the [REST](/components/connectors/protocol/rest.md) and [Amazon Bedrock](/components/connectors/out-of-the-box-connectors/amazon-bedrock.md) Connectors.
+- Document handling support is added to the [REST](/components/connectors/protocol/rest.md) and [Amazon Bedrock](/components/connectors/out-of-the-box-connectors/amazon-bedrock.md) connectors.
 
 <!-- https://github.com/camunda/product-hub/issues/2469 -->
 
@@ -452,17 +452,17 @@ New Query API endpoints are added as follows:
 - User tasks
 - Variables
 
-### Connectors <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span>
+### Connectors <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects connectors">Connectors</span>
 
-New Connectors and enhancements are included in this release.
+New connectors and enhancements are included in this release.
 
-#### AWS Amazon Comprehend Connector
+#### AWS Amazon Comprehend connector
 
-The new Amazon Comprehend Connector allows you to integrate your BPMN service with Amazon Comprehend, a service which extracts insights about the content of documents, such as personal identifiable information (PII) and key phrases.
+The new Amazon Comprehend connector allows you to integrate your BPMN service with Amazon Comprehend, a service which extracts insights about the content of documents, such as personal identifiable information (PII) and key phrases.
 
-To learn more about this Connector, see [Amazon Comprehend Connector](/components/connectors/out-of-the-box-connectors/amazon-comprehend.md).
+To learn more about this connector, see [Amazon Comprehend connector](/components/connectors/out-of-the-box-connectors/amazon-comprehend.md).
 
-#### Email Connector attachments
+#### Email connector attachments
 
 The Email connector is enhanced as follows:
 
@@ -470,32 +470,32 @@ The Email connector is enhanced as follows:
 - Supports custom headers.
 - Messages can now be sent as plaintext, HTML, or in both formats.
 
-To learn more about this Connector, see [Email Connector](/components/connectors/out-of-the-box-connectors/email.md).
+To learn more about this connector, see [Email connector](/components/connectors/out-of-the-box-connectors/email.md).
 
-#### Google Gemini Connector
+#### Google Gemini connector
 
-The new Google Gemini Connector allows you to access Gemini multimodal models from Google, capable of understanding virtually any input, and combining different types of information in your BPMN process.
+The new Google Gemini connector allows you to access Gemini multimodal models from Google, capable of understanding virtually any input, and combining different types of information in your BPMN process.
 
-To learn more about this Connector, see [Google Gemini Connector](/components/connectors/out-of-the-box-connectors/google-gemini.md).
+To learn more about this connector, see [Google Gemini connector](/components/connectors/out-of-the-box-connectors/google-gemini.md).
 
-#### Webhook Connector document upload
+#### Webhook connector document upload
 
-Document upload is now supported by the Webhook Connector. Uploads can now be stored in the document store and are available for further processing for start and intermediate events.
+Document upload is now supported by the Webhook connector. Uploads can now be stored in the document store and are available for further processing for start and intermediate events.
 
 - Use the `documents` object to access created documents in both the response expression and the result expression.
 - The `documents` object contains the references for created documents.
 
-To learn more about this feature, see [HTTP Webhook Connector](/components/connectors/protocol/http-webhook.md).
+To learn more about this feature, see [HTTP Webhook connector](/components/connectors/protocol/http-webhook.md).
 
-### Connector Runtime <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span>
+### Connector Runtime <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects connectors">Connectors</span>
 
-#### Spring SDK and Camunda REST API Migration
+#### Spring SDK and Camunda 8 REST API Migration
 
 :::note
-This feature was originally released with 8.7.0-alpha3, and is no longer available in 8.7.0. The Camunda REST API migration is now available in [8.8.0-alpha1](/reference/announcements-release-notes/880/880-announcements.md#spring-sdk-and-camunda-rest-api-migration). For more information, see the Camunda 8.7 and 8.8 [release update blog](https://camunda.com/blog/2025/01/camunda-87-88-release-update/).
+This feature was originally released with 8.7.0-alpha3, and is no longer available in 8.7.0. The Camunda 8 REST API migration is now available in [8.8.0-alpha1](/reference/announcements-release-notes/880/880-announcements.md#spring-sdk-and-camunda-rest-api-migration). For more information, see the Camunda 8.7 and 8.8 [release update blog](https://camunda.com/blog/2025/01/camunda-87-88-release-update/).
 :::
 
-The Connectors experience is enhanced with the migration from the Spring Zeebe to the Camunda REST API, and the removal of dependency on the Operate client.
+The connectors experience is enhanced with the migration from the Spring Zeebe to the Camunda 8 REST API, and the removal of dependency on the Operate client.
 
 #### Testing Support migration
 
@@ -510,7 +510,7 @@ To learn more about this feature, see [Camunda Process Test getting started](/ap
 Cluster disk space is cleared when a trial cluster is paused.
 
 - You will need to redeploy processes to the cluster once it is resumed from a paused state.
-- Cluster configuration settings (for example, API Clients, Connector secrets, and IP allowlists) are saved so you can easily resume a cluster.
+- Cluster configuration settings (for example, API Clients, connector secrets, and IP allowlists) are saved so you can easily resume a cluster.
 
 <!-- https://github.com/camunda/product-hub/issues/2409 -->
 
@@ -602,27 +602,27 @@ Support is targeted for [Camunda 8.8](../870-announcements/#deprecated-web-model
 
 Console activity logs now contain information about changes made to secrets (add, update, remove), and Console user removals (unregistered organization users).
 
-### Email Connector <span class="badge badge--medium" title="This feature affects Connectors">Connectors</span>
+### Email connector <span class="badge badge--medium" title="This feature affects connectors">Connectors</span>
 
 <!-- https://github.com/camunda/product-hub/issues/2430 -->
 
-The new Email Connector allows you to:
+The new Email connector allows you to:
 
 - Integrate your BPMN service with any email server using POP3, IMAP, or SMTP.
 - Automate the retrieval, deletion, search, and organization of emails directly within your processes.
 
-To learn more about this Connector, see [Email Connector](/components/connectors/out-of-the-box-connectors/email.md).
+To learn more about this connector, see [Email connector](/components/connectors/out-of-the-box-connectors/email.md).
 
-### Generate Connector templates (OpenAPI + Postman) <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span>
+### Generate connector templates (OpenAPI + Postman) <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects connectors">Connectors</span>
 
 <!-- https://github.com/camunda/product-hub/issues/2049 -->
 
-You can now configure and automatically generate a custom Connector template in Web Modeler. This feature simplifies creating consistent, deployable templates, making Connector setup quicker and more flexible.
+You can now configure and automatically generate a custom connector template in Web Modeler. This feature simplifies creating consistent, deployable templates, making connector setup quicker and more flexible.
 
 - You can start from a blank template or import an existing API definition such as an OpenAPI specification, Swagger specification, or a Postman collection.
 - For example, download a Postman collection as a YAML file, import this into the generator, and choose which methods to include in the generated template.
 
-To learn more about generating Connector templates, see [generate a Connector template](/components/connectors/custom-built-connectors/connector-template-generator.md).
+To learn more about generating connector templates, see [generate a connector template](/components/connectors/custom-built-connectors/connector-template-generator.md).
 
 ### Monorepo Git sync <span class="badge badge--medium" title="This feature affects Modeler">Modeler</span>
 

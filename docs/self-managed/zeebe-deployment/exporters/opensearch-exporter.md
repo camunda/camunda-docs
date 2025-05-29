@@ -53,15 +53,16 @@ exporters:
 The exporter can be configured by providing `args`. The table below explains all the different
 options, and the default values for these options:
 
-| Option           | Description                                                                              | Default                 |
-| ---------------- | ---------------------------------------------------------------------------------------- | ----------------------- |
-| url              | Valid URLs as comma-separated string                                                     | `http://localhost:9200` |
-| requestTimeoutMs | Request timeout (in ms) for the OpenSearch client.                                       | `30000`                 |
-| index            | Refer to [Index](#index) for the index configuration options.                            |                         |
-| bulk             | Refer to [Bulk](#bulk) for the bulk configuration options.                               |                         |
-| retention        | Refer to [Retention](#retention) for the retention configuration options.                |                         |
-| authentication   | Refer to [Authentication](#authentication) for the authentication configuration options. |                         |
-| aws              | Refer to [AWS](#aws) for the AWS configuration options.                                  |                         |
+| Option                | Description                                                                              | Default                 |
+| --------------------- | ---------------------------------------------------------------------------------------- | ----------------------- |
+| url                   | Valid URLs as comma-separated string.                                                    | `http://localhost:9200` |
+| requestTimeoutMs      | Request timeout (in ms) for the OpenSearch client.                                       | `30000`                 |
+| index                 | Refer to [tndex](#index) for the index configuration options.                            |                         |
+| bulk                  | Refer to [bulk](#bulk) for the bulk configuration options.                               |                         |
+| retention             | Refer to [retention](#retention) for the retention configuration options.                |                         |
+| authentication        | Refer to [authentication](#authentication) for the authentication configuration options. |                         |
+| aws                   | Refer to [AWS](#aws) for the AWS configuration options.                                  |                         |
+| includeEnabledRecords | If `true` all enabled record types will be exported.                                     | `false`                 |
 
 <Tabs groupId="configuration" defaultValue="index" queryString values={[{label: 'Index', value: 'index' },{label: 'Bulk', value: 'bulk' },{label: 'Retention', value: 'retention' },{label: 'Authentication', value: 'authentication' },{label: 'AWS', value: 'aws' }]} >
 
@@ -94,6 +95,7 @@ and process values).
 | job                           | If `true` records related to jobs will be exported                                                                                                                                                         | `true`       |
 | jobBatch                      | If `true` records related to job batches will be exported                                                                                                                                                  | `false`      |
 | message                       | If `true` records related to messages will be exported                                                                                                                                                     | `true`       |
+| messageBatch                  | If `true` records related to message batches will be exported                                                                                                                                              | `false`      |
 | messageSubscription           | If `true` records related to message subscriptions will be exported                                                                                                                                        | `true`       |
 | messageStartEventSubscription | If `true` records related to message start event subscriptions will be exported                                                                                                                            | `true`       |
 | process                       | If `true` records related to processes will be exported                                                                                                                                                    | `true`       |
@@ -323,3 +325,19 @@ If you're using containers, you will need to mount the trust store to the contai
 your deployment method (e.g. Helm chart, Docker Compose). The simplest way is to build a custom image which already contains your trust store, and specifies
 the environment variable.
 :::
+
+## Legacy Zeebe records
+
+With the introduction of the Camunda Exporter, the Elasticsearch and OpenSearch Exporter no longer export all record types by default. Therefore, fewer indices will be created to store Zeebe data.
+
+The record types that continue to be exported by default are the following:
+
+- `DEPLOYMENT`
+- `PROCESS`
+- `PROCESS_INSTANCE`
+- `VARIABLE`
+- `USER_TASK`
+- `INCIDENT`
+- `JOB`
+
+To export other record types, enable the [includeEnabledRecords](#configuration) configuration property.

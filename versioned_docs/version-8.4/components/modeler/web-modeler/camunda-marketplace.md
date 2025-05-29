@@ -6,7 +6,7 @@ description: "Visit the Camunda Marketplace to browse and filter all available C
 
 While modeling a process, you can click into the Camunda Marketplace to browse through Connectors provided by Camunda engineering, discover Connectors developed by Camunda partners, and explore Connectors developed by the Camunda community.
 
-This may ease your process of selecting which Connectors to integrate into your process, as you can filter by creator, [inbound versus outbound Connectors](/docs/components/connectors/connector-types.md), [runtime](/docs/components/connectors/introduction.md), and Camunda versions that include specific out-of-the-box Connectors.
+This may ease your process of selecting which Connectors to integrate into your process, as you can filter by creator, [inbound versus outbound Connectors](/components/connectors/connector-types.md), [runtime](/components/connectors/introduction.md), and Camunda versions that include specific out-of-the-box Connectors.
 
 :::note
 The Camunda Marketplace can be accessed via your [browser](https://marketplace.camunda.com/) and directly from Web Modeler while building BPMN diagrams. This guide steps through accessing the Camunda Marketplace **directly from your BPMN diagram**. Therefore, screenshots and filters in this guide may appear slightly different from the browser-accessed Camunda Marketplace (though there are no functional differences).
@@ -25,7 +25,7 @@ To navigate to the Camunda Marketplace, take the following steps:
 3. Change the type of existing task by clicking on it and using the **wrench-shaped** change type context menu icon, or create a new Connector task by using the **Append Connector** context menu. Follow our [guide to using Connectors](/components/connectors/use-connectors/index.md) to learn more.
 4. Click the blue shop icon next to **Change element** to open the Camunda Marketplace modal.
    ![marketplace icon](./img/marketplace-icon.png)
-5. Browse [available Connectors](/docs/components/connectors/out-of-the-box-connectors/available-connectors-overview.md), tick the boxes on the left side of the modal to implement filters, and search for a specific Connector by typing in the **Search for a connector** search bar.
+5. Browse [available Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md), tick the boxes on the left side of the modal to implement filters, and search for a specific Connector by typing in the **Search for a connector** search bar.
    ![camunda marketplace](./img/connector-marketplace.png)
 
 :::note
@@ -39,9 +39,9 @@ Once you find a Connector you want to integrate into your BPMN diagram, click **
 Scroll down in the change type context menu and click on your downloaded Connector to change the type of existing task. You can then add the required details in the properties panel on the right side of the screen.
 
 :::note
-You can also host custom Connectors developed with [Connector SDK](/docs/components/connectors/custom-built-connectors/connector-sdk.md). Instead of viewing **Download to project**, it may read [**Learn more about self-hosted Connectors**](/docs/guides/host-custom-connector.md).
+You can also host custom Connectors developed with [Connector SDK](/components/connectors/custom-built-connectors/connector-sdk.md). Instead of viewing **Download to project**, it may read [**Learn more about self-hosted Connectors**](/guides/host-custom-connector.md).
 
-For the out-of-the-box Connectors provided by Camunda, the Connectors Bundle project provides a set of all Connector templates related to one release version. These are templates that are reusing the Camunda Connectors via the [Protocol Connector Approach](/docs/components/connectors/protocol/rest.md).
+For the out-of-the-box Connectors provided by Camunda, the Connectors Bundle project provides a set of all Connector templates related to one release version. These are templates that are reusing the Camunda Connectors via the [Protocol Connector Approach](/components/connectors/protocol/rest.md).
 
 This means a developer created a template and reused one of the Camunda Connector runtimes. Only for these templates is direct **Download to project** available.
 :::
@@ -53,6 +53,6 @@ After downloading, you may view a modal reading **Connector already exists**:
 
 ## Additional resources
 
-- Learn more about our [available out-of-the-box Connectors](/docs/components/connectors/out-of-the-box-connectors/available-connectors-overview.md).
-- Understand different [Connector types](/docs/components/connectors/connector-types.md)
-- Learn how to modify BPMN elements with [Connector templates](/docs/components/connectors/custom-built-connectors/connector-templates.md) to create custom modeling experiences.
+- Learn more about our [available out-of-the-box Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md).
+- Understand different [Connector types](/components/connectors/connector-types.md)
+- Learn how to modify BPMN elements with [Connector templates](/components/connectors/custom-built-connectors/connector-templates.md) to create custom modeling experiences.

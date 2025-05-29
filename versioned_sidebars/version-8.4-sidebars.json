@@ -1127,7 +1127,8 @@
         },
         {
           "Troubleshooting": [
-            "self-managed/operational-guides/troubleshooting/log-levels"
+            "self-managed/operational-guides/troubleshooting/log-levels",
+            "self-managed/platform-deployment/diagnostics"
           ]
         }
       ]

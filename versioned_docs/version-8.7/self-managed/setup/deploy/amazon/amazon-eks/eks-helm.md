@@ -63,6 +63,9 @@ https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/aws/kub
 https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/generic/kubernetes/single-region/procedure/chart-env.sh
 ```
 
+- `CAMUNDA_NAMESPACE` is the Kubernetes namespace where Camunda will be installed.
+- `CAMUNDA_RELEASE_NAME` is the name of the Helm release associated with this Camunda installation.
+
 ### Export database values
 
 When using either standard authentication (network based or username and password) or IRSA authentication, specific environment variables must be set with valid values. Follow the guide for either [eksctl](./eksctl.md#configuration-1) or [Terraform](./terraform-setup.md#export-values-for-the-helm-chart) to set them correctly.
@@ -223,7 +226,7 @@ Before installing the Helm chart, create Kubernetes secrets to store the Keycloa
 To create the secrets, run the following commands:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/aws/kubernetes/eks-single-region/procedure/create-setup-db-secret.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/aws/kubernetes/eks-single-region/procedure/create-external-db-secrets.sh
 ```
 
 </TabItem>
@@ -442,7 +445,7 @@ Bitnami Keycloak container image configuration is available at [hub.docker.com/b
 
 ##### Identity
 
-Identity uses PostgreSQL, and `identity` is configured to use IRSA with Amazon Aurora PostgreSQL. Check the [Identity database configuration](../../../../identity/deployment/configuration-variables.md#running-identity-on-amazon-aurora-postgresql) for more details. Identity includes the [aws-advanced-jdbc-wrapper](https://github.com/awslabs/aws-advanced-jdbc-wrapper) within the Docker image.
+Identity uses PostgreSQL, and `identity` is configured to use IRSA with Amazon Aurora PostgreSQL. Check the [Identity database configuration](/self-managed/identity/miscellaneous/configuration-variables.md#running-identity-on-amazon-aurora-postgresql) for more details. Identity includes the [aws-advanced-jdbc-wrapper](https://github.com/awslabs/aws-advanced-jdbc-wrapper) within the Docker image.
 
 #### Amazon OpenSearch Service
 
@@ -485,7 +488,7 @@ First, we need an OAuth client to be able to connect to the Camunda 8 cluster.
 
 ### Generate an M2M token using Identity
 
-Generate an M2M token by following the steps outlined in the [Identity getting started guide](/self-managed/identity/getting-started/install-identity.md), along with the [incorporating applications documentation](/self-managed/identity/user-guide/additional-features/incorporate-applications.md).
+Generate an M2M token by following the steps outlined in the [Identity firt steps guide](/self-managed/identity/identity-first-steps.md), along with the [incorporating applications documentation](/self-managed/identity/application-user-group-role-management/applications.md).
 
 Below is a summary of the necessary instructions:
 
@@ -510,8 +513,8 @@ export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identit
 Identity and Keycloak must be port-forwarded to be able to connect to the cluster.
 
 ```shell
-kubectl port-forward services/camunda-identity 8080:80 --namespace camunda
-kubectl port-forward services/camunda-keycloak 18080:80 --namespace camunda
+kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-identity" 8080:80 --namespace "$CAMUNDA_NAMESPACE"
+kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-keycloak" 18080:80 --namespace "$CAMUNDA_NAMESPACE"
 ```
 
 1. Open Identity in your browser at `http://localhost:8080`. You will be redirected to Keycloak and prompted to log in with a username and password.
@@ -531,17 +534,17 @@ export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identit
 
 ```shell
 Operate:
-> kubectl port-forward svc/camunda-operate  8081:80 --namespace camunda
+> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-operate"  8081:80 --namespace "$CAMUNDA_NAMESPACE"
 Tasklist:
-> kubectl port-forward svc/camunda-tasklist 8082:80 --namespace camunda
+> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-tasklist" 8082:80 --namespace "$CAMUNDA_NAMESPACE"
 Optimize:
-> kubectl port-forward svc/camunda-optimize 8083:80 --namespace camunda
+> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-optimize" 8083:80 --namespace "$CAMUNDA_NAMESPACE"
 Connectors:
-> kubectl port-forward svc/camunda-connectors 8086:8080 --namespace camunda
+> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-connectors" 8086:8080 --namespace "$CAMUNDA_NAMESPACE"
 WebModeler:
-> kubectl port-forward svc/camunda-web-modeler-webapp 8084:80 --namespace camunda
+> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-web-modeler-webapp" 8084:80 --namespace "$CAMUNDA_NAMESPACE"
 Console:
-> kubectl port-forward svc/camunda-console 8085:80 --namespace camunda
+> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-console" 8085:80 --namespace "$CAMUNDA_NAMESPACE"
 ```
 
 </summary>
@@ -555,7 +558,7 @@ Console:
 <Tabs groupId="c8-connectivity">
   <TabItem value="rest-api" label="REST API" default>
 
-For a detailed guide on generating and using a token, please conduct the relevant documentation on [authenticating with the REST API](./../../../../../apis-tools/camunda-api-rest/camunda-api-rest-authentication.md?environment=self-managed).
+For a detailed guide on generating and using a token, please conduct the relevant documentation on [authenticating with the Camunda 8 REST API](./../../../../../apis-tools/camunda-api-rest/camunda-api-rest-authentication.md?environment=self-managed).
 
 <Tabs groupId="domain">
   <TabItem value="with" label="With domain" default>
@@ -572,7 +575,7 @@ https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/generic
 This requires to port-forward the Zeebe Gateway to be able to connect to the cluster.
 
 ```shell
-kubectl port-forward services/camunda-zeebe-gateway 8080:8080 --namespace camunda
+kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-zeebe-gateway" 8080:8080 --namespace "$CAMUNDA_NAMESPACE"
 ```
 
 Export the following environment variables:
@@ -585,7 +588,7 @@ https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/generic
 
 </Tabs>
 
-Generate a temporary token to access the REST API, then capture the value of the `access_token` property and store it as your token. Use the stored token (referred to as `TOKEN` in this case) to interact with the REST API and display the cluster topology:
+Generate a temporary token to access the Camunda 8 REST API, then capture the value of the `access_token` property and store it as your token. Use the stored token (referred to as `TOKEN` in this case) to interact with the Camunda 8 REST API and display the cluster topology:
 
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/generic/kubernetes/single-region/procedure/check-zeebe-cluster-topology.sh
@@ -631,7 +634,7 @@ The following values are required for the OAuth authentication:
 This requires port-forwarding the Zeebe Gateway to be able to connect to the cluster:
 
 ```shell
-kubectl port-forward services/camunda-zeebe-gateway 26500:26500 --namespace camunda
+kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-zeebe-gateway" 26500:26500 --namespace "$CAMUNDA_NAMESPACE"
 ```
 
 The following values are required for OAuth authentication:

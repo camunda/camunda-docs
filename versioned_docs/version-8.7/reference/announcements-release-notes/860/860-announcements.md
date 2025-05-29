@@ -28,7 +28,7 @@ Review the following documentation for your components for more information on h
 - [Operate](/self-managed/operate-deployment/operate-configuration.md#licensing)
 - [Tasklist](/self-managed/tasklist-deployment/tasklist-configuration.md#licensing)
 - [Optimize](/self-managed/optimize-deployment/configuration/system-configuration-platform-8.md#licensing)
-- [Identity](/self-managed/identity/deployment/configuration-variables.md#license-configuration)
+- [Identity](/self-managed/identity/miscellaneous/configuration-variables.md#license-configuration)
 - [Modeler](/self-managed/modeler/web-modeler/configuration/configuration.md#licensing)
 
 To configure with Helm, visit the [Self Managed installation documentation](/self-managed/setup/install.md).
@@ -98,13 +98,13 @@ If you do not update the cluster by August 30th 2024, we will update the cluster
 
 Camunda 8 Self-Managed clusters are not affected by this.
 
-### Deprecation: None start event element templates for Kafka, RabbitMQ, Amazon SQS, and Amazon SNS inbound Connectors
+### Deprecation: None start event element templates for Kafka, RabbitMQ, Amazon SQS, and Amazon SNS inbound connectors
 
-The [none start event](/components/modeler/bpmn/none-events/none-events.md#none-start-events) element templates for the out-of-the-box Kafka, RabbitMQ, Amazon SQS, and Amazon SNS inbound Connectors have been deprecated in Camunda Modeler.
+The [none start event](/components/modeler/bpmn/none-events/none-events.md#none-start-events) element templates for the out-of-the-box Kafka, RabbitMQ, Amazon SQS, and Amazon SNS inbound connectors have been deprecated in Camunda Modeler.
 
-Users can no longer select these templates when creating a new none start event element in Camunda Modeler. Existing none start event elements with these templates will continue to work as expected, but users are encouraged to migrate to the [message start event](/components/modeler/bpmn/message-events/message-events.md#message-start-events) element templates for these Connectors.
+Users can no longer select these templates when creating a new none start event element in Camunda Modeler. Existing none start event elements with these templates will continue to work as expected, but users are encouraged to migrate to the [message start event](/components/modeler/bpmn/message-events/message-events.md#message-start-events) element templates for these connectors.
 
-Message start event element templates are better suited for the message-based communication these Connectors provide, and offer more flexibility and features compared to the none start event element templates, such as the ability to define a message ID and a correlation key for idempotency. Read more in the [inbound Connectors documentation](/components/connectors/use-connectors/inbound.md) and the [messaging concepts documentation](/components/concepts/messages.md#message-uniqueness).
+Message start event element templates are better suited for the message-based communication these connectors provide, and offer more flexibility and features compared to the none start event element templates, such as the ability to define a message ID and a correlation key for idempotency. Read more in the [inbound connectors documentation](/components/connectors/use-connectors/inbound.md) and the [messaging concepts documentation](/components/concepts/messages.md#message-uniqueness).
 
 If one of your endpoints returns multiple Set-Cookie headers and you need to capture all of them, set `groupSetCookieHeaders` to `true` in the element template XML. This aggregates the headers into a list. This feature is available since version 8.6.7. The grouping is enabled by default since version 8.6.10.
 
@@ -162,7 +162,7 @@ We are introducing a new base path for both the Operate and Tasklist **web appli
 
 ### Zeebe, Operate, Tasklist, and Optimize released from single repository
 
-To harmonize and simplify, and also to prepare for the [streamlined Orchestration Cluster Architecture](https://camunda.com/blog/2024/04/simplified-deployment-options-accelerated-getting-started-experience/), `Zeebe`, `Operate`, `Tasklist`, and `Optimize` are developed and released from a single repository going forward: https://github.com/camunda/camunda. This prepares for `Zeebe`, `Operate`, `Tasklist`, and a new, Orchestration Cluster level Identity forming the [Orchestration Cluster](/docs/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) application starting with Camunda 8.8.
+To harmonize and simplify, and also to prepare for the [streamlined Orchestration Cluster Architecture](https://camunda.com/blog/2024/04/simplified-deployment-options-accelerated-getting-started-experience/), `Zeebe`, `Operate`, `Tasklist`, and `Optimize` are developed and released from a single repository going forward: https://github.com/camunda/camunda. This prepares for `Zeebe`, `Operate`, `Tasklist`, and a new, Orchestration Cluster level Identity forming the [Orchestration Cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) application starting with Camunda 8.8.
 
 This change has the following implications:
 

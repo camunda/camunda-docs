@@ -1,26 +1,26 @@
 ---
 id: box
 sidebar_label: Box
-title: Box Connector
+title: Box connector
 description: Interact with the Box storage API.
 ---
 
-The **Box Connector** is an outbound Connector that allows you to interact with the [Box](https://box.com/) storage API from your BPMN process.
+The **Box connector** is an outbound connector that allows you to interact with the [Box](https://box.com/) storage API from your BPMN process.
 
 ## Prerequisites
 
-To use the **Box Connector**, you must have a Box account. You can use an [enterprise account](https://www.box.com/) or create a [developer account](https://developer.box.com/).
+To use the **Box connector**, you must have a Box account. You can use an [enterprise account](https://www.box.com/) or create a [developer account](https://developer.box.com/).
 
-The **Box Connector** supports different Box API authentication methods, all of which require a [Custom App](https://developer.box.com/guides/applications/app-types/custom-apps/) in your Box account.
+The **Box connector** supports different Box API authentication methods, all of which require a [Custom App](https://developer.box.com/guides/applications/app-types/custom-apps/) in your Box account.
 
-- Camunda recommends enabling the **Generate user access tokens** feature in **Advanced Features** in your app configuration. This allows the Connector to login as an [app user](https://github.com/box/box-java-sdk/blob/v4.13.1/doc/authentication.md#obtaining-user-token). You can use the **User ID** shown on the overview page in your Box app console.
+- Camunda recommends enabling the **Generate user access tokens** feature in **Advanced Features** in your app configuration. This allows the connector to login as an [app user](https://github.com/box/box-java-sdk/blob/v4.13.1/doc/authentication.md#obtaining-user-token). You can use the **User ID** shown on the overview page in your Box app console.
 - Ensure the app is **Authorized** in the **Platform Apps Manager** section of your Box account.
 
 :::note
-A [Custom App](https://developer.box.com/guides/applications/app-types/custom-apps/) is required to interact with the Box API without any manual user interaction during credentials creation when authenticating with the Connector.
+A [Custom App](https://developer.box.com/guides/applications/app-types/custom-apps/) is required to interact with the Box API without any manual user interaction during credentials creation when authenticating with the connector.
 :::
 
-## Create a Box Connector task
+## Create a Box connector task
 
 import ConnectorTask from '../../../components/react-components/connector-task.md'
 
@@ -28,7 +28,7 @@ import ConnectorTask from '../../../components/react-components/connector-task.m
 
 ## Authentication
 
-To authenticate the Connector with Box, select an authentication type from the **Authentication** dropdown:
+To authenticate the connector with Box, select an authentication type from the **Authentication** dropdown:
 
 - **Client Credentials Enterprise**: Authenticate using an **Enterprise ID**. You must have an enterprise account with Box.
 - **Client Credentials User**: Authenticate using a **User ID**. You must have a [Custom App](https://developer.box.com/guides/applications/app-types/custom-apps/) set up in Box.
@@ -37,11 +37,11 @@ To authenticate the Connector with Box, select an authentication type from the *
 
 ## Operations
 
-The **Box Connector** supports the following operations that allow you to interact with the items stored in your Box account.
+The **Box connector** supports the following operations that allow you to interact with the items stored in your Box account.
 
 :::note
 
-The Box Connector supports two methods for locating items stored in your Box account:
+The Box connector supports two methods for locating items stored in your Box account:
 
 - File or folder path properties allow you to either specify the **Item ID** (found in the Box URL when browsing your items) or using the item names separated by slashes (`/`) for items in folders.
 - A path consisting of only a single `/` denotes the root of your Box folder. For example, `/my-folder` would point to the `my-folder` folder located in the root directory. You can use the path notation for files (`/my/image.png`) and folders (`/my/sub/folder`).
@@ -49,7 +49,7 @@ The Box Connector supports two methods for locating items stored in your Box acc
 :::
 
 :::note
-Starting from version 8.7.0, the Box Connector supports uploading documents from (or downloading documents to) the Camunda document store. Review the **Document** field in the properties panel where the document reference can be provided. See additional details and limitations in [document handling](/components/concepts/document-handling.md).
+Starting from version 8.7.0, the Box connector supports uploading documents from (or downloading documents to) the Camunda document store. Review the **Document** field in the properties panel where the document reference can be provided. See additional details and limitations in [document handling](/components/document-handling/getting-started.md).
 :::
 
 ### Create Folder
@@ -110,7 +110,7 @@ For example, you can reference the document representing the downloaded file usi
 
 Upload a file using an existing document reference.
 
-The Box Connector resolves the document reference and creates a new file item in your Box store.
+The Box connector resolves the document reference and creates a new file item in your Box store.
 
 | Property           | Type                      | Required | Example          |
 | ------------------ | ------------------------- | -------- | ---------------- |

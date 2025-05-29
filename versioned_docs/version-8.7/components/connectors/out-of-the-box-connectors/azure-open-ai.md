@@ -1,14 +1,14 @@
 ---
 id: azure-open-ai
-title: Azure OpenAI Connector
+title: Azure OpenAI connector
 sidebar_label: Azure OpenAI
 description: Interact with Azure OpenAI from your BPMN process.
 ---
 
-The **Azure OpenAI Connector** is an outbound Connector that allows you to interact with
+The **Azure OpenAI connector** is an outbound connector that allows you to interact with
 [Azure OpenAI](https://azure.microsoft.com/en-us/products/ai-services/openai-service) models from your BPMN processes.
 
-The **Azure OpenAI Connector** currently supports only prompt operations:
+The **Azure OpenAI connector** currently supports only prompt operations:
 [`completions`](https://learn.microsoft.com/en-us/azure/ai-services/openai/reference#completions),
 [`chat completions`](https://learn.microsoft.com/en-us/azure/ai-services/openai/reference#chat-completions), and
 [`completions extensions`](https://learn.microsoft.com/en-us/azure/ai-services/openai/reference#completions-extensions).
@@ -18,32 +18,32 @@ to find out if a desired model supports the operations mentioned.
 
 ## Prerequisites
 
-To begin using the **Azure OpenAI Connector**, ensure you have created and deployed an Azure OpenAI resource.
+To begin using the **Azure OpenAI connector**, ensure you have created and deployed an Azure OpenAI resource.
 A valid Azure OpenAI API key is also required.
 
 Learn more at the [official Azure OpenAI portal entry](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource).
 
-## Create an Azure OpenAI Connector task
+## Create an Azure OpenAI connector task
 
 import ConnectorTask from '../../../components/react-components/connector-task.md'
 
 <ConnectorTask/>
 
-## Make your Azure OpenAI Connector executable
+## Make your Azure OpenAI connector executable
 
-To work with the **Azure OpenAI Connector**, fill all mandatory fields.
+To work with the **Azure OpenAI connector**, fill all mandatory fields.
 
 ## Authentication
 
 Fill the **API key** field with a valid Azure OpenAI API key.
 [Learn more](https://learn.microsoft.com/en-us/azure/ai-services/openai/quickstart?tabs=command-line%2Cpython-new&pivots=rest-api#retrieve-key-and-endpoint) about obtaining a key.
 
-### Create a new Connector secret
+### Create a new connector secret
 
 Keep your **API key** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
 1. Follow our [guide for creating secrets](/components/console/manage-clusters/manage-secrets.md).
-2. Name your secret (for example, `AZURE_OAI_SECRET`) so you can reference it later in the Connector.
+2. Name your secret (for example, `AZURE_OAI_SECRET`) so you can reference it later in the connector.
 
 ## Operation
 
@@ -57,9 +57,9 @@ deployed [model](https://learn.microsoft.com/en-us/azure/ai-services/openai/conc
 - For **chat completion** details, refer to the related [Microsoft reference documentation](https://learn.microsoft.com/en-us/azure/ai-services/openai/reference#chat-completions).
 - For **completion extension** details, refer to the related [Microsoft reference documentation](https://learn.microsoft.com/en-us/azure/ai-services/openai/reference#completions-extensions).
 
-## Handle Connector response
+## Handle connector response
 
-The **Azure OpenAI Connector** is a protocol Connector, meaning it is built on top of the **HTTP REST Connector**. Therefore,
+The **Azure OpenAI connector** is a protocol connector, meaning it is built on top of the **HTTP REST connector**. Therefore,
 handling response is still applicable [as described](/components/connectors/protocol/rest.md#response).
 
 ## Usage example

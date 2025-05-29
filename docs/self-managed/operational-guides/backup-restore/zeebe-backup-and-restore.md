@@ -138,6 +138,10 @@ zeebe:
           accountKey:
           connectionString:
           basePath:
+          createContainer:
+          sasToken:
+            type:
+            value:
 ```
 
 Alternatively, you can configure backup store using environment variables:
@@ -149,6 +153,16 @@ Alternatively, you can configure backup store using environment variables:
 - `ZEEBE_BROKER_DATA_BACKUP_AZURE_CONNECTIONSTRING` - The [connection string](https://learn.microsoft.com/en-us/azure/storage/common/storage-configure-connection-string?toc=/azure/storage/blobs/toc.json&bc=/azure/storage/blobs/breadcrumb/toc.json) to connect to the service. If this is defined, it will override the account name, account key, and endpoint.
 - `ZEEBE_BROKER_DATA_BACKUP_AZURE_BASEPATH` - The base path is used to define the container name where the blobs will be saved. This value must not be empty. When `basePath` is set, Zeebe will only create and access objects under this path.
   This can be any string that is a valid [container name](https://learn.microsoft.com/en-us/rest/api/storageservices/naming-and-referencing-containers--blobs--and-metadata#container-names), for example the name of your cluster.
+- `ZEEBE_BROKER_DATA_BACKUP_AZURE_CREATECONTAINER` - Defines if the
+  container is created initially or if an existing one should be used (if
+  set to true and the container already exists, this is not recreated).
+  This configuration is true by default and should be generally not used
+  unless some authentication key is being used that does not have
+  container level permissions.
+- `ZEEBE_BROKER_DATA_BACKUP_AZURE_SASTOKEN_TYPE` - This setting defines the
+  [saas token](https://learn.microsoft.com/en-us/rest/api/storageservices/delegate-access-with-shared-access-signature) to use. These can be of user delegation, service or account type. Note that user delegation and service SAS tokens do not support the creation of containers, therefore `createContainer` configuration will be
+  overridden to `false` if `sasToken.type` is configured either as "delegation" or "service". In this case the user must make sure that the container already exists, or it will lead to a runtime error. The SAS token must be of the following types: "delegation", "service" or "account".
+- `ZEEBE_BROKER_DATA_BACKUP_AZURE_SASTOKEN_VALUE` - Specifies the key value of the SAS token.
 
 #### Backup encryption
 

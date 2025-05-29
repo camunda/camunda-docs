@@ -17,7 +17,7 @@ The refactoring suggestions feature helps you improve your BPMN diagrams by prov
 
 Since this is an alpha feature, only blank elements with names will lead to suggestions. If there are suggestions available, you will see a list of them. Click on a suggestion to apply it to your diagram:
 
-![suggestion to apply a Slack outbound Connector template](./img/refactoring-suggestions-2.png)
+![suggestion to apply a Slack outbound connector template](./img/refactoring-suggestions-2.png)
 
 If there are no suggestions available, a message will indicate this:
 

@@ -83,7 +83,7 @@ The following example shows how you can create a custom connector based on the C
 
 In this first step, create a new connector template, using the REST connector as a starting point.
 
-1. Create a REST Outbound Connector task.
+1. Create a REST Outbound connector task.
 1. Define the URL as a FEEL (Friendly Enough Expression Language) expression, using the `resource` and `index` variables.
 
    <img src={CustomRestURLImg} alt="Create a REST connector task" style={{marginTop: '0', width: '800px'}} />

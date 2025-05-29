@@ -2,6 +2,7 @@ name: Send message to Slack when a release is published
 on:
   release:
     types: [published]
+  workflow_dispatch: {}
 
 jobs:
   slack-send:
@@ -9,12 +10,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - id: slack
-        uses: slackapi/slack-github-action@v1.25.0
+        uses: slackapi/slack-github-action@v2.1.0
         with:
+          webhook: ${{ secrets.SLACK_ASK_C8_DOCUMENTATION }}
+          webhook-type: webhook-trigger
+          payload-templated: true
           # This data can be any valid JSON from a previous step in the GitHub Action
           payload: |
             {
               "release": "${{ github.event.release.tag_name }} - ${{ github.event.release.html_url }} is going live now!"
             }
-env:
-  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_ASK_C8_DOCUMENTATION }}
