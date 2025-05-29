@@ -1,5 +1,4 @@
 ---
-id: run-locally
 title: "Run Camunda Self-Managed locally"
 description: "Review the options to run Camunda 8 Self-Managed locally."
 keywords: ["local"]
