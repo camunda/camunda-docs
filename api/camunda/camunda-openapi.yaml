@@ -1831,7 +1831,7 @@ paths:
         "500":
           $ref: "#/components/responses/InternalServerError"
 
-  /process-instances/batch-operations/cancellation:
+  /process-instances/cancellation:
     post:
       tags:
         - Process instance
@@ -1839,6 +1839,9 @@ paths:
       summary: Create a batch operation to cancel process instances
       description: |
         Cancels multiple running process instances.
+        Since only ACTIVE root instances can be cancelled, any given filters for state and
+        parentProcessInstanceKey are ignored and overridden during this batch operation.
+        This is done asynchronously, the progress can be tracked using the batchOperationId from the response and the batch operation status endpoint (/batch-operations/{batchOperationId}).
       requestBody:
         required: false
         content:
@@ -1846,8 +1849,8 @@ paths:
             schema:
               $ref: "#/components/schemas/ProcessInstanceFilter"
       responses:
-        "202":
-          description: The batch operation request was accepted.
+        "200":
+          description: The batch operation request was created.
           content:
             application/json:
               schema:
@@ -1867,7 +1870,7 @@ paths:
         "500":
           $ref: "#/components/responses/InternalServerError"
 
-  /process-instances/batch-operations/incident-resolution:
+  /process-instances/incident-resolution:
     post:
       tags:
         - Process instance
@@ -1875,6 +1878,9 @@ paths:
       summary: Create a batch operation to resolve incidents of process instances
       description: |
         Resolves multiple instances of process instances.
+        Since only process instances with ACTIVE state can have unresolved incidents, any given
+        filters for state are ignored and overridden during this batch operation.
+        This is done asynchronously, the progress can be tracked using the batchOperationId from the response and the batch operation status endpoint (/batch-operations/{batchOperationId}).
       requestBody:
         required: false
         content:
@@ -1882,8 +1888,8 @@ paths:
             schema:
               $ref: "#/components/schemas/ProcessInstanceFilter"
       responses:
-        "202":
-          description: The batch operation request was accepted.
+        "200":
+          description: The batch operation request was created.
           content:
             application/json:
               schema:
@@ -1903,7 +1909,7 @@ paths:
         "500":
           $ref: "#/components/responses/InternalServerError"
 
-  /process-instances/batch-operations/migration:
+  /process-instances/migration:
     post:
       tags:
         - Process instance
@@ -1911,15 +1917,18 @@ paths:
       summary: Create a batch operation to migrate process instances
       description: |
         Migrate multiple instances of process instances.
+        Since only process instances with ACTIVE state can be migrated, any given
+        filters for state are ignored and overridden during this batch operation.
+        This is done asynchronously, the progress can be tracked using the batchOperationId from the response and the batch operation status endpoint (/batch-operations/{batchOperationId}).
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ProcessInstanceMigrationBatchOperationInstruction"
+              $ref: "#/components/schemas/ProcessInstanceMigrationBatchOperationRequest"
       responses:
-        "202":
-          description: The batch operation request was accepted.
+        "200":
+          description: The batch operation request was created.
           content:
             application/json:
               schema:
@@ -1939,7 +1948,7 @@ paths:
         "500":
           $ref: "#/components/responses/InternalServerError"
 
-  /process-instances/batch-operations/modification:
+  /process-instances/modification:
     post:
       tags:
         - Process instance
@@ -1947,15 +1956,20 @@ paths:
       summary: Create a batch operation to modify process instances
       description: |
         Modify multiple process instances.
+        Since only process instances with ACTIVE state can be modified, any given
+        filters for state are ignored and overridden during this batch operation.
+        In contrast to single modification operation, it is not possible to add variable instructions or modify by element key.
+        It is only possible to use the element id of the source and target.
+        This is done asynchronously, the progress can be tracked using the batchOperationId from the response and the batch operation status endpoint (/batch-operations/{batchOperationId}).
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ProcessInstanceModificationBatchOperationInstruction"
+              $ref: "#/components/schemas/ProcessInstanceModificationBatchOperationRequest"
       responses:
-        "202":
-          description: The batch operation request was accepted.
+        "200":
+          description: The batch operation request was created.
           content:
             application/json:
               schema:
@@ -3100,6 +3114,48 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "404":
           description: The role or group with the given ID was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /roles/{roleId}/groups/search:
+    post:
+      tags:
+        - Role
+      operationId: searchGroupsForRole
+      summary: Search role groups
+      description: |
+        Search groups assigned to a role.
+      parameters:
+        - name: roleId
+          in: path
+          required: true
+          description: The role ID.
+          schema:
+            type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GroupSearchQueryRequest"
+      responses:
+        "200":
+          description: The groups assigned to the role.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GroupSearchQueryResult"
+        "400":
+          $ref: "#/components/responses/InvalidData"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          description: The role with the given ID was not found.
           content:
             application/problem+json:
               schema:
@@ -4868,7 +4924,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ProcessInstanceSearchQuery"
+              $ref: "#/components/schemas/BatchOperationSearchQuery"
       responses:
         "200":
           description: The batch operation search result.
@@ -4885,13 +4941,15 @@ paths:
         "500":
           $ref: "#/components/responses/InternalServerError"
 
-  /batch-operations/{batchOperationId}/cancel:
+  /batch-operations/{batchOperationId}/cancellation:
     put:
       tags:
         - Batch operation
       operationId: cancelBatchOperation
       summary: Cancel Batch operation
-      description: Cancels a running batch operation.
+      description: |
+        Cancels a running batch operation.
+        This is done asynchronously, the progress can be tracked using the batch operation status endpoint (/batch-operations/{batchOperationId}).
       parameters:
         - name: batchOperationId
           in: path
@@ -4908,8 +4966,8 @@ paths:
               nullable: true
         required: false
       responses:
-        "202":
-          description: The batch operation cancel request was accepted.
+        "204":
+          description: The batch operation cancel request was created.
           content: {}
         "400":
           $ref: "#/components/responses/InvalidData"
@@ -4924,13 +4982,15 @@ paths:
         "500":
           $ref: "#/components/responses/InternalServerError"
 
-  /batch-operations/{batchOperationId}/pause:
+  /batch-operations/{batchOperationId}/suspension:
     put:
       tags:
         - Batch operation
-      operationId: pauseBatchOperation
-      summary: Pause Batch operation
-      description: Pauses a running batch operation.
+      operationId: suspendBatchOperation
+      summary: Suspend Batch operation
+      description: |
+        Suspends a running batch operation.
+        This is done asynchronously, the progress can be tracked using the batch operation status endpoint (/batch-operations/{batchOperationId}).
       parameters:
         - name: batchOperationId
           in: path
@@ -4947,8 +5007,8 @@ paths:
               nullable: true
         required: false
       responses:
-        "202":
-          description: The batch operation pause request was accepted.
+        "204":
+          description: The batch operation pause request was created.
           content: {}
         "400":
           $ref: "#/components/responses/InvalidData"
@@ -4963,13 +5023,15 @@ paths:
         "500":
           $ref: "#/components/responses/InternalServerError"
 
-  /batch-operations/{batchOperationId}/resume:
+  /batch-operations/{batchOperationId}/resumption:
     put:
       tags:
         - Batch operation
       operationId: resumeBatchOperation
       summary: Resume Batch operation
-      description: Resumes a paused batch operation.
+      description: |
+        Resumes a suspended batch operation.
+        This is done asynchronously, the progress can be tracked using the batch operation status endpoint (/batch-operations/{batchOperationId}).
       parameters:
         - name: batchOperationId
           in: path
@@ -4986,8 +5048,8 @@ paths:
               nullable: true
         required: false
       responses:
-        "202":
-          description: The batch operation resume request was accepted.
+        "204":
+          description: The batch operation resume request was created.
           content: {}
         "400":
           $ref: "#/components/responses/InvalidData"
@@ -8350,6 +8412,9 @@ components:
         decisionRequirementsKey:
           type: string
           description: The assigned key, which acts as a unique identifier for this decision requirements.
+        resourceName:
+          type: string
+          description: The name of the resource from which the decision requirements were parsed.
     DecisionRequirementsSearchQueryResult:
       type: object
       allOf:
@@ -9133,16 +9198,32 @@ components:
             The unique identifier of the created process instance; to be used wherever a request
             needs a process instance key (e.g. CancelProcessInstanceRequest).
           type: string
-    ProcessInstanceMigrationBatchOperationInstruction:
+    ProcessInstanceMigrationBatchOperationRequest:
       type: object
       properties:
         filter:
           $ref: "#/components/schemas/ProcessInstanceFilter"
         migrationPlan:
-          $ref: "#/components/schemas/ProcessInstanceMigrationInstruction"
+          $ref: "#/components/schemas/ProcessInstanceMigrationBatchOperationPlan"
       required:
         - filter
         - migrationPlan
+    ProcessInstanceMigrationBatchOperationPlan:
+      type: object
+      description: |
+        The migration instructions describe how to migrate a process instance from one process definition to another.
+      properties:
+        mappingInstructions:
+          description: Element mappings from the source process instance to the target process instance.
+          type: array
+          items:
+            $ref: "#/components/schemas/MigrateProcessInstanceMappingInstruction"
+        targetProcessDefinitionKey:
+          description: The key of process definition to migrate the process instance to.
+          type: string
+      required:
+        - targetProcessDefinitionKey
+        - mappingInstructions
     ProcessInstanceMigrationInstruction:
       type: object
       description: |
@@ -9372,8 +9453,8 @@ components:
     BatchOperationCreatedResult:
       type: object
       properties:
-        batchOperationKey:
-          description: Key of the batch operation.
+        batchOperationId:
+          description: Id of the batch operation.
           type: string
         batchOperationType:
           $ref: "#/components/schemas/BatchOperationTypeEnum"
@@ -9423,7 +9504,7 @@ components:
           enum:
             - CREATED
             - ACTIVE
-            - PAUSED
+            - SUSPENDED
             - COMPLETED
             - COMPLETED_WITH_ERRORS
             - CANCELED
@@ -9501,7 +9582,7 @@ components:
           enum:
             - CREATED
             - ACTIVE
-            - PAUSED
+            - SUSPENDED
             - COMPLETED
             - COMPLETED_WITH_ERRORS
             - CANCELED
@@ -9565,7 +9646,7 @@ components:
         errorMessage:
           description: the error message from the engine in case of a failed operation.
           type: string
-    ProcessInstanceModificationBatchOperationInstruction:
+    ProcessInstanceModificationBatchOperationRequest:
       type: object
       description: |
         The process instance filter to define on which process instances tokens should be moved,
