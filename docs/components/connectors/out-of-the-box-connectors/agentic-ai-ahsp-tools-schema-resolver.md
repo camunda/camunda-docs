@@ -6,21 +6,23 @@ description: Resolve an input schema used in combination with LLMs for activitie
 ---
 
 The **Ad-Hoc Tools Schema connector** is an outbound connector that implements the tool resolution part of
-the [**AI Agent connector**](./agentic-ai-aiagent.md). While its function is also embedded in the AI Agent connector,
-the tools-schema connector can be used independently in combination with other AI connectors.
+the [**AI Agent connector**](./agentic-ai-aiagent.md).
+
+## About this connector
+
+Although its function is also embedded in the AI Agent connector, the Ad-Hoc Tools Schema connector can be used independently in combination with other AI connectors.
 
 This can be useful for:
 
-- **Direct LLM interaction**: if you don't want to use the AI Agent connector but still want to resolve tools
-  for an ad-hoc sub-process, leveraging the `fromAi` function to define the input schema in combination with custom LLM
+- **Direct LLM interaction**: If you don't want to use the AI Agent connector but still want to resolve tools
+  for an ad-hoc sub-process, use the `fromAi` function to define the input schema in combination with custom LLM
   integrations.
-- **Debugging tool definitions**: if you want to test the tool resolution logic without having to set up a full AI Agent
-  connector, you can use the tools-schema connector to get the tool definitions and see how they are generated.
+- **Debugging tool definitions**: If you want to test the tool resolution logic without having to set up a full AI Agent
+  connector, you can use this connector to get the tool definitions and see how they are generated.
 
 ## Prerequisites
 
-To use the **Ad-Hoc Tools Schema connector**, your process must contain an ad-hoc sub-process whose ID you
-can reference.
+To use this connector, your process must contain an ad-hoc sub-process whose ID you can reference.
 
 ## Create an Ad-Hoc Tools Schema connector task
 
@@ -32,15 +34,14 @@ can reference.
 
 ## Tool Definitions
 
-Please see the [AI Agent connector](./agentic-ai-aiagent.md) documentation for a detailed description of how tools can
-be defined.
+For more information on how to define tools, see the [AI Agent connector](./agentic-ai-aiagent.md) documentation.
 
 ## Response Structure
 
-The connector returns a list of tool definitions in the following format. Individual tool definitions are modeled after
+This connector returns a list of tool definitions in the following format. Individual tool definitions are modeled after
 the [list tools response](https://modelcontextprotocol.io/specification/2025-03-26/server/tools#listing-tools) defined
 in the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) specification, so you should be able to directly
-use the definitions with different LLMs or transform them into the reuired format for your AI integration.
+use the definitions with different LLMs or transform them into the required format for your AI integration.
 
 ```json
 {
@@ -56,7 +57,7 @@ use the definitions with different LLMs or transform them into the reuired forma
     },
     {
       "name": "Download_A_File",
-      "description": "Download a file from the provided URL",
+      "description": "Download a file from the provided URL.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -70,7 +71,7 @@ use the definitions with different LLMs or transform them into the reuired forma
     },
     {
       "name": "SuperfluxProduct",
-      "description": "Calculates the superflux product (a very complicated calculation) given two input numbers",
+      "description": "Calculates the superflux product (a very complicated calculation) given two input numbers.",
       "inputSchema": {
         "type": "object",
         "properties": {
