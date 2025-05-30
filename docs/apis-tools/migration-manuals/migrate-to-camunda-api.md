@@ -526,8 +526,6 @@ The following conventions apply to all attributes:
   - `id` - Use `decisionRequirementsKey` instead.
   - `key` of type `int64` - Use `decisionRequirementsKey` of type `string`.
   - `name` - Use `decisionRequirementsName` instead.
-- Removed attributes in the `filter` object
-  - `resourceName` - Can no longer be used for filtering.
 
 </TabItem>
 

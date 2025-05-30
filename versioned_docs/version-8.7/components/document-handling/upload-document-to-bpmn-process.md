@@ -13,6 +13,8 @@ When [building a form](/guides/utilizing-forms.md) for a process, you can use th
 
 In the Filepicker configuration, you can specify whether users can upload a single file or [multiple files](/components/modeler/forms/form-element-library/forms-element-library-filepicker.md#configurable-properties) and define the list of [supported file formats](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#unique_file_type_specifiers).
 
+Although this example focuses on [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md), you can also build a form for document upload in [Desktop Modeler](/components/modeler/desktop-modeler/index.md). The Filepicker form component is available in both environments.
+
 ![Form with Filepicker](./img/form-with-file-picker.png)
 
 A designed form can be [linked](/components/modeler/web-modeler/advanced-modeling/form-linking.md) to a [user task](#upload-a-document-from-a-user-task-in-tasklist) or used to [start a process](#upload-a-document-to-start-a-process).
@@ -110,3 +112,13 @@ The result variable will have the following structure:
  ]
 }
 ```
+
+## Upload a document using the Camunda 8 API
+
+You can also upload a document to your Camunda 8 cluster using the Camunda 8 API.
+
+:::note
+This is currently supported for document stores of type: [AWS, GCP, in-memory (non-production), local (non-production)](/self-managed/document-handling/configuration/overview.md).
+:::
+
+Learn more about [uploading a single document](/apis-tools/camunda-api-rest/specifications/create-document.api.mdx) and [uploading multiple documents](/apis-tools/camunda-api-rest/specifications/create-documents.api.mdx) using the Camunda 8 API.
