@@ -90,8 +90,8 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/camunda-api-rest/specifications/pause-batch-operation",
-          label: "Pause Batch operation",
+          id: "apis-tools/camunda-api-rest/specifications/suspend-batch-operation",
+          label: "Suspend Batch operation",
           className: "api-method put",
         },
         {
@@ -724,6 +724,12 @@ const sidebar: SidebarsConfig = {
           id: "apis-tools/camunda-api-rest/specifications/remove-group-from-role",
           label: "Unassign a group from a role",
           className: "api-method delete",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/search-groups-for-role",
+          label: "Search role groups",
+          className: "api-method post",
         },
         {
           type: "doc",
