@@ -17,22 +17,19 @@ For a standard overview of the steps involved in the SAP RFC connector, see the 
 
 ## Prerequisites
 
-- **Camunda API Client** <br/>
-  [Create an API client](/components/console/manage-clusters/manage-api-clients.md) for your Camunda SaaS cluster with the full scope: `Zeebe,Tasklist,Operate,Optimize,Secrets`
-
-To run the SAP RFC connector, the following SAP infrastructure setup is required:
-
-- Cloud Foundry CLI](https://github.com/cloudfoundry/cli) with the [multiapps plugin](https://github.com/cloudfoundry/multiapps-cli-plugin) installed on the machine executing the deployment.
-
-- SAP BTP subaccount with a [Cloud Foundry environment](https://discovery-center.cloud.sap/serviceCatalog/cloud-foundry-runtime?region=all) enabled and a [created space](https://help.sap.com/docs/btp/sap-business-technology-platform/create-spaces).
-- A minimum of [1 GB storage quota and 2 GB runtime memory](https://help.sap.com/docs/btp/sap-business-technology-platform/managing-space-quota-plans).
-- [Entitlements](https://help.sap.com/docs/btp/sap-business-technology-platform/managing-entitlements-and-quotas-using-cockpit) for:
+- **Camunda API Client**
+  - [Create an API client](/components/console/manage-clusters/manage-api-clients.md) for your Camunda SaaS cluster with the full scope: `Zeebe,Tasklist,Operate,Optimize,Secrets`
+- **To run the SAP RFC connector**, the following SAP infrastructure setup is required:
+  - [Cloud Foundry CLI](https://github.com/cloudfoundry/cli) with the [multiapps plugin](https://github.com/cloudfoundry/multiapps-cli-plugin) installed on the machine executing the deployment.
+  - SAP BTP subaccount with a [Cloud Foundry environment](https://discovery-center.cloud.sap/serviceCatalog/cloud-foundry-runtime?region=all) enabled and a [created space](https://help.sap.com/docs/btp/sap-business-technology-platform/create-spaces).
+  - A minimum of [1 GB storage quota and 2 GB runtime memory](https://help.sap.com/docs/btp/sap-business-technology-platform/managing-space-quota-plans).
+- **[Entitlements](https://help.sap.com/docs/btp/sap-business-technology-platform/managing-entitlements-and-quotas-using-cockpit) for**:
   - [Connectivity Service](https://discovery-center.cloud.sap/serviceCatalog/connectivity-service?region=all), `lite` plan (to connect to the SAP is on-premises).
   - [Destination Service](https://discovery-center.cloud.sap/serviceCatalog/destination?service_plan=lite&region=all&commercialModel=btpea), `lite` plan.
   - [Authorization and Trust Management Service](https://discovery-center.cloud.sap/serviceCatalog/authorization-and-trust-management-service?region=all), `application` plan.
-- One or more instance- or subaccount-level Destinations, pointing to the SAP systems to communicate with.
+- **One or more instance- or subaccount-level Destinations**, pointing to the SAP systems to communicate with.
   ![btp-destination-rfc](./img/btp-destination-rfc.png)
-- Ensure `Additional Properties` set on the Destination are aligned with those of your connector or remote SAP system.
+- **Ensure `Additional Properties` is set** on the Destination are aligned with those of your connector or remote SAP system.
 
 ## Configuration and deployment
 
@@ -42,13 +39,14 @@ A descriptor file is required to deploy the SAP RFC connector to a space in a SA
 
 ### Configuring the RFC connector
 
-You can either configure the RFC connector via [the `csap` cli](./csap-cli.md) (recommended) or manually. The advantage of using `csap` is that it pulls together all necessary files and adjusts them to your BTP environment automatically, using the info you provided in the prompts or via command line switches.
+Configure the SAP RFC connector via [the `csap` cli](./csap-cli.md) (recommended) or manually. Using `csap` simplifies the process by automatically gathering all required files and customizing them for your BTP environment based on the details you provide through prompts or command-line options.
 
 #### Using `csap`
 
-Use CSAP CLI in either<br/>
-**Interactive mode:** by following the on-screen prompts OR<br/>
-**Non-interactive mode:** by providing all required parameters directly to the CLI.
+Use CSAP CLI in either:
+
+- **Interactive mode:** By following the on-screen prompts.
+- **Non-interactive mode:** By providing all required parameters directly to the CLI.
 
 Use the command `csap setup` will guide you interactively.
 

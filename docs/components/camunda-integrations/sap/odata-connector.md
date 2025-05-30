@@ -42,7 +42,7 @@ WebIDEUsage: odata_gen
 ```
 
 :::danger
-Currently, only `BasicAuthentication` is supported on the Destination by the SAP OData connector.
+The SAP OData connector currently only supports `BasicAuthentication` as the Authentication type for the Destination.
 :::
 
 ## Configuration and deployment
@@ -53,10 +53,10 @@ A descriptor file is required to deploy the SAP OData connector to a space in a 
 
 Use CSAP CLI in either:
 
-**Interactive mode**: Follow the on-screen prompts.
-**Non-interactive mode**: Provide all required parameters directly to the CLI.
+- **Interactive mode**: Follow the on-screen prompts.
+- **Non-interactive mode**: Provide all required parameters directly to the CLI.
 
-Configure the OData connector via [the `csap` cli](./csap-cli.md) (recommended) or manually. The advantage of using `csap` is that it pulls together all necessary files and adjusts them to your BTP environment automatically, using the information you provided in the prompts or via command line switches.
+Configure the OData connector via [the `csap` cli](./csap-cli.md) (recommended) or manually. Using `csap` simplifies the process by automatically gathering all required files and customizing them for your BTP environment based on the details you provide through prompts or command-line options.
 
 Use the command `csap setup` to guide you interactively.
 
@@ -105,11 +105,11 @@ Application "sap-odata-connector" started and available at "some.url.hana.ondema
 
 ### Deployment in Camunda 8 SaaS
 
-- If using Web Modeler, [import the SAP OData connector's element template](/components/connectors/manage-connector-templates.md#importing-existing-connector-templates) for use in your process design.
+- If you are using Web Modeler, [import the SAP OData connector element](/components/connectors/manage-connector-templates.md#importing-existing-connector-templates) you downloaded in the earlier step to use it in your process design.
 
 ![sample BPMN diagram with SAP OData connector](./img/sap-odata-connector-task-in-model.png)
 
-- If using Desktop Modeler, [follow the standard importing procedure](/components/modeler/desktop-modeler/element-templates/configuring-templates.md).
+- If you are using Desktop Modeler, [follow the standard importing procedure](/components/modeler/desktop-modeler/element-templates/configuring-templates.md).
 
 ## Working with the SAP OData connector in Camunda Modeler
 
