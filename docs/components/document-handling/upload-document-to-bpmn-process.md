@@ -20,6 +20,21 @@ Although this example focuses on [Web Modeler](/components/modeler/web-modeler/l
 A designed form can be [linked](/components/modeler/web-modeler/advanced-modeling/form-linking.md) to a [user task](#upload-a-document-from-a-user-task-in-tasklist) or used to [start a process](#upload-a-document-to-start-a-process).
 Documents uploaded with the form can then be [referenced](#get-reference-to-an-uploaded-document) later in the process.
 
+The Filepicker always returns an array with metadata for a single or multiple files, for example:
+
+```json
+[
+  {
+    "documentId": "u123",
+    "endpoint": "https://api.example.com/documents/u123",
+    "metadata": {
+      "fileName": "Document.pdf",
+      "contentType": "application/pdf"
+    }
+  }
+]
+```
+
 ### Upload a document from a user task in Tasklist
 
 When the process is deployed and running, users can access and complete user tasks that include a form with the Filepicker component in [Tasklist](/components/tasklist/introduction-to-tasklist.md):
@@ -46,6 +61,21 @@ It always returns an array of objects, whether a user uploads a single document 
 
 Single document uploads are accessible using `value[1]` (since [FEEL](/components/modeler/feel/what-is-feel.md) uses 1-based indexing).
 
+Refer to the example array below:
+
+```
+[
+  {
+    "documentId": "u123",
+    "endpoint": "https://api.example.com/documents/u123",
+    "metadata": {
+      "fileName": "Document.pdf",
+      "contentType": "application/pdf"
+    }
+  }
+]
+```
+
 ## Upload a document via inbound webhook connector
 
 Documents can be added to a process using the [inbound](/components//connectors/connector-types.md#inbound-connectors) [HTTP webhook connector](/components/connectors/protocol/http-webhook.md).
@@ -64,12 +94,16 @@ In this example, the result expression may look as follows, where `applicationDo
 
 The document reference received as an output of one connector should be stored in process variables by using the result expression or result variable.
 
-To call the webhook sending a file, for example:
+To call the webhook sending a file, see the following example:
 
 ```curl
 curl --location 'https://some.dev.environment/uploadDocument' \
 --form 'file=@"/path-to-file/file.pdf"'
 ```
+
+:::note
+This example uses Postman to obtain the result, so your `user-agent` value may look different.
+:::
 
 The result variable will have the following structure:
 
@@ -78,10 +112,10 @@ The result variable will have the following structure:
  "request": {
    "body": {},
    "headers": {
-     "host": "lpp-1.connectors.camunda.io",
-     "x-request-id": "335843238a709273200e2055f89147ad",
-     "x-real-ip": "109.78.172.42",
-     "x-forwarded-host": "lpp-1.connectors.camunda.io",
+     "host": "example.host.io",
+     "x-request-id": "34509f2d9293cdfj49875rjf03",
+     "x-real-ip": "some.example.ip.address",
+     "x-forwarded-host": "example.host.io",
      "x-forwarded-port": "443",
      "x-forwarded-proto": "https",
      "x-forwarded-scheme": "https",
@@ -90,9 +124,9 @@ The result variable will have the following structure:
      "user-agent": "PostmanRuntime/7.43.0",
      "accept": "*/*",
      "cache-control": "no-cache",
-     "postman-token": "b9d78973-b33f-43a4-8d55-c5ac8b2de656",
+     "postman-token": "my-example-token",
      "accept-encoding": "gzip, deflate, br",
-     "content-type": "multipart/form-data; boundary=--------------------------300742796701946745140414"
+     "content-type": "multipart/form-data; boundary=--------------------------3007423254435453453514"
    },
    "params": {}
  },
@@ -100,8 +134,8 @@ The result variable will have the following structure:
  "documents": [
    {
      "storeId": "gcp",
-     "documentId": "130ad52a-f90a-4e07-9cfa-0d9abb0b6a68",
-     "contentHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+     "documentId": "example-document-id",
+     "contentHash": "fwkhkj34843rfhfwho3297ufdsj0df09",
      "metadata": {
        "contentType": "application/pdf",
        "size": 70266,
