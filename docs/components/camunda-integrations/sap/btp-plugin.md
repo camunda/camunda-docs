@@ -13,22 +13,14 @@ The BTP plugin connects to Camunda 8 SaaS to provide:
 
 ## Prerequisites
 
-- **Camunda API Client** <br/>
-  [Create an API client](/components/console/manage-clusters/manage-api-clients.md) for your Camunda SaaS cluster with the full scope: `Zeebe,Tasklist,Operate,Optimize,Secrets`
-
+- **Camunda API Client**: [Create an API client](/components/console/manage-clusters/manage-api-clients.md) for your Camunda SaaS cluster with the full scope: `Zeebe,Tasklist,Operate,Optimize,Secrets`
 - Locally, for configuring via `csap` only (see below): [Node.js >= 20 LTS](https://nodejs.org/en/about/previous-releases)
-
-On SAP BTP:
-
-- [Cloud Foundry CLI](https://github.com/cloudfoundry/cli) with the [multiapps plugin](https://github.com/cloudfoundry/multiapps-cli-plugin) installed on the machine executing the deployment.
-
-- SAP BTP subaccount with a [Cloud Foundry environment](https://discovery-center.cloud.sap/serviceCatalog/cloud-foundry-runtime?region=all) enabled and a [created space](https://help.sap.com/docs/btp/sap-business-technology-platform/create-spaces).
-- A minimum of [4 GB storage quota and 4 GB runtime memory](https://help.sap.com/docs/btp/sap-business-technology-platform/managing-space-quota-plans).
-
-- [Entitlements](https://help.sap.com/docs/btp/sap-business-technology-platform/managing-entitlements-and-quotas-using-cockpit) for:
-
-  - BTP PostgreSQL, hyperscaler option
-    - Ensure the [available BTP PostgreSQL, hyperscaler option, and configuration options](https://help.sap.com/docs/postgresql-on-sap-btp/postgresql-on-sap-btp-hyperscaler-option/parameters) match your sizing plan. For example, for multi-region databases or high availability, the BTP plugin defaults to a minimum, only specifying PostgreSQL version 16 (see `/core/pg-options.json`) and a single database instance, with no high availability.
+- **On SAP BTP**:
+  - [Cloud Foundry CLI](https://github.com/cloudfoundry/cli) with the [multiapps plugin](https://github.com/cloudfoundry/multiapps-cli-plugin) installed on the machine executing the deployment.
+  - SAP BTP subaccount with a [Cloud Foundry environment](https://discovery-center.cloud.sap/serviceCatalog/cloud-foundry-runtime?region=all) enabled and a [created space](https://help.sap.com/docs/btp/sap-business-technology-platform/create-spaces).
+  - A minimum of [4 GB storage quota and 4 GB runtime memory](https://help.sap.com/docs/btp/sap-business-technology-platform/managing-space-quota-plans).
+- **[Entitlements](https://help.sap.com/docs/btp/sap-business-technology-platform/managing-entitlements-and-quotas-using-cockpit)** for:
+  - BTP PostgreSQL, hyperscaler option. Ensure the [available BTP PostgreSQL, hyperscaler option, and configuration options](https://help.sap.com/docs/postgresql-on-sap-btp/postgresql-on-sap-btp-hyperscaler-option/parameters) match your sizing plan. For example, for multi-region databases or high availability, the BTP plugin defaults to a minimum, only specifying PostgreSQL version 16 (see `/core/pg-options.json`) and a single database instance, with no high availability.
   - [Destination Service](https://discovery-center.cloud.sap/serviceCatalog/destination?service_plan=lite&region=all&commercialModel=btpea), `lite` plan
   - [Connectivity Service](https://discovery-center.cloud.sap/serviceCatalog/connectivity-service?region=all), `lite` plan
   - [Authorization and Trust Management Service](https://discovery-center.cloud.sap/serviceCatalog/authorization-and-trust-management-service?region=all), `application` plan
@@ -36,6 +28,7 @@ On SAP BTP:
 ## Features
 
 - Model user tasks in your BPMN process—they will be automatically detected and rendered by the BTP plugin at runtime.
+- Design your form in the Form Builder as part of the BPMN process. When you model a user task and link it to the form, the BTP plugin will automatically detect and render the task and its associated form at runtime.
 
 ![Camunda Forms in Fiori](./img/forms-fiori.png)
 
@@ -57,8 +50,13 @@ On SAP BTP:
 Layout: Only a single-row layout is supported:<br/>
 ![image-20250219112232376](./img/froms-no-columns.png)<br/>
 
-Custom properties are not supported:<br/>
+:::note
+
+Custom properties are not supported:
+
 ![image-20250219112156011](./img/forms-no-custom-properties.png)
+
+:::
 
 ### Supported Form Features and Properties
 
@@ -94,7 +92,7 @@ Custom properties are not supported:<br/>
 
 ## Configuration and deployment
 
-[Use `csap`](./csap-cli.md) for setting up the BTP plugin, as a manual configuration is cumbersome and error-prone.
+Use [`csap`](./csap-cli.md) for setting up the BTP plugin, as a manual configuration is cumbersome and error-prone.
 
 Within Camunda, no setup/config work is necessary to use the BTP plugin.
 
