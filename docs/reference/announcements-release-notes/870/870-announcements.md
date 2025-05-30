@@ -25,9 +25,9 @@ Supported environment changes and breaking changes or deprecations for the Camun
 
 Identity 8.7 now requires Keycloak v25 or v26, and Keycloak versions must be updated to match. This update also includes changes to the Camunda Helm chart. For more information on configuration changes, see the Self-Managed [update guide](/self-managed/operational-guides/update-guide/860-to-870.md#identity).
 
-### Camunda Spring SDK now requires Spring Boot 3.4.x <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+### Camunda Spring Boot SDK now requires Spring Boot 3.4.x <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-Camunda Spring SDK 8.7 now requires Spring Boot 3.4.x. For more information on compatibility, see the Camunda Spring SDK [version compatibility matrix](/apis-tools/spring-zeebe-sdk/getting-started.md#version-compatibility).
+Camunda Spring Boot SDK 8.7 now requires Spring Boot 3.4.x. For more information on compatibility, see the Camunda Spring Boot SDK [version compatibility matrix](/apis-tools/spring-zeebe-sdk/getting-started.md#version-compatibility).
 
 ### Desktop Modeler no longer supports macOS 12
 
@@ -96,10 +96,10 @@ The Zeebe Java client will not be developed further and will only receive bug fi
 
 ### Connectors
 
-Starting with 8.7, the connector runtime will stop using the deprecated community [Spring Zeebe library](https://github.com/camunda-community-hub/spring-zeebe) to communicate with the core APIs of Camunda. The new [Spring Zeebe SDK](/apis-tools/spring-zeebe-sdk/getting-started.md) will be used instead.
+Starting with 8.7, the connector runtime will stop using the deprecated community [Spring Zeebe library](https://github.com/camunda-community-hub/spring-zeebe) to communicate with the core APIs of Camunda. The new [Camunda Spring Boot SDK](/apis-tools/spring-zeebe-sdk/getting-started.md) will be used instead.
 
 Although the official SDK is largely compatible with the community library, some changes might be required in the configuration of Self-Managed connector deployments.
 
-We recommend updating the configuration to match the new property format of the [Spring Zeebe SDK](/apis-tools/spring-zeebe-sdk/getting-started.md) to avoid any issues. The old properties will be removed in a future release.
+We recommend updating the configuration to match the new property format of the [Camunda Spring Boot SDK](/apis-tools/spring-zeebe-sdk/getting-started.md) to avoid any issues. The old properties will be removed in a future release.
 
 For more information, see the [update guide](/self-managed/operational-guides/update-guide/860-to-870.md#connectors) and the [connectors configuration guide](/self-managed/connectors-deployment/connectors-configuration.md).
