@@ -9,13 +9,12 @@ import OverviewImg from './assets/self-managed-hero.png';
 import CardGrid from './react-components/\_card';
 import { gettingStartedCards, installCards } from './react-components/\_card-data';
 
+<h3 style={{marginTop: '-10px', marginBottom: '60px', fontWeight: 'normal'}}>Get started with our self-hosted alternative to Camunda 8 SaaS.</h3>
+
 <div class="double-column-container">
 <div class="double-column-left"  style={{marginRight: '50px', flex: '1.5'}}>
 
-Use Camunda 8 Self-Managed as a self-hosted alternative to Camunda 8 SaaS. Building process automation solutions with Camunda 8 works similarly regardless of hosting and deployment.
-
-- Download, configure, and use Self-Managed components.
-- Learn about features specific to Camunda 8 Self-Managed.
+Building process automation solutions with Camunda 8 works similarly regardless of hosting and deployment. Learn how to download, configure, and use Self-Managed components and features.
 
 <a class="button button--outline button--secondary button--md button--hero get-started" title="Get started with Self-Managed" href="../get-started" style={{marginBottom: '30px', marginTop: '20px'}}>Get started with Self-Managed</a>
 
@@ -69,6 +68,30 @@ Learn more about different use cases and scenarios for configuring Camunda 8 bey
 </div>
 
 ## Operational guides
+
+<div class="double-column-container">
+<div class="double-column-left"  style={{marginRight: '30px', flex: '1'}}>
+
+- [Configure multi-tenancy](/self-managed/operational-guides/configure-multi-tenancy.md)
+- [Backup and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md)
+- [Data purge](/self-managed/operational-guides/data-purge.md)
+- [Configure components](/self-managed/operational-guides/application-configs.md)
+
+</div>
+<div class="double-column-right" style={{flex: '1'}}>
+
+- [Installing in an air-gapped environment](/self-managed/setup/guides/air-gapped-installation.md)
+- [Running custom connectors](/self-managed/setup/guides/running-custom-connectors.md)
+- [Multi-namespace deployment](/self-managed/setup/guides/multi-namespace-deployment.md)
+- [Verifying Camunda 8 installation with a demo app](/self-managed/setup/guides/installing-payment-example.md)
+- [Inject custom Kubernetes manifests](/self-managed/setup/guides/add-extra-manifests.md)
+- [Prefix Elasticsearch indices](/self-managed/setup/guides/configure-elastcisearch-prefix-indices.md)
+- [Managing secrets in Helm charts](/self-managed/setup/guides/secret-management.md)
+
+</div>
+</div>
+
+
 
 ## Concepts
 
