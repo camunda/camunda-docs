@@ -81,7 +81,7 @@ User: Yes, please proceed.
 AI Agent: Call the `Create_Credit_Card` tool with the following parameters: {"name": "John Doe"}
 Tool Call Result: {"Create_Credit_Card": {"success": true}}
 
-Agent: John Doe's credit card has been created successfully.
+AI Agent: John Doe's credit card has been created successfully.
 ```
 
 ## Prerequisites
