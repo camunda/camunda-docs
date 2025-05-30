@@ -22,19 +22,19 @@ For a mature testing library, take a look at [Zeebe Process Test](/apis-tools/ja
 
 ## Prerequisites
 
-- Java 8+ / 17+ (for Spring SDK)
+- Java 8+ / 17+ (for Camunda Spring Boot SDK)
 - JUnit 5
 - A Docker-API compatible container runtime, such as Docker on Linux or Docker Desktop on Mac and Windows. If you have issues with your Docker runtime, have a look at the [Testcontainers documentation](https://java.testcontainers.org/supported_docker_environment/).
 
 ## Install
 
-We have two variations of CPT: for the [Spring SDK](/apis-tools/spring-zeebe-sdk/getting-started.md) and the [Camunda Java client](/apis-tools/java-client/index.md). Choose the one depending on which library you use in your process application.
+We have two variations of CPT: for the [Camunda Spring Boot SDK](/apis-tools/spring-zeebe-sdk/getting-started.md) and the [Camunda Java client](/apis-tools/java-client/index.md). Choose the one depending on which library you use in your process application.
 
 Add the following dependency to your Maven project:
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={
 [
-{label: 'Spring SDK', value: 'spring-sdk' },
+{label: 'Camunda Spring Boot SDK', value: 'spring-sdk' },
 {label: 'Java client', value: 'java-client' }
 ]
 }>
@@ -71,7 +71,7 @@ Create a new Java class with the following structure:
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={
 [
-{label: 'Spring SDK', value: 'spring-sdk' },
+{label: 'Camunda Spring Boot SDK', value: 'spring-sdk' },
 {label: 'Java client', value: 'java-client' }
 ]
 }>
@@ -186,7 +186,7 @@ By default, the test runtime uses the Camunda Docker images in the same version 
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={
 [
-{label: 'Spring SDK', value: 'spring-sdk' },
+{label: 'Camunda Spring Boot SDK', value: 'spring-sdk' },
 {label: 'Java client', value: 'java-client' }
 ]
 }>

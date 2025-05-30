@@ -31,12 +31,12 @@ For more information on how to configure flow control for a Self-Managed cluster
 
 This release extends the OpenSearch features supported by Optimize. Full support is committed for the 8.8 release.
 
-### Spring Zeebe SDK test support in 8.6.7
+### Camunda Spring Boot SDK test support in 8.6.7
 
-[Testing support for the Spring Zeebe SDK](/apis-tools/spring-zeebe-sdk/getting-started.md#writing-test-cases) is available in the 8.6.7 release.
+[Testing support for the Camunda Spring Boot SDK](/apis-tools/spring-zeebe-sdk/getting-started.md#writing-test-cases) is available in the 8.6.7 release.
 
 :::note
-This closes the feature gap where the Spring Zeebe SDK released with Camunda 8.5.0 did not offer the testing support previously available in the [Spring Zeebe Community Project](https://github.com/camunda-community-hub/spring-zeebe/blob/main/README.md#writing-test-cases).
+This closes the feature gap where the Camunda Spring Boot SDK released with Camunda 8.5.0 did not offer the testing support previously available in the [Spring Zeebe Community Project](https://github.com/camunda-community-hub/spring-zeebe/blob/main/README.md#writing-test-cases).
 :::
 
 ### Advanced SaaS offering <span class="badge badge--long" title="This feature affects SaaS">SaaS</span> <span class="badge badge--long" title="This feature affects Console">Console</span>

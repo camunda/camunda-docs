@@ -89,7 +89,7 @@ This is visualized on the left-hand side of the following image. With Camunda 8,
 
 - Java
 - Spring Boot
-- [Spring Zeebe SDK](../../apis-tools/spring-zeebe-sdk/getting-started.md) (embedding the Zeebe client)
+- [Camunda Spring Boot SDK](../../apis-tools/spring-zeebe-sdk/getting-started.md) (embedding the Zeebe client)
 - Glue code implemented as workers (being Spring beans)
 
 ![Diagram showing the spring boot architecture](../img/architecture-spring-boot.png)
@@ -112,7 +112,7 @@ You can find a complete Java Spring Boot example, showing the Camunda 7 process 
 
 The programming models of Camunda 7 and Camunda 8 are very similar if you program in Java and use Spring.
 
-For example, a worker in Camunda 8 can be implemented as follows (using the [Spring Zeebe SDK](../../apis-tools/spring-zeebe-sdk/getting-started.md)):
+For example, a worker in Camunda 8 can be implemented as follows (using the [Camunda Spring Boot SDK](../../apis-tools/spring-zeebe-sdk/getting-started.md)):
 
 ```java
 @JobWorker(type = "payment")
@@ -152,7 +152,7 @@ Camunda 8 doesn't provide integration into Jakarta EE application servers like C
 
 ### CDI or OSGI
 
-Due to limited adoption, there is no support for CDI or OSGI in Camunda 8. A lightweight integration layer comparable to the [Spring Zeebe SDK](../../apis-tools/spring-zeebe-sdk/getting-started.md) may be provided in the future.
+Due to limited adoption, there is no support for CDI or OSGI in Camunda 8. A lightweight integration layer comparable to the [Camunda Spring Boot SDK](../../apis-tools/spring-zeebe-sdk/getting-started.md) may be provided in the future.
 
 ### Polyglot applications (C#, Node.js)
 
