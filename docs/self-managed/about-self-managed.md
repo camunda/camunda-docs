@@ -12,7 +12,7 @@ import { gettingStartedCards, installCards } from './react-components/\_card-dat
 <h3 style={{marginTop: '-10px', marginBottom: '60px', fontWeight: 'normal'}}>Get started with our self-hosted alternative to Camunda 8 SaaS.</h3>
 
 <div class="double-column-container">
-<div class="double-column-left"  style={{marginRight: '50px', flex: '1.3'}}>
+<div class="double-column-left"  style={{marginRight: '50px', flex: '1.35'}}>
 
 Building process automation solutions with Camunda 8 works similarly regardless of hosting and deployment. Learn how to download, configure, and use Self-Managed components and features.
 
@@ -28,7 +28,7 @@ Building process automation solutions with Camunda 8 works similarly regardless 
 
 ## Get started with Camunda 8 Self-Managed
 
-Get started by deploying Self-Managed locally using Camunda 8 Run, Docker Compose, or a local Kubernetes cluster.
+Get started by deploying Self-Managed locally using Camunda 8 Run, Docker Compose, or your local Kubernetes cluster.
 
 <CardGrid card={gettingStartedCards} />
 

@@ -4,7 +4,7 @@ import "./_card-table.css";
 const Card = ({ link, title, image, description }) => {
   return (
     <a href={link} className="idp-card" title={title}>
-      <img src={image} alt={`${title} icon`} className="idp-card-image" />
+      {image && <img src={image} alt={`${title} icon`} className="idp-card-image" />}
       <h3>{title}</h3>
       <p>{description}</p>
     </a>
