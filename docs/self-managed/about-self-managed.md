@@ -12,7 +12,7 @@ import { gettingStartedCards, installCards } from './react-components/\_card-dat
 <h3 style={{marginTop: '-10px', marginBottom: '60px', fontWeight: 'normal'}}>Get started with our self-hosted alternative to Camunda 8 SaaS.</h3>
 
 <div class="double-column-container">
-<div class="double-column-left"  style={{marginRight: '50px', flex: '1.5'}}>
+<div class="double-column-left"  style={{marginRight: '50px', flex: '1.3'}}>
 
 Building process automation solutions with Camunda 8 works similarly regardless of hosting and deployment. Learn how to download, configure, and use Self-Managed components and features.
 
@@ -80,13 +80,10 @@ Learn more about different use cases and scenarios for configuring Camunda 8 bey
 </div>
 <div class="double-column-right" style={{flex: '1'}}>
 
-- [Installing in an air-gapped environment](/self-managed/setup/guides/air-gapped-installation.md)
-- [Running custom connectors](/self-managed/setup/guides/running-custom-connectors.md)
-- [Multi-namespace deployment](/self-managed/setup/guides/multi-namespace-deployment.md)
-- [Verifying Camunda 8 installation with a demo app](/self-managed/setup/guides/installing-payment-example.md)
-- [Inject custom Kubernetes manifests](/self-managed/setup/guides/add-extra-manifests.md)
-- [Prefix Elasticsearch indices](/self-managed/setup/guides/configure-elastcisearch-prefix-indices.md)
-- [Managing secrets in Helm charts](/self-managed/setup/guides/secret-management.md)
+- [Configure flow control](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md)
+- [Multi-region](/self-managed/operational-guides/multi-region/dual-region-ops.md)
+- [Monitoring](/self-managed/operational-guides/monitoring/log-levels.md)
+- [Troubleshooting](/self-managed/operational-guides/troubleshooting/troubleshooting.md)
 
 </div>
 </div>
