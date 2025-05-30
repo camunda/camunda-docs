@@ -1,6 +1,6 @@
 import IconConfig from "../assets/icon-config.png";
-import IconPrereqs from "../assets/icon-config.png";
-import IconExample from "../assets/icon-config.png";
+import IconRefArch from "../assets/icon-sm-refarch.png";
+import IconUpdate from "../assets/icon-sm-update.png";
 import IconC8Run from "../assets/icon-sm-c8run.png";
 import IconDocker from "../assets/icon-sm-docker.png";
 import IconKubernetes from "../assets/icon-sm-kubernetes.png";
@@ -42,14 +42,14 @@ export const installCards = [
   {
     link: "../reference-architecture",
     title: "Reference architectures",
-    image: IconPrereqs,
+    image: IconRefArch,
     description:
       "Deployment guidance for enterprise architects, developers, and IT.",
   },
   {
     link: "../update",
     title: "Update",
-    image: IconExample,
+    image: IconUpdate,
     description:
       "Learn how to upgrade via Helm and update to a newer version.",
   },

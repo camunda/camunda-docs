@@ -39,7 +39,7 @@ Learn how to install and deploy, and update Camunda 8 Self-Managed locally and i
 
 <CardGrid card={installCards} />
 
-## Configuration and deployment user guides
+## Configuration guides
 
 Learn more about different use cases and scenarios for configuring Camunda 8 beyond the default values.
 
