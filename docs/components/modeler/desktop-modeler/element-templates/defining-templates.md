@@ -698,7 +698,7 @@ You can define a category to group templates in the element template selection l
 ```
 
 ::note
-The category is optional. If not defined, the template will be displayed in the `Other items` section.
+The category is optional. If not defined, the template will be displayed in the `Templates` section.
 The ID of the category must be formatted with a kebab-case, e.g., `connectors`, `user-tasks`, etc.
 :::
 
