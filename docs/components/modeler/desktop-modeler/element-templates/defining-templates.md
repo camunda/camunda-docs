@@ -675,6 +675,32 @@ The placeholder is displayed when a field is empty:
   ]
 ```
 
+### Categories
+
+You can define a category to group templates in the element template selection list. The category is defined as an object with `id` and `name` properties.
+
+```json
+[
+  {
+    "name": "REST connector",
+    "id": "io.camunda.examples.RestConnector",
+    "description": "A REST API invocation task.",
+    "appliesTo": ["bpmn:ServiceTask"],
+    "category": {
+      "id": "connectors",
+      "name": "Connectors"
+    },
+    "properties": [
+      ...
+    ]
+  }
+]
+```
+::note
+The category is optional. If not defined, the template will be displayed in the `Other items` section.
+The ID of the category must be formatted with a kebab-case, e.g., `connectors`, `user-tasks`, etc.
+:::
+
 ### Icons
 
 It is possible to define custom icons to update the visual appearance of elements after applying an element template.
@@ -699,7 +725,9 @@ It is possible to define custom icons to update the visual appearance of element
 
 ![Icons](./img/icons.png)
 
+::tip
 The icon contents must be a valid [data](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs) or HTTP(s) URL. We recommend using square icons as they get rendered 18x18 pixels on the canvas and 32x32 pixels in the properties panel.
+:::
 
 ### Display all entries
 
