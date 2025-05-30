@@ -415,6 +415,22 @@ module.exports = {
           },
           items: [
             {
+              "Agentic AI": [
+                {
+                  type: "category",
+                  label: "AI Agent",
+                  link: {
+                    type: "doc",
+                    id: "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent",
+                  },
+                  items: [
+                    "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-example",
+                  ],
+                },
+                "components/connectors/out-of-the-box-connectors/agentic-ai-ad-hoc-tools-schema-resolver",
+              ],
+            },
+            {
               "Amazon AWS": [
                 "components/connectors/out-of-the-box-connectors/amazon-bedrock",
                 "components/connectors/out-of-the-box-connectors/amazon-comprehend",
