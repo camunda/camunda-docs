@@ -5,20 +5,71 @@ description: "Step through everything you need to download, configure, and work 
 ---
 
 import Components from './react-components/components.md'
+import OverviewImg from './assets/self-managed-hero.png';
+import CardGrid from './react-components/\_card';
+import { gettingStartedCards, installCards } from './react-components/\_card-data';
 
-:::note
+<div class="double-column-container">
+<div class="double-column-left"  style={{marginRight: '50px', flex: '1.5'}}>
 
-Camunda 8 Self-Managed is not Camunda 7. [Find Camunda 7 documentation here](https://docs.camunda.org).
+Use Camunda 8 Self-Managed as a self-hosted alternative to Camunda 8 SaaS. Building process automation solutions with Camunda 8 works similarly regardless of hosting and deployment.
 
-:::
+- Download, configure, and use Self-Managed components.
+- Learn about features specific to Camunda 8 Self-Managed.
 
-Camunda 8 Self-Managed is a self-hosted alternative to using Camunda 8 SaaS. Building process automation solutions with Camunda 8 works similarly regardless of hosting and deployment.
+<a class="button button--outline button--secondary button--md button--hero get-started" title="Get started with Self-Managed" href="../get-started" style={{marginBottom: '30px', marginTop: '20px'}}>Get started with Self-Managed</a>
 
-For more information on Camunda 8 SaaS, visit [What is Camunda 8?](../components/concepts/what-is-camunda-8.md) If you are new to Camunda 8, we recommend you start your journey with [Camunda 8 SaaS-based guides](../../guides/).
+</div>
+<div class="double-column-right" style={{flex: '1'}}>
 
-The content in this section of the documentation includes:
+<img src={OverviewImg} alt="Image showing Self-Managed components and features" title="Use Camunda 8 Self-Managed as a self-hosted alternative to Camunda 8 SaaS" class="img-noborder img-600 img-transparent fade-in-top-image" style={{marginTop: '0'}}/>
 
-- Everything you need to download, configure, and work with each component of Camunda 8 Self-Managed.
-- Features specific to Camunda 8 Self-Managed.
+</div>
+</div>
 
-To get started with your Self-Managed installation, see our [installation overview](./setup/overview.md).
+## Get started with Camunda 8 Self-Managed
+
+Get started by deploying Self-Managed locally using Camunda 8 Run, Docker Compose, or a local Kubernetes cluster.
+
+<CardGrid card={gettingStartedCards} />
+
+## Install
+
+Learn how to install and deploy, and update Camunda 8 Self-Managed locally and in production.
+
+<CardGrid card={installCards} />
+
+## Configuration and deployment user guides
+
+Learn more about different use cases and scenarios for configuring Camunda 8 beyond the default values.
+
+<div class="double-column-container">
+<div class="double-column-left"  style={{marginRight: '30px', flex: '1'}}>
+
+- [Accessing components without Ingress](/self-managed/setup/guides/accessing-components-without-ingress.md)
+- [Ingress setup](/self-managed/setup/guides/ingress-setup.md)
+- [Using existing Keycloak](/self-managed/setup/guides/using-existing-keycloak.md)
+- [Using existing Elasticsearch](/self-managed/setup/guides/using-existing-elasticsearch.md)
+- [Using Amazon OpenSearch Service](/self-managed/setup/guides/using-existing-opensearch.md)
+- [Configure custom HTTP headers](/self-managed/setup/guides/configure-db-custom-headers.md)
+- [Connect to an OpenID Connect provider](/self-managed/setup/guides/connect-to-an-oidc-provider.md)
+
+</div>
+<div class="double-column-right" style={{flex: '1'}}>
+
+- [Installing in an air-gapped environment](/self-managed/setup/guides/air-gapped-installation.md)
+- [Running custom connectors](/self-managed/setup/guides/running-custom-connectors.md)
+- [Multi-namespace deployment](/self-managed/setup/guides/multi-namespace-deployment.md)
+- [Verifying Camunda 8 installation with a demo app](/self-managed/setup/guides/installing-payment-example.md)
+- [Inject custom Kubernetes manifests](/self-managed/setup/guides/add-extra-manifests.md)
+- [Prefix Elasticsearch indices](/self-managed/setup/guides/configure-elastcisearch-prefix-indices.md)
+- [Managing secrets in Helm charts](/self-managed/setup/guides/secret-management.md)
+
+</div>
+</div>
+
+## Operational guides
+
+## Concepts
+
+## Components
