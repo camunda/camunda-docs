@@ -1,12 +1,12 @@
 ---
 id: overview
-title: "Install Camunda 8 Self-Managed in production environments"
+title: "Install Camunda 8 Self-Managed for production and advanced development setups"
 sidebar_label: "Overview"
-description: "This chapter contains information for users who want to deploy and run Camunda 8 Self-Managed in their self-managed cloud or own on-premise infrastructure in a production environment."
+description: "This chapter contains information for users who want to deploy and run Camunda 8 Self-Managed in their self-managed cloud or own on-premise infrastructure in a production and advanced development environment."
 keywords: ["camunda download", "production installation"]
 ---
 
-This section provides an overview of the available recommendations for installing Camunda 8 Self-Managed in a production-ready environment, whether in a self-managed cloud (public or private) or on on-premises infrastructure.
+This section provides an overview of the available recommendations for installing Camunda 8 Self-Managed in a production-ready environment, whether in a self-managed cloud (public or private) or on on-premises infrastructure. These installation options can also be used to set up advanced development environments that mirror production - such as for CI/CD pipelines, integration testing, or shared development clusters - especially when aligning closely with the production environment is important.
 
 ## Production installations
 
