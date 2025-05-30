@@ -37,7 +37,7 @@ First, an AI Agent connector is added and configured in the process diagram. Nex
 
 ### Configure multi-instance execution
 
-The ad-hoc sub-process must be configured as a [parallel multi-instance](../../modeler/bpmn/multi-instance/multi-instance.md) sub-process.
+The ad-hoc sub-process in this example is configured as a [parallel multi-instance](../../modeler/bpmn/multi-instance/multi-instance.md) sub-process (instead of sequential multi-instance).
 
 This allows:
 
@@ -48,10 +48,6 @@ This allows:
 #### Configure properties
 
 The following properties for the ad-hoc sub-process must be configured. You can use the following suggested values as a starting point and change as required or if dealing with multiple agents within the same process.
-
-:::note
-As multi-instance configuration is the same for each agent, you can reuse a template to make configuration easier.
-:::
 
 - **Input collection**: Set this to the list of tool calls your AI Agent connector returns, for example `agent.toolCalls`.
 - **Input element**: Contains the individual tool call, including LLM-generated input parameters based on the [tool definition](#tool-definitions). Suggested value: `toolCall`. This must be aligned with the `fromAi` function calls in the tool definition.

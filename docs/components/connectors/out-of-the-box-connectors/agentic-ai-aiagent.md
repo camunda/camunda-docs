@@ -11,7 +11,7 @@ Use the **AI Agent** outbound connector to integrate Large Language Models (LLMs
 
 The AI Agent connector enables AI agents to integrate with an LLM to provide interaction/reasoning capabilities. This connector is designed for use with an ad-hoc sub-process in a feedback loop, providing automated user interaction and tool selection.
 
-For example, use this connector to enable an AI agent to autonomously select and execute ad-hoc sub-processes by evaluating the current process context and determining the relevant tasks and tools to use in response. You can also use the AI Agent connector independently, although it is designed to be used with an ad-hoc sub-process to define the tools an AI agent can use.
+For example, use this connector to enable an AI agent to autonomously select and execute tasks within ad-hoc sub-processes by evaluating the current process context and determining the relevant tasks and tools to use in response. You can also use the AI Agent connector independently, although it is designed to be used with an ad-hoc sub-process to define the tools an AI agent can use.
 
 Core features include:
 
@@ -88,9 +88,9 @@ AI Agent: John Doe's credit card has been created successfully.
 
 The following prerequisites are required to use this connector:
 
-| Prerequisite                                      | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| :------------------------------------------------ | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Set up your LLM model provider and authentication | <p>Prior to using this connector, you must have previously set up an account with access and authentication details for the supported LLM model provider you want to use.</p><p>For example:<ul><li><p>To use an LLM model provided by Amazon Bedrock, you must have an AWS account with an access key and secret key to execute `InvokeModel` or `Converse` actions.</p></li><li><p>For OpenAI, you must configure the [OpenAI model](https://platform.openai.com/docs/models) and obtain an OpenAI API key to use for authentication.</p></li></ul></p> |
+| Prerequisite                                      | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| :------------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Set up your LLM model provider and authentication | <p>Prior to using this connector, you must have previously set up an account with access and authentication details for the supported LLM model provider you want to use.</p><p>For example:<ul><li><p>To use an LLM model provided by Amazon Bedrock, you must have an AWS account with an access key and secret key to execute `Converse` actions.</p></li><li><p>For OpenAI, you must configure the [OpenAI model](https://platform.openai.com/docs/models) and obtain an OpenAI API key to use for authentication.</p></li></ul></p> |
 
 ## Configuration
 
@@ -141,11 +141,13 @@ For a list of Amazon Bedrock LLM models, refer to [supported foundation models i
 
 Select this option to use the [OpenAI Chat Completion API](https://platform.openai.com/docs/api-reference/chat).
 
-| Field           | Required | Description                                                                                                                                              |
-| :-------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| OpenAI API Key  | Yes      | Your OpenAI account API Key for authorization.                                                                                                           |
-| Organization ID | No       | For members of multiple organizations. If you belong to multiple organizations, specify the organization ID to use for API requests with this connector. |
-| Project ID      | No       | If you access projects through a legacy user API key, specify the project ID to use for API requests with this connector.                                |
+| Field               | Required | Description                                                                                                                                              |
+| :------------------ | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| OpenAI API Key      | Yes      | Your OpenAI account API Key for authorization.                                                                                                           |
+| Organization ID     | No       | For members of multiple organizations. If you belong to multiple organizations, specify the organization ID to use for API requests with this connector. |
+| Project ID          | No       | If you access projects through a legacy user API key, specify the project ID to use for API requests with this connector.                                |
+| Custom API endpoint | No       | Optional custom API endpoint.                                                                                                                            |
+| Custom headers      | No       | Map of custom headers to add to the request.                                                                                                             |
 
 :::info
 To learn more about authentication to the OpenAPI API, refer to [OpenAPI platform API reference](https://platform.openai.com/docs/api-reference/introduction).
@@ -155,23 +157,21 @@ To learn more about authentication to the OpenAPI API, refer to [OpenAPI platfor
 
 Select the model you want to use for the selected provider, and specify any additional model parameters.
 
-| Field                     | Required | Description                                                                                                                |
-| :------------------------ | :------- | :------------------------------------------------------------------------------------------------------------------------- |
-| Model                     | Yes      | <p>Specify the model ID for the model you want to use.</p><p>Example: `anthropic.claude-3-5-sonnet-20240620-v1:0`</p>      |
-| Maximum tokens            | No       | The maximum number of tokens per request to allow in the generated response.                                               |
-| Maximum Completion Tokens | No       | The maximum number of tokens per request to generate before stopping.                                                      |
-| Temperature               | No       | Floating point number between 0 and 1. The higher the number, the more randomness will be injected into the response.      |
-| top P                     | No       | Floating point number between 0 and 1. Recommended for advanced use cases only (you usually only need to use temperature). |
-| top K                     | No       | Integer greater than 0. Recommended for advanced use cases only (you usually only need to use temperature).                |
+| Field                     | Required | Description                                                                                                                                           |
+| :------------------------ | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Model                     | Yes      | <p>Specify the model ID for the model you want to use.</p><p>Example: `anthropic.claude-3-5-sonnet-20240620-v1:0`</p>                                 |
+| Maximum tokens            | No       | The maximum number of tokens per request to allow in the generated response.                                                                          |
+| Maximum Completion Tokens | No       | The maximum number of tokens per request to generate before stopping.                                                                                 |
+| Temperature               | No       | Floating point number, typically between 0 and 1 (0 and 2 for OpenAI). The higher the number, the more randomness will be injected into the response. |
+| top P                     | No       | Floating point number, typically between 0 and 1. Recommended for advanced use cases only (usually you only need to use temperature).                 |
+| top K                     | No       | Integer greater than 0. Recommended for advanced use cases only (you usually only need to use temperature).                                           |
 
-:::note notes
+:::note
 
-- Different model parameter fields are shown depending on the provider/model you select.
+- Different model parameter fields are shown depending on the provider/model you select. Additionally, some parameters may be different or have different value ranges (for example, OpenAI Temperature uses a number range between 0 to 2, whereas other models use a range between 0 to 1).
+- For more information on each model parameter, refer to the provider documentation links in the element template.
 - Parameters that set maximum values (such as maximum tokens) are considered **per LLM request**, not for the whole conversation. Depending on the provider, the exact meaning of these parameters may vary.
 
-:::
-:::info
-For more information on each optional model parameter, refer to the provider documentation links in the element template UI.
 :::
 
 ### System Prompt
@@ -270,7 +270,7 @@ To learn more about output mapping, see [variable/response mapping](/docs/compon
 
 ### Error handling
 
-If an error occurs, the IDP extraction connector throws an error and includes the error response in the error variable in Operate.
+If an error occurs, the AI Agent connector throws an error and includes the error response in the error variable in Operate.
 
 | Field            | Required | Description                                                                                                                                                        |
 | :--------------- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------- |

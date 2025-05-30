@@ -38,7 +38,7 @@ The following prerequisites are required to use this connector:
 
 ## Tool Definitions
 
-For more information on how to define tools, see the [AI Agent connector](./agentic-ai-aiagent.md) documentation.
+For more information on how to define tools, see the [AI Agent connector](./agentic-ai-aiagent-example.md#tool-definitions) documentation.
 
 ## Response Structure
 
