@@ -7,7 +7,7 @@ description: Connect Web Modeler to your Git repositories to keep your projects 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-Organization owners and administrators can connect their Web Modeler process applications to GitHub, GitLab and Azure DevOps, allowing users to keep their Web Modeler, Desktop Modeler, and official version control projects synced.
+Organization owners and administrators can connect their Web Modeler process applications to GitHub, GitLab, and Azure DevOps, allowing users to keep their Web Modeler, Desktop Modeler, and official version control projects synced.
 
 Once the connection is configured by an organization owner or organization administrator, project administrators and editors can use the built-in button to pull changes from the remote repository, integrate contributions from Desktop Modeler users, and merge their own work.
 
@@ -137,43 +137,43 @@ When successful, your project will display a new **Sync with GitLab** button.
 <TabItem value='azure'>
 
 <h3> Register an App in Microsoft Entra </h3>
+
 :::note
-Web Modeler SaaS supports authenticating against `Microsoft Entra ID (global service)`. Other [national clouds](https://learn.microsoft.com/en-us/entra/identity-platform/authentication-national-cloud#microsoft-entra-authentication-endpoints) can be used in self-managed by setting the environment variable `CAMUNDA_MODELER_GITSYNC_AZURE_AUTHORITY_BASE_PATH`.
+Web Modeler SaaS supports authenticating against `Microsoft Entra ID (global service)`. Other [national clouds](https://learn.microsoft.com/en-us/entra/identity-platform/authentication-national-cloud#microsoft-entra-authentication-endpoints) can be used in Self-Managed by setting the environment variable `CAMUNDA_MODELER_GITSYNC_AZURE_AUTHORITY_BASE_PATH`.
 :::
 
-Web Modeler requires an application to be registered in Microsoft Entra ID to sync changes with your Azure repository.
+Web Modeler requires an application to be registered with Microsoft Entra ID to sync changes with your Azure repository.
 
-1. Follow the [Microsoft Entra ID](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app) documentation to register an application.
+1. Follow the [Microsoft Entra ID](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app) documentation to register an application. Be sure to save your `Application (client) ID` and `Directory (tenant) ID`.
 
-2. Write down your `Application (client) ID` and `Directory (tenant) ID`.
+2. Configure your application to use [client-certificate credentials](https://learn.microsoft.com/en-us/entra/identity-platform/how-to-add-credentials?tabs=certificate). You need a PEM-encoded, RSA-encrypted private key and a PEM-encoded certificate in `X509` format generated from that key. You will need both later when configuring the connection in Web Modeler.
 
-3. Configure your application to use [client-certificate credentials](https://learn.microsoft.com/en-us/entra/identity-platform/how-to-add-credentials?tabs=certificate). You need a PEM-encoded, RSA-encrypted private key and a PEM-encoded certificate in `X509` format generated from that key. You will need both later when configuring the connection in Web Modeler.
-
-4. Configure [scoped permissions](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-configure-app-access-web-apis) to your app so it can update the content of your Azure repositories. Make sure that `Azure DevOps > vso.code_write` is configured, and that `Admin consent required` is set to `No`.
+3. Configure [scoped permissions](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-configure-app-access-web-apis) for your app so it can update the content of your Azure repositories. Ensure `Azure DevOps > vso.code_write` is configured, and `Admin consent required` is set to `No`.
 
 <h3> Grant access to the App in the desired Azure projects</h3>
 
 Follow the [documentation on how to add users](https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/add-organization-users?view=azure-devops&tabs=browser#add-users-to-your-organization) to add the created application to your Azure organization.
 
-Make sure that:
+Ensure the following:
 
 - _Access level_ is set to `Basic`.
 - Add this to all projects that will be using this integration.
-- _Azure DevOps Groups_ is set to `Project Contributors` .
+- _Azure DevOps Groups_ is set to `Project Contributors`.
 
 <h3> Configure Azure in Web Modeler </h3>
+
 :::note
 When using a self-hosted Azure DevOps Server instance, ensure the environment variable `CAMUNDA_MODELER_GITSYNC_AZURE_BASEURL` is set to the API URL of your self-hosted Azure DevOps Server instance.
 :::
 
-1. Within Web Modeler, navigate to the process application you would like to connect to Azure, and click **Connect repository**.
+1. Within Web Modeler, navigate to the process application you would like to connect to Azure, and select **Connect repository**.
 
 2. Select the **Azure** tile, located at the top of the modal.
 
 3. Provide the following information in the **Configure Azure** modal:
 
-   - **Application (client) ID:** Can be found in the applications registration page.
-   - **Directory (tenant) ID:** Your Microsoft Entra tenant unique identifier. Can also be found in the applications registration page.
+   - **Application (client) ID:** Can be found on the applications registration page.
+   - **Directory (tenant) ID:** Your Microsoft Entra tenant unique identifier. Can also be found on the applications registration page.
    - **Private Key:** The private key used to generate the certificate in PEM format.
    - **Certificate:** The certificate used to register the application in PEM format.
    - **Repository URL:** The base URL of the repository you want to sync with, for example `https://dev.azure.com/camunda/my-project/_git/example-repo`. The URL cannot contain the `.git` extension or a folder path. By default, the first repository you create will have the same name as the project and the URL won't explicitly have the project name in it, for example `https://dev.azure.com/camunda/_git/example-repo`.
@@ -214,7 +214,7 @@ Existing Git configurations can be edited from the gear icon beside the **Sync w
 To switch between Git providers, update your configuration with the following steps:
 
 1. Disconnect your current Git provider by clicking the gear icon beside the **Sync with _GitProvider_** button, and clicking the **Delete provider connection** button at the bottom of the modal.
-2. After confirming the operation, open the **Connect repository** modal and provide the necessary information for the new Git provider, following the steps outlined for [GitHub](./git-sync.md?platform=github#connect-to-a-remote-repository), [GitLab](./git-sync.md?platform=gitlab#connect-to-a-remote-repository) or [Azure](./git-sync.md?platform=azure#connect-to-a-remote-repository).
+2. After confirming the operation, open the **Connect repository** modal and provide the necessary information for the new Git provider, following the steps outlined for [GitHub](./git-sync.md?platform=github#connect-to-a-remote-repository), [GitLab](./git-sync.md?platform=gitlab#connect-to-a-remote-repository), or [Azure](./git-sync.md?platform=azure#connect-to-a-remote-repository).
 
 ## Advanced use cases
 

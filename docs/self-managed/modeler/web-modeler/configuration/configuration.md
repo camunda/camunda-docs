@@ -145,7 +145,7 @@ Refer to the [advanced SSL configuration guide](./ssl.md) for additional details
 
 ### Git Sync
 
-Web Modeler supports syncing files via [Git Sync](../../../../components/modeler/web-modeler/git-sync.md). You need to provide the base url for you provider if you are using a self-hosted GitLab, GitHub or Azure DevOps Server instance.
+Web Modeler supports syncing files via [Git Sync](../../../../components/modeler/web-modeler/git-sync.md). Provide the base URL for your provider if you are using a self-hosted GitLab, GitHub, or Azure DevOps Server instance.
 
 | Provider      | Environment variable                                | Description                                                                                                                   | Default value                       |
 | ------------- | --------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- |
