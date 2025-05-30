@@ -277,6 +277,23 @@ a.idp-small-link {
   }
 }
 
+.fade-in-top-image {
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: fadeInTop 2s forwards;
+  background-color: transparent;
+}
+[data-theme="dark"] .fade-in-top-image {
+  background-color: transparent !important;
+}
+
+@keyframes fadeInTop {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .filter-badges {
   display: inline-block;
   margin-right: 5px;
