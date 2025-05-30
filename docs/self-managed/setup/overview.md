@@ -15,7 +15,7 @@ This section provides an overview of the available recommendations for installin
 - [**Manual**](./deploy/local/manual.md): Run each Java application manually on virtual machines or bare-metal servers with a supported Java Virtual Machine (JVM). This method offers a significant amount of flexibility but requires manual configuration of component interactions. It is not recommended unless necessary, as you will need to configure the details for the components to interact correctly yourself. Windows and macOS are only supported for development environments, not for production.
 
 :::info
-If you're looking to run Camunda 8 in a local environment for pure development or evaluation purposes, see [**Run locally**](../run-locally/index.md)
+To run Camunda 8 in a local environment for development or evaluation purposes only, review [running locally](../run-locally/index.md)
 :::
 
 ## Supported environments
