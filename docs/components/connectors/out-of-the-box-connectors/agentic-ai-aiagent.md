@@ -247,17 +247,16 @@ Despite these limits, you must closely monitor your LLM API usage and cost, and 
 
 ### Response
 
-Configure which kind of response you want to receive from the AI Agent connector for further processing.
-The LLM call will typically return one text content block plus additional metadata such as token
-usage, but could contain multiple content blocks, depending on the LLM provider and selected model.
+Configure the response from the AI Agent connector for further processing.
+
+For example, the LLM call typically returns one text content block plus additional metadata such as token usage, but could contain multiple content blocks, depending on the LLM provider and selected model.
 
 | Field                     | Required | Description                                                                                                                                                                                                                     |
 | :------------------------ | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Include text output       | No       | Returns the **first text block** returned by the LLM as `responseText`. This is typically a good choice if you want to use the agent's text output for further processing and is selected by default.                           |
-| Include assistant message | No       | Returns the whole message returned by the LLM (including potential additional content blocks and metadata) as `responseMessage`. You can use this for more advanced use cases where you need more than the first response text. |
+| Include text output       | No       | <p>Returns the **first text block** returned by the LLM as `responseText`.</p><p><ul><li><p>Typically a good option if you want to use the agent's text output for further processing.</p></li><li><p>This option is selected by default. </p></li></ul></p>                          |
+| Include assistant message | No       | <p>Returns the entire message returned by the LLM as `responseMessage', including any additional content blocks and metadata.</p><p>Select this option if you need more than just the first response text.</p> |
 
-If you'd select both options, the response object would contain both the `responseText` and `responseMessage` fields,
-like in the following example:
+If you select both options, the response object contains both `responseText` and `responseMessage` fields, for example:
 
 ```json
 {
@@ -284,8 +283,7 @@ like in the following example:
 }
 ```
 
-To retrieve the response text from the `responseMessage` object, you can use the following FEEL expression (assuming the
-response variable is named `agent`):
+To retrieve the response text from the `responseMessage` object, use the following FEEL expression (assuming the response variable is named `agent`):
 
 ```feel
 agent.responseMessage.content[type = "text"][1].text
