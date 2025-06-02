@@ -74,6 +74,16 @@ Set the following values for your Ingress configuration:
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/export-ingress-setup-vars.sh
 ```
 
+Additionally, before proceeding, export the following environment variables. These will be used throughout this guide for configuring DNS, certificates, and other Azure resources:
+
+```shell
+export AZURE_SUBSCRIPTION_ID="00000000-0000-0000-0000-000000000000"   # Your Azure Subscription ID where the DNS zone is located
+export AZURE_DNS_RESOURCE_GROUP="your-dns-resource-group"             # The name of the Azure resource group containing your DNS zone
+export AZURE_DNS_ZONE="example.com"                                   # The DNS zone name (e.g., your domain)
+```
+
+These variables will be referenced in later steps, so make sure they are set in your current shell session before continuing.
+
 ### ingress-nginx
 
 [Ingress-nginx](https://github.com/kubernetes/ingress-nginx) is an open-source Kubernetes Ingress controller that provides a way to manage external access to services within a Kubernetes cluster. It acts as a reverse proxy and load balancer, routing incoming traffic to the appropriate services based on rules defined in the Ingress resource.
@@ -92,6 +102,13 @@ The following installs `external-dns` in the `external-dns` namespace via Helm. 
 
 Consider setting `domainFilters` via `--set` to restrict access to certain hosted zones.
 
+To enable external-dns to work with Azure Managed Identities, create the Kubernetes secret directly using the exported environment variables:
+
+```shell
+kubectl -n external-dns create secret generic azure-config-file \
+  --from-literal=azure.json="{\"subscriptionId\":\"$AZURE_SUBSCRIPTION_ID\",\"resourceGroup\":\"$AZURE_DNS_RESOURCE_GROUP\",\"useManagedIdentityExtension\":true}"
+```
+
 :::danger Uniqueness of txtOwnerId for DNS
 
 If you are already running `external-dns` in a different cluster, ensure each instance has a **unique** `txtOwnerId` for the TXT record. Without unique identifiers, the `external-dns` instances will conflict and inadvertently delete existing DNS records.
@@ -102,6 +119,29 @@ In the example below, it's set to `external-dns` and should be changed if this i
 ```shell reference
 https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/install-external-dns.sh
 ```
+
+For externaldns to work with Azure managed identities, need to provide azure.json config file
+
+Create the following file:
+
+```json
+{
+  "subscriptionId": "insert-your-subscription-id",
+  "resourceGroup": "insert-your-resource-group-name",
+  "useManagedIdentityExtension": true
+}
+```
+
+Replace insert-your-subscription-id with the ID of the Azure subscription hosting your Azure DNS.
+Replace insert-your-resource-group-name with the name of the resource group containing your Azure DNS.
+
+Add the configuration file to your Kubernetes cluster as a secret so that external-dns can access it:
+
+```shell
+kubectl -n external-dns create secret generic azure-config-file --from-file=./azure.json
+```
+
+This command creates a Kubernetes secret named azure-config-file in the external-dns namespace, containing the azure.json file.
 
 ### cert-manager
 
