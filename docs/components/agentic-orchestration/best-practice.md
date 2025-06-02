@@ -8,3 +8,5 @@ keywords: ["agentic ai", "AI agents"]
 sentence
 
 ## Agentic orchestration best practice
+
+## Key concepts and terminology

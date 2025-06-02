@@ -7,4 +7,10 @@ keywords: ["agentic ai", "AI agents"]
 
 sentence
 
-## Agentic orchestration design and architecture
+## Plan
+
+## Architecture
+
+## Design
+
+## Implementation

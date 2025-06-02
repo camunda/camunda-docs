@@ -1,10 +1,14 @@
 ---
 id: ai-agents
-title: Integrate AI agents
+title: Build and integrate AI agents
 description: ""
 keywords: ["agentic ai", "AI agents"]
 ---
 
 sentence
 
-## About AI agents
+## What is an AI agent?
+
+## Build and integrate an AI agent
+
+### Components used
