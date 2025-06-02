@@ -78,7 +78,7 @@ The task returns a list of emails in JSON format. Each email object contains the
 - `size`: The size of the email (in bytes).
 
 :::note
-Prior to version 8.8, messageId was stripped of its `<` and `>`. This is no longer the case as of version 8.8.
+As of the 8.8 release, angle brackets (`<` and `>`) are no longer removed from the `messageId`.
 :::
 
 #### Example Response
@@ -131,7 +131,7 @@ The task returns a JSON object containing detailed information about the email:
 - `receivedDateTime`: The email's reception datetime
 
 :::note
-Prior to version 8.8, messageId was stripped of its `<` and `>`. This is no longer the case as of version 8.8.
+As of the 8.8 release, angle brackets (`<` and `>`) are no longer removed from the `messageId`.
 :::
 
 :::note
@@ -198,7 +198,7 @@ After the deletion task is performed, a JSON object is returned to confirm the a
 - `messageId`: The identifier of the email message that was attempted to be deleted.
 
 :::note
-Prior to version 8.8, messageId was stripped of its `<` and `>`. This is no longer the case as of version 8.8.
+As of the 8.8 release, angle brackets (`<` and `>`) are no longer removed from the `messageId`.
 :::
 
 #### Example Response
@@ -287,7 +287,7 @@ object with a field and a value.
 - `messageId`: The identifier of the email message that was attempted to be deleted.
 
 :::note
-Prior to version 8.8, messageId was stripped of its `<` and `>`. This is no longer the case as of version 8.8.
+As of the 8.8 release, angle brackets (`<` and `>`) are no longer removed from the `messageId`.
 :::
 
 #### Example Response
@@ -347,7 +347,7 @@ Upon successfully sending the email, the following JSON response is returned:
 - `messageId`: A unique identifier for the email message.
 
 :::note
-Prior to version 8.8, messageId was stripped of its `<` and `>`. This is no longer the case as of version 8.8.
+As of the 8.8 release, angle brackets (`<` and `>`) are no longer removed from the `messageId`.
 :::
 
 #### Example Response
@@ -411,7 +411,7 @@ The task returns a list of emails in JSON format. Each email object contains the
 - `size`: The size of the email in bytes.
 
 :::note
-Prior to version 8.8, messageId was stripped of its `<` and `>`. This is no longer the case as of version 8.8.
+As of the 8.8 release, angle brackets (`<` and `>`) are no longer removed from the `messageId`.
 :::
 
 #### Example Response
@@ -461,7 +461,7 @@ The task returns a JSON object containing detailed information about the email:
 - `receivedDateTime`: The date and time the email was received.
 
 :::note
-Prior to version 8.8, messageId was stripped of its `<` and `>`. This is no longer the case as of version 8.8.
+As of the 8.8 release, angle brackets (`<` and `>`) are no longer removed from the `messageId`.
 :::
 
 #### Example Response
@@ -521,7 +521,7 @@ The task provides a JSON object in the response, indicating the outcome of the d
 - `messageId`: Reiterates the `messageId` of the email that was targeted for deletion.
 
 :::note
-Prior to version 8.8, messageId was stripped of its `<` and `>`. This is no longer the case as of version 8.8.
+As of the 8.8 release, angle brackets (`<` and `>`) are no longer removed from the `messageId`.
 :::
 
 #### Example Response
@@ -614,7 +614,7 @@ object with a field and a value.
 - `messageId`: The identifier of the email message that was attempted to be deleted.
 
 :::note
-Prior to version 8.8, messageId was stripped of its `<` and `>`. This is no longer the case as of version 8.8.
+As of the 8.8 release, angle brackets (`<` and `>`) are no longer removed from the `messageId`.
 :::
 
 #### Example Response
@@ -649,7 +649,7 @@ Upon successful completion of the move operation, the response contains a JSON o
 - `to`: The target folder to which the email has been moved.
 
 :::note
-Prior to version 8.8, messageId was stripped of its `<` and `>`. This is no longer the case as of version 8.8.
+As of the 8.8 release, angle brackets (`<` and `>`) are no longer removed from the `messageId`.
 :::
 
 #### Example Response
@@ -724,7 +724,7 @@ The task returns a JSON object containing detailed information about the email:
 - `receivedDateTime`: The date and time the email was received.
 
 :::note
-Prior to version 8.8, messageId was stripped of its `<` and `>`. This is no longer the case as of version 8.8.
+As of the 8.8 release, angle brackets (`<` and `>`) are no longer removed from the `messageId`.
 :::
 
 #### Example Response
