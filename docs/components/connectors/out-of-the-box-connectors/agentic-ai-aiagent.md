@@ -305,7 +305,7 @@ An easy approach to get started with modeling your first AI Agent is to use the 
 :::
 
 :::info
-To learn more about output mapping, see [variable/response mapping](/docs/components/connectors/use-connectors/index.md#variableresponse-mapping).
+To learn more about output mapping, see [variable/response mapping](/components/connectors/use-connectors/index.md#variableresponse-mapping).
 :::
 
 ### Error handling
