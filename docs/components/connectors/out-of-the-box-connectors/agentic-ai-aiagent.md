@@ -231,7 +231,7 @@ Configure the Agent's short-term/conversational memory.
 | Field            | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | :--------------- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Agent Context    | Yes      | <p>Specify an agent context variable to store all relevant data for the agent to support a feedback loop between user requests, tool calls, and LLM responses. Make sure this variable points to the `context` variable that is returned from the agent response.</p><p>This is an important variable required to make a feedback loop work correctly. This variable must be aligned with the Output mapping **Result variable** and **Result expression** for this connector.</p><p>Example: `=agent.context`</p> |
-| Maximum messages | No       | <p>Specify the maximum number of messages to keep in context and pass to the LLM on every call.</p><p><ul><li><p>Configuring this is a trade-off between cost/tokens and the context window supported by the used model.</p></li><li><p>When the conversation exceeds the maximum number of messages, oldest messages from past feedback loops will be removed first. The system prompt is always kept in the context.</p></li></ul></p>     |
+| Maximum messages | No       | <p>Specify the maximum number of messages to keep in context and pass to the LLM on every call.</p><p><ul><li><p>Configuring this is a trade-off between cost/tokens and the context window supported by the used model.</p></li><li><p>When the conversation exceeds the maximum number of messages, oldest messages from past feedback loops will be removed first. The system prompt is always kept in the context.</p></li></ul></p>                                                                           |
 
 ### Limits
 
@@ -245,14 +245,60 @@ Set limits for the agent interaction to prevent unexpected behavior or unexpecte
 Despite these limits, you must closely monitor your LLM API usage and cost, and set appropriate limits on the provider side.
 :::
 
+### Response
+
+Configure which kind of response you want to receive from the AI Agent connector for further processing.
+The LLM call will typically return one text content block plus additional metadata such as token
+usage, but could contain multiple content blocks, depending on the LLM provider and selected model.
+
+| Field                     | Required | Description                                                                                                                                                                                                                     |
+| :------------------------ | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Include text output       | No       | Returns the **first text block** returned by the LLM as `responseText`. This is typically a good choice if you want to use the agent's text output for further processing and is selected by default.                           |
+| Include assistant message | No       | Returns the whole message returned by the LLM (including potential additional content blocks and metadata) as `responseMessage`. You can use this for more advanced use cases where you need more than the first response text. |
+
+If you'd select both options, the response object would contain both the `responseText` and `responseMessage` fields,
+like in the following example:
+
+```json
+{
+  "responseText": "Based on the result from the GetDateAndTime function, the current date and time is:\n\nJune 2, 2025, 09:15:38 AM (Central European Summer Time).",
+  "responseMessage": {
+    "role": "assistant",
+    "content": [
+      {
+        "type": "text",
+        "text": "Based on the result from the GetDateAndTime function, the current date and time is:\n\nJune 2, 2025, 09:15:38 AM (Central European Summer Time)."
+      }
+    ],
+    "metadata": {
+      "framework": {
+        "tokenUsage": {
+          "inputTokenCount": 1563,
+          "outputTokenCount": 95,
+          "totalTokenCount": 1658
+        },
+        "finishReason": "STOP"
+      }
+    }
+  }
+}
+```
+
+To retrieve the response text from the `responseMessage` object, you can use the following FEEL expression (assuming the
+response variable is named `agent`):
+
+```feel
+agent.responseMessage.content[type = "text"][1].text
+```
+
 ### Output mapping
 
 Specify the process variables that you want to map and export the AI Agent connector response into.
 
-| Field             | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| :---------------- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Result variable   | Yes      | <p>The result of the AI Agent connector is a context containing the following fields:</p><p><ul><li><p>`context`: The updated **Agent Context**. Make sure you map this to a process variable and re-inject this variable in the **Agent Context** input field if your AI agent is part of a feedback loop.</p></li><li><p>`chatResponse`: The last response provided by the LLM.</p></li><li><p>`toolCalls`: Tool call requests provided by the LLM that need to be routed to the ad-hoc sub-process.</p></li></ul></p> |
-| Result expression | No       | In addition, you can choose to unpack the content of the response into multiple process variables using the **Result expression** field, as a [FEEL Context Expression](/components/concepts/expressions.md).                                                                                                                                                                                                                                                                                                            |
+| Field             | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| :---------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Result variable   | Yes      | <p>The result of the AI Agent connector is a context containing the following fields:</p><p><ul><li><p>`context`: The updated **Agent Context**. Make sure you map this to a process variable and re-inject this variable in the **Agent Context** input field if your AI agent is part of a feedback loop.</p></li><li><p>`toolCalls`: Tool call requests provided by the LLM that need to be routed to the ad-hoc sub-process.</p></li><li><p>`responseText`: The last response text provided by the LLM if the `Include text output` option is enabled in the [Response](#response) section.</p></li><li><p>`responseMessage`: The last response message provided by the LLM if the `Include assistant message` option is enabled in the [Response](#response) section.</p></li></ul></p> |
+| Result expression | No       | In addition, you can choose to unpack the content of the response into multiple process variables using the **Result expression** field, as a [FEEL Context Expression](/components/concepts/expressions.md).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 
 :::tip
 An easy approach to get started with modeling your first AI Agent is to use the result variable (for example, `agent`) and configure the **Agent Context** as `agent.context`.
