@@ -94,6 +94,8 @@ The following installs `ingress-nginx` in the `ingress-nginx` namespace via Helm
 https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/install-ingress-nginx.sh
 ```
 
+For a step-by-step walkthrough (and the full list of Azure-specific annotations) see the Microsoft Learn article [“Create an unmanaged NGINX ingress controller in AKS.”](https://learn.microsoft.com/en-us/troubleshoot/azure/azure-kubernetes/load-bal-ingress-c/create-unmanaged-ingress-controller)
+
 ### external-dns
 
 [External-dns](https://github.com/kubernetes-sigs/external-dns) is a Kubernetes add-on that automates the management of DNS records for external resources, such as load balancers or Ingress controllers. It monitors the Kubernetes resources and dynamically updates the DNS provider with the appropriate DNS records.
