@@ -98,8 +98,16 @@ The following configuration parameters define the settings:
 | camunda.tasklist.elasticsearch.numberOfReplicas | How many replicas Elasticsearch uses for all Tasklist indices. | 0             |
 
 These values are applied only on first startup of Tasklist or during version update. After the Tasklist
-ELS schema is created, settings may be adjusted directly in the ELS template, and the new settings are applied
-to indices created after adjustment.
+ELS schema is created, settings may be adjusted directly in the ELS template:
+
+- Changes to `camunda.tasklist.elasticsearch.numberOfShards` will not be applied to existing indices and index templates.
+- Changes to `camunda.tasklist.elasticsearch.numberOfReplicas` will be applied to existing indices and index templates.
+
+:::warning
+
+Due to a known [bug](https://github.com/camunda/camunda/issues/31238), changes to `camunda.tasklist.elasticsearch.numberOfReplicas` are currently not applied to index templates.
+
+:::
 
 ### Snippet from application.yml
 
@@ -152,6 +160,21 @@ camunda.tasklist:
     gatewayAddress: localhost:26500
 ```
 
+### Intra-cluster secure connection
+
+You can enable intra-cluster TLS secured connections between Tasklist and Zeebe by applying the following configuration properties.
+
+| Name                                                | Description                                                                                                         | Example value                     |
+| :-------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------ | :-------------------------------- |
+| zeebe.gateway.cluster.initialContactPoints          | Zeebe Gateway initial contact points.                                                                               | [gateway-0:26502,gateway-1:26502] |
+| zeebe.gateway.cluster.security.enabled              | Connection should be secure via Transport Layer Security (TLS).                                                     | true                              |
+| zeebe.gateway.cluster.security.certificateChainPath | Path to certificate used by Zeebe. This is necessary when the certificate isn't registered in the operating system. | /path/to/cert.pem                 |
+| zeebe.gateway.cluster.security.privateKeyPath       | Path to certificate's key used by Zeebe.                                                                            | /path/to/private.key              |
+| zeebe.gateway.cluster.advertisedHost                | Advertised hostname in the cluster.                                                                                 | tasklist                          |
+| zeebe.gateway.cluster.memberId                      | Member ID for the cluster.                                                                                          | tasklist                          |
+
+For extended configuration and guidelines, refer to [secure cluster communication](../zeebe-deployment/security/secure-cluster-communication.md) and [gateway configuration](../zeebe-deployment/configuration/gateway.md).
+
 ## Zeebe Elasticsearch or OpenSearch exporter
 
 :::note
@@ -193,7 +216,7 @@ camunda.tasklist:
 ## Monitoring and health probes
 
 Tasklist includes the [Spring Boot Actuator](https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html#production-ready) inside, which
-provides the number of monitoring possibilities (e.g. health check (http://localhost:8080/actuator/health) and metrics (http://localhost:8080/actuator/prometheus) endpoints).
+provides the number of monitoring possibilities (e.g. health check (http://localhost:9600/actuator/health) and metrics (http://localhost:9600/actuator/prometheus) endpoints).
 
 Tasklist uses the following Actuator configuration by default:
 
@@ -212,11 +235,11 @@ management.endpoints.web.exposure.include: health, prometheus, loggers, usage-me
 
 With this configuration, the following endpoints are available for use out of the box:
 
-`<server>:8080/actuator/prometheus` Prometheus metrics
+`<server>:9600/actuator/prometheus` Prometheus metrics
 
-`<server>:8080/actuator/health/liveness` Liveness probe
+`<server>:9600/actuator/health/liveness` Liveness probe
 
-`<server>:8080/actuator/health/readiness` Readiness probe
+`<server>:9600/actuator/health/readiness` Readiness probe
 
 ### Example snippets to use Tasklist probes in Kubernetes
 
@@ -228,7 +251,7 @@ For details to set Kubernetes probes parameters, see [Kubernetes configure probe
 readinessProbe:
   httpGet:
     path: /actuator/health/readiness
-    port: 8080
+    port: 9600
   initialDelaySeconds: 30
   periodSeconds: 30
 ```
@@ -239,7 +262,7 @@ readinessProbe:
 livenessProbe:
   httpGet:
     path: /actuator/health/liveness
-    port: 8080
+    port: 9600
   initialDelaySeconds: 30
   periodSeconds: 30
 ```
@@ -294,7 +317,7 @@ The log level for Tasklist can be changed by following the [Setting a Log Level]
 #### Set all Tasklist loggers to DEBUG
 
 ```shell
-curl 'http://localhost:8080/actuator/loggers/io.camunda.tasklist' -i -X POST \
+curl 'http://localhost:9600/actuator/loggers/io.camunda.tasklist' -i -X POST \
 -H 'Content-Type: application/json' \
 -d '{"configuredLevel":"debug"}'
 ```
@@ -370,4 +393,19 @@ To disable CSRF protection, set the configuration property `camunda.tasklist.csr
 camunda:
   tasklist:
     csrfPreventionEnabled: false
+```
+
+## Allow non-self assignment
+
+:::danger
+This disables an intentional security mechanism and should only be used in development environments with no Identity installed.
+:::
+
+To allow users to assign other users to tasks, set the configuration property `camunda.tasklist.feature-flag.allow-non-self-assignment` to `true`.
+
+```yaml
+camunda:
+  tasklist:
+    feature-flag:
+      allow-non-self-assignment: true
 ```

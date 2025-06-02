@@ -18,9 +18,9 @@ In Self-Managed, you are prompted to select from the clusters defined in your We
 
 A Play environment is then started that utilizes your selected development cluster in SaaS, or the specified cluster in a Self-Managed setup.
 
-The current version of the active process and all its dependencies, like called processes or DMN files, are automatically deployed to the Play environment. An error or warning is raised if a file fails to deploy, is missing, or a Connector secret isn’t filled out.
+The current version of the active process and all its dependencies, like called processes or DMN files, are automatically deployed to the Play environment. An error or warning is raised if a file fails to deploy, is missing, or a connector secret isn’t filled out.
 
-In SaaS, Play uses Connector secrets from your selected cluster. Connector secrets are not currently supported in Self-Managed.
+In SaaS, Play uses connector secrets from your selected cluster. connector secrets are not currently supported in Self-Managed.
 
 ## Get started with Play
 
@@ -46,7 +46,7 @@ The **Instance History** panel tracks the path taken throughout the diagram.
 
 The **Variables** panel tracks the data collected. Global variables are shown by default. To view local variables, select the corresponding task or event. Variables can be edited or added here, and Play supports JSON format to represent complex data.
 
-Play executes all logic of the process and its linked files, such as FEEL, forms, DMN tables, and outbound Connectors.
+Play executes all logic of the process and its linked files, such as FEEL, forms, DMN tables, and outbound connectors.
 
 Actions in Play can be initiated through Operate, Tasklist, or external APIs. For example, you can complete a user task via Tasklist, finish a service task using an external job worker, or cancel/modify your instance through Operate, with all changes reflected in Play.
 
@@ -90,9 +90,9 @@ Play's rewind operation currently does not support the following elements:
 
 - If you completed an unsupported element before rewinding, you will rewind farther than expected.
 - Play rewinds to an element, not to an element instance. For example, if you wanted to rewind your process to a sequential multi-instance service task which ran five times, it will rewind your process to the first instance of that service task.
-- Play rewinds processes by initiating a new instance and executing each element. However, if any element behaves differently from the previous execution, such as a Connector returning a different result, the rewind may fail.
+- Play rewinds processes by initiating a new instance and executing each element. However, if any element behaves differently from the previous execution, such as a connector returning a different result, the rewind may fail.
 
-## Scenarios
+## Scenarios {#scenarios}
 
 Use scenarios to quickly rerun processes while tracking test coverage.
 
@@ -183,8 +183,8 @@ Depending on the BPMN element, there may be a different action:
 
 - **User tasks** with an embedded form are displayed on click. However, you cannot track assignment logic.
 - **Call activities** can be navigated into and performed.
-- **Manual tasks**, **undefined tasks**, **script tasks**, **business rule tasks**, **gateways**, **outbound Connectors** and other BPMN elements that control the process’s path are automatically completed based on their configuration.
-- **Service tasks**, **inbound Connectors**, message-related tasks, or events are simulated on click or triggered from an external client. However, Play attempts message correlation based on the process context but cannot infer keys from FEEL expressions. Therefore, these keys must be manually entered by publishing a message using secondary actions.
+- **Manual tasks**, **undefined tasks**, **script tasks**, **business rule tasks**, **gateways**, **outbound connectors** and other BPMN elements that control the process’s path are automatically completed based on their configuration.
+- **Service tasks**, **inbound connectors**, message-related tasks, or events are simulated on click or triggered from an external client. However, Play attempts message correlation based on the process context but cannot infer keys from FEEL expressions. Therefore, these keys must be manually entered by publishing a message using secondary actions.
 - Many action icons have secondary actions. For example, **user tasks** can be completed with variables rather than a form, and **service tasks** can trigger an error event.
 
 ## Operate vs. Play
@@ -212,7 +212,7 @@ Additionally, within their organization, users need to have a [role](/components
 
 In Self-Managed, Play is controlled by the `PLAY_ENABLED` [configuration property](/self-managed/modeler/web-modeler/configuration/configuration.md#feature-flags) in Web Modeler. This is `true` by default for the Docker and Kubernetes distributions.
 
-Prior to the 8.6 release, Play can be accessed by installing the 8.6.0-alpha [Helm charts](https://github.com/camunda/camunda-platform-helm/tree/main/charts/camunda-platform-alpha), or running the 8.6.0-alpha [Docker Compose](https://github.com/camunda/camunda-platform/tree/main/docker-compose/camunda-8.6) configuration.
+Prior to the 8.6 release, Play can be accessed by installing the 8.6.0-alpha [Helm charts](https://github.com/camunda/camunda-platform-helm/blob/camunda-platform-10.4.0/charts/camunda-platform-alpha), or running the 8.6.0-alpha [Docker Compose](https://github.com/camunda/camunda-distributions/tree/main/docker-compose) configuration.
 
 ### Features
 
@@ -229,9 +229,9 @@ After selecting the **Play** tab in Self-Managed, you are prompted to select fro
 
 - Play does not work with a custom OIDC provider.
 - The environment variables `CAMUNDA_CUSTOM_CERT_CHAIN_PATH`, `CAMUNDA_CUSTOM_PRIVATE_KEY_PATH`, `CAMUNDA_CUSTOM_ROOT_CERT_PATH`, and `CAMUNDA_CUSTOM_ROOT_CERT_STRING` can be set in Docker or Helm chart setups. However, these configurations have not been tested with Play's behavior, and therefore are not supported when used with Play.
-- Play cannot check the presence of Connector secrets in Self-Managed setups.
+- Play cannot check the presence of connector secrets in Self-Managed setups.
   If a secret is missing, Play will show an incident at runtime.
-  Learn more about [configuring Connector secrets](/self-managed/connectors-deployment/connectors-configuration.md#secrets).
+  Learn more about [configuring connector secrets](/self-managed/connectors-deployment/connectors-configuration.md#secrets).
 
 ## Play Usage and Billing Considerations
 

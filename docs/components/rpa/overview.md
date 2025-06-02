@@ -13,3 +13,7 @@ Camunda's RPA functionality is built around a standalone RPA worker and [Robot F
 Check out the [getting started guide](./getting-started.md) or read up on setting up your workers for [production use cases](./production.md).
 
 You can also find additional details on RPA and leave feedback via the [RPA product roadmap](https://roadmap.camunda.com/c/212-rpa-1-0).
+
+:::note
+Before getting started, review the [current known issues for RPA](https://github.com/camunda/rpa-worker/discussions/categories/known-issues) to ensure environment compatibility.
+:::

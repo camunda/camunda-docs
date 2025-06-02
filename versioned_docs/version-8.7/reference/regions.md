@@ -10,7 +10,7 @@ When you [create a cluster](/components/console/manage-clusters/create-cluster.m
 
 The following regions are available for customers on Trial, Starter, and Enterprise Plans. Enterprise customers can also discuss custom regions with their Customer Success Manager.
 
-<img src={RegionMapImg} alt="World map showing the location of each GCP and AWS region" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}}/>
+<img src={RegionMapImg} alt="World map showing the location of each GCP and AWS region" class="img-noborder"/>
 
 :::note
 
@@ -45,9 +45,3 @@ The following AWS regions are currently supported in Camunda 8 SaaS.
 | North America, Virginia (us-east-1) | _Not available_          |
 
 To learn more about each region code/location, refer to [AWS regions and availability zones](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/).
-
-### Known limitations
-
-The following limitation currently exists for AWS regions:
-
-- HTTP connectors continue to route through GCP.

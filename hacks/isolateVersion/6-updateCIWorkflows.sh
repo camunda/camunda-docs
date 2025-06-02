@@ -13,13 +13,16 @@ sed -i '' "/tags:/a\\
       - \"$ARCHIVED_VERSION.[0-9]+\"
 " .github/workflows/publish-prod.yaml
 
-#   c. add `unsupported.` to docs URLs
+#   c. build-docs: remove the trigger-crawl job.
+sed -i '' '/trigger-crawl:/,$d' .github/workflows/publish-prod.yaml
+
+#   d. add `unsupported.` to docs URLs
 sed -i '' 's/https:\/\/docs.camunda.io/https:\/\/unsupported.docs.camunda.io/' .github/workflows/publish-prod.yaml
 
-#   d. replace the main docs remote_path with this isolated version's remote_path.
+#   e. replace the main docs remote_path with this isolated version's remote_path.
 sed -i '' "s/remote_path: \${{ secrets.AWS_PROD_PUBLISH_PATH }}/remote_path: \${{ secrets.AWS_PROD_PUBLISH_PATH_UNSUPPORTED }}\/$ARCHIVED_VERSION/g" .github/workflows/publish-prod.yaml
 
-#   e. update `DOCS_SITE_BASE_URL` to specify isolated version
+#   f. update `DOCS_SITE_BASE_URL` to specify isolated version
 sed -i '' "s/DOCS_SITE_BASE_URL: \//DOCS_SITE_BASE_URL: \/$ARCHIVED_VERSION\//" .github/workflows/publish-prod.yaml
 
 # 3. publish-stage:
@@ -28,7 +31,6 @@ sed -i '' "s/DOCS_SITE_BASE_URL: \//DOCS_SITE_BASE_URL: \/$ARCHIVED_VERSION\//" 
 sed -i '' "s/- \"main\"/- \"unsupported\/$ARCHIVED_VERSION\"/" .github/workflows/publish-stage.yaml
 
 #   b. add `unsupported.` to docs URLs
-sed -i '' 's/https:\/\/docs.camunda.io/https:\/\/unsupported.docs.camunda.io/' .github/workflows/publish-stage.yaml
 sed -i '' 's/https:\/\/stage.docs.camunda.io/https:\/\/stage.unsupported.docs.camunda.io/' .github/workflows/publish-stage.yaml
 
 #   c. replace `${{ secrets.AWS_STAGE_PUBLISH_PATH }}` with `${{ secrets.AWS_STAGE_PUBLISH_PATH_UNSUPPORTED }}/{version}`

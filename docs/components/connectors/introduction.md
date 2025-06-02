@@ -1,7 +1,7 @@
 ---
 id: introduction-to-connectors
 title: Connectors
-description: "A Connector is a reusable building block that performs the integration with an external system and works out of the box."
+description: "A connector is a reusable building block that performs the integration with an external system and works out of the box."
 keywords: [bridge, reusable component, low code]
 ---
 
@@ -17,7 +17,7 @@ import { gettingStartedCards, customConnectorCards, latestConnectorCards, latest
 
 <p><a title="Find a Camunda connector" href="../out-of-the-box-connectors/available-connectors-overview"><img src={OverviewImg} alt="Get started" style={{border:0,padding:0,paddingLeft:20,margin:0,float: 'right', width: '40%'}} className="fade-in-top-image"/></a>Camunda connectors are reusable building blocks you can use to easily connect processes to external systems, applications, and data.</p>
 
-- Use a [Slack](/components/connectors/out-of-the-box-connectors/slack.md) or [Microsoft Teams](/components/connectors/out-of-the-box-connectors/microsoft-teams.md) Connector to notify people of pending or completed processes in a human task orchestration onboarding flow.
+- Use a [Slack](/components/connectors/out-of-the-box-connectors/slack.md) or [Microsoft Teams](/components/connectors/out-of-the-box-connectors/microsoft-teams.md) connector to notify people of pending or completed processes in a human task orchestration onboarding flow.
 - In microservices orchestration, use a [Kafka](/components/connectors/out-of-the-box-connectors/kafka.md) connector to add real-time messaging to your automated processes.
 
 Connectors are often configured as a [BPMN process](/components/concepts/processes.md) task, with the required integration parameters already set up for easy configuration. This helps remove the need for you to write custom integration programming code.

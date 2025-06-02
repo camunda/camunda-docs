@@ -186,31 +186,26 @@ Now, follow these steps to create the S3 bucket with versioning enabled:
 
 2. Run the following command to create an S3 bucket for storing your Terraform state. Make sure to use a unique bucket name and set the `AWS_REGION` environment variable beforehand:
 
-   ```bash
-   # Replace "my-eks-tf-state" with your unique bucket name
-   export S3_TF_BUCKET_NAME="my-eks-tf-state"
-
-   aws s3api create-bucket --bucket "$S3_TF_BUCKET_NAME" --region "$AWS_REGION" \
-     --create-bucket-configuration LocationConstraint="$AWS_REGION"
+   ```bash reference
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/s3-bucket/s3-bucket-creation.sh
    ```
 
 3. Enable versioning on the S3 bucket to track changes and protect the state file from accidental deletions or overwrites:
 
-   ```bash
-   aws s3api put-bucket-versioning --bucket "$S3_TF_BUCKET_NAME" --versioning-configuration Status=Enabled --region "$AWS_REGION"
+   ```bash reference
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/s3-bucket/s3-bucket-versioning.sh
    ```
 
 4. Secure the bucket by blocking public access:
 
-   ```bash
-   aws s3api put-public-access-block --bucket "$S3_TF_BUCKET_NAME" --public-access-block-configuration \
-     "BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true" --region "$AWS_REGION"
+   ```bash reference
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/s3-bucket/s3-bucket-private.sh
    ```
 
 5. Verify versioning is enabled on the bucket:
 
-   ```bash
-   aws s3api get-bucket-versioning --bucket "$S3_TF_BUCKET_NAME" --region "$AWS_REGION"
+   ```bash reference
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/s3-bucket/s3-bucket-verify.sh
    ```
 
 This S3 bucket will now securely store your Terraform state files with versioning enabled.
@@ -221,12 +216,8 @@ Once your authentication is set up, you can initialize your Terraform project. T
 
 Configure the backend and download the necessary provider plugins:
 
-```bash
-export S3_TF_BUCKET_KEY="camunda-terraform/terraform.tfstate"
-
-echo "Storing terraform state in s3://$S3_TF_BUCKET_NAME/$S3_TF_BUCKET_KEY"
-
-terraform init -backend-config="bucket=$S3_TF_BUCKET_NAME" -backend-config="key=$S3_TF_BUCKET_KEY"
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/s3-bucket/s3-bucket-tf-init.sh
 ```
 
 Terraform will connect to the S3 bucket to manage the state file, ensuring remote and persistent storage.
@@ -454,8 +445,8 @@ We strongly recommend managing sensitive information such as the OpenSearch, Aur
 
 2. Preform a final initialization for anything changed throughout the guide:
 
-   ```bash
-   terraform init -backend-config="bucket=$S3_TF_BUCKET_NAME" -backend-config="key=$S3_TF_BUCKET_KEY"
+   ```bash reference
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/s3-bucket/s3-bucket-tf-init.sh#L7
    ```
 
 3. Plan the configuration files:
@@ -492,11 +483,12 @@ kubectl get nodes
 
 Create a namespace for Camunda:
 
-```bash
-kubectl create namespace camunda
+```shell
+export CAMUNDA_NAMESPACE="camunda"
+kubectl create namespace "$CAMUNDA_NAMESPACE"
 ```
 
-In the remainder of the guide, we reference the `camunda` namespace to create some required resources in the Kubernetes cluster, such as secrets or one-time setup jobs.
+In the remainder of the guide, we reference the `CAMUNDA_NAMESPACE` variable as the namespace to create some required resources in the Kubernetes cluster, such as secrets or one-time setup jobs.
 
 ### Export values for the Helm chart
 
@@ -565,7 +557,7 @@ The choice depends on your infrastructure setup and security preferences. In thi
    After running the above command, you can verify that the secret was created successfully by using:
 
    ```bash
-   kubectl get secret setup-db-secret -o yaml --namespace camunda
+   kubectl get secret setup-db-secret -o yaml --namespace "$CAMUNDA_NAMESPACE"
    ```
 
    This should display the secret with the base64 encoded values.
@@ -583,7 +575,7 @@ The choice depends on your infrastructure setup and security preferences. In thi
    After running the above command, you can verify that the secret was created successfully by using:
 
    ```bash
-   kubectl get secret setup-db-secret -o yaml --namespace camunda
+   kubectl get secret setup-db-secret -o yaml --namespace "$CAMUNDA_NAMESPACE"
    ```
 
    This should display the secret with the base64 encoded values.
@@ -617,7 +609,7 @@ The choice depends on your infrastructure setup and security preferences. In thi
 4. Apply the manifest:
 
    ```bash
-   kubectl apply -f setup-postgres-create-db.yml --namespace camunda
+   kubectl apply -f setup-postgres-create-db.yml --namespace "$CAMUNDA_NAMESPACE"
    ```
 
    Once the secret is created, the **Job** manifest from the previous step can consume this secret to securely access the database credentials.
@@ -625,7 +617,7 @@ The choice depends on your infrastructure setup and security preferences. In thi
 5. Once the job is created, monitor its progress using:
 
    ```bash
-   kubectl get job/create-setup-user-db --namespace camunda --watch
+   kubectl get job/create-setup-user-db --namespace "$CAMUNDA_NAMESPACE" --watch
    ```
 
    Once the job shows as `Completed`, the users and databases will have been successfully created.
@@ -633,14 +625,14 @@ The choice depends on your infrastructure setup and security preferences. In thi
 6. View the logs of the job to confirm that the users were created and privileges were granted successfully:
 
    ```bash
-   kubectl logs job/create-setup-user-db --namespace camunda
+   kubectl logs job/create-setup-user-db --namespace "$CAMUNDA_NAMESPACE"
    ```
 
 7. Clean up the resources:
 
    ```bash
-   kubectl delete job create-setup-user-db --namespace camunda
-   kubectl delete secret setup-db-secret --namespace camunda
+   kubectl delete job create-setup-user-db --namespace "$CAMUNDA_NAMESPACE"
+   kubectl delete secret setup-db-secret --namespace "$CAMUNDA_NAMESPACE"
    ```
 
 Running these commands cleans up both the job and the secret, ensuring that no unnecessary resources remain in the cluster.
@@ -683,7 +675,7 @@ The standard installation comes already pre-configured, and no additional steps 
    After running the above command, you can verify that the secret was created successfully by using:
 
    ```bash
-   kubectl get secret setup-os-secret -o yaml --namespace camunda
+   kubectl get secret setup-os-secret -o yaml --namespace "$CAMUNDA_NAMESPACE"
    ```
 
    This should display the secret with the base64 encoded values.
@@ -697,7 +689,7 @@ The standard installation comes already pre-configured, and no additional steps 
 1. Apply the manifest:
 
    ```bash
-   kubectl apply -f setup-opensearch-fgac.yml --namespace camunda
+   kubectl apply -f setup-opensearch-fgac.yml --namespace "$CAMUNDA_NAMESPACE"
    ```
 
    Once the secret is created, the **Job** manifest from the previous step can consume this secret to securely access the OpenSearch domain credentials.
@@ -705,7 +697,7 @@ The standard installation comes already pre-configured, and no additional steps 
 1. Once the job is created, monitor its progress using:
 
    ```bash
-   kubectl get job/setup-opensearch-fgac --namespace camunda --watch
+   kubectl get job/setup-opensearch-fgac --namespace "$CAMUNDA_NAMESPACE" --watch
    ```
 
    Once the job shows as `Completed`, the OpenSearch domain is configured correctly for fine grained access control.
@@ -713,14 +705,14 @@ The standard installation comes already pre-configured, and no additional steps 
 1. View the logs of the job to confirm that the privileges were granted successfully:
 
    ```bash
-   kubectl logs job/setup-opensearch-fgac --namespace camunda
+   kubectl logs job/setup-opensearch-fgac --namespace "$CAMUNDA_NAMESPACE"
    ```
 
 1. Clean up the resources:
 
    ```bash
-   kubectl delete job setup-opensearch-fgac --namespace camunda
-   kubectl delete secret setup-os-secret --namespace camunda
+   kubectl delete job setup-opensearch-fgac --namespace "$CAMUNDA_NAMESPACE"
+   kubectl delete secret setup-os-secret --namespace "$CAMUNDA_NAMESPACE"
    ```
 
 Running these commands will clean up both the job and the secret, ensuring that no unnecessary resources remain in the cluster.

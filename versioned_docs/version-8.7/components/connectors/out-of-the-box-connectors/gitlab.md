@@ -1,22 +1,22 @@
 ---
 id: gitlab
-title: GitLab Connector
+title: GitLab connector
 sidebar_label: GitLab
-description: Manage GitLab issues and releases from your BPMN process. Learn about creating a GitLab Connector task and get started.
+description: Manage GitLab issues and releases from your BPMN process. Learn about creating a GitLab connector task and get started.
 ---
 
-The **GitLab Connector** is an outbound Connector that allows you to connect your BPMN service with [GitLab](https://about.gitlab.com/) to manage GitLab issues and releases.
+The **GitLab connector** is an outbound connector that allows you to connect your BPMN service with [GitLab](https://about.gitlab.com/) to manage GitLab issues and releases.
 
 ## Prerequisites
 
-To use the **GitLab Connector**, you must have a GitLab instance and an [access token](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html) of a user
+To use the **GitLab connector**, you must have a GitLab instance and an [access token](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html) of a user
 or a service account on whose behalf a BPMN process will be executed.
 
 :::note
 Use Camunda secrets to avoid exposing your GitLab access token credentials as plain text. Refer to our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
 :::
 
-## Create a GitLab Connector task
+## Create a GitLab connector task
 
 import ConnectorTask from '../../../components/react-components/connector-task.md'
 
@@ -28,7 +28,7 @@ In the **HTTP Endpoint** section, provide a **GitLab base URL**, i.e. `https://g
 
 ## Select operation to execute
 
-The **GitLab Connector** currently supports the following operations.
+The **GitLab connector** currently supports the following operations.
 
 ### Issues
 
@@ -142,7 +142,7 @@ The **GitLab Connector** currently supports the following operations.
 - **Squash:** Flag indicating if commits should be squashed into a single commit when merging.
 - **Target project ID:** Numeric ID of the target project.
 
-## Handle Connector response
+## Handle connector response
 
-The **GitLab Connector** is a protocol Connector, meaning it is built on top of the **HTTP REST Connector**, therefore
+The **GitLab connector** is a protocol connector, meaning it is built on top of the **HTTP REST connector**, therefore
 handling response is still applicable [as described](/components/connectors/protocol/rest.md#response).

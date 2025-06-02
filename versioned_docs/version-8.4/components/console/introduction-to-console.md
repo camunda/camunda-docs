@@ -6,7 +6,7 @@ title: Introduction to Camunda Console
 <span class="badge badge--cloud">Camunda 8 SaaS only</span>
 
 :::note
-As of version 8.4, Console is only available in Camunda 8 SaaS. For Self-Managed content, visit our [Self-Managed documentation](/docs/self-managed/about-self-managed.md).
+As of version 8.4, Console is only available in Camunda 8 SaaS. For Self-Managed content, visit our [Self-Managed documentation](/self-managed/about-self-managed.md).
 :::
 
 Camunda Console is the management application for the included products, such as Modeler, Tasklist, Operate, and Optimize.

@@ -35,7 +35,7 @@ You can choose from three different cluster types:
 | Uptime Percentage<br/> (Orchestration Cluster<strong>\*</strong>)           | 99%                                                                                    | 99.5%                                                     | 99.9%                                                                                 |
 | RTO/RPO<strong>\*\*</strong><br/>(Orchestration Cluster<strong>\*</strong>) | RTO: 8 hours<br/>RPO: 24 hours                                                         | RTO: 2 hours<br/>RPO: 4 hours                             | RTO: < 1 hour<br/>RPO: < 1 hour                                                       |
 
-<p><strong>* Orchestration Cluster</strong> means the components critical for automating processes and decisions, such as Zeebe, Operate, Tasklist, Optimize, and Connectors.</p>
+<p><strong>* Orchestration Cluster</strong> means the components critical for automating processes and decisions, such as Zeebe, Operate, Tasklist, Optimize, and connectors.</p>
 <p><strong>**  RTO (Recovery Time Objective)</strong> means the maximum allowable time that a system or application can be down after a failure or disaster before it must be restored. It defines the target time to get the system back up and running. <strong>RPO (Recovery Point Objective)</strong> means the maximum acceptable amount of data loss measured in time. It indicates the point in time to which data must be restored to resume normal operations after a failure. It defines how much data you can afford to lose. The RTO/RPO figures shown in the table are provided on a best-effort basis and are not guaranteed.</p>
 
 :::info
@@ -78,7 +78,7 @@ You can resume a paused cluster at any time, which typically takes five to ten m
 - Clusters tagged as `test`, `stage`, or `prod` auto-pause if there is no cluster activity for 48 hours.
 - Cluster disk space is cleared when a trial cluster is paused.
   - You will need to redeploy processes to the cluster once it is resumed from a paused state.
-  - Cluster configuration settings (for example, API Clients, Connector secrets, and IP allowlists) are saved so you can easily resume a cluster.
+  - Cluster configuration settings (for example, API Clients, connector secrets, and IP allowlists) are saved so you can easily resume a cluster.
 
 :::tip
 To prevent auto-pause, [upgrade your Free Trial plan](https://camunda.com/pricing/) to a Starter or Enterprise plan.

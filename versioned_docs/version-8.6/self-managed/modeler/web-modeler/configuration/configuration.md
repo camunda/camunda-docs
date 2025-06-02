@@ -24,20 +24,20 @@ Clusters configured using the following options can be selected when deploying f
 
 To add additional clusters, increment the `0` value for each variable (`CAMUNDA_MODELER_CLUSTERS_1_NAME`).
 
-| Environment variable                                 | Description                                                    | Example value                       |
-| ---------------------------------------------------- | -------------------------------------------------------------- | ----------------------------------- |
-| `CAMUNDA_MODELER_CLUSTERS_0_NAME`                    | The name of your cluster.                                      | `test cluster 1`                    |
-| `CAMUNDA_MODELER_CLUSTERS_0_VERSION`                 | The Camunda version used by this cluster.                      | `8.6.0`                             |
-| `CAMUNDA_MODELER_CLUSTERS_0_AUTHENTICATION`          | The authentication to use with your cluster.                   | `OAUTH`, `NONE`                     |
-| `CAMUNDA_MODELER_CLUSTERS_0_URL_ZEEBE_GRPC`          | The address where your cluster can be reached.                 | `grpcs://zeebe-1.example.com:26500` |
-| `CAMUNDA_MODELER_CLUSTERS_0_URL_ZEEBE_REST`          | The address where the Zeebe REST API can be reached.           | `https://zeebe-1.example.com:8080`  |
-| `CAMUNDA_MODELER_CLUSTERS_0_URL_OPERATE`             | The address where Operate can be reached.                      | `https://operate-1.example.com`     |
-| `CAMUNDA_MODELER_CLUSTERS_0_URL_TASKLIST`            | The address where Tasklist can be reached.                     | `https://tasklist-1.example.com`    |
-| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_URL`               | The address of your token issuer.                              | `https://auth.example.com/token`    |
-| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_SCOPE`             | A comma-separated list of the scopes to use with this cluster. | `test-scope`                        |
-| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_AUDIENCE_ZEEBE`    | The permission name for Zeebe.                                 | `zeebe-api`                         |
-| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_AUDIENCE_OPERATE`  | The permission name for Operate.                               | `operate-api`                       |
-| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_AUDIENCE_TASKLIST` | The permission name for Tasklist.                              | `tasklist-api`                      |
+| Environment variable                                 | Description                                                                                        | Example value                       |
+| ---------------------------------------------------- | -------------------------------------------------------------------------------------------------- | ----------------------------------- |
+| `CAMUNDA_MODELER_CLUSTERS_0_NAME`                    | The name of your cluster.                                                                          | `test cluster 1`                    |
+| `CAMUNDA_MODELER_CLUSTERS_0_VERSION`                 | The Camunda version used by this cluster.                                                          | `8.6.0`                             |
+| `CAMUNDA_MODELER_CLUSTERS_0_AUTHENTICATION`          | The authentication to use with your cluster.                                                       | `OAUTH`, `NONE`                     |
+| `CAMUNDA_MODELER_CLUSTERS_0_URL_ZEEBE_GRPC`          | The address where your cluster can be reached.                                                     | `grpcs://zeebe-1.example.com:26500` |
+| `CAMUNDA_MODELER_CLUSTERS_0_URL_ZEEBE_REST`          | The address where the Zeebe REST API can be reached.                                               | `https://zeebe-1.example.com:8080`  |
+| `CAMUNDA_MODELER_CLUSTERS_0_URL_OPERATE`             | The address where Operate can be reached.                                                          | `https://operate-1.example.com`     |
+| `CAMUNDA_MODELER_CLUSTERS_0_URL_TASKLIST`            | The address where Tasklist can be reached.                                                         | `https://tasklist-1.example.com`    |
+| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_URL`               | The address of your token issuer. Only required for authentication type `CLIENT_CREDENTIALS`.      | `https://auth.example.com/token`    |
+| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_SCOPE`             | [optional]<br/>A list of the scopes to use with this cluster separated by spaces.                  | `openid email profile`              |
+| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_AUDIENCE_ZEEBE`    | The OAuth token audience for Zeebe. Only required for authentication type `CLIENT_CREDENTIALS`.    | `zeebe-api`                         |
+| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_AUDIENCE_OPERATE`  | The OAuth token audience for Operate. Only required for authentication type `CLIENT_CREDENTIALS`.  | `operate-api`                       |
+| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_AUDIENCE_TASKLIST` | The OAuth token audience for Tasklist. Only required for authentication type `CLIENT_CREDENTIALS`. | `tasklist-api`                      |
 
 ### Database
 
@@ -207,8 +207,12 @@ The `webapp` component sends certain events (e.g. "user opened diagram", "user l
 | `LOG_LEVEL_CLIENT`   | [optional]<br/>Log level for the client         | `DEBUG`                      |
 | `LOG_LEVEL_WEBAPP`   | [optional]<br/>Log level for the Node.js server | `DEBUG`                      |
 
-The `LOG_LEVEL_*` options can be found [here](/self-managed/operational-guides/monitoring/log-levels.md#understanding-log-levels).
-Refer to the [Advanced Logging Configuration Guide](./logging.md#logging-configuration-for-the-webapp-component) for additional details on how to customize the `webapp` logging output.
+:::info
+
+- For `LOG_LEVEL_*` options, see [understanding log levels](/self-managed/operational-guides/monitoring/log-levels.md#understanding-log-levels).
+- For details on customizing the `webapp` logging output, see [logging configuration for the webapp component](./logging.md#logging-configuration-for-the-webapp-component).
+
+:::
 
 ### SSL
 

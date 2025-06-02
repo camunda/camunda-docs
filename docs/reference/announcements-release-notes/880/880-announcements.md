@@ -23,7 +23,7 @@ From version `8.8.0` forward, the following core [Orchestration cluster](/self-m
 
 ### Installation and deployment updates <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-Camunda 8.8 introduces a streamlined architecture, consolidating core components such as Zeebe, Operate, Tasklist, Optimize, and Connectors into a single deployable unit. Enhanced deployment options are also included, such as new Kubernetes Helm guides, [deployment reference architectures](/self-managed/reference-architecture/reference-architecture.md), and improved support for local development with [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md).
+Camunda 8.8 introduces a streamlined architecture, consolidating core components such as Zeebe, Operate, Tasklist, Optimize, and connectors into a single deployable unit. Enhanced deployment options are also included, such as new Kubernetes Helm guides, [deployment reference architectures](/self-managed/reference-architecture/reference-architecture.md), and improved support for local development with [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md).
 
 You can download the alpha release of the unified package from the Camunda GitHub repository, either as an executable Java application (Camunda Orchestration Core) or a Docker image.
 
@@ -45,6 +45,10 @@ New migration guides will also be provided to support you when migrating from a 
 :::caution
 Additional upgrade considerations are necessary for deployments that use custom scripts, such as Docker containers, manual installations, or custom-developed Kubernetes deployments. For these deployments, customers can either continue to deploy with their original 8.7 topology and upgrade each component independently, or adopt our Helm chart approach for the upgrade, which allows for unifying the deployment into a single JAR or container executable.
 :::
+
+#### Single Elasticsearch/OpenSearch instance
+
+Using more than one isolated Elasticsearch/OpenSearch instance for exported Zeebe, Operate, and Tasklist data is no longer supported. If your environment uses multiple Elasticsearch/OpenSearch instances, you must manually migrate the data from each to a single Elasticsearch/OpenSearch cluster before updating to Camunda 8.8. The migration should target Zeebe, Operate, and Tasklist indices, index templates, aliases, and ILM policies.
 
 ### Versioning changes in Elasticsearch
 
