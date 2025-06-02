@@ -415,6 +415,22 @@ module.exports = {
           },
           items: [
             {
+              "Agentic AI": [
+                {
+                  type: "category",
+                  label: "AI Agent",
+                  link: {
+                    type: "doc",
+                    id: "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent",
+                  },
+                  items: [
+                    "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-example",
+                  ],
+                },
+                "components/connectors/out-of-the-box-connectors/agentic-ai-ad-hoc-tools-schema-resolver",
+              ],
+            },
+            {
               "Amazon AWS": [
                 "components/connectors/out-of-the-box-connectors/amazon-bedrock",
                 "components/connectors/out-of-the-box-connectors/amazon-comprehend",
@@ -1395,6 +1411,13 @@ module.exports = {
               "Identity for Orchestration clusters": [
                 "self-managed/identity/orchestration-identity/installation",
                 "self-managed/identity/orchestration-identity/configuration",
+                {
+                  "Mapping rules": [
+                    "self-managed/identity/orchestration-identity/mapping-rules/managing-mapping-rules",
+                    "self-managed/identity/orchestration-identity/mapping-rules/mapping-rule-authorizations",
+                    "self-managed/identity/orchestration-identity/mapping-rules/assign-mappings-to-tenants",
+                  ],
+                },
               ],
             },
             {
@@ -1432,11 +1455,6 @@ module.exports = {
                     {
                       Tenants: [
                         "self-managed/identity/user-guide/tenants/managing-tenants",
-                      ],
-                    },
-                    {
-                      "Mapping rules": [
-                        "self-managed/identity/user-guide/mapping-rules/managing-mapping-rules",
                       ],
                     },
                     {
