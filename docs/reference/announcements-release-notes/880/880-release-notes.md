@@ -89,7 +89,7 @@ To learn more about these settings, see [Desktop Modeler settings](/components/m
 
 <!-- https://github.com/camunda/web-modeler/issues/12057 -->
 
-Use the versions **Description** field to track changes alongside the version tag (for example, as a change log or Git commit message). This helps make versioning more intuitive and collaborative, keeps teams aligned, and reduces ambiguity.
+Use the version **Description** field to track changes alongside the version tag (for example, as a change log or Git commit message). This helps make versioning more intuitive and collaborative, keeps teams aligned, and reduces ambiguity.
 
 To learn more about versioning your diagrams, see [versions](components/modeler/web-modeler/versions.md).
 
