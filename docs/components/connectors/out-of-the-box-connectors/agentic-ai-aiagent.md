@@ -197,7 +197,6 @@ The **User Prompt** contains the actual request to the LLM model.
 
 As file type support varies by LLM provider/model, you must test your document use case with the provider you are using.
 
-
 | File type         | Supported | Description                                                                                                                                                                        |
 | :---------------- | :-------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Text              | Yes       | Text files (MIME types matching `text/*`, `application/xml`, `application/json`, or `application/yaml`) are passed as plain text content blocks.                                   |
