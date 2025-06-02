@@ -4,7 +4,7 @@ title: "Deploy an AKS cluster with Terraform (advanced)"
 description: "Deploy an Azure Kubernetes Service (AKS) cluster with a Terraform module for a quick Camunda 8 setup."
 ---
 
-This guide provides a detailed tutorial for deploying an Azure Kubernetes Service (AKS) cluster, tailored specifically for deploying Camunda 8 using Terraform, a popular Infrastructure as Code (IaC) tool.
+This guide provides a detailed tutorial for deploying an Azure Kubernetes Service (AKS) cluster, tailored specifically to deploying Camunda 8 using Terraform, a popular Infrastructure as Code (IaC) tool.
 
 This guide is designed to help you leverage the power of Infrastructure as Code (IaC) to streamline and reproduce your cloud infrastructure setup. By walking through the essentials of setting up an AKS cluster, and provisioning managed Azure resources such as Azure Database for PostgreSQL, this guide demonstrates how to use Terraform with Azure. It makes the process accessible even to those new to Terraform or IaC concepts. It utilizes Azure-managed services where available, offering these as optional components for added convenience and maintainability.
 
@@ -23,7 +23,7 @@ If you are completely new to Terraform and the concept of IaC, consider reading 
 - [jq](https://stedolan.github.io/jq/download/) to parse and manipulate JSON (e.g. Terraform outputs).
 - **Azure service quotas**
   - Check your quotas for **Virtual Networks**, **vCPU cores**, and **Storage Accounts** in the target region: [Azure subscription and service limits](https://learn.microsoft.com/azure/azure-resource-manager/management/azure-subscription-service-limits).
-  - If you reach a limit, you can request an increase through the Azure portal: [Request a quota increase](https://learn.microsoft.com/en-us/azure/extended-zones/request-quota-increase).
+  - If you reach a limit, you can [request a quota increase through the Azure portal](https://learn.microsoft.com/en-us/azure/extended-zones/request-quota-increase).
   - This guide uses **GNU Bash** for all shell commands.
 
 For the exact tool versions we’ve tested against, see the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file in the repository.
@@ -40,7 +40,7 @@ To keep this guide simple and focused, certain best practices are referenced via
 
 Reference architectures are not intended to be consumed exactly as described. The examples provided in this guide are not packaged as a reusable Terraform module. It is recommended that you clone the repository and make any necessary modifications locally.
 
-This approach allows you to extend and customize the codebase according to your specific needs. However, please note that maintaining the infrastructure is your responsibility. Camunda will continue to update and improve the reference architecture, and these updates may not be backward compatible. You may incorporate updates into your customized codebase as needed.
+This approach allows you to extend and customize the codebase according to your specific needs. However, note that maintaining the infrastructure is your responsibility. Camunda will continue to update and improve the reference architecture, and these updates may not be backward compatible. You may incorporate updates into your customized codebase as needed.
 
 :::
 
@@ -65,13 +65,13 @@ This section explains common security findings in Azure deployments and provides
 
 This rule permits inbound traffic from `0.0.0.0/0`, meaning any external source can reach the AKS subnet. It may expose workloads or future public IPs to unsolicited access, increasing the risk of compromise—especially if internal services are misconfigured.
 
-#### Potential Resolution
+#### Potential resolution
 
-1. Restrict incoming traffic to specific IP addresses or CIDR ranges that need access
-2. For management access, limit SSH/RDP to your company's IP ranges
-3. Use just-in-time access for administrative purposes
-4. Implement a bastion host/jump box for secure access
-5. Consider using [Azure Private Link](https://learn.microsoft.com/en-us/azure/private-link/private-link-overview) for private connectivity.
+- Restrict incoming traffic to specific IP addresses or CIDR ranges that need access.
+- For management access, limit SSH/RDP to your company's IP ranges.
+- Use just-in-time access for administrative purposes.
+- Implement a bastion host/jump box for secure access.
+- Consider using [Azure Private Link](https://learn.microsoft.com/en-us/azure/private-link/private-link-overview) for private connectivity.
 
 > **Note:** This doesn't affect the AKS control plane directly, but still weakens the overall network boundary.
 
@@ -84,13 +84,13 @@ This rule permits inbound traffic from `0.0.0.0/0`, meaning any external source 
 
 This finding shows that your Kubernetes cluster's API server is accessible from any IP address. The API server is the control plane for Kubernetes and unrestricted access increases the risk of unauthorized access and potential attacks.
 
-#### Potential Resolution
+#### Potential resolution
 
-1. Configure `authorized_ip_ranges` in `api_server_access_profile` to restrict API server access. ([docs](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster#api_server_access_profile))
-2. Enable private cluster mode with `private_cluster_enabled = true`. ([docs](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster#private_cluster_enabled))
-3. Create an `azurerm_private_endpoint` for the AKS Private Link service. ([docs](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint))
-4. Enable Azure AD–based RBAC via `role_based_access_control { azure_active_directory { ... } }`. ([docs](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster#role_based_access_control))
-5. Use `azurerm_network_security_group` and `azurerm_network_security_rule` to restrict access to the control-plane subnet. ([NSG](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_group), [rule](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule))
+- Configure `authorized_ip_ranges` in `api_server_access_profile` to restrict API server access. ([Review the related documentation](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster#api_server_access_profile)).
+- Enable private cluster mode with `private_cluster_enabled = true`. ([Review the related documentation](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster#private_cluster_enabled)).
+- Create an `azurerm_private_endpoint` for the AKS Private Link service. ([Review the related documentation](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint)).
+- Enable Azure AD–based RBAC via `role_based_access_control { azure_active_directory { ... } }`. ([Review the related documentation](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster#role_based_access_control)).
+- Use `azurerm_network_security_group` and `azurerm_network_security_rule` to restrict access to the control-plane subnet. ([NSG](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_group), [rule](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule)).
 
 > **Note:** While open API access simplifies testing and development, production clusters should always restrict API server access to known IP ranges.
 
@@ -103,13 +103,13 @@ This finding shows that your Kubernetes cluster's API server is accessible from 
 
 This finding indicates that your Azure Key Vault network access controls are not configured to deny access by default. This means that unless specifically restricted, traffic can reach your Key Vault from any source.
 
-#### Potential Resolution
+#### Potential resolution
 
-1. Enable the ["Deny" default action](https://learn.microsoft.com/en-us/azure/key-vault/general/how-to-azure-key-vault-network-security) for network ACLs
-2. Allow [specific IP ranges or virtual networks](https://learn.microsoft.com/en-us/azure/key-vault/general/how-to-azure-key-vault-network-security)
-3. Use a [Private Endpoint](https://learn.microsoft.com/en-us/azure/key-vault/general/private-link-service) for Key Vault access
-4. Use [service endpoints](https://learn.microsoft.com/en-us/azure/key-vault/general/overview-vnet-service-endpoints) to limit Azure service access
-5. Enable [Soft Delete](https://learn.microsoft.com/en-us/azure/key-vault/general/soft-delete-overview) and [Purge Protection](https://learn.microsoft.com/en-us/azure/key-vault/general/soft-delete-overview) for recovery and data safety
+- Enable the ["Deny" default action](https://learn.microsoft.com/en-us/azure/key-vault/general/how-to-azure-key-vault-network-security) for network ACLs.
+- Allow [specific IP ranges or virtual networks](https://learn.microsoft.com/en-us/azure/key-vault/general/how-to-azure-key-vault-network-security).
+- Use a [Private Endpoint](https://learn.microsoft.com/en-us/azure/key-vault/general/private-link-service) for Key Vault access.
+- Use [service endpoints](https://learn.microsoft.com/en-us/azure/key-vault/general/overview-vnet-service-endpoints) to limit Azure service access.
+- Enable [Soft Delete](https://learn.microsoft.com/en-us/azure/key-vault/general/soft-delete-overview) and [Purge Protection](https://learn.microsoft.com/en-us/azure/key-vault/general/soft-delete-overview) for recovery and data safety.
 
 > **Note:** Default deny configurations provide better security posture but may complicate initial setup and testing. For automated testing environments, clearly document these exceptions.
 
@@ -122,13 +122,13 @@ This finding indicates that your Azure Key Vault network access controls are not
 
 This finding indicates that comprehensive logging is not enabled on your Kubernetes cluster using the OMS (Operations Management Suite) Agent. Without proper logging, you have limited visibility into cluster operations, making it difficult to detect and respond to security incidents.
 
-#### Potential Resolution
+#### Potential resolution
 
-1. Enable [Azure Monitor for containers](https://learn.microsoft.com/en-us/azure/azure-monitor/containers/container-insights-overview) on your AKS cluster
-2. Configure the [OMS Agent](https://learn.microsoft.com/en-us/azure/azure-monitor/containers/container-insights-onboard#enable-using-azure-resource-manager-template-or-terraforms) to collect container logs and metrics
-3. Set up a [Log Analytics workspace](https://learn.microsoft.com/en-us/azure/azure-monitor/logs/log-analytics-workspace-overview) for centralized log storage
-4. Create [custom queries and alerts](https://learn.microsoft.com/en-us/azure/azure-monitor/logs/log-analytics-tutorial) based on collected logs
-5. Consider implementing [Microsoft Defender for Cloud](https://learn.microsoft.com/en-us/azure/defender-for-cloud/defender-for-containers-introduction) (formerly Azure Security Center) for enhanced monitoring and threat detection
+- Enable [Azure Monitor for containers](https://learn.microsoft.com/en-us/azure/azure-monitor/containers/container-insights-overview) on your AKS cluster.
+- Configure the [OMS Agent](https://learn.microsoft.com/en-us/azure/azure-monitor/containers/container-insights-onboard#enable-using-azure-resource-manager-template-or-terraforms) to collect container logs and metrics.
+- Set up a [Log Analytics workspace](https://learn.microsoft.com/en-us/azure/azure-monitor/logs/log-analytics-workspace-overview) for centralized log storage.
+- Create [custom queries and alerts](https://learn.microsoft.com/en-us/azure/azure-monitor/logs/log-analytics-tutorial) based on collected logs.
+- Consider implementing [Microsoft Defender for Cloud](https://learn.microsoft.com/en-us/azure/defender-for-cloud/defender-for-containers-introduction) (formerly Azure Security Center) for enhanced monitoring and threat detection.
 
 > **Note:** While disabling logging simplifies testing environments and reduces costs, production environments should always have comprehensive logging enabled. For testing purposes, consider using a shared Log Analytics workspace with appropriate retention policies.
 
@@ -192,7 +192,7 @@ az login --service-principal \
   --tenant <tenant-id>
 ```
 
-Note that the `appId` will be needed as a value for `terraform_sp_app_id` in `terraform.tfvars` [in a later step.](#creating-terraformtfvars).
+Note that the `appId` will be needed as a value for `terraform_sp_app_id` in `terraform.tfvars` [in a later step](#creating-terraformtfvars).
 
 #### Create an Azure Storage Account for Terraform state management
 
@@ -267,7 +267,7 @@ This value is critical because Terraform uses it to assign the necessary permiss
 
 #### Initialize Terraform
 
-Once your authentication is set up, you can initialize your Terraform project. The [previous steps](#create-an-azure-storage-account-for-terraform-state-management) configured a dedicated Azure Storage Account and container (`AZURE_STORAGE_ACCOUNT_NAME`, `AZURE_STORAGE_CONTAINER_NAME`) to store your state...
+Once your authentication is set up, you can initialize your Terraform project. The [previous steps](#create-an-azure-storage-account-for-terraform-state-management) configured a dedicated Azure Storage Account and container (`AZURE_STORAGE_ACCOUNT_NAME`, `AZURE_STORAGE_CONTAINER_NAME`) to store your state.
 
 Configure the backend and download the necessary provider plugins:
 
