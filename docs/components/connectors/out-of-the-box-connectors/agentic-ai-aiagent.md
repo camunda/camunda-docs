@@ -178,10 +178,6 @@ Select the model you want to use for the selected provider, and specify any addi
 
 The **System Prompt** is a crucial part of the AI Agent connector configuration, as it defines the behavior and goal of the agent, and instructs the LLM on how to act.
 
-:::important
-Currently, the system prompt is only added to the agent context once, when the AI Agent connector is called for the first time. This means you cannot alter the system prompt in follow-up interactions, even if you include different data in the input field.
-:::
-
 | Field                    | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | :----------------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | System Prompt            | Yes      | <p>Specify a system prompt to define how the LLM should act.</p><p><ul><li><p>A minimal example system prompt is provided as a starting point for you to customize.</p></li><li><p>You can use FEEL expressions or inject parameters into the text in this field, using the `{{parameter}}` syntax to inject any parameters defined in the **System Prompt Parameters** field (FEEL context).</p><p>Example: `{{current_date_time}}`.</p></li></ul></p> |
@@ -201,7 +197,6 @@ The **User Prompt** contains the actual request to the LLM model.
 
 As file type support varies by LLM provider/model, you must test your document use case with the provider you are using.
 
-As documents are stored as part of the conversational memory, their contents are stored as process variables. Be aware of [variable size limitations](../../concepts/variables.md#variable-size-limitation) when dealing with large files.
 
 | File type         | Supported | Description                                                                                                                                                                        |
 | :---------------- | :-------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
