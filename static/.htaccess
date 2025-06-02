@@ -259,6 +259,9 @@ RewriteRule ^docs/8.6/apis-tools/camunda-api-rest/specifications/find-all-users/
 # Move SAP integrations page to a new folder
 RewriteRule ^docs/next/components/camunda-integrations/sap/?$ /docs/next/components/camunda-integrations/sap/sap-integration/ [R=301,L]
 
+# Move Microsoft AKS guide to its new sub-folder
+RewriteRule ^docs/self-managed/setup/deploy/azure/microsoft-aks/?$ /docs/self-managed/setup/deploy/azure/microsoft-aks/microsoft-aks/ [R=301,L]
+
 #---------------------------------------------------------------------------------
 #   8.7: content moves introduced prior to the release of version 8.7.
 #---------------------------------------------------------------------------------
