@@ -58,5 +58,5 @@ When previewing documents that were uploaded via [Filepicker](./forms-element-li
 
 Design process applications for document handling with the Document preview component.
 
-<DocCardList items={[{type:"link", href:"/docs/next/guides/document-handling/", label: "Store, track and manage documents", docId:"guides/document-handling"}
+<DocCardList items={[{type:"link", href:"/docs/next/components/document-handling/getting-started/", label: "Store, track and manage documents", docId:"components/document-handling/getting-started"}
 ]}/>

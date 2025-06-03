@@ -67,7 +67,7 @@ Self-Managed customers now have [full control over JWT configurations](/self-man
 
 ### Document handling <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-We have extended Camunda's [document handling](/components/concepts/document-handling.md) capabilities by introducing robust integrations and support for AWS S3, local file systems, and document operations within Zeebe. This version enhances document management by providing additional support for secure storage, retrieval, and integration with connectors, improving the efficiency and scalability of document-dependent workflows.
+We have extended Camunda's [document handling](/components/document-handling/getting-started.md) capabilities by introducing robust integrations and support for AWS S3, local file systems, and document operations within Zeebe. This version enhances document management by providing additional support for secure storage, retrieval, and integration with connectors, improving the efficiency and scalability of document-dependent workflows.
 
 <!-- https://github.com/camunda/product-hub/issues/2555 -->
 
@@ -585,7 +585,7 @@ The deployment experience is further simplified for Enterprise customers running
 - You no longer need to enter a client ID and secret in the deploy modal. Instead, simply choose a cluster (or stage for process applications) and deploy.
 
 :::note
-The simplified deployment experience is not supported when [Microsoft Entra ID is used as OIDC provider](/self-managed/setup/guides/connect-to-an-oidc-provider.md?authPlatform=microsoftEntraId#configuration).
+The simplified deployment experience is not supported when [Microsoft Entra ID is used as OIDC provider](/self-managed/identity/configuration/connect-to-an-oidc-provider.md?authPlatform=microsoftEntraId#configuration).
 You still need to enter a client ID and secret in this case.
 Support is targeted for [Camunda 8.8](../870-announcements/#deprecated-web-modeler-cluster-authentication-oauth-and-client_credentials-self-managed).
 :::

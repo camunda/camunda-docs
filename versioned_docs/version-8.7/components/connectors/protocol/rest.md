@@ -209,9 +209,11 @@ Similarly to the Query Parameters, the **HTTP headers** can be specified using t
 }
 ```
 
-:::note
+#### Content-Type
+
 If you do not set the `Content-Type` header in your HTTP headers, the connector will automatically set the `Content-Type` to `application/json`.
-:::
+
+If you set the `Content-Type` header to `multipart/form-data`, only body fields that are documents or plain strings will be sent as multipart form data. All other fields, such as JSON objects, will be ignored.
 
 ### Request body
 
@@ -234,7 +236,7 @@ Secrets are currently not supported in the body of a **REST connector**.
 
 #### File upload
 
-To upload a file, you can take advantage of [Camunda document handling](/components/concepts/document-handling.md).
+To upload a file, you can take advantage of [Camunda document handling](/components/document-handling/getting-started.md).
 
 Depending on the `Content-Type`, the file will be uploaded as a binary or a JSON object (base64 encoded).
 
@@ -272,7 +274,7 @@ The following fields are available in the returned object variable:
     - **contentType**: Content type of the stored document.
 
 :::note
-Starting from version 8.7.0, the REST connector supports storing the response as a document. See additional details and limitations in [document handling](/components/concepts/document-handling.md).
+Starting from version 8.7.0, the REST connector supports storing the response as a document. See additional details and limitations in [document handling](/components/document-handling/getting-started.md).
 :::
 
 ## Output mapping

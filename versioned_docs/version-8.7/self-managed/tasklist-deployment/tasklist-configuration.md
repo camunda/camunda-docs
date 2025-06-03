@@ -36,7 +36,7 @@ Default context-path is `/`.
 
 ## Multi-tenancy
 
-Multi-tenancy in the context of Camunda 8 refers to the ability of Camunda 8 to serve multiple distinct [tenants](/self-managed/identity/user-guide/tenants/managing-tenants.md) or
+Multi-tenancy in the context of Camunda 8 refers to the ability of Camunda 8 to serve multiple distinct [tenants](/self-managed/identity/managing-tenants.md) or
 clients within a single installation.
 
 From version 8.3 onwards, Tasklist has been enhanced to support multi-tenancy for Self-Managed setups. More information about
@@ -120,8 +120,16 @@ The following configuration parameters define the settings:
 | camunda.tasklist.elasticsearch.numberOfReplicas | How many replicas Elasticsearch uses for all Tasklist indices. | 0             |
 
 These values are applied only on first startup of Tasklist or during version update. After the Tasklist
-ELS schema is created, settings may be adjusted directly in the ELS template, and the new settings are applied
-to indices created after adjustment.
+ELS schema is created, settings may be adjusted directly in the ELS template:
+
+- Changes to `camunda.tasklist.elasticsearch.numberOfShards` will not be applied to existing indices and index templates.
+- Changes to `camunda.tasklist.elasticsearch.numberOfReplicas` will be applied to existing indices and index templates.
+
+:::warning
+
+Due to a known [bug](https://github.com/camunda/camunda/issues/31238), changes to `camunda.tasklist.elasticsearch.numberOfReplicas` are currently not applied to index templates.
+
+:::
 
 ### Snippet from application.yml
 

@@ -1,14 +1,14 @@
 ---
 id: install
 title: "Camunda 8 Helm installation"
-sidebar_label: "Install"
+sidebar_label: "Helm"
 description: "Camunda provides continuously improved Helm charts, of which are not cloud provider-specific so you can choose your Kubernetes provider."
 ---
 
 import { HelmChartInstall } from "@site/src/components/CamundaDistributions";
 
 :::note
-The 13.0.0-alpha2 Helm chart released with Camunda 8.8.0-alpha2 establishes a new default setup to support 8.8 [Identity management updates](/reference/announcements-release-notes/880/880-release-notes.md#identity-management-updates-saasself-managed). Currently, this setup is limited to the following components:
+The 13.0.0-alpha4.1 Helm chart released with Camunda 8.8.0-alpha4 establishes a new default setup to support 8.8 [Identity management updates](/reference/announcements-release-notes/880/880-release-notes.md#identity-management-updates-saasself-managed). Currently, this setup is limited to the following components:
 
 - The Orchestration core (Zeebe, Operate, Tasklist, and Orchestration cluster Identity)
 - Connectors
@@ -62,6 +62,10 @@ Refer to the [Operate](/self-managed/operate-deployment/operate-configuration.md
 ![Camunda 8 Self-Managed Architecture Diagram](../assets/camunda-platform-8-self-managed-architecture-diagram-combined-ingress.png)
 
 When installing the [camunda-platform](https://artifacthub.io/packages/helm/camunda/camunda-platform) Helm chart, all components shown on the architectural diagram above are installed.
+
+:::note
+Helm also supports document storage and management with [document handling](/self-managed/document-handling/overview.md).
+:::
 
 ## Versioning
 
