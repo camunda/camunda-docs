@@ -8,10 +8,6 @@ description: "This section defines common terminology referenced within the docu
 
 See [orchestration cluster](#orchestration-cluster).
 
-### Bridge
-
-Synonym to "[Connector](#connector)".
-
 ### Broker
 
 The [Zeebe Broker](#zeebe-broker) is the distributed workflow engine that tracks the state of active process instances. However, a Zeebe deployment often consists of more than one broker. Brokers can be partitioned for horizontal scalability and replicated for fault tolerance.
