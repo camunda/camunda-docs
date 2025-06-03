@@ -328,7 +328,7 @@ A webhook is a way for web applications to send real-time notifications or data 
 
 ### Worker
 
-See [Job Worker](#job-worker).
+See [Job worker](#job-worker).
 
 ### Workflow
 
