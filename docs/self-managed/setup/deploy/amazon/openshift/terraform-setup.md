@@ -60,6 +60,8 @@ Unlike the [EKS Terraform setup](../amazon-eks/terraform-setup.md), we currently
 
 ### Outcome
 
+<!-- TODO: before merge, replace feature/openshift-private-link => main >
+
 <!-- The following diagram should be exported as an image and as a PDF from the sources https://miro.com/app/board/uXjVL-6SrPc=/ --->
 <!-- To export: click on the frame > "Export Image" > as PDF and as JPG (low res), then save it in the ./assets/ folder --->
 
@@ -78,7 +80,7 @@ Following this tutorial and steps will result in:
 The first step is to download a copy of the reference architecture from the [GitHub repository](https://github.com/camunda/camunda-deployment-references/blob/main/aws/openshift/rosa-hcp-single-region/). This material will be used throughout the rest of this documentation, the reference architecture is versioned using the same Camunda versions (`stable/8.x`).
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/openshift/rosa-hcp-single-region/procedure/get-your-copy.sh
+https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-private-link/aws/openshift/rosa-hcp-single-region/procedure/get-your-copy.sh
 ```
 
 With the reference architecture copied, you can proceed with the remaining steps outlined in this documentation. Ensure that you are in the correct directory before continuing with further instructions.
@@ -179,7 +181,7 @@ This module sets up the foundational configuration for ROSA HCP and Terraform us
 
 We will leverage [Terraform modules](https://developer.hashicorp.com/terraform/language/modules), which allow us to abstract resources into reusable components, simplifying infrastructure management.
 
-The [Camunda-provided module](https://github.com/camunda/camunda-deployment-references/tree/main/aws/openshift/rosa-hcp-single-region/terraform/cluster/) is publicly available and serves as a robust starting point for deploying a Red Hat OpenShift cluster on AWS using a Hosted Control Plane. It is highly recommended to review this module before implementation to understand its structure and capabilities.
+The [Camunda-provided module](https://github.com/camunda/camunda-deployment-references/tree/feature/openshift-private-link/aws/openshift/rosa-hcp-single-region/terraform/cluster/) is publicly available and serves as a robust starting point for deploying a Red Hat OpenShift cluster on AWS using a Hosted Control Plane. It is highly recommended to review this module before implementation to understand its structure and capabilities.
 
 Please note that this module is based on the official [ROSA HCP Terraform module documentation](https://docs.openshift.com/rosa/rosa_hcp/terraform/rosa-hcp-creating-a-cluster-quickly-terraform.html). It is presented as an example for running Camunda 8 in ROSA. 
 
@@ -273,7 +275,7 @@ To set up a ROSA cluster, certain prerequisites must be configured on your AWS a
    This configuration will use the previously created S3 bucket for storing the Terraform state file:
 
    ```hcl reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/aws/openshift/rosa-hcp-single-region/terraform/cluster/config.tf
+   https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-private-link/aws/openshift/rosa-hcp-single-region/terraform/cluster/config.tf
    ```
 
 1. Edit the `cluster.tf` file in the same directory as your `config.tf` file:
@@ -288,23 +290,17 @@ To set up a ROSA cluster, certain prerequisites must be configured on your AWS a
 
    :::note Private cluster
 
-   <!-- TODO: verify link -->
-   <!-- TODO: add private subnet definition of aws -->
-
    By default, this cluster will be accessible from the internet. 
-   If you prefer to restrict access, you will need to set `locals.rosa_private_cluster = true`. This will create a [private cluster](https://docs.redhat.com/en/documentation/red_hat_openshift_service_on_aws/4/html/install_rosa_with_hcp_clusters/rosa-hcp-aws-private-creating-cluster#rosa-additional-principals-overview_rosa-hcp-aws-private-creating-cluster) only accessible the private subnets of the VPC.
+   If you prefer to restrict access, you will need to set `locals.rosa_private_cluster = true`. This will create a [private cluster](https://cloud.redhat.com/experts/rosa/private-link/) only accessible the [private subnets](https://docs.aws.amazon.com/vpc/latest/userguide/configure-subnets.html) of the VPC and [eventually publicly exposing a public ingress](https://cloud.redhat.com/experts/rosa/private-link/public-ingress/).
 
-   <!-- TODO: add bastion tutorial of aws aws -->
-   As private subnets are not accessible from the internet, you will need to setup a connection from your network to the cluster. This can be achieved with a bastion node or with a VPN.
+   As private subnets are not accessible from the internet, you will need to setup a connection from your network to the cluster. This can be achieved with a [bastion node](https://docs.aws.amazon.com/mwaa/latest/userguide/tutorials-private-network-bastion.html) or with a Client VPN.
 
-   <!-- TODO: add link to AWS VPN Endpoint -->
-   <!-- TODO: add link to the next section -->
-   The [next section](#) will guide you in the setup of an AWS VPN Endpoint that will allow you to access the private cluster.
+   The [next section](#vpn-module-setup) will guide you in the setup of an [AWS VPN Endpoint](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/cvpn-getting-started.html) that will allow you to access the private cluster.
 
    :::
 
    ```hcl reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/aws/openshift/rosa-hcp-single-region/terraform/cluster/cluster.tf
+   https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-private-link/aws/openshift/rosa-hcp-single-region/terraform/cluster/cluster.tf
    ```
 
    :::caution Camunda Terraform module
@@ -331,13 +327,13 @@ To set up a ROSA cluster, certain prerequisites must be configured on your AWS a
 
 1. Customize the cluster setup. The module offers various input options that allow you to further customize the cluster configuration. For a comprehensive list of available options and detailed usage instructions, refer to the [ROSA module documentation](https://github.com/camunda/camunda-deployment-references/blob/main/aws/modules/rosa-hcp/README.md).
 
-### Define outputs
+#### Define outputs
 
 **Terraform** allows you to define outputs, which make it easier to retrieve important values generated during execution, such as cluster endpoints and other necessary configurations for Helm setup.
 
 Each module that you have previously set up contains an output definition at the end of the file. You can adjust them to your needs.
 
-### Execution
+#### Execution
 
 :::note Secret management
 
@@ -360,89 +356,197 @@ We strongly recommend managing sensitive information (for example, the administr
 
 Terraform will now create the OpenShift cluster with all the necessary configurations. The completion of this process may require approximately 20-30 minutes for each component.
 
-#### Set up the VPN module
+### VPN module setup
 
-This section setups an AWS VPN Endpoint that can be used to access a private cluster. If the created cluster is private, using a VPN provides an flexible solution to connect securely to the private subnets of the VPC.
+This section setups an AWS VPN Endpoint that can be used to access a private cluster. 
 
-<!-- TODO : add Private link doc -->
-A VPN can either be used by an user to access the resources or the enable cross sites communications (Private Link). This module is focused on the usage for the user.
+This is **optional** and only useful if you have configured a **private cluster**.
 
-<!-- TODO : add x509 doc -->
-The technology used by AWS VPN is compatible with OpenVPN clients. It relies on usage of x509 certificates providing both authentification and verification of the source.
+Using a VPN provides an flexible solution to connect securely to the private subnets of the VPC. It can either be used by an user to access the resources or the enable cross sites communications ([Private Link](https://docs.aws.amazon.com/vpc/latest/privatelink/what-is-privatelink.html)). This module is focused on the usage for the user.
+
+<!-- The following diagram should be exported as an image and as a PDF from the sources https://miro.com/app/board/uXjVL-6SrPc=/ --->
+<!-- To export: click on the frame > "Export Image" > as PDF and as JPG (low res), then save it in the ./assets/ folder --->
+
+_Infrastructure diagram for a single region ROSA setup with VPN (click on the image to open the PDF version)_
+[![Infrastructure Diagram ROSA Single-Region VPN](./assets/rosa-single-region-vpn.jpg)](./assets/rosa-single-region-vpn.pdf)
+
+The technology used by AWS VPN is compatible with OpenVPN clients. It relies on usage of [x509 certificates](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/mutual.html) providing both authentification and verification of the source.
 
 #### Retrieve the VPC cluster id
 
 To create the VPN Endpoint on the cluster’s VPC, you need to gather some information using the [terraform outputs](https://developer.hashicorp.com/terraform/language/values/outputs) of the [OpenShift clusters module setup](#openshift-cluster-module-setup). Follow these steps:
 
-1. First, go in the clusters module directory
+1. Ensure you are in the [reference architecture directory of the cloned repository](#obtain-a-copy-of-the-reference-architecture): `./aws/openshift/rosa-hcp-single-region/terraform/`, then navigate in the `cluster` module directory
 
    ```bash
    ls
    # Example output:
-   # clusters vpn
+   # cluster vpn
 
    cd cluster
    ```
 
-1. Then save the associated [VPC ID](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/vpc):
+1. Save the associated [VPC ID](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/vpc):
 
    ```bash
    export CLUSTER_VPC_ID="$(terraform output -raw vpc_id)"
    echo "CLUSTER_VPC_ID=$CLUSTER_VPC_ID"
    ```
+#### Set up the VPN module
+
+In the parent directory where your cluster module reside (`cluster`), navigate to the directory called `vpn` which contains the VPN endpoint configuration:
+
+We will setup a Certificate Authority (CA) used by [AWS VPN](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/mutual.html) to perform encryption and mutual authentification of the clients.
+For the simplicity of the setup, the signing Certificate Authority and its asssociated certificates will be stored in the [tfstate](https://developer.hashicorp.com/terraform/language/state) of the project.
+You may want to adapt the implementation to your needs.
+
+Begin by reviewing up the `config.tf` that configures S3 backend for managing the Terraform state:
+
+```hcl reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-private-link/aws/openshift/rosa-hcp-single-region/terraform/vpn/config.tf
+```
+
+Finally, review the file called `vpn.tf`, that describes the VPC Client Endpoint configuration:
+
+```hcl reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-private-link/aws/openshift/rosa-hcp-single-region/terraform/vpn/vpn.tf
+```
+
+This VPN Client Endpoint configuration follows the [best practices, contraints and known limitations](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/what-is-best-practices.html):
+    - Uses a non-overlapping client CIDR range that does not conflict with the VPC CIDR or any manually added routes in the VPN endpoint’s route table.
+    - Implements [split-tunnel routing](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/split-tunnel-vpn.html): only traffic destined for the VPC flows through the VPN, reducing unnecessary bandwidth usage.
+    - The VPN supports IPv4 only and is bound to the VPC and its associated private subnets of the referenced cluster.
 
 
-<!-- TODO: add export output vpc id -->
+1. After setting up the terraform files and ensuring your AWS authentication is configured, initialize your Terraform project, then, initialize Terraform to [configure the backend](#create-an-s3-bucket-for-terraform-state-management) and download necessary provider plugins:
+
+   ```bash
+   export S3_TF_BUCKET_KEY_VPN="camunda-terraform/vpn.tfstate"
+
+   echo "Storing cluster terraform state in s3://$S3_TF_BUCKET_NAME/$S3_TF_BUCKET_KEY_VPN"
+
+   terraform init -backend-config="bucket=$S3_TF_BUCKET_NAME" -backend-config="key=$S3_TF_BUCKET_KEY_VPN" -backend-config="region=$S3_TF_BUCKET_REGION"
+   ```
+
+   Terraform will connect to the S3 bucket to manage the state file, ensuring remote and persistent storage.
+
+1. For each of your individual resource connecting to the cluster, you should use a unique name referenced in `client_key_names`, this will make revocation easier.
+
+1. By default, the VPN can be accessed from any ip, you might want to harden it by adjusting `vpn_allowed_cidr_blocks`.
+
+1. As network design is specific to each topology, we encourage you to review the implementation and adjust it according to your specific requirements.
+
+1. Customize the VPN setup. The module offers various input options that allow you to further customize the cluster configuration. For a comprehensive list of available options and detailed usage instructions, refer to the [VPN module documentation](https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-private-link/aws/modules/vpn/README.md).
+
+#### Outputs
+
+This module leverages terraform state to store certificates and VPN clients configurations. 
+Next section will describe how to retrieve a client's config and use it.
+
+#### Execution
+
+1. Run the following command to generate a plan for the VPN Client Endpoint configuration.
+   It will connect with private subnets the previously retrieved VPC of the cluster:
+
+   ```bash
+   # describe what will be created
+   terraform plan -out vpn.plan \
+    -var vpc_id="$CLUSTER_VPC_ID"
+   ```
+
+1. After reviewing the plan, you can confirm and apply the changes.
+
+   ```bash
+   terraform apply vpn.plan     # creates the resources
+   ```
+
+Terraform will now create the VPN Client Endpoint and output the client's configuration in `vpn_client_configs`. The completion of this process may require approximately 10 minutes.
+
+
 ### Reference files
 
 Depending on the installation path you have chosen, you can find the reference files used on this page:
 
-- **Standard installation:** [Reference Files](https://github.com/camunda/camunda-deployment-references/tree/main/aws/openshift/rosa-hcp-single-region/)
+- **Standard installation:** [Reference Files](https://github.com/camunda/camunda-deployment-references/tree/feature/openshift-private-link/aws/openshift/rosa-hcp-single-region/)
 
 ## 2. Preparation for Camunda 8 installation
+
+### Access to the private network using the VPN
+
+This section is applicable if you previsouly created a private cluster and you would like to access it using the [previously configured VPN module](#vpn-module-setup). 
+
+1. Navigate to the VPN module (`vpn` directory):
+
+    ```bash
+    pwd
+
+    # Example output:
+    # ./camunda-deployment-references/aws/openshift/rosa-hcp-single-region/terraform/vpn/
+    ```
+
+1. From the ouput of the VPN module, create your client's configuration file for the VPN, the file is compatible with [OpenVPN](https://openvpn.net/):
+
+    ```bash reference
+    https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-private-link/aws/openshift/rosa-hcp-single-region/procedure/gather-vpn-config.sh
+    ```
+
+1. Load the created file (`my-client.ovpn`) in one of your OpenVPN client of your choice:
+    - [Official AWS VPN Client](https://docs.aws.amazon.com/vpn/latest/clientvpn-user/connect-aws-client-vpn-connect.html)
+    - [Other OpenVPN Clients](https://docs.aws.amazon.com/vpn/latest/clientvpn-user/connect.html)
+
+1. Once loaded and enabled, the client will confirm your connection to the VPN, allowing you to reach the private network of the VPC.
 
 ### Access the created OpenShift cluster
 
 You can access the created OpenShift cluster using the following steps:
 
-Set up the required environment variables:
+1.  Verify that you are in the [OpenShift clusters module](#openshift-clusters-module-setup) directory `clusters`:
 
-```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/openshift/rosa-hcp-single-region/procedure/gather-cluster-login-id.sh
-```
+    ```bash
+    pwd
 
-If you want to give cluster administrator access to the created user, this is not required for a standard installation but can be useful for debugging:
+    # Example output:
+    # ./camunda-deployment-references/aws/openshift/rosa-hcp-single-region/terraform/cluster/
+    ```
 
-```shell
-rosa grant user cluster-admin --cluster="$CLUSTER_NAME" --user="$CLUSTER_ADMIN_USERNAME"
-```
+1.  Set up the required environment variables from the OpenShift terraform module:
 
-Log in to the OpenShift cluster:
+    ```bash reference
+    https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-private-link/aws/openshift/rosa-hcp-single-region/procedure/gather-cluster-login-id.sh
+    ```
 
-```shell
-oc login -u "$CLUSTER_ADMIN_USERNAME" "$CLUSTER_API_URL" -p "$CLUSTER_ADMIN_PASSWORD"
-```
+1. If you want to give cluster administrator access to the created user, this is not required for a standard installation but can be useful for debugging:
 
-Clean up and configure the kubeconfig context:
+    ```shell
+    rosa grant user cluster-admin --cluster="$CLUSTER_NAME" --user="$CLUSTER_ADMIN_USERNAME"
+    ```
 
-```shell
-oc config rename-context $(oc config current-context) "$CLUSTER_NAME"
-oc config use-context "$CLUSTER_NAME"
-```
+1. Log in to the OpenShift cluster:
 
-Verify your connection to the cluster with `oc`:
+    ```shell
+    oc login -u "$CLUSTER_ADMIN_USERNAME" "$CLUSTER_API_URL" -p "$CLUSTER_ADMIN_PASSWORD"
+    ```
 
-```shell
-oc get nodes
-```
+    Clean up and configure the kubeconfig context:
 
-Create a project for Camunda using `oc`:
+    ```shell
+    oc config rename-context $(oc config current-context) "$CLUSTER_NAME"
+    oc config use-context "$CLUSTER_NAME"
+    ```
 
-```shell
-oc new-project camunda
-```
+1. Verify your connection to the cluster with `oc`:
 
-In the remainder of the guide, the `camunda` namespace part of the camunda project will be referenced to create the required resources in the Kubernetes cluster, such as secrets or one-time setup jobs.
+    ```shell
+    oc get nodes
+    ```
+
+1. Create a project for Camunda using `oc`:
+
+    ```shell
+    oc new-project camunda
+    ```
+
+    In the remainder of the guide, the `camunda` namespace part of the camunda project will be referenced to create the required resources in the Kubernetes cluster, such as secrets or one-time setup jobs.
 
 ## 3. Install Camunda 8 using the Helm chart
 

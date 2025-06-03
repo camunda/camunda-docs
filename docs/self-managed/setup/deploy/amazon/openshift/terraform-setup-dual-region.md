@@ -591,7 +591,7 @@ You can now access the created OpenShift clusters.
     pwd
 
     # Example output:
-    # /home/your-username/camunda/camunda-deployment-references/aws/openshift/rosa-hcp-dual-region/clusters/
+    # ./camunda-deployment-references/aws/openshift/rosa-hcp-dual-region/terraform/clusters/
     ```
 
 1.  Set up the required environment variables from the OpenShift terraform module:
