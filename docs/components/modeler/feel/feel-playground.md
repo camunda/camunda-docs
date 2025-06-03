@@ -33,6 +33,8 @@ The FEEL Playground is integrated into the popup FEEL editor:
 
 :::note
 The latest version of the [FEEL Scala engine](/components/modeler/feel/what-is-feel.md#feel-engines) is used to validate FEEL expressions in the FEEL Playground.
+
+This can be different than the FEEL Scala version used by the linter's Zeebe version and the cluster the diagram will be deployed to.
 :::
 
 ## Validate your FEEL expression {#validate}
