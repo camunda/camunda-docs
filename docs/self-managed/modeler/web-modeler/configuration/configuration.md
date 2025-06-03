@@ -36,11 +36,11 @@ To add additional clusters, increment the `0` value for each variable (`CAMUNDA_
 | `CAMUNDA_MODELER_CLUSTERS_0_URL_ZEEBE_REST`          | [Internal or external](#notes-on-host-names-and-port-numbers) address where the Zeebe REST API can be reached. | `http://camunda-zeebe-gateway:8080`, `https://camunda-zeebe-gateway:8080`   |
 | `CAMUNDA_MODELER_CLUSTERS_0_URL_OPERATE`             | [Internal or external](#notes-on-host-names-and-port-numbers) address where Operate can be reached.            | `http://camunda-operate:80`, `https://camunda-operate:80`                   |
 | `CAMUNDA_MODELER_CLUSTERS_0_URL_TASKLIST`            | [Internal or external](#notes-on-host-names-and-port-numbers) address where Tasklist can be reached.           | `http://camunda-tasklist:80`, `https://camunda-tasklist:80`                 |
-| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_URL`               | The address of your token issuer. Required for authentication `CLIENT_CREDENTIALS`.                            | `https://auth.example.com/token`                                            |
-| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_SCOPE`             | A comma-separated list of the scopes to use with this cluster.                                                 | `test-scope`                                                                |
-| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_AUDIENCE_ZEEBE`    | The permission name for Zeebe.                                                                                 | `zeebe-api`                                                                 |
-| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_AUDIENCE_OPERATE`  | The permission name for Operate.                                                                               | `operate-api`                                                               |
-| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_AUDIENCE_TASKLIST` | The permission name for Tasklist.                                                                              | `tasklist-api`                                                              |
+| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_URL`               | The address of your token issuer. Only required for authentication type `CLIENT_CREDENTIALS`.                  | `https://auth.example.com/token`                                            |
+| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_SCOPE`             | [optional]<br/>A list of the scopes to use with this cluster separated by spaces.                              | `openid email profile`                                                      |
+| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_AUDIENCE_ZEEBE`    | The OAuth token audience for Zeebe. Only required for authentication type `CLIENT_CREDENTIALS`.                | `zeebe-api`                                                                 |
+| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_AUDIENCE_OPERATE`  | The OAuth token audience for Operate. Only required for authentication type `CLIENT_CREDENTIALS`.              | `operate-api`                                                               |
+| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_AUDIENCE_TASKLIST` | The OAuth token audience for Tasklist. Only required for authentication type `CLIENT_CREDENTIALS`.             | `tasklist-api`                                                              |
 
 #### Available authentication methods
 
@@ -145,14 +145,17 @@ Refer to the [advanced SSL configuration guide](./ssl.md) for additional details
 
 ### Git Sync
 
-Web Modeler supports syncing files via [Git Sync](../../../../components/modeler/web-modeler/git-sync.md). You need to provide the base url for you provider if you are using a self-hosted GitLab or GitHub instance.
+Web Modeler supports syncing files via [Git Sync](../../../../components/modeler/web-modeler/git-sync.md). Provide the base URL for your provider if you are using a self-hosted GitLab, GitHub, or Azure DevOps Server instance.
 
-| Provider      | Environment variable                      | Description                                                                                                                   | Default value               |
-| ------------- | ----------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | --------------------------- |
-| All providers | `CAMUNDA_MODELER_GITSYNC_MAXFILES`        | Maximum number of allowed files for sync operations.                                                                          | `50`                        |
-| All providers | `CAMUNDA_MODELER_GITSYNC_MAXINMEMORYSIZE` | Maximum memory size that can be processed by calls to the Git provider. This limits the maximum file size that can be synced. | `4MB`                       |
-| GitHub        | `CAMUNDA_MODELER_GITSYNC_GITHUB_BASEURL`  | The base URL of your self-hosted GitHub instance.                                                                             | `https://api.github.com`    |
-| GitLab        | `CAMUNDA_MODELER_GITSYNC_GITLAB_BASEURL`  | The base URL of your self-hosted GitLab instance.                                                                             | `https://gitlab.com/api/v4` |
+| Provider      | Environment variable                                | Description                                                                                                                   | Default value                       |
+| ------------- | --------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- |
+| All providers | `CAMUNDA_MODELER_GITSYNC_MAXFILES`                  | Maximum number of allowed files for sync operations.                                                                          | `50`                                |
+| All providers | `CAMUNDA_MODELER_GITSYNC_MAXINMEMORYSIZE`           | Maximum memory size that can be processed by calls to the Git provider. This limits the maximum file size that can be synced. | `4MB`                               |
+| GitHub        | `CAMUNDA_MODELER_GITSYNC_GITHUB_BASEURL`            | The base URL of your self-hosted GitHub instance.                                                                             | `https://api.github.com`            |
+| GitLab        | `CAMUNDA_MODELER_GITSYNC_GITLAB_BASEURL`            | The base URL of your self-hosted GitLab instance.                                                                             | `https://gitlab.com/api/v4`         |
+| Azure DevOps  | `CAMUNDA_MODELER_GITSYNC_AZURE_BASEURL`             | The base URL of your self-hosted Azure DevOps Server instance.                                                                | `https://dev.azure.com`             |
+| Azure DevOps  | `CAMUNDA_MODELER_GITSYNC_AZURE_API_VERSION`         | The Azure DevOps API versions to use.                                                                                         | `7.1`                               |
+| Azure DevOps  | `CAMUNDA_MODELER_GITSYNC_AZURE_AUTHORITY_BASE_PATH` | URL used to access authentication and authorization services for Microsoft cloud identities.                                  | `https://login.microsoftonline.com` |
 
 ## Configuration of the `webapp` component
 

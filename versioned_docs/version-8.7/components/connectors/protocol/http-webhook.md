@@ -387,7 +387,7 @@ newly create process instance key when accessing the `correlation` object:
 
 You can access created documents in both the response expression and the result expression.
 
-The `documents` object contains the references for created documents. See additional details and limitations in [document handling](/components/concepts/document-handling.md).
+The `documents` object contains the references for created documents. See additional details and limitations in [document handling](/components/document-handling/getting-started.md).
 
 **Example response expression**
 

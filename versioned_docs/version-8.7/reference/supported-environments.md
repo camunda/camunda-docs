@@ -76,9 +76,9 @@ To ensure an appropriate sizing, [determine your influencing factors](../compone
 
 For details on typical volume type usage, refer to the following examples specific to cloud service providers:
 
-- [Amazon EKS](/self-managed/setup/deploy/amazon/amazon-eks/amazon-eks.md#volume-performance)
-- [Microsoft AKS](/self-managed/setup/deploy/azure/microsoft-aks.md#volume-performance)
-- [Google GKE](/self-managed/setup/deploy/gcp/google-gke.md#volume-performance)
+- [Amazon EKS](/self-managed/reference-architecture/kubernetes.md#amazon-eks)
+- [Microsoft AKS](/self-managed/reference-architecture/kubernetes.md#microsoft-aks)
+- [Google GKE](/self-managed/reference-architecture/kubernetes.md#google-gke)
 
 ### Helm charts version matrix
 
@@ -88,16 +88,16 @@ Camunda Helm chart version `12.x.x` works with Camunda version `8.7.x`. Check th
 
 Requirements for the components can be seen below:
 
-| Component   | Java version | Other requirements                                                                                                                                                                                                |
-| ----------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Zeebe       | OpenJDK 21+  | Elasticsearch 8.13+<br/>Amazon OpenSearch 2.9+ (requires use of [OpenSearch exporter](../self-managed/zeebe-deployment/exporters/opensearch-exporter.md))                                                         |
-| Operate     | OpenJDK 21+  | Elasticsearch 8.13+<br/>Amazon OpenSearch 2.9+                                                                                                                                                                    |
-| Tasklist    | OpenJDK 21+  | Elasticsearch 8.13+<br/>Amazon OpenSearch 2.9+                                                                                                                                                                    |
-| Identity    | OpenJDK 17+  | Keycloak 25.x, 26.x<br/>PostgreSQL 14.x, 15.x or Amazon Aurora PostgreSQL 13.x, 14.x, 15.x (required for [certain features](/self-managed/identity/deployment/configuration-variables.md#database-configuration)) |
-| Optimize    | OpenJDK 21+  | Elasticsearch 8.13+<br/>Amazon OpenSearch 2.9+                                                                                                                                                                    |
-| Connectors  | OpenJDK 21+  |                                                                                                                                                                                                                   |
-| Web Modeler | -            | PostgreSQL 13.x, 14.x, 15.x, 16.x, 17.x or Amazon Aurora PostgreSQL 13.x, 14.x, 15.x, 16.x                                                                                                                        |
-| Console     | -            | -                                                                                                                                                                                                                 |
+| Component   | Java version | Other requirements                                                                                                                                                                                                   |
+| ----------- | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Zeebe       | OpenJDK 21+  | Elasticsearch 8.13+<br/>Amazon OpenSearch 2.9+ (requires use of [OpenSearch exporter](../self-managed/zeebe-deployment/exporters/opensearch-exporter.md))                                                            |
+| Operate     | OpenJDK 21+  | Elasticsearch 8.13+<br/>Amazon OpenSearch 2.9+                                                                                                                                                                       |
+| Tasklist    | OpenJDK 21+  | Elasticsearch 8.13+<br/>Amazon OpenSearch 2.9+                                                                                                                                                                       |
+| Identity    | OpenJDK 17+  | Keycloak 25.x, 26.x<br/>PostgreSQL 14.x, 15.x or Amazon Aurora PostgreSQL 13.x, 14.x, 15.x (required for [certain features](/self-managed/identity/miscellaneous/configuration-variables.md#database-configuration)) |
+| Optimize    | OpenJDK 21+  | Elasticsearch 8.13+<br/>Amazon OpenSearch 2.9+                                                                                                                                                                       |
+| Connectors  | OpenJDK 21+  |                                                                                                                                                                                                                      |
+| Web Modeler | -            | PostgreSQL 13.x, 14.x, 15.x, 16.x, 17.x or Amazon Aurora PostgreSQL 13.x, 14.x, 15.x, 16.x                                                                                                                           |
+| Console     | -            | -                                                                                                                                                                                                                    |
 
 \*Not all Optimize features are supported when using OpenSearch as a database. For a full list of the features that are currently supported, refer to the [Camunda 8](https://github.com/camunda/issues/issues/635) OpenSearch features.
 
@@ -123,7 +123,6 @@ From version `8.6.0` forward, Zeebe, Operate, and Tasklist must run on on the ex
 | Desktop Modeler 5.28+ <br/> Web Modeler 8.6.x | (Zeebe, Operate, Tasklist) 8.6.x, Connectors 8.6.x, <br/>Identity 8.6.x, Console 8.6.x                  | Optimize 8.6.x |
 | Desktop Modeler 5.22+ <br/> Web Modeler 8.5.x | Zeebe 8.5.x, Operate 8.5.x, Tasklist 8.5.x, <br/>Identity 8.5.x, Connectors 8.5.x, Console 8.5.x        | Optimize 8.5.x |
 | Desktop Modeler 5.19+ <br/> Web Modeler 8.4.x | Zeebe 8.4.x, Operate 8.4.x, Tasklist 8.4.x, <br/>Identity 8.4.x, Connectors 8.4.x                       | Optimize 8.4.x |
-| Desktop Modeler 5.16+ <br/> Web Modeler 8.3.x | Zeebe 8.3.x, Operate 8.3.x, Tasklist 8.3.x, <br/>Identity 8.3.x, Connectors 8.3.x                       | Optimize 8.3.x |
 
 :::note
 You can also use newer versions of Desktop and Web Modeler with older Zeebe versions.
