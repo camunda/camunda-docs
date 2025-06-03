@@ -57,13 +57,17 @@ We recommend using the timestamp as the backup ID.
 
 The steps outlined on this page are general applicable for any kind of deployment but may differ slightly depending on your setup.
 
-If you're defining the `contextPath` in the Helm chart or the `management.server.base-path` in a standalone setup, your call will require to prepend the value specific to the `contextPath` / `base-path` for the individual application.
+If you're defining the `contextPath` in the Helm chart or the `management.server.base-path` in a standalone setup, your API requests will require to prepend the value specific to the `contextPath` / `base-path` for the individual application.
 
 <!-- TODO:
    CHECK OPTIMIZE's STATEMENT:
 
    The configured context path does not apply to the management port.
    If so, it would go against all the other apps. The `base-path` does overwrite it and the Helm Chart does hardcode it.
+
+   ---
+   This really seems to be the case, even with the helm chart.
+   TODO: add exception for optimzie ...
  -->
 
 <details>
@@ -205,7 +209,11 @@ export GATEWAY_MANAGEMENT_API=
       <summary>Example output</summary>
       <summary>
 
-      <!-- TODO: You get the idea -->
+      ```json
+      {
+         "message":"Backup creation for ID 1748937221 has been scheduled. Use the GET API to monitor completion of backup process"
+      }
+      ```
 
       </summary>
    </details>
@@ -222,7 +230,18 @@ export GATEWAY_MANAGEMENT_API=
       <summary>Example output</summary>
       <summary>
 
-      <!-- TODO: You get the idea -->
+      ```json
+      {
+         "scheduledSnapshots":[
+            "camunda_operate_1748937221_8.7.2_part_1_of_6",
+            "camunda_operate_1748937221_8.7.2_part_2_of_6",
+            "camunda_operate_1748937221_8.7.2_part_3_of_6",
+            "camunda_operate_1748937221_8.7.2_part_4_of_6",
+            "camunda_operate_1748937221_8.7.2_part_5_of_6",
+            "camunda_operate_1748937221_8.7.2_part_6_of_6"
+         ]
+      }
+      ```
 
       </summary>
    </details>
@@ -239,7 +258,18 @@ export GATEWAY_MANAGEMENT_API=
       <summary>Example output</summary>
       <summary>
 
-      <!-- TODO: You get the idea -->
+      ```json
+      {
+         "scheduledSnapshots":[
+            "camunda_tasklist_1748937221_8.7.2_part_1_of_6",
+            "camunda_tasklist_1748937221_8.7.2_part_2_of_6",
+            "camunda_tasklist_1748937221_8.7.2_part_3_of_6",
+            "camunda_tasklist_1748937221_8.7.2_part_4_of_6",
+            "camunda_tasklist_1748937221_8.7.2_part_5_of_6",
+            "camunda_tasklist_1748937221_8.7.2_part_6_of_6"
+         ]
+      }
+      ```
 
       </summary>
    </details>
@@ -254,7 +284,31 @@ export GATEWAY_MANAGEMENT_API=
       <summary>Example output</summary>
       <summary>
 
-      <!-- TODO: You get the idea -->
+      ```json
+      {
+         "backupId":1748937221,
+         "failureReason":null,
+         "state":"COMPLETED",
+         "details":[
+            {
+               "snapshotName":"camunda_optimize_1748937221_8.7.1_part_1_of_2",
+               "state":"SUCCESS",
+               "startTime":"2025-06-03T07:53:54.389+0000",
+               "failures":[
+                  
+               ]
+            },
+            {
+               "snapshotName":"camunda_optimize_1748937221_8.7.1_part_2_of_2",
+               "state":"SUCCESS",
+               "startTime":"2025-06-03T07:53:54.389+0000",
+               "failures":[
+                  
+               ]
+            }
+         ]
+      }
+      ```
 
       </summary>
    </details>
@@ -275,7 +329,63 @@ export GATEWAY_MANAGEMENT_API=
       <summary>Example output</summary>
       <summary>
 
-      <!-- TODO: You get the idea -->
+      ```json
+      {
+         "backupId":1748937221,
+         "state":"COMPLETED",
+         "failureReason":null,
+         "details":[
+            {
+               "snapshotName":"camunda_operate_1748937221_8.7.2_part_1_of_6",
+               "state":"SUCCESS",
+               "startTime":"2025-06-03T07:55:15.685+0000",
+               "failures":[
+                  
+               ]
+            },
+            {
+               "snapshotName":"camunda_operate_1748937221_8.7.2_part_2_of_6",
+               "state":"SUCCESS",
+               "startTime":"2025-06-03T07:55:16.288+0000",
+               "failures":[
+                  
+               ]
+            },
+            {
+               "snapshotName":"camunda_operate_1748937221_8.7.2_part_3_of_6",
+               "state":"SUCCESS",
+               "startTime":"2025-06-03T07:55:17.092+0000",
+               "failures":[
+                  
+               ]
+            },
+            {
+               "snapshotName":"camunda_operate_1748937221_8.7.2_part_4_of_6",
+               "state":"SUCCESS",
+               "startTime":"2025-06-03T07:55:17.293+0000",
+               "failures":[
+                  
+               ]
+            },
+            {
+               "snapshotName":"camunda_operate_1748937221_8.7.2_part_5_of_6",
+               "state":"SUCCESS",
+               "startTime":"2025-06-03T07:55:18.298+0000",
+               "failures":[
+                  
+               ]
+            },
+            {
+               "snapshotName":"camunda_operate_1748937221_8.7.2_part_6_of_6",
+               "state":"SUCCESS",
+               "startTime":"2025-06-03T07:55:18.499+0000",
+               "failures":[
+                  
+               ]
+            }
+         ]
+      }
+      ```
 
       </summary>
    </details>
@@ -296,7 +406,63 @@ export GATEWAY_MANAGEMENT_API=
       <summary>Example output</summary>
       <summary>
 
-      <!-- TODO: You get the idea -->
+      ```json
+      {
+         "backupId":1748937221,
+         "state":"COMPLETED",
+         "failureReason":null,
+         "details":[
+            {
+               "snapshotName":"camunda_tasklist_1748937221_8.7.2_part_1_of_6",
+               "state":"SUCCESS",
+               "startTime":"2025-06-03T07:56:56.519+0000",
+               "failures":[
+                  
+               ]
+            },
+            {
+               "snapshotName":"camunda_tasklist_1748937221_8.7.2_part_2_of_6",
+               "state":"SUCCESS",
+               "startTime":"2025-06-03T07:56:57.324+0000",
+               "failures":[
+                  
+               ]
+            },
+            {
+               "snapshotName":"camunda_tasklist_1748937221_8.7.2_part_3_of_6",
+               "state":"SUCCESS",
+               "startTime":"2025-06-03T07:56:57.927+0000",
+               "failures":[
+                  
+               ]
+            },
+            {
+               "snapshotName":"camunda_tasklist_1748937221_8.7.2_part_4_of_6",
+               "state":"SUCCESS",
+               "startTime":"2025-06-03T07:56:58.329+0000",
+               "failures":[
+                  
+               ]
+            },
+            {
+               "snapshotName":"camunda_tasklist_1748937221_8.7.2_part_5_of_6",
+               "state":"SUCCESS",
+               "startTime":"2025-06-03T07:56:58.933+0000",
+               "failures":[
+                  
+               ]
+            },
+            {
+               "snapshotName":"camunda_tasklist_1748937221_8.7.2_part_6_of_6",
+               "state":"SUCCESS",
+               "startTime":"2025-06-03T07:56:59.535+0000",
+               "failures":[
+                  
+               ]
+            }
+         ]
+      }
+      ```
 
       </summary>
    </details>
@@ -310,14 +476,20 @@ export GATEWAY_MANAGEMENT_API=
 7. Soft pause exporting in Zeebe. See [Zeebe management API](/self-managed/zeebe-deployment/operations/management-api.md).
 
    ```bash
-   curl -XPOST "$GATEWAY_MANAGEMENT_API/actuator/exporting?soft=true"
+   curl -XPOST "$GATEWAY_MANAGEMENT_API/actuator/exporting/pause?soft=true"
    ```
 
    <details>
       <summary>Example output</summary>
       <summary>
 
-      <!-- TODO: You get the idea -->
+      ```json
+      {
+         "body":null,
+         "status":204,
+         "contentType":null
+      }
+      ```
 
       </summary>
    </details>
@@ -345,7 +517,41 @@ export GATEWAY_MANAGEMENT_API=
          <summary>Example output</summary>
          <summary>
 
-         <!-- TODO: You get the idea -->
+         ```json
+         {
+            "snapshot":{
+               "snapshot":"camunda_zeebe_records_backup_1748937221",
+               "uuid":"1p_HdzKeTZ-zY-SN1LJ9VQ",
+               "repository":"camunda",
+               "version_id":8521000,
+               "version":"8.17.0-8.17.4",
+               "indices":[
+                  
+               ],
+               "data_streams":[
+                  
+               ],
+               "include_global_state":true,
+               "state":"SUCCESS",
+               "start_time":"2025-06-03T08:05:10.633Z",
+               "start_time_in_millis":1748937910633,
+               "end_time":"2025-06-03T08:05:10.633Z",
+               "end_time_in_millis":1748937910633,
+               "duration_in_millis":0,
+               "failures":[
+                  
+               ],
+               "shards":{
+                  "total":0,
+                  "failed":0,
+                  "successful":0
+               },
+               "feature_states":[
+                  
+               ]
+            }
+         }
+         ```
 
          </summary>
       </details>
@@ -390,7 +596,42 @@ export GATEWAY_MANAGEMENT_API=
          <summary>Example output</summary>
          <summary>
 
-         <!-- TODO: You get the idea -->
+         ```
+         {
+            "snapshots":[
+               {
+                  "snapshot":"camunda_zeebe_records_backup_1748937221",
+                  "repository":"camunda",
+                  "uuid":"1p_HdzKeTZ-zY-SN1LJ9VQ",
+                  "state":"SUCCESS",
+                  "include_global_state":true,
+                  "shards_stats":{
+                     "initializing":0,
+                     "started":0,
+                     "finalizing":0,
+                     "done":0,
+                     "failed":0,
+                     "total":0
+                  },
+                  "stats":{
+                     "incremental":{
+                        "file_count":0,
+                        "size_in_bytes":0
+                     },
+                     "total":{
+                        "file_count":0,
+                        "size_in_bytes":0
+                     },
+                     "start_time_in_millis":1748937910633,
+                     "time_in_millis":0
+                  },
+                  "indices":{
+                     
+                  }
+               }
+            ]
+         }
+         ```
 
          </summary>
       </details>
@@ -401,7 +642,7 @@ export GATEWAY_MANAGEMENT_API=
       [OpenSearch documentation](https://docs.opensearch.org/docs/latest/api-reference/snapshots/get-snapshot-status/)
 
       ```bash
-      curl -XPUT "$OPENSEARCH_ENDPOINT/_snapshot/$OPENSEARCH_SNAPSHOT_REPOSITORY/camunda_zeebe_records_backup_$BACKUP_ID/_status"
+      curl "$OPENSEARCH_ENDPOINT/_snapshot/$OPENSEARCH_SNAPSHOT_REPOSITORY/camunda_zeebe_records_backup_$BACKUP_ID/_status"
       ```
 
       <details>
@@ -418,47 +659,81 @@ export GATEWAY_MANAGEMENT_API=
 
 10. Take a backup `x` of Zeebe. See [how to take a Zeebe backup](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md).
 
-   ```bash
-   curl -XPOST "$GATEWAY_MANAGEMENT_API/actuator/backups" \
-      -H "Content-Type: application/json" \
-      -d "{\"backupId\": $BACKUP_ID}"
-   ```
+      ```bash
+      curl -XPOST "$GATEWAY_MANAGEMENT_API/actuator/backups" \
+         -H "Content-Type: application/json" \
+         -d "{\"backupId\": $BACKUP_ID}"
+      ```
 
-   <details>
-      <summary>Example output</summary>
-      <summary>
+      <details>
+         <summary>Example output</summary>
+         <summary>
 
-      <!-- TODO: You get the idea -->
+         ```json
+         {
+            "message":"A backup with id 1748937221 has been scheduled. Use GET actuator/backups/1748937221 to monitor the status."
+         }
+         ```
 
-      </summary>
-   </details>
+         </summary>
+      </details>
 
 11. Wait until the backup `x` of Zeebe is completed before proceeding. See [how to monitor a Zeebe backup](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md).
 
-   ```bash
-   curl "$GATEWAY_MANAGEMENT_API/actuator/backups/$BACKUP_ID"
-   ```
+      ```bash
+      curl "$GATEWAY_MANAGEMENT_API/actuator/backups/$BACKUP_ID"
+      ```
 
-   <details>
-      <summary>Example output</summary>
-      <summary>
+      <details>
+         <summary>Example output</summary>
+         <summary>
 
-      <!-- TODO: You get the idea -->
+         ```json
+         {
+            "backupId":1748937221,
+            "state":"COMPLETED",
+            "details":[
+               {
+                  "partitionId":1,
+                  "state":"COMPLETED",
+                  "createdAt":"2025-06-03T08:06:06.246997293Z",
+                  "lastUpdatedAt":"2025-06-03T08:06:10.408893628Z",
+                  "checkpointPosition":1,
+                  "brokerVersion":"8.7.2"
+               }
+            ]
+         }
+         ```
 
-      </summary>
-   </details>
+         </summary>
+      </details>
 
-   Alternatively as a one-line to wait until the state is `COMPLETED` using a while loop and jq to parse the response JSON.
+      Alternatively as a one-line to wait until the state is `COMPLETED` using a while loop and jq to parse the response JSON.
 
-   ```bash
-   while [[ "$(curl -s "$GATEWAY_MANAGEMENT_API/actuator/backups/$BACKUP_ID" | jq -r .state)" != "COMPLETED" ]]; do echo "Waiting..."; sleep 5; done; echo "Finished backup with ID $BACKUP_ID"
-   ```
+      ```bash
+      while [[ "$(curl -s "$GATEWAY_MANAGEMENT_API/actuator/backups/$BACKUP_ID" | jq -r .state)" != "COMPLETED" ]]; do echo "Waiting..."; sleep 5; done; echo "Finished backup with ID $BACKUP_ID"
+      ```
 
 12. Resume exporting in Zeebe. See [Zeebe management API](/self-managed/zeebe-deployment/operations/management-api.md).
 
-```bash
-curl -XPOST "$GATEWAY_MANAGEMENT_API/actuator/exporting/resume"
-```
+      ```bash
+      curl -XPOST "$GATEWAY_MANAGEMENT_API/actuator/exporting/resume"
+      ```
+
+      <details>
+         <summary>Example output</summary>
+         <summary>
+
+         ```json
+         {
+            "body":null,
+            "status":204,
+            "contentType":null
+         }
+         ```
+
+         </summary>
+      </details>
 
 :::warning
 If any of the steps above fail, you may have to restart with a new backup ID. Ensure Zeebe exporting is resumed if the backup process force quits in the middle of the process.
@@ -514,7 +789,23 @@ In that case, follow the described steps above and when you have your Elasticsea
          <summary>Example output</summary>
          <summary>
 
-         <!-- TODO: You get the idea -->
+         ```
+         camunda_optimize_1748937221_8.7.1_part_1_of_2
+         camunda_optimize_1748937221_8.7.1_part_2_of_2
+         camunda_operate_1748937221_8.7.2_part_1_of_6
+         camunda_operate_1748937221_8.7.2_part_2_of_6
+         camunda_operate_1748937221_8.7.2_part_3_of_6
+         camunda_operate_1748937221_8.7.2_part_4_of_6
+         camunda_operate_1748937221_8.7.2_part_5_of_6
+         camunda_operate_1748937221_8.7.2_part_6_of_6
+         camunda_tasklist_1748937221_8.7.2_part_1_of_6
+         camunda_tasklist_1748937221_8.7.2_part_2_of_6
+         camunda_tasklist_1748937221_8.7.2_part_3_of_6
+         camunda_tasklist_1748937221_8.7.2_part_4_of_6
+         camunda_tasklist_1748937221_8.7.2_part_5_of_6
+         camunda_tasklist_1748937221_8.7.2_part_6_of_6
+         camunda_zeebe_records_backup_1748937221
+         ```
 
          </summary>
       </details>
