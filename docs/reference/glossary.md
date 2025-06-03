@@ -24,16 +24,16 @@ See [Zeebe Cluster](#zeebe-cluster).
 
 Camunda 8 is a universal universal process orchestrator that allows to orchestrate and automate complex business processes that span people, systems, and devices. Camunda 8 consists of the following key components:
 
-- [Orchestration Cluster](#orchestration-cluster) powering the automation and orchestration of [processes](#process)
+- [Orchestration cluster](#orchestration-cluster) powering the automation and orchestration of [processes](#process)
 - [Connectors](#connector) allowing the out-of-the-box integration with external systems
 - Optimize offering business intelligence tooling allowing to e.g., analyze bottlenecks and examine improvements in [processes](#process) automated with Camunda
-- Console allows to manage [orchestration cluster](#orchestration-cluster) deplyoments. The capabilities differ based in SaaS and Self-Managed:
-  - Console SaaS: allows configuring, deploying, and managing [orchestration cluster](#orchestration-cluster) and respective [Connectors](#connector) and Optimize deployments
-  - Console Self-Managed: allows monitoring [orchestration cluster](#orchestration-cluster) and respective [Connectors](#connector) deployments
+- Console allows to manage [Orchestration cluster](#orchestration-cluster) deplyoments. The capabilities differ based in SaaS and Self-Managed:
+  - Console SaaS: allows configuring, deploying, and managing [Orchestration cluster](#orchestration-cluster) and respective [Connectors](#connector) and Optimize deployments
+  - Console Self-Managed: allows monitoring [Orchestration cluster](#orchestration-cluster) and respective [Connectors](#connector) deployments
 - Modeling applications allowing business and developer personas to design and implement [processes](#process), decisions and [user task](#user-task) forms:
   - A Desktop Modeler for local usage on Mac, Windows and Linux
   - A Web Modeler for browser-based usage and process application management
-- [Management Identity](#management-identity) offering authentication and authorization capabilities to the components outside the [Orchestration Cluster](#orchestration-cluster): Optimize, Console, and Web Modeler
+- [Management Identity](#management-identity) offering authentication and authorization capabilities to the components outside the [Orchestration cluster](#orchestration-cluster): Optimize, Console, and Web Modeler
 
 Please refer to the respective documentation pages for an introduction:
 
@@ -133,7 +133,7 @@ For example, this is useful when working with services that must be isolated wit
 
 ### Identity
 
-Identity is a UI in the [orchestration cluster](#orchestration-cluster) allowing to adminster the integrated authentication and authorization capbilities.
+Identity is a UI in the [Orchestration cluster](#orchestration-cluster) allowing to adminster the integrated authentication and authorization capbilities.
 
 ### Inbound connector
 
@@ -190,7 +190,7 @@ The log is comprised of an ordered sequence of records written to persistent sto
 
 ### Management Identity
 
-The Management Identity component provides authentication and authorization capabilities to the [Camunda 8](#camunda-8) components, which exist outside the [Orchestration Cluster](#orchestration-cluster): Console, Web Modeler, and Optimize.
+The Management Identity component provides authentication and authorization capabilities to the [Camunda 8](#camunda-8) components, which exist outside the [Orchestration cluster](#orchestration-cluster): Console, Web Modeler, and Optimize.
 
 ### Manual task
 
@@ -208,13 +208,13 @@ A message contains information to be delivered to interested parties during exec
 
 ### Orchestration cluster
 
-The Orchestration cluster is the core component of [Camunda 8](#camunda-8), powering the automation and orchestration of [processes](#process). An orchestration cluster includes:
+The Orchestration cluster is the core component of [Camunda 8](#camunda-8), powering the automation and orchestration of [processes](#process). An Orchestration cluster includes:
 
 - [Zeebe](#zeebe) as [workflow engine](#workflow-engine)
 - Operate to monitor and troubleshoot [process instances](#process-instance) running in [Zeebe](#zeebe)
 - Tasklist to interact (assign, complete, ...) with [user tasks](#user-task)
 - [Identity](#identity) to adminster the integrated authentication and authorization capbilities
-- APIs to interact with the orchestration cluster programmatically
+- APIs to interact with the Orchestration cluster programmatically
 
 ### Outbound connector
 
@@ -284,7 +284,7 @@ We recommend running an odd replication factor.
 
 This is how long a [client](#zeebe-client) waits for a response from the [broker](#zeebe-broker) after the [client](#zeebe-client) submits a request. If a response is not received within the client request timeout, the [client](#zeebe-client) considers the [broker](#zeebe-broker) unreachable.
 
-- [Orchestration Cluster API](/apis-tools/zeebe-api-rest/zeebe-api-rest-overview.md)
+- [Orchestration cluster API](/apis-tools/zeebe-api-rest/zeebe-api-rest-overview.md)
 - [Zeebe API (gRPC)](/apis-tools/zeebe-api/grpc.md)
 
 ### Segment
@@ -359,7 +359,7 @@ See [process instance variable](#process-instance-variable).
 
 Zeebe is a highly scalable, cloud-native workflow engine used to automate business processes. It acts as the core component of Camunda 8.
 
-Zeebe is part of the [Orchestration Cluster](#orchestration-cluster) in Camunda 8.
+Zeebe is part of the [Orchestration cluster](#orchestration-cluster) in Camunda 8.
 
 The main components of Zeebe are:
 
