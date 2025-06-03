@@ -290,12 +290,12 @@ To set up a ROSA cluster, certain prerequisites must be configured on your AWS a
 
    :::note Private cluster
 
-   By default, this cluster will be accessible from the internet. 
-   If you prefer to restrict access, you will need to set `locals.rosa_private_cluster = true`. This will create a [private cluster](https://cloud.redhat.com/experts/rosa/private-link/) only accessible the [private subnets](https://docs.aws.amazon.com/vpc/latest/userguide/configure-subnets.html) of the VPC and [eventually publicly exposing a public ingress](https://cloud.redhat.com/experts/rosa/private-link/public-ingress/).
+   By default, this cluster is accessible from the internet.
+   If you prefer to restrict access, set `locals.rosa_private_cluster = true`. This will create a [private cluster](https://cloud.redhat.com/experts/rosa/private-link/) that is only accessible through the [private subnets](https://docs.aws.amazon.com/vpc/latest/userguide/configure-subnets.html) of your VPC. Optionally, you can still expose a public ingress: [learn more](https://cloud.redhat.com/experts/rosa/private-link/public-ingress/).
 
-   As private subnets are not accessible from the internet, you will need to setup a connection from your network to the cluster. This can be achieved with a [bastion node](https://docs.aws.amazon.com/mwaa/latest/userguide/tutorials-private-network-bastion.html) or with a Client VPN.
+   ⚠️ Since private subnets are not reachable from the internet, you'll need to establish a connection between your network and the cluster. This can be done using a [bastion host](https://docs.aws.amazon.com/mwaa/latest/userguide/tutorials-private-network-bastion.html) or a Client VPN.
 
-   The [next section](#vpn-module-setup) will guide you in the setup of an [AWS VPN Endpoint](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/cvpn-getting-started.html) that will allow you to access the private cluster.
+   The [next section](#vpn-module-setup) will guide you through setting up an [AWS VPN Endpoint](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/cvpn-getting-started.html), which allows secure access to the private cluster.
 
    :::
 
@@ -358,11 +358,11 @@ Terraform will now create the OpenShift cluster with all the necessary configura
 
 ### VPN module setup
 
-This section setups an AWS VPN Endpoint that can be used to access a private cluster. 
+This section guides you through setting up an AWS VPN Endpoint to access a private cluster.
 
-This is **optional** and only useful if you have configured a **private cluster**.
+This step is **optional** and only necessary if you have configured a **private cluster**.
 
-Using a VPN provides an flexible solution to connect securely to the private subnets of the VPC. It can either be used by an user to access the resources or the enable cross sites communications ([Private Link](https://docs.aws.amazon.com/vpc/latest/privatelink/what-is-privatelink.html)). This module is focused on the usage for the user.
+Using a VPN offers a flexible and secure way to connect to the private subnets within your VPC. It can be used either by a user to access cluster resources or to enable cross-site communications via [PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/what-is-privatelink.html). This module focuses on user access.
 
 <!-- The following diagram should be exported as an image and as a PDF from the sources https://miro.com/app/board/uXjVL-6SrPc=/ --->
 <!-- To export: click on the frame > "Export Image" > as PDF and as JPG (low res), then save it in the ./assets/ folder --->
@@ -370,13 +370,15 @@ Using a VPN provides an flexible solution to connect securely to the private sub
 _Infrastructure diagram for a single region ROSA setup with VPN (click on the image to open the PDF version)_
 [![Infrastructure Diagram ROSA Single-Region VPN](./assets/rosa-single-region-vpn.jpg)](./assets/rosa-single-region-vpn.pdf)
 
-The technology used by AWS VPN is compatible with OpenVPN clients. It relies on usage of [x509 certificates](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/mutual.html) providing both authentification and verification of the source.
+AWS VPN technology is compatible with OpenVPN clients. It uses [x509 certificates](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/mutual.html) for mutual authentication and source verification.
+The encryption provided by these certificates ensures that traffic can securely transit over the internet to the AWS VPN endpoint, which performs NAT and routes the traffic directly into the private subnets. This VPN endpoint thus becomes the sole access point to the private cluster.
 
 #### Retrieve the VPC cluster id
 
-To create the VPN Endpoint on the cluster’s VPC, you need to gather some information using the [terraform outputs](https://developer.hashicorp.com/terraform/language/values/outputs) of the [OpenShift clusters module setup](#openshift-cluster-module-setup). Follow these steps:
+To create the VPN Endpoint in your cluster’s VPC, you need to retrieve the VPC ID using [Terraform outputs](https://developer.hashicorp.com/terraform/language/values/outputs) from the [OpenShift cluster module](#openshift-cluster-module-setup). Follow these steps:
 
-1. Ensure you are in the [reference architecture directory of the cloned repository](#obtain-a-copy-of-the-reference-architecture): `./aws/openshift/rosa-hcp-single-region/terraform/`, then navigate in the `cluster` module directory
+1. Ensure you are in the [reference architecture directory of the cloned repository](#obtain-a-copy-of-the-reference-architecture): `./aws/openshift/rosa-hcp-single-region/terraform/`.
+ Navigate to the `cluster` module directory inside your reference architecture repository, for example:
 
    ```bash
    ls
@@ -386,39 +388,38 @@ To create the VPN Endpoint on the cluster’s VPC, you need to gather some infor
    cd cluster
    ```
 
-1. Save the associated [VPC ID](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/vpc):
+1. Export the [VPC ID](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/vpc) to an environment variable:
 
-   ```bash
-   export CLUSTER_VPC_ID="$(terraform output -raw vpc_id)"
-   echo "CLUSTER_VPC_ID=$CLUSTER_VPC_ID"
-   ```
+    ```bash
+    export CLUSTER_VPC_ID="$(terraform output -raw vpc_id)"
+    echo "CLUSTER_VPC_ID=$CLUSTER_VPC_ID"
+    ```
+
 #### Set up the VPN module
 
-In the parent directory where your cluster module reside (`cluster`), navigate to the directory called `vpn` which contains the VPN endpoint configuration:
+From the parent directory containing your cluster module, go to the `vpn` directory which holds the VPN endpoint configuration.
 
-We will setup a Certificate Authority (CA) used by [AWS VPN](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/mutual.html) to perform encryption and mutual authentification of the clients.
-For the simplicity of the setup, the signing Certificate Authority and its asssociated certificates will be stored in the [tfstate](https://developer.hashicorp.com/terraform/language/state) of the project.
-You may want to adapt the implementation to your needs.
+This setup creates a Certificate Authority (CA) for AWS VPN to perform encryption and mutual client authentication. For simplicity, the CA and generated certificates are stored in the project’s Terraform state (`tfstate`). You may customize this as needed.
 
-Begin by reviewing up the `config.tf` that configures S3 backend for managing the Terraform state:
+Start by reviewing the `config.tf` file that configures the S3 backend for Terraform state management:
 
 ```hcl reference
 https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-private-link/aws/openshift/rosa-hcp-single-region/terraform/vpn/config.tf
 ```
 
-Finally, review the file called `vpn.tf`, that describes the VPC Client Endpoint configuration:
+Then, review `vpn.tf`, which describes the VPC Client Endpoint configuration:
 
 ```hcl reference
 https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-private-link/aws/openshift/rosa-hcp-single-region/terraform/vpn/vpn.tf
 ```
 
-This VPN Client Endpoint configuration follows the [best practices, contraints and known limitations](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/what-is-best-practices.html):
-    - Uses a non-overlapping client CIDR range that does not conflict with the VPC CIDR or any manually added routes in the VPN endpoint’s route table.
-    - Implements [split-tunnel routing](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/split-tunnel-vpn.html): only traffic destined for the VPC flows through the VPN, reducing unnecessary bandwidth usage.
-    - The VPN supports IPv4 only and is bound to the VPC and its associated private subnets of the referenced cluster.
+This VPN Client Endpoint follows [AWS best practices and constraints](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/what-is-best-practices.html):
+    - Uses a client CIDR range that does not overlap with the VPC CIDR or any manually added VPN route table routes.
+    - Implements [split-tunnel routing](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/split-tunnel-vpn.html), so only traffic destined for the VPC goes through the VPN, minimizing bandwidth use.
+    - Supports IPv4 only and is bound to the VPC’s private subnets.
 
 
-1. After setting up the terraform files and ensuring your AWS authentication is configured, initialize your Terraform project, then, initialize Terraform to [configure the backend](#create-an-s3-bucket-for-terraform-state-management) and download necessary provider plugins:
+1. Set your Terraform state key and initialize Terraform with the S3 [backend](#create-an-s3-bucket-for-terraform-state-management) and download necessary provider plugins:
 
    ```bash
    export S3_TF_BUCKET_KEY_VPN="camunda-terraform/vpn.tfstate"
@@ -430,23 +431,22 @@ This VPN Client Endpoint configuration follows the [best practices, contraints a
 
    Terraform will connect to the S3 bucket to manage the state file, ensuring remote and persistent storage.
 
-1. For each of your individual resource connecting to the cluster, you should use a unique name referenced in `client_key_names`, this will make revocation easier.
+1. For each client connecting to the cluster, assign a unique name in `client_key_names` to simplify certificate revocation.
 
-1. By default, the VPN can be accessed from any ip, you might want to harden it by adjusting `vpn_allowed_cidr_blocks`.
+1. By default, VPN access is allowed from any IP address. You may restrict access by adjusting the `vpn_allowed_cidr_blocks` variable.
 
-1. As network design is specific to each topology, we encourage you to review the implementation and adjust it according to your specific requirements.
+1. Network designs vary; please review and adjust the configuration to fit your topology.
 
-1. Customize the VPN setup. The module offers various input options that allow you to further customize the cluster configuration. For a comprehensive list of available options and detailed usage instructions, refer to the [VPN module documentation](https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-private-link/aws/modules/vpn/README.md).
+1. Customize the VPN module by referring to the [VPN module documentation](https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-private-link/aws/modules/vpn/README.md).
 
 #### Outputs
 
-This module leverages terraform state to store certificates and VPN clients configurations. 
-Next section will describe how to retrieve a client's config and use it.
+The module stores certificates and VPN client configurations in the Terraform state. The next section explains how to retrieve and use client configurations.
 
 #### Execution
 
-1. Run the following command to generate a plan for the VPN Client Endpoint configuration.
-   It will connect with private subnets the previously retrieved VPC of the cluster:
+1. Generate a Terraform plan for the VPN Client Endpoint configuration.
+  This will use the private subnets of the designated VPC:
 
    ```bash
    # describe what will be created
@@ -454,14 +454,13 @@ Next section will describe how to retrieve a client's config and use it.
     -var vpc_id="$CLUSTER_VPC_ID"
    ```
 
-1. After reviewing the plan, you can confirm and apply the changes.
+1. Review and apply the plan to create the resources:
 
    ```bash
    terraform apply vpn.plan     # creates the resources
    ```
 
-Terraform will now create the VPN Client Endpoint and output the client's configuration in `vpn_client_configs`. The completion of this process may require approximately 10 minutes.
-
+Creation of the VPN Client Endpoint typically takes about 10 minutes. After completion, the client configurations will be available in the Terraform output `vpn_client_configs`.
 
 ### Reference files
 
@@ -473,9 +472,9 @@ Depending on the installation path you have chosen, you can find the reference f
 
 ### Access to the private network using the VPN
 
-This section is applicable if you previsouly created a private cluster and you would like to access it using the [previously configured VPN module](#vpn-module-setup). 
+This section applies if you have previously created a private cluster and want to access it using the [VPN module configured earlier](#vpn-module-setup).
 
-1. Navigate to the VPN module (`vpn` directory):
+1. Navigate to the VPN module directory (`vpn`):
 
     ```bash
     pwd
@@ -484,17 +483,17 @@ This section is applicable if you previsouly created a private cluster and you w
     # ./camunda-deployment-references/aws/openshift/rosa-hcp-single-region/terraform/vpn/
     ```
 
-1. From the ouput of the VPN module, create your client's configuration file for the VPN, the file is compatible with [OpenVPN](https://openvpn.net/):
+1. Generate your client’s VPN configuration file. This file is compatible with [OpenVPN (ovpn)](https://openvpn.net/) format:
 
     ```bash reference
     https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-private-link/aws/openshift/rosa-hcp-single-region/procedure/gather-vpn-config.sh
     ```
 
-1. Load the created file (`my-client.ovpn`) in one of your OpenVPN client of your choice:
+1. Import the generated configuration file (`my-client.ovpn`) into your preferred OpenVPN client:
     - [Official AWS VPN Client](https://docs.aws.amazon.com/vpn/latest/clientvpn-user/connect-aws-client-vpn-connect.html)
     - [Other OpenVPN Clients](https://docs.aws.amazon.com/vpn/latest/clientvpn-user/connect.html)
 
-1. Once loaded and enabled, the client will confirm your connection to the VPN, allowing you to reach the private network of the VPC.
+1. Once the VPN client is connected, you will have secure access to the VPC’s private network.
 
 ### Access the created OpenShift cluster
 
