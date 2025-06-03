@@ -55,7 +55,7 @@ To open a FEEL popup from an empty diagram, follow these steps:
 Timeouts can occur during this step if your query is too complex.
 :::
 
-## Example Prompts
+## Example prompts
 
 ### Generate FEEL expressions
 
@@ -64,13 +64,13 @@ Timeouts can occur during this step if your query is too complex.
 - Check if a number is greater than 10
 - What would this Java be in FEEL: input.trim().toUpperCase().replace(" ", "\_");
 
-### Translate Code to FEEL
+### Translate code to FEEL
 
 - Translate from JUEL
 - Translate from Python
 - Translate from JavaScript
 
-### Debugging & Refactoring FEEL
+### Debug & refactor FEEL
 
 - Fix this expression
 - Why am I getting a null response?
