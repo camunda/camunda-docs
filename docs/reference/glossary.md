@@ -10,21 +10,15 @@ See [orchestration cluster](#orchestration-cluster).
 
 ### Broker
 
-The [Zeebe Broker](#zeebe-broker) is the distributed workflow engine that tracks the state of active process instances. However, a Zeebe deployment often consists of more than one broker. Brokers can be partitioned for horizontal scalability and replicated for fault tolerance.
-
-- [Architecture](/components/zeebe/technical-concepts/architecture.md)
+See [Zeebe Broker](#zeebe-broker).
 
 ### Client
 
-A client interacts with the Zeebe Broker on behalf of the business application. Clients poll for work from the broker.
-
-- [Architecture](/components/zeebe/technical-concepts/architecture.md#clients)
+See [Zeebe Client](#zeebe-client).
 
 ### Cluster
 
-A cluster represents a configuration of one or more brokers collaborating to execute processes. Each broker in a cluster acts as a leader or a follower.
-
-- [Clustering](/components/zeebe/technical-concepts/clustering.md)
+See [Zeebe Cluster](#zeebe-cluster).
 
 ### Command
 
@@ -84,9 +78,7 @@ An execution listener is a mechanism that allows users to execute custom logic a
 
 ### Exporter
 
-An exporter represents a sink to which Zeebe will submit all records within the log. This gives users of Zeebe an opportunity to persist records with the log for future use as this data will not be available after log compaction.
-
-- [Exporter](/self-managed/concepts/exporters.md)
+See [Zeebe Exporter](#zeebe-exporter).
 
 ### Flow node
 
@@ -97,6 +89,10 @@ Flow nodes refer to a specific subset of BPMN [elements](#element). They compris
 In a clustered environment, a broker which is not a leader is a follower of a given partition. A follower can become the new leader when the old leader is no longer reachable.
 
 - [Clustering](/components/zeebe/technical-concepts/clustering.md#raft-consensus-and-replication-protocol)
+
+### Gateway
+
+See [Zeebe Gateway](#zeebe-gateway).
 
 ### Human task
 
@@ -149,7 +145,7 @@ This is the amount of time the broker will wait for a complete or fail response 
 
 ### Job worker
 
-A special type of client that polls for and executes available jobs. An uncompleted job prevents Zeebe from advancing process execution to the next step.
+A [Zeebe Client](#zeebe-client) that polls for and executes available [jobs](#job). An uncompleted job prevents [Zeebe](#zeebe) from advancing process execution to the next step.
 
 - [Job workers](/components/concepts/job-workers.md)
 
@@ -307,9 +303,7 @@ A webhook is a way for web applications to send real-time notifications or data 
 
 ### Worker
 
-A worker executes a job. In the Zeebe nomenclature, these are also referred to as job workers.
-
-- [Job workers](/components/concepts/job-workers.md)
+See [Job Worker](#job-worker).
 
 ### Workflow
 
@@ -317,7 +311,7 @@ See [process](#process).
 
 ### Workflow engine
 
-A workflow engine is an essential part of any process automation tool. We call it an “engine” because it drives business processes from start to finish, no matter how complex the process and decision logic need to be. [Zeebe](/components/zeebe/zeebe-overview.md) is the workflow engine powering Camunda 8.
+A workflow engine is an essential part of any process automation tool. We call it an “engine” because it drives business processes from start to finish, no matter how complex the process and decision logic need to be. [Zeebe](#zeebe) is the workflow engine powering Camunda 8.
 
 ### Workflow instance
 
@@ -327,12 +321,39 @@ See [process instance](#process-instance).
 
 See [process instance variable](#process-instance-variable).
 
-## Zeebe Broker
+### Zeebe
 
-The [Zeebe Broker](/components/zeebe/technical-concepts/architecture.md#brokers) is the distributed workflow engine that tracks the state of active process instances. The Zeebe Broker is the main part of the Zeebe cluster, which does all the heavy work like processing, replicating, exporting, and everything based on partitions.
+Zeebe is a highly scalable, cloud-native workflow engine used to automate business processes. It acts as the core component of Camunda 8.
+
+Zeebe is part of the [Orchestration Cluster](#orchestration-cluster) in Camunda 8.
+
+The main components of Zeebe are:
+
+- [Clients](#zeebe-client)
+- [Gateways](#zeebe-gateway)
+- [Brokers](#zeebe-broker)
+- [Exporters](#zeebe-exporter)
+
+A Zeebe deployment typically consists of multiple brokers and gateways, forming a [Zeebe cluster](#zeebe-cluster).
+
+### Zeebe Broker
+
+The [Zeebe Broker](/components/zeebe/technical-concepts/architecture.md#brokers) is the distributed workflow engine that tracks the state of active process instances. The Zeebe Broker is the main part of the Zeebe cluster, which does all the heavy work like processing, replicating, exporting, and everything based on partitions. A Zeebe deployment often consists of more than one broker. Brokers can be partitioned for horizontal scalability and replicated for fault tolerance.
+
+### Zeebe Client
+
+A [Zeebe Client](/components/zeebe/technical-concepts/architecture.md#clients) interacts with the Zeebe Broker on behalf of the business application. Clients retrieve work from the Zeebe Cluster via polling or job push.
+
+### Zeebe Cluster
+
+A Zeebe Cluster represents a configuration of one or more [brokers](#zeebe-broker) collaborating to execute processes. Each broker in a cluster acts as a leader or a follower.
+
+- [Clustering](/components/zeebe/technical-concepts/clustering.md)
+
+### Zeebe Exporter
+
+The [Zeebe Exporter](/components/zeebe/technical-concepts/architecture.md#exporters) system provides an event stream of state changes within Zeebe. It represents a sink to which Zeebe will submit all records within the log. This gives users of Zeebe an opportunity to persist records with the log for future use as this data will not be available after log compaction.
 
 ### Zeebe Gateway
 
-The Zeebe Gateway is a component of the Zeebe cluster; it can be considered the contact point for the Zeebe cluster which allows Zeebe clients to communicate with Zeebe brokers inside a Zeebe cluster.
-
-- [Zeebe Gateway overview](/self-managed/zeebe-deployment/zeebe-gateway/zeebe-gateway-overview.md)
+The [Zeebe Gateway](self-managed/zeebe-deployment/zeebe-gateway/zeebe-gateway-overview.md) is a component of the Zeebe cluster; it can be considered the contact point for the Zeebe cluster which allows Zeebe clients to communicate with Zeebe brokers inside a Zeebe cluster.
