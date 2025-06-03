@@ -29,7 +29,7 @@ The FEEL Playground is integrated into the popup FEEL editor:
 
 - **Result**: Shows the results of the validation when run against the sample data. For example, if the expression is valid for the sample data, an [Approved validation result](#results) is returned. If there is a validation issue, a warning and description of the issue is shown to help you troubleshoot the expression.
 
-- **FEEL Copilot**: Open the [FEEL Copilot (alpha feature)](/components/early-access/alpha/alpha-features.md) to chat with the AI FEEL Copilot and get help with generating expressions.
+- **FEEL Copilot**: (For SaaS only) Open the [FEEL Copilot (alpha feature)](/components/early-access/alpha/alpha-features.md) to chat with the AI FEEL Copilot and get help with generating expressions.
 
 :::note
 The latest version of the [FEEL Scala engine](/components/modeler/feel/what-is-feel.md#feel-engines) is used to validate FEEL expressions in the FEEL Playground.
