@@ -27,7 +27,9 @@ Camunda 8 is a universal universal process orchestrator that allows to orchestra
 - [Orchestration Cluster](#orchestration-cluster) powering the automation and orchestration of [processes](#process)
 - [Connectors](#connector) allowing the out-of-the-box integration with external systems
 - Optimize offering business intelligence tooling allowing to e.g., analyze bottlenecks and examine improvements in [processes](#process) automated with Camunda
-- Console allowing configuring, deploying, and managing [orchestration cluster](#orchestration-cluster) and respective [Connectors](#connector) and Optimize deployments
+- Console allows to manage [orchestration cluster](#orchestration-cluster) deplyoments. The capabilities differ based in SaaS and Self-Managed:
+  - Console SaaS: allows configuring, deploying, and managing [orchestration cluster](#orchestration-cluster) and respective [Connectors](#connector) and Optimize deployments
+  - Console Self-Managed: allows monitoring [orchestration cluster](#orchestration-cluster) and respective [Connectors](#connector) deployments
 - Modeling applications allowing business and developer personas to design and implement [processes](#process), decisions and [user task](#user-task) forms:
   - A Desktop Modeler for local usage on Mac, Windows and Linux
   - A Web Modeler for browser-based usage and process application management
@@ -36,7 +38,8 @@ Camunda 8 is a universal universal process orchestrator that allows to orchestra
 Please refer to the respective documentation pages for an introduction:
 
 - [Optimize](/components/optimize/what-is-optimize.md)
-- [Console](/components/console/introduction-to-console.md)
+- [Console SaaS](/components/console/introduction-to-console.md)
+- [Console Self-Managed](/self-managed/console-deployment/overview.md)
 - [Desktop Modeler](/components/modeler/desktop-modeler/index.md)
 - [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md)
 
