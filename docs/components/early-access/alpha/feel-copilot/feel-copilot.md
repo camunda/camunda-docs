@@ -29,17 +29,27 @@ To use the FEEL Copilot in Web Modeler, take the following steps:
 1. If you have not already done so, [opt in](/components/console/manage-organization/enable-alpha-features.md#enable-ai-powered-features) to use this feature.
 2. Log in to [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md).
 3. Click **New project > Create new > BPMN diagram**
-4. Open a FEEL Popup. In a new diagram, you can click the Start Event (the circle in the diagram), then the + sign next to "Outputs" in the right sidebar. Click "Variable assignment value", then the two overlapping squares on the right side of the field.
+4. Open any FEEL Popup.
+
+:::note
+To open a FEEL popup from an empty diagram, follow these steps:
+
+1.  In a new diagram, click the Start Event (the circle in the diagram).
+2.  In the right sidebar, click the plus (+) next to “Outputs.”
+3.  Click “Variable assignment value.”
+4.  Click the two overlapping squares icon on the right side of the field to open the FEEL popup.
+    :::
 
 <img src={OpenFeelCopilot} alt="FEEL popup icon in properties panel" width="500px" />
 
-5. Click the arrow next to FEEL Copilot to open it
+5. Open the FEEL Copilot panel
 
 <img src={FeelCopilotPanel} alt="FEEL Copilot panel within the FEEL popup" width="500px" />
 
-6. In the chat box, enter your prompt. A prompt should be a simple, clear, and concise request. For example, "Find the difference between two dates" or "Get the name from \{"name": "Alice", "id", 123\}". Note that more complex requests may take longer to process.
+6. In the chat box, enter your prompt. A prompt should be a simple, clear, and concise request. See the Example Prompts section below for ideas. Note that more complex requests may take longer to process.
 7. Wait for the FEEL Copilot to respond. This typically takes between 15-30 seconds, depending on the prompt.
 8. Click "Use expression" to save the expression to the FEEL popup.
+9. Close the FEEL popup to save the expression to your diagram.
 
 :::note
 Timeouts can occur during this step if your query is too complex.
@@ -49,6 +59,8 @@ Timeouts can occur during this step if your query is too complex.
 
 ### Generate FEEL expressions
 
+- Find the difference between two dates
+- Get the name from \{"name": "Alice", "id", 123\}
 - Check if a number is greater than 10
 - What would this Java be in FEEL: input.trim().toUpperCase().replace(" ", "\_");
 
