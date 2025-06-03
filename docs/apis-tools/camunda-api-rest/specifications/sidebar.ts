@@ -78,12 +78,6 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/camunda-api-rest/specifications/get-batch-operation-items",
-          label: "Get batch operation items",
-          className: "api-method get",
-        },
-        {
-          type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/search-batch-operations",
           label: "Search batch operations",
           className: "api-method post",
@@ -105,6 +99,12 @@ const sidebar: SidebarsConfig = {
           id: "apis-tools/camunda-api-rest/specifications/resume-batch-operation",
           label: "Resume Batch operation",
           className: "api-method put",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/search-batch-operation-items",
+          label: "Search batch operation items",
+          className: "api-method post",
         },
       ],
     },
@@ -318,6 +318,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/search-clients-for-group",
+          label: "Search group clients",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/add-user-to-group",
           label: "Assign a user to a group",
           className: "api-method put",
@@ -330,14 +336,14 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/camunda-api-rest/specifications/add-application-to-group",
-          label: "Assign an application to a group",
+          id: "apis-tools/camunda-api-rest/specifications/add-client-to-group",
+          label: "Assign a client to a group",
           className: "api-method put",
         },
         {
           type: "doc",
-          id: "apis-tools/camunda-api-rest/specifications/unassign-application-from-group",
-          label: "Unassign an application from a group",
+          id: "apis-tools/camunda-api-rest/specifications/unassign-client-from-group",
+          label: "Unassign a client from a group",
           className: "api-method delete",
         },
         {
@@ -540,6 +546,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/get-process-instance-sequence-flows",
+          label: "Get process instance sequence flows",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/get-process-instance-statistics",
           label: "Get process instance statistics",
           className: "api-method get",
@@ -667,6 +679,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/search-clients-for-role",
+          label: "Search role clients",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/add-user-to-role",
           label: "Assign a user to a role",
           className: "api-method put",
@@ -679,14 +697,14 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/camunda-api-rest/specifications/add-application-to-role",
-          label: "Assign an application to a role",
+          id: "apis-tools/camunda-api-rest/specifications/add-client-to-role",
+          label: "Assign a client to a role",
           className: "api-method put",
         },
         {
           type: "doc",
-          id: "apis-tools/camunda-api-rest/specifications/remove-application-from-role",
-          label: "Unassign an application from a role",
+          id: "apis-tools/camunda-api-rest/specifications/remove-client-from-role",
+          label: "Unassign a client from a role",
           className: "api-method delete",
         },
         {
@@ -787,6 +805,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/search-clients-for-tenant",
+          label: "Search clients for tenant",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/search-groups-for-tenant",
           label: "Search groups for tenant",
           className: "api-method post",
@@ -799,14 +823,14 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/camunda-api-rest/specifications/assign-application-to-tenant",
-          label: "Assign a user to a tenant",
+          id: "apis-tools/camunda-api-rest/specifications/assign-client-to-tenant",
+          label: "Assign a client to a tenant",
           className: "api-method put",
         },
         {
           type: "doc",
-          id: "apis-tools/camunda-api-rest/specifications/remove-application-from-tenant",
-          label: "Remove an application from a tenant",
+          id: "apis-tools/camunda-api-rest/specifications/remove-client-from-tenant",
+          label: "Remove a client from a tenant",
           className: "api-method delete",
         },
         {

@@ -16,7 +16,7 @@ Refer to the [OpenAI Platform](https://platform.openai.com/docs/quickstart) docu
 
 :::note
 Use Camunda secrets to avoid exposing your sensitive data, such as your OpenAI API key, as plain text. Follow our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
-:::note
+:::
 
 ## Create an OpenAI Connector task
 

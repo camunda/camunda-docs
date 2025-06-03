@@ -28,7 +28,7 @@ When a broker is connected to the cluster for the first time, it fetches the top
 
 To ensure fault tolerance, Zeebe replicates data across servers using the [raft protocol](<https://en.wikipedia.org/wiki/Raft_(computer_science)>).
 
-Data is divided into partitions (shards). Each partition has a number of replicas. Among the replica set, a **leader** is determined by the raft protocol, which takes in requests and performs all of the processing. All other brokers are passive **followers**. When the leader becomes unavailable, the followers transparently select a new leader.
+Data is divided into partitions (shards). Each partition has a number of replicas. Among the replica set, a **leader** is determined by the Raft protocol, which takes in requests and performs all the processing. All other brokers are passive **followers**. When the leader becomes unavailable, the followers transparently select a new leader.
 
 Each broker in the cluster may be both leader and follower at the same time for different partitions. In an ideal world, this leads to client traffic distributed evenly across all brokers.
 
@@ -44,6 +44,25 @@ To reach a well-distributed leadership again, the [Rebalancing API](../../../sel
 
 ## Commit
 
-Before a new record on a partition can be processed, it must be replicated to a quorum (typically majority) of brokers. This procedure is called **commit**. Committing ensures a record is durable, even in case of complete data loss on an individual broker. The exact semantics of committing are defined by the raft protocol.
+Before a new record on a partition can be processed, it must be replicated to a quorum of brokers, and this majority of followers has to confirm the received record. When the leader received these confirmations from half or more of its followers, the leader **commits** the record. Committing ensures a record is durable, even in case of complete data loss on an individual broker. The exact semantics of committing are defined by the raft protocol.
 
 ![cluster](assets/commit.png)
+
+A well-balanced replication ensures records can be committed even when one or more brokers will become unavailable, but the majority of brokers are still available. **Odd replication factors** [are recommended](partitions.md#replication).
+
+Examples for common replication factors and their quorum:
+
+| Replication factor | Description           | Quorum                                                      | Use case                                                                         |
+| :----------------: | --------------------- | ----------------------------------------------------------- | -------------------------------------------------------------------------------- |
+|         3          | 1 leader, 2 followers | Half or more of 2 followers is 1 follower that confirmed.   | Single region, 3 availability zones. One broker can go down without losing data. |
+|         5          | 1 leader, 4 followers | Half or more of 4 followers are 2 followers that confirmed. | Allows a higher tolerance against the loss of 2 brokers.                         |
+
+The only exception to have **even replication factors** is the [dual region setup](../../../self-managed/concepts/multi-region/dual-region.md). In this setup, an even replication factor ensures records are always replicated to both regions. In the case of losing a whole region, every new request will be denied, as no replication can get a quorum anymore. All partitions will become unhealthy, and operators start their [failover procedure](../../../self-managed/operational-guides/multi-region/dual-region-ops.md). No data is lost.
+
+Using an odd replication factor in a dual region setup would favor some partitions, where the leader and the majority of followers live in the surviving region, against the partitions that have only a minority of followers survived. This may slow down to detect a region loss, as some process instances still continue while others are stuck.
+
+Below is one example for replication and quorum used in the [dual region setup guide](../../../self-managed/setup/deploy/amazon/amazon-eks/dual-region.md#content-elaboration):
+
+| Replication factor | Description           | Quorum                                                      | Use case                                                                                                                                                                                                                 |
+| :----------------: | --------------------- | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|         4          | 1 leader, 3 followers | Half or more of 3 followers are 2 followers that confirmed. | Exception for dual-region with minimal replication, records always replicated to both regions [following the recommended setup](../../../self-managed/concepts/multi-region/dual-region.md#zeebe-cluster-configuration). |
