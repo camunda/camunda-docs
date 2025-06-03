@@ -25,4 +25,4 @@ You can [manage your connectors](/components/console/manage-clusters/manage-conn
 
 - Monitor your inbound connector webhooks, message queue subscriptions, and polling subscriptions.
 - Check connector health and which connectors are running or failing.
-- Troubleshoot and diagnose Connector issues via activity logs.
+- Troubleshoot and diagnose connector issues via activity logs.
