@@ -187,7 +187,7 @@ The log is comprised of an ordered sequence of records written to persistent sto
 
 ### Management Identity
 
-Management Identity provides authentication and authorization capabilities to the [Camunda 8](#camunda-8) components, which exist outside the [Orchestration Cluster](#orchestration-cluster): Console, Web Modeler, and Optimize.
+The Management Identity component provides authentication and authorization capabilities to the [Camunda 8](#camunda-8) components, which exist outside the [Orchestration Cluster](#orchestration-cluster): Console, Web Modeler, and Optimize.
 
 ### Manual task
 
@@ -208,9 +208,9 @@ A message contains information to be delivered to interested parties during exec
 The Orchestration cluster is the core component of [Camunda 8](#camunda-8), powering the automation and orchestration of [processes](#process). An orchestration cluster includes:
 
 - [Zeebe](#zeebe) as [workflow engine](#workflow-engine)
-- Operate as UI to monitor and troubleshoot [process instances](#process-instance) running in [Zeebe](#zeebe)
-- Tasklist as UI to interact (assign, complete, ...) with [user tasks](#user-task)
-- [Identity](#identity) as UI allowing to adminster the integrated authentication and authorization capbilities
+- Operate to monitor and troubleshoot [process instances](#process-instance) running in [Zeebe](#zeebe)
+- Tasklist to interact (assign, complete, ...) with [user tasks](#user-task)
+- [Identity](#identity) to adminster the integrated authentication and authorization capbilities
 - APIs to interact with the orchestration cluster programmatically
 
 ### Outbound connector
