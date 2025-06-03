@@ -12,6 +12,10 @@ See [orchestration cluster](#orchestration-cluster).
 
 See [Zeebe Broker](#zeebe-broker).
 
+### BPMN Model
+
+See [Process](#process).
+
 ### Client
 
 See [Zeebe Client](#zeebe-client).
@@ -36,19 +40,19 @@ The boundary between connectors and job workers can be fuzzy, but in general, co
 
 ### Correlation
 
-Correlation refers to the act of matching a message with an inflight process instance.
+Correlation refers to the act of matching a [message](#message) with an inflight [process instance](#process-instance).
 
 - [Message correlation](/components/concepts/messages.md)
 
 ### Correlation key
 
-A correlation is an attribute within a message used to match this message against a certain variable within an inflight process instance. If the value of the correlation key matches the value of the variable within the process instance, the message is matched to this process instance.
+A correlation is an attribute within a [message](#message) used to match this [message](#message) against a certain [variable](#process-instance-variable) within an inflight [message](#message). If the value of the correlation key matches the value of the [variable](#process-instance-variable) within the [process instance](#process-instance), the [message](#message) is matched to this [message](#message).
 
 - [Message correlation](/components/concepts/messages.md)
 
 ### Deployment
 
-A process cannot execute unless it is known by the broker. Deployment is the process of pushing or deploying processes to the broker.
+A process cannot execute unless it is known by the [broker](#zeebe-broker). Deployment is the process of pushing or deploying processes to the [broker](#zeebe-broker).
 
 - [Zeebe Deployment](/apis-tools/zeebe-api/gateway-service.md#deployresource-rpc)
 
@@ -66,13 +70,13 @@ Use an element template to extend the Desktop Modeler or Web Modeler with domain
 
 ### Event
 
-An event represents a state change associated with an aspect of an executing process instance. Events capture variable changes, state transition in process elements, etc. An event is represented by a timestamp, the variable name, and variable value. Events are stored in an append-only log.
+An event represents a state change associated with an aspect of an executing [process instance](#process-instance). Events capture [variable](#process-instance-variable) changes, state transition in process elements, etc. An event is represented by a timestamp, the variable name, and variable value. Events are stored in an append-only log.
 
 - [Internal processing](/components/zeebe/technical-concepts/internal-processing.md#events-and-commands)
 
 ### Execution listener
 
-An execution listener is a mechanism that allows users to execute custom logic at specific points during workflow execution. Execution listeners can be attached to BPMN elements to react to lifecycle events, such as when an element starts or ends. This feature facilitates pre-processing and post-processing tasks without cluttering the BPMN model, functioning similarly to job workers by leveraging the same infrastructure.
+An execution listener is a mechanism that allows users to execute custom logic at specific points during [workflow](#workflow) execution. Execution listeners can be attached to [BPMN elements](#element) to react to lifecycle events, such as when an element starts or ends. This feature facilitates pre-processing and post-processing tasks without cluttering the BPMN model, functioning similarly to [job workers](#job-worker) by leveraging the same infrastructure.
 
 - [Execution listeners](/components/concepts/execution-listeners.md)
 
@@ -86,7 +90,7 @@ Flow nodes refer to a specific subset of BPMN [elements](#element). They compris
 
 ### Follower
 
-In a clustered environment, a broker which is not a leader is a follower of a given partition. A follower can become the new leader when the old leader is no longer reachable.
+In a clustered environment, a [broker](#zeebe-broker) which is not a [leader](#leader) is a follower of a given partition. A follower can become the new [leader](#leader) when the old [leader](#leader) is no longer reachable.
 
 - [Clustering](/components/zeebe/technical-concepts/clustering.md#raft-consensus-and-replication-protocol)
 
@@ -102,7 +106,7 @@ Camunda 8 allows you to orchestrate processes with human tasks, which may be [us
 
 ### Hybrid mode
 
-Hybrid mode, or a hybrid Self-Managed distribution, allows you to run a separate instance of the connectors runtime in a Self-Managed or local fashion. This instance can be attached to either a SaaS cluster, or another Self-Managed cluster with its own connector runtime.
+Hybrid mode, or a hybrid Self-Managed distribution, allows you to run a separate instance of the [connectors](#connector) runtime in a Self-Managed or local fashion. This instance can be attached to either a SaaS cluster, or another Self-Managed cluster with its own connector runtime.
 
 For example, this is useful when working with services that must be isolated within a private network and cannot be exposed to the public internet, or if infrastructure amendments need to be applied to the connector runtime, such as SSL certificates or mounted volumes.
 
@@ -112,14 +116,14 @@ For example, this is useful when working with services that must be isolated wit
 
 Inbound [Connectors](#connector) in Camunda 8 enable workflows to receive data or messages from external systems or services, making it possible to integrate workflows into a wider business process or system architecture.
 
-Inbound connectors include three subtypes - [webhooks](#webhook), [subscriptions](#subscription), and [polling](#polling).
+Inbound connectors include three subtypes - [webhooks](#webhook), [subscriptions](#subscription), and polling.
 
 Unlike [outbound connectors](#outbound-connector), inbound connectors are **stateful**. The Java code of the inbound connector has a lifecycle suitable for long-running operations, such as listening for messages on a queue or waiting for a webhook to be called.
 Each element referencing an inbound connector will lead to the creation of one inbound connector instance. A process definition with one webhook start event and two additional webhooks as intermediate catch events would therefore lead to the creation of three inbound connector instances.
 
 ### Incident
 
-An incident represents an error condition which prevents Zeebe from advancing an executing process instance. Zeebe will create an incident if there was an uncaught exception thrown in your code and the number of retries of the given step is exceeded.
+An incident represents an error condition which prevents [Zeebe](#zeebe) from advancing an executing [process instance](#process-instance). [Zeebe](#zeebe) will create an incident if there was an uncaught exception thrown in your code and the number of retries of the given step is exceeded.
 
 - [Incident](/components/concepts/incidents.md)
 
@@ -131,7 +135,7 @@ An Ingress is a Kubernetes object that manages external access to the services w
 
 ### Job
 
-A job represents a distinct unit of work within a business process. Service tasks represent such
+A job represents a distinct unit of work within a [business process](#process). Service tasks represent such
 jobs in your process and are identified by a unique id. A job has a type to allow specific job
 workers to find jobs that they can work on.
 
@@ -151,7 +155,7 @@ A [Zeebe Client](#zeebe-client) that polls for and executes available [jobs](#jo
 
 ### Leader
 
-In a clustered environment, one broker (the leader) is responsible for process execution and housekeeping of data within a partition. Housekeeping includes taking snapshots, replication, and running exports.
+In a clustered environment, one [broker](#zeebe-broker) (the [leader](#leader)) is responsible for process execution and housekeeping of data within a [partition](#partition). Housekeeping includes taking [snapshots](#snapshot), [replication](#replication), and running [exports](#zeebe-exporter).
 
 - [Clustering](/components/zeebe/technical-concepts/clustering.md#raft-consensus-and-replication-protocol)
 
@@ -171,13 +175,13 @@ Manual tasks are part of [human task orchestration](/guides/getting-started-orch
 
 ### Message
 
-A message contains information to be delivered to interested parties during execution of a process instance. Messages can be published via Kafka or Zeebe’s internal messaging system. Messages are associated with timestamp and other constraints such as time-to-live (TTL).
+A message contains information to be delivered to interested parties during execution of a [process instance](#process-instance). Messages can be published via Kafka or [Zeebe](#zeebe)’s internal messaging system. Messages are associated with timestamp and other constraints such as time-to-live (TTL).
 
 - [Messages](/components/concepts/messages.md)
 
 ### Orchestration cluster
 
-An orchestration cluster includes Zeebe, Operate, Tasklist, Optimize, and connectors. Previously [automation cluster](#automation-cluster).
+An orchestration cluster includes [Zeebe](#zeebe), Operate, Tasklist, Optimize, and connectors. Previously [automation cluster](#automation-cluster).
 
 ### Orchestration core
 
@@ -189,15 +193,15 @@ Outbound [Connectors](#connector) in Camunda 8 allow workflows to trigger with e
 
 ### Partition
 
-A partition represents a logical grouping of data in a Zeebe Broker. This data includes process instance variables stored in RocksDB, commands, and events generated by Zeebe stored in the log. The number of partitions is defined by configuration.
+A partition represents a logical grouping of data in a [Zeebe Broker](#zeebe-broker). This data includes [process instance variables](#process-instance-variable) stored in RocksDB, [commands](#command), and [events](#event) generated by [Zeebe](#zeebe) stored in the [log](#log). The number of partitions is defined by configuration.
 
 - [Partitions](/components/zeebe/technical-concepts/partitions.md)
 
 ### Polling connector
 
-An inbound polling connector to periodically poll an external system or service for new data using HTTP polling.
+An inbound polling [connector](#connector) to periodically poll an external system or service for new data using HTTP polling.
 
-A Camunda workflow uses this type of connector to retrieve data from a remote system that does not support real-time notifications or webhooks, but instead requires the client to periodically request updates.
+A [Camunda workflow](#workflow) uses this type of connector to retrieve data from a remote system that does not support real-time notifications or webhooks, but instead requires the client to periodically request updates.
 
 ### Process
 
@@ -229,19 +233,19 @@ Protocol connectors can be customized to meet the needs of specific use cases us
 
 ### Record
 
-A record represents a command or an event. For example, a command to create a new process instance, or a state transition of an executing process instance representing an event at a given point in time would result to generation of a record. During the execution lifecycle of a process instance, numerous records are generated to capture various commands and events generated. Records are stored in the log.
+A record represents a command or an event. For example, a command to create a new [process instance](#process-instance), or a state transition of an executing [process instance](#process-instance) representing an [event](#event) at a given point in time would result to generation of a record. During the execution lifecycle of a [process instance](#process-instance), numerous records are generated to capture various commands and events generated. Records are stored in the log.
 
 - [Internal processing](/components/zeebe/technical-concepts/internal-processing.md#events-and-commands)
 
 ### Replication
 
-Replication is the act of copying data in a partition from a leader to its followers within a clustered Zeebe installation. After replication, the leader and followers of a partition will have the exact same data. Replication allows the system to be resilient to brokers going down.
+Replication is the act of copying data in a [partition](#partition) from a [leader](#leader) to its [followers](#follower) within a clustered [Zeebe](#zeebe) deployment. After replication, the [leader](#leader) and [followers](#follower) of a [partition](#partition) will have the exact same data. Replication allows the system to be resilient to [brokers](#zeebe-broker) going down.
 
 - [Clustering](/components/zeebe/technical-concepts/clustering.md#raft-consensus-and-replication-protocol)
 
 ### Replication factor
 
-This is the number of times data in a partition are copied. This depends on the number of brokers in a cluster. A cluster with one leader and two followers have a replication factor of three, as data in each partition needs to have three copies.
+This is the number of times data in a [partition](#partition) are copied. This depends on the number of [brokers](#zeebe-broker) in a [cluster](#zeebe-cluster). A [cluster](#zeebe-cluster) with one [leader](#leader) and two [followers](#follower) have a replication factor of three, as data in each [partition](#partition) needs to have three copies.
 
 We recommend running an odd replication factor.
 
@@ -249,25 +253,26 @@ We recommend running an odd replication factor.
 
 ### Request timeout
 
-This is how long a client waits for a response from the broker after the client submits a request. If a response is not received within the client request timeout, the client considers the broker unreachable.
+This is how long a [client](#zeebe-client) waits for a response from the [broker](#zeebe-broker) after the [client](#zeebe-client) submits a request. If a response is not received within the client request timeout, the [client](#zeebe-client) considers the [broker](#zeebe-broker) unreachable.
 
+- [Orchestration Cluster API](/apis-tools/zeebe-api-rest/zeebe-api-rest-overview.md)
 - [Zeebe API (gRPC)](/apis-tools/zeebe-api/grpc.md)
 
 ### Segment
 
-The log consists of one or more segments. Each segment is a file containing an ordered sequence records. Segments are deleted when the log is compacted.
+The [log](#log) consists of one or more segments. Each segment is a file containing an ordered sequence records. Segments are deleted when the log is compacted.
 
 - [Resource planning](/self-managed/zeebe-deployment/operations/resource-planning.md#event-log)
 
 ### Snapshot
 
-The state of all active process instances, (these are also known as inflight process instances) are stored as records in an in-memory database called RocksDB. A snapshot represents a copy of all data within the in-memory database at any given point in time. Snapshots are binary images stored on disk and can be used to restore execution state of a process. The size of a snapshot is affected by the size of the data. Size of the data depends on several factors, including complexity of the model or business process, the size and quantity of variables in each process instance, and the total number of executing process instances in a broker.
+The state of all active [process instances](#process-instance), (these are also known as inflight process instances) are stored as records in an in-memory database called RocksDB. A snapshot represents a copy of all data within the in-memory database at any given point in time. Snapshots are binary images stored on disk and can be used to restore execution state of a [process](#process). The size of a snapshot is affected by the size of the data. Size of the data depends on several factors, including complexity of the [model](#bpmn-model), the size and quantity of variables in each [process instance](#process-instance), and the total number of executing [process instances](#process-instance) in a [broker](#zeebe-broker).
 
 - [Resource planning](/self-managed/zeebe-deployment/operations/resource-planning.md#snapshots)
 
 ### Soft pause exporting
 
-Soft pause exporting is a feature that allows you to continue exporting records from Zeebe, but without deleting those records (log compaction) from Zeebe. This is particularly useful during hot backups.
+Soft pause exporting is a feature that allows you to continue exporting records from [Zeebe](#zeebe), but without deleting those [records](#record) ([log](#log) compaction) from [Zeebe](#zeebe). This is particularly useful during hot backups.
 
 - [Exporting API](/self-managed/zeebe-deployment/operations/management-api.md)
 - [Backup and restore](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md)
@@ -276,7 +281,7 @@ Soft pause exporting is a feature that allows you to continue exporting records 
 
 An [inbound connector](#inbound-connector) that subscribes to a message queue.
 
-This way, a Camunda workflow can receive messages from an external system or service (like Kafka or RabbitMQ) using message queuing technology. This type of inbound connector is commonly used in distributed systems where different components of the system need to communicate with each other asynchronously.
+This way, a [Camunda workflow](#workflow) can receive messages from an external system or service (like Kafka or RabbitMQ) using message queuing technology. This type of inbound connector is commonly used in distributed systems where different components of the system need to communicate with each other asynchronously.
 
 ### User task
 
@@ -291,7 +296,7 @@ Camunda recommends using Camunda user tasks in your process definitions. With 8.
 
 ### User task listener
 
-A user task listener allows users to execute custom logic in response to specific user task lifecycle events, such as assigning or completing a task. User task listeners are attached to BPMN user tasks and facilitate validation, custom task assignment, and other operations during user task execution. They operate similarly to job workers, leveraging the same infrastructure for processing external logic.
+A user task listener allows users to execute custom logic in response to specific user task lifecycle events, such as assigning or completing a task. User task listeners are attached to BPMN user tasks and facilitate validation, custom task assignment, and other operations during user task execution. They operate similarly to [job workers](#job-worker), leveraging the same infrastructure for processing external logic.
 
 - [User task listeners](/components/concepts/user-task-listeners.md)
 
@@ -338,22 +343,22 @@ A Zeebe deployment typically consists of multiple brokers and gateways, forming 
 
 ### Zeebe Broker
 
-The [Zeebe Broker](/components/zeebe/technical-concepts/architecture.md#brokers) is the distributed workflow engine that tracks the state of active process instances. The Zeebe Broker is the main part of the Zeebe cluster, which does all the heavy work like processing, replicating, exporting, and everything based on partitions. A Zeebe deployment often consists of more than one broker. Brokers can be partitioned for horizontal scalability and replicated for fault tolerance.
+The [Zeebe Broker](/components/zeebe/technical-concepts/architecture.md#brokers) is the distributed [workflow engine](#workflow-engine) that tracks the state of active [process instances](#process-instance). The Zeebe Broker is the main part of the [Zeebe cluster](#zeebe-cluster), which does all the heavy work like processing, replicating, exporting, and everything based on [partitions](#partition). A Zeebe deployment often consists of more than one broker. Brokers can be partitioned for horizontal scalability and replicated for fault tolerance.
 
 ### Zeebe Client
 
-A [Zeebe Client](/components/zeebe/technical-concepts/architecture.md#clients) interacts with the Zeebe Broker on behalf of the business application. Clients retrieve work from the Zeebe Cluster via polling or job push.
+A [Zeebe Client](/components/zeebe/technical-concepts/architecture.md#clients) interacts with the [Zeebe Broker](#zeebe-broker) on behalf of the business application. Clients retrieve work from the [Zeebe Cluster](#zeebe-cluster) via polling or job push.
 
 ### Zeebe Cluster
 
-A Zeebe Cluster represents a configuration of one or more [brokers](#zeebe-broker) collaborating to execute processes. Each broker in a cluster acts as a leader or a follower.
+A Zeebe Cluster represents a configuration of one or more [brokers](#zeebe-broker) collaborating to execute [processes](#process). Each [broker](#zeebe-broker) in a cluster acts as a [leader](#leader) or a [follower](#follower).
 
 - [Clustering](/components/zeebe/technical-concepts/clustering.md)
 
 ### Zeebe Exporter
 
-The [Zeebe Exporter](/components/zeebe/technical-concepts/architecture.md#exporters) system provides an event stream of state changes within Zeebe. It represents a sink to which Zeebe will submit all records within the log. This gives users of Zeebe an opportunity to persist records with the log for future use as this data will not be available after log compaction.
+The [Zeebe Exporter](/components/zeebe/technical-concepts/architecture.md#exporters) system provides an event stream of state changes within Zeebe. It represents a sink to which Zeebe will submit all [records](#record) within the [log](#log). This gives users of Zeebe an opportunity to persist [records](#record) with the [log](#log) for future use as this data will not be available after log compaction.
 
 ### Zeebe Gateway
 
-The [Zeebe Gateway](self-managed/zeebe-deployment/zeebe-gateway/zeebe-gateway-overview.md) is a component of the Zeebe cluster; it can be considered the contact point for the Zeebe cluster which allows Zeebe clients to communicate with Zeebe brokers inside a Zeebe cluster.
+The [Zeebe Gateway](self-managed/zeebe-deployment/zeebe-gateway/zeebe-gateway-overview.md) is a component of the [Zeebe cluster](#zeebe-cluster); it can be considered the contact point for the Zeebe cluster which allows [Zeebe clients](#zeebe-client) to communicate with [Zeebe brokers](#zeebe-broker) inside a [Zeebe cluster](#zeebe-cluster).
