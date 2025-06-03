@@ -526,7 +526,11 @@ export GATEWAY_MANAGEMENT_API=
                "version_id":8521000,
                "version":"8.17.0-8.17.4",
                "indices":[
-                  
+                  "zeebe-record_process_8.7.2_2025-06-03",
+                  "zeebe-record_job_8.7.2_2025-06-03",
+                  "zeebe-record_process-instance-creation_8.7.2_2025-06-03",
+                  "zeebe-record_process-instance_8.7.2_2025-06-03",
+                  "zeebe-record_deployment_8.7.2_2025-06-03"
                ],
                "data_streams":[
                   
@@ -535,16 +539,16 @@ export GATEWAY_MANAGEMENT_API=
                "state":"SUCCESS",
                "start_time":"2025-06-03T08:05:10.633Z",
                "start_time_in_millis":1748937910633,
-               "end_time":"2025-06-03T08:05:10.633Z",
-               "end_time_in_millis":1748937910633,
-               "duration_in_millis":0,
+               "end_time":"2025-06-03T08:05:11.336Z",
+               "end_time_in_millis":1748937911336,
+               "duration_in_millis":603,
                "failures":[
                   
                ],
                "shards":{
-                  "total":0,
+                  "total":9,
                   "failed":0,
-                  "successful":0
+                  "successful":9
                },
                "feature_states":[
                   
@@ -573,7 +577,42 @@ export GATEWAY_MANAGEMENT_API=
          <summary>Example output</summary>
          <summary>
 
-         <!-- TODO: You get the idea -->
+         ```json
+         {
+            "snapshot":{
+               "snapshot":"camunda_zeebe_records_backup_1748937221",
+               "uuid":"PUFbcSJZT1Cqc4jY8OE2uA",
+               "version_id":136408027,
+               "version":"2.19.2",
+               "remote_store_index_shallow_copy":false,
+               "indices":[
+                  "zeebe-record_process_8.7.2_2025-06-03",
+                  "zeebe-record_job_8.7.2_2025-06-03",
+                  "zeebe-record_process-instance-creation_8.7.2_2025-06-03",
+                  "zeebe-record_process-instance_8.7.2_2025-06-03",
+                  "zeebe-record_deployment_8.7.2_2025-06-03"
+               ],
+               "data_streams":[
+                  
+               ],
+               "include_global_state":true,
+               "state":"SUCCESS",
+               "start_time":"2025-06-03T09:37:45.623Z",
+               "start_time_in_millis":1748943465623,
+               "end_time":"2025-06-03T09:37:46.342Z",
+               "end_time_in_millis":1748943466342,
+               "duration_in_millis":719,
+               "failures":[
+                  
+               ],
+               "shards":{
+                  "total":9,
+                  "failed":0,
+                  "successful":9
+               }
+            }
+         }
+         ```
 
          </summary>
       </details>
@@ -609,9 +648,9 @@ export GATEWAY_MANAGEMENT_API=
                      "initializing":0,
                      "started":0,
                      "finalizing":0,
-                     "done":0,
+                     "done":9,
                      "failed":0,
-                     "total":0
+                     "total":9
                   },
                   "stats":{
                      "incremental":{
@@ -619,14 +658,18 @@ export GATEWAY_MANAGEMENT_API=
                         "size_in_bytes":0
                      },
                      "total":{
-                        "file_count":0,
+                        "file_count":9,
                         "size_in_bytes":0
                      },
                      "start_time_in_millis":1748937910633,
                      "time_in_millis":0
                   },
                   "indices":{
-                     
+                     "zeebe-record_process_8.7.2_2025-06-03",
+                     "zeebe-record_job_8.7.2_2025-06-03",
+                     "zeebe-record_process-instance-creation_8.7.2_2025-06-03",
+                     "zeebe-record_process-instance_8.7.2_2025-06-03",
+                     "zeebe-record_deployment_8.7.2_2025-06-03"
                   }
                }
             ]
@@ -649,7 +692,46 @@ export GATEWAY_MANAGEMENT_API=
          <summary>Example output</summary>
          <summary>
 
-         <!-- TODO: You get the idea -->
+         ```json
+         {
+            "snapshots":[
+               {
+                  "snapshot":"camunda_zeebe_records_backup_1748937221",
+                  "repository":"camunda",
+                  "uuid":"PUFbcSJZT1Cqc4jY8OE2uA",
+                  "state":"SUCCESS",
+                  "include_global_state":true,
+                  "shards_stats":{
+                     "initializing":0,
+                     "started":0,
+                     "finalizing":0,
+                     "done":9,
+                     "failed":0,
+                     "total":9
+                  },
+                  "stats":{
+                     "incremental":{
+                        "file_count":0,
+                        "size_in_bytes":0
+                     },
+                     "total":{
+                        "file_count":9,
+                        "size_in_bytes":0
+                     },
+                     "start_time_in_millis":1748943465623,
+                     "time_in_millis":0
+                  },
+                  "indices":{
+                     "zeebe-record_process_8.7.2_2025-06-03",
+                     "zeebe-record_job_8.7.2_2025-06-03",
+                     "zeebe-record_process-instance-creation_8.7.2_2025-06-03",
+                     "zeebe-record_process-instance_8.7.2_2025-06-03",
+                     "zeebe-record_deployment_8.7.2_2025-06-03"
+                  }
+               }
+            ]
+         }
+         ```
 
          </summary>
       </details>
@@ -815,17 +897,15 @@ In that case, follow the described steps above and when you have your Elasticsea
 
       The following is using the [OpenSearch snapshot API](https://docs.opensearch.org/docs/latest/api-reference/snapshots/get-snapshot/) to list all registered snapshots in a repository.
 
-      <!-- TODO: Try it out and adjust for OpenSearch, at least not publicly documented about `_all` may switch to the CAT API --->
-
       ```bash
       OPENSEARCH_ENDPOINT=http://localhost:9200       # Your OpenSearch endpoint
       OPENSEARCH_SNAPSHOT_REPOSITORY=camunda_backup   # Your defined snapshot repository on OpenSearch for Camunda backups
 
       # Get a list of all available snapshots
-      curl -XGET $OPENSEARCH_ENDPOINT/_snapshot/$OPENSEARCH_SNAPSHOT_REPOSITORY/_all
+      curl $OPENSEARCH_ENDPOINT/_snapshot/$OPENSEARCH_SNAPSHOT_REPOSITORY/_all
 
       # Get a list of all available snapshots and use jq to parse just the names for easier readability
-      curl -XGET $OPENSEARCH_ENDPOINT/_snapshot/$OPENSEARCH_SNAPSHOT_REPOSITORY/_all | jq -r '.snapshots[].snapshot'
+      curl $OPENSEARCH_ENDPOINT/_snapshot/$OPENSEARCH_SNAPSHOT_REPOSITORY/_all | jq -r '.snapshots[].snapshot'
       ```
 
       Ensure that all backups and parts exists for each component for your chosen backup ID.
@@ -834,7 +914,23 @@ In that case, follow the described steps above and when you have your Elasticsea
       <summary>Example output</summary>
       <summary>
 
-      <!-- TODO: You get the idea -->
+      ```
+      camunda_optimize_1748937221_8.7.1_part_1_of_2
+      camunda_optimize_1748937221_8.7.1_part_2_of_2
+      camunda_operate_1748937221_8.7.2_part_1_of_6
+      camunda_operate_1748937221_8.7.2_part_2_of_6
+      camunda_operate_1748937221_8.7.2_part_3_of_6
+      camunda_operate_1748937221_8.7.2_part_4_of_6
+      camunda_operate_1748937221_8.7.2_part_5_of_6
+      camunda_operate_1748937221_8.7.2_part_6_of_6
+      camunda_tasklist_1748937221_8.7.2_part_1_of_6
+      camunda_tasklist_1748937221_8.7.2_part_2_of_6
+      camunda_tasklist_1748937221_8.7.2_part_3_of_6
+      camunda_tasklist_1748937221_8.7.2_part_4_of_6
+      camunda_tasklist_1748937221_8.7.2_part_5_of_6
+      camunda_tasklist_1748937221_8.7.2_part_6_of_6
+      camunda_zeebe_records_backup_1748937221
+      ```
 
       </summary>
       </details>
