@@ -17,19 +17,23 @@ Agentic orchestration ensures your AI-driven processes are efficient, compliant,
 
 ## About agentic orchestration
 
-In Camunda, agentic orchestration refers to the use of one or more AI agents to execute the non-deterministic parts of a process.
+Camunda agentic orchestration refers to the use of AI agents to execute the non-deterministic parts of a process, built on the proven foundation of BPMN.
 
-Real-world process automation requires a blending of deterministic and dynamic (AI-driven) process orchestration. You can increase the scope of process automation to handle work traditionally requiring human case management, and provide a much higher level of flexibility for straight-through processing (STP).
+Blending both deterministic and dynamic (AI-driven) process orchestration into your end-to-end processes allows you to take advantage of non-deterministic process orchestration without sacrificing predictability, customer experience, and compliance. 
 
-For example, Camunda offers a systemic, future-ready approach for agentic AI by building on the proven foundation of BPMN. 
+### Benefits
 
+- Increase the scope of process automation to handle work traditionally requiring human case management, and provide a much higher level of flexibility for straight-through processing (STP).
+- Long-running
+- Always integrate safely with hil
+- Observability and auditing
 
+### Use cases
 
-:::info
-To learn more about determining when and where to use AI agents within your automation strategy, download the [why agentic process orchestration belongs in your automation strategy guide](https://page.camunda.com/wp-why-agentic-process-orchestration-belongs-in-your-automation-strategy).
-:::
+Example use cases are:
 
-## Design and architecture
+- 
 
-## Build and integrate AI agents
+## Get started
 
+- 
