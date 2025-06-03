@@ -128,6 +128,10 @@ For example, this is useful when working with services that must be isolated wit
 
 - [Use connectors in hybrid mode](/guides/use-connectors-in-hybrid-mode.md)
 
+### Identity
+
+Identity is a UI in the [orchestration cluster](#orchestration-cluster) allowing to adminster the integrated authentication and authorization capbilities.
+
 ### Inbound connector
 
 Inbound [Connectors](#connector) in Camunda 8 enable workflows to receive data or messages from external systems or services, making it possible to integrate workflows into a wider business process or system architecture.
@@ -203,11 +207,11 @@ A message contains information to be delivered to interested parties during exec
 
 The Orchestration cluster is the core component of [Camunda 8](#camunda-8), powering the automation and orchestration of [processes](#process). An orchestration cluster includes:
 
-- [Zeebe](#zeebe) as [worklfow engine](#workflow-engine)
+- [Zeebe](#zeebe) as [workflow engine](#workflow-engine)
 - Operate as UI to monitor and troubleshoot [process instances](#process-instance) running in [Zeebe](#zeebe)
 - Tasklist as UI to interact (assign, complete, ...) with [user tasks](#user-task)
-- APIs to interact with the orchestration cluster
-- An integrated authentication and authorization layer
+- [Identity](#identity) as UI allowing to adminster the integrated authentication and authorization capbilities
+- APIs to interact with the orchestration cluster programmatically
 
 ### Outbound connector
 
