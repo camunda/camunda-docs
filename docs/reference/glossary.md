@@ -24,14 +24,16 @@ See [Zeebe Cluster](#zeebe-cluster).
 
 Camunda 8 is a universal universal process orchestrator that allows to orchestrate and automate complex business processes that span people, systems, and devices. Camunda 8 consists of the following key components:
 
-- [**Orchestration Cluster**](#orchestration-cluster) powering the automation and orchestration of [processes](#process)
-- [**Connectors**](#connector) allowing the out-of-the-box integration with external systems
-- **Optimize** offering business intelligence tooling allowing to e.g., analyze bottlenecks and examine improvements in [processes](#process) automated with Camunda
-- **Console** allowing configuring, deploying, and managing [orchestration cluster](#orchestration-cluster) and respective [Connectors](#connector) and Optimize deployments
-- **Modeling** applications allowing business and developer personas to design and implement [processes](#process), decisions and [user task](#user-task) forms:
-  - A **Desktop Modeler** for local usage on Mac, Windows and Linux
-  - A **Web Modeler** for browser-based usage and process application management
-- [**Management Identity**](#management-identity) offering authentication and authorization capabilities to the components outside the [Orchestration Cluster](#orchestration-cluster): **Optimize**, **Console**, and **Web Modeler**
+- [Orchestration Cluster](#orchestration-cluster) powering the automation and orchestration of [processes](#process)
+- [Connectors](#connector) allowing the out-of-the-box integration with external systems
+- Optimize offering business intelligence tooling allowing to e.g., analyze bottlenecks and examine improvements in [processes](#process) automated with Camunda
+- Console allowing configuring, deploying, and managing [orchestration cluster](#orchestration-cluster) and respective [Connectors](#connector) and Optimize deployments
+- Modeling applications allowing business and developer personas to design and implement [processes](#process), decisions and [user task](#user-task) forms:
+  - A Desktop Modeler for local usage on Mac, Windows and Linux
+  - A Web Modeler for browser-based usage and process application management
+- [Management Identity](#management-identity) offering authentication and authorization capabilities to the components outside the [Orchestration Cluster](#orchestration-cluster): Optimize, Console, and Web Modeler
+
+Please refer to the respective documentation pages for an introduction:
 
 - [Optimize](/components/optimize/what-is-optimize.md)
 - [Console](/components/console/introduction-to-console.md)
