@@ -24,7 +24,7 @@ Below are some of the most common configuration options for the connector runtim
 :::note
 This guide provides configuration properties in the form of environment variables, while the Camunda Spring SDK documentation uses Java configuration properties. The two formats are interchangeable, and you can use the Java configuration properties in the connector runtime environment as well.
 
-For example, the Java configuration property`camunda.client.grpc-address` can be set in the connector runtime environment as an environment variable called `CAMUNDA_CLIENT_GRPCADDRESS`.
+For example, the Java configuration property `camunda.client.grpc-address` can be set in the connector runtime environment as an environment variable called `CAMUNDA_CLIENT_GRPCADDRESS`.
 :::
 
 ## Connecting to Zeebe and the Camunda 8 REST API
