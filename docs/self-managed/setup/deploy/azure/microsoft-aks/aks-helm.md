@@ -1,7 +1,7 @@
 ---
 id: aks-helm
 title: "Install Camunda 8 on an AKS cluster"
-description: "Set up your Camunda 8 environment with Helm and an optional Ingress setup on Azure Kubernetes Service."
+description: "Set up your Camunda 8 environment with Helm on Azure Kubernetes Service."
 ---
 
 import Tabs from "@theme/Tabs";
@@ -77,7 +77,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/azure/kuberne
 
 ### 2. Configure your deployment
 
-#### Enable Enterprise components
+#### Enable Web Modeller and Console services
 
 Some components are not enabled by default in this deployment. For more information on how to configure and enable these components, refer to [configuring Web Modeler, Console, and Connectors](../../../install.md#configuring-web-modeler-console-and-connectors).
 
@@ -101,9 +101,13 @@ elasticsearch:
 
 </details>
 
-#### Use internal PostgreSQL instead of the managed PostgreSQL service
+#### (Optional) Use internal PostgreSQL instead of the managed PostgreSQL service
 
-If you prefer not to use the external Azure Database for PostgreSQL service, you can switch to the internal PostgreSQL deployment. In this case, configure the Helm chart as follows and remove certain configurations related to the external database and secret references:
+In some scenarios, you might prefer to use an internal PostgreSQL deployment instead of the external Azure Database for PostgreSQL service. This could be due to cost considerations, network restrictions, or the need for tighter control over the database environment.
+
+For example, if your application or service is deployed in a private network and requires a database that resides within the same Kubernetes cluster for performance or security reasons, the internal PostgreSQL deployment would be a better fit.
+
+To switch to the internal PostgreSQL deployment, configure the Helm chart as follows. Additionally, remove configurations related to the external database and secret references to avoid conflicts.
 
 <details>
 <summary>Show configuration changes to disable external database usage</summary>
@@ -169,7 +173,9 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 Use these environment variables in the `kubectl` command to create the secret.
 
-- The `smtp-password` should be replaced with the appropriate external value ([see how it's used by Web Modeler](/self-managed/modeler/web-modeler/configuration/configuration.md#smtp--email)).
+:::note
+The `smtp-password` is required for Web Modeler to send emails, but Web Modeler is not enabled by default in this guide. If you plan to enable Web Modeler, ensure you configure the SMTP settings as described in the [Web Modeler configuration guide](/self-managed/modeler/web-modeler/configuration/configuration.md#smtp--email).
+:::
 
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/create-identity-secret.sh
@@ -183,7 +189,7 @@ Now that the `generated-values.yml` is ready, you can install Camunda 8 using He
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/install-chart.sh
 ```
 
-This command:
+This script:
 
 - Installs (or upgrades) the Camunda platform using the Helm chart.
 - Substitutes the appropriate version using the `$CAMUNDA_HELM_CHART_VERSION` environment variable.
@@ -319,7 +325,7 @@ To test your installation with the deployment of a sample application, refer to 
 The following are some advanced configuration topics to consider for your cluster:
 
 - [Camunda production installation guide with Kubernetes and Helm](versioned_docs/version-8.7/self-managed/operational-guides/production-guide/helm-chart-production-guide.md)
-- [Cluster autoscaling](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/cloudprovider/aws/README.md)
+- [Cluster autoscaling](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/cloudprovider/azure/README.md)
 
 To get more familiar with our product stack, visit the following topics:
 
