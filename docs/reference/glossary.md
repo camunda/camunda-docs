@@ -4,10 +4,6 @@ title: "Glossary"
 description: "This section defines common terminology referenced within the documentation."
 ---
 
-### Automation cluster
-
-See [orchestration cluster](#orchestration-cluster).
-
 ### Broker
 
 See [Zeebe Broker](#zeebe-broker).
@@ -23,6 +19,19 @@ See [Zeebe Client](#zeebe-client).
 ### Cluster
 
 See [Zeebe Cluster](#zeebe-cluster).
+
+### Camunda 8
+
+Camunda 8 is a universal universal process orchestrator that allows to orchestrate and automate complex business processes that span people, systems, and devices. Camunda 8 consists of the following key components:
+
+- [**Orchestration Cluster**](#orchestration-cluster) powering the automation and orchestration of [processes](#process)
+- [**Connectors**](#connector) allowing the out-of-the-box integration with external systems
+- **Optimize** offering business intelligence tooling allowing to e.g., analyze bottlenecks and examine improvements in [processes](#process) automated with Camunda
+- **Console** allowing configuring, deploying, and managing [orchestration cluster](#orchestration-cluster) and respective [Connectors](#connector) and Optimize deployments
+- **Modeling** applications allowing business and developer personas to design and implement [processes](#process), decisions and [user task](#user-task) forms:
+  - A **Desktop Modeler** for local usage on Mac, Windows and Linux
+  - A **Web Modeler** for browser-based usage and process application management
+- [**Management Identity**](#management-identity) offering authentication and authorization capabilities to the components outside the [Orchestration Cluster](#orchestration-cluster): **Optimize**, **Console**, and **Web Modeler**
 
 ### Command
 
@@ -165,6 +174,10 @@ The log is comprised of an ordered sequence of records written to persistent sto
 
 - [Partitions](/components/zeebe/technical-concepts/partitions.md#partition-data-layout)
 
+### Management Identity
+
+Management Identity provides authentication and authorization capabilities to the [Camunda 8](#camunda-8) components, which exist outside the [Orchestration Cluster](#orchestration-cluster): Console, Web Modeler, and Optimize.
+
 ### Manual task
 
 A manual task defines a task that requires human interaction but no external tooling or UI interface. For example, a user reviewing a document or completing a physical task.
@@ -181,11 +194,13 @@ A message contains information to be delivered to interested parties during exec
 
 ### Orchestration cluster
 
-An orchestration cluster includes [Zeebe](#zeebe), Operate, Tasklist, Optimize, and connectors. Previously [automation cluster](#automation-cluster).
+The Orchestration cluster is the core component of [Camunda 8](#camunda-8), powering the automation and orchestration of [processes](#process). An orchestration cluster includes:
 
-### Orchestration core
-
-An orchestration core or orchestration cluster core includes Zeebe, Operate, Tasklist, Optimize, and Identity.
+- [Zeebe](#zeebe) as [worklfow engine](#workflow-engine)
+- Operate as UI to monitor and troubleshoot [process instances](#process-instance) running in [Zeebe](#zeebe)
+- Tasklist as UI to interact (assign, complete, ...) with [user tasks](#user-task)
+- [APIs](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md) to interact with the orchestration cluster
+- An integrated authentication and authorization layer
 
 ### Outbound connector
 
