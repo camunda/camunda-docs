@@ -46,7 +46,7 @@ To use the FEEL Copilot in Web Modeler, take the following steps:
 
 <img src={FeelCopilotPanel} alt="FEEL Copilot panel within the FEEL popup" width="500px" />
 
-1. In the chat box, enter your prompt. A prompt should be a simple, clear, and concise request. See [Example Prompts](#example-prompts) for ideas. Note that more complex requests may take longer to process.
+1. In the chat box, enter your prompt and click **Send**. A prompt should be a simple, clear, and concise request. See [Example Prompts](#example-prompts) for ideas. Note that more complex requests may take longer to process.
 1. Wait for the FEEL Copilot to respond. This typically takes between 15-30 seconds, depending on the complexity of the prompt.
 1. Click **Use expression** to save the expression in the FEEL popup.
 1. Close the FEEL popup to save the expression to your diagram.
