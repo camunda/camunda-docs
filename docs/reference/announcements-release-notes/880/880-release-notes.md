@@ -19,6 +19,68 @@ These release notes identify the new features included in 8.8, including [alpha 
 | ---------------------- | ---------------------------- | ------------ | ------------ | ------------ |
 | 14 October 2025        | 13 April 2027                | -            | -            | -            |
 
+## 8.8.0-alpha5
+
+| Release date | Changelog(s)                                                                                                                                                                               | Blog                                                                              |
+| :----------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------- |
+| 10 June 2025 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.8.0-alpha5)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.8.0-alpha5)</li></ul> | [Release blog](https://camunda.com/blog/2025/05/camunda-alpha-release-june-2025/) |
+
+### AI Agent Connector Longterm Memory (RAG)
+
+Providing long-term memory for the AI agent connector within an ad hoc sub-process ensures previous conversations are automatically saved, retrieved, and considered through a built-in RAG mechanism.
+
+- Adds long-term memory support to the AI agent connector.
+- Automatically triggers RAG logic to retrieve relevant past conversations.
+- Simplifies memory management by removing the need for manual data handling and custom retrieval logic.
+
+<!-- https://github.com/camunda/product-hub/issues/2744 -->
+
+### Azure DevOps integration
+
+Camunda now supports [an integration with Azure DevOps](/components/modeler/web-modeler/git-sync.md), which allows for direct syncing with Azure repos.
+
+<!-- https://github.com/camunda/product-hub/issues/2580 -->
+
+### Enhanced Identity service
+
+Camunda’s new Identity service enhances authentication and authorization for Self-Managed and SaaS environments.
+
+- **Self-Managed Identity management**: Admins can create and manage users, groups, roles, and memberships directly in Identity’s database.
+- **OIDC integration**: Integrate external Identity providers such as Keycloak and Microsoft Entra.
+- **Role-Based Access Control (RBAC)**: Assign roles and group permissions on a per-resource basis for fine-grained access control. Supported resources include Authorization, Claim Mapping Rules, Messages, Batches, Applications, Tenants, Deployments, Process Definitions, Decision Definitions, and more.
+- **Flexible mapping**: Map users, groups, and roles to resource authorizations and tenants. Leverage OIDC token claims and application/client mappings to streamline permission assignments.
+- **Migration support**: Simplified migration tools make it easy for existing customers to transition to the new service.
+- **Organizational Identity**: With SaaS environments, integrate your own IdP to manage organizational users and assign resources cluster-by-cluster.
+- **Cluster-Specific Roles and Groups**: With SaaS environments, manage distinct roles, groups, and authorizations for each cluster independently.
+
+<!-- https://github.com/camunda/product-hub/issues/2222 -->
+
+### Migrate Tasklist frontend application to use Camunda 8 REST API
+
+The Tasklist frontend application is now transitioning from the soon-to-be-deprecated Tasklist V1 API to the unified Camunda 8 REST API. This change ensures Tasklist remains fully compatible with Camunda 8’s new RDBMS support while continuing to work seamlessly with Elasticsearch and OpenSearch. Users can expect consistent functionality across different data layers, improved performance, and access to new platform features—all without losing existing capabilities or disrupting task management workflows.
+
+<!-- https://github.com/camunda/product-hub/issues/2516 -->
+
+### Offline installer for RPA worker
+
+This feature introduces an offline installer package for the Camunda [RPA](/components/rpa/overview.md) worker, allowing installation without internet connectivity. The offline installer removes reliance on external repositories or downloads, ensuring consistent, secure, and hassle-free deployment into air-gapped or restricted environments.
+
+<!-- https://github.com/camunda/product-hub/issues/2786 -->
+
+### React to expired messages with a custom exporter
+
+Camunda now introduces a mechanism to react to expired messages. The original message is retrieved from the primary storage upon message expiration and the expiry event is enhanced with the original message. Existing functionality remains unchanged, so there is no disruption for current customers or custom exporters.
+
+With these updates, developers can subscribe to the expired messages through a custom exporter, examine the event content, and optionally re-publish or handle the message differently. By providing an enhanced event and re-publish flow, this feature strengthens reliability and transparency in business processes without requiring a major upgrade or modifying existing exporters.
+
+<!-- https://github.com/camunda/product-hub/issues/2796 -->
+
+### Self-Managed: Backup & restore guide
+
+You can now follow a dedicated guide on what you need to consider regarding backups with Camunda 8. It includes how to set it up and what you need to consider for external dependencies on a high level.
+
+<!-- https://github.com/camunda/product-hub/issues/2299 -->
+
 ## 8.8.0-alpha4
 
 | Release date | Changelog(s)                                                                                                                                                                               | Blog                                                                             |
