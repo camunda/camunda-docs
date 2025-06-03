@@ -122,29 +122,6 @@ In the example below, it's set to `external-dns` and should be changed if this i
 https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/install-external-dns.sh
 ```
 
-For externaldns to work with Azure managed identities, need to provide azure.json config file
-
-Create the following file:
-
-```json
-{
-  "subscriptionId": "insert-your-subscription-id",
-  "resourceGroup": "insert-your-resource-group-name",
-  "useManagedIdentityExtension": true
-}
-```
-
-Replace insert-your-subscription-id with the ID of the Azure subscription hosting your Azure DNS.
-Replace insert-your-resource-group-name with the name of the resource group containing your Azure DNS.
-
-Add the configuration file to your Kubernetes cluster as a secret so that external-dns can access it:
-
-```shell
-kubectl -n external-dns create secret generic azure-config-file --from-file=./azure.json
-```
-
-This command creates a Kubernetes secret named azure-config-file in the external-dns namespace, containing the azure.json file.
-
 ### cert-manager
 
 [Cert-manager](https://cert-manager.io/) is an open-source Kubernetes add-on that automates the management and issuance of TLS certificates. It integrates with various certificate authorities (CAs) and provides a straightforward way to obtain, renew, and manage SSL/TLS certificates for your Kubernetes applications.
@@ -162,19 +139,6 @@ https://github.com/camunda/camunda-deployment-references/blob/main/azure/kuberne
 ```
 
 Create a `ClusterIssuer` via `kubectl` to enable cert-manager to request certificates from [Let's Encrypt](https://letsencrypt.org/):
-
-For this to work, the following environment variables will need to be defined:
-
-```shell
-# The name of your Azure DNS zone, e.g. 'example.com'
-export AZURE_DNS_ZONE="example.com"
-
-# The name of the Azure resource group that contains your DNS zone
-export AZURE_DNS_RESOURCE_GROUP="your-dns-resource-group"
-
-# The Azure Subscription ID that owns the DNS zone
-export AZURE_SUBSCRIPTION_ID="00000000-0000-0000-0000-000000000000"
-```
 
 After exporting the above values, follow up with:
 
