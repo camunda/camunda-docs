@@ -33,6 +33,11 @@ Camunda 8 is a universal universal process orchestrator that allows to orchestra
   - A **Web Modeler** for browser-based usage and process application management
 - [**Management Identity**](#management-identity) offering authentication and authorization capabilities to the components outside the [Orchestration Cluster](#orchestration-cluster): **Optimize**, **Console**, and **Web Modeler**
 
+- [Optimize](/components/optimize/what-is-optimize.md)
+- [Console](/components/console/introduction-to-console.md)
+- [Desktop Modeler](/components/modeler/desktop-modeler/index.md)
+- [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md)
+
 ### Command
 
 A command represents an action to be taken or executed. Example commands include: deploy a process, execute a process, etc.
@@ -41,11 +46,11 @@ A command represents an action to be taken or executed. Example commands include
 
 ### Connector
 
-A reusable building block that performs the integration with an external system and works out of the box.
+Connectors are reusable building blocks you can use to easily connect [processes](#process) to external systems, applications, and data.
 
-The connector might be uni or bidirectional and possibly include a [job worker](#job-worker).
+[Outbound](#outbound-connector), [inbound](#inbound-connector), or [protocol](#protocol-connector) connectors are types of connectors.
 
-The boundary between connectors and job workers can be fuzzy, but in general, connectors connect to other active pieces of software. [Outbound](#outbound-connector), [inbound](#inbound-connector), or [protocol](#protocol-connector) connectors are types of connectors.
+- [Introduction to Connectors](/components/connectors/introduction.md)
 
 ### Correlation
 
@@ -182,7 +187,7 @@ Management Identity provides authentication and authorization capabilities to th
 
 A manual task defines a task that requires human interaction but no external tooling or UI interface. For example, a user reviewing a document or completing a physical task.
 
-Manual tasks are part of [human task orchestration](/guides/getting-started-orchestrate-human-tasks.md), but differ from [user tasks](/components/modeler/bpmn/user-tasks/user-tasks.md) which define an actionable task assisted by a workflow engine or software application.
+Manual tasks are part of [human task orchestration](/guides/getting-started-orchestrate-human-tasks.md), but differ from [user tasks](#user-task) which define an actionable task assisted by a workflow engine or software application.
 
 - [Manual tasks](/components/modeler/bpmn/manual-tasks/manual-tasks.md)
 
@@ -199,7 +204,7 @@ The Orchestration cluster is the core component of [Camunda 8](#camunda-8), powe
 - [Zeebe](#zeebe) as [worklfow engine](#workflow-engine)
 - Operate as UI to monitor and troubleshoot [process instances](#process-instance) running in [Zeebe](#zeebe)
 - Tasklist as UI to interact (assign, complete, ...) with [user tasks](#user-task)
-- [APIs](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md) to interact with the orchestration cluster
+- APIs to interact with the orchestration cluster
 - An integrated authentication and authorization layer
 
 ### Outbound connector
@@ -300,7 +305,7 @@ This way, a [Camunda workflow](#workflow) can receive messages from an external 
 
 ### User task
 
-A user task is used to model work that needs to be done by a human and is assisted by a workflow engine or software application. This differs from [manual tasks](/components/modeler/bpmn/manual-tasks/manual-tasks.md), which are not assisted by external tooling.
+A user task is used to model work that needs to be done by a human and is assisted by a workflow engine or software application. This differs from [manual tasks](#manual-task), which are not assisted by external tooling.
 
 With 8.7, Camunda offers job worker-based user tasks managed by Camunda, also known as Camunda user tasks (and formerly known as Zeebe user tasks). Note that you may still see references of **Zeebe user tasks** in your XML, but this is the same thing as Camunda user tasks.
 
@@ -358,11 +363,15 @@ A Zeebe deployment typically consists of multiple brokers and gateways, forming 
 
 ### Zeebe Broker
 
-The [Zeebe Broker](/components/zeebe/technical-concepts/architecture.md#brokers) is the distributed [workflow engine](#workflow-engine) that tracks the state of active [process instances](#process-instance). The Zeebe Broker is the main part of the [Zeebe cluster](#zeebe-cluster), which does all the heavy work like processing, replicating, exporting, and everything based on [partitions](#partition). A Zeebe deployment often consists of more than one broker. Brokers can be partitioned for horizontal scalability and replicated for fault tolerance.
+The Zeebe Broker is the distributed [workflow engine](#workflow-engine) that tracks the state of active [process instances](#process-instance). The Zeebe Broker is the main part of the [Zeebe cluster](#zeebe-cluster), which does all the heavy work like processing, replicating, exporting, and everything based on [partitions](#partition). A Zeebe deployment often consists of more than one broker. Brokers can be partitioned for horizontal scalability and replicated for fault tolerance.
+
+- [Zeebe Broker](/components/zeebe/technical-concepts/architecture.md#brokers)
 
 ### Zeebe Client
 
-A [Zeebe Client](/components/zeebe/technical-concepts/architecture.md#clients) interacts with the [Zeebe Broker](#zeebe-broker) on behalf of the business application. Clients retrieve work from the [Zeebe Cluster](#zeebe-cluster) via polling or job push.
+A Zeebe Client interacts with the [Zeebe Broker](#zeebe-broker) on behalf of the business application. Clients retrieve work from the [Zeebe Cluster](#zeebe-cluster) via polling or job push.
+
+- [Zeebe Client](/components/zeebe/technical-concepts/architecture.md#clients)
 
 ### Zeebe Cluster
 
@@ -372,8 +381,12 @@ A Zeebe Cluster represents a configuration of one or more [brokers](#zeebe-broke
 
 ### Zeebe Exporter
 
-The [Zeebe Exporter](/components/zeebe/technical-concepts/architecture.md#exporters) system provides an event stream of state changes within Zeebe. It represents a sink to which Zeebe will submit all [records](#record) within the [log](#log). This gives users of Zeebe an opportunity to persist [records](#record) with the [log](#log) for future use as this data will not be available after log compaction.
+The Zeebe Exporter system provides an event stream of state changes within Zeebe. It represents a sink to which Zeebe will submit all [records](#record) within the [log](#log). This gives users of Zeebe an opportunity to persist [records](#record) with the [log](#log) for future use as this data will not be available after log compaction.
+
+- [Zeebe Exporter](/components/zeebe/technical-concepts/architecture.md#exporters)
 
 ### Zeebe Gateway
 
-The [Zeebe Gateway](self-managed/zeebe-deployment/zeebe-gateway/zeebe-gateway-overview.md) is a component of the [Zeebe cluster](#zeebe-cluster); it can be considered the contact point for the Zeebe cluster which allows [Zeebe clients](#zeebe-client) to communicate with [Zeebe brokers](#zeebe-broker) inside a [Zeebe cluster](#zeebe-cluster).
+The Zeebe Gateway is a component of the [Zeebe cluster](#zeebe-cluster); it can be considered the contact point for the Zeebe cluster which allows [Zeebe clients](#zeebe-client) to communicate with [Zeebe brokers](#zeebe-broker) inside a [Zeebe cluster](#zeebe-cluster).
+
+- [Zeebe Gateway](self-managed/zeebe-deployment/zeebe-gateway/zeebe-gateway-overview.md)
