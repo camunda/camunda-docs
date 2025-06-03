@@ -10,7 +10,7 @@ This guide steps through using an existing Keycloak instance, which is part of [
 
 ## Preparation
 
-Configure your existing Keycloak realm according to the following guide: [Connect to an existing Keycloak instance](/self-managed/identity/user-guide/configuration/connect-to-an-existing-keycloak.md).
+Configure your existing Keycloak realm according to the following guide: [Connect to an existing Keycloak instance](/self-managed/identity/configuration/connect-to-an-existing-keycloak.md).
 
 ## Values file
 
@@ -39,5 +39,5 @@ identityKeycloak:
 Then, use the custom values file to [deploy Camunda 8](/self-managed/setup/install.md) as usual.
 
 ```sh
-helm install camunda camunda/camunda-platform -f existing-keycloak-values.yaml
+helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION -f existing-keycloak-values.yaml
 ```

@@ -1,21 +1,21 @@
 ---
 id: whatsapp
-title: WhatsApp Connector
+title: WhatsApp connector
 sidebar_label: WhatsApp
 description: Send messages with [WhatsApp Business](https://business.whatsapp.com/) from your BPMN process.
 ---
 
-The **WhatsApp Connector** is an outbound Connector that allows you to send messages to users from your BPMN process.
+The **WhatsApp connector** is an outbound connector that allows you to send messages to users from your BPMN process.
 
 ## Prerequisites
 
-To start using the **WhatsApp Connector**, you must have an approved Meta WhatsApp application; follow the [official guide](https://developers.facebook.com/docs/whatsapp/cloud-api/get-started) to obtain one.
+To start using the **WhatsApp connector**, you must have an approved Meta WhatsApp application; follow the [official guide](https://developers.facebook.com/docs/whatsapp/cloud-api/get-started) to obtain one.
 
 :::note
 WhatsApp webhooks are currently not supported by Camunda.
 :::
 
-## Create a WhatsApp Connector task
+## Create a WhatsApp connector task
 
 import ConnectorTask from '../../../components/react-components/connector-task.md'
 
@@ -23,7 +23,7 @@ import ConnectorTask from '../../../components/react-components/connector-task.m
 
 ## Authentication
 
-The **WhatsApp Connector** supports authentication through Meta access tokens. Take a look at [this blog post](https://developers.facebook.com/blog/post/2022/12/05/auth-tokens/) to learn more on how to obtain one for yourself.
+The **WhatsApp connector** supports authentication through Meta access tokens. Take a look at [this blog post](https://developers.facebook.com/blog/post/2022/12/05/auth-tokens/) to learn more on how to obtain one for yourself.
 
 Once the token is obtained, put it in the **Access token** field of the **Authentication** section.
 
@@ -59,7 +59,7 @@ Read more bout message templates at the [official page](https://developers.faceb
 
 See the [official Meta guide](https://developers.facebook.com/docs/whatsapp/cloud-api/guides/send-message-templates/) for more information and examples.
 
-## Handle Connector response
+## Handle connector response
 
-The **WhatsApp Connector** is a protocol Connector, meaning it is built on top of the **HTTP REST Connector**. Therefore,
+The **WhatsApp connector** is a protocol connector, meaning it is built on top of the **HTTP REST connector**. Therefore,
 handling response is still applicable [as described](/components/connectors/protocol/rest.md#response).

@@ -8,6 +8,35 @@ description: "Let's take a closer look at security notices, reporting vulnerabil
 
 Camunda publishes security notices after fixes are available.
 
+### Notice 19
+
+#### Publication date
+
+May 21st, 2025
+
+#### Product affected
+
+Camunda Web Modeler
+
+#### Impact
+
+The version of `nodejs` used by Camunda Web Modeler was affected by [CVE-2025-23166](https://nvd.nist.gov/vuln/detail/CVE-2025-23166) potentially allowing an adversary to remotely crash the Node.js runtime.
+
+#### How to determine if the installation is affected
+
+You are using Camunda Web Modeler Self-Managed version ≤ 8.4.17, ≤ 8.5.18, ≤ 8.6.10, or ≤ 8.7.1.
+
+#### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Camunda Web Modeler Self-Managed 8.4.18
+- Camunda Web Modeler Self-Managed 8.5.19
+- Camunda Web Modeler Self-Managed 8.6.11
+- Camunda Web Modeler Self-Managed 8.7.2
+
+The fix was deployed to Web Modeler SaaS on May 19, 2025, 15:10 CET.
+
 ### Notice 18
 
 #### Publication date
@@ -215,7 +244,7 @@ Tasklist
 
 #### Impact
 
-The REST API functionality of Tasklist 8.2.0 and 8.2.1 allows unauthenticated access to the following methods/URLs:
+The Tasklist REST API functionality of Tasklist 8.2.0 and 8.2.1 allows unauthenticated access to the following methods/URLs:
 
 - GET /v1/tasks/\{taskId}
 - POST /v1/tasks/search

@@ -28,7 +28,7 @@ Additional informational and high-level overview based on Kubernetes as upstream
   - Ensure at least **3 Elastic IPs** (one per availability zone).
   - Verify quotas for **VPCs, EC2 instances, and storage**.
   - Request increases if needed via the AWS console ([guide](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html)), costs are only for resources used.
-- A namespace to host the Camunda Platform, in this guide we will reference `camunda` as the target namespace.
+- A namespace to host the Camunda Platform.
 
 For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/.tool-versions) file in the repository. It contains an up-to-date list of versions that Camunda also uses for testing.
 
@@ -186,7 +186,7 @@ The actual configuration properties can be reviewed [in the Tasklist configurati
 https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/generic/openshift/single-region/helm-values/connectors-route.yml
 ```
 
-The actual configuration properties can be reviewed [in the Connectors configuration documentation](/self-managed/connectors-deployment/connectors-configuration.md#zeebe-broker-connection).
+The actual configuration properties can be reviewed [in the connectors configuration documentation](/self-managed/connectors-deployment/connectors-configuration.md#zeebe-broker-connection).
 
 1. Configure all other applications running inside the cluster and connecting to the Zeebe Gateway to also use TLS.
 
@@ -263,7 +263,7 @@ https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/generic
 
 #### Enable Enterprise components
 
-Some components are not enabled by default in this deployment. For more information on how to configure and enable these components, refer to [configuring Enterprise components and Connectors](/self-managed/setup/install.md#configuring-enterprise-components-and-connectors).
+Some components are not enabled by default in this deployment. For more information on how to configure and enable these components, refer to [configuring Enterprise components and connectors](/self-managed/setup/install.md#configuring-enterprise-components-and-connectors).
 
 #### Fill your deployment with actual values
 
@@ -296,6 +296,9 @@ The following are the required environment variables with some example values:
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/generic/openshift/single-region/procedure/chart-env.sh
 ```
+
+- `CAMUNDA_NAMESPACE` is the Kubernetes namespace where Camunda will be installed.
+- `CAMUNDA_RELEASE_NAME` is the name of the Helm release associated with this Camunda installation
 
 Then run the following command:
 
@@ -418,7 +421,7 @@ For Camunda components (except Identity), this can be done by setting the enviro
 zeebe/tasklist/operate/etc:
   env:
     - name: CAMUNDA_LOG_FILE_APPENDER_ENABLED
-      value: false
+      value: 'false'
 ```
 
 This will disable the file appender and ensure logs are visible via the container's log output.

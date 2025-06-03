@@ -7,7 +7,7 @@ description: Connect Web Modeler to your Git repositories to keep your projects 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-Organization owners and administrators can connect their Web Modeler process applications to GitHub and GitLab, allowing users to keep their Web Modeler, Desktop Modeler, and official version control projects synced.
+Organization owners and administrators can connect their Web Modeler process applications to GitHub, GitLab, and Azure DevOps, allowing users to keep their Web Modeler, Desktop Modeler, and official version control projects synced.
 
 Once the connection is configured by an organization owner or organization administrator, project administrators and editors can use the built-in button to pull changes from the remote repository, integrate contributions from Desktop Modeler users, and merge their own work.
 
@@ -19,6 +19,7 @@ Select your Git repository host:
 [
 {label: 'GitHub', value: 'github' },
 {label: 'GitLab', value: 'gitlab' },
+{label: 'Azure', value: 'azure' },
 ]}>
 
 <TabItem value='github'>
@@ -133,13 +134,70 @@ When synchronizing for the first time with a remote repository that already cont
 When successful, your project will display a new **Sync with GitLab** button.
 
 </TabItem>
+<TabItem value='azure'>
+
+<h3> Register an App in Microsoft Entra </h3>
+
+:::note
+Web Modeler SaaS supports authenticating against `Microsoft Entra ID (global service)`. Other [national clouds](https://learn.microsoft.com/en-us/entra/identity-platform/authentication-national-cloud#microsoft-entra-authentication-endpoints) can be used in Self-Managed by setting the environment variable `CAMUNDA_MODELER_GITSYNC_AZURE_AUTHORITY_BASE_PATH`.
+:::
+
+Web Modeler requires an application to be registered with Microsoft Entra ID to sync changes with your Azure repository.
+
+1. Follow the [Microsoft Entra ID](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app) documentation to register an application. Be sure to save your `Application (client) ID` and `Directory (tenant) ID`.
+
+2. Configure your application to use [client-certificate credentials](https://learn.microsoft.com/en-us/entra/identity-platform/how-to-add-credentials?tabs=certificate). You need a PEM-encoded, RSA-encrypted private key and a PEM-encoded certificate in `X509` format generated from that key. You will need both later when configuring the connection in Web Modeler.
+
+3. Configure [scoped permissions](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-configure-app-access-web-apis) for your app so it can update the content of your Azure repositories. Ensure `Azure DevOps > vso.code_write` is configured, and `Admin consent required` is set to `No`.
+
+<h3> Grant access to the App in the desired Azure projects</h3>
+
+Follow the [documentation on how to add users](https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/add-organization-users?view=azure-devops&tabs=browser#add-users-to-your-organization) to add the created application to your Azure organization.
+
+Ensure the following:
+
+- _Access level_ is set to `Basic`.
+- Add this to all projects that will be using this integration.
+- _Azure DevOps Groups_ is set to `Project Contributors`.
+
+<h3> Configure Azure in Web Modeler </h3>
+
+:::note
+When using a self-hosted Azure DevOps Server instance, ensure the environment variable `CAMUNDA_MODELER_GITSYNC_AZURE_BASEURL` is set to the API URL of your self-hosted Azure DevOps Server instance.
+:::
+
+1. Within Web Modeler, navigate to the process application you would like to connect to Azure, and select **Connect repository**.
+
+2. Select the **Azure** tile, located at the top of the modal.
+
+3. Provide the following information in the **Configure Azure** modal:
+
+   - **Application (client) ID:** Can be found on the applications registration page.
+   - **Directory (tenant) ID:** Your Microsoft Entra tenant unique identifier. Can also be found on the applications registration page.
+   - **Private Key:** The private key used to generate the certificate in PEM format.
+   - **Certificate:** The certificate used to register the application in PEM format.
+   - **Repository URL:** The base URL of the repository you want to sync with, for example `https://dev.azure.com/camunda/my-project/_git/example-repo`. The URL cannot contain the `.git` extension or a folder path. By default, the first repository you create will have the same name as the project and the URL won't explicitly have the project name in it, for example `https://dev.azure.com/camunda/_git/example-repo`.
+   - **Branch name:** The branch name to use for merging and managing changes.
+   - **Path:** (optional) The path to the folder containing your process application files. If left empty, Web Modeler syncs with the root of the repository. This path is automatically created if it does not exist.
+
+4. Click **Open repository** to test your configuration. The repository for the provided branch and optional path opens in a new tab.
+
+5. Click **Save Configuration**.
+
+:::note
+When synchronizing for the first time with a remote repository that already contains commits, ensure Web Modeler has assigned the correct main process.
+:::
+
+When successful, your project will display a new **Sync with Azure** button.
+
+</TabItem>
 </Tabs>
 
 ## Sync with remote repository
 
 Organization owners/administrators, project administrators, and project editors can sync their version of Web Modeler with the connected repository at any time.
 
-1. In your connected process application, click **Sync with GitHub** or **Sync with GitLab**.
+1. In your connected process application, click **Sync with _GitProvider_** button.
 2. Enter a [version number](./process-applications.md#versioning) to create a new milestone for your process application. The new milestone will be created prior to pushing your changes to the central repository.
 3. Click **Synchronize**.
 
@@ -149,14 +207,14 @@ Once the pull is complete and any merge conflicts are resolved, Web Modeler will
 
 ## Manage existing configurations
 
-Existing Git configurations can be edited from the gear icon beside the **Sync with GitHub** or **Sync with GitLab** button. Permission to update these settings are limited to **project administrators**.
+Existing Git configurations can be edited from the gear icon beside the **Sync with _GitProvider_** button. Permission to update these settings are limited to **project administrators**.
 
 ## Change Git provider
 
-To switch from GitHub to GitLab, or vice versa, update your configuration with the following steps:
+To switch between Git providers, update your configuration with the following steps:
 
-1. Disconnect your current Git provider by clicking the gear icon beside the **Sync with GitHub** or **Sync with GitLab** button, and clicking the **Delete provider connection** button at the bottom of the modal.
-2. After confirming the operation, open the **Connect repository** modal and provide the necessary information for the new Git provider, following the steps outlined for [GitHub](./git-sync.md?platform=github#connect-to-a-remote-repository) or [GitLab](./git-sync.md?platform=gitlab#connect-to-a-remote-repository).
+1. Disconnect your current Git provider by clicking the gear icon beside the **Sync with _GitProvider_** button, and clicking the **Delete provider connection** button at the bottom of the modal.
+2. After confirming the operation, open the **Connect repository** modal and provide the necessary information for the new Git provider, following the steps outlined for [GitHub](./git-sync.md?platform=github#connect-to-a-remote-repository), [GitLab](./git-sync.md?platform=gitlab#connect-to-a-remote-repository), or [Azure](./git-sync.md?platform=azure#connect-to-a-remote-repository).
 
 ## Advanced use cases
 
@@ -180,7 +238,7 @@ To use Git sync for parallel feature development:
 
 1. Create a new [process application](./create-a-process-application.md) in Modeler for each active feature branch you want to develop.
 2. Configure Git sync for each instance by connecting it to the corresponding feature branch in your repository.
-3. Work on your feature in Modeler, using **Sync with GitHub** or **Sync with GitLab** to pull and push changes as needed.
+3. Work on your feature in Modeler, using **Sync with _GitProvider_** to pull and push changes as needed.
 4. Once the feature is complete and merged into the main branch, you can delete the process application associated with the feature branch.
 
 To perform hotfixes or patches of production or production-bound processes, sync a copy of the process application to the `main` branch.
@@ -197,7 +255,7 @@ Refer to [Configuration of the restapi component](../../../self-managed/modeler/
 
 - Duplicate file names are not allowed for the same file type.
 - Characters with special meaning to Git (for example, `/`), or characters disallowed by Git, are not allowed in either branch or file names.
-- Any `.json` file is treated as a Connector template, and the operation will fail if it is not. If the remote repository stores any `.json` files that are not Connector templates, place them in a subfolder to be automatically ignored by the synchronization process.
+- Any `.json` file is treated as a connector template, and the operation will fail if it is not. If the remote repository stores any `.json` files that are not connector templates, place them in a subfolder to be automatically ignored by the synchronization process.
 - Git sync only supports `.md` files that are named exactly `README.md` (case sensitive). Git sync supports multiple `README.md` in a repository (including in subfolders).
 - When synchronizing for the first time with a remote repository that already contains commits, Web Modeler will attempt to select a main process with a file name that matches its own main process. If there is no matching process, Web Modeler will select a process at random from the available `.bpmn` files. In the event that no `.bpmn` files exist in the remote repository, Web Modeler will not proceed, and will instead display an error message. Ensure the main process is correctly assigned, especially in cases where a random process has been selected.
 - Actions which alter the SHA of the commit to which Web Modeler is synced (for example, squash) may cause synchronization errors.

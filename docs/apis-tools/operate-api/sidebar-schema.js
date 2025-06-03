@@ -1,7 +1,7 @@
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 
 module.exports = {
-  "Operate API (REST)": [
+  "Operate API": [
     "apis-tools/operate-api/operate-api-overview",
     "apis-tools/operate-api/operate-api-authentication",
     "apis-tools/operate-api/operate-api-tutorial",

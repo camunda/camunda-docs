@@ -1,25 +1,25 @@
 ---
 id: graphql
-title: GraphQL Connector
+title: GraphQL connector
 sidebar_label: GraphQL
 description: Execute a GraphQL query or mutation from your BPMN process.
 ---
 
-The **GraphQL Connector** is an outbound protocol Connector that allows you to execute a GraphQL query or mutation from your BPMN process.
+The **GraphQL connector** is an outbound protocol connector that allows you to execute a GraphQL query or mutation from your BPMN process.
 
 ## Prerequisites
 
-The GraphQL Connector allows you to connect to a GraphQL API endpoint. To use the GraphQL Connector, you need to know the GraphQL endpoint URL, authentication, and available API methods.
+The GraphQL connector allows you to connect to a GraphQL API endpoint. To use the GraphQL connector, you need to know the GraphQL endpoint URL, authentication, and available API methods.
 
-## Create a GraphQL Connector task
+## Create a GraphQL connector task
 
 import ConnectorTask from '../../../components/react-components/connector-task.md'
 
 <ConnectorTask/>
 
-## Make your GraphQL Connector executable
+## Make your GraphQL connector executable
 
-To make the **GraphQL Connector** executable, fill out the mandatory fields highlighted in red in the properties panel on the right side of the screen.
+To make the **GraphQL connector** executable, fill out the mandatory fields highlighted in red in the properties panel on the right side of the screen.
 
 :::note
 All the mandatory and non-mandatory fields are covered in the upcoming sections. Depending on the authentication selection you make, more fields might be required; this is covered in the next section.
@@ -35,16 +35,16 @@ Click **None** in the **Authentication** section. No extra authentication config
 
 ### Basic
 
-#### Create a new Connector secret
+#### Create a new connector secret
 
 We advise you to keep your **Password** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
 1. Follow our [guide for creating secrets](/components/console/manage-clusters/manage-secrets.md).
-2. Name your secret (i.e `GRAPHQL_PASSWORD`) so you can reference it later in the Connector.
+2. Name your secret (i.e `GRAPHQL_PASSWORD`) so you can reference it later in the connector.
 
 ### Configure Basic Authentication
 
-Select the **GraphQL Connector** and fill out the following properties under the **Authentication** section:
+Select the **GraphQL connector** and fill out the following properties under the **Authentication** section:
 
 1. Click **Basic** in the **Authentication** section.
 2. Set **Username** (i.e. `{{secrets.GRAPHQL_USERNAME}}`).
@@ -52,32 +52,32 @@ Select the **GraphQL Connector** and fill out the following properties under the
 
 ### Bearer Token
 
-#### Create a new Connector secret
+#### Create a new connector secret
 
 We advise you to keep your **Bearer Token** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
 1. Follow our [guide for creating secrets](/components/console/manage-clusters/manage-secrets.md).
-2. Name your secret (i.e `GRAPHQL_BEARER_TOKEN`) so you can reference it later in the Connector.
+2. Name your secret (i.e `GRAPHQL_BEARER_TOKEN`) so you can reference it later in the connector.
 
 #### Configure the Bearer Token
 
-Select the **GraphQL Connector** and fill out the following properties under the **Authentication** section:
+Select the **GraphQL connector** and fill out the following properties under the **Authentication** section:
 
 1. Click **Bearer Token** in the **Authentication** section.
 2. Set **Bearer** to the secret you created (i.e. `{{secrets.GRAPHQL_BEARER_TOKEN}}`).
 
 ### OAuth token
 
-#### Create a new Connector secret
+#### Create a new connector secret
 
 We advise you to keep your **OAUTH_TOKEN_ENDPOINT** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
 1. Follow our [guide for creating secrets](/components/console/manage-clusters/manage-secrets.md).
-2. Name your secret (i.e `OAUTH_TOKEN_ENDPOINT`) so you can reference it later in the Connector.
+2. Name your secret (i.e `OAUTH_TOKEN_ENDPOINT`) so you can reference it later in the connector.
 
 #### Configure the OAuth Token
 
-Select the **GraphQL Connector** and fill out the following properties under the **Authentication** section:
+Select the **GraphQL connector** and fill out the following properties under the **Authentication** section:
 
 1. Click **OAuth 2.0** in the **Authentication** section.
 2. Set **OAuth Token Endpoint** to the secret you created (i.e. `{{secrets.OAUTH_TOKEN_ENDPOINT}}`).
@@ -112,7 +112,7 @@ query Root($id: ID) {
 ```
 
 :::note
-Secrets are currently not supported in the **Query/Mutation** of a GraphQL Connector.
+Secrets are currently not supported in the **Query/Mutation** of a GraphQL connector.
 :::
 
 :::note

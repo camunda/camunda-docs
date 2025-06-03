@@ -1,7 +1,5 @@
 name: add-to-project
 
-# FYI secrets.ADD_TO_PROJECT_PAT is a personal access token belonging to @akeller.
-
 on:
   pull_request_target:
     types: [review_requested]
@@ -11,9 +9,14 @@ jobs:
     if: github.event.requested_reviewer.login == 'akeller' || github.event.requested_reviewer.login == 'christinaausley' || github.event.requested_reviewer.login == 'mesellings' || github.event.requested_team.name == 'Tech Writers'
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/create-github-app-token@v2
+        id: app-token
+        with:
+          app-id: ${{ secrets.GH_APP_API_SYNC_ID }}
+          private-key: ${{ secrets.GH_APP_API_SYNC_KEY }}
       - name: Get project IDs for later steps
         env:
-          GITHUB_TOKEN: ${{ secrets.ADD_TO_PROJECT_PAT }}
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
           ORGANIZATION: camunda
           PROJECT_NUMBER: 27
         run: |
@@ -43,7 +46,7 @@ jobs:
           echo 'IN_REVIEW_OPTION_ID='$(jq '.data.organization.projectV2.fields.nodes[] | select(.name== "Status") | .options[] | select(.name=="👀 In Review") |.id' project_data.json) >> $GITHUB_ENV
       - name: Add PR to project
         env:
-          GITHUB_TOKEN: ${{ secrets.ADD_TO_PROJECT_PAT }}
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
           PR_ID: ${{ github.event.pull_request.node_id }}
         run: |
           item_id="$( gh api graphql -f query='
@@ -58,7 +61,7 @@ jobs:
             echo 'ITEM_ID='$item_id >> $GITHUB_ENV
       - name: Set status field
         env:
-          GITHUB_TOKEN: ${{ secrets.ADD_TO_PROJECT_PAT }}
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
         run: |
           gh api graphql -f query='
             mutation (

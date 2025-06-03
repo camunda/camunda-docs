@@ -26,8 +26,7 @@
         "guides/setup-client-connection-credentials",
         "guides/configuring-out-of-the-box-connectors",
         "guides/use-connectors-in-hybrid-mode",
-        "guides/host-custom-connectors",
-        "guides/document-handling"
+        "guides/host-custom-connectors"
       ],
       "Improve": [
         "guides/improve-processes-with-optimize",
@@ -81,7 +80,6 @@
         "components/concepts/backups",
         "components/concepts/resource-deletion",
         "components/concepts/resource-authorizations",
-        "components/concepts/document-handling",
         {
           "Access control": [
             "components/concepts/access-control/user-groups",
@@ -139,6 +137,29 @@
     },
     {
       "type": "category",
+      "label": "Document handling",
+      "link": {
+        "type": "doc",
+        "id": "components/document-handling/getting-started"
+      },
+      "items": [
+        {
+          "type": "category",
+          "label": "Use cases",
+          "link": {
+            "type": "doc",
+            "id": "components/document-handling/use-cases"
+          },
+          "items": [
+            "components/document-handling/upload-document-to-bpmn-process",
+            "components/document-handling/display-and-download-document",
+            "components/document-handling/send-document-to-external-system-via-connector"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "category",
       "label": "Intelligent document processing (IDP)",
       "link": {
         "type": "doc",
@@ -178,7 +199,15 @@
         "type": "doc",
         "id": "components/rpa/overview"
       },
-      "items": ["components/rpa/getting-started", "components/rpa/production"]
+      "items": [
+        "components/rpa/getting-started",
+        "components/rpa/production",
+        {
+          "type": "link",
+          "label": "RPA library specifications",
+          "href": "https://camunda.github.io/rpa-python-libraries/"
+        }
+      ]
     },
     {
       "type": "category",
@@ -477,7 +506,8 @@
           "items": [
             "components/connectors/connector-types",
             "components/connectors/use-connectors/inbound",
-            "components/connectors/use-connectors/outbound"
+            "components/connectors/use-connectors/outbound",
+            "components/connectors/use-connectors/intrinsic-functions"
           ]
         },
         {
@@ -1137,18 +1167,6 @@
                       "type": "doc",
                       "id": "apis-tools/camunda-api-rest/specifications/create-document-link",
                       "label": "Create document link",
-                      "className": "api-method post"
-                    }
-                  ]
-                },
-                {
-                  "type": "category",
-                  "label": "User",
-                  "items": [
-                    {
-                      "type": "doc",
-                      "id": "apis-tools/camunda-api-rest/specifications/find-all-users",
-                      "label": "Query users (alpha)",
                       "className": "api-method post"
                     }
                   ]
@@ -1829,12 +1847,11 @@
           "items": [
             "self-managed/setup/guides/accessing-components-without-ingress",
             "self-managed/setup/guides/ingress-setup",
-            "self-managed/setup/guides/using-existing-keycloak",
             "self-managed/setup/guides/add-extra-manifests",
             "self-managed/setup/guides/using-existing-elasticsearch",
             "self-managed/setup/guides/using-existing-opensearch",
+            "self-managed/setup/guides/using-existing-postgres",
             "self-managed/setup/guides/configure-db-custom-headers",
-            "self-managed/setup/guides/connect-to-an-oidc-provider",
             "self-managed/setup/guides/air-gapped-installation",
             "self-managed/setup/guides/running-custom-connectors",
             "self-managed/setup/guides/prefix-elasticsearch-indices",
@@ -1894,7 +1911,6 @@
             "self-managed/operational-guides/update-guide/850-to-860",
             "self-managed/operational-guides/update-guide/840-to-850",
             "self-managed/operational-guides/update-guide/830-to-840",
-            "self-managed/operational-guides/update-guide/820-to-830",
             {
               "Elasticsearch": [
                 "self-managed/operational-guides/update-guide/elasticsearch/7-to-8"
@@ -1956,35 +1972,22 @@
         },
         {
           "Troubleshooting": [
-            "self-managed/operational-guides/troubleshooting/troubleshooting"
+            "self-managed/operational-guides/troubleshooting/troubleshooting",
+            "self-managed/operational-guides/troubleshooting/diagnostics"
           ]
         }
       ]
     },
     {
       "Concepts": [
-        {
-          "Access control": [
-            "self-managed/concepts/access-control/applications",
-            "self-managed/concepts/access-control/resource-authorizations",
-            "self-managed/concepts/access-control/user-task-access-restrictions"
-          ]
-        },
         "self-managed/concepts/exporters",
         {
           "Multi-region": ["self-managed/concepts/multi-region/dual-region"]
         },
         "self-managed/concepts/multi-tenancy",
-        "self-managed/concepts/mapping-rules",
         "self-managed/concepts/elasticsearch-privileges",
         "self-managed/concepts/elasticsearch-without-cluster-privileges",
-        "self-managed/concepts/opensearch-privileges",
-        {
-          "Document handling": [
-            "self-managed/concepts/document-handling/getting-started",
-            "self-managed/concepts/document-handling/document-storage-configuration"
-          ]
-        }
+        "self-managed/concepts/opensearch-privileges"
       ]
     },
     {
@@ -1999,6 +2002,7 @@
                 "self-managed/console-deployment/configuration/ssl"
               ]
             },
+            "self-managed/console-deployment/usage-metrics",
             "self-managed/console-deployment/telemetry"
           ],
           "Zeebe": [
@@ -2077,7 +2081,8 @@
             "self-managed/tasklist-deployment/data-retention",
             "self-managed/tasklist-deployment/importer-and-archiver",
             "self-managed/tasklist-deployment/tasklist-authentication",
-            "self-managed/tasklist-deployment/usage-metrics"
+            "self-managed/tasklist-deployment/usage-metrics",
+            "self-managed/tasklist-deployment/user-task-access-restrictions"
           ],
           "Connectors": [
             "self-managed/connectors-deployment/install-and-start",
@@ -2117,66 +2122,76 @@
                 "self-managed/optimize-deployment/migration-update/camunda-8/3.7-to-3.8"
               ]
             }
-          ],
-          "Identity": [
-            "self-managed/identity/what-is-identity",
-            "self-managed/identity/getting-started/install-identity",
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Identity",
+          "link": {
+            "type": "doc",
+            "id": "self-managed/identity/what-is-identity"
+          },
+          "items": [
+            "self-managed/identity/identity-first-steps",
             {
-              "User guide": [
+              "type": "category",
+              "label": "Configure Identity",
+              "link": {
+                "type": "doc",
+                "id": "self-managed/identity/configuration/identity-configuration-overview"
+              },
+              "items": [
+                "self-managed/identity/configuration/configure-external-identity-provider",
+                "self-managed/identity/configuration/connect-to-an-existing-keycloak",
+                "self-managed/identity/configuration/connect-to-an-oidc-provider",
+                "self-managed/identity/configuration/alternative-db"
+              ]
+            },
+            "self-managed/identity/authentication",
+            {
+              "type": "category",
+              "label": "Manage Identity",
+              "items": [
                 {
-                  "Configuration": [
-                    "self-managed/identity/user-guide/configuration/making-identity-production-ready",
-                    "self-managed/identity/user-guide/configuration/configure-external-identity-provider",
-                    "self-managed/identity/user-guide/configuration/configure-logging",
-                    "self-managed/identity/user-guide/configuration/connect-to-an-existing-keycloak"
+                  "type": "category",
+                  "label": "Manage users, groups, roles, and applications",
+                  "link": {
+                    "type": "doc",
+                    "id": "self-managed/identity/application-user-group-role-management/identity-application-user-group-role-management-overview"
+                  },
+                  "items": [
+                    "self-managed/identity/application-user-group-role-management/manage-groups",
+                    "self-managed/identity/application-user-group-role-management/manage-roles",
+                    "self-managed/identity/application-user-group-role-management/applications"
                   ]
                 },
                 {
-                  "Roles": [
-                    "self-managed/identity/user-guide/roles/manage-roles",
-                    "self-managed/identity/user-guide/roles/manage-permissions"
+                  "type": "category",
+                  "label": "Manage access and permissions",
+                  "link": {
+                    "type": "doc",
+                    "id": "self-managed/identity/access-management/access-management-overview"
+                  },
+                  "items": [
+                    "self-managed/identity/access-management/manage-permissions",
+                    "self-managed/identity/access-management/resource-authorizations"
                   ]
                 },
-                {
-                  "Groups": [
-                    "self-managed/identity/user-guide/groups/manage-groups",
-                    "self-managed/identity/user-guide/groups/manage-users-roles-to-group"
-                  ]
-                },
-                {
-                  "Authorizations": [
-                    "self-managed/identity/user-guide/authorizations/managing-resource-authorizations",
-                    "self-managed/identity/user-guide/authorizations/managing-user-access",
-                    "self-managed/identity/user-guide/authorizations/generating-m2m-tokens"
-                  ]
-                },
-                {
-                  "Tenants": [
-                    "self-managed/identity/user-guide/tenants/managing-tenants"
-                  ]
-                },
-                {
-                  "Mapping rules": [
-                    "self-managed/identity/user-guide/mapping-rules/managing-mapping-rules"
-                  ]
-                },
-                {
-                  "Additional features": [
-                    "self-managed/identity/user-guide/additional-features/adding-an-api",
-                    "self-managed/identity/user-guide/additional-features/incorporate-applications"
-                  ]
-                }
+                "self-managed/identity/managing-tenants",
+                "self-managed/identity/mapping-rules"
               ]
             },
             {
-              "Deployment": [
-                "self-managed/identity/deployment/configuration-variables",
-                "self-managed/identity/deployment/application-monitoring",
-                "self-managed/identity/deployment/starting-configuration-for-identity",
-                "self-managed/identity/deployment/resource-management"
+              "Reference": [
+                "self-managed/identity/miscellaneous/application-monitoring",
+                "self-managed/identity/miscellaneous/configuration-variables",
+                "self-managed/identity/miscellaneous/configure-logging",
+                "self-managed/identity/miscellaneous/making-identity-production-ready",
+                "self-managed/identity/miscellaneous/resource-management",
+                "self-managed/identity/miscellaneous/starting-configuration",
+                "self-managed/identity/miscellaneous/troubleshoot-identity"
               ]
-            },
-            "self-managed/identity/troubleshooting/troubleshoot-identity"
+            }
           ]
         },
         {
@@ -2205,6 +2220,29 @@
             {
               "Desktop Modeler": [
                 "self-managed/modeler/desktop-modeler/deploy-to-self-managed"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Document handling",
+          "link": {
+            "type": "doc",
+            "id": "self-managed/document-handling/getting-started"
+          },
+          "items": [
+            {
+              "type": "category",
+              "label": "Configuration",
+              "link": {
+                "type": "doc",
+                "id": "self-managed/document-handling/configuration/overview"
+              },
+              "items": [
+                "self-managed/document-handling/configuration/camunda-8-run",
+                "self-managed/document-handling/configuration/docker",
+                "self-managed/document-handling/configuration/helm"
               ]
             }
           ]

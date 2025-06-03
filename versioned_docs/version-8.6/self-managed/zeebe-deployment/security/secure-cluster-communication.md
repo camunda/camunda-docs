@@ -143,6 +143,10 @@ The `certificateChainPath`, `privateKeyPath`, and `keyStore.filePath` can be rel
 
 :::
 
+## Tasklist and Operate
+
+Using the same set of configuration properties, you can configure Tasklist and Operate to enable TLS-secured connectivity within a Camunda 8 cluster. Refer to the documentation on [Tasklist configuration](../../tasklist-deployment/tasklist-configuration.md#intra-cluster-secure-connection) and [Operate configuration](../../operate-deployment/operate-configuration.md#intra-cluster-secure-connection) for additional details.
+
 ## How it works
 
 When enabled for each node, communication over TCP between these is securely encrypted using the provided certificates in a client-server model.

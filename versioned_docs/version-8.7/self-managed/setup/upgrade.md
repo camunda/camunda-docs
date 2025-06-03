@@ -287,7 +287,7 @@ Cross-components Keycloak-specific configurations has been replaced for a more g
 
 Accordingly, some unused environment variables have been removed from Web Modeler because of the implementation of custom OIDC support. The naming has also been adjusted to use the newer scheme.
 
-For more details, check [Connect to an OpenID Connect provider](/self-managed/setup/guides/connect-to-an-oidc-provider.md).
+For more details, check [Connect to an OpenID Connect provider](/self-managed/identity/configuration/connect-to-an-oidc-provider.md).
 
 #### Keycloak
 
