@@ -445,7 +445,7 @@ The module stores certificates and VPN client configurations in the Terraform st
 #### Execution
 
 1. Generate a Terraform plan for the VPN Client Endpoint configuration.
-  This will use the private subnets of the designated VPC:
+   This will use the private subnets of the designated VPC:
 
    ```bash
    # describe what will be created
