@@ -353,7 +353,6 @@ We strongly recommend managing sensitive information (for example, the administr
    terraform apply cluster.plan     # creates the resources
    ```
 
-
 Terraform will now create the OpenShift cluster with all the necessary configurations. The completion of this process may require approximately 20-30 minutes for each component.
 
 ### VPN module setup
