@@ -488,9 +488,9 @@ This section applies if you have previously created a private cluster and want t
     https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-private-link/aws/openshift/rosa-hcp-single-region/procedure/gather-vpn-config.sh
     ```
 
-1. Import the generated configuration file (`my-client.ovpn`) into your preferred OpenVPN client:
+1. Import the generated configuration file (`my-client.ovpn`) into an OpenVPN client:
 
-   - [Official AWS VPN Client](https://docs.aws.amazon.com/vpn/latest/clientvpn-user/connect-aws-client-vpn-connect.html)
+   - _(preferred)_ [Official AWS VPN Client](https://docs.aws.amazon.com/vpn/latest/clientvpn-user/connect-aws-client-vpn-connect.html)
    - [Other OpenVPN Clients](https://docs.aws.amazon.com/vpn/latest/clientvpn-user/connect.html)
 
 1. Once the VPN client is connected, you will have secure access to the VPC’s private network.
