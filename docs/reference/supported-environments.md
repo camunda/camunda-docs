@@ -39,9 +39,9 @@ For example, 1.2+ means support for the minor version 2, and any higher minors (
 ## Clients
 
 - **Zeebe Java Client**: OpenJDK 8+
-- **Spring Zeebe SDK**: OpenJDK 17+
+- **Camunda Spring Boot SDK**: OpenJDK 17+
 - **Connector SDK**: OpenJDK 17+
-- **Spring SDK**: Spring Boot 3.4.x (for the exact version, check the [version matrix](/apis-tools/spring-zeebe-sdk/getting-started.md#version-compatibility).)
+- **Camunda Spring Boot SDK**: Spring Boot 3.4.x (for the exact version, check the [version matrix](/apis-tools/spring-zeebe-sdk/getting-started.md#version-compatibility).)
 - **Helm CLI**: 3.14.x (for the exact version, check the [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).)
 
 ## Camunda 8 Self-Managed

@@ -489,7 +489,7 @@ To learn more about this feature, see [HTTP Webhook connector](/components/conne
 
 ### Connector Runtime <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects connectors">Connectors</span>
 
-#### Spring SDK and Camunda 8 REST API Migration
+#### Spring Zeebe SDK and Camunda 8 REST API Migration
 
 :::note
 This feature was originally released with 8.7.0-alpha3, and is no longer available in 8.7.0. The Camunda 8 REST API migration is now available in [8.8.0-alpha1](/reference/announcements-release-notes/880/880-announcements.md#spring-sdk-and-camunda-rest-api-migration). For more information, see the Camunda 8.7 and 8.8 [release update blog](https://camunda.com/blog/2025/01/camunda-87-88-release-update/).

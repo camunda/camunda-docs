@@ -4,16 +4,16 @@ title: Getting started
 description: "Leverage Camunda APIs (gRPC and REST) in your Spring Boot project."
 ---
 
-This project allows you to leverage Camunda APIs ([gRPC](/apis-tools/zeebe-api/grpc.md) and [REST](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md)) in your Spring Boot project. Later on, we’ll expand the Spring Camunda SDK to deliver a Camunda Spring SDK that provides a unified experience for interacting with all Camunda APIs in Java Spring.
+This project allows you to leverage Camunda APIs ([gRPC](/apis-tools/zeebe-api/grpc.md) and [REST](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md)) in your Spring Boot project. Later on, we’ll expand the Camunda Spring Boot SDK to deliver an SDK that provides a unified experience for interacting with all Camunda APIs in Java Spring.
 
 ## Version compatibility
 
-| Camunda Spring SDK version | JDK  | Camunda version | Bundled Spring Boot version |
-| -------------------------- | ---- | --------------- | --------------------------- |
-| 8.7.x                      | ≥ 17 | 8.7.x           | 3.4.x                       |
-| 8.8.x                      | ≥ 17 | 8.8.x           | 3.4.x                       |
+| Camunda Spring Boot SDK version | JDK  | Camunda version | Bundled Spring Boot version |
+| ------------------------------- | ---- | --------------- | --------------------------- |
+| 8.7.x                           | ≥ 17 | 8.7.x           | 3.4.x                       |
+| 8.8.x                           | ≥ 17 | 8.8.x           | 3.4.x                       |
 
-## Add the Spring Camunda SDK to your project
+## Add the Camunda Spring Boot SDK to your project
 
 Add the following Maven dependency to your Spring Boot Starter project, replacing `x` with the latest patch level available:
 
@@ -163,4 +163,4 @@ See [the configuration documentation](/apis-tools/spring-zeebe-sdk/configuration
 
 ## Writing test cases
 
-To learn more about writing test cases using Zeebe Process Test, see [Spring Zeebe SDK integration](../java-client/zeebe-process-test.md#zeebe-spring-sdk-integration).
+To learn more about writing test cases using Zeebe Process Test, see [Camunda Spring Boot SDK integration](../java-client/zeebe-process-test.md#zeebe-spring-sdk-integration).

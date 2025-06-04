@@ -137,9 +137,9 @@ The existing data schema in the secondary storage has been harmonized, to be use
 Learn more about these updates in Streamlined Deployment with 8.7.
 ::: -->
 
-### Camunda Java client and Camunda Spring SDK
+### Camunda Java client and Camunda Spring Boot SDK
 
-With the Camunda 8.8 release, Camunda Java Client and Camunda Spring SDK replace the Zeebe Java client and Spring Zeebe SDK. This allows you to use a single consolidated client to interact with Camunda orchestration clusters.
+With the Camunda 8.8 release, Camunda Java Client and Camunda Spring Boot SDK replace the Zeebe Java client and Spring Zeebe SDK. This allows you to use a single consolidated client to interact with Camunda orchestration clusters.
 
 The `CamundaClient` replaces the `ZeebeClient`, offering the same functionality and adding new capabilities.
 
