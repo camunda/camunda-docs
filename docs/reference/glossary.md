@@ -24,24 +24,16 @@ See [Zeebe cluster](#zeebe-cluster).
 
 Camunda 8 is a universal process orchestrator that allows you to orchestrate and automate complex business processes that span people, systems, and devices. Camunda 8 consists of the following key components:
 
-- [Orchestration cluster](#orchestration-cluster) powers the automation and orchestration of [processes](#process)
-- [Connectors](#connector) allow out-of-the-box integration with external systems
-- Optimize offers business intelligence tooling, allowing you to analyze bottlenecks and examine improvements in [processes](#process) automated with Camunda
-- Console allows you to manage your [Orchestration cluster](#orchestration-cluster) deployments, as follows:
-  - Console SaaS: Configure, deploy, and manage your [Orchestration cluster](#orchestration-cluster), as well as your [connector](#connector) and Optimize deployments
-  - Console Self-Managed: Monitor your [Orchestration cluster](#orchestration-cluster) and [connector](#connector) deployments
-- Modeling applications allow business and developer personas to design and implement [processes](#process), decisions, and [user task](#user-task) forms:
-  - Use Desktop Modeler locally on Mac, Windows and Linux
-  - Use the browser-based Web Modeler for process application management
-- [Management Identity](#management-identity) provides authentication and authorization for components outside the [Orchestration cluster](#orchestration-cluster): Optimize, Console, and Web Modeler
-
-To learn more about these components, see the following documentation:
-
-- [Optimize](/components/optimize/what-is-optimize.md)
-- [Console SaaS](/components/console/introduction-to-console.md)
-- [Console Self-Managed](/self-managed/console-deployment/overview.md)
-- [Desktop Modeler](/components/modeler/desktop-modeler/index.md)
-- [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md)
+- **[Orchestration cluster](#orchestration-cluster)**: Powers the automation and orchestration of [processes](#process).
+- **[Connectors](#connector)**: Out-of-the-box integration with external systems.
+- [**Optimize**](/components/optimize/what-is-optimize.md): Business intelligence tooling, allowing you to analyze bottlenecks and examine improvements in [processes](#process) automated with Camunda.
+- **Console**: Manage your [Orchestration cluster](#orchestration-cluster) deployments, as follows:
+  - **[Console SaaS](/components/console/introduction-to-console.md)**: Configure, deploy, and manage your [Orchestration cluster](#orchestration-cluster), as well as your [connector](#connector) and Optimize deployments.
+  - **[Console Self-Managed](/self-managed/console-deployment/overview.md)**: Monitor your [Orchestration cluster](#orchestration-cluster) and [connector](#connector) deployments.
+- **Modeling applications**: Allow business and developer personas to design and implement [processes](#process), decisions, and [user task](#user-task) forms:
+  - Use **[Desktop Modeler](/components/modeler/desktop-modeler/index.md)** locally on Mac, Windows, and Linux.
+  - Use the browser-based **[Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md)** for process application management.
+- **[Management Identity](#management-identity)**: Authentication and authorization for components outside the [Orchestration cluster](#orchestration-cluster): Optimize, Console, and Web Modeler.
 
 ### Command
 
@@ -53,7 +45,11 @@ A command represents an action to be taken or executed. Example commands include
 
 Connectors are reusable building blocks you can use to easily connect [processes](#process) to external systems, applications, and data.
 
-[Outbound](#outbound-connector), [inbound](#inbound-connector), or [protocol](#protocol-connector) connectors are types of connectors.
+Types of connectors:
+
+- [Outbound](#outbound-connector)
+- [Inbound](#inbound-connector)
+- [Protocol](#protocol-connector)
 
 - [Introduction to Connectors](/components/connectors/introduction.md)
 
@@ -378,13 +374,13 @@ The Zeebe Broker is the distributed [workflow engine](#workflow-engine) that tra
 
 ### Zeebe Client
 
-A Zeebe Client interacts with the [Zeebe Broker](#zeebe-broker) on behalf of the business application. Clients retrieve work from the [Zeebe Cluster](#zeebe-cluster) via polling or job push.
+A Zeebe Client interacts with the [Zeebe Broker](#zeebe-broker) on behalf of the business application. Clients retrieve work from the [Zeebe cluster](#zeebe-cluster) via polling or job push.
 
 - [Zeebe Client](/components/zeebe/technical-concepts/architecture.md#clients)
 
-### Zeebe Cluster
+### Zeebe cluster
 
-A Zeebe Cluster represents a configuration of one or more [brokers](#zeebe-broker) collaborating to execute [processes](#process). Each [broker](#zeebe-broker) in a cluster acts as a [leader](#leader) or a [follower](#follower).
+A Zeebe cluster represents a configuration of one or more [brokers](#zeebe-broker) collaborating to execute [processes](#process). Each [broker](#zeebe-broker) in a cluster acts as a [leader](#leader) or a [follower](#follower).
 
 - [Clustering](/components/zeebe/technical-concepts/clustering.md)
 
