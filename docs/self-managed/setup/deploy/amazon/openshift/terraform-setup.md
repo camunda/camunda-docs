@@ -379,7 +379,7 @@ The encryption provided by these certificates ensures that traffic can securely 
 To create the VPN Endpoint in your cluster’s VPC, you need to retrieve the VPC ID using [Terraform outputs](https://developer.hashicorp.com/terraform/language/values/outputs) from the [OpenShift cluster module](#openshift-cluster-module-setup). Follow these steps:
 
 1. Ensure you are in the [reference architecture directory of the cloned repository](#obtain-a-copy-of-the-reference-architecture): `./aws/openshift/rosa-hcp-single-region/terraform/`.
- Navigate to the `cluster` module directory inside your reference architecture repository, for example:
+   Navigate to the `cluster` module directory inside your reference architecture repository, for example:
 
    ```bash
    ls
@@ -391,10 +391,10 @@ To create the VPN Endpoint in your cluster’s VPC, you need to retrieve the VPC
 
 1. Export the [VPC ID](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/vpc) to an environment variable:
 
-    ```bash
-    export CLUSTER_VPC_ID="$(terraform output -raw vpc_id)"
-    echo "CLUSTER_VPC_ID=$CLUSTER_VPC_ID"
-    ```
+   ```bash
+   export CLUSTER_VPC_ID="$(terraform output -raw vpc_id)"
+   echo "CLUSTER_VPC_ID=$CLUSTER_VPC_ID"
+   ```
 
 #### Set up the VPN module
 
@@ -414,11 +414,7 @@ Then, review `vpn.tf`, which describes the VPC Client Endpoint configuration:
 https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-private-link/aws/openshift/rosa-hcp-single-region/terraform/vpn/vpn.tf
 ```
 
-This VPN Client Endpoint follows [AWS best practices and constraints](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/what-is-best-practices.html):
-    - Uses a client CIDR range that does not overlap with the VPC CIDR or any manually added VPN route table routes.
-    - Implements [split-tunnel routing](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/split-tunnel-vpn.html), so only traffic destined for the VPC goes through the VPN, minimizing bandwidth use.
-    - Supports IPv4 only and is bound to the VPC’s private subnets.
-
+This VPN Client Endpoint follows [AWS best practices and constraints](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/what-is-best-practices.html): - Uses a client CIDR range that does not overlap with the VPC CIDR or any manually added VPN route table routes. - Implements [split-tunnel routing](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/split-tunnel-vpn.html), so only traffic destined for the VPC goes through the VPN, minimizing bandwidth use. - Supports IPv4 only and is bound to the VPC’s private subnets.
 
 1. Set your Terraform state key and initialize Terraform with the S3 [backend](#create-an-s3-bucket-for-terraform-state-management) and download necessary provider plugins:
 
@@ -477,18 +473,18 @@ This section applies if you have previously created a private cluster and want t
 
 1. Navigate to the VPN module directory (`vpn`):
 
-    ```bash
-    pwd
+   ```bash
+   pwd
 
-    # Example output:
-    # ./camunda-deployment-references/aws/openshift/rosa-hcp-single-region/terraform/vpn/
-    ```
+   # Example output:
+   # ./camunda-deployment-references/aws/openshift/rosa-hcp-single-region/terraform/vpn/
+   ```
 
 1. Generate your client’s VPN configuration file. This file is compatible with [OpenVPN (ovpn)](https://openvpn.net/) format:
 
-    ```bash reference
-    https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-private-link/aws/openshift/rosa-hcp-single-region/procedure/gather-vpn-config.sh
-    ```
+   ```bash reference
+   https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-private-link/aws/openshift/rosa-hcp-single-region/procedure/gather-vpn-config.sh
+   ```
 
 1. Import the generated configuration file (`my-client.ovpn`) into an OpenVPN client:
 
@@ -516,13 +512,13 @@ You can access the created OpenShift cluster using the following steps:
     https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-private-link/aws/openshift/rosa-hcp-single-region/procedure/gather-cluster-login-id.sh
     ```
 
-1. If you want to give cluster administrator access to the created user, this is not required for a standard installation but can be useful for debugging:
+1.  If you want to give cluster administrator access to the created user, this is not required for a standard installation but can be useful for debugging:
 
     ```shell
     rosa grant user cluster-admin --cluster="$CLUSTER_NAME" --user="$CLUSTER_ADMIN_USERNAME"
     ```
 
-1. Log in to the OpenShift cluster:
+1.  Log in to the OpenShift cluster:
 
     ```shell
     oc login -u "$CLUSTER_ADMIN_USERNAME" "$CLUSTER_API_URL" -p "$CLUSTER_ADMIN_PASSWORD"
@@ -535,13 +531,13 @@ You can access the created OpenShift cluster using the following steps:
     oc config use-context "$CLUSTER_NAME"
     ```
 
-1. Verify your connection to the cluster with `oc`:
+1.  Verify your connection to the cluster with `oc`:
 
     ```shell
     oc get nodes
     ```
 
-1. Create a project for Camunda using `oc`:
+1.  Create a project for Camunda using `oc`:
 
     ```shell
     oc new-project camunda
