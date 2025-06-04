@@ -1,21 +1,23 @@
 ---
 id: ao-design
 title: Design and architecture
-description: ""
+description: "Plan and design your agentic orchestration solutions, and understand recommended architecture and workflow guidelines."
 keywords: ["agentic ai", "AI agents"]
 ---
+
+import WorkflowImg from './img/ao-workflow.png';
 
 Plan and design your agentic orchestration solutions, and understand recommended architecture guidelines.
 
 ## Plan
 
-Problem → Agent, not Agent → Problem
+Use the following guidelines when planning your agentic orchestration solution:
 
-Agents are spices, not the entrée
+- **Problem first**: First, identify any problem you might have in a process, and only then determine whether an AI agent could help solve the problem. Do not use an AI agent where it is not really necessary, or just for the sake of it.  
 
-Architect for composability
+- **Architect for composability**. Avoid becoming too dependant on a specific LLM model, for example by doing too much fine tuning. This allows you to more easily integrate newer LLM providers and models that better suit your needs in the future.
 
-Observability is non-negotiable
+- **Observability and governance**: Use [Operate](/components/operate/operate-introduction.md) and [Optimize](/components/optimize/what-is-optimize.md) for visibility of your agentic orchestration processes. 
 
 ### When to use deterministic or non-deterministic orchestration
 
@@ -33,20 +35,49 @@ To learn more about determining when and where to use AI agents within your auto
 
 ## Design and architecture
 
-observability
+Use the following guidelines when designing your agentic orchestration solution:
 
-Guardrail Sandwich (deterministic task → agent → deterministic validation)
+- **Guardrail sandwich**: Content, deterministic task → agent → deterministic validation.
 
-Context Packing vs. Retrieval Augmentation
+- **Context packing vs. retrieval augmentation**: Content
 
-Human-in-the-Loop Escalation Paths
+- **Human-in-the-Loop escalation**: Content
 
-Version every prompt
+- **Prompt versioning**: Version every prompt
+
+### Mixing Agents with Workflow patterns
+
+<p><img src={WorkflowImg} style={{marginBottom: '0'}} title="Diagram showing how to mix agents into your workflow patterns" className="img-transparent"/></p>
+
+<table className="table-callout">
+<tr>
+    <td><span className="callout">1</span></td>
+    <td>**Process Flow Within Tools**: Full BPMN control inside ad-hoc subprocesses for ultimate flexibility.</td>
+</tr>
+<tr>
+    <td><span className="callout">2</span></td>
+    <td>**Agents pivot instantly with external messages and timers**: During execution, agents can be influenced by events like external messages or timers, enabling on-the-fly adjustments.</td>
+</tr>
+<tr>
+    <td><span className="callout">3</span></td>
+    <td>**Event-Driven Agent Reconfiguration**: Sub-workflows handle new data, guiding the next AI steps.</td>
+</tr>
+<tr>
+    <td><span className="callout">4</span></td>
+    <td>**Agents orchestrate sub-workflow**: A tool doesn't need to be a single tool - it can be a whole subprocess.</td>
+</tr>
+<tr>
+    <td><span className="callout">5</span></td>
+    <td>**Multi-Agent Orchestration**: Agents orchestrate other agents for streamlined, scalable solutions.</td>
+</tr>
+</table>
 
 ## Implementation
 
-Toolboxing beats monoliths
+Use the following guidelines when implementing your agentic orchestration solution:
 
-Temperature discipline
+- **Toolboxing beats monoliths**: Content
 
-Latency budgets
+- **Temperature discipline**: Content
+
+- **Latency budgets**: Content

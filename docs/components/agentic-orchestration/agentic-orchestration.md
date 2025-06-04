@@ -1,7 +1,7 @@
 ---
 id: agentic-orchestration
 title: Agentic orchestration
-description: ""
+description: "Camunda agentic orchestration allows you to orchestrate AI agents within your BPMN-based workflows, enabling human tasks, deterministic rule sets, and AI-driven decisions to collaborate in a robust, end-to-end process."
 keywords: ["agentic orchestration"]
 ---
 
@@ -15,17 +15,24 @@ Agentic orchestration ensures your AI-driven processes are efficient, compliant,
 
 ## About agentic orchestration
 
-Camunda agentic orchestration refers to the use of AI agents to execute the non-deterministic parts of a process, built on the proven foundation of BPMN. Blending both deterministic and dynamic (AI-driven) process orchestration into your end-to-end processes allows you to take advantage of non-deterministic process orchestration without sacrificing predictability, customer experience, and compliance.
+Camunda agentic orchestration uses [AI agents](ai-agents.md) to execute the non-deterministic parts of a process, built on the proven foundation of BPMN. Blending both deterministic and dynamic (AI-driven) process orchestration into your end-to-end processes allows you to take advantage of non-deterministic process orchestration without sacrificing predictability, customer experience, and compliance.
 
 For example, [insert best use case example].
 
-### Benefits
+<!-- ### Benefits
 
 - Increase the scope of process automation to handle work traditionally requiring human case management, and provide a much higher level of flexibility for straight-through processing (STP).
 - Long-running
 - Always integrate safely with hil
-- Observability and auditing
+- Observability and auditing -->
 
 ## Get started
 
-- 
+Get started with agentic orchestration.
+
+- [Design and architecture](design-architecture.md): Plan and design your agentic orchestration solutions using recommended architecture guidelines.
+- [AI agents](ai-agents.md): Start building and integrating AI agents into your end-to-end processes.
+
+:::tip
+Ready to get started? Download the [AI Email Support Agent blueprint](https://marketplace.camunda.com/en-US/apps/522492/ai-email-support-agent) from the Camunda Marketplace.
+:::
