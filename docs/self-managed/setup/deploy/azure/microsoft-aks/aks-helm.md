@@ -1,17 +1,17 @@
 ---
 id: aks-helm
 title: "Install Camunda 8 on an AKS cluster"
-description: "Set up your Camunda 8 environment with Helm on Azure Kubernetes Service."
+description: "Set up the Camunda 8 environment with Helm and an optional Ingress setup on Azure AKS."
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-This guide provides a comprehensive walkthrough for installing the Camunda 8 Helm chart on your existing Azure Kubernetes Service (AKS) cluster, as well as verifying that it is working as intended
+This guide provides a comprehensive walkthrough for installing the Camunda 8 Helm chart on your existing Azure Kubernetes Service (AKS) cluster, and confirmation it is working as intended.
 
-## Requirements
+## Prerequisites
 
-- A Kubernetes cluster; see the [Terraform](./terraform-setup.md) guide.
+- A Kubernetes cluster; refer to the [Terraform guide](./terraform-setup.md) for details.
 - [Helm](https://helm.sh/docs/intro/install/)
 - [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
 - [jq](https://jqlang.github.io/jq/download/) to interact with some variables.
@@ -19,7 +19,7 @@ This guide provides a comprehensive walkthrough for installing the Camunda 8 Hel
 - (optional) Custom domain name/[DNS zone](https://learn.microsoft.com/en-us/azure/dns/dns-zones-records) in Azure DNS. This allows you to expose Camunda 8 endpoints and connect via community-supported [zbctl](https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md) or [Camunda Modeler](https://camunda.com/download/modeler/).
 - A namespace to host the Camunda Platform; in this guide we will reference `camunda` as the target namespace.
 
-For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file in the repository. It contains an up-to-date list of versions that we also use for testing.
+For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file in the related repository. This contains an up-to-date list of versions we also use for testing.
 
 ### Considerations
 
@@ -27,11 +27,11 @@ While this guide is primarily tailored for UNIX systems, it can also be run unde
 
 Multi-tenancy is disabled by default and is not covered further in this guide. If you decide to enable it, you may use the same PostgreSQL instance and add an extra database for multi-tenancy purposes.
 
-[Workload Identities](https://learn.microsoft.com/en-us/azure/aks/workload-identity-overview) offer a way to connect to Azure-managed PostgresSQL. This is not supported yet by Camunda.
+[Workload Identities](https://learn.microsoft.com/en-us/azure/aks/workload-identity-overview) offer a way to connect to Azure-managed PostgreSQL. This is not yet supported by Camunda.
 
 ## Export environment variables
 
-To streamline the execution of the subsequent commands, it is recommended to export multiple environment variables.
+To streamline execution of the following commands, we recommend exporting multiple environment variables.
 
 ### Export the Helm chart version
 
@@ -148,7 +148,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/azure/kuberne
 
 ## Deploy Camunda 8 via Helm charts
 
-For more configuration options, refer to the [Helm chart documentation](https://artifacthub.io/packages/helm/camunda/camunda-platform#parameters). Additionally, explore our existing resources on the [Camunda 8 Helm chart](/self-managed/setup/install.md) and [guides](/self-managed/setup/guides/guides.md).
+For more configuration options, refer to the [Helm chart documentation](https://artifacthub.io/packages/helm/camunda/camunda-platform#parameters). Additionally, explore our existing resources in the [Camunda 8 Helm chart](/self-managed/setup/install.md) and [related guides](/self-managed/setup/guides/guides.md).
 
 Depending on your installation path, you may use different settings.
 For easy and reproducible installations, we will use YAML files to configure the chart.
@@ -203,7 +203,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/azure/kuberne
 
 Before installing the Helm chart, create Kubernetes secrets to store the Keycloak database authentication credentials.
 
-To create the secrets, run the following commands:
+To create the secrets, run the following command:
 
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/create-external-db-secrets.sh
@@ -220,8 +220,7 @@ Some components are not enabled by default in this deployment. For more informat
 
 #### Elasticsearch options
 
-Camunda Helm chart supports both internal and external Elasticsearch deployments. For production workloads, we recommend using an externally managed Elasticsearch service (for example, [Elastic Cloud on Azure](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/elastic.ec-azure-pp)
-). Note that Terraform support for Elastic Cloud on Azure can be restrictive but remains a viable option. In this guide, we default to the internal deployment of Elasticsearch.
+Camunda Helm chart supports both internal and external Elasticsearch deployments. For production workloads, we recommend using an externally managed Elasticsearch service (for example, [Elastic Cloud on Azure](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/elastic.ec-azure-pp)). Terraform support for Elastic Cloud on Azure can be restrictive but remains a viable option. In this guide, we default to the internal deployment of Elasticsearch.
 
 <details>
 <summary>Show configuration to enable internal Elasticsearch</summary>
@@ -311,7 +310,9 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 Use these environment variables in the `kubectl` command to create the secret.
 
-- The `smtp-password` should be replaced with the appropriate external value ([see how it's used by Web Modeler](/self-managed/modeler/web-modeler/configuration/configuration.md#smtp--email)).
+:::note
+The `smtp-password` is required for Web Modeler to send emails, but Web Modeler is not enabled by default in this guide. If you plan to enable Web Modeler, ensure you configure the SMTP settings as described in the [Web Modeler configuration guide](/self-managed/modeler/web-modeler/configuration/configuration.md#smtp--email).
+:::
 
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/create-identity-secret.sh
@@ -380,7 +381,7 @@ kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-keycloak" 18080:80 --namesp
 
 1. Open Identity in your browser at `http://localhost:8080`. You will be redirected to Keycloak and prompted to log in with a username and password.
 2. Use `demo` as both the username and password.
-3. Select **Add application** and select **M2M** as the type. Assign a name like "test."
+3. Select **Add application** and select **M2M** as the type. Assign a name like "test".
 4. Select the newly created application. Then, select **Access to APIs > Assign permissions**, and select the **Core API** with "read" and "write" permission.
 5. Retrieve the `client-id` and `client-secret` values from the application details
 
@@ -390,7 +391,7 @@ export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identit
 ```
 
 <details>
-<summary>To access the other services and their UIs, port-forward those Components as well:</summary>
+<summary>To access the other services and their UIs, port-forward those components as well:</summary>
 <summary>
 
 ```shell
@@ -419,7 +420,7 @@ Console:
 <Tabs groupId="c8-connectivity">
   <TabItem value="rest-api" label="REST API" default>
 
-For a detailed guide on generating and using a token, please conduct the relevant documentation on [authenticating with the Camunda 8 REST API](./../../../../../apis-tools/camunda-api-rest/camunda-api-rest-authentication.md?environment=self-managed).
+For a detailed guide on generating and using a token, conduct the relevant documentation on [authenticating with the Camunda 8 REST API](./../../../../../apis-tools/camunda-api-rest/camunda-api-rest-authentication.md?environment=self-managed).
 
 <Tabs groupId="domain">
   <TabItem value="with" label="With domain" default>
@@ -502,10 +503,10 @@ kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-zeebe-gateway" 26500:26500 
 The following values are required for OAuth authentication:
 
 - **Cluster endpoint:** `http://localhost:26500`
-- **Client ID:** Retrieve the client ID value from the identity page of your created M2M application
-- **Client Secret:** Retrieve the client secret value from the Identity page of your created M2M application
+- **Client ID:** Retrieve the client ID value from the identity page of your created M2M application.
+- **Client Secret:** Retrieve the client secret value from the Identity page of your created M2M application.
 - **OAuth Token URL:** `http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token`
-- **Audience:** `zeebe-api`, the default for Camunda 8 Self-Managed
+- **Audience:** `zeebe-api`, the default for Camunda 8 Self-Managed.
 
 </TabItem>
 </Tabs>
@@ -521,6 +522,7 @@ To test your installation with the deployment of a sample application, refer to 
 
 The following are some advanced configuration topics to consider for your cluster:
 
+- [Camunda production installation guide with Kubernetes and Helm](versioned_docs/version-8.7/self-managed/operational-guides/production-guide/helm-chart-production-guide.md)
 - [Cluster autoscaling](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/cloudprovider/azure/README.md)
 
 To get more familiar with our product stack, visit the following topics:
