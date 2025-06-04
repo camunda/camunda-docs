@@ -4,6 +4,9 @@ title: "Exporters"
 description: "As Zeebe processes jobs and processes, or performs internal maintenance, it generates an ordered stream of records."
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 As Zeebe processes jobs and processes, or performs internal maintenance (e.g. raft failover), it generates an ordered stream of records.
 
 :::note
@@ -188,4 +191,139 @@ In the case that an exporter exports to a database, only the records are deleted
 
 :::note
 All resources required for purging need to be closed afterwards to avoid memory leaks.
+:::
+
+## Custom Exporter To Filter Specific Records
+
+The exporter interface allows you to filter specific records by implementing the [`Context#RecordFilter` interface](https://github.com/camunda/camunda/blob/5e554728eaf1122962fe9833dc9e91ff1fb5a087/zeebe/exporter-api/src/main/java/io/camunda/zeebe/exporter/api/context/Context.java#L67).
+For example, you can create a custom exporter that only exports events, job value types and with `CREATED` intent.
+
+```java
+public class CustomExporterFilter implements RecordFilter {
+
+  @Override
+  public boolean acceptType(RecordType recordType) {
+    return recordType == RecordType.EVENT;
+  }
+
+  @Override
+  public boolean acceptValue(ValueType valueType) {
+    return valueType == ValueType.JOB;
+  }
+
+  @Override
+  public boolean acceptIntent(Intent intent) {
+    return intent == JobIntent.CREATED;
+  }
+}
+```
+
+You can then set this filter in `Exporter#configure` method of your custom exporter:
+
+```java
+public class CustomExporter implements Exporter {
+
+  // ...
+
+  @Override
+  public void configure(final Context context) {
+    // ...
+    context.setFilter(new CustomExporterFilter());
+  }
+
+  // ...
+}
+```
+
+:::note
+Filters are applied as an AND condition, meaning that all conditions must be met for a record to be accepted by the exporter.
+:::
+
+### Listen to Expired Messages With A Custom Filter
+
+You can also create a custom filter to listen to expired messages.
+This can be useful if you want to take specific actions on messages that have expired, such as logging them or re-publishing them.
+For example, if you want to allow exporting only message events with `EXPIRED` intent, you can follow the steps below:
+
+1. Implement the `RecordFilter` interface:
+
+```java
+public class MessageExpiredExporterFilter implements RecordFilter {
+
+  @Override
+  public boolean acceptType(RecordType recordType) {
+    return recordType == RecordType.EVENT;
+  }
+
+  @Override
+  public boolean acceptValue(ValueType valueType) {
+    return valueType == ValueType.MESSAGE;
+  }
+
+  @Override
+  public boolean acceptIntent(Intent intent) {
+    if (intent instanceof MessageIntent messageIntent) {
+      return messageIntent == MessageIntent.EXPIRED;
+    }
+
+    return true;
+  }
+}
+```
+
+Please note that this filter will only accept records of type `EVENT`, value type `MESSAGE`, and intent `EXPIRED`.
+If you want to accept more record types, value types and intents, you can modify the `acceptType`, `acceptValue` and `acceptIntent` methods accordingly.
+
+2. Set `MessageExpiredExporterFilter` filter in `Exporter#configure` method of your custom exporter.
+
+```java
+public class MessageExpiredExporter implements Exporter {
+
+  // ...
+
+  @Override
+  public void configure(final Context context) {
+    // ...
+    context.setFilter(new MessageExpiredExporterFilter());
+  }
+
+  // ...
+}
+```
+
+3. (Optional) By default, the exporter will not receive the full message body, only the message key with empty message body will be exported.
+   If you want to receive the full message body with the expired message, you can enable it via YAML configuration or environment variable.
+
+<Tabs groupId="featured" defaultValue="envVars" queryString values={
+[
+{label: 'Environment variables', value: 'envVars' },
+{label: 'YAML configuration', value: 'valuesYaml' }
+]}>
+<TabItem value="envVars">
+
+```sh
+ZEEBE_BROKER_EXPERIMENTAL_FEATURES_ENABLEMESSAGEBODYONEXPIRED=true
+```
+
+</TabItem>
+<TabItem value="valuesYaml">
+
+```yaml
+zeebe:
+  broker:
+    experimental:
+      features:
+        enableMessageBodyOnExpired: true
+```
+
+</TabItem>
+</Tabs>
+
+:::note
+It is important to note that enabling the full message body for expired messages can have an impact on the performance of expiring messages.
+Enabling this feature flag means that every deleted message will be appended with the full message body to Zeebe Engine's record stream.
+Because each expired message now carries its entire message payload, the “write buffer” used by the expiration checker will fill up faster.
+That means the expiration checker needs more time (i.e. more roundtrips) to expire the same number of messages.
+Potentially, this may result in a growing state of the messages waiting to be expired.
+See [message ttl checker configuration](https://github.com/camunda/camunda/blob/main/dist/src/main/config/broker.yaml.template#L1223) to have more control over the checker's behavior.
 :::
