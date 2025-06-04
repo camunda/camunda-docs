@@ -186,7 +186,7 @@ client.newWorker()
 
 #### On correcting the assignee
 
-The assignee can be corrected in the `creating` listener if the process hasn't specified an assignee for this user task already. For example, if the user task's `assignee` expression evaluates to `null`.
+The assignee can be corrected in the `creating` listener only if the process hasn't specified an assignee for this user task already. For example, if the user task's `assignee` expression evaluates to `null`.
 
 :::tip
 To set an assignee when creating the user task, review [specifying the assignee in the process](components/modeler/bpmn/user-tasks/user-tasks.md#assignments), or verify the assignee is not yet defined by the process by [accessing the `assignee` attribute in the job headers](#accessing-user-task-data).
