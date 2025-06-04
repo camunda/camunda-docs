@@ -164,6 +164,8 @@ any data enrichment or transformation through the external system.
 ## Custom Exporter To Filter Specific Records
 
 The exporter interface allows you to filter specific records by implementing the [`Context#RecordFilter` interface](https://github.com/camunda/camunda/blob/5e554728eaf1122962fe9833dc9e91ff1fb5a087/zeebe/exporter-api/src/main/java/io/camunda/zeebe/exporter/api/context/Context.java#L67).
+This interface provides methods to filter records based on their record type, value type, and intent.
+You can find valid record types and value types in the [protocol definition](https://github.com/camunda/camunda/blob/stable/8.7/zeebe/protocol/src/main/resources/protocol.xml) and intents in the [intent enum class](https://github.com/camunda/camunda/blob/stable/8.7/zeebe/protocol/src/main/java/io/camunda/zeebe/protocol/record/intent/Intent.java).
 For example, you can create a custom exporter that only exports events, job value types and with `CREATED` intent.
 
 ```java
