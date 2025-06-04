@@ -8,7 +8,7 @@ description: "This section defines common terminology referenced within the docu
 
 See [Zeebe Broker](#zeebe-broker).
 
-### BPMN Model
+### BPMN model
 
 See [Process](#process).
 
@@ -18,24 +18,24 @@ See [Zeebe Client](#zeebe-client).
 
 ### Cluster
 
-See [Zeebe Cluster](#zeebe-cluster).
+See [Zeebe cluster](#zeebe-cluster).
 
 ### Camunda 8
 
-Camunda 8 is a universal universal process orchestrator that allows to orchestrate and automate complex business processes that span people, systems, and devices. Camunda 8 consists of the following key components:
+Camunda 8 is a universal process orchestrator that allows you to orchestrate and automate complex business processes that span people, systems, and devices. Camunda 8 consists of the following key components:
 
-- [Orchestration cluster](#orchestration-cluster) powering the automation and orchestration of [processes](#process)
-- [Connectors](#connector) allowing the out-of-the-box integration with external systems
-- Optimize offering business intelligence tooling allowing to e.g., analyze bottlenecks and examine improvements in [processes](#process) automated with Camunda
-- Console allows to manage [Orchestration cluster](#orchestration-cluster) deplyoments. The capabilities differ based in SaaS and Self-Managed:
-  - Console SaaS: allows configuring, deploying, and managing [Orchestration cluster](#orchestration-cluster) and respective [Connectors](#connector) and Optimize deployments
-  - Console Self-Managed: allows monitoring [Orchestration cluster](#orchestration-cluster) and respective [Connectors](#connector) deployments
-- Modeling applications allowing business and developer personas to design and implement [processes](#process), decisions and [user task](#user-task) forms:
-  - A Desktop Modeler for local usage on Mac, Windows and Linux
-  - A Web Modeler for browser-based usage and process application management
-- [Management Identity](#management-identity) offering authentication and authorization capabilities to the components outside the [Orchestration cluster](#orchestration-cluster): Optimize, Console, and Web Modeler
+- [Orchestration cluster](#orchestration-cluster) powers the automation and orchestration of [processes](#process)
+- [Connectors](#connector) allow out-of-the-box integration with external systems
+- Optimize offers business intelligence tooling, allowing you to analyze bottlenecks and examine improvements in [processes](#process) automated with Camunda
+- Console allows you to manage your [Orchestration cluster](#orchestration-cluster) deployments, as follows:
+  - Console SaaS: Configure, deploy, and manage your [Orchestration cluster](#orchestration-cluster), as well as your [connector](#connector) and Optimize deployments
+  - Console Self-Managed: Monitor your [Orchestration cluster](#orchestration-cluster) and [connector](#connector) deployments
+- Modeling applications allow business and developer personas to design and implement [processes](#process), decisions, and [user task](#user-task) forms:
+  - Use Desktop Modeler locally on Mac, Windows and Linux
+  - Use the browser-based Web Modeler for process application management
+- [Management Identity](#management-identity) provides authentication and authorization for components outside the [Orchestration cluster](#orchestration-cluster): Optimize, Console, and Web Modeler
 
-Please refer to the respective documentation pages for an introduction:
+To learn more about these components, see the following documentation:
 
 - [Optimize](/components/optimize/what-is-optimize.md)
 - [Console SaaS](/components/console/introduction-to-console.md)
@@ -65,7 +65,7 @@ Correlation refers to the act of matching a [message](#message) with an inflight
 
 ### Correlation key
 
-A correlation is an attribute within a [message](#message) used to match this [message](#message) against a certain [variable](#process-instance-variable) within an inflight [message](#message). If the value of the correlation key matches the value of the [variable](#process-instance-variable) within the [process instance](#process-instance), the [message](#message) is matched to this [message](#message).
+A correlation is an attribute within a [message](#message) that is used to match the message against a certain [variable](#process-instance-variable) within an inflight message. If the value of the correlation key matches the value of the [variable](#process-instance-variable) within the [process instance](#process-instance), the message is matched.
 
 - [Message correlation](/components/concepts/messages.md)
 
@@ -89,7 +89,7 @@ Use an element template to extend the Desktop Modeler or Web Modeler with domain
 
 ### Event
 
-An event represents a state change associated with an aspect of an executing [process instance](#process-instance). Events capture [variable](#process-instance-variable) changes, state transition in process elements, etc. An event is represented by a timestamp, the variable name, and variable value. Events are stored in an append-only log.
+An event represents a state change associated with an aspect of an executing [process instance](#process-instance). Events capture [variable](#process-instance-variable) changes, state transition in process elements, and so on. An event is represented by a timestamp, the variable name, and variable value. Events are stored in an append-only log.
 
 - [Internal processing](/components/zeebe/technical-concepts/internal-processing.md#events-and-commands)
 
@@ -109,7 +109,7 @@ Flow nodes refer to a specific subset of BPMN [elements](#element). They compris
 
 ### Follower
 
-In a clustered environment, a [broker](#zeebe-broker) which is not a [leader](#leader) is a follower of a given partition. A follower can become the new [leader](#leader) when the old [leader](#leader) is no longer reachable.
+In a clustered environment, a [broker](#zeebe-broker) which is not a [leader](#leader) is a follower of a given partition. A follower can become the new leader when the old leader is no longer reachable.
 
 - [Clustering](/components/zeebe/technical-concepts/clustering.md#raft-consensus-and-replication-protocol)
 
@@ -133,7 +133,7 @@ For example, this is useful when working with services that must be isolated wit
 
 ### Identity
 
-Identity is a UI in the [Orchestration cluster](#orchestration-cluster) allowing to adminster the integrated authentication and authorization capbilities.
+Use Identity in the [Orchestration cluster](#orchestration-cluster) to administer the integrated authentication and authorization.
 
 ### Inbound connector
 
@@ -146,7 +146,7 @@ Each element referencing an inbound connector will lead to the creation of one i
 
 ### Incident
 
-An incident represents an error condition which prevents [Zeebe](#zeebe) from advancing an executing [process instance](#process-instance). [Zeebe](#zeebe) will create an incident if there was an uncaught exception thrown in your code and the number of retries of the given step is exceeded.
+An incident represents an error condition which prevents [Zeebe](#zeebe) from advancing an executing [process instance](#process-instance). Zeebe will create an incident if there was an uncaught exception thrown in your code and the number of retries of the given step is exceeded.
 
 - [Incident](/components/concepts/incidents.md)
 
@@ -190,7 +190,7 @@ The log is comprised of an ordered sequence of records written to persistent sto
 
 ### Management Identity
 
-The Management Identity component provides authentication and authorization capabilities to the [Camunda 8](#camunda-8) components, which exist outside the [Orchestration cluster](#orchestration-cluster): Console, Web Modeler, and Optimize.
+The Management Identity component provides authentication and authorization for the [Camunda 8](#camunda-8) components outside the [Orchestration cluster](#orchestration-cluster): Console, Web Modeler, and Optimize.
 
 ### Manual task
 
@@ -210,11 +210,11 @@ A message contains information to be delivered to interested parties during exec
 
 The Orchestration cluster is the core component of [Camunda 8](#camunda-8), powering the automation and orchestration of [processes](#process). An Orchestration cluster includes:
 
-- [Zeebe](#zeebe) as [workflow engine](#workflow-engine)
-- Operate to monitor and troubleshoot [process instances](#process-instance) running in [Zeebe](#zeebe)
-- Tasklist to interact (assign, complete, ...) with [user tasks](#user-task)
-- [Identity](#identity) to adminster the integrated authentication and authorization capbilities
-- APIs to interact with the Orchestration cluster programmatically
+- [Zeebe](#zeebe) as the [workflow engine](#workflow-engine)
+- Operate for monitoring and troubleshooting [process instances](#process-instance) running in [Zeebe](#zeebe)
+- Tasklist for interacting with [user tasks](#user-task) (assigning, completing, and so on)
+- [Identity](#identity) for managing the integrated authentication and authorization
+- APIs for interacting with the Orchestration cluster programmatically
 
 ### Outbound connector
 
@@ -228,7 +228,7 @@ A partition represents a logical grouping of data in a [Zeebe Broker](#zeebe-bro
 
 ### Polling connector
 
-An inbound polling [connector](#connector) to periodically poll an external system or service for new data using HTTP polling.
+An inbound polling [connector](#connector) that periodically polls an external system or service for new data using HTTP polling.
 
 A [Camunda workflow](#workflow) uses this type of connector to retrieve data from a remote system that does not support real-time notifications or webhooks, but instead requires the client to periodically request updates.
 
@@ -262,19 +262,19 @@ Protocol connectors can be customized to meet the needs of specific use cases us
 
 ### Record
 
-A record represents a command or an event. For example, a command to create a new [process instance](#process-instance), or a state transition of an executing [process instance](#process-instance) representing an [event](#event) at a given point in time would result to generation of a record. During the execution lifecycle of a [process instance](#process-instance), numerous records are generated to capture various commands and events generated. Records are stored in the log.
+A record represents a command or an event. For example, a command to create a new [process instance](#process-instance), or a state transition of an executing [process instance](#process-instance) representing an [event](#event) at a given point in time would result to generation of a record. During the execution lifecycle of a process instance, numerous records are generated to capture various commands and events generated. Records are stored in the log.
 
 - [Internal processing](/components/zeebe/technical-concepts/internal-processing.md#events-and-commands)
 
 ### Replication
 
-Replication is the act of copying data in a [partition](#partition) from a [leader](#leader) to its [followers](#follower) within a clustered [Zeebe](#zeebe) deployment. After replication, the [leader](#leader) and [followers](#follower) of a [partition](#partition) will have the exact same data. Replication allows the system to be resilient to [brokers](#zeebe-broker) going down.
+Replication is the act of copying data in a [partition](#partition) from a [leader](#leader) to its [followers](#follower) within a clustered [Zeebe](#zeebe) deployment. After replication, the leader and followers of a partition will have the exact same data. Replication allows the system to be resilient to [brokers](#zeebe-broker) going down.
 
 - [Clustering](/components/zeebe/technical-concepts/clustering.md#raft-consensus-and-replication-protocol)
 
 ### Replication factor
 
-This is the number of times data in a [partition](#partition) are copied. This depends on the number of [brokers](#zeebe-broker) in a [cluster](#zeebe-cluster). A [cluster](#zeebe-cluster) with one [leader](#leader) and two [followers](#follower) have a replication factor of three, as data in each [partition](#partition) needs to have three copies.
+This is the number of times data in a [partition](#partition) is copied. This depends on the number of [brokers](#zeebe-broker) in a [cluster](#zeebe-cluster). A cluster with one [leader](#leader) and two [followers](#follower) has a replication factor of three, as data in each partition needs to have three copies.
 
 We recommend running an odd replication factor.
 
@@ -282,7 +282,7 @@ We recommend running an odd replication factor.
 
 ### Request timeout
 
-This is how long a [client](#zeebe-client) waits for a response from the [broker](#zeebe-broker) after the [client](#zeebe-client) submits a request. If a response is not received within the client request timeout, the [client](#zeebe-client) considers the [broker](#zeebe-broker) unreachable.
+How long a [client](#zeebe-client) waits for a response from the [broker](#zeebe-broker) after the client submits a request. If a response is not received within the client request timeout, the client considers the broker unreachable.
 
 - [Orchestration cluster API](/apis-tools/zeebe-api-rest/zeebe-api-rest-overview.md)
 - [Zeebe API (gRPC)](/apis-tools/zeebe-api/grpc.md)
@@ -295,13 +295,13 @@ The [log](#log) consists of one or more segments. Each segment is a file contain
 
 ### Snapshot
 
-The state of all active [process instances](#process-instance), (these are also known as inflight process instances) are stored as records in an in-memory database called RocksDB. A snapshot represents a copy of all data within the in-memory database at any given point in time. Snapshots are binary images stored on disk and can be used to restore execution state of a [process](#process). The size of a snapshot is affected by the size of the data. Size of the data depends on several factors, including complexity of the [model](#bpmn-model), the size and quantity of variables in each [process instance](#process-instance), and the total number of executing [process instances](#process-instance) in a [broker](#zeebe-broker).
+The state of all active [process instances](#process-instance), (these are also known as inflight process instances) are stored as records in an in-memory database called RocksDB. A snapshot represents a copy of all data within the in-memory database at any given point in time. Snapshots are binary images stored on disk and can be used to restore execution state of a [process](#process). The size of a snapshot is affected by the size of the data. Size of the data depends on several factors, including complexity of the [model](#bpmn-model), the size and quantity of variables in each process instance, and the total number of executing [process instances](#process-instance) in a [broker](#zeebe-broker).
 
 - [Resource planning](/self-managed/zeebe-deployment/operations/resource-planning.md#snapshots)
 
 ### Soft pause exporting
 
-Soft pause exporting is a feature that allows you to continue exporting records from [Zeebe](#zeebe), but without deleting those [records](#record) ([log](#log) compaction) from [Zeebe](#zeebe). This is particularly useful during hot backups.
+Soft pause exporting is a feature that allows you to continue exporting records from [Zeebe](#zeebe), but without deleting those [records](#record) ([log](#log) compaction) from Zeebe. This is particularly useful during hot backups.
 
 - [Exporting API](/self-managed/zeebe-deployment/operations/management-api.md)
 - [Backup and restore](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md)
@@ -390,12 +390,12 @@ A Zeebe Cluster represents a configuration of one or more [brokers](#zeebe-broke
 
 ### Zeebe Exporter
 
-The Zeebe Exporter system provides an event stream of state changes within Zeebe. It represents a sink to which Zeebe will submit all [records](#record) within the [log](#log). This gives users of Zeebe an opportunity to persist [records](#record) with the [log](#log) for future use as this data will not be available after log compaction.
+The Zeebe Exporter system provides an event stream of state changes within Zeebe. It represents a sink to which Zeebe will submit all [records](#record) within the [log](#log). This gives users of Zeebe an opportunity to persist [records](#record) with the log for future use as this data will not be available after log compaction.
 
 - [Zeebe Exporter](/components/zeebe/technical-concepts/architecture.md#exporters)
 
 ### Zeebe Gateway
 
-The Zeebe Gateway is a component of the [Zeebe cluster](#zeebe-cluster); it can be considered the contact point for the Zeebe cluster which allows [Zeebe clients](#zeebe-client) to communicate with [Zeebe brokers](#zeebe-broker) inside a [Zeebe cluster](#zeebe-cluster).
+The Zeebe Gateway is a component of the [Zeebe cluster](#zeebe-cluster); it can be considered the contact point for the Zeebe cluster that allows [Zeebe clients](#zeebe-client) to communicate with [Zeebe brokers](#zeebe-broker) inside a Zeebe cluster.
 
 - [Zeebe Gateway](self-managed/zeebe-deployment/zeebe-gateway/zeebe-gateway-overview.md)
