@@ -1018,10 +1018,10 @@ module.exports = {
     "self-managed/about-self-managed",
     {
       type: "category",
-      label: "Get started",
+      label: "Run locally",
       link: {
         type: "doc",
-        id: "self-managed/get-started/index",
+        id: "self-managed/run-locally/index",
       },
       items: [
         "self-managed/setup/deploy/local/c8run",
@@ -1031,7 +1031,7 @@ module.exports = {
     },
     {
       type: "category",
-      label: "Install",
+      label: "Production installation",
       link: {
         type: "doc",
         id: "self-managed/setup/overview",
