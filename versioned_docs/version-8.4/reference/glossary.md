@@ -70,6 +70,12 @@ An event represents a state change associated with an aspect of an executing pro
 
 - [Internal processing](/components/zeebe/technical-concepts/internal-processing.md#events-and-commands)
 
+### Element template
+
+Use an element template to extend the Desktop Modeler or Web Modeler with domain-specific diagram [elements](#element). Element templates are used by [Connectors](#connector) to create the connector-specific [element](#element) configuration.
+
+- [Element templates](/components/modeler/desktop-modeler/element-templates/about-templates.md)
+
 ### Exporter
 
 An exporter represents a sink to which Zeebe will submit all records within the log. This gives users of Zeebe an opportunity to persist records with the log for future use as this data will not be available after log compaction.
@@ -193,7 +199,7 @@ A process instance variable represents the execution state (i.e data) of a proce
 
 Protocol Connectors are a type of [Connector](#connector) in Camunda that can serve as either [inbound](#inbound-connector) or [outbound](#outbound-connector) Connectors, supporting a variety of technical protocols. These Connectors are highly generic, designed to provide a flexible and customizable means of integrating with external systems and services.
 
-Protocol Connectors can be customized to meet the needs of specific use cases using element templates, with no additional coding or deployment required. Examples of protocol Connectors include HTTP REST, SOAP, GraphQL, as well as message queue Connectors.
+Protocol Connectors can be customized to meet the needs of specific use cases using [element templates](#element-template), with no additional coding or deployment required. Examples of protocol Connectors include HTTP REST, SOAP, GraphQL, as well as message queue Connectors.
 
 ### Record
 
