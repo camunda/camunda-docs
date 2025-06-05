@@ -11,11 +11,11 @@ Plan and design your agentic orchestration solutions, and understand recommended
 
 ## Plan
 
-Use the following guidelines when planning your agentic orchestration solution:
+Follow these principles when planning your agentic orchestration solution:
 
 - **Problem first**: First, identify any problem you might have in a process, and only then determine whether an AI agent could help solve the problem. Do not use an AI agent where it is not really necessary, or just for the sake of it.  
 
-- **Architect for composability**. Avoid becoming too dependant on a specific LLM model, for example by doing too much fine tuning. This allows you to more easily integrate newer LLM providers and models that better suit your needs in the future.
+- **Architect for composability**. Avoid becoming too dependant on a specific LLM model, for example by doing too much fine tuning. This allows you to more easily integrate newer LLM providers and models in the future that better suit your needs.
 
 - **Observability and governance**: Use [Operate](/components/operate/operate-introduction.md) and [Optimize](/components/optimize/what-is-optimize.md) for visibility of your agentic orchestration processes. 
 
@@ -35,15 +35,15 @@ To learn more about determining when and where to use AI agents within your auto
 
 ## Design and architecture
 
-Use the following guidelines when designing your agentic orchestration solution:
+Follow these principles when designing your agentic orchestration solution:
 
-- **Guardrail sandwich**: Content, deterministic task → agent → deterministic validation.
+- **Guardrail sandwich**: Always apply guardrails in your process when using agents. For example, you could have one agent performing the task execution, with another agent following up to check the chain of thought and make sure every execution is compliant. If the execution is not compliant, you can route to a human for further work and validation. 
 
 - **Context packing vs. retrieval augmentation**: Content
 
-- **Human-in-the-Loop escalation**: Content
+- **Human-in-the-Loop escalation**: Always provide an agent with an escalation path to a human - confidence levels are useful, but it is good to provide deterministic outbreaks for agents.
 
-- **Prompt versioning**: Version every prompt
+- **Prompt versioning**: Version every prompt, as you may sometimes want to revert to using a previous prompt in some situations.
 
 ### Mixing Agents with Workflow patterns
 
@@ -71,13 +71,3 @@ Use the following guidelines when designing your agentic orchestration solution:
     <td>**Multi-Agent Orchestration**: Agents orchestrate other agents for streamlined, scalable solutions.</td>
 </tr>
 </table>
-
-## Implementation
-
-Use the following guidelines when implementing your agentic orchestration solution:
-
-- **Toolboxing beats monoliths**: Content
-
-- **Temperature discipline**: Content
-
-- **Latency budgets**: Content
