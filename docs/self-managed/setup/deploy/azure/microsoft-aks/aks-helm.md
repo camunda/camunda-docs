@@ -213,7 +213,7 @@ First, we need an OAuth client to be able to connect to the Camunda 8 cluster.
 
 ### Generate an M2M token using Identity
 
-Generate an M2M token by following the steps outlined in the [Identity getting started guide](/self-managed/identity/getting-started/install-identity.md), along with the [incorporating applications documentation](/self-managed/identity/user-guide/additional-features/incorporate-applications.md).
+Generate an M2M token by following the steps outlined in the [Identity getting started guide](/self-managed/identity/identity-first-steps.md), along with the [incorporating applications documentation](/self-managed/identity/user-guide/additional-features/incorporate-applications.md).
 
 Below is a summary of the necessary instructions:
 
