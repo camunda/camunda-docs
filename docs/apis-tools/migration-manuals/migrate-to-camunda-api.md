@@ -690,8 +690,6 @@ The following conventions apply to all attributes:
 - Renamed attributes in the `filter` object
   - `key` of type `int64` - Use `processDefinitionKey` of type `string` instead.
   - `bpmnProcessId` - Use `processDefinitionId` instead.
-- Added attributes to the `filter` object
-  - `resourceName` of type `string`.
 
 </TabItem>
 
@@ -703,8 +701,6 @@ The following conventions apply to all attributes:
 - Renamed attributes in the objects of the `items` array
   - `key` of type `int64` - Use `processDefinitionKey` of type `string` instead.
   - `bpmnProcessId` - Use `processDefinitionId` instead.
-- Added attributes to the objects of the `items` array
-  - `resourceName` of type `string`.
 
 </TabItem>
 </Tabs>
@@ -723,8 +719,7 @@ The following conventions apply to all attributes:
 
 <TabItem value='input-adjustments'>
 
-- Renamed attributes in the request path parameters
-  - `key` of type `int64` - Use `processDefinitionKey` of type `string` instead.
+- No input adjustments.
 
 </TabItem>
 
@@ -749,8 +744,7 @@ The following conventions apply to all attributes:
 
 <TabItem value='input-adjustments'>
 
-- Renamed attributes in the request path parameters
-  - `key` of type `int64` - Use `processDefinitionKey` of type `string` instead.
+- No input adjustments.
 
 </TabItem>
 
@@ -793,15 +787,6 @@ The following conventions apply to all attributes:
   - `processDefinitionKey` - Type changed from `int64` to `string`.
 - Removed attributes from the `filter` object
   - `parentKey` - Can no longer be used for filtering.
-- Added attributes to the `filter` object
-  - `variables` of type `array`.
-  - `batchOperationId` of type `string`.
-  - `errorMessage` of type `string`.
-  - `hasRetriesLeft` of type `boolean`.
-  - `elementInstanceState` of type `string`.
-  - `elementId` of type `string`.
-  - `hasElementInstanceIncident` of type `boolean`.
-  - `incidentErrorHashCode` of type `int32`.
 
 </TabItem>
 
@@ -841,8 +826,7 @@ The following conventions apply to all attributes:
 
 <TabItem value='input-adjustments'>
 
-- Renamed attributes in the request path parameters
-  - `key` of type `int64` - Use `processInstanceKey` of type `string` instead.
+- No input adjustments.
 
 </TabItem>
 
@@ -856,7 +840,7 @@ The following conventions apply to all attributes:
 #### Delete process instance and all dependant data by key
 
 - **[V1 endpoint](../operate-api/specifications/delete.api.mdx)**: `DELETE /v1/process-instances/{key}`
-- **V2 endpoint**: `NOT AVAILABLE`
+- **V2 endpoint**: This feature is not yet available in V2. It will be added in a future version.
 
 #### Get flow node statistic by process instance key
 
@@ -872,8 +856,7 @@ The following conventions apply to all attributes:
 
 <TabItem value='input-adjustments'>
 
-- Renamed attributes in the request path parameters
-  - `key` of type `int64` - Use `processInstanceKey` of type `string` instead.
+- No input adjustments.
 
 </TabItem>
 
@@ -901,8 +884,7 @@ The following conventions apply to all attributes:
 
 <TabItem value='input-adjustments'>
 
-- Renamed attributes in the request path parameters
-  - `key` of type `int64` - Use `processInstanceKey` of type `string` instead.
+- No input adjustments.
 
 </TabItem>
 
@@ -911,13 +893,7 @@ The following conventions apply to all attributes:
 - Response structure changes
   - response items are of type `object`, instead of type `string`.
   - response items are moved under the `items` array.
-- Added attributes to the objects of the `items` array
-  - `sequenceFlowId` of type `string`.
-  - `processInstanceKey` of type `string`.
-  - `processDefinitionKey` of type `string`.
-  - `processDefinitionId` of type `string`.
-  - `elementId` of type `string`.
-  - `tenantId` of type `string`.
+- Collect the `sequenceFlowId` of type `string` of all objects in the array to recreate the V1 result.
 
 </TabItem>
 </Tabs>
