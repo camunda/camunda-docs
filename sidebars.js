@@ -1058,6 +1058,12 @@ module.exports = {
               ],
             },
             {
+              "Microsoft AKS": [
+                "self-managed/setup/deploy/azure/microsoft-aks/aks-terraform",
+                "self-managed/setup/deploy/azure/microsoft-aks/aks-helm",
+              ],
+            },
+            {
               Openshift: [
                 "self-managed/setup/deploy/amazon/openshift/terraform-setup",
                 "self-managed/setup/deploy/openshift/redhat-openshift",
@@ -1117,7 +1123,18 @@ module.exports = {
             "self-managed/setup/deploy/amazon/aws-ec2",
           ],
           "Microsoft (Azure)": [
-            "self-managed/setup/deploy/azure/microsoft-aks",
+            {
+              type: "category",
+              label: "Microsoft AKS",
+              link: {
+                type: "doc",
+                id: "self-managed/setup/deploy/azure/microsoft-aks/microsoft-aks",
+              },
+              items: [
+                "self-managed/setup/deploy/azure/microsoft-aks/aks-terraform",
+                "self-managed/setup/deploy/azure/microsoft-aks/aks-helm",
+              ],
+            },
           ],
           "Google (GCP)": ["self-managed/setup/deploy/gcp/google-gke"],
           "Red Hat (OpenShift)": [

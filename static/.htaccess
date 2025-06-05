@@ -181,6 +181,9 @@ RewriteRule ^docs/next/self-managed/concepts/access-control/apis/?$ /docs/next/s
 RewriteRule ^docs/next/self-managed/identity/install-identity/?$ /docs/next/self-managed/identity/identity-first-steps/ [R=301,L]
 RewriteRule ^docs/next/self-managed/identity/user-guide/configuration/alternative-db/?$ /docs/next/self-managed/identity/configuration/alternative-db/ [R=301,L]
 
+# Microsoft AKS
+RewriteRule ^docs/next/self-managed/setup/deploy/azure/microsoft-aks/(.*)$ /docs/next/self-managed/setup/deploy/azure/microsoft-aks/microsoft-aks/ [R=301,L]
+
 # Move document handling content
 RewriteRule ^docs/next/components/concepts/document-handling/(.*)$ /docs/next/components/document-handling/getting-started/ [R=301,L]
 RewriteRule ^docs/next/guides/document-handling/(.*)$ /docs/next/components/document-handling/getting-started/ [R=301,L]
