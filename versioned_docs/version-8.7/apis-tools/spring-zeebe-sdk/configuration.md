@@ -301,17 +301,26 @@ For a full set of configuration options, see [CamundaClientConfigurationProperti
 
 ### Auth
 
-Authenticate with the cluster using the following alternative methods:
+Your authentication with the cluster can be controlled in several ways.
+
+:::not
+If the creation of the credentials provider fails, you will a log message indicating this at `WARN` level. The SDK will then use a Noop credentials provider.
+:::
+
+#### Client id and secret
+
+You can define client id and secret for the credentials provider:
+
+```yaml reference referenceLinkText="Source" title="Client id and secret"
+https://github.com/camunda/camunda/blob/stable/8.7/clients/spring-boot-starter-camunda-sdk/src/test/resources/properties/8.7/client-id-secret.yaml
+```
 
 #### Credentials cache path
 
-You can define the credentials cache path of the zeebe client, the property contains directory path and file name:
+You can define the credentials cache path of the credentials provider, the property contains directory path and file name:
 
-```yaml
-camunda:
-  client:
-    auth:
-      credentials-cache-path: /tmp/credentials
+```yaml reference referenceLinkText="Source" title="Client id and secret"
+https://github.com/camunda/camunda/blob/stable/8.7/clients/spring-boot-starter-camunda-sdk/src/test/resources/properties/8.7/credentials-cache-path.yaml
 ```
 
 ### Zeebe
@@ -322,110 +331,80 @@ You can use the following Zeebe-specific additional configuration options:
 
 The number of threads for invocation of job workers. Setting this value to 0 effectively disables subscriptions and workers (default 1):
 
-```yaml
-camunda:
-  client:
-    zeebe:
-      execution-threads: 2
+```yaml reference referenceLinkText="Source" title="Execution threads"
+https://github.com/camunda/camunda/blob/stable/8.7/clients/spring-boot-starter-camunda-sdk/src/test/resources/properties/8.7/execution-threads.yaml
 ```
 
 #### Message time to live
 
 The time-to-live which is used when none is provided for a message (default 1H):
 
-```yaml
-camunda:
-  client:
-    zeebe:
-      message-time-to-live: PT2H
+```yaml reference referenceLinkText="Source" title="Message time to live"
+https://github.com/camunda/camunda/blob/stable/8.7/clients/spring-boot-starter-camunda-sdk/src/test/resources/properties/8.7/message-ttl.yaml
 ```
 
 #### Max message size
 
 A custom `maxMessageSize` allows the client to receive larger or smaller responses from Zeebe. Technically, it specifies the `maxInboundMessageSize` of the gRPC channel (default 5MB):
 
-```yaml
-camunda:
-  client:
-    zeebe:
-      max-message-size: 4194304
+```yaml reference referenceLinkText="Source" title="Max message size"
+https://github.com/camunda/camunda/blob/stable/8.7/clients/spring-boot-starter-camunda-sdk/src/test/resources/properties/8.7/max-message-size.yaml
 ```
 
 #### Max metadata size
 
 A custom `maxMetadataSize` allows the client to receive larger or smaller response headers from Camunda:
 
-```yaml
-camunda:
-  client:
-    zeebe:
-      max-metadata-size: 4194304
+```yaml reference referenceLinkText="Source" title="Max metadata size"
+https://github.com/camunda/camunda/blob/stable/8.7/clients/spring-boot-starter-camunda-sdk/src/test/resources/properties/8.7/max-metadata-size.yaml
 ```
 
 #### Request timeout
 
 The request timeout used if not overridden by the command (default is 10s):
 
-```yaml
-camunda:
-  client:
-    zeebe:
-      request-timeout: PT20S
+```yaml reference referenceLinkText="Source" title="Request timeout"
+https://github.com/camunda/camunda/blob/stable/8.7/clients/spring-boot-starter-camunda-sdk/src/test/resources/properties/8.7/request-timeout.yaml
 ```
 
 #### CA certificate
 
 Path to a root CA certificate to be used instead of the certificate in the default store:
 
-```yaml
-camunda:
-  client:
-    zeebe:
-      ca-certificate-path: path/to/certificate
+```yaml reference referenceLinkText="Source" title="Ca certificate path"
+https://github.com/camunda/camunda/blob/stable/8.7/clients/spring-boot-starter-camunda-sdk/src/test/resources/properties/8.7/ca-cert-path.yaml
 ```
 
 #### Keep alive
 
 Time interval between keep alive messages sent to the gateway (default is 45s):
 
-```yaml
-camunda:
-  client:
-    zeebe:
-      keep-alive: PT60S
+```yaml reference referenceLinkText="Source" title="Keep alive"
+https://github.com/camunda/camunda/blob/stable/8.7/clients/spring-boot-starter-camunda-sdk/src/test/resources/properties/8.7/keep-alive.yaml
 ```
 
 #### Override authority
 
 The alternative authority to use, commonly in the form `host` or `host:port`:
 
-```yaml
-camunda:
-  client:
-    zeebe:
-      override-authority: host:port
+```yaml reference referenceLinkText="Source" title="Override authority"
+https://github.com/camunda/camunda/blob/stable/8.7/clients/spring-boot-starter-camunda-sdk/src/test/resources/properties/8.7/override-authority.yaml
 ```
 
 #### REST over gRPC
 
 If true, the Zeebe Client will use REST instead of gRPC whenever possible to communicate with the Zeebe Gateway:
 
-```yaml
-camunda:
-  client:
-    zeebe:
-      prefer-rest-over-grpc: true
+```yaml reference referenceLinkText="Source" title="REST over gRPC"
+https://github.com/camunda/camunda/blob/stable/8.7/clients/spring-boot-starter-camunda-sdk/src/test/resources/properties/8.7/rest-over-grpc.yaml
 ```
 
 #### gRPC address
 
 Define the address of the [gRPC API](/apis-tools/zeebe-api/grpc.md) exposed by the [Zeebe Gateway](/self-managed/zeebe-deployment/zeebe-gateway/zeebe-gateway-overview.md):
 
-```yaml
-camunda:
-  client:
-    zeebe:
-      grpc-address: http://localhost:26500
+```yaml reference referenceLinkText="Source" title="gRPC address"
+https://github.com/camunda/camunda/blob/stable/8.7/clients/spring-boot-starter-camunda-sdk/src/test/resources/properties/8.7/grpc-address.yaml
 ```
 
 :::note
@@ -436,11 +415,8 @@ You must add the `http://` scheme to the URL to avoid a `java.lang.NullPointerEx
 
 Define address of the [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md) exposed by the [Zeebe Gateway](/self-managed/zeebe-deployment/zeebe-gateway/zeebe-gateway-overview.md):
 
-```yaml
-camunda:
-  client:
-    zeebe:
-      rest-address: http://localhost:8080
+```yaml reference referenceLinkText="Source" title="REST address"
+https://github.com/camunda/camunda/blob/stable/8.7/clients/spring-boot-starter-camunda-sdk/src/test/resources/properties/8.7/rest-address.yaml
 ```
 
 :::note
