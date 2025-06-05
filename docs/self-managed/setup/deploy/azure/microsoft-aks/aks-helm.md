@@ -1,7 +1,7 @@
 ---
 id: aks-helm
 title: "Install Camunda 8 on an AKS cluster"
-description: "Set up the Camunda 8 environment with Helm and an optional Ingress setup on Azure AKS."
+description: "Set up your Camunda 8 environment with Helm on Azure Kubernetes Service."
 ---
 
 import Tabs from "@theme/Tabs";
@@ -467,7 +467,6 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
   </summary>
 </details>
-
   </TabItem>
   <TabItem value="modeler" label="Desktop Modeler">
 

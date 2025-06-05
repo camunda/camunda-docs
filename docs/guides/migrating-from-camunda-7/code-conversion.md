@@ -91,7 +91,7 @@ The [Diagram Converter](/guides/migrating-from-camunda-7/code-conversion.md#diag
 
 If your models also contain JUEL expressions, which are not supported in Camunda 8, they also need to be converted.
 
-Simple expressions are [directly converted by this code in the Diagram Converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/blob/main/backend-diagram-converter/core/src/main/java/org/camunda/community/migration/converter/expression/ExpressionTransformer.java). This can be extended to suit your needs.
+Simple expressions are [directly converted by this code in the Diagram Converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer/blob/d6fda97d00f27b23fc87fd741134225a527f3de1/core/src/main/java/org/camunda/community/migration/converter/expression/ExpressionTransformer.java#L4). This can be extended to suit your needs.
 
 <!-- TODO document the expression transformer instead of referencing code -->
 
@@ -116,7 +116,7 @@ For example, to migrate an existing Spring Boot application, take the following 
 1. Adjust Maven dependencies:
 
    - Remove Camunda 7 Spring Boot Starter and all other Camunda dependencies.
-   - Add the [Spring Zeebe SDK](../../apis-tools/spring-zeebe-sdk/getting-started.md).
+   - Add the [Camunda Spring Boot SDK](../../apis-tools/spring-zeebe-sdk/getting-started.md).
 
 2. Adjust configuration:
 
@@ -153,7 +153,7 @@ In Camunda 7, there are three ways to attach Java code to service tasks in the B
 
 Camunda 8 cannot directly execute custom Java code. Instead, there must be a [job worker](/components/concepts/job-workers.md) executing code.
 
-The [Camunda 7 Adapter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/camunda-7-adapter) implements such a job worker using the [Spring Zeebe SDK](../../apis-tools/spring-zeebe-sdk/getting-started.md). It subscribes to the task type `camunda-7-adapter`. [Task headers](/components/modeler/bpmn/service-tasks/service-tasks.md#task-headers) are used to configure a delegation class or expression for this worker.
+The [Camunda 7 Adapter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/camunda-7-adapter) implements such a job worker using the [Camunda Spring Boot SDK](../../apis-tools/spring-zeebe-sdk/getting-started.md). It subscribes to the task type `camunda-7-adapter`. [Task headers](/components/modeler/bpmn/service-tasks/service-tasks.md#task-headers) are used to configure a delegation class or expression for this worker.
 
 ![Service task in Camunda 7 and Camunda 8](../img/migration-service-task.png)
 
