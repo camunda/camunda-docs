@@ -1237,3 +1237,35 @@ ul ul .table-of-contents__link--active {
   padding-left: 24px;
   font-weight: 500;
 }
+
+/* Glossary page links */
+.alphabet-navigation {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+.letter-link {
+  flex: 1 0 0;
+  text-align: center;
+  border: 1px solid #e0e0e0;
+  margin: 0 2px;
+  border-radius: 4px;
+}
+/* For dark mode */
+[data-theme="dark"] .letter-link {
+  border-color: #323232;
+}
+/* Only apply hover effect to letter divs with links */
+.letter-link:has(a):hover {
+  border-color: var(--ifm-color-primary);
+}
+/* For browsers that don't support :has() selector */
+.letter-link a:hover {
+  color: var(--ifm-color-primary);
+}
+/* Style for letter divs without links - muted appearance */
+.letter-link:not(:has(a)) {
+  opacity: 0.5;
+  cursor: default;
+}
