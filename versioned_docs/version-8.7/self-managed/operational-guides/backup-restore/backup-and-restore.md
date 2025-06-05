@@ -23,7 +23,7 @@ A backup of a Camunda 8 cluster consists of a backup of Zeebe, Operate, Tasklist
 
 <!-- TODO: Add part about being hot backups and what exactly that means. What's happening in the background etc. data overlap... -->
 
-### Prerequisites
+## Prerequisites
 
 <!-- TODO: add tool prerequsisites: curl, jq, kubectl -->
 
@@ -47,28 +47,21 @@ Following items are required to be configured to make use of the backup and rest
 - [Tasklist](/self-managed/tasklist-deployment/tasklist-configuration.md#backups)
 - [Zeebe](/self-managed/zeebe-deployment/configuration/broker.md#zeebebrokerdatabackup)
 
-### Considerations
+## Considerations
 
 The backup of each component and the backup of a Camunda 8 cluster is identified by an ID. This means a backup `x` of Camunda 8 consists of backup `x` of Zeebe, backup `x` of Optimize, backup `x` of Operate, and backup `x` of Tasklist. The backup ID must be an integer and greater than the previous backups.
 
 :::note
-We recommend using the timestamp as the backup ID.
+We recommend using the unix timestamp as the backup ID.
 :::
 
 The steps outlined on this page are general applicable for any kind of deployment but may differ slightly depending on your setup.
 
-If you're defining the `contextPath` in the Helm chart or the `management.server.base-path` in a standalone setup, your API requests will require to prepend the value specific to the `contextPath` / `base-path` for the individual application.
+If you're defining the `contextPath` in the Helm chart or the `management.server.servlet.context-path` in a standalone setup, your API requests will require to prepend the value specific to the `contextPath` for the individual application. In case the `management.server.port` is defined then this also applies to `management.endpoints.web.base-path`. You can read more about this behavior in the [Spriing Boot documentation](https://docs.spring.io/spring-boot/docs/2.1.7.RELEASE/reference/html/production-ready-monitoring.html#production-ready-customizing-management-server-context-path).
 
-<!-- TODO:
-   CHECK OPTIMIZE's STATEMENT:
-
-   The configured context path does not apply to the management port.
-   If so, it would go against all the other apps. The `base-path` does overwrite it and the Helm Chart does hardcode it.
-
-   ---
-   This really seems to be the case, even with the helm chart.
-   TODO: add exception for optimzie ...
- -->
+:::warning Optimize Helm Chart Exception
+Setting the `contextPath` in the Helm Chart for Optimize will not overwrite the `contextPath` of the management API and it will remain `/`.
+:::
 
 <details>
 <summary>Example</summary>
@@ -171,9 +164,14 @@ Examples for Kubernetes approaches:
 
 </Tabs>
 
-### Backup process
+## Backup process
 
-To back up a Camunda 8 cluster, execute the following sequential steps:
+The backup process is divided in two parts:
+
+1. Backup of the WebApps
+2. Backup of the Zeebe Cluster
+
+These two parts have to be executed in a sequential order with their sub-steps to form a consistent backup and are outlined below.
 
 <!-- TODO: Rewrite actionable step names -->
 
@@ -197,7 +195,9 @@ export TASKLIST_MANAGEMENT_API=
 export GATEWAY_MANAGEMENT_API=
 ```
 
-1. Trigger a backup `x` of Optimize.
+### Backup of the WebApps
+
+1. **Trigger a backup `x` of Optimize. Using the [Optimize management backup API](/self-managed/operational-guides/backup-restore/optimize-backup.md).**
 
    ```bash
    curl -XPOST "$OPTIMIZE_MANAGEMENT_API/actuator/backups" \
@@ -218,7 +218,7 @@ export GATEWAY_MANAGEMENT_API=
       </summary>
    </details>
 
-2. Trigger a backup `x` of Operate. See [how to take an Operate backup](/self-managed/operational-guides/backup-restore/operate-tasklist-backup.md).
+2. **Trigger a backup `x` of Operate. Using the [Operate management backup API](/self-managed/operational-guides/backup-restore/operate-tasklist-backup.md).**
 
    ```bash
    curl -XPOST "$OPERATE_MANAGEMENT_API/actuator/backups" \
@@ -246,7 +246,7 @@ export GATEWAY_MANAGEMENT_API=
       </summary>
    </details>
 
-3. Trigger a backup `x` of Tasklist. See [how to take a Tasklist backup](/self-managed/operational-guides/backup-restore/operate-tasklist-backup.md).
+3. **Trigger a backup `x` of Tasklist. Using the [Tasklist management backup API](/self-managed/operational-guides/backup-restore/operate-tasklist-backup.md).**
 
    ```bash
    curl -XPOST "$TASKLIST_MANAGEMENT_API/actuator/backups" \
@@ -274,7 +274,7 @@ export GATEWAY_MANAGEMENT_API=
       </summary>
    </details>
 
-4. Wait until the backup `x` of Optimize is complete. See [how to monitor an Optimize backup](/self-managed/operational-guides/backup-restore/optimize-backup.md).
+4. **Wait until the backup `x` of Optimize is complete. Using the [Optimize management backup API](/self-managed/operational-guides/backup-restore/optimize-backup.md).**
 
    ```bash
    curl -s "$OPTIMIZE_MANAGEMENT_API/actuator/backups/$BACKUP_ID"
@@ -319,7 +319,7 @@ export GATEWAY_MANAGEMENT_API=
    while [[ "$(curl -s "$OPTIMIZE_MANAGEMENT_API/actuator/backups/$BACKUP_ID" | jq -r .state)" != "COMPLETED" ]]; do echo "Waiting..."; sleep 5; done; echo "Finished backup with ID $BACKUP_ID"
    ```
 
-5. Wait until the backup `x` of Operate is complete. See [how to monitor an Operate backup](/self-managed/operational-guides/backup-restore/operate-tasklist-backup.md).
+5. **Wait until the backup `x` of Operate is complete. Using the [Operate management backup API](/self-managed/operational-guides/backup-restore/operate-tasklist-backup.md).**
 
    ```bash
    curl -s "$OPERATE_MANAGEMENT_API/actuator/backups/$BACKUP_ID"
@@ -396,7 +396,7 @@ export GATEWAY_MANAGEMENT_API=
    while [[ "$(curl -s "$OPERATE_MANAGEMENT_API/actuator/backups/$BACKUP_ID" | jq -r .state)" != "COMPLETED" ]]; do echo "Waiting..."; sleep 5; done; echo "Finished backup with ID $BACKUP_ID"
    ```
 
-6. Wait until the backup `x` of Tasklist is complete. See [how to monitor a Tasklist backup](/self-managed/operational-guides/backup-restore/operate-tasklist-backup.md).
+6. **Wait until the backup `x` of Tasklist is complete. Using the [Tasklist management backup API](/self-managed/operational-guides/backup-restore/operate-tasklist-backup.md).**
 
    ```bash
    curl "$TASKLIST_MANAGEMENT_API/actuator/backups/$BACKUP_ID"
@@ -473,7 +473,9 @@ export GATEWAY_MANAGEMENT_API=
    while [[ "$(curl -s "$TASKLIST_MANAGEMENT_API/actuator/backups/$BACKUP_ID" | jq -r .state)" != "COMPLETED" ]]; do echo "Waiting..."; sleep 5; done; echo "Finished backup with ID $BACKUP_ID"
    ```
 
-7. Soft pause exporting in Zeebe. See [Zeebe management API](/self-managed/zeebe-deployment/operations/management-api.md).
+### Backup of the Zeebe Cluster
+
+1. **Soft pause exporting in Zeebe. Using the [management API](/self-managed/zeebe-deployment/operations/management-api.md).**
 
    ```bash
    curl -XPOST "$GATEWAY_MANAGEMENT_API/actuator/exporting/pause?soft=true"
@@ -482,6 +484,10 @@ export GATEWAY_MANAGEMENT_API=
    <details>
       <summary>Example output</summary>
       <summary>
+
+      :::note
+      Yes, 204 is the expected result and indicates a successful soft pause.
+      :::
 
       ```json
       {
@@ -494,8 +500,7 @@ export GATEWAY_MANAGEMENT_API=
       </summary>
    </details>
 
-
-8. Take a backup `x` of the exported Zeebe records in Elasticsearch / OpenSearch using the respective Snapshots API.
+2. **Take a backup `x` of the exported Zeebe records in Elasticsearch / OpenSearch using the respective Snapshots API.**
 
    By default, the indices are prefixed with `zeebe-record`. If you have configured a different prefix when configuring Elasticsearch / OpenSearch exporter in Zeebe, use this instead.
 
@@ -619,8 +624,8 @@ export GATEWAY_MANAGEMENT_API=
 
       </TabItem>
    </Tabs>
-
-9. Wait until the backup `x` of the exported Zeebe records is complete before proceeding.
+<!-- TODO: double check consistent phrasing records vs indices -->
+3. **Wait until the backup `x` of the exported Zeebe records is complete before proceeding.**
 
    <Tabs>
       <TabItem value="elasticsearch" label="Elasticsearch" default>
@@ -739,7 +744,7 @@ export GATEWAY_MANAGEMENT_API=
       </TabItem>
    </Tabs>
 
-10. Take a backup `x` of Zeebe. See [how to take a Zeebe backup](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md).
+4. **Take a backup `x` of the Zeebe broker partitions. Using the [Zeebe management backup API](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md).**
 
       ```bash
       curl -XPOST "$GATEWAY_MANAGEMENT_API/actuator/backups" \
@@ -760,7 +765,7 @@ export GATEWAY_MANAGEMENT_API=
          </summary>
       </details>
 
-11. Wait until the backup `x` of Zeebe is completed before proceeding. See [how to monitor a Zeebe backup](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md).
+5. **Wait until the backup `x` of Zeebe is completed before proceeding. Using the [Zeebe management backup API](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md).**
 
       ```bash
       curl "$GATEWAY_MANAGEMENT_API/actuator/backups/$BACKUP_ID"
@@ -796,7 +801,7 @@ export GATEWAY_MANAGEMENT_API=
       while [[ "$(curl -s "$GATEWAY_MANAGEMENT_API/actuator/backups/$BACKUP_ID" | jq -r .state)" != "COMPLETED" ]]; do echo "Waiting..."; sleep 5; done; echo "Finished backup with ID $BACKUP_ID"
       ```
 
-12. Resume exporting in Zeebe. See [Zeebe management API](/self-managed/zeebe-deployment/operations/management-api.md).
+6. **Resume exporting in Zeebe using the [management API](/self-managed/zeebe-deployment/operations/management-api.md).**
 
       ```bash
       curl -XPOST "$GATEWAY_MANAGEMENT_API/actuator/exporting/resume"
@@ -821,29 +826,180 @@ export GATEWAY_MANAGEMENT_API=
 If any of the steps above fail, you may have to restart with a new backup ID. Ensure Zeebe exporting is resumed if the backup process force quits in the middle of the process.
 :::
 
-### Restore
+## Restore process
 
-To restore a Camunda 8 cluster from a backup, all components must be restored from their backup corresponding to the same backup ID:
+To restore a Camunda 8 cluster from a backup, all components must be restored from their backup corresponding to the same backup ID.
 
 <!--  TODO: Explain why we have to restore certain items in a certain way. -->
 <!--  TODO: Differentiate between managed and helm chart deployed ElasticSearch -->
 <!--  TODO: Change it to not start Zeebe / Operate / Tasklist / Optimize by default. Because of the seeding, why do extra work. You can worst case fix your definitions afterwards, at least your database is pre-seeded with the backups. -->
 <!--  TODO: Unify everthing within this single page on what you have to do. -->
+<!-- TODO: Intro on why we have to restore from empty state -->
 
-1. Start Zeebe, Operate, Tasklist, and Optimize. (To ensure templates/aliases etc. are created)
-2. Confirm proper configuration (such as shards, replicas count, etc.)
-3. Stop Operate, Tasklist, and Optimize.
-4. Delete all indices.
-5. Restore the state of [Operate](/self-managed/operational-guides/backup-restore/operate-tasklist-backup.md), [Tasklist](/self-managed/operational-guides/backup-restore/operate-tasklist-backup.md), and [Optimize](/self-managed/operational-guides/backup-restore/optimize-backup.md).
-6. Restore `zeebe-records*` indices from Elasticsearch snapshot.
-7. Restore [Zeebe](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md).
-8. Start Zeebe, Operate, Tasklist, and Optimize.
+For the restore we assume we're starting off from a clean slate for all applications including Elasticsearch / OpenSearch. Meaning there is no previous persistent disk or state present and we're restoring everything from new.
 
-#### How to figure out available backups
+It's important to note that starting any application will automatically result in the seeding of the database or persistent disk. This will hinder the restore process and existing data will block a successful restore process.
+
+1. **Restore the Elasticsearch / OpenSearch indices that were previously backed up.**
+
+   Prerequisite:
+   - Elasticsearch / OpenSearch is set up and running with a clean slate and no data on it.
+   - Elasticsearch / OpenSearch are configured with the same snapshot repository as used for backup, as outlined in [prerequisites](#prerequisites).
+
+   If you're using an external Elasticsearch you don't have to interact with the Camunda Helm Chart or Camunda components in general until step 2.
+
+   :::note
+   In case of the Camunda Helm Chart, this could be achieved by e.g. disabling all other applications in the `values.yml`.
+
+   ```yaml
+   elsaticsearch:
+      enabled: true
+
+   connectors:
+      enabled: false
+   identity:
+      enabled: false
+   optimize:
+      enabled: false
+   operate:
+      enabled: false
+   tasklist:
+      enabled: false
+   zeebe:
+      enabled: false
+   zeebe-gateway:
+      enabled: false
+   ```
+
+   :::
+
+   While the backup order was important to ensure consistent backups. It does not matter in case of the restore process and we can restore the backed up indices in any order.
+
+   The applications don't have any endpoint to restore the backup in Elasticsearch, so you'll have to restore it yourself directly.
+
+   See also [the section about figuring out available backups](#how-to-figure-out-available-backups) since the applications won't be available during backup as mentioned due to the automatic seeding.
+
+   After you have figured out a backup ID that you want to restore, do so for Elasticsearch / OpenSearch for each available backup under the same backupID.
+
+   <Tabs>
+      <TabItem value="elasticsearch" label="Elasticsearch" default>
+
+      [Elasticsearch documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-snapshot-restore)
+
+      ```bash
+      curl -XPOST "$ELASTIC_ENDPOINT/_snapshot/$ELASTIC_SNAPSHOT_REPOSITORY/$SNAPSHOT_NAME/_restore?wait_for_completion=true"
+      ```
+
+      </TabItem>
+      <TabItem value="opensearch" label="OpenSearch">
+
+      [OpenSearch documentation](https://docs.opensearch.org/docs/latest/api-reference/snapshots/restore-snapshot/)
+
+      ```bash
+      curl -XPOST "$OPENSEARCH_ENDPOINT/_snapshot/$OPENSEARCH_SNAPSHOT_REPOSITORY/$SNAPSHOT_NAME/_restore?wait_for_completion=true"
+      ```
+
+      </TabItem>
+   </Tabs>
+
+   Where `$SNAPSHOT_NAME` would be any of the following based on our example in [figuring out available backups](#how-to-figure-out-available-backups).
+   Ensure that all your backups are corresponding to the same backup ID and that each one is restored one by one.
+
+   ```
+   camunda_optimize_1748937221_8.7.1_part_1_of_2
+   camunda_optimize_1748937221_8.7.1_part_2_of_2
+   camunda_operate_1748937221_8.7.2_part_1_of_6
+   camunda_operate_1748937221_8.7.2_part_2_of_6
+   camunda_operate_1748937221_8.7.2_part_3_of_6
+   camunda_operate_1748937221_8.7.2_part_4_of_6
+   camunda_operate_1748937221_8.7.2_part_5_of_6
+   camunda_operate_1748937221_8.7.2_part_6_of_6
+   camunda_tasklist_1748937221_8.7.2_part_1_of_6
+   camunda_tasklist_1748937221_8.7.2_part_2_of_6
+   camunda_tasklist_1748937221_8.7.2_part_3_of_6
+   camunda_tasklist_1748937221_8.7.2_part_4_of_6
+   camunda_tasklist_1748937221_8.7.2_part_5_of_6
+   camunda_tasklist_1748937221_8.7.2_part_6_of_6
+   camunda_zeebe_records_backup_1748937221
+   ```
+
+2. **Restore the Zeebe partitions for each Zeebe broker**
+
+<!-- TODO: 2. Confirm proper configuration (such as shards, replicas count, etc.) - if that really is important, how to figure that out just based on your backup?! -->
+
+   <Tabs>
+      <TabItem value="kubernetes" label="Kubernetes" default>
+
+      Assuming you're using the official [Camunda Helm Chart](/self-managed/setup/install.md), you'll have to adjust your Helm `values.yml` to supply the following temporarily.
+      It will overwrite the start command of the resulting Zeebe pod, executing a restore script.
+      It's important that the backup is configured for Zeebe to be able to restore from the backup!
+
+      ```yaml
+      zeebe:
+         enabled: true
+         command: ["/usr/local/zeebe/bin/restore", "--backupId=$BACKUP_ID"] # Change the $BACKUP_ID to your actual value for restoring
+         env:
+         ... # all the envs related to the backup store
+
+      # assuming you're using the inbuilt Elasticsearch, otherwise should be set to false
+      elsaticsearch:
+         enabled: true
+
+      connectors:
+         enabled: false
+      identity:
+         enabled: false
+      optimize:
+         enabled: false
+      operate:
+         enabled: false
+      tasklist:
+         enabled: false
+      zeebe-gateway:
+         enabled: false
+      ```
+
+      If you're not using the Camunda Helm Chart, you can use a similar approach natively with Kubernetes to overwrite the command.
+
+      The application will exit and restart the pod. This is an expected behavior. The restore application will not try to restore the state again since the partitions were already restored to the persistent disk.
+
+      </TabItem>
+      <TabItem value="manual" label="Manual" default>
+
+      To restore a Zeebe Cluster, run the following in each node where the broker will be running:
+
+      ```
+      tar -xzf zeebe-distribution-X.Y.Z.tar.gz -C zeebe/
+      ./bin/restore --backupId=<backupId>
+      ```
+
+      </TabItem>
+   </Tabs>
+
+   If restore was successful, the app exits with a log message of `Successfully restored broker from backup`.
+
+   Restore fails if:
+
+   - There is no valid backup with the given backupId.
+   - Backup store is not configured correctly.
+   - The configured data directory is not empty.
+   - Any other unexpected errors.
+
+   If the restore fails, you can re-run the application after fixing the root cause.
+
+3. **Start all the Camunda 8 applications**
+
+   In the case of Kubernetes this would mean, to enable all applications again in the Helm chart and removing the command overwrite of Zeebe.
+
+   In the case of a manual setup this would mean to execute the broker and all other applications in their normal way.
+
+### How to figure out available backups
 
 The easiest way to figure out available backups is by utilizing the backup APIs of each component to list available backups. <!-- TODO: Link to subpages that are now becoming API focused -->
 
 This may not be possible in a lot of cases, especially if doing disaster recovery.
+
+#### Available Backups on Elasticsearch / OpenSearch
 
 In that case, follow the described steps above and when you have your Elasticsearch / OpenSearch available, use the snapshot API to list available snapshots and correlate that to available snapshots in your backup bucket (AWS S3, Azure Store, Google GCS). It's important to have the same ID for all backups.
 
@@ -937,7 +1093,41 @@ In that case, follow the described steps above and when you have your Elasticsea
    </TabItem>
 </Tabs>
 
-<!-- TODO: add remaing item to figure out available Zeebe partition backups -->
+#### Available Backups of Zeebe Partitions
+
+For the Zeebe partitions backup, you will have to check your configured backup store for availablbe backup IDs and correlate those to the available backups on Elasticsearch / OpenSearch.
+
+Zeebe will create a folder for each Partition ID and subfolder in there with each backupID.
+
+<details>
+   <summary>Example output</summary>
+   <summary>
+   Example in the case of 3 partitions with two available backups:
+
+   ```bash
+   #PartitionID folder
+   #   BackupID folder
+   1
+      1748937221
+      1749130104
+   2
+      1748937221
+      1749130104
+   3
+      1748937221
+      1749130104
+   ```
+
+   </summary>
+</details>
+
+<!-- TODO: rethink phrasing around WebApps / Elasticsearch / OpenSearch and Zeebe Cluster / Partitions 
+Would love to just say WebApps and Zeebe Cluster (Workflow Engine) the problem is that the backups are overlaping due to the Zeebe indices in ES / OS.
+So you always have Elasticsearch backups and Zeebe parititon backups.
+While e.g. for Backups I can say Backup of WebApps and Backup of Zeebe Cluster. I can't say the same in restore since it's overlapping.
+-->
+
+---
 
 <!-- TODO: Add tab grouping to allow to switch for the whole page between elastic and opensearch -->
 
