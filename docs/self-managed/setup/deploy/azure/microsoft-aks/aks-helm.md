@@ -106,9 +106,8 @@ Consider setting `domainFilters` via `--set` to restrict access to certain hoste
 
 To enable external-dns to work with Azure Managed Identities, create the Kubernetes secret directly using the exported environment variables:
 
-```shell
-kubectl -n external-dns create secret generic azure-config-file \
-  --from-literal=azure.json="{\"subscriptionId\":\"$AZURE_SUBSCRIPTION_ID\",\"resourceGroup\":\"$AZURE_DNS_RESOURCE_GROUP\",\"useManagedIdentityExtension\":true}"
+```shell reference
+https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/external-dns-azure-config.sh
 ```
 
 :::danger Uniqueness of txtOwnerId for DNS
