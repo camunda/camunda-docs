@@ -77,6 +77,10 @@ The task returns a list of emails in JSON format. Each email object contains the
 - `subject`: The subject line of the email.
 - `size`: The size of the email (in bytes).
 
+:::note
+As of the 8.8 release, angle brackets (`<` and `>`) are no longer removed from the `messageId`.
+:::
+
 #### Example Response
 
 Example of a returned JSON array:
@@ -127,11 +131,15 @@ The task returns a JSON object containing detailed information about the email:
 - `receivedDateTime`: The email's reception datetime
 
 :::note
+As of the 8.8 release, angle brackets (`<` and `>`) are no longer removed from the `messageId`.
+:::
+
+:::note
 Starting from version 8.7.0, the outbound email connector supports sending Camunda documents as attachments.
 
 For example, the **Attachment** field in the properties panel may look as `=[ document1, document2]`.
 
-See additional details and limitations in [document handling](/components/concepts/document-handling.md).
+See additional details and limitations in [document handling](/components/document-handling/getting-started.md).
 :::
 
 #### Example Response
@@ -148,11 +156,11 @@ Below is an example of the JSON response returned when a specific email is read:
   "htmlBody": "<html>Any Html Content</html>",
   "headers": [
     {
-      "header": "header1",
+      "key": "header1",
       "value": "example"
     },
     {
-      "header": "header2",
+      "key": "header2",
       "value": "test"
     }
   ],
@@ -188,6 +196,10 @@ After the deletion task is performed, a JSON object is returned to confirm the a
 
 - `deleted`: A boolean value that indicates whether the deletion was successful (true) or not (false).
 - `messageId`: The identifier of the email message that was attempted to be deleted.
+
+:::note
+As of the 8.8 release, angle brackets (`<` and `>`) are no longer removed from the `messageId`.
+:::
 
 #### Example Response
 
@@ -269,6 +281,15 @@ object with a field and a value.
 
 :::
 
+#### Response Structure
+
+- `subject`: The email subject line.
+- `messageId`: The identifier of the email message that was attempted to be deleted.
+
+:::note
+As of the 8.8 release, angle brackets (`<` and `>`) are no longer removed from the `messageId`.
+:::
+
 #### Example Response
 
 The following is an example of a returned response:
@@ -323,6 +344,11 @@ Upon successfully sending the email, the following JSON response is returned:
 
 - `subject`: Echoes back the subject of the sent email.
 - `sent`: A boolean value indicating the success status of the email being sent (true for success, false for failure).
+- `messageId`: A unique identifier for the email message.
+
+:::note
+As of the 8.8 release, angle brackets (`<` and `>`) are no longer removed from the `messageId`.
+:::
 
 #### Example Response
 
@@ -331,7 +357,8 @@ The following is an example of a successful send email operation:
 ```json
 {
   "subject": "Example Subject",
-  "sent": true
+  "sent": true,
+  "messageId": "<messageId>"
 }
 ```
 
@@ -383,6 +410,10 @@ The task returns a list of emails in JSON format. Each email object contains the
 - `subject`: The subject line of the email.
 - `size`: The size of the email in bytes.
 
+:::note
+As of the 8.8 release, angle brackets (`<` and `>`) are no longer removed from the `messageId`.
+:::
+
 #### Example Response
 
 Example of a returned JSON array:
@@ -429,6 +460,10 @@ The task returns a JSON object containing detailed information about the email:
 - `attachments`: A list of all the email's attachments, provided as a document reference.
 - `receivedDateTime`: The date and time the email was received.
 
+:::note
+As of the 8.8 release, angle brackets (`<` and `>`) are no longer removed from the `messageId`.
+:::
+
 #### Example Response
 
 The following JSON structure shows an expected response after a successful email retrieval:
@@ -443,11 +478,11 @@ The following JSON structure shows an expected response after a successful email
   "htmlBody": "<html>Any Html Content</html>",
   "headers": [
     {
-      "header": "header1",
+      "key": "header1",
       "value": "example"
     },
     {
-      "header": "header2",
+      "key": "header2",
       "value": "test"
     }
   ],
@@ -484,6 +519,10 @@ The task provides a JSON object in the response, indicating the outcome of the d
 
 - `deleted`: A boolean value that signifies whether the email was successfully deleted (true) or not (false).
 - `messageId`: Reiterates the `messageId` of the email that was targeted for deletion.
+
+:::note
+As of the 8.8 release, angle brackets (`<` and `>`) are no longer removed from the `messageId`.
+:::
 
 #### Example Response
 
@@ -569,6 +608,15 @@ object with a field and a value.
 
 :::
 
+#### Response Structure
+
+- `subject`: The email subject line.
+- `messageId`: The identifier of the email message that was attempted to be deleted.
+
+:::note
+As of the 8.8 release, angle brackets (`<` and `>`) are no longer removed from the `messageId`.
+:::
+
 #### Example Response
 
 The following is an example returned response:
@@ -600,13 +648,17 @@ Upon successful completion of the move operation, the response contains a JSON o
 - `from`: The source folder from which the email was moved.
 - `to`: The target folder to which the email has been moved.
 
+:::note
+As of the 8.8 release, angle brackets (`<` and `>`) are no longer removed from the `messageId`.
+:::
+
 #### Example Response
 
 The example below shows the expected JSON response after an email has been successfully moved:
 
 ```json
 {
-  "messageId": "VE1P191MB1101730EEA31B2FEAB320143919A2@VE1P191MB1101.EURP191.PROD.OUTLOOK.COM",
+  "messageId": "<VE1P191MB1101730EEA31B2FEAB320143919A2@VE1P191MB1101.EURP191.PROD.OUTLOOK.COM>",
   "from": "INBOX",
   "to": "TEST"
 }
@@ -671,6 +723,10 @@ The task returns a JSON object containing detailed information about the email:
 - `attachments` A list of document reference
 - `receivedDateTime`: The date and time the email was received.
 
+:::note
+As of the 8.8 release, angle brackets (`<` and `>`) are no longer removed from the `messageId`.
+:::
+
 #### Example Response
 
 The following example JSON response shows the data structure produced when an email triggers the creation of a process
@@ -686,11 +742,11 @@ instance:
   "htmlBody": "<html>Hello</html>",
   "headers": [
     {
-      "header": "header1",
+      "key": "header1",
       "value": "example"
     },
     {
-      "header": "header2",
+      "key": "header2",
       "value": "test"
     }
   ],

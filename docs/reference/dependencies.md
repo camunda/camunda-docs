@@ -45,8 +45,8 @@ import TabItem from "@theme/TabItem";
 
 <TabItem value='connectors'>
 
-- **Dependencies:** Find CycloneDX SBOM files, that list all direct and transitive third-party dependencies and their respective licenses, in the [release assets](https://github.com/camunda/connectors/releases) of each Connectors release.
-- **Source code:** Access the source code for Connectors at [github.com/camunda/connectors](https://github.com/camunda/connectors).
+- **Dependencies:** Find CycloneDX SBOM files, that list all direct and transitive third-party dependencies and their respective licenses, in the [release assets](https://github.com/camunda/connectors/releases) of each connectors release.
+- **Source code:** Access the source code for connectors at [github.com/camunda/connectors](https://github.com/camunda/connectors).
 
 </TabItem>
 

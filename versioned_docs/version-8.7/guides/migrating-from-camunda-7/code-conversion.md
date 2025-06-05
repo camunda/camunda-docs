@@ -23,6 +23,18 @@ This guide helps you do this if your code is written in Java, and covers the fol
 - [Diagram Converter](#diagram-converter) to convert your BPMN and DMN models.
 - [Leveraging AI to ease refactoring](#leveraging-ai-for-refactoring).
 
+## API mapping guide
+
+The Camunda 7 and Camunda 8 APIs share many similarities, but several aspects have been modernized in Camunda 8. Some of these changes are structural:
+
+- API endpoints for retrieving or searching resources are streamlined. Instead of separate endpoints (for example, `GET /resource` and `GET /resource/count`), Camunda 8 uses a single `POST /search` endpoint.
+- In Camunda 8, the `tenantId` is passed in the request body rather than as a path parameter, reducing the need for multiple endpoint variants as seen in Camunda 7.
+- Camunda 8 does not have separate API endpoints for historic data.
+
+:::info
+To help you understand the differences between the two APIs, the [Camunda 7 to 8 API Mapping Guide](https://camunda-community-hub.github.io/camunda-7-to-8-code-conversion/) maps the complete Camunda 7 REST API to its Camunda 8 counterparts and highlights key differences. For example, why a specific endpoint or parameter is no longer available, or if it is planned for future implementation.
+:::
+
 ## Code conversion patterns
 
 Because of the flexibility of Camunda 7, users leveraged different ways to write code, resulting in many possible conversion patterns.
@@ -79,7 +91,7 @@ The [Diagram Converter](/guides/migrating-from-camunda-7/code-conversion.md#diag
 
 If your models also contain JUEL expressions, which are not supported in Camunda 8, they also need to be converted.
 
-Simple expressions are [directly converted by this code in the Diagram Converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/blob/main/backend-diagram-converter/core/src/main/java/org/camunda/community/migration/converter/expression/ExpressionTransformer.java). This can be extended to suit your needs.
+Simple expressions are [directly converted by this code in the Diagram Converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer/blob/d6fda97d00f27b23fc87fd741134225a527f3de1/core/src/main/java/org/camunda/community/migration/converter/expression/ExpressionTransformer.java#L4). This can be extended to suit your needs.
 
 You can use the [FEEL copilot](https://feel-copilot.camunda.com/) to rewrite more complex expressions for you.
 

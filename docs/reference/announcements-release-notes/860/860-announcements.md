@@ -7,6 +7,8 @@ toc_max_heading_level: 3
 
 Supported environment changes and breaking changes or deprecations for the Camunda 8.6 release are summarized below.
 
+Please visit our [quality board](https://github.com/orgs/camunda/projects/187/views/17) to get an overview of known bugs by component and severity.
+
 | Release date   | End of maintenance | Release notes                                                                        |
 | :------------- | :----------------- | :----------------------------------------------------------------------------------- |
 | 8 October 2024 | 14 April 2026      | [8.6 release notes](/reference/announcements-release-notes/860/860-release-notes.md) |
@@ -98,19 +100,19 @@ If you do not update the cluster by August 30th 2024, we will update the cluster
 
 Camunda 8 Self-Managed clusters are not affected by this.
 
-### Deprecation: None start event element templates for Kafka, RabbitMQ, Amazon SQS, and Amazon SNS inbound Connectors
+### Deprecation: None start event element templates for Kafka, RabbitMQ, Amazon SQS, and Amazon SNS inbound connectors
 
-The [none start event](/components/modeler/bpmn/none-events/none-events.md#none-start-events) element templates for the out-of-the-box Kafka, RabbitMQ, Amazon SQS, and Amazon SNS inbound Connectors have been deprecated in Camunda Modeler.
+The [none start event](/components/modeler/bpmn/none-events/none-events.md#none-start-events) element templates for the out-of-the-box Kafka, RabbitMQ, Amazon SQS, and Amazon SNS inbound connectors have been deprecated in Camunda Modeler.
 
-Users can no longer select these templates when creating a new none start event element in Camunda Modeler. Existing none start event elements with these templates will continue to work as expected, but users are encouraged to migrate to the [message start event](/components/modeler/bpmn/message-events/message-events.md#message-start-events) element templates for these Connectors.
+Users can no longer select these templates when creating a new none start event element in Camunda Modeler. Existing none start event elements with these templates will continue to work as expected, but users are encouraged to migrate to the [message start event](/components/modeler/bpmn/message-events/message-events.md#message-start-events) element templates for these connectors.
 
-Message start event element templates are better suited for the message-based communication these Connectors provide, and offer more flexibility and features compared to the none start event element templates, such as the ability to define a message ID and a correlation key for idempotency. Read more in the [inbound Connectors documentation](/components/connectors/use-connectors/inbound.md) and the [messaging concepts documentation](/components/concepts/messages.md#message-uniqueness).
+Message start event element templates are better suited for the message-based communication these connectors provide, and offer more flexibility and features compared to the none start event element templates, such as the ability to define a message ID and a correlation key for idempotency. Read more in the [inbound connectors documentation](/components/connectors/use-connectors/inbound.md) and the [messaging concepts documentation](/components/concepts/messages.md#message-uniqueness).
 
 If one of your endpoints returns multiple Set-Cookie headers and you need to capture all of them, set `groupSetCookieHeaders` to `true` in the element template XML. This aggregates the headers into a list. This feature is available since version 8.6.7. The grouping is enabled by default since version 8.6.10.
 
 If one of your endpoints requires pre-encoded URL elements, this behavior will change in version 8.6.0. Since 8.6.10, the element template includes the skipEncoding property, which can be set to "true". This disables the automatic decoding and re-encoding process, ensuring the URL is sent to the server exactly as provided.
 
-### Breaking changes in the Connector SDK
+### Breaking changes in the connector SDK
 
 The `void correlate(Object variables)` method in the `InboundConnectorContext` interface has been removed, following the deprecation in 8.4.0. Use the `CorrelationResult correlateWithResult(Object variables)` method instead.
 

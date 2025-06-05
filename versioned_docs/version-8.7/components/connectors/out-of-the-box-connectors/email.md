@@ -131,7 +131,7 @@ Starting from version 8.7.0, the outbound email connector supports sending Camun
 
 For example, the **Attachment** field in the properties panel may look as `=[ document1, document2]`.
 
-See additional details and limitations in [document handling](/components/concepts/document-handling.md).
+See additional details and limitations in [document handling](/components/document-handling/getting-started.md).
 :::
 
 #### Example Response
@@ -148,11 +148,11 @@ Below is an example of the JSON response returned when a specific email is read:
   "htmlBody": "<html>Any Html Content</html>",
   "headers": [
     {
-      "header": "header1",
+      "key": "header1",
       "value": "example"
     },
     {
-      "header": "header2",
+      "key": "header2",
       "value": "test"
     }
   ],
@@ -443,11 +443,11 @@ The following JSON structure shows an expected response after a successful email
   "htmlBody": "<html>Any Html Content</html>",
   "headers": [
     {
-      "header": "header1",
+      "key": "header1",
       "value": "example"
     },
     {
-      "header": "header2",
+      "key": "header2",
       "value": "test"
     }
   ],
@@ -686,11 +686,11 @@ instance:
   "htmlBody": "<html>Hello</html>",
   "headers": [
     {
-      "header": "header1",
+      "key": "header1",
       "value": "example"
     },
     {
-      "header": "header2",
+      "key": "header2",
       "value": "test"
     }
   ],

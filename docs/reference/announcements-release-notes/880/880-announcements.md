@@ -9,7 +9,9 @@ import DeployDiagramImg from '../../img/deploy-diagram-modal.png';
 
 Supported environment changes and breaking changes or deprecations for the Camunda 8.8 release are summarized below.
 
-[Release notes](/reference/announcements-release-notes/880/880-release-notes.md) now contain all updates for new features and enhancements.
+Please read out [release notes](/reference/announcements-release-notes/880/880-release-notes.md) to learn about all new features and enhancements.
+
+Please visit our [quality board](https://github.com/orgs/camunda/projects/187/views/15) to get an overview of known bugs by component and severity.
 
 | Scheduled release date | Scheduled end of maintenance | Release notes | Blog |
 | :--------------------- | :--------------------------- | :------------ | :--- |
@@ -23,7 +25,7 @@ From version `8.8.0` forward, the following core [Orchestration cluster](/self-m
 
 ### Installation and deployment updates <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-Camunda 8.8 introduces a streamlined architecture, consolidating core components such as Zeebe, Operate, Tasklist, Optimize, and Connectors into a single deployable unit. Enhanced deployment options are also included, such as new Kubernetes Helm guides, [deployment reference architectures](/self-managed/reference-architecture/reference-architecture.md), and improved support for local development with [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md).
+Camunda 8.8 introduces a streamlined architecture, consolidating core components such as Zeebe, Operate, Tasklist, Optimize, and connectors into a single deployable unit. Enhanced deployment options are also included, such as new Kubernetes Helm guides, [deployment reference architectures](/self-managed/reference-architecture/reference-architecture.md), and improved support for local development with [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md).
 
 You can download the alpha release of the unified package from the Camunda GitHub repository, either as an executable Java application (Camunda Orchestration Core) or a Docker image.
 
@@ -135,9 +137,9 @@ The existing data schema in the secondary storage has been harmonized, to be use
 Learn more about these updates in Streamlined Deployment with 8.7.
 ::: -->
 
-### Camunda Java client and Camunda Spring SDK
+### Camunda Java client and Camunda Spring Boot SDK
 
-With the Camunda 8.8 release, Camunda Java Client and Camunda Spring SDK replace the Zeebe Java client and Spring Zeebe SDK. This allows you to use a single consolidated client to interact with Camunda orchestration clusters.
+With the Camunda 8.8 release, Camunda Java Client and Camunda Spring Boot SDK replace the Zeebe Java client and Spring Zeebe SDK. This allows you to use a single consolidated client to interact with Camunda orchestration clusters.
 
 The `CamundaClient` replaces the `ZeebeClient`, offering the same functionality and adding new capabilities.
 

@@ -9,6 +9,8 @@ import DeployDiagramImg from '../../img/deploy-diagram-modal.png';
 
 Supported environment changes and breaking changes or deprecations for the Camunda 8.7 release are summarized below.
 
+Please visit our [quality board](https://github.com/orgs/camunda/projects/187/views/16) to get an overview of known bugs by component and severity.
+
 | Scheduled release date | Scheduled end of maintenance | Release notes                                                                        | Blog                                                                            |
 | :--------------------- | :--------------------------- | :----------------------------------------------------------------------------------- | :------------------------------------------------------------------------------ |
 | 8 April 2025           | 13 October 2026              | [8.7 release notes](/reference/announcements-release-notes/870/870-release-notes.md) | [Announcing Camunda 8.7](https://camunda.com/blog/2025/04/camunda-8-7-release/) |
@@ -43,14 +45,14 @@ With this version, we ship a breaking change to how Web Modeler **Deploy diagram
 
 - In 8.6, you could still configure cluster details on the **Deploy diagram** modal when deploying.
 - In 8.7, you can no longer configure cluster details on the **Deploy diagram** modal. You must [configure the cluster](/self-managed/modeler/web-modeler/configuration/configuration.md#clusters) to be able to deploy from this modal.
-- Note that you must also be assigned the `Zeebe` [Identity role](/self-managed/identity/user-guide/roles/manage-roles.md) to be able to deploy (if `BEARER_TOKEN` is used as authentication).
+- Note that you must also be assigned the `Zeebe` [Identity role](/self-managed/identity/application-user-group-role-management/manage-roles.md) to be able to deploy (if `BEARER_TOKEN` is used as authentication).
 
 ### Deprecated: Web Modeler cluster authentication `OAUTH` and `CLIENT_CREDENTIALS` <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
 The following authentication methods for a [configured cluster in Web Modeler](/self-managed/modeler/web-modeler/configuration/configuration.md#clusters) are now being deprecated and will no longer be supported in version 8.8:
 
 - `OAUTH`: This method was replaced by `BEARER_TOKEN`.
-- `CLIENT_CREDENTIALS`: This method was introduced as a temporary solution to support deployments from Web Modeler when [Microsoft Entra ID is used as OIDC provider](/self-managed/setup/guides/connect-to-an-oidc-provider.md?authPlatform=microsoftEntraId#configuration).
+- `CLIENT_CREDENTIALS`: This method was introduced as a temporary solution to support deployments from Web Modeler when [Microsoft Entra ID is used as OIDC provider](/self-managed/identity/configuration/connect-to-an-oidc-provider.md?authPlatform=microsoftEntraId#configuration).
   It is marked for removal in 8.8 as the `BEARER_TOKEN` authentication will be supported for Entra ID as well.
 
 ### Breaking changes in Camunda Process Test
@@ -96,9 +98,9 @@ The Zeebe Java client will not be developed further and will only receive bug fi
 
 ### Connectors
 
-Starting with 8.7, the Connector runtime will stop using the deprecated community [Spring Zeebe library](https://github.com/camunda-community-hub/spring-zeebe) to communicate with the core APIs of Camunda. The new [Spring Zeebe SDK](/apis-tools/spring-zeebe-sdk/getting-started.md) will be used instead.
+Starting with 8.7, the connector runtime will stop using the deprecated community [Spring Zeebe library](https://github.com/camunda-community-hub/spring-zeebe) to communicate with the core APIs of Camunda. The new [Spring Zeebe SDK](/apis-tools/spring-zeebe-sdk/getting-started.md) will be used instead.
 
-Although the official SDK is largely compatible with the community library, some changes might be required in the configuration of Self-Managed Connector deployments.
+Although the official SDK is largely compatible with the community library, some changes might be required in the configuration of Self-Managed connector deployments.
 
 We recommend updating the configuration to match the new property format of the [Spring Zeebe SDK](/apis-tools/spring-zeebe-sdk/getting-started.md) to avoid any issues. The old properties will be removed in a future release.
 

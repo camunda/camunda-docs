@@ -7,6 +7,8 @@ toc_max_heading_level: 3
 
 Supported environment changes and breaking changes or deprecations for the Camunda 8.5, 8.4, and 8.3 releases are summarized below.
 
+Please visit our [quality board](https://github.com/orgs/camunda/projects/187/views/18) to get an overview of known bugs by component and severity.
+
 ## Camunda 8.5
 
 | Release date | End of maintenance | Release notes                                                                        |
@@ -103,11 +105,11 @@ This release contains the following limitations:
       2. The OpenSearch configuration in Helm charts will be provided in one of our future Helm releases.
 - In **Connectors `8.4.x`**
   - **Missing feature**
-    - **Description:** Custom OIDC provider support for Connectors is missing
+    - **Description:** Custom OIDC provider support for connectors is missing
     - **Reference:** https://github.com/camunda/issues/issues/569
     - **Mitigation:**
       1. Feature is planned to be delivered with an upcoming patch release. Please see [issue](https://github.com/camunda/issues/issues/569) for latest progress.
-      2. [Disable Connectors component](/self-managed/setup/guides/connect-to-an-oidc-provider.md#configuration) when configuring a custom OIDC provider.
+      2. [Disable connectors component](/self-managed/setup/guides/connect-to-an-oidc-provider.md#configuration) when configuring a custom OIDC provider.
 
 ### Key changes
 
@@ -129,45 +131,3 @@ were deprecated in `8.4`. Please use the dedicated Camunda Identity properties o
 
 The Dockerfile now uses a numeric user ID instead of a non-numeric user.
 This will allow the Helm users to use `runAsNonRoot=true` without the need to explicitly set the ID in the Helm `values.yaml` file.
-
-## Camunda 8.3
-
-| Release date    | End of maintenance |
-| :-------------- | :----------------- |
-| 10 October 2023 | 9 April 2025       |
-
-### Changes in supported environments
-
-#### Versioning changes in Elasticsearch
-
-As of the 8.3 release, Camunda is compatible with Elasticsearch 8.8+ and no longer supports Elasticsearch 7.x. See [supported environments](/reference/supported-environments.md).
-
-#### Versioning changes in Helm chart
-
-[Helm charts versioning](/self-managed/setup/overview.md) changed in July 2023.
-
-Starting from July 2023 (v8.2.8), the Camunda 8 **Helm chart** version follows the same unified schema
-and schedule as [Camunda 8 applications](https://github.com/camunda/camunda-platform).
-
-Before this change, the Camunda 8 **Helm chart** version only followed the minor version.
-
-### Key changes
-
-#### Data migration
-
-For existing clusters we recommend updating to `8.3.1` directly and not `8.3.0` due to issues in data migration of Operate, Tasklist, and Optimize that could prolong the migration or even blocking it from finishing.
-
-#### Zeebe Docker image now runs with unprivileged user by default
-
-The default user in the Zeebe Docker image changed from root to an unprivileged user with the UID 1000. This was done to provide stronger compliance with the [OWASP recommendations on Docker Security](https://cheatsheetseries.owasp.org/cheatsheets/Docker_Security_Cheat_Sheet.html#rule-2-set-a-user).
-
-Please refer to the [Update 8.2 to 8.3](/self-managed/operational-guides/update-guide/820-to-830.md) guide.
-
-:::info
-The update from `8.2.x` to `8.3.x` performs a migration for nearly all entities stored in Operate, Tasklist, and Optimize to support [multi-tenancy](/self-managed/concepts/multi-tenancy.md). Therefore, migration may take longer.
-:::
-
-#### Deprecated: Web Modeler's beta API
-
-[Web Modeler's beta API](/apis-tools/web-modeler-api/index.md) was deprecated in 8.3 and will be removed in 8.5.
-Use `v1` instead, see [migration hints](/apis-tools/web-modeler-api/index.md#migrating-from-beta-to-v1).
