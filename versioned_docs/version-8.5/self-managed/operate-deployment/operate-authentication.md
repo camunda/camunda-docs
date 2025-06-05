@@ -243,7 +243,7 @@ The user or user group can be assigned the following types of permissions:
 | UPDATE_PROCESS_INSTANCE | process-definition                      | User can retry the incident, add/update variable, cancel, or modify process instance related to defined process definition. |
 | DELETE_PROCESS_INSTANCE | process-definition                      | User can delete process instance related to defined process definition.                                                     |
 
-For more information, visit the [Identity documentation](../../concepts/access-control/resource-authorizations/).
+For more information, visit the [Identity documentation](/self-managed/identity/what-is-identity.md).
 
 ## Zeebe client credentials
 
