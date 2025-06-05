@@ -366,14 +366,14 @@ const SearchableTable = () => {
       name: "SAP OData",
       description: "Orchestrate SAP tasks and data.",
       type: "Outbound",
-      link: "../salesforce/",
+      link: "../../../camunda-integrations/sap/odata-connector/",
       image: ODataImg,
     },
     {
       name: "SAP RFC",
       description: "Orchestrate SAP tasks and data.",
       type: "Outbound",
-      link: "../salesforce/",
+      link: "../../../camunda-integrations/sap/rfc-connector/",
       image: RFCImg,
     },
     {
