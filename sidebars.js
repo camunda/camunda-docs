@@ -1190,11 +1190,9 @@ module.exports = {
       items: [
         "self-managed/setup/guides/accessing-components-without-ingress",
         "self-managed/setup/guides/ingress-setup",
-        "self-managed/setup/guides/using-existing-keycloak",
         "self-managed/setup/guides/using-existing-elasticsearch",
         "self-managed/setup/guides/using-existing-opensearch",
         "self-managed/setup/guides/configure-db-custom-headers",
-        "self-managed/setup/guides/connect-to-an-oidc-provider",
         "self-managed/setup/guides/air-gapped-installation",
         "self-managed/setup/guides/running-custom-connectors",
         "self-managed/setup/guides/multi-namespace-deployment",
@@ -1253,13 +1251,6 @@ module.exports = {
     },
     {
       Concepts: [
-        {
-          "Access control": [
-            "self-managed/concepts/access-control/applications",
-            "self-managed/concepts/access-control/resource-authorizations",
-            "self-managed/concepts/access-control/user-task-access-restrictions",
-          ],
-        },
         "self-managed/concepts/exporters",
         {
           "Multi-region": ["self-managed/concepts/multi-region/dual-region"],
@@ -1363,6 +1354,7 @@ module.exports = {
             "self-managed/tasklist-deployment/importer-and-archiver",
             "self-managed/tasklist-deployment/tasklist-authentication",
             "self-managed/tasklist-deployment/usage-metrics",
+            "self-managed/tasklist-deployment/user-task-access-restrictions",
           ],
           Connectors: [
             "self-managed/connectors-deployment/install-and-start",
@@ -1404,76 +1396,73 @@ module.exports = {
               ],
             },
           ],
-
-          Identity: [
-            "self-managed/identity/what-is-identity",
+        },
+        {
+          type: "category",
+          label: "Identity",
+          link: {
+            type: "doc",
+            id: "self-managed/identity/what-is-identity",
+          },
+          items: [
+            "self-managed/identity/identity-first-steps",
             {
-              "Identity for Orchestration clusters": [
-                "self-managed/identity/orchestration-identity/installation",
-                "self-managed/identity/orchestration-identity/configuration",
+              type: "category",
+              label: "Configure Identity",
+              link: {
+                type: "doc",
+                id: "self-managed/identity/configuration/identity-configuration-overview",
+              },
+              items: [
+                "self-managed/identity/configuration/configure-external-identity-provider",
+                "self-managed/identity/configuration/connect-to-an-existing-keycloak",
+                "self-managed/identity/configuration/connect-to-an-oidc-provider",
+                "self-managed/identity/configuration/alternative-db",
+              ],
+            },
+            "self-managed/identity/authentication",
+            {
+              type: "category",
+              label: "Manage Identity",
+              items: [
                 {
-                  "Mapping rules": [
-                    "self-managed/identity/orchestration-identity/mapping-rules/managing-mapping-rules",
-                    "self-managed/identity/orchestration-identity/mapping-rules/mapping-rule-authorizations",
-                    "self-managed/identity/orchestration-identity/mapping-rules/assign-mappings-to-tenants",
+                  type: "category",
+                  label: "Manage users, groups, roles, and applications",
+                  link: {
+                    type: "doc",
+                    id: "self-managed/identity/application-user-group-role-management/identity-application-user-group-role-management-overview",
+                  },
+                  items: [
+                    "self-managed/identity/application-user-group-role-management/manage-groups",
+                    "self-managed/identity/application-user-group-role-management/manage-roles",
+                    "self-managed/identity/application-user-group-role-management/applications",
                   ],
                 },
+                {
+                  type: "category",
+                  label: "Manage access and permissions",
+                  link: {
+                    type: "doc",
+                    id: "self-managed/identity/access-management/access-management-overview",
+                  },
+                  items: [
+                    "self-managed/identity/access-management/manage-permissions",
+                    "self-managed/identity/access-management/resource-authorizations",
+                  ],
+                },
+                "self-managed/identity/managing-tenants",
+                "self-managed/identity/mapping-rules",
               ],
             },
             {
-              "Identity for Web Modeler, Console, and Optimize": [
-                "self-managed/identity/getting-started/install-identity",
-                {
-                  "User guide": [
-                    {
-                      Configuration: [
-                        "self-managed/identity/user-guide/configuration/making-identity-production-ready",
-                        "self-managed/identity/user-guide/configuration/configure-external-identity-provider",
-                        "self-managed/identity/user-guide/configuration/configure-logging",
-                        "self-managed/identity/user-guide/configuration/connect-to-an-existing-keycloak",
-                      ],
-                    },
-                    {
-                      Roles: [
-                        "self-managed/identity/user-guide/roles/manage-roles",
-                        "self-managed/identity/user-guide/roles/manage-permissions",
-                      ],
-                    },
-                    {
-                      Groups: [
-                        "self-managed/identity/user-guide/groups/manage-groups",
-                        "self-managed/identity/user-guide/groups/manage-users-roles-to-group",
-                      ],
-                    },
-                    {
-                      Authorizations: [
-                        "self-managed/identity/user-guide/authorizations/managing-resource-authorizations",
-                        "self-managed/identity/user-guide/authorizations/managing-user-access",
-                        "self-managed/identity/user-guide/authorizations/generating-m2m-tokens",
-                      ],
-                    },
-                    {
-                      Tenants: [
-                        "self-managed/identity/user-guide/tenants/managing-tenants",
-                      ],
-                    },
-                    {
-                      "Additional features": [
-                        "self-managed/identity/user-guide/additional-features/adding-an-api",
-                        "self-managed/identity/user-guide/additional-features/incorporate-applications",
-                      ],
-                    },
-                  ],
-                },
-                {
-                  Deployment: [
-                    "self-managed/identity/deployment/configuration-variables",
-                    "self-managed/identity/deployment/application-monitoring",
-                    "self-managed/identity/deployment/starting-configuration-for-identity",
-                    "self-managed/identity/deployment/resource-management",
-                  ],
-                },
-                "self-managed/identity/troubleshooting/troubleshoot-identity",
+              Reference: [
+                "self-managed/identity/miscellaneous/application-monitoring",
+                "self-managed/identity/miscellaneous/configuration-variables",
+                "self-managed/identity/miscellaneous/configure-logging",
+                "self-managed/identity/miscellaneous/making-identity-production-ready",
+                "self-managed/identity/miscellaneous/resource-management",
+                "self-managed/identity/miscellaneous/starting-configuration",
+                "self-managed/identity/miscellaneous/troubleshoot-identity",
               ],
             },
           ],
