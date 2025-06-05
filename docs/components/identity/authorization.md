@@ -10,7 +10,7 @@ Authorizations are managed through permissions that can be assigned to [users](u
 
 Camunda 8 Self-Managed [Orchestration clusters](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) use resource-based authorization control, which grants permissions to entities (like users) to perform specific actions on specified resources. For example, permissions can be set for actions such as reading, updating, creating, or deleting resources, such as process instances.
 
-A user is not granted authorizations by default, and must be explicitly granted permission to access applications or perform actions on resources. Authorizations can be enabled or disabled in Self-Managed deployments via [configuration settings](/self-managed/identity/orchestration-identity/installation.md#enable-api-authentication-and-authorizations).
+A user is not granted authorizations by default, and must be explicitly granted permission to access applications or perform actions on resources. Authorizations can be enabled or disabled in Self-Managed deployments via configuration settings.
 
 ## Authorization concepts
 

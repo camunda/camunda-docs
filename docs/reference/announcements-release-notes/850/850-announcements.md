@@ -109,7 +109,7 @@ This release contains the following limitations:
     - **Reference:** https://github.com/camunda/issues/issues/569
     - **Mitigation:**
       1. Feature is planned to be delivered with an upcoming patch release. Please see [issue](https://github.com/camunda/issues/issues/569) for latest progress.
-      2. [Disable connectors component](/self-managed/setup/guides/connect-to-an-oidc-provider.md#configuration) when configuring a custom OIDC provider.
+      2. [Disable connectors component](/self-managed/identity/configuration/connect-to-an-oidc-provider.md#configuration) when configuring a custom OIDC provider.
 
 ### Key changes
 
@@ -123,7 +123,7 @@ Follow the instructions in the [form linking](/components/modeler/web-modeler/ad
 #### Deprecated: Zeebe configuration properties for Camunda Identity
 
 The [Zeebe configuration properties for Camunda Identity](/self-managed/zeebe-deployment/configuration/gateway.md#zeebegatewayclustersecurityauthenticationidentity)
-were deprecated in `8.4`. Please use the dedicated Camunda Identity properties or the [corresponding environment variables](/self-managed/identity/deployment/configuration-variables.md#core-configuration).
+were deprecated in `8.4`. Please use the dedicated Camunda Identity properties or the [corresponding environment variables](/self-managed/identity/miscellaneous/configuration-variables.md#core-configuration).
 
 ### Additional features
 

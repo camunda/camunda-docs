@@ -152,7 +152,7 @@ export SPRING_PROFILES_ACTIVE=identity-auth
 Identity requires the following parameters:
 
 :::danger
-These configuration variables are deprecated. To connect using the updated values, see [connecting to an OpenID Connect provider](/self-managed/setup/guides/connect-to-an-oidc-provider.md).
+These configuration variables are deprecated. To connect using the updated values, see [connecting to an OpenID Connect provider](/self-managed/identity/configuration/connect-to-an-oidc-provider.md).
 :::
 
 | Property name                                       | Description                                                                                                                                   | Example value                                                                     |
@@ -174,9 +174,8 @@ using a JWT access token in an authorization header `Authorization: Bearer <JWT>
 
 **Example:**
 
-1. [Add an application in Identity](/self-managed/identity/user-guide/additional-features/incorporate-applications.md).
-2. [Add permissions to an application](/self-managed/identity/user-guide/additional-features/incorporate-applications.md)
-   for Operate API.
+1. [Add an application in Identity](/self-managed/identity/application-user-group-role-management/applications.md).
+2. [Add permissions to an application](/self-managed/identity/application-user-group-role-management/applications.md).
 3. Obtain a token to access the Operate REST API.
    You will need:
    - `client_id` and `client_secret` from Identity application you created.
@@ -225,7 +224,7 @@ modifying data (e.g. update the variables, resolve the incidents or cancel insta
 More detailed permissions may be enabled:
 
 1. Resource authorizations must
-   be [enabled in Identity](/self-managed/identity/user-guide/authorizations/managing-resource-authorizations.md).
+   be enabled in Identity.
 2. Operate must be configured to use resource authorizations:
 
 ```yaml
