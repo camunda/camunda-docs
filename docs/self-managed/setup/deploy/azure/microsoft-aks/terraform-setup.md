@@ -502,26 +502,17 @@ This step defines a custom `StorageClass` that:
 
 #### Apply the StorageClass
 
-Save the following as `storage-class.yml`:
+Run the following script to apply the new storage class and set it as default:
 
-```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/manifests/storage-class.yml
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/storageclass-configure.sh
 ```
 
-**First, remove the default attribute from the original StorageClass:**
+Then run the following script to veryify if it had been set correctly.
 
-```bash
-kubectl patch storageclass default \
-  -p '{"metadata":{"annotations":{"storageclass.kubernetes.io/is-default-class":"false"}}}'
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/storageclass-verify.sh
 ```
-
-**Then, apply the new StorageClass:**
-
-```bash
-kubectl apply -f storage-class.yml
-```
-
-**Always verify with** `kubectl get storageclass` **afterwards.**
 
 This must be applied **before installing the Camunda Helm chart** so that PersistentVolumeClaims (PVCs) are provisioned with the correct performance characteristics.
 
