@@ -109,6 +109,20 @@ The `getText` function accepts a document and an optional encoding parameter. It
 }
 ```
 
+### `getJson`
+
+The `getJson` function accepts a document and an optional FEEL expression parameter. It extracts the text content from the JSON document and returns it as an object so that you can manipulate it using FEEL.
+
+- The optional FEEL expression parameter specifies the part that will be extracted from the JSON document content.
+- If not provided, the whole document is returned as a JSON object.
+
+```json
+{
+  "camunda.function.type": "getJson",
+  "params": [ myDocument, "field1.field2" ]
+}
+```
+
 ## Create a custom function
 
 In **Self-Managed** deployments, you can create custom intrinsic functions by implementing the `IntrinsicFunctionProvider` interface
