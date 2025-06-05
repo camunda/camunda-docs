@@ -44,7 +44,7 @@ To use the FEEL Playground for validation:
 1. Open the properties panel of a diagram element containing the FEEL expression you want to validate.
 1. To open the popup FEEL editor, click **fx** on the FEEL expression field, and click the **Open popup editor** icon in the field.
 
- <img src={PlaygroundOpenImg} alt="click fx on the FEEL expression field, and click the Open popup editor icon in the field" class="img-500"/>
+   <img src={PlaygroundOpenImg} alt="click fx on the FEEL expression field, and click the Open popup editor icon in the field" class="img-500"/>
 
 1. In the popup FEEL editor, enter and validate your expression using the contextual data. Edit the expression as required until it is valid (returns an Approved status) and no errors are shown. See [validation results](#results).
 
