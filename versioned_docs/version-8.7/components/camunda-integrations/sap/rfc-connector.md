@@ -4,7 +4,7 @@ title: SAP RFC connector
 description: "The SAP RFC connector is a Java Spring Boot application that runs on SAP BTP."
 ---
 
-The SAP RFC [Connector](/components/connectors/introduction.md) is a [protocol and outbound connector](/components/connectors/connector-types.md).<br/>
+The [SAP RFC](/reference/glossary.md#rfc) [Connector](/components/connectors/introduction.md) is a [protocol and outbound connector](/components/connectors/connector-types.md).<br/>
 This connector is a Java Spring Boot application that runs as a `.war` on the SAP Business Technology Platform (BTP).
 
 It connects to Camunda 8 SaaS, and utilizes SAP BTP's [Destination](https://learning.sap.com/learning-journeys/administrating-sap-business-technology-platform/using-destinations) and [Connectivity](https://help.sap.com/docs/connectivity/sap-btp-connectivity-cf/what-is-sap-btp-connectivity) concepts to query a SAP system via the RFC protocol to interact with remote-enabled Function Modules and BAPIs.
@@ -54,8 +54,8 @@ Use the command `csap setup` will guide you interactively.
 
 ```shell
 csap setup --for rfc \
-	--camunda 8.7 \
-	--deployment SaaS
+  --camunda 8.7 \
+  --deployment SaaS
 ```
 
 #### Manual configuration
@@ -228,8 +228,8 @@ The result of a call to a BAPI holds the following JSON structure:
 ```json
 {
   tables: [
-  	{ ... }
-	],
+    { ... }
+  ],
   importing: {
     { ... }
   }
@@ -247,8 +247,8 @@ The result of a call to a Function Module holds the following JSON structure:
 ```json
 {
   tables: [
-  	{ ... }
-	],
+    { ... }
+  ],
   importing: [
     { ... }
   ],

@@ -4,7 +4,7 @@ title: SAP BTP plugin
 description: "Learn about the Camunda SAP Business Technology Platform (BTP) plugin, an artifact run on BTP."
 ---
 
-The Camunda SAP Business Technology Platform (BTP) plugin is an artifact run on BTP. It consists of a [UI5 app](https://ui5.sap.com/), a [CAP service layer and backend](https://cap.cloud.sap/) (using PostgreSQL), and an [approuter](https://www.npmjs.com/package/@sap/approuter) for traffic dispatching.
+The [Camunda SAP Business Technology Platform (BTP) plugin](/reference/glossary.md#btp) is an artifact run on BTP. It consists of a [UI5 app](https://ui5.sap.com/), a [CAP service layer and backend](https://cap.cloud.sap/) (using PostgreSQL), and an [approuter](https://www.npmjs.com/package/@sap/approuter) for traffic dispatching.
 
 The BTP plugin connects to Camunda 8 SaaS to provide:
 
@@ -98,9 +98,11 @@ Within Camunda, no setup/config work is necessary to use the BTP plugin.
 
 ### Configuring the BTP plugin using `csap`
 
-Configure the SAP BTP plugin via the `csap cli` (recommended) or manually. Using `csap` simplifies the process by automatically gathering all required files and customizing them for your BTP environment based on the details you provide through prompts or command-line options.
+Either walk yourself through the prompts or provide all information to the CLI:
 
-Assuming your [Camunda cluster's API credentials](/guides/setup-client-connection-credentials.md) are sourced in your shell environment, this will do the configuration for you:
+- `csap setup` will guide you interactively.
+
+- Assuming your [Camunda cluster's API credentials](/guides/setup-client-connection-credentials.md) are sourced in your shell environment, this will do the configuration for you:
 
 ```shell
 csap setup --for btp-plugin \
@@ -131,14 +133,6 @@ For advanced deployment configuration, consider working with your SAP practice, 
 ## Working with the BTP plugin
 
 The BTP plugin provides a guided, one-user multi-page flow where a single user progresses through a sequence of steps to complete a task or workflow. It renders subsets of Camunda Forms, with each page representing a distinct part of the process.
-
-[Create a user task](/components/modeler/bpmn/user-tasks/user-tasks.md) and [link a form to it](/components/modeler/web-modeler/advanced-modeling/form-linking.md). When the process runs, the form will be rendered using the SAP Fiori design system.
-
-![a user task for SAP Fiori in Web Modeler](./img/sap-btp-plugin-model-user-task.png)
-
-:::note
-Until Camunda 8.8, use `Job worker` as the `Implementation` `Type` of the user task. This will result in a warning message displayed in Modeler that can safely be ignored.
-:::
 
 After deployment, the BTP plugin is available at the `btpRoute` provided: `https://<btpRoute>`. If called manually (for example, in the browser) it will redirect automatically to `/app/index.html?channelId=<unique id>` . The `<unique id>` or "channel ID" links the output device to the BTP plugin, representing a dedicated "output channel".
 
@@ -172,4 +166,4 @@ Make a `POST` http call to `https://<btpRoute>/backend/inbound` with this define
 }
 ```
 
-The advantage over Camunda 8 REST API: use the authentication realm between BTP and S/4 / ECC, there is no need for adminstrating additional credentials.
+The advantage over Camunda 8 REST API: use the authentication realm between BTP and S/4 / ECC, there is no need for administrating additional credentials.
