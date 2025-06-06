@@ -915,37 +915,37 @@ The following conventions apply to all attributes:
 <TabItem value='input-adjustments'>
 
 - Request structure changes as outlined in [general changes][].
-    - `searchAfter` has been moved under `page`.
-    - `size` is now the `limit` in the `page` object.
+  - `searchAfter` has been moved under `page`.
+  - `size` is now the `limit` in the `page` object.
 - Renamed attributes in the `filter` object
-    - `key` of type `int64` - Use `elementInstanceKey` of type `string` instead.
-    - `flowNodeId` - Use `elementId` instead.
-    - `flowNodeName` - Use `elementName` instead.
-    - `incident` - Use `hasIncident` instead.
+  - `key` of type `int64` - Use `elementInstanceKey` of type `string` instead.
+  - `flowNodeId` - Use `elementId` instead.
+  - `flowNodeName` - Use `elementName` instead.
+  - `incident` - Use `hasIncident` instead.
 - Adjusted attributes in the `filter` object
-    - `processInstanceKey` - Type changed from `int64` to `string`.
-    - `processDefinitionKey` - Type changed from `int64` to `string`.
-    - `incidentKey` - Type changed from `int64` to `string`.
+  - `processInstanceKey` - Type changed from `int64` to `string`.
+  - `processDefinitionKey` - Type changed from `int64` to `string`.
+  - `incidentKey` - Type changed from `int64` to `string`.
 - Removed attributes from the `filter` object
-    - `startDate` - Can no longer be used for filtering.
-    - `endDate` - Can no longer be used for filtering.
+  - `startDate` - Can no longer be used for filtering.
+  - `endDate` - Can no longer be used for filtering.
 
 </TabItem>
 
 <TabItem value='output-adjustments'>
 
 - Response structure changes as outlined in [general changes][].
-    - `total` is moved under the `page` object as `totalItems`.
-    - `sortValues` - Use `lastSortValues` in the `page` object instead.
+  - `total` is moved under the `page` object as `totalItems`.
+  - `sortValues` - Use `lastSortValues` in the `page` object instead.
 - Renamed attributes in the objects of the `items` array
-    - `key` of type `int64` - Use `elementInstanceKey` of type `string` instead.
-    - `flowNodeId` - Use `elementId` instead.
-    - `flowNodeName` - Use `elementName` instead.
-    - `incident` - Use `hasIncident` instead.
+  - `key` of type `int64` - Use `elementInstanceKey` of type `string` instead.
+  - `flowNodeId` - Use `elementId` instead.
+  - `flowNodeName` - Use `elementName` instead.
+  - `incident` - Use `hasIncident` instead.
 - Adjusted attributes in the objects of the `items` array
-    - `processInstanceKey` - Type changed from `int64` to `string`.
-    - `processDefinitionKey` - Type changed from `int64` to `string`.
-    - `incidentKey` - Type changed from `int64` to `string`.
+  - `processInstanceKey` - Type changed from `int64` to `string`.
+  - `processDefinitionKey` - Type changed from `int64` to `string`.
+  - `incidentKey` - Type changed from `int64` to `string`.
 
 </TabItem>
 </Tabs>
@@ -992,32 +992,32 @@ The following conventions apply to all attributes:
 <TabItem value='input-adjustments'>
 
 - Request structure changes as outlined in [general changes][].
-    - `searchAfter` has been moved under `page`.
-    - `size` is now the `limit` in the `page` object.
+  - `searchAfter` has been moved under `page`.
+  - `size` is now the `limit` in the `page` object.
 - Renamed attributes in the `filter` object
-    - `key` of type `int64` - Use `incidentKey` of type `string` instead.
-    - `type` - Use `errorType` instead.
-    - `message` - Use `errorMessage` instead.
+  - `key` of type `int64` - Use `incidentKey` of type `string` instead.
+  - `type` - Use `errorType` instead.
+  - `message` - Use `errorMessage` instead.
 - Adjusted attributes in the `filter` object
-    - `processInstanceKey` - Type changed from `int64` to `string`.
-    - `processDefinitionKey` - Type changed from `int64` to `string`.
-    - `jobKey` - Type changed from `int64` to `string`.
+  - `processInstanceKey` - Type changed from `int64` to `string`.
+  - `processDefinitionKey` - Type changed from `int64` to `string`.
+  - `jobKey` - Type changed from `int64` to `string`.
 
 </TabItem>
 
 <TabItem value='output-adjustments'>
 
 - Response structure changes as outlined in [general changes][].
-    - `total` is moved under the `page` object as `totalItems`.
-    - `sortValues` - Use `lastSortValues` in the `page` object instead.
+  - `total` is moved under the `page` object as `totalItems`.
+  - `sortValues` - Use `lastSortValues` in the `page` object instead.
 - Renamed attributes in the objects of the `items` array
-    - `key` of type `int64` - Use `incidentKey` of type `string` instead.
-    - `type` - Use `errorType` instead.
-    - `message` - Use `errorMessage` instead.
+  - `key` of type `int64` - Use `incidentKey` of type `string` instead.
+  - `type` - Use `errorType` instead.
+  - `message` - Use `errorMessage` instead.
 - Adjusted attributes in the objects of the `items` array
-    - `processInstanceKey` - Type changed from `int64` to `string`.
-    - `processDefinitionKey` - Type changed from `int64` to `string`.
-    - `jobKey` - Type changed from `int64` to `string`.
+  - `processInstanceKey` - Type changed from `int64` to `string`.
+  - `processDefinitionKey` - Type changed from `int64` to `string`.
+  - `jobKey` - Type changed from `int64` to `string`.
 
 </TabItem>
 </Tabs>
