@@ -161,12 +161,14 @@ worst case, could completely block a thread.
 It's therefore recommended to keep exporters as simple as possible, and perform
 any data enrichment or transformation through the external system.
 
-## Custom Exporter To Filter Specific Records
+## Custom exporter to filter specific records
 
 The exporter interface allows you to filter specific records by implementing the [`Context#RecordFilter` interface](https://github.com/camunda/camunda/blob/5e554728eaf1122962fe9833dc9e91ff1fb5a087/zeebe/exporter-api/src/main/java/io/camunda/zeebe/exporter/api/context/Context.java#L67).
+
 This interface provides methods to filter records based on their record type, value type, and intent.
 You can find valid record types and value types in the [protocol definition](https://github.com/camunda/camunda/blob/stable/8.7/zeebe/protocol/src/main/resources/protocol.xml) and intents in the [intent enum class](https://github.com/camunda/camunda/blob/stable/8.7/zeebe/protocol/src/main/java/io/camunda/zeebe/protocol/record/intent/Intent.java).
-For example, you can create a custom exporter that only exports events, job value types and with `CREATED` intent.
+
+For example, you can create a custom exporter that only exports events, job value types, and with `CREATED` intent.
 
 ```java
 public class CustomExporterFilter implements RecordFilter {
@@ -188,7 +190,7 @@ public class CustomExporterFilter implements RecordFilter {
 }
 ```
 
-You can then set this filter in `Exporter#configure` method of your custom exporter:
+You can then set this filter in the `Exporter#configure` method of your custom exporter:
 
 ```java
 public class CustomExporter implements Exporter {
@@ -220,19 +222,18 @@ public class CustomExporter implements Exporter {
 ```
 
 :::info
-Please note that after handling the record, you must acknowledge the position by calling `controller.updateLastExportedRecordPosition(record.getPosition())`.
-If the position is not acknowledged, then the log compaction does not happen resulting in out of disk space.
+After handling the record, you must acknowledge the position by calling `controller.updateLastExportedRecordPosition(record.getPosition())`. If the position is not acknowledged, the log compaction does not occur and results in out of disk space.
 :::
 
 :::info
-Filters are applied as an AND condition, meaning that all conditions must be met for a record to be accepted by the exporter.
+Filters are applied as an AND condition, meaning all conditions must be met for a record to be accepted by the exporter.
 :::
 
-### Listen to Expired Messages With A Custom Filter
+### Listen to expired messages with a custom filter
 
-You can also create a custom filter to listen to expired messages.
-This can be useful if you want to take specific actions on messages that have expired, such as logging them or re-publishing them.
-For example, if you want to allow exporting only message events with `EXPIRED` intent, you can follow the steps below:
+You can also create a custom filter to listen to expired messages. This can be useful if you want to take specific actions on messages that have expired, such as logging them or re-publishing them.
+
+For example, if you want to allow exporting only message events with `EXPIRED` intent, follow the steps below:
 
 1. Implement the `RecordFilter` interface:
 
@@ -260,10 +261,12 @@ public class MessageExpiredExporterFilter implements RecordFilter {
 }
 ```
 
-Please note that this filter will only accept records of type `EVENT`, value type `MESSAGE`, and intent `EXPIRED`.
-If you want to accept more record types, value types and intents, you can modify the `acceptType`, `acceptValue` and `acceptIntent` methods accordingly.
+:::note
+This filter will only accept records of type `EVENT`, value type `MESSAGE`, and intent `EXPIRED`.
+If you want to accept more record types, value types, and intents, modify the `acceptType`, `acceptValue`, and `acceptIntent` methods accordingly.
+:::
 
-2. Set `MessageExpiredExporterFilter` filter in `Exporter#configure` method of your custom exporter.
+2. Set the `MessageExpiredExporterFilter` filter in the `Exporter#configure` method of your custom exporter:
 
 ```java
 public class MessageExpiredExporter implements Exporter {
@@ -295,14 +298,12 @@ public class MessageExpiredExporter implements Exporter {
 ```
 
 :::info
-Please be aware that messages with zero TTL will also be exported with this filter.
-If a message with zero TTL is republished after expiration, it will immediately expire again, causing the exporter to receive it again.
-This creates an infinite loop of republishing and expiring the same message, potentially leading to the engine being blocked from processing other records.
-To avoid this, it is highly recommended to check the message TTL before republishing it.
+Messages with zero TTL will also be exported with this filter. If a message with zero TTL is republished after expiration, it will immediately expire again, causing the exporter to receive it again.
+
+This creates an infinite loop of republishing and expiring the same message, potentially leading to the engine blocked from processing other records. To avoid this, check the message TTL before republishing it.
 :::
 
-3. (Optional) By default, the exporter will not receive the full message body, only the message key with empty message body will be exported.
-   If you want to receive the full message body with the expired message, you can enable it via YAML configuration or environment variable.
+3. (Optional) By default, the exporter will not receive the full message body, only the message key with empty message body will be exported. To receive the full message body with the expired message, enable it via YAML configuration or environment variable.
 
 <Tabs groupId="featured" defaultValue="envVars" queryString values={
 [
@@ -330,10 +331,10 @@ zeebe:
 </Tabs>
 
 :::info
-It is important to note that enabling the full message body for expired messages can have an impact on the performance of expiring messages.
-Enabling this feature flag means that every deleted message will be appended with the full message body to Zeebe Engine's record stream.
-Because each expired message now carries its entire message payload, the “write buffer” used by the expiration checker will fill up faster.
-That means the expiration checker needs more time (i.e. more roundtrips) to expire the same number of messages.
-Potentially, this may result in a growing state of the messages waiting to be expired.
-See [message ttl checker configuration](https://github.com/camunda/camunda/blob/main/dist/src/main/config/broker.yaml.template#L1223) to have more control over the checker's behavior.
+Enabling the full message body for expired messages can have an impact on the performance of expiring messages. Enabling this feature flag means every deleted message will be appended with the full message body to the Zeebe engine's record stream.
+
+Because each expired message now carries its entire message payload, the “write buffer” used by the expiration checker will fill up faster. This means the expiration checker needs more time (or more roundtrips) to expire the same number of messages.
+
+This may result in a growing state of the messages waiting to be expired.
+See [message TTL checker configuration](https://github.com/camunda/camunda/blob/main/dist/src/main/config/broker.yaml.template#L1223) to have more control over the checker's behavior.
 :::
