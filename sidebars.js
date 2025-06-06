@@ -515,7 +515,15 @@ module.exports = {
       ],
     },
     {
-      Zeebe: [
+      type: "category",
+      label: "Orchestration cluster",
+      link: {
+        type: "doc",
+        id: "components/orchestration-cluster",
+      },
+      items: [
+        {
+          Zeebe: [
         "components/zeebe/zeebe-overview",
         {
           "Technical concepts": [
@@ -562,6 +570,22 @@ module.exports = {
           ],
         },
       ],
+        },
+        {
+          type: "category",
+          label: "Identity",
+          link: {
+            type: "doc",
+            id: "components/identity/identity-introduction",
+          },
+          items: [
+            "components/identity/authorization",
+            "components/identity/user",
+          ],
+        }
+      ],
+    },
+    {
       Optimize: [
         "components/optimize/what-is-optimize",
 
@@ -636,19 +660,6 @@ module.exports = {
             },
           ],
         },
-      ],
-    },
-    {
-      type: "category",
-      label: "Identity",
-      link: {
-        type: "doc",
-        id: "components/identity/identity-introduction",
-      },
-      items: [
-        "components/identity/identity-introduction",
-        "components/identity/authorization",
-        "components/identity/user",
       ],
     },
     {
