@@ -20,4 +20,4 @@ Starter plan users have one **development cluster**, with free execution for dev
 Deployment and execution of models (process instances, decision instances, and task users) is provided at no cost.
 Additional clusters can be purchased through your [billing reservations](/components/console/manage-plan/update-billing-reservations.md).
 
-Visit the [clusters page](/components/concepts/clusters.md) to learn more about the differences between **development clusters** and **production clusters**.
+Visit the [clusters page](/components/concepts/clusters.md) to learn more about the differences between **development clusters** and **production clusters**. Additionally, review the related [Camunda Academy course](https://academy.camunda.com/c8-h2-create-cluster) on creating clusters.
