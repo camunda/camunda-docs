@@ -1263,20 +1263,16 @@ module.exports = {
     },
     {
       Components: [
-        {
-          Console: [
-            "self-managed/console-deployment/overview",
-            "self-managed/console-deployment/installation",
-            {
-              Configuration: [
-                "self-managed/console-deployment/configuration/configuration",
-                "self-managed/console-deployment/configuration/ssl",
-              ],
+                    {
+            type: "category",
+            label: "Orchestration cluster",
+            link: {
+              type: "doc",
+              id: "self-managed/orchestration-cluster/sm-orchestration-cluster"
             },
-            "self-managed/console-deployment/usage-metrics",
-            "self-managed/console-deployment/telemetry",
-          ],
-          Zeebe: [
+            items: [
+              {
+              Zeebe: [
             "self-managed/zeebe-deployment/zeebe-installation",
             {
               "Zeebe Gateway": [
@@ -1356,50 +1352,15 @@ module.exports = {
             "self-managed/tasklist-deployment/usage-metrics",
             "self-managed/tasklist-deployment/user-task-access-restrictions",
           ],
-          Connectors: [
-            "self-managed/connectors-deployment/install-and-start",
-            "self-managed/connectors-deployment/connectors-configuration",
+          Identity: [
+            "self-managed/orchestration-identity/orchestration-identity",
           ],
-
-          Optimize: [
-            "self-managed/optimize-deployment/install-and-start",
-            {
-              Configuration: [
-                "self-managed/optimize-deployment/configuration/getting-started",
-                {
-                  "System configuration": [
-                    "self-managed/optimize-deployment/configuration/system-configuration",
-                    "self-managed/optimize-deployment/configuration/system-configuration-platform-8",
-                  ],
-                },
-                "self-managed/optimize-deployment/configuration/logging",
-                "self-managed/optimize-deployment/configuration/security-instructions",
-                "self-managed/optimize-deployment/configuration/shared-elasticsearch-cluster",
-                "self-managed/optimize-deployment/configuration/history-cleanup",
-                "self-managed/optimize-deployment/configuration/localization",
-                "self-managed/optimize-deployment/configuration/object-variables",
-                "self-managed/optimize-deployment/configuration/multi-tenancy",
-              ],
-            },
-            {
-              "Migration & update": [
-                "self-managed/optimize-deployment/migration-update/camunda-8/instructions",
-                "self-managed/optimize-deployment/migration-update/camunda-8/8.6-to-8.7",
-                "self-managed/optimize-deployment/migration-update/camunda-8/3.13_8.5-to-8.6",
-                "self-managed/optimize-deployment/migration-update/camunda-8/3.12_8.4-to-3.13_8.5",
-                "self-managed/optimize-deployment/migration-update/camunda-8/3.11_8.3-to-3.12_8.4",
-                "self-managed/optimize-deployment/migration-update/camunda-8/3.10-to-3.11_8.3",
-                "self-managed/optimize-deployment/migration-update/camunda-8/3.9-to-3.10",
-                "self-managed/optimize-deployment/migration-update/camunda-8/3.9-preview-1-to-3.9",
-                "self-managed/optimize-deployment/migration-update/camunda-8/3.8-to-3.9-preview-1",
-                "self-managed/optimize-deployment/migration-update/camunda-8/3.7-to-3.8",
-              ],
-            },
-          ],
-        },
-        {
+              }
+            ]
+          },
+          {
           type: "category",
-          label: "Identity",
+          label: "Management Identity",
           link: {
             type: "doc",
             id: "self-managed/identity/what-is-identity",
@@ -1467,6 +1428,61 @@ module.exports = {
             },
           ],
         },
+        {
+          Console: [
+            "self-managed/console-deployment/overview",
+            "self-managed/console-deployment/installation",
+            {
+              Configuration: [
+                "self-managed/console-deployment/configuration/configuration",
+                "self-managed/console-deployment/configuration/ssl",
+              ],
+            },
+            "self-managed/console-deployment/usage-metrics",
+            "self-managed/console-deployment/telemetry",
+          ],        
+          Connectors: [
+            "self-managed/connectors-deployment/install-and-start",
+            "self-managed/connectors-deployment/connectors-configuration",
+          ],
+
+          Optimize: [
+            "self-managed/optimize-deployment/install-and-start",
+            {
+              Configuration: [
+                "self-managed/optimize-deployment/configuration/getting-started",
+                {
+                  "System configuration": [
+                    "self-managed/optimize-deployment/configuration/system-configuration",
+                    "self-managed/optimize-deployment/configuration/system-configuration-platform-8",
+                  ],
+                },
+                "self-managed/optimize-deployment/configuration/logging",
+                "self-managed/optimize-deployment/configuration/security-instructions",
+                "self-managed/optimize-deployment/configuration/shared-elasticsearch-cluster",
+                "self-managed/optimize-deployment/configuration/history-cleanup",
+                "self-managed/optimize-deployment/configuration/localization",
+                "self-managed/optimize-deployment/configuration/object-variables",
+                "self-managed/optimize-deployment/configuration/multi-tenancy",
+              ],
+            },
+            {
+              "Migration & update": [
+                "self-managed/optimize-deployment/migration-update/camunda-8/instructions",
+                "self-managed/optimize-deployment/migration-update/camunda-8/8.6-to-8.7",
+                "self-managed/optimize-deployment/migration-update/camunda-8/3.13_8.5-to-8.6",
+                "self-managed/optimize-deployment/migration-update/camunda-8/3.12_8.4-to-3.13_8.5",
+                "self-managed/optimize-deployment/migration-update/camunda-8/3.11_8.3-to-3.12_8.4",
+                "self-managed/optimize-deployment/migration-update/camunda-8/3.10-to-3.11_8.3",
+                "self-managed/optimize-deployment/migration-update/camunda-8/3.9-to-3.10",
+                "self-managed/optimize-deployment/migration-update/camunda-8/3.9-preview-1-to-3.9",
+                "self-managed/optimize-deployment/migration-update/camunda-8/3.8-to-3.9-preview-1",
+                "self-managed/optimize-deployment/migration-update/camunda-8/3.7-to-3.8",
+              ],
+            },
+          ],
+        },
+        
         {
           Modeler: [
             {
