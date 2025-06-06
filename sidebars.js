@@ -741,6 +741,7 @@ module.exports = {
                 "components/early-access/alpha/bpmn-copilot/bpmn-copilot",
               ],
             },
+            "components/early-access/alpha/feel-copilot/feel-copilot",
           ],
         },
       ],
@@ -1113,7 +1114,7 @@ module.exports = {
             },
             {
               type: "category",
-              label: "Amazon MarketPlace",
+              label: "Amazon Marketplace",
               link: {
                 type: "doc",
                 id: "self-managed/setup/deploy/amazon/aws-marketplace",
