@@ -50,7 +50,7 @@ void shouldCompleteJob() {
     // given: mock job worker for the job type "send-email"
     // 1) Complete jobs without variables
     rocessTestContext.mockJobWorker("send-email").thenComplete();
-    
+
     // 2) Complete jobs with variables
     final Map<String, Object> variables = Map.of(
         "emailSent", true,
@@ -102,7 +102,7 @@ void shouldUseCustomHandler() {
                 final Map<String, Object> variables = job.getVariablesAsMap();
                 final double orderAmount = (double) variables.get("orderAmount");
                 final double discount = orderAmount > 100 ? 0.1 : 0.0;
-    
+
                 jobClient.newCompleteCommand(job).variable("discount", discount).send().join();
             });
 

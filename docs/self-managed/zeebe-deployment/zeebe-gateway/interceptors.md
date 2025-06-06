@@ -87,7 +87,7 @@ dispatch to the broker.
 
 :::note
 
-Camunda 8 relies on [Identity](../../identity/user-guide/tenants/managing-tenants.md) for tenant management.
+Camunda 8 relies on [Identity](/self-managed/identity/managing-tenants.md) for tenant management.
 Tenant-providing interceptors are only compatible with Zeebe, and should only be used when Zeebe is used as a standalone
 application.
 
@@ -100,7 +100,7 @@ multiple distinct users/clients.
 
 To ensure that clients can only access tenants they are authorized for, client requests
 need to provide a list of the tenants they are authorized for. If using the full Camunda 8 stack, this
-functionality is already provided by [Identity](../../identity/user-guide/tenants/managing-tenants.md).
+functionality is already provided by [Identity](/self-managed/identity/managing-tenants.md).
 
 However, if you decide to use Zeebe as a standalone product with multi-tenancy enabled, you need to
 provide your own component for managing tenants. You can integrate your tenant-managing component with Zeebe
