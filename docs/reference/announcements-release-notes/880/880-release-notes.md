@@ -83,12 +83,6 @@ With these updates, developers can subscribe to the expired messages through a c
 
 <!-- https://github.com/camunda/product-hub/issues/2796 -->
 
-### Self-Managed: Backup & restore guide
-
-You can now follow a dedicated guide on what you need to consider regarding backups with Camunda 8. It includes how to set it up and what you need to consider for external dependencies on a high level.
-
-<!-- https://github.com/camunda/product-hub/issues/2299 -->
-
 ## 8.8.0-alpha4
 
 | Release date | Changelog(s)                                                                                                                                                                               | Blog                                                                             |
