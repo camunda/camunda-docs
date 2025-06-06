@@ -17,12 +17,13 @@ You can configure the connector runtime environment in the following ways:
 Starting from version 8.8, the connector runtime no longer requires a connection to Operate. The connector runtime now only depends on the Camunda 8 REST API and Zeebe.
 :::
 
-To connect to **Zeebe** and the **Camunda 8 REST API**, the connector runtime uses the [Camunda Spring SDK](/apis-tools/spring-zeebe-sdk/getting-started.md). Any configuration that can be set in the Spring Zeebe SDK can also be set in the connector runtime environment.
+To connect to **Zeebe** and the **Camunda 8 REST API**, the connector runtime uses the [Camunda Spring Boot SDK](/apis-tools/spring-zeebe-sdk/getting-started.md). Any configuration that can be set in the Camunda Spring Boot SDK can also be set in the connector runtime environment.
 
-Below are some of the most common configuration options for the connector runtime. Refer to the [Camunda Spring SDK](/apis-tools/spring-zeebe-sdk/configuration.md) for a full list of configuration options.
+Below are some of the most common configuration options for the connector runtime. Refer to the [Camunda Spring Boot SDK](/apis-tools/spring-zeebe-sdk/configuration.md#zeebe) for a full list of configuration options.
+
 
 :::note
-This guide provides configuration properties in the form of environment variables, while the Camunda Spring SDK documentation uses Java configuration properties. The two formats are interchangeable, and you can use the Java configuration properties in the connector runtime environment as well.
+This guide provides configuration properties in the form of environment variables, while the Camunda Spring Boot SDK documentation uses Java configuration properties. The two formats are interchangeable, and you can use the Java configuration properties in the connector runtime environment as well.
 
 For example, the Java configuration property `camunda.client.grpc-address` can be set in the connector runtime environment as an environment variable called `CAMUNDA_CLIENT_GRPCADDRESS`.
 :::
@@ -129,7 +130,7 @@ camunda:
       audience: zeebe-api
 ```
 
-See the [Camunda Spring SDK documentation](../../../apis-tools/spring-zeebe-sdk/getting-started#self-managed) for more information on authentication properties.
+See the [Camunda Spring Boot SDK documentation](../../../apis-tools/spring-zeebe-sdk/getting-started#self-managed) for more information on authentication properties.
 
 </TabItem>
 </Tabs>

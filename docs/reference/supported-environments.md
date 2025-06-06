@@ -39,9 +39,9 @@ For example, 1.2+ means support for the minor version 2, and any higher minors (
 ## Clients
 
 - **Zeebe Java Client**: OpenJDK 8+
-- **Spring Zeebe SDK**: OpenJDK 17+
+- **Camunda Spring Boot SDK**: OpenJDK 17+
 - **Connector SDK**: OpenJDK 17+
-- **Spring SDK**: Spring Boot 3.4.x (for the exact version, check the [version matrix](/apis-tools/spring-zeebe-sdk/getting-started.md#version-compatibility).)
+- **Camunda Spring Boot SDK**: Spring Boot 3.4.x (for the exact version, check the [version matrix](/apis-tools/spring-zeebe-sdk/getting-started.md#version-compatibility).)
 - **Helm CLI**: 3.14.x (for the exact version, check the [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).)
 
 ## Camunda 8 Self-Managed
@@ -57,7 +57,7 @@ The following are tested and supported deployment options for Kubernetes, Docker
 - [Stock Kubernetes](/self-managed/setup/install.md)
 - [Cloud service providers](/self-managed/setup/install.md) [recommended]
   - [Amazon EKS](/self-managed/setup/deploy/amazon/amazon-eks/amazon-eks.md)
-  - [Microsoft AKS](/self-managed/setup/deploy/azure/microsoft-aks.md)
+  - [Microsoft AKS](/self-managed/setup/deploy/azure/microsoft-aks/microsoft-aks.md)
   - [Google GKE](/self-managed/setup/deploy/gcp/google-gke.md)
 - [Red Hat OpenShift](/self-managed/setup/deploy/openshift/redhat-openshift.md)
 - [Docker](/self-managed/setup/deploy/other/docker.md) (`linux/amd64`)
