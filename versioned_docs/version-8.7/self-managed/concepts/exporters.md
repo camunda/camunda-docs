@@ -294,6 +294,13 @@ public class MessageExpiredExporter implements Exporter {
 }
 ```
 
+:::info
+Please be aware that messages with zero TTL will also be exported with this filter.
+If a message with zero TTL is republished after expiration, it will immediately expire again, causing the exporter to receive it again.
+This creates an infinite loop of republishing and expiring the same message, potentially leading to the engine being blocked from processing other records.
+To avoid this, it is highly recommended to check the message TTL before republishing it.
+:::
+
 3. (Optional) By default, the exporter will not receive the full message body, only the message key with empty message body will be exported.
    If you want to receive the full message body with the expired message, you can enable it via YAML configuration or environment variable.
 
@@ -322,7 +329,7 @@ zeebe:
 </TabItem>
 </Tabs>
 
-:::note
+:::info
 It is important to note that enabling the full message body for expired messages can have an impact on the performance of expiring messages.
 Enabling this feature flag means that every deleted message will be appended with the full message body to Zeebe Engine's record stream.
 Because each expired message now carries its entire message payload, the “write buffer” used by the expiration checker will fill up faster.
