@@ -53,12 +53,6 @@ operate:
   env:
     - name: CAMUNDA_OPERATE_ELASTICSEARCH_INDEXPREFIX
       value: custom-operate
-  migration:
-    env:
-      - name: CAMUNDA_OPERATE_ELASTICSEARCH_INDEXPREFIX
-        value: custom-operate
-      - name: CAMUNDA_OPERATE_ZEEBEELASTICSEARCH_PREFIX
-        value: custom-zeebe
 
 tasklist:
   env:
@@ -69,10 +63,6 @@ optimize:
   env:
     - name: CAMUNDA_OPTIMIZE_ELASTICSEARCH_SETTINGS_INDEX_PREFIX
       value: custom-optimize
-  migration:
-    env:
-      - name: CAMUNDA_OPTIMIZE_ZEEBE_NAME
-        value: custom-zeebe
 ```
 
 </TabItem>
