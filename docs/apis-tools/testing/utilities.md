@@ -170,13 +170,13 @@ void shouldMockDmnDecision() {
 
 ## Complete jobs
 
-You can complete an active job to simulate the behavior of a job worker without invoking the actual worker. 
+You can complete an active job to simulate the behavior of a job worker without invoking the actual worker.
 The command waits for the first job with the given job type and completes it. If no job exists, the command fails.
 
 When to use it:
 
 - Test the process with full control over the job completion
-- Complete a repeated task with different outcomes 
+- Complete a repeated task with different outcomes
 
 ```java
 @Test
@@ -230,10 +230,10 @@ void shouldThrowBpmnErrorFromJob() {
 
 ## Complete user tasks
 
-You can complete a user task to simulate the user behavior in Tasklist. The command waits for the first user task and completes it. 
+You can complete a user task to simulate the user behavior in Tasklist. The command waits for the first user task and completes it.
 If no user task exists, the command fails.
 
-You can identify the user task by name or using a [UserTaskSelector](assertions.md#user-task-assertions). 
+You can identify the user task by name or using a [UserTaskSelector](assertions.md#user-task-assertions).
 
 When to use it:
 
@@ -243,8 +243,8 @@ When to use it:
 @Test
 void shouldCompleteUserTask() {
     // given: a process instance is waiting at a user task
-    
-    // when: complete the user task 
+
+    // when: complete the user task
     // 1) With name "Approve Request"
     final Map<String, Object> variables = Map.of(
         "approved", true,
