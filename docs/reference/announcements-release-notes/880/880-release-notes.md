@@ -27,7 +27,7 @@ These release notes identify the new features included in 8.8, including [alpha 
 
 ### AI Agent Connector <span class="badge badge--medium" title="This feature affects Connectors">Connectors</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Dektop Modeler</span>
 
-The [AI Agent connector](https://docs.camunda.io/docs/8.8/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent/) enables AI agents to integrate with an LLM to provide interaction/reasoning capabilities. This connector is designed for use with an ad-hoc sub-process in a feedback loop, providing automated user interaction and tool selection.
+The [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) enables AI agents to integrate with an LLM to provide interaction/reasoning capabilities. This connector is designed for use with an ad-hoc sub-process in a feedback loop, providing automated user interaction and tool selection.
 
 It provides:
 
@@ -77,9 +77,9 @@ With these updates, developers can subscribe to the expired messages through a c
 
 <!-- https://github.com/camunda/product-hub/issues/2796 -->
 
-### Vector database connector
+### Vector database connector <span class="badge badge--medium" title="This feature affects Connectors">Connectors</span>
 
-The [vector database connector](https://docs.camunda.io/docs/8.8/components/connectors/out-of-the-box-connectors/embeddings-vector-db/) allows embedding, storing, and retrieving Large Language Model (LLM) embeddings. This enables building AI-based solutions for your organizations, such as context document search, long-term LLM memory, and agentic AI interaction in combination with the AI Agent connector (RAG).
+The [vector database connector](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md) allows embedding, storing, and retrieving Large Language Model (LLM) embeddings. This enables building AI-based solutions for your organizations, such as context document search, long-term LLM memory, and agentic AI interaction in combination with the AI Agent connector (RAG).
 
 <!-- https://github.com/camunda/product-hub/issues/2744 -->
 
