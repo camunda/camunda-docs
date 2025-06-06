@@ -167,3 +167,95 @@ void shouldMockDmnDecision() {
     // then: verify that the process instance completed the business rule task
 }
 ```
+
+## Complete jobs
+
+You can complete an active job to simulate the behavior of a job worker without invoking the actual worker.
+The command waits for the first job with the given job type and completes it. If no job exists, the command fails.
+
+When to use it:
+
+- Test the process with full control over the job completion
+- Complete a repeated task with different outcomes
+
+```java
+@Test
+void shouldCompleteJob() {
+    // given: a process instance is waiting at a task
+    
+    // when: complete the job with type "send-notification"
+    // 1) Without variables
+    processTestContext.completeJob("send-notification");
+    
+    // 2) With variables
+    final Map<String, Object> variables = Map.of(
+        "notification-sent", true,
+        "recipients", List.of("user1@example.com", "user2@example.com")
+    );
+    processTestContext.completeJob("send-notification", variables);
+    
+    // then: verify that the process instance completed the task
+}
+```
+
+## Throw BPMN errors from jobs
+
+You can throw a BPMN error from an active job to simulate the behavior of a job worker without invoking the actual worker.
+The command waits for the first job with the given job type and throw the BPMN error. If no job exists, the command fails.
+
+When to use it:
+
+- Test the error paths in the process
+- Simulate different behaviors of a repeated task (success, BPMN error)
+
+```java
+@Test
+void shouldThrowBpmnErrorFromJob() {
+    // given: a process instance is waiting at a task
+    
+    // when: throw a BPMN error for the job with type "validate-data"
+    // 1) With error code "VALIDATION_FAILED" and no variables
+    processTestContext.throwBpmnErrorFromJob("validate-data", "VALIDATION_FAILED");
+    
+    // 2) With error code "VALIDATION_FAILED" and variables
+    final Map<String, Object> variables = Map.of(
+        "error-message", "Invalid customer data",
+        "error-code", "ERR_VALIDATION_001"
+    );
+    processTestContext.throwBpmnErrorFromJob("validate-data", "VALIDATION_FAILED", variables);
+    
+    // then: verify that the process instance handled the error
+}
+```
+
+## Complete user tasks
+
+You can complete a user task to simulate the user behavior in Tasklist. The command waits for the first user task and completes it.
+If no user task exists, the command fails.
+
+You can identify the user task by name or using a [UserTaskSelector](assertions.md#user-task-assertions).
+
+When to use it:
+
+- Test a process with user tasks
+
+```java
+@Test
+void shouldCompleteUserTask() {
+    // given: a process instance is waiting at a user task
+
+    // when: complete the user task
+    // 1) With name "Approve Request"
+    final Map<String, Object> variables = Map.of(
+        "approved", true,
+        "comment", "Request approved by manager",
+        "approvedAmount", 5000.00
+    );
+    processTestContext.completeUserTask("Approve Request", variables);
+    
+    // 2) With selector by element id "task_approveRequest"
+    processTestContext.completeUserTask(byElementId("task_approveRequest"), variables);
+    
+    // then: verify that the process instance is completed
+}
+```
