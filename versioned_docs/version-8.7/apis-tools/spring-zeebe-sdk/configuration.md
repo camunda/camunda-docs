@@ -303,7 +303,7 @@ For a full set of configuration options, see [CamundaClientConfigurationProperti
 
 Your authentication with the cluster can be controlled in several ways.
 
-:::not
+:::note
 If the creation of the credentials provider fails, you will a log message indicating this at `WARN` level. The SDK will then use a Noop credentials provider.
 :::
 
