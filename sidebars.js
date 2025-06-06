@@ -741,6 +741,7 @@ module.exports = {
                 "components/early-access/alpha/bpmn-copilot/bpmn-copilot",
               ],
             },
+            "components/early-access/alpha/feel-copilot/feel-copilot",
           ],
         },
       ],
