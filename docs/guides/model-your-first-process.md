@@ -60,6 +60,8 @@ You can share read-only models with teammates and other stakeholders via a link.
 
 ## Collaborate on a process
 
+<span class="badge badge--cloud">Camunda 8 SaaS only</span>
+
 To invite collaborators to your process, ensure they have the proper permissions and roles:
 
 1. Select the **Open Organizations** icon in the top right of the navigation bar and select **Manage** next to your organization name.
