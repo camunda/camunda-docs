@@ -1,5 +1,6 @@
 ---
 id: orchestration-identity
-title: "Identity"
+title: "Orchestration cluster Identity"
+label: "Identity"
 description: ""
 ---

@@ -1352,10 +1352,26 @@ module.exports = {
             "self-managed/tasklist-deployment/usage-metrics",
             "self-managed/tasklist-deployment/user-task-access-restrictions",
           ],
-          Identity: [
-            "self-managed/orchestration-identity/orchestration-identity",
-          ],
-              }
+              },
+              {
+                type: "category",
+                label: "Identity",
+                link: {
+                  type: "doc",
+                  id: "self-managed/orchestration-identity/orchestration-identity",
+                },
+                items: [
+                  "self-managed/orchestration-identity/installation",
+            "self-managed/orchestration-identity/configuration",
+                {
+                  "Mapping rules": [
+                    "self-managed/orchestration-identity/mapping-rules/managing-mapping-rules",
+                    "self-managed/orchestration-identity/mapping-rules/mapping-rule-authorizations",
+                    "self-managed/orchestration-identity/mapping-rules/assign-mappings-to-tenants",
+                  ],
+                },
+                ],
+              },
             ]
           },
           {
