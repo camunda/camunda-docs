@@ -436,6 +436,109 @@ Asserts that the user task has the expected candidate groups.
 assertThat(byTaskName("User Task")).hasCandidateGroups("groupA", "groupB", "groupC");
 ```
 
+## Decision assertions
+
+You can verify the decision evaluation state and other properties using `CamundaAssert.assertThat()`. There are two types of Decisions:
+
+1. `DecisionInstance`s represent evaluated decisions, both as part of a running BPMN process or a decision evaluated via Camunda API.
+2. `EvaluateDecisionResponse`s are decisions you evaluated via Camunda API. After being evaluated they're also available as queryable as a DecisionInstance.
+
+When asserting a decision response, it's important to know that internally a response is turned into a DecisionInstance query. Should the decision evaluation have failed, no DecisionInstance will be found. Furthermore, if the corresponding DND encapsulates multiple decision tables, you can query and assert them individually by using the `byId` or `byName` selectors.
+
+### DecisionInstance selectors
+
+Use a predefined `DecisionSelector` from `io.camunda.process.test.api.assertions.DecisionSelectors` or a custom implemention to identify the decision instance:
+
+```java
+// by decision ID
+assertThat(byId("decision-id")).isEvaluated();
+
+// by decision name
+assertThat(byName("Decision Name")).isEvaluated();
+
+// you may optionally specify the process instance key:
+assertThat(byId("decision-id", processInstanceKey)).isEvaluated();
+assertThat(byName("Decision Name", processInstanceKey)).isEvaluated();
+
+// for most tests it's enough to query solely by the process instance key
+assertThat(byProcessInstanceKey(processInstanceKey)).isEvaluated();
+
+// by EvaluateResponse
+final EvaluateDecisionResponse response = client
+        .newEvaluateDecisionCommand()
+        .decisionId(decisionId)
+        .variables(variables)
+        .send()
+        .join();
+assertThat(response).isEvaluated();
+
+// custom selector implementation for DecisionInstances
+assertThat(decisionInstance -> { .. }).isEvaluated();
+```
+
+### isEvaluated
+
+Asserts that the decision instance is evaluated. The assertion fails if the evaluation failed and outputs the evaluation failure message.
+
+```java
+assertThat(DecisionSelectors.byId("decision-id")).isEvaluated();
+```
+
+### hasOutput
+
+Asserts that the decision instance is evaluated with the expected output. The verification fails if the decision evaluation failed or the output does not match.
+
+```java
+// With a simple value
+assertThat(DecisionSelectors.byId("simple-decision")).hasOutput("output");
+
+// With a map of values
+Map<String, Object> expectedOutput = new HashMap<>();
+expectedOutput.put("jedi_or_sith", "jedi");
+expectedOutput.put("force_user", "Luke Skywalker");
+assertThat(DecisionSelectors.byId("jedi-or-sith")).hasOutput(expectedOutput);
+
+// With a list of values
+List<Object> expectedOutput = new ArrayList<>();
+expectedOutput.add("output");
+expectedOutput.add(100);
+assertThat(DecisionSelectors.byId("decision-id")).hasOutput(expectedOutput);
+```
+
+### hasMatchedRules
+
+Asserts that the decision has matched the given rule indices. The evaluation fails if the decision evaluation failed or at least one of the expected matched rules didn't match.
+
+The assertion will pass if the expected indexes are a subset of the total matches, e.g. `hasMatchedRules(1, 2)` will pass if rules [1, 2, 3] matched.
+
+```java
+// Single rule
+assertThat(DecisionSelectors.byId("decision-id")).hasMatchedRules(1);
+
+// Multiple rules
+assertThat(DecisionSelectors.byId("decision-id")).hasMatchedRules(1, 3);
+```
+
+### hasNotMatchedRules
+
+Asserts that the decision has not matched the given rule indices. The assertion will fail if the decision evaluation has failed or at least one of the rules indexes has matched.
+
+```java
+// Single rule
+assertThat(DecisionSelectors.byId("decision-id")).hasNotMatchedRules(2);
+
+// Multiple rules
+assertThat(DecisionSelectors.byId("decision-id")).hasNotMatchedRules(2, 4);
+```
+
+### hasNoMatchedRules
+
+Asserts that the decision matched no rules. The assertion will fail if the decision evaluation has failed or at least one rule matched.
+
+```java
+assertThat(DecisionSelectors.byId("decision-id")).hasNoMatchedRules();
+```
+
 ## Custom assertions
 
 You can build your own assertions similar to the assertions from CPT.
