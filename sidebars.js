@@ -1263,106 +1263,106 @@ module.exports = {
     },
     {
       Components: [
-                    {
-            type: "category",
-            label: "Orchestration cluster",
-            link: {
-              type: "doc",
-              id: "self-managed/orchestration-cluster/sm-orchestration-cluster"
-            },
-            items: [
-              {
+        {
+          type: "category",
+          label: "Orchestration cluster",
+          link: {
+            type: "doc",
+            id: "self-managed/orchestration-cluster/sm-orchestration-cluster",
+          },
+          items: [
+            {
               Zeebe: [
-            "self-managed/zeebe-deployment/zeebe-installation",
-            {
-              "Zeebe Gateway": [
-                "self-managed/zeebe-deployment/zeebe-gateway/overview",
-                "self-managed/zeebe-deployment/zeebe-gateway/interceptors",
-                "self-managed/zeebe-deployment/zeebe-gateway/filters",
-                "self-managed/zeebe-deployment/zeebe-gateway/job-streaming",
+                "self-managed/zeebe-deployment/zeebe-installation",
+                {
+                  "Zeebe Gateway": [
+                    "self-managed/zeebe-deployment/zeebe-gateway/overview",
+                    "self-managed/zeebe-deployment/zeebe-gateway/interceptors",
+                    "self-managed/zeebe-deployment/zeebe-gateway/filters",
+                    "self-managed/zeebe-deployment/zeebe-gateway/job-streaming",
+                  ],
+                },
+                {
+                  Configuration: [
+                    "self-managed/zeebe-deployment/configuration/configuration",
+                    "self-managed/zeebe-deployment/configuration/logging",
+                    "self-managed/zeebe-deployment/configuration/gateway-health-probes",
+                    "self-managed/zeebe-deployment/configuration/environment-variables",
+                    "self-managed/zeebe-deployment/configuration/fixed-partitioning",
+                    "self-managed/zeebe-deployment/configuration/priority-election",
+                    "self-managed/zeebe-deployment/configuration/broker-config",
+                    "self-managed/zeebe-deployment/configuration/gateway-config",
+                  ],
+                },
+                {
+                  Security: [
+                    "self-managed/zeebe-deployment/security/security",
+                    "self-managed/zeebe-deployment/security/client-authorization",
+                    "self-managed/zeebe-deployment/security/secure-client-communication",
+                    "self-managed/zeebe-deployment/security/secure-cluster-communication",
+                  ],
+                },
+                {
+                  Operation: [
+                    "self-managed/zeebe-deployment/operations/zeebe-in-production",
+                    "self-managed/zeebe-deployment/operations/resource-planning",
+                    "self-managed/zeebe-deployment/operations/network-ports",
+                    "self-managed/zeebe-deployment/operations/setting-up-a-cluster",
+                    "self-managed/zeebe-deployment/operations/health",
+                    "self-managed/zeebe-deployment/operations/backpressure",
+                    "self-managed/zeebe-deployment/operations/disk-space",
+                    "self-managed/zeebe-deployment/operations/update-zeebe",
+                    "self-managed/zeebe-deployment/operations/rebalancing",
+                    "self-managed/zeebe-deployment/operations/management-api",
+                    "self-managed/zeebe-deployment/operations/backups",
+                    "self-managed/zeebe-deployment/operations/cluster-scaling",
+                  ],
+                },
+                {
+                  type: "category",
+                  label: "Exporters",
+                  link: {
+                    type: "doc",
+                    id: "self-managed/zeebe-deployment/exporters/exporters",
+                  },
+                  items: [
+                    "self-managed/zeebe-deployment/exporters/install-zeebe-exporters",
+                    "self-managed/zeebe-deployment/exporters/camunda-exporter",
+                    "self-managed/zeebe-deployment/exporters/elasticsearch-exporter",
+                    "self-managed/zeebe-deployment/exporters/opensearch-exporter",
+                  ],
+                },
               ],
-            },
-            {
-              Configuration: [
-                "self-managed/zeebe-deployment/configuration/configuration",
-                "self-managed/zeebe-deployment/configuration/logging",
-                "self-managed/zeebe-deployment/configuration/gateway-health-probes",
-                "self-managed/zeebe-deployment/configuration/environment-variables",
-                "self-managed/zeebe-deployment/configuration/fixed-partitioning",
-                "self-managed/zeebe-deployment/configuration/priority-election",
-                "self-managed/zeebe-deployment/configuration/broker-config",
-                "self-managed/zeebe-deployment/configuration/gateway-config",
+              Operate: [
+                "self-managed/operate-deployment/install-and-start",
+                "self-managed/operate-deployment/operate-configuration",
+                "self-managed/operate-deployment/data-retention",
+                "self-managed/operate-deployment/schema-and-migration",
+                "self-managed/operate-deployment/importer-and-archiver",
+                "self-managed/operate-deployment/operate-authentication",
+                "self-managed/operate-deployment/usage-metrics",
               ],
-            },
-            {
-              Security: [
-                "self-managed/zeebe-deployment/security/security",
-                "self-managed/zeebe-deployment/security/client-authorization",
-                "self-managed/zeebe-deployment/security/secure-client-communication",
-                "self-managed/zeebe-deployment/security/secure-cluster-communication",
-              ],
-            },
-            {
-              Operation: [
-                "self-managed/zeebe-deployment/operations/zeebe-in-production",
-                "self-managed/zeebe-deployment/operations/resource-planning",
-                "self-managed/zeebe-deployment/operations/network-ports",
-                "self-managed/zeebe-deployment/operations/setting-up-a-cluster",
-                "self-managed/zeebe-deployment/operations/health",
-                "self-managed/zeebe-deployment/operations/backpressure",
-                "self-managed/zeebe-deployment/operations/disk-space",
-                "self-managed/zeebe-deployment/operations/update-zeebe",
-                "self-managed/zeebe-deployment/operations/rebalancing",
-                "self-managed/zeebe-deployment/operations/management-api",
-                "self-managed/zeebe-deployment/operations/backups",
-                "self-managed/zeebe-deployment/operations/cluster-scaling",
+              Tasklist: [
+                "self-managed/tasklist-deployment/install-and-start",
+                "self-managed/tasklist-deployment/tasklist-configuration",
+                "self-managed/tasklist-deployment/tasklist-custom-styling",
+                "self-managed/tasklist-deployment/data-retention",
+                "self-managed/tasklist-deployment/importer-and-archiver",
+                "self-managed/tasklist-deployment/tasklist-authentication",
+                "self-managed/tasklist-deployment/usage-metrics",
+                "self-managed/tasklist-deployment/user-task-access-restrictions",
               ],
             },
             {
               type: "category",
-              label: "Exporters",
+              label: "Identity",
               link: {
                 type: "doc",
-                id: "self-managed/zeebe-deployment/exporters/exporters",
+                id: "self-managed/orchestration-identity/orchestration-identity",
               },
               items: [
-                "self-managed/zeebe-deployment/exporters/install-zeebe-exporters",
-                "self-managed/zeebe-deployment/exporters/camunda-exporter",
-                "self-managed/zeebe-deployment/exporters/elasticsearch-exporter",
-                "self-managed/zeebe-deployment/exporters/opensearch-exporter",
-              ],
-            },
-          ],
-          Operate: [
-            "self-managed/operate-deployment/install-and-start",
-            "self-managed/operate-deployment/operate-configuration",
-            "self-managed/operate-deployment/data-retention",
-            "self-managed/operate-deployment/schema-and-migration",
-            "self-managed/operate-deployment/importer-and-archiver",
-            "self-managed/operate-deployment/operate-authentication",
-            "self-managed/operate-deployment/usage-metrics",
-          ],
-          Tasklist: [
-            "self-managed/tasklist-deployment/install-and-start",
-            "self-managed/tasklist-deployment/tasklist-configuration",
-            "self-managed/tasklist-deployment/tasklist-custom-styling",
-            "self-managed/tasklist-deployment/data-retention",
-            "self-managed/tasklist-deployment/importer-and-archiver",
-            "self-managed/tasklist-deployment/tasklist-authentication",
-            "self-managed/tasklist-deployment/usage-metrics",
-            "self-managed/tasklist-deployment/user-task-access-restrictions",
-          ],
-              },
-              {
-                type: "category",
-                label: "Identity",
-                link: {
-                  type: "doc",
-                  id: "self-managed/orchestration-identity/orchestration-identity",
-                },
-                items: [
-                  "self-managed/orchestration-identity/installation",
-            "self-managed/orchestration-identity/configuration",
+                "self-managed/orchestration-identity/installation",
+                "self-managed/orchestration-identity/configuration",
                 {
                   "Mapping rules": [
                     "self-managed/orchestration-identity/mapping-rules/managing-mapping-rules",
@@ -1370,11 +1370,65 @@ module.exports = {
                     "self-managed/orchestration-identity/mapping-rules/assign-mappings-to-tenants",
                   ],
                 },
-                ],
-              },
-            ]
-          },
-          {
+              ],
+            },
+          ],
+        },
+        {
+          Console: [
+            "self-managed/console-deployment/overview",
+            "self-managed/console-deployment/installation",
+            {
+              Configuration: [
+                "self-managed/console-deployment/configuration/configuration",
+                "self-managed/console-deployment/configuration/ssl",
+              ],
+            },
+            "self-managed/console-deployment/usage-metrics",
+            "self-managed/console-deployment/telemetry",
+          ],
+          Connectors: [
+            "self-managed/connectors-deployment/install-and-start",
+            "self-managed/connectors-deployment/connectors-configuration",
+          ],
+
+          Optimize: [
+            "self-managed/optimize-deployment/install-and-start",
+            {
+              Configuration: [
+                "self-managed/optimize-deployment/configuration/getting-started",
+                {
+                  "System configuration": [
+                    "self-managed/optimize-deployment/configuration/system-configuration",
+                    "self-managed/optimize-deployment/configuration/system-configuration-platform-8",
+                  ],
+                },
+                "self-managed/optimize-deployment/configuration/logging",
+                "self-managed/optimize-deployment/configuration/security-instructions",
+                "self-managed/optimize-deployment/configuration/shared-elasticsearch-cluster",
+                "self-managed/optimize-deployment/configuration/history-cleanup",
+                "self-managed/optimize-deployment/configuration/localization",
+                "self-managed/optimize-deployment/configuration/object-variables",
+                "self-managed/optimize-deployment/configuration/multi-tenancy",
+              ],
+            },
+            {
+              "Migration & update": [
+                "self-managed/optimize-deployment/migration-update/camunda-8/instructions",
+                "self-managed/optimize-deployment/migration-update/camunda-8/8.6-to-8.7",
+                "self-managed/optimize-deployment/migration-update/camunda-8/3.13_8.5-to-8.6",
+                "self-managed/optimize-deployment/migration-update/camunda-8/3.12_8.4-to-3.13_8.5",
+                "self-managed/optimize-deployment/migration-update/camunda-8/3.11_8.3-to-3.12_8.4",
+                "self-managed/optimize-deployment/migration-update/camunda-8/3.10-to-3.11_8.3",
+                "self-managed/optimize-deployment/migration-update/camunda-8/3.9-to-3.10",
+                "self-managed/optimize-deployment/migration-update/camunda-8/3.9-preview-1-to-3.9",
+                "self-managed/optimize-deployment/migration-update/camunda-8/3.8-to-3.9-preview-1",
+                "self-managed/optimize-deployment/migration-update/camunda-8/3.7-to-3.8",
+              ],
+            },
+          ],
+        },
+        {
           type: "category",
           label: "Management Identity",
           link: {
@@ -1444,61 +1498,6 @@ module.exports = {
             },
           ],
         },
-        {
-          Console: [
-            "self-managed/console-deployment/overview",
-            "self-managed/console-deployment/installation",
-            {
-              Configuration: [
-                "self-managed/console-deployment/configuration/configuration",
-                "self-managed/console-deployment/configuration/ssl",
-              ],
-            },
-            "self-managed/console-deployment/usage-metrics",
-            "self-managed/console-deployment/telemetry",
-          ],        
-          Connectors: [
-            "self-managed/connectors-deployment/install-and-start",
-            "self-managed/connectors-deployment/connectors-configuration",
-          ],
-
-          Optimize: [
-            "self-managed/optimize-deployment/install-and-start",
-            {
-              Configuration: [
-                "self-managed/optimize-deployment/configuration/getting-started",
-                {
-                  "System configuration": [
-                    "self-managed/optimize-deployment/configuration/system-configuration",
-                    "self-managed/optimize-deployment/configuration/system-configuration-platform-8",
-                  ],
-                },
-                "self-managed/optimize-deployment/configuration/logging",
-                "self-managed/optimize-deployment/configuration/security-instructions",
-                "self-managed/optimize-deployment/configuration/shared-elasticsearch-cluster",
-                "self-managed/optimize-deployment/configuration/history-cleanup",
-                "self-managed/optimize-deployment/configuration/localization",
-                "self-managed/optimize-deployment/configuration/object-variables",
-                "self-managed/optimize-deployment/configuration/multi-tenancy",
-              ],
-            },
-            {
-              "Migration & update": [
-                "self-managed/optimize-deployment/migration-update/camunda-8/instructions",
-                "self-managed/optimize-deployment/migration-update/camunda-8/8.6-to-8.7",
-                "self-managed/optimize-deployment/migration-update/camunda-8/3.13_8.5-to-8.6",
-                "self-managed/optimize-deployment/migration-update/camunda-8/3.12_8.4-to-3.13_8.5",
-                "self-managed/optimize-deployment/migration-update/camunda-8/3.11_8.3-to-3.12_8.4",
-                "self-managed/optimize-deployment/migration-update/camunda-8/3.10-to-3.11_8.3",
-                "self-managed/optimize-deployment/migration-update/camunda-8/3.9-to-3.10",
-                "self-managed/optimize-deployment/migration-update/camunda-8/3.9-preview-1-to-3.9",
-                "self-managed/optimize-deployment/migration-update/camunda-8/3.8-to-3.9-preview-1",
-                "self-managed/optimize-deployment/migration-update/camunda-8/3.7-to-3.8",
-              ],
-            },
-          ],
-        },
-        
         {
           Modeler: [
             {
