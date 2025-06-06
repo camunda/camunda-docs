@@ -247,26 +247,30 @@ Despite these limits, you must closely monitor your LLM API usage and cost, and 
 
 ### Response
 
-Configure the response from the AI Agent connector for further processing. The LLM call typically returns one text
-content block plus additional metadata such as token usage, but in the future it could contain multiple content blocks,
-depending on the LLM provider and selected model.
+Configure which format to instruct the model to return and how to handle the response returned from the AI Agent
+connector.
+
+The outcome of a LLM call is stored as an **assistant message** which is designed to contain multiple content blocks.
+With the current set of supported providers/models, this message will always contain a single text content block. The
+connector will return the **first content block** when handling the response, either as text string or as parsed JSON
+object.
 
 | Field                     | Required | Description                                                                                                                                                                                                    |
 | :------------------------ | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Response Format           | Yes      | <p>Instructs the model which response format to return. Can be either text or JSON.</p><p><ul><li>Note that JSON format support varies by provider and model.</li></ul></p>                                    |
-| Include assistant message | No       | <p>Returns the entire message returned by the LLM as `responseMessage', including any additional content blocks and metadata.</p><p>Select this option if you need more than just the first response text.</p> |
+| Response Format           | Yes      | <p>Instructs the model which response format to return. This can be either text or JSON.</p><p><ul><li>Note that JSON format support varies by provider and model.</li></ul></p>                               |
+| Include assistant message | No       | <p>Returns the entire message returned by the LLM as `responseMessage`, including any additional content blocks and metadata.</p><p>Select this option if you need more than just the first response text.</p> |
 
 #### Text response format
 
 If not configured otherwise, this format will be used by default and will return a `responseText` string as part of the
 connector response.
 
-| Field              | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| :----------------- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Parse text as JSON | No       | <p>If this option is selected, the connector will attempt to parse the response text as JSON and return the parsed object as `responseJson` in the connector response.</p><p><ul><li>In case parsing fails, the connector will not throw an error but will return the original response text as `responseText` and an empty `responseJson` object.</li><li>Use this option for models which do not support setting JSON as response format (such as Anthropic models) in combination with a prompt instructing the model to return a JSON response.</li></ul></p> |
+| Field              | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| :----------------- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Parse text as JSON | No       | <p>If this option is selected, the connector will attempt to parse the response text as JSON and return the parsed object as `responseJson` in the connector response.</p><p><ul><li>Use this option for models which do not support setting JSON as response format (such as Anthropic models) in combination with a prompt instructing the model to return a JSON response.</li><li>In case parsing fails, the connector will not throw an error but will return the original response text as `responseText` and return no `responseJson` object.</li></ul></p> |
 
-An example prompt that instructs the model to return a JSON response (
-see [Anthropic docs](https://docs.anthropic.com/en/docs/test-and-evaluate/strengthen-guardrails/increase-consistency#example-enhancing-it-support-consistency)):
+An example prompt that instructs the model to return a JSON response
+(see [Anthropic docs](https://docs.anthropic.com/en/docs/test-and-evaluate/strengthen-guardrails/increase-consistency#example-enhancing-it-support-consistency)):
 
 ```
 Output in JSON format with keys: "sentiment" (positive/negative/neutral), "key_issues" (list), and "action_items" (list of dicts with "team" and "task").
@@ -274,25 +278,53 @@ Output in JSON format with keys: "sentiment" (positive/negative/neutral), "key_i
 
 #### JSON response format
 
-If the model supports it, selecting JSON as response format instructs the model to always return a JSON response.
+If the model supports it, selecting JSON as response format instructs the model to always return a JSON response. In
+case the model does not return a valid JSON response, the connector will throw an error.
 
-You can optionally provide a schema to enforce a specific JSON structure or instruct the model to return JSON in a
-specific format in your prompt. Please note that support for JSON responses varies by provider and model.
+To ensure the model generates data according to a specific JSON structure, you can optionally provide a
+[JSON Schema](https://json-schema.org/). Alternatively, you can instruct the model to return JSON following a specific
+structure as shown in the text example above.
+
+Please note that support for JSON responses varies by provider and model.
 
 In OpenAI terms, selecting the JSON response format is equivalent to using
 the [JSON mode](https://platform.openai.com/docs/guides/structured-outputs?api-mode=chat#json-mode) while providing a
 JSON Schema instructs the model to return
 [structured outputs](https://platform.openai.com/docs/guides/structured-outputs?api-mode=chat#structured-outputs-vs-json-mode).
 
-| Field                     | Required | Description                                                                                                                                                                                                                  |
-| :------------------------ | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Response JSON Schema      | No       | <p>Describes the desired response format as [JSON Schema](https://json-schema.org/).</p>                                                                                                                                     |
-| Response JSON Schema name | No       | <p>Depending on the provider, the schema needs to be configured with a name for the schema (such as `Person`).</p><p>Ideally this name describes the purpose of the schema to make the model aware of the expected data.</p> |
+| Field                     | Required | Description                                                                                                                                                                                                                                                           |
+| :------------------------ | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Response JSON Schema      | No       | <p>Describes the desired response format as [JSON Schema](https://json-schema.org/).</p><p><ul><li>See [OpenAI's structured outputs documentation](https://platform.openai.com/docs/guides/structured-outputs?api-mode=chat#introduction) for examples.</li></ul></p> |
+| Response JSON Schema name | No       | <p>Depending on the provider, the schema needs to be configured with a name for the schema (such as `Person`).</p><p>Ideally this name describes the purpose of the schema to make the model aware of the expected data.</p>                                          |
+
+An example JSON Schema describing the expected response format for a user profile:
+
+```feel
+={
+  "type": "object",
+  "properties": {
+    "userId": {
+      "type": "number"
+    },
+    "firstname": {
+      "type": "string"
+    },
+    "lastname": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "userId",
+    "firstname",
+    "lastname"
+  ]
+}
+```
 
 #### Assistant message
 
 If the **Include assistant message** option is selected, the response from the AI Agent connector contains a
-`responseMessage` object that includes the full LLM response, including all content blocks and metadata. For example:
+`responseMessage` object that includes the assistant message, including all content blocks and metadata. For example:
 
 ```json
 {
