@@ -667,3 +667,152 @@ The following conventions apply to all attributes:
 [setting variables]: /apis-tools/camunda-api-rest/specifications/create-element-instance-variables.api.mdx
 [general changes]: #general-endpoint-changes
 [multi-tenancy]: /self-managed/concepts/multi-tenancy.md
+
+### Flownode instances
+
+#### Search flownode instances
+
+- **[V1 endpoint](../operate-api/specifications/search-4.api.mdx)**: `POST /v1/flownode-instances/search`
+- **[V2 endpoint](../camunda-api-rest/specifications/search-element-instances.api.mdx)**: `POST /v2/element-instances/search`
+
+<Tabs groupId="search-flownode-instances" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments'},
+{label: 'Output adjustments', value: 'output-adjustments'},
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+- Request structure changes as outlined in [general changes][].
+  - `searchAfter` has been moved under `page`.
+  - `size` is now the `limit` in the `page` object.
+- Renamed attributes in the `filter` object
+  - `key` of type `int64` - Use `elementInstanceKey` of type `string` instead.
+  - `flowNodeId` - Use `elementId` instead.
+  - `flowNodeName` - Use `elementName` instead.
+  - `incident` - Use `hasIncident` instead.
+- Adjusted attributes in the `filter` object
+  - `processInstanceKey` - Type changed from `int64` to `string`.
+  - `processDefinitionKey` - Type changed from `int64` to `string`.
+  - `incidentKey` - Type changed from `int64` to `string`.
+- Removed attributes from the `filter` object
+  - `startDate` - Can no longer be used for filtering.
+  - `endDate` - Can no longer be used for filtering.
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+- Response structure changes as outlined in [general changes][].
+  - `total` is moved under the `page` object as `totalItems`.
+  - `sortValues` - Use `lastSortValues` in the `page` object instead.
+- Renamed attributes in the objects of the `items` array
+  - `key` of type `int64` - Use `elementInstanceKey` of type `string` instead.
+  - `flowNodeId` - Use `elementId` instead.
+  - `flowNodeName` - Use `elementName` instead.
+  - `incident` - Use `hasIncident` instead.
+- Adjusted attributes in the objects of the `items` array
+  - `processInstanceKey` - Type changed from `int64` to `string`.
+  - `processDefinitionKey` - Type changed from `int64` to `string`.
+  - `incidentKey` - Type changed from `int64` to `string`.
+
+</TabItem>
+</Tabs>
+
+#### Get flownode instance by key
+
+- **[V1 endpoint](../operate-api/specifications/by-key-4.api.mdx)**: `GET /v1/flownode-instances/{key}`
+- **[V2 endpoint](../camunda-api-rest/specifications/get-element-instance.api.mdx)**: `GET /v2/element-instances/{elementInstanceKey}`
+
+<Tabs groupId="get-flownode-instance-by-key" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments'},
+{label: 'Output adjustments', value: 'output-adjustments'},
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+- No input adjustments.
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+- Except for the response structure changes, all adjustments from [search flownode instances](#search-flownode-instances) apply.
+
+</TabItem>
+</Tabs>
+
+### Incidents
+
+#### Search incidents
+
+- **[V1 endpoint](../operate-api/specifications/search-3.api.mdx)**: `POST /v1/incidents/search`
+- **[V2 endpoint](../camunda-api-rest/specifications/search-incidents.api.mdx)**: `POST /v2/incidents/search`
+
+<Tabs groupId="search-incidents" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments'},
+{label: 'Output adjustments', value: 'output-adjustments'},
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+- Request structure changes as outlined in [general changes][].
+  - `searchAfter` has been moved under `page`.
+  - `size` is now the `limit` in the `page` object.
+- Renamed attributes in the `filter` object
+  - `key` of type `int64` - Use `incidentKey` of type `string` instead.
+  - `type` - Use `errorType` instead.
+  - `message` - Use `errorMessage` instead.
+- Adjusted attributes in the `filter` object
+  - `processInstanceKey` - Type changed from `int64` to `string`.
+  - `processDefinitionKey` - Type changed from `int64` to `string`.
+  - `jobKey` - Type changed from `int64` to `string`.
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+- Response structure changes as outlined in [general changes][].
+  - `total` is moved under the `page` object as `totalItems`.
+  - `sortValues` - Use `lastSortValues` in the `page` object instead.
+- Renamed attributes in the objects of the `items` array
+  - `key` of type `int64` - Use `incidentKey` of type `string` instead.
+  - `type` - Use `errorType` instead.
+  - `message` - Use `errorMessage` instead.
+- Adjusted attributes in the objects of the `items` array
+  - `processInstanceKey` - Type changed from `int64` to `string`.
+  - `processDefinitionKey` - Type changed from `int64` to `string`.
+  - `jobKey` - Type changed from `int64` to `string`.
+
+</TabItem>
+</Tabs>
+
+#### Get incident by key
+
+- **[V1 endpoint](../operate-api/specifications/by-key-3.api.mdx)**: `GET /v1/incidents/{key}`
+- **[V2 endpoint](../camunda-api-rest/specifications/get-incident.api.mdx)**: `GET /v2/incidents/{incidentKey}`
+
+<Tabs groupId="get-incident-by-key" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments'},
+{label: 'Output adjustments', value: 'output-adjustments'},
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+- No input adjustments.
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+- Except for the response structure changes, all adjustments from [search incidents](#search-incidents) apply.
+
+</TabItem>
+</Tabs>

@@ -135,7 +135,7 @@ This will allow the Helm users to use `runAsNonRoot=true` without the need to ex
 ### Deprecated in 8.4
 
 The [Zeebe configuration properties for Camunda Identity](../self-managed/zeebe-deployment/configuration/gateway.md#zeebegatewayclustersecurityauthenticationidentity)
-were deprecated in `8.4`. Please use the dedicated Camunda Identity properties or the [corresponding environment variables](../self-managed/identity/deployment/configuration-variables.md#core-configuration).
+were deprecated in `8.4`. Please use the dedicated Camunda Identity properties or the [corresponding environment variables](../self-managed/identity/miscellaneous/configuration-variables.md#core-configuration).
 
 ### Versioning changes in Elasticsearch
 
