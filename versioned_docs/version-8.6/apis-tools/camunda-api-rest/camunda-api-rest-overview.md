@@ -103,5 +103,5 @@ The naming of the new objects containing key attributes as `string` is defined a
 See [the interactive Camunda 8 REST API Explorer][camunda-api-explorer] for more details.
 
 [camunda-api-explorer]: ./specifications/camunda-8-rest-api.info.mdx
-[resource authorizations]: /self-managed/concepts/access-control/resource-authorizations.md
+[resource authorizations]: /self-managed/identity/access-management/resource-authorizations.md
 [alpha feature]: /reference/alpha-features.md
