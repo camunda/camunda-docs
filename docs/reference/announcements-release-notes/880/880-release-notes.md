@@ -25,7 +25,7 @@ These release notes identify the new features included in 8.8, including [alpha 
 | :----------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------- |
 | 10 June 2025 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.8.0-alpha5)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.8.0-alpha5)</li></ul> | [Release blog](https://camunda.com/blog/2025/05/camunda-alpha-release-june-2025/) |
 
-### AI Agent Connector
+### AI Agent Connector <span class="badge badge--medium" title="This feature affects Connectors">Connectors</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Dektop Modeler</span>
 
 The [AI Agent connector](https://docs.camunda.io/docs/8.8/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent/) enables AI agents to integrate with an LLM to provide interaction/reasoning capabilities. This connector is designed for use with an ad-hoc sub-process in a feedback loop, providing automated user interaction and tool selection.
 
@@ -37,19 +37,13 @@ It provides:
 
 <!-- https://github.com/camunda/product-hub/issues/2779 -->
 
-### Vector database connector
-
-The [vector database connector](https://docs.camunda.io/docs/8.8/components/connectors/out-of-the-box-connectors/embeddings-vector-db/) allows embedding, storing, and retrieving Large Language Model (LLM) embeddings. This enables building AI-based solutions for your organizations, such as context document search, long-term LLM memory, and agentic AI interaction in combination with the AI Agent connector (RAG).
-
-<!-- https://github.com/camunda/product-hub/issues/2744 -->
-
-### Azure DevOps integration
+### Azure DevOps integration <span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
 
 Camunda now supports [an integration with Azure DevOps](/components/modeler/web-modeler/git-sync.md), which allows for direct syncing with Azure repos.
 
 <!-- https://github.com/camunda/product-hub/issues/2580 -->
 
-### Enhanced Identity service
+### Enhanced Identity service <span class="badge badge--medium" title="This feature affects Identity">Identity</span>
 
 Camunda’s new Identity service enhances authentication and authorization for Self-Managed and SaaS environments.
 
@@ -63,7 +57,7 @@ Camunda’s new Identity service enhances authentication and authorization for S
 
 <!-- https://github.com/camunda/product-hub/issues/2222 -->
 
-### Migrate Tasklist frontend application to use Camunda 8 REST API
+### Migrate Tasklist frontend application to use Camunda 8 REST API <span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span>
 
 The Tasklist frontend application is now transitioning from the soon-to-be-deprecated Tasklist V1 API to the unified Camunda 8 REST API. This change ensures Tasklist remains fully compatible with Camunda 8’s new RDBMS support while continuing to work seamlessly with Elasticsearch and OpenSearch. Users can expect consistent functionality across different data layers, improved performance, and access to new platform features—all without losing existing capabilities or disrupting task management workflows.
 
@@ -82,6 +76,12 @@ Camunda now introduces a mechanism to react to expired messages. The original me
 With these updates, developers can subscribe to the expired messages through a custom exporter, examine the event content, and optionally re-publish or handle the message differently. By providing an enhanced event and re-publish flow, this feature strengthens reliability and transparency in business processes without requiring a major upgrade or modifying existing exporters.
 
 <!-- https://github.com/camunda/product-hub/issues/2796 -->
+
+### Vector database connector
+
+The [vector database connector](https://docs.camunda.io/docs/8.8/components/connectors/out-of-the-box-connectors/embeddings-vector-db/) allows embedding, storing, and retrieving Large Language Model (LLM) embeddings. This enables building AI-based solutions for your organizations, such as context document search, long-term LLM memory, and agentic AI interaction in combination with the AI Agent connector (RAG).
+
+<!-- https://github.com/camunda/product-hub/issues/2744 -->
 
 ## 8.8.0-alpha4
 
