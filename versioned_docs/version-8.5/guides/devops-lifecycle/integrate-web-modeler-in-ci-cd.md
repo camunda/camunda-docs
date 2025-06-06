@@ -259,7 +259,7 @@ Push approved changes to staging or production by deploying them to the respecti
 
 #### Define resource authorizations
 
-For clusters with [resource authorizations](/self-managed/concepts/access-control/resource-authorizations.md) enabled (via the `RESOURCE_PERMISSIONS_ENABLED` [feature flag](/self-managed/identity/deployment/configuration-variables.md#feature-flags)), use the Identity API to assign the necessary authorizations through the pipeline. This step ensures appropriate accessibility for process/application stakeholders or updating existing authorizations.
+For clusters with [resource authorizations](/self-managed/identity/access-management/resource-authorizations.md) enabled (via the `RESOURCE_PERMISSIONS_ENABLED` [feature flag](/self-managed/identity/miscellaneous/configuration-variables.md#feature-flags)), use the Identity API to assign the necessary authorizations through the pipeline. This step ensures appropriate accessibility for process/application stakeholders or updating existing authorizations.
 
 ##### Monitoring and error handling
 

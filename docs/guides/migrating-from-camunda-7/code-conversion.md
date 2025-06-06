@@ -95,7 +95,7 @@ Simple expressions are [directly converted by this code in the Diagram Converter
 
 <!-- TODO document the expression transformer instead of referencing code -->
 
-You can use the [FEEL copilot](https://feel-copilot.camunda.com/) to rewrite more complex expressions for you.
+You can use the [FEEL Copilot](/components/early-access/alpha/feel-copilot/feel-copilot.md) to rewrite more complex expressions for you.
 
 ## Leveraging AI for refactoring
 

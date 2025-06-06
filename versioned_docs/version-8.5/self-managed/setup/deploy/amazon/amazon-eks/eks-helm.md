@@ -257,7 +257,7 @@ helm upgrade --install \
 
 First, we need an OAuth client to be able to connect to the Camunda 8 cluster.
 
-This can be done by following the [Identity getting started guide](/self-managed/identity/getting-started/install-identity.md) followed by the [incorporating applications documentation](/self-managed/identity/user-guide/additional-features/incorporate-applications.md).
+This can be done by following the [Identity getting started guide](/self-managed/identity/identity-first-steps.md) followed by the [incorporating applications documentation](/self-managed/identity/application-user-group-role-management/applications.md).
 Instead of creating a confidential application, a machine-to-machine (M2M) application is required to be created.
 This reveals a `client-id` and `client-secret` that can be used to connect to the Camunda 8 cluster.
 
