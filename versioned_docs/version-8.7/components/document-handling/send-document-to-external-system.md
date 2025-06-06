@@ -27,3 +27,7 @@ In most cases for the following outbound connectors, you can include a **Request
 | [REST](/components/connectors/protocol/rest.md)                                         | Supports storing the response as a document.                                                                                                                                                                                   |
 | [SendGrid](/components/connectors/out-of-the-box-connectors/sendgrid.md)                | Provides attachment support.                                                                                                                                                                                                   |
 | [Slack](/components/connectors/out-of-the-box-connectors/slack.md)                      | Supports adding attachments and increasing template versions.                                                                                                                                                                  |
+
+## Additional resources
+
+- [Camunda Academy: How To Handle Documents with Email Connector](https://academy.camunda.com/c8-h2-handle-documents-email-connector)

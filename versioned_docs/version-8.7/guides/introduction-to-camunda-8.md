@@ -55,3 +55,5 @@ After getting started with Camunda, get to know the platform through the followi
 - **Improve**: [Get Optimize involved in your processes](/guides/improve-processes-with-optimize.md). By leveraging data collected during process execution, you can access reports, share process intelligence, analyze bottlenecks, and examine areas in business processes for improvement. Alternatively, [apply continuous integration and continuous deployment (CI/CD) pipelines](/guides/devops-lifecycle/integrate-web-modeler-in-ci-cd.md) for automated production deployments.
 
 Additionally, Camunda hosts a section of [Best Practices](/components/best-practices/best-practices-overview.md). A mix of conceptual and practical implementation information, this section hosts our condensed experience using BPMN and DMN on the Camunda tool stack collected by consulting engagement with our customers and feedback from the community.
+
+You can also learn more about Camunda 8 by reviewing the Camunda Academy courses [introducing Camunda 8](https://academy.camunda.com/camunda-intro/) and [providing an overview of Camunda 8](https://academy.camunda.com/c8-overview/).

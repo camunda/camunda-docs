@@ -89,3 +89,4 @@ If the decision evaluation is unsuccessful, an [incident](../components/concepts
 - [DMN in Modeler](../components/modeler/dmn/dmn.md)
 - [DMN Tutorial](https://camunda.com/dmn/#introduction-overview)
 - [What is FEEL?](../components/modeler/feel/what-is-feel.md)
+- [Camunda Academy: DMN](https://academy.camunda.com/dmn-overview/)

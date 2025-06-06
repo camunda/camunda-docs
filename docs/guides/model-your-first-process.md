@@ -51,3 +51,7 @@ If you want to invite collaborators to work on your process together, you'll nee
 5. Click **Add user** and find your colleague you added to your organization. Assign their role with the dropdown and click **Send invites**.
    ![add new user](./img/invite-collaborators.png)
 6. After your colleague clicks **Accept invitation**, they will have access to the project based on the role you assigned.
+
+## Additional resources
+
+- [Camunda Academy: Getting Started with Process Modeling](https://academy.camunda.com/c8-getting-started-process-modeling)

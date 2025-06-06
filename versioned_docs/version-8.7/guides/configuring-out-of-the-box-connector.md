@@ -110,3 +110,4 @@ In [Operate](../components/operate/operate-introduction.md), you will now see th
 - [Connectors & Integration Framework](https://camunda.com/platform/modeler/connectors/)
 - [Camunda BPMN Tutorial](https://camunda.com/bpmn/)
 - [Automate processes using BPMN](./automating-a-process-using-bpmn.md)
+- [Camunda Academy: How To Configure the SendGrid Connector](https://academy.camunda.com/c8-h2-sendgrid-connector/)

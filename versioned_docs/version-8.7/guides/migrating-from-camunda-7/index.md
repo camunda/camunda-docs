@@ -43,6 +43,7 @@ Get help with your migration journey from the following additional resources.
 - [Camunda Partners](https://camunda.com/de/partners/):
   - Professional advisory services
   - Implementation services
+- [Camunda Academy: Migration Overview](https://academy.camunda.com/c8-migration-overview/)
 
 :::info
 Still need more help? Contact your customer success manager or [reach out to Camunda](https://camunda.com/contact-us/).

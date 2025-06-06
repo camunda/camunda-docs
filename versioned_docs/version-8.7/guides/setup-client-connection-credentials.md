@@ -46,3 +46,7 @@ Depending on the scopes granted to these client credentials, the following varia
 - `CAMUNDA_TASKLIST_BASE_URL`: The base URL for the Tasklist API.
 - `CAMUNDA_OPTIMIZE_BASE_URL`: The base URL for the Optimize API.
 - `CAMUNDA_OPERATE_BASE_URL`: The base URL for the Operate API.
+
+## Additional resources
+
+- [Camunda Academy: How To Create Client Credentials](https://academy.camunda.com/c8-h2-create-client-credentials)
