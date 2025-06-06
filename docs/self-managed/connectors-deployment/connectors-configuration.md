@@ -21,7 +21,6 @@ To connect to **Zeebe** and the **Camunda 8 REST API**, the connector runtime us
 
 Below are some of the most common configuration options for the connector runtime. Refer to the [Camunda Spring Boot SDK](/apis-tools/spring-zeebe-sdk/configuration.md#zeebe) for a full list of configuration options.
 
-
 :::note
 This guide provides configuration properties in the form of environment variables, while the Camunda Spring Boot SDK documentation uses Java configuration properties. The two formats are interchangeable, and you can use the Java configuration properties in the connector runtime environment as well.
 
