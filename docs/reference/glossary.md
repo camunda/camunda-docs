@@ -2,7 +2,7 @@
 id: glossary
 title: "Glossary"
 description: "This section defines common terminology referenced within the documentation."
-toc_min_heading_level: 1
+toc_min_heading_level: 2
 toc_max_heading_level: 2
 ---
 
