@@ -422,6 +422,33 @@ kubectl create namespace camunda
 
 In the remainder of the guide, we reference the `camunda` namespace to create some required resources in the Kubernetes cluster, such as secrets or one-time setup jobs.
 
+### Configure a high-performance StorageClass
+
+Camunda 8 requires high IOPS for performance-critical components like **Zeebe**, so it is important to use Azure **PremiumV2** disks rather than the default `Standard_LRS`.
+
+This step defines a custom `StorageClass` that:
+
+- Uses **PremiumV2_LRS** Azure Managed Disks
+- Sets a **`Retain`** reclaim policy
+- Uses `WaitForFirstConsumer` volume binding
+- Becomes the default StorageClass for the cluster
+
+#### Apply the StorageClass
+
+Run the following script to apply the new storage class and set it as default:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/storageclass-configure.sh
+```
+
+Then run the following script to veryify if it had been set correctly.
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/storageclass-verify.sh
+```
+
+This must be applied **before installing the Camunda Helm chart** so that PersistentVolumeClaims (PVCs) are provisioned with the correct performance characteristics.
+
 ### Configure the database and associated access
 
 As you now have a database, you need to create dedicated databases for each Camunda component and an associated user that has configured access. Follow these steps to create the database users and configure access.
@@ -488,33 +515,6 @@ kubectl delete secret setup-db-secret --namespace camunda
 ```
 
 Running these commands cleans up both the job and the secret, ensuring that no unnecessary resources remain in the cluster.
-
-### Configure a high-performance StorageClass
-
-Camunda 8 requires high IOPS for performance-critical components like **Zeebe**, so it is important to use Azure **PremiumV2** disks rather than the default `Standard_LRS`.
-
-This step defines a custom `StorageClass` that:
-
-- Uses **PremiumV2_LRS** Azure Managed Disks
-- Sets a **`Retain`** reclaim policy
-- Uses `WaitForFirstConsumer` volume binding
-- Becomes the default StorageClass for the cluster
-
-#### Apply the StorageClass
-
-Run the following script to apply the new storage class and set it as default:
-
-```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/storageclass-configure.sh
-```
-
-Then run the following script to veryify if it had been set correctly.
-
-```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/storageclass-verify.sh
-```
-
-This must be applied **before installing the Camunda Helm chart** so that PersistentVolumeClaims (PVCs) are provisioned with the correct performance characteristics.
 
 ## 2. Install Camunda 8 using the Helm chart
 
