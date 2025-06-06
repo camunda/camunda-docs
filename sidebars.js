@@ -1114,7 +1114,7 @@ module.exports = {
             },
             {
               type: "category",
-              label: "Amazon MarketPlace",
+              label: "Amazon Marketplace",
               link: {
                 type: "doc",
                 id: "self-managed/setup/deploy/amazon/aws-marketplace",
