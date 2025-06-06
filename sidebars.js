@@ -88,53 +88,7 @@ module.exports = {
           ],
         },
       ],
-      Console: [
-        "components/console/introduction-to-console",
-        {
-          "Manage your organization": [
-            "components/console/manage-organization/organization-settings",
-            "components/console/manage-organization/manage-users",
-            "components/console/manage-organization/view-organization-activity",
-            "components/console/manage-organization/enable-alpha-features",
-            "components/console/manage-organization/usage-history",
-            "components/console/manage-organization/usage-alerts",
-            "components/console/manage-organization/advanced-search",
-            "components/console/manage-organization/switch-organization",
-            "components/console/manage-organization/external-sso",
-            "components/console/manage-organization/delete-account",
-          ],
-        },
-        {
-          "Manage clusters": [
-            "components/console/manage-clusters/create-cluster",
-            "components/console/manage-clusters/manage-cluster",
-            "components/console/manage-clusters/cluster-connectors",
-            "components/console/manage-clusters/manage-api-clients",
-            "components/console/manage-clusters/manage-secrets",
-            "components/console/manage-clusters/manage-alerts",
-            "components/console/manage-clusters/manage-ip-allowlists",
-            "components/console/manage-clusters/create-backups",
-            "components/console/manage-clusters/settings",
-            "components/console/manage-clusters/cluster-capacity",
-          ],
-        },
-        {
-          "Manage your plan": [
-            "components/console/manage-plan/available-plans",
-            "components/console/manage-plan/upgrade-to-starter-plan",
-            "components/console/manage-plan/update-billing-reservations",
-            "components/console/manage-plan/update-creditcard",
-            "components/console/manage-plan/retrieve-invoices-or-update-billing-info",
-            "components/console/manage-plan/cancel-starter-subscription",
-            "components/console/manage-plan/migrate-from-prof-to-starter",
-          ],
-        },
-        {
-          Troubleshooting: [
-            "components/console/console-troubleshooting/common-pitfalls",
-          ],
-        },
-      ],
+      
     },
     {
       type: "category",
@@ -209,6 +163,126 @@ module.exports = {
           type: "link",
           label: "RPA library specifications",
           href: "https://camunda.github.io/rpa-python-libraries/",
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Orchestration cluster",
+      link: {
+        type: "doc",
+        id: "components/orchestration-cluster",
+      },
+      items: [
+        {
+          Zeebe: [
+        "components/zeebe/zeebe-overview",
+        {
+          "Technical concepts": [
+            "components/zeebe/technical-concepts/technical-concepts-overview",
+            "components/zeebe/technical-concepts/architecture",
+            "components/zeebe/technical-concepts/clustering",
+            "components/zeebe/technical-concepts/partitions",
+            "components/zeebe/technical-concepts/internal-processing",
+            "components/zeebe/technical-concepts/process-lifecycles",
+            "components/zeebe/technical-concepts/protocols",
+          ],
+        },
+      ],
+      Operate: [
+        "components/operate/operate-introduction",
+        {
+          "User guide": [
+            "components/operate/userguide/basic-operate-navigation",
+            "components/operate/userguide/resolve-incidents-update-variables",
+            "components/operate/userguide/selections-operations",
+            "components/operate/userguide/delete-finished-instances",
+            "components/operate/userguide/delete-resources",
+            {
+              "Process instance modification": [
+                "components/operate/userguide/process-instance-modification",
+                "components/operate/userguide/process-instance-batch-modification",
+              ],
+            },
+            "components/operate/userguide/process-instance-migration",
+            "components/operate/userguide/monitor-operation-status",
+          ],
+        },
+      ],
+      Tasklist: [
+        "components/tasklist/introduction-to-tasklist",
+        {
+          "User guide": [
+            "components/tasklist/userguide/using-tasklist",
+            "components/tasklist/userguide/managing-tasks",
+            "components/tasklist/userguide/using-filters",
+            "components/tasklist/userguide/defining-task-priorities",
+            "components/tasklist/userguide/starting-processes",
+            "components/tasklist/userguide/tasklist-localization",
+          ],
+        },
+      ],
+        },
+        {
+          type: "category",
+          label: "Identity",
+          link: {
+            type: "doc",
+            id: "components/identity/identity-introduction",
+          },
+          items: [
+            "components/identity/authorization",
+            "components/identity/user",
+          ],
+        }
+      ],
+    },
+    {
+    Console: [
+        "components/console/introduction-to-console",
+        {
+          "Manage your organization": [
+            "components/console/manage-organization/organization-settings",
+            "components/console/manage-organization/manage-users",
+            "components/console/manage-organization/view-organization-activity",
+            "components/console/manage-organization/enable-alpha-features",
+            "components/console/manage-organization/usage-history",
+            "components/console/manage-organization/usage-alerts",
+            "components/console/manage-organization/advanced-search",
+            "components/console/manage-organization/switch-organization",
+            "components/console/manage-organization/external-sso",
+            "components/console/manage-organization/delete-account",
+          ],
+        },
+        {
+          "Manage clusters": [
+            "components/console/manage-clusters/create-cluster",
+            "components/console/manage-clusters/manage-cluster",
+            "components/console/manage-clusters/cluster-connectors",
+            "components/console/manage-clusters/manage-api-clients",
+            "components/console/manage-clusters/manage-secrets",
+            "components/console/manage-clusters/manage-alerts",
+            "components/console/manage-clusters/manage-ip-allowlists",
+            "components/console/manage-clusters/create-backups",
+            "components/console/manage-clusters/settings",
+            "components/console/manage-clusters/cluster-capacity",
+          ],
+        },
+        {
+          "Manage your plan": [
+            "components/console/manage-plan/available-plans",
+            "components/console/manage-plan/upgrade-to-starter-plan",
+            "components/console/manage-plan/update-billing-reservations",
+            "components/console/manage-plan/update-creditcard",
+            "components/console/manage-plan/retrieve-invoices-or-update-billing-info",
+            "components/console/manage-plan/cancel-starter-subscription",
+            "components/console/manage-plan/migrate-from-prof-to-starter",
+          ],
+        },
+        {
+          Troubleshooting: [
+            "components/console/console-troubleshooting/common-pitfalls",
+          ],
         },
       ],
     },
@@ -514,77 +588,7 @@ module.exports = {
         },
       ],
     },
-    {
-      type: "category",
-      label: "Orchestration cluster",
-      link: {
-        type: "doc",
-        id: "components/orchestration-cluster",
-      },
-      items: [
-        {
-          Zeebe: [
-        "components/zeebe/zeebe-overview",
-        {
-          "Technical concepts": [
-            "components/zeebe/technical-concepts/technical-concepts-overview",
-            "components/zeebe/technical-concepts/architecture",
-            "components/zeebe/technical-concepts/clustering",
-            "components/zeebe/technical-concepts/partitions",
-            "components/zeebe/technical-concepts/internal-processing",
-            "components/zeebe/technical-concepts/process-lifecycles",
-            "components/zeebe/technical-concepts/protocols",
-          ],
-        },
-      ],
-      Operate: [
-        "components/operate/operate-introduction",
-        {
-          "User guide": [
-            "components/operate/userguide/basic-operate-navigation",
-            "components/operate/userguide/resolve-incidents-update-variables",
-            "components/operate/userguide/selections-operations",
-            "components/operate/userguide/delete-finished-instances",
-            "components/operate/userguide/delete-resources",
-            {
-              "Process instance modification": [
-                "components/operate/userguide/process-instance-modification",
-                "components/operate/userguide/process-instance-batch-modification",
-              ],
-            },
-            "components/operate/userguide/process-instance-migration",
-            "components/operate/userguide/monitor-operation-status",
-          ],
-        },
-      ],
-      Tasklist: [
-        "components/tasklist/introduction-to-tasklist",
-        {
-          "User guide": [
-            "components/tasklist/userguide/using-tasklist",
-            "components/tasklist/userguide/managing-tasks",
-            "components/tasklist/userguide/using-filters",
-            "components/tasklist/userguide/defining-task-priorities",
-            "components/tasklist/userguide/starting-processes",
-            "components/tasklist/userguide/tasklist-localization",
-          ],
-        },
-      ],
-        },
-        {
-          type: "category",
-          label: "Identity",
-          link: {
-            type: "doc",
-            id: "components/identity/identity-introduction",
-          },
-          items: [
-            "components/identity/authorization",
-            "components/identity/user",
-          ],
-        }
-      ],
-    },
+    
     {
       Optimize: [
         "components/optimize/what-is-optimize",
@@ -1398,6 +1402,34 @@ module.exports = {
             "self-managed/console-deployment/usage-metrics",
             "self-managed/console-deployment/telemetry",
           ],
+          Modeler: [
+            {
+              "Web Modeler": [
+                "self-managed/modeler/web-modeler/installation",
+                {
+                  Configuration: [
+                    "self-managed/modeler/web-modeler/configuration/configuration",
+                    "self-managed/modeler/web-modeler/configuration/database",
+                    "self-managed/modeler/web-modeler/configuration/identity",
+                    "self-managed/modeler/web-modeler/configuration/logging",
+                    "self-managed/modeler/web-modeler/configuration/ssl",
+                  ],
+                  Troubleshooting: [
+                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-database-connection",
+                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection",
+                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-missing-data",
+                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-proxy-configuration",
+                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-other-problems",
+                  ],
+                },
+              ],
+            },
+            {
+              "Desktop Modeler": [
+                "self-managed/modeler/desktop-modeler/deploy-to-self-managed",
+              ],
+            },
+          ],
           Connectors: [
             "self-managed/connectors-deployment/install-and-start",
             "self-managed/connectors-deployment/connectors-configuration",
@@ -1509,36 +1541,7 @@ module.exports = {
             },
           ],
         },
-        {
-          Modeler: [
-            {
-              "Web Modeler": [
-                "self-managed/modeler/web-modeler/installation",
-                {
-                  Configuration: [
-                    "self-managed/modeler/web-modeler/configuration/configuration",
-                    "self-managed/modeler/web-modeler/configuration/database",
-                    "self-managed/modeler/web-modeler/configuration/identity",
-                    "self-managed/modeler/web-modeler/configuration/logging",
-                    "self-managed/modeler/web-modeler/configuration/ssl",
-                  ],
-                  Troubleshooting: [
-                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-database-connection",
-                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection",
-                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-missing-data",
-                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-proxy-configuration",
-                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-other-problems",
-                  ],
-                },
-              ],
-            },
-            {
-              "Desktop Modeler": [
-                "self-managed/modeler/desktop-modeler/deploy-to-self-managed",
-              ],
-            },
-          ],
-        },
+        
         {
           type: "category",
           label: "Document handling",
