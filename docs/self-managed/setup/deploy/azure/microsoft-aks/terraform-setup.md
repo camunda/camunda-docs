@@ -196,43 +196,7 @@ az login --service-principal \
   --tenant <tenant-id>
 ```
 
-Note that the `appId` will be needed as a value for `terraform_sp_app_id` in `terraform.tfvars` [in a later step](#creating-terraformtfvars).
-
-#### Create an Azure Storage Account for Terraform state management
-
-Before setting up Terraform, you should create an Azure Storage Account and container to store the state file. This is important for collaboration and to prevent issues like state file corruption. This should be in a separate resource group from the main infrastructure.
-
-To start, set the required values as environment variables upfront to avoid repeating them in each command:
-
-```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/azure/common/procedure/storage-account/storage-account-env-vars.sh
-```
-
-Define the value for `AZURE_LOCATION` with your chosen Azure region (for example, `westeurope`).
-
-Now, follow these steps to create the storage account with versioning enabled:
-
-1. Open your terminal and ensure the Azure CLI is installed and you're logged in.
-
-2. Run the following script to create a storage account and container for storing your Terraform state. Make sure that you have chosen a globally unique name for the storage account before:
-
-   ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/azure/common/procedure/storage-account/storage-account-creation.sh
-   ```
-
-3. Enable blob versioning to track changes and protect the state file from accidental deletions or overwrites:
-
-   ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/azure/common/procedure/storage-account/storage-account-versioning.sh
-   ```
-
-4. Verify versioning is enabled on the blob container:
-
-   ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/azure/common/procedure/storage-account/storage-account-verify.sh
-   ```
-
-This Azure Storage Account will now securely store your Terraform state files with versioning enabled.
+Note that the `appId` will be needed as a value for `terraform_sp_app_id` in `terraform.tfvars` [in the next step](#creating-terraformtfvars).
 
 #### Creating terraform.tfvars
 
@@ -305,6 +269,42 @@ az ad sp list --display-name "<your-service-principal-name>" --query "[0].appId"
 If you're already using a Service Principal to authenticate (for example, with `az login --service-principal`), this value corresponds to the `appId` you supplied during login.
 
 This value is critical because Terraform uses it to assign the necessary permissions for interacting with encryption keys and other protected resources. If the ID is incorrect or omitted, key-related configurations may fail, and AKS will be unable to use CMK for securing cluster secrets.
+
+#### Create an Azure Storage Account for Terraform state management
+
+Before setting up Terraform, you should create an Azure Storage Account and container to store the state file. This is important for collaboration and to prevent issues like state file corruption. This should be in a separate resource group from the main infrastructure.
+
+To start, set the required values as environment variables upfront to avoid repeating them in each command:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/azure/common/procedure/storage-account/storage-account-env-vars.sh
+```
+
+Define the value for `AZURE_LOCATION` with your chosen Azure region (for example, `westeurope`).
+
+Now, follow these steps to create the storage account with versioning enabled:
+
+1. Open your terminal and ensure the Azure CLI is installed and you're logged in.
+
+2. Run the following script to create a storage account and container for storing your Terraform state. Make sure that you have chosen a globally unique name for the storage account before:
+
+   ```bash reference
+   https://github.com/camunda/camunda-deployment-references/blob/main/azure/common/procedure/storage-account/storage-account-creation.sh
+   ```
+
+3. Enable blob versioning to track changes and protect the state file from accidental deletions or overwrites:
+
+   ```bash reference
+   https://github.com/camunda/camunda-deployment-references/blob/main/azure/common/procedure/storage-account/storage-account-versioning.sh
+   ```
+
+4. Verify versioning is enabled on the blob container:
+
+   ```bash reference
+   https://github.com/camunda/camunda-deployment-references/blob/main/azure/common/procedure/storage-account/storage-account-verify.sh
+   ```
+
+This Azure Storage Account will now securely store your Terraform state files with versioning enabled.
 
 #### Initialize Terraform
 
