@@ -4,7 +4,7 @@ title: SAP integration
 description: "Camunda's SAP integration consists of several modules that can be used independently of one another: SAP OData connector, RFC outbound connector, and BTP plugin."
 ---
 
-Use Camunda's SAP integration to integrate SAP S/4HANA or ECC functionality in Camunda processes and integrate them with SAP BTP services.
+Use Camunda's [SAP](/reference/glossary.md#sap) integration to integrate SAP S/4HANA or ECC functionality in Camunda processes and integrate them with SAP BTP services.
 
 ## About the integration
 

@@ -16,4 +16,7 @@ To learn more about how Camunda Forms are created in Camunda Modeler and embedde
 
 Camunda Forms are powered by the open source [bpmn-io form-js library](https://github.com/bpmn-io/form-js). Visit the [open source repository](https://github.com/bpmn-io/form-js) to find out how to render a form using plain JavaScript in a custom application (note that this also requires you to fetch the form from the respective BPMN 2.0 element and provide data as needed to the form.)
 
-Visit the [form element library](./form-element-library/forms-element-library.md) for an overview of the components supported by Camunda Forms.
+## Additional resources
+
+- [Form element library](./form-element-library/forms-element-library.md): An overview of the components supported by Camunda Forms.
+- [SAP design system supported form features and properties](/components/camunda-integrations/sap/btp-plugin.md#supported-form-features-and-properties)
