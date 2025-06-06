@@ -31,9 +31,9 @@ The [AI Agent connector](/components/connectors/out-of-the-box-connectors/agenti
 
 It provides:
 
-- support for different LLM providers, such as OpenAI or Anthropic
-- conversational/short-term memory handling to enable feedback loops and follow-up tasks
-- tool resolution and orchestration through tools defined in an ad-hoc sub-process
+- Support for different LLM providers, such as OpenAI or Anthropic
+- Conversational/short-term memory handling to enable feedback loops and follow-up tasks
+- Tool resolution and orchestration through tools defined in an ad-hoc sub-process
 
 <!-- https://github.com/camunda/product-hub/issues/2779 -->
 
