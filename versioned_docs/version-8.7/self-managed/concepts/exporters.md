@@ -194,6 +194,13 @@ You can then set this filter in `Exporter#configure` method of your custom expor
 public class CustomExporter implements Exporter {
 
   // ...
+  private Controller controller;
+
+  @Override
+  public void open(final Controller controller) {
+    this.controller = controller;
+    // ...
+  }
 
   @Override
   public void configure(final Context context) {
@@ -201,11 +208,23 @@ public class CustomExporter implements Exporter {
     context.setFilter(new CustomExporterFilter());
   }
 
+  @Override
+  public void export(final Record<?> record) {
+    // ...
+    // after handling the record, acknowledge the position
+    controller.updateLastExportedRecordPosition(record.getPosition());
+  }
+
   // ...
 }
 ```
 
-:::note
+:::info
+Please note that after handling the record, you must acknowledge the position by calling `controller.updateLastExportedRecordPosition(record.getPosition())`.
+If the position is not acknowledged, then the log compaction does not happen resulting in out of disk space.
+:::
+
+:::info
 Filters are applied as an AND condition, meaning that all conditions must be met for a record to be accepted by the exporter.
 :::
 
@@ -250,11 +269,25 @@ If you want to accept more record types, value types and intents, you can modify
 public class MessageExpiredExporter implements Exporter {
 
   // ...
+  private Controller controller;
+
+  @Override
+  public void open(final Controller controller) {
+    this.controller = controller;
+    // ...
+  }
 
   @Override
   public void configure(final Context context) {
     // ...
     context.setFilter(new MessageExpiredExporterFilter());
+  }
+
+  @Override
+  public void export(final Record<?> record) {
+    // ...
+    // after handling the record, acknowledge the position
+    controller.updateLastExportedRecordPosition(record.getPosition());
   }
 
   // ...
