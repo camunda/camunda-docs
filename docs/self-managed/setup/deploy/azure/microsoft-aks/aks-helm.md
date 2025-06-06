@@ -76,10 +76,8 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 Additionally, before proceeding, export the following environment variables. These will be used throughout this guide for configuring DNS, certificates, and other Azure resources:
 
-```shell
-export AZURE_SUBSCRIPTION_ID="00000000-0000-0000-0000-000000000000"   # Your Azure Subscription ID where the DNS zone is located
-export AZURE_DNS_RESOURCE_GROUP="your-dns-resource-group"             # The name of the Azure resource group containing your DNS zone
-export AZURE_DNS_ZONE="example.com"                                   # The DNS zone name (e.g., your domain)
+```shell reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/export-domain-setup-vars.sh
 ```
 
 These variables will be referenced in later steps, so make sure they are set in your current shell session before continuing.
