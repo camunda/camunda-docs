@@ -54,6 +54,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/get-authorization",
+          label: "Get authorization",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/delete-authorization",
           label: "Delete authorization",
           className: "api-method delete",
@@ -90,8 +96,8 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/camunda-api-rest/specifications/pause-batch-operation",
-          label: "Pause Batch operation",
+          id: "apis-tools/camunda-api-rest/specifications/suspend-batch-operation",
+          label: "Suspend Batch operation",
           className: "api-method put",
         },
         {
@@ -348,7 +354,7 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/camunda-api-rest/specifications/add-mapping-to-group",
+          id: "apis-tools/camunda-api-rest/specifications/assign-mapping-to-group",
           label: "Assign a mapping rule to a group",
           className: "api-method put",
         },
@@ -564,6 +570,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/search-process-instance-incidents",
+          label: "Search for incidents associated with a process instance",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/cancel-process-instance",
           label: "Cancel process instance",
           className: "api-method post",
@@ -724,6 +736,12 @@ const sidebar: SidebarsConfig = {
           id: "apis-tools/camunda-api-rest/specifications/remove-group-from-role",
           label: "Unassign a group from a role",
           className: "api-method delete",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/search-groups-for-role",
+          label: "Search role groups",
+          className: "api-method post",
         },
         {
           type: "doc",
@@ -898,6 +916,12 @@ const sidebar: SidebarsConfig = {
           id: "apis-tools/camunda-api-rest/specifications/search-users",
           label: "Search users",
           className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/get-user",
+          label: "Get user",
+          className: "api-method get",
         },
         {
           type: "doc",
