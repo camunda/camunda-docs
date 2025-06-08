@@ -52,6 +52,30 @@ We recommend an **odd replication factor**, as it ensures high fault-tolerance a
 
 For example, a replication factor of four has no benefit over a replication factor of three. A replication factor for four would be weaker than a replication factor of five.
 
+### Roles
+
+A replica which takes part in a partition is assigned a role, which can be one of: `leader`, `follower`, or `inactive`.
+
+:::note
+There are other [Raft specific roles](./clustering.md#raft-consensus-and-replication-protocol) which are used as part of the
+replication process, but are generally not relevant for the operation of a Zeebe cluster.
+:::
+
+As mentioned, replication of a partition is from the **leader** to its **followers**. This means _there can only be one leader for
+a partition at any given time_. More generally, a node will a partition role of:
+
+- `leader`: a node which is appending new commands to the stream, and replicating them to the **followers**.
+- `follower`: a node which is actively taking part in replication, and which could become a `leader`.
+- `inactive`: a node which is still starting, or which has encounted a non-recoverable error.
+
+It can happen that nodes will encounter non-recoverable errors, and will explicitly stop a partition - aka take on an `inactive`
+role. Non-recoverable here simply means that it cannot automatically recover by itself - human intervention, for example, may allow
+it to recover.
+
+An example would be during a rolling update, it could be that a newer version of a node writes data that is not readable by the
+older version, which would cause it to stall. Recovery in this case would consist of restarting the older node so that it can update,
+which will let it recover.
+
 ## Partition distribution
 
 If no other configuration is specified, partitions are distributed in a guaranteed round-robin fashion across all brokers in the cluster, considering the number of nodes, number of partitions, and the replication factor. For example, the first partition will always be hosted by the first node, plus the following nodes based on the replication factor. The second partition will be hosted on the second node and the following to fulfill the replication factor.
