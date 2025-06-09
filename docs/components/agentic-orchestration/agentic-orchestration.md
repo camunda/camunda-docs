@@ -17,14 +17,11 @@ Agentic orchestration ensures your AI-driven processes are efficient, compliant,
 
 Camunda agentic orchestration uses [AI agents](ai-agents.md) to execute the non-deterministic parts of a process, built on the proven foundation of BPMN. Blending both deterministic and dynamic (AI-driven) process orchestration into your end-to-end processes allows you to take advantage of non-deterministic process orchestration without sacrificing predictability, customer experience, and compliance.
 
-For example, [insert best use case example].
+For example, use an AI agent to enhance a Know Your Customer (KYC) process, where the AI agent can:
 
-<!-- ### Benefits
-
-- Increase the scope of process automation to handle work traditionally requiring human case management, and provide a much higher level of flexibility for straight-through processing (STP).
-- Long-running
-- Always integrate safely with hil
-- Observability and auditing -->
+- Provide dynamic guidance and problem-solving to the person throughout the process.
+- Monitor for policy changes and dynamically change the process execution in response.
+- Automatically adjust risk level based on ongoing monitoring, and take action such as restricting account activity or dynamically adjusting spending limits.
 
 ## Get started
 

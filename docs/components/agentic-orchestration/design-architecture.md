@@ -17,7 +17,7 @@ Follow these principles when planning your agentic orchestration solution:
 
 - **Architect for composability**. Avoid becoming too dependant on a specific LLM model, for example by doing too much fine tuning. This allows you to more easily integrate newer LLM providers and models in the future that better suit your needs.
 
-- **Observability and governance**: Use [Operate](/components/operate/operate-introduction.md) and [Optimize](/components/optimize/what-is-optimize.md) for visibility of your agentic orchestration processes. 
+- **Observability and governance**: Use [Operate](/components/operate/operate-introduction.md) and [Optimize](/components/optimize/what-is-optimize.md) for visibility into your agentic orchestration processes. 
 
 ### When to use deterministic or non-deterministic orchestration
 
@@ -37,13 +37,11 @@ To learn more about determining when and where to use AI agents within your auto
 
 Follow these principles when designing your agentic orchestration solution:
 
-- **Guardrail sandwich**: Always apply guardrails in your process when using agents. For example, you could have one agent performing the task execution, with another agent following up to check the chain of thought and make sure every execution is compliant. If the execution is not compliant, you can route to a human for further work and validation. 
+- **Guardrail sandwich**: Apply guardrails in your process when using agents. For example, you could have one agent performing the task execution, with another agent following up to check the chain of thought and make sure every execution is compliant. If the execution is not compliant, route to a human for additional validation. 
 
-- **Context packing vs. retrieval augmentation**: Content
+- **Human-in-the-Loop escalation**: Provide an agent with an escalation path to a human - confidence levels are useful, but it is good to always provide deterministic outbreaks for agents.
 
-- **Human-in-the-Loop escalation**: Always provide an agent with an escalation path to a human - confidence levels are useful, but it is good to provide deterministic outbreaks for agents.
-
-- **Prompt versioning**: Version every prompt, as you may sometimes want to revert to using a previous prompt in some situations.
+- **Prompt versioning**: Version every prompt, so you can revert to using a previous prompt when required.
 
 ### Mixing Agents with Workflow patterns
 
