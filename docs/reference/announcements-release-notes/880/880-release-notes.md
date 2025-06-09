@@ -31,13 +31,13 @@ The following features are released to support agentic orchestration.
 
 #### AI Agent connector <span class="badge badge--medium" title="This feature affects Connectors">Connectors</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Dektop Modeler</span>
 
-The AI Agent connector enables AI agents to integrate with an LLM to provide interaction/reasoning capabilities. This connector is designed for use with an ad-hoc sub-process in a feedback loop, providing automated user interaction and tool selection.
+The AI Agent connector enables AI agents to integrate with an LLM to provide interaction/reasoning capabilities. This connector is designed for use with an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) in a [feedback loop](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-example.md), providing automated user interaction and tool selection.
 
 This connector provides:
 
 - Support for different LLM providers, such as OpenAI or Anthropic.
 - Conversational/short-term memory handling to enable feedback loops and follow-up tasks.
-- Tool resolution and orchestration through tools defined in an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md).
+- Tool resolution and orchestration through tools defined in an ad-hoc sub-process.
 
 To learn more about this connector, see [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
 
@@ -57,15 +57,25 @@ Camunda now supports [an integration with Azure DevOps](/components/modeler/web-
 
 <!-- https://github.com/camunda/product-hub/issues/2580 -->
 
-### FEEL Copilot
+### FEEL Copilot <span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
 
+Chat with the AI FEEL Copilot for help generating FEEL (Friendly Enough Expression Language) expressions in Web Modeler.
 
+To learn more about this feature, see [FEEL Copilot](/components/early-access/alpha/feel-copilot/feel-copilot.md).
 
-### FEEL Playground
+:::note
+The FEEL Copilot is released as an [early access alpha feature](/components/early-access/alpha/alpha-features.md) to allow you to test and participate in development by sharing feedback before general availability, and is subject to alpha feature limitations.
+:::
+
+<!-- https://github.com/camunda/web-modeler/issues/14223 -->
+
+### FEEL Playground <span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
 
 Use the FEEL Playground to validate and troubleshoot your FEEL expressions when modeling process diagrams in Web Modeler.
 
-To learn more about this feature, see FEEL Playground.
+To learn more about this feature, see [FEEL Playground](/components/modeler/feel/feel-playground.md).
+
+<!-- https://github.com/camunda/camunda-docs/issues/5611 -->
 
 ### Identity service enhancements <span class="badge badge--medium" title="This feature affects Identity">Identity</span>
 
@@ -81,12 +91,6 @@ Camunda’s new Identity service enhances authentication and authorization for S
 
 <!-- https://github.com/camunda/product-hub/issues/2222 -->
 
-### Offline installer for RPA worker
-
-This feature introduces an offline installer package for the Camunda [RPA](/components/rpa/overview.md) worker, allowing installation without internet connectivity. The offline installer removes reliance on external repositories or downloads, ensuring consistent, secure, and hassle-free deployment into air-gapped or restricted environments.
-
-<!-- https://github.com/camunda/product-hub/issues/2786 -->
-
 ### React to expired messages with a custom exporter
 
 Camunda now introduces a mechanism to react to expired messages. The original message is retrieved from the primary storage upon message expiration and the expiry event is enhanced with the original message. Existing functionality remains unchanged, so there is no disruption for current customers or custom exporters.
@@ -95,9 +99,15 @@ With these updates, developers can subscribe to the expired messages through a c
 
 <!-- https://github.com/camunda/product-hub/issues/2796 -->
 
+### RPA worker offline installer 
+
+This feature introduces an offline installer package for the Camunda [RPA](/components/rpa/overview.md) worker, allowing installation without internet connectivity. The offline installer removes reliance on external repositories or downloads, ensuring consistent, secure, and hassle-free deployment into air-gapped or restricted environments.
+
+<!-- https://github.com/camunda/product-hub/issues/2786 -->
+
 ### Tasklist frontend application migration to use Camunda 8 REST API <span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span>
 
-The Tasklist frontend application is now transitioning from the soon-to-be-deprecated Tasklist V1 API to the unified Camunda 8 REST API. 
+The Tasklist frontend application is transitioning from the soon-to-be-deprecated Tasklist V1 API to the unified Camunda 8 REST API. 
 
 - This ensures Tasklist remains fully compatible with Camunda 8’s new RDBMS support while continuing to work seamlessly with Elasticsearch and OpenSearch.
 - You can expect consistent functionality across different data layers, improved performance, and access to new platform features - all without losing existing capabilities or disrupting task management workflows.
