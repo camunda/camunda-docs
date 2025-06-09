@@ -107,7 +107,7 @@ This feature introduces an offline installer package for the Camunda [RPA](/comp
 
 ### Tasklist frontend application migration to use Camunda 8 REST API <span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span>
 
-The Tasklist frontend application is transitioning from the soon-to-be-deprecated Tasklist V1 API to the unified Camunda 8 REST API. 
+The Tasklist frontend application is transitioning from the soon-to-be-deprecated Tasklist V1 API to the unified Camunda 8 REST API.
 
 - This ensures Tasklist remains fully compatible with Camunda 8’s new RDBMS support while continuing to work seamlessly with Elasticsearch and OpenSearch.
 - You can expect consistent functionality across different data layers, improved performance, and access to new platform features - all without losing existing capabilities or disrupting task management workflows.
