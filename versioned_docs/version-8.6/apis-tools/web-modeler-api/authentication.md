@@ -66,10 +66,10 @@ While there's no project-level access control enforced in the API, access is sti
 
 <TabItem value='self-managed'>
 
-1. [Add an M2M application in Identity](/self-managed/identity/user-guide/additional-features/incorporate-applications.md).
-2. [Add permissions to this application](/self-managed/identity/user-guide/additional-features/incorporate-applications.md) for **Web Modeler API** with the needed [CRUD permissions](../../self-managed/identity/user-guide/roles/manage-permissions.md#preset-permissions).
+1. [Add an M2M application in Identity](/self-managed/identity/application-user-group-role-management/applications.md).
+2. [Add permissions to this application](/self-managed/identity/application-user-group-role-management/applications.md) for **Web Modeler API** with the needed [CRUD permissions](/self-managed/identity/access-management/access-management-overview.md#preset-permissions).
 3. Capture the `Client ID` and `Client Secret` from the application in Identity.
-4. [Generate a token](/self-managed/identity/user-guide/authorizations/generating-m2m-tokens.md) to access the Web Modeler REST API. Provide the `client_id` and `client_secret` from the values you previously captured in Identity.
+4. [Generate a token](/self-managed/identity/authentication.md) to access the Web Modeler REST API. Provide the `client_id` and `client_secret` from the values you previously captured in Identity.
    ```shell
    curl --location --request POST 'http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token' \
    --header 'Content-Type: application/x-www-form-urlencoded' \

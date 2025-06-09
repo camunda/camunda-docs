@@ -255,7 +255,7 @@ java -cp 'connector-runtime-application-VERSION-with-dependencies.jar:...:my-sec
 
 ## Multi-tenancy
 
-The Connector Runtime supports multiple tenants for inbound and outbound Connectors. These are configurable in [Identity](/self-managed/identity/user-guide/tenants/managing-tenants.md).
+The Connector Runtime supports multiple tenants for inbound and outbound Connectors. These are configurable in [Identity](/self-managed/identity/managing-tenants.md).
 
 A single Connector Runtime can serve a single tenant or can be configured to serve
 multiple tenants. By default, the runtime uses the tenant ID `<default>` for all

@@ -149,6 +149,9 @@ RewriteRule ^optimize/3.11.0/self-managed/(.*)$ /docs/8.3/self-managed/$1 [R=301
 #   8.8: content moves introduced prior to the release of version 8.8.
 #---------------------------------------------------------------------------------
 
+# Microsoft AKS
+RewriteRule ^docs/next/self-managed/setup/deploy/azure/microsoft-aks/(.*)$ /docs/next/self-managed/setup/deploy/azure/microsoft-aks/microsoft-aks/ [R=301,L]
+
 # Move document handling content
 RewriteRule ^docs/next/components/concepts/document-handling/(.*)$ /docs/next/components/document-handling/getting-started/ [R=301,L]
 RewriteRule ^docs/next/guides/document-handling/(.*)$ /docs/next/components/document-handling/getting-started/ [R=301,L]
@@ -220,6 +223,38 @@ RewriteRule ^docs/next/apis-tools/camunda-api-rest/specifications/update-element
 # Remove Camunda exporter from 8.7 docs
 RewriteRule ^docs/self-managed/zeebe-deployment/exporters/camunda-exporter/?$ /docs/self-managed/zeebe-deployment/exporters/install-zeebe-exporters/ [R=301,L]
 
+# Restructure Identity Docs (8.5)
+RewriteRule ^docs/8.5/self-managed/setup/guides/using-existing-keycloak/?$ /docs/8.5/self-managed/identity/configuration/connect-to-an-existing-keycloak/ [R=301,L]
+RewriteRule ^docs/8.5/self-managed/setup/guides/connect-to-an-oidc-provider/?$ /docs/8.5/self-managed/identity/configuration/connect-to-an-oidc-provider/ [R=301,L]
+RewriteRule ^docs/8.5/self-managed/concepts/access-control/applications/?$ /docs/8.5/self-managed/identity/application-user-group-role-management/applications/ [R=301,L]
+RewriteRule ^docs/8.5/self-managed/concepts/access-control/resource-authorizations/?$ /docs/8.5/self-managed/identity/access-management/resource-authorizations/ [R=301,L]
+RewriteRule ^docs/8.5/self-managed/concepts/access-control/user-task-access-restrictions/?$ /docs/8.5/self-managed/tasklist-deployment/user-task-access-restrictions/ [R=301,L]
+RewriteRule ^docs/8.5/self-managed/concepts/mapping-rules/?$ /docs/8.5/self-managed/identity/mapping-rules/ [R=301,L]
+RewriteRule ^docs/8.5/self-managed/identity/getting-started/install-identity/?$ /docs/8.5/self-managed/identity/install-identity/ [R=301,L]
+RewriteRule ^docs/8.5/self-managed/identity/user-guide/configuration/making-identity-production-ready/?$ /docs/8.5/self-managed/identity/miscellaneous/making-identity-production-ready/ [R=301,L]
+RewriteRule ^docs/8.5/self-managed/identity/user-guide/configuration/configure-external-identity-provider/?$ /docs/8.5/self-managed/identity/configuration/configure-external-identity-provider/ [R=301,L]
+RewriteRule ^docs/8.5/self-managed/identity/user-guide/configuration/configure-logging/?$ /docs/8.5/self-managed/identity/miscellaneous/configure-logging/ [R=301,L]
+RewriteRule ^docs/8.5/self-managed/identity/user-guide/configuration/connect-to-an-existing-keycloak/?$ /docs/8.5/self-managed/identity/configuration/connect-to-an-existing-keycloak/ [R=301,L]
+RewriteRule ^docs/8.5/self-managed/identity/user-guide/roles/manage-roles/?$ /docs/8.5/self-managed/identity/application-user-group-role-management/manage-roles/ [R=301,L]
+RewriteRule ^docs/8.5/self-managed/identity/user-guide/roles/manage-permissions/?$ /docs/8.5/self-managed/identity/access-management/manage-permissions/ [R=301,L]
+RewriteRule ^docs/8.5/self-managed/identity/user-guide/groups/manage-groups/?$ /docs/8.5/self-managed/identity/application-user-group-role-management/manage-groups/ [R=301,L]
+RewriteRule ^docs/8.5/self-managed/identity/user-guide/groups/manage-users-roles-to-group/?$ /docs/8.5/self-managed/identity/application-user-group-role-management/manage-groups/ [R=301,L]
+RewriteRule ^docs/8.5/self-managed/identity/user-guide/authorizations/managing-resource-authorizations/?$ /docs/8.5/self-managed/identity/access-management/resource-authorizations/ [R=301,L]
+RewriteRule ^docs/8.5/self-managed/identity/user-guide/authorizations/managing-user-access/?$ /docs/8.5/self-managed/identity/access-management/manage-permissions/ [R=301,L]
+RewriteRule ^docs/8.5/self-managed/identity/user-guide/authorizations/generating-m2m-tokens/?$ /docs/8.5/self-managed/identity/authentication/ [R=301,L]
+RewriteRule ^docs/8.5/self-managed/identity/user-guide/tenants/managing-tenants/?$ /docs/8.5/self-managed/identity/managing-tenants/ [R=301,L]
+RewriteRule ^docs/8.5/self-managed/identity/user-guide/mapping-rules/managing-mapping-rules/?$ /docs/8.5/self-managed/identity/mapping-rules/ [R=301,L]
+RewriteRule ^docs/8.5/self-managed/identity/user-guide/additional-features/adding-an-api/?$ /docs/8.5/self-managed/identity/access-management/access-management-overview/ [R=301,L]
+RewriteRule ^docs/8.5/self-managed/identity/user-guide/additional-features/incorporate-applications/?$ /docs/8.5/self-managed/identity/application-user-group-role-management/applications/ [R=301,L]
+RewriteRule ^docs/8.5/self-managed/identity/deployment/configuration-variables/?$ /docs/8.5/self-managed/identity/miscellaneous/configuration-variables/ [R=301,L]
+RewriteRule ^docs/8.5/self-managed/identity/deployment/application-monitoring/?$ /docs/8.5/self-managed/identity/miscellaneous/application-monitoring/ [R=301,L]
+RewriteRule ^docs/8.5/self-managed/identity/deployment/starting-configuration-for-identity/?$ /docs/8.5/self-managed/identity/miscellaneous/starting-configuration/ [R=301,L]
+RewriteRule ^docs/8.5/self-managed/identity/deployment/resource-management/?$ /docs/8.5/self-managed/identity/miscellaneous/resource-management/ [R=301,L]
+RewriteRule ^docs/8.5/self-managed/identity/troubleshooting/troubleshoot-identity/?$ /docs/8.5/self-managed/identity/miscellaneous/troubleshoot-identity/ [R=301,L]
+RewriteRule ^docs/8.5/self-managed/concepts/access-control/apis/?$ /docs/8.5/self-managed/identity/access-management/access-management-overview [R=301,L]
+RewriteRule ^docs/8.5/self-managed/identity/install-identity/?$ /docs/8.5/self-managed/identity/identity-first-steps/ [R=301,L]
+RewriteRule ^docs/8.5/self-managed/identity/user-guide/configuration/alternative-db/?$ /docs/8.5/self-managed/identity/configuration/alternative-db/ [R=301,L]
+
 # Restructure Identity Docs (8.7)
 RewriteRule ^docs/self-managed/setup/guides/using-existing-keycloak/?$ /docs/self-managed/identity/configuration/connect-to-an-existing-keycloak/ [R=301,L]
 RewriteRule ^docs/self-managed/setup/guides/connect-to-an-oidc-provider/?$ /docs/self-managed/identity/configuration/connect-to-an-oidc-provider/ [R=301,L]
@@ -251,6 +286,38 @@ RewriteRule ^docs/self-managed/identity/troubleshooting/troubleshoot-identity/?$
 RewriteRule ^docs/self-managed/concepts/access-control/apis/?$ /docs/self-managed/identity/access-management/access-management-overview [R=301,L]
 RewriteRule ^docs/self-managed/identity/install-identity/?$ /docs/self-managed/identity/identity-first-steps/ [R=301,L]
 RewriteRule ^docs/self-managed/identity/user-guide/configuration/alternative-db/?$ /docs/self-managed/identity/configuration/alternative-db/ [R=301,L]
+
+# Restructure Identity Docs (8.6)
+RewriteRule ^docs/8.6/self-managed/setup/guides/using-existing-keycloak/?$ /docs/8.6/self-managed/identity/configuration/connect-to-an-existing-keycloak/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/setup/guides/connect-to-an-oidc-provider/?$ /docs/8.6/self-managed/identity/configuration/connect-to-an-oidc-provider/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/concepts/access-control/applications/?$ /docs/8.6/self-managed/identity/application-user-group-role-management/applications/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/concepts/access-control/resource-authorizations/?$ /docs/8.6/self-managed/identity/access-management/resource-authorizations/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/concepts/access-control/user-task-access-restrictions/?$ /docs/8.6/self-managed/tasklist-deployment/user-task-access-restrictions/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/concepts/mapping-rules/?$ /docs/8.6/self-managed/identity/mapping-rules/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/identity/getting-started/install-identity/?$ /docs/8.6/self-managed/identity/install-identity/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/identity/user-guide/configuration/making-identity-production-ready/?$ /docs/8.6/self-managed/identity/miscellaneous/making-identity-production-ready/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/identity/user-guide/configuration/configure-external-identity-provider/?$ /docs/8.6/self-managed/identity/configuration/configure-external-identity-provider/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/identity/user-guide/configuration/configure-logging/?$ /docs/8.6/self-managed/identity/miscellaneous/configure-logging/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/identity/user-guide/configuration/connect-to-an-existing-keycloak/?$ /docs/8.6/self-managed/identity/configuration/connect-to-an-existing-keycloak/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/identity/user-guide/roles/manage-roles/?$ /docs/8.6/self-managed/identity/application-user-group-role-management/manage-roles/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/identity/user-guide/roles/manage-permissions/?$ /docs/8.6/self-managed/identity/access-management/manage-permissions/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/identity/user-guide/groups/manage-groups/?$ /docs/8.6/self-managed/identity/application-user-group-role-management/manage-groups/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/identity/user-guide/groups/manage-users-roles-to-group/?$ /docs/8.6/self-managed/identity/application-user-group-role-management/manage-groups/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/identity/user-guide/authorizations/managing-resource-authorizations/?$ /docs/8.6/self-managed/identity/access-management/resource-authorizations/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/identity/user-guide/authorizations/managing-user-access/?$ /docs/8.6/self-managed/identity/access-management/manage-permissions/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/identity/user-guide/authorizations/generating-m2m-tokens/?$ /docs/8.6/self-managed/identity/authentication/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/identity/user-guide/tenants/managing-tenants/?$ /docs/8.6/self-managed/identity/managing-tenants/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/identity/user-guide/mapping-rules/managing-mapping-rules/?$ /docs/8.6/self-managed/identity/mapping-rules/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/identity/user-guide/additional-features/adding-an-api/?$ /docs/8.6/self-managed/identity/access-management/access-management-overview/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/identity/user-guide/additional-features/incorporate-applications/?$ /docs/8.6/self-managed/identity/application-user-group-role-management/applications/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/identity/deployment/configuration-variables/?$ /docs/8.6/self-managed/identity/miscellaneous/configuration-variables/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/identity/deployment/application-monitoring/?$ /docs/8.6/self-managed/identity/miscellaneous/application-monitoring/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/identity/deployment/starting-configuration-for-identity/?$ /docs/8.6/self-managed/identity/miscellaneous/starting-configuration/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/identity/deployment/resource-management/?$ /docs/8.6/self-managed/identity/miscellaneous/resource-management/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/identity/troubleshooting/troubleshoot-identity/?$ /docs/8.6/self-managed/identity/miscellaneous/troubleshoot-identity/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/concepts/access-control/apis/?$ /docs/8.6/self-managed/identity/access-management/access-management-overview [R=301,L]
+RewriteRule ^docs/8.6/self-managed/identity/install-identity/?$ /docs/8.6/self-managed/identity/identity-first-steps/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/identity/user-guide/configuration/alternative-db/?$ /docs/8.6/self-managed/identity/configuration/alternative-db/ [R=301,L]
 
 # Remove V2 REST user search API from 8.7 and 8.8 docs
 RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/find-all-users/?$ /docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api/ [R=301,L]
