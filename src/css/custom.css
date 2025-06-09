@@ -464,6 +464,33 @@ body {
   border: 1px solid #171c29;
 }
 
+.button--hero--topic {
+  background-color: #0f62fe;
+  border-color: #0f62fe;
+  color: #fff !important;
+  transition: all 0.3s;
+}
+
+.button--hero--topic:hover {
+  background-color: #0050e6;
+  border-color: #0050e6;
+  color: #fff !important;
+}
+
+[data-theme="dark"] .button--hero--topic {
+  border-color: rgb(255, 255, 255);
+  transition: 0.3s;
+  color: rgb(255, 255, 255);
+  background-color: transparent;
+  border: 1px solid white;
+}
+
+[data-theme="dark"] .button--hero--topic:hover {
+  background-color: #ffffff;
+  color: var(--ifm-color-black)!important;
+  border: 1px solid #171c29;
+}
+
 .dropdown {
   background-color: #edeef0;
   border-radius: 15px !important;
