@@ -25,17 +25,31 @@ These release notes identify the new features included in 8.8, including [alpha 
 | :----------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------- |
 | 10 June 2025 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.8.0-alpha5)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.8.0-alpha5)</li></ul> | [Release blog](https://camunda.com/blog/2025/05/camunda-alpha-release-june-2025/) |
 
-### AI Agent Connector <span class="badge badge--medium" title="This feature affects Connectors">Connectors</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Dektop Modeler</span>
+### Agentic orchestration
 
-The [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) enables AI agents to integrate with an LLM to provide interaction/reasoning capabilities. This connector is designed for use with an ad-hoc sub-process in a feedback loop, providing automated user interaction and tool selection.
+The following features are released to support agentic orchestration.
 
-It provides:
+#### AI Agent connector <span class="badge badge--medium" title="This feature affects Connectors">Connectors</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Dektop Modeler</span>
 
-- Support for different LLM providers, such as OpenAI or Anthropic
-- Conversational/short-term memory handling to enable feedback loops and follow-up tasks
-- Tool resolution and orchestration through tools defined in an ad-hoc sub-process
+The AI Agent connector enables AI agents to integrate with an LLM to provide interaction/reasoning capabilities. This connector is designed for use with an ad-hoc sub-process in a feedback loop, providing automated user interaction and tool selection.
+
+This connector provides:
+
+- Support for different LLM providers, such as OpenAI or Anthropic.
+- Conversational/short-term memory handling to enable feedback loops and follow-up tasks.
+- Tool resolution and orchestration through tools defined in an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md).
+
+To learn more about this connector, see [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
 
 <!-- https://github.com/camunda/product-hub/issues/2779 -->
+
+#### Vector database connector <span class="badge badge--medium" title="This feature affects Connectors">Connectors</span>
+
+The vector database connector allows embedding, storing, and retrieving Large Language Model (LLM) embeddings. This enables building AI-based solutions for your organizations, such as context document search, long-term LLM memory, and agentic AI interaction in combination with the AI Agent connector (RAG).
+
+To learn more about this connector, see [vector database connector](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md).
+
+<!-- https://github.com/camunda/product-hub/issues/2744 -->
 
 ### Azure DevOps integration <span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
 
@@ -43,7 +57,17 @@ Camunda now supports [an integration with Azure DevOps](/components/modeler/web-
 
 <!-- https://github.com/camunda/product-hub/issues/2580 -->
 
-### Enhanced Identity service <span class="badge badge--medium" title="This feature affects Identity">Identity</span>
+### FEEL Copilot
+
+
+
+### FEEL Playground
+
+Use the FEEL Playground to validate and troubleshoot your FEEL expressions when modeling process diagrams in Web Modeler.
+
+To learn more about this feature, see FEEL Playground.
+
+### Identity service enhancements <span class="badge badge--medium" title="This feature affects Identity">Identity</span>
 
 Camunda’s new Identity service enhances authentication and authorization for Self-Managed and SaaS environments.
 
@@ -56,12 +80,6 @@ Camunda’s new Identity service enhances authentication and authorization for S
 - **Cluster-Specific Roles and Groups**: With SaaS environments, manage distinct roles, groups, and authorizations for each cluster independently.
 
 <!-- https://github.com/camunda/product-hub/issues/2222 -->
-
-### Migrate Tasklist frontend application to use Camunda 8 REST API <span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span>
-
-The Tasklist frontend application is now transitioning from the soon-to-be-deprecated Tasklist V1 API to the unified Camunda 8 REST API. This change ensures Tasklist remains fully compatible with Camunda 8’s new RDBMS support while continuing to work seamlessly with Elasticsearch and OpenSearch. Users can expect consistent functionality across different data layers, improved performance, and access to new platform features—all without losing existing capabilities or disrupting task management workflows.
-
-<!-- https://github.com/camunda/product-hub/issues/2516 -->
 
 ### Offline installer for RPA worker
 
@@ -77,11 +95,14 @@ With these updates, developers can subscribe to the expired messages through a c
 
 <!-- https://github.com/camunda/product-hub/issues/2796 -->
 
-### Vector database connector <span class="badge badge--medium" title="This feature affects Connectors">Connectors</span>
+### Tasklist frontend application migration to use Camunda 8 REST API <span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span>
 
-The [vector database connector](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md) allows embedding, storing, and retrieving Large Language Model (LLM) embeddings. This enables building AI-based solutions for your organizations, such as context document search, long-term LLM memory, and agentic AI interaction in combination with the AI Agent connector (RAG).
+The Tasklist frontend application is now transitioning from the soon-to-be-deprecated Tasklist V1 API to the unified Camunda 8 REST API. 
 
-<!-- https://github.com/camunda/product-hub/issues/2744 -->
+- This ensures Tasklist remains fully compatible with Camunda 8’s new RDBMS support while continuing to work seamlessly with Elasticsearch and OpenSearch.
+- You can expect consistent functionality across different data layers, improved performance, and access to new platform features - all without losing existing capabilities or disrupting task management workflows.
+
+<!-- https://github.com/camunda/product-hub/issues/2516 -->
 
 ## 8.8.0-alpha4
 
