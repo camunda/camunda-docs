@@ -35,3 +35,7 @@ Log in with the email address and password you used in the previous form, or use
 After login, select the square-shaped **Camunda components** icon in the upper-left corner, and select Console to view the Console overview page. This is the central place to manage the clusters, diagrams, and forms you want to deploy to Camunda 8.
 
 ![overview-home](./img/home.png)
+
+## Additional resources
+
+- [Camunda Academy: Create a Camunda 8 Account](https://academy.camunda.com/c8-h2-create-account?reg=1)
