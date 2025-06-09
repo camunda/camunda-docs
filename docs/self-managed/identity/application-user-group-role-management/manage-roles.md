@@ -1,7 +1,7 @@
 ---
 id: manage-roles
 title: Manage roles
-sidebar_label: "Manage roles"
+sidebar_label: "Roles"
 description: "Use Identity to manage roles"
 ---
 

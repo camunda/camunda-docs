@@ -1,7 +1,7 @@
 ---
 id: applications
 title: "Manage applications"
-sidebar_label: "Manage applications"
+sidebar_label: "Applications"
 ---
 
 import ApplicationImg from '../img/add-application-modal-2.png';

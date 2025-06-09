@@ -1,7 +1,7 @@
 ---
 id: manage-permissions
 title: Manage permissions
-sidebar_label: "Manage permissions"
+sidebar_label: "Permissions"
 description: "Use Identity to manage permissions for a role"
 ---
 

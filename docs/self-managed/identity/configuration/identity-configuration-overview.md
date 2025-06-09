@@ -1,6 +1,6 @@
 ---
 id: identity-configuration-overview
-title: "Configure Identity"
+title: "Configuration"
 sidebar_label: "Configure Identity"
 description: "Learn more about how Identity plays together with Keycloak and other OIDC IdP applications to provide authentication services"
 ---

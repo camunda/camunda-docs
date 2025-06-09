@@ -1481,7 +1481,7 @@ module.exports = {
             "self-managed/identity/identity-first-steps",
             {
               type: "category",
-              label: "Configure Identity",
+              label: "Configuration",
               link: {
                 type: "doc",
                 id: "self-managed/identity/configuration/identity-configuration-overview",
@@ -1500,7 +1500,7 @@ module.exports = {
               items: [
                 {
                   type: "category",
-                  label: "Manage users, groups, roles, and applications",
+                  label: "Users, groups, roles, and applications",
                   link: {
                     type: "doc",
                     id: "self-managed/identity/application-user-group-role-management/identity-application-user-group-role-management-overview",
@@ -1513,7 +1513,7 @@ module.exports = {
                 },
                 {
                   type: "category",
-                  label: "Manage access and permissions",
+                  label: "Access and permissions",
                   link: {
                     type: "doc",
                     id: "self-managed/identity/access-management/access-management-overview",

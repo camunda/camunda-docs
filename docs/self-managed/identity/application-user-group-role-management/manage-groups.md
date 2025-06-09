@@ -1,6 +1,6 @@
 ---
 id: manage-groups
-title: "Manage groups"
+title: "Groups"
 description: "Groups are a way to apply a set of roles and permissions to users. Use Identity to create a group."
 ---
 
