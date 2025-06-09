@@ -13,7 +13,7 @@ For example, the property `camunda.client.worker.defaults.max-jobs-active` is re
 
 ## Modes
 
-The Spring SDK has modes with meaningful defaults aligned with the distribution's default connection details. Each mode is made for a Camunda 8 setup, and only one mode may be used at a time.
+The Camunda Spring Boot SDK has modes with meaningful defaults aligned with the distribution's default connection details. Each mode is made for a Camunda 8 setup, and only one mode may be used at a time.
 
 :::note
 The defaults applied by the modes are overwritten by _any_ other set property, including legacy/deprecated properties. Check your configuration and logs to avoid unwanted override.
@@ -821,7 +821,7 @@ camunda:
 
 ## Observing metrics
 
-The Spring Camunda SDK provides some out-of-the-box metrics that can be leveraged via [Spring Actuator](https://docs.spring.io/spring-boot/docs/current/actuator-api/htmlsingle/). Whenever actuator is on the classpath, you can access the following metrics:
+The Camunda Spring Boot SDK provides some out-of-the-box metrics that can be leveraged via [Spring Actuator](https://docs.spring.io/spring-boot/docs/current/actuator-api/htmlsingle/). Whenever actuator is on the classpath, you can access the following metrics:
 
 - `camunda.job.invocations`: Number of invocations of job workers (tagging the job type)
 

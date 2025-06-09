@@ -9,7 +9,9 @@ import DeployDiagramImg from '../../img/deploy-diagram-modal.png';
 
 Supported environment changes and breaking changes or deprecations for the Camunda 8.8 release are summarized below.
 
-[Release notes](/reference/announcements-release-notes/880/880-release-notes.md) now contain all updates for new features and enhancements.
+Please read out [release notes](/reference/announcements-release-notes/880/880-release-notes.md) to learn about all new features and enhancements.
+
+Please visit our [quality board](https://github.com/orgs/camunda/projects/187/views/15) to get an overview of known bugs by component and severity.
 
 | Scheduled release date | Scheduled end of maintenance | Release notes | Blog |
 | :--------------------- | :--------------------------- | :------------ | :--- |
@@ -37,6 +39,10 @@ The 13.0.0-alpha2 Helm chart released with Camunda 8.8.0-alpha2 establishes a ne
 This temporary limitation will be resolved in subsequent alpha releases.
 
 #### Helm charts
+
+#### Separated Ingress deprecation
+
+The separated Ingress Helm configuration for Camunda 8 Self-Managed has been deprecated in 8.6, and will be removed from the Helm chart in 8.8. Only the combined Ingress configuration is officially supported. See the [Ingress guide](/self-managed/setup/guides/ingress-setup.md) for more information on configuring a combined Ingress setup.
 
 If you are using the recommended Camunda 8 deployment option ([Helm charts](/self-managed/setup/install.md)), the upgrade path from version 8.7 to 8.8 will be straightforward by changing the values file to the new syntax.
 
@@ -135,9 +141,9 @@ The existing data schema in the secondary storage has been harmonized, to be use
 Learn more about these updates in Streamlined Deployment with 8.7.
 ::: -->
 
-### Camunda Java client and Camunda Spring SDK
+### Camunda Java client and Camunda Spring Boot SDK
 
-With the Camunda 8.8 release, Camunda Java Client and Camunda Spring SDK replace the Zeebe Java client and Spring Zeebe SDK. This allows you to use a single consolidated client to interact with Camunda orchestration clusters.
+With the Camunda 8.8 release, Camunda Java Client and Camunda Spring Boot SDK replace the Zeebe Java client and Spring Zeebe SDK. This allows you to use a single consolidated client to interact with Camunda orchestration clusters.
 
 The `CamundaClient` replaces the `ZeebeClient`, offering the same functionality and adding new capabilities.
 
