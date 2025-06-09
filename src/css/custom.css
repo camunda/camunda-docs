@@ -68,6 +68,12 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   }
 }
 
+@media (max-width: 996px) {
+  .hero-topic {
+    display: none;
+  }
+}
+
 /* Match alert colours to Camunda brand colours */
 :root {
   --ifm-color-success-dark: rgb(12, 176, 96);

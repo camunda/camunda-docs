@@ -21,20 +21,20 @@ Building process automation solutions with Camunda 8 works similarly regardless 
 </div>
 <div class="double-column-right" style={{flex: '1'}}>
 
-<img src={OverviewImg} alt="Image showing Self-Managed components and features" title="Use Camunda 8 Self-Managed as a self-hosted alternative to Camunda 8 SaaS" class="img-noborder img-600 img-transparent fade-in-top-image" style={{marginTop: '0'}}/>
+<img src={OverviewImg} alt="Image showing Self-Managed components and features" title="Use Camunda 8 Self-Managed as a self-hosted alternative to Camunda 8 SaaS" class="img-noborder img-600 img-transparent fade-in-top-image hero-topic" style={{marginTop: '0', marginBottom: '0'}}/>
 
 </div>
 </div>
 
 ## Install and run locally
 
-Get started by deploying camunda 8 Self-Managed locally using Camunda 8 Run, Docker Compose, or your local Kubernetes cluster.
+Install and run Camunda 8 Self-Managed locally using Camunda 8 Run, Docker Compose, or your local Kubernetes cluster.
 
 <CardGrid card={gettingStartedCards} />
 
 ## Install and run in production
 
-Learn how to install and deploy, and update Camunda 8 Self-Managed locally and in production.
+Install and run Camunda 8 Self-Managed in production using Helm, Docker, or a manual setup.
 
 <CardGrid card={installCards} />
 
