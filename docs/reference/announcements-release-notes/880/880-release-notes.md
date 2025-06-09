@@ -99,7 +99,7 @@ With these updates, developers can subscribe to the expired messages through a c
 
 <!-- https://github.com/camunda/product-hub/issues/2796 -->
 
-### RPA worker offline installer 
+### RPA worker offline installer
 
 This feature introduces an offline installer package for the Camunda [RPA](/components/rpa/overview.md) worker, allowing installation without internet connectivity. The offline installer removes reliance on external repositories or downloads, ensuring consistent, secure, and hassle-free deployment into air-gapped or restricted environments.
 
