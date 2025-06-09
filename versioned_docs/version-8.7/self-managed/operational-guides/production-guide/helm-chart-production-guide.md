@@ -61,7 +61,7 @@ For more information on the difference between the Orchestration cluster and the
 
 ### Install the Helm chart
 
-As there will be a Helm deployment in each namespace, create your own `management-values.yaml` and `orchestration-values.yaml`, or modify an existing setup by applying the production recommendations in the next section. Example values files can be found at the [end of this guide](#example-management-valuesyaml).
+As there will be a Helm deployment in each namespace, create your own `management-values.yaml` and `orchestration-values.yaml`, or modify an existing setup by applying the production recommendations in the next section. Example values files can be found at the [end of this guide](#create-a-production-valuesyaml).
 
 The Camunda Helm chart can be installed in each namespace using the following command:
 
