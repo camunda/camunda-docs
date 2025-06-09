@@ -21,7 +21,7 @@ Multi-tenancy is currently only available for Camunda 8 Self-Managed with authen
 
 ## Multi-tenancy
 
-Multi-tenancy in the context of Camunda 8 refers to the ability of Camunda 8 to serve multiple distinct [tenants](/self-managed/identity/user-guide/tenants/managing-tenants.md) or
+Multi-tenancy in the context of Camunda 8 refers to the ability of Camunda 8 to serve multiple distinct [tenants](/self-managed/identity/managing-tenants.md) or
 clients within a single installation. Multi-tenancy extends these capabilities to cater to the needs of
 different departments, teams, or even external clients, all within a shared Camunda environment.
 
@@ -41,7 +41,7 @@ resource utilization and ensures that Camunda 8 remains cost-effective.
 
 ### Efficient administration
 
-Administrators can manage all tenants from [Identity](/self-managed/identity/user-guide/tenants/managing-tenants.md). This simplifies the process of monitoring and maintaining
+Administrators can manage all tenants from [Identity](/self-managed/identity/managing-tenants.md). This simplifies the process of monitoring and maintaining
 different tenant environments, making administrative tasks more efficient and reducing overhead.
 
 ### Security
@@ -72,8 +72,7 @@ criteria:
 - Dashes (`-`)
 - Underscores (`_`)
 - Dots (`.`)
-- At sign (`@`)
-- A maximum length of 256 characters.
+- A maximum length of 31 characters.
 
 ### Inherited tenant ownership
 
@@ -82,6 +81,22 @@ Camunda 8 data produced from these resources will belong to the same tenant. The
 example on how tenant ownership is inherited.
 
 ![Tenant ownership inheritance diagram](img/multi-tenancy.png)
+
+### Standalone Zeebe usage
+
+For a standalone Zeebe installation, multi-tenancy is currently available with the following options:
+
+- Authentication enabled [through Identity](../../../self-managed/identity/what-is-identity/).
+- By [integrating an external tenant-managing component](../zeebe-deployment/zeebe-gateway/interceptors.md#implementing-a-tenant-providing-interceptor)
+  with Zeebe.
+
+:::note
+
+It's not possible to use multi-tenancy on the full Camunda 8 stack when
+[integrating an external tenant-managing component](../zeebe-deployment/zeebe-gateway/interceptors.md#implementing-a-tenant-providing-interceptor)
+in Zeebe, as the remaining Camunda 8 components don't support this setup.
+
+:::
 
 ## Unsupported features
 

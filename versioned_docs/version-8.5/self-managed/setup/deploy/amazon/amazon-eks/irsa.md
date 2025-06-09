@@ -288,7 +288,7 @@ Don't forget to set the `serviceAccountName` of the deployment/statefulset to th
 
 ### Identity
 
-Since Identity uses PostgreSQL, configure `identity` to use IRSA with Amazon Aurora PostgreSQL. Check the [Identity database configuration](../../../../identity/deployment/configuration-variables.md#running-identity-on-amazon-aurora-postgresql) for more details.
+Since Identity uses PostgreSQL, configure `identity` to use IRSA with Amazon Aurora PostgreSQL. Check the [Identity database configuration](/self-managed/identity/miscellaneous/configuration-variables.md#running-identity-on-amazon-aurora-postgresql) for more details.
 Identity already comes fitted with the [aws-advanced-jdbc-wrapper](https://github.com/awslabs/aws-advanced-jdbc-wrapper) within the Docker image.
 
 #### Kubernetes configuration
