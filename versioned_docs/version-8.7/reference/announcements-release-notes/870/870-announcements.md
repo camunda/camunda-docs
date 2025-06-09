@@ -86,6 +86,12 @@ The old `zeebe-client-java` artifact will be relocation-only, so your build syst
 The Zeebe Java client will not be developed further and will only receive bug fixes for as long as version 8.7 is officially supported.
 :::
 
+### Camunda 8 Self-Managed
+
+#### Helm chart - Separated Ingress deprecation
+
+The separated Ingress Helm configuration for Camunda 8 Self-Managed has been deprecated in 8.6, and will be removed from the Helm chart in 8.8. Only the combined Ingress configuration is officially supported. See the [Ingress guide](/self-managed/setup/guides/ingress-setup.md) for more information on configuring a combined Ingress setup.
+
 #### Adjustments
 
 - **New package structure**:
