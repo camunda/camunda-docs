@@ -278,6 +278,13 @@ Output in JSON format with keys: "sentiment" (positive/negative/neutral), "key_i
 
 #### JSON response format
 
+:::note
+
+The JSON response format is currently only supported for OpenAI models. Use the text response format in combination with
+the **Parse text as JSON** option for other providers.
+
+:::
+
 If the model supports it, selecting JSON as response format instructs the model to always return a JSON response. In
 case the model does not return a valid JSON response, the connector will throw an error.
 
