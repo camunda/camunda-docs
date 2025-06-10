@@ -58,8 +58,13 @@ module.exports = {
   Components: [
     "components/components-overview",
     {
-      Concepts: [
-        "components/concepts/what-is-camunda-8",
+      type: "category",
+      label: "Concepts",
+      link: {
+        type: "doc",
+        id: "components/concepts/concepts-overview",
+      },
+      items: [
         "components/concepts/clusters",
         "components/concepts/processes",
         "components/concepts/process-applications",
@@ -97,9 +102,9 @@ module.exports = {
         id: "components/agentic-orchestration/agentic-orchestration",
       },
       items: [
-            "components/agentic-orchestration/ao-design",
-            "components/agentic-orchestration/ai-agents",
-          ],
+        "components/agentic-orchestration/ao-design",
+        "components/agentic-orchestration/ai-agents",
+      ],
     },
     {
       type: "category",
