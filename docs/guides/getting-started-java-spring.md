@@ -255,3 +255,7 @@ To deploy your process upon application start, take the following steps:
 2. In Desktop Modeler, change the tax amount calculated to `total * 1.2` under **FEEL expression** and save your changes.
 
 Re-run the application in your terminal with `mvn spring-boot:run` to see the process run. In Operate, note the new version `2` when filtering process instances, and the tax amount has increased for the most recent process instance.
+
+## Additional resources
+
+- [Camunda Academy: Develop Workers (Spring Zeebe)](https://academy.camunda.com/c8-develop-workers-spring)

@@ -1253,6 +1253,25 @@ ul ul .table-of-contents__link--active {
   font-weight: 500;
 }
 
+.table-callout {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.table-callout th,
+.table-callout td {
+  border-left: 0;
+  border-right: 0;
+  border-top: 1px solid var(--ifm-table-border-color);
+  border-bottom: 1px solid var(--ifm-table-border-color);
+  padding: var(--ifm-table-cell-padding);
+}
+
+.table-callout thead tr {
+  border-left: 0;
+  border-right: 0;
+}
+
 /* Glossary page links */
 .alphabet-navigation {
   display: flex;
@@ -1284,3 +1303,4 @@ ul ul .table-of-contents__link--active {
   opacity: 0.5;
   cursor: default;
 }
+
