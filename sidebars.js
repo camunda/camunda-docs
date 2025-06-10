@@ -114,6 +114,7 @@ module.exports = {
         id: "components/document-handling/getting-started",
       },
       items: [
+        "components/document-handling/use-cases",
         "components/document-handling/upload-document-to-bpmn-process",
         "components/document-handling/display-and-download-document",
         "components/document-handling/send-document-to-external-system-via-connector",
