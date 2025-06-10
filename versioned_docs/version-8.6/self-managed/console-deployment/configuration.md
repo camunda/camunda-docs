@@ -84,7 +84,7 @@ console:
 ## Using a different OpenID Connect (OIDC) authentication provider than Keycloak
 
 By default, Console uses Keycloak to provide authentication.
-You can use a different OIDC provider by following the steps described in the [OIDC connection guide](/self-managed/setup/guides/connect-to-an-oidc-provider.md).
+You can use a different OIDC provider by following the steps described in the [OIDC connection guide](/self-managed/identity/configuration/connect-to-an-oidc-provider.md?authPlatform=microsoftEntraId#configuration).
 
 ## Monitoring
 

@@ -109,6 +109,8 @@ This release contains the following limitations:
       1. Feature is planned to be delivered with an upcoming patch release. Please see [issue](https://github.com/camunda/issues/issues/569) for latest progress.
       2. [Disable connectors component](/self-managed/identity/configuration/connect-to-an-oidc-provider.md#configuration) when configuring a custom OIDC provider.
 
+Please visit our [quality board](https://github.com/orgs/camunda/projects/187/views/18) to get an overview of known bugs by component and severity.
+
 ### Key changes
 
 #### Form linking
