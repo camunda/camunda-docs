@@ -151,6 +151,8 @@ RewriteRule ^optimize/3.11.0/self-managed/(.*)$ /docs/8.3/self-managed/$1 [R=301
 
 # Migrate overview pages
 RewriteRule ^docs/next/components/concepts/what-is-camunda-8/(.*)$ /docs/next/components/components-overview/ [R=301,L]
+RewriteRule ^docs/components/concepts/what-is-camunda-8/(.*)$ /docs/components/components-overview/ [R=301,L]
+RewriteRule ^docs/8.7/components/concepts/what-is-camunda-8/(.*)$ /docs/8.7/components/components-overview/ [R=301,L]
 
 # Move document handling content
 RewriteRule ^docs/next/components/concepts/document-handling/(.*)$ /docs/next/components/document-handling/getting-started/ [R=301,L]
