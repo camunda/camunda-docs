@@ -58,8 +58,13 @@
   "Components": [
     "components/components-overview",
     {
-      "Concepts": [
-        "components/concepts/what-is-camunda-8",
+      "type": "category",
+      "label": "Concepts",
+      "link": {
+        "type": "doc",
+        "id": "components/concepts/concepts-overview"
+      },
+      "items": [
         "components/concepts/clusters",
         "components/concepts/processes",
         "components/concepts/process-applications",
@@ -86,7 +91,9 @@
             "components/concepts/access-control/user-task-access-restrictions"
           ]
         }
-      ],
+      ]
+    },
+    {
       "Console": [
         "components/console/introduction-to-console",
         {
