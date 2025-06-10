@@ -216,7 +216,7 @@ Then, take the contents under `application.yml` and put it under the `operate.co
 - [Web Modeler](/self-managed/modeler/web-modeler/configuration/configuration.md)
 - [Console](/self-managed/console-deployment/configuration.md)
 - [Connectors](/self-managed/connectors-deployment/connectors-configuration.md)
-- [Identity](/self-managed/identity/deployment/configuration-variables.md)
+- [Identity](/self-managed/identity/miscellaneous/configuration-variables.md)
 - [Optimize](/self-managed/optimize-deployment/configuration/system-configuration.md)
 
 ## Limitations
