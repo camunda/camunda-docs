@@ -292,34 +292,6 @@ or `spring.ssl.*` properties are defined, the `camunda.client.auth.*` takes prec
 
 ## Job worker configuration options
 
-### Overriding job worker values using properties
-
-You can override the `JobWorker` annotation's values, as you can see in the example above where the `enabled` property is overridden:
-
-```yaml
-camunda:
-  client:
-    override:
-      foo:
-        enabled: false
-```
-
-In this case, `foo` is the type of the worker that we want to customize.
-
-You can override all supported configuration options for a worker, for example:
-
-```yaml
-camunda:
-  client:
-    override:
-      foo:
-        timeout: PT10S
-```
-
-:::info
-You could also provide a custom class that can customize the `JobWorker` configuration values by implementing the `io.camunda.spring.client.annotation.customizer.JobWorkerValueCustomizer` interface and register it as bean.
-:::
-
 ### Job type
 
 You can configure the job type via the `JobWorker` annotation:
@@ -714,7 +686,7 @@ camunda:
         max-jobs-active: 64
 ```
 
-##### Enable job streaming
+#### Enable job streaming
 
 Read more about this feature in the [job streaming documentation](/apis-tools/java-client/job-worker.md#job-streaming).
 
@@ -747,9 +719,9 @@ camunda:
         stream-enabled: true
 ```
 
-##### Control tenant usage
+#### Control tenant usage
 
-Generally, the [client default `tenant-ids`](#tenant-usage) is used for all job worker activations.
+Generally, the [client default `tenant-id`](#tenant-usage) is used for all job worker activations.
 
 Configure global worker defaults for additional `tenant-ids` to be used by all workers:
 
@@ -784,6 +756,42 @@ camunda:
             - <default>
             - foo
 ```
+
+#### Define the job timeout
+
+To define the job timeout, you can set the annotation (`long` in milliseconds):
+
+```java
+@JobWorker(timeout=60000)
+public void foo() {
+  // worker's code
+}
+```
+
+Moreover, you can override the timeout for the worker (as ISO 8601 duration expression):
+
+```yaml
+camunda:
+  client:
+    worker:
+      override:
+        foo:
+          timeout: PT1M
+```
+
+You can also set a global default:
+
+```yaml
+camunda:
+  client:
+    worker:
+      defaults:
+        timeout: PT1M
+```
+
+#### Programmatic job worker modification
+
+You could also provide a bean that can customize the `JobWorker` configuration values by implementing the `io.camunda.spring.client.annotation.customizer.JobWorkerValueCustomizer` interface.
 
 ## Additional configuration options
 
