@@ -81,15 +81,15 @@ To learn more about this feature, see [FEEL Playground](/components/modeler/feel
 
 Camunda’s new Identity service enhances authentication and authorization for Self-Managed and SaaS environments:
 
-| Feature/enhancement | Description |
-|:--|:--|
-| Self-Managed Identity management | Admins can create and manage users, groups, roles, and memberships directly in the Identity database. |
-| OIDC integration | Integrate external identity providers (IdP) such as Keycloak and Microsoft Entra. |
-| Role-based access control (RBAC) | Assign roles and group permissions on a per-resource basis for fine-grained access control. Supported resources include Authorization, Claim Mapping Rules, Messages, Batches, Applications, Tenants, Deployments, Process Definitions, Decision Definitions, and more. |
-| Flexible mapping | Map users, groups, and roles to resource authorizations and tenants. Leverage OIDC token claims and application/client mappings to streamline permission assignments. |
-| Migration support | Simplified migration tools make it easy for existing customers to transition to the new service. |
-| Organizational Identity | In SaaS environments, integrate your own IdP to manage organizational users and assign resources cluster-by-cluster. |
-| Cluster-specific Roles and Groups | In SaaS environments, manage distinct roles, groups, and authorizations for each cluster independently. |
+| Feature/enhancement               | Description                                                                                                                                                                                                                                                             |
+| :-------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Self-Managed Identity management  | Admins can create and manage users, groups, roles, and memberships directly in the Identity database.                                                                                                                                                                   |
+| OIDC integration                  | Integrate external identity providers (IdP) such as Keycloak and Microsoft Entra.                                                                                                                                                                                       |
+| Role-based access control (RBAC)  | Assign roles and group permissions on a per-resource basis for fine-grained access control. Supported resources include Authorization, Claim Mapping Rules, Messages, Batches, Applications, Tenants, Deployments, Process Definitions, Decision Definitions, and more. |
+| Flexible mapping                  | Map users, groups, and roles to resource authorizations and tenants. Leverage OIDC token claims and application/client mappings to streamline permission assignments.                                                                                                   |
+| Migration support                 | Simplified migration tools make it easy for existing customers to transition to the new service.                                                                                                                                                                        |
+| Organizational Identity           | In SaaS environments, integrate your own IdP to manage organizational users and assign resources cluster-by-cluster.                                                                                                                                                    |
+| Cluster-specific Roles and Groups | In SaaS environments, manage distinct roles, groups, and authorizations for each cluster independently.                                                                                                                                                                 |
 
 #### Identity management for SaaS clusters <span class="badge badge--long" title="This feature affects SaaS">SaaS</span>
 
@@ -97,24 +97,23 @@ Camunda’s new Identity service enhances authentication and authorization for S
 
 The following known limitations apply for this alpha version release:
 
-| Known limitation | Description |
-|:--|:--|
-| Authorizations | <p><ul><li><p>Before enabling authorization checks in the cluster settings, users must assign themselves to the admin role in Identity for the Orchestration cluster.</p><p>**Note:** As authorizations are disabled by default, no changes are required for initial access.</p></li><li><p>Authorizations cannot be assigned to users via the UI, only to groups.</p></li><li><p>Authorizations are not correctly loaded in the UI.</p></li></ul></p> |
-| Navigation, Notifications, and Logout | <p><ul><li><p>Links to the other Camunda components in the Orchestration cluster web applications (Operate, Tasklist, Identity) do not currently work.</p></li><li><p>SaaS notifications are not displayed in Orchestration cluster components.</p></li><li><p>Log out from Orchestration cluster web applications is not fully functional.</p></li></ul></p> |
-| Documentation | Documentation is incomplete. |
+| Known limitation                      | Description                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| :------------------------------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Authorizations                        | <p><ul><li><p>Before enabling authorization checks in the cluster settings, users must assign themselves to the admin role in Identity for the Orchestration cluster.</p><p>**Note:** As authorizations are disabled by default, no changes are required for initial access.</p></li><li><p>Authorizations cannot be assigned to users via the UI, only to groups.</p></li><li><p>Authorizations are not correctly loaded in the UI.</p></li></ul></p> |
+| Navigation, Notifications, and Logout | <p><ul><li><p>Links to the other Camunda components in the Orchestration cluster web applications (Operate, Tasklist, Identity) do not currently work.</p></li><li><p>SaaS notifications are not displayed in Orchestration cluster components.</p></li><li><p>Log out from Orchestration cluster web applications is not fully functional.</p></li></ul></p>                                                                                          |
+| Documentation                         | Documentation is incomplete.                                                                                                                                                                                                                                                                                                                                                                                                                           |
 
 #### Identity management for Helm Chart setups <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-[Orchestration cluster Identity](/self-managed/orchestration-identity/orchestration-identity.md) is now available for OIDC setups in [Helm chart deployments](/self-managed/setup/install.md). Starting with this alpha version, you can configure the Orchestration cluster components to use the identity provider (IdP) of your choice and enable single sign-on (SSO). 
+[Orchestration cluster Identity](/self-managed/orchestration-identity/orchestration-identity.md) is now available for OIDC setups in [Helm chart deployments](/self-managed/setup/install.md). Starting with this alpha version, you can configure the Orchestration cluster components to use the identity provider (IdP) of your choice and enable single sign-on (SSO).
 
 The following known limitations apply for this alpha version release:
 
-| Known limitation | Description |
-|:--|:--|
-| Authorizations | <p><ul><li><p>Authorizations cannot be assigned to users via the UI, only to groups.</p></li><li><p>Authorizations are not correctly loaded in the UI.</p></li></ul></p> |
-| Logout | Log out from Orchestration cluster web applications is not fully functional. |
-| Documentation | Documentation is incomplete. |
-
+| Known limitation | Description                                                                                                                                                              |
+| :--------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Authorizations   | <p><ul><li><p>Authorizations cannot be assigned to users via the UI, only to groups.</p></li><li><p>Authorizations are not correctly loaded in the UI.</p></li></ul></p> |
+| Logout           | Log out from Orchestration cluster web applications is not fully functional.                                                                                             |
+| Documentation    | Documentation is incomplete.                                                                                                                                             |
 
 <!-- https://github.com/camunda/product-hub/issues/2222 -->
 
