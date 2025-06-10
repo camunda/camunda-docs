@@ -114,19 +114,9 @@ module.exports = {
         id: "components/document-handling/getting-started",
       },
       items: [
-        {
-          type: "category",
-          label: "Use cases",
-          link: {
-            type: "doc",
-            id: "components/document-handling/use-cases",
-          },
-          items: [
-            "components/document-handling/upload-document-to-bpmn-process",
-            "components/document-handling/display-and-download-document",
-            "components/document-handling/send-document-to-external-system-via-connector",
-          ],
-        },
+        "components/document-handling/upload-document-to-bpmn-process",
+        "components/document-handling/display-and-download-document",
+        "components/document-handling/send-document-to-external-system-via-connector",
       ],
     },
     {
@@ -363,52 +353,59 @@ module.exports = {
       },
       items: [
         {
-          Zeebe: [
-            "components/zeebe/zeebe-overview",
-            {
-              "Technical concepts": [
-                "components/zeebe/technical-concepts/technical-concepts-overview",
-                "components/zeebe/technical-concepts/architecture",
-                "components/zeebe/technical-concepts/clustering",
-                "components/zeebe/technical-concepts/partitions",
-                "components/zeebe/technical-concepts/internal-processing",
-                "components/zeebe/technical-concepts/process-lifecycles",
-                "components/zeebe/technical-concepts/protocols",
-              ],
-            },
+          type: "category",
+          label: "Zeebe",
+          link: {
+            type: "doc",
+            id: "components/zeebe/zeebe-overview",
+          },
+          items: [
+            "components/zeebe/technical-concepts/technical-concepts-overview",
+            "components/zeebe/technical-concepts/architecture",
+            "components/zeebe/technical-concepts/clustering",
+            "components/zeebe/technical-concepts/partitions",
+            "components/zeebe/technical-concepts/internal-processing",
+            "components/zeebe/technical-concepts/process-lifecycles",
+            "components/zeebe/technical-concepts/protocols",
           ],
-          Operate: [
-            "components/operate/operate-introduction",
+        },
+        {
+          type: "category",
+          label: "Operate",
+          link: {
+            type: "doc",
+            id: "components/operate/operate-introduction",
+          },
+          items: [
+            "components/operate/userguide/basic-operate-navigation",
+            "components/operate/userguide/resolve-incidents-update-variables",
+            "components/operate/userguide/selections-operations",
+            "components/operate/userguide/delete-finished-instances",
+            "components/operate/userguide/delete-resources",
             {
-              "User guide": [
-                "components/operate/userguide/basic-operate-navigation",
-                "components/operate/userguide/resolve-incidents-update-variables",
-                "components/operate/userguide/selections-operations",
-                "components/operate/userguide/delete-finished-instances",
-                "components/operate/userguide/delete-resources",
-                {
-                  "Process instance modification": [
-                    "components/operate/userguide/process-instance-modification",
-                    "components/operate/userguide/process-instance-batch-modification",
-                  ],
-                },
-                "components/operate/userguide/process-instance-migration",
-                "components/operate/userguide/monitor-operation-status",
+              "Process instance modification": [
+                "components/operate/userguide/process-instance-modification",
+                "components/operate/userguide/process-instance-batch-modification",
               ],
             },
+            "components/operate/userguide/process-instance-migration",
+            "components/operate/userguide/monitor-operation-status",
           ],
-          Tasklist: [
-            "components/tasklist/introduction-to-tasklist",
-            {
-              "User guide": [
-                "components/tasklist/userguide/using-tasklist",
-                "components/tasklist/userguide/managing-tasks",
-                "components/tasklist/userguide/using-filters",
-                "components/tasklist/userguide/defining-task-priorities",
-                "components/tasklist/userguide/starting-processes",
-                "components/tasklist/userguide/tasklist-localization",
-              ],
-            },
+        },
+        {
+          type: "category",
+          label: "Tasklist",
+          link: {
+            type: "doc",
+            id: "components/tasklist/introduction-to-tasklist",
+          },
+          items: [
+            "components/tasklist/userguide/using-tasklist",
+            "components/tasklist/userguide/managing-tasks",
+            "components/tasklist/userguide/using-filters",
+            "components/tasklist/userguide/defining-task-priorities",
+            "components/tasklist/userguide/starting-processes",
+            "components/tasklist/userguide/tasklist-localization",
           ],
         },
         {
@@ -556,85 +553,89 @@ module.exports = {
       ],
     },
     {
-      Optimize: [
-        "components/optimize/what-is-optimize",
+      type: "category",
+      label: "Optimize",
+      link: {
+        type: "doc",
+        id: "components/optimize/what-is-optimize",
+      },
+      items: [
+        "components/optimize/userguide/collections-dashboards-reports",
+        "components/optimize/userguide/user-permissions",
+        "components/optimize/userguide/data-sources",
+        {
+          Dashboards: [
+            "components/optimize/userguide/creating-dashboards",
+            "components/optimize/userguide/edit-mode",
+            "components/optimize/userguide/view-mode",
+          ],
+        },
+        {
+          "Dashboards maintained by Camunda": [
+            "components/optimize/userguide/process-dashboards",
+            "components/optimize/userguide/instant-process-dashboards",
+          ],
+        },
+        "components/optimize/userguide/creating-reports",
+        "components/optimize/userguide/process-KPIs",
 
         {
-          "User guide": [
-            "components/optimize/userguide/collections-dashboards-reports",
-            "components/optimize/userguide/user-permissions",
-            "components/optimize/userguide/data-sources",
-
+          "Process analysis": [
+            "components/optimize/userguide/process-analysis/process-analysis-overview",
+            "components/optimize/userguide/process-analysis/task-analysis",
+            "components/optimize/userguide/process-analysis/branch-analysis",
+            "components/optimize/userguide/process-analysis/user-task-analytics",
             {
-              Dashboards: [
-                "components/optimize/userguide/creating-dashboards",
-                "components/optimize/userguide/edit-mode",
-                "components/optimize/userguide/view-mode",
-              ],
-            },
-            {
-              "Dashboards maintained by Camunda": [
-                "components/optimize/userguide/process-dashboards",
-                "components/optimize/userguide/instant-process-dashboards",
-              ],
-            },
-            "components/optimize/userguide/creating-reports",
-            "components/optimize/userguide/process-KPIs",
-
-            {
-              "Process analysis": [
-                "components/optimize/userguide/process-analysis/process-analysis-overview",
-                "components/optimize/userguide/process-analysis/task-analysis",
-                "components/optimize/userguide/process-analysis/branch-analysis",
-                "components/optimize/userguide/process-analysis/user-task-analytics",
+              "Report analysis": [
+                "components/optimize/userguide/process-analysis/report-analysis/overview",
                 {
-                  "Report analysis": [
-                    "components/optimize/userguide/process-analysis/report-analysis/overview",
-                    {
-                      "Edit mode": [
-                        "components/optimize/userguide/process-analysis/report-analysis/edit-mode",
-                        "components/optimize/userguide/process-analysis/report-analysis/select-process-definitions",
-                        "components/optimize/userguide/process-analysis/report-analysis/define-reports",
-                        "components/optimize/userguide/process-analysis/report-analysis/measures",
-                        "components/optimize/userguide/process-analysis/report-analysis/compare-target-values",
-                        "components/optimize/userguide/process-analysis/report-analysis/process-instance-parts",
-                        "components/optimize/userguide/process-analysis/report-analysis/configure-reports",
-                      ],
-                    },
-
-                    "components/optimize/userguide/process-analysis/report-analysis/view-mode",
+                  "Edit mode": [
+                    "components/optimize/userguide/process-analysis/report-analysis/edit-mode",
+                    "components/optimize/userguide/process-analysis/report-analysis/select-process-definitions",
+                    "components/optimize/userguide/process-analysis/report-analysis/define-reports",
+                    "components/optimize/userguide/process-analysis/report-analysis/measures",
+                    "components/optimize/userguide/process-analysis/report-analysis/compare-target-values",
+                    "components/optimize/userguide/process-analysis/report-analysis/process-instance-parts",
+                    "components/optimize/userguide/process-analysis/report-analysis/configure-reports",
                   ],
                 },
 
-                {
-                  Filters: [
-                    "components/optimize/userguide/process-analysis/filters",
-                    "components/optimize/userguide/process-analysis/metadata-filters",
-                    "components/optimize/userguide/process-analysis/instance-state-filters",
-                    "components/optimize/userguide/process-analysis/flow-node-filters",
-                    "components/optimize/userguide/process-analysis/process-instance-filters",
-                    "components/optimize/userguide/process-analysis/variable-filters",
-                  ],
-                },
+                "components/optimize/userguide/process-analysis/report-analysis/view-mode",
               ],
             },
 
             {
-              "Additional features": [
-                "components/optimize/userguide/additional-features/alerts",
-                "components/optimize/userguide/additional-features/export-import",
-                "components/optimize/userguide/additional-features/variable-labeling",
-                "components/optimize/userguide/additional-features/process-variants-comparison",
-                "components/optimize/userguide/additional-features/ml-dataset",
+              Filters: [
+                "components/optimize/userguide/process-analysis/filters",
+                "components/optimize/userguide/process-analysis/metadata-filters",
+                "components/optimize/userguide/process-analysis/instance-state-filters",
+                "components/optimize/userguide/process-analysis/flow-node-filters",
+                "components/optimize/userguide/process-analysis/process-instance-filters",
+                "components/optimize/userguide/process-analysis/variable-filters",
               ],
             },
+          ],
+        },
+
+        {
+          "Additional features": [
+            "components/optimize/userguide/additional-features/alerts",
+            "components/optimize/userguide/additional-features/export-import",
+            "components/optimize/userguide/additional-features/variable-labeling",
+            "components/optimize/userguide/additional-features/process-variants-comparison",
+            "components/optimize/userguide/additional-features/ml-dataset",
           ],
         },
       ],
     },
     {
-      Console: [
-        "components/console/introduction-to-console",
+      type: "category",
+      label: "Console",
+      link: {
+        type: "doc",
+        id: "components/console/introduction-to-console",
+      },
+      items: [
         {
           "Manage your organization": [
             "components/console/manage-organization/organization-settings",
@@ -682,8 +683,13 @@ module.exports = {
       ],
     },
     {
-      "Best Practices": [
-        "components/best-practices/best-practices-overview",
+      type: "category",
+      label: "Best Practices",
+      link: {
+        type: "doc",
+        id: "components/best-practices/best-practices-overview",
+      },
+      items: [
         {
           "Project management": [
             "components/best-practices/management/following-the-customer-success-path",
