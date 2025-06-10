@@ -94,3 +94,4 @@ Don't want to build the process yourself? Click this button to create it from a 
 - Learn more about Camunda 8 and what it can do by reading [What is Camunda 8](/components/components-overview.md) or watching our [overview video](https://bit.ly/3TjNEm7) in Camunda Academy.
 - [Learn about types of connectors](/components/connectors/connector-types.md)
 - [Use connectors in your BPMN process](/components/connectors/use-connectors/index.md)
+- [Camunda Academy: Generate a Connector Template from an API Specification](https://academy.camunda.com/c8-h2-generate-connector-from-api/)

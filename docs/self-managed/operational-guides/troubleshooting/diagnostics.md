@@ -84,6 +84,9 @@ mkdir -p "$output_dir" && cd "$output_dir"
 # Collect general Kubernetes resources
 echo "Collecting resource information..."
 
+echo "  - Collecting Kubernetes version."
+kubectl version -o yaml > kubernetes-version.txt
+
 echo "  - Collecting pod information (current state of all pods in the namespace)."
 kubectl get pod -n "$namespace" -o wide > pods.txt
 
@@ -131,6 +134,18 @@ for pod in $(kubectl get pod -n "$namespace" --no-headers -o custom-columns=":me
   kubectl logs -n "$namespace" "$pod" -p > "${pod}-previous.log" 2>/dev/null
   kubectl describe pod -n "$namespace" "$pod" > "describe-$pod.log" 2>/dev/null
 done
+
+# Collect Helm resources
+echo "  - Collecting information via Helm..."
+release_name=`helm list -n "$namespace" --no-headers -q` 2>/dev/null
+if [[ -z "$release_name" ]]; then
+  echo "    INFO: unable to detect Camunda release name, so Helm values.yaml will not be collected. Install \"helm\" command, make it available in the PATH and re-run the script. (Alternatively, upload \"values.yaml\" separately)"
+else
+  helm version > helm-version.txt
+  helm history -n "$namespace" "$release_name" > helm-history.txt
+  helm get values -n "$namespace" "$release_name" > helm-values.yaml
+fi
+
 echo "All logs and descriptions collected."
 
 # Compress the output directory

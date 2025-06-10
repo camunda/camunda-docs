@@ -44,10 +44,10 @@ To use Camunda 8 SaaS, specify the connection properties:
 
 ```bash
 CAMUNDA_CLIENT_MODE=saas
-CAMUNDA_CLIENT_CLUSTERID=xxx
+CAMUNDA_CLIENT_CLOUD_CLUSTERID=xxx
 CAMUNDA_CLIENT_AUTH_CLIENTID=xxx
 CAMUNDA_CLIENT_AUTH_CLIENTSECRET=xxx
-CAMUNDA_CLIENT_REGION=bru-2
+CAMUNDA_CLIENT_CLOUD_REGION=bru-2
 ```
 
 ##### YAML configuration
@@ -56,11 +56,12 @@ CAMUNDA_CLIENT_REGION=bru-2
 camunda:
   client:
     mode: saas
-    cluster-id: xxx
+    cloud:
+      cluster-id: xxx
+      region: bru-2
     auth:
       client-id: xxx
       client-secret: xxx
-    region: bru-2
 ```
 
 To use inbound connectors, specify the Operate connection properties:
@@ -163,7 +164,7 @@ Depending on the authentication method used by the Zeebe instance, you may need 
 CAMUNDA_CLIENT_AUTH_CLIENTID=xxx
 CAMUNDA_CLIENT_AUTH_CLIENTSECRET=xxx
 CAMUNDA_CLIENT_AUTH_ISSUER=http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
-CAMUNDA_CLIENT_AUTH_AUDIENCE=zeebe-api
+CAMUNDA_CLIENT_ZEEBE_AUDIENCE=zeebe-api
 ```
 
 ##### YAML configuration
@@ -175,6 +176,7 @@ camunda:
       client-id: xxx
       client-secret: xxx
       issuer: http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
+    zeebe:
       audience: zeebe-api
 ```
 
@@ -405,8 +407,7 @@ For Docker images, you can add the JAR by using volumes, for example:
 ```bash
 docker run --rm --name=connectors -d \
   -v $PWD/my-secret-provider-with-dependencies.jar:/opt/app/my-secret-provider-with-dependencies.jar \  # Specify secret provider
-  -e ZEEBE_CLIENT_BROKER_GATEWAY-ADDRESS=ip.address.of.zeebe:26500 \                                    # Specify Zeebe address
-  -e ZEEBE_CLIENT_SECURITY_PLAINTEXT=true \                                                             # Optional: provide security configs to connect to Zeebe
+  -e CAMUNDA_CLIENT_ZEEBE_GRPCADDRESS=http://ip.address.of.zeebe:26500 \                                # Specify grpc Zeebe address
   camunda/connectors:latest
 ```
 
@@ -422,7 +423,7 @@ java -cp 'connector-runtime-application-VERSION-with-dependencies.jar:...:my-sec
 
 ## Multi-tenancy
 
-The Connector Runtime supports multiple tenants for inbound and outbound connectors. These are configurable in [Identity](/self-managed/identity/user-guide/tenants/managing-tenants.md).
+The Connector Runtime supports multiple tenants for inbound and outbound connectors. These are configurable in [Identity](/self-managed/identity/managing-tenants.md).
 
 A single Connector Runtime can serve a single tenant or can be configured to serve
 multiple tenants. By default, the runtime uses the tenant ID `<default>` for all
@@ -437,16 +438,16 @@ tenant job worker config (described below). **Inbound connectors** automatically
 
 The Connector Runtime uses the following environment variables to configure multi-tenancy:
 
-| Name                                       | Description                                                                                                                                                                              | Default value |
-| ------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| ZEEBE_CLIENT_DEFAULT_TENANT_ID             | The default tenant ID used to communicate with Zeebe. Changing this value will set a new default tenant ID used for fetching jobs and publishing messages.                               | `<default>`   |
-| ZEEBE_CLIENT_DEFAULT_JOB_WORKER_TENANT_IDS | The default tenant IDs (comma separated) used to activate jobs. To run the Connector Runtime in a setup where a single runtime serves multiple tenants, add each tenant ID to this list. | `<default>`   |
+| Name                                    | Description                                                                                                                                                                              | Default value |
+| --------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| CAMUNDA_CLIENT_TENANTID                 | The default tenant ID used to communicate with Zeebe. Changing this value will set a new default tenant ID used for fetching jobs and publishing messages.                               | `<default>`   |
+| CAMUNDA_CLIENT_ZEEBE_DEFAULTS_TENANTIDS | The default tenant IDs (comma separated) used to activate jobs. To run the Connector Runtime in a setup where a single runtime serves multiple tenants, add each tenant ID to this list. | `<default>`   |
 
 If you are using an embedded version of the Connector Runtime, you can specify the tenant information in your Spring configuration like in this example `application.properties` file:
 
 ```bash
-zeebe.client.default-tenant-id=myTenant
-zeebe.client.default-job-worker-tenant-ids=myTenant
+camunda.client.tenant-id=myTenant
+camunda.client.zeebe.defaults.tenant-ids=myTenant
 ```
 
 ### Outbound connector config
@@ -458,6 +459,13 @@ to be configured individually using the following environment variables.
 If you want to use outbound connectors for a single tenant that is different
 from the default tenant, you can specify a different default tenant ID using:
 
+```bash
+CAMUNDA_CLIENT_TENANTID=myTenant
+```
+
+This will change the default tenant ID used for fetching jobs and publishing messages
+to the tenant ID `myTenant`.
+
 It is possible to adjust the polling interval of connectors polling process definitions to Operate by setting the environment variable `CAMUNDA_CONNECTOR_POLLING_INTERVAL`. This variable allows you to control how often connectors fetch the process definitions, with the interval specified in milliseconds. For example, setting `CAMUNDA_CONNECTOR_POLLING_INTERVAL=20000` will configure the connectors to poll every 20 seconds.
 
 Example:
@@ -465,13 +473,6 @@ Example:
 ```
 CAMUNDA_CONNECTOR_POLLING_INTERVAL=10000
 ```
-
-```bash
-ZEEBE_CLIENT_DEFAULT_TENANT_ID=myTenant
-```
-
-This will change the default tenant ID used for fetching jobs and publishing messages
-to the tenant ID `myTenant`.
 
 :::note
 Inbound connectors will still be enabled for
@@ -482,10 +483,10 @@ To run the Connector Runtime in a setup where a single runtime
 serves multiple tenants, add each tenant ID to the list of the default job workers:
 
 ```bash
-ZEEBE_CLIENT_DEFAULT_JOB_WORKER_TENANT_IDS=`myTenant, otherTenant`
+CAMUNDA_CLIENT_ZEEBE_DEFAULTS_TENANTIDS=`myTenant, otherTenant`
 ```
 
-In this case, the `ZEEBE_CLIENT_DEFAULT_TENANT_ID` will **not** be used for the
+In this case, the `CAMUNDA_CLIENT_TENANTID` will **not** be used for the
 configuration of job workers.
 
 ### Inbound connector configuration

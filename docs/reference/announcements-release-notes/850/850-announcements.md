@@ -7,6 +7,8 @@ toc_max_heading_level: 3
 
 Supported environment changes and breaking changes or deprecations for the Camunda 8.5, 8.4, and 8.3 releases are summarized below.
 
+Please visit our [quality board](https://github.com/orgs/camunda/projects/187/views/18) to get an overview of known bugs by component and severity.
+
 ## Camunda 8.5
 
 | Release date | End of maintenance | Release notes                                                                        |
@@ -121,7 +123,7 @@ Follow the instructions in the [form linking](/components/modeler/web-modeler/ad
 #### Deprecated: Zeebe configuration properties for Camunda Identity
 
 The [Zeebe configuration properties for Camunda Identity](/self-managed/zeebe-deployment/configuration/gateway.md#zeebegatewayclustersecurityauthenticationidentity)
-were deprecated in `8.4`. Please use the dedicated Camunda Identity properties or the [corresponding environment variables](/self-managed/identity/deployment/configuration-variables.md#core-configuration).
+were deprecated in `8.4`. Please use the dedicated Camunda Identity properties or the [corresponding environment variables](/self-managed/identity/miscellaneous/configuration-variables.md#core-configuration).
 
 ### Additional features
 

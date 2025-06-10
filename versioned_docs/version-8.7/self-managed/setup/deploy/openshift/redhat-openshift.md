@@ -421,7 +421,7 @@ For Camunda components (except Identity), this can be done by setting the enviro
 zeebe/tasklist/operate/etc:
   env:
     - name: CAMUNDA_LOG_FILE_APPENDER_ENABLED
-      value: false
+      value: "false"
 ```
 
 This will disable the file appender and ensure logs are visible via the container's log output.

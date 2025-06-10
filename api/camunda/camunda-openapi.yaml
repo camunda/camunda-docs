@@ -557,14 +557,41 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UserSearchQueryRequest"
+              $ref: "#/components/schemas/TenantUserSearchQueryRequest"
       responses:
         "200":
           description: The search result of users for the tenant.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/UserSearchResult"
+                $ref: "#/components/schemas/TenantUserSearchResult"
+  /tenants/{tenantId}/clients/search:
+    post:
+      tags:
+        - Tenant
+      operationId: searchClientsForTenant
+      summary: Search clients for tenant
+      description: Retrieves a filtered and sorted list of clients for a specified tenant.
+      parameters:
+        - name: tenantId
+          in: path
+          required: true
+          description: The unique identifier of the tenant.
+          schema:
+            type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TenantClientSearchQueryRequest"
+      responses:
+        "200":
+          description: The search result of users for the tenant.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TenantClientSearchResult"
   /tenants/{tenantId}/groups/search:
     post:
       tags:
@@ -619,13 +646,13 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/RoleSearchQueryResult"
-  /tenants/{tenantId}/applications/{applicationId}:
+  /tenants/{tenantId}/clients/{clientId}:
     put:
       tags:
         - Tenant
-      operationId: assignApplicationToTenant
-      summary: Assign a user to a tenant
-      description: Assign a single user to a specified tenant.
+      operationId: assignClientToTenant
+      summary: Assign a client to a tenant
+      description: Assign a client to a specified tenant.
       parameters:
         - name: tenantId
           in: path
@@ -633,15 +660,15 @@ paths:
           description: The unique identifier of the tenant.
           schema:
             type: string
-        - name: applicationId
+        - name: clientId
           in: path
           required: true
-          description: The ID of the application to assign.
+          description: The ID of the client to assign.
           schema:
             type: string
       responses:
         "204":
-          description: The application was successfully assigned to the tenant.
+          description: The client was successfully assigned to the tenant.
         "400":
           $ref: "#/components/responses/InvalidData"
         "403":
@@ -657,9 +684,9 @@ paths:
     delete:
       tags:
         - Tenant
-      operationId: removeApplicationFromTenant
-      summary: Remove an application from a tenant
-      description: Removes a single application from a specified tenant.
+      operationId: removeClientFromTenant
+      summary: Remove a client from a tenant
+      description: Removes a single client from a specified tenant.
       parameters:
         - name: tenantId
           in: path
@@ -667,7 +694,7 @@ paths:
           description: The unique identifier of the tenant.
           schema:
             type: string
-        - name: applicationId
+        - name: clientId
           in: path
           required: true
           description: The unique identifier of the application.
@@ -675,13 +702,13 @@ paths:
             type: string
       responses:
         "204":
-          description: The application was successfully removed from the tenant.
+          description: The client was successfully removed from the tenant.
         "400":
           $ref: "#/components/responses/InvalidData"
         "403":
           $ref: "#/components/responses/Forbidden"
         "404":
-          description: The tenant does not exist or the application was not assigned to it.
+          description: The tenant does not exist or the client was not assigned to it.
           content:
             application/problem+json:
               schema:
@@ -1678,6 +1705,37 @@ paths:
         "500":
           $ref: "#/components/responses/InternalServerError"
 
+  /process-instances/{processInstanceKey}/sequence-flows:
+    get:
+      tags:
+        - Process instance
+      operationId: getProcessInstanceSequenceFlows
+      summary: Get process instance sequence flows
+      description: |
+        Get sequence flows taken by the process instance.
+      parameters:
+        - name: processInstanceKey
+          in: path
+          required: true
+          description: The assigned key of the process instance, which acts as a unique identifier for this process instance.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: The process instance sequence flows result.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProcessInstanceSequenceFlowsQueryResult"
+        "400":
+          $ref: "#/components/responses/InvalidData"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+
   /process-instances/{processInstanceKey}/statistics/element-instances:
     get:
       tags:
@@ -1739,6 +1797,49 @@ paths:
         "500":
           $ref: "#/components/responses/InternalServerError"
 
+  /process-instances/{processInstanceKey}/incidents/search:
+    post:
+      tags:
+        - Process instance
+      operationId: searchProcessInstanceIncidents
+      summary: Search for incidents associated with a process instance
+      description: |
+        Search for incidents caused by the process instance or any of its called process or decision instances.
+      parameters:
+        - name: processInstanceKey
+          in: path
+          required: true
+          description: The assigned key of the process instance, which acts as a unique identifier for this process instance.
+          schema:
+            type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProcessInstanceIncidentSearchQuery"
+      responses:
+        "200":
+          description: The process instance search result.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IncidentSearchQueryResult"
+        "400":
+          $ref: "#/components/responses/InvalidData"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          description: The process instance with the given key was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+
   /process-instances/{processInstanceKey}/cancellation:
     post:
       tags:
@@ -1773,7 +1874,7 @@ paths:
         "500":
           $ref: "#/components/responses/InternalServerError"
 
-  /process-instances/batch-operations/cancellation:
+  /process-instances/cancellation:
     post:
       tags:
         - Process instance
@@ -1781,6 +1882,9 @@ paths:
       summary: Create a batch operation to cancel process instances
       description: |
         Cancels multiple running process instances.
+        Since only ACTIVE root instances can be cancelled, any given filters for state and
+        parentProcessInstanceKey are ignored and overridden during this batch operation.
+        This is done asynchronously, the progress can be tracked using the batchOperationId from the response and the batch operation status endpoint (/batch-operations/{batchOperationId}).
       requestBody:
         required: false
         content:
@@ -1788,8 +1892,8 @@ paths:
             schema:
               $ref: "#/components/schemas/ProcessInstanceFilter"
       responses:
-        "202":
-          description: The batch operation request was accepted.
+        "200":
+          description: The batch operation request was created.
           content:
             application/json:
               schema:
@@ -1809,7 +1913,7 @@ paths:
         "500":
           $ref: "#/components/responses/InternalServerError"
 
-  /process-instances/batch-operations/incident-resolution:
+  /process-instances/incident-resolution:
     post:
       tags:
         - Process instance
@@ -1817,6 +1921,9 @@ paths:
       summary: Create a batch operation to resolve incidents of process instances
       description: |
         Resolves multiple instances of process instances.
+        Since only process instances with ACTIVE state can have unresolved incidents, any given
+        filters for state are ignored and overridden during this batch operation.
+        This is done asynchronously, the progress can be tracked using the batchOperationId from the response and the batch operation status endpoint (/batch-operations/{batchOperationId}).
       requestBody:
         required: false
         content:
@@ -1824,8 +1931,8 @@ paths:
             schema:
               $ref: "#/components/schemas/ProcessInstanceFilter"
       responses:
-        "202":
-          description: The batch operation request was accepted.
+        "200":
+          description: The batch operation request was created.
           content:
             application/json:
               schema:
@@ -1845,7 +1952,7 @@ paths:
         "500":
           $ref: "#/components/responses/InternalServerError"
 
-  /process-instances/batch-operations/migration:
+  /process-instances/migration:
     post:
       tags:
         - Process instance
@@ -1853,15 +1960,18 @@ paths:
       summary: Create a batch operation to migrate process instances
       description: |
         Migrate multiple instances of process instances.
+        Since only process instances with ACTIVE state can be migrated, any given
+        filters for state are ignored and overridden during this batch operation.
+        This is done asynchronously, the progress can be tracked using the batchOperationId from the response and the batch operation status endpoint (/batch-operations/{batchOperationId}).
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ProcessInstanceMigrationBatchOperationInstruction"
+              $ref: "#/components/schemas/ProcessInstanceMigrationBatchOperationRequest"
       responses:
-        "202":
-          description: The batch operation request was accepted.
+        "200":
+          description: The batch operation request was created.
           content:
             application/json:
               schema:
@@ -1881,7 +1991,7 @@ paths:
         "500":
           $ref: "#/components/responses/InternalServerError"
 
-  /process-instances/batch-operations/modification:
+  /process-instances/modification:
     post:
       tags:
         - Process instance
@@ -1889,15 +1999,20 @@ paths:
       summary: Create a batch operation to modify process instances
       description: |
         Modify multiple process instances.
+        Since only process instances with ACTIVE state can be modified, any given
+        filters for state are ignored and overridden during this batch operation.
+        In contrast to single modification operation, it is not possible to add variable instructions or modify by element key.
+        It is only possible to use the element id of the source and target.
+        This is done asynchronously, the progress can be tracked using the batchOperationId from the response and the batch operation status endpoint (/batch-operations/{batchOperationId}).
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ProcessInstanceModificationBatchOperationInstruction"
+              $ref: "#/components/schemas/ProcessInstanceModificationBatchOperationRequest"
       responses:
-        "202":
-          description: The batch operation request was accepted.
+        "200":
+          description: The batch operation request was created.
           content:
             application/json:
               schema:
@@ -2515,6 +2630,38 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+    get:
+      tags:
+        - Authorization
+      operationId: getAuthorization
+      summary: Get authorization
+      description: Get authorization by the given key.
+      parameters:
+        - name: authorizationKey
+          in: path
+          required: true
+          description: The key of the authorization to get.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: The authorization was successfully returned.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthorizationResult"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          description: The authorization with the given key was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
     delete:
       tags:
         - Authorization
@@ -2720,14 +2867,56 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UserSearchQueryRequest"
+              $ref: "#/components/schemas/RoleUserSearchQueryRequest"
       responses:
         "200":
           description: The users assigned to the role.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/UserSearchResult"
+                $ref: "#/components/schemas/RoleUserSearchResult"
+        "400":
+          $ref: "#/components/responses/InvalidData"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          description: The role with the given ID was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /roles/{roleId}/clients/search:
+    post:
+      tags:
+        - Role
+      operationId: searchClientsForRole
+      summary: Search role clients
+      description: |
+        Search clients assigned to a role.
+      parameters:
+        - name: roleId
+          in: path
+          required: true
+          description: The role ID.
+          schema:
+            type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RoleClientSearchQueryRequest"
+      responses:
+        "200":
+          description: The clients assigned to the role.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RoleClientSearchResult"
         "400":
           $ref: "#/components/responses/InvalidData"
         "401":
@@ -2819,14 +3008,14 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /roles/{roleId}/applications/{applicationId}:
+  /roles/{roleId}/clients/{clientId}:
     put:
       tags:
         - Role
-      operationId: addApplicationToRole
-      summary: Assign an application to a role
+      operationId: addClientToRole
+      summary: Assign a client to a role
       description: |
-        Assigns an application to a role.
+        Assigns a client to a role.
       parameters:
         - name: roleId
           in: path
@@ -2834,15 +3023,15 @@ paths:
           description: The role ID.
           schema:
             type: string
-        - name: applicationId
+        - name: clientId
           in: path
           required: true
-          description: The application ID.
+          description: The client ID.
           schema:
             type: string
       responses:
         "202":
-          description: The application was assigned successfully to the role.
+          description: The client was assigned successfully to the role.
         "400":
           $ref: "#/components/responses/InvalidData"
         "403":
@@ -2854,7 +3043,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         "409":
-          description: The application with the given ID is already assigned to the role.
+          description: The client with the given ID is already assigned to the role.
           content:
             application/problem+json:
               schema:
@@ -2864,10 +3053,10 @@ paths:
     delete:
       tags:
         - Role
-      operationId: removeApplicationFromRole
-      summary: Unassign an application from a role
+      operationId: removeClientFromRole
+      summary: Unassign a client from a role
       description: |
-        Unassigns an application from a role.
+        Unassigns a client from a role.
       parameters:
         - name: roleId
           in: path
@@ -2875,21 +3064,21 @@ paths:
           description: The role ID.
           schema:
             type: string
-        - name: applicationId
+        - name: clientId
           in: path
           required: true
-          description: The application ID.
+          description: The client ID.
           schema:
             type: string
       responses:
         "202":
-          description: The application was unassigned successfully from the role.
+          description: The client was unassigned successfully from the role.
         "400":
           $ref: "#/components/responses/InvalidData"
         "403":
           $ref: "#/components/responses/Forbidden"
         "404":
-          description: The role or application with the given ID or username was not found.
+          description: The role or client with the given ID or username was not found.
           content:
             application/problem+json:
               schema:
@@ -3000,6 +3189,48 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "404":
           description: The role or group with the given ID was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /roles/{roleId}/groups/search:
+    post:
+      tags:
+        - Role
+      operationId: searchGroupsForRole
+      summary: Search role groups
+      description: |
+        Search groups assigned to a role.
+      parameters:
+        - name: roleId
+          in: path
+          required: true
+          description: The role ID.
+          schema:
+            type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GroupSearchQueryRequest"
+      responses:
+        "200":
+          description: The groups assigned to the role.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GroupSearchQueryResult"
+        "400":
+          $ref: "#/components/responses/InvalidData"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          description: The role with the given ID was not found.
           content:
             application/problem+json:
               schema:
@@ -3274,14 +3505,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UserSearchQueryRequest"
+              $ref: "#/components/schemas/GroupUserSearchQueryRequest"
       responses:
         "200":
           description: The users assigned to the group.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/UserSearchResult"
+                $ref: "#/components/schemas/GroupUserSearchResult"
         "400":
           $ref: "#/components/responses/InvalidData"
         "401":
@@ -3380,6 +3611,48 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+  /groups/{groupId}/clients/search:
+    post:
+      tags:
+        - Group
+      operationId: searchClientsForGroup
+      summary: Search group clients
+      description: |
+        Search clients assigned to a group.
+      parameters:
+        - name: groupId
+          in: path
+          required: true
+          description: The group ID.
+          schema:
+            type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GroupClientSearchQueryRequest"
+      responses:
+        "200":
+          description: The clients assigned to the group.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GroupClientSearchResult"
+        "400":
+          $ref: "#/components/responses/InvalidData"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          description: The group with the given ID was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
   /groups/{groupId}/users/{username}:
     put:
       tags:
@@ -3457,14 +3730,14 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /groups/{groupId}/applications/{applicationId}:
+  /groups/{groupId}/clients/{clientId}:
     put:
       tags:
         - Group
-      operationId: addApplicationToGroup
-      summary: Assign an application to a group
+      operationId: addClientToGroup
+      summary: Assign a client to a group
       description: |
-        Assigns an application to a group.
+        Assigns a client to a group.
       parameters:
         - name: groupId
           in: path
@@ -3472,15 +3745,15 @@ paths:
           description: The group ID.
           schema:
             type: string
-        - name: applicationId
+        - name: clientId
           in: path
           required: true
-          description: The application ID.
+          description: The client ID.
           schema:
             type: string
       responses:
         "202":
-          description: The application was assigned successfully to the group.
+          description: The client was assigned successfully to the group.
         "400":
           $ref: "#/components/responses/InvalidData"
         "403":
@@ -3492,7 +3765,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         "409":
-          description: The application with the given ID is already assigned to the group.
+          description: The client with the given ID is already assigned to the group.
           content:
             application/problem+json:
               schema:
@@ -3502,10 +3775,10 @@ paths:
     delete:
       tags:
         - Group
-      operationId: unassignApplicationFromGroup
-      summary: Unassign an application from a group
+      operationId: unassignClientFromGroup
+      summary: Unassign a client from a group
       description: |
-        Unassigns an appliction from a group.
+        Unassigns a client from a group.
       parameters:
         - name: groupId
           in: path
@@ -3513,21 +3786,21 @@ paths:
           description: The group ID.
           schema:
             type: string
-        - name: applicationId
+        - name: clientId
           in: path
           required: true
-          description: The application ID.
+          description: The client ID.
           schema:
             type: string
       responses:
         "202":
-          description: The application was unassigned successfully from the group.
+          description: The client was unassigned successfully from the group.
         "400":
           $ref: "#/components/responses/InvalidData"
         "403":
           $ref: "#/components/responses/Forbidden"
         "404":
-          description: The group with the given ID was not found, or the application is not assigned to this group.
+          description: The group with the given ID was not found, or the client is not assigned to this group.
           content:
             application/problem+json:
               schema:
@@ -3538,7 +3811,7 @@ paths:
     put:
       tags:
         - Group
-      operationId: addMappingToGroup
+      operationId: assignMappingToGroup
       summary: Assign a mapping rule to a group
       description: |
         Assigns a mapping rule to a group.
@@ -4211,6 +4484,39 @@ paths:
           $ref: "#/components/responses/InternalServerError"
 
   /users/{username}:
+    get:
+      tags:
+        - User
+      operationId: getUser
+      summary: Get user
+      description: |
+        Get a user by its username.
+      parameters:
+        - name: username
+          in: path
+          required: true
+          description: The username of the user.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: The user is successfully returned.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserResult"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          description: The user with the given username was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
     delete:
       tags:
         - User
@@ -4714,43 +5020,6 @@ paths:
         "500":
           $ref: "#/components/responses/InternalServerError"
 
-  /batch-operations/{batchOperationId}/items:
-    get:
-      tags:
-        - Batch operation
-      operationId: getBatchOperationItems
-      summary: Get batch operation items
-      description: Get items for a batch operation.
-      parameters:
-        - name: batchOperationId
-          in: path
-          required: true
-          description: |
-            The key (or operate legacy ID) of the batch operation.
-          schema:
-            type: string
-      responses:
-        "200":
-          description: The batch operation items were found.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/BatchOperationItemSearchQueryResult"
-        "400":
-          description: The provided data is not valid.
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetail"
-        "404":
-          description: The batch operation was not found.
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetail"
-        "500":
-          $ref: "#/components/responses/InternalServerError"
-
   /batch-operations/search:
     post:
       tags:
@@ -4763,7 +5032,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ProcessInstanceSearchQuery"
+              $ref: "#/components/schemas/BatchOperationSearchQuery"
       responses:
         "200":
           description: The batch operation search result.
@@ -4780,13 +5049,15 @@ paths:
         "500":
           $ref: "#/components/responses/InternalServerError"
 
-  /batch-operations/{batchOperationId}/cancel:
+  /batch-operations/{batchOperationId}/cancellation:
     put:
       tags:
         - Batch operation
       operationId: cancelBatchOperation
       summary: Cancel Batch operation
-      description: Cancels a running batch operation.
+      description: |
+        Cancels a running batch operation.
+        This is done asynchronously, the progress can be tracked using the batch operation status endpoint (/batch-operations/{batchOperationId}).
       parameters:
         - name: batchOperationId
           in: path
@@ -4803,8 +5074,8 @@ paths:
               nullable: true
         required: false
       responses:
-        "202":
-          description: The batch operation cancel request was accepted.
+        "204":
+          description: The batch operation cancel request was created.
           content: {}
         "400":
           $ref: "#/components/responses/InvalidData"
@@ -4819,13 +5090,15 @@ paths:
         "500":
           $ref: "#/components/responses/InternalServerError"
 
-  /batch-operations/{batchOperationId}/pause:
+  /batch-operations/{batchOperationId}/suspension:
     put:
       tags:
         - Batch operation
-      operationId: pauseBatchOperation
-      summary: Pause Batch operation
-      description: Pauses a running batch operation.
+      operationId: suspendBatchOperation
+      summary: Suspend Batch operation
+      description: |
+        Suspends a running batch operation.
+        This is done asynchronously, the progress can be tracked using the batch operation status endpoint (/batch-operations/{batchOperationId}).
       parameters:
         - name: batchOperationId
           in: path
@@ -4842,8 +5115,8 @@ paths:
               nullable: true
         required: false
       responses:
-        "202":
-          description: The batch operation pause request was accepted.
+        "204":
+          description: The batch operation pause request was created.
           content: {}
         "400":
           $ref: "#/components/responses/InvalidData"
@@ -4858,13 +5131,15 @@ paths:
         "500":
           $ref: "#/components/responses/InternalServerError"
 
-  /batch-operations/{batchOperationId}/resume:
+  /batch-operations/{batchOperationId}/resumption:
     put:
       tags:
         - Batch operation
       operationId: resumeBatchOperation
       summary: Resume Batch operation
-      description: Resumes a paused batch operation.
+      description: |
+        Resumes a suspended batch operation.
+        This is done asynchronously, the progress can be tracked using the batch operation status endpoint (/batch-operations/{batchOperationId}).
       parameters:
         - name: batchOperationId
           in: path
@@ -4881,8 +5156,8 @@ paths:
               nullable: true
         required: false
       responses:
-        "202":
-          description: The batch operation resume request was accepted.
+        "204":
+          description: The batch operation resume request was created.
           content: {}
         "400":
           $ref: "#/components/responses/InvalidData"
@@ -4890,6 +5165,34 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "404":
           description: Not found. The batch operation was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /batch-operation-items/search:
+    post:
+      tags:
+        - Batch operation
+      operationId: searchBatchOperationItems
+      summary: Search batch operation items
+      description: Search for batch operation items based on given criteria.
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchOperationItemSearchQuery"
+      responses:
+        "200":
+          description: The batch operation search result.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchOperationItemSearchQueryResult"
+        "400":
+          description: The provided data is not valid.
           content:
             application/problem+json:
               schema:
@@ -5528,6 +5831,16 @@ components:
           description: The process instance search filters.
           allOf:
             - $ref: "#/components/schemas/ProcessInstanceFilter"
+    ProcessInstanceIncidentSearchQuery:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/SearchQueryRequest"
+      properties:
+        sort:
+          description: Sort field criteria.
+          type: array
+          items:
+            $ref: "#/components/schemas/IncidentSearchQuerySortRequest"
     AdvancedIntegerFilter:
       title: Advanced filter
       description: Advanced integer (int32) filter.
@@ -6022,6 +6335,37 @@ components:
         processDefinitionName:
           type: string
           description: The name of the process definition (fall backs to the process definition ID if not available).
+    ProcessInstanceSequenceFlowsQueryResult:
+      description: Process instance sequence flows query response.
+      type: object
+      properties:
+        items:
+          description: The sequence flows.
+          type: array
+          items:
+            $ref: "#/components/schemas/ProcessInstanceSequenceFlowResult"
+    ProcessInstanceSequenceFlowResult:
+      description: Process instance sequence flow result.
+      type: object
+      properties:
+        sequenceFlowId:
+          type: string
+          description: The sequence flow ID.
+        processInstanceKey:
+          type: string
+          description: The key of this process instance.
+        processDefinitionKey:
+          type: string
+          description: The process definition key.
+        processDefinitionId:
+          type: string
+          description: The process definition ID.
+        elementId:
+          type: string
+          description: The element ID for this sequence flow, as provided in the BPMN process.
+        tenantId:
+          description: The tenant ID for this sequence flow.
+          type: string
     ProcessDefinitionElementStatisticsQuery:
       description: Process definition element statistics request.
       type: object
@@ -6693,7 +7037,7 @@ components:
       description: The type of the owner of permissions.
       enum:
         - USER
-        - APPLICATION
+        - CLIENT
         - ROLE
         - GROUP
         - MAPPING
@@ -6919,13 +7263,16 @@ components:
       properties:
         username:
           description: The username of the user.
-          type: "string"
+          allOf:
+            - $ref: "#/components/schemas/StringFilterProperty"
         name:
           description: The name of the user.
-          type: "string"
+          allOf:
+            - $ref: "#/components/schemas/StringFilterProperty"
         email:
           description: The email of the user.
-          type: "string"
+          allOf:
+            - $ref: "#/components/schemas/StringFilterProperty"
     MappingFilterRequest:
       description: Mapping search filter.
       type: object
@@ -7039,6 +7386,82 @@ components:
         email:
           description: The email of the user.
           type: "string"
+    TenantClientResult:
+      type: object
+      properties:
+        clientId:
+          description: The ID of the client.
+          type: string
+    TenantClientSearchResult:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/SearchQueryResponse"
+      properties:
+        items:
+          description: The matching clients.
+          type: array
+          items:
+            $ref: "#/components/schemas/TenantClientResult"
+    TenantClientSearchQueryRequest:
+      allOf:
+        - $ref: "#/components/schemas/SearchQueryRequest"
+      type: object
+      properties:
+        sort:
+          description: Sort field criteria.
+          type: array
+          items:
+            $ref: "#/components/schemas/TenantClientSearchQuerySortRequest"
+    TenantClientSearchQuerySortRequest:
+      type: object
+      properties:
+        field:
+          description: The field to sort by.
+          type: string
+          enum:
+            - clientId
+        order:
+          $ref: "#/components/schemas/SortOrderEnum"
+      required:
+        - field
+    TenantUserResult:
+      type: object
+      properties:
+        username:
+          description: The username of the user.
+          type: string
+    TenantUserSearchResult:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/SearchQueryResponse"
+      properties:
+        items:
+          description: The matching users.
+          type: array
+          items:
+            $ref: "#/components/schemas/TenantUserResult"
+    TenantUserSearchQueryRequest:
+      allOf:
+        - $ref: "#/components/schemas/SearchQueryRequest"
+      type: object
+      properties:
+        sort:
+          description: Sort field criteria.
+          type: array
+          items:
+            $ref: "#/components/schemas/TenantUserSearchQuerySortRequest"
+    TenantUserSearchQuerySortRequest:
+      type: object
+      properties:
+        field:
+          description: The field to sort by.
+          type: string
+          enum:
+            - username
+        order:
+          $ref: "#/components/schemas/SortOrderEnum"
+      required:
+        - field
     RoleCreateRequest:
       type: "object"
       properties:
@@ -7057,9 +7480,6 @@ components:
     RoleCreateResult:
       type: object
       properties:
-        roleKey:
-          description: The key of the created role.
-          type: string
         roleId:
           description: The ID of the created role.
           type: string
@@ -7084,9 +7504,6 @@ components:
     RoleUpdateResult:
       type: object
       properties:
-        roleKey:
-          type: string
-          description: The key of the updated role.
         name:
           type: string
           description: The display name of the updated role.
@@ -7103,20 +7520,12 @@ components:
         name:
           type: string
           description: The role name.
-        roleKey:
-          type: string
-          description: The role key.
         roleId:
           type: string
           description: The role id.
         description:
           type: string
           description: The description of the role.
-        assignedMemberKeys:
-          type: array
-          description: The set of keys of members assigned to the role.
-          items:
-            type: string
     RoleSearchQuerySortRequest:
       type: object
       properties:
@@ -7124,7 +7533,6 @@ components:
           description: The field to sort by.
           type: string
           enum:
-            - roleKey
             - name
             - roleId
         order:
@@ -7167,7 +7575,82 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/RoleResult"
-
+    RoleUserResult:
+      type: object
+      properties:
+        username:
+          description: The username of the user.
+          type: string
+    RoleUserSearchResult:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/SearchQueryResponse"
+      properties:
+        items:
+          description: The matching users.
+          type: array
+          items:
+            $ref: "#/components/schemas/RoleUserResult"
+    RoleUserSearchQueryRequest:
+      allOf:
+        - $ref: "#/components/schemas/SearchQueryRequest"
+      type: object
+      properties:
+        sort:
+          description: Sort field criteria.
+          type: array
+          items:
+            $ref: "#/components/schemas/RoleUserSearchQuerySortRequest"
+    RoleUserSearchQuerySortRequest:
+      type: object
+      properties:
+        field:
+          description: The field to sort by.
+          type: string
+          enum:
+            - username
+        order:
+          $ref: "#/components/schemas/SortOrderEnum"
+      required:
+        - field
+    RoleClientResult:
+      type: object
+      properties:
+        clientId:
+          description: The ID of the client.
+          type: string
+    RoleClientSearchResult:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/SearchQueryResponse"
+      properties:
+        items:
+          description: The matching clients.
+          type: array
+          items:
+            $ref: "#/components/schemas/RoleClientResult"
+    RoleClientSearchQueryRequest:
+      allOf:
+        - $ref: "#/components/schemas/SearchQueryRequest"
+      type: object
+      properties:
+        sort:
+          description: Sort field criteria.
+          type: array
+          items:
+            $ref: "#/components/schemas/RoleClientSearchQuerySortRequest"
+    RoleClientSearchQuerySortRequest:
+      type: object
+      properties:
+        field:
+          description: The field to sort by.
+          type: string
+          enum:
+            - clientId
+        order:
+          $ref: "#/components/schemas/SortOrderEnum"
+      required:
+        - field
     GroupCreateRequest:
       type: "object"
       properties:
@@ -7281,6 +7764,82 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/GroupResult"
+    GroupUserResult:
+      type: object
+      properties:
+        username:
+          description: The username of the user.
+          type: string
+    GroupUserSearchResult:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/SearchQueryResponse"
+      properties:
+        items:
+          description: The matching members.
+          type: array
+          items:
+            $ref: "#/components/schemas/GroupUserResult"
+    GroupUserSearchQueryRequest:
+      allOf:
+        - $ref: "#/components/schemas/SearchQueryRequest"
+      type: object
+      properties:
+        sort:
+          description: Sort field criteria.
+          type: array
+          items:
+            $ref: "#/components/schemas/GroupUserSearchQuerySortRequest"
+    GroupUserSearchQuerySortRequest:
+      type: object
+      properties:
+        field:
+          description: The field to sort by.
+          type: string
+          enum:
+            - username
+        order:
+          $ref: "#/components/schemas/SortOrderEnum"
+      required:
+        - field
+    GroupClientResult:
+      type: object
+      properties:
+        clientId:
+          description: The ID of the client.
+          type: string
+    GroupClientSearchResult:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/SearchQueryResponse"
+      properties:
+        items:
+          description: The matching client IDs.
+          type: array
+          items:
+            $ref: "#/components/schemas/GroupClientResult"
+    GroupClientSearchQueryRequest:
+      allOf:
+        - $ref: "#/components/schemas/SearchQueryRequest"
+      type: object
+      properties:
+        sort:
+          description: Sort field criteria.
+          type: array
+          items:
+            $ref: "#/components/schemas/GroupClientSearchQuerySortRequest"
+    GroupClientSearchQuerySortRequest:
+      type: object
+      properties:
+        field:
+          description: The field to sort by.
+          type: string
+          enum:
+            - clientId
+        order:
+          $ref: "#/components/schemas/SortOrderEnum"
+      required:
+        - field
     MappingRuleCreateUpdateRequest:
       type: object
       properties:
@@ -7971,6 +8530,9 @@ components:
         decisionRequirementsKey:
           type: string
           description: The assigned key, which acts as a unique identifier for this decision requirements.
+        resourceName:
+          type: string
+          description: The name of the resource from which the decision requirements were parsed.
     DecisionRequirementsSearchQueryResult:
       type: object
       allOf:
@@ -8754,16 +9316,32 @@ components:
             The unique identifier of the created process instance; to be used wherever a request
             needs a process instance key (e.g. CancelProcessInstanceRequest).
           type: string
-    ProcessInstanceMigrationBatchOperationInstruction:
+    ProcessInstanceMigrationBatchOperationRequest:
       type: object
       properties:
         filter:
           $ref: "#/components/schemas/ProcessInstanceFilter"
         migrationPlan:
-          $ref: "#/components/schemas/ProcessInstanceMigrationInstruction"
+          $ref: "#/components/schemas/ProcessInstanceMigrationBatchOperationPlan"
       required:
         - filter
         - migrationPlan
+    ProcessInstanceMigrationBatchOperationPlan:
+      type: object
+      description: |
+        The migration instructions describe how to migrate a process instance from one process definition to another.
+      properties:
+        mappingInstructions:
+          description: Element mappings from the source process instance to the target process instance.
+          type: array
+          items:
+            $ref: "#/components/schemas/MigrateProcessInstanceMappingInstruction"
+        targetProcessDefinitionKey:
+          description: The key of process definition to migrate the process instance to.
+          type: string
+      required:
+        - targetProcessDefinitionKey
+        - mappingInstructions
     ProcessInstanceMigrationInstruction:
       type: object
       description: |
@@ -8993,8 +9571,8 @@ components:
     BatchOperationCreatedResult:
       type: object
       properties:
-        batchOperationKey:
-          description: Key of the batch operation.
+        batchOperationId:
+          description: Id of the batch operation.
           type: string
         batchOperationType:
           $ref: "#/components/schemas/BatchOperationTypeEnum"
@@ -9005,6 +9583,7 @@ components:
           description: The field to sort by.
           type: string
           enum:
+            - batchOperationId
             - operationType
             - state
             - startDate
@@ -9034,20 +9613,210 @@ components:
       properties:
         batchOperationId:
           description: The key (or operate legacy ID) of the batch operation.
-          type: string
+          allOf:
+            - $ref: "#/components/schemas/BasicStringFilterProperty"
         operationType:
-          $ref: "#/components/schemas/BatchOperationTypeEnum"
+          description: The type of the batch operation.
+          allOf:
+            - $ref: "#/components/schemas/BatchOperationTypeFilterProperty"
+        state:
+          description: The state of the batch operation.
+          allOf:
+            - $ref: "#/components/schemas/BatchOperationStateFilterProperty"
+    BatchOperationTypeFilterProperty:
+      description: BatchOperationTypeEnum property with full advanced search capabilities.
+      type: object
+      oneOf:
+        - type: string
+          title: Exact match
+          description: Matches the value exactly.
+          allOf:
+            - $ref: "#/components/schemas/BatchOperationTypeEnum"
+        - $ref: "#/components/schemas/AdvancedBatchOperationTypeFilter"
+    AdvancedBatchOperationTypeFilter:
+      title: Advanced filter
+      description: Advanced BatchOperationTypeEnum filter.
+      type: object
+      properties:
+        $eq:
+          description: Checks for equality with the provided value.
+          allOf:
+            - $ref: "#/components/schemas/BatchOperationTypeEnum"
+        $neq:
+          description: Checks for inequality with the provided value.
+          allOf:
+            - $ref: "#/components/schemas/BatchOperationTypeEnum"
+        $exists:
+          description: Checks if the current property exists.
+          type: boolean
+        $in:
+          description: Checks if the property matches any of the provided values.
+          type: array
+          items:
+            $ref: "#/components/schemas/BatchOperationTypeEnum"
+        $like:
+          description: |
+            Checks if the property matches the provided like value.
+
+            Supported wildcard characters are:
+
+            * `*`: matches zero, one, or multiple characters.
+            * `?`: matches one, single character.
+
+            Wildcard characters can be escaped with backslash, for instance: `\*`.
+          type: string
+    BatchOperationStateFilterProperty:
+      description: BatchOperationStateEnum property with full advanced search capabilities.
+      type: object
+      oneOf:
+        - type: string
+          title: Exact match
+          description: Matches the value exactly.
+          allOf:
+            - $ref: "#/components/schemas/BatchOperationStateEnum"
+        - $ref: "#/components/schemas/AdvancedBatchOperationStateFilter"
+    AdvancedBatchOperationStateFilter:
+      title: Advanced filter
+      description: Advanced BatchOperationStateEnum filter.
+      type: object
+      properties:
+        $eq:
+          description: Checks for equality with the provided value.
+          allOf:
+            - $ref: "#/components/schemas/BatchOperationStateEnum"
+        $neq:
+          description: Checks for inequality with the provided value.
+          allOf:
+            - $ref: "#/components/schemas/BatchOperationStateEnum"
+        $exists:
+          description: Checks if the current property exists.
+          type: boolean
+        $in:
+          description: Checks if the property matches any of the provided values.
+          type: array
+          items:
+            $ref: "#/components/schemas/BatchOperationStateEnum"
+        $like:
+          description: |
+            Checks if the property matches the provided like value.
+
+            Supported wildcard characters are:
+
+            * `*`: matches zero, one, or multiple characters.
+            * `?`: matches one, single character.
+
+            Wildcard characters can be escaped with backslash, for instance: `\*`.
+          type: string
+    BatchOperationStateEnum:
+      description: The state, one of ACTIVE, COMPLETED, TERMINATED.
+      enum:
+        - CREATED
+        - ACTIVE
+        - SUSPENDED
+        - COMPLETED
+        - COMPLETED_WITH_ERRORS
+        - CANCELED
+        - INCOMPLETED
+    BatchOperationItemSearchQuerySortRequest:
+      type: object
+      properties:
+        field:
+          description: The field to sort by.
+          type: string
+          enum:
+            - batchOperationId
+            - itemKey
+            - processInstanceKey
+            - state
+        order:
+          $ref: "#/components/schemas/SortOrderEnum"
+      required:
+        - field
+    BatchOperationItemSearchQuery:
+      description: Batch operation item search request.
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/SearchQueryRequest"
+      properties:
+        sort:
+          description: Sort field criteria.
+          type: array
+          items:
+            $ref: "#/components/schemas/BatchOperationItemSearchQuerySortRequest"
+        filter:
+          description: The batch operation search filters.
+          allOf:
+            - $ref: "#/components/schemas/BatchOperationItemFilter"
+    BatchOperationItemFilter:
+      description: Batch operation item filter request.
+      type: object
+      properties:
+        batchOperationId:
+          description: The key (or operate legacy ID) of the batch operation.
+          allOf:
+            - $ref: "#/components/schemas/BasicStringFilterProperty"
+        itemKey:
+          description: The key of the item, e.g. a process instance key.
+          allOf:
+            - $ref: "#/components/schemas/BasicStringFilterProperty"
+        processInstanceKey:
+          description: The process instance key of the processed item.
+          allOf:
+            - $ref: "#/components/schemas/BasicStringFilterProperty"
         state:
           type: string
           description: The state of the batch operation.
-          enum:
-            - CREATED
-            - ACTIVE
-            - PAUSED
-            - COMPLETED
-            - COMPLETED_WITH_ERRORS
-            - CANCELED
-            - INCOMPLETED
+          allOf:
+            - $ref: "#/components/schemas/BatchOperationItemStateFilterProperty"
+    BatchOperationItemStateFilterProperty:
+      description: BatchOperationItemStateEnum property with full advanced search capabilities.
+      type: object
+      oneOf:
+        - type: string
+          title: Exact match
+          description: Matches the value exactly.
+          allOf:
+            - $ref: "#/components/schemas/BatchOperationItemStateEnum"
+        - $ref: "#/components/schemas/AdvancedBatchOperationItemStateFilter"
+    AdvancedBatchOperationItemStateFilter:
+      title: Advanced filter
+      description: Advanced BatchOperationItemStateEnum filter.
+      type: object
+      properties:
+        $eq:
+          description: Checks for equality with the provided value.
+          allOf:
+            - $ref: "#/components/schemas/BatchOperationItemStateEnum"
+        $neq:
+          description: Checks for inequality with the provided value.
+          allOf:
+            - $ref: "#/components/schemas/BatchOperationItemStateEnum"
+        $exists:
+          description: Checks if the current property exists.
+          type: boolean
+        $in:
+          description: Checks if the property matches any of the provided values.
+          type: array
+          items:
+            $ref: "#/components/schemas/BatchOperationItemStateEnum"
+        $like:
+          description: |
+            Checks if the property matches the provided like value.
+
+            Supported wildcard characters are:
+
+            * `*`: matches zero, one, or multiple characters.
+            * `?`: matches one, single character.
+
+            Wildcard characters can be escaped with backslash, for instance: `\*`.
+          type: string
+    BatchOperationItemStateEnum:
+      description: The state, one of ACTIVE, COMPLETED, TERMINATED.
+      enum:
+        - ACTIVE
+        - COMPLETED
+        - CANCELED
+        - FAILED
     BatchOperationSearchQueryResult:
       type: object
       allOf:
@@ -9070,7 +9839,7 @@ components:
           enum:
             - CREATED
             - ACTIVE
-            - PAUSED
+            - SUSPENDED
             - COMPLETED
             - COMPLETED_WITH_ERRORS
             - CANCELED
@@ -9134,7 +9903,7 @@ components:
         errorMessage:
           description: the error message from the engine in case of a failed operation.
           type: string
-    ProcessInstanceModificationBatchOperationInstruction:
+    ProcessInstanceModificationBatchOperationRequest:
       type: object
       description: |
         The process instance filter to define on which process instances tokens should be moved,

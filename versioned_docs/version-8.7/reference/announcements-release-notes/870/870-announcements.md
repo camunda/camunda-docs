@@ -9,6 +9,8 @@ import DeployDiagramImg from '../../img/deploy-diagram-modal.png';
 
 Supported environment changes and breaking changes or deprecations for the Camunda 8.7 release are summarized below.
 
+Please visit our [quality board](https://github.com/orgs/camunda/projects/187/views/16) to get an overview of known bugs by component and severity.
+
 | Scheduled release date | Scheduled end of maintenance | Release notes                                                                        | Blog                                                                            |
 | :--------------------- | :--------------------------- | :----------------------------------------------------------------------------------- | :------------------------------------------------------------------------------ |
 | 8 April 2025           | 13 October 2026              | [8.7 release notes](/reference/announcements-release-notes/870/870-release-notes.md) | [Announcing Camunda 8.7](https://camunda.com/blog/2025/04/camunda-8-7-release/) |
@@ -43,15 +45,15 @@ With this version, we ship a breaking change to how Web Modeler **Deploy diagram
 
 - In 8.6, you could still configure cluster details on the **Deploy diagram** modal when deploying.
 - In 8.7, you can no longer configure cluster details on the **Deploy diagram** modal. You must [configure the cluster](/self-managed/modeler/web-modeler/configuration/configuration.md#clusters) to be able to deploy from this modal.
-- Note that you must also be assigned the `Zeebe` [Identity role](/self-managed/identity/user-guide/roles/manage-roles.md) to be able to deploy (if `BEARER_TOKEN` is used as authentication).
+- Note that you must also be assigned the `Zeebe` [Identity role](/self-managed/identity/application-user-group-role-management/manage-roles.md) to be able to deploy (if `BEARER_TOKEN` is used as authentication).
 
 ### Deprecated: Web Modeler cluster authentication `OAUTH` and `CLIENT_CREDENTIALS` <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
 The following authentication methods for a [configured cluster in Web Modeler](/self-managed/modeler/web-modeler/configuration/configuration.md#clusters) are now being deprecated and will no longer be supported in version 8.8:
 
 - `OAUTH`: This method was replaced by `BEARER_TOKEN`.
-- `CLIENT_CREDENTIALS`: This method was introduced as a temporary solution to support deployments from Web Modeler when using [Microsoft Entra ID or a generic OIDC provider](/self-managed/setup/guides/connect-to-an-oidc-provider.md).
-  It is marked for removal in 8.8 as the `BEARER_TOKEN` authentication will be supported for Entra ID and generic providers as well.
+- `CLIENT_CREDENTIALS`: This method was introduced as a temporary solution to support deployments from Web Modeler when [Microsoft Entra ID is used as OIDC provider](/self-managed/identity/configuration/connect-to-an-oidc-provider.md?authPlatform=microsoftEntraId#configuration).
+  It is marked for removal in 8.8 as the `BEARER_TOKEN` authentication will be supported for Entra ID as well.
 
 ### Breaking changes in Camunda Process Test
 
@@ -83,6 +85,12 @@ The old `zeebe-client-java` artifact will be relocation-only, so your build syst
 :::note
 The Zeebe Java client will not be developed further and will only receive bug fixes for as long as version 8.7 is officially supported.
 :::
+
+### Camunda 8 Self-Managed
+
+#### Helm chart - Separated Ingress deprecation
+
+The separated Ingress Helm configuration for Camunda 8 Self-Managed has been deprecated in 8.6, and will be removed from the Helm chart in 8.8. Only the combined Ingress configuration is officially supported. See the [Ingress guide](/self-managed/setup/guides/ingress-setup.md) for more information on configuring a combined Ingress setup.
 
 #### Adjustments
 

@@ -7,11 +7,11 @@ description: "Get diagnostics and logs from a Helm chart deployment."
 
 ## Diagnostics collection script
 
-This script automates the process of gathering logs and diagnostics from a Camunda Helm chart deployment running in a Kubernetes cluster. It collects all relevant information—including pod logs, events, and resource details—into a single directory, and outputs it in a .zip file to make it easy sharing these information with the Camunda Support team.
+This script automates the process of gathering logs and diagnostics from a Camunda Helm chart deployment running in a Kubernetes cluster. The script collects all relevant information (including pod logs, events, and resource details) into a single directory, and outputs it in a .zip file to make it easier to share this information with the Camunda Support team.
 
 ### What the script collects
 
-The script outputs the following data from your namespace and creates a :
+The script outputs the following data from your namespace and creates a zip file containing the following:
 
 - **Pod Information**: Current and previous logs and full pod descriptions.
 - **Cluster Events**: Sorted by time to help identify recent issues.
@@ -22,14 +22,14 @@ The script outputs the following data from your namespace and creates a :
 
 ### Usage
 
-1. Save the script below as e.g. `camunda-collect-diagnostics.sh`.
+1. Save the following script as `camunda-collect-diagnostics.sh` for example.
 2. Make the script executable:
 
 ```bash
 chmod +x camunda-collect-diagnostics.sh
 ```
 
-3. Execute the script replacing `<namespace>` with the namespace of your Camunda deployment:
+3. Execute the script, replacing `<namespace>` with the namespace of your Camunda deployment:
 
 ```bash
 ./camunda-collect-diagnostics.sh --namespace <namespace>
@@ -84,6 +84,9 @@ mkdir -p "$output_dir" && cd "$output_dir"
 # Collect general Kubernetes resources
 echo "Collecting resource information..."
 
+echo "  - Collecting Kubernetes version."
+kubectl version -o yaml > kubernetes-version.txt
+
 echo "  - Collecting pod information (current state of all pods in the namespace)."
 kubectl get pod -n "$namespace" -o wide > pods.txt
 
@@ -131,6 +134,18 @@ for pod in $(kubectl get pod -n "$namespace" --no-headers -o custom-columns=":me
   kubectl logs -n "$namespace" "$pod" -p > "${pod}-previous.log" 2>/dev/null
   kubectl describe pod -n "$namespace" "$pod" > "describe-$pod.log" 2>/dev/null
 done
+
+# Collect Helm resources
+echo "  - Collecting information via Helm..."
+release_name=`helm list -n "$namespace" --no-headers -q` 2>/dev/null
+if [[ -z "$release_name" ]]; then
+  echo "    INFO: unable to detect Camunda release name, so Helm values.yaml will not be collected. Install \"helm\" command, make it available in the PATH and re-run the script. (Alternatively, upload \"values.yaml\" separately)"
+else
+  helm version > helm-version.txt
+  helm history -n "$namespace" "$release_name" > helm-history.txt
+  helm get values -n "$namespace" "$release_name" > helm-values.yaml
+fi
+
 echo "All logs and descriptions collected."
 
 # Compress the output directory

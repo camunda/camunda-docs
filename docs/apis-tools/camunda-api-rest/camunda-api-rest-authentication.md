@@ -1,13 +1,13 @@
 ---
 id: camunda-api-rest-authentication
 title: "Authentication"
-description: "Step through authentication options that can be used to access Camunda 8 REST API."
+description: "Step through authentication options that can be used to access Orchestration Cluster API."
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-All Camunda 8 REST API requests require authentication. To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) depending on your environment and include it in each request.
+All Orchestration Cluster API requests require authentication. To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) depending on your environment and include it in each request.
 
 ## Generate a token
 
@@ -59,10 +59,10 @@ All Camunda 8 REST API requests require authentication. To authenticate, generat
 
 <TabItem value='self-managed'>
 
-1. [Add an M2M application in Identity](/self-managed/identity/user-guide/additional-features/incorporate-applications.md).
-2. [Add permissions to this application](/self-managed/identity/user-guide/additional-features/incorporate-applications.md) for **Camunda 8 REST API**.
+1. [Add an M2M application in Identity](/self-managed/identity/application-user-group-role-management/applications.md).
+2. [Add permissions to this application](/self-managed/identity/application-user-group-role-management/applications.md) for **Orchestration Cluster API**.
 3. Capture the `Client ID` and `Client Secret` from the application in Identity.
-4. [Generate a token](/self-managed/identity/user-guide/authorizations/generating-m2m-tokens.md) to access the Camunda 8 REST API. Provide the `client_id` and `client_secret` from the values you previously captured in Identity.
+4. [Generate a token](/self-managed/identity/authentication.md) to access the Orchestration Cluster API. Provide the `client_id` and `client_secret` from the values you previously captured in Identity.
    ```shell
    curl --location --request POST 'http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token' \
    --header 'Content-Type: application/x-www-form-urlencoded' \
@@ -90,7 +90,7 @@ All Camunda 8 REST API requests require authentication. To authenticate, generat
 
 Include the previously captured token as an authorization header in each request: `Authorization: Bearer <TOKEN>`.
 
-For example, to send a request to the Camunda 8 REST API's `/topology` endpoint:
+For example, to send a request to the Orchestration Cluster API's `/topology` endpoint:
 
 <Tabs groupId="environment" defaultValue="saas" queryString values={
 [
@@ -101,7 +101,7 @@ For example, to send a request to the Camunda 8 REST API's `/topology` endpoint:
 <TabItem value='saas'>
 
 :::tip
-The `${ZEEBE_REST_ADDRESS}` variable below represents the URL of the Camunda 8 REST API. You can capture this URL when creating an API client. You can also construct it as `https://${REGION_ID}.zeebe.camunda.io/${CLUSTER_ID}/`.
+The `${ZEEBE_REST_ADDRESS}` variable below represents the URL of the Orchestration Cluster API. You can capture this URL when creating an API client. You can also construct it as `https://${REGION_ID}.zeebe.camunda.io/${CLUSTER_ID}/`.
 :::
 
 </TabItem>
@@ -109,7 +109,7 @@ The `${ZEEBE_REST_ADDRESS}` variable below represents the URL of the Camunda 8 R
 <TabItem value='self-managed'>
 
 :::tip
-The `${ZEEBE_REST_ADDRESS}` variable below represents the URL of the Camunda 8 REST API. You can configure this value in your Self-Managed installation. The default value is `http://localhost:8080/`.
+The `${ZEEBE_REST_ADDRESS}` variable below represents the URL of the Orchestration Cluster API. You can configure this value in your Self-Managed installation. The default value is `http://localhost:8080/`.
 :::
 
 </TabItem>
