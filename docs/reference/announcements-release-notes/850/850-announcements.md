@@ -123,7 +123,7 @@ Follow the instructions in the [form linking](/components/modeler/web-modeler/ad
 #### Deprecated: Zeebe configuration properties for Camunda Identity
 
 The [Zeebe configuration properties for Camunda Identity](/self-managed/zeebe-deployment/configuration/gateway.md#zeebegatewayclustersecurityauthenticationidentity)
-were deprecated in `8.4`. Please use the dedicated Camunda Identity properties or the [corresponding environment variables](/self-managed/identity/deployment/configuration-variables.md#core-configuration).
+were deprecated in `8.4`. Please use the dedicated Camunda Identity properties or the [corresponding environment variables](/self-managed/identity/miscellaneous/configuration-variables.md#core-configuration).
 
 ### Additional features
 

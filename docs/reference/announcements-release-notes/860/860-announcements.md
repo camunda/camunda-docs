@@ -30,7 +30,7 @@ Review the following documentation for your components for more information on h
 - [Operate](/self-managed/operate-deployment/operate-configuration.md#licensing)
 - [Tasklist](/self-managed/tasklist-deployment/tasklist-configuration.md#licensing)
 - [Optimize](/self-managed/optimize-deployment/configuration/system-configuration-platform-8.md#licensing)
-- [Identity](/self-managed/identity/deployment/configuration-variables.md#license-configuration)
+- [Identity](/self-managed/identity/miscellaneous/configuration-variables.md#license-configuration)
 - [Modeler](/self-managed/modeler/web-modeler/configuration/configuration.md#licensing)
 
 To configure with Helm, visit the [Self Managed installation documentation](/self-managed/setup/install.md).
@@ -131,7 +131,7 @@ The separated Ingress Helm configuration for Camunda 8 Self-Managed has been dep
 
 #### Helm chart - `global.multiregion.installationType` deprecation
 
-The `global.multiregion.installationType` option is used in failover and failback scenarios. This option in the Helm chart has been deprecated in 8.6, and will be removed from the Helm chart in 8.8. `global.multiregion.installationType` was replaced with a set of API endpoints called while following the ([dual-region operational procedure](/self-managed/operational-guides/multi-region/dual-region-ops.md))
+The `global.multiregion.installationType` option is used in failover and failback scenarios. This option in the Helm chart has been deprecated in 8.6, and will be removed from the Helm chart in 8.7. `global.multiregion.installationType` was replaced with a set of API endpoints called while following the ([dual-region operational procedure](/self-managed/operational-guides/multi-region/dual-region-ops.md))
 
 ##### Helm chart - Elasticsearch nodes number
 

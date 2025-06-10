@@ -68,6 +68,12 @@ A BPMN element is part of a [process](#process), defining one part of its BPMN m
 
 - [BPMN elements](/components/modeler/bpmn/bpmn-primer.md#bpmn-elements)
 
+### Element template
+
+Use an element template to extend the Desktop Modeler or Web Modeler with domain-specific diagram [elements](#element). Element templates are used by [Connectors](#connector) to create the connector-specific [element](#element) configuration.
+
+- [Element templates](/components/modeler/desktop-modeler/element-templates/about-templates.md)
+
 ### Event
 
 An event represents a state change associated with an aspect of an executing process instance. Events capture variable changes, state transition in process elements, etc. An event is represented by a timestamp, the variable name, and variable value. Events are stored in an append-only log.
@@ -227,7 +233,7 @@ A process instance variable represents the execution state (i.e data) of a proce
 
 Protocol connectors are a type of [Connector](#connector) in Camunda that can serve as either [inbound](#inbound-connector) or [outbound](#outbound-connector) connectors, supporting a variety of technical protocols. These connectors are highly generic, designed to provide a flexible and customizable means of integrating with external systems and services.
 
-Protocol connectors can be customized to meet the needs of specific use cases using element templates, with no additional coding or deployment required. Examples of protocol connectors include HTTP REST, SOAP, GraphQL, as well as message queue connectors.
+Protocol connectors can be customized to meet the needs of specific use cases using [element templates](#element-template), with no additional coding or deployment required. Examples of protocol connectors include HTTP REST, SOAP, GraphQL, as well as message queue connectors.
 
 ### Record
 
