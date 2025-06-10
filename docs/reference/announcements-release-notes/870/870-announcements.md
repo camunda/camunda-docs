@@ -45,7 +45,7 @@ With this version, we ship a breaking change to how Web Modeler **Deploy diagram
 
 - In 8.6, you could still configure cluster details on the **Deploy diagram** modal when deploying.
 - In 8.7, you can no longer configure cluster details on the **Deploy diagram** modal. You must [configure the cluster](/self-managed/modeler/web-modeler/configuration/configuration.md#clusters) to be able to deploy from this modal.
-- Note that you must also be assigned the `Zeebe` [Identity role](/self-managed/identity/user-guide/roles/manage-roles.md) to be able to deploy (if `BEARER_TOKEN` is used as authentication).
+- Note that you must also be assigned the `Zeebe` [Identity role](/self-managed/identity/application-user-group-role-management/manage-roles.md) to be able to deploy (if `BEARER_TOKEN` is used as authentication).
 
 ### Deprecated: Web Modeler cluster authentication `OAUTH` and `CLIENT_CREDENTIALS` <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
@@ -85,6 +85,12 @@ The old `zeebe-client-java` artifact will be relocation-only, so your build syst
 :::note
 The Zeebe Java client will not be developed further and will only receive bug fixes for as long as version 8.7 is officially supported.
 :::
+
+### Camunda 8 Self-Managed
+
+#### Helm chart - Separated Ingress deprecation
+
+The separated Ingress Helm configuration for Camunda 8 Self-Managed has been deprecated in 8.6, and will be removed from the Helm chart in 8.8. Only the combined Ingress configuration is officially supported. See the [Ingress guide](/self-managed/setup/guides/ingress-setup.md) for more information on configuring a combined Ingress setup.
 
 #### Adjustments
 
