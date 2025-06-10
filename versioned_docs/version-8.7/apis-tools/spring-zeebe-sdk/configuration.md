@@ -25,10 +25,8 @@ This allows you to connect to a Camunda instance in our SaaS offering as the URL
 
 Activate by setting:
 
-```yaml
-camunda:
-  client:
-    mode: saas
+```yaml reference referenceLinkText="Source" title="Client mode"
+https://github.com/camunda/camunda/blob/stable/8.7/clients/spring-boot-starter-camunda-sdk/src/test/resources/properties/8.7/mode-saas.yaml
 ```
 
 This applies the following defaults:
@@ -43,10 +41,8 @@ This allows you to connect to a Self-Managed instance protected with JWT authent
 
 Activate by setting:
 
-```yaml
-camunda:
-  client:
-    mode: self-managed
+```yaml reference referenceLinkText="Source" title="Client mode"
+https://github.com/camunda/camunda/blob/stable/8.7/clients/spring-boot-starter-camunda-sdk/src/test/resources/properties/8.7/mode-self-managed.yaml
 ```
 
 This applies the following defaults:
@@ -79,12 +75,8 @@ public void foo() {
 
 As a third possibility, you can set a default job type:
 
-```yaml
-camunda:
-  client:
-    zeebe:
-      defaults:
-        type: foo
+```yaml reference referenceLinkText="Source" title="Default type"
+https://github.com/camunda/camunda/blob/stable/8.7/clients/spring-boot-starter-camunda-sdk/src/test/resources/properties/8.7/default-type.yaml
 ```
 
 This is used for all workers that do **not** set a task type via the annotation.
@@ -226,23 +218,14 @@ You can also control auto-completion in your configuration.
 
 **Globally:**
 
-```yaml
-camunda:
-  client:
-    zeebe:
-      defaults:
-        auto-complete: false
+```yaml reference referenceLinkText="Source" title="Default auto complete"
+https://github.com/camunda/camunda/blob/stable/8.7/clients/spring-boot-starter-camunda-sdk/src/test/resources/properties/8.7/default-auto-complete.yaml
 ```
 
 **Per worker:**
 
-```yaml
-camunda:
-  client:
-    zeebe:
-      override:
-        foo:
-          auto-complete: false
+```yaml reference referenceLinkText="Source" title="Worker auto complete"
+https://github.com/camunda/camunda/blob/stable/8.7/clients/spring-boot-starter-camunda-sdk/src/test/resources/properties/8.7/worker-auto-complete.yaml
 ```
 
 Ideally, you **don't** use blocking behavior like `send().join()`, as this is a blocking call to wait for the issued command to be executed on the workflow engine. While this is very straightforward to use and produces easy-to-read code, blocking code is limited in terms of scalability.
@@ -431,25 +414,20 @@ You can define defaults and overrides for all supported configuration options fo
 
 If you build a worker that only serves one thing, it might also be handy to define the worker job type globally and not in the annotation:
 
-```yaml
-camunda:
-  client:
-    zeebe:
-      defaults:
-        type: foo
+```yaml reference referenceLinkText="Source" title="Default type"
+https://github.com/camunda/camunda/blob/stable/8.7/clients/spring-boot-starter-camunda-sdk/src/test/resources/properties/8.7/default-type.yaml
 ```
 
 ##### Configure jobs in flight and thread pool
 
 Number of jobs that are polled from the broker to be worked on in this client and thread pool size to handle the jobs:
 
-```yaml
-camunda:
-  client:
-    zeebe:
-      defaults:
-        max-jobs-active: 32
-      execution-threads: 1
+```yaml reference referenceLinkText="Source" title="Max jobs active"
+https://github.com/camunda/camunda/blob/stable/8.7/clients/spring-boot-starter-camunda-sdk/src/test/resources/properties/8.7/max-jobs-active.yaml
+```
+
+```yaml reference referenceLinkText="Source" title="Execution threads"
+https://github.com/camunda/camunda/blob/stable/8.7/clients/spring-boot-starter-camunda-sdk/src/test/resources/properties/8.7/execution-threads.yaml
 ```
 
 :::note
@@ -471,13 +449,8 @@ class SomeClass {
 
 You can also override this setting via your `application.yaml` file:
 
-```yaml
-camunda:
-  client:
-    zeebe:
-      override:
-        foo:
-          enabled: false
+```yaml reference referenceLinkText="Source" title="Worker disabled"
+https://github.com/camunda/camunda/blob/stable/8.7/clients/spring-boot-starter-camunda-sdk/src/test/resources/properties/8.7/worker-disabled.yaml
 ```
 
 This is especially useful if you have a bigger code base including many workers, but want to start only some of them. Typical use cases are:
@@ -488,38 +461,24 @@ This is especially useful if you have a bigger code base including many workers,
 
 To disable all workers, but still have the Zeebe client available, you can use:
 
-```yaml
-camunda:
-  client:
-    zeebe:
-      defaults:
-        enabled: false
+```yaml reference referenceLinkText="Source" title="Default worker disabled"
+https://github.com/camunda/camunda/blob/stable/8.7/clients/spring-boot-starter-camunda-sdk/src/test/resources/properties/8.7/default-disabled.yaml
 ```
 
 ##### Overriding `JobWorker` values via configuration file
 
 You can override the `JobWorker` annotation's values, as you can see in the example above where the `enabled` property is overridden:
 
-```yaml
-camunda:
-  client:
-    zeebe:
-      override:
-        foo:
-          enabled: false
+```yaml reference referenceLinkText="Source" title="Worker disabled"
+https://github.com/camunda/camunda/blob/stable/8.7/clients/spring-boot-starter-camunda-sdk/src/test/resources/properties/8.7/worker-disabled.yaml
 ```
 
 In this case, `foo` is the type of the worker that we want to customize.
 
 You can override all supported configuration options for a worker, for example:
 
-```yaml
-camunda:
-  client:
-    zeebe:
-      override:
-        foo:
-          timeout: PT10S
+```yaml reference referenceLinkText="Source" title="Worker timeout"
+https://github.com/camunda/camunda/blob/stable/8.7/clients/spring-boot-starter-camunda-sdk/src/test/resources/properties/8.7/worker-timeout.yaml
 ```
 
 You could also provide a custom class that can customize the `JobWorker` configuration values by implementing the `io.camunda.zeebe.spring.client.annotation.customizer.ZeebeWorkerValueCustomizer` interface.
@@ -530,45 +489,28 @@ Read more about this feature in the [job streaming documentation](/apis-tools/ja
 
 Job streaming is disabled by default for job workers. To enable job streaming on the Zeebe client, configure it as follows:
 
-```yaml
-camunda:
-  client:
-    zeebe:
-      defaults:
-        stream-enabled: true
+```yaml reference referenceLinkText="Source" title="Default stream enabled"
+https://github.com/camunda/camunda/blob/stable/8.7/clients/spring-boot-starter-camunda-sdk/src/test/resources/properties/8.7/default-stream-enabled.yaml
 ```
 
 This also works for every worker individually:
 
-```yaml
-camunda:
-  client:
-    zeebe:
-      override:
-        foo:
-          stream-enabled: true
+```yaml reference referenceLinkText="Source" title="Worker stream enabled"
+https://github.com/camunda/camunda/blob/stable/8.7/clients/spring-boot-starter-camunda-sdk/src/test/resources/properties/8.7/worker-stream-enabled.yaml
 ```
 
 ##### Control tenant usage
 
 When using multi-tenancy, the Zeebe client will connect to the `<default>` tenant. To control this, you can configure:
 
-```yaml
-camunda:
-  client:
-    tenant-id: foo
+```yaml reference referenceLinkText="Source" title="Tenant id"
+https://github.com/camunda/camunda/blob/stable/8.7/clients/spring-boot-starter-camunda-sdk/src/test/resources/properties/8.7/tenant-id.yaml
 ```
 
 To control which tenants your job workers should use, you can configure:
 
-```yaml
-camunda:
-  client:
-    zeebe:
-      defaults:
-        tenant-ids:
-          - <default>
-          - foo
+```yaml reference referenceLinkText="Source" title="Default tenant ids"
+https://github.com/camunda/camunda/blob/stable/8.7/clients/spring-boot-starter-camunda-sdk/src/test/resources/properties/8.7/default-tenant-ids.yaml
 ```
 
 Additionally, you can set tenant ids on job worker level by using the annotation:
@@ -579,15 +521,8 @@ Additionally, you can set tenant ids on job worker level by using the annotation
 
 You can override this property as well:
 
-```yaml
-camunda:
-  client:
-    zeebe:
-      override:
-        foo:
-          tenants-ids:
-            - <default>
-            - foo
+```yaml reference referenceLinkText="Source" title="Worker tenant ids"
+https://github.com/camunda/camunda/blob/stable/8.7/clients/spring-boot-starter-camunda-sdk/src/test/resources/properties/8.7/worker-tenant-ids.yaml
 ```
 
 ## Observing metrics
