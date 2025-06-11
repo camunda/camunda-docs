@@ -1,54 +1,52 @@
 ---
 id: rfc-connector
-title: SAP RFC Connector
-description: "The SAP RFC Connector is a Java Spring Boot application that runs on SAP BTP."
+title: SAP RFC connector
+description: "The SAP RFC connector is a Java Spring Boot application that runs on SAP BTP."
 ---
 
-The SAP RFC [Connector](/components/connectors/introduction.md) is a [protocol and outbound Connector](/components/connectors/connector-types.md).<br/>
-This Connector is a Java Spring Boot application that runs as a `.war` on the SAP Business Technology Platform (BTP).
+The [SAP RFC](/reference/glossary.md#rfc) [Connector](/components/connectors/introduction.md) is a [protocol and outbound connector](/components/connectors/connector-types.md).<br/>
+This connector is a Java Spring Boot application that runs as a `.war` on the SAP Business Technology Platform (BTP).
 
 It connects to Camunda 8 SaaS, and utilizes SAP BTP's [Destination](https://learning.sap.com/learning-journeys/administrating-sap-business-technology-platform/using-destinations) and [Connectivity](https://help.sap.com/docs/connectivity/sap-btp-connectivity-cf/what-is-sap-btp-connectivity) concepts to query a SAP system via the RFC protocol to interact with remote-enabled Function Modules and BAPIs.
 
 ## Overview
 
-For a standard overview of the steps involved in the SAP RFC Connector, see the following diagram:
+For a standard overview of the steps involved in the SAP RFC connector, see the following diagram:
 
 ![RFC overview](./img/rfc-connector-ops.png)
 
 ## Prerequisites
 
-- **Camunda API Client** <br/>
-  [Create an API client](/components/console/manage-clusters/manage-api-clients.md) for your Camunda SaaS cluster with the full scope: `Zeebe,Tasklist,Operate,Optimize,Secrets`
-
-To run the SAP RFC Connector, the following SAP infrastructure setup is required:
-
-- Cloud Foundry CLI](https://github.com/cloudfoundry/cli) with the [multiapps plugin](https://github.com/cloudfoundry/multiapps-cli-plugin) installed on the machine executing the deployment.
-
-- SAP BTP subaccount with a [Cloud Foundry environment](https://discovery-center.cloud.sap/serviceCatalog/cloud-foundry-runtime?region=all) enabled and a [created space](https://help.sap.com/docs/btp/sap-business-technology-platform/create-spaces).
-- A minimum of [1 GB storage quota and 2 GB runtime memory](https://help.sap.com/docs/btp/sap-business-technology-platform/managing-space-quota-plans).
-- [Entitlements](https://help.sap.com/docs/btp/sap-business-technology-platform/managing-entitlements-and-quotas-using-cockpit) for:
+- **Camunda API Client**
+  - [Create an API client](/components/console/manage-clusters/manage-api-clients.md) for your Camunda SaaS cluster with the full scope: `Zeebe,Tasklist,Operate,Optimize,Secrets`
+- **To run the SAP RFC connector**, the following SAP infrastructure setup is required:
+  - [Cloud Foundry CLI](https://github.com/cloudfoundry/cli) with the [multiapps plugin](https://github.com/cloudfoundry/multiapps-cli-plugin) installed on the machine executing the deployment.
+  - SAP BTP subaccount with a [Cloud Foundry environment](https://discovery-center.cloud.sap/serviceCatalog/cloud-foundry-runtime?region=all) enabled and a [created space](https://help.sap.com/docs/btp/sap-business-technology-platform/create-spaces).
+  - A minimum of [1 GB storage quota and 2 GB runtime memory](https://help.sap.com/docs/btp/sap-business-technology-platform/managing-space-quota-plans).
+- **[Entitlements](https://help.sap.com/docs/btp/sap-business-technology-platform/managing-entitlements-and-quotas-using-cockpit) for**:
   - [Connectivity Service](https://discovery-center.cloud.sap/serviceCatalog/connectivity-service?region=all), `lite` plan (to connect to the SAP is on-premises).
   - [Destination Service](https://discovery-center.cloud.sap/serviceCatalog/destination?service_plan=lite&region=all&commercialModel=btpea), `lite` plan.
   - [Authorization and Trust Management Service](https://discovery-center.cloud.sap/serviceCatalog/authorization-and-trust-management-service?region=all), `application` plan.
-- One or more instance- or subaccount-level Destinations, pointing to the SAP systems to communicate with.
+- **One or more instance- or subaccount-level Destinations**, pointing to the SAP systems to communicate with.
   ![btp-destination-rfc](./img/btp-destination-rfc.png)
-- Ensure `Additional Properties` set on the Destination are aligned with those of your Connector or remote SAP system.
+- **Ensure `Additional Properties` is set** on the Destination are aligned with those of your connector or remote SAP system.
 
 ## Configuration and deployment
 
-Unlike other Camunda Connectors, the SAP RFC Connector must be deployed as a Java `.war` archive. This is because it uses SAP's [JCo Java library](https://support.sap.com/en/product/connectors/jco.html) to connect via RFC to the configured SAP system. the JCo library's license prohibits redistribution, but it is available at runtime on BTP and auto-discovered by Camunda's RFC Connector.
+Unlike other Camunda connectors, the SAP RFC connector must be deployed as a Java `.war` archive. This is because it uses SAP's [JCo Java library](https://support.sap.com/en/product/connectors/jco.html) to connect via RFC to the configured SAP system. the JCo library's license prohibits redistribution, but it is available at runtime on BTP and auto-discovered by Camunda's RFC connector.
 
-A descriptor file is required to deploy the SAP RFC Connector to a space in a SAP BTP subaccount. An exemplary deployment descriptor `mtad.yaml.example` is provided by Camunda. This is a standard format in SAP BTP's Cloud Foundry environment to describe the application that needs deployment.
+A descriptor file is required to deploy the SAP RFC connector to a space in a SAP BTP subaccount. An exemplary deployment descriptor `mtad.yaml.example` is provided by Camunda. This is a standard format in SAP BTP's Cloud Foundry environment to describe the application that needs deployment.
 
 ### Configuring the RFC connector
 
-You can either configure the RFC connector via [the `csap` cli](./csap-cli.md) (recommended) or manually. The advantage of using `csap` is that it pulls together all necessary files and adjusts them to your BTP environment automatically, using the info you provided in the prompts or via command line switches.
+Configure the SAP RFC connector via [the `csap` cli](./csap-cli.md) (recommended) or manually. Using `csap` simplifies the process by automatically gathering all required files and customizing them for your BTP environment based on the details you provide through prompts or command-line options.
 
 #### Using `csap`
 
-Use CSAP CLI in either<br/>
-**Interactive mode:** by following the on-screen prompts OR<br/>
-**Non-interactive mode:** by providing all required parameters directly to the CLI.
+Use CSAP CLI in either:
+
+- **Interactive mode:** By following the on-screen prompts.
+- **Non-interactive mode:** By providing all required parameters directly to the CLI.
 
 Use the command `csap setup` will guide you interactively.
 
@@ -56,8 +54,8 @@ Use the command `csap setup` will guide you interactively.
 
 ```shell
 csap setup --for rfc \
-	--camunda 8.7 \
-	--deployment SaaS
+  --camunda 8.7 \
+  --deployment SaaS
 ```
 
 #### Manual configuration
@@ -66,8 +64,8 @@ csap setup --for rfc \
    The version follows the format `<C8 version major>.<C8 version minor>.<RFC connector version>`.  
    Examples:
 
-   - `rfc-8.6.0.war` is the RFC Connector in version `0` for C8 SaaS version `8.6`
-   - `rfc-8.5.1.war` is the RFC Connector in version `1` for C8 SaaS version `8.5`
+   - `rfc-8.6.0.war` is the RFC connector in version `0` for C8 SaaS version `8.6`
+   - `rfc-8.5.1.war` is the RFC connector in version `1` for C8 SaaS version `8.5`
 
 2. Download the matching `mtad.yaml.example` file also from [the GitHub release page](https://github.com/camunda/sap-rfc-connector/releases).
    Adjust the values for the credentials (such as client ID and client secret) to match those of the API client of the targeted Camunda 8 SaaS environment and rename it to `mtad.yaml`.
@@ -84,7 +82,7 @@ API endpoint: https://api.cf. ...
 ...
 ```
 
-2. Deploy the SAP RFC Connector via the `cf-cli`. Note that this requires [the "multiapps" plugin of Cloud Foundry](https://github.com/cloudfoundry/multiapps-cli-plugin) to be installed on the machine the deployment runs on.
+2. Deploy the SAP RFC connector via the `cf-cli`. Note that this requires [the "multiapps" plugin of Cloud Foundry](https://github.com/cloudfoundry/multiapps-cli-plugin) to be installed on the machine the deployment runs on.
 
 ```shell
 $> cf deploy ./ # append the -f flag to shortcircuit ongoing deployments
@@ -95,17 +93,17 @@ Application "sap-rfc-connector" started and available at "some.url.hana.ondemand
 
 ### Deployment in Camunda 8 SaaS
 
-- If using Web Modeler, [import the SAP RFC Connector's element template](/components/connectors/manage-connector-templates.md#importing-existing-connector-templates) contained in the repository in `element-templates/sap-rfc-connector.json` for use in your process design.
+- If using Web Modeler, [import the SAP RFC connector's element template](/components/connectors/manage-connector-templates.md#importing-existing-connector-templates) contained in the repository in `element-templates/sap-rfc-connector.json` for use in your process design.
 
 ![sap-rfc-connector-task-in-model](./img/sap-rfc-connector-task-in-model.png)
 
 - If using Desktop Modeler, [follow the standard importing procedure](/components/modeler/desktop-modeler/element-templates/configuring-templates.md).
 
-## Working with the SAP RFC Connector in Camunda Modeler
+## Working with the SAP RFC connector in Camunda Modeler
 
 ### Modeling options
 
-To use the **SAP RFC Connector** in your process, either change the type of existing task by clicking on it and using the **wrench-shaped** change type context menu icon, or create a new Connector task by using the **Append Connector** context menu. Follow our [guide to using Connectors](/components/connectors/use-connectors/index.md) to learn more.
+To use the **SAP RFC connector** in your process, either change the type of existing task by clicking on it and using the **wrench-shaped** change type context menu icon, or create a new connector task by using the **Append connector** context menu. Follow our [guide to using connectors](/components/connectors/use-connectors/index.md) to learn more.
 
 ![sap-rfc-connector-task-in-model](./img/sap-rfc-connector-element-template.png)
 
@@ -205,7 +203,7 @@ This aligns with the BAPI definition:
 
 #### changing
 
-A `changing parameter` is a variable received by an RFC target that is processed, changed, and returned. It is only available for `FM`-type RFC targets in the SAP RFC Connector. The overall structure is `[{name: "param", type: "type", value: <value> }]`.
+A `changing parameter` is a variable received by an RFC target that is processed, changed, and returned. It is only available for `FM`-type RFC targets in the SAP RFC connector. The overall structure is `[{name: "param", type: "type", value: <value> }]`.
 
 Example:
 
@@ -230,8 +228,8 @@ The result of a call to a BAPI holds the following JSON structure:
 ```json
 {
   tables: [
-  	{ ... }
-	],
+    { ... }
+  ],
   importing: {
     { ... }
   }
@@ -249,8 +247,8 @@ The result of a call to a Function Module holds the following JSON structure:
 ```json
 {
   tables: [
-  	{ ... }
-	],
+    { ... }
+  ],
   importing: [
     { ... }
   ],
@@ -266,7 +264,7 @@ The result of a call to a Function Module holds the following JSON structure:
 
 ## Error handling
 
-The SAP RFC Connector allows handling of query errors directly in the model. This means an RFC error is relayed to the process instance in the reserved variables `bpmnError` and `error` and can be processed accordingly:
+The SAP RFC connector allows handling of query errors directly in the model. This means an RFC error is relayed to the process instance in the reserved variables `bpmnError` and `error` and can be processed accordingly:
 
 ```
 DESTINATION_ERROR,

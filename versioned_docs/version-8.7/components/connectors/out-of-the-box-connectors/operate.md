@@ -1,16 +1,16 @@
 ---
 id: operate
-title: Camunda Operate Connector
+title: Camunda Operate connector
 sidebar_label: Camunda Operate
 description: Fetch process execution data from Camunda Operate, a monitoring solution for Camunda 8.
 ---
 
-The **Camunda Operate Connector** allows you to interact with [Camunda Operate](https://camunda.com/platform/operate/) in your BPMN process to fetch process execution data.
+The **Camunda Operate connector** allows you to interact with [Camunda Operate](https://camunda.com/platform/operate/) in your BPMN process to fetch process execution data.
 
 ## Prerequisites
 
-To use the **Camunda Operate Connector**, you need to have an active Camunda 8 cluster with Operate.
-This Connector is compatible with both Camunda 8 SaaS and Camunda 8 Self-Managed.
+To use the **Camunda Operate connector**, you need to have an active Camunda 8 cluster with Operate.
+This connector is compatible with both Camunda 8 SaaS and Camunda 8 Self-Managed.
 
 :::note
 Password authentication with Operate is currently not supported.
@@ -26,7 +26,7 @@ You also need to obtain the Operate API client credentials. Follow the links bel
 Use Camunda secrets to store credentials so you don't expose sensitive information directly from the process. See [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
 :::
 
-## Create an Operate Connector task
+## Create an Operate connector task
 
 import ConnectorTask from '../../../components/react-components/connector-task.md'
 
@@ -47,7 +47,7 @@ If you are using a Self-Managed cluster, you need to provide two URLs:
 - URL of your OAuth token endpoint
 - Operate URL
 
-If you are testing this Connector on your local machine with the Camunda 8 Docker Compose setup, set the following URLs:
+If you are testing this connector on your local machine with the Camunda 8 Docker Compose setup, set the following URLs:
 
 - OAuth Token endpoint: `http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token`
 - Operate URL: `http://localhost:8081`
@@ -69,7 +69,7 @@ In the **Operation** dropdown list, select one of the supported operations: **Ge
 Refer to the Operate [API documentation](/apis-tools/operate-api/overview.md) for more details on the specific operations.
 
 :::note Unsupported operations
-The following API operations are currently not supported by the **Operate Connector**:
+The following API operations are currently not supported by the **Operate connector**:
 
 - Delete process instance
 - Get process definition XML

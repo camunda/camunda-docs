@@ -43,7 +43,7 @@ of you local machine.
 ## Wiring your Connector with Camunda Docker instance (without Keycloak)
 
 This option is applicable if you launch your cluster in a Self-Managed version with
-[Camunda Docker Compose variant without Keycloak](https://github.com/camunda/camunda-platform/blob/main/docker-compose-core.yaml).
+[Camunda Docker Compose variant without Keycloak](https://github.com/camunda/camunda-distributions/tree/main/docker-compose).
 
 Run the following command:
 
@@ -66,7 +66,7 @@ Exact values of the environment variables related to Zeebe, Operate, or network 
 ## Wiring your Connector with Camunda Docker instance (with Keycloak)
 
 This option is applicable if you launch your cluster in a Self-Managed version with
-[Camunda Platform Docker Compose variant with Keycloak](https://github.com/camunda/camunda-platform/blob/main/docker-compose.yaml).
+[Camunda Platform Docker Compose variant with Keycloak](https://github.com/camunda/camunda-distributions/tree/main/docker-compose).
 
 Run the following command:
 
@@ -100,15 +100,15 @@ your own configuration.
 There are multiple ways to configure a Helm/Kubernetes Self-Managed cluster.
 Refer to the [official guide](../../self-managed/platform-deployment/helm-kubernetes/overview/) to learn more.
 
-For the purpose of this section, imagine you installed Helm charts with `helm install dev camunda/camunda-platform`,
+For the purpose of this section, imagine you installed Helm charts with `helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION`,
 and forwarded Zeebe, Operate, and Keycloak ports:
 
-- `kubectl port-forward svc/dev-zeebe-gateway 26500:26500`
-- `kubectl port-forward svc/dev-operate 8081:80`
-- `kubectl port-forward svc/dev-keycloak 18080:80`
+- `kubectl port-forward svc/camunda-zeebe-gateway 26500:26500`
+- `kubectl port-forward svc/camunda-operate 8081:80`
+- `kubectl port-forward svc/camunda-keycloak 18080:80`
 
-Now, you need to obtain both Zeebe and Connectors' Operate OAuth clients. You can do it with `kubectl get secret dev-zeebe-identity-secret -o jsonpath="{.data.*}" | base64 --decode`
-and `kubectl get secret dev-connectors-identity-secret -o jsonpath="{.data.*}" | base64 --decode` respectively.
+Now, you need to obtain both Zeebe and Connectors' Operate OAuth clients. You can do it with `kubectl get secret camunda-zeebe-identity-secret -o jsonpath="{.data.*}" | base64 --decode`
+and `kubectl get secret camunda-connectors-identity-secret -o jsonpath="{.data.*}" | base64 --decode` respectively.
 
 Run the following command:
 

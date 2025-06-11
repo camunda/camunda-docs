@@ -6,14 +6,14 @@ description: "FEEL is a part of DMN specification of the Object Management Group
 
 import { MarkerCamundaExtension } from "@site/src/mdx/MarkerCamundaExtension";
 
-**Friendly Enough Expression Language (FEEL)** is designed to write expressions in a way that is easily understood by both business professionals and developers. In Camunda, FEEL is used to define expressions in the context of [BPMN diagrams](/docs/components/modeler/bpmn/bpmn.md), [DMN diagrams](/docs/components/modeler/dmn/dmn.md), and [Forms](/docs/components/modeler/forms/camunda-forms-reference.md). FEEL is specified in
+**Friendly Enough Expression Language (FEEL)** is designed to write expressions in a way that is easily understood by both business professionals and developers. In Camunda, FEEL is used to define expressions in the context of [BPMN diagrams](/components/modeler/bpmn/bpmn.md), [DMN diagrams](/components/modeler/dmn/dmn.md), and [Forms](/components/modeler/forms/camunda-forms-reference.md). FEEL is specified in
 the [DMN specification](https://www.omg.org/spec/DMN/) of the Object Management Group (OMG).
 
 ## Learning FEEL
 
 To understand FEEL better and how it is integrated into Camunda, you can explore the following resources:
 
-- [Expressions in Camunda 8](/docs/components/concepts/expressions.md): Learn how expressions are used within our platform.
+- [Expressions in Camunda 8](/components/concepts/expressions.md): Learn how expressions are used within our platform.
 - [FEEL syntax and operators](./language-guide/feel-expressions-introduction.md): Learn how to write basic expression.
 - [Built-in functions](./builtin-functions/feel-built-in-functions-introduction.md): Read about functions the FEEL engine offers.
 

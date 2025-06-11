@@ -57,9 +57,9 @@ The `server` configuration allows you to configure the main REST server. Below a
 
 #### server.compression
 
-| Field   | Description                                                                                                                                                 | Example value |
-| ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| enabled | If true, enables compression of responses for the REST API. This setting can also be overridden using the environment variable `SERVER_COMPRESION_ENABLED`. | false         |
+| Field   | Description                                                                                                                                                           | Example value |
+| ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| enabled | If true, enables compression of responses for the Camunda 8 REST API. This setting can also be overridden using the environment variable `SERVER_COMPRESION_ENABLED`. | false         |
 
 #### server.ssl
 
@@ -67,7 +67,7 @@ Allows you to configure the SSL security for the REST server.
 
 | Field                   | Description                                                                                                                                                                     | Example value |
 | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| enabled                 | If true, enables TLS for the REST API. This setting can also be overridden using the environment variable `SERVER_SSL_ENABLED`.                                                 | false         |
+| enabled                 | If true, enables TLS for the Camunda 8 REST API. This setting can also be overridden using the environment variable `SERVER_SSL_ENABLED`.                                       | false         |
 | certificate             | The path to a PEM encoded certificate. This setting can also be overridden using the environment variable `SERVER_SSL_CERTIFICATE`.                                             |               |
 | certificate-private-key | The path to a PKCS1 or PKCS8 private key for the configured certificate. This setting can also be overridden using the environment variable `SERVER_SSL_CERTIFICATEPRIVATEKEY`. |               |
 
@@ -281,7 +281,7 @@ security:
 
 :::note
 The Zeebe configuration properties for Camunda Identity are deprecated as of version `8.4.0`. Use the dedicated
-Camunda Identity properties or the [corresponding SDK environment variables](../../identity/deployment/configuration-variables.md#camunda-identity-sdk-configuration).
+Camunda Identity properties or the [corresponding SDK environment variables](/self-managed/identity/miscellaneous/configuration-variables.md#camunda-identity-sdk-configuration).
 :::
 
 | Field            | Description                                                                                                                                                                                          | Example value                                     |
@@ -498,7 +498,7 @@ Read more [in the multi-tenancy documentation](../../../self-managed/concepts/mu
 :::note
 For now, multi-tenancy is only supported in combination with Identity.
 To use multi-tenancy, you must set [`authentication.mode`](#zeebegatewayclustersecurityauthentication) to `'identity'` and specify the
-`camunda.identity.baseUrl` property or the [corresponding Camunda Identity environment variable](../../identity/deployment/configuration-variables.md#core-configuration)
+`camunda.identity.baseUrl` property or the [corresponding Camunda Identity environment variable](/self-managed/identity/miscellaneous/configuration-variables.md#core-configuration)
 as well.
 :::
 

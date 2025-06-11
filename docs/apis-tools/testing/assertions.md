@@ -140,6 +140,22 @@ Assert that the process instance is created and either active, completed, or ter
 assertThat(processInstance).isCreated();
 ```
 
+### hasActiveIncidents
+
+Assert that the process instance has at least one active incident. The assertion fails if there is no active incident.
+
+```java
+assertThat(processInstance).hasActiveIncidents();
+```
+
+### hasNoActiveIncidents
+
+Assert that the process instance has no active incidents. The assertion fails if there is any active incident.
+
+```java
+assertThat(processInstance).hasNoActiveIncidents();
+```
+
 ## Element instance assertions
 
 You can verify the element instance states and other properties using `CamundaAssert.assertThat(processInstance)`. Use the BPMN element ID or a `ElementSelector` to identify the elements.
@@ -177,22 +193,6 @@ Assert that the given BPMN elements of the process instance are active. The asse
 assertThat(processInstance).hasActiveElements("task_A", "task_B");
 ```
 
-### hasCompletedElements
-
-Assert that the given BPMN elements of the process instance are completed. The assertion fails if at least one element is active, terminated, or not entered.
-
-```java
-assertThat(processInstance).hasCompletedElements("task_A", "task_B");
-```
-
-### hasTerminatedElements
-
-Assert that the given BPMN elements of the process instance are terminated. The assertion fails if at least one element is active, completed, or not entered.
-
-```java
-assertThat(processInstance).hasTerminatedElements("task_A", "task_B");
-```
-
 ### hasActiveElement
 
 Assert that the BPMN element of the process instance is active the given amount of times. The assertion fails if the element is not active or not exactly the given amount of times.
@@ -201,12 +201,63 @@ Assert that the BPMN element of the process instance is active the given amount 
 assertThat(processInstance).hasActiveElement("task_A", 2);
 ```
 
+### hasActiveElementsExactly
+
+Assert that only the given BPMN elements are active. The assertion fails if at least one element is not active, or other elements are active.
+
+```java
+assertThat(processInstance).hasActiveElementsExactly("task_A", "task_B");
+```
+
+### hasNoActiveElements
+
+Assert that the given BPMN elements are not active. The assertion fails if at least one element is active.
+
+```java
+assertThat(processInstance).hasNoActiveElements("task_A", "task_B");
+```
+
+### hasNotActivatedElements
+
+Assert that the given BPMN elements are not activated (i.e. not entered). The assertion fails if at least one element is active, completed, or terminated.
+
+This assertion does not wait for the given activities.
+
+```java
+assertThat(processInstance).hasNotActivatedElements("task_A", "task_B");
+```
+
+### hasCompletedElements
+
+Assert that the given BPMN elements of the process instance are completed. The assertion fails if at least one element is active, terminated, or not entered.
+
+```java
+assertThat(processInstance).hasCompletedElements("task_A", "task_B");
+```
+
 ### hasCompletedElement
 
 Assert that the BPMN element of the process instance is completed the given amount of times. The assertion fails if the element is not completed or not exactly the given amount of times.
 
 ```java
 assertThat(processInstance).hasCompletedElement("task_A", 2);
+```
+
+### hasCompletedElementsInOrder
+
+Assert that the given BPMN elements are completed in order. Elements that do not match any of the given element IDs are ignored. The assertion fails if at least one of the elements is not completed,
+or the order is not correct.
+
+```java
+assertThat(processInstance).hasCompletedElementsInOrder("task_A", "task_B");
+```
+
+### hasTerminatedElements
+
+Assert that the given BPMN elements of the process instance are terminated. The assertion fails if at least one element is active, completed, or not entered.
+
+```java
+assertThat(processInstance).hasTerminatedElements("task_A", "task_B");
 ```
 
 ### hasTerminatedElement
@@ -244,6 +295,145 @@ Assert that the process instance has the given variables. The assertion fails if
 ```java
 Map<String, Object> expectedVariables = //
 assertThat(processInstance).hasVariables(expectedVariables);
+```
+
+## User task assertions
+
+You can verify the user task states and other properties using `CamundaAssert.assertThat()`. Use a predefined `UserTaskSelector` from `io.camunda.process.test.api.assertions.UserTaskSelectors` or a custom implementation to identify the user task:
+
+```java
+// by BPMN element ID
+assertThat(byElementId("user-task-id")).isCompleted();
+
+// by user task name
+assertThat(byTaskName("User Task")).isCompleted();
+
+// you may optionally specify the process instance key:
+assertThat(byElementId("user-task-id", processInstanceKey)).isCompleted();
+assertThat(byTaskName("User Task", processInstanceKey)).isCompleted();
+
+// custom selector implementation
+assertThat(userTask -> { .. }).isCompleted();
+```
+
+### isCreated
+
+Asserts that the user task is created. The assertion fails if the task is in any other state.
+
+```java
+assertThat(byTaskName("User Task")).isCreated();
+```
+
+### isCompleted
+
+Asserts that the user task is completed. The assertion fails if the task is in any other state.
+
+```java
+assertThat(byTaskName("User Task")).isCompleted();
+```
+
+### isCanceled
+
+Asserts that the user task is canceled. The assertion fails if the task is in any other state.
+
+```java
+assertThat(byTaskName("User Task")).isCanceled();
+```
+
+### isFailed
+
+Asserts that the user task is failed. The assertion fails if the task is in any other state.
+
+```java
+assertThat(byTaskName("User Task")).isFailed();
+```
+
+### hasAssignee
+
+Asserts that the user task has the expected assignee.
+
+```java
+assertThat(byTaskName("User Task")).hasAssignee("John Doe");
+```
+
+### hasPriority
+
+Asserts that the user task has the expected priority.
+
+```java
+assertThat(byTaskName("User Task")).hasPriority(100);
+```
+
+### hasElementId
+
+Asserts that the user task has the expected BPMN element ID.
+
+```java
+assertThat(byTaskName("User Task")).hasElementId("user-task-id");
+```
+
+### hasName
+
+Asserts that the user task has the expected name.
+
+```java
+assertThat(byElementId("user-task-id")).hasName("User Task");
+```
+
+### hasProcessInstanceKey
+
+Asserts that the user task has the expected process instance key.
+
+```java
+assertThat(byTaskName("User Task")).hasProcessInstanceKey(processInstanceKey);
+```
+
+### hasDueDate
+
+Asserts that the user task has the expected due date.
+
+```java
+assertThat(byTaskName("User Task")).hasDueDate("2023-10-01T00:00:00Z");
+```
+
+### hasCompletionDate
+
+Asserts that the user task has the expected completion date.
+
+```java
+assertThat(byTaskName("User Task")).hasCompletionDate("2023-10-01T00:00:00Z");
+```
+
+### hasFollowUpDate
+
+Asserts that the user task has the expected follow-up date.
+
+```java
+assertThat(byTaskName("User Task")).hasFollowUpDate("2023-10-01T00:00:00Z");
+```
+
+### hasCreationDate
+
+Asserts that the user task has the expected creation date.
+
+```java
+assertThat(byTaskName("User Task")).hasCreationDate("2023-10-01T00:00:00Z");
+```
+
+### hasCandidateGroup
+
+Asserts that the user task has the expected candidate group.
+
+```java
+assertThat(byTaskName("User Task")).hasCandidateGroup("groupA");
+```
+
+### hasCandidateGroups
+
+Asserts that the user task has the expected candidate groups.
+
+```java
+assertThat(byTaskName("User Task")).hasCandidateGroups("groupA", "groupB", "groupC");
 ```
 
 ## Custom assertions

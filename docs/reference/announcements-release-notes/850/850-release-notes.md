@@ -4,11 +4,13 @@ title: "Release notes"
 description: "Release notes for 8.5, including alphas"
 ---
 
+These release notes identify the new features included in Camunda 8.5, 8.4, and 8.3 releases, including [alpha feature releases](/components/early-access/alpha/alpha-features.md).
+
 ## 8.5 minor
 
 | Release date | End of maintenance | Changelog(s)                                                                                                                                                                                                                                                | Release blog                                                          | Update guide                                                                             |
 | ------------ | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| 9 April 2024 | 14 October 2025    | -[ Camunda 8 Core ](https://github.com/camunda/camunda-platform/releases/tag/8.5.0) <br /> -[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.5.0) <br /> - [ Optimize ](https://github.com/camunda/camunda-optimize/releases/tag/3.13.0) | [Release blog](https://camunda.com/blog/2024/04/camunda-8-5-release/) | [Self-Managed update guide](/self-managed/operational-guides/update-guide/840-to-850.md) |
+| 9 April 2024 | 14 October 2025    | -[ Camunda 8 Core ](https://github.com/camunda/camunda-platform/releases/tag/8.5.0) <br /> -[ connectors ](https://github.com/camunda/connectors/releases/tag/8.5.0) <br /> - [ Optimize ](https://github.com/camunda/camunda-optimize/releases/tag/3.13.0) | [Release blog](https://camunda.com/blog/2024/04/camunda-8-5-release/) | [Self-Managed update guide](/self-managed/operational-guides/update-guide/840-to-850.md) |
 
 ### Updated SaaS URLs <span class="badge badge--long" title="This feature affects SaaS">SaaS</span>
 
@@ -26,9 +28,9 @@ The new naming scheme used for all Camunda SaaS generations created after April 
 
 For patch releases to existing generations, `N` is set to the latest patch level plus 1. For example, when `Camunda 8.4.5` is the current generation name, the following patch will be released as `Camunda 8.4+gen6`.
 
-This was done to decouple the generation name from the particular patch level of the components it contains, as some component versions like Connectors are decoupled from other components.
+This was done to decouple the generation name from the particular patch level of the components it contains, as some component versions like connectors are decoupled from other components.
 
-You will learn about the particular component patch version changes in the update dialogue to the latest generation available. The following screenshot shows a sample update from `Camunda 8.5+gen1` to `Camunda 8.5+gen2`, where only the Connectors patch version changed.
+You will learn about the particular component patch version changes in the update dialogue to the latest generation available. The following screenshot shows a sample update from `Camunda 8.5+gen1` to `Camunda 8.5+gen2`, where only the connectors patch version changed.
 
 ![New Generating naming sample showing an update dialogue from 8.5+gen1 to 8.5+gen2](../../img/generation-naming-scheme-sample.png)
 
@@ -50,7 +52,7 @@ The process overview page was redesigned for clarity and ease-of-use.
 
 <!-- https://github.com/camunda/product-hub/issues/2148 -->
 
-Use supported [Spring Zeebe SDK](/apis-tools/spring-zeebe-sdk/getting-started.md) in your Spring or Spring Boot projects to interact with the Zeebe API and build process applications. Spring Zeebe SDK works with Zeebe gRPC and the new Zeebe REST API.
+Use the supported [Spring Zeebe SDK](/apis-tools/spring-zeebe-sdk/getting-started.md) in your Spring or Spring Boot projects to interact with the Zeebe API and build process applications. The Spring Zeebe SDK works with Zeebe gRPC and the new Zeebe REST API.
 
 ### Modeler-only role in Camunda 8 SaaS <span class="badge badge--long" title="This feature affects Modeler">Modeler</span> <span class="badge badge--long" title="This feature affects SaaS">SaaS</span>
 
@@ -138,7 +140,7 @@ The first step to offer an intuitive and consistent experience via a single, [un
 
 <!-- https://github.com/camunda/product-hub/issues/2010 -->
 
-Introducing AI-driven [refactoring suggestions](/components/modeler/web-modeler/advanced-modeling/refactoring-suggestions.md) in our modeling canvas, designed to refine your BPMN models based on task descriptions. Enter a description, like `Send a message`, and immediately receive a practical suggestion, such as implementing it through a Slack Connector. This feature aims to streamline your workflow, offering intuitive, actionable advice for transforming descriptions into efficient BPMN tasks.
+Introducing AI-driven [refactoring suggestions](/components/modeler/web-modeler/advanced-modeling/refactoring-suggestions.md) in our modeling canvas, designed to refine your BPMN models based on task descriptions. Enter a description, like `Send a message`, and immediately receive a practical suggestion, such as implementing it through a Slack connector. This feature aims to streamline your workflow, offering intuitive, actionable advice for transforming descriptions into efficient BPMN tasks.
 
 ### Frontend developer documentation <span class="badge badge--long" title="This feature affects Tasklist">Tasklist</span>
 
@@ -152,11 +154,11 @@ Developers now find [documentation](/apis-tools/frontend-development/01-task-app
 
 The [KPI Wizard](/components/optimize/userguide/process-KPIs.md) is the new way to build a KPI report quickly. The Wizard already contains predefined KPIs that can be selected. It guides the users through the needed customization and allows them to activate an alert that allows passive monitoring. The list of predefined KPIs will be extended with upcoming releases. Start setting up a first process KPI now.
 
-### Use secrets in hybrid mode <span class="badge badge--long" title="This feature affects Connectors">Connectors</span>
+### Use secrets in hybrid mode <span class="badge badge--long" title="This feature affects connectors">Connectors</span>
 
 <!-- https://github.com/camunda/product-hub/issues/1999 -->
 
-You are now able to consume the [secrets](/guides/use-connectors-in-hybrid-mode.md#using-saas-secrets) from the console in your own custom Connector connected to our Camunda 8 SaaS platform.
+You are now able to consume the [secrets](/guides/use-connectors-in-hybrid-mode.md#using-saas-secrets) from the console in your own custom connector connected to our Camunda 8 SaaS platform.
 
 ### Multi-region: Productize the two regions, Active-Active, Self-Managed setup (Zeebe, Operate, Tasklist) <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
@@ -165,18 +167,18 @@ You are now able to consume the [secrets](/guides/use-connectors-in-hybrid-mode.
 You can now run Zeebe, Operate, and Tasklist across [two geographical regions](/self-managed/concepts/multi-region/dual-region.md). This allows Camunda 8 to run in a mix of active-active and active-passive setups, resulting in an overall **active-passive** setup. You will find installation and failover guides to help you recover quickly and safely from whole region failures.
 
 :::note
-Optimize, Identity, and Connectors are not supported in dual-region setups yet.
+Optimize, Identity, and connectors are not supported in dual-region setups yet.
 :::
 
-### REST Postman collection to Connector template converter <span class="badge badge--long" title="This feature affects Connectors">Connectors</span>
+### REST Postman collection to connector template converter <span class="badge badge--long" title="This feature affects connectors">Connectors</span>
 
 <!-- https://github.com/camunda/product-hub/issues/1947 -->
 
-Via a command line tool, you can now generate your Connector template based on our REST Connector from a Postman collection. This supports multiple operations and splitting up the body into single fields.
+Via a command line tool, you can now generate your connector template based on our REST connector from a Postman collection. This supports multiple operations and splitting up the body into single fields.
 
-### SOAP SDK support (Self-Managed + Hybrid) <span class="badge badge--long" title="This feature affects Connectors">Connectors</span> <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+### SOAP SDK support (Self-Managed + Hybrid) <span class="badge badge--long" title="This feature affects connectors">Connectors</span> <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-You can now connect to a SOAP service via our Camunda Connector. The first iteration of this Connector will only be available in SM and as hybrid setup.
+You can now connect to a SOAP service via our Camunda connector. The first iteration of this connector will only be available in SM and as hybrid setup.
 
 ### Process blueprint import via link <span class="badge badge--long" title="This feature affects Marketplace">Marketplace</span>
 
@@ -226,17 +228,17 @@ You cannot update alpha versions.
 
 In process orchestration, executed tasks may need to be canceled later under certain circumstances. BPMN compensation events and handlers allow you to undo or reverse the effects of activities in case of errors, exceptions, or cancelations, ensuring consistency, reliability, and compliance in complex business scenarios. Compensation supports the [Saga pattern](https://blog.bernd-ruecker.com/saga-how-to-implement-complex-business-transactions-without-two-phase-commit-e00aa41a1b1b), and Zeebe as Saga Coordinator helps to solve transactions without two-phase-commit in distributed systems.
 
-### Create a (REST-based) Connector From a OpenAPI/Swagger specification <span class="badge badge--long" title="This feature affects Connectors">Connectors</span>
+### Create a (REST-based) connector From a OpenAPI/Swagger specification <span class="badge badge--long" title="This feature affects connectors">Connectors</span>
 
 <!-- https://github.com/camunda/product-hub/issues/137 -->
 
-Via a command line tool, you can now generate your Connector template based on our REST Connector from an OpenAPI specification. We are supporting multiple operations and splitting up the body to single fields.
+Via a command line tool, you can now generate your connector template based on our REST connector from an OpenAPI specification. We are supporting multiple operations and splitting up the body to single fields.
 
 ## 8.5.0-alpha2
 
 | Release date  | Changelog(s)                                                                                                                                                                         |                                                                                    |
 | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------- |
-| 12 March 2024 | - [ Camunda 8 core ](https://github.com/camunda/camunda-platform/releases/tag/8.5.0-alpha2) <br /> - [ Connectors ](https://github.com/camunda/connectors/releases/tag/8.5.0-alpha2) | [Release blog](https://camunda.com/blog/2024/03/camunda-alpha-release-march-2024/) |
+| 12 March 2024 | - [ Camunda 8 core ](https://github.com/camunda/camunda-platform/releases/tag/8.5.0-alpha2) <br /> - [ connectors ](https://github.com/camunda/connectors/releases/tag/8.5.0-alpha2) | [Release blog](https://camunda.com/blog/2024/03/camunda-alpha-release-march-2024/) |
 
 ### Allow multiple candidate groups in TaskSearchRequest <span class="badge badge--long" title="This feature affects Tasklist">Tasklist</span>
 
@@ -282,7 +284,7 @@ This update introduces a new context pad, designed to make modeling actions like
 
 | Release date     | Changelog(s)                                                                                                                                                                         | Release blog                                                                          |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------- |
-| 13 February 2024 | - [ Camunda 8 core ](https://github.com/camunda/camunda-platform/releases/tag/8.5.0-alpha1) <br /> - [ Connectors ](https://github.com/camunda/connectors/releases/tag/8.5.0-alpha1) | [Release blog](https://camunda.com/blog/2024/02/camunda-alpha-release-february-2024/) |
+| 13 February 2024 | - [ Camunda 8 core ](https://github.com/camunda/camunda-platform/releases/tag/8.5.0-alpha1) <br /> - [ connectors ](https://github.com/camunda/connectors/releases/tag/8.5.0-alpha1) | [Release blog](https://camunda.com/blog/2024/02/camunda-alpha-release-february-2024/) |
 
 ### Deep link to process with start form in Tasklist <span class="badge badge--long" title="This feature affects Tasklist">Tasklist</span>
 

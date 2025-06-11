@@ -74,7 +74,7 @@ Refer to the [advanced Identity configuration guide](./identity.md) for addition
 
 ### Zeebe Client
 
-Web Modeler uses the [Zeebe Java client](/docs/apis-tools/java-client/index.md) to connect to Zeebe.
+Web Modeler uses the [Zeebe Java client](/apis-tools/java-client/index.md) to connect to Zeebe.
 To customize the client configuration, you can provide optional environment variables.
 
 | Environment variable          | Description                                                                                              | Example value                    | Default Value                |

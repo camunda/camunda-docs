@@ -46,19 +46,19 @@ Camunda 7 uses [Java Unified Expression Language (JUEL)](https://docs.camunda.or
 
 Camunda 8 uses [Friendly-Enough Expression Language (FEEL)](/components/modeler/feel/what-is-feel.md) and expressions can only access the process instance data and variables.
 
-Most expressions can be converted (see [this code in the diagram converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/blob/main/backend-diagram-converter/core/src/main/java/org/camunda/community/migration/converter/expression/ExpressionTransformer.java) as a starting point), some might need to be completely rewritten, and some might require an additional service task to prepare necessary data (which may have been calculated on the fly when using Camunda 7).
+Most expressions can be converted (see [this code in the diagram converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer/blob/d6fda97d00f27b23fc87fd741134225a527f3de1/core/src/main/java/org/camunda/community/migration/converter/expression/ExpressionTransformer.java#L4) as a starting point), some might need to be completely rewritten, and some might require an additional service task to prepare necessary data (which may have been calculated on the fly when using Camunda 7).
 
 <!-- TODO extensive docs for the diagram converter -->
 
-You can also use the [FEEL copilot](https://feel-copilot.camunda.com/) to rewrite complex expressions for you.
+You can also use the [FEEL Copilot](/components/early-access/alpha/feel-copilot/feel-copilot.md) to rewrite complex expressions for you.
 
-### Different Connector infrastructure
+### Different connector infrastructure
 
 Through Camunda Connect, Camunda 7 provides an HTTP and a SOAP HTTP [Connector](https://docs.camunda.org/manual/latest/reference/connect/). Camunda 8 offers multiple [Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) out-of-the-box on a completely different codebase.
 
-To migrate existing Connectors, consider the following options:
+To migrate existing connectors, consider the following options:
 
-- Use the [REST protocol Connector](components/connectors/protocol/rest.md) to leverage an out-of-the-box Connector.
+- Use the [REST protocol connector](components/connectors/protocol/rest.md) to leverage an out-of-the-box connector.
 - Create a small bridging layer via custom [job workers](/components/concepts/job-workers.md).
 
 ### Multi-tenancy
@@ -89,7 +89,7 @@ This is visualized on the left-hand side of the following image. With Camunda 8,
 
 - Java
 - Spring Boot
-- [Spring Zeebe SDK](../../apis-tools/spring-zeebe-sdk/getting-started.md) (embedding the Zeebe client)
+- [Camunda Spring Boot SDK](../../apis-tools/spring-zeebe-sdk/getting-started.md) (embedding the Zeebe client)
 - Glue code implemented as workers (being Spring beans)
 
 ![Diagram showing the spring boot architecture](../img/architecture-spring-boot.png)
@@ -112,7 +112,7 @@ You can find a complete Java Spring Boot example, showing the Camunda 7 process 
 
 The programming models of Camunda 7 and Camunda 8 are very similar if you program in Java and use Spring.
 
-For example, a worker in Camunda 8 can be implemented as follows (using the [Spring Zeebe SDK](../../apis-tools/spring-zeebe-sdk/getting-started.md)):
+For example, a worker in Camunda 8 can be implemented as follows (using the [Camunda Spring Boot SDK](../../apis-tools/spring-zeebe-sdk/getting-started.md)):
 
 ```java
 @JobWorker(type = "payment")
@@ -152,7 +152,7 @@ Camunda 8 doesn't provide integration into Jakarta EE application servers like C
 
 ### CDI or OSGI
 
-Due to limited adoption, there is no support for CDI or OSGI in Camunda 8. A lightweight integration layer comparable to the [Spring Zeebe SDK](../../apis-tools/spring-zeebe-sdk/getting-started.md) may be provided in the future.
+Due to limited adoption, there is no support for CDI or OSGI in Camunda 8. A lightweight integration layer comparable to the [Camunda Spring Boot SDK](../../apis-tools/spring-zeebe-sdk/getting-started.md) may be provided in the future.
 
 ### Polyglot applications (C#, Node.js)
 

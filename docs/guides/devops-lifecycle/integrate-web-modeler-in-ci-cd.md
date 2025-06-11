@@ -44,7 +44,7 @@ This blueprint provides a ready-to-use proof of concept for a CI/CD pipeline for
 While a pipeline for process application integration and deployment resembles general software CI/CD pipelines, key distinctions exist. Consider the following:
 
 - Web Modeler uses [versions](/components/modeler/web-modeler/versions.md) to indicate specific process states, such as readiness for developer handover, review, or deployment.
-- A process application comprises main processes and diverse resources, such as subprocesses, forms, DMN decision models, Connectors, job workers, and orchestrated services. Some applications bundle these resources, while others focus on a single process for deployment.
+- A process application comprises main processes and diverse resources, such as subprocesses, forms, DMN decision models, connectors, job workers, and orchestrated services. Some applications bundle these resources, while others focus on a single process for deployment.
 - Process reviews differ from code reviews, occurring on visual diagrams rather than XML.
 
 ![Sample CI/CD setup with Web Modeler](img/modeler-ci-cd.png)
@@ -204,13 +204,13 @@ Pagination is enforced for all listed `search` endpoints. Ensure you obtain all 
 
 To retrieve the actual file `content`, iterate over the response and fetch it via `GET /api/v1/files/:id`. Parse the XML of the diagram for the `zeebe:taskDefinition` tag to retrieve job worker types. Utilizing a job worker registry mapping, deploy these workers along with the process if required.
 
-If you are running Connectors in your process or application, you need to deploy the runtimes as well. Parse the process XML for `zeebe:taskDefinition` bindings to identify the necessary runtimes (in addition to job workers). To learn how to deploy Connector runtimes, read more [here](/self-managed/connectors-deployment/install-and-start.md) for Self-Managed, or [here](/components/connectors/custom-built-connectors/connector-sdk.md#runtime-environments) for SaaS.
+If you are running connectors in your process or application, you need to deploy the runtimes as well. Parse the process XML for `zeebe:taskDefinition` bindings to identify the necessary runtimes (in addition to job workers). To learn how to deploy connector runtimes, read more [here](/self-managed/connectors-deployment/install-and-start.md) for Self-Managed, or [here](/components/connectors/custom-built-connectors/connector-sdk.md#runtime-environments) for SaaS.
 
 Deploy resources in this pipeline step using the [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md), compatible with both SaaS and Self-Managed clusters. Alternatively, utilize the Java client library or any community-built alternatives.
 
 #### Add environment variables via secrets
 
-If you are running Connectors, you need to provide environment variables, such as service endpoints and API keys, for your preview environment. You can manage these via secrets. Read the [Connectors configuration documentation](/self-managed/connectors-deployment/connectors-configuration.md) to learn how to set these up in SaaS or Self-Managed.
+If you are running connectors, you need to provide environment variables, such as service endpoints and API keys, for your preview environment. You can manage these via secrets. Read the [Connectors configuration documentation](/self-managed/connectors-deployment/connectors-configuration.md) to learn how to set these up in SaaS or Self-Managed.
 
 ### Test stage
 
@@ -261,7 +261,7 @@ Push approved changes to staging or production by deploying them to the respecti
 
 #### Define resource authorizations
 
-For clusters with [resource authorizations](/self-managed/concepts/access-control/resource-authorizations.md) enabled (via the `RESOURCE_PERMISSIONS_ENABLED` [feature flag](/self-managed/identity/deployment/configuration-variables.md#feature-flags)), use the Identity API to assign the necessary authorizations through the pipeline. This step ensures appropriate accessibility for process/application stakeholders or updating existing authorizations.
+For clusters with [resource authorizations](/self-managed/identity/access-management/resource-authorizations.md) enabled (via the `RESOURCE_PERMISSIONS_ENABLED` [feature flag](/self-managed/identity/miscellaneous/configuration-variables.md#feature-flags)), use the Identity API to assign the necessary authorizations through the pipeline. This step ensures appropriate accessibility for process/application stakeholders or updating existing authorizations.
 
 ##### Monitoring and error handling
 
@@ -306,9 +306,9 @@ Yes, you can use the `bpmnlint` and `dmnlint` libraries to automatically verify 
 
 You can use the `zeebe-process-test` library for Java-based unit tests or community-built clients for other programming languages. These libraries allow you to execute your BPMN and DMN diagrams with assertions in your development or preview environments.
 
-#### How do I provide environment variables to Connectors in preview environments?
+#### How do I provide environment variables to connectors in preview environments?
 
-You can manage environment variables for Connectors using secrets. This can be set up in both Camunda 8 SaaS and Self-Managed. Refer to the [Connectors configuration documentation](/components/connectors/introduction.md) for details.
+You can manage environment variables for connectors using secrets. This can be set up in both Camunda 8 SaaS and Self-Managed. Refer to the [Connectors configuration documentation](/components/connectors/introduction.md) for details.
 
 #### How can I monitor and handle errors in my CI/CD pipeline?
 

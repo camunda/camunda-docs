@@ -1,31 +1,31 @@
 ---
 id: connector-templates
 title: Connector templates
-description: Learn how to modify BPMN elements with Connector templates to create custom modeling experiences.
+description: Learn how to modify BPMN elements with connector templates to create custom modeling experiences.
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
 Connectors are available [out-of-the-box (OOTB)](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) and come with [Connector templates](/components/connectors/manage-connector-templates.md) which customize how a BPMN element is shown,
-and how it can be configured by process developers. Connector templates are a specific kind of [element templates](/components/modeler/desktop-modeler/element-templates/about-templates.md), which can also be used when creating custom Connectors via the [Connector SDK](/components/connectors/custom-built-connectors/connector-sdk.md).
+and how it can be configured by process developers. connector templates are a specific kind of [element templates](/components/modeler/desktop-modeler/element-templates/about-templates.md), which can also be used when creating custom connectors via the [Connector SDK](/components/connectors/custom-built-connectors/connector-sdk.md).
 
-Additionally, the [Camunda Marketplace](/components/modeler/web-modeler/camunda-marketplace.md) provides Connectors by Camunda partners and community contributors.
+Additionally, the [Camunda Marketplace](/components/modeler/web-modeler/camunda-marketplace.md) provides connectors by Camunda partners and community contributors.
 
-Before developing one, you'll need to decide what you would like to achieve with your Connector. Currently, the options are:
+Before developing one, you'll need to decide what you would like to achieve with your connector. Currently, the options are:
 
-- Starting a BPMN process, triggered by external service - Use [inbound start event Connector template](#inbound-start-event-connector-templates).
-- Continue process with an intermediate catch event emitted by external service call - Use [inbound intermediate catch event Connector templates](#inbound-intermediate-catch-event-connector-templates).
-- Trigger an external service - Use [outbound Connector template](#outbound-connector-templates).
+- Starting a BPMN process, triggered by external service - Use [inbound start event connector template](#inbound-start-event-connector-templates).
+- Continue process with an intermediate catch event emitted by external service call - Use [inbound intermediate catch event connector templates](#inbound-intermediate-catch-event-connector-templates).
+- Trigger an external service - Use [outbound connector template](#outbound-connector-templates).
 
 :::note
 Do not confuse **Connector templates** with the **[Connector template](https://github.com/camunda/connector-template-outbound)**,
-which is used to supply boilerplate code and configuration when developing a new custom Connector.
+which is used to supply boilerplate code and configuration when developing a new custom connector.
 :::
 
-## Inbound start event Connector templates
+## Inbound start event connector templates
 
-You can, for example, allow the user to model and configure the following **HTTP Webhook Connector** by providing
+You can, for example, allow the user to model and configure the following **HTTP Webhook connector** by providing
 a simple JSON configuration:
 
 <Tabs groupId="connectorTemplateInbound" defaultValue="process" values={
@@ -37,7 +37,7 @@ a simple JSON configuration:
 
 <TabItem value='process'>
 
-![Webhook Inbound Connector Example](./img/custom-connector-template-inbound-start.png)
+![Webhook Inbound connector Example](./img/custom-connector-template-inbound-start.png)
 
 </TabItem>
 
@@ -46,7 +46,7 @@ a simple JSON configuration:
 ```json
 {
   "$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema/resources/schema.json",
-  "name": "Webhook Connector",
+  "name": "Webhook connector",
   "id": "io.camunda.connectors.webhook.WebhookConnector.v1",
   "version": 1,
   "description": "Configure webhook to receive callbacks",
@@ -191,7 +191,7 @@ a simple JSON configuration:
         "type": "zeebe:property",
         "name": "inbound.activationCondition"
       },
-      "description": "Condition under which the Connector triggers. Leave empty to catch all events. <a href='https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/http-webhook/#make-your-http-webhook-connector-for-receiving-messages-executable' target='_blank'>See documentation</a>"
+      "description": "Condition under which the connector triggers. Leave empty to catch all events. <a href='https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/http-webhook/#make-your-http-webhook-connector-for-receiving-messages-executable' target='_blank'>See documentation</a>"
     },
     {
       "label": "Variables",
@@ -214,9 +214,9 @@ a simple JSON configuration:
 </TabItem>
 </Tabs>
 
-## Inbound intermediate catch event Connector templates
+## Inbound intermediate catch event connector templates
 
-You can, for example, allow the user to model and configure the following **HTTP Webhook Connector** by providing
+You can, for example, allow the user to model and configure the following **HTTP Webhook connector** by providing
 a simple JSON configuration:
 
 <Tabs groupId="connectorTemplateInbound" defaultValue="process" values={
@@ -228,7 +228,7 @@ a simple JSON configuration:
 
 <TabItem value='process'>
 
-![Webhook Inbound intermediate Connector Example](./img/custom-connector-template-inbound-intermediate.png)
+![Webhook Inbound intermediate connector Example](./img/custom-connector-template-inbound-intermediate.png)
 
 </TabItem>
 
@@ -237,7 +237,7 @@ a simple JSON configuration:
 ```json
 {
   "$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema/resources/schema.json",
-  "name": "Webhook Connector",
+  "name": "Webhook connector",
   "id": "io.camunda.connectors.webhook.WebhookConnectorIntermediate.v1",
   "version": 1,
   "description": "Configure webhook to receive callbacks",
@@ -421,7 +421,7 @@ a simple JSON configuration:
         "type": "zeebe:property",
         "name": "inbound.activationCondition"
       },
-      "description": "Condition under which the Connector triggers. Leave empty to catch all events. <a href='https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/http-webhook/#make-your-http-webhook-connector-for-receiving-messages-executable' target='_blank'>See documentation</a>"
+      "description": "Condition under which the connector triggers. Leave empty to catch all events. <a href='https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/http-webhook/#make-your-http-webhook-connector-for-receiving-messages-executable' target='_blank'>See documentation</a>"
     },
     {
       "label": "Variables",
@@ -444,9 +444,9 @@ a simple JSON configuration:
 </TabItem>
 </Tabs>
 
-## Inbound boundary event Connector templates
+## Inbound boundary event connector templates
 
-You can, for example, allow the user to model and configure the following **HTTP webhook Connector** for boundary events by providing
+You can, for example, allow the user to model and configure the following **HTTP webhook connector** for boundary events by providing
 a simple JSON configuration:
 
 <Tabs groupId="connectorTemplateInbound" defaultValue="process" values={
@@ -458,7 +458,7 @@ a simple JSON configuration:
 
 <TabItem value='process'>
 
-![Webhook Inbound boundary Connector Example.png](img/custom-connector-template-inbound-boundary.png)
+![Webhook Inbound boundary connector Example.png](img/custom-connector-template-inbound-boundary.png)
 
 </TabItem>
 
@@ -467,7 +467,7 @@ a simple JSON configuration:
 ```json
 {
   "$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema/resources/schema.json",
-  "name": "Webhook Boundary Event Connector",
+  "name": "Webhook Boundary Event connector",
   "id": "io.camunda.connectors.webhook.WebhookConnectorBoundary.v1",
   "description": "Configure webhook to receive callbacks",
   "documentationRef": "https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/http-webhook/",
@@ -873,7 +873,7 @@ a simple JSON configuration:
     {
       "id": "activationCondition",
       "label": "Activation condition",
-      "description": "Condition under which the Connector triggers. Leave empty to catch all events",
+      "description": "Condition under which the connector triggers. Leave empty to catch all events",
       "optional": true,
       "feel": "required",
       "group": "activation",
@@ -1004,9 +1004,9 @@ a simple JSON configuration:
 
 </Tabs>
 
-## Outbound Connector templates
+## Outbound connector templates
 
-You can, for example, allow the user to model and configure the following **REST Connector** by providing a JSON configuration for a service task:
+You can, for example, allow the user to model and configure the following **REST connector** by providing a JSON configuration for a service task:
 
 <Tabs groupId="connectorTemplateOutbound" defaultValue="process" values={
 [
@@ -1017,7 +1017,7 @@ You can, for example, allow the user to model and configure the following **REST
 
 <TabItem value='process'>
 
-![REST Outbound Connector Example](./img/custom-connector-template.png)
+![REST Outbound connector Example](./img/custom-connector-template.png)
 
 </TabItem>
 
@@ -1026,7 +1026,7 @@ You can, for example, allow the user to model and configure the following **REST
 ```json
 {
   "$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema/resources/schema.json",
-  "name": "(Conditional) REST Connector",
+  "name": "(Conditional) REST connector",
   "id": "io.camunda.examples.ConditionalRestConnector",
   "description": "A REST API invocation task.",
   "appliesTo": ["bpmn:ServiceTask"],
@@ -1171,11 +1171,11 @@ You can, for example, allow the user to model and configure the following **REST
 </TabItem>
 </Tabs>
 
-## Develop Connector templates
+## Develop connector templates
 
-You can develop Connector templates using the [`element template` feature](/components/modeler/desktop-modeler/element-templates/defining-templates.md). You can also look at existing [examples](https://github.com/camunda/camunda-modeler/blob/master/resources/element-templates/cloud-samples.json).
+You can develop connector templates using the [`element template` feature](/components/modeler/desktop-modeler/element-templates/defining-templates.md). You can also look at existing [examples](https://github.com/camunda/camunda-modeler/blob/master/resources/element-templates/cloud-samples.json).
 
-## Providing and using Connector templates
+## Providing and using connector templates
 
 When using [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md), you can create **Connector templates** [directly within the application](/components/connectors/manage-connector-templates.md) and share them with your respective organization.
 

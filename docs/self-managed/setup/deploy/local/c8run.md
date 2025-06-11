@@ -25,9 +25,11 @@ Camunda 8 Run includes the following:
 - Connectors
 - Elasticsearch
 
+Camunda 8 Run also supports document storage and management with [document handling](/self-managed/document-handling/overview.md).
+
 ## Prerequisites
 
-- **OpenJDK 21+**: Required for running Camunda 8 as a Java application.
+- **OpenJDK 21-23**: Required for running Camunda 8 as a Java application.
 - **Docker 20.10.21+**: Required for running Camunda 8 via Docker Compose.
 - **[Desktop Modeler](/components/modeler/desktop-modeler/install-the-modeler.md)**
 - **If using Ubuntu**: Ubuntu 22.04 or newer
@@ -43,10 +45,21 @@ If no version of Java is found, follow your chosen installation's instructions f
 1. Download the latest release of <C8Run/> for your operating system and architecture. Opening the .tgz file extracts the Camunda 8 Run script into a new directory.
 2. Navigate to the new `c8run` directory.
 3. Start Camunda 8 Run by running one of the following in your terminal:
-   - `./start.sh` (or `.\c8run.exe start` on Windows): start Camunda 8 Run as a Java application.
-   - `./start.sh --docker` (or `.\c8run.exe start -docker` on Windows): start Camunda 8 Run via Docker Compose.
 
-When successful, a new Operate window automatically opens.
+- On Mac and Linux:
+  - Run the helper script: `./start.sh`
+  - Or use the command: `./c8run start`
+- On Windows:
+  - Use the command: `.\c8run.exe start`
+
+If startup is successful, a browser window for Operate will open automatically. Alternatively, you can access Operate at [http://localhost:8080/operate](http://localhost:8080/operate)
+
+Alternatively, you can start Camunda 8 Run using Docker:
+
+- On Mac and Linux: `./start.sh --docker`
+- On Windows: `.\c8run.exe start --docker`
+
+When started with Docker, Operate will be available at [http://localhost:8081](http://localhost:8081)
 
 :::note
 If Camunda 8 Run fails to start, run the [shutdown script](#shut-down-camunda-8-run) to end the current processes, then run the start script again.
@@ -90,7 +103,7 @@ The following components do not have a web interface, but the URLs may be requir
 - Connectors: http://localhost:8085
 
 :::note
-The Connectors URL displays a login page, but cannot be logged into.
+The connectors URL displays a login page, but cannot be logged into.
 :::
 
 ### Deploy diagrams from Desktop Modeler
@@ -105,16 +118,16 @@ To [deploy diagrams](/self-managed/modeler/desktop-modeler/deploy-to-self-manage
 
 A success notification displays when complete. [Start a new process instance](/components/modeler/desktop-modeler/start-instance.md) to view your running process in Operate.
 
-### Use built-in and custom Connectors
+### Use built-in and custom connectors
 
-Desktop Modeler [automatically fetches](/components/modeler/desktop-modeler/use-connectors.md#automatic-connector-template-fetching) templates for pre-built Connectors. [Custom Connectors](/components/connectors/custom-built-connectors/connector-sdk.md) can also be added to your Camunda 8 Run distribution.
+Desktop Modeler [automatically fetches](/components/modeler/desktop-modeler/use-connectors.md#automatic-connector-template-fetching) templates for pre-built connectors. [Custom connectors](/components/connectors/custom-built-connectors/connector-sdk.md) can also be added to your Camunda 8 Run distribution.
 
-To add a custom Connector:
+To add a custom connector:
 
-1. Place the Connector's .jar file in the `/custom_connectors` folder contained in the `/c8run` directory.
+1. Place the connector's .jar file in the `/custom_connectors` folder contained in the `/c8run` directory.
 2. Place the element template in the appropriate folder for your installation. See [Search Paths](/components/modeler/desktop-modeler/search-paths/search-paths.md) for more information.
 
-Once configured correctly, your Connectors are available for use in Modeler.
+Once configured correctly, your connectors are available for use in Modeler.
 
 ### Use Camunda APIs
 

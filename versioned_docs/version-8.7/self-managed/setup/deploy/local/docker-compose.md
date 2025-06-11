@@ -8,7 +8,7 @@ import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import {DockerCompose} from "@site/src/components/CamundaDistributions";
 
-A Docker Compose configuration to run Camunda Self-Managed components (Zeebe, Operate, Tasklist, Optimize, Identity, and Connectors).
+A Docker Compose configuration to run Camunda Self-Managed components (Zeebe, Operate, Tasklist, Optimize, Identity, and connectors). Docker Compose also supports document storage and management with [document handling](/self-managed/document-handling/overview.md).
 
 :::note
 While the [Docker images](/self-managed/setup/deploy/other/docker.md) themselves are supported for production usage, the Docker Compose files are designed to be used by developers to run an environment locally, and are not designed to be used in production. We recommend [Kubernetes](/self-managed/setup/install.md) for production use cases.
@@ -89,7 +89,7 @@ docker compose down
 ### Web Modeler
 
 :::info
-Non-production installations of Web Modeler are restricted to five collaborators per project. Refer to the [licensing documentation](/docs/reference/licenses.md) for more information.
+Non-production installations of Web Modeler are restricted to five collaborators per project. Refer to the [licensing documentation](/reference/licenses.md) for more information.
 :::
 
 #### Standalone setup
@@ -199,15 +199,15 @@ The default value can also be modified directly in the included `.env` file.
 
 ## Connectors
 
-Both the full and lightweight Docker Compose files contain a configuration for [Out-of-the-box Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md). Refer to the [Connector installation guide](/self-managed/connectors-deployment/install-and-start.md) for details on how to provide the related Connector templates for modeling.
+Both the full and lightweight Docker Compose files contain a configuration for [Out-of-the-box connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md). Refer to the [Connector installation guide](/self-managed/connectors-deployment/install-and-start.md) for details on how to provide the related connector templates for modeling.
 
 ### Connector secrets
 
-Secrets can be added into the Connector runtime using the included `connector-secrets.txt` file. Add secrets in the format `NAME=VALUE`
-per line. The secrets will then be available in the Connector runtime in the format `secrets.NAME`.
+Secrets can be added into the connector runtime using the included `connector-secrets.txt` file. Add secrets in the format `NAME=VALUE`
+per line. The secrets will then be available in the connector runtime in the format `secrets.NAME`.
 
 ### Custom connectors
 
-To add custom Connectors, create a new Docker Image bundling them as described in the [Connectors repository](https://github.com/camunda/connectors).
+To add custom connectors, create a new Docker Image bundling them as described in the [Connectors repository](https://github.com/camunda/connectors).
 
-Alternatively, you can mount new Connector JARs as volumes into the `/opt/app` folder by adding this to the Docker Compose file. Keep in mind that the Connector JARs must include all necessary dependencies inside the JAR.
+Alternatively, you can mount new connector JARs as volumes into the `/opt/app` folder by adding this to the Docker Compose file. Keep in mind that the connector JARs must include all necessary dependencies inside the JAR.

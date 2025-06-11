@@ -2,7 +2,7 @@
 id: getting-started-java-spring
 title: Get started as a Java developer using Spring
 sidebar_label: Get started with Spring
-description: "Use Spring Boot and the Spring Camunda SDK to interact with your local Self-Managed Camunda 8 installation."
+description: "Use Spring Boot and the Camunda Spring Boot SDK to interact with your local Self-Managed Camunda 8 installation."
 keywords: [java, spring, spring camunda, getting started, user guide, tutorial]
 ---
 
@@ -11,7 +11,7 @@ import Install from './react-components/\_install-c8run.md'
 <span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--medium">1 hour</span>
 
-In this guide, we'll step through using Spring Boot and the [Spring Camunda SDK](/apis-tools/spring-zeebe-sdk/getting-started.md) with Desktop Modeler to interact with your local Self-Managed Camunda 8 installation. While this guide focuses on Self-Managed, you can do something similar with [SaaS](https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral).
+In this guide, we'll step through using Spring Boot and the [Camunda Spring Boot SDK](/apis-tools/spring-zeebe-sdk/getting-started.md) with Desktop Modeler to interact with your local Self-Managed Camunda 8 installation. While this guide focuses on Self-Managed, you can do something similar with [SaaS](https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral).
 
 :::note
 This guide specifically uses Java and Spring because the two, in combination with Camunda 8, is our [default technology stack recommendation](/components/best-practices/architecture/deciding-about-your-stack.md#the-java-greenfield-stack).
@@ -255,3 +255,7 @@ To deploy your process upon application start, take the following steps:
 2. In Desktop Modeler, change the tax amount calculated to `total * 1.2` under **FEEL expression** and save your changes.
 
 Re-run the application in your terminal with `mvn spring-boot:run` to see the process run. In Operate, note the new version `2` when filtering process instances, and the tax amount has increased for the most recent process instance.
+
+## Additional resources
+
+- [Camunda Academy: Develop Workers (Spring Zeebe)](https://academy.camunda.com/c8-develop-workers-spring)

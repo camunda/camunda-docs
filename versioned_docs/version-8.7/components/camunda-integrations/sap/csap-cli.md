@@ -4,7 +4,7 @@ title: CSAP CLI command line utility
 description: "Learn about CSAP, the CLI to configure all SAP integration artifacts for deployment."
 ---
 
-The Camunda SAP Integration CLI (`csap`) is a command-line tool designed to simplify the setup of Camunda's SAP integration modules. It provides a streamlined process for configuring and building these modules for deployment.
+The [Camunda SAP Integration CLI](/reference/glossary.md#csap-cli) (`csap`) is a command-line tool designed to simplify the setup of Camunda's SAP integration modules. It provides a streamlined process for configuring and building these modules for deployment.
 
 ## Features
 
@@ -19,8 +19,8 @@ The Camunda SAP Integration CLI (`csap`) is a command-line tool designed to simp
 
 The CLI supports the following SAP integration modules:
 
-1. **SAP OData Connector**: Facilitates interaction with SAP S/4HANA or ECC systems from a BPMN model.
-2. **SAP RFC Connector**: Allows querying BAPIs and Remote Function Modules on SAP ECC systems.
+1. **SAP OData connector**: Facilitates interaction with SAP S/4HANA or ECC systems from a BPMN model.
+2. **SAP RFC connector**: Allows querying BAPIs and Remote Function Modules on SAP ECC systems.
 3. **BTP plugin**: Enables rendering task forms in Fiori and provides BTP integration.
 4. **All modules**: Configures all available modules.
 

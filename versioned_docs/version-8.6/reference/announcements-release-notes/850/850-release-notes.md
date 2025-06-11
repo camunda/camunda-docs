@@ -4,6 +4,8 @@ title: "Release notes"
 description: "Release notes for 8.5, including alphas"
 ---
 
+These release notes identify the new features included in Camunda 8.5, 8.4, and 8.3 releases, including alpha feature releases.
+
 ## 8.5 minor
 
 | Release date | End of maintenance | Changelog(s)                                                                                                                                                                                                                                                | Release blog                                                          | Update guide                                                                             |
@@ -38,7 +40,7 @@ Note that the actual values shown in this screenshot don't correspond to any act
 
 <!-- https://github.com/camunda/product-hub/issues/2162 -->
 
-You can now use Role-Based Access Control (RBAC) with your own OIDC Identity provider (such as Entra ID) and Web Modeler without relying on Keycloak. [This extends RBAC and role mapping support](/self-managed/setup/guides/connect-to-an-oidc-provider.md#component-specific-configuration) that is available for other components to Web Modeler.
+You can now use Role-Based Access Control (RBAC) with your own OIDC Identity provider (such as Entra ID) and Web Modeler without relying on Keycloak. [This extends RBAC and role mapping support](/self-managed/identity/configuration/connect-to-an-oidc-provider.md#component-specific-configuration) that is available for other components to Web Modeler.
 
 ### Introductory UI header for processes page
 
@@ -269,7 +271,7 @@ Mapping rules allow you to automatically assign users or client credentials to s
 
 You can now use Role-Based Access Control (RBAC) with your own OIDC Identity Provider (i.e. Entra ID) and Camunda 8 web applications without relying on Keycloak.
 
-Create roles within Identity, assign component-specific permissions (such as view-only Operate) to the roles. Then, create [mapping rules](/self-managed/concepts/mapping-rules.md) to automatically assign users to specific roles based on authentication token claim values.
+Create roles within Identity, assign component-specific permissions (such as view-only Operate) to the roles. Then, create [mapping rules](/self-managed/identity/mapping-rules.md) to automatically assign users to specific roles based on authentication token claim values.
 Role Mapping is not yet supported for Web Modeler, but will follow.
 
 ### Intuitive modeling <span class="badge badge--long" title="This feature affects Modeler">Modeler</span>

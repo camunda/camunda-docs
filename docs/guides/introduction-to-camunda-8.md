@@ -1,7 +1,7 @@
 ---
 id: introduction-to-camunda
-title: Introduction to Camunda 8
-sidebar_label: Introduction to Camunda 8
+title: Get started with Camunda 8
+sidebar_label: Get started with Camunda 8
 slug: /guides/
 description: "Learn about Camunda 8, a platform that delivers scalable, on-demand process automation as-a-service, paired with tools for collaborative modeling and operations."
 ---
@@ -36,7 +36,7 @@ type:"link", href:"/docs/next/guides/getting-started-java-spring/", label: "Get 
 }
 ]}/>
 
-With these guides, start working with [Web Modeler](/components/modeler/about-modeler.md) to get familiar with BPMN and model a business process, or as a Java developer, step through using Spring Boot and the Spring Zeebe SDK with Desktop Modeler to interact with a local Self-Managed Camunda 8 installation.
+With these guides, start working with [Web Modeler](/components/modeler/about-modeler.md) to get familiar with BPMN and model a business process, or as a Java developer, step through using Spring Boot and the Camunda Spring Boot SDK with Desktop Modeler to interact with a local Self-Managed Camunda 8 installation.
 
 ### Use cases
 
@@ -51,7 +51,9 @@ As you're getting started with Camunda, you can also learn more about some of ou
 After getting started with Camunda, get to know the platform through the following sections:
 
 - **Design**: Have a closer look at [designing with BPMN](/guides/automating-a-process-using-bpmn.md), or [creating decision tables using DMN](/guides/create-decision-tables-using-dmn.md).
-- **Automate**: [Get to know Connectors](/guides/configuring-out-of-the-box-connector.md), reusable building blocks that integrate with external systems. Or, [set up client connection credentials](/guides/setup-client-connection-credentials.md) to create, name, and connect your client.
+- **Automate**: [Get to know connectors](/guides/configuring-out-of-the-box-connector.md), reusable building blocks that integrate with external systems. Or, [set up client connection credentials](/guides/setup-client-connection-credentials.md) to create, name, and connect your client.
 - **Improve**: [Get Optimize involved in your processes](/guides/improve-processes-with-optimize.md). By leveraging data collected during process execution, you can access reports, share process intelligence, analyze bottlenecks, and examine areas in business processes for improvement. Alternatively, [apply continuous integration and continuous deployment (CI/CD) pipelines](/guides/devops-lifecycle/integrate-web-modeler-in-ci-cd.md) for automated production deployments.
 
 Additionally, Camunda hosts a section of [Best Practices](/components/best-practices/best-practices-overview.md). A mix of conceptual and practical implementation information, this section hosts our condensed experience using BPMN and DMN on the Camunda tool stack collected by consulting engagement with our customers and feedback from the community.
+
+You can also learn more about Camunda 8 by reviewing the Camunda Academy courses [introducing Camunda 8](https://academy.camunda.com/camunda-intro/) and [providing an overview of Camunda 8](https://academy.camunda.com/c8-overview/).

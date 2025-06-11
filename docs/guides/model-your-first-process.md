@@ -79,3 +79,7 @@ Additionally, you may invite users who are not yet part of a SaaS organization t
 As a next step, learn more about ensuring clarity, reusability, and governance within your organization in [using a shared project for organization-wide collaboration](/guides/use-shared-project-for-organization-wide-collaboration.md).
 
 For a slightly more advanced example of modeling a process using BPMN, visit our guide on [automating a process using BPMN](/guides/automating-a-process-using-bpmn.md).
+
+## Additional resources
+
+- [Camunda Academy: Getting Started with Process Modeling](https://academy.camunda.com/c8-getting-started-process-modeling)

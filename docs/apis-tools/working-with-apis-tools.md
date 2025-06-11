@@ -1,7 +1,7 @@
 ---
 id: working-with-apis-tools
-title: "Working with APIs & tools"
-sidebar_label: "Working with APIs & tools"
+title: "APIs & tools"
+sidebar_label: "APIs & tools"
 description: "Learn more about the integration concepts involved in using the Camunda Zeebe client libraries, APIs, and SDKs to interact programmatically with Camunda 8."
 ---
 
@@ -71,7 +71,7 @@ Additionally, visit our documentation on [Operate](../self-managed/operate-deplo
 
 ### SDKs
 
-<DocCardList items={[{type:"link", href:"/docs/next/apis-tools/spring-zeebe-sdk/getting-started/", label: "Spring Zeebe", docId:"apis-tools/spring-zeebe-sdk/getting-started"},
+<DocCardList items={[{type:"link", href:"/docs/next/apis-tools/spring-zeebe-sdk/getting-started/", label: "Camunda Spring Boot", docId:"apis-tools/spring-zeebe-sdk/getting-started"},
 {
 type:"link", href:"/docs/next/apis-tools/node-js-sdk/", label: "Node.js", docId:"apis-tools/node-js-sdk"
 },

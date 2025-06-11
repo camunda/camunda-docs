@@ -46,7 +46,7 @@ To change the values for http header for security reasons, you can use the confi
 
 ## Multi-tenancy
 
-Multi-tenancy in the context of Camunda 8 refers to the ability of Camunda 8 to serve multiple distinct [tenants](/self-managed/identity/user-guide/tenants/managing-tenants.md) or
+Multi-tenancy in the context of Camunda 8 refers to the ability of Camunda 8 to serve multiple distinct [tenants](/self-managed/identity/managing-tenants.md) or
 clients within a single installation.
 
 From version 8.3 onwards, Operate has been enhanced to support multi-tenancy for Self-Managed setups. More information about
@@ -231,6 +231,25 @@ camunda.operate:
     # Gateway host and port
     gatewayAddress: localhost:26500
 ```
+
+### Intra-cluster secure connection
+
+You can enable intra-cluster TLS secured connections between Operate and Zeebe by applying the following configuration properties.
+
+| Name                                                | Description                                                                                                         | Example value                     |
+| :-------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------ | :-------------------------------- |
+| zeebe.gateway.cluster.initialContactPoints          | Zeebe Gateway initial contact points.                                                                               | [gateway-0:26502,gateway-1:26502] |
+| zeebe.gateway.cluster.security.enabled              | Connection should be secure via Transport Layer Security (TLS).                                                     | true                              |
+| zeebe.gateway.cluster.security.certificateChainPath | Path to certificate used by Zeebe. This is necessary when the certificate isn't registered in the operating system. | /path/to/cert.pem                 |
+| zeebe.gateway.cluster.security.privateKeyPath       | Path to certificate's key used by Zeebe.                                                                            | /path/to/private.key              |
+| zeebe.gateway.cluster.advertisedHost                | Advertised hostname in the cluster.                                                                                 | operate                           |
+| zeebe.gateway.cluster.memberId                      | Member ID for the cluster.                                                                                          | operate                           |
+
+For extended configuration and guidelines, refer to [secure cluster communication](../zeebe-deployment/security/secure-cluster-communication.md) and [gateway configuration](../zeebe-deployment/configuration/gateway.md).
+
+:::note
+Intra-cluster TLS secured connections are available from Operate 8.6.14.
+:::
 
 ## Zeebe Elasticsearch or OpenSearch exporter
 

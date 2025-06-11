@@ -1,30 +1,54 @@
 ---
 id: what-is-identity
-title: "What is Identity?"
-sidebar_label: "What is Identity?"
-description: "Identity is the component within the Camunda 8 stack responsible for authentication and authorization."
+title: "Identity"
+sidebar_label: "Identity"
+description: "Identity is the component within the Camunda 8 self-managed stack responsible for authentication and authorization."
 ---
 
-Identity is the component within the Camunda 8 stack responsible for authentication and authorization. It allows you to manage:
+Use Identity in Camunda 8 Self-Managed to manage authentication, access, and authorization for your users and applications.
 
-- Applications
-- APIs
-- Permissions
-- Roles
+## About Identity
 
-For example, using Identity you can:
+Identity is included by default in the [Docker Compose](/self-managed/setup/deploy/local/docker-compose.md) and [Helm](/self-managed/setup/install.md) deployments of Camunda 8 Self-Managed, and is configured by default to use a packaged Keycloak instance as an identity provider (IdP).
 
-- [Add and assign a role to a user](/self-managed/identity/user-guide/roles/add-assign-role.md), which is a way to group sets of permissions which can be assigned to users using the Identity UI.
-- [Add and assign a permission to a role](/self-managed/identity/user-guide/roles/add-assign-permission.md) to control the level of access a user or an application has to a particular component.
-- [Create a group](/self-managed/identity/user-guide/groups/create-group.md) to apply a set of roles and authorizations to users.
-- [Manage resource authorizations](/self-managed/identity/user-guide/authorizations/managing-resource-authorizations.md) to control resource access within the Identity application.
-- [Utilize configuration variables](/self-managed/identity/deployment/configuration-variables.md).
+- Administrators can use Identity to manage users, groups, roles, permissions, and applications within the Camunda 8 platform.
+- Identity supports both users (interacting via Camunda UIs) and applications (interacting via Camunda APIs, such as job workers) with secure authorization based on OAuth 2.0 standards.
+- Users can log in to Camunda 8 component UIs via an IdP login page. Applications can authenticate via machine-to-machine (M2M) tokens.
+- You can also choose to integrate Identity with an external OIDC provider or connect to an existing Keycloak installation.
 
-## Next steps
+## Get started with Identity
 
-If you're new to Identity, we suggest reviewing our [getting started guide](./getting-started/install-identity.md).
+If you're new to Identity, get started by learning how to open and log in to the Identity interface.
 
-You can use Identity for authentication with Keycloak. The following guidance can be used during platform installation and deployment:
+- [Get started with Identity](identity-first-steps.md)
 
-- [Use existing Keycloak](/self-managed/setup/guides/using-existing-keycloak.md)
-- [Connect to an OIDC provider](/self-managed/setup/guides/connect-to-an-oidc-provider.md)
+## Configure Identity
+
+Configure your Identity Keycloak and OIDC integration.
+
+- [Configure Identity](configuration/identity-configuration-overview.md)
+
+## Authentication
+
+Depending on your configuration, users and applications can authenticate with Camunda 8 via the IdP using the [OAuth 2.0 protocol](https://oauth.net/2/), using either a login page or M2M tokens.
+
+- [Authentication](authentication.md)
+
+## Manage Identity
+
+Manage and control access for your users and applications, using groups and roles/permissions (role-based access control).
+
+- [Manage users, groups, roles, and applications](application-user-group-role-management/identity-application-user-group-role-management-overview.md)
+- [Manage access and permissions](access-management/access-management-overview.md)
+- [Manage tenants](managing-tenants.md)
+- [Mapping rules](mapping-rules.md)
+
+## Reference
+
+- [Monitoring Identity](miscellaneous/application-monitoring.md)
+- [Configuration variables](miscellaneous/configuration-variables.md)
+- [Configure logging](miscellaneous/configure-logging.md)
+- [Prepare Identity for production](miscellaneous/making-identity-production-ready.md)
+- [Keycloak resource management](miscellaneous/resource-management.md)
+- [Starting configuration](miscellaneous/starting-configuration.md)
+- [Troubleshoot Identity](miscellaneous/troubleshoot-identity.md)

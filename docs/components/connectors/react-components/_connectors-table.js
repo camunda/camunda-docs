@@ -32,6 +32,8 @@ import OpenaiImg from "../img/connector-openai.png";
 import RestImg from "../img/connector-rest.png";
 import RabbitmqImg from "../img/connector-rabbitmq.png";
 import SalesforceImg from "../img/connector-salesforce.png";
+import ODataImg from "../img/connector-sap-odata.png";
+import RFCImg from "../img/connector-sap-rfc.png";
 import SendgridImg from "../img/connector-sendgrid.png";
 import SlackImg from "../img/connector-slack.png";
 import SoapImg from "../img/connector-soap.png";
@@ -142,7 +144,7 @@ const SearchableTable = () => {
       image: AmazonBedrockImg,
     },
     {
-      name: "Asana Connector",
+      name: "Asana",
       description: "Manage Asana projects and tasks from your processes.",
       type: "Outbound",
       link: "../asana/",
@@ -359,6 +361,20 @@ const SearchableTable = () => {
       type: "Outbound",
       link: "../salesforce/",
       image: SalesforceImg,
+    },
+    {
+      name: "SAP OData",
+      description: "Orchestrate SAP tasks and data.",
+      type: "Outbound",
+      link: "../../../camunda-integrations/sap/odata-connector/",
+      image: ODataImg,
+    },
+    {
+      name: "SAP RFC",
+      description: "Orchestrate SAP tasks and data.",
+      type: "Outbound",
+      link: "../../../camunda-integrations/sap/rfc-connector/",
+      image: RFCImg,
     },
     {
       name: "SendGrid",

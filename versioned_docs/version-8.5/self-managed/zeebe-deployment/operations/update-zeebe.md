@@ -9,11 +9,11 @@ Zeebe versions can be updated:
 - From any patch version to a newer patch of the same minor version
 - To any patch of the next minor version.
 
-It is recommended but not required to first update to the latest patch of the current minor version before updating to the next minor version. In other words, Zeebe can always be updated to a higher version but skipping minor versions is not allowed. For example, an update from `8.5.0` to `8.5.3` or from `8.5.3` to `8.6.1` is possible.
-
 Since Zeebe 8.5, updates to a newer version can be rolling or offline. Zeebe 8.4 and older don't contain necessary safety checks that make rolling updates safe, and we recommend offline updates instead to ensure processing behaves correctly.
 
-Refer to the [update guide](/self-managed/operational-guides/update-guide/introduction.md) to check if there are known issues for the specific update you are planning.
+:::info
+Review the [update guide](/self-managed/operational-guides/update-guide/introduction.md) for general update procedures you must follow and to check for known issues relating to the specific update you are planning.
+:::
 
 ## Rolling update
 

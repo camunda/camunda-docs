@@ -1,23 +1,23 @@
 ---
 id: connectors
 title: Connectors
-description: "Run your process test with Connectors to verify the integration with external systems or the configuration of the Connector tasks in your processes."
+description: "Run your process test with connectors to verify the integration with external systems or the configuration of the connector tasks in your processes."
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-You can run your process test with [Connectors](/components/connectors/introduction.md) to verify the integration with external systems or the configuration of the Connector tasks in your processes.
+You can run your process test with [Connectors](/components/connectors/introduction.md) to verify the integration with external systems or the configuration of the connector tasks in your processes.
 
-For more unit-focused tests, mock the interaction; for example, by completing Connector jobs with an expected result.
+For more unit-focused tests, mock the interaction; for example, by completing connector jobs with an expected result.
 
-## Enable Connectors
+## Enable connectors
 
-By default, the Connectors are disabled. You need to change the runtime configuration to enable them.
+By default, the connectors are disabled. You need to change the runtime configuration to enable them.
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={
 [
-{label: 'Spring SDK', value: 'spring-sdk' },
+{label: 'Camunda Spring Boot SDK', value: 'spring-sdk' },
 {label: 'Java client', value: 'java-client' }
 ]
 }>
@@ -48,7 +48,7 @@ public class MyProcessTest {
 
 <TabItem value='java-client'>
 
-Register the JUnit extension in your test class with enabled Connectors:
+Register the JUnit extension in your test class with enabled connectors:
 
 ```java
 // No annotation: @CamundaProcessTest
@@ -70,7 +70,7 @@ If you use [Connectors secrets](/components/connectors/use-connectors/index.md#u
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={
 [
-{label: 'Spring SDK', value: 'spring-sdk' },
+{label: 'Camunda Spring Boot SDK', value: 'spring-sdk' },
 {label: 'Java client', value: 'java-client' }
 ]
 }>
@@ -129,13 +129,13 @@ public class MyProcessTest {
 
 </Tabs>
 
-## Invoke an inbound Connector
+## Invoke an inbound connector
 
-You can retrieve the URL address to invoke an inbound Connector in your test from the `CamundaProcessTestContext`.
+You can retrieve the URL address to invoke an inbound connector in your test from the `CamundaProcessTestContext`.
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={
 [
-{label: 'Spring SDK', value: 'spring-sdk' },
+{label: 'Camunda Spring Boot SDK', value: 'spring-sdk' },
 {label: 'Java client', value: 'java-client' }
 ]
 }>
@@ -152,14 +152,14 @@ public class MyProcessTest {
 
     @Test
     void shouldInvokeConnector() {
-        // given: a process instance waiting at a Connector event
+        // given: a process instance waiting at a connector event
 
         // when
         final String inboundConnectorAddress =
             processTestContext.getConnectorsAddress() + "/inbound/" + CONNECTOR_ID;
         // invoke the connector address, for example, via HTTP request
 
-        // then: verify that the Connector event is completed
+        // then: verify that the connector event is completed
     }
 }
 ```
@@ -178,14 +178,14 @@ public class MyProcessTest {
 
     @Test
     void shouldInvokeConnector() {
-        // given: a process instance waiting at a Connector event
+        // given: a process instance waiting at a connector event
 
         // when
         final String inboundConnectorAddress =
             processTestContext.getConnectorsAddress() + "/inbound/" + CONNECTOR_ID;
         // invoke the connector address, for example, via HTTP request
 
-        // then: verify that the Connector event is completed
+        // then: verify that the connector event is completed
     }
 }
 ```
@@ -195,25 +195,25 @@ public class MyProcessTest {
 </Tabs>
 
 :::tip
-You might need to wrap the invocation of the Connector in a retry loop, for example, by using [Awaitility](http://www.awaitility.org/).
+You might need to wrap the invocation of the connector in a retry loop, for example, by using [Awaitility](http://www.awaitility.org/).
 
-There can be a delay between verifying that the Connectors event is active and opening the Connectors inbound subscription.
+There can be a delay between verifying that the connectors event is active and opening the connectors inbound subscription.
 :::
 
-## Custom Connectors
+## Custom connectors
 
-To use a custom Connectors bundle, replace the Connectors in the test runtime.
+To use a custom connectors bundle, replace the connectors in the test runtime.
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={
 [
-{label: 'Spring SDK', value: 'spring-sdk' },
+{label: 'Camunda Spring Boot SDK', value: 'spring-sdk' },
 {label: 'Java client', value: 'java-client' }
 ]
 }>
 
 <TabItem value='spring-sdk'>
 
-Set the Docker image name and version of your custom Connector bundle under the following properties in your `application.yml` (or `application.properties`):
+Set the Docker image name and version of your custom connector bundle under the following properties in your `application.yml` (or `application.properties`):
 
 ```yaml
 io:
@@ -229,7 +229,7 @@ io:
 
 <TabItem value='java-client'>
 
-Set the Docker image name and version of your custom Connector bundle when you register the JUnit extension:
+Set the Docker image name and version of your custom connector bundle when you register the JUnit extension:
 
 ```java
 // No annotation: @CamundaProcessTest

@@ -48,5 +48,5 @@ Single file uploads are accessible using `value[1]` (since [FEEL](../../feel/wha
 
 Design process applications for document handling with the Filepicker component.
 
-<DocCardList items={[{type:"link", href:"/docs/components/concepts/document-handling/", label: "Document handling", docId:"components/concepts/document-handling"}
+<DocCardList items={[{type:"link", href:"/docs/components/document-handling/getting-started/", label: "Store, track and manage documents", docId:"components/document-handling/getting-started"}
 ]}/>

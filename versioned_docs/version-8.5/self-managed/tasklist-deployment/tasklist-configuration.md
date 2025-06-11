@@ -30,7 +30,7 @@ Default context-path is `/`.
 
 ## Multi-tenancy
 
-Multi-tenancy in the context of Camunda 8 refers to the ability of Camunda 8 to serve multiple distinct [tenants](/self-managed/identity/user-guide/tenants/managing-tenants.md) or
+Multi-tenancy in the context of Camunda 8 refers to the ability of Camunda 8 to serve multiple distinct [tenants](/self-managed/identity/managing-tenants.md) or
 clients within a single installation.
 
 From version 8.3 onwards, Tasklist has been enhanced to support multi-tenancy for Self-Managed setups. More information about
@@ -114,8 +114,16 @@ The following configuration parameters define the settings:
 | camunda.tasklist.elasticsearch.numberOfReplicas | How many replicas Elasticsearch uses for all Tasklist indices. | 0             |
 
 These values are applied only on first startup of Tasklist or during version update. After the Tasklist
-ELS schema is created, settings may be adjusted directly in the ELS template, and the new settings are applied
-to indices created after adjustment.
+ELS schema is created, settings may be adjusted directly in the ELS template:
+
+- Changes to `camunda.tasklist.elasticsearch.numberOfShards` will not be applied to existing indices and index templates.
+- Changes to `camunda.tasklist.elasticsearch.numberOfReplicas` will be applied to existing indices and index templates.
+
+:::warning
+
+Due to a known [bug](https://github.com/camunda/camunda/issues/31238), changes to `camunda.tasklist.elasticsearch.numberOfReplicas` are currently not applied to index templates.
+
+:::
 
 ### Snippet from application.yml
 
@@ -310,6 +318,35 @@ If more than one Camunda Tasklist instance is accessible by users for a failover
 | Name                                         | Description                                                | Default value |
 | :------------------------------------------- | :--------------------------------------------------------- | :------------ |
 | camunda.tasklist.persistent.sessions.enabled | Enables the persistence of user sessions in Elasticsearch. | false         |
+
+## Migrations
+
+Automatic migration is enabled by default in all Tasklist deployments, including the Importer.
+
+| Name                                        | Description                                             | Default value |
+| ------------------------------------------- | ------------------------------------------------------- | ------------- |
+| camunda.tasklist.migration.migrationEnabled | Enables the migration process                           | true          |
+| camunda.tasklist.migration.reindexBatchSize | The batch size of documents to reindex during migration | 5000          |
+| camunda.tasklist.migration.slices           | How many slices should the reindex be divided into      | 0 (auto)      |
+
+:::note
+When running multiple instances of Tasklist or the Tasklist Importer, the `camunda.tasklist.migration.migrationEnabled` property should be enabled on only one of the instances. Though the migration processes themselves are idempotent, there is a chance one of the instances fails to apply the migration.
+
+As a side effect of this, there is a possibility Elasticsearch/OpenSearch index settings are left modified with `refresh_interval=-1`, causing the data to not be refreshed, and thus not visible.
+
+:::
+
+The configuration properties above have an effect on the duration of the migration process in the following way:
+
+1. You can set the batch size for reindex of the documents. This can reduce the time needed to reindex the data.
+   Small document size means big batch size, while big document size means small batch size.
+
+`camunda.tasklist.migration.reindexBatchSize = 5000` (Between 1 and 10.000, Default: 5.000)
+
+2. In how many slices should the reindex be divided. For each shard used by the index, you normally use a slice.
+   Elasticsearch decides how many slices are used if the value is set to 0 (automatic).
+
+`camunda.tasklist.migration.slices = 0` - Must be positive. Default is 0 (automatic).
 
 ## Example of application.yml file
 

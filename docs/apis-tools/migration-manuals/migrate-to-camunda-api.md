@@ -34,6 +34,7 @@ This guide considers all public endpoints existing in the component REST APIs an
 - All endpoints are no longer separated by component concerns and all endpoints receive similar support. For example, process definitions, user tasks, and user authorizations were previously spread across separate Tasklist, Operate, and Identity APIs.
 - Naming, response codes, and type handling have been streamlined for all endpoints to provide a consistent UX.
 - Endpoints with similar concerns (variable search, for example) have been consolidated into single endpoints.
+- The request and response payload of every new endpoint might contain new attributes that are not necessarily needed for a migration from a V1 endpoint to V2 but might still be useful. Please consult the V2 API guides for access to all new attributes.
 
 </TabItem>
 
@@ -73,10 +74,10 @@ The following conventions apply to all attributes:
 
 #### Get a form
 
-- **V1 endpoint**: `GET /v1/forms/{formId}`
+- **[V1 endpoint](../tasklist-api-rest/specifications/get-form.api.mdx)**: `GET /v1/forms/{formId}`
 - **V2 endpoints**:
-  - `GET /v2/user-tasks/{userTaskKey}/form`
-  - `GET /v2/process-definitions/{processDefinitionKey}/form`
+  - `GET /v2/user-tasks/{userTaskKey}/form` ([link](../camunda-api-rest/specifications/get-user-task-form.api.mdx))
+  - `GET /v2/process-definitions/{processDefinitionKey}/form` ([link](../camunda-api-rest/specifications/get-start-process-form.api.mdx))
 
 <Tabs groupId="get-form" defaultValue="input-adjustments" queryString values={
 [
@@ -109,13 +110,13 @@ The following conventions apply to all attributes:
 
 #### Save task draft variables
 
-- **V1 endpoint**: `POST /v1/tasks/{taskId}/variables`
+- **[V1 endpoint](../tasklist-api-rest/specifications/save-draft-task-variables.api.mdx)**: `POST /v1/tasks/{taskId}/variables`
 - **V2 endpoint**: This feature is not supported in V2 anymore. Use [setting variables][] as `local` to the user task's `elementInstanceKey` as a replacement.
 
 #### Search task variables
 
-- **V1 endpoint**: `POST /v1/tasks/{taskId}/variables/search`
-- **V2 endpoint**: `POST /v2/user-tasks/{userTaskKey}/variables/search`
+- **[V1 endpoint](../tasklist-api-rest/specifications/search-task-variables.api.mdx)**: `POST /v1/tasks/{taskId}/variables/search`
+- **[V2 endpoint](../camunda-api-rest/specifications/search-user-task-variables.api.mdx)**: `POST /v2/user-tasks/{userTaskKey}/variables/search`
 
 <Tabs groupId="search-vars-by-task" defaultValue="input-adjustments" queryString values={
 [
@@ -139,23 +140,18 @@ The following conventions apply to all attributes:
 - Response structure changes as outlined in [general changes][].
 - Renamed attributes
   - `id` - Use `variableKey` as this refers to the unique system identifier of the variable.
-  - `value` - Use `fullValue` as this represents the full variable value in case the `value` is only a preview due to size constraints. If the `value` is not a preview, the `fullValue` is empty.
-  - `previewValue` - Use `value` as this always represents the variable value. This can be a preview value due to size constraints. In that case, the `fullValue` contains the full variable value.
-  - `isValueTruncated` - Use `isTruncated` as a replacement
+  - `previewValue` - Use `value` as this always represents the variable value. This can be a truncated value due to size constraints.
+  - `isValueTruncated` - Use `isTruncated` as a replacement. If the value of `isTruncated` is `true` and you need the full value, please see the [get a variable](#get-a-variable) endpoint.
 - Removed attributes
   - `draft` - Draft variables are not supported in V2 anymore, see also the [save draft variables](#save-task-draft-variables) endpoint for further details.
-- Added attributes
-  - `scopeKey` - Variables belong to a specific scope, for example, the process instance or the element instance of a user task. This value represents the scope the variables is related to.
-  - `processInstanceKey` - A variable belongs to process instance and this value represents the unique system identifier of that instance.
-  - `tenantId` - Variables can belong to a dedicated tenant and this value represents the one it belongs to. See [multi-tenancy][] for further details.
 
 </TabItem>
 </Tabs>
 
 #### Search tasks
 
-- **V1 endpoint**: `POST /v1/tasks/search`
-- **V2 endpoint**: `POST /v2/user-tasks/search`
+- **[V1 endpoint](../tasklist-api-rest/specifications/search-tasks.api.mdx)**: `POST /v1/tasks/search`
+- **[V2 endpoint](../camunda-api-rest/specifications/search-user-tasks.api.mdx)**: `POST /v2/user-tasks/search`
 
 <Tabs groupId="tasklist" defaultValue="input-adjustments" queryString values={
 [
@@ -186,10 +182,6 @@ The following conventions apply to all attributes:
   - `tenantIds` - Use `tenantId` with `{ "$in": [ "xyz", ... ] }`.
   - `includeVariables` - The endpoint does not return variables. Use the [search task variables](#search-task-variables) endpoint to retrieve them.
   - `implementation` - The V2 API supports only Camunda user tasks.
-- Added attributes
-  - `userTaskKey` - Filter for specific user tasks by their unique system identifiers.
-  - `processDefinitionId` - Filter for user tasks by the user-provided unique identifier of the process.
-  - `elementInstanceKey` - Find tasks by the unique system identifier of the instance of the BPMN element that created the user task.
 
 </TabItem>
 
@@ -205,24 +197,20 @@ The following conventions apply to all attributes:
   - `processName` - Use `processDefinitionId`, this still refers to the user-provided identifier of the process.
 - Removed attributes
   - `isFirst` - This used to identify if the task was the first in the process.
-  - `variables` - Use the [search user task variables endpoint][] to retrieve variables for a user task.
+  - `variables` - Use the [search user task variables endpoint](#search-task-variables) to retrieve variables for a user task.
   - `implementation` - The V2 API supports only Camunda user tasks.
   - `isFormEmbedded` - The V2 API does not support embedded forms anymore.
   - `formVersion` - Use the [get user task form endpoint][] to retrieve form data bound to this user task. The `formKey` references the form of a specific `formId`, linked to this user task in a specific version.
   - `formId` - Use the [get user task form endpoint][] to retrieve form data bound to this user task. The `formKey` references the form of a specific `formId`, linked to this user task in a specific version.
-- Added attributes
-  - `customHeaders` - Any user-provided custom header values provided for the user task.
-  - `externalFormReference` - The user-provided reference to an external form for the user task. Previously, the `formKey` encoded this value.
-  - `processDefinitionVersion` - The version of the process this user task belongs to.
 
 </TabItem>
 
 </Tabs>
 
-#### Unassign user task
+#### Unassign a task
 
-- **V1 endpoint**: `PATCH /v1/tasks/{taskId}/unassign`
-- **V2 endpoint**: `DELETE /v2/user-tasks/{userTaskKey}/assignee`
+- **[V1 endpoint](../tasklist-api-rest/specifications/unassign-task.api.mdx)**: `PATCH /v1/tasks/{taskId}/unassign`
+- **[V2 endpoint](../camunda-api-rest/specifications/unassign-user-task.api.mdx)**: `DELETE /v2/user-tasks/{userTaskKey}/assignee`
 
 <Tabs groupId="unassign-user-task" defaultValue="input-adjustments" queryString values={
 [
@@ -244,10 +232,10 @@ The following conventions apply to all attributes:
 </TabItem>
 </Tabs>
 
-#### Complete user task
+#### Complete a task
 
-- **V1 endpoint**: `PATCH /v1/tasks/{taskId}/complete`
-- **V2 endpoint**: `POST /v2/user-tasks/{userTaskKey}/completion`
+- **[V1 endpoint](../tasklist-api-rest/specifications/complete-task.api.mdx)**: `PATCH /v1/tasks/{taskId}/complete`
+- **[V2 endpoint](../camunda-api-rest/specifications/complete-user-task.api.mdx)**: `POST /v2/user-tasks/{userTaskKey}/completion`
 
 <Tabs groupId="complete-user-task" defaultValue="input-adjustments" queryString values={
 [
@@ -260,8 +248,6 @@ The following conventions apply to all attributes:
 
 - Adjusted attributes
   - `variables` - Provide the variables as a proper JSON object instead of an array of objects with a `name` and a serialized JSON string `value`.
-- Added attributes
-  - `action` - Provide any custom lifecycle for this action or use the default value of `"assign"`.
 
 </TabItem>
 
@@ -272,10 +258,10 @@ The following conventions apply to all attributes:
 </TabItem>
 </Tabs>
 
-#### Assign user task
+#### Assign a task
 
-- **V1 endpoint**: `PATCH /v1/tasks/{taskId}/assign`
-- **V2 endpoint**: `POST /v2/user-tasks/{userTaskKey}/assignment`
+- **[V1 endpoint](../tasklist-api-rest/specifications/assign-task.api.mdx)**: `PATCH /v1/tasks/{taskId}/assign`
+- **[V2 endpoint](../camunda-api-rest/specifications/assign-user-task.api.mdx)**: `POST /v2/user-tasks/{userTaskKey}/assignment`
 
 <Tabs groupId="assign-user-task" defaultValue="input-adjustments" queryString values={
 [
@@ -288,8 +274,6 @@ The following conventions apply to all attributes:
 
 - Renamed attributes
   - `allowOverrideAssignment` - Use `allowOverride`, this still refers to allowing to override any existing assignee.
-- Added attributes
-  - `action` - Provide any custom lifecycle for this action or use the default value of `"assign"`.
 
 </TabItem>
 
@@ -300,10 +284,10 @@ The following conventions apply to all attributes:
 </TabItem>
 </Tabs>
 
-#### Get user task
+#### Get a task
 
-- **V1 endpoint**: `GET /v1/tasks/{taskId}`
-- **V2 endpoint**: `GET /v2/user-tasks/{userTaskKey}`
+- **[V1 endpoint](../tasklist-api-rest/specifications/get-task-by-id.api.mdx)**: `GET /v1/tasks/{taskId}`
+- **[V2 endpoint](../camunda-api-rest/specifications/get-user-task.api.mdx)**: `GET /v2/user-tasks/{userTaskKey}`
 
 <Tabs groupId="get-user-task" defaultValue="input-adjustments" queryString values={
 [
@@ -325,6 +309,357 @@ The following conventions apply to all attributes:
 </TabItem>
 </Tabs>
 
+### Variables
+
+#### Get a variable
+
+- **[V1 endpoint](../tasklist-api-rest/specifications/get-variable-by-id.api.mdx)**: `GET /v1/variables/{variableId}`
+- **[V2 endpoint](../camunda-api-rest/specifications/get-variable.api.mdx)**: `GET /v2/variables/{variableKey}`
+
+<Tabs groupId="get-a-variable" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments'},
+{label: 'Output adjustments', value: 'output-adjustments'},
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+- `variableId` - Use `variableKey` as this refers to the unique system identifier of the variable.
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+- Renamed attributes
+  - `id` - Use `variableKey` as this refers to the unique system identifier of the variable.
+- Removed attributes
+  - `draft` - Draft variables are not supported in V2 anymore, see also the [save draft variables](#save-task-draft-variables) endpoint for further details.
+
+</TabItem>
+</Tabs>
+
+## Operate API
+
+### Decision definition
+
+#### Search decision definitions
+
+- **[V1 endpoint](../operate-api/specifications/search-7.api.mdx)**: `POST /v1/decision-definitions/search`
+- **[V2 endpoint](../camunda-api-rest/specifications/search-decision-definitions.api.mdx)**: `POST /v2/decision-definitions/search`
+
+<Tabs groupId="search-decision-definitions" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments'},
+{label: 'Output adjustments', value: 'output-adjustments'},
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+- Request structure changes as outlined in [general changes][].
+  - `searchAfter` has been moved under `page`.
+  - `size` is now the `limit` in the `page` object.
+- Renamed attributes in the `filter` object
+  - `id` - Use `decisionDefinitionKey` instead.
+  - `key` of type `int64` - Use `decisionDefinitionKey` of type `string`.
+  - `decisionId` - Use `decisionDefinitionId` instead.
+  - `decisionRequirementsKey` of type `int64` - This is now of type `string`.
+- Removed attributes from the `filter` object
+  - `decisionRequirementsName` - Can no longer be used for filtering.
+  - `decisionRequirementsVersion` - Can no longer be used for filtering.
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+- Response structure changes as outlined in [general changes][].
+  - `total` is moved under the `page` object as `totalItems`.
+  - `sortValues` - Use `lastSortValues` in the `page` object instead.
+- Renamed attributes in the objects of the `items` array
+  - `id` - Use `decisionDefinitionKey` instead.
+  - `key` of type `int64` - Use `decisionDefinitionKey` of type `string`.
+  - `decisionId` - Use `decisionDefinitionId` instead.
+  - `decisionRequirementsKey` of type `int64` - This is now of type `string`.
+- Removed attributes in the objects of the `items` array
+  - `decisionRequirementsName` - Can be fetched using the **get decision requirements** endpoint with `decisionRequirementsKey`.
+  - `decisionRequirementsVersion` - Can be fetched using the **get decision requirements** endpoint with `decisionRequirementsKey`.
+
+</TabItem>
+</Tabs>
+
+#### Get decision definition by key
+
+- **[V1 endpoint](../operate-api/specifications/by-key-6.api.mdx)**: `GET /v1/decision-definitions/{key}`
+- **[V2 endpoint](../camunda-api-rest/specifications/get-decision-definition.api.mdx)**: `GET /v2/decision-definitions/{decisionDefinitionKey}`
+
+<Tabs groupId="get-decision-definition" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments'},
+{label: 'Output adjustments', value: 'output-adjustments'},
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+- No input adjustments.
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+- Except for the response structure changes, all adjustments from [search decision definitions](#search-decision-definitions) apply.
+
+</TabItem>
+</Tabs>
+
+#### Search decision instances
+
+- **[V1 endpoint](../operate-api/specifications/search-6.api.mdx)**: `POST /v1/decision-instances/search`
+- **[V2 endpoint](../camunda-api-rest/specifications/search-decision-instances.api.mdx)**: `POST /v2/decision-instances/search`
+
+<Tabs groupId="search-decision-instances" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments'},
+{label: 'Output adjustments', value: 'output-adjustments'},
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+- Request structure changes as outlined in [general changes][].
+  - `searchAfter` has been moved under `page`.
+  - `size` is now the `limit` in the `page` object.
+- Renamed attributes in the `filter` object
+  - `id` - Use `decisionInstanceId` instead.
+  - `key` of type `int64` - Use `decisionInstanceKey` of type `string`.
+  - `processDefinitionKey` of type `int64` - This is now of type `string`.
+  - `processInstanceKey` of type `int64` - This is now of type `string`.
+  - `decisionId` - Use `decisionDefinitionId` instead.
+  - `decisionName` - Use `decisionDefinitionName` instead.
+  - `decisionVersion` - Use `decisionDefinitionVersion` instead.
+  - `decisionType` - Use `decisionDefinitionType` instead.
+- Removed attributes in the `filter` object
+  - `result` - Can no longer be used for filtering.
+  - `evaluatedInputs` - Can no longer be used for filtering.
+  - `evaluatedOutputs` - Can no longer be used for filtering.
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+- Response structure changes as outlined in [general changes][].
+  - `total` is moved under the `page` object as `totalItems`.
+  - `sortValues` - Use `lastSortValues` in the `page` object instead.
+- Renamed attributes in the objects of the `items` array
+  - `id` - Use `decisionInstanceId` instead.
+  - `key` of type `int64` - Use `decisionInstanceKey` of type `string`.
+  - `processDefinitionKey` of type `int64` - This is now of type `string`.
+  - `processInstanceKey` of type `int64` - This is now of type `string`.
+  - `decisionId` - Use `decisionDefinitionId` instead.
+  - `decisionName` - Use `decisionDefinitionName` instead.
+  - `decisionVersion` - Use `decisionDefinitionVersion` instead.
+  - `decisionType` - Use `decisionDefinitionType` instead.
+- Removed attributes in the objects of the `items` array
+  - `evaluatedInputs` - The endpoint does not serve this information anymore.
+  - `evaluatedOutputs` - The endpoint does not serve this information anymore.
+
+</TabItem>
+</Tabs>
+
+#### Get decision instance by id
+
+- **[V1 endpoint](../operate-api/specifications/by-id.api.mdx)**: `GET /v1/decision-instances/{id}`
+- **[V2 endpoint](../camunda-api-rest/specifications/search-decision-instances.api.mdx)**: `GET /v2/decision-instances/{decisionInstanceId}`
+
+<Tabs groupId="get-decision-instance-by-id" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments'},
+{label: 'Output adjustments', value: 'output-adjustments'},
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+- No input adjustments.
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+- The adjustments from [search decision instances](#search-decision-instances) apply, with the following exceptions:
+  - Response structure changes.
+  - `evaluatedInputs` - Present in the response payload.
+  - `evaluatedOutputs` - Present in the response payload and moved under `matchedRules`.
+- Renamed attributes in the `evaluatedInputs` object
+  - `id` - Use `inputId` instead.
+  - `name` - Use `inputName` instead.
+  - `value` - Use `inputValue` instead.
+- Renamed attributes in the `evaluatedOutputs` object
+  - `id` - Use `outputId` instead.
+  - `name` - Use `outputName` instead.
+  - `value` - Use `outputValue` instead.
+  - `ruleId` - Moved under the objects of the `matchedRules` array.
+  - `ruleIndex` - Moved under the objects of the `matchedRules` array.
+
+</TabItem>
+</Tabs>
+
+#### Search decision requirements
+
+- **[V1 endpoint](../operate-api/specifications/search-5.api.mdx)**: `POST /v1/drd/search`
+- **[V2 endpoint](../camunda-api-rest/specifications/search-decision-requirements.api.mdx)**: `POST /v2/decision-requirements/search`
+
+<Tabs groupId="search-decision-requirements" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments'},
+{label: 'Output adjustments', value: 'output-adjustments'},
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+- Request structure changes as outlined in [general changes][].
+  - `searchAfter` has been moved under `page`.
+  - `size` is now the `limit` in the `page` object.
+- Renamed attributes in the `filter` object
+  - `id` - Use `decisionRequirementsKey` instead.
+  - `key` of type `int64` - Use `decisionRequirementsKey` of type `string`.
+  - `name` - Use `decisionRequirementsName` instead.
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+- Response structure changes as outlined in [general changes][].
+  - `total` is moved under the `page` object as `totalItems`.
+  - `sortValues` - Use `lastSortValues` in the `page` object instead.
+- Renamed attributes in the objects of the `items` array
+  - `id` - Use `decisionRequirementsKey` instead.
+  - `key` of type `int64` - Use `decisionRequirementsKey` of type `string`.
+  - `name` - Use `decisionRequirementsName` instead.
+
+</TabItem>
+</Tabs>
+
+#### Get decision requirements by key
+
+- **[V1 endpoint](../operate-api/specifications/by-key-5.api.mdx)**: `GET /v1/drd/{key}`
+- **[V2 endpoint](../camunda-api-rest/specifications/get-decision-requirements.api.mdx)**: `GET /v2/decision-requirements/{decisionRequirementsKey}`
+
+<Tabs groupId="get-decision-requirements-by-key" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments'},
+{label: 'Output adjustments', value: 'output-adjustments'},
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+- No input adjustments.
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+- Except for the response structure changes, all adjustments from [search decision requirements](#search-decision-requirements) apply.
+
+</TabItem>
+</Tabs>
+
+#### Get decision requirements as XML by key
+
+- **[V1 endpoint](../operate-api/specifications/xml-by-key-1.api.mdx)**: `GET /v1/drd/{key}/xml`
+- **[V2 endpoint](../camunda-api-rest/specifications/get-decision-requirements-xml.api.mdx)**: `GET /v2/decision-requirements/{decisionRequirementsKey}/xml`
+
+<Tabs groupId="get-decision-requirements-by-key" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments'},
+{label: 'Output adjustments', value: 'output-adjustments'},
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+- No input adjustments.
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+- No output adjustments.
+
+</TabItem>
+</Tabs>
+
+### Variable
+
+#### Search variables for process instances
+
+- **[V1 endpoint](../operate-api/specifications/search.api.mdx)**: `POST /v1/variables/search`
+- **[V2 endpoint](../camunda-api-rest/specifications/search-variables.api.mdx)**: `POST /v2/variables/search`
+
+<Tabs groupId="search-variables-for-process-instances" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments'},
+{label: 'Output adjustments', value: 'output-adjustments'},
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+- Response structure changes as outlined in [general changes][].
+  - `searchAfter` has been moved under `page`.
+  - `size` is now the `limit` in the `page` object.
+- Renamed attributes in the `filter` object
+  - `key` of type `int64` - Use `variableKey` of type `string`.
+  - `processInstanceKey` of type `int64` - This is now of type `string`.
+  - `scopeKey` of type `int64` - This is now of type `string`.
+  - `truncated` - Use `isTruncated` instead.
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+- Response structure changes as outlined in [general changes][].
+  - `total` is moved under the `page` object as `totalItems`.
+  - `sortValues` - Use `lastSortValues` in the `page` object instead.
+- Renamed attributes in the objects of the `items` array
+  - `key` of type `int64` - Use `variableKey` of type `string`.
+  - `processInstanceKey` of type `int64` - This is now of type `string`.
+  - `scopeKey` of type `int64` - This is now of type `string`.
+  - `truncated` - Use `isTruncated` instead.
+
+</TabItem>
+</Tabs>
+
+#### Get variable by key
+
+- **[V1 endpoint](../operate-api/specifications/by-key.api.mdx)**: `GET /v1/variables/{key}`
+- **[V2 endpoint](../camunda-api-rest/specifications/get-variable.api.mdx)**: `GET /v2/variables/{variableKey}`
+
+<Tabs groupId="get-variable-by-key" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments'},
+{label: 'Output adjustments', value: 'output-adjustments'},
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+- No input adjustments.
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+- All adjustments from [search variables for process instances](#search-variables-for-process-instances) apply, with the following exceptions:
+  - Response structure changes.
+  - `truncated` is removed because this endpoint always returns the full variable value.
+
+</TabItem>
+</Tabs>
+
 <!--- TODO: open questions and related resources --->
 
 <!--- TODO: insert link to C8 REST API guidelines --->
@@ -332,3 +667,382 @@ The following conventions apply to all attributes:
 [setting variables]: /apis-tools/camunda-api-rest/specifications/create-element-instance-variables.api.mdx
 [general changes]: #general-endpoint-changes
 [multi-tenancy]: /self-managed/concepts/multi-tenancy.md
+
+### Process definition
+
+#### Search process definitions
+
+- **[V1 endpoint](../operate-api/specifications/search-2.api.mdx)**: `POST /v1/process-definitions/search`
+- **[V2 endpoint](../camunda-api-rest/specifications/search-process-definitions.api.mdx)**: `POST /v2/process-definitions/search`
+
+<Tabs groupId="search-process-definitions" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments'},
+{label: 'Output adjustments', value: 'output-adjustments'},
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+- Request structure changes as outlined in [general changes][].
+  - `searchAfter` has been moved under `page`.
+  - `size` is now the `limit` in the `page` object.
+- Renamed attributes in the `filter` object
+  - `key` of type `int64` - Use `processDefinitionKey` of type `string` instead.
+  - `bpmnProcessId` - Use `processDefinitionId` instead.
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+- Response structure changes as outlined in [general changes][].
+  - `total` is moved under the `page` object as `totalItems`.
+  - `sortValues` - Use `lastSortValues` in the `page` object instead.
+- Renamed attributes in the objects of the `items` array
+  - `key` of type `int64` - Use `processDefinitionKey` of type `string` instead.
+  - `bpmnProcessId` - Use `processDefinitionId` instead.
+
+</TabItem>
+</Tabs>
+
+#### Get process definition by key
+
+- **[V1 endpoint](../operate-api/specifications/by-key-2.api.mdx)**: `GET /v1/process-definitions/{key}`
+- **[V2 endpoint](../camunda-api-rest/specifications/get-process-definition.api.mdx)**: `GET /v2/process-definitions/{processDefinitionKey}`
+
+<Tabs groupId="get-process-definition" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments'},
+{label: 'Output adjustments', value: 'output-adjustments'},
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+- No input adjustments.
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+- Except for the response structure changes, all adjustments from [search process definitions](#search-process-definitions) apply.
+
+</TabItem>
+</Tabs>
+
+#### Get process definition as XML by key
+
+- **[V1 endpoint](../operate-api/specifications/xml-by-key.api.mdx)**: `GET /v1/process-definitions/{key}/xml`
+- **[V2 endpoint](../camunda-api-rest/specifications/get-process-definition-xml.api.mdx)**: `GET /v2/process-definitions/{processDefinitionKey}/xml`
+
+<Tabs groupId="get-process-definition-xml" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments'},
+{label: 'Output adjustments', value: 'output-adjustments'},
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+- No input adjustments.
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+- No output adjustments.
+
+</TabItem>
+</Tabs>
+
+### Process instance
+
+#### Search process instances
+
+- **[V1 endpoint](../operate-api/specifications/search-1.api.mdx)**: `POST /v1/process-instances/search`
+- **[V2 endpoint](../camunda-api-rest/specifications/search-process-instances.api.mdx)**: `POST /v2/process-instances/search`
+
+<Tabs groupId="search-process-instances" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments'},
+{label: 'Output adjustments', value: 'output-adjustments'},
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+- Request structure changes as outlined in [general changes][].
+  - `searchAfter` has been moved under `page`.
+  - `size` is now the `limit` in the `page` object.
+- Renamed attributes in the `filter` object
+  - `key` of type `int64` - Use `processInstanceKey` of type `string` instead.
+  - `processVersion` - Use `processDefinitionVersion` instead.
+  - `processVersionTag` - Use `processDefinitionVersionTag` instead.
+  - `bpmnProcessId` - Use `processDefinitionId` instead.
+  - `parentFlowNodeInstanceKey` - Use `parentElementInstanceKey` of type `string` instead.
+  - `state` - Use value `TERMINATED` instead of value `CANCELED`.
+  - `incident` - Use `hasIncident` instead.
+- Adjusted attributes in the `filter` object
+  - `parentProcessInstanceKey` - Type changed from `int64` to `string`.
+  - `processDefinitionKey` - Type changed from `int64` to `string`.
+- Removed attributes from the `filter` object
+  - `parentKey` - Can no longer be used for filtering.
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+- Response structure changes as outlined in [general changes][].
+  - `total` is moved under the `page` object as `totalItems`.
+  - `sortValues` - Use `lastSortValues` in the `page` object instead.
+- Renamed attributes in the objects of the `items` array
+  - `key` of type `int64` - Use `processInstanceKey` of type `string` instead.
+  - `processVersion` - Use `processDefinitionVersion` instead.
+  - `processVersionTag` - Use `processDefinitionVersionTag` instead.
+  - `bpmnProcessId` - Use `processDefinitionId` instead.
+  - `parentFlowNodeInstanceKey` - Use `parentElementInstanceKey` of type `string` instead.
+  - `state` - Use value `TERMINATED` instead of value `CANCELED`.
+  - `incident` - Use `hasIncident` instead.
+- Adjusted attributes in the objects of the `items` array
+  - `parentProcessInstanceKey` - Type changed from `int64` to `string`.
+  - `processDefinitionKey` - Type changed from `int64` to `string`.
+- Removed attributes from the objects of the `items` array
+  - `parentKey` - The endpoint does not serve this information anymore.
+
+</TabItem>
+</Tabs>
+
+#### Get process instance by key
+
+- **[V1 endpoint](../operate-api/specifications/by-key-1.api.mdx)**: `GET /v1/process-instances/{key}`
+- **[V2 endpoint](../camunda-api-rest/specifications/get-process-instance.api.mdx)**: `GET /v2/process-instances/{processInstanceKey}`
+
+<Tabs groupId="get-process-instance-by-key" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments'},
+{label: 'Output adjustments', value: 'output-adjustments'},
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+- No input adjustments.
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+- Except for the response structure changes, all adjustments from [search process instances](#search-process-instances) apply.
+
+</TabItem>
+</Tabs>
+
+#### Delete process instance and all dependant data by key
+
+- **[V1 endpoint](../operate-api/specifications/delete.api.mdx)**: `DELETE /v1/process-instances/{key}`
+- **V2 endpoint**: This feature is not yet available in V2. It will be added in a future version.
+
+#### Get flow node statistic by process instance key
+
+- **[V1 endpoint](../operate-api/specifications/get-statistics.api.mdx)**: `GET /v1/process-instances/{key}/statistics`
+- **[V2 endpoint](../camunda-api-rest/specifications/get-process-instance-statistics.api.mdx)**: `GET /v2/process-instances/{processInstanceKey}/statistics/element-instances`
+
+<Tabs groupId="get-process-instance-statistics" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments'},
+{label: 'Output adjustments', value: 'output-adjustments'},
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+- No input adjustments.
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+- Response structure changes
+  - response items are moved under the `items` array.
+- Renamed attributes in the objects of the `items` array
+  - `activityId` - Use `elementId` instead.
+
+</TabItem>
+</Tabs>
+
+#### Get sequence flows of process instance by key
+
+- **[V1 endpoint](../operate-api/specifications/sequence-flows-by-key.api.mdx)**: `GET /v1/process-instances/{key}/sequence-flows`
+- **[V2 endpoint](../camunda-api-rest/specifications/get-process-instance-sequence-flows.api.mdx)**: `GET /v2/process-instances/{processInstanceKey}/sequence-flows`
+
+<Tabs groupId="get-process-instance-sequence-flows" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments'},
+{label: 'Output adjustments', value: 'output-adjustments'},
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+- No input adjustments.
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+- Response structure changes
+  - response items are of type `object`, instead of type `string`.
+  - response items are moved under the `items` array.
+- Collect the `sequenceFlowId` of type `string` of all objects in the array to recreate the V1 result.
+
+</TabItem>
+</Tabs>
+
+### Flownode instances
+
+#### Search flownode instances
+
+- **[V1 endpoint](../operate-api/specifications/search-4.api.mdx)**: `POST /v1/flownode-instances/search`
+- **[V2 endpoint](../camunda-api-rest/specifications/search-element-instances.api.mdx)**: `POST /v2/element-instances/search`
+
+<Tabs groupId="search-flownode-instances" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments'},
+{label: 'Output adjustments', value: 'output-adjustments'},
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+- Request structure changes as outlined in [general changes][].
+  - `searchAfter` has been moved under `page`.
+  - `size` is now the `limit` in the `page` object.
+- Renamed attributes in the `filter` object
+  - `key` of type `int64` - Use `elementInstanceKey` of type `string` instead.
+  - `flowNodeId` - Use `elementId` instead.
+  - `flowNodeName` - Use `elementName` instead.
+  - `incident` - Use `hasIncident` instead.
+- Adjusted attributes in the `filter` object
+  - `processInstanceKey` - Type changed from `int64` to `string`.
+  - `processDefinitionKey` - Type changed from `int64` to `string`.
+  - `incidentKey` - Type changed from `int64` to `string`.
+- Removed attributes from the `filter` object
+  - `startDate` - Can no longer be used for filtering.
+  - `endDate` - Can no longer be used for filtering.
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+- Response structure changes as outlined in [general changes][].
+  - `total` is moved under the `page` object as `totalItems`.
+  - `sortValues` - Use `lastSortValues` in the `page` object instead.
+- Renamed attributes in the objects of the `items` array
+  - `key` of type `int64` - Use `elementInstanceKey` of type `string` instead.
+  - `flowNodeId` - Use `elementId` instead.
+  - `flowNodeName` - Use `elementName` instead.
+  - `incident` - Use `hasIncident` instead.
+- Adjusted attributes in the objects of the `items` array
+  - `processInstanceKey` - Type changed from `int64` to `string`.
+  - `processDefinitionKey` - Type changed from `int64` to `string`.
+  - `incidentKey` - Type changed from `int64` to `string`.
+
+</TabItem>
+</Tabs>
+
+#### Get flownode instance by key
+
+- **[V1 endpoint](../operate-api/specifications/by-key-4.api.mdx)**: `GET /v1/flownode-instances/{key}`
+- **[V2 endpoint](../camunda-api-rest/specifications/get-element-instance.api.mdx)**: `GET /v2/element-instances/{elementInstanceKey}`
+
+<Tabs groupId="get-flownode-instance-by-key" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments'},
+{label: 'Output adjustments', value: 'output-adjustments'},
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+- No input adjustments.
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+- Except for the response structure changes, all adjustments from [search flownode instances](#search-flownode-instances) apply.
+
+</TabItem>
+</Tabs>
+
+### Incidents
+
+#### Search incidents
+
+- **[V1 endpoint](../operate-api/specifications/search-3.api.mdx)**: `POST /v1/incidents/search`
+- **[V2 endpoint](../camunda-api-rest/specifications/search-incidents.api.mdx)**: `POST /v2/incidents/search`
+
+<Tabs groupId="search-incidents" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments'},
+{label: 'Output adjustments', value: 'output-adjustments'},
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+- Request structure changes as outlined in [general changes][].
+  - `searchAfter` has been moved under `page`.
+  - `size` is now the `limit` in the `page` object.
+- Renamed attributes in the `filter` object
+  - `key` of type `int64` - Use `incidentKey` of type `string` instead.
+  - `type` - Use `errorType` instead.
+  - `message` - Use `errorMessage` instead.
+- Adjusted attributes in the `filter` object
+  - `processInstanceKey` - Type changed from `int64` to `string`.
+  - `processDefinitionKey` - Type changed from `int64` to `string`.
+  - `jobKey` - Type changed from `int64` to `string`.
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+- Response structure changes as outlined in [general changes][].
+  - `total` is moved under the `page` object as `totalItems`.
+  - `sortValues` - Use `lastSortValues` in the `page` object instead.
+- Renamed attributes in the objects of the `items` array
+  - `key` of type `int64` - Use `incidentKey` of type `string` instead.
+  - `type` - Use `errorType` instead.
+  - `message` - Use `errorMessage` instead.
+- Adjusted attributes in the objects of the `items` array
+  - `processInstanceKey` - Type changed from `int64` to `string`.
+  - `processDefinitionKey` - Type changed from `int64` to `string`.
+  - `jobKey` - Type changed from `int64` to `string`.
+
+</TabItem>
+</Tabs>
+
+#### Get incident by key
+
+- **[V1 endpoint](../operate-api/specifications/by-key-3.api.mdx)**: `GET /v1/incidents/{key}`
+- **[V2 endpoint](../camunda-api-rest/specifications/get-incident.api.mdx)**: `GET /v2/incidents/{incidentKey}`
+
+<Tabs groupId="get-incident-by-key" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments'},
+{label: 'Output adjustments', value: 'output-adjustments'},
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+- No input adjustments.
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+- Except for the response structure changes, all adjustments from [search incidents](#search-incidents) apply.
+
+</TabItem>
+</Tabs>

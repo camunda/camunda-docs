@@ -16,11 +16,11 @@ const features = [
       "New to Camunda 8? Create an account and start modeling your first process.",
   },
   {
-    title: "Components",
+    title: "Using Camunda",
     imageUrl: "img/home-components.png",
     url: "/docs/components/",
     description:
-      "Explore components such as Console, Modeler, Zeebe, Operate, and Optimize.",
+      "Learn how to use Camunda 8 components, features, and integrations.",
   },
   {
     title: "Self-Managed",
@@ -154,7 +154,7 @@ function Home() {
                   "docs/apis-tools/spring-zeebe-sdk/getting-started/"
                 )}
               >
-                Spring Zeebe SDK
+                Camunda Spring Boot SDK
               </Link>
               <Link
                 className={clsx(
