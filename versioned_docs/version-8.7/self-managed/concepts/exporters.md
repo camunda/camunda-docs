@@ -233,7 +233,7 @@ For example, if you want to allow exporting only message events with `EXPIRED` i
         This filter will only accept records of type `EVENT`, value type `MESSAGE`, and intent `EXPIRED`. To accept more record types, value types, and intents, modify the `acceptType`, `acceptValue`, and `acceptIntent` methods accordingly.
         :::
 
-2. Set the `MessageExpiredExporterFilter` filter in the `Exporter#configure` method of your custom exporter:
+2.  Set the `MessageExpiredExporterFilter` filter in the `Exporter#configure` method of your custom exporter:
 
         ```java
         public class MessageExpiredExporter implements Exporter {
