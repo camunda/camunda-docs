@@ -270,7 +270,7 @@ For example, if you want to allow exporting only message events with `EXPIRED` i
         This creates an infinite loop of republishing and expiring the same message, potentially leading to the engine blocked from processing other records. To avoid this, check the message TTL before republishing it.
         :::
 
-3. (Optional) By default, the exporter will not receive the full message body, only the message key with the empty message body is exported. To receive the full message body with the expired message, enable it via YAML configuration or environment variable.
+3.  (Optional) By default, the exporter will not receive the full message body, only the message key with the empty message body is exported. To receive the full message body with the expired message, enable it via YAML configuration or environment variable.
 
         <Tabs groupId="featured" defaultValue="envVars" queryString values={
         [
