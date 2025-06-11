@@ -26,6 +26,7 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   --ifm-leading: calc(var(--ifm-leading-desktop) * 1rem);
   --ifm-alert-border-radius: 0;
   --ifm-breadcrumb-padding-horizontal: 0rem;
+  --ifm-card-border-radius: 4px;
 }
 
 .markdown {
@@ -72,6 +73,15 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   .hero-topic {
     display: none;
   }
+}
+
+.card {
+  margin-top:25px;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  transition: all 0.3s ease;
 }
 
 /* Match alert colours to Camunda brand colours */
@@ -296,6 +306,8 @@ a {
   background-color: transparent;
   border: 1px solid var(--ifm-color-primary);
   box-shadow: 0px 8px 16px 4px #78a9ff33;
+  transform: translateY(-5px);
+  transition: all 0.3s ease;
 }
 
 /* Dark mode > Badges */

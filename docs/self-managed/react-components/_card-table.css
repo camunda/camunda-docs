@@ -280,7 +280,7 @@ a.idp-small-link {
 .fade-in-top-image {
   opacity: 0;
   transform: translateY(-20px);
-  animation: fadeInTop 2s forwards;
+  animation: fadeInTop 1s forwards !important;
   background-color: transparent;
 }
 [data-theme="dark"] .fade-in-top-image {

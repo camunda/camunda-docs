@@ -1,25 +1,45 @@
-/** this is the only class altered during swizzling. **/
+/** these are the only classes altered during swizzling. **/
 
 .cardDescription {
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
 }
 
-/** everything below here is untouched from the original. **/
+.cardTitle {
+  border-bottom: 0;
+  margin: 0px;
+  font-size: 1.1em;
+  font-weight: 600;
+  padding-bottom: 10px;
+  color: #1c1e21;
+}
 
 .cardContainer {
   --ifm-link-color: var(--ifm-color-emphasis-800);
   --ifm-link-hover-color: var(--ifm-color-emphasis-700);
   --ifm-link-hover-decoration: none;
-
-  box-shadow: 0 1.5px 3px 0 rgb(0 0 0 / 15%);
-  border: 1px solid var(--ifm-color-emphasis-200);
+  box-shadow: none;
+  border: 1px solid rgb(222, 222, 222);
   transition: all var(--ifm-transition-fast) ease;
   transition-property: border, box-shadow;
+  margin-top:10px!important;
 }
+
+[data-theme="dark"] .cardTitle {
+  border-bottom: 0;
+    color: #f4f4f4;
+}
+
+[data-theme="dark"] .cardContainer {
+  border: 1px solid #3b3a3a;
+}
+
+/** everything below here is untouched from the original. **/
+
+
 
 .cardContainer:hover {
   border-color: var(--ifm-color-primary);
@@ -32,4 +52,5 @@
 
 .cardTitle {
   font-size: 1.2rem;
+  border-bottom: 0;
 }
