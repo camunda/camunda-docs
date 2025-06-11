@@ -97,9 +97,9 @@ module.exports = {
         id: "components/agentic-orchestration/agentic-orchestration",
       },
       items: [
-            "components/agentic-orchestration/ao-design",
-            "components/agentic-orchestration/ai-agents",
-          ],
+        "components/agentic-orchestration/ao-design",
+        "components/agentic-orchestration/ai-agents",
+      ],
     },
     {
       type: "category",
@@ -661,7 +661,7 @@ module.exports = {
         {
           "Manage your plan": [
             "components/console/manage-plan/available-plans",
-            "components/console/manage-plan/upgrade-to-starter-plan",
+            "components/console/manage-plan/upgrade-to-enterprise-plan",
             "components/console/manage-plan/update-billing-reservations",
             "components/console/manage-plan/update-creditcard",
             "components/console/manage-plan/retrieve-invoices-or-update-billing-info",
