@@ -25,7 +25,7 @@ Camunda 8 Run includes the following:
 - Connectors
 - Elasticsearch
 
-Camunda 8 Run also supports document storage and management with [document handling](/self-managed/document-handling/overview.md).
+Camunda 8 Run also supports document storage and management with [document handling](/self-managed/concepts/document-handling/overview.md).
 
 ## Prerequisites
 
