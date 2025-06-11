@@ -666,7 +666,6 @@ module.exports = {
             "components/console/manage-plan/update-creditcard",
             "components/console/manage-plan/retrieve-invoices-or-update-billing-info",
             "components/console/manage-plan/cancel-starter-subscription",
-            "components/console/manage-plan/migrate-from-prof-to-starter",
           ],
         },
         {
