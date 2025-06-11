@@ -25,7 +25,7 @@
   border: 1px solid rgb(222, 222, 222);
   transition: all var(--ifm-transition-fast) ease;
   transition-property: border, box-shadow;
-  margin-top:10px!important;
+  margin-top: 10px !important;
 }
 
 [data-theme="dark"] .cardTitle {
