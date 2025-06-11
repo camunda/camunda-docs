@@ -42,3 +42,7 @@ The downloaded file contains all the necessary information to communicate with y
 Depending on the scopes granted to these client credentials, the following variables may also be present:
 
 - `CAMUNDA_OPTIMIZE_BASE_URL`: The base URL for the Optimize API.
+
+## Additional resources
+
+- [Camunda Academy: How To Create Client Credentials](https://academy.camunda.com/c8-h2-create-client-credentials)

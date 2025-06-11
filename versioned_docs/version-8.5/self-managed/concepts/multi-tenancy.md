@@ -21,7 +21,7 @@ Multi-tenancy is currently only available for Camunda 8 Self-Managed with authen
 
 ## Multi-tenancy
 
-Multi-tenancy in the context of Camunda 8 refers to the ability of Camunda 8 to serve multiple distinct [tenants](/self-managed/identity/user-guide/tenants/managing-tenants.md) or
+Multi-tenancy in the context of Camunda 8 refers to the ability of Camunda 8 to serve multiple distinct [tenants](/self-managed/identity/managing-tenants.md) or
 clients within a single installation. Multi-tenancy extends these capabilities to cater to the needs of
 different departments, teams, or even external clients, all within a shared Camunda environment.
 
@@ -41,7 +41,7 @@ resource utilization and ensures that Camunda 8 remains cost-effective.
 
 ### Efficient administration
 
-Administrators can manage all tenants from [Identity](/self-managed/identity/user-guide/tenants/managing-tenants.md). This simplifies the process of monitoring and maintaining
+Administrators can manage all tenants from [Identity](/self-managed/identity/managing-tenants.md). This simplifies the process of monitoring and maintaining
 different tenant environments, making administrative tasks more efficient and reducing overhead.
 
 ### Security

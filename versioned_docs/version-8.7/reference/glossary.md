@@ -18,6 +18,14 @@ The [Zeebe Broker](#zeebe-broker) is the distributed workflow engine that tracks
 
 - [Architecture](/components/zeebe/technical-concepts/architecture.md)
 
+### BTP
+
+BTP stands for [SAP](#sap) Business Technology Platform, which is a cloud-based platform that provides tools and services for data management, analytics, application development, and integration within the SAP ecosystem.
+
+Camunda can integrate with SAP BTP to orchestrate business processes across SAP and non-SAP systems. By doing so, it enables automation and visibility of workflows that span multiple services and applications hosted on BTP, enhancing agility and process control in enterprise environments.
+
+- [BTP plugin](/components/camunda-integrations/sap/btp-plugin.md)
+
 ### Client
 
 A client interacts with the Zeebe Broker on behalf of the business application. Clients poll for work from the broker.
@@ -56,6 +64,14 @@ A correlation is an attribute within a message used to match this message agains
 
 - [Message correlation](/components/concepts/messages.md)
 
+### CSAP CLI
+
+CSAP CLI stands for Camunda SAP Integration Command-Line Interface. It's a standalone tool (`csap`) that simplifies configuring and building Camunda’s SAP integration modules—like the RFC connector, OData connector, and BTP plugin—for deployment.
+
+Camunda uses `csap` to automate setup steps: it interactively or via scripted flags configures connectors and plugins, resolves dependencies, and produces deployment-ready artifacts. This makes deploying SAP integrations (including BTP plugins) straightforward and repeatable in environments like Camunda SaaS.
+
+- [CSAP CLI](/components/camunda-integrations/sap/csap-cli.md)
+
 ### Deployment
 
 A process cannot execute unless it is known by the broker. Deployment is the process of pushing or deploying processes to the broker.
@@ -67,6 +83,12 @@ A process cannot execute unless it is known by the broker. Deployment is the pro
 A BPMN element is part of a [process](#process), defining one part of its BPMN model. Elements are the building blocks of a process and comprise [flow nodes](#flow-node), sequence flows, participants, data objects, and more.
 
 - [BPMN elements](/components/modeler/bpmn/bpmn-primer.md#bpmn-elements)
+
+### Element template
+
+Use an element template to extend the Desktop Modeler or Web Modeler with domain-specific diagram [elements](#element). Element templates are used by [Connectors](#connector) to create the connector-specific [element](#element) configuration.
+
+- [Element templates](/components/modeler/desktop-modeler/element-templates/about-templates.md)
 
 ### Event
 
@@ -227,7 +249,7 @@ A process instance variable represents the execution state (i.e data) of a proce
 
 Protocol connectors are a type of [Connector](#connector) in Camunda that can serve as either [inbound](#inbound-connector) or [outbound](#outbound-connector) connectors, supporting a variety of technical protocols. These connectors are highly generic, designed to provide a flexible and customizable means of integrating with external systems and services.
 
-Protocol connectors can be customized to meet the needs of specific use cases using element templates, with no additional coding or deployment required. Examples of protocol connectors include HTTP REST, SOAP, GraphQL, as well as message queue connectors.
+Protocol connectors can be customized to meet the needs of specific use cases using [element templates](#element-template), with no additional coding or deployment required. Examples of protocol connectors include HTTP REST, SOAP, GraphQL, as well as message queue connectors.
 
 ### Record
 
@@ -254,6 +276,20 @@ We recommend running an odd replication factor.
 This is how long a client waits for a response from the broker after the client submits a request. If a response is not received within the client request timeout, the client considers the broker unreachable.
 
 - [Zeebe API (gRPC)](/apis-tools/zeebe-api/grpc.md)
+
+### RFC
+
+RFC stands for Remote Function Call, a protocol used by SAP to enable communication and data exchange between SAP systems or between SAP and external systems.
+
+Camunda can use RFC to call SAP functions directly as part of a business process. This allows Camunda to trigger SAP transactions, retrieve data, or update records within an SAP system, integrating SAP functionality seamlessly into broader automated workflows.
+
+- [RFC](/components/camunda-integrations/sap/csap-cli.md)
+
+### SAP
+
+SAP stands for Systems, Applications, and Products in Data Processing; it's an enterprise software platform used to manage business operations such as finance, supply chain, and HR. Camunda integrates with SAP to automate and orchestrate workflows that involve SAP systems, allowing for greater flexibility, transparency, and control over complex business processes.
+
+- [SAP](/components/camunda-integrations/overview.md)
 
 ### Segment
 
