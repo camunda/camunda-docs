@@ -1,12 +1,9 @@
 ---
 id: operate-tasklist-backup
-title: Backup and restore Operate and Tasklist data
-description: "How to perform a backup and restore of Operate and Tasklist data."
+title: Backup Management API - Operate / Tasklist
+description: "Backup API to perform a backup of Operate and Tasklist data."
 keywords: ["backup", "backups"]
 ---
-
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
 
 Operate stores its data over multiple indices in Elasticsearch. Backup of Operate data includes several
 Elasticsearch snapshots containing sets of Operate indices. Each backup is identified by `backupId`. For example, a backup with an ID of `123` may contain the following Elasticsearch snapshots:
@@ -169,32 +166,3 @@ Response:
 | 404 Not Found    | Not a single snapshot corresponding to given ID exist.                                                                       |
 | 500 Server Error | All other errors, e.g. ES returned error response when attempting to execute the query.                                      |
 | 502 Bad Gateway  | Elasticsearch is not accessible, the request can be retried when it is back.                                                 |
-
-<!-- TODO: Move to central page -->
-
-## Restore backup
-
-There is no Operate API to preform the backup restore. Instead, use the [Elasticsearch restore snapshot API](https://www.elastic.co/guide/en/elasticsearch/reference/current/restore-snapshot-api.html).
-
-:::note
-Operate must **not** be running while a backup restore is taking place.
-:::
-
-To restore the backup with a known backup id, you must restore all the snapshots this backup contains (check the response of the [create backup API](#create-backup-api)).
-
-Example of Elasticsearch query:
-
-```shell
-curl --request POST `http://localhost:9200/_snapshot/test/camunda_operate_123_8.1.0-snapshot_part_1_of_6/_restore?wait_for_completion=true`
-```
-
-To summarize, the process may look as follows:
-
-1. Stop Operate.
-2. Ensure there are no Operate indices present in Elasticsearch (otherwise the restore process will fail).
-3. Iterate over all Elasticsearch snapshots included in the desired backup and restore them using the Elasticsearch restore snapshot API.
-4. Start Operate.
-
-## Backup and restore of Tasklist data
-
-Backup and restore of Tasklist may be performed in exactly the same way as [Operate data](#).

@@ -12,28 +12,26 @@ import TabItem from '@theme/TabItem';
 If the Camunda application(s) cannot access Elasticsearch with cluster-level privileges, it is possible to run the backup of Operate and Tasklist indices (steps 2, 3, 5 and 6 from the backup procedure below) as a standalone application separate from the main application (see [standalone backup application](/self-managed/concepts/elasticsearch-without-cluster-privileges.md#standalone-backup-application)).
 :::
 
+The following will explore the motive, considerations and actual backup and restore procedures in detail. The goal is for you to understand the steps and choices taken. The manually described procedures should be automated within your organization with the tools of your choice to fulfill your companies requirements.
+
 You need to use the backup feature of Camunda 8 Self-Managed to regularly back up the state of all of its components (Zeebe, Operate, Tasklist, and Optimize) without any downtime (except Web Modeler, see [the Web Modeler backup and restore documentation](./modeler-backup-and-restore.md)).
 In case of failures that lead to data loss, you can recover the cluster from a backup.
 
-<!-- TODO: insert reasoning here - Elaticsearch, consistent backups, etc. Explain on why it's different with Elasticsearch, the pointers etc.
-Why is it important? Backup for Operate / Tasklit / Optimize taken in a certain order.
-The reasoning -->
+## Motive
 
-A backup of a Camunda 8 cluster consists of a backup of Zeebe, Operate, Tasklist, Optimize, and exported Zeebe records in Elasticsearch. Since the data of these applications are dependent on each other, it is important that the backup is consistent across all components. The backups of individual components taken independently may not form a consistent recovery point. Therefore, you must take the backup of a Camunda 8 cluster as a whole. To ensure a consistent backup, follow the process described below. Failing to do so will result in the loss of data and you might not even notice it. There is currently no way to verify this. <!-- TODO: Rewrite the last two lines -->
+The reasoning behind is that Operate, Tasklist, and Optimize use an Importer and Archiver to consume the exported indices from Zeebe. Those keep a pointer on the exported indices. Using Elasticsearch / OpenSearch snapshot feature directly would not result in coherent backups as the position would not be properly saved. That's why the backups need to be scheduled through their respective components.
 
-<!-- TODO: Add part about being hot backups and what exactly that means. What's happening in the background etc. data overlap... -->
+Similar for Zeebe the backup needs to be scheduled through Zeebe to create a coherent backup of the partitions. Just taking a disk backup for each Zeebe broker will not result in a coherent backup as data may differ between the brokers and partitions as a disk backup is never going to be executed on each broker at the same time.
+
+A backup of a Camunda 8 cluster consists of a backup of Zeebe, Operate, Tasklist, Optimize, and exported Zeebe records in Elasticsearch. Since the data of these applications are dependent on each other, it is important that the backup is consistent across all components. The backups of individual components taken independently may not form a consistent recovery point. Therefore, you must take the backup of a Camunda 8 cluster as a whole. To ensure a consistent backup, follow the process outlined below. Deviating from this process can lead to undetected data loss, as there is no reliable way to verify data integrity afterward.
+
+Following the backup procedure outlined in the documentation results in a hot backup, meaning Zeebe continues to process and export data during the backup, and the WebApps remain fully operational.
 
 ## Prerequisites
 
-<!-- TODO: add tool prerequsisites: curl, jq, kubectl -->
-
-Operate, Tasklist, and Optimize use Elasticsearch / OpenSearch as backend storage and use the snapshot feature of Elasticsearch / OpenSearch for backing up their state. Zeebe does not have an in-built API for its related indices but will need to use the snapshot API of Elasticsearch / OpenSearch directly.
-
-Zeebe stores its partition backup to an external storage and must be configured before the cluster is started.
-
 Following items are required to be configured to make use of the backup and restore functionality:
 
-1. Depending on the choice of database, following must be configured on the database itself:
+1. Depending on the choice of secondary datastore, following must be configured on the datastore itself:
 
    - [Elasticsearch snapshot repository](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshot-restore.html)
    - [OpenSearch snapshot repository](https://docs.opensearch.org/docs/latest/tuning-your-cluster/availability-and-recovery/snapshots/snapshot-restore/)
@@ -47,6 +45,16 @@ Following items are required to be configured to make use of the backup and rest
 - [Tasklist](/self-managed/tasklist-deployment/tasklist-configuration.md#backups)
 - [Zeebe](/self-managed/zeebe-deployment/configuration/broker.md#zeebebrokerdatabackup)
 
+<!-- TODO: Don't find it fitting anymore - Operate, Tasklist, and Optimize use Elasticsearch / OpenSearch as datastore and use the snapshot feature of Elasticsearch / OpenSearch for backing up their state. Zeebe does not have an in-built API for its related indices and will need to use the snapshot API of Elasticsearch / OpenSearch directly.
+
+Zeebe stores its partition backup to an external storage and must be configured before the cluster is started. -->
+
+In the guide, we're showcasing backup and restore, based on the following tools:
+
+- [curl](https://curl.se/)
+- [jq](https://jqlang.org/)
+- [kubectl](https://kubernetes.io/de/docs/reference/kubectl/)
+
 ## Considerations
 
 The backup of each component and the backup of a Camunda 8 cluster is identified by an ID. This means a backup `x` of Camunda 8 consists of backup `x` of Zeebe, backup `x` of Optimize, backup `x` of Operate, and backup `x` of Tasklist. The backup ID must be an integer and greater than the previous backups.
@@ -57,47 +65,9 @@ We recommend using the unix timestamp as the backup ID.
 
 The steps outlined on this page are general applicable for any kind of deployment but may differ slightly depending on your setup.
 
-If you're defining the `contextPath` in the Helm chart or the `management.server.servlet.context-path` in a standalone setup, your API requests will require to prepend the value specific to the `contextPath` for the individual application. In case the `management.server.port` is defined then this also applies to `management.endpoints.web.base-path`. You can read more about this behavior in the [Spriing Boot documentation](https://docs.spring.io/spring-boot/docs/2.1.7.RELEASE/reference/html/production-ready-monitoring.html#production-ready-customizing-management-server-context-path).
+### Management API
 
-:::warning Optimize Helm Chart Exception
-Setting the `contextPath` in the Helm Chart for Optimize will not overwrite the `contextPath` of the management API and it will remain `/`.
-:::
-
-<details>
-<summary>Example</summary>
-<summary>
-
-If you're defining `management.server.base-path` for Operate:
-
-```bash
-# Helm Chart
-operate:
-   contextPath: /operate
-
-# Standalone
-management.server.base-path: /operate
-```
-
-A call to the management API of Operate would look like the following:
-
-```
-OPERATE_MANAGEMENT_API=http://localhost:9600
-
-curl $OPERATE_MANAGEMENT_API/operate/health
-```
-
-Without the `contextPath` / `base-path` it would just be:
-
-```
-OPERATE_MANAGEMENT_API=http://localhost:9600
-
-curl $OPERATE_MANAGEMENT_API/health
-```
-
-</summary>
-</details>
-
-The management API is an extension of the [Spring Boot Actuator](https://docs.spring.io/spring-boot/reference/actuator/index.html), typically used for monitoring and other operational purposes. This is not a public API and not exposed. You will need direct access to your Camunda cluster to be able to interact with these management APIs.
+The management API is an extension of the [Spring Boot Actuator](https://docs.spring.io/spring-boot/reference/actuator/index.html), typically used for monitoring and other operational purposes. This is not a public API and not exposed. You will need direct access to your Camunda cluster to be able to interact with these management APIs. That's why you'll often see the reference to `localhost`.
 
 Direct access, may depend on your deployment environment. For example, direct Kubernetes cluster access with [port-forwarding](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_port-forward/) or [exec](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_exec/) to execute commands directly on Kubernetes pods. In case of a manual deployment you will need to be able to reach the machines that host Camunda. Typically, the management port is on port `9600` but may differ on your setup and on the components. You will find the default for each component in their configuration page.
 
@@ -110,18 +80,19 @@ Direct access, may depend on your deployment environment. For example, direct Ku
 
 Examples for Kubernetes approaches:
 
-<Tabs>
+<Tabs groupId="application-ports">
    <TabItem value="port-forwarding" label="Port Forwarding" default>
 
    Port-forwarding allows to temporarily bind a remote Kubernetes cluster port of a service or pod directly to your local machine, allowing you to interact with it via `localhost:PORT`
 
    ```bash
-   HELM_RELEASE_NAME=camunda
+   export CAMUNDA_RELEASE_NAME="camunda"
    # kubectl port-forward services/$SERVICE_NAME $LOCAL_PORT:$REMOTE_PORT
-   kubectl port-forward services/$HELM_RELEASE_NAME-operate 9600:9600 & \
-   kubectl port-forward services/$HELM_RELEASE_NAME-optimize 9620:8092 & \
-   kubectl port-forward services/$HELM_RELEASE_NAME-tasklist 9640:9600 & \
-   kubectl port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 9660:9600 &
+   kubectl port-forward services/$CAMUNDA_RELEASE_NAME-operate 9600:9600 & \
+   kubectl port-forward services/$CAMUNDA_RELEASE_NAME-optimize 9620:8092 & \
+   kubectl port-forward services/$CAMUNDA_RELEASE_NAME-tasklist 9640:9600 & \
+   kubectl port-forward services/$CAMUNDA_RELEASE_NAME-zeebe-gateway 9660:9600 & \
+   kubectl port-forward services/$CAMUNDA_RELEASE_NAME-elasticsearch 9200:9200 &
    ```
 
    Using the bash instruction `&` at the end of each line would run the command in a subshell allowing the use of a single terminal.
@@ -135,22 +106,19 @@ Examples for Kubernetes approaches:
 
    ```bash
    # following will create a temporary alias within your terminal to overwrite the normal curl
-   CAMUNDA_NAMESPACE=camunda <!-- TODO: double check consistent naming with our guides -->
-   HELM_RELEASE_NAME=camunda
-   <!-- TODO: consider renaming kubecurl to curl to temporarily overwrite it locally, will allow to have the same commands for everything -->
-   alias kubecurl="kubectl run curl --rm -i -n $CAMUNDA_NAMESPACE --restart=Never --image=alpine/curl -- -sS"
+   export CAMUNDA_NAMESPACE="camunda"
+   export CAMUNDA_RELEASE_NAME="camunda"
+   # temporary overwrite of curl, can be removed with `unalias curl` again
+   alias curl="kubectl run curl --rm -i -n $CAMUNDA_NAMESPACE --restart=Never --image=alpine/curl -- -sS"
 
-   kubecurl $HELM_RELEASE_NAME-operate:9600/actuator/health
-   kubecurl $HELM_RELEASE_NAME-optimize:8092/actuator/health
-   kubecurl $HELM_RELEASE_NAME-tasklist:9600/actuator/health
-   kubecurl $HELM_RELEASE_NAME-zeebe-gateway:9600/actuator/health
+   curl $CAMUNDA_RELEASE_NAME-operate:9600/actuator/health
+   curl $CAMUNDA_RELEASE_NAME-optimize:8092/actuator/health
+   curl $CAMUNDA_RELEASE_NAME-tasklist:9600/actuator/health
+   curl $CAMUNDA_RELEASE_NAME-zeebe-gateway:9600/actuator/health
+   curl $CAMUNDA_RELEASE_NAME-elasticsearch:9200/_cluster/health
    ```
 
    This will allow to directly execute commands within the namespace and talk to available services.
-
-   ```bash
-   kubectl get services
-   ```
 
    </TabItem>
    <TabItem value="jobs" label="Cronjob">
@@ -164,16 +132,52 @@ Examples for Kubernetes approaches:
 
 </Tabs>
 
+### ContextPath
+
+If you're defining the `contextPath` in the Helm chart or the `management.server.servlet.context-path` in a standalone setup, your API requests will require to prepend the value specific to the `contextPath` for the individual application. In case the `management.server.port` is defined then this also applies to `management.endpoints.web.base-path`. You can read more about this behavior in the [Spriing Boot documentation](https://docs.spring.io/spring-boot/docs/2.1.7.RELEASE/reference/html/production-ready-monitoring.html#production-ready-customizing-management-server-context-path).
+
+:::warning Optimize Helm Chart Exception
+Setting the `contextPath` in the Helm Chart for Optimize will not overwrite the `contextPath` of the management API and it will remain `/`.
+:::
+
+<details>
+<summary>Example</summary>
+<summary>
+
+If you're defining the `contextPath` for Operate in the Helm Chart:
+
+```bash
+operate:
+   contextPath: /operate
+```
+
+A call to the management API of Operate would look like the following:
+
+```
+OPERATE_MANAGEMENT_API=http://localhost:9600
+
+curl $OPERATE_MANAGEMENT_API/operate/health
+```
+
+Without the `contextPath` it would just be:
+
+```
+OPERATE_MANAGEMENT_API=http://localhost:9600
+
+curl $OPERATE_MANAGEMENT_API/health
+```
+
+</summary>
+</details>
+
 ## Backup process
 
 The backup process is divided in two parts:
 
-1. Backup of the WebApps
-2. Backup of the Zeebe Cluster
+1. [Backup of the WebApps](#backup-of-the-webapps)
+2. [Backup of the Zeebe Cluster](#backup-of-the-zeebe-cluster)
 
 These two parts have to be executed in a sequential order with their sub-steps to form a consistent backup and are outlined below.
-
-<!-- TODO: Rewrite actionable step names -->
 
 <!-- TODO: Explain why the certain order is so important; Basically, WebApps interchangable, overlap with Zeebe is important and softpause topic.
 
@@ -185,17 +189,54 @@ Zeebe exports ("db" + partitions)
 Resume Pause
 -->
 
-```bash
-<!-- TODO: Define all endpoints somehow - maybe specific per use case -->
-# Don't export the BACKUP_ID multiple times, it needs to be consistent with all backups for easier identification
-export BACKUP_ID=$(date +%s) # unix timestamp as unique always increasing ID
-export OPTIMIZE_MANAGEMENT_API=
-export OPERATE_MANAGEMENT_API=
-export TASKLIST_MANAGEMENT_API=
-export GATEWAY_MANAGEMENT_API=
-```
-
 ### Backup of the WebApps
+
+0. **Example definition of the API endpoints.**
+
+   :::note
+
+   This will heavily depend on your setup, the following examples are based on [the example definitions](#management-api) in Kubernetes using either active port-forwarding or overwrite of the local curl command.
+
+   :::
+
+   <Tabs groupId="application-ports">
+      <TabItem value="port-forwarding" label="Port Forwarding" default>
+
+      ```bash
+      # only export the BACKUP_ID once as it has to stay consistent throughout the backup procedure
+      export BACKUP_ID=$(date +%s) # unix timestamp as unique always increasing ID
+
+      export ELASTIC_SNAPSHOT_REPOSITORY="camunda" # the name of your snapshot repository
+      export ELASTIC_ENDPOINT="http://localhost:9200/"
+
+      export OPERATE_MANAGEMENT_API="http://localhost:9600/"
+      export OPTIMIZE_MANAGEMENT_API="http://localhost:9620/"
+      export TASKLIST_MANAGEMENT_API="http://localhost:9640/"
+      export GATEWAY_MANAGEMENT_API="http://localhost:9660/"
+      ```
+
+      </TabItem>
+      <TabItem value="exec" label="Exec">
+
+      ```bash
+      # only export the BACKUP_ID once as it has to stay consistent throughout the backup procedure
+      export BACKUP_ID=$(date +%s) # unix timestamp as unique always increasing ID
+      export CAMUNDA_RELEASE_NAME="camunda"
+
+      export ELASTIC_SNAPSHOT_REPOSITORY="camunda" # the name of your snapshot repository
+      export ELASTIC_ENDPOINT="$CAMUNDA_RELEASE_NAME-elasticsearch:9200"
+
+      export OPERATE_MANAGEMENT_API="http://$CAMUNDA_RELEASE_NAME-operate:9600/"
+      export OPTIMIZE_MANAGEMENT_API="http://$CAMUNDA_RELEASE_NAME-optimize:8092/"
+      export TASKLIST_MANAGEMENT_API="http://$CAMUNDA_RELEASE_NAME-tasklist:9600/"
+      export GATEWAY_MANAGEMENT_API="http://$CAMUNDA_RELEASE_NAME-zeebe-gateway:9600/"
+      ```
+
+      </TabItem>
+
+   </Tabs>
+
+<!-- TODO: move the wait for as verify step and not single point -->
 
 1. **Trigger a backup `x` of Optimize. Using the [Optimize management backup API](/self-managed/operational-guides/backup-restore/optimize-backup.md).**
 
@@ -504,7 +545,7 @@ export GATEWAY_MANAGEMENT_API=
 
    By default, the indices are prefixed with `zeebe-record`. If you have configured a different prefix when configuring Elasticsearch / OpenSearch exporter in Zeebe, use this instead.
 
-   <Tabs>
+   <Tabs groupId="search-engine">
       <TabItem value="elasticsearch" label="Elasticsearch" default>
 
       [Elasticsearch documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-snapshot-create)
@@ -627,7 +668,7 @@ export GATEWAY_MANAGEMENT_API=
 <!-- TODO: double check consistent phrasing records vs indices -->
 3. **Wait until the backup `x` of the exported Zeebe records is complete before proceeding.**
 
-   <Tabs>
+   <Tabs groupId="search-engine">
       <TabItem value="elasticsearch" label="Elasticsearch" default>
 
       [Elasticsearch documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-snapshot-create)
@@ -828,7 +869,13 @@ If any of the steps above fail, you may have to restart with a new backup ID. En
 
 ## Restore process
 
+The restore process is divided in two parts:
+
+1. [Restore of Elasticsearch / OpenSearch](#restore-of-elasticsearch--opensearch)
+2. [Restore of the Zeebe Cluster](#restore-the-zeebe-cluster)
+
 To restore a Camunda 8 cluster from a backup, all components must be restored from their backup corresponding to the same backup ID.
+
 
 <!--  TODO: Explain why we have to restore certain items in a certain way. -->
 <!--  TODO: Differentiate between managed and helm chart deployed ElasticSearch -->
@@ -836,11 +883,51 @@ To restore a Camunda 8 cluster from a backup, all components must be restored fr
 <!--  TODO: Unify everthing within this single page on what you have to do. -->
 <!-- TODO: Intro on why we have to restore from empty state -->
 
-For the restore we assume we're starting off from a clean slate for all applications including Elasticsearch / OpenSearch. Meaning there is no previous persistent disk or state present and we're restoring everything from new.
+The restore process assumes a clean slate for all components, including Elasticsearch/OpenSearch. This means no prior persistent volumes or application state should exist—all data is restored from scratch.
 
-It's important to note that starting any application will automatically result in the seeding of the database or persistent disk. This will hinder the restore process and existing data will block a successful restore process.
+It is critical to ensure that no application is started before the restore is complete. Starting any component prematurely will automatically initialize its data store or persistent disk, potentially interfering with the restore and causing existing data to block a successful recovery.
 
-1. **Restore the Elasticsearch / OpenSearch indices that were previously backed up.**
+Additionally, backups must be restored using the exact Camunda version they were created with. As noted during the backup process, the version is embedded in the backup name. This is essential because starting an application with a mismatched version may result in startup failures due to schema incompatibilities with Elasticsearch/OpenSearch. Although schema changes are generally avoided in patch releases, they can still occur.
+
+When using the Camunda Helm Chart, this means figuring out the corresponding Helm chart version. For this the [Camunda 8 Helm Chart Version Matrix](https://helm.camunda.io/camunda-platform/version-matrix/) can help. Click on the `major.minor` release and then search for the backed up patch release of your component. The other components would typically fit in there as well.
+
+<details>
+   <summary>Example</summary>
+   <summary>
+
+   Our Backup looks as follows:
+
+   ```
+   camunda_optimize_1748937221_8.7.1_part_1_of_2
+   camunda_optimize_1748937221_8.7.1_part_2_of_2
+   camunda_operate_1748937221_8.7.2_part_1_of_6
+   camunda_operate_1748937221_8.7.2_part_2_of_6
+   camunda_operate_1748937221_8.7.2_part_3_of_6
+   camunda_operate_1748937221_8.7.2_part_4_of_6
+   camunda_operate_1748937221_8.7.2_part_5_of_6
+   camunda_operate_1748937221_8.7.2_part_6_of_6
+   camunda_tasklist_1748937221_8.7.2_part_1_of_6
+   camunda_tasklist_1748937221_8.7.2_part_2_of_6
+   camunda_tasklist_1748937221_8.7.2_part_3_of_6
+   camunda_tasklist_1748937221_8.7.2_part_4_of_6
+   camunda_tasklist_1748937221_8.7.2_part_5_of_6
+   camunda_tasklist_1748937221_8.7.2_part_6_of_6
+   camunda_zeebe_records_backup_1748937221
+   ```
+
+   This means, we know:
+
+   - Optimize: 8.7.1
+   - Operate / Tasklist: 8.7.2
+
+   Based on that we can look in the [matrix versioning of 8.7](https://helm.camunda.io/camunda-platform/version-matrix/camunda-8.7) and quickly see that the corresponding Camunda Helm Chart version is `12.0.2`. <!-- TODO: Align Camunda Helm Chart naming is it Camunda 8 Helm Chart and lower / upper case? -->
+
+   </summary>
+</details>
+
+
+
+### Restore of Elasticsearch / OpenSearch
 
    Prerequisite:
    - Elasticsearch / OpenSearch is set up and running with a clean slate and no data on it.
@@ -881,7 +968,7 @@ It's important to note that starting any application will automatically result i
 
    After you have figured out a backup ID that you want to restore, do so for Elasticsearch / OpenSearch for each available backup under the same backupID.
 
-   <Tabs>
+   <Tabs groupId="search-engine">
       <TabItem value="elasticsearch" label="Elasticsearch" default>
 
       [Elasticsearch documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-snapshot-restore)
@@ -923,9 +1010,15 @@ It's important to note that starting any application will automatically result i
    camunda_zeebe_records_backup_1748937221
    ```
 
-2. **Restore the Zeebe partitions for each Zeebe broker**
+### Restore the Zeebe Cluster
 
 <!-- TODO: 2. Confirm proper configuration (such as shards, replicas count, etc.) - if that really is important, how to figure that out just based on your backup?! -->
+
+   Camunda provides a standalone app which must be run on each node where a Zeebe broker will be running. This is a Spring Boot application similar to the broker and can run using the binary provided as part of the distribution. The app can be configured the same way a broker is configured - via environment variables or using the configuration file located in `config/application.yaml`.
+
+   :::note
+   When restoring, provide the same configuration (node id, data directory, cluster size, and replication count) as the broker that will be running in this node. The partition count must be same as in the backup.
+   :::
 
    <Tabs>
       <TabItem value="kubernetes" label="Kubernetes" default>
@@ -987,7 +1080,16 @@ It's important to note that starting any application will automatically result i
 
    If the restore fails, you can re-run the application after fixing the root cause.
 
-3. **Start all the Camunda 8 applications**
+   :::note
+
+   <!-- TODO: Restart policy adjustment would be dope but not supported in the Helm chart ... -->
+   <!-- Guess I'll have to implement more in the Helm chart ... -->
+
+   The default behavior for Kubernetes is to always restart failing pods. Meaning that you have observe the Zeebe brokers and may have to look at the logs with `--previous` if it already restarted.
+
+   :::
+
+### Start all Camunda 8 applications
 
    In the case of Kubernetes this would mean, to enable all applications again in the Helm chart and removing the command overwrite of Zeebe.
 
@@ -995,7 +1097,12 @@ It's important to note that starting any application will automatically result i
 
 ### How to figure out available backups
 
-The easiest way to figure out available backups is by utilizing the backup APIs of each component to list available backups. <!-- TODO: Link to subpages that are now becoming API focused -->
+If you have an active environment you can quickly figure out available backups utilizing the backups APIs for each component to list available backups.
+
+- [Operate](/self-managed/operational-guides/backup-restore/operate-tasklist-backup.md#get-backups-list-api)
+- [Optimize](/self-managed/operational-guides/backup-restore/optimize-backup.md#get-backup-info-api)
+- [Tasklist](/self-managed/operational-guides/backup-restore/operate-tasklist-backup.md#get-backups-list-api)
+- [Zeebe](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore#list-backups-api)
 
 This may not be possible in a lot of cases, especially if doing disaster recovery.
 
@@ -1003,9 +1110,7 @@ This may not be possible in a lot of cases, especially if doing disaster recover
 
 In that case, follow the described steps above and when you have your Elasticsearch / OpenSearch available, use the snapshot API to list available snapshots and correlate that to available snapshots in your backup bucket (AWS S3, Azure Store, Google GCS). It's important to have the same ID for all backups.
 
-<!-- TODO: Tabs: Elastic / OS with the call -->
-
-<Tabs>
+<Tabs groupId="search-engine">
    <TabItem value="elasticsearch" label="Elasticsearch" default>
 
       The following is using the [Elasticsearch snapshot API](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-snapshot-get) to list all registered snapshots in a repository.
@@ -1127,14 +1232,7 @@ So you always have Elasticsearch backups and Zeebe parititon backups.
 While e.g. for Backups I can say Backup of WebApps and Backup of Zeebe Cluster. I can't say the same in restore since it's overlapping.
 -->
 
----
-
-<!-- TODO: Add tab grouping to allow to switch for the whole page between elastic and opensearch -->
-
-<!-- TODO: add how to figure out what backups are available? -->
 
 <!-- TODO: Add Tabs for different usages Docker | Compose | Kubernetes (Helm Chart) | Local -->
 
-<!-- TODO: Troubleshooting page? -->
-
-<!-- TODO: Talk about k8s specifics, with snapshots of the disks and potential inconsistencies. -->
+<!-- TODO: check the sub-page (management api) links across the docs whether they need to be changed or need to point to the reworked backup page -->

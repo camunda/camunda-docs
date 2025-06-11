@@ -1,7 +1,7 @@
 ---
 id: optimize-backup
-title: Backup and restore Optimize data
-description: "How to perform a backup of Optimize data and restore the backup."
+title: Backup Management API - Optimize
+description: "Backup API to perform a backup of Optimize data."
 keywords: ["backup", "backups"]
 ---
 
@@ -14,15 +14,10 @@ camunda_optimize_123456_3.9.0_part_2_of_2
 
 Optimize provides an API to trigger a backup and retrieve information about a given backup's state. During backup creation Optimize can continue running. The backed up data can later be restored using the standard Elasticsearch snapshot restore API.
 
-<!-- TODO: Move Prerequisites to central page -->
-<!-- TODO: Move Config to config page. -->
-
 ## Create backup API
 
 Note that the backup API can be reached via the `/actuator` management port, which by default is `8092`.
 The configured context path does not apply to the management port.
-
-<!-- TODO: Context Path shit. While yes it's true from a local developer perspective. The helm chart defines also the base-path. -->
 
 The following endpoint can be used to trigger the backup process:
 
