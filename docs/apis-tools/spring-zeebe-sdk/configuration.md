@@ -335,15 +335,13 @@ camunda:
 
 This is used for all workers that do **not** set a task type via the annotation or set a job type as individual worker property.
 
-### Define job worker function parameters
+### Control variable fetching
 
-The way you define the job worker functions' method signature will also influence the way variables will be fetched.
+A job worker can submit a list of variables when activating jobs to limit the amount of data being sent.
 
-All listed methods to fetch variables will form a joint list of variables to fetch unless explicitly mentioned otherwise.
+There are implicit and explicit ways to control the variable fetching. While the implicit ones come with the job worker function parameters, the explicit ones are listed here.
 
-#### Explicit ways to control the variable fetching
-
-##### Provide a list of variables to fetch
+#### Provide a list of variables to fetch
 
 You can specify that you only want to fetch some variables (instead of all) when executing a job, which can decrease load and improve performance:
 
@@ -373,7 +371,7 @@ camunda:
 Using the properties-defined way of fetching variables will override **all** other detection strategies.
 :::
 
-##### Prevent the variable filtering
+#### Prevent the variable filtering
 
 You can force that all variables are loaded anyway:
 
@@ -383,9 +381,35 @@ public void handleJobFoo(final JobClient client, final ActivatedJob job, @Variab
 }
 ```
 
-#### Implicit ways to control the variable fetching
+You can also override the forced fetching of all variables in your properties:
 
-##### `ActivatedJob` parameter
+```yml
+camunda:
+  client:
+    worker:
+      override:
+        foo:
+          force-fetch-all-variables: true
+```
+
+### Define job worker function parameters
+
+The way you define the job worker functions' method signature will also influence the way variables will be fetched.
+
+All listed methods to fetch variables will form a joint list of variables to fetch unless explicitly mentioned otherwise.
+
+#### `JobClient` parameter
+
+The `JobClient` is also part of the native `JobHandler` functional interface:
+
+```java
+@JobWorker(type = "foo")
+public void handleJobFoo(final JobClient jobClient) {
+  // ...
+}
+```
+
+#### `ActivatedJob` parameter
 
 This will **prevent** the implicit variable fetching detection as you can retrieve variables in a programmatic way now:
 
@@ -398,7 +422,11 @@ public void handleJobFoo(final ActivatedJob job) {
 }
 ```
 
-##### Using `@Variable`
+:::note
+Only explicit variable fetching will be effective on using the `ActivatedJob` as parameter.
+:::
+
+#### Using `@Variable`
 
 By using the `@Variable` annotation, there is a shortcut to make variable retrieval simpler and only fetch certain variables, making them available as parameters:
 
@@ -420,6 +448,10 @@ public void handleJobFoo(final JobClient client, final ActivatedJob job, @Variab
 }
 ```
 
+:::note
+This will add the name of the variable to the joint list of variables to fetch.
+:::
+
 #### Using `@VariablesAsType`
 
 You can also use your own class into which the process variables are mapped to (comparable to `getVariablesAsType()` in the [Java client API](/apis-tools/java-client/index.md)). Therefore, use the `@VariablesAsType` annotation. In the example below, `MyProcessVariables` refers to your own class:
@@ -436,11 +468,13 @@ public ProcessVariables handleFoo(@VariablesAsType MyProcessVariables variables)
 }
 ```
 
-Here, the variables to fetch will be limited to the names of the fields of the used type. The `@JsonProperty` annotation is respected.
+:::note
+This will add the names of the fields of the used type to the joint list of variables to fetch. Jackson's `@JsonProperty` annotation is respected.
+:::
 
 #### Using `@CustomHeaders`
 
-You can use the `@CustomHeaders` annotation for a parameter to retrieve [custom headers](/components/concepts/job-workers.md) for a job:
+You can use the `@CustomHeaders` annotation for a `Map<String, String>` parameter to retrieve [custom headers](/components/concepts/job-workers.md) for a job:
 
 ```java
 @JobWorker(type = "foo")
@@ -448,6 +482,10 @@ public void handleFoo(@CustomHeaders Map<String, String> headers){
   // do whatever you need to do
 }
 ```
+
+:::note
+This will not have any effect on the variable fetching behavior.
+:::
 
 ### Completing jobs
 
@@ -704,9 +742,10 @@ This can also be configured as property:
 ```yaml
 camunda:
   client:
-    override:
-      foo:
-        stream-enabled: true
+    worker:
+      override:
+        foo:
+          stream-enabled: true
 ```
 
 To configure a global default, you can set:
