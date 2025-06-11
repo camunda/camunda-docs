@@ -203,7 +203,7 @@ You can also create a custom filter to listen to expired messages. This can be u
 
 For example, if you want to allow exporting only message events with `EXPIRED` intent, follow the steps below:
 
-1. Implement the `RecordFilter` interface:
+1.  Implement the `RecordFilter` interface:
 
         ```java
         public class MessageExpiredExporterFilter implements RecordFilter {
