@@ -10,7 +10,7 @@ After starting [Desktop Modeler](./index.md), you can model your first BPMN diag
 
 ![empty application](./img/empty.png)
 
-The BPMN diagram will now open with a start event. [Events](/components/modeler/bpmn/events.md) in BPMN represent things that happen. A process can react to events and emit events, for example:
+The BPMN diagram opens with a start event. [Events](/components/modeler/bpmn/events.md) in BPMN represent things that happen. A process can react to events and emit events, for example:
 
 ![new diagram](./img/new-diagram.png)
 
