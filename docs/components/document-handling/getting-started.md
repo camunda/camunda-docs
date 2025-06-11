@@ -27,7 +27,7 @@ Camunda SaaS manages storage for you by integrating with [**Google Cloud Platfor
 
 - Each cluster automatically includes one pre-configured storage bucket. Clusters hosted on GCP use a GCP bucket. Clusters hosted on AWS use an AWS S3 bucket.
 - **Maximum upload size per request (whether you're uploading one or multiple files in that request)**: 10 MB
-- **File expiration time/time-to-live (TTL) policy**: 30 days. A custom expiration date can be specified via the [document upload API](/apis-tools/camunda-api-rest/specifications/create-document.api.mdx).
+- **File expiration time/time-to-live (TTL) policy**: 30 days. A custom expiration date can be specified via metadata for each document. The [document upload API](/apis-tools/camunda-api-rest/specifications/create-document.api.mdx) allows this. For forms, this defaults to the cluster configuration as there is no set custom TTL for forms.
 
 ### Self-Managed
 
