@@ -134,7 +134,7 @@ Now, follow these steps to create the S3 bucket with versioning enabled:
 
 1. Open your terminal and ensure the AWS CLI is installed and configured.
 
-1. Run the following command to create an S3 bucket for storing your Terraform state. Make sure to use a unique bucket name and set the `AWS_REGION` environment variable beforehand:
+2. Run the following command to create an S3 bucket for storing your Terraform state. Make sure to use a unique bucket name and set the `AWS_REGION` environment variable beforehand:
 
    ```bash
    # Replace "my-rosa-tf-state" with your unique bucket name
@@ -162,14 +162,14 @@ Steps to create the S3 bucket with versioning enabled:
    aws s3api put-bucket-versioning --bucket "$S3_TF_BUCKET_NAME" --versioning-configuration Status=Enabled --region "$S3_TF_BUCKET_REGION"
    ```
 
-1. Secure the bucket by blocking public access:
+2. Secure the bucket by blocking public access:
 
    ```bash
    aws s3api put-public-access-block --bucket "$S3_TF_BUCKET_NAME" --public-access-block-configuration \
      "BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true" --region "$S3_TF_BUCKET_REGION"
    ```
 
-1. Verify versioning is enabled on the bucket:
+3. Verify versioning is enabled on the bucket:
 
    ```bash
    aws s3api get-bucket-versioning --bucket "$S3_TF_BUCKET_NAME" --region "$S3_TF_BUCKET_REGION"
@@ -185,9 +185,11 @@ We will leverage [Terraform modules](https://developer.hashicorp.com/terraform/l
 
 The [Camunda-provided module](https://github.com/camunda/camunda-deployment-references/tree/stable/8.7/aws/openshift/rosa-hcp-single-region/terraform/cluster/) is publicly available and serves as a robust starting point for deploying a Red Hat OpenShift cluster on AWS using a Hosted Control Plane. It is highly recommended to review this module before implementation to understand its structure and capabilities.
 
-Please note that this module is based on the official [ROSA HCP Terraform module documentation](https://docs.openshift.com/rosa/rosa_hcp/terraform/rosa-hcp-creating-a-cluster-quickly-terraform.html). It is presented as an example for running Camunda 8 in ROSA.
+:::note
+This module is based on the official [ROSA HCP Terraform module documentation](https://docs.openshift.com/rosa/rosa_hcp/terraform/rosa-hcp-creating-a-cluster-quickly-terraform.html). It is presented as an example for running Camunda 8 in ROSA.
 
 **For production or advanced use cases or custom setups, we encourage you to use the [official module](https://docs.openshift.com/rosa/rosa_hcp/terraform/rosa-hcp-creating-a-cluster-quickly-terraform.html)**, which includes vendor-supported features.
+:::
 
 #### Set up ROSA authentication
 
@@ -199,7 +201,7 @@ To set up a ROSA cluster, certain prerequisites must be configured on your AWS a
    aws sts get-caller-identity
    ```
 
-1. Check if the ELB service role exists, as if you have never created a load balancer in your AWS account, the role for Elastic Load Balancing (ELB) might not exist yet:
+2. Check if the ELB service role exists, as if you have never created a load balancer in your AWS account, the role for Elastic Load Balancing (ELB) might not exist yet:
 
    ```bash
    aws iam get-role --role-name "AWSServiceRoleForElasticLoadBalancing"
@@ -211,11 +213,11 @@ To set up a ROSA cluster, certain prerequisites must be configured on your AWS a
    aws iam create-service-linked-role --aws-service-name "elasticloadbalancing.amazonaws.com"
    ```
 
-1. Create a Red Hat Hybrid Cloud Console account if you don’t already have one: [Red Hat Hybrid Cloud Console](https://console.redhat.com/).
+3. Create a Red Hat Hybrid Cloud Console account if you don’t already have one: [Red Hat Hybrid Cloud Console](https://console.redhat.com/).
 
-1. Enable ROSA on your AWS account via the [AWS Console](https://console.aws.amazon.com/rosa/).
+4. Enable ROSA on your AWS account via the [AWS Console](https://console.aws.amazon.com/rosa/).
 
-1. Enable HCP ROSA on [AWS Marketplace](https://docs.openshift.com/rosa/cloud_experts_tutorials/cloud-experts-rosa-hcp-activation-and-account-linking-tutorial.html):
+5. Enable HCP ROSA on [AWS Marketplace](https://docs.openshift.com/rosa/cloud_experts_tutorials/cloud-experts-rosa-hcp-activation-and-account-linking-tutorial.html):
 
    - Navigate to the ROSA console: [AWS ROSA Console](https://console.aws.amazon.com/rosa).
    - Choose **Get started**.
@@ -224,9 +226,9 @@ To set up a ROSA cluster, certain prerequisites must be configured on your AWS a
 
    **Note**: Only a single AWS account can be associated with a Red Hat account for service billing.
 
-1. Install the ROSA CLI from the [OpenShift AWS Console](https://console.redhat.com/openshift/downloads#tool-rosa).
+6. Install the ROSA CLI from the [OpenShift AWS Console](https://console.redhat.com/openshift/downloads#tool-rosa).
 
-1. Get an API token, go to the [OpenShift Cluster Management API Token](https://console.redhat.com/openshift/token/rosa), click **Load token**, and save it. Use the token to log in with ROSA CLI:
+7. Get an API token, go to the [OpenShift Cluster Management API Token](https://console.redhat.com/openshift/token/rosa), click **Load token**, and save it. Use the token to log in with ROSA CLI:
 
    ```bash
    export RHCS_TOKEN="<yourToken>"
@@ -236,7 +238,7 @@ To set up a ROSA cluster, certain prerequisites must be configured on your AWS a
    rosa whoami
    ```
 
-1. Verify your AWS quotas:
+8. Verify your AWS quotas:
 
    ```bash
    rosa verify quota --region="$AWS_REGION"
@@ -244,22 +246,22 @@ To set up a ROSA cluster, certain prerequisites must be configured on your AWS a
 
    **Note**: This may fail due to organizational policies.
 
-1. Create the required account roles:
+9. Create the required account roles:
 
    ```bash
    rosa create account-roles --mode auto
    ```
 
-1. Verify your AWS quotas, and if quotas are insufficient, consult the following:
+10. Verify your AWS quotas, and if quotas are insufficient, consult the following:
 
-   - [Provisioned AWS Infrastructure](https://docs.openshift.com/rosa/rosa_planning/rosa-sts-aws-prereqs.html#rosa-aws-policy-provisioned_rosa-sts-aws-prereqs)
-   - [Required AWS Service Quotas](https://docs.openshift.com/rosa/rosa_planning/rosa-sts-required-aws-service-quotas.html#rosa-sts-required-aws-service-quotas)
+- [Provisioned AWS Infrastructure](https://docs.openshift.com/rosa/rosa_planning/rosa-sts-aws-prereqs.html#rosa-aws-policy-provisioned_rosa-sts-aws-prereqs)
+- [Required AWS Service Quotas](https://docs.openshift.com/rosa/rosa_planning/rosa-sts-required-aws-service-quotas.html#rosa-sts-required-aws-service-quotas)
 
-1. Ensure the `oc` CLI is installed. If it’s not already installed, follow the [official ROSA oc installation guide](https://docs.openshift.com/rosa/cli_reference/openshift_cli/getting-started-cli.html#cli-getting-started):
+11. Ensure the `oc` CLI is installed. If it’s not already installed, follow the [official ROSA oc installation guide](https://docs.openshift.com/rosa/cli_reference/openshift_cli/getting-started-cli.html#cli-getting-started):
 
-   ```bash
-   rosa verify openshift-client
-   ```
+```bash
+rosa verify openshift-client
+```
 
 #### Set up the ROSA cluster module
 
@@ -273,14 +275,14 @@ To set up a ROSA cluster, certain prerequisites must be configured on your AWS a
    cd cluster
    ```
 
-1. Review the module configuration file `config.tf`.
+2. Review the module configuration file `config.tf`.
    This configuration will use the previously created S3 bucket for storing the Terraform state file:
 
    ```hcl reference
    https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-private-link/aws/openshift/rosa-hcp-single-region/terraform/cluster/config.tf
    ```
 
-1. Edit the `cluster.tf` file in the same directory as your `config.tf` file:
+3. Edit the `cluster.tf` file in the same directory as your `config.tf` file:
 
    :::note Configure your cluster
 
@@ -313,7 +315,7 @@ To set up a ROSA cluster, certain prerequisites must be configured on your AWS a
 
    :::
 
-1. After setting up the terraform files and ensuring your AWS authentication is configured, initialize your Terraform project, then, initialize Terraform to [configure the backend](#create-an-s3-bucket-for-terraform-state-management) and download necessary provider plugins:
+4. After setting up the terraform files and ensuring your AWS authentication is configured, initialize your Terraform project, then, initialize Terraform to [configure the backend](#create-an-s3-bucket-for-terraform-state-management) and download necessary provider plugins:
 
    ```bash
    export S3_TF_BUCKET_KEY_CLUSTER="camunda-terraform/cluster.tfstate"
@@ -325,9 +327,9 @@ To set up a ROSA cluster, certain prerequisites must be configured on your AWS a
 
    Terraform will connect to the S3 bucket to manage the state file, ensuring remote and persistent storage.
 
-1. Configure user access to the cluster. By default, the user who creates the OpenShift cluster has administrative access. If you want to grant access to other users, follow the [Red Hat documentation for granting admin rights to users](https://docs.openshift.com/rosa/cloud_experts_tutorials/cloud-experts-getting-started/cloud-experts-getting-started-admin-rights.html) when the cluster is created.
+5. Configure user access to the cluster. By default, the user who creates the OpenShift cluster has administrative access. If you want to grant access to other users, follow the [Red Hat documentation for granting admin rights to users](https://docs.openshift.com/rosa/cloud_experts_tutorials/cloud-experts-getting-started/cloud-experts-getting-started-admin-rights.html) when the cluster is created.
 
-1. Customize the cluster setup. The module offers various input options that allow you to further customize the cluster configuration. For a comprehensive list of available options and detailed usage instructions, refer to the [ROSA module documentation](https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/aws/modules/rosa-hcp/README.md).
+6. Customize the cluster setup. The module offers various input options that allow you to further customize the cluster configuration. For a comprehensive list of available options and detailed usage instructions, refer to the [ROSA module documentation](https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/aws/modules/rosa-hcp/README.md).
 
 #### Define outputs
 
@@ -349,7 +351,7 @@ We strongly recommend managing sensitive information (for example, the administr
    terraform plan -out cluster.plan # describe what will be created
    ```
 
-1. After reviewing the plan, you can confirm and apply the changes.
+2. After reviewing the plan, you can confirm and apply the changes.
 
    ```bash
    terraform apply cluster.plan     # creates the resources
@@ -374,7 +376,7 @@ _Infrastructure diagram for a single region ROSA setup with VPN (click on the im
 AWS VPN technology is compatible with OpenVPN clients. It uses [x509 certificates](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/mutual.html) for mutual authentication and source verification.
 The encryption provided by these certificates ensures that traffic can securely transit over the internet to the AWS VPN endpoint, which performs NAT and routes the traffic directly into the private subnets. This VPN endpoint thus becomes the sole access point to the private cluster.
 
-#### Retrieve the VPC cluster id
+#### Retrieve the VPC cluster ID
 
 To create the VPN Endpoint in your cluster’s VPC, you need to retrieve the VPC ID using [Terraform outputs](https://developer.hashicorp.com/terraform/language/values/outputs) from the [OpenShift cluster module](#openshift-cluster-module-setup). Follow these steps:
 
@@ -389,7 +391,7 @@ To create the VPN Endpoint in your cluster’s VPC, you need to retrieve the VPC
    cd cluster
    ```
 
-1. Export the [VPC ID](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/vpc) to an environment variable:
+2. Export the [VPC ID](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/vpc) to an environment variable:
 
    ```bash
    export CLUSTER_VPC_ID="$(terraform output -raw vpc_id)"
@@ -414,7 +416,11 @@ Then, review `vpn.tf`, which describes the VPC Client Endpoint configuration:
 https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-private-link/aws/openshift/rosa-hcp-single-region/terraform/vpn/vpn.tf
 ```
 
-This VPN Client Endpoint follows [AWS best practices and constraints](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/what-is-best-practices.html): - Uses a client CIDR range that does not overlap with the VPC CIDR or any manually added VPN route table routes. - Implements [split-tunnel routing](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/split-tunnel-vpn.html), so only traffic destined for the VPC goes through the VPN, minimizing bandwidth use. - Supports IPv4 only and is bound to the VPC’s private subnets.
+This VPN Client Endpoint follows [AWS best practices and constraints](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/what-is-best-practices.html):
+
+- Uses a client CIDR range that does not overlap with the VPC CIDR or any manually added VPN route table routes.
+- Implements [split-tunnel routing](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/split-tunnel-vpn.html), so only traffic destined for the VPC goes through the VPN, minimizing bandwidth use.
+- Supports IPv4 only and is bound to the VPC’s private subnets.
 
 1. Set your Terraform state key and initialize Terraform with the S3 [backend](#create-an-s3-bucket-for-terraform-state-management) and download necessary provider plugins:
 
@@ -428,13 +434,13 @@ This VPN Client Endpoint follows [AWS best practices and constraints](https://do
 
    Terraform will connect to the S3 bucket to manage the state file, ensuring remote and persistent storage.
 
-1. For each client connecting to the cluster, assign a unique name in `client_key_names` to simplify certificate revocation.
+2. For each client connecting to the cluster, assign a unique name in `client_key_names` to simplify certificate revocation.
 
-1. By default, VPN access is allowed from any IP address. You may restrict access by adjusting the `vpn_allowed_cidr_blocks` variable.
+3. By default, VPN access is allowed from any IP address. You may restrict access by adjusting the `vpn_allowed_cidr_blocks` variable.
 
-1. Network designs vary; please review and adjust the configuration to fit your topology.
+4. Network designs vary; review and adjust the configuration to fit your topology.
 
-1. Customize the VPN module by referring to the [VPN module documentation](https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-private-link/aws/modules/vpn/README.md).
+5. Customize the VPN module by referring to the [VPN module documentation](https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-private-link/aws/modules/vpn/README.md).
 
 #### Outputs
 
@@ -451,7 +457,7 @@ The module stores certificates and VPN client configurations in the Terraform st
     -var vpc_id="$CLUSTER_VPC_ID"
    ```
 
-1. Review and apply the plan to create the resources:
+2. Review and apply the plan to create the resources:
 
    ```bash
    terraform apply vpn.plan     # creates the resources
@@ -480,70 +486,70 @@ This section applies if you have previously created a private cluster and want t
    # ./camunda-deployment-references/aws/openshift/rosa-hcp-single-region/terraform/vpn/
    ```
 
-1. Generate your client’s VPN configuration file. This file is compatible with [OpenVPN (ovpn)](https://openvpn.net/) format:
+2. Generate your client’s VPN configuration file. This file is compatible with [OpenVPN (ovpn)](https://openvpn.net/) format:
 
    ```bash reference
    https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-private-link/aws/openshift/rosa-hcp-single-region/procedure/gather-vpn-config.sh
    ```
 
-1. Import the generated configuration file (`my-client.ovpn`) into an OpenVPN client:
+3. Import the generated configuration file (`my-client.ovpn`) into an OpenVPN client:
 
    - _(preferred)_ [Official AWS VPN Client](https://docs.aws.amazon.com/vpn/latest/clientvpn-user/connect-aws-client-vpn-connect.html)
    - [Other OpenVPN Clients](https://docs.aws.amazon.com/vpn/latest/clientvpn-user/connect.html)
 
-1. Once the VPN client is connected, you will have secure access to the VPC’s private network.
+4. Once the VPN client is connected, you will have secure access to the VPC’s private network.
 
 ### Access the created OpenShift cluster
 
 You can access the created OpenShift cluster using the following steps:
 
-1.  Verify that you are in the [OpenShift clusters module](#openshift-clusters-module-setup) directory `clusters`:
+1. Verify that you are in the [OpenShift clusters module](#openshift-clusters-module-setup) directory `clusters`:
 
-    ```bash
-    pwd
+   ```bash
+   pwd
 
-    # Example output:
-    # ./camunda-deployment-references/aws/openshift/rosa-hcp-single-region/terraform/cluster/
-    ```
+   # Example output:
+   # ./camunda-deployment-references/aws/openshift/rosa-hcp-single-region/terraform/cluster/
+   ```
 
-1.  Set up the required environment variables from the OpenShift terraform module:
+2. Set up the required environment variables from the OpenShift terraform module:
 
-    ```bash reference
-    https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-private-link/aws/openshift/rosa-hcp-single-region/procedure/gather-cluster-login-id.sh
-    ```
+   ```bash reference
+   https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-private-link/aws/openshift/rosa-hcp-single-region/procedure/gather-cluster-login-id.sh
+   ```
 
-1.  If you want to give cluster administrator access to the created user, this is not required for a standard installation but can be useful for debugging:
+3. If you want to give cluster administrator access to the created user, this is not required for a standard installation but can be useful for debugging:
 
-    ```shell
-    rosa grant user cluster-admin --cluster="$CLUSTER_NAME" --user="$CLUSTER_ADMIN_USERNAME"
-    ```
+   ```shell
+   rosa grant user cluster-admin --cluster="$CLUSTER_NAME" --user="$CLUSTER_ADMIN_USERNAME"
+   ```
 
-1.  Log in to the OpenShift cluster:
+4. Log in to the OpenShift cluster:
 
-    ```shell
-    oc login -u "$CLUSTER_ADMIN_USERNAME" "$CLUSTER_API_URL" -p "$CLUSTER_ADMIN_PASSWORD"
-    ```
+   ```shell
+   oc login -u "$CLUSTER_ADMIN_USERNAME" "$CLUSTER_API_URL" -p "$CLUSTER_ADMIN_PASSWORD"
+   ```
 
-    Clean up and configure the kubeconfig context:
+   Clean up and configure the kubeconfig context:
 
-    ```shell
-    oc config rename-context $(oc config current-context) "$CLUSTER_NAME"
-    oc config use-context "$CLUSTER_NAME"
-    ```
+   ```shell
+   oc config rename-context $(oc config current-context) "$CLUSTER_NAME"
+   oc config use-context "$CLUSTER_NAME"
+   ```
 
-1.  Verify your connection to the cluster with `oc`:
+5. Verify your connection to the cluster with `oc`:
 
-    ```shell
-    oc get nodes
-    ```
+   ```shell
+   oc get nodes
+   ```
 
-1.  Create a project for Camunda using `oc`:
+6. Create a project for Camunda using `oc`:
 
-    ```shell
-    oc new-project camunda
-    ```
+   ```shell
+   oc new-project camunda
+   ```
 
-    In the remainder of the guide, the `camunda` namespace part of the camunda project will be referenced to create the required resources in the Kubernetes cluster, such as secrets or one-time setup jobs.
+   In the remainder of the guide, the `camunda` namespace part of the Camunda project will be referenced to create the required resources in the Kubernetes cluster, such as secrets or one-time setup jobs.
 
 ## 3. Install Camunda 8 using the Helm chart
 
