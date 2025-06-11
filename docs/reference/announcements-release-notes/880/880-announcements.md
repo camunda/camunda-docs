@@ -9,13 +9,16 @@ import DeployDiagramImg from '../../img/deploy-diagram-modal.png';
 
 Supported environment changes and breaking changes or deprecations for the Camunda 8.8 release are summarized below.
 
-Please read out [release notes](/reference/announcements-release-notes/880/880-release-notes.md) to learn about all new features and enhancements.
-
-Please visit our [quality board](https://github.com/orgs/camunda/projects/187/views/15) to get an overview of known bugs by component and severity.
-
 | Scheduled release date | Scheduled end of maintenance | Release notes | Blog |
 | :--------------------- | :--------------------------- | :------------ | :--- |
 | 14 October 2025        | 13 April 2027                | -             | -    |
+
+:::tip Release notes and quality board
+
+- See [release notes](/reference/announcements-release-notes/880/880-release-notes.md) to learn more about new features and enhancements.
+- Refer to the [quality board](https://github.com/orgs/camunda/projects/187/views/15) for an overview of known bugs by component and severity.
+
+:::
 
 ## Changes in supported environments
 
