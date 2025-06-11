@@ -91,6 +91,18 @@ module.exports = {
     },
     {
       type: "category",
+      label: "Agentic orchestration",
+      link: {
+        type: "doc",
+        id: "components/agentic-orchestration/agentic-orchestration",
+      },
+      items: [
+            "components/agentic-orchestration/ao-design",
+            "components/agentic-orchestration/ai-agents",
+          ],
+    },
+    {
+      type: "category",
       label: "Document handling",
       link: {
         type: "doc",

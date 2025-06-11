@@ -1115,6 +1115,17 @@ h4 .badge--long:nth-of-type(1) {
   margin-bottom: 0;
 }
 
+h4 .badge--medium {
+  margin-bottom: 0;
+  font-size: 12px;
+  margin-left: 5px;
+}
+
+h4 .badge--medium:nth-of-type(1) {
+  margin-left: 5px;
+  margin-bottom: 0;
+}
+
 /* API reference modifications for new H3 style */
 h4.openapi-security__summary-header {
   margin-top: 0;
@@ -1275,6 +1286,25 @@ ul ul .table-of-contents__link--active {
   font-weight: 500;
 }
 
+.table-callout {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.table-callout th,
+.table-callout td {
+  border-left: 0;
+  border-right: 0;
+  border-top: 1px solid var(--ifm-table-border-color);
+  border-bottom: 1px solid var(--ifm-table-border-color);
+  padding: var(--ifm-table-cell-padding);
+}
+
+.table-callout thead tr {
+  border-left: 0;
+  border-right: 0;
+}
+
 /* Glossary page links */
 .alphabet-navigation {
   display: flex;
@@ -1306,3 +1336,4 @@ ul ul .table-of-contents__link--active {
   opacity: 0.5;
   cursor: default;
 }
+
