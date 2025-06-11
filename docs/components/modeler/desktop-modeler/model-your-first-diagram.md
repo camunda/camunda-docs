@@ -24,7 +24,7 @@ Above, you can see that elements that support different types can be reconfigure
 
 ![task configuration](img/element-configuration.png)
 
-You might also [orchestrate human tasks](/guides/getting-started-orchestrate-human-tasks.md). Review the [complete list of supported BPMN elements](/components/modeler/bpmn/bpmn-coverage.md)
+You can also [orchestrate human tasks](/guides/getting-started-orchestrate-human-tasks.md). Review the [complete list of supported BPMN elements](/components/modeler/bpmn/bpmn-coverage.md)
 
 4. Open the properties panel by selecting the light gray arrow on the right side of the page halfway down the canvas. Here, you can edit the properties of the currently selected element:
 
