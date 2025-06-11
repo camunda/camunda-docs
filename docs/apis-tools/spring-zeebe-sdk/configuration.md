@@ -394,9 +394,9 @@ camunda:
 
 ### Define job worker function parameters
 
-The way you define the job worker functions' method signature will also influence the way variables will be fetched.
+The method signature you use to define job worker functions will affect how variables are retrieved.
 
-All listed methods to fetch variables will form a joint list of variables to fetch unless explicitly mentioned otherwise.
+Unless stated otherwise, all specified methods for fetching variables will be combined into a single list of variables to retrieve.
 
 #### `JobClient` parameter
 
