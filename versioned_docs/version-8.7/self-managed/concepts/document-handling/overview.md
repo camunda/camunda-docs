@@ -26,4 +26,4 @@ Step through all of these capabilities in the [use cases section](/components/do
 You can configure document storage based on your deployment setup and production requirements.
 Supported options include an external cloud storage such as Google Cloud Platform (GCP) or AWS S3, local file storage or an in-memory storage.
 
-Learn how to set it up in the [storage configuration guide](/self-managed/document-handling/configuration/overview.md).
+Learn how to set it up in the [storage configuration guide](/self-managed/concepts/document-handling/configuration/overview.md).
