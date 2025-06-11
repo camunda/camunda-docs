@@ -4,7 +4,10 @@ title: "Exporters"
 description: "As Zeebe processes jobs and processes, or performs internal maintenance, it generates an ordered stream of records."
 ---
 
-As Zeebe processes jobs and processes, or performs internal maintenance (e.g. raft failover), it generates an ordered stream of records.
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+As Zeebe processes jobs and processes, or performs internal maintenance (for example, raft failover), it generates an ordered stream of records.
 
 :::note
 
@@ -14,8 +17,7 @@ Exporters are not available in Camunda 8 Software-as-a-Service (SaaS).
 
 ![record-stream](img/exporters-stream.png)
 
-While the clients provide no way to inspect this stream directly, Zeebe can load
-and configure user code that can process each record in the form of an exporter.
+While the clients provide no way to inspect this stream directly, Zeebe can load and configure user code that can process each record in the form of an exporter.
 
 An **exporter** provides a single entry point to process every record written on a stream.
 
@@ -24,32 +26,24 @@ An **exporter** provides a single entry point to process every record written on
 
 Zeebe only loads exporters configured through the main Zeebe YAML configuration file.
 
-Once an exporter is configured, the next time Zeebe starts, the exporter
-starts receiving records. Note that it is only guaranteed to see records
+Once an exporter is configured, the next time Zeebe starts, the exporter starts receiving records. Note that it is only guaranteed to see records
 produced from that point on.
 
-Find a reference implementation in the form of the Zeebe-maintained
-[Elasticsearch exporter](https://github.com/camunda/camunda/tree/main/zeebe/exporters/elasticsearch-exporter).
+Find a reference implementation in the form of the Zeebe-maintained [Elasticsearch exporter](https://github.com/camunda/camunda/tree/main/zeebe/exporters/elasticsearch-exporter).
 
-The main impact exporters have on a Zeebe cluster is that they remove the burden
-of persisting data indefinitely.
+The main impact exporters have on a Zeebe cluster is that they remove the burden of persisting data indefinitely.
 
-Once data is not needed by Zeebe anymore, it queries its exporters to
-know if it can be safely deleted, and if so, permanently erases it, thereby
-reducing disk usage.
+Once data is not needed by Zeebe anymore, it queries its exporters to know if it can be safely deleted, and if so, permanently erases it, thereby reducing disk usage.
 
 :::note
 If no exporters are configured, Zeebe automatically erases data when it is not necessary anymore. If you need historical data, you **must** configure an exporter to stream records into your external data warehouse.
 :::
 
-Regardless of how an exporter is loaded (whether through an external JAR or not),
-all exporters interact in the same way with the broker, which is defined by the
-[exporter interface](https://github.com/camunda/camunda/blob/main/zeebe/exporter-api/src/main/java/io/camunda/zeebe/exporter/api/Exporter.java).
+Regardless of how an exporter is loaded (whether through an external JAR or not), all exporters interact in the same way with the broker, which is defined by the [exporter interface](https://github.com/camunda/camunda/blob/main/zeebe/exporter-api/src/main/java/io/camunda/zeebe/exporter/api/Exporter.java).
 
 ## Loading
 
-Once configured, exporters are loaded as part of the broker startup phase, before
-any processing is done.
+Once configured, exporters are loaded as part of the broker startup phase, before any processing is done.
 
 During the loading phase, the configuration for each exporter is validated, such that the broker will not start if:
 
@@ -58,11 +52,9 @@ During the loading phase, the configuration for each exporter is validated, such
 - An exporter points to a non-existent/non-instantiable class
 - An exporter instance throws an exception in its `Exporter#configure` method.
 
-The last point is there to provide individual exporters to perform lightweight
-validation of their configuration (e.g. fail if missing arguments). For this validation call, the given context will report a partition ID (via `Context#getPartitionId()`) with a pseudo-null value, i.e. `Context#NULL_PARTITION_VALUE`). However, at runtime, it will report the appropriate partition ID on which the exporter is running.
+The last point is there to provide individual exporters to perform lightweight validation of their configuration (for example, fail if missing arguments). For this validation call, the given context will report a partition ID (via `Context#getPartitionId()`) with a pseudo-null value, `Context#NULL_PARTITION_VALUE`). However, at runtime, it will report the appropriate partition ID on which the exporter is running.
 
-One caveat is that an instance of an exporter is created and immediately thrown away. Therefore, exporters should not perform any computationally
-heavy work during instantiation/configuration.
+One caveat is that an instance of an exporter is created and immediately thrown away. Therefore, exporters should not perform any computationally heavy work during instantiation/configuration.
 
 ### Metrics
 
@@ -90,45 +82,33 @@ When an exporter is validated, it is only provided with an in-memory register wh
 :::note
 Zeebe creates a single isolated class loader for every JAR referenced by exporter configurations. If the same JAR is reused to define different exporters, these will share the same class loader.
 
-Therefore, different exporters can depend on the same third-party libraries without worrying about versions or class
-name collisions.
+Therefore, different exporters can depend on the same third-party libraries without worrying about versions or class name collisions.
 
 Additionally, exporters use the system class loader for system classes, or classes packaged as part of the Zeebe JAR.
 :::
 
-Exporter-specific configuration is handled through the exporter's `[exporters.args]`
-nested map. This provides a `Map<String, Object>` passed directly
-in the form of a [configuration](https://github.com/camunda/camunda/tree/main/zeebe/exporter-api/src/main/java/io/camunda/zeebe/exporter/api/context/Configuration.java) object when the broker calls the `Exporter#configure(Configuration)` method.
+Exporter-specific configuration is handled through the exporter's `[exporters.args]` nested map. This provides a `Map<String, Object>` passed directly in the form of a [configuration](https://github.com/camunda/camunda/tree/main/zeebe/exporter-api/src/main/java/io/camunda/zeebe/exporter/api/context/Configuration.java) object when the broker calls the `Exporter#configure(Configuration)` method.
 
-Configuration occurs at two different phases: during the broker startup phase, and
-once every time a leader is elected for a partition.
+Configuration occurs at two different phases: during the broker startup phase, and once every time a leader is elected for a partition.
 
 ## Processing
 
 At any given point, there is exactly one leader node for a given partition.
 
-Whenever a node becomes the leader for a partition, it runs an instance of an
-[exporter stream processor](https://github.com/camunda/camunda/tree/main/zeebe/broker/src/main/java/io/camunda/zeebe/broker/exporter/stream/ExporterDirector.java).
+Whenever a node becomes the leader for a partition, it runs an instance of an [exporter stream processor](https://github.com/camunda/camunda/tree/main/zeebe/broker/src/main/java/io/camunda/zeebe/broker/exporter/stream/ExporterDirector.java).
 
-This stream processor creates exactly one instance of each configured exporter,
-and forwards every record written on the stream to each of these in turn.
+This stream processor creates exactly one instance of each configured exporter, and forwards every record written on the stream to each of these in turn.
 
 :::note
 This implies there will be exactly one instance of every exporter for every partition. If you have four partitions, and at least four threads for processing, there are potentially four instances of your exporter exporting simultaneously.
 :::
 
-Zeebe only guarantees at-least-once semantics. That is, a record is seen at least once by an exporter, maybe more. Cases where this may happen
-include:
+Zeebe only guarantees at-least-once semantics. That is, a record is seen at least once by an exporter, maybe more. Cases where this may happen include:
 
 - During reprocessing after raft failover (i.e. new leader election)
 - On error if the position is not yet updated
 
-To reduce the amount of duplicate records an exporter processes, the stream
-processor keeps track of the position of the last successfully exported record
-for every single exporter. The position is sufficient since a stream is an ordered
-sequence of records whose position is monotonically increasing. This position is
-set by the exporter once it can guarantee a record is successfully
-updated.
+To reduce the amount of duplicate records an exporter processes, the stream processor keeps track of the position of the last successfully exported record for every single exporter. The position is sufficient since a stream is an ordered sequence of records whose position is monotonically increasing. This position is set by the exporter once it can guarantee a record is successfully updated.
 
 :::note
 Although Zeebe tries to reduce the amount of duplicate records an exporter must handle, it is likely it will have to. Therefore, it is necessary that export operations be idempotent. This can be implemented either in the exporter itself, but if it exports to an external system, it is recommended you perform deduplication there to reduce the load on Zeebe. Refer to the exporter-specific documentation for how this is meant to be achieved.
@@ -136,24 +116,195 @@ Although Zeebe tries to reduce the amount of duplicate records an exporter must 
 
 ### Error handling
 
-If an error occurs during the `Exporter#open(Context)` phase, the stream
-processor fails and is restarted, potentially fixing the error. Worst case
-scenario, this means no exporter runs until these errors stop.
+If an error occurs during the `Exporter#open(Context)` phase, the stream processor fails and is restarted, potentially fixing the error. Worst case scenario, this means no exporter runs until these errors stop.
 
-If an error occurs during the `Exporter#close` phase, it is logged, but will
-still allow other exporters to gracefully finish their work.
+If an error occurs during the `Exporter#close` phase, it is logged, but will still allow other exporters to gracefully finish their work.
 
-If an error occurs during processing, we continuously retry the same record until
-no error is produced. Worst case scenario, this means a failing exporter could bring
-all exporters to a halt. Currently, exporter implementations are expected to
-implement their own retry/error handling strategies, though this may change in the
+If an error occurs during processing, we continuously retry the same record until no error is produced. Worst case scenario, this means a failing exporter could bring
+all exporters to a halt. Currently, exporter implementations are expected to implement their own retry/error handling strategies, though this may change in the
 future.
 
 ### Performance impact
 
-Zeebe naturally incurs a performance impact for each loaded exporter. A slow
-exporter slows down all other exporters for a given partition, and in the
-worst case, could completely block a thread.
+Zeebe naturally incurs a performance impact for each loaded exporter. A slow exporter slows down all other exporters for a given partition, and in the worst case, could completely block a thread.
 
-It's therefore recommended to keep exporters as simple as possible, and perform
-any data enrichment or transformation through the external system.
+It's therefore recommended to keep exporters as simple as possible, and perform any data enrichment or transformation through the external system.
+
+## Custom exporter to filter specific records
+
+The exporter interface allows you to filter specific records, using the [`Context#RecordFilter`](https://github.com/camunda/camunda/blob/5e554728eaf1122962fe9833dc9e91ff1fb5a087/zeebe/exporter-api/src/main/java/io/camunda/zeebe/exporter/api/context/Context.java#L67) interface.
+
+- This interface provides methods to filter records based on their record type, value type, and intent.
+- You can find valid record types and value types in the [protocol definition](https://github.com/camunda/camunda/blob/stable/8.7/zeebe/protocol/src/main/resources/protocol.xml), and intents in the [intent enum class](https://github.com/camunda/camunda/blob/stable/8.7/zeebe/protocol/src/main/java/io/camunda/zeebe/protocol/record/intent/Intent.java).
+
+For example, you can create a custom exporter that only exports events, job value types, and with `CREATED` intent.
+
+```java
+public class CustomExporterFilter implements RecordFilter {
+
+  @Override
+  public boolean acceptType(RecordType recordType) {
+    return recordType == RecordType.EVENT;
+  }
+
+  @Override
+  public boolean acceptValue(ValueType valueType) {
+    return valueType == ValueType.JOB;
+  }
+
+  @Override
+  public boolean acceptIntent(Intent intent) {
+    return intent == JobIntent.CREATED;
+  }
+}
+```
+
+You can then set this filter in the `Exporter#configure` method of your custom exporter:
+
+```java
+public class CustomExporter implements Exporter {
+
+  // ...
+  private Controller controller;
+
+  @Override
+  public void open(final Controller controller) {
+    this.controller = controller;
+    // ...
+  }
+
+  @Override
+  public void configure(final Context context) {
+    // ...
+    context.setFilter(new CustomExporterFilter());
+  }
+
+  @Override
+  public void export(final Record<?> record) {
+    // ...
+    // after handling the record, acknowledge the position
+    controller.updateLastExportedRecordPosition(record.getPosition());
+  }
+
+  // ...
+}
+```
+
+:::note
+
+- After handling the record, you must acknowledge the position by calling `controller.updateLastExportedRecordPosition(record.getPosition())`. If the position is not acknowledged, the log compaction does not occur and results in out of disk space.
+- Filters are applied as an `AND` condition. This means all conditions must be met for a record to be accepted by the exporter.
+
+:::
+
+### Listen to expired messages with a custom filter
+
+You can also create a custom filter to listen to expired messages. This can be useful if you want to take specific actions on messages that have expired, such as logging them or re-publishing them.
+
+For example, if you want to allow exporting only message events with `EXPIRED` intent, follow the steps below:
+
+1. Implement the `RecordFilter` interface:
+
+        ```java
+        public class MessageExpiredExporterFilter implements RecordFilter {
+
+        @Override
+        public boolean acceptType(RecordType recordType) {
+            return recordType == RecordType.EVENT;
+        }
+
+        @Override
+        public boolean acceptValue(ValueType valueType) {
+            return valueType == ValueType.MESSAGE;
+        }
+
+        @Override
+        public boolean acceptIntent(Intent intent) {
+            if (intent instanceof MessageIntent messageIntent) {
+            return messageIntent == MessageIntent.EXPIRED;
+            }
+
+            return true;
+        }
+        }
+        ```
+
+        :::note
+        This filter will only accept records of type `EVENT`, value type `MESSAGE`, and intent `EXPIRED`. To accept more record types, value types, and intents, modify the `acceptType`, `acceptValue`, and `acceptIntent` methods accordingly.
+        :::
+
+2. Set the `MessageExpiredExporterFilter` filter in the `Exporter#configure` method of your custom exporter:
+
+        ```java
+        public class MessageExpiredExporter implements Exporter {
+
+        // ...
+        private Controller controller;
+
+        @Override
+        public void open(final Controller controller) {
+            this.controller = controller;
+            // ...
+        }
+
+        @Override
+        public void configure(final Context context) {
+            // ...
+            context.setFilter(new MessageExpiredExporterFilter());
+        }
+
+        @Override
+        public void export(final Record<?> record) {
+            // ...
+            // after handling the record, acknowledge the position
+            controller.updateLastExportedRecordPosition(record.getPosition());
+        }
+
+        // ...
+        }
+        ```
+
+        :::info
+        Messages with zero TTL will also be exported with this filter. If a message with zero TTL is republished after expiration, it will immediately expire again, causing the exporter to receive it again.
+
+        This creates an infinite loop of republishing and expiring the same message, potentially leading to the engine blocked from processing other records. To avoid this, check the message TTL before republishing it.
+        :::
+
+3. (Optional) By default, the exporter will not receive the full message body, only the message key with the empty message body is exported. To receive the full message body with the expired message, enable it via YAML configuration or environment variable.
+
+        <Tabs groupId="featured" defaultValue="envVars" queryString values={
+        [
+        {label: 'Environment variables', value: 'envVars' },
+        {label: 'YAML configuration', value: 'valuesYaml' }
+        ]}>
+        <TabItem value="envVars">
+
+        ```sh
+        ZEEBE_BROKER_EXPERIMENTAL_FEATURES_ENABLEMESSAGEBODYONEXPIRED=true
+        ```
+
+        </TabItem>
+        <TabItem value="valuesYaml">
+
+        ```yaml
+        zeebe:
+        broker:
+            experimental:
+            features:
+                enableMessageBodyOnExpired: true
+        ```
+
+        </TabItem>
+        </Tabs>
+
+        :::caution
+
+        Enabling the full message body for expired messages can have an impact on the performance of expiring messages. 
+        
+        - Enabling this feature flag means every deleted message is appended to the Zeebe engine's record stream with the full message body.
+
+        - As each expired message now carries its entire message payload, the “write buffer” used by the expiration checker will reach capacity faster. This means the expiration checker needs more time (or more roundtrips) to expire the same number of messages.
+
+        - This can result in a growing state of the messages waiting to be expired. See [message TTL checker configuration](https://github.com/camunda/camunda/blob/main/dist/src/main/config/broker.yaml.template#L1223) for more control over the checker's behavior.
+
+        :::
