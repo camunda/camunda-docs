@@ -88,8 +88,6 @@ Learn more about different use cases and scenarios for configuring Camunda 8 bey
 </div>
 </div>
 
-
-
 ## Concepts
 
 ## Components
