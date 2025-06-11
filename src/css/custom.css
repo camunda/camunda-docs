@@ -506,7 +506,7 @@ body {
 
 [data-theme="dark"] .button--hero--topic:hover {
   background-color: #ffffff;
-  color: var(--ifm-color-black)!important;
+  color: var(--ifm-color-black) !important;
   border: 1px solid #171c29;
 }
 
