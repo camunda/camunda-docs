@@ -150,7 +150,7 @@ RewriteRule ^optimize/3.11.0/self-managed/(.*)$ /docs/8.3/self-managed/$1 [R=301
 #---------------------------------------------------------------------------------
 
 # Remove Amazon Marketplace
-RewriteRule ^docs/next/self-managed/setup/deploy/amazon/aws-marketplace/?$ /docs/next/self-managed/setup/deploy/amazon/amazon-eks/ [R=301,L]
+RewriteRule ^docs/next/self-managed/setup/deploy/amazon/aws-marketplace/?$ /docs/next/self-managed/setup/deploy/amazon/amazon-eks/ [R=301,L] 
 
 # Move doc handling SM to Concepts
 RewriteRule ^docs/next/self-managed/document-handling/(.*)$ /docs/next/self-managed/concepts/document-handling/$1 [R=301,L]
