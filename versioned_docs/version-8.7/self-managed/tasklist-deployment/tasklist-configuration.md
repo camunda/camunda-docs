@@ -449,6 +449,6 @@ Read more about the procedure and the need to trigger it through Camunda compone
 
 Tasklist must be configured with the repository name:
 
-| Name                                    | Description                       | Default value         |
-| --------------------------------------- | --------------------------------- | --------------------- |
-| camunda.tasklist.backup.repositoryName   | ES / OS snapshot repository name  | -                     |
+| Name                                   | Description                      | Default value |
+| -------------------------------------- | -------------------------------- | ------------- |
+| camunda.tasklist.backup.repositoryName | ES / OS snapshot repository name | -             |

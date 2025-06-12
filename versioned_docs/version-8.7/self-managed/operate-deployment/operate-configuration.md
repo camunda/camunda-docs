@@ -492,6 +492,6 @@ Read more about the procedure and the need to trigger it through Camunda compone
 
 Operate must be configured with the repository name:
 
-| Name                                    | Description                       | Default value         |
-| --------------------------------------- | --------------------------------- | --------------------- |
-| camunda.operate.backup.repositoryName   | ES / OS snapshot repository name  | -                     |
+| Name                                  | Description                      | Default value |
+| ------------------------------------- | -------------------------------- | ------------- |
+| camunda.operate.backup.repositoryName | ES / OS snapshot repository name | -             |
