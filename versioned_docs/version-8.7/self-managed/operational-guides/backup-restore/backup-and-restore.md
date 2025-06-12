@@ -19,11 +19,11 @@ In case of failures that lead to data loss, you can recover the cluster from a b
 
 ## Motive
 
-Camunda 8 components - Zeebe, Operate, Tasklist, and Optimize - store data in various formats and across multiple indices in Elasticsearch / OpenSearch. Because of this distributed and interdependent architecture, creating a consistent and reliable backup requires coordination between the components themselves.
+Camunda 8 components - Zeebe, Operate, Tasklist, and Optimize - store data in various formats and across multiple indices in Elasticsearch / OpenSearch. Because of this distributed and interdependent architecture, creating a consistent and reliable backup **requires coordination** between the components themselves.
 
-For example, using Elasticsearch / OpenSearch’s native snapshot capabilities directly will not produce a coherent backup. This is because Operate, Tasklist, and Optimize each manage their data across multiple indices, which cannot be reliably captured together without involvement from the components that understand their structure. For this reason, backups must be initiated through each component individually, using their built-in backup functionality.
+For example, using Elasticsearch / OpenSearch’s native snapshot capabilities directly will not produce a coherent backup. This is because Operate, Tasklist, and Optimize each manage their data across multiple indices, which cannot be reliably captured together without involvement from the components that understand their structure. For this reason, **backups must be** initiated through each component individually, using **their built-in backup functionality**.
 
-The same principle applies to Zeebe. Backups must be scheduled through Zeebe to ensure a consistent snapshot of all partition data. Simply taking a disk-level snapshot of each Zeebe broker is insufficient, as the brokers operate independently and data may not be aligned across them at the time of the snapshot. Since disk-level backups are not synchronized, this can lead to inconsistencies and invalid recovery points.
+The same principle applies to Zeebe. **Backups must be** scheduled through Zeebe to ensure a **consistent snapshot** of all partition data. Simply taking a disk-level snapshot of each Zeebe broker is insufficient, as the brokers operate independently and data may not be aligned across them at the time of the snapshot. Since disk-level backups are not synchronized, this can lead to inconsistencies and invalid recovery points.
 
 A complete backup of a Camunda 8 cluster includes:
 
@@ -31,7 +31,7 @@ A complete backup of a Camunda 8 cluster includes:
 - Exported Zeebe-related indices from Elasticsearch/OpenSearch
 - A Zeebe broker partition backup (triggered through its API)
 
-Because the data across these systems is interdependent, all components must be backed up as part of the **same backup window**. Backups taken independently at different times may not align and could result in an unreliable restore point.
+Because the data across these systems is interdependent, **all components must be backed up** as part of the **same backup window**. Backups taken independently at different times may not align and could result in an unreliable restore point.
 
 :::warning
 To ensure a consistent backup, follow the process outlined in the documentation. Deviating from it can result in undetected data loss, as there is no reliable method to verify cross-component data integrity afterward.
@@ -210,7 +210,7 @@ For the WebApps the sub-step order is not crucial, meaning you can interchangeab
 
 :::note
 
-This will heavily depend on your setup, the following examples are based on [the example definitions](#management-api) in Kubernetes using either active port-forwarding or overwrite of the local curl command.
+This will heavily depend on your setup, the following examples are based on examples given in the [Management API](#management-api) in Kubernetes using either active port-forwarding or overwrite of the local curl command.
 
 As noted in the [Management API](#management-api) section, this API is typically not publicly exposed. Therefore, you will need to access it directly using any means available within your environment.
 
@@ -570,7 +570,7 @@ By default, the indices are prefixed with `zeebe-record`. If you have configured
    <Tabs groupId="search-engine">
       <TabItem value="elasticsearch" label="Elasticsearch" default>
 
-      [Elasticsearch documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-snapshot-create)
+      The following is using the [Elasticsearch snapshot API](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-snapshot-create) to create a snapshot.
 
       ```bash
       curl -XPUT "$ELASTIC_ENDPOINT/_snapshot/$ELASTIC_SNAPSHOT_REPOSITORY/camunda_zeebe_records_backup_$BACKUP_ID?wait_for_completion=true" \
@@ -631,7 +631,7 @@ By default, the indices are prefixed with `zeebe-record`. If you have configured
       </TabItem>
       <TabItem value="opensearch" label="OpenSearch">
 
-      [OpenSearch documentation](https://docs.opensearch.org/docs/latest/api-reference/snapshots/create-snapshot/)
+      The following is using the [OpenSearch snapshot API](https://docs.opensearch.org/docs/latest/api-reference/snapshots/create-snapshot/) to create a snapshot.
 
       ```bash
       curl -XPUT "$OPENSEARCH_ENDPOINT/_snapshot/$OPENSEARCH_SNAPSHOT_REPOSITORY/camunda_zeebe_records_backup_$BACKUP_ID?wait_for_completion=true" \
@@ -694,7 +694,7 @@ By default, the indices are prefixed with `zeebe-record`. If you have configured
    <Tabs groupId="search-engine">
       <TabItem value="elasticsearch" label="Elasticsearch" default>
 
-      [Elasticsearch documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-snapshot-create)
+      The following is using the [Elasticsearch snapshot API](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-snapshot-status-2) to get the snapshot status.
 
       ```bash
       curl "$ELASTIC_ENDPOINT/_snapshot/$ELASTIC_SNAPSHOT_REPOSITORY/camunda_zeebe_records_backup_$BACKUP_ID/_status"
@@ -751,7 +751,7 @@ By default, the indices are prefixed with `zeebe-record`. If you have configured
       </TabItem>
       <TabItem value="opensearch" label="OpenSearch">
 
-      [OpenSearch documentation](https://docs.opensearch.org/docs/latest/api-reference/snapshots/get-snapshot-status/)
+      The following is using the [OpenSearch snapshot API](https://docs.opensearch.org/docs/latest/api-reference/snapshots/get-snapshot-status/) to get the snapshot status.
 
       ```bash
       curl "$OPENSEARCH_ENDPOINT/_snapshot/$OPENSEARCH_SNAPSHOT_REPOSITORY/camunda_zeebe_records_backup_$BACKUP_ID/_status"
@@ -876,6 +876,10 @@ By default, the indices are prefixed with `zeebe-record`. If you have configured
          <summary>Example output</summary>
          <summary>
 
+         :::note
+         Yes, 204 is the expected result and indicates a successful resume.
+         :::
+
          ```json
          {
             "body":null,
@@ -947,9 +951,9 @@ Based on that we can look in the [matrix versioning of 8.7](https://helm.camunda
 Prerequisite:
 
 - Elasticsearch / OpenSearch is set up and running with a clean slate and no data on it.
-- Elasticsearch / OpenSearch are configured with the same snapshot repository as used for backup, using the outlined in documentation in [prerequisites](#prerequisites).
+- Elasticsearch / OpenSearch are configured with the same snapshot repository as used for backup, using the outlined documentation in [prerequisites](#prerequisites).
 
-If you're using an external Elasticsearch you don't have to interact with the Camunda Helm Chart or Camunda components in general until step 2.
+If you're using an external Elasticsearch you don't have to interact with the Camunda Helm Chart or Camunda components in general until step 2 - [Restore the Zeebe Cluster](#restore-the-zeebe-cluster).
 
 :::note
 In case of the Camunda Helm Chart, this could be achieved by e.g. disabling all other components in the `values.yml`.
@@ -987,7 +991,7 @@ After you have figured out a backup ID that you want to restore, do so for Elast
 <Tabs groupId="search-engine">
    <TabItem value="elasticsearch" label="Elasticsearch" default>
 
-[Elasticsearch documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-snapshot-restore)
+The following is using the [Elasticsearch snapshot API](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-snapshot-restore) to restore a snapshot.
 
 ```bash
 curl -XPOST "$ELASTIC_ENDPOINT/_snapshot/$ELASTIC_SNAPSHOT_REPOSITORY/$SNAPSHOT_NAME/_restore?wait_for_completion=true"
@@ -996,7 +1000,7 @@ curl -XPOST "$ELASTIC_ENDPOINT/_snapshot/$ELASTIC_SNAPSHOT_REPOSITORY/$SNAPSHOT_
    </TabItem>
    <TabItem value="opensearch" label="OpenSearch">
 
-[OpenSearch documentation](https://docs.opensearch.org/docs/latest/api-reference/snapshots/restore-snapshot/)
+The following is using the [OpenSearch snapshot API](https://docs.opensearch.org/docs/latest/api-reference/snapshots/restore-snapshot/) to restore a snapshot.
 
 ```bash
 curl -XPOST "$OPENSEARCH_ENDPOINT/_snapshot/$OPENSEARCH_SNAPSHOT_REPOSITORY/$SNAPSHOT_NAME/_restore?wait_for_completion=true"
@@ -1030,8 +1034,8 @@ camunda_zeebe_records_backup_1748937221
 
 Prerequisites:
 
-- No persistent volumes or disks should contain any pre-existing data
-- Zeebe is configured with the same backup storage as outlined in the [prerequisites](#prerequisites)
+- No persistent volumes or disks should contain any pre-existing data.
+- Zeebe is configured with the same backup storage as outlined in the [prerequisites](#prerequisites).
 
 Camunda provides a standalone app which must be run on each node where a Zeebe broker will be running. This is a Spring Boot application similar to the broker and can run using the binary provided as part of the distribution. The app can be configured the same way a broker is configured - via environment variables or using the configuration file located in `config/application.yaml`.
 
@@ -1058,12 +1062,12 @@ zeebe:
    env:
    # Environment variables to overwrite the Zeebe startup behavior
    - name: ZEEBE_RESTORE
-      value: "true"
+     value: "true"
    - name: ZEEBE_RESTORE_FROM_BACKUP_ID
-      value: "$BACKUP_ID" # Change the $BACKUP_ID to your actual value
+     value: "$BACKUP_ID" # Change the $BACKUP_ID to your actual value
    # all the envs related to the backup store as outlined in the prerequisites
    - name: ZEEBE_BROKER_DATA_BACKUP_STORE
-      value: "S3" # just as an example
+     value: "S3" # just as an example
    ...
 
 # assuming you're using the inbuilt Elasticsearch, otherwise should be set to false
@@ -1103,6 +1107,14 @@ If you're not using the Camunda Helm Chart, you can use a similar approach nativ
 
 The application will exit and restart the pod. This is an expected behavior. The restore application will not try to restore the state again since the partitions were already restored to the persistent disk.
 
+:::note
+
+In Kubernetes, Zeebe is a [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/), which are meant for long-running and persistent applications. There is no `restartPolicy` due to which the resulting pods of the Zeebe `StatefulSet` will always restart. Meaning that you have to observe the Zeebe brokers during restore and may have to look at the logs with `--previous` if it already restarted.
+
+It will not try to import or overwrite the data again but should be noted that you may miss the `successful` first run if you're not observing it actively.
+
+:::
+
    </TabItem>
    <TabItem value="manual" label="Manual" default>
 
@@ -1127,14 +1139,6 @@ Restore fails if:
 - Any other unexpected errors.
 
 If the restore fails, you can re-run the application after fixing the root cause.
-
-:::note
-
-In Kubernetes, Zeebe is a [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/], which are meant for long-running and persistent applications. There is no `restartPolicy` due to which the resulting pods of the Zeebe `StatefulSet` will always restart. Meaning that you have to observe the Zeebe brokers during restore and may have to look at the logs with `--previous` if it already restarted.
-
-It will not try to import or overwrite the data again but should be noted that you may miss the `successful` first run if you're not observing it actively.
-
-:::
 
 ### Start all Camunda 8 components
 
