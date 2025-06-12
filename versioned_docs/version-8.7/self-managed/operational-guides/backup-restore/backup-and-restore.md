@@ -134,7 +134,7 @@ Examples for Kubernetes approaches:
 
 ### ContextPath
 
-If you're defining the `contextPath` in the Helm chart or the `management.server.servlet.context-path` in a standalone setup, your API requests will require to prepend the value specific to the `contextPath` for the individual application. In case the `management.server.port` is defined then this also applies to `management.endpoints.web.base-path`. You can read more about this behavior in the [Spriing Boot documentation](https://docs.spring.io/spring-boot/docs/2.1.7.RELEASE/reference/html/production-ready-monitoring.html#production-ready-customizing-management-server-context-path).
+If you're defining the `contextPath` in the Camunda Helm Chart or the `management.server.servlet.context-path` in a standalone setup, your API requests will require to prepend the value specific to the `contextPath` for the individual application. In case the `management.server.port` is defined then this also applies to `management.endpoints.web.base-path`. You can read more about this behavior in the [Spriing Boot documentation](https://docs.spring.io/spring-boot/docs/2.1.7.RELEASE/reference/html/production-ready-monitoring.html#production-ready-customizing-management-server-context-path).
 
 :::warning Optimize Helm Chart Exception
 Setting the `contextPath` in the Helm Chart for Optimize will not overwrite the `contextPath` of the management API and it will remain `/`.
@@ -144,7 +144,7 @@ Setting the `contextPath` in the Helm Chart for Optimize will not overwrite the 
 <summary>Example</summary>
 <summary>
 
-If you're defining the `contextPath` for Operate in the Helm Chart:
+If you're defining the `contextPath` for Operate in the Camunda Helm Chart:
 
 ```bash
 operate:
@@ -153,7 +153,7 @@ operate:
 
 A call to the management API of Operate would look like the following:
 
-```
+```bash
 OPERATE_MANAGEMENT_API=http://localhost:9600
 
 curl $OPERATE_MANAGEMENT_API/operate/health
@@ -161,7 +161,7 @@ curl $OPERATE_MANAGEMENT_API/operate/health
 
 Without the `contextPath` it would just be:
 
-```
+```bash
 OPERATE_MANAGEMENT_API=http://localhost:9600
 
 curl $OPERATE_MANAGEMENT_API/health
@@ -889,7 +889,7 @@ It is critical to ensure that no application is started before the restore is co
 
 Additionally, backups must be restored using the exact Camunda version they were created with. As noted during the backup process, the version is embedded in the backup name. This is essential because starting an application with a mismatched version may result in startup failures due to schema incompatibilities with Elasticsearch/OpenSearch. Although schema changes are generally avoided in patch releases, they can still occur.
 
-When using the Camunda Helm Chart, this means figuring out the corresponding Helm chart version. For this the [Camunda 8 Helm Chart Version Matrix](https://helm.camunda.io/camunda-platform/version-matrix/) can help. Click on the `major.minor` release and then search for the backed up patch release of your component. The other components would typically fit in there as well.
+When using the Camunda Helm Chart, this means figuring out the corresponding version. For this the [Camunda Helm Chart Version Matrix](https://helm.camunda.io/camunda-platform/version-matrix/) can help. Click on the `major.minor` release and then search for the backed up patch release of your component. The other components would typically fit in there as well.
 
 <details>
    <summary>Example</summary>
@@ -897,7 +897,7 @@ When using the Camunda Helm Chart, this means figuring out the corresponding Hel
 
    Our Backup looks as follows:
 
-   ```
+   ```bash
    camunda_optimize_1748937221_8.7.1_part_1_of_2
    camunda_optimize_1748937221_8.7.1_part_2_of_2
    camunda_operate_1748937221_8.7.2_part_1_of_6
@@ -920,7 +920,7 @@ When using the Camunda Helm Chart, this means figuring out the corresponding Hel
    - Optimize: 8.7.1
    - Operate / Tasklist: 8.7.2
 
-   Based on that we can look in the [matrix versioning of 8.7](https://helm.camunda.io/camunda-platform/version-matrix/camunda-8.7) and quickly see that the corresponding Camunda Helm Chart version is `12.0.2`. <!-- TODO: Align Camunda Helm Chart naming is it Camunda 8 Helm Chart and lower / upper case? -->
+   Based on that we can look in the [matrix versioning of 8.7](https://helm.camunda.io/camunda-platform/version-matrix/camunda-8.7) and quickly see that the corresponding Camunda Helm Chart version is `12.0.2`.
 
    </summary>
 </details>
@@ -992,7 +992,7 @@ When using the Camunda Helm Chart, this means figuring out the corresponding Hel
    Where `$SNAPSHOT_NAME` would be any of the following based on our example in [figuring out available backups](#how-to-figure-out-available-backups).
    Ensure that all your backups are corresponding to the same backup ID and that each one is restored one by one.
 
-   ```
+   ```bash
    camunda_optimize_1748937221_8.7.1_part_1_of_2
    camunda_optimize_1748937221_8.7.1_part_2_of_2
    camunda_operate_1748937221_8.7.2_part_1_of_6
@@ -1024,15 +1024,26 @@ When using the Camunda Helm Chart, this means figuring out the corresponding Hel
       <TabItem value="kubernetes" label="Kubernetes" default>
 
       Assuming you're using the official [Camunda Helm Chart](/self-managed/setup/install.md), you'll have to adjust your Helm `values.yml` to supply the following temporarily.
+
       It will overwrite the start command of the resulting Zeebe pod, executing a restore script.
       It's important that the backup is configured for Zeebe to be able to restore from the backup!
+
+      The following example is possible starting from the Camunda Helm Chart version `12.1.0`.
+      Look at the note below the example to see how it can be achieved with an older Camund Helm Chart version.
 
       ```yaml
       zeebe:
          enabled: true
-         command: ["/usr/local/zeebe/bin/restore", "--backupId=$BACKUP_ID"] # Change the $BACKUP_ID to your actual value for restoring
          env:
-         ... # all the envs related to the backup store
+         # Environment variables to overwrite the Zeebe startup behavior
+         - name: ZEEBE_RESTORE
+           value: "true"
+         - name: ZEEBE_RESTORE_FROM_BACKUP_ID
+           value: "$BACKUP_ID" # Change the $BACKUP_ID to your actual value
+         # all the envs related to the backup store as outlined in the prerequisites
+         - name: ZEEBE_BROKER_DATA_BACKUP_STORE
+           value: "S3" # just as an example
+         ...
 
       # assuming you're using the inbuilt Elasticsearch, otherwise should be set to false
       elsaticsearch:
@@ -1052,6 +1063,21 @@ When using the Camunda Helm Chart, this means figuring out the corresponding Hel
          enabled: false
       ```
 
+      :::note Older Camunda Helm Charts
+
+      For older Camunda Helm Chart versions one can overwrite the startup behaviour of the Zeebe brokers by setting the command.
+
+      ```yaml
+      zeebe:
+         enabled: true
+         command: ["/usr/local/zeebe/bin/restore", "--backupId=$BACKUP_ID"] # Change the $BACKUP_ID to your actual value
+         env:
+         # all the envs related to the backup store as outlined in the prerequisites
+         ...
+      ```
+
+      :::
+
       If you're not using the Camunda Helm Chart, you can use a similar approach natively with Kubernetes to overwrite the command.
 
       The application will exit and restart the pod. This is an expected behavior. The restore application will not try to restore the state again since the partitions were already restored to the persistent disk.
@@ -1061,9 +1087,10 @@ When using the Camunda Helm Chart, this means figuring out the corresponding Hel
 
       To restore a Zeebe Cluster, run the following in each node where the broker will be running:
 
-      ```
-      tar -xzf zeebe-distribution-X.Y.Z.tar.gz -C zeebe/
-      ./bin/restore --backupId=<backupId>
+      ```bash
+      mkdir -p zeebe
+      tar -xzf camunda-zeebe-X.Y.Z.tar.gz --strip-components=1 -C zeebe/
+      ./zeebe/bin/restore --backupId=<backupId>
       ```
 
       </TabItem>
@@ -1082,16 +1109,17 @@ When using the Camunda Helm Chart, this means figuring out the corresponding Hel
 
    :::note
 
-   <!-- TODO: Restart policy adjustment would be dope but not supported in the Helm chart ... -->
-   <!-- Guess I'll have to implement more in the Helm chart ... -->
+   In Kubernetes, Zeebe is a [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/], which are meant for long-running and persistent applications. There is no `restartPolicy` due to which the resulting pods of the Zeebe `StatefulSet` will always restart. Meaning that you have to observe the Zeebe brokers during restore and may have to look at the logs with `--previous` if it already restarted.
 
-   The default behavior for Kubernetes is to always restart failing pods. Meaning that you have observe the Zeebe brokers and may have to look at the logs with `--previous` if it already restarted.
+   It will not try to import or overwrite the data again but should be noted that you may miss the `successful` first run if you're not observing it actively.
 
    :::
 
 ### Start all Camunda 8 applications
 
-   In the case of Kubernetes this would mean, to enable all applications again in the Helm chart and removing the command overwrite of Zeebe.
+   You have actively restored Elasticsearch / OpenSearch and the Zeebe cluster partitions. You can now normally start everything again and use Camunda 8.
+
+   In the case of Kubernetes this would mean, to enable all applications again in the Helm Chart and removing the environment variables that overwrite the Zeebe startup behavior.
 
    In the case of a manual setup this would mean to execute the broker and all other applications in their normal way.
 
@@ -1132,7 +1160,7 @@ In that case, follow the described steps above and when you have your Elasticsea
          <summary>Example output</summary>
          <summary>
 
-         ```
+         ```bash
          camunda_optimize_1748937221_8.7.1_part_1_of_2
          camunda_optimize_1748937221_8.7.1_part_2_of_2
          camunda_operate_1748937221_8.7.2_part_1_of_6
@@ -1175,7 +1203,7 @@ In that case, follow the described steps above and when you have your Elasticsea
       <summary>Example output</summary>
       <summary>
 
-      ```
+      ```bash
       camunda_optimize_1748937221_8.7.1_part_1_of_2
       camunda_optimize_1748937221_8.7.1_part_2_of_2
       camunda_operate_1748937221_8.7.2_part_1_of_6
