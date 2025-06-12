@@ -23,7 +23,7 @@ The reasoning behind is that Operate, Tasklist, and Optimize use an Importer and
 
 Similar for Zeebe the backup needs to be scheduled through Zeebe to create a coherent backup of the partitions. Just taking a disk backup for each Zeebe broker will not result in a coherent backup as data may differ between the brokers and partitions as a disk backup is never going to be executed on each broker at the same time.
 
-A backup of a Camunda 8 cluster consists of a backup of Zeebe, Operate, Tasklist, Optimize, and exported Zeebe indices in Elasticsearch. Since the data of these applications are dependent on each other, it is important that the backup is consistent across all components. The backups of individual components taken independently may not form a consistent recovery point. Therefore, you must take the backup of a Camunda 8 cluster as a whole. To ensure a consistent backup, follow the process outlined below. Deviating from this process can lead to undetected data loss, as there is no reliable way to verify data integrity afterward.
+A backup of a Camunda 8 cluster consists of a backup of Zeebe, Operate, Tasklist, Optimize, and exported Zeebe indices in Elasticsearch. Since the data of these components are dependent on each other, it is important that the backup is consistent across all components. The backups of individual components taken independently may not form a consistent recovery point. Therefore, you must take the backup of a Camunda 8 cluster as a whole. To ensure a consistent backup, follow the process outlined below. Deviating from this process can lead to undetected data loss, as there is no reliable way to verify data integrity afterward.
 
 Following the backup procedure outlined in the documentation results in a hot backup, meaning Zeebe continues to process and export data during the backup, and the WebApps remain fully operational.
 
@@ -36,7 +36,7 @@ Following items are required to be configured to make use of the backup and rest
    - [Elasticsearch snapshot repository](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshot-restore.html)
    - [OpenSearch snapshot repository](https://docs.opensearch.org/docs/latest/tuning-your-cluster/availability-and-recovery/snapshots/snapshot-restore/)
 
-2. Configure the components backup storages, these will partly be important for restore as well:
+2. Configure the components backup storage, these will partly be important for restore as well:
 
 - [Operate](/self-managed/operate-deployment/operate-configuration.md#backups)
 - Optimize
@@ -45,9 +45,9 @@ Following items are required to be configured to make use of the backup and rest
 - [Tasklist](/self-managed/tasklist-deployment/tasklist-configuration.md#backups)
 - [Zeebe](/self-managed/zeebe-deployment/configuration/broker.md#zeebebrokerdatabackup)
 
-<!-- TODO: Don't find it fitting anymore - Operate, Tasklist, and Optimize use Elasticsearch / OpenSearch as datastore and use the snapshot feature of Elasticsearch / OpenSearch for backing up their state. Zeebe does not have an in-built API for its related indices and will need to use the snapshot API of Elasticsearch / OpenSearch directly.
-
-Zeebe stores its partition backup to an external storage and must be configured before the cluster is started. -->
+:::note
+You should keep the backup storage of the components configured at all times to ease the backup and restore process and avoid unnecessary restarts.
+:::
 
 In the guide, we're showcasing backup and restore, based on the following tools:
 
@@ -179,15 +179,7 @@ The backup process is divided in two parts:
 
 These two parts have to be executed in a sequential order with their sub-steps to form a consistent backup and are outlined below.
 
-<!-- TODO: Explain why the certain order is so important; Basically, WebApps interchangable, overlap with Zeebe is important and softpause topic.
-
-Softpause = exported + but not deleted (log compacted) from Zeebe.
-Maybe in the form of like a short TL;DR
-WebApp Backup
-Export Pause
-Zeebe exports ("db" + partitions)
-Resume Pause
--->
+For the WebApps the sub-step order is not crucial, meaning you can interchangeably back up first Operate, Optimize, Tasklist or in any other order, as long as those backups are completed before proceeding with the Zeebe Cluster backup. In the Zeebe Cluster backup the order is of importance.
 
 ### Backup of the WebApps
 
@@ -885,19 +877,13 @@ The restore process is divided in two parts:
 
 To restore Camunda 8 from a backup, all components must be restored from their backup corresponding to the same backup ID.
 
-<!--  TODO: Explain why we have to restore certain items in a certain way. -->
-<!--  TODO: Differentiate between managed and helm chart deployed ElasticSearch -->
-<!-- TODO: Intro on why we have to restore from empty state -->
+The restore process assumes a **clean slate** for all components, including Elasticsearch / OpenSearch. This means **no prior persistent volumes** or **application state** should exist - all data is restored from scratch.
 
-The restore process assumes a clean slate for all components, including Elasticsearch / OpenSearch. This means no prior persistent volumes or application state should exist—all data is restored from scratch.
+It is **critical** to ensure that **no application is started** before the restore is complete. Starting any component prematurely will automatically initialize its data store or persistent disk, potentially interfering with the restore and causing existing data to block a successful recovery.
 
-It is critical to ensure that no application is started before the restore is complete. Starting any component prematurely will automatically initialize its data store or persistent disk, potentially interfering with the restore and causing existing data to block a successful recovery.
-
-Additionally, backups must be restored using the exact Camunda version they were created with. As noted during the backup process, the version is embedded in the backup name. This is essential because starting an application with a mismatched version may result in startup failures due to schema incompatibilities with Elasticsearch / OpenSearch and the application. Although schema changes are generally avoided in patch releases, they can still occur.
+Additionally, **backups must be restored** using the **exact Camunda version** they were created with. As noted during the backup process, the version is embedded in the backup name. This is essential because starting an application with a mismatched version may result in startup failures due to schema incompatibilities with Elasticsearch / OpenSearch and the application. Although schema changes are generally avoided in patch releases, they can still occur.
 
 When using the Camunda Helm Chart, this means figuring out the corresponding version. For this the [Camunda Helm Chart Version Matrix](https://helm.camunda.io/camunda-platform/version-matrix/) can help. Click on the `major.minor` release and then search for the backed up patch release of your component. The other components would typically fit in there as well.
-
-<!-- TODO: components vs applications - check consistent phrasing -->
 
 <details>
    <summary>Example</summary>
@@ -938,12 +924,12 @@ Based on that we can look in the [matrix versioning of 8.7](https://helm.camunda
 Prerequisite:
 
 - Elasticsearch / OpenSearch is set up and running with a clean slate and no data on it.
-- Elasticsearch / OpenSearch are configured with the same snapshot repository as used for backup, as outlined in [prerequisites](#prerequisites).
+- Elasticsearch / OpenSearch are configured with the same snapshot repository as used for backup, using the outlined in documentation in [prerequisites](#prerequisites).
 
 If you're using an external Elasticsearch you don't have to interact with the Camunda Helm Chart or Camunda components in general until step 2.
 
 :::note
-In case of the Camunda Helm Chart, this could be achieved by e.g. disabling all other applications in the `values.yml`.
+In case of the Camunda Helm Chart, this could be achieved by e.g. disabling all other components in the `values.yml`.
 
 ```yaml
 elsaticsearch:
@@ -969,9 +955,9 @@ zeebe-gateway:
 
 While the backup order was important to ensure consistent backups. It does not matter in case of the restore process and we can restore the backed up indices in any order.
 
-The applications don't have any endpoint to restore the backup in Elasticsearch, so you'll have to restore it yourself directly.
+The components don't have any endpoint to restore the backup in Elasticsearch, so you'll have to restore it yourself directly.
 
-See also [the section about figuring out available backups](#how-to-figure-out-available-backups) since the applications won't be available during backup as mentioned due to the automatic seeding.
+See also [the section about figuring out available backups](#how-to-figure-out-available-backups) since the components won't be available during backup as mentioned due to the automatic seeding.
 
 After you have figured out a backup ID that you want to restore, do so for Elasticsearch / OpenSearch for each available backup under the same backupID.
 
@@ -1019,12 +1005,12 @@ camunda_zeebe_records_backup_1748937221
 
 ### Restore the Zeebe Cluster
 
-<!-- TODO: 2. Confirm proper configuration (such as shards, replicas count, etc.) - if that really is important, how to figure that out just based on your backup?! -->
-
 Camunda provides a standalone app which must be run on each node where a Zeebe broker will be running. This is a Spring Boot application similar to the broker and can run using the binary provided as part of the distribution. The app can be configured the same way a broker is configured - via environment variables or using the configuration file located in `config/application.yaml`.
 
 :::note
 When restoring, provide the same configuration (node id, data directory, cluster size, and replication count) as the broker that will be running in this node. The partition count must be same as in the backup.
+
+The amount of partitions backed up are also visible in the backup store of Zeebe, see [how to figure out available backups](#available-backups-of-zeebe-partitions).
 :::
 
 <Tabs>
@@ -1122,13 +1108,13 @@ It will not try to import or overwrite the data again but should be noted that y
 
 :::
 
-### Start all Camunda 8 applications
+### Start all Camunda 8 components
 
 You have actively restored Elasticsearch / OpenSearch and the Zeebe cluster partitions. You can now normally start everything again and use Camunda 8.
 
-In the case of Kubernetes this would mean, to enable all applications again in the Helm Chart and removing the environment variables that overwrite the Zeebe startup behavior.
+In the case of Kubernetes this would mean, to enable all components again in the Helm Chart and removing the environment variables that overwrite the Zeebe startup behavior.
 
-In the case of a manual setup this would mean to execute the broker and all other applications in their normal way.
+In the case of a manual setup this would mean to execute the broker and all other components in their normal way.
 
 ### How to figure out available backups
 
@@ -1262,11 +1248,5 @@ Zeebe will create a folder for each Partition ID and subfolder in there with eac
 
    </summary>
 </details>
-
-<!-- TODO: rethink phrasing around WebApps / Elasticsearch / OpenSearch and Zeebe Cluster / Partitions
-Would love to just say WebApps and Zeebe Cluster (Workflow Engine) the problem is that the backups are overlaping due to the Zeebe indices in ES / OS.
-So you always have Elasticsearch backups and Zeebe parititon backups.
-While e.g. for Backups I can say Backup of WebApps and Backup of Zeebe Cluster. I can't say the same in restore since it's overlapping.
--->
 
 <!-- TODO: check the sub-page (management api) links across the docs whether they need to be changed or need to point to the reworked backup page -->
