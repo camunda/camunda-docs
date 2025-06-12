@@ -675,7 +675,7 @@ The placeholder is displayed when a field is empty:
   ]
 ```
 
-### Categories
+### Category
 
 You can define a category to group templates in the element template selection list. The category is defined as an object with `id` and `name` properties.
 
