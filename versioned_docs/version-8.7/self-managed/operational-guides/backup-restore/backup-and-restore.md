@@ -95,7 +95,7 @@ Direct access, may depend on your deployment environment. For example, direct Ku
 | [Tasklist](/self-managed/tasklist-deployment/tasklist-configuration.md#monitoring-and-health-probes) | 9600 |
 | [Zeebe](/self-managed/zeebe-deployment/configuration/gateway.md#managementserver)                    | 9600 |
 
-Examples for Kubernetes approaches:
+#### Examples for Kubernetes approaches
 
 <Tabs groupId="application-ports">
    <TabItem value="port-forwarding" label="Port Forwarding" default>
