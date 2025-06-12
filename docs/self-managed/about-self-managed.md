@@ -21,6 +21,8 @@ Building process automation solutions with Camunda 8 works similarly regardless 
 </div>
 <div class="double-column-right" style={{flex: '1'}}>
 
+For more information on Camunda 8 SaaS, visit [What is Camunda 8?](/components/components-overview.md) If you are new to Camunda 8, we recommend you start your journey with [Camunda 8 SaaS-based guides](../../guides/).
+
 <img src={OverviewImg} alt="Image showing Self-Managed components and features" title="Use Camunda 8 Self-Managed as a self-hosted alternative to Camunda 8 SaaS" class="img-noborder img-600 img-transparent hero-topic fade-in-top-image" style={{marginTop: '0', marginBottom: '0'}}/>
 
 </div>
