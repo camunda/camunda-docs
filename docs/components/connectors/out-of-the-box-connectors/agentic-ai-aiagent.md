@@ -5,6 +5,8 @@ title: AI Agent connector
 description: AI agent connector implementing a feedback loop using for user interactions and toolcalls with an LLM.
 ---
 
+import FromVersionBadge from '../../react-components/\_from-version-badge';
+
 Use the **AI Agent** outbound connector to integrate Large Language Models (LLMs) with AI agents.
 
 ## About this connector
@@ -255,19 +257,19 @@ With the current set of supported providers/models, this message will always con
 connector will return the **first content block** when handling the response, either as text string or as parsed JSON
 object.
 
-| Field                     | Required | Description                                                                                                                                                                                                    |
-| :------------------------ | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Response Format           | Yes      | <p>Instructs the model which response format to return. This can be either text or JSON.</p><p><ul><li>Note that JSON format support varies by provider and model.</li></ul></p>                               |
-| Include assistant message | No       | <p>Returns the entire message returned by the LLM as `responseMessage`, including any additional content blocks and metadata.</p><p>Select this option if you need more than just the first response text.</p> |
+| Field                                                       | Required | Description                                                                                                                                                                                                    |
+| :---------------------------------------------------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Response Format <FromVersionBadge version="8.8.0-alpha6" /> | Yes      | <p>Instructs the model which response format to return. This can be either text or JSON.</p><p><ul><li>Note that JSON format support varies by provider and model.</li></ul></p>                               |
+| Include assistant message                                   | No       | <p>Returns the entire message returned by the LLM as `responseMessage`, including any additional content blocks and metadata.</p><p>Select this option if you need more than just the first response text.</p> |
 
 #### Text response format
 
 If not configured otherwise, this format will be used by default and will return a `responseText` string as part of the
 connector response.
 
-| Field              | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| :----------------- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Parse text as JSON | No       | <p>If this option is selected, the connector will attempt to parse the response text as JSON and return the parsed object as `responseJson` in the connector response.</p><p><ul><li>Use this option for models which do not support setting JSON as response format (such as Anthropic models) in combination with a prompt instructing the model to return a JSON response.</li><li>In case parsing fails, the connector will not throw an error but will return the original response text as `responseText` and return no `responseJson` object.</li></ul></p> |
+| Field                                                          | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| :------------------------------------------------------------- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Parse text as JSON <FromVersionBadge version="8.8.0-alpha6" /> | No       | <p>If this option is selected, the connector will attempt to parse the response text as JSON and return the parsed object as `responseJson` in the connector response.</p><p><ul><li>Use this option for models which do not support setting JSON as response format (such as Anthropic models) in combination with a prompt instructing the model to return a JSON response.</li><li>In case parsing fails, the connector will not throw an error but will return the original response text as `responseText` and return no `responseJson` object.</li></ul></p> |
 
 An example prompt that instructs the model to return a JSON response
 (see [Anthropic docs](https://docs.anthropic.com/en/docs/test-and-evaluate/strengthen-guardrails/increase-consistency#example-enhancing-it-support-consistency)):
@@ -276,7 +278,7 @@ An example prompt that instructs the model to return a JSON response
 Output in JSON format with keys: "sentiment" (positive/negative/neutral), "key_issues" (list), and "action_items" (list of dicts with "team" and "task").
 ```
 
-#### JSON response format
+#### JSON response format <FromVersionBadge version="8.8.0-alpha6" />
 
 :::note
 
