@@ -292,34 +292,6 @@ or `spring.ssl.*` properties are defined, the `camunda.client.auth.*` takes prec
 
 ## Job worker configuration options
 
-### Overriding job worker values using properties
-
-You can override the `JobWorker` annotation's values, as you can see in the example above where the `enabled` property is overridden:
-
-```yaml
-camunda:
-  client:
-    override:
-      foo:
-        enabled: false
-```
-
-In this case, `foo` is the type of the worker that we want to customize.
-
-You can override all supported configuration options for a worker, for example:
-
-```yaml
-camunda:
-  client:
-    override:
-      foo:
-        timeout: PT10S
-```
-
-:::info
-You could also provide a custom class that can customize the `JobWorker` configuration values by implementing the `io.camunda.spring.client.annotation.customizer.JobWorkerValueCustomizer` interface and register it as bean.
-:::
-
 ### Job type
 
 You can configure the job type via the `JobWorker` annotation:
@@ -363,15 +335,13 @@ camunda:
 
 This is used for all workers that do **not** set a task type via the annotation or set a job type as individual worker property.
 
-### Define job worker function parameters
+### Control variable fetching
 
-The way you define the job worker functions' method signature will also influence the way variables will be fetched.
+A job worker can submit a list of variables when activating jobs to limit the amount of data being sent.
 
-All listed methods to fetch variables will form a joint list of variables to fetch unless explicitly mentioned otherwise.
+There are implicit and explicit ways to control the variable fetching. While the implicit ones come with the job worker function parameters, the explicit ones are listed here.
 
-#### Explicit ways to control the variable fetching
-
-##### Provide a list of variables to fetch
+#### Provide a list of variables to fetch
 
 You can specify that you only want to fetch some variables (instead of all) when executing a job, which can decrease load and improve performance:
 
@@ -401,7 +371,7 @@ camunda:
 Using the properties-defined way of fetching variables will override **all** other detection strategies.
 :::
 
-##### Prevent the variable filtering
+#### Prevent the variable filtering
 
 You can force that all variables are loaded anyway:
 
@@ -411,9 +381,35 @@ public void handleJobFoo(final JobClient client, final ActivatedJob job, @Variab
 }
 ```
 
-#### Implicit ways to control the variable fetching
+You can also override the forced fetching of all variables in your properties:
 
-##### `ActivatedJob` parameter
+```yml
+camunda:
+  client:
+    worker:
+      override:
+        foo:
+          force-fetch-all-variables: true
+```
+
+### Define job worker function parameters
+
+The method signature you use to define job worker functions will affect how variables are retrieved.
+
+Unless stated otherwise, all specified methods for fetching variables will be combined into a single list of variables to retrieve.
+
+#### `JobClient` parameter
+
+The `JobClient` is also part of the native `JobHandler` functional interface:
+
+```java
+@JobWorker(type = "foo")
+public void handleJobFoo(final JobClient jobClient) {
+  // ...
+}
+```
+
+#### `ActivatedJob` parameter
 
 This will **prevent** the implicit variable fetching detection as you can retrieve variables in a programmatic way now:
 
@@ -426,7 +422,11 @@ public void handleJobFoo(final ActivatedJob job) {
 }
 ```
 
-##### Using `@Variable`
+:::note
+Only explicit variable fetching will be effective on using the `ActivatedJob` as parameter.
+:::
+
+#### Using `@Variable`
 
 By using the `@Variable` annotation, there is a shortcut to make variable retrieval simpler and only fetch certain variables, making them available as parameters:
 
@@ -448,6 +448,10 @@ public void handleJobFoo(final JobClient client, final ActivatedJob job, @Variab
 }
 ```
 
+:::note
+This will add the name of the variable to the joint list of variables to fetch.
+:::
+
 #### Using `@VariablesAsType`
 
 You can also use your own class into which the process variables are mapped to (comparable to `getVariablesAsType()` in the [Java client API](/apis-tools/java-client/index.md)). Therefore, use the `@VariablesAsType` annotation. In the example below, `MyProcessVariables` refers to your own class:
@@ -464,11 +468,13 @@ public ProcessVariables handleFoo(@VariablesAsType MyProcessVariables variables)
 }
 ```
 
-Here, the variables to fetch will be limited to the names of the fields of the used type. The `@JsonProperty` annotation is respected.
+:::note
+This will add the names of the fields of the used type to the joint list of variables to fetch. Jackson's `@JsonProperty` annotation is respected.
+:::
 
 #### Using `@CustomHeaders`
 
-You can use the `@CustomHeaders` annotation for a parameter to retrieve [custom headers](/components/concepts/job-workers.md) for a job:
+You can use the `@CustomHeaders` annotation for a `Map<String, String>` parameter to retrieve [custom headers](/components/concepts/job-workers.md) for a job:
 
 ```java
 @JobWorker(type = "foo")
@@ -476,6 +482,10 @@ public void handleFoo(@CustomHeaders Map<String, String> headers){
   // do whatever you need to do
 }
 ```
+
+:::note
+This will not have any effect on the variable fetching behavior.
+:::
 
 ### Completing jobs
 
@@ -714,7 +724,7 @@ camunda:
         max-jobs-active: 64
 ```
 
-##### Enable job streaming
+#### Enable job streaming
 
 Read more about this feature in the [job streaming documentation](/apis-tools/java-client/job-worker.md#job-streaming).
 
@@ -732,9 +742,10 @@ This can also be configured as property:
 ```yaml
 camunda:
   client:
-    override:
-      foo:
-        stream-enabled: true
+    worker:
+      override:
+        foo:
+          stream-enabled: true
 ```
 
 To configure a global default, you can set:
@@ -747,9 +758,9 @@ camunda:
         stream-enabled: true
 ```
 
-##### Control tenant usage
+#### Control tenant usage
 
-Generally, the [client default `tenant-ids`](#tenant-usage) is used for all job worker activations.
+Generally, the [client default `tenant-id`](#tenant-usage) is used for all job worker activations.
 
 Configure global worker defaults for additional `tenant-ids` to be used by all workers:
 
@@ -784,6 +795,42 @@ camunda:
             - <default>
             - foo
 ```
+
+#### Define the job timeout
+
+To define the job timeout, you can set the annotation (`long` in milliseconds):
+
+```java
+@JobWorker(timeout=60000)
+public void foo() {
+  // worker's code
+}
+```
+
+Moreover, you can override the timeout for the worker (as ISO 8601 duration expression):
+
+```yaml
+camunda:
+  client:
+    worker:
+      override:
+        foo:
+          timeout: PT1M
+```
+
+You can also set a global default:
+
+```yaml
+camunda:
+  client:
+    worker:
+      defaults:
+        timeout: PT1M
+```
+
+#### Programmatic job worker modification
+
+You could also provide a bean that can customize the `JobWorker` configuration values by implementing the `io.camunda.spring.client.annotation.customizer.JobWorkerValueCustomizer` interface.
 
 ## Additional configuration options
 

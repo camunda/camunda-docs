@@ -53,6 +53,14 @@ See [Process](#process).
 
 ## C
 
+### BTP
+
+BTP stands for [SAP](#sap) Business Technology Platform, which is a cloud-based platform that provides tools and services for data management, analytics, application development, and integration within the SAP ecosystem.
+
+Camunda can integrate with SAP BTP to orchestrate business processes across SAP and non-SAP systems. By doing so, it enables automation and visibility of workflows that span multiple services and applications hosted on BTP, enhancing agility and process control in enterprise environments.
+
+- [BTP plugin](/components/camunda-integrations/sap/btp-plugin.md)
+
 ### Client
 
 See [Zeebe Client](#zeebe-client).
@@ -101,6 +109,14 @@ Correlation refers to the act of matching a [message](#message) with an inflight
 A correlation is an attribute within a [message](#message) that is used to match the message against a certain [variable](#process-instance-variable) within an inflight message. If the value of the correlation key matches the value of the [variable](#process-instance-variable) within the [process instance](#process-instance), the message is matched.
 
 - [Message correlation](/components/concepts/messages.md)
+
+### CSAP CLI
+
+CSAP CLI stands for Camunda SAP Integration Command-Line Interface. It's a standalone tool (`csap`) that simplifies configuring and building Camunda’s SAP integration modules—like the RFC connector, OData connector, and BTP plugin—for deployment.
+
+Camunda uses `csap` to automate setup steps: it interactively or via scripted flags configures connectors and plugins, resolves dependencies, and produces deployment-ready artifacts. This makes deploying SAP integrations (including BTP plugins) straightforward and repeatable in environments like Camunda SaaS.
+
+- [CSAP CLI](/components/camunda-integrations/sap/csap-cli.md)
 
 ## D
 
@@ -344,7 +360,21 @@ How long a [client](#zeebe-client) waits for a response from the [broker](#zeebe
 - [Orchestration cluster API](/apis-tools/zeebe-api-rest/zeebe-api-rest-overview.md)
 - [Zeebe API (gRPC)](/apis-tools/zeebe-api/grpc.md)
 
+### RFC
+
+RFC stands for Remote Function Call, a protocol used by SAP to enable communication and data exchange between SAP systems or between SAP and external systems.
+
+Camunda can use RFC to call SAP functions directly as part of a business process. This allows Camunda to trigger SAP transactions, retrieve data, or update records within an SAP system, integrating SAP functionality seamlessly into broader automated workflows.
+
+- [RFC](/components/camunda-integrations/sap/csap-cli.md)
+
 ## S
+
+### SAP
+
+SAP stands for Systems, Applications, and Products in Data Processing; it's an enterprise software platform used to manage business operations such as finance, supply chain, and HR. Camunda integrates with SAP to automate and orchestrate workflows that involve SAP systems, allowing for greater flexibility, transparency, and control over complex business processes.
+
+- [SAP](/components/camunda-integrations/overview.md)
 
 ### Segment
 

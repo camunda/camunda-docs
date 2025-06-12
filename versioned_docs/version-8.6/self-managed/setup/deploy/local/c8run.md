@@ -26,7 +26,7 @@ Camunda 8 Run includes the following:
 
 ## Prerequisites
 
-- OpenJDK 21+
+- OpenJDK 21-23
 - [Desktop Modeler](/components/modeler/desktop-modeler/install-the-modeler.md)
 - If using Ubuntu, use Ubuntu 22.04 or newer
 

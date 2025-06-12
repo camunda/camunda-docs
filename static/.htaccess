@@ -149,6 +149,11 @@ RewriteRule ^optimize/3.11.0/self-managed/(.*)$ /docs/8.3/self-managed/$1 [R=301
 #   8.8: content moves introduced prior to the release of version 8.8.
 #---------------------------------------------------------------------------------
 
+# Migrate overview pages
+RewriteRule ^docs/next/components/concepts/what-is-camunda-8/(.*)$ /docs/next/components/ [R=301,L]
+RewriteRule ^docs/components/concepts/what-is-camunda-8/(.*)$ /docs/components/ [R=301,L]
+RewriteRule ^docs/8.7/components/concepts/what-is-camunda-8/(.*)$ /docs/8.7/components/ [R=301,L]
+
 # Restructure Identity Docs (8.8)
 RewriteRule ^docs/next/self-managed/setup/guides/using-existing-keycloak/?$ /docs/next/self-managed/identity/configuration/connect-to-an-existing-keycloak/ [R=301,L]
 RewriteRule ^docs/next/self-managed/setup/guides/connect-to-an-oidc-provider/?$ /docs/next/self-managed/identity/configuration/connect-to-an-oidc-provider/ [R=301,L]

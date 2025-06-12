@@ -4,6 +4,8 @@ title: "Release notes"
 description: "Release notes for 8.5, including alphas"
 ---
 
+These release notes identify the new features included in Camunda 8.5, 8.4, and 8.3 releases, including [alpha feature releases](/components/early-access/alpha/alpha-features.md).
+
 ## 8.5 minor
 
 | Release date | End of maintenance | Changelog(s)                                                                                                                                                                                                                                                | Release blog                                                          | Update guide                                                                             |
