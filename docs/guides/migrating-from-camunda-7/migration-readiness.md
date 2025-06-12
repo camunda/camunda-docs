@@ -66,7 +66,7 @@ public class CreateCustomerInCrmJavaDelegate implements JavaDelegate {
 
 Never cast to Camunda implementation classes, use any ThreadLocal object, or influence the transaction manager in any way. Java delegates should always be stateless and not store any data in their fields.
 
-The resulting delegate can be migrated to a Camunda 8 API, or reused by the adapter provided in [this migration community extension](https://github.com/camunda-community-hub/camunda-7-to-8-migration/).
+The resulting delegate can be migrated to a Orchestration Cluster API, or reused by the adapter provided in [this migration community extension](https://github.com/camunda-community-hub/camunda-7-to-8-migration/).
 
 <!-- TODO use the link to the new repo -->
 
@@ -77,9 +77,9 @@ You should not trust ACID [transaction managers](https://blog.bernd-ruecker.com/
 - Instead, embrace eventual consistency and make every service task its own transactional step. If you are familiar with Camunda 7 lingo, this means that all BPMN elements will be `async=true`.
 - A process solution that relies on five service tasks to be executed within one ACID transaction, probably rolling back in case of an error, will make migration challenging.
 
-## Don’t expose Camunda API
+## Don’t expose Orchestration Cluster API
 
-You should apply the [information hiding principle](https://en.wikipedia.org/wiki/Information_hiding) and not expose too much of the Camunda API to other parts of your application.
+You should apply the [information hiding principle](https://en.wikipedia.org/wiki/Information_hiding) and not expose too much of the Orchestration Cluster API to other parts of your application.
 
 In the following example, you should not hand over an execution context to your `CrmFacade`:
 
@@ -88,7 +88,7 @@ In the following example, you should not hand over an execution context to your 
 crmFacade.createCustomer(execution);
 ```
 
-The same holds true when a new order is placed, and your order fulfillment process should be started. Instead of the frontend calling the Camunda API to start a process instance, provide your own endpoint to translate between the inbound REST call and Camunda.
+The same holds true when a new order is placed, and your order fulfillment process should be started. Instead of the frontend calling the Orchestration Cluster API to start a process instance, provide your own endpoint to translate between the inbound REST call and Camunda.
 
 For example:
 
@@ -117,7 +117,7 @@ public class OrderFulfillmentRestController {
 
 Camunda 7 provides flexible ways to add data to your process. For example, you could add Java objects that would be serialized as byte code. Java byte code is brittle and also tied to the Java runtime environment.
 
-Another possibility is transforming those objects on the fly to JSON or XML using Camunda Spin. It turned out this was black magic and led to regular problems, which is why Camunda 8 does not offer this any more. Instead, you should perform any transformation within your code before communicating with the Camunda API. Camunda 8 only takes JSON as a payload, which automatically includes primitive values.
+Another possibility is transforming those objects on the fly to JSON or XML using Camunda Spin. It turned out this was black magic and led to regular problems, which is why Camunda 8 does not offer this any more. Instead, you should perform any transformation within your code before communicating with the Orchestration Cluster API. Camunda 8 only takes JSON as a payload, which automatically includes primitive values.
 
 In the following Java delegate example, you can see Spin and Jackson were used in the delegate for JSON to Java mapping:
 

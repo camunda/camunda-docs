@@ -76,9 +76,9 @@ Our best practices, as implemented in Tasklist, are as follows:
 
 Make sure that you create your own validation logic that matches your use case.
 
-## Implement task life cycle with the Camunda 8 API
+## Implement task life cycle with the Orchestration Cluster API
 
-Use the Camunda 8 REST API to implement task life cycle operations. You can find the API specifications [here](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md).
+Use the Orchestration Cluster REST API to implement task life cycle operations. You can find the API specifications [here](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md).
 
 Task life cycle events can be tracked via the following API endpoints:
 

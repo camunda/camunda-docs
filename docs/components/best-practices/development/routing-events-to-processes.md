@@ -186,7 +186,7 @@ other.
 
 <span className="callout">1</span>
 
-You will need a mechanism receiving that message and routing it to the workflow engine. That could be a direct API call to Camunda. It could also be a AMQP or Kafka consumer or a SOAP endpoint using the Camunda API internally. It could even be a hotfolder polled by some framework like Apache Camel.
+You will need a mechanism receiving that message and routing it to the workflow engine. That could be a direct API call to Camunda. It could also be a AMQP or Kafka consumer or a SOAP endpoint using the Orchestration Cluster API internally. It could even be a hotfolder polled by some framework like Apache Camel.
 
 API examples for REST, AMQP, and Kafka are shown in [connecting the workflow engine with your world](../connecting-the-workflow-engine-with-your-world/).
 

@@ -59,7 +59,7 @@ This analysis will help you understand what needs to be done to migrate.
 
 ### Estimate migration effort and budget project
 
-This analysis is the basis for estimating migration efforts. Our consultants use rule-of-thumb numbers on how much effort typical tasks require. For example, converting a Camunda 7 Java Delegate to a Camunda 8 Job Worker might take one hour if it just involves refactoring the JavaDelegate. It might take more effort if internal Camunda API is used in the delegate. Looking at [code conversion patterns](./code-conversion.md) allows you to come up with your own estimate, which you can multiply by the number of tasks from the analyzer.
+This analysis is the basis for estimating migration efforts. Our consultants use rule-of-thumb numbers on how much effort typical tasks require. For example, converting a Camunda 7 Java Delegate to a Camunda 8 Job Worker might take one hour if it just involves refactoring the JavaDelegate. It might take more effort if internal Orchestration Cluster API is used in the delegate. Looking at [code conversion patterns](./code-conversion.md) allows you to come up with your own estimate, which you can multiply by the number of tasks from the analyzer.
 
 In past migration projects, this gave us a good ballpark estimation to plan and budget the project.
 

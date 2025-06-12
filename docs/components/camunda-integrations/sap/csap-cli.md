@@ -129,19 +129,19 @@ csap setup [options]
 | `--btpRoute`     | string | (For `btp-plugin` or `all`) Specifies the BTP route to reach the plugin. This is SAP/BTP specific.    | `camunda-btp-plugin`       |
 | `--clusterId`    | string | Specifies the Camunda Cluster ID.                                                                     | (Prompted if not provided) |
 | `--region`       | string | Specifies the Camunda Cluster Region.                                                                 | `bru-2`                    |
-| `--clientId`     | string | Specifies the Camunda API Client OAuth2 Client ID.                                                    | (Prompted if not provided) |
-| `--clientSecret` | string | Specifies the Camunda API Client OAuth2 Client Secret.                                                | (Prompted if not provided) |
+| `--clientId`     | string | Specifies the Orchestration Cluster API Client OAuth2 Client ID.                                      | (Prompted if not provided) |
+| `--clientSecret` | string | Specifies the Orchestration Cluster API Client OAuth2 Client Secret.                                  | (Prompted if not provided) |
 
 ## Environment variables
 
-The CLI can detect Camunda API credentials from environment variables. If these variables are set, the CLI will reuse them without prompting for input.
+The CLI can detect Orchestration Cluster API credentials from environment variables. If these variables are set, the CLI will reuse them without prompting for input.
 
-| Environment variable     | Description               |
-| ------------------------ | ------------------------- |
-| `CAMUNDA_CLUSTER_ID`     | Camunda cluster ID        |
-| `CAMUNDA_CLIENT_ID`      | Camunda API client ID     |
-| `CAMUNDA_CLIENT_SECRET`  | Camunda API client secret |
-| `CAMUNDA_CLUSTER_REGION` | Camunda cluster region    |
+| Environment variable     | Description                             |
+| ------------------------ | --------------------------------------- |
+| `CAMUNDA_CLUSTER_ID`     | Camunda cluster ID                      |
+| `CAMUNDA_CLIENT_ID`      | Orchestration Cluster API client ID     |
+| `CAMUNDA_CLIENT_SECRET`  | Orchestration Cluster API client secret |
+| `CAMUNDA_CLUSTER_REGION` | Camunda cluster region                  |
 
 ### Examples
 
@@ -187,7 +187,7 @@ $> csap setup --for all \
 
 # ...
 
-i Camunda API credentials found in environment. Reusing
+i Orchestration Cluster API credentials found in environment. Reusing
 ┌────────────────────────┬──────────┐
 │ (idx)                  │ Values   │
 ├────────────────────────┼──────────┤

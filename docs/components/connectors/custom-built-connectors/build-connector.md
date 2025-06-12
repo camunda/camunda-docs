@@ -40,7 +40,7 @@ and how it can be configured by process developers. Connector templates are a sp
 </div>
 
 :::tip
-To learn how to create a custom connector based on the Camunda REST connector, see [create a custom REST connector](create-connector-from-rest.md).
+To learn how to create a custom connector based on the Orchestration Cluster REST connector, see [create a custom REST connector](create-connector-from-rest.md).
 :::
 
 ## Connector SDK
