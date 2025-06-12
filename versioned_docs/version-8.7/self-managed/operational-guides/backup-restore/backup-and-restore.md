@@ -19,13 +19,30 @@ In case of failures that lead to data loss, you can recover the cluster from a b
 
 ## Motive
 
-The reasoning behind is that Operate, Tasklist, and Optimize use an Importer and Archiver to consume the exported indices from Zeebe. Those keep a pointer on the exported indices. Using Elasticsearch / OpenSearch snapshot feature directly would not result in coherent backups as the position would not be properly saved. That's why the backups need to be scheduled through their respective components.
+Camunda 8 components - Zeebe, Operate, Tasklist, and Optimize - store data in various formats and across multiple indices in Elasticsearch / OpenSearch. Because of this distributed and interdependent architecture, creating a consistent and reliable backup requires coordination between the components themselves.
 
-Similar for Zeebe the backup needs to be scheduled through Zeebe to create a coherent backup of the partitions. Just taking a disk backup for each Zeebe broker will not result in a coherent backup as data may differ between the brokers and partitions as a disk backup is never going to be executed on each broker at the same time.
+For example, using Elasticsearch / OpenSearch’s native snapshot capabilities directly will not produce a coherent backup. This is because Operate, Tasklist, and Optimize each manage their data across multiple indices, which cannot be reliably captured together without involvement from the components that understand their structure. For this reason, backups must be initiated through each component individually, using their built-in backup functionality.
 
-A backup of a Camunda 8 cluster consists of a backup of Zeebe, Operate, Tasklist, Optimize, and exported Zeebe indices in Elasticsearch. Since the data of these components are dependent on each other, it is important that the backup is consistent across all components. The backups of individual components taken independently may not form a consistent recovery point. Therefore, you must take the backup of a Camunda 8 cluster as a whole. To ensure a consistent backup, follow the process outlined below. Deviating from this process can lead to undetected data loss, as there is no reliable way to verify data integrity afterward.
+The same principle applies to Zeebe. Backups must be scheduled through Zeebe to ensure a consistent snapshot of all partition data. Simply taking a disk-level snapshot of each Zeebe broker is insufficient, as the brokers operate independently and data may not be aligned across them at the time of the snapshot. Since disk-level backups are not synchronized, this can lead to inconsistencies and invalid recovery points.
 
-Following the backup procedure outlined in the documentation results in a hot backup, meaning Zeebe continues to process and export data during the backup, and the WebApps remain fully operational.
+A complete backup of a Camunda 8 cluster includes:
+
+- Backups of Operate, Tasklist, and Optimize (triggered through their APIs)
+- Exported Zeebe-related indices from Elasticsearch/OpenSearch
+- A Zeebe broker partition backup (triggered through its API)
+
+Because the data across these systems is interdependent, all components must be backed up as part of the **same backup window**. Backups taken independently at different times may not align and could result in an unreliable restore point.
+
+:::warning
+To ensure a consistent backup, follow the process outlined in the documentation. Deviating from it can result in undetected data loss, as there is no reliable method to verify cross-component data integrity afterward.
+:::
+
+Following the documented procedure results in a hot backup, meaning that:
+
+- Zeebe continues processing and exporting data
+- WebApps (Operate, Tasklist, Optimize) remain fully operational during the backup process
+
+This ensures high availability while preserving the integrity of the data snapshot.
 
 ## Prerequisites
 
@@ -140,7 +157,7 @@ You may want to get inspired what our Consultants have been coming up with in th
 
 ### ContextPath
 
-If you're defining the `contextPath` in the Camunda Helm Chart or the `management.server.servlet.context-path` in a standalone setup, your API requests will require to prepend the value specific to the `contextPath` for the individual application. In case the `management.server.port` is defined then this also applies to `management.endpoints.web.base-path`. You can read more about this behavior in the [Spring Boot documentation](https://docs.spring.io/spring-boot/docs/2.1.7.RELEASE/reference/html/production-ready-monitoring.html#production-ready-customizing-management-server-context-path).
+If you're defining the `contextPath` in the Camunda Helm Chart or the `management.server.servlet.context-path` in a standalone setup, your API requests will require to prepend the value specific to the `contextPath` for the individual component. In case the `management.server.port` is defined then this also applies to `management.endpoints.web.base-path`. You can read more about this behavior in the [Spring Boot documentation](https://docs.spring.io/spring-boot/docs/2.1.7.RELEASE/reference/html/production-ready-monitoring.html#production-ready-customizing-management-server-context-path).
 
 :::warning Optimize Helm Chart Exception
 Setting the `contextPath` in the Helm Chart for Optimize will not overwrite the `contextPath` of the management API and it will remain `/`.
@@ -183,9 +200,9 @@ The backup process is divided in two parts:
 1. [Backup of the WebApps](#backup-of-the-webapps)
 2. [Backup of the Zeebe Cluster](#backup-of-the-zeebe-cluster)
 
-These two parts have to be executed in a sequential order with their sub-steps to form a consistent backup and are outlined below.
+These two parts must be executed in a sequential order with their sub-steps to form a consistent backup and are outlined below.
 
-For the WebApps the sub-step order is not crucial, meaning you can interchangeably back up first Operate, Optimize, Tasklist or in any other order, as long as those backups are completed before proceeding with the Zeebe Cluster backup. In the Zeebe Cluster backup the order is of importance.
+For the WebApps the sub-step order is not crucial, meaning you can interchangeably start the back up first Operate, Optimize, Tasklist or in any other order, as long as those backups are completed before proceeding with the Zeebe Cluster backup. In the Zeebe Cluster backup the order is of importance.
 
 ### Backup of the WebApps
 
@@ -194,6 +211,8 @@ For the WebApps the sub-step order is not crucial, meaning you can interchangeab
 :::note
 
 This will heavily depend on your setup, the following examples are based on [the example definitions](#management-api) in Kubernetes using either active port-forwarding or overwrite of the local curl command.
+
+As noted in the [Management API](#management-api) section, this API is typically not publicly exposed. Therefore, you will need to access it directly using any means available within your environment.
 
 :::
 
@@ -233,8 +252,6 @@ This will heavily depend on your setup, the following examples are based on [the
       </TabItem>
 
    </Tabs>
-
-<!-- TODO: move the wait for as verify step and not single point -->
 
 #### 1. Trigger a backup `x` of Optimize. Using the [Optimize management backup API](/self-managed/operational-guides/backup-restore/optimize-backup.md)
 
@@ -883,11 +900,11 @@ The restore process is divided in two parts:
 
 To restore Camunda 8 from a backup, all components must be restored from their backup corresponding to the same backup ID.
 
-The restore process assumes a **clean slate** for all components, including Elasticsearch / OpenSearch. This means **no prior persistent volumes** or **application state** should exist - all data is restored from scratch.
+The restore process assumes a **clean slate** for all components, including Elasticsearch / OpenSearch. This means **no prior persistent volumes** or **component state** should exist - all data is restored from scratch.
 
-It is **critical** to ensure that **no application is started** before the restore is complete. Starting any component prematurely will automatically initialize its data store or persistent disk, potentially interfering with the restore and causing existing data to block a successful recovery.
+It is **critical** to ensure that **no component is started** before the restore is complete. Starting any component prematurely will automatically initialize its data store or persistent disk, potentially interfering with the restore and causing existing data to block a successful recovery.
 
-Additionally, **backups must be restored** using the **exact Camunda version** they were created with. As noted during the backup process, the version is embedded in the backup name. This is essential because starting an application with a mismatched version may result in startup failures due to schema incompatibilities with Elasticsearch / OpenSearch and the application. Although schema changes are generally avoided in patch releases, they can still occur.
+Additionally, **backups must be restored** using the **exact Camunda version** they were created with. As noted during the backup process, the version is embedded in the backup name. This is essential because starting a component with a mismatched version may result in startup failures due to schema incompatibilities with Elasticsearch / OpenSearch and the component itself. Although schema changes are generally avoided in patch releases, they can still occur.
 
 When using the Camunda Helm Chart, this means figuring out the corresponding version. For this the [Camunda Helm Chart Version Matrix](https://helm.camunda.io/camunda-platform/version-matrix/) can help. Click on the `major.minor` release and then search for the backed up patch release of your component. The other components would typically fit in there as well.
 
