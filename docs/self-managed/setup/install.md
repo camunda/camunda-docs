@@ -64,7 +64,7 @@ Refer to the [Operate](/self-managed/operate-deployment/operate-configuration.md
 When installing the [camunda-platform](https://artifacthub.io/packages/helm/camunda/camunda-platform) Helm chart, all components shown on the architectural diagram above are installed.
 
 :::note
-Helm also supports document storage and management with [document handling](/self-managed/document-handling/overview.md).
+Helm also supports document storage and management with [document handling](/self-managed/concepts/document-handling/overview.md).
 :::
 
 ## Versioning

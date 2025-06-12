@@ -11,9 +11,9 @@ The following section outlines supported storage options, their intended use cas
 
 Jump to the environment configuration options below:
 
-- [Camunda 8 Run](/self-managed/document-handling/configuration/camunda-8-run.md)
-- [Docker Compose](/self-managed/document-handling/configuration/docker.md)
-- [Helm](/self-managed/document-handling/configuration/helm.md)
+- [Camunda 8 Run](/self-managed/concepts/document-handling/configuration/camunda-8-run.md)
+- [Docker Compose](/self-managed/concepts/document-handling/configuration/docker.md)
+- [Helm](/self-managed/concepts/document-handling/configuration/helm.md)
 
 :::note
 

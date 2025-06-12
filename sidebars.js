@@ -1288,6 +1288,29 @@ module.exports = {
     },
     {
       Concepts: [
+        {
+          type: "category",
+          label: "Document handling",
+          link: {
+            type: "doc",
+            id: "self-managed/concepts/document-handling/getting-started",
+          },
+          items: [
+            {
+              type: "category",
+              label: "Configuration",
+              link: {
+                type: "doc",
+                id: "self-managed/concepts/document-handling/configuration/overview",
+              },
+              items: [
+                "self-managed/concepts/document-handling/configuration/camunda-8-run",
+                "self-managed/concepts/document-handling/configuration/docker",
+                "self-managed/concepts/document-handling/configuration/helm",
+              ],
+            },
+          ],
+        },
         "self-managed/concepts/exporters",
         {
           "Multi-region": ["self-managed/concepts/multi-region/dual-region"],
@@ -1560,30 +1583,6 @@ module.exports = {
                 "self-managed/identity/miscellaneous/resource-management",
                 "self-managed/identity/miscellaneous/starting-configuration",
                 "self-managed/identity/miscellaneous/troubleshoot-identity",
-              ],
-            },
-          ],
-        },
-
-        {
-          type: "category",
-          label: "Document handling",
-          link: {
-            type: "doc",
-            id: "self-managed/document-handling/getting-started",
-          },
-          items: [
-            {
-              type: "category",
-              label: "Configuration",
-              link: {
-                type: "doc",
-                id: "self-managed/document-handling/configuration/overview",
-              },
-              items: [
-                "self-managed/document-handling/configuration/camunda-8-run",
-                "self-managed/document-handling/configuration/docker",
-                "self-managed/document-handling/configuration/helm",
               ],
             },
           ],
