@@ -1155,7 +1155,7 @@ If you have an active environment you can quickly figure out available backups u
 - [Operate](/self-managed/operational-guides/backup-restore/operate-tasklist-backup.md#get-backups-list-api)
 - [Optimize](/self-managed/operational-guides/backup-restore/optimize-backup.md#get-backup-info-api)
 - [Tasklist](/self-managed/operational-guides/backup-restore/operate-tasklist-backup.md#get-backups-list-api)
-- [Zeebe](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore#list-backups-api)
+- [Zeebe](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md#list-backups-api)
 
 This may not be possible in a lot of cases, especially if doing disaster recovery.
 
