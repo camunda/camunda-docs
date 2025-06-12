@@ -128,13 +128,19 @@ You may want to use [Kubernetes Cronjobs](https://kubernetes.io/docs/concepts/wo
 
 Kubernetes Cronjobs will spawn a [Job](https://kubernetes.io/docs/concepts/workloads/controllers/job/) on a regular basis. The job will run a defined image within a given namespace, allowing you to run commands and interact with the environment.
 
+:::note
+
+You may want to get inspired what our Consultants have been coming up with in the [Backup and Restore Workshop](https://github.com/camunda-consulting/c8-devops-workshop/tree/main/03%20-%20Lab%203%20-%20Backup%20and%20Restore). These examples in there can be used to achieve a similar automation.
+
+:::
+
    </TabItem>
 
 </Tabs>
 
 ### ContextPath
 
-If you're defining the `contextPath` in the Camunda Helm Chart or the `management.server.servlet.context-path` in a standalone setup, your API requests will require to prepend the value specific to the `contextPath` for the individual application. In case the `management.server.port` is defined then this also applies to `management.endpoints.web.base-path`. You can read more about this behavior in the [Spriing Boot documentation](https://docs.spring.io/spring-boot/docs/2.1.7.RELEASE/reference/html/production-ready-monitoring.html#production-ready-customizing-management-server-context-path).
+If you're defining the `contextPath` in the Camunda Helm Chart or the `management.server.servlet.context-path` in a standalone setup, your API requests will require to prepend the value specific to the `contextPath` for the individual application. In case the `management.server.port` is defined then this also applies to `management.endpoints.web.base-path`. You can read more about this behavior in the [Spring Boot documentation](https://docs.spring.io/spring-boot/docs/2.1.7.RELEASE/reference/html/production-ready-monitoring.html#production-ready-customizing-management-server-context-path).
 
 :::warning Optimize Helm Chart Exception
 Setting the `contextPath` in the Helm Chart for Optimize will not overwrite the `contextPath` of the management API and it will remain `/`.
@@ -1005,6 +1011,11 @@ camunda_zeebe_records_backup_1748937221
 
 ### Restore the Zeebe Cluster
 
+Prerequisites:
+
+- No persistent volumes or disks should contain any pre-existing data
+- Zeebe is configured with the same backup storage as outlined in the [prerequisites](#prerequisites)
+
 Camunda provides a standalone app which must be run on each node where a Zeebe broker will be running. This is a Spring Boot application similar to the broker and can run using the binary provided as part of the distribution. The app can be configured the same way a broker is configured - via environment variables or using the configuration file located in `config/application.yaml`.
 
 :::note
@@ -1235,18 +1246,16 @@ Zeebe will create a folder for each Partition ID and subfolder in there with eac
 ```bash
 #PartitionID folder
 #   BackupID folder
-1
-   1748937221
-   1749130104
-2
-   1748937221
-   1749130104
-3
-   1748937221
-   1749130104
+1/
+├── 1748937221
+└── 1749130104
+2/
+├── 1748937221
+└── 1749130104
+3/
+├── 1748937221
+└── 1749130104
 ```
 
    </summary>
 </details>
-
-<!-- TODO: check the sub-page (management api) links across the docs whether they need to be changed or need to point to the reworked backup page -->
