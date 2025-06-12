@@ -149,6 +149,20 @@ RewriteRule ^optimize/3.11.0/self-managed/(.*)$ /docs/8.3/self-managed/$1 [R=301
 #   8.8: content moves introduced prior to the release of version 8.8.
 #---------------------------------------------------------------------------------
 
+# Remove Starter Plan
+RewriteRule ^docs/next/components/console/manage-plan/upgrade-to-starter-plan/?$ /docs/next/components/console/manage-plan/upgrade-to-enterprise-plan/ [R=301,L]
+RewriteRule ^docs/components/console/manage-plan/upgrade-to-starter-plan/?$ /docs/components/console/manage-plan/upgrade-to-enterprise-plan/ [R=301,L]
+RewriteRule ^docs/8.6/components/console/manage-plan/upgrade-to-starter-plan/?$ /docs/8.6/components/console/manage-plan/upgrade-to-enterprise-plan/ [R=301,L]
+RewriteRule ^docs/8.5/components/console/manage-plan/upgrade-to-starter-plan/?$ /docs/8.5/components/console/manage-plan/upgrade-to-enterprise-plan/ [R=301,L]
+RewriteRule ^docs/8.4/components/console/manage-plan/upgrade-to-starter-plan/?$ /docs/next/components/console/manage-plan/upgrade-to-enterprise-plan/ [R=301,L]
+
+RewriteRule ^docs/next/components/console/manage-plan/migrate-from-prof-to-starter/?$ /docs/next/components/console/manage-plan/available-plans/ [R=301,L]
+RewriteRule ^docs/components/console/manage-plan/migrate-from-prof-to-starter/?$ /docs/next/components/console/manage-plan/available-plans/ [R=301,L]
+RewriteRule ^docs/8.6/components/console/manage-plan/migrate-from-prof-to-starter/?$ /docs/next/components/console/manage-plan/available-plans/ [R=301,L]
+RewriteRule ^docs/8.5/components/console/manage-plan/migrate-from-prof-to-starter/?$ /docs/next/components/console/manage-plan/available-plans/ [R=301,L]
+RewriteRule ^docs/8.4/components/console/manage-plan/migrate-from-prof-to-starter/?$ /docs/next/components/console/manage-plan/available-plans/ [R=301,L]
+
+
 # Migrate overview pages
 RewriteRule ^docs/next/components/concepts/what-is-camunda-8/(.*)$ /docs/next/components/ [R=301,L]
 RewriteRule ^docs/components/concepts/what-is-camunda-8/(.*)$ /docs/components/ [R=301,L]

@@ -8,6 +8,14 @@ description: "When utilizing Camunda's Starter plan, follow these steps to cance
 This setting is only visible in the **Starter plan** (formerly Professional plan) for owners and admins.
 :::
 
+:::caution Starter plans
+The Starter plan is no longer available. 
+
+- Existing customers using a Starter plan will need to either upgrade to the Enterprise plan, or move to the Free plan. 
+- To compare plan features and contact Camunda for advice and an Enterprise plan quote, refer to [Camunda 8 pricing](https://camunda.com/pricing/?utm_source=docs.camunda.io&utm_medium=referral).
+
+:::
+
 To cancel your subscription using Camunda's Starter plan, take the following steps:
 
 1. From the Console, click **Organization > Billing > Manage payment account**.
