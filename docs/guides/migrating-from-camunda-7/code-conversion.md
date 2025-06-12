@@ -5,7 +5,7 @@ sidebar_label: Code conversion
 description: "Understand patterns to convert your code written for Camunda 7 to run on Camunda 8."
 ---
 
-As Camunda 8 is a complete rewrite of Camunda 7, you must convert your models (BPMN and DMN) and some of your code to work with the Camunda 8 API.
+As Camunda 8 is a complete rewrite of Camunda 7, you must convert your models (BPMN and DMN) and some of your code to work with the Orchestration Cluster API.
 
 ## Overview
 
@@ -129,7 +129,7 @@ For example, to migrate an existing Spring Boot application, take the following 
 
 ### Client API
 
-<!-- TODO link to the Zeebe / Camunda API, call it Camunda 8 API, is the mentioning of the protocol still required? -->
+<!-- TODO link to the Orchestration Cluster API, is the mentioning of the protocol still required? -->
 
 The Zeebe API (for example, the workflow engine API - start process instances, subscribe to tasks, or complete them) has been completely redesigned and is not compatible with Camunda 7. While conceptually similar, the API uses different method names, data structures, and protocols.
 

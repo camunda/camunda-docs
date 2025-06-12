@@ -27,7 +27,7 @@ This command creates a new process instance and immediately responds with the pr
 ![create-process](assets/create-process.png)
 
 <details>
-   <summary>Create a process instance via Camunda 8 REST API</summary>
+   <summary>Create a process instance via Orchestration Cluster REST API</summary>
    <p>
 
 ```
@@ -73,7 +73,7 @@ When the client resends the command, it creates a new process instance.
 :::
 
 <details>
-   <summary>Create a process instance and await results via Camunda 8 REST API</summary>
+   <summary>Create a process instance and await results via Orchestration Cluster REST API</summary>
    <p>
 
 ```

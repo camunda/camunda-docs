@@ -1,7 +1,7 @@
 ---
 id: create-connector-from-rest
 title: Create a custom REST connector
-description: Learn how to create a custom connector based on and using the Camunda REST connector as a starting point.
+description: Learn how to create a custom connector based on and using the Orchestration Cluster REST connector as a starting point.
 ---
 
 import CustomRestURLImg from './img/custom-rest-connector.png';
@@ -11,9 +11,9 @@ import CustomBPMNImg from './img/custom-swapi-connector.png';
 
 # Create a custom REST connector
 
-Create a custom REST connector based on and using the [Camunda REST connector](/components/connectors/protocol/rest.md) as a starting point.
+Create a custom REST connector based on and using the [Orchestration Cluster REST connector](/components/connectors/protocol/rest.md) as a starting point.
 
-## Create a custom connector based on the Camunda REST connector
+## Create a custom connector based on the Orchestration Cluster REST connector
 
 1. In Web Modeler, add a [task](/components/modeler/bpmn/tasks.md) element to a new or existing BPMN diagram.
 1. Change the task type to [REST connector](/components/connectors/protocol/rest.md).
@@ -77,7 +77,7 @@ When creating a new template based on the REST connector, you must ensure that a
 
 ## Example: Custom Star Wars API connector
 
-The following example shows how you can create a custom connector based on the Camunda REST connector that retrieves data from the [Star Wars API (SWAPI)](https://swapi.dev/).
+The following example shows how you can create a custom connector based on the Orchestration Cluster REST connector that retrieves data from the [Star Wars API (SWAPI)](https://swapi.dev/).
 
 ### Step 1: Create connector template
 

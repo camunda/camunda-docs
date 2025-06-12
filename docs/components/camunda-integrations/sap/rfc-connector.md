@@ -17,7 +17,7 @@ For a standard overview of the steps involved in the SAP RFC connector, see the 
 
 ## Prerequisites
 
-- **Camunda API Client**
+- **Orchestration Cluster API Client**
   - [Create an API client](/components/console/manage-clusters/manage-api-clients.md) for your Camunda SaaS cluster with the full scope: `Zeebe,Tasklist,Operate,Optimize,Secrets`
 - **To run the SAP RFC connector**, the following SAP infrastructure setup is required:
   - [Cloud Foundry CLI](https://github.com/cloudfoundry/cli) with the [multiapps plugin](https://github.com/cloudfoundry/multiapps-cli-plugin) installed on the machine executing the deployment.

@@ -41,7 +41,7 @@ Official clients have been developed and tested by Camunda. They also add conven
 ## Learn about Camunda Components and their APIs
 
 :::note
-To migrate from Camunda's V1 component REST APIs to the V2 [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md), review [migrating to the Camunda 8 API](/apis-tools/migration-manuals/migrate-to-camunda-api.md).
+To migrate from Camunda's V1 component REST APIs to the V2 [Orchestration Cluster REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md), review [migrating to the Orchestration Cluster API](/apis-tools/migration-manuals/migrate-to-camunda-api.md).
 :::
 
 Camunda 8 components have APIs to enable polyglot developers to work with in their programming language of choice. Below are links to available component APIs.
@@ -52,7 +52,7 @@ Camunda 8 components have APIs to enable polyglot developers to work with in the
 
 <DocCardList items={[{type:"link", href:"/docs/next/apis-tools/administration-api/administration-api-reference/", label: "Administration API (REST)", docId:"apis-tools/administration-api/administration-api-reference"},
 {
-type:"link", href:"/docs/next/apis-tools/camunda-api-rest/camunda-api-rest-overview/", label: "Camunda 8 API (REST)", docId:"apis-tools/camunda-api-rest/camunda-api-rest-overview"
+type:"link", href:"/docs/next/apis-tools/camunda-api-rest/camunda-api-rest-overview/", label: "Orchestration Cluster API (REST)", docId:"apis-tools/camunda-api-rest/camunda-api-rest-overview"
 },
 {
 type:"link", href:"/docs/next/apis-tools/optimize-api/optimize-api-authentication/", label: "Optimize API (REST)", description: "Get, delete, and export reports and dashboards, enable and disable sharing, and more."

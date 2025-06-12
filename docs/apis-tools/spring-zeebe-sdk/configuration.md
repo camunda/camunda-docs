@@ -72,9 +72,9 @@ https://github.com/camunda/camunda/blob/main/clients/spring-boot-starter-camunda
 
 ## Connectivity
 
-The connection to Camunda API is determined by `camunda.client.grpc-address` and `camunda.client.rest-address`
+The connection to Orchestration Cluster API is determined by `camunda.client.grpc-address` and `camunda.client.rest-address`
 
-### Camunda API connection
+### Orchestration Cluster API connection
 
 #### gRPC address
 
@@ -92,7 +92,7 @@ You must add the `http://` scheme to the URL to avoid a `java.lang.NullPointerEx
 
 #### REST address
 
-Define address of the [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md) exposed by the [Zeebe Gateway](/self-managed/zeebe-deployment/zeebe-gateway/zeebe-gateway-overview.md):
+Define address of the [Orchestration Cluster REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md) exposed by the [Zeebe Gateway](/self-managed/zeebe-deployment/zeebe-gateway/zeebe-gateway-overview.md):
 
 ```yaml
 camunda:

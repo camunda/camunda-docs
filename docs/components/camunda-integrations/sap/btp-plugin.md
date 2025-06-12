@@ -13,7 +13,7 @@ The BTP plugin connects to Camunda 8 SaaS to provide:
 
 ## Prerequisites
 
-- **Camunda API Client**: [Create an API client](/components/console/manage-clusters/manage-api-clients.md) for your Camunda SaaS cluster with the full scope: `Zeebe,Tasklist,Operate,Optimize,Secrets`
+- **Orchestration Cluster API Client**: [Create an API client](/components/console/manage-clusters/manage-api-clients.md) for your Camunda SaaS cluster with the full scope: `Zeebe,Tasklist,Operate,Optimize,Secrets`
 - Locally, for configuring via `csap` only (see below): [Node.js >= 20 LTS](https://nodejs.org/en/about/previous-releases)
 - **On SAP BTP**:
   - [Cloud Foundry CLI](https://github.com/cloudfoundry/cli) with the [multiapps plugin](https://github.com/cloudfoundry/multiapps-cli-plugin) installed on the machine executing the deployment.
@@ -166,4 +166,4 @@ Make a `POST` http call to `https://<btpRoute>/backend/inbound` with this define
 }
 ```
 
-The advantage over Camunda 8 REST API: use the authentication realm between BTP and S/4 / ECC, there is no need for administrating additional credentials.
+The advantage over Orchestration Cluster REST API: use the authentication realm between BTP and S/4 / ECC, there is no need for administrating additional credentials.

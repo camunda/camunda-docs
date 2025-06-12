@@ -19,7 +19,7 @@ When a message is published and the message name and correlation key match to a 
 A subscription is closed when the corresponding element (e.g. the message catch event), or its scope is left. After a subscription is opened, it is not updated (for example, when the referenced process instance variable is changed.)
 
 <details>
-   <summary>Publish message via Camunda 8 REST API</summary>
+   <summary>Publish message via Orchestration Cluster REST API</summary>
    <p>
 
 ```
@@ -33,7 +33,7 @@ curl -L 'http://localhost:8080/v2/messages/publication' \
 ```
 
 See the [API reference for publish message](/apis-tools/camunda-api-rest/specifications/publish-message.api.mdx) for more information, including additional request fields and code samples.
-When you require immediate feedback if the message was correlated to an open subscription, you can use `Correlate message` via Camunda 8 REST API. If correlation is successful it will return the first process instance key the message correlated with.
+When you require immediate feedback if the message was correlated to an open subscription, you can use `Correlate message` via Orchestration Cluster REST API. If correlation is successful it will return the first process instance key the message correlated with.
 
 ```
 curl -L 'http://localhost:8080/v2/messages/correlation' \
@@ -61,7 +61,7 @@ When a subscription is opened, it polls the buffer for a proper message. If a pr
 The buffering of a message is disabled when its TTL is set to zero. If no proper subscription is open, the message is discarded.
 
 <details>
-   <summary>Publish message with TTL via Camunda 8 REST API</summary>
+   <summary>Publish message with TTL via Orchestration Cluster REST API</summary>
    <p>
 
 ```
@@ -97,7 +97,7 @@ A message is rejected and not correlated if a message with the same name, the sa
 The uniqueness check is disabled when no message ID is set.
 
 <details>
-   <summary>Publish message with message ID via Camunda 8 REST API</summary>
+   <summary>Publish message with message ID via Orchestration Cluster REST API</summary>
    <p>
 
 ```
