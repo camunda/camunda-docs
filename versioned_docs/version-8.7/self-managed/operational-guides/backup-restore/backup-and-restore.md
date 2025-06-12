@@ -157,17 +157,17 @@ You may want to get inspired what our Consultants have been coming up with in th
 
 ### ContextPath
 
-If you're defining the `contextPath` in the Camunda Helm Chart or the `management.server.servlet.context-path` in a standalone setup, your API requests will require to prepend the value specific to the `contextPath` for the individual component. In case the `management.server.port` is defined then this also applies to `management.endpoints.web.base-path`. You can read more about this behavior in the [Spring Boot documentation](https://docs.spring.io/spring-boot/docs/2.1.7.RELEASE/reference/html/production-ready-monitoring.html#production-ready-customizing-management-server-context-path).
+If you're defining the `contextPath` in the Camunda Helm chart or the `management.server.servlet.context-path` in a standalone setup, your API requests will require to prepend the value specific to the `contextPath` for the individual component. In case the `management.server.port` is defined then this also applies to `management.endpoints.web.base-path`. You can read more about this behavior in the [Spring Boot documentation](https://docs.spring.io/spring-boot/docs/2.1.7.RELEASE/reference/html/production-ready-monitoring.html#production-ready-customizing-management-server-context-path).
 
-:::warning Optimize Helm Chart Exception
-Setting the `contextPath` in the Helm Chart for Optimize will not overwrite the `contextPath` of the management API and it will remain `/`.
+:::warning Optimize Helm chart Exception
+Setting the `contextPath` in the Helm chart for Optimize will not overwrite the `contextPath` of the management API and it will remain `/`.
 :::
 
 <details>
 <summary>Example</summary>
 <summary>
 
-If you're defining the `contextPath` for Operate in the Camunda Helm Chart:
+If you're defining the `contextPath` for Operate in the Camunda Helm chart:
 
 ```bash
 operate:
@@ -910,7 +910,7 @@ It is **critical** to ensure that **no component is started** before the restore
 
 Additionally, **backups must be restored** using the **exact Camunda version** they were created with. As noted during the backup process, the version is embedded in the backup name. This is essential because starting a component with a mismatched version may result in startup failures due to schema incompatibilities with Elasticsearch / OpenSearch and the component itself. Although schema changes are generally avoided in patch releases, they can still occur.
 
-When using the Camunda Helm Chart, this means figuring out the corresponding version. For this the [Camunda Helm Chart Version Matrix](https://helm.camunda.io/camunda-platform/version-matrix/) can help. Click on the `major.minor` release and then search for the backed up patch release of your component. The other components would typically fit in there as well.
+When using the Camunda Helm chart, this means figuring out the corresponding version. For this the [Camunda Helm chart Version Matrix](https://helm.camunda.io/camunda-platform/version-matrix/) can help. Click on the `major.minor` release and then search for the backed up patch release of your component. The other components would typically fit in there as well.
 
 <details>
    <summary>Example</summary>
@@ -941,7 +941,7 @@ This means, we know:
 - Optimize: 8.7.1
 - Operate / Tasklist: 8.7.2
 
-Based on that we can look in the [matrix versioning of 8.7](https://helm.camunda.io/camunda-platform/version-matrix/camunda-8.7) and quickly see that the corresponding Camunda Helm Chart version is `12.0.2`.
+Based on that we can look in the [matrix versioning of 8.7](https://helm.camunda.io/camunda-platform/version-matrix/camunda-8.7) and quickly see that the corresponding Camunda Helm chart version is `12.0.2`.
 
    </summary>
 </details>
@@ -953,10 +953,10 @@ Prerequisite:
 - Elasticsearch / OpenSearch is set up and running with a clean slate and no data on it.
 - Elasticsearch / OpenSearch are configured with the same snapshot repository as used for backup, using the outlined documentation in [prerequisites](#prerequisites).
 
-If you're using an external Elasticsearch you don't have to interact with the Camunda Helm Chart or Camunda components in general until step 2 - [Restore the Zeebe Cluster](#restore-the-zeebe-cluster).
+If you're using an external Elasticsearch you don't have to interact with the Camunda Helm chart or Camunda components in general until step 2 - [Restore the Zeebe Cluster](#restore-the-zeebe-cluster).
 
 :::note
-In case of the Camunda Helm Chart, this could be achieved by e.g. disabling all other components in the `values.yml`.
+In case of the Camunda Helm chart, this could be achieved by e.g. disabling all other components in the `values.yml`.
 
 ```yaml
 elsaticsearch:
@@ -1048,13 +1048,13 @@ The amount of partitions backed up are also visible in the backup store of Zeebe
 <Tabs>
    <TabItem value="kubernetes" label="Kubernetes" default>
 
-Assuming you're using the official [Camunda Helm Chart](/self-managed/setup/install.md), you'll have to adjust your Helm `values.yml` to supply the following temporarily.
+Assuming you're using the official [Camunda Helm chart](/self-managed/setup/install.md), you'll have to adjust your Helm `values.yml` to supply the following temporarily.
 
 It will overwrite the start command of the resulting Zeebe pod, executing a restore script.
 It's important that the backup is configured for Zeebe to be able to restore from the backup!
 
-The following example is possible starting from the Camunda Helm Chart version `12.1.0`.
-Look at the note below the example to see how it can be achieved with an older Camund Helm Chart version.
+The following example is possible starting from the Camunda Helm chart version `12.1.0`.
+Look at the note below the example to see how it can be achieved with an older Camund Helm chart version.
 
 ```yaml
 zeebe:
@@ -1088,9 +1088,9 @@ zeebe-gateway:
    enabled: false
 ```
 
-:::note Older Camunda Helm Charts
+:::note Older Camunda Helm charts
 
-For older Camunda Helm Chart versions one can overwrite the startup behaviour of the Zeebe brokers by setting the command.
+For older Camunda Helm chart versions one can overwrite the startup behaviour of the Zeebe brokers by setting the command.
 
 ```yaml
 zeebe:
@@ -1103,7 +1103,7 @@ zeebe:
 
 :::
 
-If you're not using the Camunda Helm Chart, you can use a similar approach natively with Kubernetes to overwrite the command.
+If you're not using the Camunda Helm chart, you can use a similar approach natively with Kubernetes to overwrite the command.
 
 The application will exit and restart the pod. This is an expected behavior. The restore application will not try to restore the state again since the partitions were already restored to the persistent disk.
 
@@ -1144,7 +1144,7 @@ If the restore fails, you can re-run the application after fixing the root cause
 
 You have actively restored Elasticsearch / OpenSearch and the Zeebe cluster partitions. You can now normally start everything again and use Camunda 8.
 
-In the case of Kubernetes this would mean, to enable all components again in the Helm Chart and removing the environment variables that overwrite the Zeebe startup behavior.
+In the case of Kubernetes this would mean, to enable all components again in the Helm chart and removing the environment variables that overwrite the Zeebe startup behavior.
 
 In the case of a manual setup this would mean to execute the broker and all other components in their normal way.
 
