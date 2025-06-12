@@ -226,7 +226,7 @@ string before passing it to the LLM.
 #### Document support
 
 Similar to the [user prompt](agentic-ai-aiagent.md#user-prompt) **Documents** field, tool call responses can contain
-[Camunda Document references](../../../self-managed/document-handling/overview.md) within arbitrary structures
+[Camunda Document references](/self-managed/concepts/document-handling/overview.md) within arbitrary structures
 (supporting the same file types as for the user prompt).
 
 When serializing the tool call response to JSON, document references are transformed into a content block containing the plain text or base64 encoded document content, before being passed to the LLM.

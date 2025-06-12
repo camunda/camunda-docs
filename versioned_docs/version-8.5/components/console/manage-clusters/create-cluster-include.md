@@ -37,6 +37,14 @@ Only organization owners or users with the **Admin** role in Console can deploy 
 Users without **Admin** roles can deploy only on `dev`, `test`, or `stage` clusters.
 :::
 
+:::caution Starter plans
+The Starter plan is no longer available. 
+
+- Existing customers using a Starter plan will need to either upgrade to the Enterprise plan, or move to the Free plan. 
+- To compare plan features and contact Camunda for advice and an Enterprise plan quote, refer to [Camunda 8 pricing](https://camunda.com/pricing/?utm_source=docs.camunda.io&utm_medium=referral).
+
+:::
+
 ![cluster-creating-modal](./img/cluster-creating-modal.png)
 
 1. After you've made your selection and created the cluster, view the new entry in the **Clusters** tab:

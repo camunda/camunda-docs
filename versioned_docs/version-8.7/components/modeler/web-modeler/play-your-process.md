@@ -240,3 +240,11 @@ The use of Play may result in additional charges depending on your organization'
 - **Enterprise Plans:** Use a [development cluster](/components/concepts/clusters.md#development-clusters-in-the-enterprise-plan) to avoid costs. Alternatively, ensure your organization is designated as a development organization. For further assistance, contact your Customer Success Manager.
 - **Starter/Professional Plans:** Use a [development cluster](/components/concepts/clusters.md#development-clusters-in-the-starter-plan) to avoid costs. Starter plan users have one development cluster with free execution for development included in their plan. For Professional Plans, you may need to purchase a development cluster.
 - **Trial Plans:** You can use any cluster.
+
+:::caution Starter plans
+The Starter plan is no longer available. 
+
+- Existing customers using a Starter plan will need to either upgrade to the Enterprise plan, or move to the Free plan. 
+- To compare plan features and contact Camunda for advice and an Enterprise plan quote, refer to [Camunda 8 pricing](https://camunda.com/pricing/?utm_source=docs.camunda.io&utm_medium=referral).
+
+:::

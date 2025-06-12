@@ -21,3 +21,11 @@ Deployment and execution of models (process instances, decision instances, and t
 Additional clusters can be purchased through your [billing reservations](/components/console/manage-plan/update-billing-reservations.md).
 
 Visit the [clusters page](/components/concepts/clusters.md) to learn more about the differences between **development clusters** and **production clusters**. Additionally, review the related [Camunda Academy course](https://academy.camunda.com/c8-h2-create-cluster) on creating clusters.
+
+:::caution Starter plans
+The Starter plan is no longer available. 
+
+- Existing customers using a Starter plan will need to either upgrade to the Enterprise plan, or move to the Free plan. 
+- To compare plan features and contact Camunda for advice and an Enterprise plan quote, refer to [Camunda 8 pricing](https://camunda.com/pricing/?utm_source=docs.camunda.io&utm_medium=referral).
+
+:::

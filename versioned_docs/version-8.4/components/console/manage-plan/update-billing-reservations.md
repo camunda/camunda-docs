@@ -8,6 +8,14 @@ description: "Let's manage our hardware packages and edit reservations."
 This setting is only visible in the **Starter plan** and **Enterprise plan** for owners and admins.
 :::
 
+:::caution Starter plans
+The Starter plan is no longer available. 
+
+- Existing customers using a Starter plan will need to either upgrade to the Enterprise plan, or move to the Free plan. 
+- To compare plan features and contact Camunda for advice and an Enterprise plan quote, refer to [Camunda 8 pricing](https://camunda.com/pricing/?utm_source=docs.camunda.io&utm_medium=referral).
+
+:::
+
 ## Managing hardware packages
 
 Once signed up for the **Starter plan** or **Enterprise plan**, you have access to the **Billing** page.

@@ -8,6 +8,14 @@ description: "Retrieve and download your Starter plan invoices and update your b
 This setting is only visible in the **Starter plan** for owners and admins.
 :::
 
+:::caution Starter plans
+The Starter plan is no longer available. 
+
+- Existing customers using a Starter plan will need to either upgrade to the Enterprise plan, or move to the Free plan. 
+- To compare plan features and contact Camunda for advice and an Enterprise plan quote, refer to [Camunda 8 pricing](https://camunda.com/pricing/?utm_source=docs.camunda.io&utm_medium=referral).
+
+:::
+
 Once signed up for the **Starter plan**, you have access to the **Billing** page.
 
 You can access the **Billing** page by selecting **Organization management** in the Camunda Console navigation bar.
