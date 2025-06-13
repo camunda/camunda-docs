@@ -62,7 +62,7 @@ Unlike the [EKS Terraform setup](../amazon-eks/terraform-setup.md), we currently
 
 ### Outcome
 
-<!-- TODO: before merge, replace feature/openshift-private-link => stable/8.7 >
+<!-- TODO: before merge, replace  => stable/8.7 >
 
 <!-- The following diagram should be exported as an image and as a PDF from the sources https://miro.com/app/board/uXjVL-6SrPc=/ --->
 <!-- To export: click on the frame > "Export Image" > as PDF and as JPG (low res), then save it in the ./assets/ folder --->
@@ -279,7 +279,7 @@ rosa verify openshift-client
    This configuration will use the previously created S3 bucket for storing the Terraform state file:
 
    ```hcl reference
-   https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-private-link/aws/openshift/rosa-hcp-single-region/terraform/cluster/config.tf
+   https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/aws/openshift/rosa-hcp-single-region/terraform/cluster/config.tf
    ```
 
 3. Edit the `cluster.tf` file in the same directory as your `config.tf` file:
@@ -407,13 +407,13 @@ This setup creates a Certificate Authority (CA) for AWS VPN to perform encryptio
 Start by reviewing the `config.tf` file that configures the S3 backend for Terraform state management:
 
 ```hcl reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-private-link/aws/openshift/rosa-hcp-single-region/terraform/vpn/config.tf
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/aws/openshift/rosa-hcp-single-region/terraform/vpn/config.tf
 ```
 
 Then, review `vpn.tf`, which describes the VPC Client Endpoint configuration:
 
 ```hcl reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-private-link/aws/openshift/rosa-hcp-single-region/terraform/vpn/vpn.tf
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/aws/openshift/rosa-hcp-single-region/terraform/vpn/vpn.tf
 ```
 
 This VPN Client Endpoint follows [AWS best practices and constraints](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/what-is-best-practices.html):
@@ -440,7 +440,7 @@ This VPN Client Endpoint follows [AWS best practices and constraints](https://do
 
 4. Network designs vary; review and adjust the configuration to fit your topology.
 
-5. Customize the VPN module by referring to the [VPN module documentation](https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-private-link/aws/modules/vpn/README.md).
+5. Customize the VPN module by referring to the [VPN module documentation](https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/aws/modules/vpn/README.md).
 
 #### Outputs
 
@@ -489,7 +489,7 @@ This section applies if you have previously created a private cluster and want t
 2. Generate your client’s VPN configuration file. This file is compatible with [OpenVPN (ovpn)](https://openvpn.net/) format:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-private-link/aws/openshift/rosa-hcp-single-region/procedure/gather-vpn-config.sh
+   https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/aws/openshift/rosa-hcp-single-region/procedure/gather-vpn-config.sh
    ```
 
 3. Import the generated configuration file (`my-client.ovpn`) into an OpenVPN client:
@@ -515,7 +515,7 @@ You can access the created OpenShift cluster using the following steps:
 2. Set up the required environment variables from the OpenShift terraform module:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-private-link/aws/openshift/rosa-hcp-single-region/procedure/gather-cluster-login-id.sh
+   https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/aws/openshift/rosa-hcp-single-region/procedure/gather-cluster-login-id.sh
    ```
 
 3. If you want to give cluster administrator access to the created user, this is not required for a standard installation but can be useful for debugging:
