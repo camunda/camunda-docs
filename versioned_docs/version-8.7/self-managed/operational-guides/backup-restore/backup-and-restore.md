@@ -50,7 +50,7 @@ Following items are required to be configured to make use of the backup and rest
 
 1. Depending on the choice of secondary datastore, following must be configured on the datastore itself:
 
-   - [Elasticsearch snapshot repository](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshot-restore.html)
+   - [Elasticsearch snapshot repository](https://www.elastic.co/docs/deploy-manage/tools/snapshot-and-restore/manage-snapshot-repositories)
    - [OpenSearch snapshot repository](https://docs.opensearch.org/docs/latest/tuning-your-cluster/availability-and-recovery/snapshots/snapshot-restore/)
 
 2. Configure the components backup storage, these will partly be important for restore as well:
@@ -64,6 +64,15 @@ Following items are required to be configured to make use of the backup and rest
 
 :::note
 You should keep the backup storage of the components configured at all times to ease the backup and restore process and avoid unnecessary restarts.
+:::
+
+:::tip
+You can use the same backup storage location for both Elasticsearch / OpenSearch snapshots and Zeebe partition backups, as long as different paths are configured:
+
+- Set the `basePath` for Zeebe
+- Set the `base_path` for Elasticsearch / OpenSearch
+
+For details on how to configure these settings, refer to the linked documentation above.
 :::
 
 In the guide, we're showcasing backup and restore, based on the following tools:
