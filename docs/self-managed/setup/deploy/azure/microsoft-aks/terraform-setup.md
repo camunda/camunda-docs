@@ -258,7 +258,7 @@ It is essential to ensure this ID is correct, as Terraform will use it to determ
 
 ##### terraform_sp_app_id
 
-This is the Application (client) ID of the Azure Service Principal that Terraform uses for authentication. It **is required** to configure access policies in services such as Key Vault, particularly when using customer-managed keys (CMK) with AKS.
+This is the Application (client) ID of the Azure Service Principal that Terraform uses to configure Role-Based Access Control (RBAC). By providing this ID, Terraform ensures that the Service Principal has the necessary access rights to manage and provision resources within your Azure subscription.
 
 If you created a Service Principal manually, you can retrieve its application ID with the following command:
 
@@ -281,6 +281,10 @@ https://github.com/camunda/camunda-deployment-references/blob/main/azure/common/
 ```
 
 Define the value for `AZURE_LOCATION` with your chosen Azure region (for example, `westeurope`).
+
+:::tip
+For production deployments, it is recommended to replace the example values with custom names tailored to your environment. While the provided examples are functional and include mechanisms like `export AZURE_STORAGE_ACCOUNT_NAME="camundatfstate$RANDOM"` to ensure global uniqueness, using custom values enhances clarity and maintainability. Be sure to override these values to align with your organization's naming conventions and requirements.
+:::
 
 Now, follow these steps to create the storage account with versioning enabled:
 
