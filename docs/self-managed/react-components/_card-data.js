@@ -75,7 +75,7 @@ export const referenceCards = [
     link: "../reference-architecture/kubernetes",
     title: "Kubernetes",
     image: IconKubernetes,
-    description: "Guidance for deploying Camunda 8 Self-Managed within a Kubernetes cluster.",
+    description: "Deploy Camunda 8 Self-Managed within a Kubernetes cluster.",
   },
   {
     link: "../setup/deploy/other/docker",
@@ -88,5 +88,21 @@ export const referenceCards = [
     title: "Manual",
     image: IconManual,
     description: "Manually install Camunda 8 on a local or virtual machine.",
+  },
+];
+
+// Update cards on introduction page
+export const updateCards = [
+  {
+    link: "../reference-architecture/kubernetes",
+    title: "Update",
+    image: "",
+    description: "Upgrade Helm charts, and update your installation version.",
+  },
+  {
+    link: "../setup/deploy/other/docker",
+    title: "Configure",
+    image: "",
+    description: "Configure Camunda 8 beyond the default values.",
   },
 ];
