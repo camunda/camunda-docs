@@ -509,7 +509,7 @@ https://github.com/camunda/camunda/blob/stable/8.7/clients/spring-boot-starter-c
 
 To control which tenants your job workers should use, you can configure:
 
-```yaml reference referenceLinkText="Source" title="Default tenant ids"
+```yaml reference referenceLinkText="Source" title="Default worker tenant ids"
 https://github.com/camunda/camunda/blob/stable/8.7/clients/spring-boot-starter-camunda-sdk/src/test/resources/properties/8.7/default-tenant-ids.yaml
 ```
 
