@@ -2,7 +2,44 @@
 id: glossary
 title: "Glossary"
 description: "This section defines common terminology referenced within the documentation."
+toc_min_heading_level: 2
+toc_max_heading_level: 2
 ---
+
+Explore and understand definitions for key Camunda 8 terms and abbreviations.
+
+<div class="alphabet-rows">
+  <div class="alphabet-navigation">
+    <div class="letter-link"><a href="#automation-cluster">A</a></div>
+    <div class="letter-link"><a href="#bridge">B</a></div>
+    <div class="letter-link"><a href="#client">C</a></div>
+    <div class="letter-link"><a href="#deployment">D</a></div>
+    <div class="letter-link"><a href="#element">E</a></div>
+    <div class="letter-link"><a href="#flow-node">F</a></div>
+    <div class="letter-link">G</div>
+    <div class="letter-link"><a href="#human-task">H</a></div>
+    <div class="letter-link"><a href="#inbound-connector">I</a></div>
+    <div class="letter-link"><a href="#job">J</a></div>
+    <div class="letter-link">K</div>
+    <div class="letter-link"><a href="#leader">L</a></div>
+    <div class="letter-link"><a href="#manual-task">M</a></div>
+  </div>
+  <div class="alphabet-navigation">
+    <div class="letter-link">N</div>
+    <div class="letter-link"><a href="#orchestration-cluster">O</a></div>
+    <div class="letter-link"><a href="#partition">P</a></div>
+    <div class="letter-link">Q</div>
+    <div class="letter-link"><a href="#record">R</a></div>
+    <div class="letter-link"><a href="#sap">S</a></div>
+    <div class="letter-link">T</div>
+    <div class="letter-link"><a href="#user-task">U</a></div>
+    <div class="letter-link">V</div>
+    <div class="letter-link"><a href="#webhook-connector">W</a></div>
+    <div class="letter-link">X</div>
+    <div class="letter-link">Y</div>
+    <div class="letter-link"><a href="#zeebe-gateway">Z</a></div>
+  </div>
+</div>
 
 ### Automation cluster
 
