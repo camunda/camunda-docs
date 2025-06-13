@@ -7,9 +7,11 @@ description: "Troubleshooting considerations in Platform deployment."
 
 ## Helm chart security warning
 
-Due to [recent changes](https://github.com/bitnami/charts/issues/30850) from Bitnami (Helm chart 3rd party dependency), you could see a security warning printed when the Camunda Helm chart is installed, as Bitnami charts show that warning when the chart image is changed. As we repackage the Bitnami distribution with [Camunda Keycloak](https://github.com/camunda/keycloak) for Identity, **it's not a security risk per se**.
+Due to [recent changes](https://github.com/bitnami/charts/issues/30850) in Bitnami's Helm charts (a third-party dependency), you may see a security warning when installing the Camunda Helm chart. This warning appears because Bitnami charts emit such messages when the underlying image is replaced.
 
-Hence, the Helm option `allowInsecureImages` is enabled by default in Camunda Helm chart to allow using Camunda Keycloak:
+Camunda repackages the Bitnami distribution with [Camunda Keycloak](https://github.com/camunda/keycloak) for Identity. **This is not a security risk in itself.**
+
+To accommodate this, the Helm option `allowInsecureImages` is enabled by default in the Camunda Helm chart to support the use of Camunda Keycloak:
 
 ```yaml
 identityKeycloak:
@@ -18,7 +20,7 @@ identityKeycloak:
       allowInsecureImages: true
 ```
 
-Also, that option should be set for any 3rd party dependency by Bitnami (e.g., PostgreSQL and Elasticsearch sub-charts) in case you use your Docker registry to host the application Docker images. For example:
+If you're using your own Docker registry to host application images, you should also enable this option for any Bitnami-based third-party dependencies, such as PostgreSQL or Elasticsearch sub-charts. For example:
 
 ```yaml
 identityKeycloak:

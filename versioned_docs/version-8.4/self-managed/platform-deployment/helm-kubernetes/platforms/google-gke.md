@@ -34,7 +34,9 @@ Zeebe requires an Ingress controller that supports `gRPC`, so if you are using [
 
 ### Google Cloud load balancer
 
-As Camunda Identity management endpoints like health endpoint don't use port 80, you could need a [custom health check configuration](https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-configuration#direct_health) when using Google Cloud load balancer.
+Camunda Identity management endpoints, such as the health check endpoint, do not run on port 80. As a result, when using a Google Cloud Load Balancer, you may need a [custom health check configuration](https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-configuration#direct_health).
+
+Here’s an example of a `BackendConfig` you can apply:
 
 ```yaml
 apiVersion: cloud.google.com/v1
@@ -51,7 +53,7 @@ spec:
     port: 8082
 ```
 
-Finally, in the Helm values, you should assign the `BackendConfig` to the Identity service.
+Finally, in your Helm values, assign the `BackendConfig` to the Identity service.
 
 ```yaml
 identity:

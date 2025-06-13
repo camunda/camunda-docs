@@ -9,13 +9,17 @@ Camunda 8 Self-Managed offers flexible deployment options that allow it to span 
 - One **Management Group**: Console, Identity, and Web Modeler
 - One or more **Orchestration Group**: Zeebe, Operate, Tasklist, and Optimize.
 
-For this configuration, each namespace is set up independently through Helm, with deployments classified into two types: management and orchestration. Each type has a specific values file designed for its deployment requirements.
+For this configuration, each namespace is set up independently using Helm, with deployments categorized into two types: **management** and **orchestration**. Each type has a dedicated values file tailored to its specific deployment requirements.
 
 ## Purpose
 
-The main purpose of multi-namespace deployment is "logical grouping", which is useful for many cases like resource management. That means deployments across all namespaces are considered one cluster. Security concerns are out of the scope of this deployment method; hence, all credentials of the same deployment are shared between the namespaces.
+The primary goal of a multi-namespace deployment is **logical grouping**, which is beneficial for scenarios such as resource management. This approach treats all namespaces as part of a single logical cluster.
 
-In the following sections, we show a multi-namespace Camunda deployment: one namespace will be dedicated to the management cluster, and the other two will be used for the orchestration cluster.
+:::note
+Security considerations are outside the scope of this deployment model. As a result, all credentials associated with the same deployment are shared across namespaces.
+:::
+
+In the following sections, we demonstrate a multi-namespace Camunda deployment. One namespace is assigned to the management cluster, while two other namespaces are used for the orchestration cluster.
 
 ## Management deployment
 
