@@ -4,11 +4,18 @@ title: "Multi-namespace deployment"
 description: "Deploy Camunda 8 Self-Managed across several namespaces for better resource management and environment separation."
 ---
 
-Camunda 8 Self-Managed offers flexible deployment options that allow it to span multiple namespaces. This setup consists of a management cluster, which includes the Console, Identity, and Web Modeler components, along with several automation clusters (including Zeebe, Operate, Tasklist, and Optimize).
+Camunda 8 Self-Managed offers flexible deployment options that allow it to span multiple namespaces. This setup consists of:
 
-For this configuration, each namespace is set up independently through Helm, with deployments classified into two types: management and automation. Each type has a specific values file designed for its deployment requirements.
+- One **Management Group**: Console, Identity, and Web Modeler
+- One or more **Orchestration Group**: Zeebe, Operate, Tasklist, and Optimize.
 
-Below, we illustrate multi-namespace Camunda deployment: one namespace will be dedicated to the management cluster, and the other two will be used for the automation cluster.
+For this configuration, each namespace is set up independently through Helm, with deployments classified into two types: management and orchestration. Each type has a specific values file designed for its deployment requirements.
+
+## Purpose
+
+The main purpose of multi-namespace deployment is "logical grouping", which is useful for many cases like resource management. That means deployments across all namespaces are considered one cluster. Security concerns are out of the scope of this deployment method; hence, all credentials of the same deployment are shared between the namespaces.
+
+In the following sections, we show a multi-namespace Camunda deployment: one namespace will be dedicated to the management cluster, and the other two will be used for the orchestration cluster.
 
 ## Management deployment
 
