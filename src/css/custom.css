@@ -1082,6 +1082,17 @@ h4 .badge--long:nth-of-type(1) {
   margin-bottom: 0;
 }
 
+h4 .badge--medium {
+  margin-bottom: 0;
+  font-size: 12px;
+  margin-left: 5px;
+}
+
+h4 .badge--medium:nth-of-type(1) {
+  margin-left: 5px;
+  margin-bottom: 0;
+}
+
 /* API reference modifications for new H3 style */
 h4.openapi-security__summary-header {
   margin-top: 0;
