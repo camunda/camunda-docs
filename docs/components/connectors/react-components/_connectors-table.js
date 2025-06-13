@@ -168,7 +168,8 @@ const SearchableTable = () => {
     },
     {
       name: "Azure Blob Storage",
-      description: "Handle documents with Azure Blob Storage from your processes.",
+      description:
+        "Handle documents with Azure Blob Storage from your processes.",
       type: "Outbound",
       link: "../azure-blob-storage/",
       image: AzureBlobStorageImg,
