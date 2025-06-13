@@ -28,9 +28,9 @@ The CLI supports the following SAP integration modules:
 
 To use the CLI, download the binary matching your operating system and architecture from the [releases](https://github.com/camunda/sap-csap-cli/releases) section of its repository:
 
-1. Check that these requirements are met on your build system:
-   1. [Node.js](https://nodejs.org/en) >= 20 (which includes the required `npm`)
-   2. the [transient requirements for SAP's `mbt`](https://sap.github.io/cloud-mta-build-tool/makefile/) (Cloud MTA Build Tool), specifically `make`
+1. Check your build system meets the following requirements:
+   1. [Node.js](https://nodejs.org/en) >= 20 (this includes the required `npm`)
+   2. The [transient requirements for SAP's `mbt`](https://sap.github.io/cloud-mta-build-tool/makefile/) (Cloud MTA Build Tool), specifically `make`
 1. Navigate to the [releases](https://github.com/camunda/sap-csap-cli/releases) page.
 1. Download the binary for your platform:
    - For Linux: `csap-x86_64-unknown-linux-gnu`
