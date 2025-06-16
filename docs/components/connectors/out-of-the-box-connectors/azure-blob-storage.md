@@ -37,6 +37,10 @@ Select the desired operation from the **Action** dropdown.
 2. (Optional) Enter the **File name**. If left blank, the filename from the document metadata will be used.
 3. Reference the **Document to upload**.
 
+:::note
+If an uploaded document already exists in the container with the same name, it will be overwritten. Depending on the settings made on the Azure Storage Account, the previous version of the document may still be accessible in the file version history.
+:::
+
 ### Download document
 
 1. Enter the **Container name** — it must match the container the **SAS token** was created for.
