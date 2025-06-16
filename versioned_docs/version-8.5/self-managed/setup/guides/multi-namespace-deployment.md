@@ -6,8 +6,8 @@ description: "Deploy Camunda 8 Self-Managed across several namespaces for better
 
 Camunda 8 Self-Managed offers flexible deployment options that allow it to span multiple namespaces. This setup consists of:
 
-- One **Management Group**: Console, Identity, and Web Modeler
-- One or more **Orchestration Group**: Zeebe, Operate, Tasklist, and Optimize.
+- One **Management Cluster**: Console, Identity, and Web Modeler
+- One or more **Orchestration Cluster**: Zeebe, Operate, Tasklist, and Optimize.
 
 For this configuration, each namespace is set up independently using Helm, with deployments categorized into two types: **management** and **orchestration**. Each type has a dedicated values file tailored to its specific deployment requirements.
 
