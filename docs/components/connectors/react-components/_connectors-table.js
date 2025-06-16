@@ -42,12 +42,28 @@ import TwilioImg from "../img/connector-twilio.png";
 import UipathImg from "../img/connector-uipath.png";
 import WebhookImg from "../img/connector-webhook.png";
 import WhatsappImg from "../img/connector-whatsapp.png";
+import AiagentImg from "../img/connector-aiagent.png";
+import VectorImg from "../img/connector-vector.png";
 
 const SearchableTable = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterType, setFilterType] = useState("All");
 
   const connectors = [
+    {
+      name: "AI Agent",
+      description: "Integrate Large Language Models (LLMs) with AI agents.",
+      type: "Outbound",
+      link: "../agentic-ai-aiagent",
+      image: AiagentImg,
+    },
+    {
+      name: "Ad-Hoc Tools Schema Resolver",
+      description: "Implement tool resolution of the AI Agent connector.",
+      type: "Outbound",
+      link: "../agentic-ai-ad-hoc-tools-schema-resolver",
+      image: AiagentImg,
+    },
     {
       name: "Amazon Bedrock",
       description: "Interact with Amazon Bedrock from your processes.",
@@ -436,6 +452,14 @@ const SearchableTable = () => {
       type: "Outbound",
       link: "../uipath/",
       image: UipathImg,
+    },
+    {
+      name: "Vector database",
+      description:
+        "Embed, store, and retrieve Large Language Model (LLM) embeddings.",
+      type: "Outbound",
+      link: "../embeddings-vector-db/",
+      image: VectorImg,
     },
     {
       name: "WhatsApp",

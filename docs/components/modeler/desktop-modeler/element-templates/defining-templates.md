@@ -58,8 +58,8 @@ Example:
 - `description : String`: Optional description of the template. Shown in the element template selection modal and in the properties panel (after applying an element template).
 - `keywords: Array<String>`: Optional list of keywords. Can be used to help users find this template. Keywords are used for search and filtering but are not displayed in the UI.
 - `documentationRef : String`: Optional URL pointing to a template documentation. Shown in the properties panel (after applying an element template).
-- `version : Integer`: Optional version of the template. If you add a version to a template, it is considered unique based on its ID and version. Two templates can have the same ID if their version is different.
-- `engines : Object`: Optional dictionary of environments compatible with the template. Environment version is specified with semantic versions range.
+- `version : Integer`: Optional property to support [templates versioning and upgrading](#template-versioning). If you add a version to a template, it is considered unique based on its ID and version. Two templates can have the same ID if their version is different.
+- `engines : Object`: Optional dictionary of environments [compatible with the template](#template-compatibility). Environment version is specified with semantic versions range.
 - `appliesTo : Array<String>`: List of BPMN types the template can be applied to.
 - `elementType : Object`: Optional type of the element. If you configure `elementType` on a template, the element is replaced with the specified type when a user applies the template.
 - `properties : Array<Object>`: List of properties of the template.
@@ -82,39 +82,69 @@ For example, given the following `$schema` definition, the application takes `0.
 
 The JSON schema versioning is backward-compatible, meaning that all versions including or below the current one are supported.
 
+## Template versioning
+
+To support [template evolution](https://github.com/bpmn-io/element-templates/blob/main/docs/LIFE_CYCLE.md#overview), maintain a `version` property on your templates:
+
+```json
+{
+  ...,
+  "version": 1
+}
+```
+
+Once a template with a new `version` is available to users, the editor tooling suggests an upgrade, [preserving technical bindings](https://github.com/bpmn-io/element-templates/blob/main/docs/LIFE_CYCLE.md#upgrade-behavior) on a best effort basis.
+
+:::tip
+Versioning is an important cornerstone of template evolution. Review the [upstream documentation](https://github.com/bpmn-io/element-templates/blob/main/docs/LIFE_CYCLE.md#overview) to understand foundations of our upgrade mechanism, and foundations on how the element template life cycle works.
+:::
+
 ## Template compatibility
 
-You can define template compatibility with execution platforms and applications using the `engines` property.
+Define [template compatibility](https://github.com/bpmn-io/element-templates/blob/main/docs/LIFE_CYCLE.md#compatibility) with execution platforms (Camunda orchestration cluster versions) and related components (such as Web Modeler) using the `engines` property.
 
 This property is a dictionary object, where the execution platform names are the keys, and the [semantic version](https://semver.org/) ranges are the values.
 
 For example, the following `engines` definition specifies that the template is compatible with Camunda 8.6 or higher.
 
 ```json
-"engines": {
-  "camunda": ">8.5"
+{
+  ...,
+  "engines": {
+    "camunda": ">8.5"
+  }
 }
 ```
 
 Compatibility is only validated if the platform version is provided by both the template and the modeler. In the example below, the template is compatible with specified versions of both Desktop and Web Modeler, but it requires Camunda version 8.6 or higher for both:
 
 ```json
-"engines": {
-  "camunda": ">8.5",
-  "camundaDesktopModeler": ">=5.30",
-  "camundaWebModeler": "^8.5.5"
+{
+  ...,
+  "engines": {
+    "camunda": ">8.5",
+    "camundaDesktopModeler": ">=5.30",
+    "camundaWebModeler": "^8.5.5"
+  }
 }
 ```
 
 You can also use this feature to explicitly specify a template’s incompatibility with a platform. For instance, the following template is incompatible with all versions of Web Modeler:
 
 ```json
-"engines": {
-  "camundaWebModeler": "0"
+{
+  ...,
+  "engines": {
+    "camundaWebModeler": "0"
+  }
 }
 ```
 
-If no engines are specified, the template is considered compatible with any execution platform version.
+If no `engines` are specified, a template is considered compatible with any execution platform version.
+
+:::tip
+Review the [upstream documentation](https://github.com/bpmn-io/element-templates/blob/main/docs/LIFE_CYCLE.md#overview) to learn more about template evolution and the life cycle.
+:::
 
 ## Supported BPMN types
 
@@ -471,11 +501,11 @@ For `zeebe:calledElement` bindings, variable propagation is not supported. To pr
 
 #### `zeebe:userTask`
 
-| **Binding `type`**          | `zeebe:userTask`                                                                                              |
-| --------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| **Valid property `type`'s** | `Hidden`                                                                                                      |
+| **Binding `type`**          | `zeebe:userTask`                                                                                                      |
+| --------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| **Valid property `type`'s** | `Hidden`                                                                                                              |
 | **Binding parameters**      | This is a flag-like binding, so it has no parameters and only applies to templates with element type `bpmn:UserTask`. |
-| **Mapping result**          | `<zeebe:userTask />`                                                                                          |
+| **Mapping result**          | `<zeebe:userTask />`                                                                                                  |
 
 The `zeebe:userTask` binding allows you to configure the implementation type for a templated `bpmn:UserTask`. When present, it sets the task as a Camunda user task; when omitted, the task defaults to a job worker.
 
