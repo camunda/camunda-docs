@@ -193,28 +193,28 @@ In that case, you could declare `Result Expression` as follows:
 
 ## Activation
 
-The `Activation` section pertains specifically to [inbound connectors](/components/connectors/connector-types.md).
+The **Activation** section pertains specifically to [inbound connectors](/components/connectors/connector-types.md).
 
 ### Activation condition
 
-The activation condition validates conditions against the incoming message payload. This field enables filtering payloads that can initiate a process. Leaving this field empty results in all incoming messages triggering a new process, except those failing pre-validation checks, such as HMAC signature verification for specific connectors.
+The **Activation condition** field evaluates conditions against the incoming message payload. It enables filtering of payloads that can initiate a process. If left empty, all valid incoming messages will trigger a new process—except those that fail pre-validation checks, such as **HMAC signature verification** for specific connectors.
 
 ## Correlation
 
 ### Correlation key (process)
 
-This field is instrumental in specifying which variable within a connector should function as the process correlation key.
-Learn more about [message correlation](components/concepts/messages.md#message-correlation-overview).
+The **Correlation key (process)** field specifies which variable from the connector output should serve as the process correlation key.  
+Learn more about [message correlation](/components/concepts/messages.md#message-correlation-overview).
 
 ### Correlation key (payload)
 
-This field guides the connector on how to extract a correlation value from the incoming message payload.
+The **Correlation key (payload)** field tells the connector how to extract the correlation value from the incoming message payload.
 
 ### Message ID expression
 
-This field extracts a unique message identifier from the incoming message payload. Messages sharing the same identifier
-within a defined TTL (time-to-live) will be correlated once at most.
-Leaving this field empty may result in identical messages submitted and processed multiple times.
+The **Message ID expression** field defines how to extract a unique identifier from the incoming message payload.  
+Messages that share the same identifier within the defined **time-to-live (TTL)** will be correlated only once.  
+Leaving this field empty may cause identical messages to be submitted and processed multiple times.
 
 ## BPMN errors and failing jobs {#bpmn-errors}
 
