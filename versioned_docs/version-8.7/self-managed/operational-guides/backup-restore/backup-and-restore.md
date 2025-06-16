@@ -546,7 +546,9 @@ while [[ "$(curl -s "$TASKLIST_MANAGEMENT_API/actuator/backups/$BACKUP_ID" | jq 
 
 ### Backup of the Zeebe Cluster
 
-#### 1. Soft pause exporting in Zeebe. Using the [management API](/self-managed/zeebe-deployment/operations/management-api.md)
+#### 1. Soft pause exporting in Zeebe. Using the [management API](/self-managed/zeebe-deployment/operations/management-api.md?exporting=softPause#exporting-api)
+
+This will continue exporting records, but not delete those records (log compaction) from Zeebe. This makes the backup a hot backup as outlined in the [motive](#motive).
 
 ```bash
 curl -XPOST "$GATEWAY_MANAGEMENT_API/actuator/exporting/pause?soft=true"
