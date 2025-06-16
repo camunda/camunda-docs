@@ -1,39 +1,35 @@
 ---
 id: variable-import
 title: "Enable or disable variable ingestion"
-description: "Learn how enable or disable Optimize variables ingestion"
+description: "Learn how to enable or disable variable ingestion in Camunda Optimize."
 ---
 
-Learn how to configure Camunda Optimize to control variables ingestion and optimize performance.
+Learn how to configure Camunda Optimize to control variable ingestion and enhance performance.
 
-## About
+## Overview
 
-Camunda Optimize imports process variables by default to provide comprehensive insights into both process performance
-and business context. However, in high-throughput environments or data-sensitive deployments, variable import can
-impact system performance and resource consumption.
+By default, Camunda Optimize imports process variables to provide deep insights into both process performance and business context. However, in high-throughput environments or data-sensitive scenarios, importing variables may impact system performance and resource usage.
 
-Variable data import affects several aspects of Optimize operation:
+Variable ingestion affects several areas of Optimize’s operation:
 
-- **Import Performance**: Large or numerous process variables can slow down data ingestion
-- **Memory Usage**: Variable data increases memory consumption during processing
-- **Storage Requirements**: Variable data contributes to overall storage footprint
-- **Indexing Duration**: Additional variable data extends indexing operations
+- **Import performance**: Importing large or numerous variables can slow down data ingestion.
+- **Memory usage**: Variable data increases memory consumption during processing.
+- **Storage requirements**: Imported variables contribute to overall storage demands.
+- **Indexing duration**: Additional variable data extends indexing time.
 
-For organizations that focus primarily on process performance metrics rather than detailed business context,
-disabling variable import can improve system scalability and responsiveness.
+If your organization primarily focuses on process performance metrics rather than detailed business context, disabling variable ingestion can help improve scalability and responsiveness.
 
-## Optimize Configuration
+## Optimize configuration
 
-Variable import behavior is controlled through the `CAMUNDA_OPTIMIZE_ZEEBE_VARIABLE_IMPORT_ENABLED=true|false`
-environment variable.
+Variable ingestion is controlled using the `CAMUNDA_OPTIMIZE_ZEEBE_VARIABLE_IMPORT_ENABLED=true|false` environment variable.
 
-### Configuration Options
+### Configuration options
 
-| Value   | Behavior                                     | Use Case                                                        |
-| ------- | -------------------------------------------- | --------------------------------------------------------------- |
-| `true`  | Variables are imported and indexed (default) | Standard deployments requiring full context                     |
-| `false` | Variable import is disabled                  | High-throughput environments or performance-focused deployments |
+| Value   | Behavior                                     | Recommended use case                                     |
+| ------- | -------------------------------------------- | -------------------------------------------------------- |
+| `true`  | Variables are imported and indexed (default) | Standard deployments requiring complete business context |
+| `false` | Variable import is disabled                  | High-throughput or performance-optimized environments    |
 
-Note that disabling variable import means variable-based reports and filters will not be available in
-the Optimize interface. Ensure this aligns with your monitoring and reporting requirements before
-applying this configuration.
+:::note
+Disabling variable ingestion means variable-based reports and filters will no longer be available in the Optimize interface. Ensure this setting aligns with your reporting and monitoring needs before applying the configuration.
+:::
