@@ -133,7 +133,7 @@ An example of how to use the new `CorrelationResult` can be found in the [Connec
 ### Deprecation of Self-Managed AWS Marketplace
 
 Starting of October 2025 the Self-Managed AWS Marketplace offering gets deprecated and is no longer publicly available. Current customers can continue using the product until their contract expires.
-Please refer to our [new AWS Marketplace listing](https://aws.amazon.com/marketplace/pp/prodview-6y664fcnydiqg?sr=0-2&ref_=beagle&applicationId=AWSMPContessa) for further details.
+Please refer to our [new AWS Marketplace listing](https://aws.amazon.com/marketplace/pp/prodview-6y664fcnydiqg?sr=0-1&ref_=beagle&applicationId=AWSMPContessa) for further details.
 
 #### Helm chart - Separated Ingress deprecation
 
