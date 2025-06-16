@@ -24,11 +24,11 @@ If you are completely new to Terraform and the concept of IaC, consider reading 
 - [Terraform](https://developer.hashicorp.com/terraform/downloads) for provisioning infrastructure as code.
 - [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with your AKS cluster.
 - [jq](https://stedolan.github.io/jq/download/) to parse and manipulate JSON (e.g. Terraform outputs).
-- (optional) Custom domain name/[DNS zone](https://learn.microsoft.com/en-us/azure/dns/dns-zones-records) in Azure DNS. This allows you to expose Camunda 8 endpoints and connect via community-supported [zbctl](https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md) or [Camunda Modeler](https://camunda.com/download/modeler/).
+- (optional) Custom domain name/[DNS zone](https://learn.microsoft.com/en-us/azure/dns/dns-zones-records) in Azure DNS. This allows you to expose Camunda 8 endpoints to an external network via the configured ingress.
 - **Azure service quotas**
   - Check your quotas for **Virtual Networks**, **vCPU cores**, and **Storage Accounts** in the target region: [Azure subscription and service limits](https://learn.microsoft.com/azure/azure-resource-manager/management/azure-subscription-service-limits).
   - If you reach a limit, you can [request a quota increase through the Azure portal](https://learn.microsoft.com/en-us/azure/extended-zones/request-quota-increase).
-  - This guide uses **GNU Bash** for all shell commands.
+- This guide uses **GNU Bash** for all shell commands.
 
 For the exact tool versions we’ve tested against, see the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/add-azure-domain-support/.tool-versions) file in the repository.
 
@@ -178,7 +178,34 @@ The [Azure Terraform provider](https://registry.terraform.io/providers/hashicorp
 
 For all environments, create a dedicated Azure AD service principal and assign only the necessary permissions. You can create and assign roles via the [Azure Portal](https://portal.azure.com/) or with the Azure CLI.
 
+<Tabs groupId="domain" defaultValue="existing-sp" queryString values={
+[
+{label: 'Existing SP', value: 'existing-sp' },
+{label: 'New SP', value: 'new-sp' },
+]}>
+
+<TabItem value="existing-sp">
+
+To log in using an existing Azure Service Principal, you need the `appId`, `password`, and `tenant` values associated with the Service Principal. These credentials allow Terraform to authenticate and provision resources in your Azure subscription. Use the following command to log in:
+
+Note that its display name will be needed as an environment variable [in the next step](#creating-terraformtfvars).
+
+```bash
+az login --service-principal \
+  -u <appId> \
+  -p <password> \
+  --tenant <tenant-id>
+```
+
+Replace `<appId>`, `<password>`, and `<tenant-id>` with the actual values of your Service Principal.
+
+</TabItem>
+
+<TabItem value="new-sp">
+
 To create a new service principal and assign it the required permissions:
+
+Feel free to change the example name, however note that the its name will be needed as an environment variable [in the next step](#creating-terraformtfvars).
 
 ```bash
 az ad sp create-for-rbac \
@@ -196,11 +223,16 @@ az login --service-principal \
   --tenant <tenant-id>
 ```
 
-Note that the `appId` will be needed as a value for `terraform_sp_app_id` in `terraform.tfvars` [in the next step](#creating-terraformtfvars).
+Replace `<appId>`, `<password>`, and `<tenant-id>` with the actual values of your Service Principal.
+
+</TabItem>
+</Tabs>
 
 #### Creating terraform.tfvars
 
 To configure your deployment, create a `terraform.tfvars` file in the root of the `aks-single-region` folder. This file defines critical environment-specific settings like your Azure subscription and the Service Principal used for authentication.
+
+Follow the below guide for getting the necessary values:
 
 <Tabs groupId="domain" defaultValue="with-domain" queryString values={
 [
@@ -210,26 +242,36 @@ To configure your deployment, create a `terraform.tfvars` file in the root of th
 
 <TabItem value="with-domain">
 
-```hcl
-subscription_id     = "00000000-0000-0000-0000-000000000000"
-terraform_sp_app_id = "00000000-0000-0000-0000-000000000000"
-dns_zone_id         = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/your-dns-resource-group/providers/Microsoft.Network/dnszones/yourdomain.com"
+First, set the following environment variables:
+
+```shell
+# The domain name that your Azure DNS zone manages
+export TLD=<yourdomain.com>
+# The resource group that your Azure DNS zone belongs to
+export AZURE_DNS_RESOURCE_GROUP=<your-dns-resource-group>
+# The name of the Service Principal you plan to use for deploying the infrastructure
+export AZURE_SP_NAME=<your-sp-display-name>
 ```
+
+Then, run the following script to create the `terraform.tfvars` file:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/add-azure-domain-support/azure/kubernetes/aks-single-region/procedure/tfvars-domain.sh
+```
+
+##### subscription_id
+
+This value specifies the Azure Subscription ID in which all infrastructure will be deployed, including the AKS cluster, PostgreSQL Flexible Server, and Key Vault. To retrieve your current subscription ID, you can run the following command:
+
+##### terraform_sp_app_id
+
+This is the Application (client) ID of the Azure Service Principal that Terraform uses to configure Role-Based Access Control (RBAC). By providing this ID, Terraform ensures that the Service Principal has the necessary access rights to manage and provision resources within your Azure subscription.
 
 ##### dns_zone_id
 
-This value specifies the full Azure resource ID of the DNS Zone used for managing your custom domain (e.g., `yourdomain.com`) with `external-dns`.
+This value specifies the full Azure resource ID of the DNS Zone used for managing your custom domain.
 
 It is **required** if you are deploying Camunda 8 with a domain name. Terraform uses this value to grant the necessary role-based access control (RBAC) permissions to the `external-dns` Kubernetes add-on, allowing it to create and update DNS records dynamically within your Azure DNS Zone.
-
-To retrieve the resource ID for your existing DNS Zone, run the following command:
-
-```shell
-az network dns zone show \
-  --name <yourdomain.com> \
-  --resource-group <your-dns-resource-group> \
-  --query "id" -o tsv
-```
 
 If this value is missing or incorrect, `external-dns` will not have permission to manage records, and DNS entries for your Camunda 8 endpoints will not be created.
 
@@ -237,38 +279,30 @@ If this value is missing or incorrect, `external-dns` will not have permission t
 
 <TabItem value="without-domain">
 
-```hcl
-subscription_id     = "00000000-0000-0000-0000-000000000000"
-terraform_sp_app_id = "00000000-0000-0000-0000-000000000000"
+First, set the following environment variable:
+
+```shell
+# The name of the Service Principal you plan to use for deploying the infrastructure
+export AZURE_SP_NAME=<your-sp-display-name>
 ```
 
-</TabItem>
+Then, run the following script to create the `terraform.tfvars` file:
 
-</Tabs>
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/add-azure-domain-support/azure/kubernetes/aks-single-region/procedure/tfvars-no-domain.sh
+```
 
 ##### subscription_id
 
 This value specifies the Azure Subscription ID in which all infrastructure will be deployed, including the AKS cluster, PostgreSQL Flexible Server, and Key Vault. To retrieve your current subscription ID, you can run the following command:
 
-```shell
-az account show --query "id" -o tsv
-```
-
-It is essential to ensure this ID is correct, as Terraform will use it to determine where resources are provisioned.
-
 ##### terraform_sp_app_id
 
 This is the Application (client) ID of the Azure Service Principal that Terraform uses to configure Role-Based Access Control (RBAC). By providing this ID, Terraform ensures that the Service Principal has the necessary access rights to manage and provision resources within your Azure subscription.
 
-If you created a Service Principal manually, you can retrieve its application ID with the following command:
+</TabItem>
 
-```shell
-az ad sp list --display-name "<your-service-principal-name>" --query "[0].appId" -o tsv
-```
-
-If you're already using a Service Principal to authenticate (for example, with `az login --service-principal`), this value corresponds to the `appId` you supplied during login.
-
-This value is critical because Terraform uses it to assign the necessary permissions for interacting with encryption keys and other protected resources. If the ID is incorrect or omitted, key-related configurations may fail, and AKS will be unable to use CMK for securing cluster secrets.
+</Tabs>
 
 #### Create an Azure Storage Account for Terraform state management
 
