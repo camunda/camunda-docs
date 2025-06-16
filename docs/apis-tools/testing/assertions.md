@@ -446,7 +446,7 @@ Use the response of the evaluate decision command to identify the decision insta
 
 ```java
 // given/when
-EvaluateDecisionResponse response = 
+EvaluateDecisionResponse response =
     client
         .newEvaluateDecisionCommand()
         .decisionId(decisionId)
