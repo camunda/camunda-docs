@@ -130,6 +130,11 @@ An example of how to use the new `CorrelationResult` can be found in the [Connec
 
 ### Camunda 8 Self-Managed
 
+### Deprecation of Self-Managed AWS Marketplace
+
+Starting of October 2025 the Self-Managed AWS Marketplace offering gets deprecated and is no longer publicly available. Current customers can continue using the product until their contract expires.
+Please refer to our [new AWS Marketplace listing](https://aws.amazon.com/marketplace/pp/prodview-6y664fcnydiqg?sr=0-2&ref_=beagle&applicationId=AWSMPContessa) for further details.
+
 #### Helm chart - Separated Ingress deprecation
 
 The separated Ingress Helm configuration for Camunda 8 Self-Managed has been deprecated in 8.6, and will be removed from the Helm chart in 8.8. Only the combined Ingress configuration is officially supported. See the [Ingress guide](/self-managed/setup/guides/ingress-setup.md) for more information on configuring a combined Ingress setup.

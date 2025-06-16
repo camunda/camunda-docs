@@ -4,6 +4,15 @@ title: "Install AWS Marketplace"
 description: "Learn how to Install the AWS Marketplace."
 ---
 
+:::warning AWS Marketplace Listing Update
+
+Starting of **October 2025**, this guide and our previous Self-Managed AWS Marketplace offering was deprecated and is no longer publicly available.
+
+**Current customers can continue using the product until their contract expires.**  
+Please refer to our [new AWS Marketplace listing](https://aws.amazon.com/marketplace/pp/prodview-6y664fcnydiqg?sr=0-2&ref_=beagle&applicationId=AWSMPContessa) for further details.
+
+:::
+
 You can subscribe to Camunda directly from the AWS Marketplace. You then have the convenience of viewing your Camunda subscription as part of your AWS bill, and you do not have to supply any additional billing information to Camunda.
 
 Estimated time to deploy: 3 hours

@@ -42,6 +42,11 @@ Following the end-of-life of macOS 12, support for Desktop Modeler on macOS 12 h
 
 ## Key changes
 
+### Deprecation of Self-Managed AWS Marketplace
+
+Starting of October 2025 the Self-Managed AWS Marketplace offering gets deprecated and is no longer publicly available. Current customers can continue using the product until their contract expires.
+Please refer to our [new AWS Marketplace listing](https://aws.amazon.com/marketplace/pp/prodview-6y664fcnydiqg?sr=0-2&ref_=beagle&applicationId=AWSMPContessa) for further details.
+
 ### Deploy diagram change <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span> {#web-modeler-deploy-diagram-change}
 
 With this version, we ship a breaking change to how Web Modeler **Deploy diagram** modals work. Clusters must now be proactively [configured](/self-managed/modeler/web-modeler/configuration/configuration.md#clusters) to be able to deploy from Web Modeler.

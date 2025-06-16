@@ -52,6 +52,11 @@ This release contains the following limitations:
 
 ### Key changes
 
+### Deprecation of Self-Managed AWS Marketplace
+
+Starting of October 2025 the Self-Managed AWS Marketplace offering gets deprecated and is no longer publicly available. Current customers can continue using the product until their contract expires.
+Please refer to our [new AWS Marketplace listing](https://aws.amazon.com/marketplace/pp/prodview-6y664fcnydiqg?sr=0-2&ref_=beagle&applicationId=AWSMPContessa) for further details.
+
 #### Removal of Web Modeler's beta API
 
 The Web Modeler beta API has been removed. The API was deprecated in 8.3 and is no longer available in 8.5. Use the [Web Modeler v1 API](/apis-tools/web-modeler-api/index.md) instead.
@@ -117,6 +122,11 @@ This release contains the following limitations:
       2. [Disable connectors component](/self-managed/setup/guides/connect-to-an-oidc-provider.md#configuration) when configuring a custom OIDC provider.
 
 ### Key changes
+
+### Deprecation of Self-Managed AWS Marketplace
+
+Starting of October 2025 the Self-Managed AWS Marketplace offering gets deprecated and is no longer publicly available. Current customers can continue using the product until their contract expires.
+Please refer to our [new AWS Marketplace listing](https://aws.amazon.com/marketplace/pp/prodview-6y664fcnydiqg?sr=0-2&ref_=beagle&applicationId=AWSMPContessa) for further details.
 
 #### Form linking
 
