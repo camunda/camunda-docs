@@ -188,8 +188,6 @@ For all environments, create a dedicated Azure AD service principal and assign o
 
 To log in using an existing Azure Service Principal, you need the `appId`, `password`, and `tenant` values associated with the Service Principal. These credentials allow Terraform to authenticate and provision resources in your Azure subscription. Use the following command to log in:
 
-Note that its display name will be needed as an environment variable [in the next step](#creating-terraformtfvars).
-
 ```bash
 az login --service-principal \
   -u <appId> \
@@ -199,13 +197,20 @@ az login --service-principal \
 
 Replace `<appId>`, `<password>`, and `<tenant-id>` with the actual values of your Service Principal.
 
+Also, ensure that you export the `<appId>` as follows, as it will be needed [in the next step](#creating-terraformtfvars).
+
+```shell
+# The appid of the Service Principal you plan to use for deploying the infrastructure
+export AZURE_SP_ID=<your-sp-appid>
+```
+
 </TabItem>
 
 <TabItem value="new-sp">
 
 To create a new service principal and assign it the required permissions:
 
-Feel free to change the example name, however note that the its name will be needed as an environment variable [in the next step](#creating-terraformtfvars).
+Feel free to change the example name.
 
 ```bash
 az ad sp create-for-rbac \
@@ -224,6 +229,13 @@ az login --service-principal \
 ```
 
 Replace `<appId>`, `<password>`, and `<tenant-id>` with the actual values of your Service Principal.
+
+Also, ensure that you export the `<appId>` as follows, as it will be needed [in the next step](#creating-terraformtfvars).
+
+```shell
+# The appid of the Service Principal you plan to use for deploying the infrastructure
+export AZURE_SP_ID=<your-sp-appid>
+```
 
 </TabItem>
 </Tabs>
@@ -249,8 +261,6 @@ First, set the following environment variables:
 export TLD=<yourdomain.com>
 # The resource group that your Azure DNS zone belongs to
 export AZURE_DNS_RESOURCE_GROUP=<your-dns-resource-group>
-# The name of the Service Principal you plan to use for deploying the infrastructure
-export AZURE_SP_NAME=<your-sp-display-name>
 ```
 
 Then, run the following script to create the `terraform.tfvars` file:
@@ -279,14 +289,7 @@ If this value is missing or incorrect, `external-dns` will not have permission t
 
 <TabItem value="without-domain">
 
-First, set the following environment variable:
-
-```shell
-# The name of the Service Principal you plan to use for deploying the infrastructure
-export AZURE_SP_NAME=<your-sp-display-name>
-```
-
-Then, run the following script to create the `terraform.tfvars` file:
+Run the following script to create the `terraform.tfvars` file:
 
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/add-azure-domain-support/azure/kubernetes/aks-single-region/procedure/tfvars-no-domain.sh
