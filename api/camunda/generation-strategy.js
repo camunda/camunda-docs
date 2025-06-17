@@ -258,7 +258,7 @@ function addFrequentlyLinkedDocs(version) {
   return [
     {
       from: /The Camunda 8 API \(REST\) Overview page/g,
-      to: "The [Camunda 8 API (REST) Overview page](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)",
+      to: "The [Camunda 8 API (REST) Overview page](/apis-tools/orchestration-cluster-api-rest/camunda-api-rest-overview.md#query-api)",
     },
     {
       from: /endpoint is an alpha feature/g,

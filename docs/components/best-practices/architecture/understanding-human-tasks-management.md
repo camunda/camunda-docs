@@ -27,7 +27,7 @@ As a general rule, you should assign human tasks, like [user tasks](/components/
   </bpmn:extensionElements>
 ```
 
-Then, require individual members of that group to explicitly _claim tasks_ before working on them. This way, you avoid different people working on the same task at the same time. Refer to [`assign`](/apis-tools/camunda-api-rest/specifications/assign-user-task.api.mdx).
+Then, require individual members of that group to explicitly _claim tasks_ before working on them. This way, you avoid different people working on the same task at the same time. Refer to [`assign`](/apis-tools/orchestration-cluster-api-rest/specifications/assign-user-task.api.mdx).
 
 You can also directly claim tasks in Camunda Tasklist with the click of a button.
 

@@ -78,27 +78,27 @@ Make sure that you create your own validation logic that matches your use case.
 
 ## Implement task life cycle with the Camunda 8 API
 
-Use the Camunda 8 REST API to implement task life cycle operations. You can find the API specifications [here](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md).
+Use the Camunda 8 REST API to implement task life cycle operations. You can find the API specifications [here](/apis-tools/orchestration-cluster-api-rest/camunda-api-rest-overview.md).
 
 Task life cycle events can be tracked via the following API endpoints:
 
-- [`POST /user-tasks/:userTaskKey/assignment`](/apis-tools/camunda-api-rest/specifications/assign-user-task.api.mdx) or [`DELETE /user-tasks/:userTaskKey/assignee`](/apis-tools/camunda-api-rest/specifications/unassign-user-task.api.mdx) to change task assignment.
-- [`PATCH /user-tasks/:userTaskKey`](/apis-tools/camunda-api-rest/specifications/update-user-task.api.mdx) to update a task.
-- [`POST /user-tasks/:userTaskKey/completion`](/apis-tools/camunda-api-rest/specifications/complete-user-task.api.mdx) to complete a task.
+- [`POST /user-tasks/:userTaskKey/assignment`](/apis-tools/orchestration-cluster-api-rest/specifications/assign-user-task.api.mdx) or [`DELETE /user-tasks/:userTaskKey/assignee`](/apis-tools/orchestration-cluster-api-rest/specifications/unassign-user-task.api.mdx) to change task assignment.
+- [`PATCH /user-tasks/:userTaskKey`](/apis-tools/orchestration-cluster-api-rest/specifications/update-user-task.api.mdx) to update a task.
+- [`POST /user-tasks/:userTaskKey/completion`](/apis-tools/orchestration-cluster-api-rest/specifications/complete-user-task.api.mdx) to complete a task.
 
 - Assign user task:
-  - [`POST /user-tasks/:userTaskKey/assignment`](/apis-tools/camunda-api-rest/specifications/assign-user-task.api.mdx)
-  - [`DELETE /user-tasks/:userTaskKey/assignee`](/apis-tools/camunda-api-rest/specifications/unassign-user-task.api.mdx) is used to unassing a user task.
+  - [`POST /user-tasks/:userTaskKey/assignment`](/apis-tools/orchestration-cluster-api-rest/specifications/assign-user-task.api.mdx)
+  - [`DELETE /user-tasks/:userTaskKey/assignee`](/apis-tools/orchestration-cluster-api-rest/specifications/unassign-user-task.api.mdx) is used to unassing a user task.
 - Update user task:
-  - [`PATCH /user-tasks/:taskKey`](/apis-tools/camunda-api-rest/specifications/update-user-task.api.mdx)
+  - [`PATCH /user-tasks/:taskKey`](/apis-tools/orchestration-cluster-api-rest/specifications/update-user-task.api.mdx)
 - Complete user task:
-  - [`POST /user-tasks/:taskKey/completion`](/apis-tools/camunda-api-rest/specifications/complete-user-task.api.mdx)
+  - [`POST /user-tasks/:taskKey/completion`](/apis-tools/orchestration-cluster-api-rest/specifications/complete-user-task.api.mdx)
 
-#### [`POST /user-tasks/:userTaskKey/assignment`](/apis-tools/camunda-api-rest/specifications/assign-user-task.api.mdx)
+#### [`POST /user-tasks/:userTaskKey/assignment`](/apis-tools/orchestration-cluster-api-rest/specifications/assign-user-task.api.mdx)
 
 Use the `assignment` endpoint to change the task assignment. Use the `action` attribute to indicate the cause of the change, including `claim`, `reassign`, or `assign`.
 
-#### [`PATCH /user-tasks/:userTaskKey`](/apis-tools/camunda-api-rest/specifications/update-user-task.api.mdx)
+#### [`PATCH /user-tasks/:userTaskKey`](/apis-tools/orchestration-cluster-api-rest/specifications/update-user-task.api.mdx)
 
 Use the `update` endpoint to change candidate users, groups, the due date, or the follow-up date by defining the `changeset`. You can also send it with an empty `changeset` and just pass an `action`. Use it to send `start`, `pause`, and `resume` actions. Additionally, you can send anything of interest or relevant for the audit log such as `escalate`, `requestFurtherInformation`, `uploadDocument`, or `openExternalApp`.
 
@@ -113,7 +113,7 @@ An example request payload could look like this:
 }
 ```
 
-#### [`POST /user-tasks/:userTaskKey/completion`](/apis-tools/camunda-api-rest/specifications/complete-user-task.api.mdx)
+#### [`POST /user-tasks/:userTaskKey/completion`](/apis-tools/orchestration-cluster-api-rest/specifications/complete-user-task.api.mdx)
 
 Use the `completion` endpoint to complete a task. Pass along with it the outcome of the task via the `action` attribute, such as `approve` or `reject`.
 

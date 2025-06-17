@@ -1,0 +1,213 @@
+---
+id: delete-resource
+title: "Delete resource"
+description: "Deletes a deployed resource."
+sidebar_label: "Delete resource"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWN9v2zYQ/leIe2oxRXK6tOv0MMBL0y1b2wWOuz0kAUpLJ4stRaokFUcw9L8PR0ryrxjrw16GJYARSzze8b77vjPJNTi+tJDewAytbkyGcBeBrtFwJ7S6zCGFHCU6HMcjyNFmRtRkACm88cOWcZZjLXWLOTO9bXyr5qWwLOOKLZBxVhudobUsx0IoQQ4ilmMmrNCKGfzaCIMVKrdroQ0rtKm23t2qMVZjhVoyV2IffgxuGaq81kK5mF3XmImi9WbDOGt1w1ZcOeY0CzkyobzJp8Hmd2w/sZobXqFDE98qiGB8JNjWoHiFkMLWDIhAEDA1dyVE0KeVQ+pMg/vozUtkX7Bluthd3LimPQzdxv5xOHcMHsWWwBvsCdudGQdAQwQ2K7HikK7BtTUla50RaglddxfSQ+t+1nlLFptsCy4tRpBp5VA5GuN1LUXmiZV8tpT++tC3XnzGzEEEqpGSLyQOuNWGaOkEWrIeKTrDAg2qDOntLrZTZoZBn2BWaouKLQIPGouUO3dsJaQkbGtunEdBSmYw0ya3VJBGOqJYYXTFHJVijB3fqveNdTT3JzZhoqCK3Isc80CVPiWhHC7RQASELnfh1asziKASSlRNBelp10XghKN8e0kNipsFhKHryMagrbWyAYUXk8lh2vNtHgnb8yiPoYvg7NiEYeEs547TLKUdu+dS5DEcLWJt9EJi9d1hMfcLcRUsWY6OC8lCkRmnxZHhAnPS3s3s7Tn78ezlD3fPSudqmybJarWKTZGdYC6cNrE2y8QUGX3I7nnM5iUaZBVvfYfJc09bLtmGLsx69YuMROVCrn4xVJ6dQo3c2+VaGN1n/1Y1GyMO2uKUfZxdMpGjcqJohx61E9rPKXgjyQdf6MalC8nVF9hQ4TDofhTbVBU3YwPZDdBFYB13zVYaR9j4/YsD30SLX+fzKxZcsEznSP0hiKAPFG+T+GwyiaDiD+Hp1WTSkU+q+Ddkohg+1JIrHvrSbjpCsUob7PnjExPKOt7r/l+ojDZiKfbjxrAty57Eb0JGQY5nk7N/ViBpqdCNetLSk5aetHRUSy8f+3GaKkYoG+IhGqMN01nWGIM5W5VC4rAJGmL3+5HAxSetPWntSWuHWusiqNCVmo53tbaeOnRaSSEZj0/JeutM0yV+F0kLicCiuR+OP42RkMI6KKhLk2Rdauu6dF1r47rknspzz42gnbyvJg0HpQ0MkjrjsgyrOKwkDdAZa8jwnFeNyjl7zWYX13P2C3e44q1HlkLuun49eT151CuZHvE4vbpkIcPAw63eMLglkT/qNhh/i2N/drKYNUa49pqmBXgWyA2aaUPFGPnRx/Pe6TkYQdR/eTuw5re/5r7w1Ndmm3PZxQOv6qDKx45NE0/KQvuAPWUOl051RGNDrpP49JCeV5deZZmuqkb5VquWbCVcyfgWFJlsLJ2lIQIpMlTWr6s/RQ9m78II+zNEZKcxlTFwbeiwS+HKZhFnukqyMG38v5B6kVRcqKQPYZPz6fuPH95MT95dnl98uL44OY0nsXtwHi5SQMXV1jrCAWzcw+3nut78sPzvrj96Sjp8cEktuVAkEl+Zdd9DbsbLEAsRpLs3I2MbuYv6VnAD6/WCW/xoZNfR668NmhbSm7tN5/CtJheWvm+uFo7W5Nmsv4V4zv4L9yuPQtq/5Kr1HVQ29AQRfMF277qpu+siKJHnaDxOweI8oHEyJz8bDwd3MF00zJhmGdbuiO3Olol61/j7cfXH9ZxaUX8BVOnc34fxFd198VVYtfZV8h3Ov1uD5GrZ8CXZBp/09ze6dCoN
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Delete resource"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/resources/{resourceKey}/deletion"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Deletes a deployed resource.
+This can be a process definition, decision requirements definition, or form definition
+deployed using the deploy resources endpoint. Specify the resource you want to delete in the `resourceKey` parameter.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "resourceKey",
+      in: "path",
+      required: true,
+      description:
+        "The key of the resource to delete.\nThis can be the key of a process definition, the key of a decision requirements\ndefinition or the key of a form definition\n",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          nullable: true,
+          properties: {
+            operationReference: {
+              description:
+                "A reference key chosen by the user that will be part of all records resulting from this operation.\nMust be > 0 if provided.\n",
+              type: "integer",
+              format: "int64",
+              minimum: 1,
+            },
+          },
+          title: "DeleteResourceRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": { description: "The resource is deleted." },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The resource is not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

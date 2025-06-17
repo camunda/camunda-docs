@@ -31,7 +31,7 @@ An error can be thrown within the process using an error **end event**.
 Alternatively, you can inform Zeebe that a business error occurred using a **client command**. This throw error client
 command can only be used while processing a job.
 
-In addition to throwing the error, this also disables the job and stops it from being activated or completed by other job workers. Refer to the [gRPC command](/apis-tools/zeebe-api/gateway-service.md#throwerror-rpc) and [REST request](/apis-tools/camunda-api-rest/specifications/throw-job-error.api.mdx) for details.
+In addition to throwing the error, this also disables the job and stops it from being activated or completed by other job workers. Refer to the [gRPC command](/apis-tools/zeebe-api/gateway-service.md#throwerror-rpc) and [REST request](/apis-tools/orchestration-cluster-api-rest/specifications/throw-job-error.api.mdx) for details.
 
 ## Catching the error
 

@@ -261,7 +261,7 @@ To turn off the bastion host, set the `enable_jump_host` variable to `false` in 
 
 ## 3. Verify connectivity to Camunda 8
 
-Using Terraform, you can obtain the HTTP endpoint of the Application Load Balancer and interact with Camunda through the [REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md).
+Using Terraform, you can obtain the HTTP endpoint of the Application Load Balancer and interact with Camunda through the [REST API](/apis-tools/orchestration-cluster-api-rest/camunda-api-rest-overview.md).
 
 1. Navigate to the Terraform folder:
 
@@ -275,9 +275,9 @@ cd camunda-deployment-references-main/aws/ec2/terraform
 terraform output -raw alb_endpoint
 ```
 
-3. Use the [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md) to communicate with Camunda:
+3. Use the [Camunda 8 REST API](/apis-tools/orchestration-cluster-api-rest/camunda-api-rest-overview.md) to communicate with Camunda:
 
-Follow the example in the [REST API documentation](/apis-tools/camunda-api-rest/camunda-api-rest-authentication.md) to authenticate and retrieve the cluster topology.
+Follow the example in the [REST API documentation](/apis-tools/orchestration-cluster-api-rest/camunda-api-rest-authentication.md) to authenticate and retrieve the cluster topology.
 
 ## Manage Camunda 8
 

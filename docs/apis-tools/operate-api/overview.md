@@ -6,7 +6,7 @@ description: "Operate API is a REST API and provides searching, getting, and cha
 ---
 
 :::note
-To migrate from Camunda's V1 component REST APIs to the V2 [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md), review [migrating to the Camunda 8 API](/apis-tools/migration-manuals/migrate-to-camunda-api.md).
+To migrate from Camunda's V1 component REST APIs to the V2 [Camunda 8 REST API](/apis-tools/orchestration-cluster-api-rest/camunda-api-rest-overview.md), review [migrating to the Camunda 8 API](/apis-tools/migration-manuals/migrate-to-camunda-api.md).
 :::
 
 Operate API is a REST API and provides searching, getting, and changing Operate data.
@@ -48,7 +48,7 @@ The Swagger UI may display incorrect `id` and `key` values for data created on Z
 
 This is because Zeebe may create `key` values greater than JavaScript's `Number.MAX_SAFE_INTEGER` (2^53-1) and the Swagger UI may display such values incorrectly.
 
-The [Camunda 8 API v.2](../camunda-api-rest/camunda-api-rest-overview.md) returns `id` and `key` values as strings, so this limitation does not apply.
+The [Camunda 8 API v.2](../orchestration-cluster-api-rest/camunda-api-rest-overview.md) returns `id` and `key` values as strings, so this limitation does not apply.
 :::
 
 ## Multi-tenancy

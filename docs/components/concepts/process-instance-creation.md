@@ -51,7 +51,7 @@ Response:
 }
 ```
 
-See the [API reference for process instance creation](/apis-tools/camunda-api-rest/specifications/create-process-instance.api.mdx) for more information, including additional request fields and code samples.
+See the [API reference for process instance creation](/apis-tools/orchestration-cluster-api-rest/specifications/create-process-instance.api.mdx) for more information, including additional request fields and code samples.
 
    </p>
  </details>
@@ -100,7 +100,7 @@ Response:
 }
 ```
 
-See the [API reference for process instance creation](/apis-tools/camunda-api-rest/specifications/create-process-instance.api.mdx) for more information, including additional request fields and code samples.
+See the [API reference for process instance creation](/apis-tools/orchestration-cluster-api-rest/specifications/create-process-instance.api.mdx) for more information, including additional request fields and code samples.
 
    </p>
  </details>
@@ -153,7 +153,7 @@ curl -L 'http://localhost:8080/v2/process-instances' \
 }'
 ```
 
-See the [API reference for process instance creation](/apis-tools/camunda-api-rest/specifications/create-process-instance.api.mdx) for more information, including additional request fields and code samples.
+See the [API reference for process instance creation](/apis-tools/orchestration-cluster-api-rest/specifications/create-process-instance.api.mdx) for more information, including additional request fields and code samples.
 
    </p>
  </details>

@@ -1,0 +1,237 @@
+---
+id: remove-group-from-tenant
+title: "Remove a group from a tenant"
+description: "Removes a single group from a specified tenant without deleting the group."
+sidebar_label: "Remove a group from a tenant"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWMFu2zgQ/ZUBTy1Wtdw27XZ1M9Kkm0W3CFJ395DNgRbHFluKVMlRHEPQvy+GlFwndooecvTBkCVx5s1w3iPF6QTJVRDFtZijlZbETSZcg16SdvZCiUJ4rN0tfvCubc69q4dhmVAYSq8bHicKcRVHBZAQtF0ZhBUbwNK7mp81WOqlRgUUzWGtqXItgUKDpO0KqBpMJiITjfSyRkLPgXXCyhpFIZLphRKZ0AzZSKpEJjx+b7VHJQryLT6Ma14htFZ/bxG0QkschQe3jIDJIyOGssJaiqITtGkYLJDXdiX6Ptvix/CeEn6b7+PoNwwQGmcDBn7/anrCl32QNN1rGSC0ZYkhLFtjNpCKp1IddlPuM3EynR721Xh3qxUqUJIk6ADWEdxKoxUHWzpLaIlNZdMYXUaq5I13C4P1b18D++l2croPMIPLNBIUktQG3OIrlgQyQBq4QAXawvXV+Sn8cfLm95tnFVETijxfr9cTvyxfoNLk/MT5Ve6XJf943PMJzCv0CLXcwAJBKqUZUxpOqEFPGsPIxBLIxfkYwgae+Ml/VmRjCVJYTMat8Y8CPSxUJpbO15JEIVqv98Qxgy9XFyMBNiPd70FHm6VsDfuQC9dSsTDSfuNCkSZzEPQhSmjrWvrNyK/7AH0mAklqd9IQ2hKu0O/Gry29frXnm2nx53x+CckFlE4hLJ0HqnQYgTiJWltdt7UoTqbTTNTyLt29nU579skV/4VMLOBdY6SN1HqYjrZQO48Df2Ji2gaStnyqyjivV/oh7oQXg7EWYiDx+5RR3/dRUK/3+X7u/EIrhTbSE3i5wECjqqQxbo1HXR11ddTVT3R1YNP75AiWrrUq6Wr4rnB+Zye02yFHeR3ldZTXI/J6c+g7cGaBZ9kzD9F758GVZes9KlhX2kT3/Jk5Yg/7WuLiUWtHrR21tq+1PhM1UuX4WB1PvhgPu1SJQuRpBwt5N55z+zxuZSHvhpNnz0dF9Lfjubj1RhSiSzLqizzvKheoL7rGeerzW67RrfRaLkxiJr9OchtpZFwpTXx8qJz8gg+/Y5qnsm6tkvAOrs4+z+GDJFzLTZxehrzv+t303fSgVx76iMfZ5QWkDBMZdxaI0S0r/aDbNPhXHMdjdcCy9Zo2n9ksTc8CpUc/a7keW5IMeNE736dBIhv+nI/U+evfeay+tksXzQcW7AfCVUEfUuTTyct9xl1eROGUrq5bG1dPu4otE5A7iZWmDcQJZcLoEm2I3B6aFeOwj+kN/JMQ4eWEi5KYMy6aK01Vu5iUrs7LZLa9Loxb5LXUNh8gQn46+/vLp/ezFx8vTs8+fT578XIyndAdxeQbF6iWdieO1BcCeb8fRAebSN2PjeNp+0lDKQnvKG+M1JbJFeegG+R3PXSXgshEsdNoSgrkh2P35yYbZHQtum4hA37xpu/58fcW/UYU1zc/VBdlqnTg/0oUS2nCwxbRbtLProZm0nP4xb7VwcyGh9Ju4gJgWr4TmfiGm902Gre2nj62n0/6z0Mb57i/6TNRoVTo4wymt7OyxIZ27B79tmB9bxfa92cfz+Znou//B8yENb4=
+sidebar_class_name: "delete api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Remove a group from a tenant"}
+></Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/tenants/{tenantId}/groups/{groupId}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Removes a single group from a specified tenant without deleting the group.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "tenantId",
+      in: "path",
+      required: true,
+      description: "The unique identifier of the tenant.",
+      schema: { type: "string" },
+    },
+    {
+      name: "groupId",
+      in: "path",
+      required: true,
+      description: "The unique identifier of the group.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "204": {
+      description: "The group was successfully removed from the tenant.",
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "Not found. The tenant or group was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

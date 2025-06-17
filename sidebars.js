@@ -788,7 +788,7 @@ module.exports = {
     "apis-tools/working-with-apis-tools",
     {
       APIs: [
-        require("./docs/apis-tools/camunda-api-rest/sidebar-schema"),
+        require("./docs/apis-tools/orchestration-cluster-api-rest/sidebar-schema"),
         require("./docs/apis-tools/administration-api/sidebar-schema"),
         require("./docs/apis-tools/administration-sm-api/sidebar-schema"),
         {

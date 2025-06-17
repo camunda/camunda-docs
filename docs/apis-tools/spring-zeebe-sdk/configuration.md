@@ -92,7 +92,7 @@ You must add the `http://` scheme to the URL to avoid a `java.lang.NullPointerEx
 
 #### REST address
 
-Define address of the [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md) exposed by the [Zeebe Gateway](/self-managed/zeebe-deployment/zeebe-gateway/zeebe-gateway-overview.md):
+Define address of the [Camunda 8 REST API](/apis-tools/orchestration-cluster-api-rest/camunda-api-rest-overview.md) exposed by the [Zeebe Gateway](/self-managed/zeebe-deployment/zeebe-gateway/zeebe-gateway-overview.md):
 
 ```yaml
 camunda:
@@ -631,7 +631,7 @@ The JobError takes 5 parameters:
 - `cause`: Exception _(optional)_, defaults to `null`
 
 :::note
-The job error is sent to the engine by the SDK calling the [Fail Job API](/apis-tools/camunda-api-rest/specifications/fail-job.api.mdx). The stacktrace of the job error will become the actual error message. The provided cause will be visible in Operate.
+The job error is sent to the engine by the SDK calling the [Fail Job API](/apis-tools/orchestration-cluster-api-rest/specifications/fail-job.api.mdx). The stacktrace of the job error will become the actual error message. The provided cause will be visible in Operate.
 :::
 
 #### Implicitly failing jobs

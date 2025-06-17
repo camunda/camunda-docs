@@ -1,0 +1,152 @@
+---
+id: get-resource-content
+title: "Get resource content"
+description: "Returns the content of a deployed resource."
+sidebar_label: "Get resource content"
+hide_title: true
+hide_table_of_contents: true
+api: eJztV01vGzcQ/SuDOSXoRqukTpvuTXCc1G0aGLLTHhwfKO5Iy4RLrsmh5YWw/70guZIVyQ1SoEAvOQj7weF8vsd92iCLlcfqGufkbXCS8KZA25ETrKw5r7HCFfF28dQaJsNYYE1eOtVFI6xwThyc8cANgcw2YJcgoKZO255qcKOHyUdTVZUyS/vRnAbnyLDuC+BGeSBTd1bFrUb34EPXWcce5hez3Xaf9380WGAnnGiJycX8N2hES1jh1vJ36rFAFbPrBDdYoKPboBzVWLELdFjCVUMQjLoNBJ+pB1WTYbXslVmlqnb5Y4FeNtQKrDbIfRdjenbKrHAYbmIU31njycf1F9NpvBxH2rrbdUt58EFK8n4ZtO7BpY5SHeONNtGT6DqtZJpN+clHd5uvpDMMBZ5MT45TeGgorBU3qcKVuiOTal8LD8YyLG0wX0ugc3ahqf3hOJHDaBfZEmpioTTYxSeSDMJDNlxQDcrA9fzNKfxy8vLnmycNc+erslyv1xO3lM+oVmzdxLpV6ZYy/qLd0wlcNeQIWtHDgkDUtYoxhYbORRCzIg++I6mWSgLbVOiYNsRuTRKSxr7ltCKydpsfunrY3QKX1rWCscLg1BEjZvBhfn6Eoi9Cpz1LEXT0IRY2cLXQwnzGoUBWrB8NehjFh7YVro9sOw4wFOhZcNgrA5VhWpHbz18Z/vHFke8I01+vri4guwBpa4KldZmrY6BYRKuMakOL1cl0WmAr7vPTT9PpEH3GiX9DJQbovtPCJGgdlqMMtNbRiJ9UmDKehZH/1WSsUyt1GHeCw8MscATx61xRZtfLxwg+MxC77CIOyTnrwEoZz7oa1o3SyX1k+sPZchvIc8bid65959p3rh1zbSiwJW7sqEjS958brLDcaYNys/fxH0q5Eyue3N1WJgSnscJN5s9QleWmsZ6HahPFxlDexeHcCafEQmdIxuXMsy1+tJVCp9ePzTEuRC2yre9UtMHUAl7B/OzyCt4KprXoU19jyC9dv5q+mj7qNZr+g8fZxTnkCjMK906GrdtI8UfdZuNvcZzEjScZnOL+Mm7L7VmQcORmIc5ih44xXvIen7MRFuPNmy1mfvvrKo096sG0fRz/cSJxKuR8znw6eX4MtYvzxBhp2zaYdGyaVVY3Yq8wqYPnWFCBWkkyPoF61I5bs3d5Bf7MEeH5JA4lI2d7Wq4UN2ExkbYtZd62uy60XZStUKYcQ/jydPbHh/evZ8/enZ+evb88e/Z8Mp3wPafiO+u5FWYvj7fERwrxsODNw5fi/5Hf46iZ7rnstFAmgi/1aDNS83onxj0WWH2pzLfZ3xQjw65xs1kITx+cHob4+jaQ67G6vnkgZGJwrXy8r7FaCu0Phfx+X57MR8n/FP6FvH+0sPGlMH06H3SIT1jgZ+oP/nQMN0OBDYmaXEo3W8ykpI739h4p+civ3Qn39iwS428/0Lb1
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get resource content"}
+></Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/resources/{resourceKey}/content"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Returns the content of a deployed resource.
+:::info
+Currently, this endpoint only supports RPA resources.
+:::
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "resourceKey",
+      in: "path",
+      required: true,
+      description: "The unique key identifying the resource.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The resource content is successfully returned.",
+      content: { "application/json": { schema: { type: "string" } } },
+    },
+    "404": {
+      description: "A resource with the given key was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

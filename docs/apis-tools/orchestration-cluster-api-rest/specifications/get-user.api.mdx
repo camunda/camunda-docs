@@ -1,0 +1,247 @@
+---
+id: get-user
+title: "Get user"
+description: "Get a user by its username."
+sidebar_label: "Get user"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWE1z2zYQ/SsYnJIpI8qJ07q8aRzbdZtmPLbcHlwdQHApIgYBBlha1mj43zsLUB+W5I9Db9VBI5ILvN3FvgcSu+Aopp5nd/zWg+OThNsGnEBlzWXBMz4FDIaEF+ClUw1ZeMYvAJlgrQfH8jlT6MO1ETUM/jE84Y1wogYER9gLTgae8eUYnnBFKI3AiifcwY9WOSh4hq6FbVfjClbgzJYM+/sBT7iXFdSCZwuO84Y8eHTKTHnXTQjWN9Z48GT/OBzS335opjzzrZTgfdlqPWcOsHUGCvIhrUEwSLNF02glw+qk3z1BLHZDsPl3kEhr4GgtUcUAVrk/G8W+BLfSSvjzEG+aDrVQev/8YHoVgAx/wHw/xD3MXwHoEo4KNT0iXl2DbzXyriPD8fBoPyzxAzwyLeS9Zw9Cq4KJFisw2FeDSQcF3QrtX6hZ42yuof5pt3ZPnY7YVRzJCsCwKqGmTHgWB+ZQMGXY3fX5Kfv1+PMvk3cVYuOzNJ3NZgNXyg9QKLRuYN00daWkH417P2DjChywWsxZDkwUhSKfQrM1W5hvQKpSSYY2rGUfNqO1jPJ6mWrRuq2JhJfW1QJJh07tKHrEbq8vmQqrWM6Vme66DnNKQRXLuMhti1muhbnn66ruOt324tu6Fm7Fk6cOuoR7FNhupMGVQZiGLWgVvzL46eMONlHlt/H4ikUIJm0BrLSOYaX80hElUSuj6rbm2fFwmPBaPMa7n4fDjjCxl8grmRgGj40WJhJwKx1lWG0d9PwJiSnjURj5X1XGOjVV234HTxTWk/hLzGgpsk+7fD+3LldFASbQc6U35ZmxyITWdvbiXnjQ1UFX/3tdHb/wfTFTWAW8qXoAs37bz0SUWGlbcxDYQWAHgT0rsM/7PuBHhtEqO+IhOGcds1K2zkHBZpXSAZ6+6pe++zdb5OJBawetHbS2q7Uu4TVgZfvzfzjNY8UzntJ7y6eL5euroxM4uIflKb91mmd8EQXTZWm6qKzHLls01mGXPlA1HoRTIteRg2SOwloSRlspdHi8r3Bk2Dzmnoq6NYVgJ+z67GbMLgTCTMzDQpLLp9Anw5PhXlQa+gzi6OqSxQwj7Ta2giUsaXovbBz8FuDQrfAgW6dwfkPT4vLkIBy4UUuLv6JD7y+g030cxJP+4nxJkt//Hoc6K1PaML2v924gVBVwPkY+HBztcuvqMkhE2rpuTdgnzTR+04iNxKRuPcZTv1YSjA8s7ls/y2Ffo4X9FT2yowEVJTJnuT1OFVZtPpC2TmWctvrPtc3TWiiT9i58ejr68/bbl9GHr5enZ99uzj4cDYYDfMSQfGM91sJsxEGNq3ZPR2uxfh282tzqK4HwiGmjhTKhMeLCfhClchf6JJ4nPFv1fSZJz/c7vljkwsOt011Hj3+04OY8u5us5RH0VChP1wXPSqH9dmNsM+J3130L7T17QzfpaeD9Q2HmQZ66pTue8Hvq8qzbVt2kS3gFogAXgovmkZTQ4MbEnRYZcXu1nVycESn/BZyTCaI=
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get user"}
+></Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/users/{username}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Get a user by its username.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "username",
+      in: "path",
+      required: true,
+      description: "The username of the user.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The user is successfully returned.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            properties: {
+              username: {
+                description: "The username of the user.",
+                type: "string",
+              },
+              name: { description: "The name of the user.", type: "string" },
+              email: { description: "The email of the user.", type: "string" },
+              userKey: { description: "The key of the user.", type: "string" },
+            },
+            title: "UserResult",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The user with the given username was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>
