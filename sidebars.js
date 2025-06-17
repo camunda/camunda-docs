@@ -507,6 +507,7 @@ module.exports = {
             {
               Microsoft: [
                 "components/connectors/out-of-the-box-connectors/azure-open-ai",
+                "components/connectors/out-of-the-box-connectors/azure-blob-storage",
                 "components/connectors/out-of-the-box-connectors/microsoft-teams",
                 "components/connectors/out-of-the-box-connectors/microsoft-o365-mail",
               ],
