@@ -1287,7 +1287,7 @@ kubectl get pvc \
     done
 ```
 
-New persistent volumes will be created on a new Camunda Helm Chart upgrade and install.
+New persistent volumes will be created on a new Camunda Helm chart upgrade and install.
 
 In case of a manual deployment, this means to remove the data directory of each Zeebe broker.
 :::
@@ -1539,3 +1539,18 @@ Zeebe will create a folder for each Partition ID and subfolder in there with eac
 
    </summary>
 </details>
+
+## Miscellaneous
+
+### Clean up of Backups
+
+Depending on your company’s backup policies - such as retention periods and the number of backups to keep - you should consider regularly cleaning up old backups to reduce storage costs and manage resources efficiently.
+
+You can use the **delete backup APIs** of each component to remove the associated resources from the configured backup storage. You will have to provide the same backup ID for all calls to remove it from all backup stores.
+
+- [Operate](/self-managed/operational-guides/backup-restore/operate-tasklist-backup.md#delete-backup-api)
+- [Optimize](/self-managed/operational-guides/backup-restore/optimize-backup.md#delete-backup-api)
+- [Tasklist](/self-managed/operational-guides/backup-restore/operate-tasklist-backup.md#delete-backup-api)
+- [Zeebe](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md#delete-backup-api)
+
+For Zeebe one would also have to remove the separately backed up `zeebe-record` index snapshot using the [Elasticsearch](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-snapshot-delete) / [OpenSearch](https://docs.opensearch.org/docs/latest/api-reference/snapshots/delete-snapshot/) API directly.
