@@ -11,6 +11,7 @@ import AmazonS3Img from "../img/connector-amazon-s3.png";
 import AsanaImg from "../img/connector-asana.png";
 import AutomationImg from "../img/connector-automation.png";
 import AzureaiImg from "../img/connector-azure-openai.png";
+import AzureBlobStorageImg from "../img/connector-azure-blob-storage.png";
 import BoxImg from "../img/connector-box.png";
 import BluePrismImg from "../img/connector-blueprism.png";
 import CamundaImg from "../img/connector-camunda.png";
@@ -180,6 +181,14 @@ const SearchableTable = () => {
       type: "Outbound",
       link: "../azure-open-ai/",
       image: AzureaiImg,
+    },
+    {
+      name: "Azure Blob Storage",
+      description:
+        "Handle documents with Azure Blob Storage from your processes.",
+      type: "Outbound",
+      link: "../azure-blob-storage/",
+      image: AzureBlobStorageImg,
     },
     {
       name: "Blue Prism",
