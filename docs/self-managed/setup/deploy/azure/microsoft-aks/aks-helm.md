@@ -262,7 +262,7 @@ Console:
 <Tabs groupId="c8-connectivity">
   <TabItem value="rest-api" label="REST API" default>
 
-For a detailed guide on generating and using a token, conduct the relevant documentation on [authenticating with the Camunda 8 REST API](./../../../../../apis-tools/camunda-api-rest/camunda-api-rest-authentication.md?environment=self-managed).
+For a detailed guide on generating and using a token, conduct the relevant documentation on [authenticating with the Camunda 8 REST API](./../../../../../apis-tools/orchestration-cluster-api-rest/camunda-api-rest-authentication.md?environment=self-managed).
 
 This requires port-forwarding the Zeebe Gateway to be able to connect to the cluster.
 

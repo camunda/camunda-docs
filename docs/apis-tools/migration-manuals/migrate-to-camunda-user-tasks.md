@@ -239,7 +239,7 @@ The following table outlines the respective endpoints. Click the endpoints to fo
             </a>
         </td>
         <td>
-            <a href="../../camunda-api-rest/specifications/search-user-tasks">
+            <a href="../../orchestration-cluster-api-rest/specifications/search-user-tasks">
                 <code>POST /user-tasks/search</code>
             </a>
         </td>
@@ -252,7 +252,7 @@ The following table outlines the respective endpoints. Click the endpoints to fo
             </a>
         </td>
         <td>
-            <a href="../../camunda-api-rest/specifications/get-user-task">
+            <a href="../../orchestration-cluster-api-rest/specifications/get-user-task">
                 <code>GET /user-tasks/:userTaskKey</code>
             </a>
         </td>
@@ -278,7 +278,7 @@ The following table outlines the respective endpoints. Click the endpoints to fo
             </a>
         </td>
         <td>
-            <a href="../../camunda-api-rest/specifications/get-user-task-form">
+            <a href="../../orchestration-cluster-api-rest/specifications/get-user-task-form">
                 <code>GET /user-tasks/:userTaskKey/form</code>
             </a>
         </td>
@@ -291,7 +291,7 @@ The following table outlines the respective endpoints. Click the endpoints to fo
             </a>
         </td>
         <td>
-            <a href="../../camunda-api-rest/specifications/assign-user-task">
+            <a href="../../orchestration-cluster-api-rest/specifications/assign-user-task">
                 <code>POST /user-tasks/:userTaskKey/assignment</code>
             </a>
         </td>
@@ -304,7 +304,7 @@ The following table outlines the respective endpoints. Click the endpoints to fo
             </a>
         </td>
         <td>
-            <a href="../../camunda-api-rest/specifications/unassign-user-task">
+            <a href="../../orchestration-cluster-api-rest/specifications/unassign-user-task">
                 <code>DELETE /user-tasks/:userTaskKey/assignee</code>
             </a>
         </td>
@@ -317,7 +317,7 @@ The following table outlines the respective endpoints. Click the endpoints to fo
             </a>
         </td>
         <td>
-            <a href="../../camunda-api-rest/specifications/complete-user-task">
+            <a href="../../orchestration-cluster-api-rest/specifications/complete-user-task">
                 <code>POST /user-tasks/:userTaskKey/completion</code>
             </a>
         </td>
@@ -326,7 +326,7 @@ The following table outlines the respective endpoints. Click the endpoints to fo
         <th style={{ textAlign: "end" }}>Update task</th>
         <td style={{color: "gray"}}>Not supported</td>
         <td>
-            <a href="../../camunda-api-rest/specifications/update-user-task">
+            <a href="../../orchestration-cluster-api-rest/specifications/update-user-task">
                 <code>PATCH /user-tasks/:userTaskKey</code>
             </a>
         </td>
@@ -361,9 +361,9 @@ docId:"apis-tools/tasklist-api-rest/tasklist-api-rest-overview"
 },
 {
 type:"link",
-href:"/docs/next/apis-tools/camunda-api-rest/camunda-api-rest-overview/",
+href:"/docs/next/apis-tools/orchestration-cluster-api-rest/camunda-api-rest-overview/",
 label: "Camunda 8 API (REST)",
-docId:"apis-tools/camunda-api-rest/camunda-api-rest-overview"
+docId:"apis-tools/orchestration-cluster-api-rest/camunda-api-rest-overview"
 }
 ]}/>
 

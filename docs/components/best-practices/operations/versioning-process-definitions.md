@@ -38,7 +38,7 @@ _Migrate_ running instances to the newest definition when:
 - Deploying _patches or bug fixes_ of a process model.
 - _Avoiding operational complexity_ due to different versions running in production is a priority.
 
-Migrating process instances can be achieved either by using the operations tooling or by calling the Zeebe API. You can use the [Camunda 8 API (REST)](../../../apis-tools/camunda-api-rest/specifications/migrate-process-instance.api.mdx) or the [Zeebe API (gRPC)](../../../apis-tools/zeebe-api/gateway-service.md#migrateprocessinstance-rpc) to migrate a process instance.
+Migrating process instances can be achieved either by using the operations tooling or by calling the Zeebe API. You can use the [Camunda 8 API (REST)](../../../apis-tools/orchestration-cluster-api-rest/specifications/migrate-process-instance.api.mdx) or the [Zeebe API (gRPC)](../../../apis-tools/zeebe-api/gateway-service.md#migrateprocessinstance-rpc) to migrate a process instance.
 
 Learn more about the concepts of [process instance migration](../../../components/concepts/process-instance-migration.md) in the components section. You can also learn [how to migrate process instances in Operate](../../../components/operate/userguide/process-instance-migration.md) in it's dedicated section.
 

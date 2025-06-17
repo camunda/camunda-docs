@@ -7,7 +7,7 @@ description: "Migrate from Camunda's V1 component REST APIs to the V2 Camunda 8 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-This document offers a comprehensive guide to migrate from Camunda's V1 component REST APIs (the Tasklist REST API, for example) to the V2 [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md).
+This document offers a comprehensive guide to migrate from Camunda's V1 component REST APIs (the Tasklist REST API, for example) to the V2 [Camunda 8 REST API](/apis-tools/orchestration-cluster-api-rest/camunda-api-rest-overview.md).
 
 Camunda is streamlining the developer experience by creating a unified REST API for Zeebe, Operate, Tasklist, and the Identity components with endpoint parity. This will be a single REST API for the orchestration cluster for a consistent and intuitive API experience to help your teams develop process automation solutions faster.
 
@@ -76,8 +76,8 @@ The following conventions apply to all attributes:
 
 - **[V1 endpoint](../tasklist-api-rest/specifications/get-form.api.mdx)**: `GET /v1/forms/{formId}`
 - **V2 endpoints**:
-  - `GET /v2/user-tasks/{userTaskKey}/form` ([link](../camunda-api-rest/specifications/get-user-task-form.api.mdx))
-  - `GET /v2/process-definitions/{processDefinitionKey}/form` ([link](../camunda-api-rest/specifications/get-start-process-form.api.mdx))
+  - `GET /v2/user-tasks/{userTaskKey}/form` ([link](../orchestration-cluster-api-rest/specifications/get-user-task-form.api.mdx))
+  - `GET /v2/process-definitions/{processDefinitionKey}/form` ([link](../orchestration-cluster-api-rest/specifications/get-start-process-form.api.mdx))
 
 <Tabs groupId="get-form" defaultValue="input-adjustments" queryString values={
 [
@@ -116,7 +116,7 @@ The following conventions apply to all attributes:
 #### Search task variables
 
 - **[V1 endpoint](../tasklist-api-rest/specifications/search-task-variables.api.mdx)**: `POST /v1/tasks/{taskId}/variables/search`
-- **[V2 endpoint](../camunda-api-rest/specifications/search-user-task-variables.api.mdx)**: `POST /v2/user-tasks/{userTaskKey}/variables/search`
+- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/search-user-task-variables.api.mdx)**: `POST /v2/user-tasks/{userTaskKey}/variables/search`
 
 <Tabs groupId="search-vars-by-task" defaultValue="input-adjustments" queryString values={
 [
@@ -151,7 +151,7 @@ The following conventions apply to all attributes:
 #### Search tasks
 
 - **[V1 endpoint](../tasklist-api-rest/specifications/search-tasks.api.mdx)**: `POST /v1/tasks/search`
-- **[V2 endpoint](../camunda-api-rest/specifications/search-user-tasks.api.mdx)**: `POST /v2/user-tasks/search`
+- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/search-user-tasks.api.mdx)**: `POST /v2/user-tasks/search`
 
 <Tabs groupId="tasklist" defaultValue="input-adjustments" queryString values={
 [
@@ -210,7 +210,7 @@ The following conventions apply to all attributes:
 #### Unassign a task
 
 - **[V1 endpoint](../tasklist-api-rest/specifications/unassign-task.api.mdx)**: `PATCH /v1/tasks/{taskId}/unassign`
-- **[V2 endpoint](../camunda-api-rest/specifications/unassign-user-task.api.mdx)**: `DELETE /v2/user-tasks/{userTaskKey}/assignee`
+- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/unassign-user-task.api.mdx)**: `DELETE /v2/user-tasks/{userTaskKey}/assignee`
 
 <Tabs groupId="unassign-user-task" defaultValue="input-adjustments" queryString values={
 [
@@ -235,7 +235,7 @@ The following conventions apply to all attributes:
 #### Complete a task
 
 - **[V1 endpoint](../tasklist-api-rest/specifications/complete-task.api.mdx)**: `PATCH /v1/tasks/{taskId}/complete`
-- **[V2 endpoint](../camunda-api-rest/specifications/complete-user-task.api.mdx)**: `POST /v2/user-tasks/{userTaskKey}/completion`
+- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/complete-user-task.api.mdx)**: `POST /v2/user-tasks/{userTaskKey}/completion`
 
 <Tabs groupId="complete-user-task" defaultValue="input-adjustments" queryString values={
 [
@@ -261,7 +261,7 @@ The following conventions apply to all attributes:
 #### Assign a task
 
 - **[V1 endpoint](../tasklist-api-rest/specifications/assign-task.api.mdx)**: `PATCH /v1/tasks/{taskId}/assign`
-- **[V2 endpoint](../camunda-api-rest/specifications/assign-user-task.api.mdx)**: `POST /v2/user-tasks/{userTaskKey}/assignment`
+- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/assign-user-task.api.mdx)**: `POST /v2/user-tasks/{userTaskKey}/assignment`
 
 <Tabs groupId="assign-user-task" defaultValue="input-adjustments" queryString values={
 [
@@ -287,7 +287,7 @@ The following conventions apply to all attributes:
 #### Get a task
 
 - **[V1 endpoint](../tasklist-api-rest/specifications/get-task-by-id.api.mdx)**: `GET /v1/tasks/{taskId}`
-- **[V2 endpoint](../camunda-api-rest/specifications/get-user-task.api.mdx)**: `GET /v2/user-tasks/{userTaskKey}`
+- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/get-user-task.api.mdx)**: `GET /v2/user-tasks/{userTaskKey}`
 
 <Tabs groupId="get-user-task" defaultValue="input-adjustments" queryString values={
 [
@@ -314,7 +314,7 @@ The following conventions apply to all attributes:
 #### Get a variable
 
 - **[V1 endpoint](../tasklist-api-rest/specifications/get-variable-by-id.api.mdx)**: `GET /v1/variables/{variableId}`
-- **[V2 endpoint](../camunda-api-rest/specifications/get-variable.api.mdx)**: `GET /v2/variables/{variableKey}`
+- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/get-variable.api.mdx)**: `GET /v2/variables/{variableKey}`
 
 <Tabs groupId="get-a-variable" defaultValue="input-adjustments" queryString values={
 [
@@ -346,7 +346,7 @@ The following conventions apply to all attributes:
 #### Search decision definitions
 
 - **[V1 endpoint](../operate-api/specifications/search-7.api.mdx)**: `POST /v1/decision-definitions/search`
-- **[V2 endpoint](../camunda-api-rest/specifications/search-decision-definitions.api.mdx)**: `POST /v2/decision-definitions/search`
+- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/search-decision-definitions.api.mdx)**: `POST /v2/decision-definitions/search`
 
 <Tabs groupId="search-decision-definitions" defaultValue="input-adjustments" queryString values={
 [
@@ -391,7 +391,7 @@ The following conventions apply to all attributes:
 #### Get decision definition by key
 
 - **[V1 endpoint](../operate-api/specifications/by-key-6.api.mdx)**: `GET /v1/decision-definitions/{key}`
-- **[V2 endpoint](../camunda-api-rest/specifications/get-decision-definition.api.mdx)**: `GET /v2/decision-definitions/{decisionDefinitionKey}`
+- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/get-decision-definition.api.mdx)**: `GET /v2/decision-definitions/{decisionDefinitionKey}`
 
 <Tabs groupId="get-decision-definition" defaultValue="input-adjustments" queryString values={
 [
@@ -416,7 +416,7 @@ The following conventions apply to all attributes:
 #### Search decision instances
 
 - **[V1 endpoint](../operate-api/specifications/search-6.api.mdx)**: `POST /v1/decision-instances/search`
-- **[V2 endpoint](../camunda-api-rest/specifications/search-decision-instances.api.mdx)**: `POST /v2/decision-instances/search`
+- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/search-decision-instances.api.mdx)**: `POST /v2/decision-instances/search`
 
 <Tabs groupId="search-decision-instances" defaultValue="input-adjustments" queryString values={
 [
@@ -470,7 +470,7 @@ The following conventions apply to all attributes:
 #### Get decision instance by id
 
 - **[V1 endpoint](../operate-api/specifications/by-id.api.mdx)**: `GET /v1/decision-instances/{id}`
-- **[V2 endpoint](../camunda-api-rest/specifications/search-decision-instances.api.mdx)**: `GET /v2/decision-instances/{decisionInstanceId}`
+- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/search-decision-instances.api.mdx)**: `GET /v2/decision-instances/{decisionInstanceId}`
 
 <Tabs groupId="get-decision-instance-by-id" defaultValue="input-adjustments" queryString values={
 [
@@ -508,7 +508,7 @@ The following conventions apply to all attributes:
 #### Search decision requirements
 
 - **[V1 endpoint](../operate-api/specifications/search-5.api.mdx)**: `POST /v1/drd/search`
-- **[V2 endpoint](../camunda-api-rest/specifications/search-decision-requirements.api.mdx)**: `POST /v2/decision-requirements/search`
+- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/search-decision-requirements.api.mdx)**: `POST /v2/decision-requirements/search`
 
 <Tabs groupId="search-decision-requirements" defaultValue="input-adjustments" queryString values={
 [
@@ -545,7 +545,7 @@ The following conventions apply to all attributes:
 #### Get decision requirements by key
 
 - **[V1 endpoint](../operate-api/specifications/by-key-5.api.mdx)**: `GET /v1/drd/{key}`
-- **[V2 endpoint](../camunda-api-rest/specifications/get-decision-requirements.api.mdx)**: `GET /v2/decision-requirements/{decisionRequirementsKey}`
+- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/get-decision-requirements.api.mdx)**: `GET /v2/decision-requirements/{decisionRequirementsKey}`
 
 <Tabs groupId="get-decision-requirements-by-key" defaultValue="input-adjustments" queryString values={
 [
@@ -570,7 +570,7 @@ The following conventions apply to all attributes:
 #### Get decision requirements as XML by key
 
 - **[V1 endpoint](../operate-api/specifications/xml-by-key-1.api.mdx)**: `GET /v1/drd/{key}/xml`
-- **[V2 endpoint](../camunda-api-rest/specifications/get-decision-requirements-xml.api.mdx)**: `GET /v2/decision-requirements/{decisionRequirementsKey}/xml`
+- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/get-decision-requirements-xml.api.mdx)**: `GET /v2/decision-requirements/{decisionRequirementsKey}/xml`
 
 <Tabs groupId="get-decision-requirements-by-key" defaultValue="input-adjustments" queryString values={
 [
@@ -597,7 +597,7 @@ The following conventions apply to all attributes:
 #### Search variables for process instances
 
 - **[V1 endpoint](../operate-api/specifications/search.api.mdx)**: `POST /v1/variables/search`
-- **[V2 endpoint](../camunda-api-rest/specifications/search-variables.api.mdx)**: `POST /v2/variables/search`
+- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/search-variables.api.mdx)**: `POST /v2/variables/search`
 
 <Tabs groupId="search-variables-for-process-instances" defaultValue="input-adjustments" queryString values={
 [
@@ -636,7 +636,7 @@ The following conventions apply to all attributes:
 #### Get variable by key
 
 - **[V1 endpoint](../operate-api/specifications/by-key.api.mdx)**: `GET /v1/variables/{key}`
-- **[V2 endpoint](../camunda-api-rest/specifications/get-variable.api.mdx)**: `GET /v2/variables/{variableKey}`
+- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/get-variable.api.mdx)**: `GET /v2/variables/{variableKey}`
 
 <Tabs groupId="get-variable-by-key" defaultValue="input-adjustments" queryString values={
 [
@@ -664,7 +664,7 @@ The following conventions apply to all attributes:
 
 <!--- TODO: insert link to C8 REST API guidelines --->
 
-[setting variables]: /apis-tools/camunda-api-rest/specifications/create-element-instance-variables.api.mdx
+[setting variables]: /apis-tools/orchestration-cluster-api-rest/specifications/create-element-instance-variables.api.mdx
 [general changes]: #general-endpoint-changes
 [multi-tenancy]: /self-managed/concepts/multi-tenancy.md
 
@@ -673,7 +673,7 @@ The following conventions apply to all attributes:
 #### Search process definitions
 
 - **[V1 endpoint](../operate-api/specifications/search-2.api.mdx)**: `POST /v1/process-definitions/search`
-- **[V2 endpoint](../camunda-api-rest/specifications/search-process-definitions.api.mdx)**: `POST /v2/process-definitions/search`
+- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/search-process-definitions.api.mdx)**: `POST /v2/process-definitions/search`
 
 <Tabs groupId="search-process-definitions" defaultValue="input-adjustments" queryString values={
 [
@@ -708,7 +708,7 @@ The following conventions apply to all attributes:
 #### Get process definition by key
 
 - **[V1 endpoint](../operate-api/specifications/by-key-2.api.mdx)**: `GET /v1/process-definitions/{key}`
-- **[V2 endpoint](../camunda-api-rest/specifications/get-process-definition.api.mdx)**: `GET /v2/process-definitions/{processDefinitionKey}`
+- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/get-process-definition.api.mdx)**: `GET /v2/process-definitions/{processDefinitionKey}`
 
 <Tabs groupId="get-process-definition" defaultValue="input-adjustments" queryString values={
 [
@@ -733,7 +733,7 @@ The following conventions apply to all attributes:
 #### Get process definition as XML by key
 
 - **[V1 endpoint](../operate-api/specifications/xml-by-key.api.mdx)**: `GET /v1/process-definitions/{key}/xml`
-- **[V2 endpoint](../camunda-api-rest/specifications/get-process-definition-xml.api.mdx)**: `GET /v2/process-definitions/{processDefinitionKey}/xml`
+- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/get-process-definition-xml.api.mdx)**: `GET /v2/process-definitions/{processDefinitionKey}/xml`
 
 <Tabs groupId="get-process-definition-xml" defaultValue="input-adjustments" queryString values={
 [
@@ -760,7 +760,7 @@ The following conventions apply to all attributes:
 #### Search process instances
 
 - **[V1 endpoint](../operate-api/specifications/search-1.api.mdx)**: `POST /v1/process-instances/search`
-- **[V2 endpoint](../camunda-api-rest/specifications/search-process-instances.api.mdx)**: `POST /v2/process-instances/search`
+- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/search-process-instances.api.mdx)**: `POST /v2/process-instances/search`
 
 <Tabs groupId="search-process-instances" defaultValue="input-adjustments" queryString values={
 [
@@ -815,7 +815,7 @@ The following conventions apply to all attributes:
 #### Get process instance by key
 
 - **[V1 endpoint](../operate-api/specifications/by-key-1.api.mdx)**: `GET /v1/process-instances/{key}`
-- **[V2 endpoint](../camunda-api-rest/specifications/get-process-instance.api.mdx)**: `GET /v2/process-instances/{processInstanceKey}`
+- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/get-process-instance.api.mdx)**: `GET /v2/process-instances/{processInstanceKey}`
 
 <Tabs groupId="get-process-instance-by-key" defaultValue="input-adjustments" queryString values={
 [
@@ -845,7 +845,7 @@ The following conventions apply to all attributes:
 #### Get flow node statistic by process instance key
 
 - **[V1 endpoint](../operate-api/specifications/get-statistics.api.mdx)**: `GET /v1/process-instances/{key}/statistics`
-- **[V2 endpoint](../camunda-api-rest/specifications/get-process-instance-statistics.api.mdx)**: `GET /v2/process-instances/{processInstanceKey}/statistics/element-instances`
+- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/get-process-instance-statistics.api.mdx)**: `GET /v2/process-instances/{processInstanceKey}/statistics/element-instances`
 
 <Tabs groupId="get-process-instance-statistics" defaultValue="input-adjustments" queryString values={
 [
@@ -873,7 +873,7 @@ The following conventions apply to all attributes:
 #### Get sequence flows of process instance by key
 
 - **[V1 endpoint](../operate-api/specifications/sequence-flows-by-key.api.mdx)**: `GET /v1/process-instances/{key}/sequence-flows`
-- **[V2 endpoint](../camunda-api-rest/specifications/get-process-instance-sequence-flows.api.mdx)**: `GET /v2/process-instances/{processInstanceKey}/sequence-flows`
+- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/get-process-instance-sequence-flows.api.mdx)**: `GET /v2/process-instances/{processInstanceKey}/sequence-flows`
 
 <Tabs groupId="get-process-instance-sequence-flows" defaultValue="input-adjustments" queryString values={
 [
@@ -903,7 +903,7 @@ The following conventions apply to all attributes:
 #### Search flownode instances
 
 - **[V1 endpoint](../operate-api/specifications/search-4.api.mdx)**: `POST /v1/flownode-instances/search`
-- **[V2 endpoint](../camunda-api-rest/specifications/search-element-instances.api.mdx)**: `POST /v2/element-instances/search`
+- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/search-element-instances.api.mdx)**: `POST /v2/element-instances/search`
 
 <Tabs groupId="search-flownode-instances" defaultValue="input-adjustments" queryString values={
 [
@@ -953,7 +953,7 @@ The following conventions apply to all attributes:
 #### Get flownode instance by key
 
 - **[V1 endpoint](../operate-api/specifications/by-key-4.api.mdx)**: `GET /v1/flownode-instances/{key}`
-- **[V2 endpoint](../camunda-api-rest/specifications/get-element-instance.api.mdx)**: `GET /v2/element-instances/{elementInstanceKey}`
+- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/get-element-instance.api.mdx)**: `GET /v2/element-instances/{elementInstanceKey}`
 
 <Tabs groupId="get-flownode-instance-by-key" defaultValue="input-adjustments" queryString values={
 [
@@ -980,7 +980,7 @@ The following conventions apply to all attributes:
 #### Search incidents
 
 - **[V1 endpoint](../operate-api/specifications/search-3.api.mdx)**: `POST /v1/incidents/search`
-- **[V2 endpoint](../camunda-api-rest/specifications/search-incidents.api.mdx)**: `POST /v2/incidents/search`
+- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/search-incidents.api.mdx)**: `POST /v2/incidents/search`
 
 <Tabs groupId="search-incidents" defaultValue="input-adjustments" queryString values={
 [
@@ -1025,7 +1025,7 @@ The following conventions apply to all attributes:
 #### Get incident by key
 
 - **[V1 endpoint](../operate-api/specifications/by-key-3.api.mdx)**: `GET /v1/incidents/{key}`
-- **[V2 endpoint](../camunda-api-rest/specifications/get-incident.api.mdx)**: `GET /v2/incidents/{incidentKey}`
+- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/get-incident.api.mdx)**: `GET /v2/incidents/{incidentKey}`
 
 <Tabs groupId="get-incident-by-key" defaultValue="input-adjustments" queryString values={
 [

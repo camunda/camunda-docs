@@ -1,0 +1,187 @@
+---
+id: get-mapping-rule
+title: "Get a mapping rule"
+description: "Gets the mapping rule with the given ID."
+sidebar_label: "Get a mapping rule"
+hide_title: true
+hide_table_of_contents: true
+api: eJztV01v2zgQ/SvEnFqsYjndtJvVzUjSrBdtESTO7iHrA0WNLbYUqZKjOIah/74YUXb8FSAL7DEHQ5Y4fMPhe48fKyA5D5A9wFdZ19rOhW8MwjQBV6OXpJ0dF5DBHKkPuOX2BAoMyuuaAyCDa6QgqERRbaGIhaay+zrXj2jF+HLwj4UEaullhYSe867Aygohg77nuIAENGPWkkpIwOPPRnssICPf4H7iSYlifCnc7DA7OTFHGkACQZVYSchWQMuacwXy2s6hbaeMH2pnAwZu/zAc8uMwx25dMgiP1HiLhQiNUhjCrDFmOYA2gbPh6XEMrgQDCSPVjyAepdGFkA2VaEmrbqqF8ljwqzSBB66cJbTEcLKuTR+V1t7lBqtfvgfGXm3Vt5t0JG5ipCiQpDbC5d9RkZBBxMAcC6GteLj9fCF+P/v42/RdSVSHLE0Xi8XAz9QJFpqcHzg/T/1M8Y/j3g/EpETP07IUOQpZFJpzSiNqz8IhjUGEGpWeacVMMDv9sAWTEJXQ0xGHxcrYdH4ma5+0BGbOV5Igg8brAyWOxP3tWOhuFmdLpuwgdddnJhvDGDJ3DWW5kfYHk0eazNGk+1lCU1XSL9fK203QJhBIUrNVBmhLOEe/PX5t6dcPB9gslT8mkxsRIYRyBYqZ84JKHdaJuIhKW101FWRnw2EClXyKb5+Gw5YxmfFXVGIFPtVG2ijAvXK0FZXz2OunK0zbQNKq/4sZ5/Vc7+cdQPvMBfQivowVtW3bmezsNUZdL0CbxaXzrnUkZq6xxZvH3jz25rGXPPbx2GY4soJn2bMO0XvnhVOq8R4LsSi16eB5P1zn7je9qMU3r7157c1rh15rE6iQSteftLszMpWQQdpvXCe8nYV0tdnHWj7Won9cH6IbbyCDVXROm6XpqnSB2mxVO09t+si0PEqvZW6iGLk5OmytHOOUNN3nYwxyA5/U15VdyKqxhRTn4vbqbiKuJeFCxgMwp9yFPh+eD4+icugLiKObsYgVRv1trQlrWDb3UdgY/Brg7goQUDVe0/KOu8XpyVF69KOGWdjoos/XofN7DIKk//N5rZY//550hGs7c133nvjDgTAr6EMc+XBweiiym3HnFeWqqrHdgmnn8VwjtwpTpgnEBSVgtEIbOjn3N6t12JfYIv6KGcXpgEmJylmvk3NNZZMPlKtSFbttnrlxeVpJbdM+RUgvRl/vv12OTr6ML66+3V2dnA6GA3qirvjaBaqk3RrHNZKQOwe0/XJXzzvEf7tS9gQRPlFaG6ktS6arbNVb6QF2rAQJZM83zmnS++EBVqtcBrz3pm35888G/RKyh+mzfTq/FTrw/wKymTRh/1q6Xce72/4C+1686rJ6tJT+o7TLzsem4TdI4Acud67O7bRNoERZoO+GGdtHSmFNWz1f3HzZDZuV6PqKZfwvrgaL1g==
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get a mapping rule"}
+></Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/mapping-rules/{mappingId}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Gets the mapping rule with the given ID.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "mappingId",
+      in: "path",
+      required: true,
+      description: "The ID of the mapping rule to get.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": { description: "The mapping rule was returned successfully." },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The mapping rule with the mappingId was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

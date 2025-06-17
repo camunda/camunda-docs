@@ -32,7 +32,7 @@ curl -L 'http://localhost:8080/v2/messages/publication' \
 }'
 ```
 
-See the [API reference for publish message](/apis-tools/camunda-api-rest/specifications/publish-message.api.mdx) for more information, including additional request fields and code samples.
+See the [API reference for publish message](/apis-tools/orchestration-cluster-api-rest/specifications/publish-message.api.mdx) for more information, including additional request fields and code samples.
 When you require immediate feedback if the message was correlated to an open subscription, you can use `Correlate message` via Camunda 8 REST API. If correlation is successful it will return the first process instance key the message correlated with.
 
 ```
@@ -45,7 +45,7 @@ curl -L 'http://localhost:8080/v2/messages/correlation' \
 }'
 ```
 
-See the [API reference for correlate message](/apis-tools/camunda-api-rest/specifications/correlate-message.api.mdx) for more information, including additional request fields and code samples.
+See the [API reference for correlate message](/apis-tools/orchestration-cluster-api-rest/specifications/correlate-message.api.mdx) for more information, including additional request fields and code samples.
 
    </p>
  </details>
@@ -75,7 +75,7 @@ curl -L 'http://localhost:8080/v2/messages/publication' \
 }'
 ```
 
-See the [API reference for publish message](/apis-tools/camunda-api-rest/specifications/publish-message.api.mdx) for more information, including additional request fields and code samples.
+See the [API reference for publish message](/apis-tools/orchestration-cluster-api-rest/specifications/publish-message.api.mdx) for more information, including additional request fields and code samples.
 
    </p>
  </details>
@@ -111,7 +111,7 @@ curl -L 'http://localhost:8080/v2/messages/publication' \
 }'
 ```
 
-See the [API reference for publish message](/apis-tools/camunda-api-rest/specifications/publish-message.api.mdx) for more information, including additional request fields and code samples.
+See the [API reference for publish message](/apis-tools/orchestration-cluster-api-rest/specifications/publish-message.api.mdx) for more information, including additional request fields and code samples.
 
    </p>
  </details>
@@ -177,7 +177,7 @@ The first message creates a new process instance. The following messages are dis
 
 Publishing a message is a fire-and-forget action. As a user, you do not know if the correlation is a success.
 
-To know if a published message was correlated (and to which process instance), use the [message correlation endpoint](../../apis-tools/camunda-api-rest/specifications/correlate-message.api.mdx).
+To know if a published message was correlated (and to which process instance), use the [message correlation endpoint](../../apis-tools/orchestration-cluster-api-rest/specifications/correlate-message.api.mdx).
 
 The message correlation endpoint works similarly to the message publish endpoint. However, the message correlation endpoint does not support [message buffering](#message-buffering). Any message published using this endpoint is either immediately correlated, or not correlated at all. This is due to the synchronous nature of requiring a response.
 
