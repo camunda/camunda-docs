@@ -20,7 +20,7 @@ Camunda Optimize
 
 #### Impact
 
-Camunda Optimize was affected by a vulnerability that allowed an attacker to gain improper access to Optimize by using a modified JWT (JSON Web Token).
+Camunda Optimize was affected by a vulnerability that allowed an attacker to gain improper access to Optimize data by using a modified JWT (JSON Web Token).
 
 #### How to determine if the installation is affected
 
