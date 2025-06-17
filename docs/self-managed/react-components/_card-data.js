@@ -6,6 +6,10 @@ import IconDocker from "../assets/icon-sm-docker.png";
 import IconKubernetes from "../assets/icon-sm-kubernetes.png";
 import IconManual from "../assets/icon-sm-manual.png";
 import IconJar from "../assets/icon-sm-jar.png";
+import IconAws from "../assets/icon-sm-aws.png";
+import IconAzure from "../assets/icon-sm-azure.png";
+import IconGcp from "../assets/icon-sm-gcp.png";
+import IconOpenshift from "../assets/icon-sm-openshift.png";
 
 // Getting started cards on introduction page
 export const gettingStartedCards = [
@@ -57,37 +61,37 @@ export const referenceCards = [
     link: "../reference-architecture/kubernetes",
     title: "Kubernetes",
     image: IconKubernetes,
-    description: "Deploy Camunda 8 Self-Managed within a Kubernetes cluster.",
+    description: "",
   },
   {
     link: "../setup/deploy/other/docker",
     title: "Manual Jar",
     image: IconJar,
-    description: "Use Docker to deploy and run Camunda 8 Self-Managed.",
+    description: "",
   },
   {
-    link: "../setup/deploy/local/manual",
-    title: "Manual",
-    image: IconManual,
-    description: "Manually install Camunda 8 on a local or virtual machine.",
+    link: "../setup/deploy/amazon/amazon-eks/",
+    title: "Amazon (AWS)",
+    image: IconAws,
+    description: "",
   },
     {
-    link: "../reference-architecture/kubernetes",
-    title: "Kubernetes",
-    image: IconKubernetes,
-    description: "Deploy Camunda 8 Self-Managed within a Kubernetes cluster.",
+    link: "../setup/deploy/azure/microsoft-aks/",
+    title: "Microsoft (Azure)",
+    image: IconAzure,
+    description: "",
   },
   {
-    link: "../setup/deploy/other/docker",
-    title: "Manual Jar",
-    image: IconJar,
-    description: "Use Docker to deploy and run Camunda 8 Self-Managed.",
+    link: "../setup/deploy/gcp/google-gke/",
+    title: "Google (GCP)",
+    image: IconGcp,
+    description: "",
   },
   {
-    link: "../setup/deploy/local/manual",
-    title: "Manual",
-    image: IconManual,
-    description: "Manually install Camunda 8 on a local or virtual machine.",
+    link: "../setup/deploy/openshift/redhat-openshift/",
+    title: "Red Hat (OpenShift)",
+    image: IconOpenshift,
+    description: "",
   },
 ];
 
