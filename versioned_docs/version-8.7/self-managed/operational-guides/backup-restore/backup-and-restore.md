@@ -109,7 +109,9 @@ Direct access, may depend on your deployment environment. For example, direct Ku
 <Tabs groupId="application-ports">
    <TabItem value="port-forwarding" label="Port Forwarding" default>
 
-Port-forwarding allows to temporarily bind a remote Kubernetes cluster port of a service or pod directly to your local machine, allowing you to interact with it via `localhost:PORT`
+Port-forwarding allows to temporarily bind a remote Kubernetes cluster port of a service or pod directly to your local machine, allowing you to interact with it via `localhost:PORT`.
+
+Since the services are bound to your local machine, you **cannot reuse the same port for all port-forwards** unless you start and stop each one based on usage. To avoid this limitation, the examples use different local ports for each service, allowing them to run simultaneously without conflict.
 
 ```bash
 export CAMUNDA_RELEASE_NAME="camunda"
@@ -915,11 +917,9 @@ The restore process is divided in two parts:
 
 To restore Camunda 8 from a backup, all components must be restored from their backup corresponding to the same backup ID.
 
-The restore process assumes a **clean slate** for all components, including Elasticsearch / OpenSearch. This means **no prior persistent volumes** or **component state** should exist - all data is restored from scratch.
+The restore process assumes a **clean state** for all components, including Elasticsearch / OpenSearch. This means **no prior persistent volumes** or **component state** should exist - all data is restored from scratch.
 
-It is **critical** to ensure that **no component is started** before the restore is complete. Starting any component prematurely will automatically initialize its data store or persistent disk, potentially interfering with the restore and causing existing data to block a successful recovery.
-
-Additionally, **backups must be restored** using the **exact Camunda version** they were created with. As noted during the backup process, the version is embedded in the backup name. This is essential because starting a component with a mismatched version may result in startup failures due to schema incompatibilities with Elasticsearch / OpenSearch and the component itself. Although schema changes are generally avoided in patch releases, they can still occur.
+**Backups must be restored** using the **exact Camunda version** they were created with. As noted during the backup process, the version is embedded in the backup name. This is essential because starting a component with a mismatched version may result in startup failures due to schema incompatibilities with Elasticsearch / OpenSearch and the component itself. Although schema changes are generally avoided in patch releases, they can still occur.
 
 When using the Camunda Helm chart, this means figuring out the corresponding version. For this the [Camunda Helm chart Version Matrix](https://helm.camunda.io/camunda-platform/version-matrix/) can help. Click on the `major.minor` release and then search for the backed up patch release of your component. The other components would typically fit in there as well.
 
@@ -961,13 +961,114 @@ Based on that we can look in the [matrix versioning of 8.7](https://helm.camunda
 
 Prerequisite:
 
-- Elasticsearch / OpenSearch is set up and running with a clean slate and no data on it.
+- Elasticsearch / OpenSearch is set up and running with a clean state and no data on it.
 - Elasticsearch / OpenSearch are configured with the same snapshot repository as used for backup, using the outlined documentation in [prerequisites](#prerequisites).
 
-If you're using an external Elasticsearch you don't have to interact with the Camunda Helm chart or Camunda components in general until step 2 - [Restore the Zeebe Cluster](#restore-the-zeebe-cluster).
+#### 1. Restore of [Templates](https://www.elastic.co/docs/manage-data/data-store/templates)
 
-:::note
-In case of the Camunda Helm chart, this could be achieved by e.g. disabling all other components in the `values.yml`.
+This includes the restoration of index templates and component templates, which are crucial for Camunda 8 to function properly on continuous use.
+
+Those templates will automatically be applied on newly created indices. These templates are only created on the initial start of the components and the first seeding of the datastore, due to which we have to temporarily restore them before we can restore all Elasticsearch / OpenSearch snapshots.
+
+- **Start Camunda 8 configured with your datastore endpoint**
+  - for example deploy the Camunda Helm chart
+  - in case of manual context, start Camunda 8 components manually
+  - depending on your setup this may mean Operate, Optimize, Tasklist, Zeebe, and the required datastore
+
+The templates are created by Operate, Optimize, and Tasklist on startup on the first seeding of the datastore. While Zeebe creates it whenever required, and isn't limited to the initial start. We recommend starting your full required Camunda 8 stack, so the applications show up healthy.
+
+You can confirm the successful creation of the index templates by using the Elasticsearch / OpenSearch API. The index templates rely on the component templates, so it also confirms that those were successfully re-created.
+
+<Tabs groupId="search-engine">
+   <TabItem value="elasticsearch" label="Elasticsearch" default>
+
+The following is using the [Elasticsearch Index API](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-get-index-template) to list all index templates.
+
+```bash
+curl -s "$ELASTIC_ENDPOINT/_index_template" \
+   | jq -r '.index_templates[].name' \
+   | grep -E 'operate|tasklist|optimize|zeebe' \
+   | sort
+```
+
+   <details>
+      <summary>Example Output</summary>
+      <summary>
+
+      ```bash
+      operate-batch-operation-1.0.0_template
+      operate-decision-instance-8.3.0_template
+      operate-event-8.3.0_template
+      operate-flownode-instance-8.3.1_template
+      operate-incident-8.3.1_template
+      operate-job-8.6.0_template
+      operate-list-view-8.3.0_template
+      operate-message-8.5.0_template
+      operate-operation-8.4.1_template
+      operate-post-importer-queue-8.3.0_template
+      operate-sequence-flow-8.3.0_template
+      operate-user-task-8.5.0_template
+      operate-variable-8.3.0_template
+      tasklist-draft-task-variable-8.3.0_template
+      tasklist-task-8.5.0_template
+      tasklist-task-variable-8.3.0_template
+      ...
+      ```
+
+      </summary>
+
+   </details>
+
+   </TabItem>
+   <TabItem value="opensearch" label="OpenSearch">
+
+The following is using the [OpenSearch Index API](https://docs.opensearch.org/docs/latest/api-reference/index-apis/get-index-template/) to list all index templates.
+
+```bash
+curl -s "$OPENSEARCH_ENDPOINT/_index_template" \
+   | jq -r '.index_templates[].name' \
+   | grep -E 'operate|tasklist|optimize|zeebe' \
+   | sort
+```
+
+   <details>
+      <summary>Example Output</summary>
+      <summary>
+
+      ```bash
+      operate-batch-operation-1.0.0_template
+      operate-decision-instance-8.3.0_template
+      operate-event-8.3.0_template
+      operate-flownode-instance-8.3.1_template
+      operate-incident-8.3.1_template
+      operate-job-8.6.0_template
+      operate-list-view-8.3.0_template
+      operate-message-8.5.0_template
+      operate-operation-8.4.1_template
+      operate-post-importer-queue-8.3.0_template
+      operate-sequence-flow-8.3.0_template
+      operate-user-task-8.5.0_template
+      operate-variable-8.3.0_template
+      tasklist-draft-task-variable-8.3.0_template
+      tasklist-task-8.5.0_template
+      tasklist-task-variable-8.3.0_template
+      ...
+      ```
+
+      </summary>
+
+   </details>
+
+   </TabItem>
+</Tabs>
+
+#### 2. Stop all components but Elasticsearch / OpenSearch
+
+If you're using an external Elasticsearch / OpenSearch and Kubernetes, you could temporarily [uninstall](https://helm.sh/docs/helm/helm_uninstall/) the Camunda Helm chart or [scale](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_scale/) all components to 0, so that nothing is running and potentially interacting with the datastore.
+
+In case of a manual setup, you can simply stop all components.
+
+If you're using the Camunda Helm chart with an embedded Elasticsearch, you can achieve it by e.g. disabling all other components in the `values.yml`.
 
 ```yaml
 elsaticsearch:
@@ -989,7 +1090,132 @@ zeebe-gateway:
   enabled: false
 ```
 
-:::
+#### 3. Deletion of all indices
+
+Now that we have successfully restored the templates and stopped the components of adding more indices. We have to delete the existing indices to be able to successfully restore the snapshots, otherwise those will block a successful restore.
+
+<Tabs groupId="search-engine">
+   <TabItem value="elasticsearch" label="Elasticsearch" default>
+
+The following is using the [Elasticsearch CAT API](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-cat-indices) to list all indices. It's also using the [Elasticsearch Index API](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-delete) to delete an index.
+
+```bash
+for index in $(curl -s "$ELASTIC_ENDPOINT/_cat/indices?h=index" \
+   | grep -E 'operate|tasklist|optimize|zeebe'); do
+      echo "Deleting index: $index"
+      curl -X DELETE "$ELASTIC_ENDPOINT/$index"
+done
+```
+
+   <details>
+      <summary>Example Output</summary>
+      <summary>
+
+      ```bash
+      Deleting index: operate-import-position-8.3.0_
+      {"acknowledged":true}Deleting index: operate-migration-steps-repository-1.1.0_
+      {"acknowledged":true}Deleting index: operate-flownode-instance-8.3.1_
+      {"acknowledged":true}Deleting index: operate-event-8.3.0_
+      {"acknowledged":true}Deleting index: operate-incident-8.3.1_
+      {"acknowledged":true}Deleting index: tasklist-web-session-1.1.0_
+      {"acknowledged":true}Deleting index: tasklist-variable-8.3.0_
+      {"acknowledged":true}Deleting index: operate-user-task-8.5.0_
+      {"acknowledged":true}Deleting index: tasklist-import-position-8.2.0_
+      {"acknowledged":true}Deleting index: tasklist-task-variable-8.3.0_
+      {"acknowledged":true}Deleting index: tasklist-flownode-instance-8.3.0_
+      {"acknowledged":true}Deleting index: operate-process-8.3.0_
+      {"acknowledged":true}Deleting index: tasklist-process-instance-8.3.0_
+      {"acknowledged":true}Deleting index: operate-operation-8.4.1_
+      {"acknowledged":true}Deleting index: operate-job-8.6.0_
+      {"acknowledged":true}Deleting index: operate-metric-8.3.0_
+      {"acknowledged":true}Deleting index: tasklist-migration-steps-repository-1.1.0_
+      {"acknowledged":true}Deleting index: operate-decision-8.3.0_
+      {"acknowledged":true}Deleting index: tasklist-process-8.4.0_
+      {"acknowledged":true}Deleting index: operate-variable-8.3.0_
+      {"acknowledged":true}Deleting index: operate-message-8.5.0_
+      {"acknowledged":true}Deleting index: operate-decision-requirements-8.3.0_
+      {"acknowledged":true}Deleting index: operate-batch-operation-1.0.0_
+      {"acknowledged":true}Deleting index: operate-web-session-1.1.0_
+      {"acknowledged":true}Deleting index: tasklist-user-1.4.0_
+      {"acknowledged":true}Deleting index: operate-list-view-8.3.0_
+      {"acknowledged":true}Deleting index: tasklist-metric-8.3.0_
+      {"acknowledged":true}Deleting index: operate-post-importer-queue-8.3.0_
+      {"acknowledged":true}Deleting index: tasklist-task-8.5.0_
+      {"acknowledged":true}Deleting index: tasklist-form-8.4.0_
+      {"acknowledged":true}Deleting index: operate-user-1.2.0_
+      {"acknowledged":true}Deleting index: tasklist-draft-task-variable-8.3.0_
+      {"acknowledged":true}Deleting index: operate-decision-instance-8.3.0_
+      {"acknowledged":true}Deleting index: operate-sequence-flow-8.3.0_
+      {"acknowledged":true}
+      ```
+
+      </summary>
+
+   </details>
+
+   </TabItem>
+   <TabItem value="opensearch" label="OpenSearch">
+
+The following is using the [OpenSearch CAT API](https://docs.opensearch.org/docs/latest/api-reference/cat/cat-indices/) to list all indices. It's also using the [OpenSearch Index API](https://docs.opensearch.org/docs/latest/api-reference/index-apis/delete-index/) to delete an index.
+
+```bash
+for index in $(curl -s "$OPENSEARCH_ENDPOINT/_cat/indices?h=index" \
+   | grep -E 'operate|tasklist|optimize|zeebe'); do
+      echo "Deleting index: $index"
+      curl -X DELETE "$OPENSEARCH_ENDPOINT/$index"
+done
+```
+
+   <details>
+      <summary>Example Output</summary>
+      <summary>
+
+      ```bash
+      Deleting index: operate-import-position-8.3.0_
+      {"acknowledged":true}Deleting index: operate-migration-steps-repository-1.1.0_
+      {"acknowledged":true}Deleting index: operate-flownode-instance-8.3.1_
+      {"acknowledged":true}Deleting index: operate-event-8.3.0_
+      {"acknowledged":true}Deleting index: operate-incident-8.3.1_
+      {"acknowledged":true}Deleting index: tasklist-web-session-1.1.0_
+      {"acknowledged":true}Deleting index: tasklist-variable-8.3.0_
+      {"acknowledged":true}Deleting index: operate-user-task-8.5.0_
+      {"acknowledged":true}Deleting index: tasklist-import-position-8.2.0_
+      {"acknowledged":true}Deleting index: tasklist-task-variable-8.3.0_
+      {"acknowledged":true}Deleting index: tasklist-flownode-instance-8.3.0_
+      {"acknowledged":true}Deleting index: operate-process-8.3.0_
+      {"acknowledged":true}Deleting index: tasklist-process-instance-8.3.0_
+      {"acknowledged":true}Deleting index: operate-operation-8.4.1_
+      {"acknowledged":true}Deleting index: operate-job-8.6.0_
+      {"acknowledged":true}Deleting index: operate-metric-8.3.0_
+      {"acknowledged":true}Deleting index: tasklist-migration-steps-repository-1.1.0_
+      {"acknowledged":true}Deleting index: operate-decision-8.3.0_
+      {"acknowledged":true}Deleting index: tasklist-process-8.4.0_
+      {"acknowledged":true}Deleting index: operate-variable-8.3.0_
+      {"acknowledged":true}Deleting index: operate-message-8.5.0_
+      {"acknowledged":true}Deleting index: operate-decision-requirements-8.3.0_
+      {"acknowledged":true}Deleting index: operate-batch-operation-1.0.0_
+      {"acknowledged":true}Deleting index: operate-web-session-1.1.0_
+      {"acknowledged":true}Deleting index: tasklist-user-1.4.0_
+      {"acknowledged":true}Deleting index: operate-list-view-8.3.0_
+      {"acknowledged":true}Deleting index: tasklist-metric-8.3.0_
+      {"acknowledged":true}Deleting index: operate-post-importer-queue-8.3.0_
+      {"acknowledged":true}Deleting index: tasklist-task-8.5.0_
+      {"acknowledged":true}Deleting index: tasklist-form-8.4.0_
+      {"acknowledged":true}Deleting index: operate-user-1.2.0_
+      {"acknowledged":true}Deleting index: tasklist-draft-task-variable-8.3.0_
+      {"acknowledged":true}Deleting index: operate-decision-instance-8.3.0_
+      {"acknowledged":true}Deleting index: operate-sequence-flow-8.3.0_
+      {"acknowledged":true}
+      ```
+
+      </summary>
+
+   </details>
+
+   </TabItem>
+</Tabs>
+
+#### 4. Restore Elasticsearch / OpenSearch snapshots
 
 While the backup order was important to ensure consistent backups. It does not matter in case of the restore process and we can restore the backed up indices in any order.
 
@@ -1047,6 +1273,28 @@ Prerequisites:
 
 - No persistent volumes or disks should contain any pre-existing data.
 - Zeebe is configured with the same backup storage as outlined in the [prerequisites](#prerequisites).
+
+:::note
+During the restoration of the Elasticsearch / OpenSearch state, we had to temporarily deploy Zeebe. This will have resulted in persistent volumes on Kubernetes and a filled data directory on each Zeebe broker in case of a manual deployment.
+
+In the case of Kubernetes to remove all related persistent volumes.
+
+```bash
+kubectl get pvc \
+  | grep zeebe \
+  | while read namespace pvc; do
+      kubectl delete pvc "$pvc"
+    done
+```
+
+New persistent volumes will be created on a new Camunda Helm Chart upgrade and install.
+
+In case of a manual deployment, this means to remove the data directory of each Zeebe broker.
+:::
+
+:::note
+When using the Camunda Helm chart, you can optionally disable Operate, Tasklist, Optimize, etc. apart from Zeebe in the `values.yml`. Their data was restored already in the previous section about [Restore of Elasticsearch / OpenSearch](#restore-of-elasticsearch--opensearch) and can be executed from now on, but they depend on Zebee and will crashloop till Zeebe is fully restored.
+:::
 
 Camunda provides a standalone app which must be run on each node where a Zeebe broker will be running. This is a Spring Boot application similar to the broker and can run using the binary provided as part of the distribution. The app can be configured the same way a broker is configured - via environment variables or using the configuration file located in `config/application.yaml`.
 
@@ -1118,7 +1366,7 @@ If you're not using the Camunda Helm chart, you can use a similar approach nativ
 
 The application will exit and restart the pod. This is an expected behavior. The restore application will not try to restore the state again since the partitions were already restored to the persistent disk.
 
-:::note
+:::tip
 
 In Kubernetes, Zeebe is a [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/), which are meant for long-running and persistent applications. There is no `restartPolicy` due to which the resulting pods of the Zeebe `StatefulSet` will always restart. Meaning that you have to observe the Zeebe brokers during restore and may have to look at the logs with `--previous` if it already restarted.
 
