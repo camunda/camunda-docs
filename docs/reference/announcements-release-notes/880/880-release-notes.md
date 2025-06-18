@@ -131,9 +131,9 @@ This feature introduces an offline installer package for the Camunda [RPA](/comp
 
 <!-- https://github.com/camunda/product-hub/issues/2786 -->
 
-### Tasklist frontend application migration to use Camunda 8 REST API <span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span>
+### Tasklist frontend application migration to use Orchestration cluster REST API <span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span>
 
-The Tasklist frontend application is transitioning from the soon-to-be-deprecated Tasklist V1 API to the unified Camunda 8 REST API.
+The Tasklist frontend application is transitioning from the soon-to-be-deprecated Tasklist V1 API to the unified Orchestration cluster REST API.
 
 - This ensures Tasklist remains fully compatible with Camunda 8’s new RDBMS support while continuing to work seamlessly with Elasticsearch and OpenSearch.
 - You can expect consistent functionality across different data layers, improved performance, and access to new platform features - all without losing existing capabilities or disrupting task management workflows.
@@ -276,7 +276,7 @@ To learn more about this connector, see [HubSpot connector](/components/connecto
 
 ### Camunda Spring Boot SDK for the C8 REST API
 
-A Spring Boot SDK is provided for the Camunda 8 REST API to unify process management, user tasks, and identity features under a single dedicated starter. This simplifies the interaction between a Spring Boot application and Camunda 8, allowing you to:
+A Spring Boot SDK is provided for the Orchestration cluster REST API to unify process management, user tasks, and identity features under a single dedicated starter. This simplifies the interaction between a Spring Boot application and Camunda 8, allowing you to:
 
 - Easily integrate process entity management and queries within your workflows.
 - Seamlessly configure endpoints and authentication via Spring Boot auto-configuration, minimizing boilerplate code.
@@ -346,9 +346,9 @@ To learn more about this feature, see [user task listeners](/components/concepts
 
 <!-- https://github.com/camunda/product-hub/issues/2126 -->
 
-### Camunda 8 REST API Query API <span class="badge badge--medium" title="This feature affects APIs">API</span>
+### Orchestration cluster REST API Query API <span class="badge badge--medium" title="This feature affects APIs">API</span>
 
-You can now use a single Query API in the Camunda 8 REST API to find process and decision data instead of using multiple component APIs.
+You can now use a single Query API in the Orchestration cluster REST API to find process and decision data instead of using multiple component APIs.
 
 For example, send a request to the [Search decision definitions](/apis-tools/orchestration-cluster-api-rest/specifications/search-decision-definitions.api.mdx) endpoint to search for decision definitions.
 
@@ -364,7 +364,7 @@ New Query API endpoints are added as follows:
 - User tasks
 - Variables
 
-To learn more about these endpoints, see the [Camunda 8 REST API](/apis-tools/orchestration-cluster-api-rest/camunda-api-rest-overview.md#query-api) documentation.
+To learn more about these endpoints, see the [Orchestration cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md#query-api) documentation.
 
 ### Amazon OpenSearch Optimize support <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span>
 
@@ -400,6 +400,6 @@ Camunda backups have been improved and made easier to use. The web application b
 
 ### Connector Runtime <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span>
 
-#### Spring SDK and Camunda 8 REST API Migration
+#### Spring SDK and Orchestration cluster REST API Migration
 
-The Connectors experience is enhanced with the migration from the Spring Zeebe to the Camunda 8 REST API, and the removal of dependency on the Operate client.
+The Connectors experience is enhanced with the migration from the Spring Zeebe to the Orchestration cluster REST API, and the removal of dependency on the Operate client.

@@ -1,23 +1,23 @@
 ---
 id: migrate-to-camunda-api
-title: Migrate to the Camunda 8 API
-description: "Migrate from Camunda's V1 component REST APIs to the V2 Camunda 8 REST API to interact with Camunda 8 clusters, activate jobs, and run user task state operations."
+title: Migrate to the Orchestration cluster API
+description: "Migrate from Camunda's V1 component REST APIs to the V2 Orchestration cluster REST API to interact with Camunda 8 clusters, activate jobs, and run user task state operations."
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-This document offers a comprehensive guide to migrate from Camunda's V1 component REST APIs (the Tasklist REST API, for example) to the V2 [Camunda 8 REST API](/apis-tools/orchestration-cluster-api-rest/camunda-api-rest-overview.md).
+This document offers a comprehensive guide to migrate from Camunda's V1 component REST APIs (the Tasklist REST API, for example) to the V2 [Orchestration cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
 
 Camunda is streamlining the developer experience by creating a unified REST API for Zeebe, Operate, Tasklist, and the Identity components with endpoint parity. This will be a single REST API for the orchestration cluster for a consistent and intuitive API experience to help your teams develop process automation solutions faster.
 
 :::note
-The Administration and Web Modeler APIs will not be part of the Camunda 8 REST API, as these are platform APIs outside the cluster’s scope.
+The Administration and Web Modeler APIs will not be part of the Orchestration cluster REST API, as these are platform APIs outside the cluster’s scope.
 :::
 
 Over time, there will be a deprecation process for the individual component APIs starting with the former Operate and Tasklist APIs. These will continue to be in the product for the short-term, but it is recommended to begin the adoption of the new API. In addition, we will begin to deprecate several Zeebe gPRC endpoints as well. See [the official blog announcement](https://camunda.com/blog/2024/11/camunda-8-7-releasing-february-2025/).
 
-This guide considers all public endpoints existing in the component REST APIs and the Camunda 8 API counterparts or required migration changes.
+This guide considers all public endpoints existing in the component REST APIs and the Orchestration cluster API counterparts or required migration changes.
 
 ## General endpoint changes
 

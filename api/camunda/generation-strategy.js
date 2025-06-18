@@ -257,8 +257,8 @@ function addFrequentlyLinkedDocs(version) {
   // Adds links to the Camunda Alpha REST API documentation, so that they don't have to live in the upstream spec.
   return [
     {
-      from: /The Camunda 8 API \(REST\) Overview page/g,
-      to: "The [Camunda 8 API (REST) Overview page](/apis-tools/orchestration-cluster-api-rest/camunda-api-rest-overview.md#query-api)",
+      from: /The Orchestration cluster API \(REST\) Overview page/g,
+      to: "The [Orchestration cluster API (REST) Overview page](/apis-tools/orchestration-cluster-api-rest/camunda-api-rest-overview.md#query-api)",
     },
     {
       from: /endpoint is an alpha feature/g,
