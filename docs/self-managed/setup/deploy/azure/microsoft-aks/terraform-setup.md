@@ -186,12 +186,15 @@ For all environments, create a dedicated Azure AD service principal and assign o
 
 <TabItem value="existing-sp">
 
-To log in using an existing Azure Service Principal, you need the `appId`, `password`, and `tenant` values associated with the Service Principal. These credentials allow Terraform to authenticate and provision resources in your Azure subscription. Use the following command to log in:
+To log in using an existing Azure Service Principal, you need the `appId` and `tenant` values associated with the Service Principal. These credentials allow Terraform to authenticate and provision resources in your Azure subscription.
+
+If you need help finding your tenant ID, refer to [Find your Azure subscription tenant ID](https://learn.microsoft.com/en-us/azure/azure-portal/get-subscription-tenant-id).
+
+Use the following command to log in (you will be prompted for the password):
 
 ```bash
 az login --service-principal \
   -u <appId> \
-  -p <password> \
   --tenant <tenant-id>
 ```
 
@@ -224,9 +227,10 @@ This will return a JSON object with `appId`, `password`, and `tenant`. These val
 ```bash
 az login --service-principal \
   -u <appId> \
-  -p <password> \
   --tenant <tenant-id>
 ```
+
+You will be prompted to enter the password interactively.
 
 Replace `<appId>`, `<password>`, and `<tenant-id>` with the actual values of your Service Principal.
 
@@ -482,11 +486,20 @@ Run the following script to apply the new storage class and set it as default:
 https://github.com/camunda/camunda-deployment-references/blob/add-azure-domain-support/azure/kubernetes/aks-single-region/procedure/storageclass-configure.sh
 ```
 
-Then run the following script to veryify if it had been set correctly.
+To verify completion of the operation, run:
+
+```bash
+./procedure/storageclass-verify.sh
+```
+
+<details>
+<summary>Show script <code>procedure/storageclass-verify.sh</code></summary>
 
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/add-azure-domain-support/azure/kubernetes/aks-single-region/procedure/storageclass-verify.sh
 ```
+
+</details>
 
 This must be applied **before installing the Camunda Helm chart** so that PersistentVolumeClaims (PVCs) are provisioned with the correct performance characteristics.
 
