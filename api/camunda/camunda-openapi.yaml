@@ -2,7 +2,7 @@
 
 openapi: "3.0.3"
 info:
-  title: Orchestration cluster REST API
+  title: Camunda 8 REST API
   version: "0.1"
   description: API for communicating with a Camunda 8 cluster.
   license:
@@ -20,10 +20,10 @@ servers:
         description: The hostname of the Camunda 8 REST Gateway.
       port:
         default: "8080"
-        description: The port of the Orchestration cluster REST API server.
+        description: The port of the Camunda 8 REST API server.
       schema:
         default: http
-        description: The schema of the Orchestration cluster REST API server.
+        description: The schema of the Camunda 8 REST API server.
 
 tags:
   - name: Ad-hoc sub-process
