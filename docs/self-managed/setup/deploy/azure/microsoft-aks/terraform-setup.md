@@ -523,21 +523,24 @@ kubectl get secret setup-db-secret -o yaml --namespace camunda
 
 This should display the secret with the base64 encoded values.
 
-3. Save the following manifest to a file, for example, `setup-postgres-create-db.yml`.
+3. Apply the following manifest to set up the DB:
+
+```bash
+kubectl apply -f ./manifests/setup-postgres-create-db.yml --namespace camunda
+```
+
+<details>
+<summary>Show manifest <code>setup-postgres-create-db.yml</code></summary>
 
 ```yaml reference
 https://github.com/camunda/camunda-deployment-references/blob/add-azure-domain-support/azure/kubernetes/aks-single-region/manifests/setup-postgres-create-db.yml
 ```
 
-4. Apply the manifest:
-
-```bash
-kubectl apply -f setup-postgres-create-db.yml --namespace camunda
-```
+</details>
 
 Once the secret is created, the **Job** manifest from the previous step can consume this secret to securely access the database credentials.
 
-5. Once the job is created, monitor its progress using:
+4. Once the job is created, monitor its progress using:
 
 ```bash
 kubectl get job/create-setup-user-db --namespace camunda --watch
@@ -545,13 +548,13 @@ kubectl get job/create-setup-user-db --namespace camunda --watch
 
 Once the job shows as `Completed`, the users and databases will have been successfully created.
 
-6. View the logs of the job to confirm that the users were created and privileges were granted successfully:
+5. View the logs of the job to confirm that the users were created and privileges were granted successfully:
 
 ```bash
 kubectl logs job/create-setup-user-db --namespace camunda
 ```
 
-7. Clean up the resources:
+6. Clean up the resources:
 
 ```bash
 kubectl delete job create-setup-user-db --namespace camunda
