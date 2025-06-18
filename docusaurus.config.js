@@ -5,13 +5,7 @@ const docsSiteUrl = process.env.DOCS_SITE_URL || "https://docs.camunda.io";
 const { themes } = require("prism-react-renderer");
 
 module.exports = {
-  // https://docusaurus.io/blog/releases/3.6#adoption-strategy
-  future: {
-    v4: {
-      removeLegacyPostBuildHeadAttribute: true,
-    },
-    experimental_faster: true,
-  },
+
   title: "Camunda 8 Docs",
   tagline:
     "Start orchestrating your processes with Camunda 8 SaaS or Self-Managed",
@@ -21,6 +15,13 @@ module.exports = {
   baseUrl: process.env.DOCS_SITE_BASE_URL || "/",
   customFields: {
     canonicalUrlRoot: docsSiteUrl,
+  // https://docusaurus.io/blog/releases/3.6#adoption-strategy
+  future: {
+    v4: {
+      removeLegacyPostBuildHeadAttribute: true,
+    },
+    experimental_faster: true,
+  },
   },
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "throw",
