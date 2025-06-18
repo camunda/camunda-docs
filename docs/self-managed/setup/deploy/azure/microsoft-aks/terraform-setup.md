@@ -389,7 +389,15 @@ The modules deployed are:
 - `aks` ([aks.tf](https://github.com/camunda/camunda-deployment-references/blob/add-azure-domain-support/azure/kubernetes/aks-single-region/aks.tf)): Cluster deployment with system and user node pools across AZs
 - `postgres_db` ([db.tf](https://github.com/camunda/camunda-deployment-references/blob/add-azure-domain-support/azure/kubernetes/aks-single-region/db.tf)): High-availability PostgreSQL Flexible Server, private DNS, and endpoint
 
-#### 2. PostgreSQL module
+#### 2. AKS module
+
+This module exposes a customisable **kubernetes_version** value via the `locals` block:
+
+```hcl reference
+https://github.com/camunda/camunda-deployment-references/blob/add-azure-domain-support/azure/kubernetes/aks-single-region/aks.tf#L1-L3
+```
+
+#### 3. PostgreSQL module
 
 This module exposes several **customizable values** via the `locals` block:
 
