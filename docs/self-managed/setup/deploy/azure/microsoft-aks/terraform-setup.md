@@ -327,21 +327,19 @@ For production deployments, it is recommended to replace the example values with
 
 Now, follow these steps to create the storage account with versioning enabled:
 
-1. Open your terminal and ensure the Azure CLI is installed and you're logged in.
-
-2. Run the following script to create a storage account and container for storing your Terraform state. Make sure that you have chosen a globally unique name for the storage account before:
+1. Run the following script to create a storage account and container for storing your Terraform state. Make sure that you have chosen a globally unique name for the storage account before:
 
    ```bash reference
    https://github.com/camunda/camunda-deployment-references/blob/add-azure-domain-support/azure/common/procedure/storage-account/storage-account-creation.sh
    ```
 
-3. Enable blob versioning to track changes and protect the state file from accidental deletions or overwrites:
+2. Enable blob versioning to track changes and protect the state file from accidental deletions or overwrites:
 
    ```bash reference
    https://github.com/camunda/camunda-deployment-references/blob/add-azure-domain-support/azure/common/procedure/storage-account/storage-account-versioning.sh
    ```
 
-4. Verify versioning is enabled on the blob container:
+3. Verify versioning is enabled on the blob container:
 
    ```bash reference
    https://github.com/camunda/camunda-deployment-references/blob/add-azure-domain-support/azure/common/procedure/storage-account/storage-account-verify.sh
