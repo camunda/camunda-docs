@@ -434,14 +434,16 @@ You can gain access to the AKS cluster using the `Azure CLI` with the following 
 RESOURCE_GROUP=$(terraform output -raw resource_group_name)
 CLUSTER_NAME=$(terraform output -raw aks_cluster_name)
 
+# Echo the values to verify they are not empty
+echo "RESOURCE_GROUP: $RESOURCE_GROUP"
+echo "CLUSTER_NAME: $CLUSTER_NAME"
+
 # Get credentials using Azure CLI
 az aks get-credentials \
   --resource-group "$RESOURCE_GROUP" \
   --name "$CLUSTER_NAME" \
   --overwrite-existing
 ```
-
-Replace `<your-resource-group>` and `<your-cluster-name>` with the actual values you have input in the root main.tf. `<your-cluster-name>` will be `<your-resource-prefix>-aks`.
 
 After updating the kubeconfig, you can verify your connection to the cluster with `kubectl`:
 
