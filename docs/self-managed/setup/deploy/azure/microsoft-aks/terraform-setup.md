@@ -409,19 +409,13 @@ We strongly recommend managing sensitive information such as the PostgreSQL user
 
 1. Open a terminal in the chosen reference folder where `config.tf` and other `.tf` files are located.
 
-2. Perform a final initialization for anything changed throughout the guide:
-
-```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/add-azure-domain-support/azure/common/procedure/storage-account/storage-account-tf-init.sh#L11-L15
-```
-
-3. Plan the configuration files:
+2. Plan the configuration files:
 
 ```bash
 terraform plan -out cluster.plan # describe what will be created
 ```
 
-4. After reviewing the plan, you can confirm and apply the changes:
+3. After reviewing the plan, you can confirm and apply the changes:
 
 ```bash
 terraform apply cluster.plan     # apply the creation
