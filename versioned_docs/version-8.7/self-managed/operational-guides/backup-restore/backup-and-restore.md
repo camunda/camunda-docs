@@ -7,15 +7,21 @@ keywords: ["backup", "backups"]
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import ZeebeGrid from '@site/docs/components/zeebe/react-components/\_zeebe-card';
+import { overviewCards } from './react-components/\_card-data';
 
 :::note
-If the Camunda application(s) cannot access Elasticsearch with cluster-level privileges, it is possible to run the backup of Operate and Tasklist indices (steps 2, 3, 5 and 6 from the backup procedure below) as a standalone application separate from the main application (see [standalone backup application](/self-managed/concepts/elasticsearch-without-cluster-privileges.md#standalone-backup-application)).
+If the Camunda application(s) cannot access Elasticsearch with cluster-level privileges, it is possible to run the backup of Operate and Tasklist indices as a standalone application separate from the main application (see [standalone backup application](/self-managed/concepts/elasticsearch-without-cluster-privileges.md#standalone-backup-application)).
 :::
 
 The following will explore the motive, considerations and actual backup and restore procedures in detail. The goal is for you to understand the steps and choices taken. The manually described procedures should be automated within your organization with the tools of your choice to fulfill your companies requirements.
 
 You need to use the backup feature of Camunda 8 Self-Managed to regularly back up the state of all of its components (Zeebe, Operate, Tasklist, and Optimize) without any downtime (except Web Modeler, see [the Web Modeler backup and restore documentation](./modeler-backup-and-restore.md)).
 In case of failures that lead to data loss, you can recover the cluster from a backup.
+
+## Overview
+
+<ZeebeGrid zeebe={overviewCards} />
 
 ## Motive
 
@@ -1542,7 +1548,7 @@ Zeebe will create a folder for each Partition ID and subfolder in there with eac
 
 ## Miscellaneous
 
-### Clean up of Backups
+### Clean-up of Backups
 
 Depending on your company’s backup policies - such as retention periods and the number of backups to keep - you should consider regularly cleaning up old backups to reduce storage costs and manage resources efficiently.
 
