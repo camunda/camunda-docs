@@ -125,7 +125,8 @@ A Connector template defines the binding to your Connector runtime behavior via 
   "type": "Hidden",
   "value": "io.camunda:template:1",
   "binding": {
-    "type": "zeebe:taskDefinition:type"
+    "type": "zeebe:taskDefinition",
+    "property": "type"
   }
 }
 ```

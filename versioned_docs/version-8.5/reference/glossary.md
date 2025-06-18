@@ -2,7 +2,46 @@
 id: glossary
 title: "Glossary"
 description: "This section defines common terminology referenced within the documentation."
+toc_min_heading_level: 2
+toc_max_heading_level: 2
 ---
+
+Explore and understand definitions for key Camunda 8 terms and abbreviations.
+
+<div class="alphabet-rows">
+  <div class="alphabet-navigation">
+    <div class="letter-link">A</div>
+    <div class="letter-link"><a href="#b">B</a></div>
+    <div class="letter-link"><a href="#c">C</a></div>
+    <div class="letter-link"><a href="#d">D</a></div>
+    <div class="letter-link"><a href="#e">E</a></div>
+    <div class="letter-link"><a href="#f">F</a></div>
+    <div class="letter-link"><a href="#g">G</a></div>
+    <div class="letter-link">H</div>
+    <div class="letter-link"><a href="#i">I</a></div>
+    <div class="letter-link"><a href="#j">J</a></div>
+    <div class="letter-link">K</div>
+    <div class="letter-link"><a href="#l">L</a></div>
+    <div class="letter-link"><a href="#m">M</a></div>
+  </div>
+  <div class="alphabet-navigation">
+    <div class="letter-link">N</div>
+    <div class="letter-link"><a href="#o">O</a></div>
+    <div class="letter-link"><a href="#p">P</a></div>
+    <div class="letter-link">Q</div>
+    <div class="letter-link"><a href="#r">R</a></div>
+    <div class="letter-link"><a href="#s">S</a></div>
+    <div class="letter-link">T</div>
+    <div class="letter-link">U</div>
+    <div class="letter-link">V</div>
+    <div class="letter-link"><a href="#w">W</a></div>
+    <div class="letter-link">X</div>
+    <div class="letter-link">Y</div>
+    <div class="letter-link">Z</div>
+  </div>
+</div>
+
+## B
 
 ### Bridge
 
@@ -13,6 +52,8 @@ Synonym to "[Connector](#connector)".
 A broker is an instance of a Zeebe installation which executes processes and manages process state. A single broker is installed on a single machine.
 
 - [Architecture](/components/zeebe/technical-concepts/architecture.md#brokers)
+
+## C
 
 ### Client
 
@@ -52,17 +93,27 @@ A correlation is an attribute within a message used to match this message agains
 
 - [Message correlation](/components/concepts/messages.md)
 
+## D
+
 ### Deployment
 
 A process cannot execute unless it is known by the broker. Deployment is the process of pushing or deploying processes to the broker.
 
 - [Zeebe Deployment](/apis-tools/zeebe-api/gateway-service.md#deployresource-rpc)
 
+## E
+
 ### Element
 
 A BPMN element is part of a [process](#process), defining one part of its BPMN model. Elements are the building blocks of a process and comprise [flow nodes](#flow-node), sequence flows, participants, data objects, and more.
 
 - [BPMN elements](/components/modeler/bpmn/bpmn-primer.md#bpmn-elements)
+
+### Element template
+
+Use an element template to extend the Desktop Modeler or Web Modeler with domain-specific diagram [elements](#element). Element templates are used by [Connectors](#connector) to create the connector-specific [element](#element) configuration.
+
+- [Element templates](/components/modeler/desktop-modeler/element-templates/about-templates.md)
 
 ### Event
 
@@ -76,6 +127,8 @@ An exporter represents a sink to which Zeebe will submit all records within the 
 
 - [Exporter](/self-managed/concepts/exporters.md)
 
+## F
+
 ### Flow node
 
 Flow nodes refer to a specific subset of BPMN [elements](#element). They comprise events, activities, and gateways. Other elements, such as sequence flows, participants, and data objects, are not considered flow nodes.
@@ -86,11 +139,15 @@ In a clustered environment, a broker which is not a leader is a follower of a gi
 
 - [Clustering](/components/zeebe/technical-concepts/clustering.md#raft-consensus-and-replication-protocol)
 
+## G
+
 ### Gateway
 
 Clients communicate with the Zeebe cluster through a gateway. The gateway provides a REST and gRPC API and forwards client commands to the cluster. Depending on the setup, a gateway can be embedded in the broker or can be configured to be standalone.
 
 - [Architecture](/components/zeebe/technical-concepts/architecture.md#gateways)
+
+## I
 
 ### Inbound Connector
 
@@ -113,6 +170,8 @@ An Ingress is a Kubernetes object that manages external access to the services w
 
 - [Ingress setup](/self-managed/setup/guides/ingress-setup.md)
 
+## J
+
 ### Job
 
 A job represents a distinct unit of work within a business process. Service tasks represent such
@@ -133,6 +192,8 @@ A special type of client that polls for and executes available jobs. An uncomple
 
 - [Job workers](/components/concepts/job-workers.md)
 
+## L
+
 ### Leader
 
 In a clustered environment, one broker (the leader) is responsible for process execution and housekeeping of data within a partition. Housekeeping includes taking snapshots, replication, and running exports.
@@ -145,15 +206,21 @@ The log is comprised of an ordered sequence of records written to persistent sto
 
 - [Partitions](/components/zeebe/technical-concepts/partitions.md#partition-data-layout)
 
+## M
+
 ### Message
 
 A message contains information to be delivered to interested parties during execution of a process instance. Messages can be published via Kafka or Zeebe’s internal messaging system. Messages are associated with timestamp and other constraints such as time-to-live (TTL).
 
 - [Messages](/components/concepts/messages.md)
 
+## O
+
 ### Outbound Connector
 
 Outbound [Connectors](#connector) in Camunda 8 allow workflows to trigger with external systems or services, making it possible to integrate workflows with other parts of a business process or system architecture.
+
+## P
 
 ### Partition
 
@@ -193,7 +260,9 @@ A process instance variable represents the execution state (i.e data) of a proce
 
 Protocol Connectors are a type of [Connector](#connector) in Camunda that can serve as either [inbound](#inbound-connector) or [outbound](#outbound-connector) Connectors, supporting a variety of technical protocols. These Connectors are highly generic, designed to provide a flexible and customizable means of integrating with external systems and services.
 
-Protocol Connectors can be customized to meet the needs of specific use cases using element templates, with no additional coding or deployment required. Examples of protocol Connectors include HTTP REST, SOAP, GraphQL, as well as message queue Connectors.
+Protocol Connectors can be customized to meet the needs of specific use cases using [element templates](#element-template), with no additional coding or deployment required. Examples of protocol Connectors include HTTP REST, SOAP, GraphQL, as well as message queue Connectors.
+
+## R
 
 ### Record
 
@@ -221,6 +290,8 @@ This is how long a client waits for a response from the broker after the client 
 
 - [Zeebe API (gRPC)](/apis-tools/zeebe-api/grpc.md)
 
+## S
+
 ### Segment
 
 The log consists of one or more segments. Each segment is a file containing an ordered sequence records. Segments are deleted when the log is compacted.
@@ -245,6 +316,8 @@ Soft pause exporting is a feature that allows you to continue exporting records 
 An [inbound Connector](#inbound-connector) that subscribes to a message queue.
 
 This way, a Camunda workflow can receive messages from an external system or service (like Kafka or RabbitMQ) using message queuing technology. This type of inbound Connector is commonly used in distributed systems where different components of the system need to communicate with each other asynchronously.
+
+## W
 
 ### Webhook Connector
 

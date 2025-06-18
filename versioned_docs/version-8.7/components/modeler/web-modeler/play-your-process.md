@@ -92,7 +92,7 @@ Play's rewind operation currently does not support the following elements:
 - Play rewinds to an element, not to an element instance. For example, if you wanted to rewind your process to a sequential multi-instance service task which ran five times, it will rewind your process to the first instance of that service task.
 - Play rewinds processes by initiating a new instance and executing each element. However, if any element behaves differently from the previous execution, such as a connector returning a different result, the rewind may fail.
 
-## Scenarios <span class="badge badge--cloud">Camunda 8 SaaS only</span> {#scenarios}
+## Scenarios {#scenarios}
 
 Use scenarios to quickly rerun processes while tracking test coverage.
 
@@ -135,7 +135,6 @@ You can run scenarios on the process definition page by clicking either the **Ru
 
 ### Limitations {#scenarios-limitations}
 
-- Scenarios are currently only available in Camunda 8 SaaS.
 - Scenarios are stored in the browser's local storage, making them accessible only in the current browser and not usable outside of Play, in a different browser, or by a collaborator.
 - Call activities are not supported. Scenarios containing call activities cannot be executed successfully.
 - Scenario paths that include process modifications are not supported.
@@ -241,3 +240,11 @@ The use of Play may result in additional charges depending on your organization'
 - **Enterprise Plans:** Use a [development cluster](/components/concepts/clusters.md#development-clusters-in-the-enterprise-plan) to avoid costs. Alternatively, ensure your organization is designated as a development organization. For further assistance, contact your Customer Success Manager.
 - **Starter/Professional Plans:** Use a [development cluster](/components/concepts/clusters.md#development-clusters-in-the-starter-plan) to avoid costs. Starter plan users have one development cluster with free execution for development included in their plan. For Professional Plans, you may need to purchase a development cluster.
 - **Trial Plans:** You can use any cluster.
+
+:::caution Starter plans
+The Starter plan is no longer available. 
+
+- Existing customers using a Starter plan will need to either upgrade to the Enterprise plan, or move to the Free plan. 
+- To compare plan features and contact Camunda for advice and an Enterprise plan quote, refer to [Camunda 8 pricing](https://camunda.com/pricing/?utm_source=docs.camunda.io&utm_medium=referral).
+
+:::

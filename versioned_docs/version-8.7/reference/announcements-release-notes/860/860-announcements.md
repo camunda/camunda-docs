@@ -11,6 +11,13 @@ Supported environment changes and breaking changes or deprecations for the Camun
 | :------------- | :----------------- | :----------------------------------------------------------------------------------- |
 | 8 October 2024 | 14 April 2026      | [8.6 release notes](/reference/announcements-release-notes/860/860-release-notes.md) |
 
+:::tip Release notes and quality board
+
+- See [release notes](/reference/announcements-release-notes/860/860-release-notes.md) to learn more about new features and enhancements.
+- Refer to the [quality board](https://github.com/orgs/camunda/projects/187/views/17) for an overview of known bugs by component and severity.
+
+:::
+
 ## Changes in supported environments
 
 ### Zeebe, Operate, and Tasklist must run on exact same minor and patch levels

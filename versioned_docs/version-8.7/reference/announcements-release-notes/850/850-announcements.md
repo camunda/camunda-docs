@@ -7,6 +7,13 @@ toc_max_heading_level: 3
 
 Supported environment changes and breaking changes or deprecations for the Camunda 8.5, 8.4, and 8.3 releases are summarized below.
 
+:::tip Release notes and quality board
+
+- See [release notes](/reference/announcements-release-notes/850/850-release-notes.md) to learn more about new features and enhancements.
+- Refer to the [quality board](https://github.com/orgs/camunda/projects/187/views/18) for an overview of known bugs by component and severity.
+
+:::
+
 ## Camunda 8.5
 
 | Release date | End of maintenance | Release notes                                                                        |
@@ -108,6 +115,8 @@ This release contains the following limitations:
     - **Mitigation:**
       1. Feature is planned to be delivered with an upcoming patch release. Please see [issue](https://github.com/camunda/issues/issues/569) for latest progress.
       2. [Disable connectors component](/self-managed/identity/configuration/connect-to-an-oidc-provider.md#configuration) when configuring a custom OIDC provider.
+
+Please visit our [quality board](https://github.com/orgs/camunda/projects/187/views/18) to get an overview of known bugs by component and severity.
 
 ### Key changes
 

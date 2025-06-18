@@ -15,16 +15,16 @@ The migration tooling is currently under development, with an initial release pl
 
 Camunda provides the following migration tools:
 
-| Migration tool                                | Description                                                                                                                                                                                                 |
-| :-------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **[Migration Analyzer](#migration-analyzer)** | Helps you gain a first understanding of migration tasks. Available for local installation (requires Java) or [hosted as a free SaaS offering](https://diagram-converter.consulting-sandbox.camunda.cloud/). |
-| **[Data Migrator](#data-migrator)**           | Copies active Camunda 7 runtime instances and existing audit trail data (history) to Camunda 8.                                                                                                             |
-| **[Code Converter](#code-converter)**         | Supported by a mixture of diagram conversion tools, code conversion patterns, and automatable refactoring recipes.                                                                                          |
-| **[Camunda 7 Adapter](#camunda-7-adapter)**   | Run existing Camunda 7 delegation code directly in a Camunda 8 environment.                                                                                                                                 |
+| Migration tool                                                    | Description                                                                                                                                                                                                 |
+| :---------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **[Migration Analyzer & Diagram Converter](#migration-analyzer)** | Helps you gain a first understanding of migration tasks. Available for local installation (requires Java) or [hosted as a free SaaS offering](https://diagram-converter.consulting-sandbox.camunda.cloud/). |
+| **[Data Migrator](#data-migrator)**                               | Copies active Camunda 7 runtime instances and existing audit trail data (history) to Camunda 8.                                                                                                             |
+| **[Code Converter](#code-converter)**                             | Supported by a mixture of diagram conversion tools, code conversion patterns, and automatable refactoring recipes.                                                                                          |
+| **[Camunda 7 Adapter](#camunda-7-adapter)**                       | Run existing Camunda 7 delegation code directly in a Camunda 8 environment.                                                                                                                                 |
 
-## Migration Analyzer
+## Migration Analyzer & Diagram Converter
 
-Camunda is developing the **Migration Analyzer**, a tool to gain a first understanding of migration tasks. This tool is based on the existing [diagram converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/backend-diagram-converter), which can be used via CLI to produce a CSV file with tasks in your model. Our consultants then import this data into a [Google Spreadsheet template](https://docs.google.com/spreadsheets/d/1ZUxGhj1twgTnXadbopw1CvZg_ZvDnB2VXRQDSrKtmcM/edit?gid=6013418#gid=6013418) to analyze what tasks need to be done to migrate.
+Camunda is developing the **Migration Analyzer & Diagram Converter**, a tool to gain a first understanding of migration tasks. This tool is based on the existing [diagram converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/backend-diagram-converter), which can be used via CLI to produce a CSV file with tasks in your model. Our consultants then import this data into a [Google Spreadsheet template](https://docs.google.com/spreadsheets/d/1ZUxGhj1twgTnXadbopw1CvZg_ZvDnB2VXRQDSrKtmcM/edit?gid=6013418#gid=6013418) to analyze what tasks need to be done to migrate.
 
 :::info
 The [existing diagram converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/backend-diagram-converter) can be used today. UI and reporting will be added and documentation will be extended. The initial release is **planned for 8.8**. Iterative improvements will follow.
@@ -32,7 +32,7 @@ The [existing diagram converter](https://github.com/camunda-community-hub/camund
 
 For example, the following image shows a sample report.
 
-![A screenshot of the Migration Analyzer tool](../img/analyzer-screenshot.png)
+![A screenshot of the Migration Analyzer & Diagram Converter tool](../img/analyzer-screenshot.png)
 
 Performing this analysis will help you understand what needs to be done to migrate.
 

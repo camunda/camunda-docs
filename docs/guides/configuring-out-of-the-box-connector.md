@@ -8,7 +8,7 @@ keywords: [connector, modeling, connectors, low-code, no-code]
 <span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--medium">Time estimate: 20 minutes</span>
 
-The launch of [Camunda 8](../components/concepts/what-is-camunda-8.md) also introduced an integration framework with a key goal: integrate faster to reduce the time it takes to automate and orchestrate business processes across systems.
+The launch of [Camunda 8](/components/components-overview.md) also introduced an integration framework with a key goal: integrate faster to reduce the time it takes to automate and orchestrate business processes across systems.
 
 :::note
 New to connectors? Review our [introduction to connectors](/components/connectors/introduction.md) to get familiar with their capabilities.
@@ -110,3 +110,4 @@ In [Operate](../components/operate/operate-introduction.md), you will now see th
 - [Connectors & Integration Framework](https://camunda.com/platform/modeler/connectors/)
 - [Camunda BPMN Tutorial](https://camunda.com/bpmn/)
 - [Automate processes using BPMN](./automating-a-process-using-bpmn.md)
+- [Camunda Academy: How To Configure the SendGrid Connector](https://academy.camunda.com/c8-h2-sendgrid-connector/)

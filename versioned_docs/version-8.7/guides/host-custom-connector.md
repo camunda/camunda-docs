@@ -135,3 +135,5 @@ docker run --rm --name=CustomConnectorInSMWithHelm \
 Exact values of the environment variables related to Zeebe, Operate, Keycloak, or network may depend on
 your own configuration.
 :::
+
+Interested in creating a custom connector? Review the related Camunda Academy courses on [creating a custom inbound connector](https://academy.camunda.com/c8-custom-inbound-connectors) or [creating a custom outbound connector](https://academy.camunda.com/c8-custom-outbound-connectors).
