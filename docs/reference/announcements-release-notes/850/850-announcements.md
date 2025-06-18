@@ -52,10 +52,12 @@ This release contains the following limitations:
 
 ### Key changes
 
-### Deprecation of Self-Managed AWS Marketplace
+#### Deprecation of Self-Managed AWS Marketplace offering
 
-Starting of October 2025 the Self-Managed AWS Marketplace offering gets deprecated and is no longer publicly available. Current customers can continue using the product until their contract expires.
-Please refer to our [new AWS Marketplace listing](https://aws.amazon.com/marketplace/pp/prodview-6y664fcnydiqg?sr=0-1&ref_=beagle&applicationId=AWSMPContessa) for further details.
+As of **October 2025**, the **Self-Managed AWS Marketplace** offering will be **deprecated** and no longer publicly available.  
+Existing customers may continue to use the product until their current contracts expire.
+
+For future use, refer to our [new AWS Marketplace listing](https://aws.amazon.com/marketplace/pp/prodview-6y664fcnydiqg?sr=0-1&ref_=beagle&applicationId=AWSMPContessa) for more information.
 
 #### Removal of Web Modeler's beta API
 
@@ -123,10 +125,12 @@ This release contains the following limitations:
 
 ### Key changes
 
-### Deprecation of Self-Managed AWS Marketplace
+#### Deprecation of Self-Managed AWS Marketplace offering
 
-Starting of October 2025 the Self-Managed AWS Marketplace offering gets deprecated and is no longer publicly available. Current customers can continue using the product until their contract expires.
-Please refer to our [new AWS Marketplace listing](https://aws.amazon.com/marketplace/pp/prodview-6y664fcnydiqg?sr=0-1&ref_=beagle&applicationId=AWSMPContessa) for further details.
+As of **October 2025**, the **Self-Managed AWS Marketplace** offering will be **deprecated** and no longer publicly available.  
+Existing customers may continue to use the product until their current contracts expire.
+
+For future use, refer to our [new AWS Marketplace listing](https://aws.amazon.com/marketplace/pp/prodview-6y664fcnydiqg?sr=0-1&ref_=beagle&applicationId=AWSMPContessa) for more information.
 
 #### Form linking
 
