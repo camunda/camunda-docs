@@ -11,7 +11,6 @@ import AmazonS3Img from "../img/connector-amazon-s3.png";
 import AsanaImg from "../img/connector-asana.png";
 import AutomationImg from "../img/connector-automation.png";
 import AzureaiImg from "../img/connector-azure-openai.png";
-import AzureBlobStorageImg from "../img/connector-azure-blob-storage.png";
 import BoxImg from "../img/connector-box.png";
 import BluePrismImg from "../img/connector-blueprism.png";
 import CamundaImg from "../img/connector-camunda.png";
@@ -33,8 +32,6 @@ import OpenaiImg from "../img/connector-openai.png";
 import RestImg from "../img/connector-rest.png";
 import RabbitmqImg from "../img/connector-rabbitmq.png";
 import SalesforceImg from "../img/connector-salesforce.png";
-import ODataImg from "../img/connector-sap-odata.png";
-import RFCImg from "../img/connector-sap-rfc.png";
 import SendgridImg from "../img/connector-sendgrid.png";
 import SlackImg from "../img/connector-slack.png";
 import SoapImg from "../img/connector-soap.png";
@@ -43,28 +40,12 @@ import TwilioImg from "../img/connector-twilio.png";
 import UipathImg from "../img/connector-uipath.png";
 import WebhookImg from "../img/connector-webhook.png";
 import WhatsappImg from "../img/connector-whatsapp.png";
-import AiagentImg from "../img/connector-aiagent.png";
-import VectorImg from "../img/connector-vector.png";
 
 const SearchableTable = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterType, setFilterType] = useState("All");
 
   const connectors = [
-    {
-      name: "AI Agent",
-      description: "Integrate Large Language Models (LLMs) with AI agents.",
-      type: "Outbound",
-      link: "../agentic-ai-aiagent",
-      image: AiagentImg,
-    },
-    {
-      name: "Ad-Hoc Tools Schema Resolver",
-      description: "Implement tool resolution of the AI Agent connector.",
-      type: "Outbound",
-      link: "../agentic-ai-ad-hoc-tools-schema-resolver",
-      image: AiagentImg,
-    },
     {
       name: "Amazon Bedrock",
       description: "Interact with Amazon Bedrock from your processes.",
@@ -161,7 +142,7 @@ const SearchableTable = () => {
       image: AmazonBedrockImg,
     },
     {
-      name: "Asana",
+      name: "Asana Connector",
       description: "Manage Asana projects and tasks from your processes.",
       type: "Outbound",
       link: "../asana/",
@@ -181,14 +162,6 @@ const SearchableTable = () => {
       type: "Outbound",
       link: "../azure-open-ai/",
       image: AzureaiImg,
-    },
-    {
-      name: "Azure Blob Storage",
-      description:
-        "Handle documents with Azure Blob Storage from your processes.",
-      type: "Outbound",
-      link: "../azure-blob-storage/",
-      image: AzureBlobStorageImg,
     },
     {
       name: "Blue Prism",
@@ -388,20 +361,6 @@ const SearchableTable = () => {
       image: SalesforceImg,
     },
     {
-      name: "SAP OData",
-      description: "Orchestrate SAP tasks and data.",
-      type: "Outbound",
-      link: "../../../camunda-integrations/sap/odata-connector/",
-      image: ODataImg,
-    },
-    {
-      name: "SAP RFC",
-      description: "Orchestrate SAP tasks and data.",
-      type: "Outbound",
-      link: "../../../camunda-integrations/sap/rfc-connector/",
-      image: RFCImg,
-    },
-    {
       name: "SendGrid",
       description: "Quickly send emails from your processes.",
       type: "Outbound",
@@ -461,14 +420,6 @@ const SearchableTable = () => {
       type: "Outbound",
       link: "../uipath/",
       image: UipathImg,
-    },
-    {
-      name: "Vector database",
-      description:
-        "Embed, store, and retrieve Large Language Model (LLM) embeddings.",
-      type: "Outbound",
-      link: "../embeddings-vector-db/",
-      image: VectorImg,
     },
     {
       name: "WhatsApp",

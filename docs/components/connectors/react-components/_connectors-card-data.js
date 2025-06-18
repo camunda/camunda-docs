@@ -16,14 +16,12 @@ import GraphqlImg from "../img/connector-graphql.png";
 import AsanaImg from "../img/connector-asana.png";
 import AutomationImg from "../img/connector-automation.png";
 import HubspotImg from "../img/connector-hubspot.png";
-import AiagentImg from "../img/connector-aiagent.png";
-import VectorImg from "../img/connector-vector.png";
 
 // Getting started cards on connectors introduction page
 export const gettingStartedCards = [
   {
     link: "../use-connectors",
-    title: "How to use connectors",
+    title: "How to use Connectors",
     image: IconPlayImg,
     description: "Create a connector task and start using connector secrets.",
   },
@@ -46,7 +44,7 @@ export const gettingStartedCards = [
 export const customConnectorCards = [
   {
     link: "../custom-built-connectors/build-connector",
-    title: "Custom connectors",
+    title: "Custom Connectors",
     image: IconConnectorCustomImg,
     description: "Learn how to build and deploy your own custom connectors.",
   },
@@ -67,42 +65,22 @@ export const customConnectorCards = [
 // 3 large Latest tab cards on connectors introduction page
 export const latestConnectorCards = [
   {
-    link: "../out-of-the-box-connectors/agentic-ai-aiagent",
-    title: "AI Agent",
-    image: AiagentImg,
-    description: "Integrate Large Language Models (LLMs) with AI agents.",
-  },
-  {
-    link: "../out-of-the-box-connectors/agentic-ai-ad-hoc-tools-schema-resolver",
-    title: "Ad-Hoc Tools Schema Resolver",
-    image: AiagentImg,
-    description: "Implement tool resolution of the AI Agent connector.",
-  },
-  {
-    link: "../out-of-the-box-connectors/embeddings-vector-db",
-    title: "Vector database",
-    image: VectorImg,
-    description:
-      "Embed, store, and retrieve Large Language Model (LLM) embeddings.",
-  },
-];
-
-// 3 small Latest tab cards on connectors introduction page
-export const latestConnectorCardsSml = [
-  {
     link: "../out-of-the-box-connectors/hubspot",
     title: "Hubspot",
     image: HubspotImg,
+    description: "Interact with Hubspot objects from your processes.",
   },
   {
     link: "../out-of-the-box-connectors/amazon-s3",
     title: "Amazon S3",
     image: AmazonS3Img,
+    description: "Interact with Amazon Bedrock from your processes.",
   },
   {
     link: "../out-of-the-box-connectors/box",
     title: "Box",
     image: BoxImg,
+    description: "Connect your BPMN service to the Box storage API.",
   },
 ];
 
@@ -128,6 +106,25 @@ export const popularConnectorCards = [
     image: RestImg,
     description:
       "Connect, interact, and sync your processes with any RESTful service.",
+  },
+];
+
+// 3 small Latest tab cards on connectors introduction page
+export const latestConnectorCardsSml = [
+  {
+    link: "../out-of-the-box-connectors/email/?email=outbound",
+    title: "Email outbound",
+    image: EmailImg,
+  },
+  {
+    link: "../out-of-the-box-connectors/email/?email=inbound",
+    title: "Email inbound",
+    image: EmailImg,
+  },
+  {
+    link: "../out-of-the-box-connectors/amazon-bedrock",
+    title: "Amazon Bedrock",
+    image: BedrockImg,
   },
 ];
 
