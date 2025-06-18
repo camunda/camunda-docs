@@ -6,10 +6,10 @@ description: "Learn how to Install the AWS Marketplace."
 
 :::warning AWS Marketplace Listing Update
 
-Starting of **October 2025**, this guide and our previous Self-Managed AWS Marketplace offering was deprecated and is no longer publicly available.
+As of **October 2025**, this guide and the previous Self-Managed AWS Marketplace offering have been **deprecated** and are no longer publicly available.
 
-**Current customers can continue using the product until their contract expires.**  
-Please refer to our [new AWS Marketplace listing](https://aws.amazon.com/marketplace/pp/prodview-6y664fcnydiqg?sr=0-1&ref_=beagle&applicationId=AWSMPContessa) for further details.
+**Current customers can continue using the product until their contracts expire.**  
+Refer to our [new AWS Marketplace listing](https://aws.amazon.com/marketplace/pp/prodview-6y664fcnydiqg?sr=0-1&ref_=beagle&applicationId=AWSMPContessa) for further details.
 
 :::
 

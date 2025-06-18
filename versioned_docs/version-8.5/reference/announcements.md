@@ -109,7 +109,7 @@ Identity now uses the Keycloak frontend URL instead of the backend URL. This cha
 
 To avoid connectivity issues, ensure your Keycloak frontend URL is accessible by adjusting your network, firewall, or security settings as needed. This adjustment is crucial to maintain the integration with Keycloak and ensure compatibility.
 
-#### Deprecation of Self-Managed AWS Marketplace offering
+### Deprecation of Self-Managed AWS Marketplace offering
 
 As of **October 2025**, the **Self-Managed AWS Marketplace** offering will be **deprecated** and no longer publicly available.  
 Existing customers may continue to use the product until their current contracts expire.

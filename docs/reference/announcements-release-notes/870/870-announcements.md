@@ -42,7 +42,7 @@ Following the end-of-life of macOS 12, support for Desktop Modeler on macOS 12 h
 
 ## Key changes
 
-#### Deprecation of Self-Managed AWS Marketplace offering
+### Deprecation of Self-Managed AWS Marketplace offering
 
 As of **October 2025**, the **Self-Managed AWS Marketplace** offering will be **deprecated** and no longer publicly available.  
 Existing customers may continue to use the product until their current contracts expire.
