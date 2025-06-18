@@ -192,7 +192,8 @@ module.exports = {
         config: {
           camunda: {
             specPath: "api/camunda/camunda-openapi.yaml",
-            outputDir: "docs/apis-tools/camunda-api-rest/specifications",
+            outputDir:
+              "docs/apis-tools/orchestration-cluster-api-rest/specifications",
             sidebarOptions: {
               groupPathsBy: "tag",
             },
