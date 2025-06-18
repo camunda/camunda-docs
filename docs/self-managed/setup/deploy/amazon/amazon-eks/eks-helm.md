@@ -558,7 +558,7 @@ Console:
 <Tabs groupId="c8-connectivity">
   <TabItem value="rest-api" label="REST API" default>
 
-For a detailed guide on generating and using a token, please conduct the relevant documentation on [authenticating with the Camunda 8 REST API](./../../../../../apis-tools/orchestration-cluster-api-rest/camunda-api-rest-authentication.md?environment=self-managed).
+For a detailed guide on generating and using a token, please conduct the relevant documentation on [authenticating with the Camunda 8 REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md).
 
 <Tabs groupId="domain">
   <TabItem value="with" label="With domain" default>

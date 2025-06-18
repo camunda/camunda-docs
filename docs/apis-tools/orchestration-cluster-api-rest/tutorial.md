@@ -23,7 +23,7 @@ Make sure you keep the generated client credentials in a safe place. The **Clien
 
 ## Getting started
 
-- You need authentication to access the API endpoints. Find more information [here](./camunda-api-rest-authentication.md).
+- You need authentication to access the API endpoints. Find more information [here](./orchestration-cluster-api-rest-authentication.md).
 
 ## Set up authentication
 

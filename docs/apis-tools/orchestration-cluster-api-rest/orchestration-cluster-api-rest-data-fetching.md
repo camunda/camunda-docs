@@ -1,5 +1,5 @@
 ---
-id: camunda-api-rest-data-fetching
+id: orchestration-cluster-api-rest-data-fetching
 title: "Data fetching"
 description: "Learn about fetching data using the Orchestration Cluster API."
 ---

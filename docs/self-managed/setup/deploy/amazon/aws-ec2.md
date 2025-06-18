@@ -277,7 +277,7 @@ terraform output -raw alb_endpoint
 
 3. Use the [Camunda 8 REST API](/apis-tools/orchestration-cluster-api-rest/camunda-api-rest-overview.md) to communicate with Camunda:
 
-Follow the example in the [REST API documentation](/apis-tools/orchestration-cluster-api-rest/camunda-api-rest-authentication.md) to authenticate and retrieve the cluster topology.
+Follow the example in the [REST API documentation](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md) to authenticate and retrieve the cluster topology.
 
 ## Manage Camunda 8
 
