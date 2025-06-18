@@ -321,8 +321,8 @@ https://github.com/camunda/camunda-deployment-references/blob/add-azure-domain-s
 
 Define the value for `AZURE_LOCATION` with your chosen Azure region (for example, `westeurope`).
 
-:::tip
-For production deployments, it is recommended to replace the example values with custom names tailored to your environment. While the provided examples are functional and include mechanisms like `export AZURE_STORAGE_ACCOUNT_NAME="camundatfstate$RANDOM"` to ensure global uniqueness, using custom values enhances clarity and maintainability. Be sure to override these values to align with your organization's naming conventions and requirements.
+:::warning
+For production deployments, always use custom names for your Azure Storage Account and related resources. Storage Account names must be **globally unique** across all Azure subscriptions. The provided example (`export AZURE_STORAGE_ACCOUNT_NAME="camundatfstate"`) is for demonstration only and may not be available. Choose a name that is unique and follows your organization's naming conventions to avoid deployment failures.
 :::
 
 Now, follow these steps to create the storage account with versioning enabled:
