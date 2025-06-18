@@ -16,7 +16,7 @@ CPT is based on [JUnit 5](https://junit.org/junit5/) and [Testcontainers](https:
 
 :::info
 CPT is the successor of [Zeebe Process Test](/apis-tools/java-client/zeebe-process-test.md)  
-Our previous testing library is deprecated and will be removed with version 8.10. 
+Our previous testing library is deprecated and will be removed with version 8.10.
 :::
 
 ## Prerequisites
