@@ -7,7 +7,7 @@ description: "Interact with Camunda 8 clusters. Activate jobs and run user task 
 The Orchestration Cluster API is a REST API designed to interact with a Camunda 8 cluster.
 
 :::note
-Ensure you [authenticate](./camunda-api-rest-authentication.md) before accessing the Orchestration Cluster API.
+Ensure you [authenticate](./orchestration-cluster-api-rest-authentication.md) before accessing the Orchestration Cluster API.
 :::
 
 :::note
@@ -127,4 +127,4 @@ Date values in the Orchestration Cluster API follow the [RFC 3339](https://www.r
 
 Variables in the Orchestration Cluster API are proper JSON objects, where the `key` defines the variable name and the `value` specifies the variable value. The endpoints validate requests and transform responses accordingly.
 
-In search requests, filtering by variables works as documented in [search requests](camunda-api-rest-data-fetching.md#search-requests).
+In search requests, filtering by variables works as documented in [search requests](orchestration-cluster-api-rest-data-fetching.md#search-requests).
