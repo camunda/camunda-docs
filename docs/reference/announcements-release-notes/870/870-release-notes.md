@@ -432,13 +432,13 @@ This [alpha release](/reference/announcements-release-notes/release-policy.md) c
 
 <!-- https://github.com/camunda/product-hub/issues/2244 https://github.com/camunda/product-hub/issues/2245 -->
 
-### Orchestration cluster REST API Query API <span class="badge badge--medium" title="This feature affects APIs">API</span>
+### Camunda 8 REST API Query API <span class="badge badge--medium" title="This feature affects APIs">API</span>
 
 :::note
 The Query API was promoted from an alpha feature to stable in 8.7.0-alpha2, but is now moved back to an alpha feature for the 8.7 release. The stable Query API is now available in [8.8.0-alpha1](/reference/announcements-release-notes/880/880-announcements.md#camunda-8-rest-api-query-api-api). For more information, see the Camunda 8.7 and 8.8 [release update blog](https://camunda.com/blog/2025/01/camunda-87-88-release-update/).
 :::
 
-You can now use a single Query API in the Orchestration cluster REST API to find process and decision data instead of using multiple component APIs.
+You can now use a single Query API in the Camunda 8 REST API to find process and decision data instead of using multiple component APIs.
 
 New Query API endpoints are added as follows:
 
@@ -489,13 +489,13 @@ To learn more about this feature, see [HTTP Webhook connector](/components/conne
 
 ### Connector Runtime <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects connectors">Connectors</span>
 
-#### Spring Zeebe SDK and Orchestration cluster REST API Migration
+#### Spring Zeebe SDK and Camunda 8 REST API Migration
 
 :::note
-This feature was originally released with 8.7.0-alpha3, and is no longer available in 8.7.0. The Orchestration cluster REST API migration is now available in [8.8.0-alpha1](/reference/announcements-release-notes/880/880-announcements.md#spring-sdk-and-camunda-rest-api-migration). For more information, see the Camunda 8.7 and 8.8 [release update blog](https://camunda.com/blog/2025/01/camunda-87-88-release-update/).
+This feature was originally released with 8.7.0-alpha3, and is no longer available in 8.7.0. The Camunda 8 REST API migration is now available in [8.8.0-alpha1](/reference/announcements-release-notes/880/880-announcements.md#spring-sdk-and-camunda-rest-api-migration). For more information, see the Camunda 8.7 and 8.8 [release update blog](https://camunda.com/blog/2025/01/camunda-87-88-release-update/).
 :::
 
-The connectors experience is enhanced with the migration from the Spring Zeebe to the Orchestration cluster REST API, and the removal of dependency on the Operate client.
+The connectors experience is enhanced with the migration from the Spring Zeebe to the Camunda 8 REST API, and the removal of dependency on the Operate client.
 
 #### Testing Support migration
 
@@ -518,7 +518,7 @@ Cluster disk space is cleared when a trial cluster is paused.
 
 New features are available as part of the enhanced document handling being delivered with the 8.7 release.
 
-- A new Document API is available as part of the [Orchestration cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
+- A new Document API is available as part of the [Camunda 8 REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
 - The [Java client](/apis-tools/java-client/index.md) is enhanced to support these new Document API methods.
 - A document store concept is introduced and implemented as an in-memory and a GCP-based document store.
 - A new Tasklist [Filepicker component](/components/modeler/forms/form-element-library/forms-element-library-filepicker.md) is added for uploading documents to the document store in a form.

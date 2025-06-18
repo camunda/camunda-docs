@@ -94,10 +94,10 @@ Viewing a BKM in Operate is not supported yet.
 
 <!-- https://github.com/camunda/product-hub/issues/2438 -->
 
-The Go and zbctl clients are moved to the [Camunda Community Hub](https://github.com/camunda-community-hub) following the introduction of the Orchestration cluster REST API for Process Management.
+The Go and zbctl clients are moved to the [Camunda Community Hub](https://github.com/camunda-community-hub) following the introduction of the Camunda 8 REST API for Process Management.
 
 - These clients are no longer officially supported by Camunda, as [announced on our blog](https://camunda.com/blog/2024/09/deprecating-zbctl-and-go-clients/).
-- Use the Orchestration cluster REST API for easier interaction with the Zeebe engine, and work with it in the same way as any other REST service.
+- Use the Camunda 8 REST API for easier interaction with the Zeebe engine, and work with it in the same way as any other REST service.
 - Use the OpenAPI definition, the supported Postman collection, or cURL to get started implementing API requests in your code. We also recommend trying the new clients and SDKs.
 
 :::note
@@ -155,13 +155,13 @@ You can now develop and test any process in the Modeler, and Play processes at a
 With this change, the alpha Play infrastructure hosted in our SaaS environment is deprecated. SaaS users will see this change immediately. Self-Managed users running Web Modeler versions 8.5 or below will lose Play access after the January 8.7 release.
 :::
 
-### Process management endpoints migrated to Orchestration cluster REST API <span class="badge badge--long" title="This feature affects Zeebe">Zeebe</span>
+### Process management endpoints migrated to Camunda 8 REST API <span class="badge badge--long" title="This feature affects Zeebe">Zeebe</span>
 
 <!-- https://github.com/camunda/product-hub/issues/2040 -->
 
-Zeebe endpoints are integrated into the Orchestration cluster REST API to make building process applications easier.
+Zeebe endpoints are integrated into the Camunda 8 REST API to make building process applications easier.
 
-- Installation and onboarding to Camunda 8 is improved as gRPC is no longer required. Introducing Zeebe endpoints in the Orchestration cluster REST API eliminates the need for gRPC, making adoption easier than ever.
+- Installation and onboarding to Camunda 8 is improved as gRPC is no longer required. Introducing Zeebe endpoints in the Camunda 8 REST API eliminates the need for gRPC, making adoption easier than ever.
 - Developers can now seamlessly transition from gRPC to REST with the assurance of using the same endpoints.
 - For easy migration use the officially supported Camunda SDKs.
 
@@ -235,7 +235,7 @@ When creating a process for a local (non-English) region, you can design forms i
 
 <!-- https://github.com/camunda/product-hub/issues/1818 -->
 
-The Orchestration cluster REST API provides an [endpoint for synchronous message correlation](/apis-tools/orchestration-cluster-api-rest/specifications/correlate-message.api.mdx), enabling external systems to immediately determine the success or failure of message correlation. This enhancement allows external systems to take prompt and appropriate actions based on the correlation result, improving overall efficiency and reducing response times.
+The Camunda 8 REST API provides an [endpoint for synchronous message correlation](/apis-tools/orchestration-cluster-api-rest/specifications/correlate-message.api.mdx), enabling external systems to immediately determine the success or failure of message correlation. This enhancement allows external systems to take prompt and appropriate actions based on the correlation result, improving overall efficiency and reducing response times.
 
 ### Public Marketplace blueprint support for HTO & DMN <span class="badge badge--long" title="This feature affects Web Modeler">Web Modeler</span> <span class="badge badge--long" title="This feature affects Marketplace">Marketplace</span>
 
