@@ -1126,7 +1126,7 @@ module.exports = {
             },
             {
               type: "category",
-              label: "Microsoft AKS",
+              label: "Microsoft",
               link: {
                 type: "doc",
                 id: "self-managed/setup/deploy/azure/microsoft-aks/microsoft-aks",
@@ -1137,7 +1137,7 @@ module.exports = {
               ],
             },
             {
-              "Google GKE": ["self-managed/setup/deploy/gcp/google-gke"],
+              Google: ["self-managed/setup/deploy/gcp/google-gke"],
             },
             {
               type: "category",
@@ -1147,9 +1147,7 @@ module.exports = {
                 id: "self-managed/setup/deploy/azure/microsoft-aks/microsoft-aks",
               },
               items: [
-                "self-managed/setup/deploy/amazon/openshift/terraform-setup",
                 "self-managed/setup/deploy/openshift/redhat-openshift",
-                "self-managed/setup/deploy/amazon/openshift/terraform-setup-dual-region",
                 "self-managed/setup/deploy/openshift/redhat-openshift-dual-region",
               ],
             },
