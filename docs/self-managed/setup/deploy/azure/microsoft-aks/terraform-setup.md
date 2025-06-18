@@ -200,11 +200,10 @@ az login --service-principal \
 
 Replace `<appId>`, `<password>`, and `<tenant-id>` with the actual values of your Service Principal.
 
-Also, ensure that you export the `<appId>` as follows, as it will be needed [in the next step](#creating-terraformtfvars).
+Also, ensure that you export the `<appId>` by running the below command after logging in as the SP, as it will be needed [in the next step](#creating-terraformtfvars).
 
 ```shell
-# The appid of the Service Principal you plan to use for deploying the infrastructure
-export AZURE_SP_ID=<your-sp-appid>
+export AZURE_SP_ID=$(az account show --query user.name -o tsv)
 ```
 
 </TabItem>
@@ -234,11 +233,10 @@ You will be prompted to enter the password interactively.
 
 Replace `<appId>`, `<password>`, and `<tenant-id>` with the actual values of your Service Principal.
 
-Also, ensure that you export the `<appId>` as follows, as it will be needed [in the next step](#creating-terraformtfvars).
+Also, ensure that you export the `<appId>` by running the below command after logging in as the SP, as it will be needed [in the next step](#creating-terraformtfvars).
 
 ```shell
-# The appid of the Service Principal you plan to use for deploying the infrastructure
-export AZURE_SP_ID=<your-sp-appid>
+export AZURE_SP_ID=$(az account show --query user.name -o tsv)
 ```
 
 </TabItem>
