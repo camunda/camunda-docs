@@ -377,12 +377,17 @@ The main deployment logic is defined in [`main.tf`](https://github.com/camunda/c
 https://github.com/camunda/camunda-deployment-references/blob/add-azure-domain-support/azure/kubernetes/aks-single-region/main.tf
 ```
 
+:::warning Azure Key Vault naming
+
+Azure Key Vault names must be **globally unique** across all Azure subscriptions. In the linked script, you are prompted to provide a resource prefix, and the Key Vault will be created as `resource_prefix-kv`. Be sure to choose a prefix that results in a unique Key Vault name, or override it in the KMS module to avoid deployment failures.
+
+:::
 The modules deployed are:
 
-- `network`: Virtual network, AKS subnet, DB subnet, and private endpoint subnet
-- `kms`: Key Vault, encryption key, and UAMI for AKS secret encryption
-- `aks`: Cluster deployment with system and user node pools across AZs
-- `postgres_db`: High-availability PostgreSQL Flexible Server, private DNS, and endpoint
+- `network` ([network.tf](https://github.com/camunda/camunda-deployment-references/blob/add-azure-domain-support/azure/kubernetes/aks-single-region/network.tf)): Virtual network, AKS subnet, DB subnet, and private endpoint subnet
+- `kms` ([kms.tf](https://github.com/camunda/camunda-deployment-references/blob/add-azure-domain-support/azure/kubernetes/aks-single-region/kms.tf)): Key Vault, encryption key, and UAMI for AKS secret encryption
+- `aks` ([aks.tf](https://github.com/camunda/camunda-deployment-references/blob/add-azure-domain-support/azure/kubernetes/aks-single-region/aks.tf)): Cluster deployment with system and user node pools across AZs
+- `postgres_db` ([db.tf](https://github.com/camunda/camunda-deployment-references/blob/add-azure-domain-support/azure/kubernetes/aks-single-region/db.tf)): High-availability PostgreSQL Flexible Server, private DNS, and endpoint
 
 #### 2. PostgreSQL module
 
@@ -454,7 +459,8 @@ kubectl get nodes
 Create a namespace for Camunda:
 
 ```bash
-kubectl create namespace camunda
+export CAMUNDA_NAMESPACE="camunda"
+kubectl create namespace "$CAMUNDA_NAMESPACE"
 ```
 
 In the remainder of the guide, we reference the `camunda` namespace to create some required resources in the Kubernetes cluster, such as secrets or one-time setup jobs.
@@ -520,7 +526,7 @@ This command creates a secret named `setup-db-secret` and dynamically populates 
 After running the above command, you can verify that the secret was created successfully by using:
 
 ```bash
-kubectl get secret setup-db-secret -o yaml --namespace camunda
+kubectl get secret setup-db-secret -o yaml --namespace "$CAMUNDA_NAMESPACE"
 ```
 
 This should display the secret with the base64 encoded values.
@@ -528,7 +534,7 @@ This should display the secret with the base64 encoded values.
 3. Apply the following manifest to set up the DB:
 
 ```bash
-kubectl apply -f ./manifests/setup-postgres-create-db.yml --namespace camunda
+kubectl apply -f ./manifests/setup-postgres-create-db.yml --namespace "$CAMUNDA_NAMESPACE"
 ```
 
 <details>
@@ -545,7 +551,7 @@ Once the secret is created, the **Job** manifest from the previous step can cons
 4. Once the job is created, monitor its progress using:
 
 ```bash
-kubectl get job/create-setup-user-db --namespace camunda --watch
+kubectl get job/create-setup-user-db --namespace "$CAMUNDA_NAMESPACE" --watch
 ```
 
 Once the job shows as `Completed`, the users and databases will have been successfully created.
@@ -553,14 +559,14 @@ Once the job shows as `Completed`, the users and databases will have been succes
 5. View the logs of the job to confirm that the users were created and privileges were granted successfully:
 
 ```bash
-kubectl logs job/create-setup-user-db --namespace camunda
+kubectl logs job/create-setup-user-db --namespace "$CAMUNDA_NAMESPACE"
 ```
 
 6. Clean up the resources:
 
 ```bash
-kubectl delete job create-setup-user-db --namespace camunda
-kubectl delete secret setup-db-secret --namespace camunda
+kubectl delete job create-setup-user-db --namespace "$CAMUNDA_NAMESPACE"
+kubectl delete secret setup-db-secret --namespace "$CAMUNDA_NAMESPACE"
 ```
 
 Running these commands cleans up both the job and the secret, ensuring that no unnecessary resources remain in the cluster.
