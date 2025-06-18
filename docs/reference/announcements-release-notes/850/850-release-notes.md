@@ -134,7 +134,7 @@ The first iteration of this feature brings back existing features from Camunda 7
 
 <!-- https://github.com/camunda/product-hub/issues/2039 -->
 
-The first step to offer an intuitive and consistent experience via a single, [unified Camunda 8 REST API](https://camunda.com/blog/2024/03/streamlining-camunda-apis-zeebe-rest-api/) is to provide the Zeebe REST API. With this release, developers can use the Zeebe REST API to manage [Zeebe user tasks](/apis-tools/migration-manuals/migrate-to-camunda-user-tasks.md), enabling immediate task state changes. The Zeebe REST API includes support for Identity authentication and multi-tenancy, ensuring parity to the Zeebe gRPC API.
+The first step to offer an intuitive and consistent experience via a single, [unified Orchestration cluster REST API](https://camunda.com/blog/2024/03/streamlining-camunda-apis-zeebe-rest-api/) is to provide the Zeebe REST API. With this release, developers can use the Zeebe REST API to manage [Zeebe user tasks](/apis-tools/migration-manuals/migrate-to-camunda-user-tasks.md), enabling immediate task state changes. The Zeebe REST API includes support for Identity authentication and multi-tenancy, ensuring parity to the Zeebe gRPC API.
 
 ### Refactoring suggestions <span class="badge badge--long" title="This feature affects Modeler">Modeler</span>
 

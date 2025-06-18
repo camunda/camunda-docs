@@ -2,7 +2,7 @@
 
 openapi: "3.0.3"
 info:
-  title: Camunda 8 REST API
+  title: Orchestration cluster REST API
   version: "0.1"
   description: API for communicating with a Camunda 8 cluster.
   license:
@@ -20,10 +20,10 @@ servers:
         description: The hostname of the Camunda 8 REST Gateway.
       port:
         default: "8080"
-        description: The port of the Camunda 8 REST API server.
+        description: The port of the Orchestration cluster REST API server.
       schema:
         default: http
-        description: The schema of the Camunda 8 REST API server.
+        description: The schema of the Orchestration cluster REST API server.
 
 paths:
   /topology:
@@ -555,7 +555,7 @@ paths:
 
         :::note
         This endpoint is an [alpha feature](/reference/alpha-features.md) and not enabled on Camunda clusters out of the box.
-        See the [Camunda 8 REST API overview](/apis-tools/orchestration-cluster-api-rest/camunda-api-rest-overview.md#query-api)
+        See the [Orchestration cluster REST API overview](/apis-tools/orchestration-cluster-api-rest/camunda-api-rest-overview.md#query-api)
         for further details.
         :::
       requestBody:
@@ -737,7 +737,7 @@ paths:
 
         :::note
         This endpoint is an [alpha feature](/reference/alpha-features.md) and not enabled on Camunda clusters out of the box.
-        See the [Camunda 8 REST API overview](/apis-tools/orchestration-cluster-api-rest/camunda-api-rest-overview.md#query-api)
+        See the [Orchestration cluster REST API overview](/apis-tools/orchestration-cluster-api-rest/camunda-api-rest-overview.md#query-api)
         for further details.
         :::
       requestBody:
@@ -940,7 +940,7 @@ paths:
 
         :::note
         This endpoint is an [alpha feature](/reference/alpha-features.md) and not enabled on Camunda clusters out of the box.
-        See the [Camunda 8 REST API overview](/apis-tools/orchestration-cluster-api-rest/camunda-api-rest-overview.md#query-api)
+        See the [Orchestration cluster REST API overview](/apis-tools/orchestration-cluster-api-rest/camunda-api-rest-overview.md#query-api)
         for further details.
         :::
       requestBody:
@@ -994,7 +994,7 @@ paths:
 
         :::note
         This endpoint is an [alpha feature](/reference/alpha-features.md) and not enabled on Camunda clusters out of the box.
-        See the [Camunda 8 REST API overview](/apis-tools/orchestration-cluster-api-rest/camunda-api-rest-overview.md#query-api)
+        See the [Orchestration cluster REST API overview](/apis-tools/orchestration-cluster-api-rest/camunda-api-rest-overview.md#query-api)
         for further details.
         :::
       requestBody:
@@ -1048,7 +1048,7 @@ paths:
 
         :::note
         This endpoint is an [alpha feature](/reference/alpha-features.md) and not enabled on Camunda clusters out of the box.
-        See the [Camunda 8 REST API overview](/apis-tools/orchestration-cluster-api-rest/camunda-api-rest-overview.md#query-api)
+        See the [Orchestration cluster REST API overview](/apis-tools/orchestration-cluster-api-rest/camunda-api-rest-overview.md#query-api)
         for further details.
         :::
       parameters:
@@ -1100,7 +1100,7 @@ paths:
 
         :::note
         This endpoint is an [alpha feature](/reference/alpha-features.md) and not enabled on Camunda clusters out of the box.
-        See the [Camunda 8 REST API overview](/apis-tools/orchestration-cluster-api-rest/camunda-api-rest-overview.md#query-api)
+        See the [Orchestration cluster REST API overview](/apis-tools/orchestration-cluster-api-rest/camunda-api-rest-overview.md#query-api)
         for further details.
         :::
       requestBody:
@@ -1144,7 +1144,7 @@ paths:
 
         :::note
         This endpoint is an [alpha feature](/reference/alpha-features.md) and not enabled on Camunda clusters out of the box.
-        See the [Camunda 8 REST API overview](/apis-tools/orchestration-cluster-api-rest/camunda-api-rest-overview.md#query-api)
+        See the [Orchestration cluster REST API overview](/apis-tools/orchestration-cluster-api-rest/camunda-api-rest-overview.md#query-api)
         for further details.
         :::
       requestBody:
@@ -1549,7 +1549,7 @@ paths:
 
         :::note
         This endpoint is an [alpha feature](/reference/alpha-features.md) and not enabled on Camunda clusters out of the box.
-        See the [Camunda 8 REST API overview](/apis-tools/orchestration-cluster-api-rest/camunda-api-rest-overview.md#query-api)
+        See the [Orchestration cluster REST API overview](/apis-tools/orchestration-cluster-api-rest/camunda-api-rest-overview.md#query-api)
         for further details.
         :::
       requestBody:
@@ -1615,7 +1615,7 @@ paths:
         Returns incident as JSON.
         :::note
         This endpoint is an [alpha feature](/reference/alpha-features.md) and not enabled on Camunda clusters out of the box.
-        See the [Camunda 8 REST API overview](/apis-tools/orchestration-cluster-api-rest/camunda-api-rest-overview.md#query-api)
+        See the [Orchestration cluster REST API overview](/apis-tools/orchestration-cluster-api-rest/camunda-api-rest-overview.md#query-api)
         for further details.
         :::
       parameters:

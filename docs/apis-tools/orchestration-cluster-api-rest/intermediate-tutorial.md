@@ -1,15 +1,15 @@
 ---
-id: camunda-8-api-intermediate-tutorial
+id: orchestration-cluster-api-intermediate-tutorial
 title: Intermediate tutorial
 sidebar_label: Intermediate
-description: "Step through this intermediate Camunda 8 API tutorial to deploy resources, create and start a process instance, and view a process instance by its key."
+description: "Step through this intermediate Orchestration cluster API tutorial to deploy resources, create and start a process instance, and view a process instance by its key."
 ---
 
 <span class="badge badge--intermediate">Intermediate</span>
 
-In this tutorial, we'll step through examples to highlight the capabilities of the Camunda 8 API, such as deploying resources, creating and starting a process instance, and viewing a process instance by its key.
+In this tutorial, we'll step through examples to highlight the capabilities of the Orchestration cluster API, such as deploying resources, creating and starting a process instance, and viewing a process instance by its key.
 
-This tutorial is intended for intermediate users of the Camunda 8 API, using more sophisticated API calls and multipart requests. If you are new to the Camunda 8 API, we recommend starting with the [beginner tutorial](/apis-tools/orchestration-cluster-api-rest/tutorial.md).
+This tutorial is intended for intermediate users of the Orchestration cluster API, using more sophisticated API calls and multipart requests. If you are new to the Orchestration cluster API, we recommend starting with the [beginner tutorial](/apis-tools/orchestration-cluster-api-rest/tutorial.md).
 
 ## Prerequisites
 
@@ -69,7 +69,7 @@ async function deployResources() {
 }
 ```
 
-4. Using your generated client credentials from [prerequisites](#prerequisites), capture your Camunda 8 REST API URL beneath your call for an access token by defining `camundaApiUrl`:
+4. Using your generated client credentials from [prerequisites](#prerequisites), capture your Orchestration cluster REST API URL beneath your call for an access token by defining `camundaApiUrl`:
 
 ```javascript
 const camundaApiUrl = process.env.CAMUNDA_REST_ADDRESS;
@@ -242,4 +242,4 @@ Having trouble configuring your API calls or want to examine an example of the c
 
 ## Next steps
 
-You can script several additional API calls as outlined in the [Camunda 8 API reference material](./camunda-api-rest-overview.md).
+You can script several additional API calls as outlined in the [Orchestration cluster API reference material](./orchestration-cluster-api-rest-overview.md).

@@ -20,7 +20,7 @@ Camunda 8 provides a set of preconfigured applications:
 - Web Modeler
 - Zeebe
 
-As an Identity user you can also add your own custom applications. For example, you can provide a service with M2M access to a Camunda 8 API, such as a custom job worker.
+As an Identity user you can also add your own custom applications. For example, you can provide a service with M2M access to a Orchestration cluster API, such as a custom job worker.
 
 ## Application types
 
