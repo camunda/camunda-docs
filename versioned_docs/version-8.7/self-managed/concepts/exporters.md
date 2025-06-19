@@ -38,13 +38,13 @@ If no exporters are configured, Zeebe automatically deletes data when it's no lo
 
 :::
 
-All exporters—whether loaded from an external JAR or not—interact with the broker through the [exporter interface](https://github.com/camunda/camunda/blob/main/zeebe/exporter-api/src/main/java/io/camunda/zeebe/exporter/api/Exporter.java).
+All exporters interact with the broker through the [exporter interface](https://github.com/camunda/camunda/blob/main/zeebe/exporter-api/src/main/java/io/camunda/zeebe/exporter/api/Exporter.java), regardless of whether they are loaded from an external JAR (or not).
 
 ## Loading
 
 Exporters are loaded during broker startup, before any processing begins.
 
-The broker validates each exporter configuration during loading and will fail to start if:
+The broker validates each exporter configuration during loading and will not start if:
 
 - An exporter ID is not unique
 - The exporter references a non-existent or inaccessible JAR
@@ -101,7 +101,7 @@ When a node becomes the leader for a partition, it starts an instance of the [ex
 This stream processor creates exactly one instance of each configured exporter and forwards every record on the stream to each exporter in sequence.
 
 :::note
-This means there is exactly one instance of each exporter per partition. For example, if you have four partitions and four processing threads, potentially four instances of your exporter may run simultaneously.
+This means there is exactly one instance of each exporter per partition. For example, if you have four partitions and four processing threads, four instances of your exporter may potentially run simultaneously.
 :::
 
 Zeebe guarantees **at-least-once** delivery semantics. This means that each record will be seen by an exporter at least once, but possibly more. Duplicate delivery can occur in scenarios such as:
@@ -119,7 +119,7 @@ Although Zeebe minimizes duplicate record delivery, exporters must be designed t
 
 If an error occurs during the `Exporter#open(Context)` phase, the stream processor fails and is restarted. This may resolve transient issues automatically. In the worst case, no exporters will run until the errors are resolved.
 
-If an error occurs during the `Exporter#close` phase, it is logged, but other exporters are still allowed to finish their work and shut down gracefully.
+Errors that occur during the `Exporter#close` phase are logged, with other exporters still allowed to finish their work and shut down gracefully.
 
 If an error occurs during record processing, the same record is retried continuously until the error no longer occurs. In the worst case, a single failing exporter can block all exporters for that partition. Currently, exporters are expected to implement their own retry and error-handling strategies—though this behavior may evolve in future Zeebe versions.
 
