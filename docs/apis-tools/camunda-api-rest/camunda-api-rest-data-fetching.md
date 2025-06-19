@@ -66,16 +66,16 @@ This sorts the overall result set by the `state` attribute in ascending order.
 
 ### Page
 
-The page object details how to slice the result set. An initial search request can omit the page object or define the `limit`. This specifies the maximum number of results to retrieve per request. Subsequent requests can either use keyset or offset pagination to iterate through the result set.
+The page object details how to slice the result set. An initial search request can omit the page object or define the `limit`. This specifies the maximum number of results to retrieve per request. Subsequent requests can either use **cursor** or **offset pagination** to iterate through the result set.
 
-Keyset pagination bases on the value of the [search response's](#search-responses) `firstSortValues` and `lastSortValues`. Copy `firstSortValues` into `searchBefore` or `lastSortValues` into `searchAfter` to page through results respectively. The [search example](#search-example) showcases how to use these attributes for keyset pagination.
+Cursor pagination bases on the value of the [search response's](#search-responses) `startCursor` and `endCursor`. Copy `startCursor` into `before` or `endCursor` into `after` to page through results respectively. The [search example](#search-example) showcases how to use these attributes for cursor pagination.
 
 Offset pagination uses the `from` attribute to define the starting point of the next set of items in the overall result set.
 
 :::note
 Choosing the right pagination type depends on the specific use case. The expected result set size and intended usage of the results have the biggest influence. The expected reliability and performance of the search request affect this decision as well.
 
-Consider using keyset pagination for larger result sets and displaying result list that scroll infinitely.
+Consider using cursor pagination for larger result sets and displaying result list that scroll infinitely.
 Paged result sets can be realized with offset pagination in a straightforward way but come with performance penalties for larger result sets.
 :::
 
@@ -193,11 +193,10 @@ Search responses consist of the components **items** and **page**.
 
 The **items** array contains instances of the respective endpoint’s resource. The attributes of those instances vary by endpoint and are described in the endpoint’s documentation.
 
-The **page** object contains the pagination information that can be used in subsequent search requests to page through the results. The `totalItems` attribute specifies the overall number of results for the query to be retrieved (note: for ES/OS, this is limited to 10,000, even if more results are available).
-
-The `firstSortValues` field lists the criteria identifying the **first** entry of this page. This allows paging backward in the result set by copying them into the `searchBefore` attribute in a subsequent [search request](#search-requests). The `lastSortValues` field provides the same for the **last** entry of this page to allow paging forward using `searchAfter`. In detail, those arrays contain the values of the first or last item’s attributes, in the order defined in the search request’s `sort` object. The last element of the array is the item’s value of our internal tiebreaker attribute, typically the internal record’s key.
-
-The arrays `firstSortValues` and `lastSortValues` don't need to be interpreted by Orchestration Cluster API consumers. For pagination to work as expected, they must be copied into subsequent requests unaltered.
+The **page** object contains the pagination information that can be used in subsequent search requests to page through the results. 
+The `totalItems` attribute specifies the overall number of results for the query to be retrieved (note: for ES/OS, this is limited to 10,000, even if more results are available).
+The `startCursor` holds a reference to the **first** entry of this page. This allows paging backward in the result set by copying it into the `before` attribute in a subsequent [search request](#search-requests).
+The `endCursor` provides the same for the **last** entry of this page to allow paging forward using `after`.
 
 <details>
 <summary>Example</summary>
@@ -226,8 +225,8 @@ The arrays `firstSortValues` and `lastSortValues` don't need to be interpreted b
   ],
   "page": {
     "totalItems":  345,
-    "firstSortValues": [ "CREATED", 22456786345 ]
-    "lastSortValues": [ "COMPLETED", 22456786678 ]
+    "startCursor": "jfenj8vhekgj98uzfafhu7",
+    "endCursor": "negbkjeh84tzh4gk0kwegj"
   }
 }
 ```
@@ -289,8 +288,8 @@ This could yield the following example result:
   ],
   "page": {
     "totalItems":  345,
-    "firstSortValues": [ "CREATED", 22456786345 ]
-    "lastSortValues": [ "COMPLETED", 22456786678 ]
+    "startCursor": "jfenj8vhekgj98uzfafhu7",
+    "endCursor": "negbkjeh84tzh4gk0kwegj"
   }
 }
 ```
@@ -316,7 +315,7 @@ POST /v2/user-tasks/search
   ],
   "page": {
     "limit":  3,
-    "searchAfter": [ "COMPLETED", 22456786678 ]
+    "after": "negbkjeh84tzh4gk0kwegj"
   }
 }
 ```
