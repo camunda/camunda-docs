@@ -34,7 +34,7 @@ The same principle applies to Zeebe. **Backups must be** scheduled through Zeebe
 A complete backup of a Camunda 8 cluster includes:
 
 - Backups of Operate, Tasklist, and Optimize (triggered through their APIs)
-- Exported Zeebe-related indices from Elasticsearch/OpenSearch
+- Backup of indices from Elasticsearch/OpenSearch containing exported Zeebe records
 - A Zeebe broker partition backup (triggered through its API)
 
 Because the data across these systems is interdependent, **all components must be backed up** as part of the **same backup window**. Backups taken independently at different times may not align and could result in an unreliable restore point.
