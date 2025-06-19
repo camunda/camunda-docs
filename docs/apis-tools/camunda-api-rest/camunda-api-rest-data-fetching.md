@@ -193,7 +193,7 @@ Search responses consist of the components **items** and **page**.
 
 The **items** array contains instances of the respective endpoint’s resource. The attributes of those instances vary by endpoint and are described in the endpoint’s documentation.
 
-The **page** object contains the pagination information that can be used in subsequent search requests to page through the results. 
+The **page** object contains the pagination information that can be used in subsequent search requests to page through the results.
 The `totalItems` attribute specifies the overall number of results for the query to be retrieved (note: for ES/OS, this is limited to 10,000, even if more results are available).
 The `startCursor` holds a reference to the **first** entry of this page. This allows paging backward in the result set by copying it into the `before` attribute in a subsequent [search request](#search-requests).
 The `endCursor` provides the same for the **last** entry of this page to allow paging forward using `after`.
