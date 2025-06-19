@@ -1072,6 +1072,8 @@ curl -s "$OPENSEARCH_ENDPOINT/_index_template" \
 
 With an active environment that was required to restore the datastore templates you can quickly figure out available backups utilizing the backups APIs for each component to list available backups.
 
+You will need the output for your chosen backup ID in subsequent steps to be able to restore datastore snapshots as it contains the snapshot names.
+
    <details>
       <summary>Operate Example</summary>
       <summary>
@@ -1169,7 +1171,7 @@ With an active environment that was required to restore the datastore templates 
    </details>
 
    <details>
-      <summary>Tasklist</summary>
+      <summary>Tasklist Example</summary>
       <summary>
 
       Using the [Tasklist management API](/self-managed/operational-guides/backup-restore/operate-tasklist-backup.md#get-backups-list-api) to list backups.
