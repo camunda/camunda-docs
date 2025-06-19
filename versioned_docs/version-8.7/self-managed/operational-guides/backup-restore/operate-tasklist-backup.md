@@ -23,6 +23,18 @@ Operate provides an API to perform a backup and manage backups (list, check stat
 The backup API can be reached via the Actuator management port (defaults to 9600). The port may be reconfigured with the help of `management.server.port` configuration parameter.
 :::
 
+:::warning
+Usage of this API requires the backup store to be configured for the component.
+
+- [Operate configuration](/self-managed/operate-deployment/operate-configuration.md#backups)
+- [Tasklist configuration](/self-managed/tasklist-deployment/tasklist-configuration.md#backups)
+
+Additionally, it requires the same backup store to be configured on your chosen datastore.
+
+- [Elasticsearch snapshot repository](https://www.elastic.co/docs/deploy-manage/tools/snapshot-and-restore/manage-snapshot-repositories)
+- [OpenSearch snapshot repository](https://docs.opensearch.org/docs/latest/tuning-your-cluster/availability-and-recovery/snapshots/snapshot-restore/)
+  :::
+
 ## Create backup API
 
 During backup creation Operate can continue running. To create the backup, call the following endpoint:

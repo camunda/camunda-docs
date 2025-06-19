@@ -4,7 +4,7 @@ import IconGear from "../assets/gear.png";
 import IconCloud from "../assets/cloud.png";
 import IconRepeat from "../assets/repeat.png";
 
-// Getting started cards on Zeebe introduction page
+// Backup and Restore overview cards data
 export const overviewCards = [
   {
     link: "#prerequisites",

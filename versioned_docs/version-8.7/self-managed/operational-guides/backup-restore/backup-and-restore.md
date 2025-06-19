@@ -933,7 +933,7 @@ When using the Camunda Helm chart, this means figuring out the corresponding ver
    <summary>Example</summary>
    <summary>
 
-Our Backup looks as follows:
+Our Backups look as follows:
 
 ```bash
 camunda_optimize_1748937221_8.7.1_part_1_of_2
@@ -1068,7 +1068,338 @@ curl -s "$OPENSEARCH_ENDPOINT/_index_template" \
    </TabItem>
 </Tabs>
 
-#### 2. Stop all components but Elasticsearch / OpenSearch
+#### 2. Find available backup IDs
+
+With an active environment that was required to restore the datastore templates you can quickly figure out available backups utilizing the backups APIs for each component to list available backups.
+
+   <details>
+      <summary>Operate Example</summary>
+      <summary>
+
+      Using the [Operate management API](/self-managed/operational-guides/backup-restore/operate-tasklist-backup.md#get-backups-list-api) to list backups.
+
+      ```bash
+      curl $OPERATE_MANAGEMENT_API/actuator/backups
+      ```
+
+      ```json
+      [
+      {
+         "backupId": 1748937221,
+         "state": "COMPLETED",
+         "details": [
+            {
+               "snapshotName":"camunda_operate_1748937221_8.7.2_part_1_of_6",
+               "state":"SUCCESS",
+               "startTime":"2025-06-03T07:55:15.685+0000",
+               "failures":[]
+            },
+            {
+               "snapshotName":"camunda_operate_1748937221_8.7.2_part_2_of_6",
+               "state":"SUCCESS",
+               "startTime":"2025-06-03T07:55:16.288+0000",
+               "failures":[]
+            },
+            {
+               "snapshotName":"camunda_operate_1748937221_8.7.2_part_3_of_6",
+               "state":"SUCCESS",
+               "startTime":"2025-06-03T07:55:17.092+0000",
+               "failures":[]
+            },
+            {
+               "snapshotName":"camunda_operate_1748937221_8.7.2_part_4_of_6",
+               "state":"SUCCESS",
+               "startTime":"2025-06-03T07:55:17.293+0000",
+               "failures":[]
+            },
+            {
+               "snapshotName":"camunda_operate_1748937221_8.7.2_part_5_of_6",
+               "state":"SUCCESS",
+               "startTime":"2025-06-03T07:55:18.298+0000",
+               "failures":[]
+            },
+            {
+               "snapshotName":"camunda_operate_1748937221_8.7.2_part_6_of_6",
+               "state":"SUCCESS",
+               "startTime":"2025-06-03T07:55:18.499+0000",
+               "failures":[]
+            }
+         ]
+      }
+      ]
+      ```
+      </summary>
+
+   </details>
+
+   <details>
+      <summary>Optimize Example</summary>
+      <summary>
+
+      Using the [Optimize management API](/self-managed/operational-guides/backup-restore/optimize-backup.md#get-backup-info-api) to list backups.
+
+      ```bash
+      curl $OPTIMIZE_MANAGEMENT_API/actuator/backups
+      ```
+
+      ```json
+      [
+      {
+         "backupId": 1748937221,
+         "state": "COMPLETED",
+         "details": [
+            {
+               "snapshotName":"camunda_optimize_1748937221_8.7.1_part_1_of_2",
+               "state":"SUCCESS",
+               "startTime":"2025-06-03T07:53:54.389+0000",
+               "failures":[]
+            },
+            {
+               "snapshotName":"camunda_optimize_1748937221_8.7.1_part_2_of_2",
+               "state":"SUCCESS",
+               "startTime":"2025-06-03T07:53:54.389+0000",
+               "failures":[]
+            }
+         ]
+      }
+      ]
+      ```
+      </summary>
+
+   </details>
+
+   <details>
+      <summary>Tasklist</summary>
+      <summary>
+
+      Using the [Tasklist management API](/self-managed/operational-guides/backup-restore/operate-tasklist-backup.md#get-backups-list-api) to list backups.
+
+      ```bash
+      curl $TASKLIST_MANAGEMENT_API/actuator/backups
+      ```
+
+      ```json
+      [
+      {
+         "backupId": 1748937221,
+         "state": "COMPLETED",
+         "failureReason": null,
+         "details": [
+            {
+            "snapshotName": "camunda_tasklist_1748937221_8.7.1_part_6_of_6",
+            "state": "SUCCESS",
+            "startTime": "2025-06-03T07:56:56.519+0000",
+            "failures": []
+            },
+            {
+            "snapshotName": "camunda_tasklist_1748937221_8.7.1_part_5_of_6",
+            "state": "SUCCESS",
+            "startTime": "2025-06-03T07:56:56.519+0000",
+            "failures": []
+            },
+            {
+            "snapshotName": "camunda_tasklist_1748937221_8.7.1_part_4_of_6",
+            "state": "SUCCESS",
+            "startTime": "2025-06-03T07:56:56.519+0000",
+            "failures": []
+            },
+            {
+            "snapshotName": "camunda_tasklist_1748937221_8.7.1_part_3_of_6",
+            "state": "SUCCESS",
+            "startTime": "2025-06-03T07:56:56.519+0000",
+            "failures": []
+            },
+            {
+            "snapshotName": "camunda_tasklist_1748937221_8.7.1_part_2_of_6",
+            "state": "SUCCESS",
+            "startTime": "2025-06-03T07:56:56.519+0000",
+            "failures": []
+            },
+            {
+            "snapshotName": "camunda_tasklist_1748937221_8.7.1_part_1_of_6",
+            "state": "SUCCESS",
+            "startTime": "2025-06-03T07:56:56.519+0000",
+            "failures": []
+            }
+         ]
+      }
+      ]
+      ```
+      </summary>
+
+   </details>
+
+   <details>
+      <summary>Zeebe Example</summary>
+      <summary>
+
+      Using the [Zeebe management API](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md#list-backups-api) to list backups.
+
+      ```bash
+      curl $GATEWAY_MANAGEMENT_API/actuator/backups
+      ```
+
+      ```json
+      [
+      {
+         "backupId": 1748937221,
+         "state": "COMPLETED",
+         "details": [
+            {
+            "partitionId": 1,
+            "state": "COMPLETED",
+            "createdAt": "2025-06-03T08:06:10.408893628Z",
+            "brokerVersion": "8.7.1"
+            },
+            {
+            "partitionId": 2,
+            "state": "COMPLETED",
+            "createdAt": "2025-06-03T08:06:10.408893628Z",
+            "brokerVersion": "8.7.1"
+            },
+            {
+            "partitionId": 3,
+            "state": "COMPLETED",
+            "createdAt": "2025-06-03T08:06:10.408893628Z",
+            "brokerVersion": "8.7.1"
+            }
+         ]
+      }
+      ]
+      ```
+      </summary>
+
+   </details>
+
+There may be cases where this is not possible showcasing an alternative approach in the following.
+
+##### Available Backups on Elasticsearch / OpenSearch
+
+In that case, follow the described steps above and when you have your Elasticsearch / OpenSearch available, use the snapshot API to list available snapshots and correlate that to available snapshots in your backup bucket (AWS S3, Azure Store, Google GCS). It's important to have the same ID for all backups.
+
+<Tabs groupId="search-engine">
+   <TabItem value="elasticsearch" label="Elasticsearch" default>
+
+      The following is using the [Elasticsearch snapshot API](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-snapshot-get) to list all registered snapshots in a repository.
+
+      ```bash
+      ELASTIC_ENDPOINT=http://localhost:9200       # Your Elasticsearch endpoint
+      ELASTIC_SNAPSHOT_REPOSITORY=camunda_backup   # Your defined snapshot repository on Elasticsearch for Camunda backups
+
+      # Get a list of all available snapshots
+      curl $ELASTIC_ENDPOINT/_snapshot/$ELASTIC_SNAPSHOT_REPOSITORY/_all
+
+      # Get a list of all available snapshots and use jq to parse just the names for easier readability
+      curl $ELASTIC_ENDPOINT/_snapshot/$ELASTIC_SNAPSHOT_REPOSITORY/_all | jq -r '.snapshots[].snapshot'
+      ```
+
+      Ensure that all backups and parts exists for each component for your chosen backup ID.
+
+      <details>
+         <summary>Example output</summary>
+         <summary>
+
+         ```bash
+         camunda_optimize_1748937221_8.7.1_part_1_of_2
+         camunda_optimize_1748937221_8.7.1_part_2_of_2
+         camunda_operate_1748937221_8.7.2_part_1_of_6
+         camunda_operate_1748937221_8.7.2_part_2_of_6
+         camunda_operate_1748937221_8.7.2_part_3_of_6
+         camunda_operate_1748937221_8.7.2_part_4_of_6
+         camunda_operate_1748937221_8.7.2_part_5_of_6
+         camunda_operate_1748937221_8.7.2_part_6_of_6
+         camunda_tasklist_1748937221_8.7.2_part_1_of_6
+         camunda_tasklist_1748937221_8.7.2_part_2_of_6
+         camunda_tasklist_1748937221_8.7.2_part_3_of_6
+         camunda_tasklist_1748937221_8.7.2_part_4_of_6
+         camunda_tasklist_1748937221_8.7.2_part_5_of_6
+         camunda_tasklist_1748937221_8.7.2_part_6_of_6
+         camunda_zeebe_records_backup_1748937221
+         ```
+
+         </summary>
+      </details>
+
+   </TabItem>
+
+   <TabItem value="opensearch" label="OpenSearch">
+
+      The following is using the [OpenSearch snapshot API](https://docs.opensearch.org/docs/latest/api-reference/snapshots/get-snapshot/) to list all registered snapshots in a repository.
+
+      ```bash
+      OPENSEARCH_ENDPOINT=http://localhost:9200       # Your OpenSearch endpoint
+      OPENSEARCH_SNAPSHOT_REPOSITORY=camunda_backup   # Your defined snapshot repository on OpenSearch for Camunda backups
+
+      # Get a list of all available snapshots
+      curl $OPENSEARCH_ENDPOINT/_snapshot/$OPENSEARCH_SNAPSHOT_REPOSITORY/_all
+
+      # Get a list of all available snapshots and use jq to parse just the names for easier readability
+      curl $OPENSEARCH_ENDPOINT/_snapshot/$OPENSEARCH_SNAPSHOT_REPOSITORY/_all | jq -r '.snapshots[].snapshot'
+      ```
+
+      Ensure that all backups and parts exists for each component for your chosen backup ID.
+
+      <details>
+      <summary>Example output</summary>
+      <summary>
+
+      ```bash
+      camunda_optimize_1748937221_8.7.1_part_1_of_2
+      camunda_optimize_1748937221_8.7.1_part_2_of_2
+      camunda_operate_1748937221_8.7.2_part_1_of_6
+      camunda_operate_1748937221_8.7.2_part_2_of_6
+      camunda_operate_1748937221_8.7.2_part_3_of_6
+      camunda_operate_1748937221_8.7.2_part_4_of_6
+      camunda_operate_1748937221_8.7.2_part_5_of_6
+      camunda_operate_1748937221_8.7.2_part_6_of_6
+      camunda_tasklist_1748937221_8.7.2_part_1_of_6
+      camunda_tasklist_1748937221_8.7.2_part_2_of_6
+      camunda_tasklist_1748937221_8.7.2_part_3_of_6
+      camunda_tasklist_1748937221_8.7.2_part_4_of_6
+      camunda_tasklist_1748937221_8.7.2_part_5_of_6
+      camunda_tasklist_1748937221_8.7.2_part_6_of_6
+      camunda_zeebe_records_backup_1748937221
+      ```
+
+      </summary>
+      </details>
+
+   </TabItem>
+</Tabs>
+
+##### Available Backups of Zeebe Partitions
+
+For the Zeebe partitions backup, you will have to check your configured backup store for available backup IDs and correlate those to the available backups on Elasticsearch / OpenSearch.
+
+Zeebe will create a folder for each Partition ID and subfolder in there with each backupID.
+
+:::warning
+Using the Zeebe Management Backup API is the recommended method for listing available backups, as it ensures the backups are complete and valid. Manually identifying backup IDs can result in restoring an incomplete backup, which will fail the restore process. If this occurs, you will need to choose a different backup ID and repeat the restore process for all components with the new backup ID, including the datastore, to avoid mismatched backup windows and potential data loss.
+:::
+
+<details>
+   <summary>Example output</summary>
+   <summary>
+   Example in the case of 3 partitions with two available backups:
+
+```bash
+#PartitionID folder
+#   BackupID folder
+1/
+├── 1748937221
+└── 1749130104
+2/
+├── 1748937221
+└── 1749130104
+3/
+├── 1748937221
+└── 1749130104
+```
+
+   </summary>
+</details>
+
+#### 3. Stop all components but Elasticsearch / OpenSearch
 
 If you're using an external Elasticsearch / OpenSearch and Kubernetes, you could temporarily [uninstall](https://helm.sh/docs/helm/helm_uninstall/) the Camunda Helm chart or [scale](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_scale/) all components to 0, so that nothing is running and potentially interacting with the datastore.
 
@@ -1096,7 +1427,7 @@ zeebe-gateway:
   enabled: false
 ```
 
-#### 3. Deletion of all indices
+#### 4. Deletion of all indices
 
 Now that we have successfully restored the templates and stopped the components of adding more indices. We have to delete the existing indices to be able to successfully restore the snapshots, otherwise those will block a successful restore.
 
@@ -1221,15 +1552,13 @@ done
    </TabItem>
 </Tabs>
 
-#### 4. Restore Elasticsearch / OpenSearch snapshots
+#### 5. Restore Elasticsearch / OpenSearch snapshots
 
 While the backup order was important to ensure consistent backups. It does not matter in case of the restore process and we can restore the backed up indices in any order.
 
-The components don't have any endpoint to restore the backup in Elasticsearch, so you'll have to restore it yourself directly.
+The components don't have any endpoint to restore the backup in Elasticsearch, so you'll have to restore it yourself directly in your selected datastore.
 
-See also [the section about figuring out available backups](#how-to-figure-out-available-backups) since the components won't be available during backup as mentioned due to the automatic seeding.
-
-After you have figured out a backup ID that you want to restore, do so for Elasticsearch / OpenSearch for each available backup under the same backupID.
+Based on your chosen backup ID from [step 2 - find available backup IDs](#2-find-available-backup-ids), you can now proceed to restore the snapshots in Elasticsearch / OpenSearch for each available backup under the same backup ID.
 
 <Tabs groupId="search-engine">
    <TabItem value="elasticsearch" label="Elasticsearch" default>
@@ -1252,7 +1581,7 @@ curl -XPOST "$OPENSEARCH_ENDPOINT/_snapshot/$OPENSEARCH_SNAPSHOT_REPOSITORY/$SNA
    </TabItem>
 </Tabs>
 
-Where `$SNAPSHOT_NAME` would be any of the following based on our example in [figuring out available backups](#how-to-figure-out-available-backups).
+Where `$SNAPSHOT_NAME` would be any of the following based on our example in [find available backups IDs](#2-find-available-backup-ids).
 Ensure that all your backups are corresponding to the same backup ID and that each one is restored one by one.
 
 ```bash
@@ -1412,139 +1741,6 @@ You have actively restored Elasticsearch / OpenSearch and the Zeebe cluster part
 In the case of Kubernetes this would mean, to enable all components again in the Helm chart and removing the environment variables that overwrite the Zeebe startup behavior.
 
 In the case of a manual setup this would mean to execute the broker and all other components in their normal way.
-
-### How to figure out available backups
-
-If you have an active environment you can quickly figure out available backups utilizing the backups APIs for each component to list available backups.
-
-- [Operate](/self-managed/operational-guides/backup-restore/operate-tasklist-backup.md#get-backups-list-api)
-- [Optimize](/self-managed/operational-guides/backup-restore/optimize-backup.md#get-backup-info-api)
-- [Tasklist](/self-managed/operational-guides/backup-restore/operate-tasklist-backup.md#get-backups-list-api)
-- [Zeebe](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md#list-backups-api)
-
-This may not be possible in a lot of cases, especially if doing disaster recovery.
-
-#### Available Backups on Elasticsearch / OpenSearch
-
-In that case, follow the described steps above and when you have your Elasticsearch / OpenSearch available, use the snapshot API to list available snapshots and correlate that to available snapshots in your backup bucket (AWS S3, Azure Store, Google GCS). It's important to have the same ID for all backups.
-
-<Tabs groupId="search-engine">
-   <TabItem value="elasticsearch" label="Elasticsearch" default>
-
-      The following is using the [Elasticsearch snapshot API](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-snapshot-get) to list all registered snapshots in a repository.
-
-      ```bash
-      ELASTIC_ENDPOINT=http://localhost:9200       # Your Elasticsearch endpoint
-      ELASTIC_SNAPSHOT_REPOSITORY=camunda_backup   # Your defined snapshot repository on Elasticsearch for Camunda backups
-
-      # Get a list of all available snapshots
-      curl $ELASTIC_ENDPOINT/_snapshot/$ELASTIC_SNAPSHOT_REPOSITORY/_all
-
-      # Get a list of all available snapshots and use jq to parse just the names for easier readability
-      curl $ELASTIC_ENDPOINT/_snapshot/$ELASTIC_SNAPSHOT_REPOSITORY/_all | jq -r '.snapshots[].snapshot'
-      ```
-
-      Ensure that all backups and parts exists for each component for your chosen backup ID.
-
-      <details>
-         <summary>Example output</summary>
-         <summary>
-
-         ```bash
-         camunda_optimize_1748937221_8.7.1_part_1_of_2
-         camunda_optimize_1748937221_8.7.1_part_2_of_2
-         camunda_operate_1748937221_8.7.2_part_1_of_6
-         camunda_operate_1748937221_8.7.2_part_2_of_6
-         camunda_operate_1748937221_8.7.2_part_3_of_6
-         camunda_operate_1748937221_8.7.2_part_4_of_6
-         camunda_operate_1748937221_8.7.2_part_5_of_6
-         camunda_operate_1748937221_8.7.2_part_6_of_6
-         camunda_tasklist_1748937221_8.7.2_part_1_of_6
-         camunda_tasklist_1748937221_8.7.2_part_2_of_6
-         camunda_tasklist_1748937221_8.7.2_part_3_of_6
-         camunda_tasklist_1748937221_8.7.2_part_4_of_6
-         camunda_tasklist_1748937221_8.7.2_part_5_of_6
-         camunda_tasklist_1748937221_8.7.2_part_6_of_6
-         camunda_zeebe_records_backup_1748937221
-         ```
-
-         </summary>
-      </details>
-
-   </TabItem>
-
-   <TabItem value="opensearch" label="OpenSearch">
-
-      The following is using the [OpenSearch snapshot API](https://docs.opensearch.org/docs/latest/api-reference/snapshots/get-snapshot/) to list all registered snapshots in a repository.
-
-      ```bash
-      OPENSEARCH_ENDPOINT=http://localhost:9200       # Your OpenSearch endpoint
-      OPENSEARCH_SNAPSHOT_REPOSITORY=camunda_backup   # Your defined snapshot repository on OpenSearch for Camunda backups
-
-      # Get a list of all available snapshots
-      curl $OPENSEARCH_ENDPOINT/_snapshot/$OPENSEARCH_SNAPSHOT_REPOSITORY/_all
-
-      # Get a list of all available snapshots and use jq to parse just the names for easier readability
-      curl $OPENSEARCH_ENDPOINT/_snapshot/$OPENSEARCH_SNAPSHOT_REPOSITORY/_all | jq -r '.snapshots[].snapshot'
-      ```
-
-      Ensure that all backups and parts exists for each component for your chosen backup ID.
-
-      <details>
-      <summary>Example output</summary>
-      <summary>
-
-      ```bash
-      camunda_optimize_1748937221_8.7.1_part_1_of_2
-      camunda_optimize_1748937221_8.7.1_part_2_of_2
-      camunda_operate_1748937221_8.7.2_part_1_of_6
-      camunda_operate_1748937221_8.7.2_part_2_of_6
-      camunda_operate_1748937221_8.7.2_part_3_of_6
-      camunda_operate_1748937221_8.7.2_part_4_of_6
-      camunda_operate_1748937221_8.7.2_part_5_of_6
-      camunda_operate_1748937221_8.7.2_part_6_of_6
-      camunda_tasklist_1748937221_8.7.2_part_1_of_6
-      camunda_tasklist_1748937221_8.7.2_part_2_of_6
-      camunda_tasklist_1748937221_8.7.2_part_3_of_6
-      camunda_tasklist_1748937221_8.7.2_part_4_of_6
-      camunda_tasklist_1748937221_8.7.2_part_5_of_6
-      camunda_tasklist_1748937221_8.7.2_part_6_of_6
-      camunda_zeebe_records_backup_1748937221
-      ```
-
-      </summary>
-      </details>
-
-   </TabItem>
-</Tabs>
-
-#### Available Backups of Zeebe Partitions
-
-For the Zeebe partitions backup, you will have to check your configured backup store for availablbe backup IDs and correlate those to the available backups on Elasticsearch / OpenSearch.
-
-Zeebe will create a folder for each Partition ID and subfolder in there with each backupID.
-
-<details>
-   <summary>Example output</summary>
-   <summary>
-   Example in the case of 3 partitions with two available backups:
-
-```bash
-#PartitionID folder
-#   BackupID folder
-1/
-├── 1748937221
-└── 1749130104
-2/
-├── 1748937221
-└── 1749130104
-3/
-├── 1748937221
-└── 1749130104
-```
-
-   </summary>
-</details>
 
 ## Miscellaneous
 

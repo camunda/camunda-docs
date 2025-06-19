@@ -14,6 +14,19 @@ camunda_optimize_123456_3.9.0_part_2_of_2
 
 Optimize provides an API to trigger a backup and retrieve information about a given backup's state. During backup creation Optimize can continue running. The backed up data can later be restored using the standard Elasticsearch snapshot restore API.
 
+:::warning
+Usage of this API requires the backup store to be configured for the component.
+
+- Optimize configuration
+  - [Elasticsearch](/self-managed/optimize-deployment/configuration/system-configuration.md#elasticsearch-backup-settings)
+  - [OpenSearch](/self-managed/optimize-deployment/configuration/system-configuration.md#opensearch-backup-settings)
+
+Additionally, it requires the same backup store to be configured on your chosen datastore.
+
+- [Elasticsearch snapshot repository](https://www.elastic.co/docs/deploy-manage/tools/snapshot-and-restore/manage-snapshot-repositories)
+- [OpenSearch snapshot repository](https://docs.opensearch.org/docs/latest/tuning-your-cluster/availability-and-recovery/snapshots/snapshot-restore/)
+  :::
+
 ## Create backup API
 
 Note that the backup API can be reached via the `/actuator` management port, which by default is `8092`.
