@@ -33,3 +33,7 @@ Variable ingestion is controlled using the `CAMUNDA_OPTIMIZE_ZEEBE_VARIABLE_IMPO
 :::note
 Disabling variable ingestion means variable-based reports and filters will no longer be available in the Optimize interface. Ensure this setting aligns with your reporting and monitoring needs before applying the configuration.
 :::
+
+:::note
+When re-enabled, partial or full variable ingestion may happen depending on your cluster [retention](/self-managed/zeebe-deployment/exporters/elasticsearch-exporter.md#retention) configuration.
+:::
