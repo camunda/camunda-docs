@@ -1,7 +1,7 @@
 ---
 id: components-overview
-title: Using Camunda 8
-sidebar_label: Using Camunda 8
+title: Using Camunda
+sidebar_label: Overview
 slug: /components/
 description: "This section contains product manual content for each component in Camunda 8, including conceptual content."
 keywords:

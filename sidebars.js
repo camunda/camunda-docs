@@ -56,120 +56,232 @@ module.exports = {
     },
   ],
   Components: [
-    "components/components-overview",
     {
       type: "category",
-      label: "Concepts",
+      label: "Using Camunda",
       link: {
         type: "doc",
-        id: "components/concepts/concepts-overview",
+        id: "components/components-overview",
       },
       items: [
-        "components/concepts/clusters",
-        "components/concepts/processes",
-        "components/concepts/process-applications",
-        "components/concepts/job-workers",
-        "components/concepts/execution-listeners",
-        "components/concepts/user-task-listeners",
-        "components/concepts/process-instance-creation",
-        "components/concepts/messages",
-        "components/concepts/signals",
-        "components/concepts/incidents",
-        "components/concepts/variables",
-        "components/concepts/expressions",
-        "components/concepts/workflow-patterns",
-        "components/concepts/process-instance-modification",
-        "components/concepts/process-instance-migration",
-        "components/concepts/data-retention",
-        "components/concepts/encryption-at-rest",
-        "components/concepts/outbound-connectors-job-workers",
-        "components/concepts/backups",
-        "components/concepts/resource-deletion",
-        "components/concepts/resource-authorizations",
         {
-          "Access control": [
-            "components/concepts/access-control/user-groups",
-            "components/concepts/access-control/user-task-access-restrictions",
-          ],
+          type: "doc",
+          id: "components/concepts/dummy-overview", // document ID
+          label: "Overview", // sidebar label
         },
-      ],
-    },
-    {
-      type: "category",
-      label: "Agentic orchestration",
-      link: {
-        type: "doc",
-        id: "components/agentic-orchestration/agentic-orchestration",
-      },
-      items: [
-        "components/agentic-orchestration/ao-design",
-        "components/agentic-orchestration/ai-agents",
-      ],
-    },
-    {
-      type: "category",
-      label: "Document handling",
-      link: {
-        type: "doc",
-        id: "components/document-handling/getting-started",
-      },
-      items: [
-        "components/document-handling/use-cases",
-        "components/document-handling/upload-document-to-bpmn-process",
-        "components/document-handling/display-and-download-document",
-        "components/document-handling/send-document-to-external-system-via-connector",
-      ],
-    },
-    {
-      type: "category",
-      label: "Intelligent document processing (IDP)",
-      link: {
-        type: "doc",
-        id: "components/modeler/web-modeler/idp",
-      },
-      items: [
-        "components/modeler/web-modeler/idp/idp-configuration",
-        "components/modeler/web-modeler/idp/idp-applications",
+        {
+          type: "doc",
+          id: "components/concepts/dummy-setting-up", // document ID
+          label: "Set up Camunda", // sidebar label
+        },
         {
           type: "category",
-          label: "Document extraction",
+          label: "Processes",
           link: {
             type: "doc",
-            id: "components/modeler/web-modeler/idp/idp-document-extraction",
+            id: "components/concepts/processes",
           },
           items: [
-            // "components/modeler/web-modeler/idp/idp-structured-extraction",
-            "components/modeler/web-modeler/idp/idp-unstructured-extraction",
+            "components/concepts/process-applications",
+            "components/concepts/job-workers",
+            "components/concepts/execution-listeners",
+            "components/concepts/user-task-listeners",
+            "components/concepts/process-instance-creation",
+            "components/concepts/messages",
+            "components/concepts/signals",
+            "components/concepts/incidents",
+            "components/concepts/variables",
+            "components/concepts/expressions",
+            "components/concepts/workflow-patterns",
+            "components/concepts/process-instance-modification",
+            "components/concepts/process-instance-migration",
           ],
         },
-        // "components/modeler/web-modeler/idp/idp-document-automation",
+        {
+          type: "doc",
+          id: "components/concepts/dummy-develop", // document ID
+          label: "Develop with Camunda", // sidebar label
+        },
         {
           type: "category",
-          label: "Integrate IDP into your processes",
+          label: "Connect and integrate",
           link: {
             type: "doc",
-            id: "components/modeler/web-modeler/idp/idp-integrate",
+            id: "components/concepts/dummy-connect",
           },
-          items: ["components/modeler/web-modeler/idp/idp-example"],
+          items: ["components/concepts/outbound-connectors-job-workers"],
         },
-        "components/modeler/web-modeler/idp/idp-key-concepts",
-        "components/modeler/web-modeler/idp/idp-reference",
+        {
+          type: "doc",
+          id: "components/concepts/dummy-production", // document ID
+          label: "Prepare for production", // sidebar label
+        },
+        {
+          type: "category",
+          label: "Camunda SaaS",
+          link: {
+            type: "doc",
+            id: "components/concepts/dummy-saas",
+          },
+          items: [
+            "components/concepts/clusters",
+            "components/concepts/data-retention",
+            "components/concepts/encryption-at-rest",
+            "components/concepts/backups",
+            "components/concepts/resource-deletion",
+            "components/concepts/resource-authorizations",
+            {
+              "Access control": [
+                "components/concepts/access-control/user-groups",
+                "components/concepts/access-control/user-task-access-restrictions",
+              ],
+            },
+          ],
+        },
       ],
     },
     {
       type: "category",
-      label: "Robotic Process Automation (RPA)",
+      label: "Features and integrations",
       link: {
         type: "doc",
-        id: "components/rpa/overview",
+        id: "components/concepts/dummy-features",
       },
       items: [
-        "components/rpa/getting-started",
-        "components/rpa/production",
         {
-          type: "link",
-          label: "RPA library specifications",
-          href: "https://camunda.github.io/rpa-python-libraries/",
+          type: "category",
+          label: "Agentic orchestration",
+          link: {
+            type: "doc",
+            id: "components/agentic-orchestration/agentic-orchestration",
+          },
+          items: [
+            "components/agentic-orchestration/ao-design",
+            "components/agentic-orchestration/ai-agents",
+          ],
+        },
+        {
+          type: "category",
+          label: "Document handling",
+          link: {
+            type: "doc",
+            id: "components/document-handling/getting-started",
+          },
+          items: [
+            "components/document-handling/use-cases",
+            "components/document-handling/upload-document-to-bpmn-process",
+            "components/document-handling/display-and-download-document",
+            "components/document-handling/send-document-to-external-system-via-connector",
+          ],
+        },
+        {
+          type: "category",
+          label: "Intelligent document processing (IDP)",
+          link: {
+            type: "doc",
+            id: "components/modeler/web-modeler/idp",
+          },
+          items: [
+            "components/modeler/web-modeler/idp/idp-configuration",
+            "components/modeler/web-modeler/idp/idp-applications",
+            {
+              type: "category",
+              label: "Document extraction",
+              link: {
+                type: "doc",
+                id: "components/modeler/web-modeler/idp/idp-document-extraction",
+              },
+              items: [
+                // "components/modeler/web-modeler/idp/idp-structured-extraction",
+                "components/modeler/web-modeler/idp/idp-unstructured-extraction",
+              ],
+            },
+            // "components/modeler/web-modeler/idp/idp-document-automation",
+            {
+              type: "category",
+              label: "Integrate IDP into your processes",
+              link: {
+                type: "doc",
+                id: "components/modeler/web-modeler/idp/idp-integrate",
+              },
+              items: ["components/modeler/web-modeler/idp/idp-example"],
+            },
+            "components/modeler/web-modeler/idp/idp-key-concepts",
+            "components/modeler/web-modeler/idp/idp-reference",
+          ],
+        },
+        {
+          type: "category",
+          label: "Robotic Process Automation (RPA)",
+          link: {
+            type: "doc",
+            id: "components/rpa/overview",
+          },
+          items: [
+            "components/rpa/getting-started",
+            "components/rpa/production",
+            {
+              type: "link",
+              label: "RPA library specifications",
+              href: "https://camunda.github.io/rpa-python-libraries/",
+            },
+          ],
+        },
+        {
+          type: "category",
+          label: "Camunda integrations",
+          link: {
+            type: "doc",
+            id: "components/camunda-integrations/overview",
+          },
+          items: [
+            {
+              type: "category",
+              label: "SAP",
+              link: {
+                type: "doc",
+                id: "components/camunda-integrations/sap/sap-integration",
+              },
+              items: [
+                "components/camunda-integrations/sap/odata-connector",
+                "components/camunda-integrations/sap/rfc-connector",
+                "components/camunda-integrations/sap/btp-plugin",
+                "components/camunda-integrations/sap/csap-cli",
+              ],
+            },
+          ],
+        },
+        {
+          type: "category",
+          label: "Early access",
+          link: {
+            type: "doc",
+            id: "components/early-access/overview",
+          },
+          items: [
+            {
+              type: "category",
+              label: "Alpha features",
+              link: {
+                type: "doc",
+                id: "components/early-access/alpha/alpha-features",
+              },
+              items: [
+                {
+                  type: "category",
+                  label: "BPMN Copilot",
+                  link: {
+                    type: "doc",
+                    id: "components/early-access/alpha/bpmn-copilot/bpmn-copilot",
+                  },
+                  items: [
+                    "components/early-access/alpha/bpmn-copilot/bpmn-copilot",
+                  ],
+                },
+                "components/early-access/alpha/feel-copilot/feel-copilot",
+              ],
+            },
+          ],
         },
       ],
     },
@@ -278,6 +390,19 @@ module.exports = {
             "components/modeler/desktop-modeler/troubleshooting",
           ],
         },
+        require("./docs/components/modeler/forms/sidebar-schema"),
+        "components/modeler/data-handling",
+        require("./docs/components/modeler/reference/sidebar-schema"),
+      ],
+    },
+    {
+      type: "category",
+      label: "BPMN, DMN, and FEEL",
+      link: {
+        type: "doc",
+        id: "components/concepts/dummy-bpmnfeeldmn",
+      },
+      items: [
         {
           BPMN: [
             "components/modeler/bpmn/modeler-bpmn",
@@ -340,9 +465,6 @@ module.exports = {
         },
         require("./docs/components/modeler/dmn/sidebar-schema"),
         require("./docs/components/modeler/feel/sidebar-schema"),
-        require("./docs/components/modeler/forms/sidebar-schema"),
-        "components/modeler/data-handling",
-        require("./docs/components/modeler/reference/sidebar-schema"),
       ],
     },
     {
@@ -723,62 +845,6 @@ module.exports = {
           Operations: [
             "components/best-practices/operations/versioning-process-definitions",
             "components/best-practices/operations/reporting-about-processes",
-          ],
-        },
-      ],
-    },
-    {
-      type: "category",
-      label: "Camunda integrations",
-      link: {
-        type: "doc",
-        id: "components/camunda-integrations/overview",
-      },
-      items: [
-        {
-          type: "category",
-          label: "SAP",
-          link: {
-            type: "doc",
-            id: "components/camunda-integrations/sap/sap-integration",
-          },
-          items: [
-            "components/camunda-integrations/sap/odata-connector",
-            "components/camunda-integrations/sap/rfc-connector",
-            "components/camunda-integrations/sap/btp-plugin",
-            "components/camunda-integrations/sap/csap-cli",
-          ],
-        },
-      ],
-    },
-    {
-      type: "category",
-      label: "Early access",
-      link: {
-        type: "doc",
-        id: "components/early-access/overview",
-      },
-      items: [
-        {
-          type: "category",
-          label: "Alpha features",
-          link: {
-            type: "doc",
-            id: "components/early-access/alpha/alpha-features",
-          },
-          items: [
-            {
-              type: "category",
-              label: "BPMN Copilot",
-              link: {
-                type: "doc",
-                id: "components/early-access/alpha/bpmn-copilot/bpmn-copilot",
-              },
-              items: [
-                "components/early-access/alpha/bpmn-copilot/bpmn-copilot",
-              ],
-            },
-            "components/early-access/alpha/feel-copilot/feel-copilot",
           ],
         },
       ],
