@@ -189,14 +189,18 @@ This filters for user tasks containing at least the variables `orderVolume` with
 
 ## Search responses
 
-Search responses consist of the components **items** and **page**.
+Search responses consist of two components: **`items`** and **`page`**.
 
-The **items** array contains instances of the respective endpoint’s resource. The attributes of those instances vary by endpoint and are described in the endpoint’s documentation.
+- The **`items`** array contains instances of the respective endpoint’s resource.  
+  The structure and attributes of these instances vary by endpoint and are detailed in the corresponding endpoint documentation.
 
-The **page** object contains the pagination information that can be used in subsequent search requests to page through the results.
-The `totalItems` attribute specifies the overall number of results for the query to be retrieved (note: for ES/OS, this is limited to 10,000, even if more results are available).
-The `startCursor` holds a reference to the **first** entry of this page. This allows paging backward in the result set by copying it into the `before` attribute in a subsequent [search request](#search-requests).
-The `endCursor` provides the same for the **last** entry of this page to allow paging forward using `after`.
+- The **`page`** object includes pagination details for navigating through results in subsequent search requests:
+  - **`totalItems`**: Indicates the total number of results for the query.  
+    > **Note:** In Elasticsearch/OpenSearch, this value is capped at **10,000**, even if more results are available.
+  - **`startCursor`**: A reference to the **first** entry on the current page.  
+    Use this value in the `before` parameter to page **backward** in a subsequent [search request](#search-requests).
+  - **`endCursor`**: A reference to the **last** entry on the current page.  
+    Use this value in the `after` parameter to page **forward** in a subsequent [search request](#search-requests).
 
 <details>
 <summary>Example</summary>
