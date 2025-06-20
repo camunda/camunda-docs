@@ -8,7 +8,7 @@ keywords: ["camunda download"]
 
 import Components from '../react-components/components.md'
 
-This guide contains information for users who want to install, deploy, and upgrade Camunda 8 Self-Managed, typically in their self-controlled cloud (public or private) or on their own hardware.
+This guide contains information for users who want to install, deploy, and update Camunda 8 Self-Managed, typically in their self-controlled cloud (public or private) or on their own hardware.
 
 ## Components
 

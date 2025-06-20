@@ -566,7 +566,7 @@ webModeler:
 
 ## Upgrade Camunda
 
-If you have installed the Camunda 8 Helm charts before with default values, Identity and the related authentication mechanism are enabled. If you have disabled Identity, see how to upgrade Camunda [with Identity disabled](#identity-disabled).
+If you have installed the Camunda 8 Helm charts before with default values, Identity and the related authentication mechanism are enabled. If you have disabled Identity, see how to update Camunda [with Identity disabled](#identity-disabled).
 
 ### Identity enabled
 

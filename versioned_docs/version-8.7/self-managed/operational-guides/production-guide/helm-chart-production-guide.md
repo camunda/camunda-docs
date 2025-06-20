@@ -399,7 +399,7 @@ The following resources and configuration options are important to keep in mind 
 
   For more information, refer to the Kubernetes documentation on how to [create a secret](https://kubernetes.io/docs/concepts/configuration/secret/).
 
-- When upgrading the Camunda Helm chart, make sure to read the [upgrade guide](/self-managed/operational-guides/update-guide/introduction.md) and corresponding new version release notes before upgrading. Perform the upgrade on a test environment first before attempting in production.
+- When updating the Camunda Helm chart, make sure to read the [update guide](/self-managed/operational-guides/update-guide/introduction.md) and corresponding new version release notes before updating. Perform the update on a test environment first before attempting in production.
 
   The following is an example configuration for Zeebe to create persistent storage:
 
