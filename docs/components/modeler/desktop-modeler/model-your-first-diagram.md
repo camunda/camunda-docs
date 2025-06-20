@@ -20,7 +20,7 @@ The BPMN diagram opens with a start event. [Events](/components/modeler/bpmn/eve
 
 ![elements](./img/elements.png)
 
-Above, you can see that elements that support different types can be reconfigured by clicking on the corresponding icon. In this case, the task can be converted to a [service task](../bpmn/service-tasks/service-tasks.md), for example, by clicking on the task and the wrench-shaped icon.
+Above, you can see that elements that support different types can be reconfigured by clicking on the corresponding icon. In this case, the task can be converted to a [service task](../bpmn/service-tasks/service-tasks.md), for example, by clicking on the element and selecting the **Change element** menu icon.
 
 ![task configuration](img/element-configuration.png)
 

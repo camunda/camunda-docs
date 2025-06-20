@@ -115,7 +115,7 @@ Application "sap-odata-connector" started and available at "some.url.hana.ondema
 
 ### Modeling options
 
-To use the **SAP OData connector** in your process, either change the type of existing task by clicking on it and using the **wrench-shaped** change type context menu icon, or create a new connector task by using the **Append connector** context menu. Follow our [guide to using connectors](/components/connectors/use-connectors/index.md) to learn more.
+To use the **SAP OData connector** in your process, either change the type of existing task by clicking on it and selecting the **Change element** menu icon, or create a new connector task by using the **Append connector** context menu. Follow our [guide to using connectors](/components/connectors/use-connectors/index.md) to learn more.
 
 :::note
 The configuration options will dynamically change with the selected HTTP method and the OData protocol version. For example, a `payload` field is only displayed when the HTTP method is something other than "GET".
