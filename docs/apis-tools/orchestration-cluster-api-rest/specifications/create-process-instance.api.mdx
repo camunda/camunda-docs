@@ -1,0 +1,323 @@
+---
+id: create-process-instance
+title: "Create process instance"
+description: "Creates and starts an instance of the specified process."
+sidebar_label: "Create process instance"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Create process instance"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/process-instances"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Creates and starts an instance of the specified process.
+The process definition to use to create the instance can be specified either using its unique key
+(as returned by Deploy resources), or using the BPMN process ID and a version.
+
+Waits for the completion of the process instance before returning a result
+when awaitCompletion is enabled.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            processDefinitionId: {
+              description:
+                "The BPMN process ID of the process definition to start an instance of.\nCannot be used together with processDefinitionKey.\n",
+              type: "string",
+            },
+            processDefinitionVersion: {
+              description:
+                "The version of the process. Only considered when a processDefinitionId is provided.\nBy default, the latest version of the process is used.\n",
+              type: "integer",
+              format: "int32",
+              default: -1,
+            },
+            variables: {
+              description:
+                "JSON object that will instantiate the variables for the root variable scope\nof the process instance.\n",
+              type: "object",
+              additionalProperties: true,
+            },
+            tenantId: {
+              description: "The tenant ID of the process definition.",
+              type: "string",
+            },
+            operationReference: {
+              description:
+                "A reference key chosen by the user that will be part of all records resulting from this operation.\nMust be >0 if provided.\n",
+              type: "integer",
+              format: "int64",
+              minimum: 1,
+            },
+            startInstructions: {
+              description:
+                "List of start instructions. By default, the process instance will start at\nthe start event. If provided, the process instance will apply start instructions\nafter it has been created.\n",
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  elementId: {
+                    description:
+                      'Future extensions might include:\n  - different types of start instructions\n  - ability to set local variables for different flow scopes\n\nFor now, however, the start instruction is implicitly a "startBeforeElement" instruction\n',
+                    type: "string",
+                  },
+                },
+                title: "ProcessInstanceCreationStartInstruction",
+              },
+            },
+            awaitCompletion: {
+              description:
+                "Wait for the process instance to complete. If the process instance completion does\nnot occur within the requestTimeout, the request will be closed. This can lead to a 504\nresponse status. Disabled by default.\n",
+              type: "boolean",
+              default: false,
+            },
+            fetchVariables: {
+              description:
+                "List of variables by name to be included in the response when awaitCompletion is set to true.\nIf empty, all visible variables in the root scope will be returned.\n",
+              type: "array",
+              items: { type: "string" },
+            },
+            requestTimeout: {
+              description:
+                "Timeout (in ms) the request waits for the process to complete. By default or\nwhen set to 0, the generic request timeout configured in the cluster is applied.\n",
+              type: "integer",
+              format: "int64",
+            },
+            processDefinitionKey: {
+              description:
+                "The unique key identifying the process definition, for example, returned for a process in the\ndeploy resources endpoint. Cannot be used together with processDefinitionId.\n",
+              type: "string",
+            },
+          },
+          title: "ProcessInstanceCreationInstruction",
+        },
+        examples: {
+          "By process definition key": {
+            summary: "Create a process instance by processDefinitionKey.",
+            value: { processDefinitionKey: "12345", variables: {} },
+          },
+          "By process definition ID": {
+            summary:
+              "Create a process instance by processDefinitionId and version.",
+            value: {
+              processDefinitionId: "1234-5678",
+              version: 1,
+              variables: {},
+            },
+          },
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The process instance was created.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            properties: {
+              processDefinitionId: {
+                description:
+                  "The BPMN process ID of the process definition which was used to create the process.\ninstance\n",
+                type: "string",
+              },
+              processDefinitionVersion: {
+                description:
+                  "The version of the process definition which was used to create the process instance.\n",
+                type: "integer",
+                format: "int32",
+              },
+              tenantId: {
+                description: "The tenant ID of the created process instance.",
+                type: "string",
+              },
+              variables: {
+                additionalProperties: true,
+                description: "All the variables visible in the root scope.",
+                type: "object",
+              },
+              processDefinitionKey: {
+                description:
+                  "The key of the process definition which was used to create the process instance.\n",
+                type: "string",
+              },
+              processInstanceKey: {
+                description:
+                  "The unique identifier of the created process instance; to be used wherever a request\nneeds a process instance key (e.g. CancelProcessInstanceRequest).\n",
+                type: "string",
+              },
+            },
+            title: "CreateProcessInstanceResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "504": {
+      description:
+        "The process instance creation request timed out in the gateway.\n\nThis can happen if the `awaitCompletion` request parameter is set to `true`\nand the created process instance did not complete within the defined request timeout.\nThis often happens when the created instance is not fully automated or contains wait states.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

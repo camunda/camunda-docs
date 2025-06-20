@@ -235,7 +235,7 @@ When creating a process for a local (non-English) region, you can design forms i
 
 <!-- https://github.com/camunda/product-hub/issues/1818 -->
 
-The Camunda 8 REST API provides an [endpoint for synchronous message correlation](/apis-tools/camunda-api-rest/specifications/correlate-message.api.mdx), enabling external systems to immediately determine the success or failure of message correlation. This enhancement allows external systems to take prompt and appropriate actions based on the correlation result, improving overall efficiency and reducing response times.
+The Camunda 8 REST API provides an [endpoint for synchronous message correlation](/apis-tools/orchestration-cluster-api-rest/specifications/correlate-message.api.mdx), enabling external systems to immediately determine the success or failure of message correlation. This enhancement allows external systems to take prompt and appropriate actions based on the correlation result, improving overall efficiency and reducing response times.
 
 ### Public Marketplace blueprint support for HTO & DMN <span class="badge badge--long" title="This feature affects Web Modeler">Web Modeler</span> <span class="badge badge--long" title="This feature affects Marketplace">Marketplace</span>
 

@@ -1,0 +1,270 @@
+---
+id: update-group
+title: "Update group"
+description: "Update a group with the given ID."
+sidebar_label: "Update group"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWN1v2zYQ/1cIPrWYYjldunV685K089AVQeJsD5kfztJZYkORCj/iGIb+9+FIqVFsJ82APjpAYEt3vK/f/Uj6NtxBaXl2wz8Z7Rs+T7hu0IATWk0LnnHfFOAwChNeoM2NaEjKM34dZAxYSWK2Eq5irkJWintUbHo2+lfxhDdgoEaHhtxsuIIaecbDkmnBEy7IVAOu4gk3eOeFwYJnznjc9jerkE3PmF5GL8Gp0yyGOOIJt3mFNfBsw926IS/WGaFK3rbzaBut+10Xa9LYdpVr5VA5EkHTSJGHGqRfLbne7JrWi6+YO8rPUMWcQEvSmN52APsyUbhipP0knxFvt3Rfa2rwdttiOyzsTQzxqZl5wp1wktwEqCOyl7FivG2jCdtoZWOa78Zj+tgNpWsFsB0sBbM+z9HapZdyTSD9oEL3DfSqAnkl7jwyfHBoFMguyulZKPf/gOzHwPUyVHuBsF72OJw8V/rG6HtRYMEKcMCEZUo7dg9SFC+UvTF6IbH+abf8Tx1M2EXUZAU6EJJFWBjYLp0FFkwodnP58ZT9dvL+1/mbyrnGZmm6Wq1GZpkfYSGcNiNtytQsc/onvbcjNqvQIKthzRbIoCgE+QTJHgFntsFcLEVOfHcx1xAMFTtuMy93S5TugrPUpgZH+5wRO1hN2PXllIkClRPLtVDlruuwZgmETsZhob3LFhLULX8E8nsdMWHW1zWYdd8LTx20CbcOnB+kwYVyWKIZxi+U+/nd3m77Yza7YNEEy3WBbKkNc5WwvSNKohZK1L7m2cl4nPAaHuLTL+NxaHBC/BWZKIYPjQQFw9bu0xGK1dpg1z8hMaGsA5X/KGS0EaXY9vuUVF0Tn8WMekId7ydUd2IwCfmtjUxi4F1FXiN9WG4wBAHSHkh2INmBZM+T7OTFC8P23TFcIegAW2qvDgfYgVsHbj3Lrff7boQTxajK4bqLxmjDdJ57Y7Bgq0rIYJ7u5b3v7rCLvXjg2oFrB67tcq1NeI2u0jQZaXzoHBpcZDwNx5hNN93P0pamEWju+6mHN5JnfBMJ02Zpuqm0dW22abRxbXpPaNyDEbCQsQdJHInVN4zUOcjweh9wJBj+PD2F2qsC2Ad2eX41Y5/A4QrWoZDk8qnpD+MP471WSfUZi5OLKYsZxrYbbAW9WeL0XrNR+TWGw+TGYu6NcOsrWhbLs0AwaCaeiv+tHTp/wTo9RyWedF8+9k3y5z+zgDNtY5ePU6HzB6ibSMJuSPVM6/ZTJerJpQ4BdB2zmwrhisbGhePR8W53XkwDyXJd116FnVaV8T4Eg9Lk0ltHJUm4FDkqO4yzV/scJezv6JEdjwjW2Hv9BlsKV/nFKNd1msdl3z4XUi/SGoRKOxc2PZ38df3lbHL0eXp6/uXq/Oh4NB65BxfK12jralCDOLqBYLlvWrh5PFReOTjsUHX44NJGglBU8ZDMpqPdTZwCWZ7wrJ8HzZOOOzd8s1mAxWsj25Ze33k0a57dzB+pFrhZCEvfC54tQdrtqeMw7jeX3RjtLfvuLHJv9N1LUOvAd+npiSf8FteDmWg7bxNeIRRoQoBRehrDOJqRjcfVOzO0NulXTPIcG/ei7nywoV1cz4gr3Xy01gUtMbCiuSysYqA6VCVQMLzbcAmq9FCSbjRJf/8BQPyyoA==
+sidebar_class_name: "put api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Update group"}
+></Heading>
+
+<MethodEndpoint
+  method={"put"}
+  path={"/groups/{groupId}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Update a group with the given ID.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "groupId",
+      in: "path",
+      required: true,
+      description: "The ID of the group to update.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            name: { type: "string", description: "The new name of the group." },
+            description: {
+              type: "string",
+              description: "The new description of the group.",
+            },
+          },
+          required: ["name", "description"],
+          title: "GroupUpdateRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The group was updated successfully.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            properties: {
+              groupId: {
+                type: "string",
+                description: "The unique external group ID.",
+              },
+              name: { type: "string", description: "The name of the group." },
+              description: {
+                type: "string",
+                description: "The description of the group.",
+              },
+            },
+            title: "GroupUpdateResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The group with the given ID was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

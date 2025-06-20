@@ -225,7 +225,7 @@ Migrate currently running process instances. Running means that these process in
 <!-- TODO this is an important deep link - we need to create a headline here -->
 
 - The Runtime Data Migrator needs to access the Camunda 7 database.
-- The Runtime Data Migrator needs to access Camunda 8 APIs (which means you can also use this tool when you run on SaaS).
+- The Runtime Data Migrator needs to access Orchestration cluster APIs (which means you can also use this tool when you run on SaaS).
 - Multiple Instance is not supported, so process instances that are currently waiting in a multiple instance task cannot be migrated and need to be moved out of that state in Camunda 7 beforehand.
 
 If you need to adjust your process models before migration, you can use [process version migration](https://docs.camunda.org/manual/7.22/user-guide/process-engine/process-instance-migration/) in the Camunda 7 environment to migrate process instances to versions that are migratable to Camunda 8. An interesting strategy can be to define dedicated migration states you want your process instances to pile up in. Another common strategy is to use [process instance modification](https://docs.camunda.org/manual/7.22/user-guide/process-engine/process-instance-modification/) in the Camunda 7 environment to move out of states that are not migratable (for example, process instances within a multiple instance task).

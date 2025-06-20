@@ -59,7 +59,7 @@ To upload a file, take the following steps:
 4. In the **Document** section, input the variable name to which the document is assigned.
 
 :::note
-To work with documents you must upload them first, [using the Camunda 8 REST API](/apis-tools/camunda-api-rest/specifications/create-document.api.mdx) for example.
+To work with documents you must upload them first, [using the Orchestration cluster REST API](/apis-tools/orchestration-cluster-api-rest/specifications/create-document.api.mdx) for example.
 The result of the endpoint must then be assigned to a variable in **Start Process Instance** so you can use the variable in the **Document** field.
 :::
 
@@ -102,7 +102,7 @@ You can use an output mapping to map the response:
 
 ### Response type for _Download file_ operation only
 
-The **Google Drive connector** response will be identical to the [REST API](/apis-tools/camunda-api-rest/specifications/create-document.api.mdx).
+The **Google Drive connector** response will be identical to the [REST API](/apis-tools/orchestration-cluster-api-rest/specifications/create-document.api.mdx).
 
 For example:
 

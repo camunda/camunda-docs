@@ -27,7 +27,7 @@ This command creates a new process instance and immediately responds with the pr
 ![create-process](assets/create-process.png)
 
 <details>
-   <summary>Create a process instance via Camunda 8 REST API</summary>
+   <summary>Create a process instance via Orchestration cluster REST API</summary>
    <p>
 
 ```
@@ -51,7 +51,7 @@ Response:
 }
 ```
 
-See the [API reference for process instance creation](/apis-tools/camunda-api-rest/specifications/create-process-instance.api.mdx) for more information, including additional request fields and code samples.
+See the [API reference for process instance creation](/apis-tools/orchestration-cluster-api-rest/specifications/create-process-instance.api.mdx) for more information, including additional request fields and code samples.
 
    </p>
  </details>
@@ -73,7 +73,7 @@ When the client resends the command, it creates a new process instance.
 :::
 
 <details>
-   <summary>Create a process instance and await results via Camunda 8 REST API</summary>
+   <summary>Create a process instance and await results via Orchestration cluster REST API</summary>
    <p>
 
 ```
@@ -100,7 +100,7 @@ Response:
 }
 ```
 
-See the [API reference for process instance creation](/apis-tools/camunda-api-rest/specifications/create-process-instance.api.mdx) for more information, including additional request fields and code samples.
+See the [API reference for process instance creation](/apis-tools/orchestration-cluster-api-rest/specifications/create-process-instance.api.mdx) for more information, including additional request fields and code samples.
 
    </p>
  </details>
@@ -153,7 +153,7 @@ curl -L 'http://localhost:8080/v2/process-instances' \
 }'
 ```
 
-See the [API reference for process instance creation](/apis-tools/camunda-api-rest/specifications/create-process-instance.api.mdx) for more information, including additional request fields and code samples.
+See the [API reference for process instance creation](/apis-tools/orchestration-cluster-api-rest/specifications/create-process-instance.api.mdx) for more information, including additional request fields and code samples.
 
    </p>
  </details>

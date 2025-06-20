@@ -36,7 +36,7 @@ Client applications can be scaled up and down separately from Zeebe. The Zeebe b
 
 Clients are libraries you embed in an application (e.g. a microservice that executes your business logic) to connect to a Zeebe cluster.
 
-Clients connect to the Zeebe Gateway via a mix of REST and [gRPC](https://grpc.io). While REST can be served over any HTTP version, the gRPC part of the API requires an HTTP/2-based transport. To learn more about how REST is used in Zeebe, review the [Camunda API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md). To learn more about gRPC in Zeebe, review the [Zeebe API (gRPC)](/apis-tools/zeebe-api/grpc.md).
+Clients connect to the Zeebe Gateway via a mix of REST and [gRPC](https://grpc.io). While REST can be served over any HTTP version, the gRPC part of the API requires an HTTP/2-based transport. To learn more about how REST is used in Zeebe, review the [Camunda API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md). To learn more about gRPC in Zeebe, review the [Zeebe API (gRPC)](/apis-tools/zeebe-api/grpc.md).
 
 The Zeebe project includes officially-supported Java and Go clients. [Community clients](/apis-tools/community-clients/index.md) have been created in other languages, including C#, Ruby, and JavaScript. Thanks to code generators for gRPC and the OpenAPI spec, it is possible to [generate clients](/apis-tools/build-your-own-client.md) in a range of different programming languages.
 

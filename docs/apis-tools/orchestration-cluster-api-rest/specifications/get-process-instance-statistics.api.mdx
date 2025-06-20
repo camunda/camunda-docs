@@ -1,0 +1,282 @@
+---
+id: get-process-instance-statistics
+title: "Get process instance statistics"
+description: "Get statistics about elements by the process instance key."
+sidebar_label: "Get process instance statistics"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWMFy2zYQ/RUMTsmUFuXESVPeNI6Tqk0zru20B9cHEFyJiEGAAZaWNRr+e2cJUqJF2nUnnZ500EgiF/t2se8tyN1wFEvPk2t+7qwE75kyHoWRwG8ibktwApU184wnfAnYGs1bm0sUqDwq6XnEM/DSqZLMecI/AjK/vc1EaitkoKEAg56la4Y5sHIPk93CevKX4REvhRMFIDiKbcONKIAnvHwI/yusecQVwZUCcx5xB98q5SDjCboK9mO6yoEJ79XSQEZQzC5Gw4jYKlcyZ0KiZ8IzwSqjvlXAVAYG1UKBYwvrGObKDxZPeMS9zKEQPNlwXJcUuEenzJLX9Q3F6EtrPHi6/2o6pa9hnIOt6W2mA19pJCBpDYJBciHKUivZVCv+6snPphfHQ4D9WneF6YN8q8CtWRcsgbW52PQrSKQaOeIHqpCJQij8eC5D7z13wjnRlHF8fRfqSITPj61dTCx+Kr75+6asofhEjLDRngkHTCyXDpYCIevhdXWNuJCo7mDcP1oUmpmqSMER54Ltdvd9x8M2jp5/ZRCW4HjEF9YVAsOltyeEKGmthkdy2sfsrL8XVRnZqOCRUu/Dbs1bwfzrJG1RasBnZ9mZf1+adcRRoYYd/87C6l3Du2iowesR2649Ddb8TpLaLawjfvKE/O9UBhnLBAqmPDMW2Z3QKntC9qWzqYbih3+S/4ydB0uWAQqlWZANtbpgmDYbyK4vPpyyn07e/HjzIkcsfRLHq9Vq4hbyCDKF1k2sW8ZuIelDdi8n7CoHB6wQa5YCE1mmCFNothMk8yVItVCSoe3abxMMlSV0/6fVHO7u99ZeFSunBufRjH25mHcNfK3McgjdrFkIqk7CmwMrSbUwt3xX4iHoPoqvikK4/tHSA6gjTv2r6qXxCAtfvxr4Jlr8fHV1zoILJm0GD44hAqIkCmVUURU8OZlOI16I+/Dv7XRak0+q+DMyMQzuSy1MQ639dJRhhXXQ8mcSGkP73PDfVMY6tVT7uJN9adLF9yGjTlDH44KiJwPwyLSQtz4oiYkKc0IN8mHSQROE0P4gsoPIDiJ7XGSvh3z/YF2qsgxMQ8+t3tqjS2htV3A4vA66OujqUV29GXsanBlGu+yIh+CcdcxKWTkHGb2o6O2bYofdCi9w8aC1g9YOWhtqrY54AZjbdqzVDJww5wmPWzUdbd8f481w6lTHuzFE3L5Y7lbQAAjcXTe7qpzmCd8EjdVJHG9y67FONqV1WMd3VMA74ZRIdaAt3Q5a7DimrRS6uTxWa7pBA7JuD05FUZlMsHfs4uzyin0UCCuxbvaeIB+6fjd9Nx31SqaPeJydz1nIMDC11z06t9QGRt0G4+c4boZlHmTlFK4vaVnYnhSEAzerqF5bBrV4jXf6H4x41P740PHqlz+vGmoos7DN8pYiw0CoKuB8iHw6OR7S8XzeqEraoqhM01rNkq0U5kz0EpO68kgJRVwrCcY3xG8Hmp3Zp3CH/REQ2fGEihKY03XUpcK8SifSFrEMy7bfqbZpXAhl4hbCx6ez3758fj87+jQ/Pft8eXZ0PJlO8B6b5EvrsRCmFwdNa5+YOO7nvtkdLN876G3rh3CPcamFMsSoJvFNq8lrPtAkj3gyOgt+EPJQmDdRK65rvtmkwsMXp+uaLjfTTp5c3+y02Ig3U55+ZzxZCO33J8r9fXhx0c6eX7L/bc48unndXNWsm8aiK/rHI34L6/ERen1TRzwHkYFrcg6GMymhxJ6LwYCZ9Lntoh/PSFh/AyZpdsI=
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get process instance statistics"}
+></Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/process-instances/{processInstanceKey}/statistics/element-instances"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Get statistics about elements by the process instance key.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "processInstanceKey",
+      in: "path",
+      required: true,
+      description:
+        "The assigned key of the process instance, which acts as a unique identifier for this process instance.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The process instance statistics result.",
+      content: {
+        "application/json": {
+          schema: {
+            description: "Process instance element statistics query response.",
+            type: "object",
+            properties: {
+              items: {
+                description: "The element statistics.",
+                type: "array",
+                items: {
+                  description: "Process element statistics response.",
+                  type: "object",
+                  properties: {
+                    elementId: {
+                      description:
+                        "The element ID for which the results are aggregated.",
+                      type: "string",
+                    },
+                    active: {
+                      description:
+                        "The total number of active instances of the element.",
+                      type: "integer",
+                      format: "int64",
+                    },
+                    canceled: {
+                      description:
+                        "The total number of canceled instances of the element.",
+                      type: "integer",
+                      format: "int64",
+                    },
+                    incidents: {
+                      description:
+                        "The total number of incidents for the element.",
+                      type: "integer",
+                      format: "int64",
+                    },
+                    completed: {
+                      description:
+                        "The total number of completed instances of the element.",
+                      type: "integer",
+                      format: "int64",
+                    },
+                  },
+                  title: "ProcessElementStatisticsResult",
+                },
+              },
+            },
+            title: "ProcessInstanceElementStatisticsQueryResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

@@ -92,7 +92,7 @@ You’ll know Zeebe has started successfully when you see a message similar to t
 [exporter] [0.0.0.0:26501-zb-actors-1] INFO  io.camunda.zeebe.broker.exporter.elasticsearch - Exporter opened
 ```
 
-You can test the Zeebe Gateway by asking for the cluster topology with the [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md):
+You can test the Zeebe Gateway by asking for the cluster topology with the [Orchestration cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md):
 
 ```
 curl -L 'http://localhost:8080/v2/topology' \

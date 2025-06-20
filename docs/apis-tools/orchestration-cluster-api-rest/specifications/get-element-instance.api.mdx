@@ -1,0 +1,379 @@
+---
+id: get-element-instance
+title: "Get element instance"
+description: "Returns element instance as JSON."
+sidebar_label: "Get element instance"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get element instance"}
+></Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/element-instances/{elementInstanceKey}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Returns element instance as JSON.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "elementInstanceKey",
+      in: "path",
+      required: true,
+      description:
+        "The assigned key of the element instance, which acts as a unique identifier for this element instance.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The element instance is successfully returned.\n",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            properties: {
+              processDefinitionId: {
+                description:
+                  "The process definition ID associated to this element instance.",
+                type: "string",
+              },
+              startDate: {
+                description: "Date when element instance started.",
+                type: "string",
+                format: "date-time",
+              },
+              endDate: {
+                description: "Date when element instance finished.",
+                type: "string",
+                format: "date-time",
+              },
+              elementId: {
+                description: "The element ID for this element instance.",
+                type: "string",
+              },
+              elementName: {
+                description: "The element name for this element instance.",
+                type: "string",
+              },
+              type: {
+                description: "Type of element as defined set of values.",
+                type: "string",
+                enum: [
+                  "UNSPECIFIED",
+                  "PROCESS",
+                  "SUB_PROCESS",
+                  "EVENT_SUB_PROCESS",
+                  "AD_HOC_SUB_PROCESS",
+                  "START_EVENT",
+                  "INTERMEDIATE_CATCH_EVENT",
+                  "INTERMEDIATE_THROW_EVENT",
+                  "BOUNDARY_EVENT",
+                  "END_EVENT",
+                  "SERVICE_TASK",
+                  "RECEIVE_TASK",
+                  "USER_TASK",
+                  "MANUAL_TASK",
+                  "TASK",
+                  "EXCLUSIVE_GATEWAY",
+                  "INCLUSIVE_GATEWAY",
+                  "PARALLEL_GATEWAY",
+                  "EVENT_BASED_GATEWAY",
+                  "SEQUENCE_FLOW",
+                  "MULTI_INSTANCE_BODY",
+                  "CALL_ACTIVITY",
+                  "BUSINESS_RULE_TASK",
+                  "SCRIPT_TASK",
+                  "SEND_TASK",
+                  "UNKNOWN",
+                ],
+              },
+              state: {
+                description:
+                  "State of element instance as defined set of values.",
+                allOf: [
+                  {
+                    description:
+                      "Element states, one of ACTIVE, COMPLETED, TERMINATED.",
+                    enum: ["ACTIVE", "COMPLETED", "TERMINATED"],
+                    title: "ElementInstanceStateEnum",
+                  },
+                ],
+              },
+              hasIncident: {
+                description:
+                  "Shows whether this element instance has an incident. If true also an incidentKey is provided.",
+                type: "boolean",
+              },
+              tenantId: {
+                description: "The tenant ID of the incident.",
+                type: "string",
+              },
+              elementInstanceKey: {
+                type: "string",
+                description:
+                  "The assigned key, which acts as a unique identifier for this element instance.",
+              },
+              processInstanceKey: {
+                description:
+                  "The process instance key associated to this element instance.",
+                type: "string",
+              },
+              processDefinitionKey: {
+                description:
+                  "The process definition key associated to this element instance.",
+                type: "string",
+              },
+              incidentKey: {
+                description:
+                  "Incident key associated with this element instance.",
+                type: "string",
+              },
+            },
+            title: "ElementInstanceResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description:
+        "The element instance with the given key was not found. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>
