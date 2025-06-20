@@ -16,7 +16,7 @@ For example, if the current Helm chart version is 10.x.x, and the latest next ma
 
 Updating between minor versions of the Camunda Helm chart may require [configuration changes](#update-your-configuration). To upgrade between patch versions or when no configuration changes are required, see the [`helm upgrade`](#identity-disabled) instructions.
 
-## Upgrade requirements
+## Update requirements
 
 For a smooth update experience, we recommend determining both your **Helm chart** and **Helm CLI** versions prior to starting your upgrade.
 
