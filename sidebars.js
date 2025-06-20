@@ -1144,10 +1144,9 @@ module.exports = {
               label: "Red Hat OpenShift",
               link: {
                 type: "doc",
-                id: "self-managed/setup/deploy/azure/microsoft-aks/microsoft-aks",
+                id: "self-managed/setup/deploy/openshift/redhat-openshift",
               },
               items: [
-                "self-managed/setup/deploy/openshift/redhat-openshift",
                 "self-managed/setup/deploy/openshift/redhat-openshift-dual-region",
               ],
             },
