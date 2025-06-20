@@ -86,7 +86,7 @@ camunda.rpa.zeebe.worker-tags=default,playwright
 
 ## Installation and Setup guide
 
-An RPA worker acts as a specialized Job Worker designed to run outside the main Camunda Orchestration Cluster. RPA workers leverage the [Job Worker pattern](/components/best-practices/development/dealing-with-problems-and-exceptions.md#understanding-workers) to retrieve work from Zeebe.
+An RPA worker acts as a specialized Job worker designed to run outside the main Camunda Orchestration Cluster. RPA workers leverage the [Job worker pattern](/components/best-practices/development/dealing-with-problems-and-exceptions.md#understanding-workers) to retrieve work from Zeebe.
 
 ![Overview of the RPA architecture](img/architecture-overview.png)
 
