@@ -4,11 +4,22 @@ title: "Multi-namespace deployment"
 description: "Deploy Camunda 8 Self-Managed across several namespaces for better resource management and environment separation."
 ---
 
-Camunda 8 Self-Managed offers flexible deployment options that allow it to span multiple namespaces. This setup consists of a management cluster, which includes the Console, Identity, and Web Modeler components, along with several automation clusters (including Zeebe, Operate, Tasklist, and Optimize).
+Camunda 8 Self-Managed offers flexible deployment options that allow it to span multiple namespaces. This setup consists of:
 
-For this configuration, each namespace is set up independently through Helm, with deployments classified into two types: management and automation. Each type has a specific values file designed for its deployment requirements.
+- One **Management Cluster**: Console, Identity, and Web Modeler
+- One or more **Orchestration Cluster**: Zeebe, Operate, Tasklist, and Optimize.
 
-Below, we illustrate multi-namespace Camunda deployment: one namespace will be dedicated to the management cluster, and the other two will be used for the automation cluster.
+For this configuration, each namespace is set up independently using Helm, with deployments categorized into two types: **management** and **orchestration**. Each type has a dedicated values file tailored to its specific deployment requirements.
+
+## Purpose
+
+The primary goal of a multi-namespace deployment is **logical grouping**, which is beneficial for scenarios such as resource management. This approach treats all namespaces as part of a single logical cluster.
+
+:::note
+Security considerations are outside the scope of this deployment model. As a result, all credentials associated with the same deployment are shared across namespaces.
+:::
+
+In the following sections, we demonstrate a multi-namespace Camunda deployment. One namespace is assigned to the management cluster, while two other namespaces are used for the orchestration cluster.
 
 ## Management deployment
 
