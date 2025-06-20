@@ -4,7 +4,7 @@ title: Configuration
 description: "See how to configure Camunda Process Test"
 ---
 
-By default, CPT uses a runtime based on [Testcontainers](#testcontainers-runtime). You can customize the runtime to your needs. 
+By default, CPT uses a runtime based on [Testcontainers](#testcontainers-runtime). You can customize the runtime to your needs.
 Or, you can replace it by a [Remote runtime](#remote-runtime), for example, if you can't install a Docker-API compatible container runtime.
 
 ## Testcontainers runtime
@@ -15,7 +15,7 @@ The default runtime of CPT is based on [Testcontainers](https://java.testcontain
 - Connectors
 
 :::info Prerequisites
-You need a Docker-API compatible container runtime, such as Docker on Linux or Docker Desktop on Mac and Windows. 
+You need a Docker-API compatible container runtime, such as Docker on Linux or Docker Desktop on Mac and Windows.
 If you have issues with your Docker runtime, have a look at the [Testcontainers documentation](https://java.testcontainers.org/supported_docker_environment/).
 :::
 
@@ -112,16 +112,17 @@ public class MyProcessTest {
 
 ## Remote runtime
 
-Instead of using the managed [Testcontainers runtime](#testcontainers-runtime), you can configure CPT to connect to a remote runtime, for example, to [Camunda 8 Run](/docs/self-managed/setup/deploy/local/c8run.md) on your machine.
+Instead of using the managed [Testcontainers runtime](#testcontainers-runtime), you can configure CPT to connect to a remote runtime, for example, to [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md) on your machine.
 
 When to use it:
+
 - You can't install a Docker-API compatible container runtime
 
 :::note
 You are in charge of the remote runtime. Make sure to start the runtime before running tests.
 :::
 
-Set the following properties to switch to a remote runtime and change the connection if needed. 
+Set the following properties to switch to a remote runtime and change the connection if needed.
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={
 [
@@ -174,7 +175,7 @@ public class MyProcessTest {
             .withRemoteCamundaClientBuilderFactory(() -> CamundaClient.newClientBuilder()
                 .restAddress(URI.create("http://0.0.0.0:8080"))
                 .grpcAddress(URI.create("http://0.0.0.0:26500"))
-            )    
+            )
             .withRemoteCamundaMonitoringApiAddress(URI.create("http://0.0.0.0:9600"))
             .withRemoteConnectorsRestApiAddress(URI.create("http://0.0.0.0:8085"));
 }

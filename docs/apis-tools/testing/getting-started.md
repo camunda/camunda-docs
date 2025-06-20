@@ -178,6 +178,7 @@ public class MyProcessTest {
 </Tabs>
 
 Next, read more about:
+
 - `CamundaAssert` and [assertions](assertions.md)
 - `CamundaProcessTestContext` and [utilities](utilities.md)
 - The runtime [configuration](configuration.md)
