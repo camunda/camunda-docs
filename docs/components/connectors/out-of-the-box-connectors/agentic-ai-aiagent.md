@@ -5,6 +5,8 @@ title: AI Agent connector
 description: AI agent connector implementing a feedback loop using for user interactions and toolcalls with an LLM.
 ---
 
+import FromVersionBadge from '../../react-components/\_from-version-badge';
+
 Use the **AI Agent** outbound connector to integrate Large Language Models (LLMs) with AI agents.
 
 ## About this connector
@@ -247,20 +249,94 @@ Despite these limits, you must closely monitor your LLM API usage and cost, and 
 
 ### Response
 
-Configure the response from the AI Agent connector for further processing.
+Configure which format to instruct the model to return and how to handle the response returned from the AI Agent
+connector.
 
-For example, the LLM call typically returns one text content block plus additional metadata such as token usage, but could contain multiple content blocks, depending on the LLM provider and selected model.
+The outcome of a LLM call is stored as an **assistant message** which is designed to contain multiple content blocks.
+With the current set of supported providers/models, this message will always contain a single text content block. The
+connector will return the **first content block** when handling the response, either as text string or as parsed JSON
+object.
 
-| Field                     | Required | Description                                                                                                                                                                                                                                                  |
-| :------------------------ | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Include text output       | No       | <p>Returns the **first text block** returned by the LLM as `responseText`.</p><p><ul><li><p>Typically a good option if you want to use the agent's text output for further processing.</p></li><li><p>This option is selected by default. </p></li></ul></p> |
-| Include assistant message | No       | <p>Returns the entire message returned by the LLM as `responseMessage', including any additional content blocks and metadata.</p><p>Select this option if you need more than just the first response text.</p>                                               |
+| Field                                                       | Required | Description                                                                                                                                                                                                    |
+| :---------------------------------------------------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Response Format <FromVersionBadge version="8.8.0-alpha6" /> | Yes      | <p>Instructs the model which response format to return. This can be either text or JSON.</p><p><ul><li>Note that JSON format support varies by provider and model.</li></ul></p>                               |
+| Include assistant message                                   | No       | <p>Returns the entire message returned by the LLM as `responseMessage`, including any additional content blocks and metadata.</p><p>Select this option if you need more than just the first response text.</p> |
 
-If you select both options, the response object contains both `responseText` and `responseMessage` fields, for example:
+#### Text response format
+
+If not configured otherwise, this format will be used by default and will return a `responseText` string as part of the
+connector response.
+
+| Field                                                          | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| :------------------------------------------------------------- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Parse text as JSON <FromVersionBadge version="8.8.0-alpha6" /> | No       | <p>If this option is selected, the connector will attempt to parse the response text as JSON and return the parsed object as `responseJson` in the connector response.</p><p><ul><li>Use this option for models which do not support setting JSON as response format (such as Anthropic models) in combination with a prompt instructing the model to return a JSON response.</li><li>In case parsing fails, the connector will not throw an error but will return the original response text as `responseText` and return no `responseJson` object.</li></ul></p> |
+
+An example prompt that instructs the model to return a JSON response
+(see [Anthropic docs](https://docs.anthropic.com/en/docs/test-and-evaluate/strengthen-guardrails/increase-consistency#example-enhancing-it-support-consistency)):
+
+```
+Output in JSON format with keys: "sentiment" (positive/negative/neutral), "key_issues" (list), and "action_items" (list of dicts with "team" and "task").
+```
+
+#### JSON response format <FromVersionBadge version="8.8.0-alpha6" />
+
+:::note
+
+The JSON response format is currently only supported for OpenAI models. Use the text response format in combination with
+the **Parse text as JSON** option for other providers.
+
+:::
+
+If the model supports it, selecting JSON as response format instructs the model to always return a JSON response. In
+case the model does not return a valid JSON response, the connector will throw an error.
+
+To ensure the model generates data according to a specific JSON structure, you can optionally provide a
+[JSON Schema](https://json-schema.org/). Alternatively, you can instruct the model to return JSON following a specific
+structure as shown in the text example above.
+
+Please note that support for JSON responses varies by provider and model.
+
+In OpenAI terms, selecting the JSON response format is equivalent to using
+the [JSON mode](https://platform.openai.com/docs/guides/structured-outputs?api-mode=chat#json-mode) while providing a
+JSON Schema instructs the model to return
+[structured outputs](https://platform.openai.com/docs/guides/structured-outputs?api-mode=chat#structured-outputs-vs-json-mode).
+
+| Field                     | Required | Description                                                                                                                                                                                                                                                           |
+| :------------------------ | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Response JSON Schema      | No       | <p>Describes the desired response format as [JSON Schema](https://json-schema.org/).</p><p><ul><li>See [OpenAI's structured outputs documentation](https://platform.openai.com/docs/guides/structured-outputs?api-mode=chat#introduction) for examples.</li></ul></p> |
+| Response JSON Schema name | No       | <p>Depending on the provider, the schema needs to be configured with a name for the schema (such as `Person`).</p><p>Ideally this name describes the purpose of the schema to make the model aware of the expected data.</p>                                          |
+
+An example JSON Schema describing the expected response format for a user profile:
+
+```feel
+={
+  "type": "object",
+  "properties": {
+    "userId": {
+      "type": "number"
+    },
+    "firstname": {
+      "type": "string"
+    },
+    "lastname": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "userId",
+    "firstname",
+    "lastname"
+  ]
+}
+```
+
+#### Assistant message
+
+If the **Include assistant message** option is selected, the response from the AI Agent connector contains a
+`responseMessage` object that includes the assistant message, including all content blocks and metadata. For example:
 
 ```json
 {
-  "responseText": "Based on the result from the GetDateAndTime function, the current date and time is:\n\nJune 2, 2025, 09:15:38 AM (Central European Summer Time).",
   "responseMessage": {
     "role": "assistant",
     "content": [
@@ -293,10 +369,10 @@ agent.responseMessage.content[type = "text"][1].text
 
 Specify the process variables that you want to map and export the AI Agent connector response into.
 
-| Field             | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| :---------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Result variable   | Yes      | <p>The result of the AI Agent connector is a context containing the following fields:</p><p><ul><li><p>`context`: The updated **Agent Context**. Make sure you map this to a process variable and re-inject this variable in the **Agent Context** input field if your AI agent is part of a feedback loop.</p></li><li><p>`toolCalls`: Tool call requests provided by the LLM that need to be routed to the ad-hoc sub-process.</p></li><li><p>`responseText`: The last response text provided by the LLM if the `Include text output` option is enabled in the [Response](#response) section.</p></li><li><p>`responseMessage`: The last response message provided by the LLM if the `Include assistant message` option is enabled in the [Response](#response) section.</p></li></ul></p> |
-| Result expression | No       | In addition, you can choose to unpack the content of the response into multiple process variables using the **Result expression** field, as a [FEEL Context Expression](/components/concepts/expressions.md).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| Field             | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| :---------------- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Result variable   | Yes      | <p>The result of the AI Agent connector is a context containing the following fields:</p><p><ul><li><p>`context`: The updated **Agent Context**. Make sure you map this to a process variable and re-inject this variable in the **Agent Context** input field if your AI agent is part of a feedback loop.</p></li><li><p>`toolCalls`: Tool call requests provided by the LLM that need to be routed to the ad-hoc sub-process.</p></li></ul></p><p>Response fields depending on the configuration in the [Response](#response) section: <ul><li><p>`responseText`: The last response text provided by the LLM if the **Response Format** selection is set to **Text**.</p></li><li><p>`responseJson`: The last response text provided by the LLM parsed as JSON object if the **Response Format** selection is set to **JSON** or if the **Parse text as JSON** option is enabled.</p></li><li><p>`responseMessage`: The assistant message provided by the LLM if the **Include assistant message** option is enabled.</p></li></ul></p> |
+| Result expression | No       | In addition, you can choose to unpack the content of the response into multiple process variables using the **Result expression** field, as a [FEEL Context Expression](/components/concepts/expressions.md).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 
 :::tip
 An easy approach to get started with modeling your first AI Agent is to use the result variable (for example, `agent`) and configure the **Agent Context** as `agent.context`.
