@@ -86,7 +86,7 @@ camunda.rpa.zeebe.worker-tags=default,playwright
 
 ## Installation and Setup guide
 
-An RPA worker acts as a specialized Job Worker designed to run outside the main Camunda Orchestration Cluster. RPA workers leverage the [job worker pattern](/components/best-practices/development/dealing-with-problems-and-exceptions.md#understanding-workers) to retrieve work from Zeebe.
+An RPA worker acts as a specialized Job Worker designed to run outside the main Camunda Orchestration Cluster. RPA workers leverage the [Job Worker pattern](/components/best-practices/development/dealing-with-problems-and-exceptions.md#understanding-workers) to retrieve work from Zeebe.
 
 ![Overview of the RPA architecture](img/architecture-overview.png)
 
@@ -109,7 +109,7 @@ If your scripts require [additional libraries](#additional-libraries), they will
 | Operating System | Required Software | Optional Software |
 | ---------------- | ----------------- | ----------------- |
 | Windows          | RPA worker        | -                 |
-| Linux + MacOS    | RPA worker        | Python 3.12 + pip |
+| Linux + macOS    | RPA worker        | Python 3.12 + pip |
 
 #### Network Configurations
 
@@ -157,7 +157,7 @@ If the job waits a long time to be picked up, this might indicate that all worke
 ## FAQ
 
 **My RPA Task is never picked up.**
-Ensure your RPA worker is connected to the correct Zeebe instance and has the correct [label](https://docs.camunda.io/docs/next/components/rpa/production/#labels) configured for the Task in question.
+Ensure your RPA worker is connected to the correct Zeebe instance and has the correct [label](#labels) configured for the Task in question.
 
 **My first script run succeeds, but any subsequent runs fail. I always need to restart the machine.**
 Your script might not close or clean up the environment after completion. Use [Teardown scripts](./getting-started.md#incidents) to ensure all applications are closed properly.
