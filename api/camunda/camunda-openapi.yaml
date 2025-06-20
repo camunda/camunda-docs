@@ -318,6 +318,12 @@ paths:
           description: Key of the incident to resolve.
           schema:
             type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/IncidentResolutionRequest"
       responses:
         "204":
           description: The incident is marked as resolved.
@@ -5307,9 +5313,9 @@ components:
         filter:
           description: The tenant search filters.
           allOf:
-            - $ref: "#/components/schemas/TenantFilterRequest"
+            - $ref: "#/components/schemas/TenantFilter"
 
-    TenantFilterRequest:
+    TenantFilter:
       description: Tenant filter request
       type: object
       properties:
@@ -5343,6 +5349,7 @@ components:
             - followUpDate
             - dueDate
             - priority
+            - name
         order:
           $ref: "#/components/schemas/SortOrderEnum"
       required:
@@ -5393,7 +5400,7 @@ components:
         filter:
           description: The user task variable search filters.
           allOf:
-            - $ref: "#/components/schemas/UserTaskVariableFilterRequest"
+            - $ref: "#/components/schemas/UserTaskVariableFilter"
     UserTaskSearchQueryResult:
       description: User task search query response.
       type: object
@@ -5428,6 +5435,11 @@ components:
         elementId:
           type: string
           description: The element ID of the user task.
+        name:
+          type: string
+          description: >
+            The task name. This only works for data created with 8.8 and onwards.
+            Instances from prior versions don't contain this data and cannot be found.
         candidateGroup:
           description: The candidate group for this user task.
           allOf:
@@ -5462,12 +5474,12 @@ components:
           type: array
           description: Process instance variables associated with the user task.
           items:
-            $ref: "#/components/schemas/VariableValueFilterRequest"
+            $ref: "#/components/schemas/VariableValueFilterProperty"
         localVariables:
           type: array
           description: Local variables associated with the user task.
           items:
-            $ref: "#/components/schemas/VariableValueFilterRequest"
+            $ref: "#/components/schemas/VariableValueFilterProperty"
         userTaskKey:
           type: string
           description: The key for this user task.
@@ -5480,7 +5492,7 @@ components:
         elementInstanceKey:
           type: string
           description: The key of the element instance.
-    VariableValueFilterRequest:
+    VariableValueFilterProperty:
       type: object
       properties:
         name:
@@ -5493,7 +5505,7 @@ components:
       required:
         - name
         - value
-    UserTaskVariableFilterRequest:
+    UserTaskVariableFilter:
       description: The user task variable search filters.
       type: object
       properties:
@@ -6104,7 +6116,7 @@ components:
           description: The process instance variables.
           type: array
           items:
-            $ref: "#/components/schemas/VariableValueFilterRequest"
+            $ref: "#/components/schemas/VariableValueFilterProperty"
         processInstanceKey:
           description: The key of this process instance.
           allOf:
@@ -6440,6 +6452,7 @@ components:
             - startDate
             - endDate
             - elementId
+            - elementName
             - type
             - state
             - incidentKey
@@ -6509,7 +6522,9 @@ components:
           description: The element ID for this element instance.
         elementName:
           type: string
-          description: The element name.
+          description: >
+            The element name. This only works for data created with 8.8 and onwards.
+            Instances from prior versions don't contain this data and cannot be found.
         hasIncident:
           type: boolean
           description: Shows whether this element instance has an incident related to.
@@ -7227,7 +7242,7 @@ components:
         filter:
           description: The user search filters.
           allOf:
-            - $ref: "#/components/schemas/UserFilterRequest"
+            - $ref: "#/components/schemas/UserFilter"
     MappingSearchQuerySortRequest:
       type: object
       properties:
@@ -7256,8 +7271,8 @@ components:
         filter:
           description: The mapping search filters.
           allOf:
-            - $ref: "#/components/schemas/MappingFilterRequest"
-    UserFilterRequest:
+            - $ref: "#/components/schemas/MappingFilter"
+    UserFilter:
       description: User search filter.
       type: object
       properties:
@@ -7273,7 +7288,7 @@ components:
           description: The email of the user.
           allOf:
             - $ref: "#/components/schemas/StringFilterProperty"
-    MappingFilterRequest:
+    MappingFilter:
       description: Mapping search filter.
       type: object
       properties:
@@ -7553,8 +7568,8 @@ components:
         filter:
           description: The role search filters.
           allOf:
-            - $ref: "#/components/schemas/RoleFilterRequest"
-    RoleFilterRequest:
+            - $ref: "#/components/schemas/RoleFilter"
+    RoleFilter:
       description: Role filter request
       type: object
       properties:
@@ -7742,8 +7757,8 @@ components:
         filter:
           description: The group search filters.
           allOf:
-            - $ref: "#/components/schemas/GroupFilterRequest"
-    GroupFilterRequest:
+            - $ref: "#/components/schemas/GroupFilter"
+    GroupFilter:
       description: Group filter request
       type: object
       properties:
@@ -8371,6 +8386,13 @@ components:
       properties:
         changeset:
           $ref: "#/components/schemas/JobChangeset"
+        operationReference:
+          description: |
+            A reference key chosen by the user that will be part of all records resulting from this operation.
+            Must be > 0 if provided.
+          type: integer
+          format: int64
+          minimum: 1
       required:
         - changeset
     JobChangeset:
@@ -8445,16 +8467,12 @@ components:
           type: integer
           format: int32
           default: 100
-        searchAfter:
-          description: Items to search after. Correlates to the `lastSortValues` property of a previous search response.
-          type: array
-          items:
-            type: object
-        searchBefore:
-          description: Items to search before. Correlates to the `firstSortValues` property of a previous search response.
-          type: array
-          items:
-            type: object
+        after:
+          description: Use the `endCursor` value from the previous response to fetch the next page of results.
+          type: string
+        before:
+          description: Use the `startCursor` value from the previous response to fetch the previous page of results.
+          type: string
     SearchQueryResponse:
       type: object
       properties:
@@ -8470,16 +8488,12 @@ components:
           description: Total items matching the criteria.
           type: integer
           format: int64
-        firstSortValues:
-          description: The sort values of the first item in the result set. Use this in the `searchBefore` field of an ensuing request.
-          type: array
-          items:
-            type: object
-        lastSortValues:
-          description: The sort values of the last item in the result set. Use this in the `searchAfter` field of an ensuing request.
-          type: array
-          items:
-            type: object
+        startCursor:
+          description: The cursor value for getting the previous page of results. Use this in the `before` field of an ensuing request.
+          type: string
+        endCursor:
+          description: The cursor value for getting the next page of results. Use this in the `after` field of an ensuing request.
+          type: string
     DecisionRequirementsSearchQuerySortRequest:
       type: object
       properties:
@@ -9211,6 +9225,17 @@ components:
         resourceKey:
           type: string
           description: The assigned key, which acts as a unique identifier for this Resource.
+
+    IncidentResolutionRequest:
+      type: object
+      properties:
+        operationReference:
+          description: |
+            A reference key chosen by the user that will be part of all records resulting from this operation.
+            Must be >0 if provided.
+          type: integer
+          format: int64
+          minimum: 1
 
     ProcessInstanceCreationInstruction:
       type: object
