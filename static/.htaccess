@@ -154,15 +154,10 @@ RewriteRule ^docs/next/self-managed/setup/deploy/amazon/aws-marketplace/?$ /docs
 
 # Rename C8 API
 RewriteRule ^docs/next/apis-tools/camunda-api-rest/(.*)$ /docs/next/apis-tools/orchestration-cluster-api-rest/$1 [R=301,L]
-RewriteRule ^docs/next/apis-tools/camunda-api-rest/camunda-api-rest-authentication/?$ /docs/next/
-apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication/ [R=301,L]
-RewriteRule ^docs/next/apis-tools/camunda-api-rest/camunda-api-rest-data-fetching/?$ /docs/next/
-apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-data-fetching/ [R=301,L]
-RewriteRule ^docs/next/apis-tools/camunda-api-rest/camunda-api-rest-overview/?$ /docs/next/
-apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview/ [R=301,L]
-RewriteRule ^docs/next/apis-tools/camunda-api-rest/camunda-8-api-intermediate-tutorial/?$ /docs/next/
-apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-intermediate-tutorial/ [R=301,L]
-RewriteRule ^docs/next/apis-tools/camunda-api-rest/camunda-8-api-tutorial/?$ /docs/next/
+RewriteRule ^docs/next/apis-tools/camunda-api-rest/camunda-api-rest-authentication/?$ /docs/next/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication/ [R=301,L]
+RewriteRule ^docs/next/apis-tools/camunda-api-rest/camunda-api-rest-data-fetching/?$ /docs/next/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-data-fetching/ [R=301,L]
+RewriteRule ^docs/next/apis-tools/camunda-api-rest/camunda-api-rest-overview/?$ /docs/next/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview/ [R=301,L]
+RewriteRule ^docs/next/apis-tools/camunda-api-rest/camunda-8-api-intermediate-tutorial/?$ /docs/next/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-intermediate-tutorial/ [R=301,L]RewriteRule ^docs/next/apis-tools/camunda-api-rest/camunda-8-api-tutorial/?$ /docs/next/
 apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-tutorial/ [R=301,L]
 
 # Move doc handling SM to Concepts
