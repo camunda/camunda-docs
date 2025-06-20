@@ -1190,7 +1190,7 @@ module.exports = {
         id: "self-managed/update/index",
       },
       items: [
-        "self-managed/setup/upgrade",
+        "self-managed/setup/update",
         {
           type: "category",
           label: "Update by version",

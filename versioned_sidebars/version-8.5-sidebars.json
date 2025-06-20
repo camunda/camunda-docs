@@ -1127,7 +1127,7 @@
       "Setup": [
         "self-managed/setup/overview",
         "self-managed/setup/install",
-        "self-managed/setup/upgrade",
+        "self-managed/setup/update",
         {
           "type": "category",
           "label": "Deploy",

@@ -33,7 +33,7 @@ Additionally, two components ([external-dns](https://github.com/kubernetes-sigs/
 
 ## Usage
 
-In the following, we're using `helm upgrade --install` as it runs install on initial deployment and upgrades future usage. This may make it easier for future [Camunda 8 Helm upgrades](../../../../platform-deployment/helm-kubernetes/upgrade.md) or any other component upgrades.
+In the following, we're using `helm upgrade --install` as it runs install on initial deployment and upgrades future usage. This may make it easier for future [Camunda 8 Helm upgrades](../../../../platform-deployment/helm-kubernetes/update.md) or any other component upgrades.
 
 ### Environment prerequisites
 

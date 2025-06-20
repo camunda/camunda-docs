@@ -1,8 +1,8 @@
 ---
-id: upgrade
-title: "Upgrading Camunda 8 Helm deployment"
-sidebar_label: "Upgrade"
-description: "To upgrade to a more recent version of the Camunda Helm charts, there are certain things you need to keep in mind."
+id: update
+title: "Updating Camunda 8 Helm deployment"
+sidebar_label: "Update"
+description: "To update to a more recent version of the Camunda Helm charts, there are certain things you need to keep in mind."
 ---
 
 :::note
