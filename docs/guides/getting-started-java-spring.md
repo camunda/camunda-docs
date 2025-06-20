@@ -77,12 +77,12 @@ Next, we'll create a BPMN diagram to represent the transaction model shown at th
    - Set the ID to `process-payments`
 4. Add a start event, and name it `Payment request received`.
 5. Append a task named `Prepare transaction`.
-6. Click the wrench-shaped change type context menu icon to change the type of task to a script task, and configure the following properties:
+6. Click on the element and select the **Change element** menu icon to change the type of task to a script task, and configure the following properties:
    1. **Implementation**: `FEEL expression` [What is FEEL?](/components/modeler/feel/what-is-feel.md)
    2. **Script/Result variable**: `totalWithTax`
    3. **Script/FEEL expression**: `total * 1.1` (this represents the tax applied to the transaction.)
 7. Append a task named `Charge credit card`.
-8. Click on the task and click the wrench-shaped icon to change the type of task to a service task. In the properties panel, change the **Task definition/Job type** to `charge-credit-card`.
+8. Click on the element and select the **Change element** menu icon to change the type of task to a service task. In the properties panel, change the **Task definition/Job type** to `charge-credit-card`.
 9. Append an end event named `Payment executed`.
 10. Save this BPMN file to your Spring project in `src/main/resources`, and name it `process-payments.bpmn`.
 
