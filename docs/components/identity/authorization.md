@@ -4,7 +4,7 @@ title: Authorization
 description: "Learn how to manage authorizations in your Orchestration cluster."
 ---
 
-Authorizations are managed through permissions that can be assigned to [users](user.md), groups, roles, and mappings.
+Authorizations are managed through permissions that can be assigned to [users](user.md), [groups](group.md), [roles](role.md), and mappings.
 
 ## Authorization overview
 
