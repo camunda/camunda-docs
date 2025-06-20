@@ -25,7 +25,7 @@ The FEEL Playground is integrated into the popup FEEL editor:
 
 - **FEEL expression**: Enter and edit the FEEL expression you want to validate.
 
-- **Context**: A pre-filled set of [sample data and variables](/components/modeler/data-handling.md) to use as a context for validating your expression against. You can edit this sample data if required. The data must be correctly formatted as valid JSON.
+- **Context**: A set of [sample data and variables](/components/modeler/data-handling.md) to use as a context for validating your expression against. You can edit this sample data if required. The data must be correctly formatted as valid JSON.
 
 - **Result**: Shows the results of the validation when run against the sample data. For example, if the expression is valid for the sample data, an [Approved validation result](#results) is returned. If there is a validation issue, a warning and description of the issue is shown to help you troubleshoot the expression.
 
