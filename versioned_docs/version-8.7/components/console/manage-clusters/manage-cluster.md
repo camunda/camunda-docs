@@ -39,25 +39,25 @@ You can resume your paused cluster from the **Console** at any time.
 1. The cluster **Status** shows “Paused” if a cluster is paused. Select the cluster that you want to resume.
 1. On the cluster **Overview** tab, select **Resume cluster** in the **Status** row of the **Cluster Details**.
 
-## Update a cluster
+## Upgrade a cluster
 
 :::note
-This action cannot be undone. Updated clusters cannot be reverted to the previous version.
+This action cannot be undone. Upgraded clusters cannot be reverted to the previous version.
 :::
 
-Clusters can be updated to new versions of Camunda 8 manually or automatically.
+Clusters can be upgraded to new versions of Camunda 8 manually or automatically.
 
-Clusters eligible for updates will show a button on the UI.
+Clusters eligible for upgrades will show a button on the UI.
 
-At this time, updates do not trigger backups, however, manual backups can be initiated through the Console Backups tab.
+At this time, upgrades do not trigger backups, however, manual backups can be initiated through the Console Backups tab.
 
-### Update a cluster manually
+### Upgrade a cluster manually
 
-When an update is available, an **Update** button will appear. This button is not available for clusters enrolled in [automatic updates](/reference/auto-updates.md).
+When an upgrade is available, an **Upgrade** button will appear. This button is not available for clusters enrolled in [automatic upgrades](/reference/auto-updates.md).
 
-### Automated cluster updates
+### Automated cluster upgrades
 
-You can decide if you want to have [automated updates](/reference/auto-updates.md) to new versions of Camunda 8 activated. You can also toggle this feature anytime later in the **Settings** tab of your cluster.
+You can decide if you want to have [automated upgrades](/reference/auto-updates.md) to new versions of Camunda 8 activated. You can also toggle this feature anytime later in the **Settings** tab of your cluster.
 
 ## Resize a cluster
 

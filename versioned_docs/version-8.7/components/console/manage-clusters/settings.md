@@ -27,15 +27,15 @@ You can enable resource-based authorization on a per-cluster basis to control th
 For more information on resource-based authorization, see [resource authorizations](/components/concepts/resource-authorizations.md) and [resource-based authorization](/components/console/manage-organization/manage-users.md#resource-based-authorizations).
 :::
 
-## Automatic cluster updates
+## Automatic cluster upgrades
 
-You can set the cluster to automatically update to newer versions of Camunda 8 when they are released.
+You can set the cluster to automatically upgrade to newer versions of Camunda 8 when they are released.
 
-- Enable this setting to automatically update the cluster when a new patch release is available. During an update, the cluster may be unavailable for a short time. You can still manually update the cluster.
-- Disable this setting if you do not want the cluster to automatically update. You must manually update the cluster.
+- Enable this setting to automatically upgrade the cluster when a new patch release is available. During an upgrade, the cluster may be unavailable for a short time. You can still manually upgrade the cluster.
+- Disable this setting if you do not want the cluster to automatically upgrade. You must manually upgrade the cluster.
 
 :::tip
-For more information on updating clusters, see [update your cluster](/components/console/manage-clusters/manage-cluster.md#update-a-cluster).
+For more information on upgrading clusters, see [upgrade your cluster](/components/console/manage-clusters/manage-cluster.md#update-a-cluster).
 :::
 
 ## Enforce user task restrictions
