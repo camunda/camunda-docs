@@ -26,6 +26,7 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   --ifm-leading: calc(var(--ifm-leading-desktop) * 1rem);
   --ifm-alert-border-radius: 0;
   --ifm-breadcrumb-padding-horizontal: 0rem;
+  --ifm-card-border-radius: 4px;
 }
 
 .markdown {
@@ -66,6 +67,21 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   .theme-doc-version-badge {
     display: none;
   }
+}
+
+@media (max-width: 996px) {
+  .hero-topic {
+    display: none;
+  }
+}
+
+.card {
+  margin-top: 25px;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  transition: all 0.3s ease;
 }
 
 /* Match alert colours to Camunda brand colours */
@@ -290,6 +306,8 @@ a {
   background-color: transparent;
   border: 1px solid var(--ifm-color-primary);
   box-shadow: 0px 8px 16px 4px #78a9ff33;
+  transform: translateY(-5px);
+  transition: all 0.3s ease;
 }
 
 /* Dark mode > Badges */
@@ -462,6 +480,33 @@ body {
 [data-theme="dark"] .try-free:hover {
   background-color: #ffffff;
   color: var(--ifm-color-black);
+  border: 1px solid #171c29;
+}
+
+.button--hero--topic {
+  background-color: #0f62fe;
+  border-color: #0f62fe;
+  color: #fff !important;
+  transition: all 0.3s;
+}
+
+.button--hero--topic:hover {
+  background-color: #0050e6;
+  border-color: #0050e6;
+  color: #fff !important;
+}
+
+[data-theme="dark"] .button--hero--topic {
+  border-color: rgb(255, 255, 255);
+  transition: 0.3s;
+  color: rgb(255, 255, 255);
+  background-color: transparent;
+  border: 1px solid white;
+}
+
+[data-theme="dark"] .button--hero--topic:hover {
+  background-color: #ffffff;
+  color: var(--ifm-color-black) !important;
   border: 1px solid #171c29;
 }
 
