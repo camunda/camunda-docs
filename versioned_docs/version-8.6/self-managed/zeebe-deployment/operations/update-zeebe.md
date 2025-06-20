@@ -15,7 +15,7 @@ Since Zeebe 8.5, updates to a newer version can be rolling or offline. Zeebe 8.4
 Review the [update guide](/self-managed/operational-guides/update-guide/introduction.md) for general update procedures you must follow and to check for known issues relating to the specific update you are planning.
 :::
 
-## Rolling update
+## Rolling upgrade
 
 A **rolling update** ensures the Zeebe cluster stays available by updating brokers and gateways one by one instead of all at once.
 
@@ -31,9 +31,9 @@ The procedure to do a rolling update of Zeebe brokers is the following:
 
 1. Pick the broker with the highest ID that runs the old version.
 2. Shut down the broker.
-3. Update the broker software to the new version.
+3. Upgrade the broker software to the new version.
 4. Start the broker and wait for it to become ready and healthy.
-5. Repeat until all brokers are updated.
+5. Repeat until all brokers are upgraded.
 
 Gateways are updated with the same procedure, updating each replica one by one.
 
@@ -78,7 +78,7 @@ $ curl localhost:8080/api/v1/topology | jq .brokers[].version && kill %1
 8.5.0
 ```
 
-To start the rolling update, update the Helm deployment to use a new version of Zeebe.
+To start the rolling upgrade, upgrade the Helm deployment to use a new version of Zeebe.
 Set `$NEW_ZEEBE_VERSION` to the version you want to update to, for example `8.5.2`.
 Remember to read the [update guide](/self-managed/operational-guides/update-guide/introduction.md) to check for known issues.
 Then, start the rolling update with `helm upgrade`.
@@ -124,7 +124,7 @@ NAME                             READY   UP-TO-DATE   AVAILABLE   AGE
 camunda-platform-zeebe-gateway   2/2     2            2           4h25m
 ```
 
-Then, update the version via Helm:
+Then, upgrade the version via Helm:
 
 ```
 $ helm upgrade camunda-platform camunda/camunda-platform --reuse-values --set zeebe-gateway.image.tag=$NEW_ZEEBE_VERSION
@@ -136,12 +136,12 @@ Wait for the update to complete:
 $ kubectl rollout status -l app.kubernetes.io/component=zeebe-gateway
 ```
 
-At this point, both brokers and gateways are updated.
-Your client applications are ready to be updated as well and can start using features added in the new version.
+At this point, both brokers and gateways are upgraded.
+Your client applications are ready to be upgraded as well and can start using features added in the new version.
 
 ### Troubleshooting
 
-#### Rolling update is not completing
+#### Rolling upgrade is not completing
 
 A rolling update can become stuck due to outside interference such as failing Kubernetes pods.
 
@@ -157,14 +157,14 @@ Because the update is no longer rolling and all brokers are shut down at the sam
 
 #### Failed to install partition
 
-If updated brokers log the error message `Failed to install partition` and do not become healthy, look for more details to understand if this is caused by the rolling update.
+If updated brokers log the error message `Failed to install partition` and do not become healthy, look for more details to understand if this is caused by the rolling upgrade.
 
-If the error is caused by `Cannot upgrade to or from a pre-release version`, Zeebe detected that either the version you started from or the version you updated to is a pre-release version.
+If the error is caused by `Cannot upgrade to or from a pre-release version`, Zeebe detected that either the version you started from or the version you upgraded to is a pre-release version.
 
 This is not permitted because pre-release versions such as alpha releases are considered unstable and do not guarantee compatibility with any other version.
 
 :::note
-If you attempted to update from a minor release to a pre-release or alpha version, it is possible to roll back to the previous version of Zeebe. Note that version rollbacks are not supported in most other instances.
+If you attempt to upgrade from a minor release to a pre-release or alpha version, it is possible to roll back to the previous version of Zeebe. Note that version rollbacks are not supported in most other instances.
 :::
 
 If the log message includes `Snapshot is not compatible with current version`, the rolling update failed and manual recovery is required.
@@ -177,11 +177,11 @@ The exact scenario is further described in the log message and can be one of the
 
 ##### Snapshot is not compatible with current version: `SkippedMinorVersion`
 
-This normally occurs when attempting an update from one minor version to a newer one while skipping minor versions in between. For example, updating from 8.5 to 8.7 directly without first updating to 8.6.
+This normally occurs when attempting an update from one minor version to a newer one while skipping minor versions in between. For example, upgrading from 8.5 to 8.7 directly without first upgrading to 8.6.
 
-This is not supported and Zeebe refuses to run when detecting this. To recover, you may be able to roll back to the previous version and then update to the next minor version first.
+This is not supported and Zeebe refuses to run when detecting this. To recover, you may be able to roll back to the previous version and then upgrade to the next minor version first.
 
-Another much more unlikely cause may be that you updated multiple times before Zeebe brokers could take snapshots.
+Another much more unlikely cause may be that you upgraded multiple times before Zeebe brokers could take snapshots.
 
 For example, if you first update from 8.5 to 8.6 and then immediately to 8.7, the updated brokers running 8.7 may find snapshots taken by 8.5 and refuse to run. You can recover from this manually.
 
@@ -196,17 +196,17 @@ In that case, it is caused by updated brokers sharing snapshots with not yet upd
 This should resolve automatically once the broker is updated.
 :::
 
-If this persists, you can [force the update](#rolling-update-is-not-completing). Alternatively, it is possible to restart Zeebe with the "skipped" minor version. Note that version rollbacks are not supported in most other instances.
+If this persists, you can [force the upgrade](#rolling-update-is-not-completing). Alternatively, it is possible to restart Zeebe with the "skipped" minor version. Note that version rollbacks are not supported in most other instances.
 
-## Offline update
+## Offline upgrade
 
 See the [update guide](/self-managed/operational-guides/update-guide/introduction.md) for specific instructions per Zeebe version.
 
-To update a Zeebe cluster, take the following steps:
+To upgrade a Zeebe cluster, take the following steps:
 
 1. Shut down all Zeebe brokers and other components of the system.
 1. Take a [backup](./backups.md) of your Zeebe brokers and Elasticsearch `data` folder if used.
-1. Update all Zeebe brokers and gateways to the new version.
+1. Upgrade all Zeebe brokers and gateways to the new version.
 1. Restart the system components.
 
 ## Partitions admin endpoint

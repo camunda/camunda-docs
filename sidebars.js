@@ -1184,7 +1184,7 @@ module.exports = {
     },
     {
       type: "category",
-      label: "Update",
+      label: "Upgrade",
       link: {
         type: "doc",
         id: "self-managed/update/index",
@@ -1193,7 +1193,7 @@ module.exports = {
         "self-managed/setup/upgrade",
         {
           type: "category",
-          label: "Update by version",
+          label: "Upgrade by version",
           link: {
             type: "doc",
             id: "self-managed/operational-guides/update-guide/introduction",

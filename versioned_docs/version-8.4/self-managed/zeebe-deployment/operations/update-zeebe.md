@@ -8,11 +8,11 @@ description: "This section describes how to update Zeebe to a new version."
 
 See the [update guide](/self-managed/operational-guides/update-guide/introduction.md) for specific instructions per Zeebe version.
 
-To update a Zeebe cluster, take the following steps:
+To upgrade a Zeebe cluster, take the following steps:
 
 1. Shut down all Zeebe brokers and other components of the system.
 1. Take a [backup](./backups.md) of your Zeebe brokers and Elasticsearch `data` folder if used.
-1. Update all Zeebe brokers and gateways to the new version.
+1. Upgrade all Zeebe brokers and gateways to the new version.
 1. Restart the system components.
 
 ## Partitions admin endpoint
