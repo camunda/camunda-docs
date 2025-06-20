@@ -43,12 +43,12 @@ This guide considers all public endpoints existing in the component REST APIs an
 - Unified search request structure.
   - Attributes `filter`, `page`, and `sort` on root level.
   - Endpoint-specific filter attributes in the filter object, not at the root level.
-  - Pagination information in the `page` object. For example, the attributes `from`, `limit`, `searchBefore`, and `searchAfter`.
+  - Pagination information in the `page` object. For example, the attributes `from`, `limit`, `before`, and `after`.
   - Sorting configuration in sort object array, each object containing the field name and order (descending or ascending).
 - Unified search response structure.
   - Attributes `items` and `page` on root level.
   - List of endpoint-specific response items in `items` attribute.
-  - Page information in `page` attribute, for example the attributes `totalItems`, `firstSortValues`, and `lastSortValues` to use in `searchBefore` and `searchAfter` in follow-up requests.
+  - Page information in `page` attribute, for example the attributes `totalItems`, `startCursor`, and `endCursor` to use in `before` and `after` in follow-up requests.
 
 </TabItem>
 
@@ -164,7 +164,7 @@ The following conventions apply to all attributes:
 
 - Request structure changes as outlined in [general changes][].
   - The `pageSize` is now the `limit` in the `page` object.
-  - The `searchAfter` and `searchBefore` are in the `page` object.
+  - The `searchAfter` and `searchBefore` are in the `page` object as `after` and `before`.
   - The `searchAfterOrEqual` and `searchBeforeOrEqual` options do not exist.
 - Renamed attributes
   - `taskDefinitionId` - Use `elementId` as this refers to the user-provided identifier of the BPMN element that created the user task.
@@ -358,7 +358,7 @@ The following conventions apply to all attributes:
 <TabItem value='input-adjustments'>
 
 - Request structure changes as outlined in [general changes][].
-  - `searchAfter` has been moved under `page`.
+  - `searchAfter` is now the `after` in the `page` object.
   - `size` is now the `limit` in the `page` object.
 - Renamed attributes in the `filter` object
   - `id` - Use `decisionDefinitionKey` instead.
@@ -428,7 +428,7 @@ The following conventions apply to all attributes:
 <TabItem value='input-adjustments'>
 
 - Request structure changes as outlined in [general changes][].
-  - `searchAfter` has been moved under `page`.
+  - `searchAfter` is now the `after` in the `page` object.
   - `size` is now the `limit` in the `page` object.
 - Renamed attributes in the `filter` object
   - `id` - Use `decisionInstanceId` instead.
@@ -520,7 +520,7 @@ The following conventions apply to all attributes:
 <TabItem value='input-adjustments'>
 
 - Request structure changes as outlined in [general changes][].
-  - `searchAfter` has been moved under `page`.
+  - `searchAfter` is now the `after` in the `page` object.
   - `size` is now the `limit` in the `page` object.
 - Renamed attributes in the `filter` object
   - `id` - Use `decisionRequirementsKey` instead.
@@ -609,7 +609,7 @@ The following conventions apply to all attributes:
 <TabItem value='input-adjustments'>
 
 - Response structure changes as outlined in [general changes][].
-  - `searchAfter` has been moved under `page`.
+  - `searchAfter` is now the `after` in the `page` object.
   - `size` is now the `limit` in the `page` object.
 - Renamed attributes in the `filter` object
   - `key` of type `int64` - Use `variableKey` of type `string`.
@@ -685,7 +685,7 @@ The following conventions apply to all attributes:
 <TabItem value='input-adjustments'>
 
 - Request structure changes as outlined in [general changes][].
-  - `searchAfter` has been moved under `page`.
+  - `searchAfter` is now the `after` in the `page` object.
   - `size` is now the `limit` in the `page` object.
 - Renamed attributes in the `filter` object
   - `key` of type `int64` - Use `processDefinitionKey` of type `string` instead.
@@ -772,7 +772,7 @@ The following conventions apply to all attributes:
 <TabItem value='input-adjustments'>
 
 - Request structure changes as outlined in [general changes][].
-  - `searchAfter` has been moved under `page`.
+  - `searchAfter` is now the `after` in the `page` object.
   - `size` is now the `limit` in the `page` object.
 - Renamed attributes in the `filter` object
   - `key` of type `int64` - Use `processInstanceKey` of type `string` instead.
@@ -915,7 +915,7 @@ The following conventions apply to all attributes:
 <TabItem value='input-adjustments'>
 
 - Request structure changes as outlined in [general changes][].
-  - `searchAfter` has been moved under `page`.
+  - `searchAfter` is now the `after` in the `page` object.
   - `size` is now the `limit` in the `page` object.
 - Renamed attributes in the `filter` object
   - `key` of type `int64` - Use `elementInstanceKey` of type `string` instead.
@@ -992,7 +992,7 @@ The following conventions apply to all attributes:
 <TabItem value='input-adjustments'>
 
 - Request structure changes as outlined in [general changes][].
-  - `searchAfter` has been moved under `page`.
+  - `searchAfter` is now the `after` in the `page` object.
   - `size` is now the `limit` in the `page` object.
 - Renamed attributes in the `filter` object
   - `key` of type `int64` - Use `incidentKey` of type `string` instead.
