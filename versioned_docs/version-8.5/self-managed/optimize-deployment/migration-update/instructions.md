@@ -1,19 +1,19 @@
 ---
 id: instructions
 title: "Instructions"
-description: "Find out how to update to a new version of Optimize without losing your reports and dashboards."
+description: "Find out how to upgrade to a new version of Optimize without losing your reports and dashboards."
 ---
 
 Optimize releases two new minor versions a year. These documents guide you through the process of migrating your Optimize from one Optimize minor version to the other.
 
-If you want to update Optimize by several versions, you cannot do that at once, but you need to perform the updates in sequential order. For instance, if you want to update from 2.5 to 3.0, you need to update first from 2.5 to 2.6, then from 2.6 to 2.7, and finally from 2.7 to 3.0. The following table shows the recommended update paths to the latest version:
+If you want to upgrade Optimize by several versions, you cannot do that at once, but you need to perform the upgrades in sequential order. For instance, if you want to update from 2.5 to 3.0, you need to upgrade first from 2.5 to 2.6, then from 2.6 to 2.7, and finally from 2.7 to 3.0. The following table shows the recommended upgrade paths to the latest version:
 
-| Update from      | Recommended update path to 8.5/3.13                               |
-| ---------------- | ----------------------------------------------------------------- |
-| 8.5/3.13         | You are on the latest version.                                    |
-| 3.0 - 8.4/3.12.x | Rolling update to 8.5/3.13                                        |
-| 2.0 - 2.7        | 1. Rolling update to 2.7 <br /> 2. Rolling update from 2.7 to 3.0 |
-| 1.0 - 1.5        | No update possible. Use the latest version directly.              |
+| Upgrade from     | Recommended upgrade path to 8.5/3.13                               |
+| ---------------- | ------------------------------------------------------------------ |
+| 8.5/3.13         | You are on the latest version.                                     |
+| 3.0 - 8.4/3.12.x | Rolling upgrade to 8.5/3.13                                        |
+| 2.0 - 2.7        | 1. Rolling upgrade to 2.7 <br /> 2. Rolling update from 2.7 to 3.0 |
+| 1.0 - 1.5        | No update possible. Use the latest version directly.               |
 
 ## Migration instructions
 
@@ -37,7 +37,7 @@ You can migrate from one version of Optimize to the next one without losing data
 - Start the new Optimize version, as described in the [installation guide](../install-and-start.md).
 - It is very likely that you configured the logging of Optimize to your needs and therefore you adjusted the `environment-logback.xml` in the `config` folder of the root directory of your **old** Optimize. You can now use the backed up logging configuration and put it in the `config` folder of the **new** Optimize to keep your logging adjustments. (Optional)
 
-### 2. Rolling update to the new Elasticsearch version
+### 2. Rolling upgrade to the new Elasticsearch version
 
 You only need to execute this step if you want to update the Elasticsearch (ES) version during the update. In case the ES version stays the same, you can skip this step.
 
@@ -120,9 +120,9 @@ spec:
        # image: registry.camunda.cloud/optimize-ee/optimize:7-latest  # For Camunda 7
 ```
 
-### 4. Resume a canceled update
+### 4. Resume a canceled upgrade
 
-From Optimize 3.3.0 onwards updates are resumable. So if the update process got interrupted either manually or due to an error you don't have to restore the Elasticsearch backup and start over but can simply rerun the update. On resume previously completed update steps will be detected and logged as being skipped. In the following log example **Step 1** was previously completed and is thus skipped:
+From Optimize 3.3.0 onwards updates are resumable. So if the upgrade process got interrupted either manually or due to an error you don't have to restore the Elasticsearch backup and start over but can simply rerun the upgrade. On resume previously completed upgrade steps will be detected and logged as being skipped. In the following log example **Step 1** was previously completed and is thus skipped:
 
 ```
 ./upgrade/upgrade.sh

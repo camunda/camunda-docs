@@ -30,6 +30,6 @@ The most common cause for this issue is that the engine endpoint Optimize uses i
 
 When Optimize is running with its language set to one with characters that it can't recognize, such as Turkish, you may observe logged issues and unusable elements in the UI. We recommend running Optimize on a server with its language set to English.
 
-## Update issues
+## Upgrade issues
 
-Always check the [migration and update instructions](./../migration-update/instructions.md) for the versions you are migrating, often this section already documents the problem you are experiencing along with the solution.
+Always check the [migration and upgrade instructions](./../migration-update/instructions.md) for the versions you are migrating, often this section already documents the problem you are experiencing along with the solution.

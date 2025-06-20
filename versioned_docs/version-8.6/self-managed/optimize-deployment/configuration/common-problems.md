@@ -26,9 +26,9 @@ This often occurs when Elasticsearch is running out of disk space. If this is th
 
 When Optimize is running with its language set to one with characters that it can't recognize, such as Turkish, you may observe logged issues and unusable elements in the UI. We recommend running Optimize on a server with its language set to English.
 
-## Update issues
+## Upgrade issues
 
-Always check the migration and update instructions for the version you are migrating from:
+Always check the migration and upgrade instructions for the version you are migrating from:
 
 - For Camunda 8, refer to the [Camunda 8 migration guide](./../migration-update/camunda-8/instructions.md).
 

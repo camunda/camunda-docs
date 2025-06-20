@@ -1,7 +1,7 @@
 ---
 id: instructions
 title: "Instructions"
-description: "Find out how to update to a new version of Optimize without losing your reports and dashboards."
+description: "Find out how to upgrade to a new version of Optimize without losing your reports and dashboards."
 ---
 
 These documents guide you through the process of migrating your Optimize from one Optimize minor version to the other.
@@ -33,7 +33,7 @@ All the steps below are applicable to ElasticSearch and OpenSearch installations
 - Start the new Optimize version, as described in the [installation guide](../../install-and-start.md).
 - It is very likely that you configured the logging of Optimize to your needs and therefore you adjusted the `environment-logback.xml` in the `config` folder of the root directory of your **old** Optimize. You can now use the backed up logging configuration and put it in the `config` folder of the **new** Optimize to keep your logging adjustments. (Optional)
 
-### 2. Rolling update to the new database version
+### 2. Rolling upgrade to the new database version
 
 You only need to execute this step if you want to update the Elasticsearch (ES) or OpenSearch (OS) version during the update. In case the ES/OS version stays the same, you can skip this step.
 
@@ -71,9 +71,9 @@ spec:
        image: registry.camunda.cloud/optimize-ee/optimize:8-latest
 ```
 
-### 4. Resume a canceled update
+### 4. Resume a canceled upgrade
 
-Updates are resumable. So if the update process got interrupted either manually or due to an error you don't have to restore the database backup and start over but can simply rerun the update. On resume previously completed update steps will be detected and logged as being skipped. In the following log example **Step 1** was previously completed and is thus skipped:
+Upgrades are resumable. So if the upgrade process got interrupted either manually or due to an error you don't have to restore the database backup and start over but can simply rerun the upgrade. On resume previously completed upgrade steps will be detected and logged as being skipped. In the following log example **Step 1** was previously completed and is thus skipped:
 
 ```
 ./upgrade/upgrade.sh
