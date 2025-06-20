@@ -226,6 +226,21 @@ The **GitHub connector** currently supports the following operations.
 - **Path:** The path of the content within the repository.
 - **Ref:** The name of the commit/branch/tag. Defaults to the repository’s default branch.
 
+#### Create or update file contents
+
+- **GitHub API:** [Create or update file contents](https://docs.github.com/en/rest/repos/contents?apiVersion=2022-11-28#create-or-update-file-contents).
+- **Owner:** The account owner of the repository. The name is not case-sensitive.
+- **Repo:** The name of the repository. The name is not case-sensitive.
+- **Path:** The path of the content within the repository.
+- **Branch:** The name of the target branch for the new commit. Defaults to the repository’s default branch.
+- **Commit message**: The commit message for the file change.
+- **Content**: A string or [document reference](components/document-handling/getting-started.md)
+  If your content is already base64 encoded, please check the **Content is already base64 encoded** checkbox.
+- **SHA**: The blob SHA of the file being replaced. If you are creating a new file, this parameter is not required.
+  Use [Get repository content](#get-repository-content) to retrieve the SHA of an existing file.
+- **Use custom author/committer**: If checked, you can specify custom author and committer information.
+  Otherwise, the author and committer will be the owner of the PAT.
+
 ### Actions
 
 #### Create workflow dispatch event
