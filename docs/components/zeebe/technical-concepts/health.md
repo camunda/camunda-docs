@@ -104,7 +104,7 @@ A partition is considered healthy if:
 - It has exactly one healthy leader in the cluster. A healthy leader is one who can:
   - Replicate to [a quorum of followers](./clustering.md#raft-consensus-and-replication-protocol).
   - [Process data](./internal-processing.md).
-- It has exactly `floor(N/2)` healthy followers in the cluster. With this amount of followers and the leader, data can be
+- It has at least `floor(N/2)` healthy followers in the cluster. With this amount of followers and the leader, data can be
   [committed](./clustering.md#commit).
 
 Anything short of this represents an unhealthy partition:
