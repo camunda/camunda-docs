@@ -15,12 +15,12 @@ The migration tooling is currently under development, with an initial release pl
 
 Camunda provides the following migration tools:
 
-| Migration tool                                                    | Description                                                                                                                                                                                         |
-| :---------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **[Migration Analyzer & Diagram Converter](#migration-analyzer)** | Gain a first understanding of migration tasks. Available for local installation (Java or Docker) or [hosted as a free SaaS offering](https://migration-analyzer.consulting-sandbox.camunda.cloud/). |
-| **[Data Migrator](#data-migrator)**                               | Copies active Camunda 7 runtime instances and existing audit trail data (history) to Camunda 8.                                                                                                     |
-| **[Code Converter](./code-conversion.md)**                        | Supported by a mixture of diagram conversion tools, code conversion patterns, and automatable refactoring recipes.                                                                                  |
-| **[Camunda 7 Adapter](#camunda-7-adapter)**                       | Run existing Camunda 7 delegation code directly in a Camunda 8 environment.                                                                                                                         |
+| Migration tool                                                                       | Description                                                                                                                                                                                         |
+| :----------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **[Migration Analyzer & Diagram Converter](#migration-analyzer--diagram-converter)** | Gain a first understanding of migration tasks. Available for local installation (Java or Docker) or [hosted as a free SaaS offering](https://migration-analyzer.consulting-sandbox.camunda.cloud/). |
+| **[Data Migrator](#data-migrator)**                                                  | Copies active Camunda 7 runtime instances to Camunda 8. Planned to be extended to also copy existing audit trail data (history).                                                                    |
+| **[Code Converter](./code-conversion.md)**                                           | Supported by a mixture of diagram conversion tools, code conversion patterns, and automatable refactoring recipes.                                                                                  |
+| **[Camunda 7 Adapter](#camunda-7-adapter)**                                          | Run existing Camunda 7 delegation code directly in a Camunda 8 environment.                                                                                                                         |
 
 ## Migration Analyzer & Diagram Converter
 
@@ -205,10 +205,6 @@ You can also customize or extend the transformer logic as needed.
 
 The data migrator can copy runtime and audit data from Camunda 7 to Camunda 8.
 
-:::info
-Camunda is developing the Data Migrator with a first release planned for **Camunda 8.8 (October 2025)**. Iterative improvements will follow. You can check the current state and track progress in the [Github repository https://github.com/camunda/c7-data-migrator/tree/main](https://github.com/camunda/c7-data-migrator/tree/main).
-:::
-
 ![data-migration](../img/data-migration.png)
 
 It provides two important modes that can be applied separately:
@@ -220,6 +216,10 @@ It provides two important modes that can be applied separately:
 
 Migrate currently running process instances. Running means that these process instances in Camunda 7 are not yet ended and currently wait in some [wait-state](https://docs.camunda.org/manual/latest/user-guide/process-engine/transactions-in-processes/#wait-states). This state is persisted in the database and a corresponding data entry needs to be created in Camunda 8, so that the process instance can continue from that state in the new solution.
 
+:::info
+Camunda is developing the Data Migrator with a first release of the runtime instance migration mode planned for **Camunda 8.8 (October 2025)**. You can already use existing alpha releases. Iterative improvements will follow. You can check the current state and track progress in the [Github repository https://github.com/camunda/c7-data-migrator/tree/main](https://github.com/camunda/c7-data-migrator/tree/main).
+:::
+
 **Requirements and limitations:**
 
 <!-- TODO this is an important deep link - we need to create a headline here -->
@@ -228,11 +228,17 @@ Migrate currently running process instances. Running means that these process in
 - The Runtime Data Migrator needs to access Camunda 8 APIs (which means you can also use this tool when you run on SaaS).
 - Multiple Instance is not supported, so process instances that are currently waiting in a multiple instance task cannot be migrated and need to be moved out of that state in Camunda 7 beforehand.
 
+<!-- TODO: Mention the Listener on Start Event we need in the C8 process? -->
+
 If you need to adjust your process models before migration, you can use [process version migration](https://docs.camunda.org/manual/7.22/user-guide/process-engine/process-instance-migration/) in the Camunda 7 environment to migrate process instances to versions that are migratable to Camunda 8. An interesting strategy can be to define dedicated migration states you want your process instances to pile up in. Another common strategy is to use [process instance modification](https://docs.camunda.org/manual/7.22/user-guide/process-engine/process-instance-modification/) in the Camunda 7 environment to move out of states that are not migratable (for example, process instances within a multiple instance task).
 
 <!-- TODO pile up: mention the job pause feature in Camunda 7 -->
 
 ### History migration mode (copying audit log data)
+
+:::info
+The history migration mode of the Data Migrator will **not be release before Camunda 8.9 (April 2026)**. You can check the current state and track progress in the [Github repository https://github.com/camunda/c7-data-migrator/tree/main](https://github.com/camunda/c7-data-migrator/tree/main).
+:::
 
 Process instances left traces, referred to as [History in Camunda 7](https://docs.camunda.org/manual/latest/user-guide/process-engine/history/). These are audit logs of when a process instance was started, what path it took, and so on.
 
