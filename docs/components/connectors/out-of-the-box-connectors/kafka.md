@@ -110,7 +110,7 @@ Select **Schema registry** to send messages with a schema registered in a schema
 
 :::info
 
-Currently, the Kafka connector supports only Confluent Schema Registry. Other schema registry implementations are not supported at this time.
+Currently, the Kafka connector supports only [Confluent Schema Registry](https://docs.confluent.io/platform/current/schema-registry/index.html). Other schema registry implementations are not supported at this time.
 
 :::
 
@@ -333,7 +333,7 @@ Select **Schema registry** to send messages with a schema registered in a schema
 
 :::info
 
-Currently, the Kafka connector supports only Confluent Schema Registry. Other schema registry implementations are not supported at this time.
+Currently, the Kafka connector supports only [Confluent Schema Registry](https://docs.confluent.io/platform/current/schema-registry/index.html). Other schema registry implementations are not supported at this time.
 
 The schema configuration must be provided only for the Outbound Connector. There is no requirement to provide a schema when using Inbound Connectors.
 
