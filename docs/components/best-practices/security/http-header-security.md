@@ -1,15 +1,3 @@
----
-title: HTTP Security Headers
-tags:
-  - Reporting
-  - HTTP
-  - Headers
-  - OWASP
-  - Webapps
-  - Web applications
-description: "Configure HTTP security headers for you Camunda instance."
----
-
 # HTTP Security Headers Configuration
 
 The HTTP Header Security mechanism allows you to add security-related response headers which enable browser-side security mechanisms.
@@ -32,8 +20,8 @@ Controls browser and proxy caching behavior to prevent sensitive content from be
 
 **Configuration:**
 
-- **`camunda.security.securityHeaders.cacheConfig.enabled`**
-- **Environment Variable:** `CAMUNDA_SECURITY_SECURITYHEADERS_CACHECONFIG_ENABLED`
+- **`camunda.security.http-headers.cache-control.enabled`**
+- **Environment Variable:** `CAMUNDA_SECURITY_HTTP_HEADERS_CACHE_CONTROL_ENABLED`
 - **Type:** boolean
 - **Default:** `true`
 - **Description:** Controls whether cache prevention headers are sent
@@ -49,24 +37,24 @@ Prevents XSS and other content injection attacks by controlling which resources 
 
 **Configuration:**
 
-- **`camunda.security.securityHeaders.contentSecurityPolicyConfig.enabled`**
-- **Environment Variable:** `CAMUNDA_SECURITY_SECURITYHEADERS_CONTENTSECURITYPOLICYCONFIG_ENABLED`
+- **`camunda.security.http-headers.content-security-policy.enabled`**
+- **Environment Variable:** `CAMUNDA_SECURITY_HTTP_HEADERS_CONTENT_SECURITY_POLICY_ENABLED`
 - **Type:** boolean
 - **Default:** `true`
 - **Description:** Controls whether CSP headers are sent
 
 ---
 
-- **`camunda.security.securityHeaders.contentSecurityPolicyConfig.policyDirectives`**
-- **Environment Variable:** `CAMUNDA_SECURITY_SECURITYHEADERS_CONTENTSECURITYPOLICYCONFIG_POLICYDIRECTIVES`
+- **`camunda.security.http-headers.content-security-policy.policy-directives`**
+- **Environment Variable:** `CAMUNDA_SECURITY_HTTP_HEADERS_CONTENT_SECURITY_POLICY_POLICY_DIRECTIVES`
 - **Type:** string
 - **Default:** Platform-specific
 - **Description:** Custom policy directives. When not defined, appropriate defaults are used
 
 ---
 
-- **`camunda.security.securityHeaders.contentSecurityPolicyConfig.reportOnly`**
-- **Environment Variable:** `CAMUNDA_SECURITY_SECURITYHEADERS_CONTENTSECURITYPOLICYCONFIG_REPORTONLY`
+- **`camunda.security.http-headers.content-security-policy.report-only`**
+- **Environment Variable:** `CAMUNDA_SECURITY_HTTP_HEADERS_CONTENT_SECURITY_POLICY_REPORT_ONLY`
 - **Type:** boolean
 - **Default:** `false`
 - **Description:** When true, violations are reported but not enforced
@@ -81,8 +69,8 @@ Prevents MIME type sniffing attacks.
 
 **Configuration:**
 
-- **`camunda.security.securityHeaders.contentTypeOptionsConfig.enabled`**
-- **Environment Variable:** `CAMUNDA_SECURITY_SECURITYHEADERS_CONTENTTYPEOPTIONSCONFIG_ENABLED`
+- **`camunda.security.http-headers.content-type-options.enabled`**
+- **Environment Variable:** `CAMUNDA_SECURITY_HTTP_HEADERS_CONTENT_TYPE_OPTIONS_ENABLED`
 - **Type:** boolean
 - **Default:** `true`
 - **Description:** Controls whether the header is sent
@@ -97,8 +85,8 @@ Controls whether the document can load cross-origin resources that don't explici
 
 **Configuration:**
 
-- **`camunda.security.securityHeaders.crossOriginEmbedderPolicyConfig.crossOriginEmbedderPolicy`**
-- **Environment Variable:** `CAMUNDA_SECURITY_SECURITYHEADERS_CROSSORIGINEMBEDDERPOLICYCONFIG_CROSSORIGINEMBEDDERPOLICY`
+- **`camunda.security.http-headers.cross-origin-embedder-policy.value`**
+- **Environment Variable:** `CAMUNDA_SECURITY_HTTP_HEADERS_CROSS_ORIGIN_EMBEDDER_POLICY_VALUE`
 - **Type:** enum
 - **Default:** `REQUIRE_CORP`
 - **Description:** Policy value: `REQUIRE_CORP` or `UNSAFE_NONE`
@@ -113,8 +101,8 @@ Controls window isolation to prevent cross-origin access.
 
 **Configuration:**
 
-- **`camunda.security.securityHeaders.crossOriginOpenerPolicyConfig.crossOriginOpenerPolicy`**
-- **Environment Variable:** `CAMUNDA_SECURITY_SECURITYHEADERS_CROSSORIGINOPENERPOLICYCONFIG_CROSSORIGINOPENERPOLICY`
+- **`camunda.security.http-headers.cross-origin-opener-policy.value`**
+- **Environment Variable:** `CAMUNDA_SECURITY_HTTP_HEADERS_CROSS_ORIGIN_OPENER_POLICY_VALUE`
 - **Type:** enum
 - **Default:** `SAME_ORIGIN_ALLOW_POPUPS`
 - **Description:** Policy value: `UNSAFE_NONE`, `SAME_ORIGIN_ALLOW_POPUPS`, or `SAME_ORIGIN`
@@ -129,8 +117,8 @@ Declares that resources should not be loaded by other origins.
 
 **Configuration:**
 
-- **`camunda.security.securityHeaders.crossOriginResourcePolicyConfig.crossOriginResourcePolicy`**
-- **Environment Variable:** `CAMUNDA_SECURITY_SECURITYHEADERS_CROSSORIGINRESOURCEPOLICYCONFIG_CROSSORIGINRESOURCEPOLICY`
+- **`camunda.security.http-headers.cross-origin-resource-policy.value`**
+- **Environment Variable:** `CAMUNDA_SECURITY_HTTP_HEADERS_CROSS_ORIGIN_RESOURCE_POLICY_VALUE`
 - **Type:** enum
 - **Default:** `SAME_ORIGIN`
 - **Description:** Policy value: `SAME_ORIGIN`, `SAME_SITE`, or `CROSS_ORIGIN`
@@ -145,16 +133,16 @@ Prevents clickjacking attacks by controlling framing.
 
 **Configuration:**
 
-- **`camunda.security.securityHeaders.frameOptionsConfig.enabled`**
-- **Environment Variable:** `CAMUNDA_SECURITY_SECURITYHEADERS_FRAMEOPTIONSCONFIG_ENABLED`
+- **`camunda.security.http-headers.frame-options.enabled`**
+- **Environment Variable:** `CAMUNDA_SECURITY_HTTP_HEADERS_FRAME_OPTIONS_ENABLED`
 - **Type:** boolean
 - **Default:** `true`
 - **Description:** Controls whether the header is sent
 
 ---
 
-- **`camunda.security.securityHeaders.frameOptionsConfig.mode`**
-- **Environment Variable:** `CAMUNDA_SECURITY_SECURITYHEADERS_FRAMEOPTIONSCONFIG_MODE`
+- **`camunda.security.http-headers.frame-options.mode`**
+- **Environment Variable:** `CAMUNDA_SECURITY_HTTP_HEADERS_FRAME_OPTIONS_MODE`
 - **Type:** enum
 - **Default:** `SAMEORIGIN`
 - **Description:** Framing policy: `DENY` or `SAMEORIGIN`
@@ -169,32 +157,32 @@ Enforces HTTPS connections to prevent protocol downgrade attacks.
 
 **Configuration:**
 
-- **`camunda.security.securityHeaders.hstsConfig.enabled`**
-- **Environment Variable:** `CAMUNDA_SECURITY_SECURITYHEADERS_HSTSCONFIG_ENABLED`
+- **`camunda.security.http-headers.hsts.enabled`**
+- **Environment Variable:** `CAMUNDA_SECURITY_HTTP_HEADERS_HSTS_ENABLED`
 - **Type:** boolean
 - **Default:** `true`
 - **Description:** Controls whether the header is sent
 
 ---
 
-- **`camunda.security.securityHeaders.hstsConfig.maxAgeInSeconds`**
-- **Environment Variable:** `CAMUNDA_SECURITY_SECURITYHEADERS_HSTSCONFIG_MAXAGEINSECONDS`
+- **`camunda.security.http-headers.hsts.max-age-in-seconds`**
+- **Environment Variable:** `CAMUNDA_SECURITY_HTTP_HEADERS_HSTS_MAX_AGE_IN_SECONDS`
 - **Type:** long
 - **Default:** `31536000` (1 year)
 - **Description:** How long browsers remember to force HTTPS
 
 ---
 
-- **`camunda.security.securityHeaders.hstsConfig.includeSubDomains`**
-- **Environment Variable:** `CAMUNDA_SECURITY_SECURITYHEADERS_HSTSCONFIG_INCLUDESUBDOMAINS`
+- **`camunda.security.http-headers.hsts.include-subdomains`**
+- **Environment Variable:** `CAMUNDA_SECURITY_HTTP_HEADERS_HSTS_INCLUDE_SUBDOMAINS`
 - **Type:** boolean
 - **Default:** `false`
 - **Description:** Applies HSTS to all subdomains
 
 ---
 
-- **`camunda.security.securityHeaders.hstsConfig.preload`**
-- **Environment Variable:** `CAMUNDA_SECURITY_SECURITYHEADERS_HSTSCONFIG_PRELOAD`
+- **`camunda.security.http-headers.hsts.preload`**
+- **Environment Variable:** `CAMUNDA_SECURITY_HTTP_HEADERS_HSTS_PRELOAD`
 - **Type:** boolean
 - **Default:** `false`
 - **Description:** Indicates eligibility for browser preload lists
@@ -204,7 +192,7 @@ Enforces HTTPS connections to prevent protocol downgrade attacks.
 **Important Notes:**
 
 - HSTS headers are only sent over HTTPS connections
-- Enabling `includeSubDomains` affects ALL subdomains - ensure they support HTTPS
+- Enabling `include-subdomains` affects ALL subdomains - ensure they support HTTPS
 - Preload list inclusion is practically permanent - removal can take months
 
 ### Permissions-Policy
@@ -217,8 +205,8 @@ Controls access to browser features and APIs.
 
 **Configuration:**
 
-- **`camunda.security.securityHeaders.permissionsPolicyConfig.policy`**
-- **Environment Variable:** `CAMUNDA_SECURITY_SECURITYHEADERS_PERMISSIONSPOLICYCONFIG_POLICY`
+- **`camunda.security.http-headers.permissions-policy.value`**
+- **Environment Variable:** `CAMUNDA_SECURITY_HTTP_HEADERS_PERMISSIONS_POLICY_VALUE`
 - **Type:** string
 - **Default:** not set
 - **Description:** Policy directives (e.g., `"camera=() microphone=() geolocation=(self)"`)
@@ -233,8 +221,8 @@ Controls how much referrer information is shared when navigating to other pages.
 
 **Configuration:**
 
-- **`camunda.security.securityHeaders.referrerPolicyConfig.referrerPolicy`**
-- **Environment Variable:** `CAMUNDA_SECURITY_SECURITYHEADERS_REFERRERPOLICYCONFIG_REFERRERPOLICY`
+- **`camunda.security.http-headers.referrer-policy.value`**
+- **Environment Variable:** `CAMUNDA_SECURITY_HTTP_HEADERS_REFERRER_POLICY_VALUE`
 - **Type:** enum
 - **Default:** `STRICT_ORIGIN_WHEN_CROSS_ORIGIN`
 - **Description:** Policy controlling referrer information
@@ -255,15 +243,14 @@ Controls how much referrer information is shared when navigating to other pages.
 ### Using Properties File
 
 ```properties
-# Enable strict security headers
-camunda.security.securityHeaders.contentSecurityPolicy.policyDirectives=default-src 'self'; script-src 'self' 'unsafe-inline';
+# Disable specific security headers
+camunda.security.http-headers.cache-control.enabled=false
 ```
 
 ### Using Environment Variables
 
 ```bash
-# Enable strict security headers
-export CAMUNDA_SECURITY_SECURITYHEADERS_CONTENTSECURITYPOLICY_POLICYDIRECTIVES="default-src 'self'; script-src 'self' 'unsafe-inline';"
+export CAMUNDA_SECURITY_HTTP_HEADERS_CACHE_CONTROL_ENABLED=false
 ```
 
 ## References
