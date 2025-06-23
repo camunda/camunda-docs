@@ -76,12 +76,13 @@ module.exports = {
         },
         {
           type: "category",
-          label: "Processes",
+          label: "Process orchestration",
           link: {
             type: "doc",
-            id: "components/concepts/processes",
+            id: "components/concepts/dummy-process",
           },
           items: [
+            "components/concepts/processes",
             "components/concepts/process-applications",
             "components/concepts/job-workers",
             "components/concepts/execution-listeners",
