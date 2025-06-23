@@ -7,7 +7,7 @@ const DockerComposeBaseURL =
 const getVersion = () => {
   const docsVersion = useActiveVersion();
   if (docsVersion.label == "Next") return "alpha";
-  if (docsVersion.label == "8.8 (unreleased)") return "alpha";
+  if (docsVersion.label == "8.8 (unreleased)") return "8.8";
   return docsVersion.label;
 };
 
