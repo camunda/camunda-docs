@@ -166,7 +166,7 @@ All resources required for purging need to be closed afterwards to avoid memory 
 The exporter interface supports record filtering through the [`Context#RecordFilter`](https://github.com/camunda/camunda/blob/5e554728eaf1122962fe9833dc9e91ff1fb5a087/zeebe/exporter-api/src/main/java/io/camunda/zeebe/exporter/api/context/Context.java#L67) interface.
 
 - This interface provides methods to filter records based on record type, value type, and intent.
-- Valid record types and value types can be found in the [protocol definition](https://github.com/camunda/camunda/blob/stable/8.7/zeebe/protocol/src/main/resources/protocol.xml), while intents are listed in the [Intent enum class](https://github.com/camunda/camunda/blob/stable/8.7/zeebe/protocol/src/main/java/io/camunda/zeebe/protocol/record/intent/Intent.java).
+- Valid record types and value types can be found in the [protocol definition](https://github.com/camunda/camunda/blob/stable/8.8/zeebe/protocol/src/main/resources/protocol.xml), while intents are listed in the [Intent enum class](https://github.com/camunda/camunda/blob/stable/8.8/zeebe/protocol/src/main/java/io/camunda/zeebe/protocol/record/intent/Intent.java).
 
 For example, you can implement a custom exporter that only exports records with:
 
