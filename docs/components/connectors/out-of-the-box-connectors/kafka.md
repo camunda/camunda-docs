@@ -108,6 +108,12 @@ Select **Schema registry** to send messages with a schema registered in a schema
   - The **schema** itself (that defines the message structure) in the **Message** section.
   - The **credentials** for the schema registry (if required). Refer to the [Schema Registry documentation](https://docs.confluent.io/platform/current/schema-registry/sr-client-configs.html#basic-auth-credentials-source) for more information.
 
+:::info
+
+Currently, the Kafka connector supports only Confluent Schema Registry. Other schema registry implementations are not supported at this time.
+
+:::
+
 ### Example Avro schema and data
 
 The following is an example Avro schema and data:
@@ -302,7 +308,38 @@ Additionally, to learn more about supported producer configurations, see the [of
 
 :::
 
-#### Example Avro schema and data
+### Schema strategy
+
+#### No schema
+
+Select **No schema** to send messages without a schema. This option is suitable for simple messages that do not require a schema.
+
+#### Inline schema
+
+Select **Inline schema** to send messages with an **Avro schema**.
+
+- This option is suitable for messages that require a schema and that are not (or do not need to be) registered in a schema registry.
+- Enter the Avro schema that defines the message structure into the **Schema** field that appears in the **Message** section.
+
+#### Schema registry
+
+Select **Schema registry** to send messages with a schema registered in a schema registry.
+
+- This option is suitable for messages that require a schema and that are registered in a [schema registry](https://docs.confluent.io/platform/current/schema-registry/index.html).
+- You must provide:
+  - The **schema registry URL** in the **Kafka** section.
+  - The **schema** itself (that defines the message structure) in the **Message** section.
+  - The **credentials** for the schema registry (if required). Refer to the [Schema Registry documentation](https://docs.confluent.io/platform/current/schema-registry/sr-client-configs.html#basic-auth-credentials-source) for more information.
+
+:::info
+
+Currently, the Kafka connector supports only Confluent Schema Registry. Other schema registry implementations are not supported at this time.
+
+The schema configuration must be provided only for the Outbound Connector. There is no requirement to provide a schema when using Inbound Connectors.
+
+:::
+
+### Example Avro schema and data
 
 If the expected Kafka message looks like this:
 
