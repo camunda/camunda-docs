@@ -195,7 +195,7 @@ Search responses consist of two components: **`items`** and **`page`**.
   The structure and attributes of these instances vary by endpoint and are detailed in the corresponding endpoint documentation.
 
 - The **`page`** object includes pagination details for navigating through results in subsequent search requests:
-  - **`totalItems`**: Indicates the total number of results for the query.  
+  - **`totalItems`**: Indicates the total number of results for the query.
     > **Note:** In Elasticsearch/OpenSearch, this value is capped at **10,000**, even if more results are available.
   - **`startCursor`**: A reference to the **first** entry on the current page.  
     Use this value in the `before` parameter to page **backward** in a subsequent [search request](#search-requests).
