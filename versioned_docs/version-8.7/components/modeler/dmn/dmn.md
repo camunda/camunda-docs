@@ -10,7 +10,7 @@ description: "Camunda Desktop and Web Modeler both offer the same Modeling exper
 
 Camunda Desktop and Web Modeler both offer the same Modeling experience for DMN 1.3 models: Modeling starts in the Decision Requirements Diagram (DRD) view. From there, you can add DMN elements from the palette on the left side by dragging and dropping them onto the diagram canvas.
 
-Alternatively, you can add new elements by using the context menu that appears when you select an element in the diagram. Using the wrench icon in the context menu, you can change the type of an element in place. Use the properties panel on the right side to change the name or ID of the DMN diagram.
+Alternatively, you can add new elements by using the context menu that appears when you select an element in the diagram. You can change the type of an element in place by clicking on the element and selecting the **Change element** menu icon. Use the properties panel on the right side to change the name or ID of the DMN diagram.
 
 ## Demo
 
