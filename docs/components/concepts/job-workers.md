@@ -246,7 +246,7 @@ a big impact on the performance of your system as a whole. Here are some best pr
 
 Since most jobs are handled by external job workers, this means they have to be serialized and transferred over the network, possibly with multiple hops.
 The larger the payload, the more data has to be transferred. Coupled with the fact that jobs are batched during activation, this can lead to quite a lot
-of data being transferred around. As such, having as few, and as small, as possible variables has a big impact on the performance of your job workers.
+of data being transferred around. As such, having as few, and as small, as possible variables has a big impact on the performance of your job workers and the whole system in general.
 
 While the easiest way is to avoid large variables, one option to keep things light during job activation is to use the `FetchVariables` parameter.
 Remember, by default, when this parameter is omitted, the job payload will contain _all_ variables visible within the scope ([see the variables documentation for more on that](./variables.md).
