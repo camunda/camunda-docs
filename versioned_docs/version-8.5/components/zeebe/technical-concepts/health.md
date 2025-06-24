@@ -60,7 +60,7 @@ define the health of a cluster as:
 
 For example, given we expect 3 brokers, 3 partitions, and a replication factor of 3, a healthy cluster would show the following topology:
 
-```json
+```
 Cluster size: 3
 Partitions count: 3
 Replication factor: 3
