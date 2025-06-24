@@ -4,7 +4,7 @@ title: Role management
 description: "Learn how to manage roles in your Orchestration cluster."
 ---
 
-Role management is the process of creating, updating, and deleting roles in your Orchestration cluster. Roles can be assigned to [users](user.md) to access applications and perform actions on resources.
+Role management is the process of creating, updating, and deleting roles in your Orchestration cluster. A role is a collection of [authorizations](authorization.md) that provides users with the system and data access that they need to fulfill a certain responsibility. A role can be assigned to users directly or through a [group](group.md) that they are a member of.
 
 ### Create a role
 
@@ -133,7 +133,7 @@ This feature is only available in SaaS or in Self-Managed deployments with OIDC.
 To remove a client from a role:
 
 1. Log in to Identity in your cluster, and click on the **Roles** tab.
-2. Click on the rpole you want to remove a client from.
+2. Click on the role you want to remove a client from.
 3. Click on the **Clients** tab.
 4. Click on the **Remove** button next to the client you want to remove from the role.
 5. Confirm the removal by clicking on the **Remove** button in the confirmation dialog.

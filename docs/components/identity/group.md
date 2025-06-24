@@ -4,7 +4,7 @@ title: Group management
 description: "Learn how to manage groups in your Orchestration cluster."
 ---
 
-Group management is the process of creating, updating, and deleting groups in your Orchestration cluster. Groups can be assigned to [roles](role.md) and [users](user.md) to access application and perform actions on resources.
+Group management is the process of creating, updating, and deleting groups in your Orchestration cluster. A group is usually an organizational unit that consists of multiple [users](user.md). A group can be provided with [authorizations](authorization.md), either directly or by assigning [roles](role.md) to it.
 
 ### Create a group
 
