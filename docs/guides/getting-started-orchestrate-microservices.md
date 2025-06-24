@@ -44,10 +44,10 @@ Start by designing your automated process using BPMN. This guide introduces you 
 1. To create a BPMN diagram, click **New project** within Modeler.
 2. Name your project and select **Create new > BPMN diagram**.
 3. Give your model a descriptive name and ID. On the right side of the page, expand the **General** section of the properties panel to find the name and ID fields. For this guide, we'll use `Microservice Orchestration Tutorial` for the name and `microservice-orchestration-tutorial` for the ID.
-4. Use Web Modeler to design a BPMN process with service tasks. These service tasks are used to call your microservices via workers. Create a service task by dragging the task icon from the palette, or by clicking the existing start event and clicking the task icon. Make sure there is an arrow connecting the start event to the task. Click the wrench icon and select **Service Task** to change the task type.
+4. Use Web Modeler to design a BPMN process with service tasks. These service tasks are used to call your microservices via workers. Create a service task by dragging the task icon from the palette, or by clicking the existing start event and clicking the task icon. Make sure there is an arrow connecting the start event to the task. Click on the element and select the **Change element** menu icon. Select **Service Task** to change the task type.
    ![Task with dropdown showing config, including service task](./img/microservice-orchestration-config-service-task.png)
 5. Add a descriptive name using the **General** section in the properties panel. For this guide, we'll use `Call Microservice`.
-6. In the properties panel, expand the **Task definition** section and use the **Type** field to enter a string used in connecting this service task to the corresponding microservice code. For this guide, we'll use `orchestrate-something` as the type. You will use this while [creating a worker for the service task](#create-a-worker-for-the-service-task). If you do not have an option to add the **Type**, use the wrench icon and select **Service Task**.
+6. In the properties panel, expand the **Task definition** section and use the **Type** field to enter a string used in connecting this service task to the corresponding microservice code. For this guide, we'll use `orchestrate-something` as the type. You will use this while [creating a worker for the service task](#create-a-worker-for-the-service-task). If you do not have an option to add the **Type**, click on the element and select the **Change element** menu icon. Select **Service Task**.
 
    ![Service task with properties panel open](./img/microservice-orchestration-service-task.png)
 
@@ -109,5 +109,6 @@ Don't want to build the process yourself? Click this button to create it from a 
 
 ## Additional resources and next steps
 
-- Learn more about Camunda 8 and what it can do by reading [What is Camunda 8](/components/concepts/what-is-camunda-8.md) or watching our [Overview video](https://bit.ly/3TjNEm7) in Camunda Academy.
+- Learn more about Camunda 8 and what it can do by reading [What is Camunda 8](/components/components-overview.md) or watching our [Overview video](https://bit.ly/3TjNEm7) in Camunda Academy.
 - Get your local environment ready for development with Camunda 8 by [setting up your first development project](setting-up-development-project.md).
+- [Camunda Academy: Getting Started with Microservice Orchestration](https://academy.camunda.com/c8-getting-started-microservice-orchestration)

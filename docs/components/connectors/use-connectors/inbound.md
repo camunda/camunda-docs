@@ -7,24 +7,29 @@ description: Learn how to use inbound connectors
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-[Inbound connectors](/components/connectors/connector-types.md#inbound-connectors) enable workflows to receive data or messages from external systems or services.
+[Inbound connectors](/components/connectors/connector-types.md#inbound-connectors) enable workflows to receive data or messages from external systems or services.  
 Review our [list of existing inbound connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) for more information.
 
 ## Creating the connector event
 
-Inbound connectors are modeled as **catch events** in BPMN. connectors that create a new process instance are modeled as **start events**, and connectors that send messages to an already running process instance are modeled as **intermediate catch events**. It is also possible to create new processes by using a **message start event** and to use inbound connectors via **boundary events**.
+Inbound connectors are modeled as **catch events** in [BPMN](/components/modeler/bpmn/bpmn.md). Connectors can be modeled as:
+
+- **Start events** – Start a new process instance.
+- **Message start events** – Start a new process instance with a `messageId` to prevent duplicate process instance creation.
+- **Intermediate catch events** – Receive messages in an already running process instance.
+- **Boundary events** – Receive messages in an already running process instance, attached to a task.
 
 :::info
 If **idempotency** is a concern for the process creation and reprocessing of messages should never lead to a duplicate process instance creation, use the **message start event** element for an inbound connector as it relies on publishing a message.
 
-Unlike plain **start event** elements, **message start events** support the **Message ID expression** property that allows to derive a unique value from the connector output that will be used by Zeebe to [guarantee uniqueness](/components/concepts/messages.md#message-uniqueness) in case other messages are published that use the same **Message ID**.
+Unlike plain **start event** elements, **message start events** support the **message ID expression** property that allows you to derive a unique value from the connector output. This value is used by Zeebe to [guarantee uniqueness](/components/concepts/messages.md#message-uniqueness) in case other messages are published using the same **Message ID**.
 :::
 
 When you **deploy** such a BPMN diagram with an inbound connector, the connector becomes ready to receive incoming requests. The outcome depends on the connector type:
 
-- The webhook endpoint becomes available.
-- Subscription connectors start listening to the message queue.
-- Polling connectors start polling the external system.
+- **Webhook connectors** become available via the **webhook endpoint**.
+- **Subscription connectors** start listening to the **message queue**.
+- **Polling connectors** start polling the **external system**.
 
 <Tabs groupId="inbound-element" defaultValue="start" queryString values={
 [
@@ -38,14 +43,14 @@ When you **deploy** such a BPMN diagram with an inbound connector, the connector
 
 ### Modeling the connector start event
 
-1. Start building your BPMN diagram with a **Start Event** building block.
+1. Start building your BPMN diagram with a start event building block.
 2. Change its template to an inbound connector of your choice (e.g., HTTP webhook, or a message queue subscription).
 3. Fill in all required properties.
 4. Complete your BPMN diagram.
 5. Deploy it to your Camunda 8 instance.
 
 :::note
-You can still start instances of that process manually via the modeler, which is sometimes useful during testing.
+You can still start instances of that process manually via Modeler, which is sometimes useful during testing.
 :::
 
 </TabItem>
@@ -54,17 +59,16 @@ You can still start instances of that process manually via the modeler, which is
 
 ### Modeling the connector message start event
 
-1. Start building your BPMN diagram with an **Event subprocess**.
-2. Add a plain **Message start event (non-interrupting)** into an **Event subprocess**.
-3. Change its template to an inbound connector of your choice (for example, HTTP webhook or a message queue subscription).
-4. Fill in all required properties.
-5. Configure the **Correlation** section if needed
+1. Start building your BPMN diagram with a message start event (non-interrupting).
+2. Change its template to an inbound connector of your choice (for example, HTTP webhook or a message queue subscription), by clicking the **Select** button in the **Template** section in the **Properties** sidebar of the start event element.
+3. Fill in all required properties.
+4. Configure the **Correlation** section, if an event subprocess is used.
 
 - If you are setting up a non-interrupting message start event for a subprocess, select **Correlation required** and specify the **Correlation key (process)** and **Correlation key (payload)** values.
 - If you are setting up a message start event for a regular process (not a subprocess), skip the correlation settings.
 
-6. Complete your BPMN diagram.
-7. Deploy it to your Camunda 8 instance.
+5. Complete your BPMN diagram.
+6. Deploy it to your Camunda 8 instance.
 
 </TabItem>
 

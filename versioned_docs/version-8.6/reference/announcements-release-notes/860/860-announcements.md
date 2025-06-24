@@ -7,11 +7,16 @@ toc_max_heading_level: 3
 
 Supported environment changes and breaking changes or deprecations for the Camunda 8.6 release are summarized below.
 
-Please visit our [quality board](https://github.com/orgs/camunda/projects/187/views/17) to get an overview of known bugs by component and severity.
-
 | Release date   | End of maintenance | Release notes                                                                        |
 | :------------- | :----------------- | :----------------------------------------------------------------------------------- |
 | 8 October 2024 | 14 April 2026      | [8.6 release notes](/reference/announcements-release-notes/860/860-release-notes.md) |
+
+:::tip Release notes and quality board
+
+- See [release notes](/reference/announcements-release-notes/860/860-release-notes.md) to learn more about new features and enhancements.
+- Refer to the [quality board](https://github.com/orgs/camunda/projects/187/views/17) for an overview of known bugs by component and severity.
+
+:::
 
 ## Changes in supported environments
 
@@ -30,7 +35,7 @@ Review the following documentation for your components for more information on h
 - [Operate](/self-managed/operate-deployment/operate-configuration.md#licensing)
 - [Tasklist](/self-managed/tasklist-deployment/tasklist-configuration.md#licensing)
 - [Optimize](/self-managed/optimize-deployment/configuration/system-configuration-platform-8.md#licensing)
-- [Identity](/self-managed/identity/deployment/configuration-variables.md#license-configuration)
+- [Identity](/self-managed/identity/miscellaneous/configuration-variables.md#license-configuration)
 - [Modeler](/self-managed/modeler/web-modeler/configuration/configuration.md#licensing)
 
 To configure with Helm, visit the [Self Managed installation documentation](/self-managed/setup/install.md).

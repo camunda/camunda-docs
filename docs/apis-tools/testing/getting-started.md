@@ -14,10 +14,9 @@ CPT is based on [JUnit 5](https://junit.org/junit5/) and [Testcontainers](https:
 - Camunda
 - Connectors
 
-:::danger Disclaimer
-CPT is in an [alpha version](/components/early-access/alpha/alpha-features.md#alpha).
-
-For a mature testing library, take a look at [Zeebe Process Test](/apis-tools/java-client/zeebe-process-test.md).
+:::info
+CPT is the successor of [Zeebe Process Test](/apis-tools/java-client/zeebe-process-test.md)  
+Our previous testing library is deprecated and will be removed with version 8.10.
 :::
 
 ## Prerequisites
@@ -201,7 +200,7 @@ io:
     process:
       test:
         # Change the version of the Camunda Docker image
-        camunda-version: 8.8.0
+        camunda-docker-image-version: 8.8.0
         # Change the Camunda Docker image
         camunda-docker-image-name: camunda/camunda
         # Set additional Camunda environment variables
@@ -231,7 +230,7 @@ io:
 You can change the version by setting the following properties in a `/camunda-container-runtime.properties` file:
 
 ```properties
-camunda.version=8.8.0
+camunda.dockerImageVersion=8.8.0
 ```
 
 For more configuration options, you can register the JUnit extension manually and use the fluent builder to override the defaults:
@@ -249,7 +248,7 @@ public class MyProcessTest {
     private static final CamundaProcessTestExtension EXTENSION =
         new CamundaProcessTestExtension()
             // Change the version of the Camunda Docker image
-            .withCamundaVersion("8.8.0")
+            .withCamundaDockerImageVersion("8.8.0")
             // Change the Camunda Docker image
             .withCamundaDockerImageName("camunda/camunda")
             // Set additional Camunda environment variables

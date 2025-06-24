@@ -318,6 +318,12 @@ paths:
           description: Key of the incident to resolve.
           schema:
             type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/IncidentResolutionRequest"
       responses:
         "204":
           description: The incident is marked as resolved.
@@ -1797,6 +1803,49 @@ paths:
         "500":
           $ref: "#/components/responses/InternalServerError"
 
+  /process-instances/{processInstanceKey}/incidents/search:
+    post:
+      tags:
+        - Process instance
+      operationId: searchProcessInstanceIncidents
+      summary: Search for incidents associated with a process instance
+      description: |
+        Search for incidents caused by the process instance or any of its called process or decision instances.
+      parameters:
+        - name: processInstanceKey
+          in: path
+          required: true
+          description: The assigned key of the process instance, which acts as a unique identifier for this process instance.
+          schema:
+            type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProcessInstanceIncidentSearchQuery"
+      responses:
+        "200":
+          description: The process instance search result.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IncidentSearchQueryResult"
+        "400":
+          $ref: "#/components/responses/InvalidData"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          description: The process instance with the given key was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+
   /process-instances/{processInstanceKey}/cancellation:
     post:
       tags:
@@ -1831,7 +1880,7 @@ paths:
         "500":
           $ref: "#/components/responses/InternalServerError"
 
-  /process-instances/batch-operations/cancellation:
+  /process-instances/cancellation:
     post:
       tags:
         - Process instance
@@ -1839,6 +1888,9 @@ paths:
       summary: Create a batch operation to cancel process instances
       description: |
         Cancels multiple running process instances.
+        Since only ACTIVE root instances can be cancelled, any given filters for state and
+        parentProcessInstanceKey are ignored and overridden during this batch operation.
+        This is done asynchronously, the progress can be tracked using the batchOperationId from the response and the batch operation status endpoint (/batch-operations/{batchOperationId}).
       requestBody:
         required: false
         content:
@@ -1846,8 +1898,8 @@ paths:
             schema:
               $ref: "#/components/schemas/ProcessInstanceFilter"
       responses:
-        "202":
-          description: The batch operation request was accepted.
+        "200":
+          description: The batch operation request was created.
           content:
             application/json:
               schema:
@@ -1867,7 +1919,7 @@ paths:
         "500":
           $ref: "#/components/responses/InternalServerError"
 
-  /process-instances/batch-operations/incident-resolution:
+  /process-instances/incident-resolution:
     post:
       tags:
         - Process instance
@@ -1875,6 +1927,9 @@ paths:
       summary: Create a batch operation to resolve incidents of process instances
       description: |
         Resolves multiple instances of process instances.
+        Since only process instances with ACTIVE state can have unresolved incidents, any given
+        filters for state are ignored and overridden during this batch operation.
+        This is done asynchronously, the progress can be tracked using the batchOperationId from the response and the batch operation status endpoint (/batch-operations/{batchOperationId}).
       requestBody:
         required: false
         content:
@@ -1882,8 +1937,8 @@ paths:
             schema:
               $ref: "#/components/schemas/ProcessInstanceFilter"
       responses:
-        "202":
-          description: The batch operation request was accepted.
+        "200":
+          description: The batch operation request was created.
           content:
             application/json:
               schema:
@@ -1903,7 +1958,7 @@ paths:
         "500":
           $ref: "#/components/responses/InternalServerError"
 
-  /process-instances/batch-operations/migration:
+  /process-instances/migration:
     post:
       tags:
         - Process instance
@@ -1911,15 +1966,18 @@ paths:
       summary: Create a batch operation to migrate process instances
       description: |
         Migrate multiple instances of process instances.
+        Since only process instances with ACTIVE state can be migrated, any given
+        filters for state are ignored and overridden during this batch operation.
+        This is done asynchronously, the progress can be tracked using the batchOperationId from the response and the batch operation status endpoint (/batch-operations/{batchOperationId}).
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ProcessInstanceMigrationBatchOperationInstruction"
+              $ref: "#/components/schemas/ProcessInstanceMigrationBatchOperationRequest"
       responses:
-        "202":
-          description: The batch operation request was accepted.
+        "200":
+          description: The batch operation request was created.
           content:
             application/json:
               schema:
@@ -1939,7 +1997,7 @@ paths:
         "500":
           $ref: "#/components/responses/InternalServerError"
 
-  /process-instances/batch-operations/modification:
+  /process-instances/modification:
     post:
       tags:
         - Process instance
@@ -1947,15 +2005,20 @@ paths:
       summary: Create a batch operation to modify process instances
       description: |
         Modify multiple process instances.
+        Since only process instances with ACTIVE state can be modified, any given
+        filters for state are ignored and overridden during this batch operation.
+        In contrast to single modification operation, it is not possible to add variable instructions or modify by element key.
+        It is only possible to use the element id of the source and target.
+        This is done asynchronously, the progress can be tracked using the batchOperationId from the response and the batch operation status endpoint (/batch-operations/{batchOperationId}).
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ProcessInstanceModificationBatchOperationInstruction"
+              $ref: "#/components/schemas/ProcessInstanceModificationBatchOperationRequest"
       responses:
-        "202":
-          description: The batch operation request was accepted.
+        "200":
+          description: The batch operation request was created.
           content:
             application/json:
               schema:
@@ -2573,6 +2636,38 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+    get:
+      tags:
+        - Authorization
+      operationId: getAuthorization
+      summary: Get authorization
+      description: Get authorization by the given key.
+      parameters:
+        - name: authorizationKey
+          in: path
+          required: true
+          description: The key of the authorization to get.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: The authorization was successfully returned.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthorizationResult"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          description: The authorization with the given key was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
     delete:
       tags:
         - Authorization
@@ -3100,6 +3195,48 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "404":
           description: The role or group with the given ID was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /roles/{roleId}/groups/search:
+    post:
+      tags:
+        - Role
+      operationId: searchGroupsForRole
+      summary: Search role groups
+      description: |
+        Search groups assigned to a role.
+      parameters:
+        - name: roleId
+          in: path
+          required: true
+          description: The role ID.
+          schema:
+            type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GroupSearchQueryRequest"
+      responses:
+        "200":
+          description: The groups assigned to the role.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GroupSearchQueryResult"
+        "400":
+          $ref: "#/components/responses/InvalidData"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          description: The role with the given ID was not found.
           content:
             application/problem+json:
               schema:
@@ -3680,7 +3817,7 @@ paths:
     put:
       tags:
         - Group
-      operationId: addMappingToGroup
+      operationId: assignMappingToGroup
       summary: Assign a mapping rule to a group
       description: |
         Assigns a mapping rule to a group.
@@ -4353,6 +4490,39 @@ paths:
           $ref: "#/components/responses/InternalServerError"
 
   /users/{username}:
+    get:
+      tags:
+        - User
+      operationId: getUser
+      summary: Get user
+      description: |
+        Get a user by its username.
+      parameters:
+        - name: username
+          in: path
+          required: true
+          description: The username of the user.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: The user is successfully returned.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserResult"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          description: The user with the given username was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
     delete:
       tags:
         - User
@@ -4868,7 +5038,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ProcessInstanceSearchQuery"
+              $ref: "#/components/schemas/BatchOperationSearchQuery"
       responses:
         "200":
           description: The batch operation search result.
@@ -4885,13 +5055,15 @@ paths:
         "500":
           $ref: "#/components/responses/InternalServerError"
 
-  /batch-operations/{batchOperationId}/cancel:
+  /batch-operations/{batchOperationId}/cancellation:
     put:
       tags:
         - Batch operation
       operationId: cancelBatchOperation
       summary: Cancel Batch operation
-      description: Cancels a running batch operation.
+      description: |
+        Cancels a running batch operation.
+        This is done asynchronously, the progress can be tracked using the batch operation status endpoint (/batch-operations/{batchOperationId}).
       parameters:
         - name: batchOperationId
           in: path
@@ -4908,8 +5080,8 @@ paths:
               nullable: true
         required: false
       responses:
-        "202":
-          description: The batch operation cancel request was accepted.
+        "204":
+          description: The batch operation cancel request was created.
           content: {}
         "400":
           $ref: "#/components/responses/InvalidData"
@@ -4924,13 +5096,15 @@ paths:
         "500":
           $ref: "#/components/responses/InternalServerError"
 
-  /batch-operations/{batchOperationId}/pause:
+  /batch-operations/{batchOperationId}/suspension:
     put:
       tags:
         - Batch operation
-      operationId: pauseBatchOperation
-      summary: Pause Batch operation
-      description: Pauses a running batch operation.
+      operationId: suspendBatchOperation
+      summary: Suspend Batch operation
+      description: |
+        Suspends a running batch operation.
+        This is done asynchronously, the progress can be tracked using the batch operation status endpoint (/batch-operations/{batchOperationId}).
       parameters:
         - name: batchOperationId
           in: path
@@ -4947,8 +5121,8 @@ paths:
               nullable: true
         required: false
       responses:
-        "202":
-          description: The batch operation pause request was accepted.
+        "204":
+          description: The batch operation pause request was created.
           content: {}
         "400":
           $ref: "#/components/responses/InvalidData"
@@ -4963,13 +5137,15 @@ paths:
         "500":
           $ref: "#/components/responses/InternalServerError"
 
-  /batch-operations/{batchOperationId}/resume:
+  /batch-operations/{batchOperationId}/resumption:
     put:
       tags:
         - Batch operation
       operationId: resumeBatchOperation
       summary: Resume Batch operation
-      description: Resumes a paused batch operation.
+      description: |
+        Resumes a suspended batch operation.
+        This is done asynchronously, the progress can be tracked using the batch operation status endpoint (/batch-operations/{batchOperationId}).
       parameters:
         - name: batchOperationId
           in: path
@@ -4986,8 +5162,8 @@ paths:
               nullable: true
         required: false
       responses:
-        "202":
-          description: The batch operation resume request was accepted.
+        "204":
+          description: The batch operation resume request was created.
           content: {}
         "400":
           $ref: "#/components/responses/InvalidData"
@@ -5137,9 +5313,9 @@ components:
         filter:
           description: The tenant search filters.
           allOf:
-            - $ref: "#/components/schemas/TenantFilterRequest"
+            - $ref: "#/components/schemas/TenantFilter"
 
-    TenantFilterRequest:
+    TenantFilter:
       description: Tenant filter request
       type: object
       properties:
@@ -5173,6 +5349,7 @@ components:
             - followUpDate
             - dueDate
             - priority
+            - name
         order:
           $ref: "#/components/schemas/SortOrderEnum"
       required:
@@ -5223,7 +5400,7 @@ components:
         filter:
           description: The user task variable search filters.
           allOf:
-            - $ref: "#/components/schemas/UserTaskVariableFilterRequest"
+            - $ref: "#/components/schemas/UserTaskVariableFilter"
     UserTaskSearchQueryResult:
       description: User task search query response.
       type: object
@@ -5258,6 +5435,11 @@ components:
         elementId:
           type: string
           description: The element ID of the user task.
+        name:
+          type: string
+          description: >
+            The task name. This only works for data created with 8.8 and onwards.
+            Instances from prior versions don't contain this data and cannot be found.
         candidateGroup:
           description: The candidate group for this user task.
           allOf:
@@ -5292,12 +5474,12 @@ components:
           type: array
           description: Process instance variables associated with the user task.
           items:
-            $ref: "#/components/schemas/VariableValueFilterRequest"
+            $ref: "#/components/schemas/VariableValueFilterProperty"
         localVariables:
           type: array
           description: Local variables associated with the user task.
           items:
-            $ref: "#/components/schemas/VariableValueFilterRequest"
+            $ref: "#/components/schemas/VariableValueFilterProperty"
         userTaskKey:
           type: string
           description: The key for this user task.
@@ -5310,7 +5492,7 @@ components:
         elementInstanceKey:
           type: string
           description: The key of the element instance.
-    VariableValueFilterRequest:
+    VariableValueFilterProperty:
       type: object
       properties:
         name:
@@ -5323,7 +5505,7 @@ components:
       required:
         - name
         - value
-    UserTaskVariableFilterRequest:
+    UserTaskVariableFilter:
       description: The user task variable search filters.
       type: object
       properties:
@@ -5661,6 +5843,16 @@ components:
           description: The process instance search filters.
           allOf:
             - $ref: "#/components/schemas/ProcessInstanceFilter"
+    ProcessInstanceIncidentSearchQuery:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/SearchQueryRequest"
+      properties:
+        sort:
+          description: Sort field criteria.
+          type: array
+          items:
+            $ref: "#/components/schemas/IncidentSearchQuerySortRequest"
     AdvancedIntegerFilter:
       title: Advanced filter
       description: Advanced integer (int32) filter.
@@ -5924,7 +6116,7 @@ components:
           description: The process instance variables.
           type: array
           items:
-            $ref: "#/components/schemas/VariableValueFilterRequest"
+            $ref: "#/components/schemas/VariableValueFilterProperty"
         processInstanceKey:
           description: The key of this process instance.
           allOf:
@@ -6260,6 +6452,7 @@ components:
             - startDate
             - endDate
             - elementId
+            - elementName
             - type
             - state
             - incidentKey
@@ -6329,7 +6522,9 @@ components:
           description: The element ID for this element instance.
         elementName:
           type: string
-          description: The element name.
+          description: >
+            The element name. This only works for data created with 8.8 and onwards.
+            Instances from prior versions don't contain this data and cannot be found.
         hasIncident:
           type: boolean
           description: Shows whether this element instance has an incident related to.
@@ -7047,7 +7242,7 @@ components:
         filter:
           description: The user search filters.
           allOf:
-            - $ref: "#/components/schemas/UserFilterRequest"
+            - $ref: "#/components/schemas/UserFilter"
     MappingSearchQuerySortRequest:
       type: object
       properties:
@@ -7076,8 +7271,8 @@ components:
         filter:
           description: The mapping search filters.
           allOf:
-            - $ref: "#/components/schemas/MappingFilterRequest"
-    UserFilterRequest:
+            - $ref: "#/components/schemas/MappingFilter"
+    UserFilter:
       description: User search filter.
       type: object
       properties:
@@ -7093,7 +7288,7 @@ components:
           description: The email of the user.
           allOf:
             - $ref: "#/components/schemas/StringFilterProperty"
-    MappingFilterRequest:
+    MappingFilter:
       description: Mapping search filter.
       type: object
       properties:
@@ -7373,8 +7568,8 @@ components:
         filter:
           description: The role search filters.
           allOf:
-            - $ref: "#/components/schemas/RoleFilterRequest"
-    RoleFilterRequest:
+            - $ref: "#/components/schemas/RoleFilter"
+    RoleFilter:
       description: Role filter request
       type: object
       properties:
@@ -7562,8 +7757,8 @@ components:
         filter:
           description: The group search filters.
           allOf:
-            - $ref: "#/components/schemas/GroupFilterRequest"
-    GroupFilterRequest:
+            - $ref: "#/components/schemas/GroupFilter"
+    GroupFilter:
       description: Group filter request
       type: object
       properties:
@@ -8191,6 +8386,13 @@ components:
       properties:
         changeset:
           $ref: "#/components/schemas/JobChangeset"
+        operationReference:
+          description: |
+            A reference key chosen by the user that will be part of all records resulting from this operation.
+            Must be > 0 if provided.
+          type: integer
+          format: int64
+          minimum: 1
       required:
         - changeset
     JobChangeset:
@@ -8265,16 +8467,12 @@ components:
           type: integer
           format: int32
           default: 100
-        searchAfter:
-          description: Items to search after. Correlates to the `lastSortValues` property of a previous search response.
-          type: array
-          items:
-            type: object
-        searchBefore:
-          description: Items to search before. Correlates to the `firstSortValues` property of a previous search response.
-          type: array
-          items:
-            type: object
+        after:
+          description: Use the `endCursor` value from the previous response to fetch the next page of results.
+          type: string
+        before:
+          description: Use the `startCursor` value from the previous response to fetch the previous page of results.
+          type: string
     SearchQueryResponse:
       type: object
       properties:
@@ -8290,16 +8488,12 @@ components:
           description: Total items matching the criteria.
           type: integer
           format: int64
-        firstSortValues:
-          description: The sort values of the first item in the result set. Use this in the `searchBefore` field of an ensuing request.
-          type: array
-          items:
-            type: object
-        lastSortValues:
-          description: The sort values of the last item in the result set. Use this in the `searchAfter` field of an ensuing request.
-          type: array
-          items:
-            type: object
+        startCursor:
+          description: The cursor value for getting the previous page of results. Use this in the `before` field of an ensuing request.
+          type: string
+        endCursor:
+          description: The cursor value for getting the next page of results. Use this in the `after` field of an ensuing request.
+          type: string
     DecisionRequirementsSearchQuerySortRequest:
       type: object
       properties:
@@ -8350,6 +8544,9 @@ components:
         decisionRequirementsKey:
           type: string
           description: The assigned key, which acts as a unique identifier for this decision requirements.
+        resourceName:
+          type: string
+          description: The name of the resource from which the decision requirements were parsed.
     DecisionRequirementsSearchQueryResult:
       type: object
       allOf:
@@ -9029,6 +9226,17 @@ components:
           type: string
           description: The assigned key, which acts as a unique identifier for this Resource.
 
+    IncidentResolutionRequest:
+      type: object
+      properties:
+        operationReference:
+          description: |
+            A reference key chosen by the user that will be part of all records resulting from this operation.
+            Must be >0 if provided.
+          type: integer
+          format: int64
+          minimum: 1
+
     ProcessInstanceCreationInstruction:
       type: object
       properties:
@@ -9133,16 +9341,32 @@ components:
             The unique identifier of the created process instance; to be used wherever a request
             needs a process instance key (e.g. CancelProcessInstanceRequest).
           type: string
-    ProcessInstanceMigrationBatchOperationInstruction:
+    ProcessInstanceMigrationBatchOperationRequest:
       type: object
       properties:
         filter:
           $ref: "#/components/schemas/ProcessInstanceFilter"
         migrationPlan:
-          $ref: "#/components/schemas/ProcessInstanceMigrationInstruction"
+          $ref: "#/components/schemas/ProcessInstanceMigrationBatchOperationPlan"
       required:
         - filter
         - migrationPlan
+    ProcessInstanceMigrationBatchOperationPlan:
+      type: object
+      description: |
+        The migration instructions describe how to migrate a process instance from one process definition to another.
+      properties:
+        mappingInstructions:
+          description: Element mappings from the source process instance to the target process instance.
+          type: array
+          items:
+            $ref: "#/components/schemas/MigrateProcessInstanceMappingInstruction"
+        targetProcessDefinitionKey:
+          description: The key of process definition to migrate the process instance to.
+          type: string
+      required:
+        - targetProcessDefinitionKey
+        - mappingInstructions
     ProcessInstanceMigrationInstruction:
       type: object
       description: |
@@ -9372,8 +9596,8 @@ components:
     BatchOperationCreatedResult:
       type: object
       properties:
-        batchOperationKey:
-          description: Key of the batch operation.
+        batchOperationId:
+          description: Id of the batch operation.
           type: string
         batchOperationType:
           $ref: "#/components/schemas/BatchOperationTypeEnum"
@@ -9414,20 +9638,110 @@ components:
       properties:
         batchOperationId:
           description: The key (or operate legacy ID) of the batch operation.
-          type: string
+          allOf:
+            - $ref: "#/components/schemas/BasicStringFilterProperty"
         operationType:
-          $ref: "#/components/schemas/BatchOperationTypeEnum"
+          description: The type of the batch operation.
+          allOf:
+            - $ref: "#/components/schemas/BatchOperationTypeFilterProperty"
         state:
-          type: string
           description: The state of the batch operation.
-          enum:
-            - CREATED
-            - ACTIVE
-            - PAUSED
-            - COMPLETED
-            - COMPLETED_WITH_ERRORS
-            - CANCELED
-            - INCOMPLETED
+          allOf:
+            - $ref: "#/components/schemas/BatchOperationStateFilterProperty"
+    BatchOperationTypeFilterProperty:
+      description: BatchOperationTypeEnum property with full advanced search capabilities.
+      type: object
+      oneOf:
+        - type: string
+          title: Exact match
+          description: Matches the value exactly.
+          allOf:
+            - $ref: "#/components/schemas/BatchOperationTypeEnum"
+        - $ref: "#/components/schemas/AdvancedBatchOperationTypeFilter"
+    AdvancedBatchOperationTypeFilter:
+      title: Advanced filter
+      description: Advanced BatchOperationTypeEnum filter.
+      type: object
+      properties:
+        $eq:
+          description: Checks for equality with the provided value.
+          allOf:
+            - $ref: "#/components/schemas/BatchOperationTypeEnum"
+        $neq:
+          description: Checks for inequality with the provided value.
+          allOf:
+            - $ref: "#/components/schemas/BatchOperationTypeEnum"
+        $exists:
+          description: Checks if the current property exists.
+          type: boolean
+        $in:
+          description: Checks if the property matches any of the provided values.
+          type: array
+          items:
+            $ref: "#/components/schemas/BatchOperationTypeEnum"
+        $like:
+          description: |
+            Checks if the property matches the provided like value.
+
+            Supported wildcard characters are:
+
+            * `*`: matches zero, one, or multiple characters.
+            * `?`: matches one, single character.
+
+            Wildcard characters can be escaped with backslash, for instance: `\*`.
+          type: string
+    BatchOperationStateFilterProperty:
+      description: BatchOperationStateEnum property with full advanced search capabilities.
+      type: object
+      oneOf:
+        - type: string
+          title: Exact match
+          description: Matches the value exactly.
+          allOf:
+            - $ref: "#/components/schemas/BatchOperationStateEnum"
+        - $ref: "#/components/schemas/AdvancedBatchOperationStateFilter"
+    AdvancedBatchOperationStateFilter:
+      title: Advanced filter
+      description: Advanced BatchOperationStateEnum filter.
+      type: object
+      properties:
+        $eq:
+          description: Checks for equality with the provided value.
+          allOf:
+            - $ref: "#/components/schemas/BatchOperationStateEnum"
+        $neq:
+          description: Checks for inequality with the provided value.
+          allOf:
+            - $ref: "#/components/schemas/BatchOperationStateEnum"
+        $exists:
+          description: Checks if the current property exists.
+          type: boolean
+        $in:
+          description: Checks if the property matches any of the provided values.
+          type: array
+          items:
+            $ref: "#/components/schemas/BatchOperationStateEnum"
+        $like:
+          description: |
+            Checks if the property matches the provided like value.
+
+            Supported wildcard characters are:
+
+            * `*`: matches zero, one, or multiple characters.
+            * `?`: matches one, single character.
+
+            Wildcard characters can be escaped with backslash, for instance: `\*`.
+          type: string
+    BatchOperationStateEnum:
+      description: The state, one of ACTIVE, COMPLETED, TERMINATED.
+      enum:
+        - CREATED
+        - ACTIVE
+        - SUSPENDED
+        - COMPLETED
+        - COMPLETED_WITH_ERRORS
+        - CANCELED
+        - INCOMPLETED
     BatchOperationItemSearchQuerySortRequest:
       type: object
       properties:
@@ -9464,21 +9778,70 @@ components:
       properties:
         batchOperationId:
           description: The key (or operate legacy ID) of the batch operation.
-          type: string
+          allOf:
+            - $ref: "#/components/schemas/BasicStringFilterProperty"
         itemKey:
           description: The key of the item, e.g. a process instance key.
-          type: string
+          allOf:
+            - $ref: "#/components/schemas/BasicStringFilterProperty"
         processInstanceKey:
           description: The process instance key of the processed item.
-          type: string
+          allOf:
+            - $ref: "#/components/schemas/BasicStringFilterProperty"
         state:
           type: string
           description: The state of the batch operation.
-          enum:
-            - ACTIVE
-            - COMPLETED
-            - CANCELED
-            - FAILED
+          allOf:
+            - $ref: "#/components/schemas/BatchOperationItemStateFilterProperty"
+    BatchOperationItemStateFilterProperty:
+      description: BatchOperationItemStateEnum property with full advanced search capabilities.
+      type: object
+      oneOf:
+        - type: string
+          title: Exact match
+          description: Matches the value exactly.
+          allOf:
+            - $ref: "#/components/schemas/BatchOperationItemStateEnum"
+        - $ref: "#/components/schemas/AdvancedBatchOperationItemStateFilter"
+    AdvancedBatchOperationItemStateFilter:
+      title: Advanced filter
+      description: Advanced BatchOperationItemStateEnum filter.
+      type: object
+      properties:
+        $eq:
+          description: Checks for equality with the provided value.
+          allOf:
+            - $ref: "#/components/schemas/BatchOperationItemStateEnum"
+        $neq:
+          description: Checks for inequality with the provided value.
+          allOf:
+            - $ref: "#/components/schemas/BatchOperationItemStateEnum"
+        $exists:
+          description: Checks if the current property exists.
+          type: boolean
+        $in:
+          description: Checks if the property matches any of the provided values.
+          type: array
+          items:
+            $ref: "#/components/schemas/BatchOperationItemStateEnum"
+        $like:
+          description: |
+            Checks if the property matches the provided like value.
+
+            Supported wildcard characters are:
+
+            * `*`: matches zero, one, or multiple characters.
+            * `?`: matches one, single character.
+
+            Wildcard characters can be escaped with backslash, for instance: `\*`.
+          type: string
+    BatchOperationItemStateEnum:
+      description: The state, one of ACTIVE, COMPLETED, TERMINATED.
+      enum:
+        - ACTIVE
+        - COMPLETED
+        - CANCELED
+        - FAILED
     BatchOperationSearchQueryResult:
       type: object
       allOf:
@@ -9501,7 +9864,7 @@ components:
           enum:
             - CREATED
             - ACTIVE
-            - PAUSED
+            - SUSPENDED
             - COMPLETED
             - COMPLETED_WITH_ERRORS
             - CANCELED
@@ -9565,7 +9928,7 @@ components:
         errorMessage:
           description: the error message from the engine in case of a failed operation.
           type: string
-    ProcessInstanceModificationBatchOperationInstruction:
+    ProcessInstanceModificationBatchOperationRequest:
       type: object
       description: |
         The process instance filter to define on which process instances tokens should be moved,

@@ -58,8 +58,13 @@ module.exports = {
   Components: [
     "components/components-overview",
     {
-      Concepts: [
-        "components/concepts/what-is-camunda-8",
+      type: "category",
+      label: "Concepts",
+      link: {
+        type: "doc",
+        id: "components/concepts/concepts-overview",
+      },
+      items: [
         "components/concepts/clusters",
         "components/concepts/processes",
         "components/concepts/process-applications",
@@ -88,52 +93,17 @@ module.exports = {
           ],
         },
       ],
-      Console: [
-        "components/console/introduction-to-console",
-        {
-          "Manage your organization": [
-            "components/console/manage-organization/organization-settings",
-            "components/console/manage-organization/manage-users",
-            "components/console/manage-organization/view-organization-activity",
-            "components/console/manage-organization/enable-alpha-features",
-            "components/console/manage-organization/usage-history",
-            "components/console/manage-organization/usage-alerts",
-            "components/console/manage-organization/advanced-search",
-            "components/console/manage-organization/switch-organization",
-            "components/console/manage-organization/external-sso",
-            "components/console/manage-organization/delete-account",
-          ],
-        },
-        {
-          "Manage clusters": [
-            "components/console/manage-clusters/create-cluster",
-            "components/console/manage-clusters/manage-cluster",
-            "components/console/manage-clusters/cluster-connectors",
-            "components/console/manage-clusters/manage-api-clients",
-            "components/console/manage-clusters/manage-secrets",
-            "components/console/manage-clusters/manage-alerts",
-            "components/console/manage-clusters/manage-ip-allowlists",
-            "components/console/manage-clusters/create-backups",
-            "components/console/manage-clusters/settings",
-            "components/console/manage-clusters/cluster-capacity",
-          ],
-        },
-        {
-          "Manage your plan": [
-            "components/console/manage-plan/available-plans",
-            "components/console/manage-plan/upgrade-to-starter-plan",
-            "components/console/manage-plan/update-billing-reservations",
-            "components/console/manage-plan/update-creditcard",
-            "components/console/manage-plan/retrieve-invoices-or-update-billing-info",
-            "components/console/manage-plan/cancel-starter-subscription",
-            "components/console/manage-plan/migrate-from-prof-to-starter",
-          ],
-        },
-        {
-          Troubleshooting: [
-            "components/console/console-troubleshooting/common-pitfalls",
-          ],
-        },
+    },
+    {
+      type: "category",
+      label: "Agentic orchestration",
+      link: {
+        type: "doc",
+        id: "components/agentic-orchestration/agentic-orchestration",
+      },
+      items: [
+        "components/agentic-orchestration/ao-design",
+        "components/agentic-orchestration/ai-agents",
       ],
     },
     {
@@ -144,19 +114,10 @@ module.exports = {
         id: "components/document-handling/getting-started",
       },
       items: [
-        {
-          type: "category",
-          label: "Use cases",
-          link: {
-            type: "doc",
-            id: "components/document-handling/use-cases",
-          },
-          items: [
-            "components/document-handling/upload-document-to-bpmn-process",
-            "components/document-handling/display-and-download-document",
-            "components/document-handling/send-document-to-external-system-via-connector",
-          ],
-        },
+        "components/document-handling/use-cases",
+        "components/document-handling/upload-document-to-bpmn-process",
+        "components/document-handling/display-and-download-document",
+        "components/document-handling/send-document-to-external-system-via-connector",
       ],
     },
     {
@@ -386,6 +347,84 @@ module.exports = {
     },
     {
       type: "category",
+      label: "Orchestration cluster",
+      link: {
+        type: "doc",
+        id: "components/orchestration-cluster",
+      },
+      items: [
+        {
+          type: "category",
+          label: "Zeebe",
+          link: {
+            type: "doc",
+            id: "components/zeebe/zeebe-overview",
+          },
+          items: [
+            "components/zeebe/technical-concepts/technical-concepts-overview",
+            "components/zeebe/technical-concepts/architecture",
+            "components/zeebe/technical-concepts/clustering",
+            "components/zeebe/technical-concepts/partitions",
+            "components/zeebe/technical-concepts/internal-processing",
+            "components/zeebe/technical-concepts/process-lifecycles",
+            "components/zeebe/technical-concepts/protocols",
+          ],
+        },
+        {
+          type: "category",
+          label: "Operate",
+          link: {
+            type: "doc",
+            id: "components/operate/operate-introduction",
+          },
+          items: [
+            "components/operate/userguide/basic-operate-navigation",
+            "components/operate/userguide/resolve-incidents-update-variables",
+            "components/operate/userguide/selections-operations",
+            "components/operate/userguide/delete-finished-instances",
+            "components/operate/userguide/delete-resources",
+            {
+              "Process instance modification": [
+                "components/operate/userguide/process-instance-modification",
+                "components/operate/userguide/process-instance-batch-modification",
+              ],
+            },
+            "components/operate/userguide/process-instance-migration",
+            "components/operate/userguide/monitor-operation-status",
+          ],
+        },
+        {
+          type: "category",
+          label: "Tasklist",
+          link: {
+            type: "doc",
+            id: "components/tasklist/introduction-to-tasklist",
+          },
+          items: [
+            "components/tasklist/userguide/using-tasklist",
+            "components/tasklist/userguide/managing-tasks",
+            "components/tasklist/userguide/using-filters",
+            "components/tasklist/userguide/defining-task-priorities",
+            "components/tasklist/userguide/starting-processes",
+            "components/tasklist/userguide/tasklist-localization",
+          ],
+        },
+        {
+          type: "category",
+          label: "Identity",
+          link: {
+            type: "doc",
+            id: "components/identity/identity-introduction",
+          },
+          items: [
+            "components/identity/authorization",
+            "components/identity/user",
+          ],
+        },
+      ],
+    },
+    {
+      type: "category",
       label: "Connectors",
       link: {
         type: "doc",
@@ -468,6 +507,7 @@ module.exports = {
             {
               Microsoft: [
                 "components/connectors/out-of-the-box-connectors/azure-open-ai",
+                "components/connectors/out-of-the-box-connectors/azure-blob-storage",
                 "components/connectors/out-of-the-box-connectors/microsoft-teams",
                 "components/connectors/out-of-the-box-connectors/microsoft-o365-mail",
               ],
@@ -515,145 +555,142 @@ module.exports = {
       ],
     },
     {
-      Zeebe: [
-        "components/zeebe/zeebe-overview",
+      type: "category",
+      label: "Optimize",
+      link: {
+        type: "doc",
+        id: "components/optimize/what-is-optimize",
+      },
+      items: [
+        "components/optimize/userguide/collections-dashboards-reports",
+        "components/optimize/userguide/user-permissions",
+        "components/optimize/userguide/data-sources",
         {
-          "Technical concepts": [
-            "components/zeebe/technical-concepts/technical-concepts-overview",
-            "components/zeebe/technical-concepts/architecture",
-            "components/zeebe/technical-concepts/clustering",
-            "components/zeebe/technical-concepts/partitions",
-            "components/zeebe/technical-concepts/internal-processing",
-            "components/zeebe/technical-concepts/process-lifecycles",
-            "components/zeebe/technical-concepts/protocols",
+          Dashboards: [
+            "components/optimize/userguide/creating-dashboards",
+            "components/optimize/userguide/edit-mode",
+            "components/optimize/userguide/view-mode",
           ],
         },
-      ],
-      Operate: [
-        "components/operate/operate-introduction",
         {
-          "User guide": [
-            "components/operate/userguide/basic-operate-navigation",
-            "components/operate/userguide/resolve-incidents-update-variables",
-            "components/operate/userguide/selections-operations",
-            "components/operate/userguide/delete-finished-instances",
-            "components/operate/userguide/delete-resources",
-            {
-              "Process instance modification": [
-                "components/operate/userguide/process-instance-modification",
-                "components/operate/userguide/process-instance-batch-modification",
-              ],
-            },
-            "components/operate/userguide/process-instance-migration",
-            "components/operate/userguide/monitor-operation-status",
+          "Dashboards maintained by Camunda": [
+            "components/optimize/userguide/process-dashboards",
+            "components/optimize/userguide/instant-process-dashboards",
           ],
         },
-      ],
-      Tasklist: [
-        "components/tasklist/introduction-to-tasklist",
-        {
-          "User guide": [
-            "components/tasklist/userguide/using-tasklist",
-            "components/tasklist/userguide/managing-tasks",
-            "components/tasklist/userguide/using-filters",
-            "components/tasklist/userguide/defining-task-priorities",
-            "components/tasklist/userguide/starting-processes",
-            "components/tasklist/userguide/tasklist-localization",
-          ],
-        },
-      ],
-      Optimize: [
-        "components/optimize/what-is-optimize",
+        "components/optimize/userguide/creating-reports",
+        "components/optimize/userguide/process-KPIs",
 
         {
-          "User guide": [
-            "components/optimize/userguide/collections-dashboards-reports",
-            "components/optimize/userguide/user-permissions",
-            "components/optimize/userguide/data-sources",
-
+          "Process analysis": [
+            "components/optimize/userguide/process-analysis/process-analysis-overview",
+            "components/optimize/userguide/process-analysis/task-analysis",
+            "components/optimize/userguide/process-analysis/branch-analysis",
+            "components/optimize/userguide/process-analysis/user-task-analytics",
             {
-              Dashboards: [
-                "components/optimize/userguide/creating-dashboards",
-                "components/optimize/userguide/edit-mode",
-                "components/optimize/userguide/view-mode",
-              ],
-            },
-            {
-              "Dashboards maintained by Camunda": [
-                "components/optimize/userguide/process-dashboards",
-                "components/optimize/userguide/instant-process-dashboards",
-              ],
-            },
-            "components/optimize/userguide/creating-reports",
-            "components/optimize/userguide/process-KPIs",
-
-            {
-              "Process analysis": [
-                "components/optimize/userguide/process-analysis/process-analysis-overview",
-                "components/optimize/userguide/process-analysis/task-analysis",
-                "components/optimize/userguide/process-analysis/branch-analysis",
-                "components/optimize/userguide/process-analysis/user-task-analytics",
+              "Report analysis": [
+                "components/optimize/userguide/process-analysis/report-analysis/overview",
                 {
-                  "Report analysis": [
-                    "components/optimize/userguide/process-analysis/report-analysis/overview",
-                    {
-                      "Edit mode": [
-                        "components/optimize/userguide/process-analysis/report-analysis/edit-mode",
-                        "components/optimize/userguide/process-analysis/report-analysis/select-process-definitions",
-                        "components/optimize/userguide/process-analysis/report-analysis/define-reports",
-                        "components/optimize/userguide/process-analysis/report-analysis/measures",
-                        "components/optimize/userguide/process-analysis/report-analysis/compare-target-values",
-                        "components/optimize/userguide/process-analysis/report-analysis/process-instance-parts",
-                        "components/optimize/userguide/process-analysis/report-analysis/configure-reports",
-                      ],
-                    },
-
-                    "components/optimize/userguide/process-analysis/report-analysis/view-mode",
+                  "Edit mode": [
+                    "components/optimize/userguide/process-analysis/report-analysis/edit-mode",
+                    "components/optimize/userguide/process-analysis/report-analysis/select-process-definitions",
+                    "components/optimize/userguide/process-analysis/report-analysis/define-reports",
+                    "components/optimize/userguide/process-analysis/report-analysis/measures",
+                    "components/optimize/userguide/process-analysis/report-analysis/compare-target-values",
+                    "components/optimize/userguide/process-analysis/report-analysis/process-instance-parts",
+                    "components/optimize/userguide/process-analysis/report-analysis/configure-reports",
                   ],
                 },
 
-                {
-                  Filters: [
-                    "components/optimize/userguide/process-analysis/filters",
-                    "components/optimize/userguide/process-analysis/metadata-filters",
-                    "components/optimize/userguide/process-analysis/instance-state-filters",
-                    "components/optimize/userguide/process-analysis/flow-node-filters",
-                    "components/optimize/userguide/process-analysis/process-instance-filters",
-                    "components/optimize/userguide/process-analysis/variable-filters",
-                  ],
-                },
+                "components/optimize/userguide/process-analysis/report-analysis/view-mode",
               ],
             },
 
             {
-              "Additional features": [
-                "components/optimize/userguide/additional-features/alerts",
-                "components/optimize/userguide/additional-features/export-import",
-                "components/optimize/userguide/additional-features/variable-labeling",
-                "components/optimize/userguide/additional-features/process-variants-comparison",
-                "components/optimize/userguide/additional-features/ml-dataset",
+              Filters: [
+                "components/optimize/userguide/process-analysis/filters",
+                "components/optimize/userguide/process-analysis/metadata-filters",
+                "components/optimize/userguide/process-analysis/instance-state-filters",
+                "components/optimize/userguide/process-analysis/flow-node-filters",
+                "components/optimize/userguide/process-analysis/process-instance-filters",
+                "components/optimize/userguide/process-analysis/variable-filters",
               ],
             },
+          ],
+        },
+
+        {
+          "Additional features": [
+            "components/optimize/userguide/additional-features/alerts",
+            "components/optimize/userguide/additional-features/export-import",
+            "components/optimize/userguide/additional-features/variable-labeling",
+            "components/optimize/userguide/additional-features/process-variants-comparison",
+            "components/optimize/userguide/additional-features/ml-dataset",
           ],
         },
       ],
     },
     {
       type: "category",
-      label: "Identity",
+      label: "Console",
       link: {
         type: "doc",
-        id: "components/identity/identity-introduction",
+        id: "components/console/introduction-to-console",
       },
       items: [
-        "components/identity/identity-introduction",
-        "components/identity/authorization",
-        "components/identity/user",
+        {
+          "Manage your organization": [
+            "components/console/manage-organization/organization-settings",
+            "components/console/manage-organization/manage-users",
+            "components/console/manage-organization/view-organization-activity",
+            "components/console/manage-organization/enable-alpha-features",
+            "components/console/manage-organization/usage-history",
+            "components/console/manage-organization/usage-alerts",
+            "components/console/manage-organization/advanced-search",
+            "components/console/manage-organization/switch-organization",
+            "components/console/manage-organization/external-sso",
+            "components/console/manage-organization/delete-account",
+          ],
+        },
+        {
+          "Manage clusters": [
+            "components/console/manage-clusters/create-cluster",
+            "components/console/manage-clusters/manage-cluster",
+            "components/console/manage-clusters/cluster-connectors",
+            "components/console/manage-clusters/manage-api-clients",
+            "components/console/manage-clusters/manage-secrets",
+            "components/console/manage-clusters/manage-alerts",
+            "components/console/manage-clusters/manage-ip-allowlists",
+            "components/console/manage-clusters/create-backups",
+            "components/console/manage-clusters/settings",
+            "components/console/manage-clusters/cluster-capacity",
+          ],
+        },
+        {
+          "Manage your plan": [
+            "components/console/manage-plan/available-plans",
+            "components/console/manage-plan/upgrade-to-enterprise-plan",
+            "components/console/manage-plan/update-billing-reservations",
+            "components/console/manage-plan/update-creditcard",
+            "components/console/manage-plan/retrieve-invoices-or-update-billing-info",
+            "components/console/manage-plan/cancel-starter-subscription",
+          ],
+        },
+        {
+          Troubleshooting: [
+            "components/console/console-troubleshooting/common-pitfalls",
+          ],
+        },
       ],
     },
     {
-      "Best Practices": [
-        "components/best-practices/best-practices-overview",
+      type: "category",
+      label: "Best Practices",
+      link: {
+        type: "doc",
+        id: "components/best-practices/best-practices-overview",
+      },
+      items: [
         {
           "Project management": [
             "components/best-practices/management/following-the-customer-success-path",
@@ -741,6 +778,7 @@ module.exports = {
                 "components/early-access/alpha/bpmn-copilot/bpmn-copilot",
               ],
             },
+            "components/early-access/alpha/feel-copilot/feel-copilot",
           ],
         },
       ],
@@ -1051,17 +1089,65 @@ module.exports = {
           },
           items: [
             {
-              "Amazon EKS": [
-                "self-managed/setup/deploy/amazon/amazon-eks/eks-terraform",
-                "self-managed/setup/deploy/amazon/amazon-eks/eks-helm",
-                "self-managed/setup/deploy/amazon/amazon-eks/dual-region",
+              type: "category",
+              label: "Amazon",
+              link: {
+                type: "doc",
+                id: "self-managed/setup/deploy/amazon/amazon-eks/amazon-eks",
+              },
+              items: [
+                {
+                  type: "category",
+                  label: "Amazon EKS",
+                  link: {
+                    type: "doc",
+                    id: "self-managed/setup/deploy/amazon/amazon-eks/amazon-eks",
+                  },
+                  items: [
+                    "self-managed/setup/deploy/amazon/amazon-eks/eks-terraform",
+                    "self-managed/setup/deploy/amazon/amazon-eks/eks-helm",
+                    "self-managed/setup/deploy/amazon/amazon-eks/dual-region",
+                    "self-managed/setup/deploy/amazon/amazon-eks/eks-eksctl",
+                    "self-managed/setup/deploy/amazon/amazon-eks/irsa",
+                  ],
+                },
+                {
+                  type: "category",
+                  label: "ROSA",
+                  link: {
+                    type: "doc",
+                    id: "self-managed/setup/deploy/amazon/openshift/terraform-setup",
+                  },
+                  items: [
+                    "self-managed/setup/deploy/amazon/openshift/terraform-setup",
+                    "self-managed/setup/deploy/amazon/openshift/terraform-setup-dual-region",
+                  ],
+                },
               ],
             },
             {
-              Openshift: [
-                "self-managed/setup/deploy/amazon/openshift/terraform-setup",
-                "self-managed/setup/deploy/openshift/redhat-openshift",
-                "self-managed/setup/deploy/amazon/openshift/terraform-setup-dual-region",
+              type: "category",
+              label: "Microsoft",
+              link: {
+                type: "doc",
+                id: "self-managed/setup/deploy/azure/microsoft-aks/microsoft-aks",
+              },
+              items: [
+                "self-managed/setup/deploy/azure/microsoft-aks/aks-terraform",
+                "self-managed/setup/deploy/azure/microsoft-aks/aks-helm",
+              ],
+            },
+            {
+              Google: ["self-managed/setup/deploy/gcp/google-gke"],
+            },
+            {
+              type: "category",
+              label: "Red Hat OpenShift",
+              link: {
+                type: "doc",
+                id: "self-managed/setup/deploy/openshift/redhat-openshift",
+              },
+              items: [
                 "self-managed/setup/deploy/openshift/redhat-openshift-dual-region",
               ],
             },
@@ -1075,55 +1161,6 @@ module.exports = {
             id: "self-managed/reference-architecture/manual",
           },
           items: ["self-managed/setup/deploy/amazon/aws-ec2"],
-        },
-        {
-          "Amazon (AWS)": [
-            {
-              type: "category",
-              label: "Amazon EKS",
-              link: {
-                type: "doc",
-                id: "self-managed/setup/deploy/amazon/amazon-eks/amazon-eks",
-              },
-              items: [
-                "self-managed/setup/deploy/amazon/amazon-eks/eks-eksctl",
-                "self-managed/setup/deploy/amazon/amazon-eks/eks-terraform",
-                "self-managed/setup/deploy/amazon/amazon-eks/eks-helm",
-                "self-managed/setup/deploy/amazon/amazon-eks/dual-region",
-                "self-managed/setup/deploy/amazon/amazon-eks/irsa",
-              ],
-            },
-            {
-              type: "category",
-              label: "ROSA",
-              link: {
-                type: "doc",
-                id: "self-managed/setup/deploy/amazon/openshift/terraform-setup",
-              },
-              items: [
-                "self-managed/setup/deploy/amazon/openshift/terraform-setup",
-                "self-managed/setup/deploy/amazon/openshift/terraform-setup-dual-region",
-              ],
-            },
-            {
-              type: "category",
-              label: "Amazon MarketPlace",
-              link: {
-                type: "doc",
-                id: "self-managed/setup/deploy/amazon/aws-marketplace",
-              },
-              items: [],
-            },
-            "self-managed/setup/deploy/amazon/aws-ec2",
-          ],
-          "Microsoft (Azure)": [
-            "self-managed/setup/deploy/azure/microsoft-aks",
-          ],
-          "Google (GCP)": ["self-managed/setup/deploy/gcp/google-gke"],
-          "Red Hat (OpenShift)": [
-            "self-managed/setup/deploy/openshift/redhat-openshift",
-            "self-managed/setup/deploy/openshift/redhat-openshift-dual-region",
-          ],
         },
       ],
     },
@@ -1173,11 +1210,9 @@ module.exports = {
       items: [
         "self-managed/setup/guides/accessing-components-without-ingress",
         "self-managed/setup/guides/ingress-setup",
-        "self-managed/setup/guides/using-existing-keycloak",
         "self-managed/setup/guides/using-existing-elasticsearch",
         "self-managed/setup/guides/using-existing-opensearch",
         "self-managed/setup/guides/configure-db-custom-headers",
-        "self-managed/setup/guides/connect-to-an-oidc-provider",
         "self-managed/setup/guides/air-gapped-installation",
         "self-managed/setup/guides/running-custom-connectors",
         "self-managed/setup/guides/multi-namespace-deployment",
@@ -1237,10 +1272,26 @@ module.exports = {
     {
       Concepts: [
         {
-          "Access control": [
-            "self-managed/concepts/access-control/applications",
-            "self-managed/concepts/access-control/resource-authorizations",
-            "self-managed/concepts/access-control/user-task-access-restrictions",
+          type: "category",
+          label: "Document handling",
+          link: {
+            type: "doc",
+            id: "self-managed/concepts/document-handling/getting-started",
+          },
+          items: [
+            {
+              type: "category",
+              label: "Configuration",
+              link: {
+                type: "doc",
+                id: "self-managed/concepts/document-handling/configuration/overview",
+              },
+              items: [
+                "self-managed/concepts/document-handling/configuration/camunda-8-run",
+                "self-managed/concepts/document-handling/configuration/docker",
+                "self-managed/concepts/document-handling/configuration/helm",
+              ],
+            },
           ],
         },
         "self-managed/concepts/exporters",
@@ -1256,102 +1307,151 @@ module.exports = {
     {
       Components: [
         {
-          Console: [
-            "self-managed/console-deployment/overview",
-            "self-managed/console-deployment/installation",
+          Modeler: [
             {
-              Configuration: [
-                "self-managed/console-deployment/configuration/configuration",
-                "self-managed/console-deployment/configuration/ssl",
+              "Web Modeler": [
+                "self-managed/modeler/web-modeler/installation",
+                {
+                  Configuration: [
+                    "self-managed/modeler/web-modeler/configuration/configuration",
+                    "self-managed/modeler/web-modeler/configuration/database",
+                    "self-managed/modeler/web-modeler/configuration/identity",
+                    "self-managed/modeler/web-modeler/configuration/logging",
+                    "self-managed/modeler/web-modeler/configuration/ssl",
+                  ],
+                  Troubleshooting: [
+                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-database-connection",
+                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection",
+                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-missing-data",
+                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-proxy-configuration",
+                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-other-problems",
+                  ],
+                },
               ],
             },
-            "self-managed/console-deployment/usage-metrics",
-            "self-managed/console-deployment/telemetry",
+            {
+              "Desktop Modeler": [
+                "self-managed/modeler/desktop-modeler/deploy-to-self-managed",
+              ],
+            },
           ],
-          Zeebe: [
-            "self-managed/zeebe-deployment/zeebe-installation",
+        },
+        {
+          type: "category",
+          label: "Orchestration cluster",
+          link: {
+            type: "doc",
+            id: "self-managed/orchestration-cluster/sm-orchestration-cluster",
+          },
+          items: [
             {
-              "Zeebe Gateway": [
-                "self-managed/zeebe-deployment/zeebe-gateway/overview",
-                "self-managed/zeebe-deployment/zeebe-gateway/interceptors",
-                "self-managed/zeebe-deployment/zeebe-gateway/filters",
-                "self-managed/zeebe-deployment/zeebe-gateway/job-streaming",
+              Zeebe: [
+                "self-managed/zeebe-deployment/zeebe-installation",
+                {
+                  "Zeebe Gateway": [
+                    "self-managed/zeebe-deployment/zeebe-gateway/overview",
+                    "self-managed/zeebe-deployment/zeebe-gateway/interceptors",
+                    "self-managed/zeebe-deployment/zeebe-gateway/filters",
+                    "self-managed/zeebe-deployment/zeebe-gateway/job-streaming",
+                  ],
+                },
+                {
+                  Configuration: [
+                    "self-managed/zeebe-deployment/configuration/configuration",
+                    "self-managed/zeebe-deployment/configuration/logging",
+                    "self-managed/zeebe-deployment/configuration/gateway-health-probes",
+                    "self-managed/zeebe-deployment/configuration/environment-variables",
+                    "self-managed/zeebe-deployment/configuration/fixed-partitioning",
+                    "self-managed/zeebe-deployment/configuration/priority-election",
+                    "self-managed/zeebe-deployment/configuration/broker-config",
+                    "self-managed/zeebe-deployment/configuration/gateway-config",
+                  ],
+                },
+                {
+                  Security: [
+                    "self-managed/zeebe-deployment/security/security",
+                    "self-managed/zeebe-deployment/security/client-authorization",
+                    "self-managed/zeebe-deployment/security/secure-client-communication",
+                    "self-managed/zeebe-deployment/security/secure-cluster-communication",
+                  ],
+                },
+                {
+                  Operation: [
+                    "self-managed/zeebe-deployment/operations/zeebe-in-production",
+                    "self-managed/zeebe-deployment/operations/resource-planning",
+                    "self-managed/zeebe-deployment/operations/network-ports",
+                    "self-managed/zeebe-deployment/operations/setting-up-a-cluster",
+                    "self-managed/zeebe-deployment/operations/health",
+                    "self-managed/zeebe-deployment/operations/backpressure",
+                    "self-managed/zeebe-deployment/operations/disk-space",
+                    "self-managed/zeebe-deployment/operations/update-zeebe",
+                    "self-managed/zeebe-deployment/operations/rebalancing",
+                    "self-managed/zeebe-deployment/operations/management-api",
+                    "self-managed/zeebe-deployment/operations/backups",
+                    "self-managed/zeebe-deployment/operations/cluster-scaling",
+                  ],
+                },
+                {
+                  type: "category",
+                  label: "Exporters",
+                  link: {
+                    type: "doc",
+                    id: "self-managed/zeebe-deployment/exporters/exporters",
+                  },
+                  items: [
+                    "self-managed/zeebe-deployment/exporters/install-zeebe-exporters",
+                    "self-managed/zeebe-deployment/exporters/camunda-exporter",
+                    "self-managed/zeebe-deployment/exporters/elasticsearch-exporter",
+                    "self-managed/zeebe-deployment/exporters/opensearch-exporter",
+                  ],
+                },
               ],
-            },
-            {
-              Configuration: [
-                "self-managed/zeebe-deployment/configuration/configuration",
-                "self-managed/zeebe-deployment/configuration/logging",
-                "self-managed/zeebe-deployment/configuration/gateway-health-probes",
-                "self-managed/zeebe-deployment/configuration/environment-variables",
-                "self-managed/zeebe-deployment/configuration/fixed-partitioning",
-                "self-managed/zeebe-deployment/configuration/priority-election",
-                "self-managed/zeebe-deployment/configuration/broker-config",
-                "self-managed/zeebe-deployment/configuration/gateway-config",
+              Operate: [
+                "self-managed/operate-deployment/install-and-start",
+                "self-managed/operate-deployment/operate-configuration",
+                "self-managed/operate-deployment/data-retention",
+                "self-managed/operate-deployment/schema-and-migration",
+                "self-managed/operate-deployment/importer-and-archiver",
+                "self-managed/operate-deployment/operate-authentication",
+                "self-managed/operate-deployment/usage-metrics",
               ],
-            },
-            {
-              Security: [
-                "self-managed/zeebe-deployment/security/security",
-                "self-managed/zeebe-deployment/security/client-authorization",
-                "self-managed/zeebe-deployment/security/secure-client-communication",
-                "self-managed/zeebe-deployment/security/secure-cluster-communication",
-              ],
-            },
-            {
-              Operation: [
-                "self-managed/zeebe-deployment/operations/zeebe-in-production",
-                "self-managed/zeebe-deployment/operations/resource-planning",
-                "self-managed/zeebe-deployment/operations/network-ports",
-                "self-managed/zeebe-deployment/operations/setting-up-a-cluster",
-                "self-managed/zeebe-deployment/operations/health",
-                "self-managed/zeebe-deployment/operations/backpressure",
-                "self-managed/zeebe-deployment/operations/disk-space",
-                "self-managed/zeebe-deployment/operations/update-zeebe",
-                "self-managed/zeebe-deployment/operations/rebalancing",
-                "self-managed/zeebe-deployment/operations/management-api",
-                "self-managed/zeebe-deployment/operations/backups",
-                "self-managed/zeebe-deployment/operations/cluster-scaling",
+              Tasklist: [
+                "self-managed/tasklist-deployment/install-and-start",
+                "self-managed/tasklist-deployment/tasklist-configuration",
+                "self-managed/tasklist-deployment/tasklist-custom-styling",
+                "self-managed/tasklist-deployment/data-retention",
+                "self-managed/tasklist-deployment/importer-and-archiver",
+                "self-managed/tasklist-deployment/tasklist-authentication",
+                "self-managed/tasklist-deployment/usage-metrics",
+                "self-managed/tasklist-deployment/user-task-access-restrictions",
               ],
             },
             {
               type: "category",
-              label: "Exporters",
+              label: "Identity",
               link: {
                 type: "doc",
-                id: "self-managed/zeebe-deployment/exporters/exporters",
+                id: "self-managed/orchestration-identity/orchestration-identity",
               },
               items: [
-                "self-managed/zeebe-deployment/exporters/install-zeebe-exporters",
-                "self-managed/zeebe-deployment/exporters/camunda-exporter",
-                "self-managed/zeebe-deployment/exporters/elasticsearch-exporter",
-                "self-managed/zeebe-deployment/exporters/opensearch-exporter",
+                "self-managed/orchestration-identity/installation",
+                "self-managed/orchestration-identity/configuration",
+                {
+                  "Mapping rules": [
+                    "self-managed/orchestration-identity/mapping-rules/managing-mapping-rules",
+                    "self-managed/orchestration-identity/mapping-rules/mapping-rule-authorizations",
+                    "self-managed/orchestration-identity/mapping-rules/assign-mappings-to-tenants",
+                  ],
+                },
               ],
             },
           ],
-          Operate: [
-            "self-managed/operate-deployment/install-and-start",
-            "self-managed/operate-deployment/operate-configuration",
-            "self-managed/operate-deployment/data-retention",
-            "self-managed/operate-deployment/schema-and-migration",
-            "self-managed/operate-deployment/importer-and-archiver",
-            "self-managed/operate-deployment/operate-authentication",
-            "self-managed/operate-deployment/usage-metrics",
-          ],
-          Tasklist: [
-            "self-managed/tasklist-deployment/install-and-start",
-            "self-managed/tasklist-deployment/tasklist-configuration",
-            "self-managed/tasklist-deployment/tasklist-custom-styling",
-            "self-managed/tasklist-deployment/data-retention",
-            "self-managed/tasklist-deployment/importer-and-archiver",
-            "self-managed/tasklist-deployment/tasklist-authentication",
-            "self-managed/tasklist-deployment/usage-metrics",
-          ],
+        },
+        {
           Connectors: [
             "self-managed/connectors-deployment/install-and-start",
             "self-managed/connectors-deployment/connectors-configuration",
           ],
-
           Optimize: [
             "self-managed/optimize-deployment/install-and-start",
             {
@@ -1387,129 +1487,85 @@ module.exports = {
               ],
             },
           ],
-
-          Identity: [
-            "self-managed/identity/what-is-identity",
+          Console: [
+            "self-managed/console-deployment/overview",
+            "self-managed/console-deployment/installation",
             {
-              "Identity for Orchestration clusters": [
-                "self-managed/identity/orchestration-identity/installation",
-                "self-managed/identity/orchestration-identity/configuration",
-                {
-                  "Mapping rules": [
-                    "self-managed/identity/orchestration-identity/mapping-rules/managing-mapping-rules",
-                    "self-managed/identity/orchestration-identity/mapping-rules/mapping-rule-authorizations",
-                    "self-managed/identity/orchestration-identity/mapping-rules/assign-mappings-to-tenants",
-                  ],
-                },
+              Configuration: [
+                "self-managed/console-deployment/configuration/configuration",
+                "self-managed/console-deployment/configuration/ssl",
               ],
             },
-            {
-              "Identity for Web Modeler, Console, and Optimize": [
-                "self-managed/identity/getting-started/install-identity",
-                {
-                  "User guide": [
-                    {
-                      Configuration: [
-                        "self-managed/identity/user-guide/configuration/making-identity-production-ready",
-                        "self-managed/identity/user-guide/configuration/configure-external-identity-provider",
-                        "self-managed/identity/user-guide/configuration/configure-logging",
-                        "self-managed/identity/user-guide/configuration/connect-to-an-existing-keycloak",
-                      ],
-                    },
-                    {
-                      Roles: [
-                        "self-managed/identity/user-guide/roles/manage-roles",
-                        "self-managed/identity/user-guide/roles/manage-permissions",
-                      ],
-                    },
-                    {
-                      Groups: [
-                        "self-managed/identity/user-guide/groups/manage-groups",
-                        "self-managed/identity/user-guide/groups/manage-users-roles-to-group",
-                      ],
-                    },
-                    {
-                      Authorizations: [
-                        "self-managed/identity/user-guide/authorizations/managing-resource-authorizations",
-                        "self-managed/identity/user-guide/authorizations/managing-user-access",
-                        "self-managed/identity/user-guide/authorizations/generating-m2m-tokens",
-                      ],
-                    },
-                    {
-                      Tenants: [
-                        "self-managed/identity/user-guide/tenants/managing-tenants",
-                      ],
-                    },
-                    {
-                      "Additional features": [
-                        "self-managed/identity/user-guide/additional-features/adding-an-api",
-                        "self-managed/identity/user-guide/additional-features/incorporate-applications",
-                      ],
-                    },
-                  ],
-                },
-                {
-                  Deployment: [
-                    "self-managed/identity/deployment/configuration-variables",
-                    "self-managed/identity/deployment/application-monitoring",
-                    "self-managed/identity/deployment/starting-configuration-for-identity",
-                    "self-managed/identity/deployment/resource-management",
-                  ],
-                },
-                "self-managed/identity/troubleshooting/troubleshoot-identity",
-              ],
-            },
-          ],
-        },
-        {
-          Modeler: [
-            {
-              "Web Modeler": [
-                "self-managed/modeler/web-modeler/installation",
-                {
-                  Configuration: [
-                    "self-managed/modeler/web-modeler/configuration/configuration",
-                    "self-managed/modeler/web-modeler/configuration/database",
-                    "self-managed/modeler/web-modeler/configuration/identity",
-                    "self-managed/modeler/web-modeler/configuration/logging",
-                    "self-managed/modeler/web-modeler/configuration/ssl",
-                  ],
-                  Troubleshooting: [
-                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-database-connection",
-                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection",
-                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-missing-data",
-                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-proxy-configuration",
-                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-other-problems",
-                  ],
-                },
-              ],
-            },
-            {
-              "Desktop Modeler": [
-                "self-managed/modeler/desktop-modeler/deploy-to-self-managed",
-              ],
-            },
+            "self-managed/console-deployment/usage-metrics",
+            "self-managed/console-deployment/telemetry",
           ],
         },
         {
           type: "category",
-          label: "Document handling",
+          label: "Management Identity",
           link: {
             type: "doc",
-            id: "self-managed/document-handling/getting-started",
+            id: "self-managed/identity/what-is-identity",
           },
           items: [
+            "self-managed/identity/identity-first-steps",
             {
               type: "category",
               label: "Configuration",
               link: {
                 type: "doc",
-                id: "self-managed/document-handling/configuration/overview",
+                id: "self-managed/identity/configuration/identity-configuration-overview",
               },
               items: [
-                "self-managed/document-handling/configuration/camunda-8-run",
-                "self-managed/document-handling/configuration/docker",
-                "self-managed/document-handling/configuration/helm",
+                "self-managed/identity/configuration/configure-external-identity-provider",
+                "self-managed/identity/configuration/connect-to-an-existing-keycloak",
+                "self-managed/identity/configuration/connect-to-an-oidc-provider",
+                "self-managed/identity/configuration/alternative-db",
+              ],
+            },
+            "self-managed/identity/authentication",
+            {
+              type: "category",
+              label: "Manage Identity",
+              items: [
+                {
+                  type: "category",
+                  label: "Users, groups, roles, and applications",
+                  link: {
+                    type: "doc",
+                    id: "self-managed/identity/application-user-group-role-management/identity-application-user-group-role-management-overview",
+                  },
+                  items: [
+                    "self-managed/identity/application-user-group-role-management/manage-groups",
+                    "self-managed/identity/application-user-group-role-management/manage-roles",
+                    "self-managed/identity/application-user-group-role-management/applications",
+                  ],
+                },
+                {
+                  type: "category",
+                  label: "Access and permissions",
+                  link: {
+                    type: "doc",
+                    id: "self-managed/identity/access-management/access-management-overview",
+                  },
+                  items: [
+                    "self-managed/identity/access-management/manage-permissions",
+                    "self-managed/identity/access-management/resource-authorizations",
+                  ],
+                },
+                "self-managed/identity/managing-tenants",
+                "self-managed/identity/mapping-rules",
+              ],
+            },
+            {
+              Reference: [
+                "self-managed/identity/miscellaneous/application-monitoring",
+                "self-managed/identity/miscellaneous/configuration-variables",
+                "self-managed/identity/miscellaneous/configure-logging",
+                "self-managed/identity/miscellaneous/making-identity-production-ready",
+                "self-managed/identity/miscellaneous/resource-management",
+                "self-managed/identity/miscellaneous/starting-configuration",
+                "self-managed/identity/miscellaneous/troubleshoot-identity",
               ],
             },
           ],

@@ -35,7 +35,7 @@ To use a **REST connector** in your process, follow the steps below:
 2. Name your project and select **Create new > BPMN diagram**.
 3. Give your model a descriptive name and ID. On the right side of the page, expand the **General** section of the properties panel to find the name and ID fields. For this guide, we'll use `API Orchestration Tutorial` for the name and `api-orchestration-tutorial` for the ID.
 4. Use Web Modeler to design a BPMN flow with a connector. Create a connector by dragging the rectangular task element from the palette, or click the existing start event and the displayed task element to the right of the start event.
-5. Change the task type by clicking the wrench icon and select **REST Outbound connector** in the **Connectors** section. Alternatively, you can directly choose a **REST Outbound connector** by using the context pad.
+5. Change the task type by clicking on the element and selecting the **Change element** menu icon. Select **REST Outbound connector** in the **Connectors** section. Alternatively, you can directly choose a **REST Outbound connector** by using the context pad.
 
    ![Blank task on Web Modeler canvas with properties panel open](img/connectors-blank-task.png)
 
@@ -91,6 +91,7 @@ Don't want to build the process yourself? Click this button to create it from a 
 
 ## Additional resources and next steps
 
-- Learn more about Camunda 8 and what it can do by reading [What is Camunda 8](/components/concepts/what-is-camunda-8.md) or watching our [Overview video](https://bit.ly/3TjNEm7) in Camunda Academy.
+- Learn more about Camunda 8 and what it can do by reading [What is Camunda 8](/components/components-overview.md) or watching our [overview video](https://bit.ly/3TjNEm7) in Camunda Academy.
 - [Learn about types of connectors](/components/connectors/connector-types.md)
 - [Use connectors in your BPMN process](/components/connectors/use-connectors/index.md)
+- [Camunda Academy: Generate a Connector Template from an API Specification](https://academy.camunda.com/c8-h2-generate-connector-from-api/)

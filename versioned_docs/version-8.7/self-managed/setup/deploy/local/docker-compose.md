@@ -8,7 +8,7 @@ import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import {DockerCompose} from "@site/src/components/CamundaDistributions";
 
-A Docker Compose configuration to run Camunda Self-Managed components (Zeebe, Operate, Tasklist, Optimize, Identity, and connectors). Docker Compose also supports document storage and management with [document handling](/self-managed/document-handling/overview.md).
+A Docker Compose configuration to run Camunda Self-Managed components (Zeebe, Operate, Tasklist, Optimize, Identity, and connectors). Docker Compose also supports document storage and management with [document handling](/self-managed/concepts/document-handling/overview.md).
 
 :::note
 While the [Docker images](/self-managed/setup/deploy/other/docker.md) themselves are supported for production usage, the Docker Compose files are designed to be used by developers to run an environment locally, and are not designed to be used in production. We recommend [Kubernetes](/self-managed/setup/install.md) for production use cases.

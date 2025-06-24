@@ -1,0 +1,501 @@
+---
+id: search-process-instance-incidents
+title: "Search for incidents associated with a process instance"
+description: "Search for incidents caused by the process instance or any of its called process or decision instances."
+sidebar_label: "Search for incidents associated with a process instance"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Search for incidents associated with a process instance"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/process-instances/{processInstanceKey}/incidents/search"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Search for incidents caused by the process instance or any of its called process or decision instances.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "processInstanceKey",
+      in: "path",
+      required: true,
+      description:
+        "The assigned key of the process instance, which acts as a unique identifier for this process instance.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          allOf: [
+            {
+              type: "object",
+              properties: {
+                page: {
+                  description: "Pagination criteria.",
+                  allOf: [
+                    {
+                      type: "object",
+                      properties: {
+                        from: {
+                          description:
+                            "The index of items to start searching from.",
+                          type: "integer",
+                          format: "int32",
+                        },
+                        limit: {
+                          description:
+                            "The maximum number of items to return in one request.",
+                          type: "integer",
+                          format: "int32",
+                          default: 100,
+                        },
+                        after: {
+                          description:
+                            "Use the `endCursor` value from the previous response to fetch the next page of results.",
+                          type: "string",
+                        },
+                        before: {
+                          description:
+                            "Use the `startCursor` value from the previous response to fetch the previous page of results.",
+                          type: "string",
+                        },
+                      },
+                      title: "SearchQueryPageRequest",
+                    },
+                  ],
+                  type: "object",
+                },
+              },
+              title: "SearchQueryRequest",
+            },
+          ],
+          properties: {
+            sort: {
+              description: "Sort field criteria.",
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  field: {
+                    description: "The field to sort by.",
+                    type: "string",
+                    enum: [
+                      "incidentKey",
+                      "processDefinitionKey",
+                      "processDefinitionId",
+                      "processInstanceKey",
+                      "errorType",
+                      "errorMessage",
+                      "elementId",
+                      "elementInstanceKey",
+                      "creationTime",
+                      "state",
+                      "jobKey",
+                      "tenantId",
+                    ],
+                  },
+                  order: {
+                    description:
+                      "The order in which to sort the related field.",
+                    type: "string",
+                    enum: ["ASC", "DESC"],
+                    default: "ASC",
+                    title: "SortOrderEnum",
+                  },
+                },
+                required: ["field"],
+                title: "IncidentSearchQuerySortRequest",
+              },
+            },
+          },
+          title: "ProcessInstanceIncidentSearchQuery",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The process instance search result.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            allOf: [
+              {
+                type: "object",
+                properties: {
+                  page: {
+                    description:
+                      "Pagination information about the search results.",
+                    allOf: [
+                      {
+                        description:
+                          "Pagination information about the search results.",
+                        type: "object",
+                        properties: {
+                          totalItems: {
+                            description: "Total items matching the criteria.",
+                            type: "integer",
+                            format: "int64",
+                          },
+                          startCursor: {
+                            description:
+                              "The cursor value for getting the previous page of results. Use this in the `before` field of an ensuing request.",
+                            type: "string",
+                          },
+                          endCursor: {
+                            description:
+                              "The cursor value for getting the next page of results. Use this in the `after` field of an ensuing request.",
+                            type: "string",
+                          },
+                        },
+                        title: "SearchQueryPageResponse",
+                      },
+                    ],
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                description: "The matching incidents.",
+                type: "array",
+                items: {
+                  type: "object",
+                  properties: {
+                    processDefinitionId: {
+                      type: "string",
+                      description:
+                        "The process definition ID associated to this incident.",
+                    },
+                    errorType: {
+                      type: "string",
+                      description:
+                        "Incident error type with a defined set of values.",
+                      enum: [
+                        "UNSPECIFIED",
+                        "UNKNOWN",
+                        "IO_MAPPING_ERROR",
+                        "JOB_NO_RETRIES",
+                        "EXECUTION_LISTENER_NO_RETRIES",
+                        "TASK_LISTENER_NO_RETRIES",
+                        "CONDITION_ERROR",
+                        "EXTRACT_VALUE_ERROR",
+                        "CALLED_ELEMENT_ERROR",
+                        "UNHANDLED_ERROR_EVENT",
+                        "MESSAGE_SIZE_EXCEEDED",
+                        "CALLED_DECISION_ERROR",
+                        "DECISION_EVALUATION_ERROR",
+                        "FORM_NOT_FOUND",
+                        "RESOURCE_NOT_FOUND",
+                      ],
+                    },
+                    errorMessage: {
+                      type: "string",
+                      description:
+                        "Error message which describes the error in more detail.",
+                    },
+                    elementId: {
+                      type: "string",
+                      description:
+                        "The element ID associated to this incident.",
+                    },
+                    creationTime: {
+                      type: "string",
+                      description: "Date of incident creation.",
+                      format: "date-time",
+                    },
+                    state: {
+                      type: "string",
+                      description:
+                        "State of this incident with a defined set of values.",
+                      enum: ["ACTIVE", "MIGRATED", "RESOLVED", "PENDING"],
+                    },
+                    tenantId: {
+                      description: "The tenant ID of the incident.",
+                      type: "string",
+                    },
+                    incidentKey: {
+                      type: "string",
+                      description:
+                        "The assigned key, which acts as a unique identifier for this incident.",
+                    },
+                    processDefinitionKey: {
+                      type: "string",
+                      description:
+                        "The process definition key associated to this incident.",
+                    },
+                    processInstanceKey: {
+                      type: "string",
+                      description:
+                        "The process instance key associated to this incident.",
+                    },
+                    elementInstanceKey: {
+                      type: "string",
+                      description:
+                        "The element instance key associated to this incident.",
+                    },
+                    jobKey: {
+                      type: "string",
+                      description:
+                        "The job key, if exists, associated with this incident.",
+                    },
+                  },
+                  title: "IncidentResult",
+                },
+              },
+            },
+            title: "IncidentSearchQueryResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The process instance with the given key was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

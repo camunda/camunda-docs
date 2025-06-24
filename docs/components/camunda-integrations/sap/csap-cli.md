@@ -4,7 +4,7 @@ title: CSAP CLI command line utility
 description: "Learn about CSAP, the CLI to configure all SAP integration artifacts for deployment."
 ---
 
-The Camunda SAP Integration CLI (`csap`) is a command-line tool designed to simplify the setup of Camunda's SAP integration modules. It provides a streamlined process for configuring and building these modules for deployment.
+The [Camunda SAP Integration CLI](/reference/glossary.md#csap-cli) (`csap`) is a command-line tool designed to simplify the setup of Camunda's SAP integration modules. It provides a streamlined process for configuring and building these modules for deployment.
 
 ## Features
 
@@ -28,13 +28,16 @@ The CLI supports the following SAP integration modules:
 
 To use the CLI, download the binary matching your operating system and architecture from the [releases](https://github.com/camunda/sap-csap-cli/releases) section of its repository:
 
+1. Check your build system meets the following requirements:
+   1. [Node.js](https://nodejs.org/en) >= 20 (this includes the required `npm`)
+   2. The [transient requirements for SAP's `mbt`](https://sap.github.io/cloud-mta-build-tool/makefile/) (Cloud MTA Build Tool), specifically `make`
 1. Navigate to the [releases](https://github.com/camunda/sap-csap-cli/releases) page.
-2. Download the binary for your platform:
+1. Download the binary for your platform:
    - For Linux: `csap-x86_64-unknown-linux-gnu`
    - For macOS (Intel): `csap-x86_64-apple-darwin`
    - For macOS (Apple Silicon): `csap-aarch64-apple-darwin`
    - For Windows: `csap-x86_64-pc-windows-msvc.exe`
-3. Place the binary in a directory included in your system's `PATH` for easy access.
+1. Place the binary in a directory included in your system's `PATH` for easy access.
 
 ### Example for Linux/macOS
 

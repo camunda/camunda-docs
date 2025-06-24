@@ -37,7 +37,7 @@ To deploy, click **Deploy** in the upper right corner of the modeling screen:
 
 ![The deploy dialog of a BPMN diagram](img/web-modeler-deploy.png)
 
-In Self-Managed, you can deploy your diagram to the cluster defined in your Web Modeler [configuration](/self-managed/modeler/web-modeler/configuration/configuration.md#clusters). You should have the `Zeebe` [role](/self-managed/identity/user-guide/roles/manage-roles.md) assigned in Identity to be authorized to deploy.
+In Self-Managed, you can deploy your diagram to the cluster defined in your Web Modeler [configuration](/self-managed/modeler/web-modeler/configuration/configuration.md#clusters). You should have the `Zeebe` [role](/self-managed/identity/application-user-group-role-management/manage-roles.md) assigned in Identity to be authorized to deploy.
 
 ### Before deploying a process
 
@@ -109,10 +109,7 @@ You can also schedule a process to run at a specific time or interval using time
 To schedule a process using a timer, follow these steps:
 
 1. Select the start event.
-2. Change the start event type to a timer event using the **wrench tool**.
-
-<img src={ConvertToTimerImg} style={{width: 600}} alt="Converting the start event to a timer start event" />
-
+2. Change the start event type to a timer event by clicking on the element and selecting the **Change element** menu icon.
 3. [Configure the timer start event](../bpmn/timer-events/timer-events.md#timer-start-events) using the **properties panel** on the right side of the screen under the **Deploy** button to define when the process should be executed. You can set the timer to trigger at a specific date and time or to repeat at a certain interval.
 
 4. Click on **Deploy** to [deploy](#deploy-a-process) the process.
@@ -137,15 +134,23 @@ Publishing a process means that you make it available to other users inside and 
 
 You have the following options to publish a process:
 
-- [Deploy to run programmatically](#deploy-to-run-programmatically)
-- [Publish via webhook](#publish-via-webhook)
-- [Publish to Tasklist](#publish-to-tasklist)
-- [Publish via a public form](#publish-via-a-public-form)
-  - [Deploy process to the public](#deploy-process-to-the-public)
-  - [Get the public link and share it](#get-the-public-link-and-share-it)
-- [Listen to message or signal events](#listen-to-message-or-signal-events)
-- [Best practices for publishing a process](#best-practices-for-publishing-a-process)
-- [Missing client credentials](#missing-client-credentials)
+- [Deploy a process](#deploy-a-process)
+  - [Before deploying a process](#before-deploying-a-process)
+- [Run a process](#run-a-process)
+  - [Test run using Play mode](#test-run-using-play-mode)
+  - [Run manually from Modeler](#run-manually-from-modeler)
+  - [Schedule via timer](#schedule-via-timer)
+  - [Best practices for running a process](#best-practices-for-running-a-process)
+- [Publishing a process](#publishing-a-process)
+  - [Deploy to run programmatically](#deploy-to-run-programmatically)
+  - [Publish via webhook](#publish-via-webhook)
+  - [Publish to Tasklist](#publish-to-tasklist)
+  - [Publish via a public form](#publish-via-a-public-form)
+    - [Deploy process to the public](#deploy-process-to-the-public)
+    - [Get the public link and share it](#get-the-public-link-and-share-it)
+  - [Listen to message or signal events](#listen-to-message-or-signal-events)
+  - [Best practices for publishing a process](#best-practices-for-publishing-a-process)
+  - [Missing client credentials](#missing-client-credentials)
 
 ### Deploy to run programmatically
 
@@ -158,7 +163,7 @@ You can publish a process via webhook, which allows you to integrate it easily w
 Follow these steps to publish a process via a webhook:
 
 1. Select the start event.
-2. Switch your start event to a [HTTP webhook connector](/components/connectors/protocol/http-webhook.md) using the **wrench tool**.
+2. Switch your start event to a [HTTP webhook connector](/components/connectors/protocol/http-webhook.md) by clicking on the element and selecting the **Change element** menu icon.
    <img src={ConvertToWebhookImg} style={{width: 600}} alt="Converting the start event to a webhook start event" />
 
 3. Define the webhook configuration in the properties panel of the start event.
@@ -226,7 +231,7 @@ For further configuration and how to unpublish a process again, refer to the [fu
 Camunda 8 supports message and signal events, which can be used to trigger a process instance when a specific event occurs. Everyone on the platform that knows the message or signal correlation keys can call such a process. To listen to a message or signal event, you need to define a [message](../bpmn/message-events/message-events.md#message-start-events) or [signal start event](../bpmn/signal-events/signal-events.md#signal-start-events) in your process model and configure it to listen for the desired event. Follow these steps to configure a message or signal start event:
 
 1. Select the start event.
-2. Change the start event type to a message or signal start event using the **wrench tool**.
+2. Change the start event type to a message or signal start event by clicking on the element and selecting the **Change element** menu icon.
 3. Configure the message or signal start event using the **properties panel** to define the message or signal to listen to. Using messages, you can create a 1:1 relationship between calling processes. With signals, you can create broadcast-like message distributions.
 4. Click on **Deploy** to [deploy](#deploy-a-process) the process.
 
@@ -241,7 +246,7 @@ As soon as a matching event is received, a process instance will be started. To 
 - Make sure that the process is accessible to the appropriate users only.
 
 :::note
-When working on Camunda 8 Self-Managed, you can define access permissions on a per-process level using [Identity Resource Authorizations](../../../self-managed/identity/user-guide/authorizations/managing-resource-authorizations.md).
+When working on Camunda 8 Self-Managed, you can define access permissions on a per-process level using [Identity Resource Authorizations](/self-managed/identity/access-management/resource-authorizations.md).
 :::
 
 ### Missing client credentials

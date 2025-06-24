@@ -7,7 +7,12 @@ toc_max_heading_level: 3
 
 Supported environment changes and breaking changes or deprecations for the Camunda 8.5, 8.4, and 8.3 releases are summarized below.
 
-Please visit our [quality board](https://github.com/orgs/camunda/projects/187/views/18) to get an overview of known bugs by component and severity.
+:::tip Release notes and quality board
+
+- See [release notes](/reference/announcements-release-notes/850/850-release-notes.md) to learn more about new features and enhancements.
+- Refer to the [quality board](https://github.com/orgs/camunda/projects/187/views/18) for an overview of known bugs by component and severity.
+
+:::
 
 ## Camunda 8.5
 
@@ -109,7 +114,7 @@ This release contains the following limitations:
     - **Reference:** https://github.com/camunda/issues/issues/569
     - **Mitigation:**
       1. Feature is planned to be delivered with an upcoming patch release. Please see [issue](https://github.com/camunda/issues/issues/569) for latest progress.
-      2. [Disable Connectors component](/self-managed/setup/guides/connect-to-an-oidc-provider.md#configuration) when configuring a custom OIDC provider.
+      2. [Disable Connectors component](/self-managed/identity/configuration/connect-to-an-oidc-provider.md#configuration) when configuring a custom OIDC provider.
 
 ### Key changes
 
@@ -123,7 +128,7 @@ Follow the instructions in the [form linking](/components/modeler/web-modeler/ad
 #### Deprecated: Zeebe configuration properties for Camunda Identity
 
 The [Zeebe configuration properties for Camunda Identity](/self-managed/zeebe-deployment/configuration/gateway.md#zeebegatewayclustersecurityauthenticationidentity)
-were deprecated in `8.4`. Please use the dedicated Camunda Identity properties or the [corresponding environment variables](/self-managed/identity/deployment/configuration-variables.md#core-configuration).
+were deprecated in `8.4`. Please use the dedicated Camunda Identity properties or the [corresponding environment variables](/self-managed/identity/miscellaneous/configuration-variables.md#core-configuration).
 
 ### Additional features
 
