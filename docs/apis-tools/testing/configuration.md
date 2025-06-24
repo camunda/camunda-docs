@@ -8,7 +8,7 @@ import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
 By default, CPT uses a runtime based on [Testcontainers](#testcontainers-runtime). You can customize the runtime to your needs.
-Or, you can replace it by a [Remote runtime](#remote-runtime), for example, if you can't install a Docker-API compatible container runtime.
+Or, you can replace it with a [Remote runtime](#remote-runtime), for example, if you can't install a Docker runtime.
 
 ## Testcontainers runtime
 
@@ -24,7 +24,7 @@ If you have issues with your Docker runtime, have a look at the [Testcontainers 
 
 :::
 
-You can change the Docker images and other properties in the following way.
+You can change the Docker images and other runtime properties in the following way.
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={
 [
@@ -117,19 +117,19 @@ public class MyProcessTest {
 
 ## Remote runtime
 
-Instead of using the managed [Testcontainers runtime](#testcontainers-runtime), you can configure CPT to connect to a remote runtime, for example, to [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md) on your machine.
+Instead of using the managed [Testcontainers runtime](#testcontainers-runtime), you can configure CPT to connect to a remote runtime, for example, to a local [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md) running on your machine.
 
 When to use it:
 
 - You can't install a Docker-API compatible container runtime
 
-:::note
+:::info
 
 You are in charge of the remote runtime. Make sure to start the runtime before running tests.
 
 :::
 
-Set the following properties to switch to a remote runtime and change the connection if needed.
+Set the configuration to use a remote runtime in the following way. Change the connection to the runtime, if needed.
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={
 [
@@ -149,11 +149,11 @@ io:
       test:
         # Switch from a managed to a remote runtime
         runtime-mode: remote
-        # Change the connection if needed (default: Camunda 8 Run)
+        # Change the connection (default: Camunda 8 Run)
         remote:
           client:
-            restAddress: http://0.0.0.0:8080
-            grpcAddress: http://0.0.0.0:26500
+            rest-address: http://0.0.0.0:8080
+            grpc-address: http://0.0.0.0:26500
             camunda-monitoring-api-address: http://0.0.0.0:9600
             connectors-rest-api-address: http://0.0.0.0:8085
 ```
@@ -178,7 +178,7 @@ public class MyProcessTest {
         new CamundaProcessTestExtension()
             // Switch from a managed to a remote runtime
             .withRuntimeMode(CamundaProcessTestRuntimeMode.REMOTE)
-            // Change the connection if needed (default: Camunda 8 Run)
+            // Change the connection (default: Camunda 8 Run)
             .withRemoteCamundaClientBuilderFactory(() -> CamundaClient.newClientBuilder()
                 .restAddress(URI.create("http://0.0.0.0:8080"))
                 .grpcAddress(URI.create("http://0.0.0.0:26500"))

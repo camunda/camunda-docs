@@ -15,8 +15,7 @@ CPT is based on [JUnit 5](https://junit.org/junit5/) and [Testcontainers](https:
 - Connectors
 
 :::info
-CPT is the successor of [Zeebe Process Test](/apis-tools/java-client/zeebe-process-test.md)  
-Our previous testing library is deprecated and will be removed with version 8.10.
+CPT is the successor of [Zeebe Process Test](/apis-tools/java-client/zeebe-process-test.md). Our previous testing library is deprecated and will be removed with version 8.10.
 :::
 
 ## Prerequisites
@@ -181,7 +180,7 @@ Next, read more about:
 
 - `CamundaAssert` and [assertions](assertions.md)
 - `CamundaProcessTestContext` and [utilities](utilities.md)
-- The runtime [configuration](configuration.md)
+- How to [configure the runtime](configuration.md)
 
 ## Examples
 
