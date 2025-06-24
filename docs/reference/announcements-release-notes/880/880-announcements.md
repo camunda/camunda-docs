@@ -65,13 +65,13 @@ As of the 8.8 release, Camunda is compatible with Elasticsearch 8.16+ and no lon
 
 ## Key changes
 
-### Public API Definition for Improved Stability
+### Public API Definition for Greater Platform Stability
 
-To improve predictability and provide a more stable platform for our users, we have introduced a formal [Public API definition for Camunda 8](/reference/public-api.md).
+To enhance predictability and offer a more stable experience for developers, we’ve introduced an official [Public API Definition for Camunda 8](/reference/public-api.md).
 
-This document clearly outlines which components and interfaces are covered by our semantic versioning guarantees. By defining a clear Public API, we are committing to not introduce breaking changes in minor or patch releases for these components. This allows you to build on Camunda 8 with greater confidence and less maintenance overhead.
+This document explicitly identifies the components and interfaces that are covered by our semantic versioning guarantees. By formally defining the public API, we commit to avoiding breaking changes in minor and patch releases for these areas—empowering you to build on Camunda 8 with greater confidence and reduced maintenance effort.
 
-We encourage you to review the new Public API page to understand which parts of the platform are covered. This is a significant step forward in our commitment to providing an enterprise-ready orchestration platform.
+We encourage you to review the new Public API documentation to understand which parts of the platform are covered. This marks a meaningful step in our ongoing commitment to delivering a reliable, enterprise-ready orchestration platform.
 
 ### API updates <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
