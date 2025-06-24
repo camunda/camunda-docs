@@ -81,7 +81,7 @@ Controls whether the document can load cross-origin resources that don't explici
 
 | Header                         | Purpose                                                        | Default        |
 | ------------------------------ | -------------------------------------------------------------- | -------------- |
-| `Cross-Origin-Embedder-Policy` | Requires explicit permission for cross-origin resource loading | `require-corp` |
+| `Cross-Origin-Embedder-Policy` | Requires explicit permission for cross-origin resource loading | `REQUIRE_CORP` |
 
 **Configuration:**
 
@@ -97,7 +97,7 @@ Controls window isolation to prevent cross-origin access.
 
 | Header                       | Purpose                                    | Default                    |
 | ---------------------------- | ------------------------------------------ | -------------------------- |
-| `Cross-Origin-Opener-Policy` | Isolates windows from cross-origin openers | `same-origin-allow-popups` |
+| `Cross-Origin-Opener-Policy` | Isolates windows from cross-origin openers | `SAME_ORIGIN_ALLOW_POPUPS` |
 
 **Configuration:**
 
@@ -111,16 +111,16 @@ Controls window isolation to prevent cross-origin access.
 
 Declares that resources should not be loaded by other origins.
 
-| Header                         | Purpose                                             | Default       |
-| ------------------------------ | --------------------------------------------------- | ------------- |
-| `Cross-Origin-Resource-Policy` | Prevents unauthorized cross-origin resource loading | `same-origin` |
+| Header                         | Purpose                                             | Default     |
+| ------------------------------ | --------------------------------------------------- | ----------- |
+| `Cross-Origin-Resource-Policy` | Prevents unauthorized cross-origin resource loading | `SAME_SITE` |
 
 **Configuration:**
 
 - **`camunda.security.http-headers.cross-origin-resource-policy.value`**
 - **Environment Variable:** `CAMUNDA_SECURITY_HTTP_HEADERS_CROSS_ORIGIN_RESOURCE_POLICY_VALUE`
 - **Type:** enum
-- **Default:** `SAME_ORIGIN`
+- **Default:** `SAME_SITE`
 - **Description:** Policy value: `SAME_ORIGIN`, `SAME_SITE`, or `CROSS_ORIGIN`
 
 ### X-Frame-Options
@@ -199,16 +199,16 @@ Enforces HTTPS connections to prevent protocol downgrade attacks.
 
 Controls access to browser features and APIs.
 
-| Header               | Purpose                                    | Default            |
-| -------------------- | ------------------------------------------ | ------------------ |
-| `Permissions-Policy` | Fine-grained control over browser features | Not set by default |
+| Header               | Purpose                                    | Default                          |
+| -------------------- | ------------------------------------------ | -------------------------------- |
+| `Permissions-Policy` | Fine-grained control over browser features | Disables all policies by default |
 
 **Configuration:**
 
 - **`camunda.security.http-headers.permissions-policy.value`**
 - **Environment Variable:** `CAMUNDA_SECURITY_HTTP_HEADERS_PERMISSIONS_POLICY_VALUE`
 - **Type:** string
-- **Default:** not set
+- **Default:** `"accelerometer=(), ambient-light-sensor=(), attribution-reporting=(), autoplay=(), bluetooth=(), browsing-topics=(), camera=(), compute-pressure=(), cross-origin-isolated=(), deferred-fetch=(), deferred-fetch-minimal=(), display-capture=(), encrypted-media=(), fullscreen=(), gamepad=(), geolocation=(), gyroscope=(), hid=(), identity-credentials-get=(), idle-detection=(), language-detector=(), local-fonts=(), magnetometer=(), microphone=(), midi=(), otp-credentials=(), payment=(), picture-in-picture=(), publickey-credentials-create=(), publickey-credentials-get=(), screen-wake-lock=(), serial=(), speaker-selection=(), storage-access=(), summarizer=(), translator=(), usb=(), web-share=(), window-management=(), xr-spatial-tracking=()"`
 - **Description:** Policy directives (e.g., `"camera=() microphone=() geolocation=(self)"`)
 
 ### Referrer-Policy
@@ -217,7 +217,7 @@ Controls how much referrer information is shared when navigating to other pages.
 
 | Header            | Purpose                               | Default                           |
 | ----------------- | ------------------------------------- | --------------------------------- |
-| `Referrer-Policy` | Controls referrer information leakage | `strict-origin-when-cross-origin` |
+| `Referrer-Policy` | Controls referrer information leakage | `STRICT_ORIGIN_WHEN_CROSS_ORIGIN` |
 
 **Configuration:**
 
