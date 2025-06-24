@@ -236,31 +236,3 @@ This returns the current view of the registered job streams, where `client` refe
 For example, if jobs of a given type are not activated, but a worker is opened for this type, you can verify first if it exists in one of the gateways as a client stream. Once you've found it, grab its ID, and verify that you can find it as a consumer of a remote stream on each broker.
 
 If it's not present in the gateway as a client stream, restart your worker. If it's not present as a consumer in one of the brokers, this indicates a bug. As a workaround, restart your gateway, which will cause some interruption in your service, but will force all streams for this gateway to be recreated properly.
-
-## Performance best-practices
-
-Most of the business logic in your process models will likely end up being worked on as a job. As such, optimizing how jobs are handled in Zeebe can have
-a big impact on the performance of your system as a whole. Here are some best practices to keep things running smoothly.
-
-### Minimizing the variable payload
-
-Since most jobs are handled by external job workers, this means they have to be serialized and transferred over the network, possibly with multiple hops.
-The larger the payload, the more data has to be transferred. Coupled with the fact that jobs are batched during activation, this can lead to quite a lot
-of data being transferred around. As such, having as few, and as small, as possible variables has a big impact on the performance of your job workers and the whole system in general.
-
-While the easiest way is to avoid large variables, one option to keep things light during job activation is to use the `FetchVariables` parameter.
-Remember, by default, when this parameter is omitted, the job payload will contain _all_ variables visible within the scope ([see the variables documentation for more on that](./variables.md).
-This could mean tens or more variables, of arbitrary size, and it can be difficult to estimate how much this will represent in general.
-
-We recommend you use the `FetchVariables` parameter, and only fetch the variables which your job handler needs. This will keep the amount of data transferred to a minimum, and will greatly help performance.
-
-### Reduce latency by enabling job streaming
-
-We recommend enabling [job streaming](#job-streaming) in order to reduce latency to a maximum. Essentially, when using long polling,
-your job workers have to periodically poll every partition in your Zeebe cluster to check if there are new jobs available. Additionally, they have to
-balance polling aggressively with minimizing their impact on the cluster, which still has to handle all requests, even when no jobs are available. In large clusters, this can add a noticeable delay in the order of seconds, which can be unacceptable for certain workloads.
-
-> [!Note]
-> You can read more about the difference between long polling and job streaming [in this blog post](https://camunda.com/blog/2024/03/reducing-job-activation-delay-zeebe/).
-
-As such, we recommend using job streaming if possible.
