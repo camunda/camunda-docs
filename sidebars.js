@@ -364,6 +364,7 @@ module.exports = {
             "components/zeebe/technical-concepts/technical-concepts-overview",
             "components/zeebe/technical-concepts/architecture",
             "components/zeebe/technical-concepts/clustering",
+            "components/zeebe/technical-concepts/health",
             "components/zeebe/technical-concepts/partitions",
             "components/zeebe/technical-concepts/internal-processing",
             "components/zeebe/technical-concepts/process-lifecycles",
