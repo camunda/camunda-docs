@@ -125,10 +125,23 @@ public final JobWorker openWorker(final CamundaClient client, final JobHandler h
 There are currently no built-in tags, primarily because these are likely to be high cardinality, which can become an issue with some metric registries. If you want per-worker tags, create a different `JobWorkerMetrics` instance per worker.
 :::
 
-This implementation creates two metrics:
+This implementation creates four metrics:
 
-- `zeebe.client.worker.job.activated`: A counter tracking the count of jobs activated.
-- `zeebe.client.worker.job.handled`: A counter tracking the count of jobs handled.
+| Metric Name                         | Description                           | Status     | Replacement                         | Removal Version |
+| ----------------------------------- | ------------------------------------- | ---------- | ----------------------------------- | --------------- |
+| camunda.client.worker.job.activated | Counts the number of jobs activated   | New        | -                                   | -               |
+| camunda.client.worker.job.handled   | Counts the number of jobs handled     | New        | -                                   | -               |
+| zeebe.client.worker.job.activated   | Deprecated counter for jobs activated | Deprecated | camunda.client.worker.job.activated | 8.10            |
+| zeebe.client.worker.job.handled     | Deprecated counter for jobs handled   | Deprecated | camunda.client.worker.job.handled   | 8.10            |
+
+:::warning Deprecated Metrics
+The following metrics are deprecated and will be removed in version 8.10:
+
+- `zeebe.client.worker.job.activated`, replace with `camunda.client.worker.job.activated`
+- `zeebe.client.worker.job.handled`, replace with `camunda.client.worker.job.handled`
+
+Please update your monitoring integrations to use the new metrics before upgrading to version 8.10.
+:::
 
 ### Workarounds for additional metrics
 
