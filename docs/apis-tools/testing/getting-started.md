@@ -23,7 +23,7 @@ CPT provides different runtimes to execute your process tests:
 - Java 8+ / 17+ (for Camunda Spring Boot SDK)
 - [JUnit 5](https://junit.org/junit5/)
 
-For the default [Testcontainers runtime](configuration.md#testcontainers-runtime): 
+For the default [Testcontainers runtime](configuration.md#testcontainers-runtime):
 
 - A Docker-API compatible container runtime, such as Docker on Linux or Docker Desktop on Mac and Windows.
 
