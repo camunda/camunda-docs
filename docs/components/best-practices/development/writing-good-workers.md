@@ -65,7 +65,7 @@ If performance or efficiency matters in your scenario, there are two rules about
 Not transmitting all variables saves resources and bandwidth, but serves another purpose as well: upon job completion, these variables are written to the process and might overwrite existing variables. If you have parallel paths in your process (e.g. [parallel gateway](/components/modeler/bpmn/parallel-gateways/parallel-gateways.md), [multiple instance](/components/modeler/bpmn/multi-instance/multi-instance.md)) this can lead to race conditions that you need to think about. The less data you write, the smaller the problem.
 
 While the easiest way is to avoid large variables, one option to keep things light during job activation is to use the `FetchVariables` parameter.
-Remember, by default, when this parameter is omitted, the job payload will contain _all_ variables visible within the scope ([see the variables documentation for more on that](./variables.md).
+Remember, by default, when this parameter is omitted, the job payload will contain _all_ variables visible within the scope ([see the variables documentation for more on that](../../concepts/variables.md).
 This could mean tens or more variables, of arbitrary size, and it can be difficult to estimate how much this will represent in general.
 
 We recommend you use the `FetchVariables` parameter, and only fetch the variables which your job handler needs. This will keep the amount of data transferred to a minimum, and will greatly help performance.
@@ -107,7 +107,7 @@ a big impact on the performance of your system as a whole. Here are some best pr
 
 ### Reduce latency by enabling job streaming
 
-We recommend enabling [job streaming](#job-streaming) in order to reduce latency to a maximum. Essentially, when using long polling,
+We recommend enabling [job streaming](../../concepts/job-workers.md#job-streaming) in order to reduce latency to a maximum. Essentially, when using long polling,
 your job workers have to periodically poll every partition in your Zeebe cluster to check if there are new jobs available. Additionally, they have to
 balance polling aggressively with minimizing their impact on the cluster, which still has to handle all requests, even when no jobs are available. In large clusters, this can add a noticeable delay in the order of seconds, which can be unacceptable for certain workloads.
 
