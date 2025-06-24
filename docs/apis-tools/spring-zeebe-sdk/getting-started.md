@@ -13,6 +13,10 @@ designed to enhance the user experience and introduce new features while maintai
 For more information, visit [announcements](/reference/announcements-release-notes/880/880-announcements.md#camunda-java-client-and-camunda-spring-boot-sdk).
 :::
 
+:::info Public API
+The Camunda Spring Boot SDK is part of the Camunda 8 [public API](/reference/public-api.md) and is covered by our SemVer stability guarantees (except for alpha features). Breaking changes will not be introduced in minor or patch releases.
+:::
+
 This project allows you to leverage Camunda APIs ([gRPC](/apis-tools/zeebe-api/grpc.md) and [REST](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md)) in your Spring Boot project. Later on, we’ll expand the Camunda Spring Boot SDK to deliver an SDK that provides a unified experience for interacting with all Camunda APIs in Java Spring.
 
 ## Version compatibility
