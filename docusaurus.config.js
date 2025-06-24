@@ -278,6 +278,7 @@ module.exports = {
       "data-modal-example-questions": `What's new in Camunda ${currentVersion}?,What's Camunda SaaS vs Self-Managed?`,
       "data-search-mode-enabled": "true",
       "data-button-border": "1px solid #555555",
+      "data-user-analytics-cookie-enabled": "false",
       async: true,
     },
   ],
