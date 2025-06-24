@@ -11,36 +11,24 @@ export const overviewCards = [
     title: "Configure Storage",
     image: IconGear,
     description:
-      "1. **Setup a snapshot repository in the datastore**\n" +
-      "2. **Configure Camunda component backup storage**",
+      "1. [Setup a snapshot repository in the secondary datastore](#prerequisites)\n" +
+      "2. [Configure Camunda component backup storage](#prerequisites)",
   },
   {
     link: "#backup-process",
     title: "Backup",
     image: IconCloud,
     description:
-      "1. **Backup WebApps**\n" +
-      "\t1. Backup indices through WebApps\n" +
-      "2. **Backup Zeebe Cluster**\n" +
-      "\t1. Soft pause of Zeebe exporting\n" +
-      "\t2. Backup Zeebe indices\n" +
-      "\t3. Backup Zeebe partitions\n" +
-      "\t4. Resume Zeebe exporting\n",
+      "1. [Backup WebApps](#backup-of-the-webapps)\n" +
+      "2. [Backup Zeebe Cluster](#backup-of-the-zeebe-cluster)\n",
   },
   {
     link: "#restore-process",
     title: "Restore",
     image: IconRepeat,
     description:
-      "1. **Restore of datastore**\n" +
-      "\t1. Restore templates\n" +
-      "\t\t1. Start Camunda 8\n" +
-      "\t\t2. Stop Camunda 8\n" +
-      "\t\t3. Delete all indices\n" +
-      "\t2. Restore indices from backup\n" +
-      "2. **Restore Zeebe Cluster**\n" +
-      "\t1. Reset Volumes/Disk\n" +
-      "\t2. Restore Zeebe partitions\n" +
-      "3. **Start and use Camunda 8**",
+      "1. [Restore of secondary datastore](#restore-of-elasticsearch--opensearch)\n" +
+      "2. [Restore Zeebe Cluster](#restore-the-zeebe-cluster)\n" +
+      "3. [Start and use Camunda 8](#start-all-camunda-8-components)",
   },
 ];

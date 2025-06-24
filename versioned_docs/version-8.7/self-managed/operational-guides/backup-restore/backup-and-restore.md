@@ -974,12 +974,12 @@ Prerequisite:
 
 This includes the restoration of index templates and component templates, which are crucial for Camunda 8 to function properly on continuous use.
 
-Those templates will automatically be applied on newly created indices. These templates are only created on the initial start of the components and the first seeding of the datastore, due to which we have to temporarily restore them before we can restore all Elasticsearch / OpenSearch snapshots.
+Those templates will automatically be applied on newly created indices. These templates are only created on the initial start of the components and the first seeding of the secondary datastore, due to which we have to temporarily restore them before we can restore all Elasticsearch / OpenSearch snapshots.
 
-- **Start Camunda 8 configured with your datastore endpoint**
+- **Start Camunda 8 configured with your secondary datastore endpoint**
   - for example deploy the Camunda Helm chart
   - in case of manual context, start Camunda 8 components manually
-  - depending on your setup this may mean Operate, Optimize, Tasklist, Zeebe, and the required datastore
+  - depending on your setup this may mean Operate, Optimize, Tasklist, Zeebe, and the required secondary datastore
 
 The templates are created by Operate, Optimize, and Tasklist on startup on the first seeding of the datastore. While Zeebe creates it whenever required, and isn't limited to the initial start. We recommend starting your full required Camunda 8 stack, so the applications show up healthy.
 
