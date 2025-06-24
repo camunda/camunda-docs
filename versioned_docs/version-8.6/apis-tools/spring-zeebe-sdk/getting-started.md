@@ -8,8 +8,8 @@ This project allows you to leverage Zeebe APIs ([gRPC](/apis-tools/zeebe-api/grp
 
 :::warning Deprecated Spring Zeebe
 Spring Zeebe is deprecated and will be removed in version 8.10. \
-Please use [Camunda Spring Boot](/docs/next/apis-tools/spring-zeebe-sdk/getting-started/). \
-Also leverage [Orchestration Camunda API](/docs/next/apis-tools/camunda-api-rest/camunda-api-rest-overview/) in your Camunda Spring Boot project.
+Please use [Camunda Spring Boot](/docs/apis-tools/spring-zeebe-sdk/getting-started.md). \
+Also leverage [Orchestration Camunda API](/docs/apis-tools/camunda-api-rest/camunda-api-rest-overview.md) in your Camunda Spring Boot project.
 :::
 
 ## Version compatibility
@@ -141,7 +141,7 @@ private ZeebeClient client;
 
 :::warning Deprecated Zeebe Client
 Zeebe Client is deprecated and will be removed in version 8.10. \
-Please use [Camunda Client](/docs/next/apis-tools/java-client/).
+Please use [Camunda Client](/docs/apis-tools/java-client/index.md).
 :::
 
 ## Deploy process models
