@@ -1863,7 +1863,7 @@
                 }
               ],
               "Microsoft (Azure)": [
-                "self-managed/setup/deploy/azure/microsoft-aks"
+                "self-managed/setup/deploy/azure/microsoft-aks/microsoft-aks"
               ],
               "Google (GCP)": ["self-managed/setup/deploy/gcp/google-gke"],
               "Red Hat (OpenShift)": [
@@ -1923,6 +1923,12 @@
                 "self-managed/setup/deploy/amazon/amazon-eks/eks-terraform",
                 "self-managed/setup/deploy/amazon/amazon-eks/eks-helm",
                 "self-managed/setup/deploy/amazon/amazon-eks/dual-region"
+              ]
+            },
+            {
+              "Microsoft AKS": [
+                "self-managed/setup/deploy/azure/microsoft-aks/aks-terraform",
+                "self-managed/setup/deploy/azure/microsoft-aks/aks-helm"
               ]
             },
             {
