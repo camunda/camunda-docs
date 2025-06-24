@@ -9,20 +9,20 @@ import TabItem from "@theme/TabItem";
 
 [Camunda Process Test](https://github.com/camunda/camunda/tree/main/testing/camunda-process-test-java) (CPT) is a Java library to test your BPMN processes and your process application.
 
-CPT is based on [JUnit 5](https://junit.org/junit5/) and [Testcontainers](https://java.testcontainers.org/). It provides a managed isolated runtime to execute your process tests on your local machine. The runtime uses the Camunda Docker images and includes the following components:
-
-- Camunda
-- Connectors
-
 :::info
 CPT is the successor of [Zeebe Process Test](/apis-tools/java-client/zeebe-process-test.md). Our previous testing library is deprecated and will be removed with version 8.10.
 :::
 
+CPT provides different runtimes to execute your process tests:
+
+- [Testcontainers runtime](configuration.md#testcontainers-runtime) (default) - A managed runtime based on [Testcontainers](https://java.testcontainers.org/) and Docker.
+- [Remote runtime](configuration.md#remote-runtime) - Your own runtime, such as, [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md)
+
 ## Prerequisites
 
 - Java 8+ / 17+ (for Camunda Spring Boot SDK)
-- JUnit 5
-- A Docker-API compatible container runtime, such as Docker on Linux or Docker Desktop on Mac and Windows. If you have issues with your Docker runtime, have a look at the [Testcontainers documentation](https://java.testcontainers.org/supported_docker_environment/).
+- [JUnit 5](https://junit.org/junit5/)
+- For the default [Testcontainers runtime](configuration.md#testcontainers-runtime): A Docker-API compatible container runtime, such as Docker on Linux or Docker Desktop on Mac and Windows.
 
 ## Install
 
