@@ -54,14 +54,14 @@ Informally, a healthy cluster is one where the the expected number of
 [brokers and gateways report a healthy status](../../../self-managed/zeebe-deployment/operations/health.md), where every partition has exactly one leader, and
 there are `N-1` followers per partition (where `N` is the replication factor).
 
-More formally, given U the number of expected gateways, X the number of expected brokers, Y the partition count, and Z the replication factor, we can
+More formally, given `G` the number of expected gateways, `B` the number of expected brokers, `P` the partition count, and `R` the replication factor, we can
 define the health of a cluster as:
 
-- There are `U` gateway nodes which are report a healthy status via their health check
-- There are `X` broker nodes which are healthy a healthy status via their health check
-- For every partition from `1..Y`:
+- There are `G` gateway nodes which are report a healthy status via their health check
+- There are `B` broker nodes which are healthy a healthy status via their health check
+- For every partition from `1..P`:
   - There is exactly one leader broker
-  - There are `Z-1` follower brokers
+  - There are `R-1` follower brokers
 
 For example, given we expect 3 brokers, 3 partitions, and a replication factor of 3, a healthy cluster would show the following topology:
 
