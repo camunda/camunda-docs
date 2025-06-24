@@ -1022,6 +1022,7 @@ module.exports = {
       ],
     },
     "reference/supported-environments",
+    "reference/public-api",
     "reference/contact",
     "reference/dependencies",
     "reference/camunda-help-center",
