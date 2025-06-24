@@ -18,6 +18,7 @@ Desktop Modeler is a desktop application for modeling BPMN, DMN, and Forms. As a
 - Deploy and run processes directly from the application
 - Validate your diagrams using [configurable lint rules](https://github.com/camunda/camunda-modeler-custom-linter-rules-plugin)
 - [Customize](./flags/flags.md) and [extend](./plugins/plugins.md) the application
+- Works against the local file system and in tandem with your favorite IDE
 
 ## Download
 
