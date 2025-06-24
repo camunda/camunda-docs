@@ -5,6 +5,12 @@ sidebar_label: "Quick reference"
 description: "Provide a job worker that handles polling for available jobs, use SLF4J for logging useful notes, and more."
 ---
 
+:::warning Deprecated Zeebe Client
+Zeebe Client is deprecated and will be removed in version 8.10. \
+Please use [Camunda Spring Boot](/docs/apis-tools/spring-zeebe-sdk/getting-started.md) and
+[Camunda Client](/docs/apis-tools/java-client/index.md).
+:::
+
 ## Dependencies
 
 To use the Java client library, declare the following Maven dependency in your project:
