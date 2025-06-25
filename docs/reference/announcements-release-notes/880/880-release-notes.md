@@ -25,6 +25,64 @@ These release notes identify the new features included in 8.8, including [alpha 
 | :----------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------- |
 | 8 July 2025  | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.8.0-alpha6)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.8.0-alpha6)</li></ul> | [Release blog](https://camunda.com/blog/2025/06/camunda-alpha-release-july-2025/) |
 
+### Camunda 8 REST API renamed to Orchestration Cluster API <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects APIs">API</span>
+
+<!-- https://github.com/camunda/product-hub/issues/2793 -->
+
+Starting with the Camunda 8.8 release, the Camunda 8 REST API is renamed to the **Orchestration Cluster API**.
+
+- This new name more accurately reflects the API scope as a unified REST API for interacting with entities in a [Camunda 8 orchestration cluster](/reference/glossary.md#orchestration-cluster) (such as processes, tasks, variables, and so on).
+- There are no changes to the API functionality or structure. Only the name is changed to help with understanding and onboarding, and to improve clarity and alignment across Camunda documentation and resources.
+
+To learn more about using the Orchestration Cluster API, see [Orchestration Cluster API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md).
+
+### Bitbucket sync <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
+
+<!-- https://github.com/camunda/product-hub/issues/2507 -->
+
+Camunda 8 now supports integration with [Atlassian Bitbucket](https://bitbucket.org/product/), in addition to GitHub, GitLab, and Azure DevOps.
+
+- This helps customers who use Jira for their development processes.
+- Organization owners and administrators can connect their Web Modeler process applications to Bitbucket, allowing users to keep their Web Modeler, Desktop Modeler, and official version control projects synced.
+
+To learn more about Bitbucket integration, see [Git sync](/docs/components/modeler/web-modeler/git-sync.md?platform=bitbucket).
+
+### User task listener types <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span>
+
+The following new user task listener types are available:
+
+#### `creating` event
+
+<!-- https://github.com/camunda/product-hub/issues/2625 -->
+
+You can use this to run custom logic for new user tasks, ensuring tasks are accurately and consistently configured before appearing to end users. This is triggered whenever a user task is about to be created, and provides the following functionality:
+
+| Functionality                        | Description                                                                                                                                                                                                      |
+| :----------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Configurable Creation Listener (UTL) | Add a creating listener to user tasks. When all listener jobs are completed, the user task can be created and becomes visible to eligible users (candidate groups/candidate users or assignees).                 |
+| Controlled Task Initialization       | The creation operation proceeds only after all related listener jobs are complete. Incidents can be raised if listener logic fails to evaluate, ensuring safe retries and preventing incomplete creation states. |
+| Operate UI Insights                  | A new “Creating” event type is displayed in the listener tab of the process instance details. If an incident occurs, it is highlighted for immediate troubleshooting.                                            |
+
+#### `canceling` event
+
+<!-- https://github.com/camunda/product-hub/issues/2657 -->
+
+This is triggered when a user task is cancelled (for example, by an interrupting boundary event, event sub-process, or an entire process instance cancellation), and provides the following functionality:
+
+| Functionality                           | Description                                                                                                                                                                |
+| :-------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Configurable Cancelation Listener (UTL) | Add a cancellation listener to user tasks. On cancellation, this listener is invoked, fetching relevant task properties and enabling data or variable modifications.       |
+| Consistent Lifecycle Control            | The cancellation operation proceeds only after all related listener jobs are complete. Incidents can be raised if listener logic fails to evaluate, ensuring safe retries. |
+| Operate UI Insights                     | A new “Canceling” event type is displayed in the listener tab of the process instance details. If an incident occurs, it is highlighted for immediate troubleshooting.     |
+
+To learn more about these new user task listener event types, see [user task listeners](/components/concepts/user-task-listeners.md).
+
+### Self-Managed backup and restore guide <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+
+<!-- https://github.com/camunda/product-hub/issues/2299 -->
+
+A new [backup and restore guide](/self-managed/operational-guides/backup-restore/backup-and-restore.md) provides detailed information on what you need to consider for Camunda 8 backups, including how to set up and configure backups, and what to consider for external dependencies.
+
 ## 8.8.0-alpha5
 
 | Release date | Changelog(s)                                                                                                                                                                               | Blog                                                                              |

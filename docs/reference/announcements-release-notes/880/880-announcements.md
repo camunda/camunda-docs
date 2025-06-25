@@ -67,7 +67,11 @@ As of the 8.8 release, Camunda is compatible with Elasticsearch 8.16+ and no lon
 
 ### API updates <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-The 8.8 release includes API updates to support the move to a [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md) unified experience. See more details in the [release notes](/reference/announcements-release-notes/880/880-release-notes.md#api-updates).
+The 8.8 release includes API updates to support the move to an [Orchestration Cluster REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md) unified experience. See more details in the [release notes](/reference/announcements-release-notes/880/880-release-notes.md#api-updates).
+
+:::note
+Starting with the Camunda 8.8 release, the Camunda 8 REST API is renamed to the **Orchestration Cluster API**.
+:::
 
 #### Deprecated: Operate and Tasklist v1 REST APIs
 
