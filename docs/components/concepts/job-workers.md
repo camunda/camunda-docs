@@ -200,7 +200,7 @@ There are different ways to detect backpressure.
 
 On the client side, you can use the job worker metrics to do so. For example, by subtracting the rate of handled jobs (i.e. `camunda.client.worker.job.handled`) from the rate of activated jobs (i.e. `camunda.client.worker.job.activated`), you can estimate the rate of queued jobs. If this is too close to the `maxJobsActive` consistently, this may indicate you need to scale your worker deployment.
 
-:::warning Deprecated Metrics
+:::warning Deprecated metrics
 The following metrics are deprecated and will be removed in version 8.10:
 
 - `zeebe.client.worker.job.activated`, replace with `camunda.client.worker.job.activated`
