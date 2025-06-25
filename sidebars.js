@@ -1470,6 +1470,7 @@ module.exports = {
                 "self-managed/optimize-deployment/configuration/history-cleanup",
                 "self-managed/optimize-deployment/configuration/localization",
                 "self-managed/optimize-deployment/configuration/object-variables",
+                "self-managed/optimize-deployment/configuration/variable-import",
                 "self-managed/optimize-deployment/configuration/multi-tenancy",
               ],
             },
