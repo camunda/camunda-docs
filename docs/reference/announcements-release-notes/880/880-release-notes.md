@@ -25,6 +25,17 @@ These release notes identify the new features included in 8.8, including [alpha 
 | :----------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------- |
 | 8 July 2025  | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.8.0-alpha6)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.8.0-alpha6)</li></ul> | [Release blog](https://camunda.com/blog/2025/06/camunda-alpha-release-july-2025/) |
 
+### Bitbucket sync <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
+
+<!-- https://github.com/camunda/product-hub/issues/2507 -->
+
+Camunda 8 now supports integration with [Atlassian Bitbucket](https://bitbucket.org/product/), in addition to GitHub, GitLab, and Azure DevOps.
+
+- This helps customers who use Jira for their development processes.
+- Organization owners and administrators can connect their Web Modeler process applications to Bitbucket, allowing users to keep their Web Modeler, Desktop Modeler, and official version control projects synced.
+
+To learn more about Bitbucket integration, see [Git sync](/docs/components/modeler/web-modeler/git-sync.md?platform=bitbucket).
+
 ### Camunda 8 REST API renamed to Orchestration Cluster API <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects APIs">API</span>
 
 <!-- https://github.com/camunda/product-hub/issues/2793 -->
@@ -36,16 +47,24 @@ Starting with the Camunda 8.8 release, the Camunda 8 REST API is renamed to the 
 
 To learn more about using the Orchestration Cluster API, see [Orchestration Cluster API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md).
 
-### Bitbucket sync <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
+### Connectors <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span> {#connectorsalpha6}
 
-<!-- https://github.com/camunda/product-hub/issues/2507 -->
+#### `GetJson` intrinsic function
 
-Camunda 8 now supports integration with [Atlassian Bitbucket](https://bitbucket.org/product/), in addition to GitHub, GitLab, and Azure DevOps.
+<!-- https://github.com/camunda/camunda-docs/pull/5934 -->
 
-- This helps customers who use Jira for their development processes.
-- Organization owners and administrators can connect their Web Modeler process applications to Bitbucket, allowing users to keep their Web Modeler, Desktop Modeler, and official version control projects synced.
+A new `getJson` function accepts a document and an optional FEEL expression parameter. It extracts the text content from the JSON document and returns it as an object.
 
-To learn more about Bitbucket integration, see [Git sync](/docs/components/modeler/web-modeler/git-sync.md?platform=bitbucket).
+- The optional FEEL expression parameter specifies the part that will be extracted from the JSON document content.
+- If not provided, the whole document is returned as a JSON object.
+
+To learn more about using connector intrinsic functions, see [intrinsic functions](/components/connectors/use-connectors/intrinsic-functions.md).
+
+### Self-Managed backup and restore guide <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+
+<!-- https://github.com/camunda/product-hub/issues/2299 -->
+
+A new [backup and restore guide](/self-managed/operational-guides/backup-restore/backup-and-restore.md) provides detailed information on what you need to consider for Camunda 8 backups, including how to set up and configure backups, and what to consider for external dependencies.
 
 ### User task listener types <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span>
 
@@ -76,12 +95,6 @@ This is triggered when a user task is cancelled (for example, by an interrupting
 | Operate UI Insights                     | A new “Canceling” event type is displayed in the listener tab of the process instance details. If an incident occurs, it is highlighted for immediate troubleshooting.     |
 
 To learn more about these new user task listener event types, see [user task listeners](/components/concepts/user-task-listeners.md).
-
-### Self-Managed backup and restore guide <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
-
-<!-- https://github.com/camunda/product-hub/issues/2299 -->
-
-A new [backup and restore guide](/self-managed/operational-guides/backup-restore/backup-and-restore.md) provides detailed information on what you need to consider for Camunda 8 backups, including how to set up and configure backups, and what to consider for external dependencies.
 
 ## 8.8.0-alpha5
 
