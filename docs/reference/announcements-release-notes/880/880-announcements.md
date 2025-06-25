@@ -91,6 +91,12 @@ With the 8.8 release, Camunda announces the deprecation of several [Zeebe gRPC](
 - The final list of retained gRPC endpoints will be confirmed with the 8.8 release.
 - Selected endpoints will remain active, with others scheduled for removal in the 8.10 release.
 
+#### Deprecated: Zeebe Client job worker metrics
+
+With the 8.8 release, Camunda announces the deprecation of Zeebe Client job worker metrics.
+Scheduled for removal in the 8.10 release.
+Please advise [Zeebe Client job worker](/apis-tools/java-client/job-worker.md) and [Zeebe Client job worker concept](/components/concepts/job-workers.md).
+
 #### Removed: Tasklist GraphQL API
 
 With the 8.8 release, the deprecated Tasklist GraphQL API will be removed from the product.

@@ -163,14 +163,12 @@ There are different ways to detect backpressure.
 
 On the client side, you can use the job worker metrics to do so. For example, by subtracting the rate of handled jobs (i.e. `zeebe.client.worker.job.handled`) from the rate of activated jobs (i.e. `zeebe.client.worker.job.activated`), you can estimate the rate of queued jobs. If this is too close to the `maxJobsActive` consistently, this may indicate you need to scale your worker deployment.
 
-:::warning Deprecated Metrics
-The following metrics are deprecated and will be removed in version 8.10:
+:::info Deprecated Metrics
+The following metrics will be deprecated from 8.8 and will be removed in version 8.10:
 
-- `zeebe.client.worker.job.activated`, replace with `camunda.client.worker.job.activated`
-- `zeebe.client.worker.job.handled`, replace with `camunda.client.worker.job.handled`
-
-Please update your monitoring integrations to use the new metrics before upgrading to version 8.10.
-:::
+- `zeebe.client.worker.job.activated`, will be replaced with `camunda.client.worker.job.activated`
+- `zeebe.client.worker.job.handled`, will be replaced with `camunda.client.worker.job.handled`
+  :::
 
 :::note
 If you're using Prometheus, you can use the following query to estimate the queue size of your workers. We recommend adding a job type label to be able to group per workload, e.g. `sum(zeebe_client_worker_job_activated_total - zeebe_client_worker_job_handled_total) by (jobType)`

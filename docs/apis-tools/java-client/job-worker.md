@@ -127,12 +127,12 @@ There are currently no built-in tags, primarily because these are likely to be h
 
 This implementation creates four metrics:
 
-| Metric Name                         | Description                           | Status     | Replacement                         | Removal Version |
-| ----------------------------------- | ------------------------------------- | ---------- | ----------------------------------- | --------------- |
-| camunda.client.worker.job.activated | Counts the number of jobs activated   | New        | -                                   | -               |
-| camunda.client.worker.job.handled   | Counts the number of jobs handled     | New        | -                                   | -               |
-| zeebe.client.worker.job.activated   | Deprecated counter for jobs activated | Deprecated | camunda.client.worker.job.activated | 8.10            |
-| zeebe.client.worker.job.handled     | Deprecated counter for jobs handled   | Deprecated | camunda.client.worker.job.handled   | 8.10            |
+| Metric Name                         | Description                           | Notes                                                                     |
+| ----------------------------------- | ------------------------------------- | ------------------------------------------------------------------------- |
+| camunda.client.worker.job.activated | Counts the number of jobs activated   | New                                                                       |
+| camunda.client.worker.job.handled   | Counts the number of jobs handled     | New                                                                       |
+| zeebe.client.worker.job.activated   | Deprecated counter for jobs activated | Will be removed at 8.10. Use camunda.client.worker.job.activated instead. |
+| zeebe.client.worker.job.handled     | Deprecated counter for jobs handled   | Will be removed at 8.10. Use camunda.client.worker.job.handled instead.   |
 
 :::warning Deprecated Metrics
 The following metrics are deprecated and will be removed in version 8.10:
