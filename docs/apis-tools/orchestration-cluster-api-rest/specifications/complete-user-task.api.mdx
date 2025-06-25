@@ -1,0 +1,256 @@
+---
+id: complete-user-task
+title: "Complete user task"
+description: "Completes a user task with the given key."
+sidebar_label: "Complete user task"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWFFv2zYQ/isHPrWYIrld2rV689J0y9Z2QeJsD2keKOlksaFIlaTsGIL++3CkZDt2PGTDHm3AsCUe7/jdfR8pXcccn1uW3rIbiwYct/fsLmK6QcOd0OqiYCnLdd1IdEgmM7KIWIE2N6IhE5ays8HAAod29ANL4SpwFcJcLFDBPa5iFrGGG16jQ0NRO6Z4jSxl7eD6d1yxiAly2nBXsYgZ/N4KgwVLnWlxN/KsQnIMuvSRNsGdhnHZFNXmFdacpR1zq4YCWmeEmrO+vwsh0LqfdbEii03EkkuLEcu1cqgcjfGmkSL3qUm+WVpCt+9bZ98wd4TVUCKdQEujC24Ez2S44EUhyAuXl1tGhyCup27j2kFM6Saou4tQrZQ0N3jvI8bz4LnbCTSFvLVO1xAMYMFlS0G4g6WQEjIEnudorcgkQml0vRUdF6icBYO2lU6oeRh3lbCAqmi0UA6EWuiQuxguSlDaQWP0QhRYRCCGKAWWvJWOgH5dM+8ri7+qDbaheHvY+og54eiSjVwdqCm0ugpVZn1PdgZto5UNxXg9Od1Px+xxdrldJ74A2/pElK2Uq5j1ETudTJ72MAKEgjsOwnrUCy5FQbU6wKzG6Exi/cM+w3YrdhksoUDHhYRQdOAWgmGGBQgFt1cfz+D96Zuf7l5UzjU2TZLlchmbMj/BQjhtYm3miSlz+pLdyxhmFRqEmq983ddshQ2nwTaYi1LkVCsXsPrFUJUe1euAIMLoriQjVmpTc0e7ghF7e80Ubq4uQBSonChXxLS90H6OZxFLGc9069JMcnXPNvzYD7obxbZ1zc16Z3kcoI+Yddy1WzCYUA7naLbXL5T78fWeb6LFr7PZJQQXkOsCodQmqGUIRCBqoUTd1iw9nUwiVvOHcPV2MunJJ1X8GUgU4EMjufLU2oUjFNTa4MAfD0wo67jK/6/KaCPmYjduzLa1OpD4Q0AU9Hn6DEnunS9epSSwUrfqKLCjwI4C+weBvf8PAhOWENG9pdFq7jOMkLfGoHJyFcPnDVgL3GwdgMO88eCFTBerQOKjSI8iPYr0KZG+eeqxcqqAsmyIh2iMNqBzr8AClpWQ3r1/TB9iD683R60dtXbU2iGt9RGr0VWa+h2Ntp461IBIWUIH4gkdiDbptvoUfZKv3y2pw4BmMTY1WiNZyrogoj5Nkq7S1vVp12jj+mRBFXrUDaDhILaRRFLnXFZhIfvFpAHqnIwgz3jdqoLDO7g6v57BL9zhkoc3Uwr52PW7ybvJk17J9IDH6eUFBISBilvbw+iWdP6k22D8HMe+G2Mxb41wq2uaFtKTITdopi3VY02RIZ73TtfBiEXDn48jcX77a+ZrT1vb1abTc/7AqXq7jZmt/si6R0QMLbUPPfBnHwRVFI0NEyfxq32uXl54yeW6rlvl9101D49YfCspuWyto2RETIoclfUrHLpko9mnMAJ/hojwKqaCBtaN2+1cuKrN4lzXSR6mrX8zqbOk5kIlQwibnE0/33z5MD35dHF2/uX6/ORVPIndg/OJIznUXG2vY+xArZ8Vd+F2m4PmX3UHh9o6fHBJI7lQlH0PrBv0eMs2emQRSx93DrckeRcNsrplXZdxizdG9j3d/t6iWbH09m6jQi/bQlj6v2n8HYT04mroEb6E53Ygn0Q23ORq5XcE2dIVi9g9rnaaov1dH7EKeYHGrzVYnIUVnczIz8bDXpeyj8YZ0zzHxh2wffQUQFpcb4mXf1zPSFpDi7TWBc01fEkdWr4Mq9Y+U16x/l7HJFfzls/JNvikz9/w0MXw
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Complete user task"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/user-tasks/{userTaskKey}/completion"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Completes a user task with the given key.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "userTaskKey",
+      in: "path",
+      required: true,
+      description: "The key of the user task to complete.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            variables: {
+              additionalProperties: true,
+              description: "The variables to complete the user task with.",
+              type: "object",
+              nullable: true,
+            },
+            action: {
+              description:
+                'A custom action value that will be accessible from user task events resulting from this endpoint invocation. If not provided, it will default to "complete".\n',
+              type: "string",
+              nullable: true,
+            },
+          },
+          title: "UserTaskCompletionRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "204": { description: "The user task was completed successfully." },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The user task with the given key was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "409": {
+      description:
+        "The user task with the given key is in the wrong state currently. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

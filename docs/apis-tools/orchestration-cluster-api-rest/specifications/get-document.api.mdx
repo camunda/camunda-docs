@@ -1,0 +1,171 @@
+---
+id: get-document
+title: "Download document"
+description: "Download a document from the Camunda 8 cluster."
+sidebar_label: "Download document"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWN9v2zYQ/lcIPrWYYrldtnV6M5K09dAVQZKuD0keKOpksaVIlTzGEQz978NRku3EdptiexnWB8MWf9x9d/fd6c4rjmLheXbNT60MNRjktwm3DTiBypp5wTO+AFxvJrwAL51qaJdn/NQujbaiYIIVwxlWOlszrICdiDqYQrBXTOrgEdzkxtyY9xaBYSWQYaU8U57J4BwY1C3zoWmsQyhYad1GokfrwDNbMmwbyNjs42XC3pycJ0yZoxpq61r2zFhz1DhbBEnYnidMWyn0zvqN4QlvhBM1IDgyfcWNqIFnfNQ3L3jCFZnXCKx4wh18CcpBwTN0AR774KoCNj+N6CrYgEbLisE7E55wLyuoBc9WnGzgGffolFnwrkvWAKKdG+1fArj2gfpSaP9U/VHYNoqH2xSlp+KS1iAYfCt89U1sB+Xtg10JX+0AH7T1HFkKz6Stm0CkyNt9JhaBFLDQRFeztVzlWSMc7sh3UIIDIwcWKs8cYHAGCraswAyCSOSG1BM276VIraL3hNKenNs4e6cK6PescyAxak/iCnkHPLKl0prl9PwJJEIxuTG8uyXv+cYaD5789XI6pa9dL62RkzPGaELBfJASvC+D1i2FcnAcCRFNo5WMOZxaiYBHHh2ImvYORSjhpXW1QJ7xXBnhWt51XZfw4+nxt3AprKK9C3UHhshISI1FVtpgorUH0TXO5hrqnz55kruN7qHCGTvvT7ICUCjNbE6+ZOSSeDCHginDri9en7Dfj3/57fZZhdj4LE2Xy+XElfIICoXWTaxbpK6U9KFzzyNlHLBatBQjURSKdApNwW3AoQLPfANSlUpSzMnSAXYsSL19gzN7WFRj1pc3rv6Ky4NTO9V1xj5czJkqwKAqW2Lkjup4pxRBkwyR24BZroX5TPmGCvVepY+1+FDXwrVjpjxU0CXco8CwZQZXBmEBbhu/Mvjzyx3ZRJO3V1fnrBfBpC0g1vZY+wdFZEStjKpDzbPj6TThtbjvn36dTmPhoIg/wRLD4L7RwkRqPTZHGVbHehGlRcOU8SiM/LciY51aqMd6J1RKx1jwgcSnvUV9gv2yL/FnhpGXHfEQnLOOWRlflFSllI7iKftH3UOp+ZFrP3LtR64dyrUu4TVgZYe2NnaCWPGMp+O7zKerTRvYUX8E7m7sE4PTPOOrPm26LE1XlfXYZStqWrv0jmJyJ5wSue6ZSNt9eo20iU1pXN7bD1mP1HONZm066Iuzyyv2RiAsRRvdSSofin41fTXdK5WOHpA4O5+z3sKefFsFYRRLmb1XbH/4KYI76nU8yOAUtpd0rXdPDsKBmwUKwZoUg74onZ77QzwZfrweqfLHx6sYbWVKG68PUd8FQlEB53vk08mLXYadz2OiSFvXwcRqaRZ9VyP2TDE84VpJMD5yeeiRx2Pv+h32V6+RvZhQUHrmjEVyobAK+UTaOpX9tfV3rm2e1kKZdFDh05PZnx/en86O3s1Pzt5fnh29mEwneI/R+MZ6rIXZwrGeyIoDM9tq83b4r45vA1MQ7jFttFCGuBtdvBoS+no9zHme8GxrsrtNhqy85qtVLjx8cLrraLkfaSjPC+UphQ8MXNsO/Gez1147PkP7YBS8EzrQKU4D2fch+z+PV1/17sOBduPh2039/k4iPLsYBuHn7Gn/B+xFNywK027DGlFvsbi77RJegSjARaD9gZmU0ODW1YNjIFm6fhO+OaNK+jfh90NH
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Download document"}
+></Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/documents/{documentId}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Download a document from the Camunda 8 cluster.
+
+Note that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "documentId",
+      in: "path",
+      required: true,
+      description: "The ID of the document to download.",
+      schema: { type: "string" },
+    },
+    {
+      name: "storeId",
+      in: "query",
+      required: false,
+      description:
+        "The ID of the document store to download the document from.",
+      schema: { type: "string" },
+    },
+    {
+      name: "contentHash",
+      in: "query",
+      required: false,
+      schema: { type: "string" },
+      description:
+        "The hash of the document content that was computed by the document store during upload. The hash is part of the document reference that is returned when uploading a document. If the client fails to provide the correct hash, the request will be rejected.\n",
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The document was downloaded successfully.",
+      content: {
+        "application/octet-stream": {
+          schema: { type: "string", format: "binary" },
+        },
+      },
+    },
+    "404": {
+      description: "The document with the given ID was not found.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>
