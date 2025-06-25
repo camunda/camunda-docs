@@ -2,7 +2,7 @@
 id: index
 title: Desktop Modeler
 sidebar_label: About
-description: "Camunda Desktop Modeler is a companion desktop application for modeling BPMN, DMN, and Forms, compatible with Camunda 7 and Camunda 8. Designed to integrate seamlessly into professional software development workflows, it is intended to be used alongside your preferred IDE—not as a standalone tool."
+description: "Camunda Desktop Modeler is a desktop application for modeling BPMN, DMN, and Forms, compatible with Camunda 7 and Camunda 8. As a companion tool to your favorite IDE it integrates seamlessly into your local professional software development setup."
 ---
 
 <span class="badge badge--cloud">Camunda 7 and 8</span>
