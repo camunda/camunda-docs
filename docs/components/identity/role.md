@@ -79,7 +79,7 @@ The user is removed from the role, and can no longer access applications or perf
 ### Assign mapping to a role
 
 :::note
-This feature is only available in SaaS or in Self-Managed deployments with OIDC.
+This feature is only available in Self-Managed deployments with OIDC.
 :::
 
 To assign mapping to a role:
@@ -95,7 +95,7 @@ The mapping is assigned to the role
 ### Remove mappings from a role
 
 :::note
-This feature is only available in SaaS or in Self-Managed deployments with OIDC.
+This feature is only available in Self-Managed deployments with OIDC.
 :::
 
 To remove a mapping from a role:

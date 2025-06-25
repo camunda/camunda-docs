@@ -103,7 +103,7 @@ The role is removed from the group, and users in the group can no longer access 
 ### Assign mapping to a group
 
 :::note
-This feature is only available in SaaS or in Self-Managed deployments with OIDC.
+This feature is only available in Self-Managed deployments with OIDC.
 :::
 
 To assign mapping to a group:
@@ -119,7 +119,7 @@ The mapping is assigned to the group
 ### Remove mappings from a group
 
 :::note
-This feature is only available in SaaS or in Self-Managed deployments with OIDC.
+This feature is only available in Self-Managed deployments with OIDC.
 :::
 
 To remove a mapping from a group:
