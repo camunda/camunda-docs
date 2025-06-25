@@ -11,7 +11,7 @@ Templates are loaded by Desktop Modeler at application startup. Reloading it usi
 
 ## Global templates
 
-For templates to be available for all diagrams store them in the `resources/element-templates` directory containing the Camunda Modeler executable. Alternatively, for element templates to be available across Camunda Modeler installations, you can store them in the `resources/element-templates` directory in the modeler's [data directory](../../search-paths#user-data-directory).
+For templates to be available for all diagrams store them in the `resources/element-templates` directory containing the Camunda Modeler executable. Alternatively, for element templates to be available across Camunda Modeler installations, you can store them in the `resources/element-templates` directory in the modeler's [user data directory](../../search-paths#user-data-directory).
 
 ### Examples
 
@@ -31,9 +31,17 @@ For templates to be available for all diagrams store them in the `resources/elem
 
 :::note
 
-On macOS, the Camunda Modeler is a self-contained `.app` bundle, which makes it difficult to add files to its installation directory. Therefore, we recommend using [local templates](#local-templates), or storing [global templates](#global-templates) in the [user data directory](../../search-paths#user-data-directory).
+On macOS, the Camunda Modeler is a self-contained `.app` bundle, which makes it difficult to add files to its installation directory. Therefore, we recommend storing [global templates](#global-templates) in the [user data directory](../../search-paths#user-data-directory).
 
 :::
+
+```
+└── ~/Library/Application Support
+        └── camunda-modeler
+            └── resources
+                └── element-templates
+                    └── my-element-templates.json
+```
 
   </TabItem>
   <TabItem value="linux" label="Linux">
