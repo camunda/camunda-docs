@@ -52,7 +52,7 @@ helm repo update
 2. Download the Camunda 8 <HelmChartValuesFileLocalLink/>.
 
 :::note
-If you are deploying Camunda 8 with Ingress configuration, make sure to add additional values to the `values-local.yaml` as described in [connecting to Camunda 8 components](#connecting-to-camunda-8-components).
+If you are deploying Camunda 8 with Ingress configuration, make sure to add additional values to the file you just downloaded `values-local.yaml` as described in [connecting to Camunda 8 components](#connecting-to-camunda-8-components).
 :::
 
 3. Install Camunda 8 using the `values-local.yaml` file you downloaded previously. This file might contain additional values if you are adding Ingress, TLS, or using a variety of other configuration properties. See [Camunda Helm chart parameters](https://artifacthub.io/packages/helm/camunda/camunda-platform#parameters). Execute the following command:
