@@ -464,7 +464,8 @@ const SearchableTable = () => {
     },
     {
       name: "Vector database",
-      description: "Embed, store, and retrieve Large Language Model (LLM) embeddings.",
+      description:
+        "Embed, store, and retrieve Large Language Model (LLM) embeddings.",
       type: "Outbound",
       link: "../embeddings-vector-db/",
       image: VectorImg,

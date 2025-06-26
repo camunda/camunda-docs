@@ -82,7 +82,8 @@ export const latestConnectorCards = [
     link: "../out-of-the-box-connectors/embeddings-vector-db",
     title: "Vector database",
     image: VectorImg,
-    description: "Embed, store, and retrieve Large Language Model (LLM) embeddings.",
+    description:
+      "Embed, store, and retrieve Large Language Model (LLM) embeddings.",
   },
 ];
 
