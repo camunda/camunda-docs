@@ -7,8 +7,7 @@ description: "See how to configure Camunda Process Test"
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-By default, CPT uses a runtime based on [Testcontainers](#testcontainers-runtime). You can customize the runtime to your needs.
-Or, you can replace it with a [Remote runtime](#remote-runtime), for example, if you can't install a Docker runtime.
+By default, CPT uses a runtime based on [Testcontainers](#testcontainers-runtime). You can customize the runtime to your needs, or replace it with a [Remote runtime](#remote-runtime), for example, if you can't install a Docker runtime.
 
 ## Testcontainers runtime
 
@@ -20,7 +19,7 @@ The default runtime of CPT is based on [Testcontainers](https://java.testcontain
 :::info Prerequisites
 
 You need a Docker-API compatible container runtime, such as Docker on Linux or Docker Desktop on Mac and Windows.
-If you have issues with your Docker runtime, have a look at the [Testcontainers documentation](https://java.testcontainers.org/supported_docker_environment/).
+If you're experiencing issues with your Docker runtime, have a look at the [Testcontainers documentation](https://java.testcontainers.org/supported_docker_environment/).
 
 :::
 
