@@ -946,6 +946,7 @@ module.exports = {
         {
           "Camunda Process Test": [
             "apis-tools/testing/getting-started",
+            "apis-tools/testing/configuration",
             "apis-tools/testing/assertions",
             "apis-tools/testing/utilities",
             "apis-tools/testing/connectors",
