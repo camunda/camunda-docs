@@ -7,9 +7,8 @@ description: "Leverage Zeebe APIs (gRPC and REST) in your Spring Boot project."
 This project allows you to leverage Zeebe APIs ([gRPC](/apis-tools/zeebe-api/grpc.md) and [REST](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md)) in your Spring Boot project. Later on, we’ll expand the Spring Zeebe SDK to deliver a Camunda Spring SDK that provides a unified experience for interacting with all Camunda APIs in Java Spring.
 
 :::info Deprecated Spring Zeebe
-Spring Zeebe will be deprecated at 8.8 and will be removed in version 8.10. \
-Please use [Camunda Spring Boot](/docs/apis-tools/spring-zeebe-sdk/getting-started.md). \
-Also leverage [Orchestration Camunda API](/docs/apis-tools/camunda-api-rest/camunda-api-rest-overview.md) in your Camunda Spring Boot project.
+Starting with 8.8, the Spring Zeebe will become the new Camunda Spring Boot SDK. The SDK will rely on the new Camunda Java client,
+designed to enhance the user experience and introduce new features while maintaining compatibility with existing codebases.
 :::
 
 ## Version compatibility
