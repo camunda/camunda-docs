@@ -5,8 +5,6 @@ title: AI Agent connector
 description: AI agent connector implementing a feedback loop using for user interactions and toolcalls with an LLM.
 ---
 
-import FromVersionBadge from '../../react-components/\_from-version-badge';
-
 Use the **AI Agent** outbound connector to integrate Large Language Models (LLMs) with AI agents.
 
 ## About this connector
