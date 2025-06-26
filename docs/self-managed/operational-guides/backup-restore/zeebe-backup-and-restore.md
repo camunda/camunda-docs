@@ -58,10 +58,10 @@ Alternatively, you can configure backup store using environment variables:
 - `ZEEBE_BROKER_DATA_BACKUP_S3_ACCESSKEY` - If either `accessKey` or `secretKey` is not provided, the credentials are determined [from the environment](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials.html#credentials-chain).
 - `ZEEBE_BROKER_DATA_BACKUP_S3_SECRETKEY` - Specify the secret key.
 - `ZEEBE_BROKER_DATA_BACKUP_S3_APICALLTIMEOUT` - Configure a maximum duration for all S3 client API calls.
-- `ZEEBE_BROKER_DATA_BACKUP_S3_FORCEPATHSTYLEACCESS` - When enabled, forces the s3 client to use path-style access. By default, the client will automatically choose between path-style and virtual-hosted-style. Should only be enabled if the s3 compatible storage cannot support virtual-hosted-style.
-- `ZEEBE_BROKER_DATA_BACKUP_S3_COMPRESSION` - Enabling compression reduces 
-  the required storage space for backups in S3, more details [bellow](#backup-compression).
-- `ZEEBE_BROKER_DATA_BACKUP_S3_MAXCONCURRENTCONNECTIONS` -  Maximum number of connections allowed in a connection pool. This is used to restrict the maximum number of concurrent uploads as to avoid connection timeouts when uploading backups with large/many files.
+- `ZEEBE_BROKER_DATA_BACKUP_S3_FORCEPATHSTYLEACCESS` - When enabled, forces the S3 client to use path-style access. By default, the client will automatically choose between path-style and virtual-hosted-style. Should only be enabled if the S3 compatible storage cannot support virtual-hosted-style.
+- `ZEEBE_BROKER_DATA_BACKUP_S3_COMPRESSION` - Enabling compression reduces
+  the required storage space for backups in S3, more details [below](#backup-compression).
+- `ZEEBE_BROKER_DATA_BACKUP_S3_MAXCONCURRENTCONNECTIONS` - Maximum number of connections allowed in a connection pool. This is used to restrict the maximum number of concurrent uploads as to avoid connection timeouts when uploading backups with large/many files.
 - `ZEEBE_BROKER_DATA_BACKUP_S3_CONNECTIONAQUISITIONTIMEOUT` - Timeout for acquiring an already-established connection from a connection pool to a remote service.
 
 [AWS S3]: https://aws.amazon.com/s3/
