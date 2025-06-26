@@ -3,6 +3,7 @@ id: backup-and-restore
 title: "Backup and restore"
 sidebar_label: "Backup and restore"
 keywords: ["backup", "backups"]
+description: "Learn how to backup and restore your Camunda 8 Self-Managed components."
 ---
 
 import Tabs from '@theme/Tabs';
@@ -10,43 +11,50 @@ import TabItem from '@theme/TabItem';
 import ZeebeGrid from '@site/docs/components/zeebe/react-components/\_zeebe-card';
 import { overviewCards } from './react-components/\_card-data';
 
+Back up and restore Camunda 8 Self-Managed components.
+
 :::note
-If the Camunda application(s) cannot access Elasticsearch with cluster-level privileges, it is possible to run the backup of Operate and Tasklist indices as a standalone application separate from the main application (see [standalone backup application](/self-managed/concepts/elasticsearch-without-cluster-privileges.md#standalone-backup-application)).
+If the Camunda application(s) cannot access Elasticsearch with cluster-level privileges, you can run the backup of Operate and Tasklist indices as a standalone application separate from the main application (see [standalone backup application](/self-managed/concepts/elasticsearch-without-cluster-privileges.md#standalone-backup-application)).
 :::
 
-The following will explore the motive, considerations and actual backup and restore procedures in detail. The goal is for you to understand the steps and choices taken. The manually described procedures should be automated within your organization with the tools of your choice to fulfill your companies requirements.
+## About this guide
 
-You need to use the backup feature of Camunda 8 Self-Managed to regularly back up the state of all of its components (Zeebe, Operate, Tasklist, and Optimize) without any downtime (except Web Modeler, see [the Web Modeler backup and restore documentation](./modeler-backup-and-restore.md)).
-In case of failures that lead to data loss, you can recover the cluster from a backup.
+This guide covers how to perform a backup and restore, and the steps and choices taken during the process.
 
-## Overview
+- **Backup**: Use the Camunda 8 Self-Managed backup feature to regularly back up the state of your Zeebe, Operate, Tasklist, and Optimize components, without any downtime. For Web Modeler, see [backup and restore Web Modeler data](./modeler-backup-and-restore.md).
+
+- **Restore**: You can then restore the cluster from a backup if any failures occur that cause data loss.
+
+:::note
+You should automate the procedures in this guide, choosing tools that fulfil the requirements of your organization.
+:::
 
 <ZeebeGrid zeebe={overviewCards} />
 
-## Motive
+## Why you should use backup and restore
 
-Camunda 8 components - Zeebe, Operate, Tasklist, and Optimize - store data in various formats and across multiple indices in Elasticsearch / OpenSearch. Because of this distributed and interdependent architecture, creating a consistent and reliable backup **requires coordination** between the components themselves.
+The Camunda 8 components Zeebe, Operate, Tasklist, and Optimize store data in various formats and across multiple indices in Elasticsearch / OpenSearch. Because of this distributed and interdependent architecture, creating a consistent and reliable backup **requires coordination** between the components.
 
-For example, using Elasticsearch / OpenSearch’s native snapshot capabilities directly will not produce a coherent backup. This is because Operate, Tasklist, and Optimize each manage their data across multiple indices, which cannot be reliably captured together without involvement from the components that understand their structure. For this reason, **backups must be** initiated through each component individually, using **their built-in backup functionality**.
+For example, using Elasticsearch / OpenSearch’s native snapshot capabilities directly does not produce a coherent backup. This is because Operate, Tasklist, and Optimize each manage their data across multiple indices, which cannot be reliably captured together without involvement from the components that understand their structure. For this reason, **backups must be** initiated through each component individually, using **their built-in backup functionality**.
 
-The same principle applies to Zeebe. **Backups must be** scheduled through Zeebe to ensure a **consistent snapshot** of all partition data. Simply taking a disk-level snapshot of each Zeebe broker is insufficient, as the brokers operate independently and data may not be aligned across them at the time of the snapshot. Since disk-level backups are not synchronized, this can lead to inconsistencies and invalid recovery points.
+The same principle applies to Zeebe. **Backups must be** scheduled through Zeebe to ensure a **consistent snapshot** of all partition data. Simply taking a disk-level snapshot of each Zeebe broker is not enough, as the brokers operate independently and data may not be aligned across them at the time of the snapshot. Since disk-level backups are not synchronized, this can lead to inconsistencies and invalid recovery points.
 
 A complete backup of a Camunda 8 cluster includes:
 
-- Backups of Operate, Tasklist, and Optimize (triggered through their APIs)
-- Backup of indices from Elasticsearch/OpenSearch containing exported Zeebe records
-- A Zeebe broker partition backup (triggered through its API)
+- Backups of Operate, Tasklist, and Optimize (triggered through their APIs).
+- Backup of indices from Elasticsearch/OpenSearch containing exported Zeebe records.
+- A Zeebe broker partition backup (triggered through its API).
 
 Because the data across these systems is interdependent, **all components must be backed up** as part of the **same backup window**. Backups taken independently at different times may not align and could result in an unreliable restore point.
 
 :::warning
-To ensure a consistent backup, follow the process outlined in the documentation. Deviating from it can result in undetected data loss, as there is no reliable method to verify cross-component data integrity afterward.
+To ensure a consistent backup, you must follow the process outlined in this guide. Deviating from it can result in undetected data loss, as there is no reliable method to verify cross-component data integrity after backup.
 :::
 
 Following the documented procedure results in a hot backup, meaning that:
 
-- Zeebe continues processing and exporting data
-- WebApps (Operate, Tasklist, Optimize) remain fully operational during the backup process
+- Zeebe continues to process and export data.
+- WebApps (Operate, Tasklist, Optimize) remain fully operational during the backup process.
 
 This ensures high availability while preserving the integrity of the data snapshot.
 
