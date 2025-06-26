@@ -136,9 +136,9 @@ You can inject the Zeebe client and work with it to create new workflow instance
 private ZeebeClient client;
 ```
 
-:::warning Deprecated Zeebe Client
-Zeebe Client is deprecated and will be removed in version 8.10. \
-Please use [Camunda Client](/docs/apis-tools/java-client/index.md).
+:::info Deprecated Zeebe Client
+"Zeebe Client is deprecated as of Camunda 8.8 and will be removed in version 8.10. \
+For more information, visit [announcements](/reference/announcements-release-notes/870/870-announcements.md#zeebe-java-client).
 :::
 
 ## Deploy process models
