@@ -418,8 +418,10 @@ module.exports = {
             id: "components/identity/identity-introduction",
           },
           items: [
-            "components/identity/authorization",
             "components/identity/user",
+            "components/identity/group",
+            "components/identity/role",
+            "components/identity/authorization",
           ],
         },
       ],
