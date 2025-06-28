@@ -206,6 +206,7 @@ openssl pkcs12 -export -out keystore.p12 -inkey private-key.pem -in certificate.
 - **Solution**: Verify the client ID matches your Microsoft Entra application ID
 
 #### 2. "Invalid client secret" error:
+
 - **Cause**: Expired or incorrect client secret
 - **Solution**: Generate a new client secret in Microsoft Entra and update your configuration
 
