@@ -215,6 +215,7 @@ openssl pkcs12 -export -out keystore.p12 -inkey private-key.pem -in certificate.
 - **Solution**: Ensure the scope follows the pattern `{client-id}/.default` for Microsoft Entra
 
 #### 4. "Certificate validation failed" error:
+
 - **Cause**: Certificate is not properly uploaded or expired
 - **Solution**: Verify the certificate is uploaded to Microsoft Entra and not expired
 
