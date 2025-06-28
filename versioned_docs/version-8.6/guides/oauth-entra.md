@@ -221,6 +221,7 @@ openssl pkcs12 -export -out keystore.p12 -inkey private-key.pem -in certificate.
 - **Solution**: Verify the certificate is uploaded to Microsoft Entra and not expired
 
 #### 5. "Token audience validation failed" error:
+
 - **Cause**: Mismatch between requested audience and configured audience
 - **Solution**: Ensure `ZEEBE_TOKEN_AUDIENCE` matches your application ID
 
