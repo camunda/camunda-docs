@@ -201,6 +201,7 @@ openssl pkcs12 -export -out keystore.p12 -inkey private-key.pem -in certificate.
 ### Common Issues and Solutions:
 
 #### 1. "Invalid client" error:
+
 - **Cause**: Incorrect client ID or the application is not properly registered
 - **Solution**: Verify the client ID matches your Microsoft Entra application ID
 
