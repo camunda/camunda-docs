@@ -210,6 +210,7 @@ openssl pkcs12 -export -out keystore.p12 -inkey private-key.pem -in certificate.
 - **Solution**: Generate a new client secret in Microsoft Entra and update your configuration
 
 #### 3. "Invalid scope" error:
+
 - **Cause**: The requested scope is not configured or granted
 - **Solution**: Ensure the scope follows the pattern `{client-id}/.default` for Microsoft Entra
 
