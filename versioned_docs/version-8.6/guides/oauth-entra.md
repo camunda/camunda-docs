@@ -46,6 +46,7 @@ Below is a diagram illustrating the communication between components when using 
 ```
 
 The diagram shows the OAuth flow where:
+
 1. User/Client makes a request to Zeebe Client
 2. Zeebe Client authenticates with Microsoft Entra
 3. Microsoft Entra returns an access token
