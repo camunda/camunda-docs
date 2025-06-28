@@ -228,6 +228,7 @@ openssl pkcs12 -export -out keystore.p12 -inkey private-key.pem -in certificate.
 ### Debug Tips:
 
 1. **Enable debug logging** for OAuth components:
+
    ```bash
    export ZEEBE_LOG_LEVEL=debug
    ```
