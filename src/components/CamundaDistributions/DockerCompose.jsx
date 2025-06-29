@@ -1,18 +1,13 @@
 import React from "react";
 import { useActiveVersion } from "@docusaurus/plugin-content-docs/client";
+import { getCamundaVersion } from "./utils";
 
 const DockerComposeBaseURL =
   "https://github.com/camunda/camunda-distributions/releases/download";
 
-const getVersion = () => {
-  const docsVersion = useActiveVersion();
-  if (docsVersion.label == "Next") return "alpha";
-  if (docsVersion.label == "8.8 (unreleased)") return "8.8";
-  return docsVersion.label;
-};
 
 const DockerCompose = () => {
-  const version = getVersion();
+  const version = getCamundaVersion();
   return (
     <a
       title={`${DockerComposeBaseURL}/docker-compose-${version}/docker-compose-${version}.zip`}
