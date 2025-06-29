@@ -13,6 +13,9 @@ https://docs.camunda.io/docs/8.7/components/connectors/out-of-the-box-connectors
 https://docs.camunda.io/docs/8.7/components/connectors/out-of-the-box-connectors/amazon-s3
 https://docs.camunda.io/docs/8.7/components/connectors/out-of-the-box-connectors/box
 https://docs.camunda.io/docs/8.7/components/connectors/out-of-the-box-connectors/google-gemini
+https://docs.camunda.io/docs/8.8/components/connectors/out-of-the-box-connectors/agentic-ai-ad-hoc-tools-schema-resolver
+https://docs.camunda.io/docs/8.8/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent
+https://docs.camunda.io/docs/8.8/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent/
 https://docs.camunda.io/docs/8.8/components/connectors/out-of-the-box-connectors/embeddings-vector-db
 https://docs.camunda.io/docs/8.8/components/connectors/out-of-the-box-connectors/hubspot
 https://docs.camunda.io/docs/apis-clients/operate-api/#filter
