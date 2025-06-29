@@ -115,7 +115,7 @@ This guide is the main resource walking you through migration.
 
 As part of your migration journey, you might also want to consider engaging professional services to help you. The main starting points are:
 
-- [Migration evaluation workshop (Camunda)](https://camunda.com/wp-content/uploads/2024/03/Camunda_ConsultingWorkshops_5-Migration-Evaluation_2024.pdf)
+- [Migration evaluation workshop (Camunda)](https://camunda.com/wp-content/uploads/2025/06/Camunda_ConsultingWorkshops_6-Migration-Evaluation_2025_EN.pdf)
 - Scoping Workshop (Camunda) <!-- TODO -->
 - Professional advisory services (Camunda, Partners)
 - Implementation services (Partners)
