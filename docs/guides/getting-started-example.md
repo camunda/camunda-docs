@@ -41,8 +41,8 @@ Download the Camunda 8 developer bundle from the following website: [@TODO websi
 
 The developer bundle includes the following components:
 
-- [c8run](/self-managed/setup/deploy/local/c8run/) - a simplified, single-application Camunda configuration in a local development environment
-- [Camunda Modeler](/components/modeler/about-modeler/) - a desktop application for modeling BPMN, DMN, and Forms
+- [c8run](/self-managed/setup/deploy/local/c8run.md) - a simplified, single-application Camunda configuration in a local development environment
+- [Camunda Modeler](/components/modeler/about-modeler.md) - a desktop application for modeling BPMN, DMN, and Forms
 - [Getting Started project](https://github.com/camunda/camunda-8-get-started) - a git project containing a simple project with workers in both Java and JavaScript
 
 Links are provided to enable you to find more information. All of these components are included in the developer bundle, and you do not need to download them separately.
@@ -111,4 +111,4 @@ You will now see the workers processing the jobs for the process instance.
 
 ## Further steps
 
-For instructions to create a new Spring project, refer to [this guide](./getting-started-java-spring/).
+For instructions to create a new Spring project, refer to [this guide](/guides/getting-started-java-spring.md).
