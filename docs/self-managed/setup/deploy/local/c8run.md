@@ -80,7 +80,7 @@ The following command line arguments are available:
 | `--log-level <arg>`        | Set a different log level for the Camunda core.                                                                                                                                                                                               |
 | `--docker`                 | Download and run the Camunda Docker Compose distribution. Any additional options are not supported at this time, and will be ignored. See the [shutdown script](#shut-down-camunda-8-run) for information on stopping the Docker application. |
 | `--disable-elasticsearch`  | Do not start the built-in Elasticsearch. Ensure another Elasticsearch instance is provided via `--config`. See the [external Elasticsearch](#start-external-elasticsearch) options for more information.                                      |
-| `--startup-url`            | The URL to open after startup. By default Camunda Operate is opened.                                                                                                                                                                          |
+| `--startup-url`            | The URL to open after startup (e.g. `'http://localhost:8080/operate'`). By default Camunda Operate is opened.                                                                                                                                                                          |
 
 ## Work with Camunda 8 Run
 
