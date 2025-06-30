@@ -25,9 +25,7 @@ spec:
     timeoutSec: 3
     type: HTTP
     requestPath: /actuator/health/readiness
-    # This is the "containerPort" in the Pod, not the "targetPort" in the Service,
-    # as the load balancer sends probes to the Pod's IP address directly.
-    port: 8082
+    port: 82
 ```
 
 When using [container-native load balancing](https://cloud.google.com/kubernetes-engine/docs/how-to/container-native-load-balancing), the load balancer sends traffic to an endpoint in a network endpoint group; hence, the `targetPort` should match the `containerPort` as the load balancer sends probes to the Pod's IP address directly.
