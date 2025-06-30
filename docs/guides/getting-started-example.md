@@ -22,12 +22,16 @@ You will run Camunda 8 in a local development environment, using c8run, use the 
 ] }>
 <TabItem value="javaspring">
 
-- [OpenJDK 21-23](https://openjdk.org/install/)
-- [Maven 3](https://maven.apache.org/index.html)
+<ul>
+    <li>[OpenJDK 21-23](https://openjdk.org/install/)</li>
+    <li>[Maven 3](https://maven.apache.org/index.html)</li>
+    </ul>
   </TabItem>
   <TabItem value="nodejs">
-- [OpenJDK 21-23](https://openjdk.org/install/)
-- [Node.js](https://nodejs.org/en)
+<ul>
+    <li>[OpenJDK 21-23](https://openjdk.org/install/)</li>
+    <li>[Node.js](https://nodejs.org/en)</li>
+</ul>
   </TabItem>
   </Tabs>
 
@@ -72,19 +76,38 @@ Next, start the job workers to allow them to perform the work for the service ta
 ] }>
 <TabItem value="javaspring">
 
-1. Change into the Spring SDK directory: `cd java`
-2. Start the workers with the command: `mvn spring-boot:run`
+<ol>
+    <li>Change into the Spring SDK directory: `cd java`</li>
+    <li>Start the workers with the command: `mvn spring-boot:run`</li>
+</ol>
    </TabItem>
    <TabItem value="nodejs">
-3. Change into the Node.js SDK directory: `cd nodejs`
-4. Install dependencies with the command: `npm i`
-5. Start the workers with the command: `npm start`
+   <ol>
+        <li>Change into the Node.js SDK directory: `cd nodejs`</li>
+        <li>Install dependencies with the command: `npm i`</li>
+        <li>Start the workers with the command: `npm start`</li>
+    </ol>
    </TabItem>
    </Tabs>
 
 You will now see the workers processing the jobs for the process instance.
 
+<Tabs groupId="language" defaultValue="javaspring" values={
+[
+{ label: 'Java + Spring', value: 'javaspring', },
+{ label: 'Node.js', value: 'nodejs', },
+] }>
+<TabItem value="javaspring">
+
+    ![Worker output](./img/get-started-example-output-java.png)
+
+   </TabItem>
+   <TabItem value="nodejs">
+
     ![Worker output](./img/getting-started-example-output.png)
+
+   </TabItem>
+</Tabs>
 
 ## Further steps
 
