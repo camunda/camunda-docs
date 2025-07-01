@@ -14,7 +14,7 @@ keywords: ["backpressure", "back-pressure", "back pressure"]
 The Java client provides a job worker that handles polling for available jobs. This allows you to focus on writing code to handle the activated jobs.
 
 :::caution REST API limitation
-The 8.6.0 Java client cannot maintain the long-lived polling connections required for job polling via the Camunda 8 REST API. For example, this applies when:
+The 8.6.0 Java client cannot maintain the long-lived polling connections required for job polling via the Orchestration cluster REST API. For example, this applies when:
 
 - Performing long-polling job activation when activating jobs larger than the maximum message size.
 - Receiving additional job activation requests from the same Java client while the long-polling connection is still open.
@@ -125,10 +125,23 @@ public final JobWorker openWorker(final CamundaClient client, final JobHandler h
 There are currently no built-in tags, primarily because these are likely to be high cardinality, which can become an issue with some metric registries. If you want per-worker tags, create a different `JobWorkerMetrics` instance per worker.
 :::
 
-This implementation creates two metrics:
+This implementation creates four metrics:
 
-- `zeebe.client.worker.job.activated`: A counter tracking the count of jobs activated.
-- `zeebe.client.worker.job.handled`: A counter tracking the count of jobs handled.
+| Metric name                         | Description                           | Notes                                                                     |
+| ----------------------------------- | ------------------------------------- | ------------------------------------------------------------------------- |
+| camunda.client.worker.job.activated | Counts the number of jobs activated   | New                                                                       |
+| camunda.client.worker.job.handled   | Counts the number of jobs handled     | New                                                                       |
+| zeebe.client.worker.job.activated   | Deprecated counter for jobs activated | Will be removed at 8.10. Use camunda.client.worker.job.activated instead. |
+| zeebe.client.worker.job.handled     | Deprecated counter for jobs handled   | Will be removed at 8.10. Use camunda.client.worker.job.handled instead.   |
+
+:::warning Deprecated metrics
+The following metrics are deprecated and will be removed in version 8.10:
+
+- `zeebe.client.worker.job.activated`, replace with `camunda.client.worker.job.activated`
+- `zeebe.client.worker.job.handled`, replace with `camunda.client.worker.job.handled`
+
+Please update your monitoring integrations to use the new metrics before upgrading to version 8.10.
+:::
 
 ### Workarounds for additional metrics
 

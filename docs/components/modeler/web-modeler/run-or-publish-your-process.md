@@ -109,10 +109,7 @@ You can also schedule a process to run at a specific time or interval using time
 To schedule a process using a timer, follow these steps:
 
 1. Select the start event.
-2. Change the start event type to a timer event using the **wrench tool**.
-
-<img src={ConvertToTimerImg} style={{width: 600}} alt="Converting the start event to a timer start event" />
-
+2. Change the start event type to a timer event by clicking on the element and selecting the **Change element** menu icon.
 3. [Configure the timer start event](../bpmn/timer-events/timer-events.md#timer-start-events) using the **properties panel** on the right side of the screen under the **Deploy** button to define when the process should be executed. You can set the timer to trigger at a specific date and time or to repeat at a certain interval.
 
 4. Click on **Deploy** to [deploy](#deploy-a-process) the process.
@@ -166,7 +163,7 @@ You can publish a process via webhook, which allows you to integrate it easily w
 Follow these steps to publish a process via a webhook:
 
 1. Select the start event.
-2. Switch your start event to a [HTTP webhook connector](/components/connectors/protocol/http-webhook.md) using the **wrench tool**.
+2. Switch your start event to a [HTTP webhook connector](/components/connectors/protocol/http-webhook.md) by clicking on the element and selecting the **Change element** menu icon.
    <img src={ConvertToWebhookImg} style={{width: 600}} alt="Converting the start event to a webhook start event" />
 
 3. Define the webhook configuration in the properties panel of the start event.
@@ -234,7 +231,7 @@ For further configuration and how to unpublish a process again, refer to the [fu
 Camunda 8 supports message and signal events, which can be used to trigger a process instance when a specific event occurs. Everyone on the platform that knows the message or signal correlation keys can call such a process. To listen to a message or signal event, you need to define a [message](../bpmn/message-events/message-events.md#message-start-events) or [signal start event](../bpmn/signal-events/signal-events.md#signal-start-events) in your process model and configure it to listen for the desired event. Follow these steps to configure a message or signal start event:
 
 1. Select the start event.
-2. Change the start event type to a message or signal start event using the **wrench tool**.
+2. Change the start event type to a message or signal start event by clicking on the element and selecting the **Change element** menu icon.
 3. Configure the message or signal start event using the **properties panel** to define the message or signal to listen to. Using messages, you can create a 1:1 relationship between calling processes. With signals, you can create broadcast-like message distributions.
 4. Click on **Deploy** to [deploy](#deploy-a-process) the process.
 

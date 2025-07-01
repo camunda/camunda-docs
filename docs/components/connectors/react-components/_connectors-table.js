@@ -11,6 +11,7 @@ import AmazonS3Img from "../img/connector-amazon-s3.png";
 import AsanaImg from "../img/connector-asana.png";
 import AutomationImg from "../img/connector-automation.png";
 import AzureaiImg from "../img/connector-azure-openai.png";
+import AzureBlobStorageImg from "../img/connector-azure-blob-storage.png";
 import BoxImg from "../img/connector-box.png";
 import BluePrismImg from "../img/connector-blueprism.png";
 import CamundaImg from "../img/connector-camunda.png";
@@ -42,12 +43,28 @@ import TwilioImg from "../img/connector-twilio.png";
 import UipathImg from "../img/connector-uipath.png";
 import WebhookImg from "../img/connector-webhook.png";
 import WhatsappImg from "../img/connector-whatsapp.png";
+import AiagentImg from "../img/connector-aiagent.png";
+import VectorImg from "../img/connector-vector.png";
 
 const SearchableTable = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterType, setFilterType] = useState("All");
 
   const connectors = [
+    {
+      name: "AI Agent",
+      description: "Integrate Large Language Models (LLMs) with AI agents.",
+      type: "Outbound",
+      link: "../agentic-ai-aiagent",
+      image: AiagentImg,
+    },
+    {
+      name: "Ad-Hoc Tools Schema Resolver",
+      description: "Implement tool resolution of the AI Agent connector.",
+      type: "Outbound",
+      link: "../agentic-ai-ad-hoc-tools-schema-resolver",
+      image: AiagentImg,
+    },
     {
       name: "Amazon Bedrock",
       description: "Interact with Amazon Bedrock from your processes.",
@@ -164,6 +181,14 @@ const SearchableTable = () => {
       type: "Outbound",
       link: "../azure-open-ai/",
       image: AzureaiImg,
+    },
+    {
+      name: "Azure Blob Storage",
+      description:
+        "Handle documents with Azure Blob Storage from your processes.",
+      type: "Outbound",
+      link: "../azure-blob-storage/",
+      image: AzureBlobStorageImg,
     },
     {
       name: "Blue Prism",
@@ -436,6 +461,13 @@ const SearchableTable = () => {
       type: "Outbound",
       link: "../uipath/",
       image: UipathImg,
+    },
+    {
+      name: "Vector database",
+      description: "Embed, store, and retrieve Large Language Model (LLM) embeddings.",
+      type: "Outbound",
+      link: "../embeddings-vector-db/",
+      image: VectorImg,
     },
     {
       name: "WhatsApp",

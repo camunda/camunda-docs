@@ -13,7 +13,7 @@ Here, we'll set up client connection credentials to create, name, and connect yo
 
 Currently, Camunda 8 SaaS supports the following scopes:
 
-- Zeebe - Access to the [Zeebe gRPC](/apis-tools/zeebe-api/grpc.md) and [REST](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md) APIs.
+- Zeebe - Access to the [Zeebe gRPC](/apis-tools/zeebe-api/grpc.md) and [REST](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) APIs.
 - Optimize - Access to the [Optimize REST API](/apis-tools/optimize-api/overview.md).
 - Secrets - Access cluster secrets in a [hybrid setup](/guides/use-connectors-in-hybrid-mode.md).
 

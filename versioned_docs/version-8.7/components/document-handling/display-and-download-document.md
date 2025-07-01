@@ -49,7 +49,7 @@ When a user opens the task, they can view and download the document directly fro
 You can also download a document from your Camunda 8 cluster using the Camunda 8 API.
 
 :::note
-This is currently supported for document stores of type: [AWS, GCP, in-memory (non-production), local (non-production)](/self-managed/document-handling/configuration/overview.md).
+This is currently supported for document stores of type: [AWS, GCP, in-memory (non-production), local (non-production)](/self-managed/concepts/document-handling/configuration/overview.md).
 :::
 
 Learn more about this request in the [Camunda 8 API docs](/apis-tools/camunda-api-rest/specifications/get-document.api.mdx).

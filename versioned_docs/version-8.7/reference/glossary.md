@@ -2,11 +2,52 @@
 id: glossary
 title: "Glossary"
 description: "This section defines common terminology referenced within the documentation."
+toc_min_heading_level: 2
+toc_max_heading_level: 2
 ---
+
+Explore and understand definitions for key Camunda 8 terms and abbreviations.
+
+<div class="alphabet-rows">
+  <div class="alphabet-navigation">
+    <div class="letter-link"><a href="#a">A</a></div>
+    <div class="letter-link"><a href="#b">B</a></div>
+    <div class="letter-link"><a href="#c">C</a></div>
+    <div class="letter-link"><a href="#d">D</a></div>
+    <div class="letter-link"><a href="#e">E</a></div>
+    <div class="letter-link"><a href="#f">F</a></div>
+    <div class="letter-link">G</div>
+    <div class="letter-link"><a href="#h">H</a></div>
+    <div class="letter-link"><a href="#i">I</a></div>
+    <div class="letter-link"><a href="#j">J</a></div>
+    <div class="letter-link">K</div>
+    <div class="letter-link"><a href="#l">L</a></div>
+    <div class="letter-link"><a href="#m">M</a></div>
+  </div>
+  <div class="alphabet-navigation">
+    <div class="letter-link">N</div>
+    <div class="letter-link"><a href="#o">O</a></div>
+    <div class="letter-link"><a href="#p">P</a></div>
+    <div class="letter-link">Q</div>
+    <div class="letter-link"><a href="#r">R</a></div>
+    <div class="letter-link"><a href="#s">S</a></div>
+    <div class="letter-link">T</div>
+    <div class="letter-link"><a href="#u">U</a></div>
+    <div class="letter-link">V</div>
+    <div class="letter-link"><a href="#w">W</a></div>
+    <div class="letter-link">X</div>
+    <div class="letter-link">Y</div>
+    <div class="letter-link"><a href="#z">Z</a></div>
+  </div>
+</div>
+
+## A
 
 ### Automation cluster
 
 See [orchestration cluster](#orchestration-cluster).
+
+## B
 
 ### Bridge
 
@@ -25,6 +66,8 @@ BTP stands for [SAP](#sap) Business Technology Platform, which is a cloud-based 
 Camunda can integrate with SAP BTP to orchestrate business processes across SAP and non-SAP systems. By doing so, it enables automation and visibility of workflows that span multiple services and applications hosted on BTP, enhancing agility and process control in enterprise environments.
 
 - [BTP plugin](/components/camunda-integrations/sap/btp-plugin.md)
+
+## C
 
 ### Client
 
@@ -72,11 +115,15 @@ Camunda uses `csap` to automate setup steps: it interactively or via scripted fl
 
 - [CSAP CLI](/components/camunda-integrations/sap/csap-cli.md)
 
+## D
+
 ### Deployment
 
 A process cannot execute unless it is known by the broker. Deployment is the process of pushing or deploying processes to the broker.
 
 - [Zeebe Deployment](/apis-tools/zeebe-api/gateway-service.md#deployresource-rpc)
+
+## E
 
 ### Element
 
@@ -108,6 +155,8 @@ An exporter represents a sink to which Zeebe will submit all records within the 
 
 - [Exporter](/self-managed/concepts/exporters.md)
 
+## F
+
 ### Flow node
 
 Flow nodes refer to a specific subset of BPMN [elements](#element). They comprise events, activities, and gateways. Other elements, such as sequence flows, participants, and data objects, are not considered flow nodes.
@@ -117,6 +166,8 @@ Flow nodes refer to a specific subset of BPMN [elements](#element). They compris
 In a clustered environment, a broker which is not a leader is a follower of a given partition. A follower can become the new leader when the old leader is no longer reachable.
 
 - [Clustering](/components/zeebe/technical-concepts/clustering.md#raft-consensus-and-replication-protocol)
+
+## H
 
 ### Human task
 
@@ -131,6 +182,8 @@ Hybrid mode, or a hybrid Self-Managed distribution, allows you to run a separate
 For example, this is useful when working with services that must be isolated within a private network and cannot be exposed to the public internet, or if infrastructure amendments need to be applied to the connector runtime, such as SSL certificates or mounted volumes.
 
 - [Use connectors in hybrid mode](/guides/use-connectors-in-hybrid-mode.md)
+
+## I
 
 ### Inbound connector
 
@@ -153,6 +206,8 @@ An Ingress is a Kubernetes object that manages external access to the services w
 
 - [Ingress setup](/self-managed/setup/guides/ingress-setup.md)
 
+## J
+
 ### Job
 
 A job represents a distinct unit of work within a business process. Service tasks represent such
@@ -173,6 +228,8 @@ A special type of client that polls for and executes available jobs. An uncomple
 
 - [Job workers](/components/concepts/job-workers.md)
 
+## L
+
 ### Leader
 
 In a clustered environment, one broker (the leader) is responsible for process execution and housekeeping of data within a partition. Housekeeping includes taking snapshots, replication, and running exports.
@@ -184,6 +241,8 @@ In a clustered environment, one broker (the leader) is responsible for process e
 The log is comprised of an ordered sequence of records written to persistent storage. The log is appended-only and is stored on disk within the broker.
 
 - [Partitions](/components/zeebe/technical-concepts/partitions.md#partition-data-layout)
+
+## M
 
 ### Manual task
 
@@ -199,6 +258,8 @@ A message contains information to be delivered to interested parties during exec
 
 - [Messages](/components/concepts/messages.md)
 
+## O
+
 ### Orchestration cluster
 
 An orchestration cluster includes Zeebe, Operate, Tasklist, Optimize, and connectors. Previously [automation cluster](#automation-cluster).
@@ -210,6 +271,8 @@ An orchestration core or orchestration cluster core includes Zeebe, Operate, Tas
 ### Outbound connector
 
 Outbound [Connectors](#connector) in Camunda 8 allow workflows to trigger with external systems or services, making it possible to integrate workflows with other parts of a business process or system architecture.
+
+## P
 
 ### Partition
 
@@ -251,6 +314,8 @@ Protocol connectors are a type of [Connector](#connector) in Camunda that can se
 
 Protocol connectors can be customized to meet the needs of specific use cases using [element templates](#element-template), with no additional coding or deployment required. Examples of protocol connectors include HTTP REST, SOAP, GraphQL, as well as message queue connectors.
 
+## R
+
 ### Record
 
 A record represents a command or an event. For example, a command to create a new process instance, or a state transition of an executing process instance representing an event at a given point in time would result to generation of a record. During the execution lifecycle of a process instance, numerous records are generated to capture various commands and events generated. Records are stored in the log.
@@ -285,6 +350,8 @@ Camunda can use RFC to call SAP functions directly as part of a business process
 
 - [RFC](/components/camunda-integrations/sap/csap-cli.md)
 
+## S
+
 ### SAP
 
 SAP stands for Systems, Applications, and Products in Data Processing; it's an enterprise software platform used to manage business operations such as finance, supply chain, and HR. Camunda integrates with SAP to automate and orchestrate workflows that involve SAP systems, allowing for greater flexibility, transparency, and control over complex business processes.
@@ -316,6 +383,8 @@ An [inbound connector](#inbound-connector) that subscribes to a message queue.
 
 This way, a Camunda workflow can receive messages from an external system or service (like Kafka or RabbitMQ) using message queuing technology. This type of inbound connector is commonly used in distributed systems where different components of the system need to communicate with each other asynchronously.
 
+## U
+
 ### User task
 
 A user task is used to model work that needs to be done by a human and is assisted by a workflow engine or software application. This differs from [manual tasks](/components/modeler/bpmn/manual-tasks/manual-tasks.md), which are not assisted by external tooling.
@@ -326,6 +395,8 @@ Camunda recommends using Camunda user tasks in your process definitions. With 8.
 
 - [User tasks](/components/modeler/bpmn/user-tasks/user-tasks.md)
 - [Migrate to Camunda user tasks](/apis-tools/migration-manuals/migrate-to-camunda-user-tasks.md)
+
+## W
 
 ### Webhook connector
 
@@ -355,7 +426,9 @@ See [process instance](#process-instance).
 
 See [process instance variable](#process-instance-variable).
 
-## Zeebe Broker
+## Z
+
+### Zeebe Broker
 
 The [Zeebe Broker](/components/zeebe/technical-concepts/architecture.md#brokers) is the distributed workflow engine that tracks the state of active process instances. The Zeebe Broker is the main part of the Zeebe cluster, which does all the heavy work like processing, replicating, exporting, and everything based on partitions.
 

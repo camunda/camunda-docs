@@ -1080,6 +1080,14 @@ Returned if:
 
 Obtains the current topology of the cluster the gateway is part of.
 
+:::note
+The partition role can be one of `LEADER`, `FOLLOWER`, or `INACTIVE`, which [is defined here](../../components/zeebe/technical-concepts/partitions.md#roles).
+:::
+
+:::note
+The partition health can be one of `HEALTHY`, `UNHEALTHY`, or `DEAD`, which [is defined here](../../components/zeebe/technical-concepts/health.md).
+:::
+
 ### Input: `TopologyRequest`
 
 ```protobuf

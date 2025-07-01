@@ -4,7 +4,7 @@ title: Getting started
 description: "Leverage Camunda APIs (gRPC and REST) in your Spring Boot project."
 ---
 
-This project allows you to leverage Camunda APIs ([gRPC](/apis-tools/zeebe-api/grpc.md) and [REST](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md)) in your Spring Boot project. Later on, we’ll expand the Camunda Spring Boot SDK to deliver an SDK that provides a unified experience for interacting with all Camunda APIs in Java Spring.
+This project allows you to leverage Camunda APIs ([gRPC](/apis-tools/zeebe-api/grpc.md) and [REST](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md)) in your Spring Boot project. Later on, we’ll expand the Camunda Spring Boot SDK to deliver an SDK that provides a unified experience for interacting with all Camunda APIs in Java Spring.
 
 ## Version compatibility
 

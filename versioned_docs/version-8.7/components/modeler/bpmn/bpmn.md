@@ -17,7 +17,7 @@ BPMN diagrams must be created for the process engine they intend to be deployed 
 Web and Desktop Modeler both offer a similar core BPMN 2.0 Modeling experience:
 
 - Add BPMN elements from the palette on the left side of the page by dragging and dropping them onto the diagram canvas.
-- Change the type of element in place by clicking on an element to reveal the context menu. Then, click the wrench icon to change the type of element to a [service task](./service-tasks/service-tasks.md) or [user task](./user-tasks/user-tasks.md), for example.
+- Change the type of element in place by clicking on the element and selecting the **Change element** menu icon to change the type of element to a [service task](./service-tasks/service-tasks.md) or [user task](./user-tasks/user-tasks.md), for example.
 
 ## Creating BPMN elements
 

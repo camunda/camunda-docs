@@ -106,12 +106,11 @@
         {
           "Manage your plan": [
             "components/console/manage-plan/available-plans",
-            "components/console/manage-plan/upgrade-to-starter-plan",
+            "components/console/manage-plan/upgrade-to-enterprise-plan",
             "components/console/manage-plan/update-billing-reservations",
             "components/console/manage-plan/update-creditcard",
             "components/console/manage-plan/retrieve-invoices-or-update-billing-info",
-            "components/console/manage-plan/cancel-starter-subscription",
-            "components/console/manage-plan/migrate-from-prof-to-starter"
+            "components/console/manage-plan/cancel-starter-subscription"
           ]
         },
         {
@@ -452,6 +451,7 @@
             "components/zeebe/technical-concepts/technical-concepts-overview",
             "components/zeebe/technical-concepts/architecture",
             "components/zeebe/technical-concepts/clustering",
+            "components/zeebe/technical-concepts/health",
             "components/zeebe/technical-concepts/partitions",
             "components/zeebe/technical-concepts/internal-processing",
             "components/zeebe/technical-concepts/process-lifecycles",

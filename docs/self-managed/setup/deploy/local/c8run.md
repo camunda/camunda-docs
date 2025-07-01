@@ -25,7 +25,7 @@ Camunda 8 Run includes the following:
 - Connectors
 - Elasticsearch
 
-Camunda 8 Run also supports document storage and management with [document handling](/self-managed/document-handling/overview.md).
+Camunda 8 Run also supports document storage and management with [document handling](/self-managed/concepts/document-handling/overview.md).
 
 ## Prerequisites
 
@@ -80,6 +80,7 @@ The following command line arguments are available:
 | `--log-level <arg>`        | Set a different log level for the Camunda core.                                                                                                                                                                                               |
 | `--docker`                 | Download and run the Camunda Docker Compose distribution. Any additional options are not supported at this time, and will be ignored. See the [shutdown script](#shut-down-camunda-8-run) for information on stopping the Docker application. |
 | `--disable-elasticsearch`  | Do not start the built-in Elasticsearch. Ensure another Elasticsearch instance is provided via `--config`. See the [external Elasticsearch](#start-external-elasticsearch) options for more information.                                      |
+| `--startup-url`            | The URL to open after startup (e.g. `'http://localhost:8080/operate'`). By default Camunda Operate is opened.                                                                                                                                 |
 
 ## Work with Camunda 8 Run
 
@@ -133,7 +134,7 @@ Once configured correctly, your connectors are available for use in Modeler.
 
 All served Camunda APIs are by default **unprotected** in Camunda 8 Run, and can be accessed without any authentication credentials or token provided.
 
-The available APIs are [Tasklist V1](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md), [Operate V1](/apis-tools/operate-api/overview.md), [Zeebe gRPC](/apis-tools/zeebe-api/grpc.md) and the unified [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md)
+The available APIs are [Tasklist V1](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md), [Operate V1](/apis-tools/operate-api/overview.md), [Zeebe gRPC](/apis-tools/zeebe-api/grpc.md) and the unified [Orchestration cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md)
 
 ### Enable authentication and authorization
 

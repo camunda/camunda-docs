@@ -8,6 +8,56 @@ description: "Let's take a closer look at security notices, reporting vulnerabil
 
 Camunda publishes security notices after fixes are available.
 
+### Notice 21
+
+#### Publication date
+
+June 18th, 2025
+
+#### Product affected
+
+Camunda Web Modeler Self-Managed
+
+#### Impact
+
+The version of `org.postgresql:postgresql` used by Camunda Web Modeler Self-Managed was affected by [CVE-2025-49146](https://nvd.nist.gov/vuln/detail/CVE-2025-49146) potentially allowing a man-in-the-middle attacker to intercept connections when the PostgreSQL JDBC driver was configured with channel binding set to required.
+
+#### How to determine if the installation is affected
+
+You are using Camunda Web Modeler Self-Managed version 8.6.0 - 8.6.12, or 8.7.0 - 8.7.3.
+
+#### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Camunda Web Modeler Self-Managed 8.6.12
+- Camunda Web Modeler Self-Managed 8.7.3
+
+### Notice 20
+
+#### Publication date
+
+June 17th, 2025
+
+#### Product affected
+
+Camunda Optimize
+
+#### Impact
+
+Camunda Optimize was affected by a vulnerability that allowed an attacker to gain improper access to Optimize data by using a modified JWT (JSON Web Token).
+
+#### How to determine if the installation is affected
+
+You are using Camunda Optimize ≤ 8.6.9 or ≤ 8.7.2.
+
+#### Solution
+
+Camunda has provided the following release which contains a fix:
+
+- [Camunda Optimize 8.6.10](https://github.com/camunda/camunda/releases/tag/8.6.10-optimize)
+- [Camunda Optimize 8.7.3](https://github.com/camunda/camunda/releases/tag/8.7.3-optimize)
+
 ### Notice 19
 
 #### Publication date
