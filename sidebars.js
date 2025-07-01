@@ -3,7 +3,6 @@ module.exports = {
     "guides/introduction-to-camunda",
     "guides/getting-started-java-spring",
     "guides/setting-up-development-project",
-    "guides/setup-client-connection-credentials",
     "guides/configuring-out-of-the-box-connectors",
     "guides/use-shared-project-for-organization-wide-collaboration",
     {
@@ -644,6 +643,7 @@ module.exports = {
             "components/console/manage-clusters/create-cluster",
             "components/console/manage-clusters/manage-cluster",
             "components/console/manage-clusters/cluster-connectors",
+            "components/console/manage-clusters/setup-client-connection-credentials",
             "components/console/manage-clusters/manage-api-clients",
             "components/console/manage-clusters/manage-secrets",
             "components/console/manage-clusters/manage-alerts",
