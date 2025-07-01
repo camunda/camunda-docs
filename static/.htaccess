@@ -155,6 +155,9 @@ RewriteRule ^docs/next/guides/automating-a-process-using-bpmn/?$ /docs/next/comp
 RewriteRule ^docs/next/guides/create-decision-tables-using-dmn/?$ /docs/next/components/modeler/dmn/desktop-modeler-dmn/ [R=301,L]
 RewriteRule ^docs/next/guides/utilizing-forms/?$ /docs/next/components/modeler/forms/utilizing-forms/ [R=301,L]
 RewriteRule ^docs/next/guides/create-cluster/?$ /docs/next/components/console/manage-clusters/create-cluster/ [R=301,L]
+RewriteRule ^docs/next/guides/use-connectors-in-hybrid-mode/?$ /docs/next/components/connectors/use-connectors-in-hybrid-mode/ [R=301,L]
+RewriteRule ^docs/next/guides/host-custom-connectors/?$ /docs/next/components/connectors/custom-built-connectors/host-custom-connectors/ [R=301,L]
+RewriteRule ^docs/next/guides/improve-processes-with-optimize/?$ /docs/next/components/optimize/improve-processes-with-optimize/ [R=301,L]
 
 # Remove Amazon Marketplace
 RewriteRule ^docs/next/self-managed/setup/deploy/amazon/aws-marketplace/?$ /docs/next/self-managed/setup/deploy/amazon/amazon-eks/ [R=301,L]
