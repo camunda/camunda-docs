@@ -5,7 +5,7 @@ description: "Learn how to manage users in your Self-Managed Orchestration clust
 ---
 
 :::note
-User management in Identity is only supported by Self-Managed deployments. For SaaS, see how to [connect your identity provider](http://localhost:3000/docs/next/components/console/manage-organization/external-sso/).
+User management in Identity is only supported by Self-Managed deployments. For SaaS, see how to [connect your identity provider](/components/console/manage-organization/external-sso/).
 :::
 
 User management is the process of creating, updating, and deleting users in your Orchestration cluster. Users can be assigned roles and permissions to access applications and perform actions on resources.
