@@ -132,12 +132,11 @@
         {
           "Manage your plan": [
             "components/console/manage-plan/available-plans",
-            "components/console/manage-plan/upgrade-to-starter-plan",
+            "components/console/manage-plan/upgrade-to-enterprise-plan",
             "components/console/manage-plan/update-billing-reservations",
             "components/console/manage-plan/update-creditcard",
             "components/console/manage-plan/retrieve-invoices-or-update-billing-info",
-            "components/console/manage-plan/cancel-starter-subscription",
-            "components/console/manage-plan/migrate-from-prof-to-starter"
+            "components/console/manage-plan/cancel-starter-subscription"
           ]
         },
         {
@@ -145,6 +144,18 @@
             "components/console/console-troubleshooting/common-pitfalls"
           ]
         }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Agentic orchestration",
+      "link": {
+        "type": "doc",
+        "id": "components/agentic-orchestration/agentic-orchestration"
+      },
+      "items": [
+        "components/agentic-orchestration/ao-design",
+        "components/agentic-orchestration/ai-agents"
       ]
     },
     {
@@ -623,6 +634,7 @@
         "components/zeebe/technical-concepts/technical-concepts-overview",
         "components/zeebe/technical-concepts/architecture",
         "components/zeebe/technical-concepts/clustering",
+        "components/zeebe/technical-concepts/health",
         "components/zeebe/technical-concepts/partitions",
         "components/zeebe/technical-concepts/internal-processing",
         "components/zeebe/technical-concepts/process-lifecycles",
@@ -2009,6 +2021,29 @@
     },
     {
       "Concepts": [
+        {
+          "type": "category",
+          "label": "Document handling",
+          "link": {
+            "type": "doc",
+            "id": "self-managed/concepts/document-handling/getting-started"
+          },
+          "items": [
+            {
+              "type": "category",
+              "label": "Configuration",
+              "link": {
+                "type": "doc",
+                "id": "self-managed/concepts/document-handling/configuration/overview"
+              },
+              "items": [
+                "self-managed/concepts/document-handling/configuration/camunda-8-run",
+                "self-managed/concepts/document-handling/configuration/docker",
+                "self-managed/concepts/document-handling/configuration/helm"
+              ]
+            }
+          ]
+        },
         "self-managed/concepts/exporters",
         {
           "Multi-region": ["self-managed/concepts/multi-region/dual-region"]
@@ -2134,6 +2169,7 @@
                 "self-managed/optimize-deployment/configuration/history-cleanup",
                 "self-managed/optimize-deployment/configuration/localization",
                 "self-managed/optimize-deployment/configuration/object-variables",
+                "self-managed/optimize-deployment/configuration/variable-import",
                 "self-managed/optimize-deployment/configuration/multi-tenancy"
               ]
             },
@@ -2249,29 +2285,6 @@
             {
               "Desktop Modeler": [
                 "self-managed/modeler/desktop-modeler/deploy-to-self-managed"
-              ]
-            }
-          ]
-        },
-        {
-          "type": "category",
-          "label": "Document handling",
-          "link": {
-            "type": "doc",
-            "id": "self-managed/document-handling/getting-started"
-          },
-          "items": [
-            {
-              "type": "category",
-              "label": "Configuration",
-              "link": {
-                "type": "doc",
-                "id": "self-managed/document-handling/configuration/overview"
-              },
-              "items": [
-                "self-managed/document-handling/configuration/camunda-8-run",
-                "self-managed/document-handling/configuration/docker",
-                "self-managed/document-handling/configuration/helm"
               ]
             }
           ]

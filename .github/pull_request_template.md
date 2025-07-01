@@ -16,6 +16,8 @@
 
 ## PR Checklist
 
+- [ ] The commit history of this PR is cleaned up, using [`{type}(scope): {description}` commit message(s)](https://github.com/camunda/camunda-docs/blob/main/CONTRIBUTING.MD#commit-message-header-formatting)
+
 <!-- Camunda maintains 18 months of minor versions. Backporting your change to multiple versions is common. -->
 
 - [ ] My changes are for **an upcoming minor release** and are in the `/docs` directory (version 8.8).

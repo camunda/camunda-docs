@@ -142,33 +142,6 @@ is available:
 }
 ```
 
-## Activation
-
-The `Activation` section pertains specifically to [inbound](/components/connectors/connector-types.md) **Connectors**.
-
-### Correlation key (process)
-
-This field is instrumental in specifying which variable within a **Connector** should function as the process
-correlation key.
-Learn more about [message correlation](components/concepts/messages.md#message-correlation-overview).
-
-### Correlation key (payload)
-
-This field guides the **Connector** on how to extract a correlation value from the incoming message payload.
-
-### Message ID expression
-
-This field extracts a unique message identifier from the incoming message payload. Messages sharing the same identifier
-within a defined TTL (Time To Live) will be correlated at most once.
-Leaving this field empty may result in identical messages being submitted and processed multiple times.
-
-### Condition
-
-Utilized for validating conditions against the incoming message payload, this field enables the filtering
-of payloads that can initiate a process. Leaving this field empty results in all incoming messages triggering a new
-process,
-except those failing pre-validation checks, such as HMAC signature verification for specific connectors.
-
 ### Example
 
 Imagine your connector makes an external call to an arbitrary weather service. The weather service returns the following
@@ -217,6 +190,31 @@ In that case, you could declare `Result Expression` as follows:
   berlinWeatherInFahrenheit: response.body.current_weather.temperature * 1.8 + 32
 }
 ```
+
+## Activation
+
+The **Activation** section pertains specifically to [inbound connectors](/components/connectors/connector-types.md).
+
+### Activation condition
+
+The **Activation condition** field evaluates conditions against the incoming message payload. It enables filtering of payloads that can initiate a process. If left empty, all valid incoming messages will trigger a new process—except those that fail pre-validation checks, such as **HMAC signature verification** for specific connectors.
+
+## Correlation
+
+### Correlation key (process)
+
+The **Correlation key (process)** field specifies which variable from the connector output should serve as the process correlation key.  
+Learn more about [message correlation](/components/concepts/messages.md#message-correlation-overview).
+
+### Correlation key (payload)
+
+The **Correlation key (payload)** field tells the connector how to extract the correlation value from the incoming message payload.
+
+### Message ID expression
+
+The **Message ID expression** field defines how to extract a unique identifier from the incoming message payload.  
+Messages that share the same identifier within the defined **time-to-live (TTL)** will be correlated only once.  
+Leaving this field empty may cause identical messages to be submitted and processed multiple times.
 
 ## BPMN errors and failing jobs {#bpmn-errors}
 

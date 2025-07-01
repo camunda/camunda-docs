@@ -7,6 +7,9 @@ const { themes } = require("prism-react-renderer");
 module.exports = {
   // https://docusaurus.io/blog/releases/3.6#adoption-strategy
   future: {
+    v4: {
+      removeLegacyPostBuildHeadAttribute: true,
+    },
     experimental_faster: true,
   },
   title: "Camunda 8 Docs",
@@ -181,7 +184,7 @@ module.exports = {
       },
     ],
     [
-      // Camunda 8 REST API docs generation
+      // Orchestration cluster REST API docs generation
       "docusaurus-plugin-openapi-docs",
       {
         id: "api-camunda-openapi",
@@ -189,7 +192,8 @@ module.exports = {
         config: {
           camunda: {
             specPath: "api/camunda/camunda-openapi.yaml",
-            outputDir: "docs/apis-tools/camunda-api-rest/specifications",
+            outputDir:
+              "docs/apis-tools/orchestration-cluster-api-rest/specifications",
             sidebarOptions: {
               groupPathsBy: "tag",
             },
@@ -275,6 +279,7 @@ module.exports = {
       "data-modal-example-questions": `What's new in Camunda ${currentVersion}?,What's Camunda SaaS vs Self-Managed?`,
       "data-search-mode-enabled": "true",
       "data-button-border": "1px solid #555555",
+      "data-user-analytics-cookie-enabled": "false",
       async: true,
     },
   ],

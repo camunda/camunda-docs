@@ -1,0 +1,303 @@
+---
+id: get-process-instance-call-hierarchy
+title: "Get call hierarchy for process instance"
+description: "Returns the call hierarchy for a given process instance, showing its ancestry up to the root instance."
+sidebar_label: "Get call hierarchy for process instance"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWUtz2zYQ/is7OCVTWpQTp01509hO4jbNeBynPbg6QOBSRAwCDLCUrNHwv3cWpGRZjzR9TC+VZzwSgcU+v29JLZeC5DSI7E5ce6cwBNA2kLQKxTgRrkYvSTt7lYtMTJF6oate5lwa806jl16VC5GIHIPyuuYTIhM3SI23AahEUNIYKFeiUDgPEqZ6hhbqLcMJhNLNtZ2CpgC8EsgvoKmBXNTlnaO19OB3KxJRSy8rJPQcylJYWaHIRP3U25+RfdTsWi2pFInw+KXRHnORkW9w2//bEuEeF+CKaHbbT3anQFJl3H0S20AkIqgSKymypaBFzd4E8tpORduO2XConQ0YeP/FcMgfu8a3kqYDhEaxD0VjzAJ8zC/mbE05S2iJ9ci6NlrFsqWfAytb7jojvZcxG4RV2Fh3k8+o6Elq7vbnsV+8wEJbzcYOLH/gWozjRo2edBfzHpU7mfqL9RiI9oBXf1dzvtayX3cM7ZuUMyAPa4dnBVd6ItV9WIF8j9TVBegCrCOQM6mNnBh8PhBtmwjSZNiDr9Hz0pJfiJb/EnF2CHK1dzOdYw65JMmIY3MzafTXUFZ7NzFYfbeLtqcGRnDdSUKOJLWBDm0gOUwWnGAO2sLdzZtz+PHs1Q/jZyVRHbI0nc/nA1+oE8w1OT9wfpr6QvE/yz0fwG2JHqGSC5ggyDyPKZMGHmEHoUalC602Uhyd4fJ1bWSbBE8x2+3ulrtwvpIkMtF4vVP9EXy6uQKdoyVdLLir7ZiOZwrZGNYhJ66hbGKkvRePlf0zjI0gNFUl/SaENwy0iQgkqdlkuraEU/Sb/mtLL1/sxe+729tr6FSAcjnGBk6lDitDHESlra6aSmRnw2EiKvnQXX0/HLaskyv+DZFYwIfaSBuhtR2OtlA5jz1+YmDr+9W/Uxnn9VRv291hGS9edBGtCHW6n1DcRzEQmEjuyCSQDZVstaMPKI/RCWnCkWRHkh1JdphkL3fx/sb5ic5ztBGea771ty5pjJt/9RHpyKsjr/73vDo7+DT49CdPz6rCNfbIqSOnjpw6yKlX+35hjSxwlj3jEL13HpxSjfeYw7zUZk24le3+ZtZh8ci1I9eOXNvlWpuICql0/YgyTgOpFJlIezadrLwM6XJ37tSmPGY7KTfGmAH9bDVKbLwRmVh2rGqzNF2WLlCbLWvnqU1nXLKZ9JqnMbHCvN2xb4Uq45Q0cXlfdXljczx0LqvG5hJew83lx1t4KwnnctENoJzfUv16+Hq4VyuLHtA4ur6CLsIOmxv9YqWWib9XbSf8LYrjmDOgarymxUc+1qVngtKjHzVcoTVmentRO193QiLpv7xZIemn324jGLQtXDzeg2LXEa4K+tB5Phyc7gLw+irySLmqamxspnYKc00lyI3AlGkCYRzoGq3Qhgj1fr68Envf7cCvnUU4HXBROuSseuhUU9lMBspVqeqOrT8nxk3SSmqb9iZCej765dOHi9HJ+6vzyw8fL09OB8MBPVAMvnaBKmk3/HiLtG/Avv30tp2D5eMt5b+c1fc1J3ygtDZSW0ZhTNayZ+564vzIXJGIbO8Yeou846Qn4J1YLicy4Cdv2paXvzToFyK7Gz/yNRI814G/5yIrpAnbLwE2c/Tspp+JP4d/9mpgbwZWg3m7iB3FNHwlEnHPA+x98/J23CaiRJmjj4F0giOlsKYNFTuvA5iY64b59pIZ9QfCMQpN
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get call hierarchy for process instance"}
+></Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/process-instances/{processInstanceKey}/call-hierarchy"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Returns the call hierarchy for a given process instance, showing its ancestry up to the root instance.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "processInstanceKey",
+      in: "path",
+      required: true,
+      description:
+        "The key of the process instance to fetch the hierarchy for.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The call hierarchy is successfully returned.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "array",
+            items: {
+              type: "object",
+              required: [
+                "processInstanceKey",
+                "processDefinitionKey",
+                "processDefinitionName",
+              ],
+              properties: {
+                processInstanceKey: {
+                  type: "string",
+                  description: "The key of the process instance.",
+                },
+                processDefinitionKey: {
+                  type: "string",
+                  description: "The key of the process definition.",
+                },
+                processDefinitionName: {
+                  type: "string",
+                  description:
+                    "The name of the process definition (fall backs to the process definition ID if not available).",
+                },
+              },
+              title: "ProcessInstanceCallHierarchyEntry",
+            },
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The process instance is not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

@@ -11,7 +11,7 @@ import TabItem from "@theme/TabItem";
 The **vector database connector** allows embedding, storing, and retrieving Large Language Model (LLM) embeddings. This enables building AI-based solutions for your organizations, such as context document search, long-term LLM memory, and agentic AI interaction.
 
 :::note
-The **vector database connector** uses the [LangChain4J](https://docs.langchain4j.dev/) library. Data models and possible implementations are limited
+The **vector database connector** uses the [LangChain4j](https://docs.langchain4j.dev/) library. Data models and possible implementations are limited
 to the latest stable released LangChain4j library.
 :::
 
@@ -123,7 +123,8 @@ The **vector database connector** uses [LangChain4j implementation](https://docs
 <Tabs groupId="vector" defaultValue="elasticsearch" queryString values={
 [
 {label: 'Elasticsearch', value: 'elasticsearch' },
-{label: 'Amazon OpenSearch', value: 'amazon' },
+{label: 'OpenSearch', value: 'opensearch' },
+{label: 'Amazon OpenSearch', value: 'amazon-opensearch' },
 ]}>
 
 <TabItem value='elasticsearch'>
@@ -141,7 +142,22 @@ Enter the following parameters:
 
 </TabItem>
 
-<TabItem value='amazon'>
+<TabItem value='opensearch'>
+
+The **vector database connector** can use OpenSearch as a vector store.
+
+Enter the following parameters:
+
+- **Base URL**: The OpenSearch base URL, including protocol, for example `https://host:port`.
+- **Username**: For the OpenSearch user that has read/write access.
+- **Password**: For the OpenSearch user that has read/write access.
+- **Index name**: Name of the index where you wish to store embeddings.
+- - When embedding: If index is not present, the connector will create a new one.
+- - When retrieving: If the index is absent, the connector will raise an error.
+
+</TabItem>
+
+<TabItem value='amazon-opensearch'>
 
 - **Access key** and **Secret key**: Enter AWS IAM credentials for the user that has read/write access.
 - **Server URL**: An Amazon OpenSearch URL _without_ protocol, for example `my-opensearch.aws.com:port`.
