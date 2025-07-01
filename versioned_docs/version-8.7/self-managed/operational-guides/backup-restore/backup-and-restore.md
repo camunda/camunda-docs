@@ -19,7 +19,7 @@ If the Camunda application(s) cannot access Elasticsearch with cluster-level pri
 
 ## About this guide
 
-This guide covers how to perform a backup and restore, and the steps and choices taken during the process.
+This guide covers how to perform a Camunda 8 backup and restore, and the steps and choices involved.
 
 - **Backup**: Use the Camunda 8 Self-Managed backup feature to regularly back up the state of your Zeebe, Operate, Tasklist, and Optimize components, without any downtime. For Web Modeler, see [backup and restore Web Modeler data](./modeler-backup-and-restore.md).
 
