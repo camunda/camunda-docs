@@ -226,12 +226,34 @@ Specify the tool resolution for an accompanying ad-hoc sub-process.
 
 ### Memory
 
-Configure the Agent's short-term/conversational memory.
+Configure the Agent's short-term/conversational memory. Depending on your use case, you can choose to store the
+conversation memory in different storage backends.
 
-| Field            | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| :--------------- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Agent context    | Yes      | <p>Specify an agent context variable to store all relevant data for the agent to support a feedback loop between user requests, tool calls, and LLM responses. Make sure this variable points to the `context` variable that is returned from the agent response.</p><p>This is an important variable required to make a feedback loop work correctly. This variable must be aligned with the Output mapping **Result variable** and **Result expression** for this connector.</p><p>Example: `=agent.context`</p> |
-| Maximum messages | No       | <p>Specify the maximum number of messages to keep in context and pass to the LLM on every call.</p><p><ul><li><p>Configuring this is a trade-off between cost/tokens and the context window supported by the used model.</p></li><li><p>When the conversation exceeds the maximum number of messages, oldest messages from past feedback loops will be removed first. The system prompt is always kept in the context.</p></li></ul></p>                                                                           |
+| Field               | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| :------------------ | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Agent context       | Yes      | <p>Specify an agent context variable to store all relevant data for the agent to support a feedback loop between user requests, tool calls, and LLM responses. Make sure this variable points to the `context` variable that is returned from the agent response.</p><p>This is an important variable required to make a feedback loop work correctly. This variable must be aligned with the Output mapping **Result variable** and **Result expression** for this connector.</p><p>Example: `=agent.context`</p> |
+| Memory storage type | Yes      | <p>Specify how the conversation memory should be stored.</p><ul><li>In Process (part of agent context): conversation messages will be stored as process variable and be subject to [variable size limitations](../../concepts/variables.md). This is the default value.</li><li>Camunda Document Storage: messages will be stored as a JSON document in [document storage](../../document-handling/getting-started.md).</li></ul>                                                                                  |
+| Context window size | No       | <p>Specify the maximum number of messages to pass to the LLM on every call.</p><p><ul><li><p>Configuring this is a trade-off between cost/tokens and the context window supported by the used model.</p></li><li><p>When the conversation exceeds the configured context window size, oldest messages from past feedback loops will be omitted from the model API call first. The system prompt is always kept in the context.</p></li></ul></p>                                                                   |
+
+#### In-Process Storage
+
+With this storage type, the messages passed between the AI agent and the model are stored within the agent context
+variable and directly visible in Operate. This works great for many use cases, but you must be aware of the
+[variable size limitations](../../concepts/variables.md) limiting the amount of data which can be stored in the process
+variable.
+
+#### Camunda Document Storage
+
+With this storage type, the messages passed between the AI agent and the model are not directly available as process
+variable but reference a JSON document stored in [document storage](../../document-handling/getting-started.md).
+
+As documents are subject to expiration, you need to be able to predict the expected lifetime of your process to
+configure the document time-to-live (TTL) correctly to avoid losing the conversation history.
+
+| Field                      | Required | Description                                                                                                                                                                                                                                                      |
+| :------------------------- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Document TTL               | No       | <p>Time-to-live (TTL) for documents containing the conversation history. Use this field to set a custom TTL matching your expected process lifetime.</p><p>Will use the [default cluster TTL](../../document-handling/getting-started.md) if not configured.</p> |
+| Custom document properties | No       | <p>Optional map of properties to store with the document.</p><p>Use this option to reference custom metadata you might want to use when further processing conversation documents.</p>                                                                           |
 
 ### Limits
 
