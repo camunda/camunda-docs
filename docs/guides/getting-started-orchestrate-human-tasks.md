@@ -342,7 +342,7 @@ Don't want to build the process yourself? Click this button to create it from a 
 
 - Watch the [video-based Human Task Orchestration Course](https://bit.ly/3PJJocB).
 - Learn how to use [BPMN user tasks](/components/modeler/bpmn/user-tasks/user-tasks.md) to route tasks to the right users.
-- Learn how to [build more complex forms](./utilizing-forms.md) using the form editor.
+- Learn how to [build more complex forms](/components/modeler/forms/utilizing-forms.md) using the form editor.
 - Learn how to write powerful [expressions](/components/concepts/expressions.md) and utilize [variables](/components/concepts/variables.md) to route complex process flows.
 - Get an [introduction to Operate](/components/operate/operate-introduction.md).
 - Learn how to [set up Tasklist](/components/tasklist/introduction-to-tasklist.md) for efficient task management.

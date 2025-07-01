@@ -26,8 +26,8 @@ In this guide, we'll demonstrate modeling BPMN diagrams using both Web Modeler a
 
 ## Next steps
 
-- [Modeling BPMN](/guides/automating-a-process-using-bpmn.md) - Learn how to model an automated process in this tutorial using Web Modeler with Camunda 8 SaaS.
-- [Camunda Forms](/guides/utilizing-forms.md) - Design and configure forms, and connect them to a user task or start event to implement a task form in your application.
+- [Modeling BPMN](/components/modeler/bpmn/automating-a-process-using-bpmn.md) - Learn how to model an automated process in this tutorial using Web Modeler with Camunda 8 SaaS.
+- [Camunda Forms](/components/modeler/forms/utilizing-forms.md) - Design and configure forms, and connect them to a user task or start event to implement a task form in your application.
 - [DMN](./dmn/dmn.md) - In DMN, model and execute decisions using the same language. As a business analyst, model the rules that lead to a decision in comprehensive tables, and execute these tables directly by a decision engine like Camunda.
 - [Out-of-the-box connectors](/guides/configuring-out-of-the-box-connector.md) - Utilize pre-built connectivity with a number of outside systems via our [Camunda Marketplace](./web-modeler/camunda-marketplace.md). connectors are modular by nature, reusable, and accelerate automation across those systems.
 - [Custom connectors](/components/connectors/manage-connector-templates.md) - Learn how to build custom connectors alongside external systems based on our out-of-the-box connectors.

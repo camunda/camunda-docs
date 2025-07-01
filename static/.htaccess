@@ -149,6 +149,13 @@ RewriteRule ^optimize/3.11.0/self-managed/(.*)$ /docs/8.3/self-managed/$1 [R=301
 #   8.8: content moves introduced prior to the release of version 8.8.
 #---------------------------------------------------------------------------------
 
+# Restructure Guides
+RewriteRule ^docs/next/guides/model-your-first-process/?$ /docs/next/components/modeler/web-modeler/model-your-first-diagram/ [R=301,L]
+RewriteRule ^docs/next/guides/automating-a-process-using-bpmn/?$ /docs/next/components/modeler/bpmn/automating-a-process-using-bpmn/ [R=301,L]
+RewriteRule ^docs/next/guides/create-decision-tables-using-dmn/?$ /docs/next/components/modeler/dmn/desktop-modeler-dmn/ [R=301,L]
+RewriteRule ^docs/next/guides/utilizing-forms/?$ /docs/next/components/modeler/forms/utilizing-forms/ [R=301,L]
+RewriteRule ^docs/next/guides/create-cluster/?$ /docs/next/components/console/manage-clusters/create-cluster/ [R=301,L]
+
 # Remove Amazon Marketplace
 RewriteRule ^docs/next/self-managed/setup/deploy/amazon/aws-marketplace/?$ /docs/next/self-managed/setup/deploy/amazon/amazon-eks/ [R=301,L]
 

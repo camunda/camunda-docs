@@ -1,6 +1,6 @@
 ---
 id: getting-started-java-spring
-title: Get started as a Java developer using Spring
+title: Use Camunda as a Java developer using Spring
 sidebar_label: Get started with Spring
 description: "Use Spring Boot and the Camunda Spring Boot SDK to interact with your local Self-Managed Camunda 8 installation."
 keywords: [java, spring, spring camunda, getting started, user guide, tutorial]

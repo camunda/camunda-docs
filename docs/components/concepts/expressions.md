@@ -6,7 +6,7 @@ description: "Expressions can be used to access variables and calculate values d
 
 Expressions can be used to access variables and calculate values dynamically.
 
-This is particularly useful when [automating a process using BPMN](../../guides/automating-a-process-using-bpmn.md) and [orchestrating human tasks](../../guides/getting-started-orchestrate-human-tasks.md).
+This is particularly useful when [automating a process using BPMN](/components/modeler/bpmn/automating-a-process-using-bpmn.md) and [orchestrating human tasks](../../guides/getting-started-orchestrate-human-tasks.md).
 
 Some attributes of BPMN elements _require_ an expression, for example, a [sequence flow condition](/components/modeler/bpmn/exclusive-gateways/exclusive-gateways.md#conditions) on an exclusive
 gateway. Other attributes can define an expression _optionally_ as an alternative to a static value, for example, a

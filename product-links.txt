@@ -6,7 +6,7 @@
 https://docs.camunda.io/docs/components/modeler/bpmn/user-tasks/#assignments
 https://docs.camunda.io/docs/components/modeler/bpmn/exclusive-gateways/#conditions
 https://docs.camunda.io/docs/components/modeler/bpmn/business-rule-tasks/#defining-a-task
-https://docs.camunda.io/docs/guides/utilizing-forms/#connect-your-form-to-a-bpmn-diagram
+https://docs.camunda.io/docs/components/modeler/forms/utilizing-forms/#connect-your-form-to-a-bpmn-diagram
 https://docs.camunda.io/docs/components/modeler/bpmn/receive-tasks/#messages
 https://docs.camunda.io/docs/components/modeler/bpmn/message-events/#messages
 https://docs.camunda.io/docs/components/modeler/bpmn/call-activities/
