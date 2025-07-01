@@ -1,8 +1,8 @@
 // this makes use of the Zeebe react grid component
 
-import IconGear from "../assets/gear.png";
-import IconCloud from "../assets/cloud.png";
-import IconRepeat from "../assets/repeat.png";
+import IconGear from "../assets/icon-prereqs.png";
+import IconCloud from "../assets/icon-backup.png";
+import IconRepeat from "../assets/icon-restore.png";
 
 // Backup and Restore overview cards data
 export const overviewCards = [

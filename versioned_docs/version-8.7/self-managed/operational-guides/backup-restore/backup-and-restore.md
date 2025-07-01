@@ -17,17 +17,16 @@ Use the backup feature to back up and restore your Camunda 8 Self-Managed compon
 
 This guide covers how to back up and restore your Camunda 8 Self-Managed components and cluster. You should automate the procedures in this guide, choosing tools that fulfil the requirements of your organization.
 
-- Regularly back up the state of your Zeebe, Operate, Tasklist, and Optimize components, without any downtime. You can also back up and restore Web Modeler data.
+- Regularly [back up](backup.md) the state of your Zeebe, Operate, Tasklist, and Optimize components without any downtime. You can also back up and restore Web Modeler data.
 
-- Restore a cluster from a backup if any failures occur that cause data loss.
+- [Restore](restore.md) a cluster from a backup if any failures occur that cause data loss.
 
 <ZeebeGrid zeebe={overviewCards} />
 
 :::note
 
 - If the Camunda application(s) cannot access Elasticsearch with cluster-level privileges, you can run the backup of Operate and Tasklist indices as a standalone application separate from the main application (see [standalone backup application](/self-managed/concepts/elasticsearch-without-cluster-privileges.md#standalone-backup-application)).
-
-- The examples covered in this guide are based on using the following tools: [curl](https://curl.se/), [jq](https://jqlang.org/), and [kubectl](https://kubernetes.io/de/docs/reference/kubectl/).
+- The examples in this guide are based on using the following tools: [curl](https://curl.se/), [jq](https://jqlang.org/), and [kubectl](https://kubernetes.io/de/docs/reference/kubectl/).
 
 :::
 
