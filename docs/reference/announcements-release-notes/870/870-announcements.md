@@ -93,6 +93,10 @@ The Zeebe Java client will not be developed further and will only receive bug fi
 
 ### Camunda 8 Self-Managed
 
+#### Helm chart - Separated Ingress deprecation
+
+The separated Ingress Helm configuration for Camunda 8 Self-Managed has been deprecated in 8.6, and will be removed from the Helm chart in 8.8. Only the combined Ingress configuration is officially supported. See the [Ingress guide](/self-managed/setup/guides/ingress-setup.md) for more information on configuring a combined Ingress setup.
+
 #### Helm chart - extraVolumeClaimTemplates
 
 You can now add custom `extraVolumeClaimTemplates` to the Zeebe/Core StatefulSet by supplying an array of templates in your Helm values file. This allows you to attach additional persistent volumes to each Zeebe/Core pod for use cases such as custom storage or log directories.
