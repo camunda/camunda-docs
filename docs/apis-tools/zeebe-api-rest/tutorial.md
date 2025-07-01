@@ -8,7 +8,7 @@ In this tutorial, we'll step through examples to highlight the capabilities of t
 
 ## Prerequisites
 
-- If you haven't done so already, [create a cluster](/guides/create-cluster.md).
+- If you haven't done so already, [create a cluster](/components/console/manage-clusters/create-cluster.md).
 - Upon cluster creation, [create your first client](/guides/setup-client-connection-credentials.md). Ensure you check the `Zeebe` client scope box.
 
 :::note

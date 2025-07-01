@@ -14,7 +14,7 @@ The launch of [Camunda 8](/components/components-overview.md) also introduced an
 New to connectors? Review our [introduction to connectors](/components/connectors/introduction.md) to get familiar with their capabilities.
 :::
 
-[Connectors](../components/connectors/introduction.md) achieve this goal. Ready to use out of the box, connectors help automate complex [business processes](../components/concepts/processes.md) by inserting them into [BPMN diagrams](./automating-a-process-using-bpmn.md) within [Web Modeler](../components/modeler/about-modeler.md), and configuring them via the properties panel on the right side of the screen.
+[Connectors](../components/connectors/introduction.md) achieve this goal. Ready to use out of the box, connectors help automate complex [business processes](../components/concepts/processes.md) by inserting them into [BPMN diagrams](/components/modeler/bpmn/automating-a-process-using-bpmn.md) within [Web Modeler](../components/modeler/about-modeler.md), and configuring them via the properties panel on the right side of the screen.
 
 You can also orchestrate APIs, for example by working with a [REST connector](/guides/getting-started-orchestrate-apis.md). Learn more about [types of connectors](/components/connectors/connector-types.md).
 
@@ -50,7 +50,7 @@ In this example, we've designed the following BPMN diagram:
 ![bpmn example diagram](./img/bpmn-expense-sample.png)
 
 :::note
-To learn more about building your own BPMN diagram from scratch, visit our guide on [automating a process using BPMN](./automating-a-process-using-bpmn.md).
+To learn more about building your own BPMN diagram from scratch, visit our guide on [automating a process using BPMN](/components/modeler/bpmn/automating-a-process-using-bpmn.md).
 :::
 
 ## Add a connector
@@ -109,5 +109,4 @@ In [Operate](../components/operate/operate-introduction.md), you will now see th
 - [Available connectors](../components/connectors/out-of-the-box-connectors/available-connectors-overview.md)
 - [Connectors & Integration Framework](https://camunda.com/platform/modeler/connectors/)
 - [Camunda BPMN Tutorial](https://camunda.com/bpmn/)
-- [Automate processes using BPMN](./automating-a-process-using-bpmn.md)
 - [Camunda Academy: How To Configure the SendGrid Connector](https://academy.camunda.com/c8-h2-sendgrid-connector/)

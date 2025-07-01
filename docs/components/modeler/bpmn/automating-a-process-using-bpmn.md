@@ -20,7 +20,7 @@ BPMN offers control and visibility over your critical business processes in a wa
 
 ## Set up
 
-Begin by building your BPMN diagrams with [Modeler](../components/modeler/about-modeler.md).
+Begin by building your BPMN diagrams with [Modeler](/components/modeler/about-modeler.md).
 To get started, ensure you’ve [created a Camunda 8 account](/guides/create-account.md).
 
 ## Getting started with BPMN
@@ -39,11 +39,11 @@ You can build out a BPMN diagram for a process using several elements, including
 - Events: The things that happen. For example, start and end events which begin and terminate the process.
 - Tasks: For example, user tasks for a particular user to complete, or service tasks to invoke various web services.
 - Gateways: For example, parallel gateways that move the process along between two tasks at the same time.
-  - Utilize [variables](../components/concepts/variables.md) to reflect the data of process instances.
-  - Leverage [expressions](../components/concepts/expressions.md) to access variables and calculate their value(s).
+  - Utilize [variables](/components/concepts/variables.md) to reflect the data of process instances.
+  - Leverage [expressions](/components/concepts/expressions.md) to access variables and calculate their value(s).
 - Subprocesses: For example, a transaction subprocess which can be used to group multiple activities to a transaction.
 
-For a complete list of BPMN elements and their capabilities, visit the [BPMN reference material](../components/modeler/bpmn/bpmn.md).
+For a complete list of BPMN elements and their capabilities, visit the [BPMN reference material](/components/modeler/bpmn/bpmn.md).
 
 ### BPMN in action
 
@@ -64,7 +64,7 @@ Take the following steps:
 ![completed bpmn diagram](./img/complete-baking-cake-bpmn.png)
 
 :::note
-You can also import a BPMN diagram with Web Modeler. See how to do that [here](../components/modeler/web-modeler/import-diagram.md).
+You can also import a BPMN diagram with Web Modeler. See how to do that [here](/components/modeler/web-modeler/import-diagram.md).
 :::
 
 ## Execute your process diagram
@@ -84,15 +84,15 @@ You can now monitor your instances in [Operate](/components/operate/operate-intr
 You can also visit an ongoing list of user tasks required in your BPMN diagram. Navigate to [Tasklist](/components/tasklist/introduction-to-tasklist.md) for a closer look.
 
 :::note
-Variables are part of a process instance and represent the data of the instance. To learn more about these values, variable scope, and input/output mappings, visit our documentation on [variables](../components/concepts/variables.md).
+Variables are part of a process instance and represent the data of the instance. To learn more about these values, variable scope, and input/output mappings, visit our documentation on [variables](/components/concepts/variables.md).
 :::
 
 ## Additional resources and next steps
 
 - [Camunda BPMN tutorial](https://camunda.com/bpmn/)
 - [BPMN implementation reference](https://docs.camunda.org/manual/latest/reference/bpmn20/)
-- [Zeebe engine](../components/zeebe/zeebe-overview.md)
-- [BPMN reference](../components/modeler/bpmn/bpmn.md)
+- [Zeebe engine](/components/zeebe/zeebe-overview.md)
+- [BPMN reference](/components/modeler/bpmn/bpmn.md)
 - [Camunda Academy: BPMN - Creating Readable Process Models](https://academy.camunda.com/bpmn-readable-process-models/)
 - [Operate](/components/operate/operate-introduction.md)
 - [Tasklist](/components/tasklist/introduction-to-tasklist.md)

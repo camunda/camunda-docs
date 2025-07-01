@@ -1,29 +1,16 @@
 module.exports = {
   Guides: [
     "guides/introduction-to-camunda",
+    "guides/getting-started-java-spring",
     {
-      "Get started": [
-        "guides/getting-started-example",
-        "guides/getting-started-java-spring",
-        "guides/model-your-first-process",
-        {
-          "Orchestration use cases": [
-            "guides/orchestrate-human-tasks",
-            "guides/orchestrate-apis",
-            "guides/orchestrate-microservices",
-            "guides/listen-to-user-tasks",
-          ],
-        },
+      "Orchestration use cases": [
+        "guides/orchestrate-human-tasks",
+        "guides/orchestrate-apis",
+        "guides/orchestrate-microservices",
       ],
     },
     {
-      Design: [
-        "guides/automating-a-process-using-bpmn",
-        "guides/create-decision-tables-using-dmn",
-        "guides/utilizing-forms",
-      ],
       Automate: [
-        "guides/create-cluster",
         "guides/setting-up-development-project",
         "guides/setup-client-connection-credentials",
         "guides/configuring-out-of-the-box-connectors",
@@ -283,6 +270,7 @@ module.exports = {
         {
           BPMN: [
             "components/modeler/bpmn/modeler-bpmn",
+            "components/modeler/bpmn/automating-a-process-using-bpmn",
             "components/modeler/bpmn/bpmn-primer",
             "components/modeler/bpmn/bpmn-coverage",
             "components/modeler/bpmn/data-flow",

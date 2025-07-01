@@ -46,14 +46,4 @@ As you're getting started with Camunda, you can also learn more about some of ou
 - [**Get started with API orchestration**](/guides/getting-started-orchestrate-apis.md): Step through making a request to a REST API and using the response in the next steps of your process.
 - [**Get started with microservice orchestration**](/guides/getting-started-orchestrate-microservices.md): Orchestrate the microservices necessary to achieve your end-to-end automated business process.
 
-## Design, automate, and improve
-
-After getting started with Camunda, get to know the platform through the following sections:
-
-- **Design**: Have a closer look at [designing with BPMN](/guides/automating-a-process-using-bpmn.md), or [creating decision tables using DMN](/guides/create-decision-tables-using-dmn.md).
-- **Automate**: [Get to know connectors](/guides/configuring-out-of-the-box-connector.md), reusable building blocks that integrate with external systems. Or, [set up client connection credentials](/guides/setup-client-connection-credentials.md) to create, name, and connect your client.
-- **Improve**: [Get Optimize involved in your processes](/guides/improve-processes-with-optimize.md). By leveraging data collected during process execution, you can access reports, share process intelligence, analyze bottlenecks, and examine areas in business processes for improvement. Alternatively, [apply continuous integration and continuous deployment (CI/CD) pipelines](/guides/devops-lifecycle/integrate-web-modeler-in-ci-cd.md) for automated production deployments.
-
-Additionally, Camunda hosts a section of [Best Practices](/components/best-practices/best-practices-overview.md). A mix of conceptual and practical implementation information, this section hosts our condensed experience using BPMN and DMN on the Camunda tool stack collected by consulting engagement with our customers and feedback from the community.
-
 You can also learn more about Camunda 8 by reviewing the Camunda Academy courses [introducing Camunda 8](https://academy.camunda.com/camunda-intro/) and [providing an overview of Camunda 8](https://academy.camunda.com/c8-overview/).

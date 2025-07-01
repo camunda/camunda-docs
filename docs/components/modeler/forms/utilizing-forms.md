@@ -41,7 +41,7 @@ In the properties panel on the right side of the page, view and edit attributes 
 
 ![email properties](./img/form-properties-email.png)
 
-Refer to the [camunda forms reference](../components/modeler/forms/camunda-forms-reference.md) to explore all form elements and configuration options in detail.
+Refer to the [camunda forms reference](/components/modeler/forms/camunda-forms-reference.md) to explore all form elements and configuration options in detail.
 
 ### Save your form
 
@@ -81,7 +81,7 @@ To execute your completed process diagram, click the blue **Deploy** button.
 Linked forms will automatically be deployed along with the diagram.
 You can now start a new process instance to initiate your process diagram.
 Click the blue **Run** button.
-You can now monitor your instances in [Operate](../components/operate/operate-introduction.md).
+You can now monitor your instances in [Operate](/components/operate/operate-introduction.md).
 
 :::info
 Linked Camunda Forms will automatically be deployed along with the diagram.
@@ -91,7 +91,7 @@ When deploying to a Camunda 8 cluster with a version lower than 8.4, forms linke
 Read more about the different ways to reference Camunda Forms in the [user task forms reference](/components/modeler/bpmn/user-tasks/user-tasks.md#user-task-forms).
 :::
 
-To [complete a user task](./getting-started-orchestrate-human-tasks.md), navigate to [Tasklist](../components/tasklist/introduction-to-tasklist.md).
+To [complete a user task](/guides/getting-started-orchestrate-human-tasks.md), navigate to [Tasklist](/components/tasklist/introduction-to-tasklist.md).
 
 ## Additional resources
 

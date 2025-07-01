@@ -25,7 +25,7 @@ New to connectors? Review our [introduction to connectors](/components/connector
    <SaasPrereqs/>
 </details>
 
-The concept of a connector consists of two parts: the business logic is implemented as a job worker, and the user interface during modeling is provided using an element template. In this guide, you will create a REST connector task in your process, handle the HTTP response, and deploy your process. New to creating a process? Get started by [modeling your first diagram](/guides/model-your-first-process.md).
+The concept of a connector consists of two parts: the business logic is implemented as a job worker, and the user interface during modeling is provided using an element template. In this guide, you will create a REST connector task in your process, handle the HTTP response, and deploy your process. New to creating a process? Get started by [modeling your first diagram](/components/modeler/web-modeler/design-your-process.md).
 
 ## Step 1: Create a REST connector task
 
