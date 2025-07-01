@@ -9,25 +9,31 @@ description: "Learn how to restore a Camunda 8 Self-Managed backup."
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
+Restore a previous backup of your Camunda 8 Self-Managed components and cluster.
+
 ## About restoring a backup
 
-## Restore process
+To restore a backup you must complete the following main steps:
 
-The restore process is divided in two parts:
+1. [Restore of Elasticsearch/OpenSearch](#restore-elasticsearch-opensearchh)
+2. [Restore Zeebe Cluster](#restore-zeebe-cluster)
+3. [Start all Camunda 8 components](#start-all-camunda-8-components)
 
-1. [Restore of Elasticsearch / OpenSearch](#restore-of-elasticsearch--opensearch)
-2. [Restore of the Zeebe Cluster](#restore-the-zeebe-cluster)
+:::note
+When restoring Camunda 8 from a backup, all components must be restored from their backup that corresponds to the same backup ID.
+:::
 
-To restore Camunda 8 from a backup, all components must be restored from their backup corresponding to the same backup ID.
+## Prerequisites
 
-The restore process assumes a **clean state** for all components, including Elasticsearch / OpenSearch. This means **no prior persistent volumes** or **component state** should exist - all data is restored from scratch.
+The following general prerequisites are required before you can restore a backup:
 
-**Backups must be restored** using the **exact Camunda version** they were created with. As noted during the backup process, the version is embedded in the backup name. This is essential because starting a component with a mismatched version may result in startup failures due to schema incompatibilities with Elasticsearch / OpenSearch and the component itself. Although schema changes are generally avoided in patch releases, they can still occur.
-
-When using the Camunda Helm chart, this means figuring out the corresponding version. For this the [Camunda Helm chart Version Matrix](https://helm.camunda.io/camunda-platform/version-matrix/) can help. Click on the `major.minor` release and then search for the backed up patch release of your component. The other components would typically fit in there as well.
+| Prerequisite          | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| :-------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Component clean state | The restore process assumes a **clean state** for all components, including Elasticsearch/OpenSearch. This means **no prior persistent volumes** or **component state** should exist - all data is restored from scratch.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| Camunda version       | <p>**Backups must be restored** using the **exact Camunda version** they were created with. As noted during the backup process, the version is embedded in the backup name.</p><p>This is essential because starting a component with a mismatched version may result in startup failures due to schema incompatibilities with Elasticsearch/OpenSearch and the component itself. Although schema changes are generally avoided in patch releases, they can still occur.</p><p>When using the Camunda Helm chart, this means figuring out the corresponding version. For this the [Camunda Helm chart Version Matrix](https://helm.camunda.io/camunda-platform/version-matrix/) can help. Click on the `major.minor` release and then search for the backed up patch release of your component. The other components would typically fit in there as well.</p> |
 
 <details>
-   <summary>Example</summary>
+   <summary>Example: Work out your correct Camunda version</summary>
    <summary>
 
 Our Backups look as follows:
@@ -50,42 +56,47 @@ camunda_tasklist_1748937221_8.7.2_part_6_of_6
 camunda_zeebe_records_backup_1748937221
 ```
 
-This means, we know:
+From this, we know:
 
 - Optimize: 8.7.1
 - Operate / Tasklist: 8.7.2
 
-Based on that we can look in the [matrix versioning of 8.7](https://helm.camunda.io/camunda-platform/version-matrix/camunda-8.7) and quickly see that the corresponding Camunda Helm chart version is `12.0.2`.
+Based on this, we can look in the [matrix versioning of 8.7](https://helm.camunda.io/camunda-platform/version-matrix/camunda-8.7) and see the corresponding Camunda Helm chart version is `12.0.2`.
 
    </summary>
 </details>
 
-### Restore of Elasticsearch / OpenSearch
+## Step 1: Restore of Elasticsearch/OpenSearch {#restore-elasticsearch-opensearch}
 
-Prerequisite:
+### Prerequisites
 
-- Elasticsearch / OpenSearch is set up and running with a clean state and no data on it.
-- Elasticsearch / OpenSearch are configured with the same snapshot repository as used for backup, using the outlined documentation in [prerequisites](#prerequisites).
+The following specific prerequisites are required when restoring Elasticsearch/OpenSearch:
 
-#### 1. Restore of [Templates](https://www.elastic.co/docs/manage-data/data-store/templates)
+| Prerequisite        | Description                                                                                                                                                                           |
+| :------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Clean state/data    | Elasticsearch/OpenSearch is set up and running with a clean state and no data on it.                                                                                                  |
+| Snapshot repository | Elasticsearch/OpenSearch are configured with the same snapshot repository as used for backup, using the documentation linked in [prerequisites](backup-and-restore.md#prerequisites). |
 
-This includes the restoration of index templates and component templates, which are crucial for Camunda 8 to function properly on continuous use.
+### 1. Restore [Templates](https://www.elastic.co/docs/manage-data/data-store/templates)
 
-Those templates will automatically be applied on newly created indices. These templates are only created on the initial start of the components and the first seeding of the secondary datastore, due to which we have to temporarily restore them before we can restore all Elasticsearch / OpenSearch snapshots.
+This step includes restoring index and component templates crucial for Camunda 8 to function properly on continuous use.
 
-- **Start Camunda 8 configured with your secondary datastore endpoint**
-  - for example deploy the Camunda Helm chart
-  - in case of manual context, start Camunda 8 components manually
-  - depending on your setup this may mean Operate, Optimize, Tasklist, Zeebe, and the required secondary datastore
+These templates are automatically applied on newly created indices. These templates are only created on the initial start of the components and the first seeding of the secondary datastore, due to which you have to temporarily restore them before you can restore all Elasticsearch/OpenSearch snapshots.
 
-The templates are created by Operate, Optimize, and Tasklist on startup on the first seeding of the datastore. While Zeebe creates it whenever required, and isn't limited to the initial start. We recommend starting your full required Camunda 8 stack, so the applications show up healthy.
+**Start Camunda 8 configured with your secondary datastore endpoint**
 
-You can confirm the successful creation of the index templates by using the Elasticsearch / OpenSearch API. The index templates rely on the component templates, so it also confirms that those were successfully re-created.
+- For example, deploy the Camunda Helm chart.
+- For manual context, start Camunda 8 components manually.
+- Depending on your setup this can mean Operate, Optimize, Tasklist, Zeebe, and the required secondary datastore.
+
+The templates are created by Operate, Optimize, and Tasklist on startup on the first seeding of the datastore. Zeebe creates this whenever it is required, and isn't limited to the initial start. We recommend starting your full required Camunda 8 stack for the applications to show up as healthy.
+
+You can confirm the successful creation of the index templates by using the Elasticsearch/OpenSearch API. The index templates rely on the component templates, so it also confirms these were successfully recreated.
 
 <Tabs groupId="search-engine">
    <TabItem value="elasticsearch" label="Elasticsearch" default>
 
-The following is using the [Elasticsearch Index API](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-get-index-template) to list all index templates.
+The following uses the [Elasticsearch Index API](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-get-index-template) to list all index templates.
 
 ```bash
 curl -s "$ELASTIC_ENDPOINT/_index_template" \
@@ -125,7 +136,7 @@ curl -s "$ELASTIC_ENDPOINT/_index_template" \
    </TabItem>
    <TabItem value="opensearch" label="OpenSearch">
 
-The following is using the [OpenSearch Index API](https://docs.opensearch.org/docs/latest/api-reference/index-apis/get-index-template/) to list all index templates.
+The following uses the [OpenSearch Index API](https://docs.opensearch.org/docs/latest/api-reference/index-apis/get-index-template/) to list all index templates.
 
 ```bash
 curl -s "$OPENSEARCH_ENDPOINT/_index_template" \
@@ -165,11 +176,13 @@ curl -s "$OPENSEARCH_ENDPOINT/_index_template" \
    </TabItem>
 </Tabs>
 
-#### 2. Find available backup IDs
+### 2. Find available backup IDs
 
-With an active environment that was required to restore the datastore templates you can quickly figure out available backups utilizing the backups APIs for each component to list available backups.
+With the active environment that was required to restore the datastore templates you can quickly work out available backups, using the backup APIs for each component to list available backups.
 
-You will need the output for your chosen backup ID in subsequent steps to be able to restore datastore snapshots as it contains the snapshot names.
+:::note
+You will need the output for your chosen backup ID in the following steps to be able to restore datastore snapshots as it contains the snapshot names.
+:::
 
    <details>
       <summary>Operate Example</summary>
@@ -370,16 +383,16 @@ You will need the output for your chosen backup ID in subsequent steps to be abl
 
    </details>
 
-There may be cases where this is not possible showcasing an alternative approach in the following.
+As there may be cases where this is not possible, an alternative approach is covered in the following example.
 
-##### Available Backups on Elasticsearch / OpenSearch
+#### Available Backups on Elasticsearch/OpenSearch
 
-In that case, follow the described steps above and when you have your Elasticsearch / OpenSearch available, use the snapshot API to list available snapshots and correlate that to available snapshots in your backup bucket (AWS S3, Azure Store, Google GCS). It's important to have the same ID for all backups.
+In this scenario, follow the steps above, but when you have your Elasticsearch/OpenSearch available, use the snapshot API to list available snapshots and correlate this to the available snapshots in your backup bucket (AWS S3, Azure Store, Google GCS). It is important to use the same ID for all backups.
 
 <Tabs groupId="search-engine">
    <TabItem value="elasticsearch" label="Elasticsearch" default>
 
-      The following is using the [Elasticsearch snapshot API](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-snapshot-get) to list all registered snapshots in a repository.
+      The following uses the [Elasticsearch snapshot API](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-snapshot-get) to list all registered snapshots in a repository.
 
       ```bash
       ELASTIC_ENDPOINT=http://localhost:9200       # Your Elasticsearch endpoint
@@ -392,7 +405,7 @@ In that case, follow the described steps above and when you have your Elasticsea
       curl $ELASTIC_ENDPOINT/_snapshot/$ELASTIC_SNAPSHOT_REPOSITORY/_all | jq -r '.snapshots[].snapshot'
       ```
 
-      Ensure that all backups and parts exists for each component for your chosen backup ID.
+      Ensure that all backups and parts exist for each component for your chosen backup ID.
 
       <details>
          <summary>Example output</summary>
@@ -423,7 +436,7 @@ In that case, follow the described steps above and when you have your Elasticsea
 
    <TabItem value="opensearch" label="OpenSearch">
 
-      The following is using the [OpenSearch snapshot API](https://docs.opensearch.org/docs/latest/api-reference/snapshots/get-snapshot/) to list all registered snapshots in a repository.
+      The following uses the [OpenSearch snapshot API](https://docs.opensearch.org/docs/latest/api-reference/snapshots/get-snapshot/) to list all registered snapshots in a repository.
 
       ```bash
       OPENSEARCH_ENDPOINT=http://localhost:9200       # Your OpenSearch endpoint
@@ -436,7 +449,7 @@ In that case, follow the described steps above and when you have your Elasticsea
       curl $OPENSEARCH_ENDPOINT/_snapshot/$OPENSEARCH_SNAPSHOT_REPOSITORY/_all | jq -r '.snapshots[].snapshot'
       ```
 
-      Ensure that all backups and parts exists for each component for your chosen backup ID.
+      Ensure that all backups and parts exist for each component for your chosen backup ID.
 
       <details>
       <summary>Example output</summary>
@@ -466,11 +479,11 @@ In that case, follow the described steps above and when you have your Elasticsea
    </TabItem>
 </Tabs>
 
-##### Available Backups of Zeebe Partitions
+#### Available Backups of Zeebe Partitions
 
-For the Zeebe partitions backup, you will have to check your configured backup store for available backup IDs and correlate those to the available backups on Elasticsearch / OpenSearch.
+For the Zeebe partitions backup, you will need to check your configured backup store for available backup IDs, and correlate those to the available backups on Elasticsearch/OpenSearch.
 
-Zeebe will create a folder for each Partition ID and subfolder in there with each backupID.
+Zeebe creates a folder for each Partition ID and subfolder in this with each backup ID.
 
 :::warning
 Using the Zeebe Management Backup API is the recommended method for listing available backups, as it ensures the backups are complete and valid. Manually identifying backup IDs can result in restoring an incomplete backup, which will fail the restore process. If this occurs, you will need to choose a different backup ID and repeat the restore process for all components with the new backup ID, including the datastore, to avoid mismatched backup windows and potential data loss.
@@ -498,13 +511,13 @@ Using the Zeebe Management Backup API is the recommended method for listing avai
    </summary>
 </details>
 
-#### 3. Stop all components but Elasticsearch / OpenSearch
+### 3. Stop all components apart from Elasticsearch/OpenSearch
 
-If you're using an external Elasticsearch / OpenSearch and Kubernetes, you could temporarily [uninstall](https://helm.sh/docs/helm/helm_uninstall/) the Camunda Helm chart or [scale](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_scale/) all components to 0, so that nothing is running and potentially interacting with the datastore.
+If you are using an external Elasticsearch/OpenSearch and Kubernetes, you could temporarily [uninstall](https://helm.sh/docs/helm/helm_uninstall/) the Camunda Helm chart or [scale](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_scale/) all components to 0, so that nothing is running and potentially interacting with the datastore.
 
-In case of a manual setup, you can simply stop all components.
+In a manual setup, you can simply stop all components.
 
-If you're using the Camunda Helm chart with an embedded Elasticsearch, you can achieve it by e.g. disabling all other components in the `values.yml`.
+If you are using the Camunda Helm chart with an embedded Elasticsearch, you can achieve this by (for example) disabling all other components in the `values.yml`.
 
 ```yaml
 elsaticsearch:
@@ -526,14 +539,14 @@ zeebe-gateway:
   enabled: false
 ```
 
-#### 4. Deletion of all indices
+### 4. Delete all indices
 
-Now that we have successfully restored the templates and stopped the components of adding more indices. We have to delete the existing indices to be able to successfully restore the snapshots, otherwise those will block a successful restore.
+Now that you have successfully restored the templates and stopped the components adding more indices, you must delete the existing indices to be able to successfully restore the snapshots (otherwise these will block a successful restore).
 
 <Tabs groupId="search-engine">
    <TabItem value="elasticsearch" label="Elasticsearch" default>
 
-The following is using the [Elasticsearch CAT API](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-cat-indices) to list all indices. It's also using the [Elasticsearch Index API](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-delete) to delete an index.
+The following uses the [Elasticsearch CAT API](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-cat-indices) to list all indices. It also uses the [Elasticsearch Index API](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-delete) to delete an index.
 
 ```bash
 for index in $(curl -s "$ELASTIC_ENDPOINT/_cat/indices?h=index" \
@@ -592,7 +605,7 @@ done
    </TabItem>
    <TabItem value="opensearch" label="OpenSearch">
 
-The following is using the [OpenSearch CAT API](https://docs.opensearch.org/docs/latest/api-reference/cat/cat-indices/) to list all indices. It's also using the [OpenSearch Index API](https://docs.opensearch.org/docs/latest/api-reference/index-apis/delete-index/) to delete an index.
+The following uses the [OpenSearch CAT API](https://docs.opensearch.org/docs/latest/api-reference/cat/cat-indices/) to list all indices. It also uses the [OpenSearch Index API](https://docs.opensearch.org/docs/latest/api-reference/index-apis/delete-index/) to delete an index.
 
 ```bash
 for index in $(curl -s "$OPENSEARCH_ENDPOINT/_cat/indices?h=index" \
@@ -651,18 +664,18 @@ done
    </TabItem>
 </Tabs>
 
-#### 5. Restore Elasticsearch / OpenSearch snapshots
+### 5. Restore Elasticsearch/OpenSearch snapshots
 
-While the backup order was important to ensure consistent backups. It does not matter in case of the restore process and we can restore the backed up indices in any order.
+Although the backup order was important so far to ensure consistent backups, you can restore the backed up indices in any order.
 
-The components don't have any endpoint to restore the backup in Elasticsearch, so you'll have to restore it yourself directly in your selected datastore.
+As the components do not have an endpoint to restore the backup in Elasticsearch, you will need to restore it yourself directly in your selected datastore.
 
-Based on your chosen backup ID from [step 2 - find available backup IDs](#2-find-available-backup-ids), you can now proceed to restore the snapshots in Elasticsearch / OpenSearch for each available backup under the same backup ID.
+Based on your chosen backup ID in [find available backup IDs](#2-find-available-backup-ids), you can now restore the snapshots in Elasticsearch/OpenSearch for each available backup under the same backup ID.
 
 <Tabs groupId="search-engine">
    <TabItem value="elasticsearch" label="Elasticsearch" default>
 
-The following is using the [Elasticsearch snapshot API](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-snapshot-restore) to restore a snapshot.
+The following uses the [Elasticsearch snapshot API](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-snapshot-restore) to restore a snapshot.
 
 ```bash
 curl -XPOST "$ELASTIC_ENDPOINT/_snapshot/$ELASTIC_SNAPSHOT_REPOSITORY/$SNAPSHOT_NAME/_restore?wait_for_completion=true"
@@ -671,7 +684,7 @@ curl -XPOST "$ELASTIC_ENDPOINT/_snapshot/$ELASTIC_SNAPSHOT_REPOSITORY/$SNAPSHOT_
    </TabItem>
    <TabItem value="opensearch" label="OpenSearch">
 
-The following is using the [OpenSearch snapshot API](https://docs.opensearch.org/docs/latest/api-reference/snapshots/restore-snapshot/) to restore a snapshot.
+The following uses the [OpenSearch snapshot API](https://docs.opensearch.org/docs/latest/api-reference/snapshots/restore-snapshot/) to restore a snapshot.
 
 ```bash
 curl -XPOST "$OPENSEARCH_ENDPOINT/_snapshot/$OPENSEARCH_SNAPSHOT_REPOSITORY/$SNAPSHOT_NAME/_restore?wait_for_completion=true"
@@ -681,7 +694,8 @@ curl -XPOST "$OPENSEARCH_ENDPOINT/_snapshot/$OPENSEARCH_SNAPSHOT_REPOSITORY/$SNA
 </Tabs>
 
 Where `$SNAPSHOT_NAME` would be any of the following based on our example in [find available backups IDs](#2-find-available-backup-ids).
-Ensure that all your backups are corresponding to the same backup ID and that each one is restored one by one.
+
+Ensure that all your backups correspond to the same backup ID and that each one is restored one-by-one.
 
 ```bash
 camunda_optimize_1748937221_8.7.1_part_1_of_2
@@ -701,12 +715,18 @@ camunda_tasklist_1748937221_8.7.2_part_6_of_6
 camunda_zeebe_records_backup_1748937221
 ```
 
-### Restore the Zeebe Cluster
+## Step 2: Restore Zeebe Cluster {#restore-zeebe-cluster}
 
-Prerequisites:
+### Prerequisites
 
-- No persistent volumes or disks should contain any pre-existing data.
-- Zeebe is configured with the same backup storage as outlined in the [prerequisites](#prerequisites).
+The following specific prerequisites are required when restoring the Zeebe Cluster:
+
+| Prerequisite      | Description                                                                                                               |
+| :---------------- | :------------------------------------------------------------------------------------------------------------------------ |
+| Pre-existing data | Persistent volumes or disks must not contain any pre-existing data.                                                       |
+| Backup storage    | Zeebe is configured with the same backup storage as outlined in the [prerequisites](backup-and-restore.md#prerequisites). |
+
+### Restore Zeebe Cluster
 
 :::note
 During the restoration of the Elasticsearch / OpenSearch state, we had to temporarily deploy Zeebe. This will have resulted in persistent volumes on Kubernetes and a filled data directory on each Zeebe broker in case of a manual deployment.
@@ -727,7 +747,7 @@ In case of a manual deployment, this means to remove the data directory of each 
 :::
 
 :::note
-When using the Camunda Helm chart, you can optionally disable Operate, Tasklist, Optimize, etc. apart from Zeebe in the `values.yml`. Their data was restored already in the previous section about [Restore of Elasticsearch / OpenSearch](#restore-of-elasticsearch--opensearch) and can be executed from now on, but they depend on Zebee and will crashloop till Zeebe is fully restored.
+When using the Camunda Helm chart, you can optionally disable Operate, Tasklist, Optimize, etc. apart from Zeebe in the `values.yml`. Their data was restored already in the previous section [Restore of Elasticsearch/OpenSearch](#5-restore-elasticsearchopensearch-snapshots) and can be executed from now on, but they depend on Zeebe and will crashloop until Zeebe is fully restored.
 :::
 
 Camunda provides a standalone app which must be run on each node where a Zeebe broker will be running. This is a Spring Boot application similar to the broker and can run using the binary provided as part of the distribution. The app can be configured the same way a broker is configured - via environment variables or using the configuration file located in `config/application.yaml`.
@@ -822,26 +842,32 @@ tar -xzf camunda-zeebe-X.Y.Z.tar.gz --strip-components=1 -C zeebe/
    </TabItem>
 </Tabs>
 
-If restore was successful, the app exits with a log message of `Successfully restored broker from backup`.
+### Restore success or failure
 
-Restore fails if:
+If restore was successful, the app exits with the log message `Successfully restored broker from backup`.
+
+However, the restore will fail if:
 
 - There is no valid backup with the given backupId.
-- Backup store is not configured correctly.
+- The backup store is not configured correctly.
 - The configured data directory is not empty.
-- Any other unexpected errors.
+- Due to any other unexpected errors.
 
 If the restore fails, you can re-run the application after fixing the root cause.
 
-### Start all Camunda 8 components
+## Step 3: Start all Camunda 8 components {#start-all-camunda-8-components}
 
-You have actively restored Elasticsearch / OpenSearch and the Zeebe cluster partitions. You can now normally start everything again and use Camunda 8.
+Now that you have actively restored Elasticsearch/OpenSearch and the Zeebe cluster partitions, you can start all components again and use Camunda 8 as normal.
 
-In the case of Kubernetes this would mean, to enable all components again in the Helm chart and removing the environment variables that overwrite the Zeebe startup behavior.
+For example:
 
-In the case of a manual setup this would mean to execute the broker and all other components in their normal way.
+- For Kubernetes, enable all components again in the Helm chart and remove the environment variables that overwrite the Zeebe startup behavior.
 
-## Restore a Web Modeler data backup
+- For a manual setup, execute the broker and all other components in their normal way.
+
+## (Optional) Restore a Web Modeler data backup
+
+If you have previously backed up your Web Modeler data, you can restore this backup.
 
 Backups can only be restored with downtime.
 To restore the database dump, first ensure that Web Modeler is stopped.

@@ -13,7 +13,7 @@ Back up your Camunda 8 Self-Managed components and cluster.
 
 ## About the backup process
 
-The process for creating a backup requires two main steps:
+To create a backup you must complete the following main steps:
 
 1. [Back up WebApps](#back-up-webapps)
 2. [Back up Zeebe Cluster](#back-up-zeebe)
@@ -764,6 +764,10 @@ Password: <DATABASE_PASSWORD>
 
 :::note
 Database dumps created with `pg_dumpall`/`pg_dump` can only be restored into a database with the same or later version of PostgreSQL, see [PostgreSQL documentation](https://www.postgresql.org/docs/current/app-pgdump.html#PG-DUMP-NOTES).
+:::
+
+:::info
+You can [restore a Web Modeler data backup](restore.md#restore-a-web-modeler-data-backup).
 :::
 
 ## Cleaning up backups
