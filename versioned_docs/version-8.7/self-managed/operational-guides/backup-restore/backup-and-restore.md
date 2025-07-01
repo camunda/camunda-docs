@@ -1,9 +1,9 @@
 ---
 id: backup-and-restore
-title: "Backup and restore"
-sidebar_label: "Backup and restore"
+title: "Back up and restore"
+sidebar_label: "Back up and restore"
 keywords: ["backup", "backups"]
-description: "Learn how to backup and restore your Camunda 8 Self-Managed components."
+description: "Learn how to back up and restore your Camunda 8 Self-Managed components."
 ---
 
 import Tabs from '@theme/Tabs';

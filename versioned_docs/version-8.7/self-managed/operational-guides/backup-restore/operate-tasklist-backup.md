@@ -1,7 +1,8 @@
 ---
 id: operate-tasklist-backup
-title: Backup Management API - Operate / Tasklist
+title: Backup Management API - Operate and Tasklist
 description: "Backup API to perform a backup of Operate and Tasklist data."
+sidebar_label: "Operate and Tasklist"
 keywords: ["backup", "backups"]
 ---
 

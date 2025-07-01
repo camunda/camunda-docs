@@ -2,6 +2,7 @@
 id: optimize-backup
 title: Backup Management API - Optimize
 description: "Backup API to perform a backup of Optimize data."
+sidebar_label: "Optimize"
 keywords: ["backup", "backups"]
 ---
 
