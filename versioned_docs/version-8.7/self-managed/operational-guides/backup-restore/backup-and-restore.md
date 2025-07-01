@@ -13,20 +13,16 @@ import { overviewCards } from './react-components/\_card-data';
 
 Back up and restore Camunda 8 Self-Managed components.
 
-:::note
-If the Camunda application(s) cannot access Elasticsearch with cluster-level privileges, you can run the backup of Operate and Tasklist indices as a standalone application separate from the main application (see [standalone backup application](/self-managed/concepts/elasticsearch-without-cluster-privileges.md#standalone-backup-application)).
-:::
-
 ## About this guide
 
-This guide covers how to perform a Camunda 8 backup and restore, and the steps and choices involved.
+This guide covers how to perform a Camunda 8 backup and restore, and the steps and choices involved. You should automate the procedures in this guide, choosing tools that fulfil the requirements of your organization.
 
-- **Backup**: Use the Camunda 8 Self-Managed backup feature to regularly back up the state of your Zeebe, Operate, Tasklist, and Optimize components, without any downtime. For Web Modeler, see [backup and restore Web Modeler data](./modeler-backup-and-restore.md).
+- **[Create a backup](backup.md)**: Use the Camunda 8 Self-Managed backup feature to regularly back up the state of your Zeebe, Operate, Tasklist, and Optimize components, without any downtime. You can also back up and restore Web Modeler data.
 
-- **Restore**: You can then restore the cluster from a backup if any failures occur that cause data loss.
+- **[Restore a backup](restore.md)**: You can then restore the cluster from a backup if any failures occur that cause data loss.
 
 :::note
-You should automate the procedures in this guide, choosing tools that fulfil the requirements of your organization.
+If the Camunda application(s) cannot access Elasticsearch with cluster-level privileges, you can run the backup of Operate and Tasklist indices as a standalone application separate from the main application (see [standalone backup application](/self-managed/concepts/elasticsearch-without-cluster-privileges.md#standalone-backup-application)).
 :::
 
 <ZeebeGrid zeebe={overviewCards} />
