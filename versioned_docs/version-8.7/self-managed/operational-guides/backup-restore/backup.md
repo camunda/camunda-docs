@@ -13,16 +13,18 @@ Back up your Camunda 8 Self-Managed components and cluster.
 
 ## About the backup process
 
-The process for creating a backup involves two main steps:
+The process for creating a backup requires two main steps:
 
-1. [Back up WebApps](#backup-of-the-webapps)
-2. [Back up Zeebe Cluster](#backup-of-the-zeebe-cluster)
+1. [Back up WebApps](#back-up-webapps)
+2. [Back up Zeebe Cluster](#back-up-zeebe)
+
+You can also optionally [back up your Web Modeler data](#back-up-web-modeler-data).
 
 :::caution
 You **must** execute these two steps in the correct sequential order to create a consistent backup. For example, you must complete backing up the WebApps first before proceeding with the Zeebe Cluster backup.
 :::
 
-## Step 1: Back up WebApps
+## Step 1: Back up WebApps {#back-up-webapps}
 
 Start the backup process by first backing up the WebApps.
 
@@ -371,7 +373,7 @@ Alternatively as a one-line to wait until the state is `COMPLETED` using a while
 while [[ "$(curl -s "$TASKLIST_MANAGEMENT_API/actuator/backups/$BACKUP_ID" | jq -r .state)" != "COMPLETED" ]]; do echo "Waiting..."; sleep 5; done; echo "Finished backup with ID $BACKUP_ID"
 ```
 
-## Step 2: Backup Zeebe Cluster
+## Step 2: Backup Zeebe Cluster {#back-up-zeebe}
 
 Once you have completed backing up all the WebApps, you can back up the Zeebe Cluster.
 
@@ -409,14 +411,16 @@ curl -XPOST "$GATEWAY_MANAGEMENT_API/actuator/exporting/pause?soft=true"
 
    </details>
 
-### 2. Create a backup `x` of the exported Zeebe indices in Elasticsearch / OpenSearch using the respective Snapshots API
+### 2. Create a backup `x` of the exported Zeebe indices in Elasticsearch/OpenSearch
 
-By default, the indices are prefixed with `zeebe-record`. If you have configured a different prefix when configuring Elasticsearch / OpenSearch exporter in Zeebe, use this instead.
+You can create this backup using the respective Snapshots API.
+
+By default, the indices are prefixed with `zeebe-record`. If you have configured a different prefix when configuring Elasticsearch/OpenSearch exporter in Zeebe, use this instead.
 
    <Tabs groupId="search-engine">
       <TabItem value="elasticsearch" label="Elasticsearch" default>
 
-      The following is using the [Elasticsearch snapshot API](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-snapshot-create) to create a snapshot.
+      The following uses the [Elasticsearch snapshot API](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-snapshot-create) to create a snapshot.
 
       ```bash
       curl -XPUT "$ELASTIC_ENDPOINT/_snapshot/$ELASTIC_SNAPSHOT_REPOSITORY/camunda_zeebe_records_backup_$BACKUP_ID?wait_for_completion=true" \
@@ -477,7 +481,7 @@ By default, the indices are prefixed with `zeebe-record`. If you have configured
       </TabItem>
       <TabItem value="opensearch" label="OpenSearch">
 
-      The following is using the [OpenSearch snapshot API](https://docs.opensearch.org/docs/latest/api-reference/snapshots/create-snapshot/) to create a snapshot.
+      The following uses the [OpenSearch snapshot API](https://docs.opensearch.org/docs/latest/api-reference/snapshots/create-snapshot/) to create a snapshot.
 
       ```bash
       curl -XPUT "$OPENSEARCH_ENDPOINT/_snapshot/$OPENSEARCH_SNAPSHOT_REPOSITORY/camunda_zeebe_records_backup_$BACKUP_ID?wait_for_completion=true" \
@@ -535,12 +539,12 @@ By default, the indices are prefixed with `zeebe-record`. If you have configured
 
    </Tabs>
 
-### 3. Wait until the backup `x` of the exported Zeebe indices is complete before proceeding
+### 3. Wait for the backup `x` of the exported Zeebe indices to complete before proceeding
 
    <Tabs groupId="search-engine">
       <TabItem value="elasticsearch" label="Elasticsearch" default>
 
-      The following is using the [Elasticsearch snapshot API](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-snapshot-status-2) to get the snapshot status.
+      The following uses the [Elasticsearch snapshot API](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-snapshot-status-2) to get the snapshot status.
 
       ```bash
       curl "$ELASTIC_ENDPOINT/_snapshot/$ELASTIC_SNAPSHOT_REPOSITORY/camunda_zeebe_records_backup_$BACKUP_ID/_status"
@@ -597,7 +601,7 @@ By default, the indices are prefixed with `zeebe-record`. If you have configured
       </TabItem>
       <TabItem value="opensearch" label="OpenSearch">
 
-      The following is using the [OpenSearch snapshot API](https://docs.opensearch.org/docs/latest/api-reference/snapshots/get-snapshot-status/) to get the snapshot status.
+      The following uses the [OpenSearch snapshot API](https://docs.opensearch.org/docs/latest/api-reference/snapshots/get-snapshot-status/) to get the snapshot status.
 
       ```bash
       curl "$OPENSEARCH_ENDPOINT/_snapshot/$OPENSEARCH_SNAPSHOT_REPOSITORY/camunda_zeebe_records_backup_$BACKUP_ID/_status"
@@ -655,7 +659,9 @@ By default, the indices are prefixed with `zeebe-record`. If you have configured
 
    </Tabs>
 
-### 4. Take a backup `x` of the Zeebe broker partitions. Using the [Zeebe management backup API](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md)
+### 4. Create a backup `x` of the Zeebe broker partitions
+
+This step uses the [Zeebe management backup API](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md).
 
       ```bash
       curl -XPOST "$GATEWAY_MANAGEMENT_API/actuator/backups" \
@@ -676,7 +682,9 @@ By default, the indices are prefixed with `zeebe-record`. If you have configured
          </summary>
       </details>
 
-### 5. Wait until the backup `x` of Zeebe is completed before proceeding. Using the [Zeebe management backup API](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md)
+### 5. Wait for the backup `x` of Zeebe to complete before proceeding
+
+This step uses the [Zeebe management backup API](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md).
 
       ```bash
       curl "$GATEWAY_MANAGEMENT_API/actuator/backups/$BACKUP_ID"
@@ -738,12 +746,12 @@ By default, the indices are prefixed with `zeebe-record`. If you have configured
       </details>
 
 :::warning
-If any of the steps above fail, you may have to restart with a new backup ID. Ensure Zeebe exporting is resumed if the backup process force quits in the middle of the process.
+If any of the steps above fail, you might have to restart with a new backup ID. Ensure Zeebe exporting is resumed if the backup process force quits in the middle of the process.
 :::
 
-## Back up Web Modeler data
+## (Optional) Back up Web Modeler data {#back-up-web-modeler-data}
 
-To create a backup of Web Modeler data, you must back up the database that Web Modeler uses by following the instructions of the official [PostgreSQL documentation](https://www.postgresql.org/docs/current/backup-dump.html).
+To create a Web Modeler data backup, refer to the [official PostgreSQL documentation](https://www.postgresql.org/docs/current/backup-dump.html) to back up the database that Web Modeler uses.
 
 For example, to create a backup of the database using `pg_dumpall`, use the following command:
 
@@ -752,22 +760,21 @@ pg_dumpall -U <DATABASE_USER> -h <DATABASE_HOST> -p <DATABASE_PORT> -f dump.psql
 Password: <DATABASE_PASSWORD>
 ```
 
-`pg_dumpall` may ask multiple times for the same password.
-The database will be dumped into `dump.psql`.
+`pg_dumpall` might ask multiple times for the same password. The database will be dumped into `dump.psql`.
 
 :::note
 Database dumps created with `pg_dumpall`/`pg_dump` can only be restored into a database with the same or later version of PostgreSQL, see [PostgreSQL documentation](https://www.postgresql.org/docs/current/app-pgdump.html#PG-DUMP-NOTES).
 :::
 
-### Clean-up of Backups
+## Cleaning up backups
 
-Depending on your company’s backup policies - such as retention periods and the number of backups to keep - you should consider regularly cleaning up old backups to reduce storage costs and manage resources efficiently.
+Depending on your company’s backup policies (for example, retention periods and number of backups to keep) you should consider regularly cleaning up your old backups to reduce storage costs and efficiently manage resources.
 
-You can use the **delete backup APIs** of each component to remove the associated resources from the configured backup storage. You will have to provide the same backup ID for all calls to remove it from all backup stores.
+You can use the **delete backup APIs** for each component to remove the associated resources from the configured backup storage. You will have to provide the same backup ID for all calls to remove it from all backup stores.
 
 - [Operate](/self-managed/operational-guides/backup-restore/operate-tasklist-backup.md#delete-backup-api)
 - [Optimize](/self-managed/operational-guides/backup-restore/optimize-backup.md#delete-backup-api)
 - [Tasklist](/self-managed/operational-guides/backup-restore/operate-tasklist-backup.md#delete-backup-api)
 - [Zeebe](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md#delete-backup-api)
 
-For Zeebe one would also have to remove the separately backed up `zeebe-record` index snapshot using the [Elasticsearch](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-snapshot-delete) / [OpenSearch](https://docs.opensearch.org/docs/latest/api-reference/snapshots/delete-snapshot/) API directly.
+For Zeebe, you would also have to remove the separately backed up `zeebe-record` index snapshot using the [Elasticsearch](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-snapshot-delete) / [OpenSearch](https://docs.opensearch.org/docs/latest/api-reference/snapshots/delete-snapshot/) API directly.
