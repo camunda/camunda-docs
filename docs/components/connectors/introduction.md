@@ -31,7 +31,7 @@ New to connectors? Learn about connector types and how to start using connectors
 <ConnectorsGrid connectors={gettingStartedCards} />
 
 :::info
-Get started by learning how to [integrate a Camunda 8 connector](/guides/configuring-out-of-the-box-connector.md).
+Get started by learning how to [integrate a Camunda 8 connector](/components/connectors/use-connectors/configuring-out-of-the-box-connector.md).
 :::
 
 ## Custom connectors

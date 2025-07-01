@@ -3,7 +3,6 @@ module.exports = {
     "guides/introduction-to-camunda",
     "guides/getting-started-java-spring",
     "guides/setting-up-development-project",
-    "guides/configuring-out-of-the-box-connectors",
     "guides/use-shared-project-for-organization-wide-collaboration",
     {
       "Orchestration use cases": [
@@ -422,6 +421,7 @@ module.exports = {
             id: "components/connectors/use-connectors/index",
           },
           items: [
+            "components/connectors/use-connectors/configuring-out-of-the-box-connectors",
             "components/connectors/connector-types",
             "components/connectors/use-connectors/inbound",
             "components/connectors/use-connectors/outbound",
