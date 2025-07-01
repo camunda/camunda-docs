@@ -5,6 +5,7 @@ module.exports = {
     "guides/setting-up-development-project",
     "guides/setup-client-connection-credentials",
     "guides/configuring-out-of-the-box-connectors",
+    "guides/use-shared-project-for-organization-wide-collaboration",
     {
       "Orchestration use cases": [
         "guides/orchestrate-human-tasks",
@@ -13,13 +14,8 @@ module.exports = {
       ],
     },
     {
-      Improve: [
-        {
-          "DevOps lifecycle": [
-            "guides/devops-lifecycle/integrate-web-modeler-in-ci-cd",
-          ],
-        },
-        "guides/use-shared-project-for-organization-wide-collaboration",
+      "DevOps lifecycle": [
+        "guides/devops-lifecycle/integrate-web-modeler-in-ci-cd",
       ],
     },
     {
