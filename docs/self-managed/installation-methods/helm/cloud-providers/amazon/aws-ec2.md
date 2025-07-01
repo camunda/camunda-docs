@@ -17,7 +17,7 @@ When using this guide with a different cloud provider, note that you will be res
 :::danger Cost management
 Following this guide will incur costs on your Cloud provider account, namely for the EC2 instances, and OpenSearch. More information can be found on AWS and their [pricing calculator](https://calculator.aws/#/) as the total cost varies per region.
 
-To get an estimate, you can refer to this [example calculation](https://calculator.aws/#/estimate?id=8ce855e2d02d182c4910ec8b4ea2dbf42ea5fd1d), which can be further optimized to suit your specific use cases.
+To get an estimate, you can refer to this [example calculation](https://calculator.aws/#/estimate?id=ca54a43f3b3b7eb42fe8836854775e60d8c7e04d), which can be further optimized to suit your specific use cases.
 :::
 
 ## Architecture
@@ -60,117 +60,238 @@ Alternatively, the same setup can run with a single AWS EC2 instance, but be awa
 - Unix based Operating System (OS) with ssh and sftp
   - Windows may be used with [Cygwin](https://www.cygwin.com/) or [Windows WSL](https://learn.microsoft.com/en-us/windows/wsl/install) but has not been tested
 
-### Considerations
-
-- The Optimize importer is not highly available and must only run once within the whole setup.
-
 ### Outcome
 
 The outcome is a fully working Camunda orchestration cluster running in a high availability setup using AWS EC2 and utilizing a managed OpenSearch domain.
 The EC2 instances come with an extra disk meant for Camunda to ensure that the content is separated from the operating system.
 
-## 1. Create the required infrastructure
+## 1. Configure AWS and initialize Terraform
 
 :::note Terraform infrastructure example
 We do not recommend using the below Terraform related infrastructure as module as we do not guarantee compatibility.
 Therefore, we recommend extending or reusing some elements of the Terraform example to ensure compatibility with your environments.
 :::
 
-### Download the reference architecture GitHub repository
+### Obtain a copy of the reference architecture
 
-The provided reference architecture repository allows you to directly reuse and extend the existing Terraform example base. This sample implementation is flexible to extend to your own needs without the potential limitations of a Terraform module.
+The first step is to download a copy of the reference architecture from the GitHub repository. This material will be used throughout the rest of this documentation. The reference architectures are versioned using the same Camunda versions (stable/8.x).
 
-```sh
-wget https://github.com/camunda/camunda-deployment-references/archive/refs/heads/main.zip
+The provided reference architecture repository allows you to directly reuse and extend the existing Terraform example base. This sample implementation is flexible to extend to your own needs without the potential limitations of a Terraform module maintained by a third party.
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/aws/compute/ec2-single-region/procedure/get-your-copy.sh
 ```
 
-### Update the configuration files
+With the reference architecture copied, you can proceed with the remaining steps outlined in this documentation. Ensure that you are in the correct directory before continuing with further instructions.
 
-1. Navigate to the new directory:
+### Terraform prerequisites
 
-```sh
-cd camunda-deployment-references-main/aws/ec2/terraform
-```
-
-2. Edit the `variables.tf` file to customize the settings, such as the prefix for resource names and CIDR blocks:
-
-```hcl
-variable "prefix" {
-  default = "example"
-}
-
-variable "cidr_blocks" {
-  default = "10.0.1.0/24"
-}
-```
-
-3. In `config.tf`, configure a new Terraform backend by updating `backend "local"` to [AWS 3](https://developer.hashicorp.com/terraform/language/backend/s3) (or any other non-`local` backend that fits your organization).
+To manage the infrastructure for Camunda 8 on AWS using Terraform, we need to set up Terraform's backend to store the state file remotely in an S3 bucket. This ensures secure and persistent storage of the state file.
 
 :::note
-`local` is meant for testing and development purposes. The state is saved locally, and does not allow to easily share it with colleagues. More information on alternatives can be found in the [Terraform documentation](https://developer.hashicorp.com/terraform/language/backend).
+Advanced users may want to handle this part differently and use a different backend. The backend setup provided is an example for new users.
 :::
 
-### Configure the Terraform AWS provider
+#### Set up AWS authentication
 
-1. Add the [Terraform AWS provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs) in the `config.tf`:
+The [AWS Terraform provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs) is required to create resources in AWS. Before you can use the provider, you must authenticate it using your AWS credentials.
 
-```hcl
-provider "aws" {}
+:::caution Ownership of the created resources
+
+A user who creates resources in AWS will always retain administrative access to those resources, including any Kubernetes clusters created. It is recommended to create a dedicated [AWS IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html) for Terraform purposes, ensuring that the resources are managed and owned by that user.
+
+:::
+
+You can further change the region and other preferences and explore different [authentication](https://registry.terraform.io/providers/hashicorp/aws/latest/docs#authentication-and-configuration) methods:
+
+- For development or testing purposes you can use the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html). If you have configured your AWS CLI, Terraform will automatically detect and use those credentials.
+  To configure the AWS CLI:
+
+  ```bash
+  aws configure
+  ```
+
+  Enter your `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, region, and output format. These can be retrieved from the [AWS Console](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html).
+
+- For production environments, we recommend the use of a dedicated IAM user. Create [access keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) for the new IAM user via the console, and export them as `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`.
+
+#### Create an S3 bucket for Terraform state management
+
+Before setting up Terraform, you need to create an S3 bucket that will store the state file. This is important for collaboration and to prevent issues like state file corruption.
+
+To start, set the region as an environment variable upfront to avoid repeating it in each command:
+
+```bash
+export AWS_REGION=<your-region>
 ```
 
-This can be done via a simple script or manually:
+Replace `<your-region>` with your chosen AWS region (for example, `eu-central-1`).
 
-```sh
-echo 'provider "aws" {}' >> config.tf
-```
+Now, follow these steps to create the S3 bucket with versioning enabled:
+
+1. Open your terminal and ensure the AWS CLI is installed and configured.
+
+2. Run the following command to create an S3 bucket for storing your Terraform state. Make sure to use a unique bucket name and set the `AWS_REGION` environment variable beforehand:
+
+   ```bash reference
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/s3-bucket/s3-bucket-creation.sh
+   ```
+
+3. Enable versioning on the S3 bucket to track changes and protect the state file from accidental deletions or overwrites:
+
+   ```bash reference
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/s3-bucket/s3-bucket-versioning.sh
+   ```
+
+4. Secure the bucket by blocking public access:
+
+   ```bash reference
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/s3-bucket/s3-bucket-private.sh
+   ```
+
+5. Verify versioning is enabled on the bucket:
+
+   ```bash reference
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/s3-bucket/s3-bucket-verify.sh
+   ```
+
+This S3 bucket will now securely store your Terraform state files with versioning enabled.
+
+#### Initialize Terraform
+
+Once your authentication is set up, you can initialize your Terraform project. The previous steps configured a dedicated S3 Bucket (`S3_TF_BUCKET_NAME`) to store your state, and the following creates a bucket key that will be used by your configuration.
+
+Configure the backend and download the necessary provider plugins:
 
 :::note
-This is a current technical limitation, as the same files are used for testing. Terraform does not allow defining the provider twice.
+Ensure you are in the `terraform` subfolder `camunda-deployment-references/aws/compute/ec2-single-region/terraform`.
 :::
 
-1. Configure authentication to allow the [AWS Terraform provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs) to create resources in AWS. You must configure the provider with the proper credentials before using it. You can further change the region and other preferences and explore different authentication methods.
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/s3-bucket/s3-bucket-tf-init.sh
+```
 
-There are several ways to authenticate the AWS provider:
+Terraform will connect to the S3 bucket to manage the state file, ensuring remote and persistent storage.
 
-     - **Testing/development**: Use the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html) to configure access. Terraform will automatically default to AWS CLI configuration when present.
-     - **CI/CD**: Set the environment variables `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`, which can be retrieved from the [AWS Console](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html).
-     - **Enterprise grade security**: Use an [AWS IAM role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs#assuming-an-iam-role).
+### EC2 setup
 
-Ensure you have set the `AWS_REGION` either as environment variable or in the Terraform AWS provider to deploy the infrastructure in your desired region. AWS resources are region bound on creation.
+The `ec2.tf` takes are of creating compute instances and an optional bastion host. You can configure in here the disk size, instance type, enable or disable the bastion host, as well as configure the [Amazon Machine Image](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html) (AMI) to overwrite the use of the latest image available.
+
+The following file shows what resources are created and can be adjusted within your copied reference. The code embedding is limited to 30 lines. For the complete file, please refer to the link provided at the bottom of the embedded snippet.
+
+```hcl reference
+https://github.com/camunda/camunda-deployment-references/blob/infraex-769/aws/compute/ec2-single-region/terraform/ec2.tf#L1-L30
+```
+
+### Security setup
+
+The `security.tf` contains multiple security groups that handle different use cases. Among those:
+
+- Allow internal VPC traffic for Camunda ports
+- Allow EC2 instances to access external traffic on port 80 / 443 to download dependencies (Java, Camunda, ...)
+- Allow remote traffic for the LoadBalancer on different ports.
+- Allow SSH for the bastion host.
+
+Besides the security groups to handle traffic. It also contains a KMS key to encrypt disks and OpenSearch, as well as the SSH Key pair to trust a remote ssh connection.
+
+The following file shows what resources are created and can be adjusted within your copied reference. The code embedding is limited to 30 lines. For the complete file, please refer to the link provided at the bottom of the embedded snippet.
+
+```hcl reference
+https://github.com/camunda/camunda-deployment-references/blob/infraex-769/aws/compute/ec2-single-region/terraform/security.tf#L1-L30
+```
+
+### Load balancer setup
+
+The `lb.tf` contains a load balancer setup to expose Camunda 8 to the public or within your company network. One can restrict the access further if required.
+
+It's divided into a Network and an Application load balancer.
+
+- Network load balancer to expose the gRPC endpoint
+- Application load balancer to expose the Camunda WebApps and REST API
+
+The following file shows what resources are created and can be adjusted within your copied reference. The code embedding is limited to 30 lines. For the complete file, please refer to the link provided at the bottom of the embedded snippet.
+
+```hcl reference
+https://github.com/camunda/camunda-deployment-references/blob/infraex-769/aws/compute/ec2-single-region/terraform/lb.tf#L1-L30
+```
+
+### OpenSearch module setup
+
+:::info Optional module
+
+If you don't want to use this module, you can skip this section. However, you may need to adjust the remaining instructions to remove references to this module.
+
+If you choose not to use this module, you'll need to either provide a Elasticsearch or OpenSearch service.
+
+Additionally, you must delete the `opensearch.tf` file within your chosen reference as it will otherwise create the resources.
+:::
+
+The OpenSearch module creates an OpenSearch domain intended for Camunda platform. OpenSearch is a powerful alternative to Elasticsearch. For more information on using OpenSearch with Camunda, refer to the [Camunda documentation](/self-managed/setup/guides/using-existing-opensearch.md).
+
+:::note Migration to OpenSearch is not supported
+
+Using Amazon OpenSearch Service requires [setting up a new Camunda installation](/self-managed/setup/overview.md). Migration from previous Camunda versions using Elasticsearch environments is currently not supported. Switching between Elasticsearch and OpenSearch, in either direction, is also not supported.
+
+:::
+
+#### Set up the OpenSearch domain module
+
+1. The `opensearch.tf` in your chosen reference is containing a basic AWS OpenSearch setup referencing a local Terraform module. The following shows said file, which you can within your cloned setup adjust to your needs.
+
+   :::caution Network based security
+   The standard deployment for OpenSearch relies on the first layer of security, which is the Network.
+   While this setup allows easy access, it may expose sensitive data within the VPC. To enhance security, consider [fine-grained access control](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/fgac.html).
+   :::
+
+   ```hcl reference
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/compute/ec2-single-region/terraform/opensearch.tf#L1-L30
+   ```
+
+2. Customize the cluster setup using various input options. For a full list of available parameters, see the [OpenSearch module documentation](https://github.com/camunda/camunda-deployment-references/blob/main/aws/modules/opensearch/README.md).
+
+:::tip
+
+The instance type `m7i.large.search` in the above example is a suggestion, and can be changed depending on your needs.
+
+:::
+
+### Define outputs
+
+**Terraform** allows you to define outputs, which make it easier to retrieve important values generated during execution, such as database endpoints and other necessary configurations for the setup.
+
+Each Terraform definition set up in the reference contains an output definition at the end of the file. You can adjust them to your needs. A necessary default is provided to make use of in scripts.
+
+Outputs allow you to easily reference the resources in subsequent steps or scripts, streamlining your deployment process.
+
+### Execution
 
 :::note Secret management
-We strongly recommend managing sensitive information using a secure secrets management solution like HashiCorp Vault. For details on how to inject secrets directly into Terraform via Vault, see the [Terraform Vault secrets injection guide](https://developer.hashicorp.com/terraform/tutorials/secrets/secrets-vault).
+
+We strongly recommend managing sensitive information using a secure secrets management solution like HashiCorp Vault. For details on how to inject secrets directly into Terraform via Vault, see the [Terraform Vault Secrets Injection Guide](https://developer.hashicorp.com/terraform/tutorials/secrets/secrets-vault).
+
 :::
 
-### Initialize and deploy Terraform
+1. Open a terminal in the chosen reference folder where `config.tf` and other `.tf` files are.
 
-1. Initialize the Terraform working directory. This step downloads the necessary provider plugins:
+2. Preform a final initialization for anything changed throughout the guide:
 
-```sh
-terraform init
-```
+   ```bash reference
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/s3-bucket/s3-bucket-tf-init.sh#L7
+   ```
 
-1. Plan the configuration files:
+3. Plan the configuration files:
 
-```sh
-terraform plan -out infrastructure.plan # describe what will be created
-```
+   ```bash
+   terraform plan -out cluster.plan # describe what will be created
+   ```
 
-1. After reviewing the plan, confirm and apply the changes:
+4. After reviewing the plan, you can confirm and apply the changes.
 
-```sh
-terraform apply infrastructure.plan # apply the creation
-```
+   ```bash
+   terraform apply cluster.plan     # apply the creation
+   ```
 
-The execution takes roughly 30 minutes. Around 25 minutes is solely for the creation of a managed highly available OpenSearch cluster.
-
-1. After the infrastructure is created, access the outputs defined in `outputs.tf` using `terraform output`.
-
-For example, to retrieve the OpenSearch endpoint:
-
-```sh
-terraform output aws_opensearch_domain
-```
+Terraform will now create the Amazon EC2 resources and OpenSearch with all the necessary configurations. The completion of this process may require approximately 20-30 minutes in total.
 
 ### Connect to remote machines via Bastion host (optional)
 
@@ -316,27 +437,3 @@ If you are using a managed OpenSearch domain instead, you should check out the [
 ## Troubleshooting
 
 Please conduct the general topic of troubleshooting in the [documentation](/self-managed/operational-guides/troubleshooting.md).
-
-<!-- Optional stuff, just keeping it here for now -->
-
-<!--
-## Deployment Model
-
-Deployment Topology
-Describe whether the architecture is single-region, multi-region, or hybrid.
-Configuration Guidelines
-Best practices for configuring the environment for optimal performance and reliability.
-Automation and CI/CD Pipelines
-Suggested tooling and workflows for automated deployments and updates.
-
-## Scalability and Performance Considerations
-
-Maybe we have some information on this in the docs
-
-Scalability Patterns
-Recommended patterns for scaling compute, storage, and networking resources.
-Load Balancing and Caching
-Best practices for distributing traffic and caching data to enhance performance.
-Performance Optimization Tips
-Tips for optimizing performance across different components.
--->
