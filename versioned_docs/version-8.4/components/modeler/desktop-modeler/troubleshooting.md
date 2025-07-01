@@ -52,6 +52,10 @@ To produce logging output, you can also run Desktop Modeler from the command lin
 
 ## I cannot connect to Zeebe
 
+:::note
+If Camunda is not running locally, you can use [c8run](/self-managed/setup/deploy/local/c8run.md) which is a lightweight all-in-one distribution.
+:::
+
 You try to connect (i.e., to deploy) to a remote Zeebe instance, and Desktop Modeler tells you it "cannot find a running Zeebe."
 
 To resolve this issue, check if you can connect to Zeebe through another client, i.e., [`zbctl`](../../../apis-tools/cli-client/index.md). If that works, [further debug your Zeebe connection](#debug-zeebe-connection-issues). If that does not work, resolve the [general connection issue](#resolve-a-general-zeebe-connection-issue) first.
