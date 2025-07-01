@@ -250,10 +250,10 @@ variable but reference a JSON document stored in [document storage](../../docume
 As documents are subject to expiration, you need to be able to predict the expected lifetime of your process to
 configure the document time-to-live (TTL) correctly to avoid losing the conversation history.
 
-| Field                      | Required | Description                                                                                                                                                                                                                                                      |
-| :------------------------- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Document TTL               | No       | <p>Time-to-live (TTL) for documents containing the conversation history. Use this field to set a custom TTL matching your expected process lifetime.</p><p>Will use the [default cluster TTL](../../document-handling/getting-started.md) if not configured.</p> |
-| Custom document properties | No       | <p>Optional map of properties to store with the document.</p><p>Use this option to reference custom metadata you might want to use when further processing conversation documents.</p>                                                                           |
+| Field                      | Required | Description                                                                                                                                                                                                                                                           |
+| :------------------------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Document TTL               | No       | <p>Time-to-live (TTL) for documents containing the conversation history. Use this field to set a custom TTL matching your expected process lifetime.</p><p>Will use the [default cluster TTL](../../document-handling/getting-started.md#saas) if not configured.</p> |
+| Custom document properties | No       | <p>Optional map of properties to store with the document.</p><p>Use this option to reference custom metadata you might want to use when further processing conversation documents.</p>                                                                                |
 
 ### Limits
 
