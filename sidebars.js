@@ -2,6 +2,9 @@ module.exports = {
   Guides: [
     "guides/introduction-to-camunda",
     "guides/getting-started-java-spring",
+    "guides/setting-up-development-project",
+    "guides/setup-client-connection-credentials",
+    "guides/configuring-out-of-the-box-connectors",
     {
       "Orchestration use cases": [
         "guides/orchestrate-human-tasks",
@@ -10,15 +13,7 @@ module.exports = {
       ],
     },
     {
-      Automate: [
-        "guides/setting-up-development-project",
-        "guides/setup-client-connection-credentials",
-        "guides/configuring-out-of-the-box-connectors",
-        "guides/use-connectors-in-hybrid-mode",
-        "guides/host-custom-connectors",
-      ],
       Improve: [
-        "guides/improve-processes-with-optimize",
         {
           "DevOps lifecycle": [
             "guides/devops-lifecycle/integrate-web-modeler-in-ci-cd",
@@ -436,6 +431,7 @@ module.exports = {
             "components/connectors/use-connectors/inbound",
             "components/connectors/use-connectors/outbound",
             "components/connectors/use-connectors/intrinsic-functions",
+            "components/connectors/use-connectors-in-hybrid-mode",
           ],
         },
         {
@@ -529,6 +525,7 @@ module.exports = {
             id: "components/connectors/custom-built-connectors/build-connector",
           },
           items: [
+            "components/connectors/custom-built-connectors/host-custom-connectors",
             {
               type: "category",
               label: "Connector templates",
@@ -555,6 +552,7 @@ module.exports = {
         id: "components/optimize/what-is-optimize",
       },
       items: [
+        "components/optimize/improve-processes-with-optimize",
         "components/optimize/userguide/collections-dashboards-reports",
         "components/optimize/userguide/user-permissions",
         "components/optimize/userguide/data-sources",

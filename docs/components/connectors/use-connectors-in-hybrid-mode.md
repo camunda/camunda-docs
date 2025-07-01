@@ -33,7 +33,7 @@ Refer to the [element template](https://github.com/camunda/connectors/blob/main/
 
 ### Prerequisites
 
-Ensure you have a running Camunda cluster, and a pair of `Client ID`/`Client Secret` with `Zeebe` and `Operate` scopes. Learn more about [how to obtain required credentials](../../components/console/manage-clusters/manage-api-clients/).
+Ensure you have a running Camunda cluster, and a pair of `Client ID`/`Client Secret` with `Zeebe` and `Operate` scopes. Learn more about [how to obtain required credentials](/components/console/manage-clusters/manage-api-clients.md).
 
 To use secrets managed by the SaaS environment, add the `Secrets` scope.
 
@@ -41,7 +41,7 @@ To use secrets managed by the SaaS environment, add the `Secrets` scope.
 
 :::note When to use?
 Use this option when you don't need to make any code modifications to either connector runtime, or a specific connector.
-This option allows you to start the connector runtime bundle that runs all of [Camunda's officially-supported connectors](../../components/connectors/out-of-the-box-connectors/available-connectors-overview/).
+This option allows you to start the connector runtime bundle that runs all of [Camunda's officially-supported connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md).
 :::
 
 Run the following script:
@@ -82,7 +82,7 @@ becomes `KAFKA_CONSUMER`. Therefore, to override it one would need to pass in th
 
 ## Using SaaS secrets
 
-If you add the `Secrets` scope to your API client, you can access cluster [secrets](../components/connectors/use-connectors/index.md#using-secrets) in a hybrid setup.
+If you add the `Secrets` scope to your API client, you can access cluster [secrets](/components/connectors/use-connectors/index.md#using-secrets) in a hybrid setup.
 
 Enable the SaaS secret provider via an environment variable or in your application config file:
 

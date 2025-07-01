@@ -18,7 +18,7 @@ we will refer this file as `connector.jar`.
 
 ## Wiring your connector with a Camunda cluster
 
-This approach is equivalent to the [hybrid mode](./use-connectors-in-hybrid-mode.md), except you don't need to override
+This approach is equivalent to the [hybrid mode](/components/connectors/use-connectors-in-hybrid-mode.md), except you don't need to override
 existing connectors and instead add a new one. You need to have a running Camunda cluster, and a pair
 of `Client ID`/`Client Secret` with `Zeebe` and `Operate` scopes.
 Learn more about [how to obtain required credentials](/components/console/manage-clusters/manage-api-clients.md).
