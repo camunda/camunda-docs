@@ -30,7 +30,7 @@ To create a shared project as a space for your organization's resources:
 
 1. Open [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md) and select **Create new project** (if you do not have any existing projects) or **New project** (if you already have existing projects).
 2. Name your project accordingly.
-   ![web modeler empty home](../components/modeler/web-modeler/img/web-modeler-new-user-home.png)
+   ![web modeler empty home](../../../components/modeler/web-modeler/img/web-modeler-new-user-home.png)
 3. On the right side of the page under **Collaborators**, select **Add user**.
 4. To add collaborators to your organization and project, enter the email address of the collaborator you would like to invite and select `Enter` or `Tab` between each entry. You may enter up to 20 email addresses. To add **all** existing organization members to your project, use the **All users in the organization** option to send a bulk invitation to all colleagues.
    <img src={BulkAddUserImg} alt="Add all organization users" width="750px"/>
@@ -76,12 +76,12 @@ You can open the process landscape view by clicking **View landscape** from any 
    :::note
    For process applications, version tags represent a unified "versioned" snapshot of all process application files rather than separate versions for each file as with simple BPMN files.
    :::
-   ![selected node information](../components/modeler/web-modeler/img/process-landscape-node-information.png)
+   ![selected node information](../../../components/modeler/web-modeler/img/process-landscape-node-information.png)
 
 2. **Search**: Press `Ctrl+F` or `⌘+F` to search. Enter the name or identifier of a BPMN file to quickly find, highlight, and jump to the corresponding node.
    ![landscape search](../components/modeler/web-modeler/img/process-landscape-search.png)
 3. **Highlight paths:** Click on a node or connection to highlight the entire chain of related connections.
-   ![landscape selected node connections](../components/modeler/web-modeler/img/process-landscape-connection.png)
+   ![landscape selected node connections](../../../components/modeler/web-modeler/img/process-landscape-connection.png)
 
 ### README documentation
 

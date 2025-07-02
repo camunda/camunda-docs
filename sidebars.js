@@ -3,7 +3,6 @@ module.exports = {
     "guides/introduction-to-camunda",
     "guides/getting-started-java-spring",
     "guides/setting-up-development-project",
-    "guides/use-shared-project-for-organization-wide-collaboration",
     {
       "Orchestration use cases": [
         "guides/orchestrate-human-tasks",
@@ -163,6 +162,7 @@ module.exports = {
           "Web Modeler": [
             "components/modeler/web-modeler/launch-web-modeler",
             "components/modeler/web-modeler/model-your-first-diagram",
+            "components/modeler/web-modeler/use-shared-project-for-organization-wide-collaboration",
             "components/modeler/web-modeler/context-pad",
             "components/modeler/web-modeler/git-sync",
             "components/modeler/web-modeler/import-diagram",
