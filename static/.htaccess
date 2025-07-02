@@ -160,6 +160,7 @@ RewriteRule ^docs/next/guides/host-custom-connectors/?$ /docs/next/components/co
 RewriteRule ^docs/next/guides/improve-processes-with-optimize/?$ /docs/next/components/optimize/improve-processes-with-optimize/ [R=301,L]
 RewriteRule ^docs/next/guides/setup-client-connection-credentials/?$ /docs/next/components/console/manage-clusters/setup-client-connection-credentials/ [R=301,L]
 RewriteRule ^docs/next/guides/configuring-out-of-the-box-connectors/?$ /docs/next/components/connectors/use-connectors/configuring-out-of-the-box-connectors/ [R=301,L]
+RewriteRule ^docs/next/guides/use-shared-project-for-organization-wide-collaboration/?$ /docs/next/components/modeler/web-modeler/use-shared-project-for-organization-wide-collaboration/ [R=301,L]
 
 # Remove Amazon Marketplace
 RewriteRule ^docs/next/self-managed/setup/deploy/amazon/aws-marketplace/?$ /docs/next/self-managed/setup/deploy/amazon/amazon-eks/ [R=301,L]
