@@ -100,9 +100,12 @@ Before configuring Microsoft Entra with Camunda, ensure you have:
 1. **Go to "Authentication"**
 2. **Add platform > Web**
 3. **Configure redirect URIs:**
-   - Operate: `https://<OPERATE_URL>/identity-callback`
-   - Tasklist: `https://<TASKLIST_URL>/identity-callback`
+   - Operate: `https://<OPERATE_URL>/callback`
+   - Tasklist: `https://<TASKLIST_URL>/callback`
    - Optimize: `https://<OPTIMIZE_URL>/api/authentication/callback`
+
+Also ensure that Connectors are also registered in Microsoft Entra.
+For Camunda 8.7, it is advised to use the Connectors client in Microsoft Entra to obtain tokens for communication with Zeebe and Operate.
 
 #### For Single Page Applications (Console, Web Modeler UI):
 
@@ -145,8 +148,8 @@ export ZEEBE_AUTHORIZATION_SERVER_URL='https://login.microsoftonline.com/{tenant
 export ZEEBE_TOKEN_AUDIENCE='your-entra-application-id'
 
 # Client assertion settings (for certificate-based auth)
-export ZEEBE_CLIENT_ASSERTION_KEYSTORE_PATH='/path/to/your/keystore.p12'
-export ZEEBE_CLIENT_ASSERTION_KEYSTORE_PASSWORD='your-keystore-password'
+export CAMUNDA_CLIENT_AUTH_CLIENT_ASSERTION_KEYSTORE_PATH='/path/to/your/keystore.p12'
+export CAMUNDA_CLIENT_AUTH_CLIENT_ASSERTION_KEYSTORE_PASSWORD='your-keystore-password'
 ```
 
 ### For Zeebe Client with Client Secret:
@@ -161,16 +164,19 @@ export ZEEBE_TOKEN_SCOPE='your-entra-application-id/.default'
 ```
 
 ### For Camunda Components:
+#### Operate
+The **Camunda Operate connector** allows you to interact with [Camunda Operate](https://camunda.com/platform/operate/) in your BPMN process to fetch process execution data.
+
+#### Tasklist
+Tasklist is a ready-to-use application to rapidly implement business processes alongside.
+
+#### Optimize
+Optimize offers business intelligence tooling for Camunda customers. By leveraging data collected during process execution, you can access reports, share process intelligence, analyze bottlenecks, and examine areas in business processes for improvement.
 
 ```bash
-# Identity configuration
-export CAMUNDA_IDENTITY_TYPE='MICROSOFT'
-export CAMUNDA_IDENTITY_BASE_URL='https://your-identity-url'
-export CAMUNDA_IDENTITY_ISSUER='https://login.microsoftonline.com/{tenant-id}/v2.0'
-export CAMUNDA_IDENTITY_ISSUER_BACKEND_URL='https://login.microsoftonline.com/{tenant-id}/v2.0'
-export CAMUNDA_IDENTITY_CLIENT_ID='your-entra-application-id'
-export CAMUNDA_IDENTITY_CLIENT_SECRET='your-entra-client-secret'
-export CAMUNDA_IDENTITY_AUDIENCE='your-entra-application-id'
+# Operate client
+export OPERATE_CLIENT_CLIENT_ASSERTION_KEYSTORE_PATH='/path/to/your/keystore.p12'
+export OPERATE_CLIENT_CLIENT_ASSERTION_KEYSTORE_PASSWORD='your-keystore-password'
 
 # Spring profile
 export SPRING_PROFILES_ACTIVE='oidc'
