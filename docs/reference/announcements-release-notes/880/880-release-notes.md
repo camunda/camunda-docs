@@ -64,7 +64,16 @@ To learn more about using connector intrinsic functions, see [intrinsic function
 
 <!-- https://github.com/camunda/product-hub/issues/2299 -->
 
-A new [backup and restore guide](/self-managed/operational-guides/backup-restore/backup-and-restore.md) provides detailed information on what you need to consider for Camunda 8 backups, including how to set up and configure backups, and what to consider for external dependencies.
+The new updated [backup and restore guide](/self-managed/operational-guides/backup-restore/backup-and-restore.md) provides detailed information on what you need to consider for Camunda 8 backups, including how to set up and configure backups, and what to consider for external dependencies.
+
+### Tasklist uses the Orchestration Cluster API <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span>
+
+<!-- https://github.com/camunda/product-hub/issues/2516 -->
+
+The Tasklist frontend application is now transitioning from the soon-to-be-deprecated Tasklist V1 API to the unified [Orchestration Cluster REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md).
+
+- This ensures Tasklist remains fully compatible with Camunda 8 RDBMS support while continuing to work seamlessly with Elasticsearch and OpenSearch.
+- You can expect consistent functionality across different data layers, improved performance, and access to new platform features, all without losing existing capabilities or disrupting task management workflows.
 
 ### User task listener types <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span>
 
