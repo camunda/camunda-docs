@@ -79,7 +79,7 @@ You can open the process landscape view by clicking **View landscape** from any 
    ![selected node information](../../../components/modeler/web-modeler/img/process-landscape-node-information.png)
 
 2. **Search**: Press `Ctrl+F` or `⌘+F` to search. Enter the name or identifier of a BPMN file to quickly find, highlight, and jump to the corresponding node.
-   ![landscape search](../components/modeler/web-modeler/img/process-landscape-search.png)
+   ![landscape search](../../../components/modeler/web-modeler/img/process-landscape-search.png)
 3. **Highlight paths:** Click on a node or connection to highlight the entire chain of related connections.
    ![landscape selected node connections](../../../components/modeler/web-modeler/img/process-landscape-connection.png)
 
