@@ -772,6 +772,7 @@ module.exports = {
               ],
             },
             "components/early-access/alpha/feel-copilot/feel-copilot",
+            "components/early-access/alpha/mcp-client/mcp-client",
           ],
         },
       ],
