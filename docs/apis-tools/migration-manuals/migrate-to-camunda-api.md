@@ -786,7 +786,7 @@ The following conventions apply to all attributes:
   - `parentProcessInstanceKey` - Type changed from `int64` to `string`.
   - `processDefinitionKey` - Type changed from `int64` to `string`.
 - Removed attributes from the `filter` object
-  - `parentKey` - Can no longer be used for filtering.
+  - `parentKey` - Use `parentProcessInstanceKey` of type `string` instead.
 
 </TabItem>
 
@@ -807,7 +807,7 @@ The following conventions apply to all attributes:
   - `parentProcessInstanceKey` - Type changed from `int64` to `string`.
   - `processDefinitionKey` - Type changed from `int64` to `string`.
 - Removed attributes from the objects of the `items` array
-  - `parentKey` - The endpoint does not serve this information anymore.
+  - `parentKey` - Use `parentProcessInstanceKey` of type `string` instead.
 
 </TabItem>
 </Tabs>
