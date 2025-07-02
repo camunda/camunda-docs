@@ -170,7 +170,6 @@ The following conventions apply to all attributes:
   - `taskDefinitionId` - Use `elementId` as this refers to the user-provided identifier of the BPMN element that created the user task.
   - `followUpDate` and `dueDate` filter options - Instead of `from` and `to`, use `$gte` and `$lte`. Additionally, you can use new comparison filter options.
   - `priority` filter options - Filter object keys need a `$` prefix. Additionally, you can use new comparison filter options like `$neq`, `$exists`, and `$in`.
-- Removed attributes
   - `assigned` - Use `assignee` with `{ "$exists": false }`. Multiple filters can be combined in one attribute.
   - `assignees` - Use `assignee` with `{ "$in": [ "xyz", ... ] }`. Multiple filters can be combined in one attribute.
   - `candidateGroups` - Use `candidateGroup` with `{ "$in": [ "xyz", ... ] }`.
@@ -180,6 +179,7 @@ The following conventions apply to all attributes:
     - Local variables match the defined `name` and `value` and exist in the local scope of the BPMN element instance that created the user task.
     - Process instance variables match the defined `name` and `value` and exist anywhere in the process instance that the user task belongs to.
   - `tenantIds` - Use `tenantId` with `{ "$in": [ "xyz", ... ] }`.
+- Removed attributes
   - `includeVariables` - The endpoint does not return variables. Use the [search task variables](#search-task-variables) endpoint to retrieve them.
   - `implementation` - The V2 API supports only Camunda user tasks.
 
@@ -780,13 +780,12 @@ The following conventions apply to all attributes:
   - `processVersionTag` - Use `processDefinitionVersionTag` instead.
   - `bpmnProcessId` - Use `processDefinitionId` instead.
   - `parentFlowNodeInstanceKey` - Use `parentElementInstanceKey` of type `string` instead.
+  - `parentKey` - Use `parentProcessInstanceKey` of type `string` instead.
   - `state` - Use value `TERMINATED` instead of value `CANCELED`.
   - `incident` - Use `hasIncident` instead.
 - Adjusted attributes in the `filter` object
   - `parentProcessInstanceKey` - Type changed from `int64` to `string`.
   - `processDefinitionKey` - Type changed from `int64` to `string`.
-- Removed attributes from the `filter` object
-  - `parentKey` - Use `parentProcessInstanceKey` of type `string` instead.
 
 </TabItem>
 
@@ -801,13 +800,12 @@ The following conventions apply to all attributes:
   - `processVersionTag` - Use `processDefinitionVersionTag` instead.
   - `bpmnProcessId` - Use `processDefinitionId` instead.
   - `parentFlowNodeInstanceKey` - Use `parentElementInstanceKey` of type `string` instead.
+  - `parentKey` - Use `parentProcessInstanceKey` of type `string` instead.
   - `state` - Use value `TERMINATED` instead of value `CANCELED`.
   - `incident` - Use `hasIncident` instead.
 - Adjusted attributes in the objects of the `items` array
   - `parentProcessInstanceKey` - Type changed from `int64` to `string`.
   - `processDefinitionKey` - Type changed from `int64` to `string`.
-- Removed attributes from the objects of the `items` array
-  - `parentKey` - Use `parentProcessInstanceKey` of type `string` instead.
 
 </TabItem>
 </Tabs>
