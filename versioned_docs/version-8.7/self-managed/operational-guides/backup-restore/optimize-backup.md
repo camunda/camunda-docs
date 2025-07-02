@@ -6,6 +6,10 @@ sidebar_label: "Optimize"
 keywords: ["backup", "backups"]
 ---
 
+Back up your Optimize data using the Backup Management API.
+
+## About this API
+
 Optimize stores its data over multiple indices in Elasticsearch. To ensure data integrity across indices, a backup of Optimize data consists of two Elasticsearch snapshots, each containing a different set of Optimize indices. Each backup is identified by a positive integer backup ID. For example, a backup with ID `123456` consists of the following snapshots:
 
 ```
@@ -44,13 +48,13 @@ POST actuator/backups
 
 ### Response
 
-| Code             | Description                                                                                                                                 |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| 202 Accepted     | Backup process was successfully initiated. To determine whether backup process was completed refer to the GET API.                          |
-| 400 Bad Request  | Indicates issues with the request, for example when the `backupId` contains invalid characters.                                             |
-| 409 Conflict     | Indicates that a backup with the same `backupId` already exists.                                                                            |
-| 500 Server Error | All other errors, e.g. issues communicating with Elasticsearch for snapshot creation. Refer to the returned error message for more details. |
-| 502 Bad Gateway  | Optimize has encountered issues while trying to connect to Elasticsearch.                                                                   |
+| Code             | Description                                                                                                                                         |
+| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 202 Accepted     | Backup process was successfully initiated. To determine whether backup process was completed refer to the GET API.                                  |
+| 400 Bad Request  | Indicates issues with the request, for example when the `backupId` contains invalid characters.                                                     |
+| 409 Conflict     | Indicates that a backup with the same `backupId` already exists.                                                                                    |
+| 500 Server Error | All other errors. For example, issues communicating with Elasticsearch for snapshot creation. Refer to the returned error message for more details. |
+| 502 Bad Gateway  | Optimize has encountered issues while trying to connect to Elasticsearch.                                                                           |
 
 ### Example request
 
@@ -92,7 +96,7 @@ GET actuator/backups
 | 200 OK           | Backup state could be determined and is returned in the response body (see example below).                                                                               |
 | 400 Bad Request  | There is an issue with the request, for example the repository name specified in the Optimize configuration does not exist. Refer to returned error message for details. |
 | 404 Not Found    | If a backup ID was specified, no backup with that ID exists.                                                                                                             |
-| 500 Server Error | All other errors, e.g. issues communicating with Elasticsearch for snapshot state retrieval. Refer to the returned error message for more details.                       |
+| 500 Server Error | All other errors. For example, issues communicating with Elasticsearch for snapshot state retrieval. Refer to the returned error message for more details.               |
 | 502 Bad Gateway  | Optimize has encountered issues while trying to connect to Elasticsearch.                                                                                                |
 
 ### Example request
@@ -127,13 +131,17 @@ curl --request GET 'http://localhost:8092/actuator/backups/123456'
 
 Note that the endpoint will return a single item when called with a `backupId` and a list of items when called without specifying a `backupId`.
 
-Possible states of the backup:
+#### Backup states
 
-- `COMPLETE`: The backup can be used for restoring data.
-- `IN_PROGRESS`: The backup process for this backup ID is still in progress.
-- `FAILED`: Something went wrong when creating this backup. To find out the exact problem, use the [Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/current/get-snapshot-status-api.html) get snapshot status API for each of the snapshots included in the given backup.
-- `INCOMPATIBLE`: The backup is incompatible with the current Elasticsearch version.
-- `INCOMPLETE`: The backup is incomplete (this could occur when the backup process was interrupted or individual snapshots were deleted).
+The possible states of the backup are as follows:
+
+| State          | Description                                                                                                                                                                                                                                                                          |
+| :------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `COMPLETE`     | The backup can be used for restoring data.                                                                                                                                                                                                                                           |
+| `IN_PROGRESS`  | The backup process for this backup ID is still in progress.                                                                                                                                                                                                                          |
+| `FAILED`       | Something went wrong when creating this backup. To find out the exact problem, use the [Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/current/get-snapshot-status-api.html) get snapshot status API for each of the snapshots included in the given backup. |
+| `INCOMPATIBLE` | The backup is incompatible with the current Elasticsearch version.                                                                                                                                                                                                                   |
+| `INCOMPLETE`   | The backup is incomplete (this could occur when the backup process was interrupted or individual snapshots were deleted).                                                                                                                                                            |
 
 ## Delete backup API
 

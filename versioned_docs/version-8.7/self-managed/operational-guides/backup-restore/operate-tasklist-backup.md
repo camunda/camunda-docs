@@ -6,6 +6,10 @@ sidebar_label: "Operate and Tasklist"
 keywords: ["backup", "backups"]
 ---
 
+Back up your Operate and Tasklist data using the Backup Management API.
+
+## About this API
+
 Operate stores its data over multiple indices in Elasticsearch. Backup of Operate data includes several
 Elasticsearch snapshots containing sets of Operate indices. Each backup is identified by `backupId`. For example, a backup with an ID of `123` may contain the following Elasticsearch snapshots:
 
@@ -52,8 +56,8 @@ Response:
 | Code             | Description                                                                                                                                                                                                                                |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | 200 OK           | Backup was successfully started, snapshots will be created asynchronously. List of snapshots is returned in the response body (see example below). This list must be persisted together with the backup ID to be able to restore it later. |
-| 400 Bad Request  | In case something is wrong with `backupId`, e.g. the same backup ID already exists.                                                                                                                                                        |
-| 500 Server Error | All other errors, e.g. ES returned error response when attempting to create a snapshot.                                                                                                                                                    |
+| 400 Bad Request  | In case something is wrong with `backupId`. For example, the same backup ID already exists.                                                                                                                                                |
+| 500 Server Error | All other errors. For example, ES returned error response when attempting to create a snapshot.                                                                                                                                            |
 | 502 Bad Gateway  | Elasticsearch is not accessible, the request can be retried when it is back.                                                                                                                                                               |
 
 Example request:
@@ -89,12 +93,12 @@ GET actuator/backups/{backupId}
 
 Response:
 
-| Code             | Description                                                                             |
-| ---------------- | --------------------------------------------------------------------------------------- |
-| 200 OK           | Backup state could be determined and is returned in the response body.                  |
-| 404 Not Found    | Backup with given ID does not exist.                                                    |
-| 500 Server Error | All other errors, e.g. ES returned error response when attempting to execute the query. |
-| 502 Bad Gateway  | Elasticsearch is not accessible, the request can be retried when it is back.            |
+| Code             | Description                                                                                     |
+| ---------------- | ----------------------------------------------------------------------------------------------- |
+| 200 OK           | Backup state could be determined and is returned in the response body.                          |
+| 404 Not Found    | Backup with given ID does not exist.                                                            |
+| 500 Server Error | All other errors. For example, ES returned error response when attempting to execute the query. |
+| 502 Bad Gateway  | Elasticsearch is not accessible, the request can be retried when it is back.                    |
 
 For example, the request could look like this:
 
@@ -128,7 +132,7 @@ Possible **states** of the backup:
 - `IN_PROGRESS`: Wait until the backup completes to use it for restore.
 - `FAILED`: Something went wrong when creating this backup. To find out the exact problem, use the [Elasticsearch get snapshot status API](https://www.elastic.co/guide/en/elasticsearch/reference/current/get-snapshot-status-api.html) for each of the snapshots included in the given backup.
 - `INCOMPATIBLE`: Backup is incompatible with the current Elasticsearch version.
-- `INCOMPLETE`: Backup is incomplete (e.g. when backup process was interrupted).
+- `INCOMPLETE`: Backup is incomplete (for example, the backup process was interrupted).
 
 **State** of the individual snapshot is a copy of [Elasticsearch state](https://www.elastic.co/guide/en/elasticsearch/reference/7.17/get-snapshot-api.html#get-snapshot-api-response-state).
 
@@ -146,7 +150,7 @@ Response:
 | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
 | 200 OK           | Backup list could be determined and is returned in the response body. Can be an empty response in case no backups were created yet. |
 | 404 Not Found    | Backup repository is not configured.                                                                                                |
-| 500 Server Error | All other errors, e.g. ES returned error response when attempting to execute the query.                                             |
+| 500 Server Error | All other errors. For example, ES returned error response when attempting to execute the query.                                     |
 | 502 Bad Gateway  | Elasticsearch is not accessible, the request can be retried when it is back.                                                        |
 
 For example, the request could look like this:
@@ -173,5 +177,5 @@ Response:
 | ---------------- | ---------------------------------------------------------------------------------------------------------------------------- |
 | 204 No Content   | All commands to delete corresponding ELS snapshots were successfully sent to ELS. ELS will continue deletion asynchronously. |
 | 404 Not Found    | Not a single snapshot corresponding to given ID exist.                                                                       |
-| 500 Server Error | All other errors, e.g. ES returned error response when attempting to execute the query.                                      |
+| 500 Server Error | All other errors. For example, ES returned error response when attempting to execute the query.                              |
 | 502 Bad Gateway  | Elasticsearch is not accessible, the request can be retried when it is back.                                                 |

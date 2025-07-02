@@ -20,8 +20,11 @@ To create a backup you must complete the following main steps:
 
 You can also optionally [back up your Web Modeler data](#back-up-web-modeler-data).
 
-:::caution
-You **must** execute these two steps in the correct sequential order to create a consistent backup. For example, you must complete backing up the WebApps first before proceeding with the Zeebe Cluster backup.
+:::caution before you begin
+
+- To create a consistent backup, you **must** complete backing up the WebApps first before backing up the Zeebe Cluster.
+- You must complete the [prerequisites](backup-and-restore.md#prerequisites) before creating a backup.
+
 :::
 
 ## Step 1: Back up WebApps {#back-up-webapps}
@@ -165,7 +168,7 @@ curl -XPOST "$TASKLIST_MANAGEMENT_API/actuator/backups" \
 
    </details>
 
-### 4. Wait for the backup `x` of Optimize to complete
+### 4. Wait for backup `x` of Optimize to complete
 
 This step uses the [Optimize management backup API](/self-managed/operational-guides/backup-restore/optimize-backup.md).
 
@@ -213,7 +216,7 @@ Alternatively as a one-line to wait until the state is `COMPLETED` using a while
 while [[ "$(curl -s "$OPTIMIZE_MANAGEMENT_API/actuator/backups/$BACKUP_ID" | jq -r .state)" != "COMPLETED" ]]; do echo "Waiting..."; sleep 5; done; echo "Finished backup with ID $BACKUP_ID"
 ```
 
-### 5. Wait for the backup `x` of Operate to complete
+### 5. Wait for backup `x` of Operate to complete
 
 This step uses the the [Operate management backup API](/self-managed/operational-guides/backup-restore/operate-tasklist-backup.md).
 
@@ -293,7 +296,7 @@ Alternatively as a one-line to wait until the state is `COMPLETED` using a while
 while [[ "$(curl -s "$OPERATE_MANAGEMENT_API/actuator/backups/$BACKUP_ID" | jq -r .state)" != "COMPLETED" ]]; do echo "Waiting..."; sleep 5; done; echo "Finished backup with ID $BACKUP_ID"
 ```
 
-### 6. Wait for the backup `x` of Tasklist to complete
+### 6. Wait for backup `x` of Tasklist to complete
 
 This step uses the [Tasklist management backup API](/self-managed/operational-guides/backup-restore/operate-tasklist-backup.md).
 
@@ -539,7 +542,7 @@ By default, the indices are prefixed with `zeebe-record`. If you have configured
 
    </Tabs>
 
-### 3. Wait for the backup `x` of the exported Zeebe indices to complete before proceeding
+### 3. Wait for backup `x` of the exported Zeebe indices to complete before proceeding
 
    <Tabs groupId="search-engine">
       <TabItem value="elasticsearch" label="Elasticsearch" default>
@@ -682,7 +685,7 @@ This step uses the [Zeebe management backup API](/self-managed/operational-guide
          </summary>
       </details>
 
-### 5. Wait for the backup `x` of Zeebe to complete before proceeding
+### 5. Wait for backup `x` of Zeebe to complete before proceeding
 
 This step uses the [Zeebe management backup API](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md).
 
