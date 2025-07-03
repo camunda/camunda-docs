@@ -11,7 +11,7 @@ import TabItem from "@theme/TabItem";
 
 Follow this guide to download and run an example project with a local instance of Camunda 8.
 
-You will run Camunda 8 in a local development environment, using c8run, use the Camunda Modeler to deploy and start an instance of a business process, and run workers written using either the Spring (Java) SDK or the Node.js (JavaScript) SDK to service the worker tasks in the process.
+You will run Camunda 8 in a local development environment, using Camunda 8 Run, use the Camunda Modeler to deploy and start an instance of a business process, and run workers written using either the Spring (Java) SDK or the Node.js (JavaScript) SDK to service the worker tasks in the process.
 
 ## Prerequisites
 
@@ -37,13 +37,13 @@ You will run Camunda 8 in a local development environment, using c8run, use the 
 
 ## Download
 
-Download the Camunda 8 developer bundle from the following website: [@TODO website goes here].
+Download the Camunda 8 developer bundle from the following website: [jhttps://camunda.com/developers/install-camunda-8](https://camunda.com/developers/install-camunda-8).
 
 The developer bundle includes the following components:
 
-- [c8run](/self-managed/setup/deploy/local/c8run.md) - a simplified, single-application Camunda configuration in a local development environment
+- [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md) - a simplified, single-application Camunda configuration in a local development environment
 - [Camunda Modeler](/components/modeler/about-modeler.md) - a desktop application for modeling BPMN, DMN, and Forms
-- [Getting Started project](https://github.com/camunda/camunda-8-get-started) - a git project containing a simple project with workers in both Java and JavaScript
+- [Getting Started project](https://github.com/camunda/camunda-8-get-started) - an example project with a simple BPMN process and workers in Java or JavaScript
 
 Links are provided to enable you to find more information. All of these components are included in the developer bundle, and you do not need to download them separately.
 
@@ -53,21 +53,52 @@ The example project, in the `camunda-8-get-started` directory, contains a BPMN p
 
 ![Example business process](./img/getting-started-guide-example-process.png)
 
-The service tasks are carried out by job workers. The `java` and `nodejs` directories contain code for job workers for this process model.
+The service tasks in the process are executed by job workers. The `java` and `nodejs` directories contain code for job workers for this process model.
 
 ## Instructions
 
-1. Unzip the developer bundle.
-2. Start c8run, by changing into the `c8run` directory and running the command `./start.sh`.
-3. Open the Camunda Modeler.
-4. In the Camunda Modeler, use `File > Open File...` to open the file `camunda-8-get-started/bpmn/diagram_1.bpmn`.
-5. Click on the "Play" icon on the bottom toolbar of the Modeler to deploy and start an instance of the process model. You do not need to set any variables for the process. Optionally: you can set a value for the `item` variable by pasting in: `{"item": "special widget"}`.
+<ol>
+  <li>
+    Unzip the developer bundle.
+  </li>
 
-   ![Start a new process instance in Camunda Modeler](./img/get-started-example-start-process.png)
+  <li>
+    Start Camunda 8 Run by changing into the directory and running the command:
+    ```bash
+cd c8run
+./start.sh
+```
+  </li>
+
+  <li>
+    Open the Camunda Modeler.
+  </li>
+
+  <li>
+    In the Camunda Modeler, use:
+    <pre><code>File &gt; Open File...</code></pre>
+    to open the file:
+    <pre><code>camunda-8-get-started/bpmn/diagram_1.bpmn</code></pre>
+  </li>
+
+  <li>
+    Click on the “Play” icon on the bottom toolbar of the Modeler to deploy and start an instance of the process model.
+
+    <p>You do not need to set any variables for the process.</p>
+
+    <p>Optionally, you can set a value for the <code>item</code> variable by pasting in:</p>
+    <pre><code>{`{"item": "special widget"}`}</code></pre>
+
+  </li>
+</ol>
+
+![Start a new process instance in Camunda Modeler](./img/get-started-example-start-process.png)
 
 A process instance is now started in the engine.
 
-Next, start the job workers to allow them to perform the work for the service tasks. The workers will connect to the engine and retrieve available work for the process instance.
+You can view the process instance in Operate, the visual operating tool, by going to [http://localhost:8080/operate](http://localhost:8080/operate). The login details are `demo`/`demo`.
+
+Next, start the job workers to allow them to perform the work for the service tasks. The workers are configured to connect to the locally-running engine and retrieve available work for the process instance.
 
 <Tabs groupId="language" defaultValue="javaspring" values={
 [
@@ -75,22 +106,52 @@ Next, start the job workers to allow them to perform the work for the service ta
 { label: 'Node.js', value: 'nodejs', },
 ] }>
 <TabItem value="javaspring">
-
 <ol>
-    <li>Change into the Spring SDK directory: `cd java`</li>
-    <li>Start the workers with the command: `mvn spring-boot:run`</li>
-</ol>
-   </TabItem>
-   <TabItem value="nodejs">
-   <ol>
-        <li>Change into the Node.js SDK directory: `cd nodejs`</li>
-        <li>Install dependencies with the command: `npm i`</li>
-        <li>Start the workers with the command: `npm start`</li>
+<li>
+Change into the Spring SDK directory:
+
+```bash
+cd java
+```
+
+      </li>
+      <li>
+        Start the workers with the command:
+
+```bash
+mvn spring-boot:run
+```
+
+      </li>
     </ol>
-   </TabItem>
+
+  </TabItem>
+
+  <TabItem value="nodejs">
+    <ol>
+      <li>
+        Change into the Node.js SDK directory:
+```bash
+cd nodejs
+```
+      </li>
+      <li>
+        Install dependencies with the command:
+```bash
+npm i
+```
+      </li>
+      <li>
+        Start the workers with the command:
+```bash
+npm start
+```
+      </li>
+    </ol>
+  </TabItem>
    </Tabs>
 
-You will now see the workers processing the jobs for the process instance.
+The workers start, connect to the engine, and request work. You will see the workers processing the jobs for the process instance.
 
 <Tabs groupId="language" defaultValue="javaspring" values={
 [
