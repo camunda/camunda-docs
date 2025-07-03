@@ -11,7 +11,7 @@ import SaasPrereqs from './react-components/\_saas-prerequisites.md'
 
 In Camunda 8, **user task listeners** allow you to run custom logic in response to changes to a user task, for example when it's creating, assigning, or completing.
 
-Camunda 8 user task listeners facilitate integration of custom logic into your workflows. For more details about user task listeners, please check the [user task listeners concept](../components/concepts/user-task-listeners).
+Camunda 8 user task listeners facilitate integration of custom logic into your workflows. For more details about user task listeners, please check the [user task listeners concept](../components/concepts/user-task-listeners.md).
 
 This guide walks you through defining a task listener using **Camunda Modeler**, implementing a task listener as a job worker, and verifying the result in **Operate** and **Tasklist**.
 
@@ -26,7 +26,7 @@ You must have access to a Camunda 8 SaaS account.
    <SaasPrereqs/>
 </details>
 
-You must also know how to model a process with a user task. If you haven't done this before, please first follow the steps in our guide to [get started with human task orchestration](./orchestrate-human-tasks/).
+You must also know how to model a process with a user task. If you haven't done this before, please first follow the steps in our guide to [get started with human task orchestration](./getting-started-orchestrate-human-tasks.md).
 
 Additionally, you need the following:
 
