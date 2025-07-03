@@ -37,12 +37,18 @@ Additionally, you need the following:
 
 ## Configuring a user task listener
 
-### Step 1: Open your process in Modeler
+### Step 1: Create a process with a user task in Modeler
 
 1. Launch **Camunda Modeler**.
-2. Open your BPMN file (e.g., `hiring-process.bpmn`).
+2. Create a new BPMN file.
+3. Add a user task named `Review application`.
 
-<!---![camunda modeler with user task selected](path-to-screenshot1.png)--->
+:::note
+In this guide, you can also use the example BPMN from the repo located in `camunda-platform-tutorials/quick-start/task-listeners/task-listener-java/src/main/resources/Quick_Start_Task_Listeners.bpmn`.
+In that case, just explore the BPMN using the steps below, but do not adjust the model in steps 2-4.
+:::
+
+<!---![camunda modeler with user task](path-to-screenshot1.png)--->
 
 ### Step 2: Select the user task
 
