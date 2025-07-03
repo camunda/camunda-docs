@@ -60,7 +60,7 @@ To resolve this issue, check if you can connect to Zeebe through another client,
 
 You try to connect (i.e., to deploy) to a local Zeebe instance, and Desktop Modeler tells you it "cannot find a running Zeebe."
 
-Ensure that your local Zeebe instance is running. If you don't have one installed, consider [c8run](/self-managed/setup/deploy/local/c8run.md), a lightweight all-in-one distribution.
+Ensure that your local Zeebe instance is running.
 
 ## Resolve a general Zeebe connection issue
 
