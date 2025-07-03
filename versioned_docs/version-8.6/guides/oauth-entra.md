@@ -277,6 +277,6 @@ curl -X POST https://login.microsoftonline.com/{tenant-id}/oauth2/v2.0/token \
 - [Microsoft Entra ID Documentation](https://docs.microsoft.com/en-us/azure/active-directory/)
 - [OAuth 2.0 Client Credentials Flow](https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-client-creds-grant-flow)
 - [Camunda 8 Self-Managed Documentation](/self-managed/about-self-managed.md)
-- [Zeebe Client Java Documentation](/apis-tools/java-client/)
+- [Zeebe Client Java Documentation](/apis-tools/java-client)
 
 For additional support, refer to the Camunda documentation and ensure all configurations comply with your organization's security policies.
