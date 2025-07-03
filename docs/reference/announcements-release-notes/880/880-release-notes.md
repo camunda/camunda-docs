@@ -49,7 +49,7 @@ To learn more about using the Orchestration Cluster API, see [Orchestration Clus
 
 ### Connectors <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span> {#connectorsalpha6}
 
-#### `GetJson` intrinsic function
+#### `getJson` intrinsic function
 
 <!-- https://github.com/camunda/camunda-docs/pull/5934 -->
 
@@ -60,7 +60,7 @@ A new `getJson` function accepts a document and an optional FEEL expression para
 
 To learn more about using connector intrinsic functions, see [intrinsic functions](/components/connectors/use-connectors/intrinsic-functions.md).
 
-### Get started guides include BPMN and service worker examples <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+### Get started guides updated <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
 <!-- https://github.com/camunda/product-hub/issues/2751 -->
 
