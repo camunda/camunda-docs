@@ -7,6 +7,8 @@ description: "In Camunda 8, user task listeners allow you to run custom logic wh
 <span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--medium">Time estimate: 15 minutes</span>
 
+import SaasPrereqs from './react-components/\_saas-prerequisites.md'
+
 In Camunda 8, **user task listeners** allow you to run custom logic in response to changes to a user task, for example when it's creating, assigning, or completing.
 
 Camunda 8 user task listeners facilitate integration of custom logic into your workflows. For more details about user task listeners, please check the [user task listeners concept](/components/concepts/user-task-listeners).
@@ -17,10 +19,19 @@ This guide walks you through defining a task listener using **Camunda Modeler**,
 
 ## Prerequisites
 
-- Camunda 8 account (SaaS or Self-Managed)
-- Access to **Operate**, **Tasklist**, and **Web Modeler**
-- A simple BPMN process with at least one user task
-<!--- Add a downloadable BPMN diagram here--->
+You must have access to a Camunda 8 SaaS account.
+
+<details>
+   <summary>Have you signed up for Camunda yet?</summary>
+   <SaasPrereqs/>
+</details>
+
+Additionally, you need the following:
+
+- Java ≥ 8
+- Maven
+- IDE (IntelliJ, VSCode, or similar)
+- Download and unzip or clone the [repo](https://github.com/camunda/camunda-platform-tutorials), then `cd` into `camunda-platform-tutorials/quick-start/task-listeners/task-listener-java`
 
 ## Configuring a user task listener
 
