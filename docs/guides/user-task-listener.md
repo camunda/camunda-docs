@@ -53,7 +53,7 @@ In that case, just explore the BPMN using the steps below, but do not adjust the
 ### Step 2: Select the user task
 
 1. Click the **user task** (e.g., “Review application”).
-2. In the right-hand **properties panel**, scroll to **User Task**.
+2. In the right-hand **properties panel**, scroll to **Task listeners**.
 
 <!--- ![properties panel with user task details](path-to-screenshot2.png)--->
 
