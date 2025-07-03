@@ -4,25 +4,26 @@ title: MCP Remote Client connector
 sidebar_label: MCP Remote Client connector
 ---
 
-:::note
-Due to the overhead of managing HTTP connections described below, the MCP Remote Client connector is primarily intended
-for prototyping and testing purposes. Consider using the MCP Client connector instead.
-:::
+The MCP Remote Client connector allows to connect an AI agent to a remote MCP server by configuring
+a connection to
+a [HTTP with SSE](https://modelcontextprotocol.io/specification/2024-11-05/basic/transports#http-with-sse) (Server-Sent
+Events) endpoint.
 
-The MCP Remote Client connector allows you to connect to a remote MCP client by configuring
-an [HTTP with SSE](https://modelcontextprotocol.io/specification/2024-11-05/basic/transports#http-with-sse) (Server-Sent
-Events) endpoint provided by an MCP server.
+## Limitations
 
 As the MCP client functionality is handled by a stateless [Job worker](../../../concepts/job-workers.md), each
-activation of an activity using the MCP Remote Client demands to open a dedicated HTTP connection/SSE subscription to
+activation of an activity using the MCP Remote Client requires openint a dedicated HTTP connection/SSE subscription to
 the MCP server.
 
-For example, each action in a process would open/close a dedicated MCP client connection to the remote
-server:
+For example, each of the following actions in an agentic AI feedback loop would open/close a dedicated MCP client
+connection to the remote server:
 
 1. Tool discovery
 2. Tool call
 3. Every further tool call
+
+Due to this overhead, the MCP Remote Client connector is primarily intended for prototyping and testing purposes.
+Consider using the [MCP Client](./mcp-client-connector.md) connector instead.
 
 ## Modeling
 

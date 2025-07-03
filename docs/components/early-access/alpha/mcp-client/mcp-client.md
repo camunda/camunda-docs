@@ -15,6 +15,16 @@ started [STDIO](https://modelcontextprotocol.io/specification/draft/basic/transp
 using the [HTTP with SSE](https://modelcontextprotocol.io/specification/2024-11-05/basic/transports#http-with-sse)
 transport.
 
+![MCP Client integration architecture](img/mcp-clients-architecture.png)
+
+- [STDIO](https://modelcontextprotocol.io/specification/draft/basic/transports#stdio) (standard input/output) servers
+  are operating system processes directly started and managed by the connector runtime. Communication with these servers
+  is done via standard input and output streams.
+- Remote MCP servers are available via HTTP. Multiple standards
+  exist ([HTTP with SSE](https://modelcontextprotocol.io/specification/2024-11-05/basic/transports#http-with-sse),
+  [Streamable HTTP](https://modelcontextprotocol.io/specification/2025-06-18/basic/transports#streamable-http)).
+  Currently, only HTTP with SSE is supported by the MCP client connectors.
+
 :::note
 The MCP client integration currently only supports tool-related functionality — other MCP features such as resources or
 prompts are not supported.
@@ -32,8 +42,6 @@ Tool discovery and tool calling is done through the ad-hoc sub-process rather th
   a local filesystem could be connected to a Camunda 8 SaaS instance.
 - More advanced modeling use cases involving other BPMN elements. For example, user tasks can be used to combine MCP
   clients with an approval flow for individual tool calls (see [human-in-the-loop](#human-in-the-loop)).
-
-![MCP Client integration architecture](img/mcp-clients-architecture.png)
 
 The following sequence diagram illustrates the process of tool discovery and tool calling with MCP clients. Each actor
 in the diagram can potentially run in a different deployment, making it truly distributed.
@@ -215,17 +223,16 @@ example):
 5. Create a default flow to a user task for the confirmation. Set up a form for the user task to enable a decision on
    whether the tool call should be executed.
 
+   - A checkbox could be added to the form to allow the user to confirm or deny the tool call.
    - A text view could present the tool call with a template such as the following:
 
-     ```
-     # MCP Tool Call Confirmation
+   ```
+   # MCP Tool Call Confirmation
 
-     The model requested to call the following MCP tool:
+   The model requested to call the following MCP tool:
 
-     {{toolCall.params}}
-     ```
-
-   - A checkbox could be added to the form to allow the user to confirm or deny the tool call
+   {{toolCall.params}}
+   ```
 
 6. Configure a second exclusive gateway after the user task to decide if the tool call should be executed depending on
    the value of the checkbox added to the user task.

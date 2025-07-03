@@ -9,10 +9,10 @@ This connector is not directly available on Camunda 8 SaaS. Instead, you can con
 configured to run the MCP Client connector to your Camunda 8 SaaS instance.
 :::
 
-The MCP Client connector allows you to configure MCP clients to be started as part of the connector runtime. As the
-runtime takes care of managing the MCP client connections (opposed to the Job worker in the MCP Remote Client
-connector), this approach allows using both STDIO and remote MCP servers without the overhead of opening and closing
-connections for every MCP client interaction.
+The MCP Client connector integration allows configuring MCP clients to be started as part of the connector runtime. As
+the runtime takes care of managing the MCP client connections (opposed to the Job worker in the [MCP Remote Client
+connector](./mcp-remote-client-connector.md#limitations)), this approach allows using both STDIO and remote MCP servers
+without the overhead of opening and closing connections for every MCP client interaction.
 
 ## Runtime Configuration
 
@@ -62,6 +62,7 @@ camunda:
 
             # Connection to a remote HTTP/SSE MCP server
             some-remote-server:
+              enabled: false
               http:
                 sse-url: https://example.com/mcp/sse
 ```
@@ -74,12 +75,13 @@ this for your specific use case varies on the connector runtime you are using.
 1. Download and extract the latest [Camunda 8 Run](../../../../self-managed/setup/deploy/local/c8run.md) release (at
    least version 8.8.0-alpha6).
 2. Before starting Camunda 8 Run, create a config file (for example `mcp-clients.yml`) in the same directory as
-   `connectors-application.properties` and add the MCP Client configuration as shown above.
+   `connectors-application.properties` and add the MCP Client configuration as shown above. Adapt the configuration as
+   needed.
 3. Edit `connectors-application.properties` and add the following line to include your custom config file:
    ```properties
    spring.config.import=file:./mcp-client.yml
    ```
-4. Start Camunda 8 Run as [normally](../../../../self-managed/setup/deploy/local/c8run.md#install-and-start-camunda-8-run)
+4. [Start Camunda 8 Run](../../../../self-managed/setup/deploy/local/c8run.md#install-and-start-camunda-8-run)
 5. While startup, you can follow `logs/connectors.log`. If configured correctly, you should see log messages for the
    initialization of the configured MCP clients and the registration of the MCP Client connector:
    ```log
