@@ -170,6 +170,7 @@ export ZEEBE_TOKEN_SCOPE='your-entra-application-id/.default'
 The **Camunda Operate connector** allows you to interact with [Camunda Operate](https://camunda.com/platform/operate/) in your BPMN process to fetch process execution data.
 
 #### Tasklist
+
 Tasklist is a ready-to-use application to rapidly implement business processes alongside.
 
 #### Optimize
