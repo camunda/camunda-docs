@@ -164,6 +164,7 @@ export ZEEBE_TOKEN_SCOPE='your-entra-application-id/.default'
 ```
 
 ### For Camunda Components:
+
 #### Operate
 The **Camunda Operate connector** allows you to interact with [Camunda Operate](https://camunda.com/platform/operate/) in your BPMN process to fetch process execution data.
 
