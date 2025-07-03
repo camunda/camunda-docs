@@ -20,24 +20,11 @@ the MCP server.
 For example, each action in a process would open/close a dedicarted MCP client connection to the remote
 server:
 
-1. tool discovery
-2. tool call
-3. every subsequent tool calls
+1. Tool discovery
+2. Tool call
+3. Every further tool call
 
-## Client/connection caching
-
-To avoid the unnecessary overhead described above, the MCP Remote Client connector will keep MCP clients/HTTP connection
-in a cache for a configured amount of time and re-use these connections for calls to the same MCP server. On a
-[custom connector runtime](../../../connectors/custom-built-connectors/connector-sdk.md#runtime-environments), this
-behavior can be configured with the following properties:
-
-```properties
-camunda.connector.agenticai.mcp.remote-client.client.cache.enabled=true
-camunda.connector.agenticai.mcp.remote-client.client.cache.expire-after=PT10M
-camunda.connector.agenticai.mcp.remote-client.client.cache.maximum-size=15
-```
-
-## Usage
+## Modeling
 
 1. Configure an AI agent tools feedback loop as described in
    the [example integration](../../../connectors/out-of-the-box-connectors/agentic-ai-aiagent-example.md). Do not
@@ -48,5 +35,30 @@ camunda.connector.agenticai.mcp.remote-client.client.cache.maximum-size=15
    installed in step 2.
 4. In the **HTTP Connection** section of the properties panel, configure the **SSE URL** to point to the HTTP with SSE
    endpoint of your MCP server (typically ending in `/sse`)
-5. Execute your process. The tool definitions provided by the MCP server should be listed in the agent context variable,
-   and requests to the agent should be able to call the tools provided by the MCP server.
+5. Execute your process. You should see the tool discovery tool calls being routed to the MCP client service task, and
+   tool definitions provided by the MCP server should be listed in the agent context variable. As a result, the agent
+   should be able to call the tools provided by the MCP server.
+
+## Client/connection caching
+
+:::note
+Configuration properties can be defined as environment variables
+using [Spring Boot conventions](https://docs.spring.io/spring-boot/reference/features/external-config.html#features.external-config.typesafe-configuration-properties.relaxed-binding.environment-variables).
+To define an environment variable, convert the configuration property to uppercase, remove any dashes `-`, and replace
+any delimiters `.` with underscore `_`.
+
+For example, the property `camunda.connector.agenticai.mcp.remote-client.client.cache.expire-after` is represented by
+the environment variable `CAMUNDA_CONNECTOR_AGENTICAI_MCP_REMOTECLIENT_CLIENT_CACHE_EXPIREAFTER`.
+:::
+
+To avoid the unnecessary overhead described above, the MCP Remote Client connector will keep MCP clients/HTTP connection
+in a cache for a configured amount of time and re-use these connections for calls to the same MCP server. In a
+self-managed setup or
+a [custom connector runtime](../../../connectors/custom-built-connectors/connector-sdk.md#runtime-environments), this
+behavior can be configured with the following properties:
+
+```properties
+camunda.connector.agenticai.mcp.remote-client.client.cache.enabled=true
+camunda.connector.agenticai.mcp.remote-client.client.cache.expire-after=PT10M
+camunda.connector.agenticai.mcp.remote-client.client.cache.maximum-size=15
+```
