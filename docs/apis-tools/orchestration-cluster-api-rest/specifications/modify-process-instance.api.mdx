@@ -1,0 +1,284 @@
+---
+id: modify-process-instance
+title: "Modify process instance"
+description: "Modifies a running process instance."
+sidebar_label: "Modify process instance"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWd9z47YR/ld28NJkSlFy6qQXPXRG9flaJXcXj61LHiQ/QORKRAwCDABK1mj0v3cWICmKlO5Hc+2Tb8ZzNrHYxe5+32K53DPH15aN5+zO6AStBaGs4ypB9hgxXaDhTmg1TdmY5ToVq10lN63FIpaiTYwoSI6N2TuSEmiBgymVEmoNRUd1vFCzTFgw+EeJ1kHCFSRaOS4U5KV0opDohU2ZkFYLTgNPnNhwh8AVoMQclQO9Apdho1+bhXIaHJpcqErUb8PGNG05KogXaqE+WARHx3EaDBZcGOC9I4PLuANhwboyeQKtTo5hwGn9RI9KJZRDlWIKBXdZvFBvtAF85nkhMYIlJry0wYdnh0ZxCXZnHeakW2kHfMOF5EuJpDXVaNVfHBi0hVYpcAv4XGDiMI0XikWs4Ibn6NBQCvdM8RzZmBWnKfoZdyxigpJDZ2IRo8ALgykbO1NiN4OzDOEJd93onobCZrqUKSwR8pDwNGYRs0mGOWfjPXO7go5inRFqzQ6Hx2AVrfunTnck0T0EIQCVoyVeFFIkHnnD3y0dat9XrZe/Y+IoCIZw6gRaWm0we48rNEgQHe87Hk7A1Ive0yTTFhUsd97h0qIJTm6FlORiwY0HG5cSDCbapAReS1BVa1gZnQcENbZjeFdaR1v/ASMQKwriRqR12ioPCCprNCxiK21y7sKjH65ZxHKhRF7mbHx1iFgN/WmLEn2n2qsQlpZ0vG0mkqzGqm0lrlabglCVlE10QdRVafVgw40gNLb3JQZpV3x0hBvDPcYc5l9wshaFOphqjtYyciHflQaqUF27BOTp6xrHX2CqRm3Eav//TOj/yxh23f6KJk8j2Aj3Hfvp4Zf3kOqkPEbOcyLUAieoyFJsj/ZWVAwzBKO1ax4HXF0qKPFCTR3kFWE4eKPB7YhK3lF5zcecF0WALSf+DjZclggrbjPinqcYT1NBTnB513I2VJrTyB6obOkCPx9Bp3TpBKAf8IV6i3yDgHnhdnTLhIXOPqH8g7XUS7oUPhawdg2poErwWPFSUg1hh0O7xM9bCX6MmBNOYn1Pd2/zX/tw99pozTptbiuytW6WszFrXR/11lawjnGsbpRezEBQGh/QUbgGV52gKdz2dWyFy0S4lp+F9YW5JxOOtFArqbfhPPHHYzm46sbyWG5asexEMbRA4f6a9Gu3j2jTpHzlot7o/Z/Vlk8aPV+fPwWZTxbqs541/cX5LLWMfl66ZmfSwg4+YZ/e3Nnjz0SNmw2R+G50fd71XoclbKurOkTsejS6uNO3FZByx+sWcsOl8DG60FEVRi8l5n/td1bdLukuSEKKjgtZ1WQqyRUoQg2e37+5gR+vv//74zeZc4UdD4fb7TY2q2SAqXDaxNqsh2aV0A/JfRvDLENDdXznS35Tq+GIHbAFJhRaIn9VBf1hKPMntL3QGITVbifa6rVKI3rQn8CH+ymIFJUTqx2Bvmf6pNbypS7deCm5emJHkPSNdq3YMs+5affYLQN0IznuyjZVz/eKf/uup5tg8e/Z7A6CCkh0itWtLGxtKG63mNejUcRy/hz++mE0OpBOyvhneELltpBceWh13aH3OW2wwo93rHm9/DqZ0UasRdduzDqEpYevg0eBl9dfQkXi1EqX6oVTL5x64dRFTn1/7pKaKKAo+0EHGqMN6CQpjUH/gikbwtW2qxlBwOIL11649sK1PtcOEcvRZZqGsoW2Hjo02BuzYUWnQX1MO9z3p4GHYd7qWmlsh2ZTzxBLI9mY7QOpDuPhcJ9p6w7jfaGNOww3lLGTiQEtB/LVoJI64TILB+snlxZoUFk7fcPzUqUcXsH97cMM/sUdbvnOB5tMnqp+NXo1OquVRC9onNxNIXgYoNkqF7Va4v1ZtUH4cxT7EafFpDTC7R5oWwjPErlBMykpPw1kKnteO/0dhFhU/fKmBtJPv808FqjU3R/Hp7dhnnxp3Dm6NDKcn4zLjsA9P+Wan46G2nOS5r3r8eOzgcEVSVx4152ffzk86vZ0W2kft4oM/QzQ8dHYkLJRfNUn3t3U149E53mpPOjpXVa4DHgro4ksraNMRkyKBJX14a0m6rXY27ACvwaLcBUTGgNl6rtjLVxWLuNE58MkbGv+X0q9HOZcqGFlwg5vJu8+vH89Gbyd3ty+f7gdXMWj2D07n3Xids5V6xxhaNPrUrs+749X58v3mP/n95iK3g6f3bCQXCgqOB4e+6pEz1mvRLOIjc9+sjmp0o9RVWnnbL9fcosfjDwc6PEfJZodG88fj0T25EqFpd9TNl5xabufedoY+ea+mp18C3/i489Z5+sJlNr5OiNL+otF7MlT/YzbnvYZ8hSN9yII3oSzDmak7qio96HoENU7JkmChbsge9JCUolq7tO7Xx5mVIerj1S5Tmmv4Vv6bMa34fC6aMZ1/tmeSa7WJV+TbNBJ//4DRO1e4w==
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Modify process instance"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/process-instances/{processInstanceKey}/modification"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Modifies a running process instance.
+This request can contain multiple instructions to activate an element of the process or
+to terminate an active instance of an element.
+
+Use this to repair a process instance that is stuck on an element or took an unintended path.
+For example, because an external system is not available or doesn't respond as expected.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "processInstanceKey",
+      in: "path",
+      required: true,
+      description: "The key of the process instance that should be modified.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            operationReference: {
+              description:
+                "A reference key chosen by the user that will be part of all records resulting from this operation. Must be > 0 if provided.\n",
+              type: "integer",
+              format: "int64",
+              minimum: 1,
+            },
+            activateInstructions: {
+              description:
+                "Instructions describing which elements should be activated in which scopes and which variables should be created.",
+              type: "array",
+              items: {
+                description:
+                  "Instructions describing an element that should be activated.",
+                type: "object",
+                properties: {
+                  elementId: {
+                    description:
+                      "The ID of the element that should be activated.",
+                    type: "string",
+                  },
+                  variableInstructions: {
+                    description:
+                      "Instructions describing which variables should be created.",
+                    type: "array",
+                    items: {
+                      type: "object",
+                      description:
+                        "Instructions describing which variables should be created.",
+                      properties: {
+                        variables: {
+                          description:
+                            "JSON document that will instantiate the variables for the root variable scope of the process instance.\nIt must be a JSON object, as variables will be mapped in a key-value fashion.\n",
+                          additionalProperties: true,
+                          type: "object",
+                        },
+                        scopeId: {
+                          description:
+                            "The ID of the element in which scope the variables should be created.\nLeave empty to create the variables in the global scope of the process instance\n",
+                          type: "string",
+                          default: "",
+                        },
+                      },
+                      required: ["variables"],
+                      title: "ModifyProcessInstanceVariableInstruction",
+                    },
+                  },
+                  ancestorElementInstanceKey: {
+                    description:
+                      "The key of the ancestor scope the element instance should be created in.\nSet to -1 to create the new element instance within an existing element instance of the\nflow scope.\n",
+                    type: "string",
+                    default: -1,
+                  },
+                },
+                required: ["elementId"],
+                title: "ProcessInstanceModificationActivateInstruction",
+              },
+            },
+            terminateInstructions: {
+              description:
+                "Instructions describing which elements should be terminated.",
+              type: "array",
+              items: {
+                type: "object",
+                description:
+                  "Instructions describing which elements should be terminated.",
+                properties: {
+                  elementInstanceKey: {
+                    description:
+                      "The ID of the element that should be terminated.",
+                    type: "string",
+                  },
+                },
+                required: ["elementInstanceKey"],
+                title: "ProcessInstanceModificationTerminateInstruction",
+              },
+            },
+          },
+          title: "ProcessInstanceModificationInstruction",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "204": { description: "The process instance is modified." },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The process instance is not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

@@ -25,3 +25,7 @@ Get started with agentic orchestration.
 
 - [Design and architecture](design-architecture.md): Plan and design your agentic orchestration solutions using recommended architecture guidelines.
 - [AI agents](ai-agents.md): Start building and integrating AI agents into your end-to-end processes.
+
+:::info Camunda Academy
+Register for the free [Camunda 8 - Agentic Orchestration](https://academy.camunda.com/path/c8-lp-agentic) course and learn how to model, deploy, and manage AI agents seamlessly into your end-to-end processes.
+:::

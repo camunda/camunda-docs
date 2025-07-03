@@ -64,6 +64,12 @@ If performance or efficiency matters in your scenario, there are two rules about
 
 Not transmitting all variables saves resources and bandwidth, but serves another purpose as well: upon job completion, these variables are written to the process and might overwrite existing variables. If you have parallel paths in your process (e.g. [parallel gateway](/components/modeler/bpmn/parallel-gateways/parallel-gateways.md), [multiple instance](/components/modeler/bpmn/multi-instance/multi-instance.md)) this can lead to race conditions that you need to think about. The less data you write, the smaller the problem.
 
+While the easiest way is to avoid large variables, one option to keep things light during job activation is to use the `FetchVariables` parameter.
+Remember, by default, when this parameter is omitted, the job payload will contain _all_ variables visible within the scope ([see the variables documentation for more on that](../../concepts/variables.md).
+This could mean tens or more variables, of arbitrary size, and it can be difficult to estimate how much this will represent in general.
+
+We recommend you use the `FetchVariables` parameter, and only fetch the variables which your job handler needs. This will keep the amount of data transferred to a minimum, and will greatly help performance.
+
 ## Scaling workers
 
 If you need to process a lot of jobs, you need to think about optimizing your workers.
@@ -93,6 +99,22 @@ With a reactive HTTP client you will write code to issue the REST request, but t
 ### Recommendation
 
 In general, using reactive programming is favorable in most situations where parallel processing is important. However, we sometimes observe a lack of understanding and adoption in developer communities, which might hinder adoption in your environment.
+
+## Performance best-practices
+
+Most of the business logic in your process models will likely end up being worked on as a job. As such, optimizing how jobs are handled in Zeebe can have
+a big impact on the performance of your system as a whole. Here are some best practices to keep things running smoothly.
+
+### Reduce latency by enabling job streaming
+
+We recommend enabling [job streaming](../../concepts/job-workers.md#job-streaming) in order to reduce latency to a maximum. Essentially, when using long polling,
+your job workers have to periodically poll every partition in your Zeebe cluster to check if there are new jobs available. Additionally, they have to
+balance polling aggressively with minimizing their impact on the cluster, which still has to handle all requests, even when no jobs are available. In large clusters, this can add a noticeable delay in the order of seconds, which can be unacceptable for certain workloads.
+
+> [!Note]
+> You can read more about the difference between long polling and job streaming [in this blog post](https://camunda.com/blog/2024/03/reducing-job-activation-delay-zeebe/).
+
+As such, we recommend using job streaming if possible.
 
 ## Client library examples
 

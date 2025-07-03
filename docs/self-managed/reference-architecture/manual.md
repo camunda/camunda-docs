@@ -65,7 +65,7 @@ The orchestration core is packaged as a single JAR file and includes the followi
 The core facilitates:
 
 1. **gRPC communication**: For client workers.
-2. **HTTP endpoints**: Used by the Camunda 8 REST API and Web UI.
+2. **HTTP endpoints**: Used by the Orchestration cluster REST API and Web UI.
 
 Both types of endpoints can be routed through a load balancer to maintain availability, ensuring that the system remains accessible even if a machine becomes unavailable. While using a load balancer is optional, it is recommended for enhanced availability and security. Alternatively, you can expose static machines, ports, and IPs directly. However, direct exposure is generally discouraged due to security concerns.
 
