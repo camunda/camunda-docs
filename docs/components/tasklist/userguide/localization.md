@@ -6,7 +6,7 @@ description: "Use the Tasklist interface in your local language."
 
 When creating processes for audiences in non-English speaking regions, you can localize the Tasklist interface to the appropriate language.
 
-To do this, design [user task forms](/guides/utilizing-forms.md) in the local language, and set the Tasklist interface to use the same language.
+To do this, design [user task forms](/components/modeler/forms/utilizing-forms.md) in the local language, and set the Tasklist interface to use the same language.
 
 Tasklist supports the following four languages by default:
 

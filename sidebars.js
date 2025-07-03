@@ -1,41 +1,18 @@
 module.exports = {
   Guides: [
     "guides/introduction-to-camunda",
+    "guides/getting-started-java-spring",
+    "guides/setting-up-development-project",
     {
-      "Get started": [
-        "guides/getting-started-java-spring",
-        "guides/model-your-first-process",
-        {
-          "Orchestration use cases": [
-            "guides/orchestrate-human-tasks",
-            "guides/orchestrate-apis",
-            "guides/orchestrate-microservices",
-          ],
-        },
+      "Orchestration use cases": [
+        "guides/orchestrate-human-tasks",
+        "guides/orchestrate-apis",
+        "guides/orchestrate-microservices",
       ],
     },
     {
-      Design: [
-        "guides/automating-a-process-using-bpmn",
-        "guides/create-decision-tables-using-dmn",
-        "guides/utilizing-forms",
-      ],
-      Automate: [
-        "guides/create-cluster",
-        "guides/setting-up-development-project",
-        "guides/setup-client-connection-credentials",
-        "guides/configuring-out-of-the-box-connectors",
-        "guides/use-connectors-in-hybrid-mode",
-        "guides/host-custom-connectors",
-      ],
-      Improve: [
-        "guides/improve-processes-with-optimize",
-        {
-          "DevOps lifecycle": [
-            "guides/devops-lifecycle/integrate-web-modeler-in-ci-cd",
-          ],
-        },
-        "guides/use-shared-project-for-organization-wide-collaboration",
+      "DevOps lifecycle": [
+        "guides/devops-lifecycle/integrate-web-modeler-in-ci-cd",
       ],
     },
     {
@@ -185,6 +162,7 @@ module.exports = {
           "Web Modeler": [
             "components/modeler/web-modeler/launch-web-modeler",
             "components/modeler/web-modeler/model-your-first-diagram",
+            "components/modeler/web-modeler/use-shared-project-for-organization-wide-collaboration",
             "components/modeler/web-modeler/context-pad",
             "components/modeler/web-modeler/git-sync",
             "components/modeler/web-modeler/import-diagram",
@@ -281,6 +259,7 @@ module.exports = {
         {
           BPMN: [
             "components/modeler/bpmn/modeler-bpmn",
+            "components/modeler/bpmn/automating-a-process-using-bpmn",
             "components/modeler/bpmn/bpmn-primer",
             "components/modeler/bpmn/bpmn-coverage",
             "components/modeler/bpmn/data-flow",
@@ -442,10 +421,12 @@ module.exports = {
             id: "components/connectors/use-connectors/index",
           },
           items: [
+            "components/connectors/use-connectors/configuring-out-of-the-box-connectors",
             "components/connectors/connector-types",
             "components/connectors/use-connectors/inbound",
             "components/connectors/use-connectors/outbound",
             "components/connectors/use-connectors/intrinsic-functions",
+            "components/connectors/use-connectors-in-hybrid-mode",
           ],
         },
         {
@@ -539,6 +520,7 @@ module.exports = {
             id: "components/connectors/custom-built-connectors/build-connector",
           },
           items: [
+            "components/connectors/custom-built-connectors/host-custom-connectors",
             {
               type: "category",
               label: "Connector templates",
@@ -565,6 +547,7 @@ module.exports = {
         id: "components/optimize/what-is-optimize",
       },
       items: [
+        "components/optimize/improve-processes-with-optimize",
         "components/optimize/userguide/collections-dashboards-reports",
         "components/optimize/userguide/user-permissions",
         "components/optimize/userguide/data-sources",
@@ -660,6 +643,7 @@ module.exports = {
             "components/console/manage-clusters/create-cluster",
             "components/console/manage-clusters/manage-cluster",
             "components/console/manage-clusters/cluster-connectors",
+            "components/console/manage-clusters/setup-client-connection-credentials",
             "components/console/manage-clusters/manage-api-clients",
             "components/console/manage-clusters/manage-secrets",
             "components/console/manage-clusters/manage-alerts",

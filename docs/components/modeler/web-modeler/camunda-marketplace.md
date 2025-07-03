@@ -48,7 +48,7 @@ After downloading, you may view a modal reading **Connector already exists**:
 - By clicking **Replace resource**, you are replacing the current connector. If you are downloading a connector from the Camunda Marketplace, it is read-only and you can view it if you are opening the template using the Camunda template editor. To edit the connector, click **Customize template** to duplicate this template.
 
 :::note
-You can also host custom connectors developed with [Connector SDK](/components/connectors/custom-built-connectors/connector-sdk.md). Instead of viewing **Download to project**, it may read [**Learn more about self-hosted connectors**](/guides/host-custom-connector.md).
+You can also host custom connectors developed with [Connector SDK](/components/connectors/custom-built-connectors/connector-sdk.md). Instead of viewing **Download to project**, it may read [**Learn more about self-hosted connectors**](/components/connectors/custom-built-connectors/host-custom-connector.md).
 
 For the out-of-the-box connectors provided by Camunda, the connectors Bundle project provides a set of all connector templates related to one release version. These are templates that are reusing the Camunda connectors via the [Protocol connector Approach](/components/connectors/protocol/rest.md).
 

@@ -158,7 +158,7 @@ The [KPI Wizard](/components/optimize/userguide/process-KPIs.md) is the new way 
 
 <!-- https://github.com/camunda/product-hub/issues/1999 -->
 
-You are now able to consume the [secrets](/guides/use-connectors-in-hybrid-mode.md#using-saas-secrets) from the console in your own custom connector connected to our Camunda 8 SaaS platform.
+You are now able to consume the [secrets](/components/connectors/use-connectors-in-hybrid-mode.md#using-saas-secrets) from the console in your own custom connector connected to our Camunda 8 SaaS platform.
 
 ### Multi-region: Productize the two regions, Active-Active, Self-Managed setup (Zeebe, Operate, Tasklist) <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 

@@ -29,7 +29,7 @@ Deployment guides for Camunda 8 components are available in the [Self-Managed se
 
 :::
 
-[Camunda 8](https://camunda.io) orchestrates complex business processes that span people, systems, and devices. With Camunda, business users collaborate with developers to model and [automate end-to-end processes using BPMN-powered flowcharts](/guides/automating-a-process-using-bpmn.md), alongside DMN decision tables that promote speed, scale, and decision logic.
+[Camunda 8](https://camunda.io) orchestrates complex business processes that span people, systems, and devices. With Camunda, business users collaborate with developers to model and [automate end-to-end processes using BPMN-powered flowcharts](/components/modeler/bpmn/automating-a-process-using-bpmn.md), alongside DMN decision tables that promote speed, scale, and decision logic.
 
 ## Camunda 8 use cases
 
@@ -76,7 +76,7 @@ required to automate and orchestrate business processes that span multiple syste
 
 #### Forms
 
-[Create and implement custom forms](/guides/utilizing-forms.md) that power workflows requiring human interaction.
+[Create and implement custom forms](/components/modeler/forms/utilizing-forms.md) that power workflows requiring human interaction.
 
 ### Workflow engine & decision engine
 
@@ -92,7 +92,7 @@ With [Tasklist](/components/tasklist/introduction-to-tasklist.md), process owner
 
 ### Optimize
 
-[Optimize](/components/optimize/what-is-optimize.md) leverages process execution data to continuously [provide actionable insights](/guides/improve-processes-with-optimize.md). Optimize specializes in BPMN-based analysis and can show users exactly what their process model needs for successful execution.
+[Optimize](/components/optimize/what-is-optimize.md) leverages process execution data to continuously [provide actionable insights](/components/optimize/improve-processes-with-optimize.md). Optimize specializes in BPMN-based analysis and can show users exactly what their process model needs for successful execution.
 
 ### Console
 
@@ -122,4 +122,4 @@ The platform and tools are usable in your environment right away, with full publ
 - [Introduction to Camunda 8](/guides/introduction-to-camunda-8.md)
 - [Create a Camunda 8 account](/guides/create-account.md)
 - [Migrate from Camunda 7 to Camunda 8](/guides/migrating-from-camunda-7/index.md)
-- [Automate a process using BPMN](/guides/automating-a-process-using-bpmn.md)
+- [Automate a process using BPMN](/components/modeler/bpmn/automating-a-process-using-bpmn.md)

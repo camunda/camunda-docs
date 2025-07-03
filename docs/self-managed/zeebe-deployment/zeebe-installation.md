@@ -19,5 +19,5 @@ Within this section you will find detailed information about:
 - [Exporters](exporters/exporters.md) - Zeebe comes packaged with two exporters: [Elasticsearch](exporters/elasticsearch-exporter.md) and [OpenSearch](exporters/opensearch-exporter.md). This section of the docs explains how these exporters can be configured. For a general overview on the exporters concept, refer to our [exporters concept](/self-managed/concepts/exporters.md) page.
 
 :::note
-New to BPMN and want to learn more before moving forward? [Visit our getting started guide](/guides/automating-a-process-using-bpmn.md) to learn about automating a process using BPMN.
+New to BPMN and want to learn more before moving forward? [Visit our getting started guide](/components/modeler/bpmn/automating-a-process-using-bpmn.md) to learn about automating a process using BPMN.
 :::

@@ -116,7 +116,7 @@ A user task typically includes a form. A form contains work instructions for the
 
 However, user tasks are not limited to forms. User tasks can also be used to refer users to other applications or redirect them to a website.
 
-You can use [Camunda Forms](/guides/utilizing-forms.md) that offer visual editing of forms directly in Camunda Modeler, or use your own forms.
+You can use [Camunda Forms](/components/modeler/forms/utilizing-forms.md) that offer visual editing of forms directly in Camunda Modeler, or use your own forms.
 Forms can either be displayed in [Tasklist](/components/tasklist/introduction-to-tasklist.md), or handled by a custom application.
 
 To use a form, a user task requires a form reference.
@@ -139,7 +139,7 @@ Depending on your use case, two different types of form references can be used:
    If the `bindingType` attribute is not specified, `latest` is used as the default.
    :::
 
-   You can read more about Camunda Forms in the [Camunda Forms guide](/guides/utilizing-forms.md) or the [Camunda Forms reference](/components/modeler/forms/camunda-forms-reference.md)
+   You can read more about Camunda Forms in the [Camunda Forms guide](/components/modeler/forms/utilizing-forms.md) or the [Camunda Forms reference](/components/modeler/forms/camunda-forms-reference.md)
    to explore all configuration options for form elements.
 
 2. A **custom form reference** can specify any custom identifier in the user task using the `externalReference`

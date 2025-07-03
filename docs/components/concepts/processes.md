@@ -27,7 +27,7 @@ Camunda uses **[Business Process Model and Notation (BPMN) 2.0](/components/mode
 ![process example](./assets/order-process.png)
 
 :::note
-New to BPMN? Visit our step-by-step introductory guide on [automating a process using BPMN](../../guides/automating-a-process-using-bpmn.md)
+New to BPMN? Visit our step-by-step introductory guide on [automating a process using BPMN](/components/modeler/bpmn/automating-a-process-using-bpmn.md)
 :::
 
 ## Modeling BPMN
@@ -40,7 +40,7 @@ Camunda offers two Modeler tools to design and implement your diagrams:
 - [Desktop Modeler](/components/modeler/desktop-modeler/index.md): Design, view, and edit models using this desktop application. Install and use Desktop Modeler locally, all while integrating your local development environment.
 
 :::note
-New to modeling a process? Visit our [getting started guide](/guides/model-your-first-process.md).
+New to modeling a process? Visit our [getting started guide](/components/modeler/web-modeler/design-your-process.md).
 :::
 
 ## Process execution

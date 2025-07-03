@@ -5,7 +5,7 @@ description: "Leverage process data and analyze areas for improvement."
 ---
 
 :::note
-New to Optimize? Visit our introductory guide to [Optimize](/guides/improve-processes-with-optimize.md) to get started.
+New to Optimize? Visit our introductory guide to [Optimize](/components/optimize/improve-processes-with-optimize.md) to get started.
 :::
 
 Camunda 8 is built to handle three key aspects of process automation:
