@@ -26,6 +26,8 @@ You must have access to a Camunda 8 SaaS account.
    <SaasPrereqs/>
 </details>
 
+You must also know how to model a process with a user task. If you haven't done this before, please first follow the steps in our guide to [get started with human task orchestration](orchestrate-human-tasks/).
+
 Additionally, you need the following:
 
 - Java ≥ 8
