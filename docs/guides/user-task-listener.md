@@ -9,11 +9,15 @@ description: "In Camunda 8, user task listeners allow you to run custom logic wh
 
 import SaasPrereqs from './react-components/\_saas-prerequisites.md'
 
-In Camunda 8, **user task listeners** allow you to run custom logic in response to changes to a user task, for example when it's creating, assigning, or completing.
+In Camunda 8, **user task listeners** allow you to run custom logic in response to changes to a user task—for example, when it's created, assigned, or completed.
 
-Camunda 8 user task listeners facilitate integration of custom logic into your workflows. For more details about user task listeners, please check the [user task listeners concept](../components/concepts/user-task-listeners.md).
+User task listeners facilitate the integration of custom logic into your workflows. For more details, refer to the [User Task Listeners concept](../components/concepts/user-task-listeners.md).
 
-This guide walks you through defining a task listener using **Camunda Modeler**, implementing a task listener as a job worker, and verifying the result in **Operate** and **Tasklist**.
+This guide walks you through:
+
+- Defining a task listener using **Camunda Modeler**
+- Implementing a task listener as a job worker
+- Verifying the result in **Operate** and **Tasklist**
 
 **Goal**: When the **“Review application”** user task is created in your hiring process, automatically assign it to the HR team lead using a process variable.
 
@@ -26,14 +30,16 @@ You must have access to a Camunda 8 SaaS account.
    <SaasPrereqs/>
 </details>
 
-You must also know how to model a process with a user task. If you haven't done this before, please first follow the steps in our guide to [get started with human task orchestration](./getting-started-orchestrate-human-tasks.md).
+You must also know how to model a process with a user task.  
+If you haven't done this before, first follow the steps in our guide to [get started with human task orchestration](./getting-started-orchestrate-human-tasks.md).
 
 Additionally, you need the following:
 
 - Java ≥ 8
 - Maven
 - IDE (IntelliJ, VSCode, or similar)
-- Download and unzip or clone the [repo](https://github.com/camunda/camunda-platform-tutorials), then `cd` into `camunda-platform-tutorials/quick-start/task-listeners/task-listener-java`
+- Download and unzip or clone the [repository](https://github.com/camunda/camunda-platform-tutorials), then navigate to:  
+  `camunda-platform-tutorials/quick-start/task-listeners/task-listener-java`
 
 ## Configuring a user task listener
 
@@ -59,27 +65,25 @@ In that case, just explore the BPMN using the steps below, but do not adjust the
 
 ### Step 3: Define a task listener
 
-We'll now add a new task listener to the user task and define it's properties.
+We'll now add a new task listener to the user task and define its properties.
 
-1. Add a new task listener by clicking on the plus sign in the **Task listeners** section.
+1. Click the plus sign in the **Task listeners** section to add a new task listener.
 2. Under **Event type**, select **creating**.
-3. Under **Listener Type**, enter `assign_new_task`.
+3. Under **Listener type**, enter `assign_new_task`.
 
 <!---![add task listener UI](path-to-screenshot3.png)--->
 
 :::info
-You've now defined a creating task listener for this user task.
-When a process instance arives at this user task, the `creating` event triggers and a job of type `assign_new_task` is created.
-A job worker can activate this job to execute the external logic and complete it to approve the creation of the user task.
+You've now defined a **creating** task listener for this user task.  
+When a process instance arrives at this user task, the `creating` event is triggered, and a job of type `assign_new_task` is created.  
+A job worker can then activate this job to execute the external logic and complete it, approving the creation of the user task.
 :::
 
 ### Step 4: Deploy the process
 
-Click Deploy current diagram
-
-Select your Camunda 8 cluster or create a new deployment target
-
-Click Deploy
+1. Click **Deploy current diagram**.
+2. Select your **Camunda 8 cluster** or create a new **deployment target**.
+3. Click **Deploy**.
 
 ### Step 5: Start a process instance with test data
 
@@ -99,28 +103,23 @@ You can use the Swagger UI, Zeebe CLI, or REST API client like Postman to initia
 
 ### Step 6: Check assignment in Operate
 
-Open Operate
-
-Find the process instance you started
-
-Click on the user task node
-
-Confirm the assignee is set to "john.doe"
+1. Open **Operate**.
+2. Find the process instance you started.
+3. Click on the **user task node**.
+4. Confirm the **assignee** is set to `"john.doe"`.
 
 ### Step 7: Verify task in Tasklist
 
-Go to Tasklist
-
-Log in as john.doe
-
-You should see the “Review application” task assigned to you
+1. Go to **Tasklist**.
+2. Log in as **john.doe**.
+3. You should see the **“Review application”** task assigned to you.
 
 ## Suggestions for further development
 
-- Task listeners run inside the engine — keep them short and avoid long I/O
-- Use task.variables.get("...") to safely access process variables
-- Assignee must be a valid user from your Camunda identity provider
-- You can add other listener types (e.g., complete) using the same method
+- Task listeners run inside the engine — keep them short and avoid long I/O.
+- Use `task.variables.get("...")` to safely access process variables.
+- Assignee must be a valid user from your Camunda identity provider.
+- You can add other listener types (e.g., `complete`) using the same method.
 
 ## Additional resources
 
