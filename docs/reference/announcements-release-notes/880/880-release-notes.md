@@ -34,7 +34,7 @@ Camunda 8 now supports integration with [Atlassian Bitbucket](https://bitbucket.
 - This helps customers who use Jira for their development processes.
 - Organization owners and administrators can connect their Web Modeler process applications to Bitbucket, allowing users to keep their Web Modeler, Desktop Modeler, and official version control projects synced.
 
-To learn more about Bitbucket integration, see [Git sync](/docs/components/modeler/web-modeler/git-sync.md?platform=bitbucket).
+To learn more about Bitbucket integration, see [Git sync](/components/modeler/web-modeler/git-sync.md?platform=bitbucket).
 
 ### Camunda 8 REST API renamed to Orchestration Cluster API <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects APIs">API</span>
 
@@ -45,7 +45,7 @@ Starting with the Camunda 8.8 release, the Camunda 8 REST API is renamed to the 
 - This new name more accurately reflects the API scope as a unified REST API for interacting with entities in a [Camunda 8 orchestration cluster](/reference/glossary.md#orchestration-cluster) (such as processes, tasks, variables, and so on).
 - There are no changes to the API functionality or structure. Only the name is changed to help with understanding and onboarding, and to improve clarity and alignment across Camunda documentation and resources.
 
-To learn more about using the Orchestration Cluster API, see [Orchestration Cluster API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md).
+To learn more about using the Orchestration Cluster API, see [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
 
 ### Connectors <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span> {#connectorsalpha6}
 
@@ -87,7 +87,7 @@ The new updated [backup and restore guide](/self-managed/operational-guides/back
 
 <!-- https://github.com/camunda/product-hub/issues/2516 -->
 
-The Tasklist frontend application is now transitioning from the soon-to-be-deprecated Tasklist V1 API to the unified [Orchestration Cluster REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md).
+The Tasklist frontend application is now transitioning from the soon-to-be-deprecated Tasklist V1 API to the unified [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
 
 - This ensures Tasklist remains fully compatible with Camunda 8 RDBMS support while continuing to work seamlessly with Elasticsearch and OpenSearch.
 - You can expect consistent functionality across different data layers, improved performance, and access to new platform features, all without losing existing capabilities or disrupting task management workflows.
