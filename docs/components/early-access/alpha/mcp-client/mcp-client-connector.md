@@ -10,7 +10,7 @@ configured to run the MCP Client connector to your Camunda 8 SaaS instance.
 :::
 
 The MCP Client connector allows you to configure MCP clients to be started as part of the connector runtime. As the
-runtime takes care of managing the MCP client connections (opposed to the Job Worker in the MCP Remote Client
+runtime takes care of managing the MCP client connections (opposed to the Job worker in the MCP Remote Client
 connector), this approach allows using both STDIO and remote MCP servers without the overhead of opening and closing
 connections for every MCP client interaction.
 
