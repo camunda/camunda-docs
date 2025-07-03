@@ -9,7 +9,7 @@ description: "In Camunda 8, user task listeners allow you to run custom logic wh
 
 In Camunda 8, **user task listeners** allow you to run custom logic in response to changes to a user task, for example when it's creating, assigning, or completing.
 
-Camunda 8 user task listeners facilitate integration of custom logic into your workflows. Whether assigning tasks dynamically or triggering events, listeners give you control without requiring an external worker or service.
+Camunda 8 user task listeners facilitate integration of custom logic into your workflows.
 
 This guide walks you through setting up a task listener using **Camunda Modeler**, and verifying the result in **Operate** and **Tasklist**, using a real-world HR assignment example.
 
