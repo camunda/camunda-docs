@@ -104,7 +104,7 @@ To post a message, take the following steps:
    you must add `files:read` and `files:write` permissions for your **Bot Token Scopes** in your Slack app.
 
 :::note
-To work with documents you must upload them first, using the [REST API](/apis-tools/camunda-api-rest/specifications/create-document.api.mdx) for example.
+To work with documents you must upload them first, using the [REST API](/apis-tools/orchestration-cluster-api-rest/specifications/create-document.api.mdx) for example.
 The result of the endpoint must then be assigned to a variable in **Start Process Instance** so you can use the variable in the **Attachments** field.
 :::
 

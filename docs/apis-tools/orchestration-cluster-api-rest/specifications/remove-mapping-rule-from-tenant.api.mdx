@@ -1,0 +1,237 @@
+---
+id: remove-mapping-rule-from-tenant
+title: "Remove a mapping rule from a tenant"
+description: "Removes a single mapping rule from a specified tenant without deleting the rule."
+sidebar_label: "Remove a mapping rule from a tenant"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWEtv2zgQ/isETy1Wtdw27WZ1M9JkN4u2CFJn95DNgRLHFluKVMlhHEPQf18MKTmO7RbFonvzwZAlDuf5fXxMx1EsPS9u+RyMMMjvMm5bcAKVNZeSF9xBY+/hg2hbZZbXQcOFs80gnHEJvnKqJWle8Oso65lgXpmlBtakacwFDWzhbENDLVRqoUAyjFrYSmFtAzIJGpCksYY4Y8Iz3gonGkBw5GTHjWiAFzzNvJQ844oMtwJrnnEHX4NyIHmBLsCud/MaWDDqawCmJBgkJxyzi2gvaSSLvqqhEbzoOK5bMubRKbPkfZ9t7A9x/UwHtlP1fTfuyI5vrfHgafzV9IQe+7aeZH8lPPOhqsD7RdB6zVJhZSrLdgr6jJ9Mp4dVts7eKwmSSYGCKc+MRXYvtJLkc2UNgkGaKtpWqyrCKG+dLTU0v3z2pKfbCu2pgRm7SpJMAgqlmS0/Q4VMeJYES5BMGXZ7fXHGfjt58+vdsxqx9UWer1ariVtUL0AqtG5i3TJ3i4p+JPd8wuY1OMrImpXAhJSKbApNAbXgUIEfgVkxtDEfg9uM8j/5x/BsrERyi8C5mfxYp916ZXxhXSOQFzw4tUeZGbu5vhzhsB7R/8R0nLMQQZMOUdqARamF+UKFQoX6oNFdKz40jXDrEW1PDfQZ9ygwbIXBlUFYgtv2Xxl8/WpPN8Hij/n8iiUVrLIS2MI6hrXyoyEKolFGNaHhxcl0mvFGPKS3t9NpTzqp4j8QiWHw0GphIrR2w1GGNdbBgJ8YmDIehal+VmWsU0u1a3dCi8NYCz6A+F2KqO/7SKjX+3i/sK5UUoKJ8GS0eIDHkVVCa7uCI6+OvDry6ju8OrD3fbTIFjYYmXg1HDOs298QzUbyyLIjy44s+wbL3hw6Ds4Moyw7wiE4Zx2zVRWcA8lWtdJRPZ02Nyf6tL0lLB65duTakWv7XOsz3gDWlm7e8T4M8Q6MNS94njYyn3fj9bfPhx3N593mStrT5RHc/XhlDk7zgneJSn2R511tPfZF11qHfX5PdboXTolSJ3TScKLcCCVtK6Hj50MlpQG6F4+hnokmGCnYKbs+/zRnvwuElVjHFJPJp6pPp6fTg1pJ9BsaZ1eXLEWYALm1SIxqie0H1SbhH1EcL9oequAUrj/RtJSeEoQDNwtUkw1QBntRO70nIZ4Nfy5G+Pz59zwiQJmFjdMHJOw7QlUB55Pn08nLfdRdXUbyVLZpgokrqFnGZgoTW4FVOnikgDKuVQXGR3wPfYxR7H0aYX8li+zlhIqSkDMunEuFdSgnlW3yKk3bPEtty7wRyuSDCZ+fzT7cfHw3e/H+8uz846fzFy8n0wk+YAy+tR4bYbb8SI0jJg42jPBgs6l73EP+j77TUFeEB8xbLZQhpMWEdAMfb4culOcZL7YaUiMl6fNjn+guG3h1y7uuFB5unO57+vw1gFvz4vbukYaRt1J5+i95sRDa7zaTtsN/dj20nZ6zH+xxHYxu+CjMOq4IOtAbz/gXWG+33KgN9vN9221//QcPH5Pd3/UZr0FIcDGVaXxWVdDi1sxvnjyI+Ztl+N35+/P5Oe/7fwHLdU3G
+sidebar_class_name: "delete api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Remove a mapping rule from a tenant"}
+></Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/tenants/{tenantId}/mappings/{mappingId}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Removes a single mapping rule from a specified tenant without deleting the rule.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "tenantId",
+      in: "path",
+      required: true,
+      description: "The unique identifier of the tenant.",
+      schema: { type: "string" },
+    },
+    {
+      name: "mappingId",
+      in: "path",
+      required: true,
+      description: "The unique identifier of the mapping rule.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "204": {
+      description: "The mapping rule was successfully removed from the tenant.",
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "Not found. The tenant or mapping rule was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

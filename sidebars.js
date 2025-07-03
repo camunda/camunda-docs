@@ -418,8 +418,10 @@ module.exports = {
             id: "components/identity/identity-introduction",
           },
           items: [
-            "components/identity/authorization",
             "components/identity/user",
+            "components/identity/group",
+            "components/identity/role",
+            "components/identity/authorization",
           ],
         },
       ],
@@ -789,7 +791,7 @@ module.exports = {
     "apis-tools/working-with-apis-tools",
     {
       APIs: [
-        require("./docs/apis-tools/camunda-api-rest/sidebar-schema"),
+        require("./docs/apis-tools/orchestration-cluster-api-rest/sidebar-schema"),
         require("./docs/apis-tools/administration-api/sidebar-schema"),
         require("./docs/apis-tools/administration-sm-api/sidebar-schema"),
         {
@@ -946,6 +948,7 @@ module.exports = {
         {
           "Camunda Process Test": [
             "apis-tools/testing/getting-started",
+            "apis-tools/testing/configuration",
             "apis-tools/testing/assertions",
             "apis-tools/testing/utilities",
             "apis-tools/testing/connectors",
@@ -1470,6 +1473,7 @@ module.exports = {
                 "self-managed/optimize-deployment/configuration/history-cleanup",
                 "self-managed/optimize-deployment/configuration/localization",
                 "self-managed/optimize-deployment/configuration/object-variables",
+                "self-managed/optimize-deployment/configuration/variable-import",
                 "self-managed/optimize-deployment/configuration/multi-tenancy",
               ],
             },

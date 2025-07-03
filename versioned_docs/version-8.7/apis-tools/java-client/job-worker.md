@@ -130,6 +130,13 @@ This implementation creates two metrics:
 - `zeebe.client.worker.job.activated`: A counter tracking the count of jobs activated.
 - `zeebe.client.worker.job.handled`: A counter tracking the count of jobs handled.
 
+:::info Deprecated metrics
+The following metrics will be deprecated from 8.8 and will be removed in version 8.10:
+
+- `zeebe.client.worker.job.activated`, will be replaced with `camunda.client.worker.job.activated`
+- `zeebe.client.worker.job.handled`, will be replaced with `camunda.client.worker.job.handled`
+  :::
+
 ### Workarounds for additional metrics
 
 The decision to track a small set of metrics directly in the client is a conscious one. The idea is we should only be tracking what is not possible for users to track themselves. If you believe a specific metric should be tracked by us, do open a feature request for it. In the meantime, here is a list of workarounds to help you track additional job worker-related metrics that you can already use:
