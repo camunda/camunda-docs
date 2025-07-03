@@ -174,6 +174,7 @@ The **Camunda Operate connector** allows you to interact with [Camunda Operate](
 Tasklist is a ready-to-use application to rapidly implement business processes alongside.
 
 #### Optimize
+
 Optimize offers business intelligence tooling for Camunda customers. By leveraging data collected during process execution, you can access reports, share process intelligence, analyze bottlenecks, and examine areas in business processes for improvement.
 
 ```bash
