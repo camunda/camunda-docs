@@ -60,6 +60,23 @@ A new `getJson` function accepts a document and an optional FEEL expression para
 
 To learn more about using connector intrinsic functions, see [intrinsic functions](/components/connectors/use-connectors/intrinsic-functions.md).
 
+### Get started guides include BPMN and service worker examples <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+
+<!-- https://github.com/camunda/product-hub/issues/2751 -->
+
+The Get started documentation is enhanced as follows:
+
+- Added example BPMN files, Java Spring Boot projects, and NodeJS projects available to work out-of-the-box.
+- Added Code snippets and practical tasks such as handling payment transactions are added.
+- Code is updated to follow Camunda changes so that it will work with later releases.
+- BPMN files contain annotations to guide you through running the process and viewing the results.
+
+### Helm chart configurable volumes <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+
+<!-- https://github.com/camunda/product-hub/issues/2597 -->
+
+The Camunda Helm chart now includes support for configurable volumes. You can define `PersistentVolumeClaims` or choose to continue using `EmptyDir` through the `values.yaml` file, providing greater flexibility and operational stability.
+
 ### Self-Managed backup and restore guide <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
 <!-- https://github.com/camunda/product-hub/issues/2299 -->

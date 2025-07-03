@@ -74,7 +74,7 @@ The Camunda SaaS Starter plan is no longer available.
 
 ### API updates <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-The 8.8 release includes API updates to support the move to an [Orchestration Cluster REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md) unified experience. See more details in the [release notes](/reference/announcements-release-notes/880/880-release-notes.md#api-updates).
+The 8.8 release includes API updates to support the move to an [Orchestration Cluster REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md) unified experience. See more details in the [release notes](/reference/announcements-release-notes/880/880-release-notes.md).
 
 :::note
 Starting with the Camunda 8.8 release, the Camunda 8 REST API is renamed to the **Orchestration Cluster API**.
