@@ -57,25 +57,20 @@ In that case, just explore the BPMN using the steps below, but do not adjust the
 
 <!--- ![properties panel with user task details](path-to-screenshot2.png)--->
 
-### Step 3: Add a task listener
+### Step 3: Define a task listener
 
-1. Scroll down to **Listeners**
-2. Click **Add Task Listener**
+We'll now add a new task listener to the user task and define it's properties.
+
+1. Add a new task listener by clicking on the plus sign in the **Task listeners** section.
+2. Under **Event type**, select **creating**.
+3. Under **Listener Type**, enter `assign_new_task`.
 
 <!---![add task listener UI](path-to-screenshot3.png)--->
 
-3. Under **Event**, select **create**.
-4. Under **Implementation Type**, choose **Script**.
-5. Set **Script Format** to `javascript`.
-6. In the **Script** box, enter the following code:
-
-```javascript
-const hrLead = task.variables.get("hrGroupLead");
-task.setAssignee(hrLead);
-```
-
-:::note
-For testing, you can replace task.variables.get("hrGroupLead") with a hardcoded value like "john.doe"
+:::info
+You've now defined a creating task listener for this user task.
+When a process instance arives at this user task, the `creating` event triggers and a job of type `assign_new_task` is created.
+A job worker can activate this job to execute the external logic and complete it to approve the creation of the user task.
 :::
 
 ### Step 4: Deploy the process
