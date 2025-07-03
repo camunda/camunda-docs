@@ -53,7 +53,7 @@ If it is unhealthy, it may mean three things:
 
 - **It is only temporarily unhealthy**: For example, due to environmental circumstances such as temporary I/O issues.
 - **It is partially unhealthy**: One or more partitions could be unhealthy, while the rest of them are able to process processes.
-- **It is completely dead**
+- **It is completely dead**: one or more partitions has failed in a non-recoverable way, and human intervention is required to recover.
 
 [Metrics](metrics.md) give more insight into which partition is healthy or unhealthy.
 When a broker becomes unhealthy, it's recommended to check the logs to see what went wrong.

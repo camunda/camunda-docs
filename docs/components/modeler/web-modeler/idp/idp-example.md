@@ -46,7 +46,7 @@ In the first step of the process, a [user task](/components/modeler/bpmn/user-ta
 - The Filepicker element **Key** is set to `documents`. This is then bound to the **Document** input in the document extraction template.
 
 :::info
-You can also use the [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md) to upload documents for IDP. To learn more about storing, tracking, and managing documents in Camunda 8, see [document handling](/components/document-handling/getting-started.md).
+You can also use the [Orchestration cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) to upload documents for IDP. To learn more about storing, tracking, and managing documents in Camunda 8, see [document handling](/components/document-handling/getting-started.md).
 :::
 
 ## Extract data

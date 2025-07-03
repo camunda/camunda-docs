@@ -1,0 +1,414 @@
+---
+id: search-clients-for-group
+title: "Search group clients"
+description: "Search clients assigned to a group."
+sidebar_label: "Search group clients"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Search group clients"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/groups/{groupId}/clients/search"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Search clients assigned to a group.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "groupId",
+      in: "path",
+      required: true,
+      description: "The group ID.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          allOf: [
+            {
+              type: "object",
+              properties: {
+                page: {
+                  description: "Pagination criteria.",
+                  allOf: [
+                    {
+                      type: "object",
+                      properties: {
+                        from: {
+                          description:
+                            "The index of items to start searching from.",
+                          type: "integer",
+                          format: "int32",
+                        },
+                        limit: {
+                          description:
+                            "The maximum number of items to return in one request.",
+                          type: "integer",
+                          format: "int32",
+                          default: 100,
+                        },
+                        after: {
+                          description:
+                            "Use the `endCursor` value from the previous response to fetch the next page of results.",
+                          type: "string",
+                        },
+                        before: {
+                          description:
+                            "Use the `startCursor` value from the previous response to fetch the previous page of results.",
+                          type: "string",
+                        },
+                      },
+                      title: "SearchQueryPageRequest",
+                    },
+                  ],
+                  type: "object",
+                },
+              },
+              title: "SearchQueryRequest",
+            },
+          ],
+          type: "object",
+          properties: {
+            sort: {
+              description: "Sort field criteria.",
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  field: {
+                    description: "The field to sort by.",
+                    type: "string",
+                    enum: ["clientId"],
+                  },
+                  order: {
+                    description:
+                      "The order in which to sort the related field.",
+                    type: "string",
+                    enum: ["ASC", "DESC"],
+                    default: "ASC",
+                    title: "SortOrderEnum",
+                  },
+                },
+                required: ["field"],
+                title: "GroupClientSearchQuerySortRequest",
+              },
+            },
+          },
+          title: "GroupClientSearchQueryRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The clients assigned to the group.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            allOf: [
+              {
+                type: "object",
+                properties: {
+                  page: {
+                    description:
+                      "Pagination information about the search results.",
+                    allOf: [
+                      {
+                        description:
+                          "Pagination information about the search results.",
+                        type: "object",
+                        properties: {
+                          totalItems: {
+                            description: "Total items matching the criteria.",
+                            type: "integer",
+                            format: "int64",
+                          },
+                          startCursor: {
+                            description:
+                              "The cursor value for getting the previous page of results. Use this in the `before` field of an ensuing request.",
+                            type: "string",
+                          },
+                          endCursor: {
+                            description:
+                              "The cursor value for getting the next page of results. Use this in the `after` field of an ensuing request.",
+                            type: "string",
+                          },
+                        },
+                        title: "SearchQueryPageResponse",
+                      },
+                    ],
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                description: "The matching client IDs.",
+                type: "array",
+                items: {
+                  type: "object",
+                  properties: {
+                    clientId: {
+                      description: "The ID of the client.",
+                      type: "string",
+                    },
+                  },
+                  title: "GroupClientResult",
+                },
+              },
+            },
+            title: "GroupClientSearchResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The group with the given ID was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

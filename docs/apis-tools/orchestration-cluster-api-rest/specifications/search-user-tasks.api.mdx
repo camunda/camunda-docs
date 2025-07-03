@@ -1,0 +1,1266 @@
+---
+id: search-user-tasks
+title: "Search user tasks"
+description: "Search for user tasks based on given criteria."
+sidebar_label: "Search user tasks"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Search user tasks"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/user-tasks/search"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Search for user tasks based on given criteria.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          description: "User task search query request.",
+          type: "object",
+          allOf: [
+            {
+              type: "object",
+              properties: {
+                page: {
+                  description: "Pagination criteria.",
+                  allOf: [
+                    {
+                      type: "object",
+                      properties: {
+                        from: {
+                          description:
+                            "The index of items to start searching from.",
+                          type: "integer",
+                          format: "int32",
+                        },
+                        limit: {
+                          description:
+                            "The maximum number of items to return in one request.",
+                          type: "integer",
+                          format: "int32",
+                          default: 100,
+                        },
+                        after: {
+                          description:
+                            "Use the `endCursor` value from the previous response to fetch the next page of results.",
+                          type: "string",
+                        },
+                        before: {
+                          description:
+                            "Use the `startCursor` value from the previous response to fetch the previous page of results.",
+                          type: "string",
+                        },
+                      },
+                      title: "SearchQueryPageRequest",
+                    },
+                  ],
+                  type: "object",
+                },
+              },
+              title: "SearchQueryRequest",
+            },
+          ],
+          properties: {
+            sort: {
+              description: "Sort field criteria.",
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  field: {
+                    description: "The field to sort by.",
+                    type: "string",
+                    enum: [
+                      "creationDate",
+                      "completionDate",
+                      "followUpDate",
+                      "dueDate",
+                      "priority",
+                      "name",
+                    ],
+                  },
+                  order: {
+                    description:
+                      "The order in which to sort the related field.",
+                    type: "string",
+                    enum: ["ASC", "DESC"],
+                    default: "ASC",
+                    title: "SortOrderEnum",
+                  },
+                },
+                required: ["field"],
+                title: "UserTaskSearchQuerySortRequest",
+              },
+            },
+            filter: {
+              description: "The user task search filters.",
+              allOf: [
+                {
+                  description: "User task filter request.",
+                  type: "object",
+                  properties: {
+                    state: {
+                      type: "string",
+                      description: "The state of the user task.",
+                      enum: ["CREATED", "COMPLETED", "CANCELED", "FAILED"],
+                    },
+                    assignee: {
+                      description: "The assignee of the user task.",
+                      allOf: [
+                        {
+                          description:
+                            "String property with full advanced search capabilities.",
+                          type: "object",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced string filter.",
+                              allOf: [
+                                {
+                                  title: "Advanced filter",
+                                  description: "Basic advanced string filter.",
+                                  type: "object",
+                                  properties: {
+                                    $eq: {
+                                      description:
+                                        "Checks for equality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $neq: {
+                                      description:
+                                        "Checks for inequality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $exists: {
+                                      description:
+                                        "Checks if the current property exists.",
+                                      type: "boolean",
+                                    },
+                                    $in: {
+                                      description:
+                                        "Checks if the property matches any of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                    $notIn: {
+                                      description:
+                                        "Checks if the property matches none of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                  },
+                                },
+                                {
+                                  type: "object",
+                                  properties: {
+                                    $like: {
+                                      description:
+                                        "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                      type: "string",
+                                    },
+                                  },
+                                },
+                              ],
+                            },
+                          ],
+                          title: "StringFilterProperty",
+                        },
+                      ],
+                    },
+                    priority: {
+                      description: "The priority of the user task.",
+                      allOf: [
+                        {
+                          description:
+                            "Integer property with advanced search capabilities.",
+                          type: "object",
+                          oneOf: [
+                            {
+                              type: "integer",
+                              format: "int32",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced integer (int32) filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "integer",
+                                  format: "int32",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "integer",
+                                  format: "int32",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $gt: {
+                                  description:
+                                    "Greater than comparison with the provided value.",
+                                  type: "integer",
+                                  format: "int32",
+                                },
+                                $gte: {
+                                  description:
+                                    "Greater than or equal comparison with the provided value.",
+                                  type: "integer",
+                                  format: "int32",
+                                },
+                                $lt: {
+                                  description:
+                                    "Lower than comparison with the provided value.",
+                                  type: "integer",
+                                  format: "int32",
+                                },
+                                $lte: {
+                                  description:
+                                    "Lower than or equal comparison with the provided value.",
+                                  type: "integer",
+                                  format: "int32",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: { type: "integer", format: "int32" },
+                                },
+                              },
+                            },
+                          ],
+                          title: "IntegerFilterProperty",
+                        },
+                      ],
+                    },
+                    elementId: {
+                      type: "string",
+                      description: "The element ID of the user task.",
+                    },
+                    name: {
+                      type: "string",
+                      description:
+                        "The task name. This only works for data created with 8.8 and onwards. Instances from prior versions don't contain this data and cannot be found.\n",
+                    },
+                    candidateGroup: {
+                      description: "The candidate group for this user task.",
+                      allOf: [
+                        {
+                          description:
+                            "String property with full advanced search capabilities.",
+                          type: "object",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced string filter.",
+                              allOf: [
+                                {
+                                  title: "Advanced filter",
+                                  description: "Basic advanced string filter.",
+                                  type: "object",
+                                  properties: {
+                                    $eq: {
+                                      description:
+                                        "Checks for equality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $neq: {
+                                      description:
+                                        "Checks for inequality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $exists: {
+                                      description:
+                                        "Checks if the current property exists.",
+                                      type: "boolean",
+                                    },
+                                    $in: {
+                                      description:
+                                        "Checks if the property matches any of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                    $notIn: {
+                                      description:
+                                        "Checks if the property matches none of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                  },
+                                },
+                                {
+                                  type: "object",
+                                  properties: {
+                                    $like: {
+                                      description:
+                                        "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                      type: "string",
+                                    },
+                                  },
+                                },
+                              ],
+                            },
+                          ],
+                          title: "StringFilterProperty",
+                        },
+                      ],
+                    },
+                    candidateUser: {
+                      description: "The candidate user for this user task.",
+                      allOf: [
+                        {
+                          description:
+                            "String property with full advanced search capabilities.",
+                          type: "object",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced string filter.",
+                              allOf: [
+                                {
+                                  title: "Advanced filter",
+                                  description: "Basic advanced string filter.",
+                                  type: "object",
+                                  properties: {
+                                    $eq: {
+                                      description:
+                                        "Checks for equality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $neq: {
+                                      description:
+                                        "Checks for inequality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $exists: {
+                                      description:
+                                        "Checks if the current property exists.",
+                                      type: "boolean",
+                                    },
+                                    $in: {
+                                      description:
+                                        "Checks if the property matches any of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                    $notIn: {
+                                      description:
+                                        "Checks if the property matches none of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                  },
+                                },
+                                {
+                                  type: "object",
+                                  properties: {
+                                    $like: {
+                                      description:
+                                        "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                      type: "string",
+                                    },
+                                  },
+                                },
+                              ],
+                            },
+                          ],
+                          title: "StringFilterProperty",
+                        },
+                      ],
+                    },
+                    tenantId: {
+                      type: "string",
+                      description: "Tenant ID of this user task.",
+                    },
+                    processDefinitionId: {
+                      type: "string",
+                      description: "The ID of the process definition.",
+                    },
+                    creationDate: {
+                      description: "The user task creation date.",
+                      allOf: [
+                        {
+                          description:
+                            "Date-time property with full advanced search capabilities.",
+                          type: "object",
+                          oneOf: [
+                            {
+                              type: "string",
+                              format: "date-time",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced date-time filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $gt: {
+                                  description:
+                                    "Greater than comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $gte: {
+                                  description:
+                                    "Greater than or equal comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $lt: {
+                                  description:
+                                    "Lower than comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $lte: {
+                                  description:
+                                    "Lower than or equal comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    type: "string",
+                                    format: "date-time",
+                                  },
+                                },
+                              },
+                            },
+                          ],
+                          title: "DateTimeFilterProperty",
+                        },
+                      ],
+                    },
+                    completionDate: {
+                      description: "The user task completion date.",
+                      allOf: [
+                        {
+                          description:
+                            "Date-time property with full advanced search capabilities.",
+                          type: "object",
+                          oneOf: [
+                            {
+                              type: "string",
+                              format: "date-time",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced date-time filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $gt: {
+                                  description:
+                                    "Greater than comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $gte: {
+                                  description:
+                                    "Greater than or equal comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $lt: {
+                                  description:
+                                    "Lower than comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $lte: {
+                                  description:
+                                    "Lower than or equal comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    type: "string",
+                                    format: "date-time",
+                                  },
+                                },
+                              },
+                            },
+                          ],
+                          title: "DateTimeFilterProperty",
+                        },
+                      ],
+                    },
+                    followUpDate: {
+                      description: "The user task follow-up date.",
+                      allOf: [
+                        {
+                          description:
+                            "Date-time property with full advanced search capabilities.",
+                          type: "object",
+                          oneOf: [
+                            {
+                              type: "string",
+                              format: "date-time",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced date-time filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $gt: {
+                                  description:
+                                    "Greater than comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $gte: {
+                                  description:
+                                    "Greater than or equal comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $lt: {
+                                  description:
+                                    "Lower than comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $lte: {
+                                  description:
+                                    "Lower than or equal comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    type: "string",
+                                    format: "date-time",
+                                  },
+                                },
+                              },
+                            },
+                          ],
+                          title: "DateTimeFilterProperty",
+                        },
+                      ],
+                    },
+                    dueDate: {
+                      description: "The user task due date.",
+                      allOf: [
+                        {
+                          description:
+                            "Date-time property with full advanced search capabilities.",
+                          type: "object",
+                          oneOf: [
+                            {
+                              type: "string",
+                              format: "date-time",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced date-time filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $gt: {
+                                  description:
+                                    "Greater than comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $gte: {
+                                  description:
+                                    "Greater than or equal comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $lt: {
+                                  description:
+                                    "Lower than comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $lte: {
+                                  description:
+                                    "Lower than or equal comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    type: "string",
+                                    format: "date-time",
+                                  },
+                                },
+                              },
+                            },
+                          ],
+                          title: "DateTimeFilterProperty",
+                        },
+                      ],
+                    },
+                    processInstanceVariables: {
+                      type: "array",
+                      description:
+                        "Process instance variables associated with the user task.",
+                      items: {
+                        type: "object",
+                        properties: {
+                          name: {
+                            type: "string",
+                            description: "Name of the variable.",
+                          },
+                          value: {
+                            allOf: [
+                              {
+                                description:
+                                  "String property with full advanced search capabilities.",
+                                type: "object",
+                                oneOf: [
+                                  {
+                                    type: "string",
+                                    title: "Exact match",
+                                    description: "Matches the value exactly.",
+                                  },
+                                  {
+                                    title: "Advanced filter",
+                                    description: "Advanced string filter.",
+                                    allOf: [
+                                      {
+                                        title: "Advanced filter",
+                                        description:
+                                          "Basic advanced string filter.",
+                                        type: "object",
+                                        properties: {
+                                          $eq: {
+                                            description:
+                                              "Checks for equality with the provided value.",
+                                            type: "string",
+                                          },
+                                          $neq: {
+                                            description:
+                                              "Checks for inequality with the provided value.",
+                                            type: "string",
+                                          },
+                                          $exists: {
+                                            description:
+                                              "Checks if the current property exists.",
+                                            type: "boolean",
+                                          },
+                                          $in: {
+                                            description:
+                                              "Checks if the property matches any of the provided values.",
+                                            type: "array",
+                                            items: { type: "string" },
+                                          },
+                                          $notIn: {
+                                            description:
+                                              "Checks if the property matches none of the provided values.",
+                                            type: "array",
+                                            items: { type: "string" },
+                                          },
+                                        },
+                                      },
+                                      {
+                                        type: "object",
+                                        properties: {
+                                          $like: {
+                                            description:
+                                              "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                            type: "string",
+                                          },
+                                        },
+                                      },
+                                    ],
+                                  },
+                                ],
+                                title: "StringFilterProperty",
+                              },
+                            ],
+                            description: "The value of the variable.",
+                          },
+                        },
+                        required: ["name", "value"],
+                        title: "VariableValueFilterProperty",
+                      },
+                    },
+                    localVariables: {
+                      type: "array",
+                      description:
+                        "Local variables associated with the user task.",
+                      items: {
+                        type: "object",
+                        properties: {
+                          name: {
+                            type: "string",
+                            description: "Name of the variable.",
+                          },
+                          value: {
+                            allOf: [
+                              {
+                                description:
+                                  "String property with full advanced search capabilities.",
+                                type: "object",
+                                oneOf: [
+                                  {
+                                    type: "string",
+                                    title: "Exact match",
+                                    description: "Matches the value exactly.",
+                                  },
+                                  {
+                                    title: "Advanced filter",
+                                    description: "Advanced string filter.",
+                                    allOf: [
+                                      {
+                                        title: "Advanced filter",
+                                        description:
+                                          "Basic advanced string filter.",
+                                        type: "object",
+                                        properties: {
+                                          $eq: {
+                                            description:
+                                              "Checks for equality with the provided value.",
+                                            type: "string",
+                                          },
+                                          $neq: {
+                                            description:
+                                              "Checks for inequality with the provided value.",
+                                            type: "string",
+                                          },
+                                          $exists: {
+                                            description:
+                                              "Checks if the current property exists.",
+                                            type: "boolean",
+                                          },
+                                          $in: {
+                                            description:
+                                              "Checks if the property matches any of the provided values.",
+                                            type: "array",
+                                            items: { type: "string" },
+                                          },
+                                          $notIn: {
+                                            description:
+                                              "Checks if the property matches none of the provided values.",
+                                            type: "array",
+                                            items: { type: "string" },
+                                          },
+                                        },
+                                      },
+                                      {
+                                        type: "object",
+                                        properties: {
+                                          $like: {
+                                            description:
+                                              "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                            type: "string",
+                                          },
+                                        },
+                                      },
+                                    ],
+                                  },
+                                ],
+                                title: "StringFilterProperty",
+                              },
+                            ],
+                            description: "The value of the variable.",
+                          },
+                        },
+                        required: ["name", "value"],
+                        title: "VariableValueFilterProperty",
+                      },
+                    },
+                    userTaskKey: {
+                      type: "string",
+                      description: "The key for this user task.",
+                    },
+                    processDefinitionKey: {
+                      type: "string",
+                      description: "The key of the process definition.",
+                    },
+                    processInstanceKey: {
+                      type: "string",
+                      description: "The key of the process instance.",
+                    },
+                    elementInstanceKey: {
+                      type: "string",
+                      description: "The key of the element instance.",
+                    },
+                  },
+                  title: "UserTaskFilter",
+                },
+              ],
+            },
+          },
+          title: "UserTaskSearchQuery",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The user task search result.\n",
+      content: {
+        "application/json": {
+          schema: {
+            description: "User task search query response.",
+            type: "object",
+            allOf: [
+              {
+                type: "object",
+                properties: {
+                  page: {
+                    description:
+                      "Pagination information about the search results.",
+                    allOf: [
+                      {
+                        description:
+                          "Pagination information about the search results.",
+                        type: "object",
+                        properties: {
+                          totalItems: {
+                            description: "Total items matching the criteria.",
+                            type: "integer",
+                            format: "int64",
+                          },
+                          startCursor: {
+                            description:
+                              "The cursor value for getting the previous page of results. Use this in the `before` field of an ensuing request.",
+                            type: "string",
+                          },
+                          endCursor: {
+                            description:
+                              "The cursor value for getting the next page of results. Use this in the `after` field of an ensuing request.",
+                            type: "string",
+                          },
+                        },
+                        title: "SearchQueryPageResponse",
+                      },
+                    ],
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                description: "The matching user tasks.",
+                type: "array",
+                items: {
+                  type: "object",
+                  properties: {
+                    name: {
+                      type: "string",
+                      description: "The name for this user task.",
+                    },
+                    state: {
+                      type: "string",
+                      description: "The state of the user task.",
+                      enum: ["CREATED", "COMPLETED", "CANCELED", "FAILED"],
+                    },
+                    assignee: {
+                      description: "The assignee of the user task.",
+                      type: "string",
+                    },
+                    elementId: {
+                      type: "string",
+                      description: "The element ID of the user task.",
+                    },
+                    candidateGroups: {
+                      type: "array",
+                      description: "The candidate groups for this user task.",
+                      items: { type: "string" },
+                    },
+                    candidateUsers: {
+                      type: "array",
+                      description: "The candidate users for this user task.",
+                      items: { type: "string" },
+                    },
+                    processDefinitionId: {
+                      type: "string",
+                      description: "The ID of the process definition.",
+                    },
+                    creationDate: {
+                      type: "string",
+                      description: "The creation date of a user task.",
+                      format: "date-time",
+                    },
+                    completionDate: {
+                      type: "string",
+                      description: "The completion date of a user task.",
+                      format: "date-time",
+                    },
+                    followUpDate: {
+                      type: "string",
+                      description: "The follow date of a user task.",
+                      format: "date-time",
+                    },
+                    dueDate: {
+                      type: "string",
+                      description: "The due date of a user task.",
+                      format: "date-time",
+                    },
+                    tenantId: {
+                      type: "string",
+                      description: "Tenant ID of this user task.",
+                    },
+                    externalFormReference: {
+                      type: "string",
+                      description: "The external form reference.",
+                    },
+                    processDefinitionVersion: {
+                      type: "integer",
+                      description: "The version of the process definition.",
+                      format: "int32",
+                    },
+                    customHeaders: {
+                      type: "object",
+                      description: "Custom headers for the user task.",
+                      additionalProperties: { type: "string" },
+                    },
+                    priority: {
+                      type: "integer",
+                      description:
+                        "The priority of a user task. The higher the value the higher the priority.",
+                      minimum: 0,
+                      maximum: 100,
+                      default: 50,
+                    },
+                    userTaskKey: {
+                      description: "The key of the user task.",
+                      type: "string",
+                    },
+                    elementInstanceKey: {
+                      type: "string",
+                      description: "The key of the element instance.",
+                    },
+                    processDefinitionKey: {
+                      type: "string",
+                      description: "The key of the process definition.",
+                    },
+                    processInstanceKey: {
+                      type: "string",
+                      description: "The key of the process instance.",
+                    },
+                    formKey: {
+                      type: "string",
+                      description: "The key of the form.",
+                    },
+                  },
+                  title: "UserTaskResult",
+                },
+              },
+            },
+            title: "UserTaskSearchQueryResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>
