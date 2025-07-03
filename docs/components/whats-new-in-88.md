@@ -14,7 +14,7 @@ Camunda 8.8 introduces several important changes and enhancements as part of our
 
 :::info
 Release notes
-:::info
+:::
 
 <!-- The following badges are used to help you understand if you are likely to be affected by any 8.8 changes summarized on this page.
 
