@@ -175,6 +175,7 @@ Tasklist is a ready-to-use application to rapidly implement business processes a
 
 #### Optimize
 
+Optimize offers business intelligence tooling for Camunda customers. By leveraging data collected during process execution, you can access reports, share process intelligence, analyze bottlenecks, and examine areas in business processes for improvement.
 
 ```bash
 # Operate client
