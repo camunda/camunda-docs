@@ -721,10 +721,11 @@ camunda_zeebe_records_backup_1748937221
 
 The following specific prerequisites are required when restoring the Zeebe Cluster:
 
-| Prerequisite      | Description                                                                                                               |
-| :---------------- | :------------------------------------------------------------------------------------------------------------------------ |
-| Pre-existing data | Persistent volumes or disks must not contain any pre-existing data.                                                       |
-| Backup storage    | Zeebe is configured with the same backup storage as outlined in the [prerequisites](backup-and-restore.md#prerequisites). |
+| Prerequisite       | Description                                                                                                                                                                                      |
+| :----------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Pre-existing data  | Persistent volumes or disks must not contain any pre-existing data.                                                                                                                              |
+| Backup storage     | Zeebe is configured with the same backup storage as outlined in the [prerequisites](backup-and-restore.md#prerequisites).                                                                        |
+| Components stopped | It’s critical that no Camunda components are running during a Zeebe restore. Restored components may propagate an incorrect cluster configuration, potentially disrupting cluster communication. |
 
 ### Restore Zeebe Cluster
 
@@ -746,16 +747,13 @@ New persistent volumes will be created on a new Camunda Helm chart upgrade and i
 In case of a manual deployment, this means to remove the data directory of each Zeebe broker.
 :::
 
-:::note
-When using the Camunda Helm chart, you can optionally disable Operate, Tasklist, Optimize, etc. apart from Zeebe in the `values.yml`. Their data was restored already in the previous section [Restore of Elasticsearch/OpenSearch](#5-restore-elasticsearchopensearch-snapshots) and can be executed from now on, but they depend on Zeebe and will crashloop until Zeebe is fully restored.
-:::
-
 Camunda provides a standalone app which must be run on each node where a Zeebe broker will be running. This is a Spring Boot application similar to the broker and can run using the binary provided as part of the distribution. The app can be configured the same way a broker is configured - via environment variables or using the configuration file located in `config/application.yaml`.
 
-:::note
-When restoring, provide the same configuration (node id, data directory, cluster size, and replication count) as the broker that will be running in this node. The partition count must be same as in the backup.
+:::warning
+When restoring, provide the same configuration (node id, data directory, cluster size, and replication count) as the broker that will be running in this node. The partition count **must be same** as in the backup.
 
 The amount of partitions backed up are also visible in the backup store of Zeebe, see [how to figure out available backups](#available-backups-of-zeebe-partitions).
+If brokers were dynamically scaled between backup and restore, this is not an issue - as long as the partition count remains unchanged.
 :::
 
 <Tabs>
