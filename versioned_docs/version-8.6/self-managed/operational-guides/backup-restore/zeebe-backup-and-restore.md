@@ -83,15 +83,19 @@ This will prevent the S3 client from calculating the additional checksums and sh
 
 **Backups to Dell EMC ECS fail with 400 Bad Request**
 
-When using an S3 backup store with Dell EMC ECS, you may encounter `The Content-SHA256 you specified did not match what we received (Service: S3, Status Code: 400)` errors. This is caused by a recent change in the AWS S3 client, which now signs streaming chunked uploads differently. Dell EMC ECS does not support chuncked encoding.
+When using an S3 backup store with Dell EMC ECS, you may encounter the following error:
 
-To resolve this issue, you can restore the previous behavior by setting the following environment variable on your Zeebe brokers:
+`The Content-SHA256 you specified did not match what we received (Service: S3, Status Code: 400)`
+
+This issue is caused by a recent change in the AWS S3 client, which now signs streaming chunked uploads differently. Dell EMC ECS does not support chunked encoding.
+
+To resolve this issue, set the following environment variable on your Zeebe brokers:
 
 ```
 AWS_REQUEST_CHECKSUM_CALCULATION=WHEN_REQUIRED
 ```
 
-This will prevent the S3 client from calculating the additional checksums and should resolve the issue.
+This disables the additional checksum calculation in the S3 client and should resolve the issue.
 
 #### Backup Encryption
 
