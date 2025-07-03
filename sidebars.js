@@ -10,6 +10,7 @@ module.exports = {
             "guides/orchestrate-human-tasks",
             "guides/orchestrate-apis",
             "guides/orchestrate-microservices",
+            "guides/incorporate-user-task-listener",
           ],
         },
       ],
