@@ -16,7 +16,7 @@ CPT is based on [JUnit 5](https://junit.org/junit5/) and [Testcontainers](https:
 - Elasticsearch
 
 :::danger Disclaimer
-CPT will be released with 8.8 and replace [Zeebe Process Test](/apis-tools/java-client/zeebe-process-test.md). It is already available as [alpha version](/components/early-access/alpha/alpha-features.md#alpha).
+CPT will be released with 8.8 and replace [Zeebe Process Test](/apis-tools/java-client/zeebe-process-test.md). It is already available as an [alpha feature](/components/early-access/alpha/alpha-features.md#alpha).
 :::
 
 :::note Limitations
