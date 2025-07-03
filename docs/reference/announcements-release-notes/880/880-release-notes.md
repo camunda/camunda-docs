@@ -112,13 +112,13 @@ You can use this to run custom logic for new user tasks, ensuring tasks are accu
 
 <!-- https://github.com/camunda/product-hub/issues/2657 -->
 
-This is triggered when a user task is cancelled (for example, by an interrupting boundary event, event sub-process, or an entire process instance cancellation), and provides the following functionality:
+This is triggered when a user task is canceled (for example, by an interrupting boundary event, event sub-process, or an entire process instance cancelation), and provides the following functionality:
 
-| Functionality                           | Description                                                                                                                                                                |
-| :-------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Configurable Cancelation Listener (UTL) | Add a cancellation listener to user tasks. On cancellation, this listener is invoked, fetching relevant task properties and enabling data or variable modifications.       |
-| Consistent Lifecycle Control            | The cancellation operation proceeds only after all related listener jobs are complete. Incidents can be raised if listener logic fails to evaluate, ensuring safe retries. |
-| Operate UI Insights                     | A new “Canceling” event type is displayed in the listener tab of the process instance details. If an incident occurs, it is highlighted for immediate troubleshooting.     |
+| Functionality                           | Description                                                                                                                                                               |
+| :-------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Configurable Cancelation Listener (UTL) | Add a cancelation listener to user tasks. On cancelation, this listener is invoked, fetching relevant task properties and enabling data or variable modifications.        |
+| Consistent Lifecycle Control            | The cancelation operation proceeds only after all related listener jobs are complete. Incidents can be raised if listener logic fails to evaluate, ensuring safe retries. |
+| Operate UI Insights                     | A new “Canceling” event type is displayed in the listener tab of the process instance details. If an incident occurs, it is highlighted for immediate troubleshooting.    |
 
 To learn more about these new user task listener event types, see [user task listeners](/components/concepts/user-task-listeners.md).
 
