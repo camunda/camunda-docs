@@ -55,6 +55,16 @@ New migration guides will also be provided to support you when migrating from a 
 Additional upgrade considerations are necessary for deployments that use custom scripts, such as Docker containers, manual installations, or custom-developed Kubernetes deployments. For these deployments, customers can either continue to deploy with their original 8.7 topology and upgrade each component independently, or adopt our Helm chart approach for the upgrade, which allows for unifying the deployment into a single JAR or container executable.
 :::
 
+#### Alternative Container Images
+
+<!-- https://github.com/camunda/product-hub/issues/2826 -->
+
+To improve security, reliability, and supportability of Camunda 8 Self-Managed deployments, we are introducing alternative container images to the previously used Bitnami open source images. These images are hosted by Camunda on `registry.camunda.cloud`.
+
+Starting with version **8.8**, these images are considered the default supported option when deploying Camunda 8 via Helm charts. They ensure faster delivery of security patches (including CVE fixes) and better alignment with supported environments.
+
+To adopt these images, update your Helm deployment to reference the `values-images-ee.yml` file. Full setup instructions are available in the [installation guide](/self-managed/setup/install.md).
+
 #### Single Elasticsearch/OpenSearch instance
 
 Using more than one isolated Elasticsearch/OpenSearch instance for exported Zeebe, Operate, and Tasklist data is no longer supported. If your environment uses multiple Elasticsearch/OpenSearch instances, you must manually migrate the data from each to a single Elasticsearch/OpenSearch cluster before updating to Camunda 8.8. The migration should target Zeebe, Operate, and Tasklist indices, index templates, aliases, and ILM policies.
