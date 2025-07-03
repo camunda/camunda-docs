@@ -17,7 +17,7 @@ As the MCP client functionality is handled by a stateless [Job worker](../../../
 activation of an activity using the MCP Remote Client demands to open a dedicated HTTP connection/SSE subscription to
 the MCP server.
 
-For example, each action in a process would open/close a dedicarted MCP client connection to the remote
+For example, each action in a process would open/close a dedicated MCP client connection to the remote
 server:
 
 1. Tool discovery
