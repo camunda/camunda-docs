@@ -183,7 +183,57 @@ Specify the process variables that you want to map and export the tool calling r
 
 ## Human-in-the-loop
 
-TBD
+![MCP Client connector human-in-the-loop example](img/mcp-client-hitl.png)
+
+With the tool discovery approach described above, it is possible to combine the MCP client connector with other BPMN
+elements such as user tasks or intermediate events to create a human-in-the-loop interaction. Instead of directly
+exposing the MCP client connector as tool, an intermediate event marked as MCP client gateway can be used as the root
+activity of a tool flow within the ad-hoc sub-process.
+
+An example of how to set this up with a filesystem MCP server (see [examples](#examples) for a working reference
+example):
+
+1. Add a service task to the ad-hoc sub-process and apply/configure one of the MCP client connectors.
+2. Add an intermediate throw event to the ad-hoc sub-process and add an extension property with name
+   `io.camunda.agenticai.gateway.type` and value `mcpClient`.
+3. Create an exclusive gateway after the event to decide whether the MCP client tool call should be directly executed or
+   whether a confirmation is needed.
+4. Create a flow from the exclusive gateway for the case where the MCP client tool call should be executed
+   directly.
+   - Connect this flow to the MCP client service task.
+   - In the condition expression you can use a FEEL expression like the following to directly allow tool listing and
+     selected operations. This is different from [filtering](#tools) as it still makes all the tools available,
+     but allows to decide which tools need to be confirmed by the user:
+     ```feel
+     if toolCall.method = "tools/list" then
+       true
+     else
+       toolCall.method = "tools/call" and list contains([
+         "read_file",
+         "read_multiple_files"
+       ], toolCall.params.name)
+     ```
+5. Create a default flow to a user task containing presenting a checkbox to allow/deny the tool call.
+
+   - A text view could present the tool call with a template such as the following:
+
+     ```
+     # MCP Tool Call Confirmation
+
+     The model requested to call the following MCP tool:
+
+     {{toolCall.params}}
+     ```
+
+6. Configure a second exclusive gateway after the user task to decide if the tool call should be executed depending on
+   the value of the checkbox added to the user task.
+   - If tool execution is allowed, connect the exclusive gateway to the MCP client service task.
+   - If tool execution is not allowed, end the tool flow in an intermediate throw event. Configure an output variable
+     `toolCallResult` to return denied tool call to the model. Use the following FEEL expression as a
+     variable assignment value:
+     ```feel
+     {"isError": true, "content": [{"type": "text", "text": "Tool call was not allowed by the user"}]}
+     ```
 
 ## Examples
 
@@ -191,4 +241,4 @@ A ready-to-go example using both connector types and a human-in-the-loop interac
 [connectors repository](https://github.com/camunda/connectors/tree/main/connectors/agentic-ai/examples/ai-agent-chat-mcp).
 See
 its [README](https://github.com/camunda/connectors/blob/main/connectors/agentic-ai/examples/ai-agent-chat-mcp/README.md)
-for further details on the needed configuration.
+for further details on the necessary configuration.
