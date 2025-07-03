@@ -10,6 +10,12 @@ Learn more about the important changes in Camunda 8.8 and get ready to migrate f
 
 ## About Camunda 8.8
 
+Camunda 8.8 introduces several important changes and enhancements as part of our architecture streamlining initiative, focusing on identity management and migration considerations from version 8.7.
+
+:::info
+Release notes
+:::info
+
 <!-- The following badges are used to help you understand if you are likely to be affected by any 8.8 changes summarized on this page.
 
 | Persona | Description |
@@ -18,9 +24,13 @@ Learn more about the important changes in Camunda 8.8 and get ready to migrate f
 
 ## Authentication & authorization: Orchestration Cluster Identity
 
+### What's changed?
+
 Decoupling of the Cluster from Management Identity, formerly just Identity.
 
 Alignment of IdP integration, independent from the IdP vendor. There is no special setup for Keycloak anymore like it was the case with
+
+### How does this affect me?
 
 ### Identity in Self-Managed
 
