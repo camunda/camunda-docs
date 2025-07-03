@@ -198,9 +198,8 @@ example):
    `io.camunda.agenticai.gateway.type` and value `mcpClient`.
 3. Create an exclusive gateway after the event to decide whether the MCP client tool call should be directly executed or
    whether a confirmation is needed.
-4. Create a flow from the exclusive gateway for the case where the MCP client tool call should be executed
-   directly.
-   - Connect this flow to the MCP client service task.
+4. Create a flow from the exclusive gateway to the MCP client service task for the case where the MCP client tool call
+   should be executed directly.
    - In the condition expression you can use a FEEL expression like the following to directly allow tool listing and
      selected operations. This is different from [filtering](#tools) as it still makes all the tools available,
      but allows to decide which tools need to be confirmed by the user:
@@ -213,7 +212,8 @@ example):
          "read_multiple_files"
        ], toolCall.params.name)
      ```
-5. Create a default flow to a user task containing presenting a checkbox to allow/deny the tool call.
+5. Create a default flow to a user task for the confirmation. Set up a form for the user task to enable a decision on
+   whether the tool call should be executed.
 
    - A text view could present the tool call with a template such as the following:
 
@@ -224,6 +224,8 @@ example):
 
      {{toolCall.params}}
      ```
+
+   - A checkbox could be added to the form to allow the user to confirm or deny the tool call
 
 6. Configure a second exclusive gateway after the user task to decide if the tool call should be executed depending on
    the value of the checkbox added to the user task.
