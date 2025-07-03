@@ -13,7 +13,7 @@ The MCP Remote Client connector allows you to connect to a remote MCP client by 
 an [HTTP with SSE](https://modelcontextprotocol.io/specification/2024-11-05/basic/transports#http-with-sse) (Server-Sent
 Events) endpoint provided by an MCP server.
 
-As the MCP client functionality is handled by a stateless [Job Worker](../../../concepts/job-workers.md), each
+As the MCP client functionality is handled by a stateless [Job worker](../../../concepts/job-workers.md), each
 activation of an activity using the MCP Remote Client demands to open a dedicated HTTP connection/SSE subscription to
 the MCP server.
 
