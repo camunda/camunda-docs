@@ -57,6 +57,7 @@ module.exports = {
   ],
   Components: [
     "components/components-overview",
+    "components/whats-new-88",
     {
       type: "category",
       label: "Concepts",
