@@ -60,32 +60,18 @@ A new `getJson` function accepts a document and an optional FEEL expression para
 
 To learn more about using connector intrinsic functions, see [intrinsic functions](/components/connectors/use-connectors/intrinsic-functions.md).
 
-### Agentic orchestration <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span>
-
-The following [agentic orchestration](/components/agentic-orchestration/agentic-orchestration.md) features are available
-in this alpha release:
-
-#### AI Agent: support for structured outputs/JSON mode
+#### AI Agent connector
 
 <!-- https://github.com/camunda/camunda-docs/pull/5942 -->
-
-The AI Agent connector now supports
-[configurable response formats](../../../components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#response),
-allowing to specify whether the connector should return text or JSON responses for downstream processing of the agent
-output.
-
-Depending on the used model, it additionally allows to define the JSON schema of the data returned by the agent.
-
-#### AI Agent: support for storing conversation history in Camunda document storage
-
 <!-- https://github.com/camunda/camunda-docs/pull/6068 -->
 
-The AI Agent connector now supports storing the conversation history in
-[Camunda's document storage](../../../components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#memory)
-instead of using process variables. This allows storing a larger conversation history without being limited by the
-process variable size limits.
+- **Structured outputs/JSON mode**: [Configurable response formats](../../../components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#response) allow you to specify if the connector should return text or JSON responses for downstream processing of the agent output. Depending on the model used, this also allows you to define the JSON schema of the data returned by the agent.
 
-### Get started guides updated <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+- **Conversation history storage**: The conversation history can now be stored in [Camunda's document storage](../../../components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#memory) instead of process variables. This allows a larger conversation history to be stored without being limited by process variable size limits.
+
+To learn more about this connector, see [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
+
+### Get started updates <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
 <!-- https://github.com/camunda/product-hub/issues/2751 -->
 
