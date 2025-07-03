@@ -33,7 +33,7 @@ Tool discovery and tool calling is done through the ad-hoc sub-process rather th
 - More advanced modeling use cases involving other BPMN elements. For example, user tasks can be used to combine MCP
   clients with an approval flow for individual tool calls (see [human-in-the-loop](#human-in-the-loop)).
 
-TBD GRAPHIC
+![MCP Client integration architecture](img/mcp-clients-architecture.png)
 
 The following sequence diagram illustrates the process of tool discovery and tool calling with MCP clients. Each actor
 in the diagram can potentially run in a different deployment, making it truly distributed.
