@@ -229,11 +229,11 @@ By default, the Camunda Helm chart uses [open-source images provided by Bitnami]
 
 These enterprise images:
 
-* Are based on the Bitnami open-source stack
-* Include critical CVE patches and security hardening
-* Come with extended vendor support
-* Are hosted on a private registry: `registry.camunda.cloud`
-* Are only available to Camunda customers
+- Are based on the Bitnami open-source stack
+- Include critical CVE patches and security hardening
+- Come with extended vendor support
+- Are hosted on a private registry: `registry.camunda.cloud`
+- Are only available to Camunda customers
 
 #### Create a Kubernetes registry secret
 
