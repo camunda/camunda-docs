@@ -8,7 +8,7 @@ description: "Learn how to back up and restore your Camunda 8 Self-Managed compo
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import ZeebeGrid from '@site/docs/components/zeebe/react-components/\_zeebe-card';
+import ZeebeGrid from '../../../components/zeebe/react-components/\_zeebe-card';
 import { overviewCards } from './react-components/\_card-data';
 
 Use the backup feature to back up and restore your Camunda 8 Self-Managed components and cluster.
