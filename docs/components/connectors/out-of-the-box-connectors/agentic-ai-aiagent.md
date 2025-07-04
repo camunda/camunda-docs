@@ -115,7 +115,7 @@ Select this option to use an Anthropic Claude LLM model (uses the [Anthropic Mes
 
 | Field             | Required | Description                                                                                                                   |
 | :---------------- | :------- | :---------------------------------------------------------------------------------------------------------------------------- |
-| Anthropic API Key | Yes      | Your Anthropic account API Key for authorization to the [Anthropic Messages API](https://docs.anthropic.com/en/api/messages). |
+| Anthropic API key | Yes      | Your Anthropic account API key for authorization to the [Anthropic Messages API](https://docs.anthropic.com/en/api/messages). |
 
 :::info
 For more information about Anthropic Claude LLM models, refer to the [Claude models overview](https://docs.anthropic.com/en/docs/about-claude/models/all-models).
@@ -143,7 +143,7 @@ Select this option to use the [OpenAI Chat Completion API](https://platform.open
 
 | Field               | Required | Description                                                                                                                                              |
 | :------------------ | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| OpenAI API Key      | Yes      | Your OpenAI account API Key for authorization.                                                                                                           |
+| OpenAI API key      | Yes      | Your OpenAI account API key for authorization.                                                                                                           |
 | Organization ID     | No       | For members of multiple organizations. If you belong to multiple organizations, specify the organization ID to use for API requests with this connector. |
 | Project ID          | No       | If you access projects through a legacy user API key, specify the project ID to use for API requests with this connector.                                |
 | Custom API endpoint | No       | Optional custom API endpoint.                                                                                                                            |
@@ -161,7 +161,7 @@ Select the model you want to use for the selected provider, and specify any addi
 | :------------------------ | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Model                     | Yes      | <p>Specify the model ID for the model you want to use.</p><p>Example: `anthropic.claude-3-5-sonnet-20240620-v1:0`</p>                                 |
 | Maximum tokens            | No       | The maximum number of tokens per request to allow in the generated response.                                                                          |
-| Maximum Completion Tokens | No       | The maximum number of tokens per request to generate before stopping.                                                                                 |
+| Maximum completion tokens | No       | The maximum number of tokens per request to generate before stopping.                                                                                 |
 | Temperature               | No       | Floating point number, typically between 0 and 1 (0 and 2 for OpenAI). The higher the number, the more randomness will be injected into the response. |
 | top P                     | No       | Floating point number, typically between 0 and 1. Recommended for advanced use cases only (usually you only need to use temperature).                 |
 | top K                     | No       | Integer greater than 0. Recommended for advanced use cases only (you usually only need to use temperature).                                           |
@@ -180,8 +180,8 @@ The **System Prompt** is a crucial part of the AI Agent connector configuration,
 
 | Field                    | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | :----------------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| System Prompt            | Yes      | <p>Specify a system prompt to define how the LLM should act.</p><p><ul><li><p>A minimal example system prompt is provided as a starting point for you to customize.</p></li><li><p>You can use FEEL expressions or inject parameters into the text in this field, using the `{{parameter}}` syntax to inject any parameters defined in the **System Prompt Parameters** field (FEEL context).</p><p>Example: `{{current_date_time}}`.</p></li></ul></p> |
-| System Prompt Parameters | No       | <p>Define a map of parameters you can use in `{{parameter}}` format in the **System Prompt** field.</p><p>The default parameters (`current_date`, `current_time`, `current_date_time`) do not need to be explicitly defined in this field.</p>                                                                                                                                                                                                          |
+| System prompt            | Yes      | <p>Specify a system prompt to define how the LLM should act.</p><p><ul><li><p>A minimal example system prompt is provided as a starting point for you to customize.</p></li><li><p>You can use FEEL expressions or inject parameters into the text in this field, using the `{{parameter}}` syntax to inject any parameters defined in the **System Prompt Parameters** field (FEEL context).</p><p>Example: `{{current_date_time}}`.</p></li></ul></p> |
+| System prompt parameters | No       | <p>Define a map of parameters you can use in `{{parameter}}` format in the **System Prompt** field.</p><p>The default parameters (`current_date`, `current_time`, `current_date_time`) do not need to be explicitly defined in this field.</p>                                                                                                                                                                                                          |
 
 ### User Prompt
 
@@ -189,8 +189,8 @@ The **User Prompt** contains the actual request to the LLM model.
 
 | Field                  | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | :--------------------- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| User Prompt            | Yes      | <p>This could either contain the initial request or a follow-up request as part of a response interaction feedback loop.</p><p><ul><li><p>The value provided as part of this field is added to the conversation memory and passed to the LLM call.</p></li><li><p>For example, in the [example conversation](#example-conversation), this would be the messages prefixed with `User:`.</p></li><li><p>You can use FEEL expressions or inject parameters into the text in this field, using the `{{parameter}}` syntax to inject any parameters defined in the **User Prompt Parameters** field (FEEL context).</p><p>Example: `{{current_date_time}}`.</p></li></ul></p>                                                                                                                                                                   |
-| User Prompt Parameters | No       | <p>Define a map of parameters you can use in `{{parameter}}` format in the **User Prompt** field.</p><p>The default parameters (`current_date`, `current_time`, `current_date_time`) do not need to be explicitly defined in this field.</p>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| User prompt            | Yes      | <p>This could either contain the initial request or a follow-up request as part of a response interaction feedback loop.</p><p><ul><li><p>The value provided as part of this field is added to the conversation memory and passed to the LLM call.</p></li><li><p>For example, in the [example conversation](#example-conversation), this would be the messages prefixed with `User:`.</p></li><li><p>You can use FEEL expressions or inject parameters into the text in this field, using the `{{parameter}}` syntax to inject any parameters defined in the **User Prompt Parameters** field (FEEL context).</p><p>Example: `{{current_date_time}}`.</p></li></ul></p>                                                                                                                                                                   |
+| User prompt parameters | No       | <p>Define a map of parameters you can use in `{{parameter}}` format in the **User Prompt** field.</p><p>The default parameters (`current_date`, `current_time`, `current_date_time`) do not need to be explicitly defined in this field.</p>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | Documents              | No       | <p>Add a [document references](/self-managed/concepts/document-handling/overview.md) list to allow an AI agent to interact with documents and images.</p><p><ul><li><p>This list is internally resolved and passed to the LLM model if the document type is supported.</p></li><li><p>LLM APIs provide a way to specify the user prompt as a list of content blocks. If document references are passed, they are resolved to a corresponding content block and passed as part of the user message.</p></li><li><p>For examples of how LLM providers accept document content blocks, refer to the [Anthropic](https://docs.anthropic.com/en/docs/build-with-claude/vision#base64-encoded-image-example) and [OpenAI](https://platform.openai.com/docs/guides/images-vision#giving-a-model-images-as-input) documentation.</p></li></ul></p> |
 
 #### Supported document types
@@ -215,7 +215,7 @@ Specify the tool resolution for an accompanying ad-hoc sub-process.
 | Field                 | Required | Description                                                                                                                                                                                                                                                                                                                     |
 | :-------------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Ad-hoc sub-process ID | No       | <p>Specify the element ID of the ad-hoc sub-process to use for tool resolution (see [Tool Resolution](agentic-ai-aiagent-example.md#tool-resolution)).</p><p>When entering the AI Agent connector, the connector resolves the tools available in the ad-hoc sub-process, and passes these to the LLM as part of the prompt.</p> |
-| Tool Call Results     | No       | <p>Specify the results collection of the ad-hoc sub-process multi-instance execution.</p><p>Example: `=toolCallResults`</p>                                                                                                                                                                                                     |
+| Tool call results     | No       | <p>Specify the results collection of the ad-hoc sub-process multi-instance execution.</p><p>Example: `=toolCallResults`</p>                                                                                                                                                                                                     |
 
 :::note
 
@@ -226,12 +226,30 @@ Specify the tool resolution for an accompanying ad-hoc sub-process.
 
 ### Memory
 
-Configure the Agent's short-term/conversational memory.
+Configure the agent's short-term/conversational memory. Depending on your use case, you can store the conversation memory in different storage backends.
 
-| Field            | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| :--------------- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Agent Context    | Yes      | <p>Specify an agent context variable to store all relevant data for the agent to support a feedback loop between user requests, tool calls, and LLM responses. Make sure this variable points to the `context` variable that is returned from the agent response.</p><p>This is an important variable required to make a feedback loop work correctly. This variable must be aligned with the Output mapping **Result variable** and **Result expression** for this connector.</p><p>Example: `=agent.context`</p> |
-| Maximum messages | No       | <p>Specify the maximum number of messages to keep in context and pass to the LLM on every call.</p><p><ul><li><p>Configuring this is a trade-off between cost/tokens and the context window supported by the used model.</p></li><li><p>When the conversation exceeds the maximum number of messages, oldest messages from past feedback loops will be removed first. The system prompt is always kept in the context.</p></li></ul></p>                                                                           |
+| Field               | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| :------------------ | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Agent context       | Yes      | <p>Specify an agent context variable to store all relevant data for the agent to support a feedback loop between user requests, tool calls, and LLM responses. Make sure this variable points to the `context` variable that is returned from the agent response.</p><p>This is an important variable required to make a feedback loop work correctly. This variable must be aligned with the Output mapping **Result variable** and **Result expression** for this connector.</p><p>Example: `=agent.context`</p> |
+| Memory storage type | Yes      | <p>Specify how the conversation memory should be stored.</p><ul><li>In Process (part of agent context): conversation messages will be stored as process variable and be subject to [variable size limitations](../../concepts/variables.md). This is the default value.</li><li>Camunda Document Storage: messages will be stored as a JSON document in [document storage](../../document-handling/getting-started.md).</li></ul>                                                                                  |
+| Context window size | No       | <p>Specify the maximum number of messages to pass to the LLM on every call. Defaults to `20` if not configured.</p><ul><li>Configuring this is a trade-off between cost/tokens and the context window supported by the used model.</li><li>When the conversation exceeds the configured context window size, the oldest messages from past feedback loops are omitted from the model API call first.</li><li>The system prompt is always kept in the list of messages passed to the LLM.</li></ul>                 |
+
+#### In-process storage
+
+Messages passed between the AI agent and the model are stored within the agent context variable and directly visible in Operate.
+
+This is suitable for many use cases, but you must be aware of the [variable size limitations](../../concepts/variables.md) that limit the amount of data that can be stored in the process variable.
+
+#### Camunda document storage
+
+Messages passed between the AI agent and the model are not directly available as process variable but reference a JSON document stored in [document storage](../../document-handling/getting-started.md).
+
+As documents are subject to expiration, to avoid losing the conversation history you must be able to predict the expected lifetime of your process, so you can correctly configure the document time-to-live (TTL).
+
+| Field                      | Required | Description                                                                                                                                                                                                                                                                        |
+| :------------------------- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Document TTL               | No       | <p>Time-to-live (TTL) for documents containing the conversation history. Use this field to set a custom TTL matching your expected process lifetime.</p><p>The [default cluster TTL](../../document-handling/getting-started.md#saas) is used if this value is not configured.</p> |
+| Custom document properties | No       | <p>Optional map of properties to store with the document.</p><p>Use this option to reference custom metadata you might want to use when further processing conversation documents.</p>                                                                                             |
 
 ### Limits
 
@@ -247,20 +265,92 @@ Despite these limits, you must closely monitor your LLM API usage and cost, and 
 
 ### Response
 
-Configure the response from the AI Agent connector for further processing.
+Configure the response format by specifying how the model should return its output (text or JSON) and how the connector should process and handle the returned response.
 
-For example, the LLM call typically returns one text content block plus additional metadata such as token usage, but could contain multiple content blocks, depending on the LLM provider and selected model.
+The outcome of an LLM call is stored as an **assistant message** designed to contain multiple content blocks.
 
-| Field                     | Required | Description                                                                                                                                                                                                                                                  |
-| :------------------------ | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Include text output       | No       | <p>Returns the **first text block** returned by the LLM as `responseText`.</p><p><ul><li><p>Typically a good option if you want to use the agent's text output for further processing.</p></li><li><p>This option is selected by default. </p></li></ul></p> |
-| Include assistant message | No       | <p>Returns the entire message returned by the LLM as `responseMessage', including any additional content blocks and metadata.</p><p>Select this option if you need more than just the first response text.</p>                                               |
+- This message always contains a single text content block for the currently supported providers/models.
+- The connector returns the **first content block** when handling the response, either as a text string or as a parsed JSON object.
 
-If you select both options, the response object contains both `responseText` and `responseMessage` fields, for example:
+| Field                     | Required | Description                                                                                                                                                                                                    |
+| :------------------------ | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Response format           | Yes      | <p>Instructs the model which response format to return.</p><p><ul><li>This can be either text or JSON.</li><li>JSON format support varies by provider and model.</li></ul></p>                                 |
+| Include assistant message | No       | <p>Returns the entire message returned by the LLM as `responseMessage`, including any additional content blocks and metadata.</p><p>Select this option if you need more than just the first response text.</p> |
+
+#### Text response format
+
+If not configured otherwise, this format is used by default and returns a `responseText` string as part of the
+connector response.
+
+| Field              | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| :----------------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Parse text as JSON | No       | <p>If this option is selected, the connector will attempt to parse the response text as JSON and return the parsed object as `responseJson` in the connector response.</p><p><ul><li><p>Use this option for models that do not support setting JSON as response format (such as Anthropic models) in combination with a prompt instructing the model to return a JSON response.</p></li><li><p>If parsing fails, the connector does not return an `responseJson` object, but only returns the original response text as `responseText`.</p></li></ul></p> |
+
+For an example prompt that instructs the model to return a JSON response,
+(see [Anthropic documenation](https://docs.anthropic.com/en/docs/test-and-evaluate/strengthen-guardrails/increase-consistency#example-enhancing-it-support-consistency)):
+
+```
+Output in JSON format with keys: "sentiment" (positive/negative/neutral), "key_issues" (list), and "action_items" (list of dicts with "team" and "task").
+```
+
+#### JSON response format
+
+:::note
+
+The JSON response format is currently only supported for OpenAI models. Use the text response format in combination with
+the **Parse text as JSON** option for other providers.
+
+:::
+
+If the model supports it, selecting JSON as response format instructs the model to always return a JSON response. If the model does not return a valid JSON response, the connector throws an error.
+
+To ensure the model generates data according to a specific JSON structure, you can optionally provide a
+[JSON Schema](https://json-schema.org/). Alternatively, you can instruct the model to return JSON following a specific
+structure as shown in the text example above.
+
+Support for JSON responses varies by provider and model.
+
+For OpenAI, selecting the JSON response format is equivalent to using
+the [JSON mode](https://platform.openai.com/docs/guides/structured-outputs?api-mode=chat#json-mode). Providing a
+JSON Schema instructs the model to return
+[structured outputs](https://platform.openai.com/docs/guides/structured-outputs?api-mode=chat#structured-outputs-vs-json-mode).
+
+| Field                     | Required | Description                                                                                                                                                                                                                                                           |
+| :------------------------ | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Response JSON schema      | No       | <p>Describes the desired response format as [JSON Schema](https://json-schema.org/).</p><p><ul><li>See [OpenAI's structured outputs documentation](https://platform.openai.com/docs/guides/structured-outputs?api-mode=chat#introduction) for examples.</li></ul></p> |
+| Response JSON schema name | No       | <p>Depending on the provider, the schema must be configured with a name for the schema (such as `Person`).</p><p>Ideally this name describes the purpose of the schema to make the model aware of the expected data.</p>                                              |
+
+For example, the following shows an example JSON Schema describing the expected response format for a user profile:
+
+```feel
+={
+  "type": "object",
+  "properties": {
+    "userId": {
+      "type": "number"
+    },
+    "firstname": {
+      "type": "string"
+    },
+    "lastname": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "userId",
+    "firstname",
+    "lastname"
+  ]
+}
+```
+
+#### Assistant message
+
+If the **Include assistant message** option is selected, the response from the AI Agent connector contains a
+`responseMessage` object that includes the assistant message, including all content blocks and metadata. For example:
 
 ```json
 {
-  "responseText": "Based on the result from the GetDateAndTime function, the current date and time is:\n\nJune 2, 2025, 09:15:38 AM (Central European Summer Time).",
   "responseMessage": {
     "role": "assistant",
     "content": [
@@ -293,10 +383,10 @@ agent.responseMessage.content[type = "text"][1].text
 
 Specify the process variables that you want to map and export the AI Agent connector response into.
 
-| Field             | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| :---------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Result variable   | Yes      | <p>The result of the AI Agent connector is a context containing the following fields:</p><p><ul><li><p>`context`: The updated **Agent Context**. Make sure you map this to a process variable and re-inject this variable in the **Agent Context** input field if your AI agent is part of a feedback loop.</p></li><li><p>`toolCalls`: Tool call requests provided by the LLM that need to be routed to the ad-hoc sub-process.</p></li><li><p>`responseText`: The last response text provided by the LLM if the `Include text output` option is enabled in the [Response](#response) section.</p></li><li><p>`responseMessage`: The last response message provided by the LLM if the `Include assistant message` option is enabled in the [Response](#response) section.</p></li></ul></p> |
-| Result expression | No       | In addition, you can choose to unpack the content of the response into multiple process variables using the **Result expression** field, as a [FEEL Context Expression](/components/concepts/expressions.md).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| Field             | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| :---------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Result variable   | Yes      | <p>The result of the AI Agent connector is a context containing the following fields:</p><p><ul><li><p>`context`: The updated **Agent Context**. Make sure you map this to a process variable and re-inject this variable in the **Agent Context** input field if your AI agent is part of a feedback loop.</p></li><li><p>`toolCalls`: Tool call requests provided by the LLM that need to be routed to the ad-hoc sub-process.</p></li></ul></p><p>Response fields depend on how the [Response](#response) is configured: <ul><li><p>`responseText`: The last response text provided by the LLM if the **Response Format** is set to "Text".</p></li><li><p>`responseJson`: The last response text provided by the LLM, parsed as a JSON object if the **Response Format** is set to "JSON" or if the **Parse text as JSON** option is enabled.</p></li><li><p>`responseMessage`: The assistant message provided by the LLM if the **Include assistant message** option is enabled.</p></li></ul></p> |
+| Result expression | No       | In addition, you can choose to unpack the content of the response into multiple process variables using the **Result expression** field, as a [FEEL Context Expression](/components/concepts/expressions.md).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 
 :::tip
 An easy approach to get started with modeling your first AI Agent is to use the result variable (for example, `agent`) and configure the **Agent Context** as `agent.context`.

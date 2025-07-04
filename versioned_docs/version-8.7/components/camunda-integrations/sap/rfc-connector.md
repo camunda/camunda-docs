@@ -103,7 +103,7 @@ Application "sap-rfc-connector" started and available at "some.url.hana.ondemand
 
 ### Modeling options
 
-To use the **SAP RFC connector** in your process, either change the type of existing task by clicking on it and using the **wrench-shaped** change type context menu icon, or create a new connector task by using the **Append connector** context menu. Follow our [guide to using connectors](/components/connectors/use-connectors/index.md) to learn more.
+To use the **SAP RFC connector** in your process, either change the type of existing task by clicking on the element and selecting the **Change element** menu icon, or create a new connector task by using the **Append connector** context menu. Follow our [guide to using connectors](/components/connectors/use-connectors/index.md) to learn more.
 
 ![sap-rfc-connector-task-in-model](./img/sap-rfc-connector-element-template.png)
 
