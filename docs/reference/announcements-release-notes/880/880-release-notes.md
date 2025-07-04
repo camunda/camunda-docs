@@ -71,17 +71,6 @@ To learn more about using connector intrinsic functions, see [intrinsic function
 
 To learn more about this connector, see [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
 
-### Get started updates <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
-
-<!-- https://github.com/camunda/product-hub/issues/2751 -->
-
-The Get started documentation is enhanced as follows:
-
-- Added example BPMN files, Java Spring Boot projects, and NodeJS projects available to work out-of-the-box.
-- Added Code snippets and practical tasks such as handling payment transactions are added.
-- Code is updated to follow Camunda changes so that it will work with later releases.
-- BPMN files contain annotations to guide you through running the process and viewing the results.
-
 ### Helm charts <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
 #### Alternative container images
@@ -99,12 +88,6 @@ Alternative container images to the previously used Bitnami open source images a
 <!-- https://github.com/camunda/product-hub/issues/2597 -->
 
 The Camunda Helm chart now includes support for configurable volumes. You can define `PersistentVolumeClaims` or choose to continue using `EmptyDir` through the `values.yaml` file, providing greater flexibility and operational stability.
-
-### Self-Managed backup and restore guide <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
-
-<!-- https://github.com/camunda/product-hub/issues/2299 -->
-
-The new updated [backup and restore guide](/self-managed/operational-guides/backup-restore/backup-and-restore.md) provides detailed information on what you need to consider for Camunda 8 backups, including how to set up and configure backups, and what to consider for external dependencies.
 
 ### Tasklist uses the Orchestration Cluster API <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span>
 
@@ -144,6 +127,25 @@ This is triggered when a user task is canceled (for example, by an interrupting 
 | Operate UI Insights                     | A new “Canceling” event type is displayed in the listener tab of the process instance details. If an incident occurs, it is highlighted for immediate troubleshooting.    |
 
 To learn more about these new user task listener event types, see [user task listeners](/components/concepts/user-task-listeners.md).
+
+### Documentation
+
+#### Backup and restore guide <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+
+<!-- https://github.com/camunda/product-hub/issues/2299 -->
+
+The new updated Self-Managed [backup and restore guide](/self-managed/operational-guides/backup-restore/backup-and-restore.md) provides detailed information on what you need to consider for Camunda 8 backups, including how to set up and configure backups, and what to consider for external dependencies.
+
+#### Get started updates <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+
+<!-- https://github.com/camunda/product-hub/issues/2751 -->
+
+The Get started documentation is enhanced as follows:
+
+- Added example BPMN files, Java Spring Boot projects, and NodeJS projects available to work out-of-the-box.
+- Added Code snippets and practical tasks such as handling payment transactions are added.
+- Code is updated to follow Camunda changes so that it will work with later releases.
+- BPMN files contain annotations to guide you through running the process and viewing the results.
 
 ## 8.8.0-alpha5
 
