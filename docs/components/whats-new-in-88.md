@@ -10,19 +10,24 @@ Learn more about the important changes in Camunda 8.8 and plan your migration fr
 
 ## About Camunda 8.8
 
-Camunda 8.8 introduces several important changes and enhancements as part of our architecture streamlining initiative, focusing on identity management and migration considerations from version 8.7.
+Camunda 8.8 introduces several important changes and enhancements as part of our architecture streamlining initiative, focusing on identity management and migration considerations from version 8.7. These changes include:
+
+- Introduction of the Orchestration Identity Application and API
 
 :::info
-Release notes
+Check the [release announcements](/reference/announcements-release-notes/880/880-announcements.md), [release notes](/reference/announcements-release-notes/880/880-release-notes.md), and [quality board](https://github.com/orgs/camunda/projects/187/views/15) to learn more about Camunda 8.8.
+
+The following badges help you understand if you are likely to be affected by any 8.8 changes summarized on this page.
+
+| Persona                                                                                             | Description |
+| :-------------------------------------------------------------------------------------------------- | :---------- |
+| <span class="badge badge--long" title="This feature affects Web Modeler">Operations Engineer</span> | efer        |
+
 :::
 
-<!-- The following badges are used to help you understand if you are likely to be affected by any 8.8 changes summarized on this page.
+## Orchestration Cluster Identity
 
-| Persona | Description |
-|:--|:--|
-| <span class="badge badge--medium" title="This feature affects Web Modeler">Operations Engineer</span> | efer | -->
-
-## Authentication & authorization: Orchestration Cluster Identity
+<span class="badge badge--medium" title="This feature affects Connectors">Authentication and authorization</span> <span class="badge badge--long" title="This feature affects Web Modeler">Operations Engineer</span>
 
 ### What's changed?
 
