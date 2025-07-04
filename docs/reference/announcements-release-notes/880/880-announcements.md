@@ -55,15 +55,15 @@ New migration guides will also be provided to support you when migrating from a 
 Additional upgrade considerations are necessary for deployments that use custom scripts, such as Docker containers, manual installations, or custom-developed Kubernetes deployments. For these deployments, customers can either continue to deploy with their original 8.7 topology and upgrade each component independently, or adopt our Helm chart approach for the upgrade, which allows for unifying the deployment into a single JAR or container executable.
 :::
 
-#### Alternative Container Images
+#### Alternative container images
 
 <!-- https://github.com/camunda/product-hub/issues/2826 -->
 
-To improve security, reliability, and supportability of Camunda 8 Self-Managed deployments, we are introducing alternative container images to the previously used Bitnami open source images. These images are hosted by Camunda on `registry.camunda.cloud`.
+Alternative container images to the previously used Bitnami open source images are added, to improve security, reliability, and support for Camunda 8 Self-Managed deployments. These images are hosted by Camunda on `registry.camunda.cloud`.
 
-Starting with version **8.8**, these images are considered the default supported option when deploying Camunda 8 via Helm charts. They ensure faster delivery of security patches (including CVE fixes) and better alignment with supported environments.
+- Starting with version **8.8**, these images are considered the default supported option when deploying Camunda 8 via Helm charts, as they ensure faster delivery of security patches (including CVE fixes) and better alignment with supported environments.
 
-To adopt these images, update your Helm deployment to reference the `values-images-ee.yml` file. Full setup instructions are available in the [installation guide](/self-managed/setup/install.md).
+- To adopt these images, update your Helm deployment to reference the `values-images-ee.yml` file. Full setup instructions are available in the [installation guide](/self-managed/setup/install.md).
 
 #### Single Elasticsearch/OpenSearch instance
 

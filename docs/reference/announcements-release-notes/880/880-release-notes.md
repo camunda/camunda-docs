@@ -82,7 +82,19 @@ The Get started documentation is enhanced as follows:
 - Code is updated to follow Camunda changes so that it will work with later releases.
 - BPMN files contain annotations to guide you through running the process and viewing the results.
 
-### Helm chart configurable volumes <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+### Helm charts <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+
+#### Alternative container images
+
+<!-- https://github.com/camunda/product-hub/issues/2826 -->
+
+Alternative container images to the previously used Bitnami open source images are added, to improve security, reliability, and support for Camunda 8 Self-Managed deployments. These images are hosted by Camunda on `registry.camunda.cloud`.
+
+- Starting with version **8.8**, these images are considered the default supported option when deploying Camunda 8 via Helm charts, as they ensure faster delivery of security patches (including CVE fixes) and better alignment with supported environments.
+
+- To adopt these images, update your Helm deployment to reference the `values-images-ee.yml` file. Full setup instructions are available in the [installation guide](/self-managed/setup/install.md).
+
+#### Configurable volumes
 
 <!-- https://github.com/camunda/product-hub/issues/2597 -->
 
