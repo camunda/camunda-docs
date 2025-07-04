@@ -71,6 +71,21 @@ A new `getJson` intrinsic function accepts a document and an optional FEEL expre
 
 To learn more about using connector intrinsic functions, see [intrinsic functions](/components/connectors/use-connectors/intrinsic-functions.md).
 
+### Dynamic partition scaling <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Zeebe">Zeebe</span>
+
+<!-- https://github.com/camunda/product-hub/issues/2226 -->
+
+You can now add new Zeebe partitions to a running cluster.
+
+- Scaling can be performed concurrently when the cluster is running, with zero downtime.
+- Newly created process instances also start on new partitions, distributing cluster load evenly across partitions over time.
+- Process instances do not migrate between partitions, so it can take for the cluster to reach a new equilibrium.
+- New partitions do not take part in correlating messages/signals, except for message start events/signal start events.
+
+:::note
+This feature is not yet fully compatible with backup/restore functionality.
+:::
+
 ### Helm charts <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
 #### Alternative container images
