@@ -19,6 +19,144 @@ These release notes identify the new features included in 8.8, including [alpha 
 | ---------------------- | ---------------------------- | ------------ | ------------ | ------------ |
 | 14 October 2025        | 13 April 2027                | -            | -            | -            |
 
+## 8.8.0-alpha6
+
+| Release date | Changelog(s)                                                                                                                                                                               | Blog                                                                              |
+| :----------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------- |
+| 8 July 2025  | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.8.0-alpha6)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.8.0-alpha6)</li></ul> | [Release blog](https://camunda.com/blog/2025/06/camunda-alpha-release-july-2025/) |
+
+### Bitbucket sync <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
+
+<!-- https://github.com/camunda/product-hub/issues/2507 -->
+
+Camunda 8 now supports integration with [Atlassian Bitbucket](https://bitbucket.org/product/), in addition to GitHub, GitLab, and Azure DevOps.
+
+- This helps customers who use Jira for their development processes.
+- Organization owners and administrators can connect their Web Modeler process applications to Bitbucket, allowing users to keep their Web Modeler, Desktop Modeler, and official version control projects synced.
+
+To learn more about Bitbucket integration, see [Git sync](/components/modeler/web-modeler/git-sync.md?platform=bitbucket).
+
+### Camunda 8 REST API renamed to Orchestration Cluster API <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects APIs">API</span>
+
+<!-- https://github.com/camunda/product-hub/issues/2793 -->
+
+The Camunda 8 REST API is renamed to the **Orchestration Cluster API**.
+
+- This new name more accurately reflects the API scope as a unified REST API for interacting with entities in a [Camunda 8 orchestration cluster](/reference/glossary.md#orchestration-cluster) (such as processes, tasks, variables, and so on).
+- There are no changes to the API functionality or structure. Only the name is changed to help with understanding and onboarding, and to improve clarity and alignment across Camunda documentation and resources.
+
+To learn more about using the Orchestration Cluster API, see [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
+
+### Connectors <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span> {#connectorsalpha6}
+
+#### AI Agent connector
+
+<!-- https://github.com/camunda/camunda-docs/pull/5942 -->
+<!-- https://github.com/camunda/camunda-docs/pull/6068 -->
+
+- **Structured outputs/JSON mode**: [Configurable response formats](../../../components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#response) allow you to specify if the connector should return text or JSON responses for downstream processing of the agent output. Depending on the model used, this also allows you to define the JSON schema of the data returned by the agent.
+
+- **Conversation history storage**: The conversation history can now be stored in [Camunda's document storage](../../../components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#memory) instead of process variables. This allows a larger conversation history to be stored without being limited by process variable size limits.
+
+To learn more about this connector, see [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
+
+#### Intrinsic functions
+
+<!-- https://github.com/camunda/camunda-docs/pull/5934 -->
+
+A new `getJson` intrinsic function accepts a document and an optional FEEL expression parameter. It extracts the text content from the JSON document and returns it as an object.
+
+- The optional FEEL expression parameter specifies the part that will be extracted from the JSON document content.
+- If not provided, the whole document is returned as a JSON object.
+
+To learn more about using connector intrinsic functions, see [intrinsic functions](/components/connectors/use-connectors/intrinsic-functions.md).
+
+### Dynamic partition scaling <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Zeebe">Zeebe</span>
+
+<!-- https://github.com/camunda/product-hub/issues/2226 -->
+
+You can now add new Zeebe partitions to a running cluster.
+
+- Scaling can be performed concurrently when the cluster is running, with zero downtime.
+- Newly created process instances also start on new partitions, distributing cluster load evenly across partitions over time.
+- Process instances do not migrate between partitions, so it can take for the cluster to reach a new equilibrium.
+- New partitions do not take part in correlating messages/signals, except for message start events/signal start events.
+
+:::note
+This feature is not yet fully compatible with backup/restore functionality.
+:::
+
+### Helm charts <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+
+#### Alternative container images
+
+<!-- https://github.com/camunda/product-hub/issues/2826 -->
+
+Alternative container images to the previously used Bitnami open source images are added, to improve security, reliability, and support for Camunda 8 Self-Managed deployments. These images are hosted by Camunda on `registry.camunda.cloud`.
+
+- Starting with version **8.8**, these images are considered the default supported option when deploying Camunda 8 via Helm charts, as they ensure faster delivery of security patches (including CVE fixes) and better alignment with supported environments.
+
+- To adopt these images, update your Helm deployment to reference the `values-images-ee.yml` file. Full setup instructions are available in the [installation guide](/self-managed/setup/install.md).
+
+#### Configurable volumes
+
+<!-- https://github.com/camunda/product-hub/issues/2597 -->
+
+The Camunda Helm chart now includes support for configurable volumes. You can define `PersistentVolumeClaims` or choose to continue using `EmptyDir` through the `values.yaml` file, providing greater flexibility and operational stability.
+
+### Tasklist uses the Orchestration Cluster API <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span>
+
+<!-- https://github.com/camunda/product-hub/issues/2516 -->
+
+The Tasklist frontend application is now transitioning from the soon-to-be-deprecated Tasklist V1 API to the unified [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
+
+- This ensures Tasklist remains fully compatible with Camunda 8 RDBMS support while continuing to work seamlessly with Elasticsearch and OpenSearch.
+- You can expect consistent functionality across different data layers, improved performance, and access to new platform features, all without losing existing capabilities or disrupting task management workflows.
+
+### User task listener types <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span>
+
+The following new user task listener types are available:
+
+#### `creating` event
+
+<!-- https://github.com/camunda/product-hub/issues/2625 -->
+
+You can use this to run custom logic for new user tasks, ensuring tasks are accurately and consistently configured before appearing to end users. This is triggered whenever a user task is about to be created, and provides the following functionality:
+
+| Functionality                        | Description                                                                                                                                                                                                      |
+| :----------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Configurable Creation Listener (UTL) | Add a creating listener to user tasks. When all listener jobs are completed, the user task can be created and becomes visible to eligible users (candidate groups/candidate users or assignees).                 |
+| Controlled Task Initialization       | The creation operation proceeds only after all related listener jobs are complete. Incidents can be raised if listener logic fails to evaluate, ensuring safe retries and preventing incomplete creation states. |
+| Operate UI Insights                  | A new “Creating” event type is displayed in the listener tab of the process instance details. If an incident occurs, it is highlighted for immediate troubleshooting.                                            |
+| Assign user task                     | Assign a user task when creating a task if the process does not specify this. This is useful if the assignment relies on an external system.                                                                     |
+
+#### `canceling` event
+
+<!-- https://github.com/camunda/product-hub/issues/2657 -->
+
+This is triggered when a user task is canceled (for example, by an interrupting boundary event, event sub-process, or an entire process instance cancelation), and provides the following functionality:
+
+| Functionality                           | Description                                                                                                                                                               |
+| :-------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Configurable Cancelation Listener (UTL) | Add a cancelation listener to user tasks. On cancelation, this listener is invoked, fetching relevant task properties and enabling data or variable modifications.        |
+| Consistent Lifecycle Control            | The cancelation operation proceeds only after all related listener jobs are complete. Incidents can be raised if listener logic fails to evaluate, ensuring safe retries. |
+| Operate UI Insights                     | A new “Canceling” event type is displayed in the listener tab of the process instance details. If an incident occurs, it is highlighted for immediate troubleshooting.    |
+
+To learn more about these new user task listener event types, see [user task listeners](/components/concepts/user-task-listeners.md).
+
+### Documentation
+
+#### Get started updates <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+
+<!-- https://github.com/camunda/product-hub/issues/2751 -->
+
+The Get started documentation is enhanced as follows:
+
+- Added example BPMN files, Java Spring Boot projects, and NodeJS projects available to work out-of-the-box.
+- Added Code snippets and practical tasks such as handling payment transactions are added.
+- Code is updated to follow Camunda changes so that it will work with later releases.
+- BPMN files contain annotations to guide you through running the process and viewing the results.
+
 ## 8.8.0-alpha5
 
 | Release date | Changelog(s)                                                                                                                                                                               | Blog                                                                              |
