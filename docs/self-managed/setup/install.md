@@ -170,6 +170,9 @@ Installing all the components in a cluster requires all Docker images to be down
 
 For air-gapped environments, refer to [installing in an air-gapped environment](/self-managed/setup/guides/air-gapped-installation.md).
 
+By default, the chart uses [open-source images from Bitnami](https://github.com/bitnami/containers). For enterprise installations, we recommend using enterprise images as described in [installing with vendor enterprise images](#install-with-vendor-enterprise-images).
+
+
 Review the progress of your deployment by checking if the Kubernetes pods are up and running with the following:
 
 ```shell
@@ -227,6 +230,59 @@ If you want to install a previous version of the Camunda componenets, follow thi
 helm install camunda camunda/camunda-platform --version 8.1 \
     --values https://helm.camunda.io/camunda-platform/values/values-v8.1.yaml
 ```
+
+### Install with vendor enterprise images
+
+By default, the Camunda Helm chart uses [open-source images provided by Bitnami](https://github.com/bitnami/containers). For production use, we recommend switching to **vendor enterprise images**, which are hardened versions of the open-source images.
+
+These enterprise images:
+
+* Are based on the Bitnami open-source stack
+* Include critical CVE patches and security hardening
+* Come with extended vendor support
+* Are hosted on a private registry: `registry.camunda.cloud`
+* Are only available to Camunda customers
+
+#### Create a Kubernetes registry secret
+
+To access the private registry, you must create a Kubernetes `docker-registry` secret with your Enterprise credentials:
+
+```shell
+kubectl create secret docker-registry camunda-registry-secret \
+  --docker-server=registry.camunda.cloud \
+  --docker-username=<your-username> \
+  --docker-password=<your-password> \
+  --docker-email=unused@example.com
+```
+
+Replace `<your-username>` and `<your-password>` with your LDAP credentials.
+
+Once created, reference the secret in your Helm values:
+
+```yaml
+global:
+  image:
+    pullSecrets:
+      - name: camunda-registry-secret
+```
+
+📘 Refer to the [Kubernetes docs on imagePullSecrets](https://kubernetes.io/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod) for more information.
+
+#### Install the Helm chart with vendor enterprise images
+
+Camunda provides a dedicated values file that overrides the default image registry and tags of the bitnami images to use enterprise images `values-images-ee.yml`.
+
+Use the following command to install Camunda with enterprise vendor images and your registry secret:
+
+```shell
+helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION \
+  --values https://raw.githubusercontent.com/camunda/camunda-platform-helm/main/charts/camunda-platform-8.8/values.yml \
+  --values https://raw.githubusercontent.com/camunda/camunda-platform-helm/main/charts/camunda-platform-8.8/values-images-ee.yml \
+  --set global.image.pullSecrets[0].name=camunda-registry-secret
+```
+
+This will deploy Camunda with vendor-supported enterprise images, recommended for secure and stable production environments.
+
 
 ### Accessing Camunda services
 
