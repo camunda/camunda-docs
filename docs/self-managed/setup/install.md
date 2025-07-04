@@ -261,7 +261,7 @@ Replace `<your-username>` and `<your-password>` with your LDAP credentials.
 
 #### Install the Helm chart with vendor enterprise images
 
-Camunda provides a dedicated values file that overrides the default image registry and tags of the bitnami images to use enterprise images `values-images-ee.yml`.
+Camunda provides a dedicated values file that overrides the default image registry and tags of the bitnami images to use enterprise images `values-images-ee.yaml`.
 
 :::note Vendor pull secret
 
@@ -278,8 +278,8 @@ Use the following command to install Camunda with enterprise vendor images and y
 
 ```shell
 helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION \
-  --values https://raw.githubusercontent.com/camunda/camunda-platform-helm/main/charts/camunda-platform-8.8/values.yml \
-  --values https://raw.githubusercontent.com/camunda/camunda-platform-helm/main/charts/camunda-platform-8.8/values-images-ee.yml
+  --values https://raw.githubusercontent.com/camunda/camunda-platform-helm/main/charts/camunda-platform-8.8/values.yaml \
+  --values https://raw.githubusercontent.com/camunda/camunda-platform-helm/main/charts/camunda-platform-8.8/values-images-ee.yaml
 ```
 
 This will deploy Camunda with vendor-supported enterprise images, recommended for secure and stable production environments.
