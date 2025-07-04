@@ -146,8 +146,9 @@ The response to this request would contain a `changeId`, `currentTopology`, plan
 
 #### 2.b Scaling brokers and partitions
 
-> [!WARNING]
-> Partition scaling is still an experimental feature, it is required to set `ZEEBE_BROKER_EXPERIMENTAL_FEATURES_ENABLEPARTITIONSCALING=true` to enable it.
+:::warning
+Partition scaling is still an experimental feature, it is required to set `ZEEBE_BROKER_EXPERIMENTAL_FEATURES_ENABLEPARTITIONSCALING=true` to enable it.
+:::
 
 Run the following to send the request to the Zeebe Gateway to add 3 new brokers to the cluster and set the number of partition to 6.
 
