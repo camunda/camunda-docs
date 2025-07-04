@@ -1,16 +1,25 @@
 ---
 id: zeebe-backup-and-restore
-title: "Backup and restore Zeebe data"
-description: "Create a backup of a running Zeebe cluster comprised of a consistent snapshot of all partitions."
+title: "Backup Management API - Zeebe"
+description: "Backup API to create a backup of a running Zeebe cluster comprised of a consistent snapshot of all partitions."
+sidebar_label: "Zeebe"
 keywords: ["backup", "backups"]
 ---
+
+Back up a running Zeebe cluster using the Backup Management API.
+
+## About this API
 
 A backup of a Zeebe cluster is comprised of a consistent snapshot of all partitions. The backup is taken asynchronously in the background while Zeebe is processing. Thus, the backups can be taken with minimal impact on typical processing. The backups can be used to restore a cluster in case of failures that lead to full data loss or data corruption.
 
 Zeebe provides a REST API to create backups, query, and manage existing backups.
 The backup management API is a custom endpoint `backups`, available via [Spring Boot Actuator](https://docs.spring.io/spring-boot/docs/2.7.x/reference/htmlsingle/#actuator.endpoints). This is accessible via the management port of the gateway. The API documentation is also available as [OpenApi specification](https://github.com/camunda/camunda/blob/main/dist/src/main/resources/api/backup-management-api.yaml).
 
-## Configuration
+:::warning
+Usage of this API requires the backup store to be configured for the component.
+
+- [Zeebe configuration](/self-managed/zeebe-deployment/configuration/broker.md#zeebebrokerdatabackup)
+  :::
 
 To use the backup feature in Zeebe, you must choose which external storage system you will use.
 Make sure to set the same configuration on all brokers in your cluster.
@@ -50,22 +59,20 @@ zeebe:
 
 Alternatively, you can configure backup store using environment variables:
 
-- `ZEEBE_BROKER_DATA_BACKUP_STORE` - Set this to `S3` to store backups in S3 buckets.
-- `ZEEBE_BROKER_DATA_BACKUP_S3_BUCKETNAME` - The backup is stored in this bucket. **The bucket must already exist**.
-- `ZEEBE_BROKER_DATA_BACKUP_S3_BASEPATH` - If the bucket is shared with other Zeebe clusters, a unique basePath must be configured.
-- `ZEEBE_BROKER_DATA_BACKUP_S3_ENDPOINT` - If no endpoint is provided, it is determined based on the configured region.
-- `ZEEBE_BROKER_DATA_BACKUP_S3_REGION` - If no region is provided, it is determined [from the environment](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/region-selection.html#automatically-determine-the-aws-region-from-the-environment).
-- `ZEEBE_BROKER_DATA_BACKUP_S3_ACCESSKEY` - If either `accessKey` or `secretKey` is not provided, the credentials are determined [from the environment](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials.html#credentials-chain).
-- `ZEEBE_BROKER_DATA_BACKUP_S3_SECRETKEY` - Specify the secret key.
-- `ZEEBE_BROKER_DATA_BACKUP_S3_APICALLTIMEOUT` - Configure a maximum duration for all S3 client API calls.
-- `ZEEBE_BROKER_DATA_BACKUP_S3_FORCEPATHSTYLEACCESS` - When enabled, forces the S3 client to use path-style access. By default, the client will automatically choose between path-style and virtual-hosted-style. Should only be enabled if the S3 compatible storage cannot support virtual-hosted-style.
-- `ZEEBE_BROKER_DATA_BACKUP_S3_COMPRESSION` - Enabling compression reduces
-  the required storage space for backups in S3, more details [bellow](#backup-compression).
-- `ZEEBE_BROKER_DATA_BACKUP_S3_MAXCONCURRENTCONNECTIONS` - Maximum number of connections allowed in a connection pool. This is used to restrict the maximum number of concurrent uploads as to avoid connection timeouts when uploading backups with large/many files.
-- `ZEEBE_BROKER_DATA_BACKUP_S3_CONNECTIONAQUISITIONTIMEOUT` - Timeout for acquiring an already-established connection from a connection pool to a remote service.
-
-[AWS S3]: https://aws.amazon.com/s3/
-[MinIO]: https://min.io/
+| Variable                                                  | Description                                                                                                                                                                                                                                         |
+| :-------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ZEEBE_BROKER_DATA_BACKUP_STORE`                          | Set this to `S3` to store backups in S3 buckets.                                                                                                                                                                                                    |
+| `ZEEBE_BROKER_DATA_BACKUP_S3_BUCKETNAME`                  | The backup is stored in this bucket. **The bucket must already exist**.                                                                                                                                                                             |
+| `ZEEBE_BROKER_DATA_BACKUP_S3_BASEPATH`                    | If the bucket is shared with other Zeebe clusters, a unique basePath must be configured.                                                                                                                                                            |
+| `ZEEBE_BROKER_DATA_BACKUP_S3_ENDPOINT`                    | If no endpoint is provided, it is determined based on the configured region.                                                                                                                                                                        |
+| `ZEEBE_BROKER_DATA_BACKUP_S3_REGION`                      | If no region is provided, it is determined [from the environment](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/region-selection.html#automatically-determine-the-aws-region-from-the-environment).                               |
+| `ZEEBE_BROKER_DATA_BACKUP_S3_ACCESSKEY`                   | If either `accessKey` or `secretKey` is not provided, the credentials are determined [from the environment](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials.html#credentials-chain).                                    |
+| `ZEEBE_BROKER_DATA_BACKUP_S3_SECRETKEY`                   | Specify the secret key.                                                                                                                                                                                                                             |
+| `ZEEBE_BROKER_DATA_BACKUP_S3_APICALLTIMEOUT`              | Configure a maximum duration for all S3 client API calls.                                                                                                                                                                                           |
+| `ZEEBE_BROKER_DATA_BACKUP_S3_FORCEPATHSTYLEACCESS`        | When enabled, forces the S3 client to use path-style access. By default, the client will automatically choose between path-style and virtual-hosted-style. Should only be enabled if the S3 compatible storage cannot support virtual-hosted-style. |
+| `ZEEBE_BROKER_DATA_BACKUP_S3_COMPRESSION`                 | Enabling compression reduces the required storage space for backups in S3, more details [below](#backup-compression).                                                                                                                               |
+| `ZEEBE_BROKER_DATA_BACKUP_S3_MAXCONCURRENTCONNECTIONS`    | Maximum number of connections allowed in a connection pool. This is used to restrict the maximum number of concurrent uploads as to avoid connection timeouts when uploading backups with large/many files.                                         |
+| `ZEEBE_BROKER_DATA_BACKUP_S3_CONNECTIONAQUISITIONTIMEOUT` | Timeout for acquiring an already-established connection from a connection pool to a remote                                                                                                                                                          |
 
 #### Known issues
 
@@ -169,27 +176,19 @@ zeebe:
             value:
 ```
 
-Alternatively, you can configure backup store using environment variables:
+Alternatively, you can configure the backup store using environment variables:
 
-- `ZEEBE_BROKER_DATA_BACKUP_STORE` - Set this to `AZURE` to store backups in Azure buckets.
-- `ZEEBE_BROKER_DATA_BACKUP_AZURE_ENDPOINT` - Name of the endpoint where the backup will be stored.
-- `ZEEBE_BROKER_DATA_BACKUP_AZURE_ACCOUNTNAME` - The account name that is used to connect to the service.
-- `ZEEBE_BROKER_DATA_BACKUP_AZURE_ACCOUNTKEY` - The account key that is used to connect to the service.
-- `ZEEBE_BROKER_DATA_BACKUP_AZURE_CONNECTIONSTRING` - The [connection string](https://learn.microsoft.com/en-us/azure/storage/common/storage-configure-connection-string?toc=/azure/storage/blobs/toc.json&bc=/azure/storage/blobs/breadcrumb/toc.json) to connect to the service. If this is defined, it will override the account name, account key, and endpoint.
-- `ZEEBE_BROKER_DATA_BACKUP_AZURE_BASEPATH` - The base path is used to define the container name where the blobs will be saved. This value must not be empty. When `basePath` is set, Zeebe will only create and access objects under this path.
-  This can be any string that is a valid [container name](https://learn.microsoft.com/en-us/rest/api/storageservices/naming-and-referencing-containers--blobs--and-metadata#container-names), for example the name of your cluster.
-- `ZEEBE_BROKER_DATA_BACKUP_AZURE_CREATECONTAINER` - Defines if the
-  container is created initially or if an existing one should be used (if
-  set to true and the container already exists, this is not recreated).
-  This configuration is true by default and should be generally not used
-  unless some authentication key is being used that does not have
-  container level permissions.
-- `ZEEBE_BROKER_DATA_BACKUP_AZURE_SASTOKEN_TYPE` - This setting defines the
-  [saas token](https://learn.microsoft.com/en-us/rest/api/storageservices/delegate-access-with-shared-access-signature) to use. These can be of user delegation, service or account type. Note that user delegation and service SAS tokens do not support the creation of containers, therefore `createContainer` configuration will be
-  overridden to `false` if `sasToken.type` is configured either as
-  "delegation" or "service". In this case the user must make sure that the
-  container already exists, or it will lead to a runtime error. The SAS token must be of the following types: "delegation", "service" or "account".
-- `ZEEBE_BROKER_DATA_BACKUP_AZURE_SASTOKEN_VALUE` - Specifies the key value of the SAS token.
+| Variable                                          | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| :------------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ZEEBE_BROKER_DATA_BACKUP_STORE`                  | Set this to `AZURE` to store backups in Azure buckets.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `ZEEBE_BROKER_DATA_BACKUP_AZURE_ENDPOINT`         | Name of the endpoint where the backup will be stored.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| `ZEEBE_BROKER_DATA_BACKUP_AZURE_ACCOUNTNAME`      | The account name that is used to connect to the service.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `ZEEBE_BROKER_DATA_BACKUP_AZURE_ACCOUNTKEY`       | The account key that is used to connect to the service.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `ZEEBE_BROKER_DATA_BACKUP_AZURE_CONNECTIONSTRING` | The [connection string](https://learn.microsoft.com/en-us/azure/storage/common/storage-configure-connection-string?toc=/azure/storage/blobs/toc.json&bc=/azure/storage/blobs/breadcrumb/toc.json) to connect to the service. If this is defined, it will override the account name, account key, and endpoint.                                                                                                                                                                                                                                                                                                                                             |
+| `ZEEBE_BROKER_DATA_BACKUP_AZURE_BASEPATH`         | The base path is used to define the container name where the blobs will be saved. This value must not be empty. When `basePath` is set, Zeebe will only create and access objects under this path. This can be any string that is a valid [container name](https://learn.microsoft.com/en-us/rest/api/storageservices/naming-and-referencing-containers--blobs--and-metadata#container-names), for example the name of your cluster.                                                                                                                                                                                                                       |
+| `ZEEBE_BROKER_DATA_BACKUP_AZURE_CREATECONTAINER`  | Defines if the container is created initially or if an existing one should be used (if set to true and the container already exists, this is not recreated). This configuration is true by default and should be generally not used unless some authentication key is being used that does not have container level permissions.                                                                                                                                                                                                                                                                                                                           |
+| `ZEEBE_BROKER_DATA_BACKUP_AZURE_SASTOKEN_TYPE`    | This setting defines the [saas token](https://learn.microsoft.com/en-us/rest/api/storageservices/delegate-access-with-shared-access-signature) to use. These can be of user delegation, service or account type. Note that user delegation and service SAS tokens do not support the creation of containers, therefore `createContainer` configuration will be overridden to `false` if `sasToken.type` is configured either as "delegation" or "service". In this case the user must make sure that the container already exists, or it will lead to a runtime error. The SAS token must be of the following types: "delegation", "service" or "account". |
+| `ZEEBE_BROKER_DATA_BACKUP_AZURE_SASTOKEN_VALUE`   | Specifies the key value of the SAS token.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 
 #### Backup encryption
 
@@ -427,29 +426,3 @@ curl --request DELETE 'http://localhost:9600/actuator/backups/100'
 | 500 Server Error | All other errors. Refer to the returned error message for more details.          |
 | 502 Bad Gateway  | Zeebe has encountered issues while communicating to different brokers.           |
 | 504 Timeout      | Zeebe failed to process the request with in a pre-determined timeout.            |
-
-## Restore
-
-A new Zeebe cluster can be created from a specific backup. Camunda provides a standalone app which must be run on each node where a Zeebe broker will be running. This is a Spring Boot application similar to the broker and can run using the binary provided as part of the distribution. The app can be configured the same way a broker is configured - via environment variables or using the configuration file located in `config/application.yaml`.
-
-To restore a Zeebe cluster, run the following in each node where the broker will be running:
-
-```
-tar -xzf zeebe-distribution-X.Y.Z.tar.gz -C zeebe/
-./bin/restore --backupId=<backupId>
-```
-
-If restore was successful, the app exits with a log message of `Successfully restored broker from backup`.
-
-Restore fails if:
-
-- There is no valid backup with the given backupId.
-- Backup store is not configured correctly.
-- The configured data directory is not empty.
-- Any other unexpected errors.
-
-If the restore fails, you can re-run the application after fixing the root cause.
-
-:::note
-When restoring, provide the same configuration (node id, data directory, cluster size, and replication count) as the broker that will be running in this node. The partition count must be same as in the backup.
-:::
