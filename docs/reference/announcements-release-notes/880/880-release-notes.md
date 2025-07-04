@@ -40,7 +40,7 @@ To learn more about Bitbucket integration, see [Git sync](/components/modeler/we
 
 <!-- https://github.com/camunda/product-hub/issues/2793 -->
 
-Starting with the Camunda 8.8 release, the Camunda 8 REST API is renamed to the **Orchestration Cluster API**.
+The Camunda 8 REST API is renamed to the **Orchestration Cluster API**.
 
 - This new name more accurately reflects the API scope as a unified REST API for interacting with entities in a [Camunda 8 orchestration cluster](/reference/glossary.md#orchestration-cluster) (such as processes, tasks, variables, and so on).
 - There are no changes to the API functionality or structure. Only the name is changed to help with understanding and onboarding, and to improve clarity and alignment across Camunda documentation and resources.
