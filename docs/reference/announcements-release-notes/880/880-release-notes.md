@@ -49,17 +49,6 @@ To learn more about using the Orchestration Cluster API, see [Orchestration Clus
 
 ### Connectors <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span> {#connectorsalpha6}
 
-#### `getJson` intrinsic function
-
-<!-- https://github.com/camunda/camunda-docs/pull/5934 -->
-
-A new `getJson` function accepts a document and an optional FEEL expression parameter. It extracts the text content from the JSON document and returns it as an object.
-
-- The optional FEEL expression parameter specifies the part that will be extracted from the JSON document content.
-- If not provided, the whole document is returned as a JSON object.
-
-To learn more about using connector intrinsic functions, see [intrinsic functions](/components/connectors/use-connectors/intrinsic-functions.md).
-
 #### AI Agent connector
 
 <!-- https://github.com/camunda/camunda-docs/pull/5942 -->
@@ -70,6 +59,17 @@ To learn more about using connector intrinsic functions, see [intrinsic function
 - **Conversation history storage**: The conversation history can now be stored in [Camunda's document storage](../../../components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#memory) instead of process variables. This allows a larger conversation history to be stored without being limited by process variable size limits.
 
 To learn more about this connector, see [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
+
+#### Intrinsic functions
+
+<!-- https://github.com/camunda/camunda-docs/pull/5934 -->
+
+A new `getJson` intrinsic function accepts a document and an optional FEEL expression parameter. It extracts the text content from the JSON document and returns it as an object.
+
+- The optional FEEL expression parameter specifies the part that will be extracted from the JSON document content.
+- If not provided, the whole document is returned as a JSON object.
+
+To learn more about using connector intrinsic functions, see [intrinsic functions](/components/connectors/use-connectors/intrinsic-functions.md).
 
 ### Helm charts <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
