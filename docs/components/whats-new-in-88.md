@@ -6,7 +6,7 @@ description: "Learn more about what's new and changed in Camunda 8.8."
 keywords: ["what's changed", "what's new"]
 ---
 
-Learn more about the important changes in Camunda 8.8 and get ready to migrate from 8.7.
+Learn more about the important changes in Camunda 8.8 and plan your migration from 8.7.
 
 ## About Camunda 8.8
 
