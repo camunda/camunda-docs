@@ -85,46 +85,41 @@ A job worker can then activate this job to execute the external logic and comple
 
 <CreateCluster/>
 
-## Step 5: Create credentials for your Zeebe client
-
-<CreateApiCredentials/>
-
-### Step 4: Deploy the process
+## Step 5: Deploy the process
 
 1. Click **Deploy current diagram**.
-2. Select your **Camunda 8 cluster** or create a new **deployment target**.
+2. Select your **Camunda 8 cluster**.
 3. Click **Deploy**.
 
 <!-- ![deploy the process](path-to-screenshot4.png) -->
 
-### Step 5: Start a process instance with test data
+## Step 6: Start a process instance to create the user task
 
-Use either the Console UI or REST API to start a new process instance with the following variables:
+1. Start a new process instance by clicking on the blue **Run** button.
+2. In the top left corner of the screen, click the square-shaped **Camunda components** button.
+3. Navigate to Tasklist and notice that there is no task in Tasklist yet.
+4. Navigate to Operate to see your process instance with a token waiting at the user task by clicking **View process instances**.
+5. Click the user task and then click the **Listeners** tab to see that the **Creating** listener is **Active**.
+6. Take a moment to understand the properties of the listener, for example verify that the listener type is what you defined in the process model. This listener is a job that can be activated and handled by a job worker.
 
-```json
-{
-  "variables": {
-    "hrGroupLead": {
-      "value": "john.doe"
-    }
-  }
-}
-```
+## Step 7: Implement the listener
 
-You can use the Swagger UI, Zeebe CLI, or REST API client like Postman to initiate this.
+Next, we'll run the listener application to execute our external logic, and complete the listener job to continue the user task's creation.
 
-### Step 6: Check assignment in Operate
+### Create credentials for your Zeebe client
 
-1. Open **Operate**.
-2. Find the process instance you started.
-3. Click on the **user task node**.
-4. Confirm the **assignee** is set to `"john.doe"`.
+<CreateApiCredentials/>
 
-### Step 7: Verify task in Tasklist
+### Create a job worker to implement the task listener
 
-1. Go to **Tasklist**.
-2. Log in as **john.doe**.
-3. You should see the **“Review application”** task assigned to you.
+Next, we’ll create a worker that listens to the user task's events by associating it with the **Listener type** we specified on the task listener in the BPMN diagram.
+
+1. Open the downloaded or cloned project ([repo](https://github.com/camunda/camunda-platform-tutorials), then `cd` into `camunda-platform-tutorials/quick-start/task-listeners/task-listener-java`) in your IDE .
+2. Add your credentials to `application.properties`. Your client ID and client secret are available from the previous section in the credential text file you downloaded or copied. Go to the cluster overview page to find your **region Id** and **cluster Id** (in your client credentials under the **API** tab within your cluster).
+3. In the `Listener.java` file, change the type to match what you specified in the BPMN diagram. If you followed the previous steps for this guide and entered “assign_new_task”, no action is required.
+4. After making these changes, perform a Maven install, then run the Listener.java `main` method via your favorite IDE. If you prefer using a terminal, run `mvn package exec:java`.
+5. Navigate to Operate and see that the listener that was **Active** previously, has now been **Completed**.
+6. Navigate to Tasklist and see that the task is available and assigned to the assignee or manager that you provided.
 
 ## Suggestions for further development
 
