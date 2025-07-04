@@ -88,6 +88,22 @@ AWS_REQUEST_CHECKSUM_CALCULATION=WHEN_REQUIRED
 
 This will prevent the S3 client from calculating the additional checksums and should resolve the issue.
 
+**Backups to Dell EMC ECS fail with 400 Bad Request**
+
+When using an S3 backup store with Dell EMC ECS, you may encounter the following error:
+
+`The Content-SHA256 you specified did not match what we received (Service: S3, Status Code: 400)`
+
+This issue is caused by a recent change in the AWS S3 client, which now signs streaming chunked uploads differently. Dell EMC ECS does not support chunked encoding.
+
+To resolve this issue, set the following environment variable on your Zeebe brokers:
+
+```
+AWS_REQUEST_CHECKSUM_CALCULATION=WHEN_REQUIRED
+```
+
+This disables the additional checksum calculation in the S3 client and should resolve the issue.
+
 #### Backup Encryption
 
 Zeebe does not support backup encryption natively, but it _can_ use encrypted S3 buckets. For AWS S3, this means [enabling default bucket encryption](https://docs.aws.amazon.com/AmazonS3/latest/userguide/default-bucket-encryption.html).
