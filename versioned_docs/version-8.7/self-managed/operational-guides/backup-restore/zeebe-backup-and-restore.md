@@ -74,6 +74,20 @@ Alternatively, you can configure backup store using environment variables:
 | `ZEEBE_BROKER_DATA_BACKUP_S3_MAXCONCURRENTCONNECTIONS`    | Maximum number of connections allowed in a connection pool. This is used to restrict the maximum number of concurrent uploads as to avoid connection timeouts when uploading backups with large/many files.                                         |
 | `ZEEBE_BROKER_DATA_BACKUP_S3_CONNECTIONAQUISITIONTIMEOUT` | Timeout for acquiring an already-established connection from a connection pool to a remote                                                                                                                                                          |
 
+#### Known issues
+
+**Backups to IBM COS fail with 403 Access Denied**
+
+When using an S3 backup store with IBM Cloud Object Storage, you may encounter `403 Access Denied` errors. This is caused by a recent change in the AWS S3 client, which now calculates checksums for data integrity by default. IBM COS does not appear to support this feature.
+
+To resolve this issue, you can restore the previous behavior by setting the following environment variable on your Zeebe brokers:
+
+```
+AWS_REQUEST_CHECKSUM_CALCULATION=WHEN_REQUIRED
+```
+
+This will prevent the S3 client from calculating the additional checksums and should resolve the issue.
+
 #### Backup Encryption
 
 Zeebe does not support backup encryption natively, but it _can_ use encrypted S3 buckets. For AWS S3, this means [enabling default bucket encryption](https://docs.aws.amazon.com/AmazonS3/latest/userguide/default-bucket-encryption.html).
