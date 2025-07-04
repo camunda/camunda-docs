@@ -284,7 +284,6 @@ helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION \
 
 This will deploy Camunda with vendor-supported enterprise images, recommended for secure and stable production environments.
 
-
 ### Accessing Camunda services
 
 By default, Camunda services deployed in a cluster are not accessible from outside the cluster. However, you can choose from several methods to connect to these services:
