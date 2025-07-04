@@ -257,28 +257,29 @@ kubectl create secret docker-registry camunda-registry-secret \
 
 Replace `<your-username>` and `<your-password>` with your LDAP credentials.
 
-Once created, reference the secret in your Helm values:
-
-```yaml
-global:
-  image:
-    pullSecrets:
-      - name: camunda-registry-secret
-```
-
 📘 Refer to the [Kubernetes docs on imagePullSecrets](https://kubernetes.io/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod) for more information.
 
 #### Install the Helm chart with vendor enterprise images
 
 Camunda provides a dedicated values file that overrides the default image registry and tags of the bitnami images to use enterprise images `values-images-ee.yml`.
 
+:::note Vendor pull secret
+
+This file includes a reference to the `commonVendorPullSecrets` parameter, which is used to define the pull secret for accessing the private registry.
+
+`commonVendorPullSecrets` is required because `global.image.pullSecrets` does **not** apply to vendor charts.
+
+:::
+
+By default, the value `camunda-registry-secret` is used as the name of the secret.
+You can pverride it using `--set`, a custom `values.yaml` file, or any other [Helm value override mechanism](https://helm.sh/docs/chart_template_guide/values_files/#using-helm-install--f).
+
 Use the following command to install Camunda with enterprise vendor images and your registry secret:
 
 ```shell
 helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION \
   --values https://raw.githubusercontent.com/camunda/camunda-platform-helm/main/charts/camunda-platform-8.8/values.yml \
-  --values https://raw.githubusercontent.com/camunda/camunda-platform-helm/main/charts/camunda-platform-8.8/values-images-ee.yml \
-  --set global.image.pullSecrets[0].name=camunda-registry-secret
+  --values https://raw.githubusercontent.com/camunda/camunda-platform-helm/main/charts/camunda-platform-8.8/values-images-ee.yml
 ```
 
 This will deploy Camunda with vendor-supported enterprise images, recommended for secure and stable production environments.
