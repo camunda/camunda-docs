@@ -113,6 +113,7 @@ You can use this to run custom logic for new user tasks, ensuring tasks are accu
 | Configurable Creation Listener (UTL) | Add a creating listener to user tasks. When all listener jobs are completed, the user task can be created and becomes visible to eligible users (candidate groups/candidate users or assignees).                 |
 | Controlled Task Initialization       | The creation operation proceeds only after all related listener jobs are complete. Incidents can be raised if listener logic fails to evaluate, ensuring safe retries and preventing incomplete creation states. |
 | Operate UI Insights                  | A new “Creating” event type is displayed in the listener tab of the process instance details. If an incident occurs, it is highlighted for immediate troubleshooting.                                            |
+| Assign user task                     | Assign a user task when creating a task if the process does not specify this. This is useful if the assignment relies on an external system.                                                                     |
 
 #### `canceling` event
 
