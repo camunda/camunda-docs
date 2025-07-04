@@ -130,12 +130,6 @@ To learn more about these new user task listener event types, see [user task lis
 
 ### Documentation
 
-#### Backup and restore guide <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
-
-<!-- https://github.com/camunda/product-hub/issues/2299 -->
-
-The new updated Self-Managed [backup and restore guide](/self-managed/operational-guides/backup-restore/backup-and-restore.md) provides detailed information on what you need to consider for Camunda 8 backups, including how to set up and configure backups, and what to consider for external dependencies.
-
 #### Get started updates <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
 <!-- https://github.com/camunda/product-hub/issues/2751 -->
