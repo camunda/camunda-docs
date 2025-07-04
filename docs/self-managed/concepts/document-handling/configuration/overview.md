@@ -37,4 +37,4 @@ Camunda 8 Run is a fast way for users to test the capabilities of the platform, 
 ## Storage policies
 
 - **Maximum upload size for one or multiple files**: 10 MB
-- **File expiration time/time-to-live (TTL) policy**: With Self-Managed, users may define their own lifecycle policies. A custom expiration date can be specified via metadata for each document. The [document upload API](/apis-tools/camunda-api-rest/specifications/create-document.api.mdx) allows this. For forms, this defaults to the cluster configuration as there is no set custom TTL for forms.
+- **File expiration time/time-to-live (TTL) policy**: With Self-Managed, users may define their own lifecycle policies. A custom expiration date can be specified via metadata for each document. The [document upload API](/apis-tools/orchestration-cluster-api-rest/specifications/create-document.api.mdx) allows this. For forms, this defaults to the cluster configuration as there is no set custom TTL for forms.

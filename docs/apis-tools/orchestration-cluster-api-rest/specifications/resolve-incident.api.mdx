@@ -1,0 +1,209 @@
+---
+id: resolve-incident
+title: "Resolve incident"
+description: "Marks the incident as resolved; most likely a call to Update job will be necessary to reset the job’s retries, followed by this call."
+sidebar_label: "Resolve incident"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWM1u3DYQfhWCpwSVpXXqpKkKFNg6Tuv81Viv24PjA0WNVrQpUiEprwVBQF+jr9cnKYaU9teL5NBDDzaw8K44nOHM930jkh11bGFpek3PFRc5KEdvIqprMMwJrc5zmlIDVst7WBlENAfLjajRgqb0IzN3lrgSiBhMCLNkmJX/RCptHZHiDmRLGOFMSuI0uapz5oDc6owshZQkA6KAg7XMtDhuwILzXm919s9ff6NHZwTYiBRaSr2EnGQtcaWw3mf8WdGI1sywChwYzKmjilVAUzqu6z20NKICF10zV9KIGvjSCAM5TZ1pYDez99ASXWynFpaGqcU0opaXUDGadtS1NYayzgi1oH1/E5yDdb/ovEWLdayCSQsR5Vo5LGjaUVbXUnBf8+TWYvBu37fOboFj/WuDCDkBFkdXaM2gAAOKAz7dzmRKzDhI7qAlvNQWVCggkMaCIa5kbgVFzYzD1BEsA1yb3CPaSCfUghRGV6Hyq9jxZ/WxsQ7n/jwhoiC10fcihzzgMmQglIMFGBrRQpuKufDo1QmNaCWUqJqKpsd9H1EnnMQJI+lmWPImJOmLSvse7QzYWisbCvFicrKf+XwTPGFJxcwd5JsMjWkf0ZPJ5PG5Yx4kZ46hA6UduWdS5Ij/AQhrozMJ1Xf7UO7CchEsSQ6OCUkCxLi6YJhBToQi17O3p+THk5c/3DwrnattmiTL5TI2BT+CXDhtYm0WiSk4ftDueUzmJRggFWsRE5bnAmMySdbkIbYGLgrBkdQu5OoXg2ht4XaAeWF0l/sb4DZG7LWLKbmanROPhyhapNNeaD+nYI1EHyzTjUszydQdXTNjP+huFNtUFfaSQcDbAfqIWsdcs5HGAXJ+/2LPN9Lit/n8ggQXhOscSKFNkMQQKN7k9MlkEtGKPYRfryaTHn0i4t+QiSLwUEumPLV20xGKVNrAwB+fmFDWsaEL/AfIaCMWYjduTDdVOpD4TcgoKPPkq2JcCldu9VZst4PACt2oJ4E9CexJYAcF9vKxN9ZUEayyQR6CMdoQzXljDORkWQrp3eMma4w9bFECF5+09qS1J63ta62PaAWu1HgYqrX11MHjQ0qT8dVlk27jLdYnZrVfxUMCmPvxRNIYSVPaBQ31aZJ0pbauT7taG9cn9wjQPTOCZTLQEoeD1kYOSc2ZLMM69rHEATz2jDmesqpROSOvyezsck5+ZQ6WrPW1xZDbrl9PXk8e9YqmBzxOL85JyDAwcaM7jG5R5o+6Dcbf4tgfqCzwxgjXXuK0UJ4MmAEzbRCOFUOGeN47/g5GNBq+vB158+7PuYceO9tsfVg7e2BVHXT52Nlq4mlZaB9wIM3+0hFHMDbkOomP9wl6ce51xnVVNco3W7UImyK2UQouG+uwBBGVgoOyfl3DwXY0+xBGyB8hIjmOEcbAtbHHLoQrmyzmukp4mLb6n0mdJRUTKhlC2OR0+vHq05vp0Yfz07NPl2dHx/Ekdg/Olws1UDG1sY5ZOEqtdnK7yXbrd8v/6rpg4IuDB5fUkgmFDPZl6waJX68uDyyNaLp9k7Ch8ptoUOo17bqMWbgysu/x8ZcGTEvT65u1sH0nyIXF7+vrgIMVezYbbg6ek6/fSDya0vCQqda3F9ngLxrRO2h3rkf6mz6iJbAcjF9lsDgNazmao5+1h71biz4aZ0w5h9odsN3aUaCwV+314vfLOep0uDKpdI5zDVtitdkyrFr7Gnn5+2cdlUwtGrZA2+AT//4F50uIRw==
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Resolve incident"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/incidents/{incidentKey}/resolution"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Marks the incident as resolved; most likely a call to Update job will be necessary to reset the job’s retries, followed by this call.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "incidentKey",
+      in: "path",
+      required: true,
+      description: "Key of the incident to resolve.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            operationReference: {
+              description:
+                "A reference key chosen by the user that will be part of all records resulting from this operation.\nMust be >0 if provided.\n",
+              type: "integer",
+              format: "int64",
+              minimum: 1,
+            },
+          },
+          title: "IncidentResolutionRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "204": { description: "The incident is marked as resolved." },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The incident with the incidentKey is not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

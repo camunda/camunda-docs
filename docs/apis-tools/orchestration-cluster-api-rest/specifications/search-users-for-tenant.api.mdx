@@ -1,0 +1,209 @@
+---
+id: search-users-for-tenant
+title: "Search users for tenant"
+description: "Retrieves a filtered and sorted list of users for a specified tenant."
+sidebar_label: "Search users for tenant"
+hide_title: true
+hide_table_of_contents: true
+api: eJytV21v2zYQ/isEP22AGjndMBT6lrnpkKFrszjZPhgGSksni51EquQxiSHovxdH6s2xnGVd/cWSeLzX5x4eG45iZ3my5reghEK+ibiuwQiUWl1lPOEWhEmLOwvGvtOmk4p4BjY1siYxnvAbQCPhHiwTLJclgoGMCZUxqw1CxkppkemcOVLDcm2YYLaGVOYSMoZe6RmPeC2MqADBkEsNV6ICnvCwfpXxiEuyVgsseMQNfHHSQMYTNA6eunRbAHNKfnHAZAYKyZQhH7CAiUWbFlAJnjQc9zUZs2ik2vG23QQLYPFXne1JYjSYi9JCxFOtEBTSmqjrUqY+bfFnSx40E92iLD/mPqTOit5+hpTyWBtKN0qwJFeLHdD/YSjXYieVV81SIxGMFOT6S5XmRlfHSik/UmXwSDmRCJVlqJlFYZCFmku1Y7SXbHUWpELYgeERz7WpBIZPP73mbcRLWUmct1OJR1m5iilXbUMRBoMG0BnFpGJaAesS/hKLVO9cuBJ5cr5YtBEXOYI5tn9nwZf8E6hs6YzV5hO7F6UDH5tfqg3cS+0sM2BrrWiDZjlgWvhlBY/IqDLkuAHrSrQTD3vARHwLuTYz9Rtc8Nn9NieG5X93pI04Sizp08oX8k8HZn8tdnAT0ssJ24eYObHp9IanIKNGP458pQ2yXEKZHSC3UyWMEXtqagLDpAVP4Zj0zAMsmCD8ksHt/jgrEQflKiI64iBPLJs24tpkc6AhnX6JgPlQSCpCp5yKYaAURGve7HO2LlZLHvG3l6slEesA2O77kHBt8CNZu6RtVIqRadZd2JtRPHAwMfKkUqRjqNa0mrPSE0lvLSDOZ/n1YjGfj0AKHe4OyfyQUl/Mik/L/d1YUqpAFvQsttqFqh0EYA8Z9H+ret5j1CjKqx7mT3JLax0hVgID75KRmY6ZZ8Nffib2mZDLfAFTv9bzjjZsB4i9sZP8wgJ7SUut4Fks0Nynrul0zoRioKwjVccEPtLjQMDf4N4sBx+75s+A/+rZc3wZGoO3m5MEOUg8rbk8UW5/HnZl9i307Yw4UNmslX61H3ro/fnwR6648Sl+nklGGZKqAAtNA2OtrfeUhrSEx4EXbNz0U1wb+6jj0EM0goG57yc+Z0qe8CZwRJvEcVNoi23S1NpgG9/TuX8vjBTbMqSAlkP4PbeWOhVlEZw4TgotTJOyFJVTmWBv2M3l6pb9JhAexP6M8FoPR1qv+s3izWJWK4me0HhxfcVChF7pyH6j2gKxnlUbhF+i2I+rFlJnJO5XtC2kZwvCgLlwVIsBTZ09r53egxCPuod3PbX8/vethwcx9804Cl8+iqouYTz118PZPCJyOFr9Wee7o2PtMI4uhoHxfLEYhrfxBO1nqSlMiYt9GB0gjxNC6ABjQwYXZ+dHWaWkEbekuqqc8keT2rEHiQUTkwSnpbMYuqWUKVCDJ8N1pBd7H1bYX8EiOz8jcAQEU4ptEsc7iYXbnqW6itOwbfjflnobV0KquDNh4+XFH3cf3l68en+1vPywunx1frY4w8cwnVFbVUJN/AhdOD2GZy9nzXggf7d7WgckhEeM61JIRdD2kTdd46+7W5vlEU8mFziv2Te97/5N1HXwmjfNVli4M2Xb0ucvRK88WW/Ghg8ntbT0PF7CTgb7w003Rf3IXngZnA2rp2a199xTOnrjEf8H9tO7aUvjZAHCg37ddMvL4M2rW1Iybj+ai9qo33GRplDjs7KbCdtef1zdUrt0V9RKZ7THiAe6IIuH4Kr22fGE4L81vBRq53xD8qCTfl8BCrOTYw==
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Search users for tenant"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/tenants/{tenantId}/users/search"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Retrieves a filtered and sorted list of users for a specified tenant.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "tenantId",
+      in: "path",
+      required: true,
+      description: "The unique identifier of the tenant.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          allOf: [
+            {
+              type: "object",
+              properties: {
+                page: {
+                  description: "Pagination criteria.",
+                  allOf: [
+                    {
+                      type: "object",
+                      properties: {
+                        from: {
+                          description:
+                            "The index of items to start searching from.",
+                          type: "integer",
+                          format: "int32",
+                        },
+                        limit: {
+                          description:
+                            "The maximum number of items to return in one request.",
+                          type: "integer",
+                          format: "int32",
+                          default: 100,
+                        },
+                        after: {
+                          description:
+                            "Use the `endCursor` value from the previous response to fetch the next page of results.",
+                          type: "string",
+                        },
+                        before: {
+                          description:
+                            "Use the `startCursor` value from the previous response to fetch the previous page of results.",
+                          type: "string",
+                        },
+                      },
+                      title: "SearchQueryPageRequest",
+                    },
+                  ],
+                  type: "object",
+                },
+              },
+              title: "SearchQueryRequest",
+            },
+          ],
+          type: "object",
+          properties: {
+            sort: {
+              description: "Sort field criteria.",
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  field: {
+                    description: "The field to sort by.",
+                    type: "string",
+                    enum: ["username"],
+                  },
+                  order: {
+                    description:
+                      "The order in which to sort the related field.",
+                    type: "string",
+                    enum: ["ASC", "DESC"],
+                    default: "ASC",
+                    title: "SortOrderEnum",
+                  },
+                },
+                required: ["field"],
+                title: "TenantUserSearchQuerySortRequest",
+              },
+            },
+          },
+          title: "TenantUserSearchQueryRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The search result of users for the tenant.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            allOf: [
+              {
+                type: "object",
+                properties: {
+                  page: {
+                    description:
+                      "Pagination information about the search results.",
+                    allOf: [
+                      {
+                        description:
+                          "Pagination information about the search results.",
+                        type: "object",
+                        properties: {
+                          totalItems: {
+                            description: "Total items matching the criteria.",
+                            type: "integer",
+                            format: "int64",
+                          },
+                          startCursor: {
+                            description:
+                              "The cursor value for getting the previous page of results. Use this in the `before` field of an ensuing request.",
+                            type: "string",
+                          },
+                          endCursor: {
+                            description:
+                              "The cursor value for getting the next page of results. Use this in the `after` field of an ensuing request.",
+                            type: "string",
+                          },
+                        },
+                        title: "SearchQueryPageResponse",
+                      },
+                    ],
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                description: "The matching users.",
+                type: "array",
+                items: {
+                  type: "object",
+                  properties: {
+                    username: {
+                      description: "The username of the user.",
+                      type: "string",
+                    },
+                  },
+                  title: "TenantUserResult",
+                },
+              },
+            },
+            title: "TenantUserSearchResult",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>
