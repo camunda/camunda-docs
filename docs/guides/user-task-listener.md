@@ -8,6 +8,8 @@ description: "In Camunda 8, user task listeners allow you to run custom logic wh
 <span class="badge badge--medium">Time estimate: 15 minutes</span>
 
 import SaasPrereqs from './react-components/\_saas-prerequisites.md'
+import CreateCluster from '../components/react-components/create-cluster.md';
+import CreateApiCredentials from '../components/react-components/create-api-credentials.md';
 
 In Camunda 8, **user task listeners** allow you to run custom logic in response to changes to a user task—for example, when it's created, assigned, or completed.
 
@@ -79,11 +81,21 @@ When a process instance arrives at this user task, the `creating` event is trigg
 A job worker can then activate this job to execute the external logic and complete it, approving the creation of the user task.
 :::
 
+## Step 4: Create a cluster
+
+<CreateCluster/>
+
+## Step 5: Create credentials for your Zeebe client
+
+<CreateApiCredentials/>
+
 ### Step 4: Deploy the process
 
 1. Click **Deploy current diagram**.
 2. Select your **Camunda 8 cluster** or create a new **deployment target**.
 3. Click **Deploy**.
+
+<!-- ![deploy the process](path-to-screenshot4.png) -->
 
 ### Step 5: Start a process instance with test data
 
