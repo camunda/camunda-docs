@@ -43,9 +43,7 @@ Additionally, you need the following:
 - Download and unzip or clone the [repository](https://github.com/camunda/camunda-platform-tutorials), then navigate to:  
   `camunda-platform-tutorials/quick-start/task-listeners/task-listener-java`
 
-## Configuring a user task listener
-
-### Step 1: Create a process with a user task in Modeler
+## Step 1: Create a process with a user task in Modeler
 
 1. Launch **Camunda Modeler**.
 2. Create a new BPMN file.
@@ -58,14 +56,14 @@ In that case, just explore the BPMN using the steps below, but do not adjust the
 
 <!---![camunda modeler with user task](path-to-screenshot1.png)--->
 
-### Step 2: Select the user task
+## Step 2: Select the user task
 
 1. Click the **user task** (e.g., “Review application”).
 2. In the right-hand **properties panel**, scroll to **Task listeners**.
 
 <!--- ![properties panel with user task details](path-to-screenshot2.png)--->
 
-### Step 3: Define a task listener
+## Step 3: Define a task listener
 
 We'll now add a new task listener to the user task and define its properties.
 
@@ -123,10 +121,14 @@ Next, we’ll create a worker that listens to the user task's events by associat
 
 ## Suggestions for further development
 
-- Task listeners run inside the engine — keep them short and avoid long I/O.
-- Use `task.variables.get("...")` to safely access process variables.
-- Assignee must be a valid user from your Camunda identity provider.
-- You can add other listener types (e.g., `complete`) using the same method.
+You can now play around with it, to build your understanding of task listeners:
+
+- Stop the listener application.
+- Start a new instance of the process, and notice that the task does not appear in Tasklist.
+- Check Operate, and notice that a creating listener is active.
+- Restart the listener application and notice that the listener is failed and an incident is raised.
+- Set a variable `assignee` or `manager` in the process instance, and resolve the incident.
+- Check Tasklist, and notice that the task is assigned to the assignee or manager that you provided.
 
 ## Additional resources
 
