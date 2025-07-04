@@ -172,7 +172,6 @@ For air-gapped environments, refer to [installing in an air-gapped environment](
 
 By default, the chart uses [open-source images from Bitnami](https://github.com/bitnami/containers). For enterprise installations, we recommend using enterprise images as described in [installing with vendor enterprise images](#install-with-vendor-enterprise-images).
 
-
 Review the progress of your deployment by checking if the Kubernetes pods are up and running with the following:
 
 ```shell
