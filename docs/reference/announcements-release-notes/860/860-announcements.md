@@ -130,6 +130,13 @@ An example of how to use the new `CorrelationResult` can be found in the [Connec
 
 ### Camunda 8 Self-Managed
 
+#### Deprecation of Self-Managed AWS Marketplace offering
+
+As of **October 2025**, the **Self-Managed AWS Marketplace** offering will be **deprecated** and no longer publicly available.  
+Existing customers may continue to use the product until their contracts expire.
+
+For future use, refer to our [new AWS Marketplace listing](https://aws.amazon.com/marketplace/pp/prodview-6y664fcnydiqg?sr=0-1&ref_=beagle&applicationId=AWSMPContessa) for more information.
+
 #### Helm
 
 ##### Separated Ingress deprecation
