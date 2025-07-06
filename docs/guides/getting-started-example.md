@@ -114,7 +114,9 @@ You can view the process instance in **Operate**, the visual operations tool, by
 [http://localhost:8080/operate](http://localhost:8080/operate)  
 Login with the credentials: `demo` / `demo`.
 
-Next, start the job workers so they can perform the service tasks. The workers are configured to connect to the locally running engine and retrieve available work for the process instance.
+There you will see an active process instance. (Note: when the workers are running, process instances will be completed immediately and further process instances will not appear as active).
+
+Next, start the job workers to allow them to perform the work for the service tasks. The workers are configured to connect to the locally-running engine and retrieve available work for the process instance.
 
 <Tabs groupId="language" defaultValue="javaspring" values={
 [
@@ -187,6 +189,17 @@ The workers start, connect to the engine, and request work. You will see the wor
    </TabItem>
 </Tabs>
 
+## Complete!
+
+Your active process instance in Operate will now transition to completed. You have completed your first process instance by:
+
+1. Running Camunda 8 Run locally.
+2. Deploying a process model.
+3. Starting a process instance.
+4. Completing the service tasks in the process instance using job workers.
+
 ## Next steps
 
 To create a new Spring project, refer to [our guide using Spring](/guides/getting-started-java-spring.md).
+
+For further information about the Node.js SDK, refer to [the Camunda 8 JavaScript SDK API documentation](https://camunda.github.io/camunda-8-js-sdk/).
