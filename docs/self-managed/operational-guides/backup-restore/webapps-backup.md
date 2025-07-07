@@ -207,26 +207,3 @@ Response:
 | 404 Not Found    | Not a single snapshot corresponding to given ID exist.                                                                       |
 | 500 Server Error | All other errors, e.g. ES returned error response when attempting to execute the query.                                      |
 | 502 Bad Gateway  | Elasticsearch is not accessible, the request can be retried when it is back.                                                 |
-
-## Restore backup
-
-There is no web application API to preform the backup restore. Instead, use the [Elasticsearch restore snapshot API](https://www.elastic.co/guide/en/elasticsearch/reference/current/restore-snapshot-api.html).
-
-:::note
-Operate and Tasklist must **not** be running while a backup restore is taking place.
-:::
-
-To restore the backup with a known backup id, you must restore all the snapshots this backup contains (check the response of the [create backup API](#create-backup-api)).
-
-Example of Elasticsearch query:
-
-```shell
-curl --request POST `http://localhost:9200/_snapshot/test/camunda_webapps_123_8.8.0-snapshot_part_1_of_6/_restore?wait_for_completion=true`
-```
-
-To summarize, the process may look as follows:
-
-1. Stop all web applications.
-2. Ensure there are no web application indices present in Elasticsearch (otherwise the restore process will fail).
-3. Iterate over all Elasticsearch snapshots included in the desired backup and restore them using the Elasticsearch restore snapshot API.
-4. Start all web applications.

@@ -164,26 +164,3 @@ DELETE actuator/backups/{backupId}
 ```shell
 curl --request DELETE 'http://localhost:8092/actuator/backups/123456'
 ```
-
-## Restore backup
-
-There is no Optimize API to perform the backup restore. Instead, the standard [Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/current/restore-snapshot-api.html) / [OpenSearch](https://opensearch.org/docs/latest/api-reference/snapshots/restore-snapshot) restore snapshot API can be used. Note that the Optimize versions of your backup snapshots must match the currently running version of Optimize. You can identify the version at which the backup was taken by the version tag included in respective snapshot names; for example, a snapshot with the name`camunda_optimize_123456_8.8.0_part_1_of_2` was taken of Optimize version `8.8.0`.
-
-:::note
-Optimize must NOT be running while a backup is being restored.
-:::
-
-To restore an existing backup, all the snapshots this backup contains (as listed in the response of the [create backup API request](#example-response)) must be restored using the restore API.
-
-To restore a given backup, the following steps must be performed:
-
-1. Stop Optimize.
-2. Ensure no Optimize indices are present in the database (or the restore process will fail).
-3. Iterate over all ElasticSearch/OpenSearch snapshots included in the desired backup and restore them using the restore snapshot API mentioned above.
-4. Start Optimize.
-
-Example request:
-
-```shell
-curl --request POST `http://localhost:9200/_snapshot/repository_name/camunda_optimize_123456_8.8.0_part_1_of_2/_restore?wait_for_completion=true`
-```
