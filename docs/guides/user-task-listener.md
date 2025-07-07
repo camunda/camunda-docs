@@ -134,6 +134,8 @@ You can now play around with it, to build your understanding of task listeners:
 - Restart the listener application and notice that the listener is failed and an incident is raised.
 - Set a variable `assignee` or `manager` in the process instance, and resolve the incident.
 - Check Tasklist, and notice that the task is assigned to the assignee or manager that you provided.
+- Adjust the code in Listener.java that completes the listener job, by adding a **job result** to the command that **denies** the assignment.
+- Adjust the code in Listener.java that completes the listener job, by adding a job result to the command that **corrects** the **assignee**.
 
 ## Additional resources
 
