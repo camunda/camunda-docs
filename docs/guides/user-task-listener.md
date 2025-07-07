@@ -113,7 +113,7 @@ Next, we’ll create a worker that listens to the user task's events by associat
 3. In the `Listener.java` file, change the type to match what you specified in the BPMN diagram. If you followed the previous steps for this guide and entered “assign_new_task”, no action is required.
 4. After making these changes, perform a Maven install, then run the Listener.java `main` method via your favorite IDE. If you prefer using a terminal, run `mvn package exec:java`.
 
-## Step 8: Verify the result in **Operate** and **Tasklist**
+## Step 8: Verify the result in Operate and Tasklist
 
 Now that the task listener is running, the listener job will have been handled and completed. Let's see what effects this has had.
 
