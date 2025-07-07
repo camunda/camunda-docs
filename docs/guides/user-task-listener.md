@@ -5,7 +5,7 @@ description: "In Camunda 8, user task listeners allow you to run custom logic wh
 ---
 
 <span class="badge badge--beginner">Beginner</span>
-<span class="badge badge--medium">Time estimate: 15 minutes</span>
+<span class="badge badge--medium">Time estimate: 35 minutes</span>
 
 import SaasPrereqs from './react-components/\_saas-prerequisites.md'
 import CreateCluster from '../components/react-components/create-cluster.md';
