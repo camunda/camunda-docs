@@ -1,7 +1,8 @@
 ---
 id: webapps-backup
-title: Backup and restore Operate and Tasklist data
-description: "How to perform a backup and restore of web application (Operate and Tasklist) data."
+title: Backup Management API - Web Applications
+description: "Backup API to perform a backup of web application (Operate and Tasklist) data."
+sidebar_label: "Operate and Tasklist"
 keywords: ["backup", "backups"]
 ---
 

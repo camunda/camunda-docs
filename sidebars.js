@@ -1234,16 +1234,21 @@ module.exports = {
         "self-managed/operational-guides/configure-multi-tenancy",
         {
           type: "category",
-          label: "Backup and restore",
+          label: "Back up and restore",
           link: {
             type: "doc",
             id: "self-managed/operational-guides/backup-restore/backup-and-restore",
           },
           items: [
-            "self-managed/operational-guides/backup-restore/optimize-backup",
-            "self-managed/operational-guides/backup-restore/webapps-backup",
-            "self-managed/operational-guides/backup-restore/zeebe-backup-and-restore",
-            "self-managed/operational-guides/backup-restore/modeler-backup-and-restore",
+            "self-managed/operational-guides/backup-restore/backup",
+            "self-managed/operational-guides/backup-restore/restore",
+            {
+              "Backup Management API": [
+                "self-managed/operational-guides/backup-restore/optimize-backup",
+                "self-managed/operational-guides/backup-restore/webapps-backup",
+                "self-managed/operational-guides/backup-restore/zeebe-backup-and-restore",
+              ],
+            },
           ],
         },
         "self-managed/operational-guides/data-purge",
