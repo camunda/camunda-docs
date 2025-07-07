@@ -72,9 +72,7 @@ We'll now add a new task listener to the user task and define its properties.
 <!---![add task listener UI](path-to-screenshot3.png)--->
 
 :::info
-You've now defined a **creating** task listener for this user task.  
-When a process instance arrives at this user task, the `creating` event is triggered, and a job of type `assign_new_task` is created.  
-A job worker can then activate this job to execute the external logic and complete it, approving the creation of the user task.
+You've now defined a **creating** task listener for this user task. When a process instance arrives at this user task, the `creating` event is triggered, and a job of type `assign_new_task` is created. A job worker can then activate this job to execute the external logic and complete it, approving the creation of the user task.
 :::
 
 ## Step 4: Create a cluster
