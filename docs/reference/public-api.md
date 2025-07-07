@@ -8,7 +8,7 @@ description: Understand the Camunda 8 public API, its stability guarantees under
 Camunda 8 follows [Semantic Versioning (SemVer)](https://semver.org/) to provide users with a stable and reliable platform. A key requirement of SemVer is a clearly defined public API. This page outlines what’s included in Camunda 8's public API, the policies around versioning, and what to expect when upgrading.
 
 :::note
-The term "public API" refers to the SemVer definition of stable interfaces, not simply external APIs available to users.
+The term "public API" refers to the SemVer definition of stable interfaces, not external APIs available to users.
 :::
 
 ## What is the public API?
