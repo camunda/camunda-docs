@@ -11,7 +11,7 @@ import SaasPrereqs from './react-components/\_saas-prerequisites.md'
 import CreateCluster from '../components/react-components/create-cluster.md';
 import CreateApiCredentials from '../components/react-components/create-api-credentials.md';
 
-In Camunda 8, **user task listeners** allow you to run custom logic in response to changes to a user task—for example, when it's created, assigned, or completed.
+In Camunda 8, **user task listeners** allow you to run custom logic in response to changes to a user task, such as when the `creating`, `assigning`, or `completing` event occurs.
 
 User task listeners facilitate the integration of custom logic into your workflows. For more details, refer to the [User Task Listeners concept](../components/concepts/user-task-listeners.md).
 
