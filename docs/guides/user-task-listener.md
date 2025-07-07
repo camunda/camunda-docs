@@ -116,8 +116,13 @@ Next, we’ll create a worker that listens to the user task's events by associat
 2. Add your credentials to `application.properties`. Your client ID and client secret are available from the previous section in the credential text file you downloaded or copied. Go to the cluster overview page to find your **region Id** and **cluster Id** (in your client credentials under the **API** tab within your cluster).
 3. In the `Listener.java` file, change the type to match what you specified in the BPMN diagram. If you followed the previous steps for this guide and entered “assign_new_task”, no action is required.
 4. After making these changes, perform a Maven install, then run the Listener.java `main` method via your favorite IDE. If you prefer using a terminal, run `mvn package exec:java`.
-5. Navigate to Operate and see that the listener that was **Active** previously, has now been **Completed**.
-6. Navigate to Tasklist and see that the task is available and assigned to the assignee or manager that you provided.
+
+## Step 8: Verify the result in **Operate** and **Tasklist**
+
+Now that the task listener is running, the listener job will have been handled and completed. Let's see what effects this has had.
+
+1. Navigate to Operate and see that the listener that was **Active** previously, has now been **Completed**.
+2. Navigate to Tasklist and see that the task is available and assigned to the assignee or manager that you provided.
 
 ## Suggestions for further development
 
