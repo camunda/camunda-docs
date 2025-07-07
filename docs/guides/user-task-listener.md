@@ -124,7 +124,7 @@ Now that the task listener is running, the listener job will have been handled a
 1. Navigate to Operate and see that the listener that was **Active** previously, has now been **Completed**.
 2. Navigate to Tasklist and see that the task is available and assigned to the assignee or manager that you provided.
 
-## Suggestions for further development
+## Suggestions for further exploration
 
 You can now play around with it, to build your understanding of task listeners:
 
@@ -134,8 +134,10 @@ You can now play around with it, to build your understanding of task listeners:
 - Restart the listener application and notice that the listener is failed and an incident is raised.
 - Set a variable `assignee` or `manager` in the process instance, and resolve the incident.
 - Check Tasklist, and notice that the task is assigned to the assignee or manager that you provided.
-- Adjust the code in Listener.java that completes the listener job, by adding a **job result** to the command that **denies** the assignment.
-- Adjust the code in Listener.java that completes the listener job, by adding a job result to the command that **corrects** the **assignee**.
+- Add a lister for another event type.
+- [Access the user task's data](../components/concepts/user-task-listeners.md#accessing-user-task-data) from the activated job.
+- Adjust the code in Listener.java that completes the listener job, by adding a **job result** to the command that [**denies** the assignment](../components/concepts/user-task-listeners.md#denying-the-lifecycle-transition).
+- Adjust the code in Listener.java that completes the listener job, by adding a job result to the command that [**corrects** the **assignee**](../components/concepts/user-task-listeners.md#correcting-user-task-data).
 
 ## Additional resources
 
