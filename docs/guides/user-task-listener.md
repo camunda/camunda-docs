@@ -21,8 +21,6 @@ This guide walks you through:
 - Implementing a task listener as a job worker
 - Verifying the result in **Operate** and **Tasklist**
 
-**Goal**: When the **“Review application”** user task is created in your hiring process, automatically assign it to the HR team lead using a process variable.
-
 ## Prerequisites
 
 You must have access to a Camunda 8 SaaS account.
