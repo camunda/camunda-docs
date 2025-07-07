@@ -6,6 +6,10 @@ sidebar_label: "Optimize"
 keywords: ["backup", "backups"]
 ---
 
+Back up your Optimize data using the Backup Management API.
+
+## About this API
+
 Optimize is a dedicated application that stores its data over multiple indices in the database. To ensure data integrity across indices, a backup of Optimize data consists of two Elasticsearch/OpenSearch snapshots, each containing a different set of Optimize indices. Each backup is identified by a positive integer backup ID. For example, a backup with ID `123456` consists of the following snapshots:
 
 ```
@@ -15,17 +19,18 @@ camunda_optimize_123456_8.8.0_part_2_of_2
 
 Optimize provides an API to trigger a backup and retrieve information about a given backup's state. During backup creation Optimize can continue running. The backed up data can later be restored using the standard ElasticSearch/OpenSearch snapshot restore API.
 
-## Prerequisites
+:::warning
+Usage of this API requires the backup store to be configured for the component.
 
-The following prerequisites must be set up before using the backup API:
+- Optimize configuration
+  - [Elasticsearch](/self-managed/optimize-deployment/configuration/system-configuration.md#elasticsearch-backup-settings)
+  - [OpenSearch](/self-managed/optimize-deployment/configuration/system-configuration.md#opensearch-backup-settings)
 
-1. A snapshot repository of your choice must be registered with ElasticSearch/OpenSearch.
-2. The repository name must be specified using the `CAMUNDA_OPTIMIZE_BACKUP_REPOSITORY_NAME` environment variable, or by adding it to your Optimize [`environment-config.yaml`](/self-managed/optimize-deployment/configuration/system-configuration.md):
+Additionally, it requires the same backup store to be configured on your chosen datastore.
 
-```yaml
-backup:
-  repositoryName: <repository name>
-```
+- [Elasticsearch snapshot repository](https://www.elastic.co/docs/deploy-manage/tools/snapshot-and-restore/manage-snapshot-repositories)
+- [OpenSearch snapshot repository](https://docs.opensearch.org/docs/latest/tuning-your-cluster/availability-and-recovery/snapshots/snapshot-restore/)
+  :::
 
 ## Create backup API
 

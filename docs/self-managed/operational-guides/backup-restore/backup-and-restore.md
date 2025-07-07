@@ -94,6 +94,19 @@ The steps outlined on this page are generally applicable for any kind of deploym
 
 Optimize is not part of the Web Applications backup API and needs to be executed separately to successfully make a backup. Depending on your deployment configuration, you may not have Optimize deployed. It is safe to ignore the backup instructions for Optimize if it is not deployed.
 
+:::warning breaking change
+As of Camunda 8.8, the `indexPrefix` of Operate and Takslist must match. By default it is set to `""`. If overriden, it must set consistently across Operate and Tasklist.
+:::
+
+:::warning breaking change
+As of Camunda 8.8, configuring Operate and Tasklist with different repository names will potentially create multiple backups in different repositories.
+:::
+
+:::warning breaking changes
+As of Camunda 8.8, the `/actuator` endpoints for backups have been moved to `/actuator/backupHistory`. The previous `/actuator/backups` endpoint is still active only if the applications are deployed standalone (each application is running in its own process).
+If run together as single application then `/actuator/backups` is used by Zeebe and `/actuator/backupHistory` by Operate and Tasklist.
+:::
+
 ### Management API
 
 The management API is an extension of the [Spring Boot Actuator](https://docs.spring.io/spring-boot/reference/actuator/index.html), typically used for monitoring and other operational purposes. This is not a public API and not exposed. You will need direct access to your Camunda cluster to be able to interact with these management APIs. This is why you'll often see the reference to `localhost`.
