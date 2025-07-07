@@ -64,6 +64,13 @@ Timestamps which were previously serialized as `ISO8061` strings are now seriali
 
 Until a fix is delivered in 8.5.1, workarounds include not deserializing timestamp values from affected APIs, or deserializing them as integers.
 
+#### Deprecation of Self-Managed AWS Marketplace offering
+
+As of **October 2025**, the **Self-Managed AWS Marketplace** offering will be **deprecated** and no longer publicly available.  
+Existing customers may continue to use the product until their contracts expire.
+
+For future use, refer to our [new AWS Marketplace listing](https://aws.amazon.com/marketplace/pp/prodview-6y664fcnydiqg?sr=0-1&ref_=beagle&applicationId=AWSMPContessa) for more information.
+
 ## Camunda 8.4
 
 | Release date   | End of maintenance |

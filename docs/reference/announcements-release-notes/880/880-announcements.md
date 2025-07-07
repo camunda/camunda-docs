@@ -43,6 +43,13 @@ This temporary limitation will be resolved in subsequent alpha releases.
 
 #### Helm charts
 
+##### Deprecation of Self-Managed AWS Marketplace offering
+
+As of **October 2025**, the **Self-Managed AWS Marketplace** offering will be **deprecated** and no longer publicly available.  
+Existing customers may continue to use the product until their contracts expire.
+
+For future use, refer to our [new AWS Marketplace listing](https://aws.amazon.com/marketplace/pp/prodview-6y664fcnydiqg?sr=0-1&ref_=beagle&applicationId=AWSMPContessa) for more information.
+
 #### Separated Ingress deprecation
 
 The separated Ingress Helm configuration for Camunda 8 Self-Managed has been deprecated in 8.6, and will be removed from the Helm chart in 8.8. Only the combined Ingress configuration is officially supported. See the [Ingress guide](/self-managed/setup/guides/ingress-setup.md) for more information on configuring a combined Ingress setup.
@@ -64,6 +71,12 @@ Using more than one isolated Elasticsearch/OpenSearch instance for exported Zeeb
 As of the 8.8 release, Camunda is compatible with Elasticsearch 8.16+ and no longer supports older Elasticsearch versions. See [supported environments](/reference/supported-environments.md).
 
 ## Key changes
+
+### Public API definition for greater platform stability
+
+To enhance predictability and offer a more stable experience for developers, we’ve introduced an official [public API definition for Camunda 8](/reference/public-api.md).
+
+This document explicitly identifies the components and interfaces that are covered by our semantic versioning guarantees. By formally defining the public API, we commit to avoiding breaking changes in minor and patch releases for these areas—empowering you to build on Camunda 8 with greater confidence and reduced maintenance effort.
 
 ### API updates <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 

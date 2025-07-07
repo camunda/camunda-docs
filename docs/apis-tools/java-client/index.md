@@ -13,6 +13,10 @@ Starting with 8.8, the Camunda Java client replaces the Zeebe Java client. This 
 For more information, visit [announcements](/reference/announcements-release-notes/880/880-announcements.md#camunda-java-client-and-camunda-spring-boot-sdk).
 :::
 
+:::info Public API
+The Camunda Java client is part of the Camunda 8 [public API](/reference/public-api.md) and is covered by our SemVer stability guarantees (except for alpha features). Breaking changes will not be introduced in minor or patch releases.
+:::
+
 ## Dependencies
 
 To use the Java client library, declare the following Maven dependency in your project:
