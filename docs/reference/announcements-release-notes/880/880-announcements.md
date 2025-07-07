@@ -63,7 +63,7 @@ The number of replicas for the Web Modeler REST API and web app deployments can 
 
 The configuration for the external database used by the Web Modeler REST API has been updated to align with the Identity component's database configuration. A new value, `webModeler.restapi.externalDatabase`, is now available and mirrors the structure of `identity.externalDatabase`. To ensure backward compatibility, the existing `webModeler.restapi.externalDatabase.url` field is retained and will take precedence if set.
 
-##### Deprecation of Self-Managed AWS Marketplace offering
+#### Deprecation of Self-Managed AWS Marketplace offering
 
 As of **October 2025**, the **Self-Managed AWS Marketplace** offering will be **deprecated** and no longer publicly available.  
 Existing customers may continue to use the product until their contracts expire.
