@@ -6,37 +6,58 @@ description: "Learn more about what's new and changed in Camunda 8.8."
 keywords: ["what's changed", "what's new"]
 ---
 
-Learn more about the important changes in Camunda 8.8 and plan your migration from 8.7.
+import OrchestrationClusterImg from './assets/orchestration-cluster.png';
 
-## About Camunda 8.8
+Learn more about the important changes in Camunda 8.8 and prepare to migrate from 8.7.
 
-Camunda 8.8 introduces several important changes and enhancements as part of our architecture streamlining initiative, focusing on identity management and migration considerations from version 8.7. These changes include:
+## Prepare for Camunda 8.8
 
-- Introduction of the Orchestration Identity Application and API
+Camunda 8.8 introduces several important changes and enhancements as part of our architecture streamlining initiative, focusing on identity management and migration considerations from version 8.7.
+
+- [New Orchestration Cluster](#orchestration-cluster)
+
+Infographic?
 
 :::info
-Check the [release announcements](/reference/announcements-release-notes/880/880-announcements.md), [release notes](/reference/announcements-release-notes/880/880-release-notes.md), and [quality board](https://github.com/orgs/camunda/projects/187/views/15) to learn more about Camunda 8.8.
-
-The following badges help you understand if you are likely to be affected by any 8.8 changes summarized on this page.
-
-| Persona                                                                                             | Description |
-| :-------------------------------------------------------------------------------------------------- | :---------- |
-| <span class="badge badge--long" title="This feature affects Web Modeler">Operations Engineer</span> | efer        |
-
+See [release announcements](/reference/announcements-release-notes/880/880-announcements.md), [release notes](/reference/announcements-release-notes/880/880-release-notes.md), and the [quality board](https://github.com/orgs/camunda/projects/187/views/15) for more detail on what's included in Camunda 8.8.
 :::
 
-## Orchestration Cluster Identity
+## Orchestration Cluster {#orchestration-cluster}
 
-<span class="badge badge--medium" title="This feature affects Connectors">Authentication and authorization</span> <span class="badge badge--long" title="This feature affects Web Modeler">Operations Engineer</span>
+<span class="badge badge--medium" title="This feature is likely to affect administrators">Administrators (DevOps)</span><span class="badge badge--medium" title="This feature is likely to affect developers">Developers</span>
 
-### What's changed?
+The Orchestration cluster is now the core component of [Camunda 8](../reference/glossary.md#camunda-8), powering the automation and orchestration of [processes](../reference/glossary.md#process).
 
-Decoupling of the Cluster from Management Identity, formerly just Identity.
+<img src={OrchestrationClusterImg} alt="Diagram showing the orchestration cluster" class="img-noborder img-700" style={{marginBottom: '0'}}/>
 
-Alignment of IdP integration, independent from the IdP vendor. There is no special setup for Keycloak anymore like it was the case with
+### Zeebe, Operate, and Tasklist are now part of the Orchestration cluster
 
-### How does this affect me?
+- [Zeebe](../reference/glossary.md#zeebe) as the [workflow engine](../reference/glossary.md#workflow-engine).
+- Operate for monitoring and troubleshooting [process instances](../reference/glossary.md#process-instance) running in [Zeebe](../reference/glossary.md#zeebe).
+- Tasklist for interacting with [user tasks](../reference/glossary.md#user-task) (assigning, completing, and so on).
 
-### Identity in Self-Managed
+### Orchestration Cluster Identity
 
-### Identity in SaaS
+[Identity](../reference/glossary.md#identity) for managing the integrated authentication and authorization.
+
+Mention Management Identity here as well
+
+### Unified Orchestration Cluster API
+
+APIs for interacting with the Orchestration cluster programmatically.
+
+Introduce it but [link to content](#orchestration-cluster-api).
+
+## Identity
+
+## APIs and SDKs
+
+### Unified Orchestration Cluster API {#orchestration-cluster-api}
+
+Content is here
+
+### Deprecated Operate, Tasklist, and Zeebe gRPC API endpoints
+
+### New Java/Spring SDK, NodeJS
+
+## Authentication and authorization
