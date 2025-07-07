@@ -133,10 +133,10 @@ You can now play around with it, to build your understanding of task listeners:
 
 If you feel ready, you can also:
 
-- Add a separate listener for another event type.
-- [Access the user task's data](../components/concepts/user-task-listeners.md#accessing-user-task-data) from the activated job.
-- Adjust the code in Listener.java that completes the listener job, by adding a **job result** to the command that [**denies** the assignment](../components/concepts/user-task-listeners.md#denying-the-lifecycle-transition).
-- Adjust the code in Listener.java that completes the listener job, by adding a job result to the command that [**corrects** the **assignee**](../components/concepts/user-task-listeners.md#correcting-user-task-data).
+- Add a separate listener for another event type, and [trigger that event](../components/concepts/user-task-listeners.md#trigger-a-user-task-listener).
+- [Access the user task's data](../components/concepts/user-task-listeners.md#accessing-user-task-data) from the **activated job**.
+- [Correct the assignee](../components/concepts/user-task-listeners.md#correcting-user-task-data) in the listener by adding a **job result** to the complete job command.
+- [Deny the assignment](../components/concepts/user-task-listeners.md#denying-the-lifecycle-transition) from the listener to avoid the task's assignment altogether.
 
 ## Additional resources and next steps
 
