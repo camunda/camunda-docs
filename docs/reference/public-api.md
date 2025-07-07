@@ -17,7 +17,7 @@ The public API is the official contract between Camunda and its users under SemV
 
 This is a subset of all available APIs — many [APIs](/apis-tools/working-with-apis-tools.md) are public-facing but not covered by the SemVer stability contract.
 
-Only components explicitly listed on this page (see [Included in the public API](#included-in-the-public-api)) are covered. Anything not listed is *not* guaranteed under SemVer.
+Only components explicitly listed on this page (see [Included in the public API](#included-in-the-public-api)) are covered. Anything not listed is _not_ guaranteed under SemVer.
 
 The public API contract begins with version 8.8.
 
