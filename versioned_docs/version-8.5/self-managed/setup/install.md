@@ -196,7 +196,7 @@ To learn more, refer to the [Kubernetes imagePullSecrets documentation](https://
 
 #### Install the Helm chart with vendor enterprise images
 
-Camunda provides a dedicated values file that overrides the default image registry and tags of the bitnami images to use enterprise images `values-images-ee.yaml`.
+Camunda provides a dedicated values file that overrides the default image registry and tags of the bitnami images to use enterprise images `values-enterprise.yaml`.
 
 :::note Vendor pull secret
 
@@ -207,14 +207,14 @@ This file includes a reference to the `commonVendorPullSecrets` parameter used t
 :::
 
 By default, the value `camunda-registry-secret` is used as the name of the secret.
-You can override it using `--set`, a custom `values.yaml` file, or any other [Helm value override mechanism](https://helm.sh/docs/chart_template_guide/values_files/#using-helm-install--f).
+You can override it using `--set`, a custom `values-enterprise.yaml` file, or any other [Helm value override mechanism](https://helm.sh/docs/chart_template_guide/values_files/#using-helm-install--f).
 
 Use the following command to install Camunda with enterprise vendor images and your registry secret:
 
 ```shell
 helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION \
   --values https://raw.githubusercontent.com/camunda/camunda-platform-helm/main/charts/camunda-platform-8.5/values.yaml \
-  --values https://raw.githubusercontent.com/camunda/camunda-platform-helm/main/charts/camunda-platform-8.5/values-images-ee.yaml
+  --values https://raw.githubusercontent.com/camunda/camunda-platform-helm/main/charts/camunda-platform-8.5/values-enterprise.yaml
 ```
 
 This will deploy Camunda with vendor-supported enterprise images, recommended for secure and stable production environments.
