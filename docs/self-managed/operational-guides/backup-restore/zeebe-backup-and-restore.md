@@ -40,7 +40,7 @@ The following request can be used to start a backup.
 ### Request
 
 ```
-POST actuator/backups
+POST actuator/backupRuntime
 {
   "backupId": <backupId>
 }
@@ -54,7 +54,7 @@ The `backupId` cannot be reused, even if the backup corresponding to the backup 
   <summary>Example request</summary>
 
 ```shell
-curl --request POST 'http://localhost:9600/actuator/backups' \
+curl --request POST 'http://localhost:9600/actuator/backupRuntime' \
 -H 'Content-Type: application/json' \
 -d '{ "backupId": "100" }'
 ```
@@ -90,14 +90,14 @@ Information about a specific backup can be retrieved using the following request
 ### Request
 
 ```
-GET actuator/backups/{backupId}
+GET actuator/backupRuntime/{backupId}
 ```
 
 <details>
   <summary>Example request</summary>
 
 ```shell
-curl --request GET 'http://localhost:9600/actuator/backups/100'
+curl --request GET 'http://localhost:9600/actuator/backupRuntime/100'
 ```
 
 </details>
@@ -163,14 +163,14 @@ Information about all backups can be retrieved using the following request:
 ### Request
 
 ```
-GET actuator/backups
+GET actuator/backupRuntime
 ```
 
 <details>
   <summary>Example request</summary>
 
 ```shell
-curl --request GET 'http://localhost:9600/actuator/backups'
+curl --request GET 'http://localhost:9600/actuator/backupRuntime'
 ```
 
 </details>
@@ -241,14 +241,14 @@ A backup can be deleted using the following request:
 ### Request
 
 ```
-DELETE actuator/backups/{backupId}
+DELETE actuator/backupRuntime/{backupId}
 ```
 
 <details>
   <summary>Example request</summary>
 
 ```shell
-curl --request DELETE 'http://localhost:9600/actuator/backups/100'
+curl --request DELETE 'http://localhost:9600/actuator/backupRuntime/100'
 ```
 
 </details>
