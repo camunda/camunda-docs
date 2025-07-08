@@ -225,10 +225,12 @@ You can stop Camunda 8 Run by executing:
 { label: 'Windows', value: 'windows', },
 ] }>
 <TabItem value="maclinux">
+
 ```bash
 cd c8run && ./c8run stop
 
-````
+```
+
 </TabItem>
 <TabItem value="windows">
 ```bash
