@@ -1049,6 +1049,18 @@ module.exports = {
   ],
   "Self-Managed": [
     "self-managed/about-self-managed",
+      {
+      type: "category",
+      label: "Quickstart",
+      link: {
+        type: "doc",
+        id: "self-managed/quickstart/overview",
+      },
+      items: [
+        "self-managed/developer-quickstart",
+        "self-managed/setup/operator-quickstart",
+      ],
+    },
     {
       type: "category",
       label: "Run locally",
