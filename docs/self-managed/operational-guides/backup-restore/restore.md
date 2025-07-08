@@ -671,6 +671,8 @@ core:
    enabled: true
    env:
    # Environment variables to overwrite the Zeebe startup behavior
+   - name: SPRING_PROFILES_ACTIVE
+     value: "restore"
    - name: ZEEBE_RESTORE
      value: "true"
    - name: ZEEBE_RESTORE_FROM_BACKUP_ID
@@ -705,6 +707,8 @@ core:
    enabled: true
    command: ["/usr/local/camunda/bin/restore", "--backupId=$BACKUP_ID"] # Change the $BACKUP_ID to your actual value
    env:
+      - name: SPRING_PROFILES_ACTIVE
+        value: "restore"
    # all the envs related to the backup store as outlined in the prerequisites
    ...
 ```
