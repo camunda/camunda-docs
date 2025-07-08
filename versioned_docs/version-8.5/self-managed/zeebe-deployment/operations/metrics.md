@@ -55,8 +55,10 @@ Most metrics have the following common label:
 
 :::note
 Both brokers and gateways expose their respective metrics. The brokers have an optional metrics exporter that can be enabled for maximum insight.
+:::
 
-Also note that not all metrics are available at all times. Specifically, processing related metrics are affected by this because not all events occur frequently. For example, `zeebe_incident_events_total` is only recorded for the first time when an incident is created or resolved.
+:::note
+**Not all metrics are available at all times.** This can apply to various metrics, but is especially noticeable for **processing-related metrics**, which are recorded on events that can occur infrequently. For example, the `zeebe_incident_events_total` metric is only recorded when an incident is **created** or **resolved**.
 :::
 
 **Metrics related to process processing:**

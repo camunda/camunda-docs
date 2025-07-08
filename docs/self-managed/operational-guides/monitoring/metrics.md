@@ -200,8 +200,10 @@ Camunda also exposes several custom metrics, most of them under the `zeebe`, `at
 :::note
 While all nodes in a Camunda cluster expose metrics, they will expose relevant metrics based on their role. For example, brokers will expose processing related metrics,
 while gateways will expose REST API relevant metrics.
+:::
 
-Also note that not all metrics are available at all times. Specifically, processing related metrics are affected by this because not all events occur frequently. For example, `zeebe_incident_events_total` is only recorded for the first time when an incident is created or resolved.
+:::note
+**Not all metrics are available at all times.** This can apply to various metrics, but is especially noticeable for **processing-related metrics**, which are recorded on events that can occur infrequently. For example, the `zeebe_incident_events_total` metric is only recorded when an incident is **created** or **resolved**.
 :::
 
 ### Process processing metrics
