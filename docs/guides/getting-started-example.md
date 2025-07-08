@@ -47,7 +47,7 @@ You will:
 ## Download the Camunda 8 developer bundle
 
 Download the Camunda 8 developer bundle from the following website:  
-[https://camunda.com/developers/install-camunda-8](https://camunda.com/developers/install-camunda-8)
+[https://developers.camunda.com/install-camunda-8/](https://developers.camunda.com/install-camunda-8/)
 
 The developer bundle includes the following components:
 
