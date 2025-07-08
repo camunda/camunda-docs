@@ -13,16 +13,13 @@ Back up your Camunda 8 Self-Managed components and cluster.
 
 ## About the backup process
 
-To create a backup you must complete the following main steps:
-
-1. [Back up WebApps](#back-up-webapps)
-2. [Back up Zeebe Cluster](#back-up-zeebe)
+To create a backup you must complete the following [back up process](#back-up-process).
 
 You can also optionally [back up your Web Modeler data](#back-up-web-modeler-data).
 
 :::caution before you begin
 
-- To create a consistent backup, you **must** complete backing up the WebApps first before backing up the Zeebe Cluster.
+- To create a consistent backup, you **must** complete the backing in the outlined order.
 - You must complete the [prerequisites](backup-and-restore.md#prerequisites) before creating a backup.
 
 :::

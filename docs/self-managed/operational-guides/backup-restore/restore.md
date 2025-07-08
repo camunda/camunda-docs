@@ -41,12 +41,11 @@ Our Backups look as follows:
 ```bash
 camunda_optimize_1748937221_8.8.0_part_1_of_2
 camunda_optimize_1748937221_8.8.0_part_2_of_2
-camunda_webapps_1748937221_8.8.0_part_1_of_6
-camunda_webapps_1748937221_8.8.0_part_2_of_6
-camunda_webapps_1748937221_8.8.0_part_3_of_6
-camunda_webapps_1748937221_8.8.0_part_4_of_6
-camunda_webapps_1748937221_8.8.0_part_5_of_6
-camunda_webapps_1748937221_8.8.0_part_6_of_6
+camunda_webapps_1748937221_8.8.0_part_1_of_5
+camunda_webapps_1748937221_8.8.0_part_2_of_5
+camunda_webapps_1748937221_8.8.0_part_3_of_5
+camunda_webapps_1748937221_8.8.0_part_4_of_5
+camunda_webapps_1748937221_8.8.0_part_5_of_5
 camunda_zeebe_records_backup_1748937221
 ```
 
@@ -81,9 +80,9 @@ These templates are automatically applied on newly created indices. These templa
 
 - For example, deploy the Camunda Helm chart.
 - For manual context, start Camunda 8 components manually.
-- Depending on your setup this can mean Operate, Optimize, Tasklist, Zeebe, and the required secondary datastore.
+- Depending on your setup this can mean Orchestration Cluster (Operate, Tasklist, Zeebe), Optimize and the required secondary datastore.
 
-The templates are created by Operate, Optimize, and Tasklist on startup on the first seeding of the datastore. Zeebe creates this whenever it is required, and isn't limited to the initial start. We recommend starting your full required Camunda 8 stack for the applications to show up as healthy.
+The templates are created by the Web Applications (Operate, Tasklist), and Optimize on startup on the first seeding of the datastore. Zeebe creates this whenever it is required, and isn't limited to the initial start. We recommend starting your full required Camunda 8 stack for the applications to show up as healthy.
 
 You can confirm the successful creation of the index templates by using the Elasticsearch/OpenSearch API. The index templates rely on the component templates, so it also confirms these were successfully recreated.
 
@@ -195,39 +194,33 @@ You will need the output for your chosen backup ID in the following steps to be 
          "state": "COMPLETED",
          "details": [
             {
-               "snapshotName":"camunda_webapps_1748937221_8.8.0_part_1_of_6",
+               "snapshotName":"camunda_webapps_1748937221_8.8.0_part_1_of_5",
                "state":"SUCCESS",
                "startTime":"2025-06-03T07:55:15.685+0000",
                "failures":[]
             },
             {
-               "snapshotName":"camunda_webapps_1748937221_8.8.0_part_2_of_6",
+               "snapshotName":"camunda_webapps_1748937221_8.8.0_part_2_of_5",
                "state":"SUCCESS",
                "startTime":"2025-06-03T07:55:16.288+0000",
                "failures":[]
             },
             {
-               "snapshotName":"camunda_webapps_1748937221_8.8.0_part_3_of_6",
+               "snapshotName":"camunda_webapps_1748937221_8.8.0_part_3_of_5",
                "state":"SUCCESS",
                "startTime":"2025-06-03T07:55:17.092+0000",
                "failures":[]
             },
             {
-               "snapshotName":"camunda_webapps_1748937221_8.8.0_part_4_of_6",
+               "snapshotName":"camunda_webapps_1748937221_8.8.0_part_4_of_5",
                "state":"SUCCESS",
                "startTime":"2025-06-03T07:55:17.293+0000",
                "failures":[]
             },
             {
-               "snapshotName":"camunda_webapps_1748937221_8.8.0_part_5_of_6",
+               "snapshotName":"camunda_webapps_1748937221_8.8.0_part_5_of_5",
                "state":"SUCCESS",
                "startTime":"2025-06-03T07:55:18.298+0000",
-               "failures":[]
-            },
-            {
-               "snapshotName":"camunda_webapps_1748937221_8.8.0_part_6_of_6",
-               "state":"SUCCESS",
-               "startTime":"2025-06-03T07:55:18.499+0000",
                "failures":[]
             }
          ]
@@ -281,7 +274,7 @@ You will need the output for your chosen backup ID in the following steps to be 
       Using the [Zeebe management API](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md#list-backups-api) to list backups.
 
       ```bash
-      curl $ORCHESTRATION_CLUSTER_MANAGEMENT_API/actuator/backups
+      curl $ORCHESTRATION_CLUSTER_MANAGEMENT_API/actuator/backupRuntime
       ```
 
       ```json
@@ -294,19 +287,19 @@ You will need the output for your chosen backup ID in the following steps to be 
             "partitionId": 1,
             "state": "COMPLETED",
             "createdAt": "2025-06-03T08:06:10.408893628Z",
-            "brokerVersion": "8.7.1"
+            "brokerVersion": "8.8.0"
             },
             {
             "partitionId": 2,
             "state": "COMPLETED",
             "createdAt": "2025-06-03T08:06:10.408893628Z",
-            "brokerVersion": "8.7.1"
+            "brokerVersion": "8.8.0"
             },
             {
             "partitionId": 3,
             "state": "COMPLETED",
             "createdAt": "2025-06-03T08:06:10.408893628Z",
-            "brokerVersion": "8.7.1"
+            "brokerVersion": "8.8.0"
             }
          ]
       }
@@ -347,12 +340,11 @@ In this scenario, follow the steps above, but when you have your Elasticsearch/O
          ```bash
          camunda_optimize_1748937221_8.8.0_part_1_of_2
          camunda_optimize_1748937221_8.8.0_part_2_of_2
-         camunda_webapps_1748937221_8.8.0_part_1_of_6
-         camunda_webapps_1748937221_8.8.0_part_2_of_6
-         camunda_webapps_1748937221_8.8.0_part_3_of_6
-         camunda_webapps_1748937221_8.8.0_part_4_of_6
-         camunda_webapps_1748937221_8.8.0_part_5_of_6
-         camunda_webapps_1748937221_8.8.0_part_6_of_6
+         camunda_webapps_1748937221_8.8.0_part_1_of_5
+         camunda_webapps_1748937221_8.8.0_part_2_of_5
+         camunda_webapps_1748937221_8.8.0_part_3_of_5
+         camunda_webapps_1748937221_8.8.0_part_4_of_5
+         camunda_webapps_1748937221_8.8.0_part_5_of_5
          camunda_zeebe_records_backup_1748937221
          ```
 
@@ -385,12 +377,11 @@ In this scenario, follow the steps above, but when you have your Elasticsearch/O
       ```bash
       camunda_optimize_1748937221_8.8.0_part_1_of_2
       camunda_optimize_1748937221_8.8.0_part_2_of_2
-      camunda_webapps_1748937221_8.8.0_part_1_of_6
-      camunda_webapps_1748937221_8.8.0_part_2_of_6
-      camunda_webapps_1748937221_8.8.0_part_3_of_6
-      camunda_webapps_1748937221_8.8.0_part_4_of_6
-      camunda_webapps_1748937221_8.8.0_part_5_of_6
-      camunda_webapps_1748937221_8.8.0_part_6_of_6
+      camunda_webapps_1748937221_8.8.0_part_1_of_5
+      camunda_webapps_1748937221_8.8.0_part_2_of_5
+      camunda_webapps_1748937221_8.8.0_part_3_of_5
+      camunda_webapps_1748937221_8.8.0_part_4_of_5
+      camunda_webapps_1748937221_8.8.0_part_5_of_5
       camunda_zeebe_records_backup_1748937221
       ```
 
@@ -615,12 +606,11 @@ Ensure that all your backups correspond to the same backup ID and that each one 
 ```bash
 camunda_optimize_1748937221_8.8.0_part_1_of_2
 camunda_optimize_1748937221_8.8.0_part_2_of_2
-camunda_webapps_1748937221_8.8.0_part_1_of_6
-camunda_webapps_1748937221_8.8.0_part_2_of_6
-camunda_webapps_1748937221_8.8.0_part_3_of_6
-camunda_webapps_1748937221_8.8.0_part_4_of_6
-camunda_webapps_1748937221_8.8.0_part_5_of_6
-camunda_webapps_1748937221_8.8.0_part_6_of_6
+camunda_webapps_1748937221_8.8.0_part_1_of_5
+camunda_webapps_1748937221_8.8.0_part_2_of_5
+camunda_webapps_1748937221_8.8.0_part_3_of_5
+camunda_webapps_1748937221_8.8.0_part_4_of_5
+camunda_webapps_1748937221_8.8.0_part_5_of_5
 camunda_zeebe_records_backup_1748937221
 ```
 
@@ -685,12 +675,14 @@ core:
    # all the envs related to the backup store as outlined in the prerequisites
    - name: ZEEBE_BROKER_DATA_BACKUP_STORE
      value: "S3" # just as an example
+   - name: CAMUNDA_TASKLIST_BACKUP_REPOSITORYNAME
+     value: camunda # Change to name of the repository in Elasticsearch/OpenSearch
+   - name: CAMUNDA_OPERATE_BACKUP_REPOSITORYNAME
+     value: camunda # Change to name of the repository in Elasticsearch/OpenSearch
    ...
 
 # assuming you're using the inbuilt Elasticsearch, otherwise should be set to false
 elsaticsearch:
-   enabled: true
-core:
    enabled: true
 
 connectors:
@@ -701,9 +693,9 @@ optimize:
    enabled: false
 ```
 
-:::note Older Camunda Helm charts
+:::note Alternative overwrite
 
-For older Camunda Helm chart versions one can overwrite the startup behaviour of the Zeebe brokers by setting the command.
+Alternative approach to overwriting the startup behaviour to restore the partitions.
 
 ```yaml
 core:
