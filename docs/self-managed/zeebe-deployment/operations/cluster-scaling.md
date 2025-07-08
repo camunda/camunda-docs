@@ -205,15 +205,7 @@ curl -X 'PATCH' \
             "exporting": {
               "exporters": [
                 {
-                  "id": "elasticsearch",
-                  "state": "ENABLED"
-                },
-                {
                   "id": "CamundaExporter",
-                  "state": "ENABLED"
-                },
-                {
-                  "id": "MetricsExporter",
                   "state": "ENABLED"
                 }
               ]
@@ -228,15 +220,7 @@ curl -X 'PATCH' \
             "exporting": {
               "exporters": [
                 {
-                  "id": "elasticsearch",
-                  "state": "ENABLED"
-                },
-                {
                   "id": "CamundaExporter",
-                  "state": "ENABLED"
-                },
-                {
-                  "id": "MetricsExporter",
                   "state": "ENABLED"
                 }
               ]
@@ -251,15 +235,7 @@ curl -X 'PATCH' \
             "exporting": {
               "exporters": [
                 {
-                  "id": "elasticsearch",
-                  "state": "ENABLED"
-                },
-                {
                   "id": "CamundaExporter",
-                  "state": "ENABLED"
-                },
-                {
-                  "id": "MetricsExporter",
                   "state": "ENABLED"
                 }
               ]
@@ -282,15 +258,7 @@ curl -X 'PATCH' \
             "exporting": {
               "exporters": [
                 {
-                  "id": "elasticsearch",
-                  "state": "ENABLED"
-                },
-                {
                   "id": "CamundaExporter",
-                  "state": "ENABLED"
-                },
-                {
-                  "id": "MetricsExporter",
                   "state": "ENABLED"
                 }
               ]
@@ -305,15 +273,7 @@ curl -X 'PATCH' \
             "exporting": {
               "exporters": [
                 {
-                  "id": "elasticsearch",
-                  "state": "ENABLED"
-                },
-                {
                   "id": "CamundaExporter",
-                  "state": "ENABLED"
-                },
-                {
-                  "id": "MetricsExporter",
                   "state": "ENABLED"
                 }
               ]
@@ -328,15 +288,7 @@ curl -X 'PATCH' \
             "exporting": {
               "exporters": [
                 {
-                  "id": "elasticsearch",
-                  "state": "ENABLED"
-                },
-                {
                   "id": "CamundaExporter",
-                  "state": "ENABLED"
-                },
-                {
-                  "id": "MetricsExporter",
                   "state": "ENABLED"
                 }
               ]
@@ -359,15 +311,7 @@ curl -X 'PATCH' \
             "exporting": {
               "exporters": [
                 {
-                  "id": "elasticsearch",
-                  "state": "ENABLED"
-                },
-                {
                   "id": "CamundaExporter",
-                  "state": "ENABLED"
-                },
-                {
-                  "id": "MetricsExporter",
                   "state": "ENABLED"
                 }
               ]
@@ -382,15 +326,7 @@ curl -X 'PATCH' \
             "exporting": {
               "exporters": [
                 {
-                  "id": "elasticsearch",
-                  "state": "ENABLED"
-                },
-                {
                   "id": "CamundaExporter",
-                  "state": "ENABLED"
-                },
-                {
-                  "id": "MetricsExporter",
                   "state": "ENABLED"
                 }
               ]
@@ -405,15 +341,7 @@ curl -X 'PATCH' \
             "exporting": {
               "exporters": [
                 {
-                  "id": "elasticsearch",
-                  "state": "ENABLED"
-                },
-                {
                   "id": "CamundaExporter",
-                  "state": "ENABLED"
-                },
-                {
-                  "id": "MetricsExporter",
                   "state": "ENABLED"
                 }
               ]
@@ -486,6 +414,20 @@ curl -X 'PATCH' \
       "brokers": []
     },
     {
+      "operation": "AWAIT_REDISTRIBUTION",
+      "brokerId": 3,
+      "partitionId": 4,
+      "priority": 3,
+      "brokers": []
+    },
+    {
+      "operation": "AWAIT_RELOCATION",
+      "brokerId": 3,
+      "partitionId": 4,
+      "priority": 3,
+      "brokers": []
+    },
+    {
       "operation": "PARTITION_JOIN",
       "brokerId": 4,
       "partitionId": 4,
@@ -507,6 +449,20 @@ curl -X 'PATCH' \
       "brokers": []
     },
     {
+      "operation": "AWAIT_REDISTRIBUTION",
+      "brokerId": 4,
+      "partitionId": 5,
+      "priority": 3,
+      "brokers": []
+    },
+    {
+      "operation": "AWAIT_RELOCATION",
+      "brokerId": 4,
+      "partitionId": 5,
+      "priority": 3,
+      "brokers": []
+    },
+    {
       "operation": "PARTITION_JOIN",
       "brokerId": 5,
       "partitionId": 5,
@@ -522,6 +478,20 @@ curl -X 'PATCH' \
     },
     {
       "operation": "PARTITION_BOOTSTRAP",
+      "brokerId": 5,
+      "partitionId": 6,
+      "priority": 3,
+      "brokers": []
+    },
+    {
+      "operation": "AWAIT_REDISTRIBUTION",
+      "brokerId": 5,
+      "partitionId": 6,
+      "priority": 3,
+      "brokers": []
+    },
+    {
+      "operation": "AWAIT_RELOCATION",
       "brokerId": 5,
       "partitionId": 6,
       "priority": 3,
@@ -557,15 +527,7 @@ curl -X 'PATCH' \
             "exporting": {
               "exporters": [
                 {
-                  "id": "elasticsearch",
-                  "state": "ENABLED"
-                },
-                {
                   "id": "CamundaExporter",
-                  "state": "ENABLED"
-                },
-                {
-                  "id": "MetricsExporter",
                   "state": "ENABLED"
                 }
               ]
@@ -580,15 +542,7 @@ curl -X 'PATCH' \
             "exporting": {
               "exporters": [
                 {
-                  "id": "elasticsearch",
-                  "state": "ENABLED"
-                },
-                {
                   "id": "CamundaExporter",
-                  "state": "ENABLED"
-                },
-                {
-                  "id": "MetricsExporter",
                   "state": "ENABLED"
                 }
               ]
@@ -603,15 +557,7 @@ curl -X 'PATCH' \
             "exporting": {
               "exporters": [
                 {
-                  "id": "elasticsearch",
-                  "state": "ENABLED"
-                },
-                {
                   "id": "CamundaExporter",
-                  "state": "ENABLED"
-                },
-                {
-                  "id": "MetricsExporter",
                   "state": "ENABLED"
                 }
               ]
@@ -634,15 +580,7 @@ curl -X 'PATCH' \
             "exporting": {
               "exporters": [
                 {
-                  "id": "elasticsearch",
-                  "state": "ENABLED"
-                },
-                {
                   "id": "CamundaExporter",
-                  "state": "ENABLED"
-                },
-                {
-                  "id": "MetricsExporter",
                   "state": "ENABLED"
                 }
               ]
@@ -657,15 +595,7 @@ curl -X 'PATCH' \
             "exporting": {
               "exporters": [
                 {
-                  "id": "elasticsearch",
-                  "state": "ENABLED"
-                },
-                {
                   "id": "CamundaExporter",
-                  "state": "ENABLED"
-                },
-                {
-                  "id": "MetricsExporter",
                   "state": "ENABLED"
                 }
               ]
@@ -680,15 +610,7 @@ curl -X 'PATCH' \
             "exporting": {
               "exporters": [
                 {
-                  "id": "elasticsearch",
-                  "state": "ENABLED"
-                },
-                {
                   "id": "CamundaExporter",
-                  "state": "ENABLED"
-                },
-                {
-                  "id": "MetricsExporter",
                   "state": "ENABLED"
                 }
               ]
@@ -711,15 +633,7 @@ curl -X 'PATCH' \
             "exporting": {
               "exporters": [
                 {
-                  "id": "elasticsearch",
-                  "state": "ENABLED"
-                },
-                {
                   "id": "CamundaExporter",
-                  "state": "ENABLED"
-                },
-                {
-                  "id": "MetricsExporter",
                   "state": "ENABLED"
                 }
               ]
@@ -734,15 +648,7 @@ curl -X 'PATCH' \
             "exporting": {
               "exporters": [
                 {
-                  "id": "elasticsearch",
-                  "state": "ENABLED"
-                },
-                {
                   "id": "CamundaExporter",
-                  "state": "ENABLED"
-                },
-                {
-                  "id": "MetricsExporter",
                   "state": "ENABLED"
                 }
               ]
@@ -757,15 +663,7 @@ curl -X 'PATCH' \
             "exporting": {
               "exporters": [
                 {
-                  "id": "elasticsearch",
-                  "state": "ENABLED"
-                },
-                {
                   "id": "CamundaExporter",
-                  "state": "ENABLED"
-                },
-                {
-                  "id": "MetricsExporter",
                   "state": "ENABLED"
                 }
               ]
@@ -788,15 +686,7 @@ curl -X 'PATCH' \
             "exporting": {
               "exporters": [
                 {
-                  "id": "elasticsearch",
-                  "state": "ENABLED"
-                },
-                {
                   "id": "CamundaExporter",
-                  "state": "ENABLED"
-                },
-                {
-                  "id": "MetricsExporter",
                   "state": "ENABLED"
                 }
               ]
@@ -811,15 +701,7 @@ curl -X 'PATCH' \
             "exporting": {
               "exporters": [
                 {
-                  "id": "elasticsearch",
-                  "state": "ENABLED"
-                },
-                {
                   "id": "CamundaExporter",
-                  "state": "ENABLED"
-                },
-                {
-                  "id": "MetricsExporter",
                   "state": "ENABLED"
                 }
               ]
@@ -834,15 +716,7 @@ curl -X 'PATCH' \
             "exporting": {
               "exporters": [
                 {
-                  "id": "elasticsearch",
-                  "state": "ENABLED"
-                },
-                {
                   "id": "CamundaExporter",
-                  "state": "ENABLED"
-                },
-                {
-                  "id": "MetricsExporter",
                   "state": "ENABLED"
                 }
               ]
@@ -865,15 +739,7 @@ curl -X 'PATCH' \
             "exporting": {
               "exporters": [
                 {
-                  "id": "elasticsearch",
-                  "state": "ENABLED"
-                },
-                {
                   "id": "CamundaExporter",
-                  "state": "ENABLED"
-                },
-                {
-                  "id": "MetricsExporter",
                   "state": "ENABLED"
                 }
               ]
@@ -888,15 +754,7 @@ curl -X 'PATCH' \
             "exporting": {
               "exporters": [
                 {
-                  "id": "elasticsearch",
-                  "state": "ENABLED"
-                },
-                {
                   "id": "CamundaExporter",
-                  "state": "ENABLED"
-                },
-                {
-                  "id": "MetricsExporter",
                   "state": "ENABLED"
                 }
               ]
@@ -911,15 +769,7 @@ curl -X 'PATCH' \
             "exporting": {
               "exporters": [
                 {
-                  "id": "elasticsearch",
-                  "state": "ENABLED"
-                },
-                {
                   "id": "CamundaExporter",
-                  "state": "ENABLED"
-                },
-                {
-                  "id": "MetricsExporter",
                   "state": "ENABLED"
                 }
               ]
@@ -942,15 +792,7 @@ curl -X 'PATCH' \
             "exporting": {
               "exporters": [
                 {
-                  "id": "elasticsearch",
-                  "state": "ENABLED"
-                },
-                {
                   "id": "CamundaExporter",
-                  "state": "ENABLED"
-                },
-                {
-                  "id": "MetricsExporter",
                   "state": "ENABLED"
                 }
               ]
@@ -965,15 +807,7 @@ curl -X 'PATCH' \
             "exporting": {
               "exporters": [
                 {
-                  "id": "elasticsearch",
-                  "state": "ENABLED"
-                },
-                {
                   "id": "CamundaExporter",
-                  "state": "ENABLED"
-                },
-                {
-                  "id": "MetricsExporter",
                   "state": "ENABLED"
                 }
               ]
@@ -988,15 +822,7 @@ curl -X 'PATCH' \
             "exporting": {
               "exporters": [
                 {
-                  "id": "elasticsearch",
-                  "state": "ENABLED"
-                },
-                {
                   "id": "CamundaExporter",
-                  "state": "ENABLED"
-                },
-                {
-                  "id": "MetricsExporter",
                   "state": "ENABLED"
                 }
               ]
@@ -1368,7 +1194,7 @@ The response would show that partitions are distributed to new brokers:
 
 We will explain how to scale down a Zeebe cluster via an example of scaling from cluster size 6 to cluster size 3. We assume the cluster is running with 6 brokers.
 
-:::note
+:::warning
 Scale down can be performed only on brokers, partition count cannot be decreased
 :::
 
@@ -1395,7 +1221,7 @@ Similar to scaling up, the response to this request would contain a `changeId`, 
 ### 2. Query the Zeebe Gateway to monitor progress of scaling
 
 ```
-curl --request GET '<http://localhost:9600/actuator/cluster>'
+curl --request GET 'http://localhost:9600/actuator/cluster'
 ```
 
 When the scaling has completed, the changeId from the previous response will be marked as completed:
