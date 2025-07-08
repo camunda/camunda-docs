@@ -109,6 +109,12 @@ The Camunda SaaS Starter plan is no longer available.
 - Existing customers using a Starter plan will need to either upgrade to the Enterprise plan, or move to the Free plan.
 - To compare plan features and contact Camunda for advice and an Enterprise plan quote, refer to [Camunda 8 pricing](https://camunda.com/pricing/?utm_source=docs.camunda.io&utm_medium=referral).
 
+### Public API definition for greater platform stability
+
+To enhance predictability and offer a more stable experience for developers, we’ve introduced an official [public API definition for Camunda 8](/reference/public-api.md).
+
+This document explicitly identifies the components and interfaces that are covered by our semantic versioning guarantees. By formally defining the public API, we commit to avoiding breaking changes in minor and patch releases for these areas—empowering you to build on Camunda 8 with greater confidence and reduced maintenance effort.
+
 ### API updates <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
 The 8.8 release includes API updates to support the move to an [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) unified experience. See more details in the [release notes](/reference/announcements-release-notes/880/880-release-notes.md).
