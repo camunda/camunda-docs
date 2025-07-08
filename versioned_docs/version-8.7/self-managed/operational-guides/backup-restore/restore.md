@@ -190,6 +190,8 @@ You will need the output for your chosen backup ID in the following steps to be 
 
       Using the [Operate management API](/self-managed/operational-guides/backup-restore/operate-tasklist-backup.md#get-backups-list-api) to list backups.
 
+      You must have the Elasticsearch / OpenSearch backup repository configured to be able to retrieve backups.
+
       ```bash
       curl $OPERATE_MANAGEMENT_API/actuator/backups
       ```
@@ -250,6 +252,8 @@ You will need the output for your chosen backup ID in the following steps to be 
 
       Using the [Optimize management API](/self-managed/operational-guides/backup-restore/optimize-backup.md#get-backup-info-api) to list backups.
 
+      You must have the Elasticsearch / OpenSearch backup repository configured to be able to retrieve backups.
+
       ```bash
       curl $OPTIMIZE_MANAGEMENT_API/actuator/backups
       ```
@@ -285,6 +289,8 @@ You will need the output for your chosen backup ID in the following steps to be 
       <summary>
 
       Using the [Tasklist management API](/self-managed/operational-guides/backup-restore/operate-tasklist-backup.md#get-backups-list-api) to list backups.
+
+      You must have the Elasticsearch / OpenSearch backup repository configured to be able to retrieve backups.
 
       ```bash
       curl $TASKLIST_MANAGEMENT_API/actuator/backups

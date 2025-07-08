@@ -114,7 +114,6 @@ curl -s "$ELASTIC_ENDPOINT/_index_template" \
       operate-operation-8.4.1_template
       operate-post-importer-queue-8.3.0_template
       operate-sequence-flow-8.3.0_template
-      operate-user-task-8.5.0_template
       operate-variable-8.3.0_template
       tasklist-draft-task-variable-8.3.0_template
       tasklist-task-8.5.0_template
@@ -183,6 +182,8 @@ You will need the output for your chosen backup ID in the following steps to be 
 
       Using the [Web Applications management API](/self-managed/operational-guides/backup-restore/webapps-backup.md#get-backups-list-api) to list backups.
 
+      You must have the Elasticsearch / OpenSearch backup repository configured to be able to retrieve backups.
+
       ```bash
       curl $ORCHESTRATION_CLUSTER_MANAGEMENT_API/actuator/backupHistory
       ```
@@ -236,6 +237,8 @@ You will need the output for your chosen backup ID in the following steps to be 
       <summary>
 
       Using the [Optimize management API](/self-managed/operational-guides/backup-restore/optimize-backup.md#get-backup-info-api) to list backups.
+
+      You must have the Elasticsearch / OpenSearch backup repository configured to be able to retrieve backups.
 
       ```bash
       curl $OPTIMIZE_MANAGEMENT_API/actuator/backups
@@ -700,7 +703,7 @@ Alternative approach to overwriting the startup behaviour to restore the partiti
 ```yaml
 core:
    enabled: true
-   command: ["/usr/local/zeebe/bin/restore", "--backupId=$BACKUP_ID"] # Change the $BACKUP_ID to your actual value
+   command: ["/usr/local/camunda/bin/restore", "--backupId=$BACKUP_ID"] # Change the $BACKUP_ID to your actual value
    env:
    # all the envs related to the backup store as outlined in the prerequisites
    ...
