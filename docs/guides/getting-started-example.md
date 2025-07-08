@@ -44,8 +44,6 @@ You will:
   </TabItem>
   </Tabs>
 
-## Download
-
 ## Download the Camunda 8 developer bundle
 
 Download the Camunda 8 developer bundle from the following website:  
