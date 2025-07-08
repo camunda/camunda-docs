@@ -1049,7 +1049,7 @@ module.exports = {
   ],
   "Self-Managed": [
     "self-managed/about-self-managed",
-      {
+    {
       type: "category",
       label: "Quickstart",
       link: {
