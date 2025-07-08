@@ -293,6 +293,13 @@ Use the same configuration on all brokers of this cluster.
 
 :::
 
+:::caution
+Backups created with one store are not available or restorable from another store.
+
+This is especially relevant if you were using GCS through the S3 compatibility mode and want to switch to the new built-in support for GCS now.
+Even when the underlying storage bucket is the same, backups from one are not compatible with the other.
+:::
+
 | Field | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | Example Value |
 | ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
 | store | Set the backup store type. Supported values are [NONE, S3, GCS, AZURE]. Default value is NONE. When NONE, no backup store is configured and no backup will be taken. Use S3 to use any S3 compatible storage, including, but not limited to, Amazon S3. Use GCS to use [Google Cloud Storage](https://cloud.google.com/storage/). Use AZURE to employ [Azure Cloud Storage](https://learn.microsoft.com/en-us/azure/storage/common/storage-introduction). This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_STORE`. | NONE          |
@@ -378,6 +385,22 @@ AWS_REQUEST_CHECKSUM_CALCULATION=WHEN_REQUIRED
 ```
 
 This will prevent the S3 client from calculating the additional checksums and should resolve the issue.
+
+**Backups to Dell EMC ECS fail with 400 Bad Request**
+
+When using an S3 backup store with Dell EMC ECS, you may encounter the following error:
+
+`The Content-SHA256 you specified did not match what we received (Service: S3, Status Code: 400)`
+
+This issue is caused by a recent change in the AWS S3 client, which now signs streaming chunked uploads differently. Dell EMC ECS does not support chunked encoding.
+
+To resolve this issue, set the following environment variable on your Zeebe brokers:
+
+```
+AWS_REQUEST_CHECKSUM_CALCULATION=WHEN_REQUIRED
+```
+
+This disables the additional checksum calculation in the S3 client and should resolve the issue.
 
 ### zeebe.broker.data.backup.gcs
 
