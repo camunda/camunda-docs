@@ -142,6 +142,7 @@ Next, start the job workers to allow them to perform the work for the service ta
 { label: 'Node.js', value: 'nodejs', },
 ] }>
 <TabItem value="javaspring">
+
 <ol>
 <li>
 Change into the Spring SDK directory:
