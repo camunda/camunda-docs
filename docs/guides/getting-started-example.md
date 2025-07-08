@@ -142,7 +142,6 @@ Next, start the job workers to allow them to perform the work for the service ta
 { label: 'Node.js', value: 'nodejs', },
 ] }>
 <TabItem value="javaspring">
-
 <ol>
 <li>
 Change into the Spring SDK directory:
@@ -160,6 +159,9 @@ cd java
 mvn spring-boot:run
 ```
 
+      </li>
+      <li>
+        You can stop the application via Ctrl+C.
       </li>
     </ol>
 
@@ -187,7 +189,7 @@ npm start
 ```
       </li>
       <li>
-        You can stop the application via Ctrl+c.
+        You can stop the application via Ctrl+C.
       </li>
     </ol>
   </TabItem>
