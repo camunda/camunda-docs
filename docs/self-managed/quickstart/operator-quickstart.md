@@ -29,7 +29,7 @@ Recommended system resources:
 
 ## Step 1: Create a Kind cluster
 
-Create a local Kubernetes cluster with containerd support and a local ingress controller. This maps the necessary ports so that Camunda components (like Operate and Zeebe) are accessible on your host.
+Create a local Kubernetes cluster with containerd support and a local Ingress controller. This maps the necessary ports so that Camunda components (like Operate and Zeebe) are accessible on your host.
 
 ```bash
 cat <<EOF | kind create cluster --name camunda --config=-
@@ -110,4 +110,4 @@ kind delete cluster --name camunda
 - Try deploying a BPMN process using Camunda Modeler.
 - Connect a job worker via the Zeebe client.
 - Customize the Helm chart for production use in a full Kubernetes cluster.
-- For more in-depth configuration and production tips, visit the Camunda Helm Chart docs.
+- For more in-depth configuration and production tips, visit the Camunda Helm chart docs.
