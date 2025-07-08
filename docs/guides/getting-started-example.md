@@ -1,6 +1,6 @@
 ---
 id: getting-started-example
-title: Getting started using the example project
+title: "Quickstart: run your first Camunda 8 project locally"
 sidebar_label: Get started
 description: "Use an example project with Spring Boot or Node.js to interact with a local Camunda 8 installation."
 keywords: [java, spring, spring camunda, getting started, user guide, tutorial]
