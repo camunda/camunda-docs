@@ -1057,8 +1057,8 @@ module.exports = {
         id: "self-managed/quickstart/overview",
       },
       items: [
-        "self-managed/developer-quickstart",
-        "self-managed/setup/operator-quickstart",
+        "self-managed/quickstart/developer-quickstart",
+        "self-managed/quickstart/operator-quickstart",
       ],
     },
     {
