@@ -427,29 +427,3 @@ curl --request DELETE 'http://localhost:9600/actuator/backups/100'
 | 500 Server Error | All other errors. Refer to the returned error message for more details.          |
 | 502 Bad Gateway  | Zeebe has encountered issues while communicating to different brokers.           |
 | 504 Timeout      | Zeebe failed to process the request with in a pre-determined timeout.            |
-
-## Restore
-
-A new Zeebe cluster can be created from a specific backup. Camunda provides a standalone app which must be run on each node where a Zeebe broker will be running. This is a Spring Boot application similar to the broker and can run using the binary provided as part of the distribution. The app can be configured the same way a broker is configured - via environment variables or using the configuration file located in `config/application.yaml`.
-
-To restore a Zeebe cluster, run the following in each node where the broker will be running:
-
-```
-tar -xzf zeebe-distribution-X.Y.Z.tar.gz -C zeebe/
-./bin/restore --backupId=<backupId>
-```
-
-If restore was successful, the app exits with a log message of `Successfully restored broker from backup`.
-
-Restore fails if:
-
-- There is no valid backup with the given backupId.
-- Backup store is not configured correctly.
-- The configured data directory is not empty.
-- Any other unexpected errors.
-
-If the restore fails, you can re-run the application after fixing the root cause.
-
-:::note
-When restoring, provide the same configuration (node id, data directory, cluster size, and replication count) as the broker that will be running in this node. The partition count must be same as in the backup.
-:::
