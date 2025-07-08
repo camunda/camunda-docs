@@ -43,7 +43,6 @@ The following AWS regions are currently supported in Camunda 8 SaaS.
 | :---------------------------------- | :----------------------- |
 | Frankfurt, Europe (eu-central-1)    | _Not available_          |
 | North America, Virginia (us-east-1) | _Not available_          |
-| Singapore, Asia (ap-southeast-1)    | _Not available_          |
 
 To learn more about each region code/location, refer to [AWS regions and availability zones](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/).
 
