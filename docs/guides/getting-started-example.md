@@ -104,6 +104,14 @@ The service tasks in the process are executed by job workers. The `java` and `no
   </li>
 
   <li>
+    Click on the "Rocket" icon to connect to your c8run instance and deploy the model.
+    Select `Camunda 8 Self-Managed` and use `http://localhost:26500` as cluster endpoint.
+
+    ![Connect to Cluster and deploy model](./img/get-started-example-deploy.png)
+
+  </li>
+
+  <li>
     Click on the “Play” icon on the bottom toolbar of Modeler to deploy and start an instance of the process model.
 
     <p>You do not need to set any variables for the process.</p>
@@ -111,10 +119,10 @@ The service tasks in the process are executed by job workers. The `java` and `no
     <p>Optionally, you can set a value for the <code>item</code> variable by pasting in:</p>
     <pre><code>{`{"item": "special widget"}`}</code></pre>
 
+    ![Start a new process instance in Camunda Modeler](./img/get-started-example-start-process.png)
+
   </li>
 </ol>
-
-![Start a new process instance in Camunda Modeler](./img/get-started-example-start-process.png)
 
 ## View the process instance and start job workers
 
@@ -140,6 +148,7 @@ Next, start the job workers to allow them to perform the work for the service ta
 Change into the Spring SDK directory:
 
 ```bash
+cd camunda-8-get-started
 cd java
 ```
 
@@ -161,6 +170,7 @@ mvn spring-boot:run
       <li>
         Change into the Node.js SDK directory:
 ```bash
+cd camunda-8-get-started
 cd nodejs
 ```
       </li>
@@ -175,6 +185,9 @@ npm i
 ```bash
 npm start
 ```
+      </li>
+      <li>
+        You can stop the application via Ctrl+c.
       </li>
     </ol>
   </TabItem>
