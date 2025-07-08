@@ -122,16 +122,16 @@ Now that the task listener is running, the listener job will have been handled a
 
 ## Suggestions for further exploration
 
-You can now play around with it, to build your understanding of task listeners:
+To build your understanding of task listeners, you can also:
 
 - Stop the listener application.
 - Start a new instance of the process, and notice that the task does not appear in Tasklist.
 - Check Operate, and notice that a creating listener is active.
-- Restart the listener application and notice that the listener is failed and an incident is raised.
+- Restart the listener application and notice that the listener failed, and an incident is raised.
 - Set a variable `assignee` or `manager` in the process instance, and resolve the incident.
 - Check Tasklist, and notice that the task is assigned to the assignee or manager that you provided.
 
-If you feel ready, you can also:
+Further, you can try the following:
 
 - Add a separate listener for another event type, and [trigger that event](../components/concepts/user-task-listeners.md#trigger-a-user-task-listener).
 - [Access the user task's data](../components/concepts/user-task-listeners.md#accessing-user-task-data) from the **activated job**.
