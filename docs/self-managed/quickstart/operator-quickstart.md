@@ -21,7 +21,7 @@ Make sure you have the following tools installed:
 - [Kind](https://kind.sigs.k8s.io/docs/user/quick-start/)
 - [kubectl](https://kubernetes.io/docs/tasks/tools/)
 - [Helm](https://helm.sh/docs/intro/install/)
-- [zbctl](https://docs.camunda.io/docs/components/zeebe/cli/zbctl/) (Zeebe CLI)
+- [zbctl](https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md) (Zeebe CLI)
 
 Recommended system resources:
 
