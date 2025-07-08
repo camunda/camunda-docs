@@ -86,7 +86,7 @@ The service tasks in the process are executed by job workers. The `java` and `no
 </TabItem>
 <TabItem value="windows">
 ```bash
-1-camunda-starter.bat
+.\1-camunda-starter.bat
 ```
 </TabItem>
 </Tabs>
