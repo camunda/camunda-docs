@@ -81,7 +81,9 @@ You can now add new Zeebe partitions to a running cluster.
 - Process instances do not migrate between partitions, so it can take time for the cluster to reach equilibrium.
 - New partitions do not take part in correlating messages/signals, except for message/signal start events.
 
-:::note
+To learn more, see [cluster scaling](/self-managed/zeebe-deployment/operations/cluster-scaling.md).
+
+:::caution
 This feature is not yet fully compatible with backup/restore.
 :::
 
@@ -101,6 +103,15 @@ Camunda now provides alternative container images to the previously used Bitnami
 <!-- https://github.com/camunda/product-hub/issues/2597 -->
 
 The Helm chart now supports configurable volumes. You can define `PersistentVolumeClaims` or continue using `EmptyDir` through `values.yaml`.
+
+### Singapore region available for SaaS on Amazon Web Services <span class="badge badge--long" title="This feature affects SaaS">SaaS</span>
+
+A new Singapore (ap-southeast-1) region is now available for SaaS clusters on Amazon Web Services. Use this region to:
+
+- Improve overall processing speed and reduce latency if you operate in Singapore and Southeast Asian (SEA) countries.
+- Keep cluster data within Singapore to support your local data residency and compliance needs.
+
+To learn more about supported SaaS regions, see [regions](/reference/regions.md).
 
 ### Tasklist uses the Orchestration Cluster API <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span>
 
@@ -142,27 +153,26 @@ This event triggers when a user task is canceled (e.g., by a boundary event or p
 
 To learn more, see [user task listeners](/components/concepts/user-task-listeners.md).
 
-### Documentation
+### Documentation <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-#### Get started updates <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+#### Get started updates
 
 <!-- https://github.com/camunda/product-hub/issues/2751 -->
 
-The getting started documentation now includes:
+The [getting started](/guides/getting-started-example.md) documentation now includes:
 
-- Example BPMN files and Spring Boot/NodeJS starter projects
-- Practical code snippets, such as payment handling
-- Updated code to match recent Camunda versions
-- Annotations in BPMN files to guide usage and explain results
+- Example BPMN files and Spring Boot/NodeJS starter projects.
+- Practical code snippets, such as payment handling.
+- Updated code to match recent Camunda versions.
+- Annotations in BPMN files to guide usage and explain results.
 
-### Singapore region available for SaaS on Amazon Web Services <span class="badge badge--long" title="This feature affects SaaS">SaaS</span>
+#### Public API
 
-A new Singapore (ap-southeast-1) region is now available for SaaS clusters on Amazon Web Services. Use this region to:
+The new [Public API](/reference/public-api.md) documentation outlines what’s included in Camunda 8's public API, the policies around versioning, and what to expect when upgrading.
 
-- Improve overall processing speed and reduce latency if you operate in Singapore and Southeast Asian (SEA) countries.
-- Keep cluster data within Singapore to support your local data residency and compliance needs.
-
-To learn more about supported SaaS regions, see [regions](/reference/regions.md).
+- The public API is the official contract between Camunda and its users under SemVer.
+- No breaking changes will be made to the public API in minor or patch releases.
+- You can safely build on these interfaces with the expectation of stability and backward compatibility.
 
 ## 8.8.0-alpha5
 
