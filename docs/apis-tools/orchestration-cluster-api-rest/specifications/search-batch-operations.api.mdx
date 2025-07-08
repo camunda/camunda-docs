@@ -1,0 +1,620 @@
+---
+id: search-batch-operations
+title: "Search batch operations"
+description: "Search for batch operations based on given criteria."
+sidebar_label: "Search batch operations"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Search batch operations"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/batch-operations/search"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Search for batch operations based on given criteria.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          description: "Batch operation search request.",
+          type: "object",
+          allOf: [
+            {
+              type: "object",
+              properties: {
+                page: {
+                  description: "Pagination criteria.",
+                  allOf: [
+                    {
+                      type: "object",
+                      properties: {
+                        from: {
+                          description:
+                            "The index of items to start searching from.",
+                          type: "integer",
+                          format: "int32",
+                        },
+                        limit: {
+                          description:
+                            "The maximum number of items to return in one request.",
+                          type: "integer",
+                          format: "int32",
+                          default: 100,
+                        },
+                        after: {
+                          description:
+                            "Use the `endCursor` value from the previous response to fetch the next page of results.",
+                          type: "string",
+                        },
+                        before: {
+                          description:
+                            "Use the `startCursor` value from the previous response to fetch the previous page of results.",
+                          type: "string",
+                        },
+                      },
+                      title: "SearchQueryPageRequest",
+                    },
+                  ],
+                  type: "object",
+                },
+              },
+              title: "SearchQueryRequest",
+            },
+          ],
+          properties: {
+            sort: {
+              description: "Sort field criteria.",
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  field: {
+                    description: "The field to sort by.",
+                    type: "string",
+                    enum: [
+                      "batchOperationId",
+                      "operationType",
+                      "state",
+                      "startDate",
+                      "endDate",
+                    ],
+                  },
+                  order: {
+                    description:
+                      "The order in which to sort the related field.",
+                    type: "string",
+                    enum: ["ASC", "DESC"],
+                    default: "ASC",
+                    title: "SortOrderEnum",
+                  },
+                },
+                required: ["field"],
+                title: "BatchOperationSearchQuerySortRequest",
+              },
+            },
+            filter: {
+              description: "The batch operation search filters.",
+              allOf: [
+                {
+                  description: "Batch operation filter request.",
+                  type: "object",
+                  properties: {
+                    batchOperationId: {
+                      description:
+                        "The key (or operate legacy ID) of the batch operation.",
+                      allOf: [
+                        {
+                          description:
+                            "String property with basic advanced search capabilities.",
+                          type: "object",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Basic advanced string filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "string",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "string",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: { type: "string" },
+                                },
+                                $notIn: {
+                                  description:
+                                    "Checks if the property matches none of the provided values.",
+                                  type: "array",
+                                  items: { type: "string" },
+                                },
+                              },
+                            },
+                          ],
+                          title: "BasicStringFilterProperty",
+                        },
+                      ],
+                    },
+                    operationType: {
+                      description: "The type of the batch operation.",
+                      allOf: [
+                        {
+                          description:
+                            "BatchOperationTypeEnum property with full advanced search capabilities.",
+                          type: "object",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                              allOf: [
+                                {
+                                  description:
+                                    "The type of the batch operation.",
+                                  type: "string",
+                                  enum: [
+                                    "CANCEL_PROCESS_INSTANCE",
+                                    "RESOLVE_INCIDENT",
+                                    "MIGRATE_PROCESS_INSTANCE",
+                                    "MODIFY_PROCESS_INSTANCE",
+                                  ],
+                                  title: "BatchOperationTypeEnum",
+                                },
+                              ],
+                            },
+                            {
+                              title: "Advanced filter",
+                              description:
+                                "Advanced BatchOperationTypeEnum filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "The type of the batch operation.",
+                                      type: "string",
+                                      enum: [
+                                        "CANCEL_PROCESS_INSTANCE",
+                                        "RESOLVE_INCIDENT",
+                                        "MIGRATE_PROCESS_INSTANCE",
+                                        "MODIFY_PROCESS_INSTANCE",
+                                      ],
+                                      title: "BatchOperationTypeEnum",
+                                    },
+                                  ],
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "The type of the batch operation.",
+                                      type: "string",
+                                      enum: [
+                                        "CANCEL_PROCESS_INSTANCE",
+                                        "RESOLVE_INCIDENT",
+                                        "MIGRATE_PROCESS_INSTANCE",
+                                        "MODIFY_PROCESS_INSTANCE",
+                                      ],
+                                      title: "BatchOperationTypeEnum",
+                                    },
+                                  ],
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "The type of the batch operation.",
+                                    type: "string",
+                                    enum: [
+                                      "CANCEL_PROCESS_INSTANCE",
+                                      "RESOLVE_INCIDENT",
+                                      "MIGRATE_PROCESS_INSTANCE",
+                                      "MODIFY_PROCESS_INSTANCE",
+                                    ],
+                                    title: "BatchOperationTypeEnum",
+                                  },
+                                },
+                                $like: {
+                                  description:
+                                    "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                  type: "string",
+                                },
+                              },
+                            },
+                          ],
+                          title: "BatchOperationTypeFilterProperty",
+                        },
+                      ],
+                    },
+                    state: {
+                      description: "The state of the batch operation.",
+                      allOf: [
+                        {
+                          description:
+                            "BatchOperationStateEnum property with full advanced search capabilities.",
+                          type: "object",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                              allOf: [
+                                {
+                                  description:
+                                    "The state, one of ACTIVE, COMPLETED, TERMINATED.",
+                                  enum: [
+                                    "CREATED",
+                                    "ACTIVE",
+                                    "SUSPENDED",
+                                    "COMPLETED",
+                                    "COMPLETED_WITH_ERRORS",
+                                    "CANCELED",
+                                    "INCOMPLETED",
+                                  ],
+                                  title: "BatchOperationStateEnum",
+                                },
+                              ],
+                            },
+                            {
+                              title: "Advanced filter",
+                              description:
+                                "Advanced BatchOperationStateEnum filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "The state, one of ACTIVE, COMPLETED, TERMINATED.",
+                                      enum: [
+                                        "CREATED",
+                                        "ACTIVE",
+                                        "SUSPENDED",
+                                        "COMPLETED",
+                                        "COMPLETED_WITH_ERRORS",
+                                        "CANCELED",
+                                        "INCOMPLETED",
+                                      ],
+                                      title: "BatchOperationStateEnum",
+                                    },
+                                  ],
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "The state, one of ACTIVE, COMPLETED, TERMINATED.",
+                                      enum: [
+                                        "CREATED",
+                                        "ACTIVE",
+                                        "SUSPENDED",
+                                        "COMPLETED",
+                                        "COMPLETED_WITH_ERRORS",
+                                        "CANCELED",
+                                        "INCOMPLETED",
+                                      ],
+                                      title: "BatchOperationStateEnum",
+                                    },
+                                  ],
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "The state, one of ACTIVE, COMPLETED, TERMINATED.",
+                                    enum: [
+                                      "CREATED",
+                                      "ACTIVE",
+                                      "SUSPENDED",
+                                      "COMPLETED",
+                                      "COMPLETED_WITH_ERRORS",
+                                      "CANCELED",
+                                      "INCOMPLETED",
+                                    ],
+                                    title: "BatchOperationStateEnum",
+                                  },
+                                },
+                                $like: {
+                                  description:
+                                    "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                  type: "string",
+                                },
+                              },
+                            },
+                          ],
+                          title: "BatchOperationStateFilterProperty",
+                        },
+                      ],
+                    },
+                  },
+                  title: "BatchOperationFilter",
+                },
+              ],
+            },
+          },
+          title: "BatchOperationSearchQuery",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The batch operation search result.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            allOf: [
+              {
+                type: "object",
+                properties: {
+                  page: {
+                    description:
+                      "Pagination information about the search results.",
+                    allOf: [
+                      {
+                        description:
+                          "Pagination information about the search results.",
+                        type: "object",
+                        properties: {
+                          totalItems: {
+                            description: "Total items matching the criteria.",
+                            type: "integer",
+                            format: "int64",
+                          },
+                          startCursor: {
+                            description:
+                              "The cursor value for getting the previous page of results. Use this in the `before` field of an ensuing request.",
+                            type: "string",
+                          },
+                          endCursor: {
+                            description:
+                              "The cursor value for getting the next page of results. Use this in the `after` field of an ensuing request.",
+                            type: "string",
+                          },
+                        },
+                        title: "SearchQueryPageResponse",
+                      },
+                    ],
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                description: "The matching batch operations.",
+                type: "array",
+                items: {
+                  type: "object",
+                  properties: {
+                    batchOperationId: {
+                      description:
+                        "Key or (Operate Legacy ID = UUID) of the batch operation.",
+                      type: "string",
+                    },
+                    state: {
+                      description: "The state of the batch operation.",
+                      type: "string",
+                      enum: [
+                        "CREATED",
+                        "ACTIVE",
+                        "SUSPENDED",
+                        "COMPLETED",
+                        "COMPLETED_WITH_ERRORS",
+                        "CANCELED",
+                        "INCOMPLETED",
+                      ],
+                    },
+                    batchOperationType: {
+                      description: "The type of the batch operation.",
+                      type: "string",
+                      enum: [
+                        "CANCEL_PROCESS_INSTANCE",
+                        "RESOLVE_INCIDENT",
+                        "MIGRATE_PROCESS_INSTANCE",
+                        "MODIFY_PROCESS_INSTANCE",
+                      ],
+                      title: "BatchOperationTypeEnum",
+                    },
+                    startDate: {
+                      type: "string",
+                      description: "The start date of the batch operation.",
+                      format: "date-time",
+                    },
+                    endDate: {
+                      type: "string",
+                      description: "The end date of the batch operation.",
+                      format: "date-time",
+                    },
+                    operationsTotalCount: {
+                      type: "integer",
+                      description:
+                        "The total number of items contained in this stacking process.",
+                      format: "int32",
+                    },
+                    operationsFailedCount: {
+                      type: "integer",
+                      description:
+                        "The number of items which failed during execution of the batch operation. (e.g. because they are rejected by the machine)",
+                      format: "int32",
+                    },
+                    operationsCompletedCount: {
+                      type: "integer",
+                      description:
+                        "The number of successfully completed tasks.",
+                      format: "int32",
+                    },
+                  },
+                  title: "BatchOperationResponse",
+                },
+              },
+            },
+            title: "BatchOperationSearchQueryResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

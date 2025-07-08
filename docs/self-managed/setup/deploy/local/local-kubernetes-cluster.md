@@ -6,6 +6,7 @@ description: "Deploy Camunda 8 Self-Managed on your Kubernetes local cluster for
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import { HelmChartValuesFileLocalLink } from "@site/src/components/CamundaDistributions";
 
 You can deploy Camunda 8 Self-Managed on your Kubernetes local cluster for development purposes using [kind](https://kind.sigs.k8s.io/).
 
@@ -27,13 +28,13 @@ If you are familiar with Camunda 8 deployment and are looking to start process a
 
 If you have not done so already, create a local Kubernetes cluster with the following command:
 
-```sh
+```shell
 kind create cluster --name camunda-platform-local
 ```
 
 Next, switch to the new cluster context using the following command:
 
-```sh
+```shell
 kubectl cluster-info --context kind-camunda-platform-local
 ```
 
@@ -43,22 +44,22 @@ Now it's time to deploy Camunda 8 on the local Kubernetes cluster:
 
 1. Add the Camunda 8 Helm repository using the following command:
 
-```
+```shell
 helm repo add camunda https://helm.camunda.io
 helm repo update
 ```
 
-2. Download the Camunda 8 Helm chart values file designed for the kind cluster: [camunda-platform-core-kind-values.yaml](https://github.com/camunda/camunda-platform-helm/blob/main/kind/camunda-platform-core-kind-values.yaml).
+2. Download the Camunda 8 <HelmChartValuesFileLocalLink/>.
 
 :::note
-If you are deploying Camunda 8 with Ingress configuration, make sure to add additional values to the file you just downloaded `camunda-platform-core-kind-values.yaml` as described in [connecting to Camunda 8 components](#connecting-to-camunda-8-components).
+If you are deploying Camunda 8 with Ingress configuration, make sure to add additional values to the file you just downloaded `values-local.yaml` as described in [connecting to Camunda 8 components](#connecting-to-camunda-8-components).
 :::
 
-3. Install Camunda 8 using the `camunda-platform-core-kind-values.yaml` file you downloaded previously. This file might contain additional values if you are adding Ingress, TLS, or using a variety of other configuration properties. See [Camunda Helm chart parameters](https://artifacthub.io/packages/helm/camunda/camunda-platform#parameters). Execute the following command:
+3. Install Camunda 8 using the `values-local.yaml` file you downloaded previously. This file might contain additional values if you are adding Ingress, TLS, or using a variety of other configuration properties. See [Camunda Helm chart parameters](https://artifacthub.io/packages/helm/camunda/camunda-platform#parameters). Execute the following command:
 
-```sh
+```shell
 helm install camunda-platform camunda/camunda-platform --version $HELM_CHART_VERSION \
-    -f camunda-platform-core-kind-values.yaml
+    -f values-local.yaml
 ```
 
 This will deploy Camunda 8 components (Optimize, Connectors, and Zeebe), but with a set of parameters tailored to a local environment setup.
@@ -89,9 +90,9 @@ First, port-forward each of the components. Use a separate terminal for each com
 
 ## Connecting to the workflow engine
 
-To interact with the Camunda workflow engine via Zeebe Gateway using the [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md) or a local client/worker from outside the Kubernetes cluster, run `kubectl port-forward` to the Zeebe Gateway as follows:
+To interact with the Camunda workflow engine via Zeebe Gateway using the [Orchestration cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) or a local client/worker from outside the Kubernetes cluster, run `kubectl port-forward` to the Zeebe Gateway as follows:
 
-```sh
+```shell
 kubectl port-forward svc/camunda-platform-zeebe-gateway 26500:26500
 ```
 
@@ -113,7 +114,7 @@ Camunda 8 Self-Managed has multiple web applications and gRPC services. These ca
 
 1. Add local host mapping so you can resolve the domain name that will be used to access the Camunda 8 cluster `camunda.local` to the local IP address `127.0.0.1`. If you are using Mac or Linux, modify the `/etc/hosts` file. For Windows, modify `c:\Windows\System32\Drivers\etc\hosts`. Add the following two lines:
 
-```sh
+```shell
 127.0.0.1 camunda.local
 127.0.0.1 zeebe.camunda.local
 ```
@@ -146,13 +147,13 @@ nodes:
 
 Modify the `kind create cluster` command to use the configuration file above. You might need to delete and re-create this cluster if you are planning to enable Ingress (see [delete kind cluster](#clean)):
 
-```sh
+```shell
 kind create cluster --name camunda-platform-local --config kind.config
 ```
 
 3. Install the ingress-nginx Ingress controller:
 
-```sh
+```shell
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
 ```
 
@@ -167,7 +168,7 @@ Make sure all pods are running with the `kubectl get pods --namespace ingress-ng
 
 In this document, we will use the combined Ingress configuration. However, there is one quirk with this particular setup to be aware of - Zeebe Gateway uses gRPC, which uses HTTP/2. This means the Zeebe Gateway has to use its own subdomain `zeebe.camunda.local` instead of context path (such as `/zeebe`).
 
-Add the following values to `camunda-platform-core-kind-values.yaml` to allow Camunda 8 components to be discovered by the Ingress controller.
+Add the following values to `values-local.yaml` to allow Camunda 8 components to be discovered by the Ingress controller.
 
 ```yaml
 global:
@@ -202,7 +203,7 @@ If you don't need the cluster anymore, you can just delete the local KIND cluste
 This is a destructive action and will destroy all data of Camunda 8 in the local development cluster.
 :::
 
-```sh
+```shell
 kind delete cluster --name camunda-platform-local
 ```
 

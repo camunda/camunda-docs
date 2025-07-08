@@ -43,6 +43,13 @@ This temporary limitation will be resolved in subsequent alpha releases.
 
 #### Helm charts
 
+##### Deprecation of Self-Managed AWS Marketplace offering
+
+As of **October 2025**, the **Self-Managed AWS Marketplace** offering will be **deprecated** and no longer publicly available.  
+Existing customers may continue to use the product until their contracts expire.
+
+For future use, refer to our [new AWS Marketplace listing](https://aws.amazon.com/marketplace/pp/prodview-6y664fcnydiqg?sr=0-1&ref_=beagle&applicationId=AWSMPContessa) for more information.
+
 #### Separated Ingress deprecation
 
 The separated Ingress Helm configuration for Camunda 8 Self-Managed has been deprecated in 8.6, and will be removed from the Helm chart in 8.8. Only the combined Ingress configuration is officially supported. See the [Ingress guide](/self-managed/setup/guides/ingress-setup.md) for more information on configuring a combined Ingress setup.
@@ -65,13 +72,19 @@ As of the 8.8 release, Camunda is compatible with Elasticsearch 8.16+ and no lon
 
 ## Key changes
 
+### Public API definition for greater platform stability
+
+To enhance predictability and offer a more stable experience for developers, we’ve introduced an official [public API definition for Camunda 8](/reference/public-api.md).
+
+This document explicitly identifies the components and interfaces that are covered by our semantic versioning guarantees. By formally defining the public API, we commit to avoiding breaking changes in minor and patch releases for these areas—empowering you to build on Camunda 8 with greater confidence and reduced maintenance effort.
+
 ### API updates <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-The 8.8 release includes API updates to support the move to a [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md) unified experience. See more details in the [release notes](/reference/announcements-release-notes/880/880-release-notes.md#api-updates).
+The 8.8 release includes API updates to support the move to a [Orchestration cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) unified experience. See more details in the [release notes](/reference/announcements-release-notes/880/880-release-notes.md#api-updates).
 
 #### Deprecated: Operate and Tasklist v1 REST APIs
 
-The deprecation process for the [Operate](/apis-tools/operate-api/overview.md) and [Tasklist](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md) REST APIs starts with the 8.8 release. You can begin migrating to the [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md) for querying to prepare for this change.
+The deprecation process for the [Operate](/apis-tools/operate-api/overview.md) and [Tasklist](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md) REST APIs starts with the 8.8 release. You can begin migrating to the [Orchestration cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) for querying to prepare for this change.
 
 - Version 8.9: These APIs are still available but deprecated, and so not recommended for new implementations.
 - Version 8.10: These APIs will be removed.
@@ -90,6 +103,17 @@ With the 8.8 release, Camunda announces the deprecation of several [Zeebe gRPC](
 - Key gRPC endpoints necessary for high-throughput and low-latency applications will remain available in the product to ensure peak performance for specific use cases
 - The final list of retained gRPC endpoints will be confirmed with the 8.8 release.
 - Selected endpoints will remain active, with others scheduled for removal in the 8.10 release.
+
+#### Deprecated: Zeebe Client job worker metrics
+
+With the **8.8 release**, Camunda announces the **deprecation of Zeebe client job worker metrics**.
+
+These metrics are **scheduled for removal in the 8.10 release**.
+
+For more information, refer to:
+
+- [Zeebe client job worker](/apis-tools/java-client/job-worker.md)
+- [Zeebe client job worker concept](/components/concepts/job-workers.md)
 
 #### Removed: Tasklist GraphQL API
 
@@ -158,6 +182,29 @@ The `CamundaClient` replaces the `ZeebeClient`, offering the same functionality 
 
 :::
 
+### Camunda 8 Self-Managed
+
+#### Helm
+
+##### ExtraVolumeClaimTemplates
+
+You can now add custom `extraVolumeClaimTemplates` to the Zeebe/Core StatefulSet by supplying an array of templates in your Helm values file. This allows you to attach additional persistent volumes to each Zeebe/Core pod for use cases such as custom storage or log directories.
+
+**Important:**  
+Kubernetes does not allow you to change the `volumeClaimTemplates` of an existing StatefulSet. If you add, remove, or modify `extraVolumeClaimTemplates` after initial deployment, you must delete and recreate the StatefulSet (which will also delete the pods) for the changes to take effect. This may require additional planning and data migration steps to avoid data loss.
+
+##### Common labels for Camunda resources
+
+A new `commonLabels` value is now available and integrates with `camundaPlatform.labels`. This allows you to define mutable labels that are automatically applied to all Camunda resources. By setting `commonLabels`, you can ensure consistent labeling across deployments, making it easier to manage, organize, and identify resources within your Camunda environment.
+
+##### Configure Web Modeler replicas
+
+The number of replicas for the Web Modeler REST API and web app deployments can be set with new configuration properties: `webModeler.restapi.replicas` and `webModeler.webapp.replicas`, respectively.
+
+##### External database for Web Modeler REST API
+
+The configuration for the external database used by the Web Modeler REST API has been updated to align with the Identity component's database configuration. A new value, `webModeler.restapi.externalDatabase`, is now available and mirrors the structure of `identity.externalDatabase`. To ensure backward compatibility, the existing `webModeler.restapi.externalDatabase.url` field is retained and will take precedence if set.
+
 #### Adjustments
 
 | Change                                          | Description                                                                                                                                                                                                                                                                                                        |
@@ -165,3 +212,4 @@ The `CamundaClient` replaces the `ZeebeClient`, offering the same functionality 
 | New package structure                           | Package `io.camunda.client`: Contains the new `CamundaClient` and all 8.7 features.                                                                                                                                                                                                                                |
 | Refactored properties and environment variables | <p><ul><li><p>All old Java client property names are refactored to more general ones. For example, `zeebe.client.tenantId` to `camunda.client.tenantId`.</p></li><li><p>Similarly, environment variables are renamed following the same concept: `ZEEBE_REST_ADDRESS` to `CAMUNDA_REST_ADDRESS`.</p></li></ul></p> |
 | Artifact ID change                              | The `artifactId` changes from `zeebe-client-java` to `camunda-client-java`.                                                                                                                                                                                                                                        |
+| Command changes                                 | The method `newUserCreateCommand()` is changed to `newCreateUserCommand()` in `CamundaClient`.                                                                                                                                                                                                                     |

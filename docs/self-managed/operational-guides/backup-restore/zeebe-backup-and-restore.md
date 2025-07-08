@@ -41,6 +41,11 @@ zeebe:
           endpoint:
           accessKey:
           secretKey:
+          apiCallTimeout:
+          forcePathStyleAccess:
+          compression:
+          maxConcurrentConnections:
+          connectionAcquisitionTimeout:
 ```
 
 Alternatively, you can configure backup store using environment variables:
@@ -52,9 +57,46 @@ Alternatively, you can configure backup store using environment variables:
 - `ZEEBE_BROKER_DATA_BACKUP_S3_REGION` - If no region is provided, it is determined [from the environment](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/region-selection.html#automatically-determine-the-aws-region-from-the-environment).
 - `ZEEBE_BROKER_DATA_BACKUP_S3_ACCESSKEY` - If either `accessKey` or `secretKey` is not provided, the credentials are determined [from the environment](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials.html#credentials-chain).
 - `ZEEBE_BROKER_DATA_BACKUP_S3_SECRETKEY` - Specify the secret key.
+- `ZEEBE_BROKER_DATA_BACKUP_S3_APICALLTIMEOUT` - Configure a maximum duration for all S3 client API calls.
+- `ZEEBE_BROKER_DATA_BACKUP_S3_FORCEPATHSTYLEACCESS` - When enabled, forces the S3 client to use path-style access. By default, the client will automatically choose between path-style and virtual-hosted-style. Should only be enabled if the S3 compatible storage cannot support virtual-hosted-style.
+- `ZEEBE_BROKER_DATA_BACKUP_S3_COMPRESSION` - Enabling compression reduces
+  the required storage space for backups in S3, more details [below](#backup-compression).
+- `ZEEBE_BROKER_DATA_BACKUP_S3_MAXCONCURRENTCONNECTIONS` - Maximum number of connections allowed in a connection pool. This is used to restrict the maximum number of concurrent uploads as to avoid connection timeouts when uploading backups with large/many files.
+- `ZEEBE_BROKER_DATA_BACKUP_S3_CONNECTIONAQUISITIONTIMEOUT` - Timeout for acquiring an already-established connection from a connection pool to a remote service.
 
 [AWS S3]: https://aws.amazon.com/s3/
 [MinIO]: https://min.io/
+
+#### Known issues
+
+**Backups to IBM COS fail with 403 Access Denied**
+
+When using an S3 backup store with IBM Cloud Object Storage, you may encounter `403 Access Denied` errors even though the access credentials are valid.
+This may be caused by a [recent change in the AWS S3 client](https://docs.aws.amazon.com/sdkref/latest/guide/feature-dataintegrity.html), which now calculates checksums for data integrity by default. IBM COS does not appear to support this feature.
+
+To resolve this issue, you can restore the previous behavior by setting the following environment variable on your Zeebe brokers:
+
+```
+AWS_REQUEST_CHECKSUM_CALCULATION=WHEN_REQUIRED
+```
+
+This will prevent the S3 client from calculating the additional checksums and should resolve the issue.
+
+**Backups to Dell EMC ECS fail with 400 Bad Request**
+
+When using an S3 backup store with Dell EMC ECS, you may encounter the following error:
+
+`The Content-SHA256 you specified did not match what we received (Service: S3, Status Code: 400)`
+
+This issue is caused by a recent change in the AWS S3 client, which now signs streaming chunked uploads differently. Dell EMC ECS does not support chunked encoding.
+
+To resolve this issue, set the following environment variable on your Zeebe brokers:
+
+```
+AWS_REQUEST_CHECKSUM_CALCULATION=WHEN_REQUIRED
+```
+
+This disables the additional checksum calculation in the S3 client and should resolve the issue.
 
 #### Backup Encryption
 
@@ -70,7 +112,7 @@ Backups can be large depending on your usage of Zeebe. To reduce S3 storage cost
 
 Zeebe compresses backup data immediately before uploading to S3 and buffers the compressed files in a temporary directory. Compression and buffering of compressed files can have a negative effect if Zeebe is heavily resource constrained.
 
-You can enable compression by specifying a compression algorithm to use. We recommend using [zstd] as it provides a good trade off between compression ratio and resource usage.
+You can enable compression by specifying a compression algorithm to use. We recommend using [zstd] as it provides a good trade-off between compression ratio and resource usage.
 
 More compression algorithms are available; check [commons-compress] for a full list.
 

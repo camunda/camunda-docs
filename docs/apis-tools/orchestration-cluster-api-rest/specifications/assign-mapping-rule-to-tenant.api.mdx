@@ -1,0 +1,237 @@
+---
+id: assign-mapping-rule-to-tenant
+title: "Assign a mapping rule to a tenant"
+description: "Assign a single mapping rule to a specified tenant."
+sidebar_label: "Assign a mapping rule to a tenant"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWE1v2zgQ/SsDnlqsarlt2u3qZqTtbhZtEKTO7iGbAyWNLbYUqZLDOIag/74YUXIc2ymCokcfDFnkcD7fI8VpBcmlF9m1mKORhsRNImyDTpKy5qwUmZDeq6X5LJtGmeVl0Di3g2giSvSFUw3LikzMekmQ4JVZaoQ6rgEXNAJZnmiwUAuFJVCvYiIS0UgnayR07EUrjKxRZCLOn5UiEYp1N5IqkQiH34NyWIqMXMBdB+YVQjDqe0BQJRpiUw7sAqjCLYu+qLCWImsFrRs25skpsxRdl2zsD77/Sge20/FjN27Yjm+s8eh5/tX0hB/7th5keCU9+FAU6P0iaL2GWDlOtn2QgS4RJ9PpYY2Ns7eqxBJKSRKUB2MJbqVWJbtcWENoiJfKptGq6GGSNs7mGuvfvnrW025FtgMQuIiSUCJJpcHmX7EgkB6iYI4lKAPXlx9P4Y+TN7/fPKuIGp+l6Wq1mrhF8QJLRdZNrFumblHwj+WeT2BeoeOErCFHkGWp2KbUHFCDjhT6EX3FmI/BbeD0T/4zIhkLEd1ibG4W35dpt1yJWFhXSxKZCE7tkwKuLs9GNKy5WHum+zULGTTrkLkNlOVamm9cKFKkDxrdteJDXUu3HsH20ECXCE+SwlYYQhnCJbpt/5Wh16/2dDMs/prPLyCqgMKWCAvrgCrlR0McRK2MqkMtspPpNBG1vItvb6fTjnVyxZ8QiQG8a7Q0PbR2w1EGautwwE8fmDKepCl+VWWsU0u1a3fCe8NYCzGA+H2MqOu6nlCv9/H+0bpclSWaHp7Aewd6GlkltbYrPPLqyKsjr37AqwNH37klWNhgysireK6BdfvnodlIHll2ZNmRZY+w7M2hz8GZAc6yYxyic9aBLYrgHJawqpTu1fPH5mh7ON4iFo9cO3LtyLV9rnWJqJEqyzfrJvTI4YtlJtJ4ivm0Ha++XTocZz5tN9fRji+O6G7H63JwWmSijTzqsjRtK+upy9rGOurSWy7SrXRK5jpCk6cj30YcaVtI3Q8fqidP8J14jPNU1sGUEt7B5Ycvc/hTEq7kus8vm3yo+t303fSgVhZ9ROPs4gxihBGNWzvEqJapflBtFH6K4v6S7bEITtH6Cy+L6clROnSzwDXZoGSw12vn9ygkkuHPxxE7f/8778uvzML2ywcY7DvCVUHno+fTyct9yF2c9cwpbF0H02+fZgkrRRXIrcAKHTxxQInQqkDje3APPYxR7FOcgX+iRXg54aJE5Iy75lJRFfJJYeu0iMs2z1zbPK2lMulgwqens89X5+9nLz6dnX44//LhxcvJdEJ31AffWE+1NFt+bPpC+w0hOthJau+Pj59sKg2FI7yjtNFSGYZSH3E7EO56aDF5kYhsq9s0co6H75tAN8lAnGvRtrn0eOV01/Hw94BuLbLrm3ue9cQslef/pcgWUvvdTtF2hM8uh57Sc3hiA+tgdMOgNOue8jrwm0jEN1xv99O4x/Xrfdvtbf2Eh/fJ7m66RFQoS3R9KuP8rCiwoa2Vj35XMLU3m+zFFXPyfzLoM30=
+sidebar_class_name: "put api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Assign a mapping rule to a tenant"}
+></Heading>
+
+<MethodEndpoint
+  method={"put"}
+  path={"/tenants/{tenantId}/mappings/{mappingId}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Assign a single mapping rule to a specified tenant.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "tenantId",
+      in: "path",
+      required: true,
+      description: "The unique identifier of the tenant.",
+      schema: { type: "string" },
+    },
+    {
+      name: "mappingId",
+      in: "path",
+      required: true,
+      description: "The unique identifier of the mapping rule.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "204": {
+      description: "The mapping rule was successfully assigned to the tenant.",
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "Not found. The tenant or mapping rule was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>
