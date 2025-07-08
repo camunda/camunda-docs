@@ -3,6 +3,7 @@ module.exports = {
     "guides/introduction-to-camunda",
     {
       "Get started": [
+        "guides/getting-started-example",
         "guides/getting-started-java-spring",
         "guides/model-your-first-process",
         {
