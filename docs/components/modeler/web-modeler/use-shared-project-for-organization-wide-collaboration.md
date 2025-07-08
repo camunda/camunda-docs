@@ -101,7 +101,7 @@ To keep your process landscape up to date with all changes in production, take t
 
 1. Sync the process application to the feature branch of a subfolder in a repository.
 2. Merge the feature branch to main.
-3. Begin the [CI/CD pipeline](/guides/devops-lifecycle/integrate-web-modeler-in-ci-cd.md).
+3. Begin the [CI/CD pipeline](/components/modeler/web-modeler/integrate-web-modeler-in-ci-cd.md).
 4. Sync your main branch to the shared project as part of the CI/CD pipeline.
 
 Alternatively, you can trigger a quick automation like a GitHub Action to keep your process landscape updated.

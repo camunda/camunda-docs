@@ -11,11 +11,6 @@ module.exports = {
       ],
     },
     {
-      "DevOps lifecycle": [
-        "guides/devops-lifecycle/integrate-web-modeler-in-ci-cd",
-      ],
-    },
-    {
       type: "category",
       label: "Migrate from Camunda 7",
       link: {
@@ -168,6 +163,7 @@ module.exports = {
             "components/modeler/web-modeler/import-diagram",
             "components/modeler/web-modeler/fix-problems-in-your-diagram",
             "components/modeler/web-modeler/run-or-publish-your-process",
+            "components/modeler/web-modeler/integrate-web-modeler-in-ci-cd",
             {
               type: "category",
               label: "Process applications",

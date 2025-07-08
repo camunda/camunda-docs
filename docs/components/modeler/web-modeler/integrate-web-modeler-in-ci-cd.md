@@ -12,7 +12,7 @@ import TabItem from "@theme/TabItem";
 <span class="badge badge--intermediate">Intermediate</span>
 <span class="badge badge--medium">Time estimate: 1 hour</span>
 
-[Web Modeler](../../components/modeler/about-modeler.md) serves as a powerful tool for the development and deployment of processes and process applications. While Web Modeler simplifies one-click deployment for development, professional teams often rely on continuous integration and continuous deployment (CI/CD) pipelines for automated production deployments. The [Web Modeler API](/apis-tools/web-modeler-api/index.md) facilitates integration of Web Modeler into these pipelines, aligning with team practices and organizational process governance.
+[Web Modeler](/components/modeler/about-modeler.md) serves as a powerful tool for the development and deployment of processes and process applications. While Web Modeler simplifies one-click deployment for development, professional teams often rely on continuous integration and continuous deployment (CI/CD) pipelines for automated production deployments. The [Web Modeler API](/apis-tools/web-modeler-api/index.md) facilitates integration of Web Modeler into these pipelines, aligning with team practices and organizational process governance.
 
 - For low-risk processes, you can use Web Modeler [process application development pipeline](/components/modeler/web-modeler/process-application-pipeline.md) to quickly develop and progress process application releases through the stages of a standard development lifecycle. [Version comparison](/components/modeler/web-modeler/versions.md#compare-versions) (Visual and XML diffing), built in [review](/components/modeler/web-modeler/process-application-pipeline.md#review), and [Git Sync](/components/modeler/web-modeler/git-sync.md) provide a powerful combination for collaboration between team members using both Web and Desktop Modeler.
 
@@ -210,7 +210,7 @@ Deploy resources in this pipeline step using the [Orchestration cluster REST API
 
 #### Add environment variables via secrets
 
-If you are running connectors, you need to provide environment variables, such as service endpoints and API keys, for your preview environment. You can manage these via secrets. Read the [Connectors configuration documentation](/self-managed/connectors-deployment/connectors-configuration.md) to learn how to set these up in SaaS or Self-Managed.
+If you are running connectors, you need to provide environment variables, such as service endpoints and API keys, for your preview environment. You can manage these via secrets. Read the [connectors configuration documentation](/self-managed/connectors-deployment/connectors-configuration.md) to learn how to set these up in SaaS or Self-Managed.
 
 ### Test stage
 
