@@ -226,13 +226,13 @@ You can stop Camunda 8 Run by executing:
 ] }>
 <TabItem value="maclinux">
 ```bash
-./c8run/c8run stop
+cd c8run && ./c8run stop
 
 ````
 </TabItem>
 <TabItem value="windows">
 ```bash
-c8run\c8run.exe stop
+cd c8run && c8run.exe stop
 ````
 
 </TabItem>
