@@ -104,7 +104,6 @@ As of Camunda 8.8, configuring Operate and Tasklist with different repository na
 
 :::warning breaking changes
 As of Camunda 8.8, the `/actuator` endpoints for backups have been moved to `/actuator/backupHistory`. The previous `/actuator/backups` endpoint is still active only if the applications are deployed standalone (each application is running in its own process).
-If run together as single application then `/actuator/backups` is used by Zeebe and `/actuator/backupHistory` by Operate and Tasklist.
 :::
 
 ### Management API
@@ -130,7 +129,7 @@ Since the services are bound to your local machine, you **cannot reuse the same 
 ```bash
 export CAMUNDA_RELEASE_NAME="camunda"
 # kubectl port-forward services/$SERVICE_NAME $LOCAL_PORT:$REMOTE_PORT
-kubectl port-forward services/$CAMUNDA_RELEASE_NAME-zeebe 9600:9600 & \
+kubectl port-forward services/$CAMUNDA_RELEASE_NAME-core 9600:9600 & \
 kubectl port-forward services/$CAMUNDA_RELEASE_NAME-optimize 9620:8092 & \
 kubectl port-forward services/$CAMUNDA_RELEASE_NAME-elasticsearch 9200:9200 &
 ```
@@ -151,7 +150,7 @@ export CAMUNDA_RELEASE_NAME="camunda"
 # temporary overwrite of curl, can be removed with `unalias curl` again
 alias curl="kubectl run curl --rm -i -n $CAMUNDA_NAMESPACE --restart=Never --image=alpine/curl -- -sS"
 
-curl $CAMUNDA_RELEASE_NAME-zeebe:9600/actuator/health
+curl $CAMUNDA_RELEASE_NAME-core:9600/actuator/health
 curl $CAMUNDA_RELEASE_NAME-optimize:8092/actuator/health
 curl $CAMUNDA_RELEASE_NAME-elasticsearch:9200/_cluster/health
 ```

@@ -64,7 +64,7 @@ As noted in the [Management API](#management-api) section, this API is typically
       export ELASTIC_SNAPSHOT_REPOSITORY="camunda" # the name of your snapshot repository
       export ELASTIC_ENDPOINT="$CAMUNDA_RELEASE_NAME-elasticsearch:9200"
 
-      export ORCHESTRATION_CLUSTER_MANAGEMENT_API="http://$CAMUNDA_RELEASE_NAME-zeebe:9600/"
+      export ORCHESTRATION_CLUSTER_MANAGEMENT_API="http://$CAMUNDA_RELEASE_NAME-core:9600/"
       export OPTIMIZE_MANAGEMENT_API="http://$CAMUNDA_RELEASE_NAME-optimize:8092/"
       ```
 
@@ -117,14 +117,14 @@ curl -XPOST "$ORCHESTRATION_CLUSTER_MANAGEMENT_API/actuator/backupHistory" \
       <summary>
 
       ```json
+
       {
          "scheduledSnapshots":[
-            "camunda_webapps_1748937221_8.8.0_part_1_of_6",
-            "camunda_webapps_1748937221_8.8.0_part_2_of_6",
-            "camunda_webapps_1748937221_8.8.0_part_3_of_6",
-            "camunda_webapps_1748937221_8.8.0_part_4_of_6",
-            "camunda_webapps_1748937221_8.8.0_part_5_of_6",
-            "camunda_webapps_1748937221_8.8.0_part_6_of_6"
+            "camunda_webapps_1748937221_8.8.0_part_1_of_5",
+            "camunda_webapps_1748937221_8.8.0_part_2_of_5",
+            "camunda_webapps_1748937221_8.8.0_part_3_of_5",
+            "camunda_webapps_1748937221_8.8.0_part_4_of_5",
+            "camunda_webapps_1748937221_8.8.0_part_5_of_5"
          ]
       }
       ```
@@ -176,7 +176,7 @@ curl -s "$ORCHESTRATION_CLUSTER_MANAGEMENT_API/actuator/backupHistory/$BACKUP_ID
          "failureReason":null,
          "details":[
             {
-               "snapshotName":"camunda_webapps_1748937221_8.8.0_part_1_of_6",
+               "snapshotName":"camunda_webapps_1748937221_8.8.0_part_1_of_5",
                "state":"SUCCESS",
                "startTime":"2025-06-03T07:55:15.685+0000",
                "failures":[
@@ -184,7 +184,7 @@ curl -s "$ORCHESTRATION_CLUSTER_MANAGEMENT_API/actuator/backupHistory/$BACKUP_ID
                ]
             },
             {
-               "snapshotName":"camunda_webapps_1748937221_8.8.0_part_2_of_6",
+               "snapshotName":"camunda_webapps_1748937221_8.8.0_part_2_of_5",
                "state":"SUCCESS",
                "startTime":"2025-06-03T07:55:16.288+0000",
                "failures":[
@@ -192,7 +192,7 @@ curl -s "$ORCHESTRATION_CLUSTER_MANAGEMENT_API/actuator/backupHistory/$BACKUP_ID
                ]
             },
             {
-               "snapshotName":"camunda_webapps_1748937221_8.8.0_part_3_of_6",
+               "snapshotName":"camunda_webapps_1748937221_8.8.0_part_3_of_5",
                "state":"SUCCESS",
                "startTime":"2025-06-03T07:55:17.092+0000",
                "failures":[
@@ -200,7 +200,7 @@ curl -s "$ORCHESTRATION_CLUSTER_MANAGEMENT_API/actuator/backupHistory/$BACKUP_ID
                ]
             },
             {
-               "snapshotName":"camunda_webapps_1748937221_8.8.0_part_4_of_6",
+               "snapshotName":"camunda_webapps_1748937221_8.8.0_part_4_of_5",
                "state":"SUCCESS",
                "startTime":"2025-06-03T07:55:17.293+0000",
                "failures":[
@@ -208,17 +208,9 @@ curl -s "$ORCHESTRATION_CLUSTER_MANAGEMENT_API/actuator/backupHistory/$BACKUP_ID
                ]
             },
             {
-               "snapshotName":"camunda_webapps_1748937221_8.8.0_part_5_of_6",
+               "snapshotName":"camunda_webapps_1748937221_8.8.0_part_5_of_5",
                "state":"SUCCESS",
                "startTime":"2025-06-03T07:55:18.298+0000",
-               "failures":[
-
-               ]
-            },
-            {
-               "snapshotName":"camunda_webapps_1748937221_8.8.0_part_6_of_6",
-               "state":"SUCCESS",
-               "startTime":"2025-06-03T07:55:18.499+0000",
                "failures":[
 
                ]
@@ -316,11 +308,10 @@ By default, the indices are prefixed with `zeebe-record`. If you have configured
                "uuid":"1p_HdzKeTZ-zY-SN1LJ9VQ",
                "repository":"camunda",
                "version_id":8521000,
-               "version":"8.17.0-8.17.4",
+               "version":"8.18.0",
                "indices":[
                   "zeebe-record_process_8.8.0_2025-06-03",
                   "zeebe-record_job_8.8.0_2025-06-03",
-                  "zeebe-record_process-instance-creation_8.8.0_2025-06-03",
                   "zeebe-record_process-instance_8.8.0_2025-06-03",
                   "zeebe-record_deployment_8.8.0_2025-06-03"
                ],
@@ -338,9 +329,9 @@ By default, the indices are prefixed with `zeebe-record`. If you have configured
 
                ],
                "shards":{
-                  "total":9,
+                  "total":8,
                   "failed":0,
-                  "successful":9
+                  "successful":8
                },
                "feature_states":[
 
@@ -380,7 +371,6 @@ By default, the indices are prefixed with `zeebe-record`. If you have configured
                "indices":[
                   "zeebe-record_process_8.8.0_2025-06-03",
                   "zeebe-record_job_8.8.0_2025-06-03",
-                  "zeebe-record_process-instance-creation_8.8.0_2025-06-03",
                   "zeebe-record_process-instance_8.8.0_2025-06-03",
                   "zeebe-record_deployment_8.8.0_2025-06-03"
                ],
@@ -398,9 +388,9 @@ By default, the indices are prefixed with `zeebe-record`. If you have configured
 
                ],
                "shards":{
-                  "total":9,
+                  "total":8,
                   "failed":0,
-                  "successful":9
+                  "successful":8
                }
             }
          }
@@ -441,9 +431,9 @@ By default, the indices are prefixed with `zeebe-record`. If you have configured
                      "initializing":0,
                      "started":0,
                      "finalizing":0,
-                     "done":9,
+                     "done":8,
                      "failed":0,
-                     "total":9
+                     "total":8
                   },
                   "stats":{
                      "incremental":{
@@ -451,7 +441,7 @@ By default, the indices are prefixed with `zeebe-record`. If you have configured
                         "size_in_bytes":0
                      },
                      "total":{
-                        "file_count":9,
+                        "file_count":8,
                         "size_in_bytes":0
                      },
                      "start_time_in_millis":1748937910633,
@@ -460,7 +450,6 @@ By default, the indices are prefixed with `zeebe-record`. If you have configured
                   "indices":{
                      "zeebe-record_process_8.8.0_2025-06-03",
                      "zeebe-record_job_8.8.0_2025-06-03",
-                     "zeebe-record_process-instance-creation_8.8.0_2025-06-03",
                      "zeebe-record_process-instance_8.8.0_2025-06-03",
                      "zeebe-record_deployment_8.8.0_2025-06-03"
                   }
@@ -498,9 +487,9 @@ By default, the indices are prefixed with `zeebe-record`. If you have configured
                      "initializing":0,
                      "started":0,
                      "finalizing":0,
-                     "done":9,
+                     "done":8,
                      "failed":0,
-                     "total":9
+                     "total":8
                   },
                   "stats":{
                      "incremental":{
@@ -508,7 +497,7 @@ By default, the indices are prefixed with `zeebe-record`. If you have configured
                         "size_in_bytes":0
                      },
                      "total":{
-                        "file_count":9,
+                        "file_count":8,
                         "size_in_bytes":0
                      },
                      "start_time_in_millis":1748943465623,
@@ -517,7 +506,6 @@ By default, the indices are prefixed with `zeebe-record`. If you have configured
                   "indices":{
                      "zeebe-record_process_8.8.0_2025-06-03",
                      "zeebe-record_job_8.8.0_2025-06-03",
-                     "zeebe-record_process-instance-creation_8.8.0_2025-06-03",
                      "zeebe-record_process-instance_8.8.0_2025-06-03",
                      "zeebe-record_deployment_8.8.0_2025-06-03"
                   }
@@ -538,7 +526,7 @@ By default, the indices are prefixed with `zeebe-record`. If you have configured
 This step uses the [Zeebe management backup API](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md).
 
       ```bash
-      curl -XPOST "$ORCHESTRATION_CLUSTER_MANAGEMENT_API/actuator/backups" \
+      curl -XPOST "$ORCHESTRATION_CLUSTER_MANAGEMENT_API/actuator/backupRuntime" \
          -H "Content-Type: application/json" \
          -d "{\"backupId\": $BACKUP_ID}"
       ```
@@ -561,7 +549,7 @@ This step uses the [Zeebe management backup API](/self-managed/operational-guide
 This step uses the [Zeebe management backup API](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md).
 
       ```bash
-      curl "$ORCHESTRATION_CLUSTER_MANAGEMENT_API/actuator/backups/$BACKUP_ID"
+      curl "$ORCHESTRATION_CLUSTER_MANAGEMENT_API/actuator/backupRuntime/$BACKUP_ID"
       ```
 
       <details>
@@ -579,7 +567,7 @@ This step uses the [Zeebe management backup API](/self-managed/operational-guide
                   "createdAt":"2025-06-03T08:06:06.246997293Z",
                   "lastUpdatedAt":"2025-06-03T08:06:10.408893628Z",
                   "checkpointPosition":1,
-                  "brokerVersion":"8.7.2"
+                  "brokerVersion":"8.8.0"
                }
             ]
          }
@@ -591,7 +579,7 @@ This step uses the [Zeebe management backup API](/self-managed/operational-guide
       Alternatively as a one-line to wait until the state is `COMPLETED` using a while loop and jq to parse the response JSON.
 
       ```bash
-      while [[ "$(curl -s "$ORCHESTRATION_CLUSTER_MANAGEMENT_API/actuator/backups/$BACKUP_ID" | jq -r .state)" != "COMPLETED" ]]; do echo "Waiting..."; sleep 5; done; echo "Finished backup with ID $BACKUP_ID"
+      while [[ "$(curl -s "$ORCHESTRATION_CLUSTER_MANAGEMENT_API/actuator/backupRuntime/$BACKUP_ID" | jq -r .state)" != "COMPLETED" ]]; do echo "Waiting..."; sleep 5; done; echo "Finished backup with ID $BACKUP_ID"
       ```
 
 ### 10. Resume exporting in Zeebe using the [management API](/self-managed/zeebe-deployment/operations/management-api.md)
