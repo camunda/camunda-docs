@@ -10,6 +10,7 @@ module.exports = {
             "guides/orchestrate-human-tasks",
             "guides/orchestrate-apis",
             "guides/orchestrate-microservices",
+            "guides/listen-to-user-tasks",
           ],
         },
       ],
@@ -418,8 +419,10 @@ module.exports = {
             id: "components/identity/identity-introduction",
           },
           items: [
-            "components/identity/authorization",
             "components/identity/user",
+            "components/identity/group",
+            "components/identity/role",
+            "components/identity/authorization",
           ],
         },
       ],
@@ -946,6 +949,7 @@ module.exports = {
         {
           "Camunda Process Test": [
             "apis-tools/testing/getting-started",
+            "apis-tools/testing/configuration",
             "apis-tools/testing/assertions",
             "apis-tools/testing/utilities",
             "apis-tools/testing/connectors",
@@ -1022,6 +1026,7 @@ module.exports = {
       ],
     },
     "reference/supported-environments",
+    "reference/public-api",
     "reference/contact",
     "reference/dependencies",
     "reference/camunda-help-center",

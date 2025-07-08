@@ -9,21 +9,27 @@ import TabItem from "@theme/TabItem";
 
 [Camunda Process Test](https://github.com/camunda/camunda/tree/main/testing/camunda-process-test-java) (CPT) is a Java library to test your BPMN processes and your process application.
 
-CPT is based on [JUnit 5](https://junit.org/junit5/) and [Testcontainers](https://java.testcontainers.org/). It provides a managed isolated runtime to execute your process tests on your local machine. The runtime uses the Camunda Docker images and includes the following components:
-
-- Camunda
-- Connectors
+:::info Public API
+Camunda Process Test is part of the Camunda 8 [public API](/reference/public-api.md) and is covered by our SemVer stability guarantees (except for alpha features). Breaking changes will not be introduced in minor or patch releases.
+:::
 
 :::info
-CPT is the successor of [Zeebe Process Test](/apis-tools/java-client/zeebe-process-test.md)  
-Our previous testing library is deprecated and will be removed with version 8.10.
+CPT is the successor of [Zeebe Process Test](/apis-tools/java-client/zeebe-process-test.md). Our previous testing library is deprecated and will be removed with version 8.10.
 :::
+
+CPT provides different runtimes to execute your process tests:
+
+- [Testcontainers runtime](configuration.md#testcontainers-runtime) (default) - A managed runtime based on [Testcontainers](https://java.testcontainers.org/) and Docker.
+- [Remote runtime](configuration.md#remote-runtime) - Your own runtime, such as, [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md)
 
 ## Prerequisites
 
 - Java 8+ / 17+ (for Camunda Spring Boot SDK)
-- JUnit 5
-- A Docker-API compatible container runtime, such as Docker on Linux or Docker Desktop on Mac and Windows. If you have issues with your Docker runtime, have a look at the [Testcontainers documentation](https://java.testcontainers.org/supported_docker_environment/).
+- [JUnit 5](https://junit.org/junit5/)
+
+For the default [Testcontainers runtime](configuration.md#testcontainers-runtime):
+
+- A Docker-API compatible container runtime, such as Docker on Linux or Docker Desktop on Mac and Windows.
 
 ## Install
 
@@ -177,109 +183,11 @@ public class MyProcessTest {
 
 </Tabs>
 
-Read more about `CamundaAssert` and the available assertions [here](assertions.md).
+Next, read more about:
 
-## Configure the runtime
-
-By default, the test runtime uses the Camunda Docker images in the same version as the test library. You can change the version or customize the runtime to your needs.
-
-<Tabs groupId="client" defaultValue="spring-sdk" queryString values={
-[
-{label: 'Camunda Spring Boot SDK', value: 'spring-sdk' },
-{label: 'Java client', value: 'java-client' }
-]
-}>
-
-<TabItem value='spring-sdk'>
-
-Set the following properties in your `application.yml` (or `application.properties`) to override the defaults:
-
-```yaml
-io:
-  camunda:
-    process:
-      test:
-        # Change the version of the Camunda Docker image
-        camunda-docker-image-version: 8.8.0
-        # Change the Camunda Docker image
-        camunda-docker-image-name: camunda/camunda
-        # Set additional Camunda environment variables
-        camunda-env-vars:
-          env_1: value_1
-        # Expose additional Camunda ports
-        camunda-exposed-ports:
-          - 4567
-        # Enable Connectors
-        connectors-enabled: true
-        # Change the Connectors Docker image
-        connectors-docker-image-name: camunda/connectors
-        # Change version of the Connectors Docker image
-        connectors-docker-image-version: 8.8.0
-        # Set additional Connectors environment variables
-        connectors-env-vars:
-          env_1: value_1
-        # Set Connectors secrets
-        connectors-secrets:
-          secret_1: value_1
-```
-
-</TabItem>
-
-<TabItem value='java-client'>
-
-You can change the version by setting the following properties in a `/camunda-container-runtime.properties` file:
-
-```properties
-camunda.dockerImageVersion=8.8.0
-```
-
-For more configuration options, you can register the JUnit extension manually and use the fluent builder to override the defaults:
-
-```java
-package com.example;
-
-import io.camunda.process.test.api.CamundaProcessTestExtension;
-import org.junit.jupiter.api.extension.RegisterExtension;
-
-// No annotation: @CamundaProcessTest
-public class MyProcessTest {
-
-    @RegisterExtension
-    private static final CamundaProcessTestExtension EXTENSION =
-        new CamundaProcessTestExtension()
-            // Change the version of the Camunda Docker image
-            .withCamundaDockerImageVersion("8.8.0")
-            // Change the Camunda Docker image
-            .withCamundaDockerImageName("camunda/camunda")
-            // Set additional Camunda environment variables
-            .withCamundaEnv("env_1", "value_1")
-            // Expose additional Camunda ports
-            .withCamundaExposedPort(4567)
-            // Enable Connectors
-            .withConnectorsEnabled(true)
-            // Change the Connectors Docker image
-            .withConnectorsDockerImageName("camunda/connectors")
-            // Change version of the Connectors Docker image
-            .withConnectorsDockerImageVersion("8.8.0")
-            // Set additional Connectors environment variables
-            .withConnectorsEnv("env_1", "value_1")
-            // Set Connectors secrets
-            .withConnectorsSecret("secret_1", "value_1");
-}
-```
-
-</TabItem>
-
-</Tabs>
-
-## Logging
-
-The test runtime uses [SLF4J](https://www.slf4j.org/) as the logging framework. If needed, you can enable the logging for the following packages:
-
-- `io.camunda.process.test` - The test runtime (recommended level `info`)
-- `tc.camunda` - The Camunda Docker container (recommended level `error`)
-- `tc.connectors` - The connectors Docker container (recommended level `error`)
-- `org.testcontainers` - The Testcontainers framework (recommended level `warn`)
+- `CamundaAssert` and [assertions](assertions.md)
+- `CamundaProcessTestContext` and [utilities](utilities.md)
+- How to [configure the runtime](configuration.md)
 
 ## Examples
 

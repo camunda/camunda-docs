@@ -91,7 +91,22 @@ The old `zeebe-client-java` artifact will be relocation-only, so your build syst
 The Zeebe Java client will not be developed further and will only receive bug fixes for as long as version 8.7 is officially supported.
 :::
 
+### Spring Zeebe SDK
+
+Starting with 8.8, the Spring Zeebe SDK will become the new Camunda Spring Boot SDK. The SDK will rely on the new Camunda Java client, designed to enhance the user experience and introduce new features while maintaining compatibility with existing codebases.
+
+:::note
+The Spring Zeebe SDK will not be developed further and will only receive bug fixes for as long as version 8.7 is officially supported.
+:::
+
 ### Camunda 8 Self-Managed
+
+#### Deprecation of Self-Managed AWS Marketplace offering
+
+As of **October 2025**, the **Self-Managed AWS Marketplace** offering will be **deprecated** and no longer publicly available.  
+Existing customers may continue to use the product until their contracts expire.
+
+For future use, refer to our [new AWS Marketplace listing](https://aws.amazon.com/marketplace/pp/prodview-6y664fcnydiqg?sr=0-1&ref_=beagle&applicationId=AWSMPContessa) for more information.
 
 #### Helm chart - Separated Ingress deprecation
 
