@@ -6,6 +6,10 @@ description: "Interact with Camunda 8 clusters. Activate jobs and run user task 
 
 The Orchestration Cluster API is a REST API designed to interact with a Camunda 8 cluster.
 
+:::info Public API
+This API is part of the Camunda 8 [public API](/reference/public-api.md) and is covered by our SemVer stability guarantees (except for alpha endpoints). Breaking changes will not be introduced in minor or patch releases.
+:::
+
 :::note
 Ensure you [authenticate](./orchestration-cluster-api-rest-authentication.md) before accessing the Orchestration Cluster API.
 :::

@@ -56,6 +56,12 @@ You try to connect (i.e., to deploy) to a remote Zeebe instance, and Desktop Mod
 
 To resolve this issue, check if you can connect to Zeebe through another client, i.e., [`zbctl`](/apis-tools/cli-client/index.md). If that works, [further debug your Zeebe connection](#debug-zeebe-connection-issues). If that does not work, resolve the [general connection issue](#resolve-a-general-zeebe-connection-issue) first.
 
+## I cannot connect to local Zeebe
+
+You try to connect (i.e., to deploy) to a local Zeebe instance, and Desktop Modeler tells you it "cannot find a running Zeebe."
+
+Ensure that your local Zeebe instance is running.
+
 ## Resolve a general Zeebe connection issue
 
 You try to connect to Zeebe from both Desktop Modeler _and_ [`zbctl`](/apis-tools/cli-client/index.md), and neither of them works. General connection failures can have a couple of reasons:
