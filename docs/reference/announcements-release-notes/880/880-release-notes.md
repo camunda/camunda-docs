@@ -155,6 +155,15 @@ The getting started documentation now includes:
 - Updated code to match recent Camunda versions
 - Annotations in BPMN files to guide usage and explain results
 
+### Singapore region available for SaaS on Amazon Web Services <span class="badge badge--long" title="This feature affects SaaS">SaaS</span>
+
+A new Singapore (ap-southeast-1) region is now available for SaaS clusters on Amazon Web Services. Use this region to:
+
+- Improve overall processing speed and reduce latency if you operate in Singapore and Southeast Asian (SEA) countries.
+- Keep cluster data within Singapore to support your local data residency and compliance needs.
+
+To learn more about supported SaaS regions, see [regions](/reference/regions.md).
+
 ## 8.8.0-alpha5
 
 | Release date | Changelog(s)                                                                                                                                                                               | Blog                                                                              |
