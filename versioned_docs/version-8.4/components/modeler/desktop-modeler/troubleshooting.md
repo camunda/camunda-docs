@@ -50,23 +50,23 @@ Depending on your operating system, you can find Desktop Modeler logs in differe
 
 To produce logging output, you can also run Desktop Modeler from the command line.
 
-## I cannot connect to Zeebe
+## I cannot connect to Orchestration cluster {#i-cannot-connect-to-zeebe}
 
-You try to connect (i.e., to deploy) to a remote Zeebe instance, and Desktop Modeler tells you it "cannot find a running Zeebe."
+You try to connect (i.e., to deploy) to a remote Orchestration cluster, and Desktop Modeler tells you it "Cannot connect to Orchestration cluster."
 
 To resolve this issue, check if you can connect to Zeebe through another client, i.e., [`zbctl`](../../../apis-tools/cli-client/index.md). If that works, [further debug your Zeebe connection](#debug-zeebe-connection-issues). If that does not work, resolve the [general connection issue](#resolve-a-general-zeebe-connection-issue) first.
 
-## I cannot connect to local Zeebe
+## I cannot connect to local Orchestration cluster {#i-cannot-connect-to-local-zeebe}
 
-You try to connect (i.e., to deploy) to a local Zeebe instance, and Desktop Modeler tells you it "cannot find a running Zeebe."
+You try to connect (i.e., to deploy) to a local Orchestration cluster, and Desktop Modeler tells you it "Cannot connect to Orchestration cluster."
 
-Ensure that your local Zeebe instance is running.
+Ensure your local Orchestration cluster is running.
 
 ## Resolve a general Zeebe connection issue
 
 You try to connect to Zeebe from both Desktop Modeler _and_ [`zbctl`](../../../apis-tools/cli-client/index.md), and neither of them works. General connection failures can have a couple of reasons:
 
-### The (remote) Zeebe instance is not reachable
+### The (remote) Orchestration cluster is not reachable {#the-remote-zeebe-instance-is-not-reachable}
 
 Ensure your computer has access to the (remote) network.
 
