@@ -104,15 +104,15 @@ The service tasks in the process are executed by job workers. The `java` and `no
   </li>
 
   <li>
-    Click on the "Rocket" icon to connect to your c8run instance and deploy the model.
-    Select `Camunda 8 Self-Managed` and use `http://localhost:26500` as cluster endpoint.
+    Click the "Rocket" icon to connect to your Camunda 8 Run instance and deploy the model.
+    Select `Camunda 8 Self-Managed` and use `http://localhost:26500` as the cluster endpoint.
 
     ![Connect to Cluster and deploy model](./img/get-started-example-deploy.png)
 
   </li>
 
   <li>
-    Click on the “Play” icon on the bottom toolbar of Modeler to deploy and start an instance of the process model.
+    Click the “Play” icon on the bottom toolbar of Modeler to deploy and start an instance of the process model.
 
     <p>You do not need to set any variables for the process.</p>
 
