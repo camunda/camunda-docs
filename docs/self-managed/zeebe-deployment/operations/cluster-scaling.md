@@ -415,20 +415,6 @@ curl -X 'PATCH' \
       "brokers": []
     },
     {
-      "operation": "AWAIT_REDISTRIBUTION",
-      "brokerId": 3,
-      "partitionId": 4,
-      "priority": 3,
-      "brokers": []
-    },
-    {
-      "operation": "AWAIT_RELOCATION",
-      "brokerId": 3,
-      "partitionId": 4,
-      "priority": 3,
-      "brokers": []
-    },
-    {
       "operation": "PARTITION_JOIN",
       "brokerId": 4,
       "partitionId": 4,
@@ -444,20 +430,6 @@ curl -X 'PATCH' \
     },
     {
       "operation": "PARTITION_BOOTSTRAP",
-      "brokerId": 4,
-      "partitionId": 5,
-      "priority": 3,
-      "brokers": []
-    },
-    {
-      "operation": "AWAIT_REDISTRIBUTION",
-      "brokerId": 4,
-      "partitionId": 5,
-      "priority": 3,
-      "brokers": []
-    },
-    {
-      "operation": "AWAIT_RELOCATION",
       "brokerId": 4,
       "partitionId": 5,
       "priority": 3,
@@ -487,15 +459,11 @@ curl -X 'PATCH' \
     {
       "operation": "AWAIT_REDISTRIBUTION",
       "brokerId": 5,
-      "partitionId": 6,
-      "priority": 3,
       "brokers": []
     },
     {
       "operation": "AWAIT_RELOCATION",
       "brokerId": 5,
-      "partitionId": 6,
-      "priority": 3,
       "brokers": []
     },
     {
