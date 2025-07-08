@@ -76,10 +76,22 @@ The service tasks in the process are executed by job workers. The `java` and `no
 
   <li>
     Start Camunda 8 Run by changing into the directory and running the command:
+    <Tabs groupId="os" defaultValue="maclinux" values={
+[
+{ label: 'Mac OS + Linux', value: 'maclinux', },
+{ label: 'Windows', value: 'windows', },
+] }>
+<TabItem value="maclinux">
     ```bash
-cd c8run
-./start.sh
+./1-camunda-starter.sh
 ```
+</TabItem>
+<TabItem value="windows">
+```bash
+1-camunda-starter.bat
+```
+</TabItem>
+</Tabs>
   </li>
 
   <li>
@@ -203,3 +215,27 @@ Your active process instance in Operate will now transition to completed. You ha
 To create a new Spring project, refer to [our guide using Spring](/guides/getting-started-java-spring.md).
 
 For further information about the Node.js SDK, refer to [the Camunda 8 JavaScript SDK API documentation](https://camunda.github.io/camunda-8-js-sdk/).
+
+## Teardown
+
+You can stop Camunda 8 Run by executing:
+
+    <Tabs groupId="os" defaultValue="maclinux" values={
+
+[
+{ label: 'Mac OS + Linux', value: 'maclinux', },
+{ label: 'Windows', value: 'windows', },
+] }>
+<TabItem value="maclinux">
+```bash
+./c8run/c8run stop
+
+````
+</TabItem>
+<TabItem value="windows">
+```bash
+c8run\c8run.exe stop
+````
+
+</TabItem>
+</Tabs>
