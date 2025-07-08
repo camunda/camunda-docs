@@ -15,12 +15,13 @@ This setup is for **local evaluation only** and not intended for production use.
 
 ## Prerequisites
 
-Ensure you have the following tools installed:
+Make sure you have the following tools installed:
 
 - [Docker](https://docs.docker.com/get-docker/)
 - [Kind](https://kind.sigs.k8s.io/docs/user/quick-start/)
 - [kubectl](https://kubernetes.io/docs/tasks/tools/)
 - [Helm](https://helm.sh/docs/intro/install/)
+- [zbctl](https://docs.camunda.io/docs/components/zeebe/cli/zbctl/) (Zeebe CLI)
 
 Recommended system resources:
 
@@ -84,22 +85,83 @@ Wait until all pods show `STATUS: Running`.
 
 ## Step 5: Access the web apps
 
-You can port-forward to access Camunda web apps in your browser:
+### Operate
 
 ```bash
 kubectl port-forward svc/camunda-operate 8080:80 -n camunda
 ```
 
-Then, visit [http://localhost:8080](http://localhost:8080)
+Visit [http://localhost:8080](http://localhost:8080).
 
-**Default login:**
+Log in with:
 
 - Username: demo
 - Password: demo
 
-## Step 6: Tear down the cluster
+### Tasklist
 
-When you're done testing, delete the Kind cluster:
+In a separate terminal:
+
+```bash
+kubectl port-forward svc/camunda-tasklist 8081:80 -n camunda
+```
+
+Visit [http://localhost:8081](http://localhost:8081).
+
+Log in with:
+
+- Username: demo
+- Password: demo
+
+## Step 6: Deploy a sample process
+
+1. [Download and open Camunda Modeler](https://camunda.com/download/modeler/).
+2. Create a simple BPMN diagram:
+
+```css
+[Start Event] → [User Task: "Review Request"] → [End Event]
+```
+
+3. Set the user task properties with an ID of `reviewRequest` and an assignee of `demo`.
+4. Save the diagram as `review-request.bpmn`.
+5. Deploy it using zbctl:
+
+```bash
+zbctl --insecure \
+  --address localhost:26500 \
+  deploy review-request.bpmn
+```
+
+## Step 7: Start a process instance
+
+```bash
+zbctl --insecure \
+  --address localhost:26500 \
+  create instance review-request
+```
+
+You should see a process instance ID returned.
+
+## Step 8: View the process in Operate
+
+Go back to [http://localhost:8080](http://localhost:8080) and:
+
+1. Log in with `demo` / `demo`.
+2. Navigate to process instances.
+3. Confirm your running instance is visible and waiting at the user task.
+
+## Step 9: Complete the task in Tasklist
+
+Visit [http://localhost:8081](http://localhost:8081)
+
+1. Log in with `demo` / `demo`.
+2. Find the review request task and complete it.
+
+Once completed, go back to Operate to confirm the process has finished.
+
+## Step 10: Tear down the cluster
+
+When you're finished testing:
 
 ```bash
 kind delete cluster --name camunda
@@ -107,7 +169,8 @@ kind delete cluster --name camunda
 
 ## Next steps
 
-- Try deploying a BPMN process using Camunda Modeler.
-- Connect a job worker via the Zeebe client.
-- Customize the Helm chart for production use in a full Kubernetes cluster.
-- For more in-depth configuration and production tips, visit the Camunda Helm chart docs.
+- Connect a custom job worker to Zeebe
+- Explore Helm configuration options for production
+- Integrate with external identity providers or databases
+
+For more in-depth options, visit the [Camunda Helm chart docs](https://github.com/camunda/camunda-platform-helm).
