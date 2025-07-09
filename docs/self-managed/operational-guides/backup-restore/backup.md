@@ -44,10 +44,10 @@ As noted in the [Management API](backup-and-restore.md#management-api) section, 
       export BACKUP_ID=$(date +%s) # unix timestamp as unique always increasing ID
 
       export ELASTIC_SNAPSHOT_REPOSITORY="camunda" # the name of your snapshot repository
-      export ELASTIC_ENDPOINT="http://localhost:9200/"
+      export ELASTIC_ENDPOINT="http://localhost:9200"
 
-      export ORCHESTRATION_CLUSTER_MANAGEMENT_API="http://localhost:9600/"
-      export OPTIMIZE_MANAGEMENT_API="http://localhost:9620/"
+      export ORCHESTRATION_CLUSTER_MANAGEMENT_API="http://localhost:9600"
+      export OPTIMIZE_MANAGEMENT_API="http://localhost:9620"
       ```
 
       </TabItem>
@@ -61,8 +61,8 @@ As noted in the [Management API](backup-and-restore.md#management-api) section, 
       export ELASTIC_SNAPSHOT_REPOSITORY="camunda" # the name of your snapshot repository
       export ELASTIC_ENDPOINT="$CAMUNDA_RELEASE_NAME-elasticsearch:9200"
 
-      export ORCHESTRATION_CLUSTER_MANAGEMENT_API="http://$CAMUNDA_RELEASE_NAME-core:9600/"
-      export OPTIMIZE_MANAGEMENT_API="http://$CAMUNDA_RELEASE_NAME-optimize:8092/"
+      export ORCHESTRATION_CLUSTER_MANAGEMENT_API="http://$CAMUNDA_RELEASE_NAME-core:9600"
+      export OPTIMIZE_MANAGEMENT_API="http://$CAMUNDA_RELEASE_NAME-optimize:8092"
       ```
 
       </TabItem>
