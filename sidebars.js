@@ -1132,7 +1132,7 @@ module.exports = {
           Tutorial: [],
         },
         {
-          "Operational tasks": [],
+          "Operational tasks": ["dual-region", "collecting-diagnostics"],
         },
       ],
     },
