@@ -1,8 +1,8 @@
 module.exports = {
   Guides: [
-    "guides/create-account",
     "guides/introduction-to-camunda",
     "guides/getting-started-java-spring",
+    "guides/create-account",
     {
       Tutorials: [
         "guides/orchestrate-human-tasks",
