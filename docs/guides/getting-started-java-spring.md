@@ -1,7 +1,7 @@
 ---
 id: getting-started-java-spring
 title: Start a new Java project using Spring
-sidebar_label: Starting from scratch with Spring
+sidebar_label: Create a Spring Java project
 description: "Use Spring Boot and the Camunda Spring Boot SDK to interact with your local Self-Managed Camunda 8 installation."
 keywords: [java, spring, spring camunda, getting started, user guide, tutorial]
 ---
