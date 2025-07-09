@@ -626,7 +626,7 @@ Database dumps created with `pg_dumpall`/`pg_dump` can only be restored into a d
 :::
 
 :::info
-You can [restore a Web Modeler data backup](restore.md#restore-a-web-modeler-data-backup).
+You can [restore a Web Modeler data backup](restore.md#optional-restore-a-web-modeler-data-backup).
 :::
 
 ## Cleaning up backups
