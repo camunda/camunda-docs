@@ -1,5 +1,5 @@
 ---
-id: zeebe-installation
+id: overview
 title: "Overview"
 sidebar_label: "Overview"
 ---

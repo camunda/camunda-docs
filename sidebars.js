@@ -1317,7 +1317,6 @@ module.exports = {
           Modeler: [
             {
               "Web Modeler": [
-                "self-managed/modeler/web-modeler/installation",
                 {
                   Configuration: [
                     "self-managed/modeler/web-modeler/configuration/configuration",
@@ -1353,7 +1352,7 @@ module.exports = {
           items: [
             {
               Zeebe: [
-                "self-managed/zeebe-deployment/zeebe-installation",
+                "self-managed/zeebe-deployment/overview",
                 {
                   "Zeebe Gateway": [
                     "self-managed/zeebe-deployment/zeebe-gateway/overview",
@@ -1414,7 +1413,6 @@ module.exports = {
                 },
               ],
               Operate: [
-                "self-managed/operate-deployment/install-and-start",
                 "self-managed/operate-deployment/operate-configuration",
                 "self-managed/operate-deployment/data-retention",
                 "self-managed/operate-deployment/schema-and-migration",
@@ -1423,7 +1421,6 @@ module.exports = {
                 "self-managed/operate-deployment/usage-metrics",
               ],
               Tasklist: [
-                "self-managed/tasklist-deployment/install-and-start",
                 "self-managed/tasklist-deployment/tasklist-configuration",
                 "self-managed/tasklist-deployment/tasklist-custom-styling",
                 "self-managed/tasklist-deployment/data-retention",
@@ -1441,7 +1438,6 @@ module.exports = {
                 id: "self-managed/orchestration-identity/orchestration-identity",
               },
               items: [
-                "self-managed/orchestration-identity/installation",
                 "self-managed/orchestration-identity/configuration",
                 {
                   "Mapping rules": [
@@ -1456,14 +1452,12 @@ module.exports = {
         },
         {
           Connectors: [
-            "self-managed/connectors-deployment/install-and-start",
+            "self-managed/connectors-deployment/overview",
             "self-managed/connectors-deployment/connectors-configuration",
           ],
           Optimize: [
-            "self-managed/optimize-deployment/install-and-start",
             {
               Configuration: [
-                "self-managed/optimize-deployment/configuration/getting-started",
                 {
                   "System configuration": [
                     "self-managed/optimize-deployment/configuration/system-configuration",
@@ -1497,7 +1491,6 @@ module.exports = {
           ],
           Console: [
             "self-managed/console-deployment/overview",
-            "self-managed/console-deployment/installation",
             {
               Configuration: [
                 "self-managed/console-deployment/configuration/configuration",
