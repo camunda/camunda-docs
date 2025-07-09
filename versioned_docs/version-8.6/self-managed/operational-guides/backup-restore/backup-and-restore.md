@@ -8,6 +8,8 @@ description: "Learn how to back up and restore your Camunda 8 Self-Managed compo
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import ZeebeGrid from '@site/docs/components/zeebe/react-components/\_zeebe-card';
+import { overviewCards } from './react-components/\_card-data';
 
 Use the backup feature to back up and restore your Camunda 8 Self-Managed components and cluster.
 
@@ -18,6 +20,8 @@ This guide covers how to back up and restore your Camunda 8 Self-Managed compone
 - Regularly [back up](backup.md) the state of your Zeebe, Operate, Tasklist, and Optimize components without any downtime. You can also back up and restore Web Modeler data.
 
 - [Restore](restore.md) a cluster from a backup if any failures occur that cause data loss.
+
+<ZeebeGrid zeebe={overviewCards} />
 
 :::note
 
