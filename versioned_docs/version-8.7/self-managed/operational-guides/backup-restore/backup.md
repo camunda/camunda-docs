@@ -41,7 +41,7 @@ When backing up the WebApps, the order in which you execute the following sub-st
 
 This will heavily depend on your setup, the following examples are based on examples given in the [Management API](#management-api) in Kubernetes using either active port-forwarding or overwrite of the local curl command.
 
-As noted in the [Management API](#management-api) section, this API is typically not publicly exposed. Therefore, you will need to access it directly using any means available within your environment.
+As noted in the [Management API](backup-and-restore.md#management-api) section, this API is typically not publicly exposed. Therefore, you will need to access it directly using any means available within your environment.
 
 :::
 
