@@ -1555,7 +1555,7 @@ module.exports = {
             id: "self-managed/components/components-upgrade/introduction",
           },
           items: [
-            "self-managed/components/components-upgrade/update-guide/870-to-880",
+            "self-managed/components/components-upgrade/870-to-880",
             "self-managed/components/components-upgrade/860-to-870",
             "self-managed/components/components-upgrade/850-to-860",
             "self-managed/components/components-upgrade/840-to-850",
