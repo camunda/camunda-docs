@@ -1,7 +1,7 @@
 ---
 id: install
 title: "Camunda 8 Helm installation"
-sidebar_label: "Helm"
+sidebar_label: "Install"
 description: "Camunda provides continuously improved Helm charts, of which are not cloud provider-specific so you can choose your Kubernetes provider."
 ---
 
@@ -59,7 +59,7 @@ For example, `CAMUNDA_OPERATE_ELASTICSEARCH_URL` becomes `CAMUNDA_OPERATE_OPENSE
 Refer to the [Operate](/self-managed/operate-deployment/operate-configuration.md#settings-for-opensearch), [Tasklist](/self-managed/tasklist-deployment/tasklist-configuration.md#elasticsearch-or-opensearch) and [Optimize](/self-managed/optimize-deployment/configuration/system-configuration.md#opensearch) configuration documentation for additional component configuration parameters to update.
 :::
 
-![Camunda 8 Self-Managed Architecture Diagram](../assets/camunda-platform-8-self-managed-architecture-diagram-combined-ingress.png)
+![Camunda 8 Self-Managed Architecture Diagram](/assets/camunda-platform-8-self-managed-architecture-diagram-combined-ingress.png)
 
 When installing the [camunda-platform](https://artifacthub.io/packages/helm/camunda/camunda-platform) Helm chart, all components shown on the architectural diagram above are installed.
 
@@ -105,7 +105,7 @@ helm repo update
 
 In a default configuration, Helm charts will auto-generate all required Camunda Identity secrets for Camunda 8 component to Identity communications. However, future `helm upgrade` commands will regenerate Helm charts due to an issue with a [Bitnami library](https://docs.bitnami.com/general/how-to/troubleshoot-helm-chart-issues/#credential-errors-while-upgrading-chart-releases).
 
-While upgrading is still possible by following our [upgrade guide](./upgrade.md#upgrading-where-identity-enabled), we recommend pre-creating these secrets to ease your future upgrade experience. This is also a recommended option when using CI/CD tools like ArgoCD, FluxCD, Jenkins, etc.
+While upgrading is still possible by following our [upgrade guide](/upgrade/upgrade.md#upgrading-where-identity-enabled), we recommend pre-creating these secrets to ease your future upgrade experience. This is also a recommended option when using CI/CD tools like ArgoCD, FluxCD, Jenkins, etc.
 
 See an example of the secret below:
 

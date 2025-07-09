@@ -1064,19 +1064,35 @@ module.exports = {
     },
     {
       type: "category",
-      label: "Production installation",
+      label: "Installation methods",
       link: {
         type: "doc",
-        id: "self-managed/setup/overview",
+        id: "self-managed/installation-methods/index",
       },
       items: [
         {
           type: "doc",
-          label: "Helm",
-          id: "self-managed/setup/install",
+          label: "Kubernets with Helm",
+          id: "self-managed/installation-methods/helm/index",
         },
-        "self-managed/setup/deploy/other/docker",
-        "self-managed/setup/deploy/local/manual",
+        "self-managed/installation-methods/helm/install",
+        "self-managed/installation-methods/helm/chart-parameters",
+        {
+          type: "category",
+          label: "Configure",
+          link: {
+            type: "doc",
+            id: "self-managed/installation-methods/helm/configure/index.md",
+          },
+          items: [
+            {
+              Authentication: [],
+            },
+            {
+              Database: [],
+            },
+          ],
+        },
       ],
     },
     {
