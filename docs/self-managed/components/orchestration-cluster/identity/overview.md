@@ -1,6 +1,6 @@
 ---
-id: installation
-title: Initial setup
+id: overview
+title: Overview
 description: "Learn how Identity is bundled with your default Orchestration cluster."
 ---
 

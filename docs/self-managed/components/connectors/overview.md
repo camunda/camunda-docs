@@ -1,6 +1,6 @@
 ---
-id: install-and-start
-title: Installation
+id: overview
+title: Overview
 description: "Let's get started with connectors by installing and running them."
 ---
 
@@ -19,13 +19,6 @@ You can find a list of connectors developed by Camunda, partners, and the commun
 :::note
 Some out-of-the-box connectors are licensed under the [Camunda Self-Managed Free Edition license](https://camunda.com/legal/terms/cloud-terms-and-conditions/camunda-cloud-self-managed-free-edition-terms/).
 :::
-
-## Connector runtime and function
-
-The connector runtime environment can be installed using the supported [deployment options](/self-managed/setup/overview.md#deployment-options).
-
-Currently, we support an installation of connectors with [Docker](/self-managed/setup/deploy/other/docker.md#connectors),
-[Docker Compose](/self-managed/setup/deploy/local/docker-compose.md), [Helm charts](/self-managed/setup/overview.md), and the [manual setup](/self-managed/setup/deploy/local/manual.md#run-connectors).
 
 :::note
 [Inbound connectors](/components/connectors/use-connectors/inbound.md) require [Operate](/self-managed/operate-deployment/install-and-start.md) to be deployed as part of your Camunda Self-Managed installation.
