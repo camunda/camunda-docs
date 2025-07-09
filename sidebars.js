@@ -1409,6 +1409,7 @@ module.exports = {
               label: "Identity",
               link: {
                 type: "doc",
+                id: "self-managed/components/orchestration-cluster/identity/overview",
               },
               items: [
                 "self-managed/components/orchestration-cluster/identity/overview",
