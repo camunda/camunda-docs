@@ -8,7 +8,7 @@ import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import {DockerCompose} from "@site/src/components/CamundaDistributions";
 
-A Docker Compose configuration to run Camunda Self-Managed components (Zeebe, Operate, Tasklist, Optimize, Identity, and connectors). Docker Compose also supports document storage and management with [document handling](/self-managed/concepts/document-handling/overview.md).
+A Docker Compose configuration to run Camunda Self-Managed components (Orchestration cluster, Optimize, and connectors). Docker Compose also supports document storage and management with [document handling](/self-managed/concepts/document-handling/overview.md).
 
 :::note
 While the [Docker images](/self-managed/installation-methods/docker/docker.md) themselves are supported for production usage, the Docker Compose files are designed to be used by developers to run an environment locally, and are not designed to be used in production. We recommend [Kubernetes](/self-managed/installation-methods/helm/install.md) for production use cases.
@@ -35,10 +35,10 @@ docker compose up -d
 
 ### Configuration options
 
-Running `docker compose up -d` starts all Camunda components, including Identity. The [Camunda Distributions repository](https://github.com/camunda/camunda-distributions) also contains additional configuration files for lightweight development.
+Running `docker compose up -d` starts all Camunda components. The [Camunda Distributions repository](https://github.com/camunda/camunda-distributions) also contains additional configuration files for lightweight development.
 
-- **docker-compose.yaml:** Contains all Camunda 8 Components for a full stack deployment: Zeebe, Operate, Tasklist, connectors, Optimize, Identity, Elasticsearch, Keycloak, Web Modeler, and PostgreSQL.
-- **docker-compose-core.yaml:** Contains Camunda 8 Orchestration cluster components: Zeebe, Tasklist, Operate, and connectors.
+- **docker-compose.yaml:** Contains all Camunda 8 Components for a full stack deployment: Orchestration cluster, connectors, Optimize, Elasticsearch, Keycloak, Web Modeler, and PostgreSQL.
+- **docker-compose-core.yaml:** Contains only Camunda 8 Orchestration cluster components and connectors.
 - **docker-compose-web-modeler.yaml:** Contains the Camunda 8 Web Modeler standalone installation. For more information, see the [Web Modeler instructions](#web-modeler).
 
 To start Camunda with an alternate configuration, specify a file using the following command:
@@ -51,8 +51,8 @@ docker compose -f docker-compose-core.yaml up -d
 
 Running components can be accessed with the username `demo` and password `demo`:
 
-- Operate: [http://localhost:8081](http://localhost:8081)
-- Tasklist: [http://localhost:8082](http://localhost:8082)
+- Operate: [http://localhost:8088/operate](http://localhost:8088/operate)
+- Tasklist: [http://localhost:8088/tasklist](http://localhost:8088/tasklist)
 - Optimize: [http://localhost:8083](http://localhost:8083)
 - Identity: [http://localhost:8084](http://localhost:8084)
 - Web Modeler [http://localhost:8070](http://localhost:8070)
@@ -62,9 +62,9 @@ Keycloak is used to manage users, and can be accessed with the user `admin` and 
 
 - Keycloak: [http://localhost:18080/auth/](http://localhost:18080/auth/)
 
-The workflow engine Zeebe is available using gRPC:
+The Orchestration cluster is available using gRPC:
 
-- Zeebe: `localhost:26500`
+- Cluster endpoint: `localhost:26500`
 
 ### Stop Camunda 8
 
@@ -110,41 +110,19 @@ docker compose -f docker-compose-web-modeler.yaml down -v
 
 #### Deploy or execute a process
 
-The local Zeebe instance started when using the provided `docker-compose.yaml` is pre-configured in Web Modeler.
-
-Once you are ready to deploy or execute a process, this instance can be used without needing to enter the cluster endpoint manually. The correct authentication type is also preset based on the [`ZEEBE_AUTHENTICATION_MODE` environment variable](#securing-the-zeebe-api).
-
-<Tabs groupId="web modeler" defaultValue="with" queryString values={
-[
-{label: 'With Zeebe request authentication', value: 'with' },
-{label: 'Without authentication', value: 'without' },
-]}>
-
-<TabItem value="with">
-
-If you enabled authentication for gRPC requests on Zeebe, use the following client credentials when deploying and executing processes:
-
-- Client ID: `zeebe`
-- Client secret: `zecret`
-
-:::note
-The correct OAuth token URL and audience are preset internally.
-:::
-
-</TabItem>
-
-<TabItem value='without'>
-
-No additional input is required.
-
-</TabItem>
-</Tabs>
+The local Orchestration cluster started when using the provided `docker-compose.yaml` is pre-configured in Web Modeler.
 
 #### Emails
 
 The provided configuration includes [Mailpit](https://github.com/axllent/mailpit) as a test SMTP server. It captures all emails sent by Web Modeler, but does not forward them to the actual recipients.
 
 You can access emails in Mailpit's Web UI at [http://localhost:8075](http://localhost:8075).
+
+### Use the Orchestration cluster API
+
+- (If auth is enabled) [authenticate](apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md)
+- [deploy resources](apis-tools/orchestration-cluster-api-rest/specifications/create-deployment.api.mdx)
+- [create a process instance](apis-tools/orchestration-cluster-api-rest/specifications/create-process-instance.api.mdx)
 
 ### Desktop Modeler
 
@@ -154,48 +132,11 @@ Desktop Modeler is [open source and free to use](https://github.com/camunda/camu
 
 [Download the Desktop Modeler](https://camunda.com/download/modeler/) and start modeling BPMN, DMN and Camunda Forms on your local machine.
 
-### Use the CLI
+## Secure the Orchestration cluster API
 
-<Tabs groupId="cli" defaultValue="with" queryString values={
-[
-{label: 'With Zeebe request authentication', value: 'with' },
-{label: 'Without authentication', value: 'without' },
-]}>
+By default, the Orchestration cluster gRPC API is publicly accessible without requiring any client credentials for development purposes.
 
-<TabItem value="with">
-
-If you enabled authentication for GRPC requests on Zeebe, provide the following client credentials when deploying and executing processes:
-
-- Authentication: `OAuth`
-- URL: `http://localhost:26500`
-- Client ID: `zeebe`
-- Client secret: `zecret`
-- OAuth URL: `http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token`
-- Audience: `zeebe-api`
-
-</TabItem>
-
-<TabItem value="without">
-
-Once you are ready to deploy or execute processes, use the following settings to deploy to the local Zeebe instance:
-
-- Authentication: `None`
-- URL: `http://localhost:26500`
-
-</TabItem>
-</Tabs>
-
-## Secure the Zeebe API
-
-By default, the Zeebe GRPC API is publicly accessible without requiring any client credentials for development purposes.
-
-To enable authentication of GRPC requests in Zeebe, setting the environment variable `ZEEBE_AUTHENTICATION_MODE` to `identity`, for example:
-
-```shell
-ZEEBE_AUTHENTICATION_MODE=identity docker compose up -d
-```
-
-The default value can also be modified directly in the included `.env` file.
+TODO: find a way to enable Orchestration Cluster API over secured endpoint
 
 ## Connectors
 
