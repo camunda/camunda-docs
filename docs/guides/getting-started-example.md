@@ -132,7 +132,13 @@ You can view the process instance in **Operate**, the visual operations tool, by
 [http://localhost:8080/operate](http://localhost:8080/operate)  
 Login with the credentials: `demo` / `demo`.
 
-There you will see an active process instance. Note that data needs to sync to Operate, so the process instance may not be visible immediately. (Note also: when the workers are running, process instances will be completed immediately and further process instances will not appear as active).
+There you will see an active process instance.
+
+:::note
+Data needs to sync to Operate, so the process instance may not be visible immediately.
+
+Additionally, when the workers are running, process instances will be completed immediately and further process instances will not appear as active.
+:::
 
 ![Active process instance visible in Operate](./img/get-started-operate-screenshot.png)
 
