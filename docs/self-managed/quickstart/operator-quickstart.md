@@ -21,7 +21,6 @@ Make sure you have the following tools installed:
 - [Kind](https://kind.sigs.k8s.io/docs/user/quick-start/)
 - [kubectl](https://kubernetes.io/docs/tasks/tools/)
 - [Helm](https://helm.sh/docs/intro/install/)
-- [zbctl](https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md) (Zeebe CLI)
 
 Recommended system resources:
 
@@ -124,23 +123,16 @@ Log in with:
 
 3. Set the user task properties with an ID of `reviewRequest` and an assignee of `demo`.
 4. Save the diagram as `review-request.bpmn`.
-5. Deploy it using zbctl:
+5. Deploy the model by clicking the space-ship button with the following options
 
-```bash
-zbctl --insecure \
-  --address localhost:26500 \
-  deploy review-request.bpmn
-```
+- Parameters:
+  - Target: Camunda 8 Self-Managed
+  - Cluster Endpoint: http://localhost:26500
+  - Authentication: none
 
 ## Step 7: Start a process instance
 
-```bash
-zbctl --insecure \
-  --address localhost:26500 \
-  create instance review-request
-```
-
-You should see a process instance ID returned.
+Create a process instance by clicking the play button and "Start Process Instance"
 
 ## Step 8: View the process in Operate
 
