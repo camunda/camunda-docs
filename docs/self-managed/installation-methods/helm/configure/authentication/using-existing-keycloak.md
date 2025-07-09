@@ -1,6 +1,7 @@
 ---
 id: using-existing-keycloak
 title: "Using existing Keycloak"
+sidebar-label: "Keycloak"
 description: "Learn how to use an existing Keycloak instance in Camunda 8 Self-Managed deployment."
 ---
 

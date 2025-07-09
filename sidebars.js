@@ -1094,25 +1094,32 @@ module.exports = {
               },
               items: [
                 "self-managed/installation-methods/helm/configure/authentication/oidc",
-                "self-managed/installation-methods/helm/configure/authentication/keycloak",
+                "self-managed/installation-methods/helm/configure/authentication/using-existing-keycloak",
                 "self-managed/installation-methods/helm/configure/authentication/basic",
               ],
             },
             {
-              Database: [],
-            },
-            "secret-management",
-            {
-              Ingress: [
-                "ingress-setup",
-                "accessing-components-without-ingress",
+              Database: [
+                {
+                  Elasticsearch: [
+                    "self-managed/installation-methods/helm/configure/database/using-existing-elasticsearch",
+                    "self-managed/installation-methods/helm/configure/database/prefix-elasticsearch-indices",
+                  ],
+                },
+                "self-managed/installation-methods/helm/configure/database/using-existing-opensearch",
+                "self-managed/installation-methods/helm/configure/database/configure-db-custom-headers",
               ],
             },
-            "configure-multitenancy",
-            "multinamespace-deployment",
+            "self-managed/installation-methods/helm/configure/secret-management",
             {
-              "Image registry": ["install-airgapped-environ"],
+              Ingress: [
+                "self-managed/installation-methods/helm/configure/ingress-setup",
+                "self-managed/installation-methods/helm/configure/accessing-components-without-ingress",
+              ],
             },
+            "self-managed/installation-methods/helm/configure/configure-multi-tenancy",
+            "self-managed/installation-methods/helm/configure/multi-namespace-deployment",
+            "self-managed/installation-methods/helm/configure/air-gapped-installation",
             "running-custom-connectors",
             "customer-kubernetes-manifests",
             "inject-custom-kubernetes-manifests",
