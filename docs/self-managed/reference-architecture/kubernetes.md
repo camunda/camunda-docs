@@ -48,14 +48,14 @@ The database is not depicted in the diagram, as we recommend handling it externa
 ### Kubernetes
 
 :::note
-The reference architecture overview describes the difference between the [Orchestration cluster and Web Modeler and Console](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console), and provides additional information on application communication.
+The reference architecture overview describes the difference between the [Orchestration Cluster and Web Modeler and Console](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console), and provides additional information on application communication.
 :::
 
 A [multi-namespace deployment](/self-managed/setup/guides/multi-namespace-deployment.md) is recommended. For more information, see the [components](#components) section.
 
 The following depictions provide a simplified view of the deployed namespaces using the [Camunda 8 Helm chart](/self-managed/setup/install.md). To keep the diagram clear, ConfigMaps, Secrets, RBAC, and ReplicaSets have been omitted.
 
-#### Orchestration cluster
+#### Orchestration Cluster
 
 ![Orchestration Cluster](./img/k8s-cluster-view-orchestration.jpg)
 
@@ -93,11 +93,11 @@ To further enhance fault tolerance, it is recommended to distribute Zeebe broker
 
 ### Components
 
-A typical Camunda 8 deployment distinguishes between the **Orchestration cluster** and the **Web Modeler and Console**. These clusters should be separated by utilizing [Kubernetes namespaces](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/), though running within a single namespace is possible.
+A typical Camunda 8 deployment distinguishes between the **Orchestration Cluster** and the **Web Modeler and Console**. These clusters should be separated by utilizing [Kubernetes namespaces](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/), though running within a single namespace is possible.
 
-A multi-namespace setup allows you to duplicate and run multiple Orchestration clusters based on different use cases and requirements, while Web Modeler and Console remains independent, and does not need to be scaled the same way. The same applies to Identity as a central entity coordinating access management.
+A multi-namespace setup allows you to duplicate and run multiple Orchestration Clusters based on different use cases and requirements, while Web Modeler and Console remains independent, and does not need to be scaled the same way. The same applies to Identity as a central entity coordinating access management.
 
-The **Orchestration cluster** namespace, as outlined in the [architecture diagram](#orchestration-cluster), consists of the following components:
+The **Orchestration Cluster** namespace, as outlined in the [architecture diagram](#orchestration-cluster), consists of the following components:
 
 - [Zeebe Brokers](/components/zeebe/technical-concepts/architecture.md#brokers)
 - [Zeebe Gateway](/self-managed/zeebe-deployment/zeebe-gateway/zeebe-gateway-overview.md)
@@ -113,7 +113,7 @@ The **Web Modeler and Console** namespace, as outlined in the [architecture diag
 - [Identity](/self-managed/identity/what-is-identity.md)
   - Keycloak, an external dependency of Identity
 
-The **Orchestration cluster** should be configured to use the central Identity of the **Web Modeler and Console** namespace.
+The **Orchestration Cluster** should be configured to use the central Identity of the **Web Modeler and Console** namespace.
 
 ## Requirements
 

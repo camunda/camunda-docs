@@ -13,7 +13,7 @@ There are many ways you can provision and configure a Kubernetes cluster, and th
 
 Camunda provides continuously improved Helm charts, of which are not cloud provider-specific so you can choose your Kubernetes provider. The charts are available in the [Camunda Helm repository](https://artifacthub.io/packages/helm/camunda/camunda-platform) and we encourage you to [report issues](https://github.com/camunda/camunda-platform-helm/issues).
 
-You can also visit our Kubernetes [Camunda production deployment](../operational-guides/production-guide/helm-chart-production-guide.md) guide to learn about deploying Camunda Orchestration cluster in production environments with Helm charts.
+You can also visit our Kubernetes [Camunda production deployment](../operational-guides/production-guide/helm-chart-production-guide.md) guide to learn about deploying Camunda Orchestration Cluster in production environments with Helm charts.
 
 ## What is Helm?
 

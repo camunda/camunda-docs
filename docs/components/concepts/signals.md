@@ -14,7 +14,7 @@ respond accordingly.
 You can broadcast signals in several ways:
 
 - Using a [signal throw event or signal end event](../modeler/bpmn/signal-events/signal-events.md#signal-throw-events)
-- Using the [Orchestration cluster API Broadcast signal](/apis-tools/orchestration-cluster-api-rest/specifications/broadcast-signal.api.mdx) endpoint
+- Using the [Orchestration Cluster API Broadcast signal](/apis-tools/orchestration-cluster-api-rest/specifications/broadcast-signal.api.mdx) endpoint
 - Using Zeebe's [`BroadcastSignal` RPC](/apis-tools/zeebe-api/gateway-service.md#broadcastsignal-rpc)
 
 ## Signal subscriptions

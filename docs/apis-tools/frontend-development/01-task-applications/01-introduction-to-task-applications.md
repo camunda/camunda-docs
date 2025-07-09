@@ -155,7 +155,7 @@ Task applications are not limited to web applications to be worked on desktops. 
 You learned the basic concepts of a task application. Your possible next steps are:
 
 - Learn how to [embed or customize Camunda Forms](/apis-tools/frontend-development/03-forms/01-introduction-to-forms.md) to render tailored forms that can be designed by business users.
-- Learn how to utilize [Orchestration cluster APIs](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) to query and execute tasks in your task application, and to enrich it with process execution data.
+- Learn how to utilize [Orchestration Cluster APIs](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) to query and execute tasks in your task application, and to enrich it with process execution data.
 
 <!--
 TODO Section to be added once pages are available

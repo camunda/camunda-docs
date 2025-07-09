@@ -260,7 +260,7 @@ A message contains information to be delivered to interested parties during exec
 
 ## O
 
-### Orchestration cluster
+### Orchestration Cluster
 
 An orchestration cluster includes Zeebe, Operate, Tasklist, Optimize, and connectors. Previously [automation cluster](#automation-cluster).
 

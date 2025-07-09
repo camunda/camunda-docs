@@ -31,7 +31,7 @@ Deviations from the reference architecture are unavoidable. However, such change
 
 ## Architecture
 
-### Orchestration cluster vs Web Modeler and Console
+### Orchestration Cluster vs Web Modeler and Console
 
 When designing a reference architecture, it's essential to understand the differences between an orchestration cluster and Web Modeler and Console Self-Managed. These components play crucial roles in the deployment and operation of processes, but they serve different purposes and include distinct components.
 
