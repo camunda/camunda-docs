@@ -1086,12 +1086,46 @@ module.exports = {
           },
           items: [
             {
-              Authentication: [],
+              type: "category",
+              label: "Authentication",
+              link: {
+                type: "doc",
+                id: "self-managed/installation-methods/helm/configure/authentication/index",
+              },
+              items: [
+                "self-managed/installation-methods/helm/configure/authentication/oidc",
+                "self-managed/installation-methods/helm/configure/authentication/keycloak",
+                "self-managed/installation-methods/helm/configure/authentication/basic",
+              ],
             },
             {
               Database: [],
             },
+            "secret-management",
+            {
+              Ingress: [
+                "ingress-setup",
+                "accessing-components-without-ingress",
+              ],
+            },
+            "configure-multitenancy",
+            "multinamespace-deployment",
+            {
+              "Image registry": ["install-airgapped-environ"],
+            },
+            "running-custom-connectors",
+            "customer-kubernetes-manifests",
+            "",
           ],
+        },
+        {
+          Upgrade: [],
+        },
+        {
+          Tutorial: [],
+        },
+        {
+          "Operational tasks": [],
         },
       ],
     },
