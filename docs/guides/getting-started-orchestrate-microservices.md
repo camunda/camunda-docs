@@ -103,5 +103,5 @@ Don't want to build the process yourself? Click this button to create it from a 
 ## Additional resources and next steps
 
 - Learn more about Camunda 8 and what it can do by reading [What is Camunda 8](/components/components-overview.md) or watching our [Overview video](https://bit.ly/3TjNEm7) in Camunda Academy.
-- Get your local environment ready for development with Camunda 8 by [setting up your first development project](setting-up-development-project.md).
+- Get your local environment ready for development with Camunda 8 by [setting up your first development project](getting-started-example.md).
 - [Camunda Academy: Getting Started with Microservice Orchestration](https://academy.camunda.com/c8-getting-started-microservice-orchestration)

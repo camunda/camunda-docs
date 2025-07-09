@@ -162,6 +162,7 @@ RewriteRule ^docs/next/guides/setup-client-connection-credentials/?$ /docs/next/
 RewriteRule ^docs/next/guides/configuring-out-of-the-box-connectors/?$ /docs/next/components/connectors/use-connectors/configuring-out-of-the-box-connectors/ [R=301,L]
 RewriteRule ^docs/next/guides/use-shared-project-for-organization-wide-collaboration/?$ /docs/next/components/modeler/web-modeler/use-shared-project-for-organization-wide-collaboration/ [R=301,L]
 RewriteRule ^docs/next/guides/integrate-web-modeler-in-ci-cd/?$ /docs/next/components/modeler/web-modeler/integrate-web-modeler-in-ci-cd/ [R=301,L]
+RewriteRule ^docs/next/guides/setting-up-development-project/?$ /docs/next/guides/getting-started-example/ [R=301,L]
 
 # Remove Amazon Marketplace
 RewriteRule ^docs/next/self-managed/setup/deploy/amazon/aws-marketplace/?$ /docs/next/self-managed/setup/deploy/amazon/amazon-eks/ [R=301,L]

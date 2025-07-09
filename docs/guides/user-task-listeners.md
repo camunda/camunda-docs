@@ -141,4 +141,4 @@ Further, you can try the following:
 ## Additional resources and next steps
 
 - Learn more about Camunda 8 and what it can do by reading [What is Camunda 8](/components/components-overview.md) or watching our [Overview video](https://bit.ly/3TjNEm7) in Camunda Academy.
-- Get your local environment ready for development with Camunda 8 by [setting up your first development project](setting-up-development-project.md).
+- Get your local environment ready for development with Camunda 8 by [setting up your first development project](getting-started-example.md).

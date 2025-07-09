@@ -1,10 +1,10 @@
 module.exports = {
   Guides: [
+    "guides/create-account",
     "guides/introduction-to-camunda",
     "guides/getting-started-java-spring",
-    "guides/setting-up-development-project",
     {
-      "Orchestration use cases": [
+      Tutorials: [
         "guides/orchestrate-human-tasks",
         "guides/orchestrate-apis",
         "guides/orchestrate-microservices",
