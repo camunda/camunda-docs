@@ -1,7 +1,8 @@
 ---
 id: optimize-backup
-title: Backup and restore Optimize data
-description: "How to perform a backup of Optimize data and restore the backup."
+title: Backup Management API - Optimize
+description: "Backup API to perform a backup of Optimize data."
+sidebar_label: "Optimize"
 keywords: ["backup", "backups"]
 ---
 
