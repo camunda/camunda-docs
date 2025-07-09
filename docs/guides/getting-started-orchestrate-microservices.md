@@ -18,7 +18,9 @@ import SmPrereqs from './react-components/\_sm-prerequisites.md'
 import SaasPrereqs from './react-components/\_saas-prerequisites.md'
 import Install from './react-components/\_install-plain-java.md'
 
-Using Camunda 8, you can orchestrate the microservices necessary to achieve your end-to-end automated business process. Whether you have existing microservices or are looking to build out your microservices, this guide will help you understand how you can start your microservice orchestration journey with Camunda 8.
+Using Camunda 8, you can orchestrate the microservices necessary to achieve your end-to-end automated business process.
+
+Whether you have existing microservices or are looking to build out your microservices, this guide will help you understand how you can start your microservice orchestration journey with Camunda 8.
 
 While this guide uses code snippets in Java, you do not need to be a Java developer to be successful. Additionally, you can orchestrate microservices with Camunda 8 in other programming languages.
 

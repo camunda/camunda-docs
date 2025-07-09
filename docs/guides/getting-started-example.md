@@ -9,9 +9,9 @@ keywords: [java, spring, spring camunda, getting started, user guide, tutorial]
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-## Getting started with an example project
-
 Follow this guide to download and run an example project with a local instance of Camunda 8.
+
+## Getting started with an example project
 
 You will:
 

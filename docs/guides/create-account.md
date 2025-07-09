@@ -8,11 +8,11 @@ description: "Set up your Camunda 8 account to get started."
 <span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--medium">Time estimate: Under 5 minutes</span>
 
+Create a Camunda 8 account to create clusters, deploy processes, and create a new instance.
+
 :::note
 We're gradually rolling out changes that affect this page to users; your experience may vary.
 :::
-
-Create a Camunda 8 account so you can create clusters, deploy processes, and create a new instance.
 
 Visit [signup.camunda.com/accounts](https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral) to create your account:
 

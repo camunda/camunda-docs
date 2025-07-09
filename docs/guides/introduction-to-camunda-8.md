@@ -8,11 +8,13 @@ description: "Learn about Camunda 8, a platform that delivers scalable, on-deman
 
 import DocCardList from '@theme/DocCardList';
 
+[Camunda 8](https://camunda.io) delivers scalable, on-demand process automation as-a-service.
+
 :::note Interested in migrating from Camunda 7 to Camunda 8?
 Interested in migrating process solutions developed for Camunda 7 to run them on Camunda 8? Visit our guide on [migrating from Camunda 7](/guides/migrating-from-camunda-7/index.md).
 :::
 
-[Camunda 8](https://camunda.io) delivers scalable, on-demand process automation as-a-service. Camunda 8 is combined with powerful execution engines for BPMN processes and DMN decisions, and paired with tools for collaborative modeling, operations, and analytics.
+Camunda 8 is combined with powerful execution engines for BPMN processes and DMN decisions, and paired with tools for collaborative modeling, operations, and analytics.
 
 Camunda 8 consists of six [components](/components/components-overview.md). Together, these components form the complete Camunda 8 experience to design, automate, and improve your business processes.
 
