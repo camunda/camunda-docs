@@ -1,7 +1,8 @@
 ---
 id: docker-compose
-title: "Docker Compose"
-keywords: ["camunda docker", "docker compose"]
+title: "Developer quickstart - Docker Compose"
+sidebar_label: "Docker Compose"
+description: "This quickstart guides application developers through deploying Camunda 8 Self-Managed to a local Orchestration cluster on Docker Compose"
 ---
 
 import Tabs from "@theme/Tabs";
@@ -39,7 +40,7 @@ Running `docker compose up -d` starts all Camunda components. The [Camunda Distr
 
 - **docker-compose.yaml:** Contains all Camunda 8 Components for a full stack deployment: Orchestration cluster, connectors, Optimize, Elasticsearch, Keycloak, Web Modeler, and PostgreSQL.
 - **docker-compose-core.yaml:** Contains only Camunda 8 Orchestration cluster components and connectors.
-- **docker-compose-web-modeler.yaml:** Contains the Camunda 8 Web Modeler standalone installation. For more information, see the [Web Modeler instructions](#web-modeler).
+- **docker-compose-web-modeler.yaml:** Contains the Camunda 8 Web Modeler standalone installation. For more information, see the [Web Modeler instructions](##web-modeler).
 
 To start Camunda with an alternate configuration, specify a file using the following command:
 
@@ -136,8 +137,6 @@ Desktop Modeler is [open source and free to use](https://github.com/camunda/camu
 
 By default, the Orchestration cluster gRPC API is publicly accessible without requiring any client credentials for development purposes.
 
-TODO: find a way to enable Orchestration Cluster API over secured endpoint
-
 ## Connectors
 
 Both the full and lightweight Docker Compose files contain a configuration for [Out-of-the-box connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md). Refer to the [Connector installation guide](/self-managed/connectors-deployment/install-and-start.md) for details on how to provide the related connector templates for modeling.
@@ -152,3 +151,7 @@ per line. The secrets will then be available in the connector runtime in the for
 To add custom connectors, create a new Docker Image bundling them as described in the [Connectors repository](https://github.com/camunda/connectors).
 
 Alternatively, you can mount new connector JARs as volumes into the `/opt/app` folder by adding this to the Docker Compose file. Keep in mind that the connector JARs must include all necessary dependencies inside the JAR.
+
+## Next steps
+
+Check out the [getting started guide](/guides/getting-started-java-spring.md) to start a new Java Project to connect to this local cluster.

@@ -18,7 +18,7 @@ To configure an external IdP using Keycloak:
 1. Log in to the Keycloak Administrator Console. Open the URL you have configured for Keycloak in your browser.
 
    :::tip
-   When using the example [Docker Compose](/self-managed/setup/deploy/local/docker-compose.md) setup, Keycloak is available at [http://localhost:18080/](http://localhost:18080/).
+   When using the example [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md) setup, Keycloak is available at [http://localhost:18080/](http://localhost:18080/).
    :::
 
 2. Click **Administrator Console** and log in using the Keycloak administrator credentials.
@@ -26,7 +26,7 @@ To configure an external IdP using Keycloak:
    - The default administrator username is `admin`.
    - When deploying Camunda 8 with [Helm charts](/self-managed/setup/overview.md), you can extract the password as detailed in [secrets extraction](/self-managed/installation-methods/helm/upgrade/upgrade.md#secrets-extraction).
 
-   - Using the example [Docker Compose](/self-managed/setup/deploy/local/docker-compose.md) setup, the password is set via `KEYCLOAK_ADMIN_PASSWORD` environment variable and is `admin` per default.
+   - Using the example [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md) setup, the password is set via `KEYCLOAK_ADMIN_PASSWORD` environment variable and is `admin` per default.
 
 3. Select the realm you are using with Camunda 8. By default, this is **Camunda-platform**.
    ![keycloak-realm-select](../img/keycloak-admin-realm-select.png)

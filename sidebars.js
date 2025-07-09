@@ -1057,21 +1057,19 @@ module.exports = {
         id: "self-managed/quickstart/overview",
       },
       items: [
-        "self-managed/quickstart/developer-quickstart",
-        "self-managed/quickstart/operator-quickstart",
-      ],
-    },
-    {
-      type: "category",
-      label: "Run locally",
-      link: {
-        type: "doc",
-        id: "self-managed/run-locally/index",
-      },
-      items: [
-        "self-managed/setup/deploy/local/c8run",
-        "self-managed/setup/deploy/local/docker-compose",
-        "self-managed/setup/deploy/local/local-kubernetes-cluster",
+        {
+          type: "category",
+          label: "For Developers",
+          link: {
+            type: "doc",
+            id: "self-managed/quickstart/developer-quickstart",
+          },
+          items: [
+            "self-managed/quickstart/developer-quickstart/c8run",
+            "self-managed/quickstart/developer-quickstart/docker-compose",
+          ],
+        },
+        "self-managed/quickstart/administrator-quickstart",
       ],
     },
     {
