@@ -8,8 +8,6 @@ description: "Learn how to back up and restore your Camunda 8 Self-Managed compo
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import ZeebeGrid from '@site/docs/components/zeebe/react-components/_zeebe-card';
-import { overviewCards } from './react-components/_card-data';
 
 Use the backup feature to back up and restore your Camunda 8 Self-Managed components and cluster.
 
@@ -21,11 +19,8 @@ This guide covers how to back up and restore your Camunda 8 Self-Managed compone
 
 - [Restore](restore.md) a cluster from a backup if any failures occur that cause data loss.
 
-<ZeebeGrid zeebe={overviewCards} />
-
 :::note
 
-- If the Camunda application(s) cannot access Elasticsearch with cluster-level privileges, you can run the backup of Operate and Tasklist indices as a standalone application separate from the main application (see [standalone backup application](/self-managed/concepts/elasticsearch-without-cluster-privileges.md#standalone-backup-application)).
 - The examples in this guide are based on using the following tools: [curl](https://curl.se/), [jq](https://jqlang.org/), and [kubectl](https://kubernetes.io/de/docs/reference/kubectl/).
 
 :::
@@ -63,7 +58,7 @@ The following prerequisites are required before you can create and restore backu
 
 | Prerequisite                                             | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | :------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Set up a snapshot repository in the secondary datastore. | <p>Depending on the choice of secondary datastore, you must configure the following on the datastore itself:</p><p><ul><li>[Elasticsearch snapshot repository](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshot-restore.html)</li><li>[OpenSearch snapshot repository](https://docs.opensearch.org/docs/latest/tuning-your-cluster/availability-and-recovery/snapshots/snapshot-restore/)</li></ul></p>                                                                                                                                                                                                                           |
+| Set up a snapshot repository in the secondary datastore. | <p>Depending on the choice of secondary datastore, you must configure the following on the datastore itself:</p><p><ul><li>[Elasticsearch snapshot repository](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshot-restore.html)</li><li>[OpenSearch snapshot repository](https://docs.opensearch.org/docs/latest/tuning-your-cluster/availability-and-recovery/snapshots/snapshot-restore/)</li></ul></p>                                                                                                                                                                                                                                       |
 | Configure component backup storage.                      | <p>Configure the backup storage for the components. This is also important for restoring a backup.</p><p><ul><li>[Operate](/self-managed/operate-deployment/operate-configuration.md#backups)</li><li>[Optimize Elasticsearch](/self-managed/optimize-deployment/configuration/system-configuration.md#elasticsearch-backup-settings) / [Optimize OpenSearch](/self-managed/optimize-deployment/configuration/system-configuration.md#opensearch-backup-settings)</li><li>[Tasklist](/self-managed/tasklist-deployment/tasklist-configuration.md#backups)</li><li>[Zeebe](/self-managed/zeebe-deployment/configuration/broker.md#zeebebrokerdatabackup)</li></ul></p> |
 
 :::note
