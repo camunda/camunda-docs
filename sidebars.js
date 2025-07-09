@@ -1115,11 +1115,11 @@ module.exports = {
             },
             "running-custom-connectors",
             "customer-kubernetes-manifests",
-            "",
+            "inject-custom-kubernetes-manifests",
           ],
         },
         {
-          Upgrade: [],
+          Upgrade: ["setup/upgrade"],
         },
         {
           Tutorial: [],
