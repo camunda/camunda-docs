@@ -732,9 +732,9 @@ During the restoration of the Elasticsearch / OpenSearch state, we had to tempor
 In the case of Kubernetes to remove all related persistent volumes.
 
 ```bash
-kubectl get pvc \
+kubectl get pvc -o custom-columns=NAME:.metadata.name --no-headers \
   | grep zeebe \
-  | while read namespace pvc; do
+  | while read pvc; do
       kubectl delete pvc "$pvc"
     done
 ```
