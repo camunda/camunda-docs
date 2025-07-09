@@ -202,6 +202,10 @@ While all nodes in a Camunda cluster expose metrics, they will expose relevant m
 while gateways will expose REST API relevant metrics.
 :::
 
+:::note
+**Not all metrics are available at all times.** This can apply to various metrics, but is especially noticeable for **processing-related metrics**, which are recorded on events that can occur infrequently. For example, the `zeebe_incident_events_total` metric is only recorded when an incident is **created** or **resolved**.
+:::
+
 ### Process processing metrics
 
 The following metrics are related to process processing:

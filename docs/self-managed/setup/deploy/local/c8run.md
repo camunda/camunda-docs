@@ -18,10 +18,7 @@ The Camunda 8 Run script allows you to install and start a simplified, single-ap
 
 Camunda 8 Run includes the following:
 
-- Zeebe
-- Operate
-- Tasklist
-- Identity
+- Orchestration cluster
 - Connectors
 - Elasticsearch
 
@@ -59,7 +56,7 @@ Alternatively, you can start Camunda 8 Run using Docker:
 - On Mac and Linux: `./start.sh --docker`
 - On Windows: `.\c8run.exe start --docker`
 
-When started with Docker, Operate will be available at [http://localhost:8081](http://localhost:8081)
+When started with Docker, Operate will be available at [http://localhost:8088/operate](http://localhost:8088/operate)
 
 :::note
 If Camunda 8 Run fails to start, run the [shutdown script](#shut-down-camunda-8-run) to end the current processes, then run the start script again.

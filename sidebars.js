@@ -3,6 +3,7 @@ module.exports = {
     "guides/introduction-to-camunda",
     {
       "Get started": [
+        "guides/getting-started-example",
         "guides/getting-started-java-spring",
         "guides/model-your-first-process",
         {
@@ -10,6 +11,7 @@ module.exports = {
             "guides/orchestrate-human-tasks",
             "guides/orchestrate-apis",
             "guides/orchestrate-microservices",
+            "guides/listen-to-user-tasks",
           ],
         },
       ],

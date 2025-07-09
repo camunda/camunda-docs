@@ -14,7 +14,7 @@ Even while the cluster shows a status **Creating**, you can still proceed to beg
 Zeebe must show a status of **Healthy** to properly deploy your model.
 :::
 
-## Development clusters
+### Development clusters
 
 Starter plan users have one **development cluster**, with free execution for development, included in their plan.
 Deployment and execution of models (process instances, decision instances, and task users) is provided at no cost.
@@ -23,9 +23,9 @@ Additional clusters can be purchased through your [billing reservations](/compon
 Visit the [clusters page](/components/concepts/clusters.md) to learn more about the differences between **development clusters** and **production clusters**. Additionally, review the related [Camunda Academy course](https://academy.camunda.com/c8-h2-create-cluster) on creating clusters.
 
 :::caution Starter plans
-The Starter plan is no longer available. 
+The Starter plan is no longer available.
 
-- Existing customers using a Starter plan will need to either upgrade to the Enterprise plan, or move to the Free plan. 
+- Existing customers using a Starter plan will need to either upgrade to the Enterprise plan, or move to the Free plan.
 - To compare plan features and contact Camunda for advice and an Enterprise plan quote, refer to [Camunda 8 pricing](https://camunda.com/pricing/?utm_source=docs.camunda.io&utm_medium=referral).
 
 :::
