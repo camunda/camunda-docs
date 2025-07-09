@@ -92,12 +92,12 @@ The management API is an extension of the [Spring Boot Actuator](https://docs.sp
 
 Direct access will depend on your deployment environment. For example, direct Kubernetes cluster access with [port-forwarding](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_port-forward/) or [exec](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_exec/) to execute commands directly on Kubernetes pods. In a manual deployment you will need to be able to reach the machines that host Camunda. You can find the default for each component in their configuration page, this may differ based on your configuration.
 
-| Component                                                                                            | Port |
-| ---------------------------------------------------------------------------------------------------- | ---- |
-| [Operate](/self-managed/operate-deployment/operate-configuration.md#monitoring-operate)              | 8080 |
-| [Optimize](/self-managed/optimize-deployment/configuration/system-configuration.md#container)        | 8092 |
-| [Tasklist](/self-managed/tasklist-deployment/tasklist-configuration.md#monitoring-and-health-probes) | 8080 |
-| [Zeebe](/self-managed/zeebe-deployment/configuration/gateway.md#managementserver)                    | 9600 |
+| Component                                                                                            | Port | Helm Chart |
+| ---------------------------------------------------------------------------------------------------- | ---- | ---------- |
+| [Operate](/self-managed/operate-deployment/operate-configuration.md#monitoring-operate)              | 8080 | 80         |
+| [Optimize](/self-managed/optimize-deployment/configuration/system-configuration.md#container)        | 8092 | 8092       |
+| [Tasklist](/self-managed/tasklist-deployment/tasklist-configuration.md#monitoring-and-health-probes) | 8080 | 80         |
+| [Zeebe](/self-managed/zeebe-deployment/configuration/gateway.md#managementserver)                    | 9600 | 9600       |
 
 #### Examples for Kubernetes approaches
 
@@ -111,9 +111,9 @@ Since the services are bound to your local machine, you **cannot reuse the same 
 ```bash
 export CAMUNDA_RELEASE_NAME="camunda"
 # kubectl port-forward services/$SERVICE_NAME $LOCAL_PORT:$REMOTE_PORT
-kubectl port-forward services/$CAMUNDA_RELEASE_NAME-operate 9600:8080 & \
+kubectl port-forward services/$CAMUNDA_RELEASE_NAME-operate 9600:80 & \
 kubectl port-forward services/$CAMUNDA_RELEASE_NAME-optimize 9620:8092 & \
-kubectl port-forward services/$CAMUNDA_RELEASE_NAME-tasklist 9640:8080 & \
+kubectl port-forward services/$CAMUNDA_RELEASE_NAME-tasklist 9640:80 & \
 kubectl port-forward services/$CAMUNDA_RELEASE_NAME-zeebe-gateway 9660:9600 & \
 kubectl port-forward services/$CAMUNDA_RELEASE_NAME-elasticsearch 9200:9200 &
 ```
