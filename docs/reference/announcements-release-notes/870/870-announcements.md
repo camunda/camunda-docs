@@ -95,7 +95,7 @@ If you need to continue using the old `ZeebeClient`, you can use the new version
 The old `zeebe-client-java` artifact will be relocation-only, so your build system is redirected to the new `camunda-client-java` artifact. We will discontinue the old artifact in version 8.10 and recommend using the new one.
 
 :::note
-The Zeebe Java client will not be developed further and will only receive bug fixes for as long as version 8.7 is officially supported. This client is scheduled for removal in version 8.10.
+The Zeebe Java client will not be developed further and will only receive bug fixes for as long as version 8.9 is officially supported. This client is scheduled for removal in version 8.10.
 :::
 
 ### Spring Zeebe SDK
@@ -103,7 +103,7 @@ The Zeebe Java client will not be developed further and will only receive bug fi
 Starting with 8.8, the Spring Zeebe SDK will become the new Camunda Spring Boot SDK. The SDK will rely on the new Camunda Java client, designed to enhance the user experience and introduce new features while maintaining compatibility with existing codebases.
 
 :::note
-The Spring Zeebe SDK will not be developed further and will only receive bug fixes for as long as version 8.7 is officially supported. This SDK is scheduled for removal in version 8.10.
+The Spring Zeebe SDK will not be developed further and will only receive bug fixes for as long as version 8.9 is officially supported. This SDK is scheduled for removal in version 8.10.
 :::
 
 ### Camunda 8 Self-Managed
