@@ -46,6 +46,6 @@ As you're getting started with Camunda, you can also learn more about some of ou
 
 - [**Get started with human task orchestration**](/guides/getting-started-orchestrate-human-tasks.md): Utilizing user tasks, you can create and assign tasks to users. Then, users can perform their work and enter the necessary data to drive the business process.
 - [**Get started with API orchestration**](/guides/getting-started-orchestrate-apis.md): Step through making a request to a REST API and using the response in the next steps of your process.
-- [**Get started with microservice orchestration**](/guides/getting-started-orchestrate-microservices.md): Orchestrate the microservices necessary to achieve your end-to-end automated business process.
+- [**Get started with Spring**](/guides/getting-started-example.md): For developers using Camunda 8 Self-Managed, use an example project with Spring Boot or Node.js to interact with a local Camunda 8 installation.
 
 You can also learn more about Camunda 8 by reviewing the Camunda Academy courses [introducing Camunda 8](https://academy.camunda.com/camunda-intro/) and [providing an overview of Camunda 8](https://academy.camunda.com/c8-overview/).
