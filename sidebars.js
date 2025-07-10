@@ -1408,6 +1408,19 @@ module.exports = {
                   items: [
                     "self-managed/zeebe-deployment/exporters/install-zeebe-exporters",
                     "self-managed/zeebe-deployment/exporters/camunda-exporter",
+                    {
+                      type: "category",
+                      label: "Camunda Exporter indices",
+                      link: {
+                        type: "doc",
+                        id: "self-managed/zeebe-deployment/exporters/camunda-exporter-indices",
+                      },
+                      items: [
+                        "self-managed/zeebe-deployment/exporters/index-diagrams/camunda-exporter-indices-identity",
+                        "self-managed/zeebe-deployment/exporters/index-diagrams/camunda-exporter-indices-operate",
+                        "self-managed/zeebe-deployment/exporters/index-diagrams/camunda-exporter-indices-tasklist",
+                      ],
+                    },
                     "self-managed/zeebe-deployment/exporters/elasticsearch-exporter",
                     "self-managed/zeebe-deployment/exporters/opensearch-exporter",
                   ],
