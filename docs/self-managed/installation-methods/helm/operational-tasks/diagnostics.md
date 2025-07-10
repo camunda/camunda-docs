@@ -1,7 +1,7 @@
 ---
 id: diagnostics
 title: "Diagnostics"
-sidebar_label: "Diagnostics"
+sidebar_label: "Collecting diagnostics"
 description: "Get diagnostics and logs from a Helm chart deployment."
 ---
 

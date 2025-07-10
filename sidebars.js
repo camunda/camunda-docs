@@ -1070,69 +1070,87 @@ module.exports = {
         id: "self-managed/installation-methods/index",
       },
       items: [
-        {
-          type: "doc",
-          label: "Kubernets with Helm",
-          id: "self-managed/installation-methods/helm/index",
-        },
-        "self-managed/installation-methods/helm/install",
-        "self-managed/installation-methods/helm/chart-parameters",
+        //production readiness
         {
           type: "category",
-          label: "Configure",
+          label: "Kubernetes with Helm",
           link: {
             type: "doc",
-            id: "self-managed/installation-methods/helm/configure/index.md",
+            id: "self-managed/installation-methods/helm/index",
           },
           items: [
+            "self-managed/installation-methods/helm/install",
+            //chart parameters
+            //production  guide
             {
               type: "category",
-              label: "Authentication",
+              label: "Configure",
               link: {
                 type: "doc",
-                id: "self-managed/installation-methods/helm/configure/authentication/index",
+                id: "self-managed/installation-methods/helm/configure/index.md",
               },
               items: [
-                "self-managed/installation-methods/helm/configure/authentication/oidc",
-                "self-managed/installation-methods/helm/configure/authentication/using-existing-keycloak",
-                "self-managed/installation-methods/helm/configure/authentication/basic",
-              ],
-            },
-            {
-              Database: [
+                // {
+                //   type: "category",
+                //   label: "Authentication",
+                //   link: {
+                //     type: "doc",
+                //     id: "self-managed/installation-methods/helm/configure/authentication/index",
+                //   },
+                //   items: [
+                //     "self-managed/installation-methods/helm/configure/authentication/oidc",
+                //     "self-managed/installation-methods/helm/configure/authentication/using-existing-keycloak",
+                //     "self-managed/installation-methods/helm/configure/authentication/basic",
+                //   ],
+                // },
                 {
-                  Elasticsearch: [
-                    "self-managed/installation-methods/helm/configure/database/using-existing-elasticsearch",
-                    "self-managed/installation-methods/helm/configure/database/prefix-elasticsearch-indices",
+                  Database: [
+                    {
+                      Elasticsearch: [
+                        "self-managed/installation-methods/helm/configure/database/using-existing-elasticsearch",
+                        "self-managed/installation-methods/helm/configure/database/prefix-elasticsearch-indices",
+                      ],
+                    },
+                    "self-managed/installation-methods/helm/configure/database/using-existing-opensearch",
+                    "self-managed/installation-methods/helm/configure/database/configure-db-custom-headers",
                   ],
                 },
-                "self-managed/installation-methods/helm/configure/database/using-existing-opensearch",
-                "self-managed/installation-methods/helm/configure/database/configure-db-custom-headers",
+                "self-managed/installation-methods/helm/configure/secret-management",
+                {
+                  Ingress: [
+                    "self-managed/installation-methods/helm/configure/ingress-setup",
+                    "self-managed/installation-methods/helm/configure/accessing-components-without-ingress",
+                  ],
+                },
+                //license key
+                "self-managed/installation-methods/helm/configure/configure-multi-tenancy",
+                "self-managed/installation-methods/helm/configure/multi-namespace-deployment",
+                //image registry to include air gapped below and enterprise images
+                "self-managed/installation-methods/helm/configure/air-gapped-installation",
+                "self-managed/installation-methods/helm/configure/running-custom-connectors",
+                //certificates
+                "customer-kubernetes-manifests",
+                "inject-custom-kubernetes-manifests",
               ],
             },
-            "self-managed/installation-methods/helm/configure/secret-management",
+            // {
+            //   Upgrade: ["setup/upgrade"],
+            // },
             {
-              Ingress: [
-                "self-managed/installation-methods/helm/configure/ingress-setup",
-                "self-managed/installation-methods/helm/configure/accessing-components-without-ingress",
+              "Operational tasks": [
+                "/self-managed/installation-methods/helm/operational-tasks/dual-region-operational-procedure",
+                "/self-managed/installation-methods/helm/operational-tasks/diagnostics",
               ],
+              //also to include backup and restore, and scaling
             },
-            "self-managed/installation-methods/helm/configure/configure-multi-tenancy",
-            "self-managed/installation-methods/helm/configure/multi-namespace-deployment",
-            "self-managed/installation-methods/helm/configure/air-gapped-installation",
-            "running-custom-connectors",
-            "customer-kubernetes-manifests",
-            "inject-custom-kubernetes-manifests",
+            //cloud providers
           ],
         },
         {
-          Upgrade: ["setup/upgrade"],
+          Docker: ["docker"],
         },
         {
-          Tutorial: [],
-        },
-        {
-          "Operational tasks": ["dual-region", "collecting-diagnostics"],
+          Manual: ["manual", "manual"],
         },
       ],
     },
