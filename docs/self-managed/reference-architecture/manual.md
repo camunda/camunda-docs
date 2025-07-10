@@ -15,12 +15,12 @@ This method of deployment requires a solid understanding of infrastructure, netw
 
 ## Key features
 
-- **Single application JAR**: Starting from Camunda 8.8, all core components (Zeebe, Tasklist, Operate, Optimize, and Identity) are bundled into a single JAR file. This simplifies deployment by reducing the number of artifacts to manage.
+- **Single application JAR**: Starting from Camunda 8.8, all core components (Zeebe, Tasklist, Operate, and Identity) are bundled into a single JAR file. This simplifies deployment by reducing the number of artifacts to manage. This bundled component is called Orchestration cluster.
 - **Full control**: Users are responsible for all aspects of deployment, including installation, configuration, scaling, and maintenance. This offers maximum flexibility for custom environments.
 
 Other deployment options, such as containerized deployments or managed services, might offer more convenience and automation. However, VM based deployment gives you the flexibility to tailor the deployment to your exact needs, which can be beneficial for regulated or highly customized environments.
 
-For documentation on the orchestration cluster, Web Modeler and Console separation, refer to the [reference architecture overview](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console).
+For documentation on the Orchestration cluster, Web Modeler and Console separation, refer to the [reference architecture overview](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console).
 
 ## Reference implementations
 
@@ -30,9 +30,8 @@ This section includes deployment reference architectures for manual setups:
 
 ## Considerations
 
-- This overview page focuses on deploying the [orchestration cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster), the single JAR compromised of Identity, Operate, Optimize, Tasklist, and Zeebe, as well as the connectors runtime. Web Modeler and Console deployments are not included.
+- This overview page focuses on deploying the [Orchestration cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster), the single JAR compromised of Identity, Operate, Tasklist, and Zeebe, as well as the connectors runtime. Web Modeler, Console, Optimize, and Management Identity deployments are not included.
 - General guidance and examples focuses on **unix** users, but can be adapted by Windows users with options like [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) or included `batch` files.
-- The Optimize importer is not highly available and must only run once within the whole setup.
 
 ## Architecture
 
@@ -40,13 +39,7 @@ This section includes deployment reference architectures for manual setups:
 
 This above diagram illustrates a single-machine deployment using the single JAR package. While simple and effective for lightweight setups, scaling to multiple machines requires careful planning.
 
-Compared to the generalized architecture depicted in the [reference architecture](/self-managed/reference-architecture/reference-architecture.md#architecture), the `Optimize importer` can be enabled as part of the single JAR.
-
 ### High Availability (HA)
-
-:::caution Non-HA Optimize importer
-When scaling from a single machine to multiple machines, ensure that the `Optimize importer` is enabled on only one machine and disabled on the others. Enabling it on multiple machines will cause data inconsistencies. This limitation is known and will be addressed in future updates.
-:::
 
 ![HA JAR](./img/manual-ha.jpg)
 
@@ -59,7 +52,6 @@ The orchestration core is packaged as a single JAR file and includes the followi
 - **Zeebe**
 - **Operate**
 - **Tasklist**
-- **Optimize**
 - **Identity**
 
 The core facilitates:
@@ -69,11 +61,11 @@ The core facilitates:
 
 Both types of endpoints can be routed through a load balancer to maintain availability, ensuring that the system remains accessible even if a machine becomes unavailable. While using a load balancer is optional, it is recommended for enhanced availability and security. Alternatively, you can expose static machines, ports, and IPs directly. However, direct exposure is generally discouraged due to security concerns.
 
-Connectors expose additional HTTP(s) endpoints for handling incoming webhooks, which can also be routed through the same http load balancer.
+Connectors expose additional HTTP(s) endpoints for handling incoming webhooks, which can also be routed through the same HTTP load balancer.
 
 The orchestration components rely on **Elasticsearch** or **OpenSearch** as their data store.
 
-Components within the orchestration core communicate seamlessly, particularly:
+Components within the orchestration cluster communicate seamlessly, particularly:
 
 - **Zeebe brokers** exchange data over gRPC endpoints for efficient inter-broker communication.
 
