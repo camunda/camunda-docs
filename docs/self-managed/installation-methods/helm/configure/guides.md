@@ -11,4 +11,4 @@ Camunda 8 Self-Managed is highly customizable and can be deployed in different s
 
 Each guide is considered complete and a standalone use case. However, view the [deploying Camunda 8 using Helm charts](/self-managed/installation-methods/helm/install.md) page, as this is the base for all guides.
 
-<DocCardList items={useCurrentSidebarCategory().items}/>
+<!--<DocCardList items={useCurrentSidebarCategory().items}/>-->
