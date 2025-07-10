@@ -47,7 +47,7 @@ The included components are:
 - [Operate](/components/operate/operate-introduction.md): A monitoring tool for visualizing and troubleshooting workflows running in Zeebe.
 - [Tasklist](/components/tasklist/introduction-to-tasklist.md): A user interface for managing and completing human tasks within workflows.
 - [Optimize](/components/optimize/what-is-optimize.md): An analytics tool for generating reports and insights based on workflow data.
-- [Identity](/self-managed/identity/what-is-identity.md): A service for managing user authentication and authorization.
+- [Identity](/self-managed/components/management-identity/what-is-identity.md): A service for managing user authentication and authorization.
 - [Connectors](/components/connectors/introduction.md): Pre-built integrations for connecting Zeebe with external systems and services.
 
 Each component within the orchestration cluster is part of an integrated system that works together to provide end-to-end process orchestration. These components form a unified cluster that is tightly integrated to ensure seamless communication and data flow.
@@ -65,7 +65,7 @@ Web Modeler and Console are designed to interact with multiple orchestration clu
 
 Additionally, Web Modeler and Console require the following:
 
-- [Identity](/self-managed/identity/what-is-identity.md): A service for managing user authentication and authorization.
+- [Identity](/self-managed/components/management-identity/what-is-identity.md): A service for managing user authentication and authorization.
 
 Unlike the orchestration cluster, Web Modeler and Console run a separate and dedicated Identity deployment. For production environments, using an external [identity provider](/self-managed/setup/guides/connect-to-an-oidc-provider.md) is recommended.
 

@@ -35,7 +35,7 @@ Review the following documentation for your components for more information on h
 - [Operate](/self-managed/components/operate/operate-configuration.md#licensing)
 - [Tasklist](/self-managed/components/tasklist/tasklist-configuration.md#licensing)
 - [Optimize](/self-managed/components/optimize/configuration/system-configuration-platform-8.md#licensing)
-- [Identity](/self-managed/identity/miscellaneous/configuration-variables.md#license-configuration)
+- [Identity](/self-managed/components/management-identity/miscellaneous/configuration-variables.md#license-configuration)
 - [Modeler](/self-managed/components/modeler/web-modeler/configuration/configuration.md#licensing)
 
 To configure with Helm, visit the [Self Managed installation documentation](/self-managed/setup/install.md).

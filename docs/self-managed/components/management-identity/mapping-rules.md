@@ -16,8 +16,8 @@ You can assign two types of entities with mapping rules:
 
 :::note
 
-- Mapping rules are only available for Camunda 8 Self-Managed using [OIDC-based authentication](/self-managed/identity/configuration/connect-to-an-oidc-provider.md).
-- A `Default` mapping rule is created during startup using the [IDENTITY_INITIAL_CLAIM_NAME and IDENTITY_INITIAL_CLAIM_VALUE environment variables](/self-managed/identity/miscellaneous/configuration-variables.md#oidc-configuration) to allow an initial user access to the Identity interface. Once you have access to the Identity interface, configure the additional mapping rules to ensure your users have the correct access to the Camunda components.
+- Mapping rules are only available for Camunda 8 Self-Managed using [OIDC-based authentication](/self-managed/components/management-identity/configuration/connect-to-an-oidc-provider.md).
+- A `Default` mapping rule is created during startup using the [IDENTITY_INITIAL_CLAIM_NAME and IDENTITY_INITIAL_CLAIM_VALUE environment variables](/self-managed/components/management-identity/miscellaneous/configuration-variables.md#oidc-configuration) to allow an initial user access to the Identity interface. Once you have access to the Identity interface, configure the additional mapping rules to ensure your users have the correct access to the Camunda components.
 
 :::
 

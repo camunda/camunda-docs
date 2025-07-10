@@ -110,7 +110,7 @@ The **Web Modeler and Console** namespace, as outlined in the [architecture diag
 
 - Web Modeler
 - [Console](/self-managed/components/console/overview.md)
-- [Identity](/self-managed/identity/what-is-identity.md)
+- [Identity](/self-managed/components/management-identity/what-is-identity.md)
   - Keycloak, an external dependency of Identity
 
 The **Orchestration cluster** should be configured to use the central Identity of the **Web Modeler and Console** namespace.

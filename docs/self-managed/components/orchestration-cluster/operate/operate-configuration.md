@@ -53,7 +53,7 @@ in terms of tenant assignment, Operate - Zeebe connection must be secured. Check
 
 If users can view data from the `<default>` tenant only and no data from other tenants (and you have not [configured multi-tenancy using Helm](https://artifacthub.io/packages/helm/camunda/camunda-platform#global-parameters)), multi-tenancy is not enabled in Operate. Refer to the [configuration instructions above](#multi-tenancy).
 
-If multi-tenancy is enabled in Operate but disabled in [Identity](/self-managed/identity/what-is-identity.md), users will not have any tenant authorizations in Operate
+If multi-tenancy is enabled in Operate but disabled in [Identity](/self-managed/components/management-identity/what-is-identity.md), users will not have any tenant authorizations in Operate
 and will not be able to access the data of any tenants in Operate.
 
 ## Elasticsearch or OpenSearch

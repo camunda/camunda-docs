@@ -25,7 +25,7 @@ Use groups to manage user access by organizing users into groups (group members)
 Use roles to simplify and standardize access control across your system, help enforce consistent permission sets, reduce errors, and scale access management as your organization grows.
 
 Roles define the actions a user or application can perform in Camunda 8 by grouping together a set of related [permissions](../access-management/manage-permissions.md).
-You can assign roles [directly to a user](manage-roles.md#assign-a-role-to-a-user) or [using groups](/self-managed/identity/application-user-group-role-management/manage-groups.md#assign-roles-to-a-group).
+You can assign roles [directly to a user](manage-roles.md#assign-a-role-to-a-user) or [using groups](/self-managed/components/management-identity/application-user-group-role-management/manage-groups.md#assign-roles-to-a-group).
 
 - [Manage roles](./manage-roles.md)
 

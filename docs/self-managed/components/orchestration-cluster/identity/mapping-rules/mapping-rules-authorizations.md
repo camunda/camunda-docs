@@ -20,7 +20,7 @@ To learn more about the concept of mapping rules, see the [mapping rules documen
 ![authorizations-mapping-rule-tab.png](../img/authorizations-mapping-rule-tab.png)
 
 :::info
-The `Default` mapping rule is created during startup using the [IDENTITY_INITIAL_CLAIM_NAME and IDENTITY_INITIAL_CLAIM_VALUE environment variables](/self-managed/identity/miscellaneous/configuration-variables.md#oidc-configuration).  
+The `Default` mapping rule is created during startup using the [IDENTITY_INITIAL_CLAIM_NAME and IDENTITY_INITIAL_CLAIM_VALUE environment variables](/self-managed/components/management-identity/miscellaneous/configuration-variables.md#oidc-configuration).  
 This allows the first user to access the Identity UI. Afterward, you can configure additional rules for user access to Camunda components.
 :::
 

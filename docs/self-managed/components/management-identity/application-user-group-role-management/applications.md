@@ -55,18 +55,18 @@ The application type is selected when you [create an application](#add-an-applic
 
 2. Click the **Add application** button located on the top right of the table and a modal will open.
 
-3. Enter a name for your application. In this guide we will use a set of example values. Select the type of your application based on our [guide](/self-managed/identity/application-user-group-role-management/applications.md#types-of-applications). Depending on the selected type, you might need to enter at least one redirect URI. Once you have entered the required details, click **Add**:
+3. Enter a name for your application. In this guide we will use a set of example values. Select the type of your application based on our [guide](/self-managed/components/management-identity/application-user-group-role-management/applications.md#types-of-applications). Depending on the selected type, you might need to enter at least one redirect URI. Once you have entered the required details, click **Add**:
 
    <img src={ApplicationImg} alt="World map showing the location of each GCP and AWS region" class="img-600"/>
 
-4. On confirmation, the modal will close, and the list updates to show your new application. Click on your new application to view the details. This includes your generated client ID and client secret depending on the selected [application type](/self-managed/identity/application-user-group-role-management/applications.md#application-types).
+4. On confirmation, the modal will close, and the list updates to show your new application. Click on your new application to view the details. This includes your generated client ID and client secret depending on the selected [application type](/self-managed/components/management-identity/application-user-group-role-management/applications.md#application-types).
 
    ![add-application-refreshed-table](../img/add-application-refreshed-table.png)
 
 ## Application permissions
 
-You can control the access an application has in Camunda 8 by [assigning permissions](/self-managed/identity/access-management/manage-permissions.md#assign-a-permission-to-an-application) to the application.
+You can control the access an application has in Camunda 8 by [assigning permissions](/self-managed/components/management-identity/access-management/manage-permissions.md#assign-a-permission-to-an-application) to the application.
 
 :::info
-For an overview of permissions available, see [available permissions](/self-managed/identity/access-management/access-management-overview.md#permissions).
+For an overview of permissions available, see [available permissions](/self-managed/components/management-identity/access-management/access-management-overview.md#permissions).
 :::
