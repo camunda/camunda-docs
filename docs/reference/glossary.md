@@ -405,7 +405,7 @@ The state of all active [process instances](#process-instance), (these are also 
 Soft pause exporting is a feature that allows you to continue exporting records from [Zeebe](#zeebe), but without deleting those [records](#record) ([log](#log) compaction) from Zeebe. This is particularly useful during hot backups.
 
 - [Exporting API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md)
-- [Backup and restore](/self-managed/components-upgrade/backup-restore/zeebe-backup-and-restore.md)
+- [Backup and restore](/self-managed/components/components-upgrade/backup-restore/zeebe-backup-and-restore.md)
 
 ### Subscription inbound connector
 

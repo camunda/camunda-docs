@@ -149,4 +149,4 @@ helm install -f ingress_nginx_values.yml \
 
 ## Troubleshooting
 
-If something is not working as expected, check the guide for [general deployment troubleshooting](/self-managed/components-upgrade/troubleshooting/troubleshooting.md).
+If something is not working as expected, check the guide for [general deployment troubleshooting](/self-managed/components/components-upgrade/troubleshooting/troubleshooting.md).

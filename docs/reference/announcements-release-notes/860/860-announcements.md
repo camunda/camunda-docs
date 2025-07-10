@@ -33,7 +33,7 @@ Review the following documentation for your components for more information on h
 - [Console](/self-managed/components/console/configuration/configuration.md#environment-variables)
 - [Zeebe](/self-managed/components/orchestration-cluster/zeebe/configuration/configuration.md#licensing)
 - [Operate](/self-managed/components/orchestration-cluster/operate/operate-configuration.md#licensing)
-- [Tasklist](/self-managed/components/tasklist/tasklist-configuration.md#licensing)
+- [Tasklist](/self-managed/components/orchestration-cluster/tasklist/tasklist-configuration.md#licensing)
 - [Optimize](/self-managed/components/optimize/configuration/system-configuration-platform-8.md#licensing)
 - [Identity](/self-managed/components/management-identity/miscellaneous/configuration-variables.md#license-configuration)
 - [Modeler](/self-managed/components/modeler/web-modeler/configuration/configuration.md#licensing)
@@ -145,7 +145,7 @@ The separated Ingress Helm configuration for Camunda 8 Self-Managed has been dep
 
 ##### `global.multiregion.installationType` deprecation
 
-The `global.multiregion.installationType` option is used in failover and failback scenarios. This option in the Helm chart has been deprecated in 8.6, and will be removed from the Helm chart in 8.7. `global.multiregion.installationType` was replaced with a set of API endpoints called while following the ([dual-region operational procedure](/self-managed/components-upgrade/multi-region/dual-region-ops.md))
+The `global.multiregion.installationType` option is used in failover and failback scenarios. This option in the Helm chart has been deprecated in 8.6, and will be removed from the Helm chart in 8.7. `global.multiregion.installationType` was replaced with a set of API endpoints called while following the ([dual-region operational procedure](/self-managed/components/components-upgrade/multi-region/dual-region-ops.md))
 
 ##### Elasticsearch nodes number
 

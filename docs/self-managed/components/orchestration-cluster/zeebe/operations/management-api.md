@@ -22,7 +22,7 @@ The following operations are currently available:
 Exporting API is used:
 
 - As a debugging tool.
-- When taking a backup of Camunda 8 (see [backup and restore](/self-managed/components-upgrade/backup-restore/backup-and-restore.md)).
+- When taking a backup of Camunda 8 (see [backup and restore](/self-managed/components/components-upgrade/backup-restore/backup-and-restore.md)).
 
 <Tabs groupId="exporting" defaultValue="pause" queryString values={[{label: 'Pause exporting', value: 'pause' },{label: 'Resume exporting', value: 'resume' },{label: 'Soft pause exporting', value: 'softPause' }]} >
 
@@ -52,7 +52,7 @@ When all partitions have resumed exporting, a successful response is received. I
 
 <TabItem value="softPause">
 
-The soft pause feature can be used when you want to continue exporting records, but don't want to delete those records (log compaction) from Zeebe. This is particularly useful during hot backups. Learn more about [using this feature for hot backups](/self-managed/components-upgrade/backup-restore/backup-and-restore.md).
+The soft pause feature can be used when you want to continue exporting records, but don't want to delete those records (log compaction) from Zeebe. This is particularly useful during hot backups. Learn more about [using this feature for hot backups](/self-managed/components/components-upgrade/backup-restore/backup-and-restore.md).
 
 ```
 POST actuator/exporting/pause?soft=true
@@ -65,7 +65,7 @@ When all partitions soft pause exporting, a successful response is received. If 
 
 ## Exporters API
 
-The Exporters API is used for [dual region deployment](/self-managed/components-upgrade/multi-region/dual-region-ops.md) operations, and allows for enabling and disabling configured exporters. By default, all configured exporters are enabled.
+The Exporters API is used for [dual region deployment](/self-managed/components/components-upgrade/multi-region/dual-region-ops.md) operations, and allows for enabling and disabling configured exporters. By default, all configured exporters are enabled.
 
 When **enabled**, records are exported to the exporter. The log is compacted only after the records are exported. When **disabled**, records are _not_ exported to the exporter, and the log will be compacted.
 

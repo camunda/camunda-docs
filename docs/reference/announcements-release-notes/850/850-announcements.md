@@ -66,7 +66,7 @@ For a migration guide, see the [Web Modeler API documentation](/apis-tools/web-m
 
 #### Zeebe 8.5.0 breaks serialization of timestamp values in management API (Self-Managed only)
 
-Zeebe 8.5.0 was released with [a new bug](https://github.com/camunda/camunda/issues/17347) that breaks serialization of timestamp values in management APIs, such as [backup](/self-managed/components-upgrade/backup-restore/backup-and-restore.md) and [cluster scaling](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md).
+Zeebe 8.5.0 was released with [a new bug](https://github.com/camunda/camunda/issues/17347) that breaks serialization of timestamp values in management APIs, such as [backup](/self-managed/components/components-upgrade/backup-restore/backup-and-restore.md) and [cluster scaling](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md).
 Timestamps which were previously serialized as `ISO8061` strings are now serialized as integer values.
 
 Until a fix is delivered in 8.5.1, workarounds include not deserializing timestamp values from affected APIs, or deserializing them as integers.

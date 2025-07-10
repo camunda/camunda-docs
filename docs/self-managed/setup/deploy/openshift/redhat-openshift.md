@@ -161,7 +161,7 @@ Additionally, the Zeebe Gateway should be configured to use an encrypted connect
    The actual configuration properties can be reviewed:
 
    - [in the Operate configuration documentation](/self-managed/components/orchestration-cluster/operate/operate-configuration.md#zeebe-broker-connection),
-   - [in the Tasklist configuration documentation](/self-managed/components/tasklist/tasklist-configuration.md#zeebe-broker-connection),
+   - [in the Tasklist configuration documentation](/self-managed/components/orchestration-cluster/tasklist/tasklist-configuration.md#zeebe-broker-connection),
    - [in the Zeebe Gateway configuration documentation](/self-managed/components/orchestration-cluster/zeebe/configuration/gateway.md).
 
 2. **Connectors:** update your `values.yml` file with the following:
@@ -322,7 +322,7 @@ In this setup, the domain used for gRPC communication with Zeebe is slightly dif
 
 ## Pitfalls to avoid
 
-For general deployment pitfalls, visit the [deployment troubleshooting guide](/self-managed/components-upgrade/troubleshooting/troubleshooting.md).
+For general deployment pitfalls, visit the [deployment troubleshooting guide](/self-managed/components/components-upgrade/troubleshooting/troubleshooting.md).
 
 ### Security Context Constraints (SCCs)
 

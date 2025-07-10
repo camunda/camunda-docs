@@ -212,7 +212,7 @@ Then, take the contents under `application.yml` and put it under the `operate.co
 - [Zeebe Broker](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md)
 - [Zeebe Gateway](/self-managed/components/orchestration-cluster/zeebe/configuration/gateway.md)
 - [Operate](/self-managed/components/orchestration-cluster/operate/operate-configuration.md)
-- [Tasklist](/self-managed/components/tasklist/tasklist-configuration.md)
+- [Tasklist](/self-managed/components/orchestration-cluster/tasklist/tasklist-configuration.md)
 - [Web Modeler](/self-managed/components/modeler/web-modeler/configuration/configuration.md)
 - [Console](/self-managed/components/console/configuration/configuration.md)
 - [Connectors](/self-managed/connectors-deployment/connectors-configuration.md)

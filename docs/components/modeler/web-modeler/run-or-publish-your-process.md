@@ -187,7 +187,7 @@ To publish a process to Tasklist, you first need to [deploy](#deploy-a-process) 
 </TabItem>
 <TabItem value="sm">
 
-To publish a process to Tasklist, you first need to [deploy](#deploy-a-process) it. Once the process is deployed, you need to [set permissions in Identity](../../../self-managed/components/tasklist/tasklist-authentication.md#resource-based-permissions) in order to make it accessible in the Tasklist application.
+To publish a process to Tasklist, you first need to [deploy](#deploy-a-process) it. Once the process is deployed, you need to [set permissions in Identity](../../../self-managed/components/orchestration-cluster/tasklist/tasklist-authentication.md#resource-based-permissions) in order to make it accessible in the Tasklist application.
 
 </TabItem>
 </Tabs>

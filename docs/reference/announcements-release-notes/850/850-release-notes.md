@@ -10,7 +10,7 @@ These release notes identify the new features included in Camunda 8.5, 8.4, and 
 
 | Release date | End of maintenance | Changelog(s)                                                                                                                                                                                                                                                | Release blog                                                          | Update guide                                                                             |
 | ------------ | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| 9 April 2024 | 14 October 2025    | -[ Camunda 8 Core ](https://github.com/camunda/camunda-platform/releases/tag/8.5.0) <br /> -[ connectors ](https://github.com/camunda/connectors/releases/tag/8.5.0) <br /> - [ Optimize ](https://github.com/camunda/camunda-optimize/releases/tag/3.13.0) | [Release blog](https://camunda.com/blog/2024/04/camunda-8-5-release/) | [Self-Managed update guide](/self-managed/components-upgrade/update-guide/840-to-850.md) |
+| 9 April 2024 | 14 October 2025    | -[ Camunda 8 Core ](https://github.com/camunda/camunda-platform/releases/tag/8.5.0) <br /> -[ connectors ](https://github.com/camunda/connectors/releases/tag/8.5.0) <br /> - [ Optimize ](https://github.com/camunda/camunda-optimize/releases/tag/3.13.0) | [Release blog](https://camunda.com/blog/2024/04/camunda-8-5-release/) | [Self-Managed update guide](/self-managed/components/components-upgrade/update-guide/840-to-850.md) |
 
 ### Updated SaaS URLs <span class="badge badge--long" title="This feature affects SaaS">SaaS</span>
 
@@ -304,4 +304,4 @@ Users now have the option to [automatically select](/components/tasklist/usergui
 
 <!-- https://github.com/camunda/product-hub/issues/1785 -->
 
-Zeebe Hot Backups can now be stored in Azure Cloud Storage. This means you can now take a [Hot Backup](/self-managed/components-upgrade/backup-restore/backup-and-restore.md) with your Azure Cloud Storage for Zeebe, Operate, Tasklist and Optimize since Elasticsearch supports Azure Cloud Storage as well.
+Zeebe Hot Backups can now be stored in Azure Cloud Storage. This means you can now take a [Hot Backup](/self-managed/components/components-upgrade/backup-restore/backup-and-restore.md) with your Azure Cloud Storage for Zeebe, Operate, Tasklist and Optimize since Elasticsearch supports Azure Cloud Storage as well.

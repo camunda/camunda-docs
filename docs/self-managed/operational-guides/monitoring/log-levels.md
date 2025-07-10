@@ -24,6 +24,6 @@ Enable logging for each Camunda 8 component as follows:
 
 - [Zeebe](/self-managed/components/orchestration-cluster/zeebe/configuration/logging.md)
 - [Operate](/self-managed/components/orchestration-cluster/operate/operate-configuration.md#logging)
-- [Tasklist](/self-managed/components/tasklist/tasklist-configuration.md#logging)
+- [Tasklist](/self-managed/components/orchestration-cluster/tasklist/tasklist-configuration.md#logging)
 - [Web Modeler](/self-managed/components/modeler/web-modeler/configuration/logging.md)
 - [Identity](/self-managed/components/management-identity/miscellaneous/configure-logging.md)

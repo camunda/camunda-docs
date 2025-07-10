@@ -154,7 +154,7 @@ If you _have_ deployed processes or created process instances, you'll see them o
 
 ![operate-dash-with-processes](../../../setup/assets/operate-introduction.png)
 
-To update Operate versions, visit the [guide to update guide](/self-managed/components-upgrade/update-guide/introduction.md).
+To update Operate versions, visit the [guide to update guide](/self-managed/components/components-upgrade/update-guide/introduction.md).
 
 ## Run Tasklist
 

@@ -6,7 +6,7 @@ description: "Control the level of access a user or group has to perform tasks i
 ---
 
 :::caution
-User task access restrictions are enabled by default and can be disabled using the [`userAccessRestrictionsEnabled` Tasklist environment variable](/self-managed/components/tasklist/tasklist-authentication.md?authentication=identity#configure-identity).
+User task access restrictions are enabled by default and can be disabled using the [`userAccessRestrictionsEnabled` Tasklist environment variable](/self-managed/components/orchestration-cluster/tasklist/tasklist-authentication.md?authentication=identity#configure-identity).
 This configuration does not affect API users. When retrieving tasks using the APIs, all tasks are returned.
 :::
 

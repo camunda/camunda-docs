@@ -533,8 +533,8 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 ## Failover
 
-Consult the generic [dual-region failover procedure](/self-managed/components-upgrade/multi-region/dual-region-ops.md).
+Consult the generic [dual-region failover procedure](/self-managed/components/components-upgrade/multi-region/dual-region-ops.md).
 
 ## Pitfalls to avoid
 
-For general deployment pitfalls, visit the [deployment troubleshooting guide](/self-managed/components-upgrade/troubleshooting/troubleshooting.md).
+For general deployment pitfalls, visit the [deployment troubleshooting guide](/self-managed/components/components-upgrade/troubleshooting/troubleshooting.md).
