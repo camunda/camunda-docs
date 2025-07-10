@@ -122,7 +122,7 @@ Containers, such as Docker, offer a middle ground between the manual JAR and Kub
 - Each container runs in its own isolated environment, which helps prevent conflicts between applications and improves security.
 - Containers can be easily scaled up or down to handle varying workloads, providing flexibility in resource management.
 
-For more information and guides, see the reference for [containers](/self-managed/setup/deploy/other/docker.md).
+For more information and guides, see the reference for [containers](/self-managed/installation-methods/docker/docker.md).
 
 ### Manual JAR (bare metal/virtual machines)
 

@@ -94,14 +94,14 @@ zeebeGateway:
 ```
 
 :::note Web Modeler
-The configuration above only contains the Ingress-related values under `webModeler`. Note the additional [installation instructions and configuration hints](/self-managed/setup/install.md#installing-web-modeler).
+The configuration above only contains the Ingress-related values under `webModeler`. Note the additional [installation instructions and configuration hints](/self-managed/installation-methods/helm/install.md#installing-web-modeler).
 :::
 
 :::note Console
-The configuration above only contains the Ingress-related values under `Console`. Review the additional [installation instructions and configuration hints](/self-managed/setup/install.md#install-console).
+The configuration above only contains the Ingress-related values under `Console`. Review the additional [installation instructions and configuration hints](/self-managed/installation-methods/helm/install.md#install-console).
 :::
 
-Incorporate the custom values mentioned in the example above into the value file you're using to deploy Camunda as outlined in [deploying Camunda 8](/self-managed/setup/install.md):
+Incorporate the custom values mentioned in the example above into the value file you're using to deploy Camunda as outlined in [deploying Camunda 8](/self-managed/installation-methods/helm/install.md):
 
 ```shell
 helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION -f values-combined-ingress.yaml

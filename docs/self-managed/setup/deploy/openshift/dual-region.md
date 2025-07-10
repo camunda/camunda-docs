@@ -533,7 +533,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 ## Failover
 
-Consult the generic [dual-region failover procedure](/self-managed/operational-guides/multi-region/dual-region-ops.md).
+Consult the generic [dual-region failover procedure](/self-managed/installation-methods/helm/operational-tasks/dual-region-ops.md).
 
 ## Pitfalls to avoid
 

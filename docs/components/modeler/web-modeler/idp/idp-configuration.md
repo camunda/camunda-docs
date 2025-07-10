@@ -111,7 +111,7 @@ To learn more about using Camunda 8 Run to run Camunda Self-Managed locally, see
 
 ### Docker {#idp-docker-example}
 
-To use [Docker](/self-managed/setup/deploy/other/docker.md) to deploy and run Camunda 8 with IDP in a local development environment:
+To use [Docker](/self-managed/installation-methods/docker/docker.md) to deploy and run Camunda 8 with IDP in a local development environment:
 
 1. Ensure you have completed the IDP [Amazon Web Services (AWS) prerequisites](#prerequisites) and have obtained your AWS [access key pair](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) (_access key_ and _secret access key_).
 

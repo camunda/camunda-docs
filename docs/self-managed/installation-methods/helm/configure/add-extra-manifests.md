@@ -7,7 +7,7 @@ description: "Learn how to add extra manifests to Helm deployments by injecting 
 
 ## Overview
 
-When using the Camunda 8 [Helm chart](/self-managed/setup/install.md), arbitrary data can be injected into the `values.yaml` file, enabling the addition of extra Kubernetes manifests. This feature is particularly useful for adding custom manifests by including additional Kubernetes resources such as ConfigMaps, Deployments, or Services.
+When using the Camunda 8 [Helm chart](/self-managed/installation-methods/helm/install.md), arbitrary data can be injected into the `values.yaml` file, enabling the addition of extra Kubernetes manifests. This feature is particularly useful for adding custom manifests by including additional Kubernetes resources such as ConfigMaps, Deployments, or Services.
 
 ## Usage
 

@@ -12,7 +12,7 @@ import TabItem from "@theme/TabItem";
 Multi-tenancy is currently only available for Camunda 8 Self-Managed with authentication enabled [through Identity](/self-managed/identity/what-is-identity.md).
 :::
 
-To configure multi-tenancy you must enable the multi-tenancy flag either in the [Helm charts](/self-managed/setup/install.md)
+To configure multi-tenancy you must enable the multi-tenancy flag either in the [Helm charts](/self-managed/installation-methods/helm/install.md)
 **or** via environment variables.
 
 <Tabs groupId="memberType" defaultValue="helm" queryString values={[{label: 'Helm Charts', value: 'helm', },{label: 'Environment Variables', value: 'environment', }]} >

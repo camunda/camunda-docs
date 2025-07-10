@@ -54,13 +54,13 @@ With the right configuration, Camunda 8 Self-Managed can be deployed on any [Cer
 
 The following are tested and supported deployment options for Kubernetes, Docker, and manual installation:
 
-- [Stock Kubernetes](/self-managed/setup/install.md)
-- [Cloud service providers](/self-managed/setup/install.md) [recommended]
+- [Stock Kubernetes](/self-managed/installation-methods/helm/install.md)
+- [Cloud service providers](/self-managed/installation-methods/helm/install.md) [recommended]
   - [Amazon EKS](/self-managed/setup/deploy/amazon/amazon-eks/amazon-eks.md)
   - [Microsoft AKS](/self-managed/setup/deploy/azure/microsoft-aks/microsoft-aks.md)
   - [Google GKE](/self-managed/setup/deploy/gcp/google-gke.md)
 - [Red Hat OpenShift](/self-managed/setup/deploy/openshift/redhat-openshift.md)
-- [Docker](/self-managed/setup/deploy/other/docker.md) (`linux/amd64`)
+- [Docker](/self-managed/installation-methods/docker/docker.md) (`linux/amd64`)
 - [Manual](/self-managed/setup/deploy/local/manual.md)
 
 :::note Helm chart compatibility

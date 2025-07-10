@@ -53,7 +53,7 @@ The reference architecture overview describes the difference between the [Orches
 
 A [multi-namespace deployment](/self-managed/setup/guides/multi-namespace-deployment.md) is recommended. For more information, see the [components](#components) section.
 
-The following depictions provide a simplified view of the deployed namespaces using the [Camunda 8 Helm chart](/self-managed/setup/install.md). To keep the diagram clear, ConfigMaps, Secrets, RBAC, and ReplicaSets have been omitted.
+The following depictions provide a simplified view of the deployed namespaces using the [Camunda 8 Helm chart](/self-managed/installation-methods/helm/install.md). To keep the diagram clear, ConfigMaps, Secrets, RBAC, and ReplicaSets have been omitted.
 
 #### Orchestration cluster
 
@@ -125,7 +125,7 @@ For more details on multi-region configurations, especially dual-region setups, 
 
 We recommend using an officially [certified Kubernetes](https://www.cncf.io/training/certification/software-conformance/#benefits) distribution.
 
-Camunda 8 is not tied to a specific Kubernetes version. To simplify deployment, we provide a [Helm chart](/self-managed/setup/install.md) for easy installation on Kubernetes. The latest Helm chart is typically compatible with Kubernetes' [official support cycle](https://kubernetes.io/releases/).
+Camunda 8 is not tied to a specific Kubernetes version. To simplify deployment, we provide a [Helm chart](/self-managed/installation-methods/helm/install.md) for easy installation on Kubernetes. The latest Helm chart is typically compatible with Kubernetes' [official support cycle](https://kubernetes.io/releases/).
 
 #### Minimum cluster requirements
 

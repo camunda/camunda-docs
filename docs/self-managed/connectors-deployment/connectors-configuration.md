@@ -199,7 +199,7 @@ Connector secrets can be used in Helm charts. Review the documentation on [manag
 
 <TabItem value='docker'>
 
-To inject secrets into the [Docker images of the runtime](/self-managed/setup/deploy/other/docker.md#connectors), they must be available in the environment of the Docker container.
+To inject secrets into the [Docker images of the runtime](/self-managed/installation-methods/docker/docker.md#connectors), they must be available in the environment of the Docker container.
 
 For example, you can inject secrets when running a container:
 

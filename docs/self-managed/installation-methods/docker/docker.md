@@ -6,7 +6,7 @@ description: "Step through multi-platform support, configuration, Docker images,
 ---
 
 :::danger
-While the Docker images themselves are supported for production usage, [Docker Compose](/self-managed/setup/deploy/local/docker-compose.md) files are designed to be used by developers to run an environment locally; they are not designed to be used in production. We recommend to use [Kubernetes](/self-managed/setup/install.md) in production.
+While the Docker images themselves are supported for production usage, [Docker Compose](/self-managed/setup/deploy/local/docker-compose.md) files are designed to be used by developers to run an environment locally; they are not designed to be used in production. We recommend to use [Kubernetes](/self-managed/installation-methods/helm/install.md) in production.
 :::
 
 We provide Docker images [via Dockerhub](https://hub.docker.com/u/camunda). All these images are publicly accessible.

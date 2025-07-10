@@ -52,7 +52,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/azure/kuberne
 
 ## Deploy Camunda 8 via Helm charts
 
-For more configuration options, refer to the [Helm chart documentation](https://artifacthub.io/packages/helm/camunda/camunda-platform#parameters). Additionally, explore our existing resources in the [Camunda 8 Helm chart](/self-managed/setup/install.md) and [related guides](/self-managed/setup/guides/guides.md).
+For more configuration options, refer to the [Helm chart documentation](https://artifacthub.io/packages/helm/camunda/camunda-platform#parameters). Additionally, explore our existing resources in the [Camunda 8 Helm chart](/self-managed/installation-methods/helm/install.md) and [related guides](/self-managed/setup/guides/guides.md).
 
 Depending on your installation path, you may use different settings.
 For easy and reproducible installations, we will use YAML files to configure the chart.

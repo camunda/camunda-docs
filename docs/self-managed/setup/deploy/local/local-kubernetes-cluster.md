@@ -207,4 +207,4 @@ This is a destructive action and will destroy all data of Camunda 8 in the local
 kind delete cluster --name camunda-platform-local
 ```
 
-For more details about deployment options, visit the full [Helm deployment guide](/self-managed/setup/install.md).
+For more details about deployment options, visit the full [Helm deployment guide](/self-managed/installation-methods/helm/install.md).
