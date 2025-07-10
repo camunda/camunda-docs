@@ -53,7 +53,7 @@ Once you have completed all the required prerequisites, configure IDP in a suita
 Add the following AWS connector secrets required for IDP.
 
 - **SaaS:** Create and configure as [connector secrets](/components/console/manage-clusters/manage-secrets.md).
-- **Self-Managed:** Connector secrets are generally provided as environment variables, set via `values.yaml` or the command line. Add these connector secrets as environment variables for the Tasklist and Zeebe components. To learn more about using connector secrets in Self-Managed, see [managing secrets in Helm charts](/self-managed/setup/guides/secret-management.md) and [secrets in manual installations](/self-managed/connectors-deployment/connectors-configuration.md#secrets).
+- **Self-Managed:** Connector secrets are generally provided as environment variables, set via `values.yaml` or the command line. Add these connector secrets as environment variables for the Tasklist and Zeebe components. To learn more about using connector secrets in Self-Managed, see [managing secrets in Helm charts](/self-managed/installation-methods/helm/configure/secret-management.md) and [secrets in manual installations](/self-managed/connectors-deployment/connectors-configuration.md#secrets).
 
 | Connector secret Key  | Required | Description                                                                                                                                                                                               |
 | :-------------------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -111,7 +111,7 @@ To learn more about using Camunda 8 Run to run Camunda Self-Managed locally, see
 
 ### Docker {#idp-docker-example}
 
-To use [Docker](/self-managed/setup/deploy/other/docker.md) to deploy and run Camunda 8 with IDP in a local development environment:
+To use [Docker](/self-managed/installation-methods/docker/docker.md) to deploy and run Camunda 8 with IDP in a local development environment:
 
 1. Ensure you have completed the IDP [Amazon Web Services (AWS) prerequisites](#prerequisites) and have obtained your AWS [access key pair](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) (_access key_ and _secret access key_).
 

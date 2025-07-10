@@ -72,9 +72,9 @@ For future use, refer to our [new AWS Marketplace listing](https://aws.amazon.co
 
 #### Separated Ingress deprecation
 
-The separated Ingress Helm configuration for Camunda 8 Self-Managed has been deprecated in 8.6, and will be removed from the Helm chart in 8.8. Only the combined Ingress configuration is officially supported. See the [Ingress guide](/self-managed/setup/guides/ingress-setup.md) for more information on configuring a combined Ingress setup.
+The separated Ingress Helm configuration for Camunda 8 Self-Managed has been deprecated in 8.6, and will be removed from the Helm chart in 8.8. Only the combined Ingress configuration is officially supported. See the [Ingress guide](/self-managed/installation-methods/helm/configure/ingress-setup.md) for more information on configuring a combined Ingress setup.
 
-If you are using the recommended Camunda 8 deployment option ([Helm charts](/self-managed/setup/install.md)), the upgrade path from version 8.7 to 8.8 will be straightforward by changing the values file to the new syntax.
+If you are using the recommended Camunda 8 deployment option ([Helm charts](/self-managed/installation-methods/helm/install.md)), the upgrade path from version 8.7 to 8.8 will be straightforward by changing the values file to the new syntax.
 
 New migration guides will also be provided to support you when migrating from a previous Camunda version.
 
@@ -90,7 +90,7 @@ Alternative container images to the previously used Bitnami open source images a
 
 - Starting with version **8.8**, these images are considered the default supported option when deploying Camunda 8 via Helm charts, as they ensure faster delivery of security patches (including CVE fixes) and better alignment with supported environments.
 
-- To adopt these images, update your Helm deployment to reference the `values-images-ee.yml` file. Full setup instructions are available in the [installation guide](/self-managed/setup/install.md).
+- To adopt these images, update your Helm deployment to reference the `values-images-ee.yml` file. Full setup instructions are available in the [installation guide](/self-managed/installation-methods/helm/install.md).
 
 #### Single Elasticsearch/OpenSearch instance
 
