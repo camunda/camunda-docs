@@ -92,7 +92,7 @@ The management API is an extension of the [Spring Boot Actuator](https://docs.sp
 
 Direct access will depend on your deployment environment. For example, direct Kubernetes cluster access with [port-forwarding](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_port-forward/) or [exec](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_exec/) to execute commands directly on Kubernetes pods. In a manual deployment you will need to be able to reach the machines that host Camunda. You can find the default for each component in their configuration page, this may differ based on your configuration.
 
-| Component                                                                                            | Port | Helm Chart |
+| Component                                                                                            | Port | Helm chart |
 | ---------------------------------------------------------------------------------------------------- | ---- | ---------- |
 | [Operate](/self-managed/operate-deployment/operate-configuration.md#monitoring-operate)              | 8080 | 80         |
 | [Optimize](/self-managed/optimize-deployment/configuration/system-configuration.md#container)        | 8092 | 8092       |
