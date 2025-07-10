@@ -119,7 +119,6 @@ RewriteRule ^docs/components/modeler/web-modeler/connectors/available-connectors
 RewriteRule ^docs/components/modeler/web-modeler/connectors/available-connectors/rest/? /docs/components/connectors/protocol/rest/ [R=301,L]
 RewriteRule ^docs/components/modeler/web-modeler/connectors/available-connectors/sendgrid/? /docs/components/connectors/out-of-the-box-connectors/sendgrid/ [R=301,L]
 
-
 ## Reabsorbed Optimize docs
 RewriteRule ^optimize/next/apis-tools/optimize-api/(.*)$ /docs/next/apis-tools/optimize-api/$1 [R=301,L]
 RewriteRule ^optimize/next/components/(.*)$ /docs/next/components/optimize/$1 [R=301,L]
@@ -148,6 +147,9 @@ RewriteRule ^optimize/3.11.0/self-managed/(.*)$ /docs/8.3/self-managed/$1 [R=301
 #---------------------------------------------------------------------------------
 #   8.8: content moves introduced prior to the release of version 8.8.
 #---------------------------------------------------------------------------------
+
+# Move user task listener guide
+RewriteRule ^docs/next/guides/listen-to-user-tasks/?$ /docs/next/components/concepts/listen-to-user-tasks/ [R=301,L]
 
 # Restructure Guides
 RewriteRule ^docs/next/guides/model-your-first-process/?$ /docs/next/components/modeler/web-modeler/model-your-first-diagram/ [R=301,L]

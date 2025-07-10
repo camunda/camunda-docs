@@ -1,12 +1,11 @@
 module.exports = {
   Guides: [
-    "guides/introduction-to-camunda",
     {
       type: "category",
-      label: "Quickstart tutorials",
+      label: "Get started",
       link: {
         type: "doc",
-        id: "guides/quickstart-overview",
+        id: "guides/introduction-to-camunda",
       },
       items: [
         "guides/getting-started-example",
@@ -49,7 +48,7 @@ module.exports = {
         {
           "User task listeners": [
             "components/concepts/user-task-listeners",
-            "guides/listen-to-user-tasks",
+            "components/concepts/listen-to-user-tasks",
           ],
         },
         "components/concepts/process-instance-creation",

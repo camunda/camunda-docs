@@ -8,7 +8,7 @@ description: "User task listeners allow users to react to specific user task lif
 A user task listener allows users to react to specific user task lifecycle events.
 
 :::tip
-Try out our [getting started with user task listeners guide](/guides/user-task-listeners.md).
+Try out our [getting started with user task listeners guide](/concepts/user-task-listeners-guide.md).
 :::
 
 ## About user task listeners

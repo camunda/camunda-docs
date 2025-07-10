@@ -14,6 +14,8 @@ keywords:
 import clsx from "clsx";
 import SaasPrereqs from './react-components/\_saas-prerequisites.md'
 
+This guide is designed for users who prefer a low-code approach to process automation. You can follow this tutorial using either a local, Self-Managed lightweight setup, or Camunda 8 SaaS.
+
 This guide will walk you through working with a REST connector task as a first time Camunda 8 SaaS user.
 
 The REST connector is a [protocol connector](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md#protocol-connectors), where you can make a request to a REST API and use the response in the next steps of your process.

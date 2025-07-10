@@ -12,7 +12,7 @@ import TabItem from "@theme/TabItem";
 <span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--medium">1 hour</span>
 
-Follow this guide to download and run an example project with a local instance of Camunda 8 using Spring Boot or Node.js.
+This guide is tailored for developers who want to implement process automation solutions using Java and Spring. You'll work with a local, self-managed, lightweight Camunda 8 environment.
 
 ## Getting started with an example project
 
