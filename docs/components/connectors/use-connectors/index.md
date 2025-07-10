@@ -13,7 +13,7 @@ the [Camunda Marketplace](/components/modeler/web-modeler/camunda-marketplace.md
 diagram.
 
 :::info
-Learn how to [install connectors in Self-Managed](/self-managed/connectors-deployment/install-and-start.md).
+Learn how to [install connectors in Self-Managed](/self-managed/components/connectors/overview.md).
 :::
 
 :::note

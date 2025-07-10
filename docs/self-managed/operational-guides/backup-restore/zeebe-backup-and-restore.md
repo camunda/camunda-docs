@@ -26,7 +26,7 @@ Even when the underlying storage bucket is the same, backups from one are not co
 
 ### S3 backup store
 
-To store your backups in any S3 compatible storage system such as [AWS S3] or [MinIO], set the backup store to `S3` and specify how Zeebe should connect to your bucket. This configuration can be set in your Zeebe [`config/application.yaml`](/self-managed/zeebe-deployment/configuration/configuration.md):
+To store your backups in any S3 compatible storage system such as [AWS S3] or [MinIO], set the backup store to `S3` and specify how Zeebe should connect to your bucket. This configuration can be set in your Zeebe [`config/application.yaml`](/self-managed/components/orchestration-cluster/zeebe/configuration/configuration.md):
 
 ```yaml
 zeebe:
@@ -129,7 +129,7 @@ zeebe.broker.data.backup.s3.compression: zstd # or use environment variable ZEEB
 The GCS backup strategy utilizes the [Google Cloud Storage REST API](https://cloud.google.com/storage/docs/request-endpoints).
 :::
 
-To store your backups in Google Cloud Storage (GCS), choose the `GCS` backup store and tell Zeebe which bucket to use. This configuration can be set in your Zeebe [`config/application.yaml`](/self-managed/zeebe-deployment/configuration/configuration.md):
+To store your backups in Google Cloud Storage (GCS), choose the `GCS` backup store and tell Zeebe which bucket to use. This configuration can be set in your Zeebe [`config/application.yaml`](/self-managed/components/orchestration-cluster/zeebe/configuration/configuration.md):
 
 ```yaml
 zeebe:
@@ -166,7 +166,7 @@ There are multiple [data encryption options](https://cloud.google.com/storage/do
 
 ### Azure backup store
 
-To store your backups in Azure Storage, choose the `AZURE` backup store and specify how to connect with the Azure container. This configuration can be set in your Zeebe [`config/application.yaml`](/self-managed/zeebe-deployment/configuration/configuration.md):
+To store your backups in Azure Storage, choose the `AZURE` backup store and specify how to connect with the Azure container. This configuration can be set in your Zeebe [`config/application.yaml`](/self-managed/components/orchestration-cluster/zeebe/configuration/configuration.md):
 
 ```yaml
 zeebe:

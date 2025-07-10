@@ -34,10 +34,10 @@ We recommend using the timestamp as the backup ID.
 
 To back up a Camunda 8 cluster, execute the following sequential steps:
 
-1. Soft pause exporting in Zeebe. See the [Zeebe management API](/self-managed/zeebe-deployment/operations/management-api.md).
-2. Trigger a backup `x` of the web applications. See how to take a [web application backup](/self-managed/operational-guides/backup-restore/webapps-backup.md).
+1. Soft pause exporting in Zeebe. See the [Zeebe management API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md).
+2. Trigger a backup `x` of the web applications. See how to take a [web application backup](./webapps-backup.md).
 3. Trigger a backup `x` of Optimize. See how to take an [Optimize backup](./optimize-backup.md)
-4. Wait until the backup `x` of web applications is complete. See how to [monitor a web application backup](/self-managed/operational-guides/backup-restore/webapps-backup.md).
+4. Wait until the backup `x` of web applications is complete. See how to [monitor a web application backup](./webapps-backup.md).
 5. Wait until the backup `x` of Optimize is complete. See how to [monitor an Optimize backup](./optimize-backup.md).
 6. Take a backup `x` of the exported Zeebe records in Elasticsearch using the Elasticsearch Snapshots API.
 
@@ -54,9 +54,9 @@ PUT /_snapshot/my_repository/camunda_zeebe_records_backup_x
 By default, the indices are prefixed with `zeebe-record`. If you have configured a different prefix when configuring Elasticsearch exporter in Zeebe, use this instead.
 
 7. Wait until the backup `x` of the exported Zeebe records is complete before proceeding.
-8. Take a backup `x` of Zeebe. See how to take a [Zeebe backup](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md).
-9. Wait until the backup `x` of Zeebe is completed before proceeding. See how to [monitor a Zeebe backup](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md).
-10. Resume exporting in Zeebe. See [Zeebe management API](/self-managed/zeebe-deployment/operations/management-api.md).
+8. Take a backup `x` of Zeebe. See how to take a [Zeebe backup](./zeebe-backup-and-restore.md).
+9. Wait until the backup `x` of Zeebe is completed before proceeding. See how to [monitor a Zeebe backup](./zeebe-backup-and-restore.md).
+10. Resume exporting in Zeebe. See [Zeebe management API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md).
 
 :::note
 If any of the steps above fail, you may have to restart with a new backup id. Ensure exporting is resumed if the backup process force quits in the middle of the process.
@@ -70,8 +70,8 @@ To restore a Camunda 8 cluster from a backup, all components must be restored fr
 2. Confirm proper configuration (such as shards, replicas count, etc.)
 3. Stop Operate, Tasklist, and Optimize.
 4. Delete all indices.
-5. Restore the state of the [web applications](/self-managed/operational-guides/backup-restore/webapps-backup.md) and [Optimize](./optimize-backup.md).
+5. Restore the state of the [web applications](./webapps-backup.md) and [Optimize](./optimize-backup.md).
 6. Restore `zeebe-records*` indices from Elasticsearch snapshot.
 7. Delete the data directory of all Zeebe brokers
-8. Restore [Zeebe](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md).
+8. Restore [Zeebe](./zeebe-backup-and-restore.md).
 9. Start Zeebe, Operate, Tasklist, and Optimize.

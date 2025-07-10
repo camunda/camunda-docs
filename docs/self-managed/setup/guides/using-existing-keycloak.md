@@ -6,11 +6,11 @@ description: "Learn how to use an existing Keycloak instance in Camunda 8 Self-M
 
 Camunda 8 Self-Managed has two different types of applications: Camunda applications (Operate, Optimize, Tasklist, etc.) and non-Camunda applications (such as Keycloak and Elasticsearch). For more details, review the [architecture](../../about-self-managed.md#architecture) documentation for more information on the different types of applications.
 
-This guide steps through using an existing Keycloak instance, which is part of [Camunda Identity](/self-managed/identity/what-is-identity.md). By default, [Helm chart deployment](/self-managed/setup/install.md) creates a new Keycloak instance, but it's possible to use an existing Keycloak instance either inside the same Kubernetes cluster or outside of it.
+This guide steps through using an existing Keycloak instance, which is part of [Camunda Identity](/self-managed/components/management-identity/what-is-identity.md). By default, [Helm chart deployment](/self-managed/setup/install.md) creates a new Keycloak instance, but it's possible to use an existing Keycloak instance either inside the same Kubernetes cluster or outside of it.
 
 ## Preparation
 
-Configure your existing Keycloak realm according to the following guide: [Connect to an existing Keycloak instance](/self-managed/identity/configuration/connect-to-an-existing-keycloak.md).
+Configure your existing Keycloak realm according to the following guide: [Connect to an existing Keycloak instance](/self-managed/components/management-identity/configuration/connect-to-an-existing-keycloak.md).
 
 ## Values file
 

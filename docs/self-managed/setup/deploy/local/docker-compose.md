@@ -199,7 +199,7 @@ The default value can also be modified directly in the included `.env` file.
 
 ## Connectors
 
-Both the full and lightweight Docker Compose files contain a configuration for [Out-of-the-box connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md). Refer to the [Connector installation guide](/self-managed/connectors-deployment/install-and-start.md) for details on how to provide the related connector templates for modeling.
+Both the full and lightweight Docker Compose files contain a configuration for [Out-of-the-box connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md). Refer to the [Connector installation guide](/self-managed/components/connectors/overview.md) for details on how to provide the related connector templates for modeling.
 
 ### Connector secrets
 

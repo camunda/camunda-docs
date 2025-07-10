@@ -54,7 +54,7 @@ The [Orchestration cluster API v.2](../orchestration-cluster-api-rest/orchestrat
 ## Multi-tenancy
 
 :::note
-The [multi-tenancy feature](../../self-managed/operate-deployment/operate-configuration.md#multi-tenancy) is available in Self-Managed setups only.
+The [multi-tenancy feature](../../self-managed/components/orchestration-cluster/operate/operate-configuration.md#multi-tenancy) is available in Self-Managed setups only.
 :::
 
 All Operate endpoints for which tenant assignment is relevant will:
