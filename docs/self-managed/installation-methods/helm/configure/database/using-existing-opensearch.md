@@ -4,7 +4,7 @@ title: "Using Amazon OpenSearch Service"
 description: "Learn how to use an Amazon OpenSearch Service instance in Camunda 8 Self-Managed deployment."
 ---
 
-Camunda 8 Self-Managed has two different types of components: Camunda components (Operate, Optimize, Tasklist, etc.) and non-Camunda dependency components (such as Keycloak and Elasticsearch). For more details, review the [architecture](../../about-self-managed.md#architecture) documentation for more information on the different types of applications.
+Camunda 8 Self-Managed has two different types of components: Camunda components (Operate, Optimize, Tasklist, etc.) and non-Camunda dependency components (such as Keycloak and Elasticsearch). For more details, review the [architecture](/self-managed/about-self-managed.md#architecture) documentation for more information on the different types of applications.
 
 This guide steps through using an existing Amazon OpenSearch Service instance. By default, [Helm chart deployment](/self-managed/setup/overview.md) creates a new Elasticsearch instance, but it's possible to use Amazon OpenSearch Service instead.
 

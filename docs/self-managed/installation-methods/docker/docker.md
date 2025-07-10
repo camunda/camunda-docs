@@ -56,7 +56,7 @@ For Web Modeler, we only provide multi-platform images from the following releas
 
 ### License keys
 
-import Licensing from '../../../../self-managed/react-components/licensing.md'
+import Licensing from '../../../self-managed/react-components/licensing.md'
 
 <Licensing/>
 

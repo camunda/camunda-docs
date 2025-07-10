@@ -22,7 +22,7 @@ Once Identity has successfully started, you can open the **Log in** page and log
 If you are running the default configuration, you can access the Identity interface via the following URLs:
 
 - [Docker-Compose](/versioned_docs/version-8.7/self-managed/setup/deploy/local/docker-compose.md): `http://localhost:8084/`
-- [Helm](/versioned_docs/version-8.7/self-managed/installation-methods/helm/install.md): Follow your [`port-forward` or Ingress configuration](/self-managed/setup/guides/accessing-components-without-ingress.md)
+- [Helm](/versioned_docs/version-8.7/self-managed/installation-methods/helm/install.md): Follow your [`port-forward` or Ingress configuration](/self-managed/installation-methods/helm/configure/accessing-components-without-ingress.md)
 
 ## Default user
 

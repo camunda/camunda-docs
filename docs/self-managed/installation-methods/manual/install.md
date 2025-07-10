@@ -47,7 +47,7 @@ You’ll know Elasticsearch has started successfully when you see a message simi
 
 ## Optional: configure license key
 
-import Licensing from '../../../../self-managed/react-components/licensing.md'
+import Licensing from '../../../self-managed/react-components/licensing.md'
 
 <Licensing/>
 
@@ -148,11 +148,11 @@ The first screen you'll see is a sign-in page. Use the credentials `demo` / `dem
 
 After you sign in, you'll see an empty dashboard if you haven't yet deployed any processes:
 
-![operate-dash-no-processes](../../../setup/assets/operate-dashboard-no-processes.png)
+![operate-dash-no-processes](./assets/operate-dashboard-no-processes.png)
 
 If you _have_ deployed processes or created process instances, you'll see them on your dashboard:
 
-![operate-dash-with-processes](../../../setup/assets/operate-introduction.png)
+![operate-dash-with-processes](./assets/operate-introduction.png)
 
 To update Operate versions, visit the [guide to update guide](/self-managed/operational-guides/update-guide/introduction.md).
 
@@ -184,7 +184,7 @@ The first screen you'll see is a sign-in page. Use the credentials `demo` / `dem
 
 If you've already developed user tasks in Zeebe, you can see these on the left panel on the start screen:
 
-![tasklist-start-screen](../../../setup/assets/tasklist-start-screen_light.png)
+![tasklist-start-screen](./assets/tasklist-start-screen_light.png)
 
 ## Run connectors
 

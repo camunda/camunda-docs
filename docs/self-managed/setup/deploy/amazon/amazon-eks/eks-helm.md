@@ -41,7 +41,7 @@ Multi-tenancy is disabled by default and is not covered further in this guide. I
 
 <!-- TODO: update Arch to include Aurora and OpenSearch both text and diagram (https://github.com/camunda/team-infrastructure-experience/issues/409) -->
 
-Note the [existing architecture](../../../../about-self-managed.md#architecture) extended by deploying a Network Load Balancer with TLS termination within the [ingress](https://kubernetes.github.io/ingress-nginx/user-guide/tls/) below.
+Note the [existing architecture](/self-managed/about-self-managed.md#architecture) extended by deploying a Network Load Balancer with TLS termination within the [ingress](https://kubernetes.github.io/ingress-nginx/user-guide/tls/) below.
 
 Additionally, two components ([external-dns](https://github.com/kubernetes-sigs/external-dns) and [cert-manager](https://cert-manager.io/)) handle requesting the TLS certificate from [Let's Encrypt](https://letsencrypt.org/) and configuring Route53 to confirm domain ownership and update the DNS records to expose the Camunda 8 deployment.
 

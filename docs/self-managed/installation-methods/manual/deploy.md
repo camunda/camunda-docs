@@ -36,7 +36,7 @@ This section includes deployment reference architectures for manual setups:
 
 ## Architecture
 
-![Single JAR](./img/manual-single.jpg)
+![Single JAR](./assets/manual-single.png)
 
 This above diagram illustrates a single-machine deployment using the single JAR package. While simple and effective for lightweight setups, scaling to multiple machines requires careful planning.
 
@@ -48,7 +48,7 @@ Compared to the generalized architecture depicted in the [reference architecture
 When scaling from a single machine to multiple machines, ensure that the `Optimize importer` is enabled on only one machine and disabled on the others. Enabling it on multiple machines will cause data inconsistencies. This limitation is known and will be addressed in future updates.
 :::
 
-![HA JAR](./img/manual-ha.jpg)
+![HA JAR](./assets/manual-ha.jpg)
 
 For high availability, a minimum of three machines is recommended to ensure fault tolerance and enable master election in case of failures. Refer to the [clustering documentation](/components/zeebe/technical-concepts/clustering.md) to learn more about the raft protocol and clustering concepts.
 

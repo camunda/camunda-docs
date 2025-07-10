@@ -59,7 +59,7 @@ For example, `CAMUNDA_OPERATE_ELASTICSEARCH_URL` becomes `CAMUNDA_OPERATE_OPENSE
 Refer to the [Operate](/self-managed/operate-deployment/operate-configuration.md#settings-for-opensearch), [Tasklist](/self-managed/tasklist-deployment/tasklist-configuration.md#elasticsearch-or-opensearch) and [Optimize](/self-managed/optimize-deployment/configuration/system-configuration.md#opensearch) configuration documentation for additional component configuration parameters to update.
 :::
 
-![Camunda 8 Self-Managed Architecture Diagram](/assets/camunda-platform-8-self-managed-architecture-diagram-combined-ingress.png)
+![Camunda 8 Self-Managed Architecture Diagram](./assets/camunda-platform-8-self-managed-architecture-diagram-combined-ingress.png)
 
 When installing the [camunda-platform](https://artifacthub.io/packages/helm/camunda/camunda-platform) Helm chart, all components shown on the architectural diagram above are installed.
 
@@ -105,7 +105,7 @@ helm repo update
 
 In a default configuration, Helm charts will auto-generate all required Camunda Identity secrets for Camunda 8 component to Identity communications. However, future `helm upgrade` commands will regenerate Helm charts due to an issue with a [Bitnami library](https://docs.bitnami.com/general/how-to/troubleshoot-helm-chart-issues/#credential-errors-while-upgrading-chart-releases).
 
-While upgrading is still possible by following our [upgrade guide](/upgrade/upgrade.md#upgrading-where-identity-enabled), we recommend pre-creating these secrets to ease your future upgrade experience. This is also a recommended option when using CI/CD tools like ArgoCD, FluxCD, Jenkins, etc.
+While upgrading is still possible by following our [upgrade guide](/self-managed/installation-methods/helm/upgrade/upgrade.md#upgrading-where-identity-enabled), we recommend pre-creating these secrets to ease your future upgrade experience. This is also a recommended option when using CI/CD tools like ArgoCD, FluxCD, Jenkins, etc.
 
 See an example of the secret below:
 
@@ -168,7 +168,7 @@ The command does not install Web Modeler or Console by default. To enable Web Mo
 
 Installing all the components in a cluster requires all Docker images to be downloaded to the Kubernetes cluster. Depending on which cloud provider you are using, the time it will take to fetch all the images will vary.
 
-For air-gapped environments, refer to [installing in an air-gapped environment](/self-managed/setup/guides/air-gapped-installation.md).
+For air-gapped environments, refer to [installing in an air-gapped environment](/self-managed/installation-methods/helm/configure/air-gapped-installation.md).
 
 The Helm chart uses [open-source images from Bitnami](https://github.com/bitnami/containers) by default. For enterprise installations, Camunda recommends using enterprise images, see [install with vendor enterprise images](#install-with-vendor-enterprise-images).
 
@@ -289,7 +289,7 @@ This will deploy Camunda with vendor-supported enterprise images, recommended fo
 
 By default, Camunda services deployed in a cluster are not accessible from outside the cluster. However, you can choose from several methods to connect to these services:
 
-- **Port forwarding:** This method allows you to direct traffic from your local machine to the cluster, making it possible to access Camunda services directly. For detailed instructions, refer to [accessing components without Ingress](/self-managed/setup/guides/accessing-components-without-ingress.md).
+- **Port forwarding:** This method allows you to direct traffic from your local machine to the cluster, making it possible to access Camunda services directly. For detailed instructions, refer to [accessing components without Ingress](/self-managed/installation-methods/helm/configure/accessing-components-without-ingress.md).
 - **Ingress configuration:** You can set up the NGINX Ingress controller to manage external service access. For detailed instructions, refer to the [Ingress setup guide](/self-managed/installation-methods/helm/configure/ingress-setup.md).
 - **EKS cluster installation:** For those deploying Camunda 8 on an Amazon EKS cluster, refer to [installing Camunda 8 on an EKS cluster](/self-managed/setup/deploy/amazon/amazon-eks/eks-helm.md).
 
@@ -461,4 +461,4 @@ For upgrading the Camunda Helm chart from one release to another, perform a [Hel
 
 - **Zeebe Gateway** is deployed as a stateless service. We support [Kubernetes startup and liveness probes](/self-managed/zeebe-deployment/configuration/gateway-health-probes.md) for Zeebe.
 - **Zeebe broker nodes** need to be deployed as a [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) to preserve the identity of cluster nodes. StatefulSets require persistent storage, which must be allocated in advance. Depending on your cloud provider, the persistent storage differs as it is provider-specific.
-- **Docker pull limits** apply when downloading Camunda 8 images from Docker Hub. To avoid potential disruptions, authenticate with Docker Hub, use a mirror registry, or follow our guide on [installing in an air-gapped environment](/self-managed/setup/guides/air-gapped-installation.md).
+- **Docker pull limits** apply when downloading Camunda 8 images from Docker Hub. To avoid potential disruptions, authenticate with Docker Hub, use a mirror registry, or follow our guide on [installing in an air-gapped environment](/self-managed/installation-methods/helm/configure/air-gapped-installation.md).

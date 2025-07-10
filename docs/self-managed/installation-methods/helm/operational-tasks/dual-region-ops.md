@@ -905,7 +905,7 @@ This step **does not** affect the process instances in any way. Process informat
    kubectl --context $CLUSTER_SURVIVING scale -n $CAMUNDA_NAMESPACE_SURVIVING deployments/$CAMUNDA_RELEASE_NAME-tasklist --replicas 0
    ```
 
-2. Disable the Zeebe Elasticsearch exporters in Zeebe via kubectl using the [exporting API](./../../zeebe-deployment/operations/management-api.md#exporting-api):
+2. Disable the Zeebe Elasticsearch exporters in Zeebe via kubectl using the [exporting API](/self-managed/zeebe-deployment/operations/management-api.md#exporting-api):
 
    ```bash
    kubectl --context $CLUSTER_SURVIVING port-forward services/$CAMUNDA_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
@@ -1336,7 +1336,7 @@ desired={<Thirteen viewBox="140 40 680 500" />}
 
 #### How to get there
 
-1. Reactivate the exporters by sending the [exporting API](./../../zeebe-deployment/operations/management-api.md#exporting-api) activation request via the Zeebe Gateway:
+1. Reactivate the exporters by sending the [exporting API](/self-managed/zeebe-deployment/operations/management-api.md#exporting-api) activation request via the Zeebe Gateway:
 
    ```bash
    kubectl --context $CLUSTER_SURVIVING port-forward services/$CAMUNDA_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
