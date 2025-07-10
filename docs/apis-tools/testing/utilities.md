@@ -49,7 +49,7 @@ The mock completes jobs with/without variables.
 void shouldCompleteJob() {
     // given: mock job worker for the job type "send-email"
     // 1) Complete jobs without variables
-    rocessTestContext.mockJobWorker("send-email").thenComplete();
+    processTestContext.mockJobWorker("send-email").thenComplete();
 
     // 2) Complete jobs with variables
     final Map<String, Object> variables = Map.of(
