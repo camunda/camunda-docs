@@ -39,7 +39,7 @@ When backing up the WebApps, the order in which you execute the following sub-st
 
 :::note
 
-This will heavily depend on your setup, the following examples are based on examples given in the [Management API](#management-api) in Kubernetes using either active port-forwarding or overwrite of the local curl command.
+This will heavily depend on your setup, the following examples are based on examples given in the [Management API](backup-and-restore.md#management-api) in Kubernetes using either active port-forwarding or overwrite of the local curl command.
 
 As noted in the [Management API](backup-and-restore.md#management-api) section, this API is typically not publicly exposed. Therefore, you will need to access it directly using any means available within your environment.
 
@@ -388,7 +388,7 @@ When backing up the the Zeebe Cluster, you must execute the following sub-steps 
 
 This step uses the [management API](/self-managed/zeebe-deployment/operations/management-api.md?exporting=softPause#exporting-api). This is only available from 8.5.1, otherwise use normal pause.
 
-This will continue exporting records, but not delete those records (log compaction) from Zeebe. This makes the backup a hot backup, as covered in the [backup considerations](backup-and-restore.md#considerations).
+This will continue exporting records, but not delete those records (log compaction) from Zeebe. This makes the backup a hot backup, as covered in the [why you should use backup and restore](backup-and-restore.md#why-you-should-use-backup-and-restore).
 
 ```bash
 curl -XPOST "$GATEWAY_MANAGEMENT_API/actuator/exporting/pause?soft=true"
