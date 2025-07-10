@@ -1080,7 +1080,7 @@ module.exports = {
           },
           items: [
             "self-managed/installation-methods/helm/install",
-            //chart parameters
+            "self-managed/installation-methods/helm/chart-parameters",
             //production guide
             {
               type: "category",
