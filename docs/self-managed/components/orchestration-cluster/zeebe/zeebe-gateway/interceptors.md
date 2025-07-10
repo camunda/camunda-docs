@@ -95,7 +95,7 @@ Furthermore, as of 8.5.0, the Orchestration cluster REST API part of Zeebe does 
 
 :::
 
-Zeebe supports [multi-tenancy](../../concepts/multi-tenancy.md), or the ability for a single Zeebe installation to serve
+Zeebe supports [multi-tenancy](../../../../concepts/multi-tenancy.md), or the ability for a single Zeebe installation to serve
 multiple distinct users/clients.
 
 To ensure that clients can only access tenants they are authorized for, client requests

@@ -8,7 +8,7 @@ Discover the **Camunda Marketplace**, your go-to destination for leveraging vari
 
 Follow our intuitive guides to explore and harness connectors and blueprints using Web Modeler. If you prefer to utilize these resources within Desktop Modeler, download them directly from the [Camunda Marketplace website](https://marketplace.camunda.com).
 
-If you are a **[Web Modeler Self-Managed](/self-managed/components/modeler/web-modeler/installation.md)** user, be aware that your organization may restrict access to marketplace resources. If you are unsure about your organization's access, contact your organization's owner for clarification.
+If you are a **[Web Modeler Self-Managed](/self-managed/components/modeler/web-modeler/overview.md)** user, be aware that your organization may restrict access to marketplace resources. If you are unsure about your organization's access, contact your organization's owner for clarification.
 
 ## Browse Marketplace connectors
 

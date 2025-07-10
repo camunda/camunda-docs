@@ -12,4 +12,4 @@ Zeebe comes packaged with three exporters:
 
 This section of the docs explains how these exporters can be [installed](install-zeebe-exporters.md) and configured.
 
-For a general overview on the exporters concept, refer to our [exporters concept](../../concepts/exporters.md) page.
+For a general overview on the exporters concept, refer to our [exporters concept](../../../../concepts/exporters.md) page.

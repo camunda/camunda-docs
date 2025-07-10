@@ -12,7 +12,7 @@ Zeebe versions can be updated:
 Since Zeebe 8.5, updates to a newer version can be rolling or offline. Zeebe 8.4 and older don't contain necessary safety checks that make rolling updates safe, and we recommend offline updates instead to ensure processing behaves correctly.
 
 :::info
-Review the [update guide](/self-managed/components/components-upgrade/update-guide/introduction.md) for general update procedures you must follow and to check for known issues relating to the specific update you are planning.
+Review the [update guide](/self-managed/components/components-upgrade/introduction.md) for general update procedures you must follow and to check for known issues relating to the specific update you are planning.
 :::
 
 ## Rolling update
@@ -80,7 +80,7 @@ $ curl localhost:8080/api/v1/topology | jq .brokers[].version && kill %1
 
 To start the rolling update, update the Helm deployment to use a new version of Zeebe.
 Set `$NEW_ZEEBE_VERSION` to the version you want to update to, for example `8.5.2`.
-Remember to read the [update guide](/self-managed/components/components-upgrade/update-guide/introduction.md) to check for known issues.
+Remember to read the [update guide](/self-managed/components/components-upgrade/introduction.md) to check for known issues.
 Then, start the rolling update with `helm upgrade`.
 
 ```
@@ -200,7 +200,7 @@ If this persists, you can [force the update](#rolling-update-is-not-completing).
 
 ## Offline update
 
-See the [update guide](/self-managed/components/components-upgrade/update-guide/introduction.md) for specific instructions per Zeebe version.
+See the [update guide](/self-managed/components/components-upgrade/introduction.md) for specific instructions per Zeebe version.
 
 To update a Zeebe cluster, take the following steps:
 

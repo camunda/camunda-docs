@@ -75,7 +75,7 @@ After taking the backup, brokers can be started again and will automatically res
 :::note Caution
 Always use the same or the next minor version of Zeebe that you were using when taking the backup.
 Using a different version may result in data corruption or data loss.
-See the [update guide](/self-managed/components/components-upgrade/update-guide/introduction.md) for more details.
+See the [update guide](/self-managed/components/components-upgrade/introduction.md) for more details.
 :::
 
 Ensure your replacement cluster has the same number of brokers as the old cluster and uses the [same node IDs](setting-up-a-cluster.md#configuration).

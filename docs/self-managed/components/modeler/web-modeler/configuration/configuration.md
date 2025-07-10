@@ -12,7 +12,7 @@ The different components of Web Modeler Self-Managed can be configured using env
 
 ## Licensing
 
-import Licensing from '../../../../self-managed/react-components/licensing.md'
+import Licensing from '../../../../../self-managed/react-components/licensing.md'
 
 <Licensing/>
 
@@ -49,7 +49,7 @@ To add additional clusters, increment the `0` value for each variable (`CAMUNDA_
 | `BEARER_TOKEN`<br/><br/>(replaces [deprecated method `OAUTH`](/reference/announcements-release-notes/870/870-announcements.md#deprecated-web-modeler-cluster-authentication-oauth-and-client_credentials-self-managed)) | Web Modeler sends the authenticated user's token with every request to one of the cluster components (Zeebe, Operate, Tasklist).                                                        | The identity provider supports access tokens with multiple audiences.<br/>(_Note_: For the token to be accepted by the different cluster components, it must contain each component's audience.)<br/><br/>Example provider: Keycloak |
 | `CLIENT_CREDENTIALS`<br/><br/>([deprecated](/reference/announcements-release-notes/870/870-announcements.md#deprecated-web-modeler-cluster-authentication-oauth-and-client_credentials-self-managed))                   | Web Modeler requests an M2M token using the client credentials flow and sends this token with every request. The client ID and client secret have to be provided by the user in the UI. | The identity provider does not support access tokens with multiple audiences.<br/><br/>Example provider: [Microsoft Entra ID](/self-managed/setup/guides/connect-to-an-oidc-provider.md?authPlatform=microsoftEntraId#configuration) |
 | `BASIC`                                                                                                                                                                                                                 | Web Modeler sends a username and password with every request to one of the cluster components (Zeebe, Operate, Tasklist).                                                               | The cluster uses basic authentication.                                                                                                                                                                                               |
-| `NONE`                                                                                                                                                                                                                  | Web Modeler does not send any token.                                                                                                                                                    | Requests to the cluster do not require an access token at all because [authentication is disabled](/self-managed/components/orchestration-cluster/zeebe/security/client-authorization.md#camunda-identity-authorization).                                  |
+| `NONE`                                                                                                                                                                                                                  | Web Modeler does not send any token.                                                                                                                                                    | Requests to the cluster do not require an access token at all because [authentication is disabled](/self-managed/components/orchestration-cluster/zeebe/security/client-authorization.md#camunda-identity-authorization).            |
 
 ### Database
 
@@ -145,7 +145,7 @@ Refer to the [advanced SSL configuration guide](./ssl.md) for additional details
 
 ### Git Sync
 
-Web Modeler supports syncing files via [Git Sync](../../../../components/modeler/web-modeler/git-sync.md). Provide the base URL for your provider if you are using a self-hosted GitLab, GitHub, or Azure DevOps Server instance.
+Web Modeler supports syncing files via [Git Sync](../../../../../components/modeler/web-modeler/git-sync.md). Provide the base URL for your provider if you are using a self-hosted GitLab, GitHub, or Azure DevOps Server instance.
 
 | Provider      | Environment variable                                | Description                                                                                                                   | Default value                                |
 | ------------- | --------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
@@ -186,12 +186,12 @@ The proxy-related environment variables are lowercase because they follow a wide
 
 ### Feature Flags
 
-| Environment variable            | Description                                                                                                                                                                                                                                                                 | Example value | Default value |
-| ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ------------- |
-| `PLAY_ENABLED`                  | [optional]<br/>Enables the [**Play** mode](../../../../components/modeler/web-modeler/play-your-process.md) in the BPMN editor, allowing users to test processes in a playground environment.                                                                               | `true`        | `true`        |
-| `ZEEBE_BPMN_DEPLOYMENT_ENABLED` | [optional]<br/>Enables the [**Deploy** and **Run**](../../../../components/modeler/web-modeler/run-or-publish-your-process.md) actions in the BPMN editor.<br/>When disabled, it prevents users from deploying and starting instances of processes via the UI.              | `false`       | `true`        |
-| `ZEEBE_DMN_DEPLOYMENT_ENABLED`  | [optional]<br/>Enables the [**Deploy**](../../../../components/modeler/web-modeler/run-or-publish-your-process.md) action in the DMN editor.<br/>When disabled, it prevents users from deploying decisions via the UI.                                                      | `false`       | `true`        |
-| `MARKETPLACE_ENABLED`           | [optional]<br/>Enables the integration of the [Camunda Marketplace](https://marketplace.camunda.com). If enabled, users can browse the Marketplace and download [resources](../../../../components/modeler/web-modeler/camunda-marketplace.md) directly inside Web Modeler. | `false`       | `true`        |
+| Environment variable            | Description                                                                                                                                                                                                                                                                    | Example value | Default value |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- | ------------- |
+| `PLAY_ENABLED`                  | [optional]<br/>Enables the [**Play** mode](../../../../../components/modeler/web-modeler/play-your-process.md) in the BPMN editor, allowing users to test processes in a playground environment.                                                                               | `true`        | `true`        |
+| `ZEEBE_BPMN_DEPLOYMENT_ENABLED` | [optional]<br/>Enables the [**Deploy** and **Run**](../../../../../components/modeler/web-modeler/run-or-publish-your-process.md) actions in the BPMN editor.<br/>When disabled, it prevents users from deploying and starting instances of processes via the UI.              | `false`       | `true`        |
+| `ZEEBE_DMN_DEPLOYMENT_ENABLED`  | [optional]<br/>Enables the [**Deploy**](../../../../../components/modeler/web-modeler/run-or-publish-your-process.md) action in the DMN editor.<br/>When disabled, it prevents users from deploying decisions via the UI.                                                      | `false`       | `true`        |
+| `MARKETPLACE_ENABLED`           | [optional]<br/>Enables the integration of the [Camunda Marketplace](https://marketplace.camunda.com). If enabled, users can browse the Marketplace and download [resources](../../../../../components/modeler/web-modeler/camunda-marketplace.md) directly inside Web Modeler. | `false`       | `true`        |
 
 ### Identity / Keycloak
 

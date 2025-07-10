@@ -18,7 +18,7 @@ The following parts are configurable:
 
 ## Licensing
 
-import Licensing from '../../self-managed/react-components/licensing.md'
+import Licensing from '../../../../self-managed/react-components/licensing.md'
 
 <Licensing/>
 
@@ -47,7 +47,7 @@ To change the values for http header for security reasons, you can use the confi
 ### Securing Operate - Zeebe interaction
 
 While executing user operations, Operate communicates with Zeebe using the Zeebe Java client. For Zeebe to know whether operations are allowed to be executed
-in terms of tenant assignment, Operate - Zeebe connection must be secured. Check the list of environment variables to be provided in the [Zeebe documentation](../../zeebe-deployment/security/client-authorization/#environment-variables).
+in terms of tenant assignment, Operate - Zeebe connection must be secured. Check the list of environment variables to be provided in the [Zeebe documentation](../zeebe/security/client-authorization/#environment-variables).
 
 ### Troubleshooting multi-tenancy in Operate
 
@@ -237,17 +237,17 @@ You can enable intra-cluster TLS secured connections between Operate and Zeebe b
 | zeebe.gateway.cluster.advertisedHost                | Advertised hostname in the cluster.                                                                                 | operate                           |
 | zeebe.gateway.cluster.memberId                      | Member ID for the cluster.                                                                                          | operate                           |
 
-For extended configuration and guidelines, refer to [secure cluster communication](../zeebe-deployment/security/secure-cluster-communication.md) and [gateway configuration](../zeebe-deployment/configuration/gateway.md).
+For extended configuration and guidelines, refer to [secure cluster communication](../zeebe/security/secure-cluster-communication.md) and [gateway configuration](../zeebe/configuration/gateway.md).
 
 ## Zeebe Elasticsearch or OpenSearch exporter
 
 :::note
-Please refer to [Supported Environments](../../reference/supported-environments.md#camunda-8-self-managed) to find out which versions of Elasticsearch or OpenSearch are supported in a Camunda 8 Self-Managed setup.
+Please refer to [Supported Environments](../../../../reference/supported-environments.md#camunda-8-self-managed) to find out which versions of Elasticsearch or OpenSearch are supported in a Camunda 8 Self-Managed setup.
 :::
 
-For Elasticsearch, Operate imports data from indices created and filled in by the [Zeebe Elasticsearch exporter](../zeebe-deployment/exporters/elasticsearch-exporter.md).
+For Elasticsearch, Operate imports data from indices created and filled in by the [Zeebe Elasticsearch exporter](../zeebe/exporters/elasticsearch-exporter.md).
 
-For OpenSearch, Operate imports data from indices created and filled in by the [Zeebe OpenSearch exporter](../zeebe-deployment/exporters/opensearch-exporter.md).
+For OpenSearch, Operate imports data from indices created and filled in by the [Zeebe OpenSearch exporter](../zeebe/exporters/opensearch-exporter.md).
 
 Therefore, settings for this Elasticsearch or OpenSearch connection must be defined and must correspond to the settings on the Zeebe side.
 

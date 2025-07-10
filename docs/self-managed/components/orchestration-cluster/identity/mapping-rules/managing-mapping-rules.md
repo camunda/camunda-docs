@@ -11,7 +11,7 @@ import TabItem from "@theme/TabItem";
 In this guide, you will learn how to manage mapping rules in Identity and how to control the Camunda entities related to them.
 
 :::tip
-To learn more about the concept of mapping rules, see the [mapping rules documentation](../../concepts/mapping-rules.md).
+To learn more about the concept of mapping rules, see the [mapping rules documentation](../../../../concepts/mapping-rules.md).
 :::
 
 1. Log in to the Identity UI and navigate to the **Mappings** tab.

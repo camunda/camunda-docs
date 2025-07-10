@@ -265,8 +265,8 @@ security:
 
 ### zeebe.gateway.cluster.security.authentication
 
-| Field | Description                                                                                                                                                                                                                                                                                                                                                                                     | Example value |
-| ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| Field | Description                                                                                                                                                                                                                                                                                                                                                                                                           | Example value |
+| ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
 | mode  | Controls which authentication mode is active; supported modes are `none` and `identity`. If `identity` is set, authentication will be done using [camunda-identity](/self-managed/components/management-identity/what-is-identity.md), which needs to be configured in the corresponding subsection. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_SECURITY_AUTHENTICATION_MODE`. | none          |
 
 #### YAML snippet
@@ -374,7 +374,7 @@ security:
 
 ### zeebe.gateway.longPolling
 
-It's possible to configure gateway long-polling behavior. Read more on long-polling behavior [here](../../../components/concepts/job-workers.md#long-polling).
+It's possible to configure gateway long-polling behavior. Read more on long-polling behavior [here](../../../../../components/concepts/job-workers.md#long-polling).
 
 | Field             | Description                                                                                                                                                                                                                                     | Example value |
 | ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |

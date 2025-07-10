@@ -324,13 +324,13 @@ In our example, we went with port-forwarding to a localhost, but other alternati
    </summary>
 </details>
 
-2.  Port-forward the service of the Zeebe Gateway to access the [management REST API](../../zeebe-deployment/configuration/gateway.md#managementserver)
+2.  Port-forward the service of the Zeebe Gateway to access the [management REST API](../../components/orchestration-cluster/zeebe/configuration/gateway.md#managementserver)
 
     ```bash
     kubectl --context $CLUSTER_SURVIVING port-forward services/$CAMUNDA_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
     ```
 
-3.  Based on the [Cluster Scaling APIs](../../zeebe-deployment/operations/cluster-scaling.md), send a request to the Zeebe Gateway to redistribute the load to the remaining brokers, thereby removing the lost brokers.
+3.  Based on the [Cluster Scaling APIs](../../components/orchestration-cluster/zeebe/operations/cluster-scaling.md), send a request to the Zeebe Gateway to redistribute the load to the remaining brokers, thereby removing the lost brokers.
     Depending on which region was lost, the load must be redistributed to the remaining brokers, either the even or odd numbered ones. In our example, we have lost `region 1` and with it our uneven brokers. This means we will have to redistribute to our existing even brokers. Make sure to only run the correct one based on the surviving region's brokers.
 
   <Tabs queryString="lost-region">
@@ -538,7 +538,7 @@ desired={<Six viewBox="140 40 680 500" />}
 
 #### Procedure
 
-1. Port-forward the service of the Zeebe Gateway for the [management REST API](../../zeebe-deployment/configuration/gateway.md#managementserver)
+1. Port-forward the service of the Zeebe Gateway for the [management REST API](../../components/orchestration-cluster/zeebe/configuration/gateway.md#managementserver)
 
    ```bash
    kubectl --context $CLUSTER_SURVIVING port-forward services/$CAMUNDA_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING

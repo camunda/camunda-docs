@@ -30,7 +30,7 @@ All the steps below are applicable to ElasticSearch and OpenSearch installations
 - Back up your database instance ([ElasticSearch](https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-snapshots.html) / [OpenSearch](https://opensearch.org/docs/latest/tuning-your-cluster/availability-and-recovery/snapshots/snapshot-restore/)) in case something goes wrong during the migration process. This is recommended, but optional.
 - Make sure that you have enough storage available to perform the migration. During the migration process it can be the case that up to twice the amount of the storage of your database data is needed. (Highly recommended)
 - Back up your `environment-config.yaml` and `environment-logback.xml` located in the `config` folder of the root directory of your current Optimize. (Optional)
-- Start the new Optimize version, as described in the [installation guide](../../install-and-start.md).
+- Start the new Optimize version, as described in the [installation guide](../../overview.md).
 - It is very likely that you configured the logging of Optimize to your needs and therefore you adjusted the `environment-logback.xml` in the `config` folder of the root directory of your **old** Optimize. You can now use the backed up logging configuration and put it in the `config` folder of the **new** Optimize to keep your logging adjustments. (Optional)
 
 ### 2. Rolling update to the new database version

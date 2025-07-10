@@ -192,7 +192,7 @@ User groups are managed by Identity, and this resource is only available when Id
 
 ## Zeebe client credentials
 
-If the Zeebe Gateway is set up with Camunda Identity-based authorization, [Zeebe client OAuth environment variables](../zeebe-deployment/security/client-authorization.md#environment-variables) must be provided.
+If the Zeebe Gateway is set up with Camunda Identity-based authorization, [Zeebe client OAuth environment variables](../zeebe/security/client-authorization.md#environment-variables) must be provided.
 
 </TabItem>
 </Tabs>

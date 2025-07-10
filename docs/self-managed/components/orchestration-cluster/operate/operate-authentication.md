@@ -133,7 +133,7 @@ get `(&(objectClass=user)(userPrincipalName={0}))`.
 
 <TabItem value="identity">
 
-[Identity](../../identity/what-is-identity/) provides authentication and authorization functionality along with user
+[Identity](../identity/overview.md) provides authentication and authorization functionality along with user
 management.
 
 ## Enable Identity
@@ -248,7 +248,7 @@ For more information, visit the [Identity documentation](/self-managed/component
 ## Zeebe client credentials
 
 If the Zeebe Gateway is set up with Camunda Identity-based
-authorization, [Zeebe client OAuth environment variables](../zeebe-deployment/security/client-authorization.md#environment-variables)
+authorization, [Zeebe client OAuth environment variables](../zeebe/security/client-authorization.md#environment-variables)
 must be provided.
 
 </TabItem>

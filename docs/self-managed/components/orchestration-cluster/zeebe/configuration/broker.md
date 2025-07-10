@@ -868,7 +868,7 @@ For an embedded gateway setup, any gateway property can be passed along to the `
 
 Multi-tenancy in Zeebe can be configured with the following configuration properties.
 Multi-tenancy is disabled by default.
-Read more [in the multi-tenancy documentation](../../../self-managed/concepts/multi-tenancy.md).
+Read more [in the multi-tenancy documentation](../../../../concepts/multi-tenancy.md).
 
 :::note
 For now, multi-tenancy is only supported in combination with Identity.
@@ -896,8 +896,8 @@ broker:
 
 #### zeebe.broker.gateway.security.authentication
 
-| Field | Description                                                                                                                                                                                                                                                                                                                                                                                            | Example value |
-| ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
+| Field | Description                                                                                                                                                                                                                                                                                                                                                                                                                  | Example value |
+| ----- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
 | mode  | Controls which authentication mode is active; supported modes are `none` and `identity`. If `identity` is set, authentication will be done using [camunda-identity](/self-managed/components/management-identity/what-is-identity.md), which needs to be configured in the corresponding subsection. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_SECURITY_AUTHENTICATION_MODE`. | none          |
 
 ##### YAML snippet

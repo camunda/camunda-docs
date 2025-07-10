@@ -20,7 +20,7 @@ Zeebe doesn’t rely on a central database, so there’s no performance bottlene
 
 Zeebe distributes data across all brokers in a cluster with storage directly on the server filesystem. If one broker goes down, another can replace it with no data loss. This built-in replication mechanism ensures that Camunda can recover from machine or software failure with no human interaction, no data loss, and minimal downtime.
 
-For documentation on deploying Zeebe as part of Camunda 8 Self-Managed, refer to the [deployment guide](../../self-managed/components/orchestration-cluster/zeebe/zeebe-installation.md).
+For documentation on deploying Zeebe as part of Camunda 8 Self-Managed, refer to the [deployment guide](../../self-managed/components/orchestration-cluster/zeebe/overview.md).
 
 ## Get started
 

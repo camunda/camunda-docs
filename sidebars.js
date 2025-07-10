@@ -1178,9 +1178,7 @@ module.exports = {
         type: "doc",
         id: "self-managed/update/index",
       },
-      items: [
-        "self-managed/setup/upgrade",
-      ],
+      items: ["self-managed/setup/upgrade"],
     },
     {
       type: "category",
@@ -1414,6 +1412,7 @@ module.exports = {
               items: [
                 "self-managed/components/orchestration-cluster/identity/overview",
                 "self-managed/components/orchestration-cluster/identity/configuration",
+                "self-managed/components/orchestration-cluster/identity/manage-tenants",
                 {
                   "Mapping rules": [
                     "self-managed/components/orchestration-cluster/identity/mapping-rules/managing-mapping-rules",
@@ -1431,9 +1430,9 @@ module.exports = {
             "self-managed/components/connectors/connectors-configuration",
           ],
           Optimize: [
+            "self-managed/components/optimize/overview",
             {
               Configuration: [
-                "self-managed/components/optimize/configuration/getting-started",
                 {
                   "System configuration": [
                     "self-managed/components/optimize/configuration/system-configuration",

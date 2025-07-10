@@ -47,7 +47,7 @@ Use the following names and values for the Identity SDK to ensure proper authent
 
 ## License configuration
 
-import Licensing from '../../../self-managed/react-components/licensing.md'
+import Licensing from '../../../../self-managed/react-components/licensing.md'
 
 <Licensing/>
 
