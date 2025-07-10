@@ -14,7 +14,7 @@ import CreateApiCredentials from '../components/react-components/create-api-cred
 
 In Camunda 8, **user task listeners** allow you to run custom logic in response to changes to a user task, such as when the `creating`, `assigning`, or `completing` event occurs.
 
-User task listeners facilitate the integration of custom logic into your workflows. For more details, refer to the [User Task Listeners concept](../components/concepts/user-task-listeners.md).
+User task listeners facilitate the integration of custom logic into your workflows. For more details, refer to the [User Task Listeners concept](/components/concepts/user-task-listeners.md).
 
 This guide walks you through:
 
@@ -134,10 +134,10 @@ To build your understanding of task listeners, you can also:
 
 Further, you can try the following:
 
-- Add a separate listener for another event type, and [trigger that event](../components/concepts/user-task-listeners.md#trigger-a-user-task-listener).
-- [Access the user task's data](../components/concepts/user-task-listeners.md#accessing-user-task-data) from the **activated job**.
-- [Correct the assignee](../components/concepts/user-task-listeners.md#correcting-user-task-data) in the listener by adding a **job result** to the complete job command.
-- [Deny the assignment](../components/concepts/user-task-listeners.md#denying-the-lifecycle-transition) from the listener to avoid the task's assignment altogether.
+- Add a separate listener for another event type, and [trigger that event](/components/concepts/user-task-listeners.md#trigger-a-user-task-listener).
+- [Access the user task's data](/components/concepts/user-task-listeners.md#accessing-user-task-data) from the **activated job**.
+- [Correct the assignee](/components/concepts/user-task-listeners.md#correcting-user-task-data) in the listener by adding a **job result** to the complete job command.
+- [Deny the assignment](/components/concepts/user-task-listeners.md#denying-the-lifecycle-transition) from the listener to avoid the task's assignment altogether.
 
 ## Additional resources and next steps
 

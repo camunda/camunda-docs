@@ -25,8 +25,4 @@ Camunda 8 consists of [multiple components](/components/components-overview.md) 
 
 ![Architecture diagram for Camunda including all the components for SaaS](./img/ComponentsAndArchitecture_SaaS.png)
 
-## Getting started
-
-To get started, visit our [quickstart guides](./quickstart-overview.md) and choose the path that best fits your role and deployment preference.
-
 You can also learn more about Camunda 8 by reviewing the Camunda Academy courses [introducing Camunda 8](https://academy.camunda.com/camunda-intro/) and [providing an overview of Camunda 8](https://academy.camunda.com/c8-overview/).
