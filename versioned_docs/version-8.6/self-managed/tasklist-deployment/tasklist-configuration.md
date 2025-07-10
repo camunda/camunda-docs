@@ -421,3 +421,22 @@ camunda:
     feature-flag:
       allow-non-self-assignment: true
 ```
+
+## Backups
+
+You must configure the following on your chosen database:
+
+- [Elasticsearch snapshot repository](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshot-restore.html)
+- [OpenSearch snapshot repository](https://docs.opensearch.org/docs/latest/tuning-your-cluster/availability-and-recovery/snapshots/snapshot-restore/)
+
+Tasklist is configured with the snapshot repository name to trigger database snapshots. This is important for coherent backups.
+
+:::info
+Learn more about the procedure and the need to trigger it through Camunda components in the [backup guide](/versioned_docs/version-8.6/self-managed/operational-guides/backup-restore/backup-and-restore.md).
+:::
+
+Tasklist must be configured with the repository name:
+
+| Name                                   | Description                      | Default value |
+| -------------------------------------- | -------------------------------- | ------------- |
+| camunda.tasklist.backup.repositoryName | ES / OS snapshot repository name | -             |
