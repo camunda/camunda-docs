@@ -66,7 +66,7 @@ type:"link", href:"/docs/next/apis-tools/zeebe-api/overview/", label: "Zeebe API
 ]}/>
 
 :::note
-Additionally, visit our documentation on [Operate](../self-managed/operate-deployment/usage-metrics.md) and [Tasklist](../self-managed/tasklist-deployment/usage-metrics.md) usage metric APIs.
+Additionally, visit our documentation on [Operate](../self-managed/components/operate/usage-metrics.md) and [Tasklist](../self-managed/components/tasklist/usage-metrics.md) usage metric APIs.
 :::
 
 ### SDKs

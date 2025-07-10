@@ -61,7 +61,7 @@ This design ensures that all components are in sync, working collectively to mai
 Web Modeler and Console are designed to interact with multiple orchestration clusters. Console offers tools and interfaces for administrators to monitor clusters, and Web Modeler allows developers to create and deploy BPMN models.
 
 - [Console](/components/console/introduction-to-console.md): A central management interface for monitoring and managing multiple orchestration clusters.
-- [Web Modeler](/self-managed/modeler/web-modeler/installation.md): A web-based tool for designing and deploying workflow models to any available orchestration cluster.
+- [Web Modeler](/self-managed/components/modeler/web-modeler/installation.md): A web-based tool for designing and deploying workflow models to any available orchestration cluster.
 
 Additionally, Web Modeler and Console require the following:
 

@@ -68,7 +68,7 @@ The following command line arguments are available:
 
 | Argument                   | Description                                                                                                                                                                                                                                   |
 | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--config <path>`          | Applies the specified Zeebe [`application.yaml`](/self-managed/zeebe-deployment/configuration/configuration.md).                                                                                                                              |
+| `--config <path>`          | Applies the specified Zeebe [`application.yaml`](/self-managed/components/orchestration-cluster/zeebe/configuration/configuration.md).                                                                                                                              |
 | `--username <arg>`         | Configure the first user’s username to `<arg>`.                                                                                                                                                                                               |
 | `--password <arg>`         | Configure the first user’s password to `<arg>`.                                                                                                                                                                                               |
 | `--keystore <arg>`         | Configure the TLS certificate for HTTPS. If not specified, use HTTP. For more information, see [enabling TLS](#enable-tls).                                                                                                                   |
@@ -108,7 +108,7 @@ The connectors URL displays a login page, but cannot be logged into.
 
 Make sure you have installed [Desktop Modeler](/components/modeler/desktop-modeler/install-the-modeler.md) before continuing.
 
-To [deploy diagrams](/self-managed/modeler/desktop-modeler/deploy-to-self-managed.md) from Desktop Modeler, the following configuration is required:
+To [deploy diagrams](/self-managed/components/modeler/desktop-modeler/deploy-to-self-managed.md) from Desktop Modeler, the following configuration is required:
 
 - **Target:** Self-Managed
 - **Cluster endpoint:** `http://localhost:26500`, the location of your Zeebe Gateway

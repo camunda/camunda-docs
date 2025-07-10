@@ -43,7 +43,7 @@ Contractual metrics telemetry data includes a limited set of contractually agree
 
 ### Environment telemetry data (Self-Managed only)
 
-Environment telemetry data includes information about your Self-Managed installations to enable better support and product improvement decisions. Self-Managed customers may choose to send a very limited set of environment information through the Console component's telemetry mechanism. View the [telemetry](/self-managed/console-deployment/telemetry.md) page for a description of this data. Environment telemetry data is not relevant to SaaS installations.
+Environment telemetry data includes information about your Self-Managed installations to enable better support and product improvement decisions. Self-Managed customers may choose to send a very limited set of environment information through the Console component's telemetry mechanism. View the [telemetry](/self-managed/components/console/telemetry.md) page for a description of this data. Environment telemetry data is not relevant to SaaS installations.
 
 ### Usage telemetry data (SaaS and Desktop Modeler only)
 

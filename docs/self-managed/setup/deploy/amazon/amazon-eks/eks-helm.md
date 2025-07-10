@@ -378,7 +378,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 Use these environment variables in the `kubectl` command to create the secret.
 
-- The `smtp-password` should be replaced with the appropriate external value ([see how it's used by Web Modeler](/self-managed/modeler/web-modeler/configuration/configuration.md#smtp--email)).
+- The `smtp-password` should be replaced with the appropriate external value ([see how it's used by Web Modeler](/self-managed/components/modeler/web-modeler/configuration/configuration.md#smtp--email)).
 
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/create-identity-secret.sh
@@ -610,7 +610,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
   </TabItem>
   <TabItem value="modeler" label="Desktop Modeler">
 
-Follow our existing [Modeler guide on deploying a diagram](/self-managed/modeler/desktop-modeler/deploy-to-self-managed.md). Below are the helper values required to be filled in Modeler:
+Follow our existing [Modeler guide on deploying a diagram](/self-managed/components/modeler/desktop-modeler/deploy-to-self-managed.md). Below are the helper values required to be filled in Modeler:
 
 <Tabs groupId="domain" defaultValue="with" queryString values={
 [

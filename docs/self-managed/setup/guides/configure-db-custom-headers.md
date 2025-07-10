@@ -204,7 +204,7 @@ Due to technical limitations, Optimize currently allows registering up to 5 plug
 #### Configure Zeebe Exporter
 
 :::note
-The following configuration uses the default name `camundaExporter`. To use a custom name, update `CAMUNDAEXPORTER` in the provided environment variables to match the name defined in your exporter [configuration](/self-managed/zeebe-deployment/exporters/camunda-exporter.md).
+The following configuration uses the default name `camundaExporter`. To use a custom name, update `CAMUNDAEXPORTER` in the provided environment variables to match the name defined in your exporter [configuration](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md).
 :::
 
 ```yaml

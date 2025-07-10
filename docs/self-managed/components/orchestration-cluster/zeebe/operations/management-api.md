@@ -13,7 +13,7 @@ The API is a custom endpoint available via [Spring Boot Actuator](https://docs.s
 
 The following operations are currently available:
 
-- [Rebalancing](/self-managed/zeebe-deployment/operations/rebalancing.md)
+- [Rebalancing](/self-managed/components/orchestration-cluster/zeebe/operations/rebalancing.md)
 - [Pause and resume exporting](#exporting-api)
 - [Enable and disable exporter](#exporters-api)
 

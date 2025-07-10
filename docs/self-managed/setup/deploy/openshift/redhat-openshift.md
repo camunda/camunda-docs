@@ -160,9 +160,9 @@ Additionally, the Zeebe Gateway should be configured to use an encrypted connect
 
    The actual configuration properties can be reviewed:
 
-   - [in the Operate configuration documentation](/self-managed/operate-deployment/operate-configuration.md#zeebe-broker-connection),
-   - [in the Tasklist configuration documentation](/self-managed/tasklist-deployment/tasklist-configuration.md#zeebe-broker-connection),
-   - [in the Zeebe Gateway configuration documentation](/self-managed/zeebe-deployment/configuration/gateway.md).
+   - [in the Operate configuration documentation](/self-managed/components/operate/operate-configuration.md#zeebe-broker-connection),
+   - [in the Tasklist configuration documentation](/self-managed/components/tasklist/tasklist-configuration.md#zeebe-broker-connection),
+   - [in the Zeebe Gateway configuration documentation](/self-managed/components/orchestration-cluster/zeebe/configuration/gateway.md).
 
 2. **Connectors:** update your `values.yml` file with the following:
 
@@ -265,7 +265,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/opens
 
 Use these environment variables in the `kubectl` command to create the secret.
 
-- The `smtp-password` should be replaced with the appropriate external value ([see how it's used by Web Modeler](/self-managed/modeler/web-modeler/configuration/configuration.md#smtp--email)).
+- The `smtp-password` should be replaced with the appropriate external value ([see how it's used by Web Modeler](/self-managed/components/modeler/web-modeler/configuration/configuration.md#smtp--email)).
 
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/procedure/create-identity-secret.sh

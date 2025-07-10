@@ -12,8 +12,8 @@ keywords: [get-started, local-install]
 
 - [Camunda 8 SaaS](https://camunda.io)
 - [Desktop Modeler](https://camunda.com/download/modeler/)
-- [Operate](/self-managed/operate-deployment/install-and-start.md)
-- [Tasklist](/self-managed/tasklist-deployment/install-and-start.md)
+- [Operate](/self-managed/components/operate/install-and-start.md)
+- [Tasklist](/self-managed/components/tasklist/install-and-start.md)
 - [Optimize](/components/optimize/what-is-optimize.md)
 
 ## Setting up your project

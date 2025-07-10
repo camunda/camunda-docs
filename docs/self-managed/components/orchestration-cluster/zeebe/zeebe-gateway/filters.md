@@ -135,7 +135,7 @@ filter, provide the gateway with:
 - The [fully qualified name](https://docs.oracle.com/javase/specs/jls/se17/html/jls-6.html#jls-6.7) of the filter class. For example, `com.acme.ExampleFilter`.
 
 Continuing with the `LoggingFilter` example, provide these
-[configurations](/self-managed/zeebe-deployment/configuration/configuration.md)
+[configurations](/self-managed/components/orchestration-cluster/zeebe/configuration/configuration.md)
 using a gateway config file, environment variables, or a mix of both. We'll be
 using a config file in this example.
 

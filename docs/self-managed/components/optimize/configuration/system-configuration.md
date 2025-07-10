@@ -271,7 +271,7 @@ Settings influencing the process digest feature.
 Settings for automatic cleanup of historic process instances based on their end time.
 
 :::note
-Two types of history cleanup are available for Camunda 8 users at this time - process data cleanup and external variable cleanup. For more information, see [History cleanup](/self-managed/optimize-deployment/configuration/history-cleanup.md).
+Two types of history cleanup are available for Camunda 8 users at this time - process data cleanup and external variable cleanup. For more information, see [History cleanup](/self-managed/components/optimize/configuration/history-cleanup.md).
 :::
 
 | YAML path                                                                         | Environment Variable                                               | Default value                                                                         | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |

@@ -14,7 +14,7 @@ Play is a Zeebe-powered playground environment within Web Modeler for validating
 
 To use Play, open a BPMN diagram and click the **Play** tab. Read the [limitations and availability section](#limitations-and-availability) if this section is missing.
 
-In Self-Managed, you are prompted to select from the clusters defined in your Web Modeler [configuration](/self-managed/modeler/web-modeler/configuration/configuration.md#clusters). The Camunda 8 Helm and Docker Compose distributions provide one cluster configured by default.
+In Self-Managed, you are prompted to select from the clusters defined in your Web Modeler [configuration](/self-managed/components/modeler/web-modeler/configuration/configuration.md#clusters). The Camunda 8 Helm and Docker Compose distributions provide one cluster configured by default.
 
 A Play environment is then started that utilizes your selected development cluster in SaaS, or the specified cluster in a Self-Managed setup.
 
@@ -210,7 +210,7 @@ Additionally, within their organization, users need to have a [role](/components
 
 ### Camunda 8 Self-Managed
 
-In Self-Managed, Play is controlled by the `PLAY_ENABLED` [configuration property](/self-managed/modeler/web-modeler/configuration/configuration.md#feature-flags) in Web Modeler. This is `true` by default for the Docker and Kubernetes distributions.
+In Self-Managed, Play is controlled by the `PLAY_ENABLED` [configuration property](/self-managed/components/modeler/web-modeler/configuration/configuration.md#feature-flags) in Web Modeler. This is `true` by default for the Docker and Kubernetes distributions.
 
 Prior to the 8.6 release, Play can be accessed by installing the 8.6.0-alpha [Helm charts](https://github.com/camunda/camunda-platform-helm/blob/camunda-platform-10.4.0/charts/camunda-platform-alpha), or running the 8.6.0-alpha [Docker Compose](https://github.com/camunda/camunda-distributions/tree/main/docker-compose) configuration.
 
@@ -223,7 +223,7 @@ Prior to the 8.6 release, Play can be accessed by installing the 8.6.0-alpha [He
 
 ## Use Play with Camunda Self-Managed
 
-After selecting the **Play** tab in Self-Managed, you are prompted to select from the clusters defined in your Web Modeler [configuration](/self-managed/modeler/web-modeler/configuration/configuration.md#clusters). The Camunda 8 Helm and Docker Compose distributions provide one cluster configured by default.
+After selecting the **Play** tab in Self-Managed, you are prompted to select from the clusters defined in your Web Modeler [configuration](/self-managed/components/modeler/web-modeler/configuration/configuration.md#clusters). The Camunda 8 Helm and Docker Compose distributions provide one cluster configured by default.
 
 ### Limitations {#self-managed-limitations}
 

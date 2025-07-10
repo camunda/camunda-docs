@@ -39,7 +39,7 @@ There is no active load balancing across partitions. Each leader election for an
 
 This may lead to one node becoming the leader for all partitions. This is not a problem for fault tolerance as the guarantees of replication remain. However, this may negatively impact throughput as all traffic hits one node.
 
-To reach a well-distributed leadership again, the [Rebalancing API](../../../self-managed/zeebe-deployment/operations/rebalancing.md) can be used in Self-Managed environments. Be aware that this is on a best-effort basis.
+To reach a well-distributed leadership again, the [Rebalancing API](../../../self-managed/components/orchestration-cluster/zeebe/operations/rebalancing.md) can be used in Self-Managed environments. Be aware that this is on a best-effort basis.
 :::
 
 ## Commit

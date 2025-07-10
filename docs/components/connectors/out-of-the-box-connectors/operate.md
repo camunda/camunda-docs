@@ -14,13 +14,13 @@ This connector is compatible with both Camunda 8 SaaS and Camunda 8 Self-Managed
 
 :::note
 Password authentication with Operate is currently not supported.
-If you are using Camunda 8 Self-Managed, you can only authenticate using [Identity](/self-managed/operate-deployment/operate-authentication.md#identity).
+If you are using Camunda 8 Self-Managed, you can only authenticate using [Identity](/self-managed/components/operate/operate-authentication.md#identity).
 :::
 
 You also need to obtain the Operate API client credentials. Follow the links below to learn more about API client configuration.
 
 - [API client configuration in Camunda 8 SaaS](/components/console/manage-clusters/manage-api-clients.md)
-- [Authentication with a Self-Managed Operate deployment](/self-managed/operate-deployment/operate-authentication.md#identity)
+- [Authentication with a Self-Managed Operate deployment](/self-managed/components/operate/operate-authentication.md#identity)
 
 :::note
 Use Camunda secrets to store credentials so you don't expose sensitive information directly from the process. See [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.

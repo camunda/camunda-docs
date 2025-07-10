@@ -51,17 +51,17 @@ For future use, refer to our [new AWS Marketplace listing](https://aws.amazon.co
 
 ### Deploy diagram change <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span> {#web-modeler-deploy-diagram-change}
 
-With this version, we ship a breaking change to how Web Modeler **Deploy diagram** modals work. Clusters must now be proactively [configured](/self-managed/modeler/web-modeler/configuration/configuration.md#clusters) to be able to deploy from Web Modeler.
+With this version, we ship a breaking change to how Web Modeler **Deploy diagram** modals work. Clusters must now be proactively [configured](/self-managed/components/modeler/web-modeler/configuration/configuration.md#clusters) to be able to deploy from Web Modeler.
 
 <img src={DeployDiagramImg} alt="New 8.7 deploy diagram modal" width="600px" style={{border: '0', paddingTop: '0', marginTop: '0'}} />
 
 - In 8.6, you could still configure cluster details on the **Deploy diagram** modal when deploying.
-- In 8.7, you can no longer configure cluster details on the **Deploy diagram** modal. You must [configure the cluster](/self-managed/modeler/web-modeler/configuration/configuration.md#clusters) to be able to deploy from this modal.
+- In 8.7, you can no longer configure cluster details on the **Deploy diagram** modal. You must [configure the cluster](/self-managed/components/modeler/web-modeler/configuration/configuration.md#clusters) to be able to deploy from this modal.
 - Note that you must also be assigned the `Zeebe` [Identity role](/self-managed/identity/application-user-group-role-management/manage-roles.md) to be able to deploy (if `BEARER_TOKEN` is used as authentication).
 
 ### Deprecated: Web Modeler cluster authentication `OAUTH` and `CLIENT_CREDENTIALS` <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-The following authentication methods for a [configured cluster in Web Modeler](/self-managed/modeler/web-modeler/configuration/configuration.md#clusters) are now being deprecated and will no longer be supported in version 8.8:
+The following authentication methods for a [configured cluster in Web Modeler](/self-managed/components/modeler/web-modeler/configuration/configuration.md#clusters) are now being deprecated and will no longer be supported in version 8.8:
 
 - `OAUTH`: This method was replaced by `BEARER_TOKEN`.
 - `CLIENT_CREDENTIALS`: This method was introduced as a temporary solution to support deployments from Web Modeler when using [Microsoft Entra ID or a generic OIDC provider](/self-managed/setup/guides/connect-to-an-oidc-provider.md).

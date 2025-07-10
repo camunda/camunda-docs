@@ -37,7 +37,7 @@ Failure to connect may have several reasons:
 ### Configure the gateway to accept secure connections
 
 Ensure you properly configure the remote cluster URL to accept secure connections.
-Refer to the [Zeebe Gateway configuration documentation](/self-managed/zeebe-deployment/security/secure-client-communication.md#gateway)
+Refer to the [Zeebe Gateway configuration documentation](/self-managed/components/orchestration-cluster/zeebe/security/secure-client-communication.md#gateway)
 for additional information.
 
 ### Configure the gateway to support ALPN
