@@ -12,8 +12,8 @@ import DocCardList from '@theme/DocCardList';
 
 Camunda 8 is available in two deployment options:
 
-- **Camunda 8 SaaS**: A fully managed cloud service for rapid deployment and minimal operational overhead
-- **Camunda 8 Self-Managed**: A self-hosted solution for organizations requiring full control over their infrastructure
+- **Camunda 8 SaaS**: A fully managed cloud service for rapid deployment and minimal operational overhead.
+- **Camunda 8 Self-Managed**: A self-hosted solution for organizations requiring full control over their infrastructure.
 
 :::note Interested in migrating from Camunda 7 to Camunda 8?
 Interested in migrating process solutions developed for Camunda 7 to run them on Camunda 8? Visit our guide on [migrating from Camunda 7](/guides/migrating-from-camunda-7/index.md).
@@ -27,6 +27,6 @@ Camunda 8 consists of [multiple components](/components/components-overview.md) 
 
 ## Getting started
 
-To get started, visit our [quick-start guides](./quickstart-overview.md) to choose the path that best fits your role and deployment preference.
+To get started, visit our [quickstart guides](./quickstart-overview.md) and choose the path that best fits your role and deployment preference.
 
 You can also learn more about Camunda 8 by reviewing the Camunda Academy courses [introducing Camunda 8](https://academy.camunda.com/camunda-intro/) and [providing an overview of Camunda 8](https://academy.camunda.com/c8-overview/).
