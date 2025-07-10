@@ -28,7 +28,7 @@ Example path: `https://${REGION_ID}.zeebe.camunda.io:443/${CLUSTER_ID}/v2/`
 
 ### Self-Managed
 
-The context path should match the host and path defined in your Zeebe Gateway [configuration](/self-managed/setup/guides/ingress-setup.md). The path used here is the default.
+The context path should match the host and path defined in your Zeebe Gateway [configuration](/self-managed/installation-methods/helm/configure/ingress-setup.md). The path used here is the default.
 
 Example path: `http://localhost:8080/v2/`
 

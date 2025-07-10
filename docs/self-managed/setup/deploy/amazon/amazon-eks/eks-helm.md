@@ -186,7 +186,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
 
 ## Deploy Camunda 8 via Helm charts
 
-For more configuration options, refer to the [Helm chart documentation](https://artifacthub.io/packages/helm/camunda/camunda-platform#parameters). Additionally, explore our existing resources on the [Camunda 8 Helm chart](/self-managed/installation-methods/helm/install.md) and [guides](/self-managed/setup/guides/guides.md).
+For more configuration options, refer to the [Helm chart documentation](https://artifacthub.io/packages/helm/camunda/camunda-platform#parameters). Additionally, explore our existing resources on the [Camunda 8 Helm chart](/self-managed/installation-methods/helm/install.md) and [guides](/self-managed/installation-methods/helm/configure/index.md).
 
 Depending of your installation path, you may use different settings.
 For easy and reproducible installations, we will use yaml files to configure the chart.
@@ -198,7 +198,7 @@ Start by creating a `values.yml` file to store the configuration for your enviro
 <Tabs groupId="values">
   <TabItem value="with-domain-std" label="Standard with domain" default>
 
-The following makes use of the [combined Ingress setup](/self-managed/setup/guides/ingress-setup.md#combined-ingress-setup) by deploying a single Ingress for all HTTP components and a separate Ingress for the gRPC endpoint.
+The following makes use of the [combined Ingress setup](/self-managed/installation-methods/helm/configure/ingress-setup.md#combined-ingress-setup) by deploying a single Ingress for all HTTP components and a separate Ingress for the gRPC endpoint.
 
 :::info Cert-manager annotation for domain installation
 The annotation `kubernetes.io/tls-acme=true` will be [interpreted by cert-manager](https://cert-manager.io/docs/usage/ingress/) and automatically results in the creation of the required certificate request, easing the setup.
@@ -251,7 +251,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
 
   <TabItem value="with-domain-irsa" label="IRSA with domain" default>
 
-The following makes use of the [combined Ingress setup](/self-managed/setup/guides/ingress-setup.md#combined-ingress-setup) by deploying a single Ingress for all HTTP components and a separate Ingress for the gRPC endpoint.
+The following makes use of the [combined Ingress setup](/self-managed/installation-methods/helm/configure/ingress-setup.md#combined-ingress-setup) by deploying a single Ingress for all HTTP components and a separate Ingress for the gRPC endpoint.
 
 :::info Cert-manager annotation for domain installation
 The annotation `kubernetes.io/tls-acme=true` will be [interpreted by cert-manager](https://cert-manager.io/docs/usage/ingress/) and automatically results in the creation of the required certificate request, easing the setup.
@@ -288,7 +288,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
 
 #### Enable Enterprise components
 
-Some components are not enabled by default in this deployment. For more information on how to configure and enable these components, refer to [configuring Web Modeler, Console, and connectors](../../../install.md#configuring-web-modeler-console-and-connectors).
+Some components are not enabled by default in this deployment. For more information on how to configure and enable these components, refer to [configuring Web Modeler, Console, and connectors](/self-managed/installation-methods/helm/install.md#configuring-web-modeler-console-and-connectors).
 
 #### Use internal Elasticsearch instead of the managed OpenSearch
 
@@ -400,7 +400,7 @@ This command:
 
 :::note
 
-This guide uses `helm upgrade --install` as it runs install on initial deployment and upgrades future usage. This may make it easier for future [Camunda 8 Helm upgrades](/self-managed/setup/upgrade.md) or any other component upgrades.
+This guide uses `helm upgrade --install` as it runs install on initial deployment and upgrades future usage. This may make it easier for future [Camunda 8 Helm upgrades](/self-managed/installation-methods/helm/upgrade/upgrade.md) or any other component upgrades.
 
 :::
 

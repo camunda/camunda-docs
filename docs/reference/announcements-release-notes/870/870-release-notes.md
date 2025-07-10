@@ -585,7 +585,7 @@ The deployment experience is further simplified for Enterprise customers running
 - You no longer need to enter a client ID and secret in the deploy modal. Instead, simply choose a cluster (or stage for process applications) and deploy.
 
 :::note
-The simplified deployment experience is not supported when [Microsoft Entra ID is used as OIDC provider](/self-managed/setup/guides/connect-to-an-oidc-provider.md?authPlatform=microsoftEntraId#configuration).
+The simplified deployment experience is not supported when [Microsoft Entra ID is used as OIDC provider](/self-managed/installation-methods/helm/configure/connect-to-an-oidc-provider.md?authPlatform=microsoftEntraId#configuration).
 You still need to enter a client ID and secret in this case.
 Support is targeted for [Camunda 8.8](../870-announcements/#deprecated-web-modeler-cluster-authentication-oauth-and-client_credentials-self-managed).
 :::

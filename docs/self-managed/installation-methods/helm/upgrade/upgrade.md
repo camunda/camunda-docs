@@ -92,7 +92,7 @@ The following keys were deprecated in 8.5, and their removal has been delayed un
 
 #### Separated Ingress deprecation warning
 
-The separated Ingress Helm configuration has been deprecated in 8.6, and will be removed from the Helm chart in 8.8. If using a separated Ingress, switch to a [combined Ingress](/self-managed/setup/guides/ingress-setup.md) to ensure a smooth upgrade experience.
+The separated Ingress Helm configuration has been deprecated in 8.6, and will be removed from the Helm chart in 8.8. If using a separated Ingress, switch to a [combined Ingress](/self-managed/installation-methods/helm/configure/ingress-setup.md) to ensure a smooth upgrade experience.
 
 #### OpenShift Changes
 
@@ -283,7 +283,7 @@ Cross-components Keycloak-specific configurations has been replaced for a more g
 
 Accordingly, some unused environment variables have been removed from Web Modeler because of the implementation of custom OIDC support. The naming has also been adjusted to use the newer scheme.
 
-For more details, check [Connect to an OpenID Connect provider](/self-managed/setup/guides/connect-to-an-oidc-provider.md).
+For more details, check [Connect to an OpenID Connect provider](/self-managed/installation-methods/helm/configure/connect-to-an-oidc-provider.md).
 
 #### Keycloak
 

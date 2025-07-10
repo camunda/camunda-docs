@@ -141,7 +141,7 @@ For future use, refer to our [new AWS Marketplace listing](https://aws.amazon.co
 
 ##### Separated Ingress deprecation
 
-The separated Ingress Helm configuration for Camunda 8 Self-Managed has been deprecated in 8.6, and will be removed from the Helm chart in 8.8. Only the combined Ingress configuration is officially supported. See the [Ingress guide](/self-managed/setup/guides/ingress-setup.md) for more information on configuring a combined Ingress setup.
+The separated Ingress Helm configuration for Camunda 8 Self-Managed has been deprecated in 8.6, and will be removed from the Helm chart in 8.8. Only the combined Ingress configuration is officially supported. See the [Ingress guide](/self-managed/installation-methods/helm/configure/ingress-setup.md) for more information on configuring a combined Ingress setup.
 
 ##### `global.multiregion.installationType` deprecation
 
@@ -173,10 +173,10 @@ We are introducing a new base path for both the Operate and Tasklist **web appli
 #### For Self-Managed
 
 - The new base path for Operate is `/operate`, and for Tasklist, it is `/tasklist`.
-- For a [Separated Ingress](/self-managed/setup/guides/ingress-setup.md?ingress=separated) configuration:
+- For a [Separated Ingress](/self-managed/installation-methods/helm/configure/ingress-setup.md?ingress=separated) configuration:
   - for Operate, the full URL will be `{operate-host}/operate`. Any calls to `{operate-host}` will automatically be redirected to `{operate-host}/operate`
   - for Tasklist, the full URL will be `{tasklist-host}/tasklist`. Any calls to `{tasklist-host}` will automatically be redirected to `{tasklist-host}/tasklist`.
-- For a [Combined Ingress](/self-managed/setup/guides/ingress-setup.md?ingress=combined) configuration:
+- For a [Combined Ingress](/self-managed/installation-methods/helm/configure/ingress-setup.md?ingress=combined) configuration:
   - for Operate, the full URL will be `{common-host}/{operate-contextPath}/operate`. Any calls to `{common-host}/{operate-contextPath}` will be automatically redirected to `{common-host}/{operate-contextPath}/operate`.
   - for Tasklist, the full URL will be `{common-host}/{tasklist-contextPath}/tasklist`. Any calls to `{common-host}/{tasklist-contextPath}` will be automatically redirected to `{common-host}/{tasklist-contextPath}/tasklist`.
 
