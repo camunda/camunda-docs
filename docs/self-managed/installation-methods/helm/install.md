@@ -17,7 +17,7 @@ TODO: have links to explain the orchestration cluster and management cluster
 
 - Firstly, create a namespace to install the platform on Kubernetes:
   ```bash
-  kubectl create namesapce orchestration
+  kubectl create namespace orchestration
   ```
   output:
   ```bash
