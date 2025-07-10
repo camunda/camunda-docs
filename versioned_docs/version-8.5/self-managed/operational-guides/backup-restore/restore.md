@@ -15,7 +15,7 @@ Restore a previous backup of your Camunda 8 Self-Managed components and cluster.
 
 To restore a backup you must complete the following main steps:
 
-1. [Restore of Elasticsearch/OpenSearch](#restore-elasticsearch-opensearchh)
+1. [Restore of Elasticsearch/OpenSearch](#restore-elasticsearch-opensearch)
 2. [Restore Zeebe Cluster](#restore-zeebe-cluster)
 3. [Start all Camunda 8 components](#start-all-camunda-8-components)
 

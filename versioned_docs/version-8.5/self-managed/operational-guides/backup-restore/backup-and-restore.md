@@ -134,9 +134,9 @@ export CAMUNDA_RELEASE_NAME="camunda"
 # temporary overwrite of curl, can be removed with `unalias curl` again
 alias curl="kubectl run curl --rm -i -n $CAMUNDA_NAMESPACE --restart=Never --image=alpine/curl -- -sS"
 
-curl $CAMUNDA_RELEASE_NAME-operate:8080/actuator/health
+curl $CAMUNDA_RELEASE_NAME-operate:80/actuator/health
 curl $CAMUNDA_RELEASE_NAME-optimize:8092/actuator/health
-curl $CAMUNDA_RELEASE_NAME-tasklist:8080/actuator/health
+curl $CAMUNDA_RELEASE_NAME-tasklist:80/actuator/health
 curl $CAMUNDA_RELEASE_NAME-zeebe-gateway:9600/actuator/health
 curl $CAMUNDA_RELEASE_NAME-elasticsearch:9200/_cluster/health
 ```
@@ -183,7 +183,7 @@ operate:
 A call to the management API of Operate would look like the following example:
 
 ```bash
-OPERATE_MANAGEMENT_API=http://localhost:8080
+OPERATE_MANAGEMENT_API=http://localhost:9600
 
 curl $OPERATE_MANAGEMENT_API/operate/health
 ```
@@ -191,7 +191,7 @@ curl $OPERATE_MANAGEMENT_API/operate/health
 Without the `contextPath` it would just be:
 
 ```bash
-OPERATE_MANAGEMENT_API=http://localhost:8080
+OPERATE_MANAGEMENT_API=http://localhost:9600
 
 curl $OPERATE_MANAGEMENT_API/health
 ```
