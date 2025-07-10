@@ -88,7 +88,7 @@ By decoupling databases from Camunda, you gain greater control and customization
 
 ### High availability (HA)
 
-High availability (HA) ensures that a system remains operational and accessible even in the event of component failures. While all components are equipped to be run in a highly available manner. Optimize requires extra considerations when run in HA mode as the importer / archiver should only run once across all replicas. Related settings can be found as part of the [Optimize configuration](/self-managed/optimize-deployment/configuration/system-configuration-platform-8.md/#general-settings).
+High availability (HA) ensures that a system remains operational and accessible even in the event of component failures. While all components are equipped to be run in a highly available manner. Optimize requires extra considerations when run in HA mode as the importer / archiver should only run once across all replicas. Related settings can be found as part of the [Optimize configuration](/self-managed/optimize-deployment/configuration/system-configuration-platform-8.md#general-settings).
 
 While high availability is one part of the increased fault tolerance and resilience, you should also consider regional or zonal placement of your workloads.
 
