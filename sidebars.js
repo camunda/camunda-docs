@@ -1104,6 +1104,14 @@ module.exports = {
                 //   ],
                 // },
                 {
+                  Authentication: [
+                    "self-managed/installation-methods/helm/configure/auth/authentication",
+                    "self-managed/installation-methods/helm/configure/auth/authentication-oidc",
+                    "self-managed/installation-methods/helm/configure/auth/authentication-keycloak",
+                    "self-managed/installation-methods/helm/configure/auth/authentication-basic",
+                  ],
+                },
+                {
                   Database: [
                     {
                       Elasticsearch: [
