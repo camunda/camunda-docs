@@ -1146,14 +1146,9 @@ module.exports = {
             //cloud providers
           ],
         },
+        "self-managed/installation-methods/docker/docker",
         {
-          Docker: ["self-managed/installation-methods/docker/docker"],
-        },
-        {
-          Manual: [
-            "self-managed/installation-methods/manual/manual-deploy",
-            "self-managed/installation-methods/manual/manual-install",
-          ],
+          Manual: ["self-managed/installation-methods/manual/manual-install"],
         },
       ],
     },
@@ -1243,7 +1238,7 @@ module.exports = {
           label: "Manual JAR",
           link: {
             type: "doc",
-            id: "self-managed/setup/deploy/amazon/aws-ec2",
+            id: "self-managed/reference-architecture/manual",
           },
           items: ["self-managed/setup/deploy/amazon/aws-ec2"],
         },

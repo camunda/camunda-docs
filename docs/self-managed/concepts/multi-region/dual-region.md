@@ -29,7 +29,7 @@ In an **active-passive** setup, one instance or region is designated as the acti
 
 :::caution
 
-Running dual-region setups requires developing, testing, and executing custom [operational procedures](./../../operational-guides/multi-region/dual-region-ops.md) matching your environments. This page outlines key points to consider.
+Running dual-region setups requires developing, testing, and executing custom [operational procedures](/self-managed/installation-methods/helm/operational-tasks/dual-region-ops.md) matching your environments. This page outlines key points to consider.
 
 :::
 
@@ -150,10 +150,10 @@ In a dual-region setup, a loss of a region will invariably affect Camunda 8, reg
 
 This means the Zeebe stretch cluster will not have a quorum when half of its brokers are not reachable anymore and will stop processing any new data. This will also affect the components, as they cannot update or push new workflows. Essentially, this means the workflow engine will halt until the region failover procedure is complete.
 
-The [operational procedure](./../../operational-guides/multi-region/dual-region-ops.md) looks in detail at a recovery from a region loss and how to long-term fully re-establish the lost region.
+The [operational procedure](/self-managed/installation-methods/helm/operational-tasks/dual-region-ops.md) looks in detail at a recovery from a region loss and how to long-term fully re-establish the lost region.
 
 :::caution
-Customers are expected to proactively monitor for regional failures and take ownership of executing the necessary [operational procedures](./../../operational-guides/multi-region/dual-region-ops.md) to ensure smooth recovery and failover.
+Customers are expected to proactively monitor for regional failures and take ownership of executing the necessary [operational procedures](/self-managed/installation-methods/helm/operational-tasks/dual-region-ops.md) to ensure smooth recovery and failover.
 :::
 
 ### Active region loss
@@ -166,12 +166,12 @@ The total loss of the active region results in the following:
 
 #### Steps to take in case of active region loss
 
-1. **Temporary recovery:** Follow the [operational procedure for temporary recovery](./../../operational-guides/multi-region/dual-region-ops.md#failover) to restore functionality and unblock the workflow engine.
+1. **Temporary recovery:** Follow the [operational procedure for temporary recovery](/self-managed/installation-methods/helm/operational-tasks/dual-region-ops.md#failover) to restore functionality and unblock the workflow engine.
 2. **Traffic rerouting:** Reroute traffic to the passive region, which will now become the new active region.
 3. **Data and task management:** Due to the loss of data in Operate and Tasklist:
    1. Reassign any uncompleted tasks in the lost region's Tasklist.
    2. Recreate batch operations in Operate.
-4. **Permanent region setup:** In case of permanent/complete region loss, follow the [operational procedure to create a new permanent region](./../../operational-guides/multi-region/dual-region-ops.md#failback) that will become your new passive region.
+4. **Permanent region setup:** In case of permanent/complete region loss, follow the [operational procedure to create a new permanent region](/self-managed/installation-methods/helm/operational-tasks/dual-region-ops.md#failback) that will become your new passive region.
 
 ### Passive region loss
 
@@ -181,8 +181,8 @@ The loss of the passive region results in the following:
 
 #### Steps to take in case of passive region loss
 
-1. **Temporary recovery:** Follow the [operational procedure to temporarily recover](./../../operational-guides/multi-region/dual-region-ops.md#failover) from the loss and unblock the workflow engine.
-2. **Permanent region setup:** Follow the [operational procedure to create a new permanent region](./../../operational-guides/multi-region/dual-region-ops.md#failback) that will become your new passive region.
+1. **Temporary recovery:** Follow the [operational procedure to temporarily recover](/self-managed/installation-methods/helm/operational-tasks/dual-region-ops.md#failover) from the loss and unblock the workflow engine.
+2. **Permanent region setup:** Follow the [operational procedure to create a new permanent region](/self-managed/installation-methods/helm/operational-tasks/dual-region-ops.md#failback) that will become your new passive region.
 
 :::note
 Unlike an active region loss, no data will be lost and no traffic rerouting is necessary.
@@ -213,4 +213,4 @@ The **Recovery Time Objective (RTO)** estimates are based on our internal tests 
 
 - Familiarize yourself with our [Amazon Elastic Kubernetes Service (EKS) setup guide](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md). This showcases an example blueprint setup in AWS that utilizes the managed EKS and VPC peering for a dual-region setup with Terraform.
   - The concepts in the guide are mainly cloud-agnostic, and the guide can be adopted by other cloud providers.
-- Familiarize yourself with the [operational procedure](./../../operational-guides/multi-region/dual-region-ops.md) to understand how to proceed in the case of a total region loss and how to prepare yourself to ensure smooth operations.
+- Familiarize yourself with the [operational procedure](/self-managed/installation-methods/helm/operational-tasks/dual-region-ops.md) to understand how to proceed in the case of a total region loss and how to prepare yourself to ensure smooth operations.

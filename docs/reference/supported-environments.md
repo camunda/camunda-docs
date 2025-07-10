@@ -61,7 +61,7 @@ The following are tested and supported deployment options for Kubernetes, Docker
   - [Google GKE](/self-managed/setup/deploy/gcp/google-gke.md)
 - [Red Hat OpenShift](/self-managed/setup/deploy/openshift/redhat-openshift.md)
 - [Docker](/self-managed/installation-methods/docker/docker.md) (`linux/amd64`)
-- [Manual](/self-managed/setup/deploy/local/manual.md)
+- [Manual](/self-managed/installation-methods/manual/install.md)
 
 :::note Helm chart compatibility
 Ensure the Camunda component versions are compatible with the Helm chart version as defined in the [matrix](https://helm.camunda.io/camunda-platform/version-matrix/).

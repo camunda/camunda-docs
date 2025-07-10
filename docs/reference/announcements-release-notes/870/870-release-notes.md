@@ -93,7 +93,7 @@ Automation leaders can visualize all automation projects through a single, hiera
 
 The Camunda 8 Helm chart now allows custom Kubernetes manifests to be injected into your `values.yaml`. This enables you to add additional Kubernetes resources such as ConfigMaps, Deployments, or Services into your deployment without modifying the Helm chart itself.
 
-For more information, visit the [documentation on injecting Kubernetes manifests](/self-managed/setup/guides/add-extra-manifests.md).
+For more information, visit the [documentation on injecting Kubernetes manifests](/self-managed/installation-methods/helm/configure/add-extra-manifests.md).
 
 <!--- https://github.com/camunda/product-hub/issues/2464 --->
 

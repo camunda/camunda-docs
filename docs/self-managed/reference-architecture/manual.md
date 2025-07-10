@@ -1,5 +1,5 @@
 ---
-id: manual-deploy
+id: manual
 title: "Manual JAR deployment overview"
 sidebar_label: Manual JAR
 description: "Camunda 8 Manual (Java) deployment Reference architecture home "
@@ -36,7 +36,7 @@ This section includes deployment reference architectures for manual setups:
 
 ## Architecture
 
-![Single JAR](./assets/manual-single.png)
+![Single JAR](./img/manual-single.jpg)
 
 This above diagram illustrates a single-machine deployment using the single JAR package. While simple and effective for lightweight setups, scaling to multiple machines requires careful planning.
 
