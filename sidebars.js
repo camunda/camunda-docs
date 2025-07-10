@@ -1257,7 +1257,6 @@ module.exports = {
         id: "self-managed/update/index",
       },
       items: [
-        "self-managed/setup/upgrade",
         {
           type: "category",
           label: "Update by version",
