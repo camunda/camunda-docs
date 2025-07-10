@@ -13,7 +13,7 @@ Red Hat OpenShift, a Kubernetes distribution maintained by [Red Hat](https://www
 
 Deploying Camunda 8 on Red Hat OpenShift is supported using Helm, given the appropriate configurations.
 
-However, it's important to note that the [Security Context Constraints (SCCs)](#security-context-constraints-sccs) and [Routes](./redhat-openshift.md?current-ingress=openshift-routes#using-openshift-routes) configurations might require slight deviations from the guidelines provided in the [general Helm deployment guide](/self-managed/setup/install.md).
+However, it's important to note that the [Security Context Constraints (SCCs)](#security-context-constraints-sccs) and [Routes](./redhat-openshift.md?current-ingress=openshift-routes#using-openshift-routes) configurations might require slight deviations from the guidelines provided in the [general Helm deployment guide](/self-managed/installation-methods/helm/install.md).
 
 Additional informational and high-level overview based on Kubernetes as upstream project is available on our [Kubernetes deployment reference](/self-managed/reference-architecture/kubernetes.md).
 
@@ -191,7 +191,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/opens
 
 If you find that its features aren't suitable for your needs, or if you prefer to use a Kubernetes-native Ingress controller, such as the [ingress-nginx controller](https://github.com/kubernetes/ingress-nginx), [you have that option](https://www.redhat.com/en/blog/a-guide-to-using-routes-ingress-and-gateway-apis-in-kubernetes-without-vendor-lock-in).
 
-For guidance on installing an Ingress controller, you can refer to the [Ingress Setup documentation](/self-managed/setup/guides/ingress-setup.md).
+For guidance on installing an Ingress controller, you can refer to the [Ingress Setup documentation](/self-managed/installation-methods/helm/configure/ingress-setup.md).
 
 :::note Difference between ingress-nginx and NGINX Ingress
 
@@ -236,7 +236,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/opens
 </TabItem>
 <TabItem value="no-scc" label="Permissive SCCs">
 
-To use permissive SCCs, simply install the charts as they are. Follow the [general Helm deployment guide](/self-managed/setup/install.md).
+To use permissive SCCs, simply install the charts as they are. Follow the [general Helm deployment guide](/self-managed/installation-methods/helm/install.md).
 
 ```yaml reference
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/helm-values/no-scc.yml
@@ -247,7 +247,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/opens
 
 #### Enable Enterprise components
 
-Some components are not enabled by default in this deployment. For more information on how to configure and enable these components, refer to [configuring Enterprise components and connectors](/self-managed/setup/install.md#configuring-enterprise-components-and-connectors).
+Some components are not enabled by default in this deployment. For more information on how to configure and enable these components, refer to [configuring Enterprise components and connectors](/self-managed/installation-methods/helm/install.md#configuring-enterprise-components-and-connectors).
 
 #### Fill your deployment with actual values
 
@@ -298,7 +298,7 @@ This command:
 
 :::note
 
-This guide uses `helm upgrade --install` as it runs install on initial deployment and upgrades future usage. This may make it easier for future [Camunda 8 Helm upgrades](/self-managed/setup/upgrade.md) or any other component upgrades.
+This guide uses `helm upgrade --install` as it runs install on initial deployment and upgrades future usage. This may make it easier for future [Camunda 8 Helm upgrades](/self-managed/installation-methods/helm/upgrade/upgrade.md) or any other component upgrades.
 
 :::
 

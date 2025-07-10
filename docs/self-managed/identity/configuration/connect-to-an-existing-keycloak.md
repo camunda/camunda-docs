@@ -107,7 +107,7 @@ identityKeycloak:
   enabled: false
 ```
 
-Then, use the custom values file to [deploy Camunda 8](/self-managed/setup/install.md) as usual.
+Then, use the custom values file to [deploy Camunda 8](/self-managed/installation-methods/helm/install.md) as usual.
 
 ```sh
 helm install camunda camunda/camunda-platform -f existing-keycloak-values.yaml

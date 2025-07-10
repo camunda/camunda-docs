@@ -65,7 +65,7 @@ When all partitions soft pause exporting, a successful response is received. If 
 
 ## Exporters API
 
-The Exporters API is used for [dual region deployment](/self-managed/operational-guides/multi-region/dual-region-ops.md) operations, and allows for enabling and disabling configured exporters. By default, all configured exporters are enabled.
+The Exporters API is used for [dual region deployment](/self-managed/installation-methods/helm/operational-tasks/dual-region-ops.md) operations, and allows for enabling and disabling configured exporters. By default, all configured exporters are enabled.
 
 When **enabled**, records are exported to the exporter. The log is compacted only after the records are exported. When **disabled**, records are _not_ exported to the exporter, and the log will be compacted.
 

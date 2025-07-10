@@ -18,7 +18,7 @@ Additionally, depending on whether your OpenShift clusters are managed on a clou
 
 :::caution Dual-region limits and constraints
 
-Please review our [dual-region concept documentation](./../../../concepts/multi-region/dual-region.md) to understand the limitations and constraints of this blueprint before proceeding.
+Please review our [dual-region concept documentation](/self-managed/concepts/multi-region/dual-region.md) to understand the limitations and constraints of this blueprint before proceeding.
 
 :::
 
@@ -466,7 +466,7 @@ This command:
 
 :::note
 
-This guide uses `helm upgrade --install` as it runs install on initial deployment and upgrades future usage. This may make it easier for future [Camunda 8 Helm upgrades](/self-managed/setup/upgrade.md) or any other component upgrades.
+This guide uses `helm upgrade --install` as it runs install on initial deployment and upgrades future usage. This may make it easier for future [Camunda 8 Helm upgrades](/self-managed/installation-methods/helm/upgrade/upgrade.md) or any other component upgrades.
 
 :::
 
@@ -533,7 +533,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 ## Failover
 
-Consult the generic [dual-region failover procedure](/self-managed/operational-guides/multi-region/dual-region-ops.md).
+Consult the generic [dual-region failover procedure](/self-managed/installation-methods/helm/operational-tasks/dual-region-ops.md).
 
 ## Pitfalls to avoid
 

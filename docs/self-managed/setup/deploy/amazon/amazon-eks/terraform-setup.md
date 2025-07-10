@@ -363,7 +363,7 @@ If you choose not to use this module, you'll need to either provide a managed El
 Additionally, you must delete the `opensearch.tf` file within your chosen reference as it will otherwise create the resources.
 :::
 
-The OpenSearch module creates an OpenSearch domain intended for Camunda platform. OpenSearch is a powerful alternative to Elasticsearch. For more information on using OpenSearch with Camunda, refer to the [Camunda documentation](/self-managed/setup/guides/using-existing-opensearch.md).
+The OpenSearch module creates an OpenSearch domain intended for Camunda platform. OpenSearch is a powerful alternative to Elasticsearch. For more information on using OpenSearch with Camunda, refer to the [Camunda documentation](/self-managed/installation-methods/helm/configure/database/using-existing-opensearch.md).
 
 :::note Migration to OpenSearch is not supported
 

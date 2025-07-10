@@ -24,5 +24,5 @@ Identity relies on a PostgreSQL. When running Identity with an external OIDC pro
 :::
 
 :::note
-Keycloak is started as a component in a [Docker Compose](/self-managed/setup/deploy/local/docker-compose.md) and [Helm](/self-managed/setup/install.md) Camunda 8 self-managed deployment.
+Keycloak is started as a component in a [Docker Compose](/self-managed/setup/deploy/local/docker-compose.md) and [Helm](/self-managed/installation-methods/helm/install.md) Camunda 8 self-managed deployment.
 :::

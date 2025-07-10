@@ -46,7 +46,7 @@ The snapshot period is five minutes by default but is [configurable via `snapsho
 
 ### Using Helm
 
-If your Zeebe deployment is managed by our [Helm charts](/self-managed/setup/install.md), the rolling update procedure is already automated.
+If your Zeebe deployment is managed by our [Helm charts](/self-managed/installation-methods/helm/install.md), the rolling update procedure is already automated.
 
 :::note
 Zeebe brokers are managed by a [`StatefulSet`](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#update-strategies). Zeebe Gateways are managed by a [`Deployment`](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#updating-a-deployment).
