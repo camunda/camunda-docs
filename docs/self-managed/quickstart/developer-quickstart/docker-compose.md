@@ -40,7 +40,7 @@ Running `docker compose up -d` starts all Camunda components. The [Camunda Distr
 
 - **docker-compose.yaml:** Contains all Camunda 8 Components for a full stack deployment: Orchestration cluster, connectors, Optimize, Elasticsearch, Keycloak, Web Modeler, and PostgreSQL.
 - **docker-compose-core.yaml:** Contains only Camunda 8 Orchestration cluster components and connectors.
-- **docker-compose-web-modeler.yaml:** Contains the Camunda 8 Web Modeler standalone installation. For more information, see the [Web Modeler instructions](##web-modeler).
+- **docker-compose-web-modeler.yaml:** Contains the Camunda 8 Web Modeler standalone installation. For more information, see the [Web Modeler instructions](#web-modeler).
 
 To start Camunda with an alternate configuration, specify a file using the following command:
 
