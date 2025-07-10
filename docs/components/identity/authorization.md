@@ -1,14 +1,14 @@
 ---
 id: authorization
 title: Authorization
-description: "Learn how to manage authorizations in your Orchestration cluster."
+description: "Learn how to manage authorizations in your Orchestration Cluster."
 ---
 
 Authorizations are managed through permissions that can be assigned to [users](user.md), [groups](group.md), [roles](role.md), and mappings.
 
 ## Authorization overview
 
-Camunda 8 Self-Managed [Orchestration clusters](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) use resource-based authorization control, which grants permissions to entities (like users) to perform specific actions on specified resources. For example, permissions can be set for actions such as reading, updating, creating, or deleting resources, such as process instances.
+Camunda 8 Self-Managed [Orchestration Clusters](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) use resource-based authorization control, which grants permissions to entities (like users) to perform specific actions on specified resources. For example, permissions can be set for actions such as reading, updating, creating, or deleting resources, such as process instances.
 
 A user is not granted authorizations by default, and must be explicitly granted permission to access applications or perform actions on resources. Authorizations can be enabled or disabled in Self-Managed deployments via [configuration settings](/self-managed/identity/configuration/identity-configuration-overview.md).
 

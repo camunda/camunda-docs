@@ -302,7 +302,7 @@ Check the [code conversion patterns section](./code-conversion.md) for more comp
 
 ### Refactor code
 
-You need to refactor your code to use Orchestration cluster APIs only.
+You need to refactor your code to use Orchestration Cluster APIs only.
 
 Most prominently you need to **convert any API calls to Camunda** (for example, RuntimeService) and the glue code attached to process models (for example, JavaDelegates). The [code conversion patterns](./code-conversion.md) goes into more details how to approach this. Some of those changes might be automated using [OpenRewrite recipes](https://docs.openrewrite.org/).
 
@@ -347,7 +347,7 @@ Runtime instance migration has limitations, check [migration tooling](./migratio
 
 Migrating runtime instances is only necessary if you target a big bang migration for your process solution (keep in mind that "big bang" in this context means to switch one process solution from Camunda 7 to Camunda 8 on a defined point in time - it doesn't mean that you have to migrate all your processes at once). If you drain out your Camunda 7 processes, or if they are typically very short-lived, you do not need runtime instance migration.
 
-The Data Migrator needs to access the Camunda 7 database, but just uses Orchestration cluster APIs, which means you can also use this tool when you run on SaaS.
+The Data Migrator needs to access the Camunda 7 database, but just uses Orchestration Cluster APIs, which means you can also use this tool when you run on SaaS.
 
 **Audit data (aka History)**
 

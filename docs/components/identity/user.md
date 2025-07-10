@@ -1,14 +1,14 @@
 ---
 id: user
 title: User management
-description: "Learn how to manage users in your Self-Managed Orchestration cluster."
+description: "Learn how to manage users in your Self-Managed Orchestration Cluster."
 ---
 
 :::note
 User management in Identity is only supported by Self-Managed deployments. For SaaS, see how to [connect your identity provider](/components/console/manage-organization/external-sso.md).
 :::
 
-User management is the process of creating, updating, and deleting users in your Orchestration cluster. Users can be assigned roles and permissions to access applications and perform actions on resources.
+User management is the process of creating, updating, and deleting users in your Orchestration Cluster. Users can be assigned roles and permissions to access applications and perform actions on resources.
 
 ### Create a user
 

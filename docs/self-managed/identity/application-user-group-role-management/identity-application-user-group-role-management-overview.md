@@ -33,6 +33,6 @@ You can assign roles [directly to a user](manage-roles.md#assign-a-role-to-a-use
 
 In Identity, an application represents an entity that can request Identity to authenticate a user or a service. Camunda 8 has a set of preconfigured applications, but as a user of Identity you can also add your own Applications.
 
-For example, you can provide a service with M2M access to a Orchestration cluster API, such as a custom job worker.
+For example, you can provide a service with M2M access to a Orchestration Cluster API, such as a custom job worker.
 
 - [Manage applications](./applications.md)

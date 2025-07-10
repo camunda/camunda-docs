@@ -7,7 +7,7 @@ description: "All communication from a client to a broker must first pass throug
 
 :::danger
 
-Filters are only applied to the Orchestration cluster REST API of the gateway, and do not affect any gRPC calls.
+Filters are only applied to the Orchestration Cluster REST API of the gateway, and do not affect any gRPC calls.
 
 For gRPC-related middleware, review the [gateway interceptors documentation](interceptors.md).
 

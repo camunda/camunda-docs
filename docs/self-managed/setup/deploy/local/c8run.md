@@ -18,7 +18,7 @@ The Camunda 8 Run script allows you to install and start a simplified, single-ap
 
 Camunda 8 Run includes the following:
 
-- Orchestration cluster
+- Orchestration Cluster
 - Connectors
 - Elasticsearch
 
@@ -131,7 +131,7 @@ Once configured correctly, your connectors are available for use in Modeler.
 
 All served Camunda APIs are by default **unprotected** in Camunda 8 Run, and can be accessed without any authentication credentials or token provided.
 
-The available APIs are [Tasklist V1](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md), [Operate V1](/apis-tools/operate-api/overview.md), [Zeebe gRPC](/apis-tools/zeebe-api/grpc.md) and the unified [Orchestration cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md)
+The available APIs are [Tasklist V1](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md), [Operate V1](/apis-tools/operate-api/overview.md), [Zeebe gRPC](/apis-tools/zeebe-api/grpc.md) and the unified [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md)
 
 ### Enable authentication and authorization
 
