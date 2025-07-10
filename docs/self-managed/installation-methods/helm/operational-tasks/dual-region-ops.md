@@ -41,7 +41,7 @@ This operational blueprint procedure is a step-by-step guide on how to restore o
 The operational procedure builds on top of the [dual-region AWS setup guidance](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md), but is generally applicable for any dual-region setup.
 It has been also validated for the [OpenShift dual-region setup guidance](/self-managed/setup/deploy/openshift/dual-region.md).
 
-Before proceeding with the operational procedure, thoroughly review and understand the contents of the [dual-region concept page](./../../concepts/multi-region/dual-region.md). This page outlines various limitations and requirements pertinent to the procedure, which are crucial for successful execution.
+Before proceeding with the operational procedure, thoroughly review and understand the contents of the [dual-region concept page](/self-managed/concepts/multi-region/dual-region.md). This page outlines various limitations and requirements pertinent to the procedure, which are crucial for successful execution.
 
 ## Disclaimer
 
@@ -185,7 +185,7 @@ The following alternatives to port-forwarding are possible:
 
 In our example, we went with port-forwarding to a localhost, but other alternatives can also be used.
 
-1. Use the [Orchestration cluster REST API](../../../apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) to retrieve the list of the remaining brokers
+1. Use the [Orchestration cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) to retrieve the list of the remaining brokers
 
    ```bash
    kubectl --context $CLUSTER_SURVIVING port-forward services/$CAMUNDA_RELEASE_NAME-zeebe-gateway 8080:8080 -n $CAMUNDA_NAMESPACE_SURVIVING
@@ -324,13 +324,13 @@ In our example, we went with port-forwarding to a localhost, but other alternati
    </summary>
 </details>
 
-2.  Port-forward the service of the Zeebe Gateway to access the [management REST API](../../zeebe-deployment/configuration/gateway.md#managementserver)
+1.  Port-forward the service of the Zeebe Gateway to access the [management REST API](/self-managed/zeebe-deployment/configuration/gateway.md#managementserver)
 
     ```bash
     kubectl --context $CLUSTER_SURVIVING port-forward services/$CAMUNDA_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
     ```
 
-3.  Based on the [Cluster Scaling APIs](../../zeebe-deployment/operations/cluster-scaling.md), send a request to the Zeebe Gateway to redistribute the load to the remaining brokers, thereby removing the lost brokers.
+2.  Based on the [Cluster Scaling APIs](/self-managed/zeebe-deployment/operations/cluster-scaling.md), send a request to the Zeebe Gateway to redistribute the load to the remaining brokers, thereby removing the lost brokers.
     Depending on which region was lost, the load must be redistributed to the remaining brokers, either the even or odd numbered ones. In our example, we have lost `region 1` and with it our uneven brokers. This means we will have to redistribute to our existing even brokers. Make sure to only run the correct one based on the surviving region's brokers.
 
   <Tabs queryString="lost-region">
@@ -538,7 +538,7 @@ desired={<Six viewBox="140 40 680 500" />}
 
 #### Procedure
 
-1. Port-forward the service of the Zeebe Gateway for the [management REST API](../../zeebe-deployment/configuration/gateway.md#managementserver)
+1. Port-forward the service of the Zeebe Gateway for the [management REST API](/self-managed/zeebe-deployment/configuration/gateway.md#managementserver)
 
    ```bash
    kubectl --context $CLUSTER_SURVIVING port-forward services/$CAMUNDA_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING

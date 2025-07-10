@@ -33,7 +33,7 @@ Multi-tenancy is disabled by default and is not covered further in this guide. I
 
 :::caution Optimize compatibility with OpenSearch
 
-**Migration:** The migration step will be disabled during the installation. For more information, refer to [using Amazon OpenSearch Service](/self-managed/setup/guides/using-existing-opensearch.md).
+**Migration:** The migration step will be disabled during the installation. For more information, refer to [using Amazon OpenSearch Service](/self-managed/installation-methods/helm/configure/database/using-existing-opensearch.md).
 
 :::
 
@@ -651,10 +651,6 @@ The following values are required for OAuth authentication:
 
 </TabItem>
 </Tabs>
-
-## Test the installation with payment example application
-
-To test your installation with the deployment of a sample application, refer to the [installing payment example guide](../../../guides/installing-payment-example.md).
 
 ## Advanced topics
 

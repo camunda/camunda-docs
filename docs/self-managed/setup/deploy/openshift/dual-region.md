@@ -18,7 +18,7 @@ Additionally, depending on whether your OpenShift clusters are managed on a clou
 
 :::caution Dual-region limits and constraints
 
-Please review our [dual-region concept documentation](./../../../concepts/multi-region/dual-region.md) to understand the limitations and constraints of this blueprint before proceeding.
+Please review our [dual-region concept documentation](/self-managed/concepts/multi-region/dual-region.md) to understand the limitations and constraints of this blueprint before proceeding.
 
 :::
 

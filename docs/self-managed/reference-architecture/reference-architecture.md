@@ -133,7 +133,7 @@ For organizations that prefer traditional infrastructure, reference architecture
 - Applicable for high availability but requires more detailed planning.
 - Best for teams with expertise in managing physical servers or virtual machines.
 
-For more information and guides, see the reference for [manual setups](/self-managed/reference-architecture/manual.md).
+For more information and guides, see the reference for [manual setups](/self-managed/installation-methods/index.md).
 
 ### Local development
 

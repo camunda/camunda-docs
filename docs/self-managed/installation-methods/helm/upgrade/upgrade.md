@@ -231,11 +231,11 @@ elasticsearch:
 
 #### Enabling external Elasticsearch
 
-In v10.0.0, it is possible to use external Elasticsearch. For more information on how to set up external Elasticsearch, refer to [using existing Elasticsearch](./guides/using-existing-elasticsearch.md).
+In v10.0.0, it is possible to use external Elasticsearch. For more information on how to set up external Elasticsearch, refer to [using existing Elasticsearch](/self-managed/installation-methods/helm/configure/database/elasticsearch/using-existing-elasticsearch.md).
 
 #### Enabling external OpenSearch
 
-In v10.0.0, it is possible to use external OpenSearch. For more information on how to set up external OpenSearch, refer to [using external OpenSearch](./guides/using-existing-opensearch.md).
+In v10.0.0, it is possible to use external OpenSearch. For more information on how to set up external OpenSearch, refer to [using external OpenSearch](/self-managed/installation-methods/helm/configure/database/using-existing-opensearch.md).
 
 </TabItem>
 

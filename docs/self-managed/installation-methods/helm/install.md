@@ -48,7 +48,7 @@ The following charts will be installed as part of Camunda 8 Self-Managed:
   - _Note_: The chart is disabled by default and needs to be [enabled explicitly](#install-console).
 
 :::note Amazon OpenSearch Helm support
-The existing Helm charts use the Elasticsearch configurations by default. The Helm charts can still be used to connect to Amazon OpenSearch Service. Refer to [using Amazon OpenSearch Service](/self-managed/setup/guides/using-existing-opensearch.md).
+The existing Helm charts use the Elasticsearch configurations by default. The Helm charts can still be used to connect to Amazon OpenSearch Service. Refer to [using Amazon OpenSearch Service](/self-managed/installation-methods/helm/configure/database/using-existing-opensearch.md).
 
 **Zeebe**: Configure the [OpenSearch exporter](/self-managed/zeebe-deployment/exporters/opensearch-exporter.md).
 

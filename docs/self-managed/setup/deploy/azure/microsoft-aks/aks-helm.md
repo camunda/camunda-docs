@@ -316,10 +316,6 @@ The following values are required for OAuth authentication:
 </TabItem>
 </Tabs>
 
-## Test the installation with payment example application
-
-To test your installation with the deployment of a sample application, refer to the [installing payment example guide](../../../guides/installing-payment-example.md).
-
 ## Advanced topics
 
 The following are some advanced configuration topics to consider for your cluster:

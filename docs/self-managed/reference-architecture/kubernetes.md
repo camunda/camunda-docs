@@ -51,7 +51,7 @@ The database is not depicted in the diagram, as we recommend handling it externa
 The reference architecture overview describes the difference between the [Orchestration cluster and Web Modeler and Console](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console), and provides additional information on application communication.
 :::
 
-A [multi-namespace deployment](/self-managed/setup/guides/multi-namespace-deployment.md) is recommended. For more information, see the [components](#components) section.
+A [multi-namespace deployment](/self-managed/installation-methods/helm/configure/multi-namespace-deployment.md) is recommended. For more information, see the [components](#components) section.
 
 The following depictions provide a simplified view of the deployed namespaces using the [Camunda 8 Helm chart](/self-managed/installation-methods/helm/install.md). To keep the diagram clear, ConfigMaps, Secrets, RBAC, and ReplicaSets have been omitted.
 
@@ -71,7 +71,7 @@ Zeebe Brokers also have a service but are not directly exposed externally; all r
 
 Web Modeler, Console, and Identity are deployed as **Deployments** since they are stateless, with data stored externally in a SQL database. This allows them to be easily scaled as needed.
 
-The namespace has its own Ingress resource, as those are namespace-bound and not cluster-wide resources. This means you will have to use a different subdomain for each Ingress resource. For more details, refer to the [multi-namespace deployment guide](/self-managed/setup/guides/multi-namespace-deployment.md).
+The namespace has its own Ingress resource, as those are namespace-bound and not cluster-wide resources. This means you will have to use a different subdomain for each Ingress resource. For more details, refer to the [multi-namespace deployment guide](/self-managed/installation-methods/helm/configure/multi-namespace-deployment.md).
 
 ### High availability (HA)
 
