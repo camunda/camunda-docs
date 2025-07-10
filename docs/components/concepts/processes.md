@@ -8,7 +8,7 @@ A process is a defined sequence of distinct steps or tasks representing your bus
 
 At large, process orchestration is a technology that coordinates the various moving parts (or endpoints) of a business process, and sometimes even ties multiple processes together. Process orchestration helps you work with the people, systems, and devices you already have—while achieving goals around end-to-end process automation.
 
-For example, with Camunda you can [orchestrate human tasks](../../guides/getting-started-orchestrate-human-tasks.md), [microservices](/guides/getting-started-orchestrate-microservices.md), and [APIs](/guides/getting-started-orchestrate-apis.md).
+For example, with Camunda you can [orchestrate human tasks](../../guides/getting-started-orchestrate-human-tasks.md), [microservices](/guides/getting-started-example.md), and [APIs](/guides/getting-started-orchestrate-apis.md).
 
 A **[job worker](./job-workers.md)** implements the business logic required to complete a task. You can choose to write a worker as a microservice, or also as part of a classical 3-tier application, as a \(lambda\) function, via command line tools, etc.
 

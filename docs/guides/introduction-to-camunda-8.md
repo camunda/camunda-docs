@@ -34,7 +34,7 @@ Below are two excellent starting points if you're new to Camunda: modeling a pro
 
 <DocCardList items={[{type:"link", href:"/docs/next/components/modeler/about-modeler/", label: "Model your first process", docId:"components/modeler/about-modeler"},
 {
-type:"link", href:"/docs/next/guides/getting-started-java-spring/", label: "Get started with Spring", docId:"guides/getting-started-java-spring",
+type:"link", href:"/docs/next/guides/getting-started-example/", label: "Get started with Spring", docId:"guides/getting-started-example",
 }
 ]}/>
 

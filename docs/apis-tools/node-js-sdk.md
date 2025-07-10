@@ -236,7 +236,7 @@ The handler must return a job completion function - `fail`, `complete`, or `forw
 
 ### Create a programmatic user task worker
 
-Our process has a [user task](/guides/getting-started-orchestrate-human-tasks.md) after the [service task](/guides/getting-started-orchestrate-microservices.md). The service task worker will complete the service task job, and we will complete the user task using the Tasklist API client.
+Our process has a [user task](/guides/getting-started-orchestrate-human-tasks.md) after the service task. The service task worker will complete the service task job, and we will complete the user task using the Tasklist API client.
 
 Add the following code beneath the service worker code:
 

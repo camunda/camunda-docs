@@ -1,6 +1,6 @@
 ---
 id: getting-started-example
-title: "Quickstart: Run your first Camunda 8 project locally"
+title: "Run your first Camunda 8 project locally"
 sidebar_label: Run your first local project
 description: "Use an example project with Spring Boot or Node.js to interact with a local Camunda 8 installation."
 keywords: [java, spring, spring camunda, getting started, user guide, tutorial]
@@ -9,7 +9,10 @@ keywords: [java, spring, spring camunda, getting started, user guide, tutorial]
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-Follow this guide to download and run an example project with a local instance of Camunda 8.
+<span class="badge badge--beginner">Beginner</span>
+<span class="badge badge--medium">1 hour</span>
+
+Follow this guide to download and run an example project with a local instance of Camunda 8 using Spring Boot or Node.js.
 
 ## Getting started with an example project
 
@@ -233,8 +236,6 @@ Your active process instance in Operate will now transition to completed. You ha
 4. Completing the service tasks in the process instance using job workers.
 
 ## Next steps
-
-To create a new Spring project, refer to [our guide using Spring](/guides/getting-started-java-spring.md).
 
 For further information about the Node.js SDK, refer to [the Camunda 8 JavaScript SDK API documentation](https://camunda.github.io/camunda-8-js-sdk/).
 

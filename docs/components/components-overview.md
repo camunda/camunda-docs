@@ -37,7 +37,7 @@ With Camunda 8, orchestrate, observe, and analyze microservices and human tasks.
 
 An end-to-end, automated business process typically requires multiple microservices to achieve an outcome. Software developers and architects often struggle to effectively communicate across multiple microservices, monitor their performance, and identify and resolve problems when they occur.
 
-Camunda enables organizations to overcome these issues without compromising autonomy and the coupling of microservices. Camunda offers speed, scale, and security when paired with [microservices](/guides/getting-started-orchestrate-microservices.md), without the overhead of building and maintaining a daunting infrastructure.
+Camunda enables organizations to overcome these issues without compromising autonomy and the coupling of microservices. Camunda offers speed, scale, and security when paired with microservices, without the overhead of building and maintaining a daunting infrastructure.
 
 In addition to microservices, many organizations have mission-critical processes that require people to perform tasks manually. An end-to-end business process often requires the combination of manual work with automated steps in a unified workflow.
 
