@@ -1081,13 +1081,13 @@ module.exports = {
           items: [
             "self-managed/installation-methods/helm/install",
             //chart parameters
-            //production  guide
+            //production guide
             {
               type: "category",
               label: "Configure",
               link: {
                 type: "doc",
-                id: "self-managed/installation-methods/helm/configure/index.md",
+                id: "self-managed/installation-methods/helm/configure/index",
               },
               items: [
                 // {
@@ -1107,8 +1107,8 @@ module.exports = {
                   Database: [
                     {
                       Elasticsearch: [
-                        "self-managed/installation-methods/helm/configure/database/using-existing-elasticsearch",
-                        "self-managed/installation-methods/helm/configure/database/prefix-elasticsearch-indices",
+                        "self-managed/installation-methods/helm/configure/database/elasticsearch/using-existing-elasticsearch",
+                        "self-managed/installation-methods/helm/configure/database/elasticsearch/prefix-elasticsearch-indices",
                       ],
                     },
                     "self-managed/installation-methods/helm/configure/database/using-existing-opensearch",
@@ -1130,7 +1130,7 @@ module.exports = {
                 "self-managed/installation-methods/helm/configure/running-custom-connectors",
                 //certificates
                 "self-managed/installation-methods/helm/configure/add-extra-manifests",
-                //configure components in helm charts
+                "self-managed/installation-methods/helm/configure/application-configs",
               ],
             },
             // {
@@ -1243,7 +1243,7 @@ module.exports = {
           label: "Manual JAR",
           link: {
             type: "doc",
-            id: "self-managed/reference-architecture/manual",
+            id: "self-managed/setup/deploy/amazon/aws-ec2",
           },
           items: ["self-managed/setup/deploy/amazon/aws-ec2"],
         },
@@ -1286,30 +1286,7 @@ module.exports = {
       ],
     },
     {
-      type: "category",
-      label: "Configure",
-      link: {
-        type: "doc",
-        id: "self-managed/setup/guides/guides",
-      },
-      items: [
-        "self-managed/setup/guides/accessing-components-without-ingress",
-        "self-managed/setup/guides/ingress-setup",
-        "self-managed/setup/guides/using-existing-elasticsearch",
-        "self-managed/setup/guides/using-existing-opensearch",
-        "self-managed/setup/guides/configure-db-custom-headers",
-        "self-managed/setup/guides/air-gapped-installation",
-        "self-managed/setup/guides/running-custom-connectors",
-        "self-managed/setup/guides/multi-namespace-deployment",
-        "self-managed/setup/guides/installing-payment-app-example",
-        "self-managed/setup/guides/add-extra-manifests",
-        "self-managed/setup/guides/prefix-elasticsearch-indices",
-        "self-managed/setup/guides/secret-management",
-      ],
-    },
-    {
       "Operational guides": [
-        "self-managed/operational-guides/configure-multi-tenancy",
         {
           type: "category",
           label: "Backup and restore",
@@ -1327,18 +1304,8 @@ module.exports = {
         "self-managed/operational-guides/data-purge",
         {
           type: "doc",
-          label: "Configure components",
-          id: "self-managed/operational-guides/application-configs",
-        },
-        {
-          type: "doc",
           label: "Configure flow control",
           id: "self-managed/operational-guides/configure-flow-control/configure-flow-control",
-        },
-        {
-          "Multi-region": [
-            "self-managed/operational-guides/multi-region/dual-region-operational-procedure",
-          ],
         },
         {
           Monitoring: [
@@ -1349,7 +1316,6 @@ module.exports = {
         {
           Troubleshooting: [
             "self-managed/operational-guides/troubleshooting/troubleshooting",
-            "self-managed/operational-guides/troubleshooting/diagnostics",
           ],
         },
       ],
