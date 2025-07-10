@@ -39,7 +39,7 @@ Gateways are updated with the same procedure, updating each replica one by one.
 
 Clients can be updated according to your requirements and environment, for example by simply deploying a new version of your worker applications.
 
-For disaster recovery, you may want to take [backups](/self-managed/components/components-upgrade/backup-restore/backup-and-restore.md) before the update.
+For disaster recovery, you may want to take [backups](/self-managed/operational-guides/backup-restore/backup-and-restore.md) before the update.
 
 If you plan to immediately update again, wait to give all brokers a chance to take new snapshots.
 The snapshot period is five minutes by default but is [configurable via `snapshotPeriod`](../configuration/broker.md#zeebebrokerdata).

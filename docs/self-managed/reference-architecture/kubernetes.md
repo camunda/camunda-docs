@@ -32,7 +32,7 @@ Red Hat OpenShift on AWS (ROSA)
 - [ROSA single-region](/self-managed/setup/deploy/amazon/openshift/terraform-setup.md): a standard production setup.
 - [ROSA dual-region](/self-managed/setup/deploy/amazon/openshift/terraform-setup-dual-region.md): an advanced use case utilizing two regions.
 
-For general deployment pitfalls, visit the [deployment troubleshooting guide](/self-managed/components/components-upgrade/troubleshooting/troubleshooting.md).
+For general deployment pitfalls, visit the [deployment troubleshooting guide](/self-managed/operational-guides/troubleshooting/troubleshooting.md).
 
 ## Architecture
 
@@ -204,7 +204,7 @@ For more information, see the [reference architecture overview](/self-managed/re
 
 Sizing is use case dependent. It is crucial to conduct thorough load testing and benchmark tests to determine the appropriate size specific to your environment and use case.
 
-Once deployed, the included [Grafana dashboard](/self-managed/components/components-upgrade/monitoring/metrics.md#grafana) can be used with [Prometheus](https://prometheus.io/) to address bottlenecks when exporting data from Zeebe to your database.
+Once deployed, the included [Grafana dashboard](/self-managed/operational-guides/monitoring/metrics.md#grafana) can be used with [Prometheus](https://prometheus.io/) to address bottlenecks when exporting data from Zeebe to your database.
 
 ## Distributions
 

@@ -303,13 +303,13 @@ The update process can be automated using the `all-in-one-install.sh` script, wh
 
 ### Monitoring
 
-Camunda metrics are exposed by default using the Prometheus format. To learn more about how to scrape Camunda 8, see [metrics](/self-managed/components/components-upgrade/monitoring/metrics.md).
+Camunda metrics are exposed by default using the Prometheus format. To learn more about how to scrape Camunda 8, see [metrics](/self-managed/operational-guides/monitoring/metrics.md).
 
 In an AWS environment, you can leverage CloudWatch not only for log collection but also for gathering [Prometheus metrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContainerInsights-Prometheus-metrics.html). It's important to note that while Camunda natively supports Grafana and Prometheus, integrating CloudWatch for metric visualization is possible but requires additional configuration.
 
 ### Backups
 
-Please conduct the general topic of backups in the [documentation](/self-managed/components/components-upgrade/backup-restore/backup-and-restore.md).
+Please conduct the general topic of backups in the [documentation](/self-managed/operational-guides/backup-restore/backup-and-restore.md).
 
 With AWS as chosen platform you can utilize [S3](https://aws.amazon.com/s3/) for the backups both for Zeebe and Elasticsearch.
 
@@ -317,7 +317,7 @@ If you are using a managed OpenSearch domain instead, you should check out the [
 
 ## Troubleshooting
 
-Please conduct the general topic of troubleshooting in the [documentation](/self-managed/components/components-upgrade/troubleshooting/troubleshooting.md).
+Please conduct the general topic of troubleshooting in the [documentation](/self-managed/operational-guides/troubleshooting/troubleshooting.md).
 
 <!-- Optional stuff, just keeping it here for now -->
 

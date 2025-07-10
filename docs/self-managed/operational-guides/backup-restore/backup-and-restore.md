@@ -20,7 +20,7 @@ To take backups, you must first configure backup storage.
 
 Operate, Tasklist, and Optimize use Elasticsearch as backend storage and use the snapshot feature of Elasticsearch for backing up their state. Therefore, you must configure a [snapshot repository](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-register-repository.html) in Elasticsearch.
 
-Zeebe stores its backup to an external storage and must be configured before the cluster is started. Refer to [Zeebe backup configuration](/self-managed/components/components-upgrade/backup-restore/zeebe-backup-and-restore.md#configuration) for additional information.
+Zeebe stores its backup to an external storage and must be configured before the cluster is started. Refer to [Zeebe backup configuration](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md#configuration) for additional information.
 
 Optimize uses its [own backup process](./optimize-backup.md) and needs to be executed separately to successfully make a backup. Depending on your deployment configuration, you may not have Optimize deployed. It is safe to ignore the backup instructions for Optimize if it is not deployed.
 
@@ -35,9 +35,9 @@ We recommend using the timestamp as the backup ID.
 To back up a Camunda 8 cluster, execute the following sequential steps:
 
 1. Soft pause exporting in Zeebe. See the [Zeebe management API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md).
-2. Trigger a backup `x` of the web applications. See how to take a [web application backup](/self-managed/components/components-upgrade/backup-restore/webapps-backup.md).
+2. Trigger a backup `x` of the web applications. See how to take a [web application backup](./webapps-backup.md).
 3. Trigger a backup `x` of Optimize. See how to take an [Optimize backup](./optimize-backup.md)
-4. Wait until the backup `x` of web applications is complete. See how to [monitor a web application backup](/self-managed/components/components-upgrade/backup-restore/webapps-backup.md).
+4. Wait until the backup `x` of web applications is complete. See how to [monitor a web application backup](./webapps-backup.md).
 5. Wait until the backup `x` of Optimize is complete. See how to [monitor an Optimize backup](./optimize-backup.md).
 6. Take a backup `x` of the exported Zeebe records in Elasticsearch using the Elasticsearch Snapshots API.
 
@@ -54,8 +54,8 @@ PUT /_snapshot/my_repository/camunda_zeebe_records_backup_x
 By default, the indices are prefixed with `zeebe-record`. If you have configured a different prefix when configuring Elasticsearch exporter in Zeebe, use this instead.
 
 7. Wait until the backup `x` of the exported Zeebe records is complete before proceeding.
-8. Take a backup `x` of Zeebe. See how to take a [Zeebe backup](/self-managed/components/components-upgrade/backup-restore/zeebe-backup-and-restore.md).
-9. Wait until the backup `x` of Zeebe is completed before proceeding. See how to [monitor a Zeebe backup](/self-managed/components/components-upgrade/backup-restore/zeebe-backup-and-restore.md).
+8. Take a backup `x` of Zeebe. See how to take a [Zeebe backup](./zeebe-backup-and-restore.md).
+9. Wait until the backup `x` of Zeebe is completed before proceeding. See how to [monitor a Zeebe backup](./zeebe-backup-and-restore.md).
 10. Resume exporting in Zeebe. See [Zeebe management API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md).
 
 :::note
@@ -70,8 +70,8 @@ To restore a Camunda 8 cluster from a backup, all components must be restored fr
 2. Confirm proper configuration (such as shards, replicas count, etc.)
 3. Stop Operate, Tasklist, and Optimize.
 4. Delete all indices.
-5. Restore the state of the [web applications](/self-managed/components/components-upgrade/backup-restore/webapps-backup.md) and [Optimize](./optimize-backup.md).
+5. Restore the state of the [web applications](./webapps-backup.md) and [Optimize](./optimize-backup.md).
 6. Restore `zeebe-records*` indices from Elasticsearch snapshot.
 7. Delete the data directory of all Zeebe brokers
-8. Restore [Zeebe](/self-managed/components/components-upgrade/backup-restore/zeebe-backup-and-restore.md).
+8. Restore [Zeebe](./zeebe-backup-and-restore.md).
 9. Start Zeebe, Operate, Tasklist, and Optimize.

@@ -322,7 +322,7 @@ In this setup, the domain used for gRPC communication with Zeebe is slightly dif
 
 ## Pitfalls to avoid
 
-For general deployment pitfalls, visit the [deployment troubleshooting guide](/self-managed/components/components-upgrade/troubleshooting/troubleshooting.md).
+For general deployment pitfalls, visit the [deployment troubleshooting guide](/self-managed/operational-guides/troubleshooting/troubleshooting.md).
 
 ### Security Context Constraints (SCCs)
 

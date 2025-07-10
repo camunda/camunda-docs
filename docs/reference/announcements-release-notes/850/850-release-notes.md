@@ -304,4 +304,4 @@ Users now have the option to [automatically select](/components/tasklist/usergui
 
 <!-- https://github.com/camunda/product-hub/issues/1785 -->
 
-Zeebe Hot Backups can now be stored in Azure Cloud Storage. This means you can now take a [Hot Backup](/self-managed/components/components-upgrade/backup-restore/backup-and-restore.md) with your Azure Cloud Storage for Zeebe, Operate, Tasklist and Optimize since Elasticsearch supports Azure Cloud Storage as well.
+Zeebe Hot Backups can now be stored in Azure Cloud Storage. This means you can now take a [Hot Backup](/self-managed/operational-guides/backup-restore/backup-and-restore.md) with your Azure Cloud Storage for Zeebe, Operate, Tasklist and Optimize since Elasticsearch supports Azure Cloud Storage as well.

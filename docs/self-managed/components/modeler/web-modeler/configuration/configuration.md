@@ -233,7 +233,7 @@ The `webapp` component sends certain events (e.g. "user opened diagram", "user l
 
 :::info
 
-- For `LOG_LEVEL_*` options, see [understanding log levels](/self-managed/components/components-upgrade/monitoring/log-levels.md#understanding-log-levels).
+- For `LOG_LEVEL_*` options, see [understanding log levels](/self-managed/operational-guides/monitoring/log-levels.md#understanding-log-levels).
 - For details on customizing the `webapp` logging output, see [logging configuration for the webapp component](./logging.md#logging-configuration-for-the-webapp-component).
 
 :::

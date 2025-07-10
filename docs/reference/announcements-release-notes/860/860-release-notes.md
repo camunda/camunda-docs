@@ -25,7 +25,7 @@ Flow control is now enabled by default in Camunda 8.6 SaaS. This change ensures 
 
 These new configuration defaults are tailored to the cluster size and optimized for a stable performance. However, the cluster might reject requests if the load is too high with this change. The error message for this is `Failed to write client request to partition X, because the write limit is exhausted`. If the error persists, this may be a sign of underlining issues, or a need to adjust the cluster size.
 
-For more information on how to configure flow control for a Self-Managed cluster, visit the [flow control documentation](/self-managed/components/components-upgrade/configure-flow-control/configure-flow-control.md).
+For more information on how to configure flow control for a Self-Managed cluster, visit the [flow control documentation](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md).
 
 ### Support for Amazon OpenSearch for Optimize
 
@@ -288,7 +288,7 @@ If activated, you might see more backpressure in cases where exporters are not e
 
 - SaaS: The new write limit is automatically applied to Saas default hosting packages.
 - Self-Managed: Limiting is disabled by default. If required, you can
-  activate and tune the write limit. See the [operational guide](/self-managed/components/components-upgrade/configure-flow-control/configure-flow-control.md) for more
+  activate and tune the write limit. See the [operational guide](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md) for more
   information.
 
 ## 8.6.0-alpha4
