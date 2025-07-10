@@ -71,7 +71,7 @@ Additionally, Web Modeler and Console require the following:
 - [Management Identity](/self-managed/identity/what-is-identity.md): A service for managing user authentication and authorization.
 
 Unlike the orchestration cluster, Web Modeler and Console run a separate and dedicated Management Identity deployment. This is not the same as the embedded Identity in the Orchestration cluster. Optimize also relies on the Management Identity and will not function without it. It is not compatible with the embedded Orchestration cluster Identity.
-For production environments, using an external [identity provider](/self-managed/setup/guides/connect-to-an-oidc-provider.md) is recommended to connect the two environments.
+For production environments, using an external [identity provider](/self-managed/installation-methods/helm/configure/connect-to-an-oidc-provider.md) is recommended to connect the two environments.
 
 ### Databases
 
