@@ -8,9 +8,9 @@ description: "In Camunda 8, user task listeners allow you to run custom logic wh
 <span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--medium">Time estimate: 35 minutes</span>
 
-import SaasPrereqs from './react-components/\_saas-prerequisites.md'
-import CreateCluster from '../components/react-components/create-cluster.md';
-import CreateApiCredentials from '../components/react-components/create-api-credentials.md';
+import SaasPrereqs from '../../guides/react-components/\_saas-prerequisites.md'
+import CreateCluster from '../../components/react-components/create-cluster.md';
+import CreateApiCredentials from '../../components/react-components/create-api-credentials.md';
 
 In Camunda 8, **user task listeners** allow you to run custom logic in response to changes to a user task, such as when the `creating`, `assigning`, or `completing` event occurs.
 
@@ -32,7 +32,7 @@ You must have access to a Camunda 8 SaaS account.
 </details>
 
 You must also know how to model a process with a user task.  
-If you haven't done this before, first follow the steps in our guide to [get started with human task orchestration](./getting-started-orchestrate-human-tasks.md).
+If you haven't done this before, first follow the steps in our guide to [get started with human task orchestration](/guides/getting-started-orchestrate-human-tasks.md).
 
 Additionally, you need the following:
 
@@ -142,4 +142,4 @@ Further, you can try the following:
 ## Additional resources and next steps
 
 - Learn more about Camunda 8 and what it can do by reading [What is Camunda 8](/components/components-overview.md) or watching our [Overview video](https://bit.ly/3TjNEm7) in Camunda Academy.
-- Get your local environment ready for development with Camunda 8 by [setting up your first development project](getting-started-example.md).
+- Get your local environment ready for development with Camunda 8 by [setting up your first development project](/guides/getting-started-example.md).
