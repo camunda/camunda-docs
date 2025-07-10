@@ -21,7 +21,7 @@ Some out-of-the-box connectors are licensed under the [Camunda Self-Managed Free
 :::
 
 :::note
-[Inbound connectors](/components/connectors/use-connectors/inbound.md) require [Operate](/self-managed/components/operate/install-and-start.md) to be deployed as part of your Camunda Self-Managed installation.
+[Inbound connectors](/components/connectors/use-connectors/inbound.md) require [Operate](/self-managed/components/orchestration-cluster/operate/install-and-start.md) to be deployed as part of your Camunda Self-Managed installation.
 If you don't use Operate with your cluster, you can still use [outbound connectors](/components/connectors/use-connectors/outbound.md).
 :::
 

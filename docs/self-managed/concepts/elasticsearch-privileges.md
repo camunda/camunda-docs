@@ -17,14 +17,14 @@ If an application cannot be granted cluster privileges, the schema manager can b
 
 ### Backup privileges
 
-To use the [backup feature](/self-managed/operational-guides/backup-restore/backup-and-restore.md), you must have snapshot privileges. You can provide these privileges to each Component before you create a backup, and then revoke them after the backup has been completed:
+To use the [backup feature](/self-managed/components-upgrade/backup-restore/backup-and-restore.md), you must have snapshot privileges. You can provide these privileges to each Component before you create a backup, and then revoke them after the backup has been completed:
 
 - `create_snapshot` - Creates a backup, or snapshot, of a running cluster.
 - `monitor_snapshot` - Provides read-only permissions to list and view snapshot details.
 
 ### Update privileges
 
-When [updating](/self-managed/operational-guides/update-guide/introduction.md) to a newer version of Camunda 8 which requires data migration, the following are required:
+When [updating](/self-managed/components-upgrade/update-guide/introduction.md) to a newer version of Camunda 8 which requires data migration, the following are required:
 
 - `manage_pipeline` - Allows any data transformations to occur when updating.
 - `manage_index_templates` - See [cluster privileges](#cluster-privileges).

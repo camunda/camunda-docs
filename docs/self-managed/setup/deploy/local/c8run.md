@@ -172,7 +172,7 @@ TLS can be enabled by providing a local file keystore using the `--keystore` arg
 
 ### Access metrics
 
-Metrics are enabled in Camunda 8 Run by default, and can be accessed at [/actuator/prometheus](http://localhost:9600/actuator/prometheus). For more information, see the [metrics](/self-managed/operational-guides/monitoring/metrics.md) documentation.
+Metrics are enabled in Camunda 8 Run by default, and can be accessed at [/actuator/prometheus](http://localhost:9600/actuator/prometheus). For more information, see the [metrics](/self-managed/components-upgrade/monitoring/metrics.md) documentation.
 
 ### Start external Elasticsearch
 

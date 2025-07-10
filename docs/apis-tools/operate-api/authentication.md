@@ -81,7 +81,7 @@ All Operate REST API requests require authentication. To authenticate, generate 
    ```
 5. Capture the value of the `access_token` property and store it as your token.
 
-See the [Operate Configuration - Authentication](/self-managed/components/operate/operate-authentication.md#identity) documentation for more information about this authentication method.
+See the [Operate Configuration - Authentication](/self-managed/components/orchestration-cluster/operate/operate-authentication.md#identity) documentation for more information about this authentication method.
 
 </TabItem>
 

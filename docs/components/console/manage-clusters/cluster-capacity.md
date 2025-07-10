@@ -87,9 +87,9 @@ If your cluster load percentage remains high even after attempts to reduce it, y
 
 ## How cluster load percentage is calculated {#load-calculation}
 
-Cluster load percentage is based on the cluster's [flow control configuration](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md).
+Cluster load percentage is based on the cluster's [flow control configuration](/self-managed/components-upgrade/configure-flow-control/configure-flow-control.md).
 
-Essentially, if flow control is configured, every partition is assigned a [write rate](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md#exporting-and-write-rate) and a [write rate limit](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md#write-rate-limit).
+Essentially, if flow control is configured, every partition is assigned a [write rate](/self-managed/components-upgrade/configure-flow-control/configure-flow-control.md#exporting-and-write-rate) and a [write rate limit](/self-managed/components-upgrade/configure-flow-control/configure-flow-control.md#write-rate-limit).
 
 This means a partition's cluster load is defined as:
 

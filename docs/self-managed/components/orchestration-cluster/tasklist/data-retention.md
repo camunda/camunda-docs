@@ -33,7 +33,7 @@ In case of intensive Zeebe usage, the amount of data can grow significantly over
 
 Dated indices may be safely removed from Elasticsearch. "Safely" means only finished process instances are deleted together with all related data, and the rest of the data stays consistent.
 
-Users [updating from Elasticsearch 7 to Elasticsearch 8](/self-managed/operational-guides/update-guide/elasticsearch/7-to-8.md) will encounter issues with the [Elasticsearch Curator](https://www.elastic.co/guide/en/elasticsearch/client/curator/current/index.html). To resolve this, Tasklist allows configuring an Index Lifecycle Management (ILM) Policy using the `archiver` configuration options, which is enabled by default:
+Users [updating from Elasticsearch 7 to Elasticsearch 8](/self-managed/components-upgrade/update-guide/elasticsearch/7-to-8.md) will encounter issues with the [Elasticsearch Curator](https://www.elastic.co/guide/en/elasticsearch/client/curator/current/index.html). To resolve this, Tasklist allows configuring an Index Lifecycle Management (ILM) Policy using the `archiver` configuration options, which is enabled by default:
 
 ### Snippet from application.yml
 

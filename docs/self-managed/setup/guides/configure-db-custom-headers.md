@@ -95,7 +95,7 @@ For each container, mount your plugin's JAR file inside the container's file sys
 
 ### Configure components
 
-Include the plugin parameters in each component's `application.yaml`, or pass them to the component as environment variables. For more information, see how to [configure components using Helm charts](/self-managed/operational-guides/application-configs.md).
+Include the plugin parameters in each component's `application.yaml`, or pass them to the component as environment variables. For more information, see how to [configure components using Helm charts](/self-managed/components-upgrade/application-configs.md).
 
 The following examples add the new `my-plugin` JAR to the `application.yaml` for Zeebe, Operate, and Tasklist:
 

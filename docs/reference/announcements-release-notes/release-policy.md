@@ -127,7 +127,7 @@ To learn more about the applications version included in the Helm chart, see the
 
 ### New Camunda 8 versions
 
-If you are running Camunda 8 Self-Managed, see the [update guide](/self-managed/operational-guides/update-guide/introduction.md) to learn how to update your Camunda 8 application or server installation to a newer version of Camunda 8.
+If you are running Camunda 8 Self-Managed, see the [update guide](/self-managed/components-upgrade/update-guide/introduction.md) to learn how to update your Camunda 8 application or server installation to a newer version of Camunda 8.
 
 ## Dependency maintenance policies
 

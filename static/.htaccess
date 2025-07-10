@@ -655,7 +655,7 @@ RewriteRule ^optimize/self-managed/components/optimize/migration-update/3.13_8.5
 RewriteRule ^optimize/self-managed/components/optimize/migration-update/instructions/?$ /optimize/self-managed/components/optimize/migration-update/camunda-8/instructions/ [R=301,L]
 
 # Updated web-modeler troubleshooting
-RewriteRule ^docs/self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-login/?$ /docs/self-managed/modeler/web-modeler/troubleshooting/troubleshoot-missing-data/ [R=301,L]
+RewriteRule ^docs/self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-login/?$ /docs/self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-missing-data/ [R=301,L]
 
 #---------------------------------------------------------------------------------
 #   8.5: content moves introduced prior to the release of version 8.5.
@@ -701,7 +701,7 @@ RewriteRule ^api/tasklist/docs/(.*)$ /docs/apis-tools/tasklist-api-rest/specific
 RewriteRule ^docs/components/operate/userguide/updating-operate/?$ /docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
 RewriteRule ^docs/8.4/components/operate/userguide/updating-operate/?$ /docs/8.4/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
 
-RewriteRule ^docs/self-managed/components/operate/updating-operate/?$ /docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
+RewriteRule ^docs/self-managed/components/orchestration-cluster/operate/updating-operate/?$ /docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
 RewriteRule ^docs/8.4/self-managed/components/operate/updating-operate/?$ /docs/8.4/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
 
 # Consolidate SM troubleshooting pages
@@ -746,7 +746,7 @@ RewriteRule ^docs/apis-tools/grpc/?$ /docs/apis-tools/zeebe-api/overview/ [R=301
 RewriteRule ^docs/apis-tools/console-api-reference/?$ /docs/apis-tools/console-api/console-api-reference/ [R=301,L]
 RewriteRule ^optimize/components/userguide/process-analysis/outlier-analysis/?$ /optimize/components/userguide/process-analysis/task-analysis/ [R=301,L]
 RewriteRule ^docs/self-managed/components/management-identity/troubleshooting/common-problems/?$ /docs/self-managed/components/management-identity/troubleshooting/troubleshoot-identity/ [R=301,L]
-RewriteRule ^docs/components/operate/userguide/updating-operate-cloud/?$ /docs/self-managed/components/operate/updating-operate/ [R=301,L]
+RewriteRule ^docs/components/operate/userguide/updating-operate-cloud/?$ /docs/self-managed/components/orchestration-cluster/operate/updating-operate/ [R=301,L]
 
 # Early access to alpha features
 RewriteRule ^docs/reference/early-access/?$ /docs/reference/alpha-features/ [R=301,L]

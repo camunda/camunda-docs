@@ -76,7 +76,7 @@ Commands related to canceling a banned process instance are not skipped.
 
 When a broker receives a client request, it is written to the **event stream** first, and processed later by the stream processor. If the processing is slow or if there are many client requests in the stream, it might take too long for the processor to start processing the command. If the broker keeps accepting new requests from the client, the backlog increases and the processing latency can grow beyond an acceptable time.
 
-To avoid such problems, Zeebe employs [flow control](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md) strategies that apply write rate limits and [backpressure](/self-managed/components/orchestration-cluster/zeebe/operations/backpressure.md) to user requests.
+To avoid such problems, Zeebe employs [flow control](/self-managed/components-upgrade/configure-flow-control/configure-flow-control.md) strategies that apply write rate limits and [backpressure](/self-managed/components/orchestration-cluster/zeebe/operations/backpressure.md) to user requests.
 
 In the case of backpressure when the broker receives more requests than it can process with an acceptable latency, it rejects some requests. For flow control, it can be used with static write rate limits or throttling which prevents the
 partition from building an excessive backlog of records not exported.

@@ -30,7 +30,7 @@ Resource Authorizations are only supported when running Identity with Keycloak a
 Resource authorizations are disabled by default. You can enable them using environment variables. This feature must be enabled in all required components, see:
 
 - [Identity feature flags](/self-managed/components/management-identity/miscellaneous/configuration-variables.md#feature-flags)
-- [Operate resource based permissions](/self-managed/components/operate/operate-authentication.md#resource-based-permissions)
+- [Operate resource based permissions](/self-managed/components/orchestration-cluster/operate/operate-authentication.md#resource-based-permissions)
 - [Tasklist resource based permissions](/self-managed/components/tasklist/tasklist-authentication.md#resource-based-permissions)
 
 You must also [configure a database](/self-managed/components/management-identity/miscellaneous/configuration-variables.md#database-configuration) for Identity to use resource authorizations.

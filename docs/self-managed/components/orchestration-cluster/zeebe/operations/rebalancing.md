@@ -20,7 +20,7 @@ curl -X POST https://{zeebe-gateway}:9600/actuator/rebalance
 
 The result of this operation is always `200 OK` with no body, even when rebalancing is [not supported](#limitations) by the current configuration or when not all leaders have been contacted.
 
-Track the rebalancing progress by observing [metrics](/self-managed/operational-guides/monitoring/metrics.md).
+Track the rebalancing progress by observing [metrics](/self-managed/components-upgrade/monitoring/metrics.md).
 During the rebalancing, partitions might become unhealthy and can't make progress until a new leader is elected.
 
 ### Limitations

@@ -39,7 +39,7 @@ For Operate and Tasklist, the metrics are stored in the `operate-metric-1.0.0_` 
 
 On Camunda 8 Self-Managed, you can get the usage metrics in Operate and Tasklist.
 
-For **root process instances** and **decision instances**, follow the steps provided in the [Operate guide](/self-managed/components/operate/usage-metrics.md).
+For **root process instances** and **decision instances**, follow the steps provided in the [Operate guide](/self-managed/components/orchestration-cluster/operate/usage-metrics.md).
 
 For **task users**, follow the steps provided in the [Tasklist guide](/self-managed/components/tasklist/usage-metrics.md).
 

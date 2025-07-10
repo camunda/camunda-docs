@@ -32,7 +32,7 @@ Red Hat OpenShift on AWS (ROSA)
 - [ROSA single-region](/self-managed/setup/deploy/amazon/openshift/terraform-setup.md): a standard production setup.
 - [ROSA dual-region](/self-managed/setup/deploy/amazon/openshift/terraform-setup-dual-region.md): an advanced use case utilizing two regions.
 
-For general deployment pitfalls, visit the [deployment troubleshooting guide](/self-managed/operational-guides/troubleshooting/troubleshooting.md).
+For general deployment pitfalls, visit the [deployment troubleshooting guide](/self-managed/components-upgrade/troubleshooting/troubleshooting.md).
 
 ## Architecture
 
@@ -80,7 +80,7 @@ The following concerns **Operate**, **Tasklist**, and **Optimize**:
 
 When scaling from a single pod to multiple, ensure that the `importer / archiver` is enabled on only one pod and disabled on others. Enabling it on multiple pods will cause data inconsistencies. This limitation is known and will be addressed in future updates.
 
-Example configuration options are available for [Operate](/self-managed/components/operate/importer-and-archiver.md#configuration), [Optimize](/self-managed/components/optimize/configuration/system-configuration-platform-8.md#general-settings), and [Tasklist](/self-managed/components/tasklist/importer-and-archiver.md#configuration).
+Example configuration options are available for [Operate](/self-managed/components/orchestration-cluster/operate/importer-and-archiver.md#configuration), [Optimize](/self-managed/components/optimize/configuration/system-configuration-platform-8.md#general-settings), and [Tasklist](/self-managed/components/tasklist/importer-and-archiver.md#configuration).
 :::
 
 For high availability, a minimum of four Kubernetes nodes are recommended to ensure fault tolerance and support leader election in case of failures. To learn more about the Raft protocol and clustering concepts, refer to the [clustering documentation](/components/zeebe/technical-concepts/clustering.md).
@@ -204,7 +204,7 @@ For more information, see the [reference architecture overview](/self-managed/re
 
 Sizing is use case dependent. It is crucial to conduct thorough load testing and benchmark tests to determine the appropriate size specific to your environment and use case.
 
-Once deployed, the included [Grafana dashboard](/self-managed/operational-guides/monitoring/metrics.md#grafana) can be used with [Prometheus](https://prometheus.io/) to address bottlenecks when exporting data from Zeebe to your database.
+Once deployed, the included [Grafana dashboard](/self-managed/components-upgrade/monitoring/metrics.md#grafana) can be used with [Prometheus](https://prometheus.io/) to address bottlenecks when exporting data from Zeebe to your database.
 
 ## Distributions
 
