@@ -16,7 +16,7 @@ This section of the documentation offers three quickstart guides for new users i
 
 ## SaaS
 
-<DocCardList items={[{type:"link", href:"/docs/next/guides/orchestrate-human-tasks/", label: "Human task orchestration", docId:"guides/orchestrate-human-tasks"},
+<DocCardList items={[{type:"link", href:"/docs/next/guides/orchestrate-human-tasks/", label: "Orchestrate human tasks", docId:"guides/orchestrate-human-tasks"},
 {
 type:"link", href:"/docs/next/guides/orchestrate-apis/", label: "Orchestrate APIs using connectors", docId:"guides/orchestrate-apis",
 }
