@@ -1,51 +1,32 @@
 ---
 id: introduction-to-camunda
-title: Get started with Camunda 8
-sidebar_label: Get started with Camunda
+title: Camunda 8 overview
+sidebar_label: Camunda 8 overview
 slug: /guides/
-description: "Learn about Camunda 8, a platform that delivers scalable, on-demand process automation as-a-service, paired with tools for collaborative modeling and operations."
+description: "Learn about Camunda 8, a universal process orchestrator that allows you to orchestrate and automate complex business processes that span people, systems, and devices."
 ---
 
 import DocCardList from '@theme/DocCardList';
 
-[Camunda 8](https://camunda.io) delivers scalable, on-demand process automation as-a-service.
+[Camunda 8](https://camunda.io) is a universal process orchestrator that allows you to orchestrate and automate complex business processes that span people, systems, and devices.
+
+Camunda 8 is available in two deployment options:
+
+- **Camunda 8 SaaS**: A fully managed cloud service for rapid deployment and minimal operational overhead
+- **Camunda 8 Self-Managed**: A self-hosted solution for organizations requiring full control over their infrastructure
 
 :::note Interested in migrating from Camunda 7 to Camunda 8?
 Interested in migrating process solutions developed for Camunda 7 to run them on Camunda 8? Visit our guide on [migrating from Camunda 7](/guides/migrating-from-camunda-7/index.md).
 :::
 
-Camunda 8 is combined with powerful execution engines for BPMN processes and DMN decisions, and paired with tools for collaborative modeling, operations, and analytics.
+Camunda 8 combines powerful execution engines for BPMN processes and DMN decisions with tools for collaborative modeling, operations, and analytics.
 
-Camunda 8 consists of six [components](/components/components-overview.md). Together, these components form the complete Camunda 8 experience to design, automate, and improve your business processes.
-
-In the architecture diagram below, take a closer look at how these components work together. Don't worry if you're not sure about all the terminology yet, as this is merely a visual overview of how the components form a unified experience. Step through the [getting started section](#getting-started) below to get started with Camunda for the first time, or find additional details in [What is Camunda 8](/components/components-overview.md), and an on-demand demonstration of the product in [Camunda Academy](https://bit.ly/3CvooTX).
+Camunda 8 consists of [multiple components](/components/components-overview.md) that work together to form the complete Camunda 8 experience to design, automate, and improve your business processes that span people, systems, and devices.
 
 ![Architecture diagram for Camunda including all the components for SaaS](./img/ComponentsAndArchitecture_SaaS.png)
 
-:::note Looking for deployment guides?
-
-Deployment guides for Camunda 8 components are available in the [Self-Managed section](/self-managed/about-self-managed.md), a self-hosted alternative to using Camunda 8 SaaS.
-
-:::
-
 ## Getting started
 
-Below are two excellent starting points if you're new to Camunda: modeling a process, and getting started with Spring:
-
-<DocCardList items={[{type:"link", href:"/docs/next/components/modeler/about-modeler/", label: "Model your first process", docId:"components/modeler/about-modeler"},
-{
-type:"link", href:"/docs/next/guides/getting-started-example/", label: "Get started with Spring", docId:"guides/getting-started-example",
-}
-]}/>
-
-With these guides, start working with [Web Modeler](/components/modeler/about-modeler.md) to get familiar with BPMN and model a business process, or as a Java developer, step through using Spring Boot and the Camunda Spring Boot SDK with Desktop Modeler to interact with a local Self-Managed Camunda 8 installation.
-
-### Use cases
-
-As you're getting started with Camunda, you can also learn more about some of our use cases:
-
-- [**Get started with human task orchestration**](/guides/getting-started-orchestrate-human-tasks.md): Utilizing user tasks, you can create and assign tasks to users. Then, users can perform their work and enter the necessary data to drive the business process.
-- [**Get started with API orchestration**](/guides/getting-started-orchestrate-apis.md): Step through making a request to a REST API and using the response in the next steps of your process.
-- [**Get started with Spring**](/guides/getting-started-example.md): For developers using Camunda 8 Self-Managed, use an example project with Spring Boot or Node.js to interact with a local Camunda 8 installation.
+To get started, visit our [quick-start guides](./quickstart-overview.md) to choose the path that best fits your role and deployment preference.
 
 You can also learn more about Camunda 8 by reviewing the Camunda Academy courses [introducing Camunda 8](https://academy.camunda.com/camunda-intro/) and [providing an overview of Camunda 8](https://academy.camunda.com/c8-overview/).
