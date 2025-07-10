@@ -1,6 +1,7 @@
 ---
 id: listen-to-user-tasks
 title: User task listeners
+sidebar_label: Tutorial
 description: "In Camunda 8, user task listeners allow you to run custom logic when a user task is created, assigned, or completed."
 ---
 
