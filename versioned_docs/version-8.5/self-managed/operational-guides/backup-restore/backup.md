@@ -39,7 +39,7 @@ When backing up the WebApps, the order in which you execute the following sub-st
 
 :::note
 
-This will heavily depend on your setup, the following examples are based on examples given in the [Management API](#management-api) in Kubernetes using either active port-forwarding or overwrite of the local curl command.
+This will heavily depend on your setup, the following examples are based on examples given in the [Management API](backup-and-restore.md#management-api) in Kubernetes using either active port-forwarding or overwrite of the local curl command.
 
 As noted in the [Management API](backup-and-restore.md#management-api) section, this API is typically not publicly exposed. Therefore, you will need to access it directly using any means available within your environment.
 
@@ -72,9 +72,9 @@ As noted in the [Management API](backup-and-restore.md#management-api) section, 
       export ELASTIC_SNAPSHOT_REPOSITORY="camunda" # the name of your snapshot repository
       export ELASTIC_ENDPOINT="$CAMUNDA_RELEASE_NAME-elasticsearch:9200"
 
-      export OPERATE_MANAGEMENT_API="http://$CAMUNDA_RELEASE_NAME-operate:9600"
+      export OPERATE_MANAGEMENT_API="http://$CAMUNDA_RELEASE_NAME-operate:80"
       export OPTIMIZE_MANAGEMENT_API="http://$CAMUNDA_RELEASE_NAME-optimize:8092"
-      export TASKLIST_MANAGEMENT_API="http://$CAMUNDA_RELEASE_NAME-tasklist:9600"
+      export TASKLIST_MANAGEMENT_API="http://$CAMUNDA_RELEASE_NAME-tasklist:80"
       export GATEWAY_MANAGEMENT_API="http://$CAMUNDA_RELEASE_NAME-zeebe-gateway:9600"
       ```
 
@@ -123,12 +123,12 @@ curl -XPOST "$OPERATE_MANAGEMENT_API/actuator/backups" \
       ```json
       {
          "scheduledSnapshots":[
-            "camunda_operate_1748937221_8.7.2_part_1_of_6",
-            "camunda_operate_1748937221_8.7.2_part_2_of_6",
-            "camunda_operate_1748937221_8.7.2_part_3_of_6",
-            "camunda_operate_1748937221_8.7.2_part_4_of_6",
-            "camunda_operate_1748937221_8.7.2_part_5_of_6",
-            "camunda_operate_1748937221_8.7.2_part_6_of_6"
+            "camunda_operate_1748937221_8.5.16_part_1_of_6",
+            "camunda_operate_1748937221_8.5.16_part_2_of_6",
+            "camunda_operate_1748937221_8.5.16_part_3_of_6",
+            "camunda_operate_1748937221_8.5.16_part_4_of_6",
+            "camunda_operate_1748937221_8.5.16_part_5_of_6",
+            "camunda_operate_1748937221_8.5.16_part_6_of_6"
          ]
       }
       ```
@@ -154,12 +154,12 @@ curl -XPOST "$TASKLIST_MANAGEMENT_API/actuator/backups" \
       ```json
       {
          "scheduledSnapshots":[
-            "camunda_tasklist_1748937221_8.7.2_part_1_of_6",
-            "camunda_tasklist_1748937221_8.7.2_part_2_of_6",
-            "camunda_tasklist_1748937221_8.7.2_part_3_of_6",
-            "camunda_tasklist_1748937221_8.7.2_part_4_of_6",
-            "camunda_tasklist_1748937221_8.7.2_part_5_of_6",
-            "camunda_tasklist_1748937221_8.7.2_part_6_of_6"
+            "camunda_tasklist_1748937221_8.5.18_part_1_of_6",
+            "camunda_tasklist_1748937221_8.5.18_part_2_of_6",
+            "camunda_tasklist_1748937221_8.5.18_part_3_of_6",
+            "camunda_tasklist_1748937221_8.5.18_part_4_of_6",
+            "camunda_tasklist_1748937221_8.5.18_part_5_of_6",
+            "camunda_tasklist_1748937221_8.5.18_part_6_of_6"
          ]
       }
       ```
@@ -187,7 +187,7 @@ curl -s "$OPTIMIZE_MANAGEMENT_API/actuator/backups/$BACKUP_ID"
          "state":"COMPLETED",
          "details":[
             {
-               "snapshotName":"camunda_optimize_1748937221_8.7.1_part_1_of_2",
+               "snapshotName":"camunda_optimize_1748937221_8.5.17_part_1_of_2",
                "state":"SUCCESS",
                "startTime":"2025-06-03T07:53:54.389+0000",
                "failures":[
@@ -195,7 +195,7 @@ curl -s "$OPTIMIZE_MANAGEMENT_API/actuator/backups/$BACKUP_ID"
                ]
             },
             {
-               "snapshotName":"camunda_optimize_1748937221_8.7.1_part_2_of_2",
+               "snapshotName":"camunda_optimize_1748937221_8.5.17_part_2_of_2",
                "state":"SUCCESS",
                "startTime":"2025-06-03T07:53:54.389+0000",
                "failures":[
@@ -235,7 +235,7 @@ curl -s "$OPERATE_MANAGEMENT_API/actuator/backups/$BACKUP_ID"
          "failureReason":null,
          "details":[
             {
-               "snapshotName":"camunda_operate_1748937221_8.7.2_part_1_of_6",
+               "snapshotName":"camunda_operate_1748937221_8.5.16_part_1_of_6",
                "state":"SUCCESS",
                "startTime":"2025-06-03T07:55:15.685+0000",
                "failures":[
@@ -243,7 +243,7 @@ curl -s "$OPERATE_MANAGEMENT_API/actuator/backups/$BACKUP_ID"
                ]
             },
             {
-               "snapshotName":"camunda_operate_1748937221_8.7.2_part_2_of_6",
+               "snapshotName":"camunda_operate_1748937221_8.5.16_part_2_of_6",
                "state":"SUCCESS",
                "startTime":"2025-06-03T07:55:16.288+0000",
                "failures":[
@@ -251,7 +251,7 @@ curl -s "$OPERATE_MANAGEMENT_API/actuator/backups/$BACKUP_ID"
                ]
             },
             {
-               "snapshotName":"camunda_operate_1748937221_8.7.2_part_3_of_6",
+               "snapshotName":"camunda_operate_1748937221_8.5.16_part_3_of_6",
                "state":"SUCCESS",
                "startTime":"2025-06-03T07:55:17.092+0000",
                "failures":[
@@ -259,7 +259,7 @@ curl -s "$OPERATE_MANAGEMENT_API/actuator/backups/$BACKUP_ID"
                ]
             },
             {
-               "snapshotName":"camunda_operate_1748937221_8.7.2_part_4_of_6",
+               "snapshotName":"camunda_operate_1748937221_8.5.16_part_4_of_6",
                "state":"SUCCESS",
                "startTime":"2025-06-03T07:55:17.293+0000",
                "failures":[
@@ -267,7 +267,7 @@ curl -s "$OPERATE_MANAGEMENT_API/actuator/backups/$BACKUP_ID"
                ]
             },
             {
-               "snapshotName":"camunda_operate_1748937221_8.7.2_part_5_of_6",
+               "snapshotName":"camunda_operate_1748937221_8.5.16_part_5_of_6",
                "state":"SUCCESS",
                "startTime":"2025-06-03T07:55:18.298+0000",
                "failures":[
@@ -275,7 +275,7 @@ curl -s "$OPERATE_MANAGEMENT_API/actuator/backups/$BACKUP_ID"
                ]
             },
             {
-               "snapshotName":"camunda_operate_1748937221_8.7.2_part_6_of_6",
+               "snapshotName":"camunda_operate_1748937221_8.5.16_part_6_of_6",
                "state":"SUCCESS",
                "startTime":"2025-06-03T07:55:18.499+0000",
                "failures":[
@@ -315,7 +315,7 @@ curl "$TASKLIST_MANAGEMENT_API/actuator/backups/$BACKUP_ID"
          "failureReason":null,
          "details":[
             {
-               "snapshotName":"camunda_tasklist_1748937221_8.7.2_part_1_of_6",
+               "snapshotName":"camunda_tasklist_1748937221_8.5.18_part_1_of_6",
                "state":"SUCCESS",
                "startTime":"2025-06-03T07:56:56.519+0000",
                "failures":[
@@ -323,7 +323,7 @@ curl "$TASKLIST_MANAGEMENT_API/actuator/backups/$BACKUP_ID"
                ]
             },
             {
-               "snapshotName":"camunda_tasklist_1748937221_8.7.2_part_2_of_6",
+               "snapshotName":"camunda_tasklist_1748937221_8.5.18_part_2_of_6",
                "state":"SUCCESS",
                "startTime":"2025-06-03T07:56:57.324+0000",
                "failures":[
@@ -331,7 +331,7 @@ curl "$TASKLIST_MANAGEMENT_API/actuator/backups/$BACKUP_ID"
                ]
             },
             {
-               "snapshotName":"camunda_tasklist_1748937221_8.7.2_part_3_of_6",
+               "snapshotName":"camunda_tasklist_1748937221_8.5.18_part_3_of_6",
                "state":"SUCCESS",
                "startTime":"2025-06-03T07:56:57.927+0000",
                "failures":[
@@ -339,7 +339,7 @@ curl "$TASKLIST_MANAGEMENT_API/actuator/backups/$BACKUP_ID"
                ]
             },
             {
-               "snapshotName":"camunda_tasklist_1748937221_8.7.2_part_4_of_6",
+               "snapshotName":"camunda_tasklist_1748937221_8.5.18_part_4_of_6",
                "state":"SUCCESS",
                "startTime":"2025-06-03T07:56:58.329+0000",
                "failures":[
@@ -347,7 +347,7 @@ curl "$TASKLIST_MANAGEMENT_API/actuator/backups/$BACKUP_ID"
                ]
             },
             {
-               "snapshotName":"camunda_tasklist_1748937221_8.7.2_part_5_of_6",
+               "snapshotName":"camunda_tasklist_1748937221_8.5.18_part_5_of_6",
                "state":"SUCCESS",
                "startTime":"2025-06-03T07:56:58.933+0000",
                "failures":[
@@ -355,7 +355,7 @@ curl "$TASKLIST_MANAGEMENT_API/actuator/backups/$BACKUP_ID"
                ]
             },
             {
-               "snapshotName":"camunda_tasklist_1748937221_8.7.2_part_6_of_6",
+               "snapshotName":"camunda_tasklist_1748937221_8.5.18_part_6_of_6",
                "state":"SUCCESS",
                "startTime":"2025-06-03T07:56:59.535+0000",
                "failures":[
@@ -386,9 +386,9 @@ When backing up the the Zeebe Cluster, you must execute the following sub-steps 
 
 ### 1. Soft pause exporting in Zeebe
 
-This step uses the [management API](/self-managed/zeebe-deployment/operations/management-api.md?exporting=softPause#exporting-api).
+This step uses the [management API](/self-managed/zeebe-deployment/operations/management-api.md?exporting=softPause#exporting-api). This is only available from 8.5.1, otherwise use normal pause.
 
-This will continue exporting records, but not delete those records (log compaction) from Zeebe. This makes the backup a hot backup, as covered in the [backup considerations](backup-and-restore.md#considerations).
+This will continue exporting records, but not delete those records (log compaction) from Zeebe. This makes the backup a hot backup, as covered in the [why you should use backup and restore](backup-and-restore.md#why-you-should-use-backup-and-restore).
 
 ```bash
 curl -XPOST "$GATEWAY_MANAGEMENT_API/actuator/exporting/pause?soft=true"
@@ -447,11 +447,11 @@ By default, the indices are prefixed with `zeebe-record`. If you have configured
                "version_id":8521000,
                "version":"8.17.0-8.17.4",
                "indices":[
-                  "zeebe-record_process_8.7.2_2025-06-03",
-                  "zeebe-record_job_8.7.2_2025-06-03",
-                  "zeebe-record_process-instance-creation_8.7.2_2025-06-03",
-                  "zeebe-record_process-instance_8.7.2_2025-06-03",
-                  "zeebe-record_deployment_8.7.2_2025-06-03"
+                  "zeebe-record_process_8.5.16_2025-06-03",
+                  "zeebe-record_job_8.5.16_2025-06-03",
+                  "zeebe-record_process-instance-creation_8.5.16_2025-06-03",
+                  "zeebe-record_process-instance_8.5.16_2025-06-03",
+                  "zeebe-record_deployment_8.5.16_2025-06-03"
                ],
                "data_streams":[
 
@@ -507,11 +507,11 @@ By default, the indices are prefixed with `zeebe-record`. If you have configured
                "version":"2.19.2",
                "remote_store_index_shallow_copy":false,
                "indices":[
-                  "zeebe-record_process_8.7.2_2025-06-03",
-                  "zeebe-record_job_8.7.2_2025-06-03",
-                  "zeebe-record_process-instance-creation_8.7.2_2025-06-03",
-                  "zeebe-record_process-instance_8.7.2_2025-06-03",
-                  "zeebe-record_deployment_8.7.2_2025-06-03"
+                  "zeebe-record_process_8.5.16_2025-06-03",
+                  "zeebe-record_job_8.5.16_2025-06-03",
+                  "zeebe-record_process-instance-creation_8.5.16_2025-06-03",
+                  "zeebe-record_process-instance_8.5.16_2025-06-03",
+                  "zeebe-record_deployment_8.5.16_2025-06-03"
                ],
                "data_streams":[
 
@@ -587,11 +587,11 @@ By default, the indices are prefixed with `zeebe-record`. If you have configured
                      "time_in_millis":0
                   },
                   "indices":{
-                     "zeebe-record_process_8.7.2_2025-06-03",
-                     "zeebe-record_job_8.7.2_2025-06-03",
-                     "zeebe-record_process-instance-creation_8.7.2_2025-06-03",
-                     "zeebe-record_process-instance_8.7.2_2025-06-03",
-                     "zeebe-record_deployment_8.7.2_2025-06-03"
+                     "zeebe-record_process_8.5.16_2025-06-03",
+                     "zeebe-record_job_8.5.16_2025-06-03",
+                     "zeebe-record_process-instance-creation_8.5.16_2025-06-03",
+                     "zeebe-record_process-instance_8.5.16_2025-06-03",
+                     "zeebe-record_deployment_8.5.16_2025-06-03"
                   }
                }
             ]
@@ -644,11 +644,11 @@ By default, the indices are prefixed with `zeebe-record`. If you have configured
                      "time_in_millis":0
                   },
                   "indices":{
-                     "zeebe-record_process_8.7.2_2025-06-03",
-                     "zeebe-record_job_8.7.2_2025-06-03",
-                     "zeebe-record_process-instance-creation_8.7.2_2025-06-03",
-                     "zeebe-record_process-instance_8.7.2_2025-06-03",
-                     "zeebe-record_deployment_8.7.2_2025-06-03"
+                     "zeebe-record_process_8.5.16_2025-06-03",
+                     "zeebe-record_job_8.5.16_2025-06-03",
+                     "zeebe-record_process-instance-creation_8.5.16_2025-06-03",
+                     "zeebe-record_process-instance_8.5.16_2025-06-03",
+                     "zeebe-record_deployment_8.5.16_2025-06-03"
                   }
                }
             ]
@@ -708,7 +708,7 @@ This step uses the [Zeebe management backup API](/self-managed/operational-guide
                   "createdAt":"2025-06-03T08:06:06.246997293Z",
                   "lastUpdatedAt":"2025-06-03T08:06:10.408893628Z",
                   "checkpointPosition":1,
-                  "brokerVersion":"8.7.2"
+                  "brokerVersion":"8.5.16"
                }
             ]
          }
@@ -770,7 +770,7 @@ Database dumps created with `pg_dumpall`/`pg_dump` can only be restored into a d
 :::
 
 :::info
-You can [restore a Web Modeler data backup](restore.md#restore-a-web-modeler-data-backup).
+You can [restore a Web Modeler data backup](restore.md#optional-restore-a-web-modeler-data-backup).
 :::
 
 ## Cleaning up backups
