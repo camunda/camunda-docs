@@ -1,13 +1,11 @@
 module.exports = {
   Guides: [
     "guides/introduction-to-camunda",
-    "guides/getting-started-java-spring",
-    "guides/create-account",
     {
       Tutorials: [
+        "guides/getting-started-example",
         "guides/orchestrate-human-tasks",
         "guides/orchestrate-apis",
-        "guides/orchestrate-microservices",
       ],
     },
     {
