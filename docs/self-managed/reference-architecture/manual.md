@@ -48,7 +48,7 @@ Compared to the generalized architecture depicted in the [reference architecture
 When scaling from a single machine to multiple machines, ensure that the `Optimize importer` is enabled on only one machine and disabled on the others. Enabling it on multiple machines will cause data inconsistencies. This limitation is known and will be addressed in future updates.
 :::
 
-![HA JAR](./assets/manual-ha.jpg)
+![HA JAR](./img/manual-ha.jpg)
 
 For high availability, a minimum of three machines is recommended to ensure fault tolerance and enable master election in case of failures. Refer to the [clustering documentation](/components/zeebe/technical-concepts/clustering.md) to learn more about the raft protocol and clustering concepts.
 
