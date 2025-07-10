@@ -505,4 +505,4 @@ The Zeebe Exporter system provides an event stream of state changes within Zeebe
 
 The Zeebe Gateway is a component of the [Zeebe cluster](#zeebe-cluster); it can be considered the contact point for the Zeebe cluster that allows [Zeebe clients](#zeebe-client) to communicate with [Zeebe brokers](#zeebe-broker) inside a Zeebe cluster.
 
-- [Zeebe Gateway](self-managed/zeebe-deployment/zeebe-gateway/zeebe-gateway-overview.md)
+- [Zeebe Gateway](self-managed/components/orchestration-cluster/zeebe/zeebe-gateway/zeebe-gateway-overview.md)
