@@ -48,7 +48,7 @@ not provide support for the distribution of the Keycloak TLS key to the other co
 
 ## Identity redirect URL
 
-If HTTP to HTTPS redirection is enabled in the load-balancer or ingress, make sure to use the HTTPS
+If HTTP to HTTPS redirection is enabled in the load-balancer or Ingress, make sure to use the HTTPS
 protocol in the values file under `global.identity.auth.[COMPONENT].redirectUrl`.
 Otherwise, you will get a redirection error in Keycloak.
 
