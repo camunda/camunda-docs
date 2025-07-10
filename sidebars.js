@@ -1129,8 +1129,8 @@ module.exports = {
                 "self-managed/installation-methods/helm/configure/air-gapped-installation",
                 "self-managed/installation-methods/helm/configure/running-custom-connectors",
                 //certificates
-                "customer-kubernetes-manifests",
-                "inject-custom-kubernetes-manifests",
+                "self-managed/installation-methods/helm/configure/add-extra-manifests",
+                //configure components in helm charts
               ],
             },
             // {
@@ -1147,10 +1147,13 @@ module.exports = {
           ],
         },
         {
-          Docker: ["docker"],
+          Docker: ["/self-managed/installation-methods/docker/docker"],
         },
         {
-          Manual: ["manual", "manual"],
+          Manual: [
+            "/self-managed/installation-methods/manual/manual-deploy",
+            "/self-managed/installation-methods/manual/manual-install",
+          ],
         },
       ],
     },

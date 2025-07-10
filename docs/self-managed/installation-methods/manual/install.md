@@ -1,5 +1,5 @@
 ---
-id: manual
+id: manual-install
 title: "Manual installation on local machine"
 sidebar_label: "Manual"
 ---
