@@ -31,13 +31,13 @@ Deviations from the reference architecture are unavoidable. However, such change
 
 ## Architecture
 
-### Orchestration cluster vs Web Modeler and Console
+### Orchestration cluster vs Web Modeler, Console, and Optimize
 
 When designing a reference architecture, it's essential to understand the differences between an orchestration cluster and Web Modeler and Console Self-Managed. These components play crucial roles in the deployment and operation of processes, but they serve different purposes and include distinct components.
 
-#### Orchestration Cluster
+#### Orchestration cluster
 
-![Orchestration Cluster](./img/orchestration-cluster.jpg)
+![Orchestration cluster](./img/orchestration-cluster.jpg)
 
 The orchestration cluster is the core of Camunda.
 
@@ -46,9 +46,12 @@ The included components are:
 - [Zeebe](/components/zeebe/zeebe-overview.md): A workflow engine for orchestrating microservices and managing stateful, long-running business processes.
 - [Operate](/components/operate/operate-introduction.md): A monitoring tool for visualizing and troubleshooting workflows running in Zeebe.
 - [Tasklist](/components/tasklist/introduction-to-tasklist.md): A user interface for managing and completing human tasks within workflows.
+- [Identity](/self-managed/orchestration-identity/orchestration-identity.md): A service for managing user authentication and authorization.
+
+Thematically close to the Orchestration cluster are following components:
+
 - [Optimize](/components/optimize/what-is-optimize.md): An analytics tool for generating reports and insights based on workflow data.
-- [Identity](/self-managed/identity/what-is-identity.md): A service for managing user authentication and authorization.
-- [Connectors](/components/connectors/introduction.md): Pre-built integrations for connecting Zeebe with external systems and services.
+- [Connectors](/components/connectors/introduction.md): Pre-built integrations for connecting the Orchestration cluster with external systems and services.
 
 Each component within the orchestration cluster is part of an integrated system that works together to provide end-to-end process orchestration. These components form a unified cluster that is tightly integrated to ensure seamless communication and data flow.
 
@@ -65,9 +68,10 @@ Web Modeler and Console are designed to interact with multiple orchestration clu
 
 Additionally, Web Modeler and Console require the following:
 
-- [Identity](/self-managed/identity/what-is-identity.md): A service for managing user authentication and authorization.
+- [Management Identity](/self-managed/identity/what-is-identity.md): A service for managing user authentication and authorization.
 
-Unlike the orchestration cluster, Web Modeler and Console run a separate and dedicated Identity deployment. For production environments, using an external [identity provider](/self-managed/installation-methods/helm/configure/connect-to-an-oidc-provider.md) is recommended.
+Unlike the orchestration cluster, Web Modeler and Console run a separate and dedicated Management Identity deployment. This is not the same as the embedded Identity in the Orchestration cluster. Optimize also relies on the Management Identity and will not function without it. It is not compatible with the embedded Orchestration cluster Identity.
+For production environments, using an external [identity provider](/self-managed/installation-methods/helm/configure/connect-to-an-oidc-provider.md) is recommended to connect the two environments.
 
 ### Databases
 
@@ -84,9 +88,7 @@ By decoupling databases from Camunda, you gain greater control and customization
 
 ### High availability (HA)
 
-High availability (HA) ensures that a system remains operational and accessible even in the event of component failures. While all components are equipped to be run in a highly available manner, some components need extra considerations when run in HA mode.
-
-<!-- TODO Describe Optimize and Connectors limitations or point to resource for more -->
+High availability (HA) ensures that a system remains operational and accessible even in the event of component failures. While all components are equipped to be run in a highly available manner. Optimize requires extra considerations when run in HA mode as the importer / archiver should only run once across all replicas. Related settings can be found as part of the [Optimize configuration](/self-managed/optimize-deployment/configuration/system-configuration-platform-8.md/#general-settings).
 
 While high availability is one part of the increased fault tolerance and resilience, you should also consider regional or zonal placement of your workloads.
 
@@ -97,7 +99,7 @@ If running a single instance is preferred, make sure to implement [regular backu
 ## Available reference architectures
 
 :::note Documentation Update in Progress
-This is a work in progress as the existing documentation is updated to provide better general guidance on the topic. The Kubernetes and Docker documentation may point to older guides.
+This is a work in progress as the existing documentation is updated to provide better general guidance on the topic. The Docker documentation may point to older guides.
 :::
 
 Choosing the right reference architecture depends on various factors such as the organization's goals, existing infrastructure, and specific requirements. The following guides are available to help choose and guide deployments:
