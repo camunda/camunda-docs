@@ -1,7 +1,7 @@
 ---
 id: index
 title: Overview
-description: "Some text."
+description: "In this section, find details on the Self-Managed installation methods."
 ---
 
-Some text.
+In this section, find details on the Self-Managed installation methods.

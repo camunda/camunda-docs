@@ -1138,8 +1138,8 @@ module.exports = {
             // },
             {
               "Operational tasks": [
-                "/self-managed/installation-methods/helm/operational-tasks/dual-region-operational-procedure",
-                "/self-managed/installation-methods/helm/operational-tasks/diagnostics",
+                "self-managed/installation-methods/helm/operational-tasks/dual-region-operational-procedure",
+                "self-managed/installation-methods/helm/operational-tasks/diagnostics",
               ],
               //also to include backup and restore, and scaling
             },
@@ -1147,12 +1147,12 @@ module.exports = {
           ],
         },
         {
-          Docker: ["/self-managed/installation-methods/docker/docker"],
+          Docker: ["self-managed/installation-methods/docker/docker"],
         },
         {
           Manual: [
-            "/self-managed/installation-methods/manual/manual-deploy",
-            "/self-managed/installation-methods/manual/manual-install",
+            "self-managed/installation-methods/manual/manual-deploy",
+            "self-managed/installation-methods/manual/manual-install",
           ],
         },
       ],
