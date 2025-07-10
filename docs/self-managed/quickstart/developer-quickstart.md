@@ -6,5 +6,8 @@ description: "This quickstart guides application developers through deploying Ca
 ---
 
 import DocCardList from '@theme/DocCardList';
+import {useCurrentSidebarCategory} from '@docusaurus/theme-common';
 
 This quickstart guides application engineers through deploying **Camunda 8 Self-Managed** to a local developer environment.
+
+<DocCardList queryString items={useCurrentSidebarCategory().items}/>
