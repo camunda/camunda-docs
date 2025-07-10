@@ -2,7 +2,13 @@ module.exports = {
   Guides: [
     "guides/introduction-to-camunda",
     {
-      Tutorials: [
+      type: "category",
+      label: "Quickstart tutorials",
+      link: {
+        type: "doc",
+        id: "guides/quickstart-overview",
+      },
+      items: [
         "guides/getting-started-example",
         "guides/orchestrate-human-tasks",
         "guides/orchestrate-apis",

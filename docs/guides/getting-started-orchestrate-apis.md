@@ -1,8 +1,8 @@
 ---
 id: orchestrate-apis
 title: Get started with API orchestration
-sidebar_label: APIs
-description: "Use connectors to build low code process automation solutions"
+sidebar_label: Orchestrate APIs using connectors
+description: "For low-code developers using Camunda 8 Saas, use connectors to build process automation solutions."
 keywords:
   [api endpoints, orchestration, getting started, user guide, connectors]
 ---
