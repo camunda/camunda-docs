@@ -66,6 +66,7 @@ Keycloak is used to manage users, and can be accessed with the user `admin` and 
 The Orchestration cluster is available using gRPC:
 
 - Cluster endpoint: `localhost:26500`
+- v2 REST API: `http://localhost:8088/v2`
 
 ### Stop Camunda 8
 
