@@ -50,22 +50,22 @@ The database is not depicted in the diagram, as we recommend handling it externa
 ### Kubernetes
 
 :::note
-The reference architecture overview describes the difference between the [Orchestration cluster and Web Modeler and Console](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console), and provides additional information on application communication.
+The reference architecture overview describes the difference between the [Orchestration Cluster and Web Modeler and Console](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console), and provides additional information on application communication.
 :::
 
 A [multi-namespace deployment](/self-managed/installation-methods/helm/configure/multi-namespace-deployment.md) is recommended. For more information, see the [components](#components) section.
 
 The following depictions provide a simplified view of the deployed namespaces using the [Camunda 8 Helm chart](/self-managed/installation-methods/helm/install.md). To keep the diagram clear, ConfigMaps, Secrets, RBAC, and ReplicaSets have been omitted.
 
-#### Orchestration cluster
+#### Orchestration Cluster
 
-![Orchestration cluster](./img/k8s-cluster-view-orchestration.jpg)
+![Orchestration Cluster](./img/k8s-cluster-view-orchestration.jpg)
 
 By default, the Helm chart suggests using a single Ingress for Camunda resources, enabling a unified domain with each application accessible via a different path.
 
-Most applications are stateless and deployed as **Deployments**. However, the Orchestration cluster, due to included Zeebe brokers, are an exception, requiring a **StatefulSet** to ensure that volumes are consistently mounted, as pod order and identifiers are crucial.
+Most applications are stateless and deployed as **Deployments**. However, the Orchestration Cluster, due to included Zeebe brokers, are an exception, requiring a **StatefulSet** to ensure that volumes are consistently mounted, as pod order and identifiers are crucial.
 
-The Orchestration cluster exposes two services:
+The Orchestration Cluster exposes two services:
 
 1. A [**headless service**](https://kubernetes.io/docs/concepts/services-networking/service/#headless-services), which enables direct communication between Zeebe brokers of an Orchestration Cluster. This service does not perform load balancing and simply resolves to individual pod IPs, making it suitable for internal broker-to-broker communication.
 
@@ -91,19 +91,19 @@ Example configuration options are available for [Optimize](/self-managed/optimiz
 
 For high availability, a minimum of four Kubernetes nodes are recommended to ensure fault tolerance and support leader election in case of failures. To learn more about the Raft protocol and clustering concepts, refer to the [clustering documentation](/components/zeebe/technical-concepts/clustering.md).
 
-In Kubernetes, Deployments and StatefulSets can be scaled independently of physical machines. Four Kubernetes nodes are recommended based on the default setup of a three node Orchestration cluster and all available Camunda 8 components, and the resources this setup requires. Your setup may differ from this default, and may require you to scale more horizontally or vertically to ensure enough capacity depending on your Camunda 8 usage.
+In Kubernetes, Deployments and StatefulSets can be scaled independently of physical machines. Four Kubernetes nodes are recommended based on the default setup of a three node Orchestration Cluster and all available Camunda 8 components, and the resources this setup requires. Your setup may differ from this default, and may require you to scale more horizontally or vertically to ensure enough capacity depending on your Camunda 8 usage.
 
-The default node affinity settings prevent the Orchestration cluster from being scheduled on the same node, requiring a minimum three-node setup. For more details on Kubernetes affinity rules, see the [official documentation](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/).
+The default node affinity settings prevent the Orchestration Cluster from being scheduled on the same node, requiring a minimum three-node setup. For more details on Kubernetes affinity rules, see the [official documentation](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/).
 
-To further enhance fault tolerance, it is recommended to distribute the Orchestration cluster and other scaled applications across multiple availability zones using additional affinity rules, ensuring resilience in case of a zone failure.
+To further enhance fault tolerance, it is recommended to distribute the Orchestration Cluster and other scaled applications across multiple availability zones using additional affinity rules, ensuring resilience in case of a zone failure.
 
 ### Components
 
-A typical Camunda 8 deployment distinguishes between the **Orchestration cluster** and the **Web Modeler and Console**. These clusters should be separated by utilizing [Kubernetes namespaces](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/), though running within a single namespace is possible.
+A typical Camunda 8 deployment distinguishes between the **Orchestration Cluster** and the **Web Modeler and Console**. These clusters should be separated by utilizing [Kubernetes namespaces](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/), though running within a single namespace is possible.
 
-A multi-namespace setup allows you to duplicate and run multiple Orchestration clusters based on different use cases and requirements, while Web Modeler and Console remains independent, and does not need to be scaled the same way. The same applies to Management Identity as a central entity coordinating access management.
+A multi-namespace setup allows you to duplicate and run multiple Orchestration Clusters based on different use cases and requirements, while Web Modeler and Console remains independent, and does not need to be scaled the same way. The same applies to Management Identity as a central entity coordinating access management.
 
-The **Orchestration cluster** namespace, as outlined in the [architecture diagram](#orchestration-cluster), consists of the following components:
+The **Orchestration Cluster** namespace, as outlined in the [architecture diagram](#orchestration-cluster), consists of the following components:
 
 - [Zeebe Brokers](/components/zeebe/technical-concepts/architecture.md#brokers)
 - [Zeebe Gateway](/self-managed/zeebe-deployment/zeebe-gateway/zeebe-gateway-overview.md)
@@ -111,7 +111,7 @@ The **Orchestration cluster** namespace, as outlined in the [architecture diagra
 - [Tasklist](/components/tasklist/introduction-to-tasklist.md)
 - [Identity](/self-managed/orchestration-identity/orchestration-identity.md)
 
-Thematically close to the Orchestration cluster are following components:
+Thematically close to the Orchestration Cluster are following components:
 
 - [Optimize](/components/optimize/what-is-optimize.md)
 - [Connectors](/components/connectors/introduction.md)
@@ -123,7 +123,7 @@ The **Web Modeler and Console** namespace, as outlined in the [architecture diag
 - [Management Identity](/self-managed/identity/what-is-identity.md)
   - Keycloak, an external dependency of Management Identity
 
-The **Orchestration cluster** can be configured to connect via OIDC to the Management Identity of the **Web Modeler and Console** namespace.
+The **Orchestration Cluster** can be configured to connect via OIDC to the Management Identity of the **Web Modeler and Console** namespace.
 
 ## Requirements
 
@@ -182,7 +182,7 @@ The defaults for the databases are:
 
 ##### Load Balancer
 
-The Zeebe Gateway as part of the Orchestration cluster requires gRPC, which itself requires HTTP/2 to be used. It is recommended to secure the endpoint with a TLS certificate.
+The Zeebe Gateway as part of the Orchestration Cluster requires gRPC, which itself requires HTTP/2 to be used. It is recommended to secure the endpoint with a TLS certificate.
 
 :::tip
 If you do not rely on the gRPC capabilities of Camunda 8, you can safely disregard this and use the REST API instead.
@@ -218,7 +218,7 @@ For more information, see the [reference architecture overview](/self-managed/re
 
 Sizing is use case dependent. It is crucial to conduct thorough load testing and benchmark tests to determine the appropriate size specific to your environment and use case.
 
-Once deployed, the included [Grafana dashboard](/self-managed/operational-guides/monitoring/metrics.md#grafana) can be used with [Prometheus](https://prometheus.io/) to address bottlenecks when exporting data from the Orchestration cluster to your database.
+Once deployed, the included [Grafana dashboard](/self-managed/operational-guides/monitoring/metrics.md#grafana) can be used with [Prometheus](https://prometheus.io/) to address bottlenecks when exporting data from the Orchestration Cluster to your database.
 
 ## Distributions
 
@@ -330,4 +330,4 @@ Azure offers the **Application Gateway for Containers (AGC)**, which supports gR
 
 #### Load Balancer
 
-If you are using the [GKE Ingress](https://cloud.google.com/kubernetes-engine/docs/concepts/ingress) (Ingress-gce), you may need to use `cloud.google.com/app-protocols` annotations in the **Orchestration cluster** non-headless service. For more details, visit the GKE guide [using HTTP/2 for load balancing with Ingress](https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-http2).
+If you are using the [GKE Ingress](https://cloud.google.com/kubernetes-engine/docs/concepts/ingress) (Ingress-gce), you may need to use `cloud.google.com/app-protocols` annotations in the **Orchestration Cluster** non-headless service. For more details, visit the GKE guide [using HTTP/2 for load balancing with Ingress](https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-http2).

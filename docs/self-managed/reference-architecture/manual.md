@@ -15,12 +15,12 @@ This method of deployment requires a solid understanding of infrastructure, netw
 
 ## Key features
 
-- **Single application JAR**: Starting from Camunda 8.8, all core components (Zeebe, Tasklist, Operate, and Identity) are bundled into a single JAR file. This simplifies deployment by reducing the number of artifacts to manage. This bundled component is called Orchestration cluster.
+- **Single application JAR**: Starting from Camunda 8.8, all core components (Zeebe, Tasklist, Operate, and Identity) are bundled into a single JAR file. This simplifies deployment by reducing the number of artifacts to manage. This bundled component is called Orchestration Cluster.
 - **Full control**: Users are responsible for all aspects of deployment, including installation, configuration, scaling, and maintenance. This offers maximum flexibility for custom environments.
 
 Other deployment options, such as containerized deployments or managed services, might offer more convenience and automation. However, VM based deployment gives you the flexibility to tailor the deployment to your exact needs, which can be beneficial for regulated or highly customized environments.
 
-For documentation on the Orchestration cluster, Web Modeler and Console separation, refer to the [reference architecture overview](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console).
+For documentation on the Orchestration Cluster, Web Modeler and Console separation, refer to the [reference architecture overview](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console).
 
 ## Reference implementations
 
@@ -30,7 +30,7 @@ This section includes deployment reference architectures for manual setups:
 
 ## Considerations
 
-- This overview page focuses on deploying the [Orchestration cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster), the single JAR compromised of Identity, Operate, Tasklist, and Zeebe, as well as the connectors runtime. Web Modeler, Console, Optimize, and Management Identity deployments are not included.
+- This overview page focuses on deploying the [Orchestration Cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster), the single JAR compromised of Identity, Operate, Tasklist, and Zeebe, as well as the connectors runtime. Web Modeler, Console, Optimize, and Management Identity deployments are not included.
 - General guidance and examples focuses on **unix** users, but can be adapted by Windows users with options like [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) or included `batch` files.
 
 ## Architecture
@@ -57,7 +57,7 @@ The orchestration core is packaged as a single JAR file and includes the followi
 The core facilitates:
 
 1. **gRPC communication**: For client workers.
-2. **HTTP endpoints**: Used by the Orchestration cluster REST API and Web UI.
+2. **HTTP endpoints**: Used by the Orchestration Cluster REST API and Web UI.
 
 Both types of endpoints can be routed through a load balancer to maintain availability, ensuring that the system remains accessible even if a machine becomes unavailable. While using a load balancer is optional, it is recommended for enhanced availability and security. Alternatively, you can expose static machines, ports, and IPs directly. However, direct exposure is generally discouraged due to security concerns.
 
@@ -65,7 +65,7 @@ Connectors expose additional HTTP(s) endpoints for handling incoming webhooks, w
 
 The orchestration components rely on **Elasticsearch** or **OpenSearch** as their data store.
 
-Components within the orchestration cluster communicate seamlessly, particularly:
+Components within the Orchestration Cluster communicate seamlessly, particularly:
 
 - **Zeebe brokers** exchange data over gRPC endpoints for efficient inter-broker communication.
 
