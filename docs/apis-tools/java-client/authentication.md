@@ -48,6 +48,7 @@ private static final String audience = "[Zeebe Token Audience, e.g., zeebe.camun
 private static final String clientId = "[Client ID, e.g., FmT7K8gVv_FcwiUhc8U-fAJ9wph0Kn~P]";
 private static final String clientSecret = "[Client Secret]";
 private static final String authorizationServer = "[OAuth API, e.g., https://login.cloud.camunda.io/oauth/token]";
+private static final String resourceIndicator = "[optional resource indicator]";
 
 final var credentialsProvider =
   new OAuthCredentialsProviderBuilder()
@@ -55,6 +56,7 @@ final var credentialsProvider =
     .audience(audience)
     .clientId(clientId)
     .clientSecret(clientSecret)
+    .resource(resourceIndicator)
     .build();
 ```
 
@@ -97,6 +99,7 @@ private static final String keystorePassword = "password";
 private static final String keystoreKeyPassword = "password";
 private static final Path truststorePath = Paths.get("/path/to/truststore.jks");
 private static final String truststorePassword = "password";
+private static final String resourceIndicator = "[optional resource indicator]";
 
 final OAuthCredentialsProvider provider =
   new OAuthCredentialsProviderBuilder()
@@ -109,6 +112,7 @@ final OAuthCredentialsProvider provider =
     .keystoreKeyPassword(keystoreKeyPassword)
     .truststorePath(truststorePath)
     .truststorePassword(truststorePassword)
+    .resource(resourceIndicator)
     .build();
 ```
 
