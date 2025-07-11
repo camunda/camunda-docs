@@ -24,13 +24,13 @@ By leveraging this ecosystem, organizations can extend Kubernetes functionality 
 
 This section includes deployment reference architectures:
 
-- [Amazon EKS single-region](/self-managed/setup/deploy/amazon/amazon-eks/terraform-setup.md): a standard production setup.
-- [Amazon EKS dual-region](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md): an advanced use case utilizing two regions.
+- [Amazon EKS single-region](/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md): a standard production setup.
+- [Amazon EKS dual-region](/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/dual-region.md): an advanced use case utilizing two regions.
 
 Red Hat OpenShift on AWS (ROSA)
 
-- [ROSA single-region](/self-managed/setup/deploy/amazon/openshift/terraform-setup.md): a standard production setup.
-- [ROSA dual-region](/self-managed/setup/deploy/amazon/openshift/terraform-setup-dual-region.md): an advanced use case utilizing two regions.
+- [ROSA single-region](/self-managed/installation-methods/helm/cloud-providers/amazon/openshift/terraform-setup.md): a standard production setup.
+- [ROSA dual-region](/self-managed/installation-methods/helm/cloud-providers/amazon/openshift/terraform-setup-dual-region.md): an advanced use case utilizing two regions.
 
 For general deployment pitfalls, visit the [deployment troubleshooting guide](/self-managed/operational-guides/troubleshooting/troubleshooting.md).
 

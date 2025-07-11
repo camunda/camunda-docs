@@ -111,7 +111,7 @@ Kubernetes is a powerful orchestration platform for containerized applications. 
 - Best for teams with experience in managing containerized environments.
 - A steeper learning curve but offers scalable and highly resilient platform.
 
-For more information and guides, see the reference for [Kubernetes](/self-managed/reference-architecture/kubernetes.md).
+For more information and guides, see the reference for [Kubernetes](/self-managed/installation-methods/helm/cloud-providers/kubernetes.md).
 
 ### Containers
 
