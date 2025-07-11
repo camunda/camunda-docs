@@ -455,14 +455,16 @@ camunda.operate:
 
 ## Backups
 
-Depending on the choice of database, following must be configured on the database itself:
+You must configure the following on your chosen database:
 
 - [Elasticsearch snapshot repository](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshot-restore.html)
 - [OpenSearch snapshot repository](https://docs.opensearch.org/docs/latest/tuning-your-cluster/availability-and-recovery/snapshots/snapshot-restore/)
 
 Operate is configured with the snapshot repository name to trigger database snapshots. This is important for coherent backups.
 
-Read more about the procedure and the need to trigger it through Camunda components in the [backup guide](/self-managed/operational-guides/backup-restore/backup-and-restore.md).
+:::info
+Learn more about the procedure and the need to trigger it through Camunda components in the [backup guide](/self-managed/operational-guides/backup-restore/backup-and-restore.md).
+:::
 
 Operate must be configured with the repository name:
 
