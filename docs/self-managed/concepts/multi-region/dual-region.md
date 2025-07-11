@@ -90,10 +90,10 @@ Amazon OpenSearch is **not supported** in dual-region configurations.
 #### Network requirements
 
 - Kubernetes clusters, services, and pods must not have overlapping CIDRs. Each cluster must use distinct CIDRs that do not conflict or overlap with those of any other cluster to avoid routing issues.
-- The regions (for example, two Kubernetes clusters) must be able to communicate with each other (for example, via VPC peering). See [example implementation](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md) for AWS EKS.
+- The regions (for example, two Kubernetes clusters) must be able to communicate with each other (for example, via VPC peering). See [example implementation](/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/dual-region.md) for AWS EKS.
   - Kubernetes services in one cluster must be resolvable and reachable from the other cluster and vice-versa. This is essential for proper communication and functionality across regions:
-    - For AWS EKS setups, ensure DNS chaining is configured. Refer to the [Amazon Elastic Kubernetes Service (EKS) setup guide](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md).
-    - For OpenShift, [Submariner](https://docs.redhat.com/en/documentation/red_hat_advanced_cluster_management_for_kubernetes/2.11/html/networking/networking#submariner) is recommended for handling multi-cluster networking. Refer to the [OpenShift dual-region setup guide](/self-managed/setup/deploy/openshift/dual-region.md).
+    - For AWS EKS setups, ensure DNS chaining is configured. Refer to the [Amazon Elastic Kubernetes Service (EKS) setup guide](/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/dual-region.md).
+    - For OpenShift, [Submariner](https://docs.redhat.com/en/documentation/red_hat_advanced_cluster_management_for_kubernetes/2.11/html/networking/networking#submariner) is recommended for handling multi-cluster networking. Refer to the [OpenShift dual-region setup guide](/self-managed/installation-methods/helm/cloud-providers/openshift/dual-region.md).
 - Maximum network round trip time (**RTT**) between regions should not exceed **100 ms**.
 - Required open ports between the two regions:
   - **9200** for Elasticsearch (for cross-region data pushed by Zeebe).
@@ -211,6 +211,6 @@ The **Recovery Time Objective (RTO)** estimates are based on our internal tests 
 
 ## Further resources
 
-- Familiarize yourself with our [Amazon Elastic Kubernetes Service (EKS) setup guide](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md). This showcases an example blueprint setup in AWS that utilizes the managed EKS and VPC peering for a dual-region setup with Terraform.
+- Familiarize yourself with our [Amazon Elastic Kubernetes Service (EKS) setup guide](/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/dual-region.md). This showcases an example blueprint setup in AWS that utilizes the managed EKS and VPC peering for a dual-region setup with Terraform.
   - The concepts in the guide are mainly cloud-agnostic, and the guide can be adopted by other cloud providers.
 - Familiarize yourself with the [operational procedure](/self-managed/installation-methods/helm/operational-tasks/dual-region-ops.md) to understand how to proceed in the case of a total region loss and how to prepare yourself to ensure smooth operations.

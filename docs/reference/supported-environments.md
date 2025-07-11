@@ -56,10 +56,10 @@ The following are tested and supported deployment options for Kubernetes, Docker
 
 - [Stock Kubernetes](/self-managed/installation-methods/helm/install.md)
 - [Cloud service providers](/self-managed/installation-methods/helm/install.md) [recommended]
-  - [Amazon EKS](/self-managed/setup/deploy/amazon/amazon-eks/amazon-eks.md)
-  - [Microsoft AKS](/self-managed/setup/deploy/azure/microsoft-aks/microsoft-aks.md)
-  - [Google GKE](/self-managed/setup/deploy/gcp/google-gke.md)
-- [Red Hat OpenShift](/self-managed/setup/deploy/openshift/redhat-openshift.md)
+  - [Amazon EKS](/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/amazon-eks.md)
+  - [Microsoft AKS](/self-managed/installation-methods/helm/cloud-providers/azure/microsoft-aks/microsoft-aks.md)
+  - [Google GKE](/self-managed/installation-methods/helm/cloud-providers/gcp/google-gke.md)
+- [Red Hat OpenShift](/self-managed/installation-methods/helm/cloud-providers/openshift/redhat-openshift.md)
 - [Docker](/self-managed/installation-methods/docker/docker.md) (`linux/amd64`)
 - [Manual](/self-managed/installation-methods/manual/install.md)
 
@@ -79,9 +79,9 @@ To ensure an appropriate sizing, [determine your influencing factors](../compone
 
 For details on typical volume type usage, refer to the following examples specific to cloud service providers:
 
-- [Amazon EKS](/self-managed/reference-architecture/kubernetes.md#amazon-eks)
-- [Microsoft AKS](/self-managed/reference-architecture/kubernetes.md#microsoft-aks)
-- [Google GKE](/self-managed/reference-architecture/kubernetes.md#google-gke)
+- [Amazon EKS](/self-managed/installation-methods/helm/cloud-providers/kubernetes.md#amazon-eks)
+- [Microsoft AKS](/self-managed/installation-methods/helm/cloud-providers/kubernetes.md#microsoft-aks)
+- [Google GKE](/self-managed/installation-methods/helm/cloud-providers/kubernetes.md#google-gke)
 
 ### Helm charts version matrix
 

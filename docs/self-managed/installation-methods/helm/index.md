@@ -290,7 +290,7 @@ By default, Camunda services deployed in a cluster are not accessible from outsi
 
 - **Port forwarding:** This method allows you to direct traffic from your local machine to the cluster, making it possible to access Camunda services directly. For detailed instructions, refer to [accessing components without Ingress](/self-managed/installation-methods/helm/configure/accessing-components-without-ingress.md).
 - **Ingress configuration:** You can set up the NGINX Ingress controller to manage external service access. For detailed instructions, refer to the [Ingress setup guide](/self-managed/installation-methods/helm/configure/ingress-setup.md).
-- **EKS cluster installation:** For those deploying Camunda 8 on an Amazon EKS cluster, refer to [installing Camunda 8 on an EKS cluster](/self-managed/setup/deploy/amazon/amazon-eks/eks-helm.md).
+- **EKS cluster installation:** For those deploying Camunda 8 on an Amazon EKS cluster, refer to [installing Camunda 8 on an EKS cluster](/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/eks-helm.md).
 
 ## Configure license key
 
