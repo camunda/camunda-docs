@@ -1,6 +1,6 @@
 ---
 id: getting-started-example
-title: "Run your first Camunda 8 project locally"
+title: "Run your first local Camunda 8 project"
 sidebar_label: Run your first local project
 description: "For developers using Camunda 8 Self-Managed, step through an example project with Spring Boot or Node.js."
 keywords: [java, spring, spring camunda, getting started, user guide, tutorial]
@@ -14,7 +14,7 @@ import TabItem from "@theme/TabItem";
 
 This guide is tailored for developers who want to implement process automation solutions using Java and Spring. You'll work with a local, self-managed, lightweight Camunda 8 environment.
 
-## Getting started with an example project
+## Get started with an example project
 
 You will:
 
