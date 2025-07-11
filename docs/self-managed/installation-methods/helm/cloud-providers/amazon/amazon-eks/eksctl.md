@@ -700,7 +700,7 @@ export DB_WEBMODELER_PASSWORD="CHANGE-ME-PLEASE"
 
 6. Create a PostgreSQL cluster within a private subnet of the VPC:
 
-   For the latest Camunda-supported PostgreSQL engine version, check our [documentation](../../../../../reference/supported-environments.md#camunda-8-self-managed).
+   For the latest Camunda-supported PostgreSQL engine version, check our [documentation](../../../../../../reference/supported-environments.md#camunda-8-self-managed).
 
    ```shell
    aws rds create-db-cluster \

@@ -42,7 +42,7 @@ Terraform can initially appear complex. If you're new to it, you might want to s
 
 If you require managed services for PostgreSQL Aurora or OpenSearch, you can refer to the definitions provided in the [EKS setup with Terraform](../amazon-eks/terraform-setup.md) guide. However, please note that these configurations may need adjustments to fit your specific requirements and have not been tested. By default, this guide assumes that the database services (PostgreSQL and Elasticsearch) integrated into the default chart will be used.
 
-For testing Camunda 8 or developing against it, you might consider signing up for our [SaaS offering](https://camunda.com/platform/). If you already have a Red Hat OpenShift cluster on AWS, you can skip ahead to the [Helm setup guide](/self-managed/setup/deploy/openshift/redhat-openshift.md).
+For testing Camunda 8 or developing against it, you might consider signing up for our [SaaS offering](https://camunda.com/platform/). If you already have a Red Hat OpenShift cluster on AWS, you can skip ahead to the [Helm setup guide](/self-managed/installation-methods/helm/cloud-providers/openshift/redhat-openshift.md).
 
 To keep this guide concise, we provide links to additional documentation covering best practices, allowing you to explore each topic in greater depth.
 
@@ -552,4 +552,4 @@ You can access the created OpenShift cluster using the following steps:
 
 ## 3. Install Camunda 8 using the Helm chart
 
-Now that you've exported the necessary values, you can proceed with installing Camunda 8 using Helm charts. Follow the guide [Camunda 8 on OpenShift](/self-managed/setup/deploy/openshift/redhat-openshift.md) for detailed instructions on deploying the platform to your OpenShift cluster.
+Now that you've exported the necessary values, you can proceed with installing Camunda 8 using Helm charts. Follow the guide [Camunda 8 on OpenShift](/self-managed/installation-methods/helm/cloud-providers/openshift/redhat-openshift.md) for detailed instructions on deploying the platform to your OpenShift cluster.

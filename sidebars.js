@@ -1132,9 +1132,22 @@ module.exports = {
                 "self-managed/installation-methods/helm/configure/application-configs",
               ],
             },
-            // {
-            //   Upgrade: ["setup/upgrade"],
-            // },
+            {
+              type: "category",
+              label: "Upgrade",
+              link: {
+                type: "doc",
+                id: "self-managed/installation-methods/helm/upgrade/upgrade",
+              },
+              items: [
+                "self-managed/installation-methods/helm/upgrade/upgrade-hc-820-830",
+                "self-managed/installation-methods/helm/upgrade/upgrade-hc-830-840",
+                "self-managed/installation-methods/helm/upgrade/upgrade-hc-840-850",
+                "self-managed/installation-methods/helm/upgrade/upgrade-hc-850-860",
+                "self-managed/installation-methods/helm/upgrade/upgrade-hc-860-870",
+                "self-managed/installation-methods/helm/upgrade/upgrade",
+              ],
+            },
             {
               "Operational tasks": [
                 "self-managed/installation-methods/helm/operational-tasks/dual-region-operational-procedure",
@@ -1142,13 +1155,85 @@ module.exports = {
               ],
               //also to include backup and restore, and scaling
             },
-            //cloud providers
+            {
+              type: "category",
+              label: "Cloud providers",
+              link: {
+                type: "doc",
+                id: "self-managed/installation-methods/helm/cloud-providers/kubernetes",
+              },
+              items: [
+                {
+                  type: "category",
+                  label: "Amazon",
+                  link: {
+                    type: "doc",
+                    id: "self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/amazon-eks",
+                  },
+                  items: [
+                    {
+                      type: "category",
+                      label: "Amazon EKS",
+                      link: {
+                        type: "doc",
+                        id: "self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/amazon-eks",
+                      },
+                      items: [
+                        "self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/eks-terraform",
+                        "self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/eks-helm",
+                        "self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/dual-region",
+                        "self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/eks-eksctl",
+                        "self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/irsa",
+                      ],
+                    },
+                    {
+                      type: "category",
+                      label: "ROSA",
+                      link: {
+                        type: "doc",
+                        id: "self-managed/installation-methods/helm/cloud-providers/amazon/openshift/terraform-setup",
+                      },
+                      items: [
+                        "self-managed/installation-methods/helm/cloud-providers/amazon/openshift/terraform-setup",
+                        "self-managed/installation-methods/helm/cloud-providers/amazon/openshift/terraform-setup-dual-region",
+                      ],
+                    },
+                  ],
+                },
+                {
+                  type: "category",
+                  label: "Microsoft",
+                  link: {
+                    type: "doc",
+                    id: "self-managed/installation-methods/helm/cloud-providers/azure/microsoft-aks/microsoft-aks",
+                  },
+                  items: [
+                    "self-managed/installation-methods/helm/cloud-providers/azure/microsoft-aks/aks-terraform",
+                    "self-managed/installation-methods/helm/cloud-providers/azure/microsoft-aks/aks-helm",
+                  ],
+                },
+                {
+                  Google: [
+                    "self-managed/installation-methods/helm/cloud-providers/gcp/google-gke",
+                  ],
+                },
+                {
+                  type: "category",
+                  label: "Red Hat OpenShift",
+                  link: {
+                    type: "doc",
+                    id: "self-managed/installation-methods/helm/cloud-providers/openshift/redhat-openshift",
+                  },
+                  items: [
+                    "self-managed/installation-methods/helm/cloud-providers/openshift/redhat-openshift-dual-region",
+                  ],
+                },
+              ],
+            },
           ],
         },
         "self-managed/installation-methods/docker/docker",
-        {
-          Manual: ["self-managed/installation-methods/manual/manual-install"],
-        },
+        "self-managed/installation-methods/manual/manual-install",
       ],
     },
     {
@@ -1161,85 +1246,14 @@ module.exports = {
       items: [
         {
           type: "category",
-          label: "Kubernetes",
-          link: {
-            type: "doc",
-            id: "self-managed/reference-architecture/kubernetes",
-          },
-          items: [
-            {
-              type: "category",
-              label: "Amazon",
-              link: {
-                type: "doc",
-                id: "self-managed/setup/deploy/amazon/amazon-eks/amazon-eks",
-              },
-              items: [
-                {
-                  type: "category",
-                  label: "Amazon EKS",
-                  link: {
-                    type: "doc",
-                    id: "self-managed/setup/deploy/amazon/amazon-eks/amazon-eks",
-                  },
-                  items: [
-                    "self-managed/setup/deploy/amazon/amazon-eks/eks-terraform",
-                    "self-managed/setup/deploy/amazon/amazon-eks/eks-helm",
-                    "self-managed/setup/deploy/amazon/amazon-eks/dual-region",
-                    "self-managed/setup/deploy/amazon/amazon-eks/eks-eksctl",
-                    "self-managed/setup/deploy/amazon/amazon-eks/irsa",
-                  ],
-                },
-                {
-                  type: "category",
-                  label: "ROSA",
-                  link: {
-                    type: "doc",
-                    id: "self-managed/setup/deploy/amazon/openshift/terraform-setup",
-                  },
-                  items: [
-                    "self-managed/setup/deploy/amazon/openshift/terraform-setup",
-                    "self-managed/setup/deploy/amazon/openshift/terraform-setup-dual-region",
-                  ],
-                },
-              ],
-            },
-            {
-              type: "category",
-              label: "Microsoft",
-              link: {
-                type: "doc",
-                id: "self-managed/setup/deploy/azure/microsoft-aks/microsoft-aks",
-              },
-              items: [
-                "self-managed/setup/deploy/azure/microsoft-aks/aks-terraform",
-                "self-managed/setup/deploy/azure/microsoft-aks/aks-helm",
-              ],
-            },
-            {
-              Google: ["self-managed/setup/deploy/gcp/google-gke"],
-            },
-            {
-              type: "category",
-              label: "Red Hat OpenShift",
-              link: {
-                type: "doc",
-                id: "self-managed/setup/deploy/openshift/redhat-openshift",
-              },
-              items: [
-                "self-managed/setup/deploy/openshift/redhat-openshift-dual-region",
-              ],
-            },
-          ],
-        },
-        {
-          type: "category",
           label: "Manual JAR",
           link: {
             type: "doc",
             id: "self-managed/reference-architecture/manual",
           },
-          items: ["self-managed/setup/deploy/amazon/aws-ec2"],
+          items: [
+            "self-managed/installation-methods/helm/cloud-providers/amazon/aws-ec2",
+          ],
         },
       ],
     },

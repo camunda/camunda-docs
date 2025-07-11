@@ -38,8 +38,8 @@ This procedure has been updated in the Camunda 8.6 release. The procedure used i
 
 This operational blueprint procedure is a step-by-step guide on how to restore operations in the case of a total region failure. It explains how to temporarily restore functionality in the surviving region and how to ultimately do a full recovery to restore the dual-region setup.
 
-The operational procedure builds on top of the [dual-region AWS setup guidance](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md), but is generally applicable for any dual-region setup.
-It has been also validated for the [OpenShift dual-region setup guidance](/self-managed/setup/deploy/openshift/dual-region.md).
+The operational procedure builds on top of the [dual-region AWS setup guidance](/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/dual-region.md), but is generally applicable for any dual-region setup.
+It has been also validated for the [OpenShift dual-region setup guidance](/self-managed/installation-methods/helm/cloud-providers/openshift/dual-region.md).
 
 Before proceeding with the operational procedure, thoroughly review and understand the contents of the [dual-region concept page](/self-managed/concepts/multi-region/dual-region.md). This page outlines various limitations and requirements pertinent to the procedure, which are crucial for successful execution.
 
@@ -53,7 +53,7 @@ Running a dual-region configuration requires users to detect and manage any regi
 
 ## Prerequisites
 
-- A dual-region Camunda 8 setup installed in two different regions, preferably derived from our [AWS dual-region concept](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md) or [OpenShift dual-region concept](/self-managed/setup/deploy/openshift/dual-region.md).
+- A dual-region Camunda 8 setup installed in two different regions, preferably derived from our [AWS dual-region concept](/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/dual-region.md) or [OpenShift dual-region concept](/self-managed/installation-methods/helm/cloud-providers/openshift/dual-region.md).
   - In that guide, we're showcasing Kubernetes dual-region installation, based on the following tools:
     - [Helm (3.x)](https://helm.sh/docs/intro/install/) for installing and upgrading the [Camunda Helm chart](https://artifacthub.io/packages/helm/camunda/camunda-platform).
     - [Kubectl (1.30.x)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the Kubernetes cluster.
@@ -91,10 +91,10 @@ For the failback procedure, the recreated region must not include any active Cam
 
 The following procedures assume the following dual-region deployment for:
 
-- **AWS:** the deployment has been created using [AWS setup guide](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md#deploy-camunda-8-to-the-clusters) and you have your own copy of the [c8-multi-region](https://github.com/camunda/c8-multi-region) repository and previously completed changes in the `camunda-values.yml` to adjust them in your setup.
-  Follow the [dual-region cluster deployment](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md#deploy-camunda-8-to-the-clusters) guide to install Camunda 8, configure a dual-region setup, and have the general environment variables (see [environment prerequisites](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md#environment-prerequisites) already set up).
+- **AWS:** the deployment has been created using [AWS setup guide](/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/dual-region.md#deploy-camunda-8-to-the-clusters) and you have your own copy of the [c8-multi-region](https://github.com/camunda/c8-multi-region) repository and previously completed changes in the `camunda-values.yml` to adjust them in your setup.
+  Follow the [dual-region cluster deployment](/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/dual-region.md#deploy-camunda-8-to-the-clusters) guide to install Camunda 8, configure a dual-region setup, and have the general environment variables (see [environment prerequisites](/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/dual-region.md#environment-prerequisites) already set up).
 
-- **OpenShift:** the deployment has been created using [OpenShift setup guide](/self-managed/setup/deploy/openshift/dual-region.md#deploying-camunda-8-via-helm-charts-in-a-dual-region-setup) and previously completed changes in your `generated-values-region-1.yml` and `generated-values-region-2.yml` to adjust them in your setup.
+- **OpenShift:** the deployment has been created using [OpenShift setup guide](/self-managed/installation-methods/helm/cloud-providers/openshift/dual-region.md#deploying-camunda-8-via-helm-charts-in-a-dual-region-setup) and previously completed changes in your `generated-values-region-1.yml` and `generated-values-region-2.yml` to adjust them in your setup.
 
 :::note OpenShift cluster reference
 
@@ -647,8 +647,8 @@ Ensure that the values for `ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION0_ARGS_URL
 
 This step is equivalent to applying for the region to be recreated:
 
-- [Setting up the Camunda 8 Dual-Region Helm chart](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md#camunda-8-helm-chart-prerequisites)
-- [Deploying the Camunda 8 Dual-Region Helm chart](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md#deploy-camunda-8)
+- [Setting up the Camunda 8 Dual-Region Helm chart](/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/dual-region.md#camunda-8-helm-chart-prerequisites)
+- [Deploying the Camunda 8 Dual-Region Helm chart](/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/dual-region.md#deploy-camunda-8)
 
 From the terminal context of `aws/dual-region/kubernetes` execute:
 
@@ -668,7 +668,7 @@ helm install $CAMUNDA_RELEASE_NAME camunda/camunda-platform \
 
 Follow the installation steps **recreated region**:
 
-- [Setting up the Camunda 8 Dual-Region Helm chart](/self-managed/setup/deploy/openshift/dual-region.md#configure-your-deployment-for-each-region) _Optional if you already have your pre-configured `generated-values-file.yml`_
+- [Setting up the Camunda 8 Dual-Region Helm chart](/self-managed/installation-methods/helm/cloud-providers/openshift/dual-region.md#configure-your-deployment-for-each-region) _Optional if you already have your pre-configured `generated-values-file.yml`_
 - Once your values file is generated from the installation step, install **Camunda 8 only in the recreated region**, you will need to adjust the installation command to disable Operate (`--set operate.enabled=false`) and Tasklist (`--set tasklist.enabled=false`):
 
   Example command adapted from the installation step.
@@ -684,7 +684,7 @@ Follow the installation steps **recreated region**:
   --set tasklist.enabled=false # <---- don't forget to disable operate and tasklist
   ```
 
-- [Follow the installation step for the **recreated region only**](/self-managed/setup/deploy/openshift/dual-region.md#install-camunda-8-using-helm).
+- [Follow the installation step for the **recreated region only**](/self-managed/installation-methods/helm/cloud-providers/openshift/dual-region.md#install-camunda-8-using-helm).
 
 </TabItem>
 </Tabs>
@@ -947,7 +947,7 @@ desired={<Ten viewBox="140 40 680 500" />}
 
 #### How to get there
 
-This builds on top of the [AWS setup](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md) and assumes the S3 bucket was automatically created as part of the Terraform execution.
+This builds on top of the [AWS setup](/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/dual-region.md) and assumes the S3 bucket was automatically created as part of the Terraform execution.
 
 :::info
 
@@ -969,7 +969,7 @@ The procedure works for other Cloud providers and bare metal. You have to adjust
    </TabItem>
    <TabItem value="OpenShift" label="OpenShift">
 
-   Retrieve the name of the bucket from the [verify the pre-requisites step of OpenShift Dual-region](/self-managed/setup/deploy/openshift/dual-region.md#verify-the-pre-requisites) step, it should be referenced as the `AWS_ES_BUCKET_NAME` variable.
+   Retrieve the name of the bucket from the [verify the pre-requisites step of OpenShift Dual-region](/self-managed/installation-methods/helm/cloud-providers/openshift/dual-region.md#verify-the-pre-requisites) step, it should be referenced as the `AWS_ES_BUCKET_NAME` variable.
 
    Export it:
 
@@ -1228,7 +1228,7 @@ The base Helm values file `camunda-values.yml` in `aws/dual-region/kubernetes` c
 
 Follow the installation instruction for the two regions, you will need to apply helm upgrade on the `CLUSTER_RECREATED` and on the `CLUSTER_SURVIVING`.
 
-- [Apply the initial installation on the two regions](/self-managed/setup/deploy/openshift/dual-region.md#install-camunda-8-using-helm).
+- [Apply the initial installation on the two regions](/self-managed/installation-methods/helm/cloud-providers/openshift/dual-region.md#install-camunda-8-using-helm).
 - Ensure that the services are exported correctly using `subctl`.
 - This step will re-enable Operate and Tasklist in the two regions.
 

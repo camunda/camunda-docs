@@ -78,7 +78,7 @@ The script offers detailed output to confirm that each component is properly con
 [OK] AWS environment detected. Proceeding with the script.
 [INFO] Chart camunda-platform is deployed in namespace camunda-primary.
 [INFO] Retrieved values for Helm deployment: camunda-platform-11.0.1.
-[FAIL] The service account keycloak-sa does not have a valid eks.amazonaws.com/role-arn annotation. You must add it in the chart, see https://docs.camunda.io/docs/self-managed/setup/deploy/amazon/amazon-eks/eks-helm/
+[FAIL] The service account keycloak-sa does not have a valid eks.amazonaws.com/role-arn annotation. You must add it in the chart, see https://docs.camunda.io/docs/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/eks-helm/
 [FAIL] RoleArn name for component 'identityKeycloak' is empty. Skipping verification.
 ```
 

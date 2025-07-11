@@ -4,7 +4,7 @@ title: "Red Hat OpenShift"
 description: "Deploy Camunda 8 Self-Managed on Red Hat OpenShift"
 ---
 
-<!-- (!) Note: Please ensure that this guide maintains a consistent structure and presentation style throughout, as with docs/self-managed/setup/deploy/amazon/amazon-eks/eks-helm.md. The user should have a similar experience when reading both guides. -->
+<!-- (!) Note: Please ensure that this guide maintains a consistent structure and presentation style throughout, as with docs/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/eks-helm.md. The user should have a similar experience when reading both guides. -->
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -15,7 +15,7 @@ Deploying Camunda 8 on Red Hat OpenShift is supported using Helm, given the appr
 
 However, it's important to note that the [Security Context Constraints (SCCs)](#security-context-constraints-sccs) and [Routes](./redhat-openshift.md?current-ingress=openshift-routes#using-openshift-routes) configurations might require slight deviations from the guidelines provided in the [general Helm deployment guide](/self-managed/installation-methods/helm/install.md).
 
-Additional informational and high-level overview based on Kubernetes as upstream project is available on our [Kubernetes deployment reference](/self-managed/reference-architecture/kubernetes.md).
+Additional informational and high-level overview based on Kubernetes as upstream project is available on our [Kubernetes deployment reference](/self-managed/installation-methods/helm/cloud-providers/kubernetes.md).
 
 ## Requirements
 
@@ -310,7 +310,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 ## Verify connectivity to Camunda 8
 
-Please follow our [guide to verify connectivity to Camunda 8](/self-managed/setup/deploy/amazon/amazon-eks/eks-helm.md#verify-connectivity-to-camunda-8).
+Please follow our [guide to verify connectivity to Camunda 8](/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/eks-helm.md#verify-connectivity-to-camunda-8).
 
 The username of the first user is `demo`, the password is the one generated previously and stored in the environment variable `FIRST_USER_PASSWORD`.
 
