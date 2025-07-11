@@ -13,27 +13,18 @@ Back up your Camunda 8 Self-Managed components and cluster.
 
 ## About the backup process
 
-To create a backup you must complete the following main steps:
-
-1. [Back up WebApps](#back-up-webapps)
-2. [Back up Zeebe Cluster](#back-up-zeebe)
+To create a backup you must complete the following [back up process](#back-up-process).
 
 You can also optionally [back up your Web Modeler data](#back-up-web-modeler-data).
 
 :::caution before you begin
 
-- To create a consistent backup, you **must** complete backing up the WebApps first before backing up the Zeebe Cluster.
+- To create a consistent backup, you **must** complete the backing in the outlined order.
 - You must complete the [prerequisites](backup-and-restore.md#prerequisites) before creating a backup.
 
 :::
 
-## Step 1: Back up WebApps {#back-up-webapps}
-
-Start the backup process by first backing up the WebApps.
-
-:::note
-When backing up the WebApps, the order in which you execute the following sub-steps is not important (you can start by backing up Operate, Optimize, Tasklist in any order for example).
-:::
+## Back up process
 
 ### Example API endpoint definition
 
@@ -55,10 +46,8 @@ As noted in the [Management API](backup-and-restore.md#management-api) section, 
       export ELASTIC_SNAPSHOT_REPOSITORY="camunda" # the name of your snapshot repository
       export ELASTIC_ENDPOINT="http://localhost:9200"
 
-      export OPERATE_MANAGEMENT_API="http://localhost:9600"
+      export ORCHESTRATION_CLUSTER_MANAGEMENT_API="http://localhost:9600"
       export OPTIMIZE_MANAGEMENT_API="http://localhost:9620"
-      export TASKLIST_MANAGEMENT_API="http://localhost:9640"
-      export GATEWAY_MANAGEMENT_API="http://localhost:9660"
       ```
 
       </TabItem>
@@ -72,17 +61,76 @@ As noted in the [Management API](backup-and-restore.md#management-api) section, 
       export ELASTIC_SNAPSHOT_REPOSITORY="camunda" # the name of your snapshot repository
       export ELASTIC_ENDPOINT="$CAMUNDA_RELEASE_NAME-elasticsearch:9200"
 
-      export OPERATE_MANAGEMENT_API="http://$CAMUNDA_RELEASE_NAME-operate:9600"
+      export ORCHESTRATION_CLUSTER_MANAGEMENT_API="http://$CAMUNDA_RELEASE_NAME-core:9600"
       export OPTIMIZE_MANAGEMENT_API="http://$CAMUNDA_RELEASE_NAME-optimize:8092"
-      export TASKLIST_MANAGEMENT_API="http://$CAMUNDA_RELEASE_NAME-tasklist:9600"
-      export GATEWAY_MANAGEMENT_API="http://$CAMUNDA_RELEASE_NAME-zeebe-gateway:9600"
       ```
 
       </TabItem>
 
    </Tabs>
 
-### 1. Start a backup `x` of Optimize
+### 1. Soft pause exporting in Zeebe
+
+This step uses the [management API](/self-managed/zeebe-deployment/operations/management-api.md?exporting=softPause#exporting-api).
+
+This will continue exporting records, but not delete those records (log compaction) from Zeebe. This makes the backup a hot backup, as covered in the [why you should use backup and restore](backup-and-restore.md#why-you-should-use-backup-and-restore).
+
+```bash
+curl -XPOST "$ORCHESTRATION_CLUSTER_MANAGEMENT_API/actuator/exporting/pause?soft=true"
+```
+
+   <details>
+      <summary>Example output</summary>
+      <summary>
+
+      :::note
+      Yes, 204 is the expected result and indicates a successful soft pause.
+      :::
+
+      ```json
+      {
+         "body":null,
+         "status":204,
+         "contentType":null
+      }
+      ```
+
+      </summary>
+
+   </details>
+
+### 2. Start a backup `x` of the web applications (Operate / Tasklist)
+
+This step uses the [web applications management backup API](/self-managed/operational-guides/backup-restore/webapps-backup.md).
+
+```bash
+curl -XPOST "$ORCHESTRATION_CLUSTER_MANAGEMENT_API/actuator/backupHistory" \
+   -H "Content-Type: application/json" \
+   -d "{\"backupId\": $BACKUP_ID}"
+```
+
+   <details>
+      <summary>Example output</summary>
+      <summary>
+
+      ```json
+
+      {
+         "scheduledSnapshots":[
+            "camunda_webapps_1748937221_8.8.0_part_1_of_5",
+            "camunda_webapps_1748937221_8.8.0_part_2_of_5",
+            "camunda_webapps_1748937221_8.8.0_part_3_of_5",
+            "camunda_webapps_1748937221_8.8.0_part_4_of_5",
+            "camunda_webapps_1748937221_8.8.0_part_5_of_5"
+         ]
+      }
+      ```
+
+      </summary>
+
+   </details>
+
+### 3. Start a backup `x` of Optimize
 
 This step uses the [Optimize management backup API](/self-managed/operational-guides/backup-restore/optimize-backup.md).
 
@@ -106,14 +154,12 @@ curl -XPOST "$OPTIMIZE_MANAGEMENT_API/actuator/backups" \
 
    </details>
 
-### 2. Start a backup `x` of Operate
+### 4. Wait for backup `x` of the web applications (Operate / Tasklist) to complete
 
-This step uses the [Operate management backup API](/self-managed/operational-guides/backup-restore/operate-tasklist-backup.md).
+This step uses the the [web applications management backup API](/self-managed/operational-guides/backup-restore/webapps-backup.md).
 
 ```bash
-curl -XPOST "$OPERATE_MANAGEMENT_API/actuator/backups" \
-   -H "Content-Type: application/json" \
-   -d "{\"backupId\": $BACKUP_ID}"
+curl -s "$ORCHESTRATION_CLUSTER_MANAGEMENT_API/actuator/backupHistory/$BACKUP_ID"
 ```
 
    <details>
@@ -122,13 +168,50 @@ curl -XPOST "$OPERATE_MANAGEMENT_API/actuator/backups" \
 
       ```json
       {
-         "scheduledSnapshots":[
-            "camunda_operate_1748937221_8.7.2_part_1_of_6",
-            "camunda_operate_1748937221_8.7.2_part_2_of_6",
-            "camunda_operate_1748937221_8.7.2_part_3_of_6",
-            "camunda_operate_1748937221_8.7.2_part_4_of_6",
-            "camunda_operate_1748937221_8.7.2_part_5_of_6",
-            "camunda_operate_1748937221_8.7.2_part_6_of_6"
+         "backupId":1748937221,
+         "state":"COMPLETED",
+         "failureReason":null,
+         "details":[
+            {
+               "snapshotName":"camunda_webapps_1748937221_8.8.0_part_1_of_5",
+               "state":"SUCCESS",
+               "startTime":"2025-06-03T07:55:15.685+0000",
+               "failures":[
+
+               ]
+            },
+            {
+               "snapshotName":"camunda_webapps_1748937221_8.8.0_part_2_of_5",
+               "state":"SUCCESS",
+               "startTime":"2025-06-03T07:55:16.288+0000",
+               "failures":[
+
+               ]
+            },
+            {
+               "snapshotName":"camunda_webapps_1748937221_8.8.0_part_3_of_5",
+               "state":"SUCCESS",
+               "startTime":"2025-06-03T07:55:17.092+0000",
+               "failures":[
+
+               ]
+            },
+            {
+               "snapshotName":"camunda_webapps_1748937221_8.8.0_part_4_of_5",
+               "state":"SUCCESS",
+               "startTime":"2025-06-03T07:55:17.293+0000",
+               "failures":[
+
+               ]
+            },
+            {
+               "snapshotName":"camunda_webapps_1748937221_8.8.0_part_5_of_5",
+               "state":"SUCCESS",
+               "startTime":"2025-06-03T07:55:18.298+0000",
+               "failures":[
+
+               ]
+            }
          ]
       }
       ```
@@ -137,38 +220,13 @@ curl -XPOST "$OPERATE_MANAGEMENT_API/actuator/backups" \
 
    </details>
 
-### 3. Start a backup `x` of Tasklist
-
-This step uses the [Tasklist management backup API](/self-managed/operational-guides/backup-restore/operate-tasklist-backup.md).
+Alternatively as a one-line to wait until the state is `COMPLETED` using a while loop and jq to parse the response JSON.
 
 ```bash
-curl -XPOST "$TASKLIST_MANAGEMENT_API/actuator/backups" \
-   -H "Content-Type: application/json" \
-   -d "{\"backupId\": $BACKUP_ID}"
+while [[ "$(curl -s "$ORCHESTRATION_CLUSTER_MANAGEMENT_API/actuator/backupHistory/$BACKUP_ID" | jq -r .state)" != "COMPLETED" ]]; do echo "Waiting..."; sleep 5; done; echo "Finished backup with ID $BACKUP_ID"
 ```
 
-   <details>
-      <summary>Example output</summary>
-      <summary>
-
-      ```json
-      {
-         "scheduledSnapshots":[
-            "camunda_tasklist_1748937221_8.7.2_part_1_of_6",
-            "camunda_tasklist_1748937221_8.7.2_part_2_of_6",
-            "camunda_tasklist_1748937221_8.7.2_part_3_of_6",
-            "camunda_tasklist_1748937221_8.7.2_part_4_of_6",
-            "camunda_tasklist_1748937221_8.7.2_part_5_of_6",
-            "camunda_tasklist_1748937221_8.7.2_part_6_of_6"
-         ]
-      }
-      ```
-
-      </summary>
-
-   </details>
-
-### 4. Wait for backup `x` of Optimize to complete
+### 5. Wait for backup `x` of Optimize to complete
 
 This step uses the [Optimize management backup API](/self-managed/operational-guides/backup-restore/optimize-backup.md).
 
@@ -187,7 +245,7 @@ curl -s "$OPTIMIZE_MANAGEMENT_API/actuator/backups/$BACKUP_ID"
          "state":"COMPLETED",
          "details":[
             {
-               "snapshotName":"camunda_optimize_1748937221_8.7.1_part_1_of_2",
+               "snapshotName":"camunda_optimize_1748937221_8.8.0_part_1_of_2",
                "state":"SUCCESS",
                "startTime":"2025-06-03T07:53:54.389+0000",
                "failures":[
@@ -195,7 +253,7 @@ curl -s "$OPTIMIZE_MANAGEMENT_API/actuator/backups/$BACKUP_ID"
                ]
             },
             {
-               "snapshotName":"camunda_optimize_1748937221_8.7.1_part_2_of_2",
+               "snapshotName":"camunda_optimize_1748937221_8.8.0_part_2_of_2",
                "state":"SUCCESS",
                "startTime":"2025-06-03T07:53:54.389+0000",
                "failures":[
@@ -216,205 +274,7 @@ Alternatively as a one-line to wait until the state is `COMPLETED` using a while
 while [[ "$(curl -s "$OPTIMIZE_MANAGEMENT_API/actuator/backups/$BACKUP_ID" | jq -r .state)" != "COMPLETED" ]]; do echo "Waiting..."; sleep 5; done; echo "Finished backup with ID $BACKUP_ID"
 ```
 
-### 5. Wait for backup `x` of Operate to complete
-
-This step uses the the [Operate management backup API](/self-managed/operational-guides/backup-restore/operate-tasklist-backup.md).
-
-```bash
-curl -s "$OPERATE_MANAGEMENT_API/actuator/backups/$BACKUP_ID"
-```
-
-   <details>
-      <summary>Example output</summary>
-      <summary>
-
-      ```json
-      {
-         "backupId":1748937221,
-         "state":"COMPLETED",
-         "failureReason":null,
-         "details":[
-            {
-               "snapshotName":"camunda_operate_1748937221_8.7.2_part_1_of_6",
-               "state":"SUCCESS",
-               "startTime":"2025-06-03T07:55:15.685+0000",
-               "failures":[
-
-               ]
-            },
-            {
-               "snapshotName":"camunda_operate_1748937221_8.7.2_part_2_of_6",
-               "state":"SUCCESS",
-               "startTime":"2025-06-03T07:55:16.288+0000",
-               "failures":[
-
-               ]
-            },
-            {
-               "snapshotName":"camunda_operate_1748937221_8.7.2_part_3_of_6",
-               "state":"SUCCESS",
-               "startTime":"2025-06-03T07:55:17.092+0000",
-               "failures":[
-
-               ]
-            },
-            {
-               "snapshotName":"camunda_operate_1748937221_8.7.2_part_4_of_6",
-               "state":"SUCCESS",
-               "startTime":"2025-06-03T07:55:17.293+0000",
-               "failures":[
-
-               ]
-            },
-            {
-               "snapshotName":"camunda_operate_1748937221_8.7.2_part_5_of_6",
-               "state":"SUCCESS",
-               "startTime":"2025-06-03T07:55:18.298+0000",
-               "failures":[
-
-               ]
-            },
-            {
-               "snapshotName":"camunda_operate_1748937221_8.7.2_part_6_of_6",
-               "state":"SUCCESS",
-               "startTime":"2025-06-03T07:55:18.499+0000",
-               "failures":[
-
-               ]
-            }
-         ]
-      }
-      ```
-
-      </summary>
-
-   </details>
-
-Alternatively as a one-line to wait until the state is `COMPLETED` using a while loop and jq to parse the response JSON.
-
-```bash
-while [[ "$(curl -s "$OPERATE_MANAGEMENT_API/actuator/backups/$BACKUP_ID" | jq -r .state)" != "COMPLETED" ]]; do echo "Waiting..."; sleep 5; done; echo "Finished backup with ID $BACKUP_ID"
-```
-
-### 6. Wait for backup `x` of Tasklist to complete
-
-This step uses the [Tasklist management backup API](/self-managed/operational-guides/backup-restore/operate-tasklist-backup.md).
-
-```bash
-curl "$TASKLIST_MANAGEMENT_API/actuator/backups/$BACKUP_ID"
-```
-
-   <details>
-      <summary>Example output</summary>
-      <summary>
-
-      ```json
-      {
-         "backupId":1748937221,
-         "state":"COMPLETED",
-         "failureReason":null,
-         "details":[
-            {
-               "snapshotName":"camunda_tasklist_1748937221_8.7.2_part_1_of_6",
-               "state":"SUCCESS",
-               "startTime":"2025-06-03T07:56:56.519+0000",
-               "failures":[
-
-               ]
-            },
-            {
-               "snapshotName":"camunda_tasklist_1748937221_8.7.2_part_2_of_6",
-               "state":"SUCCESS",
-               "startTime":"2025-06-03T07:56:57.324+0000",
-               "failures":[
-
-               ]
-            },
-            {
-               "snapshotName":"camunda_tasklist_1748937221_8.7.2_part_3_of_6",
-               "state":"SUCCESS",
-               "startTime":"2025-06-03T07:56:57.927+0000",
-               "failures":[
-
-               ]
-            },
-            {
-               "snapshotName":"camunda_tasklist_1748937221_8.7.2_part_4_of_6",
-               "state":"SUCCESS",
-               "startTime":"2025-06-03T07:56:58.329+0000",
-               "failures":[
-
-               ]
-            },
-            {
-               "snapshotName":"camunda_tasklist_1748937221_8.7.2_part_5_of_6",
-               "state":"SUCCESS",
-               "startTime":"2025-06-03T07:56:58.933+0000",
-               "failures":[
-
-               ]
-            },
-            {
-               "snapshotName":"camunda_tasklist_1748937221_8.7.2_part_6_of_6",
-               "state":"SUCCESS",
-               "startTime":"2025-06-03T07:56:59.535+0000",
-               "failures":[
-
-               ]
-            }
-         ]
-      }
-      ```
-
-      </summary>
-
-   </details>
-
-Alternatively as a one-line to wait until the state is `COMPLETED` using a while loop and jq to parse the response JSON.
-
-```bash
-while [[ "$(curl -s "$TASKLIST_MANAGEMENT_API/actuator/backups/$BACKUP_ID" | jq -r .state)" != "COMPLETED" ]]; do echo "Waiting..."; sleep 5; done; echo "Finished backup with ID $BACKUP_ID"
-```
-
-## Step 2: Backup Zeebe Cluster {#back-up-zeebe}
-
-Once you have completed backing up all the WebApps, you can back up the Zeebe Cluster.
-
-:::caution
-When backing up the the Zeebe Cluster, you must execute the following sub-steps in the correct sequential order.
-:::
-
-### 1. Soft pause exporting in Zeebe
-
-This step uses the [management API](/self-managed/zeebe-deployment/operations/management-api.md?exporting=softPause#exporting-api).
-
-This will continue exporting records, but not delete those records (log compaction) from Zeebe. This makes the backup a hot backup, as covered in the [why you should use backup and restore](backup-and-restore.md#why-you-should-use-backup-and-restore).
-
-```bash
-curl -XPOST "$GATEWAY_MANAGEMENT_API/actuator/exporting/pause?soft=true"
-```
-
-   <details>
-      <summary>Example output</summary>
-      <summary>
-
-      :::note
-      Yes, 204 is the expected result and indicates a successful soft pause.
-      :::
-
-      ```json
-      {
-         "body":null,
-         "status":204,
-         "contentType":null
-      }
-      ```
-
-      </summary>
-
-   </details>
-
-### 2. Create a backup `x` of the exported Zeebe indices in Elasticsearch/OpenSearch
+### 6. Create a backup `x` of the exported Zeebe indices in Elasticsearch/OpenSearch
 
 You can create this backup using the respective Snapshots API.
 
@@ -445,13 +305,12 @@ By default, the indices are prefixed with `zeebe-record`. If you have configured
                "uuid":"1p_HdzKeTZ-zY-SN1LJ9VQ",
                "repository":"camunda",
                "version_id":8521000,
-               "version":"8.17.0-8.17.4",
+               "version":"8.18.0",
                "indices":[
-                  "zeebe-record_process_8.7.2_2025-06-03",
-                  "zeebe-record_job_8.7.2_2025-06-03",
-                  "zeebe-record_process-instance-creation_8.7.2_2025-06-03",
-                  "zeebe-record_process-instance_8.7.2_2025-06-03",
-                  "zeebe-record_deployment_8.7.2_2025-06-03"
+                  "zeebe-record_process_8.8.0_2025-06-03",
+                  "zeebe-record_job_8.8.0_2025-06-03",
+                  "zeebe-record_process-instance_8.8.0_2025-06-03",
+                  "zeebe-record_deployment_8.8.0_2025-06-03"
                ],
                "data_streams":[
 
@@ -467,9 +326,9 @@ By default, the indices are prefixed with `zeebe-record`. If you have configured
 
                ],
                "shards":{
-                  "total":9,
+                  "total":8,
                   "failed":0,
-                  "successful":9
+                  "successful":8
                },
                "feature_states":[
 
@@ -507,11 +366,10 @@ By default, the indices are prefixed with `zeebe-record`. If you have configured
                "version":"2.19.2",
                "remote_store_index_shallow_copy":false,
                "indices":[
-                  "zeebe-record_process_8.7.2_2025-06-03",
-                  "zeebe-record_job_8.7.2_2025-06-03",
-                  "zeebe-record_process-instance-creation_8.7.2_2025-06-03",
-                  "zeebe-record_process-instance_8.7.2_2025-06-03",
-                  "zeebe-record_deployment_8.7.2_2025-06-03"
+                  "zeebe-record_process_8.8.0_2025-06-03",
+                  "zeebe-record_job_8.8.0_2025-06-03",
+                  "zeebe-record_process-instance_8.8.0_2025-06-03",
+                  "zeebe-record_deployment_8.8.0_2025-06-03"
                ],
                "data_streams":[
 
@@ -527,9 +385,9 @@ By default, the indices are prefixed with `zeebe-record`. If you have configured
 
                ],
                "shards":{
-                  "total":9,
+                  "total":8,
                   "failed":0,
-                  "successful":9
+                  "successful":8
                }
             }
          }
@@ -542,7 +400,7 @@ By default, the indices are prefixed with `zeebe-record`. If you have configured
 
    </Tabs>
 
-### 3. Wait for backup `x` of the exported Zeebe indices to complete before proceeding
+### 7. Wait for backup `x` of the exported Zeebe indices to complete before proceeding
 
    <Tabs groupId="search-engine">
       <TabItem value="elasticsearch" label="Elasticsearch" default>
@@ -570,9 +428,9 @@ By default, the indices are prefixed with `zeebe-record`. If you have configured
                      "initializing":0,
                      "started":0,
                      "finalizing":0,
-                     "done":9,
+                     "done":8,
                      "failed":0,
-                     "total":9
+                     "total":8
                   },
                   "stats":{
                      "incremental":{
@@ -580,18 +438,17 @@ By default, the indices are prefixed with `zeebe-record`. If you have configured
                         "size_in_bytes":0
                      },
                      "total":{
-                        "file_count":9,
+                        "file_count":8,
                         "size_in_bytes":0
                      },
                      "start_time_in_millis":1748937910633,
                      "time_in_millis":0
                   },
                   "indices":{
-                     "zeebe-record_process_8.7.2_2025-06-03",
-                     "zeebe-record_job_8.7.2_2025-06-03",
-                     "zeebe-record_process-instance-creation_8.7.2_2025-06-03",
-                     "zeebe-record_process-instance_8.7.2_2025-06-03",
-                     "zeebe-record_deployment_8.7.2_2025-06-03"
+                     "zeebe-record_process_8.8.0_2025-06-03",
+                     "zeebe-record_job_8.8.0_2025-06-03",
+                     "zeebe-record_process-instance_8.8.0_2025-06-03",
+                     "zeebe-record_deployment_8.8.0_2025-06-03"
                   }
                }
             ]
@@ -627,9 +484,9 @@ By default, the indices are prefixed with `zeebe-record`. If you have configured
                      "initializing":0,
                      "started":0,
                      "finalizing":0,
-                     "done":9,
+                     "done":8,
                      "failed":0,
-                     "total":9
+                     "total":8
                   },
                   "stats":{
                      "incremental":{
@@ -637,18 +494,17 @@ By default, the indices are prefixed with `zeebe-record`. If you have configured
                         "size_in_bytes":0
                      },
                      "total":{
-                        "file_count":9,
+                        "file_count":8,
                         "size_in_bytes":0
                      },
                      "start_time_in_millis":1748943465623,
                      "time_in_millis":0
                   },
                   "indices":{
-                     "zeebe-record_process_8.7.2_2025-06-03",
-                     "zeebe-record_job_8.7.2_2025-06-03",
-                     "zeebe-record_process-instance-creation_8.7.2_2025-06-03",
-                     "zeebe-record_process-instance_8.7.2_2025-06-03",
-                     "zeebe-record_deployment_8.7.2_2025-06-03"
+                     "zeebe-record_process_8.8.0_2025-06-03",
+                     "zeebe-record_job_8.8.0_2025-06-03",
+                     "zeebe-record_process-instance_8.8.0_2025-06-03",
+                     "zeebe-record_deployment_8.8.0_2025-06-03"
                   }
                }
             ]
@@ -662,12 +518,12 @@ By default, the indices are prefixed with `zeebe-record`. If you have configured
 
    </Tabs>
 
-### 4. Create a backup `x` of the Zeebe broker partitions
+### 8. Create a backup `x` of the Zeebe broker partitions
 
 This step uses the [Zeebe management backup API](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md).
 
       ```bash
-      curl -XPOST "$GATEWAY_MANAGEMENT_API/actuator/backups" \
+      curl -XPOST "$ORCHESTRATION_CLUSTER_MANAGEMENT_API/actuator/backupRuntime" \
          -H "Content-Type: application/json" \
          -d "{\"backupId\": $BACKUP_ID}"
       ```
@@ -685,12 +541,12 @@ This step uses the [Zeebe management backup API](/self-managed/operational-guide
          </summary>
       </details>
 
-### 5. Wait for backup `x` of Zeebe to complete before proceeding
+### 9. Wait for backup `x` of Zeebe to complete before proceeding
 
 This step uses the [Zeebe management backup API](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md).
 
       ```bash
-      curl "$GATEWAY_MANAGEMENT_API/actuator/backups/$BACKUP_ID"
+      curl "$ORCHESTRATION_CLUSTER_MANAGEMENT_API/actuator/backupRuntime/$BACKUP_ID"
       ```
 
       <details>
@@ -708,7 +564,7 @@ This step uses the [Zeebe management backup API](/self-managed/operational-guide
                   "createdAt":"2025-06-03T08:06:06.246997293Z",
                   "lastUpdatedAt":"2025-06-03T08:06:10.408893628Z",
                   "checkpointPosition":1,
-                  "brokerVersion":"8.7.2"
+                  "brokerVersion":"8.8.0"
                }
             ]
          }
@@ -720,13 +576,13 @@ This step uses the [Zeebe management backup API](/self-managed/operational-guide
       Alternatively as a one-line to wait until the state is `COMPLETED` using a while loop and jq to parse the response JSON.
 
       ```bash
-      while [[ "$(curl -s "$GATEWAY_MANAGEMENT_API/actuator/backups/$BACKUP_ID" | jq -r .state)" != "COMPLETED" ]]; do echo "Waiting..."; sleep 5; done; echo "Finished backup with ID $BACKUP_ID"
+      while [[ "$(curl -s "$ORCHESTRATION_CLUSTER_MANAGEMENT_API/actuator/backupRuntime/$BACKUP_ID" | jq -r .state)" != "COMPLETED" ]]; do echo "Waiting..."; sleep 5; done; echo "Finished backup with ID $BACKUP_ID"
       ```
 
-### 6. Resume exporting in Zeebe using the [management API](/self-managed/zeebe-deployment/operations/management-api.md)
+### 10. Resume exporting in Zeebe using the [management API](/self-managed/zeebe-deployment/operations/management-api.md)
 
       ```bash
-      curl -XPOST "$GATEWAY_MANAGEMENT_API/actuator/exporting/resume"
+      curl -XPOST "$ORCHESTRATION_CLUSTER_MANAGEMENT_API/actuator/exporting/resume"
       ```
 
       <details>
@@ -779,9 +635,8 @@ Depending on your company’s backup policies (for example, retention periods an
 
 You can use the **delete backup APIs** for each component to remove the associated resources from the configured backup storage. You will have to provide the same backup ID for all calls to remove it from all backup stores.
 
-- [Operate](/self-managed/operational-guides/backup-restore/operate-tasklist-backup.md#delete-backup-api)
+- [Web Applications](/self-managed/operational-guides/backup-restore/webapps-backup.md#delete-backup-api)
 - [Optimize](/self-managed/operational-guides/backup-restore/optimize-backup.md#delete-backup-api)
-- [Tasklist](/self-managed/operational-guides/backup-restore/operate-tasklist-backup.md#delete-backup-api)
 - [Zeebe](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md#delete-backup-api)
 
 For Zeebe, you would also have to remove the separately backed up `zeebe-record` index snapshot using the [Elasticsearch](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-snapshot-delete) / [OpenSearch](https://docs.opensearch.org/docs/latest/api-reference/snapshots/delete-snapshot/) API directly.

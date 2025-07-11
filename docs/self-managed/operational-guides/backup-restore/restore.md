@@ -39,29 +39,22 @@ The following general prerequisites are required before you can restore a backup
 Our Backups look as follows:
 
 ```bash
-camunda_optimize_1748937221_8.7.1_part_1_of_2
-camunda_optimize_1748937221_8.7.1_part_2_of_2
-camunda_operate_1748937221_8.7.2_part_1_of_6
-camunda_operate_1748937221_8.7.2_part_2_of_6
-camunda_operate_1748937221_8.7.2_part_3_of_6
-camunda_operate_1748937221_8.7.2_part_4_of_6
-camunda_operate_1748937221_8.7.2_part_5_of_6
-camunda_operate_1748937221_8.7.2_part_6_of_6
-camunda_tasklist_1748937221_8.7.2_part_1_of_6
-camunda_tasklist_1748937221_8.7.2_part_2_of_6
-camunda_tasklist_1748937221_8.7.2_part_3_of_6
-camunda_tasklist_1748937221_8.7.2_part_4_of_6
-camunda_tasklist_1748937221_8.7.2_part_5_of_6
-camunda_tasklist_1748937221_8.7.2_part_6_of_6
+camunda_optimize_1748937221_8.8.0_part_1_of_2
+camunda_optimize_1748937221_8.8.0_part_2_of_2
+camunda_webapps_1748937221_8.8.0_part_1_of_5
+camunda_webapps_1748937221_8.8.0_part_2_of_5
+camunda_webapps_1748937221_8.8.0_part_3_of_5
+camunda_webapps_1748937221_8.8.0_part_4_of_5
+camunda_webapps_1748937221_8.8.0_part_5_of_5
 camunda_zeebe_records_backup_1748937221
 ```
 
 From this, we know:
 
-- Optimize: 8.7.1
-- Operate / Tasklist: 8.7.2
+- Optimize: 8.8.0
+- Web Applications (Operate / Tasklist): 8.8.0
 
-Based on this, we can look in the [matrix versioning of 8.7](https://helm.camunda.io/camunda-platform/version-matrix/camunda-8.7) and see the corresponding Camunda Helm chart version is `12.0.2`.
+Based on this, we can look in the [matrix versioning of 8.8](https://helm.camunda.io/camunda-platform/version-matrix/camunda-8.8) and see the corresponding Camunda Helm chart version is `13.0.0`.
 
    </summary>
 </details>
@@ -87,9 +80,9 @@ These templates are automatically applied on newly created indices. These templa
 
 - For example, deploy the Camunda Helm chart.
 - For manual context, start Camunda 8 components manually.
-- Depending on your setup this can mean Operate, Optimize, Tasklist, Zeebe, and the required secondary datastore.
+- Depending on your setup this can mean Orchestration Cluster (Operate, Tasklist, Zeebe), Optimize and the required secondary datastore.
 
-The templates are created by Operate, Optimize, and Tasklist on startup on the first seeding of the datastore. Zeebe creates this whenever it is required, and isn't limited to the initial start. We recommend starting your full required Camunda 8 stack for the applications to show up as healthy.
+The templates are created by the Web Applications (Operate, Tasklist), and Optimize on startup on the first seeding of the datastore. Zeebe creates this whenever it is required, and isn't limited to the initial start. We recommend starting your full required Camunda 8 stack for the applications to show up as healthy.
 
 You can confirm the successful creation of the index templates by using the Elasticsearch/OpenSearch API. The index templates rely on the component templates, so it also confirms these were successfully recreated.
 
@@ -121,7 +114,6 @@ curl -s "$ELASTIC_ENDPOINT/_index_template" \
       operate-operation-8.4.1_template
       operate-post-importer-queue-8.3.0_template
       operate-sequence-flow-8.3.0_template
-      operate-user-task-8.5.0_template
       operate-variable-8.3.0_template
       tasklist-draft-task-variable-8.3.0_template
       tasklist-task-8.5.0_template
@@ -185,15 +177,15 @@ You will need the output for your chosen backup ID in the following steps to be 
 :::
 
    <details>
-      <summary>Operate Example</summary>
+      <summary>Web Applications Example</summary>
       <summary>
 
-      Using the [Operate management API](/self-managed/operational-guides/backup-restore/operate-tasklist-backup.md#get-backups-list-api) to list backups.
+      Using the [Web Applications management API](/self-managed/operational-guides/backup-restore/webapps-backup.md#get-backups-list-api) to list backups.
 
       You must have the Elasticsearch / OpenSearch backup repository configured to be able to retrieve backups.
 
       ```bash
-      curl $OPERATE_MANAGEMENT_API/actuator/backups
+      curl $ORCHESTRATION_CLUSTER_MANAGEMENT_API/actuator/backupHistory
       ```
 
       ```json
@@ -203,39 +195,33 @@ You will need the output for your chosen backup ID in the following steps to be 
          "state": "COMPLETED",
          "details": [
             {
-               "snapshotName":"camunda_operate_1748937221_8.7.2_part_1_of_6",
+               "snapshotName":"camunda_webapps_1748937221_8.8.0_part_1_of_5",
                "state":"SUCCESS",
                "startTime":"2025-06-03T07:55:15.685+0000",
                "failures":[]
             },
             {
-               "snapshotName":"camunda_operate_1748937221_8.7.2_part_2_of_6",
+               "snapshotName":"camunda_webapps_1748937221_8.8.0_part_2_of_5",
                "state":"SUCCESS",
                "startTime":"2025-06-03T07:55:16.288+0000",
                "failures":[]
             },
             {
-               "snapshotName":"camunda_operate_1748937221_8.7.2_part_3_of_6",
+               "snapshotName":"camunda_webapps_1748937221_8.8.0_part_3_of_5",
                "state":"SUCCESS",
                "startTime":"2025-06-03T07:55:17.092+0000",
                "failures":[]
             },
             {
-               "snapshotName":"camunda_operate_1748937221_8.7.2_part_4_of_6",
+               "snapshotName":"camunda_webapps_1748937221_8.8.0_part_4_of_5",
                "state":"SUCCESS",
                "startTime":"2025-06-03T07:55:17.293+0000",
                "failures":[]
             },
             {
-               "snapshotName":"camunda_operate_1748937221_8.7.2_part_5_of_6",
+               "snapshotName":"camunda_webapps_1748937221_8.8.0_part_5_of_5",
                "state":"SUCCESS",
                "startTime":"2025-06-03T07:55:18.298+0000",
-               "failures":[]
-            },
-            {
-               "snapshotName":"camunda_operate_1748937221_8.7.2_part_6_of_6",
-               "state":"SUCCESS",
-               "startTime":"2025-06-03T07:55:18.499+0000",
                "failures":[]
             }
          ]
@@ -265,79 +251,16 @@ You will need the output for your chosen backup ID in the following steps to be 
          "state": "COMPLETED",
          "details": [
             {
-               "snapshotName":"camunda_optimize_1748937221_8.7.1_part_1_of_2",
+               "snapshotName":"camunda_optimize_1748937221_8.8.0_part_1_of_2",
                "state":"SUCCESS",
                "startTime":"2025-06-03T07:53:54.389+0000",
                "failures":[]
             },
             {
-               "snapshotName":"camunda_optimize_1748937221_8.7.1_part_2_of_2",
+               "snapshotName":"camunda_optimize_1748937221_8.8.0_part_2_of_2",
                "state":"SUCCESS",
                "startTime":"2025-06-03T07:53:54.389+0000",
                "failures":[]
-            }
-         ]
-      }
-      ]
-      ```
-      </summary>
-
-   </details>
-
-   <details>
-      <summary>Tasklist Example</summary>
-      <summary>
-
-      Using the [Tasklist management API](/self-managed/operational-guides/backup-restore/operate-tasklist-backup.md#get-backups-list-api) to list backups.
-
-      You must have the Elasticsearch / OpenSearch backup repository configured to be able to retrieve backups.
-
-      ```bash
-      curl $TASKLIST_MANAGEMENT_API/actuator/backups
-      ```
-
-      ```json
-      [
-      {
-         "backupId": 1748937221,
-         "state": "COMPLETED",
-         "failureReason": null,
-         "details": [
-            {
-            "snapshotName": "camunda_tasklist_1748937221_8.7.1_part_6_of_6",
-            "state": "SUCCESS",
-            "startTime": "2025-06-03T07:56:56.519+0000",
-            "failures": []
-            },
-            {
-            "snapshotName": "camunda_tasklist_1748937221_8.7.1_part_5_of_6",
-            "state": "SUCCESS",
-            "startTime": "2025-06-03T07:56:56.519+0000",
-            "failures": []
-            },
-            {
-            "snapshotName": "camunda_tasklist_1748937221_8.7.1_part_4_of_6",
-            "state": "SUCCESS",
-            "startTime": "2025-06-03T07:56:56.519+0000",
-            "failures": []
-            },
-            {
-            "snapshotName": "camunda_tasklist_1748937221_8.7.1_part_3_of_6",
-            "state": "SUCCESS",
-            "startTime": "2025-06-03T07:56:56.519+0000",
-            "failures": []
-            },
-            {
-            "snapshotName": "camunda_tasklist_1748937221_8.7.1_part_2_of_6",
-            "state": "SUCCESS",
-            "startTime": "2025-06-03T07:56:56.519+0000",
-            "failures": []
-            },
-            {
-            "snapshotName": "camunda_tasklist_1748937221_8.7.1_part_1_of_6",
-            "state": "SUCCESS",
-            "startTime": "2025-06-03T07:56:56.519+0000",
-            "failures": []
             }
          ]
       }
@@ -354,7 +277,7 @@ You will need the output for your chosen backup ID in the following steps to be 
       Using the [Zeebe management API](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md#list-backups-api) to list backups.
 
       ```bash
-      curl $GATEWAY_MANAGEMENT_API/actuator/backups
+      curl $ORCHESTRATION_CLUSTER_MANAGEMENT_API/actuator/backupRuntime
       ```
 
       ```json
@@ -367,19 +290,19 @@ You will need the output for your chosen backup ID in the following steps to be 
             "partitionId": 1,
             "state": "COMPLETED",
             "createdAt": "2025-06-03T08:06:10.408893628Z",
-            "brokerVersion": "8.7.1"
+            "brokerVersion": "8.8.0"
             },
             {
             "partitionId": 2,
             "state": "COMPLETED",
             "createdAt": "2025-06-03T08:06:10.408893628Z",
-            "brokerVersion": "8.7.1"
+            "brokerVersion": "8.8.0"
             },
             {
             "partitionId": 3,
             "state": "COMPLETED",
             "createdAt": "2025-06-03T08:06:10.408893628Z",
-            "brokerVersion": "8.7.1"
+            "brokerVersion": "8.8.0"
             }
          ]
       }
@@ -418,20 +341,13 @@ In this scenario, follow the steps above, but when you have your Elasticsearch/O
          <summary>
 
          ```bash
-         camunda_optimize_1748937221_8.7.1_part_1_of_2
-         camunda_optimize_1748937221_8.7.1_part_2_of_2
-         camunda_operate_1748937221_8.7.2_part_1_of_6
-         camunda_operate_1748937221_8.7.2_part_2_of_6
-         camunda_operate_1748937221_8.7.2_part_3_of_6
-         camunda_operate_1748937221_8.7.2_part_4_of_6
-         camunda_operate_1748937221_8.7.2_part_5_of_6
-         camunda_operate_1748937221_8.7.2_part_6_of_6
-         camunda_tasklist_1748937221_8.7.2_part_1_of_6
-         camunda_tasklist_1748937221_8.7.2_part_2_of_6
-         camunda_tasklist_1748937221_8.7.2_part_3_of_6
-         camunda_tasklist_1748937221_8.7.2_part_4_of_6
-         camunda_tasklist_1748937221_8.7.2_part_5_of_6
-         camunda_tasklist_1748937221_8.7.2_part_6_of_6
+         camunda_optimize_1748937221_8.8.0_part_1_of_2
+         camunda_optimize_1748937221_8.8.0_part_2_of_2
+         camunda_webapps_1748937221_8.8.0_part_1_of_5
+         camunda_webapps_1748937221_8.8.0_part_2_of_5
+         camunda_webapps_1748937221_8.8.0_part_3_of_5
+         camunda_webapps_1748937221_8.8.0_part_4_of_5
+         camunda_webapps_1748937221_8.8.0_part_5_of_5
          camunda_zeebe_records_backup_1748937221
          ```
 
@@ -462,20 +378,13 @@ In this scenario, follow the steps above, but when you have your Elasticsearch/O
       <summary>
 
       ```bash
-      camunda_optimize_1748937221_8.7.1_part_1_of_2
-      camunda_optimize_1748937221_8.7.1_part_2_of_2
-      camunda_operate_1748937221_8.7.2_part_1_of_6
-      camunda_operate_1748937221_8.7.2_part_2_of_6
-      camunda_operate_1748937221_8.7.2_part_3_of_6
-      camunda_operate_1748937221_8.7.2_part_4_of_6
-      camunda_operate_1748937221_8.7.2_part_5_of_6
-      camunda_operate_1748937221_8.7.2_part_6_of_6
-      camunda_tasklist_1748937221_8.7.2_part_1_of_6
-      camunda_tasklist_1748937221_8.7.2_part_2_of_6
-      camunda_tasklist_1748937221_8.7.2_part_3_of_6
-      camunda_tasklist_1748937221_8.7.2_part_4_of_6
-      camunda_tasklist_1748937221_8.7.2_part_5_of_6
-      camunda_tasklist_1748937221_8.7.2_part_6_of_6
+      camunda_optimize_1748937221_8.8.0_part_1_of_2
+      camunda_optimize_1748937221_8.8.0_part_2_of_2
+      camunda_webapps_1748937221_8.8.0_part_1_of_5
+      camunda_webapps_1748937221_8.8.0_part_2_of_5
+      camunda_webapps_1748937221_8.8.0_part_3_of_5
+      camunda_webapps_1748937221_8.8.0_part_4_of_5
+      camunda_webapps_1748937221_8.8.0_part_5_of_5
       camunda_zeebe_records_backup_1748937221
       ```
 
@@ -535,13 +444,7 @@ identity:
   enabled: false
 optimize:
   enabled: false
-operate:
-  enabled: false
-tasklist:
-  enabled: false
-zeebe:
-  enabled: false
-zeebe-gateway:
+core:
   enabled: false
 ```
 
@@ -704,20 +607,13 @@ Where `$SNAPSHOT_NAME` would be any of the following based on our example in [fi
 Ensure that all your backups correspond to the same backup ID and that each one is restored one-by-one.
 
 ```bash
-camunda_optimize_1748937221_8.7.1_part_1_of_2
-camunda_optimize_1748937221_8.7.1_part_2_of_2
-camunda_operate_1748937221_8.7.2_part_1_of_6
-camunda_operate_1748937221_8.7.2_part_2_of_6
-camunda_operate_1748937221_8.7.2_part_3_of_6
-camunda_operate_1748937221_8.7.2_part_4_of_6
-camunda_operate_1748937221_8.7.2_part_5_of_6
-camunda_operate_1748937221_8.7.2_part_6_of_6
-camunda_tasklist_1748937221_8.7.2_part_1_of_6
-camunda_tasklist_1748937221_8.7.2_part_2_of_6
-camunda_tasklist_1748937221_8.7.2_part_3_of_6
-camunda_tasklist_1748937221_8.7.2_part_4_of_6
-camunda_tasklist_1748937221_8.7.2_part_5_of_6
-camunda_tasklist_1748937221_8.7.2_part_6_of_6
+camunda_optimize_1748937221_8.8.0_part_1_of_2
+camunda_optimize_1748937221_8.8.0_part_2_of_2
+camunda_webapps_1748937221_8.8.0_part_1_of_5
+camunda_webapps_1748937221_8.8.0_part_2_of_5
+camunda_webapps_1748937221_8.8.0_part_3_of_5
+camunda_webapps_1748937221_8.8.0_part_4_of_5
+camunda_webapps_1748937221_8.8.0_part_5_of_5
 camunda_zeebe_records_backup_1748937221
 ```
 
@@ -765,19 +661,18 @@ If brokers were dynamically scaled between backup and restore, this is not an is
 <Tabs>
    <TabItem value="kubernetes" label="Kubernetes" default>
 
-Assuming you're using the official [Camunda Helm chart](/self-managed/setup/install.md), you'll have to adjust your Helm `values.yml` to supply the following temporarily.
+Assuming you're using the official [Camunda Helm chart](/self-managed/installation-methods/helm/install.md), you'll have to adjust your Helm `values.yml` to supply the following temporarily.
 
 It will overwrite the start command of the resulting Zeebe pod, executing a restore script.
 It's important that the backup is configured for Zeebe to be able to restore from the backup!
 
-The following example is possible starting from the Camunda Helm chart version `12.1.0`.
-Look at the note below the example to see how it can be achieved with an older Camund Helm chart version.
-
 ```yaml
-zeebe:
+core:
    enabled: true
    env:
    # Environment variables to overwrite the Zeebe startup behavior
+   - name: SPRING_PROFILES_ACTIVE
+     value: "restore"
    - name: ZEEBE_RESTORE
      value: "true"
    - name: ZEEBE_RESTORE_FROM_BACKUP_ID
@@ -785,6 +680,10 @@ zeebe:
    # all the envs related to the backup store as outlined in the prerequisites
    - name: ZEEBE_BROKER_DATA_BACKUP_STORE
      value: "S3" # just as an example
+   - name: CAMUNDA_TASKLIST_BACKUP_REPOSITORYNAME
+     value: camunda # Change to name of the repository in Elasticsearch/OpenSearch
+   - name: CAMUNDA_OPERATE_BACKUP_REPOSITORYNAME
+     value: camunda # Change to name of the repository in Elasticsearch/OpenSearch
    ...
 
 # assuming you're using the inbuilt Elasticsearch, otherwise should be set to false
@@ -797,23 +696,19 @@ identity:
    enabled: false
 optimize:
    enabled: false
-operate:
-   enabled: false
-tasklist:
-   enabled: false
-zeebe-gateway:
-   enabled: false
 ```
 
-:::note Older Camunda Helm charts
+:::note Alternative overwrite
 
-For older Camunda Helm chart versions one can overwrite the startup behaviour of the Zeebe brokers by setting the command.
+Alternative approach to overwriting the startup behaviour to restore the partitions.
 
 ```yaml
-zeebe:
+core:
    enabled: true
-   command: ["/usr/local/zeebe/bin/restore", "--backupId=$BACKUP_ID"] # Change the $BACKUP_ID to your actual value
+   command: ["/usr/local/camunda/bin/restore", "--backupId=$BACKUP_ID"] # Change the $BACKUP_ID to your actual value
    env:
+      - name: SPRING_PROFILES_ACTIVE
+        value: "restore"
    # all the envs related to the backup store as outlined in the prerequisites
    ...
 ```
@@ -838,9 +733,9 @@ It will not try to import or overwrite the data again but should be noted that y
 To restore a Zeebe Cluster, run the following in each node where the broker will be running:
 
 ```bash
-mkdir -p zeebe
-tar -xzf camunda-zeebe-X.Y.Z.tar.gz --strip-components=1 -C zeebe/
-./zeebe/bin/restore --backupId=<backupId>
+mkdir -p camunda
+tar -xzf camunda-zeebe-X.Y.Z.tar.gz --strip-components=1 -C camunda/
+./camunda/bin/restore --backupId=<backupId>
 ```
 
    </TabItem>
