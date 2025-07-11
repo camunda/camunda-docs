@@ -26,12 +26,12 @@ Camunda 8 Run is a fast way for users to test the capabilities of the platform, 
 - By using **external cloud file bucket storages**, documents can be stored in a secure, and scalable way. Buckets are integrated per cluster to ensure proper isolation and environment-specific management. The following file bucket storages are supported:
   - [**Google Cloud Platform (GCP)**](https://cloud.google.com/storage)
   - [**AWS S3**](https://aws.amazon.com/s3/).
-  - Configuring these buckets is supported in [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md), [Docker Compose](/self-managed/setup/deploy/other/docker.md), and [Helm](/self-managed/setup/install.md).
+  - Configuring these buckets is supported in [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md), [Docker Compose](/self-managed/installation-methods/docker/docker.md), and [Helm](/self-managed/installation-methods/helm/install.md).
 - **Local storage** can be configured for a cluster to store documents in a local folder.
   - It can be used only for local development with [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md).
   - Local storage is not suitable for production use, as pods and file paths are not shared across components. This prevents components like Tasklist and Zeebe from accessing the same data. Files are stored locally, and their retention must be managed manually.
 - **In-memory** storage can be used to store documents during the application's runtime. When the application is stopped, documents are lost.
-  - It can be used with [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md), [Docker Compose](/self-managed/setup/deploy/other/docker.md) and [Helm](/self-managed/setup/install.md).
+  - It can be used with [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md), [Docker Compose](/self-managed/installation-methods/docker/docker.md) and [Helm](/self-managed/installation-methods/helm/install.md).
   - In-memory storage is not suitable for production use, as pods and memory are not shared across components. Files stored in memory are not persisted and will be lost on application restart.
 
 ## Storage policies

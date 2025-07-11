@@ -11,7 +11,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 :::caution
-Review our [dual-region concept documentation](./../../../../concepts/multi-region/dual-region.md) before continuing to understand the current limitations and restrictions of this blueprint setup.
+Review our [dual-region concept documentation](/self-managed/concepts/multi-region/dual-region.md) before continuing to understand the current limitations and restrictions of this blueprint setup.
 :::
 
 This guide offers a detailed blueprint tutorial for deploying two Amazon Web Services (AWS) Elastic Kubernetes Service (EKS) clusters, tailored explicitly for deploying Camunda 8 and using Terraform, a popular Infrastructure as Code (IaC) tool.
@@ -411,7 +411,7 @@ Key changes of the dual-region setup:
 - `global.multiregion.regions: 2`
   - Indicates the use for two regions
 - `global.identity.auth.enabled: false`
-  - Identity is currently not supported. Review the [limitations section](../../../../concepts/multi-region/dual-region.md#limitations) on the dual-region concept page.
+  - Identity is currently not supported. Review the [limitations section](/self-managed/concepts/multi-region/dual-region.md#limitations) on the dual-region concept page.
 - `global.elasticsearch.disableExporter: true`
   - Disables the automatic Elasticsearch configuration of the Helm chart. We will manually supply the values via environment variables.
 - `identity.enabled: false`

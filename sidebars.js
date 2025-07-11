@@ -1064,19 +1064,92 @@ module.exports = {
     },
     {
       type: "category",
-      label: "Production installation",
+      label: "Installation methods",
       link: {
         type: "doc",
-        id: "self-managed/setup/overview",
+        id: "self-managed/installation-methods/index",
       },
       items: [
+        //production readiness
         {
-          type: "doc",
-          label: "Helm",
-          id: "self-managed/setup/install",
+          type: "category",
+          label: "Kubernetes with Helm",
+          link: {
+            type: "doc",
+            id: "self-managed/installation-methods/helm/index",
+          },
+          items: [
+            "self-managed/installation-methods/helm/install",
+            "self-managed/installation-methods/helm/chart-parameters",
+            //production guide
+            {
+              type: "category",
+              label: "Configure",
+              link: {
+                type: "doc",
+                id: "self-managed/installation-methods/helm/configure/index",
+              },
+              items: [
+                // {
+                //   type: "category",
+                //   label: "Authentication",
+                //   link: {
+                //     type: "doc",
+                //     id: "self-managed/installation-methods/helm/configure/authentication/index",
+                //   },
+                //   items: [
+                //     "self-managed/installation-methods/helm/configure/authentication/oidc",
+                //     "self-managed/installation-methods/helm/configure/authentication/using-existing-keycloak",
+                //     "self-managed/installation-methods/helm/configure/authentication/basic",
+                //   ],
+                // },
+                {
+                  Database: [
+                    {
+                      Elasticsearch: [
+                        "self-managed/installation-methods/helm/configure/database/elasticsearch/using-existing-elasticsearch",
+                        "self-managed/installation-methods/helm/configure/database/elasticsearch/prefix-elasticsearch-indices",
+                      ],
+                    },
+                    "self-managed/installation-methods/helm/configure/database/using-existing-opensearch",
+                    "self-managed/installation-methods/helm/configure/database/configure-db-custom-headers",
+                  ],
+                },
+                "self-managed/installation-methods/helm/configure/secret-management",
+                {
+                  Ingress: [
+                    "self-managed/installation-methods/helm/configure/ingress-setup",
+                    "self-managed/installation-methods/helm/configure/accessing-components-without-ingress",
+                  ],
+                },
+                //license key
+                "self-managed/installation-methods/helm/configure/configure-multi-tenancy",
+                "self-managed/installation-methods/helm/configure/multi-namespace-deployment",
+                //image registry to include air gapped below and enterprise images
+                "self-managed/installation-methods/helm/configure/air-gapped-installation",
+                "self-managed/installation-methods/helm/configure/running-custom-connectors",
+                //certificates
+                "self-managed/installation-methods/helm/configure/add-extra-manifests",
+                "self-managed/installation-methods/helm/configure/application-configs",
+              ],
+            },
+            // {
+            //   Upgrade: ["setup/upgrade"],
+            // },
+            {
+              "Operational tasks": [
+                "self-managed/installation-methods/helm/operational-tasks/dual-region-operational-procedure",
+                "self-managed/installation-methods/helm/operational-tasks/diagnostics",
+              ],
+              //also to include backup and restore, and scaling
+            },
+            //cloud providers
+          ],
         },
-        "self-managed/setup/deploy/other/docker",
-        "self-managed/setup/deploy/local/manual",
+        "self-managed/installation-methods/docker/docker",
+        {
+          Manual: ["self-managed/installation-methods/manual/manual-install"],
+        },
       ],
     },
     {
@@ -1179,7 +1252,6 @@ module.exports = {
         id: "self-managed/update/index",
       },
       items: [
-        "self-managed/setup/upgrade",
         {
           type: "category",
           label: "Update by version",
@@ -1208,59 +1280,31 @@ module.exports = {
       ],
     },
     {
-      type: "category",
-      label: "Configure",
-      link: {
-        type: "doc",
-        id: "self-managed/setup/guides/guides",
-      },
-      items: [
-        "self-managed/setup/guides/accessing-components-without-ingress",
-        "self-managed/setup/guides/ingress-setup",
-        "self-managed/setup/guides/using-existing-elasticsearch",
-        "self-managed/setup/guides/using-existing-opensearch",
-        "self-managed/setup/guides/configure-db-custom-headers",
-        "self-managed/setup/guides/air-gapped-installation",
-        "self-managed/setup/guides/running-custom-connectors",
-        "self-managed/setup/guides/multi-namespace-deployment",
-        "self-managed/setup/guides/installing-payment-app-example",
-        "self-managed/setup/guides/add-extra-manifests",
-        "self-managed/setup/guides/prefix-elasticsearch-indices",
-        "self-managed/setup/guides/secret-management",
-      ],
-    },
-    {
       "Operational guides": [
-        "self-managed/operational-guides/configure-multi-tenancy",
         {
           type: "category",
-          label: "Backup and restore",
+          label: "Back up and restore",
           link: {
             type: "doc",
             id: "self-managed/operational-guides/backup-restore/backup-and-restore",
           },
           items: [
-            "self-managed/operational-guides/backup-restore/optimize-backup",
-            "self-managed/operational-guides/backup-restore/webapps-backup",
-            "self-managed/operational-guides/backup-restore/zeebe-backup-and-restore",
-            "self-managed/operational-guides/backup-restore/modeler-backup-and-restore",
+            "self-managed/operational-guides/backup-restore/backup",
+            "self-managed/operational-guides/backup-restore/restore",
+            {
+              "Backup Management API": [
+                "self-managed/operational-guides/backup-restore/optimize-backup",
+                "self-managed/operational-guides/backup-restore/webapps-backup",
+                "self-managed/operational-guides/backup-restore/zeebe-backup-and-restore",
+              ],
+            },
           ],
         },
         "self-managed/operational-guides/data-purge",
         {
           type: "doc",
-          label: "Configure components",
-          id: "self-managed/operational-guides/application-configs",
-        },
-        {
-          type: "doc",
           label: "Configure flow control",
           id: "self-managed/operational-guides/configure-flow-control/configure-flow-control",
-        },
-        {
-          "Multi-region": [
-            "self-managed/operational-guides/multi-region/dual-region-operational-procedure",
-          ],
         },
         {
           Monitoring: [
@@ -1271,7 +1315,6 @@ module.exports = {
         {
           Troubleshooting: [
             "self-managed/operational-guides/troubleshooting/troubleshooting",
-            "self-managed/operational-guides/troubleshooting/diagnostics",
           ],
         },
       ],
