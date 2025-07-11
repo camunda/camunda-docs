@@ -202,4 +202,4 @@ The following advanced configuration options can be provided via environment var
 
 ## Next Steps
 
-Check out the [getting started guide](/guides/getting-started-java-spring.md) to start a new Java Project to connect to this local cluster.
+Check out the [getting started guide](/guides/getting-started-example.md) to start a new Java Project to connect to this local cluster.

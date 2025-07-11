@@ -188,7 +188,7 @@ Hybrid mode, or a hybrid Self-Managed distribution, allows you to run a separate
 
 For example, this is useful when working with services that must be isolated within a private network and cannot be exposed to the public internet, or if infrastructure amendments need to be applied to the connector runtime, such as SSL certificates or mounted volumes.
 
-- [Use connectors in hybrid mode](/guides/use-connectors-in-hybrid-mode.md)
+- [Use connectors in hybrid mode](/components/connectors/use-connectors-in-hybrid-mode.md)
 
 ## I
 

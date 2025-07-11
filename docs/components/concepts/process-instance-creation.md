@@ -175,4 +175,4 @@ A process can also have one or more [timer start events](/components/modeler/bpm
 ## Next steps
 
 - [About Modeler](/components/modeler/about-modeler.md)
-- [Automating a process using BPMN](/guides/automating-a-process-using-bpmn.md)
+- [Automating a process using BPMN](/components/modeler/bpmn/automating-a-process-using-bpmn.md)

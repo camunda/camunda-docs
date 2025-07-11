@@ -14,7 +14,7 @@ You can use Web Modeler to quickly develop and progress low-risk process applica
 <p><img src={DeployProcessApplicationDiagramImg} alt="Process application file list" /></p>
 
 :::caution
-For business-critical and higher-risk processes that require strict governance and/or quality requirements, you can [integrate Web Modeler into your CI/CD pipelines](/guides/devops-lifecycle/integrate-web-modeler-in-ci-cd.md).
+For business-critical and higher-risk processes that require strict governance and/or quality requirements, you can [integrate Web Modeler into your CI/CD pipelines](/components/modeler/web-modeler/integrate-web-modeler-in-ci-cd.md).
 :::
 
 ## Model

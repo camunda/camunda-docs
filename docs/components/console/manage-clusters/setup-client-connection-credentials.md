@@ -4,9 +4,6 @@ title: Set up client connection credentials
 description: "Set up client connection credentials to create, name, and connect your client."
 ---
 
-<span class="badge badge--beginner">Beginner</span>
-<span class="badge badge--medium">Time estimate: Under 5 minutes</span>
-
 Here, we'll set up client connection credentials to create, name, and connect your client.
 
 ## Create a client
@@ -15,18 +12,18 @@ Currently, Camunda 8 SaaS supports the following scopes:
 
 - Zeebe - Access to the [Zeebe gRPC](/apis-tools/zeebe-api/grpc.md) and [REST](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) APIs.
 - Optimize - Access to the [Optimize REST API](/apis-tools/optimize-api/overview.md).
-- Secrets - Access cluster secrets in a [hybrid setup](/guides/use-connectors-in-hybrid-mode.md).
+- Secrets - Access cluster secrets in a [hybrid setup](/components/connectors/use-connectors-in-hybrid-mode.md).
 
 To create a new client, take the following steps:
 
 1. Navigate to the API tab [in Camunda Console](https://console.camunda.io/) by clicking **Clusters > Cluster name > API**.
-   ![cluster-details](../components/console/manage-clusters/img/cluster-detail-clients.png)
+   ![cluster-details](./img/cluster-detail-clients.png)
 2. Click **Create your first client** to create a new client and name your client accordingly.
 3. Determine the scoped access for client credentials. Select **Zeebe client** so the newly-created client can access your Zeebe instance.
-   ![create-client](../components/console/manage-clusters/img/cluster-details-create-client.png)
+   ![create-client](./img/cluster-details-create-client.png)
 4. Make sure you keep the generated client credentials in a safe place. The **Client secret** will not be shown again. For your convenience, you can also download the client information to your computer.
 
-![created-client](../components/console/manage-clusters/img/cluster-details-created-client.png)
+![created-client](./img/cluster-details-created-client.png)
 
 The downloaded file contains all the necessary information to communicate with your Camunda 8 instance in the future:
 

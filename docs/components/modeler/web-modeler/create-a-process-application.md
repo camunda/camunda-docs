@@ -25,7 +25,7 @@ To create a process application, either:
 When you create a process application, you must select a development cluster to deploy to.
 
 - If you have already created a cluster, turn on the toggle next to the cluster name in **Select a development cluster**.
-- If you have not yet [created a cluster](/guides/create-cluster.md), or if **No Cluster has been created yet** is shown, select **Create new dev cluster**. The Console **Clusters** tab opens so you can create a new cluster.
+- If you have not yet [created a cluster](/components/console/manage-clusters/create-cluster.md), or if **No Cluster has been created yet** is shown, select **Create new dev cluster**. The Console **Clusters** tab opens so you can create a new cluster.
 
 :::note
 

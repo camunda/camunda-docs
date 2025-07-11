@@ -1,13 +1,14 @@
 ---
 id: user-task-listeners
 title: "User task listeners"
+sidebar_label: "Overview"
 description: "User task listeners allow users to react to specific user task lifecycle events."
 ---
 
 A user task listener allows users to react to specific user task lifecycle events.
 
 :::tip
-Try out our [getting started with user task listeners guide](/guides/user-task-listeners.md).
+Try out our [getting started with user task listeners guide](/components/concepts/user-task-listeners-guide.md).
 :::
 
 ## About user task listeners

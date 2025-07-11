@@ -1,8 +1,8 @@
 ---
 id: orchestrate-apis
 title: Get started with API orchestration
-sidebar_label: APIs
-description: "Use connectors to build low code process automation solutions"
+sidebar_label: Orchestrate APIs using connectors
+description: "For low-code developers using Camunda 8 Saas, use connectors to build process automation solutions."
 keywords:
   [api endpoints, orchestration, getting started, user guide, connectors]
 ---
@@ -14,7 +14,11 @@ keywords:
 import clsx from "clsx";
 import SaasPrereqs from './react-components/\_saas-prerequisites.md'
 
-This guide will walk you through working with a REST connector task as a first time Camunda 8 SaaS user. The REST connector is a [protocol connector](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md#protocol-connectors), where you can make a request to a REST API and use the response in the next steps of your process.
+This guide is designed for users who prefer a low-code approach to process automation. You can follow this tutorial using either a local, Self-Managed lightweight setup, or Camunda 8 SaaS.
+
+This guide will walk you through working with a REST connector task as a first time Camunda 8 SaaS user.
+
+The REST connector is a [protocol connector](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md#protocol-connectors), where you can make a request to a REST API and use the response in the next steps of your process.
 
 :::note
 New to connectors? Review our [introduction to connectors](/components/connectors/introduction.md) to get familiar with their capabilities, and have a closer look at all of the available [out-of-the-box connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md).
@@ -25,7 +29,7 @@ New to connectors? Review our [introduction to connectors](/components/connector
    <SaasPrereqs/>
 </details>
 
-The concept of a connector consists of two parts: the business logic is implemented as a job worker, and the user interface during modeling is provided using an element template. In this guide, you will create a REST connector task in your process, handle the HTTP response, and deploy your process. New to creating a process? Get started by [modeling your first diagram](/guides/model-your-first-process.md).
+The concept of a connector consists of two parts: the business logic is implemented as a job worker, and the user interface during modeling is provided using an element template. In this guide, you will create a REST connector task in your process, handle the HTTP response, and deploy your process. New to creating a process? Get started by [modeling your first diagram](/components/modeler/web-modeler/design-your-process.md).
 
 ## Step 1: Create a REST connector task
 

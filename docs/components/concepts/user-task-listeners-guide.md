@@ -1,19 +1,20 @@
 ---
 id: listen-to-user-tasks
 title: User task listeners
+sidebar_label: Tutorial
 description: "In Camunda 8, user task listeners allow you to run custom logic when a user task is created, assigned, or completed."
 ---
 
 <span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--medium">Time estimate: 35 minutes</span>
 
-import SaasPrereqs from './react-components/\_saas-prerequisites.md'
-import CreateCluster from '../components/react-components/create-cluster.md';
-import CreateApiCredentials from '../components/react-components/create-api-credentials.md';
+import SaasPrereqs from '../../guides/react-components/\_saas-prerequisites.md'
+import CreateCluster from '../../components/react-components/create-cluster.md';
+import CreateApiCredentials from '../../components/react-components/create-api-credentials.md';
 
 In Camunda 8, **user task listeners** allow you to run custom logic in response to changes to a user task, such as when the `creating`, `assigning`, or `completing` event occurs.
 
-User task listeners facilitate the integration of custom logic into your workflows. For more details, refer to the [User Task Listeners concept](../components/concepts/user-task-listeners.md).
+User task listeners facilitate the integration of custom logic into your workflows. For more details, refer to the [User Task Listeners concept](/components/concepts/user-task-listeners.md).
 
 This guide walks you through:
 
@@ -31,7 +32,7 @@ You must have access to a Camunda 8 SaaS account.
 </details>
 
 You must also know how to model a process with a user task.  
-If you haven't done this before, first follow the steps in our guide to [get started with human task orchestration](./getting-started-orchestrate-human-tasks.md).
+If you haven't done this before, first follow the steps in our guide to [get started with human task orchestration](/guides/getting-started-orchestrate-human-tasks.md).
 
 Additionally, you need the following:
 
@@ -133,12 +134,12 @@ To build your understanding of task listeners, you can also:
 
 Further, you can try the following:
 
-- Add a separate listener for another event type, and [trigger that event](../components/concepts/user-task-listeners.md#trigger-a-user-task-listener).
-- [Access the user task's data](../components/concepts/user-task-listeners.md#accessing-user-task-data) from the **activated job**.
-- [Correct the assignee](../components/concepts/user-task-listeners.md#correcting-user-task-data) in the listener by adding a **job result** to the complete job command.
-- [Deny the assignment](../components/concepts/user-task-listeners.md#denying-the-lifecycle-transition) from the listener to avoid the task's assignment altogether.
+- Add a separate listener for another event type, and [trigger that event](/components/concepts/user-task-listeners.md#trigger-a-user-task-listener).
+- [Access the user task's data](/components/concepts/user-task-listeners.md#accessing-user-task-data) from the **activated job**.
+- [Correct the assignee](/components/concepts/user-task-listeners.md#correcting-user-task-data) in the listener by adding a **job result** to the complete job command.
+- [Deny the assignment](/components/concepts/user-task-listeners.md#denying-the-lifecycle-transition) from the listener to avoid the task's assignment altogether.
 
 ## Additional resources and next steps
 
 - Learn more about Camunda 8 and what it can do by reading [What is Camunda 8](/components/components-overview.md) or watching our [Overview video](https://bit.ly/3TjNEm7) in Camunda Academy.
-- Get your local environment ready for development with Camunda 8 by [setting up your first development project](setting-up-development-project.md).
+- Get your local environment ready for development with Camunda 8 by [setting up your first development project](/guides/getting-started-example.md).

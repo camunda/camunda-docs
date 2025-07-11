@@ -8,8 +8,8 @@ In this tutorial, we'll step through examples to highlight the capabilities of t
 
 ## Prerequisites
 
-- If you haven't done so already, [create a cluster](/guides/create-cluster.md).
-- Upon cluster creation, [create your first client](/guides/setup-client-connection-credentials.md). Ensure you check the `Zeebe` client scope box.
+- If you haven't done so already, [create a cluster](/components/console/manage-clusters/create-cluster.md).
+- Upon cluster creation, [create your first client](/components/console/manage-clusters/setup-client-connection-credentials.md). Ensure you check the `Zeebe` client scope box.
 
 :::note
 Make sure you keep the generated client credentials in a safe place. The **Client secret** will not be shown again. For your convenience, you can also download the client information to your computer.

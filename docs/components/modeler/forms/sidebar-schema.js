@@ -5,6 +5,7 @@ const config_dir = root_dir + "configuration/";
 module.exports = {
   "Camunda Forms": [
     root_dir + "camunda-forms-reference",
+    root_dir + "utilizing-forms",
     {
       "Form Element Library": [
         lib_dir + "forms-element-library",

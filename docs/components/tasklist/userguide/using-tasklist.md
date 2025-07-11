@@ -14,7 +14,7 @@ Tasklist provides a user-friendly interface for managing and completing tasks th
 When a user is granted Tasklist access, the user has full access to the respective process instance data.
 :::
 
-The user interaction with a task may involve making updates, adding variables, filling out a [Camunda Form](../../../guides/utilizing-forms.md), or simply reviewing and completing the task.
+The user interaction with a task may involve making updates, adding variables, filling out a [Camunda Form](/components/modeler/forms/utilizing-forms.md), or simply reviewing and completing the task.
 
 User tasks can be automatically assigned to users and groups in the BPMN process, or they must be self-assigned from Tasklist.
 Once assigned to a user, the task can be completed. The user can unassign the task if they do not intend to work on it.

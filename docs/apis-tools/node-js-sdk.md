@@ -41,7 +41,7 @@ The best way to do the configuration is via the zero-configuration constructor i
 
 The environment variables you need to set are outlined below. Replace these with your secrets and URLs.
 
-To configure a client, and to capture these values when creating the client, review our documentation on [setting up client connection credentials](/guides/setup-client-connection-credentials.md).
+To configure a client, and to capture these values when creating the client, review our documentation on [setting up client connection credentials](/components/console/manage-clusters/setup-client-connection-credentials.md).
 
 ### Self-Managed configuration
 
@@ -236,7 +236,7 @@ The handler must return a job completion function - `fail`, `complete`, or `forw
 
 ### Create a programmatic user task worker
 
-Our process has a [user task](/guides/getting-started-orchestrate-human-tasks.md) after the [service task](/guides/getting-started-orchestrate-microservices.md). The service task worker will complete the service task job, and we will complete the user task using the Tasklist API client.
+Our process has a [user task](/guides/getting-started-orchestrate-human-tasks.md) after the service task. The service task worker will complete the service task job, and we will complete the user task using the Tasklist API client.
 
 Add the following code beneath the service worker code:
 
