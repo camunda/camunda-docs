@@ -140,6 +140,8 @@ To work with authorizations, API authentication and authorization enforcement mu
 camunda.security:
   authentication.unprotected-api: false
   authorizations.enabled: true
+  initialization.default-roles.admin.users:
+    - "username"
 ```
 
 Place the above `application.yaml` into your root `/c8run` folder, provide it to Camunda 8 Run at startup using the `--config` [flag](#configuration-options):
