@@ -9,7 +9,7 @@ import TabItem from '@theme/TabItem';
 
 Identity is included by default with the deployment of any [Orchestration cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster). Within an Orchestration cluster, Identity provides unified, cluster-level identity management and authorizations.
 
-Identity for Orchestration clusters is available via [Helm install](/self-managed/installation-methods/helm/install.md), and for local development via [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md).
+Identity for Orchestration clusters is available via [Helm install](/self-managed/installation-methods/helm/install.md), and for local development via [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md).
 
 :::note
 
@@ -19,7 +19,7 @@ The following guides are on Identity configuration in Self-Managed environments.
 
 ## Initial configuration
 
-Following the default installation for [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md) will result in a cluster with the following:
+Following the default installation for [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) will result in a cluster with the following:
 
 1. Basic authentication enabled
 2. API authentication disabled
@@ -27,7 +27,7 @@ Following the default installation for [Camunda 8 Run](/self-managed/setup/deplo
 4. An initial user with the username/password `demo`/`demo`
 5. An `admin` role with read, create, update, and delete permissions for all roles and all resources, which is applied to the initial `demo` user
 
-To make changes to the [initial configuration](./configuration.md), add the desired values to your `application.yaml`, and provide this file to Camunda 8 Run using the `--config` flag [at startup](/self-managed/setup/deploy/local/c8run.md#enable-authentication-and-authorization).
+To make changes to the [initial configuration](./configuration.md), add the desired values to your `application.yaml`, and provide this file to Camunda 8 Run using the `--config` flag [at startup](/self-managed/quickstart/developer-quickstart/c8run.md#enable-authentication-and-authorization).
 
 :::note
 Helm installations have API authentication and authorizations enabled by default. To adjust your Helm configuration, add the desired values to your `application.yaml` or via environment variables.

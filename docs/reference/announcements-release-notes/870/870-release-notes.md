@@ -177,7 +177,7 @@ The Camunda 8 Run startup script now supports additional configuration parameter
 
 This release also introduces a new `--docker` option, which starts C8Run with the `docker-compose up` command, and deploys Camunda 8 in containers instead of starting with a Java engine.
 
-For more information, see the [Camunda 8 Run documentation](/self-managed/setup/deploy/local/c8run.md).
+For more information, see the [Camunda 8 Run documentation](/self-managed/quickstart/developer-quickstart/c8run.md).
 
 <!-- https://github.com/camunda/product-hub/issues/2459 -->
 

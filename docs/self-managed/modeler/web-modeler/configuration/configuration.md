@@ -7,7 +7,7 @@ description: "Read details on the configuration variables of Web Modeler Self-Ma
 
 The different components of Web Modeler Self-Managed can be configured using environment variables. Each component's variables are described below.
 
-- For a working example configuration showing how the components are correctly wired together, see the [Docker Compose file for Web Modeler](/self-managed/setup/deploy/local/docker-compose.md).
+- For a working example configuration showing how the components are correctly wired together, see the [Docker Compose file for Web Modeler](/self-managed/quickstart/developer-quickstart/docker-compose.md).
 - If you are using the Camunda 8 [Helm chart](/self-managed/installation-methods/helm/install.md) to set up Web Modeler, read more about the different configuration options in the chart's [values docs](https://artifacthub.io/packages/helm/camunda/camunda-platform#webmodeler-parameters).
 
 ## Licensing
@@ -22,7 +22,7 @@ import Licensing from '../../../../self-managed/react-components/licensing.md'
 
 Clusters must be configured using the following options to access the cluster from within Web Modeler. If no clusters are configured, you will not be able to perform any actions that require a cluster (for example, deploy, start an instance, or Play a process).
 
-The Camunda 8 [Helm](/self-managed/installation-methods/helm/install.md) and [Docker Compose](/self-managed/setup/deploy/local/docker-compose.md) distributions provide a local Zeebe cluster configured by default.
+The Camunda 8 [Helm](/self-managed/installation-methods/helm/install.md) and [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md) distributions provide a local Zeebe cluster configured by default.
 
 To add additional clusters, increment the `0` value for each variable (`CAMUNDA_MODELER_CLUSTERS_1_NAME`).
 

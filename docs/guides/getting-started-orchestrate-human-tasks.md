@@ -230,7 +230,7 @@ Other options to run a process are to start it via Tasklist, test it in the Play
 <TabItem value="sm">
 
 :::note
-Ensure your installation of [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md) is running prior to deploying your process.
+Ensure your installation of [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) is running prior to deploying your process.
 :::
 
 1. Click the rocket-shaped **Deploy** icon to begin deploying your process, and provide the following configuration:

@@ -1,9 +1,8 @@
 ---
 id: c8run
-title: "Local installation with Camunda 8 Run"
-sidebar_label: "Camunda 8 Run"
-keywords: ["C8Run"]
-description: "Use the Camunda 8 Run single application script to set up a local development environment."
+title: "Developer quickstart - C8Run"
+sidebar_label: "C8Run"
+description: "This quickstart guides application developers through deploying Camunda 8 Self-Managed to a local Orchestration cluster on C8Run"
 ---
 
 import Tabs from "@theme/Tabs";
@@ -86,7 +85,7 @@ The following command line arguments are available:
 All Camunda 8 Run components can be accessed using the username/password combination `demo`/`demo`.
 
 :::note
-The URLs for the Docker Compose application can be found in the [Docker Compose](/self-managed/setup/deploy/local/docker-compose.md#access-components) documentation.
+The URLs for the Docker Compose application can be found in the [Docker Compose](#docker-compose) documentation.
 :::
 
 Tasklist, Operate, and Identity are available at:
@@ -200,3 +199,7 @@ The following advanced configuration options can be provided via environment var
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `ES_JAVA_OPTS` | Allows you to override Java command line parameters for Elasticsearch. This can allow you to increase memory limits. **Default:** `-Xms1g -Xmx1g` |
 | `JAVA_OPTS`    | Allows you to override Java command line parameters for Camunda.                                                                                  |
+
+## Next Steps
+
+Check out the [getting started guide](/guides/getting-started-java-spring.md) to start a new Java Project to connect to this local cluster.
