@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 32 32"
+   width="64"
+   height="64"
+   fill="#035bda"
+   fill-rule="evenodd"
+   version="1.1"
+   id="svg4"
+   sodipodi:docname="azure.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs8" />
+  <sodipodi:namedview
+     id="namedview6"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="3.6875"
+     inkscape:cx="15.457627"
+     inkscape:cy="32"
+     inkscape:window-width="1680"
+     inkscape:window-height="1018"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg4" />
+  <path
+     d="m 19.485878,8.141226 -4.266527,8.59345 7.511719,8.707932 L 8.788461,27.024639 30.423077,27.25 Z M 18.64393,4.75 8.848858,12.946815 1.576923,25.215444 7.7671273,24.584435 Z"
+     id="path2"
+     style="stroke-width:0.901442" />
+</svg>
