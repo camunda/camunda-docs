@@ -319,7 +319,7 @@ Configure the following if store is set to s3.
 You can use any S3 compatible storage, including, but not limited to, Amazon S3.
 :::
 
-:::note Backup Encryption
+:::note Backup encryption
 Zeebe does not support backup encryption natively, but it _can_ use encrypted S3 buckets. For AWS S3, this means [enabling default bucket encryption](https://docs.aws.amazon.com/AmazonS3/latest/userguide/default-bucket-encryption.html).
 
 Using default bucket encryption gives you control over the encryption keys and algorithms while being completely transparent with Zeebe.
@@ -327,17 +327,31 @@ Using default bucket encryption gives you control over the encryption keys and a
 Combined with TLS between Zeebe and the S3 API, backups are fully encrypted in transit and at rest. Other S3 compatible services might have similar features that should work as well.
 :::
 
-| Field                | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | Example Value |
-| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| bucketName           | Name of the bucket where the backup will be stored. The bucket must be already created. The bucket must not be shared with other zeebe clusters. bucketName must not be empty. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_BUCKETNAME`.                                                                                                                                                                                                                                                           |               |
-| endpoint             | Configure URL endpoint for the store. If no endpoint is provided, it will be determined based on the configured region. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_ENDPOINT`.                                                                                                                                                                                                                                                                                                                    |               |
-| region               | Configure region. If no region is provided it will be determined as documented by your S3 compatible storage provider. If you use Amazon S3, it will be determined as [documented](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/region-selection.html#automatically-determine-the-aws-region-from-the-environment). This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_REGION`                                                                                                        |               |
-| accessKey            | Configure access credentials. If either accessKey or secretKey is not provided, it will be determined as [documented](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials.html#credentials-chain), not based on your S3 compatible storage provider. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_ACCESSKEY`.                                                                                                                                                              |               |
-| secretKey            | This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_SECRETKEY`.                                                                                                                                                                                                                                                                                                                                                                                                                                           |               |
-| apiCallTimeout       | Configure a maximum duration for all S3 client API calls. Lower values will ensure that failed or slow API calls don't block other backups but may increase the risk that backups can't be stored if uploading parts of the backup takes longer than the configured timeout. Amazon S3 users can refer [here](https://github.com/aws/aws-sdk-java-v2/blob/master/docs/BestPractices.md#utilize-timeout-configurations). This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_APICALLTIMEOUT`.              | PT180S        |
-| forcePathStyleAccess | When enabled, forces the s3 client to use path-style access. By default, the client will automatically choose between path-style and virtual-hosted-style. Should only be enabled if the s3 compatible storage cannot support virtual-hosted-style. Refer to your S3 compatible storage provider or the [Amazon S3 docs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-bucket-intro.html) for more information. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_FORCEPATHSTYLEACCESS`. | false         |
-| compression          | When set to an algorithm such as 'zstd', enables compression of backup contents. When not set or set to 'none', backup content is not compressed. Enabling compression reduces the required storage space for backups in S3 but also increases the impact on CPU and disk utilization while taking a backup. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_COMPRESSION`                                                                                                                             | none          |
-| basePath             | When set, all objects in the bucket will use this prefix. Must be non-empty and not start or end with '/'. Useful for using the same bucket for multiple Zeebe clusters. In this case, basePath must be unique. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_BASEPATH`.                                                                                                                                                                                                                            |
+:::note Backup compression
+
+Backups can be large depending on your usage of Zeebe. To reduce S3 storage costs and upload times, you can enable backup compression.
+
+Zeebe compresses backup data immediately before uploading to S3 and buffers the compressed files in a temporary directory. Compression and buffering of compressed files can have a negative effect if Zeebe is heavily resource constrained.
+
+You can enable compression by specifying a compression algorithm to use. We recommend using [zstd](https://github.com/facebook/zstd) as it provides a good trade-off between compression ratio and resource usage.
+
+More compression algorithms are available; check [commons-compress](https://commons.apache.org/proper/commons-compress/) for a full list.
+
+:::
+
+| Field                       | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | Example Value |
+| --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| bucketName                  | Name of the bucket where the backup will be stored. The bucket must be already created. The bucket must not be shared with other zeebe clusters. bucketName must not be empty. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_BUCKETNAME`.                                                                                                                                                                                                                                                           |               |
+| endpoint                    | Configure URL endpoint for the store. If no endpoint is provided, it will be determined based on the configured region. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_ENDPOINT`.                                                                                                                                                                                                                                                                                                                    |               |
+| region                      | Configure region. If no region is provided it will be determined as documented by your S3 compatible storage provider. If you use Amazon S3, it will be determined as [documented](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/region-selection.html#automatically-determine-the-aws-region-from-the-environment). This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_REGION`                                                                                                        |               |
+| accessKey                   | Configure access credentials. If either accessKey or secretKey is not provided, it will be determined as [documented](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials.html#credentials-chain), not based on your S3 compatible storage provider. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_ACCESSKEY`.                                                                                                                                                              |               |
+| secretKey                   | This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_SECRETKEY`.                                                                                                                                                                                                                                                                                                                                                                                                                                           |               |
+| apiCallTimeout              | Configure a maximum duration for all S3 client API calls. Lower values will ensure that failed or slow API calls don't block other backups but may increase the risk that backups can't be stored if uploading parts of the backup takes longer than the configured timeout. Amazon S3 users can refer [here](https://github.com/aws/aws-sdk-java-v2/blob/master/docs/BestPractices.md#utilize-timeout-configurations). This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_APICALLTIMEOUT`.              | PT180S        |
+| forcePathStyleAccess        | When enabled, forces the s3 client to use path-style access. By default, the client will automatically choose between path-style and virtual-hosted-style. Should only be enabled if the s3 compatible storage cannot support virtual-hosted-style. Refer to your S3 compatible storage provider or the [Amazon S3 docs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-bucket-intro.html) for more information. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_FORCEPATHSTYLEACCESS`. | false         |
+| compression                 | When set to an algorithm such as 'zstd', enables compression of backup contents. When not set or set to 'none', backup content is not compressed. Enabling compression reduces the required storage space for backups in S3 but also increases the impact on CPU and disk utilization while taking a backup. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_COMPRESSION`                                                                                                                             | none          |
+| basePath                    | When set, all objects in the bucket will use this prefix. Must be non-empty and not start or end with '/'. Useful for using the same bucket for multiple Zeebe clusters. In this case, basePath must be unique. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_BASEPATH`.                                                                                                                                                                                                                            |
+| maxConcurrentConnections    | Maximum number of connections allowed in a connection pool. This is used to restrict the maximum number of concurrent uploads as to avoid connection timeouts when uploading backups with large/many files. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_MAXCONCURRENTCONNECTIONS`.                                                                                                                                                                                                                |
+| connectionAquisitionTimeout | Timeout for acquiring an already-established connection from a connection pool to a remote service. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_CONNECTIONAQUISITIONTIMEOUT`.                                                                                                                                                                                                                                                                                                                     |
 
 #### YAML snippet
 
@@ -354,6 +368,37 @@ backup:
     compression: none
     basePath: null
 ```
+
+#### Known issues
+
+**Backups to IBM COS fail with 403 Access Denied**
+
+When using an S3 backup store with IBM Cloud Object Storage, you may encounter `403 Access Denied` errors even though the access credentials are valid.
+This may be caused by a [recent change in the AWS S3 client](https://docs.aws.amazon.com/sdkref/latest/guide/feature-dataintegrity.html), which now calculates checksums for data integrity by default. IBM COS does not appear to support this feature.
+
+To resolve this issue, you can restore the previous behavior by setting the following environment variable on your Zeebe brokers:
+
+```
+AWS_REQUEST_CHECKSUM_CALCULATION=WHEN_REQUIRED
+```
+
+This will prevent the S3 client from calculating the additional checksums and should resolve the issue.
+
+**Backups to Dell EMC ECS fail with 400 Bad Request**
+
+When using an S3 backup store with Dell EMC ECS, you may encounter the following error:
+
+`The Content-SHA256 you specified did not match what we received (Service: S3, Status Code: 400)`
+
+This issue is caused by a recent change in the AWS S3 client, which now signs streaming chunked uploads differently. Dell EMC ECS does not support chunked encoding.
+
+To resolve this issue, set the following environment variable on your Zeebe brokers:
+
+```
+AWS_REQUEST_CHECKSUM_CALCULATION=WHEN_REQUIRED
+```
+
+This disables the additional checksum calculation in the S3 client and should resolve the issue.
 
 ### zeebe.broker.data.backup.gcs
 
@@ -376,8 +421,8 @@ There are multiple [data encryption options](https://cloud.google.com/storage/do
 
 | Field      | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Example Value |
 | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| bucketName | Name of the bucket where the backup will be stored. The bucket must already exist. The bucket must not be shared with other Zeebe clusters unless basePath is also set. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_GCS_BUCKETNAME`.                                                                                                                                                                                                                                                                                            |               |
-| basePath   | When set, all blobs in the bucket will use this prefix. Useful for using the same bucket for multiple Zeebe clusters. In this case, basePath must be unique. Should not start or end with '/' character. Must be non-empty and not consist of only '/' characters. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_GCS_BASEPATH`.                                                                                                                                                                                                   |               |
+| bucketName | Name of the bucket where the backup will be stored. The bucket **must already exist**. The bucket must not be shared with other Zeebe clusters unless basePath is also set. Zeebe will check at startup that the specified bucket exists and can be accessed, and log at WARN level if the bucket does not exist. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_GCS_BUCKETNAME`.                                                                                                                                                  |               |
+| basePath   | When set, all blobs in the bucket will use this prefix. Useful for using the same bucket for multiple Zeebe clusters. In this case, basePath must be unique. Should not start or end with '/' character. Must be non-empty and not consist of only '/' characters. See [Google documentation on naming](https://cloud.google.com/storage/docs/objects#naming). This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_GCS_BASEPATH`.                                                                                                       |               |
 | host       | When set, this overrides the host that the GCS client connects to. By default, this is not set because the client can automatically discover the correct host to connect to. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_GCS_HOST`                                                                                                                                                                                                                                                                                              |               |
 | auth       | Configures which authentication method is used for connecting to GCS. Can be either 'auto' or 'none'. Choosing 'auto' means that the GCS client uses application default credentials which automatically discovers appropriate credentials from the runtime environment: https://cloud.google.com/docs/authentication/application-default-credentials. Choosing 'none' means that no authentication is attempted which is only applicable for testing with emulated GCS. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_GCS_AUTH`. | auto          |
 
@@ -427,6 +472,10 @@ backup:
     accountKey: null
     connectionString: null
     basePath: null
+    createContainer: true
+    sasToken:
+      type: null
+      value: null
 ```
 
 ### zeebe.broker.cluster
