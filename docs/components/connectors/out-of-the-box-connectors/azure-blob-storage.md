@@ -29,7 +29,7 @@ Keep your **SAS token** and **SAS URL** secure by avoiding direct inclusion in t
 
 ## Operation
 
-Select the desired operation from the **Action** dropdown.
+Select the desired operation from the **Operation** dropdown.
 
 ### Upload document
 

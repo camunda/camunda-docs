@@ -498,6 +498,7 @@ module.exports = {
             "components/connectors/out-of-the-box-connectors/gitlab",
             {
               Google: [
+                "components/connectors/out-of-the-box-connectors/google-cloud-storage",
                 "components/connectors/out-of-the-box-connectors/googledrive",
                 "components/connectors/out-of-the-box-connectors/google-maps-platform",
                 "components/connectors/out-of-the-box-connectors/google-sheets",
