@@ -2,8 +2,10 @@
 id: camunda-exporter-indices-tasklist
 title: "Tasklist index diagrams"
 sidebar_label: "Tasklist index diagrams"
-description: "The Camunda Index diagrams to which the Camunda Exporter will export system state information to."
+description: "The Camunda index diagrams to which the Camunda Exporter will export system state information to."
 ---
+
+The following index diagrams show Camunda Exporter indices for Tasklist.
 
 - [tasklist-form](#tasklist-form)
 - [tasklist-import-position](#tasklist-import-position)

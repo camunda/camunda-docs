@@ -5,6 +5,8 @@ sidebar_label: "Camunda index diagrams"
 description: "The Camunda identity index diagrams to which the Camunda Exporter will export system state information to."
 ---
 
+The following index diagrams show Camunda Exporter indices for Camunda identity.
+
 - [camunda-authorization](#camunda-authorization)
 - [camunda-group](#camunda-group)
 - [camunda-mapping](#camunda-mapping)

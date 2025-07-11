@@ -2,8 +2,10 @@
 id: camunda-exporter-indices-operate
 title: "Operate index diagrams"
 sidebar_label: "Operate index diagrams"
-description: "The Operate Index diagrams to which the Camunda Exporter will export system state information to."
+description: "The Operate index diagrams to which the Camunda Exporter will export system state information to."
 ---
+
+The following index diagrams show Camunda Exporter indices for Operate.
 
 - [operate-decision-requirements](#operate-decision-requirements)
 - [operate-decision](#operate-decision)
