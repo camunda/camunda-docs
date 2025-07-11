@@ -8,7 +8,7 @@ description: "Deploy an Amazon Kubernetes Cluster (EKS) with a Terraform module 
 
 :::warning
 
-There is a [**newer release**](/docs/self-managed/setup/deploy/amazon/amazon-eks/terraform-setup.md) of the documentation available with updated instructions. Use of the latest release is encouraged.
+There is a [**newer release**](/docs/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md) of the documentation available with updated instructions. Use of the latest release is encouraged.
 
 :::
 
