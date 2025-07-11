@@ -104,7 +104,7 @@ helm repo update
 
 In a default configuration, Helm charts will auto-generate all required Camunda Identity secrets for Camunda 8 component to Identity communications. However, future `helm upgrade` commands will regenerate Helm charts due to an issue with a [Bitnami library](https://docs.bitnami.com/general/how-to/troubleshoot-helm-chart-issues/#credential-errors-while-upgrading-chart-releases).
 
-While upgrading is still possible by following our [upgrade guide](/self-managed/installation-methods/helm/upgrade/upgrade.md#upgrading-where-identity-enabled), we recommend pre-creating these secrets to ease your future upgrade experience. This is also a recommended option when using CI/CD tools like ArgoCD, FluxCD, Jenkins, etc.
+While upgrading is still possible by following our [upgrade guide](/self-managed/installation-methods/helm/upgrade/helm-870-880/#identity-disabled), we recommend pre-creating these secrets to ease your future upgrade experience. This is also a recommended option when using CI/CD tools like ArgoCD, FluxCD, Jenkins, etc.
 
 See an example of the secret below:
 
@@ -454,7 +454,7 @@ kubectl logs -f <POD_NAME>
 
 ## Upgrading
 
-For upgrading the Camunda Helm chart from one release to another, perform a [Helm upgrade](/self-managed/installation-methods/helm/upgrade/upgrade.md).
+For upgrading the Camunda Helm chart from one release to another, perform a [Helm upgrade](/self-managed/installation-methods/helm/upgrade/helm-870-880.md).
 
 ## General notes
 

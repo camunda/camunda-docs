@@ -32,7 +32,7 @@ A Camunda Helm chart upgrade is not possible from v9.x.x to v10.0.0 or v10.0.1. 
 
 The Camunda Helm chart v10.0.0 has major changes in the values file structure. Some keys in the values file have been changed. For compatibility, the keys are deprecated in the Camunda release cycle 8.5 and will be removed in the Camunda 8.6 release (October 2024).
 
-Follow the [upgrade instructions](/self-managed/installation-methods/helm/upgrade/upgrade.md#helm-chart-1002+) to upgrade from Camunda Helm chart v9.x.x to Camunda Helm chart v10.x.x.
+Follow the [upgrade instructions](/self-managed/installation-methods/helm/upgrade/helm-840-850.md) to upgrade from Camunda Helm chart v9.x.x to Camunda Helm chart v10.x.x.
 
 #### Support for Amazon OpenSearch
 
