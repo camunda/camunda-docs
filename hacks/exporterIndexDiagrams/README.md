@@ -1,15 +1,16 @@
 # What is this used for?
 
-There is a documentation [file](/self-managed/zeebe-deployment/exporters/camunda-exporter-indices.md) for 
+There is a documentation [file](/self-managed/zeebe-deployment/exporters/camunda-exporter-indices.md) for
 Camunda Exporter indices that includes diagrams, currently these are generated manually using the script in this folder.
 
 ## Using schema_to_mermaid.py
+
 1. Navigate to the parent directory of the `camunda-docs` repo
    ```shell
-   ls -d camunda-docs/ >/dev/null 2>&1 && echo true || echo false 
+   ls -d camunda-docs/ >/dev/null 2>&1 && echo true || echo false
    # should return true if you are in the right directory
    ```
-2. Clone the `camunda/camunda` repo 
+2. Clone the `camunda/camunda` repo
    ```shell
    git clone https://github.com/camunda/camunda.git
    ```
@@ -58,10 +59,11 @@ Camunda Exporter indices that includes diagrams, currently these are generated m
    -c camunda-docs/hacks/exporterIndexDiagrams/styling.json
    ```
 8. Delete the diagram templates
+
    ```shell
    rm $INDEX_DIAGRAM_DIR/camunda-template.md &&
    rm $INDEX_DIAGRAM_DIR/tasklist-template.md &&
-   rm $INDEX_DIAGRAM_DIR/operate-template.md 
+   rm $INDEX_DIAGRAM_DIR/operate-template.md
    ```
 
 9. Add the new diagrams as git changes
