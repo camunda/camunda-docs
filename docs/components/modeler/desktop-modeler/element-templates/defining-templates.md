@@ -509,6 +509,23 @@ For `zeebe:calledElement` bindings, variable propagation is not supported. To pr
 
 The `zeebe:userTask` binding allows you to configure the implementation type for a templated `bpmn:UserTask`. When present, it sets the task as a Camunda user task; when omitted, the task defaults to a job worker.
 
+#### `zeebe:formDefinition`
+
+| **Binding `type`**          | `zeebe:formDefinition`                                                                     |
+| --------------------------- | ------------------------------------------------------------------------------------------ |
+| **Valid property `type`'s** | `String`<br />`Text`<br />`Hidden`<br />`Dropdown`                                         |
+| **Binding parameters**      | `property`: The name of the property. Only `formId` and `externalReference` are supported. |
+| **Mapping result**          | `<zeebe:formDefinition [property]="[userInput]" />`                                        |
+
+The `zeebe:formDefinition` binding allows you to configure the [user task form](../../../bpmn/user-tasks/#user-task-forms) used by a user task.
+
+:::note
+
+When `zeebe:formDefinition` is used, `zeebe:userTask` must be set on the same element.
+Properties `formId` and `externalReference` are mutually exclusive, meaning that only one of them can be set at a time.
+
+:::
+
 #### `zeebe:calledDecision`
 
 | **Binding `type`**          | `zeebe:calledDecision`                                                                     |
