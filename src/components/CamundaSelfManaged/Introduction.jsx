@@ -36,7 +36,7 @@ const Introduction = () => {
       </ul>
       <p>
         Essentially, Self-Managed gives you control and customizability; SaaS
-        gives you speed and simplicity.
+        provides speed and simplicity.
       </p>
     </div>
   );
