@@ -24,8 +24,7 @@ The `Default` mapping rule is created during startup using the [IDENTITY_INITIAL
 This allows the first user to access the Identity UI. Afterward, you can configure additional rules for user access to Camunda components.
 :::
 
-<Tabs groupId="mappingRuleAction" defaultValue="add" queryString
-values={[{label: 'Add', value: 'add', },{label: 'Update', value: 'update', },{label: 'Delete', value: 'delete', },]}>
+<Tabs groupId="mappingRuleAction" defaultValue="add" queryString values={[{label: 'Add', value: 'add', },{label: 'Update', value: 'update', },{label: 'Delete', value: 'delete', },]}>
 
 <TabItem value="add">
 

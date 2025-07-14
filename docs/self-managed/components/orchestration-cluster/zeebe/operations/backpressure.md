@@ -14,9 +14,7 @@ To avoid such problems, Zeebe employs a backpressure mechanism. When the
 broker receives more requests than it can process with an acceptable
 latency, it rejects some requests (see [technical error handling](/apis-tools/zeebe-api/technical-error-handling.md)).
 
-Alternatively, [flow
-control write rate limits](/self-managed/components/components-upgrade/configure-flow-control/configure-flow-control.md) can also
-be used with static write rate limits or throttling. This prevents the
+Alternatively, [flow control write rate limits](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md) can also be used with static write rate limits or throttling. This prevents the
 partition from building an excessive backlog of records not exported.
 
 ### Terminology
@@ -111,7 +109,7 @@ If this is the expected workload, you might consider a different configuration f
 
 The rate limiter used by Zeebe to implement backpressure may use `System.nanoTime()` to measure the RTT of requests. In some systems, we've observed consecutive calls to this method can return equal or even decreasing values. [Low clock resolution](https://shipilev.net/blog/2014/nanotrusting-nanotime) and [monotonicity](https://bugs.openjdk.java.net/browse/JDK-6458294) [issues](https://stackoverflow.com/questions/3657289/linux-clock-gettimeclock-monotonic-strange-non-monotonic-behavior) are some of the most likely culprits of this. If this happens, it's recommended to configure the backpressure to use the **fixed** algorithm. Without a clock with sufficient resolution, adaptive backpressure algorithms are not useful.
 
-import BackpressureWarning from '../../../components/react-components/backpressure-warning.md'
+import BackpressureWarning from '../../../../../components/react-components/backpressure-warning.md'
 
 <BackpressureWarning/>
 

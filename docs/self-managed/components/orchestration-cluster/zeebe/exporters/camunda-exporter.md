@@ -45,8 +45,7 @@ Configure the exporter by providing `args`. See the tables below for configurati
 
 ### Options
 
-<Tabs groupId="configuration" defaultValue="index" queryString
-values={[{label: 'Connect', value: 'connect' },{label: 'Security', value: 'security' },{label: 'Index', value: 'index' },{label: 'Bulk', value: 'bulk' },{label: 'Retention', value: 'retention' }]} >
+<Tabs groupId="configuration" defaultValue="index" queryString values={[{label: 'Connect', value: 'connect' },{label: 'Security', value: 'security' },{label: 'Index', value: 'index' },{label: 'Bulk', value: 'bulk' },{label: 'Retention', value: 'retention' }]}>
 
 <TabItem value="connect">
 

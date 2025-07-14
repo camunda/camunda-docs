@@ -21,8 +21,7 @@ To learn more about mappings and tenants, see the [mapping rules documentation](
 2. Click on the desired Tenant ID (e.g., `<default>`).
 3. Open the **Mappings** tab.
 
-<Tabs groupId="tenantMappingAssignment" defaultValue="add" queryString
-values={[{label: 'Add', value: 'add'}, {label: 'Update', value: 'update'}, {label: 'Delete', value: 'delete'}]}>
+<Tabs groupId="tenantMappingAssignment" defaultValue="add" queryString values={[{label: 'Add', value: 'add'}, {label: 'Update', value: 'update'}, {label: 'Delete', value: 'delete'}]}>
 
 <TabItem value="add">
 
