@@ -7,7 +7,14 @@ description: "Provide a job worker that handles polling for available jobs, use 
 
 :::info
 Starting with 8.8, the Camunda Java client replaces the Zeebe Java client. This transition brings a new Java client structure designed to enhance the user experience and introduce new features while maintaining compatibility with existing codebases.
-For more information, visit [announcements](/reference/announcements-release-notes/880/880-announcements.md#camunda-java-client-and-camunda-spring-sdk).
+
+**Note:** The Zeebe Java client will be removed in version 8.10. Please migrate to the new Camunda Java client before then.
+
+For more information, visit [announcements](/reference/announcements-release-notes/880/880-announcements.md#camunda-java-client-and-camunda-spring-boot-sdk).
+:::
+
+:::info Public API
+The Camunda Java client is part of the Camunda 8 [public API](/reference/public-api.md) and is covered by our SemVer stability guarantees (except for alpha features). Breaking changes will not be introduced in minor or patch releases.
 :::
 
 ## Dependencies

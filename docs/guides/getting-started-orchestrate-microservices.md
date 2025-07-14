@@ -13,6 +13,7 @@ import clsx from "clsx";
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import CreateCluster from '../components/react-components/create-cluster.md';
+import CreateApiCredentials from '../components/react-components/create-api-credentials.md';
 import SmPrereqs from './react-components/\_sm-prerequisites.md'
 import SaasPrereqs from './react-components/\_saas-prerequisites.md'
 import Install from './react-components/\_install-plain-java.md'
@@ -44,10 +45,10 @@ Start by designing your automated process using BPMN. This guide introduces you 
 1. To create a BPMN diagram, click **New project** within Modeler.
 2. Name your project and select **Create new > BPMN diagram**.
 3. Give your model a descriptive name and ID. On the right side of the page, expand the **General** section of the properties panel to find the name and ID fields. For this guide, we'll use `Microservice Orchestration Tutorial` for the name and `microservice-orchestration-tutorial` for the ID.
-4. Use Web Modeler to design a BPMN process with service tasks. These service tasks are used to call your microservices via workers. Create a service task by dragging the task icon from the palette, or by clicking the existing start event and clicking the task icon. Make sure there is an arrow connecting the start event to the task. Click the wrench icon and select **Service Task** to change the task type.
+4. Use Web Modeler to design a BPMN process with service tasks. These service tasks are used to call your microservices via workers. Create a service task by dragging the task icon from the palette, or by clicking the existing start event and clicking the task icon. Make sure there is an arrow connecting the start event to the task. Click on the element and select the **Change element** menu icon. Select **Service Task** to change the task type.
    ![Task with dropdown showing config, including service task](./img/microservice-orchestration-config-service-task.png)
 5. Add a descriptive name using the **General** section in the properties panel. For this guide, we'll use `Call Microservice`.
-6. In the properties panel, expand the **Task definition** section and use the **Type** field to enter a string used in connecting this service task to the corresponding microservice code. For this guide, we'll use `orchestrate-something` as the type. You will use this while [creating a worker for the service task](#create-a-worker-for-the-service-task). If you do not have an option to add the **Type**, use the wrench icon and select **Service Task**.
+6. In the properties panel, expand the **Task definition** section and use the **Type** field to enter a string used in connecting this service task to the corresponding microservice code. For this guide, we'll use `orchestrate-something` as the type. You will use this while [creating a worker for the service task](#create-a-worker-for-the-service-task). If you do not have an option to add the **Type**, click on the element and select the **Change element** menu icon. Select **Service Task**.
 
    ![Service task with properties panel open](./img/microservice-orchestration-service-task.png)
 
@@ -62,15 +63,7 @@ Start by designing your automated process using BPMN. This guide introduces you 
 
 ## Step 3: Create credentials for your Zeebe client
 
-To interact with your Camunda 8 cluster, you'll use the Zeebe client. First, you'll need to create credentials.
-
-1. The main page for Console should be open on another tab. Use Console to navigate to your clusters either through the navigation **Clusters** or by using the section under **View all** on the **Clusters** section of the main dashboard. Click on your existing cluster. This will open the **Overview** for your cluster, where you can find your **region Id** and **cluster Id** (in your client credentials under the **API** tab within your cluster). You will need this information later when creating a worker in the next section.
-   :::note
-   If your account is new, you should have a cluster already available. If no cluster is available, or you’d like to create a new one, click **Create New Cluster**.
-   :::
-2. Navigate to the **API** tab. Click **Create**.
-3. Provide a descriptive name for your client like `microservice-worker`. For this tutorial, the scope can be the default Zeebe scope. Click **Create**.
-4. Your client credentials can be copied or downloaded at this point. You will need your client ID and your client secret when creating a worker in the next section, so keep this window open. Once you close or navigate away from this screen, you will not be able to see them again.
+<CreateApiCredentials/>
 
 ## Step 4: Create a worker for the service task
 

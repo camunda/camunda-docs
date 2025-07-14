@@ -52,7 +52,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/azure/kuberne
 
 ## Deploy Camunda 8 via Helm charts
 
-For more configuration options, refer to the [Helm chart documentation](https://artifacthub.io/packages/helm/camunda/camunda-platform#parameters). Additionally, explore our existing resources in the [Camunda 8 Helm chart](/self-managed/setup/install.md) and [related guides](/self-managed/setup/guides/guides.md).
+For more configuration options, refer to the [Helm chart documentation](https://artifacthub.io/packages/helm/camunda/camunda-platform#parameters). Additionally, explore our existing resources in the [Camunda 8 Helm chart](/self-managed/installation-methods/helm/install.md) and [related guides](/self-managed/installation-methods/helm/configure/index.md).
 
 Depending on your installation path, you may use different settings.
 For easy and reproducible installations, we will use YAML files to configure the chart.
@@ -79,7 +79,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/azure/kuberne
 
 #### Enable Web Modeller and Console services
 
-Some components are not enabled by default in this deployment. For more information on how to configure and enable these components, refer to [configuring Web Modeler, Console, and Connectors](../../../install.md#configuring-web-modeler-console-and-connectors).
+Some components are not enabled by default in this deployment. For more information on how to configure and enable these components, refer to [configuring Web Modeler, Console, and Connectors](/self-managed/installation-methods/helm/install.md#configuring-web-modeler-console-and-connectors).
 
 #### Elasticsearch options
 
@@ -197,7 +197,7 @@ This script:
 
 :::note
 
-This guide uses `helm upgrade --install` as it runs install on initial deployment and upgrades future usage. This may make it easier for future [Camunda 8 Helm upgrades](/self-managed/setup/upgrade.md) or any other component upgrades.
+This guide uses `helm upgrade --install` as it runs install on initial deployment and upgrades future usage. This may make it easier for future [Camunda 8 Helm upgrades](/self-managed/installation-methods/helm/upgrade/upgrade.md) or any other component upgrades.
 
 :::
 
@@ -262,7 +262,7 @@ Console:
 <Tabs groupId="c8-connectivity">
   <TabItem value="rest-api" label="REST API" default>
 
-For a detailed guide on generating and using a token, conduct the relevant documentation on [authenticating with the Camunda 8 REST API](./../../../../../apis-tools/camunda-api-rest/camunda-api-rest-authentication.md?environment=self-managed).
+For a detailed guide on generating and using a token, conduct the relevant documentation on [authenticating with the Orchestration cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md).
 
 This requires port-forwarding the Zeebe Gateway to be able to connect to the cluster.
 
@@ -276,7 +276,7 @@ Export the following environment variables:
 https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/generic/kubernetes/single-region/procedure/export-verify-zeebe-local.sh
 ```
 
-Generate a temporary token to access the Camunda 8 REST API, then capture the value of the `access_token` property and store it as your token. Use the stored token (referred to as `TOKEN` in this case) to interact with the Camunda 8 REST API and display the cluster topology:
+Generate a temporary token to access the Orchestration cluster REST API, then capture the value of the `access_token` property and store it as your token. Use the stored token (referred to as `TOKEN` in this case) to interact with the Orchestration cluster REST API and display the cluster topology:
 
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/generic/kubernetes/single-region/procedure/check-zeebe-cluster-topology.sh
@@ -315,10 +315,6 @@ The following values are required for OAuth authentication:
 
 </TabItem>
 </Tabs>
-
-## Test the installation with payment example application
-
-To test your installation with the deployment of a sample application, refer to the [installing payment example guide](../../../guides/installing-payment-example.md).
 
 ## Advanced topics
 

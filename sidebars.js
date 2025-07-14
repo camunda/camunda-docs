@@ -3,6 +3,7 @@ module.exports = {
     "guides/introduction-to-camunda",
     {
       "Get started": [
+        "guides/getting-started-example",
         "guides/getting-started-java-spring",
         "guides/model-your-first-process",
         {
@@ -10,6 +11,7 @@ module.exports = {
             "guides/orchestrate-human-tasks",
             "guides/orchestrate-apis",
             "guides/orchestrate-microservices",
+            "guides/listen-to-user-tasks",
           ],
         },
       ],
@@ -364,6 +366,7 @@ module.exports = {
             "components/zeebe/technical-concepts/technical-concepts-overview",
             "components/zeebe/technical-concepts/architecture",
             "components/zeebe/technical-concepts/clustering",
+            "components/zeebe/technical-concepts/health",
             "components/zeebe/technical-concepts/partitions",
             "components/zeebe/technical-concepts/internal-processing",
             "components/zeebe/technical-concepts/process-lifecycles",
@@ -417,8 +420,10 @@ module.exports = {
             id: "components/identity/identity-introduction",
           },
           items: [
-            "components/identity/authorization",
             "components/identity/user",
+            "components/identity/group",
+            "components/identity/role",
+            "components/identity/authorization",
           ],
         },
       ],
@@ -788,7 +793,7 @@ module.exports = {
     "apis-tools/working-with-apis-tools",
     {
       APIs: [
-        require("./docs/apis-tools/camunda-api-rest/sidebar-schema"),
+        require("./docs/apis-tools/orchestration-cluster-api-rest/sidebar-schema"),
         require("./docs/apis-tools/administration-api/sidebar-schema"),
         require("./docs/apis-tools/administration-sm-api/sidebar-schema"),
         {
@@ -945,6 +950,7 @@ module.exports = {
         {
           "Camunda Process Test": [
             "apis-tools/testing/getting-started",
+            "apis-tools/testing/configuration",
             "apis-tools/testing/assertions",
             "apis-tools/testing/utilities",
             "apis-tools/testing/connectors",
@@ -1021,6 +1027,7 @@ module.exports = {
       ],
     },
     "reference/supported-environments",
+    "reference/public-api",
     "reference/contact",
     "reference/dependencies",
     "reference/camunda-help-center",
@@ -1044,32 +1051,115 @@ module.exports = {
     "self-managed/about-self-managed",
     {
       type: "category",
-      label: "Run locally",
+      label: "Quickstart",
       link: {
         type: "doc",
-        id: "self-managed/run-locally/index",
+        id: "self-managed/quickstart/overview",
       },
       items: [
-        "self-managed/setup/deploy/local/c8run",
-        "self-managed/setup/deploy/local/docker-compose",
-        "self-managed/setup/deploy/local/local-kubernetes-cluster",
+        {
+          type: "category",
+          label: "For Developers",
+          link: {
+            type: "doc",
+            id: "self-managed/quickstart/developer-quickstart",
+          },
+          items: [
+            "self-managed/quickstart/developer-quickstart/c8run",
+            "self-managed/quickstart/developer-quickstart/docker-compose",
+          ],
+        },
+        "self-managed/quickstart/administrator-quickstart",
       ],
     },
     {
       type: "category",
-      label: "Production installation",
+      label: "Installation methods",
       link: {
         type: "doc",
-        id: "self-managed/setup/overview",
+        id: "self-managed/installation-methods/index",
       },
       items: [
+        //production readiness
         {
-          type: "doc",
-          label: "Helm",
-          id: "self-managed/setup/install",
+          type: "category",
+          label: "Kubernetes with Helm",
+          link: {
+            type: "doc",
+            id: "self-managed/installation-methods/helm/index",
+          },
+          items: [
+            "self-managed/installation-methods/helm/install",
+            "self-managed/installation-methods/helm/chart-parameters",
+            //production guide
+            {
+              type: "category",
+              label: "Configure",
+              link: {
+                type: "doc",
+                id: "self-managed/installation-methods/helm/configure/index",
+              },
+              items: [
+                // {
+                //   type: "category",
+                //   label: "Authentication",
+                //   link: {
+                //     type: "doc",
+                //     id: "self-managed/installation-methods/helm/configure/authentication/index",
+                //   },
+                //   items: [
+                //     "self-managed/installation-methods/helm/configure/authentication/oidc",
+                //     "self-managed/installation-methods/helm/configure/authentication/using-existing-keycloak",
+                //     "self-managed/installation-methods/helm/configure/authentication/basic",
+                //   ],
+                // },
+                {
+                  Database: [
+                    {
+                      Elasticsearch: [
+                        "self-managed/installation-methods/helm/configure/database/elasticsearch/using-existing-elasticsearch",
+                        "self-managed/installation-methods/helm/configure/database/elasticsearch/prefix-elasticsearch-indices",
+                      ],
+                    },
+                    "self-managed/installation-methods/helm/configure/database/using-existing-opensearch",
+                    "self-managed/installation-methods/helm/configure/database/configure-db-custom-headers",
+                  ],
+                },
+                "self-managed/installation-methods/helm/configure/secret-management",
+                {
+                  Ingress: [
+                    "self-managed/installation-methods/helm/configure/ingress-setup",
+                    "self-managed/installation-methods/helm/configure/accessing-components-without-ingress",
+                  ],
+                },
+                //license key
+                "self-managed/installation-methods/helm/configure/configure-multi-tenancy",
+                "self-managed/installation-methods/helm/configure/multi-namespace-deployment",
+                //image registry to include air gapped below and enterprise images
+                "self-managed/installation-methods/helm/configure/air-gapped-installation",
+                "self-managed/installation-methods/helm/configure/running-custom-connectors",
+                //certificates
+                "self-managed/installation-methods/helm/configure/add-extra-manifests",
+                "self-managed/installation-methods/helm/configure/application-configs",
+              ],
+            },
+            // {
+            //   Upgrade: ["setup/upgrade"],
+            // },
+            {
+              "Operational tasks": [
+                "self-managed/installation-methods/helm/operational-tasks/dual-region-operational-procedure",
+                "self-managed/installation-methods/helm/operational-tasks/diagnostics",
+              ],
+              //also to include backup and restore, and scaling
+            },
+            //cloud providers
+          ],
         },
-        "self-managed/setup/deploy/other/docker",
-        "self-managed/setup/deploy/local/manual",
+        "self-managed/installation-methods/docker/docker",
+        {
+          Manual: ["self-managed/installation-methods/manual/manual-install"],
+        },
       ],
     },
     {
@@ -1089,23 +1179,65 @@ module.exports = {
           },
           items: [
             {
-              "Amazon EKS": [
-                "self-managed/setup/deploy/amazon/amazon-eks/eks-terraform",
-                "self-managed/setup/deploy/amazon/amazon-eks/eks-helm",
-                "self-managed/setup/deploy/amazon/amazon-eks/dual-region",
+              type: "category",
+              label: "Amazon",
+              link: {
+                type: "doc",
+                id: "self-managed/setup/deploy/amazon/amazon-eks/amazon-eks",
+              },
+              items: [
+                {
+                  type: "category",
+                  label: "Amazon EKS",
+                  link: {
+                    type: "doc",
+                    id: "self-managed/setup/deploy/amazon/amazon-eks/amazon-eks",
+                  },
+                  items: [
+                    "self-managed/setup/deploy/amazon/amazon-eks/eks-terraform",
+                    "self-managed/setup/deploy/amazon/amazon-eks/eks-helm",
+                    "self-managed/setup/deploy/amazon/amazon-eks/dual-region",
+                    "self-managed/setup/deploy/amazon/amazon-eks/eks-eksctl",
+                    "self-managed/setup/deploy/amazon/amazon-eks/irsa",
+                  ],
+                },
+                {
+                  type: "category",
+                  label: "ROSA",
+                  link: {
+                    type: "doc",
+                    id: "self-managed/setup/deploy/amazon/openshift/terraform-setup",
+                  },
+                  items: [
+                    "self-managed/setup/deploy/amazon/openshift/terraform-setup",
+                    "self-managed/setup/deploy/amazon/openshift/terraform-setup-dual-region",
+                  ],
+                },
               ],
             },
             {
-              "Microsoft AKS": [
+              type: "category",
+              label: "Microsoft",
+              link: {
+                type: "doc",
+                id: "self-managed/setup/deploy/azure/microsoft-aks/microsoft-aks",
+              },
+              items: [
                 "self-managed/setup/deploy/azure/microsoft-aks/aks-terraform",
                 "self-managed/setup/deploy/azure/microsoft-aks/aks-helm",
               ],
             },
             {
-              Openshift: [
-                "self-managed/setup/deploy/amazon/openshift/terraform-setup",
-                "self-managed/setup/deploy/openshift/redhat-openshift",
-                "self-managed/setup/deploy/amazon/openshift/terraform-setup-dual-region",
+              Google: ["self-managed/setup/deploy/gcp/google-gke"],
+            },
+            {
+              type: "category",
+              label: "Red Hat OpenShift",
+              link: {
+                type: "doc",
+                id: "self-managed/setup/deploy/openshift/redhat-openshift",
+              },
+              items: [
                 "self-managed/setup/deploy/openshift/redhat-openshift-dual-region",
               ],
             },
@@ -1120,66 +1252,6 @@ module.exports = {
           },
           items: ["self-managed/setup/deploy/amazon/aws-ec2"],
         },
-        {
-          "Amazon (AWS)": [
-            {
-              type: "category",
-              label: "Amazon EKS",
-              link: {
-                type: "doc",
-                id: "self-managed/setup/deploy/amazon/amazon-eks/amazon-eks",
-              },
-              items: [
-                "self-managed/setup/deploy/amazon/amazon-eks/eks-eksctl",
-                "self-managed/setup/deploy/amazon/amazon-eks/eks-terraform",
-                "self-managed/setup/deploy/amazon/amazon-eks/eks-helm",
-                "self-managed/setup/deploy/amazon/amazon-eks/dual-region",
-                "self-managed/setup/deploy/amazon/amazon-eks/irsa",
-              ],
-            },
-            {
-              type: "category",
-              label: "ROSA",
-              link: {
-                type: "doc",
-                id: "self-managed/setup/deploy/amazon/openshift/terraform-setup",
-              },
-              items: [
-                "self-managed/setup/deploy/amazon/openshift/terraform-setup",
-                "self-managed/setup/deploy/amazon/openshift/terraform-setup-dual-region",
-              ],
-            },
-            {
-              type: "category",
-              label: "Amazon Marketplace",
-              link: {
-                type: "doc",
-                id: "self-managed/setup/deploy/amazon/aws-marketplace",
-              },
-              items: [],
-            },
-            "self-managed/setup/deploy/amazon/aws-ec2",
-          ],
-          "Microsoft (Azure)": [
-            {
-              type: "category",
-              label: "Microsoft AKS",
-              link: {
-                type: "doc",
-                id: "self-managed/setup/deploy/azure/microsoft-aks/microsoft-aks",
-              },
-              items: [
-                "self-managed/setup/deploy/azure/microsoft-aks/aks-terraform",
-                "self-managed/setup/deploy/azure/microsoft-aks/aks-helm",
-              ],
-            },
-          ],
-          "Google (GCP)": ["self-managed/setup/deploy/gcp/google-gke"],
-          "Red Hat (OpenShift)": [
-            "self-managed/setup/deploy/openshift/redhat-openshift",
-            "self-managed/setup/deploy/openshift/redhat-openshift-dual-region",
-          ],
-        },
       ],
     },
     {
@@ -1190,7 +1262,6 @@ module.exports = {
         id: "self-managed/update/index",
       },
       items: [
-        "self-managed/setup/upgrade",
         {
           type: "category",
           label: "Update by version",
@@ -1219,59 +1290,31 @@ module.exports = {
       ],
     },
     {
-      type: "category",
-      label: "Configure",
-      link: {
-        type: "doc",
-        id: "self-managed/setup/guides/guides",
-      },
-      items: [
-        "self-managed/setup/guides/accessing-components-without-ingress",
-        "self-managed/setup/guides/ingress-setup",
-        "self-managed/setup/guides/using-existing-elasticsearch",
-        "self-managed/setup/guides/using-existing-opensearch",
-        "self-managed/setup/guides/configure-db-custom-headers",
-        "self-managed/setup/guides/air-gapped-installation",
-        "self-managed/setup/guides/running-custom-connectors",
-        "self-managed/setup/guides/multi-namespace-deployment",
-        "self-managed/setup/guides/installing-payment-app-example",
-        "self-managed/setup/guides/add-extra-manifests",
-        "self-managed/setup/guides/prefix-elasticsearch-indices",
-        "self-managed/setup/guides/secret-management",
-      ],
-    },
-    {
       "Operational guides": [
-        "self-managed/operational-guides/configure-multi-tenancy",
         {
           type: "category",
-          label: "Backup and restore",
+          label: "Back up and restore",
           link: {
             type: "doc",
             id: "self-managed/operational-guides/backup-restore/backup-and-restore",
           },
           items: [
-            "self-managed/operational-guides/backup-restore/optimize-backup",
-            "self-managed/operational-guides/backup-restore/webapps-backup",
-            "self-managed/operational-guides/backup-restore/zeebe-backup-and-restore",
-            "self-managed/operational-guides/backup-restore/modeler-backup-and-restore",
+            "self-managed/operational-guides/backup-restore/backup",
+            "self-managed/operational-guides/backup-restore/restore",
+            {
+              "Backup Management API": [
+                "self-managed/operational-guides/backup-restore/optimize-backup",
+                "self-managed/operational-guides/backup-restore/webapps-backup",
+                "self-managed/operational-guides/backup-restore/zeebe-backup-and-restore",
+              ],
+            },
           ],
         },
         "self-managed/operational-guides/data-purge",
         {
           type: "doc",
-          label: "Configure components",
-          id: "self-managed/operational-guides/application-configs",
-        },
-        {
-          type: "doc",
           label: "Configure flow control",
           id: "self-managed/operational-guides/configure-flow-control/configure-flow-control",
-        },
-        {
-          "Multi-region": [
-            "self-managed/operational-guides/multi-region/dual-region-operational-procedure",
-          ],
         },
         {
           Monitoring: [
@@ -1282,7 +1325,6 @@ module.exports = {
         {
           Troubleshooting: [
             "self-managed/operational-guides/troubleshooting/troubleshooting",
-            "self-managed/operational-guides/troubleshooting/diagnostics",
           ],
         },
       ],
@@ -1419,6 +1461,19 @@ module.exports = {
                   items: [
                     "self-managed/zeebe-deployment/exporters/install-zeebe-exporters",
                     "self-managed/zeebe-deployment/exporters/camunda-exporter",
+                    {
+                      type: "category",
+                      label: "Camunda Exporter indices",
+                      link: {
+                        type: "doc",
+                        id: "self-managed/zeebe-deployment/exporters/camunda-exporter-indices",
+                      },
+                      items: [
+                        "self-managed/zeebe-deployment/exporters/index-diagrams/camunda-exporter-indices-identity",
+                        "self-managed/zeebe-deployment/exporters/index-diagrams/camunda-exporter-indices-operate",
+                        "self-managed/zeebe-deployment/exporters/index-diagrams/camunda-exporter-indices-tasklist",
+                      ],
+                    },
                     "self-managed/zeebe-deployment/exporters/elasticsearch-exporter",
                     "self-managed/zeebe-deployment/exporters/opensearch-exporter",
                   ],
@@ -1487,6 +1542,7 @@ module.exports = {
                 "self-managed/optimize-deployment/configuration/history-cleanup",
                 "self-managed/optimize-deployment/configuration/localization",
                 "self-managed/optimize-deployment/configuration/object-variables",
+                "self-managed/optimize-deployment/configuration/variable-import",
                 "self-managed/optimize-deployment/configuration/multi-tenancy",
               ],
             },

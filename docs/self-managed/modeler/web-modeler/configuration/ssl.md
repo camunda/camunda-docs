@@ -4,7 +4,7 @@ title: "SSL"
 description: "Read details on additional SSL configuration for Web Modeler."
 ---
 
-By default, communication between Web Modeler and Identity and the Web Modeler components is not encrypted, as it usually happens backend-to-backend within the same [Docker](/self-managed/setup/deploy/other/docker.md) network or [Kubernetes](/self-managed/setup/install.md) cluster.
+By default, communication between Web Modeler and Identity and the Web Modeler components is not encrypted, as it usually happens backend-to-backend within the same [Docker](/self-managed/installation-methods/docker/docker.md) network or [Kubernetes](/self-managed/installation-methods/helm/install.md) cluster.
 However, you can enable TLS-encrypted communication by following the steps below (for example, if backend-to-backend communication is not possible in a custom Camunda 8 installation setup).
 
 ## Configuring secure connections to Identity

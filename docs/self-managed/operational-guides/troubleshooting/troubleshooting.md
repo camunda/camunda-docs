@@ -5,6 +5,36 @@ sidebar_label: "Troubleshooting"
 description: "Troubleshooting considerations in Platform deployment."
 ---
 
+## Helm chart security warning
+
+Due to [recent changes](https://github.com/bitnami/charts/issues/30850) in Bitnami's Helm charts (a third-party dependency), you may see a security warning when installing the Camunda Helm chart. This warning appears because Bitnami charts emit such messages when the underlying image is replaced.
+
+Camunda repackages the Bitnami distribution with [Camunda Keycloak](https://github.com/camunda/keycloak) for Identity. **This is not a security risk in itself.**
+
+To accommodate this, the Helm option `allowInsecureImages` is enabled by default in the Camunda Helm chart to support the use of Camunda Keycloak:
+
+```yaml
+identityKeycloak:
+  global:
+    security:
+      allowInsecureImages: true
+```
+
+If you're using your own Docker registry to host application images, you should also enable this option for any Bitnami-based third-party dependencies, such as PostgreSQL or Elasticsearch sub-charts. For example:
+
+```yaml
+identityKeycloak:
+  postgresql:
+    global:
+      security:
+        allowInsecureImages: true
+[...]
+elasticsearch:
+  global:
+    security:
+      allowInsecureImages: true
+```
+
 ## Keycloak requires SSL for requests from external sources
 
 When deploying Camunda to a provider, it is important to confirm the IP ranges used
@@ -18,7 +48,7 @@ not provide support for the distribution of the Keycloak TLS key to the other co
 
 ## Identity redirect URL
 
-If HTTP to HTTPS redirection is enabled in the load-balancer or ingress, make sure to use the HTTPS
+If HTTP to HTTPS redirection is enabled in the load-balancer or Ingress, make sure to use the HTTPS
 protocol in the values file under `global.identity.auth.[COMPONENT].redirectUrl`.
 Otherwise, you will get a redirection error in Keycloak.
 
@@ -43,11 +73,11 @@ However, according to the official Kubernetes documentation about [Ingress TLS](
 
 > There is a gap between TLS features supported by various Ingress controllers. Please refer to documentation on nginx, GCE, or any other platform specific Ingress controller to understand how TLS works in your environment.
 
-Therefore, if you are not using the [ingress-nginx controller](https://github.com/kubernetes/ingress-nginx), ensure you pay attention to TLS configuration of the Ingress controller of your choice. Find more details about the Zeebe Ingress setup in the [Kubernetes platforms supported by Camunda](/self-managed/setup/install.md).
+Therefore, if you are not using the [ingress-nginx controller](https://github.com/kubernetes/ingress-nginx), ensure you pay attention to TLS configuration of the Ingress controller of your choice. Find more details about the Zeebe Ingress setup in the [Kubernetes platforms supported by Camunda](/self-managed/installation-methods/helm/install.md).
 
 ## Identity `contextPath`
 
-Camunda 8 Self-Managed can be accessed externally via the [combined Ingress setup](self-managed/setup/guides/ingress-setup.md#combined-ingress-setup). In that configuration, Camunda Identity is accessed using a specific path, configured by setting the `contextPath` variable, for example `https://camunda.example.com/identity`.
+Camunda 8 Self-Managed can be accessed externally via the [combined Ingress setup](/self-managed/installation-methods/helm/configure/ingress-setup.md#combined-ingress-setup). In that configuration, Camunda Identity is accessed using a specific path, configured by setting the `contextPath` variable, for example `https://camunda.example.com/identity`.
 
 For security reasons, Camunda Identity requires secure access (HTTPS) when a `contextPath` is configured.
 

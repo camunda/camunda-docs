@@ -33,3 +33,6 @@ Get started with agentic orchestration.
 :::tip
 Ready to get started? Download the [AI Email Support Agent blueprint](https://marketplace.camunda.com/en-US/apps/522492/ai-email-support-agent) from the Camunda Marketplace.
 :::
+:::info Camunda Academy
+Register for the free [Camunda 8 - Agentic Orchestration](https://academy.camunda.com/path/c8-lp-agentic) course and learn how to model, deploy, and manage AI agents seamlessly into your end-to-end processes.
+:::

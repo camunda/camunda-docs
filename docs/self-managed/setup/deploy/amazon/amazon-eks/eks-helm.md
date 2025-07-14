@@ -33,7 +33,7 @@ Multi-tenancy is disabled by default and is not covered further in this guide. I
 
 :::caution Optimize compatibility with OpenSearch
 
-**Migration:** The migration step will be disabled during the installation. For more information, refer to [using Amazon OpenSearch Service](/self-managed/setup/guides/using-existing-opensearch.md).
+**Migration:** The migration step will be disabled during the installation. For more information, refer to [using Amazon OpenSearch Service](/self-managed/installation-methods/helm/configure/database/using-existing-opensearch.md).
 
 :::
 
@@ -41,7 +41,7 @@ Multi-tenancy is disabled by default and is not covered further in this guide. I
 
 <!-- TODO: update Arch to include Aurora and OpenSearch both text and diagram (https://github.com/camunda/team-infrastructure-experience/issues/409) -->
 
-Note the [existing architecture](../../../../about-self-managed.md#architecture) extended by deploying a Network Load Balancer with TLS termination within the [ingress](https://kubernetes.github.io/ingress-nginx/user-guide/tls/) below.
+Note the [existing architecture](/self-managed/about-self-managed.md#architecture) extended by deploying a Network Load Balancer with TLS termination within the [ingress](https://kubernetes.github.io/ingress-nginx/user-guide/tls/) below.
 
 Additionally, two components ([external-dns](https://github.com/kubernetes-sigs/external-dns) and [cert-manager](https://cert-manager.io/)) handle requesting the TLS certificate from [Let's Encrypt](https://letsencrypt.org/) and configuring Route53 to confirm domain ownership and update the DNS records to expose the Camunda 8 deployment.
 
@@ -186,7 +186,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
 
 ## Deploy Camunda 8 via Helm charts
 
-For more configuration options, refer to the [Helm chart documentation](https://artifacthub.io/packages/helm/camunda/camunda-platform#parameters). Additionally, explore our existing resources on the [Camunda 8 Helm chart](/self-managed/setup/install.md) and [guides](/self-managed/setup/guides/guides.md).
+For more configuration options, refer to the [Helm chart documentation](https://artifacthub.io/packages/helm/camunda/camunda-platform#parameters). Additionally, explore our existing resources on the [Camunda 8 Helm chart](/self-managed/installation-methods/helm/install.md) and [guides](/self-managed/installation-methods/helm/configure/index.md).
 
 Depending of your installation path, you may use different settings.
 For easy and reproducible installations, we will use yaml files to configure the chart.
@@ -198,7 +198,7 @@ Start by creating a `values.yml` file to store the configuration for your enviro
 <Tabs groupId="values">
   <TabItem value="with-domain-std" label="Standard with domain" default>
 
-The following makes use of the [combined Ingress setup](/self-managed/setup/guides/ingress-setup.md#combined-ingress-setup) by deploying a single Ingress for all HTTP components and a separate Ingress for the gRPC endpoint.
+The following makes use of the [combined Ingress setup](/self-managed/installation-methods/helm/configure/ingress-setup.md#combined-ingress-setup) by deploying a single Ingress for all HTTP components and a separate Ingress for the gRPC endpoint.
 
 :::info Cert-manager annotation for domain installation
 The annotation `kubernetes.io/tls-acme=true` will be [interpreted by cert-manager](https://cert-manager.io/docs/usage/ingress/) and automatically results in the creation of the required certificate request, easing the setup.
@@ -251,7 +251,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
 
   <TabItem value="with-domain-irsa" label="IRSA with domain" default>
 
-The following makes use of the [combined Ingress setup](/self-managed/setup/guides/ingress-setup.md#combined-ingress-setup) by deploying a single Ingress for all HTTP components and a separate Ingress for the gRPC endpoint.
+The following makes use of the [combined Ingress setup](/self-managed/installation-methods/helm/configure/ingress-setup.md#combined-ingress-setup) by deploying a single Ingress for all HTTP components and a separate Ingress for the gRPC endpoint.
 
 :::info Cert-manager annotation for domain installation
 The annotation `kubernetes.io/tls-acme=true` will be [interpreted by cert-manager](https://cert-manager.io/docs/usage/ingress/) and automatically results in the creation of the required certificate request, easing the setup.
@@ -288,7 +288,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
 
 #### Enable Enterprise components
 
-Some components are not enabled by default in this deployment. For more information on how to configure and enable these components, refer to [configuring Web Modeler, Console, and connectors](../../../install.md#configuring-web-modeler-console-and-connectors).
+Some components are not enabled by default in this deployment. For more information on how to configure and enable these components, refer to [configuring Web Modeler, Console, and connectors](/self-managed/installation-methods/helm/install.md#configuring-web-modeler-console-and-connectors).
 
 #### Use internal Elasticsearch instead of the managed OpenSearch
 
@@ -400,7 +400,7 @@ This command:
 
 :::note
 
-This guide uses `helm upgrade --install` as it runs install on initial deployment and upgrades future usage. This may make it easier for future [Camunda 8 Helm upgrades](/self-managed/setup/upgrade.md) or any other component upgrades.
+This guide uses `helm upgrade --install` as it runs install on initial deployment and upgrades future usage. This may make it easier for future [Camunda 8 Helm upgrades](/self-managed/installation-methods/helm/upgrade/upgrade.md) or any other component upgrades.
 
 :::
 
@@ -558,7 +558,7 @@ Console:
 <Tabs groupId="c8-connectivity">
   <TabItem value="rest-api" label="REST API" default>
 
-For a detailed guide on generating and using a token, please conduct the relevant documentation on [authenticating with the Camunda 8 REST API](./../../../../../apis-tools/camunda-api-rest/camunda-api-rest-authentication.md?environment=self-managed).
+For a detailed guide on generating and using a token, please conduct the relevant documentation on [authenticating with the Orchestration cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md).
 
 <Tabs groupId="domain">
   <TabItem value="with" label="With domain" default>
@@ -588,7 +588,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 </Tabs>
 
-Generate a temporary token to access the Camunda 8 REST API, then capture the value of the `access_token` property and store it as your token. Use the stored token (referred to as `TOKEN` in this case) to interact with the Camunda 8 REST API and display the cluster topology:
+Generate a temporary token to access the Orchestration cluster REST API, then capture the value of the `access_token` property and store it as your token. Use the stored token (referred to as `TOKEN` in this case) to interact with the Orchestration cluster REST API and display the cluster topology:
 
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/check-zeebe-cluster-topology.sh
@@ -651,10 +651,6 @@ The following values are required for OAuth authentication:
 
 </TabItem>
 </Tabs>
-
-## Test the installation with payment example application
-
-To test your installation with the deployment of a sample application, refer to the [installing payment example guide](../../../guides/installing-payment-example.md).
 
 ## Advanced topics
 

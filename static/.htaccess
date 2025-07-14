@@ -149,6 +149,17 @@ RewriteRule ^optimize/3.11.0/self-managed/(.*)$ /docs/8.3/self-managed/$1 [R=301
 #   8.8: content moves introduced prior to the release of version 8.8.
 #---------------------------------------------------------------------------------
 
+# Remove Amazon Marketplace
+RewriteRule ^docs/next/self-managed/setup/deploy/amazon/aws-marketplace/?$ /docs/next/self-managed/setup/deploy/amazon/amazon-eks/ [R=301,L]
+
+# Rename C8 API
+RewriteRule ^docs/next/apis-tools/camunda-api-rest/(.*)$ /docs/next/apis-tools/orchestration-cluster-api-rest/$1 [R=301,L]
+RewriteRule ^docs/next/apis-tools/camunda-api-rest/camunda-api-rest-authentication/?$ /docs/next/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication/ [R=301,L]
+RewriteRule ^docs/next/apis-tools/camunda-api-rest/camunda-api-rest-data-fetching/?$ /docs/next/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-data-fetching/ [R=301,L]
+RewriteRule ^docs/next/apis-tools/camunda-api-rest/camunda-api-rest-overview/?$ /docs/next/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview/ [R=301,L]
+RewriteRule ^docs/next/apis-tools/camunda-api-rest/camunda-8-api-intermediate-tutorial/?$ /docs/next/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-intermediate-tutorial/ [R=301,L]
+RewriteRule ^docs/next/apis-tools/camunda-api-rest/camunda-8-api-tutorial/?$ /docs/next/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-tutorial/ [R=301,L]
+
 # Move doc handling SM to Concepts
 RewriteRule ^docs/next/self-managed/document-handling/(.*)$ /docs/next/self-managed/concepts/document-handling/$1 [R=301,L]
 RewriteRule ^docs/self-managed/document-handling/(.*)$ /docs/self-managed/concepts/document-handling/$1 [R=301,L]
@@ -380,6 +391,12 @@ RewriteRule ^docs/8.6/apis-tools/camunda-api-rest/specifications/find-all-users/
 
 # Move SAP integrations page to a new folder
 RewriteRule ^docs/next/components/camunda-integrations/sap/?$ /docs/next/components/camunda-integrations/sap/sap-integration/ [R=301,L]
+
+# Restructure Backup and restore guide
+RewriteRule ^docs/next/self-managed/operational-guides/backup-restore/modeler-backup-and-restore/?$ /docs/next/self-managed/operational-guides/backup-restore/backup-and-restore/ [R=301,L]
+RewriteRule ^docs/self-managed/operational-guides/backup-restore/modeler-backup-and-restore/?$ /docs/self-managed/operational-guides/backup-restore/backup-and-restore/ [R=301,L]
+RewriteRule ^docs/8.5/self-managed/operational-guides/backup-restore/modeler-backup-and-restore/?$ /docs/8.5/self-managed/operational-guides/backup-restore/backup-and-restore/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/operational-guides/backup-restore/modeler-backup-and-restore/?$ /docs/8.6/self-managed/operational-guides/backup-restore/backup-and-restore/ [R=301,L]
 
 #---------------------------------------------------------------------------------
 #   8.7: content moves introduced prior to the release of version 8.7.

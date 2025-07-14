@@ -14,10 +14,10 @@ You can configure the connector runtime environment in the following ways:
 - The secrets that should be available to the connectors.
 
 :::note
-Starting from version 8.8, the connector runtime no longer requires a connection to Operate. The connector runtime now only depends on the Camunda 8 REST API and Zeebe.
+Starting from version 8.8, the connector runtime no longer requires a connection to Operate. The connector runtime now only depends on the Orchestration cluster REST API and Zeebe.
 :::
 
-To connect to **Zeebe** and the **Camunda 8 REST API**, the connector runtime uses the [Camunda Spring Boot SDK](/apis-tools/spring-zeebe-sdk/getting-started.md). Any configuration that can be set in the Camunda Spring Boot SDK can also be set in the connector runtime environment.
+To connect to **Zeebe** and the **Orchestration cluster REST API**, the connector runtime uses the [Camunda Spring Boot SDK](/apis-tools/spring-zeebe-sdk/getting-started.md). Any configuration that can be set in the Camunda Spring Boot SDK can also be set in the connector runtime environment.
 
 Below are some of the most common configuration options for the connector runtime. Refer to the [Camunda Spring Boot SDK](/apis-tools/spring-zeebe-sdk/configuration.md#zeebe) for a full list of configuration options.
 
@@ -27,7 +27,7 @@ This guide provides configuration properties in the form of environment variable
 For example, the Java configuration property `camunda.client.grpc-address` can be set in the connector runtime environment as an environment variable called `CAMUNDA_CLIENT_GRPCADDRESS`.
 :::
 
-## Connecting to Zeebe and the Camunda 8 REST API
+## Connecting to Zeebe and the Orchestration cluster REST API
 
 <Tabs groupId="configuration" defaultValue="saas" queryString values={
 [
@@ -193,13 +193,13 @@ The following environment variables can be used to configure the default secret 
 
 <TabItem value='helm'>
 
-Connector secrets can be used in Helm charts. Review the documentation on [managing secrets in Helm charts](self-managed/setup/guides/secret-management.md) for additional details.
+Connector secrets can be used in Helm charts. Review the documentation on [managing secrets in Helm charts](/self-managed/installation-methods/helm/configure/secret-management.md) for additional details.
 
 </TabItem>
 
 <TabItem value='docker'>
 
-To inject secrets into the [Docker images of the runtime](/self-managed/setup/deploy/other/docker.md#connectors), they must be available in the environment of the Docker container.
+To inject secrets into the [Docker images of the runtime](/self-managed/installation-methods/docker/docker.md#connectors), they must be available in the environment of the Docker container.
 
 For example, you can inject secrets when running a container:
 
@@ -222,7 +222,7 @@ to inject multiple secrets at once.
 
 <TabItem value='manual'>
 
-In the [manual setup](/self-managed/setup/deploy/local/manual.md#run-connectors), inject secrets during connector execution by providing
+In the [manual setup](/self-managed/installation-methods/manual/install.md#run-connectors), inject secrets during connector execution by providing
 them as environment variables before starting the runtime environment. You can, for example, export them beforehand as follows:
 
 ```bash
@@ -366,7 +366,7 @@ configuration of job workers.
 
 ### Inbound Connector configuration
 
-The Connector Runtime fetches process definitions from the Camunda 8 REST API, and executes all inbound connectors within those processes independently of the outbound connector configuration without any additional configuration required from the user.
+The Connector Runtime fetches process definitions from the Orchestration cluster REST API, and executes all inbound connectors within those processes independently of the outbound connector configuration without any additional configuration required from the user.
 
 To restrict the Connector Runtime inbound connector feature to a single tenant or multiple tenants, use Identity and assign the tenants the connector application should have access to.
 

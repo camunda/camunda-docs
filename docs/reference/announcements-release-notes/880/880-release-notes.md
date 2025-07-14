@@ -19,6 +19,161 @@ These release notes identify the new features included in 8.8, including [alpha 
 | ---------------------- | ---------------------------- | ------------ | ------------ | ------------ |
 | 14 October 2025        | 13 April 2027                | -            | -            | -            |
 
+## 8.8.0-alpha6
+
+| Release date | Changelog(s)                                                                                                                                                                               | Blog                                                                              |
+| :----------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------- |
+| 8 July 2025  | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.8.0-alpha6)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.8.0-alpha6)</li></ul> | [Release blog](https://camunda.com/blog/2025/07/camunda-alpha-release-july-2025/) |
+
+### Bitbucket sync <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
+
+<!-- https://github.com/camunda/product-hub/issues/2507 -->
+
+Camunda 8 now supports integration with [Atlassian Bitbucket](https://bitbucket.org/product/), in addition to GitHub, GitLab, and Azure DevOps.
+
+- This helps customers who use Jira for their development processes.
+- Organization owners and administrators can connect their Web Modeler process applications to Bitbucket, allowing users to keep their Web Modeler, Desktop Modeler, and official version control projects synced.
+
+To learn more, see [Git sync](/components/modeler/web-modeler/git-sync.md?platform=bitbucket).
+
+### Camunda 8 REST API renamed to Orchestration Cluster API <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects APIs">API</span>
+
+<!-- https://github.com/camunda/product-hub/issues/2793 -->
+
+The Camunda 8 REST API is now called the **Orchestration Cluster API**.
+
+- This name better reflects its role as a unified REST API for interacting with entities in a [Camunda 8 orchestration cluster](/reference/glossary.md#orchestration-cluster), such as processes, tasks, and variables.
+- The functionality and structure of the API remain unchanged. The name change improves clarity and onboarding across Camunda documentation and resources.
+
+To learn more, see [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
+
+### Connectors <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span> {#connectorsalpha6}
+
+#### AI Agent connector
+
+<!-- https://github.com/camunda/camunda-docs/pull/5942 -->
+<!-- https://github.com/camunda/camunda-docs/pull/6068 -->
+
+- **Structured outputs/JSON mode**: [Configurable response formats](../../../components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#response) allow you to choose whether the connector returns plain text or JSON for downstream processing. For some models, you can define a JSON schema for returned data.
+- **Conversation history storage**: History can now be stored in [Camunda's document storage](../../../components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#memory) rather than in process variables—allowing longer histories without process variable size limits.
+
+To learn more, see [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
+
+#### Intrinsic functions
+
+<!-- https://github.com/camunda/camunda-docs/pull/5934 -->
+
+A new `getJson` intrinsic function accepts a document and an optional FEEL expression. It extracts and returns content from a JSON document as an object.
+
+- The optional FEEL expression parameter specifies the part that will be extracted from the JSON document content.
+- If not provided, the whole document is returned as a JSON object.
+
+To learn more, see [intrinsic functions](/components/connectors/use-connectors/intrinsic-functions.md).
+
+### Dynamic partition scaling <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Zeebe">Zeebe</span>
+
+<!-- https://github.com/camunda/product-hub/issues/2226 -->
+
+You can now add new Zeebe partitions to a running cluster.
+
+- Scaling can be performed concurrently when the cluster is running, with zero downtime.
+- New process instances also start on new partitions, distributing cluster load evenly across partitions.
+- Process instances do not migrate between partitions, so it can take time for the cluster to reach equilibrium.
+- New partitions do not take part in correlating messages/signals, except for message/signal start events.
+
+To learn more, see [cluster scaling](/self-managed/zeebe-deployment/operations/cluster-scaling.md).
+
+:::caution
+This feature is not yet fully compatible with backup/restore.
+:::
+
+### Helm charts <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+
+#### Alternative container images
+
+<!-- https://github.com/camunda/product-hub/issues/2826 -->
+
+Camunda now provides alternative container images to the previously used Bitnami images. These images are hosted on `registry.camunda.cloud`.
+
+- From version **8.8**, these are the default supported images, offering better security and faster patch delivery.
+- To use them, update your Helm deployment to reference the `values-images-ee.yml` file. See the [installation guide](/self-managed/installation-methods/helm/install.md) for details.
+
+#### Configurable volumes
+
+<!-- https://github.com/camunda/product-hub/issues/2597 -->
+
+The Helm chart now supports configurable volumes. You can define `PersistentVolumeClaims` or continue using `EmptyDir` through `values.yaml`.
+
+### Singapore region available for SaaS on Amazon Web Services <span class="badge badge--long" title="This feature affects SaaS">SaaS</span>
+
+A new Singapore (ap-southeast-1) region is now available for SaaS clusters on Amazon Web Services. Use this region to:
+
+- Improve overall processing speed and reduce latency if you operate in Singapore and Southeast Asian (SEA) countries.
+- Keep cluster data within Singapore to support your local data residency and compliance needs.
+
+To learn more about supported SaaS regions, see [regions](/reference/regions.md).
+
+### Tasklist uses the Orchestration Cluster API <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span>
+
+<!-- https://github.com/camunda/product-hub/issues/2516 -->
+
+Tasklist now uses the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md), replacing the soon-to-be-deprecated Tasklist V1 API.
+
+- This change improves compatibility with Camunda 8 RDBMS support and continues to work with Elasticsearch/OpenSearch.
+- It ensures consistent functionality, better performance, and access to new features—without breaking existing workflows.
+
+### User task listener types <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span>
+
+New user task listener types are available:
+
+#### `creating` event
+
+<!-- https://github.com/camunda/product-hub/issues/2625 -->
+
+This event triggers before a user task is created.
+
+| Functionality                  | Description                                                                                                      |
+| :----------------------------- | :--------------------------------------------------------------------------------------------------------------- |
+| Configurable creation listener | Executes logic before a task appears to users. Task is visible only after all listener jobs finish.              |
+| Controlled task initialization | The creation continues only after listeners succeed. Incidents are raised if logic fails, enabling safe retries. |
+| Operate UI insights            | A “Creating” event appears in the listener tab in Operate. Incidents are flagged for troubleshooting.            |
+| Assign user task               | Assign a task programmatically during creation, useful when assignment depends on an external system.            |
+
+#### `canceling` event
+
+<!-- https://github.com/camunda/product-hub/issues/2657 -->
+
+This event triggers when a user task is canceled (e.g., by a boundary event or process termination).
+
+| Functionality                     | Description                                                                                               |
+| :-------------------------------- | :-------------------------------------------------------------------------------------------------------- |
+| Configurable cancelation listener | Executes logic when a task is canceled. Allows inspection or modification of task data before completion. |
+| Consistent lifecycle control      | Cancelation waits for listener logic to complete. Failures can raise incidents for safe retry.            |
+| Operate UI insights               | A “Canceling” event is shown in the listener tab. Incidents are highlighted for visibility.               |
+
+To learn more, see [user task listeners](/components/concepts/user-task-listeners.md).
+
+### Documentation <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+
+#### Get started updates
+
+<!-- https://github.com/camunda/product-hub/issues/2751 -->
+
+The [getting started](/guides/getting-started-example.md) documentation now includes:
+
+- Example BPMN files and Spring Boot/NodeJS starter projects.
+- Practical code snippets, such as payment handling.
+- Updated code to match recent Camunda versions.
+- Annotations in BPMN files to guide usage and explain results.
+
+#### Public API
+
+The new [Public API](/reference/public-api.md) documentation outlines what’s included in Camunda 8's public API, the policies around versioning, and what to expect when upgrading.
+
+- The public API is the official contract between Camunda and its users under SemVer.
+- No breaking changes will be made to the public API in minor or patch releases.
+- You can safely build on these interfaces with the expectation of stability and backward compatibility.
+
 ## 8.8.0-alpha5
 
 | Release date | Changelog(s)                                                                                                                                                                               | Blog                                                                              |
@@ -81,15 +236,15 @@ To learn more about this feature, see [FEEL Playground](/components/modeler/feel
 
 Camunda’s new Identity service enhances authentication and authorization for Self-Managed and SaaS environments:
 
-| Feature/enhancement | Description |
-|:--|:--|
-| Self-Managed Identity management | Admins can create and manage users, groups, roles, and memberships directly in the Identity database. |
-| OIDC integration | Integrate external identity providers (IdP) such as Keycloak and Microsoft Entra. |
-| Role-based access control (RBAC) | Assign roles and group permissions on a per-resource basis for fine-grained access control. Supported resources include Authorization, Claim Mapping Rules, Messages, Batches, Applications, Tenants, Deployments, Process Definitions, Decision Definitions, and more. |
-| Flexible mapping | Map users, groups, and roles to resource authorizations and tenants. Leverage OIDC token claims and application/client mappings to streamline permission assignments. |
-| Migration support | Simplified migration tools make it easy for existing customers to transition to the new service. |
-| Organizational Identity | In SaaS environments, integrate your own IdP to manage organizational users and assign resources cluster-by-cluster. |
-| Cluster-specific Roles and Groups | In SaaS environments, manage distinct roles, groups, and authorizations for each cluster independently. |
+| Feature/enhancement               | Description                                                                                                                                                                                                                                                             |
+| :-------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Self-Managed Identity management  | Admins can create and manage users, groups, roles, and memberships directly in the Identity database.                                                                                                                                                                   |
+| OIDC integration                  | Integrate external identity providers (IdP) such as Keycloak and Microsoft Entra.                                                                                                                                                                                       |
+| Role-based access control (RBAC)  | Assign roles and group permissions on a per-resource basis for fine-grained access control. Supported resources include Authorization, Claim Mapping Rules, Messages, Batches, Applications, Tenants, Deployments, Process Definitions, Decision Definitions, and more. |
+| Flexible mapping                  | Map users, groups, and roles to resource authorizations and tenants. Leverage OIDC token claims and application/client mappings to streamline permission assignments.                                                                                                   |
+| Migration support                 | Simplified migration tools make it easy for existing customers to transition to the new service.                                                                                                                                                                        |
+| Organizational Identity           | In SaaS environments, integrate your own IdP to manage organizational users and assign resources cluster-by-cluster.                                                                                                                                                    |
+| Cluster-specific Roles and Groups | In SaaS environments, manage distinct roles, groups, and authorizations for each cluster independently.                                                                                                                                                                 |
 
 #### Identity management for SaaS clusters <span class="badge badge--long" title="This feature affects SaaS">SaaS</span>
 
@@ -97,24 +252,23 @@ Camunda’s new Identity service enhances authentication and authorization for S
 
 The following known limitations apply for this alpha version release:
 
-| Known limitation | Description |
-|:--|:--|
-| Authorizations | <p><ul><li><p>Before enabling authorization checks in the cluster settings, users must assign themselves to the admin role in Identity for the Orchestration cluster.</p><p>**Note:** As authorizations are disabled by default, no changes are required for initial access.</p></li><li><p>Authorizations cannot be assigned to users via the UI, only to groups.</p></li><li><p>Authorizations are not correctly loaded in the UI.</p></li></ul></p> |
-| Navigation, Notifications, and Logout | <p><ul><li><p>Links to the other Camunda components in the Orchestration cluster web applications (Operate, Tasklist, Identity) do not currently work.</p></li><li><p>SaaS notifications are not displayed in Orchestration cluster components.</p></li><li><p>Log out from Orchestration cluster web applications is not fully functional.</p></li></ul></p> |
-| Documentation | Documentation is incomplete. |
+| Known limitation                      | Description                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| :------------------------------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Authorizations                        | <p><ul><li><p>Before enabling authorization checks in the cluster settings, users must assign themselves to the admin role in Identity for the Orchestration cluster.</p><p>**Note:** As authorizations are disabled by default, no changes are required for initial access.</p></li><li><p>Authorizations cannot be assigned to users via the UI, only to groups.</p></li><li><p>Authorizations are not correctly loaded in the UI.</p></li></ul></p> |
+| Navigation, Notifications, and Logout | <p><ul><li><p>Links to the other Camunda components in the Orchestration cluster web applications (Operate, Tasklist, Identity) do not currently work.</p></li><li><p>SaaS notifications are not displayed in Orchestration cluster components.</p></li><li><p>Log out from Orchestration cluster web applications is not fully functional.</p></li></ul></p>                                                                                          |
+| Documentation                         | Documentation is incomplete.                                                                                                                                                                                                                                                                                                                                                                                                                           |
 
 #### Identity management for Helm Chart setups <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-[Orchestration cluster Identity](/self-managed/orchestration-identity/orchestration-identity.md) is now available for OIDC setups in [Helm chart deployments](/self-managed/setup/install.md). Starting with this alpha version, you can configure the Orchestration cluster components to use the identity provider (IdP) of your choice and enable single sign-on (SSO). 
+[Orchestration cluster Identity](/self-managed/orchestration-identity/orchestration-identity.md) is now available for OIDC setups in [Helm chart deployments](/self-managed/installation-methods/helm/install.md). Starting with this alpha version, you can configure the Orchestration cluster components to use the identity provider (IdP) of your choice and enable single sign-on (SSO).
 
 The following known limitations apply for this alpha version release:
 
-| Known limitation | Description |
-|:--|:--|
-| Authorizations | <p><ul><li><p>Authorizations cannot be assigned to users via the UI, only to groups.</p></li><li><p>Authorizations are not correctly loaded in the UI.</p></li></ul></p> |
-| Logout | Log out from Orchestration cluster web applications is not fully functional. |
-| Documentation | Documentation is incomplete. |
-
+| Known limitation | Description                                                                                                                                                              |
+| :--------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Authorizations   | <p><ul><li><p>Authorizations cannot be assigned to users via the UI, only to groups.</p></li><li><p>Authorizations are not correctly loaded in the UI.</p></li></ul></p> |
+| Logout           | Log out from Orchestration cluster web applications is not fully functional.                                                                                             |
+| Documentation    | Documentation is incomplete.                                                                                                                                             |
 
 <!-- https://github.com/camunda/product-hub/issues/2222 -->
 
@@ -132,9 +286,9 @@ This feature introduces an offline installer package for the Camunda [RPA](/comp
 
 <!-- https://github.com/camunda/product-hub/issues/2786 -->
 
-### Tasklist frontend application migration to use Camunda 8 REST API <span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span>
+### Tasklist frontend application migration to use Orchestration cluster REST API <span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span>
 
-The Tasklist frontend application is transitioning from the soon-to-be-deprecated Tasklist V1 API to the unified Camunda 8 REST API.
+The Tasklist frontend application is transitioning from the soon-to-be-deprecated Tasklist V1 API to the unified Orchestration cluster REST API.
 
 - This ensures Tasklist remains fully compatible with Camunda 8’s new RDBMS support while continuing to work seamlessly with Elasticsearch and OpenSearch.
 - You can expect consistent functionality across different data layers, improved performance, and access to new platform features - all without losing existing capabilities or disrupting task management workflows.
@@ -239,8 +393,8 @@ To learn more about basic authentication, see [available authentication methods]
 Agentic process orchestration enhancements include:
 
 - An optional `completionCondition` boolean expression for ad-hoc sub-processes that is evaluated every time an inner element is completed. A `cancelRemainingInstances` boolean attribute can also be configured to influence the ad-hoc sub-process behavior when the completion condition is met.
-- An [Activate activities within an ad-hoc sub-process](/apis-tools/camunda-api-rest/specifications/activate-ad-hoc-sub-process-activities.api.mdx) API used to activate selected activities within an ad-hoc sub-process.
-- A [Search activatable activities (alpha)](/apis-tools/camunda-api-rest/specifications/search-ad-hoc-sub-process-activities.api.mdx) API used to search for activatable activities within ad-hoc sub-processes.
+- An [Activate activities within an ad-hoc sub-process](/apis-tools/orchestration-cluster-api-rest/specifications/activate-ad-hoc-sub-process-activities.api.mdx) API used to activate selected activities within an ad-hoc sub-process.
+- A [Search activatable activities (alpha)](/apis-tools/orchestration-cluster-api-rest/specifications/search-ad-hoc-sub-process-activities.api.mdx) API used to search for activatable activities within ad-hoc sub-processes.
 
 To learn more about these features, see [ad-hoc sub-processes](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md).
 
@@ -277,7 +431,7 @@ To learn more about this connector, see [HubSpot connector](/components/connecto
 
 ### Camunda Spring Boot SDK for the C8 REST API
 
-A Spring Boot SDK is provided for the Camunda 8 REST API to unify process management, user tasks, and identity features under a single dedicated starter. This simplifies the interaction between a Spring Boot application and Camunda 8, allowing you to:
+A Spring Boot SDK is provided for the Orchestration cluster REST API to unify process management, user tasks, and identity features under a single dedicated starter. This simplifies the interaction between a Spring Boot application and Camunda 8, allowing you to:
 
 - Easily integrate process entity management and queries within your workflows.
 - Seamlessly configure endpoints and authentication via Spring Boot auto-configuration, minimizing boilerplate code.
@@ -291,7 +445,7 @@ To learn more about this feature, see the [Camunda Spring Boot SDK](/apis-tools/
 
 Camunda 8 Run no longer requires authentication when working with APIs. Authentication and authorizations can be optionally enabled to allow requests using basic authentication, and to test authorizations and permissions.
 
-To learn more about this feature, see the [API documentation](/self-managed/setup/deploy/local/c8run.md#use-camunda-apis) for Camunda 8 Run.
+To learn more about this feature, see the [API documentation](/self-managed/quickstart/developer-quickstart/c8run.md#use-camunda-apis) for Camunda 8 Run.
 
 <!-- https://github.com/camunda/camunda-docs/pull/5145 -->
 
@@ -347,11 +501,11 @@ To learn more about this feature, see [user task listeners](/components/concepts
 
 <!-- https://github.com/camunda/product-hub/issues/2126 -->
 
-### Camunda 8 REST API Query API <span class="badge badge--medium" title="This feature affects APIs">API</span>
+### Orchestration cluster REST API Query API <span class="badge badge--medium" title="This feature affects APIs">API</span>
 
-You can now use a single Query API in the Camunda 8 REST API to find process and decision data instead of using multiple component APIs.
+You can now use a single Query API in the Orchestration cluster REST API to find process and decision data instead of using multiple component APIs.
 
-For example, send a request to the [Search decision definitions](/apis-tools/camunda-api-rest/specifications/search-decision-definitions.api.mdx) endpoint to search for decision definitions.
+For example, send a request to the [Search decision definitions](/apis-tools/orchestration-cluster-api-rest/specifications/search-decision-definitions.api.mdx) endpoint to search for decision definitions.
 
 New Query API endpoints are added as follows:
 
@@ -365,7 +519,7 @@ New Query API endpoints are added as follows:
 - User tasks
 - Variables
 
-To learn more about these endpoints, see the [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api) documentation.
+To learn more about these endpoints, see the [Orchestration cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md#query-api) documentation.
 
 ### Amazon OpenSearch Optimize support <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span>
 
@@ -401,6 +555,6 @@ Camunda backups have been improved and made easier to use. The web application b
 
 ### Connector Runtime <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span>
 
-#### Spring SDK and Camunda 8 REST API Migration
+#### Spring SDK and Orchestration cluster REST API Migration
 
-The Connectors experience is enhanced with the migration from the Spring Zeebe to the Camunda 8 REST API, and the removal of dependency on the Operate client.
+The Connectors experience is enhanced with the migration from the Spring Zeebe to the Orchestration cluster REST API, and the removal of dependency on the Operate client.

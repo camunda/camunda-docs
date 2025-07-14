@@ -51,10 +51,10 @@ Using these elements, let's build out a BPMN diagram to examine the process of b
 
 Take the following steps:
 
-1. On our diagram, we've already been given an element as a start event in the shape of a circle. Click on the circle, and then the wrench icon to adjust this element. For now, keep it as a start event. Double click on the circle to add text.
+1. On our diagram, we've already been given an element as a start event in the shape of a circle. Click on the circle, and select the **Change element** menu icon to adjust this element. For now, keep it as a start event. Double click on the circle to add text.
 2. Drag and drop an arrow to the first task (the rectangle shape), or click the start event, and then click the task element to automatically attach it.
-3. Click on the task, then click on the wrench icon to declare it a user task, which will be named "Purchase Ingredients." Note that each element added has adjustable attributes. Use the properties panel on the right side of the page to adjust these attributes.
-4. Click on the user task to connect a gateway to it. By clicking the wrench icon on the gateway and declaring it a parallel gateway, you can connect it to two tasks that can happen at the same time: mixing the ingredients, and preheating the oven.
+3. Click on the element and selecting the **Change element** menu icon to declare it a user task, which will be named "Purchase Ingredients." Note that each element added has adjustable attributes. Use the properties panel on the right side of the page to adjust these attributes.
+4. Click on the user task to connect a gateway to it. By clicking on the gateway and selecting the **Change element** menu icon, declare it a parallel gateway to connect it to two tasks that can happen at the same time: mixing the ingredients, and preheating the oven.
    ![baking a cake bpmn sample](./img/bake-cake-bpmn.png)
 5. Attach the next gateway once these two tasks have completed to move forward.
 6. Add a user task to bake the cake, and finally a user task to ice the cake.

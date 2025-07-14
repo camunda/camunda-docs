@@ -101,7 +101,7 @@ To run this guide, make sure to be in **Implement** mode to specify the technica
 1. A **start event** is automatically added to the canvas. Click it to display configuration and append options.
 2. Click the rectangular **Append Task** icon to append a task.
 3. Enter a descriptive name for the task, such as `Decide what's for dinner`.
-4. Change the task type by clicking the **wrench** icon. Select **User Task**.
+4. Change the task type by clicking on the element and selecting the **Change element** menu icon. Select **User Task**.
 5. Select the user task and click on the diamond-shaped icon to append an exclusive gateway. The gateway allows to route the process flow differently, depending on conditions.
 6. Select the gateway and append a task by clicking the task icon. Repeat it to create a second process flow. Name the tasks based on what the user decides to eat: in this case, we've named ours `Prepare chicken` and `Prepare salad`.
 7. To route the user to the right task, add [expressions](/components/concepts/expressions.md) to the **sequence flows**. Sequence flows are represented by arrows connecting the gateway to the tasks. To add an expression, click on a sequence flow to view the **properties panel**, and open the **Condition** section.
@@ -230,7 +230,7 @@ Other options to run a process are to start it via Tasklist, test it in the Play
 <TabItem value="sm">
 
 :::note
-Ensure your installation of [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md) is running prior to deploying your process.
+Ensure your installation of [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) is running prior to deploying your process.
 :::
 
 1. Click the rocket-shaped **Deploy** icon to begin deploying your process, and provide the following configuration:

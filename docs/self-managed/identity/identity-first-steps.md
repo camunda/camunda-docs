@@ -10,7 +10,7 @@ import IdentityLoginImg from './img/identity-login-page.png';
 Get started with Identity in Self-Managed by learning how to open and log in to the Identity interface.
 
 :::note
-Identity is included in the [Docker-Compose](/versioned_docs/version-8.7/self-managed/setup/deploy/local/docker-compose.md) and [Helm](/versioned_docs/version-8.7/self-managed/setup/install.md) based deployment of Camunda 8 Self-Managed. With the default configuration, Identity uses an included Keycloak container/pod.
+Identity is included in the [Docker-Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md) and [Helm](/self-managed/installation-methods/helm/install.md) based deployment of Camunda 8 Self-Managed. With the default configuration, Identity uses an included Keycloak container/pod.
 :::
 
 ## Log in to Identity
@@ -21,8 +21,8 @@ Once Identity has successfully started, you can open the **Log in** page and log
 
 If you are running the default configuration, you can access the Identity interface via the following URLs:
 
-- [Docker-Compose](/versioned_docs/version-8.7/self-managed/setup/deploy/local/docker-compose.md): `http://localhost:8084/`
-- [Helm](/versioned_docs/version-8.7/self-managed/setup/install.md): Follow your [`port-forward` or Ingress configuration](/self-managed/setup/guides/accessing-components-without-ingress.md)
+- [Docker-Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md): `http://localhost:8084/`
+- [Helm](/self-managed/installation-methods/helm/install.md): Follow your [`port-forward` or Ingress configuration](/self-managed/installation-methods/helm/configure/accessing-components-without-ingress.md)
 
 ## Default user
 
@@ -47,7 +47,7 @@ You are directed to the home page once you have successfully logged in.
 
 ## Next steps
 
-Once you are able to log in to Identity, you can start managing authentication, access, and authorization for your Camunda 8 users, resources, and the Camunda 8 API.
+Once you are able to log in to Identity, you can start managing authentication, access, and authorization for your Camunda 8 users, resources, and the Orchestration cluster API.
 
 - [Manage users, groups, roles, and applications](application-user-group-role-management/identity-application-user-group-role-management-overview.md)
 - [Manage access and permissions](access-management/access-management-overview.md)

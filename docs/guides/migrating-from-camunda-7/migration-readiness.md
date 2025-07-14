@@ -66,7 +66,7 @@ public class CreateCustomerInCrmJavaDelegate implements JavaDelegate {
 
 Never cast to Camunda implementation classes, use any ThreadLocal object, or influence the transaction manager in any way. Java delegates should always be stateless and not store any data in their fields.
 
-The resulting delegate can be migrated to a Camunda 8 API, or reused by the adapter provided in [this migration community extension](https://github.com/camunda-community-hub/camunda-7-to-8-migration/).
+The resulting delegate can be migrated to a Orchestration cluster API, or reused by the adapter provided in [this migration community extension](https://github.com/camunda-community-hub/camunda-7-to-8-migration/).
 
 <!-- TODO use the link to the new repo -->
 

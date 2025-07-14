@@ -1,0 +1,414 @@
+---
+id: search-clients-for-role
+title: "Search role clients"
+description: "Search clients assigned to a role."
+sidebar_label: "Search role clients"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Search role clients"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/roles/{roleId}/clients/search"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Search clients assigned to a role.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "roleId",
+      in: "path",
+      required: true,
+      description: "The role ID.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          allOf: [
+            {
+              type: "object",
+              properties: {
+                page: {
+                  description: "Pagination criteria.",
+                  allOf: [
+                    {
+                      type: "object",
+                      properties: {
+                        from: {
+                          description:
+                            "The index of items to start searching from.",
+                          type: "integer",
+                          format: "int32",
+                        },
+                        limit: {
+                          description:
+                            "The maximum number of items to return in one request.",
+                          type: "integer",
+                          format: "int32",
+                          default: 100,
+                        },
+                        after: {
+                          description:
+                            "Use the `endCursor` value from the previous response to fetch the next page of results.",
+                          type: "string",
+                        },
+                        before: {
+                          description:
+                            "Use the `startCursor` value from the previous response to fetch the previous page of results.",
+                          type: "string",
+                        },
+                      },
+                      title: "SearchQueryPageRequest",
+                    },
+                  ],
+                  type: "object",
+                },
+              },
+              title: "SearchQueryRequest",
+            },
+          ],
+          type: "object",
+          properties: {
+            sort: {
+              description: "Sort field criteria.",
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  field: {
+                    description: "The field to sort by.",
+                    type: "string",
+                    enum: ["clientId"],
+                  },
+                  order: {
+                    description:
+                      "The order in which to sort the related field.",
+                    type: "string",
+                    enum: ["ASC", "DESC"],
+                    default: "ASC",
+                    title: "SortOrderEnum",
+                  },
+                },
+                required: ["field"],
+                title: "RoleClientSearchQuerySortRequest",
+              },
+            },
+          },
+          title: "RoleClientSearchQueryRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The clients assigned to the role.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            allOf: [
+              {
+                type: "object",
+                properties: {
+                  page: {
+                    description:
+                      "Pagination information about the search results.",
+                    allOf: [
+                      {
+                        description:
+                          "Pagination information about the search results.",
+                        type: "object",
+                        properties: {
+                          totalItems: {
+                            description: "Total items matching the criteria.",
+                            type: "integer",
+                            format: "int64",
+                          },
+                          startCursor: {
+                            description:
+                              "The cursor value for getting the previous page of results. Use this in the `before` field of an ensuing request.",
+                            type: "string",
+                          },
+                          endCursor: {
+                            description:
+                              "The cursor value for getting the next page of results. Use this in the `after` field of an ensuing request.",
+                            type: "string",
+                          },
+                        },
+                        title: "SearchQueryPageResponse",
+                      },
+                    ],
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                description: "The matching clients.",
+                type: "array",
+                items: {
+                  type: "object",
+                  properties: {
+                    clientId: {
+                      description: "The ID of the client.",
+                      type: "string",
+                    },
+                  },
+                  title: "RoleClientResult",
+                },
+              },
+            },
+            title: "RoleClientSearchResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The role with the given ID was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

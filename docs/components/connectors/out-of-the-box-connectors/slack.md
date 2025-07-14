@@ -94,7 +94,7 @@ To post a message, take the following steps:
 
 1. Set **Method** to `Post Message`.
 2. Set **Channel/User Name** to either the **channel** or **user** you want to send the message to.
-   1. A **channel** is specified by a unique identifier starting with a `#` (for example, `#myChannel`).
+   1. A **channel** is specified by a unique identifier starting with a `#` (for example, `#myChannel`) or by using the channel id.
    2. A **user** is specified by a username starting with an `@` symbol (for example, `@myUser`).
 3. (Optional) A **thread** can be specified to start a thread from a specific message. For example, `ts` in the response can be used (see [here](#post-message)). If the message has been posted by a user, we currently have no way to retrieve the `ts` value. Visit the [Slack documentation](https://api.slack.com/methods/chat.postMessage) for additional details.
 4. Select a **Message type**.
@@ -104,7 +104,7 @@ To post a message, take the following steps:
    you must add `files:read` and `files:write` permissions for your **Bot Token Scopes** in your Slack app.
 
 :::note
-To work with documents you must upload them first, using the [REST API](/apis-tools/camunda-api-rest/specifications/create-document.api.mdx) for example.
+To work with documents you must upload them first, using the [REST API](/apis-tools/orchestration-cluster-api-rest/specifications/create-document.api.mdx) for example.
 The result of the endpoint must then be assigned to a variable in **Start Process Instance** so you can use the variable in the **Attachments** field.
 :::
 

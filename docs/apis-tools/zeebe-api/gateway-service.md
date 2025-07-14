@@ -75,6 +75,25 @@ message ActivateJobsResponse {
 }
 
 message ActivatedJob {
+  // Describes the kind of job.
+  enum JobKind {
+    BPMN_ELEMENT = 0;
+    EXECUTION_LISTENER = 1;
+    TASK_LISTENER = 2;
+  }
+
+  // Describes the listener event type of the job.
+  enum ListenerEventType {
+    ASSIGNING = 0;
+    CANCELING = 1;
+    COMPLETING = 2;
+    CREATING = 3;
+    END = 4;
+    START = 5;
+    UNSPECIFIED = 6;
+    UPDATING = 7;
+  }
+
   // the key, a unique identifier for the job
   int64 key = 1;
   // the type of the job (should match what was requested)
@@ -106,6 +125,10 @@ message ActivatedJob {
   string variables = 13;
   // the ID of the tenant that owns the job
   string tenantId = 14;
+  // the kind of the job.
+  JobKind kind = 15;
+  // the listener event type of the job.
+  ListenerEventType listenerEventType = 16;
 }
 ```
 
@@ -1122,6 +1145,14 @@ Returned if:
 
 Obtains the current topology of the cluster the gateway is part of.
 
+:::note
+The partition role can be one of `LEADER`, `FOLLOWER`, or `INACTIVE`, which [is defined here](../../components/zeebe/technical-concepts/partitions.md#roles).
+:::
+
+:::note
+The partition health can be one of `HEALTHY`, `UNHEALTHY`, or `DEAD`, which [is defined here](../../components/zeebe/technical-concepts/health.md).
+:::
+
 ### Input: `TopologyRequest`
 
 ```protobuf
@@ -1327,6 +1358,25 @@ message StreamActivatedJobsRequest {
 
 ```protobuf
 message ActivatedJob {
+  // Describes the kind of job.
+  enum JobKind {
+    BPMN_ELEMENT = 0;
+    EXECUTION_LISTENER = 1;
+    TASK_LISTENER = 2;
+  }
+
+  // Describes the listener event type of the job.
+  enum ListenerEventType {
+    ASSIGNING = 0;
+    CANCELING = 1;
+    COMPLETING = 2;
+    CREATING = 3;
+    END = 4;
+    START = 5;
+    UNSPECIFIED = 6;
+    UPDATING = 7;
+  }
+
   // the key, a unique identifier for the job
   int64 key = 1;
   // the type of the job (should match what was requested)
@@ -1358,6 +1408,10 @@ message ActivatedJob {
   string variables = 13;
   // the ID of the tenant that owns the job
   string tenantId = 14;
+  // the kind of the job.
+  JobKind kind = 15;
+  // the listener event type of the job.
+  ListenerEventType listenerEventType = 16;
 }
 ```
 
