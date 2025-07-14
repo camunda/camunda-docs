@@ -49,7 +49,7 @@ def main():
 
   files = list(Path(args.schema).rglob(f"{args.prefix}*.json"))
 
-  toc = [f"# {args.prefix.capitalize()} Index Diagrams"]
+  toc = []
   content = []
 
   for file in sorted(files):
@@ -59,14 +59,16 @@ def main():
 
     toc.append(f"- [{class_name}](#{class_name})")
     content.append(f"## {class_name}")
+    content.append("")
     content.extend(wrap_mermaid(create_class_diagram(mappings, class_name)))
 
     join_diagram = create_join_diagram(mappings)
     if join_diagram:
       content.extend(wrap_mermaid(join_diagram))
+    content.append("")
 
   with open(args.destination, "w") as f:
-    f.write("\n".join(toc + content))
+    f.write("\n".join(toc + [""] + content))
 
   print(f"Generated '{args.destination}'")
 
