@@ -29,7 +29,7 @@ const Introduction = () => {
           Camunda stack across Kubernetes clusters or/and cloud infrastructure.
         </li>
         <li>
-          <b>Camunda 8 SaaS:</b> Camunda handles the infrastructure, uptime,
+          <b>Camunda 8 SaaS:</b> Camunda manages the infrastructure, availability,
           security, and upgrades - so you can focus on modeling,
           deploying, and managing your business processes.
         </li>
