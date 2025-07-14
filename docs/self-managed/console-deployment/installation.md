@@ -7,4 +7,4 @@ description: "How to install Console Self-Managed"
 
 ## Helm
 
-Refer to the [Helm installation guide](/self-managed/setup/install.md#install-console) for details on installing the Console Self-Managed component.
+Refer to the [Helm installation guide](/self-managed/installation-methods/helm/install.md#install-console) for details on installing the Console Self-Managed component.

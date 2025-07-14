@@ -215,7 +215,7 @@ An incident represents an error condition which prevents [Zeebe](#zeebe) from ad
 
 An Ingress is a Kubernetes object that manages external access to the services within a Kubernetes cluster. An **Ingress controller** is required to route traffic to your services according to the rules defined on the Ingress.
 
-- [Ingress setup](/self-managed/setup/guides/ingress-setup.md)
+- [Ingress setup](/self-managed/installation-methods/helm/configure/ingress-setup.md)
 
 ## J
 
@@ -405,7 +405,7 @@ The state of all active [process instances](#process-instance), (these are also 
 Soft pause exporting is a feature that allows you to continue exporting records from [Zeebe](#zeebe), but without deleting those [records](#record) ([log](#log) compaction) from Zeebe. This is particularly useful during hot backups.
 
 - [Exporting API](/self-managed/zeebe-deployment/operations/management-api.md)
-- [Backup and restore](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md)
+- [Backup and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md)
 
 ### Subscription inbound connector
 

@@ -20,7 +20,7 @@ CPT is the successor of [Zeebe Process Test](/apis-tools/java-client/zeebe-proce
 CPT provides different runtimes to execute your process tests:
 
 - [Testcontainers runtime](configuration.md#testcontainers-runtime) (default) - A managed runtime based on [Testcontainers](https://java.testcontainers.org/) and Docker.
-- [Remote runtime](configuration.md#remote-runtime) - Your own runtime, such as, [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md)
+- [Remote runtime](configuration.md#remote-runtime) - Your own runtime, such as, [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md)
 
 ## Prerequisites
 

@@ -28,7 +28,7 @@ From version `8.8.0` forward, the following core [Orchestration cluster](/self-m
 
 ### Installation and deployment updates <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-Camunda 8.8 introduces a streamlined architecture, consolidating core components such as Zeebe, Operate, Tasklist, Optimize, and connectors into a single deployable unit. Enhanced deployment options are also included, such as new Kubernetes Helm guides, [deployment reference architectures](/self-managed/reference-architecture/reference-architecture.md), and improved support for local development with [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md).
+Camunda 8.8 introduces a streamlined architecture, consolidating core components such as Zeebe, Operate, Tasklist, Optimize, and connectors into a single deployable unit. Enhanced deployment options are also included, such as new Kubernetes Helm guides, [deployment reference architectures](/self-managed/reference-architecture/reference-architecture.md), and improved support for local development with [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md).
 
 You can download the alpha release of the unified package from the Camunda GitHub repository, either as an executable Java application (Camunda Orchestration Core) or a Docker image.
 
@@ -72,9 +72,9 @@ For future use, refer to our [new AWS Marketplace listing](https://aws.amazon.co
 
 #### Separated Ingress deprecation
 
-The separated Ingress Helm configuration for Camunda 8 Self-Managed has been deprecated in 8.6, and will be removed from the Helm chart in 8.8. Only the combined Ingress configuration is officially supported. See the [Ingress guide](/self-managed/setup/guides/ingress-setup.md) for more information on configuring a combined Ingress setup.
+The separated Ingress Helm configuration for Camunda 8 Self-Managed has been deprecated in 8.6, and will be removed from the Helm chart in 8.8. Only the combined Ingress configuration is officially supported. See the [Ingress guide](/self-managed/installation-methods/helm/configure/ingress-setup.md) for more information on configuring a combined Ingress setup.
 
-If you are using the recommended Camunda 8 deployment option ([Helm charts](/self-managed/setup/install.md)), the upgrade path from version 8.7 to 8.8 will be straightforward by changing the values file to the new syntax.
+If you are using the recommended Camunda 8 deployment option ([Helm charts](/self-managed/installation-methods/helm/install.md)), the upgrade path from version 8.7 to 8.8 will be straightforward by changing the values file to the new syntax.
 
 New migration guides will also be provided to support you when migrating from a previous Camunda version.
 
@@ -90,7 +90,7 @@ Alternative container images to the previously used Bitnami open source images a
 
 - Starting with version **8.8**, these images are considered the default supported option when deploying Camunda 8 via Helm charts, as they ensure faster delivery of security patches (including CVE fixes) and better alignment with supported environments.
 
-- To adopt these images, update your Helm deployment to reference the `values-images-ee.yml` file. Full setup instructions are available in the [installation guide](/self-managed/setup/install.md).
+- To adopt these images, update your Helm deployment to reference the `values-images-ee.yml` file. Full setup instructions are available in the [installation guide](/self-managed/installation-methods/helm/install.md).
 
 #### Single Elasticsearch/OpenSearch instance
 
@@ -218,7 +218,7 @@ The `CamundaClient` replaces the `ZeebeClient`, offering the same functionality 
 :::note
 
 - If you need to continue using the old `ZeebeClient`, you can use the new version 8.8 `CamundaClient` artifact without issues as it still contains the related `ZeebeClient` classes. Those classes are marked as deprecated, so you can easily spot code you need to adjust to the `CamundaClient`.
-- The old `zeebe-client-java` artifact is now relocation-only, so your build system is redirected to the new `camunda-client-java` artifact. We will discontinue the old artifact with a future release and recommend using the new one.
+- The old `zeebe-client-java` artifact is now relocation-only, so your build system is redirected to the new `camunda-client-java` artifact. We will discontinue the old artifact in version 8.10 and recommend using the new one.
 - The Zeebe Java client will not be developed further and only receives bug fixes while version 8.7 is officially supported.
 
 :::

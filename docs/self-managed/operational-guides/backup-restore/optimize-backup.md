@@ -1,9 +1,14 @@
 ---
 id: optimize-backup
-title: Backup and restore Optimize data
-description: "How to perform a backup of Optimize data and restore the backup."
+title: Backup Management API - Optimize
+description: "Backup API to perform a backup of Optimize data."
+sidebar_label: "Optimize"
 keywords: ["backup", "backups"]
 ---
+
+Back up your Optimize data using the Backup Management API.
+
+## About this API
 
 Optimize is a dedicated application that stores its data over multiple indices in the database. To ensure data integrity across indices, a backup of Optimize data consists of two Elasticsearch/OpenSearch snapshots, each containing a different set of Optimize indices. Each backup is identified by a positive integer backup ID. For example, a backup with ID `123456` consists of the following snapshots:
 
@@ -14,17 +19,18 @@ camunda_optimize_123456_8.8.0_part_2_of_2
 
 Optimize provides an API to trigger a backup and retrieve information about a given backup's state. During backup creation Optimize can continue running. The backed up data can later be restored using the standard ElasticSearch/OpenSearch snapshot restore API.
 
-## Prerequisites
+:::warning
+Usage of this API requires the backup store to be configured for the component.
 
-The following prerequisites must be set up before using the backup API:
+- Optimize configuration
+  - [Elasticsearch](/self-managed/optimize-deployment/configuration/system-configuration.md#elasticsearch-backup-settings)
+  - [OpenSearch](/self-managed/optimize-deployment/configuration/system-configuration.md#opensearch-backup-settings)
 
-1. A snapshot repository of your choice must be registered with ElasticSearch/OpenSearch.
-2. The repository name must be specified using the `CAMUNDA_OPTIMIZE_BACKUP_REPOSITORY_NAME` environment variable, or by adding it to your Optimize [`environment-config.yaml`](/self-managed/optimize-deployment/configuration/system-configuration.md):
+Additionally, it requires the same backup store to be configured on your chosen datastore.
 
-```yaml
-backup:
-  repositoryName: <repository name>
-```
+- [Elasticsearch snapshot repository](https://www.elastic.co/docs/deploy-manage/tools/snapshot-and-restore/manage-snapshot-repositories)
+- [OpenSearch snapshot repository](https://docs.opensearch.org/docs/latest/tuning-your-cluster/availability-and-recovery/snapshots/snapshot-restore/)
+  :::
 
 ## Create backup API
 
@@ -157,27 +163,4 @@ DELETE actuator/backups/{backupId}
 
 ```shell
 curl --request DELETE 'http://localhost:8092/actuator/backups/123456'
-```
-
-## Restore backup
-
-There is no Optimize API to perform the backup restore. Instead, the standard [Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/current/restore-snapshot-api.html) / [OpenSearch](https://opensearch.org/docs/latest/api-reference/snapshots/restore-snapshot) restore snapshot API can be used. Note that the Optimize versions of your backup snapshots must match the currently running version of Optimize. You can identify the version at which the backup was taken by the version tag included in respective snapshot names; for example, a snapshot with the name`camunda_optimize_123456_8.8.0_part_1_of_2` was taken of Optimize version `8.8.0`.
-
-:::note
-Optimize must NOT be running while a backup is being restored.
-:::
-
-To restore an existing backup, all the snapshots this backup contains (as listed in the response of the [create backup API request](#example-response)) must be restored using the restore API.
-
-To restore a given backup, the following steps must be performed:
-
-1. Stop Optimize.
-2. Ensure no Optimize indices are present in the database (or the restore process will fail).
-3. Iterate over all ElasticSearch/OpenSearch snapshots included in the desired backup and restore them using the restore snapshot API mentioned above.
-4. Start Optimize.
-
-Example request:
-
-```shell
-curl --request POST `http://localhost:9200/_snapshot/repository_name/camunda_optimize_123456_8.8.0_part_1_of_2/_restore?wait_for_completion=true`
 ```
