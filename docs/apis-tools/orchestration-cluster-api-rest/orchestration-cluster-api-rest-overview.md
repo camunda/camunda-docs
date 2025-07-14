@@ -6,6 +6,10 @@ description: "Interact with Camunda 8 clusters. Activate jobs and run user task 
 
 The Orchestration Cluster API is a REST API designed to interact with a Camunda 8 cluster.
 
+:::info Public API
+This API is part of the Camunda 8 [public API](/reference/public-api.md) and is covered by our SemVer stability guarantees (except for alpha endpoints). Breaking changes will not be introduced in minor or patch releases.
+:::
+
 :::note
 Ensure you [authenticate](./orchestration-cluster-api-rest-authentication.md) before accessing the Orchestration Cluster API.
 :::
@@ -24,7 +28,7 @@ Example path: `https://${REGION_ID}.zeebe.camunda.io:443/${CLUSTER_ID}/v2/`
 
 ### Self-Managed
 
-The context path should match the host and path defined in your Zeebe Gateway [configuration](/self-managed/setup/guides/ingress-setup.md). The path used here is the default.
+The context path should match the host and path defined in your Zeebe Gateway [configuration](/self-managed/installation-methods/helm/configure/ingress-setup.md). The path used here is the default.
 
 Example path: `http://localhost:8080/v2/`
 
@@ -34,7 +38,7 @@ See [the interactive Orchestration Cluster API Explorer][camunda-api-explorer] f
 
 ## Request and file sizes
 
-You can change the `maxMessageSize` default value of 4MB in the [Gateway](../../self-managed/zeebe-deployment/configuration/gateway.md#zeebegatewaynetwork) and [Broker](../../self-managed/zeebe-deployment/configuration/broker.md#zeebebrokernetwork) configuration.
+You can change the `maxMessageSize` default value of 4MB in the [Gateway](/self-managed/zeebe-deployment/configuration/gateway.md#zeebegatewaynetwork) and [Broker](../../self-managed/zeebe-deployment/configuration/broker.md#zeebebrokernetwork) configuration.
 
 If you do change this value, it is recommended that you also configure the [Deploy resources](./specifications/create-deployment.api.mdx) REST endpoint appropriately. By default, this endpoint allows single file upload and overall data up to 4MB.
 

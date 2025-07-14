@@ -1,7 +1,7 @@
 ---
 id: getting-started-java-spring
-title: Get started as a Java developer using Spring
-sidebar_label: Get started with Spring
+title: Start a new Java project using Spring
+sidebar_label: Starting from scratch with Spring
 description: "Use Spring Boot and the Camunda Spring Boot SDK to interact with your local Self-Managed Camunda 8 installation."
 keywords: [java, spring, spring camunda, getting started, user guide, tutorial]
 ---
@@ -37,7 +37,7 @@ Before getting started, ensure you have the following in your local environment:
 
 - Access to your preferred code editor or IDE
 - [OpenJDK 21+](https://openjdk.org/install/) and [Maven 3](https://maven.apache.org/index.html)
-- [Camunda 8 Desktop Modeler](/components/modeler/desktop-modeler/index.md) and [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md)
+- [Camunda 8 Desktop Modeler](/components/modeler/desktop-modeler/index.md) and [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md)
 
 :::note
 After installing OpenJDK, ensure `JAVA_HOME` is set by running `java -version` in a **new** terminal.

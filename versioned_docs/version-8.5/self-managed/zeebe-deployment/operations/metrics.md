@@ -57,6 +57,10 @@ Most metrics have the following common label:
 Both brokers and gateways expose their respective metrics. The brokers have an optional metrics exporter that can be enabled for maximum insight.
 :::
 
+:::note
+**Not all metrics are available at all times.** This can apply to various metrics, but is especially noticeable for **processing-related metrics**, which are recorded on events that can occur infrequently. For example, the `zeebe_incident_events_total` metric is only recorded when an incident is **created** or **resolved**.
+:::
+
 **Metrics related to process processing:**
 
 - `zeebe_stream_processor_records_total`: The number of events processed by the stream processor.

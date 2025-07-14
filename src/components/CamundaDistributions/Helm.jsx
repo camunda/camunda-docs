@@ -1,8 +1,9 @@
 import React from "react";
 import { useActiveVersion } from "@docusaurus/plugin-content-docs/client";
 import CodeBlock from "@theme/CodeBlock";
+import { getCamundaVersion } from "./utils";
 
-const getVersion = () => {
+const getChartVersion = () => {
   const docsVersion = useActiveVersion();
   const camundaVersion = docsVersion.label.match(/\d\.\d/)[0];
   const camundaMinorVersion = camundaVersion.split(".")[1];
@@ -24,11 +25,11 @@ const getVersion = () => {
   return camundaVersion;
 };
 
-const getVersionEnvVar = () => {
-  return `export HELM_CHART_VERSION="${getVersion()}";\n`;
+const getChartVersionEnvVar = () => {
+  return `export HELM_CHART_VERSION="${getChartVersion()}";\n`;
 };
 
-const getVersionArg = () => {
+const getChartVersionArg = () => {
   const docsVersion = useActiveVersion();
   var versionArg = "--version $HELM_CHART_VERSION";
   // For unreleased Camunda versions, add Helm --devel flag to include development versions such as alpha.
@@ -42,8 +43,8 @@ const getVersionArg = () => {
 // So we format the code block here. For more details check:
 // https://github.com/facebook/docusaurus/issues/5700
 const HelmChartInstall = () => {
-  const versionEnvVar = getVersionEnvVar();
-  const versionArg = getVersionArg();
+  const versionEnvVar = getChartVersionEnvVar();
+  const versionArg = getChartVersionArg();
   return (
     <>
       <CodeBlock language="shell">
@@ -57,6 +58,18 @@ const HelmChartInstall = () => {
       <br />
       <br />
     </>
+  );
+};
+
+export const HelmChartValuesFileLocalLink = () => {
+  const version = getCamundaVersion();
+  return (
+    <a
+      title={`https://helm.camunda.io/camunda-platform/values/camunda-${version}/values-local.yaml`}
+      href={`https://helm.camunda.io/camunda-platform/values/camunda-${version}/values-local.yaml`}
+    >
+      Helm chart local values file
+    </a>
   );
 };
 

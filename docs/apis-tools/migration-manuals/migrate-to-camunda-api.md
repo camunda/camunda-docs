@@ -188,7 +188,7 @@ The following conventions apply to all attributes:
 <TabItem value='output-adjustments'>
 
 - Response structure changes as outlined in [general changes][].
-  - `sortValues` do not exist per result item. Instead, the `page` object contains `firstSortValues` and `lastSortValues`, referring to the `sortValues` of the first and last item of the result set.
+  - `sortValues` do not exist per result item. Instead, the `page` object contains `startCursor` and `endCursor`, referring to the `sortValues` of the first and last item of the result set.
 - Renamed attributes
   - `id` - Use `userTaskKey`, this still refers to the unique system identifier of the user task.
   - `formKey` - This now is a unique system identifier, referencing a linked Camunda form in a specific version. Previously, this encoded an embedded form, a linked Camunda form, or an external form reference.
@@ -375,7 +375,7 @@ The following conventions apply to all attributes:
 
 - Response structure changes as outlined in [general changes][].
   - `total` is moved under the `page` object as `totalItems`.
-  - `sortValues` - Use `lastSortValues` in the `page` object instead.
+  - `sortValues` - Use `endCursor` in the `page` object instead.
 - Renamed attributes in the objects of the `items` array
   - `id` - Use `decisionDefinitionKey` instead.
   - `key` of type `int64` - Use `decisionDefinitionKey` of type `string`.
@@ -450,7 +450,7 @@ The following conventions apply to all attributes:
 
 - Response structure changes as outlined in [general changes][].
   - `total` is moved under the `page` object as `totalItems`.
-  - `sortValues` - Use `lastSortValues` in the `page` object instead.
+  - `sortValues` - Use `endCursor` in the `page` object instead.
 - Renamed attributes in the objects of the `items` array
   - `id` - Use `decisionInstanceId` instead.
   - `key` of type `int64` - Use `decisionInstanceKey` of type `string`.
@@ -533,7 +533,7 @@ The following conventions apply to all attributes:
 
 - Response structure changes as outlined in [general changes][].
   - `total` is moved under the `page` object as `totalItems`.
-  - `sortValues` - Use `lastSortValues` in the `page` object instead.
+  - `sortValues` - Use `endCursor` in the `page` object instead.
 - Renamed attributes in the objects of the `items` array
   - `id` - Use `decisionRequirementsKey` instead.
   - `key` of type `int64` - Use `decisionRequirementsKey` of type `string`.
@@ -623,7 +623,7 @@ The following conventions apply to all attributes:
 
 - Response structure changes as outlined in [general changes][].
   - `total` is moved under the `page` object as `totalItems`.
-  - `sortValues` - Use `lastSortValues` in the `page` object instead.
+  - `sortValues` - Use `endCursor` in the `page` object instead.
 - Renamed attributes in the objects of the `items` array
   - `key` of type `int64` - Use `variableKey` of type `string`.
   - `processInstanceKey` of type `int64` - This is now of type `string`.
@@ -697,7 +697,7 @@ The following conventions apply to all attributes:
 
 - Response structure changes as outlined in [general changes][].
   - `total` is moved under the `page` object as `totalItems`.
-  - `sortValues` - Use `lastSortValues` in the `page` object instead.
+  - `sortValues` - Use `endCursor` in the `page` object instead.
 - Renamed attributes in the objects of the `items` array
   - `key` of type `int64` - Use `processDefinitionKey` of type `string` instead.
   - `bpmnProcessId` - Use `processDefinitionId` instead.
@@ -794,7 +794,7 @@ The following conventions apply to all attributes:
 
 - Response structure changes as outlined in [general changes][].
   - `total` is moved under the `page` object as `totalItems`.
-  - `sortValues` - Use `lastSortValues` in the `page` object instead.
+  - `sortValues` - Use `endCursor` in the `page` object instead.
 - Renamed attributes in the objects of the `items` array
   - `key` of type `int64` - Use `processInstanceKey` of type `string` instead.
   - `processVersion` - Use `processDefinitionVersion` instead.
@@ -936,7 +936,7 @@ The following conventions apply to all attributes:
 
 - Response structure changes as outlined in [general changes][].
   - `total` is moved under the `page` object as `totalItems`.
-  - `sortValues` - Use `lastSortValues` in the `page` object instead.
+  - `sortValues` - Use `endCursor` in the `page` object instead.
 - Renamed attributes in the objects of the `items` array
   - `key` of type `int64` - Use `elementInstanceKey` of type `string` instead.
   - `flowNodeId` - Use `elementId` instead.
@@ -1009,7 +1009,7 @@ The following conventions apply to all attributes:
 
 - Response structure changes as outlined in [general changes][].
   - `total` is moved under the `page` object as `totalItems`.
-  - `sortValues` - Use `lastSortValues` in the `page` object instead.
+  - `sortValues` - Use `endCursor` in the `page` object instead.
 - Renamed attributes in the objects of the `items` array
   - `key` of type `int64` - Use `incidentKey` of type `string` instead.
   - `type` - Use `errorType` instead.

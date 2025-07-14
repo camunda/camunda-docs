@@ -435,7 +435,7 @@ camunda_tasklist_123_8.6.0_part_5_of_6
 camunda_tasklist_123_8.6.0_part_6_of_6
 ```
 
-Once completed, you can proceed with step 7 of the [backup procedure](self-managed/operational-guides/backup-restore/backup-and-restore.md#backup-process).
+Once completed, you can proceed with the [backup of the Zeebe Cluster](self-managed/operational-guides/backup-restore/backup-and-restore.md#backup-of-the-zeebe-cluster).
 
 ### Limitations
 
