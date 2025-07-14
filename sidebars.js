@@ -1051,15 +1051,25 @@ module.exports = {
     "self-managed/about-self-managed",
     {
       type: "category",
-      label: "Run locally",
+      label: "Quickstart",
       link: {
         type: "doc",
-        id: "self-managed/run-locally/index",
+        id: "self-managed/quickstart/overview",
       },
       items: [
-        "self-managed/setup/deploy/local/c8run",
-        "self-managed/setup/deploy/local/docker-compose",
-        "self-managed/setup/deploy/local/local-kubernetes-cluster",
+        {
+          type: "category",
+          label: "For Developers",
+          link: {
+            type: "doc",
+            id: "self-managed/quickstart/developer-quickstart",
+          },
+          items: [
+            "self-managed/quickstart/developer-quickstart/c8run",
+            "self-managed/quickstart/developer-quickstart/docker-compose",
+          ],
+        },
+        "self-managed/quickstart/administrator-quickstart",
       ],
     },
     {
@@ -1451,6 +1461,19 @@ module.exports = {
                   items: [
                     "self-managed/zeebe-deployment/exporters/install-zeebe-exporters",
                     "self-managed/zeebe-deployment/exporters/camunda-exporter",
+                    {
+                      type: "category",
+                      label: "Camunda Exporter indices",
+                      link: {
+                        type: "doc",
+                        id: "self-managed/zeebe-deployment/exporters/camunda-exporter-indices",
+                      },
+                      items: [
+                        "self-managed/zeebe-deployment/exporters/index-diagrams/camunda-exporter-indices-identity",
+                        "self-managed/zeebe-deployment/exporters/index-diagrams/camunda-exporter-indices-operate",
+                        "self-managed/zeebe-deployment/exporters/index-diagrams/camunda-exporter-indices-tasklist",
+                      ],
+                    },
                     "self-managed/zeebe-deployment/exporters/elasticsearch-exporter",
                     "self-managed/zeebe-deployment/exporters/opensearch-exporter",
                   ],

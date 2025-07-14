@@ -137,4 +137,4 @@ For more information and guides, see the reference for [manual setups](/self-man
 
 ### Local development
 
-While the above options are suitable for trying out Camunda 8 locally, [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md) provides a simplified, developer-focused experience.
+While the above options are suitable for trying out Camunda 8 locally, [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) provides a simplified, developer-focused experience.
