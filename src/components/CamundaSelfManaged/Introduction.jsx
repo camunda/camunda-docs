@@ -14,7 +14,7 @@ const Introduction = () => {
       <p>
         From quick start guides to infrastructure and deployment options, we'll
         help you build a robust process automation platform that meets your
-        organization's specific requirements.
+        organization's specific needs.
       </p>
 
       <h2>Self-Managed or SaaS?</h2>
