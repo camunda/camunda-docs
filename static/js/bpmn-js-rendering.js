@@ -1,17 +1,19 @@
-function adjustUrl(url) {
-  /*
-    not used as assets moved to static folder
-  // go one level up if trailing slashes are used in the page (which is to expect in the current stetting)
-  if (new RegExp(/^.*\/(\?|#|$).*$/).test(window.location.href)) {
-    url = "../" + url;
-  }
-  */
-
-  return "/bpmn/" + url;
+/**
+ * Adjust the file path for BPMN and DMN files. All BPMN and DMN files are
+ * stored in the `bpmn` directory.
+ *
+ * @todo Remove this function once paths are fixed in the .md files.
+ *
+ * @param {string} path
+ *
+ * @returns {string}
+ */
+function prefixFilePath(filePath) {
+  return "/bpmn/" + filePath;
 }
 
 async function renderBpmn(index, element) {
-  var bpmnUrl = element.attr("bpmn");
+  var bpmnFilePath = element.attr("bpmn");
 
   // create div element with a unique id (created from the src)
   var bpmnId = "bpmn-" + (index + 1) + "-screen";
@@ -34,11 +36,18 @@ async function renderBpmn(index, element) {
     */
 
   // render the svg
-  var viewer = new window.BpmnJS({ container: "#" + bpmnId });
+  var viewer =
+    /**
+     *
+     * @param {*} url
+     * @returns
+     */
+    new window.BpmnJS({ container: "#" + bpmnId });
 
-  bpmnUrl = adjustUrl(bpmnUrl);
+  bpmnFilePath = prefixFilePath(bpmnFilePath);
+
   $.ajax({
-    url: bpmnUrl,
+    url: bpmnFilePath,
     dataType: "text",
     success: async function (bpmnDiagram) {
       try {
@@ -123,10 +132,10 @@ function renderDmn(index, element) {
     hideDetails: hideDetails,
   });
 
-  var dmnUrl = adjustUrl(element.attr("dmn"));
+  var dmnFilePath = prefixFilePath(element.attr("dmn"));
 
   $.ajax({
-    url: dmnUrl,
+    url: dmnFilePath,
     dataType: "text",
     success: async function (dmnDiagram) {
       try {
