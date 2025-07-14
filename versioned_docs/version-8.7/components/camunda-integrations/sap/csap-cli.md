@@ -136,6 +136,7 @@ csap setup [options]
 | `--region`       | string | Specifies the Camunda Cluster Region.                                                                 | `bru-2`                    |
 | `--clientId`     | string | Specifies the Camunda API Client OAuth2 Client ID.                                                    | (Prompted if not provided) |
 | `--clientSecret` | string | Specifies the Camunda API Client OAuth2 Client Secret.                                                | (Prompted if not provided) |
+| `--to` | string | Target directory for setup artifacts | os-dependent `tmp` directory |
 
 ## Environment variables
 
