@@ -131,7 +131,11 @@ Output mappings can be used for several purposes:
 - They can be defined on service tasks, receive tasks, message catch events, and subprocesses.
 - They can be used in script and user tasks.
 
-If **one or more** output mappings are defined, the results variables are set as **local variables** in the scope where the mapping is defined. Then, the output mappings are applied to the variables and create new variables in this scope. The new variables are merged into the parent scope. If there is no mapping for a job/message variable, the variable is not merged. Please note that this can lead to a case where some variables with an output mapping are merged into the parent scope, and others without an output mapping are not merged.
+If **one or more** output mappings are defined, the results variables are set as **local variables** in the scope where the mapping is defined. Then, the output mappings are applied to the variables and create new variables in this scope. The new variables are merged into the parent scope. If there is no mapping for a job/message variable, the variable is not merged.
+
+:::note
+This can lead to a case where some variables with an output mapping are merged into the parent scope, and others without an output mapping are not merged.
+:::
 
 If **no** output mappings are defined, all results variables are merged into the process instance.
 
