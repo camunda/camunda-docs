@@ -36,16 +36,6 @@ module.exports = function () {
               async: true,
             },
           },
-          {
-            tagName: "script",
-            innerHTML: `
-                    document.addEventListener('readystatechange', event => {
-                    if (event.target.readyState === "complete") {
-                        renderAllBpmnJs();
-                    }
-                    });
-                `,
-          },
         ],
       };
     },
