@@ -260,3 +260,9 @@ function adjustBox(box, width) {
   var factor = box.inner.width > width ? (1 / box.inner.width) * width : 1.0;
   box.outer.height = Math.max(Math.ceil(box.inner.height * factor), 115);
 }
+
+document.addEventListener("readystatechange", (event) => {
+  if (event.target.readyState === "complete") {
+    renderAllBpmnJs();
+  }
+});
