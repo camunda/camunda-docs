@@ -452,3 +452,26 @@ camunda.operate:
     # Index prefix, configured in Zeebe Elasticsearch exporter
     prefix: zeebe-record
 ```
+
+## Backups
+
+You must configure the following on your chosen database:
+
+- [Elasticsearch snapshot repository](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshot-restore.html)
+- [OpenSearch snapshot repository](https://docs.opensearch.org/docs/latest/tuning-your-cluster/availability-and-recovery/snapshots/snapshot-restore/)
+
+Operate is configured with the snapshot repository name to trigger database snapshots. This is important for coherent backups.
+
+:::info
+Learn more about the procedure and the need to trigger it through Camunda components in the [backup guide](/self-managed/operational-guides/backup-restore/backup-and-restore.md).
+:::
+
+Operate must be configured with the repository name:
+
+| Name                                  | Description                      | Default value |
+| ------------------------------------- | -------------------------------- | ------------- |
+| camunda.operate.backup.repositoryName | ES / OS snapshot repository name | -             |
+
+:::warning breaking change
+Configuring Operate and Tasklist with different repository names will potentially create multiple backups in different repositories. Therefore, use the same `repositoryName` for both components.
+:::

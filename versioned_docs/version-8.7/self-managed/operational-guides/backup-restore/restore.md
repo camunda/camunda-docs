@@ -15,7 +15,7 @@ Restore a previous backup of your Camunda 8 Self-Managed components and cluster.
 
 To restore a backup you must complete the following main steps:
 
-1. [Restore of Elasticsearch/OpenSearch](#restore-elasticsearch-opensearchh)
+1. [Restore of Elasticsearch/OpenSearch](#restore-elasticsearch-opensearch)
 2. [Restore Zeebe Cluster](#restore-zeebe-cluster)
 3. [Start all Camunda 8 components](#start-all-camunda-8-components)
 
@@ -190,6 +190,8 @@ You will need the output for your chosen backup ID in the following steps to be 
 
       Using the [Operate management API](/self-managed/operational-guides/backup-restore/operate-tasklist-backup.md#get-backups-list-api) to list backups.
 
+      You must have the Elasticsearch / OpenSearch backup repository configured to be able to retrieve backups.
+
       ```bash
       curl $OPERATE_MANAGEMENT_API/actuator/backups
       ```
@@ -250,6 +252,8 @@ You will need the output for your chosen backup ID in the following steps to be 
 
       Using the [Optimize management API](/self-managed/operational-guides/backup-restore/optimize-backup.md#get-backup-info-api) to list backups.
 
+      You must have the Elasticsearch / OpenSearch backup repository configured to be able to retrieve backups.
+
       ```bash
       curl $OPTIMIZE_MANAGEMENT_API/actuator/backups
       ```
@@ -285,6 +289,8 @@ You will need the output for your chosen backup ID in the following steps to be 
       <summary>
 
       Using the [Tasklist management API](/self-managed/operational-guides/backup-restore/operate-tasklist-backup.md#get-backups-list-api) to list backups.
+
+      You must have the Elasticsearch / OpenSearch backup repository configured to be able to retrieve backups.
 
       ```bash
       curl $TASKLIST_MANAGEMENT_API/actuator/backups
@@ -735,9 +741,9 @@ During the restoration of the Elasticsearch / OpenSearch state, we had to tempor
 In the case of Kubernetes to remove all related persistent volumes.
 
 ```bash
-kubectl get pvc \
+kubectl get pvc -o custom-columns=NAME:.metadata.name --no-headers \
   | grep zeebe \
-  | while read namespace pvc; do
+  | while read pvc; do
       kubectl delete pvc "$pvc"
     done
 ```
