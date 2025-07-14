@@ -24,7 +24,7 @@ const Components = () => {
       description:
         "Central components that can work with multiple Camunda orchestration clusters",
       // The link should point to the management cluster documentation which is not there yet.
-      link: "/self-managed/management-cluster/",
+      link: "/self-managed/about-self-managed/",
     },
     {
       title: "Camunda Orchestration Cluster",

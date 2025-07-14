@@ -51,7 +51,7 @@ Download the Camunda 8 developer bundle from the following website:
 
 The developer bundle includes the following components:
 
-- [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md) – A simplified, single-application Camunda configuration for a local development environment.
+- [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) – A simplified, single-application Camunda configuration for a local development environment.
 - [Camunda Modeler](/components/modeler/about-modeler.md) – An application for modeling BPMN, DMN, and Forms.
 - [Getting started project](https://github.com/camunda/camunda-8-get-started) – An example project with a simple BPMN process and workers in Java or JavaScript.
 
@@ -132,7 +132,15 @@ You can view the process instance in **Operate**, the visual operations tool, by
 [http://localhost:8080/operate](http://localhost:8080/operate)  
 Login with the credentials: `demo` / `demo`.
 
-There you will see an active process instance. (Note: when the workers are running, process instances will be completed immediately and further process instances will not appear as active).
+There you will see an active process instance.
+
+:::note
+Data needs to sync to Operate, so the process instance may not be visible immediately.
+
+Additionally, when the workers are running, process instances will be completed immediately and further process instances will not appear as active.
+:::
+
+![Active process instance visible in Operate](./img/get-started-operate-screenshot.png)
 
 Next, start the job workers to allow them to perform the work for the service tasks. The workers are configured to connect to the locally-running engine and retrieve available work for the process instance.
 

@@ -1,4 +1,5 @@
 import React from "react";
+import { activeVersionURLPath as linkBase } from "../Versions";
 
 const Introduction = () => {
   return (
@@ -6,9 +7,9 @@ const Introduction = () => {
       <h2>Overview</h2>
       <p>
         Welcome to Camunda 8 Self-Managed the self-hosted alternative of{" "}
-        <a href="/components">Camunda 8 SaaS</a>! This section provides
-        everything you need to get started with deploying and managing Camunda
-        in your own infrastructure.
+        <a href={`${linkBase()}/components`}>Camunda 8 SaaS</a>! This section
+        provides everything you need to get started with deploying and managing
+        Camunda in your own infrastructure.
       </p>
       <p>
         From quick start guides to infrastructure and deployment options, we'll
