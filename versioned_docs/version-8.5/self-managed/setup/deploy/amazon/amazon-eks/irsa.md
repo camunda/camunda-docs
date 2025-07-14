@@ -628,13 +628,13 @@ When implementing [backup and restore procedures](/self-managed/operational-guid
 
 ### Bitnami Elasticsearch chart configuration
 
-Camunda’s Helm chart uses the [Bitnami Elasticsearch chart](https://artifacthub.io/packages/helm/bitnami/elasticsearch) as a sub-chart. If you're using this setup, IRSA can be integrated for backup operations.
+Camunda’s Helm chart uses the [Bitnami Elasticsearch chart](https://artifacthub.io/packages/helm/bitnami/elasticsearch) as a sub-chart. If you are using this setup, IRSA can be integrated for backup operations.
 
 Following the [AWS IRSA documentation](https://docs.aws.amazon.com/eks/latest/userguide/associate-service-account-role.html), create an IAM role mapped to a Kubernetes service account with the required permissions for S3, as detailed in the [Elasticsearch documentation](https://www.elastic.co/docs/deploy-manage/tools/snapshot-and-restore/s3-repository#repository-s3-permissions).
 
 Additionally, ensure Elasticsearch is configured to recognize the IRSA token. The [Elasticsearch documentation](https://www.elastic.co/docs/deploy-manage/tools/snapshot-and-restore/s3-repository#iam-kubernetes-service-accounts) outlines this requirement for official Elasticsearch images.
 
-Once the IRSA setup is complete, configure the Bitnami Elasticsearch chart in your Camunda Helm chart like the following adjusting your `values.yaml`:
+Once the IRSA setup is complete, configure the Bitnami Elasticsearch chart in your Camunda Helm chart by adjusting your `values.yaml` as follows:
 
 ```yaml
 elasticsearch:
@@ -657,8 +657,10 @@ elasticsearch:
       emptyDir: {}
 ```
 
-The values `<account-id>` and `<iam-role-arn>` would be based on the [AWS IRSA documentation](https://docs.aws.amazon.com/eks/latest/userguide/associate-service-account-role.html).
+The values `<account-id>` and `<iam-role-arn>` are based on the [AWS IRSA documentation](https://docs.aws.amazon.com/eks/latest/userguide/associate-service-account-role.html).
 
 The init script remains consistent across environments, as the Elasticsearch S3 plugin expects the credentials at the fixed path `repository-s3`. This path is **not configurable**.
 
-> ℹ️ `$AWS_WEB_IDENTITY_TOKEN_FILE` is automatically injected into the pod by EKS when the pod is using a service account annotated with a valid `eks.amazonaws.com/role-arn`.
+:::info
+`$AWS_WEB_IDENTITY_TOKEN_FILE` is automatically injected into the pod by EKS when the pod is using a service account annotated with a valid `eks.amazonaws.com/role-arn`.
+:::
