@@ -30,7 +30,9 @@ To use the CLI, download the binary matching your operating system and architect
 
 1. Check your build system meets the following requirements:
    1. [Node.js](https://nodejs.org/en) >= 20 (this includes the required `npm`)
-   2. The [transient requirements for SAP's `mbt`](https://sap.github.io/cloud-mta-build-tool/makefile/) (Cloud MTA Build Tool), specifically `make`
+   1. (Windows) tell `npm` to use `cmd` as the shell script executor:  
+      `$> npm config set script-shell cmd`
+   1. The [transient requirements for SAP's `mbt`](https://sap.github.io/cloud-mta-build-tool/makefile/) (Cloud MTA Build Tool), specifically `make`
 1. Navigate to the [releases](https://github.com/camunda/sap-csap-cli/releases) page.
 1. Download the binary for your platform:
    - For Linux: `csap-x86_64-unknown-linux-gnu`
@@ -124,16 +126,17 @@ csap setup [options]
 
 #### Options
 
-| Option           | Type   | Description                                                                                           | Default value              |
-| ---------------- | ------ | ----------------------------------------------------------------------------------------------------- | -------------------------- |
-| `--for`          | string | Specifies the SAP integration module to set up. Choices: `btp-plugin`, `odata`, `rfc`, `all`.         | `odata`                    |
-| `--camunda`      | string | Specifies the Camunda version. Choices: `8.7`, `8.6`, `8.5`.                                          | `8.7`                      |
-| `--deployment`   | string | Specifies the Camunda deployment option. Choices: `SaaS`. (`SM` for self managed currently disabled.) | `SaaS`                     |
-| `--btpRoute`     | string | (For `btp-plugin` or `all`) Specifies the BTP route to reach the plugin. This is SAP/BTP specific.    | `camunda-btp-plugin`       |
-| `--clusterId`    | string | Specifies the Camunda Cluster ID.                                                                     | (Prompted if not provided) |
-| `--region`       | string | Specifies the Camunda Cluster Region.                                                                 | `bru-2`                    |
-| `--clientId`     | string | Specifies the Camunda API Client OAuth2 Client ID.                                                    | (Prompted if not provided) |
-| `--clientSecret` | string | Specifies the Camunda API Client OAuth2 Client Secret.                                                | (Prompted if not provided) |
+| Option           | Type   | Description                                                                                           | Default value                                          |
+| ---------------- | ------ | ----------------------------------------------------------------------------------------------------- | -------------------------------------------------------|
+| `--for`          | string | Specifies the SAP integration module to set up. Choices: `btp-plugin`, `odata`, `rfc`, `all`.         | `odata`                                                |
+| `--camunda`      | string | Specifies the Camunda version. Choices: `8.7`, `8.6`, `8.5`.                                          | `8.7`                                                  |
+| `--deployment`   | string | Specifies the Camunda deployment option. Choices: `SaaS`. (`SM` for self managed currently disabled.) | `SaaS`                                                 |
+| `--btpRoute`     | string | (For `btp-plugin` or `all`) Specifies the BTP route to reach the plugin. This is SAP/BTP specific.    | `camunda-btp-plugin.cfapps.eu10-004.hana.ondemand.com` |
+| `--clusterId`    | string | Specifies the Camunda Cluster ID.                                                                     | (Prompted if not provided)                             |
+| `--region`       | string | Specifies the Camunda Cluster Region.                                                                 | `bru-2`                                                |
+| `--clientId`     | string | Specifies the Camunda API Client OAuth2 Client ID.                                                    | (Prompted if not provided)                             |
+| `--clientSecret` | string | Specifies the Camunda API Client OAuth2 Client Secret.                                                | (Prompted if not provided)                             |
+| `--to`           | string | Target directory for setup artifacts                                                                  | os-dependent `tmp` directory                           |
 
 ## Environment variables
 
