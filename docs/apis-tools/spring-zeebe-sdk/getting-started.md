@@ -38,6 +38,8 @@ Add the following Maven dependency to your Spring Boot Starter project, replacin
 </dependency>
 ```
 
+You can find the source on GitHub if you are interested: [https://github.com/camunda/camunda/tree/main/clients/spring-boot-starter-camunda-sdk/src/main](https://github.com/camunda/camunda/tree/main/clients/spring-boot-starter-camunda-sdk/src/main).
+
 ## Enable the Java Compiler `-parameters`-flag
 
 If you don't want to specify annotation values just as the process variable name on the [variable](configuration.md#using-variable) annotation, the Java compiler flag `-parameters` is required.
