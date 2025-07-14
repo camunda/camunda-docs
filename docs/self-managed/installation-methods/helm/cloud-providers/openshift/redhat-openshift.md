@@ -15,7 +15,7 @@ Deploying Camunda 8 on Red Hat OpenShift is supported using Helm, given the appr
 
 However, it's important to note that the [Security Context Constraints (SCCs)](#security-context-constraints-sccs) and [Routes](./redhat-openshift.md?current-ingress=openshift-routes#using-openshift-routes) configurations might require slight deviations from the guidelines provided in the [general Helm deployment guide](/self-managed/installation-methods/helm/install.md).
 
-Additional informational and high-level overview based on Kubernetes as upstream project is available on our [Kubernetes deployment reference](/self-managed/installation-methods/helm/cloud-providers/kubernetes.md).
+Additional informational and high-level overview based on Kubernetes as upstream project is available on our [Kubernetes deployment reference](/self-managed/reference-architecture/kubernetes.md).
 
 ## Requirements
 

@@ -79,9 +79,9 @@ To ensure an appropriate sizing, [determine your influencing factors](../compone
 
 For details on typical volume type usage, refer to the following examples specific to cloud service providers:
 
-- [Amazon EKS](/self-managed/installation-methods/helm/cloud-providers/kubernetes.md#amazon-eks)
-- [Microsoft AKS](/self-managed/installation-methods/helm/cloud-providers/kubernetes.md#microsoft-aks)
-- [Google GKE](/self-managed/installation-methods/helm/cloud-providers/kubernetes.md#google-gke)
+- [Amazon EKS](/self-managed/reference-architecture/kubernetes.md#amazon-eks)
+- [Microsoft AKS](/self-managed/reference-architecture/kubernetes.md#microsoft-aks)
+- [Google GKE](/self-managed/reference-architecture/kubernetes.md#google-gke)
 
 ### Helm charts version matrix
 

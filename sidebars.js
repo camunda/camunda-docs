@@ -1079,7 +1079,7 @@ module.exports = {
             "self-managed/installation-methods/helm/cloud-providers/amazon/aws-ec2",
           ],
         },
-        "self-managed/installation-methods/helm/cloud-providers/kubernetes",
+        "self-managed/reference-architecture/kubernetes",
       ],
     },
     {
