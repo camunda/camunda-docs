@@ -131,7 +131,7 @@ csap setup [options]
 | `--for`          | string | Specifies the SAP integration module to set up. Choices: `btp-plugin`, `odata`, `rfc`, `all`.         | `odata`                    |
 | `--camunda`      | string | Specifies the Camunda version. Choices: `8.7`, `8.6`, `8.5`.                                          | `8.7`                      |
 | `--deployment`   | string | Specifies the Camunda deployment option. Choices: `SaaS`. (`SM` for self managed currently disabled.) | `SaaS`                     |
-| `--btpRoute`     | string | (For `btp-plugin` or `all`) Specifies the BTP route to reach the plugin. This is SAP/BTP specific.    | `camunda-btp-plugin`       |
+| `--btpRoute`     | string | (For `btp-plugin` or `all`) Specifies the BTP route to reach the plugin. This is SAP/BTP specific.    | `camunda-btp-plugin.cfapps.eu10-004.hana.ondemand.com`       |
 | `--clusterId`    | string | Specifies the Camunda Cluster ID.                                                                     | (Prompted if not provided) |
 | `--region`       | string | Specifies the Camunda Cluster Region.                                                                 | `bru-2`                    |
 | `--clientId`     | string | Specifies the Camunda API Client OAuth2 Client ID.                                                    | (Prompted if not provided) |
