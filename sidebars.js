@@ -1132,6 +1132,7 @@ module.exports = {
                     "self-managed/installation-methods/helm/configure/accessing-components-without-ingress",
                   ],
                 },
+                "self-managed/installation-methods/helm/configure/using-existing-keycloak",
                 //license key
                 "self-managed/installation-methods/helm/configure/configure-multi-tenancy",
                 "self-managed/installation-methods/helm/configure/multi-namespace-deployment",
