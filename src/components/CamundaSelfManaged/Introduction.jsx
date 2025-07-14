@@ -17,7 +17,7 @@ const Introduction = () => {
         organization's specific needs.
       </p>
 
-      <h2>Self-Managed or SaaS?</h2>
+      <h2>Self-Managed vs. SaaS?</h2>
       <p>
         In Camunda 8, the key difference between Self-Managed and SaaS lies in
         user responsibility.
