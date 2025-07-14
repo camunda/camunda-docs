@@ -1,14 +1,14 @@
 ---
 id: authentication-basic
-title: "Basic Auth"
+title: "Basic auth"
 description: "Guides to authenticate and authorize your users with the Camunda Platform 8 Self-Managed Helm chart."
 ---
 
-In this document we will explore authentication with basic auth and how to authorize your users on the Camunda 8 Self-Managed Helm chart.
+In this document, we will explore authentication with basic auth and how to authorize your users on the Camunda 8 Self-Managed Helm chart.
 
 ## Prerequisites
 
-Outline any downloads, installations, particular versions, etc., that the user may need before getting started. Do they need to create a Camunda 8 account? Should they have Java or Node.js installed?
+Outline any downloads, installations, particular versions, etc. that the user may need before getting started. Do they need to create a Camunda 8 account? Should they have Java or Node.js installed?
 
 ## Set up
 
@@ -24,4 +24,4 @@ Are there additional resources or reference material the user could benefit from
 
 ## Next steps
 
-Where could the user go next/what could the user read next to further their knowledge or experience with the subject?
+Where could the user go next, or what could the user read next to further their knowledge or experience with the subject?

@@ -1,6 +1,6 @@
 ---
 id: authentication
-title: "index: Authentication and Authorization"
+title: "Authentication and authorization"
 description: "Guides to authenticate and authorize your users with the Camunda Platform 8 Self-Managed Helm chart."
 ---
 
