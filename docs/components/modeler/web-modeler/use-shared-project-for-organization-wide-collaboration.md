@@ -24,7 +24,7 @@ Teams can use shared projects to:
 
 ## Create a shared project and invite collaborators
 
-If you have not yet already, [create a Camunda 8 account](/guides/create-account.md)
+If you have not yet already, [create a Camunda 8 account](/components/console/manage-plan/create-account.md)
 
 To create a shared project as a space for your organization's resources:
 

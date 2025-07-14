@@ -1,12 +1,8 @@
 ---
 id: create-account
 title: Create an account
-slug: /guides/getting-started/
 description: "Set up your Camunda 8 account to get started."
 ---
-
-<span class="badge badge--beginner">Beginner</span>
-<span class="badge badge--medium">Time estimate: Under 5 minutes</span>
 
 Create a Camunda 8 account to create clusters, deploy processes, and create a new instance.
 
@@ -24,7 +20,7 @@ Fill out the form and submit, or sign up using the social sign up buttons like G
 
 When you fill out the form, you'll receive a confirmation email. Click on the link to verify your email address.
 
-If you choose to create an account through the social sign up buttons, you'll be redirected to [Console](../components/console/introduction-to-console.md) directly.
+If you choose to create an account through the social sign up buttons, you'll be redirected to [Console](/components/console/introduction-to-console.md) directly.
 
 ## Log in to your Camunda 8 account
 

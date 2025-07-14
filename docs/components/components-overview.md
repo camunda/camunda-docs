@@ -120,6 +120,6 @@ The platform and tools are usable in your environment right away, with full publ
 
 - To request information about Camunda 8 performance and benchmarking, refer to our [Contact](/reference/contact.md) page.
 - [Introduction to Camunda 8](/guides/introduction-to-camunda-8.md)
-- [Create a Camunda 8 account](/guides/create-account.md)
+- [Create a Camunda 8 account](/components/console/manage-plan/create-account.md)
 - [Migrate from Camunda 7 to Camunda 8](/guides/migrating-from-camunda-7/index.md)
 - [Automate a process using BPMN](/components/modeler/bpmn/automating-a-process-using-bpmn.md)

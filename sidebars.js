@@ -659,6 +659,7 @@ module.exports = {
         },
         {
           "Manage your plan": [
+            "components/console/manage-plan/create-account",
             "components/console/manage-plan/available-plans",
             "components/console/manage-plan/upgrade-to-enterprise-plan",
             "components/console/manage-plan/update-billing-reservations",
