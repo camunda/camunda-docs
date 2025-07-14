@@ -31,7 +31,7 @@ const Introduction = () => {
         <li>
           <b>Camunda 8 SaaS:</b> Camunda handles the infrastructure, uptime,
           security, and updates, allowing users to focus solely on modeling,
-          deploying, and managing their business processes.
+          deploying, and managing your business processes.
         </li>
       </ul>
       <p>
