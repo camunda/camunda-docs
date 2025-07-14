@@ -99,7 +99,6 @@ private static final String keystorePassword = "password";
 private static final String keystoreKeyPassword = "password";
 private static final Path truststorePath = Paths.get("/path/to/truststore.jks");
 private static final String truststorePassword = "password";
-private static final String resourceIndicator = "[optional resource indicator]";
 
 final OAuthCredentialsProvider provider =
   new OAuthCredentialsProviderBuilder()
@@ -112,7 +111,7 @@ final OAuthCredentialsProvider provider =
     .keystoreKeyPassword(keystoreKeyPassword)
     .truststorePath(truststorePath)
     .truststorePassword(truststorePassword)
-    .resource(resourceIndicator)
+    .resource("optional resource indicator")
     .build();
 ```
 

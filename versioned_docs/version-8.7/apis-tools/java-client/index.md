@@ -114,8 +114,6 @@ As a prerequisite, ensure you have proper KeyStore and TrustStore configured, so
 In that case, configuring `OAuthCredentialsProvider` might look like this
 
 ```java
-final String resourceIndicator = "[optional resource indicator]";
-
 final OAuthCredentialsProvider provider =
         new OAuthCredentialsProviderBuilder()
             .clientId("myClient")
@@ -127,7 +125,7 @@ final OAuthCredentialsProvider provider =
             .keystoreKeyPassword("password")
             .truststorePath(Paths.get("/path/to/truststore.jks"))
             .truststorePassword("password")
-            .resource(resourceIndicator)
+            .resource("optional resource indicator")
             .build();
 ```
 
