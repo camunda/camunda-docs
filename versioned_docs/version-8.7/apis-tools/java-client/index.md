@@ -41,6 +41,7 @@ In Java code, instantiate the client as follows:
   private static final String clientId = "[Client ID, e.g., FmT7K8gVv_FcwiUhc8U-fAJ9wph0Kn~P]";
   private static final String clientSecret = "[Client Secret]";
   private static final String oAuthAPI = "[OAuth API, e.g., https://login.cloud.camunda.io/oauth/token] ";
+  private static final String resourceIndicator = "[optional resource indicator]";
 
   public static void main(String[] args) {
     OAuthCredentialsProvider credentialsProvider =
@@ -49,6 +50,7 @@ In Java code, instantiate the client as follows:
             .audience(audience)
             .clientId(clientId)
             .clientSecret(clientSecret)
+            .resource(resourceIndicator)
             .build();
 
     try (ZeebeClient client = ZeebeClient.newClientBuilder()
@@ -78,6 +80,7 @@ export ZEEBE_REST_ADDRESS='[Zeebe REST Address]'
 export ZEEBE_CLIENT_ID='[Client ID]'
 export ZEEBE_CLIENT_SECRET='[Client Secret]'
 export ZEEBE_AUTHORIZATION_SERVER_URL='[OAuth API]'
+export ZEEBE_TOKEN_RESOURCE='[optional resource indicator]'
 ```
 
 When you create client credentials in Camunda 8, you have the option to download a file with the lines above filled out for you.
@@ -111,6 +114,8 @@ As a prerequisite, ensure you have proper KeyStore and TrustStore configured, so
 In that case, configuring `OAuthCredentialsProvider` might look like this
 
 ```java
+final String resourceIndicator = "[optional resource indicator]";
+
 final OAuthCredentialsProvider provider =
         new OAuthCredentialsProviderBuilder()
             .clientId("myClient")
@@ -122,6 +127,7 @@ final OAuthCredentialsProvider provider =
             .keystoreKeyPassword("password")
             .truststorePath(Paths.get("/path/to/truststore.jks"))
             .truststorePassword("password")
+            .resource(resourceIndicator)
             .build();
 ```
 
@@ -131,6 +137,7 @@ Or via environment variables:
 export ZEEBE_CLIENT_ID='[Client ID]'
 export ZEEBE_CLIENT_SECRET=''
 export ZEEBE_AUTHORIZATION_SERVER_URL='[OAuth API]'
+export ZEEBE_TOKEN_RESOURCE='[optional resource indicator]'
 export ZEEBE_SSL_CLIENT_KEYSTORE_PATH='[Keystore path]'
 export ZEEBE_SSL_CLIENT_KEYSTORE_SECRET='[Keystore password]'
 export ZEEBE_SSL_CLIENT_KEYSTORE_KEY_SECRET='[Keystore material password]'
