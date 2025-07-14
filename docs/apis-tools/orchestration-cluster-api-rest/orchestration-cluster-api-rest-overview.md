@@ -51,13 +51,13 @@ spring.servlet.multipart.max-request-size=4MB
 
 For example, if you increase the `maxMessageSize` to 10MB, increase these property values to 10MB as well.
 
-Additionally, if you're uploading multiple files as part of a multipart request, be aware that Tomcat limits the number of parts per request via the `server.tomcat.max-part-count` property. By default, this is set to 50 in our orchestration API. You can increase it to allow more files:
+Additionally, if you're uploading multiple files as part of a multipart request, note that Tomcat limits the number of parts per request using the `server.tomcat.max-part-count` property. By default, this is set to 50 in the orchestration API. You can increase the limit to allow more files by setting the property in your configuration:
 
 ```properties
 server.tomcat.max-part-count=100
 ```
 
-This can also be configured via the environment variable:
+Or by using the equivalent environment variable:
 
 ```properties
 SERVER_TOMCAT_MAX_PART_COUNT=100
