@@ -31,7 +31,7 @@ To use the CLI, download the binary matching your operating system and architect
 1. Check your build system meets the following requirements:
    1. [Node.js](https://nodejs.org/en) >= 20 (this includes the required `npm`)
    1. (Windows) tell `npm` to use `cmd` as the shell script executor:  
-   `$> npm config set script-shell cmd`
+      `$> npm config set script-shell cmd`
    1. The [transient requirements for SAP's `mbt`](https://sap.github.io/cloud-mta-build-tool/makefile/) (Cloud MTA Build Tool), specifically `make`
 1. Navigate to the [releases](https://github.com/camunda/sap-csap-cli/releases) page.
 1. Download the binary for your platform:
