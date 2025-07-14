@@ -189,7 +189,7 @@ annotations:
 
 The Helm chart required for deploying on Kubernetes is [publicly available](https://helm.camunda.io/).
 
-Camunda maintains the required Docker images consumed by the Helm chart. These images are available on [DockerHub](https://hub.docker.com/u/camunda). The `Dockerfile` and and its default configuration are available as part of the [Camunda repository](https://github.com/camunda/camunda/blob/stable/8.7/Dockerfile).
+Camunda maintains the required Docker images consumed by the Helm chart. These images are available on [DockerHub](https://hub.docker.com/u/camunda). The `Dockerfile` and its default configuration are available as part of the [Camunda repository](https://github.com/camunda/camunda/blob/stable/8.7/Dockerfile).
 
 ### Database
 

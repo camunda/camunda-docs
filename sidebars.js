@@ -1062,6 +1062,28 @@ module.exports = {
     },
     {
       type: "category",
+      label: "Reference architecture",
+      link: {
+        type: "doc",
+        id: "self-managed/reference-architecture/reference-architecture",
+      },
+      items: [
+        {
+          type: "category",
+          label: "Manual JAR",
+          link: {
+            type: "doc",
+            id: "self-managed/reference-architecture/manual",
+          },
+          items: [
+            "self-managed/installation-methods/helm/cloud-providers/amazon/aws-ec2",
+          ],
+        },
+        "self-managed/installation-methods/helm/cloud-providers/kubernetes",
+      ],
+    },
+    {
+      type: "category",
       label: "Installation methods",
       link: {
         type: "doc",
@@ -1160,7 +1182,7 @@ module.exports = {
               label: "Cloud providers",
               link: {
                 type: "doc",
-                id: "self-managed/installation-methods/helm/cloud-providers/kubernetes",
+                id: "self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/amazon-eks",
               },
               items: [
                 {
@@ -1234,27 +1256,6 @@ module.exports = {
         },
         "self-managed/installation-methods/docker/docker",
         "self-managed/installation-methods/manual/manual-install",
-      ],
-    },
-    {
-      type: "category",
-      label: "Reference architecture",
-      link: {
-        type: "doc",
-        id: "self-managed/reference-architecture/reference-architecture",
-      },
-      items: [
-        {
-          type: "category",
-          label: "Manual JAR",
-          link: {
-            type: "doc",
-            id: "self-managed/reference-architecture/manual",
-          },
-          items: [
-            "self-managed/installation-methods/helm/cloud-providers/amazon/aws-ec2",
-          ],
-        },
       ],
     },
     {
