@@ -127,7 +127,7 @@ csap setup [options]
 #### Options
 
 | Option           | Type   | Description                                                                                           | Default value                                          |
-| ---------------- | ------ | ----------------------------------------------------------------------------------------------------- | -------------------------------------------------------|
+| ---------------- | ------ | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
 | `--for`          | string | Specifies the SAP integration module to set up. Choices: `btp-plugin`, `odata`, `rfc`, `all`.         | `odata`                                                |
 | `--camunda`      | string | Specifies the Camunda version. Choices: `8.7`, `8.6`, `8.5`.                                          | `8.7`                                                  |
 | `--deployment`   | string | Specifies the Camunda deployment option. Choices: `SaaS`. (`SM` for self managed currently disabled.) | `SaaS`                                                 |
