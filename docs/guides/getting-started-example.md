@@ -258,7 +258,7 @@ cd c8run && ./c8run stop
 </TabItem>
 <TabItem value="windows">
 ```bash
-cd c8run; .\c8run.exe stop
+cd c8run && .\c8run.exe stop
 ````
 
 </TabItem>
