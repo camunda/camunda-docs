@@ -129,7 +129,7 @@ camunda:
       audience: zeebe-api
 ```
 
-See the [Camunda Spring Boot SDK documentation](../../../apis-tools/spring-zeebe-sdk/getting-started#self-managed) for more information on authentication properties.
+See the [Camunda Spring Boot SDK documentation](../../../../apis-tools/spring-zeebe-sdk/getting-started#self-managed) for more information on authentication properties.
 
 </TabItem>
 </Tabs>

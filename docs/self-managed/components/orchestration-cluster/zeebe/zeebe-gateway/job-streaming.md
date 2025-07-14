@@ -17,7 +17,7 @@ Proxies which support forwarding HTTP/2 keepalive do not require any change.
 
 The following configuration is recommended for impacted reverse proxies:
 
-- On your client, set an explicit stream timeout of one hour. See additional examples in [Java](../../../../apis-tools/java-client/job-worker).
+- On your client, set an explicit stream timeout of one hour. See additional examples in [Java](../../../../../apis-tools/java-client/job-worker.md).
 - On your reverse proxy, ensure the read response timeout is set to slightly higher than your client (for example, an hour and ten minutes).
 
 ## Nginx

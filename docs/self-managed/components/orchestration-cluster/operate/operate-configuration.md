@@ -47,7 +47,7 @@ To change the values for http header for security reasons, you can use the confi
 ### Securing Operate - Zeebe interaction
 
 While executing user operations, Operate communicates with Zeebe using the Zeebe Java client. For Zeebe to know whether operations are allowed to be executed
-in terms of tenant assignment, Operate - Zeebe connection must be secured. Check the list of environment variables to be provided in the [Zeebe documentation](../zeebe/security/client-authorization/#environment-variables).
+in terms of tenant assignment, Operate - Zeebe connection must be secured. Check the list of environment variables to be provided in the [Zeebe documentation](../zeebe/security/client-authorization.md#environment-variables).
 
 ### Troubleshooting multi-tenancy in Operate
 
