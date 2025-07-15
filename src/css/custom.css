@@ -738,14 +738,45 @@ div[class^="announcementBar_"] button {
   align-self: center;
 }
 
-/* Styles for BPMN.io integration and callouts in these models */
-.bpmn-model {
-  position: relative;
+/* Styles for rendered BPMN/DMN diagrams and optional callouts */
+.bpmn-io-example {
   background-color: #f9f9f9;
   margin-bottom: 15px;
   padding: 10px;
-  overflow: hidden;
 }
+
+.bpmn-io-example.bpmn-io-example-thumbs-down {
+  border: 3px solid #bd0100;
+  padding-bottom: 0px;
+}
+
+.bpmn-io-example .tjs-container .bjs-powered-by {
+  bottom: initial !important;
+  top: 15px !important;
+}
+
+/* Overrides for DMN decision tables */
+.dmn-decision-table-container .tjs-container,
+.dmn-decision-table-container .tjs-table,
+.dmn-decision-table-container .tjs-row {
+  width: max-content !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.dmn-decision-table-container td.rule-index {
+  white-space: nowrap;
+}
+
+.dmn-decision-table-container .callout {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.2rem;
+  height: 1.2rem;
+  margin-inline-start: 0.5rem;
+}
+
 .callout {
   display: inline-block;
   color: #fff !important;
@@ -759,34 +790,17 @@ div[class^="announcementBar_"] button {
   line-height: 1.67em;
   font-style: normal;
   font-weight: bold;
-  /*margin-block-end: 1em; leads to wired effects when callout has multiple lines*/
   margin-inline-end: 0.75em;
 }
-.thumbs-down-example {
-  border: 3px solid #bd0100;
-  padding-bottom: 0px;
-}
-.thumbs-down {
-  color: #bd0100 !important;
-  font-size: xx-large;
-  position: absolute;
-  z-index: 10;
-}
+
 span.callout + p {
   display: inline;
   margin: 0 0 1.25rem;
 }
+
 span.callout + p::after {
   content: "\a";
   white-space: pre;
-}
-
-/* I needed to overwrite this, otherwise the DMN table is super small */
-.dmn-decision-table-container .tjs-container {
-  width: 100%;
-}
-.dmn-decision-table-container .tjs-table {
-  width: 100%;
 }
 
 /* Add space and thin border to images, remove drop shadow */
@@ -1303,4 +1317,3 @@ ul ul .table-of-contents__link--active {
   opacity: 0.5;
   cursor: default;
 }
-
