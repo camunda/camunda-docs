@@ -119,12 +119,12 @@ async function renderBpmn(element) {
 
     const overlays = viewer.get("overlays");
 
-    for (const callout of callouts) {
-      const elementId = callout.trim();
+    for (let i = 0; i < callouts.length; i++) {
+      const elementId = callouts[i].trim();
 
       if (elementId) {
         overlays.add(elementId, {
-          html: `<span class="callout">${callouts.indexOf(callout) + 1}</span>`,
+          html: `<span class="callout">${i + 1}</span>`,
           position: {
             right: -5,
             top: -5,
@@ -199,15 +199,15 @@ async function renderDmn(element) {
   if (callouts) {
     callouts = callouts.split(",");
 
-    for (const callout of callouts) {
-      const [col, row] = callout.trim().split(":");
+    for (let i = 0; i < callouts.length; i++) {
+      const [col, row] = callouts[i].trim().split(":");
 
       if (col && row) {
         const span = document.createElement("span");
 
         span.classList.add("callout");
 
-        span.textContent = `${callouts.indexOf(callout) + 1}`;
+        span.textContent = `${i + 1}`;
 
         let cell;
 
