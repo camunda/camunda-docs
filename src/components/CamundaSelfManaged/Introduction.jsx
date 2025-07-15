@@ -23,7 +23,9 @@ const Introduction = () => {
       </p>
       <ul>
         <li>
-          <b>Camunda 8 Self-Managed:</b> You are responsible for deploying, scaling, securing, maintaining, and updating the entire Camunda stack on your own Kubernetes clusters or cloud infrastructure.
+          <b>Camunda 8 Self-Managed:</b> You are responsible for deploying,
+          scaling, securing, maintaining, and updating the entire Camunda stack
+          on your own Kubernetes clusters or cloud infrastructure.
         </li>
         <li>
           <b>Camunda 8 SaaS:</b> Camunda manages the infrastructure,
