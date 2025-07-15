@@ -4,9 +4,8 @@ import { activeVersionURLPath as linkBase } from "../Versions";
 const Introduction = () => {
   return (
     <div>
-      <h2>Overview</h2>
       <p>
-        Welcome to Camunda 8 Self-Managed the self-hosted alternative of{" "}
+        Welcome to Camunda 8 Self-Managed the self-hosted alternative to{" "}
         <a href={`${linkBase()}/components`}>Camunda 8 SaaS</a>! This section
         provides everything you need to get started with deploying and managing
         Camunda in your own infrastructure.
@@ -29,8 +28,8 @@ const Introduction = () => {
           Camunda stack across Kubernetes clusters or/and cloud infrastructure.
         </li>
         <li>
-          <b>Camunda 8 SaaS:</b> Camunda manages the infrastructure, availability,
-          security, and upgrades - so you can focus on modeling,
+          <b>Camunda 8 SaaS:</b> Camunda manages the infrastructure,
+          availability, security, and upgrades - so you can focus on modeling,
           deploying, and managing your business processes.
         </li>
       </ul>
