@@ -154,4 +154,4 @@ Alternatively, you can mount new connector JARs as volumes into the `/opt/app` f
 
 ## Next steps
 
-Check out the [getting started guide](/guides/getting-started-java-spring.md) to start a new Java project connected to this local cluster.
+Check out the [getting started guide](/guides/getting-started-example.md) to start a new Java Project to connect to this local cluster.
