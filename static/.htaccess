@@ -168,7 +168,7 @@ RewriteRule ^docs/next/guides/setting-up-development-project/?$ /docs/next/guide
 RewriteRule ^docs/next/guides/getting-started-java-spring/?$ /docs/next/guides/getting-started-example/ [R=301,L]
 RewriteRule ^docs/next/guides/orchestrate-microservices/?$ /docs/next/guides/getting-started-example/ [R=301,L]
 RewriteRule ^docs/next/guides/create-account/?$ /docs/next/console/manage-plan/create-account/ [R=301,L]
-RewriteRule ^docs/next/guides/getting-started/?$ /docs/next/console/manage-plan/create-account/ [R=301,L]
+RewriteRule ^docs/next/guides/getting-started/?$ /docs/next/guides/getting-started-example/ [R=301,L]
 
 # Remove Amazon Marketplace
 RewriteRule ^docs/next/self-managed/setup/deploy/amazon/aws-marketplace/?$ /docs/next/self-managed/setup/deploy/amazon/amazon-eks/ [R=301,L]
