@@ -30,6 +30,48 @@ module.exports = function () {
               src: "/js/render-diagrams.js",
             },
           },
+          {
+            tagName: "link",
+            attributes: {
+              rel: "stylesheet",
+              href: "https://unpkg.com/bpmn-js/dist/assets/diagram-js.css",
+            },
+          },
+          {
+            tagName: "link",
+            attributes: {
+              rel: "stylesheet",
+              href: "https://unpkg.com/bpmn-js/dist/assets/bpmn-js.css",
+            },
+          },
+          {
+            tagName: "link",
+            attributes: {
+              rel: "stylesheet",
+              href: "https://unpkg.com/bpmn-js/dist/assets/bpmn-font/css/bpmn-embedded.css",
+            },
+          },
+          {
+            tagName: "link",
+            attributes: {
+              rel: "stylesheet",
+              href: "https://unpkg.com/dmn-js/dist/assets/dmn-js-shared.css",
+            },
+          },
+          {
+            tagName: "link",
+            attributes: {
+              rel: "stylesheet",
+              href: "https://unpkg.com/dmn-js/dist/assets/dmn-js-decision-table.css",
+            },
+          },
+          {
+            tagName: "link",
+            attributes: {
+              rel: "stylesheet",
+              href: "https://unpkg.com/dmn-js/dist/assets/dmn-font/css/dmn.css",
+            },
+          },
         ],
       };
     },
