@@ -64,4 +64,4 @@ If the specified file is not found, the operation will fail and return an error 
 
 ## Limitations
 
-For detailed information on quotas and limits, including file size constraints, please refer to the official [Google Cloud Storage Quotas and Limits documentation](https://cloud.google.com/storage/quotas).
+For detailed information on quotas and limits, including file size constraints, refer to the official [Google Cloud Storage quotas and limits](https://cloud.google.com/storage/quotas).
