@@ -256,25 +256,6 @@ function findElementWithTextContent(selector, text) {
 }
 
 /**
- * Adds a stylesheet to the document if it is not already present.
- *
- * @param {url} source
- */
-function addStylesheet(source) {
-  let link = document.querySelector(`link[href="${source}"]`);
-
-  if (!link) {
-    link = document.createElement("link");
-
-    link.rel = "stylesheet";
-    link.type = "text/css";
-    link.href = source;
-
-    document.head.appendChild(link);
-  }
-}
-
-/**
  * Scrolls to the element with the current hash in the URL.
  * If the element is not found, it scrolls to the top of the page.
  */
@@ -318,19 +299,6 @@ async function renderDiagrams() {
 
 document.addEventListener("readystatechange", (event) => {
   if (event.target.readyState === "complete") {
-    addStylesheet("https://unpkg.com/bpmn-js/dist/assets/diagram-js.css");
-    addStylesheet("https://unpkg.com/bpmn-js/dist/assets/bpmn-js.css");
-    addStylesheet(
-      "https://unpkg.com/bpmn-js/dist/assets/bpmn-font/css/bpmn-embedded.css"
-    );
-    addStylesheet("https://unpkg.com/dmn-js/dist/assets/dmn-js-shared.css");
-    addStylesheet(
-      "https://unpkg.com/dmn-js/dist/assets/dmn-js-decision-table.css"
-    );
-    addStylesheet("https://unpkg.com/dmn-js/dist/assets/dmn-font/css/dmn.css");
-
-    console.log("Rendering BPMN/DMN diagrams...");
-
     // Timeout is necessary because Docusaurus uses React for rendering
     requestAnimationFrame(() => {
       renderDiagrams();
