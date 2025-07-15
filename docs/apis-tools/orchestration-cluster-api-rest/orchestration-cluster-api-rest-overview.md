@@ -51,7 +51,7 @@ spring.servlet.multipart.max-request-size=4MB
 
 For example, if you increase the `maxMessageSize` to 10MB, increase these property values to 10MB as well.
 
-[camunda-api-explorer]: ./specifications/camunda-8-rest-api.info.mdx
+[camunda-api-explorer]: ./specifications/orchestration-cluster-rest-api.info.mdx
 
 ## Naming conventions
 
