@@ -137,4 +137,3 @@ https://docs.camunda.io/docs/next/components/connectors/out-of-the-box-connector
 https://docs.camunda.io/docs/next/components/connectors/out-of-the-box-connectors/sql/#connection
 https://docs.camunda.io/docs/next/components/connectors/out-of-the-box-connectors/sql/#uri-connection
 https://docs.camunda.io/docs/next/components/connectors/out-of-the-box-connectors/sql/#variables
-https://docs.camunda.io/docs/components/console/manage-clusters/setup-client-connection-credentials
