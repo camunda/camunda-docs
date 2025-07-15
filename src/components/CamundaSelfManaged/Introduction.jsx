@@ -18,14 +18,11 @@ const Introduction = () => {
 
       <h2>Self-Managed vs. SaaS?</h2>
       <p>
-        In Camunda 8, the key difference between Self-Managed and SaaS lies in
-        user responsibility.
+        The primary difference between Camunda 8 Self-Managed and Camunda 8 SaaS is who is responsible for the infrastructure and operations.
       </p>
       <ul>
         <li>
-          <b>Camunda 8 Self-Managed:</b> Users are fully responsible for
-          deploying, scaling, securing, maintaining, and updating the entire
-          Camunda stack across Kubernetes clusters or/and cloud infrastructure.
+          <b>Camunda 8 Self-Managed:</b> You are responsible for deploying, scaling, securing, maintaining, and updating the entire Camunda stack on your own Kubernetes clusters or cloud infrastructure.
         </li>
         <li>
           <b>Camunda 8 SaaS:</b> Camunda manages the infrastructure,
@@ -34,8 +31,7 @@ const Introduction = () => {
         </li>
       </ul>
       <p>
-        Essentially, Self-Managed gives you control and customizability; SaaS
-        provides speed and simplicity.
+        In short: <b>Self-Managed</b> offers maximum control and flexibility, while <b>SaaS</b> provides speed and simplicity.
       </p>
     </div>
   );
