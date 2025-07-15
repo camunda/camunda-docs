@@ -13,21 +13,21 @@ module.exports = function () {
             tagName: "script",
             attributes: {
               src: "https://unpkg.com/bpmn-js/dist/bpmn-viewer.production.min.js",
-              async: true,
+              defer: true,
             },
           },
           {
             tagName: "script",
             attributes: {
               src: "https://unpkg.com/dmn-js/dist/dmn-viewer.production.min.js",
-              async: true,
+              defer: true,
             },
           },
           {
             tagName: "script",
             attributes: {
-              defer: true,
               src: "/js/render-diagrams.js",
+              defer: true,
             },
           },
           {
