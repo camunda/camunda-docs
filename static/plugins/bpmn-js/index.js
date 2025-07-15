@@ -12,13 +12,6 @@ module.exports = function () {
           {
             tagName: "script",
             attributes: {
-              src: "https://code.jquery.com/jquery-3.6.0.min.js",
-              async: true,
-            },
-          },
-          {
-            tagName: "script",
-            attributes: {
               src: "https://unpkg.com/bpmn-js/dist/bpmn-viewer.production.min.js",
               async: true,
             },
