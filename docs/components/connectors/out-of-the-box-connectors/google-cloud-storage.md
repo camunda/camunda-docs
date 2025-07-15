@@ -57,3 +57,11 @@ If a document with the same name already exists in the bucket, it will be overwr
 4. Choose whether to check the **Create document** checkbox:
    - If selected, a document reference will be created.
    - If not selected, the content will be extracted and returned in the response.
+
+:::note
+If the specified file is not found, the operation will fail and return an error message.
+:::
+
+## Limitations
+
+For detailed information on quotas and limits, including file size constraints, please refer to the official [Google Cloud Storage Quotas and Limits documentation](https://cloud.google.com/storage/quotas).
