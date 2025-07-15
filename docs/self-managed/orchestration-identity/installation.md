@@ -7,50 +7,48 @@ description: "Learn how Identity is bundled with your default Orchestration clus
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Identity is included by default with the deployment of any [Orchestration cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster). Within an Orchestration cluster, Identity provides unified, cluster-level identity management and authorizations.
+Identity is included by default with any [Orchestration cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster). Within an Orchestration cluster, Identity provides unified, cluster-level identity management and authorization.
 
-Identity for Orchestration clusters is available via [Helm install](/self-managed/installation-methods/helm/install.md), and for local development via [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md).
+Identity is available via [Helm install](/self-managed/installation-methods/helm/install.md) and for local development via [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md).
 
 :::note
-
-The following guides are on Identity configuration in Self-Managed environments. For information on Identity use and management, see the [user guides](/components/identity/identity-introduction.md).
-
+The following guides cover Identity configuration in Self-Managed environments. For information on using and managing Identity, see the [user guides](/components/identity/identity-introduction.md).
 :::
 
 ## Initial configuration
 
-Following the default installation for [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) will result in a cluster with the following:
+Using the default setup for [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) will result in a cluster with:
 
-1. Web application login enabled
-2. API authentication disabled
-3. Authorizations disabled
-4. An initial user with the username/password `demo`/`demo`
-5. An `admin` role with read, create, update, and delete permissions for all roles and all resources, which is applied to the initial `demo` user
+1. Web application login enabled  
+2. API authentication disabled  
+3. Authorizations disabled  
+4. An initial user with username/password: `demo` / `demo`  
+5. An `admin` role with full permissions, applied to the `demo` user  
 
-To make changes to the [initial configuration](./configuration.md), add the desired values to your `application.yaml`, and provide this file to Camunda 8 Run using the `--config` flag [at startup](/self-managed/quickstart/developer-quickstart/c8run.md#enable-authentication-and-authorization).
+To modify this [initial configuration](./configuration.md), define your custom values in `application.yaml`, and pass this file at startup using the `--config` flag. See [this section](/self-managed/quickstart/developer-quickstart/c8run.md#enable-authentication-and-authorization) for details.
 
 :::note
-Helm installations have API authentication and authorizations enabled by default. To adjust your Helm configuration, add the desired values to your `application.yaml` or via environment variables.
+In Helm installations, API authentication and authorization are enabled by default. You can adjust these settings in `application.yaml` or using environment variables.
 :::
 
 ### Configure initial users
 
-If users are managed in the Orchestration Cluster (i.e. no external Identity Provider is connected), an initial user can be created in two ways:
+If users are managed within the Orchestration cluster (i.e., without an external Identity Provider), you can create an initial user in two ways:
 
-- In the web application UI
-- Via configuration
+- Through the web application UI  
+- Through configuration
 
-#### Configure an initial admin user in the web application UI
+#### Option 1: Create an initial admin user in the UI
 
-If no admin user exists in the system, you can access the Orchestration Cluster web applications and they will display a screen to create the initial user.
+If no admin user exists, the Orchestration cluster web applications display a screen for creating the initial user:
 
 ![identity-create-initial-user](./img/create-initial-user.png)
 
-The initial user will be assigned to the admin role so that it has all permissions in the system. Once an admin user exists, the screen is not displayed anymore.
+This user will be assigned to the `admin` role and granted all permissions in the system. Once an admin user exists, this screen is no longer shown.
 
-#### Configure initial users via configuration
+#### Option 2: Define initial users via configuration
 
-To create initial users via configuration, the following is required in your `application.yaml` or environment variables:
+To configure initial users programmatically, include the relevant definitions in your `application.yaml` or environment variables.
 
 <Tabs>
   <TabItem value="helm" label="Helm properties">
@@ -84,19 +82,19 @@ CAMUNDA_SECURITY_INITIALIZATION_USERS_0_EMAIL=<The email address of the first us
 </Tabs>
 
 :::note
-By default, a user is not assigned to any roles and accordingly does not have any permissions. See the next section for how to assign a user to a role via configuration.
+By default, a user is not assigned to any roles and therefore has no permissions. See the next section to learn how to assign a user to a role via configuration.
 :::
 
-#### Assign users/clients/groups/mapping rules to roles via configuration
+#### Assign users, clients, groups, or mapping rules to roles via configuration
 
-The Orchestration Cluster creates the following default roles:
+The Orchestration cluster provides the following default roles:
 
-- admin: Has all permissions
-- readonly-admin: Has all permissions to read data and no permissions to modify data
-- connectors: Has all the permissions that the Connectors component requires
-- rpa: Has all the permissions that the RPA component requires
+- `admin`: Full permissions across all components  
+- `readonly-admin`: Read-only access to all data  
+- `connectors`: Permissions required by the Connectors component  
+- `rpa`: Permissions required by the RPA component  
 
-To assign users/clients/groups/mappings to a role, you can add the following `application.yaml` properties or environment variables:
+To assign users, clients, groups, or mapping rules to roles, add the appropriate properties to your `application.yaml` or set them as environment variables.
 
 <Tabs>
   <TabItem value="helm" label="Helm properties">
