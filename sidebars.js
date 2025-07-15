@@ -1068,6 +1068,7 @@ module.exports = {
         id: "self-managed/reference-architecture/reference-architecture",
       },
       items: [
+        "self-managed/reference-architecture/kubernetes",
         {
           type: "category",
           label: "Manual JAR",
@@ -1079,7 +1080,6 @@ module.exports = {
             "self-managed/installation-methods/helm/cloud-providers/amazon/aws-ec2",
           ],
         },
-        "self-managed/reference-architecture/kubernetes",
       ],
     },
     {
