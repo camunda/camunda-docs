@@ -41,11 +41,17 @@ export default function MetadataWrapper(props: Props): ReactNode {
     fullCanonicalUrl = `${customFields.canonicalUrlRoot}${canonicalPath}`;
   }
 
+  // Get the page rank from front matter, defaulting to 0 if not set.
+  // Higher page rank means higher priority in search results.
+  // This is parsed by Algolia's crawler to prioritize search results.
+  const pageRank = currentDoc.frontMatter.page_rank || 0;
+
   return (
     <>
       <Metadata {...props} />
       <Head>
         <link rel="canonical" href={fullCanonicalUrl} />
+        <meta name="docsearch:page_rank" content={pageRank} />
       </Head>
     </>
   );
