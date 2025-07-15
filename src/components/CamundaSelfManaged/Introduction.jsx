@@ -18,7 +18,8 @@ const Introduction = () => {
 
       <h2>Self-Managed vs. SaaS?</h2>
       <p>
-        The primary difference between Camunda 8 Self-Managed and Camunda 8 SaaS is who is responsible for the infrastructure and operations.
+        The primary difference between Camunda 8 Self-Managed and Camunda 8 SaaS
+        is who is responsible for the infrastructure and operations.
       </p>
       <ul>
         <li>
