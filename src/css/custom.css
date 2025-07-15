@@ -740,13 +740,30 @@ div[class^="announcementBar_"] button {
 
 /* Styles for rendered BPMN/DMN diagrams and optional callouts */
 .bpmn-io-example {
+  position: relative;
   background-color: #f9f9f9;
   margin-bottom: 15px;
   padding: 10px;
 }
 
+.bpmn-io-example-thumbs-icon {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.bpmn-io-example.bpmn-io-example-thumbs-up {
+  border: 3px solid green;
+  padding-bottom: 0px;
+}
+
 .bpmn-io-example.bpmn-io-example-thumbs-down {
-  border: 3px solid #bd0100;
+  border: 3px solid #da1e28;
   padding-bottom: 0px;
 }
 
