@@ -34,7 +34,8 @@ const Introduction = () => {
         </li>
       </ul>
       <p>
-        In short: <b>Self-Managed</b> offers maximum control and flexibility, while <b>SaaS</b> provides speed and simplicity.
+        In short: <b>Self-Managed</b> offers maximum control and flexibility,
+        while <b>SaaS</b> provides speed and simplicity.
       </p>
     </div>
   );
