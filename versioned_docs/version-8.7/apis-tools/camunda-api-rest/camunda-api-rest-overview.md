@@ -55,6 +55,10 @@ Or by using the equivalent environment variable:
 SERVER_TOMCAT_MAX_PART_COUNT=100
 ```
 
+Tomcat also enforces a separate limit on the total number of request parameters via the `server.tomcat.max-parameter-count` property. Since each file upload typically counts as both a part and a parameter, the lower of these two limits will determine how many files can be uploaded.
+
+For the latest defaults and detailed behavior, refer to the [Tomcat documentation](https://tomcat.apache.org/), as these values may change between versions.
+
 ### Query API
 
 :::danger
