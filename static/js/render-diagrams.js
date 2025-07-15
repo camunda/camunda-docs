@@ -63,9 +63,45 @@ async function renderBpmn(element) {
 
   await viewer.importXML(xml);
 
-  // TODO: adjust the size of the container based on the diagram size
+  // Adjust the container size based on the diagram size, outer viewbox is the
+  // visible part of the diagram, inner viewbox is the actual size of the
+  // diagram
+  const viewbox = viewer.get("canvas").viewbox();
 
-  viewer.get("canvas").zoom("fit-viewport");
+  const { outer, inner } = viewbox;
+
+  let scale = 1;
+
+  if (inner.width > outer.width) {
+    // We need to scale down the diagram to fit the container width
+    scale = outer.width / inner.width;
+  }
+
+  const needsHeightAdjustment = inner.height * scale > outer.height;
+
+  if (needsHeightAdjustment) {
+    const adjustedHeight = inner.height * scale;
+
+    container.style.height = `${adjustedHeight}px`;
+
+    viewer.get("canvas").resized();
+  }
+
+  viewer.get("canvas").zoom("fit-viewport", {
+    x: inner.x + inner.width / 2,
+    y: inner.y + inner.height / 2,
+  });
+
+  const newViewbox = viewer.get("canvas").viewbox();
+
+  const padding = 5;
+
+  newViewbox.height += padding * 2;
+  newViewbox.width += padding * 2;
+  newViewbox.x -= padding;
+  newViewbox.y -= padding;
+
+  viewer.get("canvas").viewbox(newViewbox);
 
   let callouts = element.getAttribute("callouts");
 
