@@ -26,7 +26,7 @@ The Camunda SAP integration is **SAP Certified**, ensuring compliance with SAP's
 
 ## Technical requirements
 
-All SAP integration modules operate in [hybrid mode](/guides/use-connectors-in-hybrid-mode.md), requiring the following:
+All SAP integration modules operate in [hybrid mode](/components/connectors/use-connectors-in-hybrid-mode.md), requiring the following:
 
 - Credentials from an [API client](/components/console/manage-clusters/manage-api-clients.md) to connect to a cluster
 - Configuration via environment variables only

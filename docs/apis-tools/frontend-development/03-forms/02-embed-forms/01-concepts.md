@@ -21,7 +21,7 @@ The form-js project is made of three core libraries: the [form editor](https://g
 
 ### Form editor
 
-The [form editor](https://github.com/bpmn-io/form-js/tree/develop/packages/form-js-editor) <GHIcon /> allows to design forms with a drag'n'drop interface, and uses [FEEL expressions](/components/modeler/feel/what-is-feel.md) to execute form logic, such as visibility conditions, in realtime. Learn more about using the form editor in the [getting started guide](/guides/utilizing-forms.md).
+The [form editor](https://github.com/bpmn-io/form-js/tree/develop/packages/form-js-editor) <GHIcon /> allows to design forms with a drag'n'drop interface, and uses [FEEL expressions](/components/modeler/feel/what-is-feel.md) to execute form logic, such as visibility conditions, in realtime. Learn more about using the form editor in the [getting started guide](/components/modeler/forms/utilizing-forms.md).
 
 The form editor as it is shipped in Camunda 8 actually uses the [form playground](#form-playground), which provides realtime preview and validation functionality.
 

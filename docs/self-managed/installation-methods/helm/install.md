@@ -5,17 +5,18 @@ sidebar_label: "Install"
 description: "Camunda provides continuously improved Helm charts, of which are not cloud provider-specific so you can choose your Kubernetes provider."
 ---
 
-This guide walks through how to have a basic installation of the Camunda 8 Self-Managed by installing the Orchestration Cluster and also optionally install the Management Cluster.
-TODO: have links to explain the orchestration cluster and management cluster
+This guide walks through how to perform a basic installation of Camunda 8 Self-Managed by installing the orchestration cluster and optionally the management cluster.
+
+<!-- TODO: add links to explain the orchestration cluster and management cluster -->
 
 ## Prerequisites
 
-- Kubernetes Cluster: A functioning Kubernetes cluster with kubectl access and block storage persistent volumes for stateful components.
+- Kubernetes cluster: A functioning Kubernetes cluster with kubectl access and block storage persistent volumes for stateful components.
 - Helm: Make sure the Helm CLI is installed.
 
-## Installing the Orchestration Cluster
+## Installing the orchestration cluster
 
-- Firstly, create a namespace to install the platform on Kubernetes:
+- First, create a namespace to install the platform on Kubernetes:
   ```bash
   kubectl create namespace orchestration
   ```
@@ -23,7 +24,7 @@ TODO: have links to explain the orchestration cluster and management cluster
   ```bash
   namespace/orchestration created
   ```
-- In order to install the Camunda 8 Self-Managed [Helm chart](https://helm.sh/docs/topics/charts/), it is required to add the [Helm Repository](https://helm.sh/docs/topics/chart_repository/). This can be done with the following command:
+- To install the Camunda 8 Self-Managed [Helm chart](https://helm.sh/docs/topics/charts/), you need to add the [Helm repository](https://helm.sh/docs/topics/chart_repository/). You can do this with the following command:
   ```bash
   helm repo add camunda https://helm.camunda.io
   helm repo update
@@ -35,7 +36,7 @@ To install the Helm chart on your namespace, run the following command:
 helm install camunda camunda/camunda-platform -n orchestration
 ```
 
-### Accessing the Orchestration Cluster:
+### Accessing the orchestration cluster
 
 Run the following command to locally port-forward the orchestration cluster pod to access the UI:
 
@@ -43,7 +44,7 @@ Run the following command to locally port-forward the orchestration cluster pod 
 kubectl port-forward svc/camunda-core 8080:8080
 ```
 
-Use the following URLs to access the Orchestration Cluster UIs:
+Use the following URLs to access the orchestration cluster UIs:
 
 ```bash
 http://localhost:8080/identity
@@ -51,21 +52,22 @@ http://localhost:8080/operate
 http://localhost:8080/tasklist
 ```
 
-By default basic auth is configured on the Orchestration Cluster. There is a default user configured:
+By default, basic auth is configured on the orchestration cluster. There is a default user configured:
 
 ```
 username: demo
 password: demo
 ```
 
-## Enabling Other Components:
+## Enabling other components
 
 :::note
 This step is optional.
 :::
 
-TODO: Add links to doc pages that explains each component.
-The following list of components live outside the Orchestration Cluster:
+<!-- TODO: Add links to doc pages that explain each component. -->
+
+The following components live outside the orchestration cluster:
 
 - Optimize
 - Web Modeler
@@ -73,15 +75,17 @@ The following list of components live outside the Orchestration Cluster:
 - Management Identity
 - Keycloak
 
-The above components are disabled by default. They also do not support basic auth, so another authentication/authorization mechanism should be used such as Keycloak or OIDC. In this scenario, we will use Keycloak.
+These components are disabled by default. They do not support basic auth, so another authentication/authorization mechanism should be used, such as Keycloak or OIDC. In this scenario, we will use Keycloak.
 
-TODO: add a suitable link to explain what a values.yaml is.
-Since the default configuration of the Helm chart uses basic auth, it is necessary to create a [values.yaml](https://helm.sh/docs/chart_template_guide/values_files/) file to modify the default configuration to do the following:
+<!-- TODO: Add a suitable link to explain what a values.yaml file is. -->
 
-- Enable Keycloak to provide another method of auth.
-- Enable the rest of the Camunda components that live outside of the Orchestration Cluster.
+Since the default configuration of the Helm chart uses basic auth, you need to create a [values.yaml](https://helm.sh/docs/chart_template_guide/values_files/) file to modify the default configuration to:
 
-TDOO: remove setting existingSecret in favor of autoGenerate secrets
+- Enable Keycloak to provide another method of authentication.
+- Enable the rest of the Camunda components that live outside the orchestration cluster.
+
+<!-- TODO: Remove setting existingSecret in favor of autoGenerate secrets -->
+
 Create a file called `camunda-values.yaml` with the following content:
 
 ```yaml
@@ -186,17 +190,16 @@ console:
   enabled: true
 ```
 
-TODO: add a section about port-forward. Currently port-forward is not working because the redirect URIs are configured with the k8s service names. If the redirect URIs are configured to localhost then the orchestration cluster will not be healthy since it can't access keycloak through localhost.
+<!-- TODO: Add a section about port-forward. Currently, port-forward is not working because the redirect URIs are configured with the Kubernetes service names. If the redirect URIs are set to localhost, the orchestration cluster will be unhealthy since it cannot access Keycloak through localhost. -->
 
 ## Additional resources
 
-TODO: add a link to the following:
+<!-- TODO: Add links to the following:
+- Basic auth guide
+- Enable Keycloak guide
+- Enable OIDC guide
+- Explanation of management/orchestration cluster -->
 
-- basic auth guide
-- enable keycloak guide
-- enable OIDC guide
-- explaining management/orchestration cluster
+<!--## Next steps
 
-## Next steps
-
-If you would like to further customize the Camunda 8 Self-Managed Helm chart then please go to the following section:
+If you would like to further customize the Camunda 8 Self-Managed Helm chart, please proceed to the following section:-->

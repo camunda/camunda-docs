@@ -1,43 +1,16 @@
 module.exports = {
   Guides: [
-    "guides/introduction-to-camunda",
     {
-      "Get started": [
+      type: "category",
+      label: "Get started",
+      link: {
+        type: "doc",
+        id: "guides/introduction-to-camunda",
+      },
+      items: [
         "guides/getting-started-example",
-        "guides/getting-started-java-spring",
-        "guides/model-your-first-process",
-        {
-          "Orchestration use cases": [
-            "guides/orchestrate-human-tasks",
-            "guides/orchestrate-apis",
-            "guides/orchestrate-microservices",
-            "guides/listen-to-user-tasks",
-          ],
-        },
-      ],
-    },
-    {
-      Design: [
-        "guides/automating-a-process-using-bpmn",
-        "guides/create-decision-tables-using-dmn",
-        "guides/utilizing-forms",
-      ],
-      Automate: [
-        "guides/create-cluster",
-        "guides/setting-up-development-project",
-        "guides/setup-client-connection-credentials",
-        "guides/configuring-out-of-the-box-connectors",
-        "guides/use-connectors-in-hybrid-mode",
-        "guides/host-custom-connectors",
-      ],
-      Improve: [
-        "guides/improve-processes-with-optimize",
-        {
-          "DevOps lifecycle": [
-            "guides/devops-lifecycle/integrate-web-modeler-in-ci-cd",
-          ],
-        },
-        "guides/use-shared-project-for-organization-wide-collaboration",
+        "guides/orchestrate-human-tasks",
+        "guides/orchestrate-apis",
       ],
     },
     {
@@ -72,7 +45,12 @@ module.exports = {
         "components/concepts/process-applications",
         "components/concepts/job-workers",
         "components/concepts/execution-listeners",
-        "components/concepts/user-task-listeners",
+        {
+          "User task listeners": [
+            "components/concepts/user-task-listeners",
+            "components/concepts/listen-to-user-tasks",
+          ],
+        },
         "components/concepts/process-instance-creation",
         "components/concepts/messages",
         "components/concepts/signals",
@@ -187,11 +165,13 @@ module.exports = {
           "Web Modeler": [
             "components/modeler/web-modeler/launch-web-modeler",
             "components/modeler/web-modeler/model-your-first-diagram",
+            "components/modeler/web-modeler/use-shared-project-for-organization-wide-collaboration",
             "components/modeler/web-modeler/context-pad",
             "components/modeler/web-modeler/git-sync",
             "components/modeler/web-modeler/import-diagram",
             "components/modeler/web-modeler/fix-problems-in-your-diagram",
             "components/modeler/web-modeler/run-or-publish-your-process",
+            "components/modeler/web-modeler/integrate-web-modeler-in-ci-cd",
             {
               type: "category",
               label: "Process applications",
@@ -283,6 +263,7 @@ module.exports = {
         {
           BPMN: [
             "components/modeler/bpmn/modeler-bpmn",
+            "components/modeler/bpmn/automating-a-process-using-bpmn",
             "components/modeler/bpmn/bpmn-primer",
             "components/modeler/bpmn/bpmn-coverage",
             "components/modeler/bpmn/data-flow",
@@ -444,10 +425,12 @@ module.exports = {
             id: "components/connectors/use-connectors/index",
           },
           items: [
+            "components/connectors/use-connectors/configuring-out-of-the-box-connectors",
             "components/connectors/connector-types",
             "components/connectors/use-connectors/inbound",
             "components/connectors/use-connectors/outbound",
             "components/connectors/use-connectors/intrinsic-functions",
+            "components/connectors/use-connectors-in-hybrid-mode",
           ],
         },
         {
@@ -498,6 +481,7 @@ module.exports = {
             "components/connectors/out-of-the-box-connectors/gitlab",
             {
               Google: [
+                "components/connectors/out-of-the-box-connectors/google-cloud-storage",
                 "components/connectors/out-of-the-box-connectors/googledrive",
                 "components/connectors/out-of-the-box-connectors/google-maps-platform",
                 "components/connectors/out-of-the-box-connectors/google-sheets",
@@ -541,6 +525,7 @@ module.exports = {
             id: "components/connectors/custom-built-connectors/build-connector",
           },
           items: [
+            "components/connectors/custom-built-connectors/host-custom-connectors",
             {
               type: "category",
               label: "Connector templates",
@@ -567,6 +552,7 @@ module.exports = {
         id: "components/optimize/what-is-optimize",
       },
       items: [
+        "components/optimize/improve-processes-with-optimize",
         "components/optimize/userguide/collections-dashboards-reports",
         "components/optimize/userguide/user-permissions",
         "components/optimize/userguide/data-sources",
@@ -662,6 +648,7 @@ module.exports = {
             "components/console/manage-clusters/create-cluster",
             "components/console/manage-clusters/manage-cluster",
             "components/console/manage-clusters/cluster-connectors",
+            "components/console/manage-clusters/setup-client-connection-credentials",
             "components/console/manage-clusters/manage-api-clients",
             "components/console/manage-clusters/manage-secrets",
             "components/console/manage-clusters/manage-alerts",
@@ -673,6 +660,7 @@ module.exports = {
         },
         {
           "Manage your plan": [
+            "components/console/manage-plan/create-account",
             "components/console/manage-plan/available-plans",
             "components/console/manage-plan/upgrade-to-enterprise-plan",
             "components/console/manage-plan/update-billing-reservations",
@@ -1132,6 +1120,7 @@ module.exports = {
                     "self-managed/installation-methods/helm/configure/accessing-components-without-ingress",
                   ],
                 },
+                "self-managed/installation-methods/helm/configure/using-existing-keycloak",
                 //license key
                 "self-managed/installation-methods/helm/configure/configure-multi-tenancy",
                 "self-managed/installation-methods/helm/configure/multi-namespace-deployment",
