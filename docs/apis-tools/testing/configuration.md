@@ -25,12 +25,10 @@ If you're experiencing issues with your Docker runtime, have a look at the [Test
 
 You can change the Docker images and other runtime properties in the following way.
 
-<Tabs groupId="client" defaultValue="spring-sdk" queryString values={
-[
+<Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
 {label: 'Camunda Spring Boot SDK', value: 'spring-sdk' },
 {label: 'Java client', value: 'java-client' }
-]
-}>
+]}>
 
 <TabItem value='spring-sdk'>
 
@@ -116,7 +114,7 @@ public class MyProcessTest {
 
 ## Remote runtime
 
-Instead of using the managed [Testcontainers runtime](#testcontainers-runtime), you can configure CPT to connect to a remote runtime, for example, to a local [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md) running on your machine.
+Instead of using the managed [Testcontainers runtime](#testcontainers-runtime), you can configure CPT to connect to a remote runtime, for example, to a local [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) running on your machine.
 
 When to use it:
 
@@ -130,12 +128,10 @@ You are in charge of the remote runtime. Make sure to start the runtime before r
 
 Set the configuration to use a remote runtime in the following way. Change the connection to the runtime, if needed.
 
-<Tabs groupId="client" defaultValue="spring-sdk" queryString values={
-[
+<Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
 {label: 'Camunda Spring Boot SDK', value: 'spring-sdk' },
 {label: 'Java client', value: 'java-client' }
-]
-}>
+]}>
 
 <TabItem value='spring-sdk'>
 

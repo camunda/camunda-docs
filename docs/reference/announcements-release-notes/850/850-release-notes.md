@@ -40,7 +40,7 @@ Note that the actual values shown in this screenshot don't correspond to any act
 
 <!-- https://github.com/camunda/product-hub/issues/2162 -->
 
-You can now use Role-Based Access Control (RBAC) with your own OIDC Identity provider (such as Entra ID) and Web Modeler without relying on Keycloak. [This extends RBAC and role mapping support](/self-managed/setup/guides/connect-to-an-oidc-provider.md#component-specific-configuration) that is available for other components to Web Modeler.
+You can now use Role-Based Access Control (RBAC) with your own OIDC Identity provider (such as Entra ID) and Web Modeler without relying on Keycloak. [This extends RBAC and role mapping support](/self-managed/installation-methods/helm/configure/connect-to-an-oidc-provider.md#component-specific-configuration) that is available for other components to Web Modeler.
 
 ### Introductory UI header for processes page
 

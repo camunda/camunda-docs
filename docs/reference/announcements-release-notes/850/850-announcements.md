@@ -32,7 +32,7 @@ A Camunda Helm chart upgrade is not possible from v9.x.x to v10.0.0 or v10.0.1. 
 
 The Camunda Helm chart v10.0.0 has major changes in the values file structure. Some keys in the values file have been changed. For compatibility, the keys are deprecated in the Camunda release cycle 8.5 and will be removed in the Camunda 8.6 release (October 2024).
 
-Follow the [upgrade instructions](/versioned_docs/version-8.5/self-managed/setup/upgrade.md#helm-chart-1002+) to upgrade from Camunda Helm chart v9.x.x to Camunda Helm chart v10.x.x.
+Follow the [upgrade instructions](/self-managed/installation-methods/helm/upgrade/upgrade.md#helm-chart-1002+) to upgrade from Camunda Helm chart v9.x.x to Camunda Helm chart v10.x.x.
 
 #### Support for Amazon OpenSearch
 
@@ -113,7 +113,7 @@ As of the 8.4 release, Camunda is compatible with Elasticsearch 8.9+ and no long
 As of the 8.4 release, Zeebe, Operate, and Tasklist are now compatible with [Amazon OpenSearch](https://aws.amazon.com/de/opensearch-service/) 2.5.x. Note that using Amazon OpenSearch requires [setting up a new Camunda installation](/versioned_docs/version-8.4/self-managed/about-self-managed.md). A migration from previous versions or Elasticsearch environments is currently not supported.
 
 :::info
-The Helm charts are not yet prepared with the OpenSearch configurations as templates/pre-filled. The Helm charts can still be used to install for OpenSearch, but some adjustments are needed beforehand. Refer to the [Helm deployment documentation](/versioned_docs/version-8.4/self-managed/platform-deployment/helm-kubernetes/overview.md) for further details.
+The Helm charts are not yet prepared with the OpenSearch configurations as templates/pre-filled. The Helm charts can still be used to install for OpenSearch, but some adjustments are needed beforehand. Refer to the [Helm deployment documentation](/self-managed/installation-methods/helm/install.md) for further details.
 :::
 
 This release contains the following limitations:
@@ -128,19 +128,23 @@ This release contains the following limitations:
     - **Reference:** https://github.com/camunda/issues/issues/568
     - **Mitigation:** Bug is planned to be fixed with upcoming `8.4.1` release
 - In **Camunda HELM `9.0.x`**
+
   - **Limitation**
+
     - **Description:** The existing Helm charts use the Elasticsearch configurations by default and are not yet prepared with the OpenSearch configurations as templates/pre-filled. The Helm charts can still be used to install for OpenSearch, but some adjustments are needed beforehand.
     - **Reference:** n/a
     - **Mitigation:**
-      1. Refer to our [docs for the installation](/versioned_docs/version-8.4/self-managed/platform-deployment/helm-kubernetes/overview.md#components-installed-by-the-helm-charts), the docs include guidance about necessary adjustments of the Helm chart configuration.
+
+      1. Refer to our [docs for the installation](/self-managed/installation-methods/helm/install.md#components-installed-by-the-helm-charts), the docs include guidance about necessary adjustments of the Helm chart configuration.
       2. The OpenSearch configuration in Helm charts will be provided in one of our future Helm releases.
+
 - In **Connectors `8.4.x`**
   - **Missing feature**
     - **Description:** Custom OIDC provider support for connectors is missing
     - **Reference:** https://github.com/camunda/issues/issues/569
     - **Mitigation:**
       1. Feature is planned to be delivered with an upcoming patch release. Please see [issue](https://github.com/camunda/issues/issues/569) for latest progress.
-      2. [Disable connectors component](/versioned_docs/version-8.4/self-managed/identity/user-guide/configuration/configure-external-identity-provider.md) when configuring a custom OIDC provider.
+      2. [Disable connectors component](/self-managed/installation-methods/helm/configure/connect-to-an-oidc-provider.md#configuration) when configuring a custom OIDC provider.
 
 ### Key changes
 

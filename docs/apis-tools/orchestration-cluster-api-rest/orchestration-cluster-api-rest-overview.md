@@ -15,7 +15,7 @@ Ensure you [authenticate](./orchestration-cluster-api-rest-authentication.md) be
 :::
 
 :::note
-The Orchestration Cluster API only supports user tasks managed by Camunda (formerly known as [Zeebe user tasks](/apis-tools/migration-manuals/migrate-to-camunda-user-tasks.md), which may still appear as such in your XML content).
+The Orchestration Cluster API only supports user tasks managed by Camunda (formerly known as [Zeebe user tasks](../migration-manuals/migrate-to-camunda-user-tasks.md), which may still appear as such in your XML content).
 :::
 
 ## Context paths
@@ -28,7 +28,7 @@ Example path: `https://${REGION_ID}.zeebe.camunda.io:443/${CLUSTER_ID}/v2/`
 
 ### Self-Managed
 
-The context path should match the host and path defined in your Zeebe Gateway [configuration](/self-managed/setup/guides/ingress-setup.md). The path used here is the default.
+The context path should match the host and path defined in your Zeebe Gateway [configuration](/self-managed/installation-methods/helm/configure/ingress-setup.md). The path used here is the default.
 
 Example path: `http://localhost:8080/v2/`
 
@@ -38,7 +38,7 @@ See [the interactive Orchestration Cluster API Explorer][camunda-api-explorer] f
 
 ## Request and file sizes
 
-You can change the `maxMessageSize` default value of 4MB in the [Gateway](../../self-managed/components/orchestration-cluster/zeebe/configuration/gateway.md#zeebegatewaynetwork) and [Broker](../../self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#zeebebrokernetwork) configuration.
+You can change the `maxMessageSize` default value of 4MB in the [Gateway](/self-managed/components/orchestration-cluster/zeebe/configuration/gateway.md#zeebegatewaynetwork) and [Broker](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#zeebebrokernetwork) configuration.
 
 If you do change this value, it is recommended that you also configure the [Deploy resources](./specifications/create-deployment.api.mdx) REST endpoint appropriately. By default, this endpoint allows single file upload and overall data up to 4MB.
 
@@ -131,4 +131,4 @@ Date values in the Orchestration Cluster API follow the [RFC 3339](https://www.r
 
 Variables in the Orchestration Cluster API are proper JSON objects, where the `key` defines the variable name and the `value` specifies the variable value. The endpoints validate requests and transform responses accordingly.
 
-In search requests, filtering by variables works as documented in [search requests](orchestration-cluster-api-rest-data-fetching.md#search-requests).
+In search requests, filtering by variables works as documented in [search requests](./orchestration-cluster-api-rest-data-fetching.md#search-requests).

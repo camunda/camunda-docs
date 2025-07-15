@@ -51,7 +51,7 @@ in terms of tenant assignment, Operate - Zeebe connection must be secured. Check
 
 ### Troubleshooting multi-tenancy in Operate
 
-If users can view data from the `<default>` tenant only and no data from other tenants (and you have not [configured multi-tenancy using Helm](https://artifacthub.io/packages/helm/camunda/camunda-platform#global-parameters)), multi-tenancy is not enabled in Operate. Refer to the [multi-tenancy configuration guide](../../../operational-guides/configure-multi-tenancy.md).
+If users can view data from the `<default>` tenant only and no data from other tenants (and you have not [configured multi-tenancy using Helm](https://artifacthub.io/packages/helm/camunda/camunda-platform#global-parameters)), multi-tenancy is not enabled in Operate. Refer to the [multi-tenancy configuration guide](../../../installation-methods/helm/configure/configure-multi-tenancy.md).
 
 If multi-tenancy is enabled in Operate but disabled in [Identity](/self-managed/components/management-identity/what-is-identity.md), users will not have any tenant authorizations in Operate
 and will not be able to access the data of any tenants in Operate.
@@ -67,7 +67,7 @@ Valid values are `elasticsearch` (default) and `opensearch`.
 Example as environment variable: `CAMUNDA_OPERATE_DATABASE=opensearch`.
 
 :::note
-As of the 8.4 release, Operate is now compatible with [Amazon OpenSearch](https://aws.amazon.com/de/opensearch-service/) 2.5.x. Note that using Amazon OpenSearch requires [setting up a new Camunda installation](/self-managed/setup/overview.md). A migration from previous versions or Elasticsearch environments is currently not supported.
+As of the 8.4 release, Operate is now compatible with [Amazon OpenSearch](https://aws.amazon.com/de/opensearch-service/) 2.5.x. Note that using Amazon OpenSearch requires [setting up a new Camunda installation](../../../installation-methods/index.md). A migration from previous versions or Elasticsearch environments is currently not supported.
 :::
 
 ### Settings to connect
@@ -452,3 +452,26 @@ camunda.operate:
     # Index prefix, configured in Zeebe Elasticsearch exporter
     prefix: zeebe-record
 ```
+
+## Backups
+
+You must configure the following on your chosen database:
+
+- [Elasticsearch snapshot repository](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshot-restore.html)
+- [OpenSearch snapshot repository](https://docs.opensearch.org/docs/latest/tuning-your-cluster/availability-and-recovery/snapshots/snapshot-restore/)
+
+Operate is configured with the snapshot repository name to trigger database snapshots. This is important for coherent backups.
+
+:::info
+Learn more about the procedure and the need to trigger it through Camunda components in the [backup guide](/self-managed/operational-guides/backup-restore/backup-and-restore.md).
+:::
+
+Operate must be configured with the repository name:
+
+| Name                                  | Description                      | Default value |
+| ------------------------------------- | -------------------------------- | ------------- |
+| camunda.operate.backup.repositoryName | ES / OS snapshot repository name | -             |
+
+:::warning breaking change
+Configuring Operate and Tasklist with different repository names will potentially create multiple backups in different repositories. Therefore, use the same `repositoryName` for both components.
+:::

@@ -1,21 +1,30 @@
 ---
 id: zeebe-backup-and-restore
-title: "Backup and restore Zeebe data"
-description: "Create a backup of a running Zeebe cluster comprised of a consistent snapshot of all partitions."
+title: "Backup Management API - Zeebe"
+description: "Backup API to create a backup of a running Zeebe cluster comprised of a consistent snapshot of all partitions."
+sidebar_label: "Zeebe"
 keywords: ["backup", "backups"]
 ---
+
+Back up a running Zeebe cluster using the Backup Management API.
+
+## About this API
 
 A backup of a Zeebe cluster is comprised of a consistent snapshot of all partitions. The backup is taken asynchronously in the background while Zeebe is processing. Thus, the backups can be taken with minimal impact on typical processing. The backups can be used to restore a cluster in case of failures that lead to full data loss or data corruption.
 
 Zeebe provides a REST API to create backups, query, and manage existing backups.
 The backup management API is a custom endpoint `backups`, available via [Spring Boot Actuator](https://docs.spring.io/spring-boot/docs/2.7.x/reference/htmlsingle/#actuator.endpoints). This is accessible via the management port of the gateway. The API documentation is also available as [OpenApi specification](https://github.com/camunda/camunda/blob/main/dist/src/main/resources/api/backup-management-api.yaml).
 
-## Configuration
+:::warning
+Usage of this API requires the backup store to be configured for the component.
+
+- [Zeebe configuration](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#zeebebrokerdatabackup)
+  :::
 
 To use the backup feature in Zeebe, you must choose which external storage system you will use.
 Make sure to set the same configuration on all brokers in your cluster.
 
-Zeebe supports [S3](#s3-backup-store), [Google Cloud Storage (GCS)](#gcs-backup-store), and [Azure](#azure-backup-store) for external storage.
+Zeebe supports [S3](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#zeebebrokerdatabackups3), [Google Cloud Storage (GCS)](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#zeebebrokerdatabackupgcs), and [Azure](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#zeebebrokerdatabackupazure) for external storage.
 
 :::caution
 Backups created with one store are not available or restorable from another store.
@@ -220,7 +229,7 @@ The following request can be used to start a backup.
 ### Request
 
 ```
-POST actuator/backups
+POST actuator/backupRuntime
 {
   "backupId": <backupId>
 }
@@ -234,7 +243,7 @@ The `backupId` cannot be reused, even if the backup corresponding to the backup 
   <summary>Example request</summary>
 
 ```shell
-curl --request POST 'http://localhost:9600/actuator/backups' \
+curl --request POST 'http://localhost:9600/actuator/backupRuntime' \
 -H 'Content-Type: application/json' \
 -d '{ "backupId": "100" }'
 ```
@@ -270,14 +279,14 @@ Information about a specific backup can be retrieved using the following request
 ### Request
 
 ```
-GET actuator/backups/{backupId}
+GET actuator/backupRuntime/{backupId}
 ```
 
 <details>
   <summary>Example request</summary>
 
 ```shell
-curl --request GET 'http://localhost:9600/actuator/backups/100'
+curl --request GET 'http://localhost:9600/actuator/backupRuntime/100'
 ```
 
 </details>
@@ -343,14 +352,14 @@ Information about all backups can be retrieved using the following request:
 ### Request
 
 ```
-GET actuator/backups
+GET actuator/backupRuntime
 ```
 
 <details>
   <summary>Example request</summary>
 
 ```shell
-curl --request GET 'http://localhost:9600/actuator/backups'
+curl --request GET 'http://localhost:9600/actuator/backupRuntime'
 ```
 
 </details>
@@ -421,14 +430,14 @@ A backup can be deleted using the following request:
 ### Request
 
 ```
-DELETE actuator/backups/{backupId}
+DELETE actuator/backupRuntime/{backupId}
 ```
 
 <details>
   <summary>Example request</summary>
 
 ```shell
-curl --request DELETE 'http://localhost:9600/actuator/backups/100'
+curl --request DELETE 'http://localhost:9600/actuator/backupRuntime/100'
 ```
 
 </details>
@@ -442,29 +451,3 @@ curl --request DELETE 'http://localhost:9600/actuator/backups/100'
 | 500 Server Error | All other errors. Refer to the returned error message for more details.          |
 | 502 Bad Gateway  | Zeebe has encountered issues while communicating to different brokers.           |
 | 504 Timeout      | Zeebe failed to process the request with in a pre-determined timeout.            |
-
-## Restore
-
-A new Zeebe cluster can be created from a specific backup. Camunda provides a standalone app which must be run on each node where a Zeebe broker will be running. This is a Spring Boot application similar to the broker and can run using the binary provided as part of the distribution. The app can be configured the same way a broker is configured - via environment variables or using the configuration file located in `config/application.yaml`.
-
-To restore a Zeebe cluster, run the following in each node where the broker will be running:
-
-```
-tar -xzf zeebe-distribution-X.Y.Z.tar.gz -C zeebe/
-./bin/restore --backupId=<backupId>
-```
-
-If restore was successful, the app exits with a log message of `Successfully restored broker from backup`.
-
-Restore fails if:
-
-- There is no valid backup with the given backupId.
-- Backup store is not configured correctly.
-- The configured data directory is not empty.
-- Any other unexpected errors.
-
-If the restore fails, you can re-run the application after fixing the root cause.
-
-:::note
-When restoring, provide the same configuration (node id, data directory, cluster size, and replication count) as the broker that will be running in this node. The partition count must be same as in the backup.
-:::

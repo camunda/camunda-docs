@@ -9,7 +9,7 @@ description: "Multi-tenancy allows you to re-use your Camunda installation."
 
 Multi-tenancy is disabled by default.
 
-See the [configuration guide](../operational-guides/configure-multi-tenancy.md) for details on how to enable multi-tenancy.
+See the [configuration guide](/self-managed/installation-methods/helm/configure/configure-multi-tenancy.md) for details on how to enable multi-tenancy.
 
 :::
 

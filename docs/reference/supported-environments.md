@@ -54,14 +54,14 @@ With the right configuration, Camunda 8 Self-Managed can be deployed on any [Cer
 
 The following are tested and supported deployment options for Kubernetes, Docker, and manual installation:
 
-- [Stock Kubernetes](/self-managed/setup/install.md)
-- [Cloud service providers](/self-managed/setup/install.md) [recommended]
+- [Stock Kubernetes](/self-managed/installation-methods/helm/install.md)
+- [Cloud service providers](/self-managed/installation-methods/helm/install.md) [recommended]
   - [Amazon EKS](/self-managed/setup/deploy/amazon/amazon-eks/amazon-eks.md)
   - [Microsoft AKS](/self-managed/setup/deploy/azure/microsoft-aks/microsoft-aks.md)
   - [Google GKE](/self-managed/setup/deploy/gcp/google-gke.md)
 - [Red Hat OpenShift](/self-managed/setup/deploy/openshift/redhat-openshift.md)
-- [Docker](/self-managed/setup/deploy/other/docker.md) (`linux/amd64`)
-- [Manual](/self-managed/setup/deploy/local/manual.md)
+- [Docker](/self-managed/installation-methods/docker/docker.md) (`linux/amd64`)
+- [Manual](/self-managed/installation-methods/manual/install.md)
 
 :::note Helm chart compatibility
 Ensure the Camunda component versions are compatible with the Helm chart version as defined in the [matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
@@ -91,20 +91,20 @@ Camunda Helm chart version `13.x.x` works with Camunda version `8.8.x`. Check th
 
 Requirements for the components can be seen below:
 
-| Component                                                  | Java version | Other requirements                                                                                                                                                                                                   |
-| ---------------------------------------------------------- | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Component                                                  | Java version | Other requirements                                                                                                                                                                                                                         |
+| ---------------------------------------------------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Orchestration Cluster (Zeebe, Operate, Tasklist, Identity) | OpenJDK 21+  | Elasticsearch 8.16+<br/>Amazon OpenSearch 2.9+ (requires use of [OpenSearch exporter](../self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md))                                                            |
-| Optimize                                                   | OpenJDK 21+  | Elasticsearch 8.16+<br/>Amazon OpenSearch 2.9+                                                                                                                                                                       |
-| Connectors                                                 | OpenJDK 21+  |                                                                                                                                                                                                                      |
+| Optimize                                                   | OpenJDK 21+  | Elasticsearch 8.16+<br/>Amazon OpenSearch 2.9+                                                                                                                                                                                             |
+| Connectors                                                 | OpenJDK 21+  |                                                                                                                                                                                                                                            |
 | Management Identity                                        | OpenJDK 17+  | Keycloak 25.x, 26.x<br/>PostgreSQL 14.x, 15.x or Amazon Aurora PostgreSQL 13.x, 14.x, 15.x (required for [certain features](/self-managed/components/management-identity/miscellaneous/configuration-variables.md#database-configuration)) |
-| Web Modeler                                                | -            | PostgreSQL 13.x, 14.x, 15.x, 16.x, 17.x or Amazon Aurora PostgreSQL 13.x, 14.x, 15.x, 16.x                                                                                                                           |
-| Self-Managed Console                                       | -            | -                                                                                                                                                                                                                    |
+| Web Modeler                                                | -            | PostgreSQL 13.x, 14.x, 15.x, 16.x, 17.x or Amazon Aurora PostgreSQL 13.x, 14.x, 15.x, 16.x                                                                                                                                                 |
+| Self-Managed Console                                       | -            | -                                                                                                                                                                                                                                          |
 
 When running Elasticsearch, you must have the [appropriate Elasticsearch privileges](/self-managed/concepts/elasticsearch-privileges.md).
 
 When running Amazon OpenSearch 2.11 or higher, we do not support [OR1 instances](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/or1.html)
 due to the [limitation](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/or1.html#or1-considerations)
-for the index refresh interval. More information on configuring Amazon OpenSearch can be found [here](/self-managed/setup/guides/using-existing-opensearch.md).
+for the index refresh interval. More information on configuring Amazon OpenSearch can be found [here](/self-managed/installation-methods/helm/configure/database/using-existing-opensearch.md).
 
 :::note Elasticsearch support
 Camunda 8 works with the [default distribution](https://www.elastic.co/downloads/elasticsearch) of Elasticsearch, which is available under the [Free or Gold+ Elastic license](https://www.elastic.co/pricing/faq/licensing#summary).

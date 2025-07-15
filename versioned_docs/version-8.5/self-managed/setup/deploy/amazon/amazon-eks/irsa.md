@@ -180,7 +180,7 @@ GRANT ALL privileges on database "some-db" to "<DB-USERNAME>";
 ### Keycloak
 
 :::caution
-IAM Roles for Service Accounts can only be implemented with Keycloak 21 onwards. This may require you to adjust the version used in the Camunda Helm Chart.
+IAM Roles for Service Accounts can only be implemented with Keycloak 21 onwards. This may require you to adjust the version used in the Camunda Helm chart.
 :::
 
 From Keycloak versions 21+, the default JDBC driver can be overwritten, allowing use of a custom wrapper like the [aws-advanced-jdbc-wrapper](https://github.com/awslabs/aws-advanced-jdbc-wrapper) to utilize the features of IRSA. This is a wrapper around the default JDBC driver, but takes care of signing the requests.
@@ -621,3 +621,46 @@ eks_managed_node_group_defaults {
 ```
 
 Overall, this will disable the role assumption of the node for the Kubernetes pod. Depending on the resulting error within Operate, Zeebe, and Web-Modeler, you'll get a clearer error, which is helpful to debug the error more easily.
+
+## Backup-related
+
+When implementing [backup and restore procedures](/self-managed/operational-guides/backup-restore/backup-and-restore.md) for **Elasticsearch** in your **Camunda** deployment, you can leverage **AWS IAM Roles for Service Accounts (IRSA)** to securely access **S3 buckets**.
+
+### Bitnami Elasticsearch chart configuration
+
+Camunda’s Helm chart uses the [Bitnami Elasticsearch chart](https://artifacthub.io/packages/helm/bitnami/elasticsearch) as a sub-chart. If you are using this setup, IRSA can be integrated for backup operations.
+
+Following the [AWS IRSA documentation](https://docs.aws.amazon.com/eks/latest/userguide/associate-service-account-role.html), create an IAM role mapped to a Kubernetes service account with the required permissions for S3, as detailed in the [Elasticsearch documentation](https://www.elastic.co/docs/deploy-manage/tools/snapshot-and-restore/s3-repository#repository-s3-permissions).
+
+Additionally, ensure Elasticsearch is configured to recognize the IRSA token. The [Elasticsearch documentation](https://www.elastic.co/docs/deploy-manage/tools/snapshot-and-restore/s3-repository#iam-kubernetes-service-accounts) outlines this requirement for official Elasticsearch images.
+
+Once the IRSA setup is complete, configure the Bitnami Elasticsearch chart in your Camunda Helm chart by adjusting your `values.yaml` as follows:
+
+```yaml
+elasticsearch:
+  master:
+    serviceAccount:
+      create: true
+      annotations:
+        eks.amazonaws.com/role-arn: arn:aws:iam::<account-id>:role/<iam-role-arn>
+  initScripts:
+    irsa_access_init_script.sh: |
+      #!/bin/sh
+      mkdir -p "/opt/bitnami/elasticsearch/config/repository-s3"
+      ln -s $AWS_WEB_IDENTITY_TOKEN_FILE "/opt/bitnami/elasticsearch/config/repository-s3/aws-web-identity-token-file"
+  extraVolumeMounts:
+    - name: empty-dir
+      mountPath: /bitnami/elasticsearch
+      subPath: app-volume-dir
+  volumes:
+    - name: empty-dir
+      emptyDir: {}
+```
+
+The values `<account-id>` and `<iam-role-arn>` are based on the [AWS IRSA documentation](https://docs.aws.amazon.com/eks/latest/userguide/associate-service-account-role.html).
+
+The init script remains consistent across environments, as the Elasticsearch S3 plugin expects the credentials at the fixed path `repository-s3`. This path is **not configurable**.
+
+:::info
+`$AWS_WEB_IDENTITY_TOKEN_FILE` is automatically injected into the pod by EKS when the pod is using a service account annotated with a valid `eks.amazonaws.com/role-arn`.
+:::

@@ -67,7 +67,7 @@ Additionally, Web Modeler and Console require the following:
 
 - [Identity](/self-managed/components/management-identity/what-is-identity.md): A service for managing user authentication and authorization.
 
-Unlike the orchestration cluster, Web Modeler and Console run a separate and dedicated Identity deployment. For production environments, using an external [identity provider](/self-managed/setup/guides/connect-to-an-oidc-provider.md) is recommended.
+Unlike the orchestration cluster, Web Modeler and Console run a separate and dedicated Identity deployment. For production environments, using an external [identity provider](/self-managed/installation-methods/helm/configure/connect-to-an-oidc-provider.md) is recommended.
 
 ### Databases
 
@@ -122,7 +122,7 @@ Containers, such as Docker, offer a middle ground between the manual JAR and Kub
 - Each container runs in its own isolated environment, which helps prevent conflicts between applications and improves security.
 - Containers can be easily scaled up or down to handle varying workloads, providing flexibility in resource management.
 
-For more information and guides, see the reference for [containers](/self-managed/setup/deploy/other/docker.md).
+For more information and guides, see the reference for [containers](/self-managed/installation-methods/docker/docker.md).
 
 ### Manual JAR (bare metal/virtual machines)
 
@@ -133,8 +133,8 @@ For organizations that prefer traditional infrastructure, reference architecture
 - Applicable for high availability but requires more detailed planning.
 - Best for teams with expertise in managing physical servers or virtual machines.
 
-For more information and guides, see the reference for [manual setups](/self-managed/reference-architecture/manual.md).
+For more information and guides, see the reference for [manual setups](/self-managed/installation-methods/index.md).
 
 ### Local development
 
-While the above options are suitable for trying out Camunda 8 locally, [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md) provides a simplified, developer-focused experience.
+While the above options are suitable for trying out Camunda 8 locally, [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) provides a simplified, developer-focused experience.

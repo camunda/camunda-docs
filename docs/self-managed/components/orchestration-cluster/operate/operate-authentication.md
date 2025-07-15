@@ -152,7 +152,7 @@ export SPRING_PROFILES_ACTIVE=identity-auth
 Identity requires the following parameters:
 
 :::danger
-These configuration variables are deprecated. To connect using the updated values, see [connecting to an OpenID Connect provider](/self-managed/setup/guides/connect-to-an-oidc-provider.md).
+These configuration variables are deprecated. To connect using the updated values, see [connecting to an OpenID Connect provider](/self-managed/installation-methods/helm/configure/connect-to-an-oidc-provider.md).
 :::
 
 | Property name                                       | Description                                                                                                                                   | Example value                                                                     |
