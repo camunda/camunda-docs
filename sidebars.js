@@ -1162,12 +1162,12 @@ module.exports = {
                 id: "self-managed/installation-methods/helm/upgrade/upgrade",
               },
               items: [
-                "self-managed/installation-methods/helm/upgrade/upgrade-hc-820-830",
-                "self-managed/installation-methods/helm/upgrade/upgrade-hc-830-840",
-                "self-managed/installation-methods/helm/upgrade/upgrade-hc-840-850",
-                "self-managed/installation-methods/helm/upgrade/upgrade-hc-850-860",
+                "self-managed/installation-methods/helm/upgrade/upgrade-hc-870-880",
                 "self-managed/installation-methods/helm/upgrade/upgrade-hc-860-870",
-                "self-managed/installation-methods/helm/upgrade/upgrade",
+                "self-managed/installation-methods/helm/upgrade/upgrade-hc-850-860",
+                "self-managed/installation-methods/helm/upgrade/upgrade-hc-840-850",
+                "self-managed/installation-methods/helm/upgrade/upgrade-hc-830-840",
+                "self-managed/installation-methods/helm/upgrade/upgrade-hc-820-830",
               ],
             },
             {
