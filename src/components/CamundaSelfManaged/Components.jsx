@@ -24,14 +24,14 @@ const Components = () => {
       description:
         "Central components that can work with multiple Camunda orchestration clusters",
       // The link should point to the management cluster documentation which is not there yet.
-      link: "/self-managed/components/modeler/web-modeler/",
+      link: "/self-managed/components/modeler/web-modeler/overview",
     },
     {
       title: "Camunda Orchestration Cluster",
       icon: ClusterOrchestrationIcon,
       description:
         "Workers components cluster for workflow execution that could be deployed multiple times",
-      link: "/self-managed/components/orchestration-cluster/",
+      link: "/self-managed/components/orchestration-cluster/overview",
     },
   ];
 

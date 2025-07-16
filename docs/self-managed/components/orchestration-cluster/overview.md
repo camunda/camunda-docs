@@ -1,7 +1,7 @@
 ---
-id: sm-orchestration-cluster
+id: overview
 title: "Orchestration cluster"
-description: ""
+description: "How to install and configure an Orchestration cluster"
 ---
 
 Install and configure Orchestration cluster components in your self-managed environment.

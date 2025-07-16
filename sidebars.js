@@ -1324,6 +1324,7 @@ module.exports = {
           Modeler: [
             {
               "Web Modeler": [
+                "self-managed/components/modeler/web-modeler/overview",
                 {
                   Configuration: [
                     "self-managed/components/modeler/web-modeler/configuration/configuration",
@@ -1354,7 +1355,7 @@ module.exports = {
           label: "Orchestration cluster",
           link: {
             type: "doc",
-            id: "self-managed/components/orchestration-cluster/sm-orchestration-cluster",
+            id: "self-managed/components/orchestration-cluster/overview",
           },
           items: [
             {
