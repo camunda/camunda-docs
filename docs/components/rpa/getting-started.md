@@ -48,7 +48,7 @@ Once you are happy with your script and have tested it locally, you can start au
 
 1. **Deploy the RPA file**:
 
-   1. If you haven't already, [set up client connection credentials](/guides/setup-client-connection-credentials.md) for your Modeler.
+   1. If you haven't already, [set up client connection credentials](/components/console/manage-clusters/setup-client-connection-credentials.md) for your Modeler.
    2. Deploy your RPA script file by clicking on the rocket (🚀) icon in Modeler.
    3. Note the ID of your RPA script. You will need this in the next step.
 

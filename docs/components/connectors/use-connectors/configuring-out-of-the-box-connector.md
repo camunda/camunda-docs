@@ -5,30 +5,27 @@ description: "Ready to use out of the box, connectors help automate complex busi
 keywords: [connector, modeling, connectors, low-code, no-code]
 ---
 
-<span class="badge badge--beginner">Beginner</span>
-<span class="badge badge--medium">Time estimate: 20 minutes</span>
-
 The launch of [Camunda 8](/components/components-overview.md) also introduced an integration framework with a key goal: integrate faster to reduce the time it takes to automate and orchestrate business processes across systems.
 
 :::note
 New to connectors? Review our [introduction to connectors](/components/connectors/introduction.md) to get familiar with their capabilities.
 :::
 
-[Connectors](../components/connectors/introduction.md) achieve this goal. Ready to use out of the box, connectors help automate complex [business processes](../components/concepts/processes.md) by inserting them into [BPMN diagrams](./automating-a-process-using-bpmn.md) within [Web Modeler](../components/modeler/about-modeler.md), and configuring them via the properties panel on the right side of the screen.
+[Connectors](/components/connectors/introduction.md) achieve this goal. Ready to use out of the box, connectors help automate complex [business processes](/components/concepts/processes.md) by inserting them into [BPMN diagrams](/components/modeler/bpmn/automating-a-process-using-bpmn.md) within [Web Modeler](/components/modeler/about-modeler.md), and configuring them via the properties panel on the right side of the screen.
 
 You can also orchestrate APIs, for example by working with a [REST connector](/guides/getting-started-orchestrate-apis.md). Learn more about [types of connectors](/components/connectors/connector-types.md).
 
-Connectors technically consist of two parts: the business logic is implemented as a [job worker](../components/concepts/job-workers.md), and the user interface during modeling is provided using an element template. In this guide, we'll walk step-by-step through the implementation of a sample connector.
+Connectors technically consist of two parts: the business logic is implemented as a [job worker](/components/concepts/job-workers.md), and the user interface during modeling is provided using an element template. In this guide, we'll walk step-by-step through the implementation of a sample connector.
 
 ## Set up
 
-We'll implement our connector with [Modeler](../components/modeler/about-modeler.md). To get started, ensure you’ve [created a Camunda 8 account](/guides/create-account.md).
+We'll implement our connector with [Modeler](/components/modeler/about-modeler.md). To get started, ensure you’ve [created a Camunda 8 account](/components/console/manage-plan/create-account.md).
 
 You'll also need to [create a SendGrid account](https://signup.sendgrid.com/) if you don't have one already, as we'll use SendGrid in our example connector. Once you've created your account, you will immediately be prompted to create a [sender](https://docs.sendgrid.com/ui/sending-email/senders).
 
 ### Create a cluster
 
-import CreateCluster from '../components/react-components/create-cluster.md'
+import CreateCluster from '../../../components/react-components/create-cluster.md'
 
 <CreateCluster/>
 
@@ -50,7 +47,7 @@ In this example, we've designed the following BPMN diagram:
 ![bpmn example diagram](./img/bpmn-expense-sample.png)
 
 :::note
-To learn more about building your own BPMN diagram from scratch, visit our guide on [automating a process using BPMN](./automating-a-process-using-bpmn.md).
+To learn more about building your own BPMN diagram from scratch, visit our guide on [automating a process using BPMN](/components/modeler/bpmn/automating-a-process-using-bpmn.md).
 :::
 
 ## Add a connector
@@ -58,7 +55,7 @@ To learn more about building your own BPMN diagram from scratch, visit our guide
 Here, a receipt is initially uploaded for review. The first task we need to complete is notifying the manager of the uploaded receipt. If we want to leverage our email service to notify the manager, we can utilize a productivity applications connector to replace this task.
 
 :::note
-Camunda offers a variety of available connectors. For example, utilize cloud connectors to communicate with cloud-native applications and conform to REST, GraphQL, or SOAP protocols. Or, employ service connectors to integrate with technology enablers like RPA, AI or IOT services. Learn more about our [available connectors](../components/connectors/out-of-the-box-connectors/available-connectors-overview.md) to find out which may best suit your business needs.
+Camunda offers a variety of available connectors. For example, utilize cloud connectors to communicate with cloud-native applications and conform to REST, GraphQL, or SOAP protocols. Or, employ service connectors to integrate with technology enablers like RPA, AI or IOT services. Learn more about our [available connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) to find out which may best suit your business needs.
 :::
 
 To add our productivity applications connector, take the following steps:
@@ -87,27 +84,26 @@ To execute your completed process diagram, click **Deploy**.
 
 You can now start a new process instance to initiate your process diagram. Click **Run**.
 
-You can now monitor your instances in [Operate](components/operate/operate-introduction.md).
+You can now monitor your instances in [Operate](/components/operate/operate-introduction.md).
 
 :::note
-Variables are part of a process instance and represent the data of the instance. To learn more about these values, variable scope, and input/output mappings, visit our documentation on [variables](../components/concepts/variables.md).
+Variables are part of a process instance and represent the data of the instance. To learn more about these values, variable scope, and input/output mappings, visit our documentation on [variables](/components/concepts/variables.md).
 :::
 
 ## Observe your running process
 
-After the [user task](./getting-started-orchestrate-human-tasks.md) **Upload receipt** is completed in [Tasklist](../components/tasklist/introduction-to-tasklist.md), an email is automatically sent to the address as specified in the connectors properties panel we configured earlier.
+After the [user task](/guides/getting-started-orchestrate-human-tasks.md) **Upload receipt** is completed in [Tasklist](/components/tasklist/introduction-to-tasklist.md), an email is automatically sent to the address as specified in the connectors properties panel we configured earlier.
 
 ![email via SendGrid](./img/sendgrid-email.png)
 
-In [Operate](../components/operate/operate-introduction.md), you will now see the process move forward to **Review receipt**.
+In [Operate](/components/operate/operate-introduction.md), you will now see the process move forward to **Review receipt**.
 
 ![operate example](./img/operate-example.png)
 
 ## Additional resources and next steps
 
 - [Use connectors in your BPMN process](/components/connectors/use-connectors/index.md)
-- [Available connectors](../components/connectors/out-of-the-box-connectors/available-connectors-overview.md)
+- [Available connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md)
 - [Connectors & Integration Framework](https://camunda.com/platform/modeler/connectors/)
 - [Camunda BPMN Tutorial](https://camunda.com/bpmn/)
-- [Automate processes using BPMN](./automating-a-process-using-bpmn.md)
 - [Camunda Academy: How To Configure the SendGrid Connector](https://academy.camunda.com/c8-h2-sendgrid-connector/)
