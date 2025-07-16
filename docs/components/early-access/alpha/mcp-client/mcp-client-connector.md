@@ -72,7 +72,7 @@ this for your specific use case varies on the connector runtime you are using.
 
 ### Camunda 8 Run
 
-1. Download and extract the latest [Camunda 8 Run](../../../../self-managed/setup/deploy/local/c8run.md) release (at
+1. Download and extract the latest [Camunda 8 Run](../../../../self-managed/quickstart/developer-quickstart/c8run.md) release (at
    least version 8.8.0-alpha6).
 2. Before starting Camunda 8 Run, create a config file (for example `mcp-clients.yml`) in the same directory as
    `connectors-application.properties` and add the MCP Client configuration as shown above. Adapt the configuration as
@@ -81,7 +81,7 @@ this for your specific use case varies on the connector runtime you are using.
    ```properties
    spring.config.import=file:./mcp-client.yml
    ```
-4. [Start Camunda 8 Run](../../../../self-managed/setup/deploy/local/c8run.md#install-and-start-camunda-8-run)
+4. [Start Camunda 8 Run](../../../../self-managed/quickstart/developer-quickstart/c8run.md#install-and-start-camunda-8-run)
 5. While startup, you can follow `logs/connectors.log`. If configured correctly, you should see log messages for the
    initialization of the configured MCP clients and the registration of the MCP Client connector:
    ```log
