@@ -67,7 +67,7 @@ Tomcat also enforces a separate limit on the total number of request parameters 
 
 For the latest defaults and detailed behavior, refer to the [Tomcat documentation](https://tomcat.apache.org/), as these values may change between versions.
 
-[camunda-api-explorer]: ./specifications/camunda-8-rest-api.info.mdx
+[camunda-api-explorer]: ./specifications/orchestration-cluster-rest-api.info.mdx
 
 ## Naming conventions
 
