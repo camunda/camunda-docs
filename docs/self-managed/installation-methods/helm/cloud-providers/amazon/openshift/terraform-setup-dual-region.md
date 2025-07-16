@@ -9,7 +9,7 @@ description: "Deploy Red Hat OpenShift in two regions on AWS using a Terraform m
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-This guide provides a detailed tutorial for deploying two [Red Hat OpenShift on AWS (ROSA) cluster with Hosted Control Plane (HCP)](https://docs.redhat.com/en/documentation/red_hat_openshift_service_on_aws/4/html-single/architecture/index#architecture-overview) in two different [regions](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/). It is specifically tailored for deploying Camunda 8 using Terraform, a widely-used Infrastructure as Code (IaC) tool, details of the High Level design are available in the generic [Red Hat OpenShift dual-region for Camunda 8 guide](/self-managed/setup/deploy/openshift/dual-region.md).
+This guide provides a detailed tutorial for deploying two [Red Hat OpenShift on AWS (ROSA) cluster with Hosted Control Plane (HCP)](https://docs.redhat.com/en/documentation/red_hat_openshift_service_on_aws/4/html-single/architecture/index#architecture-overview) in two different [regions](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/). It is specifically tailored for deploying Camunda 8 using Terraform, a widely-used Infrastructure as Code (IaC) tool, details of the High Level design are available in the generic [Red Hat OpenShift dual-region for Camunda 8 guide](/self-managed/installation-methods/helm/cloud-providers/openshift/dual-region.md).
 
 We recommend this guide for building a robust and sustainable infrastructure that needs to survive a region lost.
 
@@ -636,7 +636,7 @@ In the remainder of the guide, different namespaces will be created following th
 
 ## 3. Next installation steps
 
-The next steps are generic and referenced in the **[Generic OpenShift Dual-Region for Camunda 8 guide](/self-managed/setup/deploy/openshift/dual-region.md#setup-advanced-cluster-management-and-submariner)**.
+The next steps are generic and referenced in the **[Generic OpenShift Dual-Region for Camunda 8 guide](/self-managed/installation-methods/helm/cloud-providers/openshift/dual-region.md#setup-advanced-cluster-management-and-submariner)**.
 
 It includes:
 

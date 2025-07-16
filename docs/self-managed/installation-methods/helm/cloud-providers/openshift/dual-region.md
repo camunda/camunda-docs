@@ -61,7 +61,7 @@ In addition to the general prerequisites outlined above, the following CLI tools
 ### OpenShift clusters
 
 The architecture of your OpenShift clusters may vary depending on your specific configuration.
-This guide assumes a generic deployment on OpenShift. If you are interested in a tested topology, follow the [ROSA Dual-Region Guide](/self-managed/setup/deploy/amazon/openshift/terraform-setup-dual-region.md).
+This guide assumes a generic deployment on OpenShift. If you are interested in a tested topology, follow the [ROSA Dual-Region Guide](/self-managed/installation-methods/helm/cloud-providers/amazon/openshift/terraform-setup-dual-region.md).
 
 #### Cluster requirements
 
@@ -345,7 +345,7 @@ Review and adjust the following environment script to match your specific config
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/dual-region/procedure/chart-env.sh
 ```
 
-_If you are unsure about the values of the backup bucket, please refer to the [S3 backup bucket module setup](/self-managed/setup/deploy/amazon/openshift/terraform-setup-dual-region.md#s3-backup-bucket-module-setup) as a reference for implementation._
+_If you are unsure about the values of the backup bucket, please refer to the [S3 backup bucket module setup](/self-managed/installation-methods/helm/cloud-providers/amazon/openshift/terraform-setup-dual-region.md#s3-backup-bucket-module-setup) as a reference for implementation._
 
 Save the file as `chart-env.sh`, replace the placeholders with your values, and then source the file:
 
