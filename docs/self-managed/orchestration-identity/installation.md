@@ -89,10 +89,10 @@ By default, a user is not assigned to any roles and therefore has no permissions
 
 The Orchestration cluster provides the following default roles:
 
-- `admin`: Full permissions across all components  
-- `readonly-admin`: Read-only access to all data  
-- `connectors`: Permissions required by the Connectors component  
-- `rpa`: Permissions required by the RPA component  
+- `admin`: Full permissions across all components
+- `readonly-admin`: Read-only access to all data
+- `connectors`: Permissions required by the Connectors component
+- `rpa`: Permissions required by the RPA component
 
 To assign users, clients, groups, or mapping rules to roles, add the appropriate properties to your `application.yaml` or set them as environment variables.
 
