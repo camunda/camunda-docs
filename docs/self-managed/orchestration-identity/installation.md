@@ -35,7 +35,7 @@ In Helm installations, API authentication and authorization are enabled by defau
 
 If users are managed within the Orchestration cluster (i.e., without an external Identity Provider), you can create an initial user in two ways:
 
-- Through the web application UI  
+- Through the web application UI
 - Through configuration
 
 #### Option 1: Create an initial admin user in the UI
