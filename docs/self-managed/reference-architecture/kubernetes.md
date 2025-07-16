@@ -24,20 +24,20 @@ By leveraging this ecosystem, organizations can extend Kubernetes functionality 
 
 This section includes deployment reference architectures:
 
-- [Amazon EKS single-region](/self-managed/setup/deploy/amazon/amazon-eks/terraform-setup.md): a standard production setup.
-- [Amazon EKS dual-region](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md): an advanced use case utilizing two regions.
+- [Amazon EKS single-region](/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md): a standard production setup.
+- [Amazon EKS dual-region](/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/dual-region.md): an advanced use case utilizing two regions.
 
 Red Hat OpenShift on AWS (ROSA)
 
-- [ROSA single-region](/self-managed/setup/deploy/amazon/openshift/terraform-setup.md): a standard production setup.
-- [ROSA dual-region](/self-managed/setup/deploy/amazon/openshift/terraform-setup-dual-region.md): an advanced use case utilizing two regions.
+- [ROSA single-region](/self-managed/installation-methods/helm/cloud-providers/amazon/openshift/terraform-setup.md): a standard production setup.
+- [ROSA dual-region](/self-managed/installation-methods/helm/cloud-providers/amazon/openshift/terraform-setup-dual-region.md): an advanced use case utilizing two regions.
 
 For general deployment pitfalls, visit the [deployment troubleshooting guide](/self-managed/operational-guides/troubleshooting/troubleshooting.md).
 
 ## Architecture
 
-_Infrastructure diagram for a single region setup (click on the image to open the PDF version):_
-[![Architecture Overview](./img/k8s-single.jpg)](./img/k8s-single.pdf)
+<!--_Infrastructure diagram for a single region setup (click on the image to open the PDF version):_
+[![Architecture Overview](./img/k8s-single.jpg)](./img/k8s-single.pdf)-->
 
 This Kubernetes architecture diagram illustrates a high-availability setup spanning multiple availability zones (A, B, and C) with key networking components to ensure scalability, security, and reliability. Whenever possible, we recommend leveraging multiple availability zones to enhance fault tolerance and eliminate single points of failure.
 
@@ -189,7 +189,7 @@ annotations:
 
 The Helm chart required for deploying on Kubernetes is [publicly available](https://helm.camunda.io/).
 
-Camunda maintains the required Docker images consumed by the Helm chart. These images are available on [DockerHub](https://hub.docker.com/u/camunda). The `Dockerfile` and and its default configuration are available as part of the [Camunda repository](https://github.com/camunda/camunda/blob/stable/8.7/Dockerfile).
+Camunda maintains the required Docker images consumed by the Helm chart. These images are available on [DockerHub](https://hub.docker.com/u/camunda). The `Dockerfile` and its default configuration are available as part of the [Camunda repository](https://github.com/camunda/camunda/blob/stable/8.7/Dockerfile).
 
 ### Database
 

@@ -25,27 +25,27 @@ const Infrastructure = () => {
       icon: AWSIcon,
       description:
         "Deploy Camunda on AWS with EKS, RDS, and other AWS services",
-      link: "/self-managed/setup/deploy/amazon/amazon-eks/",
+      link: "/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/",
     },
     {
       title: "Microsoft",
       icon: AzureIcon,
       description:
         "Set up Camunda on Azure with AKS and Azure Database services",
-      link: "/self-managed/setup/deploy/azure/microsoft-aks/",
+      link: "/self-managed/installation-methods/helm/cloud-providers/azure/microsoft-aks/",
     },
     {
       title: "Google",
       icon: GCPIcon,
       description:
         "Deploy on Google Cloud Platform with GKE and other GCP services",
-      link: "/self-managed/setup/deploy/gcp/google-gke/",
+      link: "/self-managed/installation-methods/helm/cloud-providers/gcp/google-gke/",
     },
     {
       title: "Red Hat OpenShift",
       icon: OpenShiftIcon,
       description: "Run Camunda on OpenShift container platform",
-      link: "/self-managed/setup/deploy/openshift/redhat-openshift/",
+      link: "/self-managed/installation-methods/helm/cloud-providers/openshift/redhat-openshift/",
     },
   ];
 
