@@ -525,6 +525,22 @@ When `zeebe:calledDecision` is used, `zeebe:taskDefinition` cannot be used on th
 
 :::
 
+#### `zeebe:script`
+
+| **Binding `type`**          | `zeebe:script`                                                                         |
+| --------------------------- | -------------------------------------------------------------------------------------- |
+| **Valid property `type`'s** | `String`<br />`Text`<br />`Hidden`<br />`Dropdown`                                     |
+| **Binding parameters**      | `property`: The name of the property. `expression` and `resultVariable` are supported. |
+| **Mapping result**          | `<zeebe:script [property]="[userInput]" />`                                            |
+
+The `zeebe:script` binding allows you to configure the [FEEL expression](../../../bpmn/script-tasks/#defining-a-task) used by a script task.
+
+:::note
+
+When `zeebe:script` is used, `zeebe:taskDefinition` cannot be used on the same element.
+
+:::
+
 ### Optional bindings
 
 We support optional bindings that do not persist empty values in the underlying BPMN 2.0 XML.
