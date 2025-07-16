@@ -1,37 +1,28 @@
 ---
 id: mcp-client-connector
-title: MCP Client connector
-sidebar_label: MCP Client connector
+title: MCP client connector
+sidebar_label: MCP client connector
 ---
 
 :::note
-This connector is not directly available on Camunda 8 SaaS. Instead, you can connect a custom connector runtime
-configured to run the MCP Client connector to your Camunda 8 SaaS instance.
+This connector is not directly available on Camunda 8 SaaS. Instead, you can connect a custom connector runtime configured to run the MCP client connector to your Camunda 8 SaaS instance.
 :::
 
-The MCP Client connector integration allows configuring MCP clients to be started as part of the connector runtime. As
-the runtime takes care of managing the MCP client connections (opposed to the Job worker in the [MCP Remote Client
-connector](./mcp-remote-client-connector.md#limitations)), this approach allows using both STDIO and remote MCP servers
-without the overhead of opening and closing connections for every MCP client interaction.
+The MCP client connector integration allows configuring MCP clients to be started as part of the connector runtime. As the runtime manages MCP client connections (unlike the job worker in the [MCP remote client connector](./mcp-remote-client-connector.md#limitations)), this approach enables using both STDIO and remote MCP servers without the overhead of repeatedly opening and closing connections for each interaction.
 
-## Runtime Configuration
+## Runtime configuration
 
 :::note
-Configuration properties can be defined as environment variables
-using [Spring Boot conventions](https://docs.spring.io/spring-boot/reference/features/external-config.html#features.external-config.typesafe-configuration-properties.relaxed-binding.environment-variables).
-To define an environment variable, convert the configuration property to uppercase, remove any dashes `-`, and replace
-any delimiters `.` with underscore `_`.
+Configuration properties can be defined as environment variables using [Spring Boot conventions](https://docs.spring.io/spring-boot/reference/features/external-config.html#features.external-config.typesafe-configuration-properties.relaxed-binding.environment-variables).
 
-For example, the property `camunda.connector.agenticai.mcp.remote-client.client.cache.expire-after` is represented by
-the environment variable `CAMUNDA_CONNECTOR_AGENTICAI_MCP_REMOTECLIENT_CLIENT_CACHE_EXPIREAFTER`.
+To define an environment variable, convert the configuration property to uppercase, remove any dashes `-`, and replace any delimiters `.` with underscores `_`.
+
+For example, the property `camunda.connector.agenticai.mcp.remote-client.client.cache.expire-after` is represented by the environment variable `CAMUNDA_CONNECTOR_AGENTICAI_MCP_REMOTECLIENT_CLIENT_CACHE_EXPIREAFTER`.
 :::
 
-To use the MCP Client connector, it needs to be enabled on the connector runtime. Any clients that should be available
-to the MCP Client connector need to be configured as part of the runtime configuration.
+To use the MCP client connector, it must be enabled in the connector runtime. Any clients that should be available to the connector must also be defined in the runtime configuration.
 
-STDIO servers can use any programming language/execution runtime available to the machine running the connector runtime.
-The example below starts MCP servers using both Node.js and Docker (and therefore requires a Node.js and Docker
-environment being available).
+STDIO servers can use any programming language or execution runtime available on the machine running the connector runtime. The example below starts MCP servers using both Node.js and Docker, and therefore requires a Node.js and Docker environment to be available.
 
 ```yaml
 camunda:
@@ -81,21 +72,19 @@ this for your specific use case varies on the connector runtime you are using.
    ```properties
    spring.config.import=file:./mcp-client.yml
    ```
-4. [Start Camunda 8 Run](../../../../self-managed/quickstart/developer-quickstart/c8run.md#install-and-start-camunda-8-run)
-5. While startup, you can follow `logs/connectors.log`. If configured correctly, you should see log messages for the
-   initialization of the configured MCP clients and the registration of the MCP Client connector:
+4. [Start Camunda 8 Run](../../../../self-managed/quickstart/developer-quickstart/c8run.md#install-and-start-camunda-8-run).
+5. While starting up, you can follow `logs/connectors.log`. If configured correctly, you should see log messages for the
+   initialization of the configured MCP clients and the registration of the MCP client connector:
    ```log
    [...] Creating MCP client with ID 'filesystem'
    [...] Creating MCP client with ID 'time'
    [...] Starting job worker: JobWorkerValue{type='io.camunda.agenticai:mcpclient:xxx', name='MCP Client', ...}
    ```
 
-### Custom project using the Spring Boot Starter Runtime
+### Custom project using the Spring Boot starter runtime
 
-1. Create a new Spring Boot project
-2. Add
-   the [Camunda Connector Spring Boot Starter](../../../connectors/custom-built-connectors/connector-sdk.md#spring-boot-starter-runtime)
-   and the agentic AI dependencies to your `pom.xml`:
+1. Create a new Spring Boot project.
+2. Add the [Camunda Connector Spring Boot starter](../../../connectors/custom-built-connectors/connector-sdk.md#spring-boot-starter-runtime) and the Agentic AI dependencies to your `pom.xml`:
 
    ```xml
    <project>
@@ -126,11 +115,9 @@ this for your specific use case varies on the connector runtime you are using.
    </project>
    ```
 
-3. Configure the SDK to connect to your cluster according
-   to [the Camunda SDK documentation](../../../../apis-tools/spring-zeebe-sdk/getting-started.md#configuring-the-camunda-8-connection)
-4. In your application configuration file (e.g. `application.yml`), add the MCP Client configuration as shown above.
-5. If you want to only run the MCP Client connector (for example because you are connecting the runtime to SaaS),
-   disable the other agentic AI connectors provided by the `connector-agentic-ai` dependency:
+3. Configure the SDK to connect to your cluster, according to [the Camunda SDK documentation](../../../../apis-tools/spring-zeebe-sdk/getting-started.md#configuring-the-camunda-8-connection).
+4. In your application configuration file (e.g., `application.yml`), add the MCP client configuration as shown above.
+5. If you only want to run the MCP client connector (for example, because you're connecting the runtime to SaaS), disable the other Agentic AI connectors provided by the `connector-agentic-ai` dependency:
 
    ```yaml
    camunda:
@@ -147,15 +134,8 @@ this for your specific use case varies on the connector runtime you are using.
 
 ## Modeling
 
-1. Configure an AI agent tools feedback loop as described in
-   the [example integration](../../../connectors/out-of-the-box-connectors/agentic-ai-aiagent-example.md). Do not
-   configure any tools within the ad-hoc sub-process yet.
-2. Install
-   the [MCP Client element template](https://github.com/camunda/connectors/blob/8.8.0-alpha6/connectors/agentic-ai/element-templates/agenticai-mcp-client-outbound-connector.json)
-3. Create a service task within the ad-hoc sub-process and apply the **MCP Client** element template you
-   installed in step 2.
-4. In the **MCP Client** section of the properties panel, configure the **Client ID** to the value of the MCP Client you
-   used in the runtime configuration (example: `filesystem`).
-5. Execute your process. You should see the tool discovery tool calls being routed to the MCP client service task, and
-   tool definitions provided by the MCP server should be listed in the agent context variable. As a result, the agent
-   should be able to call the tools provided by the MCP server.
+1. Configure an AI agent tools feedback loop as described in the [example integration](../../../connectors/out-of-the-box-connectors/agentic-ai-aiagent-example.md). Do not configure any tools within the ad-hoc sub-process yet.
+2. Install the [MCP client element template](https://github.com/camunda/connectors/blob/8.8.0-alpha6/connectors/agentic-ai/element-templates/agenticai-mcp-client-outbound-connector.json).
+3. Create a service task within the ad-hoc sub-process and apply the **MCP client** element template you installed in step 2.
+4. In the **MCP client** section of the properties panel, configure the **Client ID** to match the value of the MCP client you used in the runtime configuration (example: `filesystem`).
+5. Execute your process. You should see tool discovery calls being routed to the MCP client service task, and tool definitions provided by the MCP server listed in the agent context variable. As a result, the agent should be able to call the tools provided by the MCP server.
