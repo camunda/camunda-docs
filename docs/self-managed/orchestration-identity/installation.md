@@ -19,11 +19,11 @@ The following guides cover Identity configuration in Self-Managed environments. 
 
 Using the default setup for [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) will result in a cluster with:
 
-1. Web application login enabled  
-2. API authentication disabled  
-3. Authorizations disabled  
-4. An initial user with username/password: `demo` / `demo`  
-5. An `admin` role with full permissions, applied to the `demo` user  
+1. Web application login enabled
+2. API authentication disabled
+3. Authorizations disabled
+4. An initial user with username/password: `demo` / `demo`
+5. An `admin` role with full permissions, applied to the `demo` user
 
 To modify this [initial configuration](./configuration.md), define your custom values in `application.yaml`, and pass this file at startup using the `--config` flag. See [this section](/self-managed/quickstart/developer-quickstart/c8run.md#enable-authentication-and-authorization) for details.
 
