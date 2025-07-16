@@ -52,3 +52,11 @@ Helm charts throw an error if multi-tenancy is enabled, but no external database
 ### Solution: Configure Identity with a database
 
 Ensure Identity is configured with a [database](/self-managed/identity/miscellaneous/configuration-variables.md#database-configuration).
+
+### Problem: Multi-tenancy enabled, but Zeebe is unable to retrieve jobs for a tenant
+
+Multi-tenancy is enabled, but Zeebe is unable to retrieve jobs for a tenant when cancelling or retrying via Operate/Tasklist
+
+### Solution: Zeebe client must be provided access to tenants
+
+The Zeebe client Operate and Tasklist are configured with must be provided access to the tenant(s) in question to perform the actions.

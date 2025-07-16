@@ -37,3 +37,9 @@ export CAMUNDA_SECURITY_AUTHENTICATION_UNPROTECTEDAPI=false
 :::danger
 Disabling multi-tenancy can lead to unexpected behavior if previously enabled with active tenants
 :::
+
+## Troubleshooting
+
+### Multi-tenancy enabled, but Zeebe is unable to retrieve jobs for a tenant when cancelling or retrying via Operate/Tasklist
+
+The Zeebe client Operate and Tasklist are configured with must be provided access to the tenant(s) in question to perform the actions.
