@@ -343,7 +343,7 @@ RewriteRule ^docs/8.5/self-managed/components/management-identity/install-identi
 RewriteRule ^docs/8.5/self-managed/components/management-identity/user-guide/configuration/alternative-db/?$ /docs/8.5/self-managed/components/management-identity/configuration/alternative-db/ [R=301,L]
 
 # Restructure Identity Docs (8.7)
-RewriteRule ^docs/self-managed/setup/guides/using-existing-keycloak/?$ /docs/self-managed/components/management-identity/configuration/connect-to-an-existing-keycloak/ [R=301,L]
+RewriteRule ^docs/self-managed/setup/guides/using-existing-keycloak/?$ /docs/self-managed/installation-methods/helm/configure/using-existing-keycloak/ [R=301,L]
 RewriteRule ^docs/self-managed/setup/guides/connect-to-an-oidc-provider/?$ /docs/self-managed/components/management-identity/configuration/connect-to-an-oidc-provider/ [R=301,L]
 RewriteRule ^docs/self-managed/concepts/access-control/applications/?$ /docs/self-managed/components/management-identity/application-user-group-role-management/applications/ [R=301,L]
 RewriteRule ^docs/self-managed/concepts/access-control/resource-authorizations/?$ /docs/self-managed/components/management-identity/access-management/resource-authorizations/ [R=301,L]
@@ -712,7 +712,7 @@ RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/guides/connec
 RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup/?$ /docs/self-managed/setup/guides/ingress-setup/ [R=301,L]
 RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/guides/multi-namespace-deployment/?$ /docs/self-managed/setup/guides/multi-namespace-deployment/ [R=301,L]
 RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/guides/running-custom-connectors/?$ /docs/self-managed/setup/guides/running-custom-connectors/ [R=301,L]
-RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak/?$ /docs/self-managed/setup/guides/using-existing-keycloak/ [R=301,L]
+RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak/?$ /docs/self-managed/installation-methods/helm/configure/using-existing-keycloak/ [R=301,L]
 RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/guides/?$ /docs/self-managed/setup/guides/ [R=301,L]
 RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/guides/local-kubernetes-cluster/?$ /docs/self-managed/setup/deploy/local/local-kubernetes-cluster/ [R=301,L]
 
