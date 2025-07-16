@@ -26,7 +26,7 @@ authorizations enabled by default.
 
 | Environment variable                                             | Description                                                                                                           | Default value (Camunda 8 Run) |
 | ---------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | ----------------------------- |
-| `CAMUNDA_PERSISTENT_SESSIONS_ENABLED`                            | Enables shared authentication between the Orchestration Cluster web applications (Operate and Tasklist).                      | `true`                        |
+| `CAMUNDA_PERSISTENT_SESSIONS_ENABLED`                            | Enables shared authentication between the Orchestration Cluster web applications (Operate and Tasklist).              | `true`                        |
 | `CAMUNDA_SECURITY_AUTHENTICATION_METHOD`                         | The authentication method to use.                                                                                     | `basic`                       |
 | `CAMUNDA_SECURITY_AUTHENTICATION_UNPROTECTEDAPI`                 | If the API can be used without authentication.                                                                        | `true`                        |
 | `CAMUNDA_SECURITY_AUTHORIZATIONS_ENABLED`                        | If authorizations are enabled.                                                                                        | `true`                        |
