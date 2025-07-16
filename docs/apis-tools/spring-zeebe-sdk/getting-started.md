@@ -38,7 +38,7 @@ Add the following Maven dependency to your Spring Boot Starter project, replacin
 </dependency>
 ```
 
-You can find the source on GitHub if you are interested: [https://github.com/camunda/camunda/tree/main/clients/spring-boot-starter-camunda-sdk/src/main](https://github.com/camunda/camunda/tree/main/clients/spring-boot-starter-camunda-sdk/src/main).
+Additionally, you can find the [source on GitHub](https://github.com/camunda/camunda/tree/main/clients/spring-boot-starter-camunda-sdk/src/main).
 
 ## Enable the Java Compiler `-parameters`-flag
 
