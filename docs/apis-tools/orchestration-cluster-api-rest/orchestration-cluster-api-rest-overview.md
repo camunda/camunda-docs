@@ -4,37 +4,83 @@ title: "Overview"
 description: "Interact with Camunda 8 clusters. Activate jobs and run user task state operations for Camunda user tasks."
 ---
 
-The Orchestration Cluster API is a REST API designed to interact with a Camunda 8 cluster.
+## Welcome to the Camunda Orchestration Cluster API
+The Orchestration Cluster API lets you interact programmatically with process orchestration capabilities in Camunda 8. You can use it to start, manage, and query process instances. It also lets you complete user tasks, resolve incidents, and manage variables - at scale and with confidence.
 
-:::info Public API
-This API is part of the Camunda 8 [public API](/reference/public-api.md) and is covered by our SemVer stability guarantees (except for alpha endpoints). Breaking changes will not be introduced in minor or patch releases.
-:::
+You can use this API to:
+* Build process-driven applications
+* Integrate Camunda's User Tasks into custom task UIs 
+* Start and monitor processes from external systems
+
+This API is designed to make it easy to [find resources](./orchestration-cluster-api-rest-data-fetching.md#advanced-search-filters) with a consistent experience while ensuring all endpoints are secure with [authentication](./orchestration-cluster-api-rest-authentication.md) and fine-grained [resource authorization](/components/identity/authorization.md). 
+
+We're commited to delivering high performance and reliability with our APIs. This API is part of the Camunda 8 [public API](/reference/public-api.md) and is covered by our SemVer stability guarantees (except for clearly marked alpha endpoints).
+
+To learn more about orchestration clusters themselves, see [What is an Orchestration Cluster?](/components/orchestration-cluster.md)
+
+Ready to dive in? See **Get started** below to make your first API call.
+
+## Get started
+To begin using the Orchestration Cluster API, you'll need the following:
+
+### Prerequisites
+
+* **A Camunda 8 Orchestration Cluster**
+  * For quick local development, we recommend using [C8Run](/self-managed/quickstart/developer-quickstart/c8run.md). It exposes the API without requiring credentials or tokens.
+* **An Access Token** (for secured clusters)
+  * Follow the steps in [Authentication](./orchestration-cluster-api-rest-authentication.md) to obtain a valid JWT access token.
+* **A Client to make API requests**
+  * Use the [Postman Collection](https://www.postman.com/camundateam/camunda-8-postman/collection/apl78x9/camunda-8-api-rest) for quick testing, or interact programmatically using the [Java Client](/java-client/index.md) or [Spring SDK](/spring-zeebe-sdk/getting-started.md).
+
+Once you’re set up, we recommend trying your first call using [Postman](https://www.postman.com/camundateam/camunda-8-postman/request/en495q6/get-cluster-typology) or curl: [Get cluster topology](./specifications/get-topology.api.mdx).
+
+### Explore the API
+
+Visit the [interactive Orchestration Cluster API Explorer][camunda-api-explorer] to:
+* Browse available endpoints 
+* See request and response examples 
+* Check code samples
+
+If you're just getting started, try these next steps:
+* Model a process definition with a user task and deploy using Modeler
+* Start a process: [`POST /process-instances`](./specifications/create-process-instance.api.mdx)
+* Completing a user task: [`POST /user-tasks/:userTaskKey/completion`](./specifications/complete-user-task.api.mdx)
+
+or check [this complete e2e guide](/guides/getting-started-example.md) to implement process automation solutions using Java and Spring Clients. 
+
+## Authorize your requests
+
+When authentication is enabled, all API requests must include a valid access token to ensure secure access to your orchestration cluster.
+
+To learn how to authenticate, follow the step-by-step guide in [Authentication](./orchestration-cluster-api-rest-authentication.md) based on your setup (SaaS or Self-Managed).
+
+Once you’ve obtained a token, include it in each API request like this:
+
+```shell
+curl --header "Authorization: Bearer ${TOKEN}" \
+     ${BASE_URL}/topology
+```
+Replace the `${BASE_URL}` based on the address of your cluster. See the [Context paths](#context-paths) below.
+
+### Context paths
+
+#### SaaS
+In the Camunda Console, go to your cluster, and in the Cluster Details find your **Region Id** and **Cluster Id**. Use this pattern as your `${BASE_URL}`:
+`https://${REGION_ID}.zeebe.camunda.io:443/${CLUSTER_ID}/v2/`
+
+#### Self-Managed
+
+Use the host and path defined in your Zeebe Gateway [configuration](/self-managed/installation-methods/helm/configure/ingress-setup.md). If you’re using the default setup the `${BASE_URL}` is: `http://localhost:8080/v2/`
+
+## Versioning
+
+The API version is defined by the API version number (`v2`) and the product version, for example, `POST /v2/user-tasks/search` in Camunda 8.8.0.
+
+Camunda does API versioning rather than endpoint versioning. For example, the version changes for all endpoints if there is a breaking change in at least one endpoint. Multiple versions of an Orchestration Cluster API can exist in one product version to support a migration period, for example, `POST /v2/user-tasks/search` and `POST /v3/user-tasks/search` in Camunda 8.x.x.
 
 :::note
-Ensure you [authenticate](./orchestration-cluster-api-rest-authentication.md) before accessing the Orchestration Cluster API.
+New attributes and endpoints are not considered breaking changes.
 :::
-
-:::note
-The Orchestration Cluster API only supports user tasks managed by Camunda (formerly known as [Zeebe user tasks](/apis-tools/migration-manuals/migrate-to-camunda-user-tasks.md), which may still appear as such in your XML content).
-:::
-
-## Context paths
-
-### SaaS
-
-Find your **region Id** and **cluster Id** under **Connection information** in your client credentials (revealed when you click on your client under the **API** tab within your cluster).
-
-Example path: `https://${REGION_ID}.zeebe.camunda.io:443/${CLUSTER_ID}/v2/`
-
-### Self-Managed
-
-The context path should match the host and path defined in your Zeebe Gateway [configuration](/self-managed/installation-methods/helm/configure/ingress-setup.md). The path used here is the default.
-
-Example path: `http://localhost:8080/v2/`
-
-## API Explorer
-
-See [the interactive Orchestration Cluster API Explorer][camunda-api-explorer] for specifications, example requests and responses, and code samples of interacting with the Orchestration Cluster API.
 
 ## Request and file sizes
 
@@ -100,17 +146,6 @@ Identifiers follow a naming rule in parameters and data attributes alike:
 - The full entity is the prefix to avoid confusion, for example, `processDefinitionKey` instead of `processKey`; the latter could be interpreted as process instance or process definition.
 - Other attributes of entities have no prefix to avoid clutter, such as `version` in the process definition entity. However, other resources have to be referenced with a prefix, like `processDefinitionVersion` in the process instance entity.
 
-## Versioning
-
-Camunda uses the term “major version number” from [semantic versioning](https://semver.org/), but does not follow semantic versioning for the Orchestration Cluster API outright. Instead, Camunda provides updates to the API in place and only increments the version number for a major, breaking change.
-
-:::note
-New attributes and endpoints are not considered breaking changes.
-:::
-
-The Orchestration Cluster API version does not match the product version (8.x.x). An API’s version is rather defined by the API version number (e.g., `v2`) and the product version, for example, `POST /v2/user-tasks/search` in Camunda 8.8.0.
-
-Camunda does API versioning rather than endpoint versioning. For example, the version changes for all endpoints if there is a breaking change in at least one endpoint. Multiple versions of an Orchestration Cluster API can exist in one product version to support a migration period, for example, `POST /v2/user-tasks/search` and `POST /v3/user-tasks/search` in Camunda 8.x.x.
 
 ## HTTP status codes & error handling
 
