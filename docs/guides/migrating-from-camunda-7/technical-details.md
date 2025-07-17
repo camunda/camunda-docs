@@ -5,6 +5,9 @@ sidebar_label: Technical details
 description: "Understand technical details (e.g. BPMN Schema differences) from Camunda 7 to Camunda 8."
 ---
 
+<!-- TODO: I think this page should go away and move to https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer 
+-->
+
 Technical details around the differences between Camunda 7 and Camunda 8 BPMN and DMN models, including the logic also implemented in the [Diagram Converter](/guides/migrating-from-camunda-7/code-conversion.md#diagram-converter).
 
 ## Adjusting BPMN models

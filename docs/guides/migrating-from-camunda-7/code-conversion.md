@@ -31,9 +31,11 @@ The Camunda 7 and Orchestration cluster APIs share many similarities, but severa
 - In Camunda 8, the `tenantId` is passed in the request body rather than as a path parameter, reducing the need for multiple endpoint variants as seen in Camunda 7.
 - Camunda 8 does not have separate API endpoints for historic data.
 
-:::info
 To help you understand the differences between the two APIs, the [Camunda 7 to 8 API Mapping Guide](https://camunda-community-hub.github.io/camunda-7-to-8-code-conversion/) maps the complete Camunda 7 REST API to its Camunda 8 counterparts and highlights key differences. For example, why a specific endpoint or parameter is no longer available, or if it is planned for future implementation.
-:::
+
+You can find the API mapping guide here:
+
+- [API Mapping Guide](https://camunda-community-hub.github.io/camunda-7-to-8-code-conversion/)
 
 ## Code conversion patterns
 
@@ -42,129 +44,57 @@ Because of the flexibility of Camunda 7, users leveraged different ways to write
 - Our approach to collect these is to use a collaborative GitHub repository, where our consultants, partners, and users can add their own patterns to the catalog.
 - You might still adapt the patterns to your situation, for example, if you use your own data handling or glue code abstractions.
 
-You can find the pattern catalog [here](https://github.com/camunda-community-hub/camunda-7-to-8-code-conversion).
+You can find the pattern catalog here:
 
-:::info
-The pattern catalog was kicked off and will be filled in Q2 of 2025.
-:::
+- [Pattern Catalog](https://github.com/camunda-community-hub/camunda-7-to-8-code-conversion).
 
-## OpenRewrite recipes
-
-:::info
-First recipes will be delivered throughout Q2 of 2025, and Camunda plans a first release **with Camunda 8.8 (October 2025)**. Iterative improvements will follow after.
-:::
+## Refactoring recipes (using OpenRewrite)
 
 [OpenRewrite](https://docs.openrewrite.org/) is an open-source framework that can automate refactorings by so-called recipes. It is provided with an Apache License, making it easy to adopt in any context. Technically, to [run recipes](https://docs.openrewrite.org/running-recipes), you need to add a Maven plugin to your build.
 
-For example, to run a recipe to convert JavaDelegates to Spring-based Job Workers:
-
-```xml
-<plugin>
-    <groupId>org.openrewrite.maven</groupId>
-    <artifactId>rewrite-maven-plugin</artifactId>
-    <version>6.1.4</version>
-    <configuration>
-      <activeRecipes>
-        <recipe>org.camunda.migration.rewrite.recipes.ConvertJavaDelegateToZeebeWorker</recipe>
-      </activeRecipes>
-      <skipMavenParsing>true</skipMavenParsing>
-    </configuration>
-    <dependencies>
-        <dependency>
-            <groupId>org.camunda.community</groupId>
-            <artifactId>camunda-7-to-8-rewrite-recipes</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-    </dependencies>
-</plugin>
-```
-
 Those recipes might work out-of-the-box for your environment, but most often they need to be adjusted to your code patterns. In this case, use the existing patterns as a basis to make your own adjustments or extensions.
 
-You can find the existing recipes on [GitHub](https://github.com/camunda-community-hub/camunda-7-to-8-code-conversion).
+You can find the existing recipes including documentation on how-to-use them here:
+
+- [OpenRewrite recipes](https://github.com/camunda-community-hub/camunda-7-to-8-code-conversion/tree/main/recipes).
 
 ## Diagram converter
 
 Your BPMN and DMN models need to be adjusted.
 
-The [Diagram Converter](/guides/migrating-from-camunda-7/code-conversion.md#diagram-converter) takes care of most changes. Depending on how you refactor your code and what elements of Camunda 7 you have used, you can extend or customize the diagram converter to suit your needs.
+The [Migration Analyzer & Diagram Converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer) takes care of most changes. Depending on how you refactor your code and what elements of Camunda 7 you have used, you can extend or customize the diagram converter to suit your needs.
 
-If your models also contain JUEL expressions, which are not supported in Camunda 8, they also need to be converted.
+<!-- 
+If your models also contain JUEL expressions, which are not supported in Camunda 8, they also need to be converted. Simple expressions are [directly converted by this code in the Diagram Converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer/blob/d6fda97d00f27b23fc87fd741134225a527f3de1/core/src/main/java/org/camunda/community/migration/converter/expression/ExpressionTransformer.java#L4). This can be extended to suit your needs. You can use the [FEEL Copilot](/components/early-access/alpha/feel-copilot/feel-copilot.md) to rewrite more complex expressions for you.
 
-Simple expressions are [directly converted by this code in the Diagram Converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer/blob/d6fda97d00f27b23fc87fd741134225a527f3de1/core/src/main/java/org/camunda/community/migration/converter/expression/ExpressionTransformer.java#L4). This can be extended to suit your needs.
+TODO document the expression transformer instead of referencing code. Or probably do a complete rewamp of this section to extract details to the readme - it is a bit arbritrary what is mentioned here - and probably also not fully aligned with latest changes.
+Might also make sense to describe that above patterns also inform diagram conversion
+ -->
 
-<!-- TODO document the expression transformer instead of referencing code -->
+You find the diagram conversion tooling and its documentation here:
 
-You can use the [FEEL Copilot](/components/early-access/alpha/feel-copilot/feel-copilot.md) to rewrite more complex expressions for you.
+- [Migration Analyzer & Diagram Converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer)
 
 ## Leveraging AI for refactoring
 
-You can use any AI you have available to assist you with refactoring tasks. In our experiments with ChatGPT and GitHub Copilot for example, we had success by simply telling it:
+You can use any AI you have available to assist you with refactoring tasks. In our experiments with ChatGPT and GitHub Copilot for example, we had success by relatively simple prompts, but you needed to do a couple of rounds to make sure the AI refactors correctly and according to your target architecture whishes. 
+
+In the [migration example](https://github.com/camunda-community-hub/camunda-7-to-8-migration-example?tab=readme-ov-file#migrating-test-cases) we could let ChatGPT rewrite test cases for us with this sample prompt:
 
 ```
-Please adjust this codebase, written for Camunda 7, to run with Camunda 8.
+Please refactor the following Camunda 7 JUnit test case to Camunda 8 using the official migration pattern described in https://github.com/camunda-community-hub/camunda-7-to-8-code-conversion/blob/main/patterns/ALL_IN_ONE.md. The refactored test must:
+
+- Use `@SpringBootTest` and `@CamundaSpringProcessTest`
+- Use `CamundaClient` to start the process
+- Use `CamundaProcessTestContext.completeUserTask(...)` to complete user tasks
+- Use `CamundaProcessTestContext.increaseTime(Duration)` to simulate timer events (no manual job execution)
+- Use `CamundaAssert` with `byName(...)` selectors to check activity state
+- Use `assertThat(processInstance).hasVariable(...)` to check process variables
+
+Here is the Camunda 7 test case:
+[... add full test case code...]
 ```
 
 ## Example: Adjusting a Spring Boot application
 
-<!-- :::warning
-This paragraph needs improvement - it is slightly outdated.
-::: -->
-
-For example, to migrate an existing Spring Boot application, take the following steps:
-
-1. Adjust Maven dependencies:
-
-   - Remove Camunda 7 Spring Boot Starter and all other Camunda dependencies.
-   - Add the [Camunda Spring Boot SDK](../../apis-tools/spring-zeebe-sdk/getting-started.md).
-
-2. Adjust configuration:
-
-   - Set [Camunda 8 credentials](/apis-tools/spring-zeebe-sdk/getting-started.md#configuring-the-camunda-8-connection) (for example, in `src/main/resources/application.yaml`) and point it to an existing Zeebe cluster.
-   - Remove existing Camunda 7 settings.
-
-3. Add `@Deployment(resources = "classpath*:**/*.bpmn")` to automatically deploy all BPMN models.
-
-4. Adjust your source code and process model as described below.
-
-### Client API
-
-<!-- TODO link to the Zeebe / Camunda API, call it Orchestration cluster API, is the mentioning of the protocol still required? -->
-
-The Zeebe API (for example, the workflow engine API - start process instances, subscribe to tasks, or complete them) has been completely redesigned and is not compatible with Camunda 7. While conceptually similar, the API uses different method names, data structures, and protocols.
-
-If this affects large parts of your code base, you could write a small abstraction layer implementing the Camunda 7 API delegating to Camunda 8, probably marking unavailable methods as deprecated. We welcome community extensions that facilitate this but have not yet started our own efforts.
-
-### Service tasks as external tasks
-
-[External task workers](https://docs.camunda.org/manual/latest/user-guide/process-engine/external-tasks/) in Camunda 7 are conceptually comparable to [job workers](/components/concepts/job-workers.md) in Camunda 8. This means they are generally easier to migrate.
-
-The "external task topic" from Camunda 7 is directly translated into a "task type name" in Camunda 8, therefore `camunda:topic` becomes `zeebe:taskDefinition type` in your BPMN model.
-
-The [Camunda 7 Adapter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/camunda-7-adapter) picks up your `@ExternalTaskHandler` beans, wraps them into a JobWorker, and subscribes to the `camunda:topic` you defined as `zeebe:taskDefinition type`.
-
-### Service tasks with attached Java code (Java delegates, expressions)
-
-In Camunda 7, there are three ways to attach Java code to service tasks in the BPMN model using different attributes in the BPMN XML:
-
-- Specify a class that implements a JavaDelegate or ActivityBehavior: `camunda:class`.
-- Evaluate an expression that resolves to a delegation object: `camunda:delegateExpression`.
-- Invoke a method or value expression: `camunda:expression`.
-
-Camunda 8 cannot directly execute custom Java code. Instead, there must be a [job worker](/components/concepts/job-workers.md) executing code.
-
-The [Camunda 7 Adapter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/camunda-7-adapter) implements such a job worker using the [Camunda Spring Boot SDK](../../apis-tools/spring-zeebe-sdk/getting-started.md). It subscribes to the task type `camunda-7-adapter`. [Task headers](/components/modeler/bpmn/service-tasks/service-tasks.md#task-headers) are used to configure a delegation class or expression for this worker.
-
-![Service task in Camunda 7 and Camunda 8](../img/migration-service-task.png)
-
-You can use this worker directly, but more often it might serve as a starting point or simply be used for inspiration.
-
-<!-- TODO naming inconsistency -->
-
-The [Camunda 7 to Camunda 8 Converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/backend-diagram-converter) will adjust the service tasks in your BPMN model automatically for this adapter.
-
-The topic `camunda-7-adapter` is set and the following attributes/elements are migrated and put into a task header:
-
-- `camunda:class`
-- `camunda:delegateExpression`
-- `camunda:expression` and `camunda:resultVariable`
+See [end-to-end migration example](https://github.com/camunda-community-hub/camunda-7-to-8-migration-example?tab=readme-ov-file#migrating-test-cases) on Github.
