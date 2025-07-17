@@ -94,7 +94,7 @@ The Orchestration cluster provides the following default roles:
 - `connectors`: Permissions required by the Connectors component
 - `rpa`: Permissions required by the RPA component
 
-To assign users, clients, groups, or mapping rules to roles, add the appropriate properties to your `application.yaml` or set them as environment variables.
+To assign users, clients, groups, or [mapping rules](/self-managed/concepts/mapping-rules.md) to roles, add the appropriate properties to your `application.yaml` or set them as environment variables.
 
 <Tabs>
   <TabItem value="helm" label="Helm properties">
@@ -160,6 +160,8 @@ CAMUNDA_SECURITY_INITIALIZATION_DEFAULTROLES_ADMIN_USERS_0=demo
 
   </TabItem>
 </Tabs>
+
+You can assign a user to multiple roles by listing them in the respective section of each role.
 
 ### Enable API authentication and authorizations
 
