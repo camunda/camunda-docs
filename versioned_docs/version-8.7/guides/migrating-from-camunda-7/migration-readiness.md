@@ -204,4 +204,4 @@ Now, the `dmnResultChecker` is a Spring bean that can contain arbitrary Java log
 
 ## Camunda Forms
 
-Finally, while Camunda 7 supports [different types of task forms](https://docs.camunda.org/manual/latest/user-guide/task-forms/), Camunda 8 only supports [Camunda Forms](/components/modeler/forms/utilizing-forms.md) (and will actually be extended over time). If you rely on other form types, you either need to make Camunda Forms out of them or use a bespoke tasklist where you still support those forms.
+Finally, while Camunda 7 supports [different types of task forms](https://docs.camunda.org/manual/latest/user-guide/task-forms/), Camunda 8 only supports [Camunda Forms](/guides/utilizing-forms.md) (and will actually be extended over time). If you rely on other form types, you either need to make Camunda Forms out of them or use a bespoke tasklist where you still support those forms.
