@@ -1294,7 +1294,7 @@ module.exports = {
       ],
     },
     {
-      "Operational guides": [
+      Concepts: [
         {
           type: "category",
           label: "Back up and restore",
@@ -1314,27 +1314,6 @@ module.exports = {
             },
           ],
         },
-        "self-managed/operational-guides/data-purge",
-        {
-          type: "doc",
-          label: "Configure flow control",
-          id: "self-managed/operational-guides/configure-flow-control/configure-flow-control",
-        },
-        {
-          Monitoring: [
-            "self-managed/operational-guides/monitoring/log-levels",
-            "self-managed/operational-guides/monitoring/metrics",
-          ],
-        },
-        {
-          Troubleshooting: [
-            "self-managed/operational-guides/troubleshooting/troubleshooting",
-          ],
-        },
-      ],
-    },
-    {
-      Concepts: [
         {
           type: "category",
           label: "Document handling",
@@ -1358,14 +1337,31 @@ module.exports = {
             },
           ],
         },
-        "self-managed/concepts/exporters",
         {
           "Multi-region": ["self-managed/concepts/multi-region/dual-region"],
         },
+        {
+          Monitoring: [
+            "self-managed/operational-guides/monitoring/log-levels",
+            "self-managed/operational-guides/monitoring/metrics",
+          ],
+        },
+        {
+          Troubleshooting: [
+            "self-managed/operational-guides/troubleshooting/troubleshooting",
+          ],
+        },
+        "self-managed/concepts/exporters",
         "self-managed/concepts/multi-tenancy",
         "self-managed/concepts/mapping-rules",
         "self-managed/concepts/elasticsearch-privileges",
         "self-managed/concepts/opensearch-privileges",
+        "self-managed/operational-guides/data-purge",
+        {
+          type: "doc",
+          label: "Configure flow control",
+          id: "self-managed/operational-guides/configure-flow-control/configure-flow-control",
+        },
       ],
     },
     {
