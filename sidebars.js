@@ -25,7 +25,7 @@ module.exports = {
         "guides/migrating-from-camunda-7/conceptual-differences",
         "guides/migrating-from-camunda-7/migration-tooling",
         "guides/migrating-from-camunda-7/code-conversion",
-        "guides/migrating-from-camunda-7/migration-readiness"
+        "guides/migrating-from-camunda-7/migration-readiness",
       ],
     },
   ],
