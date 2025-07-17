@@ -1,6 +1,6 @@
 ---
 id: eks-eksctl
-title: "Deploy an EKS cluster with eksctl (quickstart)"
+title: "Deploy an EKS cluster with eksctl"
 description: "Deploy an Amazon Kubernetes cluster (EKS) with eksctl with step-by-step guidance."
 ---
 
