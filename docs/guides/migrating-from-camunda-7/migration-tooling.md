@@ -23,7 +23,7 @@ Camunda provides the following migration tools:
 
 ## End-to-example example: Adjusting a Spring Boot application
 
-See [End-to-end example showing all tools in action](https://github.com/camunda-community-hub/camunda-7-to-8-migration-example) on GitHub.
+See [end-to-end example showing all tools in action](https://github.com/camunda-community-hub/camunda-7-to-8-migration-example) on GitHub.
 
 ## Migration Analyzer & Diagram Converter
 
