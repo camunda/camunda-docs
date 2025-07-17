@@ -20,14 +20,14 @@ All Orchestration Cluster API requests require authentication. To authenticate, 
 <TabItem value='saas'>
 
 1. [Create client credentials](/components/console/manage-clusters/setup-client-connection-credentials.md) in the **Clusters > Cluster name > API** tab of [Camunda Console](https://console.camunda.io/).
-2. Add permissions to this client for **Zeebe**.
+2. Add scope for client credentials for **Orchestration cluster**.
 3. Once you have created the client, capture the following values required to generate a token:
    <!-- this comment convinces the markdown processor to still treat the table as a table, but without adding surrounding paragraphs. 🤷 -->
    | Name                     | Environment variable name        | Default value                                |
    | ------------------------ | -------------------------------- | -------------------------------------------- |
-   | Client ID                | `ZEEBE_CLIENT_ID`                | -                                            |
-   | Client Secret            | `ZEEBE_CLIENT_SECRET`            | -                                            |
-   | Authorization Server URL | `ZEEBE_AUTHORIZATION_SERVER_URL` | `https://login.cloud.camunda.io/oauth/token` |
+   | Client ID                | `CAMUNDA_CLIENT_ID`                | -                                            |
+   | Client Secret            | `CAMUNDA_CLIENT_SECRET`            | -                                            |
+   | Authorization Server URL | `CAMUNDA_OAUTH_URL` | `https://login.cloud.camunda.io/oauth/token` |
    | Audience                 | `ZEEBE_TOKEN_AUDIENCE`           | `zeebe.camunda.io`                           |
    | Zeebe REST Address       | `ZEEBE_REST_ADDRESS`             | -                                            |
    <!-- this comment convinces the markdown processor to still treat the table as a table, but without adding surrounding paragraphs. 🤷 -->
@@ -36,12 +36,12 @@ All Orchestration Cluster API requests require authentication. To authenticate, 
    :::
 4. Execute an authentication request to the token issuer:
    ```bash
-   curl --request POST ${ZEEBE_AUTHORIZATION_SERVER_URL} \
+   curl --request POST ${CAMUNDA_OAUTH_URL} \
        --header 'Content-Type: application/x-www-form-urlencoded' \
        --data-urlencode 'grant_type=client_credentials' \
        --data-urlencode "audience=${ZEEBE_TOKEN_AUDIENCE}" \
-       --data-urlencode "client_id=${ZEEBE_CLIENT_ID}" \
-       --data-urlencode "client_secret=${ZEEBE_CLIENT_SECRET}"
+       --data-urlencode "client_id=${CAMUNDA_CLIENT_ID}" \
+       --data-urlencode "client_secret=${CAMUNDA_CLIENT_SECRET}"
    ```
    A successful authentication response looks like the following:
    ```json
