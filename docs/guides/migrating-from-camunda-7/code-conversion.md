@@ -64,7 +64,7 @@ Your BPMN and DMN models need to be adjusted.
 
 The [Migration Analyzer & Diagram Converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer) takes care of most changes. Depending on how you refactor your code and what elements of Camunda 7 you have used, you can extend or customize the diagram converter to suit your needs.
 
-<!-- 
+<!--
 If your models also contain JUEL expressions, which are not supported in Camunda 8, they also need to be converted. Simple expressions are [directly converted by this code in the Diagram Converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer/blob/d6fda97d00f27b23fc87fd741134225a527f3de1/core/src/main/java/org/camunda/community/migration/converter/expression/ExpressionTransformer.java#L4). This can be extended to suit your needs. You can use the [FEEL Copilot](/components/early-access/alpha/feel-copilot/feel-copilot.md) to rewrite more complex expressions for you.
 
 TODO document the expression transformer instead of referencing code. Or probably do a complete rewamp of this section to extract details to the readme - it is a bit arbritrary what is mentioned here - and probably also not fully aligned with latest changes.
@@ -77,7 +77,7 @@ You find the diagram conversion tooling and its documentation here:
 
 ## Leveraging AI for refactoring
 
-You can use any AI you have available to assist you with refactoring tasks. In our experiments with ChatGPT and GitHub Copilot for example, we had success by relatively simple prompts, but you needed to do a couple of rounds to make sure the AI refactors correctly and according to your target architecture whishes. 
+You can use any AI you have available to assist you with refactoring tasks. In our experiments with ChatGPT and GitHub Copilot for example, we had success by relatively simple prompts, but you needed to do a couple of rounds to make sure the AI refactors correctly and according to your target architecture whishes.
 
 In the [migration example](https://github.com/camunda-community-hub/camunda-7-to-8-migration-example?tab=readme-ov-file#migrating-test-cases) we could let ChatGPT rewrite test cases for us with this sample prompt:
 
@@ -97,4 +97,4 @@ Here is the Camunda 7 test case:
 
 ## Example: Adjusting a Spring Boot application
 
-See [end-to-end migration example](https://github.com/camunda-community-hub/camunda-7-to-8-migration-example?tab=readme-ov-file#migrating-test-cases) on Github.
+See [end-to-end migration example](https://github.com/camunda-community-hub/camunda-7-to-8-migration-example) on GitHub.
