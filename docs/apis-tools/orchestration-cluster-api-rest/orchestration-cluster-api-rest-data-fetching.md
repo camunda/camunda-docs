@@ -17,6 +17,10 @@ Search endpoints can also be used to access entity instances with a unique ident
 
 All those data retrieval endpoints offer near-real-time data consistency guarantees, providing runtime and historic data that has been processed by the [Camunda Exporter](../../self-managed/zeebe-deployment/exporters/camunda-exporter.md).
 
+:::note
+The Orchestration Cluster API only supports user tasks managed by Camunda (formerly known as [Zeebe user tasks](/apis-tools/migration-manuals/migrate-to-camunda-user-tasks.md), which may still appear as such in your XML content).
+:::
+
 ## Search requests
 
 Search requests consist of the components for **filter**, **sort**, and **page**.
