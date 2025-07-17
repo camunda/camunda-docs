@@ -4,7 +4,7 @@ title: "Clusters"
 description: "Learn more about the clusters available in your Camunda 8 plan."
 ---
 
-A [cluster](../../guides/create-cluster.md) is a provided group of production-ready nodes that run Camunda 8.
+A [cluster](/components/console/manage-clusters/create-cluster.md) is a provided group of production-ready nodes that run Camunda 8.
 
 When [creating a cluster in SaaS](/components/console/manage-clusters/create-cluster.md), you can choose the cluster **type** and **size** to meet your organization's availability and scalability needs, and to provide control over cluster performance, uptime, and disaster recovery guarantees.
 

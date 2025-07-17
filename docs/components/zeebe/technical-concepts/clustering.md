@@ -61,7 +61,7 @@ The only exception to have **even replication factors** is the [dual region setu
 
 Using an odd replication factor in a dual region setup would favor some partitions, where the leader and the majority of followers live in the surviving region, against the partitions that have only a minority of followers survived. This may slow down to detect a region loss, as some process instances still continue while others are stuck.
 
-Below is one example for replication and quorum used in the [dual region setup guide](../../../self-managed/setup/deploy/amazon/amazon-eks/dual-region.md#content-elaboration):
+Below is one example for replication and quorum used in the [dual region setup guide](../../../self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/dual-region.md#content-elaboration):
 
 | Replication factor | Description           | Quorum                                                      | Use case                                                                                                                                                                                                                 |
 | :----------------: | --------------------- | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |

@@ -5,7 +5,7 @@ sidebar_label: "Overview"
 description: ""
 ---
 
-Welcome to the **Quickstart** section for Camunda 8 Self-Managed. This guide is designed to help you get up and running quickly with Camunda 8 in a local environment, whether you're a developer building process solutions or an administrator responsible for deploying and running Camunda clusters.
+Welcome to the **Quickstart** section for Camunda 8 Self-Managed. This guide is designed to help you get up and running quickly with Camunda 8 in a local environment—whether you're a developer building process solutions or an administrator responsible for deploying and running Camunda clusters.
 
 You’ll find two tailored quickstart paths:
 
@@ -13,12 +13,12 @@ You’ll find two tailored quickstart paths:
 - An **administrator quickstart** using **Kind (Kubernetes in Docker)** to simulate real-world infrastructure.
 
 :::note
-These quickstarts are meant for local testing and learning purposes. They are not intended for production deployments.
+These quickstarts are intended for local testing and learning purposes only. They are not designed for production deployments.
 :::
 
 ## Quickstart for developers
 
-If you're a developer looking to evaluate or build process solutions with Camunda 8, this path is for you. It focuses on getting a minimal setup running quickly with:
+If you're a developer looking to evaluate or build process solutions with Camunda 8, this path is for you. It focuses on getting a minimal setup running quickly using:
 
 - **Camunda 8 Run**: A lightweight distribution of the Camunda engine.
 - **Docker Compose**: For spinning up required services like Zeebe, Operate, and Tasklist.
@@ -41,7 +41,7 @@ In each quickstart, you will:
 - Spin up a local environment with the core Camunda 8 components.
 - Deploy a sample process definition.
 - Interact with the platform using Operate and Tasklist.
-- Understand the responsibilities of your chosen role (developer or administrator).
+- Understand the responsibilities associated with your chosen role (developer or administrator).
 
 ## Prerequisites
 
@@ -49,7 +49,7 @@ Each quickstart guide lists the required tools and setup steps. In general, you�
 
 - Docker and Docker Compose (for developers).
 - Kind, kubectl, and Helm (for administrators).
-- A basic understanding of BPMN and distributed systems is helpful, but not required.
+- A basic understanding of BPMN and distributed systems is helpful but not required.
 
 ## Next steps
 

@@ -8,7 +8,7 @@ A process is a defined sequence of distinct steps or tasks representing your bus
 
 At large, process orchestration is a technology that coordinates the various moving parts (or endpoints) of a business process, and sometimes even ties multiple processes together. Process orchestration helps you work with the people, systems, and devices you already have—while achieving goals around end-to-end process automation.
 
-For example, with Camunda you can [orchestrate human tasks](../../guides/getting-started-orchestrate-human-tasks.md), [microservices](/guides/getting-started-orchestrate-microservices.md), and [APIs](/guides/getting-started-orchestrate-apis.md).
+For example, with Camunda you can [orchestrate human tasks](../../guides/getting-started-orchestrate-human-tasks.md), [microservices](/guides/getting-started-example.md), and [APIs](/guides/getting-started-orchestrate-apis.md).
 
 A **[job worker](./job-workers.md)** implements the business logic required to complete a task. You can choose to write a worker as a microservice, or also as part of a classical 3-tier application, as a \(lambda\) function, via command line tools, etc.
 
@@ -27,7 +27,7 @@ Camunda uses **[Business Process Model and Notation (BPMN) 2.0](/components/mode
 ![process example](./assets/order-process.png)
 
 :::note
-New to BPMN? Visit our step-by-step introductory guide on [automating a process using BPMN](../../guides/automating-a-process-using-bpmn.md)
+New to BPMN? Visit our step-by-step introductory guide on [automating a process using BPMN](/components/modeler/bpmn/automating-a-process-using-bpmn.md)
 :::
 
 ## Modeling BPMN
@@ -40,7 +40,7 @@ Camunda offers two Modeler tools to design and implement your diagrams:
 - [Desktop Modeler](/components/modeler/desktop-modeler/index.md): Design, view, and edit models using this desktop application. Install and use Desktop Modeler locally, all while integrating your local development environment.
 
 :::note
-New to modeling a process? Visit our [getting started guide](/guides/model-your-first-process.md).
+New to modeling a process? Visit our [getting started guide](/components/modeler/web-modeler/design-your-process.md).
 :::
 
 ## Process execution
