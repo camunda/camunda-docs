@@ -77,7 +77,7 @@ You find the diagram conversion tooling and its documentation here:
 
 ## Leveraging AI for refactoring
 
-You can use any AI you have available to assist you with refactoring tasks. In our experiments with ChatGPT and GitHub Copilot for example, we had success by relatively simple prompts, but you needed to do a couple of rounds to make sure the AI refactors correctly and according to your target architecture whishes. 
+You can use any AI you have available to assist you with refactoring tasks. In our experiments with ChatGPT and GitHub Copilot for example, we had success by relatively simple prompts, but you needed to do a couple of rounds to make sure the AI refactors correctly and according to your target architecture whishes.
 
 In the [migration example](https://github.com/camunda-community-hub/camunda-7-to-8-migration-example?tab=readme-ov-file#migrating-test-cases) we could let ChatGPT rewrite test cases for us with this sample prompt:
 
