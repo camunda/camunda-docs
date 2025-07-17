@@ -1202,11 +1202,19 @@ module.exports = {
                         id: "self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/amazon-eks",
                       },
                       items: [
+                        {
+                          Quickstart: [
+                            "self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/eks-eksctl",
+                          ],
+                        },
                         "self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/eks-terraform",
                         "self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/eks-helm",
                         "self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/dual-region",
-                        "self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/eks-eksctl",
-                        "self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/irsa",
+                        {
+                          Troubleshooting: [
+                            "self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/irsa",
+                          ],
+                        },
                       ],
                     },
                     {
