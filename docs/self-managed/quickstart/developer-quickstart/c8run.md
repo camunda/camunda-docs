@@ -82,26 +82,30 @@ The following command-line arguments are available:
 
 ### Access Camunda components
 
-All Camunda 8 Run components can be accessed using the username/password combination `demo`/`demo`.
+You can log in to all web interfaces using with the default credentials:
+
+- **Username:** `demo`
+- **Password:** `demo`
+
+These web interfaces are available at:
+
+- **Operate:** http://localhost:8080/operate
+- **Tasklist:** http://localhost:8080/tasklist
+- **Identity:** http://localhost:8080/identity
+
+The following components do not have a web interface, but their endpoints are useful for additional configuration:
+
+- **Orchestration Cluster API:** http://localhost:8080/v2/
+- **Inbound Connectors API:** http://localhost:8085/
+- **Zeebe API (gRPC):** http://localhost:26500/
+- **Metrics (Prometheus):** http://localhost:9600/actuator/prometheus
+- **Swagger UI (API Explorer):** http://localhost:8080/swagger-ui/index.html
 
 :::note
-The URLs for the Docker Compose application can be found in the [Docker Compose](#docker-compose) documentation.
-:::
 
-Tasklist, Operate, and Identity are available at:
-
-- Tasklist: http://localhost:8080/tasklist
-- Operate: http://localhost:8080/operate
-- Identity: http://localhost:8080/identity
-
-The following components do not have a web interface, but the URLs may be required for additional configuration:
-
-- Zeebe Gateway: http://localhost:26500
-- Connectors: http://localhost:8085
-
-:::note
-The Connectors URL displays a login page, but it cannot be logged into.
-:::
+- The URLs for the Docker Compose application can be found in the [Docker Compose](#docker-compose) documentation.
+- The Connectors URL displays a login page, but it cannot be logged into.
+  :::
 
 ### Deploy diagrams from Desktop Modeler
 

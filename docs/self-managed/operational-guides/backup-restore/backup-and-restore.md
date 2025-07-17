@@ -56,6 +56,27 @@ A complete backup of a Camunda 8 cluster includes:
 8. Take a backup `x` of Zeebe. See how to take a [Zeebe backup](./zeebe-backup-and-restore.md).
 9. Wait until the backup `x` of Zeebe is completed before proceeding. See how to [monitor a Zeebe backup](./zeebe-backup-and-restore.md).
 10. Resume exporting in Zeebe. See [Zeebe management API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md).
+    Because the data across these systems is interdependent, **all components must be backed up** as part of the **same backup window**. Backups taken independently at different times may not align and could result in an unreliable restore point.
+
+:::warning
+To ensure a consistent backup, you must follow the process outlined in this guide. Deviating from it can result in undetected data loss, as there is no reliable method to verify cross-component data integrity after backup.
+:::
+
+Following the documented procedure results in a hot backup, meaning that:
+
+- Zeebe continues to process and export data.
+- Web Applications (Operate, Tasklist), and Optimize remain fully operational during the backup process.
+
+This ensures high availability while preserving the integrity of the data snapshot.
+
+## Prerequisites
+
+The following prerequisites are required before you can create and restore backups:
+
+| Prerequisite                                             | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| :------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Set up a snapshot repository in the secondary datastore. | <p>Depending on the choice of secondary datastore, you must configure the following on the datastore itself:</p><p><ul><li>[Elasticsearch snapshot repository](https://www.elastic.co/docs/deploy-manage/tools/snapshot-and-restore/manage-snapshot-repositories)</li><li>[OpenSearch snapshot repository](https://docs.opensearch.org/docs/latest/tuning-your-cluster/availability-and-recovery/snapshots/snapshot-restore/)</li></ul></p><p><small>Note: For Elasticsearch configuration with the Camunda Helm chart on AWS EKS using IRSA, see [configuration example](/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/irsa.md#backup-related).</small></p>                                                                        |
+| Configure component backup storage.                      | <p>Configure the backup storage for the components. This is also important for restoring a backup.</p><p><ul><li>[Operate](../../../self-managed/components/orchestration-cluster/operate/operate-configuration.md#backups)</li><li>[Optimize Elasticsearch](../../../self-managed/components/optimize/configuration/system-configuration.md#elasticsearch-backup-settings) / [Optimize OpenSearch](../../components/optimize/configuration/system-configuration.md#opensearch-backup-settings)</li><li>[Tasklist](../../../self-managed/components/orchestration-cluster/tasklist/tasklist-configuration.md#backups)</li><li>[Zeebe](../../../self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#zeebebrokerdatabackup)</li></ul></p> |
 
 :::note
 You should keep the backup storage of the components configured at all times to ease the backup and restore process and avoid unnecessary restarts.
