@@ -22,7 +22,8 @@ Camunda provides the following migration tools:
 | **[Code Conversion Utilities](./code-conversion.md)**                                | Mixture of code _mapping tables_, code conversion _patterns_, and automatable _refactoring recipes_.                                                                                                |
 
 You might also be interested in:
-* [End-to-end example showing all tools in action](https://github.com/camunda-community-hub/camunda-7-to-8-migration-example)
+
+- [End-to-end example showing all tools in action](https://github.com/camunda-community-hub/camunda-7-to-8-migration-example)
 
 ## Migration Analyzer & Diagram Converter
 
