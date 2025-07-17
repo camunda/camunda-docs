@@ -1135,13 +1135,13 @@ module.exports = {
                     "self-managed/installation-methods/helm/configure/database/configure-db-custom-headers",
                   ],
                 },
-                "self-managed/installation-methods/helm/configure/secret-management",
                 {
                   Ingress: [
                     "self-managed/installation-methods/helm/configure/ingress-setup",
                     "self-managed/installation-methods/helm/configure/accessing-components-without-ingress",
                   ],
                 },
+                "self-managed/installation-methods/helm/configure/secret-management",
                 "self-managed/installation-methods/helm/configure/using-existing-keycloak",
                 //license key
                 "self-managed/installation-methods/helm/configure/configure-multi-tenancy",
