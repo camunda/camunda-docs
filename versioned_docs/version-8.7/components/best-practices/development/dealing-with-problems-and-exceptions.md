@@ -35,7 +35,7 @@ Whenever the worker has finished whatever it needs to do (like invoking the REST
 
 As the glue code in the worker is external to the workflow engine, there is **no technical transaction spanning both components**. Technical transactions refer to ACID (atomic, consistent, isolated, durable) properties, mostly known from relational databases.
 
-If, for example, your application leverages those capabilities, your business logic is either successfully committed as a whole, or rolled back completely in case of any error. However, those ACID transactions cannot be applied to distributed systems (the talk [lost in transaction](https://berndruecker.io/lost-in-transaction/) elaborates on this). In other words, things can get out of sync if either the job handler or the workflow engine fails.
+If, for example, your application leverages those capabilities, your business logic is either successfully committed as a whole, or rolled back completely in case of any error. However, those ACID transactions cannot be applied to distributed systems (the talk [lost in transaction](https://www.youtube.com/watch?v=WRR26jJNh68) elaborates on this). In other words, things can get out of sync if either the job handler or the workflow engine fails.
 
 A typical example scenario is the following, where a worker calls a REST endpoint to invoke business logic:
 
@@ -216,7 +216,7 @@ In general, we recommend talking about business reactions, which are modeled in 
 
 Applications using databases can often leverage ACID (atomic, consistent, isolated, durable) capabilities of that database. This means that some business logic is either successfully committed as a whole, or rolled back completely in case of any error. It is normally referred to as "transactions".
 
-Those ACID transactions cannot be applied to distributed systems (the talk [lost in transaction](https://berndruecker.io/lost-in-transaction/) elaborates on this), so if you call out to multiple services from a process, you end up with separate ACID transactions at play. The following illustrations are taken from the O'Reilly book [Practical Process Automation](https://processautomationbook.com/):
+Those ACID transactions cannot be applied to distributed systems (the talk [lost in transaction](https://www.youtube.com/watch?v=WRR26jJNh68) elaborates on this), so if you call out to multiple services from a process, you end up with separate ACID transactions at play. The following illustrations are taken from the O'Reilly book [Practical Process Automation](https://processautomationbook.com/):
 
 ![Multiple ACID transactions](dealing-with-problems-and-exceptions-assets/multiple-acid-transactions.png)
 
