@@ -67,7 +67,7 @@ The [Migration Analyzer & Diagram Converter](https://github.com/camunda-communit
 <!--
 If your models also contain JUEL expressions, which are not supported in Camunda 8, they also need to be converted. Simple expressions are [directly converted by this code in the Diagram Converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer/blob/d6fda97d00f27b23fc87fd741134225a527f3de1/core/src/main/java/org/camunda/community/migration/converter/expression/ExpressionTransformer.java#L4). This can be extended to suit your needs. You can use the [FEEL Copilot](/components/early-access/alpha/feel-copilot/feel-copilot.md) to rewrite more complex expressions for you.
 
-TODO document the expression transformer instead of referencing code. Or probably do a complete rewamp of this section to extract details to the readme - it is a bit arbritrary what is mentioned here - and probably also not fully aligned with latest changes.
+TODO document the expression transformer instead of referencing code. Or probably do a complete rewamp of this section to extract details to the readme - it is a bit arbitrary what is mentioned here - and probably also not fully aligned with latest changes.
 Might also make sense to describe that above patterns also inform diagram conversion
  -->
 
