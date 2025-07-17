@@ -9,6 +9,10 @@ import TabItem from "@theme/TabItem";
 
 [Camunda Process Test](https://github.com/camunda/camunda/tree/main/testing/camunda-process-test-java) (CPT) is a Java library to test your BPMN processes and your process application.
 
+:::info Public API
+Camunda Process Test is part of the Camunda 8 [public API](/reference/public-api.md) and is covered by our SemVer stability guarantees (except for alpha features). Breaking changes will not be introduced in minor or patch releases.
+:::
+
 :::info
 CPT is the successor of [Zeebe Process Test](/apis-tools/java-client/zeebe-process-test.md). Our previous testing library is deprecated and will be removed with version 8.10.
 :::
@@ -16,7 +20,7 @@ CPT is the successor of [Zeebe Process Test](/apis-tools/java-client/zeebe-proce
 CPT provides different runtimes to execute your process tests:
 
 - [Testcontainers runtime](configuration.md#testcontainers-runtime) (default) - A managed runtime based on [Testcontainers](https://java.testcontainers.org/) and Docker.
-- [Remote runtime](configuration.md#remote-runtime) - Your own runtime, such as, [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md)
+- [Remote runtime](configuration.md#remote-runtime) - Your own runtime, such as, [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md)
 
 ## Prerequisites
 

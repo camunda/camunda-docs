@@ -501,13 +501,62 @@ For `zeebe:calledElement` bindings, variable propagation is not supported. To pr
 
 #### `zeebe:userTask`
 
-| **Binding `type`**          | `zeebe:userTask`                                                                                              |
-| --------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| **Valid property `type`'s** | `Hidden`                                                                                                      |
+| **Binding `type`**          | `zeebe:userTask`                                                                                                      |
+| --------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| **Valid property `type`'s** | `Hidden`                                                                                                              |
 | **Binding parameters**      | This is a flag-like binding, so it has no parameters and only applies to templates with element type `bpmn:UserTask`. |
-| **Mapping result**          | `<zeebe:userTask />`                                                                                          |
+| **Mapping result**          | `<zeebe:userTask />`                                                                                                  |
 
 The `zeebe:userTask` binding allows you to configure the implementation type for a templated `bpmn:UserTask`. When present, it sets the task as a Camunda user task; when omitted, the task defaults to a job worker.
+
+#### `zeebe:formDefinition`
+
+| **Binding `type`**          | `zeebe:formDefinition`                                                                     |
+| --------------------------- | ------------------------------------------------------------------------------------------ |
+| **Valid property `type`'s** | `String`<br />`Text`<br />`Hidden`<br />`Dropdown`                                         |
+| **Binding parameters**      | `property`: The name of the property. Only `formId` and `externalReference` are supported. |
+| **Mapping result**          | `<zeebe:formDefinition [property]="[userInput]" />`                                        |
+
+The `zeebe:formDefinition` binding allows you to configure the [user task form](../../../bpmn/user-tasks/#user-task-forms) used by a user task.
+
+:::note
+
+When `zeebe:formDefinition` is used, `zeebe:userTask` must be set on the same element.
+Properties `formId` and `externalReference` are mutually exclusive, meaning that only one of them can be set at a time.
+
+:::
+
+#### `zeebe:calledDecision`
+
+| **Binding `type`**          | `zeebe:calledDecision`                                                                     |
+| --------------------------- | ------------------------------------------------------------------------------------------ |
+| **Valid property `type`'s** | `String`<br />`Text`<br />`Hidden`<br />`Dropdown`                                         |
+| **Binding parameters**      | `property`: The name of the property. Only `decisionId` and `resultVariable` are supported. |
+| **Mapping result**          | `<zeebe:calledDecision [property]="[userInput]" />`                                        |
+
+The `zeebe:calledDecision` binding allows you to configure the [called decision](../../../bpmn/business-rule-tasks/#defining-a-task) used by a business rule task.
+
+:::note
+
+When `zeebe:calledDecision` is used, `zeebe:taskDefinition` cannot be used on the same element.
+
+:::
+
+#### `zeebe:script`
+
+| **Binding `type`**          | `zeebe:script`                                                                         |
+| --------------------------- | -------------------------------------------------------------------------------------- |
+| **Valid property `type`'s** | `String`<br />`Text`<br />`Hidden`<br />`Dropdown`                                     |
+| **Binding parameters**      | `property`: The name of the property. `expression` and `resultVariable` are supported. |
+| **Mapping result**          | `<zeebe:script [property]="[userInput]" />`                                            |
+
+The `zeebe:script` binding allows you to configure the [FEEL expression](../../../bpmn/script-tasks/#defining-a-task) used by a script task.
+
+:::note
+
+When `zeebe:script` is used, `zeebe:taskDefinition` cannot be used on the same element.
+
+:::
 
 ### Optional bindings
 
@@ -697,7 +746,7 @@ You can define a category to group templates in the element template selection l
 ]
 ```
 
-::note
+:::note
 The category is optional. If not defined, the template will be displayed in the **Templates** section.
 :::
 
@@ -725,7 +774,7 @@ It is possible to define custom icons to update the visual appearance of element
 
 ![Icons](./img/icons.png)
 
-::tip
+:::tip
 The icon contents must be a valid [data](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs) or HTTP(s) URL. We recommend using square icons as they get rendered 18x18 pixels on the canvas and 32x32 pixels in the properties panel.
 :::
 

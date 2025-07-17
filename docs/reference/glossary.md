@@ -73,14 +73,14 @@ See [Zeebe cluster](#zeebe-cluster).
 
 Camunda 8 is a universal process orchestrator that allows you to orchestrate and automate complex business processes that span people, systems, and devices. Camunda 8 consists of the following key components:
 
-| Component | Description |
-|:-- |:-- |
-| [Orchestration cluster](#orchestration-cluster) | Powers the automation and orchestration of [processes](#process). |
-| [Connectors](#connector) | Out-of-the-box integration with external systems. |
-| [Optimize](/components/optimize/what-is-optimize.md) | Business intelligence tooling, allowing you to analyze bottlenecks and examine improvements in [processes](#process) automated with Camunda. |
-| Console | Manage your [Orchestration cluster](#orchestration-cluster) deployments, as follows:<p><ul><li><p>[Console SaaS](/components/console/introduction-to-console.md): Configure, deploy, and manage your [Orchestration cluster](#orchestration-cluster), as well as your [connectors](#connector) and Optimize deployments.</p></li><li><p>[Console Self-Managed](/self-managed/console-deployment/overview.md): Monitor your [Orchestration cluster](#orchestration-cluster) and [connector](#connector) deployments.</p></li></ul></p> |
-| Modelers | Allows business users and developers to design and implement [processes](#process), decisions, and [user task](#user-task) forms:<p><ul><li><p>Use [Desktop Modeler](/components/modeler/desktop-modeler/index.md) locally on Mac, Windows, and Linux.</p></li><li><p>Use the browser-based [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md) for process application management.</p></li></ul></p> |
-| [Management Identity](#management-identity) | Authentication and authorization for the components outside the [Orchestration cluster](#orchestration-cluster) (Optimize, Console, and Web Modeler). |
+| Component                                            | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| :--------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [Orchestration cluster](#orchestration-cluster)      | Powers the automation and orchestration of [processes](#process).                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| [Connectors](#connector)                             | Out-of-the-box integration with external systems.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| [Optimize](/components/optimize/what-is-optimize.md) | Business intelligence tooling, allowing you to analyze bottlenecks and examine improvements in [processes](#process) automated with Camunda.                                                                                                                                                                                                                                                                                                                                                                                          |
+| Console                                              | Manage your [Orchestration cluster](#orchestration-cluster) deployments, as follows:<p><ul><li><p>[Console SaaS](/components/console/introduction-to-console.md): Configure, deploy, and manage your [Orchestration cluster](#orchestration-cluster), as well as your [connectors](#connector) and Optimize deployments.</p></li><li><p>[Console Self-Managed](/self-managed/console-deployment/overview.md): Monitor your [Orchestration cluster](#orchestration-cluster) and [connector](#connector) deployments.</p></li></ul></p> |
+| Modelers                                             | Allows business users and developers to design and implement [processes](#process), decisions, and [user task](#user-task) forms:<p><ul><li><p>Use [Desktop Modeler](/components/modeler/desktop-modeler/index.md) locally on Mac, Windows, and Linux.</p></li><li><p>Use the browser-based [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md) for process application management.</p></li></ul></p>                                                                                                                |
+| [Management Identity](#management-identity)          | Authentication and authorization for the components outside the [Orchestration cluster](#orchestration-cluster) (Optimize, Console, and Web Modeler).                                                                                                                                                                                                                                                                                                                                                                                 |
 
 ### Command
 
@@ -188,7 +188,7 @@ Hybrid mode, or a hybrid Self-Managed distribution, allows you to run a separate
 
 For example, this is useful when working with services that must be isolated within a private network and cannot be exposed to the public internet, or if infrastructure amendments need to be applied to the connector runtime, such as SSL certificates or mounted volumes.
 
-- [Use connectors in hybrid mode](/guides/use-connectors-in-hybrid-mode.md)
+- [Use connectors in hybrid mode](/components/connectors/use-connectors-in-hybrid-mode.md)
 
 ## I
 
@@ -215,7 +215,7 @@ An incident represents an error condition which prevents [Zeebe](#zeebe) from ad
 
 An Ingress is a Kubernetes object that manages external access to the services within a Kubernetes cluster. An **Ingress controller** is required to route traffic to your services according to the rules defined on the Ingress.
 
-- [Ingress setup](/self-managed/setup/guides/ingress-setup.md)
+- [Ingress setup](/self-managed/installation-methods/helm/configure/ingress-setup.md)
 
 ## J
 
@@ -331,6 +331,12 @@ Protocol connectors are a type of [Connector](#connector) in Camunda that can se
 
 Protocol connectors can be customized to meet the needs of specific use cases using [element templates](#element-template), with no additional coding or deployment required. Examples of protocol connectors include HTTP REST, SOAP, GraphQL, as well as message queue connectors.
 
+### Public API
+
+The public API represents the official set of interfaces in Camunda 8 that are covered by [Semantic Versioning (SemVer)](https://semver.org/) stability guarantees. APIs included in the public API contract will not introduce breaking changes in minor or patch releases, ensuring backwards compatibility for your integrations. The public API is a subset of all available Camunda 8 APIs - many APIs are available for external use but are not included in the formal stability commitment.
+
+- [Public API](/reference/public-api.md)
+
 ## R
 
 ### Record
@@ -338,6 +344,12 @@ Protocol connectors can be customized to meet the needs of specific use cases us
 A record represents a command or an event. For example, a command to create a new [process instance](#process-instance), or a state transition of an executing [process instance](#process-instance) representing an [event](#event) at a given point in time would result to generation of a record. During the execution lifecycle of a process instance, numerous records are generated to capture various commands and events generated. Records are stored in the log.
 
 - [Internal processing](/components/zeebe/technical-concepts/internal-processing.md#events-and-commands)
+
+### Reference architecture
+
+Reference architectures provide comprehensive blueprints for designing and implementing scalable, robust, and adaptable Camunda 8 self-managed installations. Reference architectures serve as starting points that should be adapted to fit the specific needs and constraints of your organization and infrastructure.
+
+- [Reference architectures](/self-managed/reference-architecture/reference-architecture.md)
 
 ### Replication
 
@@ -393,7 +405,7 @@ The state of all active [process instances](#process-instance), (these are also 
 Soft pause exporting is a feature that allows you to continue exporting records from [Zeebe](#zeebe), but without deleting those [records](#record) ([log](#log) compaction) from Zeebe. This is particularly useful during hot backups.
 
 - [Exporting API](/self-managed/zeebe-deployment/operations/management-api.md)
-- [Backup and restore](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md)
+- [Backup and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md)
 
 ### Subscription inbound connector
 

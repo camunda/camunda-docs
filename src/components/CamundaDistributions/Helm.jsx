@@ -1,7 +1,7 @@
 import React from "react";
-import { useActiveVersion } from "@docusaurus/plugin-content-docs/client";
 import CodeBlock from "@theme/CodeBlock";
-import { getCamundaVersion } from "./utils";
+import { useActiveVersion } from "@docusaurus/plugin-content-docs/client";
+import { camundaReleaseVersion } from "../Versions";
 
 const getChartVersion = () => {
   const docsVersion = useActiveVersion();
@@ -62,7 +62,7 @@ const HelmChartInstall = () => {
 };
 
 export const HelmChartValuesFileLocalLink = () => {
-  const version = getCamundaVersion();
+  const version = camundaReleaseVersion();
   return (
     <a
       title={`https://helm.camunda.io/camunda-platform/values/camunda-${version}/values-local.yaml`}

@@ -56,6 +56,12 @@ You try to connect (i.e., to deploy) to a remote Zeebe instance, and Desktop Mod
 
 To resolve this issue, check if you can connect to Zeebe through another client, for example, community-supported [`zbctl`](https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md). If that works, [further debug your Zeebe connection](#debug-zeebe-connection-issues). If that does not work, resolve the [general connection issue](#resolve-a-general-zeebe-connection-issue) first.
 
+## I cannot connect to local Zeebe
+
+You try to connect (i.e., to deploy) to a local Zeebe instance, and Desktop Modeler tells you it "cannot find a running Zeebe."
+
+Ensure your local Zeebe instance is running. If you don't have one installed, consider [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md), a lightweight all-in-one distribution.
+
 ## Resolve a general Zeebe connection issue
 
 You try to connect to Zeebe from both Desktop Modeler _and_ community-supported [`zbctl`](https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md), and neither of them works. General connection failures can have a couple of reasons:
@@ -63,6 +69,10 @@ You try to connect to Zeebe from both Desktop Modeler _and_ community-supported 
 ### The (remote) Zeebe instance is not reachable
 
 Ensure your computer has access to the (remote) network.
+
+:::tip
+If you run against a Camunda 8 free-trial cluster, ensure it is [not paused](../../concepts/clusters.md#auto-pause).
+:::
 
 ### The connection to Zeebe happens through a proxy
 

@@ -116,7 +116,7 @@ public class MyProcessTest {
 
 ## Remote runtime
 
-Instead of using the managed [Testcontainers runtime](#testcontainers-runtime), you can configure CPT to connect to a remote runtime, for example, to a local [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md) running on your machine.
+Instead of using the managed [Testcontainers runtime](#testcontainers-runtime), you can configure CPT to connect to a remote runtime, for example, to a local [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) running on your machine.
 
 When to use it:
 

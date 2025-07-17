@@ -108,7 +108,7 @@ In Camunda 7, you have [different ways to provide forms for user tasks](https://
 - Generated Forms (modelled directly in the process)
 - Embedded Task Forms (embedded custom HTML and JavaScript)
 - External Task Forms (link to custom applications)
-- [Camunda Forms](/guides/utilizing-forms.md)
+- [Camunda Forms](/components/modeler/forms/utilizing-forms.md)
 
 :::note
 Only Camunda Forms are currently supported in Camunda 8 and can be migrated.

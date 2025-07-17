@@ -12,7 +12,7 @@ New to RPA? Visit the [overview page](/components/rpa/overview.md) to get famili
 Before getting started, review the [current known issues for RPA](https://github.com/camunda/rpa-worker/discussions/categories/known-issues) to ensure environment compatibility.
 :::
 
-The RPA worker is available on all major platforms (Windows, Linux, and Mac). This allows you to automate your applications on their native platforms. In most cases, this will be Windows. For console applications or browser automation, you can use a more light-weight distribution, such as the [Docker image](/self-managed/setup/deploy/other/docker.md).
+The RPA worker is available on all major platforms (Windows, Linux, and Mac). This allows you to automate your applications on their native platforms. In most cases, this will be Windows. For console applications or browser automation, you can use a more light-weight distribution, such as the [Docker image](/self-managed/installation-methods/docker/docker.md).
 
 ## Create your first script
 
@@ -48,7 +48,7 @@ Once you are happy with your script and have tested it locally, you can start au
 
 1. **Deploy the RPA file**:
 
-   1. If you haven't already, [set up client connection credentials](/guides/setup-client-connection-credentials.md) for your Modeler.
+   1. If you haven't already, [set up client connection credentials](/components/console/manage-clusters/setup-client-connection-credentials.md) for your Modeler.
    2. Deploy your RPA script file by clicking on the rocket (🚀) icon in Modeler.
    3. Note the ID of your RPA script. You will need this in the next step.
 

@@ -85,10 +85,10 @@ The primary goal of those changes is to enable users to interact with Camunda cl
 
 If you need to continue using the old `ZeebeClient`, you can use the new version 8.8 `CamundaClient` artifact without issues as it still contains the related `ZeebeClient` classes. Those classes are marked as deprecated, so you can easily spot code you need to adjust to the `CamundaClient`.
 
-The old `zeebe-client-java` artifact will be relocation-only, so your build system is redirected to the new `camunda-client-java` artifact. We will discontinue the old artifact with a future release and recommend using the new one.
+The old `zeebe-client-java` artifact will be relocation-only, so your build system is redirected to the new `camunda-client-java` artifact. We will discontinue the old artifact in version 8.10 and recommend using the new one.
 
 :::note
-The Zeebe Java client will not be developed further and will only receive bug fixes for as long as version 8.7 is officially supported.
+The Zeebe Java client will not be developed further and will only receive bug fixes for as long as version 8.9 is officially supported. This client is scheduled for removal in version 8.10.
 :::
 
 ### Spring Zeebe SDK
@@ -96,10 +96,17 @@ The Zeebe Java client will not be developed further and will only receive bug fi
 Starting with 8.8, the Spring Zeebe SDK will become the new Camunda Spring Boot SDK. The SDK will rely on the new Camunda Java client, designed to enhance the user experience and introduce new features while maintaining compatibility with existing codebases.
 
 :::note
-The Spring Zeebe SDK will not be developed further and will only receive bug fixes for as long as version 8.7 is officially supported.
+The Spring Zeebe SDK will not be developed further and will only receive bug fixes for as long as version 8.9 is officially supported. This SDK is scheduled for removal in version 8.10.
 :::
 
 ### Camunda 8 Self-Managed
+
+#### Deprecation of Self-Managed AWS Marketplace offering
+
+As of **October 2025**, the **Self-Managed AWS Marketplace** offering will be **deprecated** and no longer publicly available.  
+Existing customers may continue to use the product until their contracts expire.
+
+For future use, refer to our [new AWS Marketplace listing](https://aws.amazon.com/marketplace/pp/prodview-6y664fcnydiqg?sr=0-1&ref_=beagle&applicationId=AWSMPContessa) for more information.
 
 #### Helm chart - Separated Ingress deprecation
 

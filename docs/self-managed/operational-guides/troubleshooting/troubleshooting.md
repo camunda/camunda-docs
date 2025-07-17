@@ -48,7 +48,7 @@ not provide support for the distribution of the Keycloak TLS key to the other co
 
 ## Identity redirect URL
 
-If HTTP to HTTPS redirection is enabled in the load-balancer or ingress, make sure to use the HTTPS
+If HTTP to HTTPS redirection is enabled in the load-balancer or Ingress, make sure to use the HTTPS
 protocol in the values file under `global.identity.auth.[COMPONENT].redirectUrl`.
 Otherwise, you will get a redirection error in Keycloak.
 
@@ -73,11 +73,11 @@ However, according to the official Kubernetes documentation about [Ingress TLS](
 
 > There is a gap between TLS features supported by various Ingress controllers. Please refer to documentation on nginx, GCE, or any other platform specific Ingress controller to understand how TLS works in your environment.
 
-Therefore, if you are not using the [ingress-nginx controller](https://github.com/kubernetes/ingress-nginx), ensure you pay attention to TLS configuration of the Ingress controller of your choice. Find more details about the Zeebe Ingress setup in the [Kubernetes platforms supported by Camunda](/self-managed/setup/install.md).
+Therefore, if you are not using the [ingress-nginx controller](https://github.com/kubernetes/ingress-nginx), ensure you pay attention to TLS configuration of the Ingress controller of your choice. Find more details about the Zeebe Ingress setup in the [Kubernetes platforms supported by Camunda](/self-managed/installation-methods/helm/install.md).
 
 ## Identity `contextPath`
 
-Camunda 8 Self-Managed can be accessed externally via the [combined Ingress setup](self-managed/setup/guides/ingress-setup.md#combined-ingress-setup). In that configuration, Camunda Identity is accessed using a specific path, configured by setting the `contextPath` variable, for example `https://camunda.example.com/identity`.
+Camunda 8 Self-Managed can be accessed externally via the [combined Ingress setup](/self-managed/installation-methods/helm/configure/ingress-setup.md#combined-ingress-setup). In that configuration, Camunda Identity is accessed using a specific path, configured by setting the `contextPath` variable, for example `https://camunda.example.com/identity`.
 
 For security reasons, Camunda Identity requires secure access (HTTPS) when a `contextPath` is configured.
 
@@ -186,7 +186,7 @@ Find more information on [how to register your application on Identity](https://
 
 The AWS EKS IRSA configuration scripts are focused on verifying the correct setup of IAM Roles for Service Accounts (IRSA) within your Kubernetes deployment on AWS. These scripts ensure that your Kubernetes service accounts are correctly associated with IAM roles, allowing components like PostgreSQL, OpenSearch, and others in your deployment to securely interact with AWS resources.
 
-For detailed usage instructions and setup information, please refer to the [IRSA guide](/self-managed/setup/deploy/amazon/amazon-eks/irsa.md#irsa-check-script).
+For detailed usage instructions and setup information, please refer to the [IRSA guide](/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/irsa.md#irsa-check-script).
 
 ### Interpretation of the results
 
