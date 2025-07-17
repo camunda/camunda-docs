@@ -19,13 +19,13 @@ Applications can authenticate with Camunda 8 using M2M (machine-to-machine) toke
 
 The following prerequisites are required for M2M authentication:
 
-| Prerequisite                                                                                 | Description                            |
-| :------------------------------------------------------------------------------------------- | :------------------------------------- |
+| Prerequisite                                                                                                       | Description                            |
+| :----------------------------------------------------------------------------------------------------------------- | :------------------------------------- |
 | [Identity](/self-managed/components/management-identity/what-is-identity.md)                                       | A running Identity service.            |
 | [Application](/self-managed/components/management-identity/application-user-group-role-management/applications.md) | An application for your service.       |
-| Client ID                                                                                    | The client ID of your application.     |
-| Client secret                                                                                | The client secret of your application. |
-| REST client                                                                                  | A REST client of your choice.          |
+| Client ID                                                                                                          | The client ID of your application.     |
+| Client secret                                                                                                      | The client secret of your application. |
+| REST client                                                                                                        | A REST client of your choice.          |
 
 ### Generate a token
 
