@@ -25,7 +25,7 @@ function preGenerateDocs(config) {
 
 function postGenerateDocs(config) {
   removeDuplicateVersionBadge(
-    `${config.outputDir}/camunda-8-rest-api.info.mdx`
+    `${config.outputDir}/orchestration-cluster-rest-api.info.mdx`
   );
 }
 

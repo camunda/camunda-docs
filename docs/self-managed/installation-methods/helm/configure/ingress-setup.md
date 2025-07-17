@@ -116,7 +116,7 @@ Once deployed, you can access the Camunda 8 components on:
 
 ## Ingress controllers
 
-Ingress resources require the cluster to have an [Ingress Controller](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/) running. There are many options for configuring your Ingress Controller. If you are using a cloud provider such as AWS or GCP, follow their Ingress setup guides if an Ingress Controller is not already pre-installed. Ingress configuration for AWS EKS can be found in [install Camunda 8 on an EKS cluster](/self-managed/setup/deploy/amazon/amazon-eks/eks-helm.md).
+Ingress resources require the cluster to have an [Ingress Controller](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/) running. There are many options for configuring your Ingress Controller. If you are using a cloud provider such as AWS or GCP, follow their Ingress setup guides if an Ingress Controller is not already pre-installed. Ingress configuration for AWS EKS can be found in [install Camunda 8 on an EKS cluster](/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/eks-helm.md).
 
 ### Example local configuration
 

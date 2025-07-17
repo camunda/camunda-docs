@@ -122,7 +122,7 @@ describe("determineCanonical", () => {
 
         expect(() => {
           determineCanonical(currentDoc, currentPlugin);
-        }).toThrowError("canonicalUrl does not exist: /docs/welcome.");
+        }).toThrow("canonicalUrl does not exist: /docs/welcome.");
       });
     });
   });
@@ -174,7 +174,7 @@ describe("determineCanonical", () => {
 
         expect(() => {
           determineCanonical(currentDoc, currentPlugin);
-        }).toThrowError(
+        }).toThrow(
           "canonicalId does not exist in latest version: components/components-overview."
         );
       });
