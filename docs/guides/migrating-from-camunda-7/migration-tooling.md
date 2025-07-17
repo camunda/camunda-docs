@@ -19,7 +19,7 @@ Camunda provides the following migration tools:
 | :----------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **[Migration Analyzer & Diagram Converter](#migration-analyzer--diagram-converter)** | Gain a first understanding of migration tasks. Available for local installation (Java or Docker) or [hosted as a free SaaS offering](https://migration-analyzer.consulting-sandbox.camunda.cloud/). |
 | **[Data Migrator](#data-migrator)**                                                  | Copies active Camunda 7 runtime instances to Camunda 8. Planned to be extended to also copy existing audit trail data (history).                                                                    |
-| **[Code Conversion Utilities](./code-conversion.md)**                                           | Mixture of code *mapping tables*, code conversion *patterns*, and automatable *refactoring recipes*.                                                                                  |
+| **[Code Conversion Utilities](./code-conversion.md)**                                | Mixture of code _mapping tables_, code conversion _patterns_, and automatable _refactoring recipes_.                                                                                                |
 
 You might also be interested in:
 * [End-to-end example showing all tools in action](https://github.com/camunda-community-hub/camunda-7-to-8-migration-example)
