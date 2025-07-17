@@ -182,18 +182,18 @@ When to use it:
 @Test
 void shouldCompleteJob() {
     // given: a process instance is waiting at a task
-    
+
     // when: complete the job with type "send-notification"
     // 1) Without variables
     processTestContext.completeJob("send-notification");
-    
+
     // 2) With variables
     final Map<String, Object> variables = Map.of(
         "notification-sent", true,
         "recipients", List.of("user1@example.com", "user2@example.com")
     );
     processTestContext.completeJob("send-notification", variables);
-    
+
     // then: verify that the process instance completed the task
 }
 ```
@@ -212,18 +212,18 @@ When to use it:
 @Test
 void shouldThrowBpmnErrorFromJob() {
     // given: a process instance is waiting at a task
-    
+
     // when: throw a BPMN error for the job with type "validate-data"
     // 1) With error code "VALIDATION_FAILED" and no variables
     processTestContext.throwBpmnErrorFromJob("validate-data", "VALIDATION_FAILED");
-    
+
     // 2) With error code "VALIDATION_FAILED" and variables
     final Map<String, Object> variables = Map.of(
         "error-message", "Invalid customer data",
         "error-code", "ERR_VALIDATION_001"
     );
     processTestContext.throwBpmnErrorFromJob("validate-data", "VALIDATION_FAILED", variables);
-    
+
     // then: verify that the process instance handled the error
 }
 ```
@@ -252,10 +252,10 @@ void shouldCompleteUserTask() {
         "approvedAmount", 5000.00
     );
     processTestContext.completeUserTask("Approve Request", variables);
-    
+
     // 2) With selector by element id "task_approveRequest"
     processTestContext.completeUserTask(byElementId("task_approveRequest"), variables);
-    
+
     // then: verify that the process instance is completed
 }
 ```

@@ -8,9 +8,9 @@ These release notes identify the new features included in Camunda 8.5, 8.4, and 
 
 ## 8.5 minor
 
-| Release date | End of maintenance | Changelog(s)                                                                                                                                                                                                                                                | Release blog                                                          | Update guide                                                                             |
-| ------------ | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| 9 April 2024 | 14 October 2025    | -[ Camunda 8 Core ](https://github.com/camunda/camunda-platform/releases/tag/8.5.0) <br /> -[ connectors ](https://github.com/camunda/connectors/releases/tag/8.5.0) <br /> - [ Optimize ](https://github.com/camunda/camunda-optimize/releases/tag/3.13.0) | [Release blog](https://camunda.com/blog/2024/04/camunda-8-5-release/) | [Self-Managed update guide](/self-managed/operational-guides/update-guide/840-to-850.md) |
+| Release date | End of maintenance | Changelog(s)                                                                                                                                                                                                                                                | Release blog                                                          | Update guide                                                                           |
+| ------------ | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| 9 April 2024 | 14 October 2025    | -[ Camunda 8 Core ](https://github.com/camunda/camunda-platform/releases/tag/8.5.0) <br /> -[ connectors ](https://github.com/camunda/connectors/releases/tag/8.5.0) <br /> - [ Optimize ](https://github.com/camunda/camunda-optimize/releases/tag/3.13.0) | [Release blog](https://camunda.com/blog/2024/04/camunda-8-5-release/) | [Self-Managed update guide](/self-managed/components/components-upgrade/840-to-850.md) |
 
 ### Updated SaaS URLs <span class="badge badge--long" title="This feature affects SaaS">SaaS</span>
 
@@ -208,7 +208,7 @@ Our marketplace now supports process blueprints as well. You can discover a wide
 
 <!-- https://github.com/camunda/product-hub/issues/1376 -->
 
-We are excited to announce the release of a new Camunda 8 component - [Camunda Console Self-Managed](/self-managed/console-deployment/overview.md), the new console has been developed to enhance the management and monitoring of Camunda 8 installations within an enterprise installation. It facilitates a clear and concise overview of the Camunda platform as deployed within Kubernetes environments, making operational tasks more streamlined and efficient.
+We are excited to announce the release of a new Camunda 8 component - [Camunda Console Self-Managed](/self-managed/components/console/overview.md), the new console has been developed to enhance the management and monitoring of Camunda 8 installations within an enterprise installation. It facilitates a clear and concise overview of the Camunda platform as deployed within Kubernetes environments, making operational tasks more streamlined and efficient.
 
 ### Rolling updates for Zeebe Self-Managed <span class="badge badge--long" title="This feature affects Zeebe">Zeebe</span> <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 

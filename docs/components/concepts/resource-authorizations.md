@@ -8,7 +8,7 @@ In Camunda 8 SaaS, resource authorizations allow you to control the level of acc
 
 :::info
 Resource authorizations in Camunda 8 SaaS can only be applied on a user level currently. If you would like to explore setting resource authorizations
-on a group level, see the [resource authorizations for Self-Managed](../../self-managed/identity/access-management/resource-authorizations.md).
+on a group level, see the [resource authorizations for Self-Managed](../../self-managed/components/management-identity/access-management/resource-authorizations.md).
 :::
 
 ### Component support
@@ -37,4 +37,4 @@ Operate uses a caching mechanism where resource authorization changes can take 3
 
 ### Using Camunda 8 Self-Managed?
 
-If you are using the Self-Managed distribution of Camunda 8, we recommend heading over to the [resource authorizations for Self-Managed](../../self-managed/identity/access-management/resource-authorizations.md) documentation.
+If you are using the Self-Managed distribution of Camunda 8, we recommend heading over to the [resource authorizations for Self-Managed](../../self-managed/components/management-identity/access-management/resource-authorizations.md) documentation.
