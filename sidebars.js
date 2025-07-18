@@ -721,7 +721,6 @@ module.exports = {
             "components/best-practices/operations/versioning-process-definitions",
             "components/best-practices/operations/reporting-about-processes",
           ],
-          Security: ["components/best-practices/security/csrf-protection"],
         },
       ],
     },
