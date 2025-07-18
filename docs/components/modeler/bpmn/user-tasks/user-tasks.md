@@ -178,7 +178,7 @@ Currently, user task listeners can react to the following events:
 
 To define a user task listener, include the `zeebe:taskListeners` extension element within the user task in your BPMN model. This element can contain one or more `zeebe:taskListener` elements, each specifying the following attributes:
 
-- The `eventType` that triggers the listener (`"assigning"` or `"completing"`).
+- The `eventType` that triggers the listener (possible values: `creating`, `assigning`, `updating`, `completing`, `canceling`).
 - The `type` of the listener (job type used by the external worker).
 - The number of `retries` for the user task listener job (defaults to 3 if omitted).
 
