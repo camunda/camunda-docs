@@ -71,7 +71,7 @@ module.exports = {
             "components/concepts/access-control/access-control-overview",
             "components/concepts/access-control/authorizations",
             "components/concepts/access-control/user-groups",
-            "components/concepts/access-control/user-task-access-restrictions"
+            "components/concepts/access-control/user-task-access-restrictions",
           ],
         },
       ],
