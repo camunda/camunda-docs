@@ -534,4 +534,4 @@ With application preparation complete, coordinate with platform administrators f
 - Execute comprehensive validation tests
 - Monitor application performance and functionality
 
-For additional SDK migration guidance, see the [migration documentation](/apis-tools/migration-manuals/) for detailed migration instructions.
+For additional SDK migration guidance, see the [migration documentation](/apis-tools/migration-manuals/migrate-to-camunda-api.md) for detailed migration instructions.

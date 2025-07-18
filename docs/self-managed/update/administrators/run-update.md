@@ -575,6 +575,5 @@ After successful platform update completion:
 ## Additional resources
 
 - **[Helm chart upgrade guide: 8.7 to 8.8](../../../self-managed/installation-methods/helm/upgrade/helm-870-880.md)** - Detailed technical upgrade steps
-- **[Operational guides](/self-managed/operational-guides/)** - 8.8-specific procedures and best practices
 - **[Backup and restore guide](/self-managed/operational-guides/backup-restore/backup-and-restore.md)** - Comprehensive backup procedures
 - **[Troubleshooting guides](/self-managed/operational-guides/troubleshooting/troubleshooting.md)** - Issue resolution procedures

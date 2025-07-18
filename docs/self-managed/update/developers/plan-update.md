@@ -288,4 +288,4 @@ Once you've completed your application update planning:
 3. **Document the strategy** including rollback procedures for applications
 4. **Proceed to preparation** following the [prepare for update guide](./prepare-for-update.md)
 
-For additional guidance on specific SDK migrations, consult the [migration documentation](/apis-tools/migration-manuals/) for detailed migration instructions.
+For additional guidance on specific SDK migrations, consult the [migration documentation](/apis-tools/migration-manuals/migrate-to-camunda-api.md) for detailed migration instructions.
