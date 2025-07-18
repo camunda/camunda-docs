@@ -85,15 +85,6 @@ Docker images are supported for production usage on Linux systems. Docker Compos
 - **Identity**: `camunda/identity:8.8.0`
 - **Connectors**: `camunda/connectors:8.8.0`
 
-**Component-specific guidance:**
-
-- **[Docker deployment guide](/self-managed/installation-methods/docker/docker.md)**
-- **[Zeebe Docker deployment](/self-managed/zeebe-deployment/)**
-- **[Operate Docker setup](/self-managed/operate-deployment/)**
-- **[Tasklist Docker configuration](/self-managed/tasklist-deployment/)**
-- **[Optimize migration procedures](/self-managed/optimize-deployment/migration-update/)**
-- **[Identity Docker setup](/self-managed/identity/)**
-
 </TabItem>
 <TabItem value="manual" label="Manual JAR">
 
@@ -109,14 +100,6 @@ For manual installations using JAR files or system packages:
 4. **Update configuration**: Apply configuration changes for 8.8
 5. **Run migrations**: Execute necessary data migrations
 6. **Start services**: Restart all services in proper order
-
-**Component-specific guidance:**
-
-- **[Zeebe manual deployment](/self-managed/zeebe-deployment/)**
-- **[Operate manual setup](/self-managed/operate-deployment/)**
-- **[Tasklist manual configuration](/self-managed/tasklist-deployment/)**
-- **[Optimize migration procedures](/self-managed/optimize-deployment/migration-update/)**
-- **[Identity manual setup](/self-managed/identity/)**
 
 </TabItem>
 </Tabs>
@@ -370,7 +353,7 @@ jstat -gc <java-pid>
 
 For detailed troubleshooting of Helm-specific upgrade issues:
 
-- **[Helm upgrade troubleshooting](/self-managed/installation-methods/helm/upgrade/upgrade-hc-870-880/#troubleshooting)**
+- **[Helm upgrade troubleshooting](/self-managed/installation-methods/helm/upgrade/helm-870-880.md#troubleshooting)**
 
 **Quick diagnostic commands:**
 
@@ -591,7 +574,7 @@ After successful platform update completion:
 
 ## Additional resources
 
-- **[Helm chart upgrade guide: 8.7 to 8.8](/self-managed/installation-methods/helm/upgrade/upgrade-hc-870-880/)** - Detailed technical upgrade steps
+- **[Helm chart upgrade guide: 8.7 to 8.8](../../../self-managed/installation-methods/helm/upgrade/helm-870-880.md)** - Detailed technical upgrade steps
 - **[Operational guides](/self-managed/operational-guides/)** - 8.8-specific procedures and best practices
 - **[Backup and restore guide](/self-managed/operational-guides/backup-restore/backup-and-restore.md)** - Comprehensive backup procedures
-- **[Troubleshooting guides](/self-managed/operational-guides/)** - Issue resolution procedures
+- **[Troubleshooting guides](/self-managed/operational-guides/troubleshooting/troubleshooting.md)** - Issue resolution procedures

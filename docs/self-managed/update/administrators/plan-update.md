@@ -47,7 +47,7 @@ helm list | grep camunda-platform
 ### Version-specific considerations
 
 Review the [supported environments](/reference/supported-environments.md#component-version-matrix) to understand version compatibility requirements.
-Always check the [release notes](/reference/announcements-release-notes/) for version-specific recommendations.
+Always check the [release notes](/reference/announcements-release-notes/880/880-release-notes.md) for version-specific recommendations.
 
 ## Step 2: Assess platform changes
 

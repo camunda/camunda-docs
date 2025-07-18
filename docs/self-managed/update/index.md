@@ -91,7 +91,7 @@ Camunda 8.8 introduces the **orchestration cluster** - a unified deployment mode
 | Tasklist V1 API        | Orchestration Cluster API |
 
 **Detailed migration guide:**
-For step-by-step instructions on migrating from V1 APIs to the new Orchestration Cluster API, see the [Migration to Orchestration Cluster API guide](/apis-tools/migration-manuals/migrate-to-camunda-api/).
+For step-by-step instructions on migrating from V1 APIs to the new Orchestration Cluster API, see the [Migration to Orchestration Cluster API guide](/apis-tools/migration-manuals/migrate-to-camunda-api.md).
 
 ### SDK migration requirements
 
@@ -215,7 +215,7 @@ await client.userTasks.complete(taskId, {
 ```
 
 **Detailed migration guide:**
-For comprehensive instructions on migrating from job-based to Camunda User Tasks, see the [User Task Migration Guide](/apis-tools/migration-manuals/migrate-to-camunda-user-tasks/).
+For comprehensive instructions on migrating from job-based to Camunda User Tasks, see the [User Task Migration Guide](/apis-tools/migration-manuals/migrate-to-camunda-user-tasks.md).
 
 ### Authentication and authorization changes
 
