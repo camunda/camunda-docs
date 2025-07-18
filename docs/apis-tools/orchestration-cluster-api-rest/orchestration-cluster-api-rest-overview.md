@@ -5,7 +5,7 @@ description: "Interact with Camunda 8 clusters. Activate jobs and run user task 
 ---
 
 ## Welcome to the Camunda Orchestration Cluster API
-The Orchestration Cluster API lets you interact programmatically with process orchestration capabilities in Camunda 8. You can use it to start, manage, and query process instances. It also lets you complete user tasks, resolve incidents, and manage variables - at scale and with confidence.
+The Orchestration Cluster API lets you interact programmatically with process orchestration capabilities in Camunda 8. You can use it to start, manage, and query process instances. It also lets you complete user tasks, resolve incidents, and manage variables, at scale and with confidence.
 
 You can use this API to:
 * Build process-driven applications
@@ -14,14 +14,14 @@ You can use this API to:
 
 This API is designed to make it easy to [find resources](./orchestration-cluster-api-rest-data-fetching.md#advanced-search-filters) with a consistent experience while ensuring all endpoints are secure with [authentication](./orchestration-cluster-api-rest-authentication.md) and fine-grained [resource authorization](/components/identity/authorization.md). 
 
-We're commited to delivering high performance and reliability with our APIs. This API is part of the Camunda 8 [public API](/reference/public-api.md) and is covered by our SemVer stability guarantees (except for clearly marked alpha endpoints).
+We're committed to delivering high performance and reliability with our APIs. This API is part of the Camunda 8 [public API](/reference/public-api.md) and is covered by our SemVer stability guarantees (except for clearly marked alpha endpoints).
 
 To learn more about orchestration clusters themselves, see [What is an Orchestration Cluster?](/components/orchestration-cluster.md)
 
-Ready to dive in? See **Get started** below to make your first API call.
+Ready to dive in? Head to **[Getting started](#getting-started)** section below to make your first API call.
 
-## Get started
-To begin using the Orchestration Cluster API, you'll need the following:
+## Getting started
+This section helps you get up and running in minutes. To begin using the Orchestration Cluster API, you'll need the following:
 
 ### Prerequisites
 
@@ -29,10 +29,10 @@ To begin using the Orchestration Cluster API, you'll need the following:
   * For quick local development, we recommend using [C8Run](/self-managed/quickstart/developer-quickstart/c8run.md). It exposes the API without requiring credentials or tokens.
 * **An Access Token** (for secured clusters)
   * Follow the steps in [Authentication](./orchestration-cluster-api-rest-authentication.md) to obtain a valid JWT access token.
-* **A Client to make API requests**
+* **A Client to send API requests**
   * Use the [Postman Collection](https://www.postman.com/camundateam/camunda-8-postman/collection/apl78x9/camunda-8-api-rest) for quick testing, or interact programmatically using the [Java Client](/java-client/index.md) or [Spring SDK](/spring-zeebe-sdk/getting-started.md).
 
-Once you’re set up, we recommend trying your first call using [Postman](https://www.postman.com/camundateam/camunda-8-postman/request/en495q6/get-cluster-typology) or curl: [Get cluster topology](./specifications/get-topology.api.mdx).
+Once you’re set up, we recommend trying your first call using [Postman](https://www.postman.com/camundateam/camunda-8-postman/request/en495q6/get-cluster-typology) or curl: [Get cluster topology](./specifications/get-topology.api.mdx) to fetch the current topology - this is a simple way to confirm your setup is working.
 
 ### Explore the API
 
@@ -41,10 +41,12 @@ Visit the [interactive Orchestration Cluster API Explorer][camunda-api-explorer]
 * See request and response examples 
 * Check code samples
 
+Prefer code-first? You can also [download the OpenAPI spec](https://github.com/camunda/camunda/blob/main/zeebe/gateway-protocol/src/main/proto/rest-api.yaml) if you want to generate your own client or inspect the full schema.
+
 If you're just getting started, try these next steps:
 * Model a process definition with a user task and deploy using Modeler
-* Start a process: [`POST /process-instances`](./specifications/create-process-instance.api.mdx)
-* Completing a user task: [`POST /user-tasks/:userTaskKey/completion`](./specifications/complete-user-task.api.mdx)
+* Start a process instance: [`POST /process-instances`](./specifications/create-process-instance.api.mdx)
+* Complete a user task: [`POST /user-tasks/:userTaskKey/completion`](./specifications/complete-user-task.api.mdx)
 
 or check [this complete e2e guide](/guides/getting-started-example.md) to implement process automation solutions using Java and Spring Clients. 
 
@@ -52,21 +54,23 @@ or check [this complete e2e guide](/guides/getting-started-example.md) to implem
 
 When authentication is enabled, all API requests must include a valid access token to ensure secure access to your orchestration cluster.
 
+These tokens are short-lived and must be refreshed periodically depending on your client configuration. If you're using the Java or Spring clients, token handling can be [configured easily](../spring-zeebe-sdk/getting-started.md#configuring-the-camunda-8-connection).
+
 To learn how to authenticate, follow the step-by-step guide in [Authentication](./orchestration-cluster-api-rest-authentication.md) based on your setup (SaaS or Self-Managed).
 
-Once you’ve obtained a token, include it in each API request like this:
+Once you’ve obtained a token, include it in each API request as `${ACCESS_TOKEN}` like this:
 
 ```shell
-curl --header "Authorization: Bearer ${TOKEN}" \
+curl --header "Authorization: Bearer ${ACCESS_TOKEN}" \
      ${BASE_URL}/topology
 ```
-Replace the `${BASE_URL}` based on the address of your cluster. See the [Context paths](#context-paths) below.
+Replace the `${BASE_URL}` based on the address of your cluster. See the [Context paths](#context-paths) below for SaaS and Self-Managed URL formats.
 
 ### Context paths
 
 #### SaaS
-In the Camunda Console, go to your cluster, and in the Cluster Details find your **Region Id** and **Cluster Id**. Use this pattern as your `${BASE_URL}`:
-`https://${REGION_ID}.zeebe.camunda.io:443/${CLUSTER_ID}/v2/`
+In the Camunda Console, go to your cluster, and in the Cluster Details, find your **Region Id** and **Cluster Id**. Use this pattern as your `${BASE_URL}`:
+`https://${REGION_ID}.zeebe.camunda.io/${CLUSTER_ID}/v2/`
 
 #### Self-Managed
 
@@ -74,48 +78,25 @@ Use the host and path defined in your Zeebe Gateway [configuration](/self-manage
 
 ## Versioning
 
+Camunda uses semantic versioning (SemVer) to ensure that API changes are predictable and compatible. This helps you safely upgrade without unexpected breaking changes.
+
 The API version is defined by the API version number (`v2`) and the product version, for example, `POST /v2/user-tasks/search` in Camunda 8.8.0.
 
-Camunda does API versioning rather than endpoint versioning. For example, the version changes for all endpoints if there is a breaking change in at least one endpoint. Multiple versions of an Orchestration Cluster API can exist in one product version to support a migration period, for example, `POST /v2/user-tasks/search` and `POST /v3/user-tasks/search` in Camunda 8.x.x.
+Camunda versions the entire API rather than individual endpoints. If a breaking change occurs in any endpoint, the entire API is versioned. During migration periods, multiple API versions will coexist - for example, both `v2` and `v3` versions of `/user-tasks/search` may be available in the same product release.
 
 :::note
-New attributes and endpoints are not considered breaking changes.
+Adding new endpoints or attributes to existing responses is **not** considered a breaking change.
 :::
 
-## Request and file sizes
+## API structure and conventions
 
-You can change the `maxMessageSize` default value of 4MB in the [Gateway](/self-managed/zeebe-deployment/configuration/gateway.md#zeebegatewaynetwork) and [Broker](../../self-managed/zeebe-deployment/configuration/broker.md#zeebebrokernetwork) configuration.
+### Request limits and file size
 
-If you do change this value, it is recommended that you also configure the [Deploy resources](./specifications/create-deployment.api.mdx) REST endpoint appropriately. By default, this endpoint allows single file upload and overall data up to 4MB.
+The default maximum request size for deployment-related requests (such as `POST /v2/deployments`) is 4MB. You can adjust this limit through the [Gateway](/self-managed/zeebe-deployment/configuration/gateway.md#zeebegatewaynetwork) and [Broker](../../self-managed/zeebe-deployment/configuration/broker.md#zeebebrokernetwork) configuration. 
 
-You can adjust this configuration via the following properties:
+For full configuration guidance, see [Deployment configuration](./orchestration-cluster-api-rest-deployment-configuration.md).
 
-```properties
-spring.servlet.multipart.max-file-size=4MB
-spring.servlet.multipart.max-request-size=4MB
-```
-
-For example, if you increase the `maxMessageSize` to 10MB, increase these property values to 10MB as well.
-
-Additionally, if you're uploading multiple files as part of a multipart request, note that Tomcat limits the number of parts per request using the `server.tomcat.max-part-count` property. By default, this is set to 50 in the orchestration API. You can increase the limit to allow more files by setting the property in your configuration:
-
-```properties
-server.tomcat.max-part-count=100
-```
-
-Or by using the equivalent environment variable:
-
-```properties
-SERVER_TOMCAT_MAX_PART_COUNT=100
-```
-
-Tomcat also enforces a separate limit on the total number of request parameters via the `server.tomcat.max-parameter-count` property. Since each file upload typically counts as both a part and a parameter, the lower of these two limits will determine how many files can be uploaded.
-
-For the latest defaults and detailed behavior, refer to the [Tomcat documentation](https://tomcat.apache.org/), as these values may change between versions.
-
-[camunda-api-explorer]: ./specifications/orchestration-cluster-rest-api.info.mdx
-
-## Naming conventions
+### Naming conventions
 
 Naming is simple, intuitive, and consistent across the Orchestration Cluster API to reduce friction when working across multiple endpoints.
 
@@ -147,19 +128,19 @@ Identifiers follow a naming rule in parameters and data attributes alike:
 - Other attributes of entities have no prefix to avoid clutter, such as `version` in the process definition entity. However, other resources have to be referenced with a prefix, like `processDefinitionVersion` in the process instance entity.
 
 
-## HTTP status codes & error handling
+### HTTP status codes & error handling
 
-Handling errors is consistent across all endpoints, using well-known HTTP status codes and clear descriptions. This includes the information about errors and the use of a problem details object.
+The Orchestration Cluster API uses standard HTTP status codes and returns error responses following the [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457) format. This format ensures consistency across endpoints and simplifies error parsing and handling.
 
-Camunda follows the proposed standard from [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457) for problem details. The problem object contains at least the following members:
+Each error response includes the following fields:
 
-- Type
-- Status
-- Title
-- Detail
-- Instance
+- `type`: A URI identifier for the error type
+- `status`: The HTTP status code (e.g., 400, 404)
+- `title`: A short, human-readable summary of the error
+- `detail`: A more detailed explanation of the issue
+- `instance`: A URI reference identifying the specific occurrence of the problem
 
-Camunda uses the following error codes and descriptions across our Orchestration Cluster API:
+#### Common error codes
 
 | Error code | Meaning                                                                                                                                                                    |
 | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -174,12 +155,20 @@ Camunda uses the following error codes and descriptions across our Orchestration
 | 429        | Rate limit exceeded. The client exceeds a defined limit of requests, for example, Zeebe signaling backpressure due to more requests than the broker can currently process. |
 | 500        | Internal server error. Generic error that contains further description in the problem detail.                                                                              |
 
-## Date values
+### Date formats
 
 Date values in the Orchestration Cluster API follow the [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339) notation. This includes all requests and responses. The endpoints validate requests and transform responses accordingly.
 
-## Variables
+### Variables
 
-Variables in the Orchestration Cluster API are proper JSON objects, where the `key` defines the variable name and the `value` specifies the variable value. The endpoints validate requests and transform responses accordingly.
+Variables in the Orchestration Cluster API are JSON objects, where the `key` defines the variable name and the `value` specifies the variable value. 
 
-In search requests, filtering by variables works as documented in [search requests](orchestration-cluster-api-rest-data-fetching.md#search-requests).
+For full details on variable filtering and structure see [search requests](orchestration-cluster-api-rest-data-fetching.md#variables).
+
+## What's next?
+
+Now that you're familiar with the Orchestration Cluster API, here are some useful next steps:
+* [Build a Job Worker using the Spring SDK](../spring-zeebe-sdk/getting-started.md)
+* [Test your process definitions using Camunda Process Test](../testing/getting-started.md)
+* [Migrate from v1 component REST APIs to the v2 Orchestration Cluster API](../migration-manuals/migrate-to-camunda-api.md)
+* [Download the OpenAPI spec](https://github.com/camunda/camunda/blob/main/zeebe/gateway-protocol/src/main/proto/rest-api.yaml)  to generate a client or explore the raw schema
