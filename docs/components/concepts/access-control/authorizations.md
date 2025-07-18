@@ -135,4 +135,3 @@ When implementing your own integrations by e.g. using a Camunda Client, you shou
 
 - **Job Workers**
   - `UPDATE_PROCESS_INSTANCE` to complete jobs for the specific process definitions
-
