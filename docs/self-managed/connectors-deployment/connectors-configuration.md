@@ -190,7 +190,7 @@ The following environment variables can be used to configure the default secret 
 | `CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_PREFIX`      | The prefix applied to the secret name before looking up the environment. | `""`          |
 | `CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_TENANTAWARE` | Whether the secret provider should be tenant-aware.                      | `false`       |
 
-If the secret provider is set to be tenant-aware, please consider that the secret format will change to the format `${prefix}${tenantId}_${secretName}`:
+If the secret provider is set to be tenant-aware, the secret format will change to `${prefix}${tenantId}_${secretName}`:
 
 Example with empty prefix:
 
