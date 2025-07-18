@@ -57,6 +57,7 @@ Authorizations can be activated/deactivated on a per-cluster level by:
 - Organization Owners
 
 ### Self-Managed Configuration
+
 Enable authorizations in your deployment using:
 
 ```yaml
