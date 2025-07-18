@@ -167,15 +167,6 @@ configuration parameters for tasklist applications.
 
 User tasks support **user task listeners**, which allow you to react to user task lifecycle events.
 
-#### Supported events
-
-Currently, user task listeners can react to the following events:
-
-- **Assigning**: Triggered while assigning a user task.
-- **Completing**: Triggered while completing a user task.
-
-#### Configuration
-
 To define a user task listener, include the `zeebe:taskListeners` extension element within the user task in your BPMN model. This element can contain one or more `zeebe:taskListener` elements, each specifying the following attributes:
 
 - The `eventType` that triggers the listener (possible values: `creating`, `assigning`, `updating`, `completing`, `canceling`).
