@@ -11,7 +11,7 @@ Mapping rules are only available for Camunda 8 Self-Managed with [OIDC-based aut
 
 A mapping rule has the following properties:
 
-- **Claim name**: Either the name of a (nested) claim or a JSON path expression.
+- **Claim name**: Either the name of a (nested) claim or a [JSONPath expression](https://www.rfc-editor.org/rfc/rfc9535).
 - **Claim value**: The expected value of the claim. The mapping rule takes effect only if this value is matched in a JWT.
 
 Using a mapping rule is a two-step process:
