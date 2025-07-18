@@ -1,7 +1,17 @@
 ---
 title: Authorization in Camunda 8 Orchestration Cluster
 description: Learn how to control access to applications and APIs in Camunda 8's orchestration cluster using the built-in authorization system.
-keywords: [camunda 8, orchestration cluster, zeebe, operate, tasklist, authorization, access control, permissions]
+keywords:
+  [
+    camunda 8,
+    orchestration cluster,
+    zeebe,
+    operate,
+    tasklist,
+    authorization,
+    access control,
+    permissions,
+  ]
 ---
 
 # Authorization in Camunda 8 Orchestration Cluster
