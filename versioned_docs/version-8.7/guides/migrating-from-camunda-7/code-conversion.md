@@ -33,9 +33,7 @@ The Camunda 7 and Orchestration cluster APIs share many similarities, but severa
 
 To help you understand the differences between the two APIs, the [Camunda 7 to 8 API Mapping Guide](https://camunda-community-hub.github.io/camunda-7-to-8-code-conversion/) maps the complete Camunda 7 REST API to its Camunda 8 counterparts and highlights key differences. For example, why a specific endpoint or parameter is no longer available, or if it is planned for future implementation.
 
-You can find the API mapping guide here:
-
-- [API Mapping Guide](https://camunda-community-hub.github.io/camunda-7-to-8-code-conversion/)
+Find the API mapping guide [here](https://camunda-community-hub.github.io/camunda-7-to-8-code-conversion/).
 
 ## Code conversion patterns
 
@@ -44,9 +42,7 @@ Because of the flexibility of Camunda 7, users leveraged different ways to write
 - Our approach to collect these is to use a collaborative GitHub repository, where our consultants, partners, and users can add their own patterns to the catalog.
 - You might still adapt the patterns to your situation, for example, if you use your own data handling or glue code abstractions.
 
-You can find the pattern catalog here:
-
-- [Pattern Catalog](https://github.com/camunda-community-hub/camunda-7-to-8-code-conversion).
+Find the pattern catalog [here](https://github.com/camunda-community-hub/camunda-7-to-8-code-conversion).
 
 ## Refactoring recipes (using OpenRewrite)
 
@@ -54,9 +50,7 @@ You can find the pattern catalog here:
 
 Those recipes might work out-of-the-box for your environment, but most often they need to be adjusted to your code patterns. In this case, use the existing patterns as a basis to make your own adjustments or extensions.
 
-You can find the existing recipes including documentation on how-to-use them here:
-
-- [OpenRewrite recipes](https://github.com/camunda-community-hub/camunda-7-to-8-code-conversion/tree/main/recipes).
+Find the existing recipes and documentation on how to use them [here](https://github.com/camunda-community-hub/camunda-7-to-8-code-conversion/tree/main/recipes).
 
 ## Diagram converter
 
@@ -71,9 +65,7 @@ TODO document the expression transformer instead of referencing code. Or probabl
 Might also make sense to describe that above patterns also inform diagram conversion
  -->
 
-You find the diagram conversion tooling and its documentation here:
-
-- [Migration Analyzer & Diagram Converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer)
+Find the diagram conversion tooling and its documentation [here](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer).
 
 ## Leveraging AI for refactoring
 
