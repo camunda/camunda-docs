@@ -13,7 +13,9 @@ Learn more about important changes in Camunda 8.8 when migrating from Camunda 8.
 
 ## Introducing Camunda 8.8
 
-Camunda 8.8 introduces several important changes and enhancements as part of our architecture streamlining initiative, focusing on identity management and migration considerations from Camunda 8.7.
+Camunda 8.8 introduces fundamental changes and enhancements as part of our architecture streamlining initiative, unifying former isolated components such as Operate, Tasklist and identity management into one Orchestration Cluster component that serves a unified Orchestration Cluster API.
+
+The simplest possible deployment now becomes running a single Java application or docker container of the Orchestration Cluster Application.
 
 <table className="table-callout">
 <tr>
@@ -64,7 +66,7 @@ The Orchestration cluster (previously automation cluster) is now the core compon
 
 ### Zeebe, Operate, and Tasklist
 
-Zeebe, Operate, and Tasklist are now part of the Orchestration cluster.
+Zeebe, Operate, and Tasklist are consolidated into the Orchestration Cluster Application.
 
 - [Zeebe](../reference/glossary.md#zeebe) as the [workflow engine](../reference/glossary.md#workflow-engine).
 - Operate for monitoring and troubleshooting [process instances](../reference/glossary.md#process-instance) running in [Zeebe](../reference/glossary.md#zeebe).
