@@ -102,7 +102,7 @@ The following variables are used when `oidc` is selected as the authentication m
 | `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ISSUERURI`     | The issuer URI for OIDC authentication.                          |                                      |
 | `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_REDIRECTURI`   | The redirect URI for OIDC authentication.                        | `http://localhost:8080/sso-callback` |
 | `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_USERNAMECLAIM` | The claim to use for the username in OIDC authentication.        | `sub`                                |
-| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_GROUPSCLAIM`   | The claim to use for groups in OIDC authentication.              | `groups`                             |
+| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_GROUPSCLAIM`   | The claim to use for groups in OIDC authentication.              |                                      |
 | `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_AUDIENCES`     | Comma-separated list of audiences to validate in the OIDC token. |                                      |
 
   </TabItem>
@@ -115,7 +115,7 @@ The following variables are used when `oidc` is selected as the authentication m
 | `camunda.security.authentication.oidc.issuer-uri`     | The issuer URI for OIDC authentication.                          |                                      |
 | `camunda.security.authentication.oidc.redirect-uri`   | The redirect URI for OIDC authentication.                        | `http://localhost:8080/sso-callback` |
 | `camunda.security.authentication.oidc.username-claim` | The claim to use for the username in OIDC authentication.        | `sub`                                |
-| `camunda.security.authentication.oidc.groups-claim`   | The claim to use for groups in OIDC authentication.              | `groups`                             |
+| `camunda.security.authentication.oidc.groups-claim`   | The claim to use for groups in OIDC authentication.              |                                      |
 | `camunda.security.authentication.oidc.audiences`      | Comma-separated list of audiences to validate in the OIDC token. |                                      |
 
   </TabItem>
@@ -128,7 +128,7 @@ The following variables are used when `oidc` is selected as the authentication m
 | `global.security.authentication.oidc.issuerUri`     | The issuer URI for OIDC authentication.                          |                                      |
 | `global.security.authentication.oidc.redirectUri`   | The redirect URI for OIDC authentication.                        | `http://localhost:8080/sso-callback` |
 | `global.security.authentication.oidc.userNameClaim` | The claim to use for the username in OIDC authentication.        | `sub`                                |
-| `global.security.authentication.oidc.groupsClaim`   | The claim to use for groups in OIDC authentication.              | `groups`                             |
+| `global.security.authentication.oidc.groupsClaim`   | The claim to use for groups in OIDC authentication.              |                                      |
 | `global.security.authentication.oidc.audiences`     | Comma-separated list of audiences to validate in the OIDC token. |                                      |
 
   </TabItem>
