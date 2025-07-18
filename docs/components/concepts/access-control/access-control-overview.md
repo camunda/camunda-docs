@@ -1,7 +1,15 @@
 ---
 title: Access Control Concepts in Camunda 8
 description: Understand the difference between authentication and authorization in Camunda 8, and how they work together to secure your orchestration cluster.
-keywords: [camunda 8, access control, authentication, authorization, security, orchestration cluster]
+keywords:
+  [
+    camunda 8,
+    access control,
+    authentication,
+    authorization,
+    security,
+    orchestration cluster,
+  ]
 ---
 
 # Access Control Concepts in Camunda 8
