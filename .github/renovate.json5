@@ -1,7 +1,64 @@
 {
   $schema: "https://docs.renovatebot.com/renovate-schema.json",
-  extends: ["config:recommended", "schedule:weekends"],
+  extends: [
+    "config:recommended",
+    "schedule:weekends",
+    ":automergeDisabled",
+    ":semanticCommits",
+  ],
   lockFileMaintenance: {
     enabled: true,
+    automerge: true,
   },
+  prBodyNotes: [
+    "{{#if isMajor}}:warning: THIS IS A MAJOR VERSION UPDATE :warning:{{/if}}",
+    "Before merging, *always* check with the release notes if any other changes need to be done.",
+  ],
+  packageRules: [
+    {
+      groupName: "docusaurus",
+      matchPackageNames: ["/docusaurus/"],
+    },
+    {
+      // Automerge dev dependencies
+      matchPackageNames: [
+        "@playwright/test",
+        "@types/jest",
+        "husky",
+        "jest",
+        "lint-staged",
+        "playwright",
+        "prettier",
+      ],
+      groupName: "dev dependencies",
+      automerge: true,
+    },
+    {
+      // Require Docs team review for minor updates of docusaurus
+      matchPackageNames: ["/docusaurus/"],
+      matchUpdateTypes: ["minor"],
+      reviewers: ["@camunda/docs-api-reviewers"],
+      automerge: false,
+    },
+    {
+      // Automerge docusaurus patches
+      matchPackageNames: ["/docusaurus/"],
+      matchUpdateTypes: ["patch"],
+      automerge: true,
+    },
+    {
+      // Automerge patches and minor updates of GitHub Actions
+      matchManagers: ["github-actions"],
+      matchUpdateTypes: ["patch", "minor"],
+      automerge: true,
+      groupName: "GitHub Actions",
+    },
+    // Use only stable/LTS versions of NodeJS (even numbers): 18, 20, ...
+    {
+      matchPackageNames: ["node"],
+      matchUpdateTypes: ["patch", "minor"],
+      groupName: "node",
+      automerge: true,
+    },
+  ],
 }

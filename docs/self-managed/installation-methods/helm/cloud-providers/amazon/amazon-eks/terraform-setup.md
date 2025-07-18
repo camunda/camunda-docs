@@ -1,6 +1,6 @@
 ---
 id: eks-terraform
-title: "Deploy an EKS cluster with Terraform (advanced)"
+title: "Deploy an EKS cluster with Terraform"
 description: "Deploy an Amazon Kubernetes Cluster (EKS) with a Terraform module for a quick Camunda 8 setup."
 ---
 

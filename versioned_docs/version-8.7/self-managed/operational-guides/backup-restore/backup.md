@@ -547,6 +547,8 @@ By default, the indices are prefixed with `zeebe-record`. If you have configured
    <Tabs groupId="search-engine">
       <TabItem value="elasticsearch" label="Elasticsearch" default>
 
+      Using `?wait_for_completion=true` in the previous call, as outlined, ensures that the request only returns once the backup has finished. However, to double-check that the backup completed successfully, you can perform the following verification:
+
       The following uses the [Elasticsearch snapshot API](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-snapshot-status-2) to get the snapshot status.
 
       ```bash
@@ -603,6 +605,8 @@ By default, the indices are prefixed with `zeebe-record`. If you have configured
 
       </TabItem>
       <TabItem value="opensearch" label="OpenSearch">
+
+      Using `?wait_for_completion=true` in the previous call, as outlined, ensures that the request only returns once the backup has finished. However, to double-check that the backup completed successfully, you can perform the following verification:
 
       The following uses the [OpenSearch snapshot API](https://docs.opensearch.org/docs/latest/api-reference/snapshots/get-snapshot-status/) to get the snapshot status.
 

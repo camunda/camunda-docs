@@ -531,8 +531,6 @@ elsaticsearch:
 
 connectors:
   enabled: false
-identity:
-  enabled: false
 optimize:
   enabled: false
 operate:
@@ -541,7 +539,7 @@ tasklist:
   enabled: false
 zeebe:
   enabled: false
-zeebe-gateway:
+zeebeGateway:
   enabled: false
 ```
 
@@ -793,15 +791,13 @@ elsaticsearch:
 
 connectors:
    enabled: false
-identity:
-   enabled: false
 optimize:
    enabled: false
 operate:
    enabled: false
 tasklist:
    enabled: false
-zeebe-gateway:
+zeebeGateway:
    enabled: false
 ```
 
@@ -822,11 +818,11 @@ zeebe:
 
 If you're not using the Camunda Helm chart, you can use a similar approach natively with Kubernetes to overwrite the command.
 
-The application will exit and restart the pod. This is an expected behavior. The restore application will not try to restore the state again since the partitions were already restored to the persistent disk.
+The application will exit and restart the pod and will be interpreted by Kubernetes as a `crashloop`. This is an expected behavior. The restore application will not try to restore the state again since the partitions were already restored to the persistent disk.
 
 :::tip
 
-In Kubernetes, Zeebe is a [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/), which are meant for long-running and persistent applications. There is no `restartPolicy` due to which the resulting pods of the Zeebe `StatefulSet` will always restart. Meaning that you have to observe the Zeebe brokers during restore and may have to look at the logs with `--previous` if it already restarted.
+In Kubernetes, Zeebe is a [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/), which are meant for long-running and persistent applications. There is no `restartPolicy` due to which the resulting pods of the Zeebe `StatefulSet` will always restart and `crashloop` as the restore application won't overwrite the data. Meaning that you have to observe the Zeebe brokers during restore and may have to look at the logs with `--previous` if it already restarted.
 
 It will not try to import or overwrite the data again but should be noted that you may miss the `successful` first run if you're not observing it actively.
 
