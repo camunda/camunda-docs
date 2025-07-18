@@ -90,11 +90,9 @@ Adding new endpoints or attributes to existing responses is **not** considered a
 
 ## API structure and conventions
 
-### Request limits and file size
+### Request size limits
 
-The default maximum request size for deployment-related requests (such as `POST /v2/deployments`) is 4MB. You can adjust this limit through the [Gateway](/self-managed/zeebe-deployment/configuration/gateway.md#zeebegatewaynetwork) and [Broker](../../self-managed/zeebe-deployment/configuration/broker.md#zeebebrokernetwork) configuration. 
-
-For full configuration guidance, see [Deployment configuration](./orchestration-cluster-api-rest-deployment-configuration.md).
+The default maximum request size for deployment-related requests (such as `POST /v2/deployments`) is 4MB. 
 
 ### Naming conventions
 
