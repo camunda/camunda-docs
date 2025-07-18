@@ -525,8 +525,6 @@ elsaticsearch:
 
 connectors:
   enabled: false
-identity:
-  enabled: false
 optimize:
   enabled: false
 operate:
@@ -786,8 +784,6 @@ elsaticsearch:
    enabled: true
 
 connectors:
-   enabled: false
-identity:
    enabled: false
 optimize:
    enabled: false

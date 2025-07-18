@@ -531,8 +531,6 @@ elsaticsearch:
 
 connectors:
   enabled: false
-identity:
-  enabled: false
 optimize:
   enabled: false
 operate:
@@ -541,7 +539,7 @@ tasklist:
   enabled: false
 zeebe:
   enabled: false
-zeebe-gateway:
+zeebeGateway:
   enabled: false
 ```
 
@@ -793,15 +791,13 @@ elsaticsearch:
 
 connectors:
    enabled: false
-identity:
-   enabled: false
 optimize:
    enabled: false
 operate:
    enabled: false
 tasklist:
    enabled: false
-zeebe-gateway:
+zeebeGateway:
    enabled: false
 ```
 

@@ -440,8 +440,6 @@ elsaticsearch:
 
 connectors:
   enabled: false
-identity:
-  enabled: false
 optimize:
   enabled: false
 core:
@@ -691,8 +689,6 @@ elsaticsearch:
    enabled: true
 
 connectors:
-   enabled: false
-identity:
    enabled: false
 optimize:
    enabled: false
