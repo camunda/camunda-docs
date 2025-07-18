@@ -1132,16 +1132,17 @@ module.exports = {
                       ],
                     },
                     "self-managed/installation-methods/helm/configure/database/using-existing-opensearch",
+                    "self-managed/installation-methods/helm/configure/database/using-existing-postgres",
                     "self-managed/installation-methods/helm/configure/database/configure-db-custom-headers",
                   ],
                 },
-                "self-managed/installation-methods/helm/configure/secret-management",
                 {
                   Ingress: [
                     "self-managed/installation-methods/helm/configure/ingress-setup",
                     "self-managed/installation-methods/helm/configure/accessing-components-without-ingress",
                   ],
                 },
+                "self-managed/installation-methods/helm/configure/secret-management",
                 "self-managed/installation-methods/helm/configure/using-existing-keycloak",
                 //license key
                 "self-managed/installation-methods/helm/configure/configure-multi-tenancy",
@@ -1201,11 +1202,19 @@ module.exports = {
                         id: "self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/amazon-eks",
                       },
                       items: [
+                        {
+                          Quickstart: [
+                            "self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/eks-eksctl",
+                          ],
+                        },
                         "self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/eks-terraform",
                         "self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/eks-helm",
                         "self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/dual-region",
-                        "self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/eks-eksctl",
-                        "self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/irsa",
+                        {
+                          Troubleshooting: [
+                            "self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/irsa",
+                          ],
+                        },
                       ],
                     },
                     {
@@ -1279,27 +1288,6 @@ module.exports = {
             },
           ],
         },
-        "self-managed/operational-guides/data-purge",
-        {
-          type: "doc",
-          label: "Configure flow control",
-          id: "self-managed/operational-guides/configure-flow-control/configure-flow-control",
-        },
-        {
-          Monitoring: [
-            "self-managed/operational-guides/monitoring/log-levels",
-            "self-managed/operational-guides/monitoring/metrics",
-          ],
-        },
-        {
-          Troubleshooting: [
-            "self-managed/operational-guides/troubleshooting/troubleshooting",
-          ],
-        },
-      ],
-    },
-    {
-      Concepts: [
         {
           type: "category",
           label: "Document handling",
@@ -1323,14 +1311,31 @@ module.exports = {
             },
           ],
         },
-        "self-managed/concepts/exporters",
         {
           "Multi-region": ["self-managed/concepts/multi-region/dual-region"],
         },
+        {
+          Monitoring: [
+            "self-managed/operational-guides/monitoring/log-levels",
+            "self-managed/operational-guides/monitoring/metrics",
+          ],
+        },
+        {
+          Troubleshooting: [
+            "self-managed/operational-guides/troubleshooting/troubleshooting",
+          ],
+        },
+        "self-managed/concepts/exporters",
         "self-managed/concepts/multi-tenancy",
         "self-managed/concepts/mapping-rules",
         "self-managed/concepts/elasticsearch-privileges",
         "self-managed/concepts/opensearch-privileges",
+        "self-managed/operational-guides/data-purge",
+        {
+          type: "doc",
+          label: "Configure flow control",
+          id: "self-managed/operational-guides/configure-flow-control/configure-flow-control",
+        },
       ],
     },
     {
@@ -1613,6 +1618,31 @@ module.exports = {
             },
           ],
         },
+        {
+          type: "category",
+          label: "Components update",
+          link: {
+            type: "doc",
+            id: "self-managed/operational-guides/update-guide/introduction",
+          },
+          items: [
+            "self-managed/operational-guides/update-guide/870-to-880",
+            "self-managed/operational-guides/update-guide/860-to-870",
+            "self-managed/operational-guides/update-guide/850-to-860",
+            "self-managed/operational-guides/update-guide/840-to-850",
+            "self-managed/operational-guides/update-guide/830-to-840",
+            {
+              Elasticsearch: [
+                "self-managed/operational-guides/update-guide/elasticsearch/7-to-8",
+              ],
+            },
+            {
+              Keycloak: [
+                "self-managed/operational-guides/update-guide/keycloak/keycloak-update",
+              ],
+            },
+          ],
+        },
       ],
     },
     {
@@ -1639,31 +1669,6 @@ module.exports = {
             "self-managed/update/developers/plan-dev-update",
             "self-managed/update/developers/prepare-for-dev-update",
             "self-managed/update/developers/run-dev-update",
-          ],
-        },
-        {
-          type: "category",
-          label: "Update by version",
-          link: {
-            type: "doc",
-            id: "self-managed/operational-guides/update-guide/introduction",
-          },
-          items: [
-            "self-managed/operational-guides/update-guide/870-to-880",
-            "self-managed/operational-guides/update-guide/860-to-870",
-            "self-managed/operational-guides/update-guide/850-to-860",
-            "self-managed/operational-guides/update-guide/840-to-850",
-            "self-managed/operational-guides/update-guide/830-to-840",
-            {
-              Elasticsearch: [
-                "self-managed/operational-guides/update-guide/elasticsearch/7-to-8",
-              ],
-            },
-            {
-              Keycloak: [
-                "self-managed/operational-guides/update-guide/keycloak/keycloak-update",
-              ],
-            },
           ],
         },
       ],
