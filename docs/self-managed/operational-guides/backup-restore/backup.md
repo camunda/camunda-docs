@@ -1,7 +1,7 @@
 ---
 id: backup
-title: "Create a backup"
-sidebar_label: "Create a backup"
+sidebar_label: Create a backup
+title: Camunda backup creation
 keywords: ["backup", "backups"]
 description: "Learn how to back up your Camunda 8 Self-Managed components."
 ---

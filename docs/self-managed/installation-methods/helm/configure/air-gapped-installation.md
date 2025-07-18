@@ -1,6 +1,7 @@
 ---
 id: air-gapped-installation
-title: "Installing in an air-gapped environment"
+sidebar_label: Air-gapped environment
+title: Helm chart air-gapped environment installation
 description: "Camunda 8 Self-Managed installation in an air-gapped environment"
 ---
 

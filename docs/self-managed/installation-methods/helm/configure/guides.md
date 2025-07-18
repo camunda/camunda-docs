@@ -1,6 +1,7 @@
 ---
 id: guides
-title: "Configuration and deployment user guides"
+sidebar_label: User guides
+title: Helm chart user guides
 description: "Various use cases configuring and deploying Camunda 8."
 ---
 

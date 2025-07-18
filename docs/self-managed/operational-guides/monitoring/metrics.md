@@ -1,6 +1,7 @@
 ---
 id: metrics
-title: "Metrics"
+sidebar_label: Metrics
+title: Camunda componenets metrics
 keywords: ["observability", "metrics", "monitoring", "monitor"]
 Description: "Learn about Camunda distributed system monitoring metrics using the Micrometer library as a facade for exporting metrics."
 ---
