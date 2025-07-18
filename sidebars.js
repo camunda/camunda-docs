@@ -1356,11 +1356,7 @@ module.exports = {
             "self-managed/operational-guides/monitoring/metrics",
           ],
         },
-        {
-          Troubleshooting: [
-            "self-managed/operational-guides/troubleshooting",
-          ],
-        },
+        "self-managed/operational-guides/troubleshooting",
         "self-managed/concepts/exporters",
         "self-managed/concepts/multi-tenancy",
         "self-managed/concepts/mapping-rules",
