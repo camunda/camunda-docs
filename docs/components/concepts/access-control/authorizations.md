@@ -67,6 +67,7 @@ Authorization applies only to these orchestration components — it does not app
 ### SaaS Configuration
 
 Authorizations can be activated/deactivated on a per-cluster level by:
+
 - Organization Admins
 - Organization Owners
 
