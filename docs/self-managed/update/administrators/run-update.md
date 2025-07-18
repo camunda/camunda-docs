@@ -43,11 +43,11 @@ Choose your deployment method and follow the appropriate upgrade procedures:
 <Tabs>
 <TabItem value="helm" label="Kubernetes/Helm">
 
-### Helm Chart Upgrade
+### Helm chart Upgrade
 
 For Kubernetes deployments using the Camunda Helm chart, follow the dedicated technical upgrade guide:
 
-<DocCardList items={[{type:"link", href:"/docs/next/self-managed/installation-methods/helm/upgrade/upgrade-hc-870-880/", label: "Helm Chart Upgrade: 8.7 to 8.8", docId:"self-managed/installation-methods/helm/upgrade/upgrade-hc-870-880"}
+<DocCardList items={[{type:"link", href:"/docs/next/self-managed/installation-methods/helm/upgrade/upgrade-hc-870-880/", label: "Helm chart Upgrade: 8.7 to 8.8", docId:"self-managed/installation-methods/helm/upgrade/upgrade-hc-870-880"}
 ]}/>
 
 This guide provides:
@@ -591,7 +591,7 @@ After successful platform update completion:
 
 ## Additional resources
 
-- **[Helm Chart Upgrade Guide: 8.7 to 8.8](/self-managed/installation-methods/helm/upgrade/upgrade-hc-870-880/)** - Detailed technical upgrade steps
+- **[Helm chart upgrade guide: 8.7 to 8.8](/self-managed/installation-methods/helm/upgrade/upgrade-hc-870-880/)** - Detailed technical upgrade steps
 - **[Operational guides](/self-managed/operational-guides/)** - 8.8-specific procedures and best practices
 - **[Backup and restore guide](/self-managed/operational-guides/backup-restore/backup-and-restore.md)** - Comprehensive backup procedures
 - **[Troubleshooting guides](/self-managed/operational-guides/)** - Issue resolution procedures

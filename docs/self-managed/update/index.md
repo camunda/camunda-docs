@@ -334,7 +334,7 @@ management:
 
 - **Kubernetes cluster management**: Version compatibility, resource capacity, node management
 - **Helm chart updates**: Version upgrades, values.yaml configuration, release management
-- **Container orchestration**: Pod lifecycle, service discovery, ingress configuration
+- **Container orchestration**: Pod lifecycle, service discovery, Ingress configuration
 - **Storage management**: Persistent volumes, storage classes, backup integration
 - **Authentication system migration**: LDAP → Identity/OIDC, RBAC configuration
 - **Platform monitoring**: Kubernetes metrics, pod health, cluster-level alerting
