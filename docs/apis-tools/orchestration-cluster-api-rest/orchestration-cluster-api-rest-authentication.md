@@ -21,17 +21,17 @@ All Orchestration Cluster API requests require authentication when authenticatio
 
 1. [Create client credentials](/components/console/manage-clusters/setup-client-connection-credentials.md) in the **Clusters > Cluster name > API** tab of [Camunda Console](https://console.camunda.io/).
 2. Add scope for client credentials for **Orchestration cluster**.
-3. Once you have created the client, capture the following values required to generate a token:
+3. Once you have created the client credentials, capture the following values required to generate a token:
    <!-- this comment convinces the markdown processor to still treat the table as a table, but without adding surrounding paragraphs. 🤷 -->
    | Name                     | Environment variable name        | Default value                                |
    | ------------------------ | -------------------------------- | -------------------------------------------- |
    | Client ID                | `CAMUNDA_CLIENT_ID`                | -                                            |
    | Client Secret            | `CAMUNDA_CLIENT_SECRET`            | -                                            |
    | Authorization Server URL | `CAMUNDA_OAUTH_URL` | `https://login.cloud.camunda.io/oauth/token` |
-   | Audience                 | `CAMUNDA_TOKEN_AUDIENCE`           | `zeebe.camunda.io`                           |
+   | Audience                 | `CAMUNDA_TOKEN_AUDIENCE`           | `camunda.io`                           |
    | Zeebe REST Address       | `ZEEBE_REST_ADDRESS`             | -                                            |
    <!-- this comment convinces the markdown processor to still treat the table as a table, but without adding surrounding paragraphs. 🤷 -->
-   :::caution
+   :::tip
    When client credentials are created, the `Client Secret` is only shown once. Save this `Client Secret` somewhere safe.
    :::
 4. Execute an authentication request to the token issuer:

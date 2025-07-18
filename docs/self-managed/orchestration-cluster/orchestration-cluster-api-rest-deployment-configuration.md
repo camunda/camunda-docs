@@ -6,7 +6,7 @@ description: "Learn how to configure upload limits and multipart handling for Or
 
 ## Deployment configuration
 
-The Orchestration Cluster API supports file and multipart uploads when deploying BPMN diagrams and other resources. By default, the maximum allowed request size is 4MB. You can increase this limit through configuration of the Zeebe Gateway, Broker, and the REST layer (e.g. Spring Boot + Tomcat).
+The Orchestration Cluster API supports file and multipart uploads when deploying BPMN diagrams and other resources. By default, the maximum allowed request size is 4MB. You can increase this limit in Self-Managed cluster through configuration of the Zeebe Gateway, Broker, and the REST layer (e.g. Spring Boot + Tomcat).
 
 This guide walks you through adjusting these settings.
 
@@ -14,8 +14,8 @@ This guide walks you through adjusting these settings.
 
 The `maxMessageSize` default value is 4MB. You can configure this setting in the:
 
-- [Gateway config](../../self-managed/zeebe-deployment/configuration/gateway.md#zeebegatewaynetwork)
-- [Broker config](../../self-managed/zeebe-deployment/configuration/broker.md#zeebebrokernetwork)
+- [Gateway config](../zeebe-deployment/configuration/gateway.md#zeebegatewaynetwork)
+- [Broker config](../zeebe-deployment/configuration/broker.md#zeebebrokernetwork)
 
 If you increase this value, you must also adjust the configuration for the deployment REST endpoint to match.
 
