@@ -15,16 +15,16 @@ The following configurations apply to all components within the Orchestration Cl
 <!-- Updates must be made to ALL tables below. Tables are sorted alphabetically by property name. -->
 <Tabs>
   <TabItem value="env" label="Environment variables" default>
-  
-| Environment variable                                 | Description                                                                                                    | Default value         |
-| ---------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | --------------------- |
-| `CAMUNDA_PERSISTENT_SESSIONS_ENABLED`                | Stores session data in secondary storage so users stay logged in across cluster nodes.                         | `true`                |
-| `CAMUNDA_SECURITY_AUTHENTICATION_METHOD`             | The authentication method to use. Options: `basic`, `oidc`, `none`.                                            | `basic`               |
-| `CAMUNDA_SECURITY_AUTHENTICATION_UNPROTECTEDAPI`     | If the API can be used without authentication.                                                                 | `false`               |
-| `CAMUNDA_SECURITY_AUTHORIZATIONS_ENABLED`            | If authorizations are enabled.                                                                                 | `true`                |
-| `CAMUNDA_SECURITY_MULTITENANCY_CHECKSENABLED`        | Enables multi-tenancy checks. This requires the API to be protected.                                           | `false`               |
-| `CAMUNDA_SECURITY_MULTITENANCY_APIENABLED`           | Enables the multi-tenancy API and UI independently from multi-tenancy checks.                                  | `true`                |
-| `SPRING_PROFILES_ACTIVE`                             | **Note:** This property will be deprecated as additional authentication methods become available.              | `consolidated-auth`   |
+
+| Environment variable                             | Description                                                                                       | Default value       |
+| ------------------------------------------------ | ------------------------------------------------------------------------------------------------- | ------------------- |
+| `CAMUNDA_PERSISTENT_SESSIONS_ENABLED`            | Stores session data in secondary storage so users stay logged in across cluster nodes.            | `true`              |
+| `CAMUNDA_SECURITY_AUTHENTICATION_METHOD`         | The authentication method to use. Options: `basic`, `oidc`, `none`.                               | `basic`             |
+| `CAMUNDA_SECURITY_AUTHENTICATION_UNPROTECTEDAPI` | If the API can be used without authentication.                                                    | `false`             |
+| `CAMUNDA_SECURITY_AUTHORIZATIONS_ENABLED`        | If authorizations are enabled.                                                                    | `true`              |
+| `CAMUNDA_SECURITY_MULTITENANCY_CHECKSENABLED`    | Enables multi-tenancy checks. This requires the API to be protected.                              | `false`             |
+| `CAMUNDA_SECURITY_MULTITENANCY_APIENABLED`       | Enables the multi-tenancy API and UI independently from multi-tenancy checks.                     | `true`              |
+| `SPRING_PROFILES_ACTIVE`                         | **Note:** This property will be deprecated as additional authentication methods become available. | `consolidated-auth` |
 
   </TabItem>
   <TabItem value="application.yaml" label="application.yaml">
@@ -141,3 +141,97 @@ The following variables are used when `oidc` is selected as the authentication m
 
   </TabItem>
 </Tabs>
+
+## CSRF Protection
+
+Cross-Site Request Forgery (CSRF) is a type of malicious exploit where unauthorized commands are
+transmitted from a user that the web application trusts. In a CSRF attack, an attacker tricks a victim's
+browser into making unwanted requests to a web application where the victim is authenticated.
+
+For a comprehensive understanding of CSRF attacks and prevention methods, refer to the
+[MDN Web Docs on CSRF](https://developer.mozilla.org/en-US/docs/Glossary/CSRF).
+
+### How CSRF protection works in Camunda
+
+- **Token generation**: A unique CSRF token is generated and stored in a secure, HTTP-only cookie named `X-CSRF-TOKEN`.
+- **Token validation**: For state-changing requests (POST, PUT, DELETE, etc.), the server validates that the CSRF token
+  in the request header matches the one in the cookie.
+- **Safe methods**: GET, HEAD, TRACE, and OPTIONS requests are considered safe and don't require CSRF validation.
+
+### Configuration
+
+The following variables are used to configure CSRF protection.
+
+<Tabs>
+  <TabItem value="csrf-env" label="Environment variables" default>
+
+| Environment variable            | Description                          | Default value |
+| ------------------------------- | ------------------------------------ | ------------- |
+| `CAMUNDA_SECURITY_CSRF_ENABLED` | Enables or disables CSRF protection. | `true`        |
+
+  </TabItem>
+  <TabItem value="csrf-yaml" label="application.yaml">
+
+| Application.yaml property       | Description                          | Default value |
+| ------------------------------- | ------------------------------------ | ------------- |
+| `camunda.security.csrf.enabled` | Enables or disables CSRF protection. | `true`        |
+
+  </TabItem>
+  <TabItem value="csrf-helm" label="Helm values">
+
+| Helm value key                 | Description                          | Default value |
+| ------------------------------ | ------------------------------------ | ------------- |
+| `global.security.csrf.enabled` | Enables or disables CSRF protection. | `true`        |
+
+  </TabItem>
+</Tabs>
+
+:::caution
+Disabling CSRF protection is not recommended for production environments as it leaves your application vulnerable to cross-site request forgery attacks.
+:::
+
+### Protected vs unprotected paths
+
+#### Protected paths (require CSRF token)
+
+- `/api/**` – API endpoints (except specifically excluded paths)
+- `/v1/**`, `/v2/**` – Versioned API endpoints
+- All state-changing operations (POST, PUT, DELETE, PATCH)
+
+#### Unprotected paths (no CSRF token required)
+
+- `/actuator/**` – Health and monitoring endpoints
+- `/swagger-ui/**` – API documentation
+- `/v2/license` – Public license endpoint
+- `/error` – Error handling
+- Authentication endpoints (`/login`, `/logout`)
+- Safe HTTP methods (GET, HEAD, OPTIONS, TRACE)
+
+### Troubleshooting
+
+#### Common issues
+
+**403 Forbidden on POST/PUT/DELETE requests**
+
+- Ensure the `X-CSRF-TOKEN` header is included.
+- Check that cookies are being sent with requests.
+
+Hint: the HTTP code 403 does not necessarily mean the issue is with CSRF; it could also be another issue.
+
+**Token not received**
+
+- Make an authenticated GET request first to receive a token.
+- Ensure cookies are enabled in the client.
+- Check for CORS issues if making cross-origin requests.
+
+**Token mismatch errors**
+
+- Tokens may expire with the session.
+- Re-authenticate to get a new token.
+- Ensure you're using the most recent token.
+
+### Security considerations
+
+- Always use HTTPS in production to prevent token interception.
+- Consider additional security headers configured in the security settings.
+- Regularly review and update the list of unprotected paths.
