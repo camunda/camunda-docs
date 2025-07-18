@@ -42,6 +42,7 @@ Authorization applies only to these orchestration components — it does not app
    - Authorizations can be assigned to any owner type
 
 3. **Permissions**
+
    - Define allowed interactions with resources
    - Specific to resource types
 
