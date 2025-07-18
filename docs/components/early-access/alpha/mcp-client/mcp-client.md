@@ -1,22 +1,22 @@
 ---
 id: mcp-client
-title: MCP client
-sidebar_label: MCP client
+title: MCP Client
+sidebar_label: MCP Client
 description: "Integrate MCP (Model Context Protocol) clients with agentic orchestration."
 ---
 
 Integrate [MCP (Model Context Protocol)](https://modelcontextprotocol.io/) clients with [agentic orchestration](../../../agentic-orchestration/agentic-orchestration.md).
 
-Camunda's MCP client integration allows using the [AI agent connector](../../../connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) in combination with MCP clients to access tools provided by MCP servers. This includes both locally started [STDIO](https://modelcontextprotocol.io/specification/draft/basic/transports#stdio) servers and remote MCP servers using the [HTTP with SSE](https://modelcontextprotocol.io/specification/2024-11-05/basic/transports#http-with-sse) transport.
+Camunda's MCP Client integration allows using the [AI agent connector](../../../connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) in combination with MCP clients to access tools provided by MCP servers. This includes both locally started [STDIO](https://modelcontextprotocol.io/specification/draft/basic/transports#stdio) servers and remote MCP servers using the [HTTP with SSE](https://modelcontextprotocol.io/specification/2024-11-05/basic/transports#http-with-sse) transport.
 
-![MCP client integration architecture](img/mcp-clients-architecture.png)
+![MCP Client integration architecture](img/mcp-clients-architecture.png)
 
 - [STDIO](https://modelcontextprotocol.io/specification/draft/basic/transports#stdio) (standard input/output) servers are operating system processes directly started and managed by the connector runtime. Communication with these servers is done via standard input and output streams.
 - Remote MCP servers are available via HTTP. Multiple standards exist ([HTTP with SSE](https://modelcontextprotocol.io/specification/2024-11-05/basic/transports#http-with-sse), [Streamable HTTP](https://modelcontextprotocol.io/specification/2025-06-18/basic/transports#streamable-http)).  
-  Currently, only HTTP with SSE is supported by the MCP client connectors.
+  Currently, only HTTP with SSE is supported by the MCP Client connectors.
 
 :::note
-The MCP client integration currently only supports tool-related functionality. Other MCP features such as resources or prompts are not supported.
+The MCP Client integration currently only supports tool-related functionality. Other MCP features such as resources or prompts are not supported.
 :::
 
 ## MCP tool discovery and calling
@@ -71,7 +71,7 @@ To mark an activity tool as a gateway tool definition, the agent expects an [ext
 
 When the AI agent connector [resolves its available tools](../../../connectors/out-of-the-box-connectors/agentic-ai-aiagent-example.md#tool-resolution), it also resolves gateway tool definitions. If required by the gateway tool type, it initiates a tool discovery feedback loop through the ad-hoc sub-process.
 
-The implementation of tool discovery depends on the gateway tool type. For MCP clients (gateway type `mcpClient`), it triggers the [`tools/list`](https://modelcontextprotocol.io/specification/2025-06-18/server/tools#listing-tools) method on each MCP client connector configured within the ad-hoc sub-process. It is the responsibility of the MCP client implementation to fetch tool definitions from the connected MCP server and return them to the AI agent as part of this discovery call.
+The implementation of tool discovery depends on the gateway tool type. For MCP clients (gateway type `mcpClient`), it triggers the [`tools/list`](https://modelcontextprotocol.io/specification/2025-06-18/server/tools#listing-tools) method on each MCP Client connector configured within the ad-hoc sub-process. It is the responsibility of the MCP client implementation to fetch tool definitions from the connected MCP server and return them to the AI agent as part of this discovery call.
 
 #### Tool definitions
 
@@ -83,7 +83,7 @@ MCP_<activityId>___<toolName>>
 
 For example, the `get_current_time` tool provided by
 a [time MCP server](https://github.com/modelcontextprotocol/servers/tree/main/src/time) would resolve to the
-following tool definition when accessed through an MCP client activity with the ID `Time`:
+following tool definition when accessed through an MCP Client activity with the ID `Time`:
 
 ```json
 {
@@ -102,20 +102,20 @@ following tool definition when accessed through an MCP client activity with the 
 }
 ```
 
-When handling LLM tool call requests, the MCP client integration of the AI agent connector transparently maps the unique tool names back to the matching activity. The tool name and arguments are then passed to the MCP client connector for the actual tool call.
+When handling LLM tool call requests, the MCP Client integration of the AI agent connector transparently maps the unique tool names back to the matching activity. The tool name and arguments are then passed to the MCP Client connector for the actual tool call.
 
 ## MCP connectors
 
 :::note
-Remote MCP client connectors do not currently support authentication. This feature will be added in a future release.
+Remote MCP Client connectors do not currently support authentication. This feature will be added in a future release.
 :::
 
 Camunda provides two MCP connectors with different focuses. These connectors are not mutually exclusive and can be used together as long as the cluster/environment is configured accordingly.
 
-| Connector                                                       | STDIO | Remote/HTTP | Configuration                         | Availability                                                                                                   | Description                                                                                                                                                                                |
-| :-------------------------------------------------------------- | :---- | :---------- | :---------------------------------- | :------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [MCP remote client connector](./mcp-remote-client-connector.md) | ❌    | ✅          | Properties panel                    | Available on SaaS                                                                                              | Suited for prototyping with remote MCP servers. HTTP connections are opened on demand during execution instead of maintaining persistent connections, per protocol design.                    |
-| [MCP client connector](./mcp-client-connector.md)               | ✅    | ✅          | Connector runtime + properties panel | Not directly available on SaaS, but a custom runtime running the client connector can be connected to SaaS.    | Flexible MCP integration based on persistent connections managed by the connector runtime. Supports STDIO MCP servers.                                                                      |
+| Connector                                                       | STDIO | Remote/HTTP | Configuration                        | Availability                                                                                                | Description                                                                                                                                                                |
+| :-------------------------------------------------------------- | :---- | :---------- | :----------------------------------- | :---------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [MCP Remote Client connector](./mcp-remote-client-connector.md) | ❌    | ✅          | Properties panel                     | Available on SaaS                                                                                           | Suited for prototyping with remote MCP servers. HTTP connections are opened on demand during execution instead of maintaining persistent connections, per protocol design. |
+| [MCP Client connector](./mcp-client-connector.md)               | ✅    | ✅          | Connector runtime + properties panel | Not directly available on SaaS, but a custom runtime running the client connector can be connected to SaaS. | Flexible MCP integration based on persistent connections managed by the connector runtime. Supports STDIO MCP servers.                                                     |
 
 See the individual connector documentation for details on configuring and using these connectors.
 
@@ -129,7 +129,7 @@ Allows filtering the list of tools provided by the MCP server. If not configured
 
 | Field          | Required | Description                                             | Example                                |
 | :------------- | :------- | :------------------------------------------------------ | :------------------------------------- |
-| Included tools | No       | List of allowed tools provided by the MCP server.      | `["read_file", "read_multiple_files"]` |
+| Included tools | No       | List of allowed tools provided by the MCP server.       | `["read_file", "read_multiple_files"]` |
 | Excluded tools | No       | List of tools to exclude. Overrides any included tools. | `["write_file"]`                       |
 
 For example, an MCP client connected to
@@ -144,7 +144,7 @@ Configures the operation to execute on the MCP server. You typically only need t
 | Field      | Required | Description                                                                                                                                       |
 | :--------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Method     | Yes      | The [MCP method](https://modelcontextprotocol.io/specification/2025-06-18/server/tools#protocol-messages) to call. Defaults to `toolCall.method`. |
-| Parameters | Yes      | The parameters to pass with the MCP client execution. Defaults to `toolCall.params`.                                                             |
+| Parameters | Yes      | The parameters to pass with the MCP client execution. Defaults to `toolCall.params`.                                                              |
 
 #### Output mapping
 
@@ -153,22 +153,22 @@ Specify the process variables to map and export the tool calling response into.
 | Field             | Required | Description                                                                                                                                                                                                                                                                                   |
 | :---------------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Result variable   | Yes      | Defaults to `toolCallResult`. Change only if the output mapping of the ad-hoc sub-process multi-instance is configured to use a different variable for the [content mapping](../../../connectors/out-of-the-box-connectors/agentic-ai-aiagent-example.md#configure-multi-instance-execution). |
-| Result expression | No       | Optionally unpack the response content into multiple process variables using the **Result expression** field as a [FEEL context expression](../../../concepts/expressions.md).                                                                                                              |
+| Result expression | No       | Optionally unpack the response content into multiple process variables using the **Result expression** field as a [FEEL context expression](../../../concepts/expressions.md).                                                                                                                |
 
 ## Human-in-the-loop
 
-![MCP client connector human-in-the-loop example](img/mcp-client-hitl.png)
+![MCP Client connector human-in-the-loop example](img/mcp-client-hitl.png)
 
-With the tool discovery approach described above, you can combine the MCP client connector with other BPMN elements such as user tasks or intermediate events to create a human-in-the-loop interaction.
+With the tool discovery approach described above, you can combine the MCP Client connector with other BPMN elements such as user tasks or intermediate events to create a human-in-the-loop interaction.
 
-Instead of directly exposing the MCP client connector as a tool, an intermediate event marked as an MCP client gateway can serve as the root activity of a tool flow within the ad-hoc sub-process.
+Instead of directly exposing the MCP Client connector as a tool, an intermediate event marked as an MCP client gateway can serve as the root activity of a tool flow within the ad-hoc sub-process.
 
 Here is an example setup with a filesystem MCP server (see [examples](#examples) for a working reference):
 
-1. Add a service task to the ad-hoc sub-process and apply/configure one of the MCP client connectors.
+1. Add a service task to the ad-hoc sub-process and apply/configure one of the MCP Client connectors.
 2. Add an intermediate throw event to the ad-hoc sub-process and add an extension property named `io.camunda.agenticai.gateway.type` with the value `mcpClient`.
 3. Create an exclusive gateway after the event to decide whether the MCP client tool call should be executed directly or require confirmation.
-4. Create a flow from the exclusive gateway to the MCP client service task for direct execution.
+4. Create a flow from the exclusive gateway to the MCP Client service task for direct execution.
    - In the condition expression, you can use a FEEL expression like the following to allow tool listing and selected operations directly. This differs from [filtering](#tools) because all tools remain available, but you can decide which tools need user confirmation:
      ```feel
      if toolCall.method = "tools/list" then
@@ -194,7 +194,7 @@ Here is an example setup with a filesystem MCP server (see [examples](#examples)
    ```
 
 6. Configure a second exclusive gateway after the user task to decide if the tool call should be executed depending on the value of the checkbox added to the user task.
-   - If tool execution is allowed, connect the exclusive gateway to the MCP client service task.
+   - If tool execution is allowed, connect the exclusive gateway to the MCP Client service task.
    - If tool execution is not allowed, end the tool flow in an intermediate throw event. Configure an output variable
      `toolCallResult` to return denied tool call to the model. Use the following FEEL expression as a
      variable assignment value:
