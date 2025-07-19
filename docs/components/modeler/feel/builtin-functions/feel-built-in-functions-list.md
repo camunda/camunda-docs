@@ -622,7 +622,7 @@ is empty([1,2,3])
 // false
 ```
 
-## partition(list， size)
+## partition(list, size)
 
 <MarkerCamundaExtension></MarkerCamundaExtension>
 
