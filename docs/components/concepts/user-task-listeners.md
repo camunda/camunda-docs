@@ -173,13 +173,13 @@ final JobHandler completeTaskListenerJobWithCorrectionsHandler =
             .newCompleteCommand(job)
             // highlight-start
             .withResult(
-                new CompleteJobResult()
-                    .correctAssignee("john_doe") // assigns the user task to 'john_doe'
-                    .correctDueDate(null) // preserves the current 'dueDate' of the user task
-                    .correctFollowUpDate("") // clears the 'followUpDate'
+                r -> r.forUserTask()
+                    .correctAssignee("john_doe")                    // assigns the user task to 'john_doe'
+                    .correctDueDate(null)                           // preserves the current 'dueDate'
+                    .correctFollowUpDate("")                        // clears the 'followUpDate'
                     .correctCandidateUsers(List.of("alice", "bob")) // sets candidate users
-                    .correctCandidateGroups(List.of()) // clears the candidate groups
-                    .correctPriority(80)) // sets the priority to 80
+                    .correctCandidateGroups(List.of())              // clears the candidate groups
+                    .correctPriority(80))                           // sets the priority to 80
             // highlight-end
             .send();
 
@@ -218,8 +218,7 @@ final JobHandler denyUserTaskLifecycleTransitionHandler =
         jobClient
             .newCompleteCommand(job)
             // highlight-start
-            .withResult()
-            .deny(true)
+            .withResult(r -> r.forUserTask().deny(true))
             // highlight-end
             .send();
 ```

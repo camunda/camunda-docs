@@ -106,7 +106,7 @@ final JobHandler userTaskListenerHandler =
             .newCompleteCommand(job)
             // highlight-start
             .withResult(
-                new CompleteJobResult()
+                r -> r.forUserTask()
                     .correctAssignee("john_doe")
                     .correctPriority(42)
                     .deny(shouldDeny)) // deny based on validation logic
