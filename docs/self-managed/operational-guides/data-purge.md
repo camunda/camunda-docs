@@ -1,7 +1,8 @@
 ---
 id: data-purge
-title: "Data purge"
-description: "Purge data from your cluster"
+sidebar_label: Data purge
+title: Camunda data purge
+description: "Purge data from your Camunda cluster"
 ---
 
 import Tabs from "@theme/Tabs";

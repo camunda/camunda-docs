@@ -1,6 +1,7 @@
 ---
 id: camunda-8-run
-title: "Camunda 8 Run"
+sidebar_label: Camunda 8 Run
+title: Document handling configuration in Camunda 8 Run
 description: "Learn more about storage configuration options for Camunda 8 Run setups."
 keywords: ["document handling", "document storage configuration"]
 ---

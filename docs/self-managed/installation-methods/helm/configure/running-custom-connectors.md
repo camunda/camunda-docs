@@ -1,6 +1,7 @@
 ---
 id: running-custom-connectors
-title: "Running custom connectors"
+sidebar_label: Custom connectors
+title: Helm chart custom connectors running
 description: "Run custom connectors in your Helm Kubernetes cluster."
 ---
 

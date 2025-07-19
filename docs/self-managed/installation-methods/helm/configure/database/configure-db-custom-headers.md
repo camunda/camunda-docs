@@ -1,7 +1,7 @@
 ---
 id: configure-db-custom-headers
-title: "Configure custom headers"
-sidebar_label: "Configure custom HTTP headers"
+sidebar_label: Configure custom HTTP headers
+title: Helm chart custom headers configuration
 description: "Learn how to configure DB client custom HTTP headers"
 ---
 

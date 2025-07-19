@@ -1,6 +1,7 @@
 ---
 id: introduction
-title: Update guide
+sidebar_label: Update guide
+title: Camunda update guide
 description: Follow the update procedure and guides when updating your Camunda 8 application or server installation version.
 ---
 

@@ -1,7 +1,6 @@
 ---
-id: upgrade
-title: "Camunda 8 Helm upgrade"
-sidebar_label: "Upgrade via Helm"
+sidebar_label: Upgrade via Helm
+title: Helm chart upgrade
 description: "Upgrade to a more recent version of the Camunda Helm charts, and view configuration changes between versions."
 ---
 

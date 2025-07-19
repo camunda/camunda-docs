@@ -1,6 +1,7 @@
 ---
 id: using-existing-opensearch
-title: "Using Amazon OpenSearch Service"
+sidebar_label: Using Amazon OpenSearch service
+title: Helm chart Amazon OpenSearch service usage
 description: "Learn how to use an Amazon OpenSearch Service instance in Camunda 8 Self-Managed deployment."
 ---
 
