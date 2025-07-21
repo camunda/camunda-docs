@@ -80,20 +80,24 @@ You've now defined a **creating** task listener for this user task. When a proce
 
 <CreateCluster/>
 
-## Step 5: Deploy the process
+## Step 5: Deploy and run the process
 
-1. Click **Deploy current diagram**.
+1. Click **Deploy & run**.
 2. Select your **Camunda 8 cluster**.
-3. Click **Deploy**.
+3. Add an `assignee` or `manager` variable as JSON data. For example, `{ "assignee": "john.doe@camunda.com" }`.
+4. Click **Deploy & run**.
 
-<!-- ![deploy the process](path-to-screenshot4.png) -->
+## Step 6: Understand what happens to the user task
 
-## Step 6: Start a process instance to create the user task
+Now, we'll explore what happened to the user task. We'll see that the listener blocks the creation.
 
-1. Start a new process instance by clicking on the blue **Run** button.
-2. In the top left corner of the screen, click the square-shaped **Camunda components** button.
-3. Navigate to Tasklist and notice that there is no task in Tasklist yet.
-4. Navigate to Operate to see your process instance with a token waiting at the user task by clicking **View process instances**.
+1. In the top left corner of the screen, click the square-shaped **Camunda components** button.
+2. Navigate to **Tasklist** and notice that there is no task in Tasklist yet.
+
+3. Navigate to **Operate** to see your process instance with a token waiting at the user task by clicking on the active process instance in the **Dashboard**.
+
+4. Click the **Process instance key** to [inspect the process instance](/components/operate/userguide/basic-operate-navigation.md#inspect-a-process-instance).
+
 5. Click the user task and then click the **Listeners** tab to see that the **Creating** listener is **Active**.
 6. Take a moment to understand the properties of the listener, for example verify that the listener type is what you defined in the process model. This listener is a job that can be activated and handled by a job worker.
 
