@@ -46,7 +46,7 @@ Additionally, you need the following:
 
 1. Launch **Camunda Modeler**.
 2. Create a new BPMN file.
-3. Add a user task named `Review application`.
+3. Add a user task named `Assigned by creating task listener`.
 
 :::note
 In this guide, you can also use the example BPMN from the repo located in `camunda-platform-tutorials/quick-start/task-listeners/task-listener-java/src/main/resources/Quick_Start_Task_Listeners.bpmn`.
@@ -101,7 +101,7 @@ You've now defined a **creating** task listener for this user task. When a proce
 
 Next, we'll run the listener application to execute our external logic, and complete the listener job to continue the user task's creation.
 
-### Create credentials for your Zeebe client
+### Create credentials for your Camunda client
 
 <CreateApiCredentials/>
 
