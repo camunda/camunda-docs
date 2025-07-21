@@ -100,6 +100,7 @@ Select and configure authentication for the LLM model **Provider** you want to u
 
 - [Anthropic](http://anthropic.com/) (Claude models)
 - [Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html)
+- [Azure OpenAI](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/overview)
 - [OpenAI](http://openai.com/)
 
 :::note
@@ -135,6 +136,29 @@ Model availability depends on the region and model you use. You might need to re
 
 :::info
 For a list of Amazon Bedrock LLM models, refer to [supported foundation models in Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html).
+:::
+
+#### Azure OpenAI
+
+Select this option to use the [Azure OpenAI models](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/overview).
+
+| Field          | Required | Description                                                                                      |
+| :------------- | :------- | :----------------------------------------------------------------------------------------------- |
+| Endpoint       | Yes      | The Azure OpenAI endpoint URL. Example: `https://<your-resource-name>.openai.azure.com/`         |
+| Authentication | Yes      | Select the authentication type you want to use to authenticate the connectgor with Azure OpenAI. |
+
+Currently two authentication methods are supported:
+
+- **API key**: Use this option to authenticate using an Azure OpenAI API key. The API key is available in the [Azure AI Foundry portal](https://ai.azure.com/).
+- **Client credentials**: Use this option to authenticate using a client ID and secret, which requires you to register an application in [Microsoft Entra ID](https://go.microsoft.com/fwlink/?linkid=2083908).
+  The following fields are provided for this authentication method:
+  - **Client ID:** the ID of the Microsoft Entra application.
+  - **Client secret:** the secret of the application.
+  - **Tenant ID:** the Microsoft Entra tenant ID.
+  - **Authority host:** The authority host URL for the Microsoft Entra application. In most cases, it can be left empty as the default value of `https://login.microsoftonline.com/` is used. This field can also contain an OAuth 2.0 token endpoint.
+
+:::info
+To be able to use the Azure OpenAI models you need to first deploy the model you want to use in the Azure AI Foundry portal. For more information, refer to [deploying models in Azure OpenAI](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/how-to/create-resource#deploy-a-model).
 :::
 
 #### OpenAI
