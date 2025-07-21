@@ -389,12 +389,11 @@ Specify the process variables that you want to map and export the AI Agent conne
 | Result expression | No       | In addition, you can choose to unpack the content of the response into multiple process variables using the **Result expression** field, as a [FEEL Context Expression](/components/concepts/expressions.md).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 
 :::tip
-An easy approach to get started with modeling your first AI Agent is to use the default result variable (`agent`) and
+To model your first AI Agent, you can use the default result variable (`agent`) and
 configure the **Agent Context** as `agent.context`.
 
-When adding a second AI Agent connector, make sure to use a
-different variable name (such as `mySecondAgent`) and align the context variable accordingly (e.g.
-`mySecondAgent.context`) to avoid interference and
+When adding a second AI Agent connector, use a
+different variable name (such as `mySecondAgent`) and align the context variable accordingly (for example, `mySecondAgent.context`) to avoid interference and
 unexpected results between different agents.
 :::
 
