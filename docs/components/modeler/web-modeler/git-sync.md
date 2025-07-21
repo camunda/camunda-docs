@@ -211,7 +211,7 @@ Follow the [Bitbucket documentation](https://support.atlassian.com/bitbucket-clo
 <h3>Configure Bitbucket in Web Modeler</h3>
 
 :::note
-Web Modeler currently only support Bitbucket Cloud.
+Web Modeler currently only supports Bitbucket Cloud.
 :::
 
 1. In Web Modeler, navigate to the process application you want to connect to Bitbucket, and click **Connect repository**.
