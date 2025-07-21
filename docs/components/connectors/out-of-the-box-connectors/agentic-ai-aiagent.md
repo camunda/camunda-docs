@@ -141,43 +141,40 @@ For a list of Amazon Bedrock LLM models, refer to [supported foundation models i
 
 #### Azure OpenAI
 
-Select this option to use the [Azure OpenAI models](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/overview).
+Select this option to use [Azure OpenAI models](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/overview).
 
-| Field          | Required | Description                                                                                      |
-| :------------- | :------- | :----------------------------------------------------------------------------------------------- |
-| Endpoint       | Yes      | The Azure OpenAI endpoint URL. Example: `https://<your-resource-name>.openai.azure.com/`         |
-| Authentication | Yes      | Select the authentication type you want to use to authenticate the connectgor with Azure OpenAI. |
+| Field          | Required | Description                                                                                     |
+|----------------|----------|-------------------------------------------------------------------------------------------------|
+| **Endpoint**       | Yes      | The Azure OpenAI endpoint URL. Example: `https://<your-resource-name>.openai.azure.com/`          |
+| **Authentication** | Yes      | Select the authentication type you want to use to authenticate the connector with Azure OpenAI.                                   |
 
-Currently two authentication methods are supported:
+Two authentication methods are currently supported:
 
-- **API key**: Use this option to authenticate using an Azure OpenAI API key. The API key is available in the [Azure AI Foundry portal](https://ai.azure.com/).
-- **Client credentials**: Use this option to authenticate using a client ID and secret, which requires you to register an application in [Microsoft Entra ID](https://go.microsoft.com/fwlink/?linkid=2083908).
-  The following fields are provided for this authentication method:
-  - **Client ID:** the ID of the Microsoft Entra application.
-  - **Client secret:** the secret of the application.
-  - **Tenant ID:** the Microsoft Entra tenant ID.
-  - **Authority host:** The authority host URL for the Microsoft Entra application. In most cases, it can be left empty as the default value of `https://login.microsoftonline.com/` is used. This field can also contain an OAuth 2.0 token endpoint.
+- **API key**: Authenticate using an Azure OpenAI API key, available in the [Azure AI Foundry portal](https://ai.azure.com/).
 
-:::info
-To be able to use an Azure OpenAI model you need to first deploy that model in the Azure AI Foundry portal. For more information, refer to [deploying models in Azure OpenAI](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/how-to/create-resource#deploy-a-model).
-Then the deployment ID is used in the **Model** field.
+- **Client credentials**: Authenticate using a client ID and secret. This method requires registering an application in [Microsoft Entra ID](https://go.microsoft.com/fwlink/?linkid=2083908). Provide the following fields:
+  - **Client ID** – The Microsoft Entra application ID.  
+  - **Client secret** – The application’s client secret.  
+  - **Tenant ID** – The Microsoft Entra tenant ID.  
+  - **Authority host** – (Optional) The authority host URL. Defaults to `https://login.microsoftonline.com/`. This can also be an OAuth 2.0 token endpoint.
+
+:::note
+To use an Azure OpenAI model, you must first deploy it in the Azure AI Foundry portal. For details, see [Deploy a model in Azure OpenAI](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/how-to/create-resource#deploy-a-model). The deployment ID must then be provided in the **Model** field.
 :::
 
 #### Google Vertex AI
 
-Select this option to use the [Google Vertex AI](https://cloud.google.com/vertex-ai) models.
+Select this option to use [Google Vertex AI](https://cloud.google.com/vertex-ai) models.
 
-| Field      | Required | Description                                                                                                                        |
-| :--------- | :------- | :--------------------------------------------------------------------------------------------------------------------------------- |
-| Project ID | Yes      | The Google Cloud project ID.                                                                                                       |
-| Location   | Yes      | The [region](https://cloud.google.com/vertex-ai/docs/general/locations#feature-availability) where AI inference should take place. |
+| Field          | Required | Description                                                                                                                           |
+|----------------|----------|---------------------------------------------------------------------------------------------------------------------------------------|
+| **Project ID** | Yes      | The Google Cloud project ID.                                                                                                          |
+| **Location**   | Yes      | The [region](https://cloud.google.com/vertex-ai/docs/general/locations#feature-availability) where AI inference should take place.   |
 
-:::info
-Currently, only the [Application Default Credentials (ADC)](https://cloud.google.com/docs/authentication/provide-credentials-adc) authentication method is supported.
-Hence, the Google Vertex AI provider is only supported in self-managed or hybrid environments.
-:::
+:::note
+Only [Application Default Credentials (ADC)](https://cloud.google.com/docs/authentication/provide-credentials-adc) are currently supported. As a result, the Google Vertex AI provider is only available in Self-Managed or hybrid environments.
 
-To set up ADC for a local development environment follow the instructions [here](https://cloud.google.com/docs/authentication/set-up-adc-local-dev-environment).
+To set up ADC in a local development environment, follow the instructions [here](https://cloud.google.com/docs/authentication/set-up-adc-local-dev-environment).
 
 #### OpenAI
 
