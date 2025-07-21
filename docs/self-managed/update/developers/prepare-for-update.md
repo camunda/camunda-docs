@@ -8,39 +8,12 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 This guide provides detailed steps for developers to prepare their applications and local development environments before the platform update to Camunda 8.8.
-
+TODO add explanation of breaking changes (Identity? CPT? ) if any and other info
 Preparing your applications for Camunda 8.8 requires upgrade of an SDK, environment updates, and testing changes. This guide walks you through each step to ensure a smooth transition.
 
 ## Step 1: Application assessment and planning
 
 First, understand what applications you have and what needs to change.
-
-### Find all Camunda applications
-
-**Scan your codebase for Camunda usage:**
-
-<Tabs>
-<TabItem value="linux-mac" label="Linux/macOS">
-
-```bash
-# Find applications with Camunda dependencies
-find . -name "pom.xml" -exec grep -l "zeebe\|camunda" {} \;
-find . -name "package.json" -exec grep -l "zeebe\|camunda" {} \;
-find . -name "build.gradle" -exec grep -l "zeebe\|camunda" {} \;
-```
-
-</TabItem>
-<TabItem value="windows" label="Windows">
-
-```bash
-# Find applications with Camunda dependencies
-Get-ChildItem -Recurse -Name "pom.xml" | ForEach-Object { if (Select-String -Path $_ -Pattern "zeebe|camunda" -Quiet) { $_ } }
-Get-ChildItem -Recurse -Name "package.json" | ForEach-Object { if (Select-String -Path $_ -Pattern "zeebe|camunda" -Quiet) { $_ } }
-Get-ChildItem -Recurse -Name "build.gradle" | ForEach-Object { if (Select-String -Path $_ -Pattern "zeebe|camunda" -Quiet) { $_ } }
-```
-
-</TabItem>
-</Tabs>
 
 ### Create application inventory
 
@@ -63,7 +36,7 @@ Get-ChildItem -Recurse -Name "build.gradle" | ForEach-Object { if (Select-String
 
 **API endpoint usage:**
 
-Check for V1 API endpoint usage to replace them with the Orchestration Cluster API.
+Check for v1 API endpoint usage to replace them with the Orchestration Cluster API v2.
 
 ## Step 2: Update development environment
 
@@ -210,7 +183,7 @@ const camunda8 = new Camunda8({
 </Tabs>
 
 ## Step 4: Update testing frameworks
-
+TODO Check validity
 Migrate from deprecated testing tools to new frameworks.
 
 :::warning Breaking Change: Testing Framework Migration

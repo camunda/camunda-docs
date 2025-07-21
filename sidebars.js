@@ -1657,7 +1657,6 @@ module.exports = {
           type: "category",
           label: "For Administrators",
           items: [
-            "self-managed/update/administrators/plan-admin-update",
             "self-managed/update/administrators/prepare-for-admin-update",
             "self-managed/update/administrators/run-admin-update",
           ],
@@ -1666,7 +1665,6 @@ module.exports = {
           type: "category",
           label: "For Developers",
           items: [
-            "self-managed/update/developers/plan-dev-update",
             "self-managed/update/developers/prepare-for-dev-update",
             "self-managed/update/developers/run-dev-update",
           ],

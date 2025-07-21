@@ -13,9 +13,8 @@ Now it's time to deploy your updated applications to Camunda 8.8. This guide cov
 
 **Make sure you've completed these steps:**
 
-1. [Planned your application updates](./plan-update.md)
-2. [Prepared your applications](./prepare-for-update.md)
-3. Coordinated with platform administrators
+1. [Prepared your applications](./prepare-for-update.md)
+2. Coordinated with platform administrators
 
 **Ready to deploy? Check these items:**
 
@@ -27,7 +26,7 @@ Now it's time to deploy your updated applications to Camunda 8.8. This guide cov
 
 ## Application deployment strategy
 
-Choose how to deploy your updated applications.
+You can use variety of deployment models. Below we would like to highlight two most popular choices to deploy your updated applications.
 
 ### Option 1: Coordinated deployment (recommended)
 
@@ -50,62 +49,6 @@ Choose how to deploy your updated applications.
 
 **Pros:** Lower risk, easier troubleshooting
 **Cons:** Takes longer, more coordination needed
-
-## Step 1: Deploy updated applications
-
-Update and deploy applications with new SDK versions and configurations.
-
-<Tabs>
-<TabItem value="java-spring" label="Java/Spring">
-
-**Update and redeploy:**
-
-```bash
-# Build applications with updated dependencies
-mvn clean package
-
-# Deploy updated applications
-kubectl apply -f updated-deployment.yaml
-
-# Monitor application startup
-kubectl logs deployment/your-app-name -f
-```
-
-**Verify SDK functionality:**
-
-- Test basic Zeebe client connectivity
-- Verify topology request success
-- Check for any connection errors
-
-</TabItem>
-<TabItem value="nodejs" label="Node.js">
-
-**Update and redeploy:**
-
-```bash
-# Install updated dependencies
-npm install
-
-# Build and deploy application
-npm run build
-kubectl apply -f updated-deployment.yaml
-
-# Monitor application logs
-kubectl logs deployment/your-node-app -f
-```
-
-**Verify SDK functionality:**
-
-- Test new SDK connectivity
-- Check for successful topology requests
-- Monitor logs for connection issues
-
-</TabItem>
-</Tabs>
-
-## Step 2: API endpoint migration
-
-Migrate from Zeebe, Operate and Tasklist REST APIs to the new Orchestration Cluster API.
 
 ### Update API endpoints
 
@@ -148,7 +91,7 @@ curl -H "Authorization: Bearer $TOKEN" \
   "$CLUSTER_API_URL/api/tasks"
 ```
 
-## Step 3: Custom connector validation
+## Custom connector validation
 
 Validate and update custom connectors for 8.8 compatibility.
 
@@ -212,7 +155,7 @@ public void handleTestTask(JobClient client, ActivatedJob job) {
 kubectl logs deployment/your-job-worker -f
 ```
 
-## Step 5: Integration testing
+## Integration testing
 
 Perform comprehensive integration testing with the updated platform.
 
