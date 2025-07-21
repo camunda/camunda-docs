@@ -32,7 +32,7 @@ Red Hat OpenShift on AWS (ROSA)
 
 Microsoft Azure
 
-- [Microsoft AKS single-region](/self-managed/setup/deploy/azure/microsoft-aks/terraform-setup.md): a standard production setup.
+- [Microsoft AKS single-region](/self-managed/installation-methods/helm/cloud-providers/azure/microsoft-aks/terraform-setup.md): a standard production setup.
 
 For general deployment pitfalls, visit the [deployment troubleshooting guide](/self-managed/operational-guides/troubleshooting/troubleshooting.md).
 
