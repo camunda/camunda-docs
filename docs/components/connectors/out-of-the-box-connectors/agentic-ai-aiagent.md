@@ -166,10 +166,10 @@ To use an Azure OpenAI model, you must first deploy it in the Azure AI Foundry p
 
 Select this option to use [Google Vertex AI](https://cloud.google.com/vertex-ai) models.
 
-| Field          | Required | Description                                                                                                                           |
-|----------------|----------|---------------------------------------------------------------------------------------------------------------------------------------|
-| **Project ID** | Yes      | The Google Cloud project ID.                                                                                                          |
-| **Location**   | Yes      | The [region](https://cloud.google.com/vertex-ai/docs/general/locations#feature-availability) where AI inference should take place.   |
+| Field          | Required | Description                                                                                                                        |
+| -------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| **Project ID** | Yes      | The Google Cloud project ID.                                                                                                       |
+| **Location**   | Yes      | The [region](https://cloud.google.com/vertex-ai/docs/general/locations#feature-availability) where AI inference should take place. |
 
 :::note
 Only [Application Default Credentials (ADC)](https://cloud.google.com/docs/authentication/provide-credentials-adc) are currently supported. As a result, the Google Vertex AI provider is only available in Self-Managed or hybrid environments.
