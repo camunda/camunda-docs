@@ -32,6 +32,7 @@ module.exports = {
   ],
   Components: [
     "components/components-overview",
+    "components/whats-new-in-88",
     {
       type: "category",
       label: "Concepts",
