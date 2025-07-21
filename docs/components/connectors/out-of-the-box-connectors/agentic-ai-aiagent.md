@@ -101,6 +101,7 @@ Select and configure authentication for the LLM model **Provider** you want to u
 - [Anthropic](http://anthropic.com/) (Claude models)
 - [Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html)
 - [Azure OpenAI](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/overview)
+- [Google Vertex AI](https://cloud.google.com/vertex-ai)
 - [OpenAI](http://openai.com/)
 
 :::note
@@ -158,8 +159,25 @@ Currently two authentication methods are supported:
   - **Authority host:** The authority host URL for the Microsoft Entra application. In most cases, it can be left empty as the default value of `https://login.microsoftonline.com/` is used. This field can also contain an OAuth 2.0 token endpoint.
 
 :::info
-To be able to use the Azure OpenAI models you need to first deploy the model you want to use in the Azure AI Foundry portal. For more information, refer to [deploying models in Azure OpenAI](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/how-to/create-resource#deploy-a-model).
+To be able to use an Azure OpenAI model you need to first deploy that model in the Azure AI Foundry portal. For more information, refer to [deploying models in Azure OpenAI](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/how-to/create-resource#deploy-a-model).
+Then the deployment ID is used in the **Model** field.
 :::
+
+#### Google Vertex AI
+
+Select this option to use the [Google Vertex AI](https://cloud.google.com/vertex-ai) models.
+
+| Field      | Required | Description                                                                                                                        |
+| :--------- | :------- | :--------------------------------------------------------------------------------------------------------------------------------- |
+| Project ID | Yes      | The Google Cloud project ID.                                                                                                       |
+| Location   | Yes      | The [region](https://cloud.google.com/vertex-ai/docs/general/locations#feature-availability) where AI inference should take place. |
+
+:::info
+Currently, only the [Application Default Credentials (ADC)](https://cloud.google.com/docs/authentication/provide-credentials-adc) authentication method is supported.
+Hence, the Google Vertex AI provider is only supported in self-managed or hybrid environments.
+:::
+
+To set up ADC for a local development environment follow the instructions [here](https://cloud.google.com/docs/authentication/set-up-adc-local-dev-environment).
 
 #### OpenAI
 
