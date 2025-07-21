@@ -156,6 +156,10 @@ Now, this second listener corrects the priority back to the value it had before 
 The third listener sees only the `assignee` attribute as changed attribute, because the priority is no longer changed with the event.
 :::
 
+#### Task headers
+
+Configured [task headers](/components/modeler/bpmn/user-tasks/user-tasks.md#task-headers) on the user task are available in the job's custom headers.
+
 ### Correcting user task data
 
 User task listeners can correct user task data before the lifecycle transition is finalized. Corrections allow user task listeners to update specific attributes of the user task, such as the assignee, due date, follow-up date, candidate users, candidate groups, and priority. These corrections are immediately available to any subsequent task listeners and are applied to the user task when the lifecycle transition is finalized, without triggering the `UPDATING` lifecycle event.
