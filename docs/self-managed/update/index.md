@@ -1,116 +1,152 @@
 ---
 title: "Camunda 8.8 Self-Managed Update Guide"
-description: "Comprehensive guide for updating your Camunda 8 Self-Managed installation, including architectural changes, migration planning, and execution strategies."
+description: "Plan and execute an update of your Camunda 8 Self-Managed installation to version 8.8. Includes architectural highlights, prerequisites, breaking changes, and role-based update paths for administrators and developers."
 ---
 
-Update your Camunda 8 Self-Managed installation to the latest version with confidence. This section provides detailed technical guidance, migration strategies, and coordination procedures for both platform administrators and application developers.
+# Camunda 8.8 Self-Managed Update Guide
 
-## Camunda 8.8 is a latest released version
+This page helps you plan and run an update of an existing **Camunda 8.7** Self-Managed environment to **Camunda 8.8**. It summarizes what changed, what you must do before updating, and where to find step-by-step instructions based on your role.
 
-Camunda 8.8 represents a significant architectural evolution that affects both infrastructure deployment and application integration. This update introduces the new **orchestration cluster architecture**, unified APIs, and new authentication models while deprecating several legacy components.
+> **Who should read this?**  
+> Platform administrators, DevOps engineers, and application developers maintaining Camunda-based solutions in self-managed Kubernetes or VM environments. 
 
-:::info Web Modeller and Console
-Biggest changes to Camunda 8.8 release relate to Orchestrion cluster. For Web Modeller and Console please follow standard upgrade procedures described in [8.8 Update guide](../operational-guides/update-guide/870-to-880.md)
-:::
+## Camunda 8.8 is a latest release
 
-**Update complexity**: **Moderate to High**
+Camunda 8.8 represents a significant architectural evolution that affects both infrastructure deployment and application integration. This update introduces the new **Orchestration cluster architecture**, unified APIs, and new authentication models while deprecating several legacy components.
 
-We provide two guides specifically designed to help Administrators and Developer with Camunda 8.8 upgrade.
-We recommend to avoid any other deployment changes outside of this guide in order to reduce risk and complexity of the upgrade. 
+## Why this update matters
+
+Camunda 8.8 introduces changes that affect both **infrastructure** and **application integration**:
+
+- **Orchestration Cluster architecture:** Consolidates and streamlines the runtime components to simplify deployment and scaling. [See Architectural changes](#architectural-changes). 
+- **Unified APIs & SDK alignment:** Earlier component-specific APIs (V1) are deprecated; migrate to the Orchestration Cluster API and updated SDKs to access new capabilities and ensure forward compatibility. 
+- **Authentication & authorization overhaul:** Shift to an OIDC-based identity model with cluster-level and scoped permissions. LDAP integration for Operate/Tasklist is removed. 
+- **Unified configuration schema:** A consistent configuration model reduces divergence across components and eases automation. [Link to schema docs – VERIFY]
+
+> **Update complexity:** **Moderate–High.** Expect coordination across platform and application teams and plan a controlled maintenance window. Validate in a non-production environment first.
+
+---
+
+## Quick Start Checklist
+
+1. Confirm your current Camunda version and supported direct upgrade path to 8.8. [VERIFY matrix]
+2. Back up stateful data (Elasticsearch / OpenSearch indices, configuration, secrets).
+3. Prepare an OIDC provider (Identity, Keycloak, or corporate IdP) and map required roles.
+4. Migrate configuration to the unified schema (dry run).
+5. Update SDK dependencies in development branches; address deprecations.
+6. Stand up a test environment that mirrors production scale where possible.
+7. Run update and validate workflows, user tasks, and custom integrations.
+
+---
 
 [Camunda 8.8 Upgrade guide for Administrator](./administrators/prepare-for-update.md)
 [Camunda 8.8 Upgrade guide for Developers](./developers/prepare-for-update.md)
 
-You can navigate to one of these guides to start your upgrade. In the remainder of this page we will provide a high level overview of changes to help you with high level understanding of what has changed.
+You can navigate to one of these guides to start your upgrade. 
 
-- Architectural changes in 8.8
-- Update pre-requisites and compatibility
-- New Camunda Orchestration cluster Identity
-- New unified deployment architecture
+---
 
 ## Architectural changes in 8.8
 
-### New streamlined architecture
-With Camunda 8.8 we have completed our streamlined architecture project, announced in 2024 in the [blog post](https://camunda.com/blog/2024/04/simplified-deployment-options-accelerated-getting-started-experience/)
+### Streamlined / Orchestration Cluster Architecture
+Camunda 8.8 completes the “streamlined architecture” initiative announced in 2024. At a high level:
 
-TODO Explain what is all about 
+- Reduces the number of separately deployed component services. 
+- Aligns component communication through a unified cluster identity and API surface.
+- Simplifies scaling by letting you size the orchestration cluster independently of management tooling.
+- Standardizes configuration keys and secrets across components.
+- Sets the foundation for future multi-cluster and federation patterns. [VERIFY]
 
+For background, see the 2024 architecture announcement blog post. [blog post](https://camunda.com/blog/2024/04/simplified-deployment-options-accelerated-getting-started-experience/)
 
-## Update pre-requisites and compatibility
+---
 
-You can find detailed list of operating systems, clients, deployment options, and component requirements in our [Supported environments page](../../reference/supported-environments.md). Below are several highlights.
+## Update prerequisites and compatibility
 
-:::warning Breaking Changes
-Camunda 8.8 includes breaking changes that **require** application code updates and infrastructure modifications. Plan accordingly.
-For a full list of changes, please refer to [8.8 Update guide](../operational-guides/update-guide/870-to-880.md)
+For full OS, Kubernetes, database, and runtime version details, see the **[Supported environments](../../reference/supported-environments.md)** reference. Highlights relevant to the 8.8 update appear below.
+
+:::warning Breaking changes
+Camunda 8.8 includes changes that **require** both application updates and infrastructure modifications. Review the deprecation deadlines and plan your migration. For the full technical delta, see **[Update guide: 8.7.x → 8.8](../operational-guides/update-guide/870-to-880.md)**. [VERIFY path]
 :::
 
-**API and SDK changes:**
+### API & SDK status
 
-While API and SDK change are backward compatible in Camunda 8.8 release, we highly recommend migrating your applications as soon as possible to get access to new features and future proof your applications.
-- V1 component APIs is now deprecated → Migrate to Orchestration Cluster API before Camunda 8.10
-- Community Spring Zeebe is now deprecated → Migrate to Camunda Spring SDK before Camunda 8.10
-- Zeebe Process Test (ZPT) is now deprecated → Migrate to Camunda Process Test (CPT) before Camunda 8.10
-- Job-based User Tasks is now deprecated → Migrate to Camunda User Tasks before Camunda 8.10
+| Component / Use | Status in 8.8 | Migrate To | Migrate By (no later than) |
+|---|---|---|---|
+| V1 component APIs | **Deprecated** | Orchestration Cluster API | Before Camunda 8.10 |
+| Community Spring Zeebe | **Deprecated** | Camunda Spring SDK | Before Camunda 8.10 |
+| Zeebe Process Test (ZPT) | **Deprecated** | Camunda Process Test (CPT) | Before Camunda 8.10 |
+| Job-based User Tasks | **Deprecated** | Camunda User Tasks | Before Camunda 8.10 |
+
+> Start migration now to reduce risk when upgrading beyond 8.8.
 
 For More information see [Upcoming API Changes in Camunda 8: A Unified and Streamlined Experience](https://camunda.com/blog/2024/12/api-changes-in-camunda-8-a-unified-and-streamlined-experience/)
 
-**Authentication and authorization:** TODO review and rephrase
+### Authentication & authorization
 
-- LDAP authentication removed for Operate/Tasklist → Migrate to Identity/OIDC
-- New cluster-level permission model → Update role assignments
-- Separate orchestration vs management permissions → Reconfigure access controls
-- New Orchestration cluster identity does require Keycloak, however it requires an OIDC provider. This could be an you company OIDC provider or standalone deployment of Keycloak.
+- LDAP-based authentication for **Operate** and **Tasklist** has been removed. Use **Identity** backed by an **OIDC** provider (Keycloak or your enterprise IdP). 
+- A **cluster-level permission model** replaces previous per-component role handling; review role mappings.
+- **Scoped permissions** differentiate orchestration (runtime execution) from management (operate, administer). Adjust access control policies accordingly.
+- An OIDC provider is required. Camunda Identity can integrate with Keycloak or external OIDC sources. [Add link to Identity setup]
 
-**Infrastructure**
+### Infrastructure versions
 
-- **Elasticsearch 8.16+** is a minimum supported versions with Camunda 8.8.
+- **Elasticsearch: 8.16 or later** required. Confirm whether OpenSearch is supported for 8.8 and note minimum version. [VERIFY]
+- Ensure storage classes and performance settings meet event throughput needs; reindexing may be required after schema changes. [VERIFY]
 
-**Deployment changes:**
+### Deployment changes
 
-- New orchestration cluster deployment architecture → Please, refer to [Camunda Upgrade guide for Administrators](./administrators/prepare-for-update.md) for more details.
-- Unified configuration schema → Migrate Camunda configuration to the new unified schema TODO add link
+- The **Orchestration Cluster deployment architecture** replaces prior component-scattered topologies. See **[Administrators: Prepare for update](./administrators/prepare-for-update.md)**.
+- **Unified configuration schema**: migrate existing Helm values or environment settings to the new schema. [Add link to schema migration instructions]
+
+---
 
 ## Update execution paths
 
-Choose your role and follow the appropriate update path:
+Choose the path that matches your role. Teams should coordinate; many tasks are interdependent.
 
-### **Platform Administrators, DevOps** - Infrastructure and platform management
+---
 
-**You are responsible for:**
+### Platform Administrators / DevOps
 
-- Kubernetes clusters and Helm chart deployments
-- Elasticsearch/OpenSearch databases and infrastructure
-- Authentication systems (Identity, Keycloak, OIDC providers)
-- Backup systems and disaster recovery procedures
-- Platform monitoring and alerting systems
+**Typical responsibilities**
 
-**Your update path:**
+- Kubernetes clusters & Helm chart lifecycle
+- Elasticsearch / OpenSearch management
+- Authentication systems (Identity, Keycloak, enterprise OIDC)
+- Backup / restore and disaster recovery
+- Monitoring, logging, and alerting
 
-1. **[Prepare for update](./administrators/prepare-for-update.md)** - Backup creation and configuration updates
-2. **[Run update](./administrators/run-update.md)** - Platform update execution and validation
+**Your update flow**
 
-### **Application Developers** - Applications and integrations
+1. **[Prepare for update](./administrators/prepare-for-update.md)** – Validate backups, review prerequisites, map configuration changes, stage images.
+2. **[Run update](./administrators/run-update.md)** – Apply chart changes, perform rolling or controlled restart, validate cluster health and data access.
 
-**You are responsible for:**
+---
+
+### Application Developers
+
+**Typical responsibilities**
 
 - Process applications and job workers using Camunda SDKs
-- Custom connectors and integration applications
-- Client applications consuming Camunda APIs
-- Testing frameworks and development tooling
-- User task implementations and UI applications
+- Custom connectors and integration services
+- Applications consuming Camunda APIs
+- Testing frameworks and CI/CD tooling
+- User task implementations and custom UIs
 
-**Your update path:**
+**Your update flow**
 
+1. **[Prepare for update](./developers/prepare-for-update.md)** – Upgrade SDKs, resolve deprecated APIs, update auth clients (OIDC), adapt tests.
+2. **[Run update](./developers/run-update.md)** – Deploy updated applications, re-run integration and process tests, validate user task behavior.
 
-1. **[Prepare for update](./developers/prepare-for-update.md)** - SDK migration and development environment setup
-2. **[Run update](./developers/run-update.md)** - Application deployment and functionality validation
+---
 
 ## Next steps
 
-1. **Review the comprehensive planning guides** for your role
-2. **Start with a test environment** to validate your specific configuration
-3. **Coordinate with your counterpart team** (administrators ↔ developers)
-4. **Plan your maintenance window** allowing sufficient time for validation
+1. **Review the detailed role guides** linked above.  
+2. **Stage a test environment** that mirrors production scale and auth integration.  
+3. **Coordinate between platform and development teams** to align sequence and downtime.  
+4. **Schedule a maintenance window** with time for validation and rollback.  
+5. **Document results** from test and production updates for future upgrades.
 
-Both update paths include detailed step-by-step guidance, validation procedures, and troubleshooting recommendations tailored to your specific responsibilities.
+---
