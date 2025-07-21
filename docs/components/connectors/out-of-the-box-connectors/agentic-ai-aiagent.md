@@ -153,9 +153,9 @@ Two authentication methods are currently supported:
 - **API key**: Authenticate using an Azure OpenAI API key, available in the [Azure AI Foundry portal](https://ai.azure.com/).
 
 - **Client credentials**: Authenticate using a client ID and secret. This method requires registering an application in [Microsoft Entra ID](https://go.microsoft.com/fwlink/?linkid=2083908). Provide the following fields:
-  - **Client ID** – The Microsoft Entra application ID.  
-  - **Client secret** – The application’s client secret.  
-  - **Tenant ID** – The Microsoft Entra tenant ID.  
+  - **Client ID** – The Microsoft Entra application ID.
+  - **Client secret** – The application’s client secret.
+  - **Tenant ID** – The Microsoft Entra tenant ID.
   - **Authority host** – (Optional) The authority host URL. Defaults to `https://login.microsoftonline.com/`. This can also be an OAuth 2.0 token endpoint.
 
 :::note
