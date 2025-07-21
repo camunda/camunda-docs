@@ -109,32 +109,30 @@ See [open a job worker](/apis-tools/java-client-examples/job-worker-open.md) for
 
 ### Accessing user task data
 
-User task-specific data, such as `assignee` and `priority`, is accessible through the job headers of the user task listener job.
-These are merged together with the user task's [task headers](/components/modeler/bpmn/user-tasks/user-tasks.md#task-headers).
-The following attributes can be retrieved using reserved header names:
+User task-specific data, such as `assignee` and `priority`, are accessible through the `userTask` property of the user task listener job.
+The following user task attributes can be accessed from the activated job's user task property:
 
-| Attribute           | Header name                          |
-| :------------------ | :----------------------------------- |
-| `action`            | `io.camunda.zeebe:action`            |
-| `assignee`          | `io.camunda.zeebe:assignee`          |
-| `candidateGroups`   | `io.camunda.zeebe:candidateGroups`   |
-| `candidateUsers`    | `io.camunda.zeebe:candidateUsers`    |
-| `changedAttributes` | `io.camunda.zeebe:changedAttributes` |
-| `dueDate`           | `io.camunda.zeebe:dueDate`           |
-| `followUpDate`      | `io.camunda.zeebe:followUpDate`      |
-| `formKey`           | `io.camunda.zeebe:formKey`           |
-| `priority`          | `io.camunda.zeebe:priority`          |
-| `userTaskKey`       | `io.camunda.zeebe:userTaskKey`       |
+| Attribute           | Decription                                                                                                                                                                                   |
+| :------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `action`            | A custom action value provided along with the request that triggered this event. If none was provided, it defaults to one of `assign`, `claim`, `update`, `complete`.                        |
+| `assignee`          | The user assigned to the task. If not specified, then the task is unassigned. Refer to [assignments](/components/modeler/bpmn/user-tasks/user-tasks.md#assignments) for more details.        |
+| `candidateGroups`   | Specifies the groups of users that the task can be assigned to. Refer to [assignments](/components/modeler/bpmn/user-tasks/user-tasks.md#assignments) for more details.                      |
+| `candidateUsers`    | Specifies the users that the task can be assigned to. Refer to [assignments](/components/modeler/bpmn/user-tasks/user-tasks.md#assignments) for more details.                                |
+| `changedAttributes` | Lists which user task attributes have changed with the event. Refer to [changed attributes](#changed-attributes) section below for more details.                                             |
+| `dueDate`           | Specifies the due date of the task. Refer to [scheduling](/components/modeler/bpmn/user-tasks/user-tasks.md#scheduling) for more details.                                                    |
+| `followUpDate`      | Specifies the follow up date of the task. Refer to [scheduling](/components/modeler/bpmn/user-tasks/user-tasks.md#scheduling) for more details.                                              |
+| `formKey`           | The form linked to the user task referenced by its uniquely identifying key. Refer to [user task forms](/components/modeler/bpmn/user-tasks/user-tasks.md#user-task-forms) for more details. |
+| `priority`          | Refer to [priority](/components/modeler/bpmn/user-tasks/user-tasks.md#define-user-task-priority) for more details.                                                                           |
+| `userTaskKey`       | The unique key identifying the user task.                                                                                                                                                    |
 
-Below is an example of accessing the `assignee` value from the headers in Java:
+Below is an example of accessing the `assignee` value from the activated job in Java:
 
 ```java
 final JobHandler userTaskListenerHandler =
     (jobClient, job) -> {
-        // Access the 'assignee' from the job headers
+        // Access the 'assignee' from the job's user task property
         // highlight-start
-        final String assignee = job.getCustomHeaders()
-            .get("io.camunda.zeebe:assignee");
+        final String assignee = job.getUserTask().getAssignee();
         // highlight-end
 
         System.out.println("The assignee for this user task is: " + assignee);
@@ -143,7 +141,7 @@ final JobHandler userTaskListenerHandler =
     };
 ```
 
-Each header provides user task metadata that can be leveraged to customize the behavior of the user task listener job. Use these headers to retrieve necessary information about the user task in your job handler implementation.
+This user task data can be leveraged to customize the behavior of the user task listener job worker.
 
 #### Changed attributes
 
