@@ -143,10 +143,10 @@ For a list of Amazon Bedrock LLM models, refer to [supported foundation models i
 
 Select this option to use [Azure OpenAI models](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/overview).
 
-| Field          | Required | Description                                                                                     |
-|----------------|----------|-------------------------------------------------------------------------------------------------|
-| **Endpoint**       | Yes      | The Azure OpenAI endpoint URL. Example: `https://<your-resource-name>.openai.azure.com/`          |
-| **Authentication** | Yes      | Select the authentication type you want to use to authenticate the connector with Azure OpenAI.                                   |
+| Field              | Required | Description                                                                                     |
+| ------------------ | -------- | ----------------------------------------------------------------------------------------------- |
+| **Endpoint**       | Yes      | The Azure OpenAI endpoint URL. Example: `https://<your-resource-name>.openai.azure.com/`        |
+| **Authentication** | Yes      | Select the authentication type you want to use to authenticate the connector with Azure OpenAI. |
 
 Two authentication methods are currently supported:
 
