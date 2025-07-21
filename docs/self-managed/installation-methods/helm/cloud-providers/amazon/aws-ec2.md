@@ -221,12 +221,12 @@ https://github.com/camunda/camunda-deployment-references/blob/infraex-769/aws/co
 
 If you don't want to use this module, you can skip this section. However, you may need to adjust the remaining instructions to remove references to this module.
 
-If you choose not to use this module, you'll need to either provide a Elasticsearch or OpenSearch service.
+If you choose not to use this module, you'll need to either provide an Elasticsearch or OpenSearch service.
 
 Additionally, you must delete the `opensearch.tf` file within your chosen reference as it will otherwise create the resources.
 :::
 
-The OpenSearch module creates an OpenSearch domain intended for Camunda platform. OpenSearch is a powerful alternative to Elasticsearch. For more information on using OpenSearch with Camunda, refer to the [Camunda documentation](/self-managed/setup/guides/using-existing-opensearch.md).
+The OpenSearch module creates an OpenSearch domain intended for Camunda platform. OpenSearch is a powerful alternative to Elasticsearch.
 
 :::note Migration to OpenSearch is not supported
 
