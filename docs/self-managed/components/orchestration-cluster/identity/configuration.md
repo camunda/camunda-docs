@@ -24,18 +24,22 @@ authorizations enabled by default.
 <Tabs>
   <TabItem value="env" label="Environment variables" default>
 
-| Environment variable                                | Description                                                                                       | Default value (Camunda 8 Run) |
-| --------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ----------------------------- |
-| `CAMUNDA_PERSISTENT_SESSIONS_ENABLED`               | Enables shared authentication between the Orchestration web applications (Operate and Tasklist).  | `true`                        |
-| `CAMUNDA_SECURITY_AUTHENTICATION_METHOD`            | The authentication method to use.                                                                 | `basic`                       |
-| `CAMUNDA_SECURITY_AUTHENTICATION_UNPROTECTEDAPI`    | If the API can be used without authentication.                                                    | `true`                        |
-| `CAMUNDA_SECURITY_AUTHORIZATIONS_ENABLED`           | If authorizations are enabled.                                                                    | `true`                        |
-| `CAMUNDA_SECURITY_INITIALIZATION_USERS[0]_EMAIL`    | The email address of the first user.                                                              | `demo@demo.com`               |
-| `CAMUNDA_SECURITY_INITIALIZATION_USERS[0]_NAME`     | The name of the first user.                                                                       | Demo                          |
-| `CAMUNDA_SECURITY_INITIALIZATION_USERS[0]_PASSWORD` | The password of the first user.                                                                   | `demo`                        |
-| `CAMUNDA_SECURITY_INITIALIZATION_USERS[0]_USERNAME` | The username of the first user.                                                                   | `demo`                        |
-| `CAMUNDA_SECURITY_MULTITENANCY_ENABLED`             | Enables multi-tenancy. This requires the api to be protected.                                     | `false`                       |
-| `SPRING_PROFILES_ACTIVE`                            | **Note:** This property will be deprecated as additional authentication methods become available. | `consolidated-auth`           |
+| Environment variable                                             | Description                                                                                                           | Default value (Camunda 8 Run) |
+| ---------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | ----------------------------- |
+| `CAMUNDA_PERSISTENT_SESSIONS_ENABLED`                            | Enables shared authentication between the Orchestration Cluster web applications (Operate and Tasklist).              | `true`                        |
+| `CAMUNDA_SECURITY_AUTHENTICATION_METHOD`                         | The authentication method to use.                                                                                     | `basic`                       |
+| `CAMUNDA_SECURITY_AUTHENTICATION_UNPROTECTEDAPI`                 | If the API can be used without authentication.                                                                        | `true`                        |
+| `CAMUNDA_SECURITY_AUTHORIZATIONS_ENABLED`                        | If authorizations are enabled.                                                                                        | `true`                        |
+| `CAMUNDA_SECURITY_INITIALIZATION_USERS_0_EMAIL`                  | The email address of the first user.                                                                                  | `demo@demo.com`               |
+| `CAMUNDA_SECURITY_INITIALIZATION_USERS_0_NAME`                   | The name of the first user.                                                                                           | Demo                          |
+| `CAMUNDA_SECURITY_INITIALIZATION_USERS_0_PASSWORD`               | The password of the first user.                                                                                       | `demo`                        |
+| `CAMUNDA_SECURITY_INITIALIZATION_USERS_0_USERNAME`               | The username of the first user.                                                                                       | `demo`                        |
+| `CAMUNDA_SECURITY_INITIALIZATION_DEFAULTROLES_<role>_USERS_0`    | The users assigned by default to the role named `<role>` (replace with your desired role name in capital letters).    | `demo` for role `admin`       |
+| `CAMUNDA_SECURITY_INITIALIZATION_DEFAULTROLES_<role>_CLIENTS_0`  | The clients assigned by default to the role named `<role>` (replace with your desired role name in capital letters).  |                               |
+| `CAMUNDA_SECURITY_INITIALIZATION_DEFAULTROLES_<role>_GROUPS_0`   | The groups assigned by default to the role named `<role>` (replace with your desired role name in capital letters).   |                               |
+| `CAMUNDA_SECURITY_INITIALIZATION_DEFAULTROLES_<role>_MAPPINGS_0` | The mappings assigned by default to the role named `<role>` (replace with your desired role name in capital letters). |                               |
+| `CAMUNDA_SECURITY_MULTITENANCY_ENABLED`                          | Enables multi-tenancy. This requires the API to be protected.                                                         | `false`                       |
+| `SPRING_PROFILES_ACTIVE`                                         | **Note:** This property will be deprecated as additional authentication methods become available.                     | `consolidated-auth`           |
 
   </TabItem>
   <TabItem value="helm" label="Helm properties">

@@ -48,6 +48,7 @@ private static final String audience = "[Zeebe Token Audience, e.g., zeebe.camun
 private static final String clientId = "[Client ID, e.g., FmT7K8gVv_FcwiUhc8U-fAJ9wph0Kn~P]";
 private static final String clientSecret = "[Client Secret]";
 private static final String authorizationServer = "[OAuth API, e.g., https://login.cloud.camunda.io/oauth/token]";
+private static final String resourceIndicator = "[optional resource indicator]";
 
 final var credentialsProvider =
   new OAuthCredentialsProviderBuilder()
@@ -55,6 +56,7 @@ final var credentialsProvider =
     .audience(audience)
     .clientId(clientId)
     .clientSecret(clientSecret)
+    .resource(resourceIndicator)
     .build();
 ```
 
@@ -109,6 +111,7 @@ final OAuthCredentialsProvider provider =
     .keystoreKeyPassword(keystoreKeyPassword)
     .truststorePath(truststorePath)
     .truststorePassword(truststorePassword)
+    .resource("optional resource indicator")
     .build();
 ```
 
@@ -140,6 +143,7 @@ export CAMUNDA_AUTHORIZATION_SERVER_URL='[OAuth API, e.g., https://login.cloud.c
 export CAMUNDA_TOKEN_AUDIENCE='[Zeebe Token Audience, e.g., zeebe.camunda.io]'
 export CAMUNDA_CLIENT_ID='[Client ID, e.g., FmT7K8gVv_FcwiUhc8U-fAJ9wph0Kn~P]'
 export CAMUNDA_CLIENT_SECRET='[Client Secret]'
+export CAMUNDA_TOKEN_RESOURCE='[optional resource indicator]'
 ```
 
 When using environment variables you don't have to provide the username and password to the `CredentialsProvider`.
@@ -155,6 +159,7 @@ You can also use environment variables to provide the properties. The following 
 export CAMUNDA_CLIENT_ID='[Client ID]'
 export CAMUNDA_CLIENT_SECRET='[Client Secret]'
 export CAMUNDA_AUTHORIZATION_SERVER_URL='[OAuth API]'
+export CAMUNDA_TOKEN_RESOURCE='[optional resource indicator]'
 export CAMUNDA_SSL_CLIENT_KEYSTORE_PATH='[Keystore path]'
 export CAMUNDA_SSL_CLIENT_KEYSTORE_SECRET='[Keystore password]'
 export CAMUNDA_SSL_CLIENT_KEYSTORE_KEY_SECRET='[Keystore material password]'
