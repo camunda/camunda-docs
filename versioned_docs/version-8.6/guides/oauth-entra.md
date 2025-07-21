@@ -103,9 +103,10 @@ Before configuring Microsoft Entra with Camunda, ensure you have:
    - Operate: `https://<OPERATE_URL>/callback`
    - Tasklist: `https://<TASKLIST_URL>/callback`
    - Optimize: `https://<OPTIMIZE_URL>/api/authentication/callback`
+   - Identity: `https://<IDENTITY_URL>/identity`
 
 Also ensure that Connectors are also registered in Microsoft Entra.
-For Camunda 8.7, it is advised to use the Connectors client in Microsoft Entra to obtain tokens for communication with Zeebe and Operate.
+For Camunda 8.6, it is advised to use the Connectors client in Microsoft Entra to obtain tokens for communication with Zeebe and Operate.
 
 #### For Single Page Applications (Console, Web Modeler UI):
 
