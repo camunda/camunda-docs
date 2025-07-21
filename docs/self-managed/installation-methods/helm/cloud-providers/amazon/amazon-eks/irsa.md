@@ -1,6 +1,6 @@
 ---
 id: irsa
-title: "Troubleshooting IAM Roles for Service Accounts (IRSA)"
+title: "IAM Roles for Service Accounts (IRSA)"
 description: "Learn how to configure IAM roles for service accounts (IRSA) within AWS to authenticate workloads."
 ---
 

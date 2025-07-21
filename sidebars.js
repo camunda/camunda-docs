@@ -32,6 +32,7 @@ module.exports = {
   ],
   Components: [
     "components/components-overview",
+    "components/whats-new-in-88",
     {
       type: "category",
       label: "Concepts",
@@ -772,6 +773,18 @@ module.exports = {
               ],
             },
             "components/early-access/alpha/feel-copilot/feel-copilot",
+            {
+              type: "category",
+              label: "MCP Client",
+              link: {
+                type: "doc",
+                id: "components/early-access/alpha/mcp-client/mcp-client",
+              },
+              items: [
+                "components/early-access/alpha/mcp-client/mcp-remote-client-connector",
+                "components/early-access/alpha/mcp-client/mcp-client-connector",
+              ],
+            },
           ],
         },
       ],
@@ -1132,16 +1145,17 @@ module.exports = {
                       ],
                     },
                     "self-managed/installation-methods/helm/configure/database/using-existing-opensearch",
+                    "self-managed/installation-methods/helm/configure/database/using-existing-postgres",
                     "self-managed/installation-methods/helm/configure/database/configure-db-custom-headers",
                   ],
                 },
-                "self-managed/installation-methods/helm/configure/secret-management",
                 {
                   Ingress: [
                     "self-managed/installation-methods/helm/configure/ingress-setup",
                     "self-managed/installation-methods/helm/configure/accessing-components-without-ingress",
                   ],
                 },
+                "self-managed/installation-methods/helm/configure/secret-management",
                 "self-managed/installation-methods/helm/configure/using-existing-keycloak",
                 //license key
                 "self-managed/installation-methods/helm/configure/configure-multi-tenancy",
@@ -1201,11 +1215,19 @@ module.exports = {
                         id: "self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/amazon-eks",
                       },
                       items: [
+                        {
+                          Quickstart: [
+                            "self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/eks-eksctl",
+                          ],
+                        },
                         "self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/eks-terraform",
                         "self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/eks-helm",
                         "self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/dual-region",
-                        "self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/eks-eksctl",
-                        "self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/irsa",
+                        {
+                          Troubleshooting: [
+                            "self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/irsa",
+                          ],
+                        },
                       ],
                     },
                     {
@@ -1294,7 +1316,7 @@ module.exports = {
       ],
     },
     {
-      "Operational guides": [
+      Concepts: [
         {
           type: "category",
           label: "Back up and restore",
@@ -1314,27 +1336,6 @@ module.exports = {
             },
           ],
         },
-        "self-managed/operational-guides/data-purge",
-        {
-          type: "doc",
-          label: "Configure flow control",
-          id: "self-managed/operational-guides/configure-flow-control/configure-flow-control",
-        },
-        {
-          Monitoring: [
-            "self-managed/operational-guides/monitoring/log-levels",
-            "self-managed/operational-guides/monitoring/metrics",
-          ],
-        },
-        {
-          Troubleshooting: [
-            "self-managed/operational-guides/troubleshooting/troubleshooting",
-          ],
-        },
-      ],
-    },
-    {
-      Concepts: [
         {
           type: "category",
           label: "Document handling",
@@ -1358,14 +1359,31 @@ module.exports = {
             },
           ],
         },
-        "self-managed/concepts/exporters",
         {
           "Multi-region": ["self-managed/concepts/multi-region/dual-region"],
         },
+        {
+          Monitoring: [
+            "self-managed/operational-guides/monitoring/log-levels",
+            "self-managed/operational-guides/monitoring/metrics",
+          ],
+        },
+        {
+          Troubleshooting: [
+            "self-managed/operational-guides/troubleshooting/troubleshooting",
+          ],
+        },
+        "self-managed/concepts/exporters",
         "self-managed/concepts/multi-tenancy",
         "self-managed/concepts/mapping-rules",
         "self-managed/concepts/elasticsearch-privileges",
         "self-managed/concepts/opensearch-privileges",
+        "self-managed/operational-guides/data-purge",
+        {
+          type: "doc",
+          label: "Configure flow control",
+          id: "self-managed/operational-guides/configure-flow-control/configure-flow-control",
+        },
       ],
     },
     {
