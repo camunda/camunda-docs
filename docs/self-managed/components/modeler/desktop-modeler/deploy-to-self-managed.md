@@ -27,7 +27,7 @@ Desktop Modeler can directly deploy diagrams and start process instances in Camu
 
    :::caution
 
-   Multi-tenancy is only available with authentication enabled [through Identity](/self-managed/identity/what-is-identity.md), and [enabled in all required components](/self-managed/concepts/multi-tenancy.md).
+   Multi-tenancy is only available with authentication enabled [through Identity](/self-managed/components/management-identity/what-is-identity.md), and [enabled in all required components](/self-managed/concepts/multi-tenancy.md).
 
    :::
 
@@ -51,7 +51,7 @@ Desktop Modeler can directly deploy diagrams and start process instances in Camu
 
    <TabItem value='oauth'>
 
-   For **OAuth**, input the credentials for your OAuth provider. These are configured as part of the default [Helm installation](/self-managed/installation-methods/helm/install.md) and can be discovered in [Identity](/self-managed/identity/what-is-identity.md), or are set by Zeebe [environment variables](/self-managed/zeebe-deployment/security/client-authorization.md#environment-variables).
+   For **OAuth**, input the credentials for your OAuth provider. These are configured as part of the default [Helm installation](/self-managed/installation-methods/helm/install.md) and can be discovered in [Identity](/self-managed/components/management-identity/what-is-identity.md), or are set by Zeebe [environment variables](/self-managed/zeebe-deployment/security/client-authorization.md#environment-variables).
 
    ![oauth configuration](./img/deploy-with-oauth.png)
 

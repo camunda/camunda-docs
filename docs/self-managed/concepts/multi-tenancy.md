@@ -15,7 +15,7 @@ See the [configuration guide](/self-managed/installation-methods/helm/configure/
 
 :::caution
 
-Multi-tenancy is currently only available for Camunda 8 Self-Managed with authentication enabled [through Identity](/self-managed/identity/what-is-identity.md).
+Multi-tenancy is currently only available for Camunda 8 Self-Managed with authentication enabled [through Identity](/self-managed/components/management-identity/what-is-identity.md).
 
 :::
 

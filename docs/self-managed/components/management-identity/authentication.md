@@ -21,7 +21,7 @@ The following prerequisites are required for M2M authentication:
 
 | Prerequisite                                                                                 | Description                            |
 | :------------------------------------------------------------------------------------------- | :------------------------------------- |
-| [Identity](/self-managed/identity/what-is-identity.md)                                       | A running Identity service.            |
+| [Identity](/self-managed/components/management-identity/what-is-identity.md)                 | A running Identity service.            |
 | [Application](/self-managed/identity/application-user-group-role-management/applications.md) | An application for your service.       |
 | Client ID                                                                                    | The client ID of your application.     |
 | Client secret                                                                                | The client secret of your application. |

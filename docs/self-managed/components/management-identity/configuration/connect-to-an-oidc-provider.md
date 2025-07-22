@@ -279,7 +279,7 @@ Follow the [Microsoft Entra instructions](https://learn.microsoft.com/en-us/entr
 
 ## Supported and unsupported OIDC features
 
-When using [Identity](/self-managed/identity/what-is-identity.md) with an OIDC provider, not all features of authentication and authorization are available. The following table lists OIDC supported and unsupported features.
+When using [Identity](/self-managed/components/management-identity/what-is-identity.md) with an OIDC provider, not all features of authentication and authorization are available. The following table lists OIDC supported and unsupported features.
 
 | Feature name                                             | Description                                                                                                                                                                                                                                                                                                                          |                              Availability                               |
 | -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :---------------------------------------------------------------------: |

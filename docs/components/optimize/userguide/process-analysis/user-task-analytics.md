@@ -63,7 +63,7 @@ To evaluate user tasks, the following features are available in the report build
 
 ### How to evaluate task performance per assignee
 
-Evaluating performance on assignee level is not allowed in all organizations. All features related to data evaluation on an assignee level can be deactivated via [configuration](/self-managed/optimize-deployment/configuration/system-configuration-platform-8.md#settings-related-to-camunda-8-zeebe-user-tasks).
+Evaluating performance on assignee level is not allowed in all organizations. All features related to data evaluation on an assignee level can be deactivated via [configuration](/self-managed/components/optimize/configuration/system-configuration-platform-8.md#settings-related-to-camunda-8-zeebe-user-tasks).
 
 Evaluation on assignee level is only possible in Camunda 7 and Camunda 8 Self-Managed.
 

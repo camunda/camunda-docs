@@ -19,7 +19,7 @@ By default, user storage in Elasticsearch is enabled.
 <TabItem value="elasticsearch">
 
 :::note
-User restrictions are not supported when using Elasticsearch for user storage. If you want to use user restrictions, [Identity](/self-managed/identity/what-is-identity.md) is required.
+User restrictions are not supported when using Elasticsearch for user storage. If you want to use user restrictions, [Identity](/self-managed/components/management-identity/what-is-identity.md) is required.
 :::
 
 In this mode, the user authenticates with a username and password stored in Elasticsearch.
@@ -66,7 +66,7 @@ More users can be added directly to Elasticsearch, to the index `tasklist-user-<
 
 <TabItem value="identity">
 
-[Identity](/self-managed/identity/what-is-identity.md) provides authentication and authorization functionality along with user management.
+[Identity](/self-managed/components/management-identity/what-is-identity.md) provides authentication and authorization functionality along with user management.
 
 ## Enable Identity
 
