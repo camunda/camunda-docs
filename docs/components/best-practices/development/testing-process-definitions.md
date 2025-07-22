@@ -10,7 +10,7 @@ tags:
 description: "Test your executable BPMN processes as they are software. If possible, do automated unit tests with a fast in-memory workflow engine."
 ---
 
-Test your executable BPMN processes as they are software. If possible, do fast automated unit tests with a localized and isolated workflow engine. Before releasing, verify with integration tests close to your real-life environment, which might include human-driven, exploratory integration tests.
+Test your executable BPMN processes as you would any software. When possible, write fast automated unit tests using a localized and isolated workflow engine. Before releasing, verify your implementation with integration tests in an environment that closely mirrors your production setup, which may include human-driven, exploratory integration tests.
 
 This best practice uses the following process example for incoming invoices that need to be approved:
 
@@ -30,29 +30,29 @@ Approved invoices get processed.
 
 <span className="callout">4</span>
 
-If the approval task takes too long, the process takes another path - in this case the invoice is automatically approved.
+If the approval task takes too long, the process takes an alternative path—in this case, the invoice is automatically approved.
 
 <span className="callout">5</span>
 
-If an error is raised while talking to the archive system (assume you have a shaky legacy system at play here), the process also takes a detour to handle this situation manually.
+If an error occurs while communicating with the archive system (assume you have an unreliable legacy system), the process takes a detour to handle this situation manually.
 
 ## Testing scopes
 
-There are basically three typical test scopes used when building process solutions:
+There are three typical test scopes used when building process solutions:
 
 1. **Unit tests**: Testing glue code or programming code you developed for your process solution. How to unit test your software itself is not discussed here, as this is a common practice for software development.
 
-2. **Process tests**: Testing the expected behavior of the process model, including glue code and specifically the data flowing through the process model. Those tests should run frequently, so they should behave like unit tests (quick turnaround, no need for external resources, etc.)
+2. **Process tests**: Testing the expected behavior of the process model, including glue code and specifically the data flowing through the process model. These tests should run frequently, so they should behave like unit tests (quick turnaround, no need for external resources).
 
-3. **Integration tests**: Testing the system in a close-to-real-life-environment to make sure it is really working. This is typically done before releasing a new version of your system. Those tests include _human-driven_, _exploratory_ tests.
+3. **Integration tests**: Testing the system in a close-to-production environment to ensure it works correctly. This is typically done before releasing a new version of your system. These tests include _human-driven_, _exploratory_ tests.
 
 ![Scopes](testing-process-definitions-assets/scopes.png)
 
 ## Writing process tests in Java
 
-This section describes how to write process tests as unit tests in Java. We are working on more information on how to write tests in other languages, like Node.Js or C#.
+This section describes how to write process tests as unit tests in Java. We are working on additional information for writing tests in other languages, such as Node.js or C#.
 
-When using Java, most customers use Spring Boot, so we dsecribe this path in this best practice. While this is a common setup for customers, it is not the only one. Find some more examples of plain Java process tests in [Getting Started with Camunda Process Test](hhttps://docs.camunda.io/docs/apis-tools/testing/getting-started/).
+When using Java, most customers use Spring Boot, so we describe this approach in this best practice. While this is a common setup for customers, it is not the only one. Find more examples of plain Java process tests in [Getting Started with Camunda Process Test](https://docs.camunda.io/docs/apis-tools/testing/getting-started/).
 
 ### Technical setup using Spring
 
@@ -64,11 +64,11 @@ When using Java, most customers use Spring Boot, so we dsecribe this path in thi
 
 1. Use [_JUnit 5_](http://junit.org) as your unit test framework.
 2. Use the [Camunda Spring Boot SDK](../../../apis-tools/spring-zeebe-sdk/getting-started.md).
-3. Use `@CamundaSpringProcessTest` to ramp up an in-flight process engine. 
-4. Make sure you have Docker installed locally to be able to use [TestContainers](https://docs.camunda.io/docs/next/apis-tools/testing/getting-started/#prerequisites), which is the easiest way to run tests (Camunda is envisioning a test environment which runs in-memory).
-4. Use assertions from [Camunda Process Test](../../../apis-tools/testing/assertions) to check if your expectations about the state of the process are met.
-5. Use mocking of your choice (such as [Mockito](http://mockito.org)) to mock service methods and verify that services are called as expected.
-6. Use utilities from [Camunda Process Test](../../../apis-tools/testing/utilities) to mock job workers you don't want to run (for example connectors).
+3. Use `@CamundaSpringProcessTest` to start a process engine. 
+4. Ensure you have Docker installed locally to use [TestContainers](https://docs.camunda.io/docs/next/apis-tools/testing/getting-started/#prerequisites), which is the easiest way to run tests (Camunda is developing a test environment that runs in-memory).
+4. Use assertions from [Camunda Process Test](../../../apis-tools/testing/assertions) to verify that your expectations about the process state are met.
+5. Use a mocking framework of your choice (such as [Mockito](http://mockito.org)) to mock service methods and verify that services are called as expected.
+6. Use utilities from [Camunda Process Test](../../../apis-tools/testing/utilities) to mock job workers you don't want to run (for example, connectors).
 
 The following code shows an example test:
 
@@ -114,7 +114,7 @@ public class InvoiceApprovalTest {
     variables.put("approver", "Zee");
     variables.put("invoice", objectMapper.readTree(invoiceJson));
 
-    // After all preparations, let's kick off the process instance
+    // After all preparations, start the process instance
     final var processInstance =
         client
             .newCreateInstanceCommand()
@@ -124,13 +124,13 @@ public class InvoiceApprovalTest {
             .send()
             .join();
 
-    // assert the User Task was created:
+    // assert the User Task was created
     assertThat(byElementId("UserTask_ApproveInvoice")).isCreated().hasAssignee("Zee");
     // and simulate the user completing it
     processTestContext.completeUserTask(byElementId("UserTask_ApproveInvoice"),
         Map.of("approved", true));
 
-    // This should make the process instance execute till the end
+    // This should make the process instance execute to completion
     assertThat(processInstance)
         .hasCompletedElementsInOrder(
             byId("StartEvent_InvoiceReceived"),
@@ -152,17 +152,17 @@ The complete source code for this example test is available on [GitHub](https://
 
 ### Test scope and mocking
 
-In such a test case, you want to test the executable BPMN process definition, plus all the glue code which logically belongs to the process definition in a wider sense. Typical examples of glue code you want to include in a process test are:
+In a test case like this, you want to test the executable BPMN process definition, plus all the glue code that logically belongs to the process definition in a broader sense. Typical examples of glue code you want to include in a process test are:
 
 - Worker code, typically connected to a service task
 - Expressions (FEEL) used in your process model for gateway decisions or input/output mappings
-- Other glue code, for example, your own Client API (probably exposed via REST) that does data mapping before calling the Camunda Client. 
+- Other glue code, for example, your own Client API (probably exposed via REST) that performs data mapping before calling the Camunda Client. 
 
-The following illustrations shows this for the invoice approval example:
+The following illustration shows this for the invoice approval example:
 
 ![Process test scope example](testing-process-definitions-assets/process-test-scope-example.png)
 
-Workflow engine-independent business code should _not_ be included in the tests. In the invoice approval example, the `ArchiveService` will be mocked, and the `ArchiveInvoiceWorker` will read and transform process variables and call this mock. This way, you can test the process model, the glue code, and the data flow in your process test, without calling out to the real archive system.
+Workflow engine-independent business code should _not_ be included in the tests. In the invoice approval example, the `ArchiveService` will be mocked, and the `ArchiveInvoiceWorker` will read and transform process variables and call this mock. This way, you can test the process model, the glue code, and the data flow in your process test without calling out to the real archive system.
 
 The following code examples highlight the important aspects around mocking. 
 
@@ -191,7 +191,7 @@ public class ArchiveInvoiceWorker {
 }
 ```
 
-The `ArchiveService` is considered a business service (it could, for example, wrap the archive system client SDK to make the appropriate remote calls) and shall _not_ be executed during the test. This is why this interface is mocked in the test case:
+The `ArchiveService` is considered a business service (it could, for example, wrap the archive system client SDK to make the appropriate remote calls) and should _not_ be executed during the test. This is why this interface is mocked in the test case:
 
 ```java
 @MockitoBean
@@ -200,13 +200,13 @@ private ArchiveService archiveService;
 @Test
 public void happyPath() throws Exception {
   // ...
-  // Using Mockito you can make sure a business method was called with the expected parameter
+  // Using Mockito you can verify a business method was called with the expected parameters
   Mockito.verify(archiveService).archiveInvoice("INV-1001", objectMapper.readTree(invoiceJson));
 }
 
 @Test
 void testArchiveSystemError() throws Exception {
-  // Using Mockito you can define what should happen if a method is called, in this case an exception is thrown to simulate a business error
+  // Using Mockito you can define what should happen when a method is called, in this case an exception is thrown to simulate a business error
   doThrow(new WiredLegacyException()).when(archiveService).archiveInvoice(anyString(), any());
   //...
 }
