@@ -1,9 +1,9 @@
 ---
-title: "Camunda 8.8 Self-Managed Update Guide"
+title: "Camunda 8.8 Self-Managed Upgrade Guide"
 description: "Plan and execute an update of your Camunda 8 Self-Managed installation to version 8.8. Includes architectural highlights, prerequisites, breaking changes and update paths for administrators."
 ---
 
-# Camunda 8.8 Self-Managed Update Guide
+# Camunda 8.8 Self-Managed Upgrade Guide
 
 :::warning
 This documentation page is a work in progress and may contain incomplete, placeholder, or evolving content. While the core concepts introduced in Camunda 8.8 are stable, details and sections here are actively being refined.
@@ -45,7 +45,7 @@ Camunda 8.8 introduces changes that affect both **infrastructure** and **applica
 
 ---
 
-[Camunda 8.8 Upgrade guide for Administrator](./administrators/prepare-for-update.md)
+[Camunda 8.8 Upgrade guide for Administrator](./administrators/prepare-for-upgrade.md)
 
 You can navigate to one of these guides to start your upgrade.
 
@@ -102,7 +102,7 @@ For More information see [Upcoming API Changes in Camunda 8: A Unified and Strea
 
 ### Deployment changes
 
-- The **Orchestration Cluster deployment architecture** replaces prior component-scattered topologies. See **[Administrators: Prepare for update](./administrators/prepare-for-update.md)**.
+- The **Orchestration Cluster deployment architecture** replaces prior component-scattered topologies. See **[Administrators: Prepare for update](./administrators/prepare-for-upgrade.md)**.
 - **Unified configuration schema**: migrate existing Helm values or environment settings to the new schema. [Add link to schema migration instructions]
 
 ---
@@ -123,7 +123,7 @@ Choose the path that matches your role. Teams should coordinate; many tasks are 
 - Backup / restore and disaster recovery
 - Monitoring, logging, and alerting
 
-**Your update flow**
+**Your upgrade flow**
 
-1. **[Prepare for update](./administrators/prepare-for-update.md)** – Validate backups, review prerequisites, map configuration changes, stage images.
-2. **[Run update](./administrators/run-update.md)** – Apply chart changes, perform rolling or controlled restart, validate cluster health and data access.
+1. **[Prepare for an upgrade](./administrators/prepare-for-upgrade.md)** – Validate backups, review prerequisites, map configuration changes, stage images.
+2. **[Run the upgrade](./administrators/run-upgrade.md)** – Apply chart changes, perform rolling or controlled restart, validate cluster health and data access.

@@ -1,9 +1,9 @@
 ---
-title: "Camunda 8.8 APIs & tools Update Guide"
-description: "Plan and execute an update of your Camunda 8 to version 8.8. Includes architectural highlights, prerequisites, breaking changes relevant for developers."
+title: "Camunda 8.8 APIs & tools Upgrade Guide"
+description: "Plan and execute an upgrade from Camunda 8.7 to 8.8. Includes architectural highlights, prerequisites, breaking changes relevant for developers."
 ---
 
-# Camunda 8.8 APIs & tools Update Guide
+# Camunda 8.8 APIs & tools Upgrade Guide
 
 :::warning
 This documentation page is a work in progress and may contain incomplete, placeholder, or evolving content. While the core concepts introduced in Camunda 8.8 are stable, details and sections here are actively being refined.
@@ -11,10 +11,10 @@ This documentation page is a work in progress and may contain incomplete, placeh
 See [release announcements](/reference/announcements-release-notes/880/880-announcements.md), [release notes](/reference/announcements-release-notes/880/880-release-notes.md), and the [quality board](https://github.com/orgs/camunda/projects/187/views/15) for more detail on what's included in Camunda 8.8.
 :::
 
-This page helps you plan and run an update of an existing **Camunda 8.7** Self-Managed environment to **Camunda 8.8**. It summarizes what changed, what you must do before updating, and where to find step-by-step instructions based on your role.
+This section helps you plan and run an update from using Camunda 8.7 APIs and SDK artifacts to Camunda 8.8.
 
 > **Who should read this?**  
-> Platform administrators, DevOps engineers, and application developers maintaining Camunda-based solutions in self-managed Kubernetes or VM environments.
+> Application developers maintaining Camunda-based solutions in self-managed Kubernetes or VM environments.
 
 ## Camunda 8.8 is a latest release
 

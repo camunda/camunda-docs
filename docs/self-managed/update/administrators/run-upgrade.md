@@ -1,7 +1,7 @@
 ---
-id: run-admin-update
-title: "Run update"
-description: "Guide on how to run an update to Camunda 8.8 on Self-Managed - Administrator guide."
+id: run-admin-upgrade
+title: "Run upgrade"
+description: "Guide on how to run an upgrade to Camunda 8.8 on Self-Managed."
 ---
 
 import DocCardList from '@theme/DocCardList';
@@ -18,7 +18,7 @@ Execute the platform update to Camunda 8.8 following your planned strategy. This
 
 ## Before you begin
 
-Ensure you have reviewed the [preparation](./prepare-for-update.md) phases before executing the update.
+Ensure you have reviewed the [preparation](./prepare-for-upgrade.md) phases before executing the update.
 
 **Prerequisites checklist:**
 

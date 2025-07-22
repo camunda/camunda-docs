@@ -1,7 +1,7 @@
 ---
-id: prepare-for-admin-update
-title: "Prepare and Plan an update"
-description: "Prepare and Plan your update to Camunda 8.8 on Self-Managed - Administrator guide."
+id: prepare-for-admin-upgrade
+title: "Prepare and Plan an upgrade"
+description: "Prepare and Plan your upgrade to Camunda 8.8 on Self-Managed."
 ---
 
 :::warning
@@ -127,6 +127,5 @@ Once you've completed your update planning:
 
 1. **Review your plan** with relevant teams and stakeholders
 2. **Document the strategy** including backup restore procedures for the platform
-3. **Proceed to preparation** following the [prepare for update guide](./prepare-for-update.md)
 
 For additional guidance, consult the existing [update guide introduction](/self-managed/operational-guides/update-guide/introduction.md) and version-specific update documentation.
