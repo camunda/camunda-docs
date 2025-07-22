@@ -8,27 +8,25 @@ import DocCardList from '@theme/DocCardList';
 
 # Run the update
 
-This page guides **platform administrators** through the *execution* phase of an update to **Camunda 8.8 Self-Managed**.  
+This page guides **platform administrators** through the _execution_ phase of an update to **Camunda 8.8 Self-Managed**.  
 It assumes you have completed all tasks in **[Prepare for update](./prepare-for-update.md)** and have:
 
-- A tested backup and rollback plan  
-- A confirmed maintenance window  
+- A tested backup and rollback plan
+- A confirmed maintenance window
 - An agreed deployment method (Helm chart or Docker images)
 
 > For full command-level instructions, see the dedicated guides linked below.
 
 ## Step 1 — Confirm prerequisites
 
-- ✅ Test environment updated without errors  
-- ✅ Backups verified  
-- ✅ Required secrets exported (Operate, Tasklist, Identity, …)  
+- ✅ Test environment updated without errors
+- ✅ Backups verified
+- ✅ Required secrets exported (Operate, Tasklist, Identity, …)
 - ✅ Team roles and run-books shared
-
 
 ## Step 2 — Choose your execution path
 
 ### Helm chart upgrade
-
 
 For Kubernetes deployments using the Camunda Helm chart, follow the dedicated technical update guide:
 
