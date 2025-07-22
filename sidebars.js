@@ -1072,7 +1072,7 @@ module.exports = {
         "self-managed/reference-architecture/kubernetes",
         {
           type: "category",
-          label: "Manual JAR",
+          label: "Manual",
           link: {
             type: "doc",
             id: "self-managed/reference-architecture/manual",
