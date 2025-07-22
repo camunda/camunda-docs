@@ -62,6 +62,7 @@ Authorization applies only to these orchestration components — it does not app
    - Specific to resource types
 
 4. **Resources**
+
    - Entities users interact with
    - Each has specific available permissions
 
