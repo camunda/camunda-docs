@@ -8,44 +8,48 @@ import DocCardList from '@theme/DocCardList';
 
 # Run the update
 
-This page guides **platform administrators** through the _execution_ phase of an update to **Camunda 8.8 Self-Managed**.  
-It assumes you have completed all tasks in **[Prepare for update](./prepare-for-update.md)** and have:
+This page guides **platform administrators** through the _execution phase_ of an update to **Camunda 8.8 Self-Managed**.  
+It assumes you have completed all steps in [**Prepare for update**](./prepare-for-update.md) and that you have:
 
 - A tested backup and rollback plan
 - A confirmed maintenance window
-- An agreed deployment method (Helm chart or Docker images)
+- A defined deployment method (Helm chart or Docker images)
 
-> For full command-level instructions, see the dedicated guides linked below.
+> For detailed command-line instructions, refer to the technical guides linked below.
 
-## Step 1 — Confirm prerequisites
+## Step 1 – Confirm prerequisites
 
-- ✅ Test environment updated without errors
-- ✅ Backups verified
-- ✅ Required secrets exported (Operate, Tasklist, Identity, …)
-- ✅ Team roles and run-books shared
+- ✅ Test environment updated without errors  
+- ✅ Backups validated  
+- ✅ Required secrets exported (Operate, Tasklist, Identity, etc.)  
+- ✅ Team responsibilities and runbooks shared  
 
-## Step 2 — Choose your execution path
+## Step 2 – Choose your execution path
 
 ### Helm chart upgrade
 
-For Kubernetes deployments using the Camunda Helm chart, follow the dedicated technical update guide:
+If you are using Kubernetes with the Camunda Helm chart, follow the dedicated update instructions:
 
 <DocCardList items={[{type:"link", href:"/docs/next/self-managed/installation-methods/helm/upgrade/upgrade-hc-870-880/", label: "Helm chart Upgrade: 8.7 to 8.8", docId:"self-managed/installation-methods/helm/upgrade/upgrade-hc-870-880"}
 ]}/>
 
-Consult the Helm guide for options, secret handling, and migration-job monitoring.
+Consult the Helm guide for upgrade options, secret handling, and migration job monitoring.
 
 ### Docker images
 
-Make sure to download latest images. Use the following link for [Air-Gapped environments](../../installation-methods/helm/configure/air-gapped-installation.md).
+Ensure you download the latest images.  
+For offline environments, see [Air-gapped installation](../../installation-methods/helm/configure/air-gapped-installation.md).
 
 For production deployments using Docker images:
 
-:::info Docker vs Docker Compose
-Docker images are supported for production usage on Linux systems. Camunda provided Docker Compose files are designed for development environments only and should not be used in production. For production, we recommend to use Kubernetes or develop your own customer deployment procedure with one of the Infrastructure as Code systems (i.e., Terraform, Ansible, Cloud Formation and etc.).
+:::info Docker vs. Docker Compose
+Docker images are supported for production use on Linux systems.  
+Camunda-provided Docker Compose files are intended for **development environments only** and should not be used in production.
+
+For production environments, we recommend using Kubernetes or developing a custom deployment process using Infrastructure as Code tools (e.g., Terraform, Ansible, CloudFormation).
 :::
 
-## Step 3 — Run the update with Helm
+## Step 3 – Run the update with Helm
 
 ```bash
 # Pull latest chart metadata
@@ -58,35 +62,36 @@ helm upgrade camunda-platform camunda/camunda-platform \
   --namespace camunda
 ```
 
-## Step 4 — Validate platform health
+## Step 4 – Validate platform health
 
-After the upgrade succeeds:
+After a successful upgrade:
 
-- Check pod readiness and Helm release status.
+- Confirm pod readiness and Helm release status.
 - Verify component versions via Operate.
-- Run your post‑update validation suite (link below).
+- Run your post-update validation suite.  
+  _(Add link to validation steps if available.)_
 
-## Step 5 — Post‑update tasks
+## Step 5 – Perform post-update tasks
 
-- Alert application teams that the platform is ready.
-- Monitor resource usage and error rates for 24–48 hours.
+- Notify application teams that the platform is ready.
+- Monitor resource usage and error rates for 24–48 hours.
 - Document lessons learned and close the change ticket.
 
 ## Next steps
 
-After successful platform update completion:
+After completing the platform update:
 
-1. **Monitor platform stability** during application update phase
-2. **Support development teams** with application deployment issues
-3. **Update monitoring** and alerting configurations for 8.8
-4. **Document lessons learned** and update procedures
-5. **Plan next update cycle** following similar procedures
-6. **Clean up backups** according to retention policies
+1. **Monitor platform stability** during the application rollout phase.
+2. **Support development teams** with any application deployment issues.
+3. **Update monitoring and alerting** to reflect Camunda 8.8 changes.
+4. **Document lessons learned** and refine internal procedures.
+5. **Plan your next update cycle** using a similar approach.
+6. **Clean up backups** in line with your retention policy.
 
 ## Additional resources
 
-- **[Helm chart upgrade guide: 8.7 → 8.8](../../installation-methods/helm/upgrade/helm-870-880.md)** – Detailed technical steps
-- **[Collecting diagnostics](../../installation-methods/helm/operational-tasks/diagnostics.md)** – Gathering troubleshooting data
-- **[Backup and restore guide](../../operational-guides/backup-restore/backup-and-restore.md)** – Comprehensive backup procedures
-- **[Troubleshooting guides](../../operational-guides/troubleshooting/troubleshooting.md)** – Issue‑resolution references
-- **[Supported environments matrix](../../../reference/supported-environments.md)** – Component and infrastructure compatibility
+- **[Helm chart upgrade guide: 8.7 → 8.8](../../installation-methods/helm/upgrade/helm-870-880.md)** – Full step-by-step Helm upgrade guide  
+- **[Collecting diagnostics](../../installation-methods/helm/operational-tasks/diagnostics.md)** – How to gather troubleshooting data  
+- **[Backup and restore guide](../../operational-guides/backup-restore/backup-and-restore.md)** – Recommended backup workflows  
+- **[Troubleshooting guides](../../operational-guides/troubleshooting/troubleshooting.md)** – Common issues and resolution steps  
+- **[Supported environments matrix](../../../reference/supported-environments.md)** – Compatibility details for components and infrastructure
