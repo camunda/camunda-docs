@@ -102,7 +102,7 @@ Identity requires the following parameters:
 
 ## Resource-based permissions
 
-1. Resource authorizations must be [enabled in Identity](/self-managed/identity/access-management/resource-authorizations.md).
+1. Resource authorizations must be [enabled in Identity](/self-managed/components/management-identity/access-management/resource-authorizations.md).
 2. Tasklist must be configured to use resource authorizations (see above configurations) and `camunda.tasklist.identity.resourcePermissionsEnabled` must be enabled.
 
 Resource-based permissions are defined per process definition. Process definition is defined by **Process ID**, which is present in BPMN XML.
@@ -113,7 +113,7 @@ The user or user group can be assigned the following permission:
 | ---------------------- | ------------------ | ----------------------------------------------- |
 | START_PROCESS_INSTANCE | process-definition | User can start this process ad hoc on Tasklist. |
 
-For more information, visit the [Identity documentation](/self-managed/identity/access-management/resource-authorizations.md).
+For more information, visit the [Identity documentation](/self-managed/components/management-identity/access-management/resource-authorizations.md).
 
 ## Use Identity JWT token to access Tasklist API
 
@@ -125,8 +125,8 @@ Be aware a JWT token is intended to be used for M2M communication and is therefo
 
 **Example:**
 
-1. [Add an application in Identity](/self-managed/identity/application-user-group-role-management/applications.md).
-2. [Add permissions to an application](/self-managed/identity/application-user-group-role-management/applications.md) for Tasklist API.
+1. [Add an application in Identity](/self-managed/components/management-identity/application-user-group-role-management/applications.md).
+2. [Add permissions to an application](/self-managed/components/management-identity/application-user-group-role-management/applications.md) for Tasklist API.
 3. Obtain a token to access the Tasklist REST API.
    You will need:
    - `client_id` and `client_secret` from Identity application you created.

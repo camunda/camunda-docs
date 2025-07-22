@@ -47,7 +47,7 @@ Use the following names and values for the Identity SDK to ensure proper authent
 
 ## License configuration
 
-import Licensing from '../../../self-managed/react-components/licensing.md'
+import Licensing from '../../../../self-managed/react-components/licensing.md'
 
 <Licensing/>
 
@@ -88,7 +88,7 @@ for `WEBMODELER`, which is`web-modeler`.
 ## Database configuration
 
 Identity requires a database to store information
-about [resource authorization](/self-managed/identity/access-management/resource-authorizations.md)
+about [resource authorization](/self-managed/components/management-identity/access-management/resource-authorizations.md)
 and [multi-tenancy](/self-managed/concepts/multi-tenancy.md).
 
 | Environment variable         | Description                                         |

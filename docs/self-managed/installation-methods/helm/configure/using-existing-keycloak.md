@@ -10,7 +10,7 @@ This guide steps through using an existing Keycloak instance, which is part of [
 
 ## Preparation
 
-Configure your existing Keycloak realm according to the following guide: [Connect to an existing Keycloak instance](/self-managed/identity/configuration/connect-to-an-existing-keycloak.md).
+Configure your existing Keycloak realm according to the following guide: [Connect to an existing Keycloak instance](/self-managed/components/management-identity/configuration/connect-to-an-existing-keycloak.md).
 
 ## Values file
 

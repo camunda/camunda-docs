@@ -231,7 +231,7 @@ After selecting the **Play** tab in Self-Managed, you are prompted to select fro
 - The environment variables `CAMUNDA_CUSTOM_CERT_CHAIN_PATH`, `CAMUNDA_CUSTOM_PRIVATE_KEY_PATH`, `CAMUNDA_CUSTOM_ROOT_CERT_PATH`, and `CAMUNDA_CUSTOM_ROOT_CERT_STRING` can be set in Docker or Helm chart setups. However, these configurations have not been tested with Play's behavior, and therefore are not supported when used with Play.
 - Play cannot check the presence of connector secrets in Self-Managed setups.
   If a secret is missing, Play will show an incident at runtime.
-  Learn more about [configuring connector secrets](/self-managed/connectors-deployment/connectors-configuration.md#secrets).
+  Learn more about [configuring connector secrets](/self-managed/components/connectors/connectors-configuration.md#secrets).
 
 ## Play Usage and Billing Considerations
 

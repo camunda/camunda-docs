@@ -5,7 +5,7 @@ sidebar_label: "Job streaming"
 description: "Streaming job workers is expected to be long-lived to cut down on the latency overhead involved with re-creating a stream and propagating this throughout the cluster."
 ---
 
-[Job streaming](../../../components/concepts/job-workers.md#job-streaming) is a long-lived process designed to reduce the latency involved with re-creating and propagating job workers.
+[Job streaming](/components/concepts/job-workers.md#job-streaming) is a long-lived process designed to reduce the latency involved with re-creating and propagating job workers.
 
 When using a reverse proxy or a load balancer between your worker and your gateway, you may need to configure additional parameters to ensure the job stream is not closed unexpectedly. Impacted proxies will see HTTP 504 (gateway timeout) errors returned to the job streaming worker at regular intervals.
 

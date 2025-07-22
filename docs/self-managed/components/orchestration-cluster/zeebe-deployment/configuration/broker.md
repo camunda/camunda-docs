@@ -958,12 +958,12 @@ For an embedded gateway setup, any gateway property can be passed along to the `
 
 Multi-tenancy in Zeebe can be configured with the following configuration properties.
 Multi-tenancy is disabled by default.
-Read more [in the multi-tenancy documentation](../../../self-managed/concepts/multi-tenancy.md).
+Read more [in the multi-tenancy documentation](/self-managed/concepts/multi-tenancy.md).
 
 :::note
 For now, multi-tenancy is only supported in combination with Identity.
 To use multi-tenancy, you must set [`authentication.mode`](#zeebebrokergatewaysecurityauthentication) to `'identity'` and specify the
-`camunda.identity.baseUrl` property or the [corresponding Camunda Identity environment variable](/self-managed/identity/miscellaneous/configuration-variables.md#core-configuration)
+`camunda.identity.baseUrl` property or the [corresponding Camunda Identity environment variable](/self-managed/components/management-identity/miscellaneous/configuration-variables.md#core-configuration)
 as well.
 :::
 
@@ -1002,7 +1002,7 @@ security:
 
 :::note
 The Zeebe configuration properties for Camunda Identity are deprecated as of version `8.4.0`. Use the dedicated
-Camunda Identity properties or the [corresponding environment variables](/self-managed/identity/miscellaneous/configuration-variables.md#core-configuration).
+Camunda Identity properties or the [corresponding environment variables](/self-managed/components/management-identity/miscellaneous/configuration-variables.md#core-configuration).
 :::
 
 | Field            | Description                                                                                                                                                                                                 | Example value                                      |

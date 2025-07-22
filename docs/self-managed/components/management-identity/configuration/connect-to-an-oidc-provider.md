@@ -14,7 +14,7 @@ To enable a smoother integration with your existing systems, Camunda supports co
 This guide steps through the configuration required to connect Camunda to your authentication provider.
 
 :::note
-To connect to a Keycloak authentication provider, see our guide on [using an existing Keycloak](/self-managed/identity/configuration/connect-to-an-existing-keycloak.md).
+To connect to a Keycloak authentication provider, see our guide on [using an existing Keycloak](/self-managed/components/management-identity/configuration/connect-to-an-existing-keycloak.md).
 :::
 
 ## Prerequisites
@@ -25,7 +25,7 @@ To connect to a Keycloak authentication provider, see our guide on [using an exi
   - Client ID
   - Client secrets
   - Audience
-- A [claim name and value](/self-managed/identity/miscellaneous/configuration-variables.md#oidc-configuration) to use for initial access.
+- A [claim name and value](/self-managed/components/management-identity/miscellaneous/configuration-variables.md#oidc-configuration) to use for initial access.
 
 :::note
 The steps below are a general approach for the Camunda components; it is important you reference the [component-specific

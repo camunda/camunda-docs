@@ -170,7 +170,7 @@ Additionally, the Zeebe Gateway should be configured to use an encrypted connect
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/helm-values/connectors-route.yml
 ```
 
-The actual configuration properties can be reviewed [in the connectors configuration documentation](/self-managed/connectors-deployment/connectors-configuration.md#zeebe-broker-connection).
+The actual configuration properties can be reviewed [in the connectors configuration documentation](/self-managed/components/connectors/connectors-configuration.md#zeebe-broker-connection).
 
 1. Configure all other applications running inside the cluster and connecting to the Zeebe Gateway to also use TLS.
 

@@ -214,9 +214,9 @@ Then, take the contents under `application.yml` and put it under the `operate.co
 - [Operate](/self-managed/components/orchestration-cluster/operate-deployment/operate-configuration.md)
 - [Tasklist](/self-managed/components/orchestration-cluster/tasklist-deployment/tasklist-configuration.md)
 - [Web Modeler](/self-managed/components/modeler/web-modeler/configuration/configuration.md)
-- [Console](/self-managed/console-deployment/configuration/configuration.md)
-- [Connectors](/self-managed/connectors-deployment/connectors-configuration.md)
-- [Identity](/self-managed/identity/miscellaneous/configuration-variables.md)
+- [Console](/self-managed/components/console/configuration/configuration.md)
+- [Connectors](/self-managed/components/connectors/connectors-configuration.md)
+- [Identity](/self-managed/components/management-identity/miscellaneous/configuration-variables.md)
 - [Optimize](/self-managed/components/optimize/configuration/system-configuration.md)
 
 ## Limitations

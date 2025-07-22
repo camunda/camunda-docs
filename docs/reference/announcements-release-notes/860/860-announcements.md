@@ -30,12 +30,12 @@ With the 8.6 release, Camunda 8 Self-Managed requires a license key for producti
 
 Review the following documentation for your components for more information on how to provide the license key to each component as an environment variable:
 
-- [Console](/self-managed/console-deployment/configuration/configuration.md#environment-variables)
+- [Console](/self-managed/components/console/configuration/configuration.md#environment-variables)
 - [Zeebe](/self-managed/components/orchestration-cluster/zeebe-deployment/configuration/configuration.md#licensing)
 - [Operate](/self-managed/components/orchestration-cluster/operate-deployment/operate-configuration.md#licensing)
 - [Tasklist](/self-managed/components/orchestration-cluster/tasklist-deployment/tasklist-configuration.md#licensing)
 - [Optimize](/self-managed/components/optimize/configuration/system-configuration-platform-8.md#licensing)
-- [Identity](/self-managed/identity/miscellaneous/configuration-variables.md#license-configuration)
+- [Identity](/self-managed/components/management-identity/miscellaneous/configuration-variables.md#license-configuration)
 - [Modeler](/self-managed/components/modeler/web-modeler/configuration/configuration.md#licensing)
 
 To configure with Helm, visit the [Self Managed installation documentation](/self-managed/installation-methods/helm/install.md).

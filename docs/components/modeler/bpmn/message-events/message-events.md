@@ -66,9 +66,9 @@ Currently, intermediate message throw events and message end events behave exact
 like [service tasks](../service-tasks/service-tasks.md) or [send tasks](../send-tasks/send-tasks.md)
 , and have the same job-related properties (e.g. job type, custom headers, etc.) The message throw
 events and the tasks are based on jobs
-and [job workers](../../../../components/concepts/job-workers.md). The differences between the message
+and [job workers](/components/concepts/job-workers.md). The differences between the message
 throw events and the tasks are the visual representation and the semantics for the model. Read more
-about the [job properties](../../../../components/concepts/job-workers.md).
+about the [job properties](/components/concepts/job-workers.md).
 
 When a process instance enters a message throw event, it creates a corresponding job and waits for
 its completion. A job worker should request jobs of this job type and process them. When the job is

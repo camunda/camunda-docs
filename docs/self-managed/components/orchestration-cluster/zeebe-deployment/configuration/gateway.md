@@ -281,7 +281,7 @@ security:
 
 :::note
 The Zeebe configuration properties for Camunda Identity are deprecated as of version `8.4.0`. Use the dedicated
-Camunda Identity properties or the [corresponding environment variables](/self-managed/identity/miscellaneous/configuration-variables.md#core-configuration).
+Camunda Identity properties or the [corresponding environment variables](/self-managed/components/management-identity/miscellaneous/configuration-variables.md#core-configuration).
 :::
 
 | Field            | Description                                                                                                                                                                                          | Example value                                      |
@@ -374,7 +374,7 @@ security:
 
 ### zeebe.gateway.longPolling
 
-It's possible to configure gateway long-polling behavior. Read more on long-polling behavior [here](../../../components/concepts/job-workers.md#long-polling).
+It's possible to configure gateway long-polling behavior. Read more on long-polling behavior [here](/components/concepts/job-workers.md#long-polling).
 
 | Field             | Description                                                                                                                                                                                                                                     | Example value |
 | ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |

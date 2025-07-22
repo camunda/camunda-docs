@@ -5,7 +5,7 @@ sidebar_label: "Authentication"
 description: "Learn how Identity authenticates users or clients via log-in screen or M2M tokens."
 ---
 
-Depending on your [configuration](/self-managed/identity/configuration/identity-configuration-overview.md), users and applications authenticate with Camunda 8 via the IdP using the [OAuth 2.0 protocol](https://oauth.net/2/), using either a login page or [M2M tokens](#m2m-machine-to-machine-authentication).
+Depending on your [configuration](/self-managed/components/management-identity/configuration/identity-configuration-overview.md), users and applications authenticate with Camunda 8 via the IdP using the [OAuth 2.0 protocol](https://oauth.net/2/), using either a login page or [M2M tokens](#m2m-machine-to-machine-authentication).
 
 ## Login page authentication
 
@@ -19,13 +19,13 @@ Applications can authenticate with Camunda 8 using M2M (machine-to-machine) toke
 
 The following prerequisites are required for M2M authentication:
 
-| Prerequisite                                                                                 | Description                            |
-| :------------------------------------------------------------------------------------------- | :------------------------------------- |
-| [Identity](/self-managed/components/management-identity/what-is-identity.md)                 | A running Identity service.            |
-| [Application](/self-managed/identity/application-user-group-role-management/applications.md) | An application for your service.       |
-| Client ID                                                                                    | The client ID of your application.     |
-| Client secret                                                                                | The client secret of your application. |
-| REST client                                                                                  | A REST client of your choice.          |
+| Prerequisite                                                                                                       | Description                            |
+| :----------------------------------------------------------------------------------------------------------------- | :------------------------------------- |
+| [Identity](/self-managed/components/management-identity/what-is-identity.md)                                       | A running Identity service.            |
+| [Application](/self-managed/components/management-identity/application-user-group-role-management/applications.md) | An application for your service.       |
+| Client ID                                                                                                          | The client ID of your application.     |
+| Client secret                                                                                                      | The client secret of your application. |
+| REST client                                                                                                        | A REST client of your choice.          |
 
 ### Generate a token
 
