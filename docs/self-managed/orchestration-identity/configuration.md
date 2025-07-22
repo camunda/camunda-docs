@@ -61,22 +61,24 @@ The following variables are used to initialize users and mappings.
 <Tabs>
   <TabItem value="init-env" label="Environment variables" default>
 
-| Environment variable                                | Description                          | Default value   |
-| --------------------------------------------------- | ------------------------------------ | --------------- |
-| `CAMUNDA_SECURITY_INITIALIZATION_USERS[0]_USERNAME` | The username of the first user.      | `demo`          |
-| `CAMUNDA_SECURITY_INITIALIZATION_USERS[0]_PASSWORD` | The password of the first user.      | `demo`          |
-| `CAMUNDA_SECURITY_INITIALIZATION_USERS[0]_NAME`     | The name of the first user.          | `Demo`          |
-| `CAMUNDA_SECURITY_INITIALIZATION_USERS[0]_EMAIL`    | The email address of the first user. | `demo@demo.com` |
+| Environment variable                                          | Description                                     | Default value |
+| ------------------------------------------------------------- | ----------------------------------------------- | ------------- |
+| `CAMUNDA_SECURITY_INITIALIZATION_USERS[0]_USERNAME`           | The username of the first user.                 |               |
+| `CAMUNDA_SECURITY_INITIALIZATION_USERS[0]_PASSWORD`           | The password of the first user.                 |               |
+| `CAMUNDA_SECURITY_INITIALIZATION_USERS[0]_NAME`               | The name of the first user.                     |               |
+| `CAMUNDA_SECURITY_INITIALIZATION_USERS[0]_EMAIL`              | The email address of the first user.            |               |
+| `CAMUNDA_SECURITY_INITIALIZATION_DEFAULTROLES_ADMIN_USERS[0]` | Username assigned to the admin role by default. |               |
 
   </TabItem>
   <TabItem value="init-yaml" label="application.yaml">
 
-| Application.yaml property                           | Description                          | Default value   |
-| --------------------------------------------------- | ------------------------------------ | --------------- |
-| `camunda.security.initialization.users[0].username` | The username of the first user.      | `demo`          |
-| `camunda.security.initialization.users[0].password` | The password of the first user.      | `demo`          |
-| `camunda.security.initialization.users[0].name`     | The name of the first user.          | `Demo`          |
-| `camunda.security.initialization.users[0].email`    | The email address of the first user. | `demo@demo.com` |
+| Application.yaml property                                     | Description                                     | Default value |
+| ------------------------------------------------------------- | ----------------------------------------------- | ------------- |
+| `camunda.security.initialization.users[0].username`           | The username of the first user.                 |               |
+| `camunda.security.initialization.users[0].password`           | The password of the first user.                 |               |
+| `camunda.security.initialization.users[0].name`               | The name of the first user.                     |               |
+| `camunda.security.initialization.users[0].email`              | The email address of the first user.            |               |
+| `camunda.security.initialization.defaultRoles.admin.users[0]` | Username assigned to the admin role by default. |               |
 
   </TabItem>
   <TabItem value="init-helm" label="Helm values">
