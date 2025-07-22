@@ -129,7 +129,7 @@ The `document` function allows you to download a file from a URL and use it as a
 
 The function accepts a URL to the document and an optional file name. It returns a document reference that can be used in the connector input.
 
-#### Example: Use without filename  
+#### Example: Use without filename
 
 A random filename will be generated.
 
