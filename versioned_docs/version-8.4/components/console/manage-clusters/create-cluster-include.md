@@ -33,9 +33,9 @@ You can decide if you want to have automated updates to new versions of Camunda 
 Additionally, you can tag your cluster for dev, test, stage, or prod. Assigning a tag can make it easier for team members to clearly distinguish between different stages of the software development lifecycle. Tags have no impact on performance and can be changed later in the cluster details section of the cluster overview page.
 
 :::caution Starter plans
-The Starter plan is no longer available.
+The Starter plan is no longer available. 
 
-- Existing customers using a Starter plan will need to either upgrade to the Enterprise plan, or move to the Free plan.
+- Existing customers using a Starter plan will need to either upgrade to the Enterprise plan, or move to the Free plan. 
 - To compare plan features and contact Camunda for advice and an Enterprise plan quote, refer to [Camunda 8 pricing](https://camunda.com/pricing/?utm_source=docs.camunda.io&utm_medium=referral).
 
 :::
