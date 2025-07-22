@@ -1,7 +1,7 @@
 ---
-id: prepare-for-dev-update
-title: "Developer Guide: Prepare for Update"
-description: "Prepare your development environment and applications for the Camunda 8.8 update on Self-Managed."
+id: prepare-for-dev-update-88
+title: "Developer Guide: Prepare for the Camunda 8.8 Update"
+description: "Prepare your development environment and applications for the Camunda 8.8 update."
 ---
 
 import Tabs from '@theme/Tabs';
@@ -183,6 +183,7 @@ const camunda8 = new Camunda8({
 </Tabs>
 
 ## Step 4: Update testing frameworks
+
 TODO Check validity
 Migrate from deprecated testing tools to new frameworks.
 
@@ -496,10 +497,6 @@ Ensure proper coordination for the update process.
 - [ ] Validation tests prepared
 - [ ] Rollback procedures documented
 
-## Next steps
-
-With application preparation complete, coordinate with platform administrators for the update execution following the [run update guide](./run-update.md).
-
 **Key coordination points:**
 
 - Wait for platform update completion
@@ -507,4 +504,4 @@ With application preparation complete, coordinate with platform administrators f
 - Execute comprehensive validation tests
 - Monitor application performance and functionality
 
-For additional SDK migration guidance, see the [migration documentation](/apis-tools/migration-manuals/migrate-to-camunda-api.md) for detailed migration instructions.
+For additional SDK migration guidance, see the [migration documentation](/apis-tools/update/migrate-to-camunda-api.md) for detailed migration instructions.

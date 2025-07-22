@@ -1,6 +1,6 @@
 ---
 title: "Camunda 8.8 Self-Managed Update Guide"
-description: "Plan and execute an update of your Camunda 8 Self-Managed installation to version 8.8. Includes architectural highlights, prerequisites, breaking changes, and role-based update paths for administrators and developers."
+description: "Plan and execute an update of your Camunda 8 Self-Managed installation to version 8.8. Includes architectural highlights, prerequisites, breaking changes and update paths for administrators."
 ---
 
 # Camunda 8.8 Self-Managed Update Guide
@@ -8,7 +8,7 @@ description: "Plan and execute an update of your Camunda 8 Self-Managed installa
 This page helps you plan and run an update of an existing **Camunda 8.7** Self-Managed environment to **Camunda 8.8**. It summarizes what changed, what you must do before updating, and where to find step-by-step instructions based on your role.
 
 > **Who should read this?**  
-> Platform administrators, DevOps engineers, and application developers maintaining Camunda-based solutions in self-managed Kubernetes or VM environments. 
+> Platform administrators, DevOps engineers, and application developers maintaining Camunda-based solutions in self-managed Kubernetes or VM environments.
 
 ## Camunda 8.8 is a latest release
 
@@ -18,9 +18,9 @@ Camunda 8.8 represents a significant architectural evolution that affects both i
 
 Camunda 8.8 introduces changes that affect both **infrastructure** and **application integration**:
 
-- **Orchestration Cluster architecture:** Consolidates and streamlines the runtime components to simplify deployment and scaling. [See Architectural changes](#architectural-changes). 
-- **Unified APIs & SDK alignment:** Earlier component-specific APIs (V1) are deprecated; migrate to the Orchestration Cluster API and updated SDKs to access new capabilities and ensure forward compatibility. 
-- **Authentication & authorization overhaul:** Shift to an OIDC-based identity model with cluster-level and scoped permissions. LDAP integration for Operate/Tasklist is removed. 
+- **Orchestration Cluster architecture:** Consolidates and streamlines the runtime components to simplify deployment and scaling. [See Architectural changes](#architectural-changes).
+- **Unified APIs & SDK alignment:** Earlier component-specific APIs (V1) are deprecated; migrate to the Orchestration Cluster API and updated SDKs to access new capabilities and ensure forward compatibility.
+- **Authentication & authorization overhaul:** Shift to an OIDC-based identity model with cluster-level and scoped permissions. LDAP integration for Operate/Tasklist is removed.
 - **Unified configuration schema:** A consistent configuration model reduces divergence across components and eases automation. [Link to schema docs – VERIFY]
 
 > **Update complexity:** **Moderate–High.** Expect coordination across platform and application teams and plan a controlled maintenance window. Validate in a non-production environment first.
@@ -40,18 +40,18 @@ Camunda 8.8 introduces changes that affect both **infrastructure** and **applica
 ---
 
 [Camunda 8.8 Upgrade guide for Administrator](./administrators/prepare-for-update.md)
-[Camunda 8.8 Upgrade guide for Developers](./developers/prepare-for-update.md)
 
-You can navigate to one of these guides to start your upgrade. 
+You can navigate to one of these guides to start your upgrade.
 
 ---
 
 ## Architectural changes in 8.8
 
 ### Streamlined / Orchestration Cluster Architecture
+
 Camunda 8.8 completes the “streamlined architecture” initiative announced in 2024. At a high level:
 
-- Reduces the number of separately deployed component services. 
+- Reduces the number of separately deployed component services.
 - Aligns component communication through a unified cluster identity and API surface.
 - Simplifies scaling by letting you size the orchestration cluster independently of management tooling.
 - Standardizes configuration keys and secrets across components.
@@ -71,12 +71,12 @@ Camunda 8.8 includes changes that **require** both application updates and infra
 
 ### API & SDK status
 
-| Component / Use | Status in 8.8 | Migrate To | Migrate By (no later than) |
-|---|---|---|---|
-| V1 component APIs | **Deprecated** | Orchestration Cluster API | Before Camunda 8.10 |
-| Community Spring Zeebe | **Deprecated** | Camunda Spring SDK | Before Camunda 8.10 |
-| Zeebe Process Test (ZPT) | **Deprecated** | Camunda Process Test (CPT) | Before Camunda 8.10 |
-| Job-based User Tasks | **Deprecated** | Camunda User Tasks | Before Camunda 8.10 |
+| Component / Use          | Status in 8.8  | Migrate To                 | Migrate By (no later than) |
+| ------------------------ | -------------- | -------------------------- | -------------------------- |
+| V1 component APIs        | **Deprecated** | Orchestration Cluster API  | Before Camunda 8.10        |
+| Community Spring Zeebe   | **Deprecated** | Camunda Spring SDK         | Before Camunda 8.10        |
+| Zeebe Process Test (ZPT) | **Deprecated** | Camunda Process Test (CPT) | Before Camunda 8.10        |
+| Job-based User Tasks     | **Deprecated** | Camunda User Tasks         | Before Camunda 8.10        |
 
 > Start migration now to reduce risk when upgrading beyond 8.8.
 
@@ -84,7 +84,7 @@ For More information see [Upcoming API Changes in Camunda 8: A Unified and Strea
 
 ### Authentication & authorization
 
-- LDAP-based authentication for **Operate** and **Tasklist** has been removed. Use **Identity** backed by an **OIDC** provider (Keycloak or your enterprise IdP). 
+- LDAP-based authentication for **Operate** and **Tasklist** has been removed. Use **Identity** backed by an **OIDC** provider (Keycloak or your enterprise IdP).
 - A **cluster-level permission model** replaces previous per-component role handling; review role mappings.
 - **Scoped permissions** differentiate orchestration (runtime execution) from management (operate, administer). Adjust access control policies accordingly.
 - An OIDC provider is required. Camunda Identity can integrate with Keycloak or external OIDC sources. [Add link to Identity setup]
@@ -121,32 +121,3 @@ Choose the path that matches your role. Teams should coordinate; many tasks are 
 
 1. **[Prepare for update](./administrators/prepare-for-update.md)** – Validate backups, review prerequisites, map configuration changes, stage images.
 2. **[Run update](./administrators/run-update.md)** – Apply chart changes, perform rolling or controlled restart, validate cluster health and data access.
-
----
-
-### Application Developers
-
-**Typical responsibilities**
-
-- Process applications and job workers using Camunda SDKs
-- Custom connectors and integration services
-- Applications consuming Camunda APIs
-- Testing frameworks and CI/CD tooling
-- User task implementations and custom UIs
-
-**Your update flow**
-
-1. **[Prepare for update](./developers/prepare-for-update.md)** – Upgrade SDKs, resolve deprecated APIs, update auth clients (OIDC), adapt tests.
-2. **[Run update](./developers/run-update.md)** – Deploy updated applications, re-run integration and process tests, validate user task behavior.
-
----
-
-## Next steps
-
-1. **Review the detailed role guides** linked above.  
-2. **Stage a test environment** that mirrors production scale and auth integration.  
-3. **Coordinate between platform and development teams** to align sequence and downtime.  
-4. **Schedule a maintenance window** with time for validation and rollback.  
-5. **Document results** from test and production updates for future upgrades.
-
----

@@ -960,9 +960,15 @@ module.exports = {
       ],
     },
     {
-      "Migration manuals": [
-        "apis-tools/migration-manuals/migrate-to-camunda-user-tasks",
-        "apis-tools/migration-manuals/migrate-to-camunda-api",
+      type: "category",
+      label: "Update to Camunda 8.8",
+      link: {
+        type: "doc",
+        id: "apis-tools/update/index",
+      },
+      items: [
+        "apis-tools/update/migrate-to-camunda-user-tasks",
+        "apis-tools/update/migrate-to-camunda-api",
       ],
     },
   ],
@@ -1666,22 +1672,8 @@ module.exports = {
         id: "self-managed/update/index",
       },
       items: [
-        {
-          type: "category",
-          label: "For Administrators",
-          items: [
-            "self-managed/update/administrators/prepare-for-admin-update",
-            "self-managed/update/administrators/run-admin-update",
-          ],
-        },
-        {
-          type: "category",
-          label: "For Developers",
-          items: [
-            "self-managed/update/developers/prepare-for-dev-update",
-            "self-managed/update/developers/run-dev-update",
-          ],
-        },
+        "self-managed/update/administrators/prepare-for-admin-update",
+        "self-managed/update/administrators/run-admin-update",
       ],
     },
   ],
