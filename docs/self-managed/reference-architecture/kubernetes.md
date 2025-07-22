@@ -63,7 +63,7 @@ The following depictions provide a simplified view of the deployed namespaces us
 
 By default, the Helm chart suggests using a single Ingress for Camunda resources, enabling a unified domain with each application accessible via a different path.
 
-Most applications are stateless and deployed as **Deployments**. However, the Orchestration Cluster, due to included Zeebe brokers, are an exception, requiring a **StatefulSet** to ensure that volumes are consistently mounted, as pod order and identifiers are crucial.
+Most applications are stateless and deployed as **Deployments**. However, the Orchestration Cluster, due to included Zeebe brokers, are an exception, requiring a **StatefulSet** to ensure that volumes are consistently mounted, as pod order and identifiers are crucial. This is why you will continue to see the same StatefulSet names for Zeebe, even though they now include the entire Orchestration Cluster. This naming consistency simplifies migration from existing environments.
 
 The Orchestration Cluster exposes two services:
 
@@ -103,15 +103,14 @@ A typical Camunda 8 deployment distinguishes between the **Orchestration Cluster
 
 A multi-namespace setup allows you to duplicate and run multiple Orchestration Clusters based on different use cases and requirements, while Web Modeler and Console remains independent, and does not need to be scaled the same way. The same applies to Management Identity as a central entity coordinating access management.
 
-The **Orchestration Cluster** namespace, as outlined in the [architecture diagram](#orchestration-cluster), consists of the following components:
+The Orchestration Cluster namespace, as shown in the [architecture diagram](#orchestration-cluster), includes multiple components. Within this namespace, the Orchestration Cluster is packaged as a single Docker image, deployed via a StatefulSet, and consists of the following components:
 
-- [Zeebe Brokers](/components/zeebe/technical-concepts/architecture.md#brokers)
-- [Zeebe Gateway](/self-managed/zeebe-deployment/zeebe-gateway/zeebe-gateway-overview.md)
+- [Zeebe](/components/zeebe/zeebe-overview.md)
 - [Operate](/components/operate/operate-introduction.md)
 - [Tasklist](/components/tasklist/introduction-to-tasklist.md)
 - [Identity](/self-managed/orchestration-identity/orchestration-identity.md)
 
-Thematically close to the Orchestration Cluster are following components:
+Thematically close to the Orchestration Cluster are following components and part of the namespace:
 
 - [Optimize](/components/optimize/what-is-optimize.md)
 - [Connectors](/components/connectors/introduction.md)

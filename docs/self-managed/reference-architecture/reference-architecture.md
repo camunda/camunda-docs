@@ -41,7 +41,7 @@ When designing a reference architecture, it's essential to understand the differ
 
 The Orchestration Cluster is the core of Camunda.
 
-The included components are:
+The following components are bundled into a single artifact:
 
 - [Zeebe](/components/zeebe/zeebe-overview.md): A workflow engine for orchestrating microservices and managing stateful, long-running business processes.
 - [Operate](/components/operate/operate-introduction.md): A monitoring tool for visualizing and troubleshooting workflows running in Zeebe.

@@ -47,14 +47,14 @@ For high availability, a minimum of three machines is recommended to ensure faul
 
 ### Components
 
-The orchestration core is packaged as a single JAR file and includes the following components:
+The Orchestration Cluster is packaged as a single JAR file and includes the following components:
 
-- **Zeebe**
-- **Operate**
-- **Tasklist**
-- **Identity**
+- [Zeebe](/components/zeebe/zeebe-overview.md)
+- [Operate](/components/operate/operate-introduction.md)
+- [Tasklist](/components/tasklist/introduction-to-tasklist.md)
+- [Identity](/self-managed/orchestration-identity/orchestration-identity.md)
 
-The core facilitates:
+It facilitates:
 
 1. **gRPC communication**: For client workers.
 2. **HTTP endpoints**: Used by the Orchestration Cluster REST API and Web UI.
@@ -92,9 +92,9 @@ Suggested instance types from cloud providers:
 
 - Stable and high-speed network connection
 - Configured firewall rules to allow necessary traffic:
-  - **8080**: Web UI / REST endpoint.
-  - **9090**: Connector port.
-  - **9600**: Metrics endpoint.
+  - **8080**: Web UI / REST endpoint (Orchestration Cluster)
+  - **9090**: Connectors
+  - **9600**: Management endpoint (Orchestration Cluster)
   - **26500**: gRPC endpoint.
   - **26501**: Gateway-to-broker communication.
   - **26502**: Inter-broker communication.
