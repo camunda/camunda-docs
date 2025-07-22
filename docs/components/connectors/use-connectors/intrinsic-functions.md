@@ -138,13 +138,16 @@ A random filename will be generated.
   "camunda.function.type": "document",
   "params": "https://docs.camunda.io/img/logo-camunda-black.svg"
 }
+```
 
 #### Example: Use with filename
 
+```json
 {
   "camunda.function.type": "document",
   "params": ["https://docs.camunda.io/img/logo-camunda-black.svg", "logo.svg"]
 }
+```
 
 ## Create a custom function
 
