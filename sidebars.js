@@ -964,11 +964,11 @@ module.exports = {
       label: "Update to Camunda 8.8",
       link: {
         type: "doc",
-        id: "apis-tools/update/index",
+        id: "apis-tools/migration-manuals/index",
       },
       items: [
-        "apis-tools/update/migrate-to-camunda-user-tasks",
-        "apis-tools/update/migrate-to-camunda-api",
+        "apis-tools/migration-manuals/migrate-to-camunda-user-tasks",
+        "apis-tools/migration-manuals/migrate-to-camunda-api",
       ],
     },
   ],

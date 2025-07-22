@@ -510,4 +510,4 @@ Ensure proper coordination for the update process.
 - Execute comprehensive validation tests
 - Monitor application performance and functionality
 
-For additional SDK migration guidance, see the [migration documentation](/apis-tools/update/migrate-to-camunda-api.md) for detailed migration instructions.
+For additional SDK migration guidance, see the [migration documentation](/apis-tools/migration-manuals/migrate-to-camunda-api.md) for detailed migration instructions.
