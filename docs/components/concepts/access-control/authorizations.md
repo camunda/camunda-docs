@@ -99,7 +99,7 @@ The following table lists all resources that support authorization in Camunda 8 
 | **Resource**                         | `*`                                                     | `CREATE`, `DELETE_DRD`, `DELETE_FORM`, `DELETE_PROCESS`                                                                    |
 | **Role**                            | `*`                                                     | `CREATE`, `READ`, `UPDATE`, `DELETE`                                                                                       |
 | **System**                           | `*`                                                     | `READ`, `UPDATE`                                                                                                           |
-| **Tenants**                          | `*`, `tenantId:tenantA`                                 | `CREATE`, `READ`, `UPDATE`, `DELETE`                                                                                       |
+| **Tenant**                          | `*`, `tenantId:tenantA`                                 | `CREATE`, `READ`, `UPDATE`, `DELETE`                                                                                       |
 | **Users**                            | `*`, `username: felix.mueller`                          | `CREATE`, `READ`, `UPDATE`, `DELETE`                                                                                       |
 
 ## Default Roles
