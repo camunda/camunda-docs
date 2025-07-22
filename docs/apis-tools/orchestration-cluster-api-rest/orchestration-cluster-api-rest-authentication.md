@@ -22,10 +22,21 @@ The Orchestration Cluster API supports three authentication methods depending on
 - **No Authentication**: Use for local development only, with C8 Run or Docker Compose, when security is not required. Not recommended for production.
 - **Basic Authentication**: Use for simple username/password protection, typically in C8 Run with authentication enabled.
 - **OIDC (Token-based)**: Use for production, SaaS, or any environment where secure, standards-based authentication is required. Required for SaaS and recommended for Self-Managed clusters in production.
+- **OIDC with X.509**: Use for advanced scenarios where client certificates are used for authentication, typically in Self-Managed clusters.
 
----
+## Authentication support matrix
 
-## 1. No Authentication (Local Development)
+| Distribution      | Default Authentication | Supports No Auth       | Supports Basic Auth | Supports OIDC (Token-based) |
+|------------------|-----------------------|------------------------|---------------------|-----------------------------|
+| C8 Run           | None                  | ✅ (default)            | ✅ (when enabled)    | ✅ (when configured)         |
+| Docker Compose   | None                  | ✅ (default)            | ✅ (when enabled)    | ✅ (when configured)         |
+| Helm/Kubernetes  | Basic Auth            | ✅ (when Auth disabled) | ✅ (default)         | ✅ (when configured)         |
+| SaaS             | OIDC                  | ❌                      | ❌                   | ✅ (required)                |
+
+
+# Authenticate API calls
+
+## No Authentication (Local Development)
 
 By default, Camunda 8 Run and Docker Compose expose the Orchestration Cluster API without authentication for local development. You can make API requests directly:
 
@@ -33,44 +44,34 @@ By default, Camunda 8 Run and Docker Compose expose the Orchestration Cluster AP
 curl http://localhost:8080/v2/topology
 ```
 
-**Supported by:**
-- C8 Run (default)
-- Docker Compose (default)
-
----
-
-## 2. Basic Authentication
+## Basic Authentication
 
 Enable Basic Auth in C8 Run by configuring authentication in your `application.yaml`. For detailed steps, see the [C8 Run documentation on enabling authentication](../../self-managed/quickstart/developer-quickstart/c8run.md#enable-authentication-and-authorization).
 
+On Helm/Kubernetes, Basic Auth is enabled by default for the Orchestration Cluster API.
+
 Once authentication is enabled, you can use Basic Authentication with your username and password. Make sure a user is created for this purpose, or use the default user: `demo`/`demo`. Include your username and password in each API request:
+
 ```shell
 curl --user username:password \
      http://localhost:8080/v2/topology
 ```
 
-**Supported by:**
-- C8 Run (when enabled)
-
----
-
-## 3. OIDC (Token-based) Authentication
+## OIDC (Token-based) Authentication
 
 OIDC (OpenID Connect) is the recommended authentication method for production and required for SaaS. You must obtain a token and include it in the `Authorization` header of each request.
-
-### How to obtain a token
 
 <Tabs groupId="environment" defaultValue="saas" queryString values={[
   {label: 'SaaS', value: 'saas' },
   {label: 'Self-Managed', value: 'self-managed' },
 ]}>
 
-<TabItem value='saas'>
+<TabItem value="saas">
 
 1. [Create client credentials](/components/console/manage-clusters/setup-client-connection-credentials.md) in the Camunda Console.
 2. Use the credentials to request a token:
 
-```bash
+```shell
 curl --request POST ${CAMUNDA_OAUTH_URL} \
     --header 'Content-Type: application/x-www-form-urlencoded' \
     --data-urlencode 'grant_type=client_credentials' \
@@ -90,7 +91,7 @@ Replace the `${BASE_URL}` based on the address of your cluster. See the [Context
 
 </TabItem>
 
-<TabItem value='self-managed'>
+<TabItem value="self-managed">
 
 1. [Register an application in Identity](/self-managed/identity/application-user-group-role-management/applications.md) and assign permissions.
 2. Use the credentials to request a token:
@@ -116,12 +117,13 @@ Replace the `${BASE_URL}` based on the address of your cluster. See the [Context
 
 </Tabs>
 
-**Supported by:**
-- SaaS
-- Docker Compose
-- Kubernetes
+## OIDC with X.509 client certificates
 
----
+For advanced security scenarios, you can use OIDC authentication with X.509 client certificates. This is typically required in Self-Managed environments where mutual TLS (mTLS) is enforced by your identity provider (such as Keycloak).
+
+- The Java client supports OIDC with X.509 out of the box. You can configure the necessary keystore and truststore settings either via code or environment variables. See [Java client authentication](../java-client/authentication.md#oidc-with-x509) for a full example and configuration details.
+- For other clients or custom integrations, refer to your identity provider's documentation for how to obtain tokens using X.509 certificates.
+
 
 ## Token management in clients
 
