@@ -123,6 +123,30 @@ The `getJson` function accepts a document and an optional FEEL expression parame
 }
 ```
 
+### `document`
+
+The `document` function allows you to download and use documents from an url and use the file as a Camunda document.
+
+The function accepts a URL to the document and an optional file name. It returns a document reference that can be used in the connector input.
+
+Use without filename. A random will be generated.
+
+```json
+{
+  "camunda.function.type": "document",
+  "params": "https://docs.camunda.io/img/logo-camunda-black.svg"
+}
+```
+
+Use with filename.
+
+```json
+{
+  "camunda.function.type": "document",
+  "params": ["https://docs.camunda.io/img/logo-camunda-black.svg", "logo.svg"]
+}
+```
+
 ## Create a custom function
 
 In **Self-Managed** deployments, you can create custom intrinsic functions by implementing the `IntrinsicFunctionProvider` interface
