@@ -109,21 +109,21 @@ See [open a job worker](/apis-tools/java-client-examples/job-worker-open.md) for
 
 ### Accessing user task data
 
-User task-specific data, such as `assignee` and `priority`, are accessible through the `userTask` property of the user task listener job.
-The following user task attributes can be accessed from the activated job's user task property:
+User task-specific data, such as `assignee` and `priority`, are accessible through the `userTask` property of the user task listener job.  
+The following user task attributes can be accessed from the activated job's `userTask` property:
 
-| Attribute           | Decription                                                                                                                                                                                   |
-| :------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `action`            | A custom action value provided along with the request that triggered this event. If none was provided, it defaults to one of `assign`, `claim`, `update`, `complete`.                        |
-| `assignee`          | The user assigned to the task. If not specified, then the task is unassigned. Refer to [assignments](/components/modeler/bpmn/user-tasks/user-tasks.md#assignments) for more details.        |
-| `candidateGroups`   | Specifies the groups of users that the task can be assigned to. Refer to [assignments](/components/modeler/bpmn/user-tasks/user-tasks.md#assignments) for more details.                      |
-| `candidateUsers`    | Specifies the users that the task can be assigned to. Refer to [assignments](/components/modeler/bpmn/user-tasks/user-tasks.md#assignments) for more details.                                |
-| `changedAttributes` | Lists which user task attributes have changed with the event. Refer to [changed attributes](#changed-attributes) section below for more details.                                             |
-| `dueDate`           | Specifies the due date of the task. Refer to [scheduling](/components/modeler/bpmn/user-tasks/user-tasks.md#scheduling) for more details.                                                    |
-| `followUpDate`      | Specifies the follow up date of the task. Refer to [scheduling](/components/modeler/bpmn/user-tasks/user-tasks.md#scheduling) for more details.                                              |
-| `formKey`           | The form linked to the user task referenced by its uniquely identifying key. Refer to [user task forms](/components/modeler/bpmn/user-tasks/user-tasks.md#user-task-forms) for more details. |
-| `priority`          | Refer to [priority](/components/modeler/bpmn/user-tasks/user-tasks.md#define-user-task-priority) for more details.                                                                           |
-| `userTaskKey`       | The unique key identifying the user task.                                                                                                                                                    |
+| Attribute           | Description                                                                                                                                                                                   |
+| :------------------ | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `action`            | A custom action value provided along with the request that triggered this event. If none was provided, it defaults to one of `assign`, `claim`, `update`, or `complete`.                     |
+| `assignee`          | The user assigned to the task. If not specified, the task is unassigned. Refer to [assignments](/components/modeler/bpmn/user-tasks/user-tasks.md#assignments) for more details.             |
+| `candidateGroups`   | Specifies the groups of users that the task can be assigned to. Refer to [assignments](/components/modeler/bpmn/user-tasks/user-tasks.md#assignments) for more details.                       |
+| `candidateUsers`    | Specifies the users that the task can be assigned to. Refer to [assignments](/components/modeler/bpmn/user-tasks/user-tasks.md#assignments) for more details.                                 |
+| `changedAttributes` | Lists the user task attributes that have changed with the event. Refer to the [changed attributes](#changed-attributes) section below for more details.                                       |
+| `dueDate`           | Specifies the due date of the task. Refer to [scheduling](/components/modeler/bpmn/user-tasks/user-tasks.md#scheduling) for more details.                                                     |
+| `followUpDate`      | Specifies the follow-up date of the task. Refer to [scheduling](/components/modeler/bpmn/user-tasks/user-tasks.md#scheduling) for more details.                                               |
+| `formKey`           | The form linked to the user task, referenced by its uniquely identifying key. Refer to [user task forms](/components/modeler/bpmn/user-tasks/user-tasks.md#user-task-forms) for more details. |
+| `priority`          | The task’s priority level. Refer to [priority](/components/modeler/bpmn/user-tasks/user-tasks.md#define-user-task-priority) for more details.                                                 |
+| `userTaskKey`       | The unique key identifying the user task.                                                                                                                                                     |
 
 Below is an example of accessing the `assignee` value from the activated job in Java:
 
