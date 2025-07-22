@@ -32,6 +32,7 @@ module.exports = {
   ],
   Components: [
     "components/components-overview",
+    "components/whats-new-in-88",
     {
       type: "category",
       label: "Concepts",
@@ -772,6 +773,18 @@ module.exports = {
               ],
             },
             "components/early-access/alpha/feel-copilot/feel-copilot",
+            {
+              type: "category",
+              label: "MCP Client",
+              link: {
+                type: "doc",
+                id: "components/early-access/alpha/mcp-client/mcp-client",
+              },
+              items: [
+                "components/early-access/alpha/mcp-client/mcp-remote-client-connector",
+                "components/early-access/alpha/mcp-client/mcp-client-connector",
+              ],
+            },
           ],
         },
       ],

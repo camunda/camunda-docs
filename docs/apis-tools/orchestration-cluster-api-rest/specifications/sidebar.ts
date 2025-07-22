@@ -12,12 +12,6 @@ const sidebar: SidebarsConfig = {
       items: [
         {
           type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-ad-hoc-sub-process-activities",
-          label: "Search activatable activities (alpha)",
-          className: "api-method post",
-        },
-        {
-          type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/activate-ad-hoc-sub-process-activities",
           label: "Activate activities within an ad-hoc sub-process",
           className: "api-method post",
