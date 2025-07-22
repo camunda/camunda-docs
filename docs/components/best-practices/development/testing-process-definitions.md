@@ -52,7 +52,7 @@ There are three typical test scopes used when building process solutions:
 
 This section describes how to write process tests as unit tests in Java. We are working on additional information for writing tests in other languages, such as Node.js or C#.
 
-When using Java, most customers use Spring Boot, so we describe this approach in this best practice. While this is a common setup for customers, it is not the only one. Find more examples of plain Java process tests in [Getting Started with Camunda Process Test](../../../../apis-tools/testing/getting-started/).
+When using Java, most customers use Spring Boot, so we describe this approach in this best practice. While this is a common setup for customers, it is not the only one. Find more examples of plain Java process tests in [Getting Started with Camunda Process Test](/apis-tools/testing/getting-started/).
 
 ### Technical setup using Spring
 
@@ -63,12 +63,12 @@ When using Java, most customers use Spring Boot, so we describe this approach in
 :::
 
 1. Use [_JUnit 5_](http://junit.org) as your unit test framework.
-2. Use the [Camunda Spring Boot SDK](../../../../apis-tools/spring-zeebe-sdk/getting-started.md).
+2. Use the [Camunda Spring Boot SDK](/apis-tools/spring-zeebe-sdk/getting-started.md).
 3. Use `@CamundaSpringProcessTest` to start a process engine.
-4. Ensure you have Docker installed locally to use [TestContainers](../../../../apis-tools/testing/getting-started/#prerequisites), which is the easiest way to run tests (Camunda is developing a test environment that runs in-memory).
-5. Use assertions from [Camunda Process Test](../../../../apis-tools/testing/assertions) to verify that your expectations about the process state are met.
+4. Ensure you have Docker installed locally to use [TestContainers](/apis-tools/testing/getting-started/#prerequisites), which is the easiest way to run tests (Camunda is developing a test environment that runs in-memory).
+5. Use assertions from [Camunda Process Test](/apis-tools/testing/assertions) to verify that your expectations about the process state are met.
 6. Use a mocking framework of your choice (such as [Mockito](http://mockito.org)) to mock service methods and verify that services are called as expected.
-7. Use utilities from [Camunda Process Test](../../../../apis-tools/testing/utilities) to mock job workers you don't want to run (for example, connectors).
+7. Use utilities from [Camunda Process Test](/testing/utilities) to mock job workers you don't want to run (for example, connectors).
 
 The following code shows an example test:
 
@@ -224,7 +224,7 @@ public void testRejectionPath() throws Exception {
 
 You could also mock the REST endpoint, which we touch on later discussing integration tests. Some projects consider REST mocking part of the unit test scope, and this is generally also fine, even if we see it as integration test scope by default.
 
-You can use the same [utilities from Camunda Process Test](../../../../apis-tools/testing/utilities) to mock other workers, where you simply do not want to run the job worker itself. Maybe the implementation is not clean, but beyond your control. However, we advise to use a proper service interface whenever possible instead of job worker mocking.
+You can use the same [utilities from Camunda Process Test](/apis-tools/testing/utilities) to mock other workers, where you simply do not want to run the job worker itself. Maybe the implementation is not clean, but beyond your control. However, we advise to use a proper service interface whenever possible instead of job worker mocking.
 
 ```java
 // Define the mock
