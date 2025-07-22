@@ -495,7 +495,8 @@ An approved invoice can't get archived:
     // handle the problem
     assertThat(byElementId("UserTask_ManuallyArchiveInvoice"))
         .isCreated();
-        // .hasCandidateGroup("archive-team"); // probably not worth to test as it limits flexibility in model changes
+        // The test for .hasCandidateGroup("archive-team") is probably not worth implementing
+        // as it limits flexibility in model changes.
     processTestContext.completeUserTask(byElementId("UserTask_ManuallyArchiveInvoice"));
 
     assertThat(processInstance)
