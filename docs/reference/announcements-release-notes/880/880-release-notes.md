@@ -29,10 +29,10 @@ These release notes identify the new features included in 8.8, including [alpha 
 
 <!-- https://github.com/camunda/product-hub/issues/2507 -->
 
-Camunda 8 now supports integration with [Atlassian Bitbucket](https://bitbucket.org/product/), in addition to GitHub, GitLab, and Azure DevOps.
+Camunda 8 now supports integration with [Atlassian Bitbucket Cloud](https://bitbucket.org/product/), in addition to GitHub, GitLab, and Azure DevOps.
 
 - This helps customers who use Jira for their development processes.
-- Organization owners and administrators can connect their Web Modeler process applications to Bitbucket, allowing users to keep their Web Modeler, Desktop Modeler, and official version control projects synced.
+- Organization owners and administrators can connect their Web Modeler process applications to Bitbucket Cloud, allowing users to keep their Web Modeler, Desktop Modeler, and official version control projects synced.
 
 To learn more, see [Git sync](/components/modeler/web-modeler/git-sync.md?platform=bitbucket).
 
