@@ -1,0 +1,225 @@
+---
+id: create-admin-user
+title: "Create admin user"
+description: "Creates a new user and assign the admin role to it."
+sidebar_label: "Create admin user"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWE1z2zYQ/Ss7e2qntCjno015UxW7dZsmHltuD64PILkSEYMAA4CWNRr+984CpCVbspN2cmqtGY1IYrFvsfsexMUavVg4zC7xnHzb4FWCpiErvDT6pMQMC0vC06Sspb5wZDHBklxhZcMWmOE0jDsQoGkJrSMLQpcgnJMLDb4iEDwXrFEE3oD0I0zQ0qeWnP/JlCvM1lgY7Ul7vhRNo2QR8NOPjiHW6IqKasFXftUQZmjyj1R4TLCxHK2X5Hi0Ec4tjS35+n6Us4pgGAUzD3FxrBxL79N5K/UCuwR5QIua9rsZRj/r5nEXXzSdaiHV/vlh6DMOugS99Iofcd3OYsKx4wHOvrRUYuZtS+GBa4x2MYsvxoePrxyWwkHkRBkKvTC+LzaVD8vt2qIg5+atUqvRXxqTr1Xo/0SFItF+o9V+F9e0GhwM+W6jAJ+udBTkGblWhXJ3Cb4ajx+RhDU3sqQSSuEFSAfaeLgRSpajx4vVWJMrqr/bLdp9gAmcRksoyYd0hGKCcBANcypBarg8O57Cj69e/3D1TeV947I0XS6XIzsvDqiU3tiRsYvUzgv+st23I5hVZAlqsYKcGVdKxhQKNjQB11Ah57LgTcfHtYZgOHuRjE9zLI6uH2Q7wbmxtfCYYWvlzm44gYuzE5AlaS/nK6kXu9BhzlxwdTIUuWl9liuhr3FTx13QhyiurWth7whyH6BL0Hnh261loNSeFoE9d/FL7V++2PHNtPhlNjuF6AIKUxLMjQVfSTcA8SJqqWXd1pi9Go8TrMVtvPt+PO7Yp++18ZmVaKDbRgkdqPVwOVJDbSz1/AkLk9p5oYuvVRlj5UI+xB3d01RP4rdxRYOgXu7y/djYXJYl6UBP6P/iBlUJpcySnnX1rKtnXT2qq9f7/qgmGjjLlnlI1hoLpihaa6mEZSVVcM+vGQN2L7wnXzietfastf+11roEa/KV4RavMS5QR/gKM0wdN4Jp/67pyN6Q5QZxja1VmOE6aqXL0nRdGee7bN0Y67v0hgtxI6wUuYr04+GoqYEryhRCVRFvt2Y8sP3m/cEWFTkfu1GYqtZ5snB2dD6Dn4WnpViFfDL8fZg34zfjvQhs+gXeJ6cnEFcembi1OwwQLPO9ENH4n4J03RUnu2it9KtzdhFTmJOwZCctl+aOLT12QOL7aIRJf3E8cOjXP2eBBrzLnW067qNbUTdRo5uOeUPBTXO1efbwvm99tnoZqecmhNhT7umFM1PIupi18ehwl+qnJ0GxhanrVodtWy9gKX0FAqaibnUp4A0U0S9rWcmCtAur6qMdzN7FEfgjIsLhiMkR2Tzs1gvpqzYfFaZOizjt7jdXJk9rIXXaQ7h0Ovn94v3bycG7k+nR+/Ojg8PReORvfUg2q6kWejuO0JH1jXG75xBl6wDkX56n9MTwdOvTRgmpQ3tpVawxk+cSg677+vI5T1TnJa7XuXB0YVXX8eNPLdkVZpdXGzHzXZdgRaIkG7aCa+5acRqjPpgxOpurlqPY6ey7ZJgxKQpq/JO2V1s70+mH8xnTuj8mqk3Jc6xY8hGSWGKGyOdVPDuoJTxboxJ60YoF20af/PkbXZOHzw==
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Create admin user"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/setup/user"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Creates a new user and assign the admin role to it.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            password: {
+              description: "The password of the user.",
+              type: "string",
+            },
+            username: {
+              description: "The username of the user.",
+              type: "string",
+            },
+            name: { description: "The name of the user.", type: "string" },
+            email: { description: "The email of the user.", type: "string" },
+          },
+          title: "UserRequest",
+        },
+      },
+    },
+    required: true,
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "201": {
+      description:
+        "The user was created and got assigned the admin role successfully.\n",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            properties: {
+              username: {
+                description: "The username of the user.",
+                type: "string",
+              },
+              name: { description: "The name of the user.", type: "string" },
+              email: { description: "The email of the user.", type: "string" },
+              userKey: {
+                description: "The key of the created user",
+                type: "string",
+              },
+            },
+            title: "UserCreateResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

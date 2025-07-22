@@ -1,8 +1,8 @@
 ---
 id: orchestrate-human-tasks
 title: Get started with human task orchestration
-sidebar_label: Human tasks
-description: "Efficiently allocate work through user tasks."
+sidebar_label: Orchestrate human tasks
+description: "For low-code developers using Camunda 8 SaaS, efficiently allocate work through user tasks."
 keywords: [human tasks, orchestration, getting started, user guide]
 ---
 
@@ -29,6 +29,8 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import SaasPrereqs from './react-components/\_saas-prerequisites.md'
 import Install from './react-components/\_install-c8run.md'
+
+This guide is designed for users who prefer a low-code approach to process automation. You can follow this tutorial using either a local, Self-Managed lightweight setup, or Camunda 8 SaaS.
 
 Camunda 8 allows you to orchestrate processes with human tasks of any complexity. Utilizing user tasks, you can create and assign tasks to users. Then, users can perform their work and enter the necessary data to drive the business process.
 
@@ -342,7 +344,7 @@ Don't want to build the process yourself? Click this button to create it from a 
 
 - Watch the [video-based Human Task Orchestration Course](https://bit.ly/3PJJocB).
 - Learn how to use [BPMN user tasks](/components/modeler/bpmn/user-tasks/user-tasks.md) to route tasks to the right users.
-- Learn how to [build more complex forms](./utilizing-forms.md) using the form editor.
+- Learn how to [build more complex forms](/components/modeler/forms/utilizing-forms.md) using the form editor.
 - Learn how to write powerful [expressions](/components/concepts/expressions.md) and utilize [variables](/components/concepts/variables.md) to route complex process flows.
 - Get an [introduction to Operate](/components/operate/operate-introduction.md).
 - Learn how to [set up Tasklist](/components/tasklist/introduction-to-tasklist.md) for efficient task management.

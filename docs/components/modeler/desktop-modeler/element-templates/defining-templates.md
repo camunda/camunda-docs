@@ -509,6 +509,55 @@ For `zeebe:calledElement` bindings, variable propagation is not supported. To pr
 
 The `zeebe:userTask` binding allows you to configure the implementation type for a templated `bpmn:UserTask`. When present, it sets the task as a Camunda user task; when omitted, the task defaults to a job worker.
 
+#### `zeebe:formDefinition`
+
+| **Binding `type`**          | `zeebe:formDefinition`                                                                     |
+| --------------------------- | ------------------------------------------------------------------------------------------ |
+| **Valid property `type`'s** | `String`<br />`Text`<br />`Hidden`<br />`Dropdown`                                         |
+| **Binding parameters**      | `property`: The name of the property. Only `formId` and `externalReference` are supported. |
+| **Mapping result**          | `<zeebe:formDefinition [property]="[userInput]" />`                                        |
+
+The `zeebe:formDefinition` binding allows you to configure the [user task form](../../../bpmn/user-tasks/#user-task-forms) used by a user task.
+
+:::note
+
+When `zeebe:formDefinition` is used, `zeebe:userTask` must be set on the same element.
+Properties `formId` and `externalReference` are mutually exclusive, meaning that only one of them can be set at a time.
+
+:::
+
+#### `zeebe:calledDecision`
+
+| **Binding `type`**          | `zeebe:calledDecision`                                                                     |
+| --------------------------- | ------------------------------------------------------------------------------------------ |
+| **Valid property `type`'s** | `String`<br />`Text`<br />`Hidden`<br />`Dropdown`                                         |
+| **Binding parameters**      | `property`: The name of the property. Only `decisionId` and `resultVariable` are supported. |
+| **Mapping result**          | `<zeebe:calledDecision [property]="[userInput]" />`                                        |
+
+The `zeebe:calledDecision` binding allows you to configure the [called decision](../../../bpmn/business-rule-tasks/#defining-a-task) used by a business rule task.
+
+:::note
+
+When `zeebe:calledDecision` is used, `zeebe:taskDefinition` cannot be used on the same element.
+
+:::
+
+#### `zeebe:script`
+
+| **Binding `type`**          | `zeebe:script`                                                                         |
+| --------------------------- | -------------------------------------------------------------------------------------- |
+| **Valid property `type`'s** | `String`<br />`Text`<br />`Hidden`<br />`Dropdown`                                     |
+| **Binding parameters**      | `property`: The name of the property. `expression` and `resultVariable` are supported. |
+| **Mapping result**          | `<zeebe:script [property]="[userInput]" />`                                            |
+
+The `zeebe:script` binding allows you to configure the [FEEL expression](../../../bpmn/script-tasks/#defining-a-task) used by a script task.
+
+:::note
+
+When `zeebe:script` is used, `zeebe:taskDefinition` cannot be used on the same element.
+
+:::
+
 ### Optional bindings
 
 We support optional bindings that do not persist empty values in the underlying BPMN 2.0 XML.

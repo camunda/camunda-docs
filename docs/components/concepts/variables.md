@@ -8,7 +8,7 @@ Variables are part of a process instance and represent the data of the instance.
 
 A variable has a name and a JSON value. The visibility of a variable is defined by its variable scope.
 
-When [automating a process using BPMN](../../guides/automating-a-process-using-bpmn.md) or [orchestrating human tasks](../../guides/getting-started-orchestrate-human-tasks.md), you can leverage the scope of these variables and customize how variables are merged into the process instance.
+When [automating a process using BPMN](/components/modeler/bpmn/automating-a-process-using-bpmn.md) or [orchestrating human tasks](../../guides/getting-started-orchestrate-human-tasks.md), you can leverage the scope of these variables and customize how variables are merged into the process instance.
 
 ## Variable names
 
@@ -132,6 +132,10 @@ Output mappings can be used for several purposes:
 - They can be used in script and user tasks.
 
 If **one or more** output mappings are defined, the results variables are set as **local variables** in the scope where the mapping is defined. Then, the output mappings are applied to the variables and create new variables in this scope. The new variables are merged into the parent scope. If there is no mapping for a job/message variable, the variable is not merged.
+
+:::note
+This can lead to a case where some variables with an output mapping are merged into the parent scope, and others without an output mapping are not merged.
+:::
 
 If **no** output mappings are defined, all results variables are merged into the process instance.
 

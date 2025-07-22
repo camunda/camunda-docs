@@ -1,43 +1,16 @@
 module.exports = {
   Guides: [
-    "guides/introduction-to-camunda",
     {
-      "Get started": [
+      type: "category",
+      label: "Get started",
+      link: {
+        type: "doc",
+        id: "guides/introduction-to-camunda",
+      },
+      items: [
         "guides/getting-started-example",
-        "guides/getting-started-java-spring",
-        "guides/model-your-first-process",
-        {
-          "Orchestration use cases": [
-            "guides/orchestrate-human-tasks",
-            "guides/orchestrate-apis",
-            "guides/orchestrate-microservices",
-            "guides/listen-to-user-tasks",
-          ],
-        },
-      ],
-    },
-    {
-      Design: [
-        "guides/automating-a-process-using-bpmn",
-        "guides/create-decision-tables-using-dmn",
-        "guides/utilizing-forms",
-      ],
-      Automate: [
-        "guides/create-cluster",
-        "guides/setting-up-development-project",
-        "guides/setup-client-connection-credentials",
-        "guides/configuring-out-of-the-box-connectors",
-        "guides/use-connectors-in-hybrid-mode",
-        "guides/host-custom-connectors",
-      ],
-      Improve: [
-        "guides/improve-processes-with-optimize",
-        {
-          "DevOps lifecycle": [
-            "guides/devops-lifecycle/integrate-web-modeler-in-ci-cd",
-          ],
-        },
-        "guides/use-shared-project-for-organization-wide-collaboration",
+        "guides/orchestrate-human-tasks",
+        "guides/orchestrate-apis",
       ],
     },
     {
@@ -59,6 +32,7 @@ module.exports = {
   ],
   Components: [
     "components/components-overview",
+    "components/whats-new-in-88",
     {
       type: "category",
       label: "Concepts",
@@ -72,7 +46,12 @@ module.exports = {
         "components/concepts/process-applications",
         "components/concepts/job-workers",
         "components/concepts/execution-listeners",
-        "components/concepts/user-task-listeners",
+        {
+          "User task listeners": [
+            "components/concepts/user-task-listeners",
+            "components/concepts/listen-to-user-tasks",
+          ],
+        },
         "components/concepts/process-instance-creation",
         "components/concepts/messages",
         "components/concepts/signals",
@@ -187,11 +166,13 @@ module.exports = {
           "Web Modeler": [
             "components/modeler/web-modeler/launch-web-modeler",
             "components/modeler/web-modeler/model-your-first-diagram",
+            "components/modeler/web-modeler/use-shared-project-for-organization-wide-collaboration",
             "components/modeler/web-modeler/context-pad",
             "components/modeler/web-modeler/git-sync",
             "components/modeler/web-modeler/import-diagram",
             "components/modeler/web-modeler/fix-problems-in-your-diagram",
             "components/modeler/web-modeler/run-or-publish-your-process",
+            "components/modeler/web-modeler/integrate-web-modeler-in-ci-cd",
             {
               type: "category",
               label: "Process applications",
@@ -283,6 +264,7 @@ module.exports = {
         {
           BPMN: [
             "components/modeler/bpmn/modeler-bpmn",
+            "components/modeler/bpmn/automating-a-process-using-bpmn",
             "components/modeler/bpmn/bpmn-primer",
             "components/modeler/bpmn/bpmn-coverage",
             "components/modeler/bpmn/data-flow",
@@ -444,10 +426,12 @@ module.exports = {
             id: "components/connectors/use-connectors/index",
           },
           items: [
+            "components/connectors/use-connectors/configuring-out-of-the-box-connectors",
             "components/connectors/connector-types",
             "components/connectors/use-connectors/inbound",
             "components/connectors/use-connectors/outbound",
             "components/connectors/use-connectors/intrinsic-functions",
+            "components/connectors/use-connectors-in-hybrid-mode",
           ],
         },
         {
@@ -498,6 +482,7 @@ module.exports = {
             "components/connectors/out-of-the-box-connectors/gitlab",
             {
               Google: [
+                "components/connectors/out-of-the-box-connectors/google-cloud-storage",
                 "components/connectors/out-of-the-box-connectors/googledrive",
                 "components/connectors/out-of-the-box-connectors/google-maps-platform",
                 "components/connectors/out-of-the-box-connectors/google-sheets",
@@ -541,6 +526,7 @@ module.exports = {
             id: "components/connectors/custom-built-connectors/build-connector",
           },
           items: [
+            "components/connectors/custom-built-connectors/host-custom-connectors",
             {
               type: "category",
               label: "Connector templates",
@@ -567,6 +553,7 @@ module.exports = {
         id: "components/optimize/what-is-optimize",
       },
       items: [
+        "components/optimize/improve-processes-with-optimize",
         "components/optimize/userguide/collections-dashboards-reports",
         "components/optimize/userguide/user-permissions",
         "components/optimize/userguide/data-sources",
@@ -662,6 +649,7 @@ module.exports = {
             "components/console/manage-clusters/create-cluster",
             "components/console/manage-clusters/manage-cluster",
             "components/console/manage-clusters/cluster-connectors",
+            "components/console/manage-clusters/setup-client-connection-credentials",
             "components/console/manage-clusters/manage-api-clients",
             "components/console/manage-clusters/manage-secrets",
             "components/console/manage-clusters/manage-alerts",
@@ -673,6 +661,7 @@ module.exports = {
         },
         {
           "Manage your plan": [
+            "components/console/manage-plan/create-account",
             "components/console/manage-plan/available-plans",
             "components/console/manage-plan/upgrade-to-enterprise-plan",
             "components/console/manage-plan/update-billing-reservations",
@@ -784,6 +773,18 @@ module.exports = {
               ],
             },
             "components/early-access/alpha/feel-copilot/feel-copilot",
+            {
+              type: "category",
+              label: "MCP Client",
+              link: {
+                type: "doc",
+                id: "components/early-access/alpha/mcp-client/mcp-client",
+              },
+              items: [
+                "components/early-access/alpha/mcp-client/mcp-remote-client-connector",
+                "components/early-access/alpha/mcp-client/mcp-client-connector",
+              ],
+            },
           ],
         },
       ],
@@ -1074,6 +1075,28 @@ module.exports = {
     },
     {
       type: "category",
+      label: "Reference architecture",
+      link: {
+        type: "doc",
+        id: "self-managed/reference-architecture/reference-architecture",
+      },
+      items: [
+        "self-managed/reference-architecture/kubernetes",
+        {
+          type: "category",
+          label: "Manual JAR",
+          link: {
+            type: "doc",
+            id: "self-managed/reference-architecture/manual",
+          },
+          items: [
+            "self-managed/installation-methods/helm/cloud-providers/amazon/aws-ec2",
+          ],
+        },
+      ],
+    },
+    {
+      type: "category",
       label: "Installation methods",
       link: {
         type: "doc",
@@ -1122,16 +1145,18 @@ module.exports = {
                       ],
                     },
                     "self-managed/installation-methods/helm/configure/database/using-existing-opensearch",
+                    "self-managed/installation-methods/helm/configure/database/using-existing-postgres",
                     "self-managed/installation-methods/helm/configure/database/configure-db-custom-headers",
                   ],
                 },
-                "self-managed/installation-methods/helm/configure/secret-management",
                 {
                   Ingress: [
                     "self-managed/installation-methods/helm/configure/ingress-setup",
                     "self-managed/installation-methods/helm/configure/accessing-components-without-ingress",
                   ],
                 },
+                "self-managed/installation-methods/helm/configure/secret-management",
+                "self-managed/installation-methods/helm/configure/using-existing-keycloak",
                 //license key
                 "self-managed/installation-methods/helm/configure/configure-multi-tenancy",
                 "self-managed/installation-methods/helm/configure/multi-namespace-deployment",
@@ -1143,9 +1168,22 @@ module.exports = {
                 "self-managed/installation-methods/helm/configure/application-configs",
               ],
             },
-            // {
-            //   Upgrade: ["setup/upgrade"],
-            // },
+            {
+              type: "category",
+              label: "Upgrade",
+              link: {
+                type: "doc",
+                id: "self-managed/installation-methods/helm/upgrade/upgrade",
+              },
+              items: [
+                "self-managed/installation-methods/helm/upgrade/upgrade-hc-870-880",
+                "self-managed/installation-methods/helm/upgrade/upgrade-hc-860-870",
+                "self-managed/installation-methods/helm/upgrade/upgrade-hc-850-860",
+                "self-managed/installation-methods/helm/upgrade/upgrade-hc-840-850",
+                "self-managed/installation-methods/helm/upgrade/upgrade-hc-830-840",
+                "self-managed/installation-methods/helm/upgrade/upgrade-hc-820-830",
+              ],
+            },
             {
               "Operational tasks": [
                 "self-managed/installation-methods/helm/operational-tasks/dual-region-operational-procedure",
@@ -1153,105 +1191,93 @@ module.exports = {
               ],
               //also to include backup and restore, and scaling
             },
-            //cloud providers
-          ],
-        },
-        "self-managed/installation-methods/docker/docker",
-        {
-          Manual: ["self-managed/installation-methods/manual/manual-install"],
-        },
-      ],
-    },
-    {
-      type: "category",
-      label: "Reference architecture",
-      link: {
-        type: "doc",
-        id: "self-managed/reference-architecture/reference-architecture",
-      },
-      items: [
-        {
-          type: "category",
-          label: "Kubernetes",
-          link: {
-            type: "doc",
-            id: "self-managed/reference-architecture/kubernetes",
-          },
-          items: [
             {
               type: "category",
-              label: "Amazon",
+              label: "Cloud providers",
               link: {
                 type: "doc",
-                id: "self-managed/setup/deploy/amazon/amazon-eks/amazon-eks",
+                id: "self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/amazon-eks",
               },
               items: [
                 {
                   type: "category",
-                  label: "Amazon EKS",
+                  label: "Amazon",
                   link: {
                     type: "doc",
-                    id: "self-managed/setup/deploy/amazon/amazon-eks/amazon-eks",
+                    id: "self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/amazon-eks",
                   },
                   items: [
-                    "self-managed/setup/deploy/amazon/amazon-eks/eks-terraform",
-                    "self-managed/setup/deploy/amazon/amazon-eks/eks-helm",
-                    "self-managed/setup/deploy/amazon/amazon-eks/dual-region",
-                    "self-managed/setup/deploy/amazon/amazon-eks/eks-eksctl",
-                    "self-managed/setup/deploy/amazon/amazon-eks/irsa",
+                    {
+                      type: "category",
+                      label: "Amazon EKS",
+                      link: {
+                        type: "doc",
+                        id: "self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/amazon-eks",
+                      },
+                      items: [
+                        {
+                          Quickstart: [
+                            "self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/eks-eksctl",
+                          ],
+                        },
+                        "self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/eks-terraform",
+                        "self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/eks-helm",
+                        "self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/dual-region",
+                        {
+                          Troubleshooting: [
+                            "self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/irsa",
+                          ],
+                        },
+                      ],
+                    },
+                    {
+                      type: "category",
+                      label: "ROSA",
+                      link: {
+                        type: "doc",
+                        id: "self-managed/installation-methods/helm/cloud-providers/amazon/openshift/terraform-setup",
+                      },
+                      items: [
+                        "self-managed/installation-methods/helm/cloud-providers/amazon/openshift/terraform-setup",
+                        "self-managed/installation-methods/helm/cloud-providers/amazon/openshift/terraform-setup-dual-region",
+                      ],
+                    },
                   ],
                 },
                 {
                   type: "category",
-                  label: "ROSA",
+                  label: "Microsoft",
                   link: {
                     type: "doc",
-                    id: "self-managed/setup/deploy/amazon/openshift/terraform-setup",
+                    id: "self-managed/installation-methods/helm/cloud-providers/azure/microsoft-aks/microsoft-aks",
                   },
                   items: [
-                    "self-managed/setup/deploy/amazon/openshift/terraform-setup",
-                    "self-managed/setup/deploy/amazon/openshift/terraform-setup-dual-region",
+                    "self-managed/installation-methods/helm/cloud-providers/azure/microsoft-aks/aks-terraform",
+                    "self-managed/installation-methods/helm/cloud-providers/azure/microsoft-aks/aks-helm",
                   ],
                 },
-              ],
-            },
-            {
-              type: "category",
-              label: "Microsoft",
-              link: {
-                type: "doc",
-                id: "self-managed/setup/deploy/azure/microsoft-aks/microsoft-aks",
-              },
-              items: [
-                "self-managed/setup/deploy/azure/microsoft-aks/aks-terraform",
-                "self-managed/setup/deploy/azure/microsoft-aks/aks-helm",
-              ],
-            },
-            {
-              Google: ["self-managed/setup/deploy/gcp/google-gke"],
-            },
-            {
-              type: "category",
-              label: "Red Hat OpenShift",
-              link: {
-                type: "doc",
-                id: "self-managed/setup/deploy/openshift/redhat-openshift",
-              },
-              items: [
-                "self-managed/setup/deploy/openshift/redhat-openshift-dual-region",
+                {
+                  Google: [
+                    "self-managed/installation-methods/helm/cloud-providers/gcp/google-gke",
+                  ],
+                },
+                {
+                  type: "category",
+                  label: "Red Hat OpenShift",
+                  link: {
+                    type: "doc",
+                    id: "self-managed/installation-methods/helm/cloud-providers/openshift/redhat-openshift",
+                  },
+                  items: [
+                    "self-managed/installation-methods/helm/cloud-providers/openshift/redhat-openshift-dual-region",
+                  ],
+                },
               ],
             },
           ],
         },
-        {
-          type: "category",
-          label: "Manual JAR",
-          link: {
-            type: "doc",
-            id: "self-managed/reference-architecture/manual",
-          },
-          items: ["self-managed/setup/deploy/amazon/aws-ec2"],
-        },
+        "self-managed/installation-methods/docker/docker",
+        "self-managed/installation-methods/manual/manual-install",
       ],
     },
     {
@@ -1290,7 +1316,7 @@ module.exports = {
       ],
     },
     {
-      "Operational guides": [
+      Concepts: [
         {
           type: "category",
           label: "Back up and restore",
@@ -1310,27 +1336,6 @@ module.exports = {
             },
           ],
         },
-        "self-managed/operational-guides/data-purge",
-        {
-          type: "doc",
-          label: "Configure flow control",
-          id: "self-managed/operational-guides/configure-flow-control/configure-flow-control",
-        },
-        {
-          Monitoring: [
-            "self-managed/operational-guides/monitoring/log-levels",
-            "self-managed/operational-guides/monitoring/metrics",
-          ],
-        },
-        {
-          Troubleshooting: [
-            "self-managed/operational-guides/troubleshooting/troubleshooting",
-          ],
-        },
-      ],
-    },
-    {
-      Concepts: [
         {
           type: "category",
           label: "Document handling",
@@ -1354,14 +1359,31 @@ module.exports = {
             },
           ],
         },
-        "self-managed/concepts/exporters",
         {
           "Multi-region": ["self-managed/concepts/multi-region/dual-region"],
         },
+        {
+          Monitoring: [
+            "self-managed/operational-guides/monitoring/log-levels",
+            "self-managed/operational-guides/monitoring/metrics",
+          ],
+        },
+        {
+          Troubleshooting: [
+            "self-managed/operational-guides/troubleshooting/troubleshooting",
+          ],
+        },
+        "self-managed/concepts/exporters",
         "self-managed/concepts/multi-tenancy",
         "self-managed/concepts/mapping-rules",
         "self-managed/concepts/elasticsearch-privileges",
         "self-managed/concepts/opensearch-privileges",
+        "self-managed/operational-guides/data-purge",
+        {
+          type: "doc",
+          label: "Configure flow control",
+          id: "self-managed/operational-guides/configure-flow-control/configure-flow-control",
+        },
       ],
     },
     {
@@ -1461,6 +1483,19 @@ module.exports = {
                   items: [
                     "self-managed/zeebe-deployment/exporters/install-zeebe-exporters",
                     "self-managed/zeebe-deployment/exporters/camunda-exporter",
+                    {
+                      type: "category",
+                      label: "Camunda Exporter indices",
+                      link: {
+                        type: "doc",
+                        id: "self-managed/zeebe-deployment/exporters/camunda-exporter-indices",
+                      },
+                      items: [
+                        "self-managed/zeebe-deployment/exporters/index-diagrams/camunda-exporter-indices-identity",
+                        "self-managed/zeebe-deployment/exporters/index-diagrams/camunda-exporter-indices-operate",
+                        "self-managed/zeebe-deployment/exporters/index-diagrams/camunda-exporter-indices-tasklist",
+                      ],
+                    },
                     "self-managed/zeebe-deployment/exporters/elasticsearch-exporter",
                     "self-managed/zeebe-deployment/exporters/opensearch-exporter",
                   ],

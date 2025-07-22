@@ -127,7 +127,6 @@ https://docs.camunda.io/docs/components/modeler/web-modeler/connectors/available
 https://docs.camunda.io/docs/components/modeler/web-modeler/connectors/available-connectors/rest
 https://docs.camunda.io/docs/components/modeler/web-modeler/connectors/available-connectors/sendgrid
 https://docs.camunda.io/docs/guides
-https://docs.camunda.io/docs/guides/setup-client-connection-credentials
 https://docs.camunda.io/docs/next/apis-tools/orchestration-cluster-api-rest/specifications/create-document-link/
 https://docs.camunda.io/docs/next/components/connectors/out-of-the-box-connectors/amazon-comprehend
 https://docs.camunda.io/docs/next/components/connectors/out-of-the-box-connectors/amazon-sagemaker
@@ -138,4 +137,3 @@ https://docs.camunda.io/docs/next/components/connectors/out-of-the-box-connector
 https://docs.camunda.io/docs/next/components/connectors/out-of-the-box-connectors/sql/#connection
 https://docs.camunda.io/docs/next/components/connectors/out-of-the-box-connectors/sql/#uri-connection
 https://docs.camunda.io/docs/next/components/connectors/out-of-the-box-connectors/sql/#variables
-https://docs.camunda.io/docs/next/guides/setup-client-connection-credentials

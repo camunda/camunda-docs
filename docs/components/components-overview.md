@@ -29,7 +29,7 @@ Deployment guides for Camunda 8 components are available in the [Self-Managed se
 
 :::
 
-[Camunda 8](https://camunda.io) orchestrates complex business processes that span people, systems, and devices. With Camunda, business users collaborate with developers to model and [automate end-to-end processes using BPMN-powered flowcharts](/guides/automating-a-process-using-bpmn.md), alongside DMN decision tables that promote speed, scale, and decision logic.
+[Camunda 8](https://camunda.io) orchestrates complex business processes that span people, systems, and devices. With Camunda, business users collaborate with developers to model and [automate end-to-end processes using BPMN-powered flowcharts](/components/modeler/bpmn/automating-a-process-using-bpmn.md), alongside DMN decision tables that promote speed, scale, and decision logic.
 
 ## Camunda 8 use cases
 
@@ -37,7 +37,7 @@ With Camunda 8, orchestrate, observe, and analyze microservices and human tasks.
 
 An end-to-end, automated business process typically requires multiple microservices to achieve an outcome. Software developers and architects often struggle to effectively communicate across multiple microservices, monitor their performance, and identify and resolve problems when they occur.
 
-Camunda enables organizations to overcome these issues without compromising autonomy and the coupling of microservices. Camunda offers speed, scale, and security when paired with [microservices](/guides/getting-started-orchestrate-microservices.md), without the overhead of building and maintaining a daunting infrastructure.
+Camunda enables organizations to overcome these issues without compromising autonomy and the coupling of microservices. Camunda offers speed, scale, and security when paired with microservices, without the overhead of building and maintaining a daunting infrastructure.
 
 In addition to microservices, many organizations have mission-critical processes that require people to perform tasks manually. An end-to-end business process often requires the combination of manual work with automated steps in a unified workflow.
 
@@ -76,7 +76,7 @@ required to automate and orchestrate business processes that span multiple syste
 
 #### Forms
 
-[Create and implement custom forms](/guides/utilizing-forms.md) that power workflows requiring human interaction.
+[Create and implement custom forms](/components/modeler/forms/utilizing-forms.md) that power workflows requiring human interaction.
 
 ### Workflow engine & decision engine
 
@@ -92,7 +92,7 @@ With [Tasklist](/components/tasklist/introduction-to-tasklist.md), process owner
 
 ### Optimize
 
-[Optimize](/components/optimize/what-is-optimize.md) leverages process execution data to continuously [provide actionable insights](/guides/improve-processes-with-optimize.md). Optimize specializes in BPMN-based analysis and can show users exactly what their process model needs for successful execution.
+[Optimize](/components/optimize/what-is-optimize.md) leverages process execution data to continuously [provide actionable insights](/components/optimize/improve-processes-with-optimize.md). Optimize specializes in BPMN-based analysis and can show users exactly what their process model needs for successful execution.
 
 ### Console
 
@@ -120,6 +120,6 @@ The platform and tools are usable in your environment right away, with full publ
 
 - To request information about Camunda 8 performance and benchmarking, refer to our [Contact](/reference/contact.md) page.
 - [Introduction to Camunda 8](/guides/introduction-to-camunda-8.md)
-- [Create a Camunda 8 account](/guides/create-account.md)
+- [Create a Camunda 8 account](/components/console/manage-plan/create-account.md)
 - [Migrate from Camunda 7 to Camunda 8](/guides/migrating-from-camunda-7/index.md)
-- [Automate a process using BPMN](/guides/automating-a-process-using-bpmn.md)
+- [Automate a process using BPMN](/components/modeler/bpmn/automating-a-process-using-bpmn.md)

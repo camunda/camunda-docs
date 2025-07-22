@@ -12,7 +12,7 @@ This guide steps through using an existing Amazon OpenSearch Service instance. B
 
 ### Authentication
 
-There are two layers of permissions with OpenSearch: AWS IAM and OpenSearch internal. If you would like to connect to OpenSearch using AWS IAM roles for service accounts (IRSA) then please also refer to the [IAM roles for service accounts documentation](/self-managed/setup/deploy/amazon/amazon-eks/terraform-setup.md#opensearch-module-setup).
+There are two layers of permissions with OpenSearch: AWS IAM and OpenSearch internal. If you would like to connect to OpenSearch using AWS IAM roles for service accounts (IRSA) then please also refer to the [IAM roles for service accounts documentation](/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md#opensearch-module-setup).
 
 Otherwise, if it is intended to connect to Amazon OpenSearch Service with basic auth, then the example below can be followed:
 
