@@ -206,6 +206,8 @@ RewriteRule ^docs/8.7/components/concepts/what-is-camunda-8/(.*)$ /docs/8.7/comp
 
 # Restructure Identity Docs (8.8)
 RewriteRule ^docs/next/self-managed/setup/guides/using-existing-keycloak/?$ /docs/next/self-managed/installation-methods/helm/configure/using-existing-keycloak/ [R=301,L]
+RewriteRule ^docs/self-managed/setup/guides/using-existing-keycloak/?$ /docs/next/self-managed/installation-methods/helm/configure/using-existing-keycloak/ [R=301,L]
+RewriteRule ^docs/8.7/self-managed/setup/guides/using-existing-keycloak/?$ /docs/next/self-managed/installation-methods/helm/configure/using-existing-keycloak/ [R=301,L]
 RewriteRule ^docs/next/self-managed/setup/guides/connect-to-an-oidc-provider/?$ /docs/next/self-managed/components/management-identity/configuration/connect-to-an-oidc-provider/ [R=301,L]
 RewriteRule ^docs/next/self-managed/concepts/access-control/applications/?$ /docs/next/self-managed/components/management-identity/application-user-group-role-management/applications/ [R=301,L]
 RewriteRule ^docs/next/self-managed/concepts/access-control/resource-authorizations/?$ /docs/next/self-managed/components/management-identity/access-management/resource-authorizations/ [R=301,L]
