@@ -1114,6 +1114,7 @@ module.exports = {
           items: [
             "self-managed/installation-methods/helm/install",
             "self-managed/installation-methods/helm/chart-parameters",
+            "self-managed/installation-methods/helm/upgrade/index",
             //production guide
             {
               type: "category",
@@ -1173,7 +1174,7 @@ module.exports = {
               label: "Upgrade",
               link: {
                 type: "doc",
-                id: "self-managed/installation-methods/helm/upgrade/upgrade",
+                id: "self-managed/installation-methods/helm/upgrade/index",
               },
               items: [
                 "self-managed/installation-methods/helm/upgrade/upgrade-hc-870-880",
@@ -1349,7 +1350,7 @@ module.exports = {
               label: "Configuration",
               link: {
                 type: "doc",
-                id: "self-managed/concepts/document-handling/configuration/overview",
+                id: "self-managed/concepts/document-handling/configuration/index",
               },
               items: [
                 "self-managed/concepts/document-handling/configuration/camunda-8-run",
@@ -1368,11 +1369,7 @@ module.exports = {
             "self-managed/operational-guides/monitoring/metrics",
           ],
         },
-        {
-          Troubleshooting: [
-            "self-managed/operational-guides/troubleshooting/troubleshooting",
-          ],
-        },
+        "self-managed/operational-guides/troubleshooting",
         "self-managed/concepts/exporters",
         "self-managed/concepts/multi-tenancy",
         "self-managed/concepts/mapping-rules",

@@ -1,7 +1,6 @@
 ---
-id: troubleshooting
-title: "Troubleshooting"
-sidebar_label: "Troubleshooting"
+sidebar_label: Troubleshooting
+title: Camunda componenets troubleshooting
 description: "Troubleshooting considerations in Platform deployment."
 ---
 

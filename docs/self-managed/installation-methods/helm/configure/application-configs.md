@@ -1,7 +1,7 @@
 ---
 id: application-configs
-title: "Configure components in Helm charts"
-sidebar_label: "Configure components"
+sidebar_label: Configure components
+title: Helm charts components configuration
 description: "Learn how to configure individual components in Helm charts."
 ---
 

@@ -1,6 +1,6 @@
 ---
 id: dual-region
-title: "Dual-region"
+title: "Dual-region setup"
 sidebar_label: "Dual-region"
 description: "A dual-region setup allows you to run Camunda in two regions synchronously."
 ---

@@ -1,6 +1,5 @@
 ---
-id: overview
-title: "Overview"
+title: Document handling configuration
 description: "Learn more about storage configuration options like Google Cloud Platform, AWS S3, local folders, and in-memory."
 keywords: ["document handling", "document storage configuration"]
 ---
