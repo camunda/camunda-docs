@@ -52,7 +52,7 @@ consumer-loan-application/
 
 ## Editor support for process applications
 
-When you open a file in the modeler, the system implicitly determines whether it belongs to a process application. It does so by checking for the presence of a `.process-application` file in the same folder or a parent folder. Within a process application, the modeler offers advanced navigation and intelligence.
+When you open a file in Modeler, the system implicitly determines whether it belongs to a process application. It does so by checking for the presence of a `.process-application` file in the same folder or a parent folder. Within a process application, Modeler offers advanced navigation and intelligence.
 
 ### Indicating context
 
@@ -66,7 +66,7 @@ When files of more than one process application are opened they are grouped visu
 
 ### Creating a process application
 
-You can create a process application by simply creating a `.process-application` file in the root of your project. Alternatively, create it via Modeler UI by taking the following steps:
+Create a process application by creating a `.process-application` file in the root of your project. Alternatively, create it via Modeler UI by taking the following steps:
 
 1. Click **File > New Process Application...**.
 2. Choose a folder.
