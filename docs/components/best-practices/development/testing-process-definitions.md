@@ -490,8 +490,7 @@ An approved invoice can't get archived:
     processTestContext.completeUserTask(byElementId("UserTask_ApproveInvoice"),
       Map.of("approved", true));
 
-    // this should lead to the exception being thrown and the process to end up in the user task to
-    // handle the problem
+    // This should lead to the exception being thrown, causing the process to end up in the user task designed to handle the problem.
     assertThat(byElementId("UserTask_ManuallyArchiveInvoice"))
         .isCreated();
         // The test for .hasCandidateGroup("archive-team") is probably not worth implementing
