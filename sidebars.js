@@ -963,6 +963,7 @@ module.exports = {
       items: [
         "apis-tools/migration-manuals/migrate-to-camunda-user-tasks",
         "apis-tools/migration-manuals/migrate-to-camunda-api",
+        "apis-tools/migration-manuals/migrate-to-camunda-process-test",
       ],
     },
   ],
