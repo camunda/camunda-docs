@@ -3,6 +3,10 @@ id: zeebe-process-test
 title: "Zeebe Process Test"
 ---
 
+:::info
+Zeebe Process Test is deprecated as of Camunda 8.8 and will be removed in Camunda 8.10. For new and future-proof process testing, use [Camunda Process Test](/apis-tools/testing/getting-started/) instead.
+:::
+
 [Zeebe Process Test](https://github.com/camunda-cloud/zeebe-process-test) allows you to unit test your Camunda 8 BPMN
 processes. It will start a lightweight in-memory Zeebe engine and provide you with a set of assertions you can use to
 verify your process behaves as expected.
