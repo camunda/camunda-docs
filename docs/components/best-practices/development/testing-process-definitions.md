@@ -52,7 +52,7 @@ There are three typical test scopes used when building process solutions:
 
 This section describes how to write process tests as unit tests in Java. We are working on additional information for writing tests in other languages, such as Node.js or C#.
 
-When using Java, most customers use Spring Boot, so we describe this approach in this best practice. While this is a common setup for customers, it is not the only one. Find more examples of plain Java process tests in [Getting Started with Camunda Process Test](https://docs.camunda.io/docs/apis-tools/testing/getting-started/).
+When using Java, most customers use Spring Boot, so we describe this approach in this best practice. While this is a common setup for customers, it is not the only one. Find more examples of plain Java process tests in [Getting Started with Camunda Process Test](../../../apis-tools/testing/getting-started/).
 
 ### Technical setup using Spring
 
@@ -64,11 +64,11 @@ When using Java, most customers use Spring Boot, so we describe this approach in
 
 1. Use [_JUnit 5_](http://junit.org) as your unit test framework.
 2. Use the [Camunda Spring Boot SDK](../../../apis-tools/spring-zeebe-sdk/getting-started.md).
-3. Use `@CamundaSpringProcessTest` to start a process engine. 
-4. Ensure you have Docker installed locally to use [TestContainers](https://docs.camunda.io/docs/next/apis-tools/testing/getting-started/#prerequisites), which is the easiest way to run tests (Camunda is developing a test environment that runs in-memory).
-4. Use assertions from [Camunda Process Test](../../../apis-tools/testing/assertions) to verify that your expectations about the process state are met.
-5. Use a mocking framework of your choice (such as [Mockito](http://mockito.org)) to mock service methods and verify that services are called as expected.
-6. Use utilities from [Camunda Process Test](../../../apis-tools/testing/utilities) to mock job workers you don't want to run (for example, connectors).
+3. Use `@CamundaSpringProcessTest` to start a process engine.
+4. Ensure you have Docker installed locally to use [TestContainers](../../../apis-tools/testing/getting-started/#prerequisites), which is the easiest way to run tests (Camunda is developing a test environment that runs in-memory).
+5. Use assertions from [Camunda Process Test](../../../apis-tools/testing/assertions) to verify that your expectations about the process state are met.
+6. Use a mocking framework of your choice (such as [Mockito](http://mockito.org)) to mock service methods and verify that services are called as expected.
+7. Use utilities from [Camunda Process Test](../../../apis-tools/testing/utilities) to mock job workers you don't want to run (for example, connectors).
 
 The following code shows an example test:
 
@@ -85,7 +85,7 @@ public class InvoiceApprovalTest {
   private CamundaClient client;
   @Autowired
   private CamundaProcessTestContext processTestContext;
-  @Autowired 
+  @Autowired
   private ObjectMapper objectMapper;
 
   // Mock services that are called from the job workers
@@ -156,7 +156,7 @@ In a test case like this, you want to test the executable BPMN process definitio
 
 - Worker code, typically connected to a service task
 - Expressions (FEEL) used in your process model for gateway decisions or input/output mappings
-- Other glue code, for example, your own Client API (probably exposed via REST) that performs data mapping before calling the Camunda Client. 
+- Other glue code, for example, your own Client API (probably exposed via REST) that performs data mapping before calling the Camunda Client.
 
 The following illustration shows this for the invoice approval example:
 
@@ -164,7 +164,7 @@ The following illustration shows this for the invoice approval example:
 
 Workflow engine-independent business code should _not_ be included in the tests. In the invoice approval example, the `ArchiveService` will be mocked, and the `ArchiveInvoiceWorker` will read and transform process variables and call this mock. This way, you can test the process model, the glue code, and the data flow in your process test without calling out to the real archive system.
 
-The following code examples highlight the important aspects around mocking. 
+The following code examples highlight the important aspects around mocking.
 
 The `ArchiveInvoiceWorker` is executed as part of the test. It does input data mapping **(1)** and also translates a specific business exception into a BPMN error **(2)**:
 
@@ -375,7 +375,6 @@ public void happyPath() throws Exception {
   }
 ```
 
-
 #### Testing detours
 
 Test _forks/detours_ from the happy path as well as _errors/exceptional_ paths as chunks in separate test methods. This allows to unit test in meaningful units.
@@ -543,7 +542,6 @@ Configure your tests to be dedicated integration tests, and separate them from u
 
 You can use typical industry standard tools for integration testing together with Camunda.
 
-
 ### Mocking REST calls
 
 Especially when using the Connector framework, there might be relevant logic to test in configuration of a connector, especially the input and output data mapping. To test those, you typically want to mock the endpoint, rather than the job worker.
@@ -565,13 +563,12 @@ In the invoice approval example, the `Send invoice rejection` task leverages an 
 
 Now you can run a Mock for the REST endpoint. Because CPT uses Testcontainers, you also need to run a container for the mock - the connector runtime cannot access any mock directly spun up in the JUnit test. You can use [Testcontainers Mockserver Module](https://java.testcontainers.org/modules/mockserver/). Therefore:
 
-1. Add the required [Testcontainers Mockserver Module](https://java.testcontainers.org/modules/mockserver/) dependencies to your test case (``org.testcontainers:mockserver`` and ``org.mock-server:mockserver-client-java`` at the time of writing) .
+1. Add the required [Testcontainers Mockserver Module](https://java.testcontainers.org/modules/mockserver/) dependencies to your test case (`org.testcontainers:mockserver` and `org.mock-server:mockserver-client-java` at the time of writing) .
 2. Start the mockserver early in the test lifecycle, so that you can capture the URL for the mock (which typically gets a random PORT).
 3. Use the secrets in Camunda to configure the endpoint of the REST call, which is best practice anyway to configure the URL in the environment. In the test you need to set it to the URL of the mock
 4. Make sure the connector runtime is enabled in the test case, so that the out-of-the-box REST connector is executed.
 
 Here is the relevant source code:
-
 
 ```java
 @SpringBootTest(
