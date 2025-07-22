@@ -38,8 +38,8 @@ For general deployment pitfalls, visit the [deployment troubleshooting guide](/s
 
 ## Architecture
 
-<!--_Infrastructure diagram for a single region setup (click on the image to open the PDF version):_
-[![Architecture Overview](./img/k8s-single.jpg)](./img/k8s-single.pdf)-->
+_Infrastructure diagram for a single region setup (click on the image to open the PDF version):_
+[![Architecture Overview](./img/k8s-single.jpg)](./img/k8s-single.pdf)
 
 This Kubernetes architecture diagram illustrates a high-availability setup spanning multiple availability zones (A, B, and C) with key networking components to ensure scalability, security, and reliability. Whenever possible, we recommend leveraging multiple availability zones to enhance fault tolerance and eliminate single points of failure.
 
