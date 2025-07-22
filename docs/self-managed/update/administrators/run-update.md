@@ -37,7 +37,7 @@ Consult the Helm guide for options, secret handling, and migration-job monitorin
 
 ### Docker images
 
-Make sure to download latest images. Use the following link for [Air-Gapped environments](../../installation-methods/helm/configure/air-gapped-installation).
+Make sure to download latest images. Use the following link for [Air-Gapped environments](../../installation-methods/helm/configure/air-gapped-installation.md).
 
 For production deployments using Docker images:
 
@@ -66,8 +66,6 @@ After the upgrade succeeds:
 - Verify component versions via Operate.
 - Run your post‑update validation suite (link below).
 
-See [Validate the platform](../../installation-methods/helm/upgrade/upgrade-hc-870-880/) after an update for step‑by‑step checks.
-
 ## Step 5 — Post‑update tasks
 
 - Alert application teams that the platform is ready.
@@ -87,8 +85,8 @@ After successful platform update completion:
 
 ## Additional resources
 
-- **[Helm chart upgrade guide: 8.7 → 8.8](../../installation-methods/helm/upgrade/upgrade-hc-870-880/)** – Detailed technical steps
+- **[Helm chart upgrade guide: 8.7 → 8.8](../../installation-methods/helm/upgrade/helm-870-880.md)** – Detailed technical steps
 - **[Collecting diagnostics](../../installation-methods/helm/operational-tasks/diagnostics.md)** – Gathering troubleshooting data
-- **[Backup and restore guide](../../operational-guides/backup-restore/backup-and-restore/)** – Comprehensive backup procedures
-- **[Troubleshooting guides](../../operational-guides/troubleshooting/troubleshooting/)** – Issue‑resolution references
-- **[Supported environments matrix](../../../reference/supported-environments/)** – Component and infrastructure compatibility
+- **[Backup and restore guide](../../operational-guides/backup-restore/backup-and-restore.md)** – Comprehensive backup procedures
+- **[Troubleshooting guides](../../operational-guides/troubleshooting/troubleshooting.md)** – Issue‑resolution references
+- **[Supported environments matrix](../../../reference/supported-environments.md)** – Component and infrastructure compatibility
