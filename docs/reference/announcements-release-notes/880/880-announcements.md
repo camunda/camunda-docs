@@ -102,7 +102,7 @@ As of the 8.8 release, Camunda is compatible with Elasticsearch 8.16+ and no lon
 
 ### Versioning changes in Opensearch
 
-As of the 8.8 release, Camunda is compatible with Opensearch 2.17+ and no longer supports older Opensearch versions. See [supported environments](/reference/supported-environments.md).
+As of the 8.8 release, Camunda is compatible with OpenSearch 2.17+ and no longer supports older OpenSearch versions. See [supported environments](/reference/supported-environments.md).
 
 ## Key changes
 
