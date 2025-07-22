@@ -15,13 +15,13 @@ If your current chart is **12.x**, plan to jump directly to the **latest patch**
 
 - **Check current version.** Direct updates are supported from 8.7.x to 8.8.x. Upgrade to the latest 8.7 patch **before** moving to 8.8.
 - **Update all orchestration components together.** Zeebe, Operate, Tasklist, and Identity must run the same version.
-- **Review customizations.** List non-default Helm values, ingress rules, external Elasticsearch/OpenSearch setups, and extra exporters.
+- **Review customizations.** List non-default Helm values, Ingress rules, external Elasticsearch/OpenSearch setups, and extra exporters.
 
 :::info Links
 
 - [Supported environments](../../../reference/supported-environments.md#component-version-matrix)
 - [8.8 release notes](../../../reference/announcements-release-notes/880/880-release-notes.md)
-- [Helm Chart 8.7 → 8.8 technical details](../../operational-guides/update-guide/870-to-880.md)
+- [Helm chart 8.7 → 8.8 technical details](../../operational-guides/update-guide/870-to-880.md)
   :::
 
 ## Step 2 - Assess Camunda platform changes
