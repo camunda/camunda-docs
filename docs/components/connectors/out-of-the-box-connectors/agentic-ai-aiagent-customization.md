@@ -2,27 +2,23 @@
 id: agentic-ai-aiagent-customization
 sidebar_label: Customization
 title: AI Agent connector customization
-description: Customization of the AI Agent connector in self-managed/hybrid deployments
+description: Customization of the AI Agent connector in self-managed or hybrid deployments
 ---
 
-In a self-managed or [hybrid](../../../reference/glossary.md#hybrid-mode) environment, you can customize and extend
-the [AI Agent connector](./agentic-ai-aiagent.md) to suit your specific needs.
+In a self-managed or [hybrid](../../../reference/glossary.md#hybrid-mode) environment, you can customize and extend the [AI Agent connector](./agentic-ai-aiagent.md) to suit your specific needs.
 
 For example, you can:
 
-- implement custom storage backends for conversation history
-- add support for additional AI models
-- inject additional logic into the agent execution flow
+- Implement custom storage backends for conversation history
+- Add support for additional AI models
+- Inject additional logic into the agent execution flow
 
 ## Prerequisites
 
-This guide assumes starting from a fresh Spring Boot project and running a customized AI Agent connector in a
-self-managed or hybrid environment.
+This guide assumes you are starting from a fresh Spring Boot project and intend to run a customized AI Agent connector in a self-managed or hybrid environment.
 
-1. Create a new Spring Boot project
-2. Add
-   the [Camunda Connector Spring Boot Starter](../custom-built-connectors/connector-sdk.md#spring-boot-starter-runtime)
-   and the agentic AI dependencies to your `pom.xml`:
+1. Create a new Spring Boot project.
+2. Add the [Camunda Connector Spring Boot Starter](../custom-built-connectors/connector-sdk.md#spring-boot-starter-runtime) and the Agentic AI dependencies to your `pom.xml`:
 
    ```xml
    <project>
@@ -55,9 +51,8 @@ self-managed or hybrid environment.
    ```
 
 3. Configure the SDK to connect to your cluster according
-   to [the Camunda SDK documentation](../../../apis-tools/spring-zeebe-sdk/getting-started.md#configuring-the-camunda-8-connection)
-4. If you want to only run the AI Agent Client connector, disable the other agentic AI connectors provided by the
-   `connector-agentic-ai` dependency in your `application.yml`:
+   to [the Camunda SDK documentation](../../../apis-tools/spring-zeebe-sdk/getting-started.md#configuring-the-camunda-8-connection).
+4. To only run the AI Agent Client connector, disable the other agentic AI connectors provided by the `connector-agentic-ai` dependency in your `application.yml`:
 
    ```yaml
    camunda:
@@ -72,34 +67,20 @@ self-managed or hybrid environment.
              enabled: false
    ```
 
-5. In case the default AI Agent connector is connected to your engine (for example because you are connecting to SaaS),
-   you
-   can override the registered AI Agent connector job worker type by setting the `CONNECTOR_AI_AGENT_TYPE` environment
-   variable to a custom value (such as `my-ai-agent`) when starting your application. This will allow you to use your
-   custom connector in combination with a [template configured](../use-connectors-in-hybrid-mode.md) to the
-   `my-ai-agent` job worker type.
+5. If the default AI Agent connector is already connected to your engine (for example, if you are connecting to SaaS), you can override the registered AI Agent connector job worker type by setting the `CONNECTOR_AI_AGENT_TYPE` environment variable to a custom value (such as `my-ai-agent`) when starting your application.
+   This allows you to use your custom connector in combination with a [template configured](../use-connectors-in-hybrid-mode.md) for the `my-ai-agent` job worker type.
 
 ## Customize individual components
 
 :::tip
-Instead of the example below, you can also use other Spring mechanisms to customize the AI Agent connector, such as
-using Aspect Oriented Programming (AOP) to intercept and customize method calls.
+Instead of the example below, you can also use other Spring mechanisms to customize the AI Agent connector, such as using Aspect Oriented Programming (AOP) to intercept and modify method calls.
 :::
 
-Any component of the AI Agent connector is registered as a Spring bean and annotated with the
-`@ConditionalOnMissingBean`
-annotation. This means you can override any of the components by defining your own bean with the same type in your
-custom
-project.
+Each component of the AI Agent connector is registered as a Spring bean and annotated with the `@ConditionalOnMissingBean` annotation. This means you can override any component by defining your own bean of the same type in your custom project.
 
-For example, to customize the agent initialization logic, you can create a new bean that implements the
-`AgentInitializer`
-interface and register it in your Spring context. In the example below, this is done by using the `@Component`
-annotation,
-but other Spring Boot mechanisms like `@Bean` producer methods work as well.
+For example, to customize the agent initialization logic, you can create a new bean that implements the `AgentInitializer` interface and register it in your Spring context. In the example below, this is done using the `@Component` annotation, but other Spring Boot mechanisms—like `@Bean` producer methods—work as well.
 
-The example below wraps the default initialization implementation with additional logging, but you can add any custom
-logic you need.
+The following example wraps the default initialization implementation with additional logging, but you can insert any custom logic as needed:
 
 ```java
 
@@ -130,11 +111,9 @@ public class MyCustomAgentInitializer implements AgentInitializer {
 
 ## Custom conversation storage
 
-The AI Agent connector ships with a set of default storage backends for conversation history, but you can also implement
-your own storage backend to suit your needs. Similar to the agent initialization example above, you can register a bean
-implementing the `ConversationStore` interface to provide your own storage implementation.
+The AI Agent connector includes a set of default storage backends for conversation history, but you can also implement your own to meet specific needs. Similar to the agent initialization example above, you can register a bean that implements the `ConversationStore` interface to provide your own storage implementation.
 
-The following example shows how to implement a store acting on a Spring Data JPA repository:
+The following example shows how to implement a custom store using a Spring Data JPA repository:
 
 ```java
 
@@ -167,8 +146,7 @@ public class MyConversationStore implements ConversationStore {
 }
 ```
 
-The actual storage logic lives within the session implementation you'll need to provide, which exposes methods to read
-and write the messages from the runtime memory:
+The actual storage logic lives within the session implementation you'll need to provide, which exposes methods to read and write the messages from the runtime memory:
 
 ```java
 public interface ConversationSession {
@@ -178,11 +156,8 @@ public interface ConversationSession {
 }
 ```
 
-After implementing the custom store, you can reference the store type in your AI Agent connector configuration (see
-[memory configuration](./agentic-ai-aiagent.md#memory)):
+After implementing the custom store, you can reference the store type in your AI Agent connector configuration (see [memory configuration](./agentic-ai-aiagent.md#memory)):
 
-1. In the **Memory** group of the AI Agent connector properties, set the **Memory storage type** to **Custom
-   Implementation**.
-2. In the **Implementation type** field, enter the type value of your custom store implementation (`my-conversation` in
-   the example above).
+1. In the **Memory** group of the AI Agent connector properties, set the **Memory storage type** to **Custom implementation**.
+2. In the **Implementation type** field, enter the type value of your custom store implementation (`my-conversation` in the example above).
 3. Run your process model. It should now use your custom conversation store for storing the conversation history.
