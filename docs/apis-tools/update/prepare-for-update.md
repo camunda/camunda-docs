@@ -7,6 +7,12 @@ description: "Prepare your development environment and applications for the Camu
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
+:::warning
+This documentation page is a work in progress and may contain incomplete, placeholder, or evolving content. While the core concepts introduced in Camunda 8.8 are stable, details and sections here are actively being refined.
+
+See [release announcements](/reference/announcements-release-notes/880/880-announcements.md), [release notes](/reference/announcements-release-notes/880/880-release-notes.md), and the [quality board](https://github.com/orgs/camunda/projects/187/views/15) for more detail on what's included in Camunda 8.8.
+:::
+
 This guide provides detailed steps for developers to prepare their applications and local development environments before the platform update to Camunda 8.8.
 TODO add explanation of breaking changes (Identity? CPT? ) if any and other info
 Preparing your applications for Camunda 8.8 requires upgrade of an SDK, environment updates, and testing changes. This guide walks you through each step to ensure a smooth transition.

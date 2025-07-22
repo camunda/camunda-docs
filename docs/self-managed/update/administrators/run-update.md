@@ -8,6 +8,12 @@ import DocCardList from '@theme/DocCardList';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
+:::warning
+This documentation page is a work in progress and may contain incomplete, placeholder, or evolving content. While the core concepts introduced in Camunda 8.8 are stable, details and sections here are actively being refined.
+
+See [release announcements](/reference/announcements-release-notes/880/880-announcements.md), [release notes](/reference/announcements-release-notes/880/880-release-notes.md), and the [quality board](https://github.com/orgs/camunda/projects/187/views/15) for more detail on what's included in Camunda 8.8.
+:::
+
 Execute the platform update to Camunda 8.8 following your planned strategy. This guide covers platform coordination and validation procedures, with references to detailed technical execution steps.
 
 ## Before you begin
@@ -30,10 +36,10 @@ For optimal stability and minimal risk, follow this recommended component update
 
 1. **Elasticsearch/OpenSearch** - Data layer
 2. **Orchestration Cluster** (non-gateway nodes first) - Core processing engine
-4. **Optimize** (can be updated in parallel) - Web applications
-5. **Identity/Keycloak** - Authentication and authorization
-6. **Connectors** - Integration components
-7. **Web Modeller and Console** - Design and management components do not have dependency on Orchestration cluster
+3. **Optimize** (can be updated in parallel) - Web applications
+4. **Identity/Keycloak** - Authentication and authorization
+5. **Connectors** - Integration components
+6. **Web Modeller and Console** - Design and management components do not have dependency on Orchestration cluster
 7. **Application and Job Workers** - when needed
 
 :::
@@ -53,7 +59,6 @@ This guide provides:
 - Version-specific configuration changes
 - Component-by-component update steps
 - Troubleshooting guidance for common issues
-
 
 ### Docker Images Update
 
@@ -196,7 +201,6 @@ curl localhost:9200/_cat/shards?v | grep -E "(UNASSIGNED|RED)"
 
 ### Performance monitoring
 
-
 **Resource monitoring:**
 
 ```bash
@@ -210,7 +214,6 @@ kubectl get events --sort-by='.lastTimestamp' | grep -E "(OOMKilled|Evicted)"
 # Monitor resource usage over time
 watch kubectl top pods
 ```
-
 
 **Platform metrics:**
 
@@ -264,11 +267,10 @@ grep -E "(connection|timeout|pool)" /var/log/camunda/*.log
 If critical issues are discovered, follow the platform restore procedure:
 
 :::caution restore limitations
-Camunda 8 doesn't support automatic rollbacks once data migrations have completed. 
+Camunda 8 doesn't support automatic rollbacks once data migrations have completed.
 :::
 
 ### Helm Restore (TODO )
-
 
 ## Post-update coordination
 

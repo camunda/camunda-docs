@@ -4,13 +4,19 @@ title: "Prepare and Plan an update"
 description: "Prepare and Plan your update to Camunda 8.8 on Self-Managed - Administrator guide."
 ---
 
+:::warning
+This documentation page is a work in progress and may contain incomplete, placeholder, or evolving content. While the core concepts introduced in Camunda 8.8 are stable, details and sections here are actively being refined.
+
+See [release announcements](/reference/announcements-release-notes/880/880-announcements.md), [release notes](/reference/announcements-release-notes/880/880-release-notes.md), and the [quality board](https://github.com/orgs/camunda/projects/187/views/15) for more detail on what's included in Camunda 8.8.
+:::
+
 A successful Camunda 8.8 update requires thorough planning. This guide helps you assess your infrastructure, understand operational requirements, and choose the right update strategy for your environment.
 
 ## Step 1: Identify your upgrade path
 
 - Determine your current and target versions to plan the update path.
 - Upgrade to the latest 8.7 patch version before starting upgrade to 8.8
-- All Orchestration cluster component should be upgraded together - ZeeBe, Operate, Tasklist and Identity. 
+- All Orchestration cluster component should be upgraded together - ZeeBe, Operate, Tasklist and Identity.
 - Review each none default configurations and changes made to Helm Charts.
 
 ### Version-specific considerations
@@ -28,7 +34,7 @@ Review changes between versions 8.7 and 8.8.
 **Orchestration cluster:**
 
 - Combines Zeebe, Operate, Identity and Tasklist into one orchestration cluster and runs in a single Container/Java app.
-- Simplifies monitoring and scaling 
+- Simplifies monitoring and scaling
 - Unified configuration management
 
 **Deployment impact:**
@@ -42,7 +48,7 @@ Review changes between versions 8.7 and 8.8.
 
 **Operate, Identity & Tasklist:**
 
-- Enhanced user management with new integrated Identity 
+- Enhanced user management with new integrated Identity
 - New streamlined exporter data pipeline
 - Automatic data migration during startup
 - HA deployment for all Orchestration cluster components
@@ -75,7 +81,7 @@ Verify that your infrastructure meets the requirements for Camunda 8.8.
 
 **Component resources:**
 
-- **Orchestration cluster**: New resource allocation patterns in 8.8. Consolidated resource allocation of 8.7 components in to a single ZeeBe Stateful set. Now all the components share the same CPU, Memeory resources limits and requests, optimizing their utilization. We do recommend scheduling performance study to understand resource utililzation for your specific use case and load. 
+- **Orchestration cluster**: New resource allocation patterns in 8.8. Consolidated resource allocation of 8.7 components in to a single ZeeBe Stateful set. Now all the components share the same CPU, Memeory resources limits and requests, optimizing their utilization. We do recommend scheduling performance study to understand resource utililzation for your specific use case and load.
 
 **Infrastructure capacity:**
 
@@ -85,18 +91,18 @@ Verify that your infrastructure meets the requirements for Camunda 8.8.
 ## Step 4: Develop update strategy
 
 Choose an update approach that meets your availability and risk requirements.
-If you use Camunda provided Helm charts upgrade is largely automated. You can refer to our Helm Charts project on GitHub as a blueprint if you use any other alternative deployment methods. We recommend focusing on Helm chart configuration and any changes made to default Helm Chart deployment like Ingress configuration, external Elasticsearch/OpensSearch, additional Exporters or Zeebe configuration parameters. 
+If you use Camunda provided Helm charts upgrade is largely automated. You can refer to our Helm Charts project on GitHub as a blueprint if you use any other alternative deployment methods. We recommend focusing on Helm chart configuration and any changes made to default Helm Chart deployment like Ingress configuration, external Elasticsearch/OpensSearch, additional Exporters or Zeebe configuration parameters.
 
 ### Camunda Helm Charts Upgrade
 
-We are providing a detailed upgrade guide when you upgrade Camunda deployed in Kubernetes using our Helm charts. 
+We are providing a detailed upgrade guide when you upgrade Camunda deployed in Kubernetes using our Helm charts.
 TODO Add Card with a link
 You could also refer to our [Deployment Reference architecture library](../../reference-architecture/reference-architecture.md) to learn more.
 
 ## Step 5: Create update timeline
 
 Develop a realistic timeline that accounts for all phases of the update.
- 
+
 ### Pre-update phase (1-2 weeks)
 
 - Environment preparation and testing
@@ -113,7 +119,7 @@ With Camunda 8.8 release Operate and Zeebe data migration is running on a backgr
 
 - Platform functional testing and validation
 - Performance monitoring and optimization
-- Update Operational procedures 
+- Update Operational procedures
 
 ## Next steps
 
