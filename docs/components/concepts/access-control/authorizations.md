@@ -14,6 +14,9 @@ keywords:
   ]
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Authorization in Camunda 8 Orchestration Cluster
 
 ## Overview
@@ -75,9 +78,23 @@ Authorizations can be activated/deactivated on a per-cluster level by:
 
 Enable authorizations in your deployment using:
 
+<Tabs>
+  <TabItem value="yaml" label="application.yaml" default>
 ```yaml
 camunda.security.authorizations.enabled: true
 ```
+  </TabItem>
+  <TabItem value="env" label="Environment variables">
+```yaml
+CAMUNDA_SECURITY_AUTHORIZATIONS_ENABLED=true
+```
+  </TabItem>
+  <TabItem value="helm" label="Helm values">
+```yaml
+global.security.authorizations.enabled=true
+```
+  </TabItem>
+</Tabs>
 
 ## Resources and Permissions
 
@@ -85,39 +102,39 @@ camunda.security.authorizations.enabled: true
 
 The following table lists all resources that support authorization in Camunda 8 Orchestration Cluster, along with the available permissions per resource. This applies to Camunda 8 Orchestration Cluster (Zeebe, Operate, Tasklist, Orchestration Cluster APIs).
 
-| Resource Type                        | Resource Key Example                                    | Supported Permissions                                                                                                      |
-| ------------------------------------ | ------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| **Application**                      | `Operate`, `Tasklist`, `Identity`, `*`                  | `ACCESS`                                                                                                                   |
-| **Authorization**                    | `*`                                                     | `CREATE`, `READ`, `UPDATE`, `DELETE`                                                                                       |
-| **Batch**                            | `*`                                                     | `CREATE`, `READ`, `DELETE`                                                                                                 |
-| **Decision Definition**              | `*`, `decisionId: order_decision`                       | `CREATE_DECISION_INSTANCE`, `READ_DECISION_DEFINITION`, `READ_DECISION_INSTANCE`, `DELETE_DECISION_INSTANCE`               |
-| **Decision Requirements Definition** | `*`, `decisionRequirementsDefinitionId: order_decision` | `CREATE`, `READ`, `UPDATE`                                                                                                 |
-| **Group**                            | `*`, `groupId: accounting`                              | `CREATE`, `READ`, `UPDATE`, `DELETE`                                                                                       |
-| **Mapping Rule**                    | `*`                                                     | `CREATE`, `READ`, `UPDATE`, `DELETE`                                                                                       |
-| **Message**                          | `*`                                                     | `CREATE`, `READ`                                                                                                           |
-| **Process Definition**               | `*`, `bpmnProcessId: order_process`                     | `CREATE_PROCESS_INSTANCE`, `READ_PROCESS_DEFINITION`, `READ_PROCESS_INSTANCE`, `READ_USER_TASK`, `UPDATE_PROCESS_INSTANCE` |
-| **Resource**                         | `*`                                                     | `CREATE`, `DELETE_DRD`, `DELETE_FORM`, `DELETE_PROCESS`                                                                    |
-| **Role**                            | `*`                                                     | `CREATE`, `READ`, `UPDATE`, `DELETE`                                                                                       |
-| **System**                           | `*`                                                     | `READ`, `UPDATE`                                                                                                           |
-| **Tenant**                          | `*`, `tenantId:tenantA`                                 | `CREATE`, `READ`, `UPDATE`, `DELETE`                                                                                       |
-| **Users**                            | `*`, `username: felix.mueller`                          | `CREATE`, `READ`, `UPDATE`, `DELETE`                                                                                       |
+| Resource Type                        | Resource Key Example                                    | Supported Permissions                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| ------------------------------------ | ------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Application**                      | `Operate`, `Tasklist`, `Identity`, `*`                  | `ACCESS`                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| **Authorization**                    | `*`                                                     | `CREATE`, `READ`, `UPDATE`, `DELETE`                                                                                                                                                                                                                                                                                                                                                                                                      |
+| **Batch**                            | `*`                                                     | `CREATE`, `CREATE_BATCH_OPERATION_CANCEL_PROCESS_INSTANCE`, `CREATE_BATCH_OPERATION_DELETE_PROCESS_INSTANCE`, `CREATE_BATCH_OPERATION_MIGRATE_PROCESS_INSTANCE`, `CREATE_BATCH_OPERATION_MODIFY_PROCESS_INSTANCE`, `CREATE_BATCH_OPERATION_RESOLVE_INCIDENT`, `CREATE_BATCH_OPERATION_DELETE_DECISION_INSTANCE`, `CREATE_BATCH_OPERATION_DELETE_DECISION_DEFINITION`, `CREATE_BATCH_OPERATION_DELETE_PROCESS_DEFINITION`, `READ` `UPDATE` |
+| **Decision Definition**              | `*`, `decisionId: order_decision`                       | `CREATE_DECISION_INSTANCE`, `READ_DECISION_DEFINITION`, `READ_DECISION_INSTANCE`, `DELETE_DECISION_INSTANCE`                                                                                                                                                                                                                                                                                                                              |
+| **Decision Requirements Definition** | `*`, `decisionRequirementsDefinitionId: order_decision` | `READ`                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| **Group**                            | `*`, `groupId: accounting`                              | `CREATE`, `READ`, `UPDATE`, `DELETE`                                                                                                                                                                                                                                                                                                                                                                                                      |
+| **Mapping Rule**                     | `*`                                                     | `CREATE`, `READ`, `UPDATE`, `DELETE`                                                                                                                                                                                                                                                                                                                                                                                                      |
+| **Message**                          | `*`                                                     | `CREATE`, `READ`                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| **Process Definition**               | `*`, `bpmnProcessId: order_process`                     | `CREATE_PROCESS_INSTANCE`, `READ_PROCESS_DEFINITION`, `READ_PROCESS_INSTANCE`, `READ_USER_TASK`, `UPDATE_PROCESS_INSTANCE`, `UPDATE_USER_TASK`                                                                                                                                                                                                                                                                                            |
+| **Resource**                         | `*`,`formId:my_form`, `bpmnProcessId:order_process`     | `CREATE`, `DELETE_DRD`, `DELETE_FORM`, `DELETE_PROCESS`, `DELETE_RESOURCE`                                                                                                                                                                                                                                                                                                                                                                |
+| **Role**                             | `*`                                                     | `CREATE`, `READ`, `UPDATE`, `DELETE`                                                                                                                                                                                                                                                                                                                                                                                                      |
+| **System**                           | `*`                                                     | `READ`, `UPDATE`                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| **Tenant**                           | `*`, `tenantId:tenantA`                                 | `CREATE`, `READ`, `UPDATE`, `DELETE`                                                                                                                                                                                                                                                                                                                                                                                                      |
+| **User**                             | `*`, `username: felix.mueller`                          | `CREATE`, `READ`, `UPDATE`, `DELETE`                                                                                                                                                                                                                                                                                                                                                                                                      |
 
 ## Default Roles
 
 Camunda provides predefined roles to simplify access management:
 
-| Role Name       | Purpose                                                                         | Typical Authorizations                                                                                                                              |
-| --------------- | ------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `admin`         | Full control over all orchestration resources and applications.                 | All permissions for all resources: `READ`, `CREATE`, `UPDATE`, `DELETE`, including `ACCESS` to all applications.                                    |
-| `readonlyadmin` | Audit-focused users who need read-only access across the orchestration cluster. | `READ` for all resources, including `READ_PROCESS_DEFINITION`, `READ_PROCESS_INSTANCE`, `READ_USER_TASK`, etc.                                      |
-| `connectors`    | Technical role for executing connector calls.                                   | `READ_PROCESS_DEFINITION` on **Process Definition** (`*`), `UPDATE_PROCESS_INSTANCE` on **Process Definition** (`*`), `CREATE` on **Message** (`*`) |
-| `rpa`           | Role for RPA workers.                                                           | `READ` on **Resource** (`*`), `UPDATE_PROCESS_INSTANCE` on **Process Definition** (`*`)                                                             |
+| Role ID          | Purpose                                                                         | Typical Authorizations                                                                                                                              |
+| ---------------- | ------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `admin`          | Full control over all orchestration resources and applications.                 | All permissions for all resources: `READ`, `CREATE`, `UPDATE`, `DELETE`, including `ACCESS` to all applications.                                    |
+| `readonly-admin` | Audit-focused users who need read-only access across the orchestration cluster. | `READ` for all resources, including `READ_PROCESS_DEFINITION`, `READ_PROCESS_INSTANCE`, `READ_USER_TASK`, etc.                                      |
+| `connectors`     | Technical role for executing connector calls.                                   | `READ_PROCESS_DEFINITION` on **Process Definition** (`*`), `UPDATE_PROCESS_INSTANCE` on **Process Definition** (`*`), `CREATE` on **Message** (`*`) |
+| `rpa`            | Role for RPA workers.                                                           | `READ` on **Resource** (`*`), `UPDATE_PROCESS_INSTANCE` on **Process Definition** (`*`)                                                             |
 
 ### Role Assignment in SaaS
 
 - **admin**: Automatically assigned to Organization Owner and Admin
 - **connectors**: Automatically assigned to Connectors Runtime in Cluster deployment
-- **readonlyadmin**: Automatically assigned to Camunda Support Agents for support cases
+- **readonly-admin**: Automatically assigned to Camunda Support Agents for support cases
 
 ## Common Use Cases
 
@@ -134,11 +151,11 @@ Users need specific application permissions to access Orchestration Cluster comp
 
 Within applications, users need additional permissions for specific resources, e.g.:
 
-- **Process Related**
+- **Process Related**: Resource Type `processDefinition`
   - `READ_PROCESS_DEFINITION` to view process models
   - `CREATE_PROCESS_INSTANCE` to start new processes
   - `UPDATE_PROCESS_INSTANCE` to modify running instances
-- **Decision Related**
+- **Decision Related**: Resource Type `decisionDefinition`
   - `READ_DECISION_DEFINITION` to view DMN models
   - `CREATE_DECISION_INSTANCE` to execute decisions
 
@@ -146,5 +163,5 @@ Within applications, users need additional permissions for specific resources, e
 
 When implementing your own integrations by e.g. using a Camunda Client, you should consider the following:
 
-- **Job Workers**
+- **Job Workers**: Resource Type `processDefinition`
   - `UPDATE_PROCESS_INSTANCE` to complete jobs for the specific process definitions
