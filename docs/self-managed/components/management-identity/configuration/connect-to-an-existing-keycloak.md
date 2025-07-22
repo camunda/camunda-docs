@@ -80,7 +80,7 @@ To connect Identity to an existing Keycloak instance, take the following steps f
 </Tabs>
 
 :::note What does Identity create when starting?
-Identity creates a base set of configurations required to function successfully. To understand more about what is created and why, see [the starting configuration](/self-managed/identity/miscellaneous/starting-configuration.md).
+Identity creates a base set of configurations required to function successfully. To understand more about what is created and why, see [the starting configuration](/self-managed/components/management-identity/miscellaneous/starting-configuration.md).
 :::
 
 ## Adjustments to Helm Values file

@@ -21,7 +21,7 @@ The data purge feature can be used to:
 
 ## Purge data
 
-You will need access to the Cluster API as described in the [Cluster scaling guide](self-managed/zeebe-deployment/operations/cluster-scaling.md) to perform the purge.
+You will need access to the Cluster API as described in the [Cluster scaling guide](/self-managed/components/orchestration-cluster/zeebe-deployment/operations/cluster-scaling.md) to perform the purge.
 
 :::danger
 The purge operation is irreversible. It will delete the runtime data in the cluster and the historical data in the exporters! Make sure to back up your data before proceeding.

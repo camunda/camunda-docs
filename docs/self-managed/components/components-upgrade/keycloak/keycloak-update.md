@@ -9,5 +9,5 @@ When updating Keycloak, follow the [Keycloak upgrade guide](https://www.keycloak
 :::danger
 When updating Keycloak, ensure that you carry along its existing database.
 **Do not** update by creating a new Keycloak instance and re-importing your users from external sources (e.g. LDAP) as this will result in new Keycloak-internal ids.
-Otherwise, users may not be able to access their data (e.g. Optimize collections and [Web Modeler projects](self-managed/modeler/web-modeler/troubleshooting/troubleshoot-missing-data.md)).
+Otherwise, users may not be able to access their data (e.g. Optimize collections and [Web Modeler projects](/self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-missing-data.md)).
 :::

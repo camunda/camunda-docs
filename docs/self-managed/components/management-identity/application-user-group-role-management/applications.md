@@ -65,7 +65,7 @@ The application type is selected when you [create an application](#add-an-applic
 
 ## Application permissions
 
-You can control the access an application has in Camunda 8 by [assigning permissions](/self-managed/identity/access-management/manage-permissions.md#assign-a-permission-to-an-application) to the application.
+You can control the access an application has in Camunda 8 by [assigning permissions](/self-managed/components/management-identity/access-management/manage-permissions.md#assign-a-permission-to-an-application) to the application.
 
 :::info
 For an overview of permissions available, see [available permissions](/self-managed/components/management-identity/access-management/access-management-overview.md#permissions).
