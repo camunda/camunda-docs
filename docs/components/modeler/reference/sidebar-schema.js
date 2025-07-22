@@ -14,6 +14,7 @@ module.exports = {
         "components/modeler/reference/modeling-guidance/rules/escalation-reference",
         "components/modeler/reference/modeling-guidance/rules/feel",
         "components/modeler/reference/modeling-guidance/rules/message-reference",
+        "components/modeler/reference/modeling-guidance/rules/no-loop",
       ],
     },
   ],
