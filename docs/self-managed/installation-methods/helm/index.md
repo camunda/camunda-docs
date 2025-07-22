@@ -59,7 +59,7 @@ Refer to the configuration documentation for each component for additional param
 
 - [Operate](/self-managed/components/orchestration-cluster/operate-deployment/operate-configuration.md#settings-for-opensearch)
 - [Tasklist](/self-managed/components/orchestration-cluster/tasklist-deployment/tasklist-configuration.md#elasticsearch-or-opensearch)
-- [Optimize](/self-managed/optimize-deployment/configuration/system-configuration.md#opensearch)
+- [Optimize](/self-managed/components/optimize/configuration/system-configuration.md#opensearch)
   :::
 
 ![Camunda 8 Self-Managed Architecture Diagram](./assets/camunda-platform-8-self-managed-architecture-diagram-combined-ingress.png)

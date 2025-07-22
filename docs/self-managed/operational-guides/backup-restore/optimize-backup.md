@@ -23,8 +23,8 @@ Optimize provides an API to trigger a backup and retrieve information about a gi
 Usage of this API requires the backup store to be configured for the component.
 
 - Optimize configuration
-  - [Elasticsearch](/self-managed/optimize-deployment/configuration/system-configuration.md#elasticsearch-backup-settings)
-  - [OpenSearch](/self-managed/optimize-deployment/configuration/system-configuration.md#opensearch-backup-settings)
+  - [Elasticsearch](/self-managed/components/optimize/configuration/system-configuration.md#elasticsearch-backup-settings)
+  - [OpenSearch](/self-managed/components/optimize/configuration/system-configuration.md#opensearch-backup-settings)
 
 Additionally, it requires the same backup store to be configured on your chosen datastore.
 
