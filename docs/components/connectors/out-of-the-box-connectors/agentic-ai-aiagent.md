@@ -251,10 +251,10 @@ As documents are subject to expiration, to avoid losing the conversation history
 | Document TTL               | No       | <p>Time-to-live (TTL) for documents containing the conversation history. Use this field to set a custom TTL matching your expected process lifetime.</p><p>The [default cluster TTL](../../document-handling/getting-started.md#saas) is used if this value is not configured.</p> |
 | Custom document properties | No       | <p>Optional map of properties to store with the document.</p><p>Use this option to reference custom metadata you might want to use when further processing conversation documents.</p>                                                                                             |
 
-#### Custom Implementation
+#### Custom implementation
 
 :::info
-This option is only supported if you are using a customized AI Agent connector in a self-managed or hybrid setup.
+This option is only supported if you are using a customized AI Agent connector in a Self-Managed or hybrid setup.
 See [customization](./agentic-ai-aiagent-customization.md) for more details.
 :::
 
