@@ -15,7 +15,7 @@ Ensure you [authenticate](./orchestration-cluster-api-rest-authentication.md) be
 :::
 
 :::note
-The Orchestration Cluster API only supports user tasks managed by Camunda (formerly known as [Zeebe user tasks](/apis-tools/migration-manuals/migrate-to-camunda-user-tasks.md), which may still appear as such in your XML content).
+The Orchestration Cluster API only supports user tasks managed by Camunda (formerly known as [Zeebe user tasks](/apis-tools/update/migrate-to-camunda-user-tasks.md), which may still appear as such in your XML content).
 :::
 
 ## Context paths
