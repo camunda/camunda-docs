@@ -30,7 +30,7 @@ Once validation is complete, deploy your process application to cluster stages i
 1. Select the **Implement** tab.
 1. Select **Deploy** to open the **Deploy process application** modal.
    <p><img src={DeployImg} alt="Deploy a process application" /></p>
-1. Turn on the toggle for the cluster stage you want to deploy to. In Self-Managed, you may be prompted to enter your cluster details manually if no [configuration](/self-managed/modeler/web-modeler/configuration/configuration.md#clusters) is provided.
+1. Turn on the toggle for the cluster stage you want to deploy to. In Self-Managed, you may be prompted to enter your cluster details manually if no [configuration](/self-managed/components/modeler/web-modeler/configuration/configuration.md#clusters) is provided.
 1. Perform any other actions as required, such as:
    - Unpausing the chosen cluster if it has been auto-paused. Select **Resume cluster** within the **Cluster Details**.
    - Managing the cluster. Select **Manage**.
@@ -39,7 +39,7 @@ Once validation is complete, deploy your process application to cluster stages i
 
 All BPMN, DMN, and form files contained in the process application folder are deployed as a single bundle.
 
-In Self-Managed, you can deploy your diagram to the cluster defined in your Web Modeler [configuration](/self-managed/modeler/web-modeler/configuration/configuration.md#clusters). You should have the `Zeebe` [role](/self-managed/identity/application-user-group-role-management/manage-roles.md) assigned in Identity to be authorized to deploy.
+In Self-Managed, you can deploy your diagram to the cluster defined in your Web Modeler [configuration](/self-managed/components/modeler/web-modeler/configuration/configuration.md#clusters). You should have the `Zeebe` [role](/self-managed/identity/application-user-group-role-management/manage-roles.md) assigned in Identity to be authorized to deploy.
 
 :::note
 If any resource fails to deploy, the whole deployment [fails](#deployment-errors) and the cluster state remains unchanged. This safely ensures that a process application cannot be deployed incompletely or in an inconsistent state.

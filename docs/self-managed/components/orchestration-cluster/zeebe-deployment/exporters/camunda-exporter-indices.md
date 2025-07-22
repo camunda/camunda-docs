@@ -9,12 +9,12 @@ Index diagrams for all the Camunda Exporter indices.
 
 ## Operate indices
 
-- [Operate index diagrams](/self-managed/zeebe-deployment/exporters/index-diagrams/operate-diagrams.md)
+- [Operate index diagrams](/self-managed/components/orchestration-cluster/zeebe-deployment/exporters/index-diagrams/operate-diagrams.md)
 
 ## Tasklist indices
 
-- [Tasklist index diagrams](/self-managed/zeebe-deployment/exporters/index-diagrams/tasklist-diagrams.md)
+- [Tasklist index diagrams](/self-managed/components/orchestration-cluster/zeebe-deployment/exporters/index-diagrams/tasklist-diagrams.md)
 
 ## Camunda Identity indices
 
-- [Camunda Identity index diagrams](/self-managed/zeebe-deployment/exporters/index-diagrams/camunda-diagrams.md)
+- [Camunda Identity index diagrams](/self-managed/components/orchestration-cluster/zeebe-deployment/exporters/index-diagrams/camunda-diagrams.md)

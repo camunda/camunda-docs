@@ -399,7 +399,7 @@ In Operate, the visualization of the executed path of a process instance is impr
 
 <!-- https://github.com/camunda/web-modeler/issues/9730 -->
 
-You can now [enable TLS-encrypted communication](/self-managed/modeler/web-modeler/configuration/ssl.md#configuring-secure-connections-between-web-modeler-components) between the different Web Modeler components (`webapp`, `restapi`, and `websockets`).
+You can now [enable TLS-encrypted communication](/self-managed/components/modeler/web-modeler/configuration/ssl.md#configuring-secure-connections-between-web-modeler-components) between the different Web Modeler components (`webapp`, `restapi`, and `websockets`).
 
 ### API orchestration getting started journey <span class="badge badge--long" title="This feature affects connectors">Connectors</span>
 
@@ -529,7 +529,7 @@ Creation, due, and follow-up dates are now shown as relative dates in task tiles
 
 <!-- https://github.com/camunda/product-hub/issues/2196 -->
 
-Tasklist sessions are now protected via an [anti CSRF token](/self-managed/tasklist-deployment/tasklist-configuration.md#cross-site-request-forgery-protection).
+Tasklist sessions are now protected via an [anti CSRF token](/self-managed/components/orchestration-cluster/tasklist-deployment/tasklist-configuration.md#cross-site-request-forgery-protection).
 
 ### Instance Modification as Batch <span class="badge badge--long" title="This feature affects Operate">Operate</span>
 

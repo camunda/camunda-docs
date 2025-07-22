@@ -12,4 +12,4 @@ keywords: ["backpressure", "back-pressure", "back pressure"]
 See [Zeebe API RPCs](gateway-service.md) for all available operations. Additionally, review [technical error handling](/apis-tools/zeebe-api/technical-error-handling.md) for a closer look at business logic errors, or [Postman](https://www.postman.com/camundateam/camunda-8-postman/collection/jzgs776/zeebe-api-grpc?action=share&creator=11465105) to experiment with the API.
 
 To authorize the Zeebe API (gRPC) in a [Self-Managed](/self-managed/about-self-managed.md) setup,
-see [client authorization](/self-managed/zeebe-deployment/security/client-authorization.md).
+see [client authorization](/self-managed/components/orchestration-cluster/zeebe-deployment/security/client-authorization.md).

@@ -162,7 +162,7 @@ curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer <TOKE
 
 ## User task access restrictions
 
-User task access restrictions are enabled by default. To disable, set the [`userAccessRestrictionsEnabled` Tasklist environment variable](/self-managed/tasklist-deployment/tasklist-authentication.md?authentication=identity#configure-identity) to `false`. When enabled, Tasklist applies additional security measures to only show tasks based on the logged-in users identity. The tasks displayed are restricted based on the candidate groups, candidate users, and assignee associated with the logged-in user. The benefits of this resource are:
+User task access restrictions are enabled by default. To disable, set the [`userAccessRestrictionsEnabled` Tasklist environment variable](/self-managed/components/orchestration-cluster/tasklist-deployment/tasklist-authentication.md?authentication=identity#configure-identity) to `false`. When enabled, Tasklist applies additional security measures to only show tasks based on the logged-in users identity. The tasks displayed are restricted based on the candidate groups, candidate users, and assignee associated with the logged-in user. The benefits of this resource are:
 
 - Enhanced security: Users only see tasks for which they have the necessary permissions, improving security and preventing unauthorized access.
 - Tasklist customization: The Tasklist interface is tailored to display only relevant tasks for each user, providing a personalized and streamlined experience.

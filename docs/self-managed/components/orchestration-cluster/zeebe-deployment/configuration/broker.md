@@ -116,7 +116,7 @@ management.server:
 
 ### zeebe.broker.gateway
 
-To configure the embedded gateway, see [Gateway config docs](/self-managed/zeebe-deployment/configuration/gateway.md).
+To configure the embedded gateway, see [Gateway config docs](/self-managed/components/orchestration-cluster/zeebe-deployment/configuration/gateway.md).
 
 | Field  | Description                                                                                                                                               | Example value |
 | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |

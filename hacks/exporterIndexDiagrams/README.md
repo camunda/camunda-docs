@@ -1,6 +1,6 @@
 # What is this used for?
 
-There is a documentation [file](/self-managed/zeebe-deployment/exporters/camunda-exporter-indices.md) for
+There is a documentation [file](/self-managed/components/orchestration-cluster/zeebe-deployment/exporters/camunda-exporter-indices.md) for
 Camunda Exporter indices that includes diagrams, currently these are generated manually using the script in this folder.
 
 ## Using schema_to_mermaid.py
@@ -21,7 +21,7 @@ Camunda Exporter indices that includes diagrams, currently these are generated m
 4. Install [python3](https://www.python.org/downloads/)
 5. Set up directory aliases
    ```shell
-   export INDEX_DIAGRAM_DIR=./camunda-docs/docs/self-managed/zeebe-deployment/exporters/index-diagrams
+   export INDEX_DIAGRAM_DIR=./camunda-docs/docs/self-managed/components/orchestration-cluster/zeebe-deployment/exporters/index-diagrams
    ```
 6. Generate the diagram templates which contain the mermaid diagrams as Markdown text.
    ```shell
@@ -58,12 +58,10 @@ Camunda Exporter indices that includes diagrams, currently these are generated m
    -e png \
    -c camunda-docs/hacks/exporterIndexDiagrams/styling.json
    ```
-   
 8. Add the diagram page metadata and description.
    ```shell
    python3 camunda-docs/hacks/exporterIndexDiagrams/add_diagram_description.py
    ```
-   
 9. Delete the diagram templates
 
    ```shell
@@ -73,6 +71,7 @@ Camunda Exporter indices that includes diagrams, currently these are generated m
    ```
 
 10. Add the new diagrams as git changes
-   ```shell
-   cd camunda-docs && git add docs/self-managed/zeebe-deployment/exporters/index-diagrams
-   ```
+
+```shell
+cd camunda-docs && git add docs/self-managed/components/orchestration-cluster/zeebe-deployment/exporters/index-diagrams
+```

@@ -51,7 +51,7 @@ often the Zeebe Gateway, it can be a single application combining Operate, Taskl
 :::
 
 Informally, a healthy cluster is one where the the expected number of
-[brokers and gateways report a healthy status](../../../self-managed/zeebe-deployment/operations/health.md), where every partition has exactly one leader, and
+[brokers and gateways report a healthy status](../../../self-managed/components/orchestration-cluster/zeebe-deployment/operations/health.md), where every partition has exactly one leader, and
 there are `N-1` followers per partition (where `N` is the replication factor).
 
 More formally, given `G` the number of expected gateways, `B` the number of expected brokers, `P` the partition count, and `R` the replication factor, we can
@@ -132,4 +132,4 @@ to understand that a broker is considered:
 There are many components in a broker, but most importantly, each partition in a broker is a separate, independent component. As such, you can roughly
 define the health of a broker as the sum of the health of its partitions.
 
-The health of a broker is reported via its [status health check](../../../self-managed/zeebe-deployment/operations/health.md#broker).
+The health of a broker is reported via its [status health check](../../../self-managed/components/orchestration-cluster/zeebe-deployment/operations/health.md#broker).

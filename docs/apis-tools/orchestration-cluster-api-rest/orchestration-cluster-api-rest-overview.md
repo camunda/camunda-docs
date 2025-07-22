@@ -38,7 +38,7 @@ See [the interactive Orchestration Cluster API Explorer][camunda-api-explorer] f
 
 ## Request and file sizes
 
-You can change the `maxMessageSize` default value of 4MB in the [Gateway](/self-managed/zeebe-deployment/configuration/gateway.md#zeebegatewaynetwork) and [Broker](../../self-managed/zeebe-deployment/configuration/broker.md#zeebebrokernetwork) configuration.
+You can change the `maxMessageSize` default value of 4MB in the [Gateway](/self-managed/components/orchestration-cluster/zeebe-deployment/configuration/gateway.md#zeebegatewaynetwork) and [Broker](../../self-managed/components/orchestration-cluster/zeebe-deployment/configuration/broker.md#zeebebrokernetwork) configuration.
 
 If you do change this value, it is recommended that you also configure the [Deploy resources](./specifications/create-deployment.api.mdx) REST endpoint appropriately. By default, this endpoint allows single file upload and overall data up to 4MB.
 

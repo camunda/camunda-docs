@@ -35,5 +35,5 @@ Disabling variable ingestion means variable-based reports and filters will no lo
 :::
 
 :::note
-When re-enabled, partial or full variable ingestion may happen depending on your cluster [retention](/self-managed/zeebe-deployment/exporters/elasticsearch-exporter.md#retention) configuration.
+When re-enabled, partial or full variable ingestion may happen depending on your cluster [retention](/self-managed/components/orchestration-cluster/zeebe-deployment/exporters/elasticsearch-exporter.md#retention) configuration.
 :::

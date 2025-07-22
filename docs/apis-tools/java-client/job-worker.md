@@ -55,7 +55,7 @@ This error code indicates the Zeebe cluster is currently under too large of a lo
 By backing off, the job worker helps Zeebe by reducing the load.
 
 :::note
-Zeebe's [backpressure mechanism](../../../self-managed/zeebe-deployment/operations/backpressure) can also be configured.
+Zeebe's [backpressure mechanism](../../../self-managed/components/orchestration-cluster/zeebe-deployment/operations/backpressure) can also be configured.
 :::
 
 ## Metrics
@@ -215,7 +215,7 @@ If the worker blocks longer than the job's deadline, the job will **not** be pas
 
 #### Proxying
 
-If you're using a reverse proxy or a load balancer between your worker and your gateway, you may need to configure additional parameters to ensure the job stream is not closed unexpectedly with an error. If you observe regular 504 timeouts, read our guide on [job streaming](../../../self-managed/zeebe-deployment/zeebe-gateway/job-streaming).
+If you're using a reverse proxy or a load balancer between your worker and your gateway, you may need to configure additional parameters to ensure the job stream is not closed unexpectedly with an error. If you observe regular 504 timeouts, read our guide on [job streaming](../../../self-managed/components/orchestration-cluster/zeebe-deployment/zeebe-gateway/job-streaming).
 
 By default, the Java job workers have a stream timeout of one hour. You can overwrite this by calling the `streamTimeout` of the job worker builder:
 

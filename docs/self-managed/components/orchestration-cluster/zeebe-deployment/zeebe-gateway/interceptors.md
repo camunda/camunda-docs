@@ -211,7 +211,7 @@ interceptor, you need to provide your gateway with:
   of the interceptor class, e.g. `com.acme.ExampleInterceptor`
 
 Let's continue with the LoggingInterceptor example. We can provide these
-[configurations](/self-managed/zeebe-deployment/configuration/configuration.md)
+[configurations](/self-managed/components/orchestration-cluster/zeebe-deployment/configuration/configuration.md)
 using a gateway config file, environment variables or a mix of both. We'll be
 using a config file here.
 

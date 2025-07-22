@@ -41,8 +41,8 @@ The backup API can be reached via the Actuator management port, which default de
 :::warning
 Usage of this API requires the backup store to be configured with the **same** repository name.
 
-- [Operate configuration](/self-managed/operate-deployment/operate-configuration.md#backups)
-- [Tasklist configuration](/self-managed/tasklist-deployment/tasklist-configuration.md#backups)
+- [Operate configuration](/self-managed/components/orchestration-cluster/operate-deployment/operate-configuration.md#backups)
+- [Tasklist configuration](/self-managed/components/orchestration-cluster/tasklist-deployment/tasklist-configuration.md#backups)
 
 Additionally, it requires the same backup store to be configured on your chosen datastore.
 

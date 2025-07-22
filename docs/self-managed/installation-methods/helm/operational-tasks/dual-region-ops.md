@@ -324,13 +324,13 @@ In our example, we went with port-forwarding to a localhost, but other alternati
    </summary>
 </details>
 
-1.  Port-forward the service of the Zeebe Gateway to access the [management REST API](/self-managed/zeebe-deployment/configuration/gateway.md#managementserver)
+1.  Port-forward the service of the Zeebe Gateway to access the [management REST API](/self-managed/components/orchestration-cluster/zeebe-deployment/configuration/gateway.md#managementserver)
 
     ```bash
     kubectl --context $CLUSTER_SURVIVING port-forward services/$CAMUNDA_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
     ```
 
-2.  Based on the [Cluster Scaling APIs](/self-managed/zeebe-deployment/operations/cluster-scaling.md), send a request to the Zeebe Gateway to redistribute the load to the remaining brokers, thereby removing the lost brokers.
+2.  Based on the [Cluster Scaling APIs](/self-managed/components/orchestration-cluster/zeebe-deployment/operations/cluster-scaling.md), send a request to the Zeebe Gateway to redistribute the load to the remaining brokers, thereby removing the lost brokers.
     Depending on which region was lost, the load must be redistributed to the remaining brokers, either the even or odd numbered ones. In our example, we have lost `region 1` and with it our uneven brokers. This means we will have to redistribute to our existing even brokers. Make sure to only run the correct one based on the surviving region's brokers.
 
   <Tabs queryString="lost-region">
@@ -538,7 +538,7 @@ desired={<Six viewBox="140 40 680 500" />}
 
 #### Procedure
 
-1. Port-forward the service of the Zeebe Gateway for the [management REST API](/self-managed/zeebe-deployment/configuration/gateway.md#managementserver)
+1. Port-forward the service of the Zeebe Gateway for the [management REST API](/self-managed/components/orchestration-cluster/zeebe-deployment/configuration/gateway.md#managementserver)
 
    ```bash
    kubectl --context $CLUSTER_SURVIVING port-forward services/$CAMUNDA_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
@@ -905,7 +905,7 @@ This step **does not** affect the process instances in any way. Process informat
    kubectl --context $CLUSTER_SURVIVING scale -n $CAMUNDA_NAMESPACE_SURVIVING deployments/$CAMUNDA_RELEASE_NAME-tasklist --replicas 0
    ```
 
-2. Disable the Zeebe Elasticsearch exporters in Zeebe via kubectl using the [exporting API](/self-managed/zeebe-deployment/operations/management-api.md#exporting-api):
+2. Disable the Zeebe Elasticsearch exporters in Zeebe via kubectl using the [exporting API](/self-managed/components/orchestration-cluster/zeebe-deployment/operations/management-api.md#exporting-api):
 
    ```bash
    kubectl --context $CLUSTER_SURVIVING port-forward services/$CAMUNDA_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
@@ -1336,7 +1336,7 @@ desired={<Thirteen viewBox="140 40 680 500" />}
 
 #### How to get there
 
-1. Reactivate the exporters by sending the [exporting API](/self-managed/zeebe-deployment/operations/management-api.md#exporting-api) activation request via the Zeebe Gateway:
+1. Reactivate the exporters by sending the [exporting API](/self-managed/components/orchestration-cluster/zeebe-deployment/operations/management-api.md#exporting-api) activation request via the Zeebe Gateway:
 
    ```bash
    kubectl --context $CLUSTER_SURVIVING port-forward services/$CAMUNDA_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING

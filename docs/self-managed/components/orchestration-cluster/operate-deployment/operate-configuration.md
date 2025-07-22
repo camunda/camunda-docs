@@ -213,7 +213,7 @@ Operate needs a connection to the Zeebe Broker to start the import and execute u
 | camunda.operate.zeebe.secure          | Connection should be secure via Transport Layer Security (TLS).                                                    | false           |
 | camunda.operate.zeebe.certificatePath | Path to certificate used by Zeebe. This is necessary when the certificate isn't registered in the operating system | -               |
 
-Additionally, visit [Zeebe Secure Client Communication](/self-managed/zeebe-deployment/security/secure-client-communication.md) for more details.
+Additionally, visit [Zeebe Secure Client Communication](/self-managed/components/orchestration-cluster/zeebe-deployment/security/secure-client-communication.md) for more details.
 
 ### A snippet from application.yml
 

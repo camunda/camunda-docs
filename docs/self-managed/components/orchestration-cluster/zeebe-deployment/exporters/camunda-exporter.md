@@ -19,7 +19,7 @@ will not be deleted (that is up to the administrator.) A [retention](./camunda-e
 
 ## Configuration
 
-Enable the exporter by configuring the `className` in your [broker configuration](/self-managed/zeebe-deployment/configuration/broker.md#zeebebrokerexporters):
+Enable the exporter by configuring the `className` in your [broker configuration](/self-managed/components/orchestration-cluster/zeebe-deployment/configuration/broker.md#zeebebrokerexporters):
 
 ```yaml
 exporters:

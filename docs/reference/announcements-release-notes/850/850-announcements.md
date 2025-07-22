@@ -66,7 +66,7 @@ For a migration guide, see the [Web Modeler API documentation](/apis-tools/web-m
 
 #### Zeebe 8.5.0 breaks serialization of timestamp values in management API (Self-Managed only)
 
-Zeebe 8.5.0 was released with [a new bug](https://github.com/camunda/camunda/issues/17347) that breaks serialization of timestamp values in management APIs, such as [backup](/self-managed/operational-guides/backup-restore/backup-and-restore.md) and [cluster scaling](/self-managed/zeebe-deployment/operations/cluster-scaling.md).
+Zeebe 8.5.0 was released with [a new bug](https://github.com/camunda/camunda/issues/17347) that breaks serialization of timestamp values in management APIs, such as [backup](/self-managed/operational-guides/backup-restore/backup-and-restore.md) and [cluster scaling](/self-managed/components/orchestration-cluster/zeebe-deployment/operations/cluster-scaling.md).
 Timestamps which were previously serialized as `ISO8061` strings are now serialized as integer values.
 
 Until a fix is delivered in 8.5.1, workarounds include not deserializing timestamp values from affected APIs, or deserializing them as integers.
@@ -160,7 +160,7 @@ Follow the instructions in the [form linking](/components/modeler/web-modeler/ad
 
 #### Deprecated: Zeebe configuration properties for Camunda Identity
 
-The [Zeebe configuration properties for Camunda Identity](/self-managed/zeebe-deployment/configuration/gateway.md#zeebegatewayclustersecurityauthenticationidentity)
+The [Zeebe configuration properties for Camunda Identity](/self-managed/components/orchestration-cluster/zeebe-deployment/configuration/gateway.md#zeebegatewayclustersecurityauthenticationidentity)
 were deprecated in `8.4`. Please use the dedicated Camunda Identity properties or the [corresponding environment variables](/self-managed/identity/miscellaneous/configuration-variables.md#core-configuration).
 
 ### Additional features

@@ -87,7 +87,7 @@ Due to limitations, the Identity `contextPath` approach is unavailable when usin
 
 ## Web Modeler database schema
 
-The Web Modeler `restapi` component requires a [database connection](/self-managed/modeler/web-modeler/configuration/configuration.md#database). This connection should not point to the same database as Keycloak does.
+The Web Modeler `restapi` component requires a [database connection](/self-managed/components/modeler/web-modeler/configuration/configuration.md#database). This connection should not point to the same database as Keycloak does.
 
 ## Gateway timeout on redirect
 

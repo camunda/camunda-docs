@@ -209,11 +209,11 @@ Then, take the contents under `application.yml` and put it under the `operate.co
 
 ## Where to search for configuration options
 
-- [Zeebe Broker](/self-managed/zeebe-deployment/configuration/broker.md)
-- [Zeebe Gateway](/self-managed/zeebe-deployment/configuration/gateway.md)
-- [Operate](/self-managed/operate-deployment/operate-configuration.md)
-- [Tasklist](/self-managed/tasklist-deployment/tasklist-configuration.md)
-- [Web Modeler](/self-managed/modeler/web-modeler/configuration/configuration.md)
+- [Zeebe Broker](/self-managed/components/orchestration-cluster/zeebe-deployment/configuration/broker.md)
+- [Zeebe Gateway](/self-managed/components/orchestration-cluster/zeebe-deployment/configuration/gateway.md)
+- [Operate](/self-managed/components/orchestration-cluster/operate-deployment/operate-configuration.md)
+- [Tasklist](/self-managed/components/orchestration-cluster/tasklist-deployment/tasklist-configuration.md)
+- [Web Modeler](/self-managed/components/modeler/web-modeler/configuration/configuration.md)
 - [Console](/self-managed/console-deployment/configuration/configuration.md)
 - [Connectors](/self-managed/connectors-deployment/connectors-configuration.md)
 - [Identity](/self-managed/identity/miscellaneous/configuration-variables.md)
@@ -335,9 +335,9 @@ zeebe:
       ioThreadCount: "3"
 ```
 
-Next, for each environment variable, we need to find the configuration option in the [Zeebe configuration](/self-managed/zeebe-deployment/configuration/broker.md) section of our documentation.
+Next, for each environment variable, we need to find the configuration option in the [Zeebe configuration](/self-managed/components/orchestration-cluster/zeebe-deployment/configuration/broker.md) section of our documentation.
 
-For `ZEEBE_BROKER_DATA_BACKUP_S3_BUCKETNAME`, we will search this page for anything relating to S3 or bucket name. In this case, the option is in [Zeebe S3 Backup](/self-managed/zeebe-deployment/configuration/broker.md#zeebebrokerdatabackups3)
+For `ZEEBE_BROKER_DATA_BACKUP_S3_BUCKETNAME`, we will search this page for anything relating to S3 or bucket name. In this case, the option is in [Zeebe S3 Backup](/self-managed/components/orchestration-cluster/zeebe-deployment/configuration/broker.md#zeebebrokerdatabackups3)
 with the name `zeebe.broker.data.backup.s3.bucketName`.
 
 In our `config` file, add the `data` section under `zeebe.broker`:
