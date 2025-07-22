@@ -961,7 +961,7 @@ module.exports = {
     },
     {
       type: "category",
-      label: "Upgrade to Camunda 8.8",
+      label: "Update to Camunda 8.8",
       link: {
         type: "doc",
         id: "apis-tools/migration-manuals/index",
@@ -1672,8 +1672,8 @@ module.exports = {
         id: "self-managed/update/index",
       },
       items: [
-        "self-managed/update/administrators/prepare-for-admin-upgrade",
-        "self-managed/update/administrators/run-admin-upgrade",
+        "self-managed/update/administrators/prepare-for-admin-update",
+        "self-managed/update/administrators/run-admin-update",
       ],
     },
   ],

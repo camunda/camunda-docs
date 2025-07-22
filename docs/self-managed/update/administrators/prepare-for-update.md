@@ -1,7 +1,7 @@
 ---
-id: prepare-for-admin-upgrade
-title: "Prepare and Plan an upgrade"
-description: "Prepare and Plan your upgrade to Camunda 8.8 on Self-Managed."
+id: prepare-for-admin-update
+title: "Prepare and Plan an Update"
+description: "Prepare and Plan your update to Camunda 8.8 on Self-Managed."
 ---
 
 :::warning
@@ -12,18 +12,18 @@ See [release announcements](/reference/announcements-release-notes/880/880-annou
 
 A successful Camunda 8.8 update requires thorough planning. This guide helps you assess your infrastructure, understand operational requirements, and choose the right update strategy for your environment.
 
-## Step 1: Identify your upgrade path
+## Step 1: Identify your update path
 
 - Determine your current and target versions to plan the update path.
-- Upgrade to the latest 8.7 patch version before starting upgrade to 8.8
-- All Orchestration cluster component should be upgraded together - ZeeBe, Operate, Tasklist and Identity.
+- Update to the latest 8.7 patch version before starting update to 8.8
+- All Orchestration cluster component should be updated together - ZeeBe, Operate, Tasklist and Identity.
 - Review each none default configurations and changes made to Helm charts.
 
 ### Version-specific considerations
 
 Review the [supported environments](/reference/supported-environments.md#component-version-matrix) to understand version compatibility requirements.
 Always check the [release notes](/reference/announcements-release-notes/880/880-release-notes.md) for version-specific recommendations.
-Always check the [Upgrade release notes](../../operational-guides/update-guide/870-to-880.md)
+Always check the [Update release notes](../../operational-guides/update-guide/870-to-880.md)
 
 ## Step 2: Assess Camunda platform changes
 

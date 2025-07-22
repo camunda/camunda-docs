@@ -1,9 +1,9 @@
 ---
-title: "Camunda 8.8 APIs & tools Upgrade Guide"
-description: "Plan and execute an upgrade from Camunda 8.7 to 8.8. Includes architectural highlights, prerequisites, breaking changes relevant for developers."
+title: "Camunda 8.8 APIs & tools Update Guide"
+description: "Plan and execute an update from Camunda 8.7 to 8.8. Includes architectural highlights, prerequisites, breaking changes relevant for developers."
 ---
 
-# Camunda 8.8 APIs & tools Upgrade Guide
+# Camunda 8.8 APIs & tools Update Guide
 
 :::warning
 This documentation page is a work in progress and may contain incomplete, placeholder, or evolving content. While the core concepts introduced in Camunda 8.8 are stable, details and sections here are actively being refined.
