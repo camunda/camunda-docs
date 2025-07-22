@@ -16,12 +16,12 @@ In professional software development, a typical process application contains res
 
 ## Example: Consumer loan application
 
-Let us consider an application implementing consumer loan approval. It may contain:
+Consider an application implementing consumer loan approval. It may contain:
 
 - A main BPMN process (for example, `consumer-loan-application.bpmn`) to define the workflow.
 - DMN decisions (for example, `interest-rate-calculation.dmn`, `credit-score-calculation.dmn`) for business rules.
 - Forms (for example, `loan-application-review.form`) for user interactions.
-- Various [job workers](https://docs.camunda.io/docs/next/components/concepts/job-workers/) that implement process behavior.
+- Various [job workers](/components/concepts/job-workers.md) that implement process behavior.
 - Additional application code and tests
 
 In a standard standard Java/Maven project, such an application may be structured as follows:
