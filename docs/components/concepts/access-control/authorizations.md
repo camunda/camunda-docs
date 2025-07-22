@@ -46,7 +46,6 @@ Authorization applies only to these orchestration components — it does not app
 ### Key Components
 
 1. **Authorizations**
-
    - Assign permissions to identities for specific resources
    - Example: User 'jonny' is authorized to create new users
    - Example: Group 'marketing' is authorized to delete the Group 'sales'
