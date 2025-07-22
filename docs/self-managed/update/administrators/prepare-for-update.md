@@ -10,7 +10,7 @@ A successful Camunda 8.8 update requires thorough planning. This guide helps you
 
 :::tip Chart version mapping
 Camunda 8.8 corresponds to Helm chart **13.x**.  
-If your current chart is **12.x**, plan to jump directly to the **latest patch** of 13.x (for example, 13.0.1 rather than 13.0.0). [oai_citation:7‡docs.camunda.io](https://docs.camunda.io/docs/next/self-managed/installation-methods/helm/upgrade/upgrade-hc-870-880/)
+If your current chart is **12.x**, plan to jump directly to the **latest patch** of 13.x (for example, 13.0.1 rather than 13.0.0).
 :::
 
 - **Check current version.** Direct updates are supported from 8.7.x to 8.8.x. Upgrade to the latest 8.7 patch **before** moving to 8.8.
