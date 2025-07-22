@@ -17,7 +17,7 @@ A successful Camunda 8.8 update requires thorough planning. This guide helps you
 - Determine your current and target versions to plan the update path.
 - Upgrade to the latest 8.7 patch version before starting upgrade to 8.8
 - All Orchestration cluster component should be upgraded together - ZeeBe, Operate, Tasklist and Identity.
-- Review each none default configurations and changes made to Helm Charts.
+- Review each none default configurations and changes made to Helm charts.
 
 ### Version-specific considerations
 
@@ -91,9 +91,9 @@ Verify that your infrastructure meets the requirements for Camunda 8.8.
 ## Step 4: Develop update strategy
 
 Choose an update approach that meets your availability and risk requirements.
-If you use Camunda provided Helm charts upgrade is largely automated. You can refer to our Helm Charts project on GitHub as a blueprint if you use any other alternative deployment methods. We recommend focusing on Helm chart configuration and any changes made to default Helm Chart deployment like Ingress configuration, external Elasticsearch/OpensSearch, additional Exporters or Zeebe configuration parameters.
+If you use Camunda provided Helm charts upgrade is largely automated. You can refer to our Helm charts project on GitHub as a blueprint if you use any other alternative deployment methods. We recommend focusing on Helm chart configuration and any changes made to default Helm chart deployment like Ingress configuration, external Elasticsearch/OpensSearch, additional Exporters or Zeebe configuration parameters.
 
-### Camunda Helm Charts Upgrade
+### Camunda Helm charts Upgrade
 
 We are providing a detailed upgrade guide when you upgrade Camunda deployed in Kubernetes using our Helm charts.
 TODO Add Card with a link
