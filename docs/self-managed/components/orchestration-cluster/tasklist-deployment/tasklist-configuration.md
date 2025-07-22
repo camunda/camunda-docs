@@ -18,7 +18,7 @@ The following components are configurable:
 
 ## Licensing
 
-import Licensing from '../../self-managed/react-components/licensing.md'
+import Licensing from '../../../../self-managed/react-components/licensing.md'
 
 <Licensing/>
 
@@ -178,7 +178,7 @@ For extended configuration and guidelines, refer to [secure cluster communicatio
 ## Zeebe Elasticsearch or OpenSearch exporter
 
 :::note
-Refer to [supported environments](../../reference/supported-environments.md#camunda-8-self-managed) to find out which versions of Elasticsearch or OpenSearch are supported in a Camunda 8 Self-Managed setup.
+Refer to [supported environments](../../../../reference/supported-environments.md#camunda-8-self-managed) to find out which versions of Elasticsearch or OpenSearch are supported in a Camunda 8 Self-Managed setup.
 :::
 
 For Elasticsearch, Tasklist imports data from Elasticsearch indices created and filled in by [Zeebe Elasticsearch Exporter](https://github.com/camunda/camunda/tree/main/zeebe/exporters/elasticsearch-exporter). <br/>For OpenSearch, Tasklist imports data from indices created and filled in by the [Zeebe OpenSearch exporter](../zeebe-deployment/exporters/opensearch-exporter.md).

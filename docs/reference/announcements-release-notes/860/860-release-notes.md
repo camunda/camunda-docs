@@ -15,9 +15,9 @@ These release notes identify the new features included in 8.6, including [alpha 
 
 ## 8.6 minor
 
-| Release date   | End of maintenance | Changelog(s)                                                                                                                                                  | Release blog                                                          | Update guide                                                                            |
-| -------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| 8 October 2024 | 14 April 2026      | - [ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.6.0) <br /> - [ Connectors ](https://github.com/camunda/connectors/releases/tag/8.6.0) | [Release blog](https://camunda.com/blog/2024/10/camunda-8-6-release/) | [Self-Managed update guide](self-managed/operational-guides/update-guide/850-to-860.md) |
+| Release date   | End of maintenance | Changelog(s)                                                                                                                                                  | Release blog                                                          | Update guide                                                                                   |
+| -------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| 8 October 2024 | 14 April 2026      | - [ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.6.0) <br /> - [ Connectors ](https://github.com/camunda/connectors/releases/tag/8.6.0) | [Release blog](https://camunda.com/blog/2024/10/camunda-8-6-release/) | [Self-Managed update guide](../../../self-managed/components/components-upgrade/850-to-860.md) |
 
 ### Flow control enabled by default <span class="badge badge--long" title="This feature affects SaaS">SaaS</span>
 

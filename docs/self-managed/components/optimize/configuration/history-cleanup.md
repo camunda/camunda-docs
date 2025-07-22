@@ -28,11 +28,11 @@ historyCleanup:
 
 `cronTrigger` - defines at what interval and when the history cleanup should be performed in the format of a cron expression. The default is 1AM every day. To avoid any impact on daily business, it is recommended to schedule the cleanup outside of business hours.
 
-See the [Configuration Description](./system-configuration.md#history-cleanup-settings) for further insights into this property and its format.
+See the [Configuration Description](../configuration/system-configuration.md#history-cleanup-settings) for further insights into this property and its format.
 
 `ttl` - is the global time to live period of data contained in Optimize. The field that defines the age of a particular entity differs between process, decision, and event data. Refer to the corresponding subsection in regard to that.
 The default value is `'P2Y'`, which means by default data older than _2 years_ at the point in time when the cleanup is executed gets cleaned up.
-For details on the notation, see the [Configuration Description](./system-configuration.md#history-cleanup-settings) of the ttl property.
+For details on the notation, see the [Configuration Description](../configuration/system-configuration.md#history-cleanup-settings) of the ttl property.
 
 All the remaining settings are entity type specific and will be explained in the following subsections.
 
@@ -43,7 +43,7 @@ The age of process instance data is determined by the `endTime` field of each pr
 To enable the cleanup of process instance data, the `historyCleanup.processDataCleanup.enabled` property needs to be set to `true`.
 
 Another important configuration parameter for process instance cleanup is the `historyCleanup.processDataCleanup.cleanupMode`. It determines what in particular gets deleted when a process instance is cleaned up. The default value of `all` results in the whole process instance being deleted.
-For other options, review the [configuration description](./system-configuration.md#history-cleanup-settings) of the `historyCleanup.processDataCleanup.cleanupMode` property.
+For other options, review the [configuration description](../configuration/system-configuration.md#history-cleanup-settings) of the `historyCleanup.processDataCleanup.cleanupMode` property.
 
 To set up a process definition-specific `ttl` or different `cleanupMode` you can also provide process specific settings using the `perProcessDefinitionConfig` list which overrides the global settings for the corresponding definition key.
 

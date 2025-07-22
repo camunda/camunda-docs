@@ -154,7 +154,7 @@ You have the following options to publish a process:
 
 ### Deploy to run programmatically
 
-In order to be able to call a process programmatically from or inside another application or service, you simply have to [deploy](#deploy-a-process) it. Once deployed, you can run a process via our APIs, using an API client, or via one the various community SDKs. Read the [documentation on APIs & clients](../../../apis-tools/working-with-apis-tools.md) to learn more.
+In order to be able to call a process programmatically from or inside another application or service, you simply have to [deploy](#deploy-a-process) it. Once deployed, you can run a process via our APIs, using an API client, or via one the various community SDKs. Read the [documentation on APIs & clients](/apis-tools/working-with-apis-tools.md) to learn more.
 
 ### Publish via webhook
 

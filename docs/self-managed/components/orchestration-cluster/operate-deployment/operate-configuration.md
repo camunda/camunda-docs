@@ -18,7 +18,7 @@ The following parts are configurable:
 
 ## Licensing
 
-import Licensing from '../../self-managed/react-components/licensing.md'
+import Licensing from '../../../../self-managed/react-components/licensing.md'
 
 <Licensing/>
 
@@ -242,7 +242,7 @@ For extended configuration and guidelines, refer to [secure cluster communicatio
 ## Zeebe Elasticsearch or OpenSearch exporter
 
 :::note
-Please refer to [Supported Environments](../../reference/supported-environments.md#camunda-8-self-managed) to find out which versions of Elasticsearch or OpenSearch are supported in a Camunda 8 Self-Managed setup.
+Please refer to [Supported Environments](../../../../reference/supported-environments.md#camunda-8-self-managed) to find out which versions of Elasticsearch or OpenSearch are supported in a Camunda 8 Self-Managed setup.
 :::
 
 For Elasticsearch, Operate imports data from indices created and filled in by the [Zeebe Elasticsearch exporter](../zeebe-deployment/exporters/elasticsearch-exporter.md).

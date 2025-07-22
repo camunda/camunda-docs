@@ -4,7 +4,7 @@ title: "Shared Elasticsearch/OpenSearch cluster"
 description: "Operate multiple Optimize instances on a shared Elasticsearch/OpenSearch cluster."
 ---
 
-In case you have a large shared Elasticsearch/OpenSearch cluster that you want to operate multiple Optimize instances on that are intended to run in complete isolation from each other, it is required to change the [`*.settings.index.prefix`](./system-configuration.md#index-settings) setting for each Optimize instance.
+In case you have a large shared Elasticsearch/OpenSearch cluster that you want to operate multiple Optimize instances on that are intended to run in complete isolation from each other, it is required to change the [`*.settings.index.prefix`](./configuration/system-configuration.md#index-settings) setting for each Optimize instance.
 
 :::note Heads Up!
 Although a shared Elasticsearch/OpenSearch cluster setup is possible, it's recommended to operate a dedicated Elasticsearch/OpenSearch cluster per Optimize instance.

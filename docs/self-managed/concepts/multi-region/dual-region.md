@@ -58,7 +58,7 @@ The currently supported Camunda 8 Self-Managed components are:
 
 #### Zeebe
 
-Zeebe operates in an **active-active** mode and replicates data between its brokers. Due to its replication logic, it can handle an entire region failure without data loss, but it requires proper partitioning and replication. Read through the [cluster technical concept](./../../../components/zeebe/technical-concepts/clustering.md) to learn more about the [Raft protocol](<https://en.wikipedia.org/wiki/Raft_(algorithm)>).
+Zeebe operates in an **active-active** mode and replicates data between its brokers. Due to its replication logic, it can handle an entire region failure without data loss, but it requires proper partitioning and replication. Read through the [cluster technical concept](/components/zeebe/technical-concepts/clustering.md) to learn more about the [Raft protocol](<https://en.wikipedia.org/wiki/Raft_(algorithm)>).
 
 #### Elasticsearch
 

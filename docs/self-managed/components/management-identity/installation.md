@@ -25,7 +25,7 @@ Using the default setup for [Camunda 8 Run](/self-managed/quickstart/developer-q
 4. An initial user with username/password: `demo` / `demo`
 5. An `admin` role with full permissions, applied to the `demo` user
 
-To modify this [initial configuration](./configuration.md), define your custom values in `application.yaml`, and pass this file at startup using the `--config` flag. See [this section](/self-managed/quickstart/developer-quickstart/c8run.md#enable-authentication-and-authorization) for details.
+To modify this [initial configuration](../management-identity/configuration/identity-configuration-overview.md), define your custom values in `application.yaml`, and pass this file at startup using the `--config` flag. See [this section](/self-managed/quickstart/developer-quickstart/c8run.md#enable-authentication-and-authorization) for details.
 
 :::note
 In Helm installations, API authentication and authorization are enabled by default. You can adjust these settings in `application.yaml` or using environment variables.

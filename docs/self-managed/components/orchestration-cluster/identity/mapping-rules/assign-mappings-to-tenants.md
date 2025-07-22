@@ -15,9 +15,6 @@ To learn more about mappings and tenants, see the [mapping rules documentation](
 :::
 
 1. Log in to the Identity UI and go to the **Tenants** tab.
-
-![tenant-mapping-list](../img/tenant-mapping-list.png)
-
 2. Click on the desired Tenant ID (e.g., `<default>`).
 3. Open the **Mappings** tab.
 
@@ -29,20 +26,9 @@ values={[{label: 'Add', value: 'add'}, {label: 'Update', value: 'update'}, {labe
 ### Add a mapping to a tenant
 
 1. Click **Assign mapping**.
-
-![tenant-detail-mappings-empty](../img/tenant-detail-mappings-empty.png)
-
 2. In the modal, search by **Mapping ID**.
-
-![tenant-assign-mapping-modal-empty](../img/tenant-assign-mapping-modal-empty.png)
-
 3. Select the desired mapping.
-
-![tenant-assign-mapping-modal-selected](../img/tenant-assign-mapping-modal-selected.png)
-
 4. Click **Assign mapping** to complete.
-
-![tenant-mapping-assigned](../img/tenant-mapping-assigned.png)
 
 </TabItem>
 
@@ -66,8 +52,6 @@ Currently, tenant mappings must be updated by removing and re-adding them with t
 
 1. In the **Mappings** tab for the selected tenant, locate the assigned mapping.
 2. Click **Remove**.
-
-![remove-tenant-mapping](../img/remove-tenant-mapping.png)
 
 </TabItem>
 

@@ -5,7 +5,7 @@ sidebar_label: "Identity"
 description: "Identity is the component within the Camunda 8 self-managed stack responsible for authentication and authorization."
 ---
 
-Use the [Management Identity](/reference/glossary.md#management-identity) component in Camunda 8 Self-Managed to manage authentication, access, and authorization for components outside the [Orchestration cluster](/self-managed/orchestration-cluster/orchestration-cluster.md) (Console, Web Modeler, and Optimize).
+Use the [Management Identity](/reference/glossary.md#management-identity) component in Camunda 8 Self-Managed to manage authentication, access, and authorization for components outside the [Orchestration cluster](/self-managed/components/orchestration-cluster/overview.md) (Console, Web Modeler, and Optimize).
 
 ## About Identity
 

@@ -11,7 +11,7 @@ TLS-encrypted communication can be enabled by following the steps below (for exa
 
 ## Configure Console for secure connections
 
-Console can be configured using [environment variables](/self-managed/console-deployment/configuration/configuration.md#environment-variables) to enable secure connections to both Console and Identity.
+Console can be configured using [environment variables](/self-managed/components/console/configuration/configuration.md#environment-variables) to enable secure connections to both Console and Identity.
 
 ### Configure the Identity base URL
 

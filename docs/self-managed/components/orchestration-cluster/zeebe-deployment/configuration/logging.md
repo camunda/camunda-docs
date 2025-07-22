@@ -16,7 +16,7 @@ It configures the [log level](https://logging.apache.org/log4j/2.x/manual/custom
 - Spring and Spring Boot (anything under `org.springframework`)
 
 :::note
-For more information, see the documentation on [log levels](../../operational-guides/monitoring/log-levels.md).
+For more information, see the documentation on [log levels](../../../../operational-guides/monitoring/log-levels.md).
 :::
 
 The log level for the Orchestration cluster is controlled via the `CAMUNDA_LOG_LEVEL` environment variable (for example, `CAMUNDA_LOG_LEVEL=DEBUG`, or

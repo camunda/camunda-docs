@@ -22,7 +22,7 @@ locales:
   fallbackLocale: 'en'
 ```
 
-For more details on the configuration keys, refer to the [localization configuration section](./system-configuration.md#localization).
+For more details on the configuration keys, refer to the [localization configuration section](../configuration/system-configuration.md#localization).
 
 ## Custom locale configuration
 

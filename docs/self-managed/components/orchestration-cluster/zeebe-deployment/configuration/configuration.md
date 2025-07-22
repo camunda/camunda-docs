@@ -139,7 +139,7 @@ Update your application's configuration
 
 ## Licensing
 
-import Licensing from '../../../self-managed/react-components/licensing.md'
+import Licensing from '../../../../../self-managed/react-components/licensing.md'
 
 <Licensing/>
 

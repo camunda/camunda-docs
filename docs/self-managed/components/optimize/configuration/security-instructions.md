@@ -24,13 +24,13 @@ Optimize already comes with a myriad of settings and security mechanism by defau
 
 ## Disable HTTP
 
-For security reasons, we recommend using Optimize over HTTPS and disabling HTTP. You can disable HTTP by setting the HTTP property in the container settings to an empty/null value. Consult the respective section in the [configuration guide](./system-configuration.md#container) for the more details.
+For security reasons, we recommend using Optimize over HTTPS and disabling HTTP. You can disable HTTP by setting the HTTP property in the container settings to an empty/null value. Consult the respective section in the [configuration guide](../configuration/system-configuration.md#container) for the more details.
 
 ## Fine tune Optimize security headers
 
 Over time, various client-side security mechanisms have been developed to protect web applications from various attacks. Some of these security mechanisms are only activated if the web application sends the corresponding HTTP headers in its server responses.
 
-Optimize adds several of these headers which can be fine-tuned in the [configuration](./system-configuration.md#security) to ensure appropriate security.
+Optimize adds several of these headers which can be fine-tuned in the [configuration](../configuration/system-configuration.md#security) to ensure appropriate security.
 
 </TabItem>
 
@@ -38,7 +38,7 @@ Optimize adds several of these headers which can be fine-tuned in the [configura
 
 Optimize stores its data in Elasticsearch or OpenSearch, which are search engines that act as a document-based datastore. To protect access to this data, the database should be configured carefully as well. Refer to the official security guidelines for [ElasticSearch](https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-cluster.html#secure-cluster) or [OpenSearch](https://opensearch.org/docs/latest/getting-started/security).
 
-Within the Optimize configuration, you can then enable SSL and/or the credentials to be used when Camunda Optimize connects to the database. See [Elasticsearch Security](./system-configuration.md#elasticsearch-security) or [OpenSearch Security](./system-configuration.md#opensearch-security) for details.
+Within the Optimize configuration, you can then enable SSL and/or the credentials to be used when Camunda Optimize connects to the database. See [Elasticsearch Security](../configuration/system-configuration.md#elasticsearch-security) or [OpenSearch Security](../configuration/system-configuration.md#opensearch-security) for details.
 
 </TabItem>
 </Tabs>

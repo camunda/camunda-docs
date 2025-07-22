@@ -28,7 +28,7 @@ Currently, we support an installation of connectors with [Docker](/self-managed/
 [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md), [Helm charts](/self-managed/setup/overview.md), and the [manual setup](/self-managed/installation-methods/manual/install.md#run-connectors).
 
 :::note
-[Inbound connectors](/components/connectors/use-connectors/inbound.md) require [Operate](/self-managed/components/orchestration-cluster/operate/overview.md) to be deployed as part of your Camunda Self-Managed installation.
+[Inbound connectors](/components/connectors/use-connectors/inbound.md) require [Operate](/self-managed/components/orchestration-cluster/operate-deployment/install-and-start.md) to be deployed as part of your Camunda Self-Managed installation.
 If you don't use Operate with your cluster, you can still use [outbound connectors](/components/connectors/use-connectors/outbound.md).
 :::
 
