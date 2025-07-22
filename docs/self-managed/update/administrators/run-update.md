@@ -62,7 +62,7 @@ This guide provides:
 
 ### Docker Images Update
 
-Make sure to download latest images for [Air-Gapped environments](/docs/self-managed/installation-methods/helm/configure/air-gapped-installation).
+Make sure to download latest images for [Air-Gapped environments](../../installation-methods/helm/configure/air-gapped-installation.md).
 
 For production deployments using Docker images:
 
