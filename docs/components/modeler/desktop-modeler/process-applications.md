@@ -12,13 +12,19 @@ import StartInstanceImg from './img/process-applications/start-instance.png'
 
 Desktop modeler recognizes [process applications](../../concepts/process-applications.md) you build and offers you advanced editor intelligence, deployment, and execution features within the context of such an application. To identify the boundaries of a process application, Desktop Modeler searches for a `.process-application` file in the root of your project.
 
-For instance, a consumer loan approval process application might contain:
+In professional software development a typical process application contains resources such as BPMN, DMN and Form files. These live alonside [job workers](https://docs.camunda.io/docs/next/components/concepts/job-workers/),  implementing process logic, additional application code and tests. How exactly your project is structured may vary depending on the implementation language, libraries and frameworks you use.
+
+## Example: Consumer loan application
+
+Let us consider an application implementing consumer loan approval. It may contain:
 
 - A main BPMN process (for example, `consumer-loan-application.bpmn`) to define the workflow.
 - DMN decisions (for example, `interest-rate-calculation.dmn`, `credit-score-calculation.dmn`) for business rules.
 - Forms (for example, `loan-application-review.form`) for user interactions.
+- Various [job workers](https://docs.camunda.io/docs/next/components/concepts/job-workers/) that implement process behavior.
+- Additional application code and tests
 
-The structure of your project may vary depending on the implementation language. For example, a standard Java/Maven might be structured as follows:
+In a standard standard Java/Maven project, such an application may be structured as follows:
 
 ```
 consumer-loan-application/
@@ -44,7 +50,13 @@ consumer-loan-application/
 └── README.md
 ```
 
-When you open a file in the modeler, the system implicitly determines whether it belongs to a process application by checking for the presence of a `.process-application` file in the same folder or a parent folder. If such a file is found, the process application is implicitly opened, indicated by the blue item in the status bar. All related files within the process application are made accessible for navigation. Similarly, when you close the file, the process application is implicitly closed.
+## Editor support for process applications
+
+When you open a file in the modeler, the system implicitly determines whether it belongs to a process application. It does so by checking for the presence of a `.process-application` file in the same folder or a parent folder. Within a process application, the modeler offers advanced navigation and intelligence.
+
+### Indicating context
+
+Process applications are opened and closed "implicitly": A blue item in the status bar indicates whether a diagram belongs to a process application and makes all related diagrams available for navigation. 
 
 <p><img src={OverlayImg} alt="Process application" /></p>
 
@@ -52,9 +64,9 @@ When files of more than one process application are opened they are grouped visu
 
 <p><img src={GroupingImg} alt="Process application file grouping" /></p>
 
-## Creating a process application
+### Creating a process application
 
-To create a process application, take the following steps:
+You can create a process application by simply creating a `.process-application` file in the root of your project. Alternatively, create it via Modeler UI by taking the following steps:
 
 1. Click **File > New Process Application...**.
 2. Choose a folder.
@@ -62,7 +74,7 @@ To create a process application, take the following steps:
 
 A `.process-application` file will be created in the selected folder. Any file within the folder or its subfolders will be treated as part of the process application.
 
-## Linking resources
+### Linking resources
 
 Any file within a process application can be linked as a resource. Linking a resource can be achieved in several ways:
 
@@ -73,13 +85,13 @@ Any file within a process application can be linked as a resource. Linking a res
 
 <p><img src={LinkResourcesImg} alt="Linking resources by using the replace feature" /></p>
 
-## Deploying a process application
+### Deploying a process application
 
 Process applications can be deployed using the [deploy feature](./connect-to-camunda-8.md). When deploying a process application, all files that are part of the process application will be deployed.
 
 <p><img src={DeployImg} alt="Deploying a process application" /></p>
 
-## Starting a process instance
+### Starting a process instance
 
 :::note
 Before starting a process instance, all process application files will be deployed to reflect the state of the process application.
