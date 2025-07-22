@@ -1,6 +1,6 @@
 ---
-id: sm-orchestration-cluster
-title: "Orchestration cluster"
+id: overview
+title: "How to install and configure an Orchestration cluster"
 description: ""
 ---
 

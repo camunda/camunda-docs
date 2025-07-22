@@ -1524,9 +1524,7 @@ module.exports = {
                 id: "self-managed/components/orchestration-cluster/identity/overview",
               },
               items: [
-                "self-managed/components/orchestration-cluster/identity/overview",
                 "self-managed/components/orchestration-cluster/identity/configuration",
-                "self-managed/components/orchestration-cluster/identity/manage-tenants",
                 {
                   "Mapping rules": [
                     "self-managed/components/orchestration-cluster/identity/mapping-rules/managing-mapping-rules",
