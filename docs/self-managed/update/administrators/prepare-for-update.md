@@ -21,7 +21,7 @@ If your current chart is **12.x**, plan to jump directly to the **latest patch**
 
 - [Supported environments](../../../reference/supported-environments.md#component-version-matrix)
 - [8.8 release notes](../../../reference/announcements-release-notes/880/880-release-notes.md)
-- [Helm chart 8.7 → 8.8 technical details](../../operational-guides/update-guide/870-to-880.md)
+- [Helm chart 8.7 → 8.8 technical details](../../installation-methods/helm/upgrade/helm-870-880.md)
   :::
 
 ## Step 2 - Assess Camunda platform changes
@@ -56,7 +56,7 @@ Review changes between versions 8.7 and 8.8.
 - Confirm supported Keycloak versions in the environment matrix.
 
 **Migration jobs** – 8.8 automatically runs two Helm jobs (`identity-migration`, `process-application-migration`).  
- Monitor their logs and wait until they report **Completed** before scaling down old pods. [oai_citation:10‡docs.camunda.io](../../operational-guides/update-guide/870-to-880.md)
+ Monitor their logs and wait until they report **Completed** before scaling down old pods. [oai_citation:10‡docs.camunda.io](../../installation-methods/helm/upgrade/helm-870-880.md)
 
 ## Step 3 — Check infrastructure compatibility
 
