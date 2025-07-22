@@ -42,9 +42,9 @@ authorizations enabled by default.
 | `SPRING_PROFILES_ACTIVE`                                         | **Note:** This property will be deprecated as additional authentication methods become available.                     | `consolidated-auth`           |
 
   </TabItem>
-  <TabItem value="helm" label="Helm properties">
+  <TabItem value="helm" label="Spring properties">
 
-| Helm property                                       | Description                                                                                       | Default value (Camunda 8 Run) |
+| Spring property                                     | Description                                                                                       | Default value (Camunda 8 Run) |
 | --------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ----------------------------- |
 | `camunda.persistent.sessions.enabled`               | Enables shared authentication between the Orchestration web applications (Operate and Tasklist).  | `true`                        |
 | `camunda.security.authentication.method`            | The authentication method to use.                                                                 | `basic`                       |
