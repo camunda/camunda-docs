@@ -52,7 +52,6 @@ Authorization applies only to these orchestration components — it does not app
    - Example: Group 'marketing' is authorized to delete the Group 'sales'
 
 2. **Owners**
-
    - Types: users, groups, roles, and mapping rules
    - Authorizations can be assigned to any owner type
 
