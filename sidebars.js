@@ -985,6 +985,7 @@ module.exports = {
         "apis-tools/migration-manuals/migrate-to-camunda-java-client",
         "apis-tools/migration-manuals/migrate-to-camunda-user-tasks",
         "apis-tools/migration-manuals/migrate-component-apis",
+        "apis-tools/migration-manuals/migrate-to-camunda-process-test",
       ],
     },
   ],
