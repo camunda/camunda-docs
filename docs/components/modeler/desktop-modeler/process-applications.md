@@ -56,7 +56,7 @@ When you open a file in Modeler, the system implicitly determines whether it bel
 
 ### Indicating context
 
-Process applications are opened and closed "implicitly": A blue item in the status bar indicates whether a diagram belongs to a process application and makes all related diagrams available for navigation. 
+Process applications are opened and closed "implicitly": A blue item in the status bar indicates whether a diagram belongs to a process application and makes all related diagrams available for navigation.
 
 <p><img src={OverlayImg} alt="Process application" /></p>
 
