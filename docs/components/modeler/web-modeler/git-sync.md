@@ -294,7 +294,7 @@ Creating multiple copies of a process application can complicate navigation and 
 
 ## Self-Managed environment variables
 
-Refer to [Configuration of the restapi component](../../../self-managed/modeler/web-modeler/configuration/configuration.md#git-sync) for details on configuring environment variables.
+Refer to [Configuration of the restapi component](../../../self-managed/components/modeler/web-modeler/configuration/configuration.md#git-sync) for details on configuring environment variables.
 
 ## Troubleshooting
 

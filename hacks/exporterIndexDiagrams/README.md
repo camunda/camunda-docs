@@ -58,12 +58,10 @@ Camunda Exporter indices that includes diagrams, currently these are generated m
    -e png \
    -c camunda-docs/hacks/exporterIndexDiagrams/styling.json
    ```
-   
 8. Add the diagram page metadata and description.
    ```shell
    python3 camunda-docs/hacks/exporterIndexDiagrams/add_diagram_description.py
    ```
-   
 9. Delete the diagram templates
 
    ```shell
@@ -73,6 +71,7 @@ Camunda Exporter indices that includes diagrams, currently these are generated m
    ```
 
 10. Add the new diagrams as git changes
-   ```shell
-   cd camunda-docs && git add docs/self-managed/zeebe-deployment/exporters/index-diagrams
-   ```
+
+```shell
+cd camunda-docs && git add docs/self-managed/zeebe-deployment/exporters/index-diagrams
+```

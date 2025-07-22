@@ -15,9 +15,9 @@ These release notes identify the new features included in 8.6, including [alpha 
 
 ## 8.6 minor
 
-| Release date   | End of maintenance | Changelog(s)                                                                                                                                                  | Release blog                                                          | Update guide                                                                            |
-| -------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| 8 October 2024 | 14 April 2026      | - [ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.6.0) <br /> - [ Connectors ](https://github.com/camunda/connectors/releases/tag/8.6.0) | [Release blog](https://camunda.com/blog/2024/10/camunda-8-6-release/) | [Self-Managed update guide](self-managed/operational-guides/update-guide/850-to-860.md) |
+| Release date   | End of maintenance | Changelog(s)                                                                                                                                                  | Release blog                                                          | Update guide                                                                          |
+| -------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| 8 October 2024 | 14 April 2026      | - [ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.6.0) <br /> - [ Connectors ](https://github.com/camunda/connectors/releases/tag/8.6.0) | [Release blog](https://camunda.com/blog/2024/10/camunda-8-6-release/) | [Self-Managed update guide](self-managed/components/components-upgrade/850-to-860.md) |
 
 ### Flow control enabled by default <span class="badge badge--long" title="This feature affects SaaS">SaaS</span>
 
@@ -399,7 +399,7 @@ In Operate, the visualization of the executed path of a process instance is impr
 
 <!-- https://github.com/camunda/web-modeler/issues/9730 -->
 
-You can now [enable TLS-encrypted communication](/self-managed/modeler/web-modeler/configuration/ssl.md#configuring-secure-connections-between-web-modeler-components) between the different Web Modeler components (`webapp`, `restapi`, and `websockets`).
+You can now [enable TLS-encrypted communication](/self-managed/components/modeler/web-modeler/configuration/ssl.md#configuring-secure-connections-between-web-modeler-components) between the different Web Modeler components (`webapp`, `restapi`, and `websockets`).
 
 ### API orchestration getting started journey <span class="badge badge--long" title="This feature affects connectors">Connectors</span>
 
@@ -529,7 +529,7 @@ Creation, due, and follow-up dates are now shown as relative dates in task tiles
 
 <!-- https://github.com/camunda/product-hub/issues/2196 -->
 
-Tasklist sessions are now protected via an [anti CSRF token](/self-managed/tasklist-deployment/tasklist-configuration.md#cross-site-request-forgery-protection).
+Tasklist sessions are now protected via an [anti CSRF token](/self-managed/components/orchestration-cluster/tasklist/tasklist-configuration.md#cross-site-request-forgery-protection).
 
 ### Instance Modification as Batch <span class="badge badge--long" title="This feature affects Operate">Operate</span>
 

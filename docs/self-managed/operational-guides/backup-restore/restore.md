@@ -776,7 +776,7 @@ After the database has been restored, you can start Web Modeler again.
 
 :::danger
 When restoring Web Modeler data from a backup, ensure that the ids of the users stored in your OIDC provider (e.g. Keycloak) do not change in between the backup and restore.
-Otherwise, users may not be able to access their projects after the restore (see [Web Modeler's troubleshooting guide](self-managed/modeler/web-modeler/troubleshooting/troubleshoot-missing-data.md)).
+Otherwise, users may not be able to access their projects after the restore (see [Web Modeler's troubleshooting guide](/self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-missing-data.md)).
 :::
 
 :::tip
