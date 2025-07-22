@@ -41,8 +41,8 @@ swap:
   jdk: JDK
   JIRA: Jira
   Job Worker: Job worker
-  Kafka Producer: Kafka producer
-  Kafka Consumer: Kafka consumer
+  Kafka producer: Kafka producer
+  Kafka consumer: Kafka consumer
   KeyCloak: Keycloak
   Linkedin: LinkedIn
   MacOS: macOS

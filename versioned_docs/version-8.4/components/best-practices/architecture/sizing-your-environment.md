@@ -149,8 +149,8 @@ Camunda 8 defines three fixed hardware packages you can select from. The table b
 | :----------------------------------------------------------------------- | ------------------------------: | ------------------------------: | -------------------------------: |
 | Max Throughput **Tasks/day**                                             |                           5.9 M |                            23 M |                             43 M |
 | Max Throughput **Tasks/second**                                          |                              65 |                             270 |                              500 |
-| Max Throughput **Process Instances/day**                                 |                           0.5 M |                           2.3 M |                            4.3 M |
-| Max Total Number of Process Instances stored (in Elasticsearch in total) |                           100 k |                           5.4 M |                             15 M |
+| Max Throughput **Process instances/day**                                 |                           0.5 M |                           2.3 M |                            4.3 M |
+| Max Total Number of Process instances stored (in Elasticsearch in total) |                           100 k |                           5.4 M |                             15 M |
 | Approx resources provisioned **\*\***                                    | 15 vCPU, 20 GB mem, 640 GB disk | 28 vCPU, 50 GB mem, 640 GB disk | 56 vCPU, 85 GB mem, 1320 GB disk |
 
 **\*** The numbers in the table where measured using Camunda 8 (version 8.0) and [the benchmark project](https://github.com/camunda-community-hub/camunda-8-benchmark). It uses a [ten task process](https://github.com/camunda-community-hub/camunda-8-benchmark/blob/main/src/main/resources/bpmn/typical_process.bpmn). To calculate day-based metrics, an equal distribution over 24 hours is assumed.

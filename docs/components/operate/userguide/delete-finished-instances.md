@@ -32,7 +32,7 @@ To delete a process instance from the **Processes** page, take the following ste
 
 ![operate-view-finished-instances-instance-detail](./img/delete-finished-instances/operate-instance-detail-finished-instances.png)
 
-2. Navigate to the instance detail page by clicking the **Process Instance Key** of the process instance you want to delete.
+2. Navigate to the instance detail page by clicking the **Process instance Key** of the process instance you want to delete.
 
 ![operate-navigate-finished-instance-detail](./img/delete-finished-instances/operate-instance-detail-finished-instances-navigate.png)
 

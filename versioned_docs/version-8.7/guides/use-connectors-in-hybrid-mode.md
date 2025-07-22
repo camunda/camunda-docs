@@ -82,7 +82,7 @@ Note the line `-e CONNECTOR_HTTP_REST_TYPE='io.camunda:http-json:local'`. This l
 `CONNECTOR_X_TYPE` with a given type. In this case, we want to register a local Self-Managed HTTP REST connector as `io.camunda:http-json:local`.
 
 The `X` is normalized to the environment variable connector name. For example, the [HTTP REST connector](https://github.com/camunda/connectors/blob/main/connectors/http/rest/src/main/java/io/camunda/connector/http/rest/HttpJsonFunction.java#L33)
-`HTTP REST` name becomes `HTTP_REST`, or the [Kafka Consumer connector](https://github.com/camunda/connectors/blob/main/connectors/kafka/src/main/java/io/camunda/connector/kafka/inbound/KafkaExecutable.java#L20) name
+`HTTP REST` name becomes `HTTP_REST`, or the [Kafka consumer connector](https://github.com/camunda/connectors/blob/main/connectors/kafka/src/main/java/io/camunda/connector/kafka/inbound/KafkaExecutable.java#L20) name
 becomes `KAFKA_CONSUMER`. Therefore, to override it one would need to pass in the `CONNECTOR_KAFKA_CONSUMER_TYPE=xxx` environment variable.
 
 ## Using SaaS secrets
@@ -194,4 +194,4 @@ The following example demonstrates this approach:
 
 ## Appendix
 
-See ready-to-use hybrid element templates examples for [HTTP REST](https://github.com/camunda/connectors/blob/main/connectors/http/rest/element-templates/hybrid/http-json-connector-hybrid.json) and [Kafka Consumer](https://github.com/camunda/connectors/tree/main/connectors/kafka/element-templates/hybrid).
+See ready-to-use hybrid element templates examples for [HTTP REST](https://github.com/camunda/connectors/blob/main/connectors/http/rest/element-templates/hybrid/http-json-connector-hybrid.json) and [Kafka consumer](https://github.com/camunda/connectors/tree/main/connectors/kafka/element-templates/hybrid).

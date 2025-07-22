@@ -60,7 +60,7 @@ To upload a file, take the following steps:
 
 :::note
 To work with documents you must upload them first, [using the Orchestration cluster REST API](/apis-tools/orchestration-cluster-api-rest/specifications/create-document.api.mdx) for example.
-The result of the endpoint must then be assigned to a variable in **Start Process Instance** so you can use the variable in the **Document** field.
+The result of the endpoint must then be assigned to a variable in **Start Process instance** so you can use the variable in the **Document** field.
 :::
 
 ### Download file

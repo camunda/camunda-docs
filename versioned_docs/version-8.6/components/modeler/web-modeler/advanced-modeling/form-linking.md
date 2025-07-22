@@ -72,7 +72,7 @@ To correct any instances affected by this issue, we recommend the following step
 2. Select the instances where tasks were generated with the incorrect forms by clicking on their process instance key, and you will be navigated to the process instance view.
 3. Move the instance to the same task, effectively restarting the task. To do this, click the wrench icon in the top right corner:
 
-<img src={IssueLinkedFormSolution01} style={{width: 400}} alt="Modify Process Instance on Operate" />
+<img src={IssueLinkedFormSolution01} style={{width: 400}} alt="Modify Process instance on Operate" />
 
 4. After this, a popup explaining how process modification works will appear. Click **Continue**, select the active task, and click **Cancel instance**.
 

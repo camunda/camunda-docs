@@ -92,9 +92,9 @@ Refer to the table below for the process instance count and duration reports tha
 
 | View                             | Group by               | Second group by                                                   |
 | -------------------------------- | ---------------------- | ----------------------------------------------------------------- |
-| Process Instance Count, Duration | Start Date, End Date   | Variable, Process (only for multi-definition reports)             |
-| Process Instance Count, Duration | Variable               | Start Date, End Date, Process (only for multi-definition reports) |
-| Process Instance Count           | Running Date, Duration | Process (only for multi-definition reports)                       |
+| Process instance Count, Duration | Start Date, End Date   | Variable, Process (only for multi-definition reports)             |
+| Process instance Count, Duration | Variable               | Start Date, End Date, Process (only for multi-definition reports) |
+| Process instance Count           | Running Date, Duration | Process (only for multi-definition reports)                       |
 
 The diagram below shows a report grouped by `Start Date` and a boolean variable:
 

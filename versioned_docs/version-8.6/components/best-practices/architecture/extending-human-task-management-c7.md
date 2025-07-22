@@ -255,7 +255,7 @@ For maximal flexibility (and best performance possibilities), create a custom Pr
 
 Prefer a ProcessInstanceEntity over a TaskEntity as long as the business data you need is quite similar in between the different user tasks of a process definition. This way you avoid unnecessary database operations. If this is not the case you need to go for the TaskEntity as shown in the following example.
 
-![Process Instance Info](extending-human-task-management-c7-assets/processinstanceinfo.png)
+![Process instance Info](extending-human-task-management-c7-assets/processinstanceinfo.png)
 
 In this entity, combine the Camunda `task.id` with all your business attributes as separate columns. This allows to query for and display tasks without or with a minimum of SQL JOINs. Consider to use your entity now as a single source for displaying tasklists to your users - hence circumventing the Camunda TaskService Query API for that purpose completely.
 

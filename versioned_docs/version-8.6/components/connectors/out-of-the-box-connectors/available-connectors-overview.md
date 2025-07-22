@@ -47,7 +47,7 @@ import TabItem from "@theme/TabItem";
 - [Google Maps Platform Connector](/components/connectors/out-of-the-box-connectors/google-maps-platform.md) - Validate addresses, retrieve postal addresses, and calculate distances with [Google Maps Platform Service](https://mapsplatform.google.com/) from your BPMN process
 - [Google Sheets Connector](/components/connectors/out-of-the-box-connectors/google-sheets.md) - Allows you to work with an existing or new empty spreadsheet on [Google Drive](https://drive.google.com/) from your BPMN process.
 - [Hugging Face Connector](/components/connectors/out-of-the-box-connectors/hugging-face.md) - Interact with [Hugging Face](https://huggingface.co/) models from your BPMN process.
-- [Kafka Producer Connector](/components/connectors/out-of-the-box-connectors/kafka.md) - Produce messages to [Kafka](https://kafka.apache.org/) from your BPMN process.
+- [Kafka producer Connector](/components/connectors/out-of-the-box-connectors/kafka.md) - Produce messages to [Kafka](https://kafka.apache.org/) from your BPMN process.
 - [Microsoft Teams Connector](/components/connectors/out-of-the-box-connectors/microsoft-teams.md) - Interactions with [Microsoft Teams](https://www.microsoft.com/microsoft-teams/) from your BPMN process.
 - [Microsoft 365 Connector](/components/connectors/out-of-the-box-connectors/microsoft-o365-mail.md) - Interactions with [Microsoft 365](https://outlook.office.com/mail/) mail from your BPMN process.
 - [OpenAI Connector](/components/connectors/out-of-the-box-connectors/openai.md) - Interact with [ChatGPT](https://chat.openai.com/) and [OpenAI Moderation API](https://platform.openai.com/docs/guides/moderation/overview).
@@ -70,7 +70,7 @@ import TabItem from "@theme/TabItem";
 - [Amazon SNS inbound Connector](/components/connectors/out-of-the-box-connectors/amazon-sns.md) - Trigger your BPMN process with an [Amazon Simple Notification Service](https://aws.amazon.com/sns/) notification via HTTPS.
 - [Amazon SQS Connector](/components/connectors/out-of-the-box-connectors/amazon-sqs.md) - Receive messages from [Amazon Simple Queue Service (SQS)](https://aws.amazon.com/sqs/) in your BPMN process.
 - [GitHub Webhook Connector](/components/connectors/out-of-the-box-connectors/github.md) - Start a process instance triggered by a [GitHub event](https://docs.github.com/en/developers/webhooks-and-events/webhooks/about-webhooks).
-- [Kafka Consumer Connector](/components/connectors/out-of-the-box-connectors/kafka.md) - Consume messages from [Kafka](https://kafka.apache.org/) from your BPMN process.
+- [Kafka consumer Connector](/components/connectors/out-of-the-box-connectors/kafka.md) - Consume messages from [Kafka](https://kafka.apache.org/) from your BPMN process.
 - [RabbitMQ Consumer Connector](/components/connectors/out-of-the-box-connectors/rabbitmq-outbound.md) - Receive messages from [RabbitMQ](https://www.rabbitmq.com/) in your BPMN process.
 - [Slack inbound Connector](/components/connectors/out-of-the-box-connectors/slack.md) - Trigger a [Slack](https://slack.com) bot to start a BPMN process with an event or a slash command
 - [Twilio Webhook Connector](/components/connectors/out-of-the-box-connectors/twilio.md) - Start a process instance triggered by a [Twilio webhook](https://www.twilio.com/docs/usage/webhooks). Can be used as an intermediate Connector in existing processes.

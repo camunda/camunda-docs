@@ -50,7 +50,7 @@ Play executes all logic of the process and its linked files, such as FEEL, forms
 
 Actions in Play can be initiated through Operate, Tasklist, or external APIs. For example, you can complete a user task via Tasklist, finish a service task using an external job worker, or cancel/modify your instance through Operate, with all changes reflected in Play.
 
-In SaaS, view your process instance in Operate by selecting the **Process Instance Key** in the header.
+In SaaS, view your process instance in Operate by selecting the **Process instance Key** in the header.
 
 ![play process instance view](img/play-view-process-instance.png)
 
@@ -242,9 +242,9 @@ The use of Play may result in additional charges depending on your organization'
 - **Trial Plans:** You can use any cluster.
 
 :::caution Starter plans
-The Starter plan is no longer available. 
+The Starter plan is no longer available.
 
-- Existing customers using a Starter plan will need to either upgrade to the Enterprise plan, or move to the Free plan. 
+- Existing customers using a Starter plan will need to either upgrade to the Enterprise plan, or move to the Free plan.
 - To compare plan features and contact Camunda for advice and an Enterprise plan quote, refer to [Camunda 8 pricing](https://camunda.com/pricing/?utm_source=docs.camunda.io&utm_medium=referral).
 
 :::

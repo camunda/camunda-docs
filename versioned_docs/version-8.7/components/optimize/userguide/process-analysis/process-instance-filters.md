@@ -16,7 +16,7 @@ As an alternative way to create a process instance start date filter, you can di
 
 ## Process instance duration filter
 
-The **Process Instance Duration Filter** allows you to only regard process instances whose execution from start to end took a certain amount of time. For instance, you can filter process instances that took more than three days or less than five seconds.
+The **Process instance Duration Filter** allows you to only regard process instances whose execution from start to end took a certain amount of time. For instance, you can filter process instances that took more than three days or less than five seconds.
 
 :::note
 This filter shows only completed process instances, since the total duration of running process instances is not yet known.

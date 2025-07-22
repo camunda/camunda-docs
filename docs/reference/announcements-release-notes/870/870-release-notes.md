@@ -353,7 +353,7 @@ To learn more about this feature, see [Git sync](/components/modeler/web-modeler
 
 <!-- https://github.com/camunda/product-hub/issues/2502 -->
 
-### Process Instance Migration <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Zeebe">Zeebe</span>
+### Process instance Migration <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Zeebe">Zeebe</span>
 
 :::note
 This feature was originally released with 8.7.0-alpha3, and is no longer available in 8.7.0. Process instance migration is now available in [8.8.0-alpha1](/reference/announcements-release-notes/880/880-announcements.md#process-instance-migration-saasself-managedzeebe). For more information, see the Camunda 8.7 and 8.8 [release update blog](https://camunda.com/blog/2025/01/camunda-87-88-release-update/).

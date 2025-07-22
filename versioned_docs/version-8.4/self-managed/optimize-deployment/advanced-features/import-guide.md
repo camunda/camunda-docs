@@ -87,7 +87,7 @@ The time was measured from the start of Optimize until the entire data import to
 
 This data set contains the following amount of instances:
 
-| Number of Process Definitions | Number of Activity Instances | Number of Process Instances | Number of Variable Instances | Number of Decision Definitions | Number of Decision Instances |
+| Number of Process Definitions | Number of Activity Instances | Number of Process instances | Number of Variable Instances | Number of Decision Definitions | Number of Decision Instances |
 | ----------------------------- | ---------------------------- | --------------------------- | ---------------------------- | ------------------------------ | ---------------------------- |
 | 21                            | 123 162 903                  | 10 000 000                  | 119 849 175                  | 4                              | 2 500 006                    |
 
@@ -104,7 +104,7 @@ Results:
 
 This data set contains the following amount of instances:
 
-| Number of Process Definitions | Number of Activity Instances | Number of Process Instances | Number of Variable Instances |
+| Number of Process Definitions | Number of Activity Instances | Number of Process instances | Number of Variable Instances |
 | ----------------------------- | ---------------------------- | --------------------------- | ---------------------------- |
 | 20                            | 21 932 786                   | 2 000 000                   | 6 913 889                    |
 

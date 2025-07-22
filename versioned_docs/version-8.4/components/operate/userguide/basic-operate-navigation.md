@@ -16,11 +16,11 @@ In the following sections, we’ll use the same [`order-process.bpmn`](./assets/
 
 To view a deployed process, take the following steps:
 
-1. In the **Process Instances by Name** panel on your dashboard, note the list of your deployed processes and running instances.
+1. In the **Process instances by Name** panel on your dashboard, note the list of your deployed processes and running instances.
 
 ![operate-view-process](./img/get-familiar-with-operate/operate-introduction.png)
 
-2. When you click on the name of a deployed process in the **Process Instances by Name** panel, you’ll navigate to a view of that process model and all running instances.
+2. When you click on the name of a deployed process in the **Process instances by Name** panel, you’ll navigate to a view of that process model and all running instances.
 
 ![operate-view-process](./img/get-familiar-with-operate/operate-view-process.png)
 
@@ -30,7 +30,7 @@ To view a deployed process, take the following steps:
 
 ## Inspect a process instance
 
-Running process instances appear in the **Instances** section below the process model. To inspect a specific instance, click the **Process Instance Key**.
+Running process instances appear in the **Instances** section below the process model. To inspect a specific instance, click the **Process instance Key**.
 
 ![operate-inspect-instance](./img/get-familiar-with-operate/operate-process-instance-id.png)
 

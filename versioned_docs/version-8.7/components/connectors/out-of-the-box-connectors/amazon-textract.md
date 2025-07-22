@@ -126,7 +126,7 @@ Mandatory only for **Real-time** execution with **Camunda Document** location ty
 
 :::note
 To work with document you must upload them first, [using the Camunda 8 REST API](/apis-tools/camunda-api-rest/specifications/create-document.api.mdx) for example.
-The result of the endpoint must then be assigned to a variable in **Start Process Instance** so you can use the variable in the **Document** field.
+The result of the endpoint must then be assigned to a variable in **Start Process instance** so you can use the variable in the **Document** field.
 :::
 
 ## Response

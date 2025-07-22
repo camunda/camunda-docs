@@ -298,7 +298,7 @@ const p = await zeebe.createProcessInstanceWithResult({
     userTaskStatus: "Needs doing",
   },
 });
-console.log(`[Zeebe] Finished Process Instance ${p.processInstanceKey}`);
+console.log(`[Zeebe] Finished Process instance ${p.processInstanceKey}`);
 console.log(`[Zeebe] userTaskStatus is "${p.variables.userTaskStatus}"`);
 console.log(
   `[Zeebe] serviceTaskOutcome is "${p.variables.serviceTaskOutcome}"`
@@ -321,7 +321,7 @@ Starting user task poller...
 [Tasklist] fetched 1 user tasks
 [Tasklist] claiming task 2251799814895765 from process 2251799814900881
 [Tasklist] servicing user task 2251799814895765 from process 2251799814900881
-[Zeebe] Finished Process Instance 2251799814900881
+[Zeebe] Finished Process instance 2251799814900881
 [Zeebe] userTaskStatus is "Got done"
 [Zeebe] serviceTaskOutcome is "We did it!"
 ```

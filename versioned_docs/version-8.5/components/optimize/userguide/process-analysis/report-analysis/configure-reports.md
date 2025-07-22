@@ -10,7 +10,7 @@ When you save changes to the report configuration, they apply to the report view
 
 ## Number
 
-Number reports are any reports that are visualized as a single number (e.g. `Process Instance: Count` grouped by `None` or `Process Instance: Duration` Grouped by `None`).
+Number reports are any reports that are visualized as a single number (e.g. `Process instance: Count` grouped by `None` or `Process instance: Duration` Grouped by `None`).
 
 In number reports, the following configurations are possible:
 

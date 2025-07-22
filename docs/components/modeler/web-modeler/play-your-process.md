@@ -50,7 +50,7 @@ Play executes all logic of the process and its linked files, such as FEEL, forms
 
 Actions in Play can be initiated through Operate, Tasklist, or external APIs. For example, you can complete a user task via Tasklist, finish a service task using an external job worker, or cancel/modify your instance through Operate, with all changes reflected in Play.
 
-In SaaS, view your process instance in Operate by selecting the **Process Instance Key** in the header.
+In SaaS, view your process instance in Operate by selecting the **Process instance Key** in the header.
 
 ![play process instance view](img/play-view-process-instance.png)
 

@@ -283,14 +283,14 @@ const SearchableTable = () => {
       image: HuggingFaceImg,
     },
     {
-      name: "Kafka Consumer",
+      name: "Kafka consumer",
       description: "Consume messages from Kafka from your processes.",
       type: "Inbound",
       link: "../kafka/?kafka=inbound",
       image: KafkaImg,
     },
     {
-      name: "Kafka Producer",
+      name: "Kafka producer",
       description: "Produce messages to Kafka from your processes.",
       type: "Outbound",
       link: "../kafka/?kafka=outbound",

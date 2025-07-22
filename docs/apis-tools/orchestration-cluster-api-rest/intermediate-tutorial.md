@@ -184,7 +184,7 @@ try {
   const response = await axios(options);
   const processInstance = response.data;
 
-  console.log(`Process Instance Key: ${processInstance.processInstanceKey}`);
+  console.log(`Process instance Key: ${processInstance.processInstanceKey}`);
 } catch (error) {
   console.error(error.message);
 }

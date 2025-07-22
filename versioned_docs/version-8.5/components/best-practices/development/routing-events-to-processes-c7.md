@@ -234,7 +234,7 @@ processEngine.getRuntimeService().createProcessInstanceByKey("twitter")
   .execute();
 ```
 
-Refer to [User Guide: Starting a Process Instance at Any Set of Activities](https://docs.camunda.org/manual/latest/user-guide/process-engine/process-engine-concepts/#start-a-process-instance-at-any-set-of-activities).
+Refer to [User Guide: Starting a Process instance at Any Set of Activities](https://docs.camunda.org/manual/latest/user-guide/process-engine/process-engine-concepts/#start-a-process-instance-at-any-set-of-activities).
 
 ## Technology examples for messages sent by external systems
 

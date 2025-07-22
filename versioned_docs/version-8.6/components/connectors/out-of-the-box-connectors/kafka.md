@@ -2,7 +2,7 @@
 id: kafka
 title: Kafka Connector
 sidebar_label: Kafka
-description: The Kafka Producer Connector allows you to connect your BPMN service with Kafka. Learn how to create a Kafka Producer Connector and make it executable.
+description: The Kafka producer Connector allows you to connect your BPMN service with Kafka. Learn how to create a Kafka producer Connector and make it executable.
 ---
 
 import Tabs from "@theme/Tabs";
@@ -10,31 +10,31 @@ import TabItem from "@theme/TabItem";
 
 <Tabs groupId="kafka" defaultValue="outbound" queryString values={
 [
-{label: 'Kafka Producer Connector', value: 'outbound' },
-{label: 'Kafka Consumer Connector', value: 'inbound' }
+{label: 'Kafka producer Connector', value: 'outbound' },
+{label: 'Kafka consumer Connector', value: 'inbound' }
 ]}>
 
 <TabItem value='outbound'>
 
-The **Kafka Producer Connector** is an outbound Connector that allows you to connect your BPMN service with [Apache Kafka](https://kafka.apache.org/) to produce messages.
+The **Kafka producer Connector** is an outbound Connector that allows you to connect your BPMN service with [Apache Kafka](https://kafka.apache.org/) to produce messages.
 
 ## Prerequisites
 
-To use the **Kafka Producer Connector**, you must have a Kafka instance with a configured bootstrap server.
+To use the **Kafka producer Connector**, you must have a Kafka instance with a configured bootstrap server.
 
 :::note
 Use Camunda secrets to avoid exposing your sensitive data as plain text. To learn more, see [managing secrets](/components/console/manage-clusters/manage-secrets.md).
 :::
 
-## Create a Kafka Producer Connector task
+## Create a Kafka producer Connector task
 
 import ConnectorTask from '../../../components/react-components/connector-task.md'
 
 <ConnectorTask/>
 
-## Make your Kafka Producer Connector for publishing messages executable
+## Make your Kafka producer Connector for publishing messages executable
 
-To make your **Kafka Producer Connector** for publishing messages executable, complete the following sections.
+To make your **Kafka producer Connector** for publishing messages executable, complete the following sections.
 
 ### Authentication
 
@@ -153,9 +153,9 @@ The following is an example Avro schema and data:
   }
   ```
 
-## Kafka Producer Connector response
+## Kafka producer Connector response
 
-The **Kafka Producer Connector** returns metadata for a record that has been acknowledged by the Kafka instance.
+The **Kafka producer Connector** returns metadata for a record that has been acknowledged by the Kafka instance.
 
 The following fields are available in the `response` variable:
 
@@ -183,7 +183,7 @@ You can use an output mapping to map the response:
 
 ### What mechanism is used to authenticate against Kafka?
 
-If the fields **Username** and **Password** are not empty, by default the **Kafka Producer Connector** enables the credentials-based SASL SSL authentication and the following properties are set:
+If the fields **Username** and **Password** are not empty, by default the **Kafka producer Connector** enables the credentials-based SASL SSL authentication and the following properties are set:
 
 ```
 sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule   required username='<Your Username>'   password='<Your Password>';
@@ -193,7 +193,7 @@ sasl.mechanism=PLAIN
 
 If any of the fields are not populated, you must configure your security method for your Kafka configuration. You can do this using the **Additional properties** field.
 
-### What are default Kafka Producer client properties?
+### What are default Kafka producer client properties?
 
 - Authentication properties (only if both **Username** and **Password** are not empty):
 
@@ -248,27 +248,27 @@ The following example sets a new client property `client.id` and overrides the S
 
 <TabItem value='inbound'>
 
-The **Kafka Consumer Connector** allows you to consume messages by subscribing to [Kafka](https://kafka.apache.org/) topics and mapping them to your BPMN processes as start or intermediate events.
+The **Kafka consumer Connector** allows you to consume messages by subscribing to [Kafka](https://kafka.apache.org/) topics and mapping them to your BPMN processes as start or intermediate events.
 
 ## Prerequisites
 
-To use the **Kafka Consumer Connector**, you must have a Kafka instance with a configured bootstrap server.
+To use the **Kafka consumer Connector**, you must have a Kafka instance with a configured bootstrap server.
 
 :::note
 Use Camunda secrets to avoid exposing your sensitive data as plain text. To learn more, see [managing secrets](/components/console/manage-clusters/manage-secrets.md).
 :::
 
-## Create a Kafka Consumer Connector event
+## Create a Kafka consumer Connector event
 
 1. Add a **Start Event** or an **Intermediate Event** to your BPMN diagram to get started.
-2. Change its template to a Kafka Consumer.
+2. Change its template to a Kafka consumer.
 3. Fill in all required properties.
 4. Complete your BPMN diagram.
 5. Deploy the diagram to activate the Kafka consumer.
 
-## Configure your Kafka Consumer Connector
+## Configure your Kafka consumer Connector
 
-To make your **Kafka Consumer Connector** executable, fill in the required properties.
+To make your **Kafka consumer Connector** executable, fill in the required properties.
 
 ### Authentication
 
@@ -419,7 +419,7 @@ The value is specified as an ISO 8601 duration. For example, `PT1H` sets the TTL
 
 The **Deduplication** section allows you to configure the Connector deduplication parameters.
 
-**Connector deduplication** is a mechanism in the Connector Runtime that determines how many Kafka subscriptions are created if there are multiple occurrences of the **Kafka Consumer Connector** in the BPMN diagram. This is not to be confused with **message deduplication**.
+**Connector deduplication** is a mechanism in the Connector Runtime that determines how many Kafka subscriptions are created if there are multiple occurrences of the **Kafka consumer Connector** in the BPMN diagram. This is not to be confused with **message deduplication**.
 
 By default, the Connector runtime deduplicates Connectors based on properties, so that elements with the same subscription properties only result in one subscription.
 
@@ -431,7 +431,7 @@ To customize the deduplication behavior, select the **Manual mode** checkbox, an
 
 ### Output mapping
 
-The **Kafka Consumer Connector** returns the consumed message.
+The **Kafka consumer Connector** returns the consumed message.
 
 The following fields are available in the `response` variable:
 
@@ -450,15 +450,15 @@ You can use an output mapping to map the response:
 }
 ```
 
-## Activate the Kafka Consumer Connector by deploying your diagram
+## Activate the Kafka consumer Connector by deploying your diagram
 
-When you click the **Deploy** button, your Kafka Consumer is activated and starts consuming messages from the specified topic.
+When you click the **Deploy** button, your Kafka consumer is activated and starts consuming messages from the specified topic.
 
 ## Appendix and FAQ
 
 ### What mechanism is used to authenticate against Kafka?
 
-If you selected _Credentials_ as the **Authentication type** and the fields **Username** and **Password** are not empty, by default the **Kafka Consumer Connector** enables the credentials-based SASL SSL authentication, and sets the following properties:
+If you selected _Credentials_ as the **Authentication type** and the fields **Username** and **Password** are not empty, by default the **Kafka consumer Connector** enables the credentials-based SASL SSL authentication, and sets the following properties:
 
 ```
 sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule   required username='<Your Username>'   password='<Your Password>';
@@ -468,7 +468,7 @@ sasl.mechanism=PLAIN
 
 If any of the field is not populated, you must configure your security method for your Kafka configuration. You can do this using the **Additional properties** field.
 
-### What are default Kafka Consumer client properties?
+### What are default Kafka consumer client properties?
 
 - Authentication properties (only if both **Username** and **Password** are not empty):
 
@@ -531,9 +531,9 @@ The following outcomes are possible:
 - If the **Activation condition** was not met, the offset is also committed to prevent consuming the same message twice.
 - If the Connector execution fails due to an unexpected error (for example, Zeebe is unavailable), the offset is not committed.
 
-### What lifecycle does the Kafka Consumer Connector have?
+### What lifecycle does the Kafka consumer Connector have?
 
-The Kafka Consumer Connector is a long-running Connector that is activated when the process is deployed, and deactivated when the process is undeployed or overwritten by a new version.
+The Kafka consumer Connector is a long-running Connector that is activated when the process is deployed, and deactivated when the process is undeployed or overwritten by a new version.
 
 </TabItem>
 
