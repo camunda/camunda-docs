@@ -72,7 +72,7 @@ Create a process application by creating a `.process-application` file in the ro
 2. Choose a folder.
 3. Click **Select folder**.
 
-A `.process-application` file will be created in the selected folder. Any file within the folder or its subfolders will be treated as part of the process application.
+A `.process-application` file will be created in the selected folder, and the folder will now be recognized by the modeler as the applications project root. Any file within the folder or its subfolders will be treated as part of the process application.
 
 ### Linking resources
 
