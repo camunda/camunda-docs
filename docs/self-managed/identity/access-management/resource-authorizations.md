@@ -14,15 +14,22 @@ Use resource authorizations to configure resource-level access to Camunda 8 enti
 
 The following resource authorizations are currently supported:
 
-| Resource type | Permissions               | Resource ID                   | Description                                                       |
-| :------------ | :------------------------ | :---------------------------- | :---------------------------------------------------------------- |
-| Process       | `Read`                    | Process ID or `*` (wildcard)  | Show Process Definition and Process instance Data in Operate UI   |
-| Process       | `Delete`                  | Process ID or `*` (wildcard)  | Delete Process Definitions via Operate UI                         |
-| Process       | `Update process instance` | Process ID or `*` (wildcard)  | Update Process instance data via Operate UI                       |
-| Process       | `Delete process instance` | Process ID or `*` (wildcard)  | Delete Process instance via Operate UI                            |
-| Process       | `Start process instance`  | Process ID or `*` (wildcard)  | Start Process instance via Tasklist UI                            |
-| Decision      | `Read`                    | Decision ID or `*` (wildcard) | Show Decision Definition and Decision Instance Data in Operate UI |
-| Decision      | `Delete`                  | Decision ID or `*` (wildcard) | Delete Decision Definitions via Operate UI                        |
+| Resource type   | Permissions                       | Resource ID                   | Description                                                       |
+| :-------------- | :-------------------------------- | :---------------------------- | :---------------------------------------------------------------- |
+| Process         | `Read`                            | Process ID or `*` (wildcard)  | Show Process Definition and Process instance Data in Operate UI   |
+| Process         | `Delete`                          | Process ID or `*` (wildcard)  | Delete Process Definitions via Operate UI                         |
+| Process         | `Update process instance`         | Process ID or `*` (wildcard)  | Update Process instance data via Operate UI                       |
+| Process         | `Delete process instance`         | Process ID or `*` (wildcard)  | Delete Process instance via Operate UI                            |
+| Process         | `Start process instance`          | Process ID or `*` (wildcard)  | Start Process instance via Tasklist UI                            |
+| Decision        | `Read`                            | Decision ID or `*` (wildcard) | Show Decision Definition and Decision Instance Data in Operate UI |
+| Decision        | `Delete`                          | Decision ID or `*` (wildcard) | Delete Decision Definitions via Operate UI                        |
+| Batch-Operation | `Create`                          | `*` (wildcard)                | Create any batch operations via Operate UI                        |
+| Batch-Operation | `Create cancel process instance`  | `*` (wildcard)                | Create _cancel process instance_ batch operations via Operate UI  |
+| Batch-Operation | `Create migrate process instance` | `*` (wildcard)                | Create _migrate process instance_ batch operations via Operate UI |
+| Batch-Operation | `Create modify process instance`  | `*` (wildcard)                | Create _modify process instance_ batch operations via Operate UI  |
+| Batch-Operation | `Create resolve incident`         | `*` (wildcard)                | Create _resolve incident_ batch operations via Operate UI         |
+| Batch-Operation | `Read`                            | `*` (wildcard)                | Read batch operation data via Operate UI                          |
+| Batch-Operation | `Update`                          | `*` (wildcard)                | Manage batch operations via Operate UI                            |
 
 Resource Authorizations are only supported when running Identity with Keycloak as an IdP.
 

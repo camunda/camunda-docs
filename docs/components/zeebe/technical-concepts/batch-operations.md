@@ -21,7 +21,7 @@ A Zeebe batch operation always consists of two parts:
   process instance migration.
 - **The batch operation items**: The batch operation items to be processed are not defined directly when the batch
   operation is created. Instead, they are described by a filter. This filter is applied the configured secondary
-  database (e.g. ElasticSearch) to identify the process instances that match the filter criteria.
+  database (e.g. Elasticsearch) to identify the process instances that match the filter criteria.
 
 ### Distribution and eventual consistency
 
@@ -37,18 +37,21 @@ responsible for only a subset of process instances. When a batch operation is st
 3. Once all partitions have processed the batch operation, the final statuses are collected and the batch operation is
    marked as `COMPLETED` by the cluster.
 
-This distributed, asynchronous behaviour enables Zeebe to process large numbers of processes in parallel.
-instances in parallel. However, this also has some implications:
+This distributed, asynchronous behaviour enables Zeebe to process large numbers of processes in parallel. However, this
+also has some implications:
 
 - When a batch operation is started from the Operate UI, the filtered process instances displayed in the UI may differ
   from those actually executed in the Zeebe engine. This is because the batch operation only defines filter criteria,
   not an exact set of process instances. By the time the engine resolves the matching process instances, the search
   results may have changed. Discovery of the process instances occurs directly at the start of the batch operation.
   Therefore, when processing begins, the number of instances to be processed is fixed and will not change over the
-  lifetime of the batch operation.
+  lifetime of the batch operation. If process instances matching the filter are started after discovery but during
+  ongoing batch execution, they will not be included.
 - Each partition processes the batch operation and resolves the matching process instances independently. This means
   that, especially at the start of very large batch operations, the total number of items in the batch operation known
-  to the secondary database may vary until all partitions have finished fetching the relevant process instances.
+  to the secondary database may vary until all partitions have finished fetching the relevant process instances. This
+  applies especially to very large batch operations, as the secondary database is then queried multiple pages, until all
+  items have been fetched.
 
 ### Why query the secondary database?
 
@@ -57,10 +60,37 @@ RocksDB store. So why do we query the external database instead of using the int
 relevant process instances?
 
 - The RocksDB store is a key-value store. It is not intended for use with complex queries.
-- The secondary database (e.g. ElasticSearch) is much more efficient at searching for process instances and incidents
+- The secondary database (e.g. Elasticsearch) is much more efficient at searching for process instances and incidents
   using complex filter criteria.
 - The user flow is designed to enable users to define filter criteria in the Operate UI and apply them to the batch
   operation. This is not possible with the RocksDB store, as it does not support complex queries.
+
+### Failure handling
+
+When a batch operation is created successfully, it still can fail during its initialization and execution.
+
+#### Initialization failures
+
+During initialization, it can happen, that the batch operation fails to fetch the relevant items from the secondary
+database. This can happen, when the database might not respond or any other network failures happen. Then not the
+complete batch operation fails but just the single one partition on which the failure occurred. Other partitions will
+continue to process the batch operation as normal. A failure during initialization also means, that this partition is
+not even initialized properly with the relevant items and the number of total items of the patch operation is most
+probably incorrect.
+
+The number of failed partitions is reported in the batch operation status in the API (see the monitoring section below).
+A failed batch operation cannot be retried, but can be started again with the same filter criteria.
+
+#### Execution failures
+
+During execution, it can happen that a partition fails to process a single item of the batch operation. This for example happens, when:
+
+- the process instance already completed or was canceled since the start of the batch operation
+- the incident was already resolved since the start of the batch operation
+- the specified migration or modification plan is invalid for the process instance
+
+Failed batch operation items are marked as `FAILED` in the batch operation status. They cannot be retried. To retry, a
+new batch operation must be created with the same filter criteria.
 
 ## How do I start and monitor a batch operation?
 
@@ -71,9 +101,19 @@ There are currently two ways to create a Zeebe batch operation:
 - The [Camunda client](/apis-tools/java-client-examples/process-instance-create.md) provides an API to create, manage
   and query for batch operations.
 
-These APIs also allow batch operations to be suspended, resumed or cancelled.
+These APIs also allow ongoing batch operations to be suspended, resumed or canceled.
+
+[Operate UI](/components/operate/operate-introduction.md) currently only provides a user interface to create
+batch operations running directly in the operate app. Starting Zeebe batch operations is currently not supported. This
+support is planned with _Camunda 8.9_.
+
+### Technical monitoring
+
+Batch operation performance also can be monitored using the [Grafana dashboards](/self-managed/operational-guides/monitoring/metrics.md#grafana).
 
 ## Authorization
+
+For more details on authorization, see the [Authorization](/components/identity/authorization.md) section.
 
 In order to execute a batch operation, the user must have two different sets of permissions.
 
