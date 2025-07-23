@@ -25,7 +25,6 @@ To use mapping rules, you must be familiar with the structure of the JWT access 
 
 Assume the following payload of an access token issued by your Identity Provider (IdP):
 
-
 ```json
 {
   "sub": "1234567890",
