@@ -907,7 +907,7 @@ module.exports = {
             "apis-tools/java-client/logging",
             "apis-tools/java-client/zeebe-process-test",
             {
-              "Examples": [
+              Examples: [
                 "apis-tools/java-client-examples/index",
                 "apis-tools/java-client-examples/process-deploy",
                 "apis-tools/java-client-examples/process-instance-create",
