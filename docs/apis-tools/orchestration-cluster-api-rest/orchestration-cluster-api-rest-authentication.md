@@ -26,13 +26,12 @@ The Orchestration Cluster API supports three authentication methods depending on
 
 ## Authentication support matrix
 
-| Distribution      | Default Authentication | Supports No Auth       | Supports Basic Auth | Supports OIDC (Token-based) |
-|------------------|-----------------------|------------------------|---------------------|-----------------------------|
-| C8 Run           | None                  | ✅ (default)            | ✅ (when enabled)    | ✅ (when configured)         |
-| Docker Compose   | None                  | ✅ (default)            | ✅ (when enabled)    | ✅ (when configured)         |
-| Helm/Kubernetes  | Basic Auth            | ✅ (when Auth disabled) | ✅ (default)         | ✅ (when configured)         |
-| SaaS             | OIDC                  | ❌                      | ❌                   | ✅ (required)                |
-
+| Distribution    | Default Authentication | Supports No Auth        | Supports Basic Auth | Supports OIDC (Token-based) |
+| --------------- | ---------------------- | ----------------------- | ------------------- | --------------------------- |
+| C8 Run          | None                   | ✅ (default)            | ✅ (when enabled)   | ✅ (when configured)        |
+| Docker Compose  | None                   | ✅ (default)            | ✅ (when enabled)   | ✅ (when configured)        |
+| Helm/Kubernetes | Basic Auth             | ✅ (when Auth disabled) | ✅ (default)        | ✅ (when configured)        |
+| SaaS            | OIDC                   | ❌                      | ❌                  | ✅ (required)               |
 
 # Authenticate API calls
 
@@ -62,8 +61,8 @@ curl --user username:password \
 OIDC (OpenID Connect) is the recommended authentication method for production and required for SaaS. You must obtain a token and include it in the `Authorization` header of each request.
 
 <Tabs groupId="environment" defaultValue="saas" queryString values={[
-  {label: 'SaaS', value: 'saas' },
-  {label: 'Self-Managed', value: 'self-managed' },
+{label: 'SaaS', value: 'saas' },
+{label: 'Self-Managed', value: 'self-managed' },
 ]}>
 
 <TabItem value="saas">
@@ -123,7 +122,6 @@ For advanced security scenarios, you can use OIDC authentication with X.509 clie
 
 - The Java client supports OIDC with X.509 out of the box. You can configure the necessary keystore and truststore settings either via code or environment variables. See [Java client authentication](../java-client/authentication.md#oidc-with-x509) for a full example and configuration details.
 - For other clients or custom integrations, refer to your identity provider's documentation for how to obtain tokens using X.509 certificates.
-
 
 ## Token management in clients
 

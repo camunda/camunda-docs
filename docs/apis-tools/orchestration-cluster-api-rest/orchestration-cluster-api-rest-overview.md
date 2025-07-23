@@ -5,9 +5,11 @@ description: "Interact with Camunda 8 clusters. Activate jobs and run user task 
 ---
 
 ## Welcome to the Camunda Orchestration Cluster API
+
 The Orchestration Cluster API lets you interact programmatically with process orchestration capabilities in Camunda 8. You can use it to start, manage, and query process instances. It also lets you complete user tasks, resolve incidents, and manage variables, at scale and with confidence.
 
 You can use this API to:
+
 - Build process-driven applications
 - Integrate Camunda's User Tasks into custom task UIs
 - Start and monitor processes from external systems
@@ -45,6 +47,7 @@ Once you’re set up, try your first call using [Postman](https://www.postman.co
 - Prefer code-first? [Download the OpenAPI spec](https://github.com/camunda/camunda/blob/main/zeebe/gateway-protocol/src/main/proto/rest-api.yaml) to generate your own client or inspect the full schema.
 
 If you're just getting started, try these next steps:
+
 - Model a process definition with a user task and deploy using Modeler
 - Start a process instance: [`POST /process-instances`](./specifications/create-process-instance.api.mdx)
 - Complete a user task: [`POST /user-tasks/:userTaskKey/completion`](./specifications/complete-user-task.api.mdx)
@@ -64,10 +67,12 @@ To learn how to authenticate, follow the step-by-step guide in [Authentication](
 ## Context paths
 
 ### SaaS
+
 In the Camunda Console, go to your cluster, and in the Cluster Details, find your **Region Id** and **Cluster Id**. Use this pattern as your `${BASE_URL}`:
 `https://${REGION_ID}.zeebe.camunda.io/${CLUSTER_ID}/v2/`
 
 ### Self-Managed
+
 Use the host and path defined in your Zeebe Gateway [configuration](/self-managed/installation-methods/helm/configure/ingress-setup.md). If you’re using the default setup, the `${BASE_URL}` is: `http://localhost:8080/v2/`
 
 ## Versioning
@@ -159,6 +164,7 @@ For full details on variable filtering and structure, see [search requests](orch
 ## What's next?
 
 Now that you're familiar with the Orchestration Cluster API, here are some useful next steps:
+
 - [Build a Job Worker using the Spring SDK](../spring-zeebe-sdk/getting-started.md)
 - [Test your process definitions using Camunda Process Test](../testing/getting-started.md)
 - [Migrate from v1 component REST APIs to the v2 Orchestration Cluster API](../migration-manuals/migrate-to-camunda-api.md)

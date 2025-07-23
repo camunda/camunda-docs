@@ -916,25 +916,25 @@ module.exports = {
                 "apis-tools/java-client-examples/decision-evaluate",
                 "apis-tools/java-client-examples/job-worker-open",
                 "apis-tools/java-client-examples/data-pojo",
-                "apis-tools/java-client-examples/cluster-topology-request"
-              ]
-            }
-          ]
+                "apis-tools/java-client-examples/cluster-topology-request",
+              ],
+            },
+          ],
         },
         {
           "Camunda Spring Boot": [
             "apis-tools/spring-zeebe-sdk/getting-started",
-            "apis-tools/spring-zeebe-sdk/configuration"
-          ]
+            "apis-tools/spring-zeebe-sdk/configuration",
+          ],
         },
         "apis-tools/node-js-sdk",
         {
           "Community clients": [
             "apis-tools/community-clients/index",
-            "apis-tools/build-your-own-client"
-          ]
-        }
-      ]
+            "apis-tools/build-your-own-client",
+          ],
+        },
+      ],
     },
     require("./docs/apis-tools/frontend-development/sidebar-schema"),
     {

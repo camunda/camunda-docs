@@ -15,7 +15,7 @@ Camunda 8 exposes several APIs for different integration and automation needs:
 
 - **Orchestration Cluster API (REST):** The main API for process automation, orchestration, and user task management. Recommended for most use cases.
 - **Zeebe API (gRPC):** API for advanced integrations and high-performance use cases. Use only if you need unique features of gRPC - it requires HTTP/2.
-- **Administration API (REST):** For managing  Camunda clusters, API clients, and system-level operations.
+- **Administration API (REST):** For managing Camunda clusters, API clients, and system-level operations.
 - **Optimize API (REST):** For process analytics, dashboards, and reporting data.
 - **Web Modeler API (REST):** For integrating with the Web Modeler for modeling automation.
 
@@ -32,9 +32,9 @@ Camunda provides official clients and SDKs to simplify API usage and speed up de
 - **Node.js SDK:** For JavaScript/TypeScript developers building integrations or automations.
 
 <DocCardList items={[
-  {type:"link", href:"/docs/next/apis-tools/java-client/", label: "Java client", docId:"apis-tools/java-client/index"},
-  {type:"link", href:"/docs/next/apis-tools/spring-zeebe-sdk/getting-started/", label: "Spring SDK", docId:"apis-tools/spring-zeebe-sdk/getting-started"},
-  {type:"link", href:"/docs/next/apis-tools/node-js-sdk/", label: "Node.js SDK", docId:"apis-tools/node-js-sdk"}
+{type:"link", href:"/docs/next/apis-tools/java-client/", label: "Java client", docId:"apis-tools/java-client/index"},
+{type:"link", href:"/docs/next/apis-tools/spring-zeebe-sdk/getting-started/", label: "Spring SDK", docId:"apis-tools/spring-zeebe-sdk/getting-started"},
+{type:"link", href:"/docs/next/apis-tools/node-js-sdk/", label: "Node.js SDK", docId:"apis-tools/node-js-sdk"}
 ]}/>
 
 ## Testing process definitions and automations
@@ -42,17 +42,17 @@ Camunda provides official clients and SDKs to simplify API usage and speed up de
 - **Camunda Process Test:** Test your process definitions and automations with a dedicated testing framework.
 
 <DocCardList items={[
-  {type:"link", href:"/docs/next/apis-tools/testing/getting-started/", label: "Camunda Process Test", docId:"apis-tools/testing/getting-started"}
+{type:"link", href:"/docs/next/apis-tools/testing/getting-started/", label: "Camunda Process Test", docId:"apis-tools/testing/getting-started"}
 ]}/>
 
 ## API Reference
 
 <DocCardList items={[
-  {type:"link", href:"/docs/next/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview/", label: "Orchestration Cluster API (REST)", docId:"apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview"},
-  {type:"link", href:"/docs/next/apis-tools/zeebe-api/overview/", label: "Zeebe API (gRPC)", docId:"apis-tools/zeebe-api/grpc"},
-  {type:"link", href:"/docs/next/apis-tools/administration-api/administration-api-reference/", label: "Administration API (REST)", docId:"apis-tools/administration-api/administration-api-reference"},
-  {type:"link", href:"/docs/next/apis-tools/optimize-api/optimize-api-authentication/", label: "Optimize API (REST)", description: "Get, delete, and export reports and dashboards, enable and disable sharing, and more."},
-  {type:"link", href:"/docs/next/apis-tools/web-modeler-api/overview/", label: "Web Modeler API (REST)", docId:"apis-tools/web-modeler-api/overview"}
+{type:"link", href:"/docs/next/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview/", label: "Orchestration Cluster API (REST)", docId:"apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview"},
+{type:"link", href:"/docs/next/apis-tools/zeebe-api/overview/", label: "Zeebe API (gRPC)", docId:"apis-tools/zeebe-api/grpc"},
+{type:"link", href:"/docs/next/apis-tools/administration-api/administration-api-reference/", label: "Administration API (REST)", docId:"apis-tools/administration-api/administration-api-reference"},
+{type:"link", href:"/docs/next/apis-tools/optimize-api/optimize-api-authentication/", label: "Optimize API (REST)", description: "Get, delete, and export reports and dashboards, enable and disable sharing, and more."},
+{type:"link", href:"/docs/next/apis-tools/web-modeler-api/overview/", label: "Web Modeler API (REST)", docId:"apis-tools/web-modeler-api/overview"}
 ]}/>
 
 ## When to use which API?
