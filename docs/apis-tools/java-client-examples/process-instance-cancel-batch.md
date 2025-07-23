@@ -6,17 +6,19 @@ description: "Let's dive deeper into Zeebe and Java to cancel multiple process i
 
 ## Prerequisites
 
-1. Run the Zeebe Broker with endpoint `localhost:26500` (default).
-2. Run the [deploy a process example](process-deploy.md).
-3. Run the [create a process instance example](process-instance-create.md) multiple times.
+1. Run the Zeebe broker with endpoint `localhost:26500` (default).
+2. Run the [Deploy a process](process-deploy.md) example.
+3. Run the [Create a process instance](process-instance-create.md) example multiple times.
 
 ## CancelProcessInstanceBatchCreator.java
 
-** TODO: Actually create the example in example repo (after first review)**
+<!-- :::note
+**TODO:** Create the example in the example repo (after first review).
+::: -->
+
 [Source on GitHub](https://github.com/camunda-community-hub/camunda-8-examples/blob/main/zeebe-client-plain-java/src/main/java/io/camunda/zeebe/example/process/ProcessInstanceCreator.java)
 
-This example demonstrates how to cancel multiple process instances using a batch operation in Zeebe. The batch operation
-will be applied to all active root process instances matching the given filter object.
+This example demonstrates how to cancel multiple process instances using a batch operation in Zeebe. The batch operation is applied to all active root process instances matching the given filter object:
 
 ```java
 final CreateBatchOperationResponse result =

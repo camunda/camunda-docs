@@ -158,7 +158,8 @@ Other miscellaneous properties:
 
 | Option                               | Description                                                                                                                                                                                                                                                                                                                                                       | Default |
 | ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| batchOperation.exportItemsOnCreation | Defines, if the pending items of a started batch operation should be exported from the beginning. For very large batch operations with more than 100k process instances this can cause temporal performance issues because a lot of documents have to be inserted. If set to `false`, the "has pending batch operations"-Spinner in the Operate-UI will not work. | `true`  |
+| batchOperation.exportItemsOnCreation | Defines whether the pending items of a started batch operation should be exported from the beginning. For very large batch operations involving more than 100,000 process instances, this can cause temporary performance issues due to the high volume of document insertions. If set to `false`, the "has pending batch operations" spinner in the Operate UI will not function properly.
+ | `true`  |
 
 </TabItem>
 </Tabs>
