@@ -34,18 +34,20 @@ camunda:
           clients:
             # STDIO server started Node.js process
             filesystem: # <-- client ID, needed to reference the client in the MCP Client connector configuration
-              stio:
-                command:
-                  - "npx"
+              stdio:
+                command: npx
+                args:
                   - "-y"
                   - "@modelcontextprotocol/server-filesystem"
                   - "<path-to-files>"
+                env:
+                  MY_ENV_VAR: "my-value" # <-- optional environment variables
 
             # STDIO server started as docker container
             time:
-              stio:
-                command:
-                  - "docker"
+              stdio:
+                command: docker
+                args:
                   - "run"
                   - "-i"
                   - "--rm"
@@ -54,8 +56,8 @@ camunda:
             # Connection to a remote HTTP/SSE MCP server
             some-remote-server:
               enabled: false
-              http:
-                sse-url: https://example.com/mcp/sse
+              sse:
+                url: https://example.com/mcp/sse
 ```
 
 The YAML structure above describes the overall configuration structure of the MCP Client connector. How to configure
