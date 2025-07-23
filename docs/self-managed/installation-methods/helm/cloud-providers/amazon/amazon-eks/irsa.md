@@ -230,3 +230,30 @@ The init script remains consistent across environments, as the Elasticsearch S3 
 :::info
 `$AWS_WEB_IDENTITY_TOKEN_FILE` is automatically injected into the pod by EKS when the pod is using a service account annotated with a valid `eks.amazonaws.com/role-arn`.
 :::
+
+## Troubleshooting OpenSearch "all shards failed" on 8.8
+
+When deploying using the managed OpenSearch service by AWS with multiple nodes, the camunda core sometimes will log an error saying "all shards failed". However, this does not always mean that the data on the OpenSearch node is corrupted. The first thing to check is query the `/_cat/indices` endpoint on the OpenSearch cluster to confirm whether the status is green or red.
+
+If the status is green but the logs still have "all shards failed", one explanation is that the connection between multiple OpenSearch nodes is down.
+
+```
+Orchestration Cluster <--> OpenSearch Node 1 (no shard) <-x-> OpenSearch Node 2 (contains shard)
+```
+
+8.8 makes more requests to OpenSearch than 8.7 and below, because OpenSearch contains data related to authorization, meaning every request to the orchestration cluster will make some request to OpenSearch. 8.7 and below would make these sorts of requests to Keycloak and PostgreSQL instead.
+
+To make OpenSearch more robust to momentary network outages between their own nodes, camunda can be configured with the following environment variables to increase the read replicas. (Default: 0)
+
+`values.yaml` configuration
+
+```yaml
+core:
+  env:
+    - name: CAMUNDA_TASKLIST_OPENSEARCH_NUMBEROFREPLICAS
+      value: "2"
+    - name: CAMUNDA_OPERATE_OPENSEARCH_NUMBEROFREPLICAS
+      value: "2"
+    - name: CAMUNDA_DATABASE_INDEX_NUMBEROFREPLICAS
+      value: "2"
+```
