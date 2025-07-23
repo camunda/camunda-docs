@@ -165,7 +165,7 @@ For full details on variable filtering and structure, see [search requests](orch
 
 Now that you're familiar with the Orchestration Cluster API, here are some useful next steps:
 
-- [Build a Job Worker using the Spring SDK](../spring-zeebe-sdk/getting-started.md)
+- [Build a Job worker using the Spring SDK](../spring-zeebe-sdk/getting-started.md)
 - [Test your process definitions using Camunda Process Test](../testing/getting-started.md)
 - [Migrate from v1 component REST APIs to the v2 Orchestration Cluster API](../migration-manuals/migrate-to-camunda-api.md)
 - [Download the OpenAPI spec](https://github.com/camunda/camunda/blob/main/zeebe/gateway-protocol/src/main/proto/rest-api.yaml) to generate a client or explore the raw schema
