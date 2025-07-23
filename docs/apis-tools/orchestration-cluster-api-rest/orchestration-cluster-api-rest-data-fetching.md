@@ -15,10 +15,10 @@ The sections below explain how to structure a search request and interpret the r
 
 The following examples support search via POST endpoints, each with its own set of filterable fields:
 
-* Process Instances (`POST /v2/process-instances/search`)
-* User Tasks (`POST /v2/user-tasks/search`)
-* Users (`POST /v2/users/search`)
-* Batch Operations (`POST /v2/batch-operations/search`)
+- Process Instances (`POST /v2/process-instances/search`)
+- User Tasks (`POST /v2/user-tasks/search`)
+- Users (`POST /v2/users/search`)
+- Batch Operations (`POST /v2/batch-operations/search`)
 
 Refer to the [interactive Orchestration Cluster API Explorer][camunda-api-explorer] for the full attribute lists.
 
@@ -26,10 +26,10 @@ Refer to the [interactive Orchestration Cluster API Explorer][camunda-api-explor
 
 Most searchable resources allow:
 
-* Filtering based on properties or variables
-* Sorting results
-* Paginating with either offset or cursor methods
-* Accessing nested resources (e.g., group users)
+- Filtering based on properties or variables
+- Sorting results
+- Paginating with either offset or cursor methods
+- Accessing nested resources (e.g., group users)
 
 > Example: You can search for groups using `POST /v2/groups/search`, and for the users in a group using `POST /v2/groups/:groupId/users/search`.
 
@@ -38,10 +38,13 @@ You can also fetch single resources using `GET` endpoints with unique identifier
 ```shell
 GET /v2/user-tasks/:userTaskKey
 ```
+
 ## Data consistency
+
 All search and retrieval endpoints (GET and POST) return near-real-time data consistency guarantees. Results reflect the current state of runtime and historic data that has been processed by the [Camunda Exporter](../../self-managed/zeebe-deployment/exporters/camunda-exporter.md).
 
 ## User task support
+
 The Orchestration Cluster API only supports Camunda user tasks (previously referred to as [Zeebe user tasks](../migration-manuals/migrate-to-camunda-user-tasks.md)), which may still appear as `zeebe:userTask` in your XML content).
 
 ## Search requests
