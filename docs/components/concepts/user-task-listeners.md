@@ -114,8 +114,8 @@ The following user task attributes can be accessed from the activated job's `use
 
 | Attribute           | Description                                                                                                                                                                                   |
 | :------------------ | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `action`            | A custom action value provided along with the request that triggered this event. If none was provided, it defaults to one of `assign`, `claim`, `update`, or `complete`.                     |
-| `assignee`          | The user assigned to the task. If not specified, the task is unassigned. Refer to [assignments](/components/modeler/bpmn/user-tasks/user-tasks.md#assignments) for more details.             |
+| `action`            | A custom action value provided along with the request that triggered this event. If none was provided, it defaults to one of `assign`, `claim`, `update`, or `complete`.                      |
+| `assignee`          | The user assigned to the task. If not specified, the task is unassigned. Refer to [assignments](/components/modeler/bpmn/user-tasks/user-tasks.md#assignments) for more details.              |
 | `candidateGroups`   | Specifies the groups of users that the task can be assigned to. Refer to [assignments](/components/modeler/bpmn/user-tasks/user-tasks.md#assignments) for more details.                       |
 | `candidateUsers`    | Specifies the users that the task can be assigned to. Refer to [assignments](/components/modeler/bpmn/user-tasks/user-tasks.md#assignments) for more details.                                 |
 | `changedAttributes` | Lists the user task attributes that have changed with the event. Refer to the [changed attributes](#changed-attributes) section below for more details.                                       |
