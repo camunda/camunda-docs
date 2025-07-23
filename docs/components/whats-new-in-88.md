@@ -34,7 +34,7 @@ The simplest possible deployment now becomes running a single Java application o
 </tr>
 <tr>
     <td>[Identity, authentication, and authorization](#identity-authentication-and-authorization)</td>
-    <!-- <td>Identity is now...</td> -->
+    <td>Details coming soon.</td>
 </tr>
 <tr>
     <td>[APIs and SDKs](#apis-and-sdks)</td>
