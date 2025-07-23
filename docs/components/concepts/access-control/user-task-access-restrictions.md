@@ -8,7 +8,9 @@ description: "Control the level of access a user or group has to perform tasks i
 User task access restrictions allow you to restrict access of user tasks in Tasklist to [users](../../console/manage-organization/manage-users.md) or
 [groups](user-groups.md) where they are assignees or candidates.
 
-Please note that this is only supported in Tasklist v1 UI.
+:::note
+This is only supported in Tasklist v1 UI.
+:::
 
 ### User task access restrictions
 
