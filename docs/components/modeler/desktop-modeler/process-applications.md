@@ -52,7 +52,7 @@ consumer-loan-application/
 
 ## Editor support for process applications
 
-When you open a file in Modeler, the system implicitly determines whether it belongs to a process application. It does so by checking for the presence of a `.process-application` file in the same folder or a parent folder. Within a process application, Modeler offers advanced navigation and intelligence.
+When you open a file in Modeler, the system implicitly determines whether it belongs to a process application. It does so by checking for the presence of a `.process-application` file in the same folder or a parent folder. Within a process application, Modeler offers improved navigation and assistance.
 
 ### Indicating context
 
