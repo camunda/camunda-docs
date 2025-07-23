@@ -233,17 +233,19 @@ The init script remains consistent across environments, as the Elasticsearch S3 
 
 ## Troubleshooting OpenSearch "all shards failed" on 8.8
 
-When deploying using the managed OpenSearch service by AWS with multiple nodes, the camunda core sometimes will log an error saying "all shards failed". However, this does not always mean that the data on the OpenSearch node is corrupted. The first thing to check is query the `/_cat/indices` endpoint on the OpenSearch cluster to confirm whether the status is green or red.
+When deploying Camunda using AWS’s managed OpenSearch service with multiple nodes, you may encounter an `all shards failed` error in the Camunda core logs. However, this error does not always indicate corrupted data on the OpenSearch node.
 
-If the status is green but the logs still have "all shards failed", one explanation is that the connection between multiple OpenSearch nodes is down.
+As a first step, query the `/_cat/indices` endpoint on the OpenSearch cluster to check the health status of the indices. If the status is `green`, but the logs still show the `all shards failed` error, a likely cause is a connectivity issue between OpenSearch nodes.
+
+In this case, investigate the network communication and health of the OpenSearch nodes themselves to identify any disruptions:
 
 ```
 Orchestration Cluster <--> OpenSearch Node 1 (no shard) <-x-> OpenSearch Node 2 (contains shard)
 ```
 
-8.8 makes more requests to OpenSearch than 8.7 and below, because OpenSearch contains data related to authorization, meaning every request to the orchestration cluster will make some request to OpenSearch. 8.7 and below would make these sorts of requests to Keycloak and PostgreSQL instead.
+In version 8.8, Camunda makes more requests to OpenSearch than in 8.7 and earlier versions. This is because OpenSearch now stores data related to authorization, so every request to the Orchestration Cluster involves a corresponding request to OpenSearch. In contrast, versions 8.7 and below made these authorization-related requests to Keycloak and PostgreSQL instead.
 
-To make OpenSearch more robust to momentary network outages between their own nodes, camunda can be configured with the following environment variables to increase the read replicas. (Default: 0)
+To make OpenSearch more resilient to brief network outages between its nodes, you can configure Camunda to increase the number of read replicas using the following environment variables (Default: `0`):
 
 `values.yaml` configuration
 
