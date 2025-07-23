@@ -528,11 +528,11 @@ Properties `formId` and `externalReference` are mutually exclusive, meaning that
 
 #### `zeebe:calledDecision`
 
-| **Binding `type`**          | `zeebe:calledDecision`                                                                     |
-| --------------------------- | ------------------------------------------------------------------------------------------ |
-| **Valid property `type`'s** | `String`<br />`Text`<br />`Hidden`<br />`Dropdown`                                         |
+| **Binding `type`**          | `zeebe:calledDecision`                                                                      |
+| --------------------------- | ------------------------------------------------------------------------------------------- |
+| **Valid property `type`'s** | `String`<br />`Text`<br />`Hidden`<br />`Dropdown`                                          |
 | **Binding parameters**      | `property`: The name of the property. Only `decisionId` and `resultVariable` are supported. |
-| **Mapping result**          | `<zeebe:calledDecision [property]="[userInput]" />`                                        |
+| **Mapping result**          | `<zeebe:calledDecision [property]="[userInput]" />`                                         |
 
 The `zeebe:calledDecision` binding allows you to configure the [called decision](../../../bpmn/business-rule-tasks/#defining-a-task) used by a business rule task.
 
