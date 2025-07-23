@@ -68,7 +68,7 @@ See: [Update guide: 8.7.x → 8.8](../operational-guides/update-guide/870-to-880
 
 ### API and SDK changes with 8.8
 
-You can learn about what changes for Application Developers in the dedicated [Camunda 8.8 APIs & tools update guide](../../apis-tools/migration-manuals/index.md).
+Learn more about changes for application developers in the dedicated [Camunda 8.8 APIs & tools update guide](../../apis-tools/migration-manuals/index.md).
 
 ### Authentication and authorization
 
