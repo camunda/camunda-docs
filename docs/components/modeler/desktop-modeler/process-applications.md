@@ -24,7 +24,7 @@ Consider an application implementing consumer loan approval. It may contain:
 - Various [job workers](/components/concepts/job-workers.md) that implement process behavior.
 - Additional application code and tests
 
-In a standard standard Java/Maven project, such an application may be structured as follows:
+In a typical Java/Maven project, the structure of such an application might be as follows:
 
 ```
 consumer-loan-application/
