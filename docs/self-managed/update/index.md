@@ -68,12 +68,12 @@ See: [Update guide: 8.7.x → 8.8](../operational-guides/update-guide/870-to-880
 
 ### API and SDK status
 
-| Component / Use          | Status in 8.8  | Migrate to                 | Migrate by                |
-|--------------------------|----------------|----------------------------|---------------------------|
-| V1 component APIs        | **Deprecated** | Orchestration Cluster API  | Before Camunda 8.10       |
-| Community Spring Zeebe   | **Deprecated** | Camunda Spring SDK         | Before Camunda 8.10       |
-| Zeebe Process Test (ZPT) | **Deprecated** | Camunda Process Test (CPT) | Before Camunda 8.10       |
-| Job-based user tasks     | **Deprecated** | Camunda User Tasks         | Before Camunda 8.10       |
+| Component / Use          | Status in 8.8  | Migrate to                 | Migrate by          |
+| ------------------------ | -------------- | -------------------------- | ------------------- |
+| V1 component APIs        | **Deprecated** | Orchestration Cluster API  | Before Camunda 8.10 |
+| Community Spring Zeebe   | **Deprecated** | Camunda Spring SDK         | Before Camunda 8.10 |
+| Zeebe Process Test (ZPT) | **Deprecated** | Camunda Process Test (CPT) | Before Camunda 8.10 |
+| Job-based user tasks     | **Deprecated** | Camunda User Tasks         | Before Camunda 8.10 |
 
 :::tip Start migration early
 Begin migrating now to reduce risk when upgrading beyond 8.8.

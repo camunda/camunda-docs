@@ -32,7 +32,7 @@ Review the platform-level changes between versions 8.7 and 8.8.
 ### Architectural highlights
 
 | Change                                                                  | Impact                                         |
-|-------------------------------------------------------------------------|-----------------------------------------------|
+| ----------------------------------------------------------------------- | ---------------------------------------------- |
 | **Single orchestration container** (Zeebe, Operate, Tasklist, Identity) | Fewer pods, simplified scaling, unified config |
 | **Streamlined Helm chart**                                              | Fewer templates, new values file structure     |
 | **Unified configuration**                                               | Shared YAML schema across components           |
@@ -64,7 +64,7 @@ Monitor their logs and wait until they report **Completed** before scaling down 
 ## Step 3 – Check infrastructure compatibility
 
 | Area                       | 8.8 requirement                              | Action                                          |
-|----------------------------|----------------------------------------------|-------------------------------------------------|
+| -------------------------- | -------------------------------------------- | ----------------------------------------------- |
 | Elasticsearch / OpenSearch | Elasticsearch ≥ 8.16 (OpenSearch TBD)        | Upgrade the cluster or create a new instance    |
 | CPU / Memory               | Consolidated Zeebe StatefulSet shares limits | Measure current usage; test with load generator |
 | Storage                    | Same or higher IOPS as 8.7                   | Check space for temporary migration files       |
@@ -75,11 +75,11 @@ Component consolidation changes resource usage. Run a load test that reflects pr
 
 ## Step 4 – Create an update timeline
 
-| Phase                     | Typical duration | Downtime                       |
-|---------------------------|------------------|--------------------------------|
-| Pre-update preparation    | 1–2 weeks        | No                             |
-| Cluster update            | 1–4 hours        | Depends on data migration size |
-| Validation and tuning     | 1–2 days         | No                             |
+| Phase                  | Typical duration | Downtime                       |
+| ---------------------- | ---------------- | ------------------------------ |
+| Pre-update preparation | 1–2 weeks        | No                             |
+| Cluster update         | 1–4 hours        | Depends on data migration size |
+| Validation and tuning  | 1–2 days         | No                             |
 
 Document backup and rollback procedures for each phase.
 
