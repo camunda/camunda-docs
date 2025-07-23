@@ -7,8 +7,8 @@ description: "Let's dive deeper into Zeebe and Java to cancel multiple process i
 ## Prerequisites
 
 1. Run the Zeebe broker with endpoint `localhost:26500` (default).
-2. Run the [Deploy a process](process-deploy.md) example.
-3. Run the [Create a process instance](process-instance-create.md) example multiple times.
+2. Run the [deploy a process](process-deploy.md) example.
+3. Run the [create a process instance](process-instance-create.md) example multiple times.
 
 ## CancelProcessInstanceBatchCreator.java
 
