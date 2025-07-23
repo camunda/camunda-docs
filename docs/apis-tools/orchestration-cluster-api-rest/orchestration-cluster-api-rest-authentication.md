@@ -26,12 +26,12 @@ The Orchestration Cluster API supports three authentication methods depending on
 
 ## Authentication support matrix
 
-| Distribution    | Default Authentication | Supports No Auth        | Supports Basic Auth | Supports OIDC (Token-based) |
-| --------------- | ---------------------- | ----------------------- | ------------------- | --------------------------- |
-| C8 Run          | None                   | ✅ (default)            | ✅ (when enabled)   | ✅ (when configured)        |
-| Docker Compose  | None                   | ✅ (default)            | ✅ (when enabled)   | ✅ (when configured)        |
-| Helm/Kubernetes | Basic Auth             | ✅ (when Auth disabled) | ✅ (default)        | ✅ (when configured)        |
-| SaaS            | OIDC                   | ❌                      | ❌                  | ✅ (required)               |
+| Distribution                                                                | Default Authentication | Supports No Auth        | Supports Basic Auth | Supports OIDC (Token-based) |
+|-----------------------------------------------------------------------------| ---------------------- | ----------------------- | ------------------- | --------------------------- |
+| [C8 Run](../../self-managed/quickstart/developer-quickstart/c8run.md)            | None                   | ✅ (default)            | ✅ (when enabled)   | ✅ (when configured)        |
+| [Docker Compose](../../self-managed/quickstart/developer-quickstart/docker-compose.md) | None                   | ✅ (default)            | ✅ (when enabled)   | ✅ (when configured)        |
+| [Helm](../../self-managed/installation-methods/helm/install.md)                   | Basic Auth             | ✅ (when Auth disabled) | ✅ (default)        | ✅ (when configured)        |
+| SaaS                                                                        | OIDC                   | ❌                      | ❌                  | ✅ (required)               |
 
 # Authenticate API calls
 
@@ -47,7 +47,7 @@ curl http://localhost:8080/v2/topology
 
 Enable Basic Auth in C8 Run by configuring authentication in your `application.yaml`. For detailed steps, see the [C8 Run documentation on enabling authentication](../../self-managed/quickstart/developer-quickstart/c8run.md#enable-authentication-and-authorization).
 
-On Helm/Kubernetes, Basic Auth is enabled by default for the Orchestration Cluster API.
+On Helm, Basic Auth is enabled by default for the Orchestration Cluster API.
 
 Once authentication is enabled, you can use Basic Authentication with your username and password. Make sure a user is created for this purpose, or use the default user: `demo`/`demo`. Include your username and password in each API request:
 
