@@ -28,9 +28,9 @@ The Orchestration Cluster API supports three authentication methods depending on
 
 | Distribution      | Default Authentication | Supports No Auth       | Supports Basic Auth | Supports OIDC (Token-based) |
 |------------------|-----------------------|------------------------|---------------------|-----------------------------|
-| C8 Run           | None                  | ✅ (default)            | ✅ (when enabled)    | ✅ (when configured)         |
-| Docker Compose   | None                  | ✅ (default)            | ✅ (when enabled)    | ✅ (when configured)         |
-| Helm/Kubernetes  | Basic Auth            | ✅ (when Auth disabled) | ✅ (default)         | ✅ (when configured)         |
+| [C8 Run](../../self-managed/quickstart/developer-quickstart/c8run.md)          | None                  | ✅ (default)            | ✅ (when enabled)    | ✅ (when configured)         |
+| [Docker Compose](../../self-managed/quickstart/developer-quickstart/docker-compose.md) | None                  | ✅ (default)            | ✅ (when enabled)    | ✅ (when configured)         |
+| [Helm](../../self-managed/installation-methods/helm/install.md)  | Basic Auth            | ✅ (when Auth disabled) | ✅ (default)         | ✅ (when configured)         |
 | SaaS             | OIDC                  | ❌                      | ❌                   | ✅ (required)                |
 
 
