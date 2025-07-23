@@ -40,7 +40,7 @@ Once you’re set up, try your first call using [Postman](https://www.postman.co
 
 ## Explore the API
 
-- Visit the [interactive Orchestration Cluster API Explorer][camunda-api-explorer] to:
+- Visit the [interactive Orchestration Cluster API Explorer][./specifications/orchestration-cluster-rest-api.info.mdx] to:
   - Browse available endpoints
   - See request and response examples
   - Check code samples
