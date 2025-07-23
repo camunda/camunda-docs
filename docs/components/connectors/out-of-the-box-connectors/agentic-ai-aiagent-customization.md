@@ -113,7 +113,7 @@ public class MyCustomAgentInitializer implements AgentInitializer {
 
 The AI Agent connector includes a set of default storage backends for conversation history, but you can also implement your own to meet specific needs. Similar to the agent initialization example above, you can register a bean that implements the `ConversationStore` interface to provide your own storage implementation.
 
-The following example shows how to implement a custom store using a Spring Data JPA repository:
+The following example shows how to implement a custom store using a Spring Data JPA repository. The value returned by the `type()` method is used to identify the store type in the AI Agent connector configuration.
 
 ```java
 
@@ -161,3 +161,7 @@ After implementing the custom store, you can reference the store type in your AI
 1. In the **Memory** group of the AI Agent connector properties, set the **Memory storage type** to **Custom implementation**.
 2. In the **Implementation type** field, enter the type value of your custom store implementation (`my-conversation` in the example above).
 3. Run your process model. It should now use your custom conversation store for storing the conversation history.
+
+:::info
+An incident is raised if the AI Agent connector is not able to find a conversation store implementation for the specified type.
+:::
