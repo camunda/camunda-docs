@@ -34,7 +34,7 @@ The simplest possible deployment now becomes running a single Java application o
 </tr>
 <tr>
     <td>[Identity, authentication, and authorization](#identity-authentication-and-authorization)</td>
-    <td>Identity is now...</td>
+    <!-- <td>Identity is now...</td> -->
 </tr>
 <tr>
     <td>[APIs and SDKs](#apis-and-sdks)</td>
@@ -104,9 +104,9 @@ Content is here
 
 The Orchestration cluster (previously automation cluster) is now the core component of [Camunda 8](../reference/glossary.md#camunda-8), powering the automation and orchestration of [processes](../reference/glossary.md#process).
 
-## Camunda Process Test
+<!-- ## Camunda Process Test
 
-<div><PersonaBadge persona="Developer" /></div>
+<div><PersonaBadge persona="Developer" /></div> -->
 
 ## Data and storage {#data}
 
