@@ -39,10 +39,4 @@ export const gettingStartedCards = [
     description:
       "Rules and development practices for smooth migration preparation.",
   },
-  {
-    link: "./technical-details",
-    title: "Technical details",
-    image: IconBpmImg,
-    description: "Technical details around BPMN and DMN model differences.",
-  },
 ];
