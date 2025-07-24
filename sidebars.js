@@ -65,7 +65,6 @@ module.exports = {
         "components/concepts/outbound-connectors-job-workers",
         "components/concepts/backups",
         "components/concepts/resource-deletion",
-        "components/concepts/resource-authorizations",
         {
           "Access control": [
             "components/concepts/access-control/access-control-overview",
@@ -1619,7 +1618,6 @@ module.exports = {
                   },
                   items: [
                     "self-managed/identity/access-management/manage-permissions",
-                    "self-managed/identity/access-management/resource-authorizations",
                   ],
                 },
                 "self-managed/identity/managing-tenants",
