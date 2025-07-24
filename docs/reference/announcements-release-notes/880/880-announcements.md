@@ -100,6 +100,10 @@ Using more than one isolated Elasticsearch/OpenSearch instance for exported Zeeb
 
 As of the 8.8 release, Camunda is compatible with Elasticsearch 8.16+ and no longer supports older Elasticsearch versions. See [supported environments](/reference/supported-environments.md).
 
+### Versioning changes in OpenSearch
+
+As of the 8.8 release, Camunda is compatible with OpenSearch 2.17+ and no longer supports older OpenSearch versions. See [supported environments](/reference/supported-environments.md).
+
 ## Key changes
 
 ### Removed: Starter plan <span class="badge badge--long" title="This feature affects SaaS">SaaS</span>
