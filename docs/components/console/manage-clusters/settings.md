@@ -1,10 +1,10 @@
 ---
 id: settings
 title: Settings
-description: "Manage your cluster settings using resource-based authorizations, automatic cluster updates, and user task restrictions, or permanently delete the cluster."
+description: "Manage your cluster settings using authorizations, automatic cluster updates, and user task restrictions, or permanently delete the cluster."
 ---
 
-Manage your cluster settings using resource-based authorizations, automatic cluster updates, and user task restrictions, or permanently delete the cluster.
+Manage your cluster settings using authorizations, automatic cluster updates, and user task restrictions, or permanently delete the cluster.
 
 ## Manage cluster settings
 
@@ -16,15 +16,15 @@ To manage your cluster settings:
 
 ![Cluster settings](./img/cluster-settings.png)
 
-## Resource-based authorizations
+## Authorizations
 
-You can enable resource-based authorization on a per-cluster basis to control the level of access users have over system resources.
+You can enable authorizations on a per-cluster basis to control the level of access users have over system resources.
 
-- Enable this setting to use resource-based authorization in the cluster. You must define resource access for each user as users no longer have access to all process and decision definitions.
-- Disable this setting if you do not want to use resource-based authorization in the cluster. You can still configure resource authorizations, but they are only applied to cluster users when you enable this setting.
+- Enable this setting to use authorizations in the cluster. You must define resource access for each user as users and clients no longer have access to all process and decision definitions.
+- Disable this setting if you do not want to use authorizations in the cluster. You can still configure authorizations, but they are only applied to cluster when you enable this setting.
 
 :::tip
-For more information on resource-based authorization, see [resource authorizations](/components/concepts/resource-authorizations.md) and [resource-based authorization](/components/console/manage-organization/manage-users.md#resource-based-authorizations).
+For more information on authorizations, see [authorizations](/components/concepts/access-control/authorizations.md).
 :::
 
 ## Automatic cluster updates

@@ -259,9 +259,9 @@ In case you use an embedded Zeebe engine, or want to provide a lightweight, focu
 
 Push approved changes to staging or production by deploying them to the respective clusters. You can use the [Orchestration cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) to deploy via your pipeline, which works both for a SaaS or Self-Managed cluster. Deployments work slightly different on SaaS and Self-Managed, since there are differences in the cluster connection. Read more about deployments [here](/apis-tools/working-with-apis-tools.md#deploy-processes-start-process-instances-and-more-using-zeebe-client-libraries).
 
-#### Define resource authorizations
+#### Define authorizations
 
-For clusters with [resource authorizations](/self-managed/identity/access-management/resource-authorizations.md) enabled (via the `RESOURCE_PERMISSIONS_ENABLED` [feature flag](/self-managed/identity/miscellaneous/configuration-variables.md#feature-flags)), use the Identity API to assign the necessary authorizations through the pipeline. This step ensures appropriate accessibility for process/application stakeholders or updating existing authorizations.
+For clusters with [authorizations](/components/concepts/access-control/authorizations.md) enabled, use the Orchestration Cluster API to assign the necessary authorizations through the pipeline. This step ensures appropriate accessibility for process/application stakeholders or updating existing authorizations.
 
 ##### Monitoring and error handling
 
