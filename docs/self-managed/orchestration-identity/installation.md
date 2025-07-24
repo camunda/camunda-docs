@@ -87,7 +87,7 @@ By default, a user is not assigned to any roles and therefore has no permissions
 
 #### Assign users, clients, groups, or mapping rules to roles via configuration
 
-The Orchestration cluster provides a number of built-in roles for easier setup. For details on available roles and their permissions, see the [Authorizations](../../components/concepts/access-control/authorizations.md) page.
+The Orchestration cluster provides a number of [built-in roles](../../components/concepts/access-control/authorizations.md#default-roles) with predefined permissions for easier setup.
 
 To assign users, clients, groups, or [mapping rules](/self-managed/concepts/mapping-rules.md) to roles, add the appropriate properties to your `application.yaml` or set them as environment variables.
 
