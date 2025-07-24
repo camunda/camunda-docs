@@ -6,10 +6,10 @@ description: How distributed batch operations work in Zeebe engine.
 
 Zeebe supports executing certain operations as batch operations:
 
-- Resolve incidents  
-- Migrate process instances  
-- Modify process instances  
-- Cancel process instances  
+- Resolve incidents
+- Migrate process instances
+- Modify process instances
+- Cancel process instances
 
 ## How do they work?
 
@@ -32,10 +32,10 @@ Zeebe clusters are distributed systems with multiple brokers and partitions. Eac
 
 When a batch operation starts:
 
-1. The batch operation (command + filter) is created and distributed to all partitions.  
-2. Each partition processes the batch independently:  
-   - It uses the filter to find relevant process instances in the secondary database.  
-   - It applies the batch command to each matched instance.  
+1. The batch operation (command + filter) is created and distributed to all partitions.
+2. Each partition processes the batch independently:
+   - It uses the filter to find relevant process instances in the secondary database.
+   - It applies the batch command to each matched instance.
 3. After all partitions finish, the final statuses are collected, and the batch is marked `COMPLETED`.
 
 This distributed, asynchronous approach allows parallel processing of many process instances.
@@ -56,8 +56,8 @@ This distributed, asynchronous approach allows parallel processing of many proce
 
 Although the broker’s internal RocksDB stores process instance data, the external database is queried because:
 
-- RocksDB is a key-value store, not optimized for complex queries.  
-- The secondary database (e.g., Elasticsearch) efficiently supports complex filtering.  
+- RocksDB is a key-value store, not optimized for complex queries.
+- The secondary database (e.g., Elasticsearch) efficiently supports complex filtering.
 - The user interface enables filter-based batch creation, which RocksDB cannot support.
 
 ### Failure handling
@@ -66,18 +66,18 @@ Batch operations may fail during **initialization** or **execution**.
 
 #### Initialization failures
 
-- Occur if a partition cannot fetch relevant items from the secondary database (e.g., network issues).  
-- Only the affected partition fails; others continue processing normally.  
-- Failed partitions may have incorrect item counts.  
-- The API reports failed partitions in the batch status.  
+- Occur if a partition cannot fetch relevant items from the secondary database (e.g., network issues).
+- Only the affected partition fails; others continue processing normally.
+- Failed partitions may have incorrect item counts.
+- The API reports failed partitions in the batch status.
 - Failed batches cannot be retried but can be restarted with the same filter.
 
 #### Execution failures
 
 Failures may occur when a partition processes individual batch items. Examples include:
 
-- The process instance completed or was canceled after batch start.  
-- The incident was resolved after batch start.  
+- The process instance completed or was canceled after batch start.
+- The incident was resolved after batch start.
 - The migration or modification plan is invalid for the instance.
 
 Failed items are marked `FAILED` in the batch status and cannot be retried. To retry, create a new batch with the same filter.
@@ -86,7 +86,7 @@ Failed items are marked `FAILED` in the batch status and cannot be retried. To r
 
 You can create batch operations using:
 
-- The [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md), which provides REST endpoints to create, manage, and monitor batches.  
+- The [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md), which provides REST endpoints to create, manage, and monitor batches.
 - The [Camunda client](/apis-tools/java-client-examples/process-instance-create.md), which offers APIs for batch operations.
 
 These APIs also support suspending, resuming, or canceling ongoing batch operations.
@@ -103,7 +103,7 @@ Batch operation performance can be tracked via [Grafana dashboards](/self-manage
 
 To execute a batch operation, users need two sets of permissions:
 
-- Permission to create the batch operation.  
+- Permission to create the batch operation.
 - Permission to read and act on the process instances targeted by the batch.
 
 For detailed authorization info, see [Authorization](/components/identity/authorization.md).
@@ -114,7 +114,7 @@ Batch operations share cluster resources with regular process instances, affecti
 
 Large batch operations can temporarily impact cluster performance during:
 
-- Batch creation in RocksDB.  
-- Initialization, when partitions query the secondary database individually and in parallel.  
+- Batch creation in RocksDB.
+- Initialization, when partitions query the secondary database individually and in parallel.
 
 Heavy querying of the secondary database can notably affect its performance, especially for large batches with broad filters.

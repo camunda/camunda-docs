@@ -14,8 +14,8 @@ Use resource authorizations to configure resource-level access to Camunda 8 enti
 
 The following resource authorizations are currently supported:
 
-| Resource type   | Permissions                       | Resource ID                   | Description                                                       |
-| :-------------- | :-------------------------------- | :---------------------------- | :---------------------------------------------------------------- |
+| Resource type   | Permissions                       | Resource ID                   | Description                                                           |
+| :-------------- | :-------------------------------- | :---------------------------- | :-------------------------------------------------------------------- |
 | Process         | `Read`                            | Process ID or `*` (wildcard)  | Show process definition and process instance data in the Operate UI   |
 | Process         | `Delete`                          | Process ID or `*` (wildcard)  | Delete process definitions via the Operate UI                         |
 | Process         | `Update process instance`         | Process ID or `*` (wildcard)  | Update process instance data via the Operate UI                       |
