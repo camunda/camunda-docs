@@ -30,6 +30,11 @@ void shouldTriggerTimerEvent() {
 }
 ```
 
+:::tip
+If you trigger a BPMN timer event, you should assert that the BPMN timer event is active before manipulating the clock.
+Otherwise, you may manipulate the clock too early and the BPMN timer event is not triggered.
+:::
+
 ## Mock job workers
 
 You can mock a job worker to simulate its behavior without invoking the actual worker. The mock handles all jobs of the given job type.
@@ -39,6 +44,19 @@ When to use it:
 - Test the process in isolation from the actual job workers
 - Simulate different outcomes of a job worker (success, BPMN error)
 - Mock disabled job workers or Connectors
+
+:::tip
+If you start the process application in your test case, you
+should [disable the job workers](../spring-zeebe-sdk/configuration.md#disable-a-job-worker) to avoid interferences with
+the mocks, for example, by setting the following configuration:
+
+```java
+@SpringBootTest(properties = {"camunda.client.worker.defaults.enabled=false"})
+@CamundaSpringProcessTest
+class MyProcessTest { .. }
+```
+
+:::
 
 ### Complete job
 
