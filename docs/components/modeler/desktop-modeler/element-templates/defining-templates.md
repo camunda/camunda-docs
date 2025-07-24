@@ -493,6 +493,10 @@ The binding name of `correlationKey` is not applicable to message start events o
 
 The `zeebe:calledElement` binding allows you to configure process called by a call activity.
 
+You can set the value of the property `bindingType` to control the [resource binding type](../../../../best-practices/modeling/choosing-the-resource-binding-type).
+We recommend setting the property `bindingType` to the value `"versionTag"` and setting property `versionTag`
+to the value of the version tag of the process you want to call.
+
 :::note
 
 For `zeebe:calledElement` bindings, variable propagation is not supported. To provide or retrieve variables, use `zeebe:input` and `zeebe:output` bindings.
@@ -519,6 +523,10 @@ The `zeebe:userTask` binding allows you to configure the implementation type for
 
 The `zeebe:formDefinition` binding allows you to configure the [user task form](../../../bpmn/user-tasks/#user-task-forms) used by a user task.
 
+When setting the `formId` property, you can set the value of the property `bindingType` to control the [resource binding type](../../../../best-practices/modeling/choosing-the-resource-binding-type).
+We recommend setting the property `bindingType` to the value `"versionTag"` and setting property `versionTag`
+to the value of the version tag of the form you want to link.
+
 :::note
 
 When `zeebe:formDefinition` is used, `zeebe:userTask` must be set on the same element.
@@ -535,6 +543,10 @@ Properties `formId` and `externalReference` are mutually exclusive, meaning that
 | **Mapping result**          | `<zeebe:calledDecision [property]="[userInput]" />`                                                                               |
 
 The `zeebe:calledDecision` binding allows you to configure the [called decision](../../../bpmn/business-rule-tasks/#defining-a-task) used by a business rule task.
+
+You can set the value of the property `bindingType` to control the [resource binding type](../../../../best-practices/modeling/choosing-the-resource-binding-type).
+We recommend setting the property `bindingType` to the value `"versionTag"` and setting property `versionTag`
+to the value of the version tag of the decision you want to call.
 
 :::note
 
