@@ -5,9 +5,6 @@ description: Manage your connector templates in Web Modeler.
 ---
 
 export const UploadIcon = () => <span style={{verticalAlign: "text-top"}}><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><path d="M0 0h24v24H0z" fill="none"></path><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z" fill="currentColor"></path></svg></span>;
-import PublishErrorIdConflictImg from './img/connector-templates/publish-error-id-conflict.png';
-import PublishErrorInvalidVersionImg from './img/connector-templates/publish-error-invalid-version.png';
-import PublishWarningIdChangeImg from './img/connector-templates/publish-warning-id-change.png';
 import PublishToOrganizationFromEditorImg from './img/connector-templates/publish-to-organization-from-editor.png';
 import PublishToOrganizationFromVersionsListImg from './img/connector-templates/publish-to-organization-from-versions-list.png';
 import EditConnectorTemplate1Img from './img/connector-templates/edit-connector-template-1.png';
@@ -18,7 +15,7 @@ import ReplaceViaUploadImg from './img/connector-templates/replace-via-upload.pn
 
 <span class="badge badge--cloud">Camunda 8 only</span>
 
-You can create and manage [Connector templates](/components/connectors/custom-built-connectors/connector-templates.md) just as any other asset in a Web Modeler project.
+You can create and manage [connector templates](/components/connectors/custom-built-connectors/connector-templates.md) just as any other asset in a Web Modeler project.
 
 ## Create a connector template
 
@@ -44,9 +41,12 @@ The components of the editor interface are as follows:
   The value of the `$schema` property is still fixed; manual changes will not be saved.
   :::
 
-- On the right, you observe the live **Visual Preview**. The live preview shows how the properties panel will look when you apply the template to an element. It automatically updates on every valid change, and reflects the latest valid state of the template. The preview allows you to interactively check your template before publishing, enhancing its usability.
+- On the right, you observe the live **Visual Preview**. The live preview shows how the properties panel will look when you apply the template to an element. It automatically updates on every valid change, and reflects the latest valid state of the template. The preview allows you to interactively check your template before publishing it.
+  :::info
+  Any changes you make in the preview will _not_ get applied to the template JSON.
+  :::
 
-- In the upper right, you can **Add an icon** for your template. You can upload an image file with a maximum size of 8 KB. We recommend using squared SVG graphics. The icons get rendered 18x18 pixels in the element on the modeling canvas, and 32x32 pixels in the properties panel.
+- In the upper right, you can **Add an icon** for your template. You can upload an image file with a maximum size of 8 KB. We recommend using squared SVG graphics. Icons appear as 18x18 pixels in the element on the modeling canvas, and as 32x32 pixels in the properties panel.
 
 On every valid change, the template is saved automatically. If there are errors in the JSON file, the template will not be saved. Ensure all [errors are resolved](#fixing-template-problems) for the template to save successfully.
 
@@ -54,24 +54,21 @@ On every valid change, the template is saved automatically. If there are errors 
 
 After finalizing your connector, click **Publish to project** to activate it within the project context. In the modal that opens:
 
-- Update the version number (if necessary, you don't need to change it for the initial version or if you have updated it already in the template editor).
+- Update the version number if necessary. You don't need to change it for the initial version or if you have updated it already in the template editor.
   The value entered here is saved to the `version` property in the JSON.
 - Assign a distinct version name for effective version management.
-- Use the description field to provide details about what changes where introduced from the previous version.
+- Add a description to explain what changed since the previous version.
 
 ![Publishing a template](img/connector-templates/publish-version-to-project.png)
 
-Web Modeler checks the template for conflicts with already published template versions.
+Web Modeler checks the template for conflicts with already-published template versions.
 You cannot publish a new version if:
 
 - The template's ID is already used in a published version of a different template file.<br/>
-  <img src={PublishErrorIdConflictImg} width="586px" alt="Error: ID conflict with a different template file" />
 - The version number is equal to or lower than the last published version of the same template file with the same template ID.<br/>
-  <img src={PublishErrorInvalidVersionImg} width="592px" alt="Error: Invalid version number" />
 
 Web Modeler also shows a warning if the template ID has changed since the last published version.
 You can still publish the new version in this case.
-<img src={PublishWarningIdChangeImg} width="588px" alt="Warning: Template ID has changed" style={{ marginTop: 0 }} />
 
 As a [user with elevated access](/components/modeler/web-modeler/collaboration.md#elevated-access), you can publish a connector template version within the organization context, enabling all organization members to use it in their diagrams.
 To do so, click **Publish > Publish to organization** on the editor screen or promote a template version via the [versions list](#versioning-connector-templates).
@@ -151,7 +148,7 @@ If you have created templates for Desktop Modeler and want to reuse them in Web 
 Once your file follows the requirements, you can upload it. There are two ways to do so:
 
 1. Upload it as a new connector template via the <UploadIcon /> **Upload files** action in the project view.
-   <img src={UploadFilesImg} width="247px" alt="Uploading a new template via file upload" style={{marginTop: 0}} />
+   <img src={UploadFilesImg} width="248px" alt="Uploading a new template via file upload" style={{marginTop: 0}} />
 
 2. <a name="replace-via-upload"></a>Update an existing template via the **Replace via upload** action in the breadcrumbs of the editor view.
    <img src={ReplaceViaUploadImg} width="675px" alt="Updating a template via file upload" style={{marginTop: 0}} />
