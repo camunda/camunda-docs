@@ -26,7 +26,6 @@ module.exports = {
         "guides/migrating-from-camunda-7/migration-tooling",
         "guides/migrating-from-camunda-7/code-conversion",
         "guides/migrating-from-camunda-7/migration-readiness",
-        "guides/migrating-from-camunda-7/technical-details",
       ],
     },
   ],
@@ -69,6 +68,8 @@ module.exports = {
         "components/concepts/resource-authorizations",
         {
           "Access control": [
+            "components/concepts/access-control/access-control-overview",
+            "components/concepts/access-control/authorizations",
             "components/concepts/access-control/user-groups",
             "components/concepts/access-control/user-task-access-restrictions",
           ],
@@ -347,6 +348,7 @@ module.exports = {
           items: [
             "components/zeebe/technical-concepts/technical-concepts-overview",
             "components/zeebe/technical-concepts/architecture",
+            "components/zeebe/technical-concepts/batch-operations",
             "components/zeebe/technical-concepts/clustering",
             "components/zeebe/technical-concepts/health",
             "components/zeebe/technical-concepts/partitions",
@@ -453,6 +455,7 @@ module.exports = {
                   },
                   items: [
                     "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-example",
+                    "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization",
                   ],
                 },
                 "components/connectors/out-of-the-box-connectors/agentic-ai-ad-hoc-tools-schema-resolver",
@@ -927,6 +930,7 @@ module.exports = {
                     "apis-tools/java-client-examples/process-instance-create",
                     "apis-tools/java-client-examples/process-instance-create-nonblocking",
                     "apis-tools/java-client-examples/process-instance-create-with-result",
+                    "apis-tools/java-client-examples/process-instance-cancel-batch",
                     "apis-tools/java-client-examples/decision-evaluate",
                     "apis-tools/java-client-examples/job-worker-open",
                     "apis-tools/java-client-examples/data-pojo",
@@ -960,7 +964,13 @@ module.exports = {
       ],
     },
     {
-      "Migration manuals": [
+      type: "category",
+      label: "Update to Camunda 8.8",
+      link: {
+        type: "doc",
+        id: "apis-tools/migration-manuals/index",
+      },
+      items: [
         "apis-tools/migration-manuals/migrate-to-camunda-user-tasks",
         "apis-tools/migration-manuals/migrate-to-camunda-api",
       ],
@@ -1281,42 +1291,7 @@ module.exports = {
       ],
     },
     {
-      type: "category",
-      label: "Update",
-      link: {
-        type: "doc",
-        id: "self-managed/update/index",
-      },
-      items: [
-        {
-          type: "category",
-          label: "Update by version",
-          link: {
-            type: "doc",
-            id: "self-managed/operational-guides/update-guide/introduction",
-          },
-          items: [
-            "self-managed/operational-guides/update-guide/870-to-880",
-            "self-managed/operational-guides/update-guide/860-to-870",
-            "self-managed/operational-guides/update-guide/850-to-860",
-            "self-managed/operational-guides/update-guide/840-to-850",
-            "self-managed/operational-guides/update-guide/830-to-840",
-            {
-              Elasticsearch: [
-                "self-managed/operational-guides/update-guide/elasticsearch/7-to-8",
-              ],
-            },
-            {
-              Keycloak: [
-                "self-managed/operational-guides/update-guide/keycloak/keycloak-update",
-              ],
-            },
-          ],
-        },
-      ],
-    },
-    {
-      Concepts: [
+      "Operational guides": [
         {
           type: "category",
           label: "Back up and restore",
@@ -1666,6 +1641,43 @@ module.exports = {
             },
           ],
         },
+        {
+          type: "category",
+          label: "Components update",
+          link: {
+            type: "doc",
+            id: "self-managed/operational-guides/update-guide/introduction",
+          },
+          items: [
+            "self-managed/operational-guides/update-guide/870-to-880",
+            "self-managed/operational-guides/update-guide/860-to-870",
+            "self-managed/operational-guides/update-guide/850-to-860",
+            "self-managed/operational-guides/update-guide/840-to-850",
+            "self-managed/operational-guides/update-guide/830-to-840",
+            {
+              Elasticsearch: [
+                "self-managed/operational-guides/update-guide/elasticsearch/7-to-8",
+              ],
+            },
+            {
+              Keycloak: [
+                "self-managed/operational-guides/update-guide/keycloak/keycloak-update",
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Upgrade to Camunda 8.8",
+      link: {
+        type: "doc",
+        id: "self-managed/update/index",
+      },
+      items: [
+        "self-managed/update/administrators/prepare-for-admin-update",
+        "self-managed/update/administrators/run-admin-update",
       ],
     },
   ],

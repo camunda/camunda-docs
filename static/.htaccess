@@ -148,6 +148,11 @@ RewriteRule ^optimize/3.11.0/self-managed/(.*)$ /docs/8.3/self-managed/$1 [R=301
 #   8.8: content moves introduced prior to the release of version 8.8.
 #---------------------------------------------------------------------------------
 
+# Remove technical details
+RewriteRule ^docs/next/guides/migrating-from-camunda-7/technical-details/?$ /docs/next/guides/migrating-from-camunda-7/migration-journey/ [R=301,L]
+RewriteRule ^docs/guides/migrating-from-camunda-7/technical-details/?$ /docs/guides/migrating-from-camunda-7/migration-journey/ [R=301,L]
+RewriteRule ^docs/8.7/guides/migrating-from-camunda-7/technical-details/?$ /docs/8.7/guides/migrating-from-camunda-7/migration-journey/ [R=301,L]
+
 # Move user task listener guide
 RewriteRule ^docs/next/guides/listen-to-user-tasks/?$ /docs/next/components/concepts/listen-to-user-tasks/ [R=301,L]
 

@@ -34,7 +34,7 @@ The simplest possible deployment now becomes running a single Java application o
 </tr>
 <tr>
     <td>[Identity, authentication, and authorization](#identity-authentication-and-authorization)</td>
-    <td>Identity is now...</td>
+    <td>Details coming soon.</td>
 </tr>
 <tr>
     <td>[APIs and SDKs](#apis-and-sdks)</td>
@@ -104,9 +104,9 @@ Content is here
 
 The Orchestration cluster (previously automation cluster) is now the core component of [Camunda 8](../reference/glossary.md#camunda-8), powering the automation and orchestration of [processes](../reference/glossary.md#process).
 
-## Camunda Process Test
+<!-- ## Camunda Process Test
 
-<div><PersonaBadge persona="Developer" /></div>
+<div><PersonaBadge persona="Developer" /></div> -->
 
 ## Data and storage {#data}
 
@@ -114,6 +114,6 @@ The Orchestration cluster (previously automation cluster) is now the core compon
 
 A new Camunda Exporter is introduced, bringing the importing and archiving logic of web components (Tasklist and Operate) closer to the distributed platform (Zeebe). This simplifies installation, enables scalability for the web applications, reduces latency when showing runtime and historical data, and reduces data duplication (resource consumption).
 
-<!-- ## Deployment and configuration {#deployment}
+## Update guides
 
-## Further resources -->
+We have two specific update guides in place written for operators of [Self-Managed installations](../self-managed/update/index.md) and developers using [APIs and our SDKs](../apis-tools/migration-manuals/index.md).

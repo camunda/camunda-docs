@@ -14,17 +14,24 @@ Use resource authorizations to configure resource-level access to Camunda 8 enti
 
 The following resource authorizations are currently supported:
 
-| Resource type | Permissions               | Resource ID                   | Description                                                       |
-| :------------ | :------------------------ | :---------------------------- | :---------------------------------------------------------------- |
-| Process       | `Read`                    | Process ID or `*` (wildcard)  | Show Process Definition and Process instance Data in Operate UI   |
-| Process       | `Delete`                  | Process ID or `*` (wildcard)  | Delete Process Definitions via Operate UI                         |
-| Process       | `Update process instance` | Process ID or `*` (wildcard)  | Update Process instance data via Operate UI                       |
-| Process       | `Delete process instance` | Process ID or `*` (wildcard)  | Delete Process instance via Operate UI                            |
-| Process       | `Start process instance`  | Process ID or `*` (wildcard)  | Start Process instance via Tasklist UI                            |
-| Decision      | `Read`                    | Decision ID or `*` (wildcard) | Show Decision Definition and Decision Instance Data in Operate UI |
-| Decision      | `Delete`                  | Decision ID or `*` (wildcard) | Delete Decision Definitions via Operate UI                        |
+| Resource type   | Permissions                       | Resource ID                   | Description                                                           |
+| :-------------- | :-------------------------------- | :---------------------------- | :-------------------------------------------------------------------- |
+| Process         | `Read`                            | Process ID or `*` (wildcard)  | Show process definition and process instance data in the Operate UI   |
+| Process         | `Delete`                          | Process ID or `*` (wildcard)  | Delete process definitions via the Operate UI                         |
+| Process         | `Update process instance`         | Process ID or `*` (wildcard)  | Update process instance data via the Operate UI                       |
+| Process         | `Delete process instance`         | Process ID or `*` (wildcard)  | Delete process instance via the Operate UI                            |
+| Process         | `Start process instance`          | Process ID or `*` (wildcard)  | Start process instance via the Tasklist UI                            |
+| Decision        | `Read`                            | Decision ID or `*` (wildcard) | Show decision definition and decision instance data in the Operate UI |
+| Decision        | `Delete`                          | Decision ID or `*` (wildcard) | Delete decision definitions via the Operate UI                        |
+| Batch-Operation | `Create`                          | `*` (wildcard)                | Create any batch operations via the Operate UI                        |
+| Batch-Operation | `Create cancel process instance`  | `*` (wildcard)                | Create _cancel process instance_ batch operations via the Operate UI  |
+| Batch-Operation | `Create migrate process instance` | `*` (wildcard)                | Create _migrate process instance_ batch operations via the Operate UI |
+| Batch-Operation | `Create modify process instance`  | `*` (wildcard)                | Create _modify process instance_ batch operations via the Operate UI  |
+| Batch-Operation | `Create resolve incident`         | `*` (wildcard)                | Create _resolve incident_ batch operations via the Operate UI         |
+| Batch-Operation | `Read`                            | `*` (wildcard)                | Read batch operation data via the Operate UI                          |
+| Batch-Operation | `Update`                          | `*` (wildcard)                | Manage batch operations via the Operate UI                            |
 
-Resource Authorizations are only supported when running Identity with Keycloak as an IdP.
+Resource authorizations are only supported when running Identity with Keycloak as an IdP.
 
 :::note
 Resource authorizations are disabled by default. You can enable them using environment variables. This feature must be enabled in all required components, see:
