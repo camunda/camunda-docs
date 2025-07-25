@@ -30,7 +30,7 @@ The simplest possible deployment now becomes running a single Java application o
 </tr>
 <tr>
     <td>[Orchestration Cluster](#orchestration-cluster)</td>
-    <td>The Orchestration cluster (previously automation cluster) is now the core Camunda 8 component.</td>
+    <td>The Orchestration Cluster (previously automation cluster) is now the core Camunda 8 component.</td>
 </tr>
 <tr>
     <td>[Identity, authentication, and authorization](#identity-authentication-and-authorization)</td>
@@ -38,7 +38,7 @@ The simplest possible deployment now becomes running a single Java application o
 </tr>
 <tr>
     <td>[APIs and SDKs](#apis-and-sdks)</td>
-    <td>New and changed APIs and SDKs for interacting programmatically with the Orchestration cluster.</td>
+    <td>New and changed APIs and SDKs for interacting programmatically with the Orchestration Cluster.</td>
 </tr>
 <tr>
     <td>[Camunda User Tasks](#camunda-user-tasks)</td>
@@ -62,9 +62,9 @@ The simplest possible deployment now becomes running a single Java application o
 
 <div><PersonaBadge persona="Administrator (DevOps)" /><PersonaBadge persona="Developer" /></div>
 
-The Orchestration cluster (previously automation cluster) is now the core component of [Camunda 8](../reference/glossary.md#camunda-8), powering the automation and orchestration of [processes](../reference/glossary.md#process).
+The Orchestration Cluster (previously automation cluster) is now the core component of [Camunda 8](../reference/glossary.md#camunda-8), powering the automation and orchestration of [processes](../reference/glossary.md#process).
 
-<img src={OrchestrationClusterImg} alt="Diagram showing the orchestration cluster" class="img-noborder img-700" style={{marginBottom: '0'}}/>
+<img src={OrchestrationClusterImg} alt="Diagram showing the Orchestration Cluster" class="img-noborder img-700" style={{marginBottom: '0'}}/>
 
 ### Zeebe, Operate, and Tasklist
 
@@ -82,7 +82,7 @@ Zeebe, Operate, and Tasklist are consolidated into the Orchestration Cluster app
 
 ### Orchestration Cluster API
 
-APIs for interacting with the Orchestration cluster programmatically.
+APIs for interacting with the Orchestration Cluster programmatically.
 
 <!-- Introduce it but [link to content](#orchestration-cluster-api). -->
 
@@ -102,7 +102,7 @@ Content is here
 
 <div><PersonaBadge persona="Administrator (DevOps)" /><PersonaBadge persona="Developer" /></div>
 
-The Orchestration cluster (previously automation cluster) is now the core component of [Camunda 8](../reference/glossary.md#camunda-8), powering the automation and orchestration of [processes](../reference/glossary.md#process).
+The Orchestration Cluster (previously automation cluster) is now the core component of [Camunda 8](../reference/glossary.md#camunda-8), powering the automation and orchestration of [processes](../reference/glossary.md#process).
 
 <!-- ## Camunda Process Test
 

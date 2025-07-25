@@ -12,13 +12,13 @@ keywords:
   ]
 ---
 
-Access control in Camunda 8 ensures that only authorized users and systems can access your orchestration cluster and perform permitted actions. Two fundamental concepts are involved: **authentication** and **authorization**.
+Access control in Camunda 8 ensures that only authorized users and systems can access your Orchestration Cluster and perform permitted actions. Two fundamental concepts are involved: **authentication** and **authorization**.
 
 ## Identity types in Camunda 8
 
 Camunda 8 distinguishes between two types of Identity:
 
-- **Orchestration Cluster Identity**: Used for authenticating and authorizing users and systems that interact with the orchestration cluster (such as Zeebe, Operate, Tasklist, and the orchestration cluster APIs). This Identity governs access to process execution, task management, and related runtime resources.
+- **Orchestration Cluster Identity**: Used for authenticating and authorizing users and systems that interact with the Orchestration Cluster (such as Zeebe, Operate, Tasklist, and the Orchestration Cluster APIs). This Identity governs access to process execution, task management, and related runtime resources.
 - **Management Identity**: Used for managing the components Web Modeler, Console, and Optimize. This Identity is typically required for platform administrators and developers, and it is separate from the Identities used for process orchestration.
 
 Understanding which Identity is required for a given action helps ensure the correct access control policies are applied.
@@ -56,4 +56,4 @@ A user must be both authenticated and authorized to access protected resources i
 
 ## Learn more
 
-- For a detailed explanation of the authorization system and how to configure permissions, see [Authorization in Camunda 8 orchestration cluster](./authorizations.md).
+- For a detailed explanation of the authorization system and how to configure permissions, see [Authorization in Camunda 8 Orchestration Cluster](./authorizations.md).

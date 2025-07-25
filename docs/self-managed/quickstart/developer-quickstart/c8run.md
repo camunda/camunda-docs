@@ -2,7 +2,7 @@
 id: c8run
 title: "Developer quickstart – Camunda 8 Run"
 sidebar_label: "Camunda 8 Run"
-description: "This quickstart guides application developers through deploying Camunda 8 Self-Managed to a local Orchestration cluster using Camunda 8 Run."
+description: "This quickstart guides application developers through deploying Camunda 8 Self-Managed to a local Orchestration Cluster using Camunda 8 Run."
 ---
 
 import Tabs from "@theme/Tabs";
@@ -17,7 +17,7 @@ Camunda 8 Run allows you to install and start a simplified, single-application C
 
 Camunda 8 Run includes the following:
 
-- Orchestration cluster
+- Orchestration Cluster
 - Connectors
 - Elasticsearch
 

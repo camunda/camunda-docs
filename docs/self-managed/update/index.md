@@ -14,14 +14,14 @@ Platform administrators, DevOps engineers, and application developers maintainin
 
 ## Camunda 8.8 is the latest release
 
-Camunda 8.8 introduces a major architectural evolution, impacting both infrastructure and application integration. Key updates include the new **orchestration cluster architecture**, unified APIs, and a revised authentication model. Several legacy components have been deprecated.
+Camunda 8.8 introduces a major architectural evolution, impacting both infrastructure and application integration. Key updates include the new **Orchestration Cluster architecture**, unified APIs, and a revised authentication model. Several legacy components have been deprecated.
 
 ## Why this update matters
 
 Camunda 8.8 introduces changes that affect both **infrastructure** and **application logic**:
 
-- **Orchestration cluster architecture** – Consolidates runtime components to simplify deployment and scaling. [See architectural changes](#architectural-changes-in-88)
-- **Unified APIs and SDK alignment** – Component-specific APIs (V1) are deprecated. Migrate to the orchestration cluster API and updated SDKs to unlock new features and ensure future compatibility.
+- **Orchestration Cluster architecture** – Consolidates runtime components to simplify deployment and scaling. [See architectural changes](#architectural-changes-in-88)
+- **Unified APIs and SDK alignment** – Component-specific APIs (V1) are deprecated. Migrate to the Orchestration Cluster API and updated SDKs to unlock new features and ensure future compatibility.
 - **Authentication and authorization overhaul** – Moves to an OIDC-based identity model with cluster-level and scoped permissions. LDAP integration for Operate and Tasklist is removed.
 - **Unified configuration schema** – A shared configuration model reduces drift across components and improves automation.  
   [Link to schema docs – VERIFY]
@@ -44,7 +44,7 @@ Camunda 8.8 introduces changes that affect both **infrastructure** and **applica
 
 ## Architectural changes in 8.8
 
-### Streamlined orchestration cluster architecture
+### Streamlined Orchestration Cluster architecture
 
 Camunda 8.8 completes the “streamlined architecture” initiative announced in early 2024. Key changes:
 
@@ -87,7 +87,7 @@ Learn more about changes for application developers in the dedicated [Camunda 8.
 
 ### Deployment changes
 
-- The new **orchestration cluster deployment model** replaces scattered component topologies.  
+- The new **Orchestration Cluster deployment model** replaces scattered component topologies.  
   See: [Administrators: Prepare for update](./administrators/prepare-for-update.md)
 - Use the **unified configuration schema**.  
   [Link to schema migration guide – VERIFY]

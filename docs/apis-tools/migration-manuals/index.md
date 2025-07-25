@@ -19,7 +19,7 @@ Application developers maintaining Camunda-based solutions in Self-Managed Kuber
 
 Camunda 8.8 introduces a significant architectural evolution that impacts both infrastructure deployment and application integration. Key updates include:
 
-- The new **orchestration cluster architecture**
+- The new **Orchestration Cluster architecture**
 - Unified APIs for a more consistent developer experience
 - Updated authentication models
 - Deprecation of several legacy components
@@ -48,7 +48,7 @@ For more information, see [Upcoming API Changes in Camunda 8: A Unified and Stre
 ## Next steps
 
 1. **Coordinate platform and development teams**  
-   Ensure that the orchestration cluster is updated to 8.8 before upgrading application clients.
+   Ensure that the Orchestration Cluster is updated to 8.8 before upgrading application clients.
 2. **Review migration guides**  
    👉 _Coming soon: Links to detailed guides on each component migration._
 

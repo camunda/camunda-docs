@@ -33,13 +33,13 @@ Deviations from the reference architecture are unavoidable. However, such change
 
 ### Orchestration Cluster vs Web Modeler and Console
 
-When designing a reference architecture, it's essential to understand the differences between an orchestration cluster and Web Modeler and Console Self-Managed. These components play crucial roles in the deployment and operation of processes, but they serve different purposes and include distinct components.
+When designing a reference architecture, it's essential to understand the differences between an Orchestration Cluster and Web Modeler and Console Self-Managed. These components play crucial roles in the deployment and operation of processes, but they serve different purposes and include distinct components.
 
 #### Orchestration Cluster
 
 ![Orchestration Cluster](./img/orchestration-cluster.jpg)
 
-The orchestration cluster is the core of Camunda.
+The Orchestration Cluster is the core of Camunda.
 
 The included components are:
 
@@ -50,7 +50,7 @@ The included components are:
 - [Identity](/self-managed/identity/what-is-identity.md): A service for managing user authentication and authorization.
 - [Connectors](/components/connectors/introduction.md): Pre-built integrations for connecting Zeebe with external systems and services.
 
-Each component within the orchestration cluster is part of an integrated system that works together to provide end-to-end process orchestration. These components form a unified cluster that is tightly integrated to ensure seamless communication and data flow.
+Each component within the Orchestration Cluster is part of an integrated system that works together to provide end-to-end process orchestration. These components form a unified cluster that is tightly integrated to ensure seamless communication and data flow.
 
 This design ensures that all components are in sync, working collectively to maintain consistent state management, data integrity, and smooth process orchestration across the entire cluster. This architecture ensures reliable process execution with clear boundaries between each workflow engine's operation.
 
@@ -58,16 +58,16 @@ This design ensures that all components are in sync, working collectively to mai
 
 ![Web Modeler and Console](./img/management-cluster.jpg)
 
-Web Modeler and Console are designed to interact with multiple orchestration clusters. Console offers tools and interfaces for administrators to monitor clusters, and Web Modeler allows developers to create and deploy BPMN models.
+Web Modeler and Console are designed to interact with multiple Orchestration Clusters. Console offers tools and interfaces for administrators to monitor clusters, and Web Modeler allows developers to create and deploy BPMN models.
 
-- [Console](/components/console/introduction-to-console.md): A central management interface for monitoring and managing multiple orchestration clusters.
-- [Web Modeler](/self-managed/modeler/web-modeler/installation.md): A web-based tool for designing and deploying workflow models to any available orchestration cluster.
+- [Console](/components/console/introduction-to-console.md): A central management interface for monitoring and managing multiple Orchestration Clusters.
+- [Web Modeler](/self-managed/modeler/web-modeler/installation.md): A web-based tool for designing and deploying workflow models to any available Orchestration Cluster.
 
 Additionally, Web Modeler and Console require the following:
 
 - [Identity](/self-managed/identity/what-is-identity.md): A service for managing user authentication and authorization.
 
-Unlike the orchestration cluster, Web Modeler and Console run a separate and dedicated Identity deployment. For production environments, using an external [identity provider](/self-managed/installation-methods/helm/configure/connect-to-an-oidc-provider.md) is recommended.
+Unlike the Orchestration Cluster, Web Modeler and Console run a separate and dedicated Identity deployment. For production environments, using an external [identity provider](/self-managed/installation-methods/helm/configure/connect-to-an-oidc-provider.md) is recommended.
 
 ### Databases
 

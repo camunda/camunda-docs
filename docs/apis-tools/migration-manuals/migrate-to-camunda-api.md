@@ -9,7 +9,7 @@ import TabItem from "@theme/TabItem";
 
 This document offers a comprehensive guide to migrate from Camunda's V1 component REST APIs (the Tasklist REST API, for example) to the V2 [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
 
-Camunda is streamlining the developer experience by creating a unified REST API for Zeebe, Operate, Tasklist, and the Identity components with endpoint parity. This will be a single REST API for the orchestration cluster for a consistent and intuitive API experience to help your teams develop process automation solutions faster.
+Camunda is streamlining the developer experience by creating a unified REST API for Zeebe, Operate, Tasklist, and the Identity components with endpoint parity. This will be a single REST API for the Orchestration Cluster for a consistent and intuitive API experience to help your teams develop process automation solutions faster.
 
 :::note
 The Administration and Web Modeler APIs will not be part of the Orchestration Cluster REST API, as these are platform APIs outside the cluster’s scope.

@@ -65,7 +65,7 @@ helm install camunda-platform camunda/camunda-platform --version $HELM_CHART_VER
     -f values-local.yaml
 ```
 
-This will deploy Camunda 8 components (Orchestration cluster, Optimize, and Connectors), but with a set of parameters tailored to a local environment setup.
+This will deploy Camunda 8 components (Orchestration Cluster, Optimize, and Connectors), but with a set of parameters tailored to a local environment setup.
 
 Depending on your machine hardware and internet connection speed, the services might take some time to get started as it will download the Docker images of all Camunda 8 components to your local kind cluster.
 

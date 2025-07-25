@@ -185,7 +185,7 @@ The following alternatives to port-forwarding are possible:
 
 In our example, we went with port-forwarding to a localhost, but other alternatives can also be used.
 
-1. Use the [Orchestration cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) to retrieve the list of the remaining brokers
+1. Use the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) to retrieve the list of the remaining brokers
 
    ```bash
    kubectl --context $CLUSTER_SURVIVING port-forward services/$CAMUNDA_RELEASE_NAME-zeebe-gateway 8080:8080 -n $CAMUNDA_NAMESPACE_SURVIVING

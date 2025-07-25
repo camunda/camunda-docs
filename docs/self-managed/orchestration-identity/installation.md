@@ -7,7 +7,7 @@ description: "Learn how Identity is bundled with your default Orchestration Clus
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Identity is included by default with any [Orchestration cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster). Within an Orchestration cluster, Identity provides unified, cluster-level identity management and authorization.
+Identity is included by default with any [Orchestration Cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster). Within an Orchestration Cluster, Identity provides unified, cluster-level identity management and authorization.
 
 Identity is available via [Helm install](/self-managed/installation-methods/helm/install.md) and for local development via [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md).
 
@@ -33,14 +33,14 @@ In Helm installations, API authentication and authorization are enabled by defau
 
 ### Configure initial users
 
-If users are managed within the Orchestration cluster (i.e., without an external Identity Provider), you can create an initial user in two ways:
+If users are managed within the Orchestration Cluster (i.e., without an external Identity Provider), you can create an initial user in two ways:
 
 - Through the web application UI
 - Through configuration
 
 #### Option 1: Create an initial admin user in the UI
 
-If no admin user exists, the Orchestration cluster web applications display a screen for creating the initial user:
+If no admin user exists, the Orchestration Cluster web applications display a screen for creating the initial user:
 
 ![identity-create-initial-user](./img/create-initial-user.png)
 
@@ -87,7 +87,7 @@ By default, a user is not assigned to any roles and therefore has no permissions
 
 #### Assign users, clients, groups, or mapping rules to roles via configuration
 
-The Orchestration cluster provides a number of [built-in roles](../../components/concepts/access-control/authorizations.md#default-roles) with predefined permissions for easier setup.
+The Orchestration Cluster provides a number of [built-in roles](../../components/concepts/access-control/authorizations.md#default-roles) with predefined permissions for easier setup.
 
 To assign users, clients, groups, or [mapping rules](/self-managed/concepts/mapping-rules.md) to roles, add the appropriate properties to your `application.yaml` or set them as environment variables.
 

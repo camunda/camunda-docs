@@ -42,7 +42,7 @@ To learn more, see [Git sync](/components/modeler/web-modeler/git-sync.md?platfo
 
 The Camunda 8 REST API is now called the **Orchestration Cluster API**.
 
-- This name better reflects its role as a unified REST API for interacting with entities in a [Camunda 8 orchestration cluster](/reference/glossary.md#orchestration-cluster), such as processes, tasks, and variables.
+- This name better reflects its role as a unified REST API for interacting with entities in a [Camunda 8 Orchestration Cluster](/reference/glossary.md#orchestration-cluster), such as processes, tasks, and variables.
 - The functionality and structure of the API remain unchanged. The name change improves clarity and onboarding across Camunda documentation and resources.
 
 To learn more, see [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
@@ -260,7 +260,7 @@ The following known limitations apply for this alpha version release:
 
 #### Identity management for Helm Chart setups <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-[Orchestration cluster Identity](/self-managed/orchestration-identity/orchestration-identity.md) is now available for OIDC setups in [Helm chart deployments](/self-managed/installation-methods/helm/install.md). Starting with this alpha version, you can configure the Orchestration cluster components to use the identity provider (IdP) of your choice and enable single sign-on (SSO).
+[Orchestration Cluster Identity](/self-managed/orchestration-identity/orchestration-identity.md) is now available for OIDC setups in [Helm chart deployments](/self-managed/installation-methods/helm/install.md). Starting with this alpha version, you can configure the Orchestration Cluster components to use the identity provider (IdP) of your choice and enable single sign-on (SSO).
 
 The following known limitations apply for this alpha version release:
 
@@ -454,7 +454,7 @@ The [Identity service](/self-managed/identity/what-is-identity.md) is enhanced t
 
 #### Cluster-level identity management
 
-Identity settings will be configured at the orchestration cluster level, allowing each cluster to have unique OIDC configurations. This cluster-specific setup empowers organizations to assign different identity providers (IdPs) across clusters, offering improved control over permissions and user group mappings, resulting in a more streamlined and efficient configuration experience.
+Identity settings will be configured at the Orchestration Cluster level, allowing each cluster to have unique OIDC configurations. This cluster-specific setup empowers organizations to assign different identity providers (IdPs) across clusters, offering improved control over permissions and user group mappings, resulting in a more streamlined and efficient configuration experience.
 
 For SaaS customers, identity management in Camunda 8.8 remains consistent with Camunda 8.7, allowing the attachment of a single IdP per organization. However, cluster-level identity capabilities are provided for SaaS as well as Self-Managed. This means that user groups, roles, and access permissions can now be managed at the cluster level, giving SaaS customers the same granular access control as in Self-Managed environments.
 

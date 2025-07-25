@@ -567,7 +567,7 @@ To learn more about supported SaaS regions, see [regions](/reference/regions.md)
 
 ### Tags and properties in Self-Managed Console <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Console">Console</span>
 
-Use custom tags and properties in Self-Managed Console to improve your orchestration cluster management.
+Use custom tags and properties in Self-Managed Console to improve your Orchestration Cluster management.
 
 - Administrators can now assign tags such as `prod`, `dev`, or `test` to clusters for clear identification across environments.
 - Tags are shown in the Console UI, and accessible via the Administration API to streamline usage reporting and cost allocation.

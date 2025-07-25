@@ -6,7 +6,7 @@ description: "Learn how to install Camunda 8 on AWS EC2 instances."
 
 This guide provides a detailed walkthrough for installing the Camunda 8 single JAR on AWS EC2 instances. It focuses on managed services by AWS and their cloud offering. Finally, you will verify that the connection to your Self-Managed Camunda 8 environment is working.
 
-This guide focuses on setting up the [orchestration cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console) for Camunda 8. The Web Modeler and Console are not covered in this manual deployment approach. These components are supported on Kubernetes and should be [deployed using Kubernetes](/self-managed/installation-methods/helm/install.md#install-web-modeler).
+This guide focuses on setting up the [Orchestration Cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console) for Camunda 8. The Web Modeler and Console are not covered in this manual deployment approach. These components are supported on Kubernetes and should be [deployed using Kubernetes](/self-managed/installation-methods/helm/install.md#install-web-modeler).
 
 :::note Using other Cloud providers
 This guide is built around the available tools and services that AWS offers, but is not limited to AWS. The scripts and ideas included can be adjusted for any other cloud provider and use case.
@@ -66,7 +66,7 @@ Alternatively, the same setup can run with a single AWS EC2 instance, but be awa
 
 ### Outcome
 
-The outcome is a fully working Camunda orchestration cluster running in a high availability setup using AWS EC2 and utilizing a managed OpenSearch domain.
+The outcome is a fully working Camunda Orchestration Cluster running in a high availability setup using AWS EC2 and utilizing a managed OpenSearch domain.
 The EC2 instances come with an extra disk meant for Camunda to ensure that the content is separated from the operating system.
 
 ## 1. Create the required infrastructure
