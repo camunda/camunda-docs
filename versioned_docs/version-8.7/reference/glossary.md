@@ -45,7 +45,7 @@ Explore and understand definitions for key Camunda 8 terms and abbreviations.
 
 ### Automation cluster
 
-See [orchestration cluster](#orchestration-cluster).
+See [Orchestration Cluster](#orchestration-cluster).
 
 ## B
 
@@ -262,11 +262,11 @@ A message contains information to be delivered to interested parties during exec
 
 ### Orchestration Cluster
 
-An orchestration cluster includes Zeebe, Operate, Tasklist, Optimize, and connectors. Previously [automation cluster](#automation-cluster).
+An Orchestration Cluster includes Zeebe, Operate, Tasklist, Optimize, and connectors. Previously [automation cluster](#automation-cluster).
 
 ### Orchestration core
 
-An orchestration core or orchestration cluster core includes Zeebe, Operate, Tasklist, Optimize, and Identity.
+An orchestration core or Orchestration Cluster core includes Zeebe, Operate, Tasklist, Optimize, and Identity.
 
 ### Outbound connector
 
