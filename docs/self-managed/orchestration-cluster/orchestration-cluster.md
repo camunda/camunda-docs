@@ -1,14 +1,14 @@
 ---
 id: sm-orchestration-cluster
 title: "Orchestration Cluster"
-description: ""
+description: "Install and configure Orchestration Cluster components in your Self-Managed environment."
 ---
 
-Install and configure Orchestration Cluster components in your self-managed environment.
+Install and configure Orchestration Cluster components in your Self-Managed environment.
 
 ## Installation and configuration
 
-The Orchestration Cluster is the core component of Camunda 8), powering the automation and orchestration of processes. An Orchestration Cluster includes:
+The Orchestration Cluster is the core component of Camunda 8, powering the automation and orchestration of processes. An Orchestration Cluster includes:
 
 - Zeebe as the workflow engine
 - Operate for monitoring and troubleshooting process instances running in Zeebe.
@@ -16,4 +16,4 @@ The Orchestration Cluster is the core component of Camunda 8), powering the auto
 - Identity for managing the integrated authentication and authorization.
 - APIs for interacting with the Orchestration Cluster programmatically.
 
-In this section, you will learn how to install, and configure these components in your self-managed environment.
+In this section, you will learn how to install, and configure these components in your Self-Managed environment.
