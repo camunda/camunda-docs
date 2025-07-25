@@ -116,7 +116,7 @@ A user task typically includes a form. A form contains work instructions for the
 
 However, user tasks are not limited to forms. User tasks can also be used to refer users to other applications or redirect them to a website.
 
-You can use [Camunda Forms](/guides/utilizing-forms.md) that offer visual editing of forms directly in Camunda Modeler, or use your own forms.
+You can use [Camunda Forms](/components/modeler/forms/utilizing-forms.md) that offer visual editing of forms directly in Camunda Modeler, or use your own forms.
 Forms can either be displayed in [Tasklist](/components/tasklist/introduction-to-tasklist.md), or handled by a custom application.
 
 To use a form, a user task requires a form reference.
@@ -139,7 +139,7 @@ Depending on your use case, two different types of form references can be used:
    If the `bindingType` attribute is not specified, `latest` is used as the default.
    :::
 
-   You can read more about Camunda Forms in the [Camunda Forms guide](/guides/utilizing-forms.md) or the [Camunda Forms reference](/components/modeler/forms/camunda-forms-reference.md)
+   You can read more about Camunda Forms in the [Camunda Forms guide](/components/modeler/forms/utilizing-forms.md) or the [Camunda Forms reference](/components/modeler/forms/camunda-forms-reference.md)
    to explore all configuration options for form elements.
 
 2. A **custom form reference** can specify any custom identifier in the user task using the `externalReference`
@@ -167,20 +167,11 @@ configuration parameters for tasklist applications.
 
 User tasks support **user task listeners**, which allow you to react to user task lifecycle events.
 
-#### Supported events
-
-Currently, user task listeners can react to the following events:
-
-- **Assigning**: Triggered while assigning a user task.
-- **Completing**: Triggered while completing a user task.
-
-#### Configuration
-
 To define a user task listener, include the `zeebe:taskListeners` extension element within the user task in your BPMN model. This element can contain one or more `zeebe:taskListener` elements, each specifying the following attributes:
 
-- The `eventType` that triggers the listener (`"assigning"` or `"completing"`).
-- The `type` of the listener (job type used by the external worker).
-- The number of `retries` for the user task listener job (defaults to 3 if omitted).
+- The `eventType` (required) that triggers the listener. Possible values are: `creating`, `assigning`, `updating`, `completing`, `canceling`.
+- The `type` (required) of the listener. Used as a reference to specify which job workers request the respective task listener job. For example, `order-items`. `type` can be specified as any static value (`myType`) or as a FEEL expression prefixed by `=` that evaluates to any FEEL string; for example, `= "order-" + priorityGroup`.
+- The number of `retries` (optional) for the user task listener job (defaults to 3 if omitted).
 
 For more details, see [user task listeners](components/concepts/user-task-listeners.md).
 

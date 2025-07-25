@@ -309,7 +309,7 @@ The state of all active process instances, (these are also known as inflight pro
 Soft pause exporting is a feature that allows you to continue exporting records from Zeebe, but without deleting those records (log compaction) from Zeebe. This is particularly useful during hot backups.
 
 - [Exporting API](/self-managed/zeebe-deployment/operations/management-api.md)
-- [Backup and restore](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md)
+- [Backup and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md)
 
 ### Subscription inbound Connector
 

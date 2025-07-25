@@ -21,8 +21,8 @@ Start building and integrating AI agents into your end-to-end processes.
 
 Use the following Camunda 8 features to integrate AI agents into your processes:
 
-| Type | Feature | Description |
-|:-- |:-- |:-- |
+| Type            | Feature                                                                                   | Description                                                                                                                                                 |
+| :-------------- | :---------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | BPMN subprocess | [Ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) | A special kind of embedded subprocess with an ad-hoc marker that allows a small part of your process decision-making to be handed over to a human or agent. |
 
 Get started with [building Your First AI Agent in Camunda](https://camunda.com/blog/2025/02/building-ai-agent-camunda/).
