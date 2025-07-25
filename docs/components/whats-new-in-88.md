@@ -172,7 +172,7 @@ The following table summarizes where identity entities are managed in Camunda 8 
 When using Keycloak, the following changes apply:
 
 - No special setup is required for Keycloak anymore; instead, Keycloak is integrated like any other identity provider.
-- the management and storage of Resource based Authorizations, Tenants, Roles as well as assignments of users/clients move from Management Identity to the Orchestration Cluster Identity.
+- the management and storage of Resource-based Authorizations, Tenants, Roles as well as assignments of users/clients move from Management Identity to the Orchestration Cluster Identity.
 - the management of groups stays within Keycloak and the Orchestration Cluster will pick up the groups via the bring your own group feature.
 - application Permissions granted to Roles or Applications previously managed in Management identity are replaced by Authorizations managed in the Orchestration Cluster.
 
