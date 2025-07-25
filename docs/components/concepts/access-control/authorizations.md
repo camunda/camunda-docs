@@ -1,6 +1,6 @@
 ---
-title: Authorization in Camunda 8 orchestration cluster
-description: Learn how to control access to applications and APIs in Camunda 8's orchestration cluster using the built-in authorization system.
+title: Authorizations in Orchestration Cluster
+description: Learn how to control access to components and APIs in Camunda 8's Orchestration Cluster using the built-in authorization system.
 keywords:
   [
     camunda 8,
