@@ -11,7 +11,7 @@ import TabItem from "@theme/TabItem";
 
 There are different ways to authenticate to your cluster. The following sections describe how to authenticate using the Java client.
 
-<Tabs groupId="authenticationMethods" defaultValue="basic" queryString values={[{label: 'Basic', value: 'basic' },{label: 'OIDC', value: 'oidc' },{label: 'OIDC with X.509', value: 'x509' }]}>
+<Tabs groupId="authenticationMethods" defaultValue="basic" queryString values={[{label: 'Basic', value: 'basic' },{label: 'OIDC Client Credentials', value: 'oidc' },{label: 'OIDC with X.509 Client Certificate', value: 'x509' }]}>
 
 <TabItem value="basic">
 

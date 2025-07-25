@@ -922,7 +922,7 @@ module.exports = {
           ],
         },
         {
-          "Camunda Spring Boot": [
+          "Camunda Spring Boot Starter": [
             "apis-tools/spring-zeebe-sdk/getting-started",
             "apis-tools/spring-zeebe-sdk/configuration",
           ],

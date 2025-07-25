@@ -55,7 +55,7 @@ If you're just getting started, try these next steps:
 
 ## Authorize your requests
 
-Authentication for the Orchestration Cluster API depends on your environment and how you deploy Camunda 8. Supported authentication methods include No Authentication (for local development), Basic Authentication, OIDC (token-based), and OIDC with X.509 client certificates (for advanced scenarios).
+Authentication for the Orchestration Cluster API depends on your environment and how you deploy Camunda 8. Supported authentication methods include No Authentication (for local development), Basic Authentication, OIDC Access Tokens.
 
 - See the [Authentication support matrix](./orchestration-cluster-api-rest-authentication.md#authentication-support-matrix) for details on which authentication methods are supported for each distribution (C8 Run, Docker Compose, Helm/Kubernetes, SaaS).
 - For advanced security, OIDC with X.509 client certificates is supported in Self-Managed environments and handled by the Java client. See [OIDC with X.509](./orchestration-cluster-api-rest-authentication.md#oidc-with-x509-client-certificates).
