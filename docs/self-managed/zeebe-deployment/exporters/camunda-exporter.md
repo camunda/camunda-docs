@@ -46,7 +46,7 @@ Configure the exporter by providing `args`. See the tables below for configurati
 ### Options
 
 <Tabs groupId="configuration" defaultValue="index" queryString
-values={[{label: 'Connect', value: 'connect' },{label: 'Security', value: 'security' },{label: 'Index', value: 'index' },{label: 'Bulk', value: 'bulk' },{label: 'Retention', value: 'retention' }]} >
+values={[{label: 'Connect', value: 'connect' },{label: 'Security', value: 'security' },{label: 'Index', value: 'index' },{label: 'Bulk', value: 'bulk' },{label: 'Retention', value: 'retention' },{label: 'History', value: 'history' },{label: 'Other', value: 'other' }]} >
 
 <TabItem value="connect">
 
@@ -151,6 +151,16 @@ indices. The history can be configured as follows:
 | retention                 | Refer to [Retention](./camunda-exporter.md?configuration=retention#options) for retention configuration options.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |         |
 
 </TabItem>
+
+<TabItem value="other">
+
+Other miscellaneous properties:
+
+| Option                               | Description                                                                                                                                                                                                                                                                                                                                                                                 | Default |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| batchOperation.exportItemsOnCreation | Defines whether the pending items of a started batch operation should be exported from the beginning. For very large batch operations involving more than 100,000 process instances, this can cause temporary performance issues due to the high volume of document insertions. If set to `false`, the "has pending batch operations" spinner in the Operate UI will not function properly. | `true`  |
+
+</TabItem>
 </Tabs>
 
 ## Example
@@ -206,6 +216,9 @@ exporters:
           enabled: false
           minimumAge: 30d
           policyName: camunda-retention-policy
+
+        batchOperation:
+          exportItemsOnCreation: true
 
       createSchema: true
 ```

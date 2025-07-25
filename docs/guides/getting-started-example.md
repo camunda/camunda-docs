@@ -1,17 +1,20 @@
 ---
 id: getting-started-example
-title: "Quickstart: run your first Camunda 8 project locally"
-sidebar_label: Your first Camunda 8 project
-description: "Use an example project with Spring Boot or Node.js to interact with a local Camunda 8 installation."
+title: "Run your first local Camunda 8 project"
+sidebar_label: Run your first local project
+description: "For developers using Camunda 8 Self-Managed, step through an example project with Spring Boot or Node.js."
 keywords: [java, spring, spring camunda, getting started, user guide, tutorial]
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-## Getting started with an example project
+<span class="badge badge--beginner">Beginner</span>
+<span class="badge badge--medium">1 hour</span>
 
-Follow this guide to download and run an example project with a local instance of Camunda 8.
+This guide is tailored for developers who want to implement process automation solutions using Java and Spring. You'll work with a local, self-managed, lightweight Camunda 8 environment.
+
+## Get started with an example project
 
 You will:
 
@@ -51,7 +54,7 @@ Download the Camunda 8 developer bundle from the following website:
 
 The developer bundle includes the following components:
 
-- [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md) – A simplified, single-application Camunda configuration for a local development environment.
+- [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) – A simplified, single-application Camunda configuration for a local development environment.
 - [Camunda Modeler](/components/modeler/about-modeler.md) – An application for modeling BPMN, DMN, and Forms.
 - [Getting started project](https://github.com/camunda/camunda-8-get-started) – An example project with a simple BPMN process and workers in Java or JavaScript.
 
@@ -132,7 +135,15 @@ You can view the process instance in **Operate**, the visual operations tool, by
 [http://localhost:8080/operate](http://localhost:8080/operate)  
 Login with the credentials: `demo` / `demo`.
 
-There you will see an active process instance. (Note: when the workers are running, process instances will be completed immediately and further process instances will not appear as active).
+There you will see an active process instance.
+
+:::note
+Data needs to sync to Operate, so the process instance may not be visible immediately.
+
+Additionally, when the workers are running, process instances will be completed immediately and further process instances will not appear as active.
+:::
+
+![Active process instance visible in Operate](./img/get-started-operate-screenshot.png)
 
 Next, start the job workers to allow them to perform the work for the service tasks. The workers are configured to connect to the locally-running engine and retrieve available work for the process instance.
 
@@ -226,8 +237,6 @@ Your active process instance in Operate will now transition to completed. You ha
 
 ## Next steps
 
-To create a new Spring project, refer to [our guide using Spring](/guides/getting-started-java-spring.md).
-
 For further information about the Node.js SDK, refer to [the Camunda 8 JavaScript SDK API documentation](https://camunda.github.io/camunda-8-js-sdk/).
 
 ## Teardown
@@ -250,7 +259,7 @@ cd c8run && ./c8run stop
 </TabItem>
 <TabItem value="windows">
 ```bash
-cd c8run; .\c8run.exe stop
+cd c8run && .\c8run.exe stop
 ````
 
 </TabItem>

@@ -17,7 +17,7 @@ When using and managing permissions, it is important to understand the following
 - You can also [assign permissions to your custom application](./manage-permissions.md#manage-application-permissions), such as a job worker for example.
 
 :::note
-You can also use [resource authorizations](./resource-authorizations.md) to grant more fine-grained access control to Camunda 8 resources to users and groups.
+In the Orchestration Cluster you can use [authorizations](/components/concepts/access-control/authorizations.md) to grant more fine-grained access control to Orchestration Cluster resources.
 :::
 
 ## Permissions

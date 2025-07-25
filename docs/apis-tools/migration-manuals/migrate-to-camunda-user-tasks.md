@@ -154,7 +154,7 @@ To make an informed decision, you should understand the differences between both
 
 ## Change the implementation type of user tasks
 
-We recommend you migrate process-by-process, allowing you to thoroughly test the processes in your test environments or via your [CI/CD](/guides/devops-lifecycle/integrate-web-modeler-in-ci-cd.md). To do this, take the following steps:
+We recommend you migrate process-by-process, allowing you to thoroughly test the processes in your test environments or via your [CI/CD](/components/modeler/web-modeler/integrate-web-modeler-in-ci-cd.md). To do this, take the following steps:
 
 1. Open a diagram you want to migrate.
 2. Click on a user task.

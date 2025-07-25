@@ -54,7 +54,7 @@ Learn more how to work with the task queue in the [Tasklist user guide](/compone
 
 #### Task details
 
-Task details are shown when a task is selected from the queue. A [form](/guides/utilizing-forms.md) is displayed as the task content, which must be filled out to complete the task.
+Task details are shown when a task is selected from the queue. A [form](/components/modeler/forms/utilizing-forms.md) is displayed as the task content, which must be filled out to complete the task.
 
 :::tip
 Typically, a task application utilizes forms to capture information from the user, to make a decision, to collect the results from a real-world task, or to provide task instructions to the user.

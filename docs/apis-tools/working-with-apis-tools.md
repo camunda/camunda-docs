@@ -7,113 +7,62 @@ description: "Learn more about the integration concepts involved in using the Ca
 
 import DocCardList from '@theme/DocCardList';
 
-This section steps through available concepts for integration:
+# Overview: APIs and Clients in Camunda 8
 
-- **Control your Camunda 8 process automation** by [deploying processes](/components/modeler/web-modeler/run-or-publish-your-process.md#deploy-a-process), [starting process instances](/components/modeler/web-modeler/run-or-publish-your-process.md), [activating jobs](/components/concepts/job-workers.md), and more using supplemental and community-maintained **Zeebe client libraries**.
-- **Interact with the Camunda 8 ecosystem** by learning about [Camunda Components](/components/components-overview.md) and their APIs to communicate with your cluster, search, get and change data, create Cloud API clients, and more.
-- **Develop a custom front end for task applications** by learning the basic architecture of task applications, the APIs for interacting with Camunda 8 through your applications, and the open source form.js library for creating and embedding human task forms into these applications.
+Camunda 8 provides a unified set of APIs and official clients to help you build, automate, and monitor process-driven applications. This page gives you an overview of the available APIs, when to use them, and how to get started with official Camunda clients and SDKs.
 
-:::note
-You're permitted to use these web apps and APIs for free with the Free Edition in non-production environments. To use the software in production, [purchase the Camunda Enterprise Edition](https://camunda.com/products/cloud/camunda-cloud-enterprise-contact/). Read more in our [licensing](../reference/licenses.md) documentation.
-:::
+Camunda 8 exposes several APIs for different integration and automation needs:
 
-## Deploy processes, start process instances, and more using Zeebe client libraries
+- **Orchestration Cluster API (REST):** The main API for process automation, orchestration, and user task management. Recommended for most use cases.
+- **Zeebe API (gRPC):** API for advanced integrations and high-performance use cases. Use only if you need unique features of gRPC - it requires HTTP/2.
+- **Administration API (REST):** For managing Camunda clusters, API clients, and system-level operations.
+- **Optimize API (REST):** For process analytics, dashboards, and reporting data.
+- **Web Modeler API (REST):** For integrating with the Web Modeler for modeling automation.
 
-Clients allow applications to do the following:
+Camunda provides official clients and SDKs - including Java, Spring, and Node.js clients to simplify API usage and speed up development. Camunda Process Test is available for testing your process definitions and automations.
 
-- Deploy processes.
-- Start and cancel process instances.
-- Activate jobs, work on those jobs, and subsequently complete or fail jobs.
-- Publish messages.
-- Update process instance variables and resolve [incidents](/components/concepts/incidents.md).
+This page is your starting point for understanding which API or client to use for your scenario, and how to get started with Camunda 8 integrations.
 
-The official clients mentioned below interact with [Zeebe](/components/zeebe/zeebe-overview.md), the workflow engine integrated into Camunda 8. All clients require [setting up client credentials](/guides/setup-client-connection-credentials.md) to authenticate. Clients connect to Camunda 8 via a mix of REST and [gRPC](https://grpc.io), a high-performance, open source, and universal RPC protocol.
+## Official Camunda Clients and SDKs
 
-Camunda 8 provides several official clients based on this API. Official clients have been developed and tested by Camunda. They also add convenience functions (for example, thread handling for job workers) on top of the core API.
+Camunda provides official clients and SDKs to simplify API usage and speed up development:
 
-### Official Zeebe clients
-
-Official clients have been developed and tested by Camunda. They also add convenience functions (e.g. thread handling for job workers) on top of the core API.
-
-<DocCardList items={[{type:"link", href:"/docs/next/apis-tools/java-client/", label: "Java client", docId:"apis-tools/java-client/index"}
-]}/>
-
-## Learn about Camunda Components and their APIs
-
-:::note
-To migrate from Camunda's V1 component REST APIs to the V2 [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md), review [migrating to the Orchestration Cluster API](/apis-tools/migration-manuals/migrate-to-camunda-api.md).
-:::
-
-Camunda 8 components have APIs to enable polyglot developers to work with in their programming language of choice. Below are links to available component APIs.
-
-![Architecture diagram for Camunda including all the components for SaaS](./img/ComponentsAndArchitecture_SaaS.png)
-
-### API Reference
-
-<DocCardList items={[{type:"link", href:"/docs/next/apis-tools/administration-api/administration-api-reference/", label: "Administration API (REST)", docId:"apis-tools/administration-api/administration-api-reference"},
-{
-type:"link", href:"/docs/next/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview/", label: "Orchestration Cluster API (REST)", docId:"apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview"
-},
-{
-type:"link", href:"/docs/next/apis-tools/optimize-api/optimize-api-authentication/", label: "Optimize API (REST)", description: "Get, delete, and export reports and dashboards, enable and disable sharing, and more."
-},
-{
-type:"link", href:"/docs/next/apis-tools/web-modeler-api/overview/", label: "Web Modeler API (REST)", docId:"apis-tools/web-modeler-api/overview"
-},
-{
-type:"link", href:"/docs/next/apis-tools/zeebe-api/overview/", label: "Zeebe API (gRPC)", docId:"apis-tools/zeebe-api/grpc"
-}
-]}/>
-
-:::note
-Additionally, visit our documentation on [Operate](../self-managed/operate-deployment/usage-metrics.md) and [Tasklist](../self-managed/tasklist-deployment/usage-metrics.md) usage metric APIs.
-:::
-
-### SDKs
-
-<DocCardList items={[{type:"link", href:"/docs/next/apis-tools/spring-zeebe-sdk/getting-started/", label: "Camunda Spring Boot", docId:"apis-tools/spring-zeebe-sdk/getting-started"},
-{
-type:"link", href:"/docs/next/apis-tools/node-js-sdk/", label: "Node.js", docId:"apis-tools/node-js-sdk"
-},
-]}/>
-
-### Postman
-
-Camunda maintains a set of collections and APIs on Postman to help learn and use the available APIs.
-
-Watch and fork your favorite collections and APIs in the [Camunda Team](https://www.postman.com/camundateam) Postman.
-
-:::note
-Collections and APIs are manually updated and not all API functionality may be available. For the most up-to-date API functionality, refer to the [API reference docs](/apis-tools/working-with-apis-tools.md#api-reference).
-:::
-
-### Community clients
-
-[Community clients](/apis-tools/community-clients/index.md) supplement the official clients. These clients have not been tested by Camunda.
-
-It is also possible to [build your own client](../apis-tools/build-your-own-client.md) You can browse other community extensions and the most up-to-date list of community clients [here](https://github.com/orgs/camunda-community-hub/repositories).
-
-### Community SDKs
-
-In addition to APIs and clients, the Camunda Developer Experience team is looking for feedback on popular community clients turned SDKs. While these are currently on the Camunda Community Hub, we are actively iterating and evaluating feedback to fully support them.
-
-- [Node.js SDK](https://github.com/camunda-community-hub/camunda-8-sdk-node-js)
-
-## Develop a custom frontend for task applications
-
-Camunda 8 provides APIs and JavaScript libraries to allow frontend developers to build custom task applications or to integrate with third-party tools or UI builders. The extensible Camunda Forms framework allows developers to build complex forms that can be rendered anywhere, while being maintained by business developers using Camunda Modeler.
+- **Java Client:** The recommended way to build Orchestration Cluster integrations and job workers in Java.
+- **Spring SDK:** Build Spring Boot applications that connect to the Orchestration Cluster to build job workers and process orchestration.
+- **Node.js SDK:** For JavaScript/TypeScript developers building integrations or automations.
 
 <DocCardList items={[
-{
-type: "link",
-href: "/docs/next/apis-tools/frontend-development/task-applications/introduction-to-task-applications",
-label: "Task applications",
-docId:"apis-tools/frontend-development/task-applications/introduction-to-task-applications"
-},
-{
-type: "link",
-href: "/docs/next/apis-tools/frontend-development/forms/introduction-to-forms",
-label: "Forms",
-docId: "apis-tools/frontend-development/forms/introduction-to-forms"
-}
+{type:"link", href:"/docs/next/apis-tools/java-client/", label: "Java client", docId:"apis-tools/java-client/index"},
+{type:"link", href:"/docs/next/apis-tools/spring-zeebe-sdk/getting-started/", label: "Spring SDK", docId:"apis-tools/spring-zeebe-sdk/getting-started"},
+{type:"link", href:"/docs/next/apis-tools/node-js-sdk/", label: "Node.js SDK", docId:"apis-tools/node-js-sdk"}
 ]}/>
+
+## Testing process definitions and automations
+
+- **Camunda Process Test:** Test your process definitions and automations with a dedicated testing framework.
+
+<DocCardList items={[
+{type:"link", href:"/docs/next/apis-tools/testing/getting-started/", label: "Camunda Process Test", docId:"apis-tools/testing/getting-started"}
+]}/>
+
+## API Reference
+
+<DocCardList items={[
+{type:"link", href:"/docs/next/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview/", label: "Orchestration Cluster API (REST)", docId:"apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview"},
+{type:"link", href:"/docs/next/apis-tools/zeebe-api/overview/", label: "Zeebe API (gRPC)", docId:"apis-tools/zeebe-api/grpc"},
+{type:"link", href:"/docs/next/apis-tools/administration-api/administration-api-reference/", label: "Administration API (REST)", docId:"apis-tools/administration-api/administration-api-reference"},
+{type:"link", href:"/docs/next/apis-tools/optimize-api/optimize-api-authentication/", label: "Optimize API (REST)", description: "Get, delete, and export reports and dashboards, enable and disable sharing, and more."},
+{type:"link", href:"/docs/next/apis-tools/web-modeler-api/overview/", label: "Web Modeler API (REST)", docId:"apis-tools/web-modeler-api/overview"}
+]}/>
+
+## When to use which API?
+
+- **Orchestration Cluster API:** For most process automation, orchestration, and user task scenarios. Recommended for new projects.
+- **Zeebe API:** For advanced, high throughput and low-latency integrations, or when you need gRPC features. Use only if you have specific requirements that the REST API cannot meet.
+- **Administration API:** For cluster and system management.
+- **Optimize API:** For analytics, dashboards, and reporting.
+- **Web Modeler API:** For integrating modeling into your toolchain.
+
+## Migration manuals
+
+If you are migrating from Camunda 7 or from v1 component REST APIs, see the [migration manuals](/apis-tools/migration-manuals/migrate-to-camunda-api.md) for guidance.

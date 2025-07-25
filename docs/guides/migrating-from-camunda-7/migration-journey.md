@@ -115,7 +115,7 @@ This guide is the main resource walking you through migration.
 
 As part of your migration journey, you might also want to consider engaging professional services to help you. The main starting points are:
 
-- [Migration evaluation workshop (Camunda)](https://camunda.com/wp-content/uploads/2024/03/Camunda_ConsultingWorkshops_5-Migration-Evaluation_2024.pdf)
+- [Migration evaluation workshop (Camunda)](https://camunda.com/wp-content/uploads/2025/06/Camunda_ConsultingWorkshops_6-Migration-Evaluation_2025_EN.pdf)
 - Scoping Workshop (Camunda) <!-- TODO -->
 - Professional advisory services (Camunda, Partners)
 - Implementation services (Partners)
@@ -144,7 +144,7 @@ There are multiple ways to set up Camunda 8:
 
 - Use **Camunda's SaaS** offering: You don't need to install or operate the platform yourself. This is the most convenient and generally recommended option. If you face legal challenges around information security, privacy, and compliance, check the [Camunda Trust Center](https://camunda.com/trust-center/). Note that this option comes with limitations. For example, you can't [migrate historical audit data from Camunda 7](./migration-tooling.md) to Camunda 8 SaaS, and [multi-tenancy will be introduced in SaaS with Camunda 8.8](/self-managed/concepts/multi-tenancy.md).
 
-- Run the platform **Self-Managed**. You might want to look at the [Camunda 8 Run distribution](/self-managed/setup/deploy/local/c8run.md). RDBMS support is planned to be introduced with 8.9, removing the need for Elastic Search and allowing a relatively simple setup that Camunda 7 users often like. Still, you can go for more scalable options (see also the [architecture streamlining blog post](https://camunda.com/blog/2024/04/simplified-deployment-options-accelerated-getting-started-experience/)). Refer to the [installation guide](/self-managed/setup/overview.md) for details.
+- Run the platform **Self-Managed**. You might want to look at the [Camunda 8 Run distribution](/self-managed/quickstart/developer-quickstart/c8run.md). RDBMS support is planned to be introduced with 8.9, removing the need for Elastic Search and allowing a relatively simple setup that Camunda 7 users often like. Still, you can go for more scalable options (see also the [architecture streamlining blog post](https://camunda.com/blog/2024/04/simplified-deployment-options-accelerated-getting-started-experience/)). Refer to the [installation guide](/self-managed/setup/overview.md) for details.
 
 While setting up Camunda 8 is not part of the core migration journey, it is a prerequisite and should be tackled early in the migration journey to avoid blockers.
 

@@ -38,6 +38,8 @@ Add the following Maven dependency to your Spring Boot Starter project, replacin
 </dependency>
 ```
 
+Additionally, you can find the [source on GitHub](https://github.com/camunda/camunda/tree/main/clients/spring-boot-starter-camunda-sdk/src/main).
+
 ## Enable the Java Compiler `-parameters`-flag
 
 If you don't want to specify annotation values just as the process variable name on the [variable](configuration.md#using-variable) annotation, the Java compiler flag `-parameters` is required.
@@ -174,4 +176,4 @@ See [the configuration documentation](/apis-tools/spring-zeebe-sdk/configuration
 
 ## Writing test cases
 
-To learn more about writing test cases using Zeebe Process Test, see [Camunda Spring Boot SDK integration](../java-client/zeebe-process-test.md#zeebe-spring-sdk-integration).
+Please refer to [Camunda Process Test](../testing/getting-started.md) to write test cases when using the Camunda Spring Boot SDK.

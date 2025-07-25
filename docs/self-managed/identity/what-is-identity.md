@@ -9,7 +9,7 @@ Use the [Management Identity](/reference/glossary.md#management-identity) compon
 
 ## About Identity
 
-Identity is included by default in the [Docker Compose](/self-managed/setup/deploy/local/docker-compose.md) and [Helm](/self-managed/setup/install.md) deployments of Camunda 8 Self-Managed, and is configured by default to use a packaged Keycloak instance as an identity provider (IdP).
+Identity is included by default in the [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md) and [Helm](/self-managed/installation-methods/helm/install.md) deployments of Camunda 8 Self-Managed, and is configured by default to use a packaged Keycloak instance as an identity provider (IdP).
 
 - Administrators can use Identity to manage users, groups, roles, permissions, and applications within the Camunda 8 platform.
 - Identity supports both users (interacting via Camunda UIs) and applications (interacting via Camunda APIs, such as job workers) with secure authorization based on OAuth 2.0 standards.

@@ -64,7 +64,7 @@ camunda:
       cluster-id: xxx
 ```
 
-If you are connecting a local connector runtime to a SaaS cluster, you may want to review our [guide to using connectors in hybrid mode](/guides/use-connectors-in-hybrid-mode.md).
+If you are connecting a local connector runtime to a SaaS cluster, you may want to review our [guide to using connectors in hybrid mode](/components/connectors/use-connectors-in-hybrid-mode.md).
 
 </TabItem>
 
@@ -184,22 +184,40 @@ export SUPER_SECRETS_MY_SECRET='foo' # This will be resolved by using {{ secrets
 
 The following environment variables can be used to configure the default secret provider:
 
-| Name                                                   | Description                                                              | Default value |
-| ------------------------------------------------------ | ------------------------------------------------------------------------ | ------------- |
-| `CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_ENABLED` | Whether the default secret provider is enabled.                          | `true`        |
-| `CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_PREFIX`  | The prefix applied to the secret name before looking up the environment. | `""`          |
+| Name                                                       | Description                                                              | Default value |
+| ---------------------------------------------------------- | ------------------------------------------------------------------------ | ------------- |
+| `CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_ENABLED`     | Whether the default secret provider is enabled.                          | `true`        |
+| `CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_PREFIX`      | The prefix applied to the secret name before looking up the environment. | `""`          |
+| `CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_TENANTAWARE` | Whether the secret provider should be tenant-aware.                      | `false`       |
+
+If the secret provider is set to be tenant-aware, the secret format will change to `${prefix}${tenantId}_${secretName}`:
+
+Example with empty prefix:
+
+```bash
+export CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_TENANTAWARE=true
+export tenant1_MY_SECRET='foo' # This will be resolved by using {{ secrets.MY_SECRET }} from tenant1
+```
+
+Example with prefix set:
+
+```bash
+export CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_TENANTAWARE=true
+export CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_PREFIX='SUPER_SECRETS_'
+export SUPER_SECRETS_tenant1_MY_SECRET='foo' # This will be resolved by using {{ secrets.MY_SECRET }} from tenant1
+```
 
 </TabItem>
 
 <TabItem value='helm'>
 
-Connector secrets can be used in Helm charts. Review the documentation on [managing secrets in Helm charts](self-managed/setup/guides/secret-management.md) for additional details.
+Connector secrets can be used in Helm charts. Review the documentation on [managing secrets in Helm charts](/self-managed/installation-methods/helm/configure/secret-management.md) for additional details.
 
 </TabItem>
 
 <TabItem value='docker'>
 
-To inject secrets into the [Docker images of the runtime](/self-managed/setup/deploy/other/docker.md#connectors), they must be available in the environment of the Docker container.
+To inject secrets into the [Docker images of the runtime](/self-managed/installation-methods/docker/docker.md#connectors), they must be available in the environment of the Docker container.
 
 For example, you can inject secrets when running a container:
 
@@ -222,7 +240,7 @@ to inject multiple secrets at once.
 
 <TabItem value='manual'>
 
-In the [manual setup](/self-managed/setup/deploy/local/manual.md#run-connectors), inject secrets during connector execution by providing
+In the [manual setup](/self-managed/installation-methods/manual/install.md#run-connectors), inject secrets during connector execution by providing
 them as environment variables before starting the runtime environment. You can, for example, export them beforehand as follows:
 
 ```bash

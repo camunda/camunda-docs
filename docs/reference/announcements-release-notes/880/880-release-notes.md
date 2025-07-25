@@ -29,10 +29,10 @@ These release notes identify the new features included in 8.8, including [alpha 
 
 <!-- https://github.com/camunda/product-hub/issues/2507 -->
 
-Camunda 8 now supports integration with [Atlassian Bitbucket](https://bitbucket.org/product/), in addition to GitHub, GitLab, and Azure DevOps.
+Camunda 8 now supports integration with [Atlassian Bitbucket Cloud](https://bitbucket.org/product/), in addition to GitHub, GitLab, and Azure DevOps.
 
 - This helps customers who use Jira for their development processes.
-- Organization owners and administrators can connect their Web Modeler process applications to Bitbucket, allowing users to keep their Web Modeler, Desktop Modeler, and official version control projects synced.
+- Organization owners and administrators can connect their Web Modeler process applications to Bitbucket Cloud, allowing users to keep their Web Modeler, Desktop Modeler, and official version control projects synced.
 
 To learn more, see [Git sync](/components/modeler/web-modeler/git-sync.md?platform=bitbucket).
 
@@ -96,7 +96,7 @@ This feature is not yet fully compatible with backup/restore.
 Camunda now provides alternative container images to the previously used Bitnami images. These images are hosted on `registry.camunda.cloud`.
 
 - From version **8.8**, these are the default supported images, offering better security and faster patch delivery.
-- To use them, update your Helm deployment to reference the `values-images-ee.yml` file. See the [installation guide](/self-managed/setup/install.md) for details.
+- To use them, update your Helm deployment to reference the `values-images-ee.yml` file. See the [installation guide](/self-managed/installation-methods/helm/install.md) for details.
 
 #### Configurable volumes
 
@@ -260,7 +260,7 @@ The following known limitations apply for this alpha version release:
 
 #### Identity management for Helm Chart setups <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-[Orchestration Cluster Identity](/self-managed/orchestration-identity/orchestration-identity.md) is now available for OIDC setups in [Helm chart deployments](/self-managed/setup/install.md). Starting with this alpha version, you can configure the Orchestration Cluster components to use the identity provider (IdP) of your choice and enable single sign-on (SSO).
+[Orchestration cluster Identity](/self-managed/orchestration-identity/orchestration-identity.md) is now available for OIDC setups in [Helm chart deployments](/self-managed/installation-methods/helm/install.md). Starting with this alpha version, you can configure the Orchestration cluster components to use the identity provider (IdP) of your choice and enable single sign-on (SSO).
 
 The following known limitations apply for this alpha version release:
 
@@ -394,7 +394,6 @@ Agentic process orchestration enhancements include:
 
 - An optional `completionCondition` boolean expression for ad-hoc sub-processes that is evaluated every time an inner element is completed. A `cancelRemainingInstances` boolean attribute can also be configured to influence the ad-hoc sub-process behavior when the completion condition is met.
 - An [Activate activities within an ad-hoc sub-process](/apis-tools/orchestration-cluster-api-rest/specifications/activate-ad-hoc-sub-process-activities.api.mdx) API used to activate selected activities within an ad-hoc sub-process.
-- A [Search activatable activities (alpha)](/apis-tools/orchestration-cluster-api-rest/specifications/search-ad-hoc-sub-process-activities.api.mdx) API used to search for activatable activities within ad-hoc sub-processes.
 
 To learn more about these features, see [ad-hoc sub-processes](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md).
 
@@ -445,7 +444,7 @@ To learn more about this feature, see the [Camunda Spring Boot SDK](/apis-tools/
 
 Camunda 8 Run no longer requires authentication when working with APIs. Authentication and authorizations can be optionally enabled to allow requests using basic authentication, and to test authorizations and permissions.
 
-To learn more about this feature, see the [API documentation](/self-managed/setup/deploy/local/c8run.md#use-camunda-apis) for Camunda 8 Run.
+To learn more about this feature, see the [API documentation](/self-managed/quickstart/developer-quickstart/c8run.md#use-camunda-apis) for Camunda 8 Run.
 
 <!-- https://github.com/camunda/camunda-docs/pull/5145 -->
 

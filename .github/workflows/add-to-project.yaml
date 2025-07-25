@@ -6,7 +6,7 @@ on:
 
 jobs:
   sync-board:
-    if: github.event.requested_reviewer.login == 'akeller' || github.event.requested_reviewer.login == 'christinaausley' || github.event.requested_reviewer.login == 'mesellings' || github.event.requested_team.name == 'Tech Writers'
+    if: github.event.requested_reviewer.login == 'christinaausley' || github.event.requested_reviewer.login == 'mesellings' || github.event.requested_team.name == 'Tech Writers'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/create-github-app-token@v2
