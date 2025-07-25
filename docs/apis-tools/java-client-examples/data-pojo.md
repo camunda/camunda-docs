@@ -19,7 +19,7 @@ description: "Let's analyze the prerequisites and code to handle variables as PO
 
 ```java
     ...
-    try (final ZeebeClient client = clientBuilder.build()) {
+    try (final CamundaClient client = clientBuilder.build()) {
       final Order order = new Order();
       order.setOrderId(31243);
 

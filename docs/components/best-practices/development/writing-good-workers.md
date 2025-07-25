@@ -140,10 +140,12 @@ public void retrieveMoney(final JobClient client, final ActivatedJob job) {
 }
 ```
 
+<!-- Does these links need to update below? -->
+
 In the background, a worker starts a polling component and [a thread pool](https://github.com/camunda-cloud/zeebe/blob/d24b31493b8e22ad3405ee183adfd5a546b7742e/clients/java/src/main/java/io/camunda/zeebe/client/impl/ZeebeClientImpl.java#L179-L183) to [handle the polled jobs](https://github.com/camunda/camunda/blob/main/zeebe/clients/java/src/main/java/io/camunda/zeebe/client/impl/worker/JobPoller.java#L109-L111). The [**default thread pool size is one**](https://github.com/camunda-cloud/zeebe/blob/760074f59bc1bcfb483fab4645501430f362a475/clients/java/src/main/java/io/camunda/zeebe/client/impl/ZeebeClientBuilderImpl.java#L49). If you need more, you can enable a thread pool:
 
 ```java
-ZeebeClient client = ZeebeClient.newClientBuilder()
+CamundaClient client = CamundaClient.newClientBuilder()
   .numJobWorkerExecutionThreads(5)
   .build();
 ```
@@ -292,7 +294,7 @@ This makes the recommendation very straight-forward:
 Using the [C# client](https://github.com/camunda/camunda-platform-get-started/tree/master/csharp), you can write worker code like this:
 
 ```csharp
-zeebeClient.NewWorker()
+camundaClient.NewWorker()
   .JobType("payment")
   .Handler(JobHandler)
   .HandlerThreads(3)

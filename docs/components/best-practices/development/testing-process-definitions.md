@@ -72,7 +72,7 @@ The following code shows an example test:
 class TestTwitterProcess {
 
     @Autowired
-    private ZeebeClient zeebe;
+    private CamundaClient zeebe;
 
     @MockBean
     private TweetPublicationService tweetPublicationService;
