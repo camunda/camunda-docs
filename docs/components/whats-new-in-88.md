@@ -89,8 +89,8 @@ With Camunda 8.8, Identity management is intentionally split into two well-defin
 
 - **Unified Access Management:** Authentication and Authorizations are directly handled via the Orchestration Cluster consistently across all components and APIs. There is no runtime dependency on Management Identity.
 - **Authentication Modes:** The Orchestration Cluster supports two authentication setups:
-  - **Basic Authentication** Authenticate in UI form-based and via API by providing basic authentication. Users and Groups are managed in the Orchestration Cluster Identity.
-  - **OIDC** OpenID Connect with any compatible identity provider of your choice (e.g., Keycloak, EntraID, Okta, etc.)
+  - **Basic Authentication:** Form-based authentication in the UI and basic authentication for API access. Users and Groups are managed within the Orchestration Cluster Identity.
+  - **OIDC:** OpenID Connect with any compatible identity provider of your choice (e.g., Keycloak, EntraID, Okta, etc.)
 - **Authorizations per Resource:** A new [authorization concept](/components/concepts/access-control/authorizations.md) allows fine-grained access control to Orchestration Cluster resources, such as process instances, tasks, and decisions. It is consistently applied across all components and APIs.
 - **Decoupling from Keycloak:** Keycloak is now treated as a standard, external Identity Provider that can be integrated via OIDC. There is no special integration — making it easier to use other providers.
 
@@ -98,8 +98,8 @@ With Camunda 8.8, Identity management is intentionally split into two well-defin
 
 - Stays responsible for managing access to platform components like Web Modeler, Console, and Optimize.
 - **Authentication Modes:** The Management Identity supports two authentication setups:
-  - **Direct Keycloak integration** (default)
-  - **OIDC** (OpenID Connect with any compatible identity provider)
+  - **Direct Keycloak integration:** (default)
+  - **OIDC:** (OpenID Connect with any compatible identity provider)
 
 #### Who is affected?
 
@@ -171,9 +171,9 @@ The following table summarizes where identity entities are managed in Camunda 8 
 
 When using Keycloak, the following changes apply:
 
-- no special setup for Keycloak anymore, instead Keycloak is integrated such as any other IdP.
+- No special setup is required for Keycloak anymore; instead, Keycloak is integrated like any other identity provider.
 - the management and storage of Resource based Authorizations, Tenants, Roles as well as assignments of users/clients move from Management Identity to the Orchestration Cluster Identity.
-- the management of Groups stays within Keycloak and the Orchestration Cluster will pick up the groups via the bring your own group feature.
+- the management of groups stays within Keycloak and the Orchestration Cluster will pick up the groups via the bring your own group feature.
 - application Permissions granted to Roles or Applications previously managed in Management identity are replaced by Authorizations managed in the Orchestration Cluster.
 
 ###### Camunda 8 Self-Managed - OpenID Connect
@@ -181,7 +181,7 @@ When using Keycloak, the following changes apply:
 When using an external Identity Provider (IdP) with OpenID Connect (OIDC), the following changes apply:
 
 - the management of Tenants, Mapping Rules, and Roles moves from Management Identity to the Orchestration Cluster Identity.
-- the management of Groups stays within your Identity Provider and the Orchestration Cluster will pick up the groups via the bring your own group feature or Mapping Rules.
+- the management of Groups stays within your Identity Provider and the Orchestration Cluster will pick up the Groups via the bring your own Group feature or Mapping Rules.
 - Permissions granted to Roles previously managed in Management identity are replaced by Authorizations managed in the Orchestration Cluster.
 - Resource-based Authorizations were not supported in this setup in 8.7 by Management Identity but will be in 8.8, no migration is due though.
 
