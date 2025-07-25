@@ -149,7 +149,7 @@ The following table summarizes where identity entities are managed in Camunda 8 
 
 The former Roles and Permissions managed in Management Identity are superseded by the new Authorizations & Roles within the Orchestration Cluster Identity.
 
-An Identity Migration App that migrates these entities from the Management Identity into the Orchestration Cluster Identity is to be run during the update from Camunda 8.7 to 8.8. Instructions on enabling and configuring the Identity Migration App in migration guide from 8.7 to 8.8 are available for Helm but also docker-compose/bare Java deployments.
+An Identity Migration App that migrates these entities from the Management Identity into the Orchestration Cluster Identity is to be run during the update from Camunda 8.7 to 8.8. Instructions on enabling and configuring the Identity Migration App in the migration guide from 8.7 to 8.8 are available for Helm but also docker-compose/bare Java deployments.
 
 Management Identity and Postgres are not needed for an Orchestration Cluster anymore but only an Identity Provider for an OIDC-based setup, or even no IdP if using the native Basic Authentication method.
 
