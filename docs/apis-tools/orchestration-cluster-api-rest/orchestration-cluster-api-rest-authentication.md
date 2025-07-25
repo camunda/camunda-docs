@@ -15,23 +15,22 @@ The Orchestration Cluster API supports three authentication methods depending on
 
 - **No Authentication**
 - **Basic Authentication**
-- **OIDC (Token-based) Authentication**
+- **OIDC Access Token Authentication**
 
 ## When to use each method
 
 - **No Authentication**: Use for local development only, with C8 Run or Docker Compose, when security is not required. Not recommended for production.
 - **Basic Authentication**: Use for simple username/password protection, typically in C8 Run with authentication enabled.
-- **OIDC (Token-based)**: Use for production, SaaS, or any environment where secure, standards-based authentication is required. Required for SaaS and recommended for Self-Managed clusters in production.
-- **OIDC with X.509**: Use for advanced scenarios where client certificates are used for authentication, typically in Self-Managed clusters.
+- **OIDC Access Token Authentication**: Use for production, SaaS, or any environment where secure, standards-based authentication is required. Required for SaaS and recommended for Self-Managed clusters in production.
 
 ## Authentication support matrix
 
-| Distribution                                                                           | Default Authentication | Supports No Auth        | Supports Basic Auth | Supports OIDC (Token-based) |
+| Distribution                                                                           | Default Authentication | Supports No Auth        | Supports Basic Auth | Supports OIDC Access Token |
 | -------------------------------------------------------------------------------------- | ---------------------- | ----------------------- | ------------------- | --------------------------- |
 | [C8 Run](../../self-managed/quickstart/developer-quickstart/c8run.md)                  | None                   | ✅ (default)            | ✅ (when enabled)   | ✅ (when configured)        |
 | [Docker Compose](../../self-managed/quickstart/developer-quickstart/docker-compose.md) | None                   | ✅ (default)            | ✅ (when enabled)   | ✅ (when configured)        |
 | [Helm](../../self-managed/installation-methods/helm/install.md)                        | Basic Auth             | ✅ (when Auth disabled) | ✅ (default)        | ✅ (when configured)        |
-| SaaS                                                                                   | OIDC                   | ❌                      | ❌                  | ✅ (required)               |
+| SaaS                                                                                   | OIDC Access Token         | ❌                      | ❌                  | ✅ (required)               |
 
 # Authenticate API calls
 
@@ -56,9 +55,9 @@ curl --user username:password \
      http://localhost:8080/v2/topology
 ```
 
-## OIDC (Token-based) Authentication
+## OIDC Access Token Authentication using Client Credentials
 
-OIDC (OpenID Connect) is the recommended authentication method for production and required for SaaS. You must obtain a token and include it in the `Authorization` header of each request.
+OIDC Access Token Authentication is the recommended method for production and required for SaaS. You must obtain an Access Token and pass it as an OAuth 2.0 Bearer Token it in the `Authorization` header of each request.
 
 <Tabs groupId="environment" defaultValue="saas" queryString values={[
 {label: 'SaaS', value: 'saas' },
@@ -68,7 +67,7 @@ OIDC (OpenID Connect) is the recommended authentication method for production an
 <TabItem value="saas">
 
 1. [Create client credentials](/components/console/manage-clusters/setup-client-connection-credentials.md) in the Camunda Console.
-2. Use the credentials to request a token:
+2. Use the credentials to request an Access Token:
 
 ```shell
 curl --request POST ${CAMUNDA_OAUTH_URL} \
@@ -116,11 +115,11 @@ Replace the `${BASE_URL}` based on the address of your cluster. See the [Context
 
 </Tabs>
 
-## OIDC with X.509 client certificates
+## OIDC Access Token Authentication using X.509 Client Certificates
 
-For advanced security scenarios, you can use OIDC authentication with X.509 client certificates. This is typically required in Self-Managed environments where mutual TLS (mTLS) is enforced by your identity provider (such as Keycloak).
+For advanced security scenarios, you can use OIDC Access Tokens from your IdP obtained using X.509 Client Certificates. This is typically required in Self-Managed environments where mutual TLS (mTLS) is enforced by your identity provider (such as Keycloak).
 
-- The Java client supports OIDC with X.509 out of the box. You can configure the necessary keystore and truststore settings either via code or environment variables. See [Java client authentication](../java-client/authentication.md#oidc-with-x509) for a full example and configuration details.
+- The Java client supports OIDC Access Token retrieval using X.509 Client Certificates out of the box. You can configure the necessary keystore and truststore settings either via code or environment variables. See [Java client authentication](../java-client/authentication.md#oidc-with-x509) for a full example and configuration details.
 - For other clients or custom integrations, refer to your identity provider's documentation for how to obtain tokens using X.509 certificates.
 
 ## Token management in clients
