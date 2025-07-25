@@ -901,20 +901,7 @@ module.exports = {
       ],
     },
     {
-      "Clients & SDKs": [
-        {
-          SDKs: [
-            "apis-tools/node-js-sdk",
-            {
-              "Camunda Spring Boot": [
-                "apis-tools/spring-zeebe-sdk/getting-started",
-                "apis-tools/spring-zeebe-sdk/configuration",
-              ],
-            },
-          ],
-        },
-        {
-          Clients: [
+          "API Clients": [
             {
               "Java client": [
                 "apis-tools/java-client/index",
@@ -929,7 +916,6 @@ module.exports = {
                     "apis-tools/java-client-examples/process-instance-create",
                     "apis-tools/java-client-examples/process-instance-create-nonblocking",
                     "apis-tools/java-client-examples/process-instance-create-with-result",
-                    "apis-tools/java-client-examples/process-instance-cancel-batch",
                     "apis-tools/java-client-examples/decision-evaluate",
                     "apis-tools/java-client-examples/job-worker-open",
                     "apis-tools/java-client-examples/data-pojo",
@@ -939,6 +925,13 @@ module.exports = {
               ],
             },
             {
+              "Camunda Spring Boot Starter": [
+                "apis-tools/spring-zeebe-sdk/getting-started",
+                "apis-tools/spring-zeebe-sdk/configuration",
+              ],
+            },
+            "apis-tools/node-js-sdk",
+            {
               "Community clients": [
                 "apis-tools/community-clients/index",
                 "apis-tools/build-your-own-client",
@@ -946,8 +939,6 @@ module.exports = {
             },
           ],
         },
-      ],
-    },
     require("./docs/apis-tools/frontend-development/sidebar-schema"),
     {
       Testing: [

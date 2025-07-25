@@ -136,7 +136,7 @@ Desktop Modeler is [open source and free to use](https://github.com/camunda/camu
 
 ## Secure the Orchestration Cluster API
 
-By default, the Orchestration Cluster gRPC API is publicly accessible without requiring any client credentials for development purposes.
+By default, the Orchestration Cluster API is publicly accessible without requiring any client credentials for development purposes.
 
 ## Connectors
 
