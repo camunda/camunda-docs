@@ -100,21 +100,6 @@ Identity requires the following parameters:
 | spring.security.oauth2.resourceserver.jwt.issueruri     | Token issuer URI                                                                                                                              | http://localhost:18080/auth/realms/camunda-platform                               |
 | spring.security.oauth2.resourceserver.jwt.jwkseturi     | Complete URI to get public keys for JWT validation                                                                                            | http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/certs |
 
-## Resource-based permissions
-
-1. Resource authorizations must be [enabled in Identity](/self-managed/identity/access-management/resource-authorizations.md).
-2. Tasklist must be configured to use resource authorizations (see above configurations) and `camunda.tasklist.identity.resourcePermissionsEnabled` must be enabled.
-
-Resource-based permissions are defined per process definition. Process definition is defined by **Process ID**, which is present in BPMN XML.
-
-The user or user group can be assigned the following permission:
-
-| Permission name        | Resource type(s)   | Allowed action(s) in Operate                    |
-| ---------------------- | ------------------ | ----------------------------------------------- |
-| START_PROCESS_INSTANCE | process-definition | User can start this process ad hoc on Tasklist. |
-
-For more information, visit the [Identity documentation](/self-managed/identity/access-management/resource-authorizations.md).
-
 ## Use Identity JWT token to access Tasklist API
 
 Tasklist provides a [REST API](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md) under the endpoint `/v1`. Clients can access this API using a JWT access token in an authorization header `Authorization: Bearer <JWT>`.
