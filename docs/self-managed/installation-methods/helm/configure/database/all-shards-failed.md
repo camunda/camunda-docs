@@ -1,4 +1,9 @@
-## Dealing with `all shards failed` Errors in OpenSearch
+---
+id: all-shards-failed
+title: "Dealing with `all shards failed` errors"
+sidebar_label: "Dealing with `all shards failed` errors"
+description: "Dealing with `all shards failed` errors"
+---
 
 When deploying Camunda 8.8+ with OpenSearch (or Elasticsearch) in a multi-node setup, you may encounter errors like the following in your Camunda logs:
 
@@ -32,7 +37,7 @@ curl http://<opensearch-host>:9200/_cat/indices?v
 
 ### Multi-node deployments and default configuration pitfalls
 
-Camunda's Helm chart is configured for single-node deployments with a shard replication of 0 per default. In a multi-node OpenSearch setup, this can cause problems if shard allocation is not balanced.
+Camunda's Helm chart is per default configured for single-node deployments with a shard replication of 0. In a multi-node OpenSearch setup, this can cause problems if shard allocation is not balanced.
 
 Consider the following scenario:
 
@@ -44,23 +49,23 @@ OpenSearch Node 1 (no shard) <-x-> OpenSearch Node 2 (not reachable; holds the s
 ```
 
 :::info
-In 8.8, Camunda now stores authorization data in OpenSearch (or Elasticsearch) instead of PostgreSQL and Keycloak as in prior versions.
+Starting with version 8.8, Camunda stores authorization data in OpenSearch (or Elasticsearch), instead of using PostgreSQL and Keycloak as in previous versions.
 
 This means:
 
-- Every request that performs an authorization check triggers one or more database queries.
-- These requests are critical - if they fail, Camunda components may be unable to process the request.
+- Every authorization check now triggers one or more search engine queries.
+- These queries are critical — if they fail, Camunda components may be unable to process requests.
   :::
 
 ### Step 2: Improve resilience with replica shards
 
-To improve fault tolerance, configure replica shards. This ensures that if one database node becomes unavailable, another can still serve the data.
+To improve fault tolerance, increase the number of replica shards. This ensures that if one database node becomes unavailable, another can still serve the data. As a general rule for multi-node clusters:
 
-As a general rule of thumb in multi-node clusters, set:
+```
+numberOfReplicas = numberOfNodes - 1
+```
 
-`numberOfReplicas = numberOfNodes - 1`
-
-For example, configure the following environment variables for a 3 node setup:
+For example, in a 3-node OpenSearch cluster, set the following environment variables:
 
 ```yaml
 orchestration:
