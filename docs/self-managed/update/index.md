@@ -66,20 +66,9 @@ Camunda 8.8 introduces changes that **require** updates to both infrastructure a
 See: [Update guide: 8.7.x → 8.8](../operational-guides/update-guide/870-to-880.md) [VERIFY path]
 :::
 
-### API and SDK status
+### API and SDK changes with 8.8
 
-| Component / Use          | Status in 8.8  | Migrate to                 | Migrate by          |
-| ------------------------ | -------------- | -------------------------- | ------------------- |
-| V1 component APIs        | **Deprecated** | Orchestration Cluster API  | Before Camunda 8.10 |
-| Community Spring Zeebe   | **Deprecated** | Camunda Spring SDK         | Before Camunda 8.10 |
-| Zeebe Process Test (ZPT) | **Deprecated** | Camunda Process Test (CPT) | Before Camunda 8.10 |
-| Job-based user tasks     | **Deprecated** | Camunda User Tasks         | Before Camunda 8.10 |
-
-:::tip Start migration early
-Begin migrating now to reduce risk when upgrading beyond 8.8.
-:::
-
-For more details, see [API changes in Camunda 8: A unified and streamlined experience](https://camunda.com/blog/2024/12/api-changes-in-camunda-8-a-unified-and-streamlined-experience/).
+Learn more about changes for application developers in the dedicated [Camunda 8.8 APIs & tools update guide](../../apis-tools/migration-manuals/index.md).
 
 ### Authentication and authorization
 

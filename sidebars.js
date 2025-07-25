@@ -65,9 +65,10 @@ module.exports = {
         "components/concepts/outbound-connectors-job-workers",
         "components/concepts/backups",
         "components/concepts/resource-deletion",
-        "components/concepts/resource-authorizations",
         {
           "Access control": [
+            "components/concepts/access-control/access-control-overview",
+            "components/concepts/access-control/authorizations",
             "components/concepts/access-control/user-groups",
             "components/concepts/access-control/user-task-access-restrictions",
           ],
@@ -346,6 +347,7 @@ module.exports = {
           items: [
             "components/zeebe/technical-concepts/technical-concepts-overview",
             "components/zeebe/technical-concepts/architecture",
+            "components/zeebe/technical-concepts/batch-operations",
             "components/zeebe/technical-concepts/clustering",
             "components/zeebe/technical-concepts/health",
             "components/zeebe/technical-concepts/partitions",
@@ -452,6 +454,7 @@ module.exports = {
                   },
                   items: [
                     "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-example",
+                    "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization",
                   ],
                 },
                 "components/connectors/out-of-the-box-connectors/agentic-ai-ad-hoc-tools-schema-resolver",
@@ -922,6 +925,7 @@ module.exports = {
           ],
         },
         {
+
           "Camunda Spring Boot Starter": [
             "apis-tools/spring-zeebe-sdk/getting-started",
             "apis-tools/spring-zeebe-sdk/configuration",
@@ -932,6 +936,9 @@ module.exports = {
           "Community clients": [
             "apis-tools/community-clients/index",
             "apis-tools/build-your-own-client",
+
+              ],
+            },
           ],
         },
       ],
@@ -1608,7 +1615,6 @@ module.exports = {
                   },
                   items: [
                     "self-managed/identity/access-management/manage-permissions",
-                    "self-managed/identity/access-management/resource-authorizations",
                   ],
                 },
                 "self-managed/identity/managing-tenants",

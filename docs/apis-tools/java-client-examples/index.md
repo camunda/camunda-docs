@@ -24,6 +24,7 @@ Import the Maven project in the `samples` directory into your IDE to start hacki
 - [Create a process instance](process-instance-create.md)
 - [Create non-blocking process instances](process-instance-create-nonblocking.md)
 - [Create a process instance with results](process-instance-create-with-result.md)
+- [Cancel multiple process instances with a batch operation](process-instance-cancel-batch.md)
 
 ## Decision
 
