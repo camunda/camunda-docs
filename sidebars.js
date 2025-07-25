@@ -347,6 +347,7 @@ module.exports = {
           items: [
             "components/zeebe/technical-concepts/technical-concepts-overview",
             "components/zeebe/technical-concepts/architecture",
+            "components/zeebe/technical-concepts/batch-operations",
             "components/zeebe/technical-concepts/clustering",
             "components/zeebe/technical-concepts/health",
             "components/zeebe/technical-concepts/partitions",
@@ -928,6 +929,7 @@ module.exports = {
                     "apis-tools/java-client-examples/process-instance-create",
                     "apis-tools/java-client-examples/process-instance-create-nonblocking",
                     "apis-tools/java-client-examples/process-instance-create-with-result",
+                    "apis-tools/java-client-examples/process-instance-cancel-batch",
                     "apis-tools/java-client-examples/decision-evaluate",
                     "apis-tools/java-client-examples/job-worker-open",
                     "apis-tools/java-client-examples/data-pojo",
