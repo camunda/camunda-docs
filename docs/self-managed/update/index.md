@@ -21,7 +21,7 @@ Camunda 8.8 introduces a major architectural evolution, impacting both infrastru
 Camunda 8.8 introduces changes that affect both **infrastructure** and **application logic**:
 
 - **Orchestration Cluster architecture** – Consolidates runtime components to simplify deployment and scaling. [See architectural changes](#architectural-changes-in-88)
-- **Unified APIs and SDK alignment** – Component-specific APIs (V1) are deprecated. Migrate to the Orchestration Cluster API and updated SDKs to unlock new features and ensure future compatibility.
+- **Unified APIs and SDK alignment** – Component-specific APIs (V1) are deprecated. Migrate to the Orchestration Cluster REST API and updated SDKs to unlock new features and ensure future compatibility.
 - **Authentication and authorization overhaul** – Moves to an OIDC-based identity model with cluster-level and scoped permissions. LDAP integration for Operate and Tasklist is removed.
 - **Unified configuration schema** – A shared configuration model reduces drift across components and improves automation.  
   [Link to schema docs – VERIFY]

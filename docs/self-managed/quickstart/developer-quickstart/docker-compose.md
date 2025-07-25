@@ -120,7 +120,7 @@ The provided configuration includes [Mailpit](https://github.com/axllent/mailpit
 
 You can access emails in Mailpit’s web UI at [http://localhost:8075](http://localhost:8075).
 
-### Use the Orchestration Cluster API
+### Use the Orchestration Cluster REST API
 
 - (If authentication is enabled) [Authenticate](apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md)
 - [Deploy resources](apis-tools/orchestration-cluster-api-rest/specifications/create-deployment.api.mdx)
@@ -134,9 +134,9 @@ Desktop Modeler is [open source and free to use](https://github.com/camunda/camu
 
 [Download the Desktop Modeler](https://camunda.com/download/modeler/) to start modeling BPMN, DMN, and Camunda Forms on your local machine.
 
-## Secure the Orchestration Cluster API
+## Secure the Orchestration Cluster REST API
 
-By default, the Orchestration Cluster API is publicly accessible without requiring any client credentials for development purposes.
+By default, the Orchestration Cluster REST API is publicly accessible without requiring any client credentials for development purposes.
 
 ## Connectors
 

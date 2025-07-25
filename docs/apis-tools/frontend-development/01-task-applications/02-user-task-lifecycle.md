@@ -76,7 +76,7 @@ Our best practices, as implemented in Tasklist, are as follows:
 
 Make sure that you create your own validation logic that matches your use case.
 
-## Implement task life cycle with the Orchestration Cluster API
+## Implement task life cycle with the Orchestration Cluster REST API
 
 Use the Orchestration Cluster REST API to implement task life cycle operations. You can find the API specifications [here](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
 

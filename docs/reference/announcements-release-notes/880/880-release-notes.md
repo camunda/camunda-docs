@@ -36,16 +36,16 @@ Camunda 8 now supports integration with [Atlassian Bitbucket Cloud](https://bitb
 
 To learn more, see [Git sync](/components/modeler/web-modeler/git-sync.md?platform=bitbucket).
 
-### Camunda 8 REST API renamed to Orchestration Cluster API <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects APIs">API</span>
+### Camunda 8 REST API renamed to Orchestration Cluster REST API <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects APIs">API</span>
 
 <!-- https://github.com/camunda/product-hub/issues/2793 -->
 
-The Camunda 8 REST API is now called the **Orchestration Cluster API**.
+The Camunda 8 REST API is now called the **Orchestration Cluster REST API**.
 
 - This name better reflects its role as a unified REST API for interacting with entities in a [Camunda 8 Orchestration Cluster](/reference/glossary.md#orchestration-cluster), such as processes, tasks, and variables.
 - The functionality and structure of the API remain unchanged. The name change improves clarity and onboarding across Camunda documentation and resources.
 
-To learn more, see [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
+To learn more, see [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
 
 ### Connectors <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span> {#connectorsalpha6}
 
@@ -113,7 +113,7 @@ A new Singapore (ap-southeast-1) region is now available for SaaS clusters on Am
 
 To learn more about supported SaaS regions, see [regions](/reference/regions.md).
 
-### Tasklist uses the Orchestration Cluster API <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span>
+### Tasklist uses the Orchestration Cluster REST API <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span>
 
 <!-- https://github.com/camunda/product-hub/issues/2516 -->
 

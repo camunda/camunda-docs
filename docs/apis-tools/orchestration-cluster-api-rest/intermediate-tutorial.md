@@ -2,14 +2,14 @@
 id: orchestration-cluster-api-intermediate-tutorial
 title: Intermediate tutorial
 sidebar_label: Intermediate
-description: "Step through this intermediate Orchestration Cluster API tutorial to deploy resources, create and start a process instance, and view a process instance by its key."
+description: "Step through this intermediate Orchestration Cluster REST API tutorial to deploy resources, create and start a process instance, and view a process instance by its key."
 ---
 
 <span class="badge badge--intermediate">Intermediate</span>
 
-In this tutorial, we'll step through examples to highlight the capabilities of the Orchestration Cluster API, such as deploying resources, creating and starting a process instance, and viewing a process instance by its key.
+In this tutorial, we'll step through examples to highlight the capabilities of the Orchestration Cluster REST API, such as deploying resources, creating and starting a process instance, and viewing a process instance by its key.
 
-This tutorial is intended for intermediate users of the Orchestration Cluster API, using more sophisticated API calls and multipart requests. If you are new to the Orchestration Cluster API, we recommend starting with the [beginner tutorial](/apis-tools/orchestration-cluster-api-rest/tutorial.md).
+This tutorial is intended for intermediate users of the Orchestration Cluster REST API, using more sophisticated API calls and multipart requests. If you are new to the Orchestration Cluster REST API, we recommend starting with the [beginner tutorial](/apis-tools/orchestration-cluster-api-rest/tutorial.md).
 
 ## Prerequisites
 
@@ -242,4 +242,4 @@ Having trouble configuring your API calls or want to examine an example of the c
 
 ## Next steps
 
-You can script several additional API calls as outlined in the [Orchestration Cluster API reference material](./orchestration-cluster-api-rest-overview.md).
+You can script several additional API calls as outlined in the [Orchestration Cluster REST API reference material](./orchestration-cluster-api-rest-overview.md).

@@ -44,12 +44,12 @@ When a user opens the task, they can view and download the document directly fro
 
 ![Document preview for task in Tasklist](./img/task-with-document-preview-tasklist.png)
 
-## Download a document using the Orchestration Cluster API
+## Download a document using the Orchestration Cluster REST API
 
-You can also download a document from your Camunda 8 cluster using the Orchestration Cluster API.
+You can also download a document from your Camunda 8 cluster using the Orchestration Cluster REST API.
 
 :::note
 This is currently supported for document stores of type: [AWS, GCP, in-memory (non-production), local (non-production)](/self-managed/concepts/document-handling/configuration/overview.md).
 :::
 
-Learn more about this request in the [Orchestration Cluster API docs](/apis-tools/orchestration-cluster-api-rest/specifications/get-document.api.mdx).
+Learn more about this request in the [Orchestration Cluster REST API docs](/apis-tools/orchestration-cluster-api-rest/specifications/get-document.api.mdx).

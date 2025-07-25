@@ -261,7 +261,7 @@ Push approved changes to staging or production by deploying them to the respecti
 
 #### Define authorizations
 
-For clusters with [authorizations](/components/concepts/access-control/authorizations.md) enabled, use the Orchestration Cluster API to assign the necessary authorizations through the pipeline. This step ensures appropriate accessibility for process/application stakeholders or updating existing authorizations.
+For clusters with [authorizations](/components/concepts/access-control/authorizations.md) enabled, use the Orchestration Cluster REST API to assign the necessary authorizations through the pipeline. This step ensures appropriate accessibility for process/application stakeholders or updating existing authorizations.
 
 ##### Monitoring and error handling
 

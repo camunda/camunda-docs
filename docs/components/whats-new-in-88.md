@@ -19,7 +19,7 @@ See [release announcements](/reference/announcements-release-notes/880/880-annou
 
 ## Introducing Camunda 8.8
 
-Camunda 8.8 introduces fundamental changes and enhancements as part of our architecture streamlining initiative, unifying former isolated components such as Operate, Tasklist and identity management into one Orchestration Cluster component that serves a unified Orchestration Cluster API.
+Camunda 8.8 introduces fundamental changes and enhancements as part of our architecture streamlining initiative, unifying former isolated components such as Operate, Tasklist and identity management into one Orchestration Cluster component that serves a unified Orchestration Cluster REST API.
 
 The simplest possible deployment now becomes running a single Java application or docker container of the Orchestration Cluster Application.
 
@@ -80,7 +80,7 @@ Zeebe, Operate, and Tasklist are consolidated into the Orchestration Cluster app
 
 <!-- Mention Management Identity here as well. -->
 
-### Orchestration Cluster API
+### Orchestration Cluster REST API
 
 APIs for interacting with the Orchestration Cluster programmatically.
 
@@ -90,7 +90,7 @@ APIs for interacting with the Orchestration Cluster programmatically.
 
 ## APIs and SDKs
 
-### Unified Orchestration Cluster API {#orchestration-cluster-api}
+### Unified Orchestration Cluster REST API {#orchestration-cluster-api}
 
 Content is here
 

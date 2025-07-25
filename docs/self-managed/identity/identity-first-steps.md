@@ -47,7 +47,7 @@ You are directed to the home page once you have successfully logged in.
 
 ## Next steps
 
-Once you are able to log in to Identity, you can start managing authentication, access, and authorization for your Camunda 8 users, resources, and the Orchestration Cluster API.
+Once you are able to log in to Identity, you can start managing authentication, access, and authorization for your Camunda 8 users, resources, and the Orchestration Cluster REST API.
 
 - [Manage users, groups, roles, and applications](application-user-group-role-management/identity-application-user-group-role-management-overview.md)
 - [Manage access and permissions](access-management/access-management-overview.md)

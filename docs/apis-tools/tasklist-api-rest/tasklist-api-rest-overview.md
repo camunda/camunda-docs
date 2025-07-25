@@ -6,7 +6,7 @@ description: "Build applications for human-centered processes by querying user t
 ---
 
 :::note
-To migrate from Camunda's V1 component REST APIs to the V2 [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md), review [migrating to the Orchestration Cluster API](/apis-tools/migration-manuals/migrate-to-camunda-api.md).
+To migrate from Camunda's V1 component REST APIs to the V2 [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md), review [migrating to the Orchestration Cluster REST API](/apis-tools/migration-manuals/migrate-to-camunda-api.md).
 :::
 
 ## Introduction

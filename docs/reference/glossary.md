@@ -369,7 +369,7 @@ We recommend running an odd replication factor.
 
 How long a [client](#zeebe-client) waits for a response from the [broker](#zeebe-broker) after the client submits a request. If a response is not received within the client request timeout, the client considers the broker unreachable.
 
-- [Orchestration Cluster API](/apis-tools/zeebe-api-rest/zeebe-api-rest-overview.md)
+- [Orchestration Cluster REST API](/apis-tools/zeebe-api-rest/zeebe-api-rest-overview.md)
 - [Zeebe API (gRPC)](/apis-tools/zeebe-api/grpc.md)
 
 ### RFC

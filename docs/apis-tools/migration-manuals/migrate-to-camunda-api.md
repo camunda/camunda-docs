@@ -1,6 +1,6 @@
 ---
 id: migrate-to-camunda-api
-title: Migrate to the Orchestration Cluster API
+title: Migrate to the Orchestration Cluster REST API
 description: "Migrate from Camunda's V1 component REST APIs to the V2 Orchestration Cluster REST API to interact with Camunda 8 clusters, activate jobs, and run user task state operations."
 ---
 
@@ -17,7 +17,7 @@ The Administration and Web Modeler APIs will not be part of the Orchestration Cl
 
 Over time, there will be a deprecation process for the individual component APIs starting with the former Operate and Tasklist APIs. These will continue to be in the product for the short-term, but it is recommended to begin the adoption of the new API. In addition, we will begin to deprecate several Zeebe gPRC endpoints as well. See [the official blog announcement](https://camunda.com/blog/2024/11/camunda-8-7-releasing-february-2025/).
 
-This guide considers all public endpoints existing in the component REST APIs and the Orchestration Cluster API counterparts or required migration changes.
+This guide considers all public endpoints existing in the component REST APIs and the Orchestration Cluster REST API counterparts or required migration changes.
 
 ## General endpoint changes
 

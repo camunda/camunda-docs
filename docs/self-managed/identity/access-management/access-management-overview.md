@@ -5,7 +5,7 @@ sidebar_label: "Access and permissions"
 description: "Access Management and Permissions overview"
 ---
 
-Manage and control access to Orchestration Cluster APIs and custom applications using permissions and roles.
+Manage and control access to Orchestration Cluster REST APIs and custom applications using permissions and roles.
 
 ## About permissions
 
