@@ -121,7 +121,7 @@ If you're using a self-hosted GitLab instance, ensure the environment variable `
    - **Project ID:** The ID copied from your GitLab project settings.
    - **GitLab repository URL:** The base URL of the repository you want to sync with (e.g., `https://gitlab.com/camunda/example-repo`). The URL must not include the `.git` extension or a folder path.
    - **Branch name:** The branch to use for merging and managing changes.
-   - **Path:** *(Optional)* The folder path that contains your process application files. If left empty, Web Modeler syncs with the root of the repository. The path is created automatically if it doesn't exist.
+   - **Path:** _(Optional)_ The folder path that contains your process application files. If left empty, Web Modeler syncs with the root of the repository. The path is created automatically if it doesn't exist.
 
 4. Click **Open repository** to test the configuration. The repository for the selected branch and optional path will open in a new browser tab.
 
