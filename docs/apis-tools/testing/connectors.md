@@ -11,6 +11,11 @@ You can run your process test with [Connectors](/components/connectors/introduct
 
 For more unit-focused tests, mock the interaction; for example, by completing connector jobs with an expected result.
 
+:::note
+The connectors run inside the Testcontainers environment in isolation and can't access your local machine. For example,
+an outbound REST connector can't invoke a mock HTTP server that is started inside the test case on `localhost`.
+:::
+
 ## Enable connectors
 
 By default, the connectors are disabled. You need to change the runtime configuration to enable them.

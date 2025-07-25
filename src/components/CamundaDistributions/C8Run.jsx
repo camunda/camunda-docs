@@ -1,19 +1,10 @@
 import React from "react";
-import { useActiveVersion } from "@docusaurus/plugin-content-docs/client";
+import { camundaReleaseVersion } from "../Versions";
 
 const C8RunBaseURL = "https://downloads.camunda.cloud/release/camunda/c8run";
 
-const getVersion = () => {
-  const docsVersion = useActiveVersion();
-  if (docsVersion.name == "current") {
-    const camundaVersion = docsVersion.label.match(/\d\.\d/);
-    return camundaVersion;
-  }
-  return docsVersion.name;
-};
-
 const C8Run = () => {
-  const version = getVersion();
+  const version = camundaReleaseVersion();
   return (
     <a
       title={`${C8RunBaseURL}/${version}/`}

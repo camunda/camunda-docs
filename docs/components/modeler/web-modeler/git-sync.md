@@ -196,7 +196,7 @@ When successful, your project will display a new **Sync with Azure** button.
 
 <h3>Create a new access token</h3>
 
-Web Modeler requires an access token to sync changes with your Bitbucket repository. You can use one of the following token types:
+Web Modeler requires an access token to sync changes with your Bitbucket Cloud repository. You can use one of the following token types:
 
 - **Repository access token** (recommended)
 - Project access token
@@ -211,11 +211,7 @@ Follow the [Bitbucket documentation](https://support.atlassian.com/bitbucket-clo
 <h3>Configure Bitbucket in Web Modeler</h3>
 
 :::note
-When using a self-hosted Bitbucket Data Center instance, ensure the environment variable `CAMUNDA_MODELER_GITSYNC_BITBUCKET_BASEURL` is set to the API URL of your self-hosted Bitbucket Data Center instance. It usually looks like `http(s)://<your-bitbucket-domain>/rest/api/2.0/repositories`.
-:::
-
-:::note
-The Bitbucket Data Center version must be [v8.18](https://developer.atlassian.com/server/bitbucket/changelog/#CHANGE-1425) or higher. Previous versions do not support REST API v2.0.
+Web Modeler currently only supports Bitbucket Cloud.
 :::
 
 1. In Web Modeler, navigate to the process application you want to connect to Bitbucket, and click **Connect repository**.
@@ -263,7 +259,7 @@ Existing Git configurations can be edited from the gear icon beside the **Sync w
 To switch between Git providers, update your configuration with the following steps:
 
 1. Disconnect your current Git provider by clicking the gear icon beside the **Sync with _GitProvider_** button, and clicking the **Delete provider connection** button at the bottom of the modal.
-2. After confirming the operation, open the **Connect repository** modal and provide the necessary information for the new Git provider, following the steps outlined for [GitHub](./git-sync.md?platform=github#connect-to-a-remote-repository), [GitLab](./git-sync.md?platform=gitlab#connect-to-a-remote-repository), or [Azure](./git-sync.md?platform=azure#connect-to-a-remote-repository).
+2. After confirming the operation, open the **Connect repository** modal and provide the necessary information for the new Git provider, following the steps outlined for [GitHub](./git-sync.md?platform=github#connect-to-a-remote-repository), [GitLab](./git-sync.md?platform=gitlab#connect-to-a-remote-repository), [Azure](./git-sync.md?platform=azure#connect-to-a-remote-repository), or [Bitbucket Cloud](./git-sync.md?platform=bitbucket#connect-to-a-remote-repository).
 
 ## Advanced use cases
 

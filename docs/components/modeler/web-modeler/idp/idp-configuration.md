@@ -53,7 +53,7 @@ Once you have completed all the required prerequisites, configure IDP in a suita
 Add the following AWS connector secrets required for IDP.
 
 - **SaaS:** Create and configure as [connector secrets](/components/console/manage-clusters/manage-secrets.md).
-- **Self-Managed:** Connector secrets are generally provided as environment variables, set via `values.yaml` or the command line. Add these connector secrets as environment variables for the Tasklist and Zeebe components. To learn more about using connector secrets in Self-Managed, see [managing secrets in Helm charts](/self-managed/setup/guides/secret-management.md) and [secrets in manual installations](/self-managed/connectors-deployment/connectors-configuration.md#secrets).
+- **Self-Managed:** Connector secrets are generally provided as environment variables, set via `values.yaml` or the command line. Add these connector secrets as environment variables for the Tasklist and Zeebe components. To learn more about using connector secrets in Self-Managed, see [managing secrets in Helm charts](/self-managed/installation-methods/helm/configure/secret-management.md) and [secrets in manual installations](/self-managed/connectors-deployment/connectors-configuration.md#secrets).
 
 | Connector secret Key  | Required | Description                                                                                                                                                                                               |
 | :-------------------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -77,11 +77,11 @@ The following examples show how you can deploy and configure IDP in your local d
 
 ### Camunda 8 Run {#idp-c8run-example}
 
-To use [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md) to deploy and run Camunda 8 with IDP in a local development environment:
+To use [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) to deploy and run Camunda 8 with IDP in a local development environment:
 
 1. Ensure you have completed the IDP [Amazon Web Services (AWS) prerequisites](#prerequisites) and have obtained your AWS [access key pair](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) (_access key_ and _secret access key_).
 
-1. [Install Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md#install-and-start-camunda-8-run). For example, download the latest release of Camunda 8 Run for your operating system and architecture and open the .tgz file to extract the Camunda 8 Run script into a new directory.
+1. [Install Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md#install-and-start-camunda-8-run). For example, download the latest release of Camunda 8 Run for your operating system and architecture and open the .tgz file to extract the Camunda 8 Run script into a new directory.
 
 1. Navigate to the `docker-compose-8.x` folder in the new c8run directory.
 
@@ -106,12 +106,12 @@ To use [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md) to deploy and 
 1. Get started with IDP by creating a new [IDP application](idp-applications.md) in a Web Modeler project.
 
 :::info
-To learn more about using Camunda 8 Run to run Camunda Self-Managed locally, see [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md).
+To learn more about using Camunda 8 Run to run Camunda Self-Managed locally, see [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md).
 :::
 
 ### Docker {#idp-docker-example}
 
-To use [Docker](/self-managed/setup/deploy/other/docker.md) to deploy and run Camunda 8 with IDP in a local development environment:
+To use [Docker](/self-managed/installation-methods/docker/docker.md) to deploy and run Camunda 8 with IDP in a local development environment:
 
 1. Ensure you have completed the IDP [Amazon Web Services (AWS) prerequisites](#prerequisites) and have obtained your AWS [access key pair](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) (_access key_ and _secret access key_).
 
@@ -132,7 +132,7 @@ To use [Docker](/self-managed/setup/deploy/other/docker.md) to deploy and run Ca
    1. Save and close the file.
 
 1. Configure [document handling environment variables](/components/document-handling/getting-started.md) for the Tasklist and Zeebe components.
-1. [Run Camunda 8 with Docker Compose](/self-managed/setup/deploy/local/docker-compose.md#run-camunda-8-with-docker-compose). For example, run the following command in the extracted directory:
+1. [Run Camunda 8 with Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md#run-camunda-8-with-docker-compose). For example, run the following command in the extracted directory:
 
    ```
    Docker compose up -d
@@ -142,5 +142,5 @@ To use [Docker](/self-managed/setup/deploy/other/docker.md) to deploy and run Ca
 1. Get started with IDP by creating a new [IDP application](idp-applications.md) in a Web Modeler project.
 
 :::info
-To learn more about using Docker Compose to run Camunda Self-Managed locally, see [Docker Compose](/self-managed/setup/deploy/local/docker-compose.md).
+To learn more about using Docker Compose to run Camunda Self-Managed locally, see [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md).
 :::

@@ -32,7 +32,7 @@ A Camunda Helm chart upgrade is not possible from v9.x.x to v10.0.0 or v10.0.1. 
 
 The Camunda Helm chart v10.0.0 has major changes in the values file structure. Some keys in the values file have been changed. For compatibility, the keys are deprecated in the Camunda release cycle 8.5 and will be removed in the Camunda 8.6 release (October 2024).
 
-Follow the [upgrade instructions](/self-managed/setup/upgrade.md#helm-chart-1002+) to upgrade from Camunda Helm chart v9.x.x to Camunda Helm chart v10.x.x.
+Follow the [upgrade instructions](/self-managed/installation-methods/helm/upgrade/upgrade.md#helm-chart-1002+) to upgrade from Camunda Helm chart v9.x.x to Camunda Helm chart v10.x.x.
 
 #### Support for Amazon OpenSearch
 
@@ -52,6 +52,13 @@ This release contains the following limitations:
 
 ### Key changes
 
+#### Deprecation of Self-Managed AWS Marketplace offering
+
+As of **October 2025**, the **Self-Managed AWS Marketplace** offering will be **deprecated** and no longer publicly available.  
+Existing customers may continue to use the product until their contracts expire.
+
+For future use, refer to our [new AWS Marketplace listing](https://aws.amazon.com/marketplace/pp/prodview-6y664fcnydiqg?sr=0-1&ref_=beagle&applicationId=AWSMPContessa) for more information.
+
 #### Removal of Web Modeler's beta API
 
 The Web Modeler beta API has been removed. The API was deprecated in 8.3 and is no longer available in 8.5. Use the [Web Modeler v1 API](/apis-tools/web-modeler-api/index.md) instead.
@@ -63,6 +70,25 @@ Zeebe 8.5.0 was released with [a new bug](https://github.com/camunda/camunda/iss
 Timestamps which were previously serialized as `ISO8061` strings are now serialized as integer values.
 
 Until a fix is delivered in 8.5.1, workarounds include not deserializing timestamp values from affected APIs, or deserializing them as integers.
+
+### Camunda 8 Self-Managed
+
+#### Helm
+
+##### ExtraVolumeClaimTemplates
+
+You can now add custom `extraVolumeClaimTemplates` to the Zeebe/Core StatefulSet by supplying an array of templates in your Helm values file. This allows you to attach additional persistent volumes to each Zeebe/Core pod for use cases such as custom storage or log directories.
+
+**Important:**  
+Kubernetes does not allow you to change the `volumeClaimTemplates` of an existing StatefulSet. If you add, remove, or modify `extraVolumeClaimTemplates` after initial deployment, you must delete and recreate the StatefulSet (which will also delete the pods) for the changes to take effect. This may require additional planning and data migration steps to avoid data loss.
+
+##### Common labels for Camunda resources
+
+A new `commonLabels` value is now available and integrates with `camundaPlatform.labels`. This allows you to define mutable labels that are automatically applied to all Camunda resources. By setting `commonLabels`, you can ensure consistent labeling across deployments, making it easier to manage, organize, and identify resources within your Camunda environment.
+
+##### Configure Web Modeler replicas
+
+The number of replicas for the Web Modeler REST API and web app deployments can be set with new configuration properties: `webModeler.restapi.replicas` and `webModeler.webapp.replicas`, respectively.
 
 ## Camunda 8.4
 
@@ -87,7 +113,7 @@ As of the 8.4 release, Camunda is compatible with Elasticsearch 8.9+ and no long
 As of the 8.4 release, Zeebe, Operate, and Tasklist are now compatible with [Amazon OpenSearch](https://aws.amazon.com/de/opensearch-service/) 2.5.x. Note that using Amazon OpenSearch requires [setting up a new Camunda installation](/self-managed/setup/overview.md). A migration from previous versions or Elasticsearch environments is currently not supported.
 
 :::info
-The Helm charts are not yet prepared with the OpenSearch configurations as templates/pre-filled. The Helm charts can still be used to install for OpenSearch, but some adjustments are needed beforehand. Refer to the [Helm deployment documentation](/self-managed/setup/install.md) for further details.
+The Helm charts are not yet prepared with the OpenSearch configurations as templates/pre-filled. The Helm charts can still be used to install for OpenSearch, but some adjustments are needed beforehand. Refer to the [Helm deployment documentation](/self-managed/installation-methods/helm/install.md) for further details.
 :::
 
 This release contains the following limitations:
@@ -106,7 +132,7 @@ This release contains the following limitations:
     - **Description:** The existing Helm charts use the Elasticsearch configurations by default and are not yet prepared with the OpenSearch configurations as templates/pre-filled. The Helm charts can still be used to install for OpenSearch, but some adjustments are needed beforehand.
     - **Reference:** n/a
     - **Mitigation:**
-      1. Refer to our [docs for the installation](/self-managed/setup/install.md#components-installed-by-the-helm-charts), the docs include guidance about necessary adjustments of the Helm chart configuration.
+      1. Refer to our [docs for the installation](/self-managed/installation-methods/helm/install.md#components-installed-by-the-helm-charts), the docs include guidance about necessary adjustments of the Helm chart configuration.
       2. The OpenSearch configuration in Helm charts will be provided in one of our future Helm releases.
 - In **Connectors `8.4.x`**
   - **Missing feature**
@@ -114,9 +140,16 @@ This release contains the following limitations:
     - **Reference:** https://github.com/camunda/issues/issues/569
     - **Mitigation:**
       1. Feature is planned to be delivered with an upcoming patch release. Please see [issue](https://github.com/camunda/issues/issues/569) for latest progress.
-      2. [Disable connectors component](/self-managed/setup/guides/connect-to-an-oidc-provider.md#configuration) when configuring a custom OIDC provider.
+      2. [Disable connectors component](/self-managed/installation-methods/helm/configure/connect-to-an-oidc-provider.md#configuration) when configuring a custom OIDC provider.
 
 ### Key changes
+
+#### Deprecation of Self-Managed AWS Marketplace offering
+
+As of **October 2025**, the **Self-Managed AWS Marketplace** offering will be **deprecated** and no longer publicly available.  
+Existing customers may continue to use the product until their contracts expire.
+
+For future use, refer to our [new AWS Marketplace listing](https://aws.amazon.com/marketplace/pp/prodview-6y664fcnydiqg?sr=0-1&ref_=beagle&applicationId=AWSMPContessa) for more information.
 
 #### Form linking
 

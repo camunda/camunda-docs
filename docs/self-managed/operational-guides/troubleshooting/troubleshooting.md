@@ -5,6 +5,36 @@ sidebar_label: "Troubleshooting"
 description: "Troubleshooting considerations in Platform deployment."
 ---
 
+## Helm chart security warning
+
+Due to [recent changes](https://github.com/bitnami/charts/issues/30850) in Bitnami's Helm charts (a third-party dependency), you may see a security warning when installing the Camunda Helm chart. This warning appears because Bitnami charts emit such messages when the underlying image is replaced.
+
+Camunda repackages the Bitnami distribution with [Camunda Keycloak](https://github.com/camunda/keycloak) for Identity. **This is not a security risk in itself.**
+
+To accommodate this, the Helm option `allowInsecureImages` is enabled by default in the Camunda Helm chart to support the use of Camunda Keycloak:
+
+```yaml
+identityKeycloak:
+  global:
+    security:
+      allowInsecureImages: true
+```
+
+If you're using your own Docker registry to host application images, you should also enable this option for any Bitnami-based third-party dependencies, such as PostgreSQL or Elasticsearch sub-charts. For example:
+
+```yaml
+identityKeycloak:
+  postgresql:
+    global:
+      security:
+        allowInsecureImages: true
+[...]
+elasticsearch:
+  global:
+    security:
+      allowInsecureImages: true
+```
+
 ## Keycloak requires SSL for requests from external sources
 
 When deploying Camunda to a provider, it is important to confirm the IP ranges used
@@ -18,7 +48,7 @@ not provide support for the distribution of the Keycloak TLS key to the other co
 
 ## Identity redirect URL
 
-If HTTP to HTTPS redirection is enabled in the load-balancer or ingress, make sure to use the HTTPS
+If HTTP to HTTPS redirection is enabled in the load-balancer or Ingress, make sure to use the HTTPS
 protocol in the values file under `global.identity.auth.[COMPONENT].redirectUrl`.
 Otherwise, you will get a redirection error in Keycloak.
 
@@ -32,6 +62,48 @@ global:
       redirectUrl: https://operate.example.com
 ```
 
+#### Zeebe Backup with S3
+
+In general, some S3 compatible implementation are not able to properly handle the checksum feature of the S3 client being introduced with version 2.30.0. For more details, you can refer to [this documentation](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/s3-checksums.html).
+
+As soon as issues appear that would be related to the checksum, it can be disabled by setting these environment variables on your Zeebe brokers:
+
+```
+AWS_REQUEST_CHECKSUM_CALCULATION=WHEN_REQUIRED
+AWS_RESPONSE_CHECKSUM_CALCULATION=WHEN_REQUIRED
+```
+
+They will disable to automated creation of checksums.
+
+**Backups to IBM COS fail with 403 Access Denied**
+
+When using an S3 backup store with IBM Cloud Object Storage, you may encounter `403 Access Denied` errors even though the access credentials are valid.
+This may be caused by a [recent change in the AWS S3 client](https://docs.aws.amazon.com/sdkref/latest/guide/feature-dataintegrity.html), which now calculates checksums for data integrity by default. IBM COS does not appear to support this feature.
+
+To resolve this issue, you can restore the previous behavior by setting the following environment variable on your Zeebe brokers:
+
+```
+AWS_REQUEST_CHECKSUM_CALCULATION=WHEN_REQUIRED
+```
+
+This will prevent the S3 client from calculating the additional checksums and should resolve the issue.
+
+**Backups to Dell EMC ECS fail with 400 Bad Request**
+
+When using an S3 backup store with Dell EMC ECS, you may encounter the following error:
+
+`The Content-SHA256 you specified did not match what we received (Service: S3, Status Code: 400)`
+
+This issue is caused by a recent change in the AWS S3 client, which now signs streaming chunked uploads differently. Dell EMC ECS does not support chunked encoding.
+
+To resolve this issue, set the following environment variable on your Zeebe brokers:
+
+```
+AWS_REQUEST_CHECKSUM_CALCULATION=WHEN_REQUIRED
+```
+
+This disables the additional checksum calculation in the S3 client and should resolve the issue.
+
 ## Zeebe Ingress (gRPC)
 
 Zeebe requires an Ingress controller that supports `gRPC` which is built on top of `HTTP/2` transport layer. Therefore, to expose Zeebe Gateway externally, you need the following:
@@ -43,11 +115,11 @@ However, according to the official Kubernetes documentation about [Ingress TLS](
 
 > There is a gap between TLS features supported by various Ingress controllers. Please refer to documentation on nginx, GCE, or any other platform specific Ingress controller to understand how TLS works in your environment.
 
-Therefore, if you are not using the [ingress-nginx controller](https://github.com/kubernetes/ingress-nginx), ensure you pay attention to TLS configuration of the Ingress controller of your choice. Find more details about the Zeebe Ingress setup in the [Kubernetes platforms supported by Camunda](/self-managed/setup/install.md).
+Therefore, if you are not using the [ingress-nginx controller](https://github.com/kubernetes/ingress-nginx), ensure you pay attention to TLS configuration of the Ingress controller of your choice. Find more details about the Zeebe Ingress setup in the [Kubernetes platforms supported by Camunda](/self-managed/installation-methods/helm/install.md).
 
 ## Identity `contextPath`
 
-Camunda 8 Self-Managed can be accessed externally via the [combined Ingress setup](self-managed/setup/guides/ingress-setup.md#combined-ingress-setup). In that configuration, Camunda Identity is accessed using a specific path, configured by setting the `contextPath` variable, for example `https://camunda.example.com/identity`.
+Camunda 8 Self-Managed can be accessed externally via the [combined Ingress setup](/self-managed/installation-methods/helm/configure/ingress-setup.md#combined-ingress-setup). In that configuration, Camunda Identity is accessed using a specific path, configured by setting the `contextPath` variable, for example `https://camunda.example.com/identity`.
 
 For security reasons, Camunda Identity requires secure access (HTTPS) when a `contextPath` is configured.
 
@@ -156,7 +228,7 @@ Find more information on [how to register your application on Identity](https://
 
 The AWS EKS IRSA configuration scripts are focused on verifying the correct setup of IAM Roles for Service Accounts (IRSA) within your Kubernetes deployment on AWS. These scripts ensure that your Kubernetes service accounts are correctly associated with IAM roles, allowing components like PostgreSQL, OpenSearch, and others in your deployment to securely interact with AWS resources.
 
-For detailed usage instructions and setup information, please refer to the [IRSA guide](/self-managed/setup/deploy/amazon/amazon-eks/irsa.md#irsa-check-script).
+For detailed usage instructions and setup information, please refer to the [IRSA guide](/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/irsa.md#irsa-check-script).
 
 ### Interpretation of the results
 

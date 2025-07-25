@@ -46,7 +46,7 @@ Configure the exporter by providing `args`. See the tables below for configurati
 ### Options
 
 <Tabs groupId="configuration" defaultValue="index" queryString
-values={[{label: 'Connect', value: 'connect' },{label: 'Security', value: 'security' },{label: 'Index', value: 'index' },{label: 'Bulk', value: 'bulk' },{label: 'Retention', value: 'retention' }]} >
+values={[{label: 'Connect', value: 'connect' },{label: 'Security', value: 'security' },{label: 'Index', value: 'index' },{label: 'Bulk', value: 'bulk' },{label: 'Retention', value: 'retention' },{label: 'History', value: 'history' },{label: 'Other', value: 'other' }]} >
 
 <TabItem value="connect">
 
@@ -140,15 +140,25 @@ The duration can be specified in days `d`, hours `h`, minutes `m`, seconds `s`, 
 To keep the main runtime index performant, documents are periodically moved into historical
 indices. The history can be configured as follows:
 
-| Option                    | Description                                                                                                                                                                                                   | Default |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| elsRolloverDateFormat     | Defines how the date values are formatted for historical indices using Java DateTimeFormatter syntax, if no format is specified the first date format specified in teh field mapping is used.                 | `date`  |
-| rolloverInterval          | The time range for groups captured by the historical indices.                                                                                                                                                 | `1d`    |
-| rolloverBatchSize         | The max number of instances for each batch that is being archived.                                                                                                                                            | `100`   |
-| waitPeriodBeforeArchiving | Grace period for completed process instances to not be processed by the archiver. For a value of 1 hour, any process instances finished within the last hour will not be collected into the historical index. | `1h`    |
-| delayBetweenRuns          | Time in milliseconds between archiving completed process instances.                                                                                                                                           | `2000`  |
-| maxDelayBetweenRuns       | Maximum time in milliseconds before an archiving attempt for completed process instances.                                                                                                                     | `60000` |
-| retention                 | Refer to [Retention](./camunda-exporter.md?configuration=retention#options) for the retention configuration options                                                                                           |         |
+| Option                    | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | Default |
+| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| elsRolloverDateFormat     | Defines how date values are formatted for historical indices using Java DateTimeFormatter syntax. If no format is specified, the first date format defined in the field mapping is used.                                                                                                                                                                                                                                                                                                                                                                                                                                     | `date`  |
+| rolloverInterval          | The rollover period before an active index is rolled over. This means that `rolloveInterval` is the time gap between updates of historical indexes, therfore for a index `index-abc` and a `rolloverInterval` of 7 days (`7d`) we will have the historical indexes `index-abc-2025-01-01`, `index-abc-2025-01-08` and so on. The `elsRolloverDateFormat` must have sufficient resolution to compute the `rolloverInterval`. For example, if the `rolloverInterval` is `1h`, then the `elsRolloverDateFormat` should be `yyyy-MM-dd-HH`. Additionally, `rolloverInterval` cannot use seconds (`s`) or minutes (`m`) as units. | `1d`    |
+| rolloverBatchSize         | The maximum number of instances per batch to be archived.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | `100`   |
+| waitPeriodBeforeArchiving | Grace period during which completed process instances are excluded from archiving. For example, with a value of `1h`, any process instances completed within the last hour will not be archived.                                                                                                                                                                                                                                                                                                                                                                                                                             | `1h`    |
+| delayBetweenRuns          | Time in milliseconds between archiving runs for completed process instances.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | `2000`  |
+| maxDelayBetweenRuns       | The maximum delay between archive runs when using an exponential backoff strategy in case of unsuccessful archiving attempts.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | `60000` |
+| retention                 | Refer to [Retention](./camunda-exporter.md?configuration=retention#options) for retention configuration options.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |         |
+
+</TabItem>
+
+<TabItem value="other">
+
+Other miscellaneous properties:
+
+| Option                               | Description                                                                                                                                                                                                                                                                                                                                                                                 | Default |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| batchOperation.exportItemsOnCreation | Defines whether the pending items of a started batch operation should be exported from the beginning. For very large batch operations involving more than 100,000 process instances, this can cause temporary performance issues due to the high volume of document insertions. If set to `false`, the "has pending batch operations" spinner in the Operate UI will not function properly. | `true`  |
 
 </TabItem>
 </Tabs>
@@ -206,6 +216,9 @@ exporters:
           enabled: false
           minimumAge: 30d
           policyName: camunda-retention-policy
+
+        batchOperation:
+          exportItemsOnCreation: true
 
       createSchema: true
 ```
