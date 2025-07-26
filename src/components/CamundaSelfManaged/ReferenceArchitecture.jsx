@@ -26,7 +26,7 @@ const ReferenceArchitecture = () => {
       link: "/self-managed/reference-architecture/kubernetes/",
     },
     {
-      title: "Manual JAR",
+      title: "Manual",
       icon: JarIcon,
       description:
         "Reference architecture for traditional JAR-based deployment patterns",

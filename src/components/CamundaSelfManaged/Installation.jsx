@@ -33,7 +33,7 @@ const Installation = () => {
       link: "/self-managed/installation-methods/docker/",
     },
     {
-      title: "Manual JAR",
+      title: "Manual",
       icon: JarIcon,
       description: "Direct installation and configuration using JAR files",
       link: "/self-managed/installation-methods/manual/manual-install/",
