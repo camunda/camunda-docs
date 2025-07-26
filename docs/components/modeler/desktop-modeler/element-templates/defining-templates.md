@@ -485,13 +485,17 @@ The binding name of `correlationKey` is not applicable to message start events o
 
 #### `zeebe:calledElement`
 
-| **Binding `type`**          | `zeebe:calledElement`                                                |
-| --------------------------- | -------------------------------------------------------------------- |
-| **Valid property `type`'s** | `String`<br />`Text`<br />`Hidden`<br />`Dropdown`                   |
-| **Binding parameters**      | `property`: The name of the property (only `processId` is supported) |
-| **Mapping result**          | `<zeebe:calledElement [property]="[userInput]" />`                   |
+| **Binding `type`**          | `zeebe:calledElement`                                                                                          |
+| --------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| **Valid property `type`'s** | `String`<br />`Text`<br />`Hidden`<br />`Dropdown`                                                             |
+| **Binding parameters**      | `property`: The name of the property.<br/> Supported properties: `processId`, `bindingType`, and `versionTag`. |
+| **Mapping result**          | `<zeebe:calledElement [property]="[userInput]" />`                                                             |
 
 The `zeebe:calledElement` binding allows you to configure process called by a call activity.
+
+You can set the value of the property `bindingType` to control the [resource binding type](../../../../best-practices/modeling/choosing-the-resource-binding-type).
+We recommend setting the property `bindingType` to the value `"versionTag"` and setting property `versionTag`
+to the value of the version tag of the process you want to call.
 
 :::note
 
@@ -511,13 +515,17 @@ The `zeebe:userTask` binding allows you to configure the implementation type for
 
 #### `zeebe:formDefinition`
 
-| **Binding `type`**          | `zeebe:formDefinition`                                                                     |
-| --------------------------- | ------------------------------------------------------------------------------------------ |
-| **Valid property `type`'s** | `String`<br />`Text`<br />`Hidden`<br />`Dropdown`                                         |
-| **Binding parameters**      | `property`: The name of the property. Only `formId` and `externalReference` are supported. |
-| **Mapping result**          | `<zeebe:formDefinition [property]="[userInput]" />`                                        |
+| **Binding `type`**          | `zeebe:formDefinition`                                                                                                            |
+| --------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| **Valid property `type`'s** | `String`<br />`Text`<br />`Hidden`<br />`Dropdown`                                                                                |
+| **Binding parameters**      | `property`: The name of the property. <br/> Supported properties: `formId`, `externalReference`, `bindingType`, and `versionTag`. |
+| **Mapping result**          | `<zeebe:formDefinition [property]="[userInput]" />`                                                                               |
 
 The `zeebe:formDefinition` binding allows you to configure the [user task form](../../../bpmn/user-tasks/#user-task-forms) used by a user task.
+
+When setting the `formId` property, you can set the value of the property `bindingType` to control the [resource binding type](../../../../best-practices/modeling/choosing-the-resource-binding-type).
+We recommend setting the property `bindingType` to the value `"versionTag"` and setting property `versionTag`
+to the value of the version tag of the form you want to link.
 
 :::note
 
@@ -528,13 +536,17 @@ Properties `formId` and `externalReference` are mutually exclusive, meaning that
 
 #### `zeebe:calledDecision`
 
-| **Binding `type`**          | `zeebe:calledDecision`                                                                      |
-| --------------------------- | ------------------------------------------------------------------------------------------- |
-| **Valid property `type`'s** | `String`<br />`Text`<br />`Hidden`<br />`Dropdown`                                          |
-| **Binding parameters**      | `property`: The name of the property. Only `decisionId` and `resultVariable` are supported. |
-| **Mapping result**          | `<zeebe:calledDecision [property]="[userInput]" />`                                         |
+| **Binding `type`**          | `zeebe:calledDecision`                                                                                                            |
+| --------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| **Valid property `type`'s** | `String`<br />`Text`<br />`Hidden`<br />`Dropdown`                                                                                |
+| **Binding parameters**      | `property`: The name of the property.<br/> Supported properties: `decisionId`, `resultVariable`, `bindingType`, and `versionTag`. |
+| **Mapping result**          | `<zeebe:calledDecision [property]="[userInput]" />`                                                                               |
 
 The `zeebe:calledDecision` binding allows you to configure the [called decision](../../../bpmn/business-rule-tasks/#defining-a-task) used by a business rule task.
+
+You can set the value of the property `bindingType` to control the [resource binding type](../../../../best-practices/modeling/choosing-the-resource-binding-type).
+We recommend setting the property `bindingType` to the value `"versionTag"` and setting property `versionTag`
+to the value of the version tag of the decision you want to call.
 
 :::note
 
