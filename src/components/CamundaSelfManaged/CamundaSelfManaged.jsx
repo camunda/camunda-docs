@@ -5,6 +5,7 @@ import Installation from "./Installation";
 import Introduction from "./Introduction";
 import QuickStart from "./QuickStart";
 import ReferenceArchitecture from "./ReferenceArchitecture";
+import Components2 from "./Components2";
 
 const CamundaSelfManaged = () => {
   return (
@@ -15,6 +16,7 @@ const CamundaSelfManaged = () => {
       <Infrastructure />
       <ReferenceArchitecture />
       <Components />
+      <Components2 />
     </div>
   );
 };

@@ -1,7 +1,6 @@
 import React from "react";
 import "./styles.css";
 import { activeVersionURLPath as linkBase } from "../Versions";
-import ClusterManagementIcon from "./icons/cluster-management.svg";
 import ClusterOrchestrationIcon from "./icons/cluster-orchestration.svg";
 
 const ComponentCard = ({ link, title, icon: Icon, description }) => {
@@ -19,28 +18,34 @@ const ComponentCard = ({ link, title, icon: Icon, description }) => {
 const Components = () => {
   const componentItems = [
     {
-      title: "Camunda Management Cluster",
-      icon: ClusterManagementIcon,
-      description:
-        "Central components that can work with multiple Camunda orchestration clusters",
-      // The link should point to the management cluster documentation which is not there yet.
-      link: "/self-managed/modeler/web-modeler/installation/",
-    },
-    {
-      title: "Camunda Orchestration Cluster",
+      title: "Orchestration cluster",
       icon: ClusterOrchestrationIcon,
       description:
-        "Workers components cluster for workflow execution that could be deployed multiple times",
+        "The Orchestration Cluster is the core component of Camunda 8, powering the automation and orchestration of processes.",
       link: "/self-managed/orchestration-cluster/",
+    },
+    {
+      title: "Connectors",
+      icon: ClusterOrchestrationIcon,
+      description:
+        "Camunda connectors are reusable building blocks you can use to easily connect processes to external systems, applications, and data.",
+      link: "/self-managed/connectors-deployment/install-and-start",
+    },
+        {
+      title: "Optimize",
+      icon: ClusterOrchestrationIcon,
+      description:
+        "Optimize offers business intelligence tooling for Camunda enterprise customers.",
+      link: "/self-managed/optimize-deployment/install-and-start",
     },
   ];
 
   return (
     <div className="sm-components">
-      <h2>Components</h2>
+      <h2>Orchestration components</h2>
       <p>
         A reference for Camunda 8 components, including the management and
-        orchestration clusters, detailed configuration guidance for each
+        orchestration clusters, Connectors, Optimize, and detailed configuration guidance for each
         component, and application upgrade instructions.
       </p>
       <div className="sm-grid-2">
