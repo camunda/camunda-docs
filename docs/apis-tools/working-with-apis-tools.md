@@ -57,7 +57,7 @@ Camunda provides official clients and SDKs to simplify API usage and speed up de
 
 ## When to use which API?
 
-- **Orchestration Cluster API:** For most process automation, orchestration, and user task scenarios. Recommended for new projects.
+- **Orchestration Cluster REST API:** For most process automation, orchestration, and user task scenarios. Recommended for new projects.
 - **Zeebe API:** For advanced, high throughput and low-latency integrations, or when you need gRPC features. Use only if you have specific requirements that the REST API cannot meet.
 - **Administration API:** For cluster and system management.
 - **Optimize API:** For analytics, dashboards, and reporting.

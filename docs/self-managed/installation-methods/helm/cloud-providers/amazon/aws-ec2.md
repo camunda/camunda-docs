@@ -6,7 +6,7 @@ description: "Learn how to install Camunda 8 on AWS EC2 instances."
 
 This guide provides a detailed walkthrough for installing the Camunda 8 single JAR on AWS EC2 instances. It focuses on managed services by AWS and their cloud offering. Finally, you will verify that the connection to your Self-Managed Camunda 8 environment is working.
 
-This guide focuses on setting up the [orchestration cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console) for Camunda 8. The Web Modeler and Console are not covered in this manual deployment approach. These components are supported on Kubernetes and should be [deployed using Kubernetes](/self-managed/installation-methods/helm/install.md#install-web-modeler).
+This guide focuses on setting up the [Orchestration Cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console) for Camunda 8. The Web Modeler and Console are not covered in this manual deployment approach. These components are supported on Kubernetes and should be [deployed using Kubernetes](/self-managed/installation-methods/helm/install.md#install-web-modeler).
 
 :::note Using other Cloud providers
 This guide is built around the available tools and services that AWS offers, but is not limited to AWS. The scripts and ideas included can be adjusted for any other cloud provider and use case.
@@ -37,7 +37,7 @@ The setup consists of:
     - three [EC2](https://aws.amazon.com/ec2/) instances using Ubuntu, one within each availability zone, which will run Camunda 8.
     - a [managed OpenSearch](https://aws.amazon.com/what-is/opensearch/) cluster stretched over the three availability zones.
   - a [Public Subnet](https://docs.aws.amazon.com/vpc/latest/userguide/configure-subnets.html), which allows direct access to the Internet via an [Internet Gateway](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html).
-    - (optional) an [Application Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html) (ALB) is used to expose the WebUIs like Operate, Tasklist, and connectors, as well as the Orchestration cluster REST API to the outside world. This is done using sticky sessions, as generally requests are distributed round-robin across all EC2 instances.
+    - (optional) an [Application Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html) (ALB) is used to expose the WebUIs like Operate, Tasklist, and connectors, as well as the Orchestration Cluster REST API to the outside world. This is done using sticky sessions, as generally requests are distributed round-robin across all EC2 instances.
     - (optional) a [Network Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/introduction.html) (NLB) is used to expose the gRPC endpoint of the Zeebe Gateway, in case external applications require it.
     - (optional) a [Bastion Host](https://en.wikipedia.org/wiki/Bastion_host) to allow access to the private EC2 instances since they're not publicly exposed.
       - Alternatively, utilize the [AWS Client VPN](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/what-is.html) instead to reach the private subnet within the VPC. The setup requires extra work and certificates, but can be set up by following the [getting started tutorial by AWS](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/cvpn-getting-started.html).
@@ -66,7 +66,7 @@ Alternatively, the same setup can run with a single AWS EC2 instance, but be awa
 
 ### Outcome
 
-The outcome is a fully working Camunda orchestration cluster running in a high availability setup using AWS EC2 and utilizing a managed OpenSearch domain.
+The outcome is a fully working Camunda Orchestration Cluster running in a high availability setup using AWS EC2 and utilizing a managed OpenSearch domain.
 The EC2 instances come with an extra disk meant for Camunda to ensure that the content is separated from the operating system.
 
 ## 1. Create the required infrastructure
@@ -275,7 +275,7 @@ cd camunda-deployment-references-main/aws/ec2/terraform
 terraform output -raw alb_endpoint
 ```
 
-3. Use the [Orchestration cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) to communicate with Camunda:
+3. Use the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) to communicate with Camunda:
 
 Follow the example in the [REST API documentation](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md) to authenticate and retrieve the cluster topology.
 

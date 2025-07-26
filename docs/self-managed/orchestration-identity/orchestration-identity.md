@@ -1,8 +1,8 @@
 ---
 id: orchestration-identity
-title: "Orchestration cluster Identity"
+title: "Orchestration Cluster Identity"
 label: "Identity"
 description: ""
 ---
 
-Install and configure Orchestration cluster Identity in your Self-Managed environment.
+Install and configure Orchestration Cluster Identity in your Self-Managed environment.

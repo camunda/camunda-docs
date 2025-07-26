@@ -19,7 +19,7 @@ The primary goal of a multi-namespace deployment is **logical grouping**, which 
 Security considerations are outside the scope of this deployment model. As a result, all credentials associated with the same deployment are shared across namespaces.
 :::
 
-In the following sections, we demonstrate a multi-namespace Camunda deployment. One namespace is assigned to the management cluster, while two other namespaces are used for the orchestration cluster.
+In the following sections, we demonstrate a multi-namespace Camunda deployment. One namespace is assigned to the management cluster, while two other namespaces are used for the Orchestration Cluster.
 
 ## Management deployment
 
@@ -74,7 +74,7 @@ helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION \
 
 ## Team One deployment
 
-Let's create a Camunda orchestration cluster that can be owned and managed by Team One and will be deployed into namespace `camunda-team01`. This deployment includes Zeebe, Operate, Tasklist, and Optimize, and authenticates against Keycloak in the Management deployment:
+Let's create a Camunda Orchestration Cluster that can be owned and managed by Team One and will be deployed into namespace `camunda-team01`. This deployment includes Zeebe, Operate, Tasklist, and Optimize, and authenticates against Keycloak in the Management deployment:
 
 ```yaml
 # File: camunda-team01.yaml
