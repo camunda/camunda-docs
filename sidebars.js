@@ -1147,6 +1147,11 @@ module.exports = {
                     "self-managed/installation-methods/helm/configure/database/using-existing-opensearch",
                     "self-managed/installation-methods/helm/configure/database/using-existing-postgres",
                     "self-managed/installation-methods/helm/configure/database/configure-db-custom-headers",
+                    {
+                      Troubleshooting: [
+                        "self-managed/installation-methods/helm/configure/database/all-shards-failed",
+                      ],
+                    },
                   ],
                 },
                 {
