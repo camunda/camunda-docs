@@ -113,7 +113,7 @@ This is the most common case and requires using the [`CreateProcessInstance`](/a
 Example in Java:
 
 ```java
-processInstance = zeebeClient.newCreateInstanceCommand()
+processInstance = camundaClient.newCreateInstanceCommand()
   .bpmnProcessId("invoice").latestVersion()
   .send()
   .exceptionally( throwable -> { throw new RuntimeException("Could not create new process instance", throwable); });
@@ -130,7 +130,7 @@ zbc.createWorkflowInstance({
 This starts a new process instance in the latest version of the process definition. You can also start a specific version of a process definition:
 
 ```java
-processInstance = zeebeClient.newCreateInstanceCommand()
+processInstance = camundaClient.newCreateInstanceCommand()
   .bpmnProcessId("invoice").version(5)
   //...
 ```
@@ -217,7 +217,7 @@ Use some simple code on the sending side to route the message to a new process i
 public void routeInput(@Variable String invoiceId) {
   Map<String, Object> variables = new HashMap<String, Object>();
   variables.put("invoiceId", invoiceId);
-  zeebeClient.newCreateInstanceCommand()
+  camundaClient.newCreateInstanceCommand()
     .bpmnProcessId("invoice").latestVersion()
 	.variables(variables)
     .send()
@@ -235,7 +235,7 @@ public void notifyOrder(@Variable String orderId, @Variable String paymentInform
   Map<String, Object> variables = new HashMap<String, Object>();
   variables.put("paymentInformation", paymentInformation);
 
-  zeebeClient.newPublishMessageCommand()
+  camundaClient.newPublishMessageCommand()
     .messageName("MsgPaymentReceived")
     .corrlationKey(orderId)
     .variables(variables)

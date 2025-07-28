@@ -22,7 +22,7 @@ description: "Let's analyze the prerequisites and code to open a job worker."
         ...
         final String jobType = "foo";
 
-        try (final ZeebeClient client = clientBuilder.build()) {
+        try (final CamundaClient client = clientBuilder.build()) {
 
             System.out.println("Opening job worker.");
 

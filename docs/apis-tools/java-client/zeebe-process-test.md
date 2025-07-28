@@ -64,7 +64,7 @@ Annotate your test class with the `@ZeebeProcessTest` annotation. This annotatio
 3. It will (optionally) inject three fields in your test class:
    1. `ZeebeTestEngine` - This is the engine that will run your process. It will provide some basic functionality
       to help you write your tests, such as waiting for an idle state and increasing the time.
-   2. `ZeebeClient` - This is the client that allows you to send commands to the engine, such as
+   2. `CamundaClient` - This is the client that allows you to send commands to the engine, such as
       starting a process instance. The interface of this client is identical to the interface you
       use to connect to a real Zeebe engine.
    3. `RecordStream` - This gives you access to all the records processed by the engine.
@@ -80,7 +80,7 @@ import io.camunda.zeebe.process.test.extension.testcontainer.ZeebeProcessTest;
 @ZeebeProcessTest
 class DeploymentAssertTest {
     private ZeebeTestEngine engine;
-    private ZeebeClient client;
+    private CamundaClient client;
     private RecordStream recordStream;
 }
 ```
@@ -90,7 +90,6 @@ class DeploymentAssertTest {
 Switching between testcontainers and embedded requires just two steps:
 
 1. Switch to the relevant dependency.
-
    - Testcontainers: `zeebe-process-test-extension-testcontainer`
    - Embedded: `zeebe-process-test-extension`
 
@@ -137,7 +136,7 @@ Add the `@ZeebeSpringTest` annotation to your Spring Boot test case to make the 
 @ZeebeSpringTest
 public class TestMyProcess {
     private ZeebeTestEngine engine;
-    private ZeebeClient client;
+    private CamundaClient client;
 ```
 
 You can find an example test case in the Camunda Community Hub at [Camunda 8 examples](https://github.com/camunda-community-hub/camunda-cloud-examples/blob/main/twitter-review-java-springboot/src/test/java/org/camunda/community/examples/twitter/TestTwitterProcess.java).

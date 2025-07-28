@@ -1079,15 +1079,15 @@ For example, you can spin up a custom client with the
 import io.camunda.connector.MyConnectorFunction;
 import io.camunda.connector.runtime.core.outbound.ConnectorJobHandler;
 import io.camunda.connector.validation.impl.DefaultValidationProvider;
-import io.camunda.zeebe.client.ZeebeClient;
+import io.camunda.zeebe.client.CamundaClient;
 
 public class Main {
 
   public static void main(String[] args) {
 
-    var zeebeClient = ZeebeClient.newClientBuilder().build();
+    var camundaClient = CamundaClient.newClientBuilder().build();
 
-    zeebeClient.newWorker()
+    camundaClient.newWorker()
         .jobType("io.camunda:template:1")
         .handler(new ConnectorJobHandler(new MyConnectorFunction(), new DefaultValidationProvider()))
         .name("MESSAGE")

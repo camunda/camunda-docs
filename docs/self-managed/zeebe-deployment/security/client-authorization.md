@@ -60,8 +60,8 @@ public class AuthorizedClient {
               .scope("scope")
               .build();
 
-        final ZeebeClient client =
-            new ZeebeClientBuilderImpl()
+        final CamundaClient client =
+            new CamundaClientBuilderImpl()
                 .gatewayAddress("cluster.endpoint.com:443")
                 .credentialsProvider(provider)
                 .build();
@@ -76,8 +76,8 @@ For security reasons, client secrets should not be hard coded. Therefore, it's r
 ```java
 public class AuthorizedClient {
     public void main(final String[] args) {
-        final ZeebeClient client =
-            new ZeebeClientBuilderImpl()
+        final CamundaClient client =
+            new CamundaClientBuilderImpl()
                 .gatewayAddress("cluster.endpoint.com:443")
                 .build();
 
@@ -86,7 +86,7 @@ public class AuthorizedClient {
 }
 ```
 
-The client creates an `OAuthCredentialProvider` with the credentials specified through the environment variables and the audience is extracted from the address specified through the `ZeebeClientBuilder`.
+The client creates an `OAuthCredentialProvider` with the credentials specified through the environment variables and the audience is extracted from the address specified through the `CamundaClientBuilder`.
 
 :::note
 Zeebe's Java client will not prevent you from adding credentials to requests while using an insecure connection, but you should be aware that doing so will expose your access token by transmitting it in plaintext.
@@ -138,7 +138,7 @@ After implementing the `CredentialsProvider`, we can provide it when building a 
 ```java
 public class SecureClient {
     public static void main(final String[] args) {
-      final ZeebeClient client = ZeebeClient.newClientBuilder().credentialsProvider(new MyCredentialsProvider()).build();
+      final CamundaClient client = CamundaClient.newClientBuilder().credentialsProvider(new MyCredentialsProvider()).build();
 
       // continue...
     }
