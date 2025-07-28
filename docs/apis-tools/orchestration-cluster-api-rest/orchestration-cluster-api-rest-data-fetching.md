@@ -41,11 +41,11 @@ GET /v2/user-tasks/:userTaskKey
 
 ## Data consistency
 
-All search and retrieval endpoints (GET and POST) return near-real-time data consistency guarantees. Results reflect the current state of runtime and historic data that has been processed by the [Camunda Exporter](../../self-managed/zeebe-deployment/exporters/camunda-exporter.md).
+All search and retrieval endpoints (GET and POST) return near-real-time data consistency guarantees. Results reflect the current state of runtime and historic data that has been processed by the [Camunda Exporter](../../self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md).
 
 ## User task support
 
-The Orchestration Cluster API only supports Camunda user tasks (previously referred to as [Zeebe user tasks](../migration-manuals/migrate-to-camunda-user-tasks.md)), which may still appear as `zeebe:userTask` in your XML content).
+The Orchestration Cluster API only supports Camunda user tasks (previously referred to as [Zeebe user tasks](../migration-manuals/migrate-to-camunda-user-tasks.md), which may still appear as `zeebe:userTask` in your XML content).
 
 ## Search requests
 
