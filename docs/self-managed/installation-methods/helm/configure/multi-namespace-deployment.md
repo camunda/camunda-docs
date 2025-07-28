@@ -74,7 +74,7 @@ helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION \
 
 ## Team One deployment
 
-Let's create a Camunda Orchestration Cluster that can be owned and managed by Team One and will be deployed into namespace `camunda-team01`. This deployment includes Zeebe, Operate, Tasklist, and Optimize, and authenticates against Keycloak in the Management deployment:
+Let's create a Camunda orchestration cluster that can be owned and managed by Team One and will be deployed into namespace `camunda-team01`. This deployment includes Zeebe, Operate, Tasklist, and Optimize, and authenticates against Keycloak in the Management deployment:
 
 ```yaml
 # File: camunda-team01.yaml

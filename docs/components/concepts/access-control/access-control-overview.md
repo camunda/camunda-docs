@@ -12,7 +12,7 @@ keywords:
   ]
 ---
 
-Access control in Camunda 8 ensures that only authorized users and systems can access your Orchestration Cluster and perform permitted actions. Two fundamental concepts are involved: **authentication** and **authorization**.
+Access control in Camunda 8 ensures that only authorized users and systems can access your orchestration cluster and perform permitted actions. Two fundamental concepts are involved: **authentication** and **authorization**.
 
 ## Identity types in Camunda 8
 

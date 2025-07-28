@@ -1,7 +1,7 @@
 ---
 id: configuration
 title: "Configuration"
-description: "Learn about the Identity configuration options available in your Orchestration Cluster."
+description: "Learn about the Identity configuration options available in your orchestration cluster."
 ---
 
 import Tabs from '@theme/Tabs';

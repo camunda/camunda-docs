@@ -66,7 +66,7 @@ Alternatively, the same setup can run with a single AWS EC2 instance, but be awa
 
 ### Outcome
 
-The outcome is a fully working Camunda Orchestration Cluster running in a high availability setup using AWS EC2 and utilizing a managed OpenSearch domain.
+The outcome is a fully working Camunda orchestration cluster running in a high availability setup using AWS EC2 and utilizing a managed OpenSearch domain.
 The EC2 instances come with an extra disk meant for Camunda to ensure that the content is separated from the operating system.
 
 ## 1. Create the required infrastructure

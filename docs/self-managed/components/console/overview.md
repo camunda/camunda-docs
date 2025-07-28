@@ -2,12 +2,12 @@
 id: overview
 title: "Console (Self-Managed)"
 sidebar_label: "Overview"
-description: "Console Self-Managed provides key insights into Orchestration Cluster deployments, process orchestration usage, and streamlining usage tracking."
+description: "Console Self-Managed provides key insights into orchestration cluster deployments, process orchestration usage, and streamlining usage tracking."
 ---
 
 Camunda Console (Self-Managed) provides a centralized interface for monitoring and managing your Camunda 8 deployments. It is designed to improve operational efficiency and streamline DevOps workflows in enterprise environments.
 
-Console gives you real-time insights into Orchestration Clusters and helps reduce the operational overhead of managing distributed systems.
+Console gives you real-time insights into orchestration clusters and helps reduce the operational overhead of managing distributed systems.
 
 ## Key features
 
@@ -21,7 +21,7 @@ Console gives you real-time insights into Orchestration Clusters and helps reduc
 
 ## Connector management
 
-You can [manage your connectors](/components/console/manage-clusters/manage-connectors.md) via Console. This feature allows Console to connect to remote Camunda Orchestration Clusters securely over HTTPS.
+You can [manage your connectors](/components/console/manage-clusters/manage-connectors.md) via Console. This feature allows Console to connect to remote Camunda orchestration clusters securely over HTTPS.
 
 - Monitor your inbound connector webhooks, message queue subscriptions, and polling subscriptions.
 - Check connector health and which connectors are running or failing.

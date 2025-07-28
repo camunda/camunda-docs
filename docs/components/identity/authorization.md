@@ -1,7 +1,7 @@
 ---
 id: authorization
 title: Authorization
-description: "Learn how to manage authorizations in your Orchestration Cluster."
+description: "Learn how to manage authorizations in your orchestration cluster."
 ---
 
 Authorizations are managed through permissions that can be assigned to [users](user.md), [groups](group.md), [roles](role.md), clients, and mapping rules.

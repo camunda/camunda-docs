@@ -22,7 +22,7 @@ const Components = () => {
       title: "Camunda Management Cluster",
       icon: ClusterManagementIcon,
       description:
-        "Central components that can work with multiple Camunda Orchestration Clusters",
+        "Central components that can work with multiple Camunda orchestration clusters",
       // The link should point to the management cluster documentation which is not there yet.
       link: "/self-managed/components/modeler/web-modeler/overview",
     },
@@ -40,7 +40,7 @@ const Components = () => {
       <h2>Components</h2>
       <p>
         A reference for Camunda 8 components, including the management and
-        Orchestration Clusters, detailed configuration guidance for each
+        orchestration clusters, detailed configuration guidance for each
         component, and application upgrade instructions.
       </p>
       <div className="sm-grid-2">

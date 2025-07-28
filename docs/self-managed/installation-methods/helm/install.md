@@ -5,16 +5,16 @@ sidebar_label: "Install"
 description: "Camunda provides continuously improved Helm charts, of which are not cloud provider-specific so you can choose your Kubernetes provider."
 ---
 
-This guide walks through how to perform a basic installation of Camunda 8 Self-Managed by installing the Orchestration Cluster and optionally the management cluster.
+This guide walks through how to perform a basic installation of Camunda 8 Self-Managed by installing the orchestration cluster and optionally the management cluster.
 
-<!-- TODO: add links to explain the Orchestration Cluster and management cluster -->
+<!-- TODO: add links to explain the orchestration cluster and management cluster -->
 
 ## Prerequisites
 
 - Kubernetes cluster: A functioning Kubernetes cluster with kubectl access and block storage persistent volumes for stateful components.
 - Helm: Make sure the Helm CLI is installed.
 
-## Installing the Orchestration Cluster
+## Installing the orchestration cluster
 
 - First, create a namespace to install the platform on Kubernetes:
   ```bash
@@ -36,15 +36,15 @@ To install the Helm chart on your namespace, run the following command:
 helm install camunda camunda/camunda-platform -n orchestration
 ```
 
-### Accessing the Orchestration Cluster
+### Accessing the orchestration cluster
 
-Run the following command to locally port-forward the Orchestration Cluster pod to access the UI:
+Run the following command to locally port-forward the orchestration cluster pod to access the UI:
 
 ```bash
 kubectl port-forward svc/camunda-core 8080:8080
 ```
 
-Use the following URLs to access the Orchestration Cluster UIs:
+Use the following URLs to access the orchestration cluster UIs:
 
 ```bash
 http://localhost:8080/identity
@@ -52,7 +52,7 @@ http://localhost:8080/operate
 http://localhost:8080/tasklist
 ```
 
-By default, basic auth is configured on the Orchestration Cluster. There is a default user configured:
+By default, basic auth is configured on the orchestration cluster. There is a default user configured:
 
 ```
 username: demo
@@ -67,7 +67,7 @@ This step is optional.
 
 <!-- TODO: Add links to doc pages that explain each component. -->
 
-The following components live outside the Orchestration Cluster:
+The following components live outside the orchestration cluster:
 
 - Optimize
 - Web Modeler
@@ -82,7 +82,7 @@ These components are disabled by default. They do not support basic auth, so ano
 Since the default configuration of the Helm chart uses basic auth, you need to create a [values.yaml](https://helm.sh/docs/chart_template_guide/values_files/) file to modify the default configuration to:
 
 - Enable Keycloak to provide another method of authentication.
-- Enable the rest of the Camunda components that live outside the Orchestration Cluster.
+- Enable the rest of the Camunda components that live outside the orchestration cluster.
 
 <!-- TODO: Remove setting existingSecret in favor of autoGenerate secrets -->
 
@@ -190,7 +190,7 @@ console:
   enabled: true
 ```
 
-<!-- TODO: Add a section about port-forward. Currently, port-forward is not working because the redirect URIs are configured with the Kubernetes service names. If the redirect URIs are set to localhost, the Orchestration Cluster will be unhealthy since it cannot access Keycloak through localhost. -->
+<!-- TODO: Add a section about port-forward. Currently, port-forward is not working because the redirect URIs are configured with the Kubernetes service names. If the redirect URIs are set to localhost, the orchestration cluster will be unhealthy since it cannot access Keycloak through localhost. -->
 
 ## Additional resources
 
@@ -198,7 +198,7 @@ console:
 - Basic auth guide
 - Enable Keycloak guide
 - Enable OIDC guide
-- Explanation of management/Orchestration Cluster -->
+- Explanation of management/orchestration cluster -->
 
 <!--## Next steps
 

@@ -1,10 +1,10 @@
 ---
 id: group
 title: Group management
-description: "Learn how to manage groups in your Orchestration Cluster."
+description: "Learn how to manage groups in your orchestration cluster."
 ---
 
-Group management is the process of creating, updating, and deleting groups in your Orchestration Cluster. A group is usually an organizational unit that consists of multiple [users](user.md). A group can be provided with [authorizations](authorization.md), either directly or by assigning [roles](role.md) to it.
+Group management is the process of creating, updating, and deleting groups in your orchestration cluster. A group is usually an organizational unit that consists of multiple [users](user.md). A group can be provided with [authorizations](authorization.md), either directly or by assigning [roles](role.md) to it.
 
 ### Create a group
 

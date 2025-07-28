@@ -8,7 +8,7 @@ Install and configure Orchestration Cluster components in your Self-Managed envi
 
 ## Installation and configuration
 
-The Orchestration Cluster is the core component of Camunda 8, powering the automation and orchestration of processes. An Orchestration Cluster includes:
+The Orchestration Cluster is the core component of Camunda 8, powering the automation and orchestration of processes. The Orchestration Cluster includes:
 
 - Zeebe as the workflow engine
 - Operate for monitoring and troubleshooting process instances running in Zeebe.

@@ -16,7 +16,7 @@ This API is designed to make it easy to [find resources](./orchestration-cluster
 
 We're committed to delivering high performance and reliability with our APIs. This API is part of the Camunda 8 [public API](/reference/public-api.md) and is covered by our SemVer stability guarantees (except for clearly marked alpha endpoints).
 
-To learn more about the Orchestration Clusters, see [What is the Orchestration Cluster?](/components/orchestration-cluster.md).
+To learn more about the Orchestration Cluster, see [What is the Orchestration Cluster?](/components/orchestration-cluster.md).
 
 Ready to dive in? Head to **[Getting started](#getting-started)** section below to make your first API call.
 

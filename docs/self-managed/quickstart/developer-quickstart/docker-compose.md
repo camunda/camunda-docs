@@ -2,7 +2,7 @@
 id: docker-compose
 title: "Developer quickstart - Docker Compose"
 sidebar_label: "Docker Compose"
-description: "This quickstart guides application developers through deploying Camunda 8 Self-Managed to a local Orchestration Cluster on Docker Compose"
+description: "This quickstart guides application developers through deploying Camunda 8 Self-Managed to a local orchestration cluster on Docker Compose"
 ---
 
 import Tabs from "@theme/Tabs";
@@ -112,7 +112,7 @@ docker compose -f docker-compose-web-modeler.yaml down -v
 
 #### Deploy or execute a process
 
-The local Orchestration Cluster started using the provided `docker-compose.yaml` is pre-configured in Web Modeler.
+The local orchestration cluster started using the provided `docker-compose.yaml` is pre-configured in Web Modeler.
 
 #### Emails
 
