@@ -176,4 +176,4 @@ See [the configuration documentation](/apis-tools/spring-zeebe-sdk/configuration
 
 ## Writing test cases
 
-To learn more about writing test cases using Zeebe Process Test, see [Camunda Spring Boot SDK integration](../java-client/zeebe-process-test.md#zeebe-spring-sdk-integration).
+Please refer to [Camunda Process Test](../testing/getting-started.md) to write test cases when using the Camunda Spring Boot SDK.

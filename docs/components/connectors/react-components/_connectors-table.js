@@ -306,7 +306,7 @@ const SearchableTable = () => {
       name: "HTTP Webhook",
       description:
         "Start a process instance with your custom webhook configuration.",
-      type: "Outbound",
+      type: "Inbound",
       link: "../../protocol/http-webhook/",
       image: WebhookImg,
     },

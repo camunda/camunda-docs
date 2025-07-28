@@ -16,12 +16,12 @@ The default runtime of CPT is based on [Testcontainers](https://java.testcontain
 - Camunda
 - Connectors
 
-:::info Prerequisites
+### Prerequisites
 
-You need a Docker-API compatible container runtime, such as Docker on Linux or Docker Desktop on Mac and Windows.
-If you're experiencing issues with your Docker runtime, have a look at the [Testcontainers documentation](https://java.testcontainers.org/supported_docker_environment/).
+- A Docker-API compatible container runtime, such as Docker on Linux or Docker Desktop on Mac and Windows.
+  If you're experiencing issues with your Docker runtime, have a look at the [Testcontainers documentation](https://java.testcontainers.org/supported_docker_environment/).
 
-:::
+### Usage
 
 You can change the Docker images and other runtime properties in the following way.
 
@@ -121,10 +121,30 @@ When to use it:
 - You can't install a Docker-API compatible container runtime
 
 :::info
-
 You are in charge of the remote runtime. Make sure to start the runtime before running tests.
-
 :::
+
+### Prerequisites
+
+- Expose the management API port (`9600`) to delete the data between the test runs (default for a local Camunda 8 Run)
+- Enable the management clock endpoint to manipulate the clock
+
+You can [configure Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md#configuration-options) by
+defining a `application.yaml` file with:
+
+```yaml
+zeebe.clock.controlled: true
+```
+
+By default, Camunda 8 Run loads the `application.yaml` from the distribution's root directory. If you use a different
+path, then you need to set the path when starting the application with the command line argument
+`--config=application.yaml`:
+
+```
+./start.sh --config=application.yaml
+```
+
+### Usage
 
 Set the configuration to use a remote runtime in the following way. Change the connection to the runtime, if needed.
 
