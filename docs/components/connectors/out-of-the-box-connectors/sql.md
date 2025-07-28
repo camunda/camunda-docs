@@ -31,7 +31,7 @@ Select the database type you want to connect to. The **SQL connector** supports 
 - Microsoft SQL Server
 - MySQL
 - PostgreSQL
-- Oracle: The Oracle Database Connector requires the Oracle JDBC driver to function. Due to licensing restrictions, Camunda is not permitted to distribute the Oracle driver as part of the product. If you plan to connect to an Oracle database, you must manually download the appropriate JDBC driver from [Oracle](https://www.oracle.com/database/technologies/appdev/jdbc-downloads.html) and run the connector in [hybrid mode](/components/connectors/use-connectors-in-hybrid-mode.md). When building your custom Docker image, make sure to include the Oracle driver by copying it into the image. For example, you can add the following line to your Dockerfile: `COPY ojdbc17.jar /opt/custom/` This ensures the driver is available on the classpath when the connector runtime starts.
+- **Oracle:** The Oracle Database Connector requires the Oracle JDBC driver, which Camunda cannot distribute due to licensing restrictions. To connect to an Oracle database, you must manually download the JDBC driver from [Oracle](https://www.oracle.com/database/technologies/appdev/jdbc-downloads.html) and run the connector in [hybrid mode](/components/connectors/use-connectors-in-hybrid-mode.md). When building a custom Docker image, include the driver by copying it into the image—for example, add `COPY ojdbc17.jar /opt/custom/` to your Dockerfile. This ensures the driver is on the classpath when the connector runtime starts.
 
 ### Connection
 
@@ -78,7 +78,6 @@ Use **[variables](#variables)** as much as possible to prevent SQL injection att
 #### Return results
 
 - When `false`, the response (see the [output](#what-is-the-output-format-of-the-sql-connector) section) will consist of an object containing an integer (`modifiedRows`) representing the number of modified rows. This is applicable for:
-
   - `INSERT`
   - `UPDATE`
   - `DELETE`
