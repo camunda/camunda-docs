@@ -74,10 +74,29 @@ The following conventions apply to all attributes:
 
 #### Get a form
 
-- **[V1 endpoint](../tasklist-api-rest/specifications/get-form.api.mdx)**: `GET /v1/forms/{formId}`
-- **V2 endpoints**:
-  - `GET /v2/user-tasks/{userTaskKey}/form` ([link](../orchestration-cluster-api-rest/specifications/get-user-task-form.api.mdx))
-  - `GET /v2/process-definitions/{processDefinitionKey}/form` ([link](../orchestration-cluster-api-rest/specifications/get-start-process-form.api.mdx))
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v1/forms/{formId}`](../tasklist-api-rest/specifications/get-form.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v2/user-tasks/{userTaskKey}/form`](../orchestration-cluster-api-rest/specifications/get-user-task-form.api.mdx)<br/>
+<span class="badge badge--get">GET</span> [`/v2/process-definitions/{processDefinitionKey}/form`](../orchestration-cluster-api-rest/specifications/get-start-process-form.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="get-form" defaultValue="input-adjustments" queryString values={
 [
@@ -110,13 +129,53 @@ The following conventions apply to all attributes:
 
 #### Save task draft variables
 
-- **[V1 endpoint](../tasklist-api-rest/specifications/save-draft-task-variables.api.mdx)**: `POST /v1/tasks/{taskId}/variables`
-- **V2 endpoint**: This feature is not supported in V2 anymore. Use [setting variables][] as `local` to the user task's `elementInstanceKey` as a replacement.
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--post">POST</span> [`/v1/tasks/{taskId}/variables`](../tasklist-api-rest/specifications/save-draft-task-variables.api.mdx)
+
+</td>
+<td>
+
+This feature is not supported in V2 anymore. Use [setting variables][] as `local` to the user task's `elementInstanceKey` as a replacement
+
+</td>
+</tr>
+</tbody>
+</table>
 
 #### Search task variables
 
-- **[V1 endpoint](../tasklist-api-rest/specifications/search-task-variables.api.mdx)**: `POST /v1/tasks/{taskId}/variables/search`
-- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/search-user-task-variables.api.mdx)**: `POST /v2/user-tasks/{userTaskKey}/variables/search`
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--post">POST</span> [`/v1/tasks/{taskId}/variables/search`](../tasklist-api-rest/specifications/search-task-variables.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--post">POST</span> [`/v2/user-tasks/{userTaskKey}/variables/search`](../orchestration-cluster-api-rest/specifications/search-user-task-variables.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="search-vars-by-task" defaultValue="input-adjustments" queryString values={
 [
@@ -150,8 +209,28 @@ The following conventions apply to all attributes:
 
 #### Search tasks
 
-- **[V1 endpoint](../tasklist-api-rest/specifications/search-tasks.api.mdx)**: `POST /v1/tasks/search`
-- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/search-user-tasks.api.mdx)**: `POST /v2/user-tasks/search`
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--post">POST</span> [`/v1/tasks/search`](../tasklist-api-rest/specifications/search-tasks.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--post">POST</span> [`/v2/user-tasks/search`](../orchestration-cluster-api-rest/specifications/search-user-tasks.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="tasklist" defaultValue="input-adjustments" queryString values={
 [
@@ -209,8 +288,28 @@ The following conventions apply to all attributes:
 
 #### Unassign a task
 
-- **[V1 endpoint](../tasklist-api-rest/specifications/unassign-task.api.mdx)**: `PATCH /v1/tasks/{taskId}/unassign`
-- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/unassign-user-task.api.mdx)**: `DELETE /v2/user-tasks/{userTaskKey}/assignee`
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--patch">PATCH</span> [`/v1/tasks/{taskId}/unassign`](../tasklist-api-rest/specifications/unassign-task.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--delete">DELETE</span> [`/v2/user-tasks/{userTaskKey}/assignee`](../orchestration-cluster-api-rest/specifications/unassign-user-task.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="unassign-user-task" defaultValue="input-adjustments" queryString values={
 [
@@ -234,8 +333,28 @@ The following conventions apply to all attributes:
 
 #### Complete a task
 
-- **[V1 endpoint](../tasklist-api-rest/specifications/complete-task.api.mdx)**: `PATCH /v1/tasks/{taskId}/complete`
-- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/complete-user-task.api.mdx)**: `POST /v2/user-tasks/{userTaskKey}/completion`
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--patch">PATCH</span> [`/v1/tasks/{taskId}/complete`](../tasklist-api-rest/specifications/complete-task.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--post">POST</span> [`/v2/user-tasks/{userTaskKey}/completion`](../orchestration-cluster-api-rest/specifications/complete-user-task.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="complete-user-task" defaultValue="input-adjustments" queryString values={
 [
@@ -260,8 +379,28 @@ The following conventions apply to all attributes:
 
 #### Assign a task
 
-- **[V1 endpoint](../tasklist-api-rest/specifications/assign-task.api.mdx)**: `PATCH /v1/tasks/{taskId}/assign`
-- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/assign-user-task.api.mdx)**: `POST /v2/user-tasks/{userTaskKey}/assignment`
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--patch">PATCH</span> [`/v1/tasks/{taskId}/assign`](../tasklist-api-rest/specifications/assign-task.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--post">POST</span> [`/v2/user-tasks/{userTaskKey}/assignment`](../orchestration-cluster-api-rest/specifications/assign-user-task.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="assign-user-task" defaultValue="input-adjustments" queryString values={
 [
@@ -286,8 +425,28 @@ The following conventions apply to all attributes:
 
 #### Get a task
 
-- **[V1 endpoint](../tasklist-api-rest/specifications/get-task-by-id.api.mdx)**: `GET /v1/tasks/{taskId}`
-- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/get-user-task.api.mdx)**: `GET /v2/user-tasks/{userTaskKey}`
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v1/tasks/{taskId}`](../tasklist-api-rest/specifications/get-task-by-id.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v2/user-tasks/{userTaskKey}`](../orchestration-cluster-api-rest/specifications/get-user-task.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="get-user-task" defaultValue="input-adjustments" queryString values={
 [
@@ -313,8 +472,28 @@ The following conventions apply to all attributes:
 
 #### Get a variable
 
-- **[V1 endpoint](../tasklist-api-rest/specifications/get-variable-by-id.api.mdx)**: `GET /v1/variables/{variableId}`
-- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/get-variable.api.mdx)**: `GET /v2/variables/{variableKey}`
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v1/variables/{variableId}`](../tasklist-api-rest/specifications/get-variable-by-id.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v2/variables/{variableKey}`](../orchestration-cluster-api-rest/specifications/get-variable.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="get-a-variable" defaultValue="input-adjustments" queryString values={
 [
@@ -345,8 +524,28 @@ The following conventions apply to all attributes:
 
 #### Search decision definitions
 
-- **[V1 endpoint](../operate-api/specifications/search-7.api.mdx)**: `POST /v1/decision-definitions/search`
-- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/search-decision-definitions.api.mdx)**: `POST /v2/decision-definitions/search`
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--post">POST</span> [`/v1/decision-definitions/search`](../operate-api/specifications/search-7.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--post">POST</span> [`/v2/decision-definitions/search`](../orchestration-cluster-api-rest/specifications/search-decision-definitions.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="search-decision-definitions" defaultValue="input-adjustments" queryString values={
 [
@@ -390,8 +589,28 @@ The following conventions apply to all attributes:
 
 #### Get decision definition by key
 
-- **[V1 endpoint](../operate-api/specifications/by-key-6.api.mdx)**: `GET /v1/decision-definitions/{key}`
-- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/get-decision-definition.api.mdx)**: `GET /v2/decision-definitions/{decisionDefinitionKey}`
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v1/decision-definitions/{key}`](../operate-api/specifications/by-key-6.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v2/decision-definitions/{decisionDefinitionKey}`](../orchestration-cluster-api-rest/specifications/get-decision-definition.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="get-decision-definition" defaultValue="input-adjustments" queryString values={
 [
@@ -415,8 +634,28 @@ The following conventions apply to all attributes:
 
 #### Search decision instances
 
-- **[V1 endpoint](../operate-api/specifications/search-6.api.mdx)**: `POST /v1/decision-instances/search`
-- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/search-decision-instances.api.mdx)**: `POST /v2/decision-instances/search`
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--post">POST</span> [`/v1/decision-instances/search`](../operate-api/specifications/search-6.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--post">POST</span> [`/v2/decision-instances/search`](../orchestration-cluster-api-rest/specifications/search-decision-instances.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="search-decision-instances" defaultValue="input-adjustments" queryString values={
 [
@@ -469,8 +708,28 @@ The following conventions apply to all attributes:
 
 #### Get decision instance by id
 
-- **[V1 endpoint](../operate-api/specifications/by-id.api.mdx)**: `GET /v1/decision-instances/{id}`
-- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/search-decision-instances.api.mdx)**: `GET /v2/decision-instances/{decisionInstanceId}`
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v1/decision-instances/{id}`](../operate-api/specifications/by-id.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v2/decision-instances/{decisionInstanceId}`](../orchestration-cluster-api-rest/specifications/search-decision-instances.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="get-decision-instance-by-id" defaultValue="input-adjustments" queryString values={
 [
@@ -507,8 +766,28 @@ The following conventions apply to all attributes:
 
 #### Search decision requirements
 
-- **[V1 endpoint](../operate-api/specifications/search-5.api.mdx)**: `POST /v1/drd/search`
-- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/search-decision-requirements.api.mdx)**: `POST /v2/decision-requirements/search`
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--post">POST</span> [`/v1/drd/search`](../operate-api/specifications/search-5.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--post">POST</span> [`/v2/decision-requirements/search`](../orchestration-cluster-api-rest/specifications/search-decision-requirements.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="search-decision-requirements" defaultValue="input-adjustments" queryString values={
 [
@@ -544,8 +823,28 @@ The following conventions apply to all attributes:
 
 #### Get decision requirements by key
 
-- **[V1 endpoint](../operate-api/specifications/by-key-5.api.mdx)**: `GET /v1/drd/{key}`
-- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/get-decision-requirements.api.mdx)**: `GET /v2/decision-requirements/{decisionRequirementsKey}`
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v1/drd/{key}`](../operate-api/specifications/by-key-5.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v2/decision-requirements/{decisionRequirementsKey}`](../orchestration-cluster-api-rest/specifications/get-decision-requirements.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="get-decision-requirements-by-key" defaultValue="input-adjustments" queryString values={
 [
@@ -569,8 +868,28 @@ The following conventions apply to all attributes:
 
 #### Get decision requirements as XML by key
 
-- **[V1 endpoint](../operate-api/specifications/xml-by-key-1.api.mdx)**: `GET /v1/drd/{key}/xml`
-- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/get-decision-requirements-xml.api.mdx)**: `GET /v2/decision-requirements/{decisionRequirementsKey}/xml`
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v1/drd/{key}/xml`](../operate-api/specifications/xml-by-key-1.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v2/decision-requirements/{decisionRequirementsKey}/xml`](../orchestration-cluster-api-rest/specifications/get-decision-requirements-xml.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="get-decision-requirements-by-key" defaultValue="input-adjustments" queryString values={
 [
@@ -596,8 +915,28 @@ The following conventions apply to all attributes:
 
 #### Search variables for process instances
 
-- **[V1 endpoint](../operate-api/specifications/search.api.mdx)**: `POST /v1/variables/search`
-- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/search-variables.api.mdx)**: `POST /v2/variables/search`
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--post">POST</span> [`/v1/variables/search`](../operate-api/specifications/search.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--post">POST</span> [`/v2/variables/search`](../orchestration-cluster-api-rest/specifications/search-variables.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="search-variables-for-process-instances" defaultValue="input-adjustments" queryString values={
 [
@@ -635,8 +974,28 @@ The following conventions apply to all attributes:
 
 #### Get variable by key
 
-- **[V1 endpoint](../operate-api/specifications/by-key.api.mdx)**: `GET /v1/variables/{key}`
-- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/get-variable.api.mdx)**: `GET /v2/variables/{variableKey}`
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v1/variables/{key}`](../operate-api/specifications/by-key.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v2/variables/{variableKey}`](../orchestration-cluster-api-rest/specifications/get-variable.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="get-variable-by-key" defaultValue="input-adjustments" queryString values={
 [
@@ -672,8 +1031,28 @@ The following conventions apply to all attributes:
 
 #### Search process definitions
 
-- **[V1 endpoint](../operate-api/specifications/search-2.api.mdx)**: `POST /v1/process-definitions/search`
-- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/search-process-definitions.api.mdx)**: `POST /v2/process-definitions/search`
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--post">POST</span> [`/v1/process-definitions/search`](../operate-api/specifications/search-2.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--post">POST</span> [`/v2/process-definitions/search`](../orchestration-cluster-api-rest/specifications/search-process-definitions.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="search-process-definitions" defaultValue="input-adjustments" queryString values={
 [
@@ -707,8 +1086,28 @@ The following conventions apply to all attributes:
 
 #### Get process definition by key
 
-- **[V1 endpoint](../operate-api/specifications/by-key-2.api.mdx)**: `GET /v1/process-definitions/{key}`
-- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/get-process-definition.api.mdx)**: `GET /v2/process-definitions/{processDefinitionKey}`
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v1/process-definitions/{key}`](../operate-api/specifications/by-key-2.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v2/process-definitions/{processDefinitionKey}`](../orchestration-cluster-api-rest/specifications/get-process-definition.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="get-process-definition" defaultValue="input-adjustments" queryString values={
 [
@@ -732,8 +1131,28 @@ The following conventions apply to all attributes:
 
 #### Get process definition as XML by key
 
-- **[V1 endpoint](../operate-api/specifications/xml-by-key.api.mdx)**: `GET /v1/process-definitions/{key}/xml`
-- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/get-process-definition-xml.api.mdx)**: `GET /v2/process-definitions/{processDefinitionKey}/xml`
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v1/process-definitions/{key}/xml`](../operate-api/specifications/xml-by-key.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v2/process-definitions/{processDefinitionKey}/xml`](../orchestration-cluster-api-rest/specifications/get-process-definition-xml.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="get-process-definition-xml" defaultValue="input-adjustments" queryString values={
 [
@@ -759,8 +1178,28 @@ The following conventions apply to all attributes:
 
 #### Search process instances
 
-- **[V1 endpoint](../operate-api/specifications/search-1.api.mdx)**: `POST /v1/process-instances/search`
-- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/search-process-instances.api.mdx)**: `POST /v2/process-instances/search`
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--post">POST</span> [`/v1/process-instances/search`](../operate-api/specifications/search-1.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--post">POST</span> [`/v2/process-instances/search`](../orchestration-cluster-api-rest/specifications/search-process-instances.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="search-process-instances" defaultValue="input-adjustments" queryString values={
 [
@@ -812,8 +1251,28 @@ The following conventions apply to all attributes:
 
 #### Get process instance by key
 
-- **[V1 endpoint](../operate-api/specifications/by-key-1.api.mdx)**: `GET /v1/process-instances/{key}`
-- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/get-process-instance.api.mdx)**: `GET /v2/process-instances/{processInstanceKey}`
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v1/process-instances/{key}`](../operate-api/specifications/by-key-1.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v2/process-instances/{processInstanceKey}`](../orchestration-cluster-api-rest/specifications/get-process-instance.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="get-process-instance-by-key" defaultValue="input-adjustments" queryString values={
 [
@@ -837,13 +1296,53 @@ The following conventions apply to all attributes:
 
 #### Delete process instance and all dependant data by key
 
-- **[V1 endpoint](../operate-api/specifications/delete.api.mdx)**: `DELETE /v1/process-instances/{key}`
-- **V2 endpoint**: This feature is not yet available in V2. It will be added in a future version.
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--delete">DELETE</span> [`/v1/process-instances/{key}`](../operate-api/specifications/delete.api.mdx)
+
+</td>
+<td>
+
+This feature is not yet available in V2. It will be added in a future version.
+
+</td>
+</tr>
+</tbody>
+</table>
 
 #### Get flow node statistic by process instance key
 
-- **[V1 endpoint](../operate-api/specifications/get-statistics.api.mdx)**: `GET /v1/process-instances/{key}/statistics`
-- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/get-process-instance-statistics.api.mdx)**: `GET /v2/process-instances/{processInstanceKey}/statistics/element-instances`
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v1/process-instances/{key}/statistics`](../operate-api/specifications/get-statistics.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v2/process-instances/{processInstanceKey}/statistics/element-instances`](../orchestration-cluster-api-rest/specifications/get-process-instance-statistics.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="get-process-instance-statistics" defaultValue="input-adjustments" queryString values={
 [
@@ -870,8 +1369,28 @@ The following conventions apply to all attributes:
 
 #### Get sequence flows of process instance by key
 
-- **[V1 endpoint](../operate-api/specifications/sequence-flows-by-key.api.mdx)**: `GET /v1/process-instances/{key}/sequence-flows`
-- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/get-process-instance-sequence-flows.api.mdx)**: `GET /v2/process-instances/{processInstanceKey}/sequence-flows`
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v1/process-instances/{key}/sequence-flows`](../operate-api/specifications/sequence-flows-by-key.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v2/process-instances/{processInstanceKey}/sequence-flows`](../orchestration-cluster-api-rest/specifications/get-process-instance-sequence-flows.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="get-process-instance-sequence-flows" defaultValue="input-adjustments" queryString values={
 [
@@ -900,8 +1419,28 @@ The following conventions apply to all attributes:
 
 #### Search flownode instances
 
-- **[V1 endpoint](../operate-api/specifications/search-4.api.mdx)**: `POST /v1/flownode-instances/search`
-- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/search-element-instances.api.mdx)**: `POST /v2/element-instances/search`
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--post">POST</span> [`/v1/flownode-instances/search`](../operate-api/specifications/search-4.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--post">POST</span> [`/v2/element-instances/search`](../orchestration-cluster-api-rest/specifications/search-element-instances.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="search-flownode-instances" defaultValue="input-adjustments" queryString values={
 [
@@ -950,8 +1489,28 @@ The following conventions apply to all attributes:
 
 #### Get flownode instance by key
 
-- **[V1 endpoint](../operate-api/specifications/by-key-4.api.mdx)**: `GET /v1/flownode-instances/{key}`
-- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/get-element-instance.api.mdx)**: `GET /v2/element-instances/{elementInstanceKey}`
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v1/flownode-instances/{key}`](../operate-api/specifications/by-key-4.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v2/element-instances/{elementInstanceKey}`](../orchestration-cluster-api-rest/specifications/get-element-instance.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="get-flownode-instance-by-key" defaultValue="input-adjustments" queryString values={
 [
@@ -977,8 +1536,28 @@ The following conventions apply to all attributes:
 
 #### Search incidents
 
-- **[V1 endpoint](../operate-api/specifications/search-3.api.mdx)**: `POST /v1/incidents/search`
-- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/search-incidents.api.mdx)**: `POST /v2/incidents/search`
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--post">POST</span> [`/v1/incidents/search`](../operate-api/specifications/search-3.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--post">POST</span> [`/v2/incidents/search`](../orchestration-cluster-api-rest/specifications/search-incidents.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="search-incidents" defaultValue="input-adjustments" queryString values={
 [
@@ -1022,8 +1601,28 @@ The following conventions apply to all attributes:
 
 #### Get incident by key
 
-- **[V1 endpoint](../operate-api/specifications/by-key-3.api.mdx)**: `GET /v1/incidents/{key}`
-- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/get-incident.api.mdx)**: `GET /v2/incidents/{incidentKey}`
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v1/incidents/{key}`](../operate-api/specifications/by-key-3.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v2/incidents/{incidentKey}`](../orchestration-cluster-api-rest/specifications/get-incident.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="get-incident-by-key" defaultValue="input-adjustments" queryString values={
 [
