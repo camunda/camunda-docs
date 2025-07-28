@@ -2,7 +2,6 @@ import React from "react";
 import "./styles.css";
 import { activeVersionURLPath as linkBase } from "../Versions";
 import ClusterOrchestrationIcon from "./icons/cluster-orchestration.svg";
-import ClusterManagementIcon from "./icons/cluster-management.svg";
 
 const ComponentCard = ({ link, title, icon: Icon, description }) => {
   return (
@@ -64,7 +63,7 @@ const Components = () => {
 
   return (
     <div className="sm-components">
-      <h2>Orchestration components</h2>
+      <h2>Components</h2>
       <p>
         A reference for Camunda 8 components, including the management and
         orchestration clusters, Connectors, Optimize, and detailed configuration
