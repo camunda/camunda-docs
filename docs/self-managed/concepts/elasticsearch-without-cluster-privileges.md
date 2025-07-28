@@ -4,11 +4,6 @@ title: "Elasticsearch without cluster privileges"
 keywords: ["elasticsearch", "schema", "backup", "backups"]
 ---
 
-:::warning Breaking changes
-The Camunda 8.8 release introduces breaking changes in the configuration of standalone schema and backup managers applications.
-Check this page for the latest configuration options.
-:::
-
 If the Camunda single application cannot access Elasticsearch with cluster-level privileges, you can run the schema manager as a standalone application separate from the main application.
 
 ## Standalone schema manager
