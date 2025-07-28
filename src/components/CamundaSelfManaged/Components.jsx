@@ -53,7 +53,7 @@ const Components = () => {
       link: "/self-managed/console-deployment/overview",
     },
     {
-      title: "Identity",
+      title: "Management Identity",
       icon: ClusterOrchestrationIcon,
       description:
         "Use Identity to manage users, groups, roles, permissions, and applications within the Camunda 8 platform.",
