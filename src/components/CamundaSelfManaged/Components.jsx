@@ -38,7 +38,7 @@ const Components = () => {
         "Optimize offers business intelligence tooling for Camunda enterprise customers.",
       link: "/self-managed/optimize-deployment/install-and-start",
     },
-        {
+    {
       title: "Web Modeler",
       icon: ClusterOrchestrationIcon,
       description:
