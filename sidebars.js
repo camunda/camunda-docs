@@ -119,7 +119,7 @@ module.exports = {
             id: "components/modeler/web-modeler/idp/idp-document-extraction",
           },
           items: [
-            // "components/modeler/web-modeler/idp/idp-structured-extraction",
+            "components/modeler/web-modeler/idp/idp-structured-extraction",
             "components/modeler/web-modeler/idp/idp-unstructured-extraction",
           ],
         },
@@ -901,44 +901,44 @@ module.exports = {
       ],
     },
     {
-          "API Clients": [
+      "API Clients": [
+        {
+          "Java client": [
+            "apis-tools/java-client/index",
+            "apis-tools/java-client/authentication",
+            "apis-tools/java-client/job-worker",
+            "apis-tools/java-client/logging",
+            "apis-tools/java-client/zeebe-process-test",
             {
-              "Java client": [
-                "apis-tools/java-client/index",
-                "apis-tools/java-client/authentication",
-                "apis-tools/java-client/job-worker",
-                "apis-tools/java-client/logging",
-                "apis-tools/java-client/zeebe-process-test",
-                {
-                  Examples: [
-                    "apis-tools/java-client-examples/index",
-                    "apis-tools/java-client-examples/process-deploy",
-                    "apis-tools/java-client-examples/process-instance-create",
-                    "apis-tools/java-client-examples/process-instance-create-nonblocking",
-                    "apis-tools/java-client-examples/process-instance-create-with-result",
-                    "apis-tools/java-client-examples/decision-evaluate",
-                    "apis-tools/java-client-examples/job-worker-open",
-                    "apis-tools/java-client-examples/data-pojo",
-                    "apis-tools/java-client-examples/cluster-topology-request",
-                  ],
-                },
-              ],
-            },
-            {
-              "Camunda Spring Boot Starter": [
-                "apis-tools/spring-zeebe-sdk/getting-started",
-                "apis-tools/spring-zeebe-sdk/configuration",
-              ],
-            },
-            "apis-tools/node-js-sdk",
-            {
-              "Community clients": [
-                "apis-tools/community-clients/index",
-                "apis-tools/build-your-own-client",
+              Examples: [
+                "apis-tools/java-client-examples/index",
+                "apis-tools/java-client-examples/process-deploy",
+                "apis-tools/java-client-examples/process-instance-create",
+                "apis-tools/java-client-examples/process-instance-create-nonblocking",
+                "apis-tools/java-client-examples/process-instance-create-with-result",
+                "apis-tools/java-client-examples/decision-evaluate",
+                "apis-tools/java-client-examples/job-worker-open",
+                "apis-tools/java-client-examples/data-pojo",
+                "apis-tools/java-client-examples/cluster-topology-request",
               ],
             },
           ],
         },
+        {
+          "Camunda Spring Boot Starter": [
+            "apis-tools/spring-zeebe-sdk/getting-started",
+            "apis-tools/spring-zeebe-sdk/configuration",
+          ],
+        },
+        "apis-tools/node-js-sdk",
+        {
+          "Community clients": [
+            "apis-tools/community-clients/index",
+            "apis-tools/build-your-own-client",
+          ],
+        },
+      ],
+    },
     require("./docs/apis-tools/frontend-development/sidebar-schema"),
     {
       Testing: [
