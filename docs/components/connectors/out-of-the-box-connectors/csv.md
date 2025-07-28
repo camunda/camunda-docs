@@ -5,7 +5,7 @@ title: CSV connector
 description: Reads CSV files and converts JSON data into CSV format for further usage
 ---
 
-The **CSV connector** is an outbound connector that allows you to read CSV files and to convert JSON data into CSV format for further usage as a document or text.
+The **CSV connector** is an outbound connector that allows you to read CSV files and convert JSON data into CSV format for use as a document or text.
 
 ## Create a CSV connector task
 
@@ -15,21 +15,21 @@ import ConnectorTask from '../../../components/react-components/connector-task.m
 
 ## Operations
 
-The **CSV connector** supports the following operations t
+The **CSV connector** supports the following operations:
 
 ### Read CSV
 
 Reads a CSV from a text or a document and converts it into an array of JSON records.
 
-| Property           | Type               | Description                                                                                                                 | Required | Example                                              |
-| :----------------- | :----------------- | :-------------------------------------------------------------------------------------------------------------------------- | :------- | :--------------------------------------------------- |
-| Data               | Document or String | The CSV data as a document or text                                                                                          | Yes      | [Example CSV](#example-csv-input)                    |
-| Delimiter          | String             | The delimiter used to separate each column                                                                                  | No       | Defaults to `,`                                      |
-| Skip header record | Boolean            | Whether to include the first row in the records or not                                                                      | No       | Defaults to `true`                                   |
-| Headers            | Array of strings   | Can be used when there is no header record present in the record or to change the column names if there is a header record. | No       | Defaults to `[]`. Example: `["name","cost","count"]` |
-| Row type           | String             | Determines how the result records object will be structured.                                                                | No       | Defaults to `Object`. Either `Object` or `Array`.    |
+| Property           | Type               | Description                                                | Required | Example                                              |
+| ------------------ | ------------------ | ---------------------------------------------------------- | -------- | ---------------------------------------------------- |
+| Data               | Document or String | The CSV data as a document or text                         | Yes      | [Example CSV](#example-csv-input)                    |
+| Delimiter          | String             | The delimiter used to separate each column                 | No       | Defaults to `,`                                      |
+| Skip header record | Boolean            | Whether to skip the first row (header) in the records      | No       | Defaults to `true`                                   |
+| Headers            | Array of strings   | Used when no header is present or to override column names | No       | Defaults to `[]`. Example: `["name","cost","count"]` |
+| Row type           | String             | Determines the structure of the result records.            | No       | Defaults to `Object`. Either `Object` or `Array`.    |
 
-#### Example CSV input:
+#### Example CSV input
 
 ```csv
 product,quantity,price
@@ -40,7 +40,7 @@ Monitor Stand,15,45.00
 Desk Lamp,32,24.95
 ```
 
-#### Example output for row type `Object`:
+#### Example output for row type `Object`
 
 ```json
 {
@@ -62,7 +62,7 @@ Based on the `Object` [example](#example-output-for-row-type-object) above, you 
 }
 ```
 
-#### Example output for row type `Array`:
+#### Example output for row type `Array`
 
 ```json
 {
@@ -86,16 +86,18 @@ Based on the `Array` [example](#example-output-for-row-type-array) above, you ca
 
 ### Write CSV
 
-Takes a array of JSON objects and creates a CSV from it. The result can either be stored as a document for further processing (uploading it for example) or as a string.
+### Convert JSON to CSV
 
-| Property           | Type             | Description                                                                                                                              | Required | Example                                                                                               |
-| :----------------- | :--------------- | :--------------------------------------------------------------------------------------------------------------------------------------- | :------- | :---------------------------------------------------------------------------------------------------- |
-| Data               | Array            | The CSV data as an array of objects or arrays                                                                                            | Yes      | [Object](#example-output-for-row-type-array) and [Array](#example-output-for-row-type-array) example. |
-| Create document    | Boolean          | If `true` the Connector will store the CSV document in Camunda and returns a reference. If `false` the CSV will be returned as a string. | No       | Defaults to `false`                                                                                   |
-| Delimiter          | String           | The delimiter used to separate each column                                                                                               | No       | Defaults to `,`                                                                                       |
-| Skip header record | Boolean          | Whether to include the first row in the records or not                                                                                   | No       | Defaults to `true`                                                                                    |
-| Headers            | Array of strings | Can be used when there is no header record present in the record or to change the column names if there is a header record.              | No       | Defaults to `[]`. Example: `["name","cost","count"]`                                                  |
-| Row type           | String           | Determines how the result records object will be structured.                                                                             | No       | Defaults to `Object`. Either `Object` or `Array`.                                                     |
+Takes an array of JSON objects and creates a CSV from it. The result can either be stored as a document for further processing (e.g., uploading) or returned as a string.
+
+| Property           | Type             | Description                                                                                                                           | Required | Example                                                                                                          |
+| ------------------ | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------- |
+| Data               | Array            | The input data as an array of objects or arrays                                                                                       | Yes      | See [Object example](#example-output-for-row-type-array) and [Array example](#example-output-for-row-type-array) |
+| Create document    | Boolean          | If `true`, the connector stores the CSV as a document in Camunda and returns a reference. If `false`, it returns the CSV as a string. | No       | Defaults to `false`                                                                                              |
+| Delimiter          | String           | The delimiter used to separate columns                                                                                                | No       | Defaults to `,`                                                                                                  |
+| Skip header record | Boolean          | Whether to skip the header row in the output                                                                                          | No       | Defaults to `true`                                                                                               |
+| Headers            | Array of strings | Used when no header is present in the data or to override the column names                                                            | No       | Defaults to `[]`. Example: `["name", "cost", "count"]`                                                           |
+| Row type           | String           | Defines how each row is represented in the input: either as an `Object` (key-value pairs) or `Array` (index-based values)             | No       | Defaults to `Object`. Options: `Object` or `Array`                                                               |
 
 #### Example output for a CSV returned a string
 
