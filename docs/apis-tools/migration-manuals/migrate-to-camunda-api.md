@@ -19,6 +19,15 @@ Over time, there will be a deprecation process for the individual component APIs
 
 This guide considers all public endpoints existing in the component REST APIs and the Orchestration cluster API counterparts or required migration changes.
 
+## Migration checklist
+
+To successfully migrate from V1 component APIs to the V2 Orchestration cluster API, follow this checklist:
+
+- [ ] **Identify your current V1 endpoints**: Audit your application to catalog all V1 API calls currently in use.
+- [ ] **Map V1 endpoints to V2 equivalents**: Use the tables in this guide to find the corresponding V2 endpoints for each call.
+- [ ] **Update request and response structure**: Adapt your code to handle the new formats, renamed attributes, and data type changes as outlined in this guide.
+- [ ] **Update pagination logic**: Replace old pagination parameters with the new `page` object structure and cursor-based navigation.
+
 ## General endpoint changes
 
 <Tabs groupId="endpoints" defaultValue="all-endpoints" queryString values={

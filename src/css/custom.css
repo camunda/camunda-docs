@@ -1364,6 +1364,11 @@ ul ul .table-of-contents__link--active {
   margin-top: 8px;
 }
 
+.table-migration code {
+  background: transparent;
+  border: none;
+}
+
 /* Glossary page links */
 .alphabet-navigation {
   display: flex;
