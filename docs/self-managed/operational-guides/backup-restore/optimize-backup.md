@@ -23,10 +23,11 @@ Optimize provides an API to trigger a backup and retrieve information about a gi
 Usage of this API requires the backup store to be configured for the component.
 
 - Optimize configuration
-  - [Elasticsearch](/self-managed/optimize-deployment/configuration/system-configuration.md#elasticsearch-backup-settings)
-  - [OpenSearch](/self-managed/optimize-deployment/configuration/system-configuration.md#opensearch-backup-settings)
+  - [Elasticsearch](/self-managed/components/optimize/configuration/system-configuration.md#elasticsearch-backup-settings)
+  - [OpenSearch](/self-managed/components/optimize/configuration/system-configuration.md#opensearch-backup-settings)
 
-Additionally, it requires the same backup store to be configured on your chosen datastore.
+1. A snapshot repository of your choice must be registered with ElasticSearch/OpenSearch.
+2. The repository name must be specified using the `CAMUNDA_OPTIMIZE_BACKUP_REPOSITORY_NAME` environment variable, or by adding it to your Optimize [`environment-config.yaml`](/self-managed/components/optimize/configuration/system-configuration.md):
 
 - [Elasticsearch snapshot repository](https://www.elastic.co/docs/deploy-manage/tools/snapshot-and-restore/manage-snapshot-repositories)
 - [OpenSearch snapshot repository](https://docs.opensearch.org/docs/latest/tuning-your-cluster/availability-and-recovery/snapshots/snapshot-restore/)

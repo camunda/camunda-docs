@@ -140,7 +140,7 @@ By default, the Orchestration Cluster REST API is publicly accessible without re
 
 ## Connectors
 
-Both the full and lightweight Docker Compose files include a configuration for [out-of-the-box connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md). Refer to the [Connector installation guide](/self-managed/connectors-deployment/install-and-start.md) for details on how to provide related connector templates for modeling.
+Both the full and lightweight Docker Compose files include a configuration for [out-of-the-box connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md). Refer to the [Connector installation guide](/self-managed/components/connectors/overview.md) for details on how to provide related connector templates for modeling.
 
 ### Connector secrets
 

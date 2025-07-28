@@ -47,7 +47,7 @@ The included components are:
 - [Operate](/components/operate/operate-introduction.md): A monitoring tool for visualizing and troubleshooting workflows running in Zeebe.
 - [Tasklist](/components/tasklist/introduction-to-tasklist.md): A user interface for managing and completing human tasks within workflows.
 - [Optimize](/components/optimize/what-is-optimize.md): An analytics tool for generating reports and insights based on workflow data.
-- [Identity](/self-managed/identity/what-is-identity.md): A service for managing user authentication and authorization.
+- [Identity](/self-managed/components/management-identity/what-is-identity.md): A service for managing user authentication and authorization.
 - [Connectors](/components/connectors/introduction.md): Pre-built integrations for connecting Zeebe with external systems and services.
 
 Each component within the Orchestration Cluster is part of an integrated system that works together to provide end-to-end process orchestration. These components form a unified cluster that is tightly integrated to ensure seamless communication and data flow.
@@ -60,12 +60,12 @@ This design ensures that all components are in sync, working collectively to mai
 
 Web Modeler and Console are designed to interact with multiple Orchestration Clusters. Console offers tools and interfaces for administrators to monitor clusters, and Web Modeler allows developers to create and deploy BPMN models.
 
-- [Console](/components/console/introduction-to-console.md): A central management interface for monitoring and managing multiple Orchestration Clusters.
-- [Web Modeler](/self-managed/modeler/web-modeler/installation.md): A web-based tool for designing and deploying workflow models to any available Orchestration Cluster.
+- [Console](/components/console/introduction-to-console.md): A central management interface for monitoring and managing multiple orchestration clusters.
+- [Web Modeler](/self-managed/components/modeler/web-modeler/overview.md): A web-based tool for designing and deploying workflow models to any available orchestration cluster.
 
 Additionally, Web Modeler and Console require the following:
 
-- [Identity](/self-managed/identity/what-is-identity.md): A service for managing user authentication and authorization.
+- [Identity](/self-managed/components/management-identity/what-is-identity.md): A service for managing user authentication and authorization.
 
 Unlike the Orchestration Cluster, Web Modeler and Console run a separate and dedicated Identity deployment. For production environments, using an external [identity provider](/self-managed/installation-methods/helm/configure/connect-to-an-oidc-provider.md) is recommended.
 

@@ -80,7 +80,7 @@ The following concerns **Operate**, **Tasklist**, and **Optimize**:
 
 When scaling from a single pod to multiple, ensure that the `importer / archiver` is enabled on only one pod and disabled on others. Enabling it on multiple pods will cause data inconsistencies. This limitation is known and will be addressed in future updates.
 
-Example configuration options are available for [Operate](/self-managed/operate-deployment/importer-and-archiver.md#configuration), [Optimize](/self-managed/optimize-deployment/configuration/system-configuration-platform-8.md#general-settings), and [Tasklist](/self-managed/tasklist-deployment/importer-and-archiver.md#configuration).
+Example configuration options are available for [Operate](/self-managed/components/orchestration-cluster/operate/importer-and-archiver.md#configuration), [Optimize](/self-managed/components/optimize/configuration/system-configuration-platform-8.md#general-settings), and [Tasklist](/self-managed/components/orchestration-cluster/tasklist/importer-and-archiver.md#configuration).
 :::
 
 For high availability, a minimum of four Kubernetes nodes are recommended to ensure fault tolerance and support leader election in case of failures. To learn more about the Raft protocol and clustering concepts, refer to the [clustering documentation](/components/zeebe/technical-concepts/clustering.md).
@@ -100,7 +100,7 @@ A multi-namespace setup allows you to duplicate and run multiple Orchestration C
 The **Orchestration Cluster** namespace, as outlined in the [architecture diagram](#orchestration-cluster), consists of the following components:
 
 - [Zeebe Brokers](/components/zeebe/technical-concepts/architecture.md#brokers)
-- [Zeebe Gateway](/self-managed/zeebe-deployment/zeebe-gateway/zeebe-gateway-overview.md)
+- [Zeebe Gateway](/self-managed/components/orchestration-cluster/zeebe/zeebe-gateway/zeebe-gateway-overview.md)
 - [Operate](/components/operate/operate-introduction.md)
 - [Tasklist](/components/tasklist/introduction-to-tasklist.md)
 - [Optimize](/components/optimize/what-is-optimize.md)
@@ -109,8 +109,8 @@ The **Orchestration Cluster** namespace, as outlined in the [architecture diagra
 The **Web Modeler and Console** namespace, as outlined in the [architecture diagram](#web-modeler-and-console), consists of the following components:
 
 - Web Modeler
-- [Console](/self-managed/console-deployment/overview.md)
-- [Identity](/self-managed/identity/what-is-identity.md)
+- [Console](/self-managed/components/console/overview.md)
+- [Identity](/self-managed/components/management-identity/what-is-identity.md)
   - Keycloak, an external dependency of Identity
 
 The **Orchestration Cluster** should be configured to use the central Identity of the **Web Modeler and Console** namespace.
@@ -129,7 +129,7 @@ Camunda 8 is not tied to a specific Kubernetes version. To simplify deployment, 
 
 #### Minimum cluster requirements
 
-The following are suggested minimum requirements. Sizing depends heavily on your specific use cases and workload. See [sizing your environment](/components/best-practices/architecture/sizing-your-environment.md) and [Zeebe resource planning](/self-managed/zeebe-deployment/operations/resource-planning.md) for additional resources, conduct benchmarking to determine your exact requirements.
+The following are suggested minimum requirements. Sizing depends heavily on your specific use cases and workload. See [sizing your environment](/components/best-practices/architecture/sizing-your-environment.md) and [Zeebe resource planning](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md) for additional resources, conduct benchmarking to determine your exact requirements.
 
 - 4 Kubernetes Nodes
   - Modern CPU: 4 Cores

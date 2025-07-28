@@ -90,7 +90,6 @@ class DeploymentAssertTest {
 Switching between testcontainers and embedded requires just two steps:
 
 1. Switch to the relevant dependency.
-
    - Testcontainers: `zeebe-process-test-extension-testcontainer`
    - Embedded: `zeebe-process-test-extension`
 

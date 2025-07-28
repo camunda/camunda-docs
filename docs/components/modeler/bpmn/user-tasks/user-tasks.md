@@ -60,7 +60,7 @@ The unique identifier depends on the authentication method used to login to Task
 - Default Basic Auth (Elasticsearch): `username`
 - IAM: `username`
 
-These assignees are not related to user restrictions, which is related to the visibility of the task in Tasklist for Self-Managed. For more information, see [Tasklist Authentication](/self-managed/tasklist-deployment/tasklist-authentication.md).
+These assignees are not related to user restrictions, which is related to the visibility of the task in Tasklist for Self-Managed. For more information, see [Tasklist Authentication](/self-managed/components/orchestration-cluster/tasklist/tasklist-authentication.md).
 
 :::note
 For example, say you log into Tasklist using Camunda 8 login with email using your email address `foo@bar.com`. Every time a user task activates with `assignee` set to value `foo@bar.com`, Tasklist automatically assigns it to you. You'll be able to find your new task under the task dropdown option `Assigned to me`.
@@ -128,7 +128,6 @@ Depending on your use case, two different types of form references can be used:
    of the task's `zeebe:formDefinition` extension element (see the [XML representation](#camunda-form)).
 
    The `bindingType` attribute determines which version of the linked form is used:
-
    - `latest`: The latest deployed version at the moment the user task is activated.
    - `deployment`: The version that was deployed together with the currently running version of the process.
    - `versionTag`: The latest deployed version that is annotated with the version tag specified in the `versionTag` attribute.

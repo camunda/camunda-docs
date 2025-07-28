@@ -78,7 +78,7 @@ Camunda 8 is a universal process orchestrator that allows you to orchestrate and
 | [Orchestration Cluster](#orchestration-cluster)      | Powers the automation and orchestration of [processes](#process).                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | [Connectors](#connector)                             | Out-of-the-box integration with external systems.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | [Optimize](/components/optimize/what-is-optimize.md) | Business intelligence tooling, allowing you to analyze bottlenecks and examine improvements in [processes](#process) automated with Camunda.                                                                                                                                                                                                                                                                                                                                                                                          |
-| Console                                              | Manage your [Orchestration Cluster](#orchestration-cluster) deployments, as follows:<p><ul><li><p>[Console SaaS](/components/console/introduction-to-console.md): Configure, deploy, and manage your [Orchestration Cluster](#orchestration-cluster), as well as your [connectors](#connector) and Optimize deployments.</p></li><li><p>[Console Self-Managed](/self-managed/console-deployment/overview.md): Monitor your [Orchestration Cluster](#orchestration-cluster) and [connector](#connector) deployments.</p></li></ul></p> |
+| Console                                              | Manage your [Orchestration Cluster](#orchestration-cluster) deployments, as follows:<p><ul><li><p>[Console SaaS](/components/console/introduction-to-console.md): Configure, deploy, and manage your [Orchestration cluster](#orchestration-cluster), as well as your [connectors](#connector) and Optimize deployments.</p></li><li><p>[Console Self-Managed](/self-managed/components/console/overview.md): Monitor your [Orchestration Cluster](#orchestration-cluster) and [connector](#connector) deployments.</p></li></ul></p> |
 | Modelers                                             | Allows business users and developers to design and implement [processes](#process), decisions, and [user task](#user-task) forms:<p><ul><li><p>Use [Desktop Modeler](/components/modeler/desktop-modeler/index.md) locally on Mac, Windows, and Linux.</p></li><li><p>Use the browser-based [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md) for process application management.</p></li></ul></p>                                                                                                                |
 | [Management Identity](#management-identity)          | Authentication and authorization for the components outside the [Orchestration Cluster](#orchestration-cluster) (Optimize, Console, and Web Modeler).                                                                                                                                                                                                                                                                                                                                                                                 |
 
@@ -392,20 +392,20 @@ SAP stands for Systems, Applications, and Products in Data Processing; it's an e
 
 The [log](#log) consists of one or more segments. Each segment is a file containing an ordered sequence records. Segments are deleted when the log is compacted.
 
-- [Resource planning](/self-managed/zeebe-deployment/operations/resource-planning.md#event-log)
+- [Resource planning](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md#event-log)
 
 ### Snapshot
 
 The state of all active [process instances](#process-instance), (these are also known as inflight process instances) are stored as records in an in-memory database called RocksDB. A snapshot represents a copy of all data within the in-memory database at any given point in time. Snapshots are binary images stored on disk and can be used to restore execution state of a [process](#process). The size of a snapshot is affected by the size of the data. Size of the data depends on several factors, including complexity of the [model](#bpmn-model), the size and quantity of variables in each process instance, and the total number of executing [process instances](#process-instance) in a [broker](#zeebe-broker).
 
-- [Resource planning](/self-managed/zeebe-deployment/operations/resource-planning.md#snapshots)
+- [Resource planning](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md#snapshots)
 
 ### Soft pause exporting
 
 Soft pause exporting is a feature that allows you to continue exporting records from [Zeebe](#zeebe), but without deleting those [records](#record) ([log](#log) compaction) from Zeebe. This is particularly useful during hot backups.
 
-- [Exporting API](/self-managed/zeebe-deployment/operations/management-api.md)
-- [Backup and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md)
+- [Exporting API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md)
+- [Backup and restore](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md)
 
 ### Subscription inbound connector
 
@@ -505,4 +505,4 @@ The Zeebe Exporter system provides an event stream of state changes within Zeebe
 
 The Zeebe Gateway is a component of the [Zeebe cluster](#zeebe-cluster); it can be considered the contact point for the Zeebe cluster that allows [Zeebe clients](#zeebe-client) to communicate with [Zeebe brokers](#zeebe-broker) inside a Zeebe cluster.
 
-- [Zeebe Gateway](self-managed/zeebe-deployment/zeebe-gateway/zeebe-gateway-overview.md)
+- [Zeebe Gateway](self-managed/components/orchestration-cluster/zeebe/zeebe-gateway/zeebe-gateway-overview.md)

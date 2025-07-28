@@ -89,4 +89,4 @@ Document backup and rollback procedures for each phase.
 2. Schedule the maintenance window and notify all stakeholders.
 3. Continue with the [Run the update](./run-update.md) guide.
 
-For more background, see the [update guide introduction](/self-managed/operational-guides/update-guide/introduction.md) and version-specific documentation.
+For more background, see the [update guide introduction](/self-managed/components/components-upgrade/introduction.md) and version-specific documentation.

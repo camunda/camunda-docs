@@ -91,7 +91,7 @@ Replace the `${BASE_URL}` based on the address of your cluster. See the [Context
 
 <TabItem value="self-managed">
 
-1. [Register an application in Identity](/self-managed/identity/application-user-group-role-management/applications.md) and assign permissions.
+1. [Register an application in Identity](/self-managed/components/management-identity/application-user-group-role-management/applications.md) and assign permissions.
 2. Use the credentials to request a token:
 
 ```shell

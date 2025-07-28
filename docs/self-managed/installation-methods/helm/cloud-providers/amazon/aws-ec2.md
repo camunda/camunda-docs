@@ -197,12 +197,10 @@ cd camunda-deployment-references-main/aws/ec2/scripts
 The script directory contains bash scripts that can be used to install and configure Camunda 8.
 
 2. Configure any script features using the following environment variables:
-
    - `CLOUDWATCH_ENABLED`: The default is false. If set to true will install the CloudWatch agent on each EC2 instance and export Camunda logs and Prometheus metrics to AWS CloudWatch.
-   - `SECURITY`: The default is false. If set to true will use self-signed certificates to secure cluster communication, based on the procedure described in the [documentation](/self-managed/zeebe-deployment/security/secure-cluster-communication.md). This requires a manual step as a prerequisite as described below in step 3.
+   - `SECURITY`: The default is false. If set to true will use self-signed certificates to secure cluster communication, based on the procedure described in the [documentation](/self-managed/components/orchestration-cluster/zeebe/security/secure-cluster-communication.md). This requires a manual step as a prerequisite as described below in step 3.
 
 3. Configure any variables in the `camunda-install.sh` script to overwrite the default for Camunda and Java versions:
-
    - `OPENJDK_VERSION`: The Temurin Java version.
    - `CAMUNDA_VERSION`: The Camunda 8 version.
    - `CAMUNDA_CONNECTORS_VERSION`: The Camunda 8 connectors version.
@@ -218,7 +216,7 @@ If `SECURITY` was enabled in step 2, execute the `generate-self-signed-cert-auth
 This certificate should be saved somewhere securely, as it will be required to upgrade or change configuations in an automated way. If the certificate is lost, recreate the certificate authority via the script and all manually created client certificates.
 
 :::note Self-signed certificates for testing
-Self-signed certificates are advocated for development and testing purposes. Check the [documentation](/self-managed/zeebe-deployment/security/secure-cluster-communication.md) on secure cluster communication to learn more about PEM certificates.
+Self-signed certificates are advocated for development and testing purposes. Check the [documentation](/self-managed/components/orchestration-cluster/zeebe/security/secure-cluster-communication.md) on secure cluster communication to learn more about PEM certificates.
 :::
 
 1. Execute the `all-in-one-install.sh` script.

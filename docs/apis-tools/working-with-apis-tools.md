@@ -7,8 +7,6 @@ description: "Learn more about the integration concepts involved in using the Ca
 
 import DocCardList from '@theme/DocCardList';
 
-# Overview: APIs and Clients in Camunda 8
-
 Camunda 8 provides a unified set of APIs and official clients to help you build, automate, and monitor process-driven applications. This page gives you an overview of the available APIs, when to use them, and how to get started with official Camunda clients and SDKs.
 
 Camunda 8 exposes several APIs for different integration and automation needs:

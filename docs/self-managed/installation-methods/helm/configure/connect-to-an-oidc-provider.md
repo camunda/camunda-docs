@@ -19,7 +19,7 @@ In this guide, we step through the configuration required to connect Camunda to 
   - Client ID
   - Client secrets
   - Audience
-- A [claim name and value](/self-managed/identity/miscellaneous/configuration-variables.md#oidc-configuration) to use for initial access.
+- A [claim name and value](/self-managed/components/management-identity/miscellaneous/configuration-variables.md#oidc-configuration) to use for initial access.
 
 :::note
 The steps below are a general approach for the Camunda components; it is important you reference the [component-specific

@@ -174,7 +174,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 Use these environment variables in the `kubectl` command to create the secret.
 
 :::note
-The `smtp-password` is required for Web Modeler to send emails, but Web Modeler is not enabled by default in this guide. If you plan to enable Web Modeler, ensure you configure the SMTP settings as described in the [Web Modeler configuration guide](/self-managed/modeler/web-modeler/configuration/configuration.md#smtp--email).
+The `smtp-password` is required for Web Modeler to send emails, but Web Modeler is not enabled by default in this guide. If you plan to enable Web Modeler, ensure you configure the SMTP settings as described in the [Web Modeler configuration guide](/self-managed/components/modeler/web-modeler/configuration/configuration.md#smtp--email).
 :::
 
 ```bash reference
@@ -213,7 +213,7 @@ First, we need an OAuth client to be able to connect to the Camunda 8 cluster.
 
 ### Generate an M2M token using Identity
 
-Generate an M2M token by following the steps outlined in the [Identity getting started guide](/self-managed/identity/identity-first-steps.md), along with the [incorporating applications documentation](/self-managed/identity/application-user-group-role-management/applications.md).
+Generate an M2M token by following the steps outlined in the [Identity getting started guide](/self-managed/components/management-identity/identity-first-steps.md), along with the [incorporating applications documentation](/self-managed/components/management-identity/application-user-group-role-management/applications.md).
 
 Below is a summary of the necessary instructions:
 
@@ -297,7 +297,7 @@ https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/generic
   </TabItem>
   <TabItem value="modeler" label="Desktop Modeler">
 
-Follow our existing [Modeler guide on deploying a diagram](/self-managed/modeler/desktop-modeler/deploy-to-self-managed.md). Below are the helper values required to be filled in Modeler:
+Follow our existing [Modeler guide on deploying a diagram](/self-managed/components/modeler/desktop-modeler/deploy-to-self-managed.md). Below are the helper values required to be filled in Modeler:
 
 This requires port-forwarding the Zeebe Gateway to be able to connect to the cluster:
 
