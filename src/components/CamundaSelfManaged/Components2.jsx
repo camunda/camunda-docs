@@ -31,7 +31,7 @@ const Components2 = () => {
         "Camunda Console (Self-Managed) provides a centralized interface for monitoring and managing your Camunda 8 deployments.",
       link: "/self-managed/console-deployment/overview",
     },
-        {
+    {
       title: "Identity",
       icon: ClusterManagementIcon,
       description:
