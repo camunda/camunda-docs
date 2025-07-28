@@ -2,6 +2,7 @@ import React from "react";
 import "./styles.css";
 import { activeVersionURLPath as linkBase } from "../Versions";
 import ClusterOrchestrationIcon from "./icons/cluster-orchestration.svg";
+import ClusterManagementIcon from "./icons/cluster-management.svg";
 
 const ComponentCard = ({ link, title, icon: Icon, description }) => {
   return (
@@ -37,6 +38,27 @@ const Components = () => {
       description:
         "Optimize offers business intelligence tooling for Camunda enterprise customers.",
       link: "/self-managed/optimize-deployment/install-and-start",
+    },
+        {
+      title: "Web Modeler",
+      icon: ClusterOrchestrationIcon,
+      description:
+        "Design and implement your first diagram using Modeler, a component of Camunda.",
+      link: "/self-managed/modeler/web-modeler/installation",
+    },
+    {
+      title: "Console",
+      icon: ClusterOrchestrationIcon,
+      description:
+        "Camunda Console (Self-Managed) provides a centralized interface for monitoring and managing your Camunda 8 deployments.",
+      link: "/self-managed/console-deployment/overview",
+    },
+    {
+      title: "Identity",
+      icon: ClusterOrchestrationIcon,
+      description:
+        "Use Identity to manage users, groups, roles, permissions, and applications within the Camunda 8 platform.",
+      link: "/self-managed/identity/what-is-identity",
     },
   ];
 
