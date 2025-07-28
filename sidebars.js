@@ -1609,7 +1609,6 @@ module.exports = {
                   },
                   items: [
                     "self-managed/components/management-identity/access-management/manage-permissions",
-                    "self-managed/components/management-identity/access-management/resource-authorizations",
                   ],
                 },
                 "self-managed/components/management-identity/managing-tenants",
@@ -1656,25 +1655,25 @@ module.exports = {
         },
         {
           type: "category",
-          label: "Components update",
+          label: "Components upgrade",
           link: {
             type: "doc",
-            id: "self-managed/operational-guides/update-guide/introduction",
+            id: "self-managed/components/components-upgrade/introduction",
           },
           items: [
-            "self-managed/operational-guides/update-guide/870-to-880",
-            "self-managed/operational-guides/update-guide/860-to-870",
-            "self-managed/operational-guides/update-guide/850-to-860",
-            "self-managed/operational-guides/update-guide/840-to-850",
-            "self-managed/operational-guides/update-guide/830-to-840",
+            "self-managed/components/components-upgrade/870-to-880",
+            "self-managed/components/components-upgrade/860-to-870",
+            "self-managed/components/components-upgrade/850-to-860",
+            "self-managed/components/components-upgrade/840-to-850",
+            "self-managed/components/components-upgrade/830-to-840",
             {
               Elasticsearch: [
-                "self-managed/operational-guides/update-guide/elasticsearch/7-to-8",
+                "self-managed/components/components-upgrade/elasticsearch/7-to-8",
               ],
             },
             {
               Keycloak: [
-                "self-managed/operational-guides/update-guide/keycloak/keycloak-update",
+                "self-managed/components/components-upgrade/keycloak/keycloak-update",
               ],
             },
           ],
@@ -1686,12 +1685,9 @@ module.exports = {
       label: "Upgrade to Camunda 8.8",
       link: {
         type: "doc",
-        id: "self-managed/update/index",
+        id: "self-managed/update/administrators/prepare-for-admin-update",
       },
-      items: [
-        "self-managed/update/administrators/prepare-for-admin-update",
-        "self-managed/update/administrators/run-admin-update",
-      ],
+      items: ["self-managed/update/administrators/run-admin-update"],
     },
   ],
 };
