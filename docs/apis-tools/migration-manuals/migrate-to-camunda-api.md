@@ -67,13 +67,24 @@ To successfully migrate from V1 component APIs to the V2 Orchestration cluster A
 
 ## Name changes and mappings
 
-The following conventions apply to all attributes:
+The following table shows key attribute name changes from V1 to V2:
 
-- `key` and `id` fields contain the entity as a prefix, for example, `userTaskKey`, `processDefinitionId`. This applies when referencing other resources like `formKey` in the user task entity, in the respective entities themselves like `userTaskKey` in the user task entity.
-- The full entity is the prefix to avoid confusion, for example `processDefinitionKey` instead of `processKey` (the latter could be interpreted as process instance or process definition).
-- Other attributes of entities themselves have no prefix to avoid clutter, for example version in the process definition entity. In other resources, they have to be referenced with a prefix, like `processDefinitionVersion` in the process instance entity.
-- The `bpmnProcessId` and `processName` are now called `processDefinitionId` to be easily relatable to the process definition entity, like the `processDefinitionKey`.
-- The `decisionKey` and `dmnDecisionKey` are now aligned to `decisionDefinitionKey`, the `decisionId` and `dmnDecisionId` to `decisionDefinitionId`. Similar to the `processDefinitionId` being related to the process definition, those attributes are now easily relatable to the decision definition entity.
+| **V1**           | **V2**                  | **Notes**                                                                   |
+| ---------------- | ----------------------- | --------------------------------------------------------------------------- |
+| `id`             | `[entity]Id`            | Keys now include entity prefix (e.g., `userTaskKey`, `processDefinitionId`) |
+| `key`            | `[entity]Key`           | Converted from `int64` to `string` with entity prefix                       |
+| `bpmnProcessId`  | `processDefinitionId`   | Unified naming convention                                                   |
+| `processName`    | `processDefinitionId`   | Unified naming convention                                                   |
+| `decisionKey`    | `decisionDefinitionKey` | Unified naming convention                                                   |
+| `dmnDecisionKey` | `decisionDefinitionKey` | Unified naming convention                                                   |
+| `decisionId`     | `decisionDefinitionId`  | Unified naming convention                                                   |
+| `dmnDecisionId`  | `decisionDefinitionId`  | Unified naming convention                                                   |
+
+**General naming conventions:**
+
+- Keys and IDs contain the full entity name as prefix to avoid confusion (e.g., `processDefinitionKey` instead of `processKey`)
+- Entity attributes have no prefix within their own entity, but use prefixes when referenced from other entities
+- All key fields are now `string` type instead of `int64`
 
 <!--- Insert Operate section with V1 endpoint and V2 endpoint to use with input/output adjustments --->
 
@@ -123,13 +134,14 @@ The following conventions apply to all attributes:
 
 <TabItem value='output-adjustments'>
 
-- Embedded forms are no longer returned as Camunda user tasks don't support them.
-- Renamed atttibutes
-  - `id` - Use `formKey` as this refers to the unique system identifier of the form.
-  - `title` - Use `formId` as this aligns better with the attribute defined in the form schema.
-- Removed attributes
-  - `isDeleted` - The endpoint does not serve this information anymore.
-  - `processDefinitionKey` - You can identify the related entity from the endpoint resource and the provided key parameter, the form response does not contain it additionally anymore.
+Embedded forms are no longer returned as Camunda user tasks don't support them.
+
+| **Field**              | **Change Type** | **Notes**                                                  |
+| ---------------------- | --------------- | ---------------------------------------------------------- |
+| `id`                   | Renamed         | Now `formKey` (unique system identifier of the form)       |
+| `title`                | Renamed         | Now `formId` (aligns with form schema attribute)           |
+| `isDeleted`            | Removed         | No longer provided by endpoint                             |
+| `processDefinitionKey` | Removed         | Can be identified from endpoint resource and key parameter |
 
 </TabItem>
 </Tabs>
@@ -195,23 +207,25 @@ This feature is not supported in V2 anymore. Use [setting variables][] as `local
 
 <TabItem value='input-adjustments'>
 
-- Request structure changes as outlined in [general changes][].
-- Renamed attributes
-  - `variableNames` - Use the `filter` object's `name`, either with a plain string for one exact match or with `{ "$in": [ "xyz", ... ]}`.
-- Removed attributes
-  - `includeVariables` - The endpoint returns all variables associated with the user task.
+Request structure changes as outlined in [general changes][].
+
+| **Field**          | **Change Type** | **Notes**                                                                   |
+| ------------------ | --------------- | --------------------------------------------------------------------------- |
+| `variableNames`    | Renamed         | Now `name` in `filter` object (plain string or `{ "$in": [ "xyz", ... ] }`) |
+| `includeVariables` | Removed         | Endpoint returns all variables associated with the user task                |
 
 </TabItem>
 
 <TabItem value='output-adjustments'>
 
-- Response structure changes as outlined in [general changes][].
-- Renamed attributes
-  - `id` - Use `variableKey` as this refers to the unique system identifier of the variable.
-  - `previewValue` - Use `value` as this always represents the variable value. This can be a truncated value due to size constraints.
-  - `isValueTruncated` - Use `isTruncated` as a replacement. If the value of `isTruncated` is `true` and you need the full value, please see the [get a variable](#get-a-variable) endpoint.
-- Removed attributes
-  - `draft` - Draft variables are not supported in V2 anymore, see also the [save draft variables](#save-task-draft-variables) endpoint for further details.
+Response structure changes as outlined in [general changes][].
+
+| **Field**          | **Change Type** | **Notes**                                                               |
+| ------------------ | --------------- | ----------------------------------------------------------------------- |
+| `id`               | Renamed         | Now `variableKey` (unique system identifier of the variable)            |
+| `previewValue`     | Renamed         | Now `value` (always represents variable value, may be truncated)        |
+| `isValueTruncated` | Renamed         | Now `isTruncated` (see get variable endpoint for full value if needed)  |
+| `draft`            | Removed         | Draft variables not supported in V2 (see save draft variables endpoint) |
 
 </TabItem>
 </Tabs>
@@ -250,46 +264,47 @@ This feature is not supported in V2 anymore. Use [setting variables][] as `local
 
 <TabItem value='input-adjustments'>
 
-- Request structure changes as outlined in [general changes][].
-  - The `pageSize` is now the `limit` in the `page` object.
-  - The `searchAfter` and `searchBefore` are in the `page` object as `after` and `before`.
-  - The `searchAfterOrEqual` and `searchBeforeOrEqual` options do not exist.
-- Renamed attributes
-  - `taskDefinitionId` - Use `elementId` as this refers to the user-provided identifier of the BPMN element that created the user task.
-  - `followUpDate` and `dueDate` filter options - Instead of `from` and `to`, use `$gte` and `$lte`. Additionally, you can use new comparison filter options.
-  - `priority` filter options - Filter object keys need a `$` prefix. Additionally, you can use new comparison filter options like `$neq`, `$exists`, and `$in`.
-  - `assigned` - Use `assignee` with `{ "$exists": false }`. Multiple filters can be combined in one attribute.
-  - `assignees` - Use `assignee` with `{ "$in": [ "xyz", ... ] }`. Multiple filters can be combined in one attribute.
-  - `candidateGroups` - Use `candidateGroup` with `{ "$in": [ "xyz", ... ] }`.
-  - `candidateUsers` - Use `candidateUser` with `{ "$in": [ "xyz", ... ] }`.
-  - `taskVariables` split up and renamed
-    - You can define `localVariables` and `processInstanceVariables`.
-    - Local variables match the defined `name` and `value` and exist in the local scope of the BPMN element instance that created the user task.
-    - Process instance variables match the defined `name` and `value` and exist anywhere in the process instance that the user task belongs to.
-  - `tenantIds` - Use `tenantId` with `{ "$in": [ "xyz", ... ] }`.
-- Removed attributes
-  - `includeVariables` - The endpoint does not return variables. Use the [search task variables](#search-task-variables) endpoint to retrieve them.
-  - `implementation` - The V2 API supports only Camunda user tasks.
+Request structure changes as outlined in [general changes][].
+
+| **Field**                 | **Change Type** | **Notes**                                                      |
+| ------------------------- | --------------- | -------------------------------------------------------------- |
+| `pageSize`                | Renamed         | Now `limit` in the `page` object                               |
+| `searchAfter`             | Renamed         | Now `after` in the `page` object                               |
+| `searchBefore`            | Renamed         | Now `before` in the `page` object                              |
+| `taskDefinitionId`        | Renamed         | Now `elementId` (user-provided identifier of the BPMN element) |
+| `assigned`                | Renamed         | Now `assignee` with `{ "$exists": false }`                     |
+| `assignees`               | Renamed         | Now `assignee` with `{ "$in": [ "xyz", ... ] }`                |
+| `candidateGroups`         | Renamed         | Now `candidateGroup` with `{ "$in": [ "xyz", ... ] }`          |
+| `candidateUsers`          | Renamed         | Now `candidateUser` with `{ "$in": [ "xyz", ... ] }`           |
+| `tenantIds`               | Renamed         | Now `tenantId` with `{ "$in": [ "xyz", ... ] }`                |
+| `followUpDate`, `dueDate` | Changed         | Use `$gte` and `$lte` instead of `from` and `to`               |
+| `priority`                | Changed         | Filter keys need `$` prefix, supports new comparison options   |
+| `taskVariables`           | Split           | Now `localVariables` and `processInstanceVariables`            |
+| `searchAfterOrEqual`      | Removed         | No longer supported                                            |
+| `searchBeforeOrEqual`     | Removed         | No longer supported                                            |
+| `includeVariables`        | Removed         | Use separate search task variables endpoint                    |
+| `implementation`          | Removed         | V2 API supports only Camunda user tasks                        |
 
 </TabItem>
 
 <TabItem value='output-adjustments'>
 
-- Response structure changes as outlined in [general changes][].
-  - `sortValues` do not exist per result item. Instead, the `page` object contains `startCursor` and `endCursor`, referring to the `sortValues` of the first and last item of the result set.
-- Renamed attributes
-  - `id` - Use `userTaskKey`, this still refers to the unique system identifier of the user task.
-  - `formKey` - This now is a unique system identifier, referencing a linked Camunda form in a specific version. Previously, this encoded an embedded form, a linked Camunda form, or an external form reference.
-  - `taskDefinitionId` - Use `elementId`, this still refers to the user-provided identifier of the BPMN element that created the user task.
-  - `taskState` - Use `state`, this still refers to the user task's current state.
-  - `processName` - Use `processDefinitionId`, this still refers to the user-provided identifier of the process.
-- Removed attributes
-  - `isFirst` - This used to identify if the task was the first in the process.
-  - `variables` - Use the [search user task variables endpoint](#search-task-variables) to retrieve variables for a user task.
-  - `implementation` - The V2 API supports only Camunda user tasks.
-  - `isFormEmbedded` - The V2 API does not support embedded forms anymore.
-  - `formVersion` - Use the [get user task form endpoint][] to retrieve form data bound to this user task. The `formKey` references the form of a specific `formId`, linked to this user task in a specific version.
-  - `formId` - Use the [get user task form endpoint][] to retrieve form data bound to this user task. The `formKey` references the form of a specific `formId`, linked to this user task in a specific version.
+Response structure changes as outlined in [general changes][].
+
+| **Field**          | **Change Type** | **Notes**                                                                            |
+| ------------------ | --------------- | ------------------------------------------------------------------------------------ |
+| `sortValues`       | Removed         | No longer exist per result item - use `startCursor` and `endCursor` in `page` object |
+| `id`               | Renamed         | Now `userTaskKey` (unique system identifier of the user task)                        |
+| `taskDefinitionId` | Renamed         | Now `elementId` (user-provided identifier of the BPMN element)                       |
+| `taskState`        | Renamed         | Now `state` (user task's current state)                                              |
+| `processName`      | Renamed         | Now `processDefinitionId` (user-provided identifier of the process)                  |
+| `formKey`          | Changed         | Now unique system identifier referencing linked Camunda form in specific version     |
+| `isFirst`          | Removed         | No longer identifies if task was first in process                                    |
+| `variables`        | Removed         | Use search user task variables endpoint                                              |
+| `implementation`   | Removed         | V2 API supports only Camunda user tasks                                              |
+| `isFormEmbedded`   | Removed         | V2 API does not support embedded forms                                               |
+| `formVersion`      | Removed         | Use get user task form endpoint                                                      |
+| `formId`           | Removed         | Use get user task form endpoint                                                      |
 
 </TabItem>
 
@@ -565,33 +580,35 @@ This feature is not supported in V2 anymore. Use [setting variables][] as `local
 
 <TabItem value='input-adjustments'>
 
-- Request structure changes as outlined in [general changes][].
-  - `searchAfter` is now the `after` in the `page` object.
-  - `size` is now the `limit` in the `page` object.
-- Renamed attributes in the `filter` object
-  - `id` - Use `decisionDefinitionKey` instead.
-  - `key` of type `int64` - Use `decisionDefinitionKey` of type `string`.
-  - `decisionId` - Use `decisionDefinitionId` instead.
-  - `decisionRequirementsKey` of type `int64` - This is now of type `string`.
-- Removed attributes from the `filter` object
-  - `decisionRequirementsName` - Can no longer be used for filtering.
-  - `decisionRequirementsVersion` - Can no longer be used for filtering.
+Request structure changes as outlined in [general changes][].
+
+| **Field**                     | **Change Type** | **Notes**                                                      |
+| ----------------------------- | --------------- | -------------------------------------------------------------- |
+| `searchAfter`                 | Renamed         | Now `after` in the `page` object                               |
+| `size`                        | Renamed         | Now `limit` in the `page` object                               |
+| `id`                          | Renamed         | Now `decisionDefinitionKey` in filter object                   |
+| `key`                         | Renamed         | Now `decisionDefinitionKey` (changed from `int64` to `string`) |
+| `decisionId`                  | Renamed         | Now `decisionDefinitionId` in filter object                    |
+| `decisionRequirementsKey`     | Changed         | Now `string` type instead of `int64`                           |
+| `decisionRequirementsName`    | Removed         | Can no longer be used for filtering                            |
+| `decisionRequirementsVersion` | Removed         | Can no longer be used for filtering                            |
 
 </TabItem>
 
 <TabItem value='output-adjustments'>
 
-- Response structure changes as outlined in [general changes][].
-  - `total` is moved under the `page` object as `totalItems`.
-  - `sortValues` - Use `endCursor` in the `page` object instead.
-- Renamed attributes in the objects of the `items` array
-  - `id` - Use `decisionDefinitionKey` instead.
-  - `key` of type `int64` - Use `decisionDefinitionKey` of type `string`.
-  - `decisionId` - Use `decisionDefinitionId` instead.
-  - `decisionRequirementsKey` of type `int64` - This is now of type `string`.
-- Removed attributes in the objects of the `items` array
-  - `decisionRequirementsName` - Can be fetched using the **get decision requirements** endpoint with `decisionRequirementsKey`.
-  - `decisionRequirementsVersion` - Can be fetched using the **get decision requirements** endpoint with `decisionRequirementsKey`.
+Response structure changes as outlined in [general changes][].
+
+| **Field**                     | **Change Type** | **Notes**                                                      |
+| ----------------------------- | --------------- | -------------------------------------------------------------- |
+| `total`                       | Moved           | Now `totalItems` in `page` object                              |
+| `sortValues`                  | Replaced        | Now use `endCursor` in `page` object                           |
+| `id`                          | Renamed         | Now `decisionDefinitionKey`                                    |
+| `key`                         | Renamed         | Now `decisionDefinitionKey` (changed from `int64` to `string`) |
+| `decisionId`                  | Renamed         | Now `decisionDefinitionId`                                     |
+| `decisionRequirementsKey`     | Changed         | Now `string` type instead of `int64`                           |
+| `decisionRequirementsName`    | Removed         | Fetch using get decision requirements endpoint                 |
+| `decisionRequirementsVersion` | Removed         | Fetch using get decision requirements endpoint                 |
 
 </TabItem>
 </Tabs>
@@ -675,42 +692,44 @@ This feature is not supported in V2 anymore. Use [setting variables][] as `local
 
 <TabItem value='input-adjustments'>
 
-- Request structure changes as outlined in [general changes][].
-  - `searchAfter` is now the `after` in the `page` object.
-  - `size` is now the `limit` in the `page` object.
-- Renamed attributes in the `filter` object
-  - `id` - Use `decisionInstanceId` instead.
-  - `key` of type `int64` - Use `decisionInstanceKey` of type `string`.
-  - `processDefinitionKey` of type `int64` - This is now of type `string`.
-  - `processInstanceKey` of type `int64` - This is now of type `string`.
-  - `decisionId` - Use `decisionDefinitionId` instead.
-  - `decisionName` - Use `decisionDefinitionName` instead.
-  - `decisionVersion` - Use `decisionDefinitionVersion` instead.
-  - `decisionType` - Use `decisionDefinitionType` instead.
-- Removed attributes in the `filter` object
-  - `result` - Can no longer be used for filtering.
-  - `evaluatedInputs` - Can no longer be used for filtering.
-  - `evaluatedOutputs` - Can no longer be used for filtering.
+Request structure changes as outlined in [general changes][].
+
+| **Field**              | **Change Type** | **Notes**                                                    |
+| ---------------------- | --------------- | ------------------------------------------------------------ |
+| `searchAfter`          | Renamed         | Now `after` in the `page` object                             |
+| `size`                 | Renamed         | Now `limit` in the `page` object                             |
+| `id`                   | Renamed         | Now `decisionInstanceId` in filter object                    |
+| `key`                  | Renamed         | Now `decisionInstanceKey` (changed from `int64` to `string`) |
+| `processDefinitionKey` | Changed         | Now `string` type instead of `int64`                         |
+| `processInstanceKey`   | Changed         | Now `string` type instead of `int64`                         |
+| `decisionId`           | Renamed         | Now `decisionDefinitionId`                                   |
+| `decisionName`         | Renamed         | Now `decisionDefinitionName`                                 |
+| `decisionVersion`      | Renamed         | Now `decisionDefinitionVersion`                              |
+| `decisionType`         | Renamed         | Now `decisionDefinitionType`                                 |
+| `result`               | Removed         | Can no longer be used for filtering                          |
+| `evaluatedInputs`      | Removed         | Can no longer be used for filtering                          |
+| `evaluatedOutputs`     | Removed         | Can no longer be used for filtering                          |
 
 </TabItem>
 
 <TabItem value='output-adjustments'>
 
-- Response structure changes as outlined in [general changes][].
-  - `total` is moved under the `page` object as `totalItems`.
-  - `sortValues` - Use `endCursor` in the `page` object instead.
-- Renamed attributes in the objects of the `items` array
-  - `id` - Use `decisionInstanceId` instead.
-  - `key` of type `int64` - Use `decisionInstanceKey` of type `string`.
-  - `processDefinitionKey` of type `int64` - This is now of type `string`.
-  - `processInstanceKey` of type `int64` - This is now of type `string`.
-  - `decisionId` - Use `decisionDefinitionId` instead.
-  - `decisionName` - Use `decisionDefinitionName` instead.
-  - `decisionVersion` - Use `decisionDefinitionVersion` instead.
-  - `decisionType` - Use `decisionDefinitionType` instead.
-- Removed attributes in the objects of the `items` array
-  - `evaluatedInputs` - The endpoint does not serve this information anymore.
-  - `evaluatedOutputs` - The endpoint does not serve this information anymore.
+Response structure changes as outlined in [general changes][].
+
+| **Field**              | **Change Type** | **Notes**                                                    |
+| ---------------------- | --------------- | ------------------------------------------------------------ |
+| `total`                | Moved           | Now `totalItems` in `page` object                            |
+| `sortValues`           | Replaced        | Now use `endCursor` in `page` object                         |
+| `id`                   | Renamed         | Now `decisionInstanceId`                                     |
+| `key`                  | Renamed         | Now `decisionInstanceKey` (changed from `int64` to `string`) |
+| `processDefinitionKey` | Changed         | Now `string` type instead of `int64`                         |
+| `processInstanceKey`   | Changed         | Now `string` type instead of `int64`                         |
+| `decisionId`           | Renamed         | Now `decisionDefinitionId`                                   |
+| `decisionName`         | Renamed         | Now `decisionDefinitionName`                                 |
+| `decisionVersion`      | Renamed         | Now `decisionDefinitionVersion`                              |
+| `decisionType`         | Renamed         | Now `decisionDefinitionType`                                 |
+| `evaluatedInputs`      | Removed         | No longer provided by endpoint                               |
+| `evaluatedOutputs`     | Removed         | No longer provided by endpoint                               |
 
 </TabItem>
 </Tabs>
@@ -755,20 +774,20 @@ This feature is not supported in V2 anymore. Use [setting variables][] as `local
 
 <TabItem value='output-adjustments'>
 
-- The adjustments from [search decision instances](#search-decision-instances) apply, with the following exceptions:
-  - Response structure changes.
-  - `evaluatedInputs` - Present in the response payload.
-  - `evaluatedOutputs` - Present in the response payload and moved under `matchedRules`.
-- Renamed attributes in the `evaluatedInputs` object
-  - `id` - Use `inputId` instead.
-  - `name` - Use `inputName` instead.
-  - `value` - Use `inputValue` instead.
-- Renamed attributes in the `evaluatedOutputs` object
-  - `id` - Use `outputId` instead.
-  - `name` - Use `outputName` instead.
-  - `value` - Use `outputValue` instead.
-  - `ruleId` - Moved under the objects of the `matchedRules` array.
-  - `ruleIndex` - Moved under the objects of the `matchedRules` array.
+The adjustments from [search decision instances](#search-decision-instances) apply, with the following exceptions: `evaluatedInputs` and `evaluatedOutputs` are present in the response payload (with `evaluatedOutputs` moved under `matchedRules`).
+
+| **Field**                   | **Change Type** | **Notes**                              |
+| --------------------------- | --------------- | -------------------------------------- |
+| **evaluatedInputs object**  |                 |                                        |
+| `id`                        | Renamed         | Now `inputId`                          |
+| `name`                      | Renamed         | Now `inputName`                        |
+| `value`                     | Renamed         | Now `inputValue`                       |
+| **evaluatedOutputs object** |                 |                                        |
+| `id`                        | Renamed         | Now `outputId`                         |
+| `name`                      | Renamed         | Now `outputName`                       |
+| `value`                     | Renamed         | Now `outputValue`                      |
+| `ruleId`                    | Moved           | Now under `matchedRules` array objects |
+| `ruleIndex`                 | Moved           | Now under `matchedRules` array objects |
 
 </TabItem>
 </Tabs>
@@ -807,25 +826,29 @@ This feature is not supported in V2 anymore. Use [setting variables][] as `local
 
 <TabItem value='input-adjustments'>
 
-- Request structure changes as outlined in [general changes][].
-  - `searchAfter` is now the `after` in the `page` object.
-  - `size` is now the `limit` in the `page` object.
-- Renamed attributes in the `filter` object
-  - `id` - Use `decisionRequirementsKey` instead.
-  - `key` of type `int64` - Use `decisionRequirementsKey` of type `string`.
-  - `name` - Use `decisionRequirementsName` instead.
+Request structure changes as outlined in [general changes][].
+
+| **Field**     | **Change Type** | **Notes**                                                        |
+| ------------- | --------------- | ---------------------------------------------------------------- |
+| `searchAfter` | Renamed         | Now `after` in the `page` object                                 |
+| `size`        | Renamed         | Now `limit` in the `page` object                                 |
+| `id`          | Renamed         | Now `decisionRequirementsKey` in filter object                   |
+| `key`         | Renamed         | Now `decisionRequirementsKey` (changed from `int64` to `string`) |
+| `name`        | Renamed         | Now `decisionRequirementsName`                                   |
 
 </TabItem>
 
 <TabItem value='output-adjustments'>
 
-- Response structure changes as outlined in [general changes][].
-  - `total` is moved under the `page` object as `totalItems`.
-  - `sortValues` - Use `endCursor` in the `page` object instead.
-- Renamed attributes in the objects of the `items` array
-  - `id` - Use `decisionRequirementsKey` instead.
-  - `key` of type `int64` - Use `decisionRequirementsKey` of type `string`.
-  - `name` - Use `decisionRequirementsName` instead.
+Response structure changes as outlined in [general changes][].
+
+| **Field**    | **Change Type** | **Notes**                                                        |
+| ------------ | --------------- | ---------------------------------------------------------------- |
+| `total`      | Moved           | Now `totalItems` in `page` object                                |
+| `sortValues` | Replaced        | Now use `endCursor` in `page` object                             |
+| `id`         | Renamed         | Now `decisionRequirementsKey`                                    |
+| `key`        | Renamed         | Now `decisionRequirementsKey` (changed from `int64` to `string`) |
+| `name`       | Renamed         | Now `decisionRequirementsName`                                   |
 
 </TabItem>
 </Tabs>
@@ -956,27 +979,31 @@ This feature is not supported in V2 anymore. Use [setting variables][] as `local
 
 <TabItem value='input-adjustments'>
 
-- Response structure changes as outlined in [general changes][].
-  - `searchAfter` is now the `after` in the `page` object.
-  - `size` is now the `limit` in the `page` object.
-- Renamed attributes in the `filter` object
-  - `key` of type `int64` - Use `variableKey` of type `string`.
-  - `processInstanceKey` of type `int64` - This is now of type `string`.
-  - `scopeKey` of type `int64` - This is now of type `string`.
-  - `truncated` - Use `isTruncated` instead.
+Request structure changes as outlined in [general changes][].
+
+| **Field**            | **Change Type** | **Notes**                                            |
+| -------------------- | --------------- | ---------------------------------------------------- |
+| `searchAfter`        | Renamed         | Now `after` in the `page` object                     |
+| `size`               | Renamed         | Now `limit` in the `page` object                     |
+| `key`                | Renamed         | Now `variableKey` (changed from `int64` to `string`) |
+| `processInstanceKey` | Changed         | Now `string` type instead of `int64`                 |
+| `scopeKey`           | Changed         | Now `string` type instead of `int64`                 |
+| `truncated`          | Renamed         | Now `isTruncated`                                    |
 
 </TabItem>
 
 <TabItem value='output-adjustments'>
 
-- Response structure changes as outlined in [general changes][].
-  - `total` is moved under the `page` object as `totalItems`.
-  - `sortValues` - Use `endCursor` in the `page` object instead.
-- Renamed attributes in the objects of the `items` array
-  - `key` of type `int64` - Use `variableKey` of type `string`.
-  - `processInstanceKey` of type `int64` - This is now of type `string`.
-  - `scopeKey` of type `int64` - This is now of type `string`.
-  - `truncated` - Use `isTruncated` instead.
+Response structure changes as outlined in [general changes][].
+
+| **Field**            | **Change Type** | **Notes**                                            |
+| -------------------- | --------------- | ---------------------------------------------------- |
+| `total`              | Moved           | Now `totalItems` in `page` object                    |
+| `sortValues`         | Replaced        | Now use `endCursor` in `page` object                 |
+| `key`                | Renamed         | Now `variableKey` (changed from `int64` to `string`) |
+| `processInstanceKey` | Changed         | Now `string` type instead of `int64`                 |
+| `scopeKey`           | Changed         | Now `string` type instead of `int64`                 |
+| `truncated`          | Renamed         | Now `isTruncated`                                    |
 
 </TabItem>
 </Tabs>
@@ -1072,23 +1099,27 @@ This feature is not supported in V2 anymore. Use [setting variables][] as `local
 
 <TabItem value='input-adjustments'>
 
-- Request structure changes as outlined in [general changes][].
-  - `searchAfter` is now the `after` in the `page` object.
-  - `size` is now the `limit` in the `page` object.
-- Renamed attributes in the `filter` object
-  - `key` of type `int64` - Use `processDefinitionKey` of type `string` instead.
-  - `bpmnProcessId` - Use `processDefinitionId` instead.
+Request structure changes as outlined in [general changes][].
+
+| **Field**       | **Change Type** | **Notes**                                                     |
+| --------------- | --------------- | ------------------------------------------------------------- |
+| `searchAfter`   | Renamed         | Now `after` in the `page` object                              |
+| `size`          | Renamed         | Now `limit` in the `page` object                              |
+| `key`           | Renamed         | Now `processDefinitionKey` (changed from `int64` to `string`) |
+| `bpmnProcessId` | Renamed         | Now `processDefinitionId`                                     |
 
 </TabItem>
 
 <TabItem value='output-adjustments'>
 
-- Response structure changes as outlined in [general changes][].
-  - `total` is moved under the `page` object as `totalItems`.
-  - `sortValues` - Use `endCursor` in the `page` object instead.
-- Renamed attributes in the objects of the `items` array
-  - `key` of type `int64` - Use `processDefinitionKey` of type `string` instead.
-  - `bpmnProcessId` - Use `processDefinitionId` instead.
+Response structure changes as outlined in [general changes][].
+
+| **Field**       | **Change Type** | **Notes**                                                     |
+| --------------- | --------------- | ------------------------------------------------------------- |
+| `total`         | Moved           | Now `totalItems` in `page` object                             |
+| `sortValues`    | Replaced        | Now use `endCursor` in `page` object                          |
+| `key`           | Renamed         | Now `processDefinitionKey` (changed from `int64` to `string`) |
+| `bpmnProcessId` | Renamed         | Now `processDefinitionId`                                     |
 
 </TabItem>
 </Tabs>
@@ -1219,41 +1250,43 @@ This feature is not supported in V2 anymore. Use [setting variables][] as `local
 
 <TabItem value='input-adjustments'>
 
-- Request structure changes as outlined in [general changes][].
-  - `searchAfter` is now the `after` in the `page` object.
-  - `size` is now the `limit` in the `page` object.
-- Renamed attributes in the `filter` object
-  - `key` of type `int64` - Use `processInstanceKey` of type `string` instead.
-  - `processVersion` - Use `processDefinitionVersion` instead.
-  - `processVersionTag` - Use `processDefinitionVersionTag` instead.
-  - `bpmnProcessId` - Use `processDefinitionId` instead.
-  - `parentFlowNodeInstanceKey` - Use `parentElementInstanceKey` of type `string` instead.
-  - `parentKey` - Use `parentProcessInstanceKey` of type `string` instead.
-  - `state` - Use value `TERMINATED` instead of value `CANCELED`.
-  - `incident` - Use `hasIncident` instead.
-- Adjusted attributes in the `filter` object
-  - `parentProcessInstanceKey` - Type changed from `int64` to `string`.
-  - `processDefinitionKey` - Type changed from `int64` to `string`.
+Request structure changes as outlined in [general changes][].
+
+| **Field**                   | **Change Type** | **Notes**                                                   |
+| --------------------------- | --------------- | ----------------------------------------------------------- |
+| `searchAfter`               | Renamed         | Now `after` in the `page` object                            |
+| `size`                      | Renamed         | Now `limit` in the `page` object                            |
+| `key`                       | Renamed         | Now `processInstanceKey` (changed from `int64` to `string`) |
+| `processVersion`            | Renamed         | Now `processDefinitionVersion`                              |
+| `processVersionTag`         | Renamed         | Now `processDefinitionVersionTag`                           |
+| `bpmnProcessId`             | Renamed         | Now `processDefinitionId`                                   |
+| `parentFlowNodeInstanceKey` | Renamed         | Now `parentElementInstanceKey` (changed to `string`)        |
+| `parentKey`                 | Renamed         | Now `parentProcessInstanceKey` (changed to `string`)        |
+| `state`                     | Changed         | Use `TERMINATED` instead of `CANCELED`                      |
+| `incident`                  | Renamed         | Now `hasIncident`                                           |
+| `parentProcessInstanceKey`  | Changed         | Now `string` type instead of `int64`                        |
+| `processDefinitionKey`      | Changed         | Now `string` type instead of `int64`                        |
 
 </TabItem>
 
 <TabItem value='output-adjustments'>
 
-- Response structure changes as outlined in [general changes][].
-  - `total` is moved under the `page` object as `totalItems`.
-  - `sortValues` - Use `endCursor` in the `page` object instead.
-- Renamed attributes in the objects of the `items` array
-  - `key` of type `int64` - Use `processInstanceKey` of type `string` instead.
-  - `processVersion` - Use `processDefinitionVersion` instead.
-  - `processVersionTag` - Use `processDefinitionVersionTag` instead.
-  - `bpmnProcessId` - Use `processDefinitionId` instead.
-  - `parentFlowNodeInstanceKey` - Use `parentElementInstanceKey` of type `string` instead.
-  - `parentKey` - Use `parentProcessInstanceKey` of type `string` instead.
-  - `state` - Use value `TERMINATED` instead of value `CANCELED`.
-  - `incident` - Use `hasIncident` instead.
-- Adjusted attributes in the objects of the `items` array
-  - `parentProcessInstanceKey` - Type changed from `int64` to `string`.
-  - `processDefinitionKey` - Type changed from `int64` to `string`.
+Response structure changes as outlined in [general changes][].
+
+| **Field**                   | **Change Type** | **Notes**                                                   |
+| --------------------------- | --------------- | ----------------------------------------------------------- |
+| `total`                     | Moved           | Now `totalItems` in `page` object                           |
+| `sortValues`                | Replaced        | Now use `endCursor` in `page` object                        |
+| `key`                       | Renamed         | Now `processInstanceKey` (changed from `int64` to `string`) |
+| `processVersion`            | Renamed         | Now `processDefinitionVersion`                              |
+| `processVersionTag`         | Renamed         | Now `processDefinitionVersionTag`                           |
+| `bpmnProcessId`             | Renamed         | Now `processDefinitionId`                                   |
+| `parentFlowNodeInstanceKey` | Renamed         | Now `parentElementInstanceKey` (changed to `string`)        |
+| `parentKey`                 | Renamed         | Now `parentProcessInstanceKey` (changed to `string`)        |
+| `state`                     | Changed         | Use `TERMINATED` instead of `CANCELED`                      |
+| `incident`                  | Renamed         | Now `hasIncident`                                           |
+| `parentProcessInstanceKey`  | Changed         | Now `string` type instead of `int64`                        |
+| `processDefinitionKey`      | Changed         | Now `string` type instead of `int64`                        |
 
 </TabItem>
 </Tabs>
@@ -1368,10 +1401,12 @@ This feature is not yet available in V2. It will be added in a future version.
 
 <TabItem value='output-adjustments'>
 
-- Response structure changes
-  - response items are moved under the `items` array.
-- Renamed attributes in the objects of the `items` array
-  - `activityId` - Use `elementId` instead.
+Response structure changes.
+
+| **Field**      | **Change Type** | **Notes**               |
+| -------------- | --------------- | ----------------------- |
+| Response items | Moved           | Now under `items` array |
+| `activityId`   | Renamed         | Now `elementId`         |
 
 </TabItem>
 </Tabs>
@@ -1416,10 +1451,13 @@ This feature is not yet available in V2. It will be added in a future version.
 
 <TabItem value='output-adjustments'>
 
-- Response structure changes
-  - response items are of type `object`, instead of type `string`.
-  - response items are moved under the `items` array.
-- Collect the `sequenceFlowId` of type `string` of all objects in the array to recreate the V1 result.
+Response structure changes.
+
+| **Field**      | **Change Type** | **Notes**                                                                        |
+| -------------- | --------------- | -------------------------------------------------------------------------------- |
+| Response items | Changed         | Now type `object` instead of `string`                                            |
+| Response items | Moved           | Now under `items` array                                                          |
+| V1 recreation  | Info            | Collect `sequenceFlowId` of type `string` from all objects to recreate V1 result |
 
 </TabItem>
 </Tabs>
@@ -1460,38 +1498,39 @@ This feature is not yet available in V2. It will be added in a future version.
 
 <TabItem value='input-adjustments'>
 
-- Request structure changes as outlined in [general changes][].
-  - `searchAfter` is now the `after` in the `page` object.
-  - `size` is now the `limit` in the `page` object.
-- Renamed attributes in the `filter` object
-  - `key` of type `int64` - Use `elementInstanceKey` of type `string` instead.
-  - `flowNodeId` - Use `elementId` instead.
-  - `flowNodeName` - Use `elementName` instead.
-  - `incident` - Use `hasIncident` instead.
-- Adjusted attributes in the `filter` object
-  - `processInstanceKey` - Type changed from `int64` to `string`.
-  - `processDefinitionKey` - Type changed from `int64` to `string`.
-  - `incidentKey` - Type changed from `int64` to `string`.
-- Removed attributes from the `filter` object
-  - `startDate` - Can no longer be used for filtering.
-  - `endDate` - Can no longer be used for filtering.
+Request structure changes as outlined in [general changes][].
+
+| **Field**              | **Change Type** | **Notes**                                                   |
+| ---------------------- | --------------- | ----------------------------------------------------------- |
+| `searchAfter`          | Renamed         | Now `after` in the `page` object                            |
+| `size`                 | Renamed         | Now `limit` in the `page` object                            |
+| `key`                  | Renamed         | Now `elementInstanceKey` (changed from `int64` to `string`) |
+| `flowNodeId`           | Renamed         | Now `elementId`                                             |
+| `flowNodeName`         | Renamed         | Now `elementName`                                           |
+| `incident`             | Renamed         | Now `hasIncident`                                           |
+| `processInstanceKey`   | Changed         | Now `string` type instead of `int64`                        |
+| `processDefinitionKey` | Changed         | Now `string` type instead of `int64`                        |
+| `incidentKey`          | Changed         | Now `string` type instead of `int64`                        |
+| `startDate`            | Removed         | Can no longer be used for filtering                         |
+| `endDate`              | Removed         | Can no longer be used for filtering                         |
 
 </TabItem>
 
 <TabItem value='output-adjustments'>
 
-- Response structure changes as outlined in [general changes][].
-  - `total` is moved under the `page` object as `totalItems`.
-  - `sortValues` - Use `endCursor` in the `page` object instead.
-- Renamed attributes in the objects of the `items` array
-  - `key` of type `int64` - Use `elementInstanceKey` of type `string` instead.
-  - `flowNodeId` - Use `elementId` instead.
-  - `flowNodeName` - Use `elementName` instead.
-  - `incident` - Use `hasIncident` instead.
-- Adjusted attributes in the objects of the `items` array
-  - `processInstanceKey` - Type changed from `int64` to `string`.
-  - `processDefinitionKey` - Type changed from `int64` to `string`.
-  - `incidentKey` - Type changed from `int64` to `string`.
+Response structure changes as outlined in [general changes][].
+
+| **Field**              | **Change Type** | **Notes**                                                   |
+| ---------------------- | --------------- | ----------------------------------------------------------- |
+| `total`                | Moved           | Now `totalItems` in `page` object                           |
+| `sortValues`           | Replaced        | Now use `endCursor` in `page` object                        |
+| `key`                  | Renamed         | Now `elementInstanceKey` (changed from `int64` to `string`) |
+| `flowNodeId`           | Renamed         | Now `elementId`                                             |
+| `flowNodeName`         | Renamed         | Now `elementName`                                           |
+| `incident`             | Renamed         | Now `hasIncident`                                           |
+| `processInstanceKey`   | Changed         | Now `string` type instead of `int64`                        |
+| `processDefinitionKey` | Changed         | Now `string` type instead of `int64`                        |
+| `incidentKey`          | Changed         | Now `string` type instead of `int64`                        |
 
 </TabItem>
 </Tabs>
@@ -1577,33 +1616,35 @@ This feature is not yet available in V2. It will be added in a future version.
 
 <TabItem value='input-adjustments'>
 
-- Request structure changes as outlined in [general changes][].
-  - `searchAfter` is now the `after` in the `page` object.
-  - `size` is now the `limit` in the `page` object.
-- Renamed attributes in the `filter` object
-  - `key` of type `int64` - Use `incidentKey` of type `string` instead.
-  - `type` - Use `errorType` instead.
-  - `message` - Use `errorMessage` instead.
-- Adjusted attributes in the `filter` object
-  - `processInstanceKey` - Type changed from `int64` to `string`.
-  - `processDefinitionKey` - Type changed from `int64` to `string`.
-  - `jobKey` - Type changed from `int64` to `string`.
+Request structure changes as outlined in [general changes][].
+
+| **Field**              | **Change Type** | **Notes**                                            |
+| ---------------------- | --------------- | ---------------------------------------------------- |
+| `searchAfter`          | Renamed         | Now `after` in the `page` object                     |
+| `size`                 | Renamed         | Now `limit` in the `page` object                     |
+| `key`                  | Renamed         | Now `incidentKey` (changed from `int64` to `string`) |
+| `type`                 | Renamed         | Now `errorType`                                      |
+| `message`              | Renamed         | Now `errorMessage`                                   |
+| `processInstanceKey`   | Changed         | Now `string` type instead of `int64`                 |
+| `processDefinitionKey` | Changed         | Now `string` type instead of `int64`                 |
+| `jobKey`               | Changed         | Now `string` type instead of `int64`                 |
 
 </TabItem>
 
 <TabItem value='output-adjustments'>
 
-- Response structure changes as outlined in [general changes][].
-  - `total` is moved under the `page` object as `totalItems`.
-  - `sortValues` - Use `endCursor` in the `page` object instead.
-- Renamed attributes in the objects of the `items` array
-  - `key` of type `int64` - Use `incidentKey` of type `string` instead.
-  - `type` - Use `errorType` instead.
-  - `message` - Use `errorMessage` instead.
-- Adjusted attributes in the objects of the `items` array
-  - `processInstanceKey` - Type changed from `int64` to `string`.
-  - `processDefinitionKey` - Type changed from `int64` to `string`.
-  - `jobKey` - Type changed from `int64` to `string`.
+Response structure changes as outlined in [general changes][].
+
+| **Field**              | **Change Type** | **Notes**                                            |
+| ---------------------- | --------------- | ---------------------------------------------------- |
+| `total`                | Moved           | Now `totalItems` in `page` object                    |
+| `sortValues`           | Replaced        | Now use `endCursor` in `page` object                 |
+| `key`                  | Renamed         | Now `incidentKey` (changed from `int64` to `string`) |
+| `type`                 | Renamed         | Now `errorType`                                      |
+| `message`              | Renamed         | Now `errorMessage`                                   |
+| `processInstanceKey`   | Changed         | Now `string` type instead of `int64`                 |
+| `processDefinitionKey` | Changed         | Now `string` type instead of `int64`                 |
+| `jobKey`               | Changed         | Now `string` type instead of `int64`                 |
 
 </TabItem>
 </Tabs>
