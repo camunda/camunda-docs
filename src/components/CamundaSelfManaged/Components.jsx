@@ -22,42 +22,42 @@ const Components = () => {
       icon: ClusterOrchestrationIcon,
       description:
         "The Orchestration Cluster is the core component of Camunda 8, powering the automation and orchestration of processes.",
-      link: "/self-managed/orchestration-cluster/",
+      link: "/self-managed/components/orchestration-cluster/",
     },
     {
       title: "Connectors",
       icon: ClusterOrchestrationIcon,
       description:
         "Camunda connectors are reusable building blocks you can use to easily connect processes to external systems, applications, and data.",
-      link: "/self-managed/connectors-deployment/install-and-start",
+      link: "/self-managed/components/connectors/overview",
     },
     {
       title: "Optimize",
       icon: ClusterOrchestrationIcon,
       description:
         "Optimize offers business intelligence tooling for Camunda enterprise customers.",
-      link: "/self-managed/optimize-deployment/install-and-start",
+      link: "/self-managed/components/optimize/overview",
     },
     {
       title: "Web Modeler",
       icon: ClusterOrchestrationIcon,
       description:
         "Design and implement your first diagram using Modeler, a component of Camunda.",
-      link: "/self-managed/modeler/web-modeler/installation",
+      link: "/self-managed/components/modeler/web-modeler/overview",
     },
     {
       title: "Console",
       icon: ClusterOrchestrationIcon,
       description:
         "Camunda Console (Self-Managed) provides a centralized interface for monitoring and managing your Camunda 8 deployments.",
-      link: "/self-managed/console-deployment/overview",
+      link: "/self-managed/components/console/overview",
     },
     {
       title: "Management Identity",
       icon: ClusterOrchestrationIcon,
       description:
         "Use Identity to manage users, groups, roles, permissions, and applications within the Camunda 8 platform.",
-      link: "/self-managed/identity/what-is-identity",
+      link: "/self-managed/components/management-identity/what-is-identity",
     },
   ];
 
