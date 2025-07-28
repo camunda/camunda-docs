@@ -58,10 +58,10 @@ All Tasklist API requests require authentication. To authenticate, generate a [J
 
 <TabItem value='self-managed'>
 
-1. [Add an M2M application in Identity](/self-managed/identity/application-user-group-role-management/applications.md).
-2. [Add permissions to this application](/self-managed/identity/application-user-group-role-management/applications.md) for **Tasklist API**.
+1. [Add an M2M application in Identity](/self-managed/components/management-identity/application-user-group-role-management/applications.md).
+2. [Add permissions to this application](/self-managed/components/management-identity/application-user-group-role-management/applications.md) for **Tasklist API**.
 3. Capture the `Client ID` and `Client Secret` from the application in Identity.
-4. [Generate a token](/self-managed/identity/authentication.md) to access the Tasklist REST API. Provide the `client_id` and `client_secret` from the values you previously captured in Identity.
+4. [Generate a token](/self-managed/components/management-identity/authentication.md) to access the Tasklist REST API. Provide the `client_id` and `client_secret` from the values you previously captured in Identity.
    ```shell
    curl --location --request POST 'http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token' \
    --header 'Content-Type: application/x-www-form-urlencoded' \
@@ -81,7 +81,7 @@ All Tasklist API requests require authentication. To authenticate, generate a [J
    ```
 5. Capture the value of the `access_token` property and store it as your token.
 
-See the [Tasklist Configuration - Authentication](/self-managed/tasklist-deployment/tasklist-authentication.md#identity) documentation for more information about this authentication method.
+See the [Tasklist Configuration - Authentication](/self-managed/components/orchestration-cluster/tasklist/tasklist-authentication.md#identity) documentation for more information about this authentication method.
 
 </TabItem>
 

@@ -36,7 +36,7 @@ Follow the [upgrade instructions](/self-managed/installation-methods/helm/upgrad
 
 #### Support for Amazon OpenSearch
 
-With the 8.5 release, Optimize is now also compatible with [Amazon OpenSearch](https://aws.amazon.com/de/opensearch-service/) 2.5+. Note that using Amazon OpenSearch requires [setting up a new Camunda installation](/self-managed/setup/overview.md). A migration from previous versions or Elasticsearch environments is not supported.
+With the 8.5 release, Optimize is now also compatible with [Amazon OpenSearch](https://aws.amazon.com/de/opensearch-service/) 2.5+. Note that using Amazon OpenSearch requires [setting up a new Camunda installation](/versioned_docs/version-8.5/self-managed/setup/overview.md). A migration from previous versions or Elasticsearch environments is not supported.
 
 This release contains the following limitations:
 
@@ -61,12 +61,12 @@ For future use, refer to our [new AWS Marketplace listing](https://aws.amazon.co
 
 #### Removal of Web Modeler's beta API
 
-The Web Modeler beta API has been removed. The API was deprecated in 8.3 and is no longer available in 8.5. Use the [Web Modeler v1 API](/apis-tools/web-modeler-api/index.md) instead.
-For a migration guide, see the [Web Modeler API documentation](/apis-tools/web-modeler-api/index.md#migrating-from-beta-to-v1).
+The Web Modeler beta API has been removed. The API was deprecated in 8.3 and is no longer available in 8.5. Use the [Web Modeler v1 API](/versioned_docs/version-8.5/apis-tools/web-modeler-api/index.md) instead.
+For a migration guide, see the [Web Modeler API documentation](/versioned_docs/version-8.5/apis-tools/web-modeler-api/index.md#migrating-from-beta-to-v1).
 
 #### Zeebe 8.5.0 breaks serialization of timestamp values in management API (Self-Managed only)
 
-Zeebe 8.5.0 was released with [a new bug](https://github.com/camunda/camunda/issues/17347) that breaks serialization of timestamp values in management APIs, such as [backup](/self-managed/operational-guides/backup-restore/backup-and-restore.md) and [cluster scaling](/self-managed/zeebe-deployment/operations/cluster-scaling.md).
+Zeebe 8.5.0 was released with [a new bug](https://github.com/camunda/camunda/issues/17347) that breaks serialization of timestamp values in management APIs, such as [backup](/versioned_docs/version-8.5/self-managed/operational-guides/backup-restore/backup-and-restore.md) and [cluster scaling](/versioned_docs/version-8.5/self-managed/zeebe-deployment/operations/cluster-scaling.md).
 Timestamps which were previously serialized as `ISO8061` strings are now serialized as integer values.
 
 Until a fix is delivered in 8.5.1, workarounds include not deserializing timestamp values from affected APIs, or deserializing them as integers.
@@ -106,11 +106,11 @@ For more details about the applications version included in the Helm chart, revi
 
 #### Versioning changes in Elasticsearch
 
-As of the 8.4 release, Camunda is compatible with Elasticsearch 8.9+ and no longer supports older Elasticsearch versions. See [supported environments](/reference/supported-environments.md).
+As of the 8.4 release, Camunda is compatible with Elasticsearch 8.9+ and no longer supports older Elasticsearch versions. See [supported environments](/versioned_docs/version-8.4/reference/supported-environments.md).
 
 #### Support for Amazon OpenSearch
 
-As of the 8.4 release, Zeebe, Operate, and Tasklist are now compatible with [Amazon OpenSearch](https://aws.amazon.com/de/opensearch-service/) 2.5.x. Note that using Amazon OpenSearch requires [setting up a new Camunda installation](/self-managed/setup/overview.md). A migration from previous versions or Elasticsearch environments is currently not supported.
+As of the 8.4 release, Zeebe, Operate, and Tasklist are now compatible with [Amazon OpenSearch](https://aws.amazon.com/de/opensearch-service/) 2.5.x. Note that using Amazon OpenSearch requires [setting up a new Camunda installation](/versioned_docs/version-8.4/self-managed/about-self-managed.md). A migration from previous versions or Elasticsearch environments is currently not supported.
 
 :::info
 The Helm charts are not yet prepared with the OpenSearch configurations as templates/pre-filled. The Helm charts can still be used to install for OpenSearch, but some adjustments are needed beforehand. Refer to the [Helm deployment documentation](/self-managed/installation-methods/helm/install.md) for further details.
@@ -128,12 +128,16 @@ This release contains the following limitations:
     - **Reference:** https://github.com/camunda/issues/issues/568
     - **Mitigation:** Bug is planned to be fixed with upcoming `8.4.1` release
 - In **Camunda HELM `9.0.x`**
+
   - **Limitation**
+
     - **Description:** The existing Helm charts use the Elasticsearch configurations by default and are not yet prepared with the OpenSearch configurations as templates/pre-filled. The Helm charts can still be used to install for OpenSearch, but some adjustments are needed beforehand.
     - **Reference:** n/a
     - **Mitigation:**
+
       1. Refer to our [docs for the installation](/self-managed/installation-methods/helm/install.md#components-installed-by-the-helm-charts), the docs include guidance about necessary adjustments of the Helm chart configuration.
       2. The OpenSearch configuration in Helm charts will be provided in one of our future Helm releases.
+
 - In **Connectors `8.4.x`**
   - **Missing feature**
     - **Description:** Custom OIDC provider support for connectors is missing
@@ -153,15 +157,15 @@ For future use, refer to our [new AWS Marketplace listing](https://aws.amazon.co
 
 #### Form linking
 
-The [form linking](/components/modeler/web-modeler/advanced-modeling/form-linking.md#using-the-link-button) feature is impacted by an [issue](https://github.com/camunda/camunda/issues/16311) where the wrong forms can get linked with new user task instances, effectively corrupting the user task instance. If you make use of this feature and run either `8.4.0`, `8.4.1` or `8.4.2`, we urge you to update to the newest `8.4.3` patch that includes the required fix.
+The [form linking](/versioned_docs/version-8.4/components/modeler/web-modeler/advanced-modeling/form-linking.md#using-the-link-button) feature is impacted by an [issue](https://github.com/camunda/camunda/issues/16311) where the wrong forms can get linked with new user task instances, effectively corrupting the user task instance. If you make use of this feature and run either `8.4.0`, `8.4.1` or `8.4.2`, we urge you to update to the newest `8.4.3` patch that includes the required fix.
 
-Follow the instructions in the [form linking](/components/modeler/web-modeler/advanced-modeling/form-linking.md#known-issues-with-linked-forms) documentation to resolve this issue.
+Follow the instructions in the [form linking](/versioned_docs/version-8.4/components/modeler/web-modeler/advanced-modeling/form-linking.md#known-issues-with-linked-forms) documentation to resolve this issue.
 :::
 
 #### Deprecated: Zeebe configuration properties for Camunda Identity
 
-The [Zeebe configuration properties for Camunda Identity](/self-managed/zeebe-deployment/configuration/gateway.md#zeebegatewayclustersecurityauthenticationidentity)
-were deprecated in `8.4`. Please use the dedicated Camunda Identity properties or the [corresponding environment variables](/self-managed/identity/miscellaneous/configuration-variables.md#core-configuration).
+The [Zeebe configuration properties for Camunda Identity](/versioned_docs/version-8.4/self-managed/zeebe-deployment/configuration/gateway.md#zeebegatewayclustersecurityauthenticationidentity)
+were deprecated in `8.4`. Please use the dedicated Camunda Identity properties or the [corresponding environment variables](/versioned_docs/version-8.4/self-managed/identity/deployment/configuration-variables.md#core-configuration).
 
 ### Additional features
 

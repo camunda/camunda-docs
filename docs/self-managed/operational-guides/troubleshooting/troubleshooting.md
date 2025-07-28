@@ -44,7 +44,7 @@ to be external and therefore require SSL.
 
 As the [Camunda Helm Charts](https://artifacthub.io/packages/helm/camunda/camunda-platform) currently do
 not provide support for the distribution of the Keycloak TLS key to the other containers, we recommend viewing the solution available in the
-[Identity documentation](/self-managed/identity/miscellaneous/troubleshoot-identity.md#solution-2-identity-making-requests-from-an-external-ip-address).
+[Identity documentation](/self-managed/components/management-identity/miscellaneous/troubleshoot-identity.md#solution-2-identity-making-requests-from-an-external-ip-address).
 
 ## Identity redirect URL
 
@@ -129,7 +129,7 @@ Due to limitations, the Identity `contextPath` approach is unavailable when usin
 
 ## Web Modeler database schema
 
-The Web Modeler `restapi` component requires a [database connection](/self-managed/modeler/web-modeler/configuration/configuration.md#database). This connection should not point to the same database as Keycloak does.
+The Web Modeler `restapi` component requires a [database connection](/self-managed/components/modeler/web-modeler/configuration/configuration.md#database). This connection should not point to the same database as Keycloak does.
 
 ## Gateway timeout on redirect
 

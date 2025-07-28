@@ -81,7 +81,7 @@ You can now add new Zeebe partitions to a running cluster.
 - Process instances do not migrate between partitions, so it can take time for the cluster to reach equilibrium.
 - New partitions do not take part in correlating messages/signals, except for message/signal start events.
 
-To learn more, see [cluster scaling](/self-managed/zeebe-deployment/operations/cluster-scaling.md).
+To learn more, see [cluster scaling](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md).
 
 :::caution
 This feature is not yet fully compatible with backup/restore.
@@ -260,7 +260,7 @@ The following known limitations apply for this alpha version release:
 
 #### Identity management for Helm Chart setups <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-[Orchestration cluster Identity](/self-managed/orchestration-identity/orchestration-identity.md) is now available for OIDC setups in [Helm chart deployments](/self-managed/installation-methods/helm/install.md). Starting with this alpha version, you can configure the Orchestration cluster components to use the identity provider (IdP) of your choice and enable single sign-on (SSO).
+[Orchestration cluster Identity](/self-managed/components/orchestration-cluster/identity/overview.md) is now available for OIDC setups in [Helm chart deployments](/self-managed/installation-methods/helm/install.md). Starting with this alpha version, you can configure the Orchestration cluster components to use the identity provider (IdP) of your choice and enable single sign-on (SSO).
 
 The following known limitations apply for this alpha version release:
 
@@ -378,7 +378,7 @@ As well as bearer token and client credentials authentication, you can now confi
 - To use basic authentication, set the `CAMUNDA_MODELER_CLUSTERS_0_AUTHENTICATION` environment variable value to `BASIC`.
 - Web Modeler sends a username and password with every request to one of the cluster components (Zeebe, Operate, Tasklist).
 
-To learn more about basic authentication, see [available authentication methods](/self-managed/modeler/web-modeler/configuration/configuration.md#available-authentication-methods).
+To learn more about basic authentication, see [available authentication methods](/self-managed/components/modeler/web-modeler/configuration/configuration.md#available-authentication-methods).
 
 ## 8.8.0-alpha3
 
@@ -450,7 +450,7 @@ To learn more about this feature, see the [API documentation](/self-managed/quic
 
 ### Identity management updates <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-The [Identity service](/self-managed/identity/what-is-identity.md) is enhanced to deliver greater flexibility, control, and security for both Self-Managed and SaaS users. These updates are part of our broader effort to streamline the platform’s architecture.
+The [Identity service](/self-managed/components/management-identity/what-is-identity.md) is enhanced to deliver greater flexibility, control, and security for both Self-Managed and SaaS users. These updates are part of our broader effort to streamline the platform’s architecture.
 
 #### Cluster-level identity management
 
@@ -544,7 +544,7 @@ To learn more about migration, see [process instance migration](/components/conc
 
 A new Camunda Exporter brings the importer and archiving logic of web components (Tasklist and Operate) closer to the distributed platform (Zeebe). The index schema is also being harmonized.
 
-To learn more about this feature, see the [Camunda Exporter documentation](/self-managed/zeebe-deployment/exporters/camunda-exporter.md).
+To learn more about this feature, see the [Camunda Exporter documentation](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md).
 
 ### Backup and restore improvements <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
