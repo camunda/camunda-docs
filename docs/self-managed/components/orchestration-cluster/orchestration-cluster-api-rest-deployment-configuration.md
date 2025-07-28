@@ -15,7 +15,7 @@ This guide walks you through adjusting these settings.
 The `maxMessageSize` default value is 4MB. You can configure this setting in the:
 
 - [Gateway config](../orchestration-cluster/zeebe/configuration/gateway.md#zeebegatewaynetwork)
-- [Broker config](../zeebe-deployment/configuration/broker.md#zeebebrokernetwork)
+- [Broker config](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#zeebebrokernetwork)
 
 If you increase this value, you must also adjust the configuration for the deployment REST endpoint to match.
 
