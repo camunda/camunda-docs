@@ -11,7 +11,7 @@ The Camunda 8.8 release introduces breaking changes for [Operate and Tasklist](.
 :::
 
 :::note
-If the Camunda application(s) cannot access Elasticsearch with cluster-level privileges, it is possible to run the backup of Operate and Tasklist indices (steps 2 and 4 from the backup procedure below) as a standalone application separate from the main application (see [Standalone Backup application](/self-managed/concepts/elasticsearch-without-cluster-privileges.md#standalone-backup-application)).
+If the Camunda application(s) cannot access Elasticsearch with cluster-level privileges, it is possible to run the backup of Operate and Tasklist indices (steps 2 and 4 from the backup procedure below) as a standalone application separate from the main application (see [standalone backup application](/self-managed/concepts/elasticsearch-without-cluster-privileges.md#standalone-backup-application)).
 :::
 
 import Tabs from '@theme/Tabs';

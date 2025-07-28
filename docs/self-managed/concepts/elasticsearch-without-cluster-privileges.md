@@ -4,34 +4,34 @@ title: "Elasticsearch without cluster privileges"
 keywords: ["elasticsearch", "schema", "backup", "backups"]
 ---
 
-If the Camunda single application cannot access Elasticsearch with cluster-level privileges, you can run the schema manager as a standalone application separate from the main application.
+If the Camunda single application cannot access Elasticsearch with cluster-level privileges, you can run the schema manager as a standalone application, separate from the main application.
 
 ## Standalone schema manager
 
-When running the schema manager as a standalone application, cluster privileges are only required for the schema creation. The single application does not need cluster privileges.
+When running the schema manager as a standalone application, cluster-level privileges are required only during schema creation. The single application itself does not need cluster-level privileges.
 
-- **Database Support**: This feature is also only supported for Elasticsearch installations (no OpenSearch support).
-- **Essential privileges required by the single application**: An index-level privilege of at least `manage` is still required for the Camunda single application to work correctly.
+- **Database support**: This setup is supported only for Elasticsearch installations (OpenSearch is not supported).
+- **Privileges required by the single application**: The Camunda single application still requires an index-level privilege of at least `manage` to function properly.
 
 To run the schema manager as a standalone application:
 
 1. [Initialize the schema manager](#initialize): The database schema must first be initialized.
-1. [Start the Camunda single application](#start): Once the schema is initialized, start the application without cluster level privileges.
+2. [Start the Camunda single application](#start): Once the schema is initialized, start the application without cluster-level privileges.
 
 ### 1. Initialize the schema manager {#initialize}
 
-The schema manager is started as a separate standalone Java application and is responsible for creating and managing the database schema and applying database settings, such as retention policies for example.
+The schema manager is a separate standalone Java application responsible for creating and managing the database schema, and applying database settings (e.g., retention policies).
 
 :::note
 
-- Initialization requires a user with cluster-level privileges for the database (`superuser` for example).
-- Initialization only needs to be executed once per installation.
+- Initialization requires a user with cluster-level privileges (e.g., `superuser`) in the database.
+- Initialization needs to be executed only once per installation.
 
 :::
 
 #### Configure the schema manager
 
-Create an additional custom configuration for the schema manager with the following values:
+Create a custom configuration for the schema manager with the following values:
 
 ```yaml
 camunda:
@@ -65,13 +65,13 @@ zeebe.broker.exporters.elasticsearch:
       password: camunda123
 ```
 
-For additional configuration options available, please take a look at this guide from (#TODO link to common database configuration page after it is created).
+For additional configuration options, see the [common database configuration guide](#TODO link to common database configuration page after it is created).
 
 #### Start the schema manager
 
-Using the custom configuration provided, start the Java application `schema` (or `schema.bat` for Windows) provided in the `bin` folder of the delivered jar file. The schema manager will create the necessary indices and templates in the database and apply the respective settings.
+Using the custom configuration file, start the Java application `schema` (or `schema.bat` on Windows) located in the `bin` folder of the delivered JAR package. The schema manager will create the necessary indices and templates in the database and apply the configured settings.
 
-Assuming the custom configuration was saved in a `schema-manager.yaml`, start the application using the following command:
+Assuming your custom configuration is saved as `schema-manager.yaml`, you can start the application with the following command:
 
 ```shell
 SPRING_CONFIG_ADDITIONALLOCATION=/path/to/schema-manager.yaml ./bin/schema
@@ -81,13 +81,13 @@ Verify that the application executed successfully.
 
 ### 2. Start the Camunda single application {#start}
 
-The Camunda single application can now be started without cluster-level privileges. The application will connect to the database and use the schema created by the schema manager.
+The Camunda single application can now be started without cluster-level privileges. It will connect to the database and use the schema previously created by the schema manager.
 
 #### Elasticsearch user with sufficient privileges
 
-Ensure that an Elasticsearch user with sufficient privileges exists. The application requires a database user with at least `manage` privileges on the indices it is meant to work with.
+Ensure that an Elasticsearch user with sufficient privileges exists. The application requires a database user with at least `manage` privileges on the indices it needs to access.
 
-If preferred, you can use an existing user with the required privileges. Alternatively the required privileges can be assigned to an example user named `camunda-app` by sending the following request to the Elasticsearch REST API:
+You can either use an existing user with the required privileges or assign the necessary privileges to an example user named `camunda-app` by sending the following request to the Elasticsearch REST API:
 
 ```
 PUT _security/role/read_write_role
@@ -234,13 +234,13 @@ zeebe.broker.exporters:
 
 #### Start the application
 
-You can start the application with this custom configuration from the JAR file or using Helm Charts.
+You can start the application using the custom configuration either from the JAR file or with Helm charts.
 
 #### Start the application from the JAR file
 
-Start the Java application `camunda` (or `camunda.bat` for Windows) provided in the `bin` folder of the delivered JAR file.
+Start the Java application `camunda` (or `camunda.bat` on Windows), located in the `bin` folder of the delivered JAR package.
 
-Assuming the configuration above was saved in an `application-custom.yaml` file, start the application using the following command:
+Assuming the configuration is saved in a file named `application-custom.yaml`, start the application with the following command:
 
 ```
 SPRING_CONFIG_ADDITIONALLOCATION=/path/to/application-custom.yaml ./bin/camunda
@@ -311,30 +311,31 @@ core:
 
 ### Limitations
 
-- This feature only works for installations using Elasticsearch.
-- Camunda Optimize cannot be executed with this setup.
+- This feature only works with Elasticsearch installations.
+- Camunda Optimize cannot be used with this setup.
 
 ## Standalone backup application
 
-If the Camunda application(s) cannot access Elasticsearch with cluster-level privileges, you can run the backup Operate and Tasklist data as a standalone application separate from the main application.
+If the Camunda application(s) cannot access Elasticsearch with cluster-level privileges, you can run the backup for Operate and Tasklist data as a standalone application, separate from the main application.
 
-Creating a backup snapshot in Elasticsearch requires `manage_snapshots` cluster-level privileges. In this case, cluster privileges are only required for the application that takes care of the backup creation, the Camunda application(s) do not need cluster privileges.
+Creating a snapshot in Elasticsearch requires `manage_snapshots` cluster-level privileges. These privileges are only needed by the application responsible for creating the backups; the Camunda application(s) do not require cluster-level privileges.
 
-- **Database Support**: This feature is also only supported for Elasticsearch installations (no OpenSearch support).
-- **Indices**: This standalone application only takes care of Operate and Tasklist indices; Optimize is not included in this procedure.
+- **Database support**: This setup is supported only for Elasticsearch installations (OpenSearch is not supported).
+- **Indices**: The standalone application only handles Operate and Tasklist indices. Optimize is not included in this procedure.
 
 :::note
 
-Before you can use the standalone backup manager:
+Before using the standalone backup manager:
 
-- A user with cluster-level privileges (including snapshot creation) must be configured in Elasticsearch. A user with [snapshot_user](https://www.elastic.co/guide/en/elasticsearch/reference/current/built-in-roles.html#:~:text=related%20to%20rollups.-,snapshot_user,-Grants%20the%20necessary) role should be enough to run the backup applications. However, when restoring snapshots, index-level permissions are needed to restore data.
+- A user with cluster-level privileges (including snapshot creation) must be configured in Elasticsearch. A user with the [snapshot_user](https://www.elastic.co/guide/en/elasticsearch/reference/current/built-in-roles.html#:~:text=related%20to%20rollups.-,snapshot_user,-Grants%20the%20necessary) role should be sufficient to run the backup application.  
+  However, restoring snapshots also requires index-level permissions.
 - An [Elasticsearch snapshot repository](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshot-restore.html) must be configured.
 
 :::
 
 ### 1. Configure the backup application
 
-Create a custom configuration `backup-manager.yaml` file for the backup standalone application using the following values:
+Create a custom `backup-manager.yaml` configuration file for the standalone backup application using the following values:
 
 ```yaml
 camunda:
@@ -355,21 +356,22 @@ camunda:
       certificatePath: PATH_TO_CA_CERT
 ```
 
-For additional configuration options available, please take a look at the guide (#TODO link to common database configuration page after it is created).
+For additional configuration options, see the [common database configuration guide](#TODO link to common database configuration page after it is created).
 
 ### 2. Start the backup application
 
-Start the Java application `backup-webapps` (or `backup-webapps.bat` for Windows) provided in the `bin` folder of the delivered JAR file.
+Start the Java application `backup-webapps` (or `backup-webapps.bat` on Windows), located in the `bin` folder of the delivered JAR package.
 
-It takes `<backupID>` as argument. The `<backupID>` is the unique identifier of the backup from type `java.lang.Long`, used as part of the snapshot names. To learn more, see [backup and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md).
+This application requires a `<backupID>` argument—a unique identifier of type `java.lang.Long`, used as part of the snapshot names.  
+To learn more, see the [backup and restore guide](/self-managed/operational-guides/backup-restore/backup-and-restore.md).
 
-Assuming this custom configuration was saved in a `backup-manager.yaml` file, start the application using the following command:
+Assuming your custom configuration is saved in a file named `backup-manager.yaml`, start the application using the following command:
 
 ```shell
 SPRING_CONFIG_ADDITIONALLOCATION=/path/to/backup-manager.yaml ./bin/backup-webapps <backupID>
 ```
 
-The standalone application will log the current state of the backup, every 5 seconds, until it completes.
+The standalone application will log the current state of the backup every five seconds until it completes.
 
 Verify that the application executed successfully.
 
@@ -413,7 +415,7 @@ GET /_snapshot/<repository-name>/*_<backupID>_*
 
 #### Delete the snapshots of a backup
 
-:::warning Warning
+:::warning
 Make sure the `<backupID>` you provide is not a single digit integer, otherwise the following command will delete more snapshots than desired.
 :::
 
