@@ -31,7 +31,7 @@ const Components = () => {
         "Camunda connectors are reusable building blocks you can use to easily connect processes to external systems, applications, and data.",
       link: "/self-managed/connectors-deployment/install-and-start",
     },
-        {
+    {
       title: "Optimize",
       icon: ClusterOrchestrationIcon,
       description:
