@@ -22,7 +22,6 @@ To configure an external IdP using Keycloak:
    :::
 
 2. Click **Administrator Console** and log in using the Keycloak administrator credentials.
-
    - The default administrator username is `admin`.
    - When deploying Camunda 8 with [Helm charts](/self-managed/setup/overview.md), you can extract the password as detailed in [secrets extraction](/self-managed/installation-methods/helm/upgrade/upgrade.md#secrets-extraction).
 

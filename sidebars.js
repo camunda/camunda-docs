@@ -331,7 +331,7 @@ module.exports = {
     },
     {
       type: "category",
-      label: "Orchestration cluster",
+      label: "Orchestration Cluster",
       link: {
         type: "doc",
         id: "components/orchestration-cluster",
@@ -1414,7 +1414,7 @@ module.exports = {
         },
         {
           type: "category",
-          label: "Orchestration cluster",
+          label: "Orchestration Cluster",
           link: {
             type: "doc",
             id: "self-managed/components/orchestration-cluster/overview",
