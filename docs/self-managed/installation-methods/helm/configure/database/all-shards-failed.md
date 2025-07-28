@@ -1,8 +1,8 @@
 ---
 id: all-shards-failed
-title: "Dealing with `all shards failed` errors"
-sidebar_label: "Dealing with `all shards failed` errors"
-description: "Dealing with `all shards failed` errors"
+title: "All shards failed errors"
+sidebar_label: "All shards failed errors"
+description: "Dealing with `all shards failed` errors."
 ---
 
 When deploying Camunda 8.8+ with OpenSearch (or Elasticsearch) in a multi-node setup, you may encounter errors like the following in your Camunda logs:
