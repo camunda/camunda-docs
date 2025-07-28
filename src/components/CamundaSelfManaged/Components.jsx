@@ -22,7 +22,7 @@ const Components = () => {
       icon: ClusterOrchestrationIcon,
       description:
         "The Orchestration Cluster is the core component of Camunda 8, powering the automation and orchestration of processes.",
-      link: "/self-managed/components/orchestration-cluster/",
+      link: "/self-managed/components/orchestration-cluster/overview",
     },
     {
       title: "Connectors",
