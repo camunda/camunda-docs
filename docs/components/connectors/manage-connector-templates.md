@@ -34,7 +34,6 @@ The components of the editor interface are as follows:
 
   :::info
   Starting with 8.8, the following properties are not managed by Web Modeler anymore, and you can freely edit them:
-
   - `name`: Human-friendly name shown when selecting a template and in the properties panel after the template has been applied. The value can be different from the file name.
   - `id`: Identifier of the template. Changing this value creates a new template. We recommend setting a meaningful value (e.g. "PaymentConnector", "CreateUserTemplate").
   - `version`: Integer-based version number. Combined with the `id`, it defines a unique template version. When [publishing](#publish-a-connector-template) a new version, you need to update the version number manually.

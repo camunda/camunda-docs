@@ -60,7 +60,6 @@ When using a self-hosted GitHub instance, ensure the environment variable `CAMUN
 2. Select the **GitHub** tile (if not already selected), located at the top of the modal.
 
 3. Provide the following information in the **Configure GitHub** modal:
-
    - **Installation ID:** Found in the URL of your GitHub App's installation page.
    - **Client ID:** Found in your GitHub App's settings page. You can also use Application ID as an alternative. (If you are using GitHub Enterprise Server 3.13 or prior, Application ID is required.)
    - **Private Key:** The contents of the .pem file downloaded from your GitHub App's settings page.
@@ -116,7 +115,6 @@ If you're using a self-hosted GitLab instance, ensure the environment variable `
 2. In the modal, select the **GitLab** tile at the top.
 
 3. In the **Configure GitLab** modal, provide the following information:
-
    - **Access token:** The project, group, or personal access token you generated.
    - **Project ID:** The ID copied from your GitLab project settings.
    - **GitLab repository URL:** The base URL of the repository you want to sync with (e.g., `https://gitlab.com/camunda/example-repo`). The URL must not include the `.git` extension or a folder path.
