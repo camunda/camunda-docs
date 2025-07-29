@@ -65,9 +65,8 @@ const Components = () => {
     <div className="sm-components">
       <h2>Components</h2>
       <p>
-        A reference for Camunda 8 components, including the management and
-        orchestration clusters, Connectors, Optimize, and detailed configuration
-        guidance for each component, and application upgrade instructions.
+        A reference for Camunda 8 components, including detailed configuration 
+        guidance for each component and application upgrade instructions.
       </p>
       <div className="sm-grid-2">
         {componentItems.map((item, index) => (
