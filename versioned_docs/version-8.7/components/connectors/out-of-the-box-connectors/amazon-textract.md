@@ -59,7 +59,6 @@ Select the desired execution type from the **Execution Type** dropdown:
 - **Real-time**: Use for small files that require immediate text extraction. This method processes the document instantly, allowing you to quickly retrieve the data.
 
   In this mode, you can select the document location using **Document location type** field.
-
   - S3
   - Camunda Document
 
@@ -86,7 +85,6 @@ Select the desired execution type from the **Execution Type** dropdown:
   **Asynchronous** execution offers more flexibility than real-time or polling execution, as it allows you to process documents without waiting for immediate responses. This is particularly useful for larger files or when handling multiple documents simultaneously.
 
   In this mode, you can configure the following optional fields:
-
   - **Client Request Token**: An idempotent token used to identify the start request.
   - **Job Tag**: A tag included in the completion notification, published to the Amazon SNS topic.
   - **KMS Key ID**: The KMS key used to encrypt inference results.

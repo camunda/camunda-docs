@@ -100,12 +100,10 @@ This paragraph needs improvement - it is slightly outdated.
 For example, to migrate an existing Spring Boot application, take the following steps:
 
 1. Adjust Maven dependencies:
-
    - Remove Camunda 7 Spring Boot Starter and all other Camunda dependencies.
    - Add the [Spring Zeebe SDK](../../apis-tools/spring-zeebe-sdk/getting-started.md).
 
 2. Adjust configuration:
-
    - Set [Camunda 8 credentials](/apis-tools/spring-zeebe-sdk/getting-started.md#configuring-the-camunda-8-connection) (for example, in `src/main/resources/application.yaml`) and point it to an existing Zeebe cluster.
    - Remove existing Camunda 7 settings.
 
