@@ -14,17 +14,17 @@ Camunda publishes security notices after fixes are available.
 
 July 29th, 2025
 
-#### Product affected
+#### Products affected
 
-Camunda Tasklist
-Camunda Zeebe
-Camunda Operate
-Camunda Identity
-Camunda Optimize
+- Camunda Tasklist
+- Camunda Zeebe
+- Camunda Operate
+- Camunda Identity
+- Camunda Optimize
 
 #### Impact
 
-The embedded Spring Boot Tomcat was affected by [CVE-2025-53506](https://nvd.nist.gov/vuln/detail/CVE-2025-53506) which allowed for uncontrolled resource consumption which could be used to exhaust syste resources in a potential DoS (denial of service) attack.
+The embedded Spring Boot Tomcat was affected by [CVE-2025-53506](https://nvd.nist.gov/vuln/detail/CVE-2025-53506) which allowed for uncontrolled resource consumption that could be used to exhaust system resources in a potential DoS (denial of service) attack.
 
 #### How to determine if the installation is affected
 
