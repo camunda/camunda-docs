@@ -87,15 +87,16 @@ When successful, your project will display a new **Sync with GitHub** button.
 
 <h3> Create a new access token </h3>
 
-Web Modeler requires an access token to sync changes with your GitLab repository. You can use the following options:
+Web Modeler requires an access token to sync changes with your GitLab repository. You can use one of the following options:
 
-- **Project access token** (Recommended)
+- **Project access token** (recommended)
 - Group access token
 - Personal access token
 
-Follow the [GitLab documentation](https://docs.gitlab.com/ee/user/project/settings/project_access_tokens.html#create-a-project-access-token) to generate a new project access token for your repository with the following configuration:
+To generate a project access token, follow the [GitLab documentation](https://docs.gitlab.com/ee/user/project/settings/project_access_tokens.html#create-a-project-access-token) and use the following configuration:
 
-- Enable the following [**scopes**](https://docs.gitlab.com/ee/user/project/settings/project_access_tokens.html#scopes-for-a-project-access-token) for either the `developer` or `maintainer` role:
+- Assign the token to a user with the `developer` or `maintainer` role.
+- Enable the following [**scopes**](https://docs.gitlab.com/ee/user/project/settings/project_access_tokens.html#scopes-for-a-project-access-token):
   - `api`
   - `read_api`
   - `read_repository`
@@ -109,30 +110,30 @@ Follow the [GitLab documentation](https://docs.gitlab.com/ee/user/project/settin
 <h3> Configure GitLab in Web Modeler </h3>
 
 :::note
-When using a self-hosted GitLab instance, ensure the environment variable `CAMUNDA_MODELER_GITSYNC_GITLAB_BASEURL` is set to the API URL of your self-hosted GitLab instance. It usually looks like `http(s)://HOSTNAME/api/v4`.
+If you're using a self-hosted GitLab instance, ensure the environment variable `CAMUNDA_MODELER_GITSYNC_GITLAB_BASEURL` is set to the API URL of your self-hosted instance. This usually follows the format: `http(s)://HOSTNAME/api/v4`.
 :::
 
-1. Within Web Modeler, navigate to the process application you would like to connect to GitLab, and click **Connect repository**.
+1. In Web Modeler, navigate to the process application you want to connect to GitLab, and click **Connect repository**.
 
-2. Select the **GitLab** tile, located at the top of the modal.
+2. In the modal, select the **GitLab** tile at the top.
 
-3. Provide the following information in the **Configure GitLab** modal:
+3. In the **Configure GitLab** modal, provide the following information:
 
-   - **Access token:** The generated project, group or personal access token.
-   - **Project ID:** The ID copied from the GitLab project settings.
-   - **GitLab repository URL:** The base URL of the repository you want to sync with, for example `https://gilab.com/camunda/example-repo`. The URL cannot contain the `.git` extension or a folder path.
-   - **Branch name:** The branch name to use for merging and managing changes.
-   - **Path:** (optional) The path to the folder containing your process application files. If left empty, Web Modeler syncs with the root of the repository. This path is automatically created if it does not exist.
+   - **Access token:** The project, group, or personal access token you generated.
+   - **Project ID:** The ID copied from your GitLab project settings.
+   - **GitLab repository URL:** The base URL of the repository you want to sync with (e.g., `https://gitlab.com/camunda/example-repo`). The URL must not include the `.git` extension or a folder path.
+   - **Branch name:** The branch to use for merging and managing changes.
+   - **Path:** _(Optional)_ The folder path that contains your process application files. If left empty, Web Modeler syncs with the root of the repository. The path is created automatically if it doesn't exist.
 
-4. Click **Open repository** to test your configuration. The repository for the provided branch and optional path opens in a new tab.
+4. Click **Open repository** to test the configuration. The repository for the selected branch and optional path will open in a new browser tab.
 
 5. Click **Save Configuration**.
 
 :::note
-When synchronizing for the first time with a remote repository that already contains commits, ensure Web Modeler has assigned the correct main process.
+If you're syncing for the first time with a remote repository that already contains commits, make sure Web Modeler has assigned the correct main process.
 :::
 
-When successful, your project will display a new **Sync with GitLab** button.
+Once connected successfully, your project will display a **Sync with GitLab** button.
 
 </TabItem>
 <TabItem value='azure'>
@@ -196,7 +197,7 @@ When successful, your project will display a new **Sync with Azure** button.
 
 <h3>Create a new access token</h3>
 
-Web Modeler requires an access token to sync changes with your Bitbucket repository. You can use one of the following token types:
+Web Modeler requires an access token to sync changes with your Bitbucket Cloud repository. You can use one of the following token types:
 
 - **Repository access token** (recommended)
 - Project access token
@@ -211,11 +212,7 @@ Follow the [Bitbucket documentation](https://support.atlassian.com/bitbucket-clo
 <h3>Configure Bitbucket in Web Modeler</h3>
 
 :::note
-When using a self-hosted Bitbucket Data Center instance, ensure the environment variable `CAMUNDA_MODELER_GITSYNC_BITBUCKET_BASEURL` is set to the API URL of your self-hosted Bitbucket Data Center instance. It usually looks like `http(s)://<your-bitbucket-domain>/rest/api/2.0/repositories`.
-:::
-
-:::note
-The Bitbucket Data Center version must be [v8.18](https://developer.atlassian.com/server/bitbucket/changelog/#CHANGE-1425) or higher. Previous versions do not support REST API v2.0.
+Web Modeler currently only supports Bitbucket Cloud.
 :::
 
 1. In Web Modeler, navigate to the process application you want to connect to Bitbucket, and click **Connect repository**.
@@ -263,7 +260,7 @@ Existing Git configurations can be edited from the gear icon beside the **Sync w
 To switch between Git providers, update your configuration with the following steps:
 
 1. Disconnect your current Git provider by clicking the gear icon beside the **Sync with _GitProvider_** button, and clicking the **Delete provider connection** button at the bottom of the modal.
-2. After confirming the operation, open the **Connect repository** modal and provide the necessary information for the new Git provider, following the steps outlined for [GitHub](./git-sync.md?platform=github#connect-to-a-remote-repository), [GitLab](./git-sync.md?platform=gitlab#connect-to-a-remote-repository), or [Azure](./git-sync.md?platform=azure#connect-to-a-remote-repository).
+2. After confirming the operation, open the **Connect repository** modal and provide the necessary information for the new Git provider, following the steps outlined for [GitHub](./git-sync.md?platform=github#connect-to-a-remote-repository), [GitLab](./git-sync.md?platform=gitlab#connect-to-a-remote-repository), [Azure](./git-sync.md?platform=azure#connect-to-a-remote-repository), or [Bitbucket Cloud](./git-sync.md?platform=bitbucket#connect-to-a-remote-repository).
 
 ## Advanced use cases
 
@@ -298,7 +295,7 @@ Creating multiple copies of a process application can complicate navigation and 
 
 ## Self-Managed environment variables
 
-Refer to [Configuration of the restapi component](../../../self-managed/modeler/web-modeler/configuration/configuration.md#git-sync) for details on configuring environment variables.
+Refer to [Configuration of the restapi component](../../../self-managed/components/modeler/web-modeler/configuration/configuration.md#git-sync) for details on configuring environment variables.
 
 ## Troubleshooting
 

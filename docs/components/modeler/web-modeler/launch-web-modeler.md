@@ -10,7 +10,7 @@ Design and implement your first diagram using Web Modeler, a component of Camund
 
 To launch Web Modeler, follow the steps below:
 
-1. After [creating an account and logging in](/guides/create-account.md) to Camunda, you are automatically taken to Web Modeler. Navigate between the components by clicking the square-shaped **Camunda components** icon in the top left corner of the page.
+1. After [creating an account and logging in](/components/console/manage-plan/create-account.md) to Camunda, you are automatically taken to Web Modeler. Navigate between the components by clicking the square-shaped **Camunda components** icon in the top left corner of the page.
 2. Select **Create new project** to create a new project and store diagrams.
    ![web modeler empty home](img/web-modeler-new-user-home.png)
 3. Name your diagram. You can go back and change the name any time by clicking on the project name and **Edit name**.

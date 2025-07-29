@@ -19,6 +19,161 @@ These release notes identify the new features included in 8.8, including [alpha 
 | ---------------------- | ---------------------------- | ------------ | ------------ | ------------ |
 | 14 October 2025        | 13 April 2027                | -            | -            | -            |
 
+## 8.8.0-alpha6
+
+| Release date | Changelog(s)                                                                                                                                                                               | Blog                                                                              |
+| :----------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------- |
+| 8 July 2025  | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.8.0-alpha6)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.8.0-alpha6)</li></ul> | [Release blog](https://camunda.com/blog/2025/07/camunda-alpha-release-july-2025/) |
+
+### Bitbucket sync <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
+
+<!-- https://github.com/camunda/product-hub/issues/2507 -->
+
+Camunda 8 now supports integration with [Atlassian Bitbucket Cloud](https://bitbucket.org/product/), in addition to GitHub, GitLab, and Azure DevOps.
+
+- This helps customers who use Jira for their development processes.
+- Organization owners and administrators can connect their Web Modeler process applications to Bitbucket Cloud, allowing users to keep their Web Modeler, Desktop Modeler, and official version control projects synced.
+
+To learn more, see [Git sync](/components/modeler/web-modeler/git-sync.md?platform=bitbucket).
+
+### Camunda 8 REST API renamed to Orchestration Cluster API <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects APIs">API</span>
+
+<!-- https://github.com/camunda/product-hub/issues/2793 -->
+
+The Camunda 8 REST API is now called the **Orchestration Cluster API**.
+
+- This name better reflects its role as a unified REST API for interacting with entities in a [Camunda 8 orchestration cluster](/reference/glossary.md#orchestration-cluster), such as processes, tasks, and variables.
+- The functionality and structure of the API remain unchanged. The name change improves clarity and onboarding across Camunda documentation and resources.
+
+To learn more, see [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
+
+### Connectors <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span> {#connectorsalpha6}
+
+#### AI Agent connector
+
+<!-- https://github.com/camunda/camunda-docs/pull/5942 -->
+<!-- https://github.com/camunda/camunda-docs/pull/6068 -->
+
+- **Structured outputs/JSON mode**: [Configurable response formats](../../../components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#response) allow you to choose whether the connector returns plain text or JSON for downstream processing. For some models, you can define a JSON schema for returned data.
+- **Conversation history storage**: History can now be stored in [Camunda's document storage](../../../components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#memory) rather than in process variables—allowing longer histories without process variable size limits.
+
+To learn more, see [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
+
+#### Intrinsic functions
+
+<!-- https://github.com/camunda/camunda-docs/pull/5934 -->
+
+A new `getJson` intrinsic function accepts a document and an optional FEEL expression. It extracts and returns content from a JSON document as an object.
+
+- The optional FEEL expression parameter specifies the part that will be extracted from the JSON document content.
+- If not provided, the whole document is returned as a JSON object.
+
+To learn more, see [intrinsic functions](/components/connectors/use-connectors/intrinsic-functions.md).
+
+### Dynamic partition scaling <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Zeebe">Zeebe</span>
+
+<!-- https://github.com/camunda/product-hub/issues/2226 -->
+
+You can now add new Zeebe partitions to a running cluster.
+
+- Scaling can be performed concurrently when the cluster is running, with zero downtime.
+- New process instances also start on new partitions, distributing cluster load evenly across partitions.
+- Process instances do not migrate between partitions, so it can take time for the cluster to reach equilibrium.
+- New partitions do not take part in correlating messages/signals, except for message/signal start events.
+
+To learn more, see [cluster scaling](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md).
+
+:::caution
+This feature is not yet fully compatible with backup/restore.
+:::
+
+### Helm charts <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+
+#### Alternative container images
+
+<!-- https://github.com/camunda/product-hub/issues/2826 -->
+
+Camunda now provides alternative container images to the previously used Bitnami images. These images are hosted on `registry.camunda.cloud`.
+
+- From version **8.8**, these are the default supported images, offering better security and faster patch delivery.
+- To use them, update your Helm deployment to reference the `values-images-ee.yml` file. See the [installation guide](/self-managed/installation-methods/helm/install.md) for details.
+
+#### Configurable volumes
+
+<!-- https://github.com/camunda/product-hub/issues/2597 -->
+
+The Helm chart now supports configurable volumes. You can define `PersistentVolumeClaims` or continue using `EmptyDir` through `values.yaml`.
+
+### Singapore region available for SaaS on Amazon Web Services <span class="badge badge--long" title="This feature affects SaaS">SaaS</span>
+
+A new Singapore (ap-southeast-1) region is now available for SaaS clusters on Amazon Web Services. Use this region to:
+
+- Improve overall processing speed and reduce latency if you operate in Singapore and Southeast Asian (SEA) countries.
+- Keep cluster data within Singapore to support your local data residency and compliance needs.
+
+To learn more about supported SaaS regions, see [regions](/reference/regions.md).
+
+### Tasklist uses the Orchestration Cluster API <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span>
+
+<!-- https://github.com/camunda/product-hub/issues/2516 -->
+
+Tasklist now uses the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md), replacing the soon-to-be-deprecated Tasklist V1 API.
+
+- This change improves compatibility with Camunda 8 RDBMS support and continues to work with Elasticsearch/OpenSearch.
+- It ensures consistent functionality, better performance, and access to new features—without breaking existing workflows.
+
+### User task listener types <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span>
+
+New user task listener types are available:
+
+#### `creating` event
+
+<!-- https://github.com/camunda/product-hub/issues/2625 -->
+
+This event triggers before a user task is created.
+
+| Functionality                  | Description                                                                                                      |
+| :----------------------------- | :--------------------------------------------------------------------------------------------------------------- |
+| Configurable creation listener | Executes logic before a task appears to users. Task is visible only after all listener jobs finish.              |
+| Controlled task initialization | The creation continues only after listeners succeed. Incidents are raised if logic fails, enabling safe retries. |
+| Operate UI insights            | A “Creating” event appears in the listener tab in Operate. Incidents are flagged for troubleshooting.            |
+| Assign user task               | Assign a task programmatically during creation, useful when assignment depends on an external system.            |
+
+#### `canceling` event
+
+<!-- https://github.com/camunda/product-hub/issues/2657 -->
+
+This event triggers when a user task is canceled (e.g., by a boundary event or process termination).
+
+| Functionality                     | Description                                                                                               |
+| :-------------------------------- | :-------------------------------------------------------------------------------------------------------- |
+| Configurable cancelation listener | Executes logic when a task is canceled. Allows inspection or modification of task data before completion. |
+| Consistent lifecycle control      | Cancelation waits for listener logic to complete. Failures can raise incidents for safe retry.            |
+| Operate UI insights               | A “Canceling” event is shown in the listener tab. Incidents are highlighted for visibility.               |
+
+To learn more, see [user task listeners](/components/concepts/user-task-listeners.md).
+
+### Documentation <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+
+#### Get started updates
+
+<!-- https://github.com/camunda/product-hub/issues/2751 -->
+
+The [getting started](/guides/getting-started-example.md) documentation now includes:
+
+- Example BPMN files and Spring Boot/NodeJS starter projects.
+- Practical code snippets, such as payment handling.
+- Updated code to match recent Camunda versions.
+- Annotations in BPMN files to guide usage and explain results.
+
+#### Public API
+
+The new [Public API](/reference/public-api.md) documentation outlines what’s included in Camunda 8's public API, the policies around versioning, and what to expect when upgrading.
+
+- The public API is the official contract between Camunda and its users under SemVer.
+- No breaking changes will be made to the public API in minor or patch releases.
+- You can safely build on these interfaces with the expectation of stability and backward compatibility.
+
 ## 8.8.0-alpha5
 
 | Release date | Changelog(s)                                                                                                                                                                               | Blog                                                                              |
@@ -105,7 +260,7 @@ The following known limitations apply for this alpha version release:
 
 #### Identity management for Helm Chart setups <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-[Orchestration cluster Identity](/self-managed/orchestration-identity/orchestration-identity.md) is now available for OIDC setups in [Helm chart deployments](/self-managed/setup/install.md). Starting with this alpha version, you can configure the Orchestration cluster components to use the identity provider (IdP) of your choice and enable single sign-on (SSO).
+[Orchestration cluster Identity](/self-managed/components/orchestration-cluster/identity/overview.md) is now available for OIDC setups in [Helm chart deployments](/self-managed/installation-methods/helm/install.md). Starting with this alpha version, you can configure the Orchestration cluster components to use the identity provider (IdP) of your choice and enable single sign-on (SSO).
 
 The following known limitations apply for this alpha version release:
 
@@ -223,7 +378,7 @@ As well as bearer token and client credentials authentication, you can now confi
 - To use basic authentication, set the `CAMUNDA_MODELER_CLUSTERS_0_AUTHENTICATION` environment variable value to `BASIC`.
 - Web Modeler sends a username and password with every request to one of the cluster components (Zeebe, Operate, Tasklist).
 
-To learn more about basic authentication, see [available authentication methods](/self-managed/modeler/web-modeler/configuration/configuration.md#available-authentication-methods).
+To learn more about basic authentication, see [available authentication methods](/self-managed/components/modeler/web-modeler/configuration/configuration.md#available-authentication-methods).
 
 ## 8.8.0-alpha3
 
@@ -239,7 +394,6 @@ Agentic process orchestration enhancements include:
 
 - An optional `completionCondition` boolean expression for ad-hoc sub-processes that is evaluated every time an inner element is completed. A `cancelRemainingInstances` boolean attribute can also be configured to influence the ad-hoc sub-process behavior when the completion condition is met.
 - An [Activate activities within an ad-hoc sub-process](/apis-tools/orchestration-cluster-api-rest/specifications/activate-ad-hoc-sub-process-activities.api.mdx) API used to activate selected activities within an ad-hoc sub-process.
-- A [Search activatable activities (alpha)](/apis-tools/orchestration-cluster-api-rest/specifications/search-ad-hoc-sub-process-activities.api.mdx) API used to search for activatable activities within ad-hoc sub-processes.
 
 To learn more about these features, see [ad-hoc sub-processes](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md).
 
@@ -290,13 +444,13 @@ To learn more about this feature, see the [Camunda Spring Boot SDK](/apis-tools/
 
 Camunda 8 Run no longer requires authentication when working with APIs. Authentication and authorizations can be optionally enabled to allow requests using basic authentication, and to test authorizations and permissions.
 
-To learn more about this feature, see the [API documentation](/self-managed/setup/deploy/local/c8run.md#use-camunda-apis) for Camunda 8 Run.
+To learn more about this feature, see the [API documentation](/self-managed/quickstart/developer-quickstart/c8run.md#use-camunda-apis) for Camunda 8 Run.
 
 <!-- https://github.com/camunda/camunda-docs/pull/5145 -->
 
 ### Identity management updates <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-The [Identity service](/self-managed/identity/what-is-identity.md) is enhanced to deliver greater flexibility, control, and security for both Self-Managed and SaaS users. These updates are part of our broader effort to streamline the platform’s architecture.
+The [Identity service](/self-managed/components/management-identity/what-is-identity.md) is enhanced to deliver greater flexibility, control, and security for both Self-Managed and SaaS users. These updates are part of our broader effort to streamline the platform’s architecture.
 
 #### Cluster-level identity management
 
@@ -390,7 +544,7 @@ To learn more about migration, see [process instance migration](/components/conc
 
 A new Camunda Exporter brings the importer and archiving logic of web components (Tasklist and Operate) closer to the distributed platform (Zeebe). The index schema is also being harmonized.
 
-To learn more about this feature, see the [Camunda Exporter documentation](/self-managed/zeebe-deployment/exporters/camunda-exporter.md).
+To learn more about this feature, see the [Camunda Exporter documentation](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md).
 
 ### Backup and restore improvements <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 

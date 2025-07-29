@@ -14,13 +14,13 @@ This connector is compatible with both Camunda 8 SaaS and Camunda 8 Self-Managed
 
 :::note
 Password authentication with Operate is currently not supported.
-If you are using Camunda 8 Self-Managed, you can only authenticate using [Identity](/self-managed/operate-deployment/operate-authentication.md#identity).
+If you are using Camunda 8 Self-Managed, you can only authenticate using [Identity](/self-managed/components/orchestration-cluster/operate/operate-authentication.md#identity).
 :::
 
 You also need to obtain the Operate API client credentials. Follow the links below to learn more about API client configuration.
 
 - [API client configuration in Camunda 8 SaaS](/components/console/manage-clusters/manage-api-clients.md)
-- [Authentication with a Self-Managed Operate deployment](/self-managed/operate-deployment/operate-authentication.md#identity)
+- [Authentication with a Self-Managed Operate deployment](/self-managed/components/orchestration-cluster/operate/operate-authentication.md#identity)
 
 :::note
 Use Camunda secrets to store credentials so you don't expose sensitive information directly from the process. See [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
@@ -38,7 +38,7 @@ Choose between **Camunda 8 SaaS** and **Camunda 8 Self-Managed** depending on yo
 
 ### SaaS clusters
 
-If you are using a SaaS cluster, you will be required to provide your **region Id** and **cluster Id**. You will see these values when you [create an API client](/guides/setup-client-connection-credentials.md) for your cluster.
+If you are using a SaaS cluster, you will be required to provide your **region Id** and **cluster Id**. You will see these values when you [create an API client](/components/console/manage-clusters/setup-client-connection-credentials.md) for your cluster.
 
 ### Self-Managed clusters
 
@@ -55,7 +55,7 @@ If you are testing this connector on your local machine with the Camunda 8 Docke
 ## Configure authentication
 
 For both SaaS and Self-Managed clusters, you need to provide **clientId** and **clientSecret**.
-You will see these values when you [create an API client](/guides/setup-client-connection-credentials.md) for your cluster.
+You will see these values when you [create an API client](/components/console/manage-clusters/setup-client-connection-credentials.md) for your cluster.
 
 For Self-Managed clusters, you can additionally specify the Operate **audience**.
 If you are using the default Identity configuration, leave the default `operate-api` value.

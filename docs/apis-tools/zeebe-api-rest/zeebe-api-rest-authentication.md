@@ -18,7 +18,7 @@ All Zeebe REST API requests require authentication. To authenticate, generate a 
 ]}>
 <TabItem value='saas'>
 
-1. [Create client credentials](/guides/setup-client-connection-credentials.md) in the **Clusters > Cluster name > API** tab of [Camunda Console](https://console.camunda.io/).
+1. [Create client credentials](/components/console/manage-clusters/setup-client-connection-credentials.md) in the **Clusters > Cluster name > API** tab of [Camunda Console](https://console.camunda.io/).
 2. Add permissions to this client for **Zeebe**.
 3. Once you have created the client, capture the following values required to generate a token:
    <!-- this comment convinces the markdown processor to still treat the table as a table, but without adding surrounding paragraphs. 🤷 -->
@@ -58,10 +58,10 @@ All Zeebe REST API requests require authentication. To authenticate, generate a 
 
 <TabItem value='self-managed'>
 
-1. [Add an M2M application in Identity](/self-managed/identity/application-user-group-role-management/applications.md).
-2. [Add permissions to this application](/self-managed/identity/application-user-group-role-management/applications.md) for **Zeebe API**.
+1. [Add an M2M application in Identity](/self-managed/components/management-identity/application-user-group-role-management/applications.md).
+2. [Add permissions to this application](/self-managed/components/management-identity/application-user-group-role-management/applications.md) for **Zeebe API**.
 3. Capture the `Client ID` and `Client Secret` from the application in Identity.
-4. [Generate a token](/self-managed/identity/authentication.md) to access the Zeebe REST API. Provide the `client_id` and `client_secret` from the values you previously captured in Identity.
+4. [Generate a token](/self-managed/components/management-identity/authentication.md) to access the Zeebe REST API. Provide the `client_id` and `client_secret` from the values you previously captured in Identity.
    ```shell
    curl --location --request POST 'http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token' \
    --header 'Content-Type: application/x-www-form-urlencoded' \

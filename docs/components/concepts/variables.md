@@ -8,7 +8,7 @@ Variables are part of a process instance and represent the data of the instance.
 
 A variable has a name and a JSON value. The visibility of a variable is defined by its variable scope.
 
-When [automating a process using BPMN](../../guides/automating-a-process-using-bpmn.md) or [orchestrating human tasks](../../guides/getting-started-orchestrate-human-tasks.md), you can leverage the scope of these variables and customize how variables are merged into the process instance.
+When [automating a process using BPMN](/components/modeler/bpmn/automating-a-process-using-bpmn.md) or [orchestrating human tasks](../../guides/getting-started-orchestrate-human-tasks.md), you can leverage the scope of these variables and customize how variables are merged into the process instance.
 
 ## Variable names
 
@@ -109,11 +109,13 @@ Variable mappings are evaluated in the defined order. Therefore, a `source` expr
 
 ### Input mappings
 
-Input mappings can be used to create new variables. They can be defined on service tasks and subprocesses.
+Input mappings can be used to create new variables. They can be defined on [service tasks](/components/modeler/bpmn/service-tasks/service-tasks.md), [script tasks](/components/modeler/bpmn/script-tasks/script-tasks.md), [business rule tasks](/components/modeler/bpmn/business-rule-tasks/business-rule-tasks.md), [call activities](/components/modeler/bpmn/call-activities/call-activities.md), [user tasks](/components/modeler/bpmn/user-tasks/user-tasks.md), [send tasks](/components/modeler/bpmn/send-tasks/send-tasks.md), and [subprocesses](/components/modeler/bpmn/subprocesses.md).
 
-When an input mapping is applied, it creates a new **local variable** in the scope where the mapping is defined.
+When an input mapping is applied, it creates a new [**local variable**](#local-variables) in the scope where the mapping is defined.
 
-For string literals containing escaped characters (e.g., a newline character `\n`), the string is returned in its original form as expected (without double escaping).
+You can use [expressions](./expressions.md) or static values for input mappings.
+
+For string literals containing escaped characters (e.g., a newline character `\n`), the string is returned in its original form as expected (no double escaping is applied).
 
 Examples:
 
@@ -122,6 +124,7 @@ Examples:
 | `orderId: "order-123"`                 | **source:** `=orderId`<br/> **target:** `reference`                                                          | `reference: "order-123"`                    |
 | `customer:{"name": "John"}`            | **source:** `=customer.name`<br/>**target:** `sender`                                                        | `sender: "John"`                            |
 | `customer: "John"`<br/>`iban: "DE456"` | **source:** `=customer`<br/> **target:** `sender.name`<br/>**source:** `=iban`<br/>**target:** `sender.iban` | `sender: {"name": "John", "iban": "DE456"}` |
+| -                                      | **source:** `"Peter"`<br/>**target:** `sender`                                                               | `sender: "Peter"`                           |
 
 ### Output mappings
 
@@ -132,6 +135,10 @@ Output mappings can be used for several purposes:
 - They can be used in script and user tasks.
 
 If **one or more** output mappings are defined, the results variables are set as **local variables** in the scope where the mapping is defined. Then, the output mappings are applied to the variables and create new variables in this scope. The new variables are merged into the parent scope. If there is no mapping for a job/message variable, the variable is not merged.
+
+:::note
+This can lead to a case where some variables with an output mapping are merged into the parent scope, and others without an output mapping are not merged.
+:::
 
 If **no** output mappings are defined, all results variables are merged into the process instance.
 

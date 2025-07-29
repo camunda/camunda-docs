@@ -224,4 +224,4 @@ We could apply the following modifications, but the process instance may end up 
 
 The process instance doesn't detect these situations. It is up to you to apply suitable modifications.
 
-When in doubt, we recommend testing your modification on a non-production cluster or using [Zeebe process test](../../apis-tools/java-client/zeebe-process-test.md).
+When in doubt, we recommend testing your modification on a non-production cluster or using [Camunda Process Test](../../apis-tools/testing/getting-started.md).

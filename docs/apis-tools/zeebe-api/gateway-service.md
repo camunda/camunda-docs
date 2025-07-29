@@ -75,6 +75,25 @@ message ActivateJobsResponse {
 }
 
 message ActivatedJob {
+  // Describes the kind of job.
+  enum JobKind {
+    BPMN_ELEMENT = 0;
+    EXECUTION_LISTENER = 1;
+    TASK_LISTENER = 2;
+  }
+
+  // Describes the listener event type of the job.
+  enum ListenerEventType {
+    ASSIGNING = 0;
+    CANCELING = 1;
+    COMPLETING = 2;
+    CREATING = 3;
+    END = 4;
+    START = 5;
+    UNSPECIFIED = 6;
+    UPDATING = 7;
+  }
+
   // the key, a unique identifier for the job
   int64 key = 1;
   // the type of the job (should match what was requested)
@@ -106,6 +125,10 @@ message ActivatedJob {
   string variables = 13;
   // the ID of the tenant that owns the job
   string tenantId = 14;
+  // the kind of the job.
+  JobKind kind = 15;
+  // the listener event type of the job.
+  ListenerEventType listenerEventType = 16;
 }
 ```
 
@@ -227,6 +250,7 @@ message JobResult{
   // In this example, the completion of a task is represented by a job that the worker can complete as denied.
   // As a result, the completion request is rejected and the task remains active.
   // Defaults to false.
+  // Only applicable for user task listener jobs.
   optional bool denied = 1;
   // Attributes that were corrected by the worker.
   // The following attributes can be corrected, additional attributes will be ignored:
@@ -236,8 +260,17 @@ message JobResult{
   //   * `candidateGroups` - clear by providing an empty list
   //   * `candidateUsers` - clear by providing an empty list
   //   * `priority` - minimum 0, maximum 100, default 50
-  //  Omitting any of the attributes will preserve the persisted attribute's value.
+  // Omitting any of the attributes will preserve the persisted attribute's value.
+  // Only applicable for user task listener jobs.
   optional JobResultCorrections corrections = 2;
+  // The reason provided by the user task listener for denying the work.
+  optional string deniedReason = 3;
+  // Identifies the type of job result. Must be either "userTask" or "adHocSubprocess".
+  // Defaults to "userTask" if not explicitly set.
+  optional string type = 4;
+  // The list of elements that should be activated after the job is completed.
+  // Only applicable for ad-hoc subprocesses.
+  repeated JobResultActivateElement activateElements = 5;
 }
 
 message JobResultCorrections {
@@ -253,6 +286,17 @@ message JobResultCorrections {
   optional StringList candidateGroups = 5;
   // The priority of the task.
   optional int32 priority = 6;
+}
+
+message JobResultActivateElement {
+  // The id of the element to activate
+  string elementId = 1;
+  // JSON document of variables that will be created on the scope of the activated element.
+  // It must be a JSON object, as variables will be mapped in a key-value fashion.
+  // e.g. { "a": 1, "b": 2 } will create two variables, named "a" and
+  // "b" respectively, with their associated values. [{ "a": 1, "b": 2 }] would not be a
+  // valid argument, as the root of the JSON document is an array and not an object.
+  string variables = 2;
 }
 
 message StringList {
@@ -1335,6 +1379,25 @@ message StreamActivatedJobsRequest {
 
 ```protobuf
 message ActivatedJob {
+  // Describes the kind of job.
+  enum JobKind {
+    BPMN_ELEMENT = 0;
+    EXECUTION_LISTENER = 1;
+    TASK_LISTENER = 2;
+  }
+
+  // Describes the listener event type of the job.
+  enum ListenerEventType {
+    ASSIGNING = 0;
+    CANCELING = 1;
+    COMPLETING = 2;
+    CREATING = 3;
+    END = 4;
+    START = 5;
+    UNSPECIFIED = 6;
+    UPDATING = 7;
+  }
+
   // the key, a unique identifier for the job
   int64 key = 1;
   // the type of the job (should match what was requested)
@@ -1366,6 +1429,10 @@ message ActivatedJob {
   string variables = 13;
   // the ID of the tenant that owns the job
   string tenantId = 14;
+  // the kind of the job.
+  JobKind kind = 15;
+  // the listener event type of the job.
+  ListenerEventType listenerEventType = 16;
 }
 ```
 

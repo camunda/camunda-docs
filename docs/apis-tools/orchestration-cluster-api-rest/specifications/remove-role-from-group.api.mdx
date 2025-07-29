@@ -1,0 +1,279 @@
+---
+id: remove-role-from-group
+title: "Unassign a role from a group"
+description: "Unassigns a role from a group."
+sidebar_label: "Unassign a role from a group"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWUtz2zYQ/is76KHJlCaV1GlT3jR+pOqkqceR2+m4PoDgUkQCAgwASlY1/O+dBUhbluU0zfSog0YiAey3r28BrDbM84Vj+TW7NArZTcJMi5Z7afSsZDmz2Jgl0ti5Nc0ba7qWJaxEJ6xsaRbL2ZXmzsmFdsDBGoVQWdMAhwXNTv/SLGEtt7xBj5agNkzzBkm4UTgrWcIkiWm5r1nCLH7qpMWS5d52uIs1rzFizE5TljAnamw4yzfMr1sS6byVesH6PrlDCWp8BUxY9684NyTKtUY7dDT+cnJMX09oveIOusFdWILrhEDnqk6pdfSaH4FT1ifseDLZL6y1ZilLLKHknoN0oI2HJVeyJG2F0R61p6W8bZUUIZ5Za02hsPnugyM5my2jHgJM4SLOhBI9lwpM8QGFB+4gTiywBKnh+vL8BH46fvXjzbPa+9blWbZarVJbiSMspTc2NXaR2UrQh+Y9T2Feo0Vo+BoKBF6WkjC5IoNatF6iA9eikJUU4E1wx6A2kOdjNg0xiGpRdt0tvo/QbqQSVhnbcM9y1ln5KIencHU5A1mi9rJaS714DB3WVLxTJIMXpvN5obj+SIHy0qu9oLsormsabtdgqj0AfcKc577bMoNJ7XGBdlt/qf33Lx/JprT4eT6/gCgChCkRKmPB19KNQGREI7Vsuoblx5NJwhp+G59+mEx6kkkR/wJLNOBtq7gOqbVrjtTQGItD/gTDpHaea/F/RcZYuZC7uCnxfowFG5L4NFrU930g1PeP8/3c2EKWJeqQnkCVAZ0fWcWVMis88OrAqwOvPsOrz+16xg6b6Ur6Om5xcokaZqdhQySWVabTB44dOHbg2JMce7XvMDjVQF62lIdorbFghOisxRJWtVRBPB0xR+xhc4u5eODagWsHru3n2p5zInnOoV1KgXQ4DDTTXq3pRrfkUvFCIWWudCFxa962qMFotQajwZnmjn4OViG/SSe3dh4bEBa5RwcFFx9bi851NG6gtbhE7eNUtEu031LMmrbzJM6Zzgp08fJYIJmNtzXvnMcyAb40sqR3wcsOlwRacak6iy6FEyVRewfckihhmgY1XSq9gQDacbqXWvR2Db42bkt/Xnm0wIO6pqqgRStNmcKfpgPBNSjkdghuoEDQ/4FtDYqaa+kaIFfkMJaG0giXCt50uuSpNOE5I4ONJmWzvxELzDyKWkvB1ZEwWmDrXTbWwaP7kpd9U3NdKqkXRw+wD+XvUP4O5e+p8tcnrEFfG+r/lajQY+jg+ZrlLKMDvcs2sXXXZ+Fc77LN0GTrqVcWqlRs9HVWsZxtIoX6PMs2tXG+zzetsb7PlhSfJbeSSmcIJw1Hqo0ppIzgKrzeF0oaoD7faOJvVtTofOxgwomiQmjh8uz9HN5wjyu+Dm4m+IcwryevJ3sRaOoXSJ9ezIb6HBN0q2iMEMT+vRBx8n8FCb1Hh6Kz0q/fk4jowgK5RTvtKF53STRgByR6jpNYMvw4H1Prlz/mITukrkxYPmTJ55WiKKJ10aJJ+uJxdl7MAsloj+l0qLR6Ea+DHE5isYfXIKJcop+SArULPBj6uOO0t3EEfo+I8CKlwMVMGwvsQvq6K1JhmmzYSu6+C2WKrOFSZwOEy06mv169O50evZ2dnL17f3b0Ip2k/tYHR7TG+YbrLT3Gdve+bveu4Zv7TeZL2uRDsDze+qxVXGpKpWDZZiDgdWiaO5aw/K57HjlIr8ZW900yEOmabTYFd3hlVd/T608d2jXLr2/ueReIWkpHv0uWV1y53X74thnPLofO+XPYacbv1X54yfU6UF119MQS9hHX9/8AULf+qzXY7tN/hQqjz/qbPmE18hJt8EgcnQo6XGyte/KkQGy8K5unZ2/P5mes7/8BTBXI3w==
+sidebar_class_name: "delete api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Unassign a role from a group"}
+></Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/roles/{roleId}/groups/{groupId}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Unassigns a role from a group.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "roleId",
+      in: "path",
+      required: true,
+      description: "The role ID.",
+      schema: { type: "string" },
+    },
+    {
+      name: "groupId",
+      in: "path",
+      required: true,
+      description: "The group ID.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "204": {
+      description: "The role was unassigned successfully from the group.",
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The role or group with the given ID was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "503": {
+      description:
+        "The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>
