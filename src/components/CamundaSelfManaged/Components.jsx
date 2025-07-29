@@ -65,7 +65,7 @@ const Components = () => {
     <div className="sm-components">
       <h2>Components</h2>
       <p>
-        A reference for Camunda 8 components, including detailed configuration 
+        A reference for Camunda 8 components, including detailed configuration
         guidance for each component and application upgrade instructions.
       </p>
       <div className="sm-grid-2">
