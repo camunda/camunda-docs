@@ -9,19 +9,17 @@ keywords: ["what's changed", "what's new"]
 import OrchestrationClusterImg from './assets/orchestration-cluster.png';
 import PersonaBadge from './react-components/\_persona-badge';
 
-Learn more about important changes in Camunda 8.8 when migrating from Camunda 8.7.
+Learn about important changes in Camunda 8.8 to consider when migrating from Camunda 8.7.
 
-:::warning
+:::warning work in progress
 This documentation page is a work in progress and may contain incomplete, placeholder, or evolving content. While the core concepts introduced in Camunda 8.8 are stable, details and sections here are actively being refined.
-
-See [release announcements](/reference/announcements-release-notes/880/880-announcements.md), [release notes](/reference/announcements-release-notes/880/880-release-notes.md), and the [quality board](https://github.com/orgs/camunda/projects/187/views/15) for more detail on what's included in Camunda 8.8.
 :::
 
 ## Introducing Camunda 8.8
 
-Camunda 8.8 introduces fundamental changes and enhancements as part of our architecture streamlining initiative, unifying former isolated components such as Operate, Tasklist and identity management into one Orchestration Cluster component that serves a unified Orchestration Cluster API.
+Camunda 8.8 introduces important architectural changes and enhancements, unifying formerly isolated components such as Operate, Tasklist, and identity management into a single **Orchestration Cluster** component serving a unified Orchestration Cluster API.
 
-The simplest possible deployment now becomes running a single Java application or docker container of the Orchestration Cluster Application.
+The simplest Self-Managed deployment now involves running a single Java application or docker container of the Orchestration Cluster Application.
 
 <table className="table-callout">
 <tr>
@@ -33,38 +31,27 @@ The simplest possible deployment now becomes running a single Java application o
     <td>The Orchestration Cluster (previously automation cluster) is now the core Camunda 8 component.</td>
 </tr>
 <tr>
-    <td>[Identity, authentication, and authorization](#identity-authentication-and-authorization)</td>
-    <td>Details coming soon.</td>
+    <td>[Identity, authentication, and authorization](#identity)</td>
+    <td>With the introduction of IAM functionality into the Orchestration Cluster with Camunda 8.8 the source of truth for IAM on cluster resources moves from the former Identity component, now called Management Identity, into the Orchestration Cluster itself.</td>
 </tr>
 <tr>
     <td>[APIs and SDKs](#apis-and-sdks)</td>
     <td>New and changed APIs and SDKs are introduced to interact programmatically with the Orchestration Cluster.</td>
 </tr>
-<!-- <tr>
-    <td>[Camunda User Tasks](#camunda-user-tasks)</td>
-    <td>Deprecation of job-based user tasks, replaced by Camunda user tasks.</td>
-</tr>
-<tr>
-    <td>[Camunda Process Test](#camunda-process-test)</td>
-    <td>Deprecation of Zeebe Process Test, replaced by Camunda Process Test.</td>
-</tr>
-<tr>
-    <td>[Data and storage](#data)</td>
-    <td>Exporters, etc.</td>
-</tr>
-<tr>
-    <td>[Deployment and configuration](#deployment)</td>
-    <td>Unified components, etc.</td>
-</tr> -->
 </table>
+
+:::info
+
+- See [release announcements](/reference/announcements-release-notes/880/880-announcements.md), [release notes](/reference/announcements-release-notes/880/880-release-notes.md), and the [quality board](https://github.com/orgs/camunda/projects/187/views/15) for more detail on what's included in Camunda 8.8.
+- Ready to upgrade? See our [upgrade guides](#upgrade-guides) to learn more about upgrading from Camunda 8.7 to 8.8.
+
+:::
 
 ## Orchestration Cluster {#orchestration-cluster}
 
-<div><PersonaBadge persona="Administrator (DevOps)" /><PersonaBadge persona="Developer" /></div>
-
 The Orchestration cluster (previously automation cluster) is now the core component of [Camunda 8](../reference/glossary.md#camunda-8), powering the automation and orchestration of [processes](../reference/glossary.md#process).
 
-<img src={OrchestrationClusterImg} alt="Diagram showing the orchestration cluster" class="img-noborder img-700" style={{marginBottom: '0'}}/>
+<img src={OrchestrationClusterImg} alt="Diagram showing the orchestration cluster" class="img-noborder" style={{marginBottom: '0'}}/>
 
 ### Zeebe, Operate, and Tasklist
 
@@ -98,22 +85,17 @@ Content is here
 
 ### New Java/Spring SDK, Node.js -->
 
-## Camunda user tasks
+## Identity, authentication, and authorization {#identity}
 
-<div><PersonaBadge persona="Administrator (DevOps)" /><PersonaBadge persona="Developer" /></div>
+## APIs and SDKs {#apis-and-sdks}
 
-The Orchestration cluster (previously automation cluster) is now the core component of [Camunda 8](../reference/glossary.md#camunda-8), powering the automation and orchestration of [processes](../reference/glossary.md#process).
+## Upgrade guides {#upgrade-guides}
 
-<!-- ## Camunda Process Test
+Camunda 8.8 lays the foundation for future releases. Upgrading ensures compatibility and access to improved features.
 
-<div><PersonaBadge persona="Developer" /></div> -->
+The following guides provide detailed information on how to upgrade to Camunda 8.8.
 
-## Data and storage {#data}
-
-### Exporters
-
-A new Camunda Exporter is introduced, bringing the importing and archiving logic of web components (Tasklist and Operate) closer to the distributed platform (Zeebe). This simplifies installation, enables scalability for the web applications, reduces latency when showing runtime and historical data, and reduces data duplication (resource consumption).
-
-## Update guides
-
-We have two specific update guides in place written for operators of [Self-Managed installations](/self-managed/components/components-upgrade/introduction.md) and developers using [APIs and our SDKs](../apis-tools/migration-manuals/index.md).
+| Guide                                                                                     | Description                                                                                      | Who is this guide for?                                                                                                                                       |
+| :---------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Self-Managed upgrade guide](/self-managed/components/components-upgrade/introduction.md) |                                                                                                  | Operations and platform administrators of Self-Managed installations.                                                                                        |
+| [API and SDK upgrade guide](../apis-tools/migration-manuals/index.md)                     | <p>Plan and execute an upgrade from Camunda 8.7 to 8.8, focusing on API and SDK transitions.</p> | <p>Application developers maintaining Camunda-based solutions in Self-Managed Kubernetes or VM environments, and developers using Camunda APIs and SDKs.</p> |
