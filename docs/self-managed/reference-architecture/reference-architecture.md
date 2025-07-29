@@ -46,7 +46,7 @@ The following components are bundled into a single artifact:
 - [Zeebe](/components/zeebe/zeebe-overview.md): A workflow engine for orchestrating microservices and managing stateful, long-running business processes.
 - [Operate](/components/operate/operate-introduction.md): A monitoring tool for visualizing and troubleshooting workflows running in Zeebe.
 - [Tasklist](/components/tasklist/introduction-to-tasklist.md): A user interface for managing and completing human tasks within workflows.
-- [Identity](/self-managed/orchestration-identity/orchestration-identity.md): A service for managing user authentication and authorization.
+- [Identity](/self-managed/components/orchestration-cluster/identity/overview.md): A service for managing user authentication and authorization.
 
 Thematically close to the Orchestration Cluster are following components:
 
@@ -64,11 +64,11 @@ This design ensures that all components are in sync, working collectively to mai
 Web Modeler and Console are designed to interact with multiple Orchestration Clusters. Console offers tools and interfaces for administrators to monitor clusters, and Web Modeler allows developers to create and deploy BPMN models.
 
 - [Console](/components/console/introduction-to-console.md): A central management interface for monitoring and managing multiple Orchestration Clusters.
-- [Web Modeler](/self-managed/modeler/web-modeler/installation.md): A web-based tool for designing and deploying workflow models to any available Orchestration Cluster.
+- [Web Modeler](/self-managed/components/modeler/web-modeler/overview.md): A web-based tool for designing and deploying workflow models to any available Orchestration Cluster.
 
 Additionally, Web Modeler and Console require the following:
 
-- [Management Identity](/self-managed/identity/what-is-identity.md): A service for managing user authentication and authorization.
+- [Management Identity](/self-managed/components/management-identity/what-is-identity.md): A service for managing user authentication and authorization.
 
 Unlike the Orchestration Cluster, Web Modeler and Console run a separate and dedicated Management Identity deployment. This is not the same as the embedded Identity in the Orchestration Cluster. Optimize also relies on the Management Identity and will not function without it. It is not compatible with the embedded Orchestration Cluster Identity.
 For production environments, using an external [identity provider](/self-managed/installation-methods/helm/configure/connect-to-an-oidc-provider.md) is recommended to connect the two environments.
@@ -88,7 +88,7 @@ By decoupling databases from Camunda, you gain greater control and customization
 
 ### High availability (HA)
 
-High availability (HA) ensures that a system remains operational and accessible even in the event of component failures. While all components are equipped to be run in a highly available manner. Optimize requires extra considerations when run in HA mode as the importer / archiver should only run once across all replicas. Related settings can be found as part of the [Optimize configuration](/self-managed/optimize-deployment/configuration/system-configuration-platform-8.md#general-settings).
+High availability (HA) ensures that a system remains operational and accessible even in the event of component failures. While all components are equipped to be run in a highly available manner. Optimize requires extra considerations when run in HA mode as the importer / archiver should only run once across all replicas. Related settings can be found as part of the [Optimize configuration](/self-managed/components/optimize/configuration/system-configuration-platform-8.md#general-settings).
 
 While high availability is one part of the increased fault tolerance and resilience, you should also consider regional or zonal placement of your workloads.
 

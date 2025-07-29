@@ -90,10 +90,10 @@ This applies to **Optimize**:
 
 When scaling from a single pod to multiple pods, ensure that the `importer / archiver` is enabled on only one pod. Enabling it on more than one pod may cause data inconsistencies. This is a known limitation and will be addressed in a future update.
 
-See the [Optimize system configuration guide](/self-managed/optimize-deployment/configuration/system-configuration-platform-8.md#general-settings) for example settings.
+See the [Optimize system configuration guide](/self-managed/components/optimize/configuration/system-configuration-platform-8.md#general-settings) for example settings.
 :::
 
-For high availability, we recommend a minimum of **four Kubernetes nodes** to ensure fault tolerance and support leader election. This is especially important when using the [Raft protocol](https://en.wikipedia.org/wiki/Raft_(algorithm)) for consensus within the Orchestration Cluster. For more details, refer to the [clustering documentation](/components/zeebe/technical-concepts/clustering.md).
+For high availability, we recommend a minimum of **four Kubernetes nodes** to ensure fault tolerance and support leader election. This is especially important when using the [Raft protocol](<https://en.wikipedia.org/wiki/Raft_(algorithm)>) for consensus within the Orchestration Cluster. For more details, refer to the [clustering documentation](/components/zeebe/technical-concepts/clustering.md).
 
 While Deployments and StatefulSets in Kubernetes can scale independently of physical hardware, four nodes are typically required to support:
 
@@ -127,7 +127,7 @@ As shown in the [architecture diagram](#orchestration-cluster), the Orchestratio
 - [Zeebe](/components/zeebe/zeebe-overview.md) — workflow engine and broker
 - [Operate](/components/operate/operate-introduction.md) — visibility and troubleshooting UI
 - [Tasklist](/components/tasklist/introduction-to-tasklist.md) — UI for human tasks
-- [Identity](/self-managed/orchestration-identity/orchestration-identity.md) — authentication and access control
+- [Identity](/self-managed/components/orchestration-cluster/identity/overview.md) — authentication and access control
 
 Also included in this namespace are components that are tightly integrated with the cluster:
 
@@ -138,9 +138,9 @@ Also included in this namespace are components that are tightly integrated with 
 
 As shown in the [architecture diagram](#web-modeler-and-console), this namespace contains:
 
-- **Web Modeler** — browser-based BPMN editor
-- [**Console**](/self-managed/console-deployment/overview.md) — administrative interface
-- [**Management Identity**](/self-managed/identity/what-is-identity.md) — centralized access control
+- [Web Modeler](/self-managed/components/modeler/web-modeler/overview.md) — browser-based BPMN editor
+- [Console](/self-managed/components/console/overview.md) — administrative interface
+- [Management Identity](/self-managed/components/management-identity/what-is-identity.md) — centralized access control
 
 This namespace also includes **Keycloak**, which serves as the Identity Provider (IdP) for Management Identity.
 
@@ -160,7 +160,7 @@ Camunda 8 is not tied to a specific Kubernetes version. To simplify deployment, 
 
 #### Minimum cluster requirements
 
-The following are suggested minimum requirements. Sizing depends heavily on your specific use cases and workload. Refer to [sizing your environment](/components/best-practices/architecture/sizing-your-environment.md) and [Zeebe resource planning](/self-managed/zeebe-deployment/operations/resource-planning.md), and conduct benchmarking to determine your exact needs.
+The following are suggested minimum requirements. Sizing depends heavily on your specific use cases and workload. Refer to [sizing your environment](/components/best-practices/architecture/sizing-your-environment.md) and [Zeebe resource planning](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md), and conduct benchmarking to determine your exact needs.
 
 - **4 Kubernetes nodes**
   - CPU: 4 modern cores
@@ -198,7 +198,7 @@ Typical defaults include:
 
 - `5432`: PostgreSQL
 - `9200`, `9300`, `9600`: Elasticsearch/OpenSearch
-:::
+  :::
 
 ##### Load balancer
 

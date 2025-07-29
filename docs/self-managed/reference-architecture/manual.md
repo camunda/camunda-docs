@@ -52,7 +52,7 @@ The Orchestration Cluster is packaged as a single JAR file and includes the foll
 - [Zeebe](/components/zeebe/zeebe-overview.md)
 - [Operate](/components/operate/operate-introduction.md)
 - [Tasklist](/components/tasklist/introduction-to-tasklist.md)
-- [Identity](/self-managed/orchestration-identity/orchestration-identity.md)
+- [Identity](/self-managed/components/orchestration-cluster/identity/overview.md)
 
 It facilitates:
 
