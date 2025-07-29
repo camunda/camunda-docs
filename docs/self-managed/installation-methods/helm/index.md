@@ -50,7 +50,7 @@ The following charts are installed as part of the Camunda 8 Self-Managed platfor
 :::note Amazon OpenSearch Helm support
 The existing Helm charts are configured to use Elasticsearch by default, but they can also be configured to connect to Amazon OpenSearch Service. Refer to the guide on [using Amazon OpenSearch Service](/self-managed/installation-methods/helm/configure/database/using-existing-opensearch.md).
 
-**Zeebe**: Configure the [OpenSearch exporter](/self-managed/zeebe-deployment/exporters/opensearch-exporter.md).
+**Zeebe**: Configure the [OpenSearch exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md).
 
 **Operate**, **Tasklist**, and **Optimize**: These components use the same configuration keys for both Elasticsearch and OpenSearch. To switch, replace the `elasticsearch` prefix with `opensearch` and provide the corresponding values.
 
@@ -58,9 +58,9 @@ For example, `CAMUNDA_OPERATE_ELASTICSEARCH_URL` becomes `CAMUNDA_OPERATE_OPENSE
 
 Refer to the configuration documentation for each component for additional parameters:
 
-- [Operate](/self-managed/operate-deployment/operate-configuration.md#settings-for-opensearch)
-- [Tasklist](/self-managed/tasklist-deployment/tasklist-configuration.md#elasticsearch-or-opensearch)
-- [Optimize](/self-managed/optimize-deployment/configuration/system-configuration.md#opensearch)
+- [Operate](/self-managed/components/orchestration-cluster/operate/operate-configuration.md#settings-for-opensearch)
+- [Tasklist](/self-managed/components/orchestration-cluster/tasklist/tasklist-configuration.md#elasticsearch-or-opensearch)
+- [Optimize](/self-managed/components/optimize/configuration/system-configuration.md#opensearch)
   :::
 
 ![Camunda 8 Self-Managed Architecture Diagram](./assets/camunda-platform-8-self-managed-architecture-diagram-combined-ingress.png)
@@ -467,6 +467,6 @@ For upgrading the Camunda Helm chart from one release to another, perform a [Hel
 
 ## General notes
 
-- **Zeebe Gateway** is deployed as a stateless service. We support [Kubernetes startup and liveness probes](/self-managed/zeebe-deployment/configuration/gateway-health-probes.md) for Zeebe.
+- **Zeebe Gateway** is deployed as a stateless service. We support [Kubernetes startup and liveness probes](/self-managed/components/orchestration-cluster/zeebe/configuration/gateway-health-probes.md) for Zeebe.
 - **Zeebe broker nodes** must be deployed as a [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) to preserve cluster node identities. StatefulSets require persistent storage, which must be provisioned in advance. The type of persistent storage depends on your cloud provider.
 - **Docker pull limits** apply when downloading Camunda 8 images from Docker Hub. To avoid disruptions, authenticate with Docker Hub, use a mirror registry, or follow our guide on [installing in an air-gapped environment](/self-managed/installation-methods/helm/configure/air-gapped-installation.md).

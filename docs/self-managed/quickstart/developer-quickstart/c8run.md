@@ -67,7 +67,7 @@ The following command-line arguments are available:
 
 | Argument                   | Description                                                                                                                                                                                                                   |
 | -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--config <path>`          | Applies the specified Zeebe [`application.yaml`](/self-managed/zeebe-deployment/configuration/configuration.md).                                                                                                              |
+| `--config <path>`          | Applies the specified Zeebe [`application.yaml`](/self-managed/components/orchestration-cluster/zeebe/configuration/configuration.md).                                                                                        |
 | `--username <arg>`         | Configures the first user’s username as `<arg>`.                                                                                                                                                                              |
 | `--password <arg>`         | Configures the first user’s password as `<arg>`.                                                                                                                                                                              |
 | `--keystore <arg>`         | Configures the TLS certificate for HTTPS. If not specified, HTTP is used. For more information, see [enabling TLS](#enable-tls).                                                                                              |
@@ -111,7 +111,7 @@ The following components do not have a web interface, but their endpoints are us
 
 Make sure you have installed [Desktop Modeler](/components/modeler/desktop-modeler/install-the-modeler.md) before continuing.
 
-To [deploy diagrams](/self-managed/modeler/desktop-modeler/deploy-to-self-managed.md) from Desktop Modeler, use the following configuration:
+To [deploy diagrams](/self-managed/components/modeler/desktop-modeler/deploy-to-self-managed.md) from Desktop Modeler, use the following configuration:
 
 - **Target:** Self-Managed
 - **Cluster endpoint:** `http://localhost:26500` (Zeebe Gateway)
@@ -136,10 +136,8 @@ All APIs are **unprotected by default** in Camunda 8 Run and can be accessed wit
 
 Available APIs include:
 
-- [Tasklist V1](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md)
-- [Operate V1](/apis-tools/operate-api/overview.md)
-- [Zeebe gRPC](/apis-tools/zeebe-api/grpc.md)
 - [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md)
+- [Zeebe gRPC](/apis-tools/zeebe-api/grpc.md)
 
 ### Enable authentication and authorization
 
@@ -160,7 +158,7 @@ Place the above `application.yaml` into your root `/c8run` folder, provide it to
 You are then required to provide basic authentication credentials on API requests, as in the following:
 
 ```shell
-curl --request POST 'http://localhost:8080/v1/process-definitions/search'  \
+curl --request POST 'http://localhost:8080/v2/topology'  \
   -u demo:demo \
   --header 'Content-Type: application/json' \
   --data-raw '{}'

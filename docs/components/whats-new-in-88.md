@@ -239,4 +239,4 @@ A new Camunda Exporter is introduced, bringing the importing and archiving logic
 
 ## Update guides
 
-We have two specific update guides in place written for operators of [Self-Managed installations](../self-managed/update/index.md) and developers using [APIs and our SDKs](../apis-tools/migration-manuals/index.md).
+We have two specific update guides in place written for operators of [Self-Managed installations](/self-managed/components/components-upgrade/introduction.md) and developers using [APIs and our SDKs](../apis-tools/migration-manuals/index.md).

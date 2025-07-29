@@ -19,7 +19,7 @@ To configure an alert, take the following steps:
 3. To give the alert a name, select the report and define a target webhook or email address of the person who will receive the alert.
 
 :::note
-In Camunda 7 and Camunda 8 Self-Managed, you must configure the email service to receive notifications. See the [technical guide](/self-managed/optimize-deployment/configuration/system-configuration.md#email) for which properties need to be defined.
+In Camunda 7 and Camunda 8 Self-Managed, you must configure the email service to receive notifications. See the [technical guide](/self-managed/components/optimize/configuration/system-configuration.md#email) for which properties need to be defined.
 :::
 
 :::note
