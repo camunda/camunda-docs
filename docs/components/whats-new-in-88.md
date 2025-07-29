@@ -30,7 +30,7 @@ The simplest possible deployment now becomes running a single Java application o
 </tr>
 <tr>
     <td>[Orchestration Cluster](#orchestration-cluster)</td>
-    <td>The Orchestration cluster (previously automation cluster) is now the core Camunda 8 component.</td>
+    <td>The Orchestration Cluster (previously automation cluster) is now the core Camunda 8 component.</td>
 </tr>
 <tr>
     <td>[Identity, authentication, and authorization](#identity-authentication-and-authorization)</td>
@@ -38,9 +38,9 @@ The simplest possible deployment now becomes running a single Java application o
 </tr>
 <tr>
     <td>[APIs and SDKs](#apis-and-sdks)</td>
-    <td>New and changed APIs and SDKs for interacting programmatically with the Orchestration cluster.</td>
+    <td>New and changed APIs and SDKs are introduced to interact programmatically with the Orchestration Cluster.</td>
 </tr>
-<tr>
+<!-- <tr>
     <td>[Camunda User Tasks](#camunda-user-tasks)</td>
     <td>Deprecation of job-based user tasks, replaced by Camunda user tasks.</td>
 </tr>
@@ -55,7 +55,7 @@ The simplest possible deployment now becomes running a single Java application o
 <tr>
     <td>[Deployment and configuration](#deployment)</td>
     <td>Unified components, etc.</td>
-</tr>
+</tr> -->
 </table>
 
 ## Orchestration Cluster {#orchestration-cluster}
