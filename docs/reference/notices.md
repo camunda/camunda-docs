@@ -8,6 +8,41 @@ description: "Let's take a closer look at security notices, reporting vulnerabil
 
 Camunda publishes security notices after fixes are available.
 
+### Notice 22
+
+#### Publication date
+
+July 29th, 2025
+
+#### Product affected
+
+Camunda Tasklist
+Camunda Zeebe
+Camunda Operate
+
+#### Impact
+
+Part of our RESTful API that supported multipart file uploads was affected by [CVE-2025-52520](https://nvd.nist.gov/vuln/detail/CVE-2025-52520) with could lead to potential DoS attacks.
+
+#### How to determine if the installation is affected
+
+You are using:
+
+- Tasklist 8.6.0 - 8.6.22 or 8.7.0 - 8.7.8
+- Zeebe 8.6.0 - 8.6.22 or 8.7.0 - 8.7.8
+- Operate 8.6.0 - 8.6.22 or 8.7.0 - 8.7.8
+
+#### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Tasklist 8.6.22
+- Tasklist 8.7.9
+- Zeebe 8.6.23
+- Zeebe 8.7.9
+- Operate 8.6.23
+- Operate 8.7.9
+
 ### Notice 21
 
 #### Publication date
