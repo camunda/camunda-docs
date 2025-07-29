@@ -210,6 +210,10 @@ RewriteRule ^docs/next/self-managed/setup/upgrade/?$ /docs/next/self-managed/ins
 RewriteRule ^docs/next/self-managed/setup/deploy/local/manual/?$ /docs/next/self-managed/installation-methods/manual/manual-install/ [R=301,L]
 RewriteRule ^docs/next/self-managed/setup/guides/installing-payment-example/?$ /docs/next/self-managed/installation-methods/manual/manual-install/ [R=301,L]
 RewriteRule ^docs/next/self-managed/setup/guides/using-existing-keycloak/?$ /docs/next/self-managed/installation-methods/manual/manual-install/ [R=301,L]
+# Quickstart guides
+RewriteRule ^docs/next/self-managed/setup/deploy/local/local-kubernetes-cluster/?$ /docs/next/self-managed/quickstart/administrator-quickstart/ [R=301,L]
+RewriteRule ^docs/next/self-managed/setup/deploy/local/c8run/?$ /docs/next/self-managed/quickstart/developer-quickstart/c8run/ [R=301,L]
+RewriteRule ^docs/next/self-managed/setup/deploy/local/docker-compose/?$ /docs/next/self-managed/quickstart/developer-quickstart/docker-compose/ [R=301,L]
 
 # Remove technical details
 RewriteRule ^docs/next/guides/migrating-from-camunda-7/technical-details/?$ /docs/next/guides/migrating-from-camunda-7/migration-journey/ [R=301,L]
