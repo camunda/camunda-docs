@@ -1,7 +1,7 @@
 ---
 id: manual-install
 title: "Manual installation on local machine"
-sidebar_label: "Manual JAR"
+sidebar_label: "Manual"
 ---
 
 This page guides you through the manual installation of the Camunda 8 on a local or virtual machine.
