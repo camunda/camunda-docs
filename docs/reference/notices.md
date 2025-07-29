@@ -14,15 +14,15 @@ Camunda publishes security notices after fixes are available.
 
 July 29th, 2025
 
-#### Product affected
+#### Products affected
 
-Camunda Tasklist
-Camunda Zeebe
-Camunda Operate
+- Camunda Tasklist
+- Camunda Zeebe
+- Camunda Operate
 
 #### Impact
 
-Part of our RESTful API that supported multipart file uploads was affected by [CVE-2025-52520](https://nvd.nist.gov/vuln/detail/CVE-2025-52520) with could lead to potential DoS attacks.
+Part of our RESTful API that supported multipart file uploads was affected by [CVE-2025-52520](https://nvd.nist.gov/vuln/detail/CVE-2025-52520), which could lead to potential DoS (denial of service) attacks.
 
 #### How to determine if the installation is affected
 
@@ -49,7 +49,7 @@ Camunda has provided the following releases which contain the fix:
 
 June 18th, 2025
 
-#### Product affected
+#### Products affected
 
 Camunda Web Modeler Self-Managed
 
@@ -74,7 +74,7 @@ Camunda has provided the following releases which contain the fix:
 
 June 17th, 2025
 
-#### Product affected
+#### Products affected
 
 Camunda Optimize
 
@@ -99,7 +99,7 @@ Camunda has provided the following release which contains a fix:
 
 May 21st, 2025
 
-#### Product affected
+#### Products affected
 
 Camunda Web Modeler
 
@@ -128,7 +128,7 @@ The fix was deployed to Web Modeler SaaS on May 19, 2025, 15:10 CET.
 
 April 8th, 2025
 
-#### Product affected
+#### Products affected
 
 Camunda Optimize
 
@@ -159,7 +159,7 @@ Camunda has provided the following release which contains a fix:
 
 April 8th, 2025
 
-#### Product affected
+#### Products affected
 
 Camunda Zeebe
 
@@ -192,7 +192,7 @@ Camunda has provided the following release which contains a fix:
 
 March 14th, 2025
 
-#### Product affected
+#### Products affected
 
 Camunda Zeebe
 
@@ -216,7 +216,7 @@ Camunda has provided the following release which contains a fix:
 
 March 11th, 2025
 
-#### Product affected
+#### Products affected
 
 Camunda Optimize
 
@@ -240,7 +240,7 @@ Camunda has provided the following release which contains a fix:
 
 March 11th, 2025
 
-#### Product affected
+#### Products affected
 
 Camunda Web Modeler
 
@@ -271,7 +271,7 @@ The fix was deployed to Web Modeler SaaS on February 14, 2025, 08:50 CET.
 
 July 18th, 2024
 
-#### Product affected
+#### Products affected
 
 Camunda Identity
 
@@ -297,7 +297,7 @@ Camunda has provided the following release which contains a fix:
 
 October 3rd, 2023
 
-#### Product affected
+#### Products affected
 
 Camunda Desktop Modeler
 
@@ -323,7 +323,7 @@ Camunda has provided the following release which contains a fix:
 
 April 17, 2023
 
-#### Product affected
+#### Products affected
 
 Tasklist
 
@@ -357,7 +357,7 @@ Camunda has provided the following releases which contain a fix
 
 November 10th, 2022
 
-#### Product affected:
+#### Products affected:
 
 Tasklist
 
@@ -387,7 +387,7 @@ Camunda has provided the following releases which contain a fix
 
 April 11th, 2022
 
-#### Product affected:
+#### Products affected:
 
 Zeebe, Operate, Tasklist, IAM
 
@@ -414,7 +414,7 @@ Camunda has provided the following releases which contain a fix
 
 December 31th, 2021
 
-#### Product affected:
+#### Products affected:
 
 Zeebe, Operate, Tasklist
 
@@ -440,7 +440,7 @@ Camunda has provided the following releases which contain a fix
 
 December 31th, 2021
 
-#### Product affected:
+#### Products affected:
 
 IAM
 
@@ -465,7 +465,7 @@ Camunda has provided the following releases which contain a fix
 
 December 22th, 2021
 
-#### Product affected:
+#### Products affected:
 
 Zeebe, Operate, Tasklist
 
@@ -491,7 +491,7 @@ Camunda has provided the following releases which contain a fix
 
 December 22th, 2021
 
-#### Product affected:
+#### Products affected:
 
 IAM
 
@@ -519,7 +519,7 @@ Camunda has provided the following releases which contain a fix
 
 December 17th, 2021
 
-#### Product affected:
+#### Products affected:
 
 Zeebe, Operate, Tasklist
 
@@ -545,7 +545,7 @@ Camunda has provided the following releases which contain a fix
 
 December 17th, 2021
 
-#### Product affected:
+#### Products affected:
 
 IAM
 
@@ -573,7 +573,7 @@ Camunda has provided the following releases which contain a fix
 
 December 14th, 2021
 
-#### Product affected:
+#### Products affected:
 
 Zeebe, Operate, Tasklist
 
@@ -601,7 +601,7 @@ Apply the patches mentioned above or set the JVM option `-Dlog4j2.formatMsgNoLoo
 
 December 14th, 2021
 
-#### Product affected:
+#### Products affected:
 
 IAM
 
