@@ -37,7 +37,7 @@ To deploy, click **Deploy** in the upper right corner of the modeling screen:
 
 ![The deploy dialog of a BPMN diagram](img/web-modeler-deploy.png)
 
-In Self-Managed, you can deploy your diagram to the cluster defined in your Web Modeler [configuration](/self-managed/modeler/web-modeler/configuration/configuration.md#clusters). You should have the `Zeebe` [role](/self-managed/identity/application-user-group-role-management/manage-roles.md) assigned in Identity to be authorized to deploy.
+In Self-Managed, you can deploy your diagram to the cluster defined in your Web Modeler [configuration](/self-managed/components/modeler/web-modeler/configuration/configuration.md#clusters). You should have the `Zeebe` [role](/self-managed/components/management-identity/application-user-group-role-management/manage-roles.md) assigned in Identity to be authorized to deploy.
 
 ### Before deploying a process
 
@@ -187,7 +187,7 @@ To publish a process to Tasklist, you first need to [deploy](#deploy-a-process) 
 </TabItem>
 <TabItem value="sm">
 
-To publish a process to Tasklist, you first need to [deploy](#deploy-a-process) it. Once the process is deployed, you need to [set permissions in Identity](../../../self-managed/tasklist-deployment/tasklist-authentication.md#resource-based-permissions) in order to make it accessible in the Tasklist application.
+To publish a process to Tasklist, you first need to [deploy](#deploy-a-process) it. Once the process is deployed, you need to [set permissions in Identity](../../../self-managed/components/orchestration-cluster/tasklist/tasklist-authentication.md#resource-based-permissions) in order to make it accessible in the Tasklist application.
 
 </TabItem>
 </Tabs>
@@ -246,7 +246,7 @@ As soon as a matching event is received, a process instance will be started. To 
 - Make sure that the process is accessible to the appropriate users only.
 
 :::note
-When working on Camunda 8 Self-Managed, you can define access permissions on a per-process level using [Identity Resource Authorizations](/self-managed/identity/access-management/resource-authorizations.md).
+When working on Camunda 8 Self-Managed, you can define access permissions on a per-process level using [Authorizations](/components/concepts/access-control/authorizations.md).
 :::
 
 ### Missing client credentials

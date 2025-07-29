@@ -12,12 +12,6 @@ const sidebar: SidebarsConfig = {
       items: [
         {
           type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-ad-hoc-sub-process-activities",
-          label: "Search activatable activities (alpha)",
-          className: "api-method post",
-        },
-        {
-          type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/activate-ad-hoc-sub-process-activities",
           label: "Activate activities within an ad-hoc sub-process",
           className: "api-method post",
@@ -92,19 +86,19 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/cancel-batch-operation",
           label: "Cancel Batch operation",
-          className: "api-method put",
+          className: "api-method post",
         },
         {
           type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/suspend-batch-operation",
           label: "Suspend Batch operation",
-          className: "api-method put",
+          className: "api-method post",
         },
         {
           type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/resume-batch-operation",
           label: "Resume Batch operation",
-          className: "api-method put",
+          className: "api-method post",
         },
         {
           type: "doc",
@@ -866,12 +860,6 @@ const sidebar: SidebarsConfig = {
         {
           type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/search-group-ids-for-tenant",
-          label: "Search groups for tenant",
-          className: "api-method post",
-        },
-        {
-          type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-groups-for-tenant",
           label: "Search groups for tenant",
           className: "api-method post",
         },

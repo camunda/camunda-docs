@@ -134,6 +134,8 @@ paths:
           $ref: "#/components/responses/InvalidData"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
   /jobs/search:
     post:
       tags:
@@ -205,6 +207,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
   /jobs/{jobKey}/error:
     post:
       tags:
@@ -248,6 +252,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
   /jobs/{jobKey}/completion:
     post:
       tags:
@@ -290,6 +296,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
   /jobs/{jobKey}:
     patch:
       tags:
@@ -331,6 +339,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
 
   /incidents/{incidentKey}/resolution:
     post:
@@ -367,6 +377,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
 
   /tenants:
     post:
@@ -400,6 +412,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
 
   /tenants/{tenantId}:
     get:
@@ -474,6 +488,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
 
     delete:
       tags:
@@ -503,6 +519,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
 
   /tenants/{tenantId}/users/{username}:
     put:
@@ -539,6 +557,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
     delete:
       tags:
         - Tenant
@@ -573,6 +593,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
 
   /tenants/{tenantId}/users/search:
     post:
@@ -628,7 +650,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/TenantClientSearchResult"
-  /tenants/{tenantId}/group-ids/search:
+  /tenants/{tenantId}/groups/search:
     post:
       tags:
         - Tenant
@@ -655,33 +677,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/TenantGroupSearchResult"
-  /tenants/{tenantId}/groups/search:
-    post:
-      tags:
-        - Tenant
-      operationId: searchGroupsForTenant
-      summary: Search groups for tenant
-      description: Retrieves a filtered and sorted list of groups for a specified tenant.
-      parameters:
-        - name: tenantId
-          in: path
-          required: true
-          description: The unique identifier of the tenant.
-          schema:
-            type: string
-      requestBody:
-        required: false
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/GroupSearchQueryRequest"
-      responses:
-        "200":
-          description: The search result of groups for the tenant.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GroupSearchQueryResult"
   /tenants/{tenantId}/roles/search:
     post:
       tags:
@@ -744,6 +739,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
     delete:
       tags:
         - Tenant
@@ -778,6 +775,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
   /tenants/{tenantId}/mapping-rules/{mappingRuleId}:
     put:
       tags:
@@ -813,6 +812,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
 
     delete:
       tags:
@@ -848,6 +849,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
   /tenants/{tenantId}/mapping-rules/search:
     post:
       tags:
@@ -911,6 +914,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
 
     delete:
       tags:
@@ -946,6 +951,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
 
   /tenants/{tenantId}/roles/{roleId}:
     put:
@@ -982,6 +989,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
     delete:
       tags:
         - Tenant
@@ -1016,6 +1025,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
 
   /tenants/search:
     post:
@@ -1094,6 +1105,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
 
   /user-tasks/{userTaskKey}/assignment:
     post:
@@ -1136,6 +1149,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
 
   /user-tasks/{userTaskKey}:
     get:
@@ -1215,6 +1230,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
 
   /user-tasks/{userTaskKey}/form:
     get:
@@ -1294,6 +1311,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
   /user-tasks/search:
     post:
       tags:
@@ -1457,6 +1476,8 @@ paths:
           $ref: "#/components/responses/InvalidData"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
 
   /clock/reset:
     post:
@@ -1478,6 +1499,8 @@ paths:
           description: The clock was successfully reset to the system time.
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
 
   /process-definitions/search:
     post:
@@ -1719,6 +1742,8 @@ paths:
           $ref: "#/components/responses/InvalidData"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
         "504":
           description: |
             The process instance creation request timed out in the gateway.
@@ -1936,6 +1961,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
 
   /process-instances/cancellation:
     post:
@@ -2135,6 +2162,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
 
   /process-instances/{processInstanceKey}/modification:
     post:
@@ -2175,6 +2204,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
   /process-instances/{processInstanceKey}/call-hierarchy:
     get:
       tags:
@@ -2623,6 +2654,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
 
   /authorizations:
     post:
@@ -2660,6 +2693,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
   /authorizations/{authorizationKey}:
     put:
       tags:
@@ -2693,6 +2728,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
     get:
       tags:
         - Authorization
@@ -2751,6 +2788,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
   /authorizations/search:
     post:
       tags:
@@ -2810,6 +2849,8 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
   /roles/{roleId}:
     get:
       tags:
@@ -2883,6 +2924,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
     delete:
       tags:
         - Role
@@ -2910,6 +2953,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
   /roles/{roleId}/users/search:
     post:
       tags:
@@ -3016,7 +3061,7 @@ paths:
           schema:
             type: string
       responses:
-        "202":
+        "204":
           description: The role was assigned successfully to the user.
         "400":
           $ref: "#/components/responses/InvalidData"
@@ -3036,6 +3081,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
     delete:
       tags:
         - Role
@@ -3057,7 +3104,7 @@ paths:
           schema:
             type: string
       responses:
-        "202":
+        "204":
           description: The user was unassigned successfully from the role.
         "400":
           $ref: "#/components/responses/InvalidData"
@@ -3071,6 +3118,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
   /roles/{roleId}/clients/{clientId}:
     put:
       tags:
@@ -3093,7 +3142,7 @@ paths:
           schema:
             type: string
       responses:
-        "202":
+        "204":
           description: The role was assigned successfully to the client.
         "400":
           $ref: "#/components/responses/InvalidData"
@@ -3113,6 +3162,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
     delete:
       tags:
         - Role
@@ -3134,7 +3185,7 @@ paths:
           schema:
             type: string
       responses:
-        "202":
+        "204":
           description: The role was unassigned successfully from the client.
         "400":
           $ref: "#/components/responses/InvalidData"
@@ -3148,6 +3199,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
   /roles/search:
     post:
       tags:
@@ -3203,7 +3256,7 @@ paths:
           schema:
             type: string
       responses:
-        "202":
+        "204":
           description: The role was assigned successfully to the group.
         "400":
           $ref: "#/components/responses/InvalidData"
@@ -3223,6 +3276,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
     delete:
       tags:
         - Role
@@ -3244,7 +3299,7 @@ paths:
           schema:
             type: string
       responses:
-        "202":
+        "204":
           description: The role was unassigned successfully from the group.
         "400":
           $ref: "#/components/responses/InvalidData"
@@ -3258,6 +3313,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
   /roles/{roleId}/groups/search:
     post:
       tags:
@@ -3322,7 +3379,7 @@ paths:
           schema:
             type: string
       responses:
-        "202":
+        "204":
           description: The role was assigned successfully to the mapping rule.
         "400":
           $ref: "#/components/responses/InvalidData"
@@ -3342,6 +3399,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
     delete:
       tags:
         - Role
@@ -3363,7 +3422,7 @@ paths:
           schema:
             type: string
       responses:
-        "202":
+        "204":
           description: The role was unassigned successfully from the mapping rule.
         "400":
           $ref: "#/components/responses/InvalidData"
@@ -3377,6 +3436,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
   /roles/{roleId}/mapping-rules/search:
     post:
       tags:
@@ -3448,6 +3509,8 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
   /groups/{groupId}:
     get:
       tags:
@@ -3521,6 +3584,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
     delete:
       tags:
         - Group
@@ -3548,6 +3613,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
   /groups/{groupId}/users/search:
     post:
       tags:
@@ -3738,7 +3805,7 @@ paths:
           schema:
             type: string
       responses:
-        "202":
+        "204":
           description: The user was assigned successfully to the group.
         "400":
           $ref: "#/components/responses/InvalidData"
@@ -3758,6 +3825,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
     delete:
       tags:
         - Group
@@ -3779,7 +3848,7 @@ paths:
           schema:
             type: string
       responses:
-        "202":
+        "204":
           description: The user was unassigned successfully from the group.
         "400":
           $ref: "#/components/responses/InvalidData"
@@ -3793,6 +3862,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
   /groups/{groupId}/clients/{clientId}:
     put:
       tags:
@@ -3815,7 +3886,7 @@ paths:
           schema:
             type: string
       responses:
-        "202":
+        "204":
           description: The client was assigned successfully to the group.
         "400":
           $ref: "#/components/responses/InvalidData"
@@ -3835,6 +3906,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
     delete:
       tags:
         - Group
@@ -3856,7 +3929,7 @@ paths:
           schema:
             type: string
       responses:
-        "202":
+        "204":
           description: The client was unassigned successfully from the group.
         "400":
           $ref: "#/components/responses/InvalidData"
@@ -3870,6 +3943,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
   /groups/{groupId}/mapping-rules/{mappingRuleId}:
     put:
       tags:
@@ -3892,7 +3967,7 @@ paths:
           schema:
             type: string
       responses:
-        "202":
+        "204":
           description: The mapping rule was assigned successfully to the group.
         "400":
           $ref: "#/components/responses/InvalidData"
@@ -3912,6 +3987,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
     delete:
       tags:
         - Group
@@ -3933,7 +4010,7 @@ paths:
           schema:
             type: string
       responses:
-        "202":
+        "204":
           description: The mapping rule was unassigned successfully from the group.
         "400":
           $ref: "#/components/responses/InvalidData"
@@ -3947,6 +4024,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
   /groups/search:
     post:
       tags:
@@ -4064,6 +4143,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
     delete:
       tags:
         - Mapping rule
@@ -4091,6 +4172,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
     get:
       tags:
         - Mapping rule
@@ -4182,6 +4265,8 @@ paths:
           $ref: "#/components/responses/InvalidData"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
 
   /messages/correlation:
     post:
@@ -4219,6 +4304,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
   /message-subscriptions/search:
     post:
       tags:
@@ -4549,6 +4636,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
 
   /users/search:
     post:
@@ -4641,6 +4730,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
     patch:
       tags:
         - User
@@ -4676,6 +4767,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
 
   /setup/user:
     post:
@@ -4704,6 +4797,8 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
 
   /incidents/search:
     post:
@@ -4781,7 +4876,7 @@ paths:
         - Usage metrics
       operationId: getUsageMetrics
       summary: Get usage metrics
-      description: Retrieve the usage metrics by given start and end date.
+      description: Retrieve the usage metrics based on given criteria.
       parameters:
         - name: startTime
           in: query
@@ -4789,14 +4884,27 @@ paths:
           description: The start date for usage metrics, including this date.
           schema:
             type: string
-            format: date-time
+            format: date
         - name: endTime
           in: query
           required: true
           description: The end date for usage metrics, including this date.
           schema:
             type: string
-            format: date-time
+            format: date
+        - name: tenantId
+          in: query
+          required: false
+          description: Restrict results to a specific tenant ID. If not provided, results for all tenants are returned.
+          schema:
+            type: string
+        - name: withTenants
+          in: query
+          required: false
+          description: Whether to return tenant metrics in addition to the total metrics or not. Default false.
+          schema:
+            type: boolean
+            default: false
       responses:
         "200":
           description: >
@@ -4850,6 +4958,8 @@ paths:
                 $ref: "#/components/schemas/DeploymentResult"
         "400":
           $ref: "#/components/responses/InvalidData"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
   /resources/{resourceKey}/deletion:
     post:
       tags:
@@ -4889,6 +4999,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
   /resources/{resourceKey}:
     get:
       tags:
@@ -4988,51 +5100,8 @@ paths:
           $ref: "#/components/responses/InvalidData"
         "500":
           $ref: "#/components/responses/InternalServerError"
-
-  /element-instances/ad-hoc-activities/search:
-    post:
-      tags:
-        - Ad-hoc sub-process
-      operationId: searchAdHocSubProcessActivities
-      summary: Search activatable activities (alpha)
-      description: |
-        Search for activatable activities within ad-hoc sub-processes based on given criteria.
-
-        Note that this API currently requires filters for both process definition key and ad-hoc
-        sub-process ID and does not support paging or sorting.
-
-        :::note
-        This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
-        in future releases.
-        :::
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/AdHocSubProcessActivitySearchQuery"
-      responses:
-        "200":
-          description: >
-            The ad-hoc sub-process activities search result.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/AdHocSubProcessActivitySearchQueryResult"
-        "400":
-          description: >
-            The ad-hoc sub-process activities search query failed.
-            More details are provided in the response body.
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetail"
-        "401":
-          $ref: "#/components/responses/Unauthorized"
-        "403":
-          $ref: "#/components/responses/Forbidden"
-        "500":
-          $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
 
   /element-instances/ad-hoc-activities/{adHocSubProcessInstanceKey}/activation:
     post:
@@ -5076,6 +5145,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
 
   /signals/broadcast:
     post:
@@ -5107,6 +5178,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
 
   /batch-operations/{batchOperationKey}:
     get:
@@ -5175,7 +5248,7 @@ paths:
           $ref: "#/components/responses/InternalServerError"
 
   /batch-operations/{batchOperationKey}/cancellation:
-    put:
+    post:
       tags:
         - Batch operation
       operationId: cancelBatchOperation
@@ -5193,10 +5266,7 @@ paths:
             type: string
       requestBody:
         content:
-          application/json:
-            schema:
-              type: object
-              nullable: true
+          application/json: {}
         required: false
       responses:
         "204":
@@ -5216,7 +5286,7 @@ paths:
           $ref: "#/components/responses/InternalServerError"
 
   /batch-operations/{batchOperationKey}/suspension:
-    put:
+    post:
       tags:
         - Batch operation
       operationId: suspendBatchOperation
@@ -5234,10 +5304,7 @@ paths:
             type: string
       requestBody:
         content:
-          application/json:
-            schema:
-              type: object
-              nullable: true
+          application/json: {}
         required: false
       responses:
         "204":
@@ -5255,9 +5322,11 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
 
   /batch-operations/{batchOperationKey}/resumption:
-    put:
+    post:
       tags:
         - Batch operation
       operationId: resumeBatchOperation
@@ -5275,10 +5344,7 @@ paths:
             type: string
       requestBody:
         content:
-          application/json:
-            schema:
-              type: object
-              nullable: true
+          application/json: {}
         required: false
       responses:
         "204":
@@ -5296,6 +5362,8 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
   /batch-operation-items/search:
     post:
       tags:
@@ -5536,18 +5604,9 @@ components:
       type: object
       properties:
         state:
-          type: string
-          description: The state of the user task.
-          enum:
-            - CREATING
-            - CREATED
-            - ASSIGNING
-            - UPDATING
-            - COMPLETING
-            - COMPLETED
-            - CANCELING
-            - CANCELED
-            - FAILED
+          description: The user task state.
+          allOf:
+            - $ref: "#/components/schemas/UserTaskStateFilterProperty"
         assignee:
           description: The assignee of the user task.
           allOf:
@@ -5616,6 +5675,39 @@ components:
         elementInstanceKey:
           type: string
           description: The key of the element instance.
+    UserTaskStateFilterProperty:
+      description: UserTaskStateEnum property with full advanced search capabilities.
+      type: object
+      oneOf:
+        - type: string
+          title: Exact match
+          description: Matches the value exactly.
+          allOf:
+            - $ref: "#/components/schemas/UserTaskStateEnum"
+        - $ref: "#/components/schemas/AdvancedUserTaskStateFilter"
+    AdvancedUserTaskStateFilter:
+      title: Advanced filter
+      description: Advanced UserTaskStateEnum filter.
+      type: object
+      properties:
+        $eq:
+          description: Checks for equality with the provided value.
+          allOf:
+            - $ref: "#/components/schemas/UserTaskStateEnum"
+        $neq:
+          description: Checks for inequality with the provided value.
+          allOf:
+            - $ref: "#/components/schemas/UserTaskStateEnum"
+        $exists:
+          description: Checks if the current property exists.
+          type: boolean
+        $in:
+          description: Checks if the property matches any of the provided values.
+          type: array
+          items:
+            $ref: "#/components/schemas/UserTaskStateEnum"
+        $like:
+          $ref: "#/components/schemas/LikeFilterProperty"
     VariableValueFilterProperty:
       type: object
       properties:
@@ -5644,18 +5736,7 @@ components:
           type: string
           description: The name for this user task.
         state:
-          type: string
-          description: The state of the user task.
-          enum:
-            - CREATING
-            - CREATED
-            - ASSIGNING
-            - UPDATING
-            - COMPLETING
-            - COMPLETED
-            - CANCELING
-            - CANCELED
-            - FAILED
+          $ref: "#/components/schemas/UserTaskStateEnum"
         assignee:
           description: The assignee of the user task.
           type: string
@@ -5727,6 +5808,19 @@ components:
         formKey:
           type: string
           description: The key of the form.
+    UserTaskStateEnum:
+      description: The state of the user task.
+      type: string
+      enum:
+        - CREATING
+        - CREATED
+        - ASSIGNING
+        - UPDATING
+        - COMPLETING
+        - COMPLETED
+        - CANCELING
+        - CANCELED
+        - FAILED
     VariableSearchQuerySortRequest:
       type: object
       properties:
@@ -5878,7 +5972,8 @@ components:
       properties:
         name:
           description: Name of this process definition.
-          type: string
+          allOf:
+            - $ref: "#/components/schemas/StringFilterProperty"
         isLatestVersion:
           description: >
             Whether to only return the latest version of each process definition.
@@ -5897,7 +5992,8 @@ components:
           type: string
         processDefinitionId:
           description: Process definition ID of this process definition.
-          type: string
+          allOf:
+            - $ref: "#/components/schemas/StringFilterProperty"
         tenantId:
           description: Tenant ID of this process definition.
           type: string
@@ -6272,8 +6368,8 @@ components:
           type: boolean
         incidentErrorHashCode:
           description: The incident error hash code, associated with this process.
-          type: integer
-          format: int32
+          allOf:
+            - $ref: "#/components/schemas/IntegerFilterProperty"
     ProcessDefinitionStatisticsFilter:
       description: Process definition statistics search filter.
       allOf:
@@ -6293,8 +6389,8 @@ components:
                   "state": "ACTIVE",
                   "tenantId": 123,
                   "$or": [
-                    { "processInstanceId": "process_v1" },
-                    { "processInstanceId": "process_v2", "hasIncident": true }
+                    { "processDefinitionId": "process_v1" },
+                    { "processDefinitionId": "process_v2", "hasIncident": true }
                   ]
                 }
                 ```
@@ -6305,8 +6401,8 @@ components:
                   <li style="list-style-type: disc;">have tenant ID equal to <em>123</em></li>
                   <li style="list-style-type: disc;">and match either:
                     <ul style="padding-left: 20px; margin-left: 20px;">
-                      <li style="list-style-type: circle;"><code>processInstanceId</code> is <em>process_v1</em>, or</li>
-                      <li style="list-style-type: circle;"><code>processInstanceId</code> is <em>process_v2</em> and <code>hasIncident</code> is <em>true</em></li>
+                      <li style="list-style-type: circle;"><code>processDefinitionId</code> is <em>process_v1</em>, or</li>
+                      <li style="list-style-type: circle;"><code>processDefinitionId</code> is <em>process_v2</em> and <code>hasIncident</code> is <em>true</em></li>
                     </ul>
                   </li>
                 </ul>
@@ -6753,83 +6849,6 @@ components:
           type: string
         incidentKey:
           description: Incident key associated with this element instance.
-          type: string
-    AdHocSubProcessActivitySearchQuery:
-      description: Ad-hoc sub-process activities search request.
-      type: object
-      required:
-        - filter
-      properties:
-        filter:
-          description: The ad-hoc sub-process activity search filters.
-          allOf:
-            - $ref: "#/components/schemas/AdHocSubProcessActivityFilter"
-    AdHocSubProcessActivityFilter:
-      description: Element instance filter.
-      type: object
-      required:
-        - processDefinitionKey
-        - adHocSubProcessId
-      properties:
-        processDefinitionKey:
-          description: The process definition key.
-          type: string
-        adHocSubProcessId:
-          description: The ad-hoc sub-process element ID.
-          type: string
-    AdHocSubProcessActivitySearchQueryResult:
-      type: object
-      properties:
-        items:
-          description: The matching ad-hoc sub-process activities.
-          type: array
-          items:
-            $ref: "#/components/schemas/AdHocSubProcessActivityResult"
-    AdHocSubProcessActivityResult:
-      type: object
-      properties:
-        processDefinitionKey:
-          description: The process definition key associated to this activity.
-          type: string
-        processDefinitionId:
-          description: The process definition ID associated to this activity.
-          type: string
-        adHocSubProcessId:
-          description: The ad-hoc sub-process element ID.
-          type: string
-        elementId:
-          description: The element ID for this activity.
-          type: string
-        elementName:
-          description: The element name for this activity.
-          type: string
-        type:
-          description: Type of activity with a defined set of values.
-          type: string
-          enum:
-            - UNSPECIFIED
-            - PROCESS
-            - SUB_PROCESS
-            - EVENT_SUB_PROCESS
-            - INTERMEDIATE_CATCH_EVENT
-            - INTERMEDIATE_THROW_EVENT
-            - BOUNDARY_EVENT
-            - SERVICE_TASK
-            - RECEIVE_TASK
-            - USER_TASK
-            - MANUAL_TASK
-            - TASK
-            - MULTI_INSTANCE_BODY
-            - CALL_ACTIVITY
-            - BUSINESS_RULE_TASK
-            - SCRIPT_TASK
-            - SEND_TASK
-            - UNKNOWN
-        documentation:
-          description: The documentation for this activity.
-          type: string
-        tenantId:
-          description: The tenant ID for this activity.
           type: string
     AdHocSubProcessActivateActivitiesInstruction:
       type: object
@@ -7284,17 +7303,33 @@ components:
           description: The assigned key of the decision requirements graph that the decision definition is part of.
     UsageMetricsResponse:
       type: object
+      allOf:
+        - $ref: "#/components/schemas/UsageMetricsResponseItem"
       properties:
-        assignees:
-          description: The amount of unique active users.
+        activeTenants:
+          description: The amount of active tenants.
           type: integer
           format: int64
+        tenants:
+          description: The usage metrics by tenants. Only available if request `withTenants` query parameter was `true`.
+          type: object
+          additionalProperties:
+            type: object
+            allOf:
+              - $ref: "#/components/schemas/UsageMetricsResponseItem"
+    UsageMetricsResponseItem:
+      type: object
+      properties:
         processInstances:
           description: The amount of created root process instances.
           type: integer
           format: int64
         decisionInstances:
           description: The amount of executed decision instances.
+          type: integer
+          format: int64
+        assignees:
+          description: The amount of unique active task users.
           type: integer
           format: int64
 
@@ -7354,7 +7389,7 @@ components:
         - CLIENT
         - ROLE
         - GROUP
-        - MAPPING
+        - MAPPING_RULE
         - UNSPECIFIED
 
     AuthorizationRequest:
@@ -8015,7 +8050,7 @@ components:
         - $ref: "#/components/schemas/SearchQueryResponse"
       properties:
         items:
-          description: The matching users.
+          description: The matching groups.
           type: array
           items:
             $ref: "#/components/schemas/RoleGroupResult"
@@ -8742,27 +8777,43 @@ components:
         result:
           $ref: "#/components/schemas/JobResult"
     JobResult:
-      type: object
-      nullable: true
       description: >
         The result of the completed job as determined by the worker.
-        This functionality is currently supported only by user task listeners.
+      discriminator:
+        propertyName: type
+        mapping:
+          userTask: "#/components/schemas/JobResultUserTask"
+          adHocSubProcess: "#/components/schemas/JobResultAdHocSubProcess"
+      required:
+        - type
       properties:
-        denied:
-          type: boolean
-          description: >
-            Indicates whether the worker denies the work, i.e. explicitly doesn't approve it.
-            For example, a user task listener can deny the completion of a task by setting this flag to true.
-            In this example, the completion of a task is represented by a job that the worker can complete as denied.
-            As a result, the completion request is rejected and the task remains active.
-            Defaults to false.
-          nullable: true
-        deniedReason:
+        type:
           type: string
-          description: The reason provided by the user task listener for denying the work.
-          nullable: true
-        corrections:
-          $ref: "#/components/schemas/JobResultCorrections"
+          description: Used to distinguish between different types of job results.
+          enum: ["userTask", "adHocSubProcess"]
+          default: "userTask"
+    JobResultUserTask:
+      type: object
+      nullable: true
+      allOf:
+        - $ref: "#/components/schemas/JobResult"
+        - type: object
+          properties:
+            denied:
+              type: boolean
+              description: >
+                Indicates whether the worker denies the work, i.e. explicitly doesn't approve it.
+                For example, a user task listener can deny the completion of a task by setting this flag to true.
+                In this example, the completion of a task is represented by a job that the worker can complete as denied.
+                As a result, the completion request is rejected and the task remains active.
+                Defaults to false.
+              nullable: true
+            deniedReason:
+              type: string
+              description: The reason provided by the user task listener for denying the work.
+              nullable: true
+            corrections:
+              $ref: "#/components/schemas/JobResultCorrections"
     JobResultCorrections:
       type: object
       description: |
@@ -8813,6 +8864,31 @@ components:
           description: The priority of the task.
           minimum: 0
           maximum: 100
+          nullable: true
+    JobResultAdHocSubProcess:
+      type: object
+      nullable: true
+      allOf:
+        - $ref: "#/components/schemas/JobResult"
+        - type: object
+          properties:
+            activateElements:
+              type: array
+              description: Indicates which elements need to be activated in the ad-hoc subprocess.
+              items:
+                $ref: "#/components/schemas/JobResultActivateElement"
+    JobResultActivateElement:
+      type: object
+      properties:
+        elementId:
+          description: The ID of the element to activate.
+          type: string
+        variables:
+          description: |
+            JSON document that will create the variables on the scope of the activated element.
+            It must be a JSON object, as variables will be mapped in a key-value fashion.
+          additionalProperties: true
+          type: object
           nullable: true
     JobUpdateRequest:
       type: object
@@ -9505,19 +9581,19 @@ components:
           description: The field to sort by.
           type: string
           enum:
-            - decisionInstanceKey
+            - decisionDefinitionId
+            - decisionDefinitionKey
+            - decisionDefinitionName
+            - decisionDefinitionType
+            - decisionDefinitionVersion
             - decisionInstanceId
-            - state
+            - decisionInstanceKey
+            - elementInstanceKey
             - evaluationDate
             - evaluationFailure
             - processDefinitionKey
             - processInstanceKey
-            - processInstanceId
-            - decisionDefinitionKey
-            - decisionDefinitionId
-            - decisionDefinitionName
-            - decisionDefinitionVersion
-            - decisionDefinitionType
+            - state
             - tenantId
         order:
           $ref: "#/components/schemas/SortOrderEnum"
@@ -9582,6 +9658,10 @@ components:
           description: The key of the decision.
           allOf:
             - $ref: "#/components/schemas/BasicStringFilterProperty"
+        elementInstanceKey:
+          description: The key of the element instance this decision instance is linked to.
+          allOf:
+            - $ref: "#/components/schemas/BasicStringFilterProperty"
     DecisionInstanceSearchQueryResult:
       type: object
       allOf:
@@ -9638,6 +9718,9 @@ components:
         decisionDefinitionKey:
           type: string
           description: The key of the decision.
+        elementInstanceKey:
+          type: string
+          description: The key of the element instance this decision instance is linked to.
 
     DecisionInstanceGetQueryResult:
       allOf:
@@ -10808,6 +10891,16 @@ components:
             $ref: "#/components/schemas/ProblemDetail"
     InvalidData:
       description: The provided data is not valid.
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/ProblemDetail"
+    ServiceUnavailable:
+      description: >
+        The service is currently unavailable. This may happen only on some requests where the system
+        creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures.
+        Clients are recommended to eventually retry those requests after a backoff period.
+        You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .
       content:
         application/problem+json:
           schema:

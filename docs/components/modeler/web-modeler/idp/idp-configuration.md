@@ -18,7 +18,7 @@ The current known limitations of IDP are as follows:
 | :---------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | [Microsoft Entra ID](https://docs.azure.cn/en-us/entra/identity/) | Use of Microsoft Entra ID as an OpenID Connect (OIDC) identity provider in Self-Managed is not currently supported with IDP.                                                                                                                                                          |
 | [Multi-tenancy](/self-managed/concepts/multi-tenancy.md)          | If multi-tenancy is enabled, IDP can only be used by users who can access the `<default>` tenant.                                                                                                                                                                                     |
-| Clusters requiring basic authentication                           | Self-Managed clusters that require basic authentication are not currently supported with IDP. You must use another [available authentication method](../../../../self-managed/modeler/web-modeler/configuration/configuration.md#available-authentication-methods) for compatibility. |
+| Clusters requiring basic authentication                           | Self-Managed clusters that require basic authentication are not currently supported with IDP. You must use another [available authentication method](/self-managed/components/modeler/web-modeler/configuration/configuration.md#available-authentication-methods) for compatibility. |
 
 ## Prerequisites
 
@@ -53,7 +53,7 @@ Once you have completed all the required prerequisites, configure IDP in a suita
 Add the following AWS connector secrets required for IDP.
 
 - **SaaS:** Create and configure as [connector secrets](/components/console/manage-clusters/manage-secrets.md).
-- **Self-Managed:** Connector secrets are generally provided as environment variables, set via `values.yaml` or the command line. Add these connector secrets as environment variables for the Tasklist and Zeebe components. To learn more about using connector secrets in Self-Managed, see [managing secrets in Helm charts](/self-managed/installation-methods/helm/configure/secret-management.md) and [secrets in manual installations](/self-managed/connectors-deployment/connectors-configuration.md#secrets).
+- **Self-Managed:** Connector secrets are generally provided as environment variables, set via `values.yaml` or the command line. Add these connector secrets as environment variables for the Tasklist and Zeebe components. To learn more about using connector secrets in Self-Managed, see [managing secrets in Helm charts](/self-managed/installation-methods/helm/configure/secret-management.md) and [secrets in manual installations](/self-managed/components/connectors/connectors-configuration.md#secrets).
 
 | Connector secret Key  | Required | Description                                                                                                                                                                                               |
 | :-------------------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -84,7 +84,6 @@ To use [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) t
 1. [Install Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md#install-and-start-camunda-8-run). For example, download the latest release of Camunda 8 Run for your operating system and architecture and open the .tgz file to extract the Camunda 8 Run script into a new directory.
 
 1. Navigate to the `docker-compose-8.x` folder in the new c8run directory.
-
    1. Open the `connector-secrets.txt` file, and add your AWS connector secrets.
 
       For example:
@@ -117,7 +116,6 @@ To use [Docker](/self-managed/installation-methods/docker/docker.md) to deploy a
 
 1. Download the latest Camunda Docker Compose release artifact from the [camunda-distributions](https://github.com/camunda/camunda-distributions/releases) GitHub repository, and extract the file contents to your desired directory.
 1. In the extracted directory:
-
    1. Open the `connector-secrets.txt` file, and add your AWS connector secrets.
 
       For example:

@@ -154,7 +154,7 @@ If you _have_ deployed processes or created process instances, you'll see them o
 
 ![operate-dash-with-processes](./assets/operate-introduction.png)
 
-To update Operate versions, visit the [guide to update guide](/self-managed/operational-guides/update-guide/introduction.md).
+To update Operate versions, visit the [guide to update guide](/self-managed/components/components-upgrade/introduction.md).
 
 ## Run Tasklist
 
@@ -247,7 +247,7 @@ A local setup of Identity in Camunda 8 is not yet supported out-of-the-box, use 
 
 ## Run Optimize
 
-The installation of Optimize is described in [Optimize Setup](/self-managed/optimize-deployment/install-and-start.md). A local setup in Camunda 8 is not yet supported out-of-the-box, use [Docker](/self-managed/installation-methods/docker/docker.md#optimize) instead.
+The installation of Optimize is described in [Optimize Setup](/self-managed/components/optimize/overview.md). A local setup in Camunda 8 is not yet supported out-of-the-box, use [Docker](/self-managed/installation-methods/docker/docker.md#optimize) instead.
 
 ## Run Web Modeler
 

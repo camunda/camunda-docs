@@ -3,6 +3,10 @@ id: zeebe-process-test
 title: "Zeebe Process Test"
 ---
 
+:::info
+Zeebe Process Test is deprecated as of Camunda 8.8 and will be removed in Camunda 8.10. For new and future-proof process testing, use [Camunda Process Test](./../testing/getting-started.md) instead.
+:::
+
 [Zeebe Process Test](https://github.com/camunda-cloud/zeebe-process-test) allows you to unit test your Camunda 8 BPMN
 processes. It will start a lightweight in-memory Zeebe engine and provide you with a set of assertions you can use to
 verify your process behaves as expected.
@@ -86,7 +90,6 @@ class DeploymentAssertTest {
 Switching between testcontainers and embedded requires just two steps:
 
 1. Switch to the relevant dependency.
-
    - Testcontainers: `zeebe-process-test-extension-testcontainer`
    - Embedded: `zeebe-process-test-extension`
 

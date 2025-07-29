@@ -9,18 +9,18 @@ import TabItem from "@theme/TabItem";
 
 [Camunda Process Test](https://github.com/camunda/camunda/tree/main/testing/camunda-process-test-java) (CPT) is a Java library to test your BPMN processes and your process application.
 
-:::info Public API
-Camunda Process Test is part of the Camunda 8 [public API](/reference/public-api.md) and is covered by our SemVer stability guarantees (except for alpha features). Breaking changes will not be introduced in minor or patch releases.
-:::
-
-:::info
-CPT is the successor of [Zeebe Process Test](/apis-tools/java-client/zeebe-process-test.md). Our previous testing library is deprecated and will be removed with version 8.10.
-:::
-
 CPT provides different runtimes to execute your process tests:
 
 - [Testcontainers runtime](configuration.md#testcontainers-runtime) (default) - A managed runtime based on [Testcontainers](https://java.testcontainers.org/) and Docker.
 - [Remote runtime](configuration.md#remote-runtime) - Your own runtime, such as, [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md)
+
+:::info Public API
+CPT is part of the Camunda 8 [public API](/reference/public-api.md) and is covered by our SemVer stability guarantees (except for alpha features). Breaking changes will not be introduced in minor or patch releases.
+:::
+
+:::note
+CPT is the successor of [Zeebe Process Test](/apis-tools/java-client/zeebe-process-test.md). Our previous testing library is deprecated and will be removed with version 8.10.
+:::
 
 ## Prerequisites
 
@@ -37,12 +37,10 @@ We have two variations of CPT: for the [Camunda Spring Boot SDK](/apis-tools/spr
 
 Add the following dependency to your Maven project:
 
-<Tabs groupId="client" defaultValue="spring-sdk" queryString values={
-[
+<Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
 {label: 'Camunda Spring Boot SDK', value: 'spring-sdk' },
 {label: 'Java client', value: 'java-client' }
-]
-}>
+]}>
 
 <TabItem value='spring-sdk'>
 
@@ -74,12 +72,10 @@ Add the following dependency to your Maven project:
 
 Create a new Java class with the following structure:
 
-<Tabs groupId="client" defaultValue="spring-sdk" queryString values={
-[
+<Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
 {label: 'Camunda Spring Boot SDK', value: 'spring-sdk' },
 {label: 'Java client', value: 'java-client' }
-]
-}>
+]}>
 
 <TabItem value='spring-sdk'>
 
@@ -183,7 +179,9 @@ public class MyProcessTest {
 
 </Tabs>
 
-Next, read more about:
+## Next steps
+
+You can dive deeper into the library and read more about:
 
 - `CamundaAssert` and [assertions](assertions.md)
 - `CamundaProcessTestContext` and [utilities](utilities.md)
