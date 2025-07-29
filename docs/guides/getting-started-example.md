@@ -35,30 +35,31 @@ You will:
 <TabItem value="javaspring">
 
 <ul>
-    <li>[OpenJDK 21-23](https://openjdk.org/install/)</li>
+    <li>[JDK 21-23](https://www.oracle.com/de/java/technologies/downloads/)</li>
     <li>[Maven 3](https://maven.apache.org/index.html)</li>
     </ul>
   </TabItem>
   <TabItem value="nodejs">
 <ul>
-    <li>[OpenJDK 21-23](https://openjdk.org/install/)</li>
-    <li>[Node.js](https://nodejs.org/en)</li>
+    <li>[JDK 21-23](https://www.oracle.com/de/java/technologies/downloads/)</li>
+    <li>[Node.js](https://nodejs.org/en) 20+</li>
+    <li>NPM 11+</li>
 </ul>
   </TabItem>
   </Tabs>
 
-## Download the Camunda 8 developer bundle
+## Download the Camunda 8 Starter Package
 
-Download the Camunda 8 developer bundle from the following website:  
+Download the Camunda 8 Starter Package from the following website:  
 [https://developers.camunda.com/install-camunda-8/](https://developers.camunda.com/install-camunda-8/)
 
-The developer bundle includes the following components:
+The starter package includes the following components:
 
 - [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) – A simplified, single-application Camunda configuration for a local development environment.
 - [Camunda Modeler](/components/modeler/about-modeler.md) – An application for modeling BPMN, DMN, and Forms.
 - [Getting started project](https://github.com/camunda/camunda-8-get-started) – An example project with a simple BPMN process and workers in Java or JavaScript.
 
-All of these components are included in the developer bundle. You do not need to download them separately. The links above are provided for additional information.
+All of these components are included in the starter package. You do not need to download them separately. The links above are provided for additional information.
 
 ## Example project
 
@@ -72,7 +73,7 @@ The service tasks in the process are executed by job workers. The `java` and `no
 
 <ol>
   <li>
-    Unzip the developer bundle.
+    Unzip the Camunda 8 starter package.
   </li>
 
   <li>
@@ -96,7 +97,7 @@ The service tasks in the process are executed by job workers. The `java` and `no
   </li>
 
   <li>
-    Open Camunda Modeler.
+    Open the Camunda Modeler application from the starter package.
   </li>
 
   <li>
@@ -228,7 +229,11 @@ The workers start, connect to the engine, and request work. You will see the wor
 
 ## Complete!
 
-Your active process instance in Operate will now transition to completed. You have completed your first process instance by:
+Navigate back to Operate and verify that your active process instance in Operate has transitioned to completed.
+
+## Summary
+
+You have completed your first process instance by:
 
 1. Running Camunda 8 Run locally.
 2. Deploying a process model.
