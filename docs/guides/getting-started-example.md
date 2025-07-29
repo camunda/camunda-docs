@@ -48,9 +48,9 @@ You will:
   </TabItem>
   </Tabs>
 
-## Download the Camunda 8 Starter Package
+## Download the Camunda 8 starter package
 
-Download the Camunda 8 Starter Package from the following website:  
+Download the Camunda 8 starter package from the following website:  
 [https://developers.camunda.com/install-camunda-8/](https://developers.camunda.com/install-camunda-8/)
 
 The starter package includes the following components:
