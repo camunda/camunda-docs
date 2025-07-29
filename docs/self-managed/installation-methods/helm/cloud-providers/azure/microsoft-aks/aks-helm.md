@@ -507,6 +507,9 @@ The following values are required for OAuth authentication:
 </TabItem>
 </Tabs>
 
+</TabItem>
+</Tabs>
+
 ## Advanced topics
 
 The following are some advanced configuration topics to consider for your cluster:
