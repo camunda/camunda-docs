@@ -148,6 +148,45 @@ RewriteRule ^optimize/3.11.0/self-managed/(.*)$ /docs/8.3/self-managed/$1 [R=301
 #   8.8: content moves introduced prior to the release of version 8.8.
 #---------------------------------------------------------------------------------
 
+# Self-Managed Restructure
+# Setup
+RewriteRule ^docs/next/self-managed/setup/deploy/amazon/amazon-eks/?$ /docs/next/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/ [R=301,L]
+RewriteRule ^docs/next/self-managed/setup/deploy/amazon/aws-ec2/?$ /docs/next/self-managed/installation-methods/helm/cloud-providers/amazon/aws-ec2/ [R=301,L]
+RewriteRule ^docs/next/self-managed/setup/deploy/amazon/openshift/?$ /docs/next/self-managed/installation-methods/helm/cloud-providers/amazon/openshift/ [R=301,L]
+RewriteRule ^docs/next/self-managed/setup/deploy/azure/microsoft-aks/?$ /docs/next/self-managed/installation-methods/helm/cloud-providers/azure/microsoft-aks/ [R=301,L]
+RewriteRule ^docs/next/self-managed/setup/deploy/gcp/?$ /docs/next/self-managed/installation-methods/helm/cloud-providers/gcp/ [R=301,L]
+RewriteRule ^docs/next/self-managed/setup/deploy/openshift/?$ /docs/next/self-managed/installation-methods/helm/cloud-providers/openshift/ [R=301,L]
+# Components and update guide
+RewriteRule ^docs/next/self-managed/operational-guides/update-guide/?$ /docs/next/self-managed/components/components-upgrade/ [R=301,L]
+RewriteRule ^docs/next/self-managed/connectors-deployment/?$ /docs/next/self-managed/components/connectors/ [R=301,L]
+RewriteRule ^docs/next/self-managed/connectors-deployment/install-and-start/?$ /docs/next/self-managed/components/connectors/overview/ [R=301,L]
+RewriteRule ^docs/next/self-managed/console-deployment/configuration/?$ /docs/next/self-managed/components/console/configuration/ [R=301,L]
+RewriteRule ^docs/next/self-managed/console-deployment/?$ /docs/next/self-managed/components/console/ [R=301,L]
+RewriteRule ^docs/next/self-managed/identity/access-management/?$ /docs/next/self-managed/components/management-identity/access-management/ [R=301,L]
+RewriteRule ^docs/next/self-managed/identity/application-user-group-role-management/?$ /docs/next/self-managed/components/management-identity/application-user-group-role-management/ [R=301,L]
+RewriteRule ^docs/next/self-managed/identity/authentication/?$ /docs/next/self-managed/components/management-identity/authentication/ [R=301,L]
+RewriteRule ^docs/next/self-managed/identity/configuration/?$ /docs/next/self-managed/components/management-identity/configuration/ [R=301,L]
+RewriteRule ^docs/next/self-managed/identity/identity-first-steps/?$ /docs/next/self-managed/components/management-identity/identity-first-steps/ [R=301,L]
+RewriteRule ^docs/next/self-managed/identity/managing-tenants/?$ /docs/next/self-managed/components/management-identity/managing-tenants/ [R=301,L]
+RewriteRule ^docs/next/self-managed/identity/mapping-rules/?$ /docs/next/self-managed/components/management-identity/mapping-rules/ [R=301,L]
+RewriteRule ^docs/next/self-managed/identity/miscellaneous/?$ /docs/next/self-managed/components/management-identity/miscellaneous/ [R=301,L]
+RewriteRule ^docs/next/self-managed/identity/what-is-identity/?$ /docs/next/self-managed/components/management-identity/what-is-identity/ [R=301,L]
+RewriteRule ^docs/next/self-managed/modeler/?$ /docs/next/self-managed/components/modeler/ [R=301,L]
+RewriteRule ^docs/next/self-managed/optimize-deployment/?$ /docs/next/self-managed/components/optimize/ [R=301,L]
+RewriteRule ^docs/next/self-managed/orchestration-identity/?$ /docs/next/self-managed/components/orchestration-cluster/identity/ [R=301,L]
+RewriteRule ^docs/next/self-managed/operate-deployment/?$ /docs/next/self-managed/components/orchestration-cluster/operate/ [R=301,L]
+RewriteRule ^docs/next/self-managed/orchestration-cluster/?$ /docs/next/self-managed/components/orchestration-cluster/ [R=301,L]
+RewriteRule ^docs/next/self-managed/orchestration-cluster/sm-orchestration-cluster/?$ /docs/next/self-managed/components/orchestration-cluster/overview/ [R=301,L]
+RewriteRule ^docs/next/self-managed/tasklist-deployment/?$ /docs/next/self-managed/components/orchestration-cluster/tasklist/ [R=301,L]
+RewriteRule ^docs/next/self-managed/zeebe-deployment/?$ /docs/next/self-managed/components/orchestration-cluster/zeebe/ [R=301,L]
+RewriteRule ^docs/next/self-managed/console-deployment/installation/?$ /docs/next/self-managed/components/console/overview/ [R=301,L]
+RewriteRule ^docs/next/self-managed/modeler/web-modeler/installation/?$ /docs/next/self-managed/components/modeler/web-modeler/overview/ [R=301,L]
+RewriteRule ^docs/next/self-managed/operate-deployment/install-and-start/?$ /docs/next/self-managed/components/orchestration-cluster/operate/overview/ [R=301,L]
+RewriteRule ^docs/next/self-managed/optimize-deployment/install-and-start/?$ /docs/next/self-managed/components/optimize/overview/ [R=301,L]
+RewriteRule ^docs/next/self-managed/orchestration-identity/orchestration-identity/?$ /docs/next/self-managed/components/orchestration-cluster/identity/overview/ [R=301,L]
+RewriteRule ^docs/next/self-managed/tasklist-deployment/install-and-start/?$ /docs/next/self-managed/components/orchestration-cluster/tasklist/overview/ [R=301,L]
+RewriteRule ^docs/next/self-managed/update/index/?$ /docs/next/self-managed/components/components-update/introduction/ [R=301,L]
+
 # Remove technical details
 RewriteRule ^docs/next/guides/migrating-from-camunda-7/technical-details/?$ /docs/next/guides/migrating-from-camunda-7/migration-journey/ [R=301,L]
 RewriteRule ^docs/guides/migrating-from-camunda-7/technical-details/?$ /docs/guides/migrating-from-camunda-7/migration-journey/ [R=301,L]
