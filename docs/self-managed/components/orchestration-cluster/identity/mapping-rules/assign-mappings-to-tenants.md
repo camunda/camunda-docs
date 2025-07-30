@@ -1,8 +1,8 @@
 ---
-id: assign-mappings-to-tenants
-title: "Assigning mappings to tenants"
-sidebar_label: "Tenant mapping assignment"
-description: "Grant claim-based access to tenants by assigning mappings in the Identity UI."
+id: assign-mapping-rules-to-tenants
+title: "Assigning mapping rules to tenants"
+sidebar_label: "Tenant mapping rule assignment"
+description: "Grant claim-based access to tenants by assigning mapping rules in the Identity UI."
 ---
 
 import Tabs from "@theme/Tabs";
@@ -11,62 +11,62 @@ import TabItem from "@theme/TabItem";
 This guide explains how to assign, update, or remove mapping rules from a tenant to grant access based on claim values.
 
 :::tip
-To learn more about mappings and tenants, see the [mapping rules documentation](../mapping-rules/managing-mapping-rules.md) and [tenant management documentation](../manage-tenants.md).
+To learn more about mapping rules and tenants, see the [mapping rules documentation](../mapping-rules/managing-mapping-rules.md) and [tenant management documentation](../manage-tenants.md).
 :::
 
 1. Log in to the Identity UI and go to the **Tenants** tab.
 
-![tenant-mapping-list](../img/tenant-mapping-list.png)
+![tenant-list](../img/tenant-list.png)
 
 2. Click on the desired Tenant ID (e.g., `<default>`).
-3. Open the **Mappings** tab.
+3. Open the **Mapping Rules** tab.
 
-<Tabs groupId="tenantMappingAssignment" defaultValue="add" queryString values={[{label: 'Add', value: 'add'}, {label: 'Update', value: 'update'}, {label: 'Delete', value: 'delete'}]}>
+<Tabs groupId="tenantMappingRuleAssignment" defaultValue="add" queryString values={[{label: 'Add', value: 'add'}, {label: 'Update', value: 'update'}, {label: 'Delete', value: 'delete'}]}>
 
 <TabItem value="add">
 
-### Add a mapping to a tenant
+### Add a mapping rule to a tenant
 
-1. Click **Assign mapping**.
+1. Click **Assign mapping rule**.
 
-![tenant-detail-mappings-empty](../img/tenant-detail-mappings-empty.png)
+![tenant-detail-mapping-rules-empty](../img/tenant-detail-mapping-rules-empty.png)
 
-2. In the modal, search by **Mapping ID**.
+2. In the modal, search by **Mapping Rule ID**.
 
-![tenant-assign-mapping-modal-empty](../img/tenant-assign-mapping-modal-empty.png)
+![tenant-assign-mapping-rule-modal-empty](../img/tenant-assign-mapping-rule-modal-empty.png)
 
-3. Select the desired mapping.
+3. Select the desired mapping rule.
 
-![tenant-assign-mapping-modal-selected](../img/tenant-assign-mapping-modal-selected.png)
+![tenant-assign-mapping-rule-modal-selected](../img/tenant-assign-mapping-rule-modal-selected.png)
 
-4. Click **Assign mapping** to complete.
+4. Click **Assign mapping rule** to complete.
 
-![tenant-mapping-assigned](../img/tenant-mapping-assigned.png)
+![tenant-mapping-rule-assigned](../img/tenant-mapping-rule-assigned.png)
 
 </TabItem>
 
 <TabItem value="update">
 
-### Update a tenant mapping
+### Update a tenant mapping rule
 
-1. In the **Mappings** tab, locate the mapping to change.
-2. Click **Remove** to delete the old mapping.
-3. Re-assign the updated mapping using the steps in the **Add** tab.
+1. In the **Mapping Rules** tab, locate the mapping rule to change.
+2. Click **Remove** to delete the old mapping rule.
+3. Re-assign the updated mapping rule using the steps in the **Add** tab.
 
 :::note
-Currently, tenant mappings must be updated by removing and re-adding them with the desired values.
+Currently, tenant mapping rules must be updated by removing and re-adding them with the desired values.
 :::
 
 </TabItem>
 
 <TabItem value="delete">
 
-### Delete a mapping from a tenant
+### Delete a mapping rule from a tenant
 
-1. In the **Mappings** tab for the selected tenant, locate the assigned mapping.
+1. In the **Mapping Rules** tab for the selected tenant, locate the assigned mapping rule.
 2. Click **Remove**.
 
-![remove-tenant-mapping](../img/remove-tenant-mapping.png)
+![tenant-remove-mapping-rule](../img/tenant-remove-mapping-rule.png)
 
 </TabItem>
 
