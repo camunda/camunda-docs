@@ -9,7 +9,7 @@ keywords: ["what's changed", "what's new"]
 import OrchestrationClusterImg from './assets/orchestration-cluster.png';
 import PersonaBadge from './react-components/\_persona-badge';
 
-Learn about important changes in Camunda 8.8 to consider when migrating from Camunda 8.7.
+Learn about important changes in Camunda 8.8 to consider when planning your upgrade from Camunda 8.7.
 
 ## Introducing Camunda 8.8
 
