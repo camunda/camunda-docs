@@ -6,12 +6,12 @@ description: "Use assertions to verify the process instance state."
 
 The class `CamundaAssert` is the entry point for all assertions. It is based on [AssertJ](https://github.com/assertj/assertj) and [Awaitility](http://www.awaitility.org/).
 
-The assertions follow the style: `assertThat(object_to_test)` + expected property.
+The assertions follow the style: `assertThatX(object_to_test)` + expected property.
 
 Use the assertions by adding the following static imports in your test class:
 
 ```java
-import static io.camunda.process.test.api.CamundaAssert.assertThat;
+import static io.camunda.process.test.api.CamundaAssert.assertThatProcessInstance;
 
 // optional:
 import static io.camunda.process.test.api.assertions.ElementSelectors.*;
@@ -26,6 +26,11 @@ The assertions handle the asynchronous behavior and wait until the expected prop
 
 :::tip
 CPT provides the most common assertions. However, if you miss an assertion you can implement a [custom assertion](#custom-assertions) yourself.
+:::
+
+:::tip
+If your test class asserts a mix of process instances, user tasks and decisions, it can be difficult to tell which object is being asserted at a glance.
+In that case, you may want to use CPT's [disambiguated assertions](#disambiguated-assertions).
 :::
 
 ## Configuration
@@ -577,4 +582,27 @@ private List<UserTask> getUserTasks(final long processInstanceKey) {
         .join()
         .items();
 }
+```
+
+## Disambiguated assertions
+
+Although you can use `CamundaAssert.assertThat` for any of the above assertions, you may find it better to specify exactly what you're trying to assert.
+The disambiguated assertions available are:
+
+- `assertThatProcessInstance`
+- `assertThatUserTask`
+- `assertThatDecision`
+
+These function identically to the various `assertThat` methods and can be used interchangeably. For example,
+these pairs of assertions are all identical:
+
+```java
+assertThat(processInstance).hasActiveElements(byId("task_A"));
+assertThatProcessInstance(processInstance).hasActiveElements(byId("task_A"));
+
+assertThat(byId("decision-id")).hasMatchedRules(1);
+assertThatDecision(byId("decision-id")).hasMatchedRules(1);
+
+assertThat(byTaskName("User Task")).hasElementId("user-task-id");
+assertThatUserTask(byTaskName("User Task")).hasElementId("user-task-id");
 ```
