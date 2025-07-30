@@ -79,7 +79,7 @@ The following variables are used to initialize users and mapping rules.
   <TabItem value="init-yaml" label="application.yaml">
 
 | Application.yaml property                                             | Description                                  | Default value |
-|-----------------------------------------------------------------------|----------------------------------------------| ------------- |
+| --------------------------------------------------------------------- | -------------------------------------------- | ------------- |
 | `camunda.security.initialization.users[0].username`                   | The username of the first user.              |               |
 | `camunda.security.initialization.users[0].password`                   | The password of the first user.              |               |
 | `camunda.security.initialization.users[0].name`                       | The name of the first user.                  |               |
