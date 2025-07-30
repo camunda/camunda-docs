@@ -49,7 +49,7 @@ The simplest Self-Managed deployment now involves running a single Java applicat
 
 ## Orchestration Cluster {#orchestration-cluster}
 
-The Orchestration cluster (previously automation cluster) is now the core component of [Camunda 8](../reference/glossary.md#camunda-8), powering the automation and orchestration of [processes](../reference/glossary.md#process).
+The Orchestration cluster (previously automation cluster) is now the core component of Camunda 8.
 
 <img src={OrchestrationClusterImg} alt="Diagram showing the orchestration cluster" class="img-noborder" style={{marginBottom: '0'}}/>
 
