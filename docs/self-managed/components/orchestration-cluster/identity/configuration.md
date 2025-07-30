@@ -62,7 +62,7 @@ The following variables are used to initialize users and mapping rules.
   <TabItem value="init-env" label="Environment variables" default>
 
 | Environment variable                                                  | Description                                  | Default value |
-|-----------------------------------------------------------------------|----------------------------------------------|---------------|
+| --------------------------------------------------------------------- | -------------------------------------------- | ------------- |
 | `CAMUNDA_SECURITY_INITIALIZATION_USERS[0]_USERNAME`                   | The username of the first user.              |               |
 | `CAMUNDA_SECURITY_INITIALIZATION_USERS[0]_PASSWORD`                   | The password of the first user.              |               |
 | `CAMUNDA_SECURITY_INITIALIZATION_USERS[0]_NAME`                       | The name of the first user.                  |               |
