@@ -62,11 +62,14 @@ The following variables are used to initialize users and mapping rules.
   <TabItem value="init-env" label="Environment variables" default>
 
 | Environment variable                                                  | Description                                  | Default value |
-|-----------------------------------------------------------------------|----------------------------------------------| ------------- |
+|-----------------------------------------------------------------------|----------------------------------------------|---------------|
 | `CAMUNDA_SECURITY_INITIALIZATION_USERS[0]_USERNAME`                   | The username of the first user.              |               |
 | `CAMUNDA_SECURITY_INITIALIZATION_USERS[0]_PASSWORD`                   | The password of the first user.              |               |
 | `CAMUNDA_SECURITY_INITIALIZATION_USERS[0]_NAME`                       | The name of the first user.                  |               |
 | `CAMUNDA_SECURITY_INITIALIZATION_USERS[0]_EMAIL`                      | The email address of the first user.         |               |
+| `CAMUNDA_SECURITY_INITIALIZATION_MAPPINGRULES[0]_MAPPINGRULEID`       | The id of the first mapping rule.            |               |
+| `CAMUNDA_SECURITY_INITIALIZATION_MAPPINGRULES[0]_CLAIMNAME`           | The claim of the first mapping rule.         |               |
+| `CAMUNDA_SECURITY_INITIALIZATION_MAPPINGRULES[0]_CLAIMVALUE`          | The claim's value of the first mapping rule. |               |
 | `CAMUNDA_SECURITY_INITIALIZATION_DEFAULTROLES_<role>_USERS[0]`        | Users assigned to the `<role>` role.         |               |
 | `CAMUNDA_SECURITY_INITIALIZATION_DEFAULTROLES_<role>_GROUPS[0]`       | Groups assigned to the `<role>` role.        |               |
 | `CAMUNDA_SECURITY_INITIALIZATION_DEFAULTROLES_<role>_CLIENTS[0]`      | Clients assigned to the `<role>` role.       |               |
@@ -81,6 +84,9 @@ The following variables are used to initialize users and mapping rules.
 | `camunda.security.initialization.users[0].password`                   | The password of the first user.              |               |
 | `camunda.security.initialization.users[0].name`                       | The name of the first user.                  |               |
 | `camunda.security.initialization.users[0].email`                      | The email address of the first user.         |               |
+| `camunda.security.initialization.mappingRules[0].mappingRuleId`       | The id of the first mapping rule.            |               |
+| `camunda.security.initialization.mappingRules[0].claimName`           | The claim of the first mapping rule.         |               |
+| `camunda.security.initialization.mappingRules[0].claimValue`          | The claim's value of the first mapping rule. |               |
 | `camunda.security.initialization.defaultRoles.<role>.users[0]`        | Users assigned to the `<role>` role.         |               |
 | `camunda.security.initialization.defaultRoles.<role>.groups[0]`       | Groups assigned to the `<role>` role.        |               |
 | `camunda.security.initialization.defaultRoles.<role>.clients[0]`      | Clients assigned to the `<role>` role.       |               |
@@ -89,9 +95,10 @@ The following variables are used to initialize users and mapping rules.
   </TabItem>
   <TabItem value="init-helm" label="Helm values">
 
-| Helm value key                         | Description                                                              | Default value |
-| -------------------------------------- | ------------------------------------------------------------------------ | ------------- |
-| `global.security.initialization.users` | List of users to initialize (each with username, password, name, email). |               |
+| Helm value key                                | Description                                                                          | Default value |
+|-----------------------------------------------|--------------------------------------------------------------------------------------| ------------- |
+| `global.security.initialization.users`        | List of users to initialize (each with username, password, name, email).             |               |
+| `global.security.initialization.mappingRules` | List of mapping rule to initialize (each with mappingRuleId, claimName, claimValue). |               |
 
   </TabItem>
 </Tabs>
