@@ -1,29 +1,34 @@
 ---
 id: saas-ip-addresses
-title: "IP addresses for Camunda connections"
+title: "Hostnames and IP addresses for Camunda connections"
+sidebar_label: Hostnames and IP addresses for Camunda connections
 description: "Details on the network configuration for Camunda 8 SaaS clusters."
 ---
 
-## Inbound Connections
+<span class="badge badge--cloud">Camunda 8 SaaS only</span>
 
-When you [create a cluster](/components/console/manage-clusters/create-cluster.md) in Camunda 8 SaaS, you will receive a set of hostnames to reach the different components of your cluster.
+Camunda 8 SaaS hostnames and IP addresses for inbound and outbound connections.
 
-Depending on the cloud provider and the region on which the cluster was created in, the public IP addresses exposed to reach the clusters will be different.
+:::caution
+Inbound and outbound connection IP addresses are subject to change at any time.
+:::
 
-- On Amazon Web Services (AWS), each endpoint is served by multiple IP addresses
-- On Google Cloud Platform (GCP), the IP addresses are AnyCast IP addresses and are globally available.
+## Inbound connections
 
-In both cases, these IP addresses are subject to change at any time.
+When you [create a cluster](/components/console/manage-clusters/create-cluster.md) in Camunda 8 SaaS, you will receive a set of hostnames for connecting to the different cluster components.
+
+The public IP addresses exposed for connecting to the cluster depends on the cloud provider and [region](/reference/regions.md) the cluster was created in.
+
+- **Amazon Web Services (AWS)**: Each endpoint is served by multiple IP addresses.
+- **Google Cloud Platform (GCP)**: IP addresses are AnyCast IP addresses and are globally available.
 
 ## Outbound Connections
 
-If you use any of the Camunda Connectors, your Camunda cluster will make requests from Camunda SaaS infrastructure towards the external services you configure in your processes.
+If you use a [Camunda connector](/components/connectors/introduction.md), your cluster sends requests from the Camunda SaaS infrastructure to the external services you configure in your processes.
 
-Depending on the cloud provider, region and type of Connectors you configured, you will see connections being made from different IP addresses.
+Depending on the cloud provider, [region](/reference/regions.md), and type of configured connector, connections are made from different IP addresses.
 
-These outbound IP addresses are subject to change at any time.
+To ensure the security of incoming connector connections, you can:
 
-To ensure the security of incoming Connectors connections, you can consider:
-
-- Authenticating the requests made by the Camunda Connectors (for instance, see the REST Connectors authentication information in the [REST Connector documentation](/components/connectors/protocol/rest.md#authentication))
-- Running the Connectors into your own infrastructure and removing incoming calls from Camunda infrastructure to your own services.
+- Authenticate the requests made by the Camunda connector(s). For example, see the [REST connector](/components/connectors/protocol/rest.md#authentication) authentication information.
+- Run the connectors into your own infrastructure and remove incoming calls from the Camunda infrastructure to your own services.

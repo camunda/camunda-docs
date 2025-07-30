@@ -1037,6 +1037,7 @@ module.exports = {
     "reference/licenses",
     "reference/notices",
     "reference/regions",
+    "reference/saas-ip-addresses",
     {
       type: "category",
       label: "Data collection",
