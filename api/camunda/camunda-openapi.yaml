@@ -3261,8 +3261,8 @@ paths:
       operationId: addRoleToGroup
       summary: Assign a role to a group
       description: |
-        Assigns the specified role to all members of the group. 
-        Every user or client in the group will inherit the authorizations associated with this role.
+        Assigns the specified role to the group. 
+        Every member of the group (user or client) will inherit the authorizations associated with this role.
       parameters:
         - name: roleId
           in: path
@@ -3305,8 +3305,8 @@ paths:
       operationId: removeRoleFromGroup
       summary: Unassign a role from a group
       description: |
-        Unassigns the specified role from all members of the group.
-        Every user or client in the group will no longer inherit the authorizations associated with this role.
+        Unassigns the specified role from the group.
+        Every member of the group (user or client) will no longer inherit the authorizations associated with this role.
       parameters:
         - name: roleId
           in: path
