@@ -195,6 +195,7 @@ public class MyProcessTest {
             .withRuntimeMode(CamundaProcessTestRuntimeMode.REMOTE)
             // Change the connection (default: Camunda 8 Run)
             .withRemoteCamundaClientBuilderFactory(() -> CamundaClient.newClientBuilder()
+                .usePlaintext()
                 .restAddress(URI.create("http://0.0.0.0:8080"))
                 .grpcAddress(URI.create("http://0.0.0.0:26500"))
             )
