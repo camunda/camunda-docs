@@ -9,8 +9,8 @@ description: "Details on the network configuration for Camunda 8 SaaS clusters."
 
 Camunda 8 SaaS hostnames and IP addresses for inbound and outbound connections.
 
-:::caution
-Inbound and outbound connection IP addresses are subject to change at any time.
+:::warning
+As inbound and outbound connection IP addresses can change at any time, Camunda does not recommend using an IP allowlist strategy based on trusted IP addresses or ranges, as their stability is not guaranteed.
 :::
 
 ## Inbound connections
