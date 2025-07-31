@@ -3145,7 +3145,7 @@ paths:
       operationId: addRoleToClient
       summary: Assign a role to a client
       description: |
-        Assigns the specified role to the client. 
+        Assigns the specified role to the client.
         The client will inherit the authorizations associated with this role.
       parameters:
         - name: roleId
