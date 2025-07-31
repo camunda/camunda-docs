@@ -11,6 +11,10 @@ import PersonaBadge from './react-components/\_persona-badge';
 
 Learn about important changes in Camunda 8.8 to consider when planning your upgrade from Camunda 8.7.
 
+:::warning
+This documentation is a work in progress and may contain incomplete, placeholder, or evolving content. While the core concepts introduced in Camunda 8.8 are stable, specific details are actively being refined.
+:::
+
 ## Introducing Camunda 8.8
 
 Camunda 8.8 introduces important architectural changes and enhancements to simplify deployment, improve maintainability, and empower both operations teams and developers.
@@ -31,8 +35,8 @@ The simplest Self-Managed deployment now involves running a single Java applicat
     <td>Changes are made to Identity and how you manage authentication and authorization.</td>
 </tr>
 <tr>
-    <td>[APIs and SDKs](#apis-and-sdks)</td>
-    <td>New and changed APIs and SDKs are introduced in Camunda 8.8.</td>
+    <td>[APIs and tools](#apis-and-tools)</td>
+    <td>New and changed APIs and tools are introduced in Camunda 8.8.</td>
 </tr>
 </table>
 
@@ -98,34 +102,9 @@ In Camunda 8.7 and earlier, managing and configuring core components (Zeebe, Ope
 
 ## Identity, authentication, and authorization {#identity}
 
-Camunda 8.8 includes changes to how you manage authentication and authorization with Identity.
+## APIs and tools {#apis-and-tools}
 
-### Identity
-
-The Identity service is now fully integrated into the Orchestration Cluster.
-
-- Instead of relying on a separate PostgreSQL database, Identity now uses Zeebe’s persistence storage. This reinforces consistency and reduces the need to manage additional databases.
-- Identity is decoupled from Keycloak. While Keycloak remains supported, Camunda 8.8 now allows direct integration of any OpenID Connect (OIDC) compatible identity provider, increasing flexibility for authentication.
-
-### Access control and authorization management
-
-Groups and roles that were previously managed via the Console are now maintained directly within Orchestration Cluster Identity.
-Console-based changes to groups/roles are no longer effective for 8.8 clusters after upgrade.
-
-### Summary of Identity changes
-
-The following table provides a summary of the main Identity changes.
-
-| Feature/area               | Camunda 8.7 and earlier                | Camunda 8.8                 |
-| :------------------------- | :------------------------------------- | :-------------------------- |
-| Identity storage           | Separate PostgreSQL database           | Zeebe internal storage      |
-| Administration location    | Console/Keycloak/external              | Identity (internal)         |
-| Supported Providers        | Primarily Keycloak (OIDC support)      | Any OIDC-compliant provider |
-| Groups/roles configuration | Managed in Console, sometimes external | Managed in Identity         |
-
-## APIs and SDKs {#apis-and-sdks}
-
-The following table provides a summary of the main 8.8 API and SDK changes.
+The following table provides a summary of the main 8.8 API and tools changes.
 
 | What's new/changed                                                                                                              | Description                                                                                                                                                                                                                                                                                                 |
 | :------------------------------------------------------------------------------------------------------------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -151,7 +130,7 @@ The following table provides a summary of the main 8.8 architectural changes.
 
 Camunda 8.8 lays the foundation for future releases. Upgrading ensures compatibility and access to improved features.
 
-The following guides provide detailed information on how to upgrade to Camunda 8.8.
+The following guides provide detailed information on how you can upgrade to Camunda 8.8.
 
 | Guide                                                                                   | Description                                                                                                             | Who is this guide for?                                                                                                                                                             |
 | :-------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
