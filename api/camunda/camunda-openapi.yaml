@@ -528,7 +528,9 @@ paths:
         - Tenant
       operationId: assignUserToTenant
       summary: Assign a user to a tenant
-      description: Assign a single user to a specified tenant.
+      description: |
+        Assign a user to the specified tenant.
+        The user will get access to the tenant's data and can perform actions according to their authorizations.
       parameters:
         - name: tenantId
           in: path
@@ -563,8 +565,10 @@ paths:
       tags:
         - Tenant
       operationId: removeUserFromTenant
-      summary: Remove a user from a tenant
-      description: Removes a single user from a specified tenant without deleting the user.
+      summary: Unassigns a user from a tenant
+      description: |
+        Unassigns the user from the specified tenant. 
+        The user will no longer have access to the tenant's data.
       parameters:
         - name: tenantId
           in: path
@@ -710,7 +714,9 @@ paths:
         - Tenant
       operationId: assignClientToTenant
       summary: Assign a client to a tenant
-      description: Assign a client to a specified tenant.
+      description: |
+        Assign the client to the specified tenant.
+        The client will get access to the tenant's data and can perform actions according to their authorizations.
       parameters:
         - name: tenantId
           in: path
@@ -746,7 +752,9 @@ paths:
         - Tenant
       operationId: removeClientFromTenant
       summary: Remove a client from a tenant
-      description: Removes a single client from a specified tenant.
+      description: |
+        Unassigns the client from the specified tenant.
+        The client will no longer have access to the tenant's data.
       parameters:
         - name: tenantId
           in: path
@@ -885,7 +893,9 @@ paths:
         - Tenant
       operationId: assignGroupToTenant
       summary: Assign a group to a tenant
-      description: Assign a single group to a specified tenant.
+      description: |
+        Assigns a group to a specified tenant.
+        Members of the group (users, clients) will get access to the tenant's data and can perform actions according to their authorizations.
       parameters:
         - name: tenantId
           in: path
@@ -922,7 +932,9 @@ paths:
         - Tenant
       operationId: removeGroupFromTenant
       summary: Remove a group from a tenant
-      description: Removes a single group from a specified tenant without deleting the group.
+      description: |
+        Unassigns a group from a specified tenant.
+        Members of the group (users, clients) will no longer have access to the tenant's data - except they are assigned directly to the tenant.
       parameters:
         - name: tenantId
           in: path
@@ -960,7 +972,9 @@ paths:
         - Tenant
       operationId: assignRoleToTenant
       summary: Assign a role to a tenant
-      description: Assign a single role to a specified tenant.
+      description: |
+        Assigns a role to a specified tenant.
+        Users, Clients or Groups, that have the role assigned, will get access to the tenant's data and can perform actions according to their authorizations.
       parameters:
         - name: tenantId
           in: path
@@ -996,7 +1010,9 @@ paths:
         - Tenant
       operationId: removeRoleFromTenant
       summary: Remove a role from a tenant
-      description: Removes a single role from a specified tenant without deleting the role.
+      description: |
+        Unassigns a role from a specified tenant.
+        Users, Clients or Groups, that have the role assigned, will no longer have access to the tenant's data - except they are assigned directly to the tenant.
       parameters:
         - name: tenantId
           in: path
@@ -3046,7 +3062,8 @@ paths:
       operationId: addRoleToUser
       summary: Assign a role to a user
       description: |
-        Assigns a role to a user.
+        Assigns the specified role to the user. 
+        The user will inherit the authorizations associated with this role.
       parameters:
         - name: roleId
           in: path
@@ -3090,6 +3107,7 @@ paths:
       summary: Unassign a user from a role
       description: |
         Unassigns a user from a role.
+        The user will no longer inherit the authorizations associated with this role.
       parameters:
         - name: roleId
           in: path
@@ -3127,7 +3145,8 @@ paths:
       operationId: addRoleToClient
       summary: Assign a role to a client
       description: |
-        Assigns a role to a client.
+        Assigns the specified role to the client. 
+        The client will inherit the authorizations associated with this role.
       parameters:
         - name: roleId
           in: path
@@ -3170,7 +3189,8 @@ paths:
       operationId: removeRoleFromClient
       summary: Unassign a role from a client
       description: |
-        Unassigns a role from a client.
+        Unassigns the specified role from the client.
+        The client will no longer inherit the authorizations associated with this role.
       parameters:
         - name: roleId
           in: path
@@ -3241,7 +3261,8 @@ paths:
       operationId: addRoleToGroup
       summary: Assign a role to a group
       description: |
-        Assigns a role to a group.
+        Assigns the specified role to all members of the group. 
+        Every user or client in the group will inherit the authorizations associated with this role.
       parameters:
         - name: roleId
           in: path
@@ -3284,7 +3305,8 @@ paths:
       operationId: removeRoleFromGroup
       summary: Unassign a role from a group
       description: |
-        Unassigns a role from a group.
+        Unassigns the specified role from all members of the group.
+        Every user or client in the group will no longer inherit the authorizations associated with this role.
       parameters:
         - name: roleId
           in: path
@@ -3790,7 +3812,8 @@ paths:
       operationId: addUserToGroup
       summary: Assign a user to a group
       description: |
-        Assigns a user to a group.
+        Assigns a user to a group, making the user a member of the group. 
+        Members of the group will inherit authorizations, roles and tenant assignment of the group.
       parameters:
         - name: groupId
           in: path
@@ -3834,6 +3857,8 @@ paths:
       summary: Unassign a user from a group
       description: |
         Unassigns a user from a group.
+
+        The user will no longer be considered a member of this group meaning authorizations, roles or tenant assignment does not apply anymore.
       parameters:
         - name: groupId
           in: path
@@ -3869,9 +3894,10 @@ paths:
       tags:
         - Group
       operationId: addClientToGroup
-      summary: Assign a client to a group
+      summary: Assign a client to a group.
       description: |
-        Assigns a client to a group.
+        Assigns a client to a group, making it a member of the group.
+        Members of the group will inherit authorizations, roles and tenant assignment of the group.
       parameters:
         - name: groupId
           in: path
@@ -3915,6 +3941,7 @@ paths:
       summary: Unassign a client from a group
       description: |
         Unassigns a client from a group.
+        The client will no longer be considered a member of this group meaning authorizations, roles or tenant assignment does not apply anymore.
       parameters:
         - name: groupId
           in: path
