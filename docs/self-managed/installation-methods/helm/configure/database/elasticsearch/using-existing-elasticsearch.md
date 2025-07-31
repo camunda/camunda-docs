@@ -1,6 +1,7 @@
 ---
 id: using-existing-elasticsearch
-title: "Using existing Elasticsearch"
+sidebar_label: Existing Elasticsearch
+title: Helm chart existing Elasticsearch usage
 description: "Learn how to use an existing Elasticsearch instance in Camunda 8 Self-Managed Helm chart deployment."
 ---
 

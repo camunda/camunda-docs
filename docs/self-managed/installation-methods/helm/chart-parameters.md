@@ -1,6 +1,7 @@
 ---
 id: chart-parameters
-title: Chart parameters
+sidebar_label: Parameters
+title: Helm chart parameters
 description: "Reference for configuring your Camunda Platform installation via Helm chart values."
 ---
 
