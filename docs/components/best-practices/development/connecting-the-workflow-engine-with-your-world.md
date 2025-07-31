@@ -34,7 +34,7 @@ Using the Zeebe client’s API, you can communicate with the workflow engine. Th
 **Start process instances using the** [**Java Client**](../../../apis-tools/java-client/index.md)**:**
 
 ```java
-processInstance = camundaClient.newCreateInstanceCommand()
+processInstance = zeebeClient.newCreateInstanceCommand()
   .bpmnProcessId("someProcess").latestVersion()
   .variables( someProcessVariablesAsMap )
   .send()
@@ -56,7 +56,7 @@ const processInstance = await zbc.createWorkflowInstance({
 **Correlate messages to process instances using the Java Client**:
 
 ```java
-camundaClient.newPublishMessageCommand() //
+zeebeClient.newPublishMessageCommand() //
   .messageName("messageA")
   .messageId(uniqueMessageIdForDeduplication)
   .correlationKey(message.getCorrelationid())
@@ -112,7 +112,7 @@ Now, this handler needs to be connected to Zeebe, which is generally done by sub
 **Open subscription via the Zeebe Java client:**
 
 ```java
-camundaClient
+zeebeClient
   .newWorker()
   .jobType("serviceA")
   .handler(new ExampleJobHandler())
