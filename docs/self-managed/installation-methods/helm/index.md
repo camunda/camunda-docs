@@ -241,15 +241,24 @@ helm install camunda camunda/camunda-platform --version 8.1 \
 
 ### Install with vendor enterprise images
 
-By default, the Camunda Helm chart uses [open-source images provided by Bitnami](https://github.com/bitnami/containers). For production environments, Camunda recommends using **vendor enterprise images**, which are hardened and supported versions of the open-source images.
+By default, the Camunda Helm chart uses [open-source images provided by Bitnami](https://github.com/bitnami/containers).
+
+:::note No managed service available
+
+For production environments, Camunda recommends using a managed service for [third-party infrastructure components](/self-managed/components/third-party-components/third-party-components.md). 
+
+If a managed service is not available, Camunda recommends using **vendor enterprise images** - which are hardened and supported versions of the open-source images provided by Bitnami.
+
+For more details, see our [installation instructions for third-party components](/self-managed/components/third-party-components/third-party-components.md).
+
+:::
 
 These enterprise images:
 
-- Are built on the Bitnami open-source stack
-- Include critical CVE patches and security hardening
-- Come with extended vendor support
-- Are hosted in a private registry: `registry.camunda.cloud`
-- Are available only to Camunda customers
+* Are derived from [Bitnami Secure Images](https://bitnami.com).
+* Include critical CVE patches and security hardening provided by Broadcom.
+* Are hosted in a private registry: `registry.camunda.cloud`.
+* Are available only to Camunda customers.
 
 #### Create a Kubernetes registry secret
 
@@ -272,6 +281,7 @@ To learn more, refer to the [Kubernetes `imagePullSecrets` documentation](https:
 #### Install the Helm chart with vendor enterprise images
 
 Camunda provides a dedicated values file, `values-enterprise.yaml`, which overrides the default Bitnami image registry and tags to use enterprise images.
+
 
 :::note Vendor pull secret
 
