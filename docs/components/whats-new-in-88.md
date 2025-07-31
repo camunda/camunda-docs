@@ -161,9 +161,11 @@ Each deployment type has a clear upgrade path and migration guidance to help adm
 
 ### Camunda 8 SaaS
 
-Resource authorizations, groups, and roles formerly managed via Console are replaced by authorizations, groups, and roles managed within the cluster-specific Identity. These are automatically migrated when upgrading to Camunda 8.8 to ensure the status quo state of Access Management at the point in time of the update is kept. After upgrading a cluster to 8.8, changes to resource authorizations and roles made in Console no longer affect 8.8 clusters.
+Resource authorizations, groups, and roles formerly managed via Console are replaced by authorizations, groups, and roles managed within the cluster-specific Identity.
 
-While users and clients are created and managed in the Console, their authorizations are managed via the Orchestration Cluster.
+- These are automatically migrated during the Camunda 8.8 upgrade to preserve your existing Access Management configuration at the time of the update.
+- After upgrading a cluster to 8.8, changes to resource authorizations and roles made in Console no longer affect the 8.8 cluster.
+- Users and clients are created and managed in Console, with their authorizations managed via the Orchestration Cluster.
 
 The following table summarizes where Identity entities are managed in Camunda 8.8 SaaS:
 
@@ -179,11 +181,11 @@ The following table summarizes where Identity entities are managed in Camunda 8.
 
 ### Camunda 8 Self-Managed
 
-The former roles and permissions managed in Management Identity are superseded by the new authorizations and roles within Orchestration Cluster Identity.
+Roles and permissions previously managed in Management Identity are superseded by the new authorizations and roles within Orchestration Cluster Identity.
 
 - The Identity Migration App that migrates these entities from Management Identity into Orchestration Cluster Identity must be run during your Camunda 8.7 to 8.8 upgrade. Instructions on enabling and configuring the Identity Migration App in the 8.7 to 8.8 migration guide are available for Helm and also docker-compose/bare Java deployments.
 
-- Management Identity and Postgres are no longer needed for an Orchestration Cluster, only for an IdP and an OIDC-based setup, or even no IdP if using the native Basic Authentication method.
+- Management Identity and Postgres are no longer needed for an Orchestration Cluster, only for an IdP and an OIDC-based setup, or even a setup without an IdP if using the native Basic Authentication method.
 
 The following table summarizes where Identity entities are managed in Camunda 8.8 Self-Managed:
 
@@ -203,7 +205,7 @@ If you use the built-in user management instead of an external IdP, both users a
 
 #### Camunda 8 Self-Managed - Keycloak
 
-When using Keycloak, the following changes also apply:
+If you are using Keycloak, the following changes also apply:
 
 | Entity/Feature       | Description                                                                                                                                                                       |
 | :------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -214,7 +216,7 @@ When using Keycloak, the following changes also apply:
 
 #### Camunda 8 Self-Managed - OpenID Connect
 
-When using an external Identity Provider (IdP) with OpenID Connect (OIDC), the following changes also apply:
+If you are using an external Identity Provider (IdP) with OpenID Connect (OIDC), the following changes also apply:
 
 | Entity/Feature                    | Description                                                                                                                                 |
 | :-------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -225,7 +227,10 @@ When using an external Identity Provider (IdP) with OpenID Connect (OIDC), the f
 
 #### Camunda 8 Self-Managed - Basic Authentication
 
-If you are using built-in user management (Basic Authentication), Tasklist and Operate specific built-in user management (using ES/OS as storage) is no longer supported. Administrators must migrate their users manually into the Orchestration Cluster. You must ensure that usernames are identical, otherwise users will not be able to see their assigned tasks.
+If you are using built-in user management (Basic Authentication), Tasklist and Operate specific built-in user management (using ES/OS as storage) is no longer supported.
+
+- Administrators must migrate their users manually into the Orchestration Cluster.
+- You must ensure that **usernames are identical**, otherwise users will not be able to see their assigned tasks.
 
 In a Basic Authentication setup, the Orchestration Cluster provides full functionality:
 
