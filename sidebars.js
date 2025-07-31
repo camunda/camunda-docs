@@ -1532,7 +1532,7 @@ module.exports = {
                   "Mapping rules": [
                     "self-managed/components/orchestration-cluster/identity/mapping-rules/managing-mapping-rules",
                     "self-managed/components/orchestration-cluster/identity/mapping-rules/mapping-rule-authorizations",
-                    "self-managed/components/orchestration-cluster/identity/mapping-rules/assign-mappings-to-tenants",
+                    "self-managed/components/orchestration-cluster/identity/mapping-rules/assign-mapping-rules-to-tenants",
                   ],
                 },
               ],
