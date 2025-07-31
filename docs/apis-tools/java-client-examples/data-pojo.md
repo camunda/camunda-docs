@@ -19,7 +19,7 @@ description: "Let's analyze the prerequisites and code to handle variables as PO
 
 ```java
     ...
-    try (final CamundaClient client = clientBuilder.build()) {
+    try (final CamundaClient client = ClientProvider.createCamundaClient(AuthMethod.none)) {
       final Order order = new Order();
       order.setOrderId(31243);
 
@@ -28,13 +28,23 @@ description: "Let's analyze the prerequisites and code to handle variables as PO
           .bpmnProcessId("demoProcess")
           .latestVersion()
           .variables(order)
-          .send()
-          .join();
+          .execute();
 
       client.newWorker().jobType("foo").handler(new DemoJobHandler()).open();
 
       // run until System.in receives exit command
       waitUntilSystemInput("exit");
+    }
+  }
+
+  private static void waitUntilSystemInput(final String exitCode) {
+    try (final Scanner scanner = new Scanner(System.in)) {
+      while (scanner.hasNextLine()) {
+        final String nextLine = scanner.nextLine();
+        if (nextLine.contains(exitCode)) {
+          return;
+        }
+      }
     }
   }
 
