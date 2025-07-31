@@ -41,8 +41,7 @@ Desk Lamp,32,24.95
 ```
 
 :::info
-If you want to pass the CSV `Data` as a FEEL string please make sure to end lines with `\r\n`
-as this is the default line separator when reading CSV files. Example:
+To pass the CSV `Data` as a FEEL string, end lines with `\r\n`. This is the default line separator when reading CSV files. For example:
 
 ```
 ="product,quantity,price\r\nWireless Mouse,25,29.99\r\nOffice Chair,8,149.50\r\nUSB Cable,100,12.99\r\nMonitor Stand,15,45.00\r\nDesk Lamp,32,24.95"
@@ -50,7 +49,7 @@ as this is the default line separator when reading CSV files. Example:
 
 :::
 
-#### Example output for row type `Object`:
+#### Example output for row type `Object`
 
 ```json
 {
@@ -98,17 +97,16 @@ Based on the `Array` [example](#example-output-for-row-type-array) above, you ca
 
 Takes an array of JSON objects and creates a CSV from it. The result can either be stored as a document for further processing (e.g., uploading) or returned as a string.
 
-
 | Property           | Type             | Description                                                                                                                              | Required | Example                                                                                                                         |
 | :----------------- | :--------------- | :--------------------------------------------------------------------------------------------------------------------------------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------ |
 | Data               | Array            | The CSV data as an array of objects or arrays                                                                                            | Yes      | [Object](#example-output-for-row-type-array) and [Array](#example-output-for-row-type-array) example.                           |
-| Create document    | Boolean          | If `true` the Connector will store the CSV document in Camunda and returns a reference. If `false` the CSV will be returned as a string. | No       | Defaults to `false`                                                                                                             |
-| Delimiter          | String           | The delimiter used to separate each column                                                                                               | No       | Defaults to `,`                                                                                                                 |
-| Skip header record | Boolean          | Whether to include the first row in the records or not                                                                                   | No       | Defaults to `true`                                                                                                              |
+| Create document    | Boolean          | If `true` the connector will store the CSV document in Camunda and returns a reference. If `false` the CSV will be returned as a string. | No       | Defaults to `false`                                                                                                             |
+| Delimiter          | String           | The delimiter used to separate each column.                                                                                              | No       | Defaults to `,`                                                                                                                 |
+| Skip header record | Boolean          | Whether to include the first row in the records or not.                                                                                  | No       | Defaults to `true`                                                                                                              |
 | Headers            | Array of strings | Can be used when there is no header record present in the record or to change the column names if there is a header record.              | No       | Defaults to `[]`. Example: `["name","cost","count"]`. Needs to be specified when using object-based arrays as the `Data` input. |
 | Row type           | String           | Determines how the result records object will be structured.                                                                             | No       | Defaults to `Object`. Either `Object` or `Array`.                                                                               |
 
-#### Example for an array-based `Data` input:
+#### Example for an array-based `Data` input
 
 ```json
 [
@@ -120,7 +118,7 @@ Takes an array of JSON objects and creates a CSV from it. The result can either 
 ]
 ```
 
-#### Example for an object-based `Data` input:
+#### Example for an object-based `Data` input
 
 ```json
 {
@@ -136,9 +134,9 @@ Takes an array of JSON objects and creates a CSV from it. The result can either 
 
 :::info
 
-Please be aware that `Headers` have to be specified when using object-based arrays as the `Data` input
-when writing a CSV. The `Headers` have to match the property names of the objects. For the example above
-one would have to provide the following value for `Headers`:
+`Headers` must be specified when using object-based arrays as the `Data` input
+when writing a CSV. The `Headers` must match the property names of the objects. For the example above,
+one would provide the following value for `Headers`:
 
 ```json
 =["product", "quantity", "price"]
