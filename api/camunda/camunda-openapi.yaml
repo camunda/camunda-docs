@@ -3812,7 +3812,7 @@ paths:
       operationId: addUserToGroup
       summary: Assign a user to a group
       description: |
-        Assigns a user to a group, making the user a member of the group. 
+        Assigns a user to a group, making the user a member of the group.
         Members of the group will inherit authorizations, roles and tenant assignment of the group.
       parameters:
         - name: groupId
