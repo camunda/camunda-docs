@@ -724,7 +724,7 @@ We could apply the following migrations, but the process instance may end up in 
 
 The process instance doesn't detect these situations. It is up to you to apply suitable migrations.
 
-When in doubt, we recommend testing your migration on a non-production cluster, or using [zeebe process test](../../apis-tools/java-client/zeebe-process-test.md).
+When in doubt, we recommend testing your migration on a non-production cluster or using [Camunda Process Test](../../apis-tools/testing/getting-started.md).
 
 :::tip
 Often it's safer to migrate in multiple smaller steps rather than in one big migration.

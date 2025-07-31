@@ -136,11 +136,9 @@ You can think of process execution as tokens running through the process model. 
 <ReactPlayer
 playing
 loop
-playsinline
+playsInline
 height="200px"
-url={[
-{src: '/videos/sequenceflow.mp4', type: 'video/mp4'}
-]}
+src="/videos/sequenceflow.mp4"
 />
 </center>
 
@@ -152,11 +150,9 @@ The basic elements of BPMN processes are tasks; these are atomic units of work c
 <ReactPlayer
 playing
 loop
-playsinline
+playsInline
 height="300px"
-url={[
-{src: '/videos/tasks.mp4', type: 'video/mp4'}
-]}
+src="/videos/tasks.mp4"
 />
 </center>
 
@@ -174,11 +170,9 @@ BPMN's **exclusive gateway** chooses one sequence flow out of many based on data
 <ReactPlayer
 playing
 loop
-playsinline
+playsInline
 height="300px"
-url={[
-{src: '/videos/exclusive-gw.mp4', type: 'video/mp4'}
-]}
+src="/videos/exclusive-gw.mp4"
 />
 </center>
 
@@ -188,11 +182,9 @@ BPMN's **parallel gateway** generates new tokens by activating multiple sequence
 <ReactPlayer
 playing
 loop
-playsinline
+playsInline
 height="300px"
-url={[
-{src: '/videos/parallel-gw.mp4', type: 'video/mp4'}
-]}
+src="/videos/parallel-gw.mp4"
 />
 </center>
 
@@ -206,11 +198,9 @@ Refer to the [gateways](gateways.md) section on which types of gateways are curr
 <ReactPlayer
 playing
 loop
-playsinline
+playsInline
 height="300px"
-url={[
-{src: '/videos/catch-event.mp4', type: 'video/mp4'}
-]}
+src="/videos/catch-event.mp4"
 />
 </center>
 

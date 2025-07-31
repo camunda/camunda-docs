@@ -26,9 +26,9 @@ The public API contract begins with version 8.8.
 The following components are officially part of the Camunda 8 public API:
 
 - [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md): The primary interface for interacting with the orchestration cluster.
-- [Camunda Process Test](/apis-tools/testing/getting-started.md): Tools for testing process automation scenarios.
-- [Camunda Java client](/apis-tools/java-client/index.md): Java libraries for working with Camunda 8.
-- [Camunda Spring Boot SDK](/apis-tools/spring-zeebe-sdk/getting-started.md): Spring Boot integration with Camunda 8.
+- [Camunda Process Test](/apis-tools/testing/getting-started.md): Testing library to test BPMN processes and process applications.
+- [Camunda Java client](/apis-tools/java-client/index.md): Java Client to interact with Orchestration Cluster API and Zeebe gRPC.
+- [Camunda Spring Boot SDK](/apis-tools/spring-zeebe-sdk/getting-started.md): Spring Boot Client to interact with Orchestration Cluster API and Zeebe gRPC.
 
 ## What is not included in the public API
 

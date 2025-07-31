@@ -30,5 +30,5 @@ To create a new secret, go to your cluster and take the following steps:
 Now you can reference your secret in any connector as described in the [Connectors guide](/components/connectors/use-connectors/index.md#using-secrets).
 
 :::note
-Find more information on managing [Connector secrets](/self-managed/connectors-deployment/connectors-configuration.md).
+Find more information on managing [Connector secrets](/self-managed/components/connectors/connectors-configuration.md).
 :::

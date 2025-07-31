@@ -206,7 +206,7 @@ To ensure you're installing the most current version of both the chart and its a
 ```shell
 # This will install the latest Camunda Helm chart with the latest applications/dependencies.
 helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION \
-    --values https://helm.camunda.io/camunda-platform/values/values-latest.yaml
+    --values https://raw.githubusercontent.com/camunda/camunda-platform-helm/refs/heads/main/charts/camunda-platform-8.6/values-latest.yaml
 ```
 
 To install a previous version of the Camunda components, use the following command structure:

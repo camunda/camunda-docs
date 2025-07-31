@@ -136,11 +136,11 @@ Desktop Modeler is [open source and free to use](https://github.com/camunda/camu
 
 ## Secure the Orchestration Cluster API
 
-By default, the Orchestration Cluster gRPC API is publicly accessible without requiring any client credentials for development purposes.
+By default, the Orchestration Cluster API is publicly accessible without requiring any client credentials for development purposes.
 
 ## Connectors
 
-Both the full and lightweight Docker Compose files include a configuration for [out-of-the-box connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md). Refer to the [Connector installation guide](/self-managed/connectors-deployment/install-and-start.md) for details on how to provide related connector templates for modeling.
+Both the full and lightweight Docker Compose files include a configuration for [out-of-the-box connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md). Refer to the [Connector installation guide](/self-managed/components/connectors/overview.md) for details on how to provide related connector templates for modeling.
 
 ### Connector secrets
 

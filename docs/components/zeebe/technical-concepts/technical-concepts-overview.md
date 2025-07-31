@@ -8,6 +8,7 @@ description: "Learn more about Zeebe's underlying technical concepts, including 
 This section gives an overview of Zeebe's underlying technical concepts.
 
 - [Architecture](architecture.md) - Introduces you to the internal pillars of Zeebe, as well as interfaces for external systems to interact with Zeebe.
+- [Batch operations](batch-operations.md) - How distributed batch operations work in the Zeebe engine.
 - [Clustering](clustering.md) - Discusses the internal structure and properties of a Zeebe cluster.
 - [Partitions](partitions.md) - Sheds light on how Zeebe achieves horizontal scalability.
 - [Internal processing](internal-processing.md) - Explains the basics of Zeebe's event processing.

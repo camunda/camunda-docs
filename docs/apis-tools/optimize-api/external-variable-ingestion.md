@@ -29,7 +29,7 @@ Additionally, ensure the reference information (process instance ID and process 
 ## Configuration
 
 Refer to
-the [configuration section](../../self-managed/optimize-deployment/configuration/system-configuration.md) to learn more
+the [configuration section](../../self-managed/components/optimize/configuration/system-configuration.md) to learn more
 about how to set up external variable ingestion.
 
 ## Method & HTTP target resource

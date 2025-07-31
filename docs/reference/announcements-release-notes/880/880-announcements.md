@@ -96,9 +96,13 @@ Alternative container images to the previously used Bitnami open source images a
 
 Using more than one isolated Elasticsearch/OpenSearch instance for exported Zeebe, Operate, and Tasklist data is no longer supported. If your environment uses multiple Elasticsearch/OpenSearch instances, you must manually migrate the data from each to a single Elasticsearch/OpenSearch cluster before updating to Camunda 8.8. The migration should target Zeebe, Operate, and Tasklist indices, index templates, aliases, and ILM policies.
 
-### Versioning changes in Elasticsearch
+### Supported versions for Elasticsearch
 
 As of the 8.8 release, Camunda is compatible with Elasticsearch 8.16+ and no longer supports older Elasticsearch versions. See [supported environments](/reference/supported-environments.md).
+
+### Supported versions for Amazon OpenSearch
+
+As of the 8.8 release, Camunda is compatible with Amazon OpenSearch 2.17+ and no longer supports older Amazon OpenSearch versions. See [supported environments](/reference/supported-environments.md).
 
 ## Key changes
 

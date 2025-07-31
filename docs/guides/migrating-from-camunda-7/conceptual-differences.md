@@ -164,7 +164,7 @@ When you run your application in Node.js or C#, for example, you exchange one re
 
 ## Plugins
 
-[**Process engine plugins**](https://docs.camunda.org/manual/latest/user-guide/process-engine/process-engine-plugins/) are not available in Camunda 8, as such plugins can massively change the behavior or even harm the stability of the engine. Some use cases might be implemented using [exporters](/self-managed/concepts/exporters.md) or [interceptors](self-managed/zeebe-deployment/zeebe-gateway/interceptors.md#implementing-an-interceptor).
+[**Process engine plugins**](https://docs.camunda.org/manual/latest/user-guide/process-engine/process-engine-plugins/) are not available in Camunda 8, as such plugins can massively change the behavior or even harm the stability of the engine. Some use cases might be implemented using [exporters](/self-managed/concepts/exporters.md) or [interceptors](self-managed/components/orchestration-cluster/zeebe/zeebe-gateway/interceptors.md#implementing-an-interceptor).
 
 :::note
 Exporters are only available for Self-Managed Zeebe clusters and are not available in Camunda 8 SaaS.

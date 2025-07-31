@@ -46,3 +46,7 @@ Use the canvas tools in the bottom right corner to interact with your diagram.
 
 6. Drop an attention point and use it as a laser pointer in your presentations.
    ![attention grabber](img/attention-grabber.png)
+
+## Additional resources
+
+- [Camunda Academy: Camunda 8 Web Modeler Overview](https://academy.camunda.com/c8-web-modeler-overview)

@@ -8,6 +8,222 @@ description: "Let's take a closer look at security notices, reporting vulnerabil
 
 Camunda publishes security notices after fixes are available.
 
+### Notice 23
+
+#### Publication date
+
+July 31st, 2025
+
+#### Products affected
+
+- Camunda Tasklist
+- Camunda Zeebe
+- Camunda Operate
+- Camunda Identity
+- Camunda Optimize
+
+#### Impact
+
+The embedded Spring Boot Tomcat was affected by [CVE-2025-53506](https://nvd.nist.gov/vuln/detail/CVE-2025-53506) which allowed for uncontrolled resource consumption that could be used to exhaust system resources in a potential DoS (denial of service) attack.
+
+#### How to determine if the installation is affected
+
+You are using:
+
+- Tasklist 8.7.0 - 8.7.8 or 8.6.0 - 8.6.22 or 8.5.0 - 8.5.18
+- Zeebe 8.7.0 - 8.7.8 or 8.6.0 - 8.6.22
+- Operate 8.7.0 - 8.7.8 or 8.6.0 - 8.6.22 or 8.5.0 - 8.5.16
+- Identity 8.7.0 - 8.7.4 or 8.6.0 - 8.6.17 or 8.5.0 - 8.5.18
+- Optimize 8.7.0 - 8.7.6 or 8.6.0 - 8.6.12
+
+#### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Tasklist 8.7.9, 8.6.23, 8.5.19
+- Zeebe 8.7.9, 8.6.23
+- Operate 8.7.9, 8.6.23, 8.5.17
+- Identity 8.7.5, 8.6.18, 8.5.19
+- Optimize 8.7.7, 8.6.13
+
+### Notice 22
+
+#### Publication date
+
+July 31st, 2025
+
+#### Products affected
+
+- Camunda Tasklist
+- Camunda Zeebe
+- Camunda Operate
+
+#### Impact
+
+Part of our RESTful API that supported multipart file uploads was affected by [CVE-2025-52520](https://nvd.nist.gov/vuln/detail/CVE-2025-52520), which could lead to potential DoS (denial of service) attacks.
+
+#### How to determine if the installation is affected
+
+You are using:
+
+- Tasklist 8.6.0 - 8.6.22 or 8.7.0 - 8.7.8
+- Zeebe 8.6.0 - 8.6.22 or 8.7.0 - 8.7.8
+- Operate 8.6.0 - 8.6.22 or 8.7.0 - 8.7.8
+
+#### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Tasklist 8.6.22
+- Tasklist 8.7.9
+- Zeebe 8.6.23
+- Zeebe 8.7.9
+- Operate 8.6.23
+- Operate 8.7.9
+
+### Notice 21
+
+#### Publication date
+
+June 18th, 2025
+
+#### Products affected
+
+Camunda Web Modeler Self-Managed
+
+#### Impact
+
+The version of `org.postgresql:postgresql` used by Camunda Web Modeler Self-Managed was affected by [CVE-2025-49146](https://nvd.nist.gov/vuln/detail/CVE-2025-49146) potentially allowing a man-in-the-middle attacker to intercept connections when the PostgreSQL JDBC driver was configured with channel binding set to required.
+
+#### How to determine if the installation is affected
+
+You are using Camunda Web Modeler Self-Managed version 8.6.0 - 8.6.12, or 8.7.0 - 8.7.3.
+
+#### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Camunda Web Modeler Self-Managed 8.6.12
+- Camunda Web Modeler Self-Managed 8.7.3
+
+### Notice 20
+
+#### Publication date
+
+June 17th, 2025
+
+#### Products affected
+
+Camunda Optimize
+
+#### Impact
+
+Camunda Optimize was affected by a vulnerability that allowed an attacker to gain improper access to Optimize data by using a modified JWT (JSON Web Token).
+
+#### How to determine if the installation is affected
+
+You are using Camunda Optimize ≤ 8.6.9 or ≤ 8.7.2.
+
+#### Solution
+
+Camunda has provided the following release which contains a fix:
+
+- [Camunda Optimize 8.6.10](https://github.com/camunda/camunda/releases/tag/8.6.10-optimize)
+- [Camunda Optimize 8.7.3](https://github.com/camunda/camunda/releases/tag/8.7.3-optimize)
+
+### Notice 19
+
+#### Publication date
+
+May 21st, 2025
+
+#### Products affected
+
+Camunda Web Modeler
+
+#### Impact
+
+The version of `nodejs` used by Camunda Web Modeler was affected by [CVE-2025-23166](https://nvd.nist.gov/vuln/detail/CVE-2025-23166) potentially allowing an adversary to remotely crash the Node.js runtime.
+
+#### How to determine if the installation is affected
+
+You are using Camunda Web Modeler Self-Managed version ≤ 8.4.17, ≤ 8.5.18, ≤ 8.6.10, or ≤ 8.7.1.
+
+#### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Camunda Web Modeler Self-Managed 8.4.18
+- Camunda Web Modeler Self-Managed 8.5.19
+- Camunda Web Modeler Self-Managed 8.6.11
+- Camunda Web Modeler Self-Managed 8.7.2
+
+The fix was deployed to Web Modeler SaaS on May 19, 2025, 15:10 CET.
+
+### Notice 18
+
+#### Publication date
+
+April 8th, 2025
+
+#### Products affected
+
+Camunda Optimize
+
+#### Impact
+
+Camunda Optimize was affected by a vulnerability that allowed an attacker to modify a JWT (JSON Web Token) so that they would be given improper access to Optimize.
+
+#### How to determine if the installation is affected
+
+You are using Camunda Optimize ≤ 8.4.15, ≤ 8.5.12, ≤ 8.6.6, ≤ 8.7.0, ≤ 3.11.20, ≤ 3.12.15, ≤ 3.13.12, ≤ 3.14.3, ≤ 3.15.1.
+
+#### Solution
+
+Camunda has provided the following release which contains a fix:
+
+- [Camunda Optimize 8.4.16](https://github.com/camunda/camunda-optimize/releases/tag/3.12.16)
+- [Camunda Optimize 8.5.13](https://github.com/camunda/camunda-optimize/releases/tag/3.13.13)
+- [Camunda Optimize 8.6.7](https://github.com/camunda/camunda/releases/tag/8.6.7-optimize)
+- [Camunda Optimize 8.7.0](https://github.com/camunda/camunda/releases/tag/8.7.0-optimize)
+- [Camunda Optimize 3.12.16](https://github.com/camunda/camunda-optimize/releases/tag/3.12.16)
+- [Camunda Optimize 3.13.13](https://github.com/camunda/camunda-optimize/releases/tag/3.13.13)
+- [Camunda Optimize 3.14.4](https://github.com/camunda/camunda-optimize/releases/tag/3.14.4)
+- [Camunda Optimize 3.15.2](https://github.com/camunda/camunda-optimize/releases/tag/3.15.2)
+
+### Notice 17
+
+#### Publication date
+
+April 8th, 2025
+
+#### Products affected
+
+Camunda Zeebe
+
+#### Impact
+
+When parsing unknown fields in the Protobuf Java Lite and Full library, a maliciously crafted message can cause a StackOverflow error and lead to a
+program crash.
+
+- As Zeebe makes extensive use of Protobuf, this could lead to denial-of-service (DoS) issues on the server side.
+- This issue allows an attacker to send specific payloads that will always result in `StackOverflowException`. This could lead to gateway performance issues and affect system availability.
+- Although the gateway will not crash, it will spend more time working on these requests. An attacker could use this opportunity to slow it down and make it unusable by sending a large number of requests within a short time frame.
+
+No data is leaked, lost, or corrupted. This issue only affects application availability.
+
+[Learn more about this CVE at the GitHub Advisory Database](https://github.com/advisories/GHSA-735f-pc8j-v9w8).
+
+#### How to determine if the installation is affected
+
+You are using Camunda Zeebe 8.6.11.
+
+#### Solution
+
+Camunda has provided the following release which contains a fix:
+
+- [Camunda Zeebe 8.6.13](https://github.com/camunda/camunda/releases/tag/8.6.13)
+
 ### Notice 16
 
 #### Publication date

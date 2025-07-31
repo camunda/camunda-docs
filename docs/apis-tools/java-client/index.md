@@ -5,17 +5,41 @@ sidebar_label: "Quick reference"
 description: "Provide a job worker that handles polling for available jobs, use SLF4J for logging useful notes, and more."
 ---
 
-:::info
-Starting with 8.8, the Camunda Java client replaces the Zeebe Java client. This transition brings a new Java client structure designed to enhance the user experience and introduce new features while maintaining compatibility with existing codebases.
+# Camunda Java Client for Camunda 8
 
-**Note:** The Zeebe Java client will be removed in version 8.10. Please migrate to the new Camunda Java client before then.
+The Camunda Java client is the official Java library for connecting to Camunda 8 clusters, automating processes, and implementing job workers. It is designed for Java developers who want to interact programmatically with Camunda 8 via REST or gRPC, and is the successor to the Zeebe Java client.
 
-For more information, visit [announcements](/reference/announcements-release-notes/880/880-announcements.md#camunda-java-client-and-camunda-spring-boot-sdk).
+The Camunda Java client is part of the Camunda 8 [public API](/reference/public-api.md) and follows [Semantic Versioning](https://semver.org/) (except for alpha features). No breaking changes will be introduced in minor or patch releases.
+
+## Quick links
+
+- [Add the dependency](#dependencies)
+- [Connect to a cluster (bootstrapping)](#bootstrapping)
+- [Authentication options](authentication.md)
+- [Job worker usage](job-worker.md)
+- [Logging](logging.md)
+- [Testing (Camunda Process Test)](../testing/getting-started.md)
+- [Examples](../java-client-examples/index.md)
+
+:::info Migration Notice
+**Camunda Java Client replaces Zeebe Java Client as of version 8.8.**
+
+- The new Camunda Java client offers an improved structure and new features.
+- The Zeebe Java client will be **removed in version 8.10**.
+- Please migrate to the Camunda Java client before upgrading to 8.10.
+
+For details, see our [release announcements](/reference/announcements-release-notes/880/880-announcements.md#camunda-java-client-and-camunda-spring-boot-sdk).
 :::
 
-:::info Public API
-The Camunda Java client is part of the Camunda 8 [public API](/reference/public-api.md) and is covered by our SemVer stability guarantees (except for alpha features). Breaking changes will not be introduced in minor or patch releases.
-:::
+## What you'll find here
+
+- How to add the Java client to your project
+- How to connect to a Camunda 8 cluster (REST or gRPC)
+- Authentication options (Basic, OIDC, OIDC with X.509)
+- How to implement job workers
+- Logging configuration
+- How to write process tests (with Camunda Process Test)
+- Example code for common scenarios
 
 ## Dependencies
 

@@ -420,7 +420,7 @@ Key changes of the dual-region setup:
   - Optimize is currently not supported, and has a dependency on Identity.
 - `zeebe.env`
   - `ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS`
-    - These are the contact points for the brokers to know how to form the cluster. Find more information on what the variable means in [setting up a cluster](../../../../../zeebe-deployment/operations/setting-up-a-cluster.md).
+    - These are the contact points for the brokers to know how to form the cluster. Find more information on what the variable means in [setting up a cluster](../../../../../components/orchestration-cluster/zeebe/operations/setting-up-a-cluster.md).
   - `ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION0_ARGS_URL`
     - The Elasticsearch endpoint for region 0.
   - `ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION1_ARGS_URL`

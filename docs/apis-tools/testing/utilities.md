@@ -30,6 +30,11 @@ void shouldTriggerTimerEvent() {
 }
 ```
 
+:::tip
+If you trigger a BPMN timer event, you should assert that the BPMN timer event is active before manipulating the clock.
+Otherwise, you may manipulate the clock too early and the BPMN timer event is not triggered.
+:::
+
 ## Mock job workers
 
 You can mock a job worker to simulate its behavior without invoking the actual worker. The mock handles all jobs of the given job type.
@@ -39,6 +44,19 @@ When to use it:
 - Test the process in isolation from the actual job workers
 - Simulate different outcomes of a job worker (success, BPMN error)
 - Mock disabled job workers or Connectors
+
+:::tip
+If you start the process application in your test case, you
+should [disable the job workers](../spring-zeebe-sdk/configuration.md#disable-a-job-worker) to avoid interferences with
+the mocks, for example, by setting the following configuration:
+
+```java
+@SpringBootTest(properties = {"camunda.client.worker.defaults.enabled=false"})
+@CamundaSpringProcessTest
+class MyProcessTest { .. }
+```
+
+:::
 
 ### Complete job
 
@@ -182,18 +200,18 @@ When to use it:
 @Test
 void shouldCompleteJob() {
     // given: a process instance is waiting at a task
-    
+
     // when: complete the job with type "send-notification"
     // 1) Without variables
     processTestContext.completeJob("send-notification");
-    
+
     // 2) With variables
     final Map<String, Object> variables = Map.of(
         "notification-sent", true,
         "recipients", List.of("user1@example.com", "user2@example.com")
     );
     processTestContext.completeJob("send-notification", variables);
-    
+
     // then: verify that the process instance completed the task
 }
 ```
@@ -212,18 +230,18 @@ When to use it:
 @Test
 void shouldThrowBpmnErrorFromJob() {
     // given: a process instance is waiting at a task
-    
+
     // when: throw a BPMN error for the job with type "validate-data"
     // 1) With error code "VALIDATION_FAILED" and no variables
     processTestContext.throwBpmnErrorFromJob("validate-data", "VALIDATION_FAILED");
-    
+
     // 2) With error code "VALIDATION_FAILED" and variables
     final Map<String, Object> variables = Map.of(
         "error-message", "Invalid customer data",
         "error-code", "ERR_VALIDATION_001"
     );
     processTestContext.throwBpmnErrorFromJob("validate-data", "VALIDATION_FAILED", variables);
-    
+
     // then: verify that the process instance handled the error
 }
 ```
@@ -252,10 +270,10 @@ void shouldCompleteUserTask() {
         "approvedAmount", 5000.00
     );
     processTestContext.completeUserTask("Approve Request", variables);
-    
+
     // 2) With selector by element id "task_approveRequest"
     processTestContext.completeUserTask(byElementId("task_approveRequest"), variables);
-    
+
     // then: verify that the process instance is completed
 }
 ```

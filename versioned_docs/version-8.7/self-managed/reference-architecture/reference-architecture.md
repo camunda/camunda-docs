@@ -115,16 +115,16 @@ For more information and guides, see the reference for [Kubernetes](/self-manage
 
 ### Containers
 
-Containers, such as Docker, offer a middle ground between the manual JAR and Kubernetes approaches. They provide a lightweight, portable, and consistent runtime environment, making it easier to develop, test, and deploy applications across different environments. Containers encapsulate an application and its dependencies, ensuring that it runs reliably regardless of where it is deployed.
+Containers, such as Docker, offer a middle ground between the manual and Kubernetes approaches. They provide a lightweight, portable, and consistent runtime environment, making it easier to develop, test, and deploy applications across different environments. Containers encapsulate an application and its dependencies, ensuring that it runs reliably regardless of where it is deployed.
 
-- Advisable as a middle ground between manual JAR and Kubernetes. Profit from containerization while not having the whole overhead of Kubernetes.
+- Advisable as a middle ground between manual and Kubernetes. Profit from containerization while not having the whole overhead of Kubernetes.
 - Containers can run on any system that supports the container runtime, ensuring consistency across development, testing, and production environments.
 - Each container runs in its own isolated environment, which helps prevent conflicts between applications and improves security.
 - Containers can be easily scaled up or down to handle varying workloads, providing flexibility in resource management.
 
 For more information and guides, see the reference for [containers](/self-managed/setup/deploy/other/docker.md).
 
-### Manual JAR (bare metal/virtual machines)
+### Manual (bare metal/virtual machines)
 
 For organizations that prefer traditional infrastructure, reference architectures for bare metal or virtual machines (VMs) offer a structured approach to system deployment. These architectures provide best practices for setting up physical servers or VMs, configuring networks, and managing storage using Infrastructure as Service cloud providers. They are suitable for environments where containerization or use of Kubernetes services may not be feasible.
 

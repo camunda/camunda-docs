@@ -57,11 +57,11 @@ All Optimize API requests except [the health readiness](./health-readiness.md) e
 
 <TabItem value='self-managed'>
 
-1. [Configure the `api.audience` setting](/self-managed/optimize-deployment/configuration/system-configuration.md#public-api) in your Optimize installation to match the audience property of the **Optimize API** [API in Identity](/self-managed/identity/access-management/access-management-overview.md).
-2. [Add an M2M application in Identity](/self-managed/identity/application-user-group-role-management/applications.md).
-3. [Add permissions to this application](/self-managed/identity/application-user-group-role-management/applications.md) for **Optimize API**.
+1. [Configure the `api.audience` setting](/self-managed/components/optimize/configuration/system-configuration.md#public-api) in your Optimize installation to match the audience property of the **Optimize API** [API in Identity](/self-managed/components/management-identity/access-management/access-management-overview.md).
+2. [Add an M2M application in Identity](/self-managed/components/management-identity/application-user-group-role-management/applications.md).
+3. [Add permissions to this application](/self-managed/components/management-identity/application-user-group-role-management/applications.md) for **Optimize API**.
 4. Capture the `Client ID` and `Client Secret` from the application in Identity.
-5. [Generate a token](/self-managed/identity/authentication.md) to access the Optimize REST API. Provide the `client_id` and `client_secret` from the values you previously captured in Identity.
+5. [Generate a token](/self-managed/components/management-identity/authentication.md) to access the Optimize REST API. Provide the `client_id` and `client_secret` from the values you previously captured in Identity.
    ```shell
    curl --location --request POST 'http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token' \
    --header 'Content-Type: application/x-www-form-urlencoded' \
@@ -82,7 +82,7 @@ All Optimize API requests except [the health readiness](./health-readiness.md) e
 6. Capture the value of the `access_token` property and store it as your token.
 
 :::note
-The Optimize API can also be configured in a Self-Managed environment to authenticate using a single shared access token. See [Public API Configuration](/self-managed/optimize-deployment/configuration/system-configuration.md#public-api) for the configuration required to access the public API using a specific token.
+The Optimize API can also be configured in a Self-Managed environment to authenticate using a single shared access token. See [Public API Configuration](/self-managed/components/optimize/configuration/system-configuration.md#public-api) for the configuration required to access the public API using a specific token.
 :::
 
 </TabItem>

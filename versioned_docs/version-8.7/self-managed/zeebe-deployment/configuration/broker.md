@@ -369,37 +369,6 @@ backup:
     basePath: null
 ```
 
-#### Known issues
-
-**Backups to IBM COS fail with 403 Access Denied**
-
-When using an S3 backup store with IBM Cloud Object Storage, you may encounter `403 Access Denied` errors even though the access credentials are valid.
-This may be caused by a [recent change in the AWS S3 client](https://docs.aws.amazon.com/sdkref/latest/guide/feature-dataintegrity.html), which now calculates checksums for data integrity by default. IBM COS does not appear to support this feature.
-
-To resolve this issue, you can restore the previous behavior by setting the following environment variable on your Zeebe brokers:
-
-```
-AWS_REQUEST_CHECKSUM_CALCULATION=WHEN_REQUIRED
-```
-
-This will prevent the S3 client from calculating the additional checksums and should resolve the issue.
-
-**Backups to Dell EMC ECS fail with 400 Bad Request**
-
-When using an S3 backup store with Dell EMC ECS, you may encounter the following error:
-
-`The Content-SHA256 you specified did not match what we received (Service: S3, Status Code: 400)`
-
-This issue is caused by a recent change in the AWS S3 client, which now signs streaming chunked uploads differently. Dell EMC ECS does not support chunked encoding.
-
-To resolve this issue, set the following environment variable on your Zeebe brokers:
-
-```
-AWS_REQUEST_CHECKSUM_CALCULATION=WHEN_REQUIRED
-```
-
-This disables the additional checksum calculation in the S3 client and should resolve the issue.
-
 ### zeebe.broker.data.backup.gcs
 
 Configure the following if store is set to GCS.

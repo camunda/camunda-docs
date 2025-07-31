@@ -43,20 +43,18 @@ Contractual metrics telemetry data includes a limited set of contractually agree
 
 ### Environment telemetry data (Self-Managed only)
 
-Environment telemetry data includes information about your Self-Managed installations to enable better support and product improvement decisions. Self-Managed customers may choose to send a very limited set of environment information through the Console component's telemetry mechanism. View the [telemetry](/self-managed/console-deployment/telemetry.md) page for a description of this data. Environment telemetry data is not relevant to SaaS installations.
+Environment telemetry data includes information about your Self-Managed installations to enable better support and product improvement decisions. Self-Managed customers may choose to send a very limited set of environment information through the Console component's telemetry mechanism. View the [telemetry](/self-managed/components/console/telemetry.md) page for a description of this data. Environment telemetry data is not relevant to SaaS installations.
 
 ### Usage telemetry data (SaaS and Desktop Modeler only)
 
 Usage telemetry data includes limited product usage data to help make better product improvement decisions and enable outreach to support users. This section describes the types of data and how they are collected.
 
 - Feature Usage:
-
   - SaaS System Actions: All SaaS organizations submit basic information about which features are being used as part of telemetry data collection. When certain features are used, Camunda logs which feature is used and basic information about how it has been used. This information is tied to a pseudonymized organization.
   - SaaS User Actions: Users that opt-in to personalization cookies gain access to in-app tutorials, whereas analytics cookies cause data to be automatically submitted about which features they interact with in Camunda’s UI as part of telemetry data. In addition to the data collected from system actions described above, Camunda collects cursor activity, geographical area, browser information, and basic biographical information limited to email, name, and city/region/country for user actions. If a user interacts through API, then personal information is not collected.
 
   <img src={CookiePrefsImg} alt="Cookie preferences in user settings" width="300px" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}}/>
   <img src={AnalyticsImg} alt="Analytics opt-in menu" width="500px" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}}/>
-
   - Desktop Modeler User Actions: Users opting into collection of telemetry data in [Desktop Modeler](/components/modeler/desktop-modeler/telemetry/telemetry.md) send data to Camunda to track how certain features are used, as described in the linked document.
 
 - AI Usage: Camunda's AI features, currently available in SaaS only, are clearly labeled as AI features. For Enterprise organizations, these features must be enabled by the customer via opt-in in the [Console](/components/console/manage-organization/enable-alpha-features.md#enable-ai-powered-features). Depending on the feature, they may collect different information.
