@@ -22,7 +22,7 @@ The public IP addresses exposed for connecting to the cluster depends on the clo
 - **Amazon Web Services (AWS)**: Each endpoint is served by multiple IP addresses.
 - **Google Cloud Platform (GCP)**: IP addresses are AnyCast IP addresses and are globally available.
 
-## Outbound Connections
+## Outbound connections
 
 If you use a [Camunda connector](/components/connectors/introduction.md), your cluster sends requests from the Camunda SaaS infrastructure to the external services you configure in your processes.
 
@@ -30,5 +30,5 @@ Depending on the cloud provider, [region](/reference/regions.md), and type of co
 
 To ensure the security of incoming connector connections, you can:
 
-- Authenticate the requests made by the Camunda connector(s). For example, see the [REST connector](/components/connectors/protocol/rest.md#authentication) authentication information.
-- Run the connectors into your own infrastructure and remove incoming calls from the Camunda infrastructure to your own services.
+- Authenticate the requests made by the Camunda connector(s). For example, see [REST connector authentication](/components/connectors/protocol/rest.md#authentication).
+- Run the connectors into your own infrastructure and remove incoming calls from the Camunda infrastructure to your own services. For example, see [Self-Managed connectors](/self-managed/components/connectors/overview.md).
