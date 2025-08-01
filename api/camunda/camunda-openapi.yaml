@@ -530,7 +530,7 @@ paths:
       summary: Assign a user to a tenant
       description: |
         Assign a user to the specified tenant.
-        The user will get access to the tenant's data and can perform actions according to their authorizations.
+        The user can then access tenant data and perform authorized actions.
       parameters:
         - name: tenantId
           in: path
