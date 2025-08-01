@@ -3,6 +3,7 @@ id: element-templates
 title: Element templates
 description: A process application is a type of folder that contains a set of related files you can work on and deploy as a single bundle.
 ---
+
 import serviceTaskNoTemplate from './assets/element-templates/service-task-no-template.png'
 import serviceTaskWithTemplate from './assets/element-templates/service-task-with-template.png'
 import propretiesNoTemplate from './assets/element-templates/properties-no-template.png'
