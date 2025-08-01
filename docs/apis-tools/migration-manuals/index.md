@@ -130,3 +130,4 @@ Ready to upgrade and migrate? Complete the following steps:
 1. **Coordinate your platform and development teams**: Ensure your orchestration cluster is upgraded to 8.8 before upgrading your application clients.
 
 2. **Review migration guides**: Coming soon: Links to detailed guides on each component migration.
+    - [Migrate from Zeebe Process Test to Camunda Process Test](migrate-to-camunda-process-test.md)
