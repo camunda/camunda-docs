@@ -3857,7 +3857,7 @@ paths:
       summary: Unassign a user from a group
       description: |
         Unassigns a user from a group.
-        The user will no longer be considered a member of this group meaning authorizations, roles or tenant assignment does not apply anymore.
+        The user is removed as a group member, with associated authorizations, roles, and tenant assignments no longer applied.
       parameters:
         - name: groupId
           in: path
