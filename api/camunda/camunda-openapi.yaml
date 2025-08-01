@@ -3813,7 +3813,7 @@ paths:
       summary: Assign a user to a group
       description: |
         Assigns a user to a group, making the user a member of the group.
-        Members of the group will inherit authorizations, roles and tenant assignment of the group.
+        Group members inherit the group authorizations, roles, and tenant assignments.
       parameters:
         - name: groupId
           in: path
