@@ -3062,7 +3062,7 @@ paths:
       operationId: addRoleToUser
       summary: Assign a role to a user
       description: |
-        Assigns the specified role to the user. 
+        Assigns the specified role to the user.
         The user will inherit the authorizations associated with this role.
       parameters:
         - name: roleId
