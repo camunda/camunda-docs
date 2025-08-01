@@ -25,4 +25,4 @@ The following example demonstrates how a generic service task can be transformed
 
 Read more about how to use element templates in Web and Desktop Modeler:
 
-- [Element templates in Modeler](/components/modeler/web-modeler/element-templates/)
+- [Element templates in Modeler](../modeler/element-templates/)
