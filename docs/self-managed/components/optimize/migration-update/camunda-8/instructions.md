@@ -41,7 +41,7 @@ The database update is usually performed in a rolling fashion. Read all about ho
 
 ### 3. Perform the migration
 
-For upgrading the Camunda Helm chart from one release to another, perform a [Helm upgrade](/self-managed/installation-methods/helm/upgrade/upgrade.md).
+For upgrading the Camunda Helm chart from one release to another, perform a [Helm upgrade](/self-managed/installation-methods/helm/upgrade/index.md).
 
 If Helm charts is not used, the update can be executed as part of the Optimize startup. In order to make use of this functionality, the command flag `--upgrade` has to be passed to the Optimize startup script.
 

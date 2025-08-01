@@ -1,7 +1,7 @@
 ---
 id: index
-title: Overview
 sidebar_label: Kubernetes with Helm
+title: Camunda Helm chart
 description: "In this section, find details on installation using Kubernetes with Helm."
 ---
 
@@ -111,7 +111,7 @@ In the default configuration, Helm charts automatically generate all required Ca
 
 However, due to an issue with a [Bitnami library](https://docs.bitnami.com/general/how-to/troubleshoot-helm-chart-issues/#credential-errors-while-upgrading-chart-releases), running future `helm upgrade` commands may unintentionally regenerate these secrets.
 
-While upgrades are still possible by following our [upgrade guide](/self-managed/installation-methods/helm/upgrade/upgrade.md#upgrading-where-identity-enabled), we recommend **pre-creating these secrets** to ensure a smoother upgrade process. This is especially helpful when using CI/CD tools such as ArgoCD, FluxCD, or Jenkins.
+While upgrades are still possible by following our [upgrade guide](/self-managed/installation-methods/helm/upgrade/index.md#upgrading-where-identity-enabled), we recommend **pre-creating these secrets** to ensure a smoother upgrade process. This is especially helpful when using CI/CD tools such as ArgoCD, FluxCD, or Jenkins.
 
 Below is an example of a pre-created secret:
 
@@ -463,7 +463,7 @@ kubectl logs -f <POD_NAME>
 
 ## Upgrading
 
-For upgrading the Camunda Helm chart from one release to another, perform a [Helm upgrade](/self-managed/installation-methods/helm/upgrade/upgrade.md).
+For upgrading the Camunda Helm chart from one release to another, perform a [Helm upgrade](/self-managed/installation-methods/helm/upgrade/index.md).
 
 ## General notes
 

@@ -1,6 +1,7 @@
 ---
 id: helm
-title: "Helm"
+sidebar_label: "Helm"
+title: "Document handling configuration in Helm"
 description: "Learn more about storage configuration options for Helm setups."
 keywords: ["document handling", "document storage configuration"]
 ---

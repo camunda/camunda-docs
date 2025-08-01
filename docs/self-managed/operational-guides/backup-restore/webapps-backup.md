@@ -1,8 +1,8 @@
 ---
 id: webapps-backup
-title: Backup Management API - Web Applications
+sidebar_label: Operate and Tasklist
+title: Web applications backup management API
 description: "Backup API to perform a backup of web application (Operate and Tasklist) data."
-sidebar_label: "Operate and Tasklist"
 keywords: ["backup", "backups"]
 ---
 
