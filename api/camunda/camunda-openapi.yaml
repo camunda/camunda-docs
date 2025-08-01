@@ -3896,7 +3896,7 @@ paths:
       summary: Assign a client to a group.
       description: |
         Assigns a client to a group, making it a member of the group.
-        Members of the group will inherit authorizations, roles and tenant assignment of the group.
+        Members of the group inherit the group authorizations, roles, and tenant assignments.
       parameters:
         - name: groupId
           in: path
