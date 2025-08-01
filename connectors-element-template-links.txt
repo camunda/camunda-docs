@@ -17,7 +17,11 @@ https://docs.camunda.io/docs/8.8/components/connectors/out-of-the-box-connectors
 https://docs.camunda.io/docs/8.8/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent
 https://docs.camunda.io/docs/8.8/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent/
 https://docs.camunda.io/docs/8.8/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent/#response
+https://docs.camunda.io/docs/8.8/components/connectors/out-of-the-box-connectors/azure-blob-storage/#prerequisites
+https://docs.camunda.io/docs/8.8/components/connectors/out-of-the-box-connectors/azure-blobstorage
 https://docs.camunda.io/docs/8.8/components/connectors/out-of-the-box-connectors/embeddings-vector-db
+https://docs.camunda.io/docs/8.8/components/connectors/out-of-the-box-connectors/google-cloud-storage
+https://docs.camunda.io/docs/8.8/components/connectors/out-of-the-box-connectors/google-cloud-storage/#authentication
 https://docs.camunda.io/docs/8.8/components/connectors/out-of-the-box-connectors/hubspot
 https://docs.camunda.io/docs/apis-clients/operate-api/#filter
 https://docs.camunda.io/docs/apis-clients/operate-api/#sort
@@ -120,6 +124,7 @@ https://docs.camunda.io/docs/components/connectors/use-connectors/
 https://docs.camunda.io/docs/components/connectors/use-connectors/#bpmn-errors
 https://docs.camunda.io/docs/components/connectors/use-connectors/#result-expression
 https://docs.camunda.io/docs/components/connectors/use-connectors/#result-variable
+https://docs.camunda.io/docs/components/console/manage-clusters/setup-client-connection-credentials
 https://docs.camunda.io/docs/components/modeler/bpmn/none-events
 https://docs.camunda.io/docs/components/modeler/desktop-modeler/element-templates/using-templates/#replacing-templates
 https://docs.camunda.io/docs/components/modeler/web-modeler/camunda-marketplace
