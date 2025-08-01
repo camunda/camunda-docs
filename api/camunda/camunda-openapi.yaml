@@ -3306,7 +3306,7 @@ paths:
       summary: Unassign a role from a group
       description: |
         Unassigns the specified role from the group.
-        Every member of the group (user or client) will no longer inherit the authorizations associated with this role.
+        All group members (user or client) no longer inherit the authorizations associated with this role.
       parameters:
         - name: roleId
           in: path
