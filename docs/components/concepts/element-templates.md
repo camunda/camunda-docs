@@ -12,11 +12,10 @@ import propretiesWithTemplate from './assets/element-templates/properties-with-t
 An **element template** is a way to extend the [Modeler](../modeler/about-modeler.md) with domain-specific diagram elements, such as service and user tasks. They allow to customize how a BPMN element is shown and how it can be configured by process developers.
 
 The following example demonstrates how a generic service task can be transformed into a customized user interface that guides users through its configuration process.
-| Without an element template                                                         | With an element template                                                           |
-| :---------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------- | 
-| <img src={serviceTaskNoTemplate} alt="Service tasks without an element template" /> | <img src={serviceTaskWithTemplate} alt="Service tasks with an element template" /> | 
-| <img src={propretiesNoTemplate} alt="Properties without an element template" />     | <img src={propretiesWithTemplate} alt="Properties with an element template" />     |  
-
+| Without an element template | With an element template |
+| :---------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------- |
+| <img src={serviceTaskNoTemplate} alt="Service tasks without an element template" /> | <img src={serviceTaskWithTemplate} alt="Service tasks with an element template" /> |
+| <img src={propretiesNoTemplate} alt="Properties without an element template" /> | <img src={propretiesWithTemplate} alt="Properties with an element template" /> |
 
 :::tip
 [Connector templates](../connectors/custom-built-connectors/connector-templates.md) are a specific kind of element template.
