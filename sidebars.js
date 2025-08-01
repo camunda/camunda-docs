@@ -1286,7 +1286,7 @@ module.exports = {
       ],
     },
     {
-      "Operational guides": [
+      Concepts: [
         {
           type: "category",
           label: "Back up and restore",
@@ -1306,10 +1306,6 @@ module.exports = {
             },
           ],
         },
-      ],
-    },
-    {
-      Concepts: [
         {
           type: "category",
           label: "Document handling",
