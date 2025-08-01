@@ -1,7 +1,7 @@
 ---
 id: backup-and-restore
-title: "Back up and restore"
-sidebar_label: "Back up and restore"
+sidebar_label: Back up and restore
+title: Camunda back up and restore
 keywords: ["backup", "backups"]
 description: "Learn how to back up and restore your Camunda 8 Self-Managed components."
 ---

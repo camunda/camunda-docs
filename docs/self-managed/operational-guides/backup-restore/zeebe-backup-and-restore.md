@@ -1,8 +1,8 @@
 ---
 id: zeebe-backup-and-restore
-title: "Backup Management API - Zeebe"
+sidebar_label: Zeebe
+title: Zeebe backup management API
 description: "Backup API to create a backup of a running Zeebe cluster comprised of a consistent snapshot of all partitions."
-sidebar_label: "Zeebe"
 keywords: ["backup", "backups"]
 ---
 

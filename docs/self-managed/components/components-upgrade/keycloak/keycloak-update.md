@@ -1,6 +1,7 @@
 ---
 id: keycloak-update
-title: Update Keycloak
+sidebar_label: Update Keycloak
+title: Camunda Keycloak updating
 description: "Review what has to be taken into account when updating Keycloak."
 ---
 
