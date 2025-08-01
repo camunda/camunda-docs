@@ -1,7 +1,8 @@
 ---
 id: webapps-backup
-title: Backup and restore Operate and Tasklist data
-description: "How to perform a backup and restore of web application (Operate and Tasklist) data."
+sidebar_label: Operate and Tasklist
+title: Web applications backup management API
+description: "Backup API to perform a backup of web application (Operate and Tasklist) data."
 keywords: ["backup", "backups"]
 ---
 
@@ -17,6 +18,8 @@ This page refers to the components Operate and Tasklist as "web applications".
 
 Optimize is not backed up as part of this process. Optimize is a dedicated application with its own backup system. Please see the [documentation for Optimize](./optimize-backup.md) to perform a backup.
 :::
+
+## About this API
 
 The Camunda web applications store their data over multiple indices in Elasticsearch. A backup of web application data includes several Elasticsearch snapshots containing sets of different indices. Each backup is identified by a `backupId`. For example, a backup with an ID of `123` may contain the following Elasticsearch snapshots:
 
@@ -35,84 +38,18 @@ All web applications provide the same API to perform a backup and manage backups
 The backup API can be reached via the Actuator management port, which default defaults to port 9600.
 :::
 
-## Prerequisites
+:::warning
+Usage of this API requires the backup store to be configured with the **same** repository name.
 
-### Snapshot repository
+- [Operate configuration](/self-managed/components/orchestration-cluster/operate/operate-configuration.md#backups)
+- [Tasklist configuration](/self-managed/components/orchestration-cluster/tasklist/tasklist-configuration.md#backups)
 
-Before you can use the backup and restore feature:
+Additionally, it requires the same backup store to be configured on your chosen datastore.
 
-1. The [Elasticsearch snapshot repository](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshot-restore.html) must be configured.
-2. All deployed web applications must be configured with the **same** repository name using one of the following configuration options.
-3. Web applications must have the right to take snapshots.
+- [Elasticsearch snapshot repository](https://www.elastic.co/docs/deploy-manage/tools/snapshot-and-restore/manage-snapshot-repositories)
+- [OpenSearch snapshot repository](https://docs.opensearch.org/docs/latest/tuning-your-cluster/availability-and-recovery/snapshots/snapshot-restore/)
 
-:::warning breaking change
-Configuring different web applications with different repository names will potentially create multiple backups in different repositories.
-:::
-
-<Tabs groupId="config" defaultValue="yaml" values={
-[
-{label: 'YAML file', value: 'yaml', },
-{label: 'Environment variables', value: 'env', },
-]
-}>
-
-<TabItem value='yaml'>
-
-#### Operate
-
-```yaml
-camunda:
-  operate:
-    backup:
-      repositoryName: <es snapshot repository name>
-```
-
-</TabItem>
-
-<TabItem value='env'>
-
-#### Operate
-
-```
-CAMUNDA_OPERATE_BACKUP_REPOSITORYNAME=<es snapshot repository name>
-```
-
-</TabItem>
-</Tabs>
-
-#### Tasklist
-
-<Tabs groupId="config" className="tabs-hidden" defaultValue="yaml" values={
-[
-{label: 'YAML file', value: 'yaml', },
-{label: 'Environment variables', value: 'env', },
-]
-}>
-
-<TabItem value='yaml'>
-
-```yaml
-camunda:
-  tasklist:
-    backup:
-      repositoryName: <es snapshot repository name>
-```
-
-</TabItem>
-
-<TabItem value='env'>
-
-```
-CAMUNDA_TASKLIST_BACKUP_REPOSITORYNAME=<es snapshot repository name>
-```
-
-</TabItem>
-</Tabs>
-
-### Index prefix
-
-:::warning breaking change
-As of Camunda 8.8, the `indexPrefix` of all web applications must match. By default it is set to `""`. If overriden, it must set consistently across Operate and Tasklist.
+Web applications must have the right to take snapshots.
 :::
 
 ## Create backup API
@@ -152,12 +89,12 @@ Example response:
 ```json
 {
   "scheduledSnapshots": [
-    "camunda_operate_123_8.8.0_part_1_of_6",
-    "camunda_operate_123_8.8.0_part_2_of_6",
-    "camunda_operate_123_8.8.0_part_3_of_6",
-    "camunda_operate_123_8.8.0_part_4_of_6",
-    "camunda_operate_123_8.8.0_part_5_of_6",
-    "camunda_operate_123_8.8.0_part_6_of_6"
+    "camunda_webapps_123_8.8.0_part_1_of_6",
+    "camunda_webapps_123_8.8.0_part_2_of_6",
+    "camunda_webapps_123_8.8.0_part_3_of_6",
+    "camunda_webapps_123_8.8.0_part_4_of_6",
+    "camunda_webapps_123_8.8.0_part_5_of_6",
+    "camunda_webapps_123_8.8.0_part_6_of_6"
   ]
 }
 ```
@@ -199,7 +136,7 @@ Example response:
   "details":  [
     //here goes the list of all Elasticsearch snapshots included in the backup
     {
-      "snapshotName": "camunda_operate_123_8.8.0_part_1_of_6",
+      "snapshotName": "camunda_webapps_123_8.8.0_part_1_of_6",
       "state": "SUCCESS",
       "startTime": "2023-01-01T10:10:10.100+0000",
       "failures": []
@@ -270,26 +207,3 @@ Response:
 | 404 Not Found    | Not a single snapshot corresponding to given ID exist.                                                                       |
 | 500 Server Error | All other errors, e.g. ES returned error response when attempting to execute the query.                                      |
 | 502 Bad Gateway  | Elasticsearch is not accessible, the request can be retried when it is back.                                                 |
-
-## Restore backup
-
-There is no web application API to preform the backup restore. Instead, use the [Elasticsearch restore snapshot API](https://www.elastic.co/guide/en/elasticsearch/reference/current/restore-snapshot-api.html).
-
-:::note
-Operate and Tasklist must **not** be running while a backup restore is taking place.
-:::
-
-To restore the backup with a known backup id, you must restore all the snapshots this backup contains (check the response of the [create backup API](#create-backup-api)).
-
-Example of Elasticsearch query:
-
-```shell
-curl --request POST `http://localhost:9200/_snapshot/test/camunda_operate_123_8.1.0-snapshot_part_1_of_6/_restore?wait_for_completion=true`
-```
-
-To summarize, the process may look as follows:
-
-1. Stop all web applications.
-2. Ensure there are no web application indices present in Elasticsearch (otherwise the restore process will fail).
-3. Iterate over all Elasticsearch snapshots included in the desired backup and restore them using the Elasticsearch restore snapshot API.
-4. Start all web applications.

@@ -56,9 +56,9 @@ camunda:
       url: https://localhost:9200
       # If custom SSL configuration is necessary
       ssl:
-        selfSigned=true
-        verifyHostname=false
-        certificatePath=PATH_TO_CA_CERT
+        selfSigned: true
+        verifyHostname: false
+        certificatePath: PATH_TO_CA_CERT
     archiver:
       # Optional, only if ILM is enabled
       ilmEnabled: true
@@ -71,9 +71,9 @@ camunda:
       url: https://localhost:9200
       # If custom SSL configuration is necessary
       ssl:
-        selfSigned=true
-        verifyHostname=false
-        certificatePath=PATH_TO_CA_CERT
+        selfSigned: true
+        verifyHostname: false
+        certificatePath: PATH_TO_CA_CERT
     archiver:
       # Optional, only if ILM is enabled
       ilmEnabled: true
@@ -174,9 +174,9 @@ camunda:
       url: https://localhost:9200
       # If custom SSL configuration is necessary
       ssl:
-        selfSigned=true
-        verifyHostname=false
-        certificatePath=PATH_TO_CA_CERT
+        selfSigned: true
+        verifyHostname: false
+        certificatePath: PATH_TO_CA_CERT
     zeebeElasticsearch:
       # Example assuming an existing user called 'camunda-app' with the privileges described in 2.1
       username: camunda-app
@@ -184,9 +184,9 @@ camunda:
       url: https://localhost:9200
       # If custom SSL configuration is necessary
       ssl:
-        selfSigned=true
-        verifyHostname=false
-        certificatePath=PATH_TO_CA_CERT
+        selfSigned: true
+        verifyHostname: false
+        certificatePath: PATH_TO_CA_CERT
     archiver:
       ilmEnabled: false
       ilmManagePolicy: false
@@ -201,9 +201,9 @@ camunda:
       url: https://localhost:9200
       # If custom SSL configuration is necessary
       ssl:
-        selfSigned=true
-        verifyHostname=false
-        certificatePath=PATH_TO_CA_CERT
+        selfSigned: true
+        verifyHostname: false
+        certificatePath: PATH_TO_CA_CERT
     zeebeElasticsearch:
       # Example assuming an existing user called 'camunda-app' with the privileges described in 2.1
       username: camunda-app
@@ -211,9 +211,9 @@ camunda:
       url: https://localhost:9200
       # If custom SSL configuration is necessary
       ssl:
-        selfSigned=true
-        verifyHostname=false
-        certificatePath=PATH_TO_CA_CERT
+        selfSigned: true
+        verifyHostname: false
+        certificatePath: PATH_TO_CA_CERT
     archiver:
       ilmEnabled: false
     migration:
@@ -368,9 +368,9 @@ camunda:
       url: https://localhost:9200
       # If custom SSL configuration is necessary
       ssl:
-        selfSigned=true
-        verifyHostname=false
-        certificatePath=PATH_TO_CA_CERT
+        selfSigned: true
+        verifyHostname: false
+        certificatePath: PATH_TO_CA_CERT
   tasklist:
     backup:
       # Example assuming an existing snapshot repository 'els-test'
@@ -383,9 +383,9 @@ camunda:
       url: https://localhost:9200
       # If custom SSL configuration is necessary
       ssl:
-        selfSigned=true
-        verifyHostname=false
-        certificatePath=PATH_TO_CA_CERT
+        selfSigned: true
+        verifyHostname: false
+        certificatePath: PATH_TO_CA_CERT
 
 ```
 

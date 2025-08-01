@@ -7,15 +7,45 @@ description: "Learn about fetching data using the Orchestration Cluster API."
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-Many Orchestration Cluster API resources like process definitions, user tasks, users, and tenants provide endpoints to fetch related data.
+The Orchestration Cluster API allows you to retrieve data from key resources like process definitions, user tasks, users, and tenants. Each search-enabled endpoint supports rich filtering, sorting, and pagination so you can quickly find the data that matters most.
 
-Those resources can offer search endpoints to query by POST method and a given query request object where applicable. The structure of such [search requests](#search-requests) always follows the same schema and so do the [search responses](#search-responses), always returning a list of items matching the query criteria, accompanied by search result metadata.
+The sections below explain how to structure a search request and interpret the response format.
 
-Resources can also support querying subordinate resources. For example, for users and groups, with group search being available at `POST /v2/groups/search`, a group's users can be retrieved using `POST /v2/groups/{groupId}/users/search`. Each resource determines independently if subordinate resources can be accessed this way.
+## Searchable resources
 
-Search endpoints can also be used to access entity instances with a unique identifier directly. As an alternative, resources can also provide GET method endpoints for fetching the data of single instances. This is done by a specific key parameter in the URL path, for example `GET /v2/user-tasks/{userTaskKey}`.
+The following examples support search via POST endpoints, each with its own set of filterable fields:
 
-All those data retrieval endpoints offer near-real-time data consistency guarantees, providing runtime and historic data that has been processed by the [Camunda Exporter](../../self-managed/zeebe-deployment/exporters/camunda-exporter.md).
+- Process instances (`POST /v2/process-instances/search`)
+- User tasks (`POST /v2/user-tasks/search`)
+- Users (`POST /v2/users/search`)
+- Batch operations (`POST /v2/batch-operations/search`)
+
+Refer to the [interactive Orchestration Cluster API Explorer][camunda-api-explorer] for the full attribute lists.
+
+## Supported operations
+
+Most searchable resources allow:
+
+- Filtering based on properties or variables
+- Sorting results
+- Paginating with either offset or cursor methods
+- Accessing nested resources (e.g., group users)
+
+> Example: You can search for groups using `POST /v2/groups/search`, and for the users in a group using `POST /v2/groups/:groupId/users/search`.
+
+You can also fetch single resources using `GET` endpoints with unique identifiers, such as:
+
+```shell
+GET /v2/user-tasks/:userTaskKey
+```
+
+## Data consistency
+
+All search and retrieval endpoints (GET and POST) return near-real-time data consistency guarantees. Results reflect the current state of runtime and historic data that has been processed by the [Camunda Exporter](../../self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md).
+
+## User task support
+
+The Orchestration Cluster API only supports Camunda user tasks (previously referred to as [Zeebe user tasks](../migration-manuals/migrate-to-camunda-user-tasks.md), which may still appear as `zeebe:userTask` in your XML content).
 
 ## Search requests
 

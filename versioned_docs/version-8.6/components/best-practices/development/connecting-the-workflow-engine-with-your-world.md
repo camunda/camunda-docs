@@ -241,7 +241,7 @@ A good reason to use Connectors is if you need to solve complex integrations whe
 
 Good use of Connectors are also scenarios where you don’t need custom glue code. For example, when orchestrating serverless functions on AWS with the [AWS Lambda Connector](https://github.com/camunda-community-hub/zeebe-lambda-worker). This Connector can be operated once and used in different processes.
 
-Some use cases also allow you to create a **resuable generic adapter**; for example, to send status events to your business intelligence system.
+Some use cases also allow you to create a **reusable generic adapter**; for example, to send status events to your business intelligence system.
 
 But there are also common downsides with Connectors. First, the possibilities are limited to what the creator of the Connector has foreseen. In reality, you might have slightly different requirements and hit a limitation of a Connector.
 

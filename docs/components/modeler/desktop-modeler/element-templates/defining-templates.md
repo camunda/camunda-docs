@@ -485,13 +485,17 @@ The binding name of `correlationKey` is not applicable to message start events o
 
 #### `zeebe:calledElement`
 
-| **Binding `type`**          | `zeebe:calledElement`                                                |
-| --------------------------- | -------------------------------------------------------------------- |
-| **Valid property `type`'s** | `String`<br />`Text`<br />`Hidden`<br />`Dropdown`                   |
-| **Binding parameters**      | `property`: The name of the property (only `processId` is supported) |
-| **Mapping result**          | `<zeebe:calledElement [property]="[userInput]" />`                   |
+| **Binding `type`**          | `zeebe:calledElement`                                                                                          |
+| --------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| **Valid property `type`'s** | `String`<br />`Text`<br />`Hidden`<br />`Dropdown`                                                             |
+| **Binding parameters**      | `property`: The name of the property.<br/> Supported properties: `processId`, `bindingType`, and `versionTag`. |
+| **Mapping result**          | `<zeebe:calledElement [property]="[userInput]" />`                                                             |
 
 The `zeebe:calledElement` binding allows you to configure process called by a call activity.
+
+You can set the value of the property `bindingType` to control the [resource binding type](../../../../best-practices/modeling/choosing-the-resource-binding-type).
+We recommend setting the property `bindingType` to the value `"versionTag"` and setting property `versionTag`
+to the value of the version tag of the process you want to call.
 
 :::note
 
@@ -508,6 +512,63 @@ For `zeebe:calledElement` bindings, variable propagation is not supported. To pr
 | **Mapping result**          | `<zeebe:userTask />`                                                                                                  |
 
 The `zeebe:userTask` binding allows you to configure the implementation type for a templated `bpmn:UserTask`. When present, it sets the task as a Camunda user task; when omitted, the task defaults to a job worker.
+
+#### `zeebe:formDefinition`
+
+| **Binding `type`**          | `zeebe:formDefinition`                                                                                                            |
+| --------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| **Valid property `type`'s** | `String`<br />`Text`<br />`Hidden`<br />`Dropdown`                                                                                |
+| **Binding parameters**      | `property`: The name of the property. <br/> Supported properties: `formId`, `externalReference`, `bindingType`, and `versionTag`. |
+| **Mapping result**          | `<zeebe:formDefinition [property]="[userInput]" />`                                                                               |
+
+The `zeebe:formDefinition` binding allows you to configure the [user task form](../../../bpmn/user-tasks/#user-task-forms) used by a user task.
+
+When setting the `formId` property, you can set the value of the property `bindingType` to control the [resource binding type](../../../../best-practices/modeling/choosing-the-resource-binding-type).
+We recommend setting the property `bindingType` to the value `"versionTag"` and setting property `versionTag`
+to the value of the version tag of the form you want to link.
+
+:::note
+
+When `zeebe:formDefinition` is used, `zeebe:userTask` must be set on the same element.
+Properties `formId` and `externalReference` are mutually exclusive, meaning that only one of them can be set at a time.
+
+:::
+
+#### `zeebe:calledDecision`
+
+| **Binding `type`**          | `zeebe:calledDecision`                                                                                                            |
+| --------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| **Valid property `type`'s** | `String`<br />`Text`<br />`Hidden`<br />`Dropdown`                                                                                |
+| **Binding parameters**      | `property`: The name of the property.<br/> Supported properties: `decisionId`, `resultVariable`, `bindingType`, and `versionTag`. |
+| **Mapping result**          | `<zeebe:calledDecision [property]="[userInput]" />`                                                                               |
+
+The `zeebe:calledDecision` binding allows you to configure the [called decision](../../../bpmn/business-rule-tasks/#defining-a-task) used by a business rule task.
+
+You can set the value of the property `bindingType` to control the [resource binding type](../../../../best-practices/modeling/choosing-the-resource-binding-type).
+We recommend setting the property `bindingType` to the value `"versionTag"` and setting property `versionTag`
+to the value of the version tag of the decision you want to call.
+
+:::note
+
+When `zeebe:calledDecision` is used, `zeebe:taskDefinition` cannot be used on the same element.
+
+:::
+
+#### `zeebe:script`
+
+| **Binding `type`**          | `zeebe:script`                                                                         |
+| --------------------------- | -------------------------------------------------------------------------------------- |
+| **Valid property `type`'s** | `String`<br />`Text`<br />`Hidden`<br />`Dropdown`                                     |
+| **Binding parameters**      | `property`: The name of the property. `expression` and `resultVariable` are supported. |
+| **Mapping result**          | `<zeebe:script [property]="[userInput]" />`                                            |
+
+The `zeebe:script` binding allows you to configure the [FEEL expression](../../../bpmn/script-tasks/#defining-a-task) used by a script task.
+
+:::note
+
+When `zeebe:script` is used, `zeebe:taskDefinition` cannot be used on the same element.
+
+:::
 
 ### Optional bindings
 

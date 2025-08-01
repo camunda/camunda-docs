@@ -25,7 +25,7 @@ This architecture diagram illustrates the flow of requests from a user's browser
 - Spring Boot is widely adopted for Java application development.
 - Flexible for both on-premises and cloud environments.
 
-Discover more in our [getting started guide for microservices orchestration](/guides/getting-started-orchestrate-microservices.md) or the [Camunda Spring Boot SDK instructions](../../../apis-tools/spring-zeebe-sdk/getting-started.md).
+Discover more in our [getting started guide using Spring](/guides/getting-started-example.md) or the [Camunda Spring Boot SDK instructions](../../../apis-tools/spring-zeebe-sdk/getting-started.md).
 
 ### Set up the stack
 
@@ -35,7 +35,7 @@ For a Java-based setup using Camunda 8 SaaS and Spring Boot, use the following s
 
 If you're new to Camunda SaaS, check out our [getting started guide](/guides/introduction-to-camunda-8.md#getting-started) to set up your environment.
 
-After signing up, create a cluster by following [creating a cluster in Camunda 8](/guides/create-cluster.md), which provides step-by-step instructions on setting up a new cluster in the Camunda 8 environment.
+After signing up, create a cluster by following [creating a cluster in Camunda 8](/components/console/manage-clusters/create-cluster.md), which provides step-by-step instructions on setting up a new cluster in the Camunda 8 environment.
 
 #### Spring Boot
 
@@ -81,4 +81,4 @@ You can develop process solutions as described with Java above also in any other
 
 ### Run Camunda 8 Self-Managed
 
-Run Camunda 8 on your Kubernetes cluster. For local development, a [Docker Compose configuration is available](/self-managed/setup/deploy/other/docker.md), though not for production use. Learn more in the [deployment docs](/self-managed/setup/install.md).
+Run Camunda 8 on your Kubernetes cluster. For local development, a [Docker Compose configuration is available](/self-managed/installation-methods/docker/docker.md), though not for production use. Learn more in the [deployment docs](/self-managed/installation-methods/helm/install.md).

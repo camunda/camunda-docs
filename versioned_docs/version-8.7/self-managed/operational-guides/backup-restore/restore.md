@@ -15,7 +15,7 @@ Restore a previous backup of your Camunda 8 Self-Managed components and cluster.
 
 To restore a backup you must complete the following main steps:
 
-1. [Restore of Elasticsearch/OpenSearch](#restore-elasticsearch-opensearchh)
+1. [Restore of Elasticsearch/OpenSearch](#restore-elasticsearch-opensearch)
 2. [Restore Zeebe Cluster](#restore-zeebe-cluster)
 3. [Start all Camunda 8 components](#start-all-camunda-8-components)
 
@@ -190,6 +190,8 @@ You will need the output for your chosen backup ID in the following steps to be 
 
       Using the [Operate management API](/self-managed/operational-guides/backup-restore/operate-tasklist-backup.md#get-backups-list-api) to list backups.
 
+      You must have the Elasticsearch / OpenSearch backup repository configured to be able to retrieve backups.
+
       ```bash
       curl $OPERATE_MANAGEMENT_API/actuator/backups
       ```
@@ -250,6 +252,8 @@ You will need the output for your chosen backup ID in the following steps to be 
 
       Using the [Optimize management API](/self-managed/operational-guides/backup-restore/optimize-backup.md#get-backup-info-api) to list backups.
 
+      You must have the Elasticsearch / OpenSearch backup repository configured to be able to retrieve backups.
+
       ```bash
       curl $OPTIMIZE_MANAGEMENT_API/actuator/backups
       ```
@@ -285,6 +289,8 @@ You will need the output for your chosen backup ID in the following steps to be 
       <summary>
 
       Using the [Tasklist management API](/self-managed/operational-guides/backup-restore/operate-tasklist-backup.md#get-backups-list-api) to list backups.
+
+      You must have the Elasticsearch / OpenSearch backup repository configured to be able to retrieve backups.
 
       ```bash
       curl $TASKLIST_MANAGEMENT_API/actuator/backups
@@ -525,8 +531,6 @@ elsaticsearch:
 
 connectors:
   enabled: false
-identity:
-  enabled: false
 optimize:
   enabled: false
 operate:
@@ -535,7 +539,7 @@ tasklist:
   enabled: false
 zeebe:
   enabled: false
-zeebe-gateway:
+zeebeGateway:
   enabled: false
 ```
 
@@ -735,9 +739,9 @@ During the restoration of the Elasticsearch / OpenSearch state, we had to tempor
 In the case of Kubernetes to remove all related persistent volumes.
 
 ```bash
-kubectl get pvc \
+kubectl get pvc -o custom-columns=NAME:.metadata.name --no-headers \
   | grep zeebe \
-  | while read namespace pvc; do
+  | while read pvc; do
       kubectl delete pvc "$pvc"
     done
 ```
@@ -787,15 +791,13 @@ elsaticsearch:
 
 connectors:
    enabled: false
-identity:
-   enabled: false
 optimize:
    enabled: false
 operate:
    enabled: false
 tasklist:
    enabled: false
-zeebe-gateway:
+zeebeGateway:
    enabled: false
 ```
 
@@ -816,11 +818,11 @@ zeebe:
 
 If you're not using the Camunda Helm chart, you can use a similar approach natively with Kubernetes to overwrite the command.
 
-The application will exit and restart the pod. This is an expected behavior. The restore application will not try to restore the state again since the partitions were already restored to the persistent disk.
+The application will exit and restart the pod and will be interpreted by Kubernetes as a `crashloop`. This is an expected behavior. The restore application will not try to restore the state again since the partitions were already restored to the persistent disk.
 
 :::tip
 
-In Kubernetes, Zeebe is a [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/), which are meant for long-running and persistent applications. There is no `restartPolicy` due to which the resulting pods of the Zeebe `StatefulSet` will always restart. Meaning that you have to observe the Zeebe brokers during restore and may have to look at the logs with `--previous` if it already restarted.
+In Kubernetes, Zeebe is a [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/), which are meant for long-running and persistent applications. There is no `restartPolicy` due to which the resulting pods of the Zeebe `StatefulSet` will always restart and `crashloop` as the restore application won't overwrite the data. Meaning that you have to observe the Zeebe brokers during restore and may have to look at the logs with `--previous` if it already restarted.
 
 It will not try to import or overwrite the data again but should be noted that you may miss the `successful` first run if you're not observing it actively.
 
@@ -852,6 +854,20 @@ However, the restore will fail if:
 - Due to any other unexpected errors.
 
 If the restore fails, you can re-run the application after fixing the root cause.
+
+#### Data directory is not empty
+
+If the data directory is not empty, the restore will fail with an error message:
+
+```
+Brokers's data directory /usr/local/zeebe/data is not empty. Aborting restore to avoid overwriting data. Please restart with a clean directory
+```
+
+On some filesystems, the data directory may contain special files and folders that can't or shouldn't be deleted.
+In such cases, the restore application can be configured to ignore the presence of these files and folders.
+The config `zeebe.restore.ignoreFilesInTarget` takes a list of file and folder names to ignore.
+By default, it ignores `lost+found` folder found on ext4 filesystems.
+To also ignore `.snapshot` folders, set `zeebe.restore.ignoreFilesInTarget: [".snapshot", "lost+found"]` or the equivalent environment variable `ZEEBE_RESTORE_IGNOREFILESINTARGET=".snapshot,lost+found"`.
 
 ## Step 3: Start all Camunda 8 components {#start-all-camunda-8-components}
 

@@ -39,7 +39,7 @@ When backing up the WebApps, the order in which you execute the following sub-st
 
 :::note
 
-This will heavily depend on your setup, the following examples are based on examples given in the [Management API](#management-api) in Kubernetes using either active port-forwarding or overwrite of the local curl command.
+This will heavily depend on your setup, the following examples are based on examples given in the [Management API](backup-and-restore.md#management-api) in Kubernetes using either active port-forwarding or overwrite of the local curl command.
 
 As noted in the [Management API](backup-and-restore.md#management-api) section, this API is typically not publicly exposed. Therefore, you will need to access it directly using any means available within your environment.
 
@@ -388,7 +388,7 @@ When backing up the the Zeebe Cluster, you must execute the following sub-steps 
 
 This step uses the [management API](/self-managed/zeebe-deployment/operations/management-api.md?exporting=softPause#exporting-api).
 
-This will continue exporting records, but not delete those records (log compaction) from Zeebe. This makes the backup a hot backup, as covered in the [backup considerations](backup-and-restore.md#considerations).
+This will continue exporting records, but not delete those records (log compaction) from Zeebe. This makes the backup a hot backup, as covered in the [why you should use backup and restore](backup-and-restore.md#why-you-should-use-backup-and-restore).
 
 ```bash
 curl -XPOST "$GATEWAY_MANAGEMENT_API/actuator/exporting/pause?soft=true"
@@ -547,6 +547,8 @@ By default, the indices are prefixed with `zeebe-record`. If you have configured
    <Tabs groupId="search-engine">
       <TabItem value="elasticsearch" label="Elasticsearch" default>
 
+      Using `?wait_for_completion=true` in the previous call, as outlined, ensures that the request only returns once the backup has finished. However, to double-check that the backup completed successfully, you can perform the following verification:
+
       The following uses the [Elasticsearch snapshot API](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-snapshot-status-2) to get the snapshot status.
 
       ```bash
@@ -603,6 +605,8 @@ By default, the indices are prefixed with `zeebe-record`. If you have configured
 
       </TabItem>
       <TabItem value="opensearch" label="OpenSearch">
+
+      Using `?wait_for_completion=true` in the previous call, as outlined, ensures that the request only returns once the backup has finished. However, to double-check that the backup completed successfully, you can perform the following verification:
 
       The following uses the [OpenSearch snapshot API](https://docs.opensearch.org/docs/latest/api-reference/snapshots/get-snapshot-status/) to get the snapshot status.
 
@@ -770,7 +774,7 @@ Database dumps created with `pg_dumpall`/`pg_dump` can only be restored into a d
 :::
 
 :::info
-You can [restore a Web Modeler data backup](restore.md#restore-a-web-modeler-data-backup).
+You can [restore a Web Modeler data backup](restore.md#optional-restore-a-web-modeler-data-backup).
 :::
 
 ## Cleaning up backups

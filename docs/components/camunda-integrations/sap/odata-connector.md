@@ -6,7 +6,7 @@ description: "The SAP OData connector is a protocol and outbound connector that 
 
 The SAP OData connector is a protocol and outbound [connector](/components/connectors/introduction.md) that runs as a Docker image on the SAP Business Technology Platform (BTP).
 
-This connector is designed to run in [hybrid mode](/guides/use-connectors-in-hybrid-mode.md), hosted in the customer's SAP BTP sub-account in the [Cloud Foundry environment](https://discovery-center.cloud.sap/serviceCatalog/cloud-foundry-runtime?region=all).
+This connector is designed to run in [hybrid mode](/components/connectors/use-connectors-in-hybrid-mode.md), hosted in the customer's SAP BTP sub-account in the [Cloud Foundry environment](https://discovery-center.cloud.sap/serviceCatalog/cloud-foundry-runtime?region=all).
 
 This connector works with Camunda 8 SaaS, and utilizes SAP BTP's [Destination](https://learning.sap.com/learning-journeys/administrating-sap-business-technology-platform/using-destinations) and [Connectivity](https://help.sap.com/docs/connectivity/sap-btp-connectivity-cf/what-is-sap-btp-connectivity) concepts to query a SAP system via both OData v2 and v4.
 
@@ -60,7 +60,7 @@ Configure the OData connector via [the `csap` cli](./csap-cli.md) (recommended) 
 
 Use the command `csap setup` to guide you interactively.
 
-- Assuming your [Camunda cluster's API credentials](/guides/setup-client-connection-credentials.md) are sourced in your shell environment, this will do the configuration for you:
+- Assuming your [Camunda cluster's API credentials](/components/console/manage-clusters/setup-client-connection-credentials.md) are sourced in your shell environment, this will do the configuration for you:
 
 ```shell
 csap setup --for odata \
@@ -75,7 +75,6 @@ Follow these steps:
 1. Find the matching [Docker image](https://hub.docker.com/r/camunda/sap-odata-connector/tags) for the targeted Camunda 8 SaaS version.  
    The version follows the format `<C8 version major>.<C8 version minor>.<OData connector version>`.  
    Examples:
-
    - `8.6.0` is the OData connector in version `0` for C8 SaaS version `8.6`
    - `8.5.1` is the OData connector in version `1` for C8 SaaS version `8.5`
 

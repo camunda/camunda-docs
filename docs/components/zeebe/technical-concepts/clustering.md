@@ -39,7 +39,7 @@ There is no active load balancing across partitions. Each leader election for an
 
 This may lead to one node becoming the leader for all partitions. This is not a problem for fault tolerance as the guarantees of replication remain. However, this may negatively impact throughput as all traffic hits one node.
 
-To reach a well-distributed leadership again, the [Rebalancing API](../../../self-managed/zeebe-deployment/operations/rebalancing.md) can be used in Self-Managed environments. Be aware that this is on a best-effort basis.
+To reach a well-distributed leadership again, the [Rebalancing API](/self-managed/components/orchestration-cluster/zeebe/operations/rebalancing.md) can be used in Self-Managed environments. Be aware that this is on a best-effort basis.
 :::
 
 ## Commit
@@ -57,12 +57,12 @@ Examples for common replication factors and their quorum:
 |         3          | 1 leader, 2 followers | Half or more of 2 followers is 1 follower that confirmed.   | Single region, 3 availability zones. One broker can go down without losing data. |
 |         5          | 1 leader, 4 followers | Half or more of 4 followers are 2 followers that confirmed. | Allows a higher tolerance against the loss of 2 brokers.                         |
 
-The only exception to have **even replication factors** is the [dual region setup](../../../self-managed/concepts/multi-region/dual-region.md). In this setup, an even replication factor ensures records are always replicated to both regions. In the case of losing a whole region, every new request will be denied, as no replication can get a quorum anymore. All partitions will become unhealthy, and operators start their [failover procedure](../../../self-managed/operational-guides/multi-region/dual-region-ops.md). No data is lost.
+The only exception to have **even replication factors** is the [dual region setup](/self-managed/concepts/multi-region/dual-region.md). In this setup, an even replication factor ensures records are always replicated to both regions. In the case of losing a whole region, every new request will be denied, as no replication can get a quorum anymore. All partitions will become unhealthy, and operators start their [failover procedure](/self-managed/installation-methods/helm/operational-tasks/dual-region-ops.md). No data is lost.
 
 Using an odd replication factor in a dual region setup would favor some partitions, where the leader and the majority of followers live in the surviving region, against the partitions that have only a minority of followers survived. This may slow down to detect a region loss, as some process instances still continue while others are stuck.
 
-Below is one example for replication and quorum used in the [dual region setup guide](../../../self-managed/setup/deploy/amazon/amazon-eks/dual-region.md#content-elaboration):
+Below is one example for replication and quorum used in the [dual region setup guide](/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/dual-region.md#content-elaboration):
 
-| Replication factor | Description           | Quorum                                                      | Use case                                                                                                                                                                                                                 |
-| :----------------: | --------------------- | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-|         4          | 1 leader, 3 followers | Half or more of 3 followers are 2 followers that confirmed. | Exception for dual-region with minimal replication, records always replicated to both regions [following the recommended setup](../../../self-managed/concepts/multi-region/dual-region.md#zeebe-cluster-configuration). |
+| Replication factor | Description           | Quorum                                                      | Use case                                                                                                                                                                                                         |
+| :----------------: | --------------------- | ----------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|         4          | 1 leader, 3 followers | Half or more of 3 followers are 2 followers that confirmed. | Exception for dual-region with minimal replication, records always replicated to both regions [following the recommended setup](/self-managed/concepts/multi-region/dual-region.md#zeebe-cluster-configuration). |

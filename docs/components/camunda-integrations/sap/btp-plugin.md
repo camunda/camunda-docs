@@ -33,7 +33,6 @@ The BTP plugin connects to Camunda 8 SaaS to provide:
 ![Camunda Forms in Fiori](./img/forms-fiori.png)
 
 - Equip the last user task with a custom header `final-user-task` and the value:
-
   - `success` to display the last user task on the "happy path".
   - `fail` to use that user task to communicate a failed process to the user.
 
@@ -102,7 +101,7 @@ Either walk yourself through the prompts or provide all information to the CLI:
 
 - `csap setup` will guide you interactively.
 
-- Assuming your [Camunda cluster's API credentials](/guides/setup-client-connection-credentials.md) are sourced in your shell environment, this will do the configuration for you:
+- Assuming your [Camunda cluster's API credentials](/components/console/manage-clusters/setup-client-connection-credentials.md) are sourced in your shell environment, this will do the configuration for you:
 
 ```shell
 csap setup --for btp-plugin \

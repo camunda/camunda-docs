@@ -1,6 +1,7 @@
 ---
 id: metrics
-title: "Metrics"
+sidebar_label: Metrics
+title: Camunda componenets metrics
 keywords: ["observability", "metrics", "monitoring", "monitor"]
 Description: "Learn about Camunda distributed system monitoring metrics using the Micrometer library as a facade for exporting metrics."
 ---
@@ -239,7 +240,7 @@ The health of partitions in a broker can be monitored using the metric `zeebe_he
 
 Brokers can export optional execution latency metrics.
 
-To enable export of execution metrics, set the `ZEEBE_BROKER_EXECUTION_METRICS_EXPORTER_ENABLED` environment variable to `true` in your Zeebe [configuration file](/self-managed/zeebe-deployment/configuration/configuration.md).
+To enable export of execution metrics, set the `ZEEBE_BROKER_EXECUTION_METRICS_EXPORTER_ENABLED` environment variable to `true` in your Zeebe [configuration file](/self-managed/components/orchestration-cluster/zeebe/configuration/configuration.md).
 
 ## Grafana
 

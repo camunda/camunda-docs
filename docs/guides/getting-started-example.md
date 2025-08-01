@@ -1,17 +1,20 @@
 ---
 id: getting-started-example
-title: "Quickstart: run your first Camunda 8 project locally"
-sidebar_label: Your first Camunda 8 project
-description: "Use an example project with Spring Boot or Node.js to interact with a local Camunda 8 installation."
+title: "Run your first local Camunda 8 project"
+sidebar_label: Run your first local project
+description: "For developers using Camunda 8 Self-Managed, step through an example project with Spring Boot or Node.js."
 keywords: [java, spring, spring camunda, getting started, user guide, tutorial]
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-## Getting started with an example project
+<span class="badge badge--beginner">Beginner</span>
+<span class="badge badge--medium">1 hour</span>
 
-Follow this guide to download and run an example project with a local instance of Camunda 8.
+This guide is tailored for developers who want to implement process automation solutions using Java and Spring. You'll work with a local, self-managed, lightweight Camunda 8 environment.
+
+## Get started with an example project
 
 You will:
 
@@ -32,30 +35,31 @@ You will:
 <TabItem value="javaspring">
 
 <ul>
-    <li>[OpenJDK 21-23](https://openjdk.org/install/)</li>
+    <li>[JDK 21-23](https://www.oracle.com/de/java/technologies/downloads/)</li>
     <li>[Maven 3](https://maven.apache.org/index.html)</li>
     </ul>
   </TabItem>
   <TabItem value="nodejs">
 <ul>
-    <li>[OpenJDK 21-23](https://openjdk.org/install/)</li>
-    <li>[Node.js](https://nodejs.org/en)</li>
+    <li>[JDK 21-23](https://www.oracle.com/de/java/technologies/downloads/)</li>
+    <li>[Node.js](https://nodejs.org/en) 20+</li>
+    <li>NPM 11+</li>
 </ul>
   </TabItem>
   </Tabs>
 
-## Download the Camunda 8 developer bundle
+## Download the Camunda 8 starter package
 
-Download the Camunda 8 developer bundle from the following website:  
+Download the Camunda 8 starter package from the following website:  
 [https://developers.camunda.com/install-camunda-8/](https://developers.camunda.com/install-camunda-8/)
 
-The developer bundle includes the following components:
+The starter package includes the following components:
 
-- [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md) – A simplified, single-application Camunda configuration for a local development environment.
+- [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) – A simplified, single-application Camunda configuration for a local development environment.
 - [Camunda Modeler](/components/modeler/about-modeler.md) – An application for modeling BPMN, DMN, and Forms.
 - [Getting started project](https://github.com/camunda/camunda-8-get-started) – An example project with a simple BPMN process and workers in Java or JavaScript.
 
-All of these components are included in the developer bundle. You do not need to download them separately. The links above are provided for additional information.
+All of these components are included in the starter package. You do not need to download them separately. The links above are provided for additional information.
 
 ## Example project
 
@@ -69,7 +73,7 @@ The service tasks in the process are executed by job workers. The `java` and `no
 
 <ol>
   <li>
-    Unzip the developer bundle.
+    Unzip the Camunda 8 starter package.
   </li>
 
   <li>
@@ -93,7 +97,7 @@ The service tasks in the process are executed by job workers. The `java` and `no
   </li>
 
   <li>
-    Open Camunda Modeler.
+    Open the Camunda Modeler application from the starter package.
   </li>
 
   <li>
@@ -225,7 +229,11 @@ The workers start, connect to the engine, and request work. You will see the wor
 
 ## Complete!
 
-Your active process instance in Operate will now transition to completed. You have completed your first process instance by:
+Navigate back to Operate and verify that your active process instance in Operate has transitioned to completed.
+
+## Summary
+
+You have completed your first process instance by:
 
 1. Running Camunda 8 Run locally.
 2. Deploying a process model.
@@ -233,8 +241,6 @@ Your active process instance in Operate will now transition to completed. You ha
 4. Completing the service tasks in the process instance using job workers.
 
 ## Next steps
-
-To create a new Spring project, refer to [our guide using Spring](/guides/getting-started-java-spring.md).
 
 For further information about the Node.js SDK, refer to [the Camunda 8 JavaScript SDK API documentation](https://camunda.github.io/camunda-8-js-sdk/).
 
@@ -258,7 +264,7 @@ cd c8run && ./c8run stop
 </TabItem>
 <TabItem value="windows">
 ```bash
-cd c8run; .\c8run.exe stop
+cd c8run && .\c8run.exe stop
 ````
 
 </TabItem>

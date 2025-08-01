@@ -30,7 +30,7 @@ Supported environment changes and breaking changes or deprecations for the Camun
 
 ### Identity Keycloak now requires v25 or v26 <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-Identity 8.7 now requires Keycloak v25 or v26, and Keycloak versions must be updated to match. This update also includes changes to the Camunda Helm chart. For more information on configuration changes, see the Self-Managed [update guide](/self-managed/operational-guides/update-guide/860-to-870.md#identity).
+Identity 8.7 now requires Keycloak v25 or v26, and Keycloak versions must be updated to match. This update also includes changes to the Camunda Helm chart. For more information on configuration changes, see the Self-Managed [update guide](/self-managed/components/components-upgrade/860-to-870.md#identity).
 
 ### Spring Zeebe SDK now requires Spring Boot 3.4.x <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
@@ -51,20 +51,20 @@ For future use, refer to our [new AWS Marketplace listing](https://aws.amazon.co
 
 ### Deploy diagram change <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span> {#web-modeler-deploy-diagram-change}
 
-With this version, we ship a breaking change to how Web Modeler **Deploy diagram** modals work. Clusters must now be proactively [configured](/self-managed/modeler/web-modeler/configuration/configuration.md#clusters) to be able to deploy from Web Modeler.
+With this version, we ship a breaking change to how Web Modeler **Deploy diagram** modals work. Clusters must now be proactively [configured](/self-managed/components/modeler/web-modeler/configuration/configuration.md#clusters) to be able to deploy from Web Modeler.
 
 <img src={DeployDiagramImg} alt="New 8.7 deploy diagram modal" width="600px" style={{border: '0', paddingTop: '0', marginTop: '0'}} />
 
 - In 8.6, you could still configure cluster details on the **Deploy diagram** modal when deploying.
-- In 8.7, you can no longer configure cluster details on the **Deploy diagram** modal. You must [configure the cluster](/self-managed/modeler/web-modeler/configuration/configuration.md#clusters) to be able to deploy from this modal.
-- Note that you must also be assigned the `Zeebe` [Identity role](/self-managed/identity/application-user-group-role-management/manage-roles.md) to be able to deploy (if `BEARER_TOKEN` is used as authentication).
+- In 8.7, you can no longer configure cluster details on the **Deploy diagram** modal. You must [configure the cluster](/self-managed/components/modeler/web-modeler/configuration/configuration.md#clusters) to be able to deploy from this modal.
+- Note that you must also be assigned the `Zeebe` [Identity role](/self-managed/components/management-identity/application-user-group-role-management/manage-roles.md) to be able to deploy (if `BEARER_TOKEN` is used as authentication).
 
 ### Deprecated: Web Modeler cluster authentication `OAUTH` and `CLIENT_CREDENTIALS` <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-The following authentication methods for a [configured cluster in Web Modeler](/self-managed/modeler/web-modeler/configuration/configuration.md#clusters) are now being deprecated and will no longer be supported in version 8.8:
+The following authentication methods for a [configured cluster in Web Modeler](/self-managed/components/modeler/web-modeler/configuration/configuration.md#clusters) are now being deprecated and will no longer be supported in version 8.8:
 
 - `OAUTH`: This method was replaced by `BEARER_TOKEN`.
-- `CLIENT_CREDENTIALS`: This method was introduced as a temporary solution to support deployments from Web Modeler when using [Microsoft Entra ID or a generic OIDC provider](/self-managed/setup/guides/connect-to-an-oidc-provider.md).
+- `CLIENT_CREDENTIALS`: This method was introduced as a temporary solution to support deployments from Web Modeler when using [Microsoft Entra ID or a generic OIDC provider](/self-managed/installation-methods/helm/configure/connect-to-an-oidc-provider.md).
   It is marked for removal in 8.8 as the `BEARER_TOKEN` authentication will be supported for Entra ID and generic providers as well.
 
 ### Breaking changes in Camunda Process Test
@@ -92,10 +92,10 @@ The primary goal of those changes is to enable users to interact with Camunda cl
 
 If you need to continue using the old `ZeebeClient`, you can use the new version 8.8 `CamundaClient` artifact without issues as it still contains the related `ZeebeClient` classes. Those classes are marked as deprecated, so you can easily spot code you need to adjust to the `CamundaClient`.
 
-The old `zeebe-client-java` artifact will be relocation-only, so your build system is redirected to the new `camunda-client-java` artifact. We will discontinue the old artifact with a future release and recommend using the new one.
+The old `zeebe-client-java` artifact will be relocation-only, so your build system is redirected to the new `camunda-client-java` artifact. We will discontinue the old artifact in version 8.10 and recommend using the new one.
 
 :::note
-The Zeebe Java client will not be developed further and will only receive bug fixes for as long as version 8.7 is officially supported.
+The Zeebe Java client will not be developed further and will only receive bug fixes for as long as version 8.9 is officially supported. This client is scheduled for removal in version 8.10.
 :::
 
 ### Spring Zeebe SDK
@@ -103,7 +103,7 @@ The Zeebe Java client will not be developed further and will only receive bug fi
 Starting with 8.8, the Spring Zeebe SDK will become the new Camunda Spring Boot SDK. The SDK will rely on the new Camunda Java client, designed to enhance the user experience and introduce new features while maintaining compatibility with existing codebases.
 
 :::note
-The Spring Zeebe SDK will not be developed further and will only receive bug fixes for as long as version 8.7 is officially supported.
+The Spring Zeebe SDK will not be developed further and will only receive bug fixes for as long as version 8.9 is officially supported. This SDK is scheduled for removal in version 8.10.
 :::
 
 ### Camunda 8 Self-Managed
@@ -112,7 +112,7 @@ The Spring Zeebe SDK will not be developed further and will only receive bug fix
 
 ##### Separated Ingress deprecation
 
-The separated Ingress Helm configuration for Camunda 8 Self-Managed has been deprecated in 8.6, and will be removed from the Helm chart in 8.8. Only the combined Ingress configuration is officially supported. See the [Ingress guide](/self-managed/setup/guides/ingress-setup.md) for more information on configuring a combined Ingress setup.
+The separated Ingress Helm configuration for Camunda 8 Self-Managed has been deprecated in 8.6, and will be removed from the Helm chart in 8.8. Only the combined Ingress configuration is officially supported. See the [Ingress guide](/self-managed/installation-methods/helm/configure/ingress-setup.md) for more information on configuring a combined Ingress setup.
 
 ##### ExtraVolumeClaimTemplates
 
@@ -151,4 +151,4 @@ Although the official SDK is largely compatible with the community library, some
 
 We recommend updating the configuration to match the new property format of the [Spring Zeebe SDK](/apis-tools/spring-zeebe-sdk/getting-started.md) to avoid any issues. The old properties will be removed in a future release.
 
-For more information, see the [update guide](/self-managed/operational-guides/update-guide/860-to-870.md#connectors) and the [connectors configuration guide](/self-managed/connectors-deployment/connectors-configuration.md).
+For more information, see the [update guide](/self-managed/components/components-upgrade/860-to-870.md#connectors) and the [connectors configuration guide](/self-managed/components/connectors/connectors-configuration.md).

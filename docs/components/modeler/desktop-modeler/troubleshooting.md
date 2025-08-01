@@ -60,7 +60,7 @@ To resolve this issue, check if you can connect to Zeebe through another client,
 
 You try to connect (i.e., to deploy) to a local Zeebe instance, and Desktop Modeler tells you it "cannot find a running Zeebe."
 
-Ensure your local Zeebe instance is running. If you don't have one installed, consider [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md), a lightweight all-in-one distribution.
+Ensure your local Zeebe instance is running. If you don't have one installed, consider [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md), a lightweight all-in-one distribution.
 
 ## Resolve a general Zeebe connection issue
 
@@ -78,7 +78,7 @@ If you run against a Camunda 8 free-trial cluster, ensure it is [not paused](../
 
 [Inspect the connection](#how-can-i-get-details-about-a-secure-remote-connection) to understand if it can be established.
 
-Secure connections to Zeebe require [HTTP/2 over TLS with protocol negotiation via ALPN](/self-managed/operational-guides/troubleshooting/troubleshooting.md#zeebe-ingress-grpc). Ensure your proxy supports these features and does not forcefully downgrade the connection to HTTP/1.
+Secure connections to Zeebe require [HTTP/2 over TLS with protocol negotiation via ALPN](/self-managed/operational-guides/troubleshooting.md#zeebe-ingress-grpc). Ensure your proxy supports these features and does not forcefully downgrade the connection to HTTP/1.
 
 ### The connection to Zeebe should not happen through a proxy
 
