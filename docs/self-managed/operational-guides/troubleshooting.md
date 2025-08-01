@@ -61,7 +61,7 @@ global:
       redirectUrl: https://operate.example.com
 ```
 
-#### Zeebe Backup with S3
+## Zeebe Backup with S3
 
 In general, some S3 compatible implementation are not able to properly handle the checksum feature of the S3 client being introduced with version 2.30.0. For more details, you can refer to [this documentation](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/s3-checksums.html).
 
