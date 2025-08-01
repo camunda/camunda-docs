@@ -6,7 +6,7 @@ description: "Use assertions to verify the process instance state."
 
 The class `CamundaAssert` is the entry point for all assertions. It is based on [AssertJ](https://github.com/assertj/assertj) and [Awaitility](http://www.awaitility.org/).
 
-The assertions follow the style: `assertThatX(object_to_test)` + expected property.
+The assertions follow the style: `assertThat(object_to_test)` + expected property.
 
 Use the assertions by adding the following static imports in your test class:
 
@@ -26,11 +26,6 @@ The assertions handle the asynchronous behavior and wait until the expected prop
 
 :::tip
 CPT provides the most common assertions. However, if you miss an assertion you can implement a [custom assertion](#custom-assertions) yourself.
-:::
-
-:::tip
-If your test class asserts a mix of process instances, user tasks and decisions, it can be difficult to tell which object is being asserted at a glance.
-In that case, you may want to use CPT's [disambiguated assertions](#disambiguated-assertions).
 :::
 
 ## Configuration
@@ -59,7 +54,9 @@ CamundaAssert.setElementSelector(ElementSelectors::byName);
 
 ## Process instance assertions
 
-You can verify the process instance state and other properties using `CamundaAssert.assertThat()`. Use the process instance creation event or a `ProcessInstanceSelector` to identify the process instance.
+You can verify the process instance state and other properties using `CamundaAssert.assertThat()` or
+`CamundaAssert.assertThatProcessInstance()`. Use the process instance creation event or a `ProcessInstanceSelector` to
+identify the process instance.
 
 ### With process instance event
 
@@ -104,13 +101,13 @@ Use a predefined `ProcessInstanceSelector` from `io.camunda.process.test.api.ass
 
 ```java
 // by process instance key
-assertThat(byKey(processInstanceKey)).isActive();
+assertThatProcessInstance(byKey(processInstanceKey)).isActive();
 
 // by process ID
-assertThat(byProcessId("my-process")).isActive();
+assertThatProcessInstance(byProcessId("my-process")).isActive();
 
 // custom selector implementation
-assertThat(processInstance -> { .. }).isActive();
+assertThatProcessInstance(processInstance -> { .. }).isActive();
 ```
 
 ### isActive
@@ -304,21 +301,23 @@ assertThat(processInstance).hasVariables(expectedVariables);
 
 ## User task assertions
 
-You can verify the user task states and other properties using `CamundaAssert.assertThat()`. Use a predefined `UserTaskSelector` from `io.camunda.process.test.api.assertions.UserTaskSelectors` or a custom implementation to identify the user task:
+You can verify the user task states and other properties using `CamundaAssert.assertThat()` or
+`CamundaAssert.assertThatUserTask()`. Use a predefined `UserTaskSelector` from
+`io.camunda.process.test.api.assertions.UserTaskSelectors` or a custom implementation to identify the user task:
 
 ```java
 // by BPMN element ID
-assertThat(byElementId("user-task-id")).isCompleted();
+assertThatUserTask(byElementId("user-task-id")).isCompleted();
 
 // by user task name
-assertThat(byTaskName("User Task")).isCompleted();
+assertThatUserTask(byTaskName("User Task")).isCompleted();
 
 // you may optionally specify the process instance key:
-assertThat(byElementId("user-task-id", processInstanceKey)).isCompleted();
-assertThat(byTaskName("User Task", processInstanceKey)).isCompleted();
+assertThatUserTask(byElementId("user-task-id", processInstanceKey)).isCompleted();
+assertThatUserTask(byTaskName("User Task", processInstanceKey)).isCompleted();
 
 // custom selector implementation
-assertThat(userTask -> { .. }).isCompleted();
+assertThatUserTask(userTask -> { .. }).isCompleted();
 ```
 
 ### isCreated
@@ -326,7 +325,7 @@ assertThat(userTask -> { .. }).isCompleted();
 Asserts that the user task is created. The assertion fails if the task is in any other state.
 
 ```java
-assertThat(byTaskName("User Task")).isCreated();
+assertThatUserTask(byTaskName("User Task")).isCreated();
 ```
 
 ### isCompleted
@@ -334,7 +333,7 @@ assertThat(byTaskName("User Task")).isCreated();
 Asserts that the user task is completed. The assertion fails if the task is in any other state.
 
 ```java
-assertThat(byTaskName("User Task")).isCompleted();
+assertThatUserTask(byTaskName("User Task")).isCompleted();
 ```
 
 ### isCanceled
@@ -342,7 +341,7 @@ assertThat(byTaskName("User Task")).isCompleted();
 Asserts that the user task is canceled. The assertion fails if the task is in any other state.
 
 ```java
-assertThat(byTaskName("User Task")).isCanceled();
+assertThatUserTask(byTaskName("User Task")).isCanceled();
 ```
 
 ### isFailed
@@ -350,7 +349,7 @@ assertThat(byTaskName("User Task")).isCanceled();
 Asserts that the user task is failed. The assertion fails if the task is in any other state.
 
 ```java
-assertThat(byTaskName("User Task")).isFailed();
+assertThatUserTask(byTaskName("User Task")).isFailed();
 ```
 
 ### hasAssignee
@@ -358,7 +357,7 @@ assertThat(byTaskName("User Task")).isFailed();
 Asserts that the user task has the expected assignee.
 
 ```java
-assertThat(byTaskName("User Task")).hasAssignee("John Doe");
+assertThatUserTask(byTaskName("User Task")).hasAssignee("John Doe");
 ```
 
 ### hasPriority
@@ -366,7 +365,7 @@ assertThat(byTaskName("User Task")).hasAssignee("John Doe");
 Asserts that the user task has the expected priority.
 
 ```java
-assertThat(byTaskName("User Task")).hasPriority(100);
+assertThatUserTask(byTaskName("User Task")).hasPriority(100);
 ```
 
 ### hasElementId
@@ -374,7 +373,7 @@ assertThat(byTaskName("User Task")).hasPriority(100);
 Asserts that the user task has the expected BPMN element ID.
 
 ```java
-assertThat(byTaskName("User Task")).hasElementId("user-task-id");
+assertThatUserTask(byTaskName("User Task")).hasElementId("user-task-id");
 ```
 
 ### hasName
@@ -382,7 +381,7 @@ assertThat(byTaskName("User Task")).hasElementId("user-task-id");
 Asserts that the user task has the expected name.
 
 ```java
-assertThat(byElementId("user-task-id")).hasName("User Task");
+assertThatUserTask(byElementId("user-task-id")).hasName("User Task");
 ```
 
 ### hasProcessInstanceKey
@@ -390,7 +389,7 @@ assertThat(byElementId("user-task-id")).hasName("User Task");
 Asserts that the user task has the expected process instance key.
 
 ```java
-assertThat(byTaskName("User Task")).hasProcessInstanceKey(processInstanceKey);
+assertThatUserTask(byTaskName("User Task")).hasProcessInstanceKey(processInstanceKey);
 ```
 
 ### hasDueDate
@@ -398,7 +397,7 @@ assertThat(byTaskName("User Task")).hasProcessInstanceKey(processInstanceKey);
 Asserts that the user task has the expected due date.
 
 ```java
-assertThat(byTaskName("User Task")).hasDueDate("2023-10-01T00:00:00Z");
+assertThatUserTask(byTaskName("User Task")).hasDueDate("2023-10-01T00:00:00Z");
 ```
 
 ### hasCompletionDate
@@ -406,7 +405,7 @@ assertThat(byTaskName("User Task")).hasDueDate("2023-10-01T00:00:00Z");
 Asserts that the user task has the expected completion date.
 
 ```java
-assertThat(byTaskName("User Task")).hasCompletionDate("2023-10-01T00:00:00Z");
+assertThatUserTask(byTaskName("User Task")).hasCompletionDate("2023-10-01T00:00:00Z");
 ```
 
 ### hasFollowUpDate
@@ -414,7 +413,7 @@ assertThat(byTaskName("User Task")).hasCompletionDate("2023-10-01T00:00:00Z");
 Asserts that the user task has the expected follow-up date.
 
 ```java
-assertThat(byTaskName("User Task")).hasFollowUpDate("2023-10-01T00:00:00Z");
+assertThatUserTask(byTaskName("User Task")).hasFollowUpDate("2023-10-01T00:00:00Z");
 ```
 
 ### hasCreationDate
@@ -422,7 +421,7 @@ assertThat(byTaskName("User Task")).hasFollowUpDate("2023-10-01T00:00:00Z");
 Asserts that the user task has the expected creation date.
 
 ```java
-assertThat(byTaskName("User Task")).hasCreationDate("2023-10-01T00:00:00Z");
+assertThatUserTask(byTaskName("User Task")).hasCreationDate("2023-10-01T00:00:00Z");
 ```
 
 ### hasCandidateGroup
@@ -430,7 +429,7 @@ assertThat(byTaskName("User Task")).hasCreationDate("2023-10-01T00:00:00Z");
 Asserts that the user task has the expected candidate group.
 
 ```java
-assertThat(byTaskName("User Task")).hasCandidateGroup("groupA");
+assertThatUserTask(byTaskName("User Task")).hasCandidateGroup("groupA");
 ```
 
 ### hasCandidateGroups
@@ -438,12 +437,14 @@ assertThat(byTaskName("User Task")).hasCandidateGroup("groupA");
 Asserts that the user task has the expected candidate groups.
 
 ```java
-assertThat(byTaskName("User Task")).hasCandidateGroups("groupA", "groupB", "groupC");
+assertThatUserTask(byTaskName("User Task")).hasCandidateGroups("groupA", "groupB", "groupC");
 ```
 
 ## Decision assertions
 
-You can verify the decision evaluation state and other properties using `CamundaAssert.assertThat()`. Use the evaluate decision response or a `DecisionSelector` to identify the decision instance.
+You can verify the decision evaluation state and other properties using `CamundaAssert.assertThat()` or
+`CamundaAssert.assertThatDecision()`. Use the evaluate decision response or a `DecisionSelector` to identify the
+decision instance.
 
 ### With evaluate decision response
 
@@ -469,20 +470,20 @@ Use a predefined `DecisionSelector` from `io.camunda.process.test.api.assertions
 
 ```java
 // by decision ID
-assertThat(byId("decision-id")).isEvaluated();
+assertThatDecision(byId("decision-id")).isEvaluated();
 
 // by decision name
-assertThat(byName("Decision Name")).isEvaluated();
+assertThatDecision(byName("Decision Name")).isEvaluated();
 
 // you may optionally specify the process instance key:
-assertThat(byId("decision-id", processInstanceKey)).isEvaluated();
-assertThat(byName("Decision Name", processInstanceKey)).isEvaluated();
+assertThatDecision(byId("decision-id", processInstanceKey)).isEvaluated();
+assertThatDecision(byName("Decision Name", processInstanceKey)).isEvaluated();
 
 // by process instance key
-assertThat(byProcessInstanceKey(processInstanceKey)).isEvaluated();
+assertThatDecision(byProcessInstanceKey(processInstanceKey)).isEvaluated();
 
 // custom selector implementation
-assertThat(decisionInstance -> { .. }).isEvaluated();
+assertThatDecision(decisionInstance -> { .. }).isEvaluated();
 ```
 
 ### isEvaluated
@@ -490,7 +491,7 @@ assertThat(decisionInstance -> { .. }).isEvaluated();
 Asserts that the decision is evaluated. The assertion fails if the evaluation failed and outputs the evaluation failure message.
 
 ```java
-assertThat(byId("decision-id")).isEvaluated();
+assertThatDecision(byId("decision-id")).isEvaluated();
 ```
 
 ### hasOutput
@@ -499,15 +500,15 @@ Asserts that the decision is evaluated with the expected output. The verificatio
 
 ```java
 // With primitive value
-assertThat(byId("decision-id")).hasOutput("output");
+assertThatDecision(byId("decision-id")).hasOutput("output");
 
 // With a map of values
 Map<String, Object> expectedOutput = //
-assertThat(byId("decision-id")).hasOutput(expectedOutput);
+assertThatDecision(byId("decision-id")).hasOutput(expectedOutput);
 
 // With a list of values
 List<Object> expectedOutput = //
-assertThat(byId("decision-id")).hasOutput(expectedOutput);
+assertThatDecision(byId("decision-id")).hasOutput(expectedOutput);
 ```
 
 ### hasMatchedRules
@@ -518,10 +519,10 @@ The assertion will pass if the expected indexes are a subset of the total matche
 
 ```java
 // Single rule
-assertThat(byId("decision-id")).hasMatchedRules(1);
+assertThatDecision(byId("decision-id")).hasMatchedRules(1);
 
 // Multiple rules
-assertThat(byId("decision-id")).hasMatchedRules(1, 3);
+assertThatDecision(byId("decision-id")).hasMatchedRules(1, 3);
 ```
 
 ### hasNotMatchedRules
@@ -530,10 +531,10 @@ Asserts that the decision table has not matched the given rule indices. The asse
 
 ```java
 // Single rule
-assertThat(byId("decision-id")).hasNotMatchedRules(2);
+assertThatDecision(byId("decision-id")).hasNotMatchedRules(2);
 
 // Multiple rules
-assertThat(byId("decision-id")).hasNotMatchedRules(2, 4);
+assertThatDecision(byId("decision-id")).hasNotMatchedRules(2, 4);
 ```
 
 ### hasNoMatchedRules
@@ -541,7 +542,7 @@ assertThat(byId("decision-id")).hasNotMatchedRules(2, 4);
 Asserts that the decision table matched no rules. The assertion will fail if the decision evaluation has failed or at least one rule matched.
 
 ```java
-assertThat(byId("decision-id")).hasNoMatchedRules();
+assertThatDecision(byId("decision-id")).hasNoMatchedRules();
 ```
 
 ## Custom assertions
@@ -582,27 +583,4 @@ private List<UserTask> getUserTasks(final long processInstanceKey) {
         .join()
         .items();
 }
-```
-
-## Disambiguated assertions
-
-Although you can use `CamundaAssert.assertThat` for any of the above assertions, you may find it better to specify exactly what you're trying to assert.
-The disambiguated assertions available are:
-
-- `assertThatProcessInstance`
-- `assertThatUserTask`
-- `assertThatDecision`
-
-These function identically to the various `assertThat` methods and can be used interchangeably. For example,
-these pairs of assertions are all identical:
-
-```java
-assertThat(processInstance).hasActiveElements(byId("task_A"));
-assertThatProcessInstance(processInstance).hasActiveElements(byId("task_A"));
-
-assertThat(byId("decision-id")).hasMatchedRules(1);
-assertThatDecision(byId("decision-id")).hasMatchedRules(1);
-
-assertThat(byTaskName("User Task")).hasElementId("user-task-id");
-assertThatUserTask(byTaskName("User Task")).hasElementId("user-task-id");
 ```
