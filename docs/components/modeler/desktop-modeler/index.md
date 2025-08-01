@@ -34,4 +34,4 @@ Learn how to [develop your first process](./model-your-first-diagram.md) and [de
 
 - [Report an issue](https://github.com/camunda/camunda-modeler/issues)
 - [Source code](https://github.com/camunda/camunda-modeler)
-- [Troubleshooting](/self-managed/operational-guides/troubleshooting/troubleshooting.md)
+- [Troubleshooting](/self-managed/operational-guides/troubleshooting.md)

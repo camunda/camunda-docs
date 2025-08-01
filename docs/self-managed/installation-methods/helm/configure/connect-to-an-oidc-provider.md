@@ -1,6 +1,7 @@
 ---
 id: connect-to-an-oidc-provider
-title: "Connect to an OpenID Connect provider"
+sidebar_label: Setup OpenID Connect provider
+title: Helm chart OpenID Connect provider setup
 description: "To enable a smoother integration with your existing systems, connect to an OpenID Connect provider"
 ---
 

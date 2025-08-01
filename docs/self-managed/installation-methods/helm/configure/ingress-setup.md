@@ -1,6 +1,7 @@
 ---
 id: ingress-setup
-title: "Ingress setup"
+sidebar_label: With Ingress
+title: Helm chart with Ingress setup
 description: "Camunda 8 Self-Managed Ingress setup and example configuration."
 ---
 
@@ -149,4 +150,4 @@ helm install -f ingress_nginx_values.yml \
 
 ## Troubleshooting
 
-If something is not working as expected, check the guide for [general deployment troubleshooting](/self-managed/operational-guides/troubleshooting/troubleshooting.md).
+If something is not working as expected, check the guide for [general deployment troubleshooting](self-managed/operational-guides/troubleshooting.md).
