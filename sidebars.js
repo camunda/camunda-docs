@@ -1480,6 +1480,7 @@ module.exports = {
                     id: "self-managed/components/orchestration-cluster/zeebe/exporters/exporters",
                   },
                   items: [
+                    "self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter",
                     {
                       type: "category",
                       label: "Camunda Exporter indices",
