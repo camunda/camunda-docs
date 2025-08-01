@@ -716,7 +716,7 @@ paths:
       summary: Assign a client to a tenant
       description: |
         Assign the client to the specified tenant.
-        The client will get access to the tenant's data and can perform actions according to their authorizations.
+        The client can then access tenant data and perform authorized actions.
       parameters:
         - name: tenantId
           in: path
