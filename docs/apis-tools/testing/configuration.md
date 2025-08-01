@@ -61,15 +61,6 @@ io:
         # Set Connectors secrets
         connectors-secrets:
           secret_1: value_1
-        # Set runtimeMode (MANAGED|REMOTE)
-        runtime-mode: remote
-        # Set configuration for remote runtime
-        remote:
-          camunda-monitoring-api-address: "http://example.com:8080"
-          connectors-rest-api-address: "http://example.com:8080"
-          client:
-            grpc-address: "http://example.com:8080"
-            rest-address: "http://example.com:8080"
 ```
 
 </TabItem>
@@ -93,15 +84,9 @@ connectorsEnvVars.env_1=value_1
 connectorsEnvVars.env_2=value_2
 connectorsSecrets.secret_1=value_1
 connectorsSecrets.secret_2=value_2
-
-runtimeMode=remote
-remote.camundaMonitoringApiAddress=http://0.0.0.0:9600
-remote.connectorsRestApiAddress=http://0.0.0.0:8085
-remote.client.grpcAddress=http://0.0.0.0:26500
-remote.client.restAddress=http://0.0.0.0:8080
 ```
 
-For more configuration options, you can register the JUnit extension manually and use the fluent builder:
+Alternatively, you can register the JUnit extension manually and use the fluent builder:
 
 ```java
 package com.example;
