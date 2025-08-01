@@ -3940,7 +3940,7 @@ paths:
       summary: Unassign a client from a group
       description: |
         Unassigns a client from a group.
-        The client will no longer be considered a member of this group meaning authorizations, roles or tenant assignment does not apply anymore.
+        The client is removed as a group member, with associated authorizations, roles, and tenant assignments no longer applied.
       parameters:
         - name: groupId
           in: path
