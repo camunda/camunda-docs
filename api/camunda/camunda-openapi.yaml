@@ -895,7 +895,7 @@ paths:
       summary: Assign a group to a tenant
       description: |
         Assigns a group to a specified tenant.
-        Members of the group (users, clients) will get access to the tenant's data and can perform actions according to their authorizations.
+        Group members (users, clients) can then access tenant data and perform authorized actions.
       parameters:
         - name: tenantId
           in: path
