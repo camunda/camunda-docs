@@ -3261,7 +3261,7 @@ paths:
       operationId: addRoleToGroup
       summary: Assign a role to a group
       description: |
-        Assigns the specified role to the group. 
+        Assigns the specified role to the group.
         Every member of the group (user or client) will inherit the authorizations associated with this role.
       parameters:
         - name: roleId
