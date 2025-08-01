@@ -18,7 +18,7 @@ The following example demonstrates how a generic service task can be transformed
 
 
 :::tip
-Connector templates are a specific kind of element template.
+[Connector templates](../connectors/custom-built-connectors/connector-templates.md) are a specific kind of element template.
 :::
 
 ## Next steps
