@@ -567,7 +567,7 @@ paths:
       operationId: removeUserFromTenant
       summary: Unassigns a user from a tenant
       description: |
-        Unassigns the user from the specified tenant. 
+        Unassigns the user from the specified tenant.
         The user will no longer have access to the tenant's data.
       parameters:
         - name: tenantId
