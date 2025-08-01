@@ -61,6 +61,7 @@ To change the ILM settings after installation, you must manually update the corr
 Zeebe does correctly apply ILM updates via configuration, but Operate does not.
 
 For reliable ILM behavior, we recommend configuring `ilmMinAgeForDeleteArchivedIndices` during initial installation and verifying the applied policy in Elasticsearch.
+
 :::
 
 ### OpenSearch
