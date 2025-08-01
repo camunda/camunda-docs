@@ -568,7 +568,7 @@ paths:
       summary: Unassigns a user from a tenant
       description: |
         Unassigns the user from the specified tenant.
-        The user will no longer have access to the tenant's data.
+        The user can no longer access tenant data.
       parameters:
         - name: tenantId
           in: path
