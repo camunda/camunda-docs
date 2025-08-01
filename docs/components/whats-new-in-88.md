@@ -32,9 +32,8 @@ The simplest Self-Managed deployment now involves running a single Java applicat
 </tr>
 <tr>
     <td>[Identity, authentication, and authorization](#identity-authentication-and-authorization)</td>
-    <td>Identity management is now split into two scopes:<br/>
-      _Orchestration Cluster Identity:_ manages authentication and fine-grained authorizations for the Orchestration Cluster and its APIs.<br/>
-      _Management Identity:_ controls access for Web Modeler, Console and Optimize.<br/><br/>This separation streamlines access management, improves performance, and enables flexible integration with any OIDC-compatible Identity Provider.</td>
+    <td><p>Identity management is now split into two scopes for improved access management, performance, and flexible integration with any OIDC-compatible Identity Provider:</p><p><ul><li><p>**Identity**: Manages authentication and fine-grained authorizations for the Orchestration Cluster and its APIs.</p></li>
+            <li><p>**Management Identity**: Controls access for Web Modeler, Console and Optimize.</p></li></ul></p></td>
 </tr>
 <tr>
     <td>[APIs and tools](#apis-and-tools)</td>
@@ -90,11 +89,15 @@ In Camunda 8.7 and earlier, managing and configuring core components (Zeebe, Ope
 
 ## Identity, authentication, and authorization {#identity}
 
-[Identity](/components/identity/identity-introduction.md) is a component of the Orchestration Cluster with a UI and handles the authentication and authorization layer for the Orchestration Cluster components and its resources.
+The Orchestration Cluster [Identity](/components/identity/identity-introduction.md) component UI handles authentication and authorization for the Orchestration Cluster components and its resources.
 
+:::note
 With this 8.8 change, the source of truth for Identity and Access Management for the Orchestration Cluster (including Zeebe, Operate, Tasklist, and its APIs) is now the Orchestration Cluster itself. This removes the reliance on the separate [Management Identity](/self-managed/components/management-identity/what-is-identity.md) (formerly "Identity") component.
+:::
 
-In Camunda 8.8, Orchestration Cluster [Identity](/components/identity/identity-introduction.md) and [Management Identity](/self-managed/components/management-identity/what-is-identity.md) co-exist as two separate components for Identity management with distinct areas of responsibility:
+### Identity and Management Identity
+
+In Camunda 8.8, Orchestration Cluster [Identity](/components/identity/identity-introduction.md) and [Management Identity](/self-managed/components/management-identity/what-is-identity.md) are two separate components used for Identity management, each with distinct areas of responsibility.
 
 <table>
     <thead>
@@ -154,29 +157,37 @@ In Camunda 8.8, Orchestration Cluster [Identity](/components/identity/identity-i
 
 ### Who is affected by 8.8 Identity changes?
 
-- **Administrators:** Need to understand the new Identity setup and migration steps from Camunda 8.7.
-- **Developers:** Should learn the new [authorization concepts](/components/concepts/access-control/authorizations.md) and required permissions for API access.
-- **Information Security:** Must review and adapt to the new Identity architecture.
+The 8.8 changes to Identity could affect different user roles in your Organization. For example:
+
+| Role                 | Responsibilities                                                                                                                              |
+| :------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------- |
+| Administrators       | Need to understand the new Identity setup and migration steps from Camunda 8.7.                                                               |
+| Developers           | Should learn the new [authorization concepts](/components/concepts/access-control/authorizations.md) and required permissions for API access. |
+| Information Security | Must review and adapt to the new Identity architecture.                                                                                       |
 
 ### Benefits
 
 Orchestration Cluster Identity provides several advantages:
 
-- **Simplified identity management:** The split between Orchestration Cluster Identity and Management Identity provides a clearer separation of concerns, making it easier to manage access for Orchestration Cluster components versus Web Modeler and Console.
-- **Unified access management:** All identity and authorization features for the Orchestration Cluster components are now contained within the Orchestration Cluster, eliminating any dependency on Management Identity when orchestrating processes.
-- **Simplified deployment and improved availability:** Removing the dependency on Management Identity streamlines deployment and increases availability by reducing potential points of failure.
-- **Consistent authorization model:** The new model offers a unified approach to managing permissions across all Orchestration Cluster resources.
-- **Enhanced security:** Granular access controls improve the overall security posture for cluster resources.
-- **Improved performance:** Authorization checks are handled internally, reducing latency and improving performance.
-- **Flexible Identity Provider integration:** Keycloak is now treated as a standard OIDC provider, making it easier to integrate with other Identity Provider and increasing flexibility for users.
+| Benefit                                         | Description                                                                                                                                                                                                                |
+| :---------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Simplified identity management                  | The split between Orchestration Cluster Identity and Management Identity provides a clearer separation of concerns, making it easier to manage access for Orchestration Cluster components versus Web Modeler and Console. |
+| Unified access management                       | All identity and authorization features for the Orchestration Cluster components are now contained within the Orchestration Cluster, eliminating any dependency on Management Identity when orchestrating processes.       |
+| Simplified deployment and improved availability | Removing the dependency on Management Identity streamlines deployment and increases availability by reducing potential points of failure.                                                                                  |
+| Consistent authorization model                  | The new model offers a unified approach to managing permissions across all Orchestration Cluster resources.                                                                                                                |
+| Enhanced security                               | Granular access controls improve the overall security posture for cluster resources.                                                                                                                                       |
+| Improved performance                            | Authorization checks are handled internally, reducing latency and improving performance.                                                                                                                                   |
+| Flexible Identity Provider integration          | Keycloak is now treated as a standard OIDC provider, making it easier to integrate with other Identity Provider and increasing flexibility for users.                                                                      |
 
 ### Impact of Identity changes on your 8.7 deployment
 
-The impact of these changes and what action you need to take depends on your deployment type.
+The impact of these changes and what action you need to take depends on your deployment type. For example:
 
-- **Authorization**: The new [authorization](/components/concepts/access-control/authorizations.md) model introduces fine-grained access control for Orchestration Cluster resources, replacing the previous model.
-- **Roles, tenants, and mapping rules**: Now managed within Orchestration Cluster Identity, replacing the previous Management Identity setup.
-- **User Task authorizations**: [User Task access restrictions](/components/concepts/access-control/user-task-access-restrictions.md) only apply to the Tasklist v1 API. After switching to the v2 API with Tasklist, user task access restrictions do not apply.
+| Area                              | Impact                                                                                                                                                                                                                            |
+| :-------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Authorization                     | The new [authorization](/components/concepts/access-control/authorizations.md) model introduces fine-grained access control for Orchestration Cluster resources, replacing the previous model.                                    |
+| Roles, tenants, and mapping rules | Now managed within Orchestration Cluster Identity, replacing the previous Management Identity setup.                                                                                                                              |
+| User Task authorizations          | [User Task access restrictions](/components/concepts/access-control/user-task-access-restrictions.md) only apply to the Tasklist v1 API. After switching to the v2 API with Tasklist, user task access restrictions do not apply. |
 
 Each deployment type has a clear upgrade path and migration guidance to help administrators transition from Camunda 8.7 to Camunda 8.8.
 
@@ -202,15 +213,19 @@ The following table summarizes where Identity entities are managed in Camunda 8.
 
 ### Camunda 8 Self-Managed
 
-When deploying all Camunda 8 components in a Self-Managed environment, you will continue to use Management Identity for Web Modeler, Console, and Optimize, while Orchestration Cluster Identity is used for Zeebe, Operate, Tasklist, and the Orchestration Cluster REST API.
+After you deploy all Camunda 8 components in a Self-Managed environment, you will continue to use Management Identity for Web Modeler, Console, and Optimize, but use Orchestration Cluster Identity for Zeebe, Operate, Tasklist, and the Orchestration Cluster REST API.
 
-- Roles and permissions for Orchestration Cluster components, previously managed in Management Identity, are now replaced by the new authorizations and roles defined within Orchestration Cluster Identity.
+- Roles and permissions for Orchestration Cluster components (previously managed in Management Identity), are now replaced by the new authorizations and roles defined within Orchestration Cluster Identity.
 
 - The Identity Migration App that migrates these entities from Management Identity into Orchestration Cluster Identity must be run during your Camunda 8.7 to 8.8 upgrade. Instructions on enabling and configuring the Identity Migration App in the 8.7 to 8.8 migration guide are available for Helm and also docker-compose/bare Java deployments.
 
-- Management Identity, Keycloak and Postgres are no longer needed for an Orchestration Cluster. They are only needed when using Web Modeler, Console or Optimize. For the Orchestration Cluster, you can bring your own Identity Provider (for example, Keycloak, Microsoft EntraID, Okta) or use the built-in Basic Authentication method. A special setup is no longer required for Keycloak as it is now integrated like any other Identity Provider via OpenID Connect (OIDC). Management Identity relies per default on Keycloak, but you can also configure it to use any OIDC-compatible Identity Provider.
+- Management Identity, Keycloak and Postgres are no longer needed for an Orchestration Cluster. They are only needed when using Web Modeler, Console or Optimize.
 
-The following table summarizes where Identity entities are managed in Camunda 8.8 Self-Managed from an Orchestration Cluster perspective:
+  - For the Orchestration Cluster, you can bring your own Identity Provider (for example, Keycloak, Microsoft EntraID, Okta) or use the built-in Basic Authentication method.
+
+  - A special setup is no longer required for Keycloak as it is now integrated like any other Identity Provider via OpenID Connect (OIDC). Management Identity relies by default on Keycloak, but you can also configure it to use any OIDC-compatible Identity Provider.
+
+The following table summarizes where Orchestration Cluster Identity entities are managed in Camunda 8.8 Self-Managed:
 
 | Entity type    | Managed via                    |
 | :------------- | :----------------------------- |
