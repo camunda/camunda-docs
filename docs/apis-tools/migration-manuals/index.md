@@ -49,7 +49,7 @@ For more information, see [Upcoming API Changes in Camunda 8: A Unified and Stre
 
 ### Orchestration Cluster API
 
-The Orchestration Cluster API replaces the legacy V1 component APIs, providing a unified interface for managing and interacting with the orchestration cluster. This API is designed to be more consistent and easier to use, aligning with the new architecture introduced in Camunda 8.8.
+The Orchestration Cluster API replaces the deprecated V1 component APIs, providing a unified interface for managing and interacting with the orchestration cluster. This API is designed to be more powerful in functionality and easier to use, aligning with the new architecture introduced in Camunda 8.8.
 The V1 APIs will remain available until version 8.10. This allows users time to migrate to the newer Orchestration Cluster API.
 
 For more information, see the [update guide](migrate-to-camunda-api.md)
@@ -78,24 +78,24 @@ For more information, see the update guide <!-- _Link to the update guide._ -->
 
 ### Camunda User Tasks
 
-The Camunda User Tasks feature replaces the legacy job-based user tasks in Camunda 8.8. This new feature provides a more robust and flexible way to handle user tasks within process models.
+The Camunda User Tasks feature replaces the deprecated job-based user tasks in Camunda 8.8. This new feature provides a more robust and flexible way to handle user tasks within process models. New functionalities are added only for the Camunda User Task type.
 It is designed to work seamlessly with the new orchestration cluster architecture and offers improved performance and usability.
-Job-based user tasks are deprecated in Camunda 8.8, and users are encouraged to migrate to the new Camunda User Tasks feature.
+Job-based user tasks are deprecated in Camunda 8.8, and users are encouraged to migrate to the new Camunda User Tasks feature. The search functionality for job-based user tasks will be removed with 8.10.
 
 For more information, see the [update guide](migrate-to-camunda-user-tasks.md)
 
 ### Camunda Java Client
 
-The Camunda Java Client is set to supersede the Zeebe Java Client, and there is a grace period for the Zeebe Client that will extend until version 8.10.
-This means that while the Zeebe Client is deprecated, it will still be available for use until that version. In this way users can transition to the Camunda Java Client without immediate pressure, allowing for a smoother migration process.
+The Camunda Java Client is a drop-in replacement for Zeebe Java Client, however, Zeebe Java Client is still available. Zeebe Java Client is deprecated with 8.8 and will be removed with 8.10.
+TIn this way users can transition to the Camunda Java Client without immediate pressure, allowing for a smoother migration process.
 
 For more information, see the update guide <!-- _Link to the update guide._ -->
 
 ### Tasklist GraphQL API
 
-The Tasklist GraphQL API has been removed in Camunda 8.8. This change is part of the broader architectural evolution towards the Orchestration Cluster API, which provides a more unified and consistent interface for managing tasks and workflows.
+The previously deprecated Tasklist GraphQL API has been removed in Camunda 8.8. This change is part of the broader architectural evolution towards the Orchestration Cluster API, which provides a more unified and consistent interface for managing tasks and workflows.
 
-Check the User Task API documentation for more information on how to manage user tasks in Camunda 8.8.
+Check the Orchestration Cluster API on User Tasks for more information on how to manage user tasks in Camunda 8.8.
 
 ## Next steps
 
