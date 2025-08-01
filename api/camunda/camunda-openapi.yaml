@@ -754,7 +754,7 @@ paths:
       summary: Remove a client from a tenant
       description: |
         Unassigns the client from the specified tenant.
-        The client will no longer have access to the tenant's data.
+        The client can no longer access tenant data.
       parameters:
         - name: tenantId
           in: path
