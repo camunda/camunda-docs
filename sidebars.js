@@ -1355,6 +1355,7 @@ module.exports = {
           label: "Configure flow control",
           id: "self-managed/operational-guides/configure-flow-control/configure-flow-control",
         },
+        "self-managed/concepts/no-secondary-storage",
       ],
     },
     {
