@@ -1,7 +1,7 @@
 ---
 id: prefix-elasticsearch-indices
-title: "Prefix Elasticsearch indices"
-sidebar_label: "Prefix Elasticsearch indices"
+sidebar_label: Prefix Elasticsearch indices
+title: Helm chart Elasticsearch indices prefix
 description: "Configure Elasticsearch index prefixes to structure your data, and ensure data isolation."
 ---
 

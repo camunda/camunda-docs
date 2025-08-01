@@ -1,7 +1,7 @@
 ---
 id: configure-multi-tenancy
-title: "Configure multi-tenancy"
-sidebar_label: "Configure multi-tenancy"
+sidebar_label: Multi-tenancy
+title: Helm chart multi-tenancy configuration
 description: "Learn how to configure multi-tenancy in Camunda 8."
 ---
 

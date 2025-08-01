@@ -4779,8 +4779,12 @@ paths:
               $ref: "#/components/schemas/UserUpdateRequest"
         required: true
       responses:
-        "204":
+        "200":
           description: The user was updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserUpdateResult"
         "400":
           $ref: "#/components/responses/InvalidData"
         "403":
@@ -5440,9 +5444,6 @@ components:
     TenantCreateResult:
       type: object
       properties:
-        tenantKey:
-          description: The unique system-generated internal tenant ID.
-          type: string
         tenantId:
           type: string
           description: The unique external tenant ID
@@ -5478,9 +5479,6 @@ components:
         description:
           type: string
           description: The description of the tenant.
-        tenantKey:
-          type: string
-          description: The unique system-generated internal tenant ID.
 
     TenantResult:
       description: Tenant search response item.
@@ -5495,9 +5493,6 @@ components:
         description:
           type: string
           description: The tenant description.
-        tenantKey:
-          type: string
-          description: The unique system-generated internal tenant ID.
     TenantSearchQuerySortRequest:
       type: object
       properties:
@@ -6026,6 +6021,9 @@ components:
         processDefinitionKey:
           description: The key for this process definition.
           type: string
+        hasStartForm:
+          description: Indicates whether the start event of the process has an associated Form Key.
+          type: boolean
     ProcessDefinitionSearchQueryResult:
       type: object
       allOf:
@@ -6061,6 +6059,9 @@ components:
         processDefinitionKey:
           description: The key for this process definition.
           type: string
+        hasStartForm:
+          description: Indicates whether the start event of the process has an associated Form Key.
+          type: boolean
     ProcessInstanceSearchQuerySortRequest:
       type: object
       properties:
@@ -6566,14 +6567,12 @@ components:
         - ACTIVE
         - COMPLETED
         - TERMINATED
-        - SUSPENDED
     ElementInstanceStateEnum:
       description: Element states
       enum:
         - ACTIVE
         - COMPLETED
         - TERMINATED
-        - SUSPENDED
     ProcessInstanceCallHierarchyEntry:
       type: object
       required:
@@ -6675,12 +6674,7 @@ components:
       nullable: true
       properties:
         operationReference:
-          description: |
-            A reference key chosen by the user that will be part of all records resulting from this operation.
-            Must be > 0 if provided.
-          type: integer
-          format: int64
-          minimum: 1
+          $ref: "#/components/schemas/OperationReference"
     ElementInstanceSearchQuerySortRequest:
       type: object
       properties:
@@ -6739,6 +6733,7 @@ components:
             - SUB_PROCESS
             - EVENT_SUB_PROCESS
             - AD_HOC_SUB_PROCESS
+            - AD_HOC_SUB_PROCESS_INNER_INSTANCE
             - START_EVENT
             - INTERMEDIATE_CATCH_EVENT
             - INTERMEDIATE_THROW_EVENT
@@ -6833,6 +6828,7 @@ components:
             - SUB_PROCESS
             - EVENT_SUB_PROCESS
             - AD_HOC_SUB_PROCESS
+            - AD_HOC_SUB_PROCESS_INNER_INSTANCE
             - START_EVENT
             - INTERMEDIATE_CATCH_EVENT
             - INTERMEDIATE_THROW_EVENT
@@ -7006,6 +7002,7 @@ components:
             - JOB_NO_RETRIES
             - EXECUTION_LISTENER_NO_RETRIES
             - TASK_LISTENER_NO_RETRIES
+            - AD_HOC_SUB_PROCESS_NO_RETRIES
             - CONDITION_ERROR
             - EXTRACT_VALUE_ERROR
             - CALLED_ELEMENT_ERROR
@@ -7247,6 +7244,7 @@ components:
             - JOB_NO_RETRIES
             - EXECUTION_LISTENER_NO_RETRIES
             - TASK_LISTENER_NO_RETRIES
+            - AD_HOC_SUB_PROCESS_NO_RETRIES
             - CONDITION_ERROR
             - EXTRACT_VALUE_ERROR
             - CALLED_ELEMENT_ERROR
@@ -7397,7 +7395,6 @@ components:
         - MAPPING_RULE
         - MESSAGE
         - BATCH
-        - BATCH_OPERATION
         - APPLICATION
         - SYSTEM
         - TENANT
@@ -7408,6 +7405,7 @@ components:
         - GROUP
         - USER
         - ROLE
+        - USAGE_METRIC
     OwnerTypeEnum:
       description: The type of the owner of permissions.
       enum:
@@ -7572,9 +7570,18 @@ components:
         email:
           description: The email of the user.
           type: "string"
-        userKey:
-          description: The key of the created user
-          type: string
+    UserUpdateResult:
+      type: object
+      properties:
+        username:
+          description: The username of the user.
+          type: "string"
+        name:
+          description: The name of the user.
+          type: "string"
+        email:
+          description: The email of the user.
+          type: "string"
     UserSearchQuerySortRequest:
       type: object
       properties:
@@ -7721,9 +7728,6 @@ components:
         apiUser:
           description: Flag for understanding if the user is an API user.
           type: boolean
-        userKey:
-          description: The system generated key of the user.
-          type: string
     UserResult:
       type: "object"
       properties:
@@ -7735,9 +7739,6 @@ components:
           type: "string"
         email:
           description: The email of the user.
-          type: "string"
-        userKey:
-          description: The key of the user.
           type: "string"
     UserSearchResult:
       type: object
@@ -8903,6 +8904,16 @@ components:
               description: Indicates which elements need to be activated in the ad-hoc subprocess.
               items:
                 $ref: "#/components/schemas/JobResultActivateElement"
+            isCompletionConditionFulfilled:
+              type: boolean
+              description: Indicates whether the completion condition of the ad-hoc subprocess is fulfilled.
+              default: false
+              nullable: false
+            isCancelRemainingInstances:
+              type: boolean
+              description: Indicates whether the remaining instances of the ad-hoc subprocess should be canceled.
+              default: false
+              nullable: false
     JobResultActivateElement:
       type: object
       properties:
@@ -8922,12 +8933,7 @@ components:
         changeset:
           $ref: "#/components/schemas/JobChangeset"
         operationReference:
-          description: |
-            A reference key chosen by the user that will be part of all records resulting from this operation.
-            Must be > 0 if provided.
-          type: integer
-          format: int64
-          minimum: 1
+          $ref: "#/components/schemas/OperationReference"
       required:
         - changeset
     JobChangeset:
@@ -9787,7 +9793,13 @@ components:
         - ASC
         - DESC
       default: ASC
-
+    OperationReference:
+      description: |
+        A reference key chosen by the user that will be part of all records resulting from this operation.
+        Must be > 0 if provided.
+      type: integer
+      format: int64
+      minimum: 1
     MessageCorrelationRequest:
       type: object
       properties:
@@ -10115,12 +10127,7 @@ components:
       type: object
       properties:
         operationReference:
-          description: |
-            A reference key chosen by the user that will be part of all records resulting from this operation.
-            Must be >0 if provided.
-          type: integer
-          format: int64
-          minimum: 1
+          $ref: "#/components/schemas/OperationReference"
 
     ProcessInstanceCreationInstruction:
       type: object
@@ -10147,12 +10154,7 @@ components:
           description: The tenant ID of the process definition.
           type: string
         operationReference:
-          description: |
-            A reference key chosen by the user that will be part of all records resulting from this operation.
-            Must be >0 if provided.
-          type: integer
-          format: int64
-          minimum: 1
+          $ref: "#/components/schemas/OperationReference"
         startInstructions:
           description: |
             List of start instructions. By default, the process instance will start at
@@ -10210,24 +10212,9 @@ components:
     RuntimeInstructionType:
       type: string
       description: |
-        The type of the runtime instruction. For now, only SUSPEND_PROCESS_INSTANCE is supported.
-
-        Caution: process instance suspension is an alpha feature and may be subject to change
-        in future releases.
-
-        Note the following limitations of suspended process instances:
-          - Suspended process instances currently cannot be resumed. The only possible state
-            transition is to cancel the suspended instance.
-          - Suspending a process instance currently means that all jobs, user tasks, incidents, and
-            event subscriptions are removed from the runtime state. This means that process instances
-            suspended with the current implementation may not be fully recoverable in the future,
-            when the resume functionality is implemented.
-          - Suspended process instances currently cannot be modified or migrated.
-
-        It is therefore not recommended to use process instance suspension outside of testing or
-        debugging context.
+        The type of the runtime instruction. For now, only TERMINATE_PROCESS_INSTANCE is supported.
       enum:
-        - SUSPEND_PROCESS_INSTANCE
+        - TERMINATE_PROCESS_INSTANCE
     ProcessInstanceCreationRuntimeInstruction:
       type: object
       required:
@@ -10238,10 +10225,10 @@ components:
       discriminator:
         propertyName: type
         mapping:
-          SUSPEND_PROCESS_INSTANCE: "#/components/schemas/ProcessInstanceCreationSuspendInstruction"
+          TERMINATE_PROCESS_INSTANCE: "#/components/schemas/ProcessInstanceCreationTerminateInstruction"
       description: |
         Base type for all runtime instructions.
-    ProcessInstanceCreationSuspendInstruction:
+    ProcessInstanceCreationTerminateInstruction:
       allOf:
         - $ref: "#/components/schemas/ProcessInstanceCreationRuntimeInstruction"
         - type: object
@@ -10250,10 +10237,10 @@ components:
           properties:
             afterElementId:
               description: |
-                The ID of the element that, once completed, will cause the process to move into suspended state.
+                The ID of the element that, once completed or terminated, will cause the process to be terminated.
               type: string
           description: |
-            Suspends the process instance after a specific BPMN element is completed.
+            Terminates the process instance after a specific BPMN element is completed or terminated.
     CreateProcessInstanceResult:
       type: object
       properties:
@@ -10320,11 +10307,7 @@ components:
           items:
             $ref: "#/components/schemas/MigrateProcessInstanceMappingInstruction"
         operationReference:
-          description: |
-            A reference key chosen by the user that will be part of all records resulting from this operation. Must be > 0 if provided.
-          type: integer
-          format: int64
-          minimum: 1
+          $ref: "#/components/schemas/OperationReference"
         targetProcessDefinitionKey:
           description: The key of process definition to migrate the process instance to.
           type: string
@@ -10349,11 +10332,7 @@ components:
       type: object
       properties:
         operationReference:
-          description: |
-            A reference key chosen by the user that will be part of all records resulting from this operation. Must be > 0 if provided.
-          type: integer
-          format: int64
-          minimum: 1
+          $ref: "#/components/schemas/OperationReference"
         activateInstructions:
           description: Instructions describing which elements should be activated in which scopes and which variables should be created.
           type: array
@@ -10441,12 +10420,7 @@ components:
           type: boolean
           default: false
         operationReference:
-          description: >
-            A reference key chosen by the user that will be part of all records resulting from this operation.
-            Must be > 0 if provided.
-          type: integer
-          format: int64
-          minimum: 1
+          $ref: "#/components/schemas/OperationReference"
       required:
         - variables
 
@@ -10455,12 +10429,7 @@ components:
       nullable: true
       properties:
         operationReference:
-          description: |
-            A reference key chosen by the user that will be part of all records resulting from this operation.
-            Must be > 0 if provided.
-          type: integer
-          format: int64
-          minimum: 1
+          $ref: "#/components/schemas/OperationReference"
 
     SignalBroadcastRequest:
       type: object
@@ -10854,6 +10823,7 @@ components:
           enum:
             - ACTIVE
             - COMPLETED
+            - SKIPPED
             - CANCELED
             - FAILED
         processedDate:
