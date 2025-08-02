@@ -530,7 +530,8 @@ You can define `groups` to organize custom fields into:
   "groups": [
     {
       "id": "definition",
-      "label": "Task definition"
+      "label": "Task definition",
+      "openByDefault": true
     },
     {
       "id": "request",
@@ -543,8 +544,7 @@ You can define `groups` to organize custom fields into:
     {
       "id": "authentication",
       "label": "Authentication",
-      "tooltip": "Optional authentication settings",
-      "openByDefault": false
+      "tooltip": "Optional authentication settings"
     }
   ],
   "properties": [
@@ -558,7 +558,7 @@ Groups can have the following attributes:
 - `id`: Unique identifier of the group
 - `label`: Label of the group
 - `tooltip`: Tooltip for the group (optional)
-- `openByDefault`: Whether the group will be expanded in the properties panel (optional, default: `true`)
+- `openByDefault`: Whether the group will be expanded in the properties panel (optional, default: `false`)
 
 Associate a field with a group (ID) via the fields `group` key:
 
