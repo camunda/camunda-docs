@@ -1,5 +1,6 @@
 const removeDuplicateVersionBadge = require("../remove-duplicate-version-badge");
 const fs = require("fs");
+const yaml = require("js-yaml");
 
 function preGenerateDocs(config) {
   const originalSpec = fs.readFileSync(config.specPath, "utf8");
@@ -12,6 +13,7 @@ function preGenerateDocs(config) {
     ...redefineEvaluateDecisionRequest(originalSpec),
     ...addAlphaAdmonition(), // needs to go before addFrequentlyLinkedDocs
     ...addFrequentlyLinkedDocs(config.version),
+    ...flattenPathParams(originalSpec),
   ];
 
   let updatedSpec = originalSpec;
@@ -263,6 +265,67 @@ function addFrequentlyLinkedDocs(version) {
     {
       from: /endpoint is an alpha feature/g,
       to: `endpoint is an [alpha feature](${alphaPath})`,
+    },
+  ];
+}
+
+function flattenPathParams(originalSpec) {
+  const doc = yaml.load(originalSpec);
+
+  const schemas = doc.components?.schemas || {};
+
+  // Traverse all paths and operations
+  for (const path of Object.values(doc.paths || {})) {
+    for (const operation of Object.values(path)) {
+      const parameters = operation.parameters;
+      if (!Array.isArray(parameters)) continue;
+
+      for (const param of parameters) {
+        if (param.schema && param.schema.$ref) {
+          const ref = param.schema.$ref;
+          const match = ref.match(/^#\/components\/schemas\/(.+)$/);
+          if (!match) continue;
+
+          const schemaName = match[1];
+          const schema = schemas[schemaName];
+          if (!schema || !schema.allOf) continue;
+
+          // Flatten one level of allOf: [ {$ref}, {description} ]
+          const refSchema = schema.allOf.find((entry) => entry.$ref);
+          const extraProps = schema.allOf.find(
+            (entry) => entry.description || entry.type
+          );
+
+          const baseMatch = refSchema?.$ref?.match(
+            /^#\/components\/schemas\/(.+)$/
+          );
+          if (!baseMatch) continue;
+
+          const baseSchema = schemas[baseMatch[1]];
+          if (!baseSchema) continue;
+
+          // Merge baseSchema + extraProps
+          const merged = {
+            type: baseSchema.type,
+            format: `string<${schemaName}`,
+            pattern: baseSchema.pattern,
+            example: baseSchema.example,
+            minLength: baseSchema.minLength,
+            maxLength: baseSchema.maxLength,
+            description: extraProps?.description || baseSchema.description,
+          };
+
+          // Replace the $ref schema with the flattened one
+          param.schema = merged;
+        }
+      }
+    }
+  }
+
+  return [
+    {
+      from: /[\s\S]*/, // match entire document
+      to: yaml.dump(doc, { lineWidth: -1 }), // prevent line wrapping
     },
   ];
 }

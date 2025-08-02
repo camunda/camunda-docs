@@ -1,6 +1,4 @@
-# Disclaimer: This is a modified version of the Camunda REST API specification, optimized for the documentation.
-
-openapi: "3.0.3"
+openapi: 3.0.3
 info:
   title: Orchestration Cluster REST API
   version: "0.1"
@@ -14,7 +12,6 @@ info:
 externalDocs:
   description: Find out more
   url: https://docs.camunda.io/docs/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview/
-
 servers:
   - url: "{schema}://{host}:{port}/v2"
     variables:
@@ -27,7 +24,6 @@ servers:
       schema:
         default: http
         description: The schema of the Orchestration Cluster REST API server.
-
 tags:
   - name: Ad-hoc sub-process
   - name: Authentication
@@ -58,7 +54,6 @@ tags:
   - name: Usage metrics
   - name: User task
   - name: Variable
-
 paths:
   /topology:
     get:
@@ -92,7 +87,6 @@ paths:
                 $ref: "#/components/schemas/LicenseResponse"
         "500":
           $ref: "#/components/responses/InternalServerError"
-
   /authentication/me:
     get:
       tags:
@@ -111,7 +105,6 @@ paths:
           $ref: "#/components/responses/Unauthorized"
         "500":
           $ref: "#/components/responses/InternalServerError"
-
   /jobs/activation:
     post:
       tags:
@@ -181,7 +174,13 @@ paths:
           required: true
           description: The key of the job to fail.
           schema:
-            $ref: "#/components/schemas/JobKey"
+            type: string
+            format: string<JobKey
+            pattern: ^-?[0-9]+$
+            example: "2251799813685249"
+            minLength: 1
+            maxLength: 20
+            description: Key for a job. Only use values returned by the system.
       requestBody:
         required: false
         content:
@@ -194,16 +193,15 @@ paths:
         "400":
           $ref: "#/components/responses/InvalidData"
         "404":
-          description: >
+          description: |
             The job with the given jobKey is not found.
           content:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         "409":
-          description: >
-            The job with the given key is in the wrong state currently.
-            More details are provided in the response body.
+          description: |
+            The job with the given key is in the wrong state currently. More details are provided in the response body.
           content:
             application/problem+json:
               schema:
@@ -226,7 +224,13 @@ paths:
           required: true
           description: The key of the job.
           schema:
-            $ref: "#/components/schemas/JobKey"
+            type: string
+            format: string<JobKey
+            pattern: ^-?[0-9]+$
+            example: "2251799813685249"
+            minLength: 1
+            maxLength: 20
+            description: Key for a job. Only use values returned by the system.
       requestBody:
         required: true
         content:
@@ -239,16 +243,15 @@ paths:
         "400":
           $ref: "#/components/responses/InvalidData"
         "404":
-          description: >
+          description: |
             The job with the given jobKey is not found.
           content:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         "409":
-          description: >
-            The job with the given key is in the wrong state currently.
-            More details are provided in the response body.
+          description: |
+            The job with the given key is in the wrong state currently. More details are provided in the response body.
           content:
             application/problem+json:
               schema:
@@ -271,7 +274,13 @@ paths:
           required: true
           description: The key of the job to complete.
           schema:
-            $ref: "#/components/schemas/JobKey"
+            type: string
+            format: string<JobKey
+            pattern: ^-?[0-9]+$
+            example: "2251799813685249"
+            minLength: 1
+            maxLength: 20
+            description: Key for a job. Only use values returned by the system.
       requestBody:
         required: false
         content:
@@ -290,9 +299,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         "409":
-          description: >
-            The job with the given key is in the wrong state currently.
-            More details are provided in the response body.
+          description: |
+            The job with the given key is in the wrong state currently. More details are provided in the response body.
           content:
             application/problem+json:
               schema:
@@ -314,7 +322,13 @@ paths:
           required: true
           description: The key of the job to update.
           schema:
-            $ref: "#/components/schemas/JobKey"
+            type: string
+            format: string<JobKey
+            pattern: ^-?[0-9]+$
+            example: "2251799813685249"
+            minLength: 1
+            maxLength: 20
+            description: Key for a job. Only use values returned by the system.
       requestBody:
         required: true
         content:
@@ -333,9 +347,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         "409":
-          description: >
-            The job with the given key is in the wrong state currently.
-            More details are provided in the response body.
+          description: |
+            The job with the given key is in the wrong state currently. More details are provided in the response body.
           content:
             application/problem+json:
               schema:
@@ -344,23 +357,27 @@ paths:
           $ref: "#/components/responses/InternalServerError"
         "503":
           $ref: "#/components/responses/ServiceUnavailable"
-
   /incidents/{incidentKey}/resolution:
     post:
       tags:
         - Incident
       operationId: resolveIncident
       summary: Resolve incident
-      description: >
-        Marks the incident as resolved; most likely a call to Update job will be necessary
-        to reset the job’s retries, followed by this call.
+      description: |
+        Marks the incident as resolved; most likely a call to Update job will be necessary to reset the job’s retries, followed by this call.
       parameters:
         - name: incidentKey
           in: path
           required: true
           description: Key of the incident to resolve.
           schema:
-            $ref: "#/components/schemas/IncidentKey"
+            type: string
+            format: string<IncidentKey
+            pattern: ^-?[0-9]+$
+            example: "2251799813685249"
+            minLength: 1
+            maxLength: 20
+            description: Key for a incident. Only use values returned by the system.
       requestBody:
         required: false
         content:
@@ -382,7 +399,6 @@ paths:
           $ref: "#/components/responses/InternalServerError"
         "503":
           $ref: "#/components/responses/ServiceUnavailable"
-
   /tenants:
     post:
       tags:
@@ -417,7 +433,6 @@ paths:
           $ref: "#/components/responses/InternalServerError"
         "503":
           $ref: "#/components/responses/ServiceUnavailable"
-
   /tenants/{tenantId}:
     get:
       tags:
@@ -493,7 +508,6 @@ paths:
           $ref: "#/components/responses/InternalServerError"
         "503":
           $ref: "#/components/responses/ServiceUnavailable"
-
     delete:
       tags:
         - Tenant
@@ -524,7 +538,6 @@ paths:
           $ref: "#/components/responses/InternalServerError"
         "503":
           $ref: "#/components/responses/ServiceUnavailable"
-
   /tenants/{tenantId}/users/{username}:
     put:
       tags:
@@ -598,7 +611,6 @@ paths:
           $ref: "#/components/responses/InternalServerError"
         "503":
           $ref: "#/components/responses/ServiceUnavailable"
-
   /tenants/{tenantId}/users/search:
     post:
       tags:
@@ -817,7 +829,6 @@ paths:
           $ref: "#/components/responses/InternalServerError"
         "503":
           $ref: "#/components/responses/ServiceUnavailable"
-
     delete:
       tags:
         - Tenant
@@ -881,7 +892,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/MappingRuleSearchQueryResult"
-
   /tenants/{tenantId}/groups/{groupId}:
     put:
       tags:
@@ -919,7 +929,6 @@ paths:
           $ref: "#/components/responses/InternalServerError"
         "503":
           $ref: "#/components/responses/ServiceUnavailable"
-
     delete:
       tags:
         - Tenant
@@ -956,7 +965,6 @@ paths:
           $ref: "#/components/responses/InternalServerError"
         "503":
           $ref: "#/components/responses/ServiceUnavailable"
-
   /tenants/{tenantId}/roles/{roleId}:
     put:
       tags:
@@ -1030,7 +1038,6 @@ paths:
           $ref: "#/components/responses/InternalServerError"
         "503":
           $ref: "#/components/responses/ServiceUnavailable"
-
   /tenants/search:
     post:
       tags:
@@ -1065,7 +1072,6 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
-
   /user-tasks/{userTaskKey}/completion:
     post:
       tags:
@@ -1079,14 +1085,19 @@ paths:
           required: true
           description: The key of the user task to complete.
           schema:
-            $ref: "#/components/schemas/UserTaskKey"
+            type: string
+            format: string<UserTaskKey
+            pattern: ^-?[0-9]+$
+            example: "2251799813685249"
+            minLength: 1
+            maxLength: 20
+            description: Key for a user task. Only use values returned by the system.
       requestBody:
         required: false
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/UserTaskCompletionRequest"
-
       responses:
         "204":
           description: The user task was completed successfully.
@@ -1099,9 +1110,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         "409":
-          description: >
-            The user task with the given key is in the wrong state currently.
-            More details are provided in the response body.
+          description: |
+            The user task with the given key is in the wrong state currently. More details are provided in the response body.
           content:
             application/problem+json:
               schema:
@@ -1110,7 +1120,6 @@ paths:
           $ref: "#/components/responses/InternalServerError"
         "503":
           $ref: "#/components/responses/ServiceUnavailable"
-
   /user-tasks/{userTaskKey}/assignment:
     post:
       tags:
@@ -1124,7 +1133,13 @@ paths:
           required: true
           description: The key of the user task to assign.
           schema:
-            $ref: "#/components/schemas/UserTaskKey"
+            type: string
+            format: string<UserTaskKey
+            pattern: ^-?[0-9]+$
+            example: "2251799813685249"
+            minLength: 1
+            maxLength: 20
+            description: Key for a user task. Only use values returned by the system.
       requestBody:
         required: true
         content:
@@ -1143,9 +1158,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         "409":
-          description: >
-            The user task with the given key is in the wrong state currently.
-            More details are provided in the response body.
+          description: |
+            The user task with the given key is in the wrong state currently. More details are provided in the response body.
           content:
             application/problem+json:
               schema:
@@ -1154,7 +1168,6 @@ paths:
           $ref: "#/components/responses/InternalServerError"
         "503":
           $ref: "#/components/responses/ServiceUnavailable"
-
   /user-tasks/{userTaskKey}:
     get:
       tags:
@@ -1169,10 +1182,16 @@ paths:
           required: true
           description: The user task key.
           schema:
-            $ref: "#/components/schemas/UserTaskKey"
+            type: string
+            format: string<UserTaskKey
+            pattern: ^-?[0-9]+$
+            example: "2251799813685249"
+            minLength: 1
+            maxLength: 20
+            description: Key for a user task. Only use values returned by the system.
       responses:
         "200":
-          description: >
+          description: |
             The user task is successfully returned.
           content:
             application/json:
@@ -1192,7 +1211,6 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
-
     patch:
       tags:
         - User task
@@ -1205,7 +1223,13 @@ paths:
           required: true
           description: The key of the user task to update.
           schema:
-            $ref: "#/components/schemas/UserTaskKey"
+            type: string
+            format: string<UserTaskKey
+            pattern: ^-?[0-9]+$
+            example: "2251799813685249"
+            minLength: 1
+            maxLength: 20
+            description: Key for a user task. Only use values returned by the system.
       requestBody:
         required: false
         content:
@@ -1224,9 +1248,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         "409":
-          description: >
-            The user task with the given key is in the wrong state currently.
-            More details are provided in the response body.
+          description: |
+            The user task with the given key is in the wrong state currently. More details are provided in the response body.
           content:
             application/problem+json:
               schema:
@@ -1235,7 +1258,6 @@ paths:
           $ref: "#/components/responses/InternalServerError"
         "503":
           $ref: "#/components/responses/ServiceUnavailable"
-
   /user-tasks/{userTaskKey}/form:
     get:
       tags:
@@ -1252,17 +1274,23 @@ paths:
           required: true
           description: The user task key.
           schema:
-            $ref: "#/components/schemas/UserTaskKey"
+            type: string
+            format: string<UserTaskKey
+            pattern: ^-?[0-9]+$
+            example: "2251799813685249"
+            minLength: 1
+            maxLength: 20
+            description: Key for a user task. Only use values returned by the system.
       responses:
         "200":
-          description: >
+          description: |
             The form is successfully returned.
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/FormResult"
         "204":
-          description: >
+          description: |
             The user task was found, but no form is associated with it.
         "400":
           $ref: "#/components/responses/InvalidData"
@@ -1271,14 +1299,13 @@ paths:
         "403":
           $ref: "#/components/responses/Forbidden"
         "404":
-          description: "Not found"
+          description: Not found
           content:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
-
   /user-tasks/{userTaskKey}/assignee:
     delete:
       tags:
@@ -1292,7 +1319,13 @@ paths:
           required: true
           description: The key of the user task.
           schema:
-            $ref: "#/components/schemas/UserTaskKey"
+            type: string
+            format: string<UserTaskKey
+            pattern: ^-?[0-9]+$
+            example: "2251799813685249"
+            minLength: 1
+            maxLength: 20
+            description: Key for a user task. Only use values returned by the system.
       responses:
         "204":
           description: The user task was unassigned successfully.
@@ -1305,9 +1338,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         "409":
-          description: >
-            The user task with the given key is in the wrong state currently.
-            More details are provided in the response body.
+          description: |
+            The user task with the given key is in the wrong state currently. More details are provided in the response body.
           content:
             application/problem+json:
               schema:
@@ -1332,7 +1364,7 @@ paths:
               $ref: "#/components/schemas/UserTaskSearchQuery"
       responses:
         "200":
-          description: >
+          description: |
             The user task search result.
           content:
             application/json:
@@ -1346,7 +1378,6 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-
   /user-tasks/{userTaskKey}/variables/search:
     post:
       tags:
@@ -1361,7 +1392,13 @@ paths:
           required: true
           description: The key of the user task.
           schema:
-            $ref: "#/components/schemas/UserTaskKey"
+            type: string
+            format: string<UserTaskKey
+            pattern: ^-?[0-9]+$
+            example: "2251799813685249"
+            minLength: 1
+            maxLength: 20
+            description: Key for a user task. Only use values returned by the system.
       requestBody:
         required: false
         content:
@@ -1370,7 +1407,7 @@ paths:
               $ref: "#/components/schemas/UserTaskVariableSearchQueryRequest"
       responses:
         "200":
-          description: >
+          description: |
             The user task variables search response.
           content:
             application/json:
@@ -1380,7 +1417,6 @@ paths:
           $ref: "#/components/responses/InvalidData"
         "500":
           $ref: "#/components/responses/InternalServerError"
-
   /variables/search:
     post:
       tags:
@@ -1397,7 +1433,7 @@ paths:
               $ref: "#/components/schemas/VariableSearchQuery"
       responses:
         "200":
-          description: >
+          description: |
             The variable search result.
           content:
             application/json:
@@ -1411,7 +1447,6 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-
   /variables/{variableKey}:
     get:
       tags:
@@ -1426,10 +1461,16 @@ paths:
           required: true
           description: The variable key.
           schema:
-            $ref: "#/components/schemas/VariableKey"
+            type: string
+            format: string<VariableKey
+            pattern: ^-?[0-9]+$
+            example: "2251799813685249"
+            minLength: 1
+            maxLength: 20
+            description: Key for a variable. Only use values returned by the system.
       responses:
         "200":
-          description: >
+          description: |
             The variable is successfully returned.
           content:
             application/json:
@@ -1442,14 +1483,13 @@ paths:
         "403":
           $ref: "#/components/responses/Forbidden"
         "404":
-          description: "Not found"
+          description: Not found
           content:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
-
   /clock:
     put:
       tags:
@@ -1461,10 +1501,8 @@ paths:
         When the clock is pinned, it remains at the specified time and does not advance.
         To change the time, the clock must be pinned again with a new timestamp.
 
-        :::note
-        This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
+        This endpoint is an alpha feature and may be subject to change
         in future releases.
-        :::
       requestBody:
         required: true
         content:
@@ -1473,7 +1511,7 @@ paths:
               $ref: "#/components/schemas/ClockPinRequest"
       responses:
         "204":
-          description: >
+          description: |
             The clock was successfully pinned to the specified time in epoch milliseconds.
         "400":
           $ref: "#/components/responses/InvalidData"
@@ -1481,7 +1519,6 @@ paths:
           $ref: "#/components/responses/InternalServerError"
         "503":
           $ref: "#/components/responses/ServiceUnavailable"
-
   /clock/reset:
     post:
       tags:
@@ -1493,10 +1530,8 @@ paths:
         This operation is useful for returning the clock to
         normal behavior after it has been pinned to a specific time.
 
-        :::note
-        This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
+        This endpoint is an alpha feature and may be subject to change
         in future releases.
-        :::
       responses:
         "204":
           description: The clock was successfully reset to the system time.
@@ -1504,7 +1539,6 @@ paths:
           $ref: "#/components/responses/InternalServerError"
         "503":
           $ref: "#/components/responses/ServiceUnavailable"
-
   /process-definitions/search:
     post:
       tags:
@@ -1521,7 +1555,7 @@ paths:
               $ref: "#/components/schemas/ProcessDefinitionSearchQuery"
       responses:
         "200":
-          description: >
+          description: |
             The process definition search result.
           content:
             application/json:
@@ -1535,7 +1569,6 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-
   /process-definitions/{processDefinitionKey}:
     get:
       tags:
@@ -1550,10 +1583,16 @@ paths:
           required: true
           description: The assigned key of the process definition, which acts as a unique identifier for this process definition.
           schema:
-            $ref: "#/components/schemas/ProcessDefinitionKey"
+            type: string
+            format: string<ProcessDefinitionKey
+            pattern: ^-?[0-9]+$
+            example: "2251799813685249"
+            minLength: 1
+            maxLength: 20
+            description: Key for a process definition. Only use values returned by the system.
       responses:
         "200":
-          description: >
+          description: |
             The process definition is successfully returned.
           content:
             application/json:
@@ -1566,16 +1605,14 @@ paths:
         "403":
           $ref: "#/components/responses/Forbidden"
         "404":
-          description: >
-            The process definition with the given key was not found.
-            More details are provided in the response body.
+          description: |
+            The process definition with the given key was not found. More details are provided in the response body.
           content:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
-
   /process-definitions/{processDefinitionKey}/xml:
     get:
       tags:
@@ -1590,17 +1627,23 @@ paths:
           required: true
           description: The assigned key of the process definition, which acts as a unique identifier for this process.
           schema:
-            $ref: "#/components/schemas/ProcessDefinitionKey"
+            type: string
+            format: string<ProcessDefinitionKey
+            pattern: ^-?[0-9]+$
+            example: "2251799813685249"
+            minLength: 1
+            maxLength: 20
+            description: Key for a process definition. Only use values returned by the system.
       responses:
         "200":
-          description: >
+          description: |
             The XML of the process definition is successfully returned.
           content:
             text/xml:
               schema:
                 type: string
         "204":
-          description: >
+          description: |
             The process definition was found but does not have XML.
           content:
             text/plain:
@@ -1613,16 +1656,14 @@ paths:
         "403":
           $ref: "#/components/responses/Forbidden"
         "404":
-          description: >
-            The decision with the given key was not found.
-            More details are provided in the response body.
+          description: |
+            The decision with the given key was not found. More details are provided in the response body.
           content:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
-
   /process-definitions/{processDefinitionKey}/form:
     get:
       tags:
@@ -1639,17 +1680,23 @@ paths:
           required: true
           description: The process key.
           schema:
-            $ref: "#/components/schemas/ProcessDefinitionKey"
+            type: string
+            format: string<ProcessDefinitionKey
+            pattern: ^-?[0-9]+$
+            example: "2251799813685249"
+            minLength: 1
+            maxLength: 20
+            description: Key for a process definition. Only use values returned by the system.
       responses:
         "200":
-          description: >
+          description: |
             The form is successfully returned.
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/FormResult"
         "204":
-          description: >
+          description: |
             The process was found, but no form is associated with it.
         "400":
           $ref: "#/components/responses/InvalidData"
@@ -1658,14 +1705,13 @@ paths:
         "403":
           $ref: "#/components/responses/Forbidden"
         "404":
-          description: "Not found"
+          description: Not found
           content:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
-
   /process-definitions/{processDefinitionKey}/statistics/element-instances:
     post:
       tags:
@@ -1680,7 +1726,13 @@ paths:
           required: true
           description: The assigned key of the process definition, which acts as a unique identifier for this process definition.
           schema:
-            $ref: "#/components/schemas/ProcessDefinitionKey"
+            type: string
+            format: string<ProcessDefinitionKey
+            pattern: ^-?[0-9]+$
+            example: "2251799813685249"
+            minLength: 1
+            maxLength: 20
+            description: Key for a process definition. Only use values returned by the system.
       requestBody:
         required: false
         content:
@@ -1702,7 +1754,6 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-
   /process-instances:
     post:
       tags:
@@ -1723,15 +1774,15 @@ paths:
             schema:
               $ref: "#/components/schemas/ProcessInstanceCreationInstruction"
             examples:
-              "By process definition key":
-                summary: "Create a process instance by processDefinitionKey."
+              By process definition key:
+                summary: Create a process instance by processDefinitionKey.
                 value:
                   processDefinitionKey: "12345543223453245"
                   variables: {}
-              "By process definition ID":
-                summary: "Create a process instance by processDefinitionId and version."
+              By process definition ID:
+                summary: Create a process instance by processDefinitionId and version.
                 value:
-                  processDefinitionId: "my-business-process"
+                  processDefinitionId: my-business-process
                   version: 1
                   variables: {}
       responses:
@@ -1758,7 +1809,6 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
-
   /process-instances/{processInstanceKey}:
     get:
       tags:
@@ -1773,7 +1823,13 @@ paths:
           required: true
           description: The process instance key.
           schema:
-            $ref: "#/components/schemas/ProcessInstanceKey"
+            type: string
+            format: string<ProcessInstanceKey
+            pattern: ^-?[0-9]+$
+            example: "2251799813685249"
+            minLength: 1
+            maxLength: 20
+            description: Key for a process instance. Only use values returned by the system.
       responses:
         "200":
           description: The process instance is successfully returned.
@@ -1795,7 +1851,6 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
-
   /process-instances/{processInstanceKey}/sequence-flows:
     get:
       tags:
@@ -1810,7 +1865,13 @@ paths:
           required: true
           description: The assigned key of the process instance, which acts as a unique identifier for this process instance.
           schema:
-            $ref: "#/components/schemas/ProcessInstanceKey"
+            type: string
+            format: string<ProcessInstanceKey
+            pattern: ^-?[0-9]+$
+            example: "2251799813685249"
+            minLength: 1
+            maxLength: 20
+            description: Key for a process instance. Only use values returned by the system.
       responses:
         "200":
           description: The process instance sequence flows result.
@@ -1826,7 +1887,6 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-
   /process-instances/{processInstanceKey}/statistics/element-instances:
     get:
       tags:
@@ -1841,7 +1901,13 @@ paths:
           required: true
           description: The assigned key of the process instance, which acts as a unique identifier for this process instance.
           schema:
-            $ref: "#/components/schemas/ProcessInstanceKey"
+            type: string
+            format: string<ProcessInstanceKey
+            pattern: ^-?[0-9]+$
+            example: "2251799813685249"
+            minLength: 1
+            maxLength: 20
+            description: Key for a process instance. Only use values returned by the system.
       responses:
         "200":
           description: The process instance statistics result.
@@ -1857,7 +1923,6 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-
   /process-instances/search:
     post:
       tags:
@@ -1887,7 +1952,6 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-
   /process-instances/{processInstanceKey}/incidents/search:
     post:
       tags:
@@ -1902,7 +1966,13 @@ paths:
           required: true
           description: The assigned key of the process instance, which acts as a unique identifier for this process instance.
           schema:
-            $ref: "#/components/schemas/ProcessInstanceKey"
+            type: string
+            format: string<ProcessInstanceKey
+            pattern: ^-?[0-9]+$
+            example: "2251799813685249"
+            minLength: 1
+            maxLength: 20
+            description: Key for a process instance. Only use values returned by the system.
       requestBody:
         required: false
         content:
@@ -1930,7 +2000,6 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
-
   /process-instances/{processInstanceKey}/cancellation:
     post:
       tags:
@@ -1944,7 +2013,13 @@ paths:
           required: true
           description: The key of the process instance to cancel.
           schema:
-            $ref: "#/components/schemas/ProcessInstanceKey"
+            type: string
+            format: string<ProcessInstanceKey
+            pattern: ^-?[0-9]+$
+            example: "2251799813685249"
+            minLength: 1
+            maxLength: 20
+            description: Key for a process instance. Only use values returned by the system.
       requestBody:
         required: false
         content:
@@ -1966,7 +2041,6 @@ paths:
           $ref: "#/components/responses/InternalServerError"
         "503":
           $ref: "#/components/responses/ServiceUnavailable"
-
   /process-instances/cancellation:
     post:
       tags:
@@ -1992,9 +2066,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/BatchOperationCreatedResult"
         "400":
-          description: >
-            The process instance batch operation failed.
-            More details are provided in the response body.
+          description: |
+            The process instance batch operation failed. More details are provided in the response body.
           content:
             application/problem+json:
               schema:
@@ -2005,7 +2078,6 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-
   /process-instances/incident-resolution:
     post:
       tags:
@@ -2031,9 +2103,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/BatchOperationCreatedResult"
         "400":
-          description: >
-            The process instance batch operation failed.
-            More details are provided in the response body.
+          description: |
+            The process instance batch operation failed. More details are provided in the response body.
           content:
             application/problem+json:
               schema:
@@ -2044,7 +2115,6 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-
   /process-instances/migration:
     post:
       tags:
@@ -2070,9 +2140,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/BatchOperationCreatedResult"
         "400":
-          description: >
-            The process instance batch operation failed.
-            More details are provided in the response body.
+          description: |
+            The process instance batch operation failed. More details are provided in the response body.
           content:
             application/problem+json:
               schema:
@@ -2083,7 +2152,6 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-
   /process-instances/modification:
     post:
       tags:
@@ -2111,9 +2179,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/BatchOperationCreatedResult"
         "400":
-          description: >
-            The process instance batch operation failed.
-            More details are provided in the response body.
+          description: |
+            The process instance batch operation failed. More details are provided in the response body.
           content:
             application/problem+json:
               schema:
@@ -2124,7 +2191,6 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-
   /process-instances/{processInstanceKey}/migration:
     post:
       tags:
@@ -2145,7 +2211,13 @@ paths:
           required: true
           description: The key of the process instance that should be migrated.
           schema:
-            $ref: "#/components/schemas/ProcessInstanceKey"
+            type: string
+            format: string<ProcessInstanceKey
+            pattern: ^-?[0-9]+$
+            example: "2251799813685249"
+            minLength: 1
+            maxLength: 20
+            description: Key for a process instance. Only use values returned by the system.
       requestBody:
         required: true
         content:
@@ -2167,7 +2239,6 @@ paths:
           $ref: "#/components/responses/InternalServerError"
         "503":
           $ref: "#/components/responses/ServiceUnavailable"
-
   /process-instances/{processInstanceKey}/modification:
     post:
       tags:
@@ -2187,7 +2258,13 @@ paths:
           required: true
           description: The key of the process instance that should be modified.
           schema:
-            $ref: "#/components/schemas/ProcessInstanceKey"
+            type: string
+            format: string<ProcessInstanceKey
+            pattern: ^-?[0-9]+$
+            example: "2251799813685249"
+            minLength: 1
+            maxLength: 20
+            description: Key for a process instance. Only use values returned by the system.
       requestBody:
         required: true
         content:
@@ -2223,7 +2300,13 @@ paths:
           required: true
           description: The key of the process instance to fetch the hierarchy for.
           schema:
-            $ref: "#/components/schemas/ProcessInstanceKey"
+            type: string
+            format: string<ProcessInstanceKey
+            pattern: ^-?[0-9]+$
+            example: "2251799813685249"
+            minLength: 1
+            maxLength: 20
+            description: Key for a process instance. Only use values returned by the system.
       responses:
         "200":
           description: The call hierarchy is successfully returned.
@@ -2247,7 +2330,6 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
-
   /element-instances/search:
     post:
       tags:
@@ -2264,7 +2346,7 @@ paths:
               $ref: "#/components/schemas/ElementInstanceSearchQuery"
       responses:
         "200":
-          description: >
+          description: |
             The element instance search result.
           content:
             application/json:
@@ -2278,7 +2360,6 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-
   /element-instances/{elementInstanceKey}:
     get:
       tags:
@@ -2293,10 +2374,16 @@ paths:
           required: true
           description: The assigned key of the element instance, which acts as a unique identifier for this element instance.
           schema:
-            $ref: "#/components/schemas/ElementInstanceKey"
+            type: string
+            format: string<ElementInstanceKey
+            pattern: ^-?[0-9]+$
+            example: "2251799813685249"
+            minLength: 1
+            maxLength: 20
+            description: Key for a element instance. Only use values returned by the system.
       responses:
         "200":
-          description: >
+          description: |
             The element instance is successfully returned.
           content:
             application/json:
@@ -2309,16 +2396,14 @@ paths:
         "403":
           $ref: "#/components/responses/Forbidden"
         "404":
-          description: >
-            The element instance with the given key was not found.
-            More details are provided in the response body.
+          description: |
+            The element instance with the given key was not found. More details are provided in the response body.
           content:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
-
   /decision-definitions/search:
     post:
       tags:
@@ -2335,7 +2420,7 @@ paths:
               $ref: "#/components/schemas/DecisionDefinitionSearchQuery"
       responses:
         "200":
-          description: >
+          description: |
             The decision definition search result.
           content:
             application/json:
@@ -2349,7 +2434,6 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-
   /decision-definitions/{decisionDefinitionKey}:
     get:
       tags:
@@ -2364,10 +2448,16 @@ paths:
           required: true
           description: The assigned key of the decision definition, which acts as a unique identifier for this decision.
           schema:
-            $ref: "#/components/schemas/DecisionDefinitionKey"
+            type: string
+            format: string<DecisionDefinitionKey
+            pattern: ^-?[0-9]+$
+            example: "2251799813685249"
+            minLength: 1
+            maxLength: 20
+            description: Key for a decision definition. Only use values returned by the system.
       responses:
         "200":
-          description: >
+          description: |
             The decision definition is successfully returned.
           content:
             application/json:
@@ -2380,16 +2470,14 @@ paths:
         "403":
           $ref: "#/components/responses/Forbidden"
         "404":
-          description: >
-            The decision with the given key was not found.
-            More details are provided in the response body.
+          description: |
+            The decision with the given key was not found. More details are provided in the response body.
           content:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
-
   /decision-definitions/{decisionDefinitionKey}/xml:
     get:
       tags:
@@ -2404,10 +2492,16 @@ paths:
           required: true
           description: The assigned key of the decision definition, which acts as a unique identifier for this decision.
           schema:
-            $ref: "#/components/schemas/DecisionDefinitionKey"
+            type: string
+            format: string<DecisionDefinitionKey
+            pattern: ^-?[0-9]+$
+            example: "2251799813685249"
+            minLength: 1
+            maxLength: 20
+            description: Key for a decision definition. Only use values returned by the system.
       responses:
         "200":
-          description: >
+          description: |
             The XML of the decision definition is successfully returned.
           content:
             text/xml:
@@ -2420,16 +2514,14 @@ paths:
         "403":
           $ref: "#/components/responses/Forbidden"
         "404":
-          description: >
-            The decision with the given key was not found.
-            More details are provided in the response body.
+          description: |
+            The decision with the given key was not found. More details are provided in the response body.
           content:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
-
   /decision-requirements/search:
     post:
       tags:
@@ -2446,7 +2538,7 @@ paths:
               $ref: "#/components/schemas/DecisionRequirementsSearchQuery"
       responses:
         "200":
-          description: >
+          description: |
             The decision requirements search result.
           content:
             application/json:
@@ -2460,7 +2552,6 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-
   /decision-requirements/{decisionRequirementsKey}:
     get:
       tags:
@@ -2475,10 +2566,16 @@ paths:
           required: true
           description: The assigned key of the decision requirements, which acts as a unique identifier for this decision requirements.
           schema:
-            $ref: "#/components/schemas/DecisionDefinitionKey"
+            type: string
+            format: string<DecisionDefinitionKey
+            pattern: ^-?[0-9]+$
+            example: "2251799813685249"
+            minLength: 1
+            maxLength: 20
+            description: Key for a decision definition. Only use values returned by the system.
       responses:
         "200":
-          description: >
+          description: |
             The decision requirements is successfully returned.
           content:
             application/json:
@@ -2491,16 +2588,14 @@ paths:
         "403":
           $ref: "#/components/responses/Forbidden"
         "404":
-          description: >
-            The decision requirements with the given key was not found.
-            More details are provided in the response body.
+          description: |
+            The decision requirements with the given key was not found. More details are provided in the response body.
           content:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
-
   /decision-requirements/{decisionRequirementsKey}/xml:
     get:
       tags:
@@ -2515,10 +2610,16 @@ paths:
           required: true
           description: The assigned key of the decision requirements, which acts as a unique identifier for this decision.
           schema:
-            $ref: "#/components/schemas/DecisionRequirementsKey"
+            type: string
+            format: string<DecisionRequirementsKey
+            pattern: ^-?[0-9]+$
+            example: "2251799813685249"
+            minLength: 1
+            maxLength: 20
+            description: Key for a decision requirements definition. Only use values returned by the system.
       responses:
         "200":
-          description: >
+          description: |
             The XML of the decision requirements is successfully returned.
           content:
             text/xml:
@@ -2531,16 +2632,14 @@ paths:
         "403":
           $ref: "#/components/responses/Forbidden"
         "404":
-          description: >
-            The decision requirements with the given key was not found.
-            More details are provided in the response body.
+          description: |
+            The decision requirements with the given key was not found. More details are provided in the response body.
           content:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
-
   /decision-instances/search:
     post:
       tags:
@@ -2557,7 +2656,7 @@ paths:
               $ref: "#/components/schemas/DecisionInstanceSearchQuery"
       responses:
         "200":
-          description: >
+          description: |
             The decision instance search result.
           content:
             application/json:
@@ -2571,7 +2670,6 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-
   /decision-instances/{decisionInstanceId}:
     get:
       tags:
@@ -2589,7 +2687,7 @@ paths:
             type: string
       responses:
         "200":
-          description: >
+          description: |
             The decision instance is successfully returned.
           content:
             application/json:
@@ -2602,16 +2700,14 @@ paths:
         "403":
           $ref: "#/components/responses/Forbidden"
         "404":
-          description: >
-            The decision instance with the given ID was not found.
-            More details are provided in the response body.
+          description: |
+            The decision instance with the given ID was not found. More details are provided in the response body.
           content:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
-
   /decision-definitions/evaluation:
     post:
       tags:
@@ -2630,15 +2726,15 @@ paths:
             schema:
               $ref: "#/components/schemas/DecisionEvaluationInstruction"
             examples:
-              "By decision definition key":
-                summary: "Evaluate the decision by decisionDefinitionKey."
+              By decision definition key:
+                summary: Evaluate the decision by decisionDefinitionKey.
                 value:
                   decisionDefinitionKey: "12345"
                   variables: {}
-              "By decision definition ID":
-                summary: "Evaluate the decision by decisionDefinitionId."
+              By decision definition ID:
+                summary: Evaluate the decision by decisionDefinitionId.
                 value:
-                  decisionDefinitionId: "1234-5678"
+                  decisionDefinitionId: 1234-5678
                   variables: {}
       responses:
         "200":
@@ -2659,7 +2755,6 @@ paths:
           $ref: "#/components/responses/InternalServerError"
         "503":
           $ref: "#/components/responses/ServiceUnavailable"
-
   /authorizations:
     post:
       tags:
@@ -2711,7 +2806,13 @@ paths:
           required: true
           description: The key of the authorization to delete.
           schema:
-            $ref: "#/components/schemas/AuthorizationKey"
+            type: string
+            format: string<AuthorizationKey
+            pattern: ^-?[0-9]+$
+            example: "2251799813685249"
+            minLength: 1
+            maxLength: 20
+            description: Key for an authorization. Only use values returned by the system.
       requestBody:
         content:
           application/json:
@@ -2745,7 +2846,13 @@ paths:
           required: true
           description: The key of the authorization to get.
           schema:
-            $ref: "#/components/schemas/AuthorizationKey"
+            type: string
+            format: string<AuthorizationKey
+            pattern: ^-?[0-9]+$
+            example: "2251799813685249"
+            minLength: 1
+            maxLength: 20
+            description: Key for an authorization. Only use values returned by the system.
       responses:
         "200":
           description: The authorization was successfully returned.
@@ -2777,7 +2884,13 @@ paths:
           required: true
           description: The key of the authorization to delete.
           schema:
-            $ref: "#/components/schemas/AuthorizationKey"
+            type: string
+            format: string<AuthorizationKey
+            pattern: ^-?[0-9]+$
+            example: "2251799813685249"
+            minLength: 1
+            maxLength: 20
+            description: Key for an authorization. Only use values returned by the system.
       responses:
         "204":
           description: The authorization was deleted successfully.
@@ -2822,7 +2935,6 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-
   /roles:
     post:
       tags:
@@ -3483,7 +3595,6 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
-
   /groups:
     post:
       tags:
@@ -4062,7 +4173,6 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
-
   /mapping-rules:
     post:
       tags:
@@ -4208,7 +4318,6 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
-
   /mapping-rules/search:
     post:
       tags:
@@ -4238,7 +4347,6 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-
   /messages/publication:
     post:
       tags:
@@ -4270,7 +4378,6 @@ paths:
           $ref: "#/components/responses/InternalServerError"
         "503":
           $ref: "#/components/responses/ServiceUnavailable"
-
   /messages/correlation:
     post:
       tags:
@@ -4339,7 +4446,6 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-
   /documents:
     post:
       tags:
@@ -4360,9 +4466,8 @@ paths:
         - name: documentId
           in: query
           required: false
-          description: >
-            The ID of the document to upload. If not provided, a new ID will be generated.
-            Specifying an existing ID will result in an error if the document already exists.
+          description: |
+            The ID of the document to upload. If not provided, a new ID will be generated. Specifying an existing ID will result in an error if the document already exists.
           schema:
             type: string
       requestBody:
@@ -4462,7 +4567,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/DocumentCreationBatchResponse"
         "207":
-          description: >
+          description: |
             Not all documents were uploaded successfully. More details are provided in the response body.
           content:
             application/json:
@@ -4498,10 +4603,8 @@ paths:
           required: true
           schema:
             type: string
-          description: >
-            The hash of the document content that was computed by the document store during upload.
-            The hash is part of the document reference that is returned when uploading a document.
-            If the client fails to provide the correct hash, the request will be rejected.
+          description: |
+            The hash of the document content that was computed by the document store during upload. The hash is part of the document reference that is returned when uploading a document. If the client fails to provide the correct hash, the request will be rejected.
       responses:
         "200":
           description: The document was downloaded successfully.
@@ -4511,7 +4614,7 @@ paths:
                 type: string
                 format: binary
         "404":
-          description: >
+          description: |
             The document with the given ID was not found.
           content:
             application/problem+json:
@@ -4519,7 +4622,6 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
-
     delete:
       tags:
         - Document
@@ -4546,7 +4648,7 @@ paths:
         "200":
           description: The document was deleted successfully.
         "404":
-          description: >
+          description: |
             The document with the given ID was not found.
           content:
             application/problem+json:
@@ -4554,7 +4656,6 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
-
   /documents/{documentId}/links:
     post:
       tags:
@@ -4583,10 +4684,8 @@ paths:
           required: true
           schema:
             type: string
-          description: >
-            The hash of the document content that was computed by the document store during upload.
-            The hash is part of the document reference that is returned when uploading a document.
-            If the client fails to provide the correct hash, the request will be rejected.
+          description: |
+            The hash of the document content that was computed by the document store during upload. The hash is part of the document reference that is returned when uploading a document. If the client fails to provide the correct hash, the request will be rejected.
       requestBody:
         required: false
         content:
@@ -4602,7 +4701,6 @@ paths:
                 $ref: "#/components/schemas/DocumentLink"
         "400":
           $ref: "#/components/responses/InvalidData"
-
   /users:
     post:
       tags:
@@ -4641,7 +4739,6 @@ paths:
           $ref: "#/components/responses/InternalServerError"
         "503":
           $ref: "#/components/responses/ServiceUnavailable"
-
   /users/search:
     post:
       tags:
@@ -4671,7 +4768,6 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-
   /users/{username}:
     get:
       tags:
@@ -4776,7 +4872,6 @@ paths:
           $ref: "#/components/responses/InternalServerError"
         "503":
           $ref: "#/components/responses/ServiceUnavailable"
-
   /setup/user:
     post:
       tags:
@@ -4806,7 +4901,6 @@ paths:
           $ref: "#/components/responses/InternalServerError"
         "503":
           $ref: "#/components/responses/ServiceUnavailable"
-
   /incidents/search:
     post:
       tags:
@@ -4823,7 +4917,7 @@ paths:
               $ref: "#/components/schemas/IncidentSearchQuery"
       responses:
         "200":
-          description: >
+          description: |
             The incident search result.
           content:
             application/json:
@@ -4837,7 +4931,6 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-
   /incidents/{incidentKey}:
     get:
       tags:
@@ -4852,10 +4945,16 @@ paths:
           required: true
           description: The assigned key of the incident, which acts as a unique identifier for this incident.
           schema:
-            $ref: "#/components/schemas/IncidentKey"
+            type: string
+            format: string<IncidentKey
+            pattern: ^-?[0-9]+$
+            example: "2251799813685249"
+            minLength: 1
+            maxLength: 20
+            description: Key for a incident. Only use values returned by the system.
       responses:
         "200":
-          description: >
+          description: |
             The incident is successfully returned.
           content:
             application/json:
@@ -4868,9 +4967,8 @@ paths:
         "403":
           $ref: "#/components/responses/Forbidden"
         "404":
-          description: >
-            The incident with the given key was not found.
-            More details are provided in the response body.
+          description: |
+            The incident with the given key was not found. More details are provided in the response body.
           content:
             application/problem+json:
               schema:
@@ -4914,7 +5012,7 @@ paths:
             default: false
       responses:
         "200":
-          description: >
+          description: |
             The usage metrics search result.
           content:
             application/json:
@@ -5074,7 +5172,6 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
-
   /element-instances/{elementInstanceKey}/variables:
     put:
       tags:
@@ -5093,7 +5190,13 @@ paths:
             This can be the process instance key (as obtained during instance creation), or a given
             element, such as a service task (see the `elementInstanceKey` on the job message).
           schema:
-            $ref: "#/components/schemas/ElementInstanceKey"
+            type: string
+            format: string<ElementInstanceKey
+            pattern: ^-?[0-9]+$
+            example: "2251799813685249"
+            minLength: 1
+            maxLength: 20
+            description: Key for a element instance. Only use values returned by the system.
       requestBody:
         required: true
         content:
@@ -5109,7 +5212,6 @@ paths:
           $ref: "#/components/responses/InternalServerError"
         "503":
           $ref: "#/components/responses/ServiceUnavailable"
-
   /element-instances/ad-hoc-activities/{adHocSubProcessInstanceKey}/activation:
     post:
       tags:
@@ -5126,7 +5228,13 @@ paths:
           required: true
           description: The key of the ad-hoc sub-process instance that contains the activities.
           schema:
-            $ref: "#/components/schemas/ElementInstanceKey"
+            type: string
+            format: string<ElementInstanceKey
+            pattern: ^-?[0-9]+$
+            example: "2251799813685249"
+            minLength: 1
+            maxLength: 20
+            description: Key for a element instance. Only use values returned by the system.
       requestBody:
         required: true
         content:
@@ -5154,7 +5262,6 @@ paths:
           $ref: "#/components/responses/InternalServerError"
         "503":
           $ref: "#/components/responses/ServiceUnavailable"
-
   /signals/broadcast:
     post:
       tags:
@@ -5187,7 +5294,6 @@ paths:
           $ref: "#/components/responses/InternalServerError"
         "503":
           $ref: "#/components/responses/ServiceUnavailable"
-
   /batch-operations/{batchOperationKey}:
     get:
       tags:
@@ -5224,7 +5330,6 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
-
   /batch-operations/search:
     post:
       tags:
@@ -5253,7 +5358,6 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
-
   /batch-operations/{batchOperationKey}/cancellation:
     post:
       tags:
@@ -5291,7 +5395,6 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
-
   /batch-operations/{batchOperationKey}/suspension:
     post:
       tags:
@@ -5331,7 +5434,6 @@ paths:
           $ref: "#/components/responses/InternalServerError"
         "503":
           $ref: "#/components/responses/ServiceUnavailable"
-
   /batch-operations/{batchOperationKey}/resumption:
     post:
       tags:
@@ -5399,45 +5501,44 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
-
 components:
   schemas:
     CamundaKey:
       type: string
       format: Camunda Key
-      pattern: "^-?[0-9]+$"
+      pattern: ^-?[0-9]+$
       minLength: 1
       maxLength: 20
-      description: "System-assigned entity key (Java long serialized as string)"
+      description: System-assigned entity key (Java long serialized as string)
       example: "2251799813685249"
     ProcessInstanceKey:
       allOf:
         - $ref: "#/components/schemas/CamundaKey"
-        - description: "Key for a process instance. Only use values returned by the system."
+        - description: Key for a process instance. Only use values returned by the system.
     DeploymentKey:
       allOf:
         - $ref: "#/components/schemas/CamundaKey"
-        - description: "Key for a deployment."
+        - description: Key for a deployment.
     UserTaskKey:
       allOf:
         - $ref: "#/components/schemas/CamundaKey"
-        - description: "Key for a user task. Only use values returned by the system."
+        - description: Key for a user task. Only use values returned by the system.
     ProcessDefinitionKey:
       allOf:
         - $ref: "#/components/schemas/CamundaKey"
-        - description: "Key for a process definition. Only use values returned by the system."
+        - description: Key for a process definition. Only use values returned by the system.
     ElementInstanceKey:
       allOf:
         - $ref: "#/components/schemas/CamundaKey"
-        - description: "Key for a element instance. Only use values returned by the system."
+        - description: Key for a element instance. Only use values returned by the system.
     FormKey:
       allOf:
         - $ref: "#/components/schemas/CamundaKey"
-        - description: "Key for a form. Only use values returned by the system."
+        - description: Key for a form. Only use values returned by the system.
     VariableKey:
       allOf:
         - $ref: "#/components/schemas/CamundaKey"
-        - description: "Key for a variable. Only use values returned by the system."
+        - description: Key for a variable. Only use values returned by the system.
     ResourceKey:
       oneOf:
         - $ref: "#/components/schemas/ProcessDefinitionKey"
@@ -5448,53 +5549,53 @@ components:
     ScopeKey:
       allOf:
         - $ref: "#/components/schemas/CamundaKey"
-        - description: "Key for a scope. Only use values returned by the system."
+        - description: Key for a scope. Only use values returned by the system.
     IncidentKey:
       allOf:
         - $ref: "#/components/schemas/CamundaKey"
-        - description: "Key for a incident. Only use values returned by the system."
+        - description: Key for a incident. Only use values returned by the system.
     JobKey:
       allOf:
         - $ref: "#/components/schemas/CamundaKey"
-        - description: "Key for a job. Only use values returned by the system."
+        - description: Key for a job. Only use values returned by the system.
     MessageSubscriptionKey:
       allOf:
         - $ref: "#/components/schemas/CamundaKey"
-        - description: "Key for a message subscription. Only use values returned by the system."
+        - description: Key for a message subscription. Only use values returned by the system.
     MessageCorrelationKey:
       allOf:
         - $ref: "#/components/schemas/CamundaKey"
-        - description: "Key for a message correlation. Only use values returned by the system."
+        - description: Key for a message correlation. Only use values returned by the system.
     DecisionDefinitionKey:
       allOf:
         - $ref: "#/components/schemas/CamundaKey"
-        - description: "Key for a decision definition. Only use values returned by the system."
+        - description: Key for a decision definition. Only use values returned by the system.
     DecisionRequirementsKey:
       allOf:
         - $ref: "#/components/schemas/CamundaKey"
-        - description: "Key for a decision requirements definition. Only use values returned by the system."
+        - description: Key for a decision requirements definition. Only use values returned by the system.
     AuthorizationKey:
       allOf:
         - $ref: "#/components/schemas/CamundaKey"
-        - description: "Key for an authorization. Only use values returned by the system."
+        - description: Key for an authorization. Only use values returned by the system.
     MessageKey:
       allOf:
         - $ref: "#/components/schemas/CamundaKey"
-        - description: "Key for an message. Only use values returned by the system."
+        - description: Key for an message. Only use values returned by the system.
     DecisionInstanceKey:
       allOf:
         - $ref: "#/components/schemas/CamundaKey"
-        - description: "Key for an decision instance. Only use values returned by the system."
+        - description: Key for an decision instance. Only use values returned by the system.
     SignalKey:
       allOf:
         - $ref: "#/components/schemas/CamundaKey"
-        - description: "Key for an signal. Only use values returned by the system."
+        - description: Key for an signal. Only use values returned by the system.
     BatchOperationKey:
       oneOf:
         - $ref: "#/components/schemas/CamundaKey"
         - type: string
           format: uuid
-          description: "Key for an batch operation. Only use values returned by the system."
+          description: Key for an batch operation. Only use values returned by the system.
     TenantCreateRequest:
       type: object
       properties:
@@ -5510,7 +5611,6 @@ components:
       required:
         - tenantId
         - name
-
     TenantCreateResult:
       type: object
       properties:
@@ -5523,7 +5623,6 @@ components:
         description:
           type: string
           description: The description of the tenant.
-
     TenantUpdateRequest:
       type: object
       properties:
@@ -5536,7 +5635,6 @@ components:
       required:
         - name
         - description
-
     TenantUpdateResult:
       type: object
       properties:
@@ -5549,7 +5647,6 @@ components:
         description:
           type: string
           description: The description of the tenant.
-
     TenantResult:
       description: Tenant search response item.
       type: object
@@ -5592,7 +5689,6 @@ components:
           description: The tenant search filters.
           allOf:
             - $ref: "#/components/schemas/TenantFilter"
-
     TenantFilter:
       description: Tenant filter request
       type: object
@@ -5603,7 +5699,6 @@ components:
         name:
           type: string
           description: The name of the tenant.
-
     TenantSearchQueryResult:
       description: Tenant search response.
       type: object
@@ -5711,9 +5806,8 @@ components:
           description: The element ID of the user task.
         name:
           type: string
-          description: >
-            The task name. This only works for data created with 8.8 and onwards.
-            Instances from prior versions don't contain this data and cannot be found.
+          description: |
+            The task name. This only works for data created with 8.8 and onwards. Instances from prior versions don't contain this data and cannot be found.
         candidateGroup:
           description: The candidate group for this user task.
           allOf:
@@ -5998,7 +6092,7 @@ components:
       description: Variable search response item.
       type: object
       allOf:
-        - "$ref": "#/components/schemas/VariableResultBase"
+        - $ref: "#/components/schemas/VariableResultBase"
       properties:
         value:
           description: Value of this variable. Can be truncated.
@@ -6010,7 +6104,7 @@ components:
       description: Variable search response item.
       type: object
       allOf:
-        - "$ref": "#/components/schemas/VariableResultBase"
+        - $ref: "#/components/schemas/VariableResultBase"
       properties:
         value:
           description: Full value of this variable.
@@ -6078,10 +6172,8 @@ components:
           allOf:
             - $ref: "#/components/schemas/StringFilterProperty"
         isLatestVersion:
-          description: >
-            Whether to only return the latest version of each process definition.
-            When using this filter, pagination functionality is limited, you can only paginate forward using `after` and `limit`.
-            The response contains no `startCursor` in the `page`, and requests ignore the `from` and `before` in the `page`.
+          description: |
+            Whether to only return the latest version of each process definition. When using this filter, pagination functionality is limited, you can only paginate forward using `after` and `limit`. The response contains no `startCursor` in the `page`, and requests ignore the `from` and `before` in the `page`.
           type: boolean
         resourceName:
           description: Resource name of this process definition.
@@ -6852,9 +6944,8 @@ components:
           description: The element ID for this element instance.
         elementName:
           type: string
-          description: >
-            The element name. This only works for data created with 8.8 and onwards.
-            Instances from prior versions don't contain this data and cannot be found.
+          description: |
+            The element name. This only works for data created with 8.8 and onwards. Instances from prior versions don't contain this data and cannot be found.
         hasIncident:
           type: boolean
           description: Shows whether this element instance has an incident related to.
@@ -6949,7 +7040,7 @@ components:
         state:
           description: State of element instance as defined set of values.
           allOf:
-            - "$ref": "#/components/schemas/ElementInstanceStateEnum"
+            - $ref: "#/components/schemas/ElementInstanceStateEnum"
         hasIncident:
           description: Shows whether this element instance has an incident. If true also an incidentKey is provided.
           type: boolean
@@ -7475,7 +7566,6 @@ components:
           description: The amount of unique active task users.
           type: integer
           format: int64
-
     PermissionTypeEnum:
       description: Specifies the type of permissions.
       enum:
@@ -7534,7 +7624,6 @@ components:
         - GROUP
         - MAPPING_RULE
         - UNSPECIFIED
-
     AuthorizationRequest:
       type: object
       properties:
@@ -7574,7 +7663,6 @@ components:
           allOf:
             - $ref: "#/components/schemas/AuthorizationKey"
             - description: The key of the created authorization.
-
     AuthorizationSearchQuerySortRequest:
       type: object
       properties:
@@ -7627,7 +7715,7 @@ components:
           allOf:
             - $ref: "#/components/schemas/ResourceTypeEnum"
     AuthorizationResult:
-      type: "object"
+      type: object
       properties:
         ownerId:
           description: The ID of the owner of permissions.
@@ -7665,44 +7753,44 @@ components:
           items:
             $ref: "#/components/schemas/AuthorizationResult"
     UserRequest:
-      type: "object"
+      type: object
       properties:
         password:
           description: The password of the user.
-          type: "string"
+          type: string
         username:
           description: The username of the user.
-          type: "string"
+          type: string
         name:
           description: The name of the user.
-          type: "string"
+          type: string
         email:
           description: The email of the user.
-          type: "string"
+          type: string
     UserCreateResult:
       type: object
       properties:
         username:
           description: The username of the user.
-          type: "string"
+          type: string
         name:
           description: The name of the user.
-          type: "string"
+          type: string
         email:
           description: The email of the user.
-          type: "string"
+          type: string
     UserUpdateResult:
       type: object
       properties:
         username:
           description: The username of the user.
-          type: "string"
+          type: string
         name:
           description: The name of the user.
-          type: "string"
+          type: string
         email:
           description: The email of the user.
-          type: "string"
+          type: string
     UserSearchQuerySortRequest:
       type: object
       properties:
@@ -7850,17 +7938,17 @@ components:
           description: Flag for understanding if the user is an API user.
           type: boolean
     UserResult:
-      type: "object"
+      type: object
       properties:
         username:
           description: The username of the user.
-          type: "string"
+          type: string
         name:
           description: The name of the user.
-          type: "string"
+          type: string
         email:
           description: The email of the user.
-          type: "string"
+          type: string
     UserSearchResult:
       type: object
       allOf:
@@ -7876,13 +7964,13 @@ components:
       properties:
         password:
           description: The password of the user.
-          type: "string"
+          type: string
         name:
           description: The name of the user.
-          type: "string"
+          type: string
         email:
           description: The email of the user.
-          type: "string"
+          type: string
     TenantClientResult:
       type: object
       properties:
@@ -7998,16 +8086,16 @@ components:
       required:
         - field
     RoleCreateRequest:
-      type: "object"
+      type: object
       properties:
         roleId:
-          type: "string"
+          type: string
           description: The ID of the new role.
         name:
-          type: "string"
+          type: string
           description: The display name of the new role.
         description:
-          type: "string"
+          type: string
           description: The description of the new role.
       required:
         - roleId
@@ -8028,10 +8116,10 @@ components:
       type: object
       properties:
         name:
-          type: "string"
+          type: string
           description: The display name of the new role.
         description:
-          type: "string"
+          type: string
           description: The description of the new role.
       required:
         - name
@@ -8225,16 +8313,16 @@ components:
       required:
         - field
     GroupCreateRequest:
-      type: "object"
+      type: object
       properties:
         groupId:
-          type: "string"
+          type: string
           description: The ID of the new group.
         name:
-          type: "string"
+          type: string
           description: The display name of the new group.
         description:
-          type: "string"
+          type: string
           description: The description of the new group.
       required:
         - groupId
@@ -8478,7 +8566,7 @@ components:
           items:
             $ref: "#/components/schemas/MappingRuleResult"
     MappingRuleResult:
-      type: "object"
+      type: object
       properties:
         claimName:
           type: string
@@ -8492,7 +8580,6 @@ components:
         mappingRuleId:
           type: string
           description: The ID of the mapping.
-
     TopologyResponse:
       description: The response of a topology request.
       type: object
@@ -8599,9 +8686,8 @@ components:
           type: object
           nullable: true
         action:
-          description: >
-            A custom action value that will be accessible from user task events resulting
-            from this endpoint invocation. If not provided, it will default to "complete".
+          description: |
+            A custom action value that will be accessible from user task events resulting from this endpoint invocation. If not provided, it will default to "complete".
           type: string
           nullable: true
     UserTaskAssignmentRequest:
@@ -8612,17 +8698,13 @@ components:
           type: string
           nullable: false
         allowOverride:
-          description: >
-            By default, the task is reassigned if it was already assigned. Set this to `false`
-            to return an error in such cases. The task must then first be unassigned to
-            be assigned again. Use this when you have users picking from group task
-            queues to prevent race conditions.
+          description: |
+            By default, the task is reassigned if it was already assigned. Set this to `false` to return an error in such cases. The task must then first be unassigned to be assigned again. Use this when you have users picking from group task queues to prevent race conditions.
           type: boolean
           nullable: true
         action:
-          description: >
-            A custom action value that will be accessible from user task events resulting
-            from this endpoint invocation. If not provided, it will default to "assign".
+          description: |
+            A custom action value that will be accessible from user task events resulting from this endpoint invocation. If not provided, it will default to "assign".
           type: string
           nullable: true
     UserTaskUpdateRequest:
@@ -8631,9 +8713,8 @@ components:
         changeset:
           $ref: "#/components/schemas/Changeset"
         action:
-          description: >
-            A custom action value that will be accessible from user task events resulting
-            from this endpoint invocation. If not provided, it will default to "update".
+          description: |
+            A custom action value that will be accessible from user task events resulting from this endpoint invocation. If not provided, it will default to "update".
           type: string
           nullable: true
     Changeset:
@@ -8701,18 +8782,16 @@ components:
       type: object
       properties:
         type:
-          description: >
-            The job type, as defined in the BPMN process (e.g. <zeebe:taskDefinition
-            type="payment-service" />).
+          description: |
+            The job type, as defined in the BPMN process (e.g. <zeebe:taskDefinition type="payment-service" />).
           type: string
         worker:
           description: The name of the worker activating the jobs, mostly used for logging purposes.
           type: string
           nullable: true
         timeout:
-          description: >
-            A job returned after this call will not be activated by another call until the
-            timeout (in ms) has been reached.
+          description: |
+            A job returned after this call will not be activated by another call until the timeout (in ms) has been reached.
           type: integer
           format: int64
         maxJobsToActivate:
@@ -8720,19 +8799,15 @@ components:
           type: integer
           format: int32
         fetchVariable:
-          description: >
-            A list of variables to fetch as the job variables; if empty, all visible variables at
-            the time of activation for the scope of the job will be returned.
+          description: |
+            A list of variables to fetch as the job variables; if empty, all visible variables at the time of activation for the scope of the job will be returned.
           type: array
           nullable: true
           items:
             type: string
         requestTimeout:
-          description: >
-            The request will be completed when at least one job is activated or after the
-            requestTimeout (in ms). If the requestTimeout = 0, a default timeout is used.
-            If the requestTimeout < 0, long polling is disabled and the request is completed
-            immediately, even when no job is activated.
+          description: |
+            The request will be completed when at least one job is activated or after the requestTimeout (in ms). If the requestTimeout = 0, a default timeout is used. If the requestTimeout < 0, long polling is disabled and the request is completed immediately, even when no job is activated.
           type: integer
           format: int64
           default: 0
@@ -8873,46 +8948,43 @@ components:
       type: object
       properties:
         retries:
-          description: >
+          description: |
             The amount of retries the job should have left
           type: integer
           format: int32
           default: 0
         errorMessage:
-          description: >
-            An optional message describing why the job failed. This is particularly useful if a job
-            runs out of retries and an incident is raised, as this message can help explain why an
-            incident was raised.
+          description: |
+            An optional message describing why the job failed. This is particularly useful if a job runs out of retries and an incident is raised, as this message can help explain why an incident was raised.
           type: string
           nullable: true
         retryBackOff:
-          description: >
+          description: |
             The backoff timeout (in ms) for the next retry.
           type: integer
           format: int64
           default: 0
         variables:
           additionalProperties: true
-          description: >
-            JSON object that will instantiate the variables at the local scope of the job's
-            associated task.
+          description: |
+            JSON object that will instantiate the variables at the local scope of the job's associated task.
           type: object
           nullable: true
     JobErrorRequest:
       type: object
       properties:
         errorCode:
-          description: >
+          description: |
             The error code that will be matched with an error catch event.
           type: string
         errorMessage:
-          description: >
+          description: |
             An error message that provides additional context.
           type: string
           nullable: true
         variables:
           additionalProperties: true
-          description: >
+          description: |
             JSON object that will instantiate the variables at the local scope of the error catch event that catches the thrown error.
           type: object
           nullable: true
@@ -8929,7 +9001,7 @@ components:
         result:
           $ref: "#/components/schemas/JobResult"
     JobResult:
-      description: >
+      description: |
         The result of the completed job as determined by the worker.
       discriminator:
         propertyName: type
@@ -8942,8 +9014,10 @@ components:
         type:
           type: string
           description: Used to distinguish between different types of job results.
-          enum: ["userTask", "adHocSubProcess"]
-          default: "userTask"
+          enum:
+            - userTask
+            - adHocSubProcess
+          default: userTask
     JobResultUserTask:
       type: object
       nullable: true
@@ -8953,12 +9027,8 @@ components:
           properties:
             denied:
               type: boolean
-              description: >
-                Indicates whether the worker denies the work, i.e. explicitly doesn't approve it.
-                For example, a user task listener can deny the completion of a task by setting this flag to true.
-                In this example, the completion of a task is represented by a job that the worker can complete as denied.
-                As a result, the completion request is rejected and the task remains active.
-                Defaults to false.
+              description: |
+                Indicates whether the worker denies the work, i.e. explicitly doesn't approve it. For example, a user task listener can deny the completion of a task by setting this flag to true. In this example, the completion of a task is represented by a job that the worker can complete as denied. As a result, the completion request is rejected and the task remains active. Defaults to false.
               nullable: true
             deniedReason:
               type: string
@@ -9428,11 +9498,9 @@ components:
             $ref: "#/components/schemas/JobListenerEventTypeEnum"
         $like:
           $ref: "#/components/schemas/LikeFilterProperty"
-
     ProblemDetail:
-      description: >
-        A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457).
-        There may be additional properties specific to the problem type.
+      description: |
+        A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.
       type: object
       properties:
         type:
@@ -9843,7 +9911,6 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/DecisionInstanceResult"
-
     DecisionInstanceResult:
       type: object
       properties:
@@ -9897,7 +9964,6 @@ components:
           allOf:
             - $ref: "#/components/schemas/ElementInstanceKey"
             - description: The key of the element instance this decision instance is linked to.
-
     DecisionInstanceGetQueryResult:
       allOf:
         - $ref: "#/components/schemas/DecisionInstanceResult"
@@ -9915,7 +9981,6 @@ components:
                 $ref: "#/components/schemas/MatchedDecisionRuleItem"
               description: |
                 The matched rules of the decision instance.
-
     DecisionDefinitionTypeEnum:
       description: The type of the decision.
       enum:
@@ -9948,7 +10013,7 @@ components:
       type: object
       properties:
         name:
-          description: >
+          description: |
             The message name as defined in the BPMN process
           type: string
         correlationKey:
@@ -10014,7 +10079,6 @@ components:
       required:
         - name
         - correlationKey
-
     MessagePublicationResult:
       description: The message key of the published message.
       type: object
@@ -10026,7 +10090,6 @@ components:
           allOf:
             - $ref: "#/components/schemas/MessageKey"
             - description: The key of the message
-
     DocumentReference:
       type: object
       properties:
@@ -10046,7 +10109,6 @@ components:
           description: The hash of the document.
         metadata:
           $ref: "#/components/schemas/DocumentMetadata"
-
     DocumentCreationFailureDetail:
       type: object
       properties:
@@ -10056,7 +10118,6 @@ components:
         detail:
           type: string
           description: The detail of the failure.
-
     DocumentCreationBatchResponse:
       allOf:
         - type: object
@@ -10071,7 +10132,6 @@ components:
               description: Documents that failed creation.
               items:
                 $ref: "#/components/schemas/DocumentCreationFailureDetail"
-
     DocumentMetadata:
       description: Information about the document.
       type: object
@@ -10101,7 +10161,6 @@ components:
           type: object
           description: Custom properties of the document.
           additionalProperties: true
-
     DocumentLinkRequest:
       type: object
       properties:
@@ -10109,7 +10168,7 @@ components:
           type: integer
           format: int64
           description: The time-to-live of the document link in ms.
-          default: 3600000 # 1 hour
+          default: 3600000
     DocumentLink:
       type: object
       properties:
@@ -10120,7 +10179,6 @@ components:
           type: string
           format: date-time
           description: The date and time when the link expires.
-
     DeploymentResult:
       type: object
       properties:
@@ -10277,13 +10335,11 @@ components:
           allOf:
             - $ref: "#/components/schemas/ResourceKey"
             - description: The assigned key, which acts as a unique identifier for this Resource.
-
     IncidentResolutionRequest:
       type: object
       properties:
         operationReference:
           $ref: "#/components/schemas/OperationReference"
-
     ProcessInstanceCreationInstruction:
       type: object
       properties:
@@ -10504,8 +10560,7 @@ components:
           items:
             $ref: "#/components/schemas/ProcessInstanceModificationTerminateInstruction"
     ProcessInstanceModificationActivateInstruction:
-      description: |-
-        Instructions describing an element that should be activated.
+      description: Instructions describing an element that should be activated.
       type: object
       properties:
         elementId:
@@ -10525,7 +10580,6 @@ components:
             - type: string
               default: "-1"
             - $ref: "#/components/schemas/ElementInstanceKey"
-
       required:
         - elementId
     ModifyProcessInstanceVariableInstruction:
@@ -10556,7 +10610,6 @@ components:
             - description: The ID of the element that should be terminated.
       required:
         - elementInstanceKey
-
     SetVariableRequest:
       type: object
       properties:
@@ -10587,14 +10640,12 @@ components:
           $ref: "#/components/schemas/OperationReference"
       required:
         - variables
-
     DeleteResourceRequest:
       type: object
       nullable: true
       properties:
         operationReference:
           $ref: "#/components/schemas/OperationReference"
-
     SignalBroadcastRequest:
       type: object
       properties:
@@ -11039,7 +11090,7 @@ components:
         - targetElementId
   responses:
     InternalServerError:
-      description: >
+      description: |
         An internal error occurred while processing the request.
       content:
         application/problem+json:
@@ -11064,16 +11115,12 @@ components:
           schema:
             $ref: "#/components/schemas/ProblemDetail"
     ServiceUnavailable:
-      description: >
-        The service is currently unavailable. This may happen only on some requests where the system
-        creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures.
-        Clients are recommended to eventually retry those requests after a backoff period.
-        You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .
+      description: |
+        The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .
       content:
         application/problem+json:
           schema:
             $ref: "#/components/schemas/ProblemDetail"
-
   securitySchemes:
     bearerAuth:
       type: http
