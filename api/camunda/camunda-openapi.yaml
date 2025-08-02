@@ -181,7 +181,7 @@ paths:
           required: true
           description: The key of the job to fail.
           schema:
-            type: string
+            $ref: "#/components/schemas/JobKey"
       requestBody:
         required: false
         content:
@@ -226,7 +226,7 @@ paths:
           required: true
           description: The key of the job.
           schema:
-            type: string
+            $ref: "#/components/schemas/JobKey"
       requestBody:
         required: true
         content:
@@ -271,7 +271,7 @@ paths:
           required: true
           description: The key of the job to complete.
           schema:
-            type: string
+            $ref: "#/components/schemas/JobKey"
       requestBody:
         required: false
         content:
@@ -314,7 +314,7 @@ paths:
           required: true
           description: The key of the job to update.
           schema:
-            type: string
+            $ref: "#/components/schemas/JobKey"
       requestBody:
         required: true
         content:
@@ -360,7 +360,7 @@ paths:
           required: true
           description: Key of the incident to resolve.
           schema:
-            type: string
+            $ref: "#/components/schemas/IncidentKey"
       requestBody:
         required: false
         content:
@@ -1079,7 +1079,7 @@ paths:
           required: true
           description: The key of the user task to complete.
           schema:
-            type: string
+            $ref: "#/components/schemas/UserTaskKey"
       requestBody:
         required: false
         content:
@@ -1124,7 +1124,7 @@ paths:
           required: true
           description: The key of the user task to assign.
           schema:
-            type: string
+            $ref: "#/components/schemas/UserTaskKey"
       requestBody:
         required: true
         content:
@@ -1169,7 +1169,7 @@ paths:
           required: true
           description: The user task key.
           schema:
-            type: string
+            $ref: "#/components/schemas/UserTaskKey"
       responses:
         "200":
           description: >
@@ -1205,7 +1205,7 @@ paths:
           required: true
           description: The key of the user task to update.
           schema:
-            type: string
+            $ref: "#/components/schemas/UserTaskKey"
       requestBody:
         required: false
         content:
@@ -1252,7 +1252,7 @@ paths:
           required: true
           description: The user task key.
           schema:
-            type: string
+            $ref: "#/components/schemas/UserTaskKey"
       responses:
         "200":
           description: >
@@ -1292,7 +1292,7 @@ paths:
           required: true
           description: The key of the user task.
           schema:
-            type: string
+            $ref: "#/components/schemas/UserTaskKey"
       responses:
         "204":
           description: The user task was unassigned successfully.
@@ -1361,7 +1361,7 @@ paths:
           required: true
           description: The key of the user task.
           schema:
-            type: string
+            $ref: "#/components/schemas/UserTaskKey"
       requestBody:
         required: false
         content:
@@ -1426,7 +1426,7 @@ paths:
           required: true
           description: The variable key.
           schema:
-            type: string
+            $ref: "#/components/schemas/VariableKey"
       responses:
         "200":
           description: >
@@ -1590,7 +1590,7 @@ paths:
           required: true
           description: The assigned key of the process definition, which acts as a unique identifier for this process.
           schema:
-            type: string
+            $ref: "#/components/schemas/ProcessDefinitionKey"
       responses:
         "200":
           description: >
@@ -1639,7 +1639,7 @@ paths:
           required: true
           description: The process key.
           schema:
-            type: string
+            $ref: "#/components/schemas/ProcessDefinitionKey"
       responses:
         "200":
           description: >
@@ -1680,7 +1680,7 @@ paths:
           required: true
           description: The assigned key of the process definition, which acts as a unique identifier for this process definition.
           schema:
-            type: string
+            $ref: "#/components/schemas/ProcessDefinitionKey"
       requestBody:
         required: false
         content:
@@ -1773,7 +1773,7 @@ paths:
           required: true
           description: The process instance key.
           schema:
-            type: string
+            $ref: "#/components/schemas/ProcessInstanceKey"
       responses:
         "200":
           description: The process instance is successfully returned.
@@ -1810,7 +1810,7 @@ paths:
           required: true
           description: The assigned key of the process instance, which acts as a unique identifier for this process instance.
           schema:
-            type: string
+            $ref: "#/components/schemas/ProcessInstanceKey"
       responses:
         "200":
           description: The process instance sequence flows result.
@@ -1841,7 +1841,7 @@ paths:
           required: true
           description: The assigned key of the process instance, which acts as a unique identifier for this process instance.
           schema:
-            type: string
+            $ref: "#/components/schemas/ProcessInstanceKey"
       responses:
         "200":
           description: The process instance statistics result.
@@ -1902,7 +1902,7 @@ paths:
           required: true
           description: The assigned key of the process instance, which acts as a unique identifier for this process instance.
           schema:
-            type: string
+            $ref: "#/components/schemas/ProcessInstanceKey"
       requestBody:
         required: false
         content:
@@ -1944,7 +1944,7 @@ paths:
           required: true
           description: The key of the process instance to cancel.
           schema:
-            type: string
+            $ref: "#/components/schemas/ProcessInstanceKey"
       requestBody:
         required: false
         content:
@@ -2145,7 +2145,7 @@ paths:
           required: true
           description: The key of the process instance that should be migrated.
           schema:
-            type: string
+            $ref: "#/components/schemas/ProcessInstanceKey"
       requestBody:
         required: true
         content:
@@ -2187,7 +2187,7 @@ paths:
           required: true
           description: The key of the process instance that should be modified.
           schema:
-            type: string
+            $ref: "#/components/schemas/ProcessInstanceKey"
       requestBody:
         required: true
         content:
@@ -2223,7 +2223,7 @@ paths:
           required: true
           description: The key of the process instance to fetch the hierarchy for.
           schema:
-            type: string
+            $ref: "#/components/schemas/ProcessInstanceKey"
       responses:
         "200":
           description: The call hierarchy is successfully returned.
@@ -2293,7 +2293,7 @@ paths:
           required: true
           description: The assigned key of the element instance, which acts as a unique identifier for this element instance.
           schema:
-            type: string
+            $ref: "#/components/schemas/ElementInstanceKey"
       responses:
         "200":
           description: >
@@ -2364,7 +2364,7 @@ paths:
           required: true
           description: The assigned key of the decision definition, which acts as a unique identifier for this decision.
           schema:
-            type: string
+            $ref: "#/components/schemas/DecisionDefinitionKey"
       responses:
         "200":
           description: >
@@ -2404,7 +2404,7 @@ paths:
           required: true
           description: The assigned key of the decision definition, which acts as a unique identifier for this decision.
           schema:
-            type: string
+            $ref: "#/components/schemas/DecisionDefinitionKey"
       responses:
         "200":
           description: >
@@ -2475,7 +2475,7 @@ paths:
           required: true
           description: The assigned key of the decision requirements, which acts as a unique identifier for this decision requirements.
           schema:
-            type: string
+            $ref: "#/components/schemas/DecisionDefinitionKey"
       responses:
         "200":
           description: >
@@ -2515,7 +2515,7 @@ paths:
           required: true
           description: The assigned key of the decision requirements, which acts as a unique identifier for this decision.
           schema:
-            type: string
+            $ref: "#/components/schemas/DecisionRequirementsKey"
       responses:
         "200":
           description: >
@@ -2711,7 +2711,7 @@ paths:
           required: true
           description: The key of the authorization to delete.
           schema:
-            type: string
+            $ref: "#/components/schemas/AuthorizationKey"
       requestBody:
         content:
           application/json:
@@ -2745,7 +2745,7 @@ paths:
           required: true
           description: The key of the authorization to get.
           schema:
-            type: string
+            $ref: "#/components/schemas/AuthorizationKey"
       responses:
         "200":
           description: The authorization was successfully returned.
@@ -2777,7 +2777,7 @@ paths:
           required: true
           description: The key of the authorization to delete.
           schema:
-            type: string
+            $ref: "#/components/schemas/AuthorizationKey"
       responses:
         "204":
           description: The authorization was deleted successfully.
@@ -4852,7 +4852,7 @@ paths:
           required: true
           description: The assigned key of the incident, which acts as a unique identifier for this incident.
           schema:
-            type: string
+            $ref: "#/components/schemas/IncidentKey"
       responses:
         "200":
           description: >
@@ -4986,7 +4986,7 @@ paths:
             This can be the key of a process definition, the key of a decision requirements
             definition or the key of a form definition
           schema:
-            type: string
+            $ref: "#/components/schemas/ResourceKey"
       requestBody:
         required: false
         content:
@@ -5025,7 +5025,7 @@ paths:
           required: true
           description: The unique key identifying the resource.
           schema:
-            type: string
+            $ref: "#/components/schemas/ResourceKey"
       responses:
         "200":
           description: The resource is successfully returned.
@@ -5058,7 +5058,7 @@ paths:
           required: true
           description: The unique key identifying the resource.
           schema:
-            type: string
+            $ref: "#/components/schemas/ResourceKey"
       responses:
         "200":
           description: The resource content is successfully returned.
@@ -5093,7 +5093,7 @@ paths:
             This can be the process instance key (as obtained during instance creation), or a given
             element, such as a service task (see the `elementInstanceKey` on the job message).
           schema:
-            type: string
+            $ref: "#/components/schemas/ElementInstanceKey"
       requestBody:
         required: true
         content:
@@ -5126,7 +5126,7 @@ paths:
           required: true
           description: The key of the ad-hoc sub-process instance that contains the activities.
           schema:
-            type: string
+            $ref: "#/components/schemas/ElementInstanceKey"
       requestBody:
         required: true
         content:
@@ -5202,7 +5202,7 @@ paths:
           description: |
             The key (or operate legacy ID) of the batch operation.
           schema:
-            type: string
+            $ref: "#/components/schemas/BatchOperationKey"
       responses:
         "200":
           description: The batch operation was found.
@@ -5270,7 +5270,7 @@ paths:
           description: |
             The key (or operate legacy ID) of the batch operation.
           schema:
-            type: string
+            $ref: "#/components/schemas/BatchOperationKey"
       requestBody:
         content:
           application/json: {}
@@ -5308,7 +5308,7 @@ paths:
           description: |
             The key (or operate legacy ID) of the batch operation.
           schema:
-            type: string
+            $ref: "#/components/schemas/BatchOperationKey"
       requestBody:
         content:
           application/json: {}
@@ -5348,7 +5348,7 @@ paths:
           description: |
             The key (or operate legacy ID) of the batch operation.
           schema:
-            type: string
+            $ref: "#/components/schemas/BatchOperationKey"
       requestBody:
         content:
           application/json: {}
@@ -5490,9 +5490,11 @@ components:
         - $ref: "#/components/schemas/CamundaKey"
         - description: "Key for an signal. Only use values returned by the system."
     BatchOperationKey:
-      allOf:
+      oneOf:
         - $ref: "#/components/schemas/CamundaKey"
-        - description: "Key for an batch operation. Only use values returned by the system."
+        - type: string
+          format: uuid
+          description: "Key for an batch operation. Only use values returned by the system."
     TenantCreateRequest:
       type: object
       properties:
