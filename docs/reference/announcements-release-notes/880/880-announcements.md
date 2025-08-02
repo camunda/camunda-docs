@@ -186,6 +186,11 @@ the [8.7 API key attributes overview][camunda8-api-overview].
 
 [camunda8-api-overview]: /versioned_docs/version-8.7/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#api-key-attributes
 
+#### Deprecated: Web Modeler API milestone endpoints
+
+With the 8.8 release, the [Web Modeler API](/apis-tools/web-modeler-api/index.md) endpoints under `/api/v1/milestones` are deprecated and scheduled for removal in 8.9.
+Use the corresponding endpoints under `/api/v1/versions` instead.
+
 ### Camunda Exporter <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
 Camunda web applications used importers and archivers to consume, aggregate, and archive historical data provided by the Elasticsearch (ES) or OpenSearch (OS) exporters.
