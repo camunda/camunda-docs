@@ -14,6 +14,7 @@ function preGenerateDocs(config) {
     ...addAlphaAdmonition(), // needs to go before addFrequentlyLinkedDocs
     ...addFrequentlyLinkedDocs(config.version),
     ...flattenPathParams(originalSpec),
+    ...stripCamundaKeyConstraintsForDocs(originalSpec),
   ];
 
   let updatedSpec = originalSpec;
@@ -269,6 +270,17 @@ function addFrequentlyLinkedDocs(version) {
   ];
 }
 
+// Make path parameters more readable by flattening them into inline primitive types, so they display as `string<ProcessInstanceKey>` instead of `object`.
+// Flattens $ref-based path parameter schemas into inline primitive types
+// by resolving one level of allOf inheritance. Preserves format, pattern, and description.
+// This is necessary because the Camunda REST API uses schema inheritance to express domain types for
+// Camunda keys, which results in a complex schema structure
+//   e.g. { $ref: "#/components/schemas/ProcessInstanceKey" },
+//          allOf: [ { $ref: "#/components/schemas/CamundaKey
+// If we don't flatten this, the docs say it is a complex object, which is not true.
+// We also modify the format to include the schema name, so that it is clear what domain type it is.
+//   e.g. format: "string<ProcessInstanceKey>"
+// Otherwise Docusaurus will not render the type correctly, and it will be displayed as the generic `Camunda Key`
 function flattenPathParams(originalSpec) {
   const doc = yaml.load(originalSpec);
 
@@ -307,7 +319,7 @@ function flattenPathParams(originalSpec) {
           // Merge baseSchema + extraProps
           const merged = {
             type: baseSchema.type,
-            format: `string<${schemaName}`,
+            format: `string<${schemaName}>`, // baseSchema.format,
             pattern: baseSchema.pattern,
             example: baseSchema.example,
             minLength: baseSchema.minLength,
@@ -326,6 +338,28 @@ function flattenPathParams(originalSpec) {
     {
       from: /[\s\S]*/, // match entire document
       to: yaml.dump(doc, { lineWidth: -1 }), // prevent line wrapping
+    },
+  ];
+}
+
+/**
+ * Get rid of the constraints on CamundaKey schemas. We don't want to clutter the docs with these constraints,
+ * but we do want them to be present in the schema for validation purposes.
+ */
+function stripCamundaKeyConstraintsForDocs(originalSpec) {
+  const doc = yaml.load(originalSpec);
+
+  const camundaKey = doc.components?.schemas?.CamundaKey;
+  if (camundaKey) {
+    delete camundaKey.pattern;
+    delete camundaKey.minLength;
+    delete camundaKey.maxLength;
+  }
+
+  return [
+    {
+      from: /[\s\S]*/, // match entire document
+      to: yaml.dump(doc, { lineWidth: -1 }),
     },
   ];
 }
