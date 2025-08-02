@@ -5291,7 +5291,6 @@ components:
       type: string
       format: Camunda Key
       description: System-assigned entity key (Java long serialized as string)
-      example: "2251799813685249"
     ProcessInstanceKey:
       allOf:
         - $ref: "#/components/schemas/CamundaKey"
