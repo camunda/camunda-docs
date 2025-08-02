@@ -1654,6 +1654,7 @@ module.exports = {
             },
           ],
         },
+        "self-managed/components/third-party-components/third-party-components",
       ],
     },
     {
