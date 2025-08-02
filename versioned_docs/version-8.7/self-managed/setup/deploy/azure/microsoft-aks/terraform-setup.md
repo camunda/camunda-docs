@@ -30,7 +30,7 @@ If you are completely new to Terraform and the concept of IaC, consider reading 
   - If you reach a limit, you can [request a quota increase through the Azure portal](https://learn.microsoft.com/en-us/azure/extended-zones/request-quota-increase).
 - This guide uses **GNU Bash** for all shell commands.
 
-For the exact tool versions we’ve tested against, see the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file in the repository.
+For the exact tool versions we’ve tested against, see the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/.tool-versions) file in the repository.
 
 ### Considerations
 
@@ -154,12 +154,12 @@ Due to Azure CNI, every pod will get assigned a real internal IP. While the defa
 
 ### Obtain a copy of the reference architecture
 
-The first step is to download a copy of the reference architecture of the [GitHub repository](https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/). This material will be used throughout the rest of this documentation. The reference architectures are versioned using the same Camunda versions (`stable/8.x`).
+The first step is to download a copy of the reference architecture of the [GitHub repository](https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/azure/kubernetes/aks-single-region/). This material will be used throughout the rest of this documentation. The reference architectures are versioned using the same Camunda versions (`stable/8.x`).
 
 The provided reference architecture repository allows you to directly reuse and extend the existing Terraform example base. This sample implementation is flexible to extend to your own needs without the potential limitations of a Terraform module maintained by a third party.
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/get-your-copy.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/azure/kubernetes/aks-single-region/procedure/get-your-copy.sh
 ```
 
 With the reference architecture copied, you can proceed with the remaining steps outlined in this documentation. Ensure that you are in the correct directory before continuing with further instructions.
@@ -268,7 +268,7 @@ export AZURE_DNS_RESOURCE_GROUP=<your-dns-resource-group>
 Then, run the following script to create the `terraform.tfvars` file:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/tfvars-domain.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/azure/kubernetes/aks-single-region/procedure/tfvars-domain.sh
 ```
 
 ##### subscription_id
@@ -294,7 +294,7 @@ If this value is missing or incorrect, `external-dns` will not have permission t
 Run the following script to create the `terraform.tfvars` file:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/tfvars-no-domain.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/azure/kubernetes/aks-single-region/procedure/tfvars-no-domain.sh
 ```
 
 ##### subscription_id
@@ -316,7 +316,7 @@ Before setting up Terraform, you should create an Azure Storage Account and cont
 To start, set the required values as environment variables upfront to avoid repeating them in each command:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/azure/common/procedure/storage-account/storage-account-env-vars.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/azure/common/procedure/storage-account/storage-account-env-vars.sh
 ```
 
 Define the value for `AZURE_LOCATION` with your chosen Azure region (for example, `westeurope`).
@@ -330,19 +330,19 @@ Now, follow these steps to create the storage account with versioning enabled:
 1. Run the following script to create a storage account and container for storing your Terraform state. Make sure that you have chosen a globally unique name for the storage account before:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/azure/common/procedure/storage-account/storage-account-creation.sh
+   https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/azure/common/procedure/storage-account/storage-account-creation.sh
    ```
 
 2. Enable blob versioning to track changes and protect the state file from accidental deletions or overwrites:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/azure/common/procedure/storage-account/storage-account-versioning.sh
+   https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/azure/common/procedure/storage-account/storage-account-versioning.sh
    ```
 
 3. Verify versioning is enabled on the blob container:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/azure/common/procedure/storage-account/storage-account-verify.sh
+   https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/azure/common/procedure/storage-account/storage-account-verify.sh
    ```
 
 This Azure Storage Account will now securely store your Terraform state files with versioning enabled.
@@ -354,7 +354,7 @@ Once your authentication is set up, you can initialize your Terraform project. T
 Configure the backend and download the necessary provider plugins:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/azure/common/procedure/storage-account/storage-account-tf-init.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/azure/common/procedure/storage-account/storage-account-tf-init.sh
 ```
 
 Terraform will connect to the Azure storage container to manage the state file, ensuring remote and persistent storage.
@@ -371,10 +371,10 @@ This reference architecture uses [Terraform modules](https://developer.hashicorp
 
 #### 1. Main configuration
 
-The main deployment logic is defined in [`main.tf`](https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/main.tf). It instantiates all modules and exposes several **customizable values** via the `locals` block:
+The main deployment logic is defined in [`main.tf`](https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/azure/kubernetes/aks-single-region/main.tf). It instantiates all modules and exposes several **customizable values** via the `locals` block:
 
 ```hcl reference
-https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/main.tf
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/azure/kubernetes/aks-single-region/main.tf
 ```
 
 :::warning Azure Key Vault naming
@@ -384,17 +384,17 @@ Azure Key Vault names must be **globally unique** across all Azure subscriptions
 :::
 The modules deployed are:
 
-- `network` ([network.tf](https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/network.tf)): Virtual network, AKS subnet, DB subnet, and private endpoint subnet
-- `kms` ([kms.tf](https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/kms.tf)): Key Vault, encryption key, and UAMI for AKS secret encryption
-- `aks` ([aks.tf](https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/aks.tf)): Cluster deployment with system and user node pools across AZs
-- `postgres_db` ([db.tf](https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/db.tf)): High-availability PostgreSQL Flexible Server, private DNS, and endpoint
+- `network` ([network.tf](https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/azure/kubernetes/aks-single-region/network.tf)): Virtual network, AKS subnet, DB subnet, and private endpoint subnet
+- `kms` ([kms.tf](https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/azure/kubernetes/aks-single-region/kms.tf)): Key Vault, encryption key, and UAMI for AKS secret encryption
+- `aks` ([aks.tf](https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/azure/kubernetes/aks-single-region/aks.tf)): Cluster deployment with system and user node pools across AZs
+- `postgres_db` ([db.tf](https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/azure/kubernetes/aks-single-region/db.tf)): High-availability PostgreSQL Flexible Server, private DNS, and endpoint
 
 #### 2. AKS module
 
 This module exposes a customisable **kubernetes_version** value via the `locals` block:
 
 ```hcl reference
-https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/aks.tf#L1-L3
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/azure/kubernetes/aks-single-region/aks.tf#L1-L3
 ```
 
 #### 3. PostgreSQL module
@@ -402,7 +402,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/azure/kuberne
 This module exposes several **customizable values** via the `locals` block:
 
 ```hcl reference
-https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/db.tf#L1-L18
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/azure/kubernetes/aks-single-region/db.tf#L1-L18
 ```
 
 These values control database user setup, naming, and passwords. Sensitive values are used by downstream provisioning jobs and Helm secrets.
@@ -489,7 +489,7 @@ This step defines a custom `StorageClass` that:
 Run the following script to apply the new storage class and set it as default:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/storageclass-configure.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/azure/kubernetes/aks-single-region/procedure/storageclass-configure.sh
 ```
 
 To verify completion of the operation, run:
@@ -502,7 +502,7 @@ To verify completion of the operation, run:
 <summary>Show script <code>procedure/storageclass-verify.sh</code></summary>
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/storageclass-verify.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/azure/kubernetes/aks-single-region/procedure/storageclass-verify.sh
 ```
 
 </details>
@@ -518,7 +518,7 @@ Due to the tight NSG rules in this example, the only way to access the database 
 1. In your terminal, set the necessary environment variables that will be substituted in the setup manifest:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/vars-create-db.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/azure/kubernetes/aks-single-region/procedure/vars-create-db.sh
 ```
 
 A **Kubernetes job** will connect to the database and create the necessary users with the required privileges. The script installs the necessary dependencies and runs SQL commands to create the users and assign them the correct roles and privileges.
@@ -526,7 +526,7 @@ A **Kubernetes job** will connect to the database and create the necessary users
 2. Create a secret that references the environment variables:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/create-setup-db-secret.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/azure/kubernetes/aks-single-region/procedure/create-setup-db-secret.sh
 ```
 
 This command creates a secret named `setup-db-secret` and dynamically populates it with the values from your environment variables.
@@ -549,7 +549,7 @@ kubectl apply -f ./manifests/setup-postgres-create-db.yml --namespace "$CAMUNDA_
 <summary>Show manifest <code>setup-postgres-create-db.yml</code></summary>
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/manifests/setup-postgres-create-db.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/azure/kubernetes/aks-single-region/manifests/setup-postgres-create-db.yml
 ```
 
 </details>
