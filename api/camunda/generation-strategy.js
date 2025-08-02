@@ -1,5 +1,6 @@
 const removeDuplicateVersionBadge = require("../remove-duplicate-version-badge");
 const fs = require("fs");
+const yaml = require("js-yaml");
 
 function preGenerateDocs(config) {
   const originalSpec = fs.readFileSync(config.specPath, "utf8");
@@ -12,6 +13,8 @@ function preGenerateDocs(config) {
     ...redefineEvaluateDecisionRequest(originalSpec),
     ...addAlphaAdmonition(), // needs to go before addFrequentlyLinkedDocs
     ...addFrequentlyLinkedDocs(config.version),
+    ...flattenPathParams(originalSpec),
+    ...stripCamundaKeyConstraintsForDocs(originalSpec),
   ];
 
   let updatedSpec = originalSpec;
@@ -263,6 +266,100 @@ function addFrequentlyLinkedDocs(version) {
     {
       from: /endpoint is an alpha feature/g,
       to: `endpoint is an [alpha feature](${alphaPath})`,
+    },
+  ];
+}
+
+// Make path parameters more readable by flattening them into inline primitive types, so they display as `string<ProcessInstanceKey>` instead of `object`.
+// Flattens $ref-based path parameter schemas into inline primitive types
+// by resolving one level of allOf inheritance. Preserves format, pattern, and description.
+// This is necessary because the Camunda REST API uses schema inheritance to express domain types for
+// Camunda keys, which results in a complex schema structure
+//   e.g. { $ref: "#/components/schemas/ProcessInstanceKey" },
+//          allOf: [ { $ref: "#/components/schemas/CamundaKey
+// If we don't flatten this, the docs say it is a complex object, which is not true.
+// We also modify the format to include the schema name, so that it is clear what domain type it is.
+//   e.g. format: "string<ProcessInstanceKey>"
+// Otherwise Docusaurus will not render the type correctly, and it will be displayed as the generic `Camunda Key`
+function flattenPathParams(originalSpec) {
+  const doc = yaml.load(originalSpec);
+
+  const schemas = doc.components?.schemas || {};
+
+  // Traverse all paths and operations
+  for (const path of Object.values(doc.paths || {})) {
+    for (const operation of Object.values(path)) {
+      const parameters = operation.parameters;
+      if (!Array.isArray(parameters)) continue;
+
+      for (const param of parameters) {
+        if (param.schema && param.schema.$ref) {
+          const ref = param.schema.$ref;
+          const match = ref.match(/^#\/components\/schemas\/(.+)$/);
+          if (!match) continue;
+
+          const schemaName = match[1];
+          const schema = schemas[schemaName];
+          if (!schema || !schema.allOf) continue;
+
+          // Flatten one level of allOf: [ {$ref}, {description} ]
+          const refSchema = schema.allOf.find((entry) => entry.$ref);
+          const extraProps = schema.allOf.find(
+            (entry) => entry.description || entry.type
+          );
+
+          const baseMatch = refSchema?.$ref?.match(
+            /^#\/components\/schemas\/(.+)$/
+          );
+          if (!baseMatch) continue;
+
+          const baseSchema = schemas[baseMatch[1]];
+          if (!baseSchema) continue;
+
+          // Merge baseSchema + extraProps
+          const merged = {
+            type: baseSchema.type,
+            format: `string<${schemaName}>`, // baseSchema.format,
+            pattern: baseSchema.pattern,
+            example: baseSchema.example,
+            minLength: baseSchema.minLength,
+            maxLength: baseSchema.maxLength,
+            description: extraProps?.description || baseSchema.description,
+          };
+
+          // Replace the $ref schema with the flattened one
+          param.schema = merged;
+        }
+      }
+    }
+  }
+
+  return [
+    {
+      from: /[\s\S]*/, // match entire document
+      to: yaml.dump(doc, { lineWidth: -1 }), // prevent line wrapping
+    },
+  ];
+}
+
+/**
+ * Get rid of the constraints on CamundaKey schemas. We don't want to clutter the docs with these constraints,
+ * but we do want them to be present in the schema for validation purposes.
+ */
+function stripCamundaKeyConstraintsForDocs(originalSpec) {
+  const doc = yaml.load(originalSpec);
+
+  const camundaKey = doc.components?.schemas?.CamundaKey;
+  if (camundaKey) {
+    delete camundaKey.pattern;
+    delete camundaKey.minLength;
+    delete camundaKey.maxLength;
+  }
+
+  return [
+    {
+      from: /[\s\S]*/, // match entire document
+      to: yaml.dump(doc, { lineWidth: -1 }),
     },
   ];
 }
