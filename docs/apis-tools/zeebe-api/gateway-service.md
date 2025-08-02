@@ -339,7 +339,10 @@ Only processes with none start events can be started through this command.
 :::
 
 :::note
-Start instructions have the same [limitations as process instance modification](/components/concepts/process-instance-modification.md#limitations), e.g., it is not possible to start at a sequence flow.
+Start and runtime instructions have the
+same [limitations as process instance modification](/components/concepts/process-instance-modification.md#limitations),
+e.g., it is not possible to start at a sequence flow or terminate a process instance when a sequence
+flow completes.
 :::
 
 ### Input: `CreateProcessInstanceRequest`
@@ -363,8 +366,17 @@ message CreateProcessInstanceRequest {
   // will start at the start event. If non-empty the process instance will apply start
   // instructions after it has been created
   repeated ProcessInstanceCreationStartInstruction startInstructions = 5;
+
   // the tenant id of the process definition
   string tenantId = 6;
+
+  // a reference key chosen by the user and will be part of all records resulted from this operation
+  optional uint64 operationReference = 7;
+
+  // a list of runtime instruction that can modify the behavior of the process
+  // instance during its execution
+  // if empty (default), the process instance will be executed normally
+  repeated ProcessInstanceCreationRuntimeInstruction runtimeInstructions = 8;
 }
 
 message ProcessInstanceCreationStartInstruction {
@@ -378,6 +390,18 @@ message ProcessInstanceCreationStartInstruction {
 
   // element ID
   string elementId = 1;
+}
+
+message ProcessInstanceCreationRuntimeInstruction {
+  oneof instruction {
+    TerminateProcessInstanceInstruction terminate = 1;
+  }
+}
+
+message TerminateProcessInstanceInstruction {
+  // the ID of the process element after which the process instance should be
+  // terminated
+  string afterElementId = 1;
 }
 ```
 
