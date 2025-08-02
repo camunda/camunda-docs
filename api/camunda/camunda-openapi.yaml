@@ -5515,30 +5515,37 @@ components:
       allOf:
         - $ref: "#/components/schemas/CamundaKey"
         - description: Key for a process instance. Only use values returned by the system.
+          format: ProcessInstanceKey
     DeploymentKey:
       allOf:
         - $ref: "#/components/schemas/CamundaKey"
         - description: Key for a deployment.
+          format: DeploymentKey
     UserTaskKey:
       allOf:
         - $ref: "#/components/schemas/CamundaKey"
         - description: Key for a user task. Only use values returned by the system.
+          format: UserTaskKey
     ProcessDefinitionKey:
       allOf:
         - $ref: "#/components/schemas/CamundaKey"
         - description: Key for a process definition. Only use values returned by the system.
+          format: ProcessDefinitionKey
     ElementInstanceKey:
       allOf:
         - $ref: "#/components/schemas/CamundaKey"
         - description: Key for a element instance. Only use values returned by the system.
+          format: ElementInstanceKey
     FormKey:
       allOf:
         - $ref: "#/components/schemas/CamundaKey"
         - description: Key for a form. Only use values returned by the system.
+          format: FormKey
     VariableKey:
       allOf:
         - $ref: "#/components/schemas/CamundaKey"
         - description: Key for a variable. Only use values returned by the system.
+          format: VariableKey
     ResourceKey:
       oneOf:
         - $ref: "#/components/schemas/ProcessDefinitionKey"
@@ -5546,6 +5553,7 @@ components:
         - $ref: "#/components/schemas/FormKey"
         - $ref: "#/components/schemas/DecisionDefinitionKey"
         - description: The assigned key, which acts as a unique identifier for this Resource.
+          format: ResourceKey
     ScopeKey:
       allOf:
         - $ref: "#/components/schemas/CamundaKey"
@@ -5554,26 +5562,32 @@ components:
       allOf:
         - $ref: "#/components/schemas/CamundaKey"
         - description: Key for a incident. Only use values returned by the system.
+          format: ScopeKey
     JobKey:
       allOf:
         - $ref: "#/components/schemas/CamundaKey"
         - description: Key for a job. Only use values returned by the system.
+          format: JobKey
     MessageSubscriptionKey:
       allOf:
         - $ref: "#/components/schemas/CamundaKey"
         - description: Key for a message subscription. Only use values returned by the system.
+          format: MessageSubscriptionKey
     MessageCorrelationKey:
       allOf:
         - $ref: "#/components/schemas/CamundaKey"
         - description: Key for a message correlation. Only use values returned by the system.
+          format: MessageCorrelationKey
     DecisionDefinitionKey:
       allOf:
         - $ref: "#/components/schemas/CamundaKey"
         - description: Key for a decision definition. Only use values returned by the system.
+          format: DecisionDefinitionKey
     DecisionRequirementsKey:
       allOf:
         - $ref: "#/components/schemas/CamundaKey"
         - description: Key for a decision requirements definition. Only use values returned by the system.
+          format: DecisionRequirementsKey
     AuthorizationKey:
       allOf:
         - $ref: "#/components/schemas/CamundaKey"
@@ -5582,6 +5596,7 @@ components:
       allOf:
         - $ref: "#/components/schemas/CamundaKey"
         - description: Key for an message. Only use values returned by the system.
+          format: MessageKey
     DecisionInstanceKey:
       allOf:
         - $ref: "#/components/schemas/CamundaKey"
