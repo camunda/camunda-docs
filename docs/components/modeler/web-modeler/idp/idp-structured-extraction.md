@@ -6,19 +6,50 @@ description: "Structured data extraction allows you to extract data from structu
 
 Use this extraction method to extract data from [structured documents](idp-key-concepts.md#structured-documents).
 
+## About structured data extraction
+
+Use this extraction method for documents with a consistent layout, such as invoices, tax forms (for example, W-2s, VAT declarations), and loan or insurance applications.
+
+Structured extraction allows you to:
+
+- Upload a sample document.
+- Automatically discover fields and tables.
+- Configure the fields and tables you want included in your template.
+- Receive confidence scores to each extracted value.
+- Build reusable templates.
+- Integrate extracted data into BPMN processes via variables.
+
+## About OCR
+
+Optical Character Recognition (OCR) technology is used to detect and extract text and layout from scanned or digital documents.
+
+Structured data extraction currently uses Amazon Textract:
+
+- Extracts text, layout, and key-value pairs.
+- Supports horizontal text only.
+- Supports English handwriting.
+- Supported languages for typed characters: Spanish, German, French, Italian, Portuguese.
+
+Limitations to consider:
+
+- No language detection.
+- No vertical text support.
+- Limited support for complex custom fields.
+- No detection of table headers.
+
 ## Data extraction steps
 
-Complete the following steps to configure and publish an unstructured data extraction project:
+Complete the following steps to configure and publish a structured data extraction template:
 
-1. [Upload documents]: Upload a set of sample documents to use for training the extraction model.
-1. [Extract fields]: Add and configure the [extraction fields](idp-key-concepts.md#extraction-fields) you want to use to extract data.
-1. [Evaluate extraction]: Test the data extraction using your uploaded document(s) and evaluate the extraction results.
-1. [Publish]: Publish the project to make it available for use in your processes and [document automation](idp-document-automation.md) projects.
+1. [Upload sample document and run extraction](#upload): Upload a sample document and run an extraction of document fields and tables.
+1. [Configure template](#configure): Select the fields and tables you want to include in your template.
+1. [Test data extraction](#test): (Optional) Upload documents to test your selection before publishing it as a template.
+1. [Publish](#publish): Publish the project to make it available for use in your BPMN diagrams, processes, and [document automation](idp-document-automation.md) projects.
 
-## Upload documents
+## Upload a sample document and run extraction {#upload}
 
-## Extract fields
+## Configure template {#configure}
 
-## Evaluate extraction
+## Test data extraction {#test}
 
-## Publish
+## Publish {#publish}

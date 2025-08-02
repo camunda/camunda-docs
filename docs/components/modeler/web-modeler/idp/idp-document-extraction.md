@@ -20,28 +20,19 @@ Document extraction templates form the basis for using IDP in your end-to-end pr
 
 To create a new document extraction template:
 
-1. In your [IDP application](idp-applications.md), select **Create document extraction template** or **Create new** > **Document extraction**.
-1. Configure the general document extraction template information and select the extraction method.
+1. In your [IDP application](idp-applications.md), click **Create extraction project** to open the Create new project modal.
    <img src={IdpExtractionProjectModalImg} alt="Create an extraction project modal" width="600px" style={{marginTop: '0'}} />
-
-   - **Name**: Enter a descriptive name for the type of document, such as “Invoice type A” for example.
-   - **Description**: Enter a description to provide more detailed information about the document type.
-   - **Extraction method**: Select the **Unstructured data extraction** extraction method.
-
-   <!-- - **Extraction method**: Select an extraction method:
-     - **Form extraction**: Select this method to extract data from structured documents.
-     - **Unstructured data extraction**: Select this method to extract data from unstructured documents. -->
-
+1. Select the **Extraction method** depending on whether your documents contain structured or unstructured data.
+   - **Unstructured data extraction**: Extract data from unstructured documents.
+   - **Structured form extraction**: Extract data from structured documents.
+1. **Name**: Enter a descriptive name for the type of document, such as “Invoice type A” for example.
+1. **Description**: Enter a description to provide more detailed information about the document type.
 1. Click **Create** to create and open the new document extraction template.
-1. Configure the document extraction template to [extract unstructured data](idp-unstructured-extraction.md).
+1. Configure and publish the template:
 
-   <!-- - [Extract structured data](idp-structured-extraction.md): Configure and publish a structured data extraction project.
-   - [unstructured data extraction project](idp-unstructured-extraction.md): Configure and publish an unstructured data extraction project. -->
+   - [Extract unstructured data](idp-unstructured-extraction.md): Configure and publish an unstructured data extraction template.
+   - [Extract structured data](idp-structured-extraction.md): Configure and publish a structured data extraction template.
 
-:::note
-The **Form Extraction** extraction method is currently in development for a future release. This method will allow you to create a document extraction template for extracting data from structured document types.
-:::
-
-<!-- :::tip
+:::tip
 Not sure which extraction method to use? See [structured and unstructured documents](idp-key-concepts.md#structured-and-unstructured-documents) to help determine what type of document(s) you will be processing.
-::: -->
+:::
