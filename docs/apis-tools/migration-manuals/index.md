@@ -15,7 +15,7 @@ This guide focuses on the API and SDK transitions required in an upgrade from Ca
 
 Camunda 8.8 introduces a significant architectural evolution that impacts both infrastructure deployment and application integration:
 
-- A new [orchestration cluster](/docs/components/whats-new-in-88.md#orchestration-cluster) architecture.
+- A new [orchestration cluster](/components/whats-new-in-88.md#orchestration-cluster) architecture.
 - Unified APIs for a more consistent developer experience.
 - Updated authentication models.
 - Deprecation of several legacy components.
