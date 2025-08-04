@@ -17,5 +17,6 @@ module.exports = {
         "components/modeler/reference/modeling-guidance/rules/no-loop",
       ],
     },
+    "components/modeler/element-templates/modeler-element-templates",
   ],
 };
