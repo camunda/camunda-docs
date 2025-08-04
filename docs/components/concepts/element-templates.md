@@ -1,7 +1,7 @@
 ---
 id: element-templates
 title: Element templates
-description: A process application is a type of folder that contains a set of related files you can work on and deploy as a single bundle.
+description: An element template is a way to extend the Modeler with domain-specific diagram elements.
 ---
 
 import serviceTaskNoTemplate from './assets/element-templates/service-task-no-template.png'
@@ -9,7 +9,7 @@ import serviceTaskWithTemplate from './assets/element-templates/service-task-wit
 import propretiesNoTemplate from './assets/element-templates/properties-no-template.png'
 import propretiesWithTemplate from './assets/element-templates/properties-with-template.png'
 
-An **element template** is a way to extend the [Modeler](../modeler/about-modeler.md) with domain-specific diagram elements, such as service and user tasks. They allow to customize how a BPMN element is shown and how it can be configured by process developers.
+An **element template** is a way to extend the [Modeler](../modeler/about-modeler.md) with domain-specific diagram elements, such as service and user tasks. They allow you to customize how a BPMN element is shown and how it can be configured by process developers.
 
 The following example demonstrates how a generic service task can be transformed into a customized user interface that guides users through its configuration process.
 | Without an element template | With an element template |
