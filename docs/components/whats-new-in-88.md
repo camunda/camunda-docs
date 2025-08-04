@@ -31,13 +31,13 @@ Important changes introduced in Camunda 8.8 are summarized as follows:
     <td>The Orchestration Cluster (previously automation cluster) is now the core Camunda 8 component.</td>
 </tr>
 <tr>
-    <td>[Identity, authentication, and authorization](#identity-authentication-and-authorization)</td>
+    <td>[Identity, authentication, and authorization](#identity)</td>
     <td><p>Identity management is now split into two scopes for improved access management, performance, and flexible integration with any OIDC-compatible Identity Provider:</p><p><ul><li><p>**Identity**: Manages authentication and fine-grained authorizations for the Orchestration Cluster and its APIs.</p></li>
             <li><p>**Management Identity**: Controls access for Web Modeler, Console and Optimize.</p></li></ul></p></td>
 </tr>
 <tr>
     <td>[APIs & tools](#apis-and-tools)</td>
-    <td>New and changed APIs and tools are introduced in Camunda 8.8.</td>
+    <td>New and changed APIs & tools are introduced in Camunda 8.8.</td>
 </tr>
 </table>
 
