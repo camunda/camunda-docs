@@ -24,6 +24,13 @@ function preGenerateDocs(config) {
   }
 
   fs.writeFileSync(config.specPath, updatedSpec);
+
+  // Add eventual consistency admonitions based on vendor extension `x-eventually-consistent: true`
+  addEventualConsistencyAdmonition(config.specPath);
+
+  // This must happen after eventual consistency admonitions (and any other transforms that need vendor extensions)
+  // Remove all vendor extensions. Docusaurus does not like them. See: https://github.com/PaloAltoNetworks/docusaurus-openapi-docs/issues/891
+  removeVendorExtensions(config.specPath);
 }
 
 function postGenerateDocs(config) {
@@ -362,6 +369,120 @@ function stripCamundaKeyConstraintsForDocs(originalSpec) {
       to: yaml.dump(doc, { lineWidth: -1 }),
     },
   ];
+}
+
+/**
+ * Add a documentation note for eventual consistency to all endpoints that need it.
+ */
+function addEventualConsistencyAdmonition(specFilePath) {
+  try {
+    // Read and parse the YAML file
+    const fileContents = fs.readFileSync(specFilePath, "utf8");
+    const spec = yaml.load(fileContents);
+    let admonitionsAdded = 0;
+    // Process each path and operation for eventual consistency
+    if (spec.paths) {
+      Object.keys(spec.paths).forEach((pathKey) => {
+        const pathItem = spec.paths[pathKey];
+
+        // Check if the path item itself has the eventual consistency marker
+        const pathHasEventualConsistency =
+          pathItem["x-eventually-consistent"] === true;
+
+        Object.keys(pathItem).forEach((method) => {
+          const operation = pathItem[method];
+
+          // Skip non-operation properties (like x-eventually-consistent, parameters, etc.)
+          if (
+            !operation ||
+            typeof operation !== "object" ||
+            ![
+              "get",
+              "post",
+              "put",
+              "patch",
+              "delete",
+              "options",
+              "head",
+              "trace",
+            ].includes(method)
+          ) {
+            return;
+          }
+
+          // Check if this operation has the eventual consistency marker (either on the operation or inherited from path)
+          const operationHasEventualConsistency =
+            operation["x-eventually-consistent"] === true;
+
+          if (operationHasEventualConsistency || pathHasEventualConsistency) {
+            // Add the admonition to the description
+            const admonition =
+              "\n\n:::tip\nThis endpoint provides eventually consistent data. There may be a slight delay between when data is written and when it becomes available for reading.\n:::\n";
+
+            if (operation.description) {
+              operation.description += admonition;
+            } else {
+              operation.description = admonition.trim();
+            }
+            admonitionsAdded++;
+          }
+        });
+      });
+    }
+
+    // Write the updated spec back to the file
+    const updatedYaml = yaml.dump(spec, {
+      lineWidth: -1,
+      noRefs: true,
+      sortKeys: false,
+    });
+    fs.writeFileSync(specFilePath, updatedYaml, "utf8");
+
+    console.log(
+      `✅ Added ${admonitionsAdded} eventual consistency admonitions`
+    );
+  } catch (error) {
+    console.error("❌ Error processing eventual consistency:", error);
+  }
+}
+
+// Remove all vendor extensions recursively (x-eventually-consistent, x-semantic-type, etc.)
+function removeVendorExtensions(specFilePath) {
+  function recursivelyRemoveVendorExtension(obj) {
+    if (obj && typeof obj === "object") {
+      if (Array.isArray(obj)) {
+        obj.forEach((item) => recursivelyRemoveVendorExtension(item));
+      } else {
+        Object.keys(obj).forEach((key) => {
+          if (key.startsWith("x-")) {
+            delete obj[key];
+          } else {
+            recursivelyRemoveVendorExtension(obj[key]);
+          }
+        });
+      }
+    }
+  }
+
+  try {
+    // Read and parse the YAML file
+    const fileContents = fs.readFileSync(specFilePath, "utf8");
+    const spec = yaml.load(fileContents);
+
+    recursivelyRemoveVendorExtension(spec);
+
+    // Write the updated spec back to the file
+    const updatedYaml = yaml.dump(spec, {
+      lineWidth: -1,
+      noRefs: true,
+      sortKeys: false,
+    });
+    fs.writeFileSync(specFilePath, updatedYaml, "utf8");
+
+    console.log("✅ Removed all vendor extensions");
+  } catch (error) {
+    console.error("❌ Error removing vendor extensions:", error);
+  }
 }
 
 module.exports = {

@@ -1134,6 +1134,11 @@ paths:
       summary: Get user task
       description: |
         Get the user task by the user task key.
+
+
+        :::tip
+        This endpoint provides eventually consistent data. There may be a slight delay between when data is written and when it becomes available for reading.
+        :::
       parameters:
         - name: userTaskKey
           in: path
@@ -1214,6 +1219,11 @@ paths:
         Get the form of a user task.
 
         Note that this endpoint will only return linked forms. This endpoint does not support embedded forms.
+
+
+        :::tip
+        This endpoint provides eventually consistent data. There may be a slight delay between when data is written and when it becomes available for reading.
+        :::
       parameters:
         - name: userTaskKey
           in: path
@@ -1290,6 +1300,11 @@ paths:
       summary: Search user tasks
       description: |
         Search for user tasks based on given criteria.
+
+
+        :::tip
+        This endpoint provides eventually consistent data. There may be a slight delay between when data is written and when it becomes available for reading.
+        :::
       requestBody:
         required: false
         content:
@@ -1320,6 +1335,11 @@ paths:
       summary: Search user task variables
       description: |
         Search for user task variables based on given criteria.
+
+
+        :::tip
+        This endpoint provides eventually consistent data. There may be a slight delay between when data is written and when it becomes available for reading.
+        :::
       parameters:
         - name: userTaskKey
           in: path
@@ -1353,6 +1373,11 @@ paths:
       summary: Search variables
       description: |
         Search for process and local variables based on given criteria.
+
+
+        :::tip
+        This endpoint provides eventually consistent data. There may be a slight delay between when data is written and when it becomes available for reading.
+        :::
       requestBody:
         required: false
         content:
@@ -1383,6 +1408,11 @@ paths:
       summary: Get variable
       description: |
         Get the variable by the variable key.
+
+
+        :::tip
+        This endpoint provides eventually consistent data. There may be a slight delay between when data is written and when it becomes available for reading.
+        :::
       parameters:
         - name: variableKey
           in: path
@@ -1469,6 +1499,11 @@ paths:
       summary: Search process definitions
       description: |
         Search for process definitions based on given criteria.
+
+
+        :::tip
+        This endpoint provides eventually consistent data. There may be a slight delay between when data is written and when it becomes available for reading.
+        :::
       requestBody:
         required: false
         content:
@@ -1499,6 +1534,11 @@ paths:
       summary: Get process definition
       description: |
         Returns process definition as JSON.
+
+
+        :::tip
+        This endpoint provides eventually consistent data. There may be a slight delay between when data is written and when it becomes available for reading.
+        :::
       parameters:
         - name: processDefinitionKey
           in: path
@@ -1537,6 +1577,11 @@ paths:
       summary: Get process definition XML
       description: |
         Returns process definition as XML.
+
+
+        :::tip
+        This endpoint provides eventually consistent data. There may be a slight delay between when data is written and when it becomes available for reading.
+        :::
       parameters:
         - name: processDefinitionKey
           in: path
@@ -1584,6 +1629,11 @@ paths:
         Get the start form of a process.
 
         Note that this endpoint will only return linked forms. This endpoint does not support embedded forms.
+
+
+        :::tip
+        This endpoint provides eventually consistent data. There may be a slight delay between when data is written and when it becomes available for reading.
+        :::
       parameters:
         - name: processDefinitionKey
           in: path
@@ -1715,6 +1765,11 @@ paths:
       summary: Get process instance
       description: |
         Get the process instance by the process instance key.
+
+
+        :::tip
+        This endpoint provides eventually consistent data. There may be a slight delay between when data is written and when it becomes available for reading.
+        :::
       parameters:
         - name: processInstanceKey
           in: path
@@ -1751,6 +1806,11 @@ paths:
       summary: Get process instance sequence flows
       description: |
         Get sequence flows taken by the process instance.
+
+
+        :::tip
+        This endpoint provides eventually consistent data. There may be a slight delay between when data is written and when it becomes available for reading.
+        :::
       parameters:
         - name: processInstanceKey
           in: path
@@ -1781,6 +1841,11 @@ paths:
       summary: Get process instance statistics
       description: |
         Get statistics about elements by the process instance key.
+
+
+        :::tip
+        This endpoint provides eventually consistent data. There may be a slight delay between when data is written and when it becomes available for reading.
+        :::
       parameters:
         - name: processInstanceKey
           in: path
@@ -1811,6 +1876,11 @@ paths:
       summary: Search process instances
       description: |
         Search for process instances based on given criteria.
+
+
+        :::tip
+        This endpoint provides eventually consistent data. There may be a slight delay between when data is written and when it becomes available for reading.
+        :::
       requestBody:
         required: false
         content:
@@ -1840,6 +1910,11 @@ paths:
       summary: Search for incidents associated with a process instance
       description: |
         Search for incidents caused by the process instance or any of its called process or decision instances.
+
+
+        :::tip
+        This endpoint provides eventually consistent data. There may be a slight delay between when data is written and when it becomes available for reading.
+        :::
       parameters:
         - name: processInstanceKey
           in: path
@@ -2150,6 +2225,11 @@ paths:
       summary: Get call hierarchy for process instance
       description: |
         Returns the call hierarchy for a given process instance, showing its ancestry up to the root instance.
+
+
+        :::tip
+        This endpoint provides eventually consistent data. There may be a slight delay between when data is written and when it becomes available for reading.
+        :::
       parameters:
         - name: processInstanceKey
           in: path
@@ -2188,6 +2268,11 @@ paths:
       summary: Search element instances
       description: |
         Search for element instances based on given criteria.
+
+
+        :::tip
+        This endpoint provides eventually consistent data. There may be a slight delay between when data is written and when it becomes available for reading.
+        :::
       requestBody:
         required: false
         content:
@@ -2218,6 +2303,11 @@ paths:
       summary: Get element instance
       description: |
         Returns element instance as JSON.
+
+
+        :::tip
+        This endpoint provides eventually consistent data. There may be a slight delay between when data is written and when it becomes available for reading.
+        :::
       parameters:
         - name: elementInstanceKey
           in: path
@@ -2256,6 +2346,11 @@ paths:
       summary: Search decision definitions
       description: |
         Search for decision definitions based on given criteria.
+
+
+        :::tip
+        This endpoint provides eventually consistent data. There may be a slight delay between when data is written and when it becomes available for reading.
+        :::
       requestBody:
         required: false
         content:
@@ -2286,6 +2381,11 @@ paths:
       summary: Get decision definition
       description: |
         Returns a decision definition by key.
+
+
+        :::tip
+        This endpoint provides eventually consistent data. There may be a slight delay between when data is written and when it becomes available for reading.
+        :::
       parameters:
         - name: decisionDefinitionKey
           in: path
@@ -2324,6 +2424,11 @@ paths:
       summary: Get decision definition XML
       description: |
         Returns decision definition as XML.
+
+
+        :::tip
+        This endpoint provides eventually consistent data. There may be a slight delay between when data is written and when it becomes available for reading.
+        :::
       parameters:
         - name: decisionDefinitionKey
           in: path
@@ -2362,6 +2467,11 @@ paths:
       summary: Search decision requirements
       description: |
         Search for decision requirements based on given criteria.
+
+
+        :::tip
+        This endpoint provides eventually consistent data. There may be a slight delay between when data is written and when it becomes available for reading.
+        :::
       requestBody:
         required: false
         content:
@@ -2392,6 +2502,11 @@ paths:
       summary: Get decision requirements
       description: |
         Returns Decision Requirements as JSON.
+
+
+        :::tip
+        This endpoint provides eventually consistent data. There may be a slight delay between when data is written and when it becomes available for reading.
+        :::
       parameters:
         - name: decisionRequirementsKey
           in: path
@@ -2430,6 +2545,11 @@ paths:
       summary: Get decision requirements XML
       description: |
         Returns decision requirements as XML.
+
+
+        :::tip
+        This endpoint provides eventually consistent data. There may be a slight delay between when data is written and when it becomes available for reading.
+        :::
       parameters:
         - name: decisionRequirementsKey
           in: path
@@ -2468,6 +2588,11 @@ paths:
       summary: Search decision instances
       description: |
         Search for decision instances based on given criteria.
+
+
+        :::tip
+        This endpoint provides eventually consistent data. There may be a slight delay between when data is written and when it becomes available for reading.
+        :::
       requestBody:
         required: false
         content:
@@ -2498,6 +2623,11 @@ paths:
       summary: Get decision instance
       description: |
         Returns a decision instance.
+
+
+        :::tip
+        This endpoint provides eventually consistent data. There may be a slight delay between when data is written and when it becomes available for reading.
+        :::
       parameters:
         - name: decisionInstanceId
           in: path
@@ -4387,6 +4517,11 @@ paths:
         Download a document from the Camunda 8 cluster.
 
         Note that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)
+
+
+        :::tip
+        This endpoint provides eventually consistent data. There may be a slight delay between when data is written and when it becomes available for reading.
+        :::
       parameters:
         - name: documentId
           in: path
@@ -4433,6 +4568,11 @@ paths:
         Delete a document from the Camunda 8 cluster.
 
         Note that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)
+
+
+        :::tip
+        This endpoint provides eventually consistent data. There may be a slight delay between when data is written and when it becomes available for reading.
+        :::
       parameters:
         - name: documentId
           in: path
@@ -4549,6 +4689,11 @@ paths:
       summary: Search users
       description: |
         Search for users based on given criteria.
+
+
+        :::tip
+        This endpoint provides eventually consistent data. There may be a slight delay between when data is written and when it becomes available for reading.
+        :::
       requestBody:
         content:
           application/json:
@@ -4711,6 +4856,11 @@ paths:
       summary: Search incidents
       description: |
         Search for incidents based on given criteria.
+
+
+        :::tip
+        This endpoint provides eventually consistent data. There may be a slight delay between when data is written and when it becomes available for reading.
+        :::
       requestBody:
         required: false
         content:
@@ -4741,6 +4891,11 @@ paths:
       summary: Get incident
       description: |
         Returns incident as JSON.
+
+
+        :::tip
+        This endpoint provides eventually consistent data. There may be a slight delay between when data is written and when it becomes available for reading.
+        :::
       parameters:
         - name: incidentKey
           in: path
@@ -4913,6 +5068,11 @@ paths:
         :::info
         Currently, this endpoint only supports RPA resources.
         :::
+
+
+        :::tip
+        This endpoint provides eventually consistent data. There may be a slight delay between when data is written and when it becomes available for reading.
+        :::
       parameters:
         - name: resourceKey
           in: path
@@ -4945,6 +5105,11 @@ paths:
         Returns the content of a deployed resource.
         :::info
         Currently, this endpoint only supports RPA resources.
+        :::
+
+
+        :::tip
+        This endpoint provides eventually consistent data. There may be a slight delay between when data is written and when it becomes available for reading.
         :::
       parameters:
         - name: resourceKey
@@ -5084,7 +5249,12 @@ paths:
         - Batch operation
       operationId: getBatchOperation
       summary: Get batch operation
-      description: Get batch operation by key.
+      description: |
+        Get batch operation by key.
+
+        :::tip
+        This endpoint provides eventually consistent data. There may be a slight delay between when data is written and when it becomes available for reading.
+        :::
       parameters:
         - name: batchOperationKey
           in: path
@@ -5120,7 +5290,12 @@ paths:
         - Batch operation
       operationId: searchBatchOperations
       summary: Search batch operations
-      description: Search for batch operations based on given criteria.
+      description: |
+        Search for batch operations based on given criteria.
+
+        :::tip
+        This endpoint provides eventually consistent data. There may be a slight delay between when data is written and when it becomes available for reading.
+        :::
       requestBody:
         required: false
         content:
@@ -5263,7 +5438,12 @@ paths:
         - Batch operation
       operationId: searchBatchOperationItems
       summary: Search batch operation items
-      description: Search for batch operation items based on given criteria.
+      description: |
+        Search for batch operation items based on given criteria.
+
+        :::tip
+        This endpoint provides eventually consistent data. There may be a slight delay between when data is written and when it becomes available for reading.
+        :::
       requestBody:
         required: false
         content:
@@ -5338,11 +5518,12 @@ components:
       allOf:
         - $ref: "#/components/schemas/CamundaKey"
         - description: Key for a scope. Only use values returned by the system.
+          format: ScopeKey
     IncidentKey:
       allOf:
         - $ref: "#/components/schemas/CamundaKey"
         - description: Key for a incident. Only use values returned by the system.
-          format: ScopeKey
+          format: IncidentKey
     JobKey:
       allOf:
         - $ref: "#/components/schemas/CamundaKey"
@@ -5372,6 +5553,7 @@ components:
       allOf:
         - $ref: "#/components/schemas/CamundaKey"
         - description: Key for an authorization. Only use values returned by the system.
+          format: AuthorizationKey
     MessageKey:
       allOf:
         - $ref: "#/components/schemas/CamundaKey"
@@ -5381,10 +5563,12 @@ components:
       allOf:
         - $ref: "#/components/schemas/CamundaKey"
         - description: Key for an decision instance. Only use values returned by the system.
+          format: DecisionInstanceKey
     SignalKey:
       allOf:
         - $ref: "#/components/schemas/CamundaKey"
         - description: Key for an signal. Only use values returned by the system.
+          format: SignalKey
     BatchOperationKey:
       oneOf:
         - $ref: "#/components/schemas/CamundaKey"
