@@ -106,6 +106,17 @@ AWS_REQUEST_CHECKSUM_CALCULATION=WHEN_REQUIRED
 
 This disables the additional checksum calculation in the S3 client and should resolve the issue.
 
+## Zeebe Backup with Azure Blob Storage
+
+When using an Azure backup store, requests to the backup API may time out due to [a bug in the Azure SDK](https://github.com/Azure/azure-sdk-for-java/issues/46231).
+The root cause of this issue is a deadlock in the Azure SDK, when virtual threads are used.
+This deadlock is especially likely to occur on systems with many partitions per broker and few CPU cores available.
+Set the following environment variable on your Zeebe brokers to disable the use of virtual threads in the Azure SDK:
+
+```
+AZURE_SDK_SHARED_THREADPOOL_USEVIRTUALTHREADS=false
+```
+
 ## Zeebe Ingress (gRPC)
 
 Zeebe requires an Ingress controller that supports `gRPC` which is built on top of `HTTP/2` transport layer. Therefore, to expose the Zeebe Gateway externally, you need the following:
