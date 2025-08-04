@@ -4,7 +4,10 @@ title: "Deploy an AKS cluster with Terraform (advanced)"
 description: "Deploy an Azure Kubernetes Service (AKS) cluster with a Terraform module for a quick Camunda 8 setup."
 ---
 
-This guide provides a detailed tutorial for deploying an Azure Kubernetes Service (AKS) cluster, tailored specifically to deploying Camunda 8 using Terraform, a popular Infrastructure as Code (IaC) tool.
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+This guide provides a detailed tutorial for deploying an Azure Kubernetes Service (AKS) cluster, tailored specifically for deploying Camunda 8 using Terraform, a popular Infrastructure as Code (IaC) tool.
 
 This guide is designed to help you leverage the power of Infrastructure as Code (IaC) to streamline and reproduce your cloud infrastructure setup. By walking through the essentials of setting up an AKS cluster, and provisioning managed Azure resources such as Azure Database for PostgreSQL, this guide demonstrates how to use Terraform with Azure. It makes the process accessible even to those new to Terraform or IaC concepts. It utilizes Azure-managed services where available, offering these as optional components for added convenience and maintainability.
 
@@ -21,10 +24,11 @@ If you are completely new to Terraform and the concept of IaC, consider reading 
 - [Terraform](https://developer.hashicorp.com/terraform/downloads) for provisioning infrastructure as code.
 - [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with your AKS cluster.
 - [jq](https://stedolan.github.io/jq/download/) to parse and manipulate JSON (e.g. Terraform outputs).
+- (optional) Custom domain name/[DNS zone](https://learn.microsoft.com/en-us/azure/dns/dns-zones-records) in Azure DNS. This allows you to expose Camunda 8 endpoints to an external network via the configured ingress.
 - **Azure service quotas**
   - Check your quotas for **Virtual Networks**, **vCPU cores**, and **Storage Accounts** in the target region: [Azure subscription and service limits](https://learn.microsoft.com/azure/azure-resource-manager/management/azure-subscription-service-limits).
   - If you reach a limit, you can [request a quota increase through the Azure portal](https://learn.microsoft.com/en-us/azure/extended-zones/request-quota-increase).
-  - This guide uses **GNU Bash** for all shell commands.
+- This guide uses **GNU Bash** for all shell commands.
 
 For the exact tool versions we’ve tested against, see the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file in the repository.
 
@@ -174,7 +178,41 @@ The [Azure Terraform provider](https://registry.terraform.io/providers/hashicorp
 
 For all environments, create a dedicated Azure AD service principal and assign only the necessary permissions. You can create and assign roles via the [Azure Portal](https://portal.azure.com/) or with the Azure CLI.
 
+<Tabs groupId="domain" defaultValue="existing-sp" queryString values={
+[
+{label: 'Existing SP', value: 'existing-sp' },
+{label: 'New SP', value: 'new-sp' },
+]}>
+
+<TabItem value="existing-sp">
+
+To log in using an existing Azure Service Principal, you need the `appId` and `tenant` values associated with the Service Principal. These credentials allow Terraform to authenticate and provision resources in your Azure subscription.
+
+If you need help finding your tenant ID, refer to [Find your Azure subscription tenant ID](https://learn.microsoft.com/en-us/azure/azure-portal/get-subscription-tenant-id).
+
+Use the following command to log in (you will be prompted for the password):
+
+```bash
+az login --service-principal \
+  -u <appId> \
+  --tenant <tenant-id>
+```
+
+Replace `<appId>`, `<password>`, and `<tenant-id>` with the actual values of your Service Principal.
+
+Also, ensure that you export the `<appId>` by running the below command after logging in as the SP, as it will be needed [in the next step](#creating-terraformtfvars).
+
+```shell
+export AZURE_SP_ID=$(az account show --query user.name -o tsv)
+```
+
+</TabItem>
+
+<TabItem value="new-sp">
+
 To create a new service principal and assign it the required permissions:
+
+Feel free to change the example name.
 
 ```bash
 az ad sp create-for-rbac \
@@ -188,11 +226,88 @@ This will return a JSON object with `appId`, `password`, and `tenant`. These val
 ```bash
 az login --service-principal \
   -u <appId> \
-  -p <password> \
   --tenant <tenant-id>
 ```
 
-Note that the `appId` will be needed as a value for `terraform_sp_app_id` in `terraform.tfvars` [in a later step](#creating-terraformtfvars).
+You will be prompted to enter the password interactively.
+
+Replace `<appId>`, `<password>`, and `<tenant-id>` with the actual values of your Service Principal.
+
+Also, ensure that you export the `<appId>` by running the below command after logging in as the SP, as it will be needed [in the next step](#creating-terraformtfvars).
+
+```shell
+export AZURE_SP_ID=$(az account show --query user.name -o tsv)
+```
+
+</TabItem>
+</Tabs>
+
+#### Creating terraform.tfvars
+
+To configure your deployment, create a `terraform.tfvars` file in the root of the `aks-single-region` folder. This file defines critical environment-specific settings like your Azure subscription and the Service Principal used for authentication.
+
+Follow the below guide for getting the necessary values:
+
+<Tabs groupId="domain" defaultValue="with-domain" queryString values={
+[
+{label: 'With domain', value: 'with-domain' },
+{label: 'Without domain', value: 'without-domain' },
+]}>
+
+<TabItem value="with-domain">
+
+First, set the following environment variables:
+
+```shell
+# The domain name that your Azure DNS zone manages
+export TLD=<yourdomain.com>
+# The resource group that your Azure DNS zone belongs to
+export AZURE_DNS_RESOURCE_GROUP=<your-dns-resource-group>
+```
+
+Then, run the following script to create the `terraform.tfvars` file:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/tfvars-domain.sh
+```
+
+##### subscription_id
+
+This value specifies the Azure Subscription ID in which all infrastructure will be deployed, including the AKS cluster, PostgreSQL Flexible Server, and Key Vault. To retrieve your current subscription ID, you can run the following command:
+
+##### terraform_sp_app_id
+
+This is the Application (client) ID of the Azure Service Principal that Terraform uses to configure Role-Based Access Control (RBAC). By providing this ID, Terraform ensures that the Service Principal has the necessary access rights to manage and provision resources within your Azure subscription.
+
+##### dns_zone_id
+
+This value specifies the full Azure resource ID of the DNS Zone used for managing your custom domain.
+
+It is **required** if you are deploying Camunda 8 with a domain name. Terraform uses this value to grant the necessary role-based access control (RBAC) permissions to the `external-dns` Kubernetes add-on, allowing it to create and update DNS records dynamically within your Azure DNS Zone.
+
+If this value is missing or incorrect, `external-dns` will not have permission to manage records, and DNS entries for your Camunda 8 endpoints will not be created.
+
+</TabItem>
+
+<TabItem value="without-domain">
+
+Run the following script to create the `terraform.tfvars` file:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/tfvars-no-domain.sh
+```
+
+##### subscription_id
+
+This value specifies the Azure Subscription ID in which all infrastructure will be deployed, including the AKS cluster, PostgreSQL Flexible Server, and Key Vault. To retrieve your current subscription ID, you can run the following command:
+
+##### terraform_sp_app_id
+
+This is the Application (client) ID of the Azure Service Principal that Terraform uses to configure Role-Based Access Control (RBAC). By providing this ID, Terraform ensures that the Service Principal has the necessary access rights to manage and provision resources within your Azure subscription.
+
+</TabItem>
+
+</Tabs>
 
 #### Create an Azure Storage Account for Terraform state management
 
@@ -206,64 +321,31 @@ https://github.com/camunda/camunda-deployment-references/blob/main/azure/common/
 
 Define the value for `AZURE_LOCATION` with your chosen Azure region (for example, `westeurope`).
 
+:::warning
+For production deployments, always use custom names for your Azure Storage Account and related resources. Storage Account names must be **globally unique** across all Azure subscriptions. The provided example (`export AZURE_STORAGE_ACCOUNT_NAME="camundatfstate"`) is for demonstration only and may not be available. Choose a name that is unique and follows your organization's naming conventions to avoid deployment failures.
+:::
+
 Now, follow these steps to create the storage account with versioning enabled:
 
-1. Open your terminal and ensure the Azure CLI is installed and you're logged in.
-
-2. Run the following script to create a storage account and container for storing your Terraform state. Make sure that you have chosen a globally unique name for the storage account before:
+1. Run the following script to create a storage account and container for storing your Terraform state. Make sure that you have chosen a globally unique name for the storage account before:
 
    ```bash reference
    https://github.com/camunda/camunda-deployment-references/blob/main/azure/common/procedure/storage-account/storage-account-creation.sh
    ```
 
-3. Enable blob versioning to track changes and protect the state file from accidental deletions or overwrites:
+2. Enable blob versioning to track changes and protect the state file from accidental deletions or overwrites:
 
    ```bash reference
    https://github.com/camunda/camunda-deployment-references/blob/main/azure/common/procedure/storage-account/storage-account-versioning.sh
    ```
 
-4. Verify versioning is enabled on the blob container:
+3. Verify versioning is enabled on the blob container:
 
    ```bash reference
    https://github.com/camunda/camunda-deployment-references/blob/main/azure/common/procedure/storage-account/storage-account-verify.sh
    ```
 
 This Azure Storage Account will now securely store your Terraform state files with versioning enabled.
-
-#### Creating terraform.tfvars
-
-To configure your deployment, create a `terraform.tfvars` file in the root of the `aks-single-region` folder. This file defines critical environment-specific settings like your Azure subscription and the Service Principal used for authentication.
-
-Example:
-
-```hcl
-subscription_id     = "00000000-0000-0000-0000-000000000000"
-terraform_sp_app_id = "00000000-0000-0000-0000-000000000000"
-```
-
-##### subscription_id
-
-This value specifies the Azure Subscription ID in which all infrastructure will be deployed, including the AKS cluster, PostgreSQL Flexible Server, and Key Vault. To retrieve your current subscription ID, you can run the following command:
-
-```shell
-az account show --query "id" -o tsv
-```
-
-It is essential to ensure this ID is correct, as Terraform will use it to determine where resources are provisioned.
-
-##### terraform_sp_app_id
-
-This is the Application (client) ID of the Azure Service Principal that Terraform uses for authentication. It **is required** to configure access policies in services such as Key Vault, particularly when using customer-managed keys (CMK) with AKS.
-
-If you created a Service Principal manually, you can retrieve its application ID with the following command:
-
-```shell
-az ad sp list --display-name "<your-service-principal-name>" --query "[0].appId" -o tsv
-```
-
-If you're already using a Service Principal to authenticate (for example, with `az login --service-principal`), this value corresponds to the `appId` you supplied during login.
-
-This value is critical because Terraform uses it to assign the necessary permissions for interacting with encryption keys and other protected resources. If the ID is incorrect or omitted, key-related configurations may fail, and AKS will be unable to use CMK for securing cluster secrets.
 
 #### Initialize Terraform
 
@@ -295,14 +377,27 @@ The main deployment logic is defined in [`main.tf`](https://github.com/camunda/c
 https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/main.tf
 ```
 
+:::warning Azure Key Vault naming
+
+Azure Key Vault names must be **globally unique** across all Azure subscriptions. In the linked script, you are prompted to provide a resource prefix, and the Key Vault will be created as `resource_prefix-kv`. Be sure to choose a prefix that results in a unique Key Vault name, or override it in the KMS module to avoid deployment failures.
+
+:::
 The modules deployed are:
 
-- `network`: Virtual network, AKS subnet, DB subnet, and private endpoint subnet
-- `kms`: Key Vault, encryption key, and UAMI for AKS secret encryption
-- `aks`: Cluster deployment with system and user node pools across AZs
-- `postgres_db`: High-availability PostgreSQL Flexible Server, private DNS, and endpoint
+- `network` ([network.tf](https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/network.tf)): Virtual network, AKS subnet, DB subnet, and private endpoint subnet
+- `kms` ([kms.tf](https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/kms.tf)): Key Vault, encryption key, and UAMI for AKS secret encryption
+- `aks` ([aks.tf](https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/aks.tf)): Cluster deployment with system and user node pools across AZs
+- `postgres_db` ([db.tf](https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/db.tf)): High-availability PostgreSQL Flexible Server, private DNS, and endpoint
 
-#### 2. PostgreSQL module
+#### 2. AKS module
+
+This module exposes a customisable **kubernetes_version** value via the `locals` block:
+
+```hcl reference
+https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/aks.tf#L1-L3
+```
+
+#### 3. PostgreSQL module
 
 This module exposes several **customizable values** via the `locals` block:
 
@@ -327,19 +422,13 @@ We strongly recommend managing sensitive information such as the PostgreSQL user
 
 1. Open a terminal in the chosen reference folder where `config.tf` and other `.tf` files are located.
 
-2. Perform a final initialization for anything changed throughout the guide:
-
-```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/azure/common/procedure/storage-account/storage-account-tf-init.sh#L11-L15
-```
-
-3. Plan the configuration files:
+2. Plan the configuration files:
 
 ```bash
 terraform plan -out cluster.plan # describe what will be created
 ```
 
-4. After reviewing the plan, you can confirm and apply the changes:
+3. After reviewing the plan, you can confirm and apply the changes:
 
 ```bash
 terraform apply cluster.plan     # apply the creation
@@ -358,14 +447,16 @@ You can gain access to the AKS cluster using the `Azure CLI` with the following 
 RESOURCE_GROUP=$(terraform output -raw resource_group_name)
 CLUSTER_NAME=$(terraform output -raw aks_cluster_name)
 
+# Echo the values to verify they are not empty
+echo "RESOURCE_GROUP: $RESOURCE_GROUP"
+echo "CLUSTER_NAME: $CLUSTER_NAME"
+
 # Get credentials using Azure CLI
 az aks get-credentials \
   --resource-group "$RESOURCE_GROUP" \
   --name "$CLUSTER_NAME" \
   --overwrite-existing
 ```
-
-Replace `<your-resource-group>` and `<your-cluster-name>` with the actual values you have input in the root main.tf. `<your-cluster-name>` will be `<your-resource-prefix>-aks`.
 
 After updating the kubeconfig, you can verify your connection to the cluster with `kubectl`:
 
@@ -376,10 +467,47 @@ kubectl get nodes
 Create a namespace for Camunda:
 
 ```bash
-kubectl create namespace camunda
+export CAMUNDA_NAMESPACE="camunda"
+kubectl create namespace "$CAMUNDA_NAMESPACE"
 ```
 
 In the remainder of the guide, we reference the `camunda` namespace to create some required resources in the Kubernetes cluster, such as secrets or one-time setup jobs.
+
+### Configure a high-performance StorageClass
+
+Camunda 8 requires high IOPS for performance-critical components like **Zeebe**, so it is important to use Azure **PremiumV2** disks rather than the default `Standard_LRS`.
+
+This step defines a custom `StorageClass` that:
+
+- Uses **PremiumV2_LRS** Azure Managed Disks
+- Sets a **`Retain`** reclaim policy
+- Uses `WaitForFirstConsumer` volume binding
+- Becomes the default StorageClass for the cluster
+
+#### Apply the StorageClass
+
+Run the following script to apply the new storage class and set it as default:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/storageclass-configure.sh
+```
+
+To verify completion of the operation, run:
+
+```bash
+./procedure/storageclass-verify.sh
+```
+
+<details>
+<summary>Show script <code>procedure/storageclass-verify.sh</code></summary>
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/storageclass-verify.sh
+```
+
+</details>
+
+This must be applied **before installing the Camunda Helm chart** so that PersistentVolumeClaims (PVCs) are provisioned with the correct performance characteristics.
 
 ### Configure the database and associated access
 
@@ -406,83 +534,50 @@ This command creates a secret named `setup-db-secret` and dynamically populates 
 After running the above command, you can verify that the secret was created successfully by using:
 
 ```bash
-kubectl get secret setup-db-secret -o yaml --namespace camunda
+kubectl get secret setup-db-secret -o yaml --namespace "$CAMUNDA_NAMESPACE"
 ```
 
 This should display the secret with the base64 encoded values.
 
-3. Save the following manifest to a file, for example, `setup-postgres-create-db.yml`.
+3. Apply the following manifest to set up the DB:
+
+```bash
+kubectl apply -f ./manifests/setup-postgres-create-db.yml --namespace "$CAMUNDA_NAMESPACE"
+```
+
+<details>
+<summary>Show manifest <code>setup-postgres-create-db.yml</code></summary>
 
 ```yaml reference
 https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/manifests/setup-postgres-create-db.yml
 ```
 
-4. Apply the manifest:
-
-```bash
-kubectl apply -f setup-postgres-create-db.yml --namespace camunda
-```
+</details>
 
 Once the secret is created, the **Job** manifest from the previous step can consume this secret to securely access the database credentials.
 
-5. Once the job is created, monitor its progress using:
+4. Once the job is created, monitor its progress using:
 
 ```bash
-kubectl get job/create-setup-user-db --namespace camunda --watch
+kubectl get job/create-setup-user-db --namespace "$CAMUNDA_NAMESPACE" --watch
 ```
 
 Once the job shows as `Completed`, the users and databases will have been successfully created.
 
-6. View the logs of the job to confirm that the users were created and privileges were granted successfully:
+5. View the logs of the job to confirm that the users were created and privileges were granted successfully:
 
 ```bash
-kubectl logs job/create-setup-user-db --namespace camunda
+kubectl logs job/create-setup-user-db --namespace "$CAMUNDA_NAMESPACE"
 ```
 
-7. Clean up the resources:
+6. Clean up the resources:
 
 ```bash
-kubectl delete job create-setup-user-db --namespace camunda
-kubectl delete secret setup-db-secret --namespace camunda
+kubectl delete job create-setup-user-db --namespace "$CAMUNDA_NAMESPACE"
+kubectl delete secret setup-db-secret --namespace "$CAMUNDA_NAMESPACE"
 ```
 
 Running these commands cleans up both the job and the secret, ensuring that no unnecessary resources remain in the cluster.
-
-### Configure a high-performance StorageClass
-
-Camunda 8 requires high IOPS for performance-critical components like **Zeebe**, so it is important to use Azure **PremiumV2** disks rather than the default `Standard_LRS`.
-
-This step defines a custom `StorageClass` that:
-
-- Uses **PremiumV2_LRS** Azure Managed Disks
-- Sets a **`Retain`** reclaim policy
-- Uses `WaitForFirstConsumer` volume binding
-- Becomes the default StorageClass for the cluster
-
-#### Apply the StorageClass
-
-Save the following as `storage-class.yml`:
-
-```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/manifests/storage-class.yml
-```
-
-**First, remove the default attribute from the original StorageClass:**
-
-```bash
-kubectl patch storageclass default \
-  -p '{"metadata":{"annotations":{"storageclass.kubernetes.io/is-default-class":"false"}}}'
-```
-
-**Then, apply the new StorageClass:**
-
-```bash
-kubectl apply -f storage-class.yml
-```
-
-**Always verify with** `kubectl get storageclass` **afterwards.**
-
-This must be applied **before installing the Camunda Helm chart** so that PersistentVolumeClaims (PVCs) are provisioned with the correct performance characteristics.
 
 ## 2. Install Camunda 8 using the Helm chart
 

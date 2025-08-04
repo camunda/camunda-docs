@@ -15,6 +15,7 @@ import AzureBlobStorageImg from "../img/connector-azure-blob-storage.png";
 import BoxImg from "../img/connector-box.png";
 import BluePrismImg from "../img/connector-blueprism.png";
 import CamundaImg from "../img/connector-camunda.png";
+import CSVImg from "../img/connector-csv.png";
 import EasypostImg from "../img/connector-easypost.png";
 import EmailImg from "../img/connector-email.png";
 import GithubImg from "../img/connector-github.png";
@@ -212,6 +213,13 @@ const SearchableTable = () => {
       type: "Outbound",
       link: "../operate/",
       image: CamundaImg,
+    },
+    {
+      name: "CSV",
+      description: "Read and write CSV documents.",
+      type: "Outbound",
+      link: "../csv/",
+      image: CSVImg,
     },
     {
       name: "EasyPost",
