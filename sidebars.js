@@ -478,6 +478,7 @@ module.exports = {
             "components/connectors/out-of-the-box-connectors/automation-anywhere",
             "components/connectors/out-of-the-box-connectors/blueprism",
             "components/connectors/out-of-the-box-connectors/box",
+            "components/connectors/out-of-the-box-connectors/csv",
             "components/connectors/out-of-the-box-connectors/easy-post",
             "components/connectors/out-of-the-box-connectors/email",
             "components/connectors/out-of-the-box-connectors/github",
@@ -955,14 +956,14 @@ module.exports = {
     },
     {
       type: "category",
-      label: "Update to Camunda 8.8",
+      label: "Upgrade to Camunda 8.8",
       link: {
         type: "doc",
         id: "apis-tools/migration-manuals/index",
       },
       items: [
-        "apis-tools/migration-manuals/migrate-to-camunda-user-tasks",
         "apis-tools/migration-manuals/migrate-to-camunda-api",
+        "apis-tools/migration-manuals/migrate-to-camunda-user-tasks",
       ],
     },
   ],
@@ -1178,7 +1179,7 @@ module.exports = {
               label: "Upgrade",
               link: {
                 type: "doc",
-                id: "self-managed/installation-methods/helm/upgrade/upgrade",
+                id: "self-managed/installation-methods/helm/upgrade/index",
               },
               items: [
                 "self-managed/installation-methods/helm/upgrade/upgrade-hc-870-880",
@@ -1286,7 +1287,7 @@ module.exports = {
       ],
     },
     {
-      "Operational guides": [
+      Concepts: [
         {
           type: "category",
           label: "Back up and restore",
@@ -1306,10 +1307,6 @@ module.exports = {
             },
           ],
         },
-      ],
-    },
-    {
-      Concepts: [
         {
           type: "category",
           label: "Document handling",
@@ -1323,7 +1320,7 @@ module.exports = {
               label: "Configuration",
               link: {
                 type: "doc",
-                id: "self-managed/concepts/document-handling/configuration/overview",
+                id: "self-managed/concepts/document-handling/configuration/index",
               },
               items: [
                 "self-managed/concepts/document-handling/configuration/camunda-8-run",
@@ -1343,9 +1340,7 @@ module.exports = {
           ],
         },
         {
-          Troubleshooting: [
-            "self-managed/operational-guides/troubleshooting/troubleshooting",
-          ],
+          Troubleshooting: ["self-managed/operational-guides/troubleshooting"],
         },
         "self-managed/concepts/exporters",
         "self-managed/concepts/multi-tenancy",
@@ -1480,6 +1475,7 @@ module.exports = {
                     id: "self-managed/components/orchestration-cluster/zeebe/exporters/exporters",
                   },
                   items: [
+                    "self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter",
                     {
                       type: "category",
                       label: "Camunda Exporter indices",
@@ -1531,7 +1527,7 @@ module.exports = {
                   "Mapping rules": [
                     "self-managed/components/orchestration-cluster/identity/mapping-rules/managing-mapping-rules",
                     "self-managed/components/orchestration-cluster/identity/mapping-rules/mapping-rule-authorizations",
-                    "self-managed/components/orchestration-cluster/identity/mapping-rules/assign-mappings-to-tenants",
+                    "self-managed/components/orchestration-cluster/identity/mapping-rules/assign-mapping-rules-to-tenants",
                   ],
                 },
               ],

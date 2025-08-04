@@ -82,4 +82,4 @@ For a slightly more advanced example of modeling a process using BPMN, visit our
 
 ## Additional resources
 
-- [Camunda Academy: Getting Started with Process Modeling](https://academy.camunda.com/c8-getting-started-process-modeling)
+- [Camunda Academy: Camunda 8 Web Modeler Overview](https://academy.camunda.com/c8-web-modeler-overview)

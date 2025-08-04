@@ -1031,7 +1031,7 @@ The response would show that partitions are distributed to new brokers:
           "health": "healthy"
         }
       ],
-      "version": "8.8.0-SNAPSHOT"
+      "version": "SNAPSHOT"
     },
     {
       "nodeId": 1,
@@ -1054,7 +1054,7 @@ The response would show that partitions are distributed to new brokers:
           "health": "healthy"
         }
       ],
-      "version": "8.8.0-SNAPSHOT"
+      "version": "SNAPSHOT"
     },
     {
       "nodeId": 0,
@@ -1077,7 +1077,7 @@ The response would show that partitions are distributed to new brokers:
           "health": "healthy"
         }
       ],
-      "version": "8.8.0-SNAPSHOT"
+      "version": "SNAPSHOT"
     },
     {
       "nodeId": 3,
@@ -1100,7 +1100,7 @@ The response would show that partitions are distributed to new brokers:
           "health": "healthy"
         }
       ],
-      "version": "8.8.0-SNAPSHOT"
+      "version": "SNAPSHOT"
     },
     {
       "nodeId": 5,
@@ -1123,7 +1123,7 @@ The response would show that partitions are distributed to new brokers:
           "health": "healthy"
         }
       ],
-      "version": "8.8.0-SNAPSHOT"
+      "version": "SNAPSHOT"
     },
     {
       "nodeId": 4,
@@ -1146,13 +1146,13 @@ The response would show that partitions are distributed to new brokers:
           "health": "healthy"
         }
       ],
-      "version": "8.8.0-SNAPSHOT"
+      "version": "SNAPSHOT"
     }
   ],
   "clusterSize": 6,
   "partitionsCount": 6,
   "replicationFactor": 3,
-  "gatewayVersion": "8.8.0-SNAPSHOT",
+  "gatewayVersion": "SNAPSHOT",
   "lastCompletedChangeId": "2"
 }
 ```

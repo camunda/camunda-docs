@@ -1,6 +1,7 @@
 ---
 id: docker
-title: "Docker"
+sidebar_label: Docker
+title: Camunda Docker images
 keywords: ["camunda docker"]
 description: "Step through multi-platform support, configuration, Docker images, and Docker Compose."
 ---

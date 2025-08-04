@@ -36,7 +36,7 @@ This section includes reference deployment architectures:
 
 - [Microsoft AKS single-region](/self-managed/installation-methods/helm/cloud-providers/azure/microsoft-aks/terraform-setup.md): Standard production setup.
 
-For common issues and mitigation strategies, refer to the [deployment troubleshooting guide](/self-managed/operational-guides/troubleshooting/troubleshooting.md).
+For common issues and mitigation strategies, refer to the [deployment troubleshooting guide](/self-managed/operational-guides/troubleshooting.md).
 
 ## Architecture
 
@@ -349,4 +349,4 @@ Azure offers the **Application Gateway for Containers (AGC)**, which supports gR
 
 #### Load balancer
 
-If using [GKE Ingress](https://cloud.google.com/kubernetes-engine/docs/concepts/ingress) (Ingress-gce), you may need to use `cloud.google.com/app-protocols` annotations in the **Orchestration Cluster** non-headless service. For more details, see the GKE guide on [using HTTP/2 for load balancing with Ingress](https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-http2).
+If you are using the [GKE Ingress](https://cloud.google.com/kubernetes-engine/docs/concepts/ingress) (Ingress-gce), you may need to use `cloud.google.com/app-protocols` annotations in the **Zeebe Gateway** service. For more details, visit the GKE guide [using HTTP/2 for load balancing with Ingress](https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-http2).
