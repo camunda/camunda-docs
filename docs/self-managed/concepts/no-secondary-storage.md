@@ -34,6 +34,7 @@ global:
 When `global.noSecondaryStorage` is set to true, the Helm charts automatically disable all secondary-storage-dependent components.
 
 Alternative deployment methods:
+
 - **Docker Compose**: Modify your compose file to exclude secondary storage services
 - **Manual deployment**: Configure Zeebe without starting Elasticsearch/OpenSearch and dependent services
 
@@ -102,6 +103,7 @@ This mode should **only** be considered in specific scenarios such as:
 - **Resource-constrained environments** where deploying the full platform isn't feasible
 
 In all cases, **contact Camunda before implementing this mode**. Our team can:
+
 - Help evaluate if this mode truly fits your requirements
 - Suggest alternative approaches that might provide better value
 - Outline potential migration paths to the full platform in the future
