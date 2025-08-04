@@ -26,7 +26,6 @@ An ad-hoc sub-process has the following constraints:
 
 - Must have at least one activity
 - Must not have start events or end events
-- Any intermediate catch event must have an outgoing sequence flow
 
 ## Activate an element
 
