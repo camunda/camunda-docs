@@ -7,7 +7,9 @@ description: "Making necessary changes to continue using Camunda's V1 component 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-This document outlines the necessary changes to continue using the component (Operate, Tasklist) REST APIs after upgrading to Camunda 8.8—if migration to the new [Orchestration cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) is not yet possible.
+This document outlines the necessary changes to continue using the component REST APIs after upgrading to Camunda 8.8—if migration to the new [Orchestration cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) is not yet possible.
+
+In this context, **components** refer to standalone Camunda applications such as **Operate**, **Tasklist**, and **Optimize**, each exposing its own V1 REST API.
 
 :::note
 As of version 8.8, the V1 component APIs are deprecated. We strongly recommend [migrating to the Orchestration cluster REST API](/apis-tools/migration-manuals/migrate-to-camunda-api.md) where possible.
