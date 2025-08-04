@@ -29,7 +29,8 @@
     "api:generate:tasklist": "npm run api:generate tasklist",
     "api:generate:zeebe": "npm run api:generate zeebe",
     "api:generate:adminsm": "npm run api:generate adminsm",
-    "api:generate:camunda": "npm run api:generate camunda"
+    "api:generate:camunda": "npm run api:generate camunda",
+    "update-release-links": "node hacks/update-release-links.js"
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.3.0",
