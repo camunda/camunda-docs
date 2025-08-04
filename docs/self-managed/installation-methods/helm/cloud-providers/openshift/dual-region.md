@@ -154,7 +154,6 @@ Later in this guide, we will refer to it as **first cluster**.
    ```
 
    :::caution Security consideration
-
    - A ServiceAccount with a ClusterRoleBinding automatically gives cluster administrator privileges to Red Hat Advanced Cluster Management and to any user credentials with access to the namespace where you install Red Hat Advanced Cluster Management (`open-cluster-management` here), [learn more about this on the official documentation](https://docs.redhat.com/en/documentation/red_hat_advanced_cluster_management_for_kubernetes/2.12/html/install/installing#installing-from-the-operatorhub).
 
    - A namespace called `local-cluster` is reserved for the Red Hat Advanced Cluster Management hub cluster when it is self-managed.
@@ -183,7 +182,6 @@ Later in this guide, we will refer to it as **first cluster**.
    ```
 
 5. After creating the Managed Cluster Set, the next step is to import clusters into the set.
-
    - To import a cluster, you need to template the manifest for each cluster.
 
      Save the following file as `managed-cluster.yml.tpl`:
@@ -269,7 +267,6 @@ Installing Submariner in OpenShift **requires** [Advanced Cluster Management](#a
    ```
 
 3. Deployment of Submariner on the clusters:
-
    - Save the following file as `submariner.yml.tpl`:
 
      ```yaml reference
@@ -311,7 +308,6 @@ Installing Submariner in OpenShift **requires** [Advanced Cluster Management](#a
    ```
 
    If everything is set up correctly, you should observe in the output of each cluster context the following statuses:
-
    - Gateway's status: `All connections (1) are established`
    - Connection's status: `connected   10.406614ms (RTT)`
 
