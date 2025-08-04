@@ -51,5 +51,6 @@ For more information, see [Upcoming API Changes in Camunda 8: A Unified and Stre
    Ensure that the orchestration cluster is updated to 8.8 before upgrading application clients.
 2. **Review migration guides**  
    👉 _Coming soon: Links to detailed guides on each component migration._
+   - [Migrate from Zeebe Process Test to Camunda Process Test](migrate-to-camunda-process-test.md)
 
 ---
