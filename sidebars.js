@@ -955,14 +955,14 @@ module.exports = {
     },
     {
       type: "category",
-      label: "Update to Camunda 8.8",
+      label: "Upgrade to Camunda 8.8",
       link: {
         type: "doc",
         id: "apis-tools/migration-manuals/index",
       },
       items: [
-        "apis-tools/migration-manuals/migrate-to-camunda-user-tasks",
         "apis-tools/migration-manuals/migrate-to-camunda-api",
+        "apis-tools/migration-manuals/migrate-to-camunda-user-tasks",
       ],
     },
   ],
