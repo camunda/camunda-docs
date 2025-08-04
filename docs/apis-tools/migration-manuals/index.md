@@ -3,7 +3,7 @@ title: "Camunda 8.8 APIs & tools upgrade guide"
 description: "Plan and execute an update from Camunda 8.7 to 8.8. Includes architectural highlights, prerequisites, and breaking changes relevant for developers."
 ---
 
-Learn about important API and SDK changes in Camunda 8.8 to consider when planning your upgrade from Camunda 8.7.
+Learn about important API & tools changes in Camunda 8.8 to consider when planning your upgrade from Camunda 8.7.
 
 :::warning
 This documentation is a work in progress and may contain incomplete, placeholder, or evolving content. While the core concepts introduced in Camunda 8.8 are stable, specific details are actively being refined.

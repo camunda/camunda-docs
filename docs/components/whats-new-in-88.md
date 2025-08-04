@@ -19,7 +19,7 @@ This documentation is a work in progress and may contain incomplete, placeholder
 
 Camunda 8.8 introduces important architectural changes and enhancements to simplify deployment, improve maintainability, and empower both operations teams and developers.
 
-The simplest Self-Managed deployment now involves running a single Java application or docker container of the Orchestration Cluster Application.
+Important changes introduced in Camunda 8.8 are summarized as follows:
 
 <table className="table-callout">
 <tr>
@@ -31,15 +31,19 @@ The simplest Self-Managed deployment now involves running a single Java applicat
     <td>The Orchestration Cluster (previously automation cluster) is now the core Camunda 8 component.</td>
 </tr>
 <tr>
-    <td>[Identity, authentication, and authorization](#identity-authentication-and-authorization)</td>
+    <td>[Identity, authentication, and authorization](#identity)</td>
     <td><p>Identity management is now split into two scopes for improved access management, performance, and flexible integration with any OIDC-compatible Identity Provider:</p><p><ul><li><p>**Identity**: Manages authentication and fine-grained authorizations for the Orchestration Cluster and its APIs.</p></li>
             <li><p>**Management Identity**: Controls access for Web Modeler, Console and Optimize.</p></li></ul></p></td>
 </tr>
 <tr>
-    <td>[APIs and tools](#apis-and-tools)</td>
-    <td>New and changed APIs and tools are introduced in Camunda 8.8.</td>
+    <td>[APIs & tools](#apis-and-tools)</td>
+    <td>New and changed APIs & tools are introduced in Camunda 8.8.</td>
 </tr>
 </table>
+
+:::note simple deployment
+The simplest Self-Managed deployment runs as a single Java application or docker container.
+:::
 
 :::info
 
@@ -159,11 +163,11 @@ In Camunda 8.8, Orchestration Cluster [Identity](/components/identity/identity-i
 
 The 8.8 changes to Identity could affect different user roles in your Organization. For example:
 
-| Role                 | Responsibilities                                                                                                                              |
-| :------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------- |
-| Administrators       | Need to understand the new Identity setup and migration steps from Camunda 8.7.                                                               |
-| Developers           | Should learn the new [authorization concepts](/components/concepts/access-control/authorizations.md) and required permissions for API access. |
-| Information Security | Must review and adapt to the new Identity architecture.                                                                                       |
+| Role                 | Responsibilities                                                                                                                       |
+| :------------------- | :------------------------------------------------------------------------------------------------------------------------------------- |
+| Administrators       | Understand the new Identity setup and migration steps from Camunda 8.7.                                                                |
+| Developers           | Learn the new [authorization concepts](/components/concepts/access-control/authorizations.md) and required permissions for API access. |
+| Information Security | Review and adapt to the new Identity architecture.                                                                                     |
 
 ### Benefits
 
@@ -220,6 +224,7 @@ After you deploy all Camunda 8 components in a Self-Managed environment, you wil
 - The Identity Migration App that migrates these entities from Management Identity into Orchestration Cluster Identity must be run during your Camunda 8.7 to 8.8 upgrade. Instructions on enabling and configuring the Identity Migration App in the 8.7 to 8.8 migration guide are available for Helm and also docker-compose/bare Java deployments.
 
 - Management Identity, Keycloak and Postgres are no longer needed for an Orchestration Cluster. They are only needed when using Web Modeler, Console or Optimize.
+
   - For the Orchestration Cluster, you can bring your own Identity Provider (for example, Keycloak, Microsoft EntraID, Okta) or use the built-in Basic Authentication method.
 
   - A special setup is no longer required for Keycloak as it is now integrated like any other Identity Provider via OpenID Connect (OIDC). Management Identity relies by default on Keycloak, but you can also configure it to use any OIDC-compatible Identity Provider.
@@ -255,29 +260,23 @@ In a Basic Authentication setup, the Orchestration Cluster provides full functio
 | Tenants        | Orchestration Cluster Identity                |
 | Mapping Rules  | n/a (not applicable for Basic Authentication) |
 
-## APIs and tools {#apis-and-tools}
+## APIs & tools {#apis-and-tools}
 
-The following table provides a summary of the main 8.8 API and tools changes.
+Changes to [APIs & tools](/apis-tools/working-with-apis-tools.md) in 8.8 are summarized as follows:
 
-| What's new/changed                                                                                                              | Description                                                                                                                                                                                                                                                                                                 |
-| :------------------------------------------------------------------------------------------------------------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Camunda Java Client](apis-tools/java-client/index.md)                                                                          | The Camunda Java Client is now the official Java library for connecting to Camunda 8 clusters, automating processes, and implementing job workers. It is designed for Java developers who want to interact programmatically with Camunda 8 via REST or gRPC, and is the successor to the Zeebe Java client. |
-| [Camunda Spring SDK](/apis-tools/spring-zeebe-sdk/getting-started.md)                                                           | The Camunda Spring Boot SDK replaces the Spring Zeebe SDK. The SDK relies on the Camunda Java client, designed to enhance the user experience and introduce new features while maintaining compatibility with existing codebases.                                                                           |
-| [Camunda Process Test](/apis-tools/testing/getting-started.md)                                                                  | Camunda Process Test (CPT) is a Java library to test your BPMN processes and your process application. CPT is the successor of Zeebe Process Test. Our previous testing library is deprecated and will be removed with version 8.10.                                                                        |
-| [Zeebe gRPC API endpoints](/reference/announcements-release-notes/880/880-announcements.md#deprecated-zeebe-grpc-api-endpoints) | With the 8.8 release, the gRPC API continues but is being disabled by default starting with 8.10.                                                                                                                                                                                                           |
+| What's new/changed                                                                                                                   | Description                                                                                                                                                                                                                                                                                                 |
+| :----------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Orchestration Cluster API](#orchestration-cluster)                                                                                  | The unified Orchestration Cluster API replaces the deprecated V1 component APIs, providing a unified interface for managing and interacting with the Orchestration Cluster.                                                                                                                                 |
+| [Camunda Java Client](apis-tools/java-client/index.md)                                                                               | The Camunda Java Client is now the official Java library for connecting to Camunda 8 clusters, automating processes, and implementing job workers. It is designed for Java developers who want to interact programmatically with Camunda 8 via REST or gRPC, and is the successor to the Zeebe Java client. |
+| [Camunda Spring SDK](/apis-tools/spring-zeebe-sdk/getting-started.md)                                                                | The Camunda Spring Boot SDK replaces the Spring Zeebe SDK. The SDK relies on the Camunda Java client, designed to enhance the user experience and introduce new features while maintaining compatibility with existing codebases.                                                                           |
+| [Camunda Process Test](/apis-tools/testing/getting-started.md)                                                                       | Camunda Process Test (CPT) is a Java library to test your BPMN processes and your process application. CPT is the successor of Zeebe Process Test. Our previous testing library is deprecated and will be removed with version 8.10.                                                                        |
+| [Camunda user tasks](/apis-tools/migration-manuals/migrate-to-camunda-user-tasks.md)                                                 | Camunda user tasks replace the deprecated job-based user tasks in Camunda 8.8, providing a more robust and flexible way to handle user tasks within process models.                                                                                                                                         |
+| [Tasklist GraphQL API](/reference/announcements-release-notes/880/880-announcements.md#deprecated-operate-and-tasklist-v1-rest-apis) | The previously deprecated Tasklist GraphQL API is removed in Camunda 8.8. This change is part of the broader architectural evolution towards the Orchestration Cluster API, which provides a more unified and consistent interface for managing tasks and workflows.                                        |
+| [Zeebe gRPC API endpoints](/reference/announcements-release-notes/880/880-announcements.md#deprecated-zeebe-grpc-api-endpoints)      | With the 8.8 release, the gRPC API continues but is being disabled by default starting with 8.10.                                                                                                                                                                                                           |
 
-## Summary of changes
-
-The following table provides a summary of the main 8.8 architectural changes.
-
-| Feature/area            | Camunda 8.7 and earlier                | Camunda 8.8                                     |
-| :---------------------- | :------------------------------------- | :---------------------------------------------- |
-| Core components         | Separate deployments (per component)   | Unified Orchestration Cluster                   |
-| Identity                | Separate, uses Keycloak and PostgreSQL | Integrated, uses Zeebe storage, OIDC compatible |
-| Optimize                | Separate component                     | Remains separate (as before)                    |
-| Exporter/Importer       | Separate Importers/Exporters           | Unified Exporter                                |
-| Helm Chart Deployment   | Multiple StatefulSets                  | Single StatefulSet                              |
-| Groups/Roles Management | Managed in Console                     | Managed in Identity                             |
+:::info
+To learn more about upgrading and migrating to 8.8, see the [API & tools upgrade guide](../apis-tools/migration-manuals/index.md).
+:::
 
 ## Upgrade guides {#upgrade-guides}
 
