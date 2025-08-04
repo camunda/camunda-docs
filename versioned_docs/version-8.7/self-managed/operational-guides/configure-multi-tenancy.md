@@ -81,3 +81,14 @@ Once the Zeebe application is assigned to the tenant, you should be able to:
 - Retrieve jobs from the correct tenant context.
 
 For additional details, refer to the documentation on [assigning applications to a tenant](/self-managed/identity/managing-tenants.md#assign-applications-to-a-tenant-1).
+
+### Tenant requirement for job actions
+
+In single-tenant deployments, Operate and Tasklist can cancel or retry jobs without requiring tenant specification. However, in multi-tenant mode, this behavior changes: **a tenant must always be explicitly provided**.
+
+This is a known limitation based on how the applications are built—there is no current workaround.
+
+### Identity usage for Zeebe client connections
+
+Although Operate and Tasklist each have their own Keycloak identities (`operate`, `tasklist`), both internally use a Zeebe client to connect to Zeebe (particularly relevant for versions before 8.8).  
+This client must be configured with its own credentials (commonly labeled `zeebe`) and **should not reuse the application's identity**. While it may appear that credentials are shared, the Zeebe client is meant to use a separate, purpose-specific identity.
