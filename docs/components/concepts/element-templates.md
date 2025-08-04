@@ -6,16 +6,17 @@ description: An element template is a way to extend the Modeler with domain-spec
 
 import serviceTaskNoTemplate from './assets/element-templates/service-task-no-template.png'
 import serviceTaskWithTemplate from './assets/element-templates/service-task-with-template.png'
-import propretiesNoTemplate from './assets/element-templates/properties-no-template.png'
-import propretiesWithTemplate from './assets/element-templates/properties-with-template.png'
+import propertiesNoTemplate from './assets/element-templates/properties-no-template.png'
+import propertiesWithTemplate from './assets/element-templates/properties-with-template.png'
 
-An **element template** is a way to extend the [Modeler](../modeler/about-modeler.md) with domain-specific diagram elements, such as service and user tasks. They allow you to customize how a BPMN element is shown and how it can be configured by process developers.
+An **element template** is a way to extend the [Modeler](../modeler/about-modeler.md) with domain-specific diagram elements, such as service and user tasks. They allow you to customize how a BPMN element is displayed and how it can be configured by process developers.
 
-The following example demonstrates how a generic service task can be transformed into a customized user interface that guides users through its configuration process.
-| Without an element template | With an element template |
-| :---------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------- |
-| <img src={serviceTaskNoTemplate} alt="Service tasks without an element template" /> | <img src={serviceTaskWithTemplate} alt="Service tasks with an element template" /> |
-| <img src={propretiesNoTemplate} alt="Properties without an element template" /> | <img src={propretiesWithTemplate} alt="Properties with an element template" /> |
+The example below demonstrates how a generic service task can be transformed into a customized user interface that guides users through its configuration:
+
+| Without an element template                                                           | With an element template                                                             |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| <img src={serviceTaskNoTemplate} alt="Service task without an element template" />    | <img src={serviceTaskWithTemplate} alt="Service task with an element template" />    |
+| <img src={propertiesNoTemplate} alt="Properties panel without an element template" /> | <img src={propertiesWithTemplate} alt="Properties panel with an element template" /> |
 
 :::tip
 [Connector templates](../connectors/custom-built-connectors/connector-templates.md) are a specific kind of element template.
@@ -23,6 +24,6 @@ The following example demonstrates how a generic service task can be transformed
 
 ## Next steps
 
-Read more about how to use element templates in Web and Desktop Modeler:
+Learn how to use element templates in Web and Desktop Modeler:
 
 - [Element templates in Modeler](/components/modeler/element-templates/element-templates.md)
