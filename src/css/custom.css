@@ -478,6 +478,16 @@ body {
   border: 2px solid #333;
 }
 
+/* Search bar general */
+
+/* As we now show the breadcrumbs with full path,
+we make it less bold compared to the search keyword */
+.DocSearch-Hit-source {
+  color: var(--ifm-color-content-secondary) !important;
+  font-size: 0.8rem !important;
+  font-weight: unset !important;
+}
+
 /* Landing page search bar */
 
 .homeSearch {

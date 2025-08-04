@@ -3,6 +3,7 @@ id: index
 sidebar_label: Kubernetes with Helm
 title: Camunda Helm chart
 description: "In this section, find details on installation using Kubernetes with Helm."
+page_rank: 80
 ---
 
 import { HelmChartInstall } from "@site/src/components/CamundaDistributions";
