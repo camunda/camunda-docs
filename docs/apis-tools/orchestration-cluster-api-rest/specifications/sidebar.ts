@@ -807,6 +807,18 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
+      label: "System",
+      items: [
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-usage-metrics",
+          label: "Get usage metrics",
+          className: "api-method get",
+        },
+      ],
+    },
+    {
+      type: "category",
       label: "Tenant",
       items: [
         {
@@ -964,18 +976,6 @@ const sidebar: SidebarsConfig = {
           id: "apis-tools/orchestration-cluster-api-rest/specifications/update-user",
           label: "Update user",
           className: "api-method patch",
-        },
-      ],
-    },
-    {
-      type: "category",
-      label: "Usage metrics",
-      items: [
-        {
-          type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-usage-metrics",
-          label: "Get usage metrics",
-          className: "api-method get",
         },
       ],
     },
