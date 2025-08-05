@@ -401,7 +401,7 @@ Configures a generic BPMN element property.
 | **Binding parameters**      | `name`: The name of the input parameter                                          |
 | **Mapping result**          | `<zeebe:input target="[name]" source="[userInput] />`                            |
 
-Configures an [input mapping](../../../../concepts/variables/#input-mappings).
+Configures an [input mapping](../../../concepts/variables/#input-mappings).
 
 #### `zeebe:output`
 
@@ -411,7 +411,7 @@ Configures an [input mapping](../../../../concepts/variables/#input-mappings).
 | **Binding parameters**      | `source`: The source of the output parameter                                     |
 | **Mapping result**          | `<zeebe:output target="[userInput]" source="[source] />`                         |
 
-Configures an [output mapping](../../../../concepts/variables/#output-mappings).
+Configures an [output mapping](../../../concepts/variables/#output-mappings).
 
 #### `zeebe:taskHeader`
 
@@ -421,7 +421,7 @@ Configures an [output mapping](../../../../concepts/variables/#output-mappings).
 | **Binding parameters**      | `key`: The key of the task header                   |
 | **Mapping result**          | `<zeebe:header key="[key]" value="[userInput] />`   |
 
-Configures a [task header](../../../bpmn/service-tasks/#task-headers).
+Configures a [task header](../../bpmn/service-tasks/#task-headers).
 
 #### `zeebe:taskDefinition`
 
@@ -431,7 +431,7 @@ Configures a [task header](../../../bpmn/service-tasks/#task-headers).
 | **Binding parameters**      | `property`: The name of the task definition property. Can be `type` or `retries`. |
 | **Mapping result**          | `<zeebe:taskDefinition [property]="[userInput]" />`                               |
 
-Configures the [task](../../../bpmn/service-tasks/#task-definition) for a service or user task.
+Configures the [task](../../bpmn/service-tasks/#task-definition) for a service or user task.
 
 #### `zeebe:taskDefinition:type`
 
@@ -445,7 +445,7 @@ Configures the [task](../../../bpmn/service-tasks/#task-definition) for a servic
 | **Binding parameters**      |                                                     |
 | **Mapping result**          | `<zeebe:taskDefinition type="[userInput]" />`       |
 
-Configures the [task type](../../../bpmn/service-tasks/#task-definition) for a service or user task.
+Configures the [task type](../../bpmn/service-tasks/#task-definition) for a service or user task.
 
 #### `zeebe:property`
 
@@ -493,7 +493,7 @@ The binding name of `correlationKey` is not applicable to message start events o
 
 The `zeebe:calledElement` binding allows you to configure process called by a call activity.
 
-You can set the value of the property `bindingType` to control the [resource binding type](../../../../best-practices/modeling/choosing-the-resource-binding-type).
+You can set the value of the property `bindingType` to control the [resource binding type](../../../best-practices/modeling/choosing-the-resource-binding-type).
 We recommend setting the property `bindingType` to the value `"versionTag"` and setting property `versionTag`
 to the value of the version tag of the process you want to call.
 
@@ -521,9 +521,9 @@ The `zeebe:userTask` binding allows you to configure the implementation type for
 | **Binding parameters**      | `property`: The name of the property. <br/> Supported properties: `formId`, `externalReference`, `bindingType`, and `versionTag`. |
 | **Mapping result**          | `<zeebe:formDefinition [property]="[userInput]" />`                                                                               |
 
-The `zeebe:formDefinition` binding allows you to configure the [user task form](../../../bpmn/user-tasks/#user-task-forms) used by a user task.
+The `zeebe:formDefinition` binding allows you to configure the [user task form](../../bpmn/user-tasks/#user-task-forms) used by a user task.
 
-When setting the `formId` property, you can set the value of the property `bindingType` to control the [resource binding type](../../../../best-practices/modeling/choosing-the-resource-binding-type).
+When setting the `formId` property, you can set the value of the property `bindingType` to control the [resource binding type](../../../best-practices/modeling/choosing-the-resource-binding-type).
 We recommend setting the property `bindingType` to the value `"versionTag"` and setting property `versionTag`
 to the value of the version tag of the form you want to link.
 
@@ -558,9 +558,9 @@ When `zeebe:assignmentDefinition` is used, `zeebe:userTask` must be set on the s
 | **Binding parameters**      | `property`: The name of the property.<br/> Supported properties: `decisionId`, `resultVariable`, `bindingType`, and `versionTag`. |
 | **Mapping result**          | `<zeebe:calledDecision [property]="[userInput]" />`                                                                               |
 
-The `zeebe:calledDecision` binding allows you to configure the [called decision](../../../bpmn/business-rule-tasks/#defining-a-task) used by a business rule task.
+The `zeebe:calledDecision` binding allows you to configure the [called decision](../../bpmn/business-rule-tasks/#defining-a-task) used by a business rule task.
 
-You can set the value of the property `bindingType` to control the [resource binding type](../../../../best-practices/modeling/choosing-the-resource-binding-type).
+You can set the value of the property `bindingType` to control the [resource binding type](../../../best-practices/modeling/choosing-the-resource-binding-type).
 We recommend setting the property `bindingType` to the value `"versionTag"` and setting property `versionTag`
 to the value of the version tag of the decision you want to call.
 
@@ -578,7 +578,7 @@ When `zeebe:calledDecision` is used, `zeebe:taskDefinition` cannot be used on th
 | **Binding parameters**      | `property`: The name of the property. `expression` and `resultVariable` are supported. |
 | **Mapping result**          | `<zeebe:script [property]="[userInput]" />`                                            |
 
-The `zeebe:script` binding allows you to configure the [FEEL expression](../../../bpmn/script-tasks/#defining-a-task) used by a script task.
+The `zeebe:script` binding allows you to configure the [FEEL expression](../../bpmn/script-tasks/#defining-a-task) used by a script task.
 
 :::note
 

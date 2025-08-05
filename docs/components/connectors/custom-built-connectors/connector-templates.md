@@ -1173,7 +1173,7 @@ You can, for example, allow the user to model and configure the following **REST
 
 ## Develop connector templates
 
-You can develop connector templates using the [`element template` feature](/components/modeler/desktop-modeler/element-templates/defining-templates.md). You can also look at existing [examples](https://github.com/camunda/camunda-modeler/blob/master/resources/element-templates/cloud-samples.json).
+You can develop connector templates using the [`element template` feature](/components/modeler/element-templates/defining-templates.md). You can also look at existing [examples](https://github.com/camunda/camunda-modeler/blob/master/resources/element-templates/cloud-samples.json).
 
 ## Providing and using connector templates
 
