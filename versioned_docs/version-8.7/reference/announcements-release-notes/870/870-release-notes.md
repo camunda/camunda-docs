@@ -15,9 +15,9 @@ These release notes identify the new features included in 8.7, including [alpha 
 
 ## 8.7 minor
 
-| Scheduled release date | Scheduled end of maintenance | Changelogs                                                                  | Release blog                                                          | Update guide                                                                |
-| ---------------------- | ---------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| 8 April 2025           | 13 October 2026              | [Links to all Changelogs](#technical-changelogs-for-all-87x-patch-releases) | [Release blog](https://camunda.com/blog/2025/04/camunda-8-7-release/) | [Update guide](/self-managed/operational-guides/update-guide/860-to-870.md) |
+| Scheduled release date | Scheduled end of maintenance | All Patch releases                                                                | Release blog                                                          | Update guide                                                                |
+| ---------------------- | ---------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| 8 April 2025           | 13 October 2026              | [Patch Releases and Changelogs](#technical-changelogs-for-all-87x-patch-releases) | [Release blog](https://camunda.com/blog/2025/04/camunda-8-7-release/) | [Update guide](/self-managed/operational-guides/update-guide/860-to-870.md) |
 
 ### AWS EKS and AWS OpenShift (ROSA) reference architecture <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
