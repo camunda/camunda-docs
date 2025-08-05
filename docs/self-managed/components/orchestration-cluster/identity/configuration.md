@@ -18,7 +18,7 @@ The following configurations apply to all components within the Orchestration Cl
   
 | Environment variable                                 | Description                                                                                                    | Default value         |
 | ---------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | --------------------- |
-| `CAMUNDA_SECURITY_AUTHENTICATION_METHOD`             | The authentication method to use. Options: `basic`, `oidc`, `none`.                                            | `basic`               |
+| `CAMUNDA_SECURITY_AUTHENTICATION_METHOD`             | The authentication method to use. Options: `basic`, `oidc`.                                                    | `basic`               |
 | `CAMUNDA_SECURITY_AUTHENTICATION_UNPROTECTEDAPI`     | If the API can be used without authentication.                                                                 | `false`               |
 | `CAMUNDA_SECURITY_AUTHORIZATIONS_ENABLED`            | If authorizations are enabled.                                                                                 | `true`                |
 | `CAMUNDA_SECURITY_MULTITENANCY_CHECKSENABLED`        | Enables multi-tenancy checks. This requires the API to be protected.                                           | `false`               |
@@ -31,7 +31,7 @@ The following configurations apply to all components within the Orchestration Cl
 
 | Application.yaml property                         | Description                                                                                       | Default value       |
 | ------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------- |
-| `camunda.security.authentication.method`          | The authentication method to use. Options: `basic`, `oidc`, `none`.                               | `basic`             |
+| `camunda.security.authentication.method`          | The authentication method to use. Options: `basic`, `oidc`.                                       | `basic`             |
 | `camunda.security.authentication.unprotected-api` | If the API can be used without authentication.                                                    | `false`             |
 | `camunda.security.authorizations.enabled`         | If authorizations are enabled.                                                                    | `true`              |
 | `camunda.security.multitenancy.checks-enabled`    | Enables multi-tenancy checks. This requires the API to be protected.                              | `false`             |
@@ -44,7 +44,7 @@ The following configurations apply to all components within the Orchestration Cl
 
 | Helm value key                                  | Description                                                                            | Default value |
 | ----------------------------------------------- | -------------------------------------------------------------------------------------- | ------------- |
-| `global.security.authentication.method`         | The authentication method to use. Options: `basic`, `oidc`, `none`.                    | `basic`       |
+| `global.security.authentication.method`         | The authentication method to use. Options: `basic`, `oidc`.                            | `basic`       |
 | `global.security.authentication.unprotectedApi` | If the API can be used without authentication.                                         | `false`       |
 | `global.security.authorizations.enabled`        | If authorizations are enabled.                                                         | `true`        |
 | `global.security.multiTenancy.checksEnabled`    | Enables multi-tenancy checks. This requires the API to be protected.                   | `false`       |
@@ -78,19 +78,19 @@ The following variables are used to initialize users and mapping rules.
   </TabItem>
   <TabItem value="init-yaml" label="application.yaml">
 
-| Application.yaml property                                               | Description                                  | Default value |
-| ----------------------------------------------------------------------- | -------------------------------------------- | ------------- |
-| `camunda.security.initialization.users[0].username`                     | The username of the first user.              |               |
-| `camunda.security.initialization.users[0].password`                     | The password of the first user.              |               |
-| `camunda.security.initialization.users[0].name`                         | The name of the first user.                  |               |
-| `camunda.security.initialization.users[0].email`                        | The email address of the first user.         |               |
-| `camunda.security.initialization.mapping-rules[0].mapping-rule-id`      | The id of the first mapping rule.            |               |
-| `camunda.security.initialization.mapping-rules[0].claim-name`           | The claim of the first mapping rule.         |               |
-| `camunda.security.initialization.mapping-rules[0].claim-value`          | The claim's value of the first mapping rule. |               |
-| `camunda.security.initialization.default-roles.<role>.users[0]`         | Users assigned to the `<role>` role.         |               |
-| `camunda.security.initialization.default-roles.<role>.groups[0]`        | Groups assigned to the `<role>` role.        |               |
-| `camunda.security.initialization.default-roles.<role>.clients[0]`       | Clients assigned to the `<role>` role.       |               |
-| `camunda.security.initialization.default-roles.<role>.mapping-rules[0]` | Mapping rules assigned to the `<role>` role. |               |
+| Application.yaml property                                              | Description                                  | Default value |
+| ---------------------------------------------------------------------- | -------------------------------------------- | ------------- |
+| `camunda.security.initialization.users[0].username`                    | The username of the first user.              |               |
+| `camunda.security.initialization.users[0].password`                    | The password of the first user.              |               |
+| `camunda.security.initialization.users[0].name`                        | The name of the first user.                  |               |
+| `camunda.security.initialization.users[0].email`                       | The email address of the first user.         |               |
+| `camunda.security.initialization.mappingrules[0].mapping-rule-id`      | The id of the first mapping rule.            |               |
+| `camunda.security.initialization.mappingrules[0].claim-name`           | The claim of the first mapping rule.         |               |
+| `camunda.security.initialization.mappingrules[0].claim-value`          | The claim's value of the first mapping rule. |               |
+| `camunda.security.initialization.default-roles.<role>.users[0]`        | Users assigned to the `<role>` role.         |               |
+| `camunda.security.initialization.default-roles.<role>.groups[0]`       | Groups assigned to the `<role>` role.        |               |
+| `camunda.security.initialization.default-roles.<role>.clients[0]`      | Clients assigned to the `<role>` role.       |               |
+| `camunda.security.initialization.default-roles.<role>.mappingrules[0]` | Mapping rules assigned to the `<role>` role. |               |
 
   </TabItem>
   <TabItem value="init-helm" label="Helm values">
