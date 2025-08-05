@@ -54,7 +54,9 @@ Click **Create GitHub App** to finish.
 <h3> Configure GitHub in Web Modeler </h3>
 
 :::note
-When using a self-hosted GitHub instance, ensure the environment variable `CAMUNDA_MODELER_GITSYNC_GITHUB_BASEURL` is set to the API URL of your self-hosted GitHub instance. It usually looks like `http(s)://HOSTNAME/api/v3`. Refer to [GitHub documentation](https://docs.github.com/en/enterprise-server@3.15/rest/enterprise-admin?apiVersion=2022-11-28#endpoint-urls) and choose the correct enterprise server version.
+When using Web Modeler Self-Managed with a self-hosted GitHub instance, ensure the environment variable `CAMUNDA_MODELER_GITSYNC_GITHUB_BASEURL` is set to the API URL of your self-hosted GitHub instance.
+It usually looks like `http(s)://HOSTNAME/api/v3`.
+Refer to [GitHub documentation](https://docs.github.com/en/enterprise-server@3.15/rest/enterprise-admin?apiVersion=2022-11-28#endpoint-urls) and choose the correct Enterprise Server version.
 :::
 
 1. Within Web Modeler, navigate to the process application you would like to connect to GitHub, and click **Connect repository**.
@@ -62,12 +64,13 @@ When using a self-hosted GitHub instance, ensure the environment variable `CAMUN
 2. Select the **GitHub** tile (if not already selected), located at the top of the modal.
 
 3. Provide the following information in the **Configure GitHub** modal:
-   - **Installation ID:** Found in the URL of your GitHub App's installation page.
    - **Client ID:** Found in your GitHub App's settings page. You can also use Application ID as an alternative. (If you are using GitHub Enterprise Server 3.13 or prior, Application ID is required.)
+   - **Installation ID:** Found in the URL of your GitHub App's installation page.
+   - **GitHub API Base URL:** (optional - _**SaaS only**_) The base URL of your GitHub installation's REST API. Only necessary for GitHub Enterprise instances, refer to the [GitHub documentation](https://docs.github.com/en/enterprise-server@3.15/rest/enterprise-admin?apiVersion=2022-11-28#endpoint-urls) and choose your correct Enterprise Server version. If left empty, Web Modeler uses the default GitHub Cloud REST API URL (`https://api.github.com`).
    - **Private Key:** The contents of the .pem file downloaded from your GitHub App's settings page.
-   - **GitHub repository URL:** The base URL of the repository you want to sync with, for example `https://github.com/camunda/example-repo`. The URL cannot contain the `.git` extension or a folder path.
+   - **Repository URL:** The base URL of the repository you want to sync with, for example `https://github.com/camunda/example-repo`. The URL cannot contain the `.git` extension or a folder path.
    - **Branch name:** The branch name to use for merging and managing changes.
-   - **Path:** (optional) The path to the folder containing your process application files. If left empty, Web Modeler syncs with the root of the repository. This path is automatically created if it does not exist.
+   - **Repository path:** (optional) The path to the folder containing your process application files. If left empty, Web Modeler syncs with the root of the repository. This path is automatically created if it does not exist.
 
 4. Click **Open repository** to test your configuration. The repository for the provided branch and optional path opens in a new tab.
 
@@ -119,9 +122,9 @@ If you're using a self-hosted GitLab instance, ensure the environment variable `
 3. In the **Configure GitLab** modal, provide the following information:
    - **Access token:** The project, group, or personal access token you generated.
    - **Project ID:** The ID copied from your GitLab project settings.
-   - **GitLab repository URL:** The base URL of the repository you want to sync with (e.g., `https://gitlab.com/camunda/example-repo`). The URL must not include the `.git` extension or a folder path.
-   - **Branch name:** The branch to use for merging and managing changes.
-   - **Path:** _(Optional)_ The folder path that contains your process application files. If left empty, Web Modeler syncs with the root of the repository. The path is created automatically if it doesn't exist.
+   - **Repository URL:** The base URL of the repository you want to sync with (e.g., `https://gitlab.com/camunda/example-repo`). The URL must not include the `.git` extension or a folder path.
+   - **Branch:** The name of the branch to use for merging and managing changes.
+   - **Repository path:** (optional) The folder path that contains your process application files. If left empty, Web Modeler syncs with the root of the repository. The path is created automatically if it doesn't exist.
 
 4. Click **Open repository** to test the configuration. The repository for the selected branch and optional path will open in a new browser tab.
 
@@ -163,7 +166,7 @@ Ensure the following:
 <h3> Configure Azure in Web Modeler </h3>
 
 :::note
-When using a self-hosted Azure DevOps Server instance, ensure the environment variable `CAMUNDA_MODELER_GITSYNC_AZURE_BASEURL` is set to the API URL of your self-hosted Azure DevOps Server instance.
+When using Web Modeler Self-Managed with a self-hosted Azure DevOps Server instance, ensure the environment variable `CAMUNDA_MODELER_GITSYNC_AZURE_BASEURL` is set to the API URL of your self-hosted Azure DevOps Server instance.
 :::
 
 1. Within Web Modeler, navigate to the process application you would like to connect to Azure, and select **Connect repository**.
@@ -176,8 +179,8 @@ When using a self-hosted Azure DevOps Server instance, ensure the environment va
    - **Private Key:** The private key used to generate the certificate in PEM format.
    - **Certificate:** The certificate used to register the application in PEM format.
    - **Repository URL:** The base URL of the repository you want to sync with, for example `https://dev.azure.com/camunda/my-project/_git/example-repo`. The URL cannot contain the `.git` extension or a folder path. By default, the first repository you create will have the same name as the project and the URL won't explicitly have the project name in it, for example `https://dev.azure.com/camunda/_git/example-repo`.
-   - **Branch name:** The branch name to use for merging and managing changes.
-   - **Path:** (optional) The path to the folder containing your process application files. If left empty, Web Modeler syncs with the root of the repository. This path is automatically created if it does not exist.
+   - **Branch:** The name of the branch to use for merging and managing changes.
+   - **Repository path:** (optional) The path to the folder containing your process application files. If left empty, Web Modeler syncs with the root of the repository. This path is automatically created if it does not exist.
 
 4. Click **Open repository** to test your configuration. The repository for the provided branch and optional path opens in a new tab.
 
@@ -218,9 +221,9 @@ Web Modeler currently only supports Bitbucket Cloud.
 
 3. Fill in the **Configure Bitbucket** modal with the following information:
    - **Access token:** The repository, project, or workspace access token you generated.
-   - **Bitbucket repository URL:** The base URL of the repository you want to sync with, e.g., `https://bitbucket.org/camunda-worksapce/my-repository`. The URL must not include the `.git` extension or any folder path.
+   - **Repository URL:** The base URL of the repository you want to sync with, e.g., `https://bitbucket.org/camunda-worksapce/my-repository`. The URL must not include the `.git` extension or any folder path.
    - **Branch name:** The branch to use for merging and managing changes.
-   - **Path:** (optional) The folder path containing your process application files. If left empty, Web Modeler syncs with the repository root. This path will be created automatically if it does not exist.
+   - **Repository path:** (optional) The folder path containing your process application files. If left empty, Web Modeler syncs with the repository root. This path will be created automatically if it does not exist.
 
 4. Click **Open repository** to test your configuration. The repository for the specified branch and optional path will open in a new tab.
 
