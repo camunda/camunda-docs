@@ -24,7 +24,6 @@ steps:
 
 1. Stop Optimize, but keep Elasticsearch running (hint: to only start Elasticsearch without Optimize, you can use `elasticsearch-startup.sh` or `elasticsearch-startup.bat` scripts).
 2. From the Optimize installation root run `./reimport/reimport.sh` on Linux or `reimport/reimport.bat` on Windows and wait for it to finish
-
    - In Docker environments, you can override the command the container executes on start to call the reimport script, e.g. in [docker-compose](https://docs.docker.com/compose/) this could look like the following:
 
    ```

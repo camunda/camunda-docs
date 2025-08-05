@@ -57,7 +57,6 @@ Visit [Microsoft Teams Access Token](https://learn.microsoft.com/azure/active-di
 #### Options to obtain an access token
 
 - Via the Graph Explorer:
-
   1.  Visit [developer.microsoft.com/graph/graph-explorer](https://developer.microsoft.com/graph/graph-explorer).
   2.  Log in with your Microsoft account.
   3.  Click the **Access Token** tab and copy the bearer token.

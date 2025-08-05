@@ -95,7 +95,6 @@ The speaker might also be your Camunda Consultant - they are used to presenting 
 - _Cloud Access_: Make sure you have an account for Camunda 8 with an active subscription or trial account.
 
 - _Installations_: Make sure your _developer systems_, as well as any _target systems_ for the POC test and production you wish to use are set up. In particular install:
-
   - Camunda _Modeler_ (https://camunda.org/download/modeler/)
   - Java, Maven, and your favorite IDE (e.g. Eclipse)
   - Make sure _Maven_ runs and builds and it can access all necessary dependencies. [Download and build this project](https://github.com/camunda/camunda-platform-tutorials/tree/main/quick-start/microservice%20orchestration/worker-java) to verify that your build runs.
@@ -115,7 +114,6 @@ Inform all POC team members and other relevant stakeholders about the following:
 - _Names and roles_ of all involved _people_
 
 - For onsite POCs:
-
   - Exact _location/address_ at which the POC is taking place as well as instructions about how to find together when arriving (for onsite POCs)
   - _Projector_, white-board, and flip-chart availability
   - _Internet_ availability for team members and external consultants

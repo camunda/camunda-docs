@@ -85,7 +85,6 @@ Check the **prerequisites**:
 - Install [OpenJDK JDK 17](https://jdk.java.net/17/).
 - Install [Camunda Modeler](https://camunda.org/download/modeler/).
 - Install an IDE like [Eclipse](https://eclipse.org/downloads/). We recommend the latest "Eclipse IDE for Java Developers".
-
   - Activate workspace file sync [refresh using built-in hooks or polling](http://stackoverflow.com/questions/4343735/avoiding-resource-is-out-of-sync-with-the-filesystem) to improve interaction of Eclipse and Camunda Modeler.
   - [Add Camunda Assert to your Eclipse content assist favorites](https://github.com/camunda/camunda-bpm-platform/blob/master/test-utils/assert/README.md).
 

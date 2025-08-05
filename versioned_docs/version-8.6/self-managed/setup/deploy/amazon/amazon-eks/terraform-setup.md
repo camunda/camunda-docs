@@ -266,7 +266,6 @@ The [Camunda-provided module](https://github.com/camunda/camunda-tf-eks-module) 
    If you want to grant access to other users, you can configure this by using the `access_entries` input.
 
    Amazon EKS access management is divided into two distinct layers:
-
    - The **first layer** involves **AWS IAM permissions**, which allow basic Amazon EKS functionalities such as interacting with the Amazon EKS UI and generating EKS access through the AWS CLI. The module handles this part for you by creating the necessary IAM roles and policies.
 
    - The **second layer** controls **cluster access** within Kubernetes, defining the user's permissions inside the cluster (for example, policy association). This can be configured directly through the module's `access_entries` input.
@@ -293,7 +292,6 @@ The [Camunda-provided module](https://github.com/camunda/camunda-tf-eks-module) 
    ```
 
    In this configuration:
-
    - Replace `principal_arn` with the ARN of the IAM user or role.
    - Use `policy_associations` to define policies for fine-grained access control.
 

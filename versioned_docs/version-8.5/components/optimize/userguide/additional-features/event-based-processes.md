@@ -135,7 +135,6 @@ Each event in the table will have the following properties:
 - Event name
 
 - Group
-
   - For external events, this corresponds to the group of the ingested event.
   - For Camunda process events, this corresponds to the name of the process definition.
 

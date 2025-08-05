@@ -126,7 +126,6 @@ The Amazon EventBridge Webhook Connector supports four types of authorization:
 - **None (without authorization)**: No authentication is required for the webhook. Anyone can trigger the webhook without any credentials.
 
 - **JWT (JSON Web Token)**: This authorization type requires the following properties to be filled:
-
   - **JWK URL**: A link to the JSON Web Key (JWK) Set containing the public keys used to verify the JWT signature. [Learn more about JWK](https://datatracker.ietf.org/doc/html/rfc7517).
   - **JWT Role Property Expression** (optional): An expression to extract the roles from the JWT token. These roles will be used to check against the **Required Roles** property. For example, the expression could be:
 
@@ -141,7 +140,6 @@ The Amazon EventBridge Webhook Connector supports four types of authorization:
   ```
 
 - **Basic**: This authorization type requires the following properties to be filled:
-
   - **Username**: The username to authenticate the webhook.
   - **Password**: The password associated with the provided username.
 
