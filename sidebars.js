@@ -43,6 +43,7 @@ module.exports = {
         "components/concepts/clusters",
         "components/concepts/processes",
         "components/concepts/process-applications",
+        "components/concepts/element-templates",
         "components/concepts/job-workers",
         "components/concepts/execution-listeners",
         {
