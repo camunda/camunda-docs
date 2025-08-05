@@ -334,17 +334,26 @@ During benchmarking and when increasing the thread count, it may also make sense
 
 For high availability and redundancy, two Zeebe Gateways are deployed by default with the Helm charts. To change that amount, set `zeebe-gateway.replicas=2` to a different number. Increasing the number of gateway replicas to more than one enables the possibility for quick failover; in the case one gateway dies, the remaining gateway(s) can handle the traffic.
 
+A separate thread pool is used to run the gRPC business logic. 
+The thread pool is elastic (meaning it will start/stop threads dynamically), but will always keep a minimum number of 
+threads, and only start up to a maximum number of threads. 
+By default, this range is from 1 thread per core, up to 2 threads per core.
+
 To explore how the gateway behaves, or what it does, metrics can be consumed. By default, the gateway exports Prometheus metrics, which can be scrapped under `:9600/actuator/prometheus`.
 
 | Field             | Description                                                                                                                                                                                           | Example value |
-| ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+|-------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------|
 | managementThreads | Sets the number of threads the gateway will use to communicate with the broker cluster. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_THREADS_MANAGEMENTTHREADS`. | 1             |
+| grpcMinThreads    | Sets the minimum number of threads in the gRPC thread pool. Only accepts static values; defaults to the number of cores available.                                                                    | 8             |
+| grpcMaxThreads    | Sets the maximum number of threads in the gRPC thread pool. Only accepts static values; defaults to twice the number of cores available.                                                              | 16            |
 
 #### YAML snippet
 
 ```yaml
 threads:
   managementThreads: 1
+  grpcMinThreads: 8
+  grpcMaxThreads: 16
 ```
 
 ### zeebe.gateway.security
