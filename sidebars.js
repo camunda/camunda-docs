@@ -1049,6 +1049,7 @@ module.exports = {
       items: ["reference/data-collection/usage-metrics"],
     },
     "reference/glossary",
+    "reference/translate",
   ],
   "Self-Managed": [
     "self-managed/about-self-managed",
