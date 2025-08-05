@@ -1,6 +1,6 @@
 ---
 id: exporters
-title: Camunda exporters
+title: Exporters
 description: "As Zeebe processes jobs and processes, or performs internal maintenance, it generates an ordered stream of records."
 ---
 

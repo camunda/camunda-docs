@@ -1138,6 +1138,10 @@ module.exports = {
                 //     "self-managed/installation-methods/helm/configure/authentication/basic",
                 //   ],
                 // },
+                "self-managed/installation-methods/helm/configure/air-gapped-installation",
+                "self-managed/installation-methods/helm/configure/application-configs",
+                "self-managed/installation-methods/helm/configure/running-custom-connectors",
+                "self-managed/installation-methods/helm/configure/add-extra-manifests",
                 {
                   Database: [
                     {
@@ -1156,23 +1160,18 @@ module.exports = {
                     },
                   ],
                 },
+                "self-managed/installation-methods/helm/configure/using-existing-keycloak",
                 {
                   Ingress: [
                     "self-managed/installation-methods/helm/configure/ingress-setup",
                     "self-managed/installation-methods/helm/configure/accessing-components-without-ingress",
                   ],
                 },
-                "self-managed/installation-methods/helm/configure/secret-management",
-                "self-managed/installation-methods/helm/configure/using-existing-keycloak",
-                //license key
                 "self-managed/installation-methods/helm/configure/configure-multi-tenancy",
                 "self-managed/installation-methods/helm/configure/multi-namespace-deployment",
+                "self-managed/installation-methods/helm/configure/secret-management",
+                //license key
                 //image registry to include air gapped below and enterprise images
-                "self-managed/installation-methods/helm/configure/air-gapped-installation",
-                "self-managed/installation-methods/helm/configure/running-custom-connectors",
-                //certificates
-                "self-managed/installation-methods/helm/configure/add-extra-manifests",
-                "self-managed/installation-methods/helm/configure/application-configs",
               ],
             },
             {
@@ -1193,8 +1192,8 @@ module.exports = {
             },
             {
               "Operational tasks": [
-                "self-managed/installation-methods/helm/operational-tasks/dual-region-operational-procedure",
                 "self-managed/installation-methods/helm/operational-tasks/diagnostics",
+                "self-managed/installation-methods/helm/operational-tasks/dual-region-operational-procedure",
               ],
               //also to include backup and restore, and scaling
             },
@@ -1203,7 +1202,7 @@ module.exports = {
               label: "Cloud providers",
               link: {
                 type: "doc",
-                id: "self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/amazon-eks",
+                id: "self-managed/installation-methods/helm/cloud-providers/overview",
               },
               items: [
                 {
@@ -1251,6 +1250,7 @@ module.exports = {
                     },
                   ],
                 },
+                "self-managed/installation-methods/helm/cloud-providers/gcp/google-gke",
                 {
                   type: "category",
                   label: "Microsoft",
@@ -1261,11 +1261,6 @@ module.exports = {
                   items: [
                     "self-managed/installation-methods/helm/cloud-providers/azure/microsoft-aks/aks-terraform",
                     "self-managed/installation-methods/helm/cloud-providers/azure/microsoft-aks/aks-helm",
-                  ],
-                },
-                {
-                  Google: [
-                    "self-managed/installation-methods/helm/cloud-providers/gcp/google-gke",
                   ],
                 },
                 {
@@ -1308,6 +1303,7 @@ module.exports = {
             },
           ],
         },
+        "self-managed/operational-guides/data-purge",
         {
           type: "category",
           label: "Document handling",
@@ -1331,9 +1327,9 @@ module.exports = {
             },
           ],
         },
-        {
-          "Multi-region": ["self-managed/concepts/multi-region/dual-region"],
-        },
+        "self-managed/concepts/exporters",
+        "self-managed/operational-guides/configure-flow-control/configure-flow-control",
+        "self-managed/concepts/mapping-rules",
         {
           Monitoring: [
             "self-managed/operational-guides/monitoring/log-levels",
@@ -1341,19 +1337,18 @@ module.exports = {
           ],
         },
         {
-          Troubleshooting: ["self-managed/operational-guides/troubleshooting"],
+          "Multi-region": ["self-managed/concepts/multi-region/dual-region"],
         },
-        "self-managed/concepts/exporters",
         "self-managed/concepts/multi-tenancy",
-        "self-managed/concepts/mapping-rules",
-        "self-managed/concepts/elasticsearch-privileges",
-        "self-managed/concepts/elasticsearch-without-cluster-privileges",
-        "self-managed/concepts/opensearch-privileges",
-        "self-managed/operational-guides/data-purge",
         {
-          type: "doc",
-          label: "Configure flow control",
-          id: "self-managed/operational-guides/configure-flow-control/configure-flow-control",
+          Privileges: [
+            "self-managed/concepts/elasticsearch-privileges",
+            "self-managed/concepts/elasticsearch-without-cluster-privileges",
+            "self-managed/concepts/opensearch-privileges",
+          ],
+        },
+        {
+          Troubleshooting: ["self-managed/operational-guides/troubleshooting"],
         },
       ],
     },
@@ -1380,36 +1375,6 @@ module.exports = {
             {
               Keycloak: [
                 "self-managed/components/components-upgrade/keycloak/keycloak-update",
-              ],
-            },
-          ],
-        },
-        {
-          Modeler: [
-            {
-              "Web Modeler": [
-                "self-managed/components/modeler/web-modeler/overview",
-                {
-                  Configuration: [
-                    "self-managed/components/modeler/web-modeler/configuration/configuration",
-                    "self-managed/components/modeler/web-modeler/configuration/database",
-                    "self-managed/components/modeler/web-modeler/configuration/identity",
-                    "self-managed/components/modeler/web-modeler/configuration/logging",
-                    "self-managed/components/modeler/web-modeler/configuration/ssl",
-                  ],
-                  Troubleshooting: [
-                    "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-database-connection",
-                    "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection",
-                    "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-missing-data",
-                    "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-proxy-configuration",
-                    "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-other-problems",
-                  ],
-                },
-              ],
-            },
-            {
-              "Desktop Modeler": [
-                "self-managed/components/modeler/desktop-modeler/deploy-to-self-managed",
               ],
             },
           ],
@@ -1536,45 +1501,6 @@ module.exports = {
           ],
         },
         {
-          Connectors: [
-            "self-managed/components/connectors/overview",
-            "self-managed/components/connectors/connectors-configuration",
-          ],
-          Optimize: [
-            "self-managed/components/optimize/overview",
-            {
-              Configuration: [
-                {
-                  "System configuration": [
-                    "self-managed/components/optimize/configuration/system-configuration",
-                    "self-managed/components/optimize/configuration/system-configuration-platform-8",
-                  ],
-                },
-                "self-managed/components/optimize/configuration/logging",
-                "self-managed/components/optimize/configuration/security-instructions",
-                "self-managed/components/optimize/configuration/shared-elasticsearch-cluster",
-                "self-managed/components/optimize/configuration/history-cleanup",
-                "self-managed/components/optimize/configuration/localization",
-                "self-managed/components/optimize/configuration/object-variables",
-                "self-managed/components/optimize/configuration/variable-import",
-                "self-managed/components/optimize/configuration/multi-tenancy",
-              ],
-            },
-            {
-              "Migration & update": [
-                "self-managed/components/optimize/migration-update/camunda-8/instructions",
-                "self-managed/components/optimize/migration-update/camunda-8/8.6-to-8.7",
-                "self-managed/components/optimize/migration-update/camunda-8/3.13_8.5-to-8.6",
-                "self-managed/components/optimize/migration-update/camunda-8/3.12_8.4-to-3.13_8.5",
-                "self-managed/components/optimize/migration-update/camunda-8/3.11_8.3-to-3.12_8.4",
-                "self-managed/components/optimize/migration-update/camunda-8/3.10-to-3.11_8.3",
-                "self-managed/components/optimize/migration-update/camunda-8/3.9-to-3.10",
-                "self-managed/components/optimize/migration-update/camunda-8/3.9-preview-1-to-3.9",
-                "self-managed/components/optimize/migration-update/camunda-8/3.8-to-3.9-preview-1",
-                "self-managed/components/optimize/migration-update/camunda-8/3.7-to-3.8",
-              ],
-            },
-          ],
           Console: [
             "self-managed/components/console/overview",
             {
@@ -1585,6 +1511,42 @@ module.exports = {
             },
             "self-managed/components/console/usage-metrics",
             "self-managed/components/console/telemetry",
+          ],
+        },
+        {
+          Modeler: [
+            {
+              "Web Modeler": [
+                "self-managed/components/modeler/web-modeler/overview",
+                {
+                  Configuration: [
+                    "self-managed/components/modeler/web-modeler/configuration/configuration",
+                    "self-managed/components/modeler/web-modeler/configuration/database",
+                    "self-managed/components/modeler/web-modeler/configuration/identity",
+                    "self-managed/components/modeler/web-modeler/configuration/logging",
+                    "self-managed/components/modeler/web-modeler/configuration/ssl",
+                  ],
+                  Troubleshooting: [
+                    "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-database-connection",
+                    "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection",
+                    "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-missing-data",
+                    "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-proxy-configuration",
+                    "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-other-problems",
+                  ],
+                },
+              ],
+            },
+            {
+              "Desktop Modeler": [
+                "self-managed/components/modeler/desktop-modeler/deploy-to-self-managed",
+              ],
+            },
+          ],
+        },
+        {
+          Connectors: [
+            "self-managed/components/connectors/overview",
+            "self-managed/components/connectors/connectors-configuration",
           ],
         },
         {
@@ -1652,6 +1614,43 @@ module.exports = {
                 "self-managed/components/management-identity/miscellaneous/resource-management",
                 "self-managed/components/management-identity/miscellaneous/starting-configuration",
                 "self-managed/components/management-identity/miscellaneous/troubleshoot-identity",
+              ],
+            },
+          ],
+        },
+        {
+          Optimize: [
+            "self-managed/components/optimize/overview",
+            {
+              Configuration: [
+                {
+                  "System configuration": [
+                    "self-managed/components/optimize/configuration/system-configuration",
+                    "self-managed/components/optimize/configuration/system-configuration-platform-8",
+                  ],
+                },
+                "self-managed/components/optimize/configuration/logging",
+                "self-managed/components/optimize/configuration/security-instructions",
+                "self-managed/components/optimize/configuration/shared-elasticsearch-cluster",
+                "self-managed/components/optimize/configuration/history-cleanup",
+                "self-managed/components/optimize/configuration/localization",
+                "self-managed/components/optimize/configuration/object-variables",
+                "self-managed/components/optimize/configuration/variable-import",
+                "self-managed/components/optimize/configuration/multi-tenancy",
+              ],
+            },
+            {
+              "Migration & update": [
+                "self-managed/components/optimize/migration-update/camunda-8/instructions",
+                "self-managed/components/optimize/migration-update/camunda-8/8.6-to-8.7",
+                "self-managed/components/optimize/migration-update/camunda-8/3.13_8.5-to-8.6",
+                "self-managed/components/optimize/migration-update/camunda-8/3.12_8.4-to-3.13_8.5",
+                "self-managed/components/optimize/migration-update/camunda-8/3.11_8.3-to-3.12_8.4",
+                "self-managed/components/optimize/migration-update/camunda-8/3.10-to-3.11_8.3",
+                "self-managed/components/optimize/migration-update/camunda-8/3.9-to-3.10",
+                "self-managed/components/optimize/migration-update/camunda-8/3.9-preview-1-to-3.9",
+                "self-managed/components/optimize/migration-update/camunda-8/3.8-to-3.9-preview-1",
+                "self-managed/components/optimize/migration-update/camunda-8/3.7-to-3.8",
               ],
             },
           ],
