@@ -1334,3 +1334,28 @@ ul ul .table-of-contents__link--active {
   opacity: 0.5;
   cursor: default;
 }
+/* Style for custom Detail collapsbiles - for example used in /docs/reference/announcements-release-notes/860/860-release-notes.md */
+.changelog-dropdown {
+  border: none !important;
+  background: transparent;
+  padding: 0.2rem 0;
+  margin: 0.3rem 0;
+  box-shadow: none;
+}
+
+.changelog-dropdown[open] {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.changelog-dropdown summary {
+  cursor: pointer;
+  font-weight: 600;
+  list-style: none;
+  padding: 0.1rem 0;
+  outline: none;
+}
+
+.changelog-dropdown summary::-webkit-details-marker {
+  display: none;
+}
