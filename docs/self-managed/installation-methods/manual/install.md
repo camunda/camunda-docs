@@ -1,7 +1,7 @@
 ---
 id: manual-install
-title: "Manual installation on local machine"
-sidebar_label: "Manual JAR"
+sidebar_label: Manual JAR
+title: Camunda manual installation on local machine
 ---
 
 This page guides you through the manual installation of the Camunda 8 on a local or virtual machine.
@@ -154,7 +154,7 @@ If you _have_ deployed processes or created process instances, you'll see them o
 
 ![operate-dash-with-processes](./assets/operate-introduction.png)
 
-To update Operate versions, visit the [guide to update guide](/self-managed/components/components-upgrade/introduction.md).
+To update Operate versions, visit the [guide to update guide](/self-managed/update/administrators/prepare-for-update.md).
 
 ## Run Tasklist
 

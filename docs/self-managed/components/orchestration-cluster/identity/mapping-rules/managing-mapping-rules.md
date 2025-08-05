@@ -14,7 +14,7 @@ In this guide, you will learn how to manage mapping rules in Identity and how to
 To learn more about the concept of mapping rules, see the [mapping rules documentation](../../../../concepts/mapping-rules.md).
 :::
 
-1. Log in to the Identity UI and navigate to the **Mappings** tab.
+1. Log in to the Identity UI and navigate to the **Mapping Rules** tab.
 
 ![mapping-rule-management-tab](../img/mapping-rule-management-tab.png)
 
@@ -26,19 +26,19 @@ To learn more about the concept of mapping rules, see the [mapping rules documen
 
 <TabItem value="add">
 
-1. Click the **Create a mapping** button.
+1. Click the **Create a mapping rule** button.
 
 2. Fill in the required fields:
 
-- **Mapping ID**: A unique identifier for the mapping.
-- **Mapping name**: A user-friendly name.
+- **Mapping Rule ID**: A unique identifier for the mapping rule.
+- **Mapping Rule name**: A user-friendly name.
 - **Claim name** and **Claim value**: These define the JWT claim rule to match.
 
-![mapping-rule-add-mapping-modal](../img/mapping-rule-add-mapping-modal.png)
+![mapping-rule-add-mapping-rule-modal](../img/mapping-rule-add-mapping-modal.png)
 
-3. Click **Create a mapping** to save.
+3. Click **Create a mapping rule** to save.
 
-The new mapping will appear in the list.
+The new mapping rule will appear in the list.
 
 ![mapping-rule-refreshed-table](../img/mapping-rule-refreshed-table.png)
 
@@ -46,11 +46,11 @@ The new mapping will appear in the list.
 
 <TabItem value="update">
 
-1. Click the **pencil** icon in the mapping row you want to edit.
+1. Click the **pencil** icon in the mapping rule row you want to edit.
 
 ![mapping-rule-edit-icon](../img/mapping-rule-edit-icon.png)
 
-2. Update the desired fields and click **Update Mapping**.
+2. Update the desired fields and click **Update Mapping Rule**.
 
 ![mapping-rule-edit-modal](../img/mapping-rule-edit-modal.png)
 

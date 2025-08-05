@@ -1,13 +1,17 @@
 ---
 id: backup-and-restore
-title: "Back up and restore"
-sidebar_label: "Back up and restore"
+sidebar_label: Back up and restore
+title: Camunda back up and restore
 keywords: ["backup", "backups"]
 description: "Learn how to back up and restore your Camunda 8 Self-Managed components."
 ---
 
 :::note
 The Camunda 8.8 release introduces breaking changes for [Operate and Tasklist](./webapps-backup.md).
+:::
+
+:::note
+If the Camunda application(s) cannot access Elasticsearch with cluster-level privileges, it is possible to run the backup of Operate and Tasklist indices (steps 2 and 4 from the backup procedure below) as a standalone application separate from the main application (see [standalone backup application](/self-managed/concepts/elasticsearch-without-cluster-privileges.md#standalone-backup-application)).
 :::
 
 import Tabs from '@theme/Tabs';

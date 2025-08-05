@@ -1,6 +1,7 @@
 ---
 id: multi-namespace-deployment
-title: "Multi-namespace deployment"
+sidebar_label: Multi-namespace
+title: Helm chart multi-namespace deployment
 description: "Deploy Camunda 8 Self-Managed across several namespaces for better resource management and environment separation."
 ---
 

@@ -8,7 +8,7 @@ keywords: ["document handling"]
 Camunda 8 provides built-in support for storing, tracking, and managing documents using Camunda Forms, connectors, Tasklist, and the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/specifications/create-documents.api.mdx) in both SaaS and Self-Managed.
 
 :::note
-For a closer look at storage options for handling documents in Self-Managed environments, visit the [Self-Managed configuration docs](/self-managed/concepts/document-handling/configuration/overview.md).
+For a closer look at storage options for handling documents in Self-Managed environments, visit the [Self-Managed configuration docs](/self-managed/concepts/document-handling/configuration/index.md).
 :::
 
 Document handling is automatically integrated into each SaaS cluster, allowing you to manage binary data, like PDFs, images and other file types, across development and production environments without needing to configure or maintain storage infrastructure yourself.
@@ -31,7 +31,7 @@ Camunda SaaS manages storage for you by integrating with [**Google Cloud Platfor
 
 ### Self-Managed
 
-If you're deploying Camunda in a Self-Managed environment, document storage must be configured manually. To learn more, visit the [Self-Managed configuration docs](/self-managed/concepts/document-handling/configuration/overview.md).
+If you're deploying Camunda in a Self-Managed environment, document storage must be configured manually. To learn more, visit the [Self-Managed configuration docs](/self-managed/concepts/document-handling/configuration/index.md).
 
 :::note
 For storage options in SaaS, you cannot combine AWS and GCP, but you can in Self-Managed (for example, a cluster on GCP and document storage on AWS). This may be the case based on your existing infrastructure. However, having a cluster and document storage by the same provider (GCP or AWS) is more practical. In this case, you may reduce latency, simplify configuration, and avoid potential cross-cloud data transfer costs.

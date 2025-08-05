@@ -1,7 +1,7 @@
 ---
 id: dual-region-operational-procedure
-title: "Dual-region operational procedure"
-sidebar_label: "Dual-region operational procedure"
+sidebar_label: Dual-region operational procedure
+title: Helm chart dual-region operational procedure
 description: "The operational procedure concerning dual-region setups to recover from a region loss."
 ---
 
