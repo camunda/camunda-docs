@@ -339,7 +339,7 @@ A separate thread pool is used to run the gRPC business logic. The thread pool i
 To explore how the gateway behaves, or what it does, metrics can be consumed. By default, the gateway exports Prometheus metrics, which can be scrapped under `:9600/actuator/prometheus`.
 
 | Field             | Description                                                                                                                                                                                           | Example value |
-|-------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------|
+| ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
 | managementThreads | Sets the number of threads the gateway will use to communicate with the broker cluster. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_THREADS_MANAGEMENTTHREADS`. | 1             |
 | grpcMinThreads    | Sets the minimum number of threads in the gRPC thread pool. Only accepts static values; defaults to the number of cores available.                                                                    | 8             |
 | grpcMaxThreads    | Sets the maximum number of threads in the gRPC thread pool. Only accepts static values; defaults to twice the number of cores available.                                                              | 16            |
