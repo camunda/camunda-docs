@@ -19,7 +19,7 @@ Can't find the connector you need? Build your own custom connector using connect
 ## Connector templates
 
 Connectors use [connector templates](/components/connectors/custom-built-connectors/connector-templates.md) to customize how a BPMN element is shown,
-and how it can be configured by process developers. Connector templates are a specific kind of [element template](/components/modeler/desktop-modeler/element-templates/about-templates.md).
+and how it can be configured by process developers. Connector templates are a specific kind of [element template](/components/modeler/element-templates/element-templates.md).
 
 <div class="connector-grid">
   <a href="../connector-templates" class="connector-card" title="Connector templates">
@@ -60,7 +60,7 @@ A connector consists of the actual Java code, and the Modeler user interface.
 :::note
 
 - If you are only using prebuilt connectors in Modeler, you only need to understand how to configure and use a connector in the Modeler interface via the properties panel on the right side of the screen.
-- Connector templates are a specific type of [element template](/components/modeler/desktop-modeler/element-templates/about-templates.md), that can also be used when creating custom connectors using the [Connector SDK](connector-sdk.md).
+- Connector templates are a specific type of [element template](/components/modeler/element-templates/element-templates.md), that can also be used when creating custom connectors using the [Connector SDK](connector-sdk.md).
 
 :::
 
