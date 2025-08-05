@@ -334,10 +334,7 @@ During benchmarking and when increasing the thread count, it may also make sense
 
 For high availability and redundancy, two Zeebe Gateways are deployed by default with the Helm charts. To change that amount, set `zeebe-gateway.replicas=2` to a different number. Increasing the number of gateway replicas to more than one enables the possibility for quick failover; in the case one gateway dies, the remaining gateway(s) can handle the traffic.
 
-A separate thread pool is used to run the gRPC business logic. 
-The thread pool is elastic (meaning it will start/stop threads dynamically), but will always keep a minimum number of 
-threads, and only start up to a maximum number of threads. 
-By default, this range is from 1 thread per core, up to 2 threads per core.
+A separate thread pool is used to run the gRPC business logic. The thread pool is elastic (meaning it will start/stop threads dynamically), but will always keep a minimum number of threads, and only start up to a maximum number of threads. By default, this range is from one thread per core, up to two threads per core.
 
 To explore how the gateway behaves, or what it does, metrics can be consumed. By default, the gateway exports Prometheus metrics, which can be scrapped under `:9600/actuator/prometheus`.
 
