@@ -309,7 +309,7 @@ The assertion fails if the variable doesn't exist, the value is of a different t
 requirements.
 
 ```java
-assertThat(processInstance).hasVariableSatisfies("order", Order.class, { order ->
+assertThat(processInstance).hasVariableSatisfies("order", Order.class, order -> {
     Assertions.assertThat(order.status()).isEqualTo("approved");
     Assertions.assertThat(order.items())
         .hasSize(3)
@@ -367,7 +367,7 @@ assertThat(processInstance).hasLocalVariableSatisfies(
     byId("send-email"),
     "to",
     EmailTo.class,
-    { emailTo ->
+    emailTo -> {
         Assertions.assertThat(emailTo.name()).isEqualTo("Zee");
         Assertions.assertThat(emailTo.email()).isEqualTo("zee@camunda.com");
     });
