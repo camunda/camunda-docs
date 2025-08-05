@@ -29,7 +29,7 @@ The template editor supports you in writing the template by providing autocomple
 
 The components of the editor interface are as follows:
 
-- On the left, you find the **template JSON editor**. Here, you define the actual [template descriptor](/components/modeler/desktop-modeler/element-templates/defining-templates.md).
+- On the left, you find the **template JSON editor**. Here, you define the actual [template descriptor](/components/modeler/element-templates/defining-templates.md).
   The descriptor follows the [most recent element template schema](https://github.com/camunda/element-templates-json-schema).
 
   :::info
@@ -154,5 +154,5 @@ Once your file follows the requirements, you can upload it. There are two ways t
    <img src={ReplaceViaUploadImg} width="675px" alt="Updating a template via file upload" style={{marginTop: 0}} />
 
 :::info Desktop Modeler support
-The connector template editor is currently only available in Web Modeler. Refer to the [Desktop Modeler documentation](/components/modeler/desktop-modeler/element-templates/about-templates.md) for instructions on configuring connector templates in Desktop Modeler.
+The connector template editor is currently only available in Web Modeler. Refer to the [Desktop Modeler documentation](/components/modeler/desktop-modeler/element-templates/configuring-templates.md) for instructions on configuring connector templates in Desktop Modeler.
 :::
