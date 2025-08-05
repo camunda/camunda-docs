@@ -17,8 +17,14 @@ https://docs.camunda.io/docs/8.8/components/connectors/out-of-the-box-connectors
 https://docs.camunda.io/docs/8.8/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent
 https://docs.camunda.io/docs/8.8/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent/
 https://docs.camunda.io/docs/8.8/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent/#response
+https://docs.camunda.io/docs/8.8/components/connectors/out-of-the-box-connectors/azure-blob-storage
+https://docs.camunda.io/docs/8.8/components/connectors/out-of-the-box-connectors/azure-blob-storage/#prerequisites
 https://docs.camunda.io/docs/8.8/components/connectors/out-of-the-box-connectors/embeddings-vector-db
+https://docs.camunda.io/docs/8.8/components/connectors/out-of-the-box-connectors/google-cloud-storage
+https://docs.camunda.io/docs/8.8/components/connectors/out-of-the-box-connectors/google-cloud-storage/#authentication
 https://docs.camunda.io/docs/8.8/components/connectors/out-of-the-box-connectors/hubspot
+https://docs.camunda.io/docs/8.8/components/connectors/out-of-the-box-connectors/sql/#database
+https://docs.camunda.io/docs/8.8/components/console/manage-clusters/setup-client-connection-credentials
 https://docs.camunda.io/docs/apis-clients/operate-api/#filter
 https://docs.camunda.io/docs/apis-clients/operate-api/#sort
 https://docs.camunda.io/docs/apis-tools/camunda-api-rest/specifications/upload-document-alpha/
