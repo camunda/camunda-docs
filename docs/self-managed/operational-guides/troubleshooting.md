@@ -90,7 +90,11 @@ AWS_REQUEST_CHECKSUM_CALCULATION=WHEN_REQUIRED
 AWS_RESPONSE_CHECKSUM_CALCULATION=WHEN_REQUIRED
 ```
 
-They will disable to automated creation of checksums.
+They will disable to automated creation of checksums. Furthermore, if you are still encountering issues in terms of MD5 checksums required by your provider you can enable legacy support for the AWS S3 client by setting:
+
+```
+ZEEBE_BROKER_DATA_BACKUP_S3_SUPPORTLEGACYMD5=true
+```
 
 **Backups to IBM COS fail with 403 Access Denied**
 
