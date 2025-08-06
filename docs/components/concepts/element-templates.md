@@ -19,7 +19,7 @@ The example below demonstrates how a generic service task can be transformed int
 | <img src={propertiesNoTemplate} alt="Properties panel without an element template" /> | <img src={propertiesWithTemplate} alt="Properties panel with an element template" /> |
 
 :::tip
-[Connector templates](../connectors/custom-built-connectors/connector-templates.md) are a specific kind of element template.
+[Connector templates](../connectors/custom-built-connectors/connector-templates.md) are a specific type of element template.
 :::
 
 ## Next steps

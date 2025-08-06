@@ -1,0 +1,33 @@
+---
+id: element-templates-with-dependencies
+title: Element templates with dependencies
+description: "Learn what you need to take into account when handling template dependencies."
+---
+
+When creating element templates, you may want to link to a particular resource like a [form](/components/modeler/forms/camunda-forms-reference.md), or pre-populate a [secret](/components/connectors/use-connectors/index.md#using-secrets) expression. Your template might require a particular [job worker](/components/concepts/job-workers.md) to execute an action. These are all different types of dependencies.
+
+Element templates can depend on:
+
+- [Camunda forms](/components/modeler/forms/camunda-forms-reference.md): used in user tasks.
+- [RPA scripts](/components/rpa/overview.md): Used in service tasks.
+- [BPMN tasks](/components/modeler/bpmn/bpmn.md): used in call activities.
+- [Call activities](/components/modeler/bpmn/call-activities/call-activities.md): this may introduce nested dependencies (i.e. a called process may depend on other processes and/or dependencies).
+- [DMN decisions](/components/modeler/dmn/dmn.md): used in business rule tasks.
+- [Job workers](/components/concepts/job-workers.md): used to provide behavior for a particular service task like a flow-node in a BPMN diagram: A message send event, a send task, a service task, a business rule task, a custom connector runtime.
+- Secrets: used in elements to access sensitive values (see [connector secrets](/self-managed/components/connectors/connectors-configuration.md#secrets) and [cluster secrets](/components/console/manage-clusters/manage-secrets.md)).
+
+To make a template available for use, you must complete two key steps:
+
+- Provision dependencies at runtime: This involves making the dependencies available in the clusters that need it.
+  - For job workers, the runtime needs to be started and wired to the cluster (see how to [host custom connectors](/components/connectors/custom-built-connectors/host-custom-connector.md)).
+  - For secrets, they need to be configured before hand.
+  - For other dependency types, they need to be deployed to the cluster.
+- Make the template available at design time: This is done by making the template available in Web Modeler or Desktop Modeler so you can use it in your projects.
+
+![Element template dependencies](./img/element-template-dependencies.png)
+
+## Next
+
+- [Defining element templates](./defining-templates.md)
+- [Using element templates in Web Modeler](/components/modeler/web-modeler/element-templates/using-templates.md)
+- [Using element templates in Desktop Modeler](/components/modeler/desktop-modeler/element-templates/using-templates.md)
