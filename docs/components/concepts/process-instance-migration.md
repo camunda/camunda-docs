@@ -282,20 +282,27 @@ For migrating joining gateways, the following conditions must be true:
 
 - The joining gateway in the process instance must be mapped to the target gateway.
 - The target gateway must have at least the same number of incoming sequence flows as the source gateway.
-- Taken sequence flow IDs must exist in the target process definition and flow to the target gateway.
 
 Consider the following example:
-The process instance is waiting at the joining parallel gateway, with an incoming sequence flow taken as the element `A` is completed. Element `B` is still active and waiting at the user task.
-
+The process instance is waiting at the joining parallel gateway, with an incoming sequence flow `flow1` is taken as the element `A` is completed. Element `B` is still active and waiting at the user task.
 ![The instance waiting on joining gateway.](assets/process-instance-migration/migration-joining-gateway-before.png)
 
-Mapping the active element `B` to the target element `B`, and mapping the joining parallel gateway instance to the target joining parallel gateway, will migrate the process instance to the target process definition. Note that the taken sequence flow (from element `A` to the joining gateway) must exist in the target process definition and flow to the target gateway.
+Then, the process definition is updated to include an element `C` as a parallel task and `D` before the joining gateway.
 
-After the migration, the process instance will look like following:
+// TODO add modeler look
 
+To migrate the process instance, the following mapping instructions must be provided:
+
+- From the active element `B` to the target element `B`
+- From the joining parallel gateway instance `gateway1` to the target joining parallel gateway `gateway2`
+- From the taken sequence flow `flow1` to the target sequence flow `flow2`
+
+After the migration, the process instance will look like the following:
+
+// TODO update image
 ![The instance waiting on service task B.](assets/process-instance-migration/migration-joining-gateway-after.png)
 
-In the example above, another element `C` is added before the joining gateway in the target process definition. To complete the process instance after the migration, element `C` must be completed. Process instance modification can be used to activate element `C` and complete it to reach the target gateway.
+In the example above, another element `D` is added before the joining gateway in the target process definition. To complete the process instance after the migration, element `C` must be completed. Process instance modification can be used to activate element `C` and complete it to reach the target gateway.
 
 ## Process definitions and versions
 
