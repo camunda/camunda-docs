@@ -19,7 +19,7 @@ Can't find the connector you need? Build your own custom connector using connect
 ## Connector templates
 
 Connectors use [connector templates](/components/connectors/custom-built-connectors/connector-templates.md) to customize how a BPMN element is shown,
-and how it can be configured by process developers. Connector templates are a specific kind of [element template](/components/modeler/element-templates/element-templates.md).
+and how it can be configured by process developers. Connector templates are a specific type of [element template](/components/modeler/element-templates/element-templates.md).
 
 <div class="connector-grid">
   <a href="../connector-templates" class="connector-card" title="Connector templates">
