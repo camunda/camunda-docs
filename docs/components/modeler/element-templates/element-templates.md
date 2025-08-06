@@ -5,18 +5,16 @@ description: "Element templates can be used in Camunda Web Modeler and Desktop M
 ---
 
 :::note
-Element templates are currently available in BPMN diagrams only.
+Element templates are available in BPMN diagrams only.
 :::
 
 ## Creating and editing element templates
 
-You can edit element templates in any text editor. With the [JSON schema](defining-templates.md#json-schema-compatibility), you may get additional editing support like formatting, code completion, and error highlighting.
+Element templates are defined in template descriptor files using JSON format. Connector templates are a specific type of element template.
 
-Connector templates are a specific kind of element template and get a visual preview and editing support in [Web Modeler](/components/connectors/manage-connector-templates.md).
+You can edit element templates in any text editor or in Web Modeler's built-in template editor. Depending on the editor, the [JSON schema](defining-templates.md#json-schema-compatibility) may be picked up in order to offer additional editing support features such as formatting, code completion, and error highlighting.
 
-To better understand how to customize your templates, read our [defining templates](./defining-templates.md) documentation.
-
-Templates are defined in template descriptor files as a JSON files.
+To learn more about customizing your templates, see our [Defining templates](./defining-templates.md) documentation.
 
 ## Next steps
 
