@@ -4,8 +4,6 @@ title: Element templates
 description: An element template is a way to extend the Modeler with domain-specific diagram elements.
 ---
 
-import serviceTaskNoTemplate from './assets/element-templates/service-task-no-template.png'
-import serviceTaskWithTemplate from './assets/element-templates/service-task-with-template.png'
 import propertiesNoTemplate from './assets/element-templates/properties-no-template.png'
 import propertiesWithTemplate from './assets/element-templates/properties-with-template.png'
 
@@ -13,13 +11,13 @@ An **element template** is a way to extend the [Modeler](../modeler/about-modele
 
 The example below demonstrates how a generic service task can be transformed into a customized user interface that guides users through its configuration:
 
-| Without an element template                                                           | With an element template                                                             |
-| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
-| <img src={serviceTaskNoTemplate} alt="Service task without an element template" />    | <img src={serviceTaskWithTemplate} alt="Service task with an element template" />    |
-| <img src={propertiesNoTemplate} alt="Properties panel without an element template" /> | <img src={propertiesWithTemplate} alt="Properties panel with an element template" /> |
+|                                    Without an element template                                     |                                     With an element template                                      |
+| :------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------: |
+| ![Service task without an element template](assets/element-templates/service-task-no-template.svg) | ![Service task with an element template](assets/element-templates/service-task-with-template.svg) |
+|       <img src={propertiesNoTemplate} alt="Properties panel without an element template" />        |       <img src={propertiesWithTemplate} alt="Properties panel with an element template" />        |
 
 :::tip
-[Connector templates](../connectors/custom-built-connectors/connector-templates.md) are a specific kind of element template.
+[Connector templates](../connectors/custom-built-connectors/connector-templates.md) are a specific type of element template.
 :::
 
 ## Next steps
