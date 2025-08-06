@@ -106,7 +106,7 @@ AWS_REQUEST_CHECKSUM_CALCULATION=WHEN_REQUIRED
 
 This disables the additional checksum calculation in the S3 client and should resolve the issue.
 
-## Zeebe backup with Azure Blob storage
+## Zeebe backup with Azure Blob Storage
 
 When using an Azure backup store, requests to the backup API may time out due to [a bug in the Azure SDK](https://github.com/Azure/azure-sdk-for-java/issues/46231).
 
