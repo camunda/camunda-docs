@@ -55,6 +55,11 @@ To perform this operation, enter the following:
 As a result of this operation, you will get an array of created embedding chunk IDs,
 for example `["d599ec62-fe51-4a91-bbf0-26e1241f9079", "a1fad021-5148-42b4-aa02-7de9d590e69c"]`.
 
+:::important
+Every time that you embed a document, the connector will create a new set of chunks and store them in the vector database.
+If you want to update the existing document, you need to delete the previous chunks first.
+:::
+
 </TabItem>
 
 <TabItem value='retrieve'>
@@ -111,13 +116,81 @@ Camunda document reference metadata, similarity score, and the actual text conte
 
 ## Embedding models
 
-### Amazon Bedrock
+<Tabs groupId="embedding-models" defaultValue="bedrock" queryString values={
+[
+{label: 'Amazon Bedrock', value: 'bedrock' },
+{label: 'OpenAI', value: 'openai' },
+{label: 'Azure OpenAI', value: 'azure-openai' },
+{label: 'Google Vertex AI', value: 'vertex-ai' },
+]}>
 
+<TabItem value='bedrock'>
 The **vector database connector** currently supports only [Amazon Titan V1/V2 models](https://docs.aws.amazon.com/bedrock/latest/userguide/titan-embedding-models.html).
 Review the [official Amazon documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters-titan-embed-text.html) to understand how to choose request parameters.
 
 The **vector database connector** uses [LangChain4j implementation](https://docs.langchain4j.dev/integrations/embedding-models/amazon-bedrock).
+</TabItem>
 
+<TabItem value='openai'>
+The following parameters are required to use OpenAI as an embedding model:
+- **API key**: Your OpenAI account API key for authorization.
+- **Model name**: The OpenAI model to use for embeddings. Refer to the [OpenAI documentation](https://platform.openai.com/docs/guides/embeddings) for available models.
+
+The following parameters are optional:
+
+- **Organization ID**: If you access projects through a legacy user API key, specify the organization ID to use for API requests with this connector.
+- **Project ID**: If you access projects through a legacy user API key, specify the project ID to use for API requests with this connector.
+- **Embedding dimensions**: The number of dimensions for the embedding vector. If not specified, the connector will use the default value for the selected model.
+- **Custom Headers**: Additional headers to include in the request.
+- **Custom base URL**: If you use a custom OpenAI endpoint, specify the base URL to use for API requests with this connector.
+
+</TabItem>
+
+<TabItem value='azure-openai'>
+The following parameters are required to use Azure OpenAI as an embedding model:
+- **Endpoint**: The Azure OpenAI endpoint URL, for example `https://<your-resource-name>.openai.azure.com/`.
+- **Authentication**: Select the authentication type you want to use to authenticate the connector with Azure OpenAI.
+
+The following parameters are optional:
+
+- **Embedding dimensions**: The number of dimensions for the embedding vector. If not specified, the connector will use the default value for the selected model.
+- **Custom Headers**: Additional headers to include in the request.
+
+Two authentication methods are currently supported:
+
+- **API key**: Authenticate using an Azure OpenAI API key, available in the [Azure AI Foundry portal](https://ai.azure.com/).
+- **Client credentials**: Authenticate using a client ID and secret. This method requires registering an application in [Microsoft Entra ID](https://go.microsoft.com/fwlink/?linkid=2083908). Provide the following fields:
+  - **Client ID** – The Microsoft Entra application ID.
+  - **Client secret** – The application’s client secret.
+  - **Tenant ID** – The Microsoft Entra tenant ID.
+  - **Authority host** – (Optional) The authority host URL. Defaults to `https://login.microsoftonline.com/`. This can also be an OAuth 2.0 token endpoint.
+
+</TabItem>
+
+<TabItem value='vertex-ai'>
+
+The following parameters are required to use Google Vertex AI as an embedding model:
+
+- **Project ID**: The Google Cloud project ID.
+- **Region**: The [region](https://cloud.google.com/vertex-ai/docs/general/locations#feature-availability) where AI inference should take place.
+- **Authentication**: Select the authentication type you want to use to authenticate the connector with Google Vertex AI.
+- **Model name**: The Vertex AI model to use for embeddings. Refer to the [Vertex AI documentation](https://cloud.google.com/vertex-ai/docs/generative-ai/embeddings) for available models.
+- **Embedding dimensions**: The number of dimensions for the embedding vector. Consult the documentation for the selected model to determine the value range.
+
+The following parameter is optional:
+
+- **Publisher**: The publisher of the Vertex AI model. If not specified, the default value of `google` is used.
+
+Two authentication methods are currently supported:
+
+- **Application default credentials (ADC)**: Authenticate using the default credentials available in your environment.
+  This authentication method can only be used in Self-Managed or hybrid environments.
+  To set up ADC in a local development environment, follow the instructions [here](https://cloud.google.com/docs/authentication/set-up-adc-local-dev-environment).
+- **Service account credentials**: Authenticate using a [service account](https://cloud.google.com/iam/docs/service-account-overview) key in JSON format.
+
+</TabItem>
+
+</Tabs>
 ## Vector stores
 
 <Tabs groupId="vector" defaultValue="elasticsearch" queryString values={
