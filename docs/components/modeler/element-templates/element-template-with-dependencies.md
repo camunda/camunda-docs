@@ -18,7 +18,7 @@ Element templates can depend on:
 
 To make a template available for use, you must complete two key steps:
 
-- Provision dependencies at runtime: This involves making the dependencies available in the clusters that needed it.
+- Provision dependencies at runtime: This involves making the dependencies available in the clusters that need it.
   - For job workers, the runtime needs to be started and wired to the cluster (see how to [host custom connectors](/components/connectors/custom-built-connectors/host-custom-connector.md)).
   - For secrets, they need to be configured before hand.
   - For other dependency types, they need to be deployed to the cluster.
