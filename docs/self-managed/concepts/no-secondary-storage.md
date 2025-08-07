@@ -1,26 +1,28 @@
 ---
 id: no-secondary-storage
-title: "No Secondary Storage"
+title: "No secondary storage"
 description: "Run Zeebe clusters with only the engine and primary storage components, without secondary storage dependencies."
 ---
 
-`noSecondaryStorage` mode allows you to run Zeebe clusters with only the engine and primary storage components, disabling all secondary-storage-dependent components.
+The `noSecondaryStorage` mode allows you to run Zeebe clusters with only the engine and primary storage components, disabling all components that depend on secondary storage.
 
-## No Secondary Storage Mode
+## No secondary storage mode
 
-`noSecondaryStorage` mode provides access only to the Zeebe process engine and primary storage components. With this configuration, only the core process orchestration capabilities are available, and the full feature set of the Camunda platform is not accessible.
+In this mode, only the Zeebe process engine and primary storage components are available. This setup provides core process orchestration functionality, but does **not** include the full feature set of the Camunda platform.
 
-For the complete Camunda 8 experience with all web applications, APIs, and advanced features, we recommend using the standard deployment with secondary storage enabled.
+For the complete Camunda 8 experience, including web applications, APIs, and advanced features, we recommend using the standard deployment with secondary storage enabled.
 
-If you believe this mode fits your specific use case, please consult with Camunda support or your field team to ensure it meets your requirements.
+If you believe this mode fits your use case, consult Camunda support or your field team to ensure it aligns with your requirements.
 
-## Understanding Primary vs Secondary Storage
+## Understanding primary vs secondary storage
 
-**Primary Storage**: The core storage layer used by the Zeebe engine for process definitions, process state, and execution data. This includes all the data required for process execution.
+**Primary storage**  
+The core storage layer used by the Zeebe engine for process definitions, execution state, and runtime data. It includes everything needed for process execution.
 
-**Secondary Storage**: Additional storage systems (such as Elasticsearch or OpenSearch) that power the web applications, search APIs, and advanced features like process monitoring, task management, and analytics.
+**Secondary storage**  
+Additional storage systems, such as Elasticsearch or OpenSearch, that support advanced features like web applications, search APIs, process monitoring, task management, and analytics.
 
-When secondary storage is disabled, you lose access to web interfaces and search capabilities but retain the core process orchestration functionality.
+When secondary storage is disabled, you lose access to these advanced features (including all web interfaces and search capabilities) but retain the ability to run and manage processes using the core engine.
 
 ## Configuration
 
@@ -33,14 +35,18 @@ global:
 
 When `global.noSecondaryStorage` is set to true, the Helm charts automatically disable all secondary-storage-dependent components.
 
-Alternative deployment methods:
+### Alternative deployment methods
 
-- **Docker Compose**: Modify your compose file to exclude secondary storage services
-- **Manual deployment**: Configure Zeebe without starting Elasticsearch/OpenSearch and dependent services
+In addition to using Helm charts, you can enable `noSecondaryStorage` mode through other deployment methods:
 
-## Which components and features are disabled in noSecondaryStorage mode?
+- **Docker Compose**: Modify your `docker-compose` file to exclude secondary storage services.
+- **Manual deployment**: Start Zeebe without Elasticsearch/OpenSearch or any services that rely on them.
 
-| Category             | Component/Feature                                               | Behavior in noSecondaryStorage                                                      |
+## Components and features disabled in `noSecondaryStorage` mode
+
+The following components and features are unavailable when secondary storage is disabled:
+
+| Category             | Component/Feature                                               | Behavior in `noSecondaryStorage` mode                                               |
 | -------------------- | --------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
 | **Web applications** | Operate                                                         | Disabled                                                                            |
 |                      | Tasklist                                                        | Disabled                                                                            |
@@ -48,25 +54,27 @@ Alternative deployment methods:
 |                      | Play (Modeler Play tab)                                         | Disabled                                                                            |
 |                      | Optimize                                                        | Disabled                                                                            |
 | **APIs & Services**  | Orchestration Cluster REST API (e.g., process/search endpoints) | Search and other ES/OS-backed endpoints return 403 Forbidden with descriptive error |
-|                      | Batch Operations API                                            | 403 Forbidden error                                                                 |
-|                      | Usage Metrics endpoint (`/usage-metrics`)                       | 403 Forbidden error                                                                 |
-| **Data & Storage**   | Default Camunda Exporters (Elasticsearch/OpenSearch)            | Disabled                                                                            |
+|                      | Batch Operations API                                            | Returns 403 Forbidden                                                               |
+|                      | Usage metrics endpoint (`/usage-metrics`)                       | Returns 403 Forbidden                                                               |
+| **Data & Storage**   | Default Camunda exporters (Elasticsearch/OpenSearch)            | Disabled                                                                            |
 |                      | Schema Manager                                                  | Disabled                                                                            |
 |                      | Secondary storage backups                                       | Disabled                                                                            |
 
-- **Outbound connectors** remain fully supported; only features that depend on secondary storage (e.g., process definition lookup for inbound connectors) are unavailable.
-- **Custom exporters** to external systems (e.g., MongoDB, Kafka, Prometheus) do work, as they rely solely on the engine's primary storage.
+- **Outbound connectors** remain fully supported. However, features that depend on secondary storage, such as process definition lookup for inbound connectors, are unavailable.
+- **Custom exporters** to external systems (e.g., MongoDB, Kafka, Prometheus) continue to work, as they rely solely on the engine’s primary storage.
 
-## Usage Metrics in Engine-Only Mode
+## Usage metrics in engine-only mode
 
 When running without secondary storage:
 
 - **All built-in usage metrics endpoints are disabled.**
-- You must set up a custom exporter to collect relevant usage metrics events from Zeebe, or work with Camunda to agree on an alternative solution for usage metrics collection. See [custom exporter setup guidance](/self-managed/concepts/exporters.md#custom-exporter-to-filter-specific-records).
+- To collect usage metrics, set up a custom exporter or coordinate with Camunda to implement an alternative solution.
+
+See the [custom exporter setup guidance](/self-managed/concepts/exporters.md#custom-exporter-to-filter-specific-records) for details.
 
 ## Error handling
 
-- REST/API access to any disabled feature will respond with a clear 403 Forbidden and an actionable error message.
+- Any attempt to access a disabled feature via REST or API will return a `403 Forbidden` response with a clear and actionable error message.
 
 **Example error response**
 
@@ -78,33 +86,37 @@ When running without secondary storage:
 }
 ```
 
-- **Startup behavior**: Any affected component or service will log a clear startup warning and shut down gracefully.
-- **SDKs/clients**: Will surface these 403 errors when API access is attempted for unavailable features.
+- **Startup behavior**: Any affected component or service will log a clear warning at startup and shut down gracefully.
+- **SDKs/clients**: When attempting to access unavailable features, SDKs and clients will surface the `403 Forbidden` errors accordingly.
 
 ## Limitations and considerations
 
-**This mode significantly reduces Camunda's capabilities:**
+:::warning
+Using `noSecondaryStorage` mode significantly reduces Camunda's capabilities:
+:::
 
-- **No visual process management**: Without Operate and Tasklist, you lose all graphical interfaces for monitoring processes, viewing process instances, and managing user tasks
-- **No historical data access**: You cannot query process history, view completed instances, or access audit trails through Camunda's built-in tools
-- **Limited operational visibility**: No dashboards, analytics, or reporting capabilities through Optimize
-- **Reduced developer experience**: Missing tools for debugging, troubleshooting, and process optimization
-- **No task management**: Human tasks cannot be managed through Camunda's task management interface
-- **Limited API functionality**: Many REST endpoints for process management and data retrieval are unavailable
+- **No visual process management**: Operate and Tasklist are disabled, removing all graphical interfaces for monitoring processes, viewing instances, and managing human tasks.
+- **No historical data access**: You cannot query process history, view completed instances, or access audit trails via built-in tools.
+- **Limited operational visibility**: Dashboards, analytics, and reporting features in Optimize are unavailable.
+- **Reduced developer experience**: Tools for debugging, troubleshooting, and optimization are not accessible.
+- **No task management**: Human task functionality is unavailable through Camunda’s task management UI.
+- **Limited API functionality**: Many REST endpoints for process management and data retrieval are disabled.
 
-**Important:** These limitations mean you're essentially using only a fraction of Camunda's value proposition. Most organizations require the full platform capabilities for production use.
+:::note
+These limitations mean you are using only a subset of Camunda’s capabilities. Most organizations require the full platform for production workloads.
+:::
 
 ## When to use this mode
 
-This mode should **only** be considered in specific scenarios such as:
+Consider `noSecondaryStorage` mode **only** in specific situations, such as:
 
-- **Specialized technical requirements** that make it difficult to deploy secondary storage
-- **Temporary migration scenarios** where you need minimal functionality during transition
-- **Resource-constrained environments** where deploying the full platform isn't feasible
+- **Specialized technical requirements** that prevent the use of secondary storage.
+- **Temporary migration scenarios** where minimal orchestration functionality is needed during a transition period.
+- **Resource-constrained environments** where deploying the full platform is not feasible.
 
-In all cases, **contact Camunda before implementing this mode**. Our team can:
+In all cases, **contact Camunda before adopting this mode**. Our team can:
 
-- Help evaluate if this mode truly fits your requirements
-- Suggest alternative approaches that might provide better value
-- Outline potential migration paths to the full platform in the future
-- Provide guidance on working around the limitations
+- Help evaluate whether this mode fits your use case.
+- Suggest alternative approaches that provide more value.
+- Recommend migration paths to the full platform in the future.
+- Offer guidance on how to work around known limitations.
