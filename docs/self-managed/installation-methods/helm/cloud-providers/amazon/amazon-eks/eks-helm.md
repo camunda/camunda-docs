@@ -513,11 +513,11 @@ export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identit
 Identity and Keycloak must be port-forwarded to be able to connect to the cluster.
 
 ```shell
-kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-identity" 8080:80 --namespace "$CAMUNDA_NAMESPACE"
+kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-identity" 8084:80 --namespace "$CAMUNDA_NAMESPACE"
 kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-keycloak" 18080:80 --namespace "$CAMUNDA_NAMESPACE"
 ```
 
-1. Open Identity in your browser at `http://localhost:8080`. You will be redirected to Keycloak and prompted to log in with a username and password.
+1. Open Identity in your browser at `http://localhost:8084`. You will be redirected to Keycloak and prompted to log in with a username and password.
 2. Use `demo` as both the username and password.
 3. Select **Add application** and select **M2M** as the type. Assign a name like "test."
 4. Select the newly created application. Then, select **Access to APIs > Assign permissions**, and select the **Core API** with "read" and "write" permission.
@@ -542,9 +542,9 @@ Optimize:
 Connectors:
 > kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-connectors" 8086:8080 --namespace "$CAMUNDA_NAMESPACE"
 WebModeler:
-> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-web-modeler-webapp" 8084:80 --namespace "$CAMUNDA_NAMESPACE"
+> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-web-modeler-webapp" 8070:80 --namespace "$CAMUNDA_NAMESPACE"
 Console:
-> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-console" 8085:80 --namespace "$CAMUNDA_NAMESPACE"
+> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-console" 8087:80 --namespace "$CAMUNDA_NAMESPACE"
 ```
 
 </summary>
