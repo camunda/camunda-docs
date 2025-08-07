@@ -25,8 +25,8 @@ The log level for the Orchestration cluster is controlled via the `CAMUNDA_LOG_L
 Additionally, it configures three possible [appenders](https://logging.apache.org/log4j/2.x/manual/appenders.html) (outputs):
 
 - `RollingFile`: A [rolling file appender](https://logging.apache.org/log4j/2.x/manual/appenders/rolling-file.html), which prints out to a file
-  compressed archive, and a new one is started. **This is enabled by default. You can disable it by setting the environment variable
-  `CAMUNDA_LOG_FILE_APPENDER_ENABLED=false`**.
+  compressed archive, and a new one is started. **This is disabled by default. You can enable it by setting the environment variable
+  `CAMUNDA_LOG_FILE_APPENDER_ENABLED=true`**.
 - `Stackdriver`: will output using the [Console Appender](https://logging.apache.org/log4j/2.x/manual/appenders.html#ConsoleAppender), configured to
   print out JSON logs which conform to the [expected Stackdriver format](https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry).
   **This is not enabled by default, and you can select it by setting `ZEEBE_LOG_APPENDER=Stackdriver`.**
