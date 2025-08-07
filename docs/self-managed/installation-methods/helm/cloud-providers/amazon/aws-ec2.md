@@ -315,7 +315,7 @@ If you are using a managed OpenSearch domain instead, you should check out the [
 
 ## Troubleshooting
 
-Please conduct the general topic of troubleshooting in the [documentation](/self-managed/operational-guides/troubleshooting/troubleshooting.md).
+Please conduct the general topic of troubleshooting in the [documentation](/self-managed/operational-guides/troubleshooting.md).
 
 <!-- Optional stuff, just keeping it here for now -->
 

@@ -16,7 +16,8 @@ This guide provides a comprehensive walkthrough for installing the Camunda 8 Hel
 - [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
 - [jq](https://jqlang.github.io/jq/download/) to interact with some variables.
 - [GNU envsubst](https://www.gnu.org/software/gettext/manual/html_node/envsubst-Invocation.html) to generate manifests.
-- A namespace to host Camunda. In this guide, we will reference `camunda` as the target namespace.
+- (optional) Custom domain name/[DNS zone](https://learn.microsoft.com/en-us/azure/dns/dns-zones-records) in Azure DNS. This allows you to expose Camunda 8 endpoints and connect via community-supported [zbctl](https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md) or [Camunda Modeler](https://camunda.com/download/modeler/).
+- A namespace to host the Camunda Platform; in this guide we will reference `camunda` as the target namespace.
 
 For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file in the related repository. This contains an up-to-date list of versions we also use for testing.
 
@@ -50,6 +51,98 @@ Verify the configuration of your environment variables by running the following 
 https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/check-env-variables.sh
 ```
 
+## (Optional) Ingress Setup
+
+:::info Domain or domainless installation
+
+If you do not have a domain name, external access to Camunda 8 web endpoints from outside the Azure Virtual Network will not be possible. In this case, skip the DNS setup and proceed directly to [deploying Camunda 8 via Helm charts](#deploy-camunda-8-via-helm-charts).
+
+Alternatively, you can use `kubectl port-forward` to access the Camunda platform without a domain or Ingress configuration. For more information, see the [kubectl port-forward documentation](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_port-forward/).
+
+Throughout the rest of this installation guide, we will refer to configurations as **"With domain"** or **"Without domain"** depending on whether the application is exposed via a domain.
+:::
+
+In this section, we provide an optional setup guide for configuring an Ingress with TLS and DNS management, allowing you to access your application through a specified domain. If you haven't set up an Ingress, refer to the [Kubernetes Ingress documentation](https://kubernetes.io/docs/concepts/services-networking/ingress/) for more details. In Kubernetes, an Ingress is an API object that manages external access to services in a cluster, typically over HTTP, and can also handle TLS encryption for secure connections.
+
+To monitor your Ingress setup using Azure Monitor, you may find the official guide on [monitoring ingress controllers with Azure Monitor and Prometheus](https://learn.microsoft.com/en-us/azure/azure-monitor/containers/container-insights-prometheus-integration) helpful. Additionally, for detailed steps on exposing Kubernetes applications with the nginx ingress controller on Azure, refer to the [official Azure tutorial](https://learn.microsoft.com/en-us/azure/aks/ingress-basic).
+
+### Export Values
+
+Set the following values for your Ingress configuration:
+
+```shell reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/export-ingress-setup-vars.sh
+```
+
+Additionally, before proceeding, export the following environment variables. These will be used throughout this guide for configuring DNS, certificates, and other Azure resources:
+
+```shell reference
+https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/export-domain-setup-vars.sh
+```
+
+These variables will be referenced in later steps, so make sure they are set in your current shell session before continuing.
+
+### ingress-nginx
+
+[Ingress-nginx](https://github.com/kubernetes/ingress-nginx) is an open-source Kubernetes Ingress controller that provides a way to manage external access to services within a Kubernetes cluster. It acts as a reverse proxy and load balancer, routing incoming traffic to the appropriate services based on rules defined in the Ingress resource.
+
+The following installs `ingress-nginx` in the `ingress-nginx` namespace via Helm. For more configuration options, consult the [Helm chart](https://github.com/kubernetes/ingress-nginx/tree/main/charts/ingress-nginx).
+
+```shell reference
+https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/install-ingress-nginx.sh
+```
+
+For a step-by-step walkthrough (and the full list of Azure-specific annotations) see the Microsoft Learn article [“Create an unmanaged NGINX ingress controller in AKS.”](https://learn.microsoft.com/en-us/troubleshoot/azure/azure-kubernetes/load-bal-ingress-c/create-unmanaged-ingress-controller)
+
+### external-dns
+
+[External-dns](https://github.com/kubernetes-sigs/external-dns) is a Kubernetes add-on that automates the management of DNS records for external resources, such as load balancers or Ingress controllers. It monitors the Kubernetes resources and dynamically updates the DNS provider with the appropriate DNS records.
+
+The following installs `external-dns` in the `external-dns` namespace via Helm. For more configuration options, consult the [Helm chart](https://github.com/kubernetes-sigs/external-dns/tree/master/charts/external-dns).
+
+Consider setting `domainFilters` via `--set` to restrict access to certain hosted zones.
+
+To enable external-dns to work with Azure Managed Identities, create the Kubernetes secret directly using the exported environment variables:
+
+```shell reference
+https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/external-dns-azure-config.sh
+```
+
+:::danger Uniqueness of txtOwnerId for DNS
+
+If you are already running `external-dns` in a different cluster, ensure each instance has a **unique** `txtOwnerId` for the TXT record. Without unique identifiers, the `external-dns` instances will conflict and inadvertently delete existing DNS records.
+
+In the example below, it's set to `external-dns` and should be changed if this identifier is already in use. Consult the [documentation](https://kubernetes-sigs.github.io/external-dns/v0.15.0/#note) to learn more about DNS record ownership.
+:::
+
+```shell reference
+https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/install-external-dns.sh
+```
+
+### cert-manager
+
+[Cert-manager](https://cert-manager.io/) is an open-source Kubernetes add-on that automates the management and issuance of TLS certificates. It integrates with various certificate authorities (CAs) and provides a straightforward way to obtain, renew, and manage SSL/TLS certificates for your Kubernetes applications.
+
+To simplify the installation process, it is [recommended](https://cert-manager.io/docs/installation/helm/#3-install-customresourcedefinitions) to install the cert-manager `CustomResourceDefinition` resources before installing the chart. This separate step allows for easy uninstallation and reinstallation of cert-manager without deleting any custom resources that have been installed.
+
+```shell reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/install-cert-manager-crds.sh
+```
+
+The following installs `cert-manager` in the `cert-manager` namespace via Helm. For more configuration options, consult the [Helm chart](https://artifacthub.io/packages/helm/cert-manager/cert-manager). The supplied settings also configure `cert-manager` to ease the certificate creation by setting a default issuer, which allows you to add a single annotation on an Ingress to request the relevant certificates.
+
+```shell reference
+https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/install-cert-manager.sh
+```
+
+Create a `ClusterIssuer` via `kubectl` to enable cert-manager to request certificates from [Let's Encrypt](https://letsencrypt.org/):
+
+After exporting the above values, follow up with:
+
+```shell reference
+https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/install-cert-manager-issuer.sh
+```
+
 ## Deploy Camunda 8 via Helm charts
 
 For more configuration options, refer to the [Helm chart documentation](https://artifacthub.io/packages/helm/camunda/camunda-platform#parameters). Additionally, explore our existing resources in the [Camunda 8 Helm chart](/self-managed/installation-methods/helm/install.md) and [related guides](/self-managed/installation-methods/helm/configure/index.md).
@@ -60,6 +153,44 @@ For easy and reproducible installations, we will use YAML files to configure the
 ### 1. Create the `values.yml` file
 
 Start by creating a `values.yml` file to store the configuration for your environment. This file will contain key-value pairs that will be substituted using `envsubst`. You can find a reference example of this file here:
+
+<Tabs groupId="values">
+  <TabItem value="with-domain" label="With domain" default>
+
+The following makes use of the [combined Ingress setup](/self-managed/installation-methods/helm/configure/ingress-setup.md#combined-ingress-setup) by deploying a single Ingress for all HTTP components and a separate Ingress for the gRPC endpoint.
+
+:::info Cert-manager annotation for domain installation
+The annotation `kubernetes.io/tls-acme=true` will be [interpreted by cert-manager](https://cert-manager.io/docs/usage/ingress/) and automatically results in the creation of the required certificate request, easing the setup.
+:::
+
+```yaml reference
+https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/helm-values/values-domain.yml
+```
+
+:::danger Exposure of the Zeebe Gateway
+
+Publicly exposing the Zeebe Gateway without proper authorization can pose significant security risks. To avoid this, consider disabling the Ingress for the Zeebe Gateway by setting the following values to `false` in your configuration file:
+
+- `zeebeGateway.ingress.grpc.enabled`
+- `zeebeGateway.ingress.rest.enabled`
+
+By default, authorization is enabled to ensure secure access to Zeebe. Typically, only internal components need direct access to Zeebe, making it unnecessary to expose the gateway externally.
+
+:::
+
+#### Reference the credentials in secrets
+
+Before installing the Helm chart, create Kubernetes secrets to store the Keycloak database authentication credentials.
+
+To create the secrets, run the following commands:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/create-external-db-secrets.sh
+```
+
+</TabItem>
+
+<TabItem value="without-domain" label="Without domain">
 
 ```yaml reference
 https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/helm-values/values-no-domain.yml
@@ -74,6 +205,9 @@ To create the secrets, run the following command:
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/create-external-db-secrets.sh
 ```
+
+</TabItem>
+</Tabs>
 
 ### 2. Configure your deployment
 
@@ -197,7 +331,7 @@ This script:
 
 :::note
 
-This guide uses `helm upgrade --install` as it runs install on initial deployment and upgrades future usage. This may make it easier for future [Camunda 8 Helm upgrades](/self-managed/installation-methods/helm/upgrade/upgrade.md) or any other component upgrades.
+This guide uses `helm upgrade --install` as it runs install on initial deployment and upgrades future usage. This may make it easier for future [Camunda 8 Helm upgrades](/self-managed/installation-methods/helm/upgrade/index.md) or any other component upgrades.
 
 :::
 
@@ -216,6 +350,24 @@ First, we need an OAuth client to be able to connect to the Camunda 8 cluster.
 Generate an M2M token by following the steps outlined in the [Identity getting started guide](/self-managed/components/management-identity/identity-first-steps.md), along with the [incorporating applications documentation](/self-managed/components/management-identity/application-user-group-role-management/applications.md).
 
 Below is a summary of the necessary instructions:
+
+<Tabs groupId="domain">
+  <TabItem value="with" label="With domain" default>
+
+1. Open Identity in your browser at `https://${DOMAIN_NAME}/identity`. You will be redirected to Keycloak and prompted to log in with a username and password.
+2. Use `demo` as both the username and password.
+3. Select **Add application** and select **M2M** as the type. Assign a name like "test."
+4. Select the newly created application. Then, select **Access to APIs > Assign permissions**, and select the **Core API** with "read" and "write" permission.
+5. Retrieve the `client-id` and `client-secret` values from the application details
+
+```shell
+export ZEEBE_CLIENT_ID='client-id' # retrieve the value from the identity page of your created m2m application
+export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identity page of your created m2m application
+```
+
+</TabItem>
+  
+<TabItem value="without" label="Without domain">
 
 Identity and Keycloak must be port-forwarded to be able to connect to the cluster.
 
@@ -257,6 +409,9 @@ Console:
 </summary>
 </details>
 
+</TabItem>
+</Tabs>
+
 ### Use the token
 
 <Tabs groupId="c8-connectivity">
@@ -264,7 +419,19 @@ Console:
 
 For a detailed guide on generating and using a token, conduct the relevant documentation on [authenticating with the Orchestration cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md).
 
-This requires port-forwarding the Zeebe Gateway to be able to connect to the cluster.
+<Tabs groupId="domain">
+  <TabItem value="with" label="With domain" default>
+
+Export the following environment variables:
+
+```shell reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/export-verify-zeebe-domain.sh
+```
+
+  </TabItem>
+  <TabItem value="without" label="Without domain">
+
+This requires to port-forward the Zeebe Gateway to be able to connect to the cluster.
 
 ```shell
 kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-zeebe-gateway" 8080:8080 --namespace "$CAMUNDA_NAMESPACE"
@@ -273,13 +440,17 @@ kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-zeebe-gateway" 8080:8080 --
 Export the following environment variables:
 
 ```shell reference
-https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/generic/kubernetes/single-region/procedure/export-verify-zeebe-local.sh
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/export-verify-zeebe-local.sh
 ```
+
+  </TabItem>
+
+</Tabs>
 
 Generate a temporary token to access the Orchestration cluster REST API, then capture the value of the `access_token` property and store it as your token. Use the stored token (referred to as `TOKEN` in this case) to interact with the Orchestration cluster REST API and display the cluster topology:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/generic/kubernetes/single-region/procedure/check-zeebe-cluster-topology.sh
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/check-zeebe-cluster-topology.sh
 ```
 
 ...and results in the following output:
@@ -289,7 +460,7 @@ https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/generic
   <summary>
 
 ```json reference
-https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/generic/kubernetes/single-region/procedure/check-zeebe-cluster-topology-output.json
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/check-zeebe-cluster-topology-output.json
 ```
 
   </summary>
@@ -298,6 +469,26 @@ https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/generic
   <TabItem value="modeler" label="Desktop Modeler">
 
 Follow our existing [Modeler guide on deploying a diagram](/self-managed/components/modeler/desktop-modeler/deploy-to-self-managed.md). Below are the helper values required to be filled in Modeler:
+
+<Tabs groupId="domain" defaultValue="with" queryString values={
+[
+{label: 'With domain', value: 'with' },
+{label: 'Without domain', value: 'without' },
+]}>
+
+<TabItem value="with">
+
+The following values are required for the OAuth authentication:
+
+- **Cluster endpoint:** `https://zeebe.$DOMAIN_NAME`, replacing `$DOMAIN_NAME` with your domain
+- **Client ID:** Retrieve the client ID value from the identity page of your created M2M application
+- **Client Secret:** Retrieve the client secret value from the Identity page of your created M2M application
+- **OAuth Token URL:** `https://$DOMAIN_NAME/auth/realms/camunda-platform/protocol/openid-connect/token`, replacing `$DOMAIN_NAME` with your domain
+- **Audience:** `zeebe-api`, the default for Camunda 8 Self-Managed
+
+</TabItem>
+
+<TabItem value="without">
 
 This requires port-forwarding the Zeebe Gateway to be able to connect to the cluster:
 
@@ -312,6 +503,9 @@ The following values are required for OAuth authentication:
 - **Client Secret:** Retrieve the client secret value from the Identity page of your created M2M application.
 - **OAuth Token URL:** `http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token`
 - **Audience:** `zeebe-api`, the default for Camunda 8 Self-Managed.
+
+</TabItem>
+</Tabs>
 
 </TabItem>
 </Tabs>
