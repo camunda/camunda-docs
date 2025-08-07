@@ -326,9 +326,11 @@ cd camunda-deployment-references-main/aws/ec2/scripts
 The `script` directory contains Bash scripts for installing and configuring Camunda 8.
 
 2. Configure script behavior using the following environment variables:
+
    - `CLOUDWATCH_ENABLED`: Defaults to `false`. Set to `true` to install the CloudWatch agent on each EC2 instance and export Camunda logs and Prometheus metrics to AWS CloudWatch.
 
 3. Override default versions in the `camunda-install.sh` script by modifying these variables:
+
    - `OPENJDK_VERSION`: The Temurin Java version to install.
    - `CAMUNDA_VERSION`: The Camunda 8 version to install.
    - `CAMUNDA_CONNECTORS_VERSION`: The Camunda 8 Connectors version to install.
@@ -406,14 +408,14 @@ Upgrading directly from Camunda 8.6 to 8.7 is not supported and cannot be perfor
 
 To update to a new patch release, follow this recommended approach:
 
-1. Remove the `jars` folder. This ensures outdated dependencies from previous versions are fully removed.
+1. Remove the `lib` folder. This ensures outdated dependencies from previous versions are fully removed.
 2. Overwrite the remaining files with those from the downloaded patch release package.
 3. Restart Camunda 8.
 
 You can automate this process using the `all-in-one-install.sh` script, which:
 
 - Detects an existing Camunda 8 installation.
-- Deletes the `jars` folder to clear outdated dependencies.
+- Deletes the `lib` folder to clear outdated dependencies.
 - Overwrites files with the updated version.
 - Regenerates configuration files.
 - Restarts the application to apply updates.
@@ -428,9 +430,7 @@ In AWS environments, you can leverage CloudWatch for log collection and for gath
 
 Refer to the general backup and restore documentation in [backup and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md).
 
-When using AWS, you can utilize [S3](https://aws.amazon.com/s3/) for backing up both Zeebe and Elasticsearch data.
-
-If you use a managed OpenSearch domain, see the [official AWS documentation](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-snapshots.html) for guidance on creating backups and snapshots.
+When using AWS, you can utilize [S3](https://aws.amazon.com/s3/) for backing up both Zeebe and Elasticsearch / OpenSearch data.
 
 ## Troubleshooting
 
