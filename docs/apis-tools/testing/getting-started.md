@@ -37,12 +37,10 @@ We have two variations of CPT: for the [Camunda Spring Boot SDK](/apis-tools/spr
 
 Add the following dependency to your Maven project:
 
-<Tabs groupId="client" defaultValue="spring-sdk" queryString values={
-[
+<Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
 {label: 'Camunda Spring Boot SDK', value: 'spring-sdk' },
 {label: 'Java client', value: 'java-client' }
-]
-}>
+]}>
 
 <TabItem value='spring-sdk'>
 
@@ -74,12 +72,10 @@ Add the following dependency to your Maven project:
 
 Create a new Java class with the following structure:
 
-<Tabs groupId="client" defaultValue="spring-sdk" queryString values={
-[
+<Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
 {label: 'Camunda Spring Boot SDK', value: 'spring-sdk' },
 {label: 'Java client', value: 'java-client' }
-]
-}>
+]}>
 
 <TabItem value='spring-sdk'>
 
@@ -190,6 +186,7 @@ You can dive deeper into the library and read more about:
 - `CamundaAssert` and [assertions](assertions.md)
 - `CamundaProcessTestContext` and [utilities](utilities.md)
 - How to [configure the runtime](configuration.md)
+- Best practices for [writing process tests](/components/best-practices/development/testing-process-definitions.md)
 
 ## Examples
 

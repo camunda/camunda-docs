@@ -93,5 +93,5 @@ After completing the platform update:
 - **[Helm chart upgrade guide: 8.7 → 8.8](../../installation-methods/helm/upgrade/helm-870-880.md)** – Full step-by-step Helm upgrade guide
 - **[Collecting diagnostics](../../installation-methods/helm/operational-tasks/diagnostics.md)** – How to gather troubleshooting data
 - **[Backup and restore guide](../../operational-guides/backup-restore/backup-and-restore.md)** – Recommended backup workflows
-- **[Troubleshooting guides](../../operational-guides/troubleshooting/troubleshooting.md)** – Common issues and resolution steps
+- **[Troubleshooting guides](../../operational-guides/troubleshooting.md)** – Common issues and resolution steps
 - **[Supported environments matrix](../../../reference/supported-environments.md)** – Compatibility details for components and infrastructure
