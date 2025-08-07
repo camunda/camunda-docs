@@ -44,6 +44,29 @@ The following environment variables can be used to set the log level for individ
 - `ATOMIX_LOG_LEVEL`: Sets the level for anything clustering or raft related.
 - `ES_LOG_LEVEL`: Sets the level for anything under `org.elasticsearch`.
 
+#### RDBMS Exporter - Sensible data
+
+:::warning
+If you enable the following loggers, sensitive data may be exposed in your logs.
+:::
+
+By default, we set all loggers that could log sensitive information (variable values, ...) to INFO level.
+To enable debug logging for these loggers, it is not enough to enable logging via ZEEBE_LOG_LEVEL or config/log4j2.xml.
+
+You have to use the following environment variables.
+
+For exported Records:
+
+```
+logging.level.io.camunda.exporter.rdbms.RdbmsExporter=TRACE
+```
+
+For executed SQLs + Parameters:
+
+```
+logging.level.io.camunda.db.rdbms.sql=DEBUG
+```
+
 ## Change log level dynamically
 
 Zeebe brokers expose a [Spring Boot Actuators web endpoint](https://docs.spring.io/spring-boot/docs/current/actuator-api/html/#loggers) for configuring loggers dynamically.
