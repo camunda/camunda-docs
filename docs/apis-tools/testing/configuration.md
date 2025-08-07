@@ -246,7 +246,7 @@ If you're running local servers such as wiremock, you will want the runtime to a
 lets you test the functionality of your outbound connectors, for example.
 
 Exposing the host ports is easily done using `TestContainers.exposeHostPorts(port)`. The following code demonstrates how
-you can expose Wiremock's 9999 port to the running Testcontainers instance. 
+you can expose Wiremock's 9999 port to the running Testcontainers instance.
 
 ```java
 @WireMockTest(httpPort = 9999)
