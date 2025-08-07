@@ -258,7 +258,6 @@ you can expose Wiremock's 9999 port to the running Testcontainers instance.
     })
 @CamundaSpringProcessTest
 public class CamundaProcessTestOutboundConnectorsMockIT {
-    
   // to be injected
   @Autowired private CamundaClient client;
   @Autowired private CamundaProcessTestContext processTestContext;
