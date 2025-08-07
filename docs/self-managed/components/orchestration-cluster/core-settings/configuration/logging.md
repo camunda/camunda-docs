@@ -91,6 +91,29 @@ curl 'http://localhost:9600/actuator/loggers/io.camunda' \
 
 Replace `io.camunda` with the logger name you want to adjust.
 
+## Sensitive data
+
+Camunda 8 will avoid logging out sensitive data (e.g. PII, unencrypted business relevant data, etc.), but you may wish to enable this at times for debugging purposes. By default, we set all loggers that could log sensitive information (variable values, ...) to INFO level. To enable debug logging for these loggers, it is not enough to enable logging via `ZEEBE_LOG_LEVEL`, but rather you have to explicitly set the logging level
+to something lower than INFO for those loggers.
+
+:::warning
+If you enable the following loggers, sensitive data may be exposed in your logs.
+:::
+
+### RDBMS
+
+For exported Records:
+
+```properties
+logging.level.io.camunda.exporter.rdbms.RdbmsExporter=TRACE
+```
+
+For executed SQLs + Parameters:
+
+```properties
+logging.level.io.camunda.db.rdbms.sql=DEBUG
+```
+
 ## Notes
 
 - Learn more about [log levels](/self-managed/operational-guides/monitoring/log-levels.md).
