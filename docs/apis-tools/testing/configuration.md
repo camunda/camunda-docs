@@ -239,3 +239,68 @@ The test runtime uses [SLF4J](https://www.slf4j.org/) as the logging framework. 
 - `tc.camunda` - The Camunda Docker container (recommended level `error`)
 - `tc.connectors` - The connectors Docker container (recommended level `error`)
 - `org.testcontainers` - The Testcontainers framework (recommended level `warn`)
+
+## Accessing host ports
+
+If you're running local servers such as wiremock, you will want the runtime to access them from outside of the containerized instance. A mock server
+lets you test the functionality of your outbound connectors, for example. 
+
+Exposing the host ports is easily done using `TestContainers.exposeHostPorts(port)`. The following code demonstrates how
+you can expose Wiremock's 9999 port to the running Testcontainers instance. 
+
+```java
+@WireMockTest(httpPort = 9999)
+@SpringBootTest(
+    classes = {CamundaProcessTestOutboundConnectorsMockIT.class},
+    properties = {
+      "io.camunda.process.test.connectors-enabled=true",
+      "io.camunda.process.test.connectors-secrets.CONNECTORS_URL=http://connectors:8080/actuator/health/readiness"
+    })
+@CamundaSpringProcessTest
+public class CamundaProcessTestOutboundConnectorsMockIT {
+    
+  // to be injected
+  @Autowired private CamundaClient client;
+  @Autowired private CamundaProcessTestContext processTestContext;
+
+  @BeforeAll
+  static void setup(final WireMockRuntimeInfo wireMockRuntimeInfo) {
+    Testcontainers.exposeHostPorts(wireMockRuntimeInfo.getHttpPort());
+  }
+  
+  @Test
+  void testWithExposedPort() {
+    // ...
+  }
+}
+```
+
+You also need to edit your process .bpmn file to ensure that the outbound connector URL references the special TestContainer
+URL `http://host.testcontainers.internal`. This ensures the outgoing request is properly routed to your locally running server:
+
+```XML
+<!-- snip of a larger process .bpmn file -->
+<bpmn:serviceTask id="mocked_outbound_connector" name="Mocked Outbound Connector" zeebe:modelerTemplate="io.camunda.connectors.HttpJson.v2" zeebe:modelerTemplateVersion="11" zeebe:modelerTemplateIcon="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE3LjAzMzUgOC45OTk5N0MxNy4wMzM1IDEzLjQ0NzUgMTMuNDI4MSAxNy4wNTI5IDguOTgwNjUgMTcuMDUyOUM0LjUzMzE2IDE3LjA1MjkgMC45Mjc3NjUgMTMuNDQ3NSAwLjkyNzc2NSA4Ljk5OTk3QzAuOTI3NzY1IDQuNTUyNDggNC41MzMxNiAwLjk0NzA4MyA4Ljk4MDY1IDAuOTQ3MDgzQzEzLjQyODEgMC45NDcwODMgMTcuMDMzNSA0LjU1MjQ4IDE3LjAzMzUgOC45OTk5N1oiIGZpbGw9IiM1MDU1NjIiLz4KPHBhdGggZD0iTTQuOTMxMjYgMTQuMTU3MUw2Ljc4MTA2IDMuNzE0NzFIMTAuMTM3NUMxMS4xOTE3IDMuNzE0NzEgMTEuOTgyNCAzLjk4MzIzIDEyLjUwOTUgNC41MjAyN0MxMy4wNDY1IDUuMDQ3MzYgMTMuMzE1IDUuNzMzNTggMTMuMzE1IDYuNTc4OTJDMTMuMzE1IDcuNDQ0MTQgMTMuMDcxNCA4LjE1NTIyIDEyLjU4NDEgOC43MTIxNUMxMi4xMDY3IDkuMjU5MTMgMTEuNDU1MyA5LjYzNzA1IDEwLjYyOTggOS44NDU5TDEyLjA2MTkgMTQuMTU3MUgxMC4zMzE1TDkuMDMzNjQgMTAuMDI0OUg3LjI0MzUxTDYuNTEyNTQgMTQuMTU3MUg0LjkzMTI2Wk03LjQ5NzExIDguNTkyODFIOS4yNDI0OEM5Ljk5ODMyIDguNTkyODEgMTAuNTkwMSA4LjQyMzc0IDExLjAxNzcgOC4wODU2MUMxMS40NTUzIDcuNzM3NTMgMTEuNjc0MSA3LjI2NTEzIDExLjY3NDEgNi42Njg0MkMxMS42NzQxIDYuMTkxMDYgMTEuNTI0OSA1LjgxODExIDExLjIyNjUgNS41NDk1OUMxMC45MjgyIDUuMjcxMTMgMTAuNDU1OCA1LjEzMTkgOS44MDkzNiA1LjEzMTlIOC4xMDg3NEw3LjQ5NzExIDguNTkyODFaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K">
+  <bpmn:extensionElements>
+    <zeebe:taskDefinition type="io.camunda:http-json:1" retries="3" />
+    <zeebe:ioMapping>
+      <zeebe:input source="noAuth" target="authentication.type" />
+      <zeebe:input source="GET" target="method" />
+      <!-- Change the source to point to the internal testcontainers URL -->
+      <zeebe:input source="http://host.testcontainers.internal:9999/test" target="url" />
+      <zeebe:input source="={&#34;Accept&#34;:&#34;application/json&#34;,&#34;Content-Type&#34;:&#34;application/json&#34;}" target="headers" />
+      <zeebe:input source="=false" target="storeResponse" />
+      <zeebe:input source="=20" target="connectionTimeoutInSeconds" />
+      <zeebe:input source="=20" target="readTimeoutInSeconds" />
+      <zeebe:input source="=false" target="ignoreNullValues" />
+    </zeebe:ioMapping>
+    <zeebe:taskHeaders>
+      <zeebe:header key="elementTemplateVersion" value="11" />
+      <zeebe:header key="elementTemplateId" value="io.camunda.connectors.HttpJson.v2" />
+      <zeebe:header key="retryBackoff" value="PT0S" />
+    </zeebe:taskHeaders>
+  </bpmn:extensionElements>
+  <bpmn:incoming>Flow_01242ip</bpmn:incoming>
+  <bpmn:outgoing>Flow_0krqrtv</bpmn:outgoing>
+</bpmn:serviceTask>
+```
