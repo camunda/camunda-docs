@@ -19,6 +19,102 @@ These release notes identify the new features included in 8.8, including [alpha 
 | ---------------------- | ---------------------------- | ------------ | ------------ | ------------ |
 | 14 October 2025        | 13 April 2027                | -            | -            | -            |
 
+## 8.8.0-alpha7
+
+| Release date   | Changelog(s)                                                                                                                                                                               | Blog                                                                                |
+| :------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------- |
+| 12 August 2025 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.8.0-alpha7)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.8.0-alpha7)</li></ul> | [Release blog](https://camunda.com/blog/2025/08/camunda-alpha-release-august-2025/) |
+
+### Azure Blob Storage connector <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects connectors">Connector</span>
+
+Provides a general-purpose connector to store and retrieve documents within Camunda workflows using Azure Blob Storage. This enables seamless document management directly in processes, improving efficiency and reducing the need for custom integrations.
+
+<!-- https://github.com/camunda/product-hub/issues/2713 -->
+
+### Camunda 8 Run - support 8.8 architecture <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Developer">Developer</span>
+
+Camunda Run now ships with Identity, allowing all Core applications to run locally in configurations similar to production. This simplifies local development by enabling multiple user authentications and credentials.
+
+<!-- https://github.com/camunda/product-hub/issues/2641 -->
+
+### CSV connector <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects connectors">Connector</span>
+
+A new CSV connector for Camunda SaaS that enables reading, filtering, transforming, and writing CSV data within processes. This reduces technical debt, accelerates development, and broadens integration capabilities by supporting this universal format natively.
+
+<!-- https://github.com/camunda/product-hub/issues/2851 -->
+
+### Fetch latest process definitions <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects connectors">Connector</span>
+
+Optimizes Connectors Runtime by fetching only the latest process definition versions from Operate, reducing CPU consumption and improving deployment performance, especially in environments with frequent CI/CD-generated process versions.
+
+<!-- https://github.com/camunda/product-hub/issues/2572 -->
+
+### Google Cloud Platform (GCP) storage connector <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects connectors">Connector</span>
+
+Introduces a Google Cloud storage connector that allows easy document storage and retrieval directly within Camunda workflows, streamlining document management without custom development.
+
+<!-- https://github.com/camunda/product-hub/issues/2712 -->
+
+### IDP form extraction <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects IDP">IDP</span>
+
+A new document extraction UI supports form-based extraction to capture structured data from documents. Projects can be shared organization-wide, enhancing accessibility to extraction capabilities.
+
+<!-- https://github.com/camunda/product-hub/issues/2707 -->
+
+### IM6: Migration to Orchestration Cluster Identity is supported <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Security">Security</span>
+
+Enables smooth migration from Camunda 8.7 to 8.8 by transferring tenants, roles, and authorizations to the new Orchestration Cluster Identity, minimizing manual admin effort during upgrade.
+
+<!-- https://github.com/camunda/product-hub/issues/2449 -->
+
+### MCP connector POC <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects connectors">Connector</span><span class="badge badge--medium" title="This feature affects AI">AI</span>
+
+Allows Camunda processes and AI agents to auto-discover and invoke external tools via an MCP client connector, eliminating hardwired connectors and enabling dynamic, metadata-driven tool integration.
+
+<!-- https://github.com/camunda/product-hub/issues/2900 -->
+
+### Multi-file script support <span class="badge badge--long" title="This feature affects RPA">RPA</span><span class="badge badge--medium" title="This feature affects Developers">Developer</span>
+
+Adds support for multi-file scripts in RPA, allowing modular script organization, reuse of common components, and integration of existing Robot Framework scripts for more scalable and maintainable automation.
+
+<!-- https://github.com/camunda/product-hub/issues/2710 -->
+
+### One Camunda 8 API <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects APIs">API</span>
+
+Introduces a unified Camunda 8 REST API that consolidates multiple fragmented APIs into a single, coherent interface, simplifying development and improving clarity across Camunda components.
+
+<!-- https://github.com/camunda/product-hub/issues/2243 -->
+
+### Provide resilient batch operations managed by Zeebe <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Zeebe">Zeebe</span>
+
+Batch operations like bulk incident cancellation or resolution are now managed by Zeebe instead of Operate, increasing reliability and resilience in multi-region deployments by protecting batch commands during failovers.
+
+<!-- https://github.com/camunda/product-hub/issues/2420 -->
+
+### Tech enabler: Run process segment <span class="badge badge--long" title="This feature affects Developer">Developer</span><span class="badge badge--medium" title="This feature affects connectors">Connector</span>
+
+Enables developers to manually execute and test individual tasks or segments (connectors, RPA bots, IDP extractions) without running full processes, improving debugging and development efficiency.
+
+<!-- https://github.com/camunda/product-hub/issues/2453 -->
+
+### Unlock element template fields <span class="badge badge--long" title="This feature affects Developer">Developer</span>
+
+Improves element template management by allowing custom semantic IDs, flexible versioning, independent template/file naming, and easier importing with safeguards against conflicts, enhancing portability and collaboration.
+
+<!-- https://github.com/camunda/product-hub/issues/2860 -->
+
+### Update ES and OS minimal supported versions to 8.16+ and 2.17+ <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+
+Camunda now supports Elasticsearch 8.16+ and OpenSearch 2.17+ as minimal versions, ensuring users can benefit from the latest, most stable database releases.
+
+<!-- https://github.com/camunda/product-hub/issues/2700 -->
+
+### Unified configuration for Orchestration Cluster <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+
+Simplifies configuration by consolidating Operate, Tasklist, and Identity profiles into a unified Camunda 8 Orchestration Cluster application, reducing duplication and complexity for easier deployment and management.
+
+<!-- https://github.com/camunda/product-hub/issues/2486 -->
+
 ## 8.8.0-alpha6
 
 | Release date | Changelog(s)                                                                                                                                                                               | Blog                                                                              |
