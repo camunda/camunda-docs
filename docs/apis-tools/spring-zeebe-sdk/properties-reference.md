@@ -636,7 +636,7 @@ Path to the keystore where the client assertion certificate is stored.
 
 ### `camunda.client.cloud`
 
-Properties related to the connection of the Camunda client to Saas. They will only be used to compose default connection details if the client is configured to `camunda.client.mode: saas`.
+Properties related to the connection of the Camunda client to SaaS. They will only be used to compose default connection details if the client is configured to `camunda.client.mode: saas`.
 
 <table>
 <thead>
@@ -1093,7 +1093,7 @@ Properties related to the authentication of the Camunda client.
 
 ### `camunda.client.cloud`
 
-Properties related to the connection of the Camunda client to Saas. They will only be used to compose default connection details if the client is configured to `camunda.client.mode: saas`.
+Properties related to the connection of the Camunda client to SaaS. They will only be used to compose default connection details if the client is configured to `camunda.client.mode: saas`.
 
 <table>
 <thead>

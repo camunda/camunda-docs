@@ -23,7 +23,7 @@
     {
       "name": "camunda.client.cloud",
       "type": "io.camunda.spring.client.properties.CamundaClientCloudProperties",
-      "description": "Properties related to the connection of the Camunda client to Saas. They will only be used to compose default connection details if the client is configured to `camunda.client.mode: saas`.",
+      "description": "Properties related to the connection of the Camunda client to SaaS. They will only be used to compose default connection details if the client is configured to `camunda.client.mode: saas`.",
       "sourceType": "io.camunda.spring.client.properties.CamundaClientProperties",
       "sourceMethod": "getCloud()"
     },
