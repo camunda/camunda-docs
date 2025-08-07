@@ -174,11 +174,10 @@ Select this option to use [Google Vertex AI](https://cloud.google.com/vertex-ai)
 
 Two authentication methods are currently supported:
 
+- **Service Account Credentials**: Authenticate using a [service account](https://cloud.google.com/iam/docs/service-account-overview) key in JSON format.
 - **Application Default Credentials (ADC)**: Authenticate using the default credentials available in your environment.  
   This method is only supported in Self-Managed or hybrid environments.  
   To set up ADC in a local development environment, follow the instructions [here](https://cloud.google.com/docs/authentication/set-up-adc-local-dev-environment).
-
-- **Service Account Credentials**: Authenticate using a [service account](https://cloud.google.com/iam/docs/service-account-overview) key in JSON format.
 
 :::info
 For more information about Google Vertex AI models, see the [Vertex AI documentation](https://cloud.google.com/vertex-ai/generative-ai/docs/models).
