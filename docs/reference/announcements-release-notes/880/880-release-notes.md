@@ -27,7 +27,7 @@ These release notes identify the new features included in 8.8, including [alpha 
 
 ### Azure Blob Storage connector <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects connectors">Connector</span>
 
-Provides a [general-purpose connector to store and retrieve documents within Camunda workflows using Azure Blob Storage](<(/components/connectors/out-of-the-box-connectors/azure-blob-storage.md)>). This enables seamless document management directly in processes, improving efficiency and reducing the need for custom integrations.
+Provides a [general-purpose connector to store and retrieve documents within Camunda workflows using Azure Blob Storage](/components/connectors/out-of-the-box-connectors/azure-blob-storage.md). This enables seamless document management directly in processes, improving efficiency and reducing the need for custom integrations.
 
 <!-- https://github.com/camunda/product-hub/issues/2713 -->
 
@@ -51,7 +51,7 @@ Optimizes Connectors Runtime by fetching only the latest process definition vers
 
 ### Google Cloud Platform (GCP) storage connector <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects connectors">Connector</span>
 
-Introduces a [Google Cloud storage connector](<(/components/connectors/out-of-the-box-connectors/google-cloud-storage.md)>) that allows easy document storage and retrieval directly within Camunda workflows, streamlining document management without custom development.
+Introduces a [Google Cloud storage connector](/components/connectors/out-of-the-box-connectors/google-cloud-storage.md) that allows easy document storage and retrieval directly within Camunda workflows, streamlining document management without custom development.
 
 <!-- https://github.com/camunda/product-hub/issues/2712 -->
 
