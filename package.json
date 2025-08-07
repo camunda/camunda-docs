@@ -29,7 +29,9 @@
     "api:generate:tasklist": "npm run api:generate tasklist",
     "api:generate:zeebe": "npm run api:generate zeebe",
     "api:generate:adminsm": "npm run api:generate adminsm",
-    "api:generate:camunda": "npm run api:generate camunda"
+    "api:generate:camunda": "npm run api:generate camunda",
+    "config-reference:generate": "node ./config-reference/generate-config-reference.js",
+    "config-reference:generate:spring-sdk": "npm run config-reference:generate spring-sdk"
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.3.0",
@@ -44,6 +46,7 @@
     "docusaurus-plugin-openapi-docs": "^4.4.0",
     "docusaurus-theme-openapi-docs": "^4.4.0",
     "mixpanel-browser": "^2.64.0",
+    "mustache": "^4.2.0",
     "pushfeedback-react": "^0.1.63",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
