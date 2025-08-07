@@ -23,7 +23,7 @@ Enable the exporter by configuring the `className` in your [broker configuration
 
 ```yaml
 exporters:
-  camundaExporter:
+  camundaexporter:
     className: io.camunda.exporter.CamundaExporter
     args:
     # Refer to the table below for the available args options
@@ -175,9 +175,9 @@ exporters:
   #
   # These setting can also be overridden using the environment variables "ZEEBE_BROKER_EXPORTERS_CAMUNDAEXPORTER_..."
   # To convert a YAML formatted variable to an environment variable, start with the top-level property and separate every nested property with an underscore (_).
-  # For example, the property "zeebe.broker.exporters.camundaExporter.args.index.numberOfShards" would be converted to "ZEEBE_BROKER_EXPORTERS_CAMUNDAEXPORTER_ARGS_INDEX_NUMBEROFSHARDS".
+  # For example, the property "zeebe.broker.exporters.camundaexporter.args.index.numberOfShards" would be converted to "ZEEBE_BROKER_EXPORTERS_CAMUNDAEXPORTER_ARGS_INDEX_NUMBEROFSHARDS".
   #
-  camundaExporter:
+  camundaexporter:
     className: io.camunda.exporter.CamundaExporter
 
     args:
