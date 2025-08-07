@@ -1,5 +1,6 @@
 const removeDuplicateVersionBadge = require("../remove-duplicate-version-badge");
 const fs = require("fs");
+const yaml = require("js-yaml");
 
 function preGenerateDocs(config) {
   const originalSpec = fs.readFileSync(config.specPath, "utf8");
@@ -12,6 +13,8 @@ function preGenerateDocs(config) {
     ...redefineEvaluateDecisionRequest(originalSpec),
     ...addAlphaAdmonition(), // needs to go before addFrequentlyLinkedDocs
     ...addFrequentlyLinkedDocs(config.version),
+    ...flattenPathParams(originalSpec),
+    ...stripCamundaKeyConstraintsForDocs(originalSpec),
   ];
 
   let updatedSpec = originalSpec;
@@ -21,6 +24,13 @@ function preGenerateDocs(config) {
   }
 
   fs.writeFileSync(config.specPath, updatedSpec);
+
+  // Add eventual consistency admonitions based on vendor extension `x-eventually-consistent: true`
+  addEventualConsistencyAdmonition(config.specPath);
+
+  // This must happen after eventual consistency admonitions (and any other transforms that need vendor extensions)
+  // Remove all vendor extensions. Docusaurus does not like them. See: https://github.com/PaloAltoNetworks/docusaurus-openapi-docs/issues/891
+  removeVendorExtensions(config.specPath);
 }
 
 function postGenerateDocs(config) {
@@ -265,6 +275,214 @@ function addFrequentlyLinkedDocs(version) {
       to: `endpoint is an [alpha feature](${alphaPath})`,
     },
   ];
+}
+
+// Make path parameters more readable by flattening them into inline primitive types, so they display as `string<ProcessInstanceKey>` instead of `object`.
+// Flattens $ref-based path parameter schemas into inline primitive types
+// by resolving one level of allOf inheritance. Preserves format, pattern, and description.
+// This is necessary because the Camunda REST API uses schema inheritance to express domain types for
+// Camunda keys, which results in a complex schema structure
+//   e.g. { $ref: "#/components/schemas/ProcessInstanceKey" },
+//          allOf: [ { $ref: "#/components/schemas/CamundaKey
+// If we don't flatten this, the docs say it is a complex object, which is not true.
+// We also modify the format to include the schema name, so that it is clear what domain type it is.
+//   e.g. format: "string<ProcessInstanceKey>"
+// Otherwise Docusaurus will not render the type correctly, and it will be displayed as the generic `Camunda Key`
+function flattenPathParams(originalSpec) {
+  const doc = yaml.load(originalSpec);
+
+  const schemas = doc.components?.schemas || {};
+
+  // Traverse all paths and operations
+  for (const path of Object.values(doc.paths || {})) {
+    for (const operation of Object.values(path)) {
+      const parameters = operation.parameters;
+      if (!Array.isArray(parameters)) continue;
+
+      for (const param of parameters) {
+        if (param.schema && param.schema.$ref) {
+          const ref = param.schema.$ref;
+          const match = ref.match(/^#\/components\/schemas\/(.+)$/);
+          if (!match) continue;
+
+          const schemaName = match[1];
+          const schema = schemas[schemaName];
+          if (!schema || !schema.allOf) continue;
+
+          // Flatten one level of allOf: [ {$ref}, {description} ]
+          const refSchema = schema.allOf.find((entry) => entry.$ref);
+          const extraProps = schema.allOf.find(
+            (entry) => entry.description || entry.type
+          );
+
+          const baseMatch = refSchema?.$ref?.match(
+            /^#\/components\/schemas\/(.+)$/
+          );
+          if (!baseMatch) continue;
+
+          const baseSchema = schemas[baseMatch[1]];
+          if (!baseSchema) continue;
+
+          // Merge baseSchema + extraProps
+          const merged = {
+            type: baseSchema.type,
+            format: `string<${schemaName}>`, // baseSchema.format,
+            pattern: baseSchema.pattern,
+            example: baseSchema.example,
+            minLength: baseSchema.minLength,
+            maxLength: baseSchema.maxLength,
+            description: extraProps?.description || baseSchema.description,
+          };
+
+          // Replace the $ref schema with the flattened one
+          param.schema = merged;
+        }
+      }
+    }
+  }
+
+  return [
+    {
+      from: /[\s\S]*/, // match entire document
+      to: yaml.dump(doc, { lineWidth: -1 }), // prevent line wrapping
+    },
+  ];
+}
+
+/**
+ * Get rid of the constraints on CamundaKey schemas. We don't want to clutter the docs with these constraints,
+ * but we do want them to be present in the schema for validation purposes.
+ */
+function stripCamundaKeyConstraintsForDocs(originalSpec) {
+  const doc = yaml.load(originalSpec);
+
+  const camundaKey = doc.components?.schemas?.CamundaKey;
+  if (camundaKey) {
+    delete camundaKey.pattern;
+    delete camundaKey.minLength;
+    delete camundaKey.maxLength;
+  }
+
+  return [
+    {
+      from: /[\s\S]*/, // match entire document
+      to: yaml.dump(doc, { lineWidth: -1 }),
+    },
+  ];
+}
+
+/**
+ * Add a documentation note for eventual consistency to all endpoints that need it.
+ */
+function addEventualConsistencyAdmonition(specFilePath) {
+  try {
+    // Read and parse the YAML file
+    const fileContents = fs.readFileSync(specFilePath, "utf8");
+    const spec = yaml.load(fileContents);
+    let admonitionsAdded = 0;
+    // Process each path and operation for eventual consistency
+    if (spec.paths) {
+      Object.keys(spec.paths).forEach((pathKey) => {
+        const pathItem = spec.paths[pathKey];
+
+        // Check if the path item itself has the eventual consistency marker
+        const pathHasEventualConsistency =
+          pathItem["x-eventually-consistent"] === true;
+
+        Object.keys(pathItem).forEach((method) => {
+          const operation = pathItem[method];
+
+          // Skip non-operation properties (like x-eventually-consistent, parameters, etc.)
+          if (
+            !operation ||
+            typeof operation !== "object" ||
+            ![
+              "get",
+              "post",
+              "put",
+              "patch",
+              "delete",
+              "options",
+              "head",
+              "trace",
+            ].includes(method)
+          ) {
+            return;
+          }
+
+          // Check if this operation has the eventual consistency marker (either on the operation or inherited from path)
+          const operationHasEventualConsistency =
+            operation["x-eventually-consistent"] === true;
+
+          if (operationHasEventualConsistency || pathHasEventualConsistency) {
+            // Add the admonition to the description
+            const admonition =
+              "\n\n:::tip\nThis endpoint provides eventually consistent data. There may be a slight delay between when data is written and when it becomes available for reading.\n:::\n";
+
+            if (operation.description) {
+              operation.description += admonition;
+            } else {
+              operation.description = admonition.trim();
+            }
+            admonitionsAdded++;
+          }
+        });
+      });
+    }
+
+    // Write the updated spec back to the file
+    const updatedYaml = yaml.dump(spec, {
+      lineWidth: -1,
+      noRefs: true,
+      sortKeys: false,
+    });
+    fs.writeFileSync(specFilePath, updatedYaml, "utf8");
+
+    console.log(
+      `✅ Added ${admonitionsAdded} eventual consistency admonitions`
+    );
+  } catch (error) {
+    console.error("❌ Error processing eventual consistency:", error);
+  }
+}
+
+// Remove all vendor extensions recursively (x-eventually-consistent, x-semantic-type, etc.)
+function removeVendorExtensions(specFilePath) {
+  function recursivelyRemoveVendorExtension(obj) {
+    if (obj && typeof obj === "object") {
+      if (Array.isArray(obj)) {
+        obj.forEach((item) => recursivelyRemoveVendorExtension(item));
+      } else {
+        Object.keys(obj).forEach((key) => {
+          if (key.startsWith("x-")) {
+            delete obj[key];
+          } else {
+            recursivelyRemoveVendorExtension(obj[key]);
+          }
+        });
+      }
+    }
+  }
+
+  try {
+    // Read and parse the YAML file
+    const fileContents = fs.readFileSync(specFilePath, "utf8");
+    const spec = yaml.load(fileContents);
+
+    recursivelyRemoveVendorExtension(spec);
+
+    // Write the updated spec back to the file
+    const updatedYaml = yaml.dump(spec, {
+      lineWidth: -1,
+      noRefs: true,
+      sortKeys: false,
+    });
+    fs.writeFileSync(specFilePath, updatedYaml, "utf8");
+
+    console.log("✅ Removed all vendor extensions");
+  } catch (error) {
+    console.error("❌ Error removing vendor extensions:", error);
+  }
 }
 
 module.exports = {
