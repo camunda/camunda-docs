@@ -1,6 +1,7 @@
 ---
 id: camunda-8-run
-title: "Camunda 8 Run"
+sidebar_label: Camunda 8 Run
+title: Document handling configuration in Camunda 8 Run
 description: "Learn more about storage configuration options for Camunda 8 Run setups."
 keywords: ["document handling", "document storage configuration"]
 ---
@@ -9,7 +10,7 @@ import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
 :::note
-[Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md) can be used for local development only, and none of the storage options below are suitable for production.
+[Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) can be used for local development only, and none of the storage options below are suitable for production.
 :::
 
 If no storage configuration is provided, the default document storage is **in-memory**. It means that documents will be lost when the application is stopped.
@@ -136,7 +137,7 @@ DOCUMENT_DEFAULT_STORE_ID=inmemory
 
 <TabItem value='local'>
 
-**Local storage** can be configured for a cluster to store documents in a local folder. It can be used only for local development with [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md).
+**Local storage** can be configured for a cluster to store documents in a local folder. It can be used only for local development with [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md).
 
 Local storage is not suitable for production use, as pods and file paths are not shared across components. This prevents components like Tasklist and Zeebe from accessing the same data. Files are stored locally, and their retention must be managed manually.
 

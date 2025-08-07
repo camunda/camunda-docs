@@ -15,6 +15,15 @@ When to use it:
 - Trigger an active BPMN timer event
 - Test scenarios that require a specific date or time, for example, a leap year
 
+:::tip
+If you trigger a BPMN timer event, you should assert that the BPMN timer event is active before manipulating the clock.
+Otherwise, you may manipulate the clock too early and the BPMN timer event is not triggered.
+:::
+
+### Increase time
+
+You can increase the time by a given duration. As a result, the clock is moved forward (i.e., in the future).
+
 ```java
 @Test
 void shouldTriggerTimerEvent() {
@@ -30,6 +39,21 @@ void shouldTriggerTimerEvent() {
 }
 ```
 
+### Set time
+
+You can set the clock to a given date and time.
+
+```java
+@Test
+void shouldCreateProcessInstanceInTheMorning() {
+    // given
+    processTestContext.setTime(Instant.parse("2025-10-01T08:00:00Z"));
+
+    // when: create a process instance
+    // then: verify the behavior at the given time
+}
+```
+
 ## Mock job workers
 
 You can mock a job worker to simulate its behavior without invoking the actual worker. The mock handles all jobs of the given job type.
@@ -40,6 +64,19 @@ When to use it:
 - Simulate different outcomes of a job worker (success, BPMN error)
 - Mock disabled job workers or Connectors
 
+:::tip
+If you start the process application in your test case, you
+should [disable the job workers](../spring-zeebe-sdk/configuration.md#disable-a-job-worker) to avoid interferences with
+the mocks, for example, by setting the following configuration:
+
+```java
+@SpringBootTest(properties = {"camunda.client.worker.defaults.enabled=false"})
+@CamundaSpringProcessTest
+class MyProcessTest { .. }
+```
+
+:::
+
 ### Complete job
 
 The mock completes jobs with/without variables.
@@ -49,7 +86,7 @@ The mock completes jobs with/without variables.
 void shouldCompleteJob() {
     // given: mock job worker for the job type "send-email"
     // 1) Complete jobs without variables
-    rocessTestContext.mockJobWorker("send-email").thenComplete();
+    processTestContext.mockJobWorker("send-email").thenComplete();
 
     // 2) Complete jobs with variables
     final Map<String, Object> variables = Map.of(
@@ -182,18 +219,18 @@ When to use it:
 @Test
 void shouldCompleteJob() {
     // given: a process instance is waiting at a task
-    
+
     // when: complete the job with type "send-notification"
     // 1) Without variables
     processTestContext.completeJob("send-notification");
-    
+
     // 2) With variables
     final Map<String, Object> variables = Map.of(
         "notification-sent", true,
         "recipients", List.of("user1@example.com", "user2@example.com")
     );
     processTestContext.completeJob("send-notification", variables);
-    
+
     // then: verify that the process instance completed the task
 }
 ```
@@ -212,18 +249,18 @@ When to use it:
 @Test
 void shouldThrowBpmnErrorFromJob() {
     // given: a process instance is waiting at a task
-    
+
     // when: throw a BPMN error for the job with type "validate-data"
     // 1) With error code "VALIDATION_FAILED" and no variables
     processTestContext.throwBpmnErrorFromJob("validate-data", "VALIDATION_FAILED");
-    
+
     // 2) With error code "VALIDATION_FAILED" and variables
     final Map<String, Object> variables = Map.of(
         "error-message", "Invalid customer data",
         "error-code", "ERR_VALIDATION_001"
     );
     processTestContext.throwBpmnErrorFromJob("validate-data", "VALIDATION_FAILED", variables);
-    
+
     // then: verify that the process instance handled the error
 }
 ```
@@ -252,10 +289,10 @@ void shouldCompleteUserTask() {
         "approvedAmount", 5000.00
     );
     processTestContext.completeUserTask("Approve Request", variables);
-    
+
     // 2) With selector by element id "task_approveRequest"
     processTestContext.completeUserTask(byElementId("task_approveRequest"), variables);
-    
+
     // then: verify that the process instance is completed
 }
 ```

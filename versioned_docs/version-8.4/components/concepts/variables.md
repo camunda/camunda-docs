@@ -133,6 +133,10 @@ Output mappings can be used for several purposes:
 
 If **one or more** output mappings are defined, the results variables are set as **local variables** in the scope where the mapping is defined. Then, the output mappings are applied to the variables and create new variables in this scope. The new variables are merged into the parent scope. If there is no mapping for a job/message variable, the variable is not merged.
 
+:::note
+This can lead to a case where some variables with an output mapping are merged into the parent scope, and others without an output mapping are not merged.
+:::
+
 If **no** output mappings are defined, all results variables are merged into the process instance.
 
 In the case of a subprocess, the behavior is different. There are no results variables to be merged. However, output mappings can be used to propagate **local variables** of the subprocess to higher scopes. By default, all **local variables** are removed when the scope is left.

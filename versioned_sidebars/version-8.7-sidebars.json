@@ -50,8 +50,7 @@
         "guides/migrating-from-camunda-7/conceptual-differences",
         "guides/migrating-from-camunda-7/migration-tooling",
         "guides/migrating-from-camunda-7/code-conversion",
-        "guides/migrating-from-camunda-7/migration-readiness",
-        "guides/migrating-from-camunda-7/technical-details"
+        "guides/migrating-from-camunda-7/migration-readiness"
       ]
     }
   ],
@@ -504,7 +503,8 @@
                 "components/modeler/reference/modeling-guidance/rules/error-reference",
                 "components/modeler/reference/modeling-guidance/rules/escalation-reference",
                 "components/modeler/reference/modeling-guidance/rules/feel",
-                "components/modeler/reference/modeling-guidance/rules/message-reference"
+                "components/modeler/reference/modeling-guidance/rules/message-reference",
+                "components/modeler/reference/modeling-guidance/rules/no-loop"
               ]
             }
           ]
@@ -1864,7 +1864,7 @@
                 }
               ],
               "Microsoft (Azure)": [
-                "self-managed/setup/deploy/azure/microsoft-aks"
+                "self-managed/setup/deploy/azure/microsoft-aks/microsoft-aks"
               ],
               "Google (GCP)": ["self-managed/setup/deploy/gcp/google-gke"],
               "Red Hat (OpenShift)": [
@@ -1892,6 +1892,7 @@
             "self-managed/setup/guides/using-existing-elasticsearch",
             "self-managed/setup/guides/using-existing-opensearch",
             "self-managed/setup/guides/using-existing-postgres",
+            "self-managed/setup/guides/using-existing-keycloak",
             "self-managed/setup/guides/configure-db-custom-headers",
             "self-managed/setup/guides/air-gapped-installation",
             "self-managed/setup/guides/running-custom-connectors",
@@ -1924,6 +1925,12 @@
                 "self-managed/setup/deploy/amazon/amazon-eks/eks-terraform",
                 "self-managed/setup/deploy/amazon/amazon-eks/eks-helm",
                 "self-managed/setup/deploy/amazon/amazon-eks/dual-region"
+              ]
+            },
+            {
+              "Microsoft AKS": [
+                "self-managed/setup/deploy/azure/microsoft-aks/aks-terraform",
+                "self-managed/setup/deploy/azure/microsoft-aks/aks-helm"
               ]
             },
             {
@@ -1978,16 +1985,21 @@
         },
         {
           "type": "category",
-          "label": "Backup and restore",
+          "label": "Back up and restore",
           "link": {
             "type": "doc",
             "id": "self-managed/operational-guides/backup-restore/backup-and-restore"
           },
           "items": [
-            "self-managed/operational-guides/backup-restore/optimize-backup",
-            "self-managed/operational-guides/backup-restore/operate-tasklist-backup",
-            "self-managed/operational-guides/backup-restore/zeebe-backup-and-restore",
-            "self-managed/operational-guides/backup-restore/modeler-backup-and-restore"
+            "self-managed/operational-guides/backup-restore/backup",
+            "self-managed/operational-guides/backup-restore/restore",
+            {
+              "Backup Management API": [
+                "self-managed/operational-guides/backup-restore/optimize-backup",
+                "self-managed/operational-guides/backup-restore/operate-tasklist-backup",
+                "self-managed/operational-guides/backup-restore/zeebe-backup-and-restore"
+              ]
+            }
           ]
         },
         {

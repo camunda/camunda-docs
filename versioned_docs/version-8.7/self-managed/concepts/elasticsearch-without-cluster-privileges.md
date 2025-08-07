@@ -37,6 +37,7 @@ Create an additional custom configuration for the schema manager with the follow
 zeebe.broker.exporters.elasticsearch:
   className: io.camunda.zeebe.exporter.ElasticsearchExporter
   args:
+    url: https://localhost:9200
     index:
       createTemplate: true
     retention:
@@ -52,6 +53,12 @@ camunda:
       username: camunda-admin
       password: camunda123
       healthCheckEnabled: false
+      url: https://localhost:9200
+      # If custom SSL configuration is necessary
+      ssl:
+        selfSigned: true
+        verifyHostname: false
+        certificatePath: PATH_TO_CA_CERT
     archiver:
       # Optional, only if ILM is enabled
       ilmEnabled: true
@@ -61,10 +68,18 @@ camunda:
       username: camunda-admin
       password: camunda123
       healthCheckEnabled: false
+      url: https://localhost:9200
+      # If custom SSL configuration is necessary
+      ssl:
+        selfSigned: true
+        verifyHostname: false
+        certificatePath: PATH_TO_CA_CERT
     archiver:
       # Optional, only if ILM is enabled
       ilmEnabled: true
 ```
+
+For additional configuration options available, please take a look at the respective guides from [Operate](../../operate-deployment/operate-configuration/), [Tasklist](../../tasklist-deployment/tasklist-configuration/), and [Zeebe Elasticsearch Exporter](../../zeebe-deployment/exporters/elasticsearch-exporter/).
 
 #### Start the schema manager
 
@@ -139,6 +154,7 @@ Create a configuration for the Camunda single application with the following val
 zeebe.broker.exporters.elasticsearch:
   className: io.camunda.zeebe.exporter.ElasticsearchExporter
   args:
+    url: https://localhost:9200
     index:
       createTemplate: false
     retention:
@@ -155,10 +171,22 @@ camunda:
       username: camunda-app
       password: camunda123
       healthCheckEnabled: false
+      url: https://localhost:9200
+      # If custom SSL configuration is necessary
+      ssl:
+        selfSigned: true
+        verifyHostname: false
+        certificatePath: PATH_TO_CA_CERT
     zeebeElasticsearch:
       # Example assuming an existing user called 'camunda-app' with the privileges described in 2.1
       username: camunda-app
       password: camunda123
+      url: https://localhost:9200
+      # If custom SSL configuration is necessary
+      ssl:
+        selfSigned: true
+        verifyHostname: false
+        certificatePath: PATH_TO_CA_CERT
     archiver:
       ilmEnabled: false
       ilmManagePolicy: false
@@ -170,10 +198,22 @@ camunda:
       username: camunda-app
       password: camunda123
       healthCheckEnabled: false
+      url: https://localhost:9200
+      # If custom SSL configuration is necessary
+      ssl:
+        selfSigned: true
+        verifyHostname: false
+        certificatePath: PATH_TO_CA_CERT
     zeebeElasticsearch:
       # Example assuming an existing user called 'camunda-app' with the privileges described in 2.1
       username: camunda-app
       password: camunda123
+      url: https://localhost:9200
+      # If custom SSL configuration is necessary
+      ssl:
+        selfSigned: true
+        verifyHostname: false
+        certificatePath: PATH_TO_CA_CERT
     archiver:
       ilmEnabled: false
     migration:
@@ -324,6 +364,12 @@ camunda:
       username: camunda-admin
       password: camunda123
       healthCheckEnabled: false
+      url: https://localhost:9200
+      # If custom SSL configuration is necessary
+      ssl:
+        selfSigned: true
+        verifyHostname: false
+        certificatePath: PATH_TO_CA_CERT
   tasklist:
     backup:
       # Example assuming an existing snapshot repository 'els-test'
@@ -333,8 +379,16 @@ camunda:
       username: camunda-admin
       password: camunda123
       healthCheckEnabled: false
+      url: https://localhost:9200
+      # If custom SSL configuration is necessary
+      ssl:
+        selfSigned: true
+        verifyHostname: false
+        certificatePath: PATH_TO_CA_CERT
 
 ```
+
+For additional configuration options available, please take a look at the respective guides from [Operate](../../operate-deployment/operate-configuration/), [Tasklist](../../tasklist-deployment/tasklist-configuration/), and [Zeebe Elasticsearch Exporter](../../zeebe-deployment/exporters/elasticsearch-exporter/).
 
 ### 2. Start the backup application
 
@@ -356,8 +410,8 @@ Example output logs:
 
 ```
 INFO  io.camunda.application.StandaloneBackupManager - Snapshot observation:
-INFO  io.camunda.application.StandaloneBackupManager - Operate indices snapshot is COMPLETED. Details: [GetBackupStateResponseDto{backupId=12345, state=COMPLETED, failureReason='null', details=[GetBackupStateResponseDetailDto{snapshotName='camunda_operate_12345_8.7.0-snapshot_part_1_of_6', state='SUCCESS', startTime=2025-03-11T17:49:08.016+01:00, failures=[]}, GetBackupStateResponseDetailDto{snapshotName='camunda_operate_12345_8.7.0-snapshot_part_2_of_6', state='SUCCESS', startTime=2025-03-11T17:49:08.216+01:00, failures=[]}, GetBackupStateResponseDetailDto{snapshotName='camunda_operate_12345_8.7.0-snapshot_part_3_of_6', state='SUCCESS', startTime=2025-03-11T17:49:08.216+01:00, failures=[]}, GetBackupStateResponseDetailDto{snapshotName='camunda_operate_12345_8.7.0-snapshot_part_4_of_6', state='SUCCESS', startTime=2025-03-11T17:49:08.416+01:00, failures=[]}, GetBackupStateResponseDetailDto{snapshotName='camunda_operate_12345_8.7.0-snapshot_part_5_of_6', state='SUCCESS', startTime=2025-03-11T17:49:08.617+01:00, failures=[]}, GetBackupStateResponseDetailDto{snapshotName='camunda_operate_12345_8.7.0-snapshot_part_6_of_6', state='SUCCESS', startTime=2025-03-11T17:49:08.617+01:00, failures=[]}]}]
-INFO  io.camunda.application.StandaloneBackupManager - Tasklist indices snapshot is COMPLETED. Details: [GetBackupStateResponseDto{backupId=12345, state=COMPLETED, failureReason='null', details=[GetBackupStateResponseDetailDto{snapshotName='camunda_tasklist_12345_8.7.0-snapshot_part_1_of_6', state='SUCCESS', startTime=2025-03-11T17:49:08.016+01:00, failures=[]}, GetBackupStateResponseDetailDto{snapshotName='camunda_tasklist_12345_8.7.0-snapshot_part_2_of_6', state='SUCCESS', startTime=2025-03-11T17:49:08.216+01:00, failures=[]}, GetBackupStateResponseDetailDto{snapshotName='camunda_tasklist_12345_8.7.0-snapshot_part_3_of_6', state='SUCCESS', startTime=2025-03-11T17:49:08.416+01:00, failures=[]}, GetBackupStateResponseDetailDto{snapshotName='camunda_tasklist_12345_8.7.0-snapshot_part_4_of_6', state='SUCCESS', startTime=2025-03-11T17:49:08.416+01:00, failures=[]}, GetBackupStateResponseDetailDto{snapshotName='camunda_tasklist_12345_8.7.0-snapshot_part_5_of_6', state='SUCCESS', startTime=2025-03-11T17:49:08.617+01:00, failures=[]}, GetBackupStateResponseDetailDto{snapshotName='camunda_tasklist_12345_8.7.0-snapshot_part_6_of_6', state='SUCCESS', startTime=2025-03-11T17:49:08.818+01:00, failures=[]}]}]
+INFO  io.camunda.application.StandaloneBackupManager - Operate indices snapshot is COMPLETED. Details: [GetBackupStateResponseDto{backupId=12345, state=COMPLETED, failureReason='null', details=[GetBackupStateResponseDetailDto{snapshotName='camunda_operate_12345_8.7-snapshot_part_1_of_6', state='SUCCESS', startTime=2025-03-11T17:49:08.016+01:00, failures=[]}, GetBackupStateResponseDetailDto{snapshotName='camunda_operate_12345_8.7-snapshot_part_2_of_6', state='SUCCESS', startTime=2025-03-11T17:49:08.216+01:00, failures=[]}, GetBackupStateResponseDetailDto{snapshotName='camunda_operate_12345_8.7-snapshot_part_3_of_6', state='SUCCESS', startTime=2025-03-11T17:49:08.216+01:00, failures=[]}, GetBackupStateResponseDetailDto{snapshotName='camunda_operate_12345_8.7-snapshot_part_4_of_6', state='SUCCESS', startTime=2025-03-11T17:49:08.416+01:00, failures=[]}, GetBackupStateResponseDetailDto{snapshotName='camunda_operate_12345_8.7-snapshot_part_5_of_6', state='SUCCESS', startTime=2025-03-11T17:49:08.617+01:00, failures=[]}, GetBackupStateResponseDetailDto{snapshotName='camunda_operate_12345_8.7-snapshot_part_6_of_6', state='SUCCESS', startTime=2025-03-11T17:49:08.617+01:00, failures=[]}]}]
+INFO  io.camunda.application.StandaloneBackupManager - Tasklist indices snapshot is COMPLETED. Details: [GetBackupStateResponseDto{backupId=12345, state=COMPLETED, failureReason='null', details=[GetBackupStateResponseDetailDto{snapshotName='camunda_tasklist_12345_8.7-snapshot_part_1_of_6', state='SUCCESS', startTime=2025-03-11T17:49:08.016+01:00, failures=[]}, GetBackupStateResponseDetailDto{snapshotName='camunda_tasklist_12345_8.7-snapshot_part_2_of_6', state='SUCCESS', startTime=2025-03-11T17:49:08.216+01:00, failures=[]}, GetBackupStateResponseDetailDto{snapshotName='camunda_tasklist_12345_8.7-snapshot_part_3_of_6', state='SUCCESS', startTime=2025-03-11T17:49:08.416+01:00, failures=[]}, GetBackupStateResponseDetailDto{snapshotName='camunda_tasklist_12345_8.7-snapshot_part_4_of_6', state='SUCCESS', startTime=2025-03-11T17:49:08.416+01:00, failures=[]}, GetBackupStateResponseDetailDto{snapshotName='camunda_tasklist_12345_8.7-snapshot_part_5_of_6', state='SUCCESS', startTime=2025-03-11T17:49:08.617+01:00, failures=[]}, GetBackupStateResponseDetailDto{snapshotName='camunda_tasklist_12345_8.7-snapshot_part_6_of_6', state='SUCCESS', startTime=2025-03-11T17:49:08.818+01:00, failures=[]}]}]
 INFO  io.camunda.application.StandaloneBackupManager - Backup with id:[12345] is completed!
 ```
 
@@ -380,7 +434,7 @@ camunda_tasklist_123_8.7.0_part_5_of_6
 camunda_tasklist_123_8.7.0_part_6_of_6
 ```
 
-Once completed, you can proceed with step 7 of the [backup procedure](self-managed/operational-guides/backup-restore/backup-and-restore.md#backup-process).
+Once completed, you can proceed with the [backup of the Zeebe Cluster](self-managed/operational-guides/backup-restore/backup-and-restore.md#backup-of-the-zeebe-cluster).
 
 ### Limitations
 

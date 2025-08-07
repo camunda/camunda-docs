@@ -29,7 +29,8 @@
     "api:generate:tasklist": "npm run api:generate tasklist",
     "api:generate:zeebe": "npm run api:generate zeebe",
     "api:generate:adminsm": "npm run api:generate adminsm",
-    "api:generate:camunda": "npm run api:generate camunda"
+    "api:generate:camunda": "npm run api:generate camunda",
+    "update-release-links": "node hacks/update-release-links.js"
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.3.0",
@@ -47,7 +48,7 @@
     "pushfeedback-react": "^0.1.63",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-player": "^2.16.0",
+    "react-player": "^3.0.0",
     "unist-util-visit": "^5.0.0"
   },
   "browserslist": {
@@ -69,7 +70,7 @@
     "jest": "^30.0.0",
     "lint-staged": "^16.0.0",
     "playwright": "^1.52.0",
-    "prettier": "3.5.3"
+    "prettier": "3.6.2"
   },
   "lint-staged": {
     "*.{css,js,json,MD,md,mdx,yaml,yml}": "prettier --write"

@@ -1,10 +1,15 @@
 ---
 id: user-task-listeners
 title: "User task listeners"
+sidebar_label: "Overview"
 description: "User task listeners allow users to react to specific user task lifecycle events."
 ---
 
 A user task listener allows users to react to specific user task lifecycle events.
+
+:::tip
+Try out our [getting started with user task listeners guide](/components/concepts/user-task-listeners-guide.md).
+:::
 
 ## About user task listeners
 
@@ -86,11 +91,11 @@ You can configure user task listeners per BPMN user task element.
 
 Each user task listener has the following properties:
 
-| Property    | Description                                                                                                                                        |
-| :---------- | :------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `eventType` | Specifies the user task event that triggers the listener. Supported values are `creating`, `assigning`, `updating`, `completing`, and `canceling`. |
-| `type`      | The name of the job type.                                                                                                                          |
-| `retries`   | The number of retries for the user task listener job.                                                                                              |
+| Property    | Description                                                                                                                                                                                                                                                                                                                              |
+| :---------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `eventType` | (Required) Specifies the user task event type that triggers the listener. Supported values are `creating`, `assigning`, `updating`, `completing`, and `canceling`.                                                                                                                                                                       |
+| `type`      | (Required) The name of the job type. Used as a reference to specify which job workers request the respective task listener job. For example, `order-items`. `type` can be specified as any static value (`myType`) or as a FEEL expression prefixed by `=` that evaluates to any FEEL string; for example, `= "order-" + priorityGroup`. |
+| `retries`   | (Optional) The number of retries for the user task listener job (defaults to 3 if omitted).                                                                                                                                                                                                                                              |
 
 :::note
 If multiple user task listeners of the same `eventType` (such as multiple `assigning` listeners) are defined on the same user task, they are executed sequentially, one after the other, in the order they are defined in the BPMN model.
@@ -104,32 +109,30 @@ See [open a job worker](/apis-tools/java-client-examples/job-worker-open.md) for
 
 ### Accessing user task data
 
-User task-specific data, such as `assignee` and `priority`, is accessible through the job headers of the user task listener job.
-These are merged together with the user task's [task headers](/components/modeler/bpmn/user-tasks/user-tasks.md#task-headers).
-The following attributes can be retrieved using reserved header names:
+User task-specific data, such as `assignee` and `priority`, are accessible through the `userTask` property of the user task listener job.  
+The following user task attributes can be accessed from the activated job's `userTask` property:
 
-| Attribute           | Header name                          |
-| :------------------ | :----------------------------------- |
-| `action`            | `io.camunda.zeebe:action`            |
-| `assignee`          | `io.camunda.zeebe:assignee`          |
-| `candidateGroups`   | `io.camunda.zeebe:candidateGroups`   |
-| `candidateUsers`    | `io.camunda.zeebe:candidateUsers`    |
-| `changedAttributes` | `io.camunda.zeebe:changedAttributes` |
-| `dueDate`           | `io.camunda.zeebe:dueDate`           |
-| `followUpDate`      | `io.camunda.zeebe:followUpDate`      |
-| `formKey`           | `io.camunda.zeebe:formKey`           |
-| `priority`          | `io.camunda.zeebe:priority`          |
-| `userTaskKey`       | `io.camunda.zeebe:userTaskKey`       |
+| Attribute           | Description                                                                                                                                                                                   |
+| :------------------ | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `action`            | A custom action value provided along with the request that triggered this event. If none was provided, it defaults to one of `assign`, `claim`, `update`, or `complete`.                      |
+| `assignee`          | The user assigned to the task. If not specified, the task is unassigned. Refer to [assignments](/components/modeler/bpmn/user-tasks/user-tasks.md#assignments) for more details.              |
+| `candidateGroups`   | Specifies the groups of users that the task can be assigned to. Refer to [assignments](/components/modeler/bpmn/user-tasks/user-tasks.md#assignments) for more details.                       |
+| `candidateUsers`    | Specifies the users that the task can be assigned to. Refer to [assignments](/components/modeler/bpmn/user-tasks/user-tasks.md#assignments) for more details.                                 |
+| `changedAttributes` | Lists the user task attributes that have changed with the event. Refer to the [changed attributes](#changed-attributes) section below for more details.                                       |
+| `dueDate`           | Specifies the due date of the task. Refer to [scheduling](/components/modeler/bpmn/user-tasks/user-tasks.md#scheduling) for more details.                                                     |
+| `followUpDate`      | Specifies the follow-up date of the task. Refer to [scheduling](/components/modeler/bpmn/user-tasks/user-tasks.md#scheduling) for more details.                                               |
+| `formKey`           | The form linked to the user task, referenced by its uniquely identifying key. Refer to [user task forms](/components/modeler/bpmn/user-tasks/user-tasks.md#user-task-forms) for more details. |
+| `priority`          | The task’s priority level. Refer to [priority](/components/modeler/bpmn/user-tasks/user-tasks.md#define-user-task-priority) for more details.                                                 |
+| `userTaskKey`       | The unique key identifying the user task.                                                                                                                                                     |
 
-Below is an example of accessing the `assignee` value from the headers in Java:
+Below is an example of accessing the `assignee` value from the activated job in Java:
 
 ```java
 final JobHandler userTaskListenerHandler =
     (jobClient, job) -> {
-        // Access the 'assignee' from the job headers
+        // Access the 'assignee' from the job's user task property
         // highlight-start
-        final String assignee = job.getCustomHeaders()
-            .get("io.camunda.zeebe:assignee");
+        final String assignee = job.getUserTask().getAssignee();
         // highlight-end
 
         System.out.println("The assignee for this user task is: " + assignee);
@@ -138,7 +141,7 @@ final JobHandler userTaskListenerHandler =
     };
 ```
 
-Each header provides user task metadata that can be leveraged to customize the behavior of the user task listener job. Use these headers to retrieve necessary information about the user task in your job handler implementation.
+This user task data can be leveraged to customize the behavior of the user task listener job worker.
 
 #### Changed attributes
 
@@ -152,6 +155,10 @@ If it corrects the priority, a subsequent assigning listener sees both the `assi
 Now, this second listener corrects the priority back to the value it had before assigning.
 The third listener sees only the `assignee` attribute as changed attribute, because the priority is no longer changed with the event.
 :::
+
+#### Task headers
+
+Configured [task headers](/components/modeler/bpmn/user-tasks/user-tasks.md#task-headers) on the user task are available in the job's custom headers.
 
 ### Correcting user task data
 
@@ -168,13 +175,13 @@ final JobHandler completeTaskListenerJobWithCorrectionsHandler =
             .newCompleteCommand(job)
             // highlight-start
             .withResult(
-                new CompleteJobResult()
-                    .correctAssignee("john_doe") // assigns the user task to 'john_doe'
-                    .correctDueDate(null) // preserves the current 'dueDate' of the user task
-                    .correctFollowUpDate("") // clears the 'followUpDate'
+                r -> r.forUserTask()
+                    .correctAssignee("john_doe")                    // assigns the user task to 'john_doe'
+                    .correctDueDate(null)                           // preserves the current 'dueDate'
+                    .correctFollowUpDate("")                        // clears the 'followUpDate'
                     .correctCandidateUsers(List.of("alice", "bob")) // sets candidate users
-                    .correctCandidateGroups(List.of()) // clears the candidate groups
-                    .correctPriority(80)) // sets the priority to 80
+                    .correctCandidateGroups(List.of())              // clears the candidate groups
+                    .correctPriority(80))                           // sets the priority to 80
             // highlight-end
             .send();
 
@@ -213,8 +220,7 @@ final JobHandler denyUserTaskLifecycleTransitionHandler =
         jobClient
             .newCompleteCommand(job)
             // highlight-start
-            .withResult()
-            .deny(true)
+            .withResult(r -> r.forUserTask().deny(true))
             // highlight-end
             .send();
 ```

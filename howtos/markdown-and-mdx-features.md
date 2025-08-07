@@ -25,8 +25,7 @@ import ReactPlayer from "react-player";
 Embed a video with the `react-video` component:
 
 ```html
-<ReactPlayer playing loop playsinline height="200px" url={[ {src: './video.mp4',
-type: 'video/mp4'} ]} />
+<ReactPlayer playing loop playsInline height="200px" src="./video.mp4" />
 ```
 
 ## Code references

@@ -1,12 +1,14 @@
 ---
 id: operate-tasklist-backup
-title: Backup and restore Operate and Tasklist data
-description: "How to perform a backup and restore of Operate and Tasklist data."
+title: Backup Management API - Operate and Tasklist
+description: "Backup API to perform a backup of Operate and Tasklist data."
+sidebar_label: "Operate and Tasklist"
 keywords: ["backup", "backups"]
 ---
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+Back up your Operate and Tasklist data using the Backup Management API.
+
+## About this API
 
 Operate stores its data over multiple indices in Elasticsearch. Backup of Operate data includes several
 Elasticsearch snapshots containing sets of Operate indices. Each backup is identified by `backupId`. For example, a backup with an id of `123` may contain the following Elasticsearch snapshots:
@@ -26,72 +28,17 @@ Operate provides an API to perform a backup and manage backups (list, check stat
 The backup API can be reached via the Actuator management port, which by default is the same as application HTTP port (and in turn defaults to 8080). The port may be reconfigured with the help of `management.server.port` configuration parameter.
 :::
 
-## Prerequisites
+:::warning
+Usage of this API requires the backup store to be configured for the component.
 
-Before you can use the backup and restore feature:
+- [Operate configuration](/self-managed/operate-deployment/operate-configuration.md#backups)
+- [Tasklist configuration](/self-managed/tasklist-deployment/tasklist-configuration.md#backups)
 
-1. The [Elasticsearch snapshot repository](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshot-restore.html) must be configured.
-2. Operate and Tasklist must be configured with the repository name using one of the following configuration options:
+Additionally, it requires the same backup store to be configured on your chosen datastore.
 
-<Tabs groupId="config" defaultValue="yaml" values={
-[
-{label: 'YAML file', value: 'yaml', },
-{label: 'Environment variables', value: 'env', },
-]
-}>
-
-<TabItem value='yaml'>
-
-#### Operate
-
-```yaml
-camunda:
-  operate:
-    backup:
-      repositoryName: <es snapshot repository name>
-```
-
-</TabItem>
-
-<TabItem value='env'>
-
-#### Operate
-
-```
-CAMUNDA_OPERATE_BACKUP_REPOSITORYNAME=<es snapshot repository name>
-```
-
-</TabItem>
-</Tabs>
-
-#### Tasklist
-
-<Tabs groupId="config" className="tabs-hidden" defaultValue="yaml" values={
-[
-{label: 'YAML file', value: 'yaml', },
-{label: 'Environment variables', value: 'env', },
-]
-}>
-
-<TabItem value='yaml'>
-
-```yaml
-camunda:
-  tasklist:
-    backup:
-      repositoryName: <es snapshot repository name>
-```
-
-</TabItem>
-
-<TabItem value='env'>
-
-```
-CAMUNDA_TASKLIST_BACKUP_REPOSITORYNAME=<es snapshot repository name>
-```
-
-</TabItem>
-</Tabs>
+- [Elasticsearch snapshot repository](https://www.elastic.co/docs/deploy-manage/tools/snapshot-and-restore/manage-snapshot-repositories)
+- [OpenSearch snapshot repository](https://docs.opensearch.org/docs/latest/tuning-your-cluster/availability-and-recovery/snapshots/snapshot-restore/)
+  :::
 
 ## Create backup API
 
@@ -230,30 +177,3 @@ Response:
 | 404 Not Found    | Not a single snapshot corresponding to given ID exist.                                                                       |
 | 500 Server Error | All other errors, e.g. ES returned error response when attempting to execute the query.                                      |
 | 502 Bad Gateway  | Elasticsearch is not accessible, the request can be retried when it is back.                                                 |
-
-## Restore backup
-
-There is no Operate API to preform the backup restore. Instead, use the [Elasticsearch restore snapshot API](https://www.elastic.co/guide/en/elasticsearch/reference/current/restore-snapshot-api.html).
-
-:::note
-Operate must **not** be running while a backup restore is taking place.
-:::
-
-To restore the backup with a known backup id, you must restore all the snapshots this backup contains (check the response of the [create backup API](#create-backup-api)).
-
-Example of Elasticsearch query:
-
-```
-curl --request POST `http://localhost:9200/_snapshot/test/camunda_operate_123_8.1.0-snapshot_part_1_of_6/_restore?wait_for_completion=true`
-```
-
-To summarize, the process may look as follows:
-
-1. Stop Operate.
-2. Ensure there are no Operate indices present in Elasticsearch (otherwise the restore process will fail).
-3. Iterate over all Elasticsearch snapshots included in the desired backup and restore them using the Elasticsearch restore snapshot API.
-4. Start Operate.
-
-## Backup and restore of Tasklist data
-
-Backup and restore of Tasklist may be performed in exactly the same way as [Operate data](#).

@@ -15,9 +15,9 @@ These release notes identify the new features included in 8.6, including [alpha 
 
 ## 8.6 minor
 
-| Release date   | End of maintenance | Changelog(s)                                                                                                                                                  | Release blog                                                          | Update guide                                                                            |
-| -------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| 8 October 2024 | 14 April 2026      | - [ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.6.0) <br /> - [ Connectors ](https://github.com/camunda/connectors/releases/tag/8.6.0) | [Release blog](https://camunda.com/blog/2024/10/camunda-8-6-release/) | [Self-Managed update guide](self-managed/operational-guides/update-guide/850-to-860.md) |
+| Release date   | End of maintenance | All Patch releases                                                                | Release blog                                                          | Update guide                                                                          |
+| -------------- | ------------------ | --------------------------------------------------------------------------------- | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| 8 October 2024 | 14 April 2026      | [Patch Releases and Changelogs](#technical-changelogs-for-all-86x-patch-releases) | [Release blog](https://camunda.com/blog/2024/10/camunda-8-6-release/) | [Self-Managed update guide](self-managed/components/components-upgrade/850-to-860.md) |
 
 ### Flow control enabled by default <span class="badge badge--long" title="This feature affects SaaS">SaaS</span>
 
@@ -173,6 +173,17 @@ Auto-mapping simplifies the process of migrating complex and lengthy process def
 
 - Operations engineers can quickly map source activities to their corresponding target activities, reducing manual effort and making it easier to focus on changes.
 - Users can manually add mapping instructions for new activities and track migration details directly within the instance.
+
+### Technical Changelogs for all 8.6.x patch releases
+
+<details className="changelog-dropdown">
+  <summary>Overview of all patch releases and their Changelogs in GitHub</summary>
+
+<!-- RELEASE_LINKS_PLACEHOLDER -->
+<ul><li>[Camunda 8.6.24 (04.08.2025)](https://github.com/camunda/camunda/releases/tag/8.6.24)</li><li>[Camunda 8.6.23 (28.07.2025)](https://github.com/camunda/camunda/releases/tag/8.6.23)</li><li>[Camunda 8.6.22 (15.07.2025)](https://github.com/camunda/camunda/releases/tag/8.6.22)</li><li>[Camunda 8.6.21 (01.07.2025)](https://github.com/camunda/camunda/releases/tag/8.6.21)</li><li>[Camunda 8.6.20 (25.06.2025)](https://github.com/camunda/camunda/releases/tag/8.6.20)</li><li>[Camunda 8.6.19 (20.06.2025)](https://github.com/camunda/camunda/releases/tag/8.6.19)</li><li>[Camunda 8.6.18 (05.06.2025)](https://github.com/camunda/camunda/releases/tag/8.6.18)</li><li>[Camunda 8.6.17 (06.06.2025)](https://github.com/camunda/camunda/releases/tag/8.6.17)</li><li>[Camunda 8.6.16 (02.06.2025)](https://github.com/camunda/camunda/releases/tag/8.6.16)</li><li>[Camunda 8.6.15 (12.05.2025)](https://github.com/camunda/camunda/releases/tag/8.6.15)</li><li>[Camunda 8.6.14 (05.05.2025)](https://github.com/camunda/camunda/releases/tag/8.6.14)</li><li>[Camunda 8.6.13 (04.04.2025)](https://github.com/camunda/camunda/releases/tag/8.6.13)</li><li>[Camunda 8.6.12 (14.03.2025)](https://github.com/camunda/camunda/releases/tag/8.6.12)</li><li>[Camunda 8.6.11 (10.03.2025)](https://github.com/camunda/camunda/releases/tag/8.6.11)</li><li>[Camunda 8.6.10 (28.02.2025)](https://github.com/camunda/camunda/releases/tag/8.6.10)</li><li>[Camunda 8.6.9 (14.02.2025)](https://github.com/camunda/camunda/releases/tag/8.6.9)</li><li>[Camunda 8.6.8 (04.02.2025)](https://github.com/camunda/camunda/releases/tag/8.6.8)</li><li>[Camunda 8.6.7 (14.01.2025)](https://github.com/camunda/camunda/releases/tag/8.6.7)</li><li>[Camunda 8.6.6 (03.12.2024)](https://github.com/camunda/camunda/releases/tag/8.6.6)</li><li>[Camunda 8.6.5 (06.11.2024)](https://github.com/camunda/camunda/releases/tag/8.6.5)</li><li>[Camunda 8.6.4 (28.10.2024)](https://github.com/camunda/camunda/releases/tag/8.6.4)</li><li>[Camunda 8.6.3 (11.10.2024)](https://github.com/camunda/camunda/releases/tag/8.6.3)</li><li>[Camunda 8.6.2 (11.10.2024)](https://github.com/camunda/camunda/releases/tag/8.6.2)</li><li>[Camunda 8.6.1 (11.10.2024)](https://github.com/camunda/camunda/releases/tag/8.6.1)</li><li>[Camunda 8.6.0 (02.10.2024)](https://github.com/camunda/camunda/releases/tag/8.6.0)</li><li>[Connectors 8.6.17 (30.07.2025)](https://github.com/camunda/connectors/releases/tag/8.6.17)</li><li>[Connectors 8.6.16 (17.07.2025)](https://github.com/camunda/connectors/releases/tag/8.6.16)</li><li>[Connectors 8.6.15 (26.06.2025)](https://github.com/camunda/connectors/releases/tag/8.6.15)</li><li>[Connectors 8.6.14 (20.06.2025)](https://github.com/camunda/connectors/releases/tag/8.6.14)</li><li>[Connectors 8.6.13 (04.06.2025)](https://github.com/camunda/connectors/releases/tag/8.6.13)</li><li>[Connectors 8.6.12 (09.05.2025)](https://github.com/camunda/connectors/releases/tag/8.6.12)</li><li>[Connectors 8.6.11 (29.04.2025)](https://github.com/camunda/connectors/releases/tag/8.6.11)</li><li>[Connectors 8.6.10 (26.03.2025)](https://github.com/camunda/connectors/releases/tag/8.6.10)</li><li>[Connectors 8.6.9 (03.03.2025)](https://github.com/camunda/connectors/releases/tag/8.6.9)</li><li>[Connectors 8.6.8 (12.02.2025)](https://github.com/camunda/connectors/releases/tag/8.6.8)</li><li>[Connectors 8.6.7 (04.02.2025)](https://github.com/camunda/connectors/releases/tag/8.6.7)</li><li>[Connectors 8.6.6 (07.01.2025)](https://github.com/camunda/connectors/releases/tag/8.6.6)</li><li>[Connectors 8.6.5 (05.12.2024)](https://github.com/camunda/connectors/releases/tag/8.6.5)</li><li>[Connectors 8.6.4 (05.11.2024)](https://github.com/camunda/connectors/releases/tag/8.6.4)</li><li>[Connectors 8.6.3 (29.10.2024)](https://github.com/camunda/connectors/releases/tag/8.6.3)</li><li>[Connectors 8.6.2 (01.10.2024)](https://github.com/camunda/connectors/releases/tag/8.6.2)</li><li>[Connectors 8.6.1 (01.10.2024)](https://github.com/camunda/connectors/releases/tag/8.6.1)</li><li>[Connectors 8.6.0 (30.09.2024)](https://github.com/camunda/connectors/releases/tag/8.6.0)</li></ul>
+<!-- RELEASE_LINKS_PLACEHOLDER -->
+
+</details>
 
 ## 8.6.0-alpha5
 
@@ -399,7 +410,7 @@ In Operate, the visualization of the executed path of a process instance is impr
 
 <!-- https://github.com/camunda/web-modeler/issues/9730 -->
 
-You can now [enable TLS-encrypted communication](/self-managed/modeler/web-modeler/configuration/ssl.md#configuring-secure-connections-between-web-modeler-components) between the different Web Modeler components (`webapp`, `restapi`, and `websockets`).
+You can now [enable TLS-encrypted communication](/self-managed/components/modeler/web-modeler/configuration/ssl.md#configuring-secure-connections-between-web-modeler-components) between the different Web Modeler components (`webapp`, `restapi`, and `websockets`).
 
 ### API orchestration getting started journey <span class="badge badge--long" title="This feature affects connectors">Connectors</span>
 
@@ -529,7 +540,7 @@ Creation, due, and follow-up dates are now shown as relative dates in task tiles
 
 <!-- https://github.com/camunda/product-hub/issues/2196 -->
 
-Tasklist sessions are now protected via an [anti CSRF token](/self-managed/tasklist-deployment/tasklist-configuration.md#cross-site-request-forgery-protection).
+Tasklist sessions are now protected via an [anti CSRF token](/self-managed/components/orchestration-cluster/tasklist/tasklist-configuration.md#cross-site-request-forgery-protection).
 
 ### Instance Modification as Batch <span class="badge badge--long" title="This feature affects Operate">Operate</span>
 

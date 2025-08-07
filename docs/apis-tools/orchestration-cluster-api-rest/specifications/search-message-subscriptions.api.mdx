@@ -1,0 +1,1174 @@
+---
+id: search-message-subscriptions
+title: "Search message subscriptions"
+description: "Search for message subscriptions based on given criteria."
+sidebar_label: "Search message subscriptions"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Search message subscriptions"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/message-subscriptions/search"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Search for message subscriptions based on given criteria.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          allOf: [
+            {
+              type: "object",
+              properties: {
+                page: {
+                  description: "Pagination criteria.",
+                  allOf: [
+                    {
+                      type: "object",
+                      properties: {
+                        from: {
+                          description:
+                            "The index of items to start searching from.",
+                          type: "integer",
+                          format: "int32",
+                        },
+                        limit: {
+                          description:
+                            "The maximum number of items to return in one request.",
+                          type: "integer",
+                          format: "int32",
+                          default: 100,
+                        },
+                        after: {
+                          description:
+                            "Use the `endCursor` value from the previous response to fetch the next page of results.",
+                          type: "string",
+                        },
+                        before: {
+                          description:
+                            "Use the `startCursor` value from the previous response to fetch the previous page of results.",
+                          type: "string",
+                        },
+                      },
+                      title: "SearchQueryPageRequest",
+                    },
+                  ],
+                  type: "object",
+                },
+              },
+              title: "SearchQueryRequest",
+            },
+          ],
+          properties: {
+            sort: {
+              description: "Sort field criteria.",
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  field: {
+                    description: "The field to sort by.",
+                    type: "string",
+                    enum: [
+                      "messageSubscriptionKey",
+                      "processDefinitionId",
+                      "processDefinitionKey",
+                      "processInstanceKey",
+                      "elementId",
+                      "elementInstanceKey",
+                      "messageSubscriptionType",
+                      "lastUpdatedDate",
+                      "messageName",
+                      "correlationKey",
+                      "tenantId",
+                    ],
+                  },
+                  order: {
+                    description:
+                      "The order in which to sort the related field.",
+                    type: "string",
+                    enum: ["ASC", "DESC"],
+                    default: "ASC",
+                    title: "SortOrderEnum",
+                  },
+                },
+                required: ["field"],
+                title: "MessageSubscriptionSearchQuerySortRequest",
+              },
+            },
+            filter: {
+              description: "The incident search filters.",
+              allOf: [
+                {
+                  description: "Message subscription search filter.",
+                  type: "object",
+                  properties: {
+                    messageSubscriptionKey: {
+                      description:
+                        "The message subscription key associated with this message subscription.",
+                      allOf: [
+                        {
+                          description:
+                            "String property with basic advanced search capabilities.",
+                          type: "object",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Basic advanced string filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "string",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "string",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: { type: "string" },
+                                },
+                                $notIn: {
+                                  description:
+                                    "Checks if the property matches none of the provided values.",
+                                  type: "array",
+                                  items: { type: "string" },
+                                },
+                              },
+                            },
+                          ],
+                          title: "BasicStringFilterProperty",
+                        },
+                      ],
+                    },
+                    processDefinitionId: {
+                      description:
+                        "The process definition ID associated with this message subscription.",
+                      allOf: [
+                        {
+                          description:
+                            "String property with full advanced search capabilities.",
+                          type: "object",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced string filter.",
+                              allOf: [
+                                {
+                                  title: "Advanced filter",
+                                  description: "Basic advanced string filter.",
+                                  type: "object",
+                                  properties: {
+                                    $eq: {
+                                      description:
+                                        "Checks for equality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $neq: {
+                                      description:
+                                        "Checks for inequality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $exists: {
+                                      description:
+                                        "Checks if the current property exists.",
+                                      type: "boolean",
+                                    },
+                                    $in: {
+                                      description:
+                                        "Checks if the property matches any of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                    $notIn: {
+                                      description:
+                                        "Checks if the property matches none of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                  },
+                                },
+                                {
+                                  type: "object",
+                                  properties: {
+                                    $like: {
+                                      type: "string",
+                                      description:
+                                        "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                      title: "LikeFilterProperty",
+                                    },
+                                  },
+                                },
+                              ],
+                            },
+                          ],
+                          title: "StringFilterProperty",
+                        },
+                      ],
+                    },
+                    processDefinitionKey: {
+                      description:
+                        "The process definition key associated with this message subscription.",
+                      allOf: [
+                        {
+                          description:
+                            "String property with basic advanced search capabilities.",
+                          type: "object",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Basic advanced string filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "string",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "string",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: { type: "string" },
+                                },
+                                $notIn: {
+                                  description:
+                                    "Checks if the property matches none of the provided values.",
+                                  type: "array",
+                                  items: { type: "string" },
+                                },
+                              },
+                            },
+                          ],
+                          title: "BasicStringFilterProperty",
+                        },
+                      ],
+                    },
+                    processInstanceKey: {
+                      description:
+                        "The process instance key associated with this message subscription.",
+                      allOf: [
+                        {
+                          description:
+                            "String property with basic advanced search capabilities.",
+                          type: "object",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Basic advanced string filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "string",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "string",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: { type: "string" },
+                                },
+                                $notIn: {
+                                  description:
+                                    "Checks if the property matches none of the provided values.",
+                                  type: "array",
+                                  items: { type: "string" },
+                                },
+                              },
+                            },
+                          ],
+                          title: "BasicStringFilterProperty",
+                        },
+                      ],
+                    },
+                    elementId: {
+                      description:
+                        "The element ID associated with this message subscription.",
+                      allOf: [
+                        {
+                          description:
+                            "String property with full advanced search capabilities.",
+                          type: "object",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced string filter.",
+                              allOf: [
+                                {
+                                  title: "Advanced filter",
+                                  description: "Basic advanced string filter.",
+                                  type: "object",
+                                  properties: {
+                                    $eq: {
+                                      description:
+                                        "Checks for equality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $neq: {
+                                      description:
+                                        "Checks for inequality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $exists: {
+                                      description:
+                                        "Checks if the current property exists.",
+                                      type: "boolean",
+                                    },
+                                    $in: {
+                                      description:
+                                        "Checks if the property matches any of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                    $notIn: {
+                                      description:
+                                        "Checks if the property matches none of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                  },
+                                },
+                                {
+                                  type: "object",
+                                  properties: {
+                                    $like: {
+                                      type: "string",
+                                      description:
+                                        "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                      title: "LikeFilterProperty",
+                                    },
+                                  },
+                                },
+                              ],
+                            },
+                          ],
+                          title: "StringFilterProperty",
+                        },
+                      ],
+                    },
+                    elementInstanceKey: {
+                      description:
+                        "The element instance key associated with this message subscription.",
+                      allOf: [
+                        {
+                          description:
+                            "String property with basic advanced search capabilities.",
+                          type: "object",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Basic advanced string filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "string",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "string",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: { type: "string" },
+                                },
+                                $notIn: {
+                                  description:
+                                    "Checks if the property matches none of the provided values.",
+                                  type: "array",
+                                  items: { type: "string" },
+                                },
+                              },
+                            },
+                          ],
+                          title: "BasicStringFilterProperty",
+                        },
+                      ],
+                    },
+                    messageSubscriptionType: {
+                      description: "The message subscription type.",
+                      allOf: [
+                        {
+                          description:
+                            "MessageSubscriptionTypeEnum with full advanced search capabilities.",
+                          type: "object",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                              allOf: [
+                                {
+                                  description:
+                                    "The type of message subscription.",
+                                  type: "string",
+                                  enum: ["CREATED", "MIGRATED", "CORRELATED"],
+                                  title: "MessageSubscriptionTypeEnum",
+                                },
+                              ],
+                            },
+                            {
+                              title: "Advanced filter",
+                              description:
+                                "Advanced MessageSubscriptionTypeEnum filter",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "The type of message subscription.",
+                                      type: "string",
+                                      enum: [
+                                        "CREATED",
+                                        "MIGRATED",
+                                        "CORRELATED",
+                                      ],
+                                      title: "MessageSubscriptionTypeEnum",
+                                    },
+                                  ],
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "The type of message subscription.",
+                                      type: "string",
+                                      enum: [
+                                        "CREATED",
+                                        "MIGRATED",
+                                        "CORRELATED",
+                                      ],
+                                      title: "MessageSubscriptionTypeEnum",
+                                    },
+                                  ],
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "The type of message subscription.",
+                                    type: "string",
+                                    enum: ["CREATED", "MIGRATED", "CORRELATED"],
+                                    title: "MessageSubscriptionTypeEnum",
+                                  },
+                                },
+                                $like: {
+                                  type: "string",
+                                  description:
+                                    "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                  title: "LikeFilterProperty",
+                                },
+                              },
+                            },
+                          ],
+                          title: "MessageSubscriptionTypeFilterProperty",
+                        },
+                      ],
+                    },
+                    lastUpdatedDate: {
+                      description:
+                        "The last updated date of the message subscription.",
+                      allOf: [
+                        {
+                          description:
+                            "Date-time property with full advanced search capabilities.",
+                          type: "object",
+                          oneOf: [
+                            {
+                              type: "string",
+                              format: "date-time",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced date-time filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $gt: {
+                                  description:
+                                    "Greater than comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $gte: {
+                                  description:
+                                    "Greater than or equal comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $lt: {
+                                  description:
+                                    "Lower than comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $lte: {
+                                  description:
+                                    "Lower than or equal comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    type: "string",
+                                    format: "date-time",
+                                  },
+                                },
+                              },
+                            },
+                          ],
+                          title: "DateTimeFilterProperty",
+                        },
+                      ],
+                    },
+                    messageName: {
+                      description:
+                        "The name of the message associated with the message subscription.",
+                      allOf: [
+                        {
+                          description:
+                            "String property with full advanced search capabilities.",
+                          type: "object",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced string filter.",
+                              allOf: [
+                                {
+                                  title: "Advanced filter",
+                                  description: "Basic advanced string filter.",
+                                  type: "object",
+                                  properties: {
+                                    $eq: {
+                                      description:
+                                        "Checks for equality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $neq: {
+                                      description:
+                                        "Checks for inequality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $exists: {
+                                      description:
+                                        "Checks if the current property exists.",
+                                      type: "boolean",
+                                    },
+                                    $in: {
+                                      description:
+                                        "Checks if the property matches any of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                    $notIn: {
+                                      description:
+                                        "Checks if the property matches none of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                  },
+                                },
+                                {
+                                  type: "object",
+                                  properties: {
+                                    $like: {
+                                      type: "string",
+                                      description:
+                                        "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                      title: "LikeFilterProperty",
+                                    },
+                                  },
+                                },
+                              ],
+                            },
+                          ],
+                          title: "StringFilterProperty",
+                        },
+                      ],
+                    },
+                    correlationKey: {
+                      description:
+                        "The correlation key of the message subscription.",
+                      allOf: [
+                        {
+                          description:
+                            "String property with full advanced search capabilities.",
+                          type: "object",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced string filter.",
+                              allOf: [
+                                {
+                                  title: "Advanced filter",
+                                  description: "Basic advanced string filter.",
+                                  type: "object",
+                                  properties: {
+                                    $eq: {
+                                      description:
+                                        "Checks for equality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $neq: {
+                                      description:
+                                        "Checks for inequality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $exists: {
+                                      description:
+                                        "Checks if the current property exists.",
+                                      type: "boolean",
+                                    },
+                                    $in: {
+                                      description:
+                                        "Checks if the property matches any of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                    $notIn: {
+                                      description:
+                                        "Checks if the property matches none of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                  },
+                                },
+                                {
+                                  type: "object",
+                                  properties: {
+                                    $like: {
+                                      type: "string",
+                                      description:
+                                        "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                      title: "LikeFilterProperty",
+                                    },
+                                  },
+                                },
+                              ],
+                            },
+                          ],
+                          title: "StringFilterProperty",
+                        },
+                      ],
+                    },
+                    tenantId: {
+                      description: "The unique external tenant ID.",
+                      allOf: [
+                        {
+                          description:
+                            "String property with full advanced search capabilities.",
+                          type: "object",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced string filter.",
+                              allOf: [
+                                {
+                                  title: "Advanced filter",
+                                  description: "Basic advanced string filter.",
+                                  type: "object",
+                                  properties: {
+                                    $eq: {
+                                      description:
+                                        "Checks for equality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $neq: {
+                                      description:
+                                        "Checks for inequality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $exists: {
+                                      description:
+                                        "Checks if the current property exists.",
+                                      type: "boolean",
+                                    },
+                                    $in: {
+                                      description:
+                                        "Checks if the property matches any of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                    $notIn: {
+                                      description:
+                                        "Checks if the property matches none of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                  },
+                                },
+                                {
+                                  type: "object",
+                                  properties: {
+                                    $like: {
+                                      type: "string",
+                                      description:
+                                        "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                      title: "LikeFilterProperty",
+                                    },
+                                  },
+                                },
+                              ],
+                            },
+                          ],
+                          title: "StringFilterProperty",
+                        },
+                      ],
+                    },
+                  },
+                  title: "MessageSubscriptionFilter",
+                },
+              ],
+            },
+          },
+          title: "MessageSubscriptionSearchQuery",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The message subscription search result.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            allOf: [
+              {
+                type: "object",
+                properties: {
+                  page: {
+                    description:
+                      "Pagination information about the search results.",
+                    allOf: [
+                      {
+                        description:
+                          "Pagination information about the search results.",
+                        type: "object",
+                        properties: {
+                          totalItems: {
+                            description: "Total items matching the criteria.",
+                            type: "integer",
+                            format: "int64",
+                          },
+                          hasMoreTotalItems: {
+                            description:
+                              "Indicates if more results exist beyond the reported totalItems value. Due to system limitations, the totalItems value can be capped.\n",
+                            type: "boolean",
+                          },
+                          startCursor: {
+                            description:
+                              "The cursor value for getting the previous page of results. Use this in the `before` field of an ensuing request.",
+                            type: "string",
+                          },
+                          endCursor: {
+                            description:
+                              "The cursor value for getting the next page of results. Use this in the `after` field of an ensuing request.",
+                            type: "string",
+                          },
+                        },
+                        title: "SearchQueryPageResponse",
+                      },
+                    ],
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                description: "The matching message subscriptions.",
+                type: "array",
+                items: {
+                  type: "object",
+                  properties: {
+                    messageSubscriptionKey: {
+                      description:
+                        "The message subscription key associated with this message subscription.",
+                      type: "string",
+                    },
+                    processDefinitionId: {
+                      description:
+                        "The process definition ID associated with this message subscription.",
+                      type: "string",
+                    },
+                    processDefinitionKey: {
+                      description:
+                        "The process definition key associated with this message subscription.",
+                      type: "string",
+                    },
+                    processInstanceKey: {
+                      description:
+                        "The process instance key associated with this message subscription.",
+                      type: "string",
+                    },
+                    elementId: {
+                      description:
+                        "The element ID associated with this message subscription.",
+                      type: "string",
+                    },
+                    elementInstanceKey: {
+                      description:
+                        "The element instance key associated with this message subscription.",
+                      type: "string",
+                    },
+                    messageSubscriptionType: {
+                      description: "The type of message subscription.",
+                      type: "string",
+                      enum: ["CREATED", "MIGRATED", "CORRELATED"],
+                      title: "MessageSubscriptionTypeEnum",
+                    },
+                    lastUpdatedDate: {
+                      description:
+                        "The last updated date of the message subscription.",
+                      type: "string",
+                      format: "date-time",
+                    },
+                    messageName: {
+                      description:
+                        "The name of the message associated with the message subscription.",
+                      type: "string",
+                    },
+                    correlationKey: {
+                      description:
+                        "The correlation key of the message subscription.",
+                      type: "string",
+                    },
+                    tenantId: {
+                      description: "The unique external tenant ID.",
+                      type: "string",
+                    },
+                  },
+                  title: "MessageSubscriptionResult",
+                },
+              },
+            },
+            title: "MessageSubscriptionSearchQueryResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

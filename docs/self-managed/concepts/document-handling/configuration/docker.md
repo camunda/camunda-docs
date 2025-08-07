@@ -1,6 +1,7 @@
 ---
 id: docker
-title: "Docker Compose"
+sidebar_label: Docker Compose
+title: Document handling configuration in Docker Compose
 description: "Learn more about storage configuration options for Docker Compose setups."
 keywords: ["document handling", "document storage configuration"]
 ---
@@ -18,7 +19,7 @@ To change this to a different storage method, use the environment variables in t
 
 To set what storage should be used, accepted values for `DOCUMENT_DEFAULT_STORE_ID` are `aws`, `inmemory`, `gcp` (for Google Cloud Platform), and `local` (for local storage).
 
-When using [Docker Compose](/self-managed/setup/deploy/local/docker-compose.md), Tasklist and Zeebe run in separate containers and do not share memory or volumes, which introduces certain limitations. While the document handling feature will still work, the environment variable below must be set for all components that use it (Zeebe and Tasklist). In this topology, using in-memory or local storage means components cannot access the same data, so documents uploaded by Zeebe may not be visible to Tasklist. This limitation does not apply when using cloud storage options like AWS or GCP, where documents are always stored in a shared, centralized location.
+When using [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md), Tasklist and Zeebe run in separate containers and do not share memory or volumes, which introduces certain limitations. While the document handling feature will still work, the environment variable below must be set for all components that use it (Zeebe and Tasklist). In this topology, using in-memory or local storage means components cannot access the same data, so documents uploaded by Zeebe may not be visible to Tasklist. This limitation does not apply when using cloud storage options like AWS or GCP, where documents are always stored in a shared, centralized location.
 
 <Tabs groupId="storage" defaultValue="aws" queryString values={
 [

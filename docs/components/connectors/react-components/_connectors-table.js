@@ -15,10 +15,12 @@ import AzureBlobStorageImg from "../img/connector-azure-blob-storage.png";
 import BoxImg from "../img/connector-box.png";
 import BluePrismImg from "../img/connector-blueprism.png";
 import CamundaImg from "../img/connector-camunda.png";
+import CSVImg from "../img/connector-csv.png";
 import EasypostImg from "../img/connector-easypost.png";
 import EmailImg from "../img/connector-email.png";
 import GithubImg from "../img/connector-github.png";
 import GitlabImg from "../img/connector-gitlab.png";
+import GoogleCloudImg from "../img/connector-google-cloud-storage.png";
 import GoogleDriveImg from "../img/connector-google-drive.png";
 import GoogleGeminiImg from "../img/connector-google-gemini.png";
 import GoogleMapsImg from "../img/connector-google-maps.png";
@@ -213,6 +215,13 @@ const SearchableTable = () => {
       image: CamundaImg,
     },
     {
+      name: "CSV",
+      description: "Read and write CSV documents.",
+      type: "Outbound",
+      link: "../csv/",
+      image: CSVImg,
+    },
+    {
       name: "EasyPost",
       description:
         "Create EasyPost addresses, parcels, shipments from your processes.",
@@ -257,6 +266,14 @@ const SearchableTable = () => {
       image: GitlabImg,
     },
     {
+      name: "Google Cloud Storage (gcs)",
+      description:
+        "Handle documents with Google Cloud Storage from your processes",
+      type: "Outbound",
+      link: "../google-cloud-storage/",
+      image: GoogleCloudImg,
+    },
+    {
       name: "Google Drive",
       description: "Create folders or files from Google Drive templates.",
       type: "Outbound",
@@ -297,7 +314,7 @@ const SearchableTable = () => {
       name: "HTTP Webhook",
       description:
         "Start a process instance with your custom webhook configuration.",
-      type: "Outbound",
+      type: "Inbound",
       link: "../../protocol/http-webhook/",
       image: WebhookImg,
     },
@@ -464,7 +481,8 @@ const SearchableTable = () => {
     },
     {
       name: "Vector database",
-      description: "Embed, store, and retrieve Large Language Model (LLM) embeddings.",
+      description:
+        "Embed, store, and retrieve Large Language Model (LLM) embeddings.",
       type: "Outbound",
       link: "../embeddings-vector-db/",
       image: VectorImg,

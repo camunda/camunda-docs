@@ -13,6 +13,10 @@ designed to enhance the user experience and introduce new features while maintai
 For more information, visit [announcements](/reference/announcements-release-notes/880/880-announcements.md#camunda-java-client-and-camunda-spring-boot-sdk).
 :::
 
+:::info Public API
+The Camunda Spring Boot SDK is part of the Camunda 8 [public API](/reference/public-api.md) and is covered by our SemVer stability guarantees (except for alpha features). Breaking changes will not be introduced in minor or patch releases.
+:::
+
 This project allows you to leverage Camunda APIs ([gRPC](/apis-tools/zeebe-api/grpc.md) and [REST](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md)) in your Spring Boot project. Later on, we’ll expand the Camunda Spring Boot SDK to deliver an SDK that provides a unified experience for interacting with all Camunda APIs in Java Spring.
 
 ## Version compatibility
@@ -33,6 +37,8 @@ Add the following Maven dependency to your Spring Boot Starter project, replacin
     <version>8.8.x</version>
 </dependency>
 ```
+
+Additionally, you can find the [source on GitHub](https://github.com/camunda/camunda/tree/main/clients/spring-boot-starter-camunda-sdk/src/main).
 
 ## Enable the Java Compiler `-parameters`-flag
 
@@ -170,4 +176,4 @@ See [the configuration documentation](/apis-tools/spring-zeebe-sdk/configuration
 
 ## Writing test cases
 
-To learn more about writing test cases using Zeebe Process Test, see [Camunda Spring Boot SDK integration](../java-client/zeebe-process-test.md#zeebe-spring-sdk-integration).
+Please refer to [Camunda Process Test](../testing/getting-started.md) to write test cases when using the Camunda Spring Boot SDK.
