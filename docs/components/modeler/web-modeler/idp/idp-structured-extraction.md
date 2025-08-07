@@ -73,7 +73,7 @@ After the extraction process of the sample document is complete, you can configu
 
 ### Extracted Tables
 
-- **Table name:** AEnter a descriptive name for the table, used to identify the table in your template. You can change the name as required.
+- **Table name:** Enter a descriptive name for the table, used to identify the table in your template. You can change the name as required.
 - **Min confidence score:** The minimum confidence score of a field in the table.
 - **Average confidence score:** The average confidence score of all fields in the table.
 
