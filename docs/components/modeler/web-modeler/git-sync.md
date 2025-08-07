@@ -56,7 +56,7 @@ Click **Create GitHub App** to finish.
 :::note
 When using Web Modeler Self-Managed with a self-hosted GitHub instance, ensure the environment variable `CAMUNDA_MODELER_GITSYNC_GITHUB_BASEURL` is set to the API URL of your self-hosted GitHub instance.
 It usually looks like `http(s)://HOSTNAME/api/v3`.
-Refer to [GitHub documentation](https://docs.github.com/en/enterprise-server@3.15/rest/enterprise-admin?apiVersion=2022-11-28#endpoint-urls) and choose the correct Enterprise Server version.
+Refer to the [GitHub documentation](https://docs.github.com/en/enterprise-server@3.15/rest/enterprise-admin?apiVersion=2022-11-28#endpoint-urls) and choose the correct Enterprise Server version.
 :::
 
 1. Within Web Modeler, navigate to the process application you would like to connect to GitHub, and click **Connect repository**.
