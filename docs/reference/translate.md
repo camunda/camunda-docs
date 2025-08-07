@@ -1,12 +1,12 @@
 ---
 id: translate
-title: "Translation"
+title: "AI translation"
 description: "Get help translating the docs."
 ---
 
 Get help with translating the docs!
 
-## English
+## Deutsch (German)
 
 <details>
   <summary>How to chat with Camunda docs AI in English</summary>
