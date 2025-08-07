@@ -7,6 +7,8 @@ keywords: ["document handling"]
 
 Camunda 8 provides built-in support for storing, tracking, and managing documents using Camunda Forms, connectors, Tasklist, and the [Camunda 8 REST API](/apis-tools/camunda-api-rest/specifications/create-documents.api.mdx) in both SaaS and Self-Managed.
 
+![document handling architecture diagram](./img/doc-handling.png)
+
 :::note
 For a closer look at storage options for handling documents in Self-Managed environments, visit the [Self-Managed configuration docs](/self-managed/concepts/document-handling/configuration/overview.md).
 :::
