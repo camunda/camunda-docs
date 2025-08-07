@@ -86,7 +86,7 @@ Failed items are marked `FAILED` in the batch status and cannot be retried. To r
 
 You can create batch operations using:
 
-- The [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md), which provides REST endpoints to create, manage, and monitor batches.
+- The [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md), which provides REST endpoints to create, manage, and monitor batches.
 - The [Camunda client](/apis-tools/java-client-examples/process-instance-create.md), which offers APIs for batch operations.
 
 These APIs also support suspending, resuming, or canceling ongoing batch operations.

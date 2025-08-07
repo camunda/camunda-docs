@@ -1,10 +1,10 @@
 ---
 id: role
 title: Role management
-description: "Learn how to manage roles in your Orchestration cluster."
+description: "Learn how to manage roles in your orchestration cluster."
 ---
 
-Role management is the process of creating, updating, and deleting roles in your Orchestration cluster. A role is a collection of [authorizations](authorization.md) that provides users with the system and data access that they need to fulfill a certain responsibility. A role can be assigned to users directly or through a [group](group.md) that they are a member of.
+Role management is the process of creating, updating, and deleting roles in your orchestration cluster. A role is a collection of [authorizations](authorization.md) that provides users with the system and data access that they need to fulfill a certain responsibility. A role can be assigned to users directly or through a [group](group.md) that they are a member of.
 
 ### Create a role
 

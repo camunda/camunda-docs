@@ -178,7 +178,7 @@ In the build stage, deploy your process or project to a cluster or embedded engi
 For GitLab users, consider using [GitLab Review Apps](https://docs.gitlab.com/ee/ci/review_apps/) to provide preview environments.
 :::
 
-Deploy resources using the [Orchestration cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) in this pipeline step, compatible with both SaaS and Self-Managed clusters. Alternately, utilize the [Java](/apis-tools/java-client/index.md) client library or any [community-built alternatives](/apis-tools/community-clients/index.md).
+Deploy resources using the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) in this pipeline step, compatible with both SaaS and Self-Managed clusters. Alternately, utilize the [Java](/apis-tools/java-client/index.md) client library or any [community-built alternatives](/apis-tools/community-clients/index.md).
 
 :::info Feature branches and Web Modeler installations
 To maintain a single source of truth, avoid multiple Web Modeler instances for different feature branches. Instead, maintain a single Web Modeler installation for all environments, utilizing versions to signify versioning and pipeline stages. Feature branches can be managed by cloning and merging files or projects, ensuring synchronization using VCS.
@@ -206,7 +206,7 @@ To retrieve the actual file `content`, iterate over the response and fetch it vi
 
 If you are running connectors in your process or application, you need to deploy the runtimes as well. Parse the process XML for `zeebe:taskDefinition` bindings to identify the necessary runtimes (in addition to job workers). To learn how to deploy connector runtimes, read more [here](/self-managed/components/connectors/overview.md) for Self-Managed, or [here](/components/connectors/custom-built-connectors/connector-sdk.md#runtime-environments) for SaaS.
 
-Deploy resources in this pipeline step using the [Orchestration cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md), compatible with both SaaS and Self-Managed clusters. Alternatively, utilize the Java client library or any community-built alternatives.
+Deploy resources in this pipeline step using the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md), compatible with both SaaS and Self-Managed clusters. Alternatively, utilize the Java client library or any community-built alternatives.
 
 #### Add environment variables via secrets
 
@@ -257,11 +257,11 @@ In case you use an embedded Zeebe engine, or want to provide a lightweight, focu
 
 ### Publish stage
 
-Push approved changes to staging or production by deploying them to the respective clusters. You can use the [Orchestration cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) to deploy via your pipeline, which works both for a SaaS or Self-Managed cluster. Deployments work slightly different on SaaS and Self-Managed, since there are differences in the cluster connection. Read more about deployments [here](/apis-tools/working-with-apis-tools.md#deploy-processes-start-process-instances-and-more-using-zeebe-client-libraries).
+Push approved changes to staging or production by deploying them to the respective clusters. You can use the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) to deploy via your pipeline, which works both for a SaaS or Self-Managed cluster. Deployments work slightly different on SaaS and Self-Managed, since there are differences in the cluster connection. Read more about deployments [here](/apis-tools/working-with-apis-tools.md#deploy-processes-start-process-instances-and-more-using-zeebe-client-libraries).
 
 #### Define authorizations
 
-For clusters with [authorizations](/components/concepts/access-control/authorizations.md) enabled, use the Orchestration Cluster API to assign the necessary authorizations through the pipeline. This step ensures appropriate accessibility for process/application stakeholders or updating existing authorizations.
+For clusters with [authorizations](/components/concepts/access-control/authorizations.md) enabled, use the Orchestration Cluster REST API to assign the necessary authorizations through the pipeline. This step ensures appropriate accessibility for process/application stakeholders or updating existing authorizations.
 
 ##### Monitoring and error handling
 

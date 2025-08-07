@@ -117,7 +117,7 @@ We recommend deploying these groups into separate [Kubernetes namespaces](https:
 
 A **multi-namespace setup** enables:
 
-- Independent scaling of Orchestration Clusters based on workload
+- Independent scaling of orchestration clusters based on workload
 - Shared access to centralized components (e.g., Management Identity)
 
 #### Orchestration Cluster namespace

@@ -48,7 +48,7 @@ The following components are bundled into a single artifact:
 - [Tasklist](/components/tasklist/introduction-to-tasklist.md): A user interface for managing and completing human tasks within workflows.
 - [Identity](/self-managed/components/orchestration-cluster/identity/overview.md): A service for managing user authentication and authorization.
 
-Thematically close to the Orchestration Cluster are following components:
+Thematically close to the Orchestration Cluster are the following components:
 
 - [Optimize](/components/optimize/what-is-optimize.md): An analytics tool for generating reports and insights based on workflow data.
 - [Connectors](/components/connectors/introduction.md): Pre-built integrations for connecting the Orchestration Cluster with external systems and services.
@@ -70,7 +70,8 @@ Additionally, Web Modeler and Console require the following:
 
 - [Management Identity](/self-managed/components/management-identity/what-is-identity.md): A service for managing user authentication and authorization.
 
-Unlike the Orchestration Cluster, Web Modeler and Console run a separate and dedicated Management Identity deployment. This is not the same as the embedded Identity in the Orchestration Cluster. Optimize also relies on the Management Identity and will not function without it. It is not compatible with the embedded Orchestration Cluster Identity.
+Unlike the Orchestration Cluster, Web Modeler and Console run a separate and dedicated Management Identity deployment. This is not the same as the embedded Identity in the Orchestration Cluster. Optimize also relies on Management Identity and will not function without it. It is not compatible with the embedded Orchestration Cluster Identity.
+
 For production environments, using an external [identity provider](/self-managed/installation-methods/helm/configure/connect-to-an-oidc-provider.md) is recommended to connect the two environments.
 
 ### Databases

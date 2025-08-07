@@ -92,7 +92,7 @@ You must add the `http://` scheme to the URL to avoid a `java.lang.NullPointerEx
 
 #### REST address
 
-Define address of the [Orchestration cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) exposed by the [Zeebe Gateway](/self-managed/components/orchestration-cluster/zeebe/zeebe-gateway/zeebe-gateway-overview.md):
+Define address of the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) exposed by the [Zeebe Gateway](/self-managed/components/orchestration-cluster/zeebe/zeebe-gateway/zeebe-gateway-overview.md):
 
 ```yaml
 camunda:
