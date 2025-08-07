@@ -170,17 +170,18 @@ Select this option to use [Google Vertex AI](https://cloud.google.com/vertex-ai)
 | ------------------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------- |
 | **Project ID**     | Yes      | The Google Cloud project ID.                                                                                                       |
 | **Region**         | Yes      | The [region](https://cloud.google.com/vertex-ai/docs/general/locations#feature-availability) where AI inference should take place. |
-| **Authentication** | Yes      | Select the authentication type you want to use to authenticate the connector with Google Cloud.                                    |
+| **Authentication** | Yes      | Select the authentication type to use for connecting to Google Cloud.                                                              |
 
 Two authentication methods are currently supported:
 
-- **Application default credentials (ADC)**: Authenticate using the default credentials available in your environment.
-  This authentication method can only be used in Self-Managed or hybrid environments.
+- **Application Default Credentials (ADC)**: Authenticate using the default credentials available in your environment.  
+  This method is only supported in Self-Managed or hybrid environments.  
   To set up ADC in a local development environment, follow the instructions [here](https://cloud.google.com/docs/authentication/set-up-adc-local-dev-environment).
-- **Service account credentials**: Authenticate using a [service account](https://cloud.google.com/iam/docs/service-account-overview) key in JSON format.
+
+- **Service Account Credentials**: Authenticate using a [service account](https://cloud.google.com/iam/docs/service-account-overview) key in JSON format.
 
 :::info
-For more information about Google Vertex AI models, refer to the [Vertex AI documentation](https://cloud.google.com/vertex-ai/generative-ai/docs/models).
+For more information about Google Vertex AI models, see the [Vertex AI documentation](https://cloud.google.com/vertex-ai/generative-ai/docs/models).
 :::
 
 #### OpenAI
