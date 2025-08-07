@@ -65,13 +65,13 @@ Log4j2 appenders define how logs are output. The Orchestration Cluster supports:
 
 1. **Console** - Default. Outputs formatted text logs to standard out. Select with `ZEEBE_LOG_APPENDER=Console`.
 2. **Stackdriver (JSON format)** - Outputs logs in JSON format compatible with [Google Cloud Logging/Stackdriver](https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry). Select with `ZEEBE_LOG_APPENDER=Stackdriver`.
-3. **Rolling file** - Writes logs to a file that rotates and compresses old logs. Enabled by default; disable with `CAMUNDA_LOG_FILE_APPENDER_ENABLED=false`.
+3. **Rolling file** - Writes logs to a file that rotates and compresses old logs. Disabled by default; enable with `CAMUNDA_LOG_FILE_APPENDER_ENABLED=true`.
 
 ## JSON logging
 
 To enable JSON logging (Stackdriver format) for any component:
 
-`LOG_APPENDER=Stackdriver`
+`ZEEBE_LOG_APPENDER=Stackdriver`
 
 Set this variable for each component’s environment as needed.
 
