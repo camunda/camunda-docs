@@ -267,7 +267,6 @@ public class CamundaProcessTestOutboundConnectorsMockIT {
   static void setup(final WireMockRuntimeInfo wireMockRuntimeInfo) {
     Testcontainers.exposeHostPorts(wireMockRuntimeInfo.getHttpPort());
   }
-  
   @Test
   void testWithExposedPort() {
     // ...
