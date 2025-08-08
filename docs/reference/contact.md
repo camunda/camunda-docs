@@ -1,6 +1,6 @@
 ---
 id: contact
-title: Contact
+title: Support and feedback
 description: Contact Camunda, submit feedback, find support using the Camunda community forum, note bug reports and feature requests, and review security notices.
 keywords:
   [
