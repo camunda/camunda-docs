@@ -119,9 +119,9 @@ Camunda document reference metadata, similarity score, and the actual text conte
 <Tabs groupId="embedding-models" defaultValue="bedrock" queryString values={
 [
 {label: 'Amazon Bedrock', value: 'bedrock' },
-{label: 'OpenAI', value: 'openai' },
 {label: 'Azure OpenAI', value: 'azure-openai' },
 {label: 'Google Vertex AI', value: 'vertex-ai' },
+{label: 'OpenAI', value: 'openai' }
 ]}>
 
 <TabItem value='bedrock'>
@@ -143,18 +143,20 @@ The following parameters are optional:
 - **Embedding dimensions**: The number of dimensions for the embedding vector. If not specified, the connector will use the default value for the selected model.
 - **Custom Headers**: Additional headers to include in the request.
 - **Custom base URL**: If you use a custom OpenAI endpoint, specify the base URL to use for API requests with this connector.
+- **Max retries**: The maximum number of retries for the embedding request in case of failure.
 
 </TabItem>
 
 <TabItem value='azure-openai'>
 The following parameters are required to use Azure OpenAI as an embedding model:
 - **Endpoint**: The Azure OpenAI endpoint URL, for example `https://<your-resource-name>.openai.azure.com/`.
-- **Authentication**: Select the authentication type you want to use to authenticate the connector with Azure OpenAI.
+- **Authentication**: Select the authentication type to use to authenticate the connector with Azure OpenAI.
 
 The following parameters are optional:
 
 - **Embedding dimensions**: The number of dimensions for the embedding vector. If not specified, the connector will use the default value for the selected model.
 - **Custom Headers**: Additional headers to include in the request.
+- **Max retries**: The maximum number of retries for the embedding request in case of failure.
 
 Two authentication methods are currently supported:
 
@@ -173,31 +175,35 @@ The following parameters are required to use Google Vertex AI as an embedding mo
 
 - **Project ID**: The Google Cloud project ID.
 - **Region**: The [region](https://cloud.google.com/vertex-ai/docs/general/locations#feature-availability) where AI inference should take place.
-- **Authentication**: Select the authentication type you want to use to authenticate the connector with Google Vertex AI.
+- **Authentication**: Select the authentication type to use for connecting to Google Cloud.
 - **Model name**: The Vertex AI model to use for embeddings. Refer to the [Vertex AI documentation](https://cloud.google.com/vertex-ai/docs/generative-ai/embeddings) for available models.
 - **Embedding dimensions**: The number of dimensions for the embedding vector. Consult the documentation for the selected model to determine the value range.
 
-The following parameter is optional:
+The following parameters are optional:
 
 - **Publisher**: The publisher of the Vertex AI model. If not specified, the default value of `google` is used.
+- **Max retries**: The maximum number of retries for the embedding request in case of failure.
 
 Two authentication methods are currently supported:
 
-- **Application default credentials (ADC)**: Authenticate using the default credentials available in your environment.
-  This authentication method can only be used in Self-Managed or hybrid environments.
+- **Service Account Credentials**: Authenticate using a [service account](https://cloud.google.com/iam/docs/service-account-overview) key in JSON format.
+- **Application Default Credentials (ADC)**: Authenticate using the default credentials available in your environment.  
+  This method is only supported in Self-Managed or hybrid environments.  
   To set up ADC in a local development environment, follow the instructions [here](https://cloud.google.com/docs/authentication/set-up-adc-local-dev-environment).
-- **Service account credentials**: Authenticate using a [service account](https://cloud.google.com/iam/docs/service-account-overview) key in JSON format.
 
 </TabItem>
 
 </Tabs>
+
 ## Vector stores
 
 <Tabs groupId="vector" defaultValue="elasticsearch" queryString values={
 [
-{label: 'Elasticsearch', value: 'elasticsearch' },
-{label: 'OpenSearch', value: 'opensearch' },
 {label: 'Amazon OpenSearch', value: 'amazon-opensearch' },
+{label: 'Azure AI Search', value: 'azure-ai-search' },
+{label: 'Azure Cosmos DB NoSql', value: 'azure-cosmos-db' },
+{label: 'Elasticsearch', value: 'elasticsearch' },
+{label: 'OpenSearch', value: 'opensearch' }
 ]}>
 
 <TabItem value='elasticsearch'>
@@ -210,8 +216,8 @@ Enter the following parameters:
 - **Username**: For the Elasticsearch user that has read/write access.
 - **Password**: For the Elasticsearch user that has read/write access.
 - **Index name**: Name of the index where you wish to store embeddings.
-- - When embedding: If index is not present, the connector will create a new one.
-- - When retrieving: If the index is absent, the connector will raise an error.
+  - When embedding: If the index is not present, the connector will create a new one.
+  - When retrieving: If the index is absent, the connector will raise an error.
 
 </TabItem>
 
@@ -225,8 +231,8 @@ Enter the following parameters:
 - **Username**: For the OpenSearch user that has read/write access.
 - **Password**: For the OpenSearch user that has read/write access.
 - **Index name**: Name of the index where you wish to store embeddings.
-- - When embedding: If index is not present, the connector will create a new one.
-- - When retrieving: If the index is absent, the connector will raise an error.
+  - When embedding: If the index is not present, the connector will create a new one.
+  - When retrieving: If the index is absent, the connector will raise an error.
 
 </TabItem>
 
@@ -236,8 +242,58 @@ Enter the following parameters:
 - **Server URL**: An Amazon OpenSearch URL _without_ protocol, for example `my-opensearch.aws.com:port`.
 - **Region**: Region of the Amazon OpenSearch instance.
 - **Index name**: Name of the index where you wish to store embeddings.
-- - When embedding: If index is not present, the connector will create a new one.
-- - When retrieving: If the index is absent, the connector will raise an error.
+  - When embedding: If the index is not present, the connector will create a new one.
+  - When retrieving: If the index is absent, the connector will raise an error.
+
+</TabItem>
+
+<TabItem value='azure-ai-search'>
+
+Enter the following parameters:
+
+- **Endpoint**: The Azure AI Search endpoint URL, for example `https://<your-resource-name>.search.windows.net/`.
+- **Authentication**: Select the authentication type to use to authenticate the connector with Azure AI Search.
+- **Index name**: Name of the index where you wish to store embeddings.
+  - When embedding: If the index is not present, the connector will create a new one.
+  - When retrieving: If the index is absent, the connector will raise an error.
+
+Two authentication methods are currently supported:
+
+- **API key**: Authenticate using an Azure AI Search key.
+- **Client credentials**: Authenticate using a client ID and secret.
+  This method requires registering an application in [Microsoft Entra ID](https://go.microsoft.com/fwlink/?linkid=2083908). The [required roles](https://learn.microsoft.com/en-us/azure/search/search-security-rbac) must be assigned to the application.
+  Note that the role-based access control must be explicitly enabled for the Azure AI Search resource.
+  Provide the following fields: - **Client ID** – The Microsoft Entra application ID. - **Client secret** – The application’s client secret. - **Tenant ID** – The Microsoft Entra tenant ID. - **Authority host** – (Optional) The authority host URL. Defaults to `https://login.microsoftonline.com/`. This can also be an OAuth 2.0 token endpoint.
+
+</TabItem>
+
+<TabItem value='azure-cosmos-db'>
+
+Enter the following parameters:
+
+- **Endpoint**: The Azure Cosmos DB NoSql endpoint URL, for example `https://<your-resource-name>.documents.azure.com/`.
+- **Authentication**: Select the authentication type to use to authenticate the connector with Azure Cosmos DB NoSql.
+- **Database name**: The name of the Azure Cosmos DB NoSql database.
+- **Container name**: The name of the Azure Cosmos DB NoSql container. Note that the container must already exist and have an `/id` partition key.
+- **Consistency level**: The consistency level for the Azure Cosmos DB NoSql container. The default value is `Eventual`.
+- **Distance function**: The distance function to use for vector similarity search. The default value is `Cosine`.
+- **Vector index type**: The vector index type to use. The default value is `Flat`.
+
+:::info
+For more information about the Azure Cosmos DB NoSql vector search, refer to the [official documentation](https://learn.microsoft.com/en-us/azure/cosmos-db/nosql/vector-search).
+Please pay a special attention to the vector dimensions limitations as stated in the documentation.
+:::
+
+Two authentication methods are currently supported:
+
+- **API key**: Authenticate using an Azure Cosmos DB key.
+- **Client credentials**: Authenticate using a client ID and secret.
+  This method requires registering an application in [Microsoft Entra ID](https://go.microsoft.com/fwlink/?linkid=2083908).
+  Provide the following fields:
+  - **Client ID** – The Microsoft Entra application ID.
+  - **Client secret** – The application’s client secret.
+  - **Tenant ID** – The Microsoft Entra tenant ID.
+  - **Authority host** – (Optional) The authority host URL. Defaults to `https://login.microsoftonline.com/`. This can also be an OAuth 2.0 token endpoint.
 
 </TabItem>
 
