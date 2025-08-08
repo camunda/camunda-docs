@@ -27,7 +27,7 @@ Upgrading to Camunda 8.8 delivers significant benefits:
 
 - **Enhanced productivity**: This upgrade introduces streamlined [identity and access management](#identity), a consolidated configuration model, and modernized & consolidated [APIs and SDKs](#apis-and-tools), making development, integration, and permission handling faster and more intuitive.
 
-- **Increased efficiency**: The new [unified exporter architecture](#unified-exporter) improves performance by making data more quickly visible in Operate and Tasklist, as well as available via query APIs. It also enables easier operation and administration, and improves resilience when deploying across multiple data centers.
+- **Increased efficiency**: The new [unified exporter architecture](#unified-exporter) improves performance with accelerated data visibility in Operate and Tasklist, as well as available via query APIs. It also enables easier operation and administration, and improves resilience when deploying across multiple data centers.
 
 :::info
 To learn more about the benefits of upgrading to Camunda 8.8, see the blog posts [streamlined deployment with Camunda 8.8](https://camunda.com/blog/2025/03/streamlined-deployment-with-camunda-8-8/) and [introducing enhanced Identity Management in Camunda 8.8](https://camunda.com/blog/2025/03/introducing-enhanced-identity-management-in-camunda-88/).
@@ -78,7 +78,7 @@ The Orchestration Cluster (previously automation cluster) is now the core compon
 
 ### Zeebe, Operate, Tasklist, and Identity
 
-In Camunda 8.8, Zeebe, Operate, Tasklist, and Identity are consolidated into the Orchestration Cluster application as a single deployable artifact, distributed as a JAR file or Docker container.
+In Camunda 8.8, Zeebe, Operate, Tasklist, and Identity are integrated into the Orchestration Cluster application as a single deployable artifact, distributed as a JAR file or Docker container.
 
 - [Zeebe](../reference/glossary.md#zeebe) is the [workflow engine](../reference/glossary.md#workflow-engine).
 - Operate is used for monitoring and troubleshooting [process instances](../reference/glossary.md#process-instance) running in Zeebe.
@@ -240,7 +240,6 @@ After you deploy all Camunda 8 components in a Self-Managed environment, you wil
 - The Identity Migration App that migrates these entities from Management Identity into Orchestration Cluster Identity must be run during your Camunda 8.7 to 8.8 upgrade. Instructions on enabling and configuring the Identity Migration App in the 8.7 to 8.8 migration guide are available for Helm and also docker-compose/bare Java deployments.
 
 - Management Identity, Keycloak and Postgres are no longer needed for an Orchestration Cluster. They are only needed when using Web Modeler, Console or Optimize.
-
   - For the Orchestration Cluster, you can bring your own Identity Provider (for example, Keycloak, Microsoft EntraID, Okta) or use the built-in Basic Authentication method.
 
   - A special setup is no longer required for Keycloak as it is now integrated like any other Identity Provider via OpenID Connect (OIDC). Management Identity relies by default on Keycloak, but you can also configure it to use any OIDC-compatible Identity Provider.
