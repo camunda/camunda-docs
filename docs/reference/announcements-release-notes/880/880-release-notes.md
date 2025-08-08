@@ -25,6 +25,15 @@ These release notes identify the new features included in 8.8, including [alpha 
 | :------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------- |
 | 12 August 2025 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.8.0-alpha7)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.8.0-alpha7)</li></ul> | [Release blog](https://camunda.com/blog/2025/08/camunda-alpha-release-august-2025/) |
 
+### AI Agent connector <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects connectors">Connector</span><span class="badge badge--medium" title="This feature affects AI">AI</span>
+
+- **Hybrid mode/customization**: The AI Agent connector can now be [customized](../../../components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization.md) in hybrid mode. This includes an API to define custom memory storage backends apart from the provided ones.
+- **Added model provider support**: Added support for Azure OpenAI and Google Vertex AI models.
+  To learn more, see [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
+
+<!-- https://github.com/camunda/camunda-docs/pull/6173 -->
+<!-- https://github.com/camunda/camunda-docs/pull/6221 -->
+
 ### Azure Blob Storage connector <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects connectors">Connector</span>
 
 Provides a [general-purpose connector to store and retrieve documents within Camunda workflows using Azure Blob Storage](/components/connectors/out-of-the-box-connectors/azure-blob-storage.md). This enables seamless document management directly in processes, improving efficiency and reducing the need for custom integrations.
@@ -72,9 +81,9 @@ These improvements simplify job worker development, reduce errors, and enable be
 
 <!-- https://github.com/camunda/product-hub/issues/2993 -->
 
-### MCP connector <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects connectors">Connector</span><span class="badge badge--medium" title="This feature affects AI">AI</span>
+### MCP Client connector (early access) <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects connectors">Connector</span><span class="badge badge--medium" title="This feature affects AI">AI</span>
 
-Allows Camunda processes and AI agents to auto-discover and invoke external tools via an MCP client connector, eliminating hardwired connectors and enabling dynamic, metadata-driven tool integration.
+Allows Camunda processes and AI agents to auto-discover and invoke external tools via an [MCP client](../../../components/early-access/alpha/mcp-client/mcp-client.md) connector, eliminating hardwired connectors and enabling dynamic, metadata-driven tool integration.
 
 <!-- https://github.com/camunda/product-hub/issues/2900 -->
 
@@ -125,6 +134,13 @@ Camunda now supports Elasticsearch 8.16+ and OpenSearch 2.17+ as minimal version
 Simplifies configuration by consolidating Operate, Tasklist, and Identity profiles into a unified Camunda 8 Orchestration Cluster application, reducing duplication and complexity for easier deployment and management.
 
 <!-- https://github.com/camunda/product-hub/issues/2486 -->
+
+### Vector database connector <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects connectors">Connector</span><span class="badge badge--medium" title="This feature affects AI">AI</span>
+
+- Updated the OpenSearch vector store support to support non-AWS managed instances.
+- Added support for OpenAI embedding models.
+
+<!-- https://github.com/camunda/camunda-docs/pull/6047 -->
 
 ## 8.8.0-alpha6
 
