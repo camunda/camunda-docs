@@ -56,8 +56,8 @@ As a result of this operation, you will get an array of created embedding chunk 
 for example `["d599ec62-fe51-4a91-bbf0-26e1241f9079", "a1fad021-5148-42b4-aa02-7de9d590e69c"]`.
 
 :::important
-Every time that you embed a document, the connector will create a new set of chunks and store them in the vector database.
-If you want to update the existing document, you need to delete the previous chunks first.
+Every time you embed a document, the connector creates a new set of chunks and stores them in the vector database.
+To update the existing document, first delete the previous chunks.
 :::
 
 </TabItem>
@@ -132,7 +132,9 @@ The **vector database connector** uses [LangChain4j implementation](https://docs
 </TabItem>
 
 <TabItem value='openai'>
+
 The following parameters are required to use OpenAI as an embedding model:
+
 - **API key**: Your OpenAI account API key for authorization.
 - **Model name**: The OpenAI model to use for embeddings. Refer to the [OpenAI documentation](https://platform.openai.com/docs/guides/embeddings) for available models.
 
@@ -148,7 +150,9 @@ The following parameters are optional:
 </TabItem>
 
 <TabItem value='azure-openai'>
+
 The following parameters are required to use Azure OpenAI as an embedding model:
+
 - **Endpoint**: The Azure OpenAI endpoint URL, for example `https://<your-resource-name>.openai.azure.com/`.
 - **Authentication**: Select the authentication type to use to authenticate the connector with Azure OpenAI.
 
@@ -165,7 +169,7 @@ Two authentication methods are currently supported:
   - **Client ID** – The Microsoft Entra application ID.
   - **Client secret** – The application’s client secret.
   - **Tenant ID** – The Microsoft Entra tenant ID.
-  - **Authority host** – (Optional) The authority host URL. Defaults to `https://login.microsoftonline.com/`. This can also be an OAuth 2.0 token endpoint.
+  - **Authority host** – _(Optional)_ The authority host URL. Defaults to `https://login.microsoftonline.com/`. This can also be an OAuth 2.0 token endpoint.
 
 </TabItem>
 
@@ -261,9 +265,14 @@ Two authentication methods are currently supported:
 
 - **API key**: Authenticate using an Azure AI Search key.
 - **Client credentials**: Authenticate using a client ID and secret.
-  This method requires registering an application in [Microsoft Entra ID](https://go.microsoft.com/fwlink/?linkid=2083908). The [required roles](https://learn.microsoft.com/en-us/azure/search/search-security-rbac) must be assigned to the application.
-  Note that the role-based access control must be explicitly enabled for the Azure AI Search resource.
-  Provide the following fields: - **Client ID** – The Microsoft Entra application ID. - **Client secret** – The application’s client secret. - **Tenant ID** – The Microsoft Entra tenant ID. - **Authority host** – (Optional) The authority host URL. Defaults to `https://login.microsoftonline.com/`. This can also be an OAuth 2.0 token endpoint.
+  This method requires registering an application in [Microsoft Entra ID](https://go.microsoft.com/fwlink/?linkid=2083908). The [required roles](https://learn.microsoft.com/en-us/azure/search/search-security-rbac) must be assigned to the application.  
+  Note that role-based access control must be explicitly enabled for the Azure AI Search resource.
+
+  Provide the following fields:
+  - **Client ID** – The Microsoft Entra application ID.
+  - **Client secret** – The application’s client secret.
+  - **Tenant ID** – The Microsoft Entra tenant ID.
+  - **Authority host** – _(Optional)_ The authority host URL. Defaults to `https://login.microsoftonline.com/`. This can also be an OAuth 2.0 token endpoint.
 
 </TabItem>
 
@@ -274,26 +283,28 @@ Enter the following parameters:
 - **Endpoint**: The Azure Cosmos DB NoSql endpoint URL, for example `https://<your-resource-name>.documents.azure.com/`.
 - **Authentication**: Select the authentication type to use to authenticate the connector with Azure Cosmos DB NoSql.
 - **Database name**: The name of the Azure Cosmos DB NoSql database.
-- **Container name**: The name of the Azure Cosmos DB NoSql container. Note that the container must already exist and have an `/id` partition key.
+- **Container name**: The name of the Azure Cosmos DB NoSql container.  
+  _Note:_ The container must already exist and have an `/id` partition key.
 - **Consistency level**: The consistency level for the Azure Cosmos DB NoSql container. The default value is `Eventual`.
 - **Distance function**: The distance function to use for vector similarity search. The default value is `Cosine`.
 - **Vector index type**: The vector index type to use. The default value is `Flat`.
 
 :::info
-For more information about the Azure Cosmos DB NoSql vector search, refer to the [official documentation](https://learn.microsoft.com/en-us/azure/cosmos-db/nosql/vector-search).
-Please pay a special attention to the vector dimensions limitations as stated in the documentation.
+For more information about the Azure Cosmos DB NoSql vector search, refer to the [official documentation](https://learn.microsoft.com/en-us/azure/cosmos-db/nosql/vector-search).  
+Please pay special attention to the vector dimensions limitations as stated in the documentation.
 :::
 
 Two authentication methods are currently supported:
 
 - **API key**: Authenticate using an Azure Cosmos DB key.
-- **Client credentials**: Authenticate using a client ID and secret.
+- **Client credentials**: Authenticate using a client ID and secret.  
   This method requires registering an application in [Microsoft Entra ID](https://go.microsoft.com/fwlink/?linkid=2083908).
+
   Provide the following fields:
   - **Client ID** – The Microsoft Entra application ID.
   - **Client secret** – The application’s client secret.
   - **Tenant ID** – The Microsoft Entra tenant ID.
-  - **Authority host** – (Optional) The authority host URL. Defaults to `https://login.microsoftonline.com/`. This can also be an OAuth 2.0 token endpoint.
+  - **Authority host** – _(Optional)_ The authority host URL. Defaults to `https://login.microsoftonline.com/`. This can also be an OAuth 2.0 token endpoint.
 
 </TabItem>
 
