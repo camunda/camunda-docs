@@ -26,7 +26,7 @@ The way you connect Camunda 8 to an external Identity Provider depends on your d
 Camunda 8 Self-Managed supports integration with external IdPs using **OpenID Connect (OIDC)** only (e.g., Keycloak, Auth0, Okta, EntraID via OIDC). Follow the individual guides for each component:
 
 - Orchestration Cluster: [Connect Orchestration Cluster Identity to an OpenID Connect provider](../../../self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md)
-- Web Modeler, Console, Optimize: [Connect Management Identity to an OpenID Connect provider](../../../self-managed/components/management-identity/configuration/connect-to-an-oidc-provider/)
+- Web Modeler, Console, Optimize: [Connect Management Identity to an OpenID Connect provider](../../../../self-managed/components/management-identity/configuration/connect-to-an-oidc-provider/)
 
 ### SaaS
 
