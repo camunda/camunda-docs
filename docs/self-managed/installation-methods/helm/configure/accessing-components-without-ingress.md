@@ -74,7 +74,7 @@ Finally, you can access each app pointing your browser at:
 - Operate: [http://localhost:8081](http://localhost:8081)
 - Tasklist: [http://localhost:8082](http://localhost:8082)
 - Optimize: [http://localhost:8083](http://localhost:8083)
-- Web Modeler: [http://localhost:8084](http://localhost:8084)
+- Web Modeler: [http://localhost:8070](http://localhost:8070)
 - Console: [http://localhost:8087](http://localhost:8087)
 
 Log in to these services using the first user `demo`/`demo` credentials.
