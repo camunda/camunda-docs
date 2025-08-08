@@ -1,0 +1,223 @@
+---
+title: Connect Orchestration Cluster to Identity Provider
+sidebar_label: Connect Orchestration Cluster to Identity Provider
+description: Learn how to connect Camunda 8 Orchestration Cluster Identity to an external Identity Provider (IdP) via OpenID Connect (OIDC) for authentication and user management.
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+# Connect Orchestration Cluster to Identity Provider
+
+This guide explains how to configure the Orchestration Cluster to use an external Identity Provider (IdP) via OpenID Connect (OIDC) for authentication and user management.
+
+**User Interface access for Users:**
+
+Users authenticate via the **OIDC Authorization Code Flow**. This means users are redirected to your Identity Provider to log in, and Camunda receives a token to establish the session.
+Claims from the token are used to identify the user's username and, optionally, groups for authorization.
+In addition, Mapping Rules can be used to map token claims to Camunda roles, authorizations, or tenants.
+
+Note that user information is not stored in the Orchestration Cluster when using OIDC. Hence you will notice that features like user search, user validation on assigning authorizations or tenants and user management are not available in the Orchestration Cluster Identity UI when using OIDC.
+
+**M2M API access for Connectors and Workers:**
+
+Connectors, job workers or other implementations that use the Orchestration Cluster REST or gRPC APIs (e.g. by using one of the Camunda Clients) do not use the browser-based authorization code flow. Instead, they authenticate using client credentials. The authentication method for Camunda Clients is separate from the interactive user login and typically require additional configuration in your Identity Provider and Camunda.
+
+There is a separate guide for connecting Connectors and Camunda Clients to an OIDC provider.
+
+## Prerequisites
+
+- Camunda 8 Orchestration Cluster (Self-Managed)
+- Access to an OIDC-compliant Identity Provider (e.g., Keycloak, Auth0, Okta, Microsoft EntraID)
+- Client credentials (client ID, client secret, issuer URI) from your Identity Provider
+
+## Step 0: Prepare Your Identity Provider
+
+Before configuring Camunda, perform these high-level steps in your Identity Provider:
+
+1. **Register a new application/client** for Camunda 8 Orchestration Cluster in your Identity Provider.
+   - Set the application type to "Web" or "Confidential".
+   - Enable OIDC support.
+   - Configure the necessary scopes (e.g., `openid`, `profile`, `email`).
+   - Ensure the client is allowed to access user information.
+2. **Set the redirect URI** to match your Camunda deployment (default: `http://localhost:8080/sso-callback`).
+3. **Assign users or groups** who should have access to Camunda 8.
+4. **(Optional) Configure group or other claims** if you want to use group-based authorizations or mapping rules in Camunda.
+5. **Note the client ID, client secret, and issuer URI** for use in Camunda configuration.
+
+> For most Identity Providers, the default claim for the username is `sub` (subject). If you want to use a different claim (e.g., `preferred_username` or `email`), configure your Identity Provider to include it in the token and update the Camunda configuration accordingly.
+
+## Step 1: Choose Your Deployment and Configuration Method
+
+You can configure OIDC using environment variables, `application.yaml`, or Helm values. Choose the method that matches your deployment.
+
+## Step 2: Set Authentication Method to OIDC
+
+Set the authentication method to OIDC using the following settings:
+
+<Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Application.yaml', value: 'yaml' }, {label: 'Environment variables', value: 'env' },{label: 'Helm values', value: 'helm' }]}>
+<TabItem value="yaml">
+
+```yaml
+camunda.security.authentication.method: oidc
+```
+
+</TabItem>
+<TabItem value="env">
+```
+CAMUNDA_SECURITY_AUTHENTICATION_METHOD=oidc
+```
+</TabItem>
+<TabItem value="helm">
+```
+global.security.authentication.method: oidc
+```
+</TabItem>
+</Tabs>
+
+## Step 3: Configure OIDC Connection Details
+
+Set the following properties with values from your Identity Provider:
+
+<Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Application.yaml', value: 'yaml' }, {label: 'Environment variables', value: 'env' },{label: 'Helm values', value: 'helm' }]}>
+<TabItem value="yaml">
+
+```yaml
+camunda.security.authentication.oidc.client-id: <YOUR_CLIENTID>
+camunda.security.authentication.oidc.client-secret: <YOUR_CLIENTSECRET>
+camunda.security.authentication.oidc.issuer-uri: <YOUR_ISSUERURI>
+camunda.security.authentication.oidc.redirect-uri: <YOUR_REDIRECTURI>
+camunda.security.authentication.oidc.username-claim: <YOUR_USERNAMECLAIM>
+camunda.security.authentication.oidc.audiences: <YOUR_CLIENTID>
+camunda.security.authentication.oidc.scope: ["openid"]
+```
+
+</TabItem>
+<TabItem value="env">
+```
+CAMUNDA_SECURITY_AUTHENTICATION_OIDC_CLIENTID=<YOUR_CLIENTID>
+CAMUNDA_SECURITY_AUTHENTICATION_OIDC_CLIENTSECRET=<YOUR_CLIENTSECRET>
+CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ISSUERURI=<YOUR_ISSUERURI>
+CAMUNDA_SECURITY_AUTHENTICATION_OIDC_REDIRECTURI=<YOUR_REDIRECTURI>
+CAMUNDA_SECURITY_AUTHENTICATION_OIDC_USERNAMECLAIM=<YOUR_USERNAMECLAIM>
+CAMUNDA_SECURITY_AUTHENTICATION_OIDC_AUDIENCES=<YOUR_CLIENTID>
+CAMUNDA_SECURITY_AUTHENTICATION_OIDC_SCOPE=["openid"]
+```
+</TabItem>
+<TabItem value="helm">
+```yaml
+global.security.authentication.oidc.clientId: <YOUR_CLIENTID>
+global.security.authentication.oidc.clientSecret: <YOUR_CLIENTSECRET>
+global.security.authentication.oidc.issuerUri: <YOUR_ISSUERURI>
+global.security.authentication.oidc.redirectUri: <YOUR_REDIRECTURI>
+global.security.authentication.oidc.userNameClaim: <YOUR_USERNAMECLAIM>
+global.security.authentication.oidc.audiences: <YOUR_CLIENTID>
+global.security.authentication.oidc.scope: ["openid"]
+```
+</TabItem>
+</Tabs>
+
+- _Redirect URI_: By default, the redirect URI is `http://localhost:8080/sso-callback`. Update this if your deployment uses a different hostname or port.
+
+- _Username claim_: By default, the `sub` (subject) claim from the ID token is used as the username. If you want to use a different claim (such as `preferred_username` or `email`), ensure your Identity Provider includes it in the token and set the `username-claim` property accordingly.
+
+### Identity Provider Example Configurations
+
+<Tabs groupId="idpExamples" defaultValue="entraid">
+<TabItem value="entraid" label="Microsoft EntraID">
+```yaml
+global.security.authentication.oidc.clientId: <YOUR_CLIENTID>
+global.security.authentication.oidc.clientSecret: <YOUR_CLIENTSECRET>
+global.security.authentication.oidc.issuerUri: "https://login.microsoftonline.com/<YOUR_TENANT_ID>/v2.0"
+global.security.authentication.oidc.redirectUri: "http://localhost:8080/sso-callback"
+global.security.authentication.oidc.userNameClaim: "email"
+global.security.authentication.oidc.audiences: <YOUR_CLIENTID>
+global.security.authentication.oidc.scope: ["openid", "profile", "<client-id>/.default"]
+```
+</TabItem>
+<TabItem value="keycloak" label="Keycloak">
+
+</TabItem>
+<TabItem value="okta" label="okta">
+
+</TabItem>
+</Tabs>
+
+## Step 4: Restart the Orchestration Cluster
+
+After updating your configuration, (re)start the Orchestration Cluster for changes to take effect.
+
+## Step 5: Test User Authentication
+
+At this point, you should be able to log in to the Orchestration Cluster using any user account from your Identity Provider that assigned to this client (application).
+
+If login is successful, you will see that you are not authorized to access the Orchestration Cluster UIs. This is expected, as you have not yet configured an admin user or any authorizations for the user.
+
+## Step 6: Configure Admin Role for Users
+
+By default, authorizations are enabled which means that users cannot access any Orchestration Cluster UI or APIs - except authorizations have been granted to them.
+
+In order to allow users to access the Orchestration Cluster UI, you can assign the "admin" role to a user from your Identity Provider:
+<Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Application.yaml', value: 'yaml' }, {label: 'Environment variables', value: 'env' },{label: 'Helm values', value: 'helm' }]}>
+<TabItem value="yaml">
+
+```yaml
+camunda.security.initialization.defaultRoles.admin.users[0]: <YOUR_USERNAME>
+```
+
+</TabItem>
+<TabItem value="env">      
+```
+CAMUNDA_SECURITY_INITIALIZATION_DEFAULTROLES_ADMIN_USERS[0]=<YOUR_USERNAME>
+```
+</TabItem>
+<TabItem value="helm">
+```yaml
+global.security.initialization.defaultRoles.admin.users[0]: <YOUR_USERNAME>
+```
+</TabItem>
+</Tabs>
+
+Replace `<YOUR_USERNAME>` with the actual username as provided by your Identity Provider (matching the claim configured as `username-claim`).
+
+---
+
+## (Optional) Step 7: Configure Group-Based Authorization
+
+If you want to use group-based authorization, configure your Identity Provider to include a groups claim in the ID token (e.g., `groups` or `roles`). Then set the `groups-claim` property in your Camunda configuration to match the claim name. If you do not need group-based authorization, you can skip this step.
+
+<Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Application.yaml', value: 'yaml' }, {label: 'Environment variables', value: 'env' },{label: 'Helm values', value: 'helm' }]}>
+<TabItem value="yaml">
+
+```yaml
+camunda.security.authentication.oidc.groups-claim: <YOUR_USERNAMECLAIM>
+```
+
+</TabItem>
+<TabItem value="env">
+```
+CAMUNDA_SECURITY_AUTHENTICATION_OIDC_GROUPSCLAIM=<YOUR_GROUPSCLAIM>
+```
+</TabItem>
+<TabItem value="helm">
+```yaml
+global.security.authentication.oidc.groupsClaim: <YOUR_GROUPSCLAIM>
+```
+</TabItem>
+</Tabs>
+
+## (Optional) Step 8: Advanced Mapping Rules
+
+For advanced scenarios, such as mapping IdP claims to Camunda roles, authorizations or tenants, you can use mapping rules. See the [configuration reference](./configuration.md) for details on how to define mapping rules for users, groups, and roles.
+
+## Troubleshooting
+
+- Check logs for authentication errors.
+- Ensure your IdP client is configured to allow the specified redirect URI.
+- Verify claim names match your IdP's token claims.
+
+## Learn More
+
+- [OIDC configuration reference](./configuration.md)
+- [OpenID Connect (OIDC) overview](https://openid.net/connect/)
+- [Camunda documentation: Authentication and Authorization](../../../../components/concepts/access-control/authorizations.md)
