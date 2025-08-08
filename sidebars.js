@@ -804,7 +804,7 @@ module.exports = {
         "reference/camunda-help-center",
         "reference/auto-updates",
         "reference/status",
-         "reference/saas-ip-addresses",
+        "reference/saas-ip-addresses",
       ],
     },
     "reference/glossary",
