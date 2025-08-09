@@ -1,0 +1,98 @@
+---
+id: properties-reference
+title: Properties Reference
+---
+
+Here is the full properties reference for the Camunda Spring SDK.
+
+## Current properties
+
+{{#groups}}
+
+
+### `{{group.name}}`
+
+{{&group.description}}
+
+{{#table}}
+<table>
+<thead>
+  <tr>
+    <th>Property</th>
+    <th>Type</th>
+    <th>Default value</th>
+    <th>Description</th>
+  </tr>
+</thead>
+<tbody>
+{{#properties}}
+<tr>
+<td>
+  <code>{{name}}</code><br/><code>{{env}}</code>
+</td>
+<td>
+  <code>{{type}}</code>
+</td>
+<td>
+  <code>{{defaultValue}}</code>
+</td>
+<td>
+
+{{&description}}
+
+</td>
+</tr>
+{{/properties}}
+</tbody>
+</table>
+{{/table}}
+{{/groups}}
+
+## Deprecated properties
+
+:::caution
+The following properties are deprecated. Please find the according replacement and read the hint.
+
+All replacements are automatically mapped unless documented otherwise. The client will log these mappings on startup.
+:::
+
+{{#deprecatedGroups}}
+
+
+### `{{group.name}}`
+
+{{&group.description}}
+
+{{#table}}
+<table>
+<thead>
+  <tr>
+    <th>Property</th>
+    <th>Type</th>
+    <th>Replacement</th>
+    <th>Hint</th>
+  </tr>
+</thead>
+<tbody>
+{{#properties}}
+<tr>
+<td>
+  <code>{{name}}</code><br/><code>{{env}}</code>
+</td>
+<td>
+  <code>{{type}}</code>
+</td>
+<td>
+  {{#deprecation.replacement}}<code>{{deprecation.replacement}}</code>{{/deprecation.replacement}}
+</td>
+<td>
+
+{{deprecation.reason}}
+
+</td>
+</tr>
+{{/properties}}
+</tbody>
+</table>
+{{/table}}
+{{/deprecatedGroups}}
