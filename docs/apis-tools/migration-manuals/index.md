@@ -70,9 +70,9 @@ The [Camunda Java Client](/apis-tools/java-client/index.md) is now the official 
 - The Camunda Java Client is a drop-in replacement for Zeebe Java Client, however, Zeebe Java Client is still available.
 - Zeebe Java Client is deprecated with 8.8 and will be removed with 8.10. This allows you to plan and transition to the Camunda Java Client without immediate pressure, allowing for a smoother migration process.
 
-<!-- :::info
-For more information, see the update guide.
-::: -->
+:::info
+For more information on upgrading and migrating, see [migrate to Camunda Java Client](migrate-to-camunda-java-client.md).
+:::
 
 ### Camunda Spring SDK
 
