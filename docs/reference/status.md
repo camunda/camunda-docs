@@ -1,6 +1,7 @@
 ---
 id: status
 title: "Camunda 8 SaaS status"
+sidebar_label: Status and updates
 description: "Camunda 8 SaaS is a hosted service for the Camunda 8 stack that runs on the Google Cloud Platform (GCP)."
 ---
 
