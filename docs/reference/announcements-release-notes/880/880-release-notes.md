@@ -19,6 +19,129 @@ These release notes identify the new features included in 8.8, including [alpha 
 | ---------------------- | ---------------------------- | ------------ | ------------ | ------------ |
 | 14 October 2025        | 13 April 2027                | -            | -            | -            |
 
+## 8.8.0-alpha7
+
+| Release date   | Changelog(s)                                                                                                                                                                               | Blog                                                                                |
+| :------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------- |
+| 12 August 2025 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.8.0-alpha7)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.8.0-alpha7)</li></ul> | [Release blog](https://camunda.com/blog/2025/08/camunda-alpha-release-august-2025/) |
+
+### AI Agent connector <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects connectors">Connector</span><span class="badge badge--medium" title="This feature affects AI">AI</span>
+
+- **Hybrid mode/customization**: The AI Agent connector can now be [customized](../../../components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization.md) in hybrid mode. This includes an API to define custom memory storage backends apart from the provided ones.
+- **Added model provider support**: Added support for Azure OpenAI and Google Vertex AI models.
+  To learn more, see [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
+
+<!-- https://github.com/camunda/camunda-docs/pull/6173 -->
+<!-- https://github.com/camunda/camunda-docs/pull/6221 -->
+
+### Azure Blob Storage connector <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects connectors">Connector</span>
+
+Provides a [general-purpose connector to store and retrieve documents within Camunda workflows using Azure Blob Storage](/components/connectors/out-of-the-box-connectors/azure-blob-storage.md). This enables seamless document management directly in processes, improving efficiency and reducing the need for custom integrations.
+
+<!-- https://github.com/camunda/product-hub/issues/2713 -->
+
+### Camunda 8 Run - support 8.8 architecture <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Developer">Developer</span>
+
+Camunda Run now ships with Identity, allowing all core applications to run locally in configurations similar to production. This simplifies local development by enabling multiple user authentications and credentials.
+
+<!-- https://github.com/camunda/product-hub/issues/2641 -->
+
+### CSV connector <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects connectors">Connector</span>
+
+A new [CSV connector](/components/connectors/out-of-the-box-connectors/csv.md) for Camunda SaaS that enables reading, filtering, transforming, and writing CSV data within processes. This reduces technical debt, accelerates development, and broadens integration capabilities by supporting this universal format natively.
+
+<!-- https://github.com/camunda/product-hub/issues/2851 -->
+
+### Fetch latest process definitions <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects connectors">Connector</span>
+
+Optimizes Connectors Runtime by fetching only the latest process definition versions from Operate, reducing CPU consumption and improving deployment performance, especially in environments with frequent CI/CD-generated process versions.
+
+<!-- https://github.com/camunda/product-hub/issues/2572 -->
+
+### Google Cloud Platform (GCP) storage connector <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects connectors">Connector</span>
+
+Introduces a [Google Cloud storage connector](/components/connectors/out-of-the-box-connectors/google-cloud-storage.md) that allows easy document storage and retrieval directly within Camunda workflows, streamlining document management without custom development.
+
+<!-- https://github.com/camunda/product-hub/issues/2712 -->
+
+### IDP form extraction <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects IDP">IDP</span>
+
+A new [document extraction UI](/components/modeler/web-modeler/idp/idp-document-extraction.md) supports form-based extraction to capture structured data from documents. Projects can be shared organization-wide, enhancing accessibility to extraction capabilities.
+
+<!-- https://github.com/camunda/product-hub/issues/2707 -->
+
+### Improved experience with user task listeners
+
+With this release, user task listener jobs are enhanced in two key ways:
+
+- Task metadata is now directly embedded in the task listener jobs' properties instead of being exposed as custom headers. This includes attributes such as `assignee`, `dueDate` or `userTaskKey`.
+- User tasks can now be filtered using partial user task states to understand the current lifecycle state of the user task fully.
+
+These improvements simplify job worker development, reduce errors, and enable better observability of the complete user task lifecycle.
+
+<!-- https://github.com/camunda/product-hub/issues/2993 -->
+
+### MCP Client connector (early access) <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects connectors">Connector</span><span class="badge badge--medium" title="This feature affects AI">AI</span>
+
+Allows Camunda processes and AI agents to auto-discover and invoke external tools via an [MCP client](../../../components/early-access/alpha/mcp-client/mcp-client.md) connector, eliminating hardwired connectors and enabling dynamic, metadata-driven tool integration.
+
+<!-- https://github.com/camunda/product-hub/issues/2900 -->
+
+### Migration to Orchestration Cluster Identity is supported <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Security">Security</span>
+
+Enables smooth migration from Camunda 8.7 to 8.8 by transferring tenants, roles, and authorizations to the new Orchestration Cluster Identity, minimizing manual admin effort during upgrade.
+
+<!-- https://github.com/camunda/product-hub/issues/2449 -->
+
+### Multi-file script support <span class="badge badge--long" title="This feature affects RPA">RPA</span><span class="badge badge--medium" title="This feature affects Developers">Developer</span>
+
+This release introduces multi-file script support for RPA, enabling users to organize scripts modularly, reuse common automation components, and integrate existing Robot Framework scripts. The execution engine now fully supports multi-file scripts and linked resources, improving scalability, maintainability, and flexibility for enterprise automation projects.
+
+<!-- https://github.com/camunda/product-hub/issues/2710 -->
+
+### One Camunda 8 API <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects APIs">API</span>
+
+Introduces a unified Camunda 8 REST API that consolidates multiple fragmented APIs into a single, coherent interface, simplifying development and improving clarity across Camunda components.
+
+<!-- https://github.com/camunda/product-hub/issues/2243 -->
+
+### Provide resilient batch operations managed by Zeebe <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Zeebe">Zeebe</span>
+
+All batch operations, such as cancelling or resolving incidents in bulk, are now handled by Zeebe instead of Operate. This change ensures region failovers in the multi-region setup no longer risk losing critical batch commands. Users will initiate and manage batch operations through the Orchestration Cluster REST API and the Operate UI, but the underlying processing occurs within Zeebe. By moving batch operations to the core engine, multi-region deployments gain reliability and resilience.
+
+<!-- https://github.com/camunda/product-hub/issues/2420 -->
+
+### Run process segment <span class="badge badge--long" title="This feature affects Developer">Developer</span><span class="badge badge--medium" title="This feature affects connectors">Connector</span>
+
+Enables developers to manually execute and test individual tasks or segments (connectors, RPA bots, IDP extractions) without running full processes, improving debugging and development efficiency.
+
+<!-- https://github.com/camunda/product-hub/issues/2453 -->
+
+### Unlock element template fields <span class="badge badge--long" title="This feature affects Developer">Developer</span>
+
+[Element template management](/components/connectors/manage-connector-templates.md) is now more flexible for developers and DevOps teams. You can assign custom semantic IDs and use an intuitive versioning scheme, ensuring templates are portable and retain stable references across different environments. Template names and file names can be managed independently, and you can quickly import templates using copy and paste, git sync, or CI/CD pipeline. Safeguards now notify you of ID or version conflicts to prevent accidental overwrites when publishing templates.
+
+<!-- https://github.com/camunda/product-hub/issues/2860 -->
+
+### Update Elasticsearch and OpenSearch minimal supported versions to 8.16+ and 2.17+ <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+
+Camunda now supports Elasticsearch 8.16+ and OpenSearch 2.17+ as minimal versions, ensuring users can benefit from the latest, most stable database releases.
+
+<!-- https://github.com/camunda/product-hub/issues/2700 -->
+
+### Unified configuration for the Orchestration Cluster <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+
+Simplifies configuration by consolidating Operate, Tasklist, and Identity profiles into a unified Camunda 8 Orchestration Cluster application, reducing duplication and complexity for easier deployment and management.
+
+<!-- https://github.com/camunda/product-hub/issues/2486 -->
+
+### Vector database connector <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects connectors">Connector</span><span class="badge badge--medium" title="This feature affects AI">AI</span>
+
+- Updated the OpenSearch vector store support to support non-AWS managed instances.
+- Added support for OpenAI embedding models.
+
+<!-- https://github.com/camunda/camunda-docs/pull/6047 -->
+
 ## 8.8.0-alpha6
 
 | Release date | Changelog(s)                                                                                                                                                                               | Blog                                                                              |
