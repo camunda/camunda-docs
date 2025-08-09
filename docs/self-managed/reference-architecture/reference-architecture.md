@@ -86,6 +86,8 @@ While some guides go into detail on how to deploy databases together with Camund
 
 By decoupling databases from Camunda, you gain greater control and customization over your data storage and management strategies.
 
+For more information on how to set up third-party components such as databases, see our [installation instructions for third-party components](/docs/self-managed/components/third-party-components/third-party-components.md).
+
 ### High availability (HA)
 
 High availability (HA) ensures that a system remains operational and accessible even in the event of component failures. While all components are equipped to be run in a highly available manner. Optimize requires extra considerations when run in HA mode as the importer / archiver should only run once across all replicas. Related settings can be found as part of the [Optimize configuration](/self-managed/components/optimize/configuration/system-configuration-platform-8.md#general-settings).
