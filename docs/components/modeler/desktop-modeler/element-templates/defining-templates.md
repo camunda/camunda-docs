@@ -534,6 +534,22 @@ Properties `formId` and `externalReference` are mutually exclusive, meaning that
 
 :::
 
+#### `zeebe:assignmentDefinition`
+
+| **Binding `type`**          | `zeebe:assignmentDefinition`                                                                                           |
+| --------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| **Valid property `type`'s** | `String`<br />`Text`<br />`Hidden`<br />`Dropdown`                                                                     |
+| **Binding parameters**      | `property`: The name of the property. <br/> Supported properties: `assignee`, `candidateGroups`, and `candidateUsers`. |
+| **Mapping result**          | `<zeebe:assignmentDefinition [property]="[userInput]" />`                                                              |
+
+The `zeebe:assignmentDefinition` binding allows you to configure the [user task assignment](../../../bpmn/user-tasks/#assignments).
+
+:::note
+
+When `zeebe:assignmentDefinition` is used, `zeebe:userTask` must be set on the same element.
+
+:::
+
 #### `zeebe:calledDecision`
 
 | **Binding `type`**          | `zeebe:calledDecision`                                                                                                            |
