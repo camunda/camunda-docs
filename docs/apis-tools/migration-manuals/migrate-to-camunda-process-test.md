@@ -594,3 +594,8 @@ When you are ready, take the next steps to continue your journey:
 - Discover new [assertions](/apis-tools/testing/assertions.md)
 - Simplify your tests with new [utilities](/apis-tools/testing/utilities.md)
 - Generate process test coverage reports (coming soon)
+
+## Troubleshooting
+
+If you run into issues with the migration or miss important features, please report them in
+the [Camunda GitHub repository](https://github.com/camunda/camunda/issues).
