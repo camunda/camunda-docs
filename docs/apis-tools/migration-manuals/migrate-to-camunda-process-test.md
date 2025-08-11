@@ -131,22 +131,10 @@ io:
 
 <TabItem value='java-client'>
 
-In your process test class, register the JUnit extension in the following way:
+In your `/camunda-container-runtime.properties` file:
 
-```java
-package com.example;
-
-import io.camunda.process.test.api.CamundaProcessTestExtension;
-import io.camunda.process.test.api.CamundaProcessTestRuntimeMode;
-import org.junit.jupiter.api.extension.RegisterExtension;
-
-public class MyProcessTest {
-
-    @RegisterExtension
-    private static final CamundaProcessTestExtension EXTENSION =
-        new CamundaProcessTestExtension()
-            .withRuntimeMode(CamundaProcessTestRuntimeMode.REMOTE);
-}
+```
+runtimeMode=remote
 ```
 
 </TabItem>
