@@ -175,7 +175,7 @@ const sidebar: SidebarsConfig = {
         {
           type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/search-decision-instances",
-          label: "Search decision instances",
+          label: "Search evaluated decision instances",
           className: "api-method post",
         },
         {
@@ -807,6 +807,18 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
+      label: "System",
+      items: [
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-usage-metrics",
+          label: "Get usage metrics",
+          className: "api-method get",
+        },
+      ],
+    },
+    {
+      type: "category",
       label: "Tenant",
       items: [
         {
@@ -895,7 +907,7 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-mappings-for-tenant",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-mapping-rules-for-tenant",
           label: "Search mapping rules for tenant",
           className: "api-method post",
         },
@@ -964,18 +976,6 @@ const sidebar: SidebarsConfig = {
           id: "apis-tools/orchestration-cluster-api-rest/specifications/update-user",
           label: "Update user",
           className: "api-method patch",
-        },
-      ],
-    },
-    {
-      type: "category",
-      label: "Usage metrics",
-      items: [
-        {
-          type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-usage-metrics",
-          label: "Get usage metrics",
-          className: "api-method get",
         },
       ],
     },
