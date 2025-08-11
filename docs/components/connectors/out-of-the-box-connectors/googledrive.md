@@ -162,6 +162,8 @@ credentials.refresh(auth_req)
 print(credentials.token)
 ```
 
+When using shared drives, you must use an Oauth client instead of a service account. The service account does not have access to shared drives.
+
 #### Example 2: Obtaining bearer and refresh tokens with OAuth client
 
 :::danger
