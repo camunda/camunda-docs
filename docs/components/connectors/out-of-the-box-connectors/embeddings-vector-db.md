@@ -55,10 +55,14 @@ To perform this operation, enter the following:
 As a result of this operation, you will get an array of created embedding chunk IDs,
 for example `["d599ec62-fe51-4a91-bbf0-26e1241f9079", "a1fad021-5148-42b4-aa02-7de9d590e69c"]`.
 
-:::important
+### Updating embedded documents
+
 Every time you embed a document, the connector creates a new set of chunks and stores them in the vector database.
-To update the existing document, first delete the previous chunks.
-:::
+If the document has been previously embedded, this will result in duplicate chunks in the vector database.
+To avoid duplicates, you should delete the existing chunks before re-embedding the document.
+To delete existing chunks, you need to use the chunk IDs returned by the previous embedding operation.
+If you have embedded a Camunda document, you can use the `filename` metadata field to retrieve the chunk IDs.
+Consult your vector store's documentation for chunk deletion procedures.
 
 </TabItem>
 
@@ -125,10 +129,28 @@ Camunda document reference metadata, similarity score, and the actual text conte
 ]}>
 
 <TabItem value='bedrock'>
-The **vector database connector** currently supports only [Amazon Titan V1/V2 models](https://docs.aws.amazon.com/bedrock/latest/userguide/titan-embedding-models.html).
-Review the [official Amazon documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters-titan-embed-text.html) to understand how to choose request parameters.
+The **vector database connector** currently supports [Amazon Titan V1/V2 models](https://docs.aws.amazon.com/bedrock/latest/userguide/titan-embedding-models.html).
+It is also possible to specify any custom model that supports text embedding and is available in your Amazon Bedrock account.
 
-The **vector database connector** uses [LangChain4j implementation](https://docs.langchain4j.dev/integrations/embedding-models/amazon-bedrock).
+The following parameters are required to use Amazon Bedrock as an embedding model:
+
+- **Access key**: Provide an access key of a user with permissions to the Amazon SageMaker `InvokeModel` action.
+- **Secret key**: Provide the secret key of the user with the access key provided above.
+- **Region**: The AWS region where the Amazon Bedrock model is hosted, for example `us-east-1`. Consult the [AWS documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/models-regions.html) for model support by region.
+- **Model name**: The Amazon Bedrock embedding model. There are three options:
+  - **Amazon Titan V1**: `amazon.titan-embed-text-v1`.
+  - **Amazon Titan V2**: `amazon.titan-embed-text-v2:0`.
+  - **Custom model**: Specify the name of your custom Amazon Bedrock embedding model.
+
+When Amazon Titan V2 is selected, the following parameters can be specified:
+
+- **Embedding dimensions**: The number of dimensions for the embedding vector.
+- **Normalize**: Whether to normalize the embedding vector. More information about normalization can be found [here](https://aws.amazon.com/blogs/aws/amazon-titan-text-v2-now-available-in-amazon-bedrock-optimized-for-improving-rag/).
+
+The following parameter is optional for all models:
+
+- **Max retries**: The maximum number of retries for the embedding request in case of failure.
+
 </TabItem>
 
 <TabItem value='openai'>
