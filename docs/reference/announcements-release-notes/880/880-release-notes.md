@@ -159,7 +159,7 @@ Simplifies configuration by consolidating Operate, Tasklist, and Identity profil
 
 ### Zeebe-managed resilient batch operations <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Zeebe">Zeebe</span>
 
-All batch operations, such as cancelling or resolving incidents in bulk, are now handled by Zeebe instead of Operate.
+All batch operations, such as canceling or resolving incidents in bulk, are now handled by Zeebe instead of Operate.
 
 - This change ensures region failovers in the multi-region setup no longer risk losing critical batch commands.
 - Users will initiate and manage batch operations through the Orchestration Cluster REST API and the Operate UI, but the underlying processing occurs within Zeebe.
