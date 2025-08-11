@@ -39,7 +39,7 @@ By the end of this guide your Users should be able to authenticate to the Camund
 - Access to an OIDC-compliant Identity Provider (e.g., Keycloak, Auth0, Okta, Microsoft EntraID)
 - Client credentials (client ID, client secret, issuer URI) from your Identity Provider
 
-### Step 0: Prepare Your Identity Provider
+### Step 1: Prepare Your Identity Provider
 
 Before configuring Camunda, perform these high-level steps in your Identity Provider:
 
@@ -55,11 +55,13 @@ Before configuring Camunda, perform these high-level steps in your Identity Prov
 
 > For most Identity Providers, the default claim for the username is `sub` (subject). If you want to use a different claim (e.g., `preferred_username` or `email`), configure your Identity Provider to include it in the token and update the Camunda configuration accordingly.
 
-### Step 1: Choose Your Deployment and Configuration Method
+### Step 2: Choose Your Deployment and Configuration Method
 
-You can configure OIDC using environment variables, `application.yaml`, or Helm values. Choose the method that matches your deployment.
+You can configure OIDC using `application.yaml`, environment variables, or Helm values.
 
-### Step 2: Set Authentication Method to OIDC
+Select the option that best fits your deployment approach.
+
+### Step 3: Set Authentication Method to OIDC
 
 Set the authentication method to OIDC using the following settings:
 
@@ -83,7 +85,7 @@ global.security.authentication.method: oidc
 </TabItem>
 </Tabs>
 
-### Step 3: Configure OIDC Connection Details
+### Step 4: Configure OIDC Connection Details
 
 Set the following properties with values from your Identity Provider:
 
@@ -144,21 +146,29 @@ global.security.authentication.oidc.scope: ["openid", "profile", "<client-id>/.d
 ```
 </TabItem>
 <TabItem value="keycloak" label="Keycloak">
-
+```yaml
+global.security.authentication.oidc.clientId: <YOUR_CLIENTID>
+global.security.authentication.oidc.clientSecret: <YOUR_CLIENTSECRET>
+global.security.authentication.oidc.issuerUri: "https://<KEYCLOAK_HOST>/realms/<REALM_NAME>"
+global.security.authentication.oidc.redirectUri: "http://localhost:8080/sso-callback"
+global.security.authentication.oidc.userNameClaim: "preferred_username"
+global.security.authentication.oidc.audiences: <YOUR_CLIENTID>
+global.security.authentication.oidc.scope: ["openid", "profile", "email"]
+```
 </TabItem>
 </Tabs>
 
-### Step 4: Restart the Orchestration Cluster
+### Step 5: Restart the Orchestration Cluster
 
 After updating your configuration, (re)start the Orchestration Cluster for changes to take effect.
 
-### Step 5: Test User Authentication
+### Step 6: Test User Authentication
 
 At this point, you should be able to log in to the Orchestration Cluster using any user account from your Identity Provider that assigned to this client (application).
 
 If login is successful, you will see that you are not authorized to access the Orchestration Cluster UIs. This is expected, as you have not yet configured an admin user or any authorizations for the user.
 
-### Step 6: Configure Admin Role for Users
+### Step 7: Configure Admin Role for Users
 
 By default, authorizations are enabled which means that users cannot access any Orchestration Cluster UI or APIs - except authorizations have been granted to them.
 
@@ -187,9 +197,13 @@ Replace `<YOUR_USERNAME>` with the actual username as provided by your Identity 
 
 ---
 
-### (Optional) Step 7: Configure Group-Based Authorization
+### (Optional) Step 8: Configure Bring your own Groups
 
-If you want to use group-based authorization, configure your Identity Provider to include a groups claim in the ID token (e.g., `groups` or `roles`). Then set the `groups-claim` property in your Camunda configuration to match the claim name. If you do not need group-based authorization, you can skip this step.
+The Orchestration Cluster allows you to manage groups in the Orchestration Cluster or to bring groups that you have configured in your Identity Provider.
+
+In order to bring own groups, configure your Identity Provider to include a groups claim in the token (e.g., `groups` or `roles`). Then set the `groups-claim` property in your Camunda configuration to match the claim name.
+
+Afterwards, you can use the groups for Role and Authorization Assignment as well as Tenant assignment.
 
 <Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Application.yaml', value: 'yaml' }, {label: 'Environment variables', value: 'env' },{label: 'Helm values', value: 'helm' }]}>
 <TabItem value="yaml">
@@ -211,9 +225,9 @@ global.security.authentication.oidc.groupsClaim: <YOUR_GROUPSCLAIM>
 </TabItem>
 </Tabs>
 
-### (Optional) Step 8: Advanced Mapping Rules
+### (Optional) Step 9: Advanced Mapping Rules
 
-For advanced scenarios, such as mapping IdP claims to Camunda roles, authorizations or tenants, you can use mapping rules. See the [configuration reference](./configuration.md) for details on how to define mapping rules for users, groups, and roles.
+For advanced scenarios, such as mapping Identity Provider claims to Camunda roles, authorizations or tenants, you can use mapping rules. See the [configuration reference](./configuration.md) for details on how to define mapping rules.
 
 ## M2M API access
 
@@ -227,7 +241,7 @@ By the end of this guide your Connectors, Job workers or other applications usin
 - Access to an OIDC-compliant Identity Provider (e.g., Keycloak, Auth0, Okta, Microsoft EntraID)
 - Client credentials (client ID, client secret, authorization server URI) from your Identity Provider
 
-### Step 0: Prepare Your Identity Provider
+### Step 1: Prepare Your Identity Provider
 
 Before configuring Camunda, perform these high-level steps in your Identity Provider:
 
@@ -237,10 +251,21 @@ Before configuring Camunda, perform these high-level steps in your Identity Prov
    - Create a new client secret.
 2. **Note the client ID, client secret, and authorization URI** for use in Camunda configuration.
 
-### Step 1: Configure your worker application
+### Step 2: Configure your worker application
 
 <Tabs groupId="camundaclientopts" defaultValue="camundaclient" >
 <TabItem value="camundaclient" label="Camunda Client">
+1) Add dependency to your Java Project:
+
+```xml
+<dependency>
+    <groupId>io.camunda</groupId>
+    <artifactId>camunda-client-java</artifactId>
+    <version>8.8.x</version>
+</dependency>
+```
+
+2. Update your java code to configure authentication and verify it:
 
 ```java
    private static final String clientId = "<YOUR_CLIENT_ID>";
@@ -253,14 +278,14 @@ Before configuring Camunda, perform these high-level steps in your Identity Prov
 
   // Build a new OAuthCredentialsProvider
   final OAuthCredentialsProvider credentialsProvider =
-		    new OAuthCredentialsProviderBuilder()
-		      .authorizationServerUrl(authorizationServer)
-		      .audience(audience)
-		      .clientId(clientId)
-		      .clientSecret(clientSecret)
-		      .scope(ocAudience+"/.default")
-		      .build();
-	// Build a new Camunda Client with the CredentialsProvider
+        new OAuthCredentialsProviderBuilder()
+          .authorizationServerUrl(authorizationServer)
+          .audience(audience)
+          .clientId(clientId)
+          .clientSecret(clientSecret)
+          .scope(ocAudience+"/.default")
+          .build();
+  // Build a new Camunda Client with the CredentialsProvider
    try (CamundaClient client = CamundaClient.newClientBuilder()
             .grpcAddress(URI.create(clusterGrpcLocal))
             .restAddress(URI.create(clusterRestLocal))
@@ -275,7 +300,45 @@ Before configuring Camunda, perform these high-level steps in your Identity Prov
 ```
 
 </TabItem>
-<TabItem value="springclient" label="Camunda Spring SDK">
+<TabItem value="springclient" label="Camunda Spring Boot SDK">
+1) Add dependency to your Java Project:
+
+```xml
+<dependency>
+    <groupId>io.camunda</groupId>
+    <artifactId>spring-boot-starter-camunda-sdk</artifactId>
+    <version>8.8.x</version>
+</dependency>
+```
+
+2. Configure your application.yaml:
+
+```yaml
+camunda:
+  client:
+    mode: self-managed
+    auth:
+      client-id: <YOUR_CLIENT_ID>
+      client-secret: <YOUR_CLIENT_SECRET>
+      token-url: <YOUR_AUTHORIZATION_SERVER>
+      audience: <YOUR_CLIENT_ID>
+      scope: <YOUR_CLIENT_ID_FROM_OC>
+    grpc-address: grpc://localhost:26500
+    rest-address: http://localhost:8080
+```
+
+3. Verify authentication in code:
+
+```java
+@Autowired
+private CamundaClient client;
+
+public static void main(String[] args) {
+  Topology t = client.newTopologyRequest().send().join();
+  System.out.println(t.toString());
+}
+```
+
 </TabItem>
 <TabItem value="connectorruntime" label="Camunda Connector Runtime">
 </TabItem>
@@ -291,13 +354,23 @@ private static final String clientId = "<YOUR_CLIENT_ID>";
 private static final String clientSecret = "<YOUR_CLIENT_SECRET>";
 private static final String authorizationServer = "https://login.microsoftonline.com/<YOUR_TENANT_ID>/oauth2/v2.0/token";
 private static final String audience = "<YOUR_CLIENT_ID>";
-private static final String ocAudience = "<YOUR_CLIENT_ID_FROM_OC>";
+private static final String ocAudience = "<YOUR_CLIENT_ID_FROM_OC>" + "/.default";
 private static final String clusterGrpcLocal = "grpc://localhost:26500";
 private static final String clusterRestLocal = "http://localhost:8080";
 ```
 
 </TabItem>
 <TabItem value="keycloak" label="Keycloak">
+
+```java
+private static final String clientId = "<YOUR_CLIENT_ID>";
+private static final String clientSecret = "<YOUR_CLIENT_SECRET>";
+private static final String authorizationServer = "https://<KEYCLOAK_HOST>/realms/<REALM_NAME>/protocol/openid-connect/token";
+private static final String audience = "<YOUR_CLIENT_ID>";
+private static final String ocAudience = "<YOUR_CLIENT_ID>";
+private static final String clusterGrpcLocal = "grpc://localhost:26500";
+private static final String clusterRestLocal = "http://localhost:8080";
+```
 
 </TabItem>
 </Tabs>
