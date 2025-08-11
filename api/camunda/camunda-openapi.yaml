@@ -50,9 +50,9 @@ tags:
   - name: Role
   - name: Setup
   - name: Signal
+  - name: System
   - name: Tenant
   - name: User
-  - name: Usage metrics
   - name: User task
   - name: Variable
 
@@ -528,9 +528,7 @@ paths:
         - Tenant
       operationId: assignUserToTenant
       summary: Assign a user to a tenant
-      description: |
-        Assign a user to the specified tenant.
-        The user can then access tenant data and perform authorized actions.
+      description: Assign a single user to a specified tenant.
       parameters:
         - name: tenantId
           in: path
@@ -565,10 +563,8 @@ paths:
       tags:
         - Tenant
       operationId: removeUserFromTenant
-      summary: Unassigns a user from a tenant
-      description: |
-        Unassigns the user from the specified tenant.
-        The user can no longer access tenant data.
+      summary: Remove a user from a tenant
+      description: Removes a single user from a specified tenant without deleting the user.
       parameters:
         - name: tenantId
           in: path
@@ -714,9 +710,7 @@ paths:
         - Tenant
       operationId: assignClientToTenant
       summary: Assign a client to a tenant
-      description: |
-        Assign the client to the specified tenant.
-        The client can then access tenant data and perform authorized actions.
+      description: Assign a client to a specified tenant.
       parameters:
         - name: tenantId
           in: path
@@ -752,9 +746,7 @@ paths:
         - Tenant
       operationId: removeClientFromTenant
       summary: Remove a client from a tenant
-      description: |
-        Unassigns the client from the specified tenant.
-        The client can no longer access tenant data.
+      description: Removes a single client from a specified tenant.
       parameters:
         - name: tenantId
           in: path
@@ -863,7 +855,7 @@ paths:
     post:
       tags:
         - Tenant
-      operationId: searchMappingsForTenant
+      operationId: searchMappingRulesForTenant
       summary: Search mapping rules for tenant
       description: Retrieves a filtered and sorted list of MappingRules for a specified tenant.
       parameters:
@@ -893,9 +885,7 @@ paths:
         - Tenant
       operationId: assignGroupToTenant
       summary: Assign a group to a tenant
-      description: |
-        Assigns a group to a specified tenant.
-        Group members (users, clients) can then access tenant data and perform authorized actions.
+      description: Assign a single group to a specified tenant.
       parameters:
         - name: tenantId
           in: path
@@ -932,9 +922,7 @@ paths:
         - Tenant
       operationId: removeGroupFromTenant
       summary: Remove a group from a tenant
-      description: |
-        Unassigns a group from a specified tenant.
-        Members of the group (users, clients) will no longer have access to the tenant's data - except they are assigned directly to the tenant.
+      description: Removes a single group from a specified tenant without deleting the group.
       parameters:
         - name: tenantId
           in: path
@@ -972,9 +960,7 @@ paths:
         - Tenant
       operationId: assignRoleToTenant
       summary: Assign a role to a tenant
-      description: |
-        Assigns a role to a specified tenant.
-        Users, Clients or Groups, that have the role assigned, will get access to the tenant's data and can perform actions according to their authorizations.
+      description: Assign a single role to a specified tenant.
       parameters:
         - name: tenantId
           in: path
@@ -1010,9 +996,7 @@ paths:
         - Tenant
       operationId: removeRoleFromTenant
       summary: Remove a role from a tenant
-      description: |
-        Unassigns a role from a specified tenant.
-        Users, Clients or Groups, that have the role assigned, will no longer have access to the tenant's data - except they are assigned directly to the tenant.
+      description: Removes a single role from a specified tenant without deleting the role.
       parameters:
         - name: tenantId
           in: path
@@ -3062,8 +3046,7 @@ paths:
       operationId: addRoleToUser
       summary: Assign a role to a user
       description: |
-        Assigns the specified role to the user.
-        The user will inherit the authorizations associated with this role.
+        Assigns a role to a user.
       parameters:
         - name: roleId
           in: path
@@ -3107,7 +3090,6 @@ paths:
       summary: Unassign a user from a role
       description: |
         Unassigns a user from a role.
-        The user will no longer inherit the authorizations associated with this role.
       parameters:
         - name: roleId
           in: path
@@ -3145,8 +3127,7 @@ paths:
       operationId: addRoleToClient
       summary: Assign a role to a client
       description: |
-        Assigns the specified role to the client.
-        The client will inherit the authorizations associated with this role.
+        Assigns a role to a client.
       parameters:
         - name: roleId
           in: path
@@ -3189,8 +3170,7 @@ paths:
       operationId: removeRoleFromClient
       summary: Unassign a role from a client
       description: |
-        Unassigns the specified role from the client.
-        The client will no longer inherit the authorizations associated with this role.
+        Unassigns a role from a client.
       parameters:
         - name: roleId
           in: path
@@ -3261,8 +3241,7 @@ paths:
       operationId: addRoleToGroup
       summary: Assign a role to a group
       description: |
-        Assigns the specified role to the group.
-        Every member of the group (user or client) will inherit the authorizations associated with this role.
+        Assigns a role to a group.
       parameters:
         - name: roleId
           in: path
@@ -3305,8 +3284,7 @@ paths:
       operationId: removeRoleFromGroup
       summary: Unassign a role from a group
       description: |
-        Unassigns the specified role from the group.
-        All group members (user or client) no longer inherit the authorizations associated with this role.
+        Unassigns a role from a group.
       parameters:
         - name: roleId
           in: path
@@ -3451,7 +3429,7 @@ paths:
         "403":
           $ref: "#/components/responses/Forbidden"
         "404":
-          description: The role or mapping with the given ID was not found.
+          description: The role or mapping rule with the given ID was not found.
           content:
             application/problem+json:
               schema:
@@ -3812,8 +3790,7 @@ paths:
       operationId: addUserToGroup
       summary: Assign a user to a group
       description: |
-        Assigns a user to a group, making the user a member of the group.
-        Group members inherit the group authorizations, roles, and tenant assignments.
+        Assigns a user to a group.
       parameters:
         - name: groupId
           in: path
@@ -3857,7 +3834,6 @@ paths:
       summary: Unassign a user from a group
       description: |
         Unassigns a user from a group.
-        The user is removed as a group member, with associated authorizations, roles, and tenant assignments no longer applied.
       parameters:
         - name: groupId
           in: path
@@ -3893,10 +3869,9 @@ paths:
       tags:
         - Group
       operationId: addClientToGroup
-      summary: Assign a client to a group.
+      summary: Assign a client to a group
       description: |
-        Assigns a client to a group, making it a member of the group.
-        Members of the group inherit the group authorizations, roles, and tenant assignments.
+        Assigns a client to a group.
       parameters:
         - name: groupId
           in: path
@@ -3940,7 +3915,6 @@ paths:
       summary: Unassign a client from a group
       description: |
         Unassigns a client from a group.
-        The client is removed as a group member, with associated authorizations, roles, and tenant assignments no longer applied.
       parameters:
         - name: groupId
           in: path
@@ -4900,10 +4874,11 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /usage-metrics:
+
+  /system/usage-metrics:
     get:
       tags:
-        - Usage metrics
+        - System
       operationId: getUsageMetrics
       summary: Get usage metrics
       description: Retrieve the usage metrics based on given criteria.
@@ -4951,6 +4926,7 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
+
   /deployments:
     post:
       tags:
@@ -6880,6 +6856,10 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/AdHocSubProcessActivateActivityReference"
+        cancelRemainingInstances:
+          description: Whether to cancel remaining instances of the ad-hoc sub-process.
+          type: boolean
+          default: false
       required:
         - elements
     AdHocSubProcessActivateActivityReference:
@@ -6888,6 +6868,10 @@ components:
         elementId:
           description: The ID of the element that should be activated.
           type: string
+        variables:
+          description: Variables to be set when activating the element.
+          type: object
+          additionalProperties: true
       required:
         - elementId
     DecisionDefinitionSearchQuerySortRequest:
@@ -7636,7 +7620,7 @@ components:
           items:
             $ref: "#/components/schemas/MappingRuleSearchQuerySortRequest"
         filter:
-          description: The mapping search filters.
+          description: The mapping rule search filters.
           allOf:
             - $ref: "#/components/schemas/MappingRuleFilter"
     UserFilter:
@@ -7667,18 +7651,21 @@ components:
           description: The value of the claim to match.
         name:
           type: string
-          description: The name of the mapping.
+          description: The name of the mapping rule.
         mappingRuleId:
           type: string
-          description: The ID of the mapping.
+          description: The ID of the mapping rule.
     CamundaUserResult:
       type: object
       properties:
-        userId:
-          description: The ID of the user.
-          type: string
+        username:
+          description: The username of the user.
+          type: "string"
         displayName:
           description: The display name of the user.
+          type: string
+        email:
+          description: The email of the user.
           type: string
         authorizedApplications:
           description: The applications the user is authorized to use.
@@ -7689,14 +7676,7 @@ components:
           description: The tenants the user is a member of.
           type: array
           items:
-            type: object
-            properties:
-              tenantId:
-                type: string
-                description: The ID of the tenant.
-              name:
-                type: string
-                description: The name of the tenant.
+            $ref: "#/components/schemas/TenantResult"
         groups:
           description: The groups assigned to the user.
           type: array
@@ -7712,16 +7692,9 @@ components:
           type: string
         c8Links:
           description: The links to the components in the C8 stack.
-          type: array
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-                description: The name of the component.
-              link:
-                type: string
-                description: A link to the component.
+          type: object
+          additionalProperties:
+            type: string
         canLogout:
           description: Flag for understanding if the user is able to perform logout.
           type: boolean
@@ -8304,7 +8277,7 @@ components:
           description: The value of the claim to map.
         name:
           type: string
-          description: The name of the mapping.
+          description: The name of the mapping rule.
       required:
         - claimName
         - claimValue
@@ -8316,7 +8289,7 @@ components:
       properties:
         mappingRuleId:
           type: string
-          description: The unique ID of the mapping.
+          description: The unique ID of the mapping rule.
       required:
         - mappingRuleId
     MappingRuleUpdateRequest:
@@ -8334,10 +8307,10 @@ components:
           description: The value of the claim to map.
         name:
           type: string
-          description: The name of the mapping.
+          description: The name of the mapping rule.
         mappingRuleId:
           type: string
-          description: The unique ID of the mapping.
+          description: The unique ID of the mapping rule.
     MappingRuleCreateResult:
       type: object
       allOf:
@@ -8367,10 +8340,10 @@ components:
           description: The value of the claim to map.
         name:
           type: string
-          description: The name of the mapping.
+          description: The name of the mapping rule.
         mappingRuleId:
           type: string
-          description: The ID of the mapping.
+          description: The ID of the mapping rule.
 
     TopologyResponse:
       description: The response of a topology request.
@@ -10504,6 +10477,11 @@ components:
         - RESOLVE_INCIDENT
         - MIGRATE_PROCESS_INSTANCE
         - MODIFY_PROCESS_INSTANCE
+        - DELETE_PROCESS_INSTANCE
+        - ADD_VARIABLE
+        - UPDATE_VARIABLE
+        - DELETE_DECISION_DEFINITION
+        - DELETE_PROCESS_DEFINITION
     BatchOperationCreatedResult:
       type: object
       properties:
@@ -10634,7 +10612,6 @@ components:
         - COMPLETED
         - PARTIALLY_COMPLETED
         - CANCELED
-        - INCOMPLETED
     BatchOperationItemSearchQuerySortRequest:
       type: object
       properties:
@@ -10752,7 +10729,6 @@ components:
             - COMPLETED
             - PARTIALLY_COMPLETED
             - CANCELED
-            - INCOMPLETED
         batchOperationType:
           $ref: "#/components/schemas/BatchOperationTypeEnum"
         startDate:
@@ -10792,6 +10768,7 @@ components:
           type: string
           enum:
             - QUERY_FAILED
+            - RESULT_BUFFER_SIZE_EXCEEDED
         message:
           description: The error message that occurred during the batch operation.
           type: string
