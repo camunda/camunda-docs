@@ -18,7 +18,7 @@ The following guide helps you to migrate your existing test cases step-by-step f
 :::note
 Please be aware that there are differences between ZPT and CPT in their API and behavior that could lead to a bigger
 effort for the migration depending on your existing test cases. Fundamentally, ZPT uses only Camunda's workflow engine
-(aka Zeebe) with access to internal components. CPT uses the full Camunda distribution and interacts over with API.
+(aka Zeebe) with access to internal components. CPT uses the full Camunda distribution and interacts with the API.
 
 - CPT has different assertion and utility names to align with the API
 - CPT has no equivalent for all assertions and utilities because it is limited to the API
@@ -75,7 +75,7 @@ In your Maven `pom.xml`, add the dependency:
 
 ## Choose your runtime
 
-Next, you need to choose your runtime for CPT depending on your environment.
+Next, choose your CPT runtime depending on your environment.
 
 If you use ZPT with Testcontainers (
 `artifactId: zeebe-process-test-extension-testcontainer/spring-boot-starter-camunda-test-testcontainer`), then you can
@@ -128,6 +128,7 @@ In your process test class, register the JUnit extension in the following way:
 package com.example;
 
 import io.camunda.process.test.api.CamundaProcessTestExtension;
+import io.camunda.process.test.api.CamundaProcessTestRuntimeMode;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
 public class MyProcessTest {
