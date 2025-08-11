@@ -42,16 +42,19 @@ Authorization applies only to these orchestration components. It does not apply 
 ### Key components
 
 1. **Authorizations**
+
    - Assign permissions to Identities for specific resources
    - Examples:
      - User `jonny` is authorized to create new users
      - Group `marketing` is authorized to delete the group `sales`
 
 2. **Owners**
+
    - Types include users, groups, roles, and mapping rules
    - Authorizations can be assigned to any type of owner
 
 3. **Permissions**
+
    - Define allowed interactions with resources
    - Are specific to each resource type
 
@@ -103,6 +106,7 @@ The following table lists all resources that support authorization in Camunda 8 
 | **Component**                        | `*`, `operate`, `tasklist`, `identity` | All components, component name       | `ACCESS`                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | **Decision Definition**              | `*`, `order_decision`                  | All decisions / Decision ID          | `CREATE_DECISION_INSTANCE`, `READ_DECISION_DEFINITION`, `READ_DECISION_INSTANCE`, `DELETE_DECISION_INSTANCE`                                                                                                                                                                                                                                                                                                                               |
 | **Decision Requirements Definition** | `*`, `order_decision`                  | All DRDs / DRD ID                    | `READ`                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| **Document**                         | `*`                                    | All Documents                        | `CREATE`, `READ`, `DELETE`                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | **Group**                            | `*`, `accounting`                      | All groups / Group ID                | `CREATE`, `READ`, `UPDATE`, `DELETE`                                                                                                                                                                                                                                                                                                                                                                                                       |
 | **Mapping Rule**                     | `*`, `my_mapping`                      | All mappings / Mapping ID            | `CREATE`, `READ`, `UPDATE`, `DELETE`                                                                                                                                                                                                                                                                                                                                                                                                       |
 | **Message**                          | `*`                                    | All messages                         | `CREATE`, `READ`                                                                                                                                                                                                                                                                                                                                                                                                                           |
