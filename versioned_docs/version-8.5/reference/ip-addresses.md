@@ -31,4 +31,4 @@ Depending on the cloud provider, [region](/reference/regions.md), and type of co
 To ensure the security of incoming connector connections, you can:
 
 - Authenticate the requests made by the Camunda connector(s). For example, see [REST connector authentication](/components/connectors/protocol/rest.md#authentication).
-- Run the connectors into your own infrastructure and remove incoming calls from the Camunda infrastructure to your own services. For example, see [Self-Managed connectors](/docs/self-managed/components/connectors/overview.md).
+- Run the connectors into your own infrastructure and remove incoming calls from the Camunda infrastructure to your own services. For example, see [Self-Managed connectors](/self-managed/components/connectors/overview.md).
