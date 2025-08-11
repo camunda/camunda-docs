@@ -14,7 +14,7 @@ Migrate to the Camunda Java Client from the Zeebe Java Client.
 This guide provides an overview of the process for migrating to the Camunda Java Client.
 
 - The [Camunda Java Client](../java-client/index.md) is the official Java library for connecting to Orchestration Cluster, automating processes, and implementing job workers.
-- The Zeebe Java Client remains available for a period until Camunda 8.10, after which it is removed.
+- The Zeebe Java Client remains available until Camunda 8.10.
 
 :::tip
 Plan and start your migration early to ensure compatibility, access to latest features, and future support.
