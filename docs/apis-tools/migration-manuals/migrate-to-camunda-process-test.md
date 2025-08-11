@@ -77,10 +77,14 @@ In your Maven `pom.xml`, add the dependency:
 
 Next, choose your CPT runtime depending on your environment.
 
+### ZPT with Testcontainers
+
 If you use ZPT with Testcontainers (
 `artifactId: zeebe-process-test-extension-testcontainer/spring-boot-starter-camunda-test-testcontainer`), then you can
-use CPT's default [Testcontainers runtime](/apis-tools/testing/configuration.md#testcontainers-runtime). Skip the
-following instructions and continue with the next step.
+use CPT's default [Testcontainers runtime](/apis-tools/testing/configuration.md#testcontainers-runtime) without
+additional changes.
+
+### ZPT's embedded runtime
 
 If you use ZPT's embedded runtime (`artifactId: zeebe-process-test-extension/spring-boot-starter-camunda-test`), then
 you should use CPT's [Remote runtime](/apis-tools/testing/configuration.md#remote-runtime). Choose this option only if
