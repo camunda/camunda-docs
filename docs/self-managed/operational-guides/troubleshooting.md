@@ -276,7 +276,7 @@ Workloads greater than that which can be supported by Basic Authentication may c
 as queued requests can time out before they are processed. 
 
 Development and testing scenarios that are performance-sensitive may 
-[disable authentication entirely](/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md#no-authentication-local-development), 
+[disable authentication entirely](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md#no-authentication-local-development), 
 or use 
 [OIDC Authentication](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md#oidc-access-token-authentication-using-client-credentials).
 
