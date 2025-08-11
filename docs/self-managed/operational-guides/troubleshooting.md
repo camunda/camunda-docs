@@ -115,6 +115,37 @@ To mitigate this, set the following environment variable on your Zeebe brokers t
 AZURE_SDK_SHARED_THREADPOOL_USEVIRTUALTHREADS=false
 ```
 
+## Enable Azure logging for troubleshooting
+
+When using Azure Blob Storage as a backup store, you can enable logging to 
+troubleshoot issues with the Azure SDK. To do this, go through the following steps:
+
+1. Download the following log4j2.xml and create configmap.
+
+`kubectl create configmap -n <namespace> zeebe-log4j-config --from-file=log4j2.xml=./log4j2.xml`
+
+2. Add a new volumeMount to Zeebe broker statefulset:
+
+```
+volumeMounts:
+- mountPath: /usr/local/zeebe/config/log4j2.xml
+  name: log4j-config
+  subPath: log4j2.xml
+```
+
+3. Add a new volume to Zeebe broker statefulset:
+
+```
+volumes:
+- configMap:
+  name: zeebe-log4j-config
+  name: log4j-config
+```
+
+4. Add Environment the following variable to Zeebe Broker StatefulSet.
+
+`AZURE_HTTP_LOG_DETAIL_LEVEL=BASIC`
+
 ## Zeebe Ingress (gRPC)
 
 Zeebe requires an Ingress controller that supports `gRPC` which is built on top of `HTTP/2` transport layer. Therefore, to expose Zeebe Gateway externally, you need the following:
