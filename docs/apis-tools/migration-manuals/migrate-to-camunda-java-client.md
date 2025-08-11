@@ -7,15 +7,25 @@ description: "Migrate from Zeebe Java Client to the Camunda Java Client. This gu
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-This guide provides an overview of the migration process from the Zeebe Java Client to the Camunda Java Client. The [Camunda Java Client](../java-client/index.md) is the official Java library for connecting to Orchestration Cluster, automating processes, and implementing job workers.
-The Zeebe Java Client remains available during a grace period until Camunda 8.10, after which it will be removed. Migrating now ensures compatibility, access to latest features, and future support.
+Migrate to the Camunda Java Client from the Zeebe Java Client.
 
-## Preparation
+## About this guide
+
+This guide provides an overview of the process for migrating to the Camunda Java Client.
+
+- The [Camunda Java Client](../java-client/index.md) is the official Java library for connecting to Orchestration Cluster, automating processes, and implementing job workers.
+- The Zeebe Java Client remains available for a period until Camunda 8.10, after which it is removed.
+
+:::tip
+Plan and start your migration early to ensure compatibility, access to latest features, and future support.
+:::
+
+## Before you begin
 
 - Review project dependencies and identify where `io.camunda.zeebe:zeebe-client-java` is used.
-- Catalog code referencing Zeebe classes, interfaces, and APIs (e.g., ZeebeClient, Zeebe workers).
+- Catalog code referencing Zeebe classes, interfaces, and APIs (for example, ZeebeClient, Zeebe workers).
 
-## Update Maven/Gradle Dependencies
+## Update Maven/Gradle dependencies
 
 Replace the Zeebe Java Client dependency with the Camunda Java Client dependency in your `pom.xml` or `build.gradle` file.
 
@@ -36,12 +46,14 @@ implementation 'io.camunda:camunda-client-java:${camunda.version}'
 ```
 
 :::info
-The Camunda Java Client artifact still contains the deprecated Zeebe classes (e.g. ZeebeClient) as deprecated types to ease migration, but all new features are available only on Camunda classes. Zeebe classes are planned for removal after 8.10.
+The Camunda Java Client artifact still contains the deprecated Zeebe classes (for example, ZeebeClient) as deprecated types to ease migration, but all new features are available only for Camunda classes. Zeebe classes are planned for removal after 8.10.
 :::
 
-## Update Imports
+## Update imports
 
-Update all imports statement in you Java files to use the new Camunda Java Client package structure. Change from:
+Update all imports statement in your Java files to use the new Camunda Java Client package structure.
+
+Change from:
 
 ```java
 import io.camunda.zeebe.client.*;
@@ -53,15 +65,17 @@ to:
 import io.camunda.client.*;
 ```
 
-## Configuration and Environment Variable Changes
+## Configuration and environment variable changes
 
 - All old Java client property names are refactored to more general ones. For example, `zeebe.client.tenantId` to `camunda.client.tenantId`.
 - Environment variables are also updated accordingly. For example, `ZEEBE_CLIENT_TENANT_ID` to `CAMUNDA_CLIENT_TENANT_ID`.
-- Both `restAddress` and `grpcAddress` now **require explicit URI schemes** (eg. `http://` or `https://`).
+- Both `restAddress` and `grpcAddress` now **require explicit URI schemes** (for example, `http://` or `https://`).
 
-## Update Client Initialization
+## Update client initialization
 
-Update the client initialization code to use the new `CamundaClient` class. For example, change:
+Update the client initialization code to use the new `CamundaClient` class.
+
+For example, change:
 
 ```java
 ZeebeClient client = ZeebeClient.newClientBuilder()
@@ -79,15 +93,16 @@ CamundaClient client = CamundaClient.newClientBuilder()
     .build();
 ```
 
-Refer to the [CamundaClientBuilder documentation](https://javadoc.io/doc/io.camunda/camunda-client-java/latest/io/camunda/client/CamundaClientBuilder.html) for more details on available configuration options.
+:::info
 
-:::note
-The construction for OAuth, Basic Auth, or custom providers remains conceptually the same, but ensure you use the classes from the new package. Refer to the [Camunda Java Client bootstrapping](../java-client/index.md#bootstrapping) for more details.
+- Refer to the [CamundaClientBuilder documentation](https://javadoc.io/doc/io.camunda/camunda-client-java/latest/io/camunda/client/CamundaClientBuilder.html) for more details on available configuration options.
+- The construction for OAuth, Basic Auth, or custom providers remains conceptually the same, but you must ensure you use the classes from the new package. Refer to the [Camunda Java Client bootstrapping](../java-client/index.md#bootstrapping) for more details.
+
 :::
 
-## API and Command rename
+## Renamed API classes and commands
 
-The following APIs have been changed in the Camunda Java Client:
+The following API classes have been changed in the Camunda Java Client:
 
 | Old                             | New                               |
 | :------------------------------ | :-------------------------------- |
@@ -98,6 +113,6 @@ The following APIs have been changed in the Camunda Java Client:
 
 The command `newUserCreateCommand()` is changed to `newCreateUserCommand()` in CamundaClient.
 
-## Protocol and Connection: REST vs gRPC selection
+## Protocol and connection: REST vs gRPC selection
 
 Zeebe Java Client used **gRPC by default**. The Camunda Java Client use **REST by default**. If you want to use gRPC, you need to explicitly set the `grpcAddress` in the client builder.
