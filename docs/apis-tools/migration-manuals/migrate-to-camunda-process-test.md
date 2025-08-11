@@ -145,7 +145,7 @@ public class MyProcessTest {
 
 ## Migrate your process tests
 
-Now, it's time to migrate your process tests. Look at the following example of a ZPT test class:
+Now, it's time to migrate your process tests.
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={
 [
@@ -155,6 +155,15 @@ Now, it's time to migrate your process tests. Look at the following example of a
 }>
 
 <TabItem value='spring-sdk'>
+
+First, migrate the general test class structure:
+
+- Replace the annotation `@ZeebeSpringTest` with `@CamundaSpringProcessTest`
+- Replace the type `ZeebeTestEngine` with `CamundaProcessTestContext`
+- Remove the field for `RecordStream`. CPT has no access to the records directly. Instead, you can use the SDK to
+  request data from the [API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
+
+Look at the following example of a ZPT test class:
 
 ```java
 import io.camunda.zeebe.process.test.extension.testcontainer.ZeebeProcessTest;
@@ -191,6 +200,15 @@ class MyProcessTest {
 </TabItem>
 
 <TabItem value='java-client'>
+
+First, you migrate the general test class structure:
+
+- Replace the annotation `@ZeebeProcessTest` with `@CamundaProcessTest`
+- Replace the type `ZeebeTestEngine` with `CamundaProcessTestContext`
+- Remove the field for `RecordStream`. CPT has no access to the records directly. However, you can use the SDK to
+  request data from the [API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
+
+Look at the following example of a ZPT test class:
 
 ```java
 import io.camunda.zeebe.process.test.extension.testcontainer.ZeebeProcessTest;
@@ -269,13 +287,6 @@ class MyProcessTest {
 }
 ```
 
-First, you migrate the general test class structure:
-
-- Replace the annotation `@ZeebeSpringTest` with `@CamundaSpringProcessTest`
-- Replace the type `ZeebeTestEngine` with `CamundaProcessTestContext`
-- Remove the field for `RecordStream`. CPT has no access to the records directly. Instead, you can use the SDK to
-  request data from the [API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
-
 </TabItem>
 
 <TabItem value='java-client'>
@@ -310,13 +321,6 @@ class MyProcessTest {
     }
 }
 ```
-
-First, you migrate the general test class structure:
-
-- Replace the annotation `@ZeebeProcessTest` with `@CamundaProcessTest`
-- Replace the type `ZeebeTestEngine` with `CamundaProcessTestContext`
-- Remove the field for `RecordStream`. CPT has no access to the records directly. However, you can use the SDK to
-  request data from the [API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
 
 </TabItem>
 </Tabs>
