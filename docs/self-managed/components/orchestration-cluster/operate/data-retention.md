@@ -52,7 +52,7 @@ This ILM Policy works on Elasticsearch 7 as well, and can function as a replacem
 Only indices containing dates in their suffix may be deleted.
 :::
 
-:::warning Limitation: ILM configuration updates not applied automatically
+:::warning Limitation: ILM configuration updates are not applied automatically
 
 If you update the value of `ilmMinAgeForDeleteArchivedIndices` in the `application.yml` after deployment, the change will **not** be applied to the existing ILM policy used by Operate. This is a known issue.
 
@@ -60,7 +60,7 @@ To change the ILM settings after installation, you must manually update the corr
 
 Zeebe does correctly apply ILM updates via configuration, but Operate does not.
 
-For reliable ILM behavior, we recommend configuring `ilmMinAgeForDeleteArchivedIndices` during initial installation and verifying the applied policy in Elasticsearch.
+For reliable ILM behavior, Camunda recommends configuring `ilmMinAgeForDeleteArchivedIndices` during initial installation and verifying the applied policy in Elasticsearch.
 
 :::
 
