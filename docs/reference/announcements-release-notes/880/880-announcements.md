@@ -22,6 +22,10 @@ Supported environment changes and breaking changes or deprecations for the Camun
 
 ## Changes in supported environments
 
+### Elasticsearch and OpenSearch minimal supported versions updated to 8.16+ and 2.17+
+
+Camunda now supports Elasticsearch 8.16+ and OpenSearch 2.17+ as minimal versions, ensuring users can benefit from the latest, most stable database releases.
+
 ### Zeebe, Operate, Tasklist, and Identity must run on exact same minor and patch levels
 
 From version `8.8.0` forward, the following core [Orchestration cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) components must run on the exact same `minor`and `patch` level to ensure compatibility: Zeebe, Operate, Tasklist, and Identity. See the [component version matrix](/reference/supported-environments.md#component-version-matrix) or the [Self-Managed reference architecture](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) for an overview of components.

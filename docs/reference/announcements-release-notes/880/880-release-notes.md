@@ -116,12 +116,6 @@ Allows developers to manually execute and test individual tasks or segments (con
 
 <!-- https://github.com/camunda/product-hub/issues/2860 -->
 
-### Elasticsearch and OpenSearch minimal supported versions updated to 8.16+ and 2.17+ <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
-
-Camunda now supports Elasticsearch 8.16+ and OpenSearch 2.17+ as minimal versions, ensuring users can benefit from the latest, most stable database releases.
-
-<!-- https://github.com/camunda/product-hub/issues/2700 -->
-
 ### Intelligent document processing (IDP) form extraction <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects IDP">IDP</span>
 
 You can use form-based structured [document extraction](/components/modeler/web-modeler/idp/idp-document-extraction.md) to capture data from structured documents. Projects can be shared organization-wide, enhancing accessibility to extraction capabilities.
