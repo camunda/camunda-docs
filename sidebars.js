@@ -119,8 +119,8 @@ module.exports = {
             id: "components/modeler/web-modeler/idp/idp-document-extraction",
           },
           items: [
-            // "components/modeler/web-modeler/idp/idp-structured-extraction",
             "components/modeler/web-modeler/idp/idp-unstructured-extraction",
+            "components/modeler/web-modeler/idp/idp-structured-extraction",
           ],
         },
         // "components/modeler/web-modeler/idp/idp-document-automation",
@@ -1039,6 +1039,7 @@ module.exports = {
     "reference/licenses",
     "reference/notices",
     "reference/regions",
+    "reference/saas-ip-addresses",
     {
       type: "category",
       label: "Data collection",

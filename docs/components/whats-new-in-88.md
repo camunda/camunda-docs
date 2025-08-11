@@ -19,6 +19,26 @@ This documentation is a work in progress and may contain incomplete, placeholder
 
 Camunda 8.8 introduces important architectural changes and enhancements to simplify deployment, improve maintainability, and empower both operations teams and developers.
 
+### Why upgrade to Camunda 8.8?
+
+Upgrading to Camunda 8.8 delivers significant benefits:
+
+<div className="list-tick">
+
+- **Unified platform**: Camunda 8.8 combines core components into a single [Orchestration Cluster](#orchestration-cluster), reducing system complexity, centralizing operations, and simplifying both deployment and maintenance.
+
+- **Enhanced productivity**: This upgrade introduces streamlined [identity and access management](#identity), a consolidated configuration model, and modernized & consolidated [APIs and SDKs](#apis-and-tools), making development, integration, and permission handling faster and more intuitive.
+
+- **Increased efficiency**: The new [unified exporter architecture](#unified-exporter) improves performance with accelerated data visibility in Operate and Tasklist, as well as available via query APIs. It also enables easier operation and administration, and improves resilience when deploying across multiple data centers.
+
+</div>
+
+:::info
+To learn more about the benefits of upgrading to Camunda 8.8, see the blog posts [streamlined deployment with Camunda 8.8](https://camunda.com/blog/2025/03/streamlined-deployment-with-camunda-8-8/) and [introducing enhanced Identity Management in Camunda 8.8](https://camunda.com/blog/2025/03/introducing-enhanced-identity-management-in-camunda-88/).
+:::
+
+### Summary of important changes
+
 Important changes introduced in Camunda 8.8 are summarized as follows:
 
 <table className="table-callout">
@@ -42,7 +62,7 @@ Important changes introduced in Camunda 8.8 are summarized as follows:
 </table>
 
 :::note simple deployment
-The simplest Self-Managed deployment runs as a single Java application or docker container.
+The simplest Camunda 8.8 Self-Managed deployment runs as a single Java application or docker container.
 :::
 
 :::info
@@ -62,7 +82,7 @@ The Orchestration Cluster (previously automation cluster) is now the core compon
 
 ### Zeebe, Operate, Tasklist, and Identity
 
-In Camunda 8.8, Zeebe, Operate, Tasklist, and Identity are consolidated into the Orchestration Cluster application as a single deployable artifact, distributed as a JAR file or Docker container.
+In Camunda 8.8, Zeebe, Operate, Tasklist, and Identity are integrated into the Orchestration Cluster application as a single deployable artifact, distributed as a JAR file or Docker container.
 
 - [Zeebe](../reference/glossary.md#zeebe) is the [workflow engine](../reference/glossary.md#workflow-engine).
 - Operate is used for monitoring and troubleshooting [process instances](../reference/glossary.md#process-instance) running in Zeebe.
@@ -173,15 +193,17 @@ The 8.8 changes to Identity could affect different user roles in your Organizati
 
 Orchestration Cluster Identity provides several advantages:
 
-| Benefit                                         | Description                                                                                                                                                                                                                |
-| :---------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Simplified identity management                  | The split between Orchestration Cluster Identity and Management Identity provides a clearer separation of concerns, making it easier to manage access for Orchestration Cluster components versus Web Modeler and Console. |
-| Unified access management                       | All identity and authorization features for the Orchestration Cluster components are now contained within the Orchestration Cluster, eliminating any dependency on Management Identity when orchestrating processes.       |
-| Simplified deployment and improved availability | Removing the dependency on Management Identity streamlines deployment and increases availability by reducing potential points of failure.                                                                                  |
-| Consistent authorization model                  | The new model offers a unified approach to managing permissions across all Orchestration Cluster resources.                                                                                                                |
-| Enhanced security                               | Granular access controls improve the overall security posture for cluster resources.                                                                                                                                       |
-| Improved performance                            | Authorization checks are handled internally, reducing latency and improving performance.                                                                                                                                   |
-| Flexible Identity Provider integration          | Keycloak is now treated as a standard OIDC provider, making it easier to integrate with other Identity Provider and increasing flexibility for users.                                                                      |
+<div className="list-tick">
+
+- **Simplified identity management**: The split between Orchestration Cluster Identity and Management Identity provides a clearer separation of concerns, making it easier to manage access for Orchestration Cluster components versus Web Modeler and Console.
+- **Unified access management**: All identity and authorization features for the Orchestration Cluster components are now contained within the Orchestration Cluster, eliminating any dependency on Management Identity when orchestrating processes.
+- **Simplified deployment and improved availability**: Removing the dependency on Management Identity streamlines deployment and increases availability by reducing potential points of failure.
+- **Consistent authorization model**: The new model offers a unified approach to managing permissions across all Orchestration Cluster resources.
+- **Enhanced security**: Granular access controls improve the overall security posture for cluster resources.
+- **Improved performance**: Authorization checks are handled internally, reducing latency and improving performance.
+- **Flexible Identity Provider integration**: Keycloak is now treated as a standard OIDC provider, making it easier to integrate with other Identity Provider and increasing flexibility for users.
+
+</div>
 
 ### Impact of Identity changes on your 8.7 deployment
 

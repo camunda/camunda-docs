@@ -299,6 +299,80 @@ Map<String, Object> expectedVariables = //
 assertThat(processInstance).hasVariables(expectedVariables);
 ```
 
+### hasVariableSatisfies
+
+Assert that the process instance has a variable with a value that satisfies the given requirements. The assertion
+transforms the value into the given type. In the consumer, you can use [AssertJ](https://github.com/assertj/assertj) to
+verify the value.
+
+The assertion fails if the variable doesn't exist, the value is of a different type, or the value doesn't satisfy the
+requirements.
+
+```java
+assertThat(processInstance).hasVariableSatisfies("order", Order.class, order -> {
+    Assertions.assertThat(order.status()).isEqualTo("approved");
+    Assertions.assertThat(order.items())
+        .hasSize(3)
+        .extracting("name", "quantity")
+        .containsExactlyInAnyOrder(
+            tuple("Helmet", 1),
+            tuple("Flag", 1),
+            tuple("Oxygen tank", 3)
+        );
+});
+```
+
+### hasLocalVariableNames
+
+Assert that the process instance has the local variables in the scope of the given element. Use the BPMN element ID or a
+`ElementSelector` to identify the element. The assertion fails if at least one variable doesn't exist.
+
+```java
+assertThat(processInstance).hasVariableNames(byId("task_A"), "var1", "var2");
+```
+
+### hasLocalVariable
+
+Assert that the process instance has the local variable with the value in the scope of the given element. Use the BPMN
+element ID or a `ElementSelector` to identify the element. The assertion fails if the variable doesn't exist or has a
+different value.
+
+```java
+assertThat(processInstance).hasLocalVariable(byId("task_A"), "var1", 100);
+```
+
+### hasLocalVariables
+
+Assert that the process instance has the local variables in the scope of the given element. Use the BPMN element ID or a
+`ElementSelector` to identify the element. The assertion fails if at least one variable doesn't exist or has a different
+value.
+
+```java
+Map<String, Object> expectedVariables = //
+assertThat(processInstance).hasLocalVariables(byId("task_A"), expectedVariables);
+```
+
+### hasLocalVariableSatisfies
+
+Assert that the process instance has a local variable in the scope of the given element with a value that satisfies the
+given requirements. Use the BPMN element ID or a `ElementSelector` to identify the element. The assertion transforms the
+value into the given type. In the consumer, you can use [AssertJ](https://github.com/assertj/assertj) to verify the
+value.
+
+The assertion fails if the variable doesn't exist, the value is of a different type, or the value doesn't satisfy the
+requirements.
+
+```java
+assertThat(processInstance).hasLocalVariableSatisfies(
+    byId("send-email"),
+    "to",
+    EmailTo.class,
+    emailTo -> {
+        Assertions.assertThat(emailTo.name()).isEqualTo("Zee");
+        Assertions.assertThat(emailTo.email()).isEqualTo("zee@camunda.com");
+    });
+```
+
 ## User task assertions
 
 You can verify the user task states and other properties using `CamundaAssert.assertThat()` or

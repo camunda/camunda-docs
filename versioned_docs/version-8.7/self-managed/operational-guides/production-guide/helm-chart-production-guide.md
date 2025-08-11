@@ -658,7 +658,7 @@ console:
                   url: https://management-host.com/modeler
                   readiness: http://camunda-web-modeler-webapp.oidc:8071/health/readiness
                   metrics: http://camunda-web-modeler-webapp.oidc:8071/metrics
-            - name: camudna
+            - name: camunda
               namespace: orchestration
               version: 12.x
               components:
