@@ -23,7 +23,12 @@ effort for the migration depending on your existing test cases. Fundamentally, Z
 - CPT has different assertion and utility names to align with the API
 - CPT has no equivalent for all assertions and utilities because it is limited to the API
 - CPT is slower because it runs the full Camunda distribution
-  :::
+
+However, CPT has many new features and improvements that make the migration worth it: access to Camunda's full API,
+support for Camunda user tasks, blocking assertions to deal with the asynchronous processing, and enhanced mocking
+utilities.
+
+:::
 
 ## Update your dependency
 
