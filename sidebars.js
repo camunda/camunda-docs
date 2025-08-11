@@ -988,7 +988,7 @@ module.exports = {
     "reference/overview",
     {
       type: "category",
-      label: "Release center",
+      label: "Release announcements and release notes",
       link: {
         type: "doc",
         id: "reference/announcements-release-notes/overview",
