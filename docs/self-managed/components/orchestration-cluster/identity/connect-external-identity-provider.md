@@ -129,7 +129,7 @@ global.security.authentication.oidc.scope: ["openid"]
 
 - _Redirect URI_: By default, the redirect URI is `http://localhost:8080/sso-callback`. Update this if your deployment uses a different hostname or port.
 
-- _Username claim_: By default, the `sub` (subject) claim from the ID token is used as the username. If you want to use a different claim (such as `preferred_username` or `email`), ensure your Identity Provider includes it in the token and set the `username-claim` property accordingly.
+- _Username claim_: By default, the `sub` (subject) claim from the ID token is used as the username. If you want to use a different claim (such as `preferred_username` or `email`), ensure your Identity Provider includes it in the token and set the `username-claim` property accordingly. You can use a [JSONPath expression](https://www.rfc-editor.org/rfc/rfc9535.html) to locate the username claim in the token (e.g. `$['camundaorg']['username']`).
 
 #### Identity Provider Example Configurations
 
@@ -201,7 +201,7 @@ Replace `<YOUR_USERNAME>` with the actual username as provided by your Identity 
 
 The Orchestration Cluster allows you to manage groups in the Orchestration Cluster or to bring groups that you have configured in your Identity Provider.
 
-In order to bring own groups, configure your Identity Provider to include a groups claim in the token (e.g., `groups` or `roles`). Then set the `groups-claim` property in your Camunda configuration to match the claim name.
+In order to bring your own groups, configure your Identity Provider to include a groups claim in the token (e.g., `groups` or `roles`). The value should be an array of strings. Then set the `groups-claim` property in your Camunda configuration to match the claim name. Similar to the `username-claim`, you can use a [JSONPath expression](https://www.rfc-editor.org/rfc/rfc9535.html) to locate the groups claim in the token (e.g. `$['camundaorg']['groups']`).
 
 Afterwards, you can use the groups for Role and Authorization Assignment as well as Tenant assignment.
 
