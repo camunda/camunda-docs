@@ -85,9 +85,18 @@ Refer to the [CamundaClientBuilder documentation](https://javadoc.io/doc/io.camu
 The construction for OAuth, Basic Auth, or custom providers remains conceptually the same, but ensure you use the classes from the new package. Refer to the [Camunda Java Client bootstrapping](../java-client/index.md#bootstrapping) for more details.
 :::
 
-## Command rename
+## API and Command rename
 
-The method `newUserCreateCommand()` is changed to `newCreateUserCommand()` in CamundaClient.
+The following APIs have been changed in the Camunda Java Client:
+
+| Old                             | New                               |
+| :------------------------------ | :-------------------------------- |
+| `ZeebeClientBuilder`            | `CamundaClientBuilder`            |
+| `ZeebeClientClouldBuilderStep1` | `CamundaClientClouldBuilderStep1` |
+| `ZeebeClientConfiguration`      | `CamundaClientConfiguration`      |
+| `ZeebeFuture`                   | `CamundaFuture`                   |
+
+The command `newUserCreateCommand()` is changed to `newCreateUserCommand()` in CamundaClient.
 
 ## Protocol and Connection: REST vs gRPC selection
 
