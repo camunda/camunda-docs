@@ -98,7 +98,7 @@ To learn more, see [vector database connector](/components/connectors/out-of-the
 
 #### Fetch latest process definitions
 
-The Connectors Runtime is optimized by fetching only the latest process definition versions from Operate. This reduces CPU consumption and improves deployment performance, particularly in environments with frequent CI/CD-generated process versions.
+The connectors runtime is optimized by fetching only the latest process definition versions from the Orchestration Cluster. This reduces CPU consumption and improves deployment performance, particularly in environments with frequent CI/CD-generated process versions.
 
 <!-- https://github.com/camunda/product-hub/issues/2572 -->
 
