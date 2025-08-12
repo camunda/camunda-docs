@@ -1,9 +1,9 @@
 ---
 id: getting-started-agentic-orchestration
 title: "Run your first AI Agent"
-sidebar_label: Run your first AI Agent
-description: "For developers using Camunda 8 Self-Managed, step through an example project with Spring Boot or Node.js."
-keywords: [java, spring, spring camunda, getting started, user guide, tutorial]
+sidebar_label: Build and run your first AI Agent
+description: "Get started with agentic orchestration by running your first AI agent in Camunda."
+keywords: [agentic orchestration, ai agent]
 ---
 
 import Tabs from "@theme/Tabs";
@@ -12,7 +12,15 @@ import TabItem from "@theme/TabItem";
 <span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--medium">1 hour</span>
 
-Have you heard about agentic orchestration, but don't know where to start? This guide is tailored for those who want to implement their first agent running on Camunda 8.
+Get started with agentic orchestration by running your first AI agent.
+
+## About this guide
+
+This guide shows you how to get started with [agentic orchestration](/components/agentic-orchestration/agentic-orchestration.md) by building and running your first Camunda 8 AI agent.
+
+This guide covers:
+
+- Using Camunda 8
 
 ## What to expect
 
@@ -23,7 +31,7 @@ You will:
   - use the **SaaS** version where you can model and deploy your processes in the cloud.
 - Use the **Camunda Modeler** to deploy and start a business process.
 - Use the **AI Agent** connector, as the brain for the agent
-- Use an ad-hoc subprocess, as the building block for the agent's behavior
+- Use an ad-hoc subprocess, as the building block for the agent's behavior, providing a set of tools for the agent to run
 
 ## Prerequisites
 
@@ -38,15 +46,17 @@ You will:
 
 ### Deterministic and dynamic workflows
 
-Traditionally people modeled their business processes as a **deterministic sequence** of steps, where each step is predefined and follows a strict order. This approach works well for simple, repetitive tasks but struggles to adapt to more complex, dynamic scenarios.
+Traditionally, business processes are modeled as a deterministic sequence of steps, where the flow logic is predefined and follows a strict order. This approach works well for situations where the flow logic can be defined it advance but struggles to adapt to more complex, open-ended scenarios.
 
-With agentic orchestration we use the concept of **dynamic workflows**, where the process can adapt and change based on real-time information and AI-driven insights. Your job is to create the tools available to the agent, and the agent can dynamically run any of the tasks available, based on the current need.
+Agentic orchestration introduces the concept of dynamic workflows, where the process can adapt and change at runtime, based on real-time information and AI-driven insights. An agent is given a goal to complete and, in a loop selects from a set of available tools (possible actions) until the goal is achieved.
 
-You can build guardrails by defining boundaries and constraints within which the AI agent operates, ensuring it stays aligned with business goals and compliance requirements.
+In Camunda, Agentic Orchestration brings both patterns together in a single process model which can have both deterministic flow logic and dynamic, AI-driven tool execution. This combination is extremely powerful and allows you to apply deterministic control where needed and provide flexibility where it makes sense.
+
+The deterministic flow logic acts as a guardrail on dynamic execution defining boundaries and constraints within which the AI agent operates, ensuring it stays aligned with business goals and compliance requirements so that you can build powerful agents that you can trust.
 
 ### AI Agent and the ad-hoc subprocess
 
-Ad-hoc subprocesses are a key building block for agentic orchestration. They allow the AI agent to dynamically run tasks available to it, based on the current context and requirements. It can perform tasks in parallel, handle exceptions, and make decisions on the fly. It can be instructed to use the available tasks until its goal is met.
+The Ad-hoc subprocesses is a key building block for agentic orchestration. It allows the AI agent to dynamically run tools (available actions), based on the current context and requirements. It can perform tasks in parallel, handle exceptions, and make decisions on the fly.
 
 In the following example you can see an AI agent
 
@@ -54,7 +64,7 @@ In the following example you can see an AI agent
 
 ## Build your agent
 
-### Start from our blueprint
+### Start from an example (blueprint)
 
 The fastest way to get started is to use our blueprint process model. This model includes all the necessary elements to run a simple AI agent.
 Visit [its marketplace page](https://marketplace.camunda.com/en-US/apps/522492/ai-email-support-agent) and choose the option you prefer. We recommend using the SaaS version as it needs the least amount of setup.
