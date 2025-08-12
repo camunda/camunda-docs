@@ -27,9 +27,9 @@ For example, use an AI agent to enhance a Know Your Customer (KYC) process, wher
 
 Get started with agentic orchestration.
 
-- [Run your first AI Agent](../../guides/getting-started-agentic-orchestration.md): If you want to jump on building your first AI agent, follow this guide.
+- [Build your first AI Agent](../../guides/getting-started-agentic-orchestration.md): Get started with building and running your first AI agent.
 - [Design and architecture](design-architecture.md): Plan and design your agentic orchestration solutions using recommended architecture guidelines.
-- [AI agents](ai-agents.md): Start building and integrating AI agents into your end-to-end processes.
+- [AI agents](ai-agents.md): Learn how to build and integrate AI agents into your end-to-end processes.
 
 :::tip
 Ready to get started? Download the [AI Email Support Agent blueprint](https://marketplace.camunda.com/en-US/apps/522492/ai-email-support-agent) from the Camunda Marketplace.
