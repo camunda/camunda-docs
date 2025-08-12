@@ -13,11 +13,9 @@ import AiAgentImg from './img/ai-agent-example-diagram.png';
 <span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--medium">1 hour</span>
 
-Get started with Camunda agentic orchestration by building and running your first AI agent.
+Get started with Camunda [agentic orchestration](/components/agentic-orchestration/agentic-orchestration.md) by building and running your first [AI agent](/components/agentic-orchestration/ai-agents.md).
 
 ## About this guide
-
-This guide introduces you to [agentic orchestration](/components/agentic-orchestration/agentic-orchestration.md) by building and running your first [AI agent](/components/agentic-orchestration/ai-agents.md) in Camunda.
 
 In this guide, you will:
 
@@ -26,7 +24,7 @@ In this guide, you will:
 - Use an [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) to provide interaction/reasoning capabilities for the AI agent.
 - Use an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) to define the tools the AI agent should use.
 
-After you have completed this guide, you will have an example running AI agent and Camunda 8 process.
+Once you have completed this guide, you will have an example running AI agent and Camunda 8 process.
 
 ## Prerequisites
 
@@ -66,25 +64,23 @@ For example, the process in this guide uses an ad-hoc sub-process in a [tool cal
 
 ## Build your first agent
 
+Perform the following steps to build your first Camunda AI agent:
+
 ### Step 1: Install the example model blueprint
 
-To help you get started quickly, you can use a pre-built blueprint process model of a simple AI agent.
-
-:::tip
-Use the SaaS version to get started quickly with minimal setup.
-:::
+To get started quickly, you can use the pre-built blueprint process model of a simple AI agent.
 
 #### SaaS
 
 1. Navigate to the [Example AI Agent](https://marketplace.camunda.com/en-US/apps/522492/ai-email-support-agent) blueprint in the Camunda marketplace.
 1. Click **For SAAS** and select the project you want to save the blueprint in, or create a new project and save it in this.
-1. The blueprint model opens in Web Modeler.
+1. The blueprint BPMN diagram opens in Web Modeler.
 
 #### Self-Managed (local environment)
 
 1. Navigate to the [Example AI Agent](https://marketplace.camunda.com/en-US/apps/522492/ai-email-support-agent) blueprint in the Camunda marketplace.
 1. Click **For SM** and download the blueprint files from the repository.
-1. Open the BPMN diagram in Desktop Modeler.
+1. Open the blueprint BPMN diagram in Desktop Modeler.
 
 ### About the example model
 
@@ -125,6 +121,18 @@ You can now run and deploy your AI agent:
 ### Self-Managed (local environment)
 
 1. ...
+
+## Step 4: Test your AI agent
+
+Now that your AI agent is running, you can test it using the form linked to the start event.
+
+### Example prompts
+
+| Prompt                                      | Description                                                                                                                                                                                |
+| :------------------------------------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| "send ervin a joke"                         | Fetches a list of users, fetches single user record, fetches joke, compiles email - on the email operator task you can add additional feedback like "add emojis" or "translate to french". |
+| "go and fetch \<url\> and tell me about it" | -                                                                                                                                                                                          |
+| "tell me about this document"               | the start form has a document upload field                                                                                                                                                 |
 
 ## Next steps
 
