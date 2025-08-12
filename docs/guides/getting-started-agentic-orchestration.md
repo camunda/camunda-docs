@@ -11,7 +11,7 @@ import TabItem from "@theme/TabItem";
 import AiAgentImg from './img/ai-agent-example-diagram.png';
 
 <span class="badge badge--beginner">Beginner</span>
-<span class="badge badge--medium">1 hour</span>
+<span class="badge badge--medium">Time estimate: 45 minutes</span>
 
 Get started with Camunda [agentic orchestration](/components/agentic-orchestration/agentic-orchestration.md) by building and running your first [AI agent](/components/agentic-orchestration/ai-agents.md).
 
@@ -62,21 +62,17 @@ An [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subp
 
 For example, the process in this guide uses an ad-hoc sub-process in a [tool calling feedback loop](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#feedback-loop-use-cases), with the AI Agent connector used to allow the LLM to choose from the tools available in the ad-hoc sub-process.
 
-## Build your first agent
+## Step 1: Install the example model blueprint
 
-Perform the following steps to build your first Camunda AI agent:
+To start building your first AI agent, you can use a pre-built Camunda blueprint process model.
 
-### Step 1: Install the example model blueprint
-
-To get started quickly, you can use the pre-built blueprint process model of a simple AI agent.
-
-#### SaaS
+### SaaS
 
 1. Navigate to the [Example AI Agent](https://marketplace.camunda.com/en-US/apps/522492/ai-email-support-agent) blueprint in the Camunda marketplace.
 1. Click **For SAAS** and select the project you want to save the blueprint in, or create a new project and save it in this.
 1. The blueprint BPMN diagram opens in Web Modeler.
 
-#### Self-Managed (local environment)
+### Self-Managed (local environment)
 
 1. Navigate to the [Example AI Agent](https://marketplace.camunda.com/en-US/apps/522492/ai-email-support-agent) blueprint in the Camunda marketplace.
 1. Click **For SM** and download the blueprint files from the repository.
@@ -126,6 +122,10 @@ You can now run and deploy your AI agent:
 
 Now that your AI agent is running, you can test it using the form linked to the start event.
 
+For example:
+
+1. ...
+
 ### Example prompts
 
 | Prompt                                      | Description                                                                                                                                                                                |
@@ -140,3 +140,4 @@ Now that you have seen easy it is to build a simple Camunda AI agent, learn more
 
 - [Camunda agentic orchestration](/components/agentic-orchestration/agentic-orchestration.md)
 - [Camunda AI agents](/components/agentic-orchestration/ai-agents.md)
+- ...
