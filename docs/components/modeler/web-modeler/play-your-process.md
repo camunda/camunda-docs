@@ -22,6 +22,25 @@ The current version of the active process and all its dependencies, like called 
 
 In SaaS, Play uses connector secrets from your selected cluster. connector secrets are not currently supported in Self-Managed.
 
+## Authorizations
+
+If [authorizations](/components/concepts/access-control/authorizations.md#available-resources) are enabled on the cluster where you will run Play, the following permissions are required for each action:
+
+| Resource Type       | Permission                                       | Allowed action                                                                                                  |
+| ------------------- | ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------- |
+| Resource            | CREATE                                           | Deploy a process                                                                                                |
+| Process Definition  | CREATE_PROCESS_INSTANCE                          | Start a process instance                                                                                        |
+| Process Definition  | READ_PROCESS_INSTANCE                            | View process instance(s)                                                                                        |
+| Process Definition  | READ_USER_TASK                                   | Get information about a user task                                                                               |
+| Process Definition  | UPDATE_USER_TASK                                 | Complete a user task                                                                                            |
+| Process Definition  | UPDATE_PROCESS_INSTANCE                          | Complete a service task, Throw error from a service task, Apply modifications, Set variables, Resolve incidents |
+| Decision Definition | READ_DECISION_DEFINITION, READ_DECISION_INSTANCE | View decision instance in Operate (SaaS only)                                                                   |
+| Message             | CREATE                                           | Publish a message                                                                                               |
+
+### Limitations {#authorizations-limitations}
+
+- Fine-grained authorizations are not supported. Resource ID has to be \* when defining authorizations.
+
 ## Get started with Play
 
 ![play process definition view](img/play-definition.png)
@@ -206,7 +225,7 @@ For more information about terms, refer to our [licensing and terms page](https:
 ### Camunda 8 SaaS
 
 In Camunda 8 SaaS, Play is available to all Web Modeler users with commenter, editor, or admin permissions within a project.
-Additionally, within their organization, users need to have a [role](/components/console/manage-organization/manage-users.md#roles-and-permissions) which has deployment privileges.
+Additionally, within their organization, users need to have a [role](/components/console/manage-organization/manage-users.md#roles-and-permissions) which has deployment privileges. [If authorizations are enabled on the cluster, users need to have specific permissions instead.](#authorizations)
 
 ### Camunda 8 Self-Managed
 
