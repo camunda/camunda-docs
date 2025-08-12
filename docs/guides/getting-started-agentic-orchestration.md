@@ -1,90 +1,102 @@
 ---
 id: getting-started-agentic-orchestration
-title: "Run your first AI Agent"
-sidebar_label: Build and run your first AI Agent
+title: "Build your first AI Agent"
+sidebar_label: Build your first AI Agent
 description: "Get started with agentic orchestration by running your first AI agent in Camunda."
 keywords: [agentic orchestration, ai agent]
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import AiAgentImg from './img/ai-agent-example-diagram.png';
 
 <span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--medium">1 hour</span>
 
-Get started with agentic orchestration by running your first AI agent.
+Get started with Camunda agentic orchestration by building and running your first AI agent.
 
 ## About this guide
 
-This guide shows you how to get started with [agentic orchestration](/components/agentic-orchestration/agentic-orchestration.md) by building and running your first Camunda 8 AI agent.
+This guide introduces you to [agentic orchestration](/components/agentic-orchestration/agentic-orchestration.md) by building and running your first [AI agent](/components/agentic-orchestration/ai-agents.md) in Camunda.
 
-This guide covers:
+In this guide, you will:
 
-- Using Camunda 8
+- Run Camunda 8 in either a local development environment (using [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md)) or [Camunda 8 SaaS](https://accounts.cloud.camunda.io/signup).
+- Deploy and start a business process using either [Desktop Modeler](/components/modeler/desktop-modeler/index.md) with Camunda 8 Run, or [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md) with Camunda 8 SaaS.
+- Use an [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) to provide interaction/reasoning capabilities for the AI agent.
+- Use an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) to define the tools the AI agent should use.
 
-## What to expect
-
-You will:
-
-- Use Camunda 8 either
-  - in a local development environment using **Camunda 8 Run** or
-  - use the **SaaS** version where you can model and deploy your processes in the cloud.
-- Use the **Camunda Modeler** to deploy and start a business process.
-- Use the **AI Agent** connector, as the brain for the agent
-- Use an ad-hoc subprocess, as the building block for the agent's behavior, providing a set of tools for the agent to run
+After you have completed this guide, you will have an example running AI agent and Camunda 8 process.
 
 ## Prerequisites
 
-- To run an agent with Camunda 8, you need a running environment.
-  - Have a Camunda 8 environment up and running, described in [Run your first local project](../getting-started-example)
-  - Or [sign up for a free SaaS Trial Account](https://accounts.cloud.camunda.io/signup)
-- AWS IAM user with permissions: `bedrock:InvokeModel` (Claude 3 Sonnet/Haiku) and `aoss:*` for your OpenSearch index
-- Email account (SMTP/IMAP) & credentials (App Password for Gmail, or provider-specific credentials)
-- Outbound internet access for connectors to reach email server, Bedrock, and OpenSearch endpoints
+The following prerequisites are required for building your first AI agent:
 
-## Concept
+| Prerequisite                                                                                                         | Description                                                                                                                                                                                                                                                                                                                                                                           |
+| :------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Running Camunda 8 environment                                                                                        | <p>To run your agent, you must set up a running Camunda 8 environment, either:</p><p><ul><li><p>A local (Self-Managed) Camunda 8 environment. For example, see [Run your first local project](../getting-started-example).</p></li><li><p>A Camunda 8 SaaS account. For example, [sign up for a free SaaS Trial Account](https://accounts.cloud.camunda.io/signup).</p></li></ul></p> |
+| [Amazon Web Services (AWS) IAM user and permissions](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html) | A valid AWS Identity and Access Management (IAM) user with permissions configured to allow access to Amazon Bedrock `bedrock:InvokeModel` (Claude 3 Sonnet/Haiku) and `aoss:*` for your OpenSearch index.                                                                                                                                                                             |
 
-### Deterministic and dynamic workflows
+## Before you begin
 
-Traditionally, business processes are modeled as a deterministic sequence of steps, where the flow logic is predefined and follows a strict order. This approach works well for situations where the flow logic can be defined it advance but struggles to adapt to more complex, open-ended scenarios.
+Before building your first AI agent it is helpful to understand the following key concepts and terms.
 
-Agentic orchestration introduces the concept of dynamic workflows, where the process can adapt and change at runtime, based on real-time information and AI-driven insights. An agent is given a goal to complete and, in a loop selects from a set of available tools (possible actions) until the goal is achieved.
+### Introducing dynamic workflows
 
-In Camunda, Agentic Orchestration brings both patterns together in a single process model which can have both deterministic flow logic and dynamic, AI-driven tool execution. This combination is extremely powerful and allows you to apply deterministic control where needed and provide flexibility where it makes sense.
+Business processes are traditionally modeled as a deterministic sequence of steps, with predefined flow logic following a strict order. This works well if flow logic can be defined in advance, but struggles to adapt in more complex, open-ended scenarios.
 
-The deterministic flow logic acts as a guardrail on dynamic execution defining boundaries and constraints within which the AI agent operates, ensuring it stays aligned with business goals and compliance requirements so that you can build powerful agents that you can trust.
+- [Dynamic workflows](/components/agentic-orchestration/design-architecture.md#when-to-use-deterministic-or-non-deterministic-orchestration) allow a process to adapt and change at runtime, based on real-time information and AI-driven insights. An agent with a goal to complete runs within a loop, selecting what it needs from a set of tools (possible actions) to achieve its goal.
 
-### AI Agent and the ad-hoc subprocess
+- Camunda agentic orchestration blends both deterministic and dynamic (AI-driven) process orchestration into a single process model. This allows you to use deterministic control when needed, and flexibility where it makes sense.
 
-The Ad-hoc subprocesses is a key building block for agentic orchestration. It allows the AI agent to dynamically run tools (available actions), based on the current context and requirements. It can perform tasks in parallel, handle exceptions, and make decisions on the fly.
+- The deterministic flow logic acts as a guardrail on dynamic execution, defining boundaries and constraints for the AI agent. This ensures the agent stays aligned with business goals and compliance requirements, so you can **build agents you can trust**.
 
-In the following example you can see an AI agent
+:::info
+To learn more about dynamic workflows, see [agentic orchestration design and architecture](/components/agentic-orchestration/design-architecture.md).
+:::
 
-![Agentic Orchestration Concept](img/ai-agent-concept.png)
+### Ad-hoc sub-processes
 
-## Build your agent
+An [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) is a key building block in Camunda agentic orchestration.
 
-### Start from an example (blueprint)
+- It allows an AI agent to dynamically select and run tools (available actions) based on the current context and requirements.
+- It can perform tasks in parallel, handle exceptions, and make decisions on the fly.
 
-The fastest way to get started is to use our blueprint process model. This model includes all the necessary elements to run a simple AI agent.
-Visit [its marketplace page](https://marketplace.camunda.com/en-US/apps/522492/ai-email-support-agent) and choose the option you prefer. We recommend using the SaaS version as it needs the least amount of setup.
+For example, the process in this guide uses an ad-hoc sub-process in a [tool calling feedback loop](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#feedback-loop-use-cases), with the AI Agent connector used to allow the LLM to choose from the tools available in the ad-hoc sub-process.
 
-**SaaS**
+## Build your first agent
 
-- If you have a SaaS account, choose [For SAAS](<https://modeler.cloud.camunda.io/import/processes?source=https://raw.githubusercontent.com/bastiankoerber/Camunda_Agent_Blueprint/refs/heads/main/Agent%20Blueprint%20(Long%20Term%20Memory).bpmn,https://raw.githubusercontent.com/bastiankoerber/Camunda_Agent_Blueprint/refs/heads/main/Escalate%20to%20human%20form.form,https://raw.githubusercontent.com/bastiankoerber/Camunda_Agent_Blueprint/refs/heads/main/Review%20case%20resolution.form>)
-- If you haven't signed up or is not logged in, first you need to take care of that
-- After that you need to select which project you want the blueprint to be saved in, or create a new project
-- The modeler will open with the blueprint and you immediately have a working AI agent modeled
+### Step 1: Install the example model blueprint
 
-**Self managed**
+To help you get started quickly, you can use a pre-built blueprint process model of a simple AI agent.
 
-- If you don't have a SaaS account, choose [For SM](https://github.com/bastiankoerber/Camunda_Agent_Blueprint/tree/main)
-- Download the blueprint files from the repository
-- Import the .bpmn and .form files into your Camunda Modeler
+:::tip
+Use the SaaS version to get started quickly with minimal setup.
+:::
 
-## Set up necessary configurations
+#### SaaS
 
-Create the following secrets in your Camunda cluster or set them up locally with the `connector-secrets.txt` file and restart `c8run`. Use the set secrets with the `{{secrets.SECRET_NAME}}` syntax.
+1. Navigate to the [Example AI Agent](https://marketplace.camunda.com/en-US/apps/522492/ai-email-support-agent) blueprint in the Camunda marketplace.
+1. Click **For SAAS** and select the project you want to save the blueprint in, or create a new project and save it in this.
+1. The blueprint model opens in Web Modeler.
+
+#### Self-Managed (local environment)
+
+1. Navigate to the [Example AI Agent](https://marketplace.camunda.com/en-US/apps/522492/ai-email-support-agent) blueprint in the Camunda marketplace.
+1. Click **For SM** and download the blueprint files from the repository.
+1. Open the BPMN diagram in Desktop Modeler.
+
+### About the example model
+
+The example AI Agent model process (description)...
+
+<img src={AiAgentImg} alt="A example AI agent BPMN process diagram"/>
+
+## Step 2: Configure the...
+
+Secrets?
+
+<!-- Create the following secrets in your Camunda cluster or set them up locally with the `connector-secrets.txt` file and restart `c8run`. Use the set secrets with the `{{secrets.SECRET_NAME}}` syntax.
 
 - `CAMUNDA_SAMPLE_AGENT_EMAIL_PASSWORD`: Email account password (App Password or SMTP token)
 - `CAMUNDA_SAMPLE_AGENT_EMAIL_USERNAME`: Email account username (e.g. your-address@example.com)
@@ -100,12 +112,23 @@ Configure the connectors:
    - Region: your AWS region (e.g. `eu-central-1`)
    - Endpoint: `https://<your-opensearch-domain>`
 3. **Agent connector:**
-   - Model ID: default is `anthropic.claude-3.7-sonnet-20240229-v1:0` (change as needed)
+   - Model ID: default is `anthropic.claude-3.7-sonnet-20240229-v1:0` (change as needed) -->
 
-## Run your agent
+## Step 3: Deploy and run your AI agent
 
-Deploy your process and send an email to the email address you set. Open **Operate** to see the process running. You have deployed your first AI agent.
+You can now run and deploy your AI agent:
+
+### SaaS
+
+1. ...
+
+### Self-Managed (local environment)
+
+1. ...
 
 ## Next steps
 
-Read more on the [documentation page for Agentic Orchestration](../../components/agentic-orchestration/) can do for you and get to know about its advanced features.
+Now that you have seen easy it is to build a simple Camunda AI agent, learn more about using agentic orchestration and advanced AI agents in your processes:
+
+- [Camunda agentic orchestration](/components/agentic-orchestration/agentic-orchestration.md)
+- [Camunda AI agents](/components/agentic-orchestration/ai-agents.md)
