@@ -27,6 +27,7 @@ For example, use an AI agent to enhance a Know Your Customer (KYC) process, wher
 
 Get started with agentic orchestration.
 
+- [Run your first AI Agent](../../guides/getting-started-agentic-orchestration.md): If you want to jump on building your first AI agent, follow this guide.
 - [Design and architecture](design-architecture.md): Plan and design your agentic orchestration solutions using recommended architecture guidelines.
 - [AI agents](ai-agents.md): Start building and integrating AI agents into your end-to-end processes.
 
