@@ -24,8 +24,8 @@ You may refer to this [example calculation](https://calculator.aws/#/estimate?id
 
 The architecture outlined below describes a standard three-node deployment, distributed across three [availability zones](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html) within a single AWS region. It includes a managed OpenSearch domain deployed under the same conditions. This approach ensures high availability and redundancy in case of a zone failure.
 
-<!-- The following diagram should be exported as an image and as a PDF from the sources https://miro.com/app/board/uXjVL-6SrPc=/ --->
-<!-- To export: click on the frame > "Export Image" > as PDF and as JPG (low res), then save it in the ./assets/ folder --->
+<!-- The following diagram should be exported as an image and as a PDF from the sources https://miro.com/app/board/uXjVL-6SrPc=/ -->
+<!-- To export: click on the frame > "Export Image" > as PDF and as JPG (low res), then save it in the ./assets/ folder -->
 
 _Infrastructure diagram for a 3-node EC2 architecture (click the image to view the PDF version)_
 
@@ -326,11 +326,9 @@ cd camunda-deployment-references-main/aws/ec2/procedure
 The `procedure` directory contains Bash scripts for installing and configuring Camunda 8.
 
 2. Configure script behavior using the following environment variables:
-
    - `CLOUDWATCH_ENABLED`: Defaults to `false`. Set to `true` to install the CloudWatch agent on each EC2 instance and export Camunda logs and Prometheus metrics to AWS CloudWatch.
 
 3. Override default versions in the `camunda-install.sh` script by modifying these variables:
-
    - `OPENJDK_VERSION`: The Temurin Java version to install.
    - `CAMUNDA_VERSION`: The Camunda 8 version to install.
    - `CAMUNDA_CONNECTORS_VERSION`: The Camunda 8 Connectors version to install.

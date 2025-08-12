@@ -26,7 +26,7 @@ For documentation on the Orchestration Cluster, Web Modeler and Console separati
 
 This section includes deployment reference architectures for manual setups:
 
-- [Amazon EC2 deployment](/self-managed/installation-methods/helm/cloud-providers/amazon/aws-ec2.md) - a standard production setup with support for high availability.
+- [Amazon EC2 deployment](/self-managed/installation-methods/manual/cloud-providers/amazon/aws-ec2.md) - a standard production setup with support for high availability.
 
 ## Considerations
 

@@ -151,7 +151,7 @@ RewriteRule ^optimize/3.11.0/self-managed/(.*)$ /docs/8.3/self-managed/$1 [R=301
 # Self-Managed Restructure
 # Setup
 RewriteRule ^docs/next/self-managed/setup/deploy/amazon/amazon-eks/?$ /docs/next/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/ [R=301,L]
-RewriteRule ^docs/next/self-managed/setup/deploy/amazon/aws-ec2/?$ /docs/next/self-managed/installation-methods/helm/cloud-providers/amazon/aws-ec2/ [R=301,L]
+RewriteRule ^docs/next/self-managed/setup/deploy/amazon/aws-ec2/?$ /docs/next/self-managed/installation-methods/manual/cloud-providers/amazon/aws-ec2/ [R=301,L]
 RewriteRule ^docs/next/self-managed/setup/deploy/amazon/openshift/?$ /docs/next/self-managed/installation-methods/helm/cloud-providers/amazon/openshift/ [R=301,L]
 RewriteRule ^docs/next/self-managed/setup/deploy/azure/microsoft-aks/?$ /docs/next/self-managed/installation-methods/helm/cloud-providers/azure/microsoft-aks/ [R=301,L]
 RewriteRule ^docs/next/self-managed/setup/deploy/gcp/?$ /docs/next/self-managed/installation-methods/helm/cloud-providers/gcp/ [R=301,L]
