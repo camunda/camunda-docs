@@ -29,11 +29,11 @@ To change the values for http header for security reasons, you can use the confi
 ### Securing Operate - Zeebe interaction
 
 While executing user operations, Operate communicates with Zeebe using the Zeebe Java client. For Zeebe to know whether operations are allowed to be executed
-in terms of tenant assignment, Operate - Zeebe connection must be secured. Check the list of environment variables to be provided in the [Zeebe documentation](../zeebe/security/client-authorization.md#environment-variables).
+in terms of tenant assignment, Operate - Zeebe connection must be secured. Check the list of environment variables to be provided in the [Zeebe documentation](../../zeebe/security/client-authorization.md#environment-variables).
 
 ### Troubleshooting multi-tenancy in Operate
 
-If users can view data from the `<default>` tenant only and no data from other tenants (and you have not [configured multi-tenancy using Helm](https://artifacthub.io/packages/helm/camunda/camunda-platform#global-parameters)), multi-tenancy is not enabled in Operate. Refer to the [multi-tenancy configuration guide](../../../installation-methods/helm/configure/configure-multi-tenancy.md).
+If users can view data from the `<default>` tenant only and no data from other tenants (and you have not [configured multi-tenancy using Helm](https://artifacthub.io/packages/helm/camunda/camunda-platform#global-parameters)), multi-tenancy is not enabled in Operate. Refer to the [multi-tenancy configuration guide](../../../../installation-methods/helm/configure/configure-multi-tenancy.md).
 
 If multi-tenancy is enabled in Operate but disabled in [Identity](/self-managed/components/management-identity/what-is-identity.md), users will not have any tenant authorizations in Operate
 and will not be able to access the data of any tenants in Operate.
