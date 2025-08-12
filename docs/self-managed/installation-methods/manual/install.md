@@ -9,6 +9,8 @@ import TabItem from '@theme/TabItem';
 
 This page guides you through the manual installation of the Camunda 8 on a local or virtual machine.
 
+The [Reference Architecture > Manual](/self-managed/reference-architecture/manual) is a recommended read to get a general understanding of the environment.
+
 ## Prerequisites
 
 - Bare Metal / Virtual Machine
@@ -21,7 +23,7 @@ This page guides you through the manual installation of the Camunda 8 on a local
   - Elasticsearch / AWS OpenSearch, see [supported environments](/reference/supported-environments.md) for version details
     - Explore available deployment options of Elasticsearch in their [documentation](https://www.elastic.co/docs/deploy-manage/deploy)
 
-See also the [Manual Reference Architecture](/self-managed/reference-architecture/manual#requirements) for suggested minimum hardware requirements and networking.
+See also the [Reference Architecture > Manual](/self-managed/reference-architecture/manual#requirements) for suggested minimum hardware requirements and networking.
 
 :::tip
 
