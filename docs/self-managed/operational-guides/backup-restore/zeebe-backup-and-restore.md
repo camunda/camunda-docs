@@ -106,10 +106,12 @@ AWS_REQUEST_CHECKSUM_CALCULATION=WHEN_REQUIRED
 ```
 
 **Backup operations on Azure Blob Storage time out**
+
 When using an Azure backup store, requests to the backup API may time out due to [a bug in the Azure SDK](https://github.com/Azure/azure-sdk-for-java/issues/46231).
-The root cause of this issue is a deadlock in the Azure SDK, when virtual threads are used.
-This deadlock is especially likely to occur on systems with many partitions per broker and few CPU cores available.
-Set the following environment variable on your Zeebe brokers to disable the use of virtual threads in the Azure SDK:
+
+The issue is caused by a deadlock in the Azure SDK when virtual threads are used. It is more likely to occur on systems with many partitions per broker and limited CPU cores.
+
+To mitigate this, set the following environment variable on your Zeebe brokers to disable virtual threads in the Azure SDK:
 
 ```
 AZURE_SDK_SHARED_THREADPOOL_USEVIRTUALTHREADS=false
