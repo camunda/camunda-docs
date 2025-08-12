@@ -1440,12 +1440,12 @@ module.exports = {
                     "self-managed/components/orchestration-cluster/core-settings/configuration/example-application",
                   ],
                 },
-                {
-                  Concepts: [],
-                },
-                {
-                  Migration: [],
-                },
+                // {
+                //   Concepts: [],
+                // },
+                // {
+                //   Migration: [],
+                // },
               ],
             },
             {
