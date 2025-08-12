@@ -139,9 +139,7 @@ Update your application's configuration
 
 ## Licensing
 
-import Licensing from '../../../../../self-managed/react-components/licensing.md'
-
-<Licensing/>
+See the [core settings documentation](/self-managed/components/orchestration-cluster/core-settings/configuration/licensing.md).
 
 ## Logging
 
