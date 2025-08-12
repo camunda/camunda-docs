@@ -65,15 +65,15 @@ To learn more, see [CSV connector](/components/connectors/out-of-the-box-connect
 
 <!-- https://github.com/camunda/product-hub/issues/2851 -->
 
-#### Google Cloud Platform storage connector
+#### Google Cloud storage connector
 
-Use the new Google Cloud Platform storage connector for easy document storage and retrieval directly within Camunda workflows, streamlining document management without custom development.
+Use the new Google Cloud storage connector for easy document storage and retrieval directly within Camunda workflows, streamlining document management without custom development.
 
 To learn more, see [Google Cloud storage connector](/components/connectors/out-of-the-box-connectors/google-cloud-storage.md).
 
 <!-- https://github.com/camunda/product-hub/issues/2712 -->
 
-#### MCP Client connector (early access)
+#### MCP Client connector (early access) <span class="badge badge--medium" title="This feature is in early access">early access</span>
 
 Use the new MCP Client connector to allow Camunda processes and AI agents to auto-discover and invoke external tools, eliminating hardwired connectors and enabling dynamic, metadata-driven tool integration.
 
@@ -92,17 +92,19 @@ Improvements are made to the Vector database connector as follows:
 - Updated the OpenSearch vector store support to support non-AWS managed instances.
 - Added support for OpenAI embedding models.
 
+To learn more, see [vector database connector](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md).
+
 <!-- https://github.com/camunda/camunda-docs/pull/6047 -->
 
 #### Fetch latest process definitions
 
-The Connectors Runtime is optimized by fetching only the latest process definition versions from Operate, reducing CPU consumption and improving deployment performance, especially in environments with frequent CI/CD-generated process versions.
+The Connectors Runtime is optimized by fetching only the latest process definition versions from Operate. This reduces CPU consumption and improves deployment performance, particularly in environments with frequent CI/CD-generated process versions.
 
 <!-- https://github.com/camunda/product-hub/issues/2572 -->
 
 #### Run process segment
 
-Allows developers to manually execute and test individual tasks or segments (connectors, RPA bots, IDP extractions) without running full processes, improving debugging and development efficiency.
+This feature allows developers to manually execute and test individual tasks or segments (connectors, RPA bots, IDP extractions) without running full processes, improving debugging and development efficiency.
 
 <!-- https://github.com/camunda/product-hub/issues/2453 -->
 
@@ -118,7 +120,12 @@ Allows developers to manually execute and test individual tasks or segments (con
 
 ### Intelligent document processing (IDP) form extraction <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects IDP">IDP</span>
 
-You can use form-based structured [document extraction](/components/modeler/web-modeler/idp/idp-document-extraction.md) to capture data from structured documents. Projects can be shared organization-wide, enhancing accessibility to extraction capabilities.
+You can use form-based structured document extraction to capture data from structured documents.
+
+- For example, you can use this extraction method for documents with a consistent layout, such as invoices, tax forms (for example, W-2s, VAT declarations), and loan or insurance applications.
+- Projects can be shared organization-wide, enhancing accessibility to extraction capabilities.
+
+To learn more, see [extract structured data](/components/modeler/web-modeler/idp/idp-structured-extraction.md).
 
 <!-- https://github.com/camunda/product-hub/issues/2707 -->
 
