@@ -315,15 +315,15 @@ ssh -J admin@${BASTION_HOST} admin@${CAMUNDA_IP}
 
 ## 2. Deploy Camunda 8
 
-### Configure and run the installation script
+### Configure and run the installation procedure
 
-1. Navigate to the script directory:
+1. Navigate to the procedure directory:
 
 ```sh
-cd camunda-deployment-references-main/aws/ec2/scripts
+cd camunda-deployment-references-main/aws/ec2/procedure
 ```
 
-The `script` directory contains Bash scripts for installing and configuring Camunda 8.
+The `procedure` directory contains Bash scripts for installing and configuring Camunda 8.
 
 2. Configure script behavior using the following environment variables:
 
