@@ -81,16 +81,16 @@ global:
 
 ## Zeebe Backup with S3
 
-In general, some S3 compatible implementation are not able to properly handle the checksum feature of the S3 client being introduced with version 2.30.0. For more details, you can refer to [this documentation](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/s3-checksums.html).
+In general, some S3 compatible implementations are not able to properly handle the checksum feature of the S3 client being introduced with version 2.30.0. For more details, you can refer to [the AWS documentation](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/s3-checksums.html).
 
-As soon as issues appear that would be related to the checksum, it can be disabled by setting these environment variables on your Zeebe brokers:
+As soon as issues appear related to the checksum, it can be disabled by setting these environment variables on your Zeebe brokers:
 
 ```
 AWS_REQUEST_CHECKSUM_CALCULATION=WHEN_REQUIRED
 AWS_RESPONSE_CHECKSUM_CALCULATION=WHEN_REQUIRED
 ```
 
-They will disable to automated creation of checksums. Furthermore, if you are still encountering issues in terms of MD5 checksums required by your provider you can enable legacy support for the AWS S3 client by setting:
+This will disable automated creation of checksums. If you are still encountering issues with MD5 checksums required by your provider, enable legacy support for the AWS S3 client by setting:
 
 ```
 ZEEBE_BROKER_DATA_BACKUP_S3_SUPPORTLEGACYMD5=true
