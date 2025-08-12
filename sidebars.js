@@ -1282,10 +1282,6 @@ module.exports = {
         {
           type: "category",
           label: "Manual",
-          link: {
-            type: "doc",
-            id: "self-managed/installation-methods/manual/index",
-          },
           items: [
             "self-managed/installation-methods/manual/install",
             {

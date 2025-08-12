@@ -79,8 +79,8 @@ Any of the following are just suggestions for the minimum viable setup, the sizi
 
 #### Minimum Requirements Per Host
 
-- Modern CPU: 4 cores
-- Memory: 8 GB RAM
+- Modern CPU: 2 cores
+- Memory: 4 GB RAM
 - Storage: 32 GB SSD (**1,000** IOPS recommended; avoid burstable disk types)
 
 Suggested instance types from cloud providers:

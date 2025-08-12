@@ -11,10 +11,7 @@ This page guides you through the manual installation of the Camunda 8 on a local
 
 ## Prerequisites
 
-<!-- TODO: move Linux / Windows / MacOS support to supported envs, win/mac dev only - assumption testing missing -->
-
 - Bare Metal / Virtual Machine
-  <!-- TODO: Any hardware requirements? -->
   - Operating system:
     - Linux
     - Windows/macOS (development only, not supported for production)
@@ -23,6 +20,8 @@ This page guides you through the manual installation of the Camunda 8 on a local
 - Secondary datastore
   - Elasticsearch / AWS OpenSearch, see [supported environments](/reference/supported-environments.md) for version details
     - Explore available deployment options of Elasticsearch in their [documentation](https://www.elastic.co/docs/deploy-manage/deploy)
+
+See also the [Manual Reference Architecture](/self-managed/reference-architecture/manual#requirements) for suggested minimum hardware requirements and networking.
 
 :::tip
 
@@ -63,6 +62,8 @@ Some out-of-the-box connectors are licensed under the [Camunda Self-Managed Free
 - [Amazon EC2](/self-managed/installation-methods/helm/cloud-providers/amazon/aws-ec2.md) - A reference architecture built on top of Amazon Web Services (AWS) using Elastic Cloud Compute (EC2) and Ubuntu
 
 ## Orchestration Cluster
+
+Learn more about the [Orchestration Cluster](/reference/glossary#orchestration-cluster) in the [architectural overview](/self-manged/reference-architecture#architecture), as well as it's configuration options in the [components section](/self-managed/components/orchestration-cluster/overview/).
 
 ### Configure
 
@@ -356,10 +357,6 @@ Installations of Camunda 8 Self-Managed which require a license can provide thei
   </TabItem>
 </Tabs>
 
-:::note
-Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and issue warnings in the logs. These warnings have no impact on startup or functionality, with the exception that Web Modeler has a limitation of five users. To obtain a license, visit the [Camunda Enterprise page](https://camunda.com/platform/camunda-platform-enterprise-contact/).
-:::
-
 ### Run
 
 Once you've downloaded an Orchestration Cluster distribution, extract it into a folder of your choice.
@@ -378,9 +375,45 @@ Once you've downloaded an Orchestration Cluster distribution, extract it into a 
 5. Execute the `camunda.sh` or `camunda.bat` depending on your OS
 6. On first access of http://localhost:8080 you will be asked to create an admin user unless configured differently in [identity](/self-managed/components/orchestration-cluster/identity/configuration.md) by using OIDC or similar.
 
-<!-- TODO: maybe something like useful endpoints? /operate / tasklist /identity. We're still missing a new user getting started page... -->
+:::note
+Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and issue warnings in the logs. These warnings have no impact on startup or functionality, with the exception that Web Modeler has a limitation of five users. To obtain a license, visit the [Camunda Enterprise page](https://camunda.com/platform/camunda-platform-enterprise-contact/).
+:::
 
 ### Run as Service
+
+The following has been tested on Ubuntu using [systemd](https://systemd.io/) and the example has to be adjusted to your use cases.
+It's utilizing a file with environment variables but could be abstracted to use a `application.yaml` instead.
+
+1. Create a `systemd` service called `camunda.service` and adjust it fit your own paths, user and group in `/lib/systemd/system/camunda.service`.
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/compute/debian/configs/camunda.service
+```
+
+2. Change the permissions on `/lib/systemd/system/camunda.service` to `644`
+
+```bash
+sudo chmod 644 /lib/systemd/system/camunda.service
+```
+
+3. Start the new service
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl start camunda.service
+```
+
+4. Verify the service status
+
+```bash
+systemctl status camunda.service
+```
+
+Logs can be viewed via e.g.
+
+```bash
+journalctl -e -u camunda
+```
 
 ### Verify
 
@@ -402,7 +435,7 @@ The logs of the Orchestration Cluster will contain something like the following 
 	io.camunda.application.StandaloneCamunda - Started StandaloneCamunda in 9.376 seconds (process running for 9.817)
 ```
 
-You can use the [Orchestration Cluster REST API](http://localhost:3000/docs/next/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview/) to check the topology of Zeebe.
+You can use the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview/) to check the topology of Zeebe.
 
 ```bash
 # username:password depends on the admin user you created on first startup
@@ -500,6 +533,8 @@ curl localhost:9600/actuator/health
 
 ## Connectors
 
+Learn more about the [Connectors](/reference/glossary#connector) in the [architectural overview](/self-manged/reference-architecture#architecture), as well as it's configuration options in the [components section](/self-managed/components/connectors/overview/).
+
 ### Configure
 
 When running Connectors on the same machine as the Orchestration Cluster, one has to consider the ports as Connectors will default on `8080` as well.
@@ -568,6 +603,40 @@ java -cp "/home/user/connectors/*" "io.camunda.connector.runtime.app.ConnectorRu
 This starts a Zeebe client, registering the defined connector as a job worker. By default, it connects to a local Zeebe instance at port `26500`.
 
 ### Run as Service
+
+The following has been tested on Ubuntu using [systemd](https://systemd.io/) and the example has to be adjusted to your use cases.
+It's utilizing a file with environment variables but could be abstracted to use a `application.yaml` instead.
+
+1. Create a `systemd` service called `camunda-connectors.service` and adjust it fit your own paths, user and group in `/lib/systemd/system/camunda-connectors.service`.
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/compute/debian/configs/connectors.service
+```
+
+2. Change the permissions on `/lib/systemd/system/camunda-connectors.service` to `644`
+
+```bash
+sudo chmod 644 /lib/systemd/system/camunda-connectors.service
+```
+
+3. Start the new service
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl start camunda-connectors.service
+```
+
+4. Verify the service status
+
+```bash
+systemctl status camunda-connectors.service
+```
+
+Logs can be viewed via e.g.
+
+```bash
+journalctl -e -u camunda-connectors
+```
 
 ### Verify
 
@@ -643,8 +712,8 @@ A local setup of Identity in Camunda 8 is not yet supported out-of-the-box, use 
 
 ## Optimize
 
-The installation of Optimize is described in [Optimize Setup](/self-managed/components/optimize/overview.md). A local setup in Camunda 8 is not yet supported out-of-the-box, use [Docker](/self-managed/installation-methods/docker/docker.md#optimize) instead.
+A local setup in Camunda 8 is not yet supported out-of-the-box, use [Docker](/self-managed/installation-methods/docker/docker.md#optimize) instead.
 
 ## Web Modeler
 
-A local setup of Web Modeler in Camunda 8 is not yet supported out-of-the-box, use [Docker](/self-managed/installation-methods/docker/docker.md#web-modeler) instead.
+A local setup of Web Modeler in Camunda 8 is not yet supported out-of-the-box, use [Docker](/self-managed/installation-methods/docker/docker.md) instead.
