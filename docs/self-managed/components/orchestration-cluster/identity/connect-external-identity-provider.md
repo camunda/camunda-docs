@@ -14,7 +14,7 @@ This guide explains how to configure the Orchestration Cluster to use an externa
 **User Interface access:**
 
 Users authenticate via the **OIDC Authorization Code Flow**. This means users are redirected to your Identity Provider to log in, and Camunda receives a token to establish the session.
-Claims from the token are used to identify the user's username and, optionally, groups for authorization.
+Claims from the token are used to identify the user's username and, optionally, groups for easier assignment and management.
 In addition, Mapping Rules can be used to map token claims to Camunda roles, authorizations, or tenants.
 
 Note that user information is not stored in the Orchestration Cluster when using OIDC. Hence you will notice that features like user search, user validation on assigning authorizations or tenants and user management are not available in the Orchestration Cluster Identity UI when using OIDC.
@@ -31,7 +31,7 @@ For information on configuring Connectors, job workers, or other applications to
 
 ### Goal of this guide
 
-By the end of this guide your Users should be able to authenticate to the Camunda 8 Orchestration Cluster using your own Identity Provider.
+By the end of this guide your users should be able to authenticate to the Camunda 8 Orchestration Cluster using your own Identity Provider.
 
 ### Prerequisites
 
@@ -129,9 +129,11 @@ global.security.authentication.oidc.scope: ["openid"]
 
 - _Redirect URI_: By default, the redirect URI is `http://localhost:8080/sso-callback`. Update this if your deployment uses a different hostname or port.
 
-- _Username claim_: By default, the `sub` (subject) claim from the ID token is used as the username. If you want to use a different claim (such as `preferred_username` or `email`), ensure your Identity Provider includes it in the token and set the `username-claim` property accordingly. You can use a [JSONPath expression](https://www.rfc-editor.org/rfc/rfc9535.html) to locate the username claim in the token (e.g. `$['camundaorg']['username']`).
+- _Username claim_: By default, the `sub` (subject) claim from the token is used as the username. If you want to use a different claim (such as `preferred_username` or `email`), ensure your Identity Provider includes it in the token and set the `username-claim` property accordingly. You can use a [JSONPath expression](https://www.rfc-editor.org/rfc/rfc9535.html) to locate the username claim in the token (e.g. `$['camundaorg']['username']`).
 
 #### Identity Provider Example Configurations
+
+Examples are provided using HELM values notation, but you can apply the same using application.yaml or environment variables as above.
 
 <Tabs groupId="idpExamples" defaultValue="entraid">
 <TabItem value="entraid" label="Microsoft EntraID">
@@ -170,7 +172,7 @@ If login is successful, you will see that you are not authorized to access the O
 
 ### Step 7: Configure Admin Role for Users
 
-By default, authorizations are enabled which means that users cannot access any Orchestration Cluster UI or APIs - except authorizations have been granted to them.
+By default, [authorizations](../../../components/concepts/access-control/authorizations.md) are enabled which means that users cannot access any Orchestration Cluster UI or APIs - except authorizations have been granted to them.
 
 In order to allow users to access the Orchestration Cluster UI, you can assign the "admin" role to a user from your Identity Provider:
 <Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Application.yaml', value: 'yaml' }, {label: 'Environment variables', value: 'env' },{label: 'Helm values', value: 'helm' }]}>
@@ -194,6 +196,10 @@ global.security.initialization.defaultRoles.admin.users[0]: <YOUR_USERNAME>
 </Tabs>
 
 Replace `<YOUR_USERNAME>` with the actual username as provided by your Identity Provider (matching the claim configured as `username-claim`).
+
+Restart your Orchestration Cluster and verify that the chosen user has the Admin Role, e.g. by visiting `localhost:8080/identity/roles/admin/users`.
+
+If your username shows up, go ahead and Configure your own Groups, Mapping Rules or continue setting up [authorizations](../../../components/concepts/access-control/authorizations.md) for other users.
 
 ---
 
@@ -225,7 +231,7 @@ global.security.authentication.oidc.groupsClaim: <YOUR_GROUPSCLAIM>
 </TabItem>
 </Tabs>
 
-### (Optional) Step 9: Advanced Mapping Rules
+### (Optional) Step 9: Mapping Rules
 
 For advanced scenarios, such as mapping Identity Provider claims to Camunda roles, authorizations or tenants, you can use mapping rules. See the [configuration reference](./configuration.md) for details on how to define mapping rules.
 
@@ -245,7 +251,7 @@ By the end of this guide your Connectors, Job workers or other applications usin
 
 Before configuring Camunda, perform these high-level steps in your Identity Provider:
 
-1. **Register a new application/client** for your Job Worker in your Identity Provider.
+1. **Register a new application/client** for your Job worker in your Identity Provider.
    - Create a new application / client in your Identity Provider
    - Configure the necessary scopes (e.g., `openid`).
    - Create a new client secret.
@@ -307,7 +313,7 @@ Before configuring Camunda, perform these high-level steps in your Identity Prov
 <dependency>
     <groupId>io.camunda</groupId>
     <artifactId>spring-boot-starter-camunda-sdk</artifactId>
-    <version>8.8.x</version>
+    <version>${version.camundastarter}</version>
 </dependency>
 ```
 
@@ -330,17 +336,54 @@ camunda:
 3. Verify authentication in code:
 
 ```java
-@Autowired
-private CamundaClient client;
+@SpringBootApplication
+public class App implements CommandLineRunner
+{
+	  @Autowired
+	  private CamundaClient client;
 
-public static void main(String[] args) {
-  Topology t = client.newTopologyRequest().send().join();
-  System.out.println(t.toString());
+	  public static void main(String[] args) {
+		  SpringApplication.run(App.class, args);
+
+	  }
+	  @Override
+		public void run(final String... args) {
+		  Topology t = client.newTopologyRequest().send().join();
+		    System.out.println(t.toString());
+	  }
 }
 ```
 
 </TabItem>
 <TabItem value="connectorruntime" label="Camunda Connector Runtime">
+1. Configure your application.yaml:
+
+```yaml
+camunda:
+  client:
+    mode: self-managed
+    auth:
+      client-id: <YOUR_CLIENT_ID>
+      client-secret: <YOUR_CLIENT_SECRET>
+      token-url: <YOUR_AUTHORIZATION_SERVER>
+      audience: <YOUR_CLIENT_ID>
+      scope: <YOUR_CLIENT_ID_FROM_OC>
+    grpc-address: grpc://localhost:26500
+    rest-address: http://localhost:8080
+```
+
+2. Add the following dependencies to your project:
+
+```xml
+<dependency>
+    <groupId>io.camunda.connector</groupId>
+    <artifactId>spring-boot-starter-camunda-connectors</artifactId>
+    <version>${version.connectors}</version>
+</dependency>
+```
+
+Note: You can run the Connector Runtime simply using Helm or Docker Image, too.
+
 </TabItem>
 </Tabs>
 
