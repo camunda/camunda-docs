@@ -259,6 +259,10 @@ Before configuring Camunda, perform these high-level steps in your Identity Prov
 
 ### Step 2: Configure your worker application
 
+Depending on your application type (e.g., standalone Java application, Spring Boot application), the configuration steps may vary.
+
+- _Audience Validation_: If you have configured the audiences property for the Orchestration Cluster (`camunda.security.authentication.oidc.audiences`), the Orchestration Cluster will validate the audience claim in the token against the configured audiences. Make sure that you token has the correct audience from the Orchestration Cluster above or add your audience in the Orchestration Cluster configuration.
+
 <Tabs groupId="camundaclientopts" defaultValue="camundaclient" >
 <TabItem value="camundaclient" label="Camunda Client">
 1) Add dependency to your Java Project:
