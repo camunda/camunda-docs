@@ -1665,9 +1665,11 @@ module.exports = {
       label: "Upgrade to Camunda 8.8",
       link: {
         type: "doc",
-        id: "self-managed/update/administrators/prepare-for-admin-update",
+        id: "self-managed/update/administrators/admin-update-overview",
       },
-      items: ["self-managed/update/administrators/run-admin-update"],
+      items: [
+        "self-managed/update/administrators/prepare-for-admin-update",
+        "self-managed/update/administrators/run-admin-update"],
     },
   ],
 };

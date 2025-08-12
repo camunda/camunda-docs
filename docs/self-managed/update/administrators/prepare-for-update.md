@@ -1,6 +1,6 @@
 ---
 id: prepare-for-admin-update
-title: "Prepare and plan an update"
+title: "Prepare and plan"
 description: "Prepare and plan an update to Camunda 8.8 Self-Managed – Administrator guide."
 ---
 

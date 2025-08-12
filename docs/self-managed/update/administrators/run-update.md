@@ -24,7 +24,7 @@ It assumes you have completed all steps in [**Prepare for update**](./prepare-fo
 - ✅ Required secrets exported (Operate, Tasklist, Identity, etc.)
 - ✅ Team responsibilities and runbooks shared
 
-## Step 2 – Choose your execution path
+## Step 2 – Run the update with Helm
 
 ### Helm chart upgrade
 
@@ -33,36 +33,22 @@ If you are using Kubernetes with the Camunda Helm chart, follow the dedicated up
 <DocCardList items={[{type:"link", href:"/docs/next/self-managed/installation-methods/helm/upgrade/upgrade-hc-870-880/", label: "Helm chart Upgrade: 8.7 to 8.8", docId:"self-managed/installation-methods/helm/upgrade/upgrade-hc-870-880"}
 ]}/>
 
-Consult the Helm guide for upgrade options, secret handling, and migration job monitoring.
+Consult the Helm guide for upgrade options, secret handling, and migration job monitoring. 
 
 ### Docker images
 
 Ensure you download the latest images.  
 For offline environments, see [Air-gapped installation](../../installation-methods/helm/configure/air-gapped-installation.md).
 
-For production deployments using Docker images:
+:::info Docker Compose
+Camunda-provided Docker Compose files are only intended for development and testing purposes, and they should never be used for production environments. Docker Compose lacks the capabilities required for a production-ready system, such as automated migration job handling, high availability, failover support, scalable persistent storage management, and robust secret management with rotation.
 
-:::info Docker vs. Docker Compose
-Docker images are supported for production use on Linux systems.  
-Camunda-provided Docker Compose files are intended for **development environments only** and should not be used in production.
+Because of these limitations, Camunda does not supply automated migration scripts for Docker Compose setups. If you still need to update a development environment, you can follow the [Component upgrade guides](../../components/components-upgrade/) to manually update each service.
 
-For production environments, we recommend using Kubernetes or developing a custom deployment process using Infrastructure as Code tools (e.g., Terraform, Ansible, CloudFormation).
+For production deployments, we recommend either using Kubernetes with the official Camunda Helm chart or creating a custom deployment process with Infrastructure as Code tools such as Terraform, Ansible, or AWS CloudFormation.
 :::
 
-## Step 3 – Run the update with Helm
-
-```bash
-# Pull latest chart metadata
-helm repo update
-
-# Execute upgrade (values.yaml contains your secrets & overrides)
-helm upgrade camunda-platform camunda/camunda-platform \
-  --version 13.0.1 \
-  --values upgrade-880-values.yaml \
-  --namespace camunda
-```
-
-## Step 4 – Validate platform health
+## Step 3 – Validate platform health
 
 After a successful upgrade:
 
@@ -71,7 +57,7 @@ After a successful upgrade:
 - Run your post-update validation suite.  
   _(Add link to validation steps if available.)_
 
-## Step 5 – Perform post-update tasks
+## Step 4 – Perform post-update tasks
 
 - Notify application teams that the platform is ready.
 - Monitor resource usage and error rates for 24–48 hours.
