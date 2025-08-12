@@ -508,8 +508,6 @@ Additionally, Connectors will need some form of authentication to be able to com
 
 By default it will try to connect to `localhost:8080` and `localhost:26500` for the Orchestration Cluster REST API and Zeebe.
 
-To update Operate versions, visit the [guide to update guide](/self-managed/update/administrators/prepare-for-update.md).
-
 <Tabs>
   <TabItem value="env" label="Environment variables">
 
