@@ -279,5 +279,3 @@ Development and testing scenarios that are performance-sensitive may
 [disable authentication entirely](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md#no-authentication-local-development), 
 or use 
 [OIDC Authentication](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md#oidc-access-token-authentication-using-client-credentials).
-
-Basic Authentication is not recommended for production use, where OIDC should be preferred. 
