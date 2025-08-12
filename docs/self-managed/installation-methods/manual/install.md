@@ -9,7 +9,7 @@ import TabItem from '@theme/TabItem';
 
 This page guides you through the manual installation of the Camunda 8 on a local or virtual machine.
 
-The [Reference Architecture > Manual](/self-managed/reference-architecture/manual) is a recommended read to get a general understanding of the environment.
+The [Reference Architecture > Manual](/self-managed/reference-architecture/manual.md) is a recommended read to get a general understanding of the environment.
 
 ## Prerequisites
 
@@ -23,7 +23,7 @@ The [Reference Architecture > Manual](/self-managed/reference-architecture/manua
   - Elasticsearch / AWS OpenSearch, see [supported environments](/reference/supported-environments.md) for version details
     - Explore available deployment options of Elasticsearch in their [documentation](https://www.elastic.co/docs/deploy-manage/deploy)
 
-See also the [Reference Architecture > Manual](/self-managed/reference-architecture/manual#requirements) for suggested minimum hardware requirements and networking.
+See also the [Reference Architecture > Manual](/self-managed/reference-architecture/manual.md#requirements) for suggested minimum hardware requirements and networking.
 
 :::tip
 
@@ -61,11 +61,11 @@ Some out-of-the-box connectors are licensed under the [Camunda Self-Managed Free
 
 ## Reference Architecture
 
-- [Amazon EC2](/self-managed/installation-methods/helm/cloud-providers/amazon/aws-ec2.md) - A reference architecture built on top of Amazon Web Services (AWS) using Elastic Cloud Compute (EC2) and Ubuntu
+- [Amazon EC2](/self-managed/installation-methods/manual/cloud-providers/amazon/aws-ec2.md) - A reference architecture built on top of Amazon Web Services (AWS) using Elastic Cloud Compute (EC2) and Ubuntu
 
 ## Orchestration Cluster
 
-Learn more about the [Orchestration Cluster](/reference/glossary#orchestration-cluster) in the [architectural overview](/self-manged/reference-architecture#architecture), as well as it's configuration options in the [components section](/self-managed/components/orchestration-cluster/overview/).
+Learn more about the [Orchestration Cluster](/reference/glossary.md#orchestration-cluster) in the [architectural overview](/self-managed/reference-architecture/reference-architecture.md#architecture), as well as it's configuration options in the [components section](/self-managed/components/orchestration-cluster/overview.md).
 
 ### Configure
 
@@ -437,7 +437,7 @@ The logs of the Orchestration Cluster will contain something like the following 
 	io.camunda.application.StandaloneCamunda - Started StandaloneCamunda in 9.376 seconds (process running for 9.817)
 ```
 
-You can use the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview/) to check the topology of Zeebe.
+You can use the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) to check the topology of Zeebe.
 
 ```bash
 # username:password depends on the admin user you created on first startup
@@ -535,7 +535,7 @@ curl localhost:9600/actuator/health
 
 ## Connectors
 
-Learn more about the [Connectors](/reference/glossary#connector) in the [architectural overview](/self-manged/reference-architecture#architecture), as well as it's configuration options in the [components section](/self-managed/components/connectors/overview/).
+Learn more about the [Connectors](/reference/glossary.md#connector) in the [architectural overview](/self-managed/reference-architecture/reference-architecture.md#architecture), as well as it's configuration options in the [components section](/self-managed/components/connectors/overview.md).
 
 ### Configure
 

@@ -1292,7 +1292,7 @@ module.exports = {
                   type: "category",
                   label: "Amazon",
                   items: [
-                    "self-managed/installation-methods/helm/cloud-providers/amazon/aws-ec2",
+                    "self-managed/installation-methods/manual/cloud-providers/amazon/aws-ec2",
                   ],
                 },
               ],
