@@ -7,8 +7,6 @@ sidebar_label: "Install"
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-<!-- TODO: starting from a clean slate, later rename to install.md -->
-
 This page guides you through the manual installation of the Camunda 8 on a local or virtual machine.
 
 ## Prerequisites
