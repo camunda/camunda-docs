@@ -1425,6 +1425,25 @@ module.exports = {
           },
           items: [
             {
+              type: "category",
+              label: "Core settings and features",
+              link: {
+                type: "doc",
+                id: "self-managed/components/orchestration-cluster/core-settings/overview",
+              },
+              items: [
+                {
+                  Configuration: [],
+                },
+                {
+                  Concepts: [],
+                },
+                {
+                  Migration: [],
+                },
+              ],
+            },
+            {
               Zeebe: [
                 {
                   "Zeebe Gateway": [
