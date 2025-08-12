@@ -89,7 +89,7 @@ The MCP Client connector is released as an [early access alpha feature](/compone
 
 Improvements are made to the Vector database connector as follows:
 
-- Updated the OpenSearch vector store support to support non-AWS managed instances.
+- Updated the OpenSearch vector store to support non-AWS managed instances.
 - Added support for OpenAI embedding models.
 
 To learn more, see [vector database connector](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md).
