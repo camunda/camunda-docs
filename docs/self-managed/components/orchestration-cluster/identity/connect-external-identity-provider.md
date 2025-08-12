@@ -172,7 +172,7 @@ If login is successful, you will see that you are not authorized to access the O
 
 ### Step 7: Configure Admin Role for Users
 
-By default, [authorizations](../../../components/concepts/access-control/authorizations.md) are enabled which means that users cannot access any Orchestration Cluster UI or APIs - except authorizations have been granted to them.
+By default, [authorizations](../../../../components/concepts/access-control/authorizations.md) are enabled which means that users cannot access any Orchestration Cluster UI or APIs - except authorizations have been granted to them.
 
 In order to allow users to access the Orchestration Cluster UI, you can assign the "admin" role to a user from your Identity Provider:
 <Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Application.yaml', value: 'yaml' }, {label: 'Environment variables', value: 'env' },{label: 'Helm values', value: 'helm' }]}>
@@ -199,7 +199,7 @@ Replace `<YOUR_USERNAME>` with the actual username as provided by your Identity 
 
 Restart your Orchestration Cluster and verify that the chosen user has the Admin Role, e.g. by visiting `localhost:8080/identity/roles/admin/users`.
 
-If your username shows up, go ahead and Configure your own Groups, Mapping Rules or continue setting up [authorizations](../../../components/concepts/access-control/authorizations.md) for other users.
+If your username shows up, go ahead and Configure your own Groups, Mapping Rules or continue setting up [authorizations](../../../../components/concepts/access-control/authorizations.md) for other users.
 
 ---
 
