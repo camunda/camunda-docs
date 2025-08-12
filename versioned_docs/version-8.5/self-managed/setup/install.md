@@ -104,7 +104,7 @@ Installing all the components in a cluster requires all Docker images to be down
 
 For air-gapped environments, refer to [installing in an air-gapped environment](/self-managed/setup/guides/air-gapped-installation.md).
 
-By default the Helm chart uses [open-source images from Bitnami](https://github.com/bitnami/containers). For production installations, we recommend using Bitnami secure images, see [install with Bitnami secure images](#install-with-bitnami-secure-images).
+By default, the Helm chart uses [open-source images from Bitnami](https://github.com/bitnami/containers). For production installations, we recommend using Bitnami secure images, see [install with Bitnami secure images](#install-with-bitnami-secure-images).
 
 Review the progress of your deployment by checking if the Kubernetes pods are up and running with the following:
 
@@ -166,7 +166,7 @@ helm install camunda camunda/camunda-platform --version 8.1 \
 
 ### Install with Bitnami secure images
 
-By default, the Camunda Helm chart uses [open-source images provided by Bitnami](https://github.com/bitnami/containers) by default. For production environments, Camunda recommends switching to [**Bitnami secure images**](https://bitnami.com/), which are hardened, enterprise-grade versions.
+By default, the Camunda Helm chart uses [open-source images provided by Bitnami](https://github.com/bitnami/containers). For production environments, we recommend switching to [**Bitnami secure images**](https://bitnami.com/), which are hardened, enterprise-grade versions.
 
 These secure images:
 
@@ -202,7 +202,7 @@ This file includes a reference to the `commonVendorPullSecrets` parameter used t
 The `commonVendorPullSecrets` is required because `global.image.pullSecrets` does **not** apply when accessing Bitnami charts.
 :::
 
-The default secret name used to access image repository is `camunda-registry-secret` .
+The default secret name used to access image repository is `camunda-registry-secret`.
 You can override it using `--set`, a custom `values-enterprise.yaml` file, or any other [Helm value override mechanism](https://helm.sh/docs/chart_template_guide/values_files/#using-helm-install--f).
 
 Use the following command to install Camunda with Bitnami secure images and your registry secret:

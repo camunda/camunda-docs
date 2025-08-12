@@ -157,7 +157,7 @@ Installing all the components in a cluster requires all Docker images to be down
 
 For air-gapped environments, refer to [installing in an air-gapped environment](/self-managed/setup/guides/air-gapped-installation.md).
 
-By default the Helm chart uses [open-source images from Bitnami](https://github.com/bitnami/containers). For production installations, we recommends using Bitnami secure images, see [Install with Bitnami secure images](#install-with-bitnami-secure-images).
+By default, the Helm chart uses [open-source images from Bitnami](https://github.com/bitnami/containers). For production installations, we recommend using Bitnami secure images, see [Install with Bitnami secure images](#install-with-bitnami-secure-images).
 
 Review the progress of your deployment by checking if the Kubernetes pods are up and running with the following:
 
