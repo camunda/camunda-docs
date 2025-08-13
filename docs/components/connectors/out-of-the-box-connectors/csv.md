@@ -21,13 +21,14 @@ The **CSV connector** supports operations to [read](#read-csv) and [write](#writ
 
 Reads a CSV from a text or a document and converts it into an array of JSON records.
 
-| Property           | Type               | Description                                                | Required | Example                                              |
-| ------------------ | ------------------ | ---------------------------------------------------------- | -------- | ---------------------------------------------------- |
-| Data               | Document or String | The CSV data as a document or text                         | Yes      | [Example CSV](#example-csv-input)                    |
-| Delimiter          | String             | The delimiter used to separate each column                 | No       | Defaults to `,`                                      |
-| Skip header record | Boolean            | Whether to skip the first row (header) in the records      | No       | Defaults to `true`                                   |
-| Headers            | Array of strings   | Used when no header is present or to override column names | No       | Defaults to `[]`. Example: `["name","cost","count"]` |
-| Row type           | String             | Determines the structure of the result records.            | No       | Defaults to `Object`. Either `Object` or `Array`.    |
+| Property           | Type                                              | Description                                                                                                                                                                                                                                                                                                     | Required | Example                                              |
+| ------------------ | ------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ---------------------------------------------------- | --- |
+| Data               | Document or String                                | The CSV data as a document or text                                                                                                                                                                                                                                                                              | Yes      | [Example CSV](#example-csv-input)                    |
+| Delimiter          | String                                            | The delimiter used to separate each column                                                                                                                                                                                                                                                                      | No       | Defaults to `,`                                      |
+| Skip header record | Boolean                                           | Whether to skip the first row (header) in the records                                                                                                                                                                                                                                                           | No       | Defaults to `true`                                   |
+| Headers            | Array of strings                                  | Used when no header is present or to override column names                                                                                                                                                                                                                                                      | No       | Defaults to `[]`. Example: `["name","cost","count"]` |
+| Row type           | String                                            | Determines the structure of the result records.                                                                                                                                                                                                                                                                 | No       | Defaults to `Object`. Either `Object` or `Array`.    |
+| Record Mapping     | [FEEL](../../../modeler/feel/what-is-feel) script | The FEEL script will be evaluated against every record. All data returned by this mapping script will be part of the results. This can be useful if you want to parse the string based CSV data into different types like numbers. Returning `null` leads to an exclusion of the record from the final results. | No       | [Example script](#example-with-record-mapping)       |     |
 
 #### Example CSV `Data` input:
 
@@ -91,6 +92,44 @@ Based on the `Array` [example](#example-output-for-row-type-array) above, you ca
 {
   sum: sum(for r in records return number(r[2]))
 }
+```
+
+#### Example with record mapping
+
+Based on the data of the `Object` [example](#example-output-for-row-type-object) above, we can use the following [FEEL](../../../modeler/feel/what-is-feel) script to extract only the `product` and the `price` converted to a number per record:
+
+```
+{
+  product: record.product,
+  price: number(record.price)
+}
+```
+
+Leading to the following output:
+
+```
+[
+  {"product":"Wireless Mouse","price":29.99},
+  {"product":"Office Chair","price":149.5},
+  {"product":"USB Cable","price":12.99},
+  {"product":"Monitor Stand","price":45},
+  {"product":"Desk Lamp","price":24.95}
+]
+```
+
+We can also use the record mapping as a filter to only include certain records in the final results:
+
+```
+if number(record.price) >= 30 then {product: record.product, price: number(record.price)} else null
+```
+
+This will exclude all products with a price lower than 30 from the final resutls:
+
+```
+[
+  {"product":"Office Chair","price":149.5},
+  {"product":"Monitor Stand","price":45}
+]
 ```
 
 ### Write CSV
