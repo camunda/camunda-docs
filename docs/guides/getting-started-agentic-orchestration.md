@@ -119,7 +119,7 @@ In this example, you can quickly test the AI agent using the [Play](/components/
 
 1. Select the **Play** tab.
 1. Select the cluster you want to deploy and play the process on.
-1. Open the Start form and add a [starting prompt](example-prompts) for the AI agent. For example, enter "Tell me a joke" in the **How can I help you today?** field, and click **Start instance**.
+1. Open the Start form and add a [starting prompt](#example-prompts) for the AI agent. For example, enter "Tell me a joke" in the **How can I help you today?** field, and click **Start instance**.
 1. The AI agent analyzes your prompt, decides what tools to use, and responds with an answer. Open the **Task form** to view the result.
 1. You can follow up with more prompts to continue testing the AI agent. Select the **Are you satisfied with the result?** checkbox when you want to finish your testing and complete the process.
 
