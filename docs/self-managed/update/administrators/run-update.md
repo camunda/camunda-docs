@@ -30,15 +30,12 @@ It assumes you have completed all steps in [**Prepare for update**](./prepare-fo
 
 If you are using Kubernetes with the Camunda Helm chart, follow the dedicated update instructions:
 
-<DocCardList items={[{type:"link", href:"/docs/next/self-managed/installation-methods/helm/upgrade/upgrade-hc-870-880/", label: "Helm chart Upgrade: 8.7 to 8.8", docId:"self-managed/installation-methods/helm/upgrade/upgrade-hc-870-880"}
+<DocCardList items={[{type:"link", href:"/docs/next/self-managed/installation-methods/helm/upgrade/upgrade-hc-870-880/", label: "Helm chart upgrade: 8.7 to 8.8", docId:"self-managed/installation-methods/helm/upgrade/upgrade-hc-870-880"}
 ]}/>
 
-Consult the Helm guide for upgrade options, secret handling, and migration job monitoring. 
-
-### Docker images
-
-Ensure you download the latest images.  
-For offline environments, see [Air-gapped installation](../../installation-methods/helm/configure/air-gapped-installation.md).
+The Helm guide covers update options, handling of secrets, and monitoring of migration jobs.  
+If you are creating your own deployment scripts, you can use the official Helm charts as a reference or technical specification.  
+You may also want to review the [component-level upgrade procedures](../../components/components-upgrade/870-to-880.md) for details on how each individual component is getting updates.
 
 :::info Docker Compose
 Camunda-provided Docker Compose files are only intended for development and testing purposes, and they should never be used for production environments. Docker Compose lacks the capabilities required for a production-ready system, such as automated migration job handling, high availability, failover support, scalable persistent storage management, and robust secret management with rotation.
