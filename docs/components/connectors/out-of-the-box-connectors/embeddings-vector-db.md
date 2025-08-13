@@ -134,7 +134,7 @@ It is also possible to specify any custom model that supports text embedding and
 
 The following parameters are required to use Amazon Bedrock as an embedding model:
 
-- **Access key**: Provide an access key of a user with permissions to the Amazon SageMaker `InvokeModel` action.
+- **Access key**: Provide an access key of a user with permissions to the Amazon Bedrock `InvokeModel` action.
 - **Secret key**: Provide the secret key of the user with the access key provided above.
 - **Region**: The AWS region where the Amazon Bedrock model is hosted, for example `us-east-1`. Consult the [AWS documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/models-regions.html) for model support by region.
 - **Model name**: The Amazon Bedrock embedding model. There are three options:
@@ -227,7 +227,7 @@ Two authentication methods are currently supported:
 [
 {label: 'Amazon OpenSearch', value: 'amazon-opensearch' },
 {label: 'Azure AI Search', value: 'azure-ai-search' },
-{label: 'Azure Cosmos DB NoSql', value: 'azure-cosmos-db' },
+{label: 'Azure Cosmos DB NoSQL', value: 'azure-cosmos-db' },
 {label: 'Elasticsearch', value: 'elasticsearch' },
 {label: 'OpenSearch', value: 'opensearch' }
 ]}>
@@ -302,17 +302,17 @@ Two authentication methods are currently supported:
 
 Enter the following parameters:
 
-- **Endpoint**: The Azure Cosmos DB NoSql endpoint URL, for example `https://<your-resource-name>.documents.azure.com/`.
-- **Authentication**: Select the authentication type to use to authenticate the connector with Azure Cosmos DB NoSql.
-- **Database name**: The name of the Azure Cosmos DB NoSql database.
-- **Container name**: The name of the Azure Cosmos DB NoSql container.  
+- **Endpoint**: The Azure Cosmos DB NoSQL endpoint URL, for example `https://<your-resource-name>.documents.azure.com/`.
+- **Authentication**: Select the authentication type to use to authenticate the connector with Azure Cosmos DB NoSQL.
+- **Database name**: The name of the Azure Cosmos DB NoSQL database.
+- **Container name**: The name of the Azure Cosmos DB NoSQL container.  
   _Note:_ The container must already exist and have an `/id` partition key.
-- **Consistency level**: The consistency level for the Azure Cosmos DB NoSql container. The default value is `Eventual`.
+- **Consistency level**: The consistency level for the Azure Cosmos DB NoSQL container. The default value is `Eventual`.
 - **Distance function**: The distance function to use for vector similarity search. The default value is `Cosine`.
 - **Vector index type**: The vector index type to use. The default value is `Flat`.
 
 :::info
-For more information about the Azure Cosmos DB NoSql vector search, refer to the [official documentation](https://learn.microsoft.com/en-us/azure/cosmos-db/nosql/vector-search).  
+For more information about the Azure Cosmos DB NoSQL vector search, refer to the [official documentation](https://learn.microsoft.com/en-us/azure/cosmos-db/nosql/vector-search).  
 Please pay special attention to the vector dimensions limitations as stated in the documentation.
 :::
 
