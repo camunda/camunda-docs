@@ -166,7 +166,7 @@ helm install camunda camunda/camunda-platform --version 8.1 \
 
 ### Install with Bitnami secure images
 
-By default, the Camunda Helm chart uses [open-source images provided by Bitnami](https://github.com/bitnami/containers). For production environments, we recommend switching to [**Bitnami secure images**](https://bitnami.com/), which are hardened, enterprise-grade versions.
+By default, the Camunda Helm chart uses [open-source images provided by Bitnami](https://github.com/bitnami/containers). For production environments, Camunda recommends switching to [**Bitnami secure images**](https://bitnami.com/), which are hardened, enterprise-grade versions.
 
 These secure images:
 
