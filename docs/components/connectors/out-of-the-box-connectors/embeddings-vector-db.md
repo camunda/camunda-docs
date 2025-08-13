@@ -227,7 +227,7 @@ Two authentication methods are supported:
 
 ## Vector stores
 
-<Tabs groupId="vector" defaultValue="elasticsearch" queryString values={
+<Tabs groupId="vector" defaultValue="amazon-opensearch" queryString values={
 [
 {label: 'Amazon OpenSearch', value: 'amazon-opensearch' },
 {label: 'Azure AI Search', value: 'azure-ai-search' },
@@ -238,29 +238,29 @@ Two authentication methods are supported:
 
 <TabItem value='elasticsearch'>
 
-The **vector database connector** can use Elasticsearch as a vector store. The Elasticsearch version must be 8+.
-
 Enter the following parameters:
 
-- **Base URL**: The Elasticsearch base URL, including protocol, for example `https://host:port`.
-- **Username**: For the Elasticsearch user that has read/write access.
-- **Password**: For the Elasticsearch user that has read/write access.
-- **Index name**: Name of the index where you wish to store embeddings.
+- **Base URL** – The Elasticsearch base URL, including protocol, for example `https://host:port`.
+- **Username** – For the Elasticsearch user that has read/write access.
+- **Password** – For the Elasticsearch user that has read/write access.
+- **Index name** – Name of the index where you wish to store embeddings.
   - When embedding: If the index is not present, the connector will create a new one.
   - When retrieving: If the index is absent, the connector will raise an error.
+
+:::important
+The Elasticsearch version must be 8+.
+:::
 
 </TabItem>
 
 <TabItem value='opensearch'>
 
-The **vector database connector** can use OpenSearch as a vector store.
-
 Enter the following parameters:
 
-- **Base URL**: The OpenSearch base URL, including protocol, for example `https://host:port`.
-- **Username**: For the OpenSearch user that has read/write access.
-- **Password**: For the OpenSearch user that has read/write access.
-- **Index name**: Name of the index where you wish to store embeddings.
+- **Base URL** – The OpenSearch base URL, including protocol, for example `https://host:port`.
+- **Username** – For the OpenSearch user that has read/write access.
+- **Password** – For the OpenSearch user that has read/write access.
+- **Index name** – Name of the index where you wish to store embeddings.
   - When embedding: If the index is not present, the connector will create a new one.
   - When retrieving: If the index is absent, the connector will raise an error.
 
@@ -268,10 +268,12 @@ Enter the following parameters:
 
 <TabItem value='amazon-opensearch'>
 
-- **Access key** and **Secret key**: Enter AWS IAM credentials for the user that has read/write access.
-- **Server URL**: An Amazon OpenSearch URL _without_ protocol, for example `my-opensearch.aws.com:port`.
-- **Region**: Region of the Amazon OpenSearch instance.
-- **Index name**: Name of the index where you wish to store embeddings.
+Enter the following parameters:
+
+- **Access key** and **Secret key** – Enter AWS IAM credentials for the user that has read/write access.
+- **Server URL** – An Amazon OpenSearch URL _without_ protocol, for example `my-opensearch.aws.com:port`.
+- **Region** – Region of the Amazon OpenSearch instance.
+- **Index name** – Name of the index where you wish to store embeddings.
   - When embedding: If the index is not present, the connector will create a new one.
   - When retrieving: If the index is absent, the connector will raise an error.
 
