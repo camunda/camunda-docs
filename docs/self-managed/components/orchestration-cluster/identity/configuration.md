@@ -80,7 +80,7 @@ The following variables are used to set the identifier pattern of Identity-relat
   <TabItem value="init-yaml" label="application.yaml">
 
 | Application.yaml property                                              | Description                                                              | Default value         |
-|------------------------------------------------------------------------|--------------------------------------------------------------------------|-----------------------|
+| ---------------------------------------------------------------------- | ------------------------------------------------------------------------ | --------------------- |
 | `camunda.security.initialization.identifier-regex`                     | Defines the allowed identifier characters for Identity-related entities. | `^[a-zA-Z0-9_@.+-]+$` |
 | `camunda.security.initialization.users[0].username`                    | The username of the first user.                                          |                       |
 | `camunda.security.initialization.users[0].password`                    | The password of the first user.                                          |                       |
