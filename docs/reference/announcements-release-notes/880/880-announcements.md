@@ -195,6 +195,11 @@ the [8.7 API key attributes overview][camunda8-api-overview].
 With the 8.8 release, the [Web Modeler API](/apis-tools/web-modeler-api/index.md) endpoints under `/api/v1/milestones` are deprecated and scheduled for removal in 8.9.
 Use the corresponding endpoints under `/api/v1/versions` instead.
 
+#### Deprecated: File type `connector_template` in Web Modeler API
+
+With the 8.8 release, the `connector_template` file type in the [Web Modeler API](/apis-tools/web-modeler-api/index.md) endpoint for file creation (`POST /api/v1/files`) is deprecated and will be removed in version 8.10.
+Please use `element_template` instead, which provides equivalent functionality.
+
 ### Camunda Exporter <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
 Camunda web applications used importers and archivers to consume, aggregate, and archive historical data provided by the Elasticsearch (ES) or OpenSearch (OS) exporters.
