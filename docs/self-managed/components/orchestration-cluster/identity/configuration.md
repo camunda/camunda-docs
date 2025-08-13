@@ -98,7 +98,7 @@ The following variables are used to set the identifier pattern of Identity-relat
   <TabItem value="init-helm" label="Helm values">
 
 | Helm value key                                   | Description                                                                          | Default value         |
-|--------------------------------------------------|--------------------------------------------------------------------------------------|-----------------------|
+| ------------------------------------------------ | ------------------------------------------------------------------------------------ | --------------------- |
 | `global.security.initialization.identifierRegex` | Defines the allowed identifier characters for Identity-related entities.             | `^[a-zA-Z0-9_@.+-]+$` |
 | `global.security.initialization.users`           | List of users to initialize (each with username, password, name, email).             |                       |
 | `global.security.initialization.mappingRules`    | List of mapping rule to initialize (each with mappingRuleId, claimName, claimValue). |                       |
