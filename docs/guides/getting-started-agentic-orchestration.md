@@ -81,13 +81,13 @@ To start building your first AI agent, you can use a pre-built Camunda blueprint
 
 ### SaaS
 
-1. Navigate to the [Example AI Agent](https://marketplace.camunda.com/en-US/apps/522492/ai-email-support-agent) blueprint in the Camunda marketplace.
+1. Navigate to the [Example AI Agent](https://marketplace.camunda.com/en-US/apps/587865) blueprint in the Camunda marketplace.
 1. Click **For SAAS** and select the project you want to save the blueprint in, or create a new project and save it in this.
 1. The blueprint BPMN diagram opens in Web Modeler.
 
 ### Self-Managed (local environment)
 
-1. Navigate to the [Example AI Agent](https://marketplace.camunda.com/en-US/apps/522492/ai-email-support-agent) blueprint in the Camunda marketplace.
+1. Navigate to the [Example AI Agent](https://marketplace.camunda.com/en-US/apps/587865) blueprint in the Camunda marketplace.
 1. Click **For SM** and download the blueprint files from the repository.
 1. Open the blueprint BPMN diagram in Desktop Modeler.
 
