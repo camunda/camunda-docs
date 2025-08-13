@@ -9497,6 +9497,7 @@ components:
           x-internal: true
           description: Deprecated and for backward-compatibility only. Use decisionEvaluationKey.
           type: string
+          deprecated: true
         decisionEvaluationKey:
           description: The unique key identifying this decision evaluation.
           type: string
