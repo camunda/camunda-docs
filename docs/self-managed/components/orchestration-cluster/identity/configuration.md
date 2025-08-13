@@ -62,7 +62,7 @@ The following variables are used to set the identifier pattern of Identity-relat
   <TabItem value="init-env" label="Environment variables" default>
 
 | Environment variable                                                  | Description                                                              | Default value         |
-|-----------------------------------------------------------------------|--------------------------------------------------------------------------|-----------------------|
+| --------------------------------------------------------------------- | ------------------------------------------------------------------------ | --------------------- |
 | `CAMUNDA_SECURITY_INITIALIZATION_IDENTIFIERREGEX`                     | Defines the allowed identifier characters for Identity-related entities. | `^[a-zA-Z0-9_@.+-]+$` |
 | `CAMUNDA_SECURITY_INITIALIZATION_USERS[0]_USERNAME`                   | The username of the first user.                                          |                       |
 | `CAMUNDA_SECURITY_INITIALIZATION_USERS[0]_PASSWORD`                   | The password of the first user.                                          |                       |
