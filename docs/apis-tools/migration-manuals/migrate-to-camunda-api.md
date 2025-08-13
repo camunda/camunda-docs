@@ -1,7 +1,7 @@
 ---
 id: migrate-to-camunda-api
-title: Migrate to the Orchestration cluster API
-description: "Migrate from Camunda's V1 component REST APIs to the V2 Orchestration cluster REST API to interact with Camunda 8 clusters, activate jobs, and run user task state operations."
+title: Migrate to the Orchestration Cluster API
+description: "Migrate from Camunda's V1 component REST APIs to the V2 Orchestration Cluster REST API to interact with Camunda 8 clusters, activate jobs, and run user task state operations."
 ---
 
 import Tabs from "@theme/Tabs";

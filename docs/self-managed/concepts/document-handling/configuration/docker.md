@@ -1,6 +1,7 @@
 ---
 id: docker
-title: "Docker Compose"
+sidebar_label: Docker Compose
+title: Document handling configuration in Docker Compose
 description: "Learn more about storage configuration options for Docker Compose setups."
 keywords: ["document handling", "document storage configuration"]
 ---

@@ -26,7 +26,7 @@ This guide assumes you are starting from a fresh Spring Boot project and intend 
 
        <properties>
            <!-- use the desired connectors version -->
-           <version.connectors>8.8.0-SNAPSHOT</version.connectors>
+           <version.connectors>SNAPSHOT</version.connectors>
        </properties>
 
        <dependencies>
