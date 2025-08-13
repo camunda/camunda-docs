@@ -78,11 +78,14 @@ To start building your first AI agent, you can use a pre-built Camunda blueprint
 1. Click **For SM** and download the blueprint files from the repository.
 1. Open the blueprint BPMN diagram in Desktop Modeler.
 
-### About the example model
+### About the example AI agent process
 
-The example AI Agent model process (description)...
+The example AI Agent process is a chatbot that you (the user) can chat and interact with via a [user task form](/components/modeler/forms/camunda-forms-reference.md).
 
 <img src={AiAgentImg} alt="A example AI agent BPMN process diagram"/>
+
+- You can enter your prompts and see the AI agent response in the connected form.
+-
 
 ## Step 2: Configure the...
 
@@ -106,38 +109,53 @@ Configure the connectors:
 3. **Agent connector:**
    - Model ID: default is `anthropic.claude-3.7-sonnet-20240229-v1:0` (change as needed) -->
 
-## Step 3: Deploy and run your AI agent
+## Step 3: Deploy, run, and test your AI agent
 
-You can now run and deploy your AI agent:
+You can now deploy and run your AI agent, and test it as a running process.
 
 ### SaaS
 
-1. ...
+In this example, you can quickly test the AI agent using the [Play](/components/modeler/web-modeler/play-your-process.md) feature.
+
+1. Select the **Play** tab.
+1. Select the cluster you want to deploy and play the process on.
+1. Open the Start form and add a [starting prompt](example-prompts) for the AI agent. For example, enter "Tell me a joke" in the **How can I help you today?** field, and click **Start instance**.
+1. The AI agent analyzes your prompt, decides what tools to use, and responds with an answer. Open the **Task form** to view the result.
+1. You can follow up with more prompts to continue testing the AI agent. Select the **Are you satisfied with the result?** checkbox when you want to finish your testing and complete the process.
+
+:::note
+You can also deploy and run the process, and use Tasklist to complete the forms.
+:::
 
 ### Self-Managed (local environment)
 
 1. ...
 
-## Step 4: Test your AI agent
+### Example prompts {#example-prompts}
 
-Now that your AI agent is running, you can test it using the form linked to the start event.
+The following example prompts are provided as guidance to help you test out your AI agent.
 
-For example:
-
-1. ...
-
-### Example prompts
-
-| Prompt                                      | Description                                                                                                                                                                                |
-| :------------------------------------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| "send ervin a joke"                         | Fetches a list of users, fetches single user record, fetches joke, compiles email - on the email operator task you can add additional feedback like "add emojis" or "translate to french". |
-| "go and fetch \<url\> and tell me about it" | -                                                                                                                                                                                          |
-| "tell me about this document"               | the start form has a document upload field                                                                                                                                                 |
+| Prompt                                      | Description                                                                                                                                                                                                                                               |
+| :------------------------------------------ | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| "Send Ervin a joke"                         | The AI agent fetches a list of users, finds the matching user, fetches a joke, and compiles an email to send to the user (Ervin) with the joke. On the email operator task you can add additional feedback such as "add emojis" or "translate to french". |
+| "Go and fetch \<url\> and tell me about it" | The AI agent fetches the specified URL and provides you with a summary of the content.                                                                                                                                                                    |
+| "Tell me about this document"               | You can upload a document in the prompt form, and get the AI agent to provide you with a summary of the content.                                                                                                                                          |
 
 ## Next steps
 
-Now that you have seen easy it is to build a simple Camunda AI agent, learn more about using agentic orchestration and advanced AI agents in your processes:
+Now that you have seen easy it is to build a simple Camunda AI agent, why not try customizing it to suit your needs?
+
+For example:
+
+- Try adding and configuring more tools in the ad-hoc sub-process for the AI agent to use.
+- ...
+
+Learn more about building and deploying agentic orchestration and advanced AI agents in your processes:
 
 - [Camunda agentic orchestration](/components/agentic-orchestration/agentic-orchestration.md)
 - [Camunda AI agents](/components/agentic-orchestration/ai-agents.md)
-- ...
+- [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md)
+
+:::info Camunda Academy
+Register for the free [Camunda 8 - Agentic Orchestration](https://academy.camunda.com/path/c8-lp-agentic) course and learn how to model, deploy, and manage AI agents seamlessly into your end-to-end processes.
+:::
