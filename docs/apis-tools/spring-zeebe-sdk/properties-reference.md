@@ -1,15 +1,15 @@
 ---
 id: properties-reference
-title: Properties Reference
+title: Properties reference
 ---
 
-Here is the full properties reference for the Camunda Spring SDK.
+Properties for the Camunda Spring SDK.
 
-## Current properties
+## Properties
 
 ### `camunda.client`
 
-Properties related to the Camunda client.
+Properties for the Camunda client.
 
 <table>
 <thead>
@@ -33,7 +33,7 @@ Properties related to the Camunda client.
 </td>
 <td>
 
-Path to a root CA certificate to be used instead of the certificate in the default store.
+The path to a root Certificate Authority (CA) certificate to use instead of the certificate in the default store.
 
 </td>
 </tr>
@@ -49,7 +49,7 @@ Path to a root CA certificate to be used instead of the certificate in the defau
 </td>
 <td>
 
-Whether the Camunda client is enabled. If disabled, no bean is created.
+Enable or disable the Camunda client. If disabled, the client bean is not created.
 
 </td>
 </tr>
@@ -97,7 +97,7 @@ The gRPC address of Camunda that the client can connect to. The address must be 
 </td>
 <td>
 
-Time interval between keep alive messages sent to the gateway.
+The time interval between keep-alive messages sent to the gateway.
 
 </td>
 </tr>
@@ -113,7 +113,7 @@ Time interval between keep alive messages sent to the gateway.
 </td>
 <td>
 
-A custom maxMessageSize allows the client to receive larger or smaller responses from Camunda. Technically, it specifies the maxInboundMessageSize of the gRPC channel.
+A custom `maxMessageSize` sets the maximum inbound message size the client can receive from Camunda. It specifies the `maxInboundMessageSize` of the gRPC channel.
 
 </td>
 </tr>
@@ -129,7 +129,7 @@ A custom maxMessageSize allows the client to receive larger or smaller responses
 </td>
 <td>
 
-A custom maxMetadataSize allows the client to receive larger or smaller response headers from Camunda. Technically, it specifies the maxInboundMetadataSize of the gRPC channel.
+A custom `maxMetadataSize` sets the maximum inbound metadata size the client can receive from Camunda. It specifies the `maxInboundMetadataSize` of the gRPC channel.
 
 </td>
 </tr>
@@ -145,7 +145,7 @@ A custom maxMetadataSize allows the client to receive larger or smaller response
 </td>
 <td>
 
-The time-to-live which is used when none is provided for a message.
+The default time-to-live for a message when no value is provided.
 
 </td>
 </tr>
@@ -161,7 +161,7 @@ The time-to-live which is used when none is provided for a message.
 </td>
 <td>
 
-The client mode to be used. If not set, `saas` mode will be detected based on the presence of a `camunda.client.cloud.cluster-id`.
+The client mode to use. If not set, `saas` mode is detected based on the presence of a `camunda.client.cloud.cluster-id`.
 
 </td>
 </tr>
@@ -177,7 +177,7 @@ The client mode to be used. If not set, `saas` mode will be detected based on th
 </td>
 <td>
 
-Overrides the authority used with TLS virtual hosting. Specifically, to override hostname verification in the TLS handshake. It does not change what host is actually connected to.
+Overrides the authority used with TLS virtual hosting to change hostname verification during the TLS handshake. It does not change the actual host connected to.
 
 </td>
 </tr>
@@ -193,7 +193,7 @@ Overrides the authority used with TLS virtual hosting. Specifically, to override
 </td>
 <td>
 
-If true, will prefer to use REST over gRPC for calls which can be done over both REST and gRPC.
+If `true`, prefers REST over gRPC for operations supported by both protocols.
 
 </td>
 </tr>
@@ -209,7 +209,7 @@ If true, will prefer to use REST over gRPC for calls which can be done over both
 </td>
 <td>
 
-The request timeout used if not overridden by the command.
+The request timeout to use when not overridden by a specific command.
 
 </td>
 </tr>
@@ -225,7 +225,7 @@ The request timeout used if not overridden by the command.
 </td>
 <td>
 
-The request timeout client offset is used in commands where the request timeout is also passed to the server. This ensures that the client timeout does not occur before the server timeout. The client-side timeout for these commands is calculated as the sum of request timeout plus offset.
+The request timeout client offset applies to commands that also pass the request timeout to the server. It ensures the client timeout occurs after the server timeout. For these commands, the client-side timeout equals the request timeout plus the offset.
 
 </td>
 </tr>
@@ -241,7 +241,7 @@ The request timeout client offset is used in commands where the request timeout 
 </td>
 <td>
 
-The REST API address of Camunda that the client can connect to. The address must be an absolute URL, including the scheme. An alternative default is set by both`camunda.client.mode`.
+The REST API address of the Camunda instance that the client can connect to. The address must be an absolute URL, including the scheme. An alternative default is set by both`camunda.client.mode`.
 
 </td>
 </tr>
@@ -257,7 +257,7 @@ The REST API address of Camunda that the client can connect to. The address must
 </td>
 <td>
 
-The tenant identifier which is used for tenant-aware commands when no tenant identifier is set.
+The tenant ID used for tenant-aware commands when no tenant ID is set.
 
 </td>
 </tr>
@@ -266,7 +266,7 @@ The tenant identifier which is used for tenant-aware commands when no tenant ide
 
 ### `camunda.client.auth`
 
-Properties related to the authentication of the Camunda client.
+Properties for authenticating the Camunda client.
 
 <table>
 <thead>
@@ -290,7 +290,7 @@ Properties related to the authentication of the Camunda client.
 </td>
 <td>
 
-The resource for which the access token should be valid. A default is set by `camunda.client.mode: saas` and `camunda.client.auth.method: oidc`.
+The resource for which the access token must be valid. A default is set by `camunda.client.mode: saas` and `camunda.client.auth.method: oidc`.
 
 </td>
 </tr>
@@ -306,7 +306,7 @@ The resource for which the access token should be valid. A default is set by `ca
 </td>
 <td>
 
-Client id to be used when requesting access token from OAuth authorization server.
+The client ID to use when requesting an access token from the OAuth authorization server.
 
 </td>
 </tr>
@@ -322,7 +322,7 @@ Client id to be used when requesting access token from OAuth authorization serve
 </td>
 <td>
 
-Client secret to be used when requesting access token from OAuth authorization server.
+The client secret to use when requesting an access token from the OAuth authorization server.
 
 </td>
 </tr>
@@ -338,7 +338,7 @@ Client secret to be used when requesting access token from OAuth authorization s
 </td>
 <td>
 
-The connection timeout of requests to the OAuth credentials provider.
+The connection timeout for requests to the OAuth credentials provider.
 
 </td>
 </tr>
@@ -354,7 +354,7 @@ The connection timeout of requests to the OAuth credentials provider.
 </td>
 <td>
 
-The location for the credentials cache file.
+The path to the credentials cache file.
 
 </td>
 </tr>
@@ -370,7 +370,7 @@ The location for the credentials cache file.
 </td>
 <td>
 
-Keystore key password used for OAuth identity provider.
+The keystore key password for the OAuth identity provider.
 
 </td>
 </tr>
@@ -386,7 +386,7 @@ Keystore key password used for OAuth identity provider.
 </td>
 <td>
 
-Password to keystore used for OAuth identity provider.
+The keystore password for the OAuth identity provider.
 
 </td>
 </tr>
@@ -402,7 +402,7 @@ Password to keystore used for OAuth identity provider.
 </td>
 <td>
 
-Path to keystore used for OAuth identity provider.
+The path to the keystore for the OAuth identity provider.
 
 </td>
 </tr>
@@ -418,7 +418,7 @@ Path to keystore used for OAuth identity provider.
 </td>
 <td>
 
-Authentication method to be used. If not set, it will be detected based on the presence of username, password, client id and client secret. A default is set by `camunda.client.mode: saas`.
+The authentication method to use. If not set, it is detected based on the presence of a username, password, client ID, and client secret. A default is set by `camunda.client.mode: saas`.
 
 </td>
 </tr>
@@ -434,7 +434,7 @@ Authentication method to be used. If not set, it will be detected based on the p
 </td>
 <td>
 
-Password to be used for basic authentication. A default is set by `camunda.client.auth.method: basic`.
+The password to be use for basic authentication. A default is set by `camunda.client.auth.method: basic`.
 
 </td>
 </tr>
@@ -450,7 +450,7 @@ Password to be used for basic authentication. A default is set by `camunda.clien
 </td>
 <td>
 
-The data read timeout of requests to the OAuth credentials provider.
+The data read timeout for requests to the OAuth credentials provider.
 
 </td>
 </tr>
@@ -466,7 +466,7 @@ The data read timeout of requests to the OAuth credentials provider.
 </td>
 <td>
 
-The resource for which the access token should be valid.
+The resource for which the access token must be valid.
 
 </td>
 </tr>
@@ -498,7 +498,7 @@ The scopes of the access token.
 </td>
 <td>
 
-The authorization server's URL, from which the access token will be requested. A default is set by `camunda.client.mode: saas` and `camunda.client.auth.method: oidc`.
+The authorization server URL from which to request the access token. A default is set by `camunda.client.mode: saas` and `camunda.client.auth.method: oidc`.
 
 </td>
 </tr>
@@ -514,7 +514,7 @@ The authorization server's URL, from which the access token will be requested. A
 </td>
 <td>
 
-Password to truststore used for OAuth identity provider.
+The truststore password for the OAuth identity provider.
 
 </td>
 </tr>
@@ -530,7 +530,7 @@ Password to truststore used for OAuth identity provider.
 </td>
 <td>
 
-Path to truststore used for OAuth identity provider.
+The path to the truststore for the OAuth identity provider.
 
 </td>
 </tr>
@@ -546,7 +546,7 @@ Path to truststore used for OAuth identity provider.
 </td>
 <td>
 
-Username to be used for basic authentication. A default is set by `camunda.client.auth.method: basic`.
+The username to use for basic authentication. A default is set by `camunda.client.auth.method: basic`.
 
 </td>
 </tr>
@@ -555,7 +555,7 @@ Username to be used for basic authentication. A default is set by `camunda.clien
 
 ### `camunda.client.auth.client-assertion`
 
-Properties related to oidc authentication using client-assertion instead of a client secret.
+Properties for OIDC authentication using a client assertion instead of a client secret.
 
 <table>
 <thead>
@@ -579,7 +579,7 @@ Properties related to oidc authentication using client-assertion instead of a cl
 </td>
 <td>
 
-Alias of the key holding the certificate to sign the client assertion certificate. If not set, the first alias from the keystore will be used.
+The alias of the key containing the certificate used to sign the client assertion certificate. If not set, the first alias from the keystore is used.
 
 </td>
 </tr>
@@ -595,7 +595,7 @@ Alias of the key holding the certificate to sign the client assertion certificat
 </td>
 <td>
 
-Password of the key the alias points to. If not set, the password of the keystore will be used.
+The password of the key referenced by the alias. If not set, the keystore password is used.
 
 </td>
 </tr>
@@ -611,7 +611,7 @@ Password of the key the alias points to. If not set, the password of the keystor
 </td>
 <td>
 
-Password of the referenced keystore.
+The password of the referenced keystore.
 
 </td>
 </tr>
@@ -627,7 +627,7 @@ Password of the referenced keystore.
 </td>
 <td>
 
-Path to the keystore where the client assertion certificate is stored.
+The path to the keystore where the client assertion certificate is stored.
 
 </td>
 </tr>
@@ -636,7 +636,7 @@ Path to the keystore where the client assertion certificate is stored.
 
 ### `camunda.client.cloud`
 
-Properties related to the connection of the Camunda client to SaaS. They will only be used to compose default connection details if the client is configured to `camunda.client.mode: saas`.
+Properties for connecting the Camunda client to SaaS. These are used to compose default connection details when the client is configured to `camunda.client.mode: saas`.
 
 <table>
 <thead>
@@ -660,7 +660,7 @@ Properties related to the connection of the Camunda client to SaaS. They will on
 </td>
 <td>
 
-Set the cluster id the Camunda client will connect to.
+The cluster ID the Camunda client connects to.
 
 </td>
 </tr>
@@ -676,7 +676,7 @@ Set the cluster id the Camunda client will connect to.
 </td>
 <td>
 
-Set the domain the Camunda client will connect to. Change this to connect to a non-productive instance of Camunda Cloud.
+The domain the Camunda client connects to. Change this to connect to a non-production instance of Camunda Cloud.
 
 </td>
 </tr>
@@ -692,7 +692,7 @@ Set the domain the Camunda client will connect to. Change this to connect to a n
 </td>
 <td>
 
-Set the port the Camunda client will connect to.
+The port the Camunda client connects to.
 
 </td>
 </tr>
@@ -708,7 +708,7 @@ Set the port the Camunda client will connect to.
 </td>
 <td>
 
-Set the region the Camunda client will connect to.
+The region the Camunda client connects to.
 
 </td>
 </tr>
@@ -717,7 +717,7 @@ Set the region the Camunda client will connect to.
 
 ### `camunda.client.deployment`
 
-Properties related to the automatic deployment at startup.
+Properties for automatic deployment at startup.
 
 <table>
 <thead>
@@ -741,7 +741,7 @@ Properties related to the automatic deployment at startup.
 </td>
 <td>
 
-Whether a deployment will be done using the `@Deployment` annotation.
+Indicates if deployment uses the `@Deployment` annotation.
 
 </td>
 </tr>
@@ -750,7 +750,7 @@ Whether a deployment will be done using the `@Deployment` annotation.
 
 ### `camunda.client.worker.defaults`
 
-Properties related to the global defaults of job workers being registered to the Camunda client.
+Global default properties for job workers registered to the Camunda client.
 
 <table>
 <thead>
@@ -774,7 +774,7 @@ Properties related to the global defaults of job workers being registered to the
 </td>
 <td>
 
-Set whether a job should automatically be completed after the method invocation.
+Enable or disable automatic job completion after method invocation.
 
 </td>
 </tr>
@@ -790,7 +790,7 @@ Set whether a job should automatically be completed after the method invocation.
 </td>
 <td>
 
-Set whether the job worker is enabled.
+Enable or disable the job worker.
 
 </td>
 </tr>
@@ -806,7 +806,7 @@ Set whether the job worker is enabled.
 </td>
 <td>
 
-Set a list of variable names which should be fetched on job activation. If set on defaults, it will extend the list of variables to fetch from the annotation. If set on override, it will replace the list of variables to fetch.
+List of variable names to fetch on job activation. When set in defaults, it extends the list of variables to fetch from the annotation. When set in an override, it replaces the list of variables to fetch.
 
 </td>
 </tr>
@@ -822,7 +822,7 @@ Set a list of variable names which should be fetched on job activation. If set o
 </td>
 <td>
 
-Set whether all variables should be fetched. Overrides `fetch-variables`.
+Sets whether all variables are fetched. Overrides `fetch-variables`.
 
 </td>
 </tr>
@@ -838,7 +838,7 @@ Set whether all variables should be fetched. Overrides `fetch-variables`.
 </td>
 <td>
 
-Set the maximum number of jobs which will be exclusively activated for this worker at the same time.
+The maximum number of jobs exclusively activated for this worker at the same time.
 
 </td>
 </tr>
@@ -854,7 +854,7 @@ Set the maximum number of jobs which will be exclusively activated for this work
 </td>
 <td>
 
-Set the maximum number of retries before an automatic response (complete, fail, bpmn error) for jobs will not be attempted anymore.
+The maximum number of retries before automatic responses (complete, fail, bpmn error) for jobs are no longer attempted.
 
 </td>
 </tr>
@@ -870,7 +870,7 @@ Set the maximum number of retries before an automatic response (complete, fail, 
 </td>
 <td>
 
-Set the name of the worker owner. Will be generated as `${beanName}#${methodName}` as long as set to default.
+The name of the worker owner. If set to default, it is generated as `${beanName}#${methodName}`.
 
 </td>
 </tr>
@@ -886,7 +886,7 @@ Set the name of the worker owner. Will be generated as `${beanName}#${methodName
 </td>
 <td>
 
-Set the maximal interval between polling for new jobs.
+The maximal interval between polls for new jobs.
 
 </td>
 </tr>
@@ -902,7 +902,7 @@ Set the maximal interval between polling for new jobs.
 </td>
 <td>
 
-Set the request timeout for activate job request used to poll for new job.
+The request timeout for the activate job request used to poll for new jobs.
 
 </td>
 </tr>
@@ -918,7 +918,7 @@ Set the request timeout for activate job request used to poll for new job.
 </td>
 <td>
 
-Opt-in feature flag to enable job streaming. If set as enabled, the job worker will use a mix of streaming and polling to activate jobs. A long living stream will be opened onto which jobs will be eagerly pushed, and the polling mechanism will be used strictly to fetch jobs created <em>before</em> any streams were opened.
+Opt-in feature flag that enables job streaming. When enabled, the job worker uses both streaming and polling to activate jobs. A long-lived stream eagerly pushes new jobs, and polling retrieves jobs created <em>before</em> any streams were opened.
 
 </td>
 </tr>
@@ -934,7 +934,7 @@ Opt-in feature flag to enable job streaming. If set as enabled, the job worker w
 </td>
 <td>
 
-If streaming is enabled, sets a maximum lifetime for a given stream. Once this timeout is reached, the stream is closed, such that no more jobs are activated and received. If the worker is still open, then it will immediately open a new stream.
+If streaming is enabled, sets the maximum lifetime for a stream. When this timeout is reached, the stream closes, and no more jobs are activated or received. If the worker is still open, a new stream opens immediately.
 
 </td>
 </tr>
@@ -950,7 +950,7 @@ If streaming is enabled, sets a maximum lifetime for a given stream. Once this t
 </td>
 <td>
 
-Set for which tenants the jobs worker should be registered. If set on defaults, it will extend the list of tenant ids from the annotation. Of set on override, it will replace the list of tenant ids.
+Sets the tenants for which the job worker is registered. When set in defaults, it extends the list of tenant IDs from the annotation. When set in override, it replaces the list of tenant IDs.
 
 </td>
 </tr>
@@ -966,7 +966,7 @@ Set for which tenants the jobs worker should be registered. If set on defaults, 
 </td>
 <td>
 
-Set the time for how long a job is exclusively assigned for a worker.
+The time a job remains exclusively assigned to the worker.
 
 </td>
 </tr>
@@ -982,7 +982,7 @@ Set the time for how long a job is exclusively assigned for a worker.
 </td>
 <td>
 
-Set the type of jobs to work on.
+The type of jobs to work on.
 
 </td>
 </tr>
@@ -991,19 +991,19 @@ Set the type of jobs to work on.
 
 ### `camunda.client.worker.override`
 
-Properties related to the override of individual job workers being registered to the Camunda client. Overrides are composed in key-value pairs where the key is the job type of the worker and the values have the same properties as `camunda.client.worker.defaults` each: `camunda.client.worker.override.<job-type>.<property-name>: <property-value>`.
+Properties for overriding settings of individual job workers registered to the Camunda client. Overrides are specified as key-value pairs, where the key is the worker's job type and the values have the same properties as `camunda.client.worker.defaults` each: `camunda.client.worker.override.<job-type>.<property-name>: <property-value>`.
 
 ## Deprecated properties
 
 :::caution
-The following properties are deprecated. Please find the according replacement and read the hint.
+The following properties are deprecated. See the replacement property and related hints.
 
-All replacements are automatically mapped unless documented otherwise. The client will log these mappings on startup.
+All replacements are automatically mapped unless stated otherwise. The client logs these mappings at startup.
 :::
 
 ### `camunda.client`
 
-Properties related to the Camunda client.
+Deprecated properties for the Camunda client.
 
 <table>
 <thead>
@@ -1062,7 +1062,7 @@ Properties related to the Camunda client.
 
 ### `camunda.client.auth`
 
-Properties related to the authentication of the Camunda client.
+Deprecated properties for authenticating the Camunda client.
 
 <table>
 <thead>
@@ -1093,7 +1093,7 @@ Properties related to the authentication of the Camunda client.
 
 ### `camunda.client.cloud`
 
-Properties related to the connection of the Camunda client to SaaS. They will only be used to compose default connection details if the client is configured to `camunda.client.mode: saas`.
+Deprecated properties for connecting the Camunda client to SaaS. Used only to compose default connection details if the client is configured to `camunda.client.mode: saas`.
 
 <table>
 <thead>
@@ -1123,6 +1123,8 @@ Properties related to the connection of the Camunda client to SaaS. They will on
 </table>
 
 ### `camunda.client.identity`
+
+Deprecated properties for identity settings.
 
 <table>
 <thead>
@@ -1202,6 +1204,8 @@ Identity is now part of Camunda.
 </table>
 
 ### `camunda.client.zeebe`
+
+Deprecated properties for Zeebe client settings.
 
 <table>
 <thead>
@@ -1428,6 +1432,8 @@ Identity is now part of Camunda.
 
 ### `camunda.client.zeebe.defaults`
 
+Deprecated default properties for Zeebe job workers.
+
 <table>
 <thead>
   <tr>
@@ -1639,6 +1645,8 @@ Identity is now part of Camunda.
 
 ### `camunda.client.zeebe.deployment`
 
+Deprecated deployment properties for Zeebe.
+
 <table>
 <thead>
   <tr>
@@ -1668,9 +1676,11 @@ Identity is now part of Camunda.
 
 ### `camunda.client.zeebe.override`
 
-Properties related to the override of individual job workers being registered to the Camunda client. Replaced by `camunda.client.worker.override`.
+Deprecated properties for overriding individual job workers registered to the Camunda client. Replaced by `camunda.client.worker.override`.
 
 ### `common`
+
+Deprecated common client properties.
 
 <table>
 <thead>
@@ -1778,7 +1788,7 @@ Properties related to the override of individual job workers being registered to
 </td>
 <td>
 
-The rest address is the unified endpoint for all interaction with Camunda.
+The REST address is the unified endpoint for all interaction with Camunda.
 
 </td>
 </tr>
@@ -1800,6 +1810,8 @@ The rest address is the unified endpoint for all interaction with Camunda.
 </table>
 
 ### `common.keycloak`
+
+Deprecated Keycloak-specific properties.
 
 <table>
 <thead>
@@ -1823,7 +1835,7 @@ The rest address is the unified endpoint for all interaction with Camunda.
 </td>
 <td>
 
-There is no keycloak-specific configuration for camunda, the issuer is provided as url.
+There is no keycloak-specific configuration for Camunda; the issuer is provided as a URL.
 
 </td>
 </tr>
@@ -1839,7 +1851,7 @@ There is no keycloak-specific configuration for camunda, the issuer is provided 
 </td>
 <td>
 
-There is no keycloak-specific configuration for camunda, the issuer is provided as url.
+There is no keycloak-specific configuration for Camunda; the issuer is provided as a URL.
 
 </td>
 </tr>
@@ -1855,7 +1867,7 @@ There is no keycloak-specific configuration for camunda, the issuer is provided 
 </td>
 <td>
 
-There is no keycloak-specific configuration for camunda, the issuer is provided as url.
+There is no keycloak-specific configuration for Camunda; the issuer is provided as a URL.
 
 </td>
 </tr>
@@ -1863,6 +1875,8 @@ There is no keycloak-specific configuration for camunda, the issuer is provided 
 </table>
 
 ### `zeebe.client`
+
+Deprecated Zeebe client properties.
 
 <table>
 <thead>
@@ -1886,7 +1900,7 @@ There is no keycloak-specific configuration for camunda, the issuer is provided 
 </td>
 <td>
 
-Only the environment variables belonging to the Spring SDK will be applied.
+Only the environment variables belonging to the Spring SDK are applied.
 
 </td>
 </tr>
@@ -1902,7 +1916,7 @@ Only the environment variables belonging to the Spring SDK will be applied.
 </td>
 <td>
 
-There are client modes now.
+Client modes are now available.
 
 </td>
 </tr>
@@ -1946,7 +1960,7 @@ There are client modes now.
 </td>
 <td>
 
-the first provided tenant id is applied.
+The first provided tenant ID is applied.
 
 </td>
 </tr>
@@ -1982,6 +1996,8 @@ the first provided tenant id is applied.
 </table>
 
 ### `zeebe.client.broker`
+
+Deprecated Zeebe broker properties.
 
 <table>
 <thead>
@@ -2054,6 +2070,8 @@ the first provided tenant id is applied.
 
 ### `zeebe.client.cloud`
 
+Deprecated Zeebe cloud connection properties.
+
 <table>
 <thead>
   <tr>
@@ -2090,7 +2108,7 @@ the first provided tenant id is applied.
 </td>
 <td>
 
-The zeebe client url is now configured as http&#x2F;https url.
+The Zeebe client URL is now configured as HTTP&#x2F;HTTPS URL.
 
 </td>
 </tr>
@@ -2162,7 +2180,7 @@ The zeebe client url is now configured as http&#x2F;https url.
 </td>
 <td>
 
-The zeebe client url is now configured as http&#x2F;https url.
+The Zeebe client URL is now configured as HTTP&#x2F;HTTPS URL.
 
 </td>
 </tr>
@@ -2198,6 +2216,8 @@ The zeebe client url is now configured as http&#x2F;https url.
 </table>
 
 ### `zeebe.client.job`
+
+Deprecated Zeebe job worker properties.
 
 <table>
 <thead>
@@ -2242,6 +2262,8 @@ The zeebe client url is now configured as http&#x2F;https url.
 
 ### `zeebe.client.message`
 
+Deprecated Zeebe message properties.
+
 <table>
 <thead>
   <tr>
@@ -2284,6 +2306,8 @@ The zeebe client url is now configured as http&#x2F;https url.
 </table>
 
 ### `zeebe.client.security`
+
+Deprecated Zeebe security properties.
 
 <table>
 <thead>
@@ -2335,7 +2359,7 @@ The zeebe client url is now configured as http&#x2F;https url.
 </td>
 <td>
 
-plaintext is determined by the url protocol (http&#x2F;https) now.
+plaintext is now determined by the URL protocol (HTTP or HTTPS).
 
 </td>
 </tr>
@@ -2343,6 +2367,8 @@ plaintext is determined by the url protocol (http&#x2F;https) now.
 </table>
 
 ### `zeebe.client.worker`
+
+Deprecated Zeebe job worker properties.
 
 <table>
 <thead>
@@ -2415,4 +2441,4 @@ plaintext is determined by the url protocol (http&#x2F;https) now.
 
 ### `zeebe.client.worker.override`
 
-Properties related to the override of individual job workers being registered to the Camunda client. Replaced by `camunda.client.worker.override`.
+Deprecated properties to override the individual job workers registered with the Camunda client. Replaced by `camunda.client.worker.override`.
