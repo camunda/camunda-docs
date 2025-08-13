@@ -39,7 +39,7 @@ If [authorizations](/components/concepts/access-control/authorizations.md#availa
 
 ### Limitations {#authorizations-limitations}
 
-- Fine-grained authorizations are not supported. Resource ID has to be \* when defining authorizations.
+- Fine-grained authorizations are not supported. If the Resource ID is not \* when defining authorizations, then the user will not have access to any resources.
 
 ## Get started with Play
 
