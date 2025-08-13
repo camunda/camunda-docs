@@ -1,14 +1,14 @@
 ---
 id: alternative-db
-title: "Use an alternative database for Management Identity"
-sidebar_label: "Use an alternative database for Management Identity"
+title: "Use an alternative database for Identity"
+sidebar_label: "Use an alternative database for Identity"
 description: "You can use alternative databases to PostgreSQL to configure Identity"
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-Use an alternative database for Management Identity if your internal policies or compliance requirements prevent the use of PostgreSQL.
+Use an alternative database for Identity if your internal policies or compliance requirements prevent the use of PostgreSQL.
 
 ## Database versions
 
