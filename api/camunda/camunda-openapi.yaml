@@ -9494,7 +9494,6 @@ components:
           description: The unique key identifying the decision requirements graph that the decision which was evaluated is part of.
           type: string
         decisionInstanceKey:
-          x-internal: true
           description: Deprecated and for backward-compatibility only. Use decisionEvaluationKey.
           type: string
           deprecated: true
