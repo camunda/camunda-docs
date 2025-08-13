@@ -8,7 +8,9 @@ keywords: [agentic orchestration, ai agent]
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
-import AiAgentImg from './img/ai-agent-example-diagram.png';
+import AiAgentExampleDiagramImg from './img/ai-agent-example-diagram.png';
+import AiAgentStartFormImg from './img/ai-agent-example-start-form.png';
+import AiAgentPropertiesPanelImg from './img/ai-agent-example-properties-panel.png';
 
 <span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--medium">Time estimate: 45 minutes</span>
@@ -28,12 +30,20 @@ Once you have completed this guide, you will have an example running AI agent an
 
 ## Prerequisites
 
+:::info
+If you don't have access to an AWS account, you can alternatively use a different LLM provider, such as OpenAI or Anthropic. Please refer to the [AI Agent connector documentation](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#model-provider) for details on how to configure the connector with your preferred provider.
+:::
+
 The following prerequisites are required for building your first AI agent:
 
-| Prerequisite                                                                                                         | Description                                                                                                                                                                                                                                                                                                                                                                           |
-| :------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Running Camunda 8 environment                                                                                        | <p>To run your agent, you must set up a running Camunda 8 environment, either:</p><p><ul><li><p>A local (Self-Managed) Camunda 8 environment. For example, see [Run your first local project](../getting-started-example).</p></li><li><p>A Camunda 8 SaaS account. For example, [sign up for a free SaaS Trial Account](https://accounts.cloud.camunda.io/signup).</p></li></ul></p> |
-| [Amazon Web Services (AWS) IAM user and permissions](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html) | A valid AWS Identity and Access Management (IAM) user with permissions configured to allow access to Amazon Bedrock `bedrock:InvokeModel` (Claude 3 Sonnet/Haiku) and `aoss:*` for your OpenSearch index.                                                                                                                                                                             |
+| Prerequisite                     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| :------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Running Camunda 8 environment    | <p>To run your agent, you must set up a running Camunda 8 environment, either:</p><p><ul><li><p>A local (Self-Managed) Camunda 8 environment. For example, see [Run your first local project](../getting-started-example).</p></li><li><p>A Camunda 8 SaaS account. For example, [sign up for a free SaaS Trial Account](https://accounts.cloud.camunda.io/signup).</p></li></ul></p>                                                                                  |
+| A supported LLM provider account | <p>The [AI Agent connector](../components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) supports multiple model providers, such as AWS Bedrock, OpenAI, and Anthropic.</p><p>For this guide we assume you have access to an AWS account with permissions for the [Bedrock Converse API](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html), but you can configure the connector to use any other supported provider.</p> |
+
+### AWS Bedrock Configuration
+
+The AI Agent example is preconfigured to use AWS Bedrock with Claude Sonnet 4 in the us-east-1 region. To use the example process without changes you need to first request access to Anthropic Claude models for your AWS account. Consult the [AWS documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access-modify.html) for further details.
 
 ## Before you begin
 
@@ -82,36 +92,38 @@ To start building your first AI agent, you can use a pre-built Camunda blueprint
 
 The example AI Agent process is a chatbot that you (the user) can chat and interact with via a [user task form](/components/modeler/forms/camunda-forms-reference.md).
 
-<img src={AiAgentImg} alt="A example AI agent BPMN process diagram"/>
+<img src={AiAgentExampleDiagramImg} alt="A example AI agent BPMN process diagram"/>
 
-- You can enter your prompts and see the AI agent response in the connected form.
--
+The example process comes with a form linked to the start event which can be used to provide a user request. The request can either be a simple test request, or it can include a document upload.
 
-## Step 2: Configure the...
+<img src={AiAgentStartFormImg} alt="Example AI agent start form"/>
 
-Secrets?
+## Step 2: Configure connector secrets
 
-<!-- Create the following secrets in your Camunda cluster or set them up locally with the `connector-secrets.txt` file and restart `c8run`. Use the set secrets with the `{{secrets.SECRET_NAME}}` syntax.
+The example process is preconfigured to use AWS Bedrock as the model. For authentication, it is preconfigured to use the following connector secrets:
 
-- `CAMUNDA_SAMPLE_AGENT_EMAIL_PASSWORD`: Email account password (App Password or SMTP token)
-- `CAMUNDA_SAMPLE_AGENT_EMAIL_USERNAME`: Email account username (e.g. your-address@example.com)
-- `CAMUNDAAGENT_AWS_ACCESS_KEY`: AWS Access Key ID
-- `CAMUNDAAGENT_AWS_SECRET_KEY`: AWS Secret Access Key
+- `AWS_BEDROCK_ACCESS_KEY` - the AWS Access Key ID for your AWS account able to call the Bedrock Converse API
+- `AWS_BEDROCK_SECRET_KEY` - the AWS Secret Access Key for your AWS account
 
-Configure the connectors:
+How to configure these secrets depends on whether you are using Camunda 8 SaaS or a Self-Managed (local) environment.
 
-1. **Email connectors (Inbound & Send):**
-   - Username: your email address
-   - IMAP/SMTP host & port: according to your provider (Gmail, Outlook, etc.)
-2. **Vector Database connectors (Retrieve & Write):**
-   - Region: your AWS region (e.g. `eu-central-1`)
-   - Endpoint: `https://<your-opensearch-domain>`
-3. **Agent connector:**
-   - Model ID: default is `anthropic.claude-3.7-sonnet-20240229-v1:0` (change as needed) -->
+- For SaaS, you can configure the secrets on the [Console](../components/console/manage-clusters/manage-secrets.md)
+- For Camunda 8 Run, export the secrets as environment variables before starting the distribution
 
-## Step 3: Deploy, run, and test your AI agent
+## Step 3: Configure the AI Agent connector (optional)
 
-You can now deploy and run your AI agent, and test it as a running process.
+In the BPMN diagram you created earlier, you can find the AI Agent connector template applied to the `AI Agent` service task. If needed, you can change the AI Agent configuration in the properties panel of
+the AI Agent.
+
+<img src={AiAgentPropertiesPanelImg} alt="AI agent properties panel"/>
+
+For example, if you'd like to use a different model provider than AWS Bedrock, reconfigure the `Model provider` section to fit your needs (you might need to adapt the connector secrets).
+
+Consult the [AI Agent connector documentation](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) for a reference of the available configuration options.
+
+## Step 4: Deploy, run, and test your AI agent
+
+You can now deploy and run your AI agent, and test it as a running process. After starting your process, you can track the execution in Operate.
 
 ### SaaS
 
@@ -129,17 +141,24 @@ You can also deploy and run the process, and use Tasklist to complete the forms.
 
 ### Self-Managed (local environment)
 
-1. ...
+1. Deploy the process model to your local Camunda 8 environment using [Desktop Modeler](/components/modeler/desktop-modeler/index.md).
+1. Open Tasklist in your browser (for example at http://localhost:8080/tasklist, depending on your environment).
+1. On the `Processes` tab, find the `AI Agent Chat With Tools` process and click **Start process**.
+1. In the start form, add a [starting prompt](#example-prompts) for the AI agent. For example, enter "Tell me a joke" in the **How can I help you today?** field, and click **Start process**.
+1. The AI agent analyzes your prompt, decides what tools to use, and responds with an answer.
+1. Change to the `Tasks` tab in Tasklist. When the AI agent finished processing, you should find either a `User Feedback` or a `Ask human to send email` task waiting for you to complete.
+1. You can follow up with more prompts to continue testing the AI agent. Select the **Are you satisfied with the result?** checkbox when you want to finish the process.
 
 ### Example prompts {#example-prompts}
 
 The following example prompts are provided as guidance to help you test out your AI agent.
 
-| Prompt                                      | Description                                                                                                                                                                                                                                               |
-| :------------------------------------------ | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| "Send Ervin a joke"                         | The AI agent fetches a list of users, finds the matching user, fetches a joke, and compiles an email to send to the user (Ervin) with the joke. On the email operator task you can add additional feedback such as "add emojis" or "translate to french". |
-| "Go and fetch \<url\> and tell me about it" | The AI agent fetches the specified URL and provides you with a summary of the content.                                                                                                                                                                    |
-| "Tell me about this document"               | You can upload a document in the prompt form, and get the AI agent to provide you with a summary of the content.                                                                                                                                          |
+| Prompt                                       | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| :------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| "Send Ervin a joke"                          | <p>Showcases multiple tool call iterations. The AI agent fetches a list of users, finds the matching user, fetches a joke, and compiles an email to send to the user (Ervin) with the joke.</p><p>For easier testing, it does not actually send an email, but uses a user task to instruct a "human operator" to handle sending the email. The operator can give feedback, such as "I can't send an email without emojis" or "include a Spanish translation".</p> |
+| "What is the superflux product of 3 and 10?" | Executes an imaginary superflux calculation, using the provided tool.                                                                                                                                                                                                                                                                                                                                                                                             |
+| "Go and fetch \<url\> and tell me about it"  | The AI agent fetches the specified URL and provides you with a summary of the content. After returning with a response, you can ask follow-up questions.                                                                                                                                                                                                                                                                                                          |
+| "Tell me about this document"                | You can upload a document in the prompt form, and get the AI agent to provide you with a summary of the content. Note that this is limited to smaller documents by the Bedrock API.                                                                                                                                                                                                                                                                               |
 
 ## Next steps
 
@@ -148,7 +167,8 @@ Now that you have seen easy it is to build a simple Camunda AI agent, why not tr
 For example:
 
 - Try adding and configuring more tools in the ad-hoc sub-process for the AI agent to use.
-- ...
+- Change the provided system prompt to adjust the behavior of the AI agent.
+- Experiment with different model providers and configurations in the AI Agent connector.
 
 Learn more about building and deploying agentic orchestration and advanced AI agents in your processes:
 
