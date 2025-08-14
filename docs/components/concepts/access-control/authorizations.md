@@ -141,9 +141,11 @@ Camunda provides predefined roles to simplify access management:
 
 Users need specific application permissions to access **Orchestration Cluster** components:
 
-- **UI access**: Resource type `application` and Resource Key is one of the components Operate, Tasklist, **Identity**
+- **UI access**: Resource type `Component` and Resource Key is one of the components Operate, Tasklist, Identity
   - Example: `operate` for Operate access
   - Example: `tasklist` for Tasklist access
+  - Example: `identity` for Identity access
+  - Example: `*` for access to all components
 - Without these permissions, users cannot log in to the components
 
 ### Resource access
