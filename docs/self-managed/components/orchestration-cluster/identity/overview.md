@@ -31,6 +31,11 @@ To modify this [initial configuration](./configuration.md), define your custom v
 In Helm installations, API authentication and authorization are enabled by default. You can adjust these settings in `application.yaml` or using environment variables.
 :::
 
+:::note
+As a Spring Boot application, the Orchestration Cluster supports standard
+[Spring configuration](https://docs.spring.io/spring-boot/reference/features/external-config.html) methods. [Review configurations which apply to all components within the Orchestration Cluster](/docs/self-managed/components/orchestration-cluster/core-settings/configuration/configuration.md).
+:::
+
 ### Configure initial users
 
 If users are managed within the Orchestration cluster (i.e., without an external Identity Provider), you can create an initial user in two ways:
