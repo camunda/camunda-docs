@@ -42,19 +42,16 @@ Authorization applies only to these orchestration components. It does not apply 
 ### Key components
 
 1. **Authorizations**
-
    - Assign permissions to Identities for specific resources
    - Examples:
      - User `jonny` is authorized to create new users
      - Group `marketing` is authorized to delete the group `sales`
 
 2. **Owners**
-
    - Types include users, groups, roles, and mapping rules
    - Authorizations can be assigned to any type of owner
 
 3. **Permissions**
-
    - Define allowed interactions with resources
    - Are specific to each resource type
 
@@ -110,13 +107,12 @@ The following table lists all resources that support authorization in Camunda 8 
 | **Group**                            | `*`, `accounting`                      | All groups / Group ID                | `CREATE`, `READ`, `UPDATE`, `DELETE`                                                                                                                                                                                                                                                                                                                                                                                                       |
 | **Mapping Rule**                     | `*`, `my_mapping`                      | All mappings / Mapping ID            | `CREATE`, `READ`, `UPDATE`, `DELETE`                                                                                                                                                                                                                                                                                                                                                                                                       |
 | **Message**                          | `*`                                    | All messages                         | `CREATE`, `READ`                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| **Process Definition**               | `*`, `order_process`                   | All processes / BPMN Process ID      | `CREATE_PROCESS_INSTANCE`, `READ_PROCESS_DEFINITION`, `READ_PROCESS_INSTANCE`, `READ_USER_TASK`, `UPDATE_PROCESS_INSTANCE`, `UPDATE_USER_TASK`, `MODIFY_PROCESS_INSTANCE`, `CANCEL_PROCESS_INSTANCE`                                                                                                                                                                                                                                       |
-| **Resource**                         | `*`, `my_form`, `order_process`        | All resources / Form ID / Process ID | `CREATE`, `DELETE_DRD`, `DELETE_FORM`, `DELETE_PROCESS`, `DELETE_RESOURCE`                                                                                                                                                                                                                                                                                                                                                                 |
+| **Process Definition**               | `*`, `order_process`                   | All processes / BPMN Process ID      | `CREATE_PROCESS_INSTANCE`, `READ_PROCESS_DEFINITION`, `READ_PROCESS_INSTANCE`, `READ_USER_TASK`, `UPDATE_PROCESS_INSTANCE`, `UPDATE_USER_TASK`, `MODIFY_PROCESS_INSTANCE`, `CANCEL_PROCESS_INSTANCE`, `DELETE_PROCESS_INSTANCE`                                                                                                                                                                                                            |
+| **Resource**                         | `*`, `my_form`, `order_process`        | All resources / Form ID / Process ID | `CREATE`, `READ`, `DELETE_DRD`, `DELETE_FORM`, `DELETE_PROCESS`, `DELETE_RESOURCE`                                                                                                                                                                                                                                                                                                                                                         |
 | **Role**                             | `*`, `myrole`                          | All roles / Role ID                  | `CREATE`, `READ`, `UPDATE`, `DELETE`                                                                                                                                                                                                                                                                                                                                                                                                       |
-| **System**                           | `*`                                    | All system operations                | `READ`, `UPDATE`                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| **System**                           | `*`                                    | All system operations                | `READ`, `READ_USAGE_METRIC`, `UPDATE`                                                                                                                                                                                                                                                                                                                                                                                                      |
 | **Tenant**                           | `*`, `tenantA`                         | All tenants / Tenant ID              | `CREATE`, `READ`, `UPDATE`, `DELETE`                                                                                                                                                                                                                                                                                                                                                                                                       |
 | **User**                             | `*`, `felix.mueller`                   | All users / Username                 | `CREATE`, `READ`, `UPDATE`, `DELETE`                                                                                                                                                                                                                                                                                                                                                                                                       |
-| **Usage Metric**                     | `*`                                    | All usage metric operations          | `READ`                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 
 ## Default roles
 
@@ -156,6 +152,7 @@ Within applications, users need additional permissions for specific resources, e
   - `UPDATE_PROCESS_INSTANCE` to update running instances
   - `MODIFY_PROCESS_INSTANCE` to modify running instances
   - `CANCEL_PROCESS_INSTANCE` to cancel running instances
+  - `DELETE_PROCESS_INSTANCE` to delete completed instances
 - **Decision related**: Resource type `decisionDefinition`
   - `READ_DECISION_DEFINITION` to view DMN models
   - `CREATE_DECISION_INSTANCE` to execute decisions
