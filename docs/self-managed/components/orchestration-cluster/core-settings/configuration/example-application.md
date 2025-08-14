@@ -3,76 +3,50 @@ id: example-application
 title: "Example of application.yml"
 ---
 
-## Example of application.yml file in Operate
+The following snippets represent example default configurations shipped with the distribution for different components in a **Camunda 8 Self-Managed Orchestration Cluster**.  
+They can be found inside the `config` folder for each component (for example, `config/application.yml`) and can be adjusted to suit your environment.
 
-The following snippet represents the default Operate configuration, which is shipped with the distribution. This can be found inside the `config` folder (`config/application.yml`) and can be used to adjust Operate to your needs.
+## Example configuration with user authentication and Elasticsearch
 
 ```yaml
-# Operate configuration file
+# Component configuration file
 
-camunda.operate:
-  # Set operate userId, displayName and password.
-  # If user with <userId> does not exists it will be created.
-  # Default: demo/demo/demo
+camunda.<component>:
+  # Set component username, display name, and password.
+  # If a user with <username> or <userId> does not exist, it will be created.
+  # Default values vary by component.
   userId: anUserId
   displayName: nameShownInWebpage
   password: aPassword
   roles:
     - OWNER
     - USER
-  # ELS instance to store Operate data
+
+  # Elasticsearch (ELS) instance to store component data
   elasticsearch:
     # Cluster name
     clusterName: elasticsearch
-    # Url
+    # URL
     url: http://localhost:9200
-  # Zeebe instance
-  zeebe:
-    # Gateway address to zeebe
-    gatewayAddress: localhost:26500
-  # ELS instance to export Zeebe data to
-  zeebeElasticsearch:
-    # Cluster name
-    clusterName: elasticsearch
-    # url
-    url: http://localhost:9200
-    # Index prefix, configured in Zeebe Elasticsearch exporter
-    prefix: zeebe-record
-```
 
-## Example of application.yml file in Tasklist
-
-The following snippet represents the default Tasklist configuration, which is shipped with the distribution. It can be found inside the `config` folder (`/usr/local/tasklist/config/application.yml`) and can be used to adjust Tasklist to your needs.
-
-```yaml
-# Tasklist configuration file
-
-camunda.tasklist:
-  # Set Tasklist username and password.
-  # If user with <username> does not exists it will be created.
-  # Default: demo/demo
-  #username:
-  #password:
-  #roles:
-  #  - OWNER
-  #  - OPERATOR
-
-  # ELS instance to store Tasklist data
-  elasticsearch:
-    # Cluster name
-    clusterName: elasticsearch
-    # url
-    url: http://localhost:9200
-  # Zeebe instance
-  zeebe:
+  # Orchestration Cluster gateway connection
+  orchestrationCluster:
     # Gateway address
     gatewayAddress: localhost:26500
-  # ELS instance to export Zeebe data to
-  zeebeElasticsearch:
+
+  # Elasticsearch instance receiving exported orchestration data
+  orchestrationElasticsearch:
     # Cluster name
     clusterName: elasticsearch
-    # url
+    # URL
     url: http://localhost:9200
-    # Index prefix, configured in Zeebe Elasticsearch exporter
-    prefix: zeebe-record
+    # Index prefix, configured in the Elasticsearch exporter
+    prefix: orchestration-record
 ```
+
+## Notes
+
+- Replace `<component>` with the identifier for the service you are configuring (for example, `operate`, `tasklist`, or another cluster component).
+- Adjust URLs and cluster names according to your deployment environment.
+- Default values may vary per distribution and may be overridden by environment variables.
+- The configuration structure is the same across most components, with differences only in the specific properties required.
