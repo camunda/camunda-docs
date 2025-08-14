@@ -93,5 +93,6 @@ Replace `io.camunda` with the logger name you want to adjust.
 
 ## Notes
 
+- Learn more about [log levels](/self-managed/operational-guides/monitoring/log-levels.md).
 - The Orchestration Cluster uses Log4j2 by default in both distributions and Docker images.
 - Adjusting logging can help with troubleshooting, performance optimization, and integration with external monitoring systems.

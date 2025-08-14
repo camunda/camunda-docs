@@ -1461,7 +1461,6 @@ module.exports = {
                 {
                   Configuration: [
                     "self-managed/components/orchestration-cluster/zeebe/configuration/configuration",
-                    "self-managed/components/orchestration-cluster/zeebe/configuration/logging",
                     "self-managed/components/orchestration-cluster/zeebe/configuration/gateway-health-probes",
                     "self-managed/components/orchestration-cluster/zeebe/configuration/environment-variables",
                     "self-managed/components/orchestration-cluster/zeebe/configuration/fixed-partitioning",
