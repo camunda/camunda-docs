@@ -17,16 +17,16 @@ As of version 8.8, the V1 component APIs are deprecated. We strongly recommend [
 
 ## Migrate Operate V1 API
 
-With Camunda 8.8, permissions for resource access have been reworked. For the Operate V1 API, this means that access to endpoints now depends on specific read and write permissions for related resources.  
-To continue using the Operate V1 API, users and clients must be assigned the appropriate permissions under the new model.
+With Camunda 8.8, permissions for resource access have been reworked. The general impact is outlined in the [Camunda 8 introduction](/components/whats-new-in-88.md#identity). For the Operate V1 API, this means that access to endpoints now depends on specific read and write permissions for related resources.  
+To continue using the Operate V1 API, users and clients must be assigned the appropriate permissions under [the new authorization model](/components/concepts/access-control/authorizations.md).
 
 Users now require wildcard (`*`) permissions for the resource type and permission type being accessed.
 
 For guidance on assigning permissions in Identity, see the [Identity authorization guide](../../components/identity/authorization.md).
 
-### Operate permissions to new resource permissions mapping
+### Mapping Operate permissions to new authorizations
 
-To maintain the same access level for the Operate V1 API, apply the following mappings:
+To maintain the same access level for the Operate V1 API, apply the following authorizations:
 
 **`operate-api:read`** is replaced by:
 
