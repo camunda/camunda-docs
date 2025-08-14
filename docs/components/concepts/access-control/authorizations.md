@@ -42,19 +42,16 @@ Authorization applies only to these orchestration components. It does not apply 
 ### Key components
 
 1. **Authorizations**
-
    - Assign permissions to Identities for specific resources
    - Examples:
      - User `jonny` is authorized to create new users
      - Group `marketing` is authorized to delete the group `sales`
 
 2. **Owners**
-
    - Types include users, groups, roles, and mapping rules
    - Authorizations can be assigned to any type of owner
 
 3. **Permissions**
-
    - Define allowed interactions with resources
    - Are specific to each resource type
 
@@ -115,8 +112,8 @@ The following table lists all resources that support authorization in Camunda 8 
 | **Role**                             | `*`, `myrole`                          | All roles / Role ID                  | `CREATE`, `READ`, `UPDATE`, `DELETE`                                                                                                                                                                                                                                                                                                                                                                                                       |
 | **System**                           | `*`                                    | All system operations                | `READ`, `UPDATE`                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | **Tenant**                           | `*`, `tenantA`                         | All tenants / Tenant ID              | `CREATE`, `READ`, `UPDATE`, `DELETE`                                                                                                                                                                                                                                                                                                                                                                                                       |
-| **User**                             | `*`, `felix.mueller`                   | All users / Username                 | `CREATE`, `READ`, `UPDATE`, `DELETE`                                                                                                                                                                                                                                                                                                                                                                                                       |
 | **Usage Metric**                     | `*`                                    | All usage metric operations          | `READ`                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| **User**                             | `*`, `felix.mueller`                   | All users / Username                 | `CREATE`, `READ`, `UPDATE`, `DELETE`                                                                                                                                                                                                                                                                                                                                                                                                       |
 
 ## Default roles
 
