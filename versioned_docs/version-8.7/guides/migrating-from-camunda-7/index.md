@@ -36,11 +36,12 @@ This guide covers the following main aspects involved in migrating from Camunda 
 
 Get help with your migration journey from the following additional resources.
 
+- [Migration Hub ](https://camunda.com/platform-7/migrate/)
 - The [Camunda forum](https://forum.camunda.io/c/c7-to-c8/)
 - Camunda Consulting
   - [Migration workshops](https://camunda.com/wp-content/uploads/2024/03/Camunda_ConsultingWorkshops_5-Migration-Evaluation_2024.pdf)
   - Professional advisory services
-- [Camunda Partners](https://camunda.com/de/partners/):
+- [Camunda 7 to Camunda 8 Recognized Migration Partners](https://marketplace.camunda.com/en-US/listing?scat=65153&order=POPULARITY&page=1&locale=en-US):
   - Professional advisory services
   - Implementation services
 - [Camunda Academy: Migration Overview](https://academy.camunda.com/c8-migration-overview/)
