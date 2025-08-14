@@ -168,11 +168,11 @@ The following example prompts are provided as guidance to help you test your AI 
 
 ## Next steps
 
-Now that you have seen easy it is to build a simple Camunda AI agent, why not try customizing it to suit your needs?
+Now that you have seen how easy it is to build a simple Camunda AI agent, why not try customizing it further?
 
 For example:
 
-- Try adding and configuring more tools in the ad-hoc sub-process for the AI agent to use.
+- Add and configure more tools in the ad-hoc sub-process that the AI agent can use.
 - Change the provided system prompt to adjust the behavior of the AI agent.
 - Experiment with different model providers and configurations in the AI Agent connector.
 
