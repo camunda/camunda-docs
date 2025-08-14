@@ -1,15 +1,17 @@
 ---
-id: run-admin-update
-title: "Run update"
-description: "High-level administrator checklist for executing a Camunda 8.8 update."
+id: run-admin-upgrade
+title: "Run upgrade"
+description: "Administrator checklist for executing a Camunda 8.8 Self-Managed upgrade."
 ---
 
 import DocCardList from '@theme/DocCardList';
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
-# Run the update
+# Run the upgrade
 
-This page guides **platform administrators** through the _execution phase_ of an update to **Camunda 8.8 Self-Managed**.  
-It assumes you have completed all steps in [**Prepare for update**](./prepare-for-update.md) and that you have:
+This page guides **platform administrators** through the _execution phase_ of an upgrade to **Camunda 8.8 Self-Managed**.  
+It assumes you have completed all steps in [**Prepare for upgrade**](./prepare-for-update.md) and that you have:
 
 - A tested backup and rollback plan
 - A confirmed maintenance window
@@ -20,13 +22,22 @@ It assumes you have completed all steps in [**Prepare for update**](./prepare-fo
 ## Step 1 – Confirm prerequisites
 
 - ✅ Test environment updated without errors
-- ✅ Backups validated
+- ✅ Backups created and validated
 - ✅ Required secrets exported (Operate, Tasklist, Identity, etc.)
 - ✅ Team responsibilities and runbooks shared
 
-## Step 2 – Run the update with Helm
+## Step 2 – Run the upgrade
 
-### Helm chart upgrade
+<Tabs groupId="helm" defaultValue="helm" queryString values={
+[
+{label: 'Helm chart', value: 'helm', },
+{label: 'Docker', value: 'docker', },
+]
+}>
+
+<TabItem value='helm'>
+
+### Helm chart
 
 If you are using Kubernetes with the Camunda Helm chart, follow the dedicated update instructions:
 
@@ -34,16 +45,26 @@ If you are using Kubernetes with the Camunda Helm chart, follow the dedicated up
 ]}/>
 
 The Helm guide covers update options, handling of secrets, and monitoring of migration jobs.  
-If you are creating your own deployment scripts, you can use the official Helm charts as a reference or technical specification.  
+If you are creating your own deployment scripts, you can use the official Helm charts as a reference or technical specification.
+
 You may also want to review the [component-level upgrade procedures](../../components/components-upgrade/870-to-880.md) for details on how each individual component is getting updates.
+
+</TabItem>
+
+<TabItem value='docker'>
+
+### Docker
 
 :::info Docker Compose
 Camunda-provided Docker Compose files are only intended for development and testing purposes, and they should never be used for production environments. Docker Compose lacks the capabilities required for a production-ready system, such as automated migration job handling, high availability, failover support, scalable persistent storage management, and robust secret management with rotation.
 
-Because of these limitations, Camunda does not supply automated migration scripts for Docker Compose setups. If you still need to update a development environment, you can follow the [Component upgrade guides](../../components/components-upgrade/) to manually update each service.
+Because of these limitations, Camunda does not supply automated migration scripts for Docker Compose setups. If you still need to update a development environment, you can follow the [Component upgrade guides](../../components/components-upgrade/870-to-880.md) to manually update each service.
+:::
 
 For production deployments, we recommend either using Kubernetes with the official Camunda Helm chart or creating a custom deployment process with Infrastructure as Code tools such as Terraform, Ansible, or AWS CloudFormation.
-:::
+
+</TabItem>
+</Tabs>
 
 ## Step 3 – Validate platform health
 
@@ -51,8 +72,7 @@ After a successful upgrade:
 
 - Confirm pod readiness and Helm release status.
 - Verify component versions via Operate.
-- Run your post-update validation suite.  
-  _(Add link to validation steps if available.)_
+- Run your post-update validation suite.
 
 ## Step 4 – Perform post-update tasks
 

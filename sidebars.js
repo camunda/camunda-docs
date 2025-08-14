@@ -1363,7 +1363,7 @@ module.exports = {
       Components: [
         {
           type: "category",
-          label: "Components upgrade",
+          label: "Components update",
           link: {
             type: "doc",
             id: "self-managed/components/components-upgrade/introduction",
@@ -1665,11 +1665,12 @@ module.exports = {
       label: "Upgrade to Camunda 8.8",
       link: {
         type: "doc",
-        id: "self-managed/update/administrators/admin-update-overview",
+        id: "self-managed/update/administrators/admin-upgrade-overview",
       },
       items: [
-        "self-managed/update/administrators/prepare-for-admin-update",
-        "self-managed/update/administrators/run-admin-update"],
+        "self-managed/update/administrators/prepare-for-admin-upgrade",
+        "self-managed/update/administrators/run-admin-upgrade",
+      ],
     },
   ],
 };
