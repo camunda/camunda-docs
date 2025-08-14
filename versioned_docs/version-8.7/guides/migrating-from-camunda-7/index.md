@@ -39,7 +39,7 @@ Get help with your migration journey from the following additional resources.
 - [Migration Hub ](https://camunda.com/platform-7/migrate/)
 - The [Camunda forum](https://forum.camunda.io/c/c7-to-c8/)
 - Camunda Consulting
-  - [Migration workshops](https://camunda.com/wp-content/uploads/2024/03/Camunda_ConsultingWorkshops_5-Migration-Evaluation_2024.pdf)
+  - [Migration workshops](https://camunda.com/wp-content/uploads/2025/06/Camunda_ConsultingWorkshops_6-Migration-Evaluation_2025_EN.pdf)
   - Professional advisory services
 - [Camunda 7 to Camunda 8 Recognized Migration Partners](https://marketplace.camunda.com/en-US/listing?scat=65153&order=POPULARITY&page=1&locale=en-US):
   - Professional advisory services
