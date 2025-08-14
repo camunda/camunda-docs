@@ -1504,6 +1504,7 @@ module.exports = {
                 "self-managed/components/orchestration-cluster/operate/schema-and-migration",
                 "self-managed/components/orchestration-cluster/operate/importer-and-archiver",
                 "self-managed/components/orchestration-cluster/operate/operate-authentication",
+                "self-managed/components/orchestration-cluster/operate/operate-authorization",
                 "self-managed/components/orchestration-cluster/operate/usage-metrics",
               ],
               Tasklist: [
