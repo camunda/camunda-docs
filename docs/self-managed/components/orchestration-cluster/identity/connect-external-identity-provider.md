@@ -13,7 +13,7 @@ This guide explains how to configure the Orchestration Cluster to use an externa
 
 **User Interface access:**
 
-Users authenticate via the **OIDC Authorization Code Flow**. This means users are redirected to your Identity Provider to log in, and Camunda receives a token to establish the session.
+Users authenticate via the **OIDC [Authorization Code Flow](https://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth)**. This means users are redirected to your Identity Provider to log in, and Camunda receives a token to establish the session.
 Claims from the token are used to identify the user's username and, optionally, groups for easier assignment and management.
 In addition, Mapping Rules can be used to map token claims to Camunda roles, authorizations, or tenants.
 
@@ -53,7 +53,7 @@ Before configuring Camunda, perform these high-level steps in your Identity Prov
 4. **(Optional) Configure group or other claims** if you want to use group-based authorizations or mapping rules in Camunda.
 5. **Note the client ID, client secret, and issuer URI** for use in Camunda configuration.
 
-> For most Identity Providers, the default claim for the username is `sub` (subject). If you want to use a different claim (e.g., `preferred_username` or `email`), configure your Identity Provider to include it in the token and update the Camunda configuration accordingly.
+> For most Identity Providers, the default claim for the username is `sub` (subject). If you want to use a different claim (e.g., `preferred_username` or `email`), [configure](./configuration.md#oidc-configuration) your Identity Provider to include it in the token and update the Camunda configuration accordingly.
 
 ### Step 2: Choose Your Deployment and Configuration Method
 
