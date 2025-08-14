@@ -735,7 +735,7 @@ You can use a temporary pod as a **“jumphost”** to tunnel traffic to these c
 ---
 
 <details>
-<summary>Generic approach using a socat pod</summary>
+<summary>Generic approach using a jump host</summary>
 
 
 0. **Component connection details**
