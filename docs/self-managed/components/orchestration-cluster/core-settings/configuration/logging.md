@@ -8,7 +8,7 @@ This page covers logging configuration for the Camunda Platform 8 orchestration 
 
 ## Log4j2 configuration
 
-Each orchestration cluster component includes a default Log4j2 configuration file that can be modified to adjust logging behavior:
+The Orchestration Cluster has one Log4j2 configuration file that can be modified to adjust logging behavior:
 
 - Location of the configuration file depends on the deployment (e.g., distribution archive, Docker image).
 - The default setup uses a `ConsoleAppender` to output logs to the system console.

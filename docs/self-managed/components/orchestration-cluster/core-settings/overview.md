@@ -4,7 +4,7 @@ title: "Overview"
 description: "The central documentation hub for shared configuration and conceptual topics across the Camunda 8 Orchestration Cluster."
 ---
 
-Welcome to the central documentation hub for shared configuration and conceptual topics across the Camunda 8 Orchestration Cluster components: Operate, Tasklist, and Identity.
+Welcome to the central documentation hub for shared configuration and conceptual topics across the Camunda 8 Orchestration Cluster components: Operate, Tasklist, Zeebe, and Identity.
 
 ## Purpose
 
@@ -22,15 +22,6 @@ This section includes:
 - **Conceptual documentation:** Explanations of cluster-wide behaviors, features, and best practices relevant across multiple components.
 - **Migration and legacy information:** Guidance related to upgrading and migrating to version 8.8+, including notes on deprecated features and legacy support.
 - **Cross-component topics:** Information on shared aspects such as HTTP security headers, authentication mechanisms, data retention policies, and usage metrics.
-
-## Why this matters
-
-Previously, configuration and concepts were scattered across multiple component-specific docs (Operate, Tasklist, Identity), which could cause confusion and duplication. Centralizing this content:
-
-- Simplifies navigation and discovery for users managing the orchestration cluster
-- Reduces maintenance overhead by avoiding duplicated content
-- Reflects the underlying architectural changes introduced in 8.8 that unify the orchestration cluster components
-- Provides a clearer, consistent experience for configuring and operating Camunda Platform 8 Self-Managed clusters
 
 ## How this section relates to component docs
 
