@@ -33,7 +33,7 @@ In Helm installations, API authentication and authorization are enabled by defau
 
 :::note
 As a Spring Boot application, the Orchestration Cluster supports standard
-[Spring configuration](https://docs.spring.io/spring-boot/reference/features/external-config.html) methods. [Review configurations which apply to all components within the Orchestration Cluster](/docs/self-managed/components/orchestration-cluster/core-settings/configuration/configuration.md).
+[Spring configuration](https://docs.spring.io/spring-boot/reference/features/external-config.html) methods. [Review configurations which apply to all components within the Orchestration Cluster](/self-managed/components/orchestration-cluster/core-settings/configuration/configuration.md).
 :::
 
 ### Configure initial users
