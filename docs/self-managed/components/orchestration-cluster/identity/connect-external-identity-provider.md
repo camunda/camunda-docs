@@ -120,7 +120,7 @@ global.security.authentication.oidc.clientId: <YOUR_CLIENTID>
 global.security.authentication.oidc.clientSecret: <YOUR_CLIENTSECRET>
 global.security.authentication.oidc.issuerUri: <YOUR_ISSUERURI>
 global.security.authentication.oidc.redirectUri: <YOUR_REDIRECTURI>
-global.security.authentication.oidc.userNameClaim: <YOUR_USERNAMECLAIM>
+global.security.authentication.oidc.usernameClaim: <YOUR_USERNAMECLAIM>
 global.security.authentication.oidc.audiences: <YOUR_CLIENTID>
 global.security.authentication.oidc.scope: ["openid"]
 ```
@@ -142,7 +142,7 @@ global.security.authentication.oidc.clientId: <YOUR_CLIENTID>
 global.security.authentication.oidc.clientSecret: <YOUR_CLIENTSECRET>
 global.security.authentication.oidc.issuerUri: "https://login.microsoftonline.com/<YOUR_TENANT_ID>/v2.0"
 global.security.authentication.oidc.redirectUri: "http://localhost:8080/sso-callback"
-global.security.authentication.oidc.userNameClaim: "email"
+global.security.authentication.oidc.usernameClaim: "email"
 global.security.authentication.oidc.audiences: <YOUR_CLIENTID>
 global.security.authentication.oidc.scope: ["openid", "profile", "<client-id>/.default"]
 ```
@@ -153,7 +153,7 @@ global.security.authentication.oidc.clientId: <YOUR_CLIENTID>
 global.security.authentication.oidc.clientSecret: <YOUR_CLIENTSECRET>
 global.security.authentication.oidc.issuerUri: "https://<KEYCLOAK_HOST>/realms/<REALM_NAME>"
 global.security.authentication.oidc.redirectUri: "http://localhost:8080/sso-callback"
-global.security.authentication.oidc.userNameClaim: "preferred_username"
+global.security.authentication.oidc.usernameClaim: "preferred_username"
 global.security.authentication.oidc.audiences: <YOUR_CLIENTID>
 global.security.authentication.oidc.scope: ["openid", "profile", "email"]
 ```
@@ -263,6 +263,8 @@ Depending on your application type (e.g., standalone Java application, Spring Bo
 
 - _Audience Validation_: If you have configured the audiences property for the Orchestration Cluster (`camunda.security.authentication.oidc.audiences`), the Orchestration Cluster will validate the audience claim in the token against the configured audiences. Make sure that you token has the correct audience from the Orchestration Cluster above or add your audience in the Orchestration Cluster configuration.
 
+Note that per default authorizations are enabled which means that your application will only be able to retrieve the topology, but other requests require you to configure setting up [authorizations](../../../../components/concepts/access-control/authorizations.md) for the client. You should use your `client id` when configuring authorizations.
+
 <Tabs groupId="camundaclientopts" defaultValue="camundaclient" >
 <TabItem value="camundaclient" label="Camunda Client">
 1) Add dependency to your Java Project:
@@ -293,7 +295,7 @@ Depending on your application type (e.g., standalone Java application, Spring Bo
           .audience(audience)
           .clientId(clientId)
           .clientSecret(clientSecret)
-          .scope(ocAudience+"/.default")
+          .scope(ocAudience) // for Microsoft EntraID typically use: ocAudience + "/.default"
           .build();
   // Build a new Camunda Client with the CredentialsProvider
    try (CamundaClient client = CamundaClient.newClientBuilder()
