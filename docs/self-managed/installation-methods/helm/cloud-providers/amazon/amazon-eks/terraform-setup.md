@@ -730,7 +730,7 @@ For a production cluster, you should use a proper VPN or other secure access met
 :::
 
 Some infrastructure components (like OpenSearch dashboards or Aurora PostgreSQL databases) are only accessible from inside the EKS network.
-You can use a temporary pod as a **“jumphost”** to tunnel traffic to these components.
+You can use a temporary pod as a **“jump host”** to tunnel traffic to these components.
 
 ---
 
