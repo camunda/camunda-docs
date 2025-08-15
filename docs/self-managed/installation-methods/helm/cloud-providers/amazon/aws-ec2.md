@@ -253,7 +253,7 @@ Using Amazon OpenSearch Service requires [setting up a new Camunda installation]
    :::
 
    ```hcl reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/aws/compute/ec2-single-region/terraform/opensearch.tf#L1-L30
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/compute/ec2-single-region/terraform/cluster/opensearch.tf#L1-L30
    ```
 
 2. Customize the cluster setup using various input options. For a complete list of available parameters, refer to the [OpenSearch module documentation](https://github.com/camunda/camunda-deployment-references/blob/main/aws/modules/opensearch/README.md).
