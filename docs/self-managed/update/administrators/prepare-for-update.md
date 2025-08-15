@@ -91,7 +91,7 @@ Understanding these highlights will help you plan your upgrade and anticipate op
 
 ### Identity, authentication, and authorization
 
-Orchestration Cluster Identity provides Identity and Access Management (IAM) inside a cluster.
+The new Orchestration Cluster [Identity](/components/identity/identity-introduction.md) handles authentication and authorization for all Orchestration Cluster components and its resources.
 
 Learn more about all Identity 8.8 changes [here](../../../components/whats-new-in-88.md#identity-authentication-and-authorization-identity). Below is a high-level overview of the impact of these changes:
 
@@ -122,7 +122,7 @@ Learn more about all Identity 8.8 changes [here](../../../components/whats-new-i
     <td>If managing Keycloak internally, verify required database schema updates. Confirm supported Keycloak versions in the [environment matrix](../../../reference/supported-environments.md).</td>
 </tr>
 <tr>
-    <td>Operate/Tasklist user storage in Elasticsearch/OpenSearch</td>
+    <td>User storage in Elasticsearch/OpenSearch for Operate or Tasklist</td>
     <td><span className="label-highlight red">Breaking changes</span></td>
     <td>Not supported anymore. You must transition to the Basic authentication and re-create users in the Orchestration Cluster Identity.</td>
 </tr>
