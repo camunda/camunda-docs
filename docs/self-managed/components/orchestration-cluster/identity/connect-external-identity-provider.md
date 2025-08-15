@@ -215,7 +215,7 @@ Afterwards, you can use the groups for Role and Authorization Assignment as well
 <TabItem value="yaml">
 
 ```yaml
-camunda.security.authentication.oidc.groups-claim: <YOUR_USERNAMECLAIM>
+camunda.security.authentication.oidc.groups-claim: <YOUR_GROUPSCLAIM>
 ```
 
 </TabItem>
