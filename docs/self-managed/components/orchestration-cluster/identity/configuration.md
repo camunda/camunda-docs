@@ -161,3 +161,170 @@ The following variables are used when `oidc` is selected as the authentication m
 
   </TabItem>
 </Tabs>
+
+## HTTP Security Headers
+
+The HTTP security headers mechanism allows you to add response headers that enable browser-side protections against common web vulnerabilities. Each header addresses a specific security concern and can be configured independently.
+
+<Tabs>
+  <TabItem value="headers-env" label="Environment variables" default>
+
+| Environment variable                                                      | Description                                                                                                                                                      | Related Header                                                                                                                                                                                                                                           | Default value                     |
+| ------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- |
+| `CAMUNDA_SECURITY_HTTP_HEADERS_CACHE_CONTROL_ENABLED`                     | Enables or disables cache prevention headers. Default values: `Cache-Control: no-cache, no-store, max-age=0, must-revalidate`, `Pragma: no-cache`, `Expires: 0`. | [`Cache-Control`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control), [`Pragma`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Pragma), [`Expires`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Expires) | `true`                            |
+| `CAMUNDA_SECURITY_HTTP_HEADERS_CONTENT_SECURITY_POLICY_ENABLED`           | Enables or disables CSP headers.                                                                                                                                 | [`Content-Security-Policy`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy)                                                                                                                                           | `true`                            |
+| `CAMUNDA_SECURITY_HTTP_HEADERS_CONTENT_SECURITY_POLICY_POLICY_DIRECTIVES` | Custom CSP directives. If not set, [default values applied](#default-content-security-policy). If set, overrides default CSP policies.                           | [`Content-Security-Policy`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy)                                                                                                                                           |                                   |
+| `CAMUNDA_SECURITY_HTTP_HEADERS_CONTENT_SECURITY_POLICY_REPORT_ONLY`       | Enables reporting mode without enforcing policies.                                                                                                               | [`Content-Security-Policy-Report-Only`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy-Report-Only)                                                                                                                   | `false`                           |
+| `CAMUNDA_SECURITY_HTTP_HEADERS_CONTENT_TYPE_OPTIONS_ENABLED`              | Enables or disables `X-Content-Type-Options` header with `nosniff` value.                                                                                        | [`X-Content-Type-Options`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options)                                                                                                                                             | `true`                            |
+| `CAMUNDA_SECURITY_HTTP_HEADERS_CROSS_ORIGIN_EMBEDDER_POLICY_VALUE`        | Restricts embedded cross-origin resources. Options: `REQUIRE_CORP`, `UNSAFE_NONE`.                                                                               | [`Cross-Origin-Embedder-Policy`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cross-Origin-Embedder-Policy)                                                                                                                                 | `UNSAFE_NONE`                     |
+| `CAMUNDA_SECURITY_HTTP_HEADERS_CROSS_ORIGIN_OPENER_POLICY_VALUE`          | Isolates windows from cross-origin openers. Options: `UNSAFE_NONE`, `SAME_ORIGIN_ALLOW_POPUPS`, `SAME_ORIGIN`.                                                   | [`Cross-Origin-Opener-Policy`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cross-Origin-Opener-Policy)                                                                                                                                     | `SAME_ORIGIN_ALLOW_POPUPS`        |
+| `CAMUNDA_SECURITY_HTTP_HEADERS_CROSS_ORIGIN_RESOURCE_POLICY_VALUE`        | Declares whether resources can be loaded cross-origin. Options: `SAME_ORIGIN`, `SAME_SITE`, `CROSS_ORIGIN`.                                                      | [`Cross-Origin-Resource-Policy`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cross-Origin-Resource-Policy)                                                                                                                                 | `SAME_SITE`                       |
+| `CAMUNDA_SECURITY_HTTP_HEADERS_FRAME_OPTIONS_ENABLED`                     | Enables or disables `X-Frame-Options` header. Default value is `SAMEORIGIN`.                                                                                     | [`X-Frame-Options`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options)                                                                                                                                                           | `true`                            |
+| `CAMUNDA_SECURITY_HTTP_HEADERS_FRAME_OPTIONS_MODE`                        | Frame options mode. Options: `DENY`, `SAMEORIGIN`.                                                                                                               | [`X-Frame-Options`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options)                                                                                                                                                           | `SAMEORIGIN`                      |
+| `CAMUNDA_SECURITY_HTTP_HEADERS_HSTS_ENABLED`                              | Enables or disables `Strict-Transport-Security` header.                                                                                                          | [`Strict-Transport-Security`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security)                                                                                                                                       | `true`                            |
+| `CAMUNDA_SECURITY_HTTP_HEADERS_HSTS_INCLUDE_SUBDOMAINS`                   | Applies HSTS to all subdomains.                                                                                                                                  | [`Strict-Transport-Security`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security)                                                                                                                                       | `false`                           |
+| `CAMUNDA_SECURITY_HTTP_HEADERS_HSTS_MAX_AGE_IN_SECONDS`                   | HSTS max age in seconds.                                                                                                                                         | [`Strict-Transport-Security`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security)                                                                                                                                       | `31536000`                        |
+| `CAMUNDA_SECURITY_HTTP_HEADERS_HSTS_PRELOAD`                              | Enables HSTS preloading.                                                                                                                                         | [`Strict-Transport-Security`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security)                                                                                                                                       | `false`                           |
+| `CAMUNDA_SECURITY_HTTP_HEADERS_PERMISSIONS_POLICY_VALUE`                  | Restricts access to browser capabilities.                                                                                                                        | [`Permissions-Policy`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Permissions-Policy)                                                                                                                                                     | Disables all features by default  |
+| `CAMUNDA_SECURITY_HTTP_HEADERS_REFERRER_POLICY_VALUE`                     | Controls referrer information sharing. See available values below.                                                                                               | [`Referrer-Policy`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy)                                                                                                                                                           | `STRICT_ORIGIN_WHEN_CROSS_ORIGIN` |
+
+  </TabItem>
+  <TabItem value="headers-yaml" label="application.yaml">
+
+| Application.yaml property                                                 | Description                                                                                                                                                      | Related Header                                                                                                                                                                                                                                           | Default value                     |
+| ------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- |
+| `camunda.security.http-headers.cache-control.enabled`                     | Enables or disables cache prevention headers. Default values: `Cache-Control: no-cache, no-store, max-age=0, must-revalidate`, `Pragma: no-cache`, `Expires: 0`. | [`Cache-Control`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control), [`Pragma`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Pragma), [`Expires`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Expires) | `true`                            |
+| `camunda.security.http-headers.content-security-policy.enabled`           | Enables or disables CSP headers.                                                                                                                                 | [`Content-Security-Policy`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy)                                                                                                                                           | `true`                            |
+| `camunda.security.http-headers.content-security-policy.policy-directives` | Custom CSP directives. If not set, [default values applied](#default-content-security-policy). If set, overrides default CSP policies.                           | [`Content-Security-Policy`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy)                                                                                                                                           |                                   |
+| `camunda.security.http-headers.content-security-policy.report-only`       | Enables reporting mode without enforcing policies.                                                                                                               | [`Content-Security-Policy-Report-Only`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy-Report-Only)                                                                                                                   | `false`                           |
+| `camunda.security.http-headers.content-type-options.enabled`              | Enables or disables `X-Content-Type-Options` header with `nosniff` value.                                                                                        | [`X-Content-Type-Options`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options)                                                                                                                                             | `true`                            |
+| `camunda.security.http-headers.cross-origin-embedder-policy.value`        | Restricts embedded cross-origin resources. Options: `REQUIRE_CORP`, `UNSAFE_NONE`.                                                                               | [`Cross-Origin-Embedder-Policy`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cross-Origin-Embedder-Policy)                                                                                                                                 | `UNSAFE_NONE`                     |
+| `camunda.security.http-headers.cross-origin-opener-policy.value`          | Isolates windows from cross-origin openers. Options: `UNSAFE_NONE`, `SAME_ORIGIN_ALLOW_POPUPS`, `SAME_ORIGIN`.                                                   | [`Cross-Origin-Opener-Policy`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cross-Origin-Opener-Policy)                                                                                                                                     | `SAME_ORIGIN_ALLOW_POPUPS`        |
+| `camunda.security.http-headers.cross-origin-resource-policy.value`        | Declares whether resources can be loaded cross-origin. Options: `SAME_ORIGIN`, `SAME_SITE`, `CROSS_ORIGIN`.                                                      | [`Cross-Origin-Resource-Policy`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cross-Origin-Resource-Policy)                                                                                                                                 | `SAME_SITE`                       |
+| `camunda.security.http-headers.frame-options.enabled`                     | Enables or disables `X-Frame-Options` header. Default value is `SAMEORIGIN`.                                                                                     | [`X-Frame-Options`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options)                                                                                                                                                           | `true`                            |
+| `camunda.security.http-headers.frame-options.mode`                        | Frame options mode. Options: `DENY`, `SAMEORIGIN`.                                                                                                               | [`X-Frame-Options`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options)                                                                                                                                                           | `SAMEORIGIN`                      |
+| `camunda.security.http-headers.hsts.enabled`                              | Enables or disables `Strict-Transport-Security` header.                                                                                                          | [`Strict-Transport-Security`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security)                                                                                                                                       | `true`                            |
+| `camunda.security.http-headers.hsts.include-subdomains`                   | Applies HSTS to all subdomains.                                                                                                                                  | [`Strict-Transport-Security`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security)                                                                                                                                       | `false`                           |
+| `camunda.security.http-headers.hsts.max-age-in-seconds`                   | HSTS max age in seconds.                                                                                                                                         | [`Strict-Transport-Security`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security)                                                                                                                                       | `31536000`                        |
+| `camunda.security.http-headers.hsts.preload`                              | Enables HSTS preloading.                                                                                                                                         | [`Strict-Transport-Security`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security)                                                                                                                                       | `false`                           |
+| `camunda.security.http-headers.permissions-policy.value`                  | Restricts access to browser capabilities.                                                                                                                        | [`Permissions-Policy`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Permissions-Policy)                                                                                                                                                     | Disables all features by default  |
+| `camunda.security.http-headers.referrer-policy.value`                     | Controls referrer information sharing. See available values below.                                                                                               | [`Referrer-Policy`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy)                                                                                                                                                           | `STRICT_ORIGIN_WHEN_CROSS_ORIGIN` |
+
+  </TabItem>
+  <TabItem value="headers-helm" label="Helm values">
+
+| Helm value key                                                       | Description                                                                                                                                                      | Related Header                                                                                                                                                                                                                                           | Default value                     |
+| -------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- |
+| `global.security.httpHeaders.cacheControl.enabled`                   | Enables or disables cache prevention headers. Default values: `Cache-Control: no-cache, no-store, max-age=0, must-revalidate`, `Pragma: no-cache`, `Expires: 0`. | [`Cache-Control`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control), [`Pragma`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Pragma), [`Expires`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Expires) | `true`                            |
+| `global.security.httpHeaders.contentSecurityPolicy.enabled`          | Enables or disables CSP headers.                                                                                                                                 | [`Content-Security-Policy`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy)                                                                                                                                           | `true`                            |
+| `global.security.httpHeaders.contentSecurityPolicy.policyDirectives` | Custom CSP directives. If not set, [default values applied](#default-content-security-policy). If set, overrides default CSP policies.                           | [`Content-Security-Policy`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy)                                                                                                                                           |                                   |
+| `global.security.httpHeaders.contentSecurityPolicy.reportOnly`       | Enables reporting mode without enforcing policies.                                                                                                               | [`Content-Security-Policy-Report-Only`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy-Report-Only)                                                                                                                   | `false`                           |
+| `global.security.httpHeaders.contentTypeOptions.enabled`             | Enables or disables `X-Content-Type-Options` header with `nosniff` value.                                                                                        | [`X-Content-Type-Options`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options)                                                                                                                                             | `true`                            |
+| `global.security.httpHeaders.crossOriginEmbedderPolicy.value`        | Restricts embedded cross-origin resources. Options: `REQUIRE_CORP`, `UNSAFE_NONE`.                                                                               | [`Cross-Origin-Embedder-Policy`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cross-Origin-Embedder-Policy)                                                                                                                                 | `UNSAFE_NONE`                     |
+| `global.security.httpHeaders.crossOriginOpenerPolicy.value`          | Isolates windows from cross-origin openers. Options: `UNSAFE_NONE`, `SAME_ORIGIN_ALLOW_POPUPS`, `SAME_ORIGIN`.                                                   | [`Cross-Origin-Opener-Policy`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cross-Origin-Opener-Policy)                                                                                                                                     | `SAME_ORIGIN_ALLOW_POPUPS`        |
+| `global.security.httpHeaders.crossOriginResourcePolicy.value`        | Declares whether resources can be loaded cross-origin. Options: `SAME_ORIGIN`, `SAME_SITE`, `CROSS_ORIGIN`.                                                      | [`Cross-Origin-Resource-Policy`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cross-Origin-Resource-Policy)                                                                                                                                 | `SAME_SITE`                       |
+| `global.security.httpHeaders.frameOptions.enabled`                   | Enables or disables `X-Frame-Options` header. Default value is `SAMEORIGIN`.                                                                                     | [`X-Frame-Options`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options)                                                                                                                                                           | `true`                            |
+| `global.security.httpHeaders.frameOptions.mode`                      | Frame options mode. Options: `DENY`, `SAMEORIGIN`.                                                                                                               | [`X-Frame-Options`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options)                                                                                                                                                           | `SAMEORIGIN`                      |
+| `global.security.httpHeaders.hsts.enabled`                           | Enables or disables `Strict-Transport-Security` header.                                                                                                          | [`Strict-Transport-Security`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security)                                                                                                                                       | `true`                            |
+| `global.security.httpHeaders.hsts.includeSubdomains`                 | Applies HSTS to all subdomains.                                                                                                                                  | [`Strict-Transport-Security`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security)                                                                                                                                       | `false`                           |
+| `global.security.httpHeaders.hsts.maxAgeInSeconds`                   | HSTS max age in seconds.                                                                                                                                         | [`Strict-Transport-Security`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security)                                                                                                                                       | `31536000`                        |
+| `global.security.httpHeaders.hsts.preload`                           | Enables HSTS preloading.                                                                                                                                         | [`Strict-Transport-Security`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security)                                                                                                                                       | `false`                           |
+| `global.security.httpHeaders.permissionsPolicy.value`                | Restricts access to browser capabilities.                                                                                                                        | [`Permissions-Policy`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Permissions-Policy)                                                                                                                                                     | Disables all features by default  |
+| `global.security.httpHeaders.referrerPolicy.value`                   | Controls referrer information sharing. See available values below.                                                                                               | [`Referrer-Policy`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy)                                                                                                                                                           | `STRICT_ORIGIN_WHEN_CROSS_ORIGIN` |
+
+  </TabItem>
+</Tabs>
+
+### Default Content Security Policy
+
+This is default value of the Content Security Policy when enabled:
+
+```
+default-src 'self';
+base-uri 'self';
+script-src 'self' https: *.chargebee.com *.mixpanel.com ajax.cloudflare.com static.cloudflareinsights.com;
+script-src-elem 'self' cdn.jsdelivr.net ;
+connect-src 'self' https: *.mixpanel.com cloudflareinsights.com *.appcues.net wss://api.appcues.net cdn.jsdelivr.net;
+style-src 'self' https: 'unsafe-inline' cdn.jsdelivr.net *.googleapis.com *.chargebee.com;
+img-src data: 'self';
+form-action 'self';
+frame-ancestors 'self';
+frame-src 'self' https: *.chargebee.com blob: ;
+object-src 'self' blob:;
+font-src 'self' data: fonts.camunda.io cdn.jsdelivr.net;
+worker-src 'self' blob:;
+child-src;
+script-src-attr 'none'.
+```
+
+## CSRF Protection
+
+Cross-Site Request Forgery (CSRF) is a type of malicious exploit where unauthorized commands are
+transmitted from a user that the web application trusts. In a CSRF attack, an attacker tricks a victim's
+browser into making unwanted requests to a web application where the victim is authenticated.
+
+For a comprehensive understanding of CSRF attacks and prevention methods, refer to the
+[MDN Web Docs on CSRF](https://developer.mozilla.org/en-US/docs/Glossary/CSRF).
+
+### How CSRF protection works in Camunda
+
+- **Token generation**: A unique CSRF token is generated and stored in a secure, HTTP-only cookie named `X-CSRF-TOKEN`.
+- **Token validation**: For state-changing requests (POST, PUT, DELETE, etc.), the server validates that the CSRF token
+  in the request header `X-CSRF-TOKEN` matches the one in the cookie.
+- **Safe methods**: GET, HEAD, TRACE, and OPTIONS requests are considered safe and don't require CSRF validation.
+
+### Configuration
+
+The following variables are used to configure CSRF protection.
+The CSRF protection only applies in the context of a session-based authentication. You don't need to provide
+CSRF tokens when using OIDC or Basic authentication methods.
+
+<Tabs>
+  <TabItem value="csrf-env" label="Environment variables" default>
+
+| Environment variable            | Description                          | Default value |
+| ------------------------------- | ------------------------------------ | ------------- |
+| `CAMUNDA_SECURITY_CSRF_ENABLED` | Enables or disables CSRF protection. | `true`        |
+
+  </TabItem>
+  <TabItem value="csrf-yaml" label="application.yaml">
+
+| Application.yaml property       | Description                          | Default value |
+| ------------------------------- | ------------------------------------ | ------------- |
+| `camunda.security.csrf.enabled` | Enables or disables CSRF protection. | `true`        |
+
+  </TabItem>
+  <TabItem value="csrf-helm" label="Helm values">
+
+| Helm value key                 | Description                          | Default value |
+| ------------------------------ | ------------------------------------ | ------------- |
+| `global.security.csrf.enabled` | Enables or disables CSRF protection. | `true`        |
+
+  </TabItem>
+</Tabs>
+
+:::caution
+Disabling CSRF protection is not recommended for production environments as it leaves your application vulnerable to cross-site request forgery attacks.
+:::
+
+### Protected vs unprotected paths
+
+#### Protected paths (require CSRF token)
+
+- `/api/**` – API endpoints (except specifically excluded paths)
+- `/v1/**`, `/v2/**` – Versioned API endpoints
+- All state-changing operations (POST, PUT, DELETE, PATCH)
+
+#### Unprotected paths (no CSRF token required)
+
+- `/actuator/**` – Health and monitoring endpoints
+- `/v2/license` – Public license endpoint
+- `/error` – Error handling
+- Authentication endpoints (`/login`, `/logout`)
+- Safe HTTP methods (GET, HEAD, OPTIONS, TRACE)
+
+### Security considerations
+
+- Always use HTTPS in production to prevent token interception.
+- Consider additional security headers configured in the security settings.
+- Regularly review and update the list of unprotected paths.

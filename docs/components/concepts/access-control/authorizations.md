@@ -17,7 +17,7 @@ keywords:
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Camunda 8's Orchestration Cluster provides a fine-grained authorization system for controlling access to applications and APIs. This system applies to:
+Camunda 8's Orchestration Cluster provides a fine-grained authorization system for controlling access to web components and APIs. This system applies to:
 
 - **Zeebe**
 - **Operate**
@@ -37,24 +37,21 @@ Authorization applies only to these orchestration components. It does not apply 
 - When disabled: all users and clients have full access
 - When enabled: no access is granted by default; explicit authorization is required
 - No concept of deny rules—absence of permission means no access
-- Enforced across both web applications and API requests
+- Enforced across both web components and API requests
 
 ### Key components
 
 1. **Authorizations**
-
    - Assign permissions to Identities for specific resources
    - Examples:
      - User `jonny` is authorized to create new users
      - Group `marketing` is authorized to delete the group `sales`
 
 2. **Owners**
-
    - Types include users, groups, roles, and mapping rules
    - Authorizations can be assigned to any type of owner
 
 3. **Permissions**
-
    - Define allowed interactions with resources
    - Are specific to each resource type
 
@@ -113,10 +110,9 @@ The following table lists all resources that support authorization in Camunda 8 
 | **Process Definition**               | `*`, `order_process`                   | All processes / BPMN Process ID      | `CREATE_PROCESS_INSTANCE`, `READ_PROCESS_DEFINITION`, `READ_PROCESS_INSTANCE`, `READ_USER_TASK`, `UPDATE_PROCESS_INSTANCE`, `UPDATE_USER_TASK`, `MODIFY_PROCESS_INSTANCE`, `CANCEL_PROCESS_INSTANCE`, `DELETE_PROCESS_INSTANCE`                                                                                                                                                                                                            |
 | **Resource**                         | `*`, `my_form`, `order_process`        | All resources / Form ID / Process ID | `CREATE`, `READ`, `DELETE_DRD`, `DELETE_FORM`, `DELETE_PROCESS`, `DELETE_RESOURCE`                                                                                                                                                                                                                                                                                                                                                         |
 | **Role**                             | `*`, `myrole`                          | All roles / Role ID                  | `CREATE`, `READ`, `UPDATE`, `DELETE`                                                                                                                                                                                                                                                                                                                                                                                                       |
-| **System**                           | `*`                                    | All system operations                | `READ`, `UPDATE`                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| **System**                           | `*`                                    | All system operations                | `READ`, `READ_USAGE_METRIC`, `UPDATE`                                                                                                                                                                                                                                                                                                                                                                                                      |
 | **Tenant**                           | `*`, `tenantA`                         | All tenants / Tenant ID              | `CREATE`, `READ`, `UPDATE`, `DELETE`                                                                                                                                                                                                                                                                                                                                                                                                       |
 | **User**                             | `*`, `felix.mueller`                   | All users / Username                 | `CREATE`, `READ`, `UPDATE`, `DELETE`                                                                                                                                                                                                                                                                                                                                                                                                       |
-| **Usage Metric**                     | `*`                                    | All usage metric operations          | `READ`                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 
 ## Default roles
 
@@ -124,7 +120,7 @@ Camunda provides predefined roles to simplify access management:
 
 | Role ID          | Purpose                                                                             | Typical authorizations                                                                                                                              |
 | ---------------- | ----------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `admin`          | Full control over all **Orchestration Cluster** resources and applications.         | All permissions for all resources: `READ`, `CREATE`, `UPDATE`, `DELETE`, including `ACCESS` to all applications.                                    |
+| `admin`          | Full control over all **Orchestration Cluster** resources and components.           | All permissions for all resources: `READ`, `CREATE`, `UPDATE`, `DELETE`, including `ACCESS` to all web components.                                  |
 | `readonly-admin` | Audit-focused users who need read-only access across the **Orchestration Cluster**. | `READ` for all resources, including `READ_PROCESS_DEFINITION`, `READ_PROCESS_INSTANCE`, `READ_USER_TASK`, etc.                                      |
 | `connectors`     | Technical role for executing connector calls.                                       | `READ_PROCESS_DEFINITION` on **Process Definition** (`*`), `UPDATE_PROCESS_INSTANCE` on **Process Definition** (`*`), `CREATE` on **Message** (`*`) |
 | `rpa`            | Role for RPA workers.                                                               | `READ` on **Resource** (`*`), `UPDATE_PROCESS_INSTANCE` on **Process Definition** (`*`)                                                             |
@@ -137,18 +133,20 @@ Camunda provides predefined roles to simplify access management:
 
 ## Common use cases
 
-### Application access
+### Web component access
 
-Users need specific application permissions to access **Orchestration Cluster** components:
+Users need specific permissions to access **Orchestration Cluster** web components:
 
-- **UI access**: Resource type `application` and Resource Key is one of the components Operate, Tasklist, **Identity**
+- **UI access**: Resource type `Component` and Resource Key is one of the components Operate, Tasklist, Identity
   - Example: `operate` for Operate access
   - Example: `tasklist` for Tasklist access
+  - Example: `identity` for Identity access
+  - Example: `*` for access to all components
 - Without these permissions, users cannot log in to the components
 
 ### Resource access
 
-Within applications, users need additional permissions for specific resources, e.g.:
+Within components, users need additional permissions for specific resources, e.g.:
 
 - **Process related**: Resource type `processDefinition`
   - `READ_PROCESS_DEFINITION` to view process models
