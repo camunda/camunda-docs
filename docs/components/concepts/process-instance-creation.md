@@ -131,9 +131,9 @@ You can activate the same element multiple times inside the created process inst
 
 #### Runtime instructions
 
-By default, the process execution continues normally until it reaches the end. To change this behavior and end the process instance once a specific element has completed or terminated, you can provide runtime instructions. Similar to start instructions, each runtime instruction specifies the ID of a single element whose completion or termination should trigger the end of the process instance.
+By default, the process execution continues normally until the end of the process. To change this behavior and end the process instance after a specific element completes or terminates, provide runtime instructions. Each runtime instruction specifies the ID of one element whose completion or termination ends the process instance.
 
-Multiple runtime instructions can be provided to terminate the process instance after more than one element—for example, when a process has multiple parallel flows.
+You can provide multiple runtime instructions to terminate the process instance after multiple elements—for example, when a process has multiple parallel flows.
 
 :::note
 Start and runtime instructions have the same [limitations as process instance modification](/components/concepts/process-instance-modification.md#limitations), e.g., it is not possible to start or end at a sequence flow.

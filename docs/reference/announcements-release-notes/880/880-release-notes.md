@@ -116,7 +116,7 @@ The connectors runtime is optimized by fetching only the latest process definiti
 
 This feature allows developers to manually execute and test individual tasks or segments (connectors, RPA bots, IDP extractions) without running full processes, improving debugging and development efficiency.
 
-To learn more, see [process instance creation](/components/concepts/process-instance-creation.md#run-process-segment)
+To learn more, see [run process segment](/components/concepts/process-instance-creation.md#run-process-segment)
 
 <!-- https://github.com/camunda/product-hub/issues/2453 -->
 
