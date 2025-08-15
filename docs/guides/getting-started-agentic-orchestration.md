@@ -32,31 +32,25 @@ Once you have completed this guide, you will have an example running AI agent an
 
 The following prerequisites are required to build your first AI agent:
 
-| Prerequisite                     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| :------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Running Camunda 8 environment    | <p>To run your agent, you must set up a running Camunda 8 environment, either:</p><p><ul><li><p>A local (Self-Managed) Camunda 8 environment. For example, see [Run your first local project](../getting-started-example).</p></li><li><p>A Camunda 8 SaaS account. For example, [sign up for a free SaaS Trial Account](https://accounts.cloud.camunda.io/signup).</p></li></ul></p>                                                                                                      |
-| A supported LLM provider account | <p>The [AI Agent connector](../components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) supports multiple model providers, such as AWS Bedrock, OpenAI, and Anthropic.</p><p>For the purposes of this guide it is assumed you have access to an AWS account with permissions for the [Bedrock Converse API](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html), but you can configure the connector to use any other supported provider.</p> |
-
-:::info
-If you do not have access to an AWS account, you can use a different LLM provider instead, such as OpenAI or Anthropic. For more information on how to configure the connector with your preferred LLM provider, see [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#model-provider).
-:::
+| Prerequisite                     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| :------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Running Camunda 8 environment    | <p>To run your agent, you must have a running Camunda 8 environment (version 8.8 or newer), either:</p><p><ul><li><p>A local (Self-Managed) Camunda 8 environment. For example, see [Run your first local project](../getting-started-example).</p></li><li><p>A Camunda 8 SaaS account. For example, [sign up for a free SaaS Trial Account](https://accounts.cloud.camunda.io/signup).</p></li></ul></p>                                                                                                                                                                                                                                                                                                                                                 |
+| A supported LLM provider account | <p>The [AI Agent connector](../components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) supports multiple model providers, such as AWS Bedrock, OpenAI, and Anthropic.</p><p>For the purposes of this guide it is assumed you have access to an AWS account with permissions for the [Bedrock Converse API](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html).</p> <p> If you do not have access to an AWS account, you can use a different LLM provider instead, such as OpenAI or Anthropic. For more information on how to configure the connector with your preferred LLM provider, see [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#model-provider)</p> |
 
 ### AWS Bedrock Configuration
 
 The AI Agent example is preconfigured to use AWS Bedrock with Claude Sonnet 4 in the us-east-1 region.
 
-- To use the example process without changes you must first request access to Anthropic Claude models for your AWS account.
+- To use the example process without changes you must first request access to **Anthropic Claude** foundation models using the AWS console.
 - Refer to the [AWS documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access-modify.html) for more information.
 
-## Before you begin
-
-Before building your first AI agent it is helpful to understand the following key concepts and terms.
+## Concepts
 
 ### Introducing dynamic workflows
 
 Business processes are traditionally modeled as a deterministic sequence of steps, with predefined flow logic following a strict order. This works well if flow logic can be defined in advance, but struggles to adapt in more complex, open-ended scenarios.
 
-- [Dynamic workflows](/components/agentic-orchestration/design-architecture.md#when-to-use-deterministic-or-non-deterministic-orchestration) allow a process to adapt and change at runtime, based on real-time information and AI-driven insights. An agent with a goal to complete runs within a loop, selecting what it needs from a set of tools (possible actions) to achieve its goal.
+- [Dynamic workflows](/components/agentic-orchestration/design-architecture.md#when-to-use-deterministic-or-non-deterministic-orchestration) adapt in real time, adjusting steps based on current information and AI insights. An agent works toward its goal in a loop, choosing actions from available tools until the goal is reached.
 
 - Camunda agentic orchestration blends both deterministic and dynamic (AI-driven) process orchestration into a single process model. This allows you to use deterministic control when needed, and flexibility where it makes sense.
 
@@ -73,7 +67,7 @@ An [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subp
 - It allows an AI agent to dynamically select and run tools (available actions) based on the current context and requirements.
 - It can perform tasks in parallel, handle exceptions, and make decisions on the fly.
 
-For example, the process in this guide uses an ad-hoc sub-process in a [tool calling feedback loop](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#feedback-loop-use-cases), with the AI Agent connector used to allow the LLM to choose from the tools available in the ad-hoc sub-process.
+In this guide’s example, the process uses an ad-hoc sub-process within a [tool-calling feedback loop](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#feedback-loop-use-cases). The AI Agent connector lets the LLM choose from the tools in that sub-process.
 
 ## Step 1: Install the example model blueprint
 
@@ -89,7 +83,7 @@ To start building your first AI agent, you can use a pre-built Camunda blueprint
 
 1. Navigate to the [Example AI Agent](https://marketplace.camunda.com/en-US/apps/587865) blueprint in the Camunda marketplace.
 1. Click **For SM** and download the blueprint files from the repository.
-1. Open the blueprint BPMN diagram in Desktop Modeler.
+1. Open the blueprint BPMN diagram in Desktop Modeler or in Web Modeler.
 
 ### About the example AI agent process
 
@@ -110,12 +104,12 @@ The example process is preconfigured to use AWS Bedrock as the model. For authen
 
 How you configure these secrets depends if you are running Camunda 8 SaaS or a Self-Managed (local) environment.
 
-- For SaaS, you can configure the secrets in the [Console](../components/console/manage-clusters/manage-secrets.md).
-- For Camunda 8 Run, export the secrets as environment variables before starting the distribution.
+- For SaaS and Self Managed deployments, you can configure the secrets in the [Console](../components/console/manage-clusters/manage-secrets.md).
+- For Camunda 8 Run, export the secrets as environment variables before starting the distribution. If you use Camunda 8 Run with docker, add the secrets in the `connector-secrets.txt` file.
 
 ## Step 3: Configure the AI Agent connector (optional)
 
-In the BPMN diagram, the AI Agent connector template is applied to the `AI Agent` service task. You can change the AI Agent configuration in the properties panel of the AI Agent if required.
+In the blueprint BPMN diagram, the AI Agent connector template is applied to the `AI Agent` service task. You can change the AI Agent configuration in the properties panel of the AI Agent if required.
 
 <img src={AiAgentPropertiesPanelImg} alt="AI agent properties panel"/>
 
@@ -127,7 +121,7 @@ For a reference of available configuration options, see [AI Agent connector](/co
 
 ## Step 4: Deploy, run, and test your AI agent
 
-You can now deploy and run your AI agent, and test it as a running process.
+You can now deploy and run your AI agent, and test it as a running process on your Camunda cluster running version 8.8 or higher.
 
 Once you have started your process, you can then monitor the execution in [Operate](/components/operate/operate-introduction.md).
 
