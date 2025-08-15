@@ -14,7 +14,7 @@ A successful upgrade to Camunda 8.8 requires careful preparation. This guide hel
 
 <table className="table-callout">
 <tr>
-    <td width="30%">**Area**</td>
+    <td style={{minWidth: "30%"}}>**Area**</td>
     <td>**Details**</td>
 </tr>
 <tr>
@@ -43,10 +43,10 @@ Understanding these highlights will help you plan your upgrade and anticipate op
 
 <table className="table-callout">
 <tr>
-    <td width="160px">**Area**</td>
-    <td width="188px">**What’s changed**</td>
-    <td width="160px">**Impact**</td>
-    <td>**Description**</td>
+    <td style={{minWidth: "152px"}}>**Area**</td>
+    <td style={{minWidth: "152px"}}>**What's changed**</td>
+    <td style={{width: "160px"}}>**Impact**</td>
+    <td style={{minWidth: "40%"}}>**Description**</td>
 </tr>
 <tr>
     <td>Orchestration Cluster</td>
@@ -58,7 +58,7 @@ Understanding these highlights will help you plan your upgrade and anticipate op
     <td>Orchestration Cluster API</td>
     <td>A new unified REST API for an Orchestration cluster.</td>
     <td><span className="label-highlight orange">Medium</span></td>
-    <td>Operate and Tasklist (V1) APIs are deprecated and should be replaced by the Orchestration cluster API.</td>
+    <td>Operate and Tasklist (V1) APIs are deprecated and should be replaced by the Orchestration Cluster API.</td>
 </tr>
 <tr>
     <td>Data and exporters</td>
@@ -69,7 +69,7 @@ Understanding these highlights will help you plan your upgrade and anticipate op
     If Taskist data are present, an additional data migration is required - process application migration utilities are offered for this.</td>
 </tr>
 <tr>
-    <td>Unified component configuration</td>
+    <td>Unified components configuration</td>
     <td>A new unified configuration with a shared YAML schema across Orchestration cluster components.</td>
     <td><span className="label-highlight red">Breaking changes</span></td>
     <td>Replacement of deprecated configuration properties to their successors.
@@ -97,8 +97,8 @@ Learn more about all Identity 8.8 changes [here](../../../components/whats-new-i
 
 <table className="table-callout">
 <tr>
-    <td width="30%">**Area**</td>
-    <td width="160px">**Impact**</td>
+    <td style={{minWidth: "30%"}}>**Area**</td>
+    <td style={{width: "160px"}}>**Impact**</td>
     <td>**Description**</td>
 </tr>
 <tr>
