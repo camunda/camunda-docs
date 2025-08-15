@@ -102,12 +102,6 @@ The connectors runtime is optimized by fetching only the latest process definiti
 
 <!-- https://github.com/camunda/product-hub/issues/2572 -->
 
-#### Run process segment
-
-This feature allows developers to manually execute and test individual tasks or segments (connectors, RPA bots, IDP extractions) without running full processes, improving debugging and development efficiency.
-
-<!-- https://github.com/camunda/product-hub/issues/2453 -->
-
 #### Unlock element template fields
 
 [Element template management](/components/connectors/manage-connector-templates.md) is now more flexible for developers and DevOps teams.
@@ -117,6 +111,14 @@ This feature allows developers to manually execute and test individual tasks or 
 - Safeguards now notify you of ID or version conflicts to prevent accidental overwrites when publishing templates.
 
 <!-- https://github.com/camunda/product-hub/issues/2860 -->
+
+### Run process segment <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects APIs">API</span>
+
+This feature allows developers to manually execute and test individual tasks or segments (connectors, RPA bots, IDP extractions) without running full processes, improving debugging and development efficiency.
+
+To learn more, see [process instance creation](/components/concepts/process-instance-creation.md#run-process-segment)
+
+<!-- https://github.com/camunda/product-hub/issues/2453 -->
 
 ### Intelligent document processing (IDP) form extraction <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects IDP">IDP</span>
 
