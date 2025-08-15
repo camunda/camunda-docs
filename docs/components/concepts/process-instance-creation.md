@@ -112,13 +112,15 @@ Failure scenarios applicable to other commands are applicable to this command as
 - **Failover**: When the node processing this process crashes, another node continues the processing. The other node does not send the response because the request is registered on the first one.
 - **Gateway failure**: If the gateway the client is connected to fails, nodes inside the cluster cannot send the response to the client.
 
-### Create and start at a user-defined element
+### Run process segment
 
-The [`create and execute asynchronously`](#create-and-execute-asynchronously) and [`create and await results`](#create-and-await-results) commands both start the process instance at their default initial element: the single [none start event](/components/modeler/bpmn/none-events/none-events.md#none-start-events). Camunda 8 also provides a way to create a process instance starting at user-defined element(s).
+The [`create and execute asynchronously`](#create-and-execute-asynchronously) and [`create and await results`](#create-and-await-results) commands both start the process instance at their default initial element: the single [none start event](/components/modeler/bpmn/none-events/none-events.md#none-start-events). Camunda 8 also provides a way to create a process instance starting or ending at user-defined element(s).
 
 :::info
 This is an advanced feature. Camunda recommends to only use this functionality for testing purposes. The none start event is the defined beginning of your process. Most likely the process is modeled with the intent to start all instances from the beginning.
 :::
+
+#### Start instructions
 
 To start the process instance at a user-defined element, you need to provide start instructions along with the command. Each instruction describes how and where to start a single element.
 
@@ -127,15 +129,23 @@ By default, the instruction starts before the given element. This means input ma
 Multiple instructions can be provided to start the process instance at more than one element.
 You can activate the same element multiple times inside the created process instance by referring to the same element ID in more than one instruction.
 
+#### Runtime instructions
+
+By default, the process execution continues normally until it reaches the end. To change this behavior and end the process instance once a specific element has completed or terminated, you can provide runtime instructions. Similar to start instructions, each runtime instruction specifies the ID of a single element whose completion or termination should trigger the end of the process instance.
+
+Multiple runtime instructions can be provided to terminate the process instance after more than one element—for example, when a process has multiple parallel flows.
+
 :::note
-Start instructions have the same [limitations as process instance modification](/components/concepts/process-instance-modification.md#limitations), e.g., it is not possible to start at a sequence flow.
+Start and runtime instructions have the same [limitations as process instance modification](/components/concepts/process-instance-modification.md#limitations), e.g., it is not possible to start or end at a sequence flow.
 :::
 
-Start instructions are supported for both `CreateProcessInstance` commands.
+Start and runtime instructions are supported for both `CreateProcessInstance` commands. Both instruction sets can be used separately or together to achieve different scenarios.
 
 <details>
-   <summary>Create a process instance and start at a user-defined element</summary>
+   <summary>Create a process instance with a start and a runtime instruction</summary>
    <p>
+
+The example below shows how to create a process instance that starts at a user-defined element and terminates after it, so that only the specified segment of the process is executed.
 
 ```
 curl -L 'http://localhost:8080/v2/process-instances' \
@@ -149,6 +159,12 @@ curl -L 'http://localhost:8080/v2/process-instances' \
       "elementId": "ship_parcel"
     }
   ],
+  "runtimeInstructions": [
+    {
+      "type": "TERMINATE_PROCESS_INSTANCE",
+      "afterElementId": "ship_parcel"
+    }
+  ]
   "variables": { "orderId": "1234" }
 }'
 ```
