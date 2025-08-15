@@ -7,40 +7,40 @@ description: "Learn how to migrate from Zeebe Process Test to Camunda Process Te
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-[Camunda Process Test](/apis-tools/testing/getting-started.md) (CPT) is the successor
-of [Zeebe Process Test](/apis-tools/java-client/zeebe-process-test.md) (ZPT). Since version 8.8, CPT is available and
-fully supported. ZPT is deprecated and will be removed with version 8.10. See
-the [announcement](https://camunda.com/blog/2025/04/camunda-process-test-the-next-generation-testing-library/) for
-details.
+[Camunda Process Test](/apis-tools/testing/getting-started.md) (CPT) is the successor to [Zeebe Process Test](/apis-tools/java-client/zeebe-process-test.md) (ZPT).  
+Since version **8.8**, CPT is available and fully supported. ZPT is deprecated and will be removed in version **8.10**.  
+See the [announcement](https://camunda.com/blog/2025/04/camunda-process-test-the-next-generation-testing-library/) for details.
 
-The following guide helps you to migrate your existing test cases step-by-step from ZPT to CPT.
+This guide walks you through migrating your existing test cases from ZPT to CPT step-by-step.
 
 :::note
-Please be aware that there are differences between ZPT and CPT in their API and behavior that could lead to a bigger
-effort for the migration depending on your existing test cases. Fundamentally, ZPT uses only Camunda's workflow engine
-(aka Zeebe) with access to internal components. CPT uses the full Camunda distribution and interacts with the API.
+Be aware that there are differences between ZPT and CPT in both API and behavior, which may increase migration effort depending on your existing test cases.
 
-- CPT has different assertion and utility names to align with the API
-- CPT has no equivalent for all assertions and utilities because it is limited to the API
-- CPT is slower because it runs the full Camunda distribution
+**Key differences:**
 
-However, CPT has many new features and improvements that make the migration worth it: access to Camunda's full API,
-support for Camunda user tasks, blocking assertions to deal with the asynchronous processing, and enhanced mocking
-utilities.
+- **Underlying engine:** ZPT uses only Camunda’s workflow engine (Zeebe) with access to internal components, whereas CPT runs the full Camunda distribution and interacts with the public API.
+- **Assertions and utilities:** CPT uses different names to align with the API, and not all ZPT assertions/utilities have equivalents in CPT.
+- **Performance:** CPT is slower because it runs the full distribution.
 
-:::
+**Key advantages of CPT:**
+
+- Access to Camunda’s full API
+- Support for Camunda user tasks
+- Blocking assertions for asynchronous processing
+- Enhanced mocking utilities
+  :::
 
 ## Update your dependency
 
-First, you need to update your Maven dependency.
+First, update your Maven dependency.
 
-If you use
-ZPT's [Camunda Spring Boot SDK integration](/apis-tools/java-client/zeebe-process-test.md#camunda-spring-boot-sdk-integration) (
-`artifactId: spring-boot-starter-camunda-test/spring-boot-starter-camunda-test-testcontainer`), then replace it with
-CPT's Spring integration module.
+- **If you use ZPT with Camunda Spring Boot SDK integration**  
+  (`artifactId: spring-boot-starter-camunda-test` or `spring-boot-starter-camunda-test-testcontainer`),  
+  replace it with **CPT’s Spring integration module**.
 
-If you use ZPT without Spring (`artifactId: zeebe-process-test-extension/zeebe-process-test-extension-testcontainer`),
-then replace it with CPT's Java module.
+- **If you use ZPT without Spring**  
+  (`artifactId: zeebe-process-test-extension` or `zeebe-process-test-extension-testcontainer`),  
+  replace it with **CPT’s Java module**.
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={
 [
@@ -91,22 +91,27 @@ additional changes.
 
 ### ZPT's embedded runtime
 
-If you use ZPT's embedded runtime (`artifactId: zeebe-process-test-extension/spring-boot-starter-camunda-test`), then
-you should use CPT's [Remote runtime](/apis-tools/testing/configuration.md#remote-runtime). Choose this option only if
-you can't install a Docker-API compatible container runtime, such as Docker on Linux or Docker Desktop.
+If you use ZPT’s **embedded runtime**  
+(`artifactId: zeebe-process-test-extension` or `spring-boot-starter-camunda-test`),  
+switch to CPT’s [remote runtime](/apis-tools/testing/configuration.md#remote-runtime).  
+Choose this option only if you cannot install a Docker-API compatible container runtime (e.g., Docker on Linux or Docker Desktop).
 
 Prepare your remote runtime:
 
-1. Install [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md#install-and-start-camunda-8-run) on
-   your machine
-2. [Enable the management clock endpoint](/apis-tools/testing/configuration.md#prerequisites-1)
+1. **Install Camunda 8 Run**  
+   Follow the [installation guide](/self-managed/quickstart/developer-quickstart/c8run.md#install-and-start-camunda-8-run) on your machine.
 
-- Create an `application.yaml` file in the root `/c8run` directory
-- Add the property `zeebe.clock.controlled: true`
+2. **Enable the management clock endpoint**  
+   See [prerequisites](/apis-tools/testing/configuration.md#prerequisites-1):
+   - Create an `application.yaml` file in the root `/c8run` directory.
+   - Add:
+     ```yaml
+     zeebe.clock.controlled: true
+     ```
 
-3. Start Camunda 8 Run
+3. **Start Camunda 8 Run**.
 
-Then, switch CPT's runtime mode to `remote` in your project.
+4. **Switch CPT’s runtime mode** to `remote` in your project configuration.
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={
 [
@@ -155,12 +160,14 @@ Now, it's time to migrate your process tests.
 
 First, migrate the general test class structure:
 
-- Replace the annotation `@ZeebeSpringTest` with `@CamundaSpringProcessTest`
-- Replace the type `ZeebeTestEngine` with `CamundaProcessTestContext`
-- Remove the field for `RecordStream`. CPT has no access to the records directly. Instead, you can use the SDK to
-  request data from the [API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
+1. **Replace annotations and types**
+   - Replace `@ZeebeSpringTest` with `@CamundaSpringProcessTest`
+   - Replace the type `ZeebeTestEngine` with `CamundaProcessTestContext`
 
-Look at the following example of a ZPT test class:
+2. **Remove record stream fields**  
+   CPT does not provide direct access to records. Instead, use the SDK to request data from the [API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
+
+Below is an example of a ZPT test class:
 
 ```java
 import io.camunda.zeebe.process.test.extension.testcontainer.ZeebeProcessTest;
@@ -198,14 +205,13 @@ class MyProcessTest {
 
 <TabItem value='java-client'>
 
-First, you migrate the general test class structure:
+First, migrate the general test class structure:
 
-- Replace the annotation `@ZeebeProcessTest` with `@CamundaProcessTest`
-- Replace the type `ZeebeTestEngine` with `CamundaProcessTestContext`
-- Remove the field for `RecordStream`. CPT has no access to the records directly. However, you can use the SDK to
-  request data from the [API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
+- Replace the annotation `@ZeebeProcessTest` with `@CamundaProcessTest`.
+- Replace the type `ZeebeTestEngine` with `CamundaProcessTestContext`.
+- Remove the field for `RecordStream`. CPT does not provide direct access to records; instead, use the SDK to request data from the [API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
 
-Look at the following example of a ZPT test class:
+Below is an example of a ZPT test class:
 
 ```java
 import io.camunda.zeebe.process.test.extension.testcontainer.ZeebeProcessTest;
@@ -240,7 +246,7 @@ class MyProcessTest {
 </TabItem>
 </Tabs>
 
-And, here is the equivalent CPT test class:
+This is the equivalent CPT test class:
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={
 [
@@ -322,7 +328,7 @@ class MyProcessTest {
 </TabItem>
 </Tabs>
 
-Then, you go over all test methods and migrate the assertions and utilities. See the following sections for detailed
+Then, review all test methods and migrate the assertions and utilities. See the following sections for detailed
 instructions.
 
 ### Process instance assertions
@@ -534,13 +540,9 @@ CamundaAssert.assertThatProcessInstance(byKey(correlateMessageResponse.getProces
 
 ### Inspection utilities
 
-ZPT has the `InspectionUtility` to find process instances and pass them to the assertion. Additionally, some assertions
-have methods to extract a related entity, for example, `extractingProcessInstance()` or `extractingLatestIncident()`.
+ZPT provides the `InspectionUtility` to locate process instances and pass them to assertions. Some assertions also include methods to extract related entities, such as `extractingProcessInstance()` or `extractingLatestIncident()`.
 
-CPT has an equivalent utility with
-the [ProcessInstanceSelector](/apis-tools/testing/assertions.md#with-process-instance-selector) that can be used with
-`CamundaAssert.assertThatProcessInstance()`. For other entities, you could use the Camunda client to search the entity
-and implement a [custom assertion](/apis-tools/testing/assertions.md#custom-assertions).
+CPT offers a similar utility via the [ProcessInstanceSelector](/apis-tools/testing/assertions.md#with-process-instance-selector`), which can be used with `CamundaAssert.assertThatProcessInstance()`. For other entities, you can use the Camunda client to search for the entity and implement a [custom assertion](/apis-tools/testing/assertions.md#custom-assertions).
 
 ```java
 // ZPT:
@@ -558,18 +560,14 @@ CamundaAssert.assertThatProcessInstance(byProcessId("child-process"))
 
 ### ZeebeTestEngine utilities
 
-ZPT has the `ZeebeTestEngine` utilities to interact with the runtime, for example, to increase the time.
+ZPT provides the `ZeebeTestEngine` utilities to interact with the runtime, for example, to advance time.
 
-CPT has an equivalent utility with the [CamundaProcessTestContext](/apis-tools/testing/utilities.md), except that the
-following utilities are not supported:
+CPT offers a similar utility via the [CamundaProcessTestContext](/apis-tools/testing/utilities.md), but the following utilities are **not supported**:
 
 - `waitForIdleState(duration)`
 - `waitForBusyState(duration)`
 
-ZPT has these utilities to handle Camunda's asynchronous processing, for example, to wait until the process instance
-processed all commands before asserting the state, or before increasing the time to trigger a BPMN timer event. CPT
-doesn't need these utilities because it has [blocking assertions](/apis-tools/testing/assertions.md) that wait a given
-time until the expected property is fulfilled.
+ZPT uses these utilities to handle Camunda's asynchronous processing—for instance, to wait until a process instance has processed all commands before asserting its state or before advancing time to trigger a BPMN timer event. CPT does not require these utilities because it provides [blocking assertions](/apis-tools/testing/assertions.md) that wait until the expected condition is fulfilled.
 
 ```java
 // ZPT
@@ -584,15 +582,14 @@ processTestContext.increaseTime(Duration.ofDays(1));
 
 ## Next steps
 
-You did it! Now, all process tests should be migrated to CPT and run successfully.
+Congratulations! Your process tests should now be fully migrated to CPT and running successfully.
 
-When you are ready, take the next steps to continue your journey:
+When you’re ready, take the next steps to continue your journey:
 
-- Discover new [assertions](/apis-tools/testing/assertions.md)
+- Explore new [assertions](/apis-tools/testing/assertions.md)
 - Simplify your tests with new [utilities](/apis-tools/testing/utilities.md)
 - Generate process test coverage reports (coming soon)
 
 ## Troubleshooting
 
-If you run into issues with the migration or miss important features, please report them in
-the [Camunda GitHub repository](https://github.com/camunda/camunda/issues).
+If you encounter issues with the migration or notice missing features, please report them in the [Camunda GitHub repository](https://github.com/camunda/camunda/issues).
