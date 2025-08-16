@@ -1,6 +1,6 @@
 ---
 id: configuration
-title: "Configuration"
+title: "Spring configuration"
 description: "Learn about the Identity configuration options available in your Orchestration cluster."
 ---
 

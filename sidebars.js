@@ -1426,6 +1426,31 @@ module.exports = {
           },
           items: [
             {
+              type: "category",
+              label: "Core settings and features",
+              link: {
+                type: "doc",
+                id: "self-managed/components/orchestration-cluster/core-settings/overview",
+              },
+              items: [
+                {
+                  Configuration: [
+                    "self-managed/components/orchestration-cluster/core-settings/configuration/configuration",
+                    "self-managed/components/orchestration-cluster/core-settings/configuration/licensing",
+                    "self-managed/components/orchestration-cluster/core-settings/configuration/webserver",
+                    "self-managed/components/orchestration-cluster/core-settings/configuration/logging",
+                    "self-managed/components/orchestration-cluster/core-settings/configuration/example-application",
+                  ],
+                },
+                // {
+                //   Concepts: [],
+                // },
+                // {
+                //   Migration: [],
+                // },
+              ],
+            },
+            {
               Zeebe: [
                 {
                   "Zeebe Gateway": [
@@ -1438,7 +1463,6 @@ module.exports = {
                 {
                   Configuration: [
                     "self-managed/components/orchestration-cluster/zeebe/configuration/configuration",
-                    "self-managed/components/orchestration-cluster/zeebe/configuration/logging",
                     "self-managed/components/orchestration-cluster/zeebe/configuration/gateway-health-probes",
                     "self-managed/components/orchestration-cluster/zeebe/configuration/environment-variables",
                     "self-managed/components/orchestration-cluster/zeebe/configuration/fixed-partitioning",
@@ -1525,7 +1549,6 @@ module.exports = {
               },
               items: [
                 "self-managed/components/orchestration-cluster/identity/overview",
-                "self-managed/components/orchestration-cluster/identity/configuration",
                 "self-managed/components/orchestration-cluster/identity/manage-tenants",
                 {
                   "Mapping rules": [

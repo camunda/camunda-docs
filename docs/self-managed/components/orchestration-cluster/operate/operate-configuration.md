@@ -18,43 +18,11 @@ The following parts are configurable:
 
 ## Licensing
 
-import Licensing from '../../../../self-managed/react-components/licensing.md'
+See the [core settings documentation](/self-managed/components/orchestration-cluster/core-settings/configuration/licensing.md).
 
-<Licensing/>
+## Webserver and security
 
-## Webserver
-
-Operate supports customizing the **context-path** using default Spring configuration.
-
-Example for `application.yml`:
-`server.servlet.context-path: /operate`
-
-Example for environment variable:
-`SERVER_SERVLET_CONTEXT_PATH=/operate`
-
-The default context-path is `/`.
-
-### Security
-
-To change the values for http header for security reasons, you can use the configuration parameters:
-
-| Name                                                                     | Description                                                                                                                                                  | Default value                                                                                                                                                                                                                                                                                                    |
-| ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| camunda.operate.websecurity.contentSecurityPolicy                        | See [Spring description](https://docs.spring.io/spring-security/site/docs/5.2.0.RELEASE/reference/html/default-security-headers-2.html#webflux-headers-csp)  | base-uri 'self'; default-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.jsdelivr.net;img-src \* data:; block-all-mixed-content; form-action 'self'; frame-ancestors 'none'; object-src 'none'; font-src 'self' fonts.camunda.io cdn.jsdelivr.net; sandbox allow-forms allow-scripts allow-same-origin allow-popups |
-| camunda.operate.websecurity.httpStrictTransportSecurityMaxAgeInSeconds   | See [Spring description](https://docs.spring.io/spring-security/site/docs/5.2.0.RELEASE/reference/html/default-security-headers-2.html#webflux-headers-hsts) | 63,072,000 (two years)                                                                                                                                                                                                                                                                                           |
-| camunda.operate.websecurity.httpStrictTransportSecurityIncludeSubDomains | See [Spring description](https://docs.spring.io/spring-security/site/docs/5.2.0.RELEASE/reference/html/default-security-headers-2.html#webflux-headers-hsts) | true                                                                                                                                                                                                                                                                                                             |
-
-### Securing Operate - Zeebe interaction
-
-While executing user operations, Operate communicates with Zeebe using the Zeebe Java client. For Zeebe to know whether operations are allowed to be executed
-in terms of tenant assignment, Operate - Zeebe connection must be secured. Check the list of environment variables to be provided in the [Zeebe documentation](../zeebe/security/client-authorization.md#environment-variables).
-
-### Troubleshooting multi-tenancy in Operate
-
-If users can view data from the `<default>` tenant only and no data from other tenants (and you have not [configured multi-tenancy using Helm](https://artifacthub.io/packages/helm/camunda/camunda-platform#global-parameters)), multi-tenancy is not enabled in Operate. Refer to the [multi-tenancy configuration guide](../../../installation-methods/helm/configure/configure-multi-tenancy.md).
-
-If multi-tenancy is enabled in Operate but disabled in [Identity](/self-managed/components/management-identity/what-is-identity.md), users will not have any tenant authorizations in Operate
-and will not be able to access the data of any tenants in Operate.
+See the [core settings documentation](/self-managed/components/orchestration-cluster/core-settings/configuration/webserver.md).
 
 ## Elasticsearch or OpenSearch
 
@@ -366,92 +334,11 @@ This configuration may be overwritten by changing the corresponding configuratio
 
 ## Logging
 
-Operate uses the Log4j2 framework for logging. In the distribution archive, as well as inside a Docker image, `config/log4j2.xml` logging configuration files are included and can be further adjusted to your needs:
+See the [core settings documentation](/self-managed/components/orchestration-cluster/core-settings/configuration/logging.md).
 
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="WARN" monitorInterval="30">
-  <Properties>
-    <Property name="LOG_PATTERN">%clr{%d{yyyy-MM-dd HH:mm:ss.SSS}}{faint} %clr{%5p} %clr{${sys:PID}}{magenta} %clr{---}{faint} %clr{[%15.15t]}{faint} %clr{%-40.40c{1.}}{cyan} %clr{:}{faint} %m%n%xwEx</Property>
-  </Properties>
-  <Appenders>
-    <Console name="Console" target="SYSTEM_OUT" follow="true">
-      <PatternLayout pattern="${LOG_PATTERN}"/>
-    </Console>
-	<Console name="Stackdriver" target="SYSTEM_OUT" follow="true">
-      <StackdriverJSONLayout/>
-    </Console>
-  </Appenders>
-  <Loggers>
-    <Logger name="io.camunda.operate" level="info" />
-    <Root level="info">
-      <AppenderRef ref="${env:OPERATE_LOG_APPENDER:-Console}"/>
-    </Root>
-  </Loggers>
-</Configuration>
-```
+## Example application.yaml
 
-By default, `ConsoleAppender` is used.
-
-### JSON logging configuration
-
-You can choose to output logs in JSON format (Stackdriver compatible). To enable it, define
-the environment variable `OPERATE_LOG_APPENDER` like this:
-
-```sh
-OPERATE_LOG_APPENDER=Stackdriver
-```
-
-### Change logging level at runtime
-
-Operate supports the default scheme for changing logging levels as provided by [Spring Boot](https://docs.spring.io/spring-boot/docs/2.4.3/actuator-api/htmlsingle/#loggers).
-
-The log level for Operate can be changed by following the [Setting a Log Level](https://docs.spring.io/spring-boot/docs/2.4.3/actuator-api/htmlsingle/#loggers-setting-level) section.
-
-#### Set all Operate loggers to DEBUG
-
-```shell
-curl 'http://localhost:9600/actuator/loggers/io.camunda.operate' -i -X POST \
--H 'Content-Type: application/json' \
--d '{"configuredLevel":"debug"}'
-```
-
-## Example of application.yml file
-
-The following snippet represents the default Operate configuration, which is shipped with the distribution. This can be found inside the `config` folder (`config/application.yml`) and can be used to adjust Operate to your needs.
-
-```yaml
-# Operate configuration file
-
-camunda.operate:
-  # Set operate userId, displayName and password.
-  # If user with <userId> does not exists it will be created.
-  # Default: demo/demo/demo
-  userId: anUserId
-  displayName: nameShownInWebpage
-  password: aPassword
-  roles:
-    - OWNER
-    - USER
-  # ELS instance to store Operate data
-  elasticsearch:
-    # Cluster name
-    clusterName: elasticsearch
-    # Url
-    url: http://localhost:9200
-  # Zeebe instance
-  zeebe:
-    # Gateway address to zeebe
-    gatewayAddress: localhost:26500
-  # ELS instance to export Zeebe data to
-  zeebeElasticsearch:
-    # Cluster name
-    clusterName: elasticsearch
-    # url
-    url: http://localhost:9200
-    # Index prefix, configured in Zeebe Elasticsearch exporter
-    prefix: zeebe-record
-```
+See the [core settings documentation](/self-managed/components/orchestration-cluster/core-settings/configuration/example-application.md).
 
 ## Backups
 
