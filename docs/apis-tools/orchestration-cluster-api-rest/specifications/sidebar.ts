@@ -175,7 +175,7 @@ const sidebar: SidebarsConfig = {
         {
           type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/search-decision-instances",
-          label: "Search decision instances",
+          label: "Search evaluated decision instances",
           className: "api-method post",
         },
         {
