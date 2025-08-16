@@ -230,25 +230,25 @@ You can use the same [utilities from Camunda Process Test](../../../apis-tools/t
 // Define the mock
 final AtomicBoolean addInvoiceJobWorkerCalled = new AtomicBoolean(false);
 processTestContext
-.mockJobWorker("add-invoice-to-accounting")
-.withHandler(
-    (jobClient, job) -> {
-        addInvoiceJobWorkerCalled.set(true);
-        // check input mapping
-        assertEquals("INV-1001", job.getVariablesAsMap().get("invoiceId"));
-        jobClient
-            .newCompleteCommand(job)
-            // .variables(null) //  We could now also simulate setting some response values
-            .send()
-            .join();
-    });
+    .mockJobWorker("add-invoice-to-accounting")
+    .withHandler(
+        (jobClient, job) -> {
+            addInvoiceJobWorkerCalled.set(true);
+            // check input mapping
+            assertEquals("INV-1001", job.getVariablesAsMap().get("invoiceId"));
+            jobClient
+                .newCompleteCommand(job)
+                // .variables(null) //  We could now also simulate setting some response values
+                .send()
+                .join();
+        });
 
 // ... drive the process ...
 
 // and assert:
 assertThat(addInvoiceJobWorkerCalled.get())
-.as("add-invoice-to-accounting job worker called")
-.isTrue();
+    .as("add-invoice-to-accounting job worker called")
+    .isTrue();
 ```
 
 
@@ -335,7 +335,7 @@ The happy path is kind of the default scenario with a positive outcome, so no ex
 
 Fully test the happy path in one (big) test method. This makes sure you have one consistent data flow in your process. Additionally, it is easy to read and to understand, making it a great starting point for new developers to understand your process and process test case.
 
-You were already exposed to the happy path in our example, which is the scenario that the tweet gets approved:
+You were already exposed to the happy path in our example, which is the scenario that the invoice gets approved:
 
 ```java
 @Test
@@ -549,22 +549,22 @@ In the invoice approval example, the `Send invoice rejection` task leverages an 
 
 ```xml
 <bpmn:serviceTask id="ServiceTask_SendRejection" name="Send invoice rejection" zeebe:modelerTemplate="io.camunda.connectors.HttpJson.v2">
-      <bpmn:extensionElements>
-        <zeebe:taskDefinition type="io.camunda:http-json:1" retries="3" />
-        <zeebe:ioMapping>
-          <zeebe:input target="method" source="POST" />
-          <zeebe:input target="url"    source="{{secrets.INVOICE_REJECTION_URL}}/reject" />
-          <zeebe:input target="body"   source="={ &#10;  &#34;invoiceId&#34; : invoice.id, &#10;  &#34;rejectionReason&#34;: rejectionReason&#10;}" />
-          <!--. .. -->
-      </bpmn:extensionElements>
-    </bpmn:serviceTask>
+  <bpmn:extensionElements>
+    <zeebe:taskDefinition type="io.camunda:http-json:1" retries="3" />
+    <zeebe:ioMapping>
+      <zeebe:input target="method" source="POST" />
+      <zeebe:input target="url"    source="{{secrets.INVOICE_REJECTION_URL}}/reject" />
+      <zeebe:input target="body"   source="={ &#10;  &#34;invoiceId&#34; : invoice.id, &#10;  &#34;rejectionReason&#34;: rejectionReason&#10;}" />
+      <!--. .. -->
+  </bpmn:extensionElements>
+</bpmn:serviceTask>
 ```
 
 Now you can run a Mock for the REST endpoint. Because CPT uses Testcontainers, you also need to run a container for the mock - the connector runtime cannot access any mock directly spun up in the JUnit test. You can use [Testcontainers Mockserver Module](https://java.testcontainers.org/modules/mockserver/). Therefore:
 
 1. Add the required [Testcontainers Mockserver Module](https://java.testcontainers.org/modules/mockserver/) dependencies to your test case (`org.testcontainers:mockserver` and `org.mock-server:mockserver-client-java` at the time of writing) .
 2. Start the mockserver early in the test lifecycle, so that you can capture the URL for the mock (which typically gets a random PORT).
-3. Use the secrets in Camunda to configure the endpoint of the REST call, which is best practice anyway to configure the URL in the environment. In the test you need to set it to the URL of the mock
+3. Use the secrets in Camunda to configure the endpoint of the REST call, which is best practice anyway to configure the URL in the environment. In the test you need to set it to the URL of the mock.
 4. Make sure the connector runtime is enabled in the test case, so that the out-of-the-box REST connector is executed.
 
 Here is the relevant source code:
