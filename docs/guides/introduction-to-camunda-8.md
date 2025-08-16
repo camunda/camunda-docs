@@ -30,6 +30,12 @@ This guide is tailored for developers who want to implement process automation s
 
 - [Run your first local project](/guides/getting-started-example.md)
 
+## Build your first AI agent
+
+Get started with Camunda [agentic orchestration](/components/agentic-orchestration/agentic-orchestration.md) by building and running your first [AI agent](/components/agentic-orchestration/ai-agents.md).
+
+- [Build your first AI agent](/guides/getting-started-agentic-orchestration.md)
+
 ## Orchestrate human tasks
 
 This guide is tailored for low-code developers using Camunda 8 SaaS to efficiently allocate work through user tasks.
