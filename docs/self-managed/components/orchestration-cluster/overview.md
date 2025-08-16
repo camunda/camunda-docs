@@ -1,19 +1,19 @@
 ---
 id: overview
-title: "Orchestration cluster"
-description: "How to install and configure an Orchestration cluster"
+title: "Orchestration Cluster"
+description: "How to install and configure an Orchestration Cluster."
 ---
 
-Install and configure Orchestration cluster components in your self-managed environment.
+Install and configure Orchestration Cluster components in your Self-Managed environment.
 
 ## Installation and configuration
 
-The Orchestration cluster is the core component of Camunda 8), powering the automation and orchestration of processes. An Orchestration cluster includes:
+The Orchestration Cluster is the core component of Camunda 8, powering the automation and orchestration of processes. The Orchestration Cluster includes:
 
 - Zeebe as the workflow engine
 - Operate for monitoring and troubleshooting process instances running in Zeebe.
 - Tasklist for interacting with user tasks (assigning, completing, and so on).
 - Identity for managing the integrated authentication and authorization.
-- APIs for interacting with the Orchestration cluster programmatically.
+- APIs for interacting with the Orchestration Cluster programmatically.
 
-In this section, you will learn how to install, and configure these components in your self-managed environment.
+In this section, you will learn how to install, and configure these components in your Self-Managed environment.

@@ -184,7 +184,7 @@ module.exports = {
       },
     ],
     [
-      // Orchestration cluster REST API docs generation
+      // Orchestration Cluster REST API docs generation
       "docusaurus-plugin-openapi-docs",
       {
         id: "api-camunda-openapi",

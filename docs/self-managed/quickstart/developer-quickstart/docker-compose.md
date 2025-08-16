@@ -2,14 +2,14 @@
 id: docker-compose
 title: "Developer quickstart - Docker Compose"
 sidebar_label: "Docker Compose"
-description: "This quickstart guides application developers through deploying Camunda 8 Self-Managed to a local Orchestration cluster on Docker Compose"
+description: "This quickstart guides application developers through deploying Camunda 8 Self-Managed to a local orchestration cluster on Docker Compose"
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import {DockerCompose} from "@site/src/components/CamundaDistributions";
 
-A Docker Compose configuration to run Camunda Self-Managed components (Orchestration cluster, Optimize, and Connectors). Docker Compose also supports document storage and management with [document handling](/self-managed/concepts/document-handling/overview.md).
+A Docker Compose configuration to run Camunda Self-Managed components (Orchestration Cluster, Optimize, and Connectors). Docker Compose also supports document storage and management with [document handling](/self-managed/concepts/document-handling/overview.md).
 
 :::note
 While the [Docker images](/self-managed/installation-methods/docker/docker.md) themselves are supported for production usage, the Docker Compose files are designed for developers to run a local environment and are not intended for production use. For production, we recommend [Kubernetes](/self-managed/installation-methods/helm/install.md).
@@ -38,8 +38,8 @@ docker compose up -d
 
 Running `docker compose up -d` starts all Camunda components. The [Camunda Distributions repository](https://github.com/camunda/camunda-distributions) also includes additional configuration files for lightweight development.
 
-- **docker-compose.yaml:** Contains all Camunda 8 components for a full-stack deployment, including the Orchestration cluster, Connectors, Optimize, Elasticsearch, Keycloak, Web Modeler, and PostgreSQL.
-- **docker-compose-core.yaml:** Contains only the Camunda 8 Orchestration cluster components and Connectors.
+- **docker-compose.yaml:** Contains all Camunda 8 components for a full-stack deployment, including the Orchestration Cluster, Connectors, Optimize, Elasticsearch, Keycloak, Web Modeler, and PostgreSQL.
+- **docker-compose-core.yaml:** Contains only the Camunda 8 Orchestration Cluster components and Connectors.
 - **docker-compose-web-modeler.yaml:** Contains the standalone Camunda 8 Web Modeler installation. For more information, see the [Web Modeler instructions](#web-modeler).
 
 To start Camunda with an alternate configuration, specify the configuration file using the following command:
@@ -63,7 +63,7 @@ Keycloak is used to manage users and can be accessed with the username `admin` a
 
 - Keycloak: [http://localhost:18080/auth/](http://localhost:18080/auth/)
 
-The Orchestration cluster is available using gRPC:
+The Orchestration Cluster is available using gRPC:
 
 - Cluster endpoint: `localhost:26500`
 - v2 REST API: `http://localhost:8088/v2`
@@ -112,7 +112,7 @@ docker compose -f docker-compose-web-modeler.yaml down -v
 
 #### Deploy or execute a process
 
-The local Orchestration cluster started using the provided `docker-compose.yaml` is pre-configured in Web Modeler.
+The local orchestration cluster started using the provided `docker-compose.yaml` is pre-configured in Web Modeler.
 
 #### Emails
 
@@ -120,7 +120,7 @@ The provided configuration includes [Mailpit](https://github.com/axllent/mailpit
 
 You can access emails in Mailpit’s web UI at [http://localhost:8075](http://localhost:8075).
 
-### Use the Orchestration Cluster API
+### Use the Orchestration Cluster REST API
 
 - (If authentication is enabled) [Authenticate](apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md)
 - [Deploy resources](apis-tools/orchestration-cluster-api-rest/specifications/create-deployment.api.mdx)
@@ -134,9 +134,9 @@ Desktop Modeler is [open source and free to use](https://github.com/camunda/camu
 
 [Download the Desktop Modeler](https://camunda.com/download/modeler/) to start modeling BPMN, DMN, and Camunda Forms on your local machine.
 
-## Secure the Orchestration Cluster API
+## Secure the Orchestration Cluster REST API
 
-By default, the Orchestration Cluster API is publicly accessible without requiring any client credentials for development purposes.
+By default, the Orchestration Cluster REST API is publicly accessible without requiring any client credentials for development purposes.
 
 ## Connectors
 
