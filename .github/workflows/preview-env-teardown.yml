@@ -10,7 +10,7 @@ jobs:
     timeout-minutes: 20
     name: teardown-preview-env
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Import secrets
         id: secrets

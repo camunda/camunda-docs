@@ -11,13 +11,13 @@ jobs:
 
     steps:
       - name: Checkout Camunda docs repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: camunda/camunda-docs
           path: docs
 
       - name: Checkout Camunda repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: camunda/camunda
           path: rest-spec
