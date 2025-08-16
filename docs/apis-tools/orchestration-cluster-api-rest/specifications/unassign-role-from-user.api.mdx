@@ -1,11 +1,11 @@
 ---
-id: remove-user-from-tenant
-title: "Remove a user from a tenant"
-description: "Removes a single user from a specified tenant without deleting the user."
-sidebar_label: "Remove a user from a tenant"
+id: unassign-role-from-user
+title: "Unassign a role from a user"
+description: "Unassigns a role from a user."
+sidebar_label: "Unassign a role from a user"
 hide_title: true
 hide_table_of_contents: true
-api: eJztWd9v2zYQ/lcO3MNaTLHcNt06vQVpsmXouiB1NgxZHmjqbLGlSJU82fEM/e/DkZLjJE7QAXn0QxBLIu+7H993os9rQXIeRHElJmilJXGdCdegl6SdPStFITzWboGXAf2pd3W/KhMlBuV1w8tEIS7iogASgrZzg9AG9DDzruZbDSo901gCxd2w1FS5lqBEg6TtHKhKO0YiE430skZCz16thZU1ikKknWelyIRmwEZSJTLh8WurPZaiIN/ifa8mbNbqry2CLtESO+HBzSJessiIQVVYS1GsBa0aBgvktZ2Lrss2+Oxd/Phs+EO8j6Nfs/3QOBsw8PPX40P+twODk72UAUKrFIYwa41ZQSpcmaqwHXGXicPxeLepxruFLrGEUpIEHcA6goU0umRflbOElnirbBqjVaRJ3ng3NVj/8DmwnfVWSHcBjuA8rYQSSWoDbvoZFYEMkBZOsQRt4eri9Bh+Pnz70/WLiqgJRZ4vl8uRn6kDLDU5P3J+nvuZ4j9e93IEkwo9Qi1XMEWQZakZUxoOqEFPGsPAQwXkYj56t4HzPvrHimyoQHKLubjZfFuf+3XKxMz5WhKTxOsHyjiCy4uzofyrgex3oOOemWwN25BT11IxNdJ+4UKRJrMT9D5KaOta+tXArrsAXSYCSWq3whDaEs7Rb/uvLb15/cA20+LXyeQckglQrkSYOQ9U6TAAcRC1trpua1EcjseZqOVNuvpxPO7YJlf8GyKxgDeNkTZS63442kLtPPb8iYFpG0ha9VyVcV7P9X3cEfeCoRaiJ/H7FFHXdVFQbx7y/dT5qS5LtJGewM0CAw2qksa4Je51tdfVXldP6GrHO++jI5i51pZJV/2pwvnbF6HdrNira6+uvboeUdfbXcfAIwucZc88RO+dB6dU6z2WsKy0ieb5lDlg96+1xMW91vZa22ttt9Z2nBA5cwH9QivkY2GUmSWzgtbKhdRGTg0yc3WIxK1k06AFZ80KnIXg6o38Aiwjv9mnsAqENSiPkjDAVKovjccQWn7uoPG4QEtpKfoF+u+5ZnXTEpsLrvUKQ/reOEUOG28q2QbCMgO5cLrkezHLARcMOpPatB7DCI6NRksBpGdTytU1Wv46SQ4iaCvTV1PyK6DKhS3/5YzQg4zuutkMGvTalSP427WgpAWD0vfFjRKI/t+JrUZVSatDDZyKAobWUDoVRkrWrS3lSLt4nXPAzrKz+b+IU8wJVWW1kuZAOauwoZAPffDgtuXl31XSlkbb+cEd7H3727e/fft7rP11maiRKscDxTj1wzjpo0oUIk/n95CvhyFfl/NBPuTrYerW8Zwsdqo0FGy9EYVYJxl1RZ6vKxeoK9aN89TlC67RQnrN7TOWlB8nuQ00Mk5JE2/vKic/YOAhzD+8qjBQGovCseFm6OHi5NMEfpGES7mKqWb4uzDvxu/GOxF46TdYPzo/63t0IulW4xgguAPshEiL/y9InDsGVK3XtPrEJlIKpyg9+qOWa7YhUo8dkfg6LRJZ/+F0oNdvf00iQ7Sdubi9Z8rTTnEV0YcU0Xj06iFDz8+i0Pg909rYbe08jpdBwnFq+PAOVLLLEjRaoQ1RC/1kd1j2IT2BPxMivBpx4RLThiY711S105Fydd6/Tjb/p8ZN81pqm/cQIT8++v3y4/ujgw9nxycfP50cvBqNR3RDMRGNC1RLu+VHGqGDvDM6p53j9vXte+Y5J+99TQlvKG+M1JYZFxOw7rV61c/hg8hEsTWSj3Lle5sx+XXWa+5KrNdTGfDSm67j219b9CtRXF3fSjRqutSBP5eimEkT7s/St0N+cdFP3V/CN074d0bW35R2FbuFaflKZOILrrZ/cOAfAZ7ftydz/rRnmxx3110mKpQl+pjB9PhI8dlla+OjBxEW+qYrvz/5cDI5EV33H2C0DsE=
+api: eJztWd1v2zYQ/1cO3MNaTJHcLt06vRn52Dx0XZAmG4Y0D2fqZLGlSJWk7LiG/vfhKNlJHCdoi2FPfjAsidT97ut3JE8rEXDmRX4lzq0mcZ0I25DDoKyZFCIXrUHv1czw6Kmz9aUnJxJRkJdONTxN5OJymOQBwVlNUDpbA0LryaXvzUVF8RIWSmswFrQ1M3KgTEVOBQgVAbahsk59jsge0HsrFQYqYKFCBaFSPopO3xuRiAYd1hTIseYrYbAmkQsenxQiEYqVajBUIhGOPrXKUSHy4Fra1pxVixpPjlORCC8rqlHkKxGWDYv0wSkzE12XbFDYknj5tTjRBeu3n0a7Znm+scaT5/GXo0P+e0T3BXpYx4kK8K2U5H3Zar3sIxEG9FR0iTgcjXbLapydq4IKKDAgKA/GBpijVgUrK60JZAK/ik2jlYyRyhpnp5rqHz54lrO6Y9N9gDGc9TOhoIBKg51+IBkAPfQTp1SAMnB1fnoEvxy++vn6WRVC4/MsWywWqSvlARUqWJdaN8tcKfnH856ncFGRI6hxCVMCLArFmKjZoIZcUOTBNyRVqSQEG70xqA3s+D6lhhD0anGKbV6+DdB2oBJRWldj4Kxw6gEtxnB5PgFVkAmqXCozewgd3ymx1SwDp7YN+VSj+ciBCironaDbKL6ta3RLsOUOgC4RPmBo75ghlAk0izze6K9M+PHlA9mcFr9dXJxBLwKkLQhK63o+DkBsRK2Mqtta5IejUSJqvOnvfhqNOpbJEf8CSwzQTaPRxNTaNkcZqK2jIX+iYcr4gEb+V5GxTs3UNm7K5F/HQgxJfNxb1HVdJNSPD/P91LqpKgoyMT2BqwP5sGYVam0XtOfVnld7Xj3Bq6cWPevWe4q4PSCYqTkZmByvR3iVjUsjE660rdnTbU+3Pd0epdurXfvCsQH2suM8JOesAytl6xzvyyulo3jebK6xh3Wuz8U91/Zc23NtN9d2bBnZc57cXEnifWKkmQl6yWe7OSqNU02cucrHxK2waciANXoJ1oC39YZ+HhYxv1knv/SBapCOMJCHKcqPjSPvWx630Diak+nP4AxO7nuOWd20gcV52zpJvj9GTonNppsKWx+oSADnVhX8LHrZ05xBS1S6deRTONKKTPCAjkVJW9dk+HwZLETQFvmE6ii4JYTK+jv6YxnIAUZ1bVlCQ07ZIoV/bAsSDWhCNwQ3UiDqf8+2mmSFRvka2BU5rEtDYaVPJdatKTBVNt5nbLA1rGz2mWhKWSBZGSVRH0hrJDXBZ+s6eHBb8rLvKjSFVmZ2cA97X/725W9f/h4rf10iagqV5fZiQZoCxY5eqEQuMt7b+2zVt/K6jDfyPlut9/Mdd81ileobf63TIhernkJdnmWryvrQ5avGutBlc47PHJ3i0hnDycM91dYppK1EHR/vCiUPxIPEYOKfTlbkQ98ghSPNhdDB+cm7C/gVAy1wGd3M8PdhXo9ej3Yi8NQvkD4+mwz1uU/QO0VjDcHs3wnRT/5akNiF9CRbp8LyHYvoXTgldOTGLcdrk0QDdkTi+36SSIaL03Vq/f73RcwOZUobXx+y5GmlOIrkfG/RKH3xMDvPJpFkvMa0JlZaM+uPhghHfbGH1yB7uUw/rSQZH3kw9HXX0970I/BXjwgvUg5cn2nrAjtToWqnqbR1Niwlm/+pttOsRmWyAcJnR+M/Lt8ejw/eTI5O3r47OXiRjtJwE6IjGutDjeaOHutm+o5e+rbdq9s15v/vwQ+RD3QTskajMpyX0U2rgc1XsSPvRSLyTWs+EpqfbNro18nAyiuxWk3R06XTXcePP7XkliK/ur4lcWR9oTxfFyIvUfvtXvtdpzw7H7ryz2Gr079T++EhmmWsG7rlO5GIj7S8/bzAnwK+WYMH3wC+QY+N57rrLhEVYUEu+qUfHkver9x58dHNBxN8U4mPT96cXJyIrvsXtosNXw==
 sidebar_class_name: "delete api-method"
 info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-rest-api
 custom_edit_url: null
@@ -23,16 +23,17 @@ import Heading from "@theme/Heading";
 <Heading
   as={"h1"}
   className={"openapi__heading"}
-  children={"Remove a user from a tenant"}
+  children={"Unassign a role from a user"}
 ></Heading>
 
 <MethodEndpoint
   method={"delete"}
-  path={"/tenants/{tenantId}/users/{username}"}
+  path={"/roles/{roleId}/users/{username}"}
   context={"endpoint"}
 ></MethodEndpoint>
 
-Removes a single user from a specified tenant without deleting the user.
+Unassigns a role from a user.
+The user will no longer inherit the authorizations associated with this role.
 
 <Heading
   id={"request"}
@@ -44,17 +45,17 @@ Removes a single user from a specified tenant without deleting the user.
 <ParamsDetails
   parameters={[
     {
-      name: "tenantId",
+      name: "roleId",
       in: "path",
       required: true,
-      description: "The unique identifier of the tenant.",
+      description: "The role ID.",
       schema: { type: "string" },
     },
     {
       name: "username",
       in: "path",
       required: true,
-      description: "The unique identifier of the user.",
+      description: "The user username.",
       schema: { type: "string" },
     },
   ]}
@@ -67,7 +68,7 @@ Removes a single user from a specified tenant without deleting the user.
   label={undefined}
   responses={{
     "204": {
-      description: "The user was successfully removed from the tenant.",
+      description: "The role was unassigned successfully from the user.",
     },
     "400": {
       description: "The provided data is not valid.",
@@ -152,7 +153,8 @@ Removes a single user from a specified tenant without deleting the user.
       },
     },
     "404": {
-      description: "Not found. The tenant or user was not found.",
+      description:
+        "The role or user with the given ID or username was not found.",
       content: {
         "application/problem+json": {
           schema: {
