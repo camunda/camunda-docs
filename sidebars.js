@@ -792,6 +792,22 @@ module.exports = {
         },
       ],
     },
+    {
+      type: "category",
+      label: "Camunda 8 SaaS",
+      link: {
+        type: "doc",
+        id: "components/saas/saas",
+      },
+      items: [
+        "reference/regions",
+        "reference/camunda-help-center",
+        "reference/auto-updates",
+        "reference/status",
+        "reference/saas-ip-addresses",
+      ],
+    },
+    "reference/glossary",
   ],
   "APIs & Tools": [
     "apis-tools/working-with-apis-tools",
@@ -973,7 +989,7 @@ module.exports = {
     "reference/overview",
     {
       type: "category",
-      label: "Announcements and release notes",
+      label: "Release announcements and release notes",
       link: {
         type: "doc",
         id: "reference/announcements-release-notes/overview",
@@ -1030,17 +1046,11 @@ module.exports = {
         "reference/announcements-release-notes/release-policy",
       ],
     },
-    "reference/supported-environments",
-    "reference/public-api",
-    "reference/contact",
-    "reference/dependencies",
-    "reference/camunda-help-center",
-    "reference/auto-updates",
-    "reference/status",
-    "reference/licenses",
     "reference/notices",
-    "reference/regions",
-    "reference/saas-ip-addresses",
+    "reference/public-api",
+    "reference/licenses",
+    "reference/supported-environments",
+    "reference/dependencies",
     {
       type: "category",
       label: "Data collection",
@@ -1050,7 +1060,8 @@ module.exports = {
       },
       items: ["reference/data-collection/usage-metrics"],
     },
-    "reference/glossary",
+
+    "reference/contact",
   ],
   "Self-Managed": [
     "self-managed/about-self-managed",
