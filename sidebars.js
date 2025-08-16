@@ -1140,6 +1140,14 @@ module.exports = {
                 //     "self-managed/installation-methods/helm/configure/authentication/basic",
                 //   ],
                 // },
+                // {
+                //   Authentication: [
+                //     "self-managed/installation-methods/helm/configure/auth/authentication",
+                //     "self-managed/installation-methods/helm/configure/auth/authentication-oidc",
+                //     "self-managed/installation-methods/helm/configure/auth/authentication-keycloak",
+                //     "self-managed/installation-methods/helm/configure/auth/authentication-basic",
+                //   ],
+                // },
                 {
                   Database: [
                     {
