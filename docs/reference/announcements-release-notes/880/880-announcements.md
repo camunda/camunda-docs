@@ -200,6 +200,10 @@ Use the corresponding endpoints under `/api/v1/versions` instead.
 With the 8.8 release, the `connector_template` file type in the [Web Modeler API](/apis-tools/web-modeler-api/index.md) endpoint for file creation (`POST /api/v1/files`) is deprecated and will be removed in version 8.10.
 Please use `element_template` instead, which provides equivalent functionality.
 
+#### Removed: Optimize Index Rollover
+
+Prior to the 8.8 release, Optimize used the `externalVariable.variableIndexRollover.maxIndexSizeGB` and `externalVariable.variableIndexRollover.scheduleIntervalInMinutes` configuration properties to apply index rollover to its External Variable Indices. These properties have been deleted in 8.8, and External Variables will now be stored in a single index.
+
 ### Camunda Exporter <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
 Camunda web applications used importers and archivers to consume, aggregate, and archive historical data provided by the Elasticsearch (ES) or OpenSearch (OS) exporters.
