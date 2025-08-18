@@ -1,7 +1,7 @@
 ---
 id: dual-region-operational-procedure
-title: "Dual-region operational procedure"
-sidebar_label: "Dual-region operational procedure"
+sidebar_label: Dual-region operational procedure
+title: Helm chart dual-region operational procedure
 description: "The operational procedure concerning dual-region setups to recover from a region loss."
 ---
 
@@ -157,8 +157,8 @@ echo "You have lost $CLUSTER_RECREATED, $CLUSTER_SURVIVING is still alive"
 
 The Failover phase outlines steps for removing lost brokers, redistributing load, disabling Elasticsearch export to a failed region, and restoring user interaction with Camunda 8 to ensure smooth recovery and continued functionality.
 
-<Tabs queryString="failover">
-  <TabItem value="step1" label="Step 1" default>
+<Tabs queryString="failover" values={[{label: 'Step 1', value: 'step1'}, {label: 'Step 2', value: 'step2'}]}>
+<TabItem value="step1" label="Step 1" default>
 
 #### Remove lost brokers from Zeebe cluster in the surviving region
 
@@ -324,17 +324,17 @@ In our example, we went with port-forwarding to a localhost, but other alternati
    </summary>
 </details>
 
-1.  Port-forward the service of the Zeebe Gateway to access the [management REST API](/self-managed/zeebe-deployment/configuration/gateway.md#managementserver)
+2.  Port-forward the service of the Zeebe Gateway to access the [management REST API](/self-managed/components/orchestration-cluster/zeebe/configuration/gateway.md#managementserver)
 
     ```bash
     kubectl --context $CLUSTER_SURVIVING port-forward services/$CAMUNDA_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
     ```
 
-2.  Based on the [Cluster Scaling APIs](/self-managed/zeebe-deployment/operations/cluster-scaling.md), send a request to the Zeebe Gateway to redistribute the load to the remaining brokers, thereby removing the lost brokers.
+3.  Based on the [Cluster Scaling APIs](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md), send a request to the Zeebe Gateway to redistribute the load to the remaining brokers, thereby removing the lost brokers.
     Depending on which region was lost, the load must be redistributed to the remaining brokers, either the even or odd numbered ones. In our example, we have lost `region 1` and with it our uneven brokers. This means we will have to redistribute to our existing even brokers. Make sure to only run the correct one based on the surviving region's brokers.
 
-  <Tabs queryString="lost-region">
-    <TabItem value="redistribute-to-even" label="Redistribute to even brokers" default>
+<Tabs queryString="lost-region" values={[{label: 'Redistribute to even brokers', value: 'redistribute-to-even'}, {label: 'Redistribute to odd brokers', value: 'redistribute-to-odd'}]}>
+<TabItem value="redistribute-to-even" label="Redistribute to even brokers" default>
 
     ```bash
     curl -XPOST 'http://localhost:9600/actuator/cluster/brokers?force=true' -H 'Content-Type: application/json' -d '["0", "2", "4", "6"]'
@@ -538,7 +538,7 @@ desired={<Six viewBox="140 40 680 500" />}
 
 #### Procedure
 
-1. Port-forward the service of the Zeebe Gateway for the [management REST API](/self-managed/zeebe-deployment/configuration/gateway.md#managementserver)
+1. Port-forward the service of the Zeebe Gateway for the [management REST API](/self-managed/components/orchestration-cluster/zeebe/configuration/gateway.md#managementserver)
 
    ```bash
    kubectl --context $CLUSTER_SURVIVING port-forward services/$CAMUNDA_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
@@ -615,8 +615,8 @@ curl -XGET 'http://localhost:9600/actuator/cluster' | jq .lastChange
 
 ### Failback phase
 
-<Tabs queryString="failback">
-  <TabItem value="step1" label="Step 1" default>
+<Tabs queryString="failback" values={[{label: 'Step 1', value: 'step1'}, {label: 'Step 2', value: 'step2'}, {label: 'Step 3', value: 'step3'}, {label: 'Step 4', value: 'step4'}, {label: 'Step 5', value: 'step5'}, {label: 'Step 6', value: 'step6'}, {label: 'Step 7', value: 'step7'}]}>
+<TabItem value="step1" label="Step 1" default>
 
 #### Deploy Camunda 8 in the newly created region
 
@@ -905,7 +905,7 @@ This step **does not** affect the process instances in any way. Process informat
    kubectl --context $CLUSTER_SURVIVING scale -n $CAMUNDA_NAMESPACE_SURVIVING deployments/$CAMUNDA_RELEASE_NAME-tasklist --replicas 0
    ```
 
-2. Disable the Zeebe Elasticsearch exporters in Zeebe via kubectl using the [exporting API](/self-managed/zeebe-deployment/operations/management-api.md#exporting-api):
+2. Disable the Zeebe Elasticsearch exporters in Zeebe via kubectl using the [exporting API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md#exporting-api):
 
    ```bash
    kubectl --context $CLUSTER_SURVIVING port-forward services/$CAMUNDA_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
@@ -1336,7 +1336,7 @@ desired={<Thirteen viewBox="140 40 680 500" />}
 
 #### How to get there
 
-1. Reactivate the exporters by sending the [exporting API](/self-managed/zeebe-deployment/operations/management-api.md#exporting-api) activation request via the Zeebe Gateway:
+1. Reactivate the exporters by sending the [exporting API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md#exporting-api) activation request via the Zeebe Gateway:
 
    ```bash
    kubectl --context $CLUSTER_SURVIVING port-forward services/$CAMUNDA_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING

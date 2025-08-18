@@ -19,6 +19,157 @@ These release notes identify the new features included in 8.8, including [alpha 
 | ---------------------- | ---------------------------- | ------------ | ------------ | ------------ |
 | 14 October 2025        | 13 April 2027                | -            | -            | -            |
 
+## 8.8.0-alpha7
+
+| Release date   | Changelog(s)                                                                                                                                                                               | Blog                                                                                |
+| :------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------- |
+| 12 August 2025 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.8.0-alpha7)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.8.0-alpha7)</li></ul> | [Release blog](https://camunda.com/blog/2025/08/camunda-alpha-release-august-2025/) |
+
+### Camunda 8 API <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects APIs">API</span>
+
+Development continues on the single unified Camunda 8 REST API that consolidates multiple fragmented APIs into a single, coherent interface, simplifying development and improving clarity across Camunda components.
+
+<!-- https://github.com/camunda/product-hub/issues/2243 -->
+
+### Camunda 8 Run supports 8.8 architecture <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Developer">Developer</span>
+
+Camunda 8 Run now includes Identity, allowing all core applications to run locally in configurations similar to production. This simplifies local development by enabling multiple user authentications and credentials.
+
+<!-- https://github.com/camunda/product-hub/issues/2641 -->
+
+### Connectors <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span> {#connectorsalpha7}
+
+#### AI Agent connector
+
+- **Hybrid mode/customization**: The AI Agent connector can now be [customized](../../../components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization.md) in hybrid mode. This includes an API to define custom memory storage backends apart from the provided ones.
+- **Added model provider support**: Added support for Azure OpenAI and Google Vertex AI models.
+
+To learn more, see [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
+
+<!-- https://github.com/camunda/camunda-docs/pull/6173 -->
+<!-- https://github.com/camunda/camunda-docs/pull/6221 -->
+
+#### Azure Blob Storage connector
+
+Use the new Azure Blob Storage connector to store and retrieve documents within Camunda workflows using Azure Blob Storage. This enables seamless document management directly within processes, improves efficiency, and reduces the need for custom integrations.
+
+To learn more, see [Azure Blob Storage connector](/components/connectors/out-of-the-box-connectors/azure-blob-storage.md).
+
+<!-- https://github.com/camunda/product-hub/issues/2713 -->
+
+#### CSV connector
+
+Use the new CSV connector for SaaS to read, filter, transform, and write CSV data within processes. This reduces technical debt, accelerates development, and broadens integration capabilities with native support for this universal data format.
+
+To learn more, see [CSV connector](/components/connectors/out-of-the-box-connectors/csv.md).
+
+<!-- https://github.com/camunda/product-hub/issues/2851 -->
+
+#### Google Cloud storage connector
+
+Use the new Google Cloud storage connector for easy document storage and retrieval directly within Camunda workflows, streamlining document management without custom development.
+
+To learn more, see [Google Cloud storage connector](/components/connectors/out-of-the-box-connectors/google-cloud-storage.md).
+
+<!-- https://github.com/camunda/product-hub/issues/2712 -->
+
+#### MCP Client connector (early access) <span class="badge badge--medium" title="This feature is in early access">early access</span>
+
+Use the new MCP Client connector to allow Camunda processes and AI agents to auto-discover and invoke external tools, eliminating hardwired connectors and enabling dynamic, metadata-driven tool integration.
+
+To learn more, see [MCP client](../../../components/early-access/alpha/mcp-client/mcp-client.md).
+
+:::note
+The MCP Client connector is released as an [early access alpha feature](/components/early-access/alpha/alpha-features.md) to allow you to test and participate in development by sharing feedback before general availability, and is subject to alpha feature limitations.
+:::
+
+<!-- https://github.com/camunda/product-hub/issues/2900 -->
+
+#### Vector database connector
+
+Improvements are made to the Vector database connector as follows:
+
+- Updated the OpenSearch vector store to support non-AWS managed instances.
+- Added support for OpenAI embedding models.
+
+To learn more, see [vector database connector](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md).
+
+<!-- https://github.com/camunda/camunda-docs/pull/6047 -->
+
+#### Fetch latest process definitions
+
+The connectors runtime is optimized by fetching only the latest process definition versions from the Orchestration Cluster. This reduces CPU consumption and improves deployment performance, particularly in environments with frequent CI/CD-generated process versions.
+
+<!-- https://github.com/camunda/product-hub/issues/2572 -->
+
+#### Unlock element template fields
+
+[Element template management](/components/connectors/manage-connector-templates.md) is now more flexible for developers and DevOps teams.
+
+- You can assign custom semantic IDs and use an intuitive versioning scheme, ensuring templates are portable and retain stable references across different environments.
+- Template names and file names can be managed independently, and you can quickly import templates using copy and paste, git sync, or CI/CD pipeline.
+- Safeguards now notify you of ID or version conflicts to prevent accidental overwrites when publishing templates.
+
+<!-- https://github.com/camunda/product-hub/issues/2860 -->
+
+### Run process segment <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects APIs">API</span>
+
+This feature allows developers to manually execute and test individual tasks or segments (connectors, RPA bots, IDP extractions) without running full processes, improving debugging and development efficiency.
+
+To learn more, see [run process segment](/components/concepts/process-instance-creation.md#run-process-segment)
+
+<!-- https://github.com/camunda/product-hub/issues/2453 -->
+
+### Intelligent document processing (IDP) form extraction <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects IDP">IDP</span>
+
+You can use form-based structured document extraction to capture data from structured documents.
+
+- For example, you can use this extraction method for documents with a consistent layout, such as invoices, tax forms (for example, W-2s, VAT declarations), and loan or insurance applications.
+- Projects can be shared organization-wide, enhancing accessibility to extraction capabilities.
+
+To learn more, see [extract structured data](/components/modeler/web-modeler/idp/idp-structured-extraction.md).
+
+<!-- https://github.com/camunda/product-hub/issues/2707 -->
+
+### Migration to Orchestration Cluster Identity support <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Security">Security</span>
+
+Allows smooth migration from Camunda 8.7 to 8.8 by transferring tenants, roles, and authorizations to the new Orchestration Cluster Identity, minimizing manual administration effort during upgrade.
+
+<!-- https://github.com/camunda/product-hub/issues/2449 -->
+
+### RPA multi-file script support <span class="badge badge--long" title="This feature affects RPA">RPA</span>
+
+Robotic process automation (RPA) now supports multi-file script support, allowing you to organize scripts modularly, reuse common automation components, and integrate existing Robot Framework scripts. The execution engine fully supports multi-file scripts and linked resources, improving scalability, maintainability, and flexibility for enterprise automation projects.
+
+<!-- https://github.com/camunda/product-hub/issues/2710 -->
+
+### User task listener metadata and filtering <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span>
+
+With this release, user task listener jobs are improved as follows:
+
+- Task metadata is now directly embedded in the task listener jobs' properties instead of being exposed as custom headers. This includes attributes such as `assignee`, `dueDate` or `userTaskKey`.
+- User tasks can now be filtered using partial user task states to understand the current lifecycle state of the user task fully.
+
+These improvements simplify job worker development, reduce errors, and enable better observability of the user task lifecycle.
+
+<!-- https://github.com/camunda/product-hub/issues/2993 -->
+
+### Unified configuration for the Orchestration Cluster <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+
+Simplifies configuration by consolidating Operate, Tasklist, and Identity profiles into a unified Camunda 8 Orchestration Cluster application, reducing duplication and complexity for easier deployment and management.
+
+<!-- https://github.com/camunda/product-hub/issues/2486 -->
+
+### Zeebe-managed resilient batch operations <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Zeebe">Zeebe</span>
+
+All batch operations, such as canceling or resolving incidents in bulk, are now handled by Zeebe instead of Operate.
+
+- This change ensures region failovers in the multi-region setup no longer risk losing critical batch commands.
+- Users will initiate and manage batch operations through the Orchestration Cluster REST API and the Operate UI, but the underlying processing occurs within Zeebe.
+- By moving batch operations to the core engine, multi-region deployments gain reliability and resilience.
+
+<!-- https://github.com/camunda/product-hub/issues/2420 -->
+
 ## 8.8.0-alpha6
 
 | Release date | Changelog(s)                                                                                                                                                                               | Blog                                                                              |
@@ -81,7 +232,7 @@ You can now add new Zeebe partitions to a running cluster.
 - Process instances do not migrate between partitions, so it can take time for the cluster to reach equilibrium.
 - New partitions do not take part in correlating messages/signals, except for message/signal start events.
 
-To learn more, see [cluster scaling](/self-managed/zeebe-deployment/operations/cluster-scaling.md).
+To learn more, see [cluster scaling](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md).
 
 :::caution
 This feature is not yet fully compatible with backup/restore.
@@ -260,7 +411,7 @@ The following known limitations apply for this alpha version release:
 
 #### Identity management for Helm Chart setups <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-[Orchestration cluster Identity](/self-managed/orchestration-identity/orchestration-identity.md) is now available for OIDC setups in [Helm chart deployments](/self-managed/installation-methods/helm/install.md). Starting with this alpha version, you can configure the Orchestration cluster components to use the identity provider (IdP) of your choice and enable single sign-on (SSO).
+[Orchestration cluster Identity](/self-managed/components/orchestration-cluster/identity/overview.md) is now available for OIDC setups in [Helm chart deployments](/self-managed/installation-methods/helm/install.md). Starting with this alpha version, you can configure the Orchestration cluster components to use the identity provider (IdP) of your choice and enable single sign-on (SSO).
 
 The following known limitations apply for this alpha version release:
 
@@ -378,7 +529,7 @@ As well as bearer token and client credentials authentication, you can now confi
 - To use basic authentication, set the `CAMUNDA_MODELER_CLUSTERS_0_AUTHENTICATION` environment variable value to `BASIC`.
 - Web Modeler sends a username and password with every request to one of the cluster components (Zeebe, Operate, Tasklist).
 
-To learn more about basic authentication, see [available authentication methods](/self-managed/modeler/web-modeler/configuration/configuration.md#available-authentication-methods).
+To learn more about basic authentication, see [available authentication methods](/self-managed/components/modeler/web-modeler/configuration/configuration.md#available-authentication-methods).
 
 ## 8.8.0-alpha3
 
@@ -450,7 +601,7 @@ To learn more about this feature, see the [API documentation](/self-managed/quic
 
 ### Identity management updates <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-The [Identity service](/self-managed/identity/what-is-identity.md) is enhanced to deliver greater flexibility, control, and security for both Self-Managed and SaaS users. These updates are part of our broader effort to streamline the platform’s architecture.
+The [Identity service](/self-managed/components/management-identity/what-is-identity.md) is enhanced to deliver greater flexibility, control, and security for both Self-Managed and SaaS users. These updates are part of our broader effort to streamline the platform’s architecture.
 
 #### Cluster-level identity management
 
@@ -544,7 +695,7 @@ To learn more about migration, see [process instance migration](/components/conc
 
 A new Camunda Exporter brings the importer and archiving logic of web components (Tasklist and Operate) closer to the distributed platform (Zeebe). The index schema is also being harmonized.
 
-To learn more about this feature, see the [Camunda Exporter documentation](/self-managed/zeebe-deployment/exporters/camunda-exporter.md).
+To learn more about this feature, see the [Camunda Exporter documentation](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md).
 
 ### Backup and restore improvements <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 

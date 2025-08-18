@@ -1,10 +1,14 @@
 ---
 id: zeebe-backup-and-restore
-title: "Backup Management API - Zeebe"
+sidebar_label: Zeebe
+title: Zeebe backup management API
 description: "Backup API to create a backup of a running Zeebe cluster comprised of a consistent snapshot of all partitions."
-sidebar_label: "Zeebe"
 keywords: ["backup", "backups"]
 ---
+
+:::warning breaking changes
+As of the Camunda 8.8 release, the `/actuator` endpoints for backups have been moved to `/actuator/backupRuntime`. The previous `/actuator/backups` endpoint is still active only if the applications are deployed standalone (each application is running in its own process).
+:::
 
 Back up a running Zeebe cluster using the Backup Management API.
 
@@ -18,13 +22,13 @@ The backup management API is a custom endpoint `backups`, available via [Spring 
 :::warning
 Usage of this API requires the backup store to be configured for the component.
 
-- [Zeebe configuration](/self-managed/zeebe-deployment/configuration/broker.md#zeebebrokerdatabackup)
+- [Zeebe configuration](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#zeebebrokerdatabackup)
   :::
 
 To use the backup feature in Zeebe, you must choose which external storage system you will use.
 Make sure to set the same configuration on all brokers in your cluster.
 
-Zeebe supports [S3](/self-managed/zeebe-deployment/configuration/broker.md#zeebebrokerdatabackups3), [Google Cloud Storage (GCS)](/self-managed/zeebe-deployment/configuration/broker.md#zeebebrokerdatabackupgcs), and [Azure](/self-managed/zeebe-deployment/configuration/broker.md#zeebebrokerdatabackupazure) for external storage.
+Zeebe supports [S3](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#zeebebrokerdatabackups3), [Google Cloud Storage (GCS)](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#zeebebrokerdatabackupgcs), and [Azure](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#zeebebrokerdatabackupazure) for external storage.
 
 :::caution
 Backups created with one store are not available or restorable from another store.

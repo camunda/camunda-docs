@@ -66,7 +66,7 @@ zeebe:
         authentication:
           # Controls which authentication mode is active, supported modes are 'none' and 'identity'.
           # If 'identity' is set, authentication will be done using camunda-identity, which needs to
-          # be configured in the corresponding subsection. See also https://docs.camunda.io/docs/self-managed/identity/what-is-identity/ .
+          # be configured in the corresponding subsection. See also https://docs.camunda.io/docs/self-managed/components/management-identity/what-is-identity/ .
           # This setting can also be overridden using the environment variable ZEEBE_BROKER_GATEWAY_SECURITY_AUTHENTICATION_MODE.
           mode: none
 

@@ -63,7 +63,6 @@ csap setup --for rfc \
 1. Find the matching `.war` archive for the targeted Camunda 8 SaaS version on the [respective GitHub release page](https://github.com/camunda/sap-rfc-connector/releases).  
    The version follows the format `<C8 version major>.<C8 version minor>.<RFC connector version>`.  
    Examples:
-
    - `rfc-8.6.0.war` is the RFC connector in version `0` for C8 SaaS version `8.6`
    - `rfc-8.5.1.war` is the RFC connector in version `1` for C8 SaaS version `8.5`
 

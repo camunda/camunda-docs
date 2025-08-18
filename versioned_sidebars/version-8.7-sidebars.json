@@ -1794,6 +1794,7 @@
     "reference/licenses",
     "reference/notices",
     "reference/regions",
+    "reference/saas-ip-addresses",
     {
       "type": "category",
       "label": "Data collection",
@@ -1864,7 +1865,7 @@
                 }
               ],
               "Microsoft (Azure)": [
-                "self-managed/setup/deploy/azure/microsoft-aks"
+                "self-managed/setup/deploy/azure/microsoft-aks/microsoft-aks"
               ],
               "Google (GCP)": ["self-managed/setup/deploy/gcp/google-gke"],
               "Red Hat (OpenShift)": [
@@ -1892,6 +1893,7 @@
             "self-managed/setup/guides/using-existing-elasticsearch",
             "self-managed/setup/guides/using-existing-opensearch",
             "self-managed/setup/guides/using-existing-postgres",
+            "self-managed/setup/guides/using-existing-keycloak",
             "self-managed/setup/guides/configure-db-custom-headers",
             "self-managed/setup/guides/air-gapped-installation",
             "self-managed/setup/guides/running-custom-connectors",
@@ -1924,6 +1926,12 @@
                 "self-managed/setup/deploy/amazon/amazon-eks/eks-terraform",
                 "self-managed/setup/deploy/amazon/amazon-eks/eks-helm",
                 "self-managed/setup/deploy/amazon/amazon-eks/dual-region"
+              ]
+            },
+            {
+              "Microsoft AKS": [
+                "self-managed/setup/deploy/azure/microsoft-aks/aks-terraform",
+                "self-managed/setup/deploy/azure/microsoft-aks/aks-helm"
               ]
             },
             {

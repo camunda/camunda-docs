@@ -2,177 +2,211 @@
 id: kubernetes
 title: "Kubernetes deployment overview"
 sidebar_label: "Kubernetes"
-description: "Camunda 8 Kubernetes deployment Reference architecture home"
+description: "Camunda 8 Kubernetes deployment reference architecture home."
 ---
 
-<!-- TODO: Update for 8.8 changes when it's clear what it means -->
-
-This reference architecture provides guidance on deploying Camunda 8 Self-Managed within a Kubernetes cluster. This deployment method is ideal for users who are looking to leverage the benefits of containerization and self-healing capabilities. It is suited for quick scalability, and can provide additional resilience by utilizing multi-zone deployments.
+This reference architecture provides guidance for deploying Camunda 8 Self-Managed within a Kubernetes cluster. This deployment method is ideal for users who want to leverage the benefits of containerization and self-healing. It supports quick scalability and offers increased resilience through multi-zone deployments.
 
 ## Key features
 
-- **Scalability & High Availability**: Camunda 8 can scale up and down depending on your demand, and makes use of a highly available setup.
-- **Fault Tolerance & Resilience**: Scale Camunda 8 across zones or across regions to provide greater fault tolerance and uptime for your workflows.
+- **Scalability & high availability**: Camunda 8 can scale dynamically to meet demand and supports high-availability configurations.
+- **Fault tolerance & resilience**: Deploy Camunda 8 across availability zones or regions to improve fault tolerance and increase uptime for your workflows.
 
-Although Kubernetes has a steeper learning curve, once properly configured, it provides significant advantages, including self-healing capabilities that ensure application resilience by automatically restarting failed containers and rescheduling workloads.
+While Kubernetes introduces a steeper learning curve, once configured properly it provides significant benefits—such as self-healing capabilities that automatically restart failed containers and reschedule workloads to maintain availability.
 
-Additionally, Kubernetes benefits from a vast ecosystem of **[Cloud Native Computing Foundation (CNCF) projects](https://www.cncf.io/)**, offering seamless integration with monitoring, observability, logging, and security solutions. Tools like Prometheus and Grafana allow for comprehensive monitoring, while service meshes such as Istio enhance traffic management and security.
+Kubernetes also benefits from a robust ecosystem of [**Cloud Native Computing Foundation (CNCF) projects**](https://www.cncf.io/), enabling seamless integration with tools for monitoring, observability, logging, and security. Solutions like [Prometheus](https://prometheus.io/) and [Grafana](https://grafana.com/) offer comprehensive monitoring, while service meshes like [Istio](https://istio.io/) enhance traffic management and security.
 
-By leveraging this ecosystem, organizations can extend Kubernetes functionality to meet their specific operational needs, enabling greater automation, scalability, and visibility across their infrastructure.
+By leveraging this ecosystem, organizations can extend Kubernetes to fit specific operational needs—improving automation, scalability, and visibility across their infrastructure.
 
 ## Reference implementations
 
-This section includes deployment reference architectures:
+This section includes reference deployment architectures:
 
-- [Amazon EKS single-region](/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md): a standard production setup.
-- [Amazon EKS dual-region](/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/dual-region.md): an advanced use case utilizing two regions.
+### Amazon EKS
 
-Red Hat OpenShift on AWS (ROSA)
+- [Amazon EKS single-region](/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md): Standard production setup.
+- [Amazon EKS dual-region](/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/dual-region.md): Advanced multi-region setup.
 
-- [ROSA single-region](/self-managed/installation-methods/helm/cloud-providers/amazon/openshift/terraform-setup.md): a standard production setup.
-- [ROSA dual-region](/self-managed/installation-methods/helm/cloud-providers/amazon/openshift/terraform-setup-dual-region.md): an advanced use case utilizing two regions.
+### Red Hat OpenShift on AWS (ROSA)
 
-For general deployment pitfalls, visit the [deployment troubleshooting guide](/self-managed/operational-guides/troubleshooting/troubleshooting.md).
+- [ROSA single-region](/self-managed/installation-methods/helm/cloud-providers/amazon/openshift/terraform-setup.md): Standard production setup.
+- [ROSA dual-region](/self-managed/installation-methods/helm/cloud-providers/amazon/openshift/terraform-setup-dual-region.md): Advanced multi-region setup.
+
+### Microsoft Azure
+
+- [Microsoft AKS single-region](/self-managed/installation-methods/helm/cloud-providers/azure/microsoft-aks/terraform-setup.md): Standard production setup.
+
+For common issues and mitigation strategies, refer to the [deployment troubleshooting guide](/self-managed/operational-guides/troubleshooting.md).
 
 ## Architecture
 
-<!--_Infrastructure diagram for a single region setup (click on the image to open the PDF version):_
-[![Architecture Overview](./img/k8s-single.jpg)](./img/k8s-single.pdf)-->
+_Infrastructure diagram for a single region setup (click on the image to open the PDF version):_
+[![Architecture Overview](./img/k8s-single.jpg)](./img/k8s-single.pdf)
 
-This Kubernetes architecture diagram illustrates a high-availability setup spanning multiple availability zones (A, B, and C) with key networking components to ensure scalability, security, and reliability. Whenever possible, we recommend leveraging multiple availability zones to enhance fault tolerance and eliminate single points of failure.
+This Kubernetes architecture illustrates a high-availability setup across multiple availability zones (A, B, and C), with key networking components to ensure scalability, security, and reliability. We recommend using multiple availability zones to improve fault tolerance and eliminate single points of failure.
 
-For controlled access, we suggest deploying Camunda 8 within a private subnet while managing incoming traffic through an Ingress and Load Balancer.
+To control access, deploy Camunda 8 in a private subnet and manage inbound traffic using an Ingress and Load Balancer.
 
-The database is not depicted in the diagram, as we recommend handling it externally from the Kubernetes cluster. The implementation depends on organizational requirements, often residing within the same private network or even the same private subnets. Many companies maintain dedicated database setups, granting access only as needed.
+:::note
+The database is not shown in the diagram. It should be hosted outside the Kubernetes cluster, ideally within the same private network or subnet. Many organizations use a dedicated external database setup with tightly controlled access.
+:::
 
 ### Kubernetes
 
 :::note
-The reference architecture overview describes the difference between the [Orchestration cluster and Web Modeler and Console](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console), and provides additional information on application communication.
+The [reference architecture overview](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console) explains the distinction between the Orchestration Cluster and Web Modeler and Console, including details on how they communicate.
 :::
 
-A [multi-namespace deployment](/self-managed/installation-methods/helm/configure/multi-namespace-deployment.md) is recommended. For more information, see the [components](#components) section.
+A [multi-namespace deployment](/self-managed/installation-methods/helm/configure/multi-namespace-deployment.md) is recommended. For details on individual components, see the [components section](#components).
 
-The following depictions provide a simplified view of the deployed namespaces using the [Camunda 8 Helm chart](/self-managed/installation-methods/helm/install.md). To keep the diagram clear, ConfigMaps, Secrets, RBAC, and ReplicaSets have been omitted.
+The following visuals provide a simplified view of the deployed namespaces using the [Camunda 8 Helm chart](/self-managed/installation-methods/helm/install.md). For clarity, ConfigMaps, Secrets, RBAC, and ReplicaSets are omitted.
 
-#### Orchestration cluster
+#### Orchestration Cluster
 
 ![Orchestration Cluster](./img/k8s-cluster-view-orchestration.jpg)
 
-By default, the Helm chart suggests using a single Ingress for Camunda resources, enabling a unified domain with each application accessible via a different path.
+The Helm chart uses a single Ingress by default, enabling a unified domain with each application accessible via a dedicated path.
 
-Most applications are stateless and deployed as **Deployments**. However, Zeebe Brokers are an exception, requiring a **StatefulSet** to ensure that volumes are consistently mounted, as pod order and identifiers are crucial.
+Most Camunda 8 components are stateless and deployed as **Deployments**. However, the Orchestration Cluster contains Zeebe brokers, which require a **StatefulSet** to maintain consistent volume mounts. This ensures stable pod ordering and identifiers. StatefulSet names remain consistent even as they represent the entire Orchestration Cluster—simplifying migration from existing setups.
 
-Zeebe Brokers also have a service but are not directly exposed externally; all requests must pass through the Zeebe Gateway, which is typically used for internal communication as well.
+The Orchestration Cluster exposes two services:
+
+1. A [**headless service**](https://kubernetes.io/docs/concepts/services-networking/service/#headless-services) for internal communication between Zeebe brokers. This service skips load balancing and resolves to pod IPs for direct peer-to-peer communication.
+
+2. A **standard service** for external applications. This service distributes traffic randomly (via `kube-proxy`) and is suitable for clients or other services connecting to the cluster.
 
 #### Web Modeler and Console
 
 ![Web Modeler and Console](./img/k8s-cluster-view-managing.jpg)
 
-Web Modeler, Console, and Identity are deployed as **Deployments** since they are stateless, with data stored externally in a SQL database. This allows them to be easily scaled as needed.
+Web Modeler, Console, and Management Identity are stateless and deployed as **Deployments**, with data stored in an external SQL database. This makes them easy to scale as needed.
 
-The namespace has its own Ingress resource, as those are namespace-bound and not cluster-wide resources. This means you will have to use a different subdomain for each Ingress resource. For more details, refer to the [multi-namespace deployment guide](/self-managed/installation-methods/helm/configure/multi-namespace-deployment.md).
+Each namespace uses its own Ingress, as Ingress resources are namespace-scoped (not cluster-wide). This requires separate subdomains for each Ingress. For more details, see the [multi-namespace deployment guide](/self-managed/installation-methods/helm/configure/multi-namespace-deployment.md).
 
 ### High availability (HA)
 
 :::caution Non-HA importer / archiver
-The following concerns **Operate**, **Tasklist**, and **Optimize**:
+This applies to **Optimize**:
 
-When scaling from a single pod to multiple, ensure that the `importer / archiver` is enabled on only one pod and disabled on others. Enabling it on multiple pods will cause data inconsistencies. This limitation is known and will be addressed in future updates.
+When scaling from a single pod to multiple pods, ensure that the `importer / archiver` is enabled on only one pod. Enabling it on more than one pod may cause data inconsistencies. This is a known limitation and will be addressed in a future update.
 
-Example configuration options are available for [Operate](/self-managed/operate-deployment/importer-and-archiver.md#configuration), [Optimize](/self-managed/optimize-deployment/configuration/system-configuration-platform-8.md#general-settings), and [Tasklist](/self-managed/tasklist-deployment/importer-and-archiver.md#configuration).
+See the [Optimize system configuration guide](/self-managed/components/optimize/configuration/system-configuration-platform-8.md#general-settings) for example settings.
 :::
 
-For high availability, a minimum of four Kubernetes nodes are recommended to ensure fault tolerance and support leader election in case of failures. To learn more about the Raft protocol and clustering concepts, refer to the [clustering documentation](/components/zeebe/technical-concepts/clustering.md).
+For high availability, we recommend a minimum of **four Kubernetes nodes** to ensure fault tolerance and support leader election. This is especially important when using the [Raft protocol](<https://en.wikipedia.org/wiki/Raft_(algorithm)>) for consensus within the Orchestration Cluster. For more details, refer to the [clustering documentation](/components/zeebe/technical-concepts/clustering.md).
 
-In Kubernetes, Deployments and StatefulSets can be scaled independently of physical machines. Four Kubernetes nodes are recommended based on the default setup of a three-broker Zeebe deployment and all available Camunda 8 components, and the resources this setup requires. Your setup may differ from this default, and may require you to scale more horizontally or vertically to ensure enough capacity depending on your Camunda 8 usage.
+While Deployments and StatefulSets in Kubernetes can scale independently of physical hardware, four nodes are typically required to support:
 
-The default node affinity settings prevent Zeebe brokers from being scheduled on the same node, requiring a minimum three-node setup. For more details on Kubernetes affinity rules, see the [official documentation](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/).
+- The default three-node Orchestration Cluster
+- Other Camunda 8 components (e.g., Web Modeler, Identity, Tasklist)
 
-To further enhance fault tolerance, it is recommended to distribute Zeebe brokers and other scaled applications across multiple availability zones using additional affinity rules, ensuring resilience in case of a zone failure.
+Depending on your specific use case, you may need to scale **horizontally** (more nodes) or **vertically** (larger nodes) to meet resource requirements.
+
+By default, node affinity rules prevent all Orchestration Cluster pods from being scheduled on the same node. This requires at least three nodes for proper operation. For details, see the [Kubernetes node affinity documentation](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/).
+
+To further improve fault tolerance, distribute the Orchestration Cluster and other components across **multiple availability zones**. Use affinity and anti-affinity rules to ensure workloads remain available even if a zone fails.
 
 ### Components
 
-A typical Camunda 8 deployment distinguishes between the **Orchestration cluster** and the **Web Modeler and Console**. These clusters should be separated by utilizing [Kubernetes namespaces](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/), though running within a single namespace is possible.
+Camunda 8 deployments typically separate workloads into two logical groups:
 
-A multi-namespace setup allows you to duplicate and run multiple Orchestration clusters based on different use cases and requirements, while Web Modeler and Console remains independent, and does not need to be scaled the same way. The same applies to Identity as a central entity coordinating access management.
+- **Orchestration Cluster**
+- **Web Modeler and Console**
 
-The **Orchestration cluster** namespace, as outlined in the [architecture diagram](#orchestration-cluster), consists of the following components:
+We recommend deploying these groups into separate [Kubernetes namespaces](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/). This separation supports multi-tenancy, improves isolation, and allows flexible scaling. However, deploying all components in a single namespace is also possible for smaller environments.
 
-- [Zeebe Brokers](/components/zeebe/technical-concepts/architecture.md#brokers)
-- [Zeebe Gateway](/self-managed/zeebe-deployment/zeebe-gateway/zeebe-gateway-overview.md)
-- [Operate](/components/operate/operate-introduction.md)
-- [Tasklist](/components/tasklist/introduction-to-tasklist.md)
-- [Optimize](/components/optimize/what-is-optimize.md)
-- [Connectors](/components/connectors/introduction.md)
+A **multi-namespace setup** enables:
 
-The **Web Modeler and Console** namespace, as outlined in the [architecture diagram](#web-modeler-and-console), consists of the following components:
+- Independent scaling of Orchestration Clusters based on workload
+- Shared access to centralized components (e.g., Management Identity)
 
-- Web Modeler
-- [Console](/self-managed/console-deployment/overview.md)
-- [Identity](/self-managed/identity/what-is-identity.md)
-  - Keycloak, an external dependency of Identity
+#### Orchestration Cluster namespace
 
-The **Orchestration cluster** should be configured to use the central Identity of the **Web Modeler and Console** namespace.
+As shown in the [architecture diagram](#orchestration-cluster), the Orchestration Cluster is deployed as a StatefulSet and packaged as a single container image. It includes the following components:
+
+- [Zeebe](/components/zeebe/zeebe-overview.md) — workflow engine and broker
+- [Operate](/components/operate/operate-introduction.md) — visibility and troubleshooting UI
+- [Tasklist](/components/tasklist/introduction-to-tasklist.md) — UI for human tasks
+- [Identity](/self-managed/components/orchestration-cluster/identity/overview.md) — authentication and access control
+
+Also included in this namespace are components that are tightly integrated with the cluster:
+
+- [Optimize](/components/optimize/what-is-optimize.md) — reporting and analytics
+- [Connectors](/components/connectors/introduction.md) — external system integrations
+
+#### Web Modeler and Console namespace
+
+As shown in the [architecture diagram](#web-modeler-and-console), this namespace contains:
+
+- [Web Modeler](/self-managed/components/modeler/web-modeler/overview.md) — browser-based BPMN editor
+- [Console](/self-managed/components/console/overview.md) — administrative interface
+- [Management Identity](/self-managed/components/management-identity/what-is-identity.md) — centralized access control
+
+This namespace also includes **Keycloak**, which serves as the Identity Provider (IdP) for Management Identity.
+
+The **Orchestration Cluster** can be configured to authenticate via **OIDC** by connecting to the **Management Identity** service deployed in this namespace.
 
 ## Requirements
 
 This guide focuses on a single-region application, but can be adapted for a multi-region setup once you understand the basics of a single region.
 
-For more details on multi-region configurations, especially dual-region setups, refer to the [dedicated guide](/self-managed/concepts/multi-region/dual-region.md).
+For details on multi-region configurations, especially dual-region setups, refer to the [dedicated guide](/self-managed/concepts/multi-region/dual-region.md).
 
 ### Infrastructure
 
-We recommend using an officially [certified Kubernetes](https://www.cncf.io/training/certification/software-conformance/#benefits) distribution.
+We recommend using a [certified Kubernetes](https://www.cncf.io/training/certification/software-conformance/#benefits) distribution.
 
-Camunda 8 is not tied to a specific Kubernetes version. To simplify deployment, we provide a [Helm chart](/self-managed/installation-methods/helm/install.md) for easy installation on Kubernetes. The latest Helm chart is typically compatible with Kubernetes' [official support cycle](https://kubernetes.io/releases/).
+Camunda 8 is not tied to a specific Kubernetes version. To simplify deployment, we provide a [Helm chart](/self-managed/installation-methods/helm/install.md) that supports the Kubernetes [official support cycle](https://kubernetes.io/releases/).
 
 #### Minimum cluster requirements
 
-The following are suggested minimum requirements. Sizing depends heavily on your specific use cases and workload. See [sizing your environment](/components/best-practices/architecture/sizing-your-environment.md) and [Zeebe resource planning](/self-managed/zeebe-deployment/operations/resource-planning.md) for additional resources, conduct benchmarking to determine your exact requirements.
+The following are suggested minimum requirements. Sizing depends heavily on your specific use cases and workload. Refer to [sizing your environment](/components/best-practices/architecture/sizing-your-environment.md) and [Zeebe resource planning](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md), and conduct benchmarking to determine your exact needs.
 
-- 4 Kubernetes Nodes
-  - Modern CPU: 4 Cores
+- **4 Kubernetes nodes**
+  - CPU: 4 modern cores
   - Memory: 16 GiB
-- Persistent Volumes
+- **Persistent volumes**
   - 1,000 IOPS
-  - 32 GiB size
-  - _avoid burstable disk types_
+  - 32 GiB
+  - _Avoid burstable disk types_
 
 #### Networking
 
-Networking is largely managed through services and Load Balancers. The following describes networking requirements, including port usage, which may be necessary if explicit whitelisting is required within a private network.
+Networking is largely managed through services and load balancers. The following outlines typical port usage, which may require whitelisting in private networks:
 
-- Stable, high-speed network connection
-- Configured firewall rules to allow necessary traffic:
-  - **80**: Web UI (Console, Identity, Keycloak, Operate, Optimize, Tasklist, Web Modeler)
-  - **82**: Metrics endpoint (Identity)
-  - **8080**: REST endpoint (Connectors, Keycloak, Zeebe Gateway)
-  - **8071 / 8091**: Management endpoint (Web Modeler)
-  - **8092**: Management endpoint (Optimize)
-  - **9100**: Management endpoint (Console)
-  - **9600**: Management endpoint (Operate, Tasklist, Zeebe Brokers, Zeebe Gateway)
-  - **26500**: gRPC endpoint.
-  - **26501**: Gateway-to-broker communication.
-  - **26502**: Inter-broker communication.
-- Load Balancer for distributing traffic and exposing Camunda 8 to users (if required)
+- Stable, high-speed connection
+- Firewall rules for:
+  - `80`: Web UI (Console, Management Identity, Keycloak, Web Modeler)
+  - `82`: Metrics (Management Identity)
+  - `8080`: REST/Web UI (Connectors, Keycloak, Orchestration Cluster)
+  - `8071`, `8091`: Management (Web Modeler)
+  - `8092`: Management (Optimize)
+  - `9100`: Management (Console)
+  - `9600`: Management (Orchestration Cluster)
+  - `26500`: gRPC endpoint
+  - `26501`: Gateway-to-broker
+  - `26502`: Inter-broker
 
-The exposed Kubernetes service port does not always match the target port of the components. The correct target ports can be found in the rendered Helm chart, or in the configuration pages for each component.
+A load balancer is recommended to distribute traffic and expose Camunda 8 to users as needed.
+
+The exposed Kubernetes service port may differ from the internal component port. Refer to the rendered Helm chart or component configuration for accurate target ports.
 
 :::note Databases
+Database ports are not included here, as databases should be maintained outside of Camunda. Default ports may vary by environment.
 
-Database ports are not included, as databases should be maintained outside Camunda, and ports may differ from the upstream defaults.
+Typical defaults include:
 
-The defaults for the databases are:
+- `5432`: PostgreSQL
+- `9200`, `9300`, `9600`: Elasticsearch/OpenSearch
+  :::
 
-- **5432**: PostgreSQL
-- **9200 / 9300**: Elasticsearch/OpenSearch
+##### Load balancer
 
+The Zeebe Gateway as part of the Orchestration Cluster requires gRPC, which itself requires HTTP/2 to be used. It is recommended to secure the endpoint with a TLS certificate.
+
+:::tip
+If you do not rely on the gRPC capabilities of Camunda 8, you can safely disregard this and use the Orchestration Cluster REST API instead.
 :::
-
-##### Load Balancer
-
-The Zeebe Gateway requires gRPC, which itself requires HTTP/2 to be used. It is recommended to secure the endpoint with a TLS certificate.
 
 By default, the Camunda 8 Helm chart is compatible with the [Ingress-nginx controller](https://github.com/kubernetes/ingress-nginx), which supports gRPC and HTTP/2. This solution is applicable independent of the cloud provider.
 
@@ -189,22 +223,22 @@ annotations:
 
 The Helm chart required for deploying on Kubernetes is [publicly available](https://helm.camunda.io/).
 
-Camunda maintains the required Docker images consumed by the Helm chart. These images are available on [DockerHub](https://hub.docker.com/u/camunda). The `Dockerfile` and its default configuration are available as part of the [Camunda repository](https://github.com/camunda/camunda/blob/stable/8.7/Dockerfile).
+Camunda maintains the required Docker images consumed by the Helm chart. These images are available on [DockerHub](https://hub.docker.com/u/camunda). The `Dockerfile` and its default configuration are available as part of the [Camunda repository](https://github.com/camunda/camunda/blob/main/Dockerfile).
 
 ### Database
 
 The following databases are required:
 
 - Elasticsearch/OpenSearch
-  - required by Operate, Optimize, Tasklist, and Zeebe
+  - Required by Orchestration Cluster and Optimize
 - PostgreSQL
-  - required by Identity, Keycloak, and Web Modeler
+  - Required by Management Identity, Keycloak, and Web Modeler
 
 For more information, see the [reference architecture overview](/self-managed/reference-architecture/reference-architecture.md#architecture).
 
-Sizing is use case dependent. It is crucial to conduct thorough load testing and benchmark tests to determine the appropriate size specific to your environment and use case.
+Sizing is use case dependent. It is crucial to conduct thorough load testing and benchmarking to determine the appropriate sizing for your specific environment and workload.
 
-Once deployed, the included [Grafana dashboard](/self-managed/operational-guides/monitoring/metrics.md#grafana) can be used with [Prometheus](https://prometheus.io/) to address bottlenecks when exporting data from Zeebe to your database.
+Once deployed, the included [Grafana dashboard](/self-managed/operational-guides/monitoring/metrics.md#grafana) can be used with [Prometheus](https://prometheus.io/) to monitor for bottlenecks when exporting data from the Orchestration Cluster to your database.
 
 ## Distributions
 
@@ -214,23 +248,23 @@ Red Hat OpenShift, a Kubernetes distribution maintained by [Red Hat](https://www
 
 #### Minimum cluster requirements
 
-- Instance type: 4 vCPUs (x86_64, >3.1 GHz), 16 GiB Memory
+- Instance type: 4 vCPUs (x86_64, >3.1 GHz), 16 GiB memory
 - Number of dedicated nodes: 4
 - Volume type: SSD
-  - 1,000 - 3,000 IOPS per volume
-  - throughput of 1,000 MB/s per volume
+  - 1,000–3,000 IOPS per volume
+  - Throughput of 1,000 MB/s per volume
 
-#### Supported Versions
+#### Supported versions
 
-We conduct testing and ensure compatibility against the following OpenShift versions:
+We conduct testing and ensure compatibility with the following OpenShift versions:
 
-| OpenShift Version |
+| OpenShift version |
 | ----------------- |
+| 4.19.x            |
 | 4.18.x            |
 | 4.17.x            |
 | 4.16.x            |
 | 4.15.x            |
-| 4.14.x            |
 
 :::caution Versions compatibility
 
@@ -244,34 +278,34 @@ Camunda 8 supports OpenShift versions in the Red Hat General Availability, Full 
 
 #### Minimum cluster requirements
 
-- Instance type: m6i.xlarge (4 vCPUs, 16 GiB Memory)
+- Instance type: `m6i.xlarge` (4 vCPUs, 16 GiB memory)
 - Number of Kubernetes nodes: 4
-- Volume type: SSD gp3
+- Volume type: SSD `gp3`
   - 3,000 IOPS baseline
-  - Requires [Amazon EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) to be installed and a gp3 `StorageClass` [to be configured](https://docs.aws.amazon.com/eks/latest/userguide/create-storage-class.html).
-- Volume alternative: gp2
-  - Only if gp3 isn't available
+  - Requires [Amazon EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) to be installed and a `gp3` StorageClass [configured](https://docs.aws.amazon.com/eks/latest/userguide/create-storage-class.html)
+- Volume alternative: `gp2`
+  - Only if `gp3` isn't available
   - IOPS performance [varies based on volume size](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/general-purpose.html#gp2-performance)
-  - Minimum 34 GiB for > 1,000 IOPS
+  - Minimum 34 GiB for >1,000 IOPS
 
-#### Load Balancer
+#### Load balancer
 
-The following AWS Load Balancers are supported by Camunda 8:
+The following AWS load balancers are supported by Camunda 8:
 
 - Application Load Balancer (ALB)
 - Network Load Balancer (NLB)
 
-The Classic Load Balancer (CLB) is the previous generation, and is unsupported by Camunda 8.
+The Classic Load Balancer (CLB) is the previous generation and is not supported by Camunda 8.
 
 ##### Application Load Balancer (ALB)
 
-AWS offers an [Application Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html) (ALB), which requires TLS termination in the Load Balancer and supports the AWS Certificate Manager (ACM).
+AWS offers an [Application Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html) (ALB), which requires TLS termination in the load balancer and supports AWS Certificate Manager (ACM).
 
-Using an Application Load Balancer requires the following:
+To use an Application Load Balancer:
 
-- A deployed [AWS Load Balancer Controller](https://kubernetes-sigs.github.io/aws-load-balancer-controller/).
-- A [certificate set up](https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html) in the AWS Certificate Manager (ACM).
-- A configured Ingress for Camunda. Follow the [example by AWS](https://github.com/kubernetes-sigs/aws-load-balancer-controller/blob/main/docs/examples/grpc_server.md), which should result in the following following annotations to the Camunda Ingress:
+- Deploy the [AWS Load Balancer Controller](https://kubernetes-sigs.github.io/aws-load-balancer-controller/)
+- Set up a [certificate in AWS Certificate Manager](https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html)
+- Configure Ingress for Camunda using the [AWS example](https://github.com/kubernetes-sigs/aws-load-balancer-controller/blob/main/docs/examples/grpc_server.md), which results in the following annotations on the Camunda Ingress:
   ```yaml
   alb.ingress.kubernetes.io/ssl-redirect: "443"
   alb.ingress.kubernetes.io/backend-protocol-version: GRPC
@@ -280,40 +314,39 @@ Using an Application Load Balancer requires the following:
   alb.ingress.kubernetes.io/target-type: ip
   ```
 
-The setup does not require the configuration of the [TLS on the Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/#tls). If the AWS Load Balancer Controller is correctly set up, it automatically pulls the correct certificate from ACM based on the host name.
+The setup does not require configuration of [TLS on the Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/#tls). If the AWS Load Balancer Controller is correctly configured, it automatically retrieves the appropriate certificate from ACM based on the host name.
 
-##### Network Load Balancer (NLB)
+##### Network load balancer (NLB)
 
-Camunda 8 is compatible with [Ingress-nginx](https://github.com/kubernetes/ingress-nginx), which deploys a Network Load Balancer. In this setup, TLS must be terminated within the Ingress, and AWS Certificate Manager (ACM) cannot be used. ACM does not allow exporting the private key required for TLS termination within the Ingress.
+Camunda 8 is compatible with [Ingress-nginx](https://github.com/kubernetes/ingress-nginx), which deploys a Network Load Balancer. In this setup, TLS must be terminated within the Ingress, so AWS Certificate Manager (ACM) cannot be used. ACM does not allow exporting the private key required for TLS termination inside the Ingress.
 
 ### Microsoft AKS
 
 #### Minimum cluster requirements
 
-- Instance type: Standard_D4as_v4 (4 vCPUs, 16 GiB Memory)
+- Instance type: Standard_D4as_v4 (4 vCPUs, 16 GiB memory)
 - Number of Kubernetes nodes: 4
 - Volume type: Premium SSD v2
   - 3,000 IOPS baseline
-  - several [known limitations](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#premium-ssd-v2-limitations)
-    - e.g. lack of [Azure Backup support](https://learn.microsoft.com/en-us/azure/backup/disk-backup-support-matrix#limitations)
+  - Several [known limitations](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#premium-ssd-v2-limitations), e.g., lack of [Azure Backup support](https://learn.microsoft.com/en-us/azure/backup/disk-backup-support-matrix#limitations)
 - Volume alternative: Premium SSD
   - IOPS performance [varies based on volume size](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#premium-ssds)
   - Minimum 256 GiB (P15) for > 1,000 IOPS
 
-#### Load Balancer
+#### Load balancer
 
-Azure offers the **Application Gateway for Containers (AGC)**, which supports gRPC and HTTP/2 via the `GRPCRoute` resource in the [Kubernetes Gateway API](https://kubernetes.io/docs/concepts/services-networking/gateway/). Configuration details can be found in [official Azure documentation](https://learn.microsoft.com/en-us/azure/application-gateway/for-containers/grpc).
+Azure offers the **Application Gateway for Containers (AGC)**, which supports gRPC and HTTP/2 via the `GRPCRoute` resource in the [Kubernetes Gateway API](https://kubernetes.io/docs/concepts/services-networking/gateway/). Configuration details are available in the [official Azure documentation](https://learn.microsoft.com/en-us/azure/application-gateway/for-containers/grpc).
 
 ### Google GKE
 
 #### Minimum cluster requirements
 
-- Instance type: n(1|2)-standard-4 (4 vCPUs, 15 / 16 GB Memory)
+- Instance type: n(1|2)-standard-4 (4 vCPUs, 15 / 16 GiB memory)
 - Number of Kubernetes nodes: 4
 - Volume type: Performance (SSD) persistent disks
   - IOPS performance [varies based on volume size](https://cloud.google.com/compute/docs/disks/performance#performance_factors)
   - Minimum 34 GiB for > 1,000 IOPS
 
-#### Load Balancer
+#### Load balancer
 
 If you are using the [GKE Ingress](https://cloud.google.com/kubernetes-engine/docs/concepts/ingress) (Ingress-gce), you may need to use `cloud.google.com/app-protocols` annotations in the **Zeebe Gateway** service. For more details, visit the GKE guide [using HTTP/2 for load balancing with Ingress](https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-http2).

@@ -1,13 +1,17 @@
 ---
 id: backup-and-restore
-title: "Back up and restore"
-sidebar_label: "Back up and restore"
+sidebar_label: Back up and restore
+title: Camunda back up and restore
 keywords: ["backup", "backups"]
 description: "Learn how to back up and restore your Camunda 8 Self-Managed components."
 ---
 
 :::note
 The Camunda 8.8 release introduces breaking changes for [Operate and Tasklist](./webapps-backup.md).
+:::
+
+:::note
+If the Camunda application(s) cannot access Elasticsearch with cluster-level privileges, it is possible to run the backup of Operate and Tasklist indices (steps 2 and 4 from the backup procedure below) as a standalone application separate from the main application (see [standalone backup application](/self-managed/concepts/elasticsearch-without-cluster-privileges.md#standalone-backup-application)).
 :::
 
 import Tabs from '@theme/Tabs';
@@ -21,9 +25,9 @@ Use the backup feature to back up and restore your Camunda 8 Self-Managed compon
 
 This guide covers how to back up and restore your Camunda 8 Self-Managed components and cluster. You should automate the procedures in this guide, choosing tools that fulfil the requirements of your organization.
 
-- Regularly [back up](backup.md) the state of your Zeebe, Web Applications (Operate, Tasklist), and Optimize components without any downtime. You can also back up and restore Web Modeler data.
+- Regularly [back up](./backup.md) the state of your Zeebe, Web Applications (Operate, Tasklist), and Optimize components without any downtime. You can also back up and restore Web Modeler data.
 
-- [Restore](restore.md) a cluster from a backup if any failures occur that cause data loss.
+- [Restore](./restore.md) a cluster from a backup if any failures occur that cause data loss.
 
 <ZeebeGrid zeebe={overviewCards} />
 
@@ -64,10 +68,10 @@ This ensures high availability while preserving the integrity of the data snapsh
 
 The following prerequisites are required before you can create and restore backups:
 
-| Prerequisite                                             | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| :------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Set up a snapshot repository in the secondary datastore. | <p>Depending on the choice of secondary datastore, you must configure the following on the datastore itself:</p><p><ul><li>[Elasticsearch snapshot repository](https://www.elastic.co/docs/deploy-manage/tools/snapshot-and-restore/manage-snapshot-repositories)</li><li>[OpenSearch snapshot repository](https://docs.opensearch.org/docs/latest/tuning-your-cluster/availability-and-recovery/snapshots/snapshot-restore/)</li></ul></p><p><small>Note: For Elasticsearch configuration with the Camunda Helm chart on AWS EKS using IRSA, see [configuration example](/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/irsa.md#backup-related).</small></p> |
-| Configure component backup storage.                      | <p>Configure the backup storage for the components. This is also important for restoring a backup.</p><p><ul><li>[Operate](/self-managed/operate-deployment/operate-configuration.md#backups)</li><li>[Optimize Elasticsearch](/self-managed/optimize-deployment/configuration/system-configuration.md#elasticsearch-backup-settings) / [Optimize OpenSearch](/self-managed/optimize-deployment/configuration/system-configuration.md#opensearch-backup-settings)</li><li>[Tasklist](/self-managed/tasklist-deployment/tasklist-configuration.md#backups)</li><li>[Zeebe](/self-managed/zeebe-deployment/configuration/broker.md#zeebebrokerdatabackup)</li></ul></p>                    |
+| Prerequisite                                             | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| :------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Set up a snapshot repository in the secondary datastore. | <p>Depending on the choice of secondary datastore, you must configure the following on the datastore itself:</p><p><ul><li>[Elasticsearch snapshot repository](https://www.elastic.co/docs/deploy-manage/tools/snapshot-and-restore/manage-snapshot-repositories)</li><li>[OpenSearch snapshot repository](https://docs.opensearch.org/docs/latest/tuning-your-cluster/availability-and-recovery/snapshots/snapshot-restore/)</li></ul></p><p><small>Note: For Elasticsearch configuration with the Camunda Helm chart on AWS EKS using IRSA, see [configuration example](/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/irsa.md#backup-related).</small></p>                                                                        |
+| Configure component backup storage.                      | <p>Configure the backup storage for the components. This is also important for restoring a backup.</p><p><ul><li>[Operate](../../../self-managed/components/orchestration-cluster/operate/operate-configuration.md#backups)</li><li>[Optimize Elasticsearch](../../../self-managed/components/optimize/configuration/system-configuration.md#elasticsearch-backup-settings) / [Optimize OpenSearch](../../components/optimize/configuration/system-configuration.md#opensearch-backup-settings)</li><li>[Tasklist](../../../self-managed/components/orchestration-cluster/tasklist/tasklist-configuration.md#backups)</li><li>[Zeebe](../../../self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#zeebebrokerdatabackup)</li></ul></p> |
 
 :::note
 You should keep the backup storage of the components configured at all times to ease the backup and restore process and avoid unnecessary restarts.
@@ -103,7 +107,7 @@ As of Camunda 8.8, configuring Operate and Tasklist with different repository na
 :::
 
 :::warning breaking changes
-As of Camunda 8.8, the `/actuator` endpoints for backups have been moved to `/actuator/backupHistory`. The previous `/actuator/backups` endpoint is still active only if the applications are deployed standalone (each application is running in its own process).
+As of Camunda 8.8, the `/actuator` endpoints for backups have been moved to `/actuator/backupHistory` and `/actuator/backupRuntime`. The previous `/actuator/backups` endpoint is still active only if the applications are deployed standalone (each application is running in its own process).
 :::
 
 ### Management API
@@ -112,10 +116,10 @@ The management API is an extension of the [Spring Boot Actuator](https://docs.sp
 
 Direct access will depend on your deployment environment. For example, direct Kubernetes cluster access with [port-forwarding](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_port-forward/) or [exec](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_exec/) to execute commands directly on Kubernetes pods. In a manual deployment you will need to be able to reach the machines that host Camunda. Typically, the management port is on port `9600` but might differ on your setup and on the components. You can find the default for each component in their configuration page.
 
-| Component                                                                                         | Port |
-| ------------------------------------------------------------------------------------------------- | ---- |
-| [Optimize](/self-managed/optimize-deployment/configuration/system-configuration.md#container)     | 8092 |
-| [Orchestration Cluster](/self-managed/zeebe-deployment/configuration/gateway.md#managementserver) | 9600 |
+| Component                                                                                                               | Port |
+| ----------------------------------------------------------------------------------------------------------------------- | ---- |
+| [Optimize](/self-managed/components/optimize/configuration/system-configuration.md#container)                           | 8092 |
+| [Orchestration Cluster](/self-managed/components/orchestration-cluster/zeebe/configuration/gateway.md#managementserver) | 9600 |
 
 #### Examples for Kubernetes approaches
 

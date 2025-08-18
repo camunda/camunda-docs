@@ -25,12 +25,10 @@ The default runtime of CPT is based on [Testcontainers](https://java.testcontain
 
 You can change the Docker images and other runtime properties in the following way.
 
-<Tabs groupId="client" defaultValue="spring-sdk" queryString values={
-[
+<Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
 {label: 'Camunda Spring Boot SDK', value: 'spring-sdk' },
 {label: 'Java client', value: 'java-client' }
-]
-}>
+]}>
 
 <TabItem value='spring-sdk'>
 
@@ -72,10 +70,23 @@ io:
 In your `/camunda-container-runtime.properties` file:
 
 ```properties
-camunda.dockerImageVersion=8.8.0
+camundaDockerImageVersion=8.8.0
+camundaDockerImageName=camunda/camunda
+camundaEnvVars.env_1=value_1
+camundaEnvVars.env_2=value_2
+camundaExposedPorts[0]=4567
+camundaExposedPorts[1]=5678
+
+connectorsEnabled=true
+connectorsDockerImageVersion=8.8.0
+connectorsDockerImageName=camunda/connectors
+connectorsEnvVars.env_1=value_1
+connectorsEnvVars.env_2=value_2
+connectorsSecrets.secret_1=value_1
+connectorsSecrets.secret_2=value_2
 ```
 
-For more configuration options, you can register the JUnit extension manually and use the fluent builder:
+Alternatively, you can register the JUnit extension manually and use the fluent builder:
 
 ```java
 package com.example;
@@ -150,12 +161,10 @@ path, then you need to set the path when starting the application with the comma
 
 Set the configuration to use a remote runtime in the following way. Change the connection to the runtime, if needed.
 
-<Tabs groupId="client" defaultValue="spring-sdk" queryString values={
-[
+<Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
 {label: 'Camunda Spring Boot SDK', value: 'spring-sdk' },
 {label: 'Java client', value: 'java-client' }
-]
-}>
+]}>
 
 <TabItem value='spring-sdk'>
 
@@ -170,18 +179,28 @@ io:
         runtime-mode: remote
         # Change the connection (default: Camunda 8 Run)
         remote:
+          camunda-monitoring-api-address: http://0.0.0.0:9600
+          connectors-rest-api-address: http://0.0.0.0:8085
           client:
             rest-address: http://0.0.0.0:8080
             grpc-address: http://0.0.0.0:26500
-            camunda-monitoring-api-address: http://0.0.0.0:9600
-            connectors-rest-api-address: http://0.0.0.0:8085
 ```
 
 </TabItem>
 
 <TabItem value='java-client'>
 
-Register the JUnit extension manually and use the fluent builder:
+In your `/camunda-container-runtime.properties` file:
+
+```properties
+runtimeMode=remote
+remote.camundaMonitoringApiAddress=http://0.0.0.0:9600
+remote.connectorsRestApiAddress=http://0.0.0.0:8085
+remote.client.grpcAddress=http://0.0.0.0:26500
+remote.client.restAddress=http://0.0.0.0:8080
+```
+
+Alternatively, you can register the JUnit extension manually and use the fluent builder:
 
 ```java
 package com.example;
@@ -199,6 +218,7 @@ public class MyProcessTest {
             .withRuntimeMode(CamundaProcessTestRuntimeMode.REMOTE)
             // Change the connection (default: Camunda 8 Run)
             .withRemoteCamundaClientBuilderFactory(() -> CamundaClient.newClientBuilder()
+                .usePlaintext()
                 .restAddress(URI.create("http://0.0.0.0:8080"))
                 .grpcAddress(URI.create("http://0.0.0.0:26500"))
             )
