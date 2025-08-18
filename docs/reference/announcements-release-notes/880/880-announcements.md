@@ -68,6 +68,12 @@ The number of replicas for the Web Modeler REST API and web app deployments can 
 
 The configuration for the external database used by the Web Modeler REST API has been updated to align with the Identity component's database configuration. A new value, `webModeler.restapi.externalDatabase`, is now available and mirrors the structure of `identity.externalDatabase`. To ensure backward compatibility, the existing `webModeler.restapi.externalDatabase.url` field is retained and will take precedence if set.
 
+##### Default username claim used by Web Modeler
+
+The default ID token claim used by Web Modeler for assigning usernames has been changed from `name` to `preferred_username`.
+This change aligns the configuration with the other Camunda 8 components and ensures consistency across the platform.
+If you want to continue to use the `name` claim, you can explicitly pass `CAMUNDA_IDENTITY_USERNAMECLAIM=name` as an environment variable to the Web Modeler `webapp` as described in the [Web Modeler configuration documentation](/self-managed/components/modeler/web-modeler/configuration/configuration.md#identity--keycloak-1).
+
 #### Deprecation of Self-Managed AWS Marketplace offering
 
 As of **October 2025**, the **Self-Managed AWS Marketplace** offering will be **deprecated** and no longer publicly available.  
