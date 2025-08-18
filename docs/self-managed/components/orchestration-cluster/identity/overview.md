@@ -33,10 +33,15 @@ In Helm installations, API authentication and authorization are enabled by defau
 
 ### Configure initial users
 
-If users are managed within the Orchestration cluster (i.e., without an external Identity Provider), you can create an initial user in two ways:
+If users are managed within the Orchestration cluster (i.e., without an external Identity Provider), you can create an initial user in three ways:
 
 - Through the web application UI
+- Through the Setup REST API
 - Through configuration
+
+:::warning
+Once you have completed the initial setup, make sure to always have at least one user assigned to the `admin` role. Otherwise, it may be possible for a third party to create a new admin user.
+:::
 
 #### Option 1: Create an initial admin user in the UI
 
@@ -46,7 +51,22 @@ If no admin user exists, the Orchestration cluster web applications display a sc
 
 This user will be assigned to the `admin` role and granted all permissions in the system. Once an admin user exists, this screen is no longer shown.
 
-#### Option 2: Define initial users via configuration
+#### Option 2: Create an initial admin user with the Setup REST API
+
+Use the Setup API POST `/v2/setup/user` ([documentation](/apis-tools/orchestration-cluster-api-rest/specifications/create-admin-user.api.mdx)) with the following JSON request body:
+
+```json
+{
+  "username": "<Your chosen username>",
+  "password": "<Your chosen password>",
+  "name": "<The user's name>",
+  "email": "<The user's email>"
+}
+```
+
+This endpoint is enabled as long as no user is assigned to the admin role.
+
+#### Option 3: Define initial users via configuration
 
 To configure initial users programmatically, include the relevant definitions in your `application.yaml` or environment variables.
 
