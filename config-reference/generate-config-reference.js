@@ -122,8 +122,18 @@ const generateConfigReference = (config) => {
         const properties = config.metadata.properties
           .filter((property) => property.deprecation)
           .filter((property) => property.sourceType === group.type);
+        const clonedGroup = JSON.parse(JSON.stringify(group));
+        if (clonedGroup.description) {
+          if (clonedGroup.description.startsWith("Zeebe")) {
+          } else if (clonedGroup.description.startsWith("Keycloak")) {
+          } else {
+            clonedGroup.description =
+              clonedGroup.description.charAt(0).toLowerCase() +
+              clonedGroup.description.slice(1);
+          }
+        }
         return {
-          group,
+          group: clonedGroup,
           properties,
         };
       })

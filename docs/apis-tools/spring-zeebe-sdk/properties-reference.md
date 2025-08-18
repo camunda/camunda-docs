@@ -1093,7 +1093,7 @@ Deprecated properties for authenticating the Camunda client.
 
 ### `camunda.client.cloud`
 
-Deprecated properties for connecting the Camunda client to SaaS. Used only to compose default connection details if the client is configured to `camunda.client.mode: saas`.
+Deprecated properties for connecting the Camunda client to SaaS. These are used to compose default connection details when the client is configured to `camunda.client.mode: saas`.
 
 <table>
 <thead>
@@ -1239,7 +1239,7 @@ Deprecated properties for Zeebe client settings.
   <code>url</code>
 </td>
 <td>
-  <code>camunda.client.restAddress</code>
+  <code>camunda.client.rest-address</code>
 </td>
 <td>
 
@@ -1393,7 +1393,7 @@ Deprecated properties for Zeebe client settings.
   <code>duration</code>
 </td>
 <td>
-  <code>camunda.client.worker.defaults.request-timeout</code>
+  <code>camunda.client.request-timeout</code>
 </td>
 <td>
 
@@ -1831,7 +1831,7 @@ Deprecated Keycloak-specific properties.
   <code>string</code>
 </td>
 <td>
-  <code>camunda.client.auth.token-url</code>
+  
 </td>
 <td>
 
@@ -1956,11 +1956,9 @@ Client modes are now available.
   <code>string</code>
 </td>
 <td>
-  <code>camunda.client.worker.defaults.tenant-ids</code>
+  <code>camunda.client.tenant-id</code>
 </td>
 <td>
-
-The first provided tenant ID is applied.
 
 </td>
 </tr>
@@ -2104,11 +2102,9 @@ Deprecated Zeebe cloud connection properties.
   <code>string</code>
 </td>
 <td>
-  <code>camunda.client.grpc-address</code>
+  <code>camunda.client.cloud.domain</code>
 </td>
 <td>
-
-The Zeebe client URL is now configured as HTTP&#x2F;HTTPS URL.
 
 </td>
 </tr>
@@ -2148,7 +2144,7 @@ The Zeebe client URL is now configured as HTTP&#x2F;HTTPS URL.
   <code>string</code>
 </td>
 <td>
-  <code>camunda.client.cluster-id</code>
+  <code>camunda.client.cloud.cluster-id</code>
 </td>
 <td>
 
@@ -2176,7 +2172,7 @@ The Zeebe client URL is now configured as HTTP&#x2F;HTTPS URL.
   <code>integer</code>
 </td>
 <td>
-  <code>camunda.client.grpc-address</code>
+  
 </td>
 <td>
 
@@ -2192,7 +2188,7 @@ The Zeebe client URL is now configured as HTTP&#x2F;HTTPS URL.
   <code>string</code>
 </td>
 <td>
-  <code>camunda.client.region</code>
+  <code>camunda.client.cloud.region</code>
 </td>
 <td>
 
@@ -2206,7 +2202,7 @@ The Zeebe client URL is now configured as HTTP&#x2F;HTTPS URL.
   <code>string</code>
 </td>
 <td>
-  <code>camunda.client.scope</code>
+  <code>camunda.client.auth.scope</code>
 </td>
 <td>
 
@@ -2355,7 +2351,7 @@ Deprecated Zeebe security properties.
   <code>boolean</code>
 </td>
 <td>
-  <code>camunda.client.grpc-address</code>
+  
 </td>
 <td>
 
