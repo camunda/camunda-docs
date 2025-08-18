@@ -50,6 +50,12 @@ The default is `50` in the orchestration API layer.
 
 Tomcat also enforces a separate limit on the total number of request parameters via the `server.tomcat.max-parameter-count` property. Since each file upload typically counts as both a part and a parameter, the lower of these two limits will determine how many files can be uploaded.
 
+### Refresh authentication cached for a session
+
+When a user logs in, we determine their associations at once (membership in roles, groups, tenants; application authorizations) and put them into the web session.
+When these associations change (e.g. user is removed from a group; authorizations change), then this is not reflected in this cached state until the next refresh interval comes.
+The default interval is 30 seconds but can be configured via `camunda.security.authentication.authenticationRefreshInterval` property to a higher/lower value if needed considering a trade-off between the extra load for session refresh and the criticality of having sync authentications. 
+
 ### Reference
 
 For more information on defaults and options, refer to the [Apache Tomcat documentation](https://tomcat.apache.org/).
