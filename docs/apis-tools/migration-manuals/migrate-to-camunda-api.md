@@ -7,17 +7,32 @@ description: "Migrate from Camunda's V1 component REST APIs to the V2 Orchestrat
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-This document offers a comprehensive guide to migrate from Camunda's V1 component REST APIs (the Tasklist REST API, for example) to the V2 [Orchestration cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
+Migrate from Camunda V1 component REST APIs to the V2 Orchestration Cluster REST API.
 
-Camunda is streamlining the developer experience by creating a unified REST API for Zeebe, Operate, Tasklist, and the Identity components with endpoint parity. This will be a single REST API for the orchestration cluster for a consistent and intuitive API experience to help your teams develop process automation solutions faster.
+## About this guide
 
-:::note
-The Administration and Web Modeler APIs will not be part of the Orchestration cluster REST API, as these are platform APIs outside the cluster’s scope.
+This guide covers how to migrate to the V2 [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md), and what to consider when migrating. It covers all public endpoints in the component REST APIs and their Orchestration Cluster API counterparts or required migration changes.
+
+- Camunda is streamlining the developer experience by creating a unified REST API for Zeebe, Operate, Tasklist, and the Identity components with endpoint parity. This is the single Orchestration Cluster REST API.
+- Individual component APIs (starting with the former Operate and Tasklist APIs) are being deprecated over time. These will continue to be in the product in the short-term, but Camunda recommends you begin the adoption of the new API.
+- In addition, several Zeebe gPRC endpoints will begin to be deprecated.
+
+:::info
+To learn more about the unified REST API, see [the official blog announcement](https://camunda.com/blog/2024/11/camunda-8-7-releasing-february-2025/).
 :::
 
-Over time, there will be a deprecation process for the individual component APIs starting with the former Operate and Tasklist APIs. These will continue to be in the product for the short-term, but it is recommended to begin the adoption of the new API. In addition, we will begin to deprecate several Zeebe gPRC endpoints as well. See [the official blog announcement](https://camunda.com/blog/2024/11/camunda-8-7-releasing-february-2025/).
+:::note
+The Administration and Web Modeler APIs are not part of the Orchestration Cluster REST API, as these are platform APIs outside the cluster’s scope.
+:::
 
-This guide considers all public endpoints existing in the component REST APIs and the Orchestration cluster API counterparts or required migration changes.
+## Migration steps
+
+To successfully migrate to the V2 Orchestration Cluster API, perform the following steps:
+
+1. **Identify your current V1 endpoints**: Audit your application to catalog all V1 API calls currently in use.
+1. **Map V1 endpoints to V2 equivalents**: Use the tables in this guide to find the corresponding V2 endpoints for each request.
+1. **Update request and response structure**: Adapt your code to handle the new formats, renamed attributes, and data type changes as outlined in this guide.
+1. **Update pagination logic**: Replace old pagination parameters with the new `page` object structure and cursor-based navigation.
 
 ## General endpoint changes
 
@@ -41,10 +56,12 @@ This guide considers all public endpoints existing in the component REST APIs an
 <TabItem value='query-endpoints'>
 
 - Unified search request structure.
+
   - Attributes `filter`, `page`, and `sort` on root level.
   - Endpoint-specific filter attributes in the filter object, not at the root level.
   - Pagination information in the `page` object. For example, the attributes `from`, `limit`, `before`, and `after`.
   - Sorting configuration in sort object array, each object containing the field name and order (descending or ascending).
+
 - Unified search response structure.
   - Attributes `items` and `page` on root level.
   - List of endpoint-specific response items in `items` attribute.
@@ -58,26 +75,56 @@ This guide considers all public endpoints existing in the component REST APIs an
 
 ## Name changes and mappings
 
-The following conventions apply to all attributes:
+The following table shows key attribute name changes from V1 to V2:
 
-- `key` and `id` fields contain the entity as a prefix, for example, `userTaskKey`, `processDefinitionId`. This applies when referencing other resources like `formKey` in the user task entity, in the respective entities themselves like `userTaskKey` in the user task entity.
-- The full entity is the prefix to avoid confusion, for example `processDefinitionKey` instead of `processKey` (the latter could be interpreted as process instance or process definition).
-- Other attributes of entities themselves have no prefix to avoid clutter, for example version in the process definition entity. In other resources, they have to be referenced with a prefix, like `processDefinitionVersion` in the process instance entity.
-- The `bpmnProcessId` and `processName` are now called `processDefinitionId` to be easily relatable to the process definition entity, like the `processDefinitionKey`.
-- The `decisionKey` and `dmnDecisionKey` are now aligned to `decisionDefinitionKey`, the `decisionId` and `dmnDecisionId` to `decisionDefinitionId`. Similar to the `processDefinitionId` being related to the process definition, those attributes are now easily relatable to the decision definition entity.
+| **V1**           | **V2**                  | **Notes**                                                                           |
+| ---------------- | ----------------------- | ----------------------------------------------------------------------------------- |
+| `id`             | `[entity]Id`            | Keys now include entity prefix (for example, `userTaskKey`, `processDefinitionId`). |
+| `key`            | `[entity]Key`           | Converted from `int64` to `string` with entity prefix.                              |
+| `bpmnProcessId`  | `processDefinitionId`   | Unified naming convention.                                                          |
+| `processName`    | `processDefinitionId`   | Unified naming convention.                                                          |
+| `decisionKey`    | `decisionDefinitionKey` | Unified naming convention.                                                          |
+| `dmnDecisionKey` | `decisionDefinitionKey` | Unified naming convention.                                                          |
+| `decisionId`     | `decisionDefinitionId`  | Unified naming convention.                                                          |
+| `dmnDecisionId`  | `decisionDefinitionId`  | Unified naming convention.                                                          |
+
+**General naming conventions:**
+
+- Keys and IDs contain the full entity name as prefix to avoid confusion (for example, `processDefinitionKey` instead of `processKey`).
+- Entity attributes have no prefix within their own entity, but use prefixes when referenced from other entities.
+- All key fields are now `string` type instead of `int64`.
 
 <!--- Insert Operate section with V1 endpoint and V2 endpoint to use with input/output adjustments --->
 
-## Tasklist API
+## Tasklist REST API
 
 ### Form
 
 #### Get a form
 
-- **[V1 endpoint](../tasklist-api-rest/specifications/get-form.api.mdx)**: `GET /v1/forms/{formId}`
-- **V2 endpoints**:
-  - `GET /v2/user-tasks/{userTaskKey}/form` ([link](../orchestration-cluster-api-rest/specifications/get-user-task-form.api.mdx))
-  - `GET /v2/process-definitions/{processDefinitionKey}/form` ([link](../orchestration-cluster-api-rest/specifications/get-start-process-form.api.mdx))
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v1/forms/{formId}`](../tasklist-api-rest/specifications/get-form.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v2/user-tasks/{userTaskKey}/form`](../orchestration-cluster-api-rest/specifications/get-user-task-form.api.mdx)<br/>
+<span class="badge badge--get">GET</span> [`/v2/process-definitions/{processDefinitionKey}/form`](../orchestration-cluster-api-rest/specifications/get-start-process-form.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="get-form" defaultValue="input-adjustments" queryString values={
 [
@@ -95,13 +142,14 @@ The following conventions apply to all attributes:
 
 <TabItem value='output-adjustments'>
 
-- Embedded forms are no longer returned as Camunda user tasks don't support them.
-- Renamed atttibutes
-  - `id` - Use `formKey` as this refers to the unique system identifier of the form.
-  - `title` - Use `formId` as this aligns better with the attribute defined in the form schema.
-- Removed attributes
-  - `isDeleted` - The endpoint does not serve this information anymore.
-  - `processDefinitionKey` - You can identify the related entity from the endpoint resource and the provided key parameter, the form response does not contain it additionally anymore.
+Embedded forms are no longer returned as Camunda user tasks don't support them.
+
+| **Field**              | **Change Type** | **Notes**                                                   |
+| ---------------------- | --------------- | ----------------------------------------------------------- |
+| `id`                   | Renamed         | Now `formKey` (unique system identifier of the form).       |
+| `title`                | Renamed         | Now `formId` (aligns with form schema attribute).           |
+| `isDeleted`            | Removed         | No longer provided by endpoint.                             |
+| `processDefinitionKey` | Removed         | Can be identified from endpoint resource and key parameter. |
 
 </TabItem>
 </Tabs>
@@ -110,13 +158,53 @@ The following conventions apply to all attributes:
 
 #### Save task draft variables
 
-- **[V1 endpoint](../tasklist-api-rest/specifications/save-draft-task-variables.api.mdx)**: `POST /v1/tasks/{taskId}/variables`
-- **V2 endpoint**: This feature is not supported in V2 anymore. Use [setting variables][] as `local` to the user task's `elementInstanceKey` as a replacement.
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--post">POST</span> [`/v1/tasks/{taskId}/variables`](../tasklist-api-rest/specifications/save-draft-task-variables.api.mdx)
+
+</td>
+<td>
+
+This feature is not supported in V2 anymore. Use [setting variables][] as `local` to the user task's `elementInstanceKey` as a replacement.
+
+</td>
+</tr>
+</tbody>
+</table>
 
 #### Search task variables
 
-- **[V1 endpoint](../tasklist-api-rest/specifications/search-task-variables.api.mdx)**: `POST /v1/tasks/{taskId}/variables/search`
-- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/search-user-task-variables.api.mdx)**: `POST /v2/user-tasks/{userTaskKey}/variables/search`
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--post">POST</span> [`/v1/tasks/{taskId}/variables/search`](../tasklist-api-rest/specifications/search-task-variables.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--post">POST</span> [`/v2/user-tasks/{userTaskKey}/variables/search`](../orchestration-cluster-api-rest/specifications/search-user-task-variables.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="search-vars-by-task" defaultValue="input-adjustments" queryString values={
 [
@@ -127,31 +215,53 @@ The following conventions apply to all attributes:
 
 <TabItem value='input-adjustments'>
 
-- Request structure changes as outlined in [general changes][].
-- Renamed attributes
-  - `variableNames` - Use the `filter` object's `name`, either with a plain string for one exact match or with `{ "$in": [ "xyz", ... ]}`.
-- Removed attributes
-  - `includeVariables` - The endpoint returns all variables associated with the user task.
+Request structure changes as outlined in [general changes][].
+
+| **Field**          | **Change Type** | **Notes**                                                                    |
+| ------------------ | --------------- | ---------------------------------------------------------------------------- |
+| `variableNames`    | Renamed         | Now `name` in `filter` object (plain string or `{ "$in": [ "xyz", ... ] }`). |
+| `includeVariables` | Removed         | Endpoint returns all variables associated with the user task.                |
 
 </TabItem>
 
 <TabItem value='output-adjustments'>
 
-- Response structure changes as outlined in [general changes][].
-- Renamed attributes
-  - `id` - Use `variableKey` as this refers to the unique system identifier of the variable.
-  - `previewValue` - Use `value` as this always represents the variable value. This can be a truncated value due to size constraints.
-  - `isValueTruncated` - Use `isTruncated` as a replacement. If the value of `isTruncated` is `true` and you need the full value, please see the [get a variable](#get-a-variable) endpoint.
-- Removed attributes
-  - `draft` - Draft variables are not supported in V2 anymore, see also the [save draft variables](#save-task-draft-variables) endpoint for further details.
+Response structure changes as outlined in [general changes][].
+
+| **Field**          | **Change Type** | **Notes**                                                                |
+| ------------------ | --------------- | ------------------------------------------------------------------------ |
+| `id`               | Renamed         | Now `variableKey` (unique system identifier of the variable).            |
+| `previewValue`     | Renamed         | Now `value` (always represents variable value, may be truncated).        |
+| `isValueTruncated` | Renamed         | Now `isTruncated` (see get variable endpoint for full value if needed).  |
+| `draft`            | Removed         | Draft variables not supported in V2 (see save draft variables endpoint). |
 
 </TabItem>
 </Tabs>
 
 #### Search tasks
 
-- **[V1 endpoint](../tasklist-api-rest/specifications/search-tasks.api.mdx)**: `POST /v1/tasks/search`
-- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/search-user-tasks.api.mdx)**: `POST /v2/user-tasks/search`
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--post">POST</span> [`/v1/tasks/search`](../tasklist-api-rest/specifications/search-tasks.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--post">POST</span> [`/v2/user-tasks/search`](../orchestration-cluster-api-rest/specifications/search-user-tasks.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="tasklist" defaultValue="input-adjustments" queryString values={
 [
@@ -162,46 +272,47 @@ The following conventions apply to all attributes:
 
 <TabItem value='input-adjustments'>
 
-- Request structure changes as outlined in [general changes][].
-  - The `pageSize` is now the `limit` in the `page` object.
-  - The `searchAfter` and `searchBefore` are in the `page` object as `after` and `before`.
-  - The `searchAfterOrEqual` and `searchBeforeOrEqual` options do not exist.
-- Renamed attributes
-  - `taskDefinitionId` - Use `elementId` as this refers to the user-provided identifier of the BPMN element that created the user task.
-  - `followUpDate` and `dueDate` filter options - Instead of `from` and `to`, use `$gte` and `$lte`. Additionally, you can use new comparison filter options.
-  - `priority` filter options - Filter object keys need a `$` prefix. Additionally, you can use new comparison filter options like `$neq`, `$exists`, and `$in`.
-  - `assigned` - Use `assignee` with `{ "$exists": false }`. Multiple filters can be combined in one attribute.
-  - `assignees` - Use `assignee` with `{ "$in": [ "xyz", ... ] }`. Multiple filters can be combined in one attribute.
-  - `candidateGroups` - Use `candidateGroup` with `{ "$in": [ "xyz", ... ] }`.
-  - `candidateUsers` - Use `candidateUser` with `{ "$in": [ "xyz", ... ] }`.
-  - `taskVariables` split up and renamed
-    - You can define `localVariables` and `processInstanceVariables`.
-    - Local variables match the defined `name` and `value` and exist in the local scope of the BPMN element instance that created the user task.
-    - Process instance variables match the defined `name` and `value` and exist anywhere in the process instance that the user task belongs to.
-  - `tenantIds` - Use `tenantId` with `{ "$in": [ "xyz", ... ] }`.
-- Removed attributes
-  - `includeVariables` - The endpoint does not return variables. Use the [search task variables](#search-task-variables) endpoint to retrieve them.
-  - `implementation` - The V2 API supports only Camunda user tasks.
+Request structure changes as outlined in [general changes][].
+
+| **Field**                 | **Change Type** | **Notes**                                                       |
+| ------------------------- | --------------- | --------------------------------------------------------------- |
+| `pageSize`                | Renamed         | Now `limit` in the `page` object.                               |
+| `searchAfter`             | Renamed         | Now `after` in the `page` object.                               |
+| `searchBefore`            | Renamed         | Now `before` in the `page` object.                              |
+| `taskDefinitionId`        | Renamed         | Now `elementId` (user-provided identifier of the BPMN element). |
+| `assigned`                | Renamed         | Now `assignee` with `{ "$exists": false }`.                     |
+| `assignees`               | Renamed         | Now `assignee` with `{ "$in": [ "xyz", ... ] }`.                |
+| `candidateGroups`         | Renamed         | Now `candidateGroup` with `{ "$in": [ "xyz", ... ] }`.          |
+| `candidateUsers`          | Renamed         | Now `candidateUser` with `{ "$in": [ "xyz", ... ] }`.           |
+| `tenantIds`               | Renamed         | Now `tenantId` with `{ "$in": [ "xyz", ... ] }`.                |
+| `followUpDate`, `dueDate` | Changed         | Use `$gte` and `$lte` instead of `from` and `to`.               |
+| `priority`                | Changed         | Filter keys need `$` prefix, supports new comparison options.   |
+| `taskVariables`           | Split           | Now `localVariables` and `processInstanceVariables`.            |
+| `searchAfterOrEqual`      | Removed         | No longer supported.                                            |
+| `searchBeforeOrEqual`     | Removed         | No longer supported.                                            |
+| `includeVariables`        | Removed         | Use separate search task variables endpoint.                    |
+| `implementation`          | Removed         | V2 API supports only Camunda user tasks.                        |
 
 </TabItem>
 
 <TabItem value='output-adjustments'>
 
-- Response structure changes as outlined in [general changes][].
-  - `sortValues` do not exist per result item. Instead, the `page` object contains `startCursor` and `endCursor`, referring to the `sortValues` of the first and last item of the result set.
-- Renamed attributes
-  - `id` - Use `userTaskKey`, this still refers to the unique system identifier of the user task.
-  - `formKey` - This now is a unique system identifier, referencing a linked Camunda form in a specific version. Previously, this encoded an embedded form, a linked Camunda form, or an external form reference.
-  - `taskDefinitionId` - Use `elementId`, this still refers to the user-provided identifier of the BPMN element that created the user task.
-  - `taskState` - Use `state`, this still refers to the user task's current state.
-  - `processName` - Use `processDefinitionId`, this still refers to the user-provided identifier of the process.
-- Removed attributes
-  - `isFirst` - This used to identify if the task was the first in the process.
-  - `variables` - Use the [search user task variables endpoint](#search-task-variables) to retrieve variables for a user task.
-  - `implementation` - The V2 API supports only Camunda user tasks.
-  - `isFormEmbedded` - The V2 API does not support embedded forms anymore.
-  - `formVersion` - Use the [get user task form endpoint][] to retrieve form data bound to this user task. The `formKey` references the form of a specific `formId`, linked to this user task in a specific version.
-  - `formId` - Use the [get user task form endpoint][] to retrieve form data bound to this user task. The `formKey` references the form of a specific `formId`, linked to this user task in a specific version.
+Response structure changes as outlined in [general changes][].
+
+| **Field**          | **Change Type** | **Notes**                                                                             |
+| ------------------ | --------------- | ------------------------------------------------------------------------------------- |
+| `sortValues`       | Removed         | No longer exist per result item - use `startCursor` and `endCursor` in `page` object. |
+| `id`               | Renamed         | Now `userTaskKey` (unique system identifier of the user task).                        |
+| `taskDefinitionId` | Renamed         | Now `elementId` (user-provided identifier of the BPMN element).                       |
+| `taskState`        | Renamed         | Now `state` (user task's current state).                                              |
+| `processName`      | Renamed         | Now `processDefinitionId` (user-provided identifier of the process).                  |
+| `formKey`          | Changed         | Now unique system identifier referencing linked Camunda form in specific version.     |
+| `isFirst`          | Removed         | No longer identifies if task was first in process.                                    |
+| `variables`        | Removed         | Use search user task variables endpoint.                                              |
+| `implementation`   | Removed         | V2 API supports only Camunda user tasks.                                              |
+| `isFormEmbedded`   | Removed         | V2 API does not support embedded forms.                                               |
+| `formVersion`      | Removed         | Use get user task form endpoint.                                                      |
+| `formId`           | Removed         | Use get user task form endpoint.                                                      |
 
 </TabItem>
 
@@ -209,8 +320,28 @@ The following conventions apply to all attributes:
 
 #### Unassign a task
 
-- **[V1 endpoint](../tasklist-api-rest/specifications/unassign-task.api.mdx)**: `PATCH /v1/tasks/{taskId}/unassign`
-- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/unassign-user-task.api.mdx)**: `DELETE /v2/user-tasks/{userTaskKey}/assignee`
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--patch">PATCH</span> [`/v1/tasks/{taskId}/unassign`](../tasklist-api-rest/specifications/unassign-task.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--delete">DELETE</span> [`/v2/user-tasks/{userTaskKey}/assignee`](../orchestration-cluster-api-rest/specifications/unassign-user-task.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="unassign-user-task" defaultValue="input-adjustments" queryString values={
 [
@@ -234,8 +365,28 @@ The following conventions apply to all attributes:
 
 #### Complete a task
 
-- **[V1 endpoint](../tasklist-api-rest/specifications/complete-task.api.mdx)**: `PATCH /v1/tasks/{taskId}/complete`
-- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/complete-user-task.api.mdx)**: `POST /v2/user-tasks/{userTaskKey}/completion`
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--patch">PATCH</span> [`/v1/tasks/{taskId}/complete`](../tasklist-api-rest/specifications/complete-task.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--post">POST</span> [`/v2/user-tasks/{userTaskKey}/completion`](../orchestration-cluster-api-rest/specifications/complete-user-task.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="complete-user-task" defaultValue="input-adjustments" queryString values={
 [
@@ -260,8 +411,28 @@ The following conventions apply to all attributes:
 
 #### Assign a task
 
-- **[V1 endpoint](../tasklist-api-rest/specifications/assign-task.api.mdx)**: `PATCH /v1/tasks/{taskId}/assign`
-- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/assign-user-task.api.mdx)**: `POST /v2/user-tasks/{userTaskKey}/assignment`
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--patch">PATCH</span> [`/v1/tasks/{taskId}/assign`](../tasklist-api-rest/specifications/assign-task.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--post">POST</span> [`/v2/user-tasks/{userTaskKey}/assignment`](../orchestration-cluster-api-rest/specifications/assign-user-task.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="assign-user-task" defaultValue="input-adjustments" queryString values={
 [
@@ -286,8 +457,28 @@ The following conventions apply to all attributes:
 
 #### Get a task
 
-- **[V1 endpoint](../tasklist-api-rest/specifications/get-task-by-id.api.mdx)**: `GET /v1/tasks/{taskId}`
-- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/get-user-task.api.mdx)**: `GET /v2/user-tasks/{userTaskKey}`
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v1/tasks/{taskId}`](../tasklist-api-rest/specifications/get-task-by-id.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v2/user-tasks/{userTaskKey}`](../orchestration-cluster-api-rest/specifications/get-user-task.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="get-user-task" defaultValue="input-adjustments" queryString values={
 [
@@ -313,8 +504,28 @@ The following conventions apply to all attributes:
 
 #### Get a variable
 
-- **[V1 endpoint](../tasklist-api-rest/specifications/get-variable-by-id.api.mdx)**: `GET /v1/variables/{variableId}`
-- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/get-variable.api.mdx)**: `GET /v2/variables/{variableKey}`
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v1/variables/{variableId}`](../tasklist-api-rest/specifications/get-variable-by-id.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v2/variables/{variableKey}`](../orchestration-cluster-api-rest/specifications/get-variable.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="get-a-variable" defaultValue="input-adjustments" queryString values={
 [
@@ -339,14 +550,34 @@ The following conventions apply to all attributes:
 </TabItem>
 </Tabs>
 
-## Operate API
+## Operate REST API
 
 ### Decision definition
 
 #### Search decision definitions
 
-- **[V1 endpoint](../operate-api/specifications/search-7.api.mdx)**: `POST /v1/decision-definitions/search`
-- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/search-decision-definitions.api.mdx)**: `POST /v2/decision-definitions/search`
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--post">POST</span> [`/v1/decision-definitions/search`](../operate-api/specifications/search-7.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--post">POST</span> [`/v2/decision-definitions/search`](../orchestration-cluster-api-rest/specifications/search-decision-definitions.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="search-decision-definitions" defaultValue="input-adjustments" queryString values={
 [
@@ -357,41 +588,63 @@ The following conventions apply to all attributes:
 
 <TabItem value='input-adjustments'>
 
-- Request structure changes as outlined in [general changes][].
-  - `searchAfter` is now the `after` in the `page` object.
-  - `size` is now the `limit` in the `page` object.
-- Renamed attributes in the `filter` object
-  - `id` - Use `decisionDefinitionKey` instead.
-  - `key` of type `int64` - Use `decisionDefinitionKey` of type `string`.
-  - `decisionId` - Use `decisionDefinitionId` instead.
-  - `decisionRequirementsKey` of type `int64` - This is now of type `string`.
-- Removed attributes from the `filter` object
-  - `decisionRequirementsName` - Can no longer be used for filtering.
-  - `decisionRequirementsVersion` - Can no longer be used for filtering.
+Request structure changes as outlined in [general changes][].
+
+| **Field**                     | **Change Type** | **Notes**                                                       |
+| ----------------------------- | --------------- | --------------------------------------------------------------- |
+| `searchAfter`                 | Renamed         | Now `after` in the `page` object.                               |
+| `size`                        | Renamed         | Now `limit` in the `page` object.                               |
+| `id`                          | Renamed         | Now `decisionDefinitionKey` in filter object.                   |
+| `key`                         | Renamed         | Now `decisionDefinitionKey` (changed from `int64` to `string`). |
+| `decisionId`                  | Renamed         | Now `decisionDefinitionId` in filter object.                    |
+| `decisionRequirementsKey`     | Changed         | Now `string` type instead of `int64`.                           |
+| `decisionRequirementsName`    | Removed         | Can no longer be used for filtering.                            |
+| `decisionRequirementsVersion` | Removed         | Can no longer be used for filtering.                            |
 
 </TabItem>
 
 <TabItem value='output-adjustments'>
 
-- Response structure changes as outlined in [general changes][].
-  - `total` is moved under the `page` object as `totalItems`.
-  - `sortValues` - Use `endCursor` in the `page` object instead.
-- Renamed attributes in the objects of the `items` array
-  - `id` - Use `decisionDefinitionKey` instead.
-  - `key` of type `int64` - Use `decisionDefinitionKey` of type `string`.
-  - `decisionId` - Use `decisionDefinitionId` instead.
-  - `decisionRequirementsKey` of type `int64` - This is now of type `string`.
-- Removed attributes in the objects of the `items` array
-  - `decisionRequirementsName` - Can be fetched using the **get decision requirements** endpoint with `decisionRequirementsKey`.
-  - `decisionRequirementsVersion` - Can be fetched using the **get decision requirements** endpoint with `decisionRequirementsKey`.
+Response structure changes as outlined in [general changes][].
+
+| **Field**                     | **Change Type** | **Notes**                                                       |
+| ----------------------------- | --------------- | --------------------------------------------------------------- |
+| `total`                       | Moved           | Now `totalItems` in `page` object.                              |
+| `sortValues`                  | Replaced        | Now use `endCursor` in `page` object.                           |
+| `id`                          | Renamed         | Now `decisionDefinitionKey`.                                    |
+| `key`                         | Renamed         | Now `decisionDefinitionKey` (changed from `int64` to `string`). |
+| `decisionId`                  | Renamed         | Now `decisionDefinitionId`.                                     |
+| `decisionRequirementsKey`     | Changed         | Now `string` type instead of `int64`.                           |
+| `decisionRequirementsName`    | Removed         | Fetch using get decision requirements endpoint.                 |
+| `decisionRequirementsVersion` | Removed         | Fetch using get decision requirements endpoint.                 |
 
 </TabItem>
 </Tabs>
 
 #### Get decision definition by key
 
-- **[V1 endpoint](../operate-api/specifications/by-key-6.api.mdx)**: `GET /v1/decision-definitions/{key}`
-- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/get-decision-definition.api.mdx)**: `GET /v2/decision-definitions/{decisionDefinitionKey}`
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v1/decision-definitions/{key}`](../operate-api/specifications/by-key-6.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v2/decision-definitions/{decisionDefinitionKey}`](../orchestration-cluster-api-rest/specifications/get-decision-definition.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="get-decision-definition" defaultValue="input-adjustments" queryString values={
 [
@@ -415,8 +668,28 @@ The following conventions apply to all attributes:
 
 #### Search decision instances
 
-- **[V1 endpoint](../operate-api/specifications/search-6.api.mdx)**: `POST /v1/decision-instances/search`
-- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/search-decision-instances.api.mdx)**: `POST /v2/decision-instances/search`
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--post">POST</span> [`/v1/decision-instances/search`](../operate-api/specifications/search-6.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--post">POST</span> [`/v2/decision-instances/search`](../orchestration-cluster-api-rest/specifications/search-decision-instances.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="search-decision-instances" defaultValue="input-adjustments" queryString values={
 [
@@ -427,50 +700,72 @@ The following conventions apply to all attributes:
 
 <TabItem value='input-adjustments'>
 
-- Request structure changes as outlined in [general changes][].
-  - `searchAfter` is now the `after` in the `page` object.
-  - `size` is now the `limit` in the `page` object.
-- Renamed attributes in the `filter` object
-  - `id` - Use `decisionInstanceId` instead.
-  - `key` of type `int64` - Use `decisionInstanceKey` of type `string`.
-  - `processDefinitionKey` of type `int64` - This is now of type `string`.
-  - `processInstanceKey` of type `int64` - This is now of type `string`.
-  - `decisionId` - Use `decisionDefinitionId` instead.
-  - `decisionName` - Use `decisionDefinitionName` instead.
-  - `decisionVersion` - Use `decisionDefinitionVersion` instead.
-  - `decisionType` - Use `decisionDefinitionType` instead.
-- Removed attributes in the `filter` object
-  - `result` - Can no longer be used for filtering.
-  - `evaluatedInputs` - Can no longer be used for filtering.
-  - `evaluatedOutputs` - Can no longer be used for filtering.
+Request structure changes as outlined in [general changes][].
+
+| **Field**              | **Change Type** | **Notes**                                                     |
+| ---------------------- | --------------- | ------------------------------------------------------------- |
+| `searchAfter`          | Renamed         | Now `after` in the `page` object.                             |
+| `size`                 | Renamed         | Now `limit` in the `page` object.                             |
+| `id`                   | Renamed         | Now `decisionInstanceId` in filter object.                    |
+| `key`                  | Renamed         | Now `decisionInstanceKey` (changed from `int64` to `string`). |
+| `processDefinitionKey` | Changed         | Now `string` type instead of `int64`.                         |
+| `processInstanceKey`   | Changed         | Now `string` type instead of `int64`.                         |
+| `decisionId`           | Renamed         | Now `decisionDefinitionId`.                                   |
+| `decisionName`         | Renamed         | Now `decisionDefinitionName`.                                 |
+| `decisionVersion`      | Renamed         | Now `decisionDefinitionVersion`.                              |
+| `decisionType`         | Renamed         | Now `decisionDefinitionType`.                                 |
+| `result`               | Removed         | Can no longer be used for filtering.                          |
+| `evaluatedInputs`      | Removed         | Can no longer be used for filtering.                          |
+| `evaluatedOutputs`     | Removed         | Can no longer be used for filtering.                          |
 
 </TabItem>
 
 <TabItem value='output-adjustments'>
 
-- Response structure changes as outlined in [general changes][].
-  - `total` is moved under the `page` object as `totalItems`.
-  - `sortValues` - Use `endCursor` in the `page` object instead.
-- Renamed attributes in the objects of the `items` array
-  - `id` - Use `decisionInstanceId` instead.
-  - `key` of type `int64` - Use `decisionInstanceKey` of type `string`.
-  - `processDefinitionKey` of type `int64` - This is now of type `string`.
-  - `processInstanceKey` of type `int64` - This is now of type `string`.
-  - `decisionId` - Use `decisionDefinitionId` instead.
-  - `decisionName` - Use `decisionDefinitionName` instead.
-  - `decisionVersion` - Use `decisionDefinitionVersion` instead.
-  - `decisionType` - Use `decisionDefinitionType` instead.
-- Removed attributes in the objects of the `items` array
-  - `evaluatedInputs` - The endpoint does not serve this information anymore.
-  - `evaluatedOutputs` - The endpoint does not serve this information anymore.
+Response structure changes as outlined in [general changes][].
+
+| **Field**              | **Change Type** | **Notes**                                                     |
+| ---------------------- | --------------- | ------------------------------------------------------------- |
+| `total`                | Moved           | Now `totalItems` in `page` object.                            |
+| `sortValues`           | Replaced        | Now use `endCursor` in `page` object.                         |
+| `id`                   | Renamed         | Now `decisionInstanceId`.                                     |
+| `key`                  | Renamed         | Now `decisionInstanceKey` (changed from `int64` to `string`). |
+| `processDefinitionKey` | Changed         | Now `string` type instead of `int64`.                         |
+| `processInstanceKey`   | Changed         | Now `string` type instead of `int64`.                         |
+| `decisionId`           | Renamed         | Now `decisionDefinitionId`.                                   |
+| `decisionName`         | Renamed         | Now `decisionDefinitionName`.                                 |
+| `decisionVersion`      | Renamed         | Now `decisionDefinitionVersion`.                              |
+| `decisionType`         | Renamed         | Now `decisionDefinitionType`.                                 |
+| `evaluatedInputs`      | Removed         | No longer provided by endpoint.                               |
+| `evaluatedOutputs`     | Removed         | No longer provided by endpoint.                               |
 
 </TabItem>
 </Tabs>
 
 #### Get decision instance by id
 
-- **[V1 endpoint](../operate-api/specifications/by-id.api.mdx)**: `GET /v1/decision-instances/{id}`
-- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/search-decision-instances.api.mdx)**: `GET /v2/decision-instances/{decisionInstanceId}`
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v1/decision-instances/{id}`](../operate-api/specifications/by-id.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v2/decision-instances/{decisionInstanceId}`](../orchestration-cluster-api-rest/specifications/search-decision-instances.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="get-decision-instance-by-id" defaultValue="input-adjustments" queryString values={
 [
@@ -487,28 +782,48 @@ The following conventions apply to all attributes:
 
 <TabItem value='output-adjustments'>
 
-- The adjustments from [search decision instances](#search-decision-instances) apply, with the following exceptions:
-  - Response structure changes.
-  - `evaluatedInputs` - Present in the response payload.
-  - `evaluatedOutputs` - Present in the response payload and moved under `matchedRules`.
-- Renamed attributes in the `evaluatedInputs` object
-  - `id` - Use `inputId` instead.
-  - `name` - Use `inputName` instead.
-  - `value` - Use `inputValue` instead.
-- Renamed attributes in the `evaluatedOutputs` object
-  - `id` - Use `outputId` instead.
-  - `name` - Use `outputName` instead.
-  - `value` - Use `outputValue` instead.
-  - `ruleId` - Moved under the objects of the `matchedRules` array.
-  - `ruleIndex` - Moved under the objects of the `matchedRules` array.
+The adjustments from [search decision instances](#search-decision-instances) apply, with the following exceptions: `evaluatedInputs` and `evaluatedOutputs` are present in the response payload (with `evaluatedOutputs` moved under `matchedRules`).
+
+| **Field**                   | **Change Type** | **Notes**                               |
+| --------------------------- | --------------- | --------------------------------------- |
+| **evaluatedInputs object**  |                 |                                         |
+| `id`                        | Renamed         | Now `inputId`.                          |
+| `name`                      | Renamed         | Now `inputName`.                        |
+| `value`                     | Renamed         | Now `inputValue`.                       |
+| **evaluatedOutputs object** |                 |                                         |
+| `id`                        | Renamed         | Now `outputId`.                         |
+| `name`                      | Renamed         | Now `outputName`.                       |
+| `value`                     | Renamed         | Now `outputValue`.                      |
+| `ruleId`                    | Moved           | Now under `matchedRules` array objects. |
+| `ruleIndex`                 | Moved           | Now under `matchedRules` array objects. |
 
 </TabItem>
 </Tabs>
 
 #### Search decision requirements
 
-- **[V1 endpoint](../operate-api/specifications/search-5.api.mdx)**: `POST /v1/drd/search`
-- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/search-decision-requirements.api.mdx)**: `POST /v2/decision-requirements/search`
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--post">POST</span> [`/v1/drd/search`](../operate-api/specifications/search-5.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--post">POST</span> [`/v2/decision-requirements/search`](../orchestration-cluster-api-rest/specifications/search-decision-requirements.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="search-decision-requirements" defaultValue="input-adjustments" queryString values={
 [
@@ -519,33 +834,57 @@ The following conventions apply to all attributes:
 
 <TabItem value='input-adjustments'>
 
-- Request structure changes as outlined in [general changes][].
-  - `searchAfter` is now the `after` in the `page` object.
-  - `size` is now the `limit` in the `page` object.
-- Renamed attributes in the `filter` object
-  - `id` - Use `decisionRequirementsKey` instead.
-  - `key` of type `int64` - Use `decisionRequirementsKey` of type `string`.
-  - `name` - Use `decisionRequirementsName` instead.
+Request structure changes as outlined in [general changes][].
+
+| **Field**     | **Change Type** | **Notes**                                                         |
+| ------------- | --------------- | ----------------------------------------------------------------- |
+| `searchAfter` | Renamed         | Now `after` in the `page` object.                                 |
+| `size`        | Renamed         | Now `limit` in the `page` object.                                 |
+| `id`          | Renamed         | Now `decisionRequirementsKey` in filter object.                   |
+| `key`         | Renamed         | Now `decisionRequirementsKey` (changed from `int64` to `string`). |
+| `name`        | Renamed         | Now `decisionRequirementsName`.                                   |
 
 </TabItem>
 
 <TabItem value='output-adjustments'>
 
-- Response structure changes as outlined in [general changes][].
-  - `total` is moved under the `page` object as `totalItems`.
-  - `sortValues` - Use `endCursor` in the `page` object instead.
-- Renamed attributes in the objects of the `items` array
-  - `id` - Use `decisionRequirementsKey` instead.
-  - `key` of type `int64` - Use `decisionRequirementsKey` of type `string`.
-  - `name` - Use `decisionRequirementsName` instead.
+Response structure changes as outlined in [general changes][].
+
+| **Field**    | **Change Type** | **Notes**                                                         |
+| ------------ | --------------- | ----------------------------------------------------------------- |
+| `total`      | Moved           | Now `totalItems` in `page` object.                                |
+| `sortValues` | Replaced        | Now use `endCursor` in `page` object.                             |
+| `id`         | Renamed         | Now `decisionRequirementsKey`.                                    |
+| `key`        | Renamed         | Now `decisionRequirementsKey` (changed from `int64` to `string`). |
+| `name`       | Renamed         | Now `decisionRequirementsName`.                                   |
 
 </TabItem>
 </Tabs>
 
 #### Get decision requirements by key
 
-- **[V1 endpoint](../operate-api/specifications/by-key-5.api.mdx)**: `GET /v1/drd/{key}`
-- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/get-decision-requirements.api.mdx)**: `GET /v2/decision-requirements/{decisionRequirementsKey}`
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v1/drd/{key}`](../operate-api/specifications/by-key-5.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v2/decision-requirements/{decisionRequirementsKey}`](../orchestration-cluster-api-rest/specifications/get-decision-requirements.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="get-decision-requirements-by-key" defaultValue="input-adjustments" queryString values={
 [
@@ -569,8 +908,28 @@ The following conventions apply to all attributes:
 
 #### Get decision requirements as XML by key
 
-- **[V1 endpoint](../operate-api/specifications/xml-by-key-1.api.mdx)**: `GET /v1/drd/{key}/xml`
-- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/get-decision-requirements-xml.api.mdx)**: `GET /v2/decision-requirements/{decisionRequirementsKey}/xml`
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v1/drd/{key}/xml`](../operate-api/specifications/xml-by-key-1.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v2/decision-requirements/{decisionRequirementsKey}/xml`](../orchestration-cluster-api-rest/specifications/get-decision-requirements-xml.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="get-decision-requirements-by-key" defaultValue="input-adjustments" queryString values={
 [
@@ -596,8 +955,28 @@ The following conventions apply to all attributes:
 
 #### Search variables for process instances
 
-- **[V1 endpoint](../operate-api/specifications/search.api.mdx)**: `POST /v1/variables/search`
-- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/search-variables.api.mdx)**: `POST /v2/variables/search`
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--post">POST</span> [`/v1/variables/search`](../operate-api/specifications/search.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--post">POST</span> [`/v2/variables/search`](../orchestration-cluster-api-rest/specifications/search-variables.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="search-variables-for-process-instances" defaultValue="input-adjustments" queryString values={
 [
@@ -608,35 +987,59 @@ The following conventions apply to all attributes:
 
 <TabItem value='input-adjustments'>
 
-- Response structure changes as outlined in [general changes][].
-  - `searchAfter` is now the `after` in the `page` object.
-  - `size` is now the `limit` in the `page` object.
-- Renamed attributes in the `filter` object
-  - `key` of type `int64` - Use `variableKey` of type `string`.
-  - `processInstanceKey` of type `int64` - This is now of type `string`.
-  - `scopeKey` of type `int64` - This is now of type `string`.
-  - `truncated` - Use `isTruncated` instead.
+Request structure changes as outlined in [general changes][].
+
+| **Field**            | **Change Type** | **Notes**                                             |
+| -------------------- | --------------- | ----------------------------------------------------- |
+| `searchAfter`        | Renamed         | Now `after` in the `page` object.                     |
+| `size`               | Renamed         | Now `limit` in the `page` object.                     |
+| `key`                | Renamed         | Now `variableKey` (changed from `int64` to `string`). |
+| `processInstanceKey` | Changed         | Now `string` type instead of `int64`.                 |
+| `scopeKey`           | Changed         | Now `string` type instead of `int64`.                 |
+| `truncated`          | Renamed         | Now `isTruncated`.                                    |
 
 </TabItem>
 
 <TabItem value='output-adjustments'>
 
-- Response structure changes as outlined in [general changes][].
-  - `total` is moved under the `page` object as `totalItems`.
-  - `sortValues` - Use `endCursor` in the `page` object instead.
-- Renamed attributes in the objects of the `items` array
-  - `key` of type `int64` - Use `variableKey` of type `string`.
-  - `processInstanceKey` of type `int64` - This is now of type `string`.
-  - `scopeKey` of type `int64` - This is now of type `string`.
-  - `truncated` - Use `isTruncated` instead.
+Response structure changes as outlined in [general changes][].
+
+| **Field**            | **Change Type** | **Notes**                                             |
+| -------------------- | --------------- | ----------------------------------------------------- |
+| `total`              | Moved           | Now `totalItems` in `page` object.                    |
+| `sortValues`         | Replaced        | Now use `endCursor` in `page` object.                 |
+| `key`                | Renamed         | Now `variableKey` (changed from `int64` to `string`). |
+| `processInstanceKey` | Changed         | Now `string` type instead of `int64`.                 |
+| `scopeKey`           | Changed         | Now `string` type instead of `int64`.                 |
+| `truncated`          | Renamed         | Now `isTruncated`.                                    |
 
 </TabItem>
 </Tabs>
 
 #### Get variable by key
 
-- **[V1 endpoint](../operate-api/specifications/by-key.api.mdx)**: `GET /v1/variables/{key}`
-- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/get-variable.api.mdx)**: `GET /v2/variables/{variableKey}`
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v1/variables/{key}`](../operate-api/specifications/by-key.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v2/variables/{variableKey}`](../orchestration-cluster-api-rest/specifications/get-variable.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="get-variable-by-key" defaultValue="input-adjustments" queryString values={
 [
@@ -672,8 +1075,28 @@ The following conventions apply to all attributes:
 
 #### Search process definitions
 
-- **[V1 endpoint](../operate-api/specifications/search-2.api.mdx)**: `POST /v1/process-definitions/search`
-- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/search-process-definitions.api.mdx)**: `POST /v2/process-definitions/search`
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--post">POST</span> [`/v1/process-definitions/search`](../operate-api/specifications/search-2.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--post">POST</span> [`/v2/process-definitions/search`](../orchestration-cluster-api-rest/specifications/search-process-definitions.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="search-process-definitions" defaultValue="input-adjustments" queryString values={
 [
@@ -684,31 +1107,55 @@ The following conventions apply to all attributes:
 
 <TabItem value='input-adjustments'>
 
-- Request structure changes as outlined in [general changes][].
-  - `searchAfter` is now the `after` in the `page` object.
-  - `size` is now the `limit` in the `page` object.
-- Renamed attributes in the `filter` object
-  - `key` of type `int64` - Use `processDefinitionKey` of type `string` instead.
-  - `bpmnProcessId` - Use `processDefinitionId` instead.
+Request structure changes as outlined in [general changes][].
+
+| **Field**       | **Change Type** | **Notes**                                                      |
+| --------------- | --------------- | -------------------------------------------------------------- |
+| `searchAfter`   | Renamed         | Now `after` in the `page` object.                              |
+| `size`          | Renamed         | Now `limit` in the `page` object.                              |
+| `key`           | Renamed         | Now `processDefinitionKey` (changed from `int64` to `string`). |
+| `bpmnProcessId` | Renamed         | Now `processDefinitionId`.                                     |
 
 </TabItem>
 
 <TabItem value='output-adjustments'>
 
-- Response structure changes as outlined in [general changes][].
-  - `total` is moved under the `page` object as `totalItems`.
-  - `sortValues` - Use `endCursor` in the `page` object instead.
-- Renamed attributes in the objects of the `items` array
-  - `key` of type `int64` - Use `processDefinitionKey` of type `string` instead.
-  - `bpmnProcessId` - Use `processDefinitionId` instead.
+Response structure changes as outlined in [general changes][].
+
+| **Field**       | **Change Type** | **Notes**                                                      |
+| --------------- | --------------- | -------------------------------------------------------------- |
+| `total`         | Moved           | Now `totalItems` in `page` object.                             |
+| `sortValues`    | Replaced        | Now use `endCursor` in `page` object.                          |
+| `key`           | Renamed         | Now `processDefinitionKey` (changed from `int64` to `string`). |
+| `bpmnProcessId` | Renamed         | Now `processDefinitionId`.                                     |
 
 </TabItem>
 </Tabs>
 
 #### Get process definition by key
 
-- **[V1 endpoint](../operate-api/specifications/by-key-2.api.mdx)**: `GET /v1/process-definitions/{key}`
-- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/get-process-definition.api.mdx)**: `GET /v2/process-definitions/{processDefinitionKey}`
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v1/process-definitions/{key}`](../operate-api/specifications/by-key-2.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v2/process-definitions/{processDefinitionKey}`](../orchestration-cluster-api-rest/specifications/get-process-definition.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="get-process-definition" defaultValue="input-adjustments" queryString values={
 [
@@ -732,8 +1179,28 @@ The following conventions apply to all attributes:
 
 #### Get process definition as XML by key
 
-- **[V1 endpoint](../operate-api/specifications/xml-by-key.api.mdx)**: `GET /v1/process-definitions/{key}/xml`
-- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/get-process-definition-xml.api.mdx)**: `GET /v2/process-definitions/{processDefinitionKey}/xml`
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v1/process-definitions/{key}/xml`](../operate-api/specifications/xml-by-key.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v2/process-definitions/{processDefinitionKey}/xml`](../orchestration-cluster-api-rest/specifications/get-process-definition-xml.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="get-process-definition-xml" defaultValue="input-adjustments" queryString values={
 [
@@ -759,8 +1226,28 @@ The following conventions apply to all attributes:
 
 #### Search process instances
 
-- **[V1 endpoint](../operate-api/specifications/search-1.api.mdx)**: `POST /v1/process-instances/search`
-- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/search-process-instances.api.mdx)**: `POST /v2/process-instances/search`
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--post">POST</span> [`/v1/process-instances/search`](../operate-api/specifications/search-1.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--post">POST</span> [`/v2/process-instances/search`](../orchestration-cluster-api-rest/specifications/search-process-instances.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="search-process-instances" defaultValue="input-adjustments" queryString values={
 [
@@ -771,49 +1258,71 @@ The following conventions apply to all attributes:
 
 <TabItem value='input-adjustments'>
 
-- Request structure changes as outlined in [general changes][].
-  - `searchAfter` is now the `after` in the `page` object.
-  - `size` is now the `limit` in the `page` object.
-- Renamed attributes in the `filter` object
-  - `key` of type `int64` - Use `processInstanceKey` of type `string` instead.
-  - `processVersion` - Use `processDefinitionVersion` instead.
-  - `processVersionTag` - Use `processDefinitionVersionTag` instead.
-  - `bpmnProcessId` - Use `processDefinitionId` instead.
-  - `parentFlowNodeInstanceKey` - Use `parentElementInstanceKey` of type `string` instead.
-  - `parentKey` - Use `parentProcessInstanceKey` of type `string` instead.
-  - `state` - Use value `TERMINATED` instead of value `CANCELED`.
-  - `incident` - Use `hasIncident` instead.
-- Adjusted attributes in the `filter` object
-  - `parentProcessInstanceKey` - Type changed from `int64` to `string`.
-  - `processDefinitionKey` - Type changed from `int64` to `string`.
+Request structure changes as outlined in [general changes][].
+
+| **Field**                   | **Change Type** | **Notes**                                                    |
+| --------------------------- | --------------- | ------------------------------------------------------------ |
+| `searchAfter`               | Renamed         | Now `after` in the `page` object.                            |
+| `size`                      | Renamed         | Now `limit` in the `page` object.                            |
+| `key`                       | Renamed         | Now `processInstanceKey` (changed from `int64` to `string`). |
+| `processVersion`            | Renamed         | Now `processDefinitionVersion`.                              |
+| `processVersionTag`         | Renamed         | Now `processDefinitionVersionTag`.                           |
+| `bpmnProcessId`             | Renamed         | Now `processDefinitionId`.                                   |
+| `parentFlowNodeInstanceKey` | Renamed         | Now `parentElementInstanceKey` (changed to `string`).        |
+| `parentKey`                 | Renamed         | Now `parentProcessInstanceKey` (changed to `string`).        |
+| `state`                     | Changed         | Use `TERMINATED` instead of `CANCELED`.                      |
+| `incident`                  | Renamed         | Now `hasIncident`.                                           |
+| `parentProcessInstanceKey`  | Changed         | Now `string` type instead of `int64`.                        |
+| `processDefinitionKey`      | Changed         | Now `string` type instead of `int64`.                        |
 
 </TabItem>
 
 <TabItem value='output-adjustments'>
 
-- Response structure changes as outlined in [general changes][].
-  - `total` is moved under the `page` object as `totalItems`.
-  - `sortValues` - Use `endCursor` in the `page` object instead.
-- Renamed attributes in the objects of the `items` array
-  - `key` of type `int64` - Use `processInstanceKey` of type `string` instead.
-  - `processVersion` - Use `processDefinitionVersion` instead.
-  - `processVersionTag` - Use `processDefinitionVersionTag` instead.
-  - `bpmnProcessId` - Use `processDefinitionId` instead.
-  - `parentFlowNodeInstanceKey` - Use `parentElementInstanceKey` of type `string` instead.
-  - `parentKey` - Use `parentProcessInstanceKey` of type `string` instead.
-  - `state` - Use value `TERMINATED` instead of value `CANCELED`.
-  - `incident` - Use `hasIncident` instead.
-- Adjusted attributes in the objects of the `items` array
-  - `parentProcessInstanceKey` - Type changed from `int64` to `string`.
-  - `processDefinitionKey` - Type changed from `int64` to `string`.
+Response structure changes as outlined in [general changes][].
+
+| **Field**                   | **Change Type** | **Notes**                                                    |
+| --------------------------- | --------------- | ------------------------------------------------------------ |
+| `total`                     | Moved           | Now `totalItems` in `page` object.                           |
+| `sortValues`                | Replaced        | Now use `endCursor` in `page` object.                        |
+| `key`                       | Renamed         | Now `processInstanceKey` (changed from `int64` to `string`). |
+| `processVersion`            | Renamed         | Now `processDefinitionVersion`.                              |
+| `processVersionTag`         | Renamed         | Now `processDefinitionVersionTag`.                           |
+| `bpmnProcessId`             | Renamed         | Now `processDefinitionId`.                                   |
+| `parentFlowNodeInstanceKey` | Renamed         | Now `parentElementInstanceKey` (changed to `string`).        |
+| `parentKey`                 | Renamed         | Now `parentProcessInstanceKey` (changed to `string`).        |
+| `state`                     | Changed         | Use `TERMINATED` instead of `CANCELED`.                      |
+| `incident`                  | Renamed         | Now `hasIncident`.                                           |
+| `parentProcessInstanceKey`  | Changed         | Now `string` type instead of `int64`.                        |
+| `processDefinitionKey`      | Changed         | Now `string` type instead of `int64`.                        |
 
 </TabItem>
 </Tabs>
 
 #### Get process instance by key
 
-- **[V1 endpoint](../operate-api/specifications/by-key-1.api.mdx)**: `GET /v1/process-instances/{key}`
-- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/get-process-instance.api.mdx)**: `GET /v2/process-instances/{processInstanceKey}`
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v1/process-instances/{key}`](../operate-api/specifications/by-key-1.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v2/process-instances/{processInstanceKey}`](../orchestration-cluster-api-rest/specifications/get-process-instance.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="get-process-instance-by-key" defaultValue="input-adjustments" queryString values={
 [
@@ -837,13 +1346,53 @@ The following conventions apply to all attributes:
 
 #### Delete process instance and all dependant data by key
 
-- **[V1 endpoint](../operate-api/specifications/delete.api.mdx)**: `DELETE /v1/process-instances/{key}`
-- **V2 endpoint**: This feature is not yet available in V2. It will be added in a future version.
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--delete">DELETE</span> [`/v1/process-instances/{key}`](../operate-api/specifications/delete.api.mdx)
+
+</td>
+<td>
+
+This feature is not yet available in V2. It will be added in a future version.
+
+</td>
+</tr>
+</tbody>
+</table>
 
 #### Get flow node statistic by process instance key
 
-- **[V1 endpoint](../operate-api/specifications/get-statistics.api.mdx)**: `GET /v1/process-instances/{key}/statistics`
-- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/get-process-instance-statistics.api.mdx)**: `GET /v2/process-instances/{processInstanceKey}/statistics/element-instances`
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v1/process-instances/{key}/statistics`](../operate-api/specifications/get-statistics.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v2/process-instances/{processInstanceKey}/statistics/element-instances`](../orchestration-cluster-api-rest/specifications/get-process-instance-statistics.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="get-process-instance-statistics" defaultValue="input-adjustments" queryString values={
 [
@@ -860,18 +1409,40 @@ The following conventions apply to all attributes:
 
 <TabItem value='output-adjustments'>
 
-- Response structure changes
-  - response items are moved under the `items` array.
-- Renamed attributes in the objects of the `items` array
-  - `activityId` - Use `elementId` instead.
+Response structure changes.
+
+| **Field**      | **Change Type** | **Notes**               |
+| -------------- | --------------- | ----------------------- |
+| Response items | Moved           | Now under `items` array |
+| `activityId`   | Renamed         | Now `elementId`         |
 
 </TabItem>
 </Tabs>
 
 #### Get sequence flows of process instance by key
 
-- **[V1 endpoint](../operate-api/specifications/sequence-flows-by-key.api.mdx)**: `GET /v1/process-instances/{key}/sequence-flows`
-- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/get-process-instance-sequence-flows.api.mdx)**: `GET /v2/process-instances/{processInstanceKey}/sequence-flows`
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v1/process-instances/{key}/sequence-flows`](../operate-api/specifications/sequence-flows-by-key.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v2/process-instances/{processInstanceKey}/sequence-flows`](../orchestration-cluster-api-rest/specifications/get-process-instance-sequence-flows.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="get-process-instance-sequence-flows" defaultValue="input-adjustments" queryString values={
 [
@@ -888,10 +1459,13 @@ The following conventions apply to all attributes:
 
 <TabItem value='output-adjustments'>
 
-- Response structure changes
-  - response items are of type `object`, instead of type `string`.
-  - response items are moved under the `items` array.
-- Collect the `sequenceFlowId` of type `string` of all objects in the array to recreate the V1 result.
+Response structure changes.
+
+| **Field**      | **Change Type** | **Notes**                                                                         |
+| -------------- | --------------- | --------------------------------------------------------------------------------- |
+| Response items | Changed         | Now type `object` instead of `string`.                                            |
+| Response items | Moved           | Now under `items` array.                                                          |
+| V1 recreation  | Info            | Collect `sequenceFlowId` of type `string` from all objects to recreate V1 result. |
 
 </TabItem>
 </Tabs>
@@ -900,8 +1474,28 @@ The following conventions apply to all attributes:
 
 #### Search flownode instances
 
-- **[V1 endpoint](../operate-api/specifications/search-4.api.mdx)**: `POST /v1/flownode-instances/search`
-- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/search-element-instances.api.mdx)**: `POST /v2/element-instances/search`
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--post">POST</span> [`/v1/flownode-instances/search`](../operate-api/specifications/search-4.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--post">POST</span> [`/v2/element-instances/search`](../orchestration-cluster-api-rest/specifications/search-element-instances.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="search-flownode-instances" defaultValue="input-adjustments" queryString values={
 [
@@ -912,46 +1506,67 @@ The following conventions apply to all attributes:
 
 <TabItem value='input-adjustments'>
 
-- Request structure changes as outlined in [general changes][].
-  - `searchAfter` is now the `after` in the `page` object.
-  - `size` is now the `limit` in the `page` object.
-- Renamed attributes in the `filter` object
-  - `key` of type `int64` - Use `elementInstanceKey` of type `string` instead.
-  - `flowNodeId` - Use `elementId` instead.
-  - `flowNodeName` - Use `elementName` instead.
-  - `incident` - Use `hasIncident` instead.
-- Adjusted attributes in the `filter` object
-  - `processInstanceKey` - Type changed from `int64` to `string`.
-  - `processDefinitionKey` - Type changed from `int64` to `string`.
-  - `incidentKey` - Type changed from `int64` to `string`.
-- Removed attributes from the `filter` object
-  - `startDate` - Can no longer be used for filtering.
-  - `endDate` - Can no longer be used for filtering.
+Request structure changes as outlined in [general changes][].
+
+| **Field**              | **Change Type** | **Notes**                                                    |
+| ---------------------- | --------------- | ------------------------------------------------------------ |
+| `searchAfter`          | Renamed         | Now `after` in the `page` object.                            |
+| `size`                 | Renamed         | Now `limit` in the `page` object.                            |
+| `key`                  | Renamed         | Now `elementInstanceKey` (changed from `int64` to `string`). |
+| `flowNodeId`           | Renamed         | Now `elementId`.                                             |
+| `flowNodeName`         | Renamed         | Now `elementName`.                                           |
+| `incident`             | Renamed         | Now `hasIncident`.                                           |
+| `processInstanceKey`   | Changed         | Now `string` type instead of `int64`.                        |
+| `processDefinitionKey` | Changed         | Now `string` type instead of `int64`.                        |
+| `incidentKey`          | Changed         | Now `string` type instead of `int64`.                        |
+| `startDate`            | Removed         | Can no longer be used for filtering.                         |
+| `endDate`              | Removed         | Can no longer be used for filtering.                         |
 
 </TabItem>
 
 <TabItem value='output-adjustments'>
 
-- Response structure changes as outlined in [general changes][].
-  - `total` is moved under the `page` object as `totalItems`.
-  - `sortValues` - Use `endCursor` in the `page` object instead.
-- Renamed attributes in the objects of the `items` array
-  - `key` of type `int64` - Use `elementInstanceKey` of type `string` instead.
-  - `flowNodeId` - Use `elementId` instead.
-  - `flowNodeName` - Use `elementName` instead.
-  - `incident` - Use `hasIncident` instead.
-- Adjusted attributes in the objects of the `items` array
-  - `processInstanceKey` - Type changed from `int64` to `string`.
-  - `processDefinitionKey` - Type changed from `int64` to `string`.
-  - `incidentKey` - Type changed from `int64` to `string`.
+Response structure changes as outlined in [general changes][].
+
+| **Field**              | **Change Type** | **Notes**                                                    |
+| ---------------------- | --------------- | ------------------------------------------------------------ |
+| `total`                | Moved           | Now `totalItems` in `page` object.                           |
+| `sortValues`           | Replaced        | Now use `endCursor` in `page` object.                        |
+| `key`                  | Renamed         | Now `elementInstanceKey` (changed from `int64` to `string`). |
+| `flowNodeId`           | Renamed         | Now `elementId`.                                             |
+| `flowNodeName`         | Renamed         | Now `elementName`.                                           |
+| `incident`             | Renamed         | Now `hasIncident`.                                           |
+| `processInstanceKey`   | Changed         | Now `string` type instead of `int64`.                        |
+| `processDefinitionKey` | Changed         | Now `string` type instead of `int64`.                        |
+| `incidentKey`          | Changed         | Now `string` type instead of `int64`.                        |
 
 </TabItem>
 </Tabs>
 
 #### Get flownode instance by key
 
-- **[V1 endpoint](../operate-api/specifications/by-key-4.api.mdx)**: `GET /v1/flownode-instances/{key}`
-- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/get-element-instance.api.mdx)**: `GET /v2/element-instances/{elementInstanceKey}`
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v1/flownode-instances/{key}`](../operate-api/specifications/by-key-4.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v2/element-instances/{elementInstanceKey}`](../orchestration-cluster-api-rest/specifications/get-element-instance.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="get-flownode-instance-by-key" defaultValue="input-adjustments" queryString values={
 [
@@ -977,8 +1592,28 @@ The following conventions apply to all attributes:
 
 #### Search incidents
 
-- **[V1 endpoint](../operate-api/specifications/search-3.api.mdx)**: `POST /v1/incidents/search`
-- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/search-incidents.api.mdx)**: `POST /v2/incidents/search`
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--post">POST</span> [`/v1/incidents/search`](../operate-api/specifications/search-3.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--post">POST</span> [`/v2/incidents/search`](../orchestration-cluster-api-rest/specifications/search-incidents.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="search-incidents" defaultValue="input-adjustments" queryString values={
 [
@@ -989,41 +1624,63 @@ The following conventions apply to all attributes:
 
 <TabItem value='input-adjustments'>
 
-- Request structure changes as outlined in [general changes][].
-  - `searchAfter` is now the `after` in the `page` object.
-  - `size` is now the `limit` in the `page` object.
-- Renamed attributes in the `filter` object
-  - `key` of type `int64` - Use `incidentKey` of type `string` instead.
-  - `type` - Use `errorType` instead.
-  - `message` - Use `errorMessage` instead.
-- Adjusted attributes in the `filter` object
-  - `processInstanceKey` - Type changed from `int64` to `string`.
-  - `processDefinitionKey` - Type changed from `int64` to `string`.
-  - `jobKey` - Type changed from `int64` to `string`.
+Request structure changes as outlined in [general changes][].
+
+| **Field**              | **Change Type** | **Notes**                                             |
+| ---------------------- | --------------- | ----------------------------------------------------- |
+| `searchAfter`          | Renamed         | Now `after` in the `page` object.                     |
+| `size`                 | Renamed         | Now `limit` in the `page` object.                     |
+| `key`                  | Renamed         | Now `incidentKey` (changed from `int64` to `string`). |
+| `type`                 | Renamed         | Now `errorType`.                                      |
+| `message`              | Renamed         | Now `errorMessage`.                                   |
+| `processInstanceKey`   | Changed         | Now `string` type instead of `int64`.                 |
+| `processDefinitionKey` | Changed         | Now `string` type instead of `int64`.                 |
+| `jobKey`               | Changed         | Now `string` type instead of `int64`.                 |
 
 </TabItem>
 
 <TabItem value='output-adjustments'>
 
-- Response structure changes as outlined in [general changes][].
-  - `total` is moved under the `page` object as `totalItems`.
-  - `sortValues` - Use `endCursor` in the `page` object instead.
-- Renamed attributes in the objects of the `items` array
-  - `key` of type `int64` - Use `incidentKey` of type `string` instead.
-  - `type` - Use `errorType` instead.
-  - `message` - Use `errorMessage` instead.
-- Adjusted attributes in the objects of the `items` array
-  - `processInstanceKey` - Type changed from `int64` to `string`.
-  - `processDefinitionKey` - Type changed from `int64` to `string`.
-  - `jobKey` - Type changed from `int64` to `string`.
+Response structure changes as outlined in [general changes][].
+
+| **Field**              | **Change Type** | **Notes**                                             |
+| ---------------------- | --------------- | ----------------------------------------------------- |
+| `total`                | Moved           | Now `totalItems` in `page` object.                    |
+| `sortValues`           | Replaced        | Now use `endCursor` in `page` object.                 |
+| `key`                  | Renamed         | Now `incidentKey` (changed from `int64` to `string`). |
+| `type`                 | Renamed         | Now `errorType`.                                      |
+| `message`              | Renamed         | Now `errorMessage`.                                   |
+| `processInstanceKey`   | Changed         | Now `string` type instead of `int64`.                 |
+| `processDefinitionKey` | Changed         | Now `string` type instead of `int64`.                 |
+| `jobKey`               | Changed         | Now `string` type instead of `int64`.                 |
 
 </TabItem>
 </Tabs>
 
 #### Get incident by key
 
-- **[V1 endpoint](../operate-api/specifications/by-key-3.api.mdx)**: `GET /v1/incidents/{key}`
-- **[V2 endpoint](../orchestration-cluster-api-rest/specifications/get-incident.api.mdx)**: `GET /v2/incidents/{incidentKey}`
+<table className="table-migration">
+<thead>
+<tr>
+<th>V1</th>
+<th>V2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v1/incidents/{key}`](../operate-api/specifications/by-key-3.api.mdx)
+
+</td>
+<td>
+
+<span class="badge badge--get">GET</span> [`/v2/incidents/{incidentKey}`](../orchestration-cluster-api-rest/specifications/get-incident.api.mdx)
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <Tabs groupId="get-incident-by-key" defaultValue="input-adjustments" queryString values={
 [
