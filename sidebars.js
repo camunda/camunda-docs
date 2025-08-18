@@ -1363,31 +1363,6 @@ module.exports = {
     {
       Components: [
         {
-          type: "category",
-          label: "Components update",
-          link: {
-            type: "doc",
-            id: "self-managed/components/components-upgrade/introduction",
-          },
-          items: [
-            "self-managed/components/components-upgrade/870-to-880",
-            "self-managed/components/components-upgrade/860-to-870",
-            "self-managed/components/components-upgrade/850-to-860",
-            "self-managed/components/components-upgrade/840-to-850",
-            "self-managed/components/components-upgrade/830-to-840",
-            {
-              Elasticsearch: [
-                "self-managed/components/components-upgrade/elasticsearch/7-to-8",
-              ],
-            },
-            {
-              Keycloak: [
-                "self-managed/components/components-upgrade/keycloak/keycloak-update",
-              ],
-            },
-          ],
-        },
-        {
           Modeler: [
             {
               "Web Modeler": [
@@ -1655,6 +1630,31 @@ module.exports = {
                 "self-managed/components/management-identity/miscellaneous/resource-management",
                 "self-managed/components/management-identity/miscellaneous/starting-configuration",
                 "self-managed/components/management-identity/miscellaneous/troubleshoot-identity",
+              ],
+            },
+          ],
+        },
+        {
+          type: "category",
+          label: "Components update",
+          link: {
+            type: "doc",
+            id: "self-managed/components/components-upgrade/introduction",
+          },
+          items: [
+            "self-managed/components/components-upgrade/870-to-880",
+            "self-managed/components/components-upgrade/860-to-870",
+            "self-managed/components/components-upgrade/850-to-860",
+            "self-managed/components/components-upgrade/840-to-850",
+            "self-managed/components/components-upgrade/830-to-840",
+            {
+              Elasticsearch: [
+                "self-managed/components/components-upgrade/elasticsearch/7-to-8",
+              ],
+            },
+            {
+              Keycloak: [
+                "self-managed/components/components-upgrade/keycloak/keycloak-update",
               ],
             },
           ],
