@@ -60,7 +60,7 @@ You can create the first admin user by calling the Setup API endpoint:
 
 with the following JSON request body:
 
-````json
+```json
 {
   "username": "<your chosen username>",
   "password": "<your chosen password>",
@@ -88,7 +88,7 @@ camunda:
           name: <The name of the first user>
           email: <The email address of the first user>
         # add more users to this list as desired
-````
+```
 
   </TabItem>
 <TabItem value="env" label="Environment variables" default>
