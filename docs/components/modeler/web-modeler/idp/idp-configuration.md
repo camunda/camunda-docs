@@ -48,11 +48,12 @@ To learn more about storing, tracking, and managing documents in Camunda 8, see 
 
 If you are using an identity-enabled cluster, the following authorizations are required for IDP operations:
 
-| Resource type      | Permission              | Description                                                       |
-| :----------------- | :---------------------- | :---------------------------------------------------------------- |
-| DOCUMENT           | CREATE                  | Required to upload documents to the cluster during IDP extraction |
-| RESOURCE           | CREATE                  | Required to deploy process instances                              |
-| PROCESS_DEFINITION | CREATE_PROCESS_INSTANCE | Required to start process instances                               |
+| Resource type      | Permission              | Owner type | Owner          | Description                                                          |
+| :----------------- | :---------------------- | :--------- | :------------- | :------------------------------------------------------------------- |
+| DOCUMENT           | READ                    | Role       | Connectors     | Required for the idp connector to read the document from the cluster |
+| DOCUMENT           | CREATE                  | User       | <user's email> | Required to upload documents to the cluster during IDP extraction    |
+| RESOURCE           | CREATE                  | User       | <user's email> | Required to deploy process instances                                 |
+| PROCESS_DEFINITION | CREATE_PROCESS_INSTANCE | User       | <user's email> | Required to start process instances                                  |
 
 ## Configure IDP
 
