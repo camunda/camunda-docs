@@ -31,7 +31,7 @@ The following configurations apply to all components within the Orchestration Cl
   <TabItem value="application.yaml" label="application.yaml">
 
 | Application.yaml property                                         | Description                                                                                                                 | Default value       |
-|-------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------| ------------------- |
+| ----------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | ------------------- |
 | `camunda.security.authentication.method`                          | The authentication method to use. Options: `basic`, `oidc`.                                                                 | `basic`             |
 | `camunda.security.authentication.authentication-refresh-interval` | The interval at which the memberships (groups, roles, tenants, component authorizations) are refreshed for logged in users. | `PT30S`             |
 | `camunda.security.authentication.unprotected-api`                 | If the API can be used without authentication.                                                                              | `false`             |
