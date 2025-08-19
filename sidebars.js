@@ -1046,8 +1046,8 @@ module.exports = {
       ],
     },
     "reference/notices",
-    "reference/public-api",
     "reference/licenses",
+    "reference/public-api",
     "reference/supported-environments",
     "reference/dependencies",
     {
