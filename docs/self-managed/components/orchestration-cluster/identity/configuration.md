@@ -29,27 +29,29 @@ The following configurations apply to all components within the Orchestration Cl
   </TabItem>
   <TabItem value="application.yaml" label="application.yaml">
 
-| Application.yaml property                         | Description                                                                                       | Default value       |
-| ------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------- |
-| `camunda.security.authentication.method`          | The authentication method to use. Options: `basic`, `oidc`.                                       | `basic`             |
-| `camunda.security.authentication.unprotected-api` | If the API can be used without authentication.                                                    | `false`             |
-| `camunda.security.authorizations.enabled`         | If authorizations are enabled.                                                                    | `true`              |
-| `camunda.security.multitenancy.checks-enabled`    | Enables multi-tenancy checks. This requires the API to be protected.                              | `false`             |
-| `camunda.security.multitenancy.api-enabled`       | Enables the multi-tenancy API and UI independently from multi-tenancy checks.                     | `true`              |
-| `camunda.persistent.sessions.enabled`             | Stores session data in secondary storage so users stay logged in across cluster nodes.            | `true`              |
-| `spring.profiles.active`                          | **Note:** This property will be deprecated as additional authentication methods become available. | `consolidated-auth` |
+| Application.yaml property                                       | Description                                                                                       | Default value       |
+| --------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------- |
+| `camunda.security.authentication.method`                        | The authentication method to use. Options: `basic`, `oidc`.                                       | `basic`             |
+| `camunda.security.authentication.authenticationRefreshInterval` | The refresh interval for the authentication object of a session.                                  | `PT30S`             |
+| `camunda.security.authentication.unprotected-api`               | If the API can be used without authentication.                                                    | `false`             |
+| `camunda.security.authorizations.enabled`                       | If authorizations are enabled.                                                                    | `true`              |
+| `camunda.security.multitenancy.checks-enabled`                  | Enables multi-tenancy checks. This requires the API to be protected.                              | `false`             |
+| `camunda.security.multitenancy.api-enabled`                     | Enables the multi-tenancy API and UI independently from multi-tenancy checks.                     | `true`              |
+| `camunda.persistent.sessions.enabled`                           | Stores session data in secondary storage so users stay logged in across cluster nodes.            | `true`              |
+| `spring.profiles.active`                                        | **Note:** This property will be deprecated as additional authentication methods become available. | `consolidated-auth` |
 
   </TabItem>
   <TabItem value="helm" label="Helm values">
 
-| Helm value key                                  | Description                                                                            | Default value |
-| ----------------------------------------------- | -------------------------------------------------------------------------------------- | ------------- |
-| `global.security.authentication.method`         | The authentication method to use. Options: `basic`, `oidc`.                            | `basic`       |
-| `global.security.authentication.unprotectedApi` | If the API can be used without authentication.                                         | `false`       |
-| `global.security.authorizations.enabled`        | If authorizations are enabled.                                                         | `true`        |
-| `global.security.multiTenancy.checksEnabled`    | Enables multi-tenancy checks. This requires the API to be protected.                   | `false`       |
-| `global.security.multiTenancy.apiEnabled`       | Enables the multi-tenancy API and UI independently from multi-tenancy checks.          | `true`        |
-| `global.persistent.sessions.enabled`            | Stores session data in secondary storage so users stay logged in across cluster nodes. | `true`        |
+| Helm value key                                                 | Description                                                                            | Default value |
+| -------------------------------------------------------------- | -------------------------------------------------------------------------------------- | ------------- |
+| `global.security.authentication.method`                        | The authentication method to use. Options: `basic`, `oidc`.                            | `basic`       |
+| `global.security.authentication.authenticationRefreshInterval` | The refresh interval for the authentication object of a session.                       | `PT30S`       |
+| `global.security.authentication.unprotectedApi`                | If the API can be used without authentication.                                         | `false`       |
+| `global.security.authorizations.enabled`                       | If authorizations are enabled.                                                         | `true`        |
+| `global.security.multiTenancy.checksEnabled`                   | Enables multi-tenancy checks. This requires the API to be protected.                   | `false`       |
+| `global.security.multiTenancy.apiEnabled`                      | Enables the multi-tenancy API and UI independently from multi-tenancy checks.          | `true`        |
+| `global.persistent.sessions.enabled`                           | Stores session data in secondary storage so users stay logged in across cluster nodes. | `true`        |
 
   </TabItem>
 </Tabs>
