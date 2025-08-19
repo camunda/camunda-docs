@@ -17,7 +17,7 @@ keywords:
   ]
 ---
 
-import CredentialsImg from './img/icon-reference-data.png';
+import CredentialsImg from './img/create-issue-request.png';
 import BugImg from './img/icon-reference-bug.png';
 import CommunityImg from './img/icon-reference-community.png';
 import SalesImg from './img/icon-reference-sales.png';

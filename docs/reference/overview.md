@@ -21,7 +21,7 @@ Keep up-to-date with upcoming, current, and past Camunda releases.
 Learn about the [Camunda release policy](/reference/announcements-release-notes/release-policy.md) with some specific clarifications across provisioning in SaaS and Self-Managed.
 :::
 
-## Security, licensing, and support
+## Security, licensing, and support information
 
 Reference information including published security notices, licensing, supported environments, and source code access.
 
