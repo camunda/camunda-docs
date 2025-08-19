@@ -1449,6 +1449,7 @@ module.exports = {
                     "self-managed/components/orchestration-cluster/core-settings/concepts/data-retention",
                     "self-managed/components/orchestration-cluster/core-settings/concepts/authentication",
                     "self-managed/components/orchestration-cluster/core-settings/concepts/usage-metrics",
+                    "self-managed/components/orchestration-cluster/core-settings/concepts/schema-and-migration",
                   ],
                 },
                 // {
@@ -1530,7 +1531,6 @@ module.exports = {
               ],
               Operate: [
                 "self-managed/components/orchestration-cluster/operate/operate-configuration",
-                "self-managed/components/orchestration-cluster/operate/schema-and-migration",
                 "self-managed/components/orchestration-cluster/operate/importer-and-archiver",
               ],
               Tasklist: [
