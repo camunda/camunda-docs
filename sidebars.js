@@ -9,6 +9,7 @@ module.exports = {
       },
       items: [
         "guides/getting-started-example",
+        "guides/getting-started-agentic-orchestration",
         "guides/orchestrate-human-tasks",
         "guides/orchestrate-apis",
       ],
