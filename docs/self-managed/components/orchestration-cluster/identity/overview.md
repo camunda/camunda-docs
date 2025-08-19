@@ -40,7 +40,8 @@ If users are managed within the Orchestration cluster (i.e., without an external
 - Through configuration
 
 :::warning
-Once you have completed the initial setup, make sure to always have at least one user assigned to the `admin` role. Otherwise, it may be possible for a third party to create a new admin user.
+After completing the initial setup, ensure at least one user remains assigned to the `admin` role.  
+If no admin user exists, a third party could create a new admin account and gain full access.
 :::
 
 #### Option 1: Create an initial admin user in the UI
@@ -53,18 +54,21 @@ This user will be assigned to the `admin` role and granted all permissions in th
 
 #### Option 2: Create an initial admin user with the Setup REST API
 
-Use the Setup API POST `/v2/setup/user` ([documentation](/apis-tools/orchestration-cluster-api-rest/specifications/create-admin-user.api.mdx)) with the following JSON request body:
+You can create the first admin user by calling the Setup API endpoint:
 
-```json
+`POST /v2/setup/user` ([API documentation](/apis-tools/orchestration-cluster-api-rest/specifications/create-admin-user.api.mdx))
+
+with the following JSON request body:
+
+````json
 {
-  "username": "<Your chosen username>",
-  "password": "<Your chosen password>",
-  "name": "<The user's name>",
-  "email": "<The user's email>"
+  "username": "<your chosen username>",
+  "password": "<your chosen password>",
+  "name": "<the user's full name>",
+  "email": "<the user's email address>"
 }
-```
 
-This endpoint is enabled as long as no user is assigned to the admin role.
+This endpoint is only available as long as **no user is assigned to the `admin` role**.
 
 #### Option 3: Define initial users via configuration
 
@@ -83,7 +87,7 @@ camunda:
           name: <The name of the first user>
           email: <The email address of the first user>
         # add more users to this list as desired
-```
+````
 
   </TabItem>
 <TabItem value="env" label="Environment variables" default>
