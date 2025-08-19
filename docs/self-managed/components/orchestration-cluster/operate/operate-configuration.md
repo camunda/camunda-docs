@@ -336,10 +336,6 @@ This configuration may be overwritten by changing the corresponding configuratio
 
 See the [core settings documentation](/self-managed/components/orchestration-cluster/core-settings/configuration/logging.md).
 
-## Example application.yaml
-
-See the [core settings documentation](/self-managed/components/orchestration-cluster/core-settings/configuration/example-application.md).
-
 ## Backups
 
 You must configure the following on your chosen database:

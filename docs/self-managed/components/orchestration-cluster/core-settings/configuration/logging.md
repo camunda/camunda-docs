@@ -77,7 +77,7 @@ Set this variable for each component’s environment as needed.
 
 ## Changing log levels at runtime
 
-Camunda components support dynamic log level changes via the
+The Orchestration Cluster supports dynamic log level changes via the
 [`Spring Boot Actuator loggers endpoint`](https://docs.spring.io/spring-boot/docs/current/actuator-api/html/#loggers).
 
 Example for a local component:

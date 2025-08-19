@@ -25,7 +25,7 @@ Using the default setup for [Camunda 8 Run](/self-managed/quickstart/developer-q
 4. An initial user with username/password: `demo` / `demo`
 5. An `admin` role with full permissions, applied to the `demo` user
 
-To modify this [initial configuration](/self-managed/components/orchestration-cluster/core-settings/configuration/configuration.md), define your custom values in `application.yaml`, and pass this file at startup using the `--config` flag. See [this section](/self-managed/quickstart/developer-quickstart/c8run.md#enable-authentication-and-authorization) for details.
+To modify this [initial configuration](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md), define your custom values in `application.yaml`, and pass this file at startup using the `--config` flag. See [this section](/self-managed/quickstart/developer-quickstart/c8run.md#enable-authentication-and-authorization) for details.
 
 :::note
 In Helm installations, API authentication and authorization are enabled by default. You can adjust these settings in `application.yaml` or using environment variables.
@@ -33,7 +33,7 @@ In Helm installations, API authentication and authorization are enabled by defau
 
 :::note
 As a Spring Boot application, the Orchestration Cluster supports standard
-[Spring configuration](https://docs.spring.io/spring-boot/reference/features/external-config.html) methods. [Review configurations which apply to all components within the Orchestration Cluster](/self-managed/components/orchestration-cluster/core-settings/configuration/configuration.md).
+[Spring configuration](https://docs.spring.io/spring-boot/reference/features/external-config.html) methods. [Review configurations which apply to all components within the Orchestration Cluster](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md).
 :::
 
 ### Configure initial users

@@ -1,7 +1,7 @@
 ---
-id: configuration
-title: "Spring configuration"
-description: "Learn about the Identity configuration options available in your Orchestration cluster."
+id: properties
+title: "All properties"
+description: "Learn about the Identity configuration properties available in your Orchestration cluster."
 ---
 
 import Tabs from '@theme/Tabs';
@@ -259,23 +259,7 @@ script-src-attr 'none'.
 
 ## CSRF Protection
 
-Cross-Site Request Forgery (CSRF) is a type of malicious exploit where unauthorized commands are
-transmitted from a user that the web application trusts. In a CSRF attack, an attacker tricks a victim's
-browser into making unwanted requests to a web application where the victim is authenticated.
-
-For a comprehensive understanding of CSRF attacks and prevention methods, refer to the
-[MDN Web Docs on CSRF](https://developer.mozilla.org/en-US/docs/Glossary/CSRF).
-
-### How CSRF protection works in Camunda
-
-- **Token generation**: A unique CSRF token is generated and stored in a secure, HTTP-only cookie named `X-CSRF-TOKEN`.
-- **Token validation**: For state-changing requests (POST, PUT, DELETE, etc.), the server validates that the CSRF token
-  in the request header `X-CSRF-TOKEN` matches the one in the cookie.
-- **Safe methods**: GET, HEAD, TRACE, and OPTIONS requests are considered safe and don't require CSRF validation.
-
-### Configuration
-
-The following variables are used to configure CSRF protection.
+The following variables are used to configure [Cross-Site Request Forgery (CSRF)](/self-managed/components/orchestration-cluster/core-settings/configuration/csrf-protection.md) protection.
 The CSRF protection only applies in the context of a session-based authentication. You don't need to provide
 CSRF tokens when using OIDC or Basic authentication methods.
 
@@ -306,25 +290,3 @@ CSRF tokens when using OIDC or Basic authentication methods.
 :::caution
 Disabling CSRF protection is not recommended for production environments as it leaves your application vulnerable to cross-site request forgery attacks.
 :::
-
-### Protected vs unprotected paths
-
-#### Protected paths (require CSRF token)
-
-- `/api/**` – API endpoints (except specifically excluded paths)
-- `/v1/**`, `/v2/**` – Versioned API endpoints
-- All state-changing operations (POST, PUT, DELETE, PATCH)
-
-#### Unprotected paths (no CSRF token required)
-
-- `/actuator/**` – Health and monitoring endpoints
-- `/v2/license` – Public license endpoint
-- `/error` – Error handling
-- Authentication endpoints (`/login`, `/logout`)
-- Safe HTTP methods (GET, HEAD, OPTIONS, TRACE)
-
-### Security considerations
-
-- Always use HTTPS in production to prevent token interception.
-- Consider additional security headers configured in the security settings.
-- Regularly review and update the list of unprotected paths.

@@ -271,10 +271,6 @@ If more than one Camunda Tasklist instance is accessible by users for a failover
 | :------------------------------------------- | :--------------------------------------------------------- | :------------ |
 | camunda.tasklist.persistent.sessions.enabled | Enables the persistence of user sessions in Elasticsearch. | false         |
 
-## Example of application.yml file
-
-See the [core settings documentation](/self-managed/components/orchestration-cluster/core-settings/configuration/example-application.md).
-
 ## Cross-site request forgery protection
 
 Cross-site request forgery (CSRF) is an attack that forces an end user to execute unwanted actions on a web application in which they are currently authenticated. To mitigate this risk, Camunda provides CSRF protection that can be enabled in the Tasklist web application.
