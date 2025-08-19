@@ -9,6 +9,7 @@ module.exports = {
       },
       items: [
         "guides/getting-started-example",
+        "guides/getting-started-agentic-orchestration",
         "guides/orchestrate-human-tasks",
         "guides/orchestrate-apis",
       ],
@@ -979,8 +980,9 @@ module.exports = {
       },
       items: [
         "apis-tools/migration-manuals/migrate-to-camunda-api",
-        "apis-tools/migration-manuals/migrate-component-apis",
+        "apis-tools/migration-manuals/migrate-to-camunda-java-client",
         "apis-tools/migration-manuals/migrate-to-camunda-user-tasks",
+        "apis-tools/migration-manuals/migrate-component-apis",
       ],
     },
   ],
@@ -1367,6 +1369,7 @@ module.exports = {
           label: "Configure flow control",
           id: "self-managed/operational-guides/configure-flow-control/configure-flow-control",
         },
+        "self-managed/concepts/no-secondary-storage",
       ],
     },
     {

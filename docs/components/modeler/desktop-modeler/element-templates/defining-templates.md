@@ -534,6 +534,22 @@ Properties `formId` and `externalReference` are mutually exclusive, meaning that
 
 :::
 
+#### `zeebe:assignmentDefinition`
+
+| **Binding `type`**          | `zeebe:assignmentDefinition`                                                                                           |
+| --------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| **Valid property `type`'s** | `String`<br />`Text`<br />`Hidden`<br />`Dropdown`                                                                     |
+| **Binding parameters**      | `property`: The name of the property. <br/> Supported properties: `assignee`, `candidateGroups`, and `candidateUsers`. |
+| **Mapping result**          | `<zeebe:assignmentDefinition [property]="[userInput]" />`                                                              |
+
+The `zeebe:assignmentDefinition` binding allows you to configure the [user task assignment](../../../bpmn/user-tasks/#assignments).
+
+:::note
+
+When `zeebe:assignmentDefinition` is used, `zeebe:userTask` must be set on the same element.
+
+:::
+
 #### `zeebe:calledDecision`
 
 | **Binding `type`**          | `zeebe:calledDecision`                                                                                                            |
@@ -631,7 +647,8 @@ You can define `groups` to organize custom fields into:
   "groups": [
     {
       "id": "definition",
-      "label": "Task definition"
+      "label": "Task definition",
+      "openByDefault": true
     },
     {
       "id": "request",
@@ -644,8 +661,7 @@ You can define `groups` to organize custom fields into:
     {
       "id": "authentication",
       "label": "Authentication",
-      "tooltip": "Optional authentication settings",
-      "openByDefault": false
+      "tooltip": "Optional authentication settings"
     }
   ],
   "properties": [
@@ -659,7 +675,7 @@ Groups can have the following attributes:
 - `id`: Unique identifier of the group
 - `label`: Label of the group
 - `tooltip`: Tooltip for the group (optional)
-- `openByDefault`: Whether the group will be expanded in the properties panel (optional, default: `true`)
+- `openByDefault`: Whether the group will be expanded in the properties panel (optional, default: `false`)
 
 Associate a field with a group (ID) via the fields `group` key:
 

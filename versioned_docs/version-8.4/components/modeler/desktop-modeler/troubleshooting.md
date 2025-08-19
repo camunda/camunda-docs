@@ -50,23 +50,23 @@ Depending on your operating system, you can find Desktop Modeler logs in differe
 
 To produce logging output, you can also run Desktop Modeler from the command line.
 
-## I cannot connect to Zeebe
+## I cannot connect to an orchestration cluster {#i-cannot-connect-to-zeebe}
 
-You try to connect (i.e., to deploy) to a remote Zeebe instance, and Desktop Modeler tells you it "cannot find a running Zeebe."
+You try to connect (i.e., to deploy) to a remote orchestration cluster, and Desktop Modeler tells you it "Cannot connect to orchestration cluster."
 
-To resolve this issue, check if you can connect to Zeebe through another client, i.e., [`zbctl`](../../../apis-tools/cli-client/index.md). If that works, [further debug your Zeebe connection](#debug-zeebe-connection-issues). If that does not work, resolve the [general connection issue](#resolve-a-general-zeebe-connection-issue) first.
+To resolve this issue, check if you can connect to Zeebe through another client, for example, community-supported [`zbctl`](https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md). If that works, [further debug your Zeebe connection](#debug-zeebe-connection-issues). If that does not work, resolve the [general connection issue](#resolve-a-general-zeebe-connection-issue) first.
 
-## I cannot connect to local Zeebe
+## I cannot connect to a local orchestration cluster {#i-cannot-connect-to-local-zeebe}
 
-You try to connect (i.e., to deploy) to a local Zeebe instance, and Desktop Modeler tells you it "cannot find a running Zeebe."
+You try to connect (i.e., to deploy) to a local orchestration cluster, and Desktop Modeler tells you it "Cannot connect to orchestration cluster."
 
-Ensure that your local Zeebe instance is running.
+Ensure your local orchestration cluster is running.
 
 ## Resolve a general Zeebe connection issue
 
-You try to connect to Zeebe from both Desktop Modeler _and_ [`zbctl`](../../../apis-tools/cli-client/index.md), and neither of them works. General connection failures can have a couple of reasons:
+You try to connect to Zeebe from both Desktop Modeler _and_ community-supported [`zbctl`](https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md), and neither of them works. General connection failures can have a couple of reasons:
 
-### The (remote) Zeebe instance is not reachable
+### The (remote) orchestration cluster is not reachable {#the-remote-zeebe-instance-is-not-reachable}
 
 Ensure your computer has access to the (remote) network.
 
@@ -119,7 +119,7 @@ NO_PROXY=localhost,127.0.0.1,some.intranet.host camunda-modeler
 
 ## Debug Zeebe connection issues
 
-You can connect to Zeebe via [`zbctl`](../../../apis-tools/cli-client/index.md) or another API client. However, connecting through Desktop Modeler fails.
+You can connect to Zeebe via community-supported [`zbctl`](https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md) or another API client. However, connecting through Desktop Modeler fails.
 
 ### Secure connection to Zeebe fails
 
@@ -217,6 +217,18 @@ DEBUG=* ZEEBE_NODE_LOG_LEVEL=DEBUG GRPC_VERBOSITY=DEBUG GRPC_TRACE=all camunda-m
 
 </TabItem>
 </Tabs>
+
+## Desktop Modeler does not start on Ubuntu 24 / modern Linux
+
+Modern Linux operating systems introduce restrictions on user namespaces, a sandboxing (isolation) mechanism Modeler uses. You may see an error message when you start the application:
+
+```sh
+$ ./camunda-modeler
+[46193:1114/170934.837319:FATAL:setuid_sandbox_host.cc(163)] The SUID sandbox helper binary was found, but is not configured correctly. Rather than run without sandboxing I'm aborting now. You need to make sure that [...]/camunda-modeler-[...]-linux-x64/chrome-sandbox is owned by root and has mode 4755.
+zsh: trace trap (core dumped)  ./camunda-modeler
+```
+
+To remedy this, configure your system to allow sandboxing by [creating an AppArmor profile](https://github.com/camunda/camunda-modeler/issues/4695#issuecomment-2478458250), or review [this issue](https://github.com/camunda/camunda-modeler/issues/4695#issuecomment-2478581677) for an in-depth explanation of available options. If you don't have the necessary permissions to permit sandboxing, you may choose to disable the sandbox, though this is not recommended.
 
 ## Other questions?
 
