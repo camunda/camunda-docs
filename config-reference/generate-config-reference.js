@@ -30,8 +30,11 @@ const preserveDeprecatedGroups = [
   "zeebe.client.worker.override",
 ];
 
+const command = process.argv[2];
+console.log(`Running ${command}`);
+
 // API name must be passed in as an arg.
-const configRefStrategyName = process.argv[2];
+const configRefStrategyName = process.argv[3];
 if (configRefStrategyName === undefined) {
   const validConfigReferences = Object.keys(configRefStrategies).join(", ");
   console.log(
@@ -51,7 +54,7 @@ if (strategy === undefined) {
 }
 
 // Version is an optional argument. If not provided, we assume "vNext".
-const requestedVersion = process.argv[3];
+const requestedVersion = process.argv[4];
 
 const generationConfig = {
   version: requestedVersion,
@@ -177,27 +180,30 @@ const preGenerateDocs = (config) => {
 const postGenerateDocs = (config) => {};
 // All APIs will execute these same steps, with custom-per-API steps
 //   implemented by each API's generation-strategy.js.
-const steps = [
-  // Remove old docs
-  () => cleanConfigReference(generationConfig),
+const steps = {
+  generate: [
+    // Remove old docs
+    () => cleanConfigReference(generationConfig),
 
-  // Run any custom steps before generation
-  () => preGenerateDocs(generationConfig),
-  () => strategy.preGenerateDocs(generationConfig),
+    // Run any custom steps before generation
+    () => preGenerateDocs(generationConfig),
+    () => strategy.preGenerateDocs(generationConfig),
 
-  // Generate the docs
-  () => generateConfigReference(generationConfig),
+    // Generate the docs
+    () => generateConfigReference(generationConfig),
 
-  // Run any custom steps after generation
-  () => postGenerateDocs(generationConfig),
-  () => strategy.postGenerateDocs(generationConfig),
+    // Run any custom steps after generation
+    () => postGenerateDocs(generationConfig),
+    () => strategy.postGenerateDocs(generationConfig),
 
-  // Run prettier against the generated docs. Twice. Yes, twice.
-  //   I don't know why, but the first run always leaves an extra blank line,
-  //   which the second execution removes.
-  () => runCommand(`prettier --write ${generationConfig.outputDir}`),
-  () => runCommand(`prettier --write ${generationConfig.outputDir}`),
-];
+    // Run prettier against the generated docs. Twice. Yes, twice.
+    //   I don't know why, but the first run always leaves an extra blank line,
+    //   which the second execution removes.
+    () => runCommand(`prettier --write ${generationConfig.outputDir}`),
+    () => runCommand(`prettier --write ${generationConfig.outputDir}`),
+  ],
+  download: [() => strategy.downloadReference(generationConfig.version)],
+};
 
 // Run the steps!
-steps.forEach((step) => step());
+steps[command].forEach((step) => step());
