@@ -13,11 +13,9 @@ Camunda 8 follows [Semantic Versioning (SemVer)](https://semver.org/) to provide
 
 The public API is the official contract between Camunda and its users under SemVer. No breaking changes will be made to the public API in minor or patch releases. You can safely build on these interfaces with the expectation of stability and backward compatibility.
 
-This is a subset of all available APIs — many [APIs](/apis-tools/working-with-apis-tools.md) are public-facing but not covered by the SemVer stability contract.
-
-Only components explicitly listed on this page (see [Included in the public API](#included-in-the-public-api)) are covered. Anything not listed is _not_ guaranteed under SemVer.
-
-The public API contract begins with version 8.8.
+- This is a subset of all available APIs. Many [APIs](/apis-tools/working-with-apis-tools.md) are public-facing but not covered by the SemVer stability contract.
+- Only components explicitly listed on this page (see [Included in the public API](#included-in-the-public-api)) are covered. Anything not listed is _not_ guaranteed under SemVer.
+- The public API contract begins with version 8.8.
 
 :::note
 The term "public API" refers to the SemVer definition of stable interfaces, not external APIs available to users.
@@ -44,12 +42,12 @@ Some endpoints in otherwise stable APIs are marked as [alpha features](/componen
 
 Alpha endpoints:
 
-- Are clearly marked in API docs
-- May introduce breaking changes in minor or patch releases
-- Follow the [alpha feature policy](/components/early-access/alpha/alpha-features.md#alpha) rather than SemVer
-- Are released for early feedback before general availability
+- Are clearly marked in API docs.
+- May introduce breaking changes in minor or patch releases.
+- Follow the [alpha feature policy](/components/early-access/alpha/alpha-features.md#alpha) rather than SemVer.
+- Are released for early feedback before general availability.
 
-Check API docs before building on any alpha endpoint.
+Check the API documentation before building on any alpha endpoint.
 
 ### Excluded APIs
 
@@ -63,8 +61,8 @@ The following APIs are **explicitly excluded** from the public API:
 
 Though not covered by the public API contract, we aim to provide a consistent experience. For non-public APIs, we commit to:
 
-- Following API versioning best practices
-- Announcing deprecations at least two minor versions in advance (e.g., deprecated in 8.9, removed no earlier than 8.11)
-- Avoiding breaking changes to configuration, endpoints, or backup-related features within the same minor release range
+- Following API versioning best practices.
+- Announcing deprecations at least two minor versions in advance (for example, deprecated in 8.9, removed no earlier than 8.11).
+- Avoiding breaking changes to configuration, endpoints, or backup-related features within the same minor release range.
 
 This balance allows continuous improvement to tools like Web Modeler and Console, while preserving stability for orchestration logic.

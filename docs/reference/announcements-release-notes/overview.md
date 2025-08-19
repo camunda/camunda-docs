@@ -6,16 +6,38 @@ description: "Important announcements and release notes for upcoming and past Ca
 
 Announcements and release notes for supported versions of the Camunda documentation.
 
-## Camunda 8 releases
-
-Find release announcements and release notes for the following Camunda 8 versions.
-
-| Version | Release date    | Release notes                                                                    | Announcements                                                                    | Update guide (Self-Managed)                                                    | Scheduled end of maintenance | Changelogs                                                                                                                                                    | Release blog                                                          |
-| ------- | --------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| 8.8     | 14 October 2025 | [Release notes](/reference/announcements-release-notes/880/880-release-notes.md) | [Announcements](/reference/announcements-release-notes/880/880-announcements.md) | [Update 8.7 to 8.8](/self-managed/components/components-upgrade/870-to-880.md) | 13 April 2027                | -                                                                                                                                                             | -                                                                     |
-| 8.7     | 8 April 2025    | [Release notes](/reference/announcements-release-notes/870/870-release-notes.md) | [Announcements](/reference/announcements-release-notes/870/870-announcements.md) | [Update 8.6 to 8.7](/self-managed/components/components-upgrade/860-to-870.md) | 13 October 2026              | - [ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.7.0) <br /> - [ Connectors ](https://github.com/camunda/connectors/releases/tag/8.7.0) | [Release blog](https://camunda.com/blog/2025/04/camunda-8-7-release/) |
-| 8.6     | 8 October 2024  | [Release notes](/reference/announcements-release-notes/860/860-release-notes.md) | [Announcements](/reference/announcements-release-notes/860/860-announcements.md) | [Update 8.5 to 8.6](/self-managed/components/components-upgrade/850-to-860.md) | 14 April 2026                | - [ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.6.0) <br /> - [ Connectors ](https://github.com/camunda/connectors/releases/tag/8.6.0) | [Release blog](https://camunda.com/blog/2024/10/camunda-8-6-release/) |
-| 8.5     | 9 April 2024    | [Release notes](/reference/announcements-release-notes/850/850-release-notes.md) | [Announcements](/reference/announcements-release-notes/850/850-announcements.md) | [Update 8.4 to 8.5](/self-managed/components/components-upgrade/840-to-850.md) | 14 October 2025              | - [ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.5.0) <br /> - [ Connectors ](https://github.com/camunda/connectors/releases/tag/8.5.0) | [Release blog](https://camunda.com/blog/2024/04/camunda-8-5-release/) |
+<table className="table-callout" width="100%">
+<tr>
+<td>**Version**</td>
+<td>**Release date**</td>
+<td>**Documentation**</td>
+<td>**Scheduled End of maintenance**</td>
+</tr>
+<tr>
+<td>8.8</td>
+<td>14 October 2025</td>
+<td>[8.8 release announcements](/reference/announcements-release-notes/880/880-announcements.md) / [8.8 release notes](/reference/announcements-release-notes/880/880-release-notes.md)</td>
+<td>13 April 2027</td>
+</tr>
+<tr>
+<td>8.7</td>
+<td>8 April 2025</td>
+<td>[8.7 release announcements](/reference/announcements-release-notes/870/870-announcements.md) / [8.7 release notes](/reference/announcements-release-notes/870/870-release-notes.md)</td>
+<td>13 October 2026</td>
+</tr>
+<tr>
+<td>8.6</td>
+<td>8 October 2024</td>
+<td>[8.6 release announcements](/reference/announcements-release-notes/860/860-announcements.md) / [8.6 release notes](/reference/announcements-release-notes/860/860-release-notes.md)</td>
+<td>14 April 2026</td>
+</tr>
+<tr>
+<td>8.5</td>
+<td>9 April 2024</td>
+<td>[8.5 release announcements](/reference/announcements-release-notes/850/850-announcements.md) / [8.5 release notes](/reference/announcements-release-notes/850/850-release-notes.md)</td>
+<td>14 October 2025</td>
+</tr>
+</table>
 
 ## Release announcements
 
@@ -24,18 +46,16 @@ Release announcements include:
 - Changes in supported environments (updates regarding OpenJDK, Spring Boot, Elasticsearch, Keycloak, Amazon OpenSearch, Docker tags, Helm chart versions, and so on).
 - Key changes (for example, deprecations and breaking changes).
 
-:::note
+:::info
 
-Updating your Camunda 8 application or server installation from one Camunda 8 version to the other with Self-Managed? Visit our [update guides](/self-managed/components/components-upgrade/introduction.md).
+- See [upgrade guides](/self-managed/components/components-upgrade/introduction.md) for guidance on upgrading your Self-Managed Camunda 8 application or server installation.
+- See [supported environments](/reference/supported-environments.md) for environments and technologies supported by Camunda 8.
 
-The [supported environments page](/reference/supported-environments.md) additionally lists browsers, operating systems, clients, deployment options, and component requirements, which are tested and supported for compatibility with Camunda 8.
 :::
 
 ## Release notes
 
-Release notes include:
-
-- New product features and enhancements
+Release notes include details of new product features and enhancements.
 
 Release notes are separated by minor release pages and include alphas released during the development cycle.
 
@@ -43,10 +63,12 @@ Release notes are separated by minor release pages and include alphas released d
 
 Technical changelogs for Camunda 8 are available on GitHub:
 
-- [Camunda 8 Core](https://github.com/camunda/camunda/releases)
-- [Connectors](https://github.com/camunda/connectors/releases)
-- [Camunda Helm chart](https://github.com/camunda/camunda-platform-helm/releases)
-- [Desktop Modeler](https://github.com/camunda/camunda-modeler/releases)
+| Changelog          | Repository                                                                                                     |
+| :----------------- | :------------------------------------------------------------------------------------------------------------- |
+| Camunda 8 Core     | [github.com/camunda/camunda/releases](https://github.com/camunda/camunda/releases)                             |
+| Connectors         | [github.com/camunda/connectors/releases](https://github.com/camunda/connectors/releases)                       |
+| Camunda Helm chart | [github.com/camunda/camunda-platform-helm/releases](https://github.com/camunda/camunda-platform-helm/releases) |
+| Desktop Modeler    | [github.com/camunda/camunda-modeler/releases](https://github.com/camunda/camunda-modeler/releases)             |
 
 ## Release policy
 

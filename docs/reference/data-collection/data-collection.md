@@ -7,7 +7,7 @@ description: "Learn which telemetry data is collected, how Camunda ensures priva
 import AnalyticsImg from './../img/analytics.png';
 import CookiePrefsImg from './../img/cookie-preferences.png';
 
-Camunda collects a variety of telemetry data to evaluate contractual usage, provide a better user experience, and improve its products.
+Camunda collects telemetry data to evaluate contractual usage, provide a better user experience, and improve its products.
 
 ## About data collection
 
