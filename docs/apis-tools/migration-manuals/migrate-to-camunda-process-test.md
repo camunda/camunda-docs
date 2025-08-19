@@ -567,7 +567,7 @@ CPT offers a similar utility via the [CamundaProcessTestContext](/apis-tools/tes
 - `waitForIdleState(duration)`
 - `waitForBusyState(duration)`
 
-ZPT uses these utilities to handle Camunda's asynchronous processing—for instance, to wait until a process instance has processed all commands before asserting its state or before advancing time to trigger a BPMN timer event. CPT does not require these utilities because it provides [blocking assertions](/apis-tools/testing/assertions.md) that wait until the expected condition is fulfilled.
+CPT does not require these utilities because it provides [blocking assertions](/apis-tools/testing/assertions.md) that wait until the expected condition is fulfilled.
 
 ```java
 // ZPT
