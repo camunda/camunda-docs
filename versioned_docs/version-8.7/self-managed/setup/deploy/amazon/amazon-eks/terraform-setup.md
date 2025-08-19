@@ -722,7 +722,6 @@ Running these commands will clean up both the job and the secret, ensuring that 
 </TabItem>
 </Tabs>
 
-
 ### Accessing internal infrastructure
 
 :::warning Not recommended in production
@@ -738,42 +737,41 @@ You can use a temporary pod as a **“jumphost”** to tunnel traffic to these c
 ---
 
 <details>
-<summary>Generic approach using a socat pod</summary>
-
+<summary>Generic approach using a jump host</summary>
 
 0. **Component connection details**
 
-   | Component            | Remote Host        | Remote Port    | Local Port     |
-   | -------------------- | ------------------ | -------------- | -------------- |
-   | OpenSearch dashboard | `$OPENSEARCH_HOST` | 443            | 9200           |
-   | Aurora PostgreSQL    | `$AURORA_ENDPOINT` | `$AURORA_PORT` | `$AURORA_PORT` |
+| Component            | `REMOTE_HOST`      | `REMOTE_PORT`  | `LOCAL_PORT` |
+| -------------------- | ------------------ | -------------- | ------------ |
+| OpenSearch dashboard | `$OPENSEARCH_HOST` | `443`          | `9200`       |
+| Aurora PostgreSQL    | `$AURORA_ENDPOINT` | `$AURORA_PORT` | `5432`       |
 
+Export `REMOTE_HOST`, `REMOTE_PORT`, and `LOCAL_PORT` with the component-specific values.
 
 1. **Run a socat pod to create a TCP tunnel**
 
-   Replace `<LOCAL_PORT>`, `<REMOTE_HOST>`, and `<REMOTE_PORT>` with the component-specific values.
-
    ```bash
    kubectl --namespace $CAMUNDA_NAMESPACE run my-jump-pod -it \
-     --image=alpine/socat \
-     --tty --rm \
-     --expose=true --port=<REMOTE_PORT> \
-     tcp-listen:<REMOTE_PORT>,fork,reuseaddr \
-     tcp-connect:<REMOTE_HOST>:<REMOTE_PORT>
+   --image=alpine/socat \
+   --tty --rm \
+   --restart=Never \
+   --expose=true --port=$REMOTE_PORT -- \
+   tcp-listen:$REMOTE_PORT,fork,reuseaddr \
+   tcp-connect:$REMOTE_HOST:$REMOTE_PORT
    ```
 
    :::tip How it works
-   [`socat`](http://www.dest-unreach.org/socat/) (*SOcket CAT*) is a command-line tool that relays data between two network endpoints.
+   [socat](http://www.dest-unreach.org/socat/) (_SOcket CAT_) is a command-line tool that relays data between two network endpoints.
 
    In this command:
 
-   * `tcp-listen:<REMOTE_PORT>,fork,reuseaddr` → Listens on the specified port in the pod and can handle multiple connections.
-   * `tcp-connect:<REMOTE_HOST>:<REMOTE_PORT>` → Forwards all incoming traffic to the internal component endpoint.
+   - `tcp-listen:$REMOTE_PORT,fork,reuseaddr` → Listens on the specified port in the pod and can handle multiple connections.
+   - `tcp-connect:$REMOTE_HOST:$REMOTE_PORT` → Forwards all incoming traffic to the internal component endpoint.
 
    Combined with `kubectl port-forward` (step 2), the flow becomes:
 
    ```
-   Local Client → localhost:<LOCAL_PORT> → port-forward → my-jump-pod:<REMOTE_PORT> → socat → Remote Component
+   Local Client → localhost:$LOCAL_PORT → port-forward → my-jump-pod:$REMOTE_PORT → socat → Remote Component
    ```
 
    This lets you securely reach internal components without exposing them publicly.
@@ -782,7 +780,7 @@ You can use a temporary pod as a **“jumphost”** to tunnel traffic to these c
 2. **Port-forward the pod to your local machine**
 
    ```bash
-   kubectl port-forward --namespace $CAMUNDA_NAMESPACE pod/my-jump-pod <LOCAL_PORT>:<REMOTE_PORT>
+   kubectl port-forward --namespace $CAMUNDA_NAMESPACE pod/my-jump-pod $LOCAL_PORT:$REMOTE_PORT
    ```
 
 3. **Connect to the component**
@@ -790,7 +788,7 @@ You can use a temporary pod as a **“jumphost”** to tunnel traffic to these c
    _OpenSearch example:_
 
    ```bash
-   https://localhost:<LOCAL_PORT>/_dashboards
+   https://localhost:$LOCAL_PORT/_dashboards
    ```
 
    Accept the insecure connection if prompted.
@@ -798,7 +796,7 @@ You can use a temporary pod as a **“jumphost”** to tunnel traffic to these c
    _Aurora PostgreSQL example:_
 
    ```bash
-   PGPASSWORD=$AURORA_PASSWORD psql -h localhost -p <LOCAL_PORT> -U $AURORA_USERNAME -d <DATABASE>
+   PGPASSWORD=$AURORA_PASSWORD psql -h localhost -p $LOCAL_PORT -U $AURORA_USERNAME -d <DATABASE>
    ```
 
 </details>
