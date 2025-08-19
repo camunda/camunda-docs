@@ -9,6 +9,7 @@ module.exports = {
       },
       items: [
         "guides/getting-started-example",
+        "guides/getting-started-agentic-orchestration",
         "guides/orchestrate-human-tasks",
         "guides/orchestrate-apis",
       ],
@@ -929,6 +930,7 @@ module.exports = {
           "Camunda Spring Boot Starter": [
             "apis-tools/spring-zeebe-sdk/getting-started",
             "apis-tools/spring-zeebe-sdk/configuration",
+            "apis-tools/spring-zeebe-sdk/properties-reference",
           ],
         },
         "apis-tools/node-js-sdk",
