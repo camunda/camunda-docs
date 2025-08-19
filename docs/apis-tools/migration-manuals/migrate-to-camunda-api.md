@@ -1,6 +1,7 @@
 ---
 id: migrate-to-camunda-api
 title: Migrate to the Orchestration Cluster API
+sidebar_label: "Orchestration Cluster API"
 description: "Migrate from Camunda's V1 component REST APIs to the V2 Orchestration Cluster REST API to interact with Camunda 8 clusters, activate jobs, and run user task state operations."
 ---
 
@@ -56,7 +57,6 @@ To successfully migrate to the V2 Orchestration Cluster API, perform the followi
 <TabItem value='query-endpoints'>
 
 - Unified search request structure.
-
   - Attributes `filter`, `page`, and `sort` on root level.
   - Endpoint-specific filter attributes in the filter object, not at the root level.
   - Pagination information in the `page` object. For example, the attributes `from`, `limit`, `before`, and `after`.

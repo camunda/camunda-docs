@@ -1,6 +1,7 @@
 ---
 id: migrate-component-apis
 title: Migrate Component V1 APIs
+sidebar_label: "Component V1 APIs"
 description: "Making necessary changes to continue using Camunda's V1 component REST APIs."
 ---
 
