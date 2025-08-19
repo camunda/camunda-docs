@@ -44,7 +44,7 @@ The following configurations apply to all components within the Orchestration Cl
   <TabItem value="helm" label="Helm values">
 
 | Helm value key                                                 | Description                                                                            | Default value |
-|----------------------------------------------------------------| -------------------------------------------------------------------------------------- | ------------- |
+| -------------------------------------------------------------- | -------------------------------------------------------------------------------------- | ------------- |
 | `global.security.authentication.method`                        | The authentication method to use. Options: `basic`, `oidc`.                            | `basic`       |
 | `global.security.authentication.authenticationRefreshInterval` | The refresh interval for the authentication object of a session.                       | `PT30S`       |
 | `global.security.authentication.unprotectedApi`                | If the API can be used without authentication.                                         | `false`       |
