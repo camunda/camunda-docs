@@ -9,7 +9,7 @@ Camunda publishes security notices after fixes are available.
 
 ## Report a security issue or vulnerability
 
-Report security vulnerabilities to Camunda immediately following the instructions at [Camunda Security](https://camunda.com/security#report-a-vulnerability).
+Report security vulnerabilities to Camunda immediately, following the instructions at [Camunda Security](https://camunda.com/security#report-a-vulnerability).
 
 :::info
 To learn more about security at Camunda, including our security policy, security issue management, and more, see [Camunda.com/security](https://camunda.com/security).
