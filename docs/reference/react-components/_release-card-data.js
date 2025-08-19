@@ -65,7 +65,7 @@ export const securityCards = [
     description: "Camunda source code access and third-party dependencies.",
   },
   {
-    link: "./data-collection/data-collection/",
+    link: "./data-collection/",
     title: "Data collection",
     image: IconDataImg,
     description: "Learn more about Camunda data collection and usage metrics.",
