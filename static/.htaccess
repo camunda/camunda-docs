@@ -148,6 +148,15 @@ RewriteRule ^optimize/3.11.0/self-managed/(.*)$ /docs/8.3/self-managed/$1 [R=301
 #   8.8: content moves introduced prior to the release of version 8.8.
 #---------------------------------------------------------------------------------
 
+# Orchestration cluster revamp
+RewriteRule ^docs/next/self-managed/components/orchestration-cluster/operate/data-retention/?$ /docs/next/self-managed/components/orchestration-cluster/core-settings/concepts/data-retention/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/orchestration-cluster/operate/operate-authentication/?$ /docs/next/self-managed/components/orchestration-cluster/core-settings/concepts/authentication/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/orchestration-cluster/operate/schema-and-migration/?$ /docs/next/self-managed/components/orchestration-cluster/core-settings/concepts/schema-and-migration/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/orchestration-cluster/operate/usage-metrics/?$ /docs/next/self-managed/components/orchestration-cluster/core-settings/concepts/usage-metrics/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/orchestration-cluster/tasklist/data-retention/?$ /docs/next/self-managed/components/orchestration-cluster/core-settings/concepts/data-retention/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/orchestration-cluster/tasklist/tasklist-authentication/?$ /docs/next/self-managed/components/orchestration-cluster/core-settings/concepts/authentication/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/orchestration-cluster/tasklist/usage-metrics/?$ /docs/next/self-managed/components/orchestration-cluster/core-settings/concepts/usage-metrics/ [R=301,L]
+
 # Self-Managed Restructure
 # Setup
 RewriteRule ^docs/next/self-managed/setup/deploy/amazon/amazon-eks/?$ /docs/next/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/ [R=301,L]
