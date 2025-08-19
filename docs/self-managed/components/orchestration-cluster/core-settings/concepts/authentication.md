@@ -4,6 +4,9 @@ title: Authentication and authorization
 description: "Overview of authentication and authorization for Orchestration Cluster components."
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 Orchestration Cluster components provide multiple ways to authenticate:
 
 1. User information stored in [Elasticsearch](#user-in-elasticsearch)
@@ -52,7 +55,9 @@ Add additional users directly to Elasticsearch indices (e.g., `*-user-<version>_
 
 User restrictions are not supported with Elasticsearch. For user restrictions, use Identity.
 
-</TabItem> <TabItem value="ldap">
+</TabItem>
+
+<TabItem value="ldap">
 
 ## Enable LDAP
 
@@ -89,7 +94,9 @@ Additional parameters:
 
 Active Directory configuration is applied only if `ldap.domain` is provided.
 
-</TabItem> <TabItem value="identity">
+</TabItem>
+
+<TabItem value="identity">
 
 ## Enable Identity
 
