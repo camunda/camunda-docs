@@ -313,7 +313,8 @@ Zeebe Process Test is **scheduled for removal in the 8.10 release**.
 
 For more information, refer to:
 
-- [Migrate to Camunda Process Test](../../../apis-tools/migration-manuals/migrate-to-camunda-process-test.md).
+- [Migrate to Camunda Process Test](../../../apis-tools/migration-manuals/migrate-to-camunda-process-test.md)
+- [Introducing Camunda Process Test—The Next Generation Testing Library](https://camunda.com/blog/2025/04/camunda-process-test-the-next-generation-testing-library/)
 
 ### Camunda 8 Self-Managed
 
