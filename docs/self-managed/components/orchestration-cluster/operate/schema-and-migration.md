@@ -18,7 +18,7 @@ Index names follow the defined pattern below:
 
 ```
 
-Here, `operate-index-prefix` defines the prefix for index name (default `operate`), `datatype` defines which data is stored in the index (e.g. `user`, `variable` etc.,) `schemaversion` represents the index schema version, and `date` represents the finished date of the archived data. See [data retention](data-retention.md).
+Here, `operate-index-prefix` defines the prefix for index name (default `operate`), `datatype` defines which data is stored in the index (e.g. `user`, `variable` etc.,) `schemaversion` represents the index schema version, and `date` represents the finished date of the archived data. See [data retention](/self-managed/components/orchestration-cluster/core-settings/concepts/data-retention.md).
 
 ## Data migration
 

@@ -60,7 +60,7 @@ The unique identifier depends on the authentication method used to login to Task
 - Default Basic Auth (Elasticsearch): `username`
 - IAM: `username`
 
-These assignees are not related to user restrictions, which is related to the visibility of the task in Tasklist for Self-Managed. For more information, see [Tasklist Authentication](/self-managed/components/orchestration-cluster/tasklist/tasklist-authentication.md).
+These assignees are not related to user restrictions, which is related to the visibility of the task in Tasklist for Self-Managed. For more information, see [Tasklist Authentication](/self-managed/components/orchestration-cluster/core-settings/concepts/authentication.md).
 
 :::note
 For example, say you log into Tasklist using Camunda 8 login with email using your email address `foo@bar.com`. Every time a user task activates with `assignee` set to value `foo@bar.com`, Tasklist automatically assigns it to you. You'll be able to find your new task under the task dropdown option `Assigned to me`.

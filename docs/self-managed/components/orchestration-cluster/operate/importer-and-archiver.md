@@ -8,7 +8,7 @@ Operate consists of three modules:
 
 - **Webapp**: Contains the UI and operation executor functionality.
 - **Importer**: Responsible for importing data from Zeebe.
-- **Archiver**: Responsible for archiving "old" data (finished process instances and user operations.) See [data retention](data-retention.md).
+- **Archiver**: Responsible for archiving "old" data (finished process instances and user operations.) See [data retention](/self-managed/components/orchestration-cluster/core-settings/concepts/data-retention.md).
 
 ## Configuration
 
