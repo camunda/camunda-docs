@@ -110,6 +110,61 @@ As of the 8.8 release, Camunda is compatible with Amazon OpenSearch 2.17+ and no
 
 ## Key changes
 
+### Connector SDK
+
+#### Core SDK restructuring
+
+The internal structure of the Connector SDK has been updated to make the Core SDK more lightweight, with **no dependency on the Camunda client**.
+
+Some classes and interfaces have been relocated, which means external connectors may need to be **recompiled** before they can be used with Connector runtime **8.8**.
+
+This change affects the following classes and interfaces previously located in the `io.camunda.document` package:
+
+```
+DocumentFactory
+Document
+DocumentLinkParameters
+```
+
+These classes and interfaces are now located in the `io.camunda.connector.api.document` package.
+
+Additionally, the following classes and interfaces from the official Camunda Java client (`io.camunda.client.api.response`)  
+have been **replicated** in the Connector SDK and are now located in the `io.camunda.connector.api.document` package:
+
+```
+DocumentMetadata
+DocumentReference
+```
+
+#### Changes to activity logging in inbound connectors
+
+Connector SDK **8.8** introduces a new way to [log activities](/components/console/manage-clusters/manage-connectors.md#activity-log) in inbound connectors.
+
+Objects of the `InboundConnectorContext` class now provide a new overloaded method:
+
+```java
+void log(Consumer<ActivityBuilder> activityBuilderConsumer)
+```
+
+This method works with the new `ActivityBuilder` interface.
+
+**Usage example:**
+
+```json
+connector.context()
+    .log(
+        activity ->
+            activity
+            .withSeverity(Severity.INFO)
+            .withTag("Consumer")
+            .withMessage("Successfully processed message")
+            .andReportHealth(Health.up()));
+```
+
+The old builder pattern (`Activity.newBuilder()`) is **deprecated** and will be removed in upcoming releases.
+
+The new `ActivityBuilder` interface provides a more flexible and fluent API for logging activities in inbound connectors.
+
 ### Removed: Starter plan <span class="badge badge--long" title="This feature affects SaaS">SaaS</span>
 
 The Camunda SaaS Starter plan is no longer available.
@@ -251,52 +306,3 @@ The `CamundaClient` replaces the `ZeebeClient`, offering the same functionality 
 | Refactored properties and environment variables | <p><ul><li><p>All old Java client property names are refactored to more general ones. For example, `zeebe.client.tenantId` to `camunda.client.tenantId`.</p></li><li><p>Similarly, environment variables are renamed following the same concept: `ZEEBE_REST_ADDRESS` to `CAMUNDA_REST_ADDRESS`.</p></li></ul></p> |
 | Artifact ID change                              | The `artifactId` changes from `zeebe-client-java` to `camunda-client-java`.                                                                                                                                                                                                                                        |
 | Command changes                                 | The method `newUserCreateCommand()` is changed to `newCreateUserCommand()` in `CamundaClient`.                                                                                                                                                                                                                     |
-
-### Connector SDK
-
-#### Core SDK restructuring
-
-The internal structure of the Connector SDK has been updated to make the Core SDK more lightweight
-(no dependency on the Camunda client). Some classes and interfaces have been relocated, which may
-require external connectors to be recompiled before they can be used with the Connector runtime 8.8.
-
-This affected the following classes and interfaces previously located in the
-`io.camunda.document` package:
-
-```
-DocumentFactory
-Document
-DocumentLinkParameters
-```
-
-These classes and interfaces are now located in the `io.camunda.connector.api.document` package.
-
-The following classes and interfaces from the official Camunda Java client (package `io.camunda.client.api.response`)
-have been replicated in the Connector SDK and are now located in the `io.camunda.connector.api.document` package:
-
-```
-DocumentMetadata
-DocumentReference
-```
-
-#### Changes to activity logging in inbound connectors
-
-Connector SDK 8.8 introduces a new way to [log activities](/components/console/manage-clusters/manage-connectors.md#activity-log)
-in inbound connectors. Objects of class `InboundConnectorContext` now provide a new overloaded method
-`void log(Consumer<ActivityBuilder> activityBuilderConsumer)`, along with the new `ActivityBuilder` interface.
-
-**Usage example:**
-
-```json
-connector.context()
-    .log(
-        activity ->
-            activity
-            .withSeverity(Severity.INFO)
-            .withTag("Consumer")
-            .withMessage("Successfully processed message")
-            .andReportHealth(Health.up()));
-```
-
-The old builder pattern (`Activity.newBuilder()`) is deprecated and marked for removal in upcoming releases.
-The new `ActivityBuilder` interface provides a more flexible and fluent API for logging activities in inbound connectors.
