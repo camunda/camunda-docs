@@ -34,17 +34,79 @@ This section helps you get up and running in minutes. To begin using the Orchest
 - **Authentication**
   - For local development, authentication is optional. For production or shared environments, authentication is required. See [Authentication](./orchestration-cluster-api-rest-authentication.md) for supported methods and setup instructions.
 - **A client to send API requests**
-  - Use the [Postman Collection](https://www.postman.com/camundateam/camunda-8-postman/collection/apl78x9/camunda-8-api-rest) for quick testing, or interact programmatically using the [Java Client](/apis-tools/java-client/index.md) or [Spring SDK](/apis-tools/spring-zeebe-sdk/getting-started.md).
+  - Use [Swagger](../orchestration-cluster-api-rest-swagger) for quick testing, or interact programmatically using the [Java Client](/apis-tools/java-client/index.md) or [Spring SDK](/apis-tools/spring-zeebe-sdk/getting-started.md).
 
 Once you’re set up, try your first call using [Postman](https://www.postman.com/camundateam/camunda-8-postman/request/en495q6/get-cluster-typology) or curl: [Get cluster topology](./specifications/get-topology.api.mdx) to confirm your setup is working.
 
-## Explore the API
+## Explore the Orchestration Cluster API
 
-- Visit the [interactive Orchestration Cluster API Explorer](./specifications/orchestration-cluster-rest-api.info.mdx) to:
-  - Browse available endpoints
-  - See request and response examples
-  - Check code samples
-- Prefer code-first? [Download the OpenAPI spec](https://github.com/camunda/camunda/blob/main/zeebe/gateway-protocol/src/main/proto/rest-api.yaml) to generate your own client or inspect the full schema.
+<div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '2rem'}}>
+
+<div style={{border: '1px solid #e5e7eb', borderRadius: '12px', padding: '1.5rem', backgroundColor: '#ffffff', boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)'}}>
+  <div style={{display: 'flex', alignItems: 'center', marginBottom: '1rem'}}>
+    <span style={{fontSize: '1.5rem', marginRight: '0.75rem'}}>⚙️</span>
+    <div>
+      <h3 style={{fontSize: '1.125rem', fontWeight: '600', margin: '0', color: '#111827'}}>Interactive REST API Explorer</h3>
+      <div style={{width: '40px', height: '2px', backgroundColor: '#e5e7eb', marginTop: '0.5rem'}}></div>
+    </div>
+  </div>
+  <p style={{color: '#6b7280', marginBottom: '1rem', lineHeight: '1.5'}}>
+    View the API specifications, available endpoints with examples of requests and responses, and code samples.
+  </p>
+  <a href="https://docs.camunda.io/docs/next/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-rest-api/" style={{display: 'inline-block', color: '#2563eb', textDecoration: 'none', fontWeight: '500'}}>
+    Explore the API →
+  </a>
+</div>
+
+<div style={{border: '1px solid #e5e7eb', borderRadius: '12px', padding: '1.5rem', backgroundColor: '#ffffff', boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)'}}>
+  <div style={{display: 'flex', alignItems: 'center', marginBottom: '1rem'}}>
+    <span style={{fontSize: '1.5rem', marginRight: '0.75rem'}}>💡</span>
+    <div>
+      <h3 style={{fontSize: '1.125rem', fontWeight: '600', margin: '0', color: '#111827'}}>Try REST API with Swagger</h3>
+      <div style={{width: '40px', height: '2px', backgroundColor: '#e5e7eb', marginTop: '0.5rem'}}></div>
+    </div>
+  </div>
+  <p style={{color: '#6b7280', marginBottom: '1rem', lineHeight: '1.5'}}>
+    Review and try the REST API endpoints with Swagger UI.
+  </p>
+  <a href="../orchestration-cluster-api-rest-swagger" style={{display: 'inline-block', color: '#2563eb', textDecoration: 'none', fontWeight: '500'}}>
+    Try with Swagger →
+  </a>
+</div>
+
+<div style={{border: '1px solid #e5e7eb', borderRadius: '12px', padding: '1.5rem', backgroundColor: '#ffffff', boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)'}}>
+  <div style={{display: 'flex', alignItems: 'center', marginBottom: '1rem'}}>
+    <span style={{fontSize: '1.5rem', marginRight: '0.75rem'}}>📬</span>
+    <div>
+      <h3 style={{fontSize: '1.125rem', fontWeight: '600', margin: '0', color: '#111827'}}>Camunda 8 Postman</h3>
+      <div style={{width: '40px', height: '2px', backgroundColor: '#e5e7eb', marginTop: '0.5rem'}}></div>
+    </div>
+  </div>
+  <p style={{color: '#6b7280', marginBottom: '1rem', lineHeight: '1.5'}}>
+    Check out our collections of APIs, or read on for regular updates and upcoming projects.
+  </p>
+  <a href="https://www.postman.com/camundateam/camunda-8-postman/collection/apl78x9/camunda-8-api-rest" style={{display: 'inline-block', color: '#2563eb', textDecoration: 'none', fontWeight: '500'}}>
+    View Postman Collection →
+  </a>
+</div>
+
+<div style={{border: '1px solid #e5e7eb', borderRadius: '12px', padding: '1.5rem', backgroundColor: '#ffffff', boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)'}}>
+  <div style={{display: 'flex', alignItems: 'center', marginBottom: '1rem'}}>
+    <span style={{fontSize: '1.5rem', marginRight: '0.75rem'}}>📋</span>
+    <div>
+      <h3 style={{fontSize: '1.125rem', fontWeight: '600', margin: '0', color: '#111827'}}>OpenAPI Specification</h3>
+      <div style={{width: '40px', height: '2px', backgroundColor: '#e5e7eb', marginTop: '0.5rem'}}></div>
+    </div>
+  </div>
+  <p style={{color: '#6b7280', marginBottom: '1rem', lineHeight: '1.5'}}>
+    Prefer code-first? Check out the OpenAPI specification to generate your own client or inspect the full schema.
+  </p>
+  <a href="https://github.com/camunda/camunda/blob/main/zeebe/gateway-protocol/src/main/proto/rest-api.yaml" style={{display: 'inline-block', color: '#2563eb', textDecoration: 'none', fontWeight: '500'}}>
+    Download OpenAPI Spec →
+  </a>
+</div>
+
+</div>
 
 If you're just getting started, try these next steps:
 
