@@ -67,6 +67,7 @@ with the following JSON request body:
   "name": "<the user's full name>",
   "email": "<the user's email address>"
 }
+```
 
 This endpoint is only available as long as **no user is assigned to the `admin` role**.
 
