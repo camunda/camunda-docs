@@ -23,7 +23,7 @@ All data present in Elasticsearch (from both **main** and **dated** indices) is 
 
 ## Archive period
 
-By default, the time between a process instance finishing and being moved to a dated index is one hour. This can be modified using the [waitPeriodBeforeArchiving](importer-and-archiver.md#archive-period) configuration parameter.
+By default, the time between a process instance finishing and being moved to a dated index is one hour. This can be modified using the [waitPeriodBeforeArchiving](/self-managed/components/orchestration-cluster/operate/importer-and-archiver.md#archive-period) configuration parameter.
 
 ## Data cleanup
 
