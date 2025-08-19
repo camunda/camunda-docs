@@ -14,7 +14,7 @@ Properties for the Camunda client.
 <table>
 <thead>
   <tr>
-    <th>Property</th>
+    <th>Configuration Property/Environment Variable</th>
     <th>Type</th>
     <th>Default value</th>
     <th>Description</th>
@@ -271,7 +271,7 @@ Properties for authenticating the Camunda client.
 <table>
 <thead>
   <tr>
-    <th>Property</th>
+    <th>Configuration Property/Environment Variable</th>
     <th>Type</th>
     <th>Default value</th>
     <th>Description</th>
@@ -560,7 +560,7 @@ Properties for OIDC authentication using a client assertion instead of a client 
 <table>
 <thead>
   <tr>
-    <th>Property</th>
+    <th>Configuration Property/Environment Variable</th>
     <th>Type</th>
     <th>Default value</th>
     <th>Description</th>
@@ -641,7 +641,7 @@ Properties for connecting the Camunda client to SaaS. These are used to compose 
 <table>
 <thead>
   <tr>
-    <th>Property</th>
+    <th>Configuration Property/Environment Variable</th>
     <th>Type</th>
     <th>Default value</th>
     <th>Description</th>
@@ -722,7 +722,7 @@ Properties for automatic deployment at startup.
 <table>
 <thead>
   <tr>
-    <th>Property</th>
+    <th>Configuration Property/Environment Variable</th>
     <th>Type</th>
     <th>Default value</th>
     <th>Description</th>
@@ -755,7 +755,7 @@ Global default properties for job workers registered to the Camunda client.
 <table>
 <thead>
   <tr>
-    <th>Property</th>
+    <th>Configuration Property/Environment Variable</th>
     <th>Type</th>
     <th>Default value</th>
     <th>Description</th>
@@ -998,7 +998,7 @@ Properties for overriding settings of individual job workers registered to the C
 :::caution
 The following properties are deprecated. See the replacement property and related hints.
 
-All replacements are automatically mapped unless stated otherwise. The client logs these mappings at startup.
+The deprecated properties are still effective if their replacement is not used yet. The SDK hints on the usage of deprecated properties by logging warn statements during startup.
 :::
 
 ### `camunda.client`
@@ -1008,7 +1008,7 @@ Deprecated properties for the Camunda client.
 <table>
 <thead>
   <tr>
-    <th>Property</th>
+    <th>Configuration Property/Environment Variable</th>
     <th>Type</th>
     <th>Replacement</th>
     <th>Hint</th>
@@ -1067,7 +1067,7 @@ Deprecated properties for authenticating the Camunda client.
 <table>
 <thead>
   <tr>
-    <th>Property</th>
+    <th>Configuration Property/Environment Variable</th>
     <th>Type</th>
     <th>Replacement</th>
     <th>Hint</th>
@@ -1098,7 +1098,7 @@ Deprecated properties for connecting the Camunda client to SaaS. These are used 
 <table>
 <thead>
   <tr>
-    <th>Property</th>
+    <th>Configuration Property/Environment Variable</th>
     <th>Type</th>
     <th>Replacement</th>
     <th>Hint</th>
@@ -1129,7 +1129,7 @@ Deprecated properties for identity settings.
 <table>
 <thead>
   <tr>
-    <th>Property</th>
+    <th>Configuration Property/Environment Variable</th>
     <th>Type</th>
     <th>Replacement</th>
     <th>Hint</th>
@@ -1210,7 +1210,7 @@ Deprecated properties for Zeebe client settings.
 <table>
 <thead>
   <tr>
-    <th>Property</th>
+    <th>Configuration Property/Environment Variable</th>
     <th>Type</th>
     <th>Replacement</th>
     <th>Hint</th>
@@ -1437,7 +1437,7 @@ Deprecated default properties for Zeebe job workers.
 <table>
 <thead>
   <tr>
-    <th>Property</th>
+    <th>Configuration Property/Environment Variable</th>
     <th>Type</th>
     <th>Replacement</th>
     <th>Hint</th>
@@ -1650,7 +1650,7 @@ Deprecated deployment properties for Zeebe.
 <table>
 <thead>
   <tr>
-    <th>Property</th>
+    <th>Configuration Property/Environment Variable</th>
     <th>Type</th>
     <th>Replacement</th>
     <th>Hint</th>
@@ -1685,7 +1685,7 @@ Deprecated common client properties.
 <table>
 <thead>
   <tr>
-    <th>Property</th>
+    <th>Configuration Property/Environment Variable</th>
     <th>Type</th>
     <th>Replacement</th>
     <th>Hint</th>
@@ -1816,7 +1816,7 @@ Deprecated Keycloak-specific properties.
 <table>
 <thead>
   <tr>
-    <th>Property</th>
+    <th>Configuration Property/Environment Variable</th>
     <th>Type</th>
     <th>Replacement</th>
     <th>Hint</th>
@@ -1881,7 +1881,7 @@ Deprecated Zeebe client properties.
 <table>
 <thead>
   <tr>
-    <th>Property</th>
+    <th>Configuration Property/Environment Variable</th>
     <th>Type</th>
     <th>Replacement</th>
     <th>Hint</th>
@@ -2000,7 +2000,7 @@ Deprecated Zeebe broker properties.
 <table>
 <thead>
   <tr>
-    <th>Property</th>
+    <th>Configuration Property/Environment Variable</th>
     <th>Type</th>
     <th>Replacement</th>
     <th>Hint</th>
@@ -2073,7 +2073,7 @@ Deprecated Zeebe cloud connection properties.
 <table>
 <thead>
   <tr>
-    <th>Property</th>
+    <th>Configuration Property/Environment Variable</th>
     <th>Type</th>
     <th>Replacement</th>
     <th>Hint</th>
@@ -2218,7 +2218,7 @@ Deprecated Zeebe job worker properties.
 <table>
 <thead>
   <tr>
-    <th>Property</th>
+    <th>Configuration Property/Environment Variable</th>
     <th>Type</th>
     <th>Replacement</th>
     <th>Hint</th>
@@ -2263,7 +2263,7 @@ Deprecated Zeebe message properties.
 <table>
 <thead>
   <tr>
-    <th>Property</th>
+    <th>Configuration Property/Environment Variable</th>
     <th>Type</th>
     <th>Replacement</th>
     <th>Hint</th>
@@ -2308,7 +2308,7 @@ Deprecated Zeebe security properties.
 <table>
 <thead>
   <tr>
-    <th>Property</th>
+    <th>Configuration Property/Environment Variable</th>
     <th>Type</th>
     <th>Replacement</th>
     <th>Hint</th>
@@ -2369,7 +2369,7 @@ Deprecated Zeebe job worker properties.
 <table>
 <thead>
   <tr>
-    <th>Property</th>
+    <th>Configuration Property/Environment Variable</th>
     <th>Type</th>
     <th>Replacement</th>
     <th>Hint</th>
