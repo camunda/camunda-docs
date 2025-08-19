@@ -20,7 +20,4 @@ For more information on development clusters in the Starter or Professional plan
 
 ## Additional information
 
-The following resources in our [Self-Managed documentation](../../self-managed/about-self-managed.md) describe these data retention concepts in more detail:
-
-- [Operate data retention](/self-managed/components/orchestration-cluster/operate/data-retention.md)
-- [Tasklist data retention](/self-managed/components/orchestration-cluster/tasklist/data-retention.md)
+Visit the [Self-Managed documentation](/self-managed/components/orchestration-cluster/core-settings/concepts/data-retention.md), which describes these data retention concepts in more detail.
