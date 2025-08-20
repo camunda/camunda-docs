@@ -44,6 +44,17 @@ The following requirements apply for IDP application clusters:
 To learn more about storing, tracking, and managing documents in Camunda 8, see [document handling](/components/document-handling/getting-started.md).
 :::
 
+### Identity {#identity}
+
+If you are using an identity-enabled cluster, the following authorizations are required for IDP operations:
+
+| Resource type      | Permission              | Owner type | Owner          | Description                                                          |
+| :----------------- | :---------------------- | :--------- | :------------- | :------------------------------------------------------------------- |
+| DOCUMENT           | READ                    | Role       | Connectors     | Required for the idp connector to read the document from the cluster |
+| DOCUMENT           | CREATE                  | User       | `user's email` | Required to upload documents to the cluster during IDP extraction    |
+| RESOURCE           | CREATE                  | User       | `user's email` | Required to deploy process instances                                 |
+| PROCESS_DEFINITION | CREATE_PROCESS_INSTANCE | User       | `user's email` | Required to start process instances                                  |
+
 ## Configure IDP
 
 Once you have completed all the required prerequisites, configure IDP in a suitable `dev` cluster as follows:
