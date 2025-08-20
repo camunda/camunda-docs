@@ -148,6 +148,9 @@ RewriteRule ^optimize/3.11.0/self-managed/(.*)$ /docs/8.3/self-managed/$1 [R=301
 #   8.8: content moves introduced prior to the release of version 8.8.
 #---------------------------------------------------------------------------------
 
+# Orchestration cluster restructure
+RewriteRule ^docs/next/self-managed/components/orchestration-cluster/identity/configuration/?$ /docs/next/self-managed/components/orchestration-cluster/core-settings/configuration/properties/ [R=301,L]
+
 # Self-Managed Restructure
 # Setup
 RewriteRule ^docs/next/self-managed/setup/deploy/amazon/amazon-eks/?$ /docs/next/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/ [R=301,L]
