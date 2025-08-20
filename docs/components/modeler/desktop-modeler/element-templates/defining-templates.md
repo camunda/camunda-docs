@@ -550,6 +550,40 @@ When `zeebe:assignmentDefinition` is used, `zeebe:userTask` must be set on the s
 
 :::
 
+#### `zeebe:taskSchedule`
+
+| **Binding `type`**          | `zeebe:taskSchedule`                                                                            |
+| --------------------------- | ----------------------------------------------------------------------------------------------- |
+| **Valid property `type`'s** | `String`<br />`Text`<br />`Hidden`<br />`Dropdown`                                              |
+| **Binding parameters**      | `property`: The name of the property. <br/> Supported properties: `dueDate` and `followUpDate`. |
+| **Mapping result**          | `<zeebe:taskSchedule [property]="[userInput]" />`                                               |
+
+The `zeebe:taskSchedule` binding allows you to configure the [user task scheduling](../../../bpmn/user-tasks/#scheduling).
+
+:::note
+
+When `zeebe:taskSchedule` is used, `zeebe:userTask` must be set on the same element.
+If the template sets a static `value` for any property, it needs to be defined as ISO 8601 combined date and time representation.
+
+:::
+
+#### `zeebe:priorityDefinition`
+
+| **Binding `type`**          | `zeebe:priorityDefinition`                                                                                                                    |
+| --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Valid property `type`'s** | `Number`<br /> `String` (only with `feel` set to `required`) <br />`Text` (only with `feel` set to `required`) <br />`Hidden`<br />`Dropdown` |
+| **Binding parameters**      | `property`: The name of the property. <br/> Supported property: `priority`.                                                                   |
+| **Mapping result**          | `<zeebe:priorityDefinition [property]="[userInput]" />`                                                                                       |
+
+The `zeebe:priorityDefinition` binding allows you to configure the [user task priority](../../../bpmn/user-tasks/#define-user-task-priority).
+
+:::note
+
+When `zeebe:priorityDefinition` is used, `zeebe:userTask` must be set on the same element.
+If the template sets a static `value` for `priority`, it needs to be between 0 and 100.
+
+:::
+
 #### `zeebe:calledDecision`
 
 | **Binding `type`**          | `zeebe:calledDecision`                                                                                                            |
