@@ -94,213 +94,208 @@ You will need to make targeted configuration changes. The following sections out
 
 For detailed configuration options and advanced setup guidance, refer to each component’s documentation under the [components section](/self-managed/components/orchestration-cluster/overview.md).
 
+#### Datastore
+
+Depending on your chosen datastore, set the value to either `elasticsearch` or `opensearch`, and remove any fields that are not applicable to your selection.
+
+Additionally, if your security settings require authentication for the secondary datastore, you must configure both `username` and `password`. Otherwise, these fields should be omitted entirely.
+
+The following configuration references are based on the official component-specific documentation:
+
+- [Operate](/self-managed/components/orchestration-cluster/operate/operate-configuration.md#elasticsearch-or-opensearch)
+- [Tasklist](/self-managed/components/orchestration-cluster/tasklist/tasklist-configuration.md#elasticsearch-or-opensearch)
+- [Camunda Exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md#configuration)
+
 <Tabs>
+  <TabItem value="env" label="Environment variables">
 
-  <TabItem value="datastore" label="Datastore" default>
+**Operate – Elasticsearch or OpenSearch Connection**
 
-    Depending on your chosen datastore, set the value to either `elasticsearch` or `opensearch`, and remove any fields that are not applicable to your selection.
+This configuration defines how Operate connects to the secondary datastore (Elasticsearch or OpenSearch).
+It is also used by the legacy Zeebe exporter.
 
-    Additionally, if your security settings require authentication for the secondary datastore, you must configure both `username` and `password`. Otherwise, these fields should be omitted entirely.
+:::note
 
-    The following configuration references are based on the official component-specific documentation:
+In new setups, the old exporter is no longer in use. However, it must still be configured to avoid blocking execution during startup.
 
-    - [Operate](/self-managed/components/orchestration-cluster/operate/operate-configuration.md#elasticsearch-or-opensearch)
-    - [Tasklist](/self-managed/components/orchestration-cluster/tasklist/tasklist-configuration.md#elasticsearch-or-opensearch)
-    - [Camunda Exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md#configuration)
+:::
 
-    <Tabs>
-      <TabItem value="env" label="Environment variables">
+```bash
+CAMUNDA_OPERATE_DATABASE=elasticsearch|opensearch # defaults to elasticsearch
 
-      #### Operate – Elasticsearch or OpenSearch Connection
+# in case of Elasticsearch
+CAMUNDA_OPERATE_ELASTICSEARCH_URL=http://localhost:9200
+CAMUNDA_OPERATE_ELASTICSEARCH_USERNAME=
+CAMUNDA_OPERATE_ELASTICSEARCH_PASSWORD=
+CAMUNDA_OPERATE_ZEEBEELASTICSEARCH_URL=http://localhost:9200
+CAMUNDA_OPERATE_ZEEBEELASTICSEARCH_USERNAME=
+CAMUNDA_OPERATE_ZEEBEELASTICSEARCH_PASSWORD=
 
-      This configuration defines how Operate connects to the secondary datastore (Elasticsearch or OpenSearch).
-      It is also used by the legacy Zeebe exporter.
+# in case of OpenSearch
+CAMUNDA_OPERATE_OPENSEARCH_URL=http://localhost:9200
+CAMUNDA_OPERATE_OPENSEARCH_USERNAME=
+CAMUNDA_OPERATE_OPENSEARCH_PASSWORD=
+CAMUNDA_OPERATE_ZEEBEOPENSEARCH_URL=http://localhost:9200
+CAMUNDA_OPERATE_ZEEBEOPENSEARCH_USERNAME=
+CAMUNDA_OPERATE_ZEEBEOPENSEARCH_PASSWORD=
+```
 
-      :::note
+**Tasklist – Elasticsearch or OpenSearch Connection**
 
-      In new setups, the old exporter is no longer in use. However, it must still be configured to avoid blocking execution during startup.
+This configuration defines how Tasklist connects to the secondary datastore (Elasticsearch or OpenSearch).
+It is also used by the legacy Zeebe exporter.
 
-      :::
+:::note
 
-      ```bash
-      CAMUNDA_OPERATE_DATABASE=elasticsearch|opensearch # defaults to elasticsearch
+In new setups, the old exporter is no longer in use. However, it must still be configured to avoid blocking execution during startup.
 
-      # in case of Elasticsearch
-      CAMUNDA_OPERATE_ELASTICSEARCH_URL=http://localhost:9200
-      CAMUNDA_OPERATE_ELASTICSEARCH_USERNAME=
-      CAMUNDA_OPERATE_ELASTICSEARCH_PASSWORD=
-      CAMUNDA_OPERATE_ZEEBEELASTICSEARCH_URL=http://localhost:9200
-      CAMUNDA_OPERATE_ZEEBEELASTICSEARCH_USERNAME=
-      CAMUNDA_OPERATE_ZEEBEELASTICSEARCH_PASSWORD=
+:::
 
-      # in case of OpenSearch
-      CAMUNDA_OPERATE_OPENSEARCH_URL=http://localhost:9200
-      CAMUNDA_OPERATE_OPENSEARCH_USERNAME=
-      CAMUNDA_OPERATE_OPENSEARCH_PASSWORD=
-      CAMUNDA_OPERATE_ZEEBEOPENSEARCH_URL=http://localhost:9200
-      CAMUNDA_OPERATE_ZEEBEOPENSEARCH_USERNAME=
-      CAMUNDA_OPERATE_ZEEBEOPENSEARCH_PASSWORD=
-      ```
+```bash
+CAMUNDA_TASKLIST_DATABASE=elasticsearch|opensearch # defaults to elasticsearch
 
-      #### Tasklist – Elasticsearch or OpenSearch Connection
+# in case of Elasticsearch
+CAMUNDA_TASKLIST_ELASTICSEARCH_URL=http://localhost:9200
+CAMUNDA_TASKLIST_ELASTICSEARCH_USERNAME=
+CAMUNDA_TASKLIST_ELASTICSEARCH_PASSWORD=
+CAMUNDA_TASKLIST_ZEEBEELASTICSEARCH_URL=http://localhost:9200
+CAMUNDA_TASKLIST_ZEEBEELASTICSEARCH_USERNAME=
+CAMUNDA_TASKLIST_ZEEBEELASTICSEARCH_PASSWORD=
 
-      This configuration defines how Tasklist connects to the secondary datastore (Elasticsearch or OpenSearch).
-      It is also used by the legacy Zeebe exporter.
+# in case of OpenSearch
+CAMUNDA_TASKLIST_OPENSEARCH_URL=http://localhost:9200
+CAMUNDA_TASKLIST_OPENSEARCH_USERNAME=
+CAMUNDA_TASKLIST_OPENSEARCH_PASSWORD=
+CAMUNDA_TASKLIST_ZEEBEOPENSEARCH_URL=http://localhost:9200
+CAMUNDA_TASKLIST_ZEEBEOPENSEARCH_USERNAME=
+CAMUNDA_TASKLIST_ZEEBEOPENSEARCH_PASSWORD=
+```
 
-      :::note
+**Orchestration Cluster - Elasticsearch or OpenSearch connection**
 
-      In new setups, the old exporter is no longer in use. However, it must still be configured to avoid blocking execution during startup.
+  <!-- TODO: No team has documented this, already reached out -->
 
-      :::
+```bash
+# defaults to elasticsearch
+CAMUNDA_DATABASE_TYPE=elasticsearch|opensearch
+CAMUNDA_DATABASE_URL=http://localhost:9200
+CAMUNDA_DATABASE_USERNAME=
+CAMUNDA_DATABASE_PASSWORD=
+```
 
-      ```bash
-      CAMUNDA_TASKLIST_DATABASE=elasticsearch|opensearch # defaults to elasticsearch
+**Camunda Exporter**
 
-      # in case of Elasticsearch
-      CAMUNDA_TASKLIST_ELASTICSEARCH_URL=http://localhost:9200
-      CAMUNDA_TASKLIST_ELASTICSEARCH_USERNAME=
-      CAMUNDA_TASKLIST_ELASTICSEARCH_PASSWORD=
-      CAMUNDA_TASKLIST_ZEEBEELASTICSEARCH_URL=http://localhost:9200
-      CAMUNDA_TASKLIST_ZEEBEELASTICSEARCH_USERNAME=
-      CAMUNDA_TASKLIST_ZEEBEELASTICSEARCH_PASSWORD=
+Required for Zeebe to export data to the secondary datastore which in turn is used by Operate / Tasklist.
 
-      # in case of OpenSearch
-      CAMUNDA_TASKLIST_OPENSEARCH_URL=http://localhost:9200
-      CAMUNDA_TASKLIST_OPENSEARCH_USERNAME=
-      CAMUNDA_TASKLIST_OPENSEARCH_PASSWORD=
-      CAMUNDA_TASKLIST_ZEEBEOPENSEARCH_URL=http://localhost:9200
-      CAMUNDA_TASKLIST_ZEEBEOPENSEARCH_USERNAME=
-      CAMUNDA_TASKLIST_ZEEBEOPENSEARCH_PASSWORD=
-      ```
-
-      #### Orchestration Cluster - Elasticsearch or OpenSearch connection
-
-      <!-- TODO: No team has documented this, already reached out -->
-
-      ```bash
-      # defaults to elasticsearch
-      CAMUNDA_DATABASE_TYPE=elasticsearch|opensearch
-      CAMUNDA_DATABASE_URL=http://localhost:9200
-      CAMUNDA_DATABASE_USERNAME=
-      CAMUNDA_DATABASE_PASSWORD=
-      ```
-
-      #### Camunda Exporter
-
-      ```bash
-      ZEEBE_BROKER_EXPORTERS_CAMUNDAEXPORTER_CLASSNAME=io.camunda.exporter.CamundaExporter
-      ZEEBE_BROKER_EXPORTERS_CAMUNDAEXPORTER_ARGS_CONNECT_TYPE=elasticsearch|opensearch # defaults to elasticsearch
-      ZEEBE_BROKER_EXPORTERS_CAMUNDAEXPORTER_ARGS_CONNECT_URL=http://localhost:9200
-      ZEEBE_BROKER_EXPORTERS_CAMUNDAEXPORTER_ARGS_CONNECT_USERNAME=
-      ZEEBE_BROKER_EXPORTERS_CAMUNDAEXPORTER_ARGS_CONNECT_PASSWORD=
-      ```
-
-
-      </TabItem>
-      <TabItem value="spring" label="application.yaml">
-
-      ```yaml
-      camunda:
-        database:
-          type: elasticsearch|opensearch # defaults to elasticsearch
-          url: http://localhost:9200
-          username:
-          password:
-        operate:
-          database: elasticsearch|opensearch # defaults to elasticsearch
-          # in case of Elasticsearch
-          elasticsearch:
-            url: http://localhost:9200
-            username:
-            password:
-          zeebe-elasticsearch:
-            url: http://localhost:9200
-            username:
-            password:
-          # in case of OpenSearch
-          opensearch:
-            url: http://localhost:9200
-            username:
-            password:
-          zeebe-opensearch:
-            url: http://localhost:9200
-            username:
-            password:
-        tasklist:
-          database: elasticsearch|opensearch # defaults to elasticsearch
-          # in case of Elasticsearch
-          elasticsearch:
-            url: http://localhost:9200
-            username:
-            password:
-          zeebe-elasticsearch:
-            url: http://localhost:9200
-            username:
-            password:
-          # in case of OpenSearch
-          opensearch:
-            url: http://localhost:9200
-            username:
-            password:
-          zeebe-opensearch:
-            url: http://localhost:9200
-            username:
-            password:
-
-      zeebe:
-        broker:
-          exporters:
-            camunda-exporter:
-              class-name: io.camunda.exporter.CamundaExporter
-              args:
-                connect:
-                  type: elasticsesarch|opensearch # defaults to elasticsearch
-                  url: http://localhost:9200
-                  username:
-                  password:
-      ```
-
-      </TabItem>
-    </Tabs>
+```bash
+ZEEBE_BROKER_EXPORTERS_CAMUNDAEXPORTER_CLASSNAME=io.camunda.exporter.CamundaExporter
+ZEEBE_BROKER_EXPORTERS_CAMUNDAEXPORTER_ARGS_CONNECT_TYPE=elasticsearch|opensearch # defaults to elasticsearch
+ZEEBE_BROKER_EXPORTERS_CAMUNDAEXPORTER_ARGS_CONNECT_URL=http://localhost:9200
+ZEEBE_BROKER_EXPORTERS_CAMUNDAEXPORTER_ARGS_CONNECT_USERNAME=
+ZEEBE_BROKER_EXPORTERS_CAMUNDAEXPORTER_ARGS_CONNECT_PASSWORD=
+```
 
   </TabItem>
+  <TabItem value="spring" label="application.yaml">
 
-  <TabItem value="broker" label="Multi Broker">
+```yaml
+camunda:
+  database:
+    type: elasticsearch|opensearch # defaults to elasticsearch
+    url: http://localhost:9200
+    username:
+    password:
+  operate:
+    database: elasticsearch|opensearch # defaults to elasticsearch
+    # in case of Elasticsearch
+    elasticsearch:
+      url: http://localhost:9200
+      username:
+      password:
+    zeebe-elasticsearch:
+      url: http://localhost:9200
+      username:
+      password:
+    # in case of OpenSearch
+    opensearch:
+      url: http://localhost:9200
+      username:
+      password:
+    zeebe-opensearch:
+      url: http://localhost:9200
+      username:
+      password:
+  tasklist:
+    database: elasticsearch|opensearch # defaults to elasticsearch
+    # in case of Elasticsearch
+    elasticsearch:
+      url: http://localhost:9200
+      username:
+      password:
+    zeebe-elasticsearch:
+      url: http://localhost:9200
+      username:
+      password:
+    # in case of OpenSearch
+    opensearch:
+      url: http://localhost:9200
+      username:
+      password:
+    zeebe-opensearch:
+      url: http://localhost:9200
+      username:
+      password:
 
-    The following configuration references are based on the official component-specific documentation:
-
-    - [Zeebe Broker](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#zeebebrokercluster)
-
-    The following explores the idea of a three-broker setup.
-    When starting with a three-broker setup, ensure that each broker is configured with a unique `Node ID`, starting from `0` and incrementing up to the total number of brokers (e.g., `0`, `1`, `2`). This ID must be unique across the entire Zeebe cluster.
-
-    <Tabs>
-      <TabItem value="env" label="Environment variables">
-
-      ```bash
-      ZEEBE_BROKER_CLUSTER_CLUSTERSIZE=3
-      ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS=HOST_0:26502,HOST_1:26502,HOST_2:26502
-      ZEEBE_BROKER_CLUSTER_NODEID=0 # unique ID of this broker node in a cluster. The ID should be between 0 and number of nodes in the cluster (exclusive).
-      ```
-
-      </TabItem>
-      <TabItem value="spring" label="application.yaml">
-
-      ```yaml
-      zeebe:
-        broker:
-          cluster:
-            cluster-size: 3
-            initial-contact-points: [HOST_0:26502,HOST_1:26502,HOST_2:26502]
-            node-id: 0 # unique ID of this broker node in a cluster. The ID should be between 0 and number of nodes in the cluster (exclusive).
-      ```
-
-      </TabItem>
-    </Tabs>
+zeebe:
+  broker:
+    exporters:
+      camunda-exporter:
+        class-name: io.camunda.exporter.CamundaExporter
+        args:
+          connect:
+            type: elasticsesarch|opensearch # defaults to elasticsearch
+            url: http://localhost:9200
+            username:
+            password:
+```
 
   </TabItem>
+</Tabs>
 
-  <TabItem value="connectors" label="Connectors">
+#### Multi broker
+
+The following configuration references are based on the official component-specific documentation:
+
+- [Zeebe Broker](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#zeebebrokercluster)
+
+The following explores the idea of a three-broker setup.
+When starting with a three-broker setup, ensure that each broker is configured with a unique `Node ID`, starting from `0` and incrementing up to the total number of brokers (e.g., `0`, `1`, `2`). This ID must be unique across the entire Zeebe cluster.
+
+<Tabs>
+  <TabItem value="env" label="Environment variables">
+
+```bash
+ZEEBE_BROKER_CLUSTER_CLUSTERSIZE=3
+ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS=HOST_0:26502,HOST_1:26502,HOST_2:26502
+ZEEBE_BROKER_CLUSTER_NODEID=0 # unique ID of this broker node in a cluster. The ID should be between 0 and number of nodes in the cluster (exclusive).
+```
+
+  </TabItem>
+  <TabItem value="spring" label="application.yaml">
+
+```yaml
+zeebe:
+  broker:
+    cluster:
+      cluster-size: 3
+      initial-contact-points: [HOST_0:26502, HOST_1:26502, HOST_2:26502]
+      node-id: 0 # unique ID of this broker node in a cluster. The ID should be between 0 and number of nodes in the cluster (exclusive).
+```
+
+  </TabItem>
+</Tabs>
+
+#### Connectors
 
 To use Connectors with their full set of capabilities, authentication is required. By default, the Orchestration Cluster uses basic authentication. You can configure the system to automatically create a user with the necessary permissions at startup.
 
@@ -308,67 +303,63 @@ If not configured during startup, the user must be created manually through the 
 
 More about the [configuration options of Identity](/self-managed/components/orchestration-cluster/identity/overview.md).
 
-  <Tabs>
-      <TabItem value="env" label="Environment variables">
+<Tabs>
+  <TabItem value="env" label="Environment variables">
 
-      ```bash
-      CAMUNDA_SECURITY_INITIALIZATION_USERS_1_USERNAME=connectors
-      CAMUNDA_SECURITY_INITIALIZATION_USERS_1_PASSWORD=connectors
-      CAMUNDA_SECURITY_INITIALIZATION_USERS_1_NAME="Connectors User"
-      CAMUNDA_SECURITY_INITIALIZATION_USERS_1_EMAIL=connectors@company.com
-      CAMUNDA_SECURITY_INITIALIZATION_DEFAULTROLES_CONNECTORS_USERS_0=connectors
-      ```
-
-      </TabItem>
-      <TabItem value="spring" label="application.yaml">
-
-      ```yaml
-      camunda:
-        security:
-          initialization:
-            users:
-              - username: connectors
-                password: connectors
-                name: Connectors User
-                email: connectors@company.com
-            default-roles:
-              connectors:
-                users:
-                  - connectors
-      ```
-
-      </TabItem>
-    </Tabs>
+```bash
+CAMUNDA_SECURITY_INITIALIZATION_USERS_1_USERNAME=connectors
+CAMUNDA_SECURITY_INITIALIZATION_USERS_1_PASSWORD=connectors
+CAMUNDA_SECURITY_INITIALIZATION_USERS_1_NAME="Connectors User"
+CAMUNDA_SECURITY_INITIALIZATION_USERS_1_EMAIL=connectors@company.com
+CAMUNDA_SECURITY_INITIALIZATION_DEFAULTROLES_CONNECTORS_USERS_0=connectors
+```
 
   </TabItem>
+  <TabItem value="spring" label="application.yaml">
 
-  <TabItem value="license" label="License Key">
+```yaml
+camunda:
+  security:
+    initialization:
+      users:
+        - username: connectors
+          password: connectors
+          name: Connectors User
+          email: connectors@company.com
+      default-roles:
+        connectors:
+          users:
+            - connectors
+```
+
+  </TabItem>
+</Tabs>
+
+#### License Key
 
 Installations of Camunda 8 Self-Managed which require a license can provide their license key in the following ways:
 
-  <Tabs>
-    <TabItem value="env" label="Environment variables">
+<Tabs>
+  <TabItem value="env" label="Environment variables">
 
-    ```bash
-    CAMUNDA_LICENSE_KEY=""
-    ```
-
-    </TabItem>
-    <TabItem value="spring" label="application.yaml">
-
-    ```yaml
-    camunda:
-      license:
-        key: >-
-          --------------- BEGIN CAMUNDA LICENSE KEY ---------------
-          [...]
-          ---------------  END CAMUNDA LICENSE KEY  ---------------
-    ```
-    </TabItem>
-
-  </Tabs>
+```bash
+CAMUNDA_LICENSE_KEY=""
+```
 
   </TabItem>
+  <TabItem value="spring" label="application.yaml">
+
+```yaml
+camunda:
+  license:
+    key: >-
+      --------------- BEGIN CAMUNDA LICENSE KEY ---------------
+      [...]
+      ---------------  END CAMUNDA LICENSE KEY  ---------------
+```
+
+  </TabItem>
+
 </Tabs>
 
 ### Run
