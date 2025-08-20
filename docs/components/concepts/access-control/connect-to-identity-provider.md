@@ -1,35 +1,33 @@
 ---
 title: Connect to an Identity Provider
-sidebar_label: Connect to an Identity Provider
+sidebar_label: Connect to an identity provider
 description: Learn how to connect Camunda 8 components to an external Identity Provider (IdP) for authentication and user management.
 ---
 
-# Connect to an Identity Provider
+# Connect to an identity provider
 
-Camunda 8 supports integration with external Identity Providers (IdPs). This enables single sign-on (SSO), centralized user management, and secure authentication for Camunda 8.
+Integrate with an external identity provider (IdP) for single sign-on (SSO), centralized user management, and secure authentication.
 
-## Overview
+## About IdP integration
 
 Connecting Camunda 8 to an external IdP allows you to:
 
-- Use enterprise authentication (e.g., Microsoft EntraID, Okta, Keycloak, Auth0)
-- Manage users centrally in your Identity Provider
-- Enable SSO across Camunda components
-- Enforce organization-wide security policies
+- Use enterprise authentication (for example, Microsoft EntraID, Okta, Keycloak, Auth0).
+- Centrally manage users in your IdP.
+- Enable SSO for Camunda components.
+- Enforce organization-wide security policies.
 
-## Supported Identity Provider Integrations
+## Self-Managed
 
-The way you connect Camunda 8 to an external Identity Provider depends on your deployment type.
+Self-Managed deployments only support external IdP integration using **OpenID Connect (OIDC)** (for example, Keycloak, Auth0, Okta, EntraID via OIDC).
 
-### Self-Managed
+You can integrate an IdP with both Orchestration Cluster Identity and Management Identity.
 
-Camunda 8 Self-Managed supports integration with external IdPs using **OpenID Connect (OIDC)** only (e.g., Keycloak, Auth0, Okta, EntraID via OIDC). Follow the individual guides for each component:
-
-- Orchestration Cluster: [Connect Orchestration Cluster Identity to an OpenID Connect provider](../../../self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md)
-- Web Modeler, Console, Optimize: [Connect Management Identity to an OpenID Connect provider](../../../../self-managed/components/management-identity/configuration/connect-to-an-oidc-provider/)
+- Orchestration Cluster: [Connect Orchestration Cluster Identity to an identity provider](../../../self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md)
+- Web Modeler, Console, Optimize: [Connect Management Identity to an identity provider](../../../../self-managed/components/management-identity/configuration/connect-to-an-oidc-provider/)
 
 ### SaaS
 
-Camunda 8 SaaS currently supports integration with external IdPs via **SAML** and **Azure Active Directory (EntraID)**. Follow the following guide:
+Camunda 8 SaaS currently only supports external IdP integration using **SAML** or **Azure Active Directory (EntraID)**.
 
-- [Connect Console to an external Identity Provider (SAML or EntraID)](../../console/manage-organization/external-sso.md)
+- [Connect to an identity provider](../../console/manage-organization/external-sso.md)
