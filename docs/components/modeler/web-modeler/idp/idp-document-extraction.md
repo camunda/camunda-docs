@@ -29,7 +29,6 @@ To create a new document extraction template:
 1. **Description**: Enter a description to provide more detailed information about the document type.
 1. Click **Create** to create and open the new document extraction template.
 1. Configure and publish the template:
-
    - [Extract unstructured data](idp-unstructured-extraction.md): Configure and publish an unstructured data extraction template.
    - [Extract structured data](idp-structured-extraction.md): Configure and publish a structured data extraction template.
 

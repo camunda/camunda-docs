@@ -60,7 +60,7 @@ When using Java, most customers use Spring Boot, so we describe this approach in
 
 - Camunda Process Test was introduced with **Camunda 8.8**.
 - You must use **JUnit 5** in every test class. The `@Test` annotation you import must be `org.junit.jupiter.api.Test`.
-:::
+  :::
 
 1. Use [_JUnit 5_](http://junit.org) as your unit test framework.
 2. Use the [Camunda Spring Boot SDK](../../../apis-tools/spring-zeebe-sdk/getting-started.md).
@@ -251,7 +251,6 @@ assertThat(addInvoiceJobWorkerCalled.get())
 .isTrue();
 ```
 
-
 ### Drive the process and assert the state
 
 For tests, you drive the process from waitstate to waitstate and assert that you observe the expected process and variable states. For example, you might implement a test for the scenario when an invoice gets approved and processed without errors:
@@ -311,7 +310,6 @@ As a rule of thumb _always_ assert that the expected _external effects_ of your 
 Divide and conquer by _testing your process in chunks_. Consider the important chunks and paths the invoice approval process consists of:
 
 <div bpmn="best-practices/testing-process-definitions-assets/TestingProcess.bpmn" callouts="EndEvent_InvoiceApproved,EndEvent_InvoiceRejected,TimerEvent_ApprovalTakesTooLong,ErrorEvent_Archive," />
-
 
 <span className="callout">1</span>
 

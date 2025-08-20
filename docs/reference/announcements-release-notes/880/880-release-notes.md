@@ -89,7 +89,7 @@ The MCP Client connector is released as an [early access alpha feature](/compone
 
 Improvements are made to the Vector database connector as follows:
 
-- Updated the OpenSearch vector store support to support non-AWS managed instances.
+- Updated the OpenSearch vector store to support non-AWS managed instances.
 - Added support for OpenAI embedding models.
 
 To learn more, see [vector database connector](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md).
@@ -98,15 +98,9 @@ To learn more, see [vector database connector](/components/connectors/out-of-the
 
 #### Fetch latest process definitions
 
-The Connectors Runtime is optimized by fetching only the latest process definition versions from Operate. This reduces CPU consumption and improves deployment performance, particularly in environments with frequent CI/CD-generated process versions.
+The connectors runtime is optimized by fetching only the latest process definition versions from the Orchestration Cluster. This reduces CPU consumption and improves deployment performance, particularly in environments with frequent CI/CD-generated process versions.
 
 <!-- https://github.com/camunda/product-hub/issues/2572 -->
-
-#### Run process segment
-
-This feature allows developers to manually execute and test individual tasks or segments (connectors, RPA bots, IDP extractions) without running full processes, improving debugging and development efficiency.
-
-<!-- https://github.com/camunda/product-hub/issues/2453 -->
 
 #### Unlock element template fields
 
@@ -117,6 +111,14 @@ This feature allows developers to manually execute and test individual tasks or 
 - Safeguards now notify you of ID or version conflicts to prevent accidental overwrites when publishing templates.
 
 <!-- https://github.com/camunda/product-hub/issues/2860 -->
+
+### Run process segment <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects APIs">API</span>
+
+This feature allows developers to manually execute and test individual tasks or segments (connectors, RPA bots, IDP extractions) without running full processes, improving debugging and development efficiency.
+
+To learn more, see [run process segment](/components/concepts/process-instance-creation.md#run-process-segment)
+
+<!-- https://github.com/camunda/product-hub/issues/2453 -->
 
 ### Intelligent document processing (IDP) form extraction <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects IDP">IDP</span>
 

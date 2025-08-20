@@ -253,7 +253,7 @@ Using Amazon OpenSearch Service requires [setting up a new Camunda installation]
    :::
 
    ```hcl reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/aws/compute/ec2-single-region/terraform/opensearch.tf#L1-L30
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/compute/ec2-single-region/terraform/cluster/opensearch.tf#L1-L30
    ```
 
 2. Customize the cluster setup using various input options. For a complete list of available parameters, refer to the [OpenSearch module documentation](https://github.com/camunda/camunda-deployment-references/blob/main/aws/modules/opensearch/README.md).
@@ -315,22 +315,20 @@ ssh -J admin@${BASTION_HOST} admin@${CAMUNDA_IP}
 
 ## 2. Deploy Camunda 8
 
-### Configure and run the installation script
+### Configure and run the installation procedure
 
-1. Navigate to the script directory:
+1. Navigate to the procedure directory:
 
 ```sh
-cd camunda-deployment-references-main/aws/ec2/scripts
+cd camunda-deployment-references-main/aws/ec2/procedure
 ```
 
-The `script` directory contains Bash scripts for installing and configuring Camunda 8.
+The `procedure` directory contains Bash scripts for installing and configuring Camunda 8.
 
 2. Configure script behavior using the following environment variables:
-
    - `CLOUDWATCH_ENABLED`: Defaults to `false`. Set to `true` to install the CloudWatch agent on each EC2 instance and export Camunda logs and Prometheus metrics to AWS CloudWatch.
 
 3. Override default versions in the `camunda-install.sh` script by modifying these variables:
-
    - `OPENJDK_VERSION`: The Temurin Java version to install.
    - `CAMUNDA_VERSION`: The Camunda 8 version to install.
    - `CAMUNDA_CONNECTORS_VERSION`: The Camunda 8 Connectors version to install.

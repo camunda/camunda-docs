@@ -51,13 +51,13 @@ See [Zeebe Broker](#zeebe-broker).
 
 See [Process](#process).
 
-## C
-
 ### BTP
 
 BTP stands for [SAP](#sap) Business Technology Platform, which is a cloud-based platform that provides tools and services for data management, analytics, application development, and integration within the SAP ecosystem.
 
 Camunda can integrate with SAP BTP to orchestrate business processes across SAP and non-SAP systems. By doing so, it enables automation and visibility of workflows that span multiple services and applications hosted on BTP, enhancing agility and process control in enterprise environments.
+
+## C
 
 - [BTP plugin](/components/camunda-integrations/sap/btp-plugin.md)
 
