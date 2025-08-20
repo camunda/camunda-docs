@@ -717,6 +717,9 @@ module.exports = {
             "components/best-practices/operations/versioning-process-definitions",
             "components/best-practices/operations/reporting-about-processes",
           ],
+          "CI/CD Guidelines": [
+            "components/best-practices/cicd-guidelines/element-templates-at-scale",
+          ],
         },
       ],
     },
