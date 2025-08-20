@@ -69,5 +69,5 @@ Need help finding your Camunda 8 credentials? Submit a **Help Request** to obtai
 1. Once these steps are completed your request is generated.
 
 :::tip
-Learn more about submitting a self-service help request via the [Camunda support guide](https://camunda.com/services/enterprise-support-guide/).
+For more information on how to submit a self-service help request, see the [Camunda support guide](https://camunda.com/services/enterprise-support-guide/).
 :::

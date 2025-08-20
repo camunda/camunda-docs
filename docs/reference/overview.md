@@ -18,7 +18,7 @@ Keep up-to-date with upcoming, current, and past Camunda releases.
 <ReleasesGrid releases={gettingStartedCards} />
 
 :::info Release policy
-Learn about the [Camunda release policy](/reference/announcements-release-notes/release-policy.md) with some specific clarifications across provisioning in SaaS and Self-Managed.
+Learn about the [Camunda release policy](/reference/announcements-release-notes/release-policy.md) and specific clarifications about provisioning in SaaS and Self-Managed.
 :::
 
 ## Security, licensing, and support information
