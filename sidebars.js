@@ -220,6 +220,11 @@ module.exports = {
             "components/modeler/web-modeler/file-download",
             "components/modeler/web-modeler/web-modeler-settings",
             "components/modeler/web-modeler/process-landscape-visualization",
+            {
+              "Element templates": [
+                "components/modeler/web-modeler/element-templates/using-templates-in-web-modeler",
+              ],
+            },
           ],
         },
         {
