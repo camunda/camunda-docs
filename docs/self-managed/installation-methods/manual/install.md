@@ -1,26 +1,24 @@
 ---
 id: install
-title: "Camunda manual installation on local machine"
+title: "Camunda manual installation"
 sidebar_label: "Install"
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-This page guides you through the manual installation of the Camunda 8 on a local or virtual machine.
-
-The [Reference Architecture > Manual](/self-managed/reference-architecture/manual.md) is a recommended read to get a general understanding of the environment.
+This page guides you through the manual installation of Camunda 8 on a local machine, bare metal server, or virtual machine.
 
 ## Prerequisites
 
 - Bare Metal / Virtual Machine
   - Operating system:
     - Linux
-    - Windows/macOS (development only, not supported for production)
+    - Windows, macOS and others are for development only and not supported for production
   - Java Virtual Machine, see [supported environments](/reference/supported-environments.md) for version details
   - Make sure to configure the web applications to use a port that is available. By default the Orchestration Cluster listens on port 8080.
 - Secondary datastore
-  - Elasticsearch / AWS OpenSearch, see [supported environments](/reference/supported-environments.md) for version details
+  - Elasticsearch / Amazon OpenSearch, see [supported environments](/reference/supported-environments.md) for version details
     - Explore available deployment options of Elasticsearch in their [documentation](https://www.elastic.co/docs/deploy-manage/deploy)
 
 See also the [Reference Architecture > Manual](/self-managed/reference-architecture/manual.md#requirements) for suggested minimum hardware requirements and networking.
@@ -28,6 +26,18 @@ See also the [Reference Architecture > Manual](/self-managed/reference-architect
 :::tip
 
 There are known performance limitations on systems that use `musl` instead of `glibc`, which Java often relies on for running native libraries. For example, Alpine Linux, which uses `musl`, has shown performance degradation of up to 20% compared to Debian or Ubuntu in benchmark tests.
+
+:::
+
+:::warning Not Supported
+
+Following components are currently not supported for manual installation:
+
+- Management Identity
+- Optimize
+- Web Modeler
+
+You may use a [docker](/self-managed/installation-methods/docker/docker.md) or [Kubernetes with Helm](/self-managed/installation-methods/helm/index.md) installation instead.
 
 :::
 
@@ -61,7 +71,9 @@ Some out-of-the-box connectors are licensed under the [Camunda Self-Managed Free
 
 ## Reference Architecture
 
-- [Amazon EC2](/self-managed/installation-methods/manual/cloud-providers/amazon/aws-ec2.md) - A reference architecture built on top of Amazon Web Services (AWS) using Elastic Cloud Compute (EC2) and Ubuntu
+The [Reference Architecture > Manual](/self-managed/reference-architecture/manual.md) is a recommended read to get a general understanding of the environment.
+
+- [Amazon EC2](/self-managed/installation-methods/manual/cloud-providers/amazon/aws-ec2.md) - A reference architecture built on top of Amazon Web Services (AWS) using Elastic Cloud Compute (EC2) with Ubuntu and Amazon OpenSearch as secondary datastore.
 
 ## Orchestration Cluster
 
@@ -707,15 +719,3 @@ curl localhost:9090/actuator/health
 
   </summary>
 </details>
-
-## Management Identity
-
-A local setup of Identity in Camunda 8 is not yet supported out-of-the-box, use [Docker](/self-managed/installation-methods/docker/docker.md) instead.
-
-## Optimize
-
-A local setup in Camunda 8 is not yet supported out-of-the-box, use [Docker](/self-managed/installation-methods/docker/docker.md#optimize) instead.
-
-## Web Modeler
-
-A local setup of Web Modeler in Camunda 8 is not yet supported out-of-the-box, use [Docker](/self-managed/installation-methods/docker/docker.md) instead.
