@@ -160,14 +160,14 @@ After updating your configuration, (re)start the Orchestration Cluster for the c
 At this point, you should be able to log in to the Orchestration Cluster using any user account from your IdP that is assigned to this client (application).
 
 :::note
-If login is successful, you will see that you are not authorized to access the Orchestration Cluster UIs. This is expected, as you have not yet configured an admin user or any authorizations for the user.
+If login is successful, you will see that you are not authorized to access the Orchestration Cluster UIs. This is expected, as you have not yet configured an Admin user or any authorizations for the user.
 :::
 
-### Step 7: Assign admin role to users
+### Step 7: Assign Admin role to users
 
 [Authorizations](../../../../components/concepts/access-control/authorizations.md) are enabled by default. This means users cannot access any Orchestration Cluster UI or APIs - except authorizations that have been granted to them.
 
-To allow users to access the Orchestration Cluster UI, you can assign the "admin" role to a user from your IdP:
+To allow users to access the Orchestration Cluster UI, you can assign the "Admin" role to a user from your IdP:
 
 <Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Application.yaml', value: 'yaml' }, {label: 'Environment variables', value: 'env' },{label: 'Helm values', value: 'helm' }]}>
 <TabItem value="yaml">
@@ -190,7 +190,7 @@ global.security.initialization.defaultRoles.admin.users[0]: <YOUR_USERNAME>
 </Tabs>
 
 1. Replace `<YOUR_USERNAME>` with the username provided by your IdP (matching the claim configured as `username-claim`).
-1. Restart your Orchestration Cluster and verify that the chosen user has the admin Role, for example by visiting `localhost:8080/identity/roles/admin/users`.
+1. Restart your Orchestration Cluster and verify that the chosen user has the Admin Role, for example by visiting `localhost:8080/identity/roles/admin/users`.
 1. If the username is shown, continue configuring your own groups, mapping rules, or setting up [authorizations](../../../../components/concepts/access-control/authorizations.md) for other users.
 
 ### (Optional) Step 8: Configure bring your own groups
