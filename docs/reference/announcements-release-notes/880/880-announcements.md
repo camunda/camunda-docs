@@ -234,10 +234,13 @@ With the Camunda 8.8 release, Camunda Java Client and Camunda Spring Boot SDK re
 The `CamundaClient` replaces the `ZeebeClient`, offering the same functionality and adding new capabilities.
 
 :::warning
-The new `CamundaClient` now has REST configured as it's default communication protocol (previously gRPC has been the default, while REST was under development).
+The new `CamundaClient` now uses **REST** as the default communication protocol.  
+Previously, **gRPC** was the default while REST was under development.
 
-If you rely on gRPC as the default communication protocol, please update your configuration accordingly via `preferRestOverGrpc=false`. (Note: job streaming is only supported via gRPC)
-In case you are still using the old `ZeebeClient` no changes required, as there the default is still gRPC.
+If you rely on gRPC as the default, update your configuration with `preferRestOverGrpc=false`. Note that job streaming is only supported via gRPC.
+
+If you are still using the old `ZeebeClient`, no changes are required since its default remains gRPC.
+
 :::
 
 :::note
