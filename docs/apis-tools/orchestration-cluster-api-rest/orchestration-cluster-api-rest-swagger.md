@@ -35,3 +35,20 @@ Use the host and path defined in your Zeebe Gateway [configuration](../../self-m
 To access Swagger UI, append the following suffix to the URL: `/swagger-ui/index.html`
 
 Example path: `http://localhost:8080/swagger-ui/index.html`
+
+## Enabling/Disabling Swagger
+
+By default, Swagger UI is enabled for both SaaS and Self-Managed deployments.
+
+### SaaS
+
+For SaaS deployments, Swagger can be controlled through the Camunda Console:
+
+1. Navigate to your cluster in the Camunda Console
+2. Go to **Cluster Settings**
+3. Toggle the **Enable Swagger** switch to enable or disable Swagger UI
+4. The change will be applied to the orchestration cluster automatically
+
+### Self-Managed
+
+Swagger UI can be enabled or disabled using the `camunda.rest.swagger.enabled`/`CAMUNDA_REST_SWAGGER_ENABLED` environment variable on the orchestration cluster.
