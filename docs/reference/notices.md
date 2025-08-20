@@ -23,7 +23,7 @@ Aug 20th, 2025
 
 #### Impact
 
-The embedded Apache Tomcat was affected by [CVE-2025-48989](https://nvd.nist.gov/vuln/detail/CVE-2025-48989) which made Tomcat vulnerable to the made you reset attack.
+The embedded Apache Tomcat was affected by [CVE-2025-48989](https://nvd.nist.gov/vuln/detail/CVE-2025-48989) which made Tomcat vulnerable to the MadeYouReset attack.
 
 #### How to determine if the installation is affected
 
