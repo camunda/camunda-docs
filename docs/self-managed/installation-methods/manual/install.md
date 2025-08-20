@@ -386,16 +386,16 @@ Camunda 8 components without a valid license may display **Non-Production Licens
 The following has been tested on Ubuntu using [systemd](https://systemd.io/) and the example has to be adjusted to your use cases.
 It's utilizing a file with environment variables but could be abstracted to use a `application.yaml` instead.
 
-1. Create a `systemd` service called `camunda.service` and adjust it fit your own paths, user and group in `/lib/systemd/system/camunda.service`.
+1. Create a `systemd` service called `camunda.service` and adjust it fit your own paths, user and group in `/etc/systemd/system/camunda.service`.
 
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/compute/debian/configs/camunda.service
 ```
 
-2. Change the permissions on `/lib/systemd/system/camunda.service` to `644`
+2. Change the permissions on `/etc/systemd/system/camunda.service` to `644`
 
 ```bash
-sudo chmod 644 /lib/systemd/system/camunda.service
+sudo chmod 644 /etc/systemd/system/camunda.service
 ```
 
 3. Start the new service
@@ -609,16 +609,16 @@ This starts a Zeebe client, registering the defined connector as a job worker. B
 The following has been tested on Ubuntu using [systemd](https://systemd.io/) and the example has to be adjusted to your use cases.
 It's utilizing a file with environment variables but could be abstracted to use a `application.yaml` instead.
 
-1. Create a `systemd` service called `camunda-connectors.service` and adjust it fit your own paths, user and group in `/lib/systemd/system/camunda-connectors.service`.
+1. Create a `systemd` service called `camunda-connectors.service` and adjust it fit your own paths, user and group in `/etc/systemd/system/camunda-connectors.service`.
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/compute/debian/configs/connectors.service
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/compute/debian/configs/camunda-connectors.service
 ```
 
-2. Change the permissions on `/lib/systemd/system/camunda-connectors.service` to `644`
+2. Change the permissions on `/etc/systemd/system/camunda-connectors.service` to `644`
 
 ```bash
-sudo chmod 644 /lib/systemd/system/camunda-connectors.service
+sudo chmod 644 /etc/systemd/system/camunda-connectors.service
 ```
 
 3. Start the new service
