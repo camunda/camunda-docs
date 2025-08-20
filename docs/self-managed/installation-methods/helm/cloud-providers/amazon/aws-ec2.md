@@ -326,11 +326,9 @@ cd camunda-deployment-references-main/aws/ec2/procedure
 The `procedure` directory contains Bash scripts for installing and configuring Camunda 8.
 
 2. Configure script behavior using the following environment variables:
-
    - `CLOUDWATCH_ENABLED`: Defaults to `false`. Set to `true` to install the CloudWatch agent on each EC2 instance and export Camunda logs and Prometheus metrics to AWS CloudWatch.
 
 3. Override default versions in the `camunda-install.sh` script by modifying these variables:
-
    - `OPENJDK_VERSION`: The Temurin Java version to install.
    - `CAMUNDA_VERSION`: The Camunda 8 version to install.
    - `CAMUNDA_CONNECTORS_VERSION`: The Camunda 8 Connectors version to install.
