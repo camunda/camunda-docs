@@ -15,6 +15,8 @@ This guide steps through the configuration required to connect Camunda to your a
 
 :::note
 To connect to a Keycloak authentication provider, see our guide on [using an existing Keycloak](/self-managed/components/management-identity/configuration/connect-to-an-existing-keycloak.md).
+
+For Microsoft Entra ID certificate-based authentication (using X.509 certificates instead of client secrets), see our guide on [MS Entra certificate authentication](/self-managed/components/management-identity/configuration/ms-entra-certificate-authentication.md).
 :::
 
 ## Prerequisites

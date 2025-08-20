@@ -1611,6 +1611,7 @@ module.exports = {
                 "self-managed/components/management-identity/configuration/configure-external-identity-provider",
                 "self-managed/components/management-identity/configuration/connect-to-an-existing-keycloak",
                 "self-managed/components/management-identity/configuration/connect-to-an-oidc-provider",
+                "self-managed/components/management-identity/configuration/ms-entra-certificate-authentication",
                 "self-managed/components/management-identity/configuration/alternative-db",
               ],
             },
