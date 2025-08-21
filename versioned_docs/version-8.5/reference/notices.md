@@ -8,6 +8,79 @@ description: "Let's take a closer look at security notices, reporting vulnerabil
 
 Camunda publishes security notices after fixes are available.
 
+### Notice 25
+
+#### Publication date
+
+Aug 20th, 2025
+
+#### Products affected
+
+- Camunda Tasklist
+- Camunda Zeebe
+- Camunda Operate
+- Camunda Optimize
+
+#### Impact
+
+The embedded Apache Tomcat was affected by [CVE-2025-48989](https://nvd.nist.gov/vuln/detail/CVE-2025-48989) which made Tomcat vulnerable to the MadeYouReset attack.
+
+#### How to determine if the installation is affected
+
+You are using:
+
+- Tasklist 8.7.0 - 8.7.10 or 8.6.0 - 8.6.24 or 8.5.0 - 8.5.20
+- Zeebe 8.7.0 - 8.7.10 or 8.6.0 - 8.6.24
+- Operate 8.7.0 - 8.7.10 or 8.6.0 - 8.6.24 or 8.5.0 - 8.5.18
+- Optimize 8.7.0 - 8.7.7 or 8.6.0 - 8.6.14
+
+#### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Tasklist 8.7.11, 8.6.25, 8.5.21
+- Zeebe 8.7.11, 8.6.25
+- Operate 8.7.11, 8.6.25, 8.5.19
+- Optimize 8.7.8, 8.6.15
+
+### Notice 24
+
+#### Publication date
+
+Aug 20th, 2025
+
+#### Products affected
+
+- Camunda Tasklist
+- Camunda Zeebe
+- Camunda Operate
+- Camunda Identity
+- Camunda Optimize
+
+#### Impact
+
+The embedded Netty was affected by [CVE-2025-55163](https://nvd.nist.gov/vuln/detail/CVE-2025-55163) which allows malformed HTTP/2 control frames usage that results in resource exhaustion and distributed denial of service.
+
+#### How to determine if the installation is affected
+
+You are using:
+
+- Tasklist 8.7.0 - 8.7.10 or 8.6.0 - 8.6.24 or 8.5.0 - 8.5.20
+- Zeebe 8.7.0 - 8.7.10 or 8.6.0 - 8.6.24 or 8.5.0 - 8.5.22
+- Operate 8.7.0 - 8.7.10 or 8.6.0 - 8.6.24 or 8.5.0 - 8.5.18
+- Identity 8.7.0 - 8.7.5 or 8.6.0 - 8.6.18 or 8.5.0 - 8.5.19
+- Optimize 8.7.0 - 8.7.7 or 8.6.0 - 8.6.14
+
+#### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Tasklist 8.7.11, 8.6.25, 8.5.21
+- Zeebe 8.7.11, 8.6.25, 8.5.23
+- Operate 8.7.11, 8.6.25, 8.5.19
+- Identity 8.7.6, 8.6.19, 8.5.20
+- Optimize 8.7.8, 8.6.15
+
 ### Notice 23
 
 #### Publication date
