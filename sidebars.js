@@ -9,6 +9,7 @@ module.exports = {
       },
       items: [
         "guides/getting-started-example",
+        "guides/getting-started-agentic-orchestration",
         "guides/orchestrate-human-tasks",
         "guides/orchestrate-apis",
       ],
@@ -69,6 +70,7 @@ module.exports = {
           "Access control": [
             "components/concepts/access-control/access-control-overview",
             "components/concepts/access-control/authorizations",
+            "components/concepts/access-control/connect-to-identity-provider",
             "components/concepts/access-control/user-groups",
             "components/concepts/access-control/user-task-access-restrictions",
           ],
@@ -929,6 +931,7 @@ module.exports = {
           "Camunda Spring Boot Starter": [
             "apis-tools/spring-zeebe-sdk/getting-started",
             "apis-tools/spring-zeebe-sdk/configuration",
+            "apis-tools/spring-zeebe-sdk/properties-reference",
           ],
         },
         "apis-tools/node-js-sdk",
@@ -963,8 +966,9 @@ module.exports = {
       },
       items: [
         "apis-tools/migration-manuals/migrate-to-camunda-api",
-        "apis-tools/migration-manuals/migrate-component-apis",
+        "apis-tools/migration-manuals/migrate-to-camunda-java-client",
         "apis-tools/migration-manuals/migrate-to-camunda-user-tasks",
+        "apis-tools/migration-manuals/migrate-component-apis",
       ],
     },
   ],
@@ -1356,6 +1360,7 @@ module.exports = {
           label: "Configure flow control",
           id: "self-managed/operational-guides/configure-flow-control/configure-flow-control",
         },
+        "self-managed/concepts/no-secondary-storage",
       ],
     },
     {
@@ -1524,6 +1529,7 @@ module.exports = {
               items: [
                 "self-managed/components/orchestration-cluster/identity/overview",
                 "self-managed/components/orchestration-cluster/identity/configuration",
+                "self-managed/components/orchestration-cluster/identity/connect-external-identity-provider",
                 "self-managed/components/orchestration-cluster/identity/manage-tenants",
                 {
                   "Mapping rules": [

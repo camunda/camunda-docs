@@ -22,6 +22,10 @@ Supported environment changes and breaking changes or deprecations for the Camun
 
 ## Changes in supported environments
 
+### Elasticsearch and OpenSearch minimal supported versions updated to 8.16+ and 2.17+
+
+Camunda now supports Elasticsearch 8.16+ and OpenSearch 2.17+ as minimal versions, ensuring users can benefit from the latest, most stable database releases.
+
 ### Zeebe, Operate, Tasklist, and Identity must run on exact same minor and patch levels
 
 From version `8.8.0` forward, the following core [Orchestration cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) components must run on the exact same `minor`and `patch` level to ensure compatibility: Zeebe, Operate, Tasklist, and Identity. See the [component version matrix](/reference/supported-environments.md#component-version-matrix) or the [Self-Managed reference architecture](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) for an overview of components.
@@ -105,6 +109,61 @@ As of the 8.8 release, Camunda is compatible with Elasticsearch 8.16+ and no lon
 As of the 8.8 release, Camunda is compatible with Amazon OpenSearch 2.17+ and no longer supports older Amazon OpenSearch versions. See [supported environments](/reference/supported-environments.md).
 
 ## Key changes
+
+### Connector SDK
+
+#### Core SDK restructuring
+
+The internal structure of the Connector SDK has been updated to make the Core SDK more lightweight, with **no dependency on the Camunda client**.
+
+Some classes and interfaces have been relocated, which means external connectors may need to be **recompiled** before they can be used with Connector runtime **8.8**.
+
+This change affects the following classes and interfaces previously located in the `io.camunda.document` package:
+
+```
+DocumentFactory
+Document
+DocumentLinkParameters
+```
+
+These classes and interfaces are now located in the `io.camunda.connector.api.document` package.
+
+Additionally, the following classes and interfaces from the official Camunda Java client (`io.camunda.client.api.response`)  
+have been **replicated** in the Connector SDK and are now located in the `io.camunda.connector.api.document` package:
+
+```
+DocumentMetadata
+DocumentReference
+```
+
+#### Changes to activity logging in inbound connectors
+
+Connector SDK **8.8** introduces a new way to [log activities](/components/console/manage-clusters/manage-connectors.md#activity-log) in inbound connectors.
+
+Objects of the `InboundConnectorContext` class now provide a new overloaded method:
+
+```java
+void log(Consumer<ActivityBuilder> activityBuilderConsumer)
+```
+
+This method works with the new `ActivityBuilder` interface.
+
+**Usage example:**
+
+```json
+connector.context()
+    .log(
+        activity ->
+            activity
+            .withSeverity(Severity.INFO)
+            .withTag("Consumer")
+            .withMessage("Successfully processed message")
+            .andReportHealth(Health.up()));
+```
+
+The old builder pattern (`Activity.newBuilder()`) is **deprecated** and will be removed in upcoming releases.
+
+The new `ActivityBuilder` interface provides a more flexible and fluent API for logging activities in inbound connectors.
 
 ### Removed: Starter plan <span class="badge badge--long" title="This feature affects SaaS">SaaS</span>
 
@@ -190,6 +249,11 @@ the [8.7 API key attributes overview][camunda8-api-overview].
 
 With the 8.8 release, the [Web Modeler API](/apis-tools/web-modeler-api/index.md) endpoints under `/api/v1/milestones` are deprecated and scheduled for removal in 8.9.
 Use the corresponding endpoints under `/api/v1/versions` instead.
+
+#### Deprecated: File type `connector_template` in Web Modeler API
+
+With the 8.8 release, the `connector_template` file type in the [Web Modeler API](/apis-tools/web-modeler-api/index.md) endpoint for file creation (`POST /api/v1/files`) is deprecated and will be removed in version 8.10.
+Please use `element_template` instead, which provides equivalent functionality.
 
 ### Camunda Exporter <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 

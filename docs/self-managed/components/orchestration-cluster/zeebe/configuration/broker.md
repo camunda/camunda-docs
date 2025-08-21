@@ -369,6 +369,8 @@ backup:
     forcePathStyleAccess: false
     compression: none
     basePath: null
+    maxConcurrentConnections:
+    connectionAcquisitionTimeout:
 ```
 
 ### zeebe.broker.data.backup.gcs

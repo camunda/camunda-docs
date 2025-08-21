@@ -11,11 +11,6 @@ You can run your process test with [Connectors](/components/connectors/introduct
 
 For more unit-focused tests, mock the interaction; for example, by completing connector jobs with an expected result.
 
-:::note
-The connectors run inside the Testcontainers environment in isolation and can't access your local machine. For example,
-an outbound REST connector can't invoke a mock HTTP server that is started inside the test case on `localhost`.
-:::
-
 ## Enable connectors
 
 By default, the connectors are disabled. You need to change the runtime configuration to enable them.
@@ -203,6 +198,119 @@ public class MyProcessTest {
 You might need to wrap the invocation of the connector in a retry loop, for example, by using [Awaitility](http://www.awaitility.org/).
 
 There can be a delay between verifying that the connectors event is active and opening the connectors inbound subscription.
+:::
+
+## Access host ports
+
+By default, the connectors run inside the Testcontainers environment in isolation and can't access your local machine.
+However, you can
+expose [host ports](https://java.testcontainers.org/features/networking/#exposing-host-ports-to-the-container) to the
+containers, for example, to invoke a mock HTTP server running on your local machine from an outbound REST connector.
+
+Expose the host ports using `TestContainers.exposeHostPorts(port)`. Inside the container, the local machine is available
+under the hostname `host.testcontainers.internal`.
+
+<Tabs groupId="client" defaultValue="spring-sdk" queryString values={
+[
+{label: 'Camunda Spring Boot SDK', value: 'spring-sdk' },
+{label: 'Java client', value: 'java-client' }
+]
+}>
+
+<TabItem value='spring-sdk'>
+
+```java
+@WireMockTest(httpPort = 9999)
+@SpringBootTest(
+    properties = {
+        "io.camunda.process.test.connectors-enabled=true",
+        "io.camunda.process.test.connectors-secrets.BASE_URL=http://host.testcontainers.internal:9999"
+    })
+@CamundaSpringProcessTest
+public class MyProcessTest {
+
+    @Autowired private CamundaClient client;
+
+    @BeforeAll
+    static void setup() {
+        Testcontainers.exposeHostPorts(9999);
+    }
+
+    @Test
+    void shouldInvokeUrlFromConnector() {
+        // given: stub the HTTP server
+        stubFor(
+            get(urlPathMatching("/test"))
+                .willReturn(
+                    aResponse()
+                        .withHeader("Content-Type", "application/json")
+                        .withStatus(200)
+                        .withBody("{\"status\":\"okay\"}")));
+
+        // when: a process instance invoked the outbound connector
+
+        // then: verify the HTTP request
+        CamundaAssert.assertThat(processInstance)
+            .isCompleted()
+            .hasVariable("status", "okay");
+
+        verify(getRequestedFor(urlEqualTo("/test")));
+    }
+}
+```
+
+</TabItem>
+
+<TabItem value='java-client'>
+
+```java
+@WireMockTest(httpPort = 9999)
+public class MyProcessTest {
+
+    @RegisterExtension
+    private static final CamundaProcessTestExtension EXTENSION =
+        new CamundaProcessTestExtension()
+            .withConnectorsEnabled(true)
+            .withConnectorsSecret("BASE_URL", "http://host.testcontainers.internal:9999");
+
+    private CamundaClient client;
+
+    @BeforeAll
+    static void setup() {
+        Testcontainers.exposeHostPorts(9999);
+    }
+
+    @Test
+    void shouldInvokeUrlFromConnector() {
+        // given: stub the HTTP server
+        stubFor(
+            get(urlPathMatching("/test"))
+                .willReturn(
+                    aResponse()
+                        .withHeader("Content-Type", "application/json")
+                        .withStatus(200)
+                        .withBody("{\"status\":\"okay\"}")));
+
+        // when: a process instance invoked the outbound connector
+
+        // then: verify the HTTP request
+        CamundaAssert.assertThat(processInstance)
+                .isCompleted()
+                .hasVariable("status", "okay");
+
+        verify(getRequestedFor(urlEqualTo("/test")));
+    }
+}
+```
+
+</TabItem>
+
+</Tabs>
+
+:::tip
+You can configure the URL of an outbound connector
+using [Connectors secrets](/components/connectors/use-connectors/index.md#using-secrets) to replace it in your process
+tests, for example, URL = `"{{secrets.BASE_URL}}" + "/test"`.
 :::
 
 ## Custom connectors

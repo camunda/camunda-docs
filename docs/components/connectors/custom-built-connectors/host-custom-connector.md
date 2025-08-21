@@ -28,11 +28,11 @@ Run the following command:
 ```shell
 docker run --rm --name=CustomConnectorInSaaS \
     -v $PWD/connector.jar:/opt/app/connector.jar \
-    -e ZEEBE_CLIENT_SECURITY_PLAINTEXT=false \
-    -e ZEEBE_CLIENT_CLOUD_CLUSTER-ID='<YOUR_CLUSTER_ID>' \
-    -e ZEEBE_CLIENT_CLOUD_CLIENT-ID='<YOUR_CLIENT_ID>' \
-    -e ZEEBE_CLIENT_CLOUD_CLIENT-SECRET='<YOUR_CLIENT_SECRET>' \
-    -e ZEEBE_CLIENT_CLOUD_REGION='<YOUR_CLUSTER_REGION>' \
+    -e CAMUNDA_CLIENT_SECURITY_PLAINTEXT=false \
+    -e CAMUNDA_CLIENT_CLOUD_CLUSTER-ID='<YOUR_CLUSTER_ID>' \
+    -e CAMUNDA_CLIENT_CLOUD_CLIENT-ID='<YOUR_CLIENT_ID>' \
+    -e CAMUNDA_CLIENT_CLOUD_CLIENT-SECRET='<YOUR_CLIENT_SECRET>' \
+    -e CAMUNDA_CLIENT_CLOUD_REGION='<YOUR_CLUSTER_REGION>' \
     -e CAMUNDA_OPERATE_CLIENT_URL='https://<region>.operate.camunda.io/<cluster-id>' \
         camunda/connectors-bundle:<desired-version>
 ```
@@ -51,8 +51,8 @@ Run the following command:
 docker run --rm --name=CustomConnectorInSMCore \
     -v $PWD/connector.jar:/opt/app/connector.jar \
     --network=camunda-platform_camunda-platform \
-    -e ZEEBE_CLIENT_BROKER_GATEWAY-ADDRESS=zeebe:26500 \
-    -e ZEEBE_CLIENT_SECURITY_PLAINTEXT=true \
+    -e CAMUNDA_CLIENT_BROKER_GATEWAY-ADDRESS=zeebe:26500 \
+    -e CAMUNDA_CLIENT_SECURITY_PLAINTEXT=true \
     -e CAMUNDA_OPERATE_CLIENT_URL=http://operate:8080 \
     -e CAMUNDA_OPERATE_CLIENT_USERNAME=demo \
     -e CAMUNDA_OPERATE_CLIENT_PASSWORD=demo \
@@ -74,11 +74,11 @@ Run the following command:
 docker run --rm --name=CustomConnectorInSMWithKeyCloak \
     -v $PWD/connector.jar:/opt/app/connector.jar \
     --network=camunda-platform_camunda-platform \
-    -e ZEEBE_CLIENT_BROKER_GATEWAY-ADDRESS=zeebe:26500 \
-    -e ZEEBE_CLIENT_SECURITY_PLAINTEXT=true \
-    -e ZEEBE_CLIENT_ID=<YOUR_ZEEBE_CLIENT_ID> \
-    -e ZEEBE_CLIENT_SECRET=<YOUR_ZEEBE_CLIENT_SECRET> \
-    -e ZEEBE_CLIENT_CONFIG_PATH=/tmp/zeebe_auth_cache \
+    -e CAMUNDA_CLIENT_BROKER_GATEWAY-ADDRESS=zeebe:26500 \
+    -e CAMUNDA_CLIENT_SECURITY_PLAINTEXT=true \
+    -e CAMUNDA_CLIENT_ID=<YOUR_CAMUNDA_CLIENT_ID> \
+    -e CAMUNDA_CLIENT_SECRET=<YOUR_CAMUNDA_CLIENT_SECRET> \
+    -e CAMUNDA_CLIENT_CONFIG_PATH=/tmp/zeebe_auth_cache \
     -e ZEEBE_TOKEN_AUDIENCE=zeebe-api \
     -e ZEEBE_AUTHORIZATION_SERVER_URL=http://keycloak:18080/auth/realms/camunda-platform/protocol/openid-connect/token \
     -e CAMUNDA_IDENTITY_TYPE=KEYCLOAK \
@@ -115,11 +115,11 @@ Run the following command:
 ```shell
 docker run --rm --name=CustomConnectorInSMWithHelm \
     -v $PWD/connector.jar:/opt/app/connector.jar \
-    -e ZEEBE_CLIENT_BROKER_GATEWAY-ADDRESS=host.docker.internal:26500 \
-    -e ZEEBE_CLIENT_SECURITY_PLAINTEXT=true \
-    -e ZEEBE_CLIENT_ID=zeebe \
-    -e ZEEBE_CLIENT_SECRET=<YOUR_ZEEBE_CLIENT_SECRET> \
-    -e ZEEBE_CLIENT_CONFIG_PATH=/tmp/zeebe_auth_cache \
+    -e CAMUNDA_CLIENT_BROKER_GATEWAY-ADDRESS=host.docker.internal:26500 \
+    -e CAMUNDA_CLIENT_SECURITY_PLAINTEXT=true \
+    -e CAMUNDA_CLIENT_ID=zeebe \
+    -e CAMUNDA_CLIENT_SECRET=<YOUR_CAMUNDA_CLIENT_SECRET> \
+    -e CAMUNDA_CLIENT_CONFIG_PATH=/tmp/zeebe_auth_cache \
     -e ZEEBE_TOKEN_AUDIENCE=zeebe-api \
     -e ZEEBE_AUTHORIZATION_SERVER_URL=http://host.docker.internal:18080/auth/realms/camunda-platform/protocol/openid-connect/token \
     -e CAMUNDA_IDENTITY_TYPE=KEYCLOAK \

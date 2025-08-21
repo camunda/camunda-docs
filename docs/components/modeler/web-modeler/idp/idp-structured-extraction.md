@@ -124,13 +124,11 @@ You can test multiple documents by:
 Publish the document extraction template to make it available for [integration into your processes](idp-integrate.md)<!-- and [document automation](idp-document-automation.md) projects -->.
 
 1. Click **Publish** and select either:
-
    - **Publish to project**: Only users in the Web Modeler project can access the document extraction template.
    - **Publish to organization**: The document extraction template is made available as a shared resource within your organization. This option is only available for organization owners or users with the Admin role.
 
 1. On the **Publish Extraction Project** dialog, configure the publish settings.
    <img src={IdpPublishProjectModalImg} width="500px" alt="Validate extraction screen" style={{marginTop: '0'}} />
-
    - **Version name**: Enter a version for the published document extraction template.
    - **Version description**: Enter a description for the published document extraction template version.
 

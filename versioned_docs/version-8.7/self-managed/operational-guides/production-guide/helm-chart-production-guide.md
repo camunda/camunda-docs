@@ -364,7 +364,6 @@ The following resources and configuration options are important to keep in mind 
   ```
 
   This configuration ensures that Zeebe Pods with the default label `app.kubernetes.io/component=zeebe` are not scheduled on the same node. The primary benefits include:
-
   - High availability: If one node fails, other nodes running the same component remain unaffected.
   - Load distribution: Balances the workload across nodes.
   - Fault tolerance: Reduces the impact of a node-level failure.
@@ -659,7 +658,7 @@ console:
                   url: https://management-host.com/modeler
                   readiness: http://camunda-web-modeler-webapp.oidc:8071/health/readiness
                   metrics: http://camunda-web-modeler-webapp.oidc:8071/metrics
-            - name: camudna
+            - name: camunda
               namespace: orchestration
               version: 12.x
               components:
