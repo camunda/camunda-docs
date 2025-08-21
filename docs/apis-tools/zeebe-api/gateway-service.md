@@ -14,7 +14,7 @@ the [Zeebe repository](https://github.com/camunda/camunda/blob/main/zeebe/gatewa
 
 Along with the gateway protocol definition, the gateway service also bundles a [default service configuration file](https://github.com/camunda/camunda/blob/main/zeebe/gateway-protocol-impl/src/main/resources/gateway-service-config.json).
 This file can be used as is, or as a template to create your own, and defines default retry strategies on a per-RPC basis: when to retry (based on error code), how often, how soon, etc.
-This file is also loaded by the [Camunda Java client](../java-client/index.md) if `useDefaultRetryPolicy` is set to true.
+This file is also loaded by the [Camunda Java client](../java-client/java-client-getting-started.md) if `useDefaultRetryPolicy` is set to true.
 
 :::note
 Read more about [service configuration files](https://github.com/grpc/grpc/blob/master/doc/service_config.md). These files are especially useful
