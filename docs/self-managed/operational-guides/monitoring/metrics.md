@@ -257,3 +257,15 @@ Zeebe comes with a pre-built dashboard, available in the repository:
 :::tip
 You can also try out an [interactive dashboard](https://snapshots.raintank.io/dashboard/snapshot/Vbu3EHQMTI5Onh5RKuiS5J7QSMd7Sp5V) to learn about each panel and get an understanding of available data.
 :::
+
+### Data Layer
+
+The data layer comes with a pre-built dashboard, available in the repoSITORY:
+[monitor/grafana/data_layer.json](https://github.com/camunda/camunda/blob/main/monitor/grafana/dashboards/data_layer.json)
+
+- [Import](https://grafana.com/docs/grafana/latest/reference/export_import/#importing-a-dashboard) the dashboard into the Grafana instance 
+and select the correct Prometheus data source (if you have more than one).
+- The dashboard displays information about the key components of the data-layer applying to version `>=8.8`, focusing on the 
+Camunda exporter through which all data passes.
+
+![Example Panels](assets/example-panels-data-layer.png)
