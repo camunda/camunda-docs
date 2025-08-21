@@ -1,50 +1,50 @@
 ---
 id: index
 title: "Java client"
-sidebar_label: "Quick reference"
+sidebar_label: "Getting started"
 description: "Provide a job worker that handles polling for available jobs, use SLF4J for logging useful notes, and more."
 ---
 
-# Camunda Java Client for Camunda 8
+# Camunda Java Client
 
-The Camunda Java client is the official Java library for connecting to Camunda 8 clusters, automating processes, and implementing job workers. It is designed for Java developers who want to interact programmatically with Camunda 8 via REST or gRPC, and is the successor to the Zeebe Java client.
+The Camunda Java Client is the official Java library for building process applications that integrate with Camunda 8. Whether you're orchestrating microservices, builing human task orchestration, or visualizing process data, this Client provides everything you need to interact with the Orchestration Cluster programmatically.
 
-The Camunda Java client is part of the Camunda 8 [public API](/reference/public-api.md) and follows [Semantic Versioning](https://semver.org/) (except for alpha features). No breaking changes will be introduced in minor or patch releases.
+## What is the Camunda Java Client?
 
-## Quick links
+The Camunda Java Client is a comprehensive library that enables Java developers to:
 
-- [Add the dependency](#dependencies)
-- [Connect to a cluster (bootstrapping)](#bootstrapping)
-- [Authentication options](authentication.md)
-- [Job worker usage](job-worker.md)
-- [Logging](logging.md)
-- [Testing (Camunda Process Test)](../testing/getting-started.md)
-- [Examples](../java-client-examples/index.md)
+- **Deploy processes and decisions** to Camunda 8 clusters
+- **Start and manage process** programmatically  
+- **Implement job workers** to handle automated tasks in your processes
+- **Query and manage process data** using the Orchestration Cluster API
 
-:::info Migration Notice
-**Camunda Java Client replaces Zeebe Java Client as of version 8.8.**
+The client supports both REST and gRPC protocols, handles authentication automatically, and provides robust error handling and retry mechanisms.
 
-- The new Camunda Java client offers an improved structure and new features.
-- The Zeebe Java client will be **removed in version 8.10**.
-- Please migrate to the Camunda Java client before upgrading to 8.10.
+:::info Migration from Zeebe Java Client
+**The Camunda Java Client replaces the Zeebe Java Client as of version 8.8.**
 
-For details, see our [release announcements](/reference/announcements-release-notes/880/880-announcements.md#camunda-java-client-and-camunda-spring-boot-sdk).
+- Offers improved structure and full Orchestration Cluster API support
+- The Zeebe Java Client will be **removed in version 8.10**
+- **Migrate before upgrading to 8.10** to avoid breaking changes
+
+See our [migration guide](/reference/announcements-release-notes/880/880-announcements.md#camunda-java-client-and-camunda-spring-boot-sdk) for details.
 :::
 
-## What you'll find here
+## What can you build with it?
 
-- How to add the Java client to your project
-- How to connect to a Camunda 8 cluster (REST or gRPC)
-- Authentication options (Basic, OIDC, OIDC with X.509)
-- How to implement job workers
-- Logging configuration
-- How to write process tests (with Camunda Process Test)
-- Example code for common scenarios
+Use the Camunda Java Client to build:
 
-## Dependencies
+- **Job workers** that perform automated tasks and call external systems (APIs, databases, file systems)
+- **Integration services** that connect Camunda processes with your existing systems and third-party services
+- **Data processing applications** that use process data in external systems for visualization, analytics, and business intelligence
 
-To use the Java client library, declare the following Maven dependency in your project:
+## Getting started in 3 steps
 
+### Step 1: Add the dependency
+
+Add the Camunda Java Client to your project:
+
+**Maven:**
 ```xml
 <dependency>
   <groupId>io.camunda</groupId>
@@ -53,75 +53,142 @@ To use the Java client library, declare the following Maven dependency in your p
 </dependency>
 ```
 
-If you are using Gradle, declare the following:
-
+**Gradle:**
 ```groovy
 implementation 'io.camunda:camunda-client-java:${camunda.version}'
 ```
 
-Use the latest released version from [Maven Central](https://search.maven.org/artifact/io.camunda/camunda-client-java).
+Use the latest version from [Maven Central](https://search.maven.org/artifact/io.camunda/camunda-client-java).
 
-## Bootstrapping
+### Step 2: Connect to your Camunda 8 cluster
 
-In Java code, instantiate the client as follows:
+Create a client instance to connect to your Camunda 8 cluster:
 
 ```java
-  private static final String zeebeGrpc = "[Gateway gRPC Address e.g. grpcs://f887f1a6-7c2b-48ce-809a-e11e5a6ba31a.dsm-1.zeebe.camunda.io:443]";
-  private static final String zeebeRest = "[Gateway REST Address e.g. https://dsm-1.zeebe.camunda.io/f887f1a6-7c2b-48ce-809a-e11e5a6ba31a]";
+private static final String grpcAddress = "[Gateway gRPC Address e.g. grpcs://f887f1a6-7c2b-48ce-809a-e11e5a6ba31a.dsm-1.zeebe.camunda.io:443]";
+private static final String restAddress = "[Gateway REST Address e.g. https://dsm-1.zeebe.camunda.io/f887f1a6-7c2b-48ce-809a-e11e5a6ba31a]";
 
-  public static void main(String[] args) {
+public static void main(String[] args) {
+    // For local development (no authentication)
     CredentialsProvider credentialsProvider = new NoopCredentialsProvider();
 
     try (CamundaClient client = CamundaClient.newClientBuilder()
-            .grpcAddress(URI.create(zeebeGrpc))
-            .restAddress(URI.create(zeebeRest))
+            .grpcAddress(URI.create(grpcAddress))
+            .restAddress(URI.create(restAddress))
             .credentialsProvider(credentialsProvider)
             .build()) {
-      client.newTopologyRequest().send().join();
+        
+        // Test the connection
+        client.newTopologyRequest().send().join();
+        System.out.println("Connected to Camunda 8!");
     }
-  }
+}
 ```
 
-Let's go over this code snippet line by line:
+**What this code does:**
+1. **Defines connection addresses** - Get these from your Camunda Console or cluster configuration
+2. **Sets up authentication** - Use `NoopCredentialsProvider` for local development, or see [authentication options](authentication.md) for production
+3. **Creates the client** - Establishes connection to your Camunda 8 cluster
+4. **Tests the connection** - Sends a topology request to verify connectivity
 
-1. Declare a few variables to define the connection properties. These values can be taken from the connection information on the **Client Credentials** page. Note that `clientSecret` is only visible when you create the client credentials.
-2. Create the credentials provider. This is needed to authenticate your client. For different authentication methods, refer to the [authentication](authentication.md) section.
-3. Create the client by passing in the address of the cluster we want to connect to and the credentials provider from the step above. Note that a client should be closed after usage, which is easily achieved by the try-with-resources statement.
-4. Send a test request to verify the connection was established.
-
-Refer to [io.camunda.client.CamundaClientBuilder](https://javadoc.io/doc/io.camunda/camunda-client-java/latest/io/camunda/client/CamundaClientBuilder.html) for a description of all available configuration properties.
-
-Another (more compact) option is to pass in the connection settings via environment variables:
+**Environment variables option:**
+You can also set connection details via environment variables:
 
 ```bash
 export CAMUNDA_GRPC_ADDRESS='[Gateway gRPC Address]'
 export CAMUNDA_REST_ADDRESS='[Gateway REST Address]'
 ```
 
-When you create client credentials in Camunda 8, you have the option to download a file with the lines above filled out for you.
-
-Given these environment variables, you can instantiate the client as follows:
+Then create the client more simply:
 
 ```java
-CamundaClient client =
-    CamundaClient.newClientBuilder()
-        .grpcAddress(System.getenv("CAMUNDA_GRPC_ADDRESS"))
-        .restAddress(System.getenv("CAMUNDA_REST_ADDRESS"))
-        .build();
+CamundaClient client = CamundaClient.newClientBuilder()
+    .grpcAddress(System.getenv("CAMUNDA_GRPC_ADDRESS"))
+    .restAddress(System.getenv("CAMUNDA_REST_ADDRESS"))
+    .build();
 ```
 
 :::note
-Ensure you provide `grpcAddress` and `restAddress` in absolute URI format: `scheme://host(:port)`.
+Ensure addresses are in absolute URI format: `scheme://host(:port)`.
 :::
 
-## Javadoc
+### Step 3: Start building your process application
 
-The official Java client library API documentation can be found [here](https://javadoc.io/doc/io.camunda/camunda-client-java). These are standard Javadocs, so your favorite JVM IDE will be able to install them locally as well.
+Once connected, you can start using the client to build your process application:
 
-## Next steps
+**Deploy a process:**
+```java
+final DeploymentEvent deploymentEvent = client.newDeployResourceCommand()
+    .addResourceFromClasspath("process.bpmn")
+    .send()
+    .join();
+```
 
-- [Getting Started Guide](https://github.com/camunda/camunda-platform-get-started): A comprehensive tutorial that covers Camunda Modeler, Operate, and the Java client.
-- [Job worker](job-worker.md): An introduction to the Java client's job worker.
-- [Logging](logging.md): An introduction to configuring logging for a Camunda client.
-- [Writing tests](zeebe-process-test.md): An introduction to unit testing processes.
-- [Examples](apis-tools/java-client-examples/index.md): A collection of specific examples for different use cases.
+**Start a process instance:**
+```java
+final ProcessInstanceEvent processInstanceEvent = client.newCreateInstanceCommand()
+    .bpmnProcessId("my-process")
+    .latestVersion()
+    .variables(Map.of("orderId", "12345"))
+    .send()
+    .join();
+```
+
+**Implement a job worker:**
+```java
+final String jobType = "send-email";
+
+try (final JobWorker workerRegistration = client.newWorker()
+        .jobType(jobType)
+        .handler(new ExampleJobHandler())
+        .timeout(Duration.ofSeconds(10))
+        .open()) {
+    
+    System.out.println("Job worker opened and receiving jobs.");
+    
+    // run until System.in receives exit command
+    waitUntilSystemInput("exit");
+}
+
+private static class ExampleJobHandler implements JobHandler {
+        @Override
+        public void handle(final JobClient client, final ActivatedJob job) {
+            // here: business logic that is executed with every job
+            System.out.println(job);
+            client.newCompleteCommand(job.getKey()).send().join();
+        }
+    }
+```
+
+## Key features and capabilities
+
+**Full Orchestration Cluster 8 API Support**
+Access all Orchestration Cluster API capabilities including process deployment, process management, job handling, and querying process data.
+
+**Multiple Authentication Methods**
+Supports no authentication (development), basic authentication, and OIDC Access Tokens for production environments.
+
+**Automatic Token Management**
+Handles authentication token acquisition and renewal automatically—no manual token management required.
+
+**Protocol Flexibility**
+Choose between REST and gRPC protocols based on your requirements and infrastructure.
+
+## Next steps and resources
+
+### **Learn the fundamentals:**
+- [Authentication setup](authentication.md) - Configure secure connections to your cluster
+- [Job worker implementation](job-worker.md) - Build workers to handle automated tasks
+- [Process testing](../testing/getting-started.md) - Test your processes with Camunda Process Test
+
+### **Explore examples:**
+- [Java client examples](../java-client-examples/index.md) - Real-world code samples for common scenarios
+- [Getting Started Tutorial](../../guides/getting-started-example.md) - Complete walkthrough with Modeler, Operate, and Spring SDK
+
+### **Advanced topics:**
+- [Logging configuration](logging.md) - Set up proper logging for your application
+- [Client Documentation](https://javadoc.io/doc/io.camunda/camunda-client-java) - Complete Javadoc reference
+
+### **Need help?**
+- [Camunda Community Forum](https://forum.camunda.io/) - Get help from the community
+- [GitHub Repository](https://github.com/camunda/camunda-platform) - Report issues and contribute
