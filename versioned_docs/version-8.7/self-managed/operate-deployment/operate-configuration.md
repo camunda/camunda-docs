@@ -139,6 +139,28 @@ These values are applied only on first startup of Operate or during version upda
 schema is created, settings may be adjusted directly in the Elasticsearch template, and the new settings are applied
 to indices created after adjustment.
 
+#### Settings for index templates priority
+
+Operate creates index templates that Elasticsearch uses for the historical indices. The priority of these templates can be changed.
+
+This is useful when the Elasticsearch provider has some predefined wildcard (with `*` index pattern) index templates with given priority, setting a higher priority for Operate index templates ensures that the correct index mappings and settings are applied on the indices created from these templates.
+
+The following configuration parameter defines the setting:
+
+| Name                                                | Description                                         | Default value   |
+| --------------------------------------------------- | --------------------------------------------------- | --------------- |
+| camunda.operate.elasticsearch.indexTemplatePriority | Priority for all index templates created by Operate | - (no priority) |
+
+This value is applied every time the configuration is changed.
+
+:::note
+The priority should be different (strictly higher) from the wildcard index template one.
+:::
+
+:::note
+This feature is only available for Operate 8.7.11 and later versions.
+:::
+
 #### A snippet from application.yml
 
 ```yaml
@@ -209,6 +231,28 @@ The following configuration parameters define the settings:
 These values are applied only on first startup of Operate or during version update. After the Operate
 schema is created, settings may be adjusted directly in the OpenSearch template, and the new settings are applied
 to indices created after adjustment.
+
+#### Settings for index templates priority
+
+Operate creates index templates that OpenSearch uses for the historical indices. The priority of these templates can be changed.
+
+This is useful when the OpenSearch provider has some predefined wildcard (with `*` index pattern) index templates with given priority, setting a higher priority for Operate index templates ensures that the correct index mappings and settings are applied on the indices created from these templates.
+
+The following configuration parameter defines the setting:
+
+| Name                                             | Description                                         | Default value   |
+| ------------------------------------------------ | --------------------------------------------------- | --------------- |
+| camunda.operate.opensearch.indexTemplatePriority | Priority for all index templates created by Operate | - (no priority) |
+
+This value is applied every time the configuration is changed.
+
+:::note
+The priority should be different (strictly higher) from the wildcard index template one.
+:::
+
+:::note
+This feature is only available for Operate 8.7.11 and later versions.
+:::
 
 #### A snippet from application.yml
 

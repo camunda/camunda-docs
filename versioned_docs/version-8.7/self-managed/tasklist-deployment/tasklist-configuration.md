@@ -131,6 +131,34 @@ Due to a known [bug](https://github.com/camunda/camunda/issues/31238), changes t
 
 :::
 
+### Settings for index templates priority
+
+Tasklist creates index templates that Elasticsearch uses for the historical indices. The priority of these templates can be changed.
+
+This is useful when the Elasticsearch provider has some predefined wildcard (with `*` index pattern) index templates with given priority, setting a higher priority for Tasklist index templates ensures that the correct index mappings and settings are applied on the indices created from these templates.
+
+The following configuration parameter defines the setting:
+
+| Name                                                 | Description                                          | Default value   |
+| ---------------------------------------------------- | ---------------------------------------------------- | --------------- |
+| camunda.tasklist.elasticsearch.indexTemplatePriority | Priority for all index templates created by Tasklist | - (no priority) |
+
+For OpenSearch:
+
+| Name                                              | Description                                          | Default value   |
+| ------------------------------------------------- | ---------------------------------------------------- | --------------- |
+| camunda.tasklist.opensearch.indexTemplatePriority | Priority for all index templates created by Tasklist | - (no priority) |
+
+This value is applied every time the configuration is changed.
+
+:::note
+The priority should be different (strictly higher) from the wildcard index template one.
+:::
+
+:::note
+This feature is only available for Tasklist 8.7.11 and later versions.
+:::
+
 ### Snippet from application.yml
 
 ```yaml
