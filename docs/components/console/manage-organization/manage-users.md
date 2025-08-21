@@ -54,11 +54,13 @@ To update an existing authorization, click on the **pencil icon** of the relevan
 
 ## User task access restrictions
 
-You can restrict user task access in [Tasklist](/components/tasklist/introduction-to-tasklist.md) to assigned users or user group candidates.
+You can control user access to user tasks in Tasklist via [user task access restrictions](components/tasklist/user-task-access-restrictions.md).
 
 For example, if a task has a candidate group named `Team A` and a candidate user named `example`, only the users that belong to `Team A` and the user `example` will have access to the task.
 
-To learn more, visit the [user task access restrictions documentation](/components/concepts/access-control/user-task-access-restrictions.md).
+:::info
+User task access restrictions are only supported with the Tasklist v1 API. For more information, see the documentation on [Tasklist API versions](components/tasklist/api-versions.md#user-task-access-restrictions-and-the-tasklist-api).
+:::
 
 ## Limitations
 
