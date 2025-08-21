@@ -263,9 +263,9 @@ You can also try out an [interactive dashboard](https://snapshots.raintank.io/da
 The data layer comes with a pre-built dashboard, available in the repoSITORY:
 [monitor/grafana/data_layer.json](https://github.com/camunda/camunda/blob/main/monitor/grafana/dashboards/data_layer.json)
 
-- [Import](https://grafana.com/docs/grafana/latest/reference/export_import/#importing-a-dashboard) the dashboard into the Grafana instance 
-and select the correct Prometheus data source (if you have more than one).
-- The dashboard displays information about the key components of the data-layer applying to version `>=8.8`, focusing on the 
-Camunda exporter through which all data passes.
+- [Import](https://grafana.com/docs/grafana/latest/reference/export_import/#importing-a-dashboard) the dashboard into the Grafana instance
+  and select the correct Prometheus data source (if you have more than one).
+- The dashboard displays information about the key components of the data-layer applying to version `>=8.8`, focusing on the
+  Camunda exporter through which all data passes.
 
 ![Example Panels](assets/example-panels-data-layer.png)
