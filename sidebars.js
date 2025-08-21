@@ -70,6 +70,7 @@ module.exports = {
           "Access control": [
             "components/concepts/access-control/access-control-overview",
             "components/concepts/access-control/authorizations",
+            "components/concepts/access-control/connect-to-identity-provider",
             "components/concepts/access-control/user-groups",
             "components/concepts/access-control/user-task-access-restrictions",
           ],
@@ -1539,6 +1540,7 @@ module.exports = {
               items: [
                 "self-managed/components/orchestration-cluster/identity/overview",
                 "self-managed/components/orchestration-cluster/identity/configuration",
+                "self-managed/components/orchestration-cluster/identity/connect-external-identity-provider",
                 "self-managed/components/orchestration-cluster/identity/manage-tenants",
                 {
                   "Mapping rules": [
