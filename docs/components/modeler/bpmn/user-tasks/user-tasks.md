@@ -44,7 +44,7 @@ Note that in SaaS, all user IDs are converted to lowercase by default, as they a
 :::
 
 :::info
-Assignment resources can also be used for set user task restrictions ([SaaS](/components/concepts/access-control/user-task-access-restrictions.md)/[Self-Managed](/components/concepts/access-control/user-task-access-restrictions.md)), where users will see only the tasks they have authorization to work on.
+Assignment resources can also be used to set [user task restrictions in Tasklist](/components/tasklist/user-task-access-restrictions.md), where users will see only the tasks they have authorization to work on.
 :::
 
 Typically, the assignee, candidate users, and candidate groups are defined as [static values](/components/concepts/expressions.md#expressions-vs-static-values) (e.g. `some_username`, `some_username, another_username` and
@@ -128,6 +128,7 @@ Depending on your use case, two different types of form references can be used:
    of the task's `zeebe:formDefinition` extension element (see the [XML representation](#camunda-form)).
 
    The `bindingType` attribute determines which version of the linked form is used:
+
    - `latest`: The latest deployed version at the moment the user task is activated.
    - `deployment`: The version that was deployed together with the currently running version of the process.
    - `versionTag`: The latest deployed version that is annotated with the version tag specified in the `versionTag` attribute.

@@ -52,7 +52,7 @@ User task access restrictions are only supported with the Tasklist v1 API. For m
 Changes to this setting can take a few minutes to be applied, as it requires a Tasklist restart.
 
 :::tip
-For more information on user task access restrictions, see [user task access restrictions](/components/concepts/access-control/user-task-access-restrictions.md).
+For more information on user task access restrictions, see [user task access restrictions](/components/tasklist/user-task-access-restrictions.md).
 :::
 
 ## Delete this cluster
