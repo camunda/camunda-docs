@@ -81,7 +81,7 @@ curl --request POST ${CAMUNDA_OAUTH_URL} \
 3. Use the `access_token` from the response in your API requests:
 
 ```shell
-curl --header "Authorization: Bearer ${TOKEN}" \
+curl --header "Authorization: Bearer ${ACCESS_TOKEN}" \
      ${BASE_URL}/topology
 ```
 
@@ -91,8 +91,8 @@ Replace the `${BASE_URL}` based on the address of your cluster. See the [Context
 
 <TabItem value="self-managed">
 
-1. [Register an application in Identity](/self-managed/components/management-identity/application-user-group-role-management/applications.md) and assign permissions.
-2. Use the credentials to request a token:
+1. Register a client in your Identity Provider (IdP). An IdP is a service that manages digital identities and authentication, such as Keycloak, Azure Entra, Okta, or similar systems.
+2. Use the credentials (`CLIENT_ID` and `CLIENT_SECRET`) to request an `access_token`. The example below shows Keycloak configuration (endpoint URL will vary based on your IdP):
 
 ```shell
 curl --location --request POST 'http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token' \
@@ -102,10 +102,10 @@ curl --location --request POST 'http://localhost:18080/auth/realms/camunda-platf
 --data-urlencode 'grant_type=client_credentials'
 ```
 
-3. Use the `access_token` from the response in your API requests:
+3. Pass the `access_token` in the Authorization header as an OAuth 2.0 Bearer Token to the Orchestration Cluster API:
 
 ```shell
-curl --header "Authorization: Bearer ${TOKEN}" \
+curl --header "Authorization: Bearer ${ACCESS_TOKEN}" \
      ${BASE_URL}/topology
 ```
 
