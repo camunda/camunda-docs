@@ -7,13 +7,18 @@ description: "Find out where to run Camunda 8 components for SaaS and Self-Manag
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-The supported environments page lists browsers, operating systems, clients, deployment options, and component requirements, which are tested and supported for compatibility with Camunda 8.
+The following browsers, operating systems, clients, deployment options, and component requirements are tested and supported for compatibility with Camunda 8.
 
-**If the particular technology is not listed, we cannot resolve issues caused by the usage of that unlisted technology.**
+## About supported environments
 
-You may [raise a feature request](/reference/contact.md) that will be evaluated by our product teams to provide official support from Camunda, or you can make a [help request](/reference/contact.md) to work with Consulting services.
+**If a particular technology is not listed below, Camunda cannot resolve issues caused by its usage.**
 
-Recommendations are denoted with [recommended], however, other listed options are supported as well.
+You can:
+
+- [Raise a feature request](/reference/contact.md) that will be evaluated by our product teams to provide official support from Camunda.
+- [Make a help request](/reference/contact.md) to work with Camunda consulting services.
+
+Recommendations are denoted with [recommended], however, other listed options are also supported.
 
 :::note Minimum versions
 The versions listed on this page are the minimum version required if appended with a `+`.
@@ -24,7 +29,7 @@ For example, 1.2+ means support for the minor version 2, and any higher minors (
 
 :::
 
-## Web Browser
+## Web browsers
 
 - Google Chrome latest [recommended]
 - Mozilla Firefox latest
@@ -50,7 +55,7 @@ We recommend running Camunda 8 Self-Managed in a Kubernetes environment. We prov
 
 ### Deployment options
 
-With the right configuration, Camunda 8 Self-Managed can be deployed on any [Certified Kubernetes](https://www.cncf.io/training/certification/software-conformance/#benefits) distribution (cloud or on-premises). However, we officially test and support a specific list of platforms.
+With the correct configuration, Camunda 8 Self-Managed can be deployed on any [Certified Kubernetes](https://www.cncf.io/training/certification/software-conformance/#benefits) distribution (cloud or on-premises). However, we officially test and support a specific list of platforms.
 
 The following are tested and supported deployment options for Kubernetes, Docker, and manual installation:
 
