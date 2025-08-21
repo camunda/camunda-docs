@@ -17,6 +17,7 @@ keywords:
   ]
 ---
 
+import AskAi from './react-components/\_banner-ask-ai.md'
 import CredentialsImg from './img/create-issue-request.png';
 import BugImg from './img/icon-reference-bug.png';
 import CommunityImg from './img/icon-reference-community.png';
@@ -53,6 +54,8 @@ Get support for Camunda or send us your feedback via the following channels.
 <td>Request support or send feedback via Jira by following our [Enterprise support process](https://camunda.com/services/enterprise-support-guide/). You can also find feedback and support options in the Help Center or [Camunda community forum](https://forum.camunda.io/).</td>
 </tr>
 </table>
+
+<AskAi/>
 
 ## Locate your Camunda 8 credentials
 

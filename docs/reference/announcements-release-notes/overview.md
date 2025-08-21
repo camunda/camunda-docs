@@ -10,31 +10,36 @@ Announcements and release notes for supported versions of the Camunda documentat
 <tr>
 <td>**Version**</td>
 <td>**Release date**</td>
-<td>**Documentation**</td>
+<td>**Announcements**</td>
+<td>**Release notes**</td>
 <td>**Scheduled End of maintenance**</td>
 </tr>
 <tr>
 <td>8.8</td>
 <td>14 October 2025</td>
-<td>[8.8 release announcements](/reference/announcements-release-notes/880/880-announcements.md) / [8.8 release notes](/reference/announcements-release-notes/880/880-release-notes.md)</td>
+<td>[8.8 release announcements](/reference/announcements-release-notes/880/880-announcements.md)</td>
+<td>[8.8 release notes](/reference/announcements-release-notes/880/880-release-notes.md)</td>
 <td>13 April 2027</td>
 </tr>
 <tr>
 <td>8.7</td>
 <td>8 April 2025</td>
-<td>[8.7 release announcements](/reference/announcements-release-notes/870/870-announcements.md) / [8.7 release notes](/reference/announcements-release-notes/870/870-release-notes.md)</td>
+<td>[8.7 release announcements](/reference/announcements-release-notes/870/870-announcements.md)</td>
+<td>[8.7 release notes](/reference/announcements-release-notes/870/870-release-notes.md)</td>
 <td>13 October 2026</td>
 </tr>
 <tr>
 <td>8.6</td>
 <td>8 October 2024</td>
-<td>[8.6 release announcements](/reference/announcements-release-notes/860/860-announcements.md) / [8.6 release notes](/reference/announcements-release-notes/860/860-release-notes.md)</td>
+<td>[8.6 release announcements](/reference/announcements-release-notes/860/860-announcements.md)</td>
+<td>[8.6 release notes](/reference/announcements-release-notes/860/860-release-notes.md)</td>
 <td>14 April 2026</td>
 </tr>
 <tr>
 <td>8.5</td>
 <td>9 April 2024</td>
-<td>[8.5 release announcements](/reference/announcements-release-notes/850/850-announcements.md) / [8.5 release notes](/reference/announcements-release-notes/850/850-release-notes.md)</td>
+<td>[8.5 release announcements](/reference/announcements-release-notes/850/850-announcements.md)</td>
+<td>[8.5 release notes](/reference/announcements-release-notes/850/850-release-notes.md)</td>
 <td>14 October 2025</td>
 </tr>
 </table>
