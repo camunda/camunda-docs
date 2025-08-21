@@ -8,6 +8,7 @@ slug: /reference/
 import "./react-components/\_release-table.css";
 import ReleasesGrid from './react-components/\_release-card';
 import { gettingStartedCards, securityCards } from './react-components/\_release-card-data';
+import AskAi from './react-components/\_banner-ask-ai.md'
 
 General Camunda 8 reference material, including release, security, licensing, and support information.
 
@@ -31,6 +32,4 @@ Reference information including published security notices, licensing, supported
 
 [Get support](contact.md) for Camunda or send us your feedback.
 
-:::tip
-Learn how you can [locate and obtain your Camunda 8 credentials](contact.md#locate-your-camunda-8-credentials).
-:::
+<AskAi/>
