@@ -101,6 +101,13 @@ public static void main(String[] args) {
     }
 }
 ```
+
+**What this code does:**
+1. **Creates a no-authentication provider** - Configures the client to skip authentication entirely
+2. **Builds an unencrypted client** - Sets up plaintext communication for local development
+3. **Connects to both APIs** - Configures access to both Zeebe gRPC and Orchestration Cluster REST APIs
+4. **Tests the connection** - Verifies connectivity by requesting cluster topology information
+
 **Environment variables option:**
 You can set the connection details via environment variables and create the client more simply:
 
@@ -118,8 +125,6 @@ The client will automatically read the environment variables and configure the a
 :::note
 Ensure addresses are in absolute URI format: `scheme://host(:port)`.
 :::
-
-
 
 </TabItem>
 
@@ -141,8 +146,8 @@ public static void main(String[] args) {
             .build();
 
     try (CamundaClient client = CamundaClient.newClientBuilder()
-            .grpcAddress(URI.create(grpcAddress))
-            .restAddress(URI.create(restAddress))
+            .grpcAddress(URI.create(CAMUNDA_GRPC_ADDRESS))
+            .restAddress(URI.create(CAMUNDA_REST_ADDRESS))
             .credentialsProvider(credentialsProvider)
             .build()) {
         
@@ -152,6 +157,12 @@ public static void main(String[] args) {
     }
 }
 ```
+
+**What this code does:**
+1. **Sets up username/password authentication** - Configures the client to authenticate using basic credentials
+2. **Builds a secure client** - Creates an encrypted connection to the cluster
+3. **Connects to both APIs** - Configures access to both Zeebe gRPC and Orchestration Cluster REST APIs
+4. **Tests the connection** - Verifies authentication works by requesting cluster topology information
 
 **Environment variables option:**
 You can set the connection details via environment variables and create the client more simply:
@@ -208,6 +219,13 @@ public static void main(String[] args) {
     }
 }
 ```
+
+**What this code does:**
+1. **Sets up OAuth2 authentication** - Configures the client to authenticate using OAuth tokens from your identity provider
+2. **Builds a secure client** - Creates an encrypted connection to your self-managed cluster
+3. **Connects to both APIs** - Configures access to both Zeebe gRPC and Orchestration Cluster REST APIs
+4. **Tests the connection** - Verifies OAuth authentication works by requesting cluster topology information
+
 **Environment variables option:**
 You can set the connection details via environment variables and create the client more simply:
 
@@ -229,7 +247,6 @@ The client will automatically read the environment variables and configure the a
 :::note
 Ensure addresses are in absolute URI format: `scheme://host(:port)`.
 :::
-
 
 </TabItem>
 
@@ -260,6 +277,12 @@ public static void main(String[] args) {
 }
 ```
 
+**What this code does:**
+1. **Sets up SaaS authentication** - Configures the client to connect to Camunda 8 SaaS using your cluster credentials
+2. **Builds a cloud client** - Creates a client optimised for SaaS with automatic endpoint discovery
+3. **Connects to your cluster** - Uses your cluster ID and region to find and connect to the right SaaS instance
+4. **Tests the connection** - Verifies SaaS authentication works by requesting cluster topology information
+
 **Environment variables option:**
 You can set the connection details via environment variables and create the client more simply:
 
@@ -282,20 +305,15 @@ The client will automatically read the environment variables and configure the a
 Ensure addresses are in absolute URI format: `scheme://host(:port)`.
 :::
 
-
 </TabItem>
 
 </Tabs>
 
-**What this code does:**
-1. **Defines connection addresses** - Get these from your Camunda Console or cluster configuration
-2. **Sets up authentication** - Choose the appropriate method based on your environment
-3. **Creates the client** - Establishes connection to your Camunda 8 cluster
-4. **Tests the connection** - Sends a topology request to verify connectivity
-
 ### Step 3: Start building your process application
 
-Once connected, you can start using the client to build your process application:
+Now that you have a connected client, you're ready to build your process application. Here are the core operations you'll typically perform, along with guidance on what to do next.
+
+#### Essential operations
 
 **Deploy a process:**
 ```java
@@ -304,16 +322,18 @@ final DeploymentEvent deploymentEvent = client.newDeployResourceCommand()
     .send()
     .join();
 ```
+This deploys your BPMN process definition to the cluster. Place your `.bpmn` files in `src/main/resources` and reference them by filename.
 
 **Start a process instance:**
 ```java
 final ProcessInstanceEvent processInstanceEvent = client.newCreateInstanceCommand()
     .bpmnProcessId("my-process")
     .latestVersion()
-    .variables(Map.of("orderId", "12345"))
+    .variables(Map.of("orderId", "12345", "amount", 100.0))
     .send()
     .join();
 ```
+This creates a new instance of your process. The `bpmnProcessId` should match the Process ID from your BPMN file, and you can pass initial variables as a Map.
 
 **Implement a job worker:**
 ```java
@@ -321,25 +341,37 @@ final String jobType = "send-email";
 
 try (final JobWorker workerRegistration = client.newWorker()
         .jobType(jobType)
-        .handler(new ExampleJobHandler())
+        .handler(new EmailJobHandler())
         .timeout(Duration.ofSeconds(10))
         .open()) {
-    
-    System.out.println("Job worker opened and receiving jobs.");
-    
-    // run until System.in receives exit command
-    waitUntilSystemInput("exit");
-}
 
-private static class ExampleJobHandler implements JobHandler {
-        @Override
-        public void handle(final JobClient client, final ActivatedJob job) {
-            // here: business logic that is executed with every job
-            System.out.println(job);
-            client.newCompleteCommand(job.getKey()).send().join();
-        }
+        System.out.println("Job worker opened and receiving jobs of type: " + jobType);
+
+// Keep the worker running
+                Thread.sleep(Duration.ofMinutes(10));
+        } catch (InterruptedException e) {
+        throw new RuntimeException(e);
+            }
+
+private static class EmailJobHandler implements JobHandler {
+    @Override
+    public void handle(final JobClient client, final ActivatedJob job) {
+        // Extract variables from the job
+        final Map<String, Object> variables = job.getVariablesAsMap();
+        
+        // Perform your business logic here
+        System.out.println("Processing job: " + job.getType());
+        System.out.println("Variables: " + variables);
+        
+        // Complete the job (or use client.newFailCommand() if something goes wrong)
+        client.newCompleteCommand(job.getKey())
+            .variables(Map.of("emailSent", true))
+            .send()
+            .join();
     }
+}
 ```
+Job workers handle automated tasks in your processes. Each worker subscribes to specific job types and processes them as they become available.
 
 ## Key features and capabilities
 
@@ -372,4 +404,4 @@ Choose between REST and gRPC protocols based on your requirements and infrastruc
 
 ### **Need help?**
 - [Camunda Community Forum](https://forum.camunda.io/) - Get help from the community
-- [GitHub Repository](https://github.com/camunda/camunda-platform) - Report issues and contribute
+- [GitHub Repository](https://github.com/camunda/camunda) - Report issues and contribute
