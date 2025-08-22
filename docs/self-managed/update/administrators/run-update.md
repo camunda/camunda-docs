@@ -48,7 +48,7 @@ Perform an upgrade as follows.
 
 ### Helm chart
 
-If you are using Kubernetes with the Camunda Helm chart, follow the [Helm chart upgrade guide for 8.7 to 8.8](/docs/self-managed/installation-methods/helm/upgrade/helm-870-880.md).
+If you are using Kubernetes with the Camunda Helm chart, follow the [Helm chart upgrade guide for 8.7 to 8.8](/self-managed/installation-methods/helm/upgrade/helm-870-880.md).
 
 - The Helm chart upgrade guide covers update options, handling of secrets, and monitoring of migration jobs.
 - If you are creating your own deployment scripts, you can use the official Helm charts as a reference or technical specification.
