@@ -10,7 +10,9 @@ import TabItem from "@theme/TabItem";
 
 # Camunda Java Client
 
-The Camunda Java Client is the official Java library for building process applications that integrate with Camunda 8. Whether you're orchestrating microservices, builing human task orchestration, or visualizing process data, this Client provides everything you need to interact with the Orchestration Cluster programmatically.
+The Camunda Java Client is the official Java library for building process applications that integrate with Camunda 8. Whether you're orchestrating microservices, building human task orchestration, or visualising process data, this Client provides everything you need to interact with the Orchestration Cluster programmatically.
+
+The Camunda Java client is part of the Camunda 8 [public API](/reference/public-api.md) and follows [Semantic Versioning](https://semver.org/) (except for alpha features). No breaking changes will be introduced in minor or patch releases.
 
 ## What is the Camunda Java Client?
 
@@ -39,7 +41,7 @@ Use the Camunda Java Client to build:
 
 - **Job workers** that perform automated tasks and call external systems (APIs, databases, file systems)
 - **Integration services** that connect Camunda processes with your existing systems and third-party services
-- **Data processing applications** that use process data in external systems for visualization, analytics, and business intelligence
+- **Data processing applications** that use process data in external systems for visualisation, analytics, and business intelligence
 
 ## Getting started in 3 steps
 
@@ -65,7 +67,7 @@ Use the latest version from [Maven Central](https://search.maven.org/artifact/io
 
 ### Step 2: Connect to your Camunda 8 cluster
 
-Create a client instance to connect to your Camunda 8 cluster. Choose the authentication method based on your environment:
+Instantiate a client to connect to your Camunda 8 cluster. Choose the [authentication method](../orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md) based on your environment:
 
 <Tabs groupId="authentication" defaultValue="no-auth" queryString values={[
 {label: 'No Authentication', value: 'no-auth' },
@@ -76,11 +78,11 @@ Create a client instance to connect to your Camunda 8 cluster. Choose the authen
 
 <TabItem value="no-auth">
 
-**Use for:** Local development with C8 Run or Docker Compose when security is not required.
+**Use for:** Local development when security is not required.
 
 ```java
-private static final String CAMUNDA_GRPC_ADDRESS = "[Address of Zeebe API (gRPC) - default: grpcs://localhost:26500]";
-private static final String CAMUNDA_REST_ADDRESS = "[Address of the Orchestration Cluster API - default: http://localhost:8080/2]";
+private static final String CAMUNDA_GRPC_ADDRESS = "[Address of Zeebe API (gRPC) - default: http://localhost:26500]";
+private static final String CAMUNDA_REST_ADDRESS = "[Address of the Orchestration Cluster API - default: http://localhost:8080]";
 
 public static void main(String[] args) {
     
@@ -99,12 +101,25 @@ public static void main(String[] args) {
     }
 }
 ```
-
 **Environment variables option:**
+You can set the connection details via environment variables and create the client more simply:
+
 ```bash
-export CAMUNDA_GRPC_ADDRESS='grpcs://localhost:26500'
-export CAMUNDA_REST_ADDRESS='http://localhost:8080'
+export CAMUNDA_GRPC_ADDRESS='[Address of Zeebe API (gRPC) - default: http://localhost:26500]'
+export CAMUNDA_REST_ADDRESS='[Address of the Orchestration Cluster API - default: http://localhost:8080]'
 ```
+
+```java
+CamundaClient client = CamundaClient.newClientBuilder().usePlaintext().build();
+```
+
+The client will automatically read the environment variables and configure the appropriate authentication method.
+
+:::note
+Ensure addresses are in absolute URI format: `scheme://host(:port)`.
+:::
+
+
 
 </TabItem>
 
@@ -113,13 +128,13 @@ export CAMUNDA_REST_ADDRESS='http://localhost:8080'
 **Use for:** Development or testing environments with username/password protection.
 
 ```java
-private static final String CAMUNDA_GRPC_ADDRESS = "[Address of Zeebe API (gRPC) - default: grpcs://localhost:26500]";
-private static final String CAMUNDA_REST_ADDRESS = "[Address of the Orchestration Cluster API - default: http://localhost:8080/2]";
-private static final String CAMUNDA_CLIENT_USERNAME = "demo"; // or your username
-private static final String CAMUNDA_CLIENT_PASSWORD = "demo"; // or your password
+private static final String CAMUNDA_GRPC_ADDRESS = "[Address of Zeebe API (gRPC) - default: http://localhost:26500]";
+private static final String CAMUNDA_REST_ADDRESS = "[Address of the Orchestration Cluster API - default: http://localhost:8080]";
+private static final String CAMUNDA_CLIENT_USERNAME = "[Your username - default: demo]";
+private static final String CAMUNDA_CLIENT_PASSWORD = "[Your password - default: demo]";
 
 public static void main(String[] args) {
-    // Basic authentication with username/password
+    
     CredentialsProvider credentialsProvider = new BasicAuthCredentialsProviderBuilder()
             .username(CAMUNDA_CLIENT_USERNAME)
             .password(CAMUNDA_CLIENT_PASSWORD)
