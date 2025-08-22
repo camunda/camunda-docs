@@ -15,7 +15,7 @@ This guide focuses on the API and SDK transitions required in an upgrade from Ca
 
 Camunda 8.8 introduces a significant architectural evolution that impacts both infrastructure deployment and application integration:
 
-- A new [orchestration cluster](/components/whats-new-in-88.md#orchestration-cluster) architecture.
+- A new [Orchestration Cluster](/components/whats-new-in-88.md#orchestration-cluster) architecture.
 - Unified APIs for a more consistent developer experience.
 - Updated authentication models.
 - Deprecation of several legacy components.
@@ -128,6 +128,6 @@ Check the Orchestration Cluster API on User Tasks for more information on how to
 
 Ready to upgrade and migrate? Complete the following steps:
 
-1. **Coordinate your platform and development teams**: Ensure your orchestration cluster is upgraded to 8.8 before upgrading your application clients.
+1. **Coordinate your platform and development teams**: Ensure your Orchestration Cluster is upgraded to 8.8 before upgrading your application clients.
 
 2. **Review migration guides**: Coming soon: Links to detailed guides on each component migration.
