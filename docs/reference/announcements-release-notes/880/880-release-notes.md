@@ -19,6 +19,14 @@ These release notes identify the new features included in 8.8, including [alpha 
 | ---------------------- | ---------------------------- | ------------ | ------------ | ------------ |
 | 14 October 2025        | 13 April 2027                | -            | -            | -            |
 
+:::info 8.8 resources
+
+- See [release announcements](/reference/announcements-release-notes/880/880-announcements.md) to learn more about supported environment changes and breaking changes or deprecations.
+- See [What's new in Camunda 8.8](/components/whats-new-in-88.md) for important changes to consider when planning your upgrade from Camunda 8.7.
+- Refer to the [quality board](https://github.com/orgs/camunda/projects/187/views/15) for an overview of known bugs by component and severity.
+
+:::
+
 ## 8.8.0-alpha7
 
 | Release date   | Changelog(s)                                                                                                                                                                               | Blog                                                                                |
@@ -586,6 +594,7 @@ A Spring Boot SDK is provided for the Orchestration cluster REST API to unify pr
 - Easily integrate process entity management and queries within your workflows.
 - Seamlessly configure endpoints and authentication via Spring Boot auto-configuration, minimizing boilerplate code.
 - Rely on an official, standardized approach to guarantee consistency and reduce maintenance costs when upgrading.
+- Based on Spring Boot 3.5 ([version compatibility matrix](/apis-tools/spring-zeebe-sdk/getting-started.md#version-compatibility)).
 
 To learn more about this feature, see the [Camunda Spring Boot SDK](/apis-tools/spring-zeebe-sdk/getting-started.md).
 
