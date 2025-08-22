@@ -1,6 +1,6 @@
 ---
 sidebar_label: Troubleshooting
-title: Camunda componenets troubleshooting
+title: Camunda components troubleshooting
 description: "Troubleshooting considerations in Platform deployment."
 ---
 
