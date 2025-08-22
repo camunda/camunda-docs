@@ -154,8 +154,7 @@ The following configuration parameter defines the setting:
 This value is applied every time the configuration is changed.
 
 :::note
-The priority should be different (strictly higher) from the wildcard index template one.
-:::
+The priority should be different (strictly higher) than that set by the wildcard templates.
 
 :::note
 This feature is only available for Operate 8.7.11 and later versions.
@@ -247,7 +246,7 @@ The following configuration parameter defines the setting:
 This value is applied every time the configuration is changed.
 
 :::note
-The priority should be different (strictly higher) from the wildcard index template one.
+The priority should be different (strictly higher) than that set by the wildcard templates.
 :::
 
 :::note
