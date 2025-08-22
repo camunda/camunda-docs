@@ -1,17 +1,17 @@
 ---
 id: orchestration-cluster-api-rest-authentication
 title: "Authentication"
-description: "Step through authentication options that can be used to access Orchestration Cluster API."
+description: "Step through authentication options that can be used to access the Orchestration Cluster REST API."
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-This page describes the available authentication methods for accessing the Orchestration Cluster API. It outlines when to use each method and how to configure your API requests for secure and appropriate access.
+This page describes the available authentication methods for accessing the Orchestration Cluster REST API. It outlines when to use each method and how to configure your API requests for secure and appropriate access.
 
-# Authentication methods for the Orchestration Cluster API
+# Authentication methods for the Orchestration Cluster REST API
 
-The Orchestration Cluster API supports three authentication methods depending on your environment and configuration:
+The Orchestration Cluster REST API supports three authentication methods depending on your environment and configuration:
 
 - **No Authentication**
 - **Basic Authentication**
@@ -36,7 +36,7 @@ The Orchestration Cluster API supports three authentication methods depending on
 
 ## No Authentication (Local Development)
 
-By default, Camunda 8 Run and Docker Compose expose the Orchestration Cluster API without authentication for local development. You can make API requests directly:
+By default, Camunda 8 Run and Docker Compose expose the Orchestration Cluster REST API without authentication for local development. You can make API requests directly:
 
 ```shell
 curl http://localhost:8080/v2/topology

@@ -13,9 +13,10 @@ Supported environment changes and breaking changes or deprecations for the Camun
 | :--------------------- | :--------------------------- | :------------ | :--- |
 | 14 October 2025        | 13 April 2027                | -             | -    |
 
-:::tip Release notes and quality board
+:::info 8.8 resources
 
 - See [release notes](/reference/announcements-release-notes/880/880-release-notes.md) to learn more about new features and enhancements.
+- See [What's new in Camunda 8.8](/components/whats-new-in-88.md) for important changes to consider when planning your upgrade from Camunda 8.7.
 - Refer to the [quality board](https://github.com/orgs/camunda/projects/187/views/15) for an overview of known bugs by component and severity.
 
 :::
@@ -28,7 +29,7 @@ Camunda now supports Elasticsearch 8.16+ and OpenSearch 2.17+ as minimal version
 
 ### Zeebe, Operate, Tasklist, and Identity must run on exact same minor and patch levels
 
-From version `8.8.0` forward, the following core [Orchestration cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) components must run on the exact same `minor`and `patch` level to ensure compatibility: Zeebe, Operate, Tasklist, and Identity. See the [component version matrix](/reference/supported-environments.md#component-version-matrix) or the [Self-Managed reference architecture](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) for an overview of components.
+From version `8.8.0` forward, the following core [Orchestration Cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) components must run on the exact same `minor`and `patch` level to ensure compatibility: Zeebe, Operate, Tasklist, and Identity. See the [component version matrix](/reference/supported-environments.md#component-version-matrix) or the [Self-Managed reference architecture](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) for an overview of components.
 
 ### Installation and deployment updates <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
@@ -40,7 +41,7 @@ You can download the alpha release of the unified package from the Camunda GitHu
 
 The 13.0.0-alpha2 Helm chart released with Camunda 8.8.0-alpha2 establishes a new default setup to support 8.8 [Identity management updates](#identity-management-updates-saasself-managed). Currently, this setup is limited to the following components:
 
-- The Orchestration core (Zeebe, Operate, Tasklist, and Orchestration cluster Identity)
+- The Orchestration core (Zeebe, Operate, Tasklist, and Orchestration Cluster Identity)
 - Connectors
 
 This temporary limitation will be resolved in subsequent alpha releases.
@@ -183,12 +184,12 @@ This document explicitly identifies the components and interfaces that are cover
 The 8.8 release includes API updates to support the move to an [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) unified experience. See more details in the [release notes](/reference/announcements-release-notes/880/880-release-notes.md).
 
 :::note
-Starting with the Camunda 8.8 release, the Camunda 8 REST API is renamed to the **Orchestration Cluster API**.
+Starting with the Camunda 8.8 release, the Camunda 8 REST API is renamed to the **Orchestration Cluster REST API**.
 :::
 
 #### Deprecated: Operate and Tasklist v1 REST APIs
 
-The deprecation process for the [Operate](/apis-tools/operate-api/overview.md) and [Tasklist](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md) REST APIs starts with the 8.8 release. You can begin migrating to the [Orchestration cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) for querying to prepare for this change.
+The deprecation process for the [Operate](/apis-tools/operate-api/overview.md) and [Tasklist](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md) REST APIs starts with the 8.8 release. You can begin migrating to the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) for querying to prepare for this change.
 
 - Version 8.9: These APIs are still available but deprecated, and so not recommended for new implementations.
 - Version 8.10: These APIs will be removed.
@@ -255,6 +256,10 @@ Use the corresponding endpoints under `/api/v1/versions` instead.
 With the 8.8 release, the `connector_template` file type in the [Web Modeler API](/apis-tools/web-modeler-api/index.md) endpoint for file creation (`POST /api/v1/files`) is deprecated and will be removed in version 8.10.
 Please use `element_template` instead, which provides equivalent functionality.
 
+#### Removed: Optimize Index Rollover
+
+Prior to the 8.8 release, Optimize used the `externalVariable.variableIndexRollover.maxIndexSizeGB` and `externalVariable.variableIndexRollover.scheduleIntervalInMinutes` configuration properties to apply index rollover to its External Variable Indices. These properties have been deleted in 8.8, and External Variables will now be stored in a single index.
+
 ### Camunda Exporter <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
 Camunda web applications used importers and archivers to consume, aggregate, and archive historical data provided by the Elasticsearch (ES) or OpenSearch (OS) exporters.
@@ -288,6 +293,8 @@ With the Camunda 8.8 release, Camunda Java Client and Camunda Spring Boot SDK re
 
 The `CamundaClient` replaces the `ZeebeClient`, offering the same functionality and adding new capabilities.
 
+The Camunda Spring Boot SDK is based on Spring Boot 3.5, see [version compatibility matrix](/apis-tools/spring-zeebe-sdk/getting-started.md#version-compatibility).
+
 :::note
 
 - If you need to continue using the old `ZeebeClient`, you can use the new version 8.8 `CamundaClient` artifact without issues as it still contains the related `ZeebeClient` classes. Those classes are marked as deprecated, so you can easily spot code you need to adjust to the `CamundaClient`.
@@ -295,6 +302,19 @@ The `CamundaClient` replaces the `ZeebeClient`, offering the same functionality 
 - The Zeebe Java client will not be developed further and only receives bug fixes while version 8.7 is officially supported.
 
 :::
+
+### Deprecated: Zeebe Process Test
+
+With the **8.8 release**, Camunda announces the **deprecation of [Zeebe Process Test](../../../apis-tools/java-client/zeebe-process-test.md)**.
+
+It is superseded by [Camunda Process Test](../../../apis-tools/testing/getting-started.md) going forward.
+
+Zeebe Process Test is **scheduled for removal in the 8.10 release**.
+
+For more information, refer to:
+
+- [Migrate to Camunda Process Test](../../../apis-tools/migration-manuals/migrate-to-camunda-process-test.md)
+- [Introducing Camunda Process Test—The Next Generation Testing Library](https://camunda.com/blog/2025/04/camunda-process-test-the-next-generation-testing-library/)
 
 ### Camunda 8 Self-Managed
 

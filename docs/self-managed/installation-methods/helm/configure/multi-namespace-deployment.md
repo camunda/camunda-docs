@@ -20,7 +20,7 @@ The primary goal of a multi-namespace deployment is **logical grouping**, which 
 Security considerations are outside the scope of this deployment model. As a result, all credentials associated with the same deployment are shared across namespaces.
 :::
 
-In the following sections, we demonstrate a multi-namespace Camunda deployment. One namespace is assigned to the management cluster, while two other namespaces are used for the orchestration cluster.
+In the following sections, we demonstrate a multi-namespace Camunda deployment. One namespace is assigned to the management cluster, while two other namespaces are used for the Orchestration Cluster.
 
 ## Management deployment
 

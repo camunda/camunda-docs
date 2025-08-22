@@ -73,7 +73,7 @@ When you model a service task in your BPMN process and assign it a job type (e.g
 The Java client provides a job worker that handles polling for available jobs. This allows you to focus on writing code to handle the activated jobs.
 
 :::caution REST API limitation
-The 8.6.0 Java client cannot maintain the long-lived polling connections required for job polling via the Orchestration cluster REST API. For example, this applies when:
+The 8.6.0 Java client cannot maintain the long-lived polling connections required for job polling via the Orchestration Cluster REST API. For example, this applies when:
 
 - Performing long-polling job activation when activating jobs larger than the maximum message size.
 - Receiving additional job activation requests from the same Java client while the long-polling connection is still open.

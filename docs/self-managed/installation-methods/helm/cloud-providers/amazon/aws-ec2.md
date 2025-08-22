@@ -6,7 +6,7 @@ description: "Learn how to install Camunda 8 on AWS EC2 instances."
 
 This guide provides a detailed walkthrough for installing the Camunda 8 single JAR on AWS EC2 instances. It focuses on managed services provided by AWS and their cloud offering. Finally, you will verify that the connection to your Self-Managed Camunda 8 environment is functioning correctly.
 
-This guide focuses on setting up the [Orchestration Cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console) for Camunda 8. The Web Modeler and Console are not covered in this manual deployment approach, as these components are not supported on virtual machines. To deploy Web Modeler and Console, explore the available options for [Kubernetes-based deployments](/self-managed/installation-methods/helm/install.md#install-web-modeler).
+This guide focuses on setting up the [Orchestration Cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console) for Camunda 8. Web Modeler and Console are not covered in this manual deployment approach, as these components are not supported on virtual machines. To deploy Web Modeler and Console, explore the available options for [Kubernetes-based deployments](/self-managed/installation-methods/helm/install.md#install-web-modeler).
 
 :::note Using other cloud providers
 This guide is based on tools and services provided by AWS but is not limited to them. The scripts and concepts included can be adapted for other cloud providers and use cases.
