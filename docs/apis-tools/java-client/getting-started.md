@@ -489,36 +489,29 @@ For a comprehensive example that demonstrates all the above steps, see the [Depl
 
 ## Key features and capabilities
 
-**Full Orchestration Cluster 8 API Support**
-Access all Orchestration Cluster API capabilities including process deployment, process management, job handling, and querying process data.
-
-**Multiple Authentication Methods**
-Supports no authentication (development), basic authentication, and OIDC Access Tokens for production environments.
-
-**Automatic Token Management**
-Handles authentication token acquisition and renewal automatically—no manual token management required.
-
-**Protocol Flexibility**
-Choose between REST and gRPC protocols based on your requirements and infrastructure.
+- **Full Orchestration Cluster 8 API Support:** Access all Orchestration Cluster API capabilities including process deployment, process management, job handling, and querying process data.
+- **Multiple Authentication Methods:** Supports no authentication (development), basic authentication, and OIDC Access Tokens for production environments.
+- **Automatic Token Management:** Handles authentication token acquisition and renewal automatically—no manual token management required.
+- **Protocol Flexibility:** Choose between REST and gRPC protocols based on your requirements and infrastructure.
 
 ## Next steps and resources
 
-### **Learn the fundamentals:**
+**Learn the fundamentals:**
 
 - [Job worker implementation](job-worker.md) - Build workers to handle automated tasks
 - [Process testing](../testing/getting-started.md) - Test your processes with Camunda Process Test
 
-### **Explore examples:**
+**Explore examples:**
 
 - [Java client examples](../java-client-examples/index.md) - Real-world code samples for common scenarios
 - [Getting Started Tutorial](../../guides/getting-started-example.md) - Complete walkthrough with Modeler, Operate, and Spring SDK
 
-### **Advanced topics:**
+**Advanced topics:**
 
 - [Logging configuration](logging.md) - Set up proper logging for your application
 - [Client Documentation](https://javadoc.io/doc/io.camunda/camunda-client-java) - Complete Javadoc reference
 
-### **Need help?**
+**Need help?**
 
 - [Camunda Community Forum](https://forum.camunda.io/) - Get help from the community
 - [GitHub Repository](https://github.com/camunda/camunda) - Report issues and contribute
