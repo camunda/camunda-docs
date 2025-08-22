@@ -80,7 +80,7 @@ In your Maven `pom.xml`, add the dependency:
 
 ## Choose your runtime
 
-Next, choose how you want to run CPT, considering your environment. CPT can be used in two modes: 
+Next, choose how you want to run CPT, considering your environment. CPT can be used in two modes:
 
 - CPT with Testcontainers (as equivalent to ZPT with Testcontainers)
 - CPT with remote engine (as equivalent to ZPT's embedded runtime)
