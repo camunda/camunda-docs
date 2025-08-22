@@ -1,5 +1,5 @@
 ---
-id: index
+id: getting-started
 title: "Java client"
 sidebar_label: "Getting started"
 description: "Provide a job worker that handles polling for available jobs, use SLF4J for logging useful notes, and more."
