@@ -135,5 +135,6 @@ Refer to your identity provider's documentation for obtaining tokens using X.509
 When using official Camunda clients (Java client or Spring Boot Starter), token acquisition and renewal are handled automatically. You don't need to manually obtain or refresh tokens—the clients handle this based on your configuration.
 
 **Learn more:**
+
 - [Camunda Java client authentication and token management](./../java-client/getting-started.md)
 - [Camunda Spring Boot Starter: Configuring the Camunda 8 connection](./../spring-zeebe-sdk/getting-started.md#configuring-the-camunda-8-connection)
