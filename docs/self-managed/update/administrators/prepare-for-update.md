@@ -4,42 +4,25 @@ title: "Prepare for upgrade"
 description: "Prepare for an upgrade to Camunda 8.8 Self-Managed – Administrator guide."
 ---
 
-import DocCardList from '@theme/DocCardList';
+Learn how to prepare for a successful upgrade to Camunda 8.8 by evaluating your infrastructure, understanding operational changes, and choosing the best upgrade strategy for your environment.
 
-# Prepare for an upgrade
+## Step 1: Evaluate your current setup
 
-A successful upgrade to Camunda 8.8 requires careful preparation. This guide helps you evaluate your infrastructure, understand operational changes, and choose the best upgrade strategy for your environment.
+First, you should evaluate your current setup:
 
-## Step 1. Evaluate your current setup
+| Area                         | Details                                                                                                                                                   |
+| :--------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Platform version             | Direct upgrades are only supported from 8.7.x to 8.8.x. You must upgrade to the latest 8.7 patch before upgrading to 8.8.                                 |
+| Component version alignment  | Orchestration components such as Zeebe, Operate, Tasklist, and Identity must run the same version.                                                        |
+| Configuration customizations | Identify non-default parameters and values in configuration files, ingress rules, external Elasticsearch/OpenSearch configurations, and custom exporters. |
 
-<table className="table-callout">
-<tr>
-    <td style={{minWidth: "30%"}}>**Area**</td>
-    <td>**Details**</td>
-</tr>
-<tr>
-    <td>Platform version</td>
-    <td>Direct updates are supported from 8.7.x to 8.8.x. Upgrade to the latest 8.7 patch before moving to 8.8.</td>
-</tr>
-<tr>
-    <td>Component version alignment</td>
-    <td>Orchestration components like Zeebe, Operate, Tasklist, and Identity must run the same version.</td>
-</tr>
-<tr>
-    <td>Configuration customizations</td>
-    <td>Identify non-default parameters and values in configuration files, Ingress rules, external Elasticsearch/OpenSearch configurations, and custom exporters.</td>
-</tr>
-</table>
+## Step 2: Assess Camunda 8.8 changes and impact
 
-## Step 2. Assess Camunda platform changes
+Review and make sure you understand the platform-level changes between Camunda 8.7 and 8.8. Understanding these highlights helps you plan your upgrade and anticipate operational impacts.
 
-Review the platform-level changes between versions 8.7 and 8.8. For a high-level overview, see this guide:
-
-<DocCardList items={[
-{type: 'link', href: '/docs/next/components/whats-new-in-88/', label: 'What is new in Camunda 8.8', docId: 'components/whats-new-in-88'},
-]} />
-
-Understanding these highlights will help you plan your upgrade and anticipate operational impacts.
+:::tip
+Start with the high-level overview [what's new in Camunda 8.8](/components/whats-new-in-88.md).
+:::
 
 <table className="table-callout">
 <tr>
@@ -64,9 +47,7 @@ Understanding these highlights will help you plan your upgrade and anticipate op
     <td>Data and exporters</td>
     <td>Unified exporter architecture and unified data schema.</td>
     <td><span className="label-highlight orange">Medium</span></td>
-    <td>Requires temporary rebalancing of indices/storage.<br/> 
-    Dedicated data retention configurations per application (Zeebe, Tasklist, Operate) are not supported anymore.<br/>
-    If Taskist data are present, an additional data migration is required - process application migration utilities are offered for this.</td>
+    <td><p><ul><li>Requires temporary rebalancing of indices/storage.</li><li><p>Dedicated data retention configurations per application (Zeebe, Tasklist, Operate) are no longer supported.</p></li><li><p>If Taskist data is present, an additional data migration is required - process application migration utilities are offered for this.</p></li></ul></p></td>
 </tr>
 <tr>
     <td>Unified components configuration</td>
@@ -84,16 +65,15 @@ Understanding these highlights will help you plan your upgrade and anticipate op
 <tr>
     <td>Identity, authentication, and authorization</td>
     <td>Orchestration Cluster provides Identity and Access Management (IAM) inside a cluster.</td>
-    <td></td>
-    <td>See [Identity, authentication, and authorization](#identity-authentication-and-authorization) below.</td>
+    <td colspan="2">See [Identity, authentication, and authorization](#identity-authentication-and-authorization) below.</td>
 </tr>
 </table>
 
 ### Identity, authentication, and authorization
 
-The new Orchestration Cluster [Identity](/components/identity/identity-introduction.md) handles authentication and authorization for all Orchestration Cluster components and its resources.
+Orchestration Cluster [Identity](/components/identity/identity-introduction.md) handles authentication and authorization for Orchestration Cluster components and resources.
 
-Learn more about all Identity 8.8 changes [here](../../../components/whats-new-in-88.md#identity-authentication-and-authorization-identity). Below is a high-level overview of the impact of these changes:
+The following table provides a high-level overview of the impact of these changes:
 
 <table className="table-callout">
 <tr>
@@ -124,84 +104,64 @@ Learn more about all Identity 8.8 changes [here](../../../components/whats-new-i
 <tr>
     <td>User storage in Elasticsearch/OpenSearch for Operate or Tasklist</td>
     <td><span className="label-highlight red">Breaking changes</span></td>
-    <td>Not supported anymore. You must transition to the Basic authentication and re-create users in the Orchestration Cluster Identity.</td>
+    <td>No longer supported. You must transition to using Basic authentication and re-create users in Orchestration Cluster Identity.</td>
 </tr>
 <tr>
     <td>LDAP authentication for Operate or Tasklist</td>
     <td><span className="label-highlight red">Breaking changes</span></td>
-    <td>Not supported anymore. You must transition to OIDC or Basic Authentication.</td>
+    <td>No longer supported. You must transition to OIDC or Basic Authentication.</td>
 </tr>
 </table>
+
+:::info
+Learn more about all Identity 8.8 changes in the [Identity section of what's new in Camunda 8.8](/components/whats-new-in-88.md#identity).
+:::
 
 ## Step 3. Check infrastructure compatibility
 
-<table className="table-callout">
-<tr>
-    <td>**Area**</td>
-    <td>**8.8 requirement**</td>
-    <td>**Action**</td>
-</tr>
-<tr>
-    <td>Elasticsearch / OpenSearch</td>
-    <td>Elasticsearch ≥ 8.16 (OpenSearch TBD)</td>
-    <td>Upgrade the cluster to the new version</td>
-</tr>
-<tr>
-    <td>CPU / Memory</td>
-    <td>Consolidated Zeebe StatefulSet shares limits</td>
-    <td>Measure current usage; test with load generator</td>
-</tr>
-<tr>
-    <td>Storage</td>
-    <td>Same or higher IOPS as 8.7</td>
-    <td>Check space for temporary migration files</td>
-</tr>
-</table>
+Check and verify your infrastructure compatibility for Camunda 8.8.
+
+| Area                     | 8.8 requirement                               | Action                                          |
+| :----------------------- | :-------------------------------------------- | :---------------------------------------------- |
+| Elasticsearch/OpenSearch | Elasticsearch ≥ 8.16 (OpenSearch TBD).        | Upgrade the cluster to the new version.         |
+| CPU/Memory               | Consolidated Zeebe StatefulSet shares limits. | Measure current usage; test with load generator |
+| Storage                  | Same or higher IOPS as 8.7.                   | Check space for temporary migration file.       |
 
 :::warning Plan a performance test
-Because component consolidation will change resource consumption, run a load test that simulates real production traffic. This ensures your cluster sizing is appropriate **before** you update the production environment.
+You should run a load test that simulates real production traffic, as component consolidation changes resource consumption. This ensures your cluster sizing is appropriate **before** you upgrade your production environment.
 :::
 
 ## Step 4. Create an upgrade timeline
 
-<table className="table-callout">
-<tr>
-    <td>**Phase**</td>
-    <td>**Typical duration**</td>
-    <td>**Downtime**</td>
-</tr>
-<tr>
-    <td>Pre-upgrade preparation</td>
-    <td>1–2 weeks</td>
-    <td>No</td>
-</tr>
-<tr>
-    <td>Cluster update</td>
-    <td>1–4 hours</td>
-    <td>Depends on data migration size</td>
-</tr>
-<tr>
-    <td>Validation and tuning</td>
-    <td>1–2 days</td>
-    <td>No</td>
-</tr>
-</table>
+Create and define the timeline for your upgrade, taking into account the duration of upgrade phases.
 
-We advise to document backup and rollback procedures for each phase.
+| Phase                   | Typical duration | Downtime                       |
+| :---------------------- | :--------------- | :----------------------------- |
+| Pre-upgrade preparation | 1–2 weeks        | No                             |
+| Cluster update          | 1–4 hours        | Depends on data migration size |
+| Validation and tuning   | 1–2 days         | No                             |
+
+:::caution
+Camunda advises you to document your backup and rollback procedures for each phase.
+:::
 
 ## Next steps
 
-1. Review the plan with operations, security, and development teams.
+Once you have completed your preparation plan, continue to:
+
+1. Review your plan with your operations, security, and development teams.
 2. Schedule the maintenance window and notify all stakeholders.
-3. Continue with the [Run the upgrade](./run-update.md) guide.
+3. Continue with the [perform an upgrade](./run-update.md) guide.
 
-For more background, see the [guide with introduction to component-based updates](/self-managed/components/components-upgrade/introduction.md) and version-specific documentation.
+:::tip
+For more background, see the [component upgrade guide](/self-managed/components/components-upgrade/introduction.md) and version-specific documentation.
+:::
 
-:::info Links
+:::info Useful resources
 
 - [Supported environments](../../../reference/supported-environments.md#component-version-matrix)
 - [8.8 release notes](../../../reference/announcements-release-notes/880/880-release-notes.md)
 - [Helm chart 8.7 to 8.8 technical details](../../installation-methods/helm/upgrade/helm-870-880.md)
-- [Camunda components update details](../../components/components-upgrade/870-to-880.md)
+- [Component upgrade guide](../../components/components-upgrade/870-to-880.md)
 
 :::

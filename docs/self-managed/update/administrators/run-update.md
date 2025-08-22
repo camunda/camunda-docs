@@ -1,6 +1,6 @@
 ---
 id: run-admin-upgrade
-title: "Run upgrade"
+title: "Perform an upgrade"
 description: "Administrator checklist for executing a Camunda 8.8 Self-Managed upgrade."
 ---
 
@@ -8,25 +8,34 @@ import DocCardList from '@theme/DocCardList';
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# Run the upgrade
+Learn how to perform a successful upgrade to Camunda 8.8 for Camunda 8.8 Self-Managed.
 
-This page guides **platform administrators** through the _execution phase_ of an upgrade to **Camunda 8.8 Self-Managed**.  
-It assumes you have completed all steps in [**Prepare for upgrade**](./prepare-for-update.md) and that you have:
+## About performing an upgrade
 
-- A tested backup and rollback plan
-- A confirmed maintenance window
-- A defined deployment method (Helm chart or Docker images)
+This guide assumes you have completed all steps in [prepare for upgrade](./prepare-for-update.md) and that you have:
 
-> For detailed command-line instructions, refer to the technical guides linked below.
+- A tested backup and rollback plan.
+- A confirmed maintenance window.
+- A defined deployment method (Helm chart or Docker images).
 
-## Step 1 – Confirm prerequisites
+:::note
+For detailed command-line instructions, refer to the technical guides linked below.
+:::
 
-- ✅ Test environment updated without errors
-- ✅ Backups created and validated
-- ✅ Required secrets exported (Operate, Tasklist, Identity, etc.)
-- ✅ Team responsibilities and runbooks shared
+## Step 1: Confirm prerequisites
 
-## Step 2 – Run the upgrade
+First, confirm you have completed the following prerequisites:
+
+| Prerequisite       | Description                                                                           |
+| :----------------- | :------------------------------------------------------------------------------------ |
+| Test environment   | Test environment updated without errors.                                              |
+| Backups            | Backups created and validated.                                                        |
+| Secrets            | Required secrets are exported (for example, Operate, Tasklist, Identity, and so on.). |
+| Team co-ordination | Team responsibilities and runbooks are shared.                                        |
+
+## Step 2: Perform upgrade
+
+Perform an upgrade as follows.
 
 <Tabs groupId="helm" defaultValue="helm" queryString values={
 [
@@ -39,15 +48,11 @@ It assumes you have completed all steps in [**Prepare for upgrade**](./prepare-f
 
 ### Helm chart
 
-If you are using Kubernetes with the Camunda Helm chart, follow the dedicated update instructions:
+If you are using Kubernetes with the Camunda Helm chart, follow the [Helm chart upgrade guide for 8.7 to 8.8](/docs/self-managed/installation-methods/helm/upgrade/helm-870-880.md).
 
-<DocCardList items={[{type:"link", href:"/docs/next/self-managed/installation-methods/helm/upgrade/upgrade-hc-870-880/", label: "Helm chart upgrade: 8.7 to 8.8", docId:"self-managed/installation-methods/helm/upgrade/upgrade-hc-870-880"}
-]}/>
-
-The Helm guide covers update options, handling of secrets, and monitoring of migration jobs.  
-If you are creating your own deployment scripts, you can use the official Helm charts as a reference or technical specification.
-
-You may also want to review the [component-level upgrade procedures](../../components/components-upgrade/870-to-880.md) for details on how each individual component is getting updates.
+- The Helm chart upgrade guide covers update options, handling of secrets, and monitoring of migration jobs.
+- If you are creating your own deployment scripts, you can use the official Helm charts as a reference or technical specification.
+- You might also want to review the [component-level upgrade procedures](../../components/components-upgrade/870-to-880.md) for details on how each individual component is getting updates.
 
 </TabItem>
 
@@ -66,15 +71,17 @@ For production deployments, we recommend either using Kubernetes with the offici
 </TabItem>
 </Tabs>
 
-## Step 3 – Validate platform health
+## Step 3: Validate platform health
 
-After a successful upgrade:
+After a successful upgrade has been performed:
 
 - Confirm pod readiness and Helm release status.
 - Verify component versions via Operate.
 - Run your post-update validation suite.
 
-## Step 4 – Perform post-update tasks
+## Step 4: Perform post-update tasks
+
+Once validation is complete, perform the following additional tasks:
 
 - Notify application teams that the platform is ready.
 - Monitor resource usage and error rates for 24–48 hours.
@@ -82,7 +89,7 @@ After a successful upgrade:
 
 ## Next steps
 
-After completing the platform update:
+After completing the upgrade to 8.8, you should:
 
 1. **Monitor platform stability** during the application rollout phase.
 2. **Support development teams** with any application deployment issues.
@@ -91,10 +98,10 @@ After completing the platform update:
 5. **Plan your next update cycle** using a similar approach.
 6. **Clean up backups** in line with your retention policy.
 
-## Additional resources
+## Useful resources
 
-- **[Helm chart upgrade guide: 8.7 → 8.8](../../installation-methods/helm/upgrade/helm-870-880.md)** – Full step-by-step Helm upgrade guide
-- **[Collecting diagnostics](../../installation-methods/helm/operational-tasks/diagnostics.md)** – How to gather troubleshooting data
-- **[Backup and restore guide](../../operational-guides/backup-restore/backup-and-restore.md)** – Recommended backup workflows
-- **[Troubleshooting guides](../../operational-guides/troubleshooting.md)** – Common issues and resolution steps
-- **[Supported environments matrix](../../../reference/supported-environments.md)** – Compatibility details for components and infrastructure
+- [Helm chart upgrade guide: 8.7 → 8.8](../../installation-methods/helm/upgrade/helm-870-880.md): Full step-by-step Helm upgrade guide.
+- [Collecting diagnostics](../../installation-methods/helm/operational-tasks/diagnostics.md): How to gather troubleshooting data.
+- [Backup and restore guide](../../operational-guides/backup-restore/backup-and-restore.md): Recommended backup workflows.
+- [Troubleshooting guides](../../operational-guides/troubleshooting.md): Common issues and resolution steps.
+- [Supported environments matrix](../../../reference/supported-environments.md): Compatibility details for components and infrastructure.
