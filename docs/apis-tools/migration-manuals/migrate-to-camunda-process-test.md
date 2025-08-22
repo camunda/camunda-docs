@@ -7,8 +7,8 @@ description: "Learn how to migrate from Zeebe Process Test to Camunda Process Te
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-[Camunda Process Test](/apis-tools/testing/getting-started.md) (CPT) is the successor to [Zeebe Process Test](/apis-tools/java-client/zeebe-process-test.md) (ZPT).  
-Since version **8.8**, CPT is available and fully supported. ZPT is deprecated and will be removed in version **8.10**.  
+[Camunda Process Test](/apis-tools/testing/getting-started.md) (CPT) is a library to test your BPMN processes and your process applications. It is the successor to [Zeebe Process Test](/apis-tools/java-client/zeebe-process-test.md) (ZPT).  
+Starting with version **8.8**, ZPT is deprecated and will be removed in version **8.10**.  
 See the [announcement](https://camunda.com/blog/2025/04/camunda-process-test-the-next-generation-testing-library/) for details.
 
 This guide walks you through migrating your existing test cases from ZPT to CPT step-by-step.
@@ -18,13 +18,13 @@ Be aware that there are differences between ZPT and CPT in both API and behavior
 
 **Key differences:**
 
-- **Underlying engine:** ZPT uses only Camunda’s workflow engine (Zeebe) with access to internal components, whereas CPT runs the full Camunda distribution and interacts with the public API.
+- **Underlying engine:** ZPT uses only Camunda’s workflow engine (Zeebe) with access to internal components, whereas CPT runs the full Camunda distribution and interacts with the Orchestration Cluster API.
 - **Assertions and utilities:** CPT uses different names to align with the API, and not all ZPT assertions/utilities have equivalents in CPT.
-- **Performance:** CPT is slower because it runs the full distribution.
+- **Startup time:** CPT takes longer to start as it runs the full Orchestration Cluster distribution.
 
 **Key advantages of CPT:**
 
-- Access to Camunda’s full API
+- Access to Camunda’s Orchestration Cluster API and Connectors
 - Support for Camunda user tasks
 - Blocking assertions for asynchronous processing
 - Enhanced mocking utilities
@@ -80,14 +80,17 @@ In your Maven `pom.xml`, add the dependency:
 
 ## Choose your runtime
 
-Next, choose your CPT runtime depending on your environment.
+Next, choose how you want to run CPT, considering your environment. CPT can be used in two modes: 
+
+- CPT with Testcontainers (as equivalent to ZPT with Testcontainers)
+- CPT with remote engine (as equivalent to ZPT's embedded runtime)
 
 ### ZPT with Testcontainers
 
 If you use ZPT with Testcontainers (
 `artifactId: zeebe-process-test-extension-testcontainer/spring-boot-starter-camunda-test-testcontainer`), then you can
-use CPT's default [Testcontainers runtime](/apis-tools/testing/configuration.md#testcontainers-runtime) without
-additional changes.
+use CPT's default Testcontainers runtime without
+additional changes. Check the documentation on how to use CPT with Testcontainers [here](/apis-tools/testing/configuration.md#testcontainers-runtime)
 
 ### ZPT's embedded runtime
 
@@ -96,6 +99,7 @@ If you use ZPT’s **embedded runtime**
 switch to CPT’s [remote runtime](/apis-tools/testing/configuration.md#remote-runtime).  
 Choose this option only if you cannot install a Docker-API compatible container runtime (e.g., Docker on Linux or Docker Desktop).
 
+In this mode, CPT connects to a remote runtime, such as a local Camunda 8 Run running on your machine.
 Prepare your remote runtime:
 
 1. **Install Camunda 8 Run**  
