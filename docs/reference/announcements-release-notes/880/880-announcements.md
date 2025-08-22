@@ -13,9 +13,10 @@ Supported environment changes and breaking changes or deprecations for the Camun
 | :--------------------- | :--------------------------- | :------------ | :--- |
 | 14 October 2025        | 13 April 2027                | -             | -    |
 
-:::tip Release notes and quality board
+:::info 8.8 resources
 
 - See [release notes](/reference/announcements-release-notes/880/880-release-notes.md) to learn more about new features and enhancements.
+- See [What's new in Camunda 8.8](/components/whats-new-in-88.md) for important changes to consider when planning your upgrade from Camunda 8.7.
 - Refer to the [quality board](https://github.com/orgs/camunda/projects/187/views/15) for an overview of known bugs by component and severity.
 
 :::
@@ -254,6 +255,10 @@ Use the corresponding endpoints under `/api/v1/versions` instead.
 
 With the 8.8 release, the `connector_template` file type in the [Web Modeler API](/apis-tools/web-modeler-api/index.md) endpoint for file creation (`POST /api/v1/files`) is deprecated and will be removed in version 8.10.
 Please use `element_template` instead, which provides equivalent functionality.
+
+#### Removed: Optimize Index Rollover
+
+Prior to the 8.8 release, Optimize used the `externalVariable.variableIndexRollover.maxIndexSizeGB` and `externalVariable.variableIndexRollover.scheduleIntervalInMinutes` configuration properties to apply index rollover to its External Variable Indices. These properties have been deleted in 8.8, and External Variables will now be stored in a single index.
 
 ### Camunda Exporter <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 

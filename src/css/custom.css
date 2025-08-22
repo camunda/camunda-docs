@@ -890,6 +890,13 @@ span.callout + p::after {
 .theme-doc-markdown img.img-500 {
   width: 500px;
 }
+.theme-doc-markdown img.img-100 {
+  width: 90px;
+  border: none;
+  max-height: 90px;
+  margin: 0;
+  padding: 0;
+}
 
 /* Transparent image background */
 .theme-doc-markdown img.img-transparent {
