@@ -482,6 +482,7 @@ private static class EmailJobHandler implements JobHandler {
     }
 }
 ```
+
 Job workers handle automated tasks in your processes. Each worker subscribes to specific job types and processes them as they become available.
 
 For a comprehensive example that demonstrates all the above steps, see the [DeployAndComplete example](https://github.com/camunda-community-hub/camunda-8-examples/blob/main/camunda-client-plain-java/src/main/java/io/camunda/example/e2e/process/DeployAndComplete.java) in the Camunda 8 examples repository. This example shows a complete workflow from process deployment to job completion.
@@ -503,17 +504,21 @@ Choose between REST and gRPC protocols based on your requirements and infrastruc
 ## Next steps and resources
 
 ### **Learn the fundamentals:**
+
 - [Job worker implementation](job-worker.md) - Build workers to handle automated tasks
 - [Process testing](../testing/getting-started.md) - Test your processes with Camunda Process Test
 
 ### **Explore examples:**
+
 - [Java client examples](../java-client-examples/index.md) - Real-world code samples for common scenarios
 - [Getting Started Tutorial](../../guides/getting-started-example.md) - Complete walkthrough with Modeler, Operate, and Spring SDK
 
 ### **Advanced topics:**
+
 - [Logging configuration](logging.md) - Set up proper logging for your application
 - [Client Documentation](https://javadoc.io/doc/io.camunda/camunda-client-java) - Complete Javadoc reference
 
 ### **Need help?**
+
 - [Camunda Community Forum](https://forum.camunda.io/) - Get help from the community
 - [GitHub Repository](https://github.com/camunda/camunda) - Report issues and contribute
