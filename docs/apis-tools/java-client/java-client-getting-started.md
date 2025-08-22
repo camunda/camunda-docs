@@ -154,39 +154,51 @@ public static void main(String[] args) {
 ```
 
 **Environment variables option:**
+You can set the connection details via environment variables and create the client more simply:
+
 ```bash
-export CAMUNDA_GRPC_ADDRESS='grpcs://localhost:26500'
-export CAMUNDA_REST_ADDRESS='http://localhost:8080'
-export CAMUNDA_CLIENT_USERNAME='demo'
-export CAMUNDA_CLIENT_PASSWORD='demo'
+export CAMUNDA_GRPC_ADDRESS='[Address of Zeebe API (gRPC) - default: http://localhost:26500]'
+export CAMUNDA_REST_ADDRESS='[Address of the Orchestration Cluster API - default: http://localhost:8080]'
+export CAMUNDA_CLIENT_USERNAME='[Your username - default: demo]'
+export CAMUNDA_CLIENT_PASSWORD='[Your password - default: demo]'
 ```
+
+```java
+CamundaClient client = CamundaClient.newClientBuilder().build();
+```
+
+The client will automatically read the environment variables and configure the appropriate authentication method.
+
+:::note
+Ensure addresses are in absolute URI format: `scheme://host(:port)`.
+:::
 
 </TabItem>
 
 <TabItem value="oidc-self-managed">
 
-**Use for:** Self-managed production environments with OIDC authentication.
+**Use for:** Self-managed production environments with OIDC Access Token authentication.
 
 ```java
-private static final String grpcAddress = "[Gateway gRPC Address e.g. grpcs://localhost:26500]";
-private static final String restAddress = "[Gateway REST Address e.g. http://localhost:8080]";
-private static final String oauthUrl = "[OAuth URL e.g. http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token]";
-private static final String audience = "[Audience e.g. zeebe-api]";
-private static final String clientId = "[Client ID]";
-private static final String clientSecret = "[Client Secret]";
+private static final String CAMUNDA_GRPC_ADDRESS = "[Address of Zeebe API (gRPC) - default: http://localhost:26500]";
+private static final String CAMUNDA_REST_ADDRESS = "[Address of the Orchestration Cluster API - default: http://localhost:8080]";
+private static final String OAUTH_URL = "[OAuth URL e.g. http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token]";
+private static final String AUDIENCE = "[Audience - default: zeebe-api]";
+private static final String CLIENT_ID = "[Client ID]";
+private static final String CLIENT_SECRET = "[Client Secret]";
 
 public static void main(String[] args) {
-    // OIDC authentication for self-managed
-    CredentialsProvider credentialsProvider = new OAuthCredentialsProvider.Builder()
-            .authorizationServerUrl(oauthUrl)
-            .audience(audience)
-            .clientId(clientId)
-            .clientSecret(clientSecret)
+    
+    CredentialsProvider credentialsProvider = new OAuthCredentialsProviderBuilder()
+            .authorizationServerUrl(OAUTH_URL)
+            .audience(AUDIENCE)
+            .clientId(CLIENT_ID)
+            .clientSecret(CLIENT_SECRET)
             .build();
 
     try (CamundaClient client = CamundaClient.newClientBuilder()
-            .grpcAddress(URI.create(grpcAddress))
-            .restAddress(URI.create(restAddress))
+            .grpcAddress(URI.create(CAMUNDA_GRPC_ADDRESS))
+            .restAddress(URI.create(CAMUNDA_REST_ADDRESS))
             .credentialsProvider(credentialsProvider)
             .build()) {
         
@@ -196,26 +208,35 @@ public static void main(String[] args) {
     }
 }
 ```
-
 **Environment variables option:**
+You can set the connection details via environment variables and create the client more simply:
+
 ```bash
-export CAMUNDA_GRPC_ADDRESS='grpcs://localhost:26500'
-export CAMUNDA_REST_ADDRESS='http://localhost:8080'
-export CAMUNDA_OAUTH_URL='http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token'
-export CAMUNDA_TOKEN_AUDIENCE='zeebe-api'
+export CAMUNDA_GRPC_ADDRESS='[Address of Zeebe API (gRPC) - default: http://localhost:26500]'
+export CAMUNDA_REST_ADDRESS='[Address of the Orchestration Cluster API - default: http://localhost:8080]'
+export CAMUNDA_OAUTH_URL='[OAuth URL e.g. http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token]'
+export CAMUNDA_TOKEN_AUDIENCE='[Audience - default: zeebe-api]'
 export CAMUNDA_CLIENT_ID='[Client ID]'
 export CAMUNDA_CLIENT_SECRET='[Client Secret]'
 ```
+
+```java
+CamundaClient client = CamundaClient.newClientBuilder().build();
+```
+
+The client will automatically read the environment variables and configure the appropriate authentication method.
+
+:::note
+Ensure addresses are in absolute URI format: `scheme://host(:port)`.
+:::
+
 
 </TabItem>
 
 <TabItem value="oidc-saas">
 
-**Use for:** Camunda 8 SaaS environments (required for SaaS).
-
-
-
-**Use for:** Camunda 8 SaaS environments (required for SaaS).
+**Use for:** Camunda 8 SaaS environments.
+Get the values below from your [Camunda Console client credentials](/components/console/manage-clusters/setup-client-connection-credentials.md).
 
 ```java
 private static final String CAMUNDA_CLUSTER_ID = "[Cluster ID from Console]";
@@ -240,16 +261,27 @@ public static void main(String[] args) {
 ```
 
 **Environment variables option:**
+You can set the connection details via environment variables and create the client more simply:
+
 ```bash
-export CAMUNDA_GRPC_ADDRESS='[Gateway gRPC Address from Console]'
-export CAMUNDA_REST_ADDRESS='[Gateway REST Address from Console]'
+export ZEEBE_GRPC_ADDRESS='[Zeebe gRPC Address from Console]'
+export ZEEBE_REST_ADDRESS='[Zeebe REST Address from Console]'
 export CAMUNDA_OAUTH_URL='[OAuth URL from Console]'
-export CAMUNDA_TOKEN_AUDIENCE='[Audience from Console]'
+export CAMUNDA_TOKEN_AUDIENCE='[Audience from Console - default: zeebe.camunda.io]'
 export CAMUNDA_CLIENT_ID='[Client ID from Console]'
 export CAMUNDA_CLIENT_SECRET='[Client Secret from Console]'
 ```
 
-Get these values from your [Camunda Console client credentials](/components/console/manage-clusters/setup-client-connection-credentials.md).
+```java
+CamundaClient client = CamundaClient.newClientBuilder().build();
+```
+
+The client will automatically read the environment variables and configure the appropriate authentication method.
+
+:::note
+Ensure addresses are in absolute URI format: `scheme://host(:port)`.
+:::
+
 
 </TabItem>
 
@@ -260,21 +292,6 @@ Get these values from your [Camunda Console client credentials](/components/cons
 2. **Sets up authentication** - Choose the appropriate method based on your environment
 3. **Creates the client** - Establishes connection to your Camunda 8 cluster
 4. **Tests the connection** - Sends a topology request to verify connectivity
-
-**Using environment variables:**
-For any authentication method, you can set the connection details via environment variables and create the client more simply:
-
-```java
-CamundaClient client = CamundaClient.newClientBuilder().build();
-// I cannot use it for no-auth 
-// CamundaClient client = CamundaClient.newClientBuilder().usePlaintext().build())
-```
-
-The client will automatically read the environment variables and configure the appropriate authentication method.
-
-:::note
-Ensure addresses are in absolute URI format: `scheme://host(:port)`.
-:::
 
 ### Step 3: Start building your process application
 
