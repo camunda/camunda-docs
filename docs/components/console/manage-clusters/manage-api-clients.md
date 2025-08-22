@@ -1,10 +1,10 @@
 ---
 id: manage-api-clients
-title: API clients
+title: Manage API clients
 description: "Let's create a client and manage our API clients."
 ---
 
-To interact with Zeebe in the cloud from the outside, every client application must authenticate itself. An **OAuth Flow** is therefore used for authentication:
+To interact with an Orchestration cluster in the cloud from the outside, every client application must authenticate itself. An **OAuth Flow** is therefore used for authentication:
 
 ![auth-flow](./img/client-auth.png)
 
@@ -26,7 +26,7 @@ The OAuth service rate limits about one request per second for all clients with 
 All token requests count toward the rate limit, whether they are successful or not. If any client is running with an expired or invalid API key, that client will continually make token requests. That client will therefore exceed the rate limit for that IP address, and may block valid token requests from completing.
 :::
 
-The officially offered [client libraries](/apis-tools/working-with-apis-tools.md) (as well as the Node.js and Spring clients) have already integrated with the auth routine, handle obtaining and refreshing an access token, and make use of a local cache.
+The officially offered [client libraries](/apis-tools/working-with-apis-tools.md#official-camunda-clients-and-sdks) (as well as the Node.js and Spring clients) have already integrated with the auth routine, handle obtaining and refreshing an access token, and make use of a local cache.
 
 If too many token requests are executed from the same source IP address in a short time, all token requests from that source IP address are blocked for a certain time. Since the access tokens have a 24-hour validity period, they must be cached on the client side, reused while still valid, and refreshed via a new token request once the validity period has expired.
 
@@ -42,23 +42,24 @@ When the rate limit is triggered, the client will receive an HTTP 429 response. 
 
 Currently, Camunda 8 SaaS supports the following scopes:
 
-- Zeebe - Access to the [Zeebe gRPC](/apis-tools/zeebe-api/grpc.md) and [REST](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) APIs.
-- Optimize - Access to the [Optimize REST API](/apis-tools/optimize-api/overview.md).
-- Secrets - Access cluster secrets in a [hybrid setup](/components/connectors/use-connectors-in-hybrid-mode.md).
+- Orchestration Cluster API - Access to the [REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) and [Zeebe gRPC API](/apis-tools/zeebe-api/grpc.md).
+- Optimize API - Access to the [Optimize REST API](/apis-tools/optimize-api/overview.md).
+- Administration API - Resource:Secrets - Access cluster secrets in a [hybrid setup](/components/connectors/use-connectors-in-hybrid-mode.md).
 
 To create a client, take the following steps:
 
 1. Navigate into the **API** tab.
+2. Click to **create a new client**.
 
 ![cluster-details](img/cluster-detail-clients.png)
 
-2. Click **Create new client** to create a new client and name your client accordingly.
+3. In the opened dialog, name your client and define it's **scope**.
 
 ![create-client](img/cluster-details-create-client.png)
 
-:::note
+4. After creating the client, you can select the format for your credentials.
+
 Ensure you keep the generated client credentials in a safe place. The **client secret** will not be shown again. For your convenience, you can also download the client information to your computer.
-:::
 
 ![created-client](img/cluster-details-created-client.png)
 
@@ -75,4 +76,6 @@ The downloaded file contains all necessary information to communicate with your 
 
 Depending on the scopes granted to these client credentials, the following variables may also be present:
 
-- `CAMUNDA_OPTIMIZE_BASE_URL`: The base URL for the Optimize API.
+- `CAMUNDA_TASKLIST_BASE_URL`: The base URL for Tasklist.
+- `CAMUNDA_OPERATE_BASE_URL`: The base URL for Operate.
+- `CAMUNDA_OPTIMIZE_BASE_URL`: The base URL for Optimize.
