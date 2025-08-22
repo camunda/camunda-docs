@@ -124,7 +124,7 @@ Replace the `${BASE_URL}` based on the address of your cluster. See the [Context
 For advanced security scenarios, you can obtain OIDC Access Tokens using X.509 Client Certificates. This method is typically required in Self-Managed environments where your identity provider (such as Keycloak) enforces mutual TLS (mTLS).
 
 **For Java applications:**
-The Java client supports OIDC Access Token retrieval using X.509 Client Certificates automatically. Configure the necessary keystore and truststore settings via code or environment variables. See [Java client authentication](../java-client/authentication.md#oidc-with-x509) for complete configuration details.
+The Java client supports OIDC Access Token retrieval using X.509 Client Certificates automatically. Configure the necessary keystore and truststore settings via code or environment variables. See [Java client authentication](../java-client/getting-started.md#oidc-access-token-authentication-with-x509-client-certificate) for complete configuration details.
 
 **For other clients:**
 Refer to your identity provider's documentation for obtaining tokens using X.509 certificates.
@@ -134,5 +134,5 @@ Refer to your identity provider's documentation for obtaining tokens using X.509
 When using official Camunda clients (Java client or Spring Boot Starter), token acquisition and renewal are handled automatically. You don't need to manually obtain or refresh tokens—the clients handle this based on your configuration.
 
 **Learn more:**
-- [Camunda Java client authentication and token management](./../java-client/authentication.md)
+- [Camunda Java client authentication and token management](./../java-client/getting-started.md)
 - [Camunda Spring Boot Starter: Configuring the Camunda 8 connection](./../spring-zeebe-sdk/getting-started.md#configuring-the-camunda-8-connection)
