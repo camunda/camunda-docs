@@ -38,4 +38,4 @@ Ensure your application does not rely on these features before upgrading to the 
 
 ### User task access restrictions
 
-[User task access restrictions](./user-task-access-restrictions.md) are only supported when using the Tasklist v1 API. This feature is not available with the v2 (Orchestration Cluster) API.
+[User task access restrictions](./user-task-access-restrictions.md) are only supported when using the Tasklist v1 API. This feature is not yet available with the v2 (Orchestration Cluster) API.
