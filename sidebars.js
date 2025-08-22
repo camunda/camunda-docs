@@ -333,7 +333,7 @@ module.exports = {
     },
     {
       type: "category",
-      label: "Orchestration cluster",
+      label: "Orchestration Cluster",
       link: {
         type: "doc",
         id: "components/orchestration-cluster",
@@ -794,6 +794,22 @@ module.exports = {
         },
       ],
     },
+    {
+      type: "category",
+      label: "Camunda 8 SaaS",
+      link: {
+        type: "doc",
+        id: "components/saas/saas",
+      },
+      items: [
+        "reference/regions",
+        "reference/camunda-help-center",
+        "reference/auto-updates",
+        "reference/status",
+        "reference/saas-ip-addresses",
+      ],
+    },
+    "reference/glossary",
   ],
   "APIs & Tools": [
     "apis-tools/working-with-apis-tools",
@@ -968,6 +984,7 @@ module.exports = {
         "apis-tools/migration-manuals/migrate-to-camunda-java-client",
         "apis-tools/migration-manuals/migrate-to-camunda-user-tasks",
         "apis-tools/migration-manuals/migrate-component-apis",
+        "apis-tools/migration-manuals/migrate-to-camunda-process-test",
       ],
     },
   ],
@@ -975,7 +992,7 @@ module.exports = {
     "reference/overview",
     {
       type: "category",
-      label: "Announcements and release notes",
+      label: "Release announcements and release notes",
       link: {
         type: "doc",
         id: "reference/announcements-release-notes/overview",
@@ -1032,17 +1049,11 @@ module.exports = {
         "reference/announcements-release-notes/release-policy",
       ],
     },
-    "reference/supported-environments",
-    "reference/public-api",
-    "reference/contact",
-    "reference/dependencies",
-    "reference/camunda-help-center",
-    "reference/auto-updates",
-    "reference/status",
-    "reference/licenses",
     "reference/notices",
-    "reference/regions",
-    "reference/saas-ip-addresses",
+    "reference/licenses",
+    "reference/public-api",
+    "reference/supported-environments",
+    "reference/dependencies",
     {
       type: "category",
       label: "Data collection",
@@ -1052,7 +1063,8 @@ module.exports = {
       },
       items: ["reference/data-collection/usage-metrics"],
     },
-    "reference/glossary",
+
+    "reference/contact",
   ],
   "Self-Managed": [
     "self-managed/about-self-managed",
@@ -1365,31 +1377,6 @@ module.exports = {
     {
       Components: [
         {
-          type: "category",
-          label: "Components upgrade",
-          link: {
-            type: "doc",
-            id: "self-managed/components/components-upgrade/introduction",
-          },
-          items: [
-            "self-managed/components/components-upgrade/870-to-880",
-            "self-managed/components/components-upgrade/860-to-870",
-            "self-managed/components/components-upgrade/850-to-860",
-            "self-managed/components/components-upgrade/840-to-850",
-            "self-managed/components/components-upgrade/830-to-840",
-            {
-              Elasticsearch: [
-                "self-managed/components/components-upgrade/elasticsearch/7-to-8",
-              ],
-            },
-            {
-              Keycloak: [
-                "self-managed/components/components-upgrade/keycloak/keycloak-update",
-              ],
-            },
-          ],
-        },
-        {
           Modeler: [
             {
               "Web Modeler": [
@@ -1421,7 +1408,7 @@ module.exports = {
         },
         {
           type: "category",
-          label: "Orchestration cluster",
+          label: "Orchestration Cluster",
           link: {
             type: "doc",
             id: "self-managed/components/orchestration-cluster/overview",
@@ -1662,6 +1649,31 @@ module.exports = {
             },
           ],
         },
+        {
+          type: "category",
+          label: "Components update",
+          link: {
+            type: "doc",
+            id: "self-managed/components/components-upgrade/introduction",
+          },
+          items: [
+            "self-managed/components/components-upgrade/870-to-880",
+            "self-managed/components/components-upgrade/860-to-870",
+            "self-managed/components/components-upgrade/850-to-860",
+            "self-managed/components/components-upgrade/840-to-850",
+            "self-managed/components/components-upgrade/830-to-840",
+            {
+              Elasticsearch: [
+                "self-managed/components/components-upgrade/elasticsearch/7-to-8",
+              ],
+            },
+            {
+              Keycloak: [
+                "self-managed/components/components-upgrade/keycloak/keycloak-update",
+              ],
+            },
+          ],
+        },
       ],
     },
     {
@@ -1669,9 +1681,12 @@ module.exports = {
       label: "Upgrade to Camunda 8.8",
       link: {
         type: "doc",
-        id: "self-managed/update/administrators/prepare-for-admin-update",
+        id: "self-managed/update/administrators/admin-upgrade-overview",
       },
-      items: ["self-managed/update/administrators/run-admin-update"],
+      items: [
+        "self-managed/update/administrators/prepare-for-admin-upgrade",
+        "self-managed/update/administrators/run-admin-upgrade",
+      ],
     },
   ],
 };

@@ -75,12 +75,12 @@ Camunda 8 is a universal process orchestrator that allows you to orchestrate and
 
 | Component                                            | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | :--------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [Orchestration cluster](#orchestration-cluster)      | Powers the automation and orchestration of [processes](#process).                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| [Orchestration Cluster](#orchestration-cluster)      | Powers the automation and orchestration of [processes](#process).                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | [Connectors](#connector)                             | Out-of-the-box integration with external systems.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | [Optimize](/components/optimize/what-is-optimize.md) | Business intelligence tooling, allowing you to analyze bottlenecks and examine improvements in [processes](#process) automated with Camunda.                                                                                                                                                                                                                                                                                                                                                                                          |
-| Console                                              | Manage your [Orchestration cluster](#orchestration-cluster) deployments, as follows:<p><ul><li><p>[Console SaaS](/components/console/introduction-to-console.md): Configure, deploy, and manage your [Orchestration cluster](#orchestration-cluster), as well as your [connectors](#connector) and Optimize deployments.</p></li><li><p>[Console Self-Managed](/self-managed/components/console/overview.md): Monitor your [Orchestration cluster](#orchestration-cluster) and [connector](#connector) deployments.</p></li></ul></p> |
+| Console                                              | Manage your [Orchestration Cluster](#orchestration-cluster) deployments, as follows:<p><ul><li><p>[Console SaaS](/components/console/introduction-to-console.md): Configure, deploy, and manage your [Orchestration cluster](#orchestration-cluster), as well as your [connectors](#connector) and Optimize deployments.</p></li><li><p>[Console Self-Managed](/self-managed/components/console/overview.md): Monitor your [orchestration cluster](#orchestration-cluster) and [connector](#connector) deployments.</p></li></ul></p> |
 | Modelers                                             | Allows business users and developers to design and implement [processes](#process), decisions, and [user task](#user-task) forms:<p><ul><li><p>Use [Desktop Modeler](/components/modeler/desktop-modeler/index.md) locally on Mac, Windows, and Linux.</p></li><li><p>Use the browser-based [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md) for process application management.</p></li></ul></p>                                                                                                                |
-| [Management Identity](#management-identity)          | Authentication and authorization for the components outside the [Orchestration cluster](#orchestration-cluster) (Optimize, Console, and Web Modeler).                                                                                                                                                                                                                                                                                                                                                                                 |
+| [Management Identity](#management-identity)          | Authentication and authorization for the components outside the [Orchestration Cluster](#orchestration-cluster) (Optimize, Console, and Web Modeler).                                                                                                                                                                                                                                                                                                                                                                                 |
 
 ### Command
 
@@ -194,7 +194,7 @@ For example, this is useful when working with services that must be isolated wit
 
 ### Identity
 
-Use Identity in the [Orchestration cluster](#orchestration-cluster) to administer the integrated authentication and authorization.
+Use Identity in the [Orchestration Cluster](#orchestration-cluster) to administer the integrated authentication and authorization.
 
 ### Inbound connector
 
@@ -257,7 +257,7 @@ The log is comprised of an ordered sequence of records written to persistent sto
 
 ### Management Identity
 
-The Management Identity component provides authentication and authorization for the [Camunda 8](#camunda-8) components outside the [Orchestration cluster](#orchestration-cluster): Console, Web Modeler, and Optimize.
+The Management Identity component provides authentication and authorization for the [Camunda 8](#camunda-8) components outside the [Orchestration Cluster](#orchestration-cluster): Console, Web Modeler, and Optimize.
 
 ### Manual task
 
@@ -275,15 +275,15 @@ A message contains information to be delivered to interested parties during exec
 
 ## O
 
-### Orchestration cluster
+### Orchestration Cluster
 
-The Orchestration cluster is the core component of [Camunda 8](#camunda-8), powering the automation and orchestration of [processes](#process). An Orchestration cluster includes:
+The Orchestration Cluster is the core component of [Camunda 8](#camunda-8), powering the automation and orchestration of [processes](#process). An Orchestration Cluster includes:
 
 - [Zeebe](#zeebe) as the [workflow engine](#workflow-engine)
 - Operate for monitoring and troubleshooting [process instances](#process-instance) running in [Zeebe](#zeebe)
 - Tasklist for interacting with [user tasks](#user-task) (assigning, completing, and so on)
 - [Identity](#identity) for managing the integrated authentication and authorization
-- APIs for interacting with the Orchestration cluster programmatically
+- APIs for interacting with the Orchestration Cluster programmatically
 
 ### Outbound connector
 
@@ -369,7 +369,7 @@ We recommend running an odd replication factor.
 
 How long a [client](#zeebe-client) waits for a response from the [broker](#zeebe-broker) after the client submits a request. If a response is not received within the client request timeout, the client considers the broker unreachable.
 
-- [Orchestration cluster API](/apis-tools/zeebe-api-rest/zeebe-api-rest-overview.md)
+- [Orchestration Cluster REST API](/apis-tools/zeebe-api-rest/zeebe-api-rest-overview.md)
 - [Zeebe API (gRPC)](/apis-tools/zeebe-api/grpc.md)
 
 ### RFC
@@ -466,7 +466,7 @@ See [process instance variable](#process-instance-variable).
 
 Zeebe is a highly scalable, cloud-native workflow engine used to automate business processes. It acts as the core component of Camunda 8.
 
-Zeebe is part of the [Orchestration cluster](#orchestration-cluster) in Camunda 8.
+Zeebe is part of the [Orchestration Cluster](#orchestration-cluster) in Camunda 8.
 
 The main components of Zeebe are:
 
