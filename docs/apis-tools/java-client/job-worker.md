@@ -5,11 +5,70 @@ description: "Let's take a deeper look at job workers to handle jobs."
 keywords: ["backpressure", "back-pressure", "back pressure"]
 ---
 
+# Job Workers
+
+**Job workers are the backbone of process automation in Camunda 8.** They handle automated tasks (service tasks) in your BPMN processes by continuously polling for available jobs and executing your business logic when jobs become available.
+
+This guide covers everything you need to know about implementing and configuring job workers with the Camunda Java Client, from basic concepts to advanced features like streaming, metrics, and multi-tenancy.
+
+## Quick start
+
+Before diving into the details, here's a simple example of creating a job worker:
+
+```java
+try (final JobWorker workerRegistration = client.newWorker()
+        .jobType(jobType)
+        .handler(new EmailJobHandler())
+        .open()) {
+
+        System.out.println("Job worker opened and receiving jobs of type: " + jobType);
+
+// Keep the worker running
+Thread.sleep(Duration.ofMinutes(10));
+        } catch (InterruptedException e) {
+        throw new RuntimeException(e);
+            }
+
+private static class EmailJobHandler implements JobHandler {
+    @Override
+    public void handle(final JobClient client, final ActivatedJob job) {
+        // Perform your business logic here
+        System.out.println("Processing job: " + job.getKey() + " for a process instance: " + job.getProcessInstanceKey());
+
+        // Complete the job (or use client.newFailCommand() if something goes wrong)
+        client.newCompleteCommand(job.getKey())
+                .variables(Map.of("emailSent", true))
+                .send()
+                .join();
+    }
+}
+```
+
+For a complete walkthrough, see the [getting started guide](java-client-getting-started.md).
+
+## What are job workers?
+
+A job worker is a service that:
+
+- **Polls for jobs** of a specific type from the Camunda cluster
+- **Executes your business logic** when jobs are activated  
+- **Reports job completion or failure** back to the cluster
+- **Handles retries and error scenarios** automatically
+
+When you model a service task in your BPMN process and assign it a job type (e.g., `send-email`, `process-payment`), job workers subscribe to these job types and process them as they become available.
+
+## Key benefits
+
+- **Decoupled architecture**: Workers run independently from the process engine
+- **Scalable processing**: Add more workers to handle increased load
+- **Fault tolerance**: Built-in retry mechanisms and error handling
+- **Language flexibility**: Implement workers in any language with a Camunda client
+
 ## Related resources
 
 - [Job worker basics](/components/concepts/job-workers.md)
 
-## The Java client's job worker
+## How job workers work
 
 The Java client provides a job worker that handles polling for available jobs. This allows you to focus on writing code to handle the activated jobs.
 

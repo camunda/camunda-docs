@@ -30,7 +30,7 @@ Camunda provides official clients and SDKs to simplify API usage and speed up de
 - **Node.js SDK:** For JavaScript/TypeScript developers building integrations or automations.
 
 <DocCardList items={[
-{type:"link", href:"/docs/next/apis-tools/java-client/", label: "Java client", docId:"apis-tools/java-client/index"},
+{type:"link", href:"/docs/next/apis-tools/java-client/", label: "Java client", docId:"apis-tools/java-client/java-client-getting-started"},
 {type:"link", href:"/docs/next/apis-tools/spring-zeebe-sdk/getting-started/", label: "Spring SDK", docId:"apis-tools/spring-zeebe-sdk/getting-started"},
 {type:"link", href:"/docs/next/apis-tools/node-js-sdk/", label: "Node.js SDK", docId:"apis-tools/node-js-sdk"}
 ]}/>
