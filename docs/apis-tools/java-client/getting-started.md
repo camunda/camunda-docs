@@ -19,7 +19,7 @@ The Camunda Java client is part of the Camunda 8 [public API](/reference/public-
 The Camunda Java Client is a comprehensive library that enables Java developers to:
 
 - **Deploy processes and decisions** to Camunda 8 clusters
-- **Start and manage process** programmatically  
+- **Start and manage process** programmatically
 - **Implement job workers** to handle automated tasks in your processes
 - **Query and manage process data** using the Orchestration Cluster API
 
@@ -50,6 +50,7 @@ Use the Camunda Java Client to build:
 Add the Camunda Java Client to your project:
 
 **Maven:**
+
 ```xml
 <dependency>
   <groupId>io.camunda</groupId>
@@ -59,6 +60,7 @@ Add the Camunda Java Client to your project:
 ```
 
 **Gradle:**
+
 ```groovy
 implementation 'io.camunda:camunda-client-java:${camunda.version}'
 ```
@@ -104,6 +106,7 @@ public static void main(String[] args) {
 ```
 
 **What this code does:**
+
 1. **Creates a no-authentication provider** - Configures the client to skip authentication entirely
 2. **Builds an unencrypted client** - Sets up plaintext communication for local development
 3. **Connects to both APIs** - Configures access to both Zeebe gRPC and Orchestration Cluster REST APIs
@@ -160,6 +163,7 @@ public static void main(String[] args) {
 ```
 
 **What this code does:**
+
 1. **Sets up username/password authentication** - Configures the client to authenticate using basic credentials
 2. **Builds a secure client** - Creates an encrypted connection to the cluster
 3. **Connects to both APIs** - Configures access to both Zeebe gRPC and Orchestration Cluster REST APIs
@@ -182,10 +186,11 @@ CamundaClient client = CamundaClient.newClientBuilder().build();
 The client will automatically read the environment variables and configure the appropriate authentication method.
 
 :::note
+
 - Ensure addresses are in absolute URI format: `scheme://host(:port)`.
 - Environment variables will by default override any values provided in Java code. You can enforce that Java code values have precedence via the `.applyEnvironmentOverrides(false)` API on the `BasicAuthCredentialsProviderBuilder`.
 - The client will add an `Authorization` header to each request with the value `Basic username:password` (where `username:password` is base64 encoded).
-:::
+  :::
 
 </TabItem>
 
@@ -224,6 +229,7 @@ public static void main(String[] args) {
 ```
 
 **What this code does:**
+
 1. **Sets up OAuth2 authentication** - Configures the client to authenticate using OAuth tokens from your identity provider
 2. **Builds a secure client** - Creates an encrypted connection to your self-managed cluster
 3. **Connects to both APIs** - Configures access to both Zeebe gRPC and Orchestration Cluster REST APIs
@@ -248,11 +254,12 @@ CamundaClient client = CamundaClient.newClientBuilder().build();
 The client will automatically read the environment variables and configure the appropriate authentication method.
 
 :::note
+
 - Ensure addresses are in absolute URI format: `scheme://host(:port)`.
 - Environment variables will, by default, override any values provided in Java code. You can enforce that Java code values have precedence via the `.applyEnvironmentOverrides(false)` API on the `OAuthCredentialsProviderBuilder`.
 - The client will add an `Authorization` header to each request with the value `Bearer <token>`. The token is obtained by making a request to the authorisation server and is cached to avoid unnecessary requests. The token is lazily refreshed once it expires.
-:::
-</TabItem>
+  :::
+  </TabItem>
 
 <TabItem value="oidc-saas">
 
@@ -282,6 +289,7 @@ public static void main(String[] args) {
 ```
 
 **What this code does:**
+
 1. **Sets up SaaS authentication** - Configures the client to connect to Camunda 8 SaaS using your cluster credentials
 2. **Builds a cloud client** - Creates a client optimised for SaaS with automatic endpoint discovery
 3. **Connects to your cluster** - Uses your cluster ID and region to find and connect to the right SaaS instance
@@ -318,6 +326,7 @@ Ensure addresses are in absolute URI format: `scheme://host(:port)`.
 Several identity providers, such as Keycloak, support client X.509 authentication as an alternative to client credentials flow.
 
 **Prerequisites:**
+
 - Proper KeyStore and TrustStore configured
 - Both the Spring Camunda application and identity provider share the same CA trust certificates
 - Both the Spring Camunda and identity provider own certificates signed by trusted CA
@@ -365,6 +374,7 @@ public static void main(String[] args) {
 ```
 
 **What this code does:**
+
 1. **Sets up X.509 certificate authentication** - Configures the client to authenticate using client certificates with OAuth
 2. **Builds a secure client** - Creates an encrypted connection using mutual TLS authentication
 3. **Connects to both APIs** - Configures access to both Zeebe gRPC and Orchestration Cluster REST APIs
@@ -396,9 +406,10 @@ The client will automatically read the environment variables and configure the a
 Refer to your identity provider documentation on how to configure X.509 authentication. For example, [Keycloak](https://www.keycloak.org/server/mutual-tls).
 
 :::note
+
 - Ensure addresses are in absolute URI format: `scheme://host(:port)`.
 - Environment variables will by default override any values provided in Java code. You can enforce that Java code values have precedence via the `.applyEnvironmentOverrides(false)` API on the `OAuthCredentialsProviderBuilder`.
-:::
+  :::
 
 </TabItem>
 
@@ -411,15 +422,18 @@ Now that you have a connected client, you're ready to build your process applica
 #### Essential operations
 
 **Deploy a process:**
+
 ```java
 final DeploymentEvent deploymentEvent = client.newDeployResourceCommand()
     .addResourceFromClasspath("process.bpmn")
     .send()
     .join();
 ```
+
 This deploys your BPMN process definition to the cluster. Place your `.bpmn` files in `src/main/resources` and reference them by filename.
 
 **Start a process instance:**
+
 ```java
 final ProcessInstanceEvent processInstanceEvent = client.newCreateInstanceCommand()
     .bpmnProcessId("my-process")
@@ -428,9 +442,11 @@ final ProcessInstanceEvent processInstanceEvent = client.newCreateInstanceComman
     .send()
     .join();
 ```
+
 This creates a new instance of your process. The `bpmnProcessId` should match the Process ID from your BPMN file, and you can pass initial variables as a Map.
 
 **Implement a job worker:**
+
 ```java
 final String jobType = "send-email";
 
