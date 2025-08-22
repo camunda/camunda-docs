@@ -95,7 +95,8 @@ Replace the `${BASE_URL}` based on the address of your cluster. See the [Context
 
 <TabItem value="self-managed">
 
-1. Register a client in your Identity Provider (IdP). An IdP is a service that manages digital identities and authentication, such as Keycloak, Azure Entra (formerly Azure AD), Okta, or similar systems.
+1. Register a client in your Identity Provider (IdP).
+   An IdP is a service that manages digital identities and authentication, such as Keycloak, Azure Entra (formerly Azure AD), Okta, or similar systems.
 2. Use the credentials (client ID and secret) to request an Access Token. The example below shows Keycloak configuration (endpoint URL will vary based on your IdP):
 
 ```shell
@@ -134,5 +135,6 @@ Refer to your identity provider's documentation for obtaining tokens using X.509
 When using official Camunda clients (Java client or Spring Boot Starter), token acquisition and renewal are handled automatically. You don't need to manually obtain or refresh tokens—the clients handle this based on your configuration.
 
 **Learn more:**
+
 - [Camunda Java client authentication and token management](./../java-client/getting-started.md)
 - [Camunda Spring Boot Starter: Configuring the Camunda 8 connection](./../spring-zeebe-sdk/getting-started.md#configuring-the-camunda-8-connection)
