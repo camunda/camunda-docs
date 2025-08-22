@@ -129,11 +129,9 @@ Prepare your remote runtime:
 In your `application.yml` (or `application.properties`):
 
 ```yaml
-io:
-  camunda:
-    process:
-      test:
-        runtime-mode: remote
+camunda:
+  process-test:
+    runtime-mode: remote
 ```
 
 </TabItem>
