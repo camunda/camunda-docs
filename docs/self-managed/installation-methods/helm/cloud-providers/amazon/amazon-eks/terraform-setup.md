@@ -529,7 +529,7 @@ As you now have a database, you need to create dedicated databases for each Camu
 You can access the created database in the following ways:
 
 1. **Bastion host:** Set up a bastion host within the same network to securely access the database.
-2. **Pod within the EKS cluster:** Deploy a pod in your EKS cluster equipped with the necessary tools to connect to the database. See [Accessing internal infrastructure](#accessing-internal-infrastructure).
+2. **Pod within the EKS cluster:** Deploy a pod in your EKS cluster equipped with the necessary tools to connect to the database. See [Access internal infrastructure](#access-internal-infrastructure).
 3. **VPN:** Establish a VPN connection to the VPC where the Aurora Cluster resides, allowing secure access from your local machine or another network.
 
 The choice depends on your infrastructure setup and security preferences. In this guide, we'll use a pod within the EKS cluster to configure the database.
@@ -643,7 +643,7 @@ As you now have an OpenSearch domain, you need to configure the related access f
 You can access the created OpenSearch domain in the following ways:
 
 1. **Bastion host:** Set up a bastion host within the same network to securely access the OpenSearch domain.
-2. **Pod within the EKS cluster:** Deploy a pod in your EKS cluster equipped with the necessary tools to connect to the OpenSearch domain. See [Accessing internal infrastructure](#accessing-internal-infrastructure).
+2. **Pod within the EKS cluster:** Deploy a pod in your EKS cluster equipped with the necessary tools to connect to the OpenSearch domain. See [Access internal infrastructure](#access-internal-infrastructure).
 3. **VPN:** Establish a VPN connection to the VPC where the OpenSearch domain resides, allowing secure access from your local machine or another network.
 
 The choice depends on your infrastructure setup and security preferences. In this tutorial, we'll use a pod within the EKS cluster to configure the domain.
@@ -720,7 +720,7 @@ Running these commands will clean up both the job and the secret, ensuring that 
 </TabItem>
 </Tabs>
 
-### Accessing internal infrastructure
+### Access internal infrastructure
 
 :::warning Not recommended in production
 
