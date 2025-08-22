@@ -13,7 +13,7 @@ Migrate to the Camunda Java Client from the Zeebe Java Client.
 
 This guide provides an overview of the process for migrating to the Camunda Java Client.
 
-- The [Camunda Java Client](../java-client/java-client-getting-started.md) is the official Java library for connecting to Orchestration Cluster, automating processes, and implementing job workers.
+- The [Camunda Java Client](../java-client/getting-started.md) is the official Java library for connecting to Orchestration Cluster, automating processes, and implementing job workers.
 - The Zeebe Java Client remains available until Camunda 8.10.
 
 :::tip
@@ -96,7 +96,7 @@ CamundaClient client = CamundaClient.newClientBuilder()
 :::info
 
 - Refer to the [CamundaClientBuilder documentation](https://javadoc.io/doc/io.camunda/camunda-client-java/latest/io/camunda/client/CamundaClientBuilder.html) for more details on available configuration options.
-- The construction for OAuth, Basic Auth, or custom providers remains conceptually the same, but you must ensure you use the classes from the new package. Refer to the [Camunda Java Client bootstrapping](../java-client/java-client-getting-started.md#bootstrapping) for more details.
+- The construction for OAuth, Basic Auth, or custom providers remains conceptually the same, but you must ensure you use the classes from the new package. Refer to the [Camunda Java Client bootstrapping](../java-client/getting-started.md#bootstrapping) for more details.
 
 :::
 

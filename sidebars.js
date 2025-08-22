@@ -907,8 +907,7 @@ module.exports = {
       "API Clients": [
         {
           "Java client": [
-            "apis-tools/java-client/index",
-            "apis-tools/java-client/authentication",
+            "apis-tools/java-client/getting-started",
             "apis-tools/java-client/job-worker",
             "apis-tools/java-client/logging",
             "apis-tools/java-client/zeebe-process-test",

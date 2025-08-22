@@ -44,7 +44,7 @@ private static class EmailJobHandler implements JobHandler {
 }
 ```
 
-For a complete walkthrough, see the [getting started guide](java-client-getting-started.md).
+For a complete walkthrough, see the [getting started guide](getting-started.md).
 
 ## What are job workers?
 
