@@ -594,6 +594,7 @@ A Spring Boot SDK is provided for the Orchestration cluster REST API to unify pr
 - Easily integrate process entity management and queries within your workflows.
 - Seamlessly configure endpoints and authentication via Spring Boot auto-configuration, minimizing boilerplate code.
 - Rely on an official, standardized approach to guarantee consistency and reduce maintenance costs when upgrading.
+- Based on Spring Boot 3.5 ([version compatibility matrix](/apis-tools/spring-zeebe-sdk/getting-started.md#version-compatibility)).
 
 To learn more about this feature, see the [Camunda Spring Boot SDK](/apis-tools/spring-zeebe-sdk/getting-started.md).
 
