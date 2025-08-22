@@ -70,6 +70,7 @@ module.exports = {
           "Access control": [
             "components/concepts/access-control/access-control-overview",
             "components/concepts/access-control/authorizations",
+            "components/concepts/access-control/connect-to-identity-provider",
             "components/concepts/access-control/user-groups",
             "components/concepts/access-control/user-task-access-restrictions",
           ],
@@ -793,6 +794,22 @@ module.exports = {
         },
       ],
     },
+    {
+      type: "category",
+      label: "Camunda 8 SaaS",
+      link: {
+        type: "doc",
+        id: "components/saas/saas",
+      },
+      items: [
+        "reference/regions",
+        "reference/camunda-help-center",
+        "reference/auto-updates",
+        "reference/status",
+        "reference/saas-ip-addresses",
+      ],
+    },
+    "reference/glossary",
   ],
   "APIs & Tools": [
     "apis-tools/working-with-apis-tools",
@@ -930,6 +947,7 @@ module.exports = {
           "Camunda Spring Boot Starter": [
             "apis-tools/spring-zeebe-sdk/getting-started",
             "apis-tools/spring-zeebe-sdk/configuration",
+            "apis-tools/spring-zeebe-sdk/properties-reference",
           ],
         },
         "apis-tools/node-js-sdk",
@@ -974,7 +992,7 @@ module.exports = {
     "reference/overview",
     {
       type: "category",
-      label: "Announcements and release notes",
+      label: "Release announcements and release notes",
       link: {
         type: "doc",
         id: "reference/announcements-release-notes/overview",
@@ -1031,17 +1049,11 @@ module.exports = {
         "reference/announcements-release-notes/release-policy",
       ],
     },
-    "reference/supported-environments",
-    "reference/public-api",
-    "reference/contact",
-    "reference/dependencies",
-    "reference/camunda-help-center",
-    "reference/auto-updates",
-    "reference/status",
-    "reference/licenses",
     "reference/notices",
-    "reference/regions",
-    "reference/saas-ip-addresses",
+    "reference/licenses",
+    "reference/public-api",
+    "reference/supported-environments",
+    "reference/dependencies",
     {
       type: "category",
       label: "Data collection",
@@ -1051,7 +1063,8 @@ module.exports = {
       },
       items: ["reference/data-collection/usage-metrics"],
     },
-    "reference/glossary",
+
+    "reference/contact",
   ],
   "Self-Managed": [
     "self-managed/about-self-managed",
@@ -1527,6 +1540,7 @@ module.exports = {
               items: [
                 "self-managed/components/orchestration-cluster/identity/overview",
                 "self-managed/components/orchestration-cluster/identity/configuration",
+                "self-managed/components/orchestration-cluster/identity/connect-external-identity-provider",
                 "self-managed/components/orchestration-cluster/identity/manage-tenants",
                 {
                   "Mapping rules": [

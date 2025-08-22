@@ -13,9 +13,10 @@ Supported environment changes and breaking changes or deprecations for the Camun
 | :--------------------- | :--------------------------- | :------------ | :--- |
 | 14 October 2025        | 13 April 2027                | -             | -    |
 
-:::tip Release notes and quality board
+:::info 8.8 resources
 
 - See [release notes](/reference/announcements-release-notes/880/880-release-notes.md) to learn more about new features and enhancements.
+- See [What's new in Camunda 8.8](/components/whats-new-in-88.md) for important changes to consider when planning your upgrade from Camunda 8.7.
 - Refer to the [quality board](https://github.com/orgs/camunda/projects/187/views/15) for an overview of known bugs by component and severity.
 
 :::
@@ -110,6 +111,61 @@ As of the 8.8 release, Camunda is compatible with Amazon OpenSearch 2.17+ and no
 
 ## Key changes
 
+### Connector SDK
+
+#### Core SDK restructuring
+
+The internal structure of the Connector SDK has been updated to make the Core SDK more lightweight, with **no dependency on the Camunda client**.
+
+Some classes and interfaces have been relocated, which means external connectors may need to be **recompiled** before they can be used with Connector runtime **8.8**.
+
+This change affects the following classes and interfaces previously located in the `io.camunda.document` package:
+
+```
+DocumentFactory
+Document
+DocumentLinkParameters
+```
+
+These classes and interfaces are now located in the `io.camunda.connector.api.document` package.
+
+Additionally, the following classes and interfaces from the official Camunda Java client (`io.camunda.client.api.response`)  
+have been **replicated** in the Connector SDK and are now located in the `io.camunda.connector.api.document` package:
+
+```
+DocumentMetadata
+DocumentReference
+```
+
+#### Changes to activity logging in inbound connectors
+
+Connector SDK **8.8** introduces a new way to [log activities](/components/console/manage-clusters/manage-connectors.md#activity-log) in inbound connectors.
+
+Objects of the `InboundConnectorContext` class now provide a new overloaded method:
+
+```java
+void log(Consumer<ActivityBuilder> activityBuilderConsumer)
+```
+
+This method works with the new `ActivityBuilder` interface.
+
+**Usage example:**
+
+```json
+connector.context()
+    .log(
+        activity ->
+            activity
+            .withSeverity(Severity.INFO)
+            .withTag("Consumer")
+            .withMessage("Successfully processed message")
+            .andReportHealth(Health.up()));
+```
+
+The old builder pattern (`Activity.newBuilder()`) is **deprecated** and will be removed in upcoming releases.
+
+The new `ActivityBuilder` interface provides a more flexible and fluent API for logging activities in inbound connectors.
+
 ### Removed: Starter plan <span class="badge badge--long" title="This feature affects SaaS">SaaS</span>
 
 The Camunda SaaS Starter plan is no longer available.
@@ -199,6 +255,10 @@ Use the corresponding endpoints under `/api/v1/versions` instead.
 
 With the 8.8 release, the `connector_template` file type in the [Web Modeler API](/apis-tools/web-modeler-api/index.md) endpoint for file creation (`POST /api/v1/files`) is deprecated and will be removed in version 8.10.
 Please use `element_template` instead, which provides equivalent functionality.
+
+#### Removed: Optimize Index Rollover
+
+Prior to the 8.8 release, Optimize used the `externalVariable.variableIndexRollover.maxIndexSizeGB` and `externalVariable.variableIndexRollover.scheduleIntervalInMinutes` configuration properties to apply index rollover to its External Variable Indices. These properties have been deleted in 8.8, and External Variables will now be stored in a single index.
 
 ### Camunda Exporter <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
