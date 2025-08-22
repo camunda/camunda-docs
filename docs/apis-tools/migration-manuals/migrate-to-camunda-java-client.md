@@ -1,6 +1,7 @@
 ---
 id: migrate-to-camunda-java-client
 title: Migrate to the Camunda Java Client
+sidebar_label: "Camunda Java Client"
 description: "Migrate from Zeebe Java Client to the Camunda Java Client. This guide provides an overview of the migration process."
 ---
 

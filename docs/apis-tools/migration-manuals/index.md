@@ -1,5 +1,5 @@
 ---
-title: "Camunda 8.8 APIs & tools upgrade guide"
+title: "Camunda 8.8 APIs & tools migration guide"
 description: "Plan and execute an update from Camunda 8.7 to 8.8. Includes architectural highlights, prerequisites, and breaking changes relevant for developers."
 ---
 
