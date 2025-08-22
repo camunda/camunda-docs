@@ -19,8 +19,10 @@ Tasklist v2 API integrates with the Orchestration Cluster API, providing a more 
 Key benefits of using v2 include:
 
 - **Improved performance:** The v2 API is optimized for faster performance and response times.
-- **Recommented user task implementation:** It uses the [Camunda user task implementation type](components/modeler/bpmn/user-tasks/user-tasks.md#camunda-user-tasks), which is the successor of the deprecated [Job worker-based user tasks](components/modeler/bpmn/user-tasks/user-tasks.md#job-worker-implementation).
-- **Unified API:** It aligns with the Orchestration Cluster API for a consistent development experience and fine-grained [access control](components/concepts/access-control/access-control-overview.md).
+- **Recommended user task implementation:** It uses the [Camunda user task implementation type](../modeler/bpmn/user-tasks/user-tasks.md#camunda-user-tasks), which is the successor of the deprecated [Job
+  worker-based user tasks](components/modeler/bpmn/user-tasks/user-tasks.md#job-worker-implementation).
+- **Unified API:** It aligns with the [Orchestration Cluster API](../../apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) for a consistent development experience and fine-grained [access control](../concepts/access-control/access-control-overview.md).
+- **User task listeners:** [Camunda user tasks](../modeler/bpmn/user-tasks/user-tasks.md#camunda-user-tasks) support [listeners](components/concepts/user-task-listeners.md) to programmatically react to task lifecycle changes.
 
 ## Migration from v1 to v2
 
