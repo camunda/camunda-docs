@@ -328,6 +328,7 @@ module.exports = {
         require("./docs/components/modeler/feel/sidebar-schema"),
         require("./docs/components/modeler/forms/sidebar-schema"),
         "components/modeler/data-handling",
+        "components/modeler/modelers-interoperability",
         require("./docs/components/modeler/reference/sidebar-schema"),
       ],
     },
