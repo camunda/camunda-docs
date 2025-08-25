@@ -42,11 +42,17 @@ For more information on updating clusters, see [update your cluster](/components
 
 You can enable user task access restrictions in the cluster to restrict Tasklist task access to assigned/candidate users and groups.
 
+:::info
+User task access restrictions are only supported with the Tasklist v1 API. For more information, see the documentation on [Tasklist API versions](../../tasklist/api-versions.md#user-task-access-restrictions-and-the-tasklist-api).
+:::
+
 - Enable this setting to use user task access restrictions in the cluster. Tasks assigned to users or candidate groups are only visible to assigned users or respective group members.
 - Disable this setting if you do not want to use user task access restrictions in the cluster. Any user can see any task, regardless of the assignment. Use this mode in development environments to test assignment rules.
 
+Changes to this setting can take a few minutes to be applied, as it requires a Tasklist restart.
+
 :::tip
-For more information on user task access restrictions, see [user task access restrictions](/components/concepts/access-control/user-task-access-restrictions.md).
+For more information on user task access restrictions, see [user task access restrictions](/components/tasklist/user-task-access-restrictions.md).
 :::
 
 ## Delete this cluster
