@@ -62,3 +62,17 @@ Camunda recommends storing shared templates in a separate VCS repository:
 :::warning
 If you rely on Desktop Modeler, you must create separate files for each template version. Web Modeler alone does not have this limitation.
 :::
+
+## Frequently asked questions
+
+### Do I really need a `.process-application` file if I’m only using Web Modeler?
+
+No. A `.process-application` file is only required if you plan to open the project in Desktop Modeler. Web Modeler does not require it, but adding the file makes the project compatible across both tools.
+
+### Can I use the same element template repository for both modelers?
+
+Yes. Camunda recommends maintaining a dedicated version control repository for element templates. Desktop Modeler users can copy templates into their global directory, while Web Modeler users can stay in sync through a CI/CD pipeline and the [Web Modeler API](/apis-tools/web-modeler-api/index.md).
+
+### How should I manage multiple versions of the same element template?
+
+In Desktop Modeler, each version must be stored in a separate file (for example, `element-template-v1.json` and `element-template-v2.json`). Otherwise, the template will appear as [missing](/components/modeler/desktop-modeler/element-templates/using-templates.md#missing-templates). Web Modeler, however, supports versioning in a single file and allows you to [publish](/components/connectors/manage-connector-templates.md#manage-published-connector-templates) new versions directly.
