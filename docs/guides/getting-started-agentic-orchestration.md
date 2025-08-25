@@ -107,7 +107,7 @@ How you configure these secrets depends if you are running Camunda 8 SaaS or a S
 - For SaaS and Self-Managed deployments, you can configure the secrets in the [Console](../components/console/manage-clusters/manage-secrets.md).
 - If you run Camunda 8 run locally, you can configure the secrets as follows:
   - If you run it with Java, export the secrets as environment variables before starting the distribution.
-  - If you use Camunda 8 Run with Docker, navigate to the `docker-compose-8.x` folder in the new c8run directory and add the secrets in the `connector-secrets.txt` file.
+  - If you use Camunda 8 Run with Docker, navigate to the `docker-compose-8.x` folder in the new `c8run` directory and add the secrets in the `connector-secrets.txt` file.
 
 ## Step 3: Configure the AI Agent connector (optional)
 
