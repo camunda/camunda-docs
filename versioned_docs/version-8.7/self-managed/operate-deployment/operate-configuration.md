@@ -139,6 +139,10 @@ These values are applied only on first startup of Operate or during version upda
 schema is created, settings may be adjusted directly in the Elasticsearch template, and the new settings are applied
 to indices created after adjustment.
 
+:::note
+From 8.7.11 you can opt-in to applying schema-related configuration updates on restart. See [Dynamic schema settings updates](#dynamic-schema-settings-updates-8711).
+:::
+
 #### Settings for index templates priority
 
 Operate creates index templates that Elasticsearch uses for the historical indices. The priority of these templates can be changed.
@@ -151,14 +155,32 @@ The following configuration parameter defines the setting:
 | --------------------------------------------------- | --------------------------------------------------- | --------------- |
 | camunda.operate.elasticsearch.indexTemplatePriority | Priority for all index templates created by Operate | - (no priority) |
 
-This value is applied every time the configuration is changed.
-
 :::note
 The priority should be different (strictly higher) than that set by the wildcard templates.
+:::
 
 :::note
 This feature is only available for Operate 8.7.11 and later versions.
 :::
+
+:::note
+From 8.7.11 you can opt-in to applying the configured priority update on restart. See [Dynamic schema settings updates](#dynamic-schema-settings-updates-8711).
+:::
+
+#### Dynamic schema settings updates (8.7.11+)
+
+Configure Operate to update certain schema-related settings each time it starts by enabling:
+
+| Name                                               | Description                                         | Default value |
+| -------------------------------------------------- | --------------------------------------------------- | ------------- |
+| camunda.operate.elasticsearch.updateSchemaSettings | Enables dynamic updates for schema-related settings | false         |
+
+Behavior when enabled:
+
+- numberOfReplicas: Updated for existing indices and future indices.
+- numberOfShards: Updated in index templates and indices created after the change.
+- indexTemplatePriority: Updated in index templates
+- A restart is required after changing any of the schema configuration values.
 
 #### A snippet from application.yml
 
@@ -231,6 +253,10 @@ These values are applied only on first startup of Operate or during version upda
 schema is created, settings may be adjusted directly in the OpenSearch template, and the new settings are applied
 to indices created after adjustment.
 
+:::note
+From 8.7.11 you can opt-in to re-applying schema-related configuration (replicas, and template priority) on restart. See [Dynamic schema settings updates (OpenSearch)](#dynamic-schema-settings-updates-opensearch-8711).
+:::
+
 #### Settings for index templates priority
 
 Operate creates index templates that OpenSearch uses for the historical indices. The priority of these templates can be changed.
@@ -243,8 +269,6 @@ The following configuration parameter defines the setting:
 | ------------------------------------------------ | --------------------------------------------------- | --------------- |
 | camunda.operate.opensearch.indexTemplatePriority | Priority for all index templates created by Operate | - (no priority) |
 
-This value is applied every time the configuration is changed.
-
 :::note
 The priority should be different (strictly higher) than that set by the wildcard templates.
 :::
@@ -252,6 +276,25 @@ The priority should be different (strictly higher) than that set by the wildcard
 :::note
 This feature is only available for Operate 8.7.11 and later versions.
 :::
+
+:::note
+From 8.7.11 you can opt-in to applying the configured priority update on restart. See [Dynamic schema settings updates](#dynamic-schema-settings-updates-8711).
+:::
+
+#### Dynamic schema settings updates (OpenSearch, 8.7.11+)
+
+Configure Operate to update certain schema-related settings each time it starts by enabling:
+
+| Name                                            | Description                                         | Default value |
+| ----------------------------------------------- | --------------------------------------------------- | ------------- |
+| camunda.operate.opensearch.updateSchemaSettings | Enables dynamic updates for schema-related settings | false         |
+
+Behavior when enabled:
+
+- numberOfReplicas: Updated for existing indices and future indices.
+- numberOfShards: Updated in index templates and indices created after the change.
+- indexTemplatePriority: Updated in index templates
+- A restart is required after changing any of the schema configuration values.
 
 #### A snippet from application.yml
 
