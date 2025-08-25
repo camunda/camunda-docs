@@ -11,119 +11,127 @@ This page guides you through the manual installation of Camunda 8 on a local mac
 
 ## Prerequisites
 
-- Bare Metal / Virtual Machine
+- Bare metal or virtual machine
   - Operating system:
     - Linux
-    - Windows, macOS and others are for development only and not supported for production
-  - Java Virtual Machine, see [supported environments](/reference/supported-environments.md) for version details
-  - Make sure to configure the web applications to use a port that is available. By default the Orchestration Cluster listens on port 8080.
+    - Windows, macOS, and other operating systems are supported for development only and not for production.
+  - Java Virtual Machine. See [supported environments](/reference/supported-environments.md) for version details.
+  - Configure the web applications to use an available port. By default, the Orchestration Cluster listens on port 8080.
 - Secondary datastore
-  - Elasticsearch / Amazon OpenSearch, see [supported environments](/reference/supported-environments.md) for version details
-    - Explore available deployment options of Elasticsearch in their [documentation](https://www.elastic.co/docs/deploy-manage/deploy)
+  - Elasticsearch or Amazon OpenSearch. See [supported environments](/reference/supported-environments.md) for version details.
+    - For Elasticsearch deployment options, see the [Elasticsearch documentation](https://www.elastic.co/docs/deploy-manage/deploy).
 
-See also the [Reference Architecture > Manual](/self-managed/reference-architecture/manual.md#requirements) for suggested minimum hardware requirements and networking.
+For suggested minimum hardware requirements and networking, see the [manual reference architecture requirements](/self-managed/reference-architecture/manual.md#requirements).
 
-:::tip
+:::tip Performance on musl-based distributions
 
-There are known performance limitations on systems that use `musl` instead of `glibc`, which Java often relies on for running native libraries. For example, Alpine Linux, which uses `musl`, has shown performance degradation of up to 20% compared to Debian or Ubuntu in benchmark tests.
+There are known performance limitations on systems that use `musl` instead of `glibc`, because Java relies on `glibc` for running native libraries. For example, Alpine Linux, which uses `musl`, has shown performance degradation of up to 20% compared to Debian or Ubuntu in benchmark tests.
 
 :::
 
-:::warning Not Supported
+:::warning Unsupported components
 
-Following components are currently not supported for manual installation:
+The following components are not supported for manual installation:
 
 - Management Identity
 - Optimize
 - Web Modeler
 
-You may use a [docker](/self-managed/installation-methods/docker/docker.md) or [Kubernetes with Helm](/self-managed/installation-methods/helm/index.md) installation instead.
+To install these components, use one of the supported methods:
+
+- [Install with Docker](/self-managed/installation-methods/docker/docker.md)
+- [Install on Kubernetes with Helm](/self-managed/installation-methods/helm/index.md)
 
 :::
 
-### Artifacts
+### Download artifacts
 
-You can download the required Camunda 8 artifact from the following locations:
+Download the required Camunda 8 artifacts from the following sources.
 
-Orchestration Cluster:
+Orchestration cluster:
 
-- named like `camunda-zeebe-x.y.z.(zip|tar.gz)`
-- [Maven Central](https://central.sonatype.com/artifact/io.camunda/camunda-zeebe/versions) (via "Browse")
-- [Artifactory](https://artifacts.camunda.com/ui/native/zeebe/io/camunda/camunda-zeebe/)
-- [GitHub](https://github.com/camunda/camunda/releases)
+- File names follow the pattern `camunda-zeebe-x.y.z.(zip|tar.gz)`.
+- [Maven Central](https://central.sonatype.com/artifact/io.camunda/camunda-zeebe/versions) - Select a version, then click **Browse** to view downloadable files such as `.zip` or `.tar.gz`.
+- [Artifactory](https://artifacts.camunda.com/ui/native/zeebe/io/camunda/camunda-zeebe/) - Select a version, then browse the files to download.
+- [GitHub](https://github.com/camunda/camunda/releases) - Select a release to download the files.
 
 Connectors:
 
-- Bundle (pre-bundled with connectors by Camunda)
-  - named like `connector-runtime-bundle-x.y.z-with-dependencies.jar`
-  - [Maven Central](https://central.sonatype.com/artifact/io.camunda.connector/connector-runtime-bundle/versions) (via "Browse")
-  - [Artifactory](https://artifacts.camunda.com/ui/native/zeebe/io/camunda/connector/connector-runtime-bundle/)
+- Bundle (includes pre-bundled connectors from Camunda)
+  - File names follow the pattern `connector-runtime-bundle-x.y.z-with-dependencies.jar`.
+  - [Maven Central](https://central.sonatype.com/artifact/io.camunda.connector/connector-runtime-bundle/versions) - Select a version, then click **Browse** to view the `.jar`.
+  - [Artifactory](https://artifacts.camunda.com/ui/native/zeebe/io/camunda/connector/connector-runtime-bundle/) - Select a version, then browse the files to download.
+
 - Runtime-only
-  - named like `connector-runtime-application-x.y.z.jar`
-  - [Maven Central](https://central.sonatype.com/artifact/io.camunda.connector/connector-runtime-application/versions) (via "Browse")
-  - [Artifactory](https://artifacts.camunda.com/ui/native/zeebe/io/camunda/connector/connector-runtime-application/)
+  - File names follow the pattern `connector-runtime-application-x.y.z.jar`.
+  - [Maven Central](https://central.sonatype.com/artifact/io.camunda.connector/connector-runtime-application/versions) - Select a version, then click **Browse** to view the `.jar`.
+  - [Artifactory](https://artifacts.camunda.com/ui/native/zeebe/io/camunda/connector/connector-runtime-application/) - Select a version, then browse the files to download.
 
 :::note
 
-Some out-of-the-box connectors are licensed under the [Camunda Self-Managed Free Edition license](https://camunda.com/legal/terms/cloud-terms-and-conditions/camunda-cloud-self-managed-free-edition-terms/). Find an overview in the [Connectors Bundle project](https://github.com/camunda/connectors-bundle).
+Some out-of-the-box connectors are licensed under the [Camunda Self-Managed Free Edition license](https://camunda.com/legal/terms/cloud-terms-and-conditions/camunda-cloud-self-managed-free-edition-terms/). See [Camunda Connectors Bundle project](https://github.com/camunda/connectors-bundle) for an overview.
 
 :::
 
-## Reference Architecture
+## Reference architecture
 
-The [Reference Architecture > Manual](/self-managed/reference-architecture/manual.md) is a recommended read to get a general understanding of the environment.
+Review the following reference architectures for deployment guidance:
 
-- [Amazon EC2](/self-managed/installation-methods/manual/cloud-providers/amazon/aws-ec2.md) - A reference architecture built on top of Amazon Web Services (AWS) using Elastic Cloud Compute (EC2) with Ubuntu and Amazon OpenSearch as secondary datastore.
+- [Manual reference architecture](/self-managed/reference-architecture/manual.md) - Provides an overview of the environment and requirements.
+- [Amazon EC2](/self-managed/installation-methods/manual/cloud-providers/amazon/aws-ec2.md) - A reference architecture built on Amazon Web Services (AWS) using Elastic Compute Cloud (EC2) with Ubuntu, and Amazon OpenSearch as the secondary datastore.
 
-## Orchestration Cluster
+## Orchestration cluster
 
-Learn more about the [Orchestration Cluster](/reference/glossary.md#orchestration-cluster) in the [architectural overview](/self-managed/reference-architecture/reference-architecture.md#architecture), as well as it's configuration options in the [components section](/self-managed/components/orchestration-cluster/overview.md).
+For background, see the [Orchestration cluster glossary entry](/reference/glossary.md#orchestration-cluster).  
+For architecture details, review the [architecture](/self-managed/reference-architecture/reference-architecture.md#architecture).  
+For configuration details, see the [Orchestration cluster components](/self-managed/components/orchestration-cluster/overview.md).
 
-### Configure
+### Configure the Orchestration cluster
 
-The default configuration assumes a **single-node Orchestration Cluster** using a **local Elasticsearch instance** as the secondary datastore. If this setup matches your environment, no additional configuration is required.
+By default, the configuration uses a single-node Orchestration cluster with a local Elasticsearch instance as the secondary datastore. If this setup matches your environment, no additional configuration is required.
 
-However, if you plan to:
+If you plan to:
 
 - Add more nodes to the cluster
 - Use a different or external secondary datastore
 - Enable Connectors
 - Apply a license key
 
-You will need to make targeted configuration changes. The following sections outline the minimum required adjustments for each use case. These changes should be **combined into a single `application.yaml`** under the appropriate configuration keys, or alternatively, exported as **environment variables**.
+You need to make targeted configuration changes. The following sections outline the minimum required adjustments for each use case. Combine these changes into a single `application.yaml` under the appropriate configuration keys, or export them as environment variables.
 
-For detailed configuration options and advanced setup guidance, refer to each component’s documentation under the [components section](/self-managed/components/orchestration-cluster/overview.md).
+For detailed configuration options and advanced setup guidance, refer to each component’s documentation under the [Orchestration cluster section](/self-managed/components/orchestration-cluster/overview.md).
 
-#### Datastore
+#### Configure the datastore
 
-Depending on your chosen datastore, set the value to either `elasticsearch` or `opensearch`, and remove any fields that are not applicable to your selection.
+Set the datastore value to `elasticsearch` or `opensearch`, and remove any fields that do not apply to your selection.
 
-Additionally, if your security settings require authentication for the secondary datastore, you must configure both `username` and `password`. Otherwise, these fields should be omitted entirely.
+If your security settings require authentication for the secondary datastore, configure both `username` and `password`.
+Omit these fields if authentication is not required.
 
-The following configuration references are based on the official component-specific documentation:
+For detailed configuration options, see the following component documentation:
 
-- [Operate](/self-managed/components/orchestration-cluster/operate/operate-configuration.md#elasticsearch-or-opensearch)
-- [Tasklist](/self-managed/components/orchestration-cluster/tasklist/tasklist-configuration.md#elasticsearch-or-opensearch)
-- [Camunda Exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md#configuration)
+- [Operate configuration for Elasticsearch or OpenSearch](/self-managed/components/orchestration-cluster/operate/operate-configuration.md#elasticsearch-or-opensearch)
+- [Tasklist configuration for Elasticsearch or OpenSearch](/self-managed/components/orchestration-cluster/tasklist/tasklist-configuration.md#elasticsearch-or-opensearch)
+- [Camunda Exporter configuration](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md#configuration)
 
 <Tabs>
   <TabItem value="env" label="Environment variables">
 
-**Operate – Elasticsearch or OpenSearch Connection**
+**Operate connection (Elasticsearch or OpenSearch)**
 
 This configuration defines how Operate connects to the secondary datastore (Elasticsearch or OpenSearch).
 It is also used by the legacy Zeebe exporter.
 
 :::note
 
-In new setups, the old exporter is no longer in use. However, it must still be configured to avoid blocking execution during startup.
+In new setups, the old exporter is no longer in use. However, you must still configure it to avoid blocking execution during startup.
 
 :::
 
 ```bash
 CAMUNDA_OPERATE_DATABASE=elasticsearch|opensearch # defaults to elasticsearch
 
-# in case of Elasticsearch
+# Elasticsearch
 CAMUNDA_OPERATE_ELASTICSEARCH_URL=http://localhost:9200
 CAMUNDA_OPERATE_ELASTICSEARCH_USERNAME=
 CAMUNDA_OPERATE_ELASTICSEARCH_PASSWORD=
@@ -131,7 +139,7 @@ CAMUNDA_OPERATE_ZEEBEELASTICSEARCH_URL=http://localhost:9200
 CAMUNDA_OPERATE_ZEEBEELASTICSEARCH_USERNAME=
 CAMUNDA_OPERATE_ZEEBEELASTICSEARCH_PASSWORD=
 
-# in case of OpenSearch
+# OpenSearch
 CAMUNDA_OPERATE_OPENSEARCH_URL=http://localhost:9200
 CAMUNDA_OPERATE_OPENSEARCH_USERNAME=
 CAMUNDA_OPERATE_OPENSEARCH_PASSWORD=
@@ -140,21 +148,21 @@ CAMUNDA_OPERATE_ZEEBEOPENSEARCH_USERNAME=
 CAMUNDA_OPERATE_ZEEBEOPENSEARCH_PASSWORD=
 ```
 
-**Tasklist – Elasticsearch or OpenSearch Connection**
+**Tasklist connection (Elasticsearch or OpenSearch)**
 
 This configuration defines how Tasklist connects to the secondary datastore (Elasticsearch or OpenSearch).
 It is also used by the legacy Zeebe exporter.
 
 :::note
 
-In new setups, the old exporter is no longer in use. However, it must still be configured to avoid blocking execution during startup.
+In new setups, the old exporter is no longer in use. However, you must still configure it to avoid blocking execution during startup.
 
 :::
 
 ```bash
 CAMUNDA_TASKLIST_DATABASE=elasticsearch|opensearch # defaults to elasticsearch
 
-# in case of Elasticsearch
+# Elasticsearch
 CAMUNDA_TASKLIST_ELASTICSEARCH_URL=http://localhost:9200
 CAMUNDA_TASKLIST_ELASTICSEARCH_USERNAME=
 CAMUNDA_TASKLIST_ELASTICSEARCH_PASSWORD=
@@ -162,7 +170,7 @@ CAMUNDA_TASKLIST_ZEEBEELASTICSEARCH_URL=http://localhost:9200
 CAMUNDA_TASKLIST_ZEEBEELASTICSEARCH_USERNAME=
 CAMUNDA_TASKLIST_ZEEBEELASTICSEARCH_PASSWORD=
 
-# in case of OpenSearch
+# OpenSearch
 CAMUNDA_TASKLIST_OPENSEARCH_URL=http://localhost:9200
 CAMUNDA_TASKLIST_OPENSEARCH_USERNAME=
 CAMUNDA_TASKLIST_OPENSEARCH_PASSWORD=
@@ -171,7 +179,7 @@ CAMUNDA_TASKLIST_ZEEBEOPENSEARCH_USERNAME=
 CAMUNDA_TASKLIST_ZEEBEOPENSEARCH_PASSWORD=
 ```
 
-**Orchestration Cluster - Elasticsearch or OpenSearch connection**
+**Orchestration cluster connection (Elasticsearch or OpenSearch)**
 
   <!-- TODO: No team has documented this, already reached out -->
 
@@ -185,7 +193,7 @@ CAMUNDA_DATABASE_PASSWORD=
 
 **Camunda Exporter**
 
-Required for Zeebe to export data to the secondary datastore which in turn is used by Operate / Tasklist.
+Required for Zeebe to export data to the secondary datastore, which is then used by Operate and Tasklist.
 
 ```bash
 ZEEBE_BROKER_EXPORTERS_CAMUNDAEXPORTER_CLASSNAME=io.camunda.exporter.CamundaExporter
@@ -207,7 +215,7 @@ camunda:
     password:
   operate:
     database: elasticsearch|opensearch # defaults to elasticsearch
-    # in case of Elasticsearch
+    # Elasticsearch
     elasticsearch:
       url: http://localhost:9200
       username:
@@ -216,7 +224,7 @@ camunda:
       url: http://localhost:9200
       username:
       password:
-    # in case of OpenSearch
+    # OpenSearch
     opensearch:
       url: http://localhost:9200
       username:
@@ -227,7 +235,7 @@ camunda:
       password:
   tasklist:
     database: elasticsearch|opensearch # defaults to elasticsearch
-    # in case of Elasticsearch
+    # Elasticsearch
     elasticsearch:
       url: http://localhost:9200
       username:
@@ -236,7 +244,7 @@ camunda:
       url: http://localhost:9200
       username:
       password:
-    # in case of OpenSearch
+    # OpenSearch
     opensearch:
       url: http://localhost:9200
       username:
@@ -253,7 +261,7 @@ zeebe:
         class-name: io.camunda.exporter.CamundaExporter
         args:
           connect:
-            type: elasticsesarch|opensearch # defaults to elasticsearch
+            type: elasticsearch|opensearch # defaults to elasticsearch
             url: http://localhost:9200
             username:
             password:
@@ -262,14 +270,15 @@ zeebe:
   </TabItem>
 </Tabs>
 
-#### Multi broker
+#### Configure a multi-broker cluster
 
-The following configuration references are based on the official component-specific documentation:
+This example shows a 3-broker cluster.
 
-- [Zeebe Broker](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#zeebebrokercluster)
+- Set `cluster-size` to `3`.
+- Assign a unique `node-id` to each broker, starting from `0` and incrementing up to the total number of brokers (`0`, `1`, `2`).
+- Use the same `initial-contact-points` on all brokers.
 
-The following explores the idea of a three-broker setup.
-When starting with a three-broker setup, ensure that each broker is configured with a unique `Node ID`, starting from `0` and incrementing up to the total number of brokers (e.g., `0`, `1`, `2`). This ID must be unique across the entire Zeebe cluster.
+For more details, see the [Zeebe broker cluster configuration](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#zeebebrokercluster).
 
 <Tabs>
   <TabItem value="env" label="Environment variables">
@@ -295,13 +304,13 @@ zeebe:
   </TabItem>
 </Tabs>
 
-#### Connectors
+#### Configure Connectors authentication
 
-To use Connectors with their full set of capabilities, authentication is required. By default, the Orchestration Cluster uses basic authentication. You can configure the system to automatically create a user with the necessary permissions at startup.
+Connectors require authentication to use their full capabilities. By default, the Orchestration cluster uses basic authentication. You can configure the cluster to automatically create a user with the necessary permissions at startup.
 
-If not configured during startup, the user must be created manually through the Identity UI after deployment.
+If you don’t configure a user at startup, create one manually in the Identity UI after deployment.
 
-More about the [configuration options of Identity](/self-managed/components/orchestration-cluster/identity/overview.md).
+For more details, see [Identity configuration overview](/self-managed/components/orchestration-cluster/identity/overview.md).
 
 <Tabs>
   <TabItem value="env" label="Environment variables">
@@ -335,9 +344,9 @@ camunda:
   </TabItem>
 </Tabs>
 
-#### License Key
+#### Configure the license key
 
-Installations of Camunda 8 Self-Managed which require a license can provide their license key in the following ways:
+If your Camunda 8 Self-Managed installation requires a license, provide the license key in one of the following ways:
 
 <Tabs>
   <TabItem value="env" label="Environment variables">
@@ -362,11 +371,11 @@ camunda:
 
 </Tabs>
 
-### Run
+### Run the Orchestration cluster
 
-Once you've downloaded an Orchestration Cluster distribution, extract it into a folder of your choice.
+Once you've downloaded the Orchestration cluster distribution, extract it into a folder.
 
-1. Extract it via your favorite GUI or via CLI like
+1. Extract the files using your GUI or CLI:
 
    ```bash
    mkdir -p camunda && unzip camunda-zeebe-x.y.z.zip  -d camunda
@@ -374,55 +383,54 @@ Once you've downloaded an Orchestration Cluster distribution, extract it into a 
    mkdir -p camunda && tar -xzf camunda-zeebe-x.y.z.tar.gz -C camunda
    ```
 
-2. Open the extracted folder
-3. Adjust the config in `config/application.yaml` or export the environment variables
-4. Navigate to `bin` folder
-5. Execute the `camunda.sh` or `camunda.bat` depending on your OS
-6. On first access of http://localhost:8080 you will be asked to create an admin user unless configured differently in [identity](/self-managed/components/orchestration-cluster/identity/configuration.md) by using OIDC or similar.
+2. Open the extracted folder.
+3. Update the configuration in `config/application.yaml`, or export the environment variables.
+4. Navigate to `bin` folder.
+5. Run `camunda.sh` (Linux/macOS) or `camunda.bat` (Windows).
+6. Open [http://localhost:8080](http://localhost:8080). On first access, you’ll be asked to create an admin user unless [Identity](/self-managed/components/orchestration-cluster/identity/configuration.md) is configured with OIDC or a similar option.
 
 :::note
-Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and issue warnings in the logs. These warnings have no impact on startup or functionality, with the exception that Web Modeler has a limitation of five users. To obtain a license, visit the [Camunda Enterprise page](https://camunda.com/platform/camunda-platform-enterprise-contact/).
+Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and issue warnings in the logs. These warnings don’t affect startup or functionality, except that Web Modeler is limited to five users. To obtain a license, visit the [Camunda Enterprise page](https://camunda.com/platform/camunda-platform-enterprise-contact/).
 :::
 
-### Run as Service
+### Run the Orchestration cluster as a service
 
-The following has been tested on Ubuntu using [systemd](https://systemd.io/) and the example has to be adjusted to your use cases.
-It's utilizing a file with environment variables but could be abstracted to use a `application.yaml` instead.
+This example shows how to run the Orchestration cluster as a [`systemd`](https://systemd.io/) service on Ubuntu. Adjust the paths, user, and group as needed for your environment. The example uses a file with environment variables, but you can adapt it to use an `application.yaml` instead.
 
-1. Create a `systemd` service called `camunda.service` and adjust it fit your own paths, user and group in `/etc/systemd/system/camunda.service`.
+1. Create a `systemd` service file named `camunda.service` and adjust it fit your own paths, user and group in `/etc/systemd/system/camunda.service`.
 
-```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/compute/debian/configs/camunda.service
-```
+   ```bash reference
+   https://github.com/camunda/camunda-deployment-references/blob/main/generic/compute/debian/configs/camunda.service
+   ```
 
-2. Change the permissions on `/etc/systemd/system/camunda.service` to `644`
+2. Change the permissions on `/etc/systemd/system/camunda.service` to `644`:
 
-```bash
-sudo chmod 644 /etc/systemd/system/camunda.service
-```
+   ```bash
+   sudo chmod 644 /etc/systemd/system/camunda.service
+   ```
 
-3. Start the new service
+3. Reload `systemd` and start the new service:
 
-```bash
-sudo systemctl daemon-reload
-sudo systemctl start camunda.service
-```
+   ```bash
+   sudo systemctl daemon-reload
+   sudo systemctl start camunda.service
+   ```
 
-4. Verify the service status
+4. Verify that the service is running:
 
-```bash
-systemctl status camunda.service
-```
+   ```bash
+   systemctl status camunda.service
+   ```
 
-Logs can be viewed via e.g.
+View logs with:
 
 ```bash
 journalctl -e -u camunda
 ```
 
-### Verify
+### Verify the Orchestration cluster
 
-The logs of the Orchestration Cluster will contain something like the following indicating a successful start:
+Check the logs for a successful startup message, such as:
 
 ```bash
 [2025-08-05 13:34:51.964] [main] INFO
@@ -440,10 +448,10 @@ The logs of the Orchestration Cluster will contain something like the following 
 	io.camunda.application.StandaloneCamunda - Started StandaloneCamunda in 9.376 seconds (process running for 9.817)
 ```
 
-You can use the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) to check the topology of Zeebe.
+Check the cluster topology with the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md):
 
 ```bash
-# username:password depends on the admin user you created on first startup
+# replace username and password with the details of the admin user you created on first startup
 curl -u username:password -L 'http://localhost:8080/v2/topology' \
   -H 'Accept: application/json'
 ```
@@ -493,7 +501,7 @@ curl -u username:password -L 'http://localhost:8080/v2/topology' \
 
 </details>
 
-You can use the actuator endpoint to check the health status of the Orchestration Cluster:
+Check the health status of the Orchestration cluster with the actuator endpoint:
 
 ```bash
 curl localhost:9600/actuator/health
@@ -538,15 +546,20 @@ curl localhost:9600/actuator/health
 
 ## Connectors
 
-Learn more about the [Connectors](/reference/glossary.md#connector) in the [architectural overview](/self-managed/reference-architecture/reference-architecture.md#architecture), as well as it's configuration options in the [components section](/self-managed/components/connectors/overview.md).
+For background, see the [Connectors glossary entry](/reference/glossary.md#connector).  
+For architecture details, review the [architecture](/self-managed/reference-architecture/reference-architecture.md#architecture).  
+For configuration options, see the [Connectors components documentation](/self-managed/components/connectors/overview.md).
 
-### Configure
+### Configure Connectors
 
-When running Connectors on the same machine as the Orchestration Cluster, one has to consider the ports as Connectors will default on `8080` as well.
+If you run Connectors on the same machine as the Orchestration cluster, change the default port (`8080`) to avoid conflicts.
 
-Additionally, Connectors will need some form of authentication to be able to communicate with the Orchestration Cluster REST API and Zeebe.
+Connectors require authentication to communicate with the Orchestration cluster REST API and Zeebe.
 
-By default it will try to connect to `localhost:8080` and `localhost:26500` for the Orchestration Cluster REST API and Zeebe.
+By default, Connectors connect to:
+
+- `localhost:8080` (Orchestration cluster REST API)
+- `localhost:26500` (Zeebe)
 
 <Tabs>
   <TabItem value="env" label="Environment variables">
@@ -565,7 +578,7 @@ CAMUNDA_CLIENT_AUTH_PASSWORD=connectors
   </TabItem>
   <TabItem value="spring" label="application.yaml">
 
-This can be saved as `application.yaml` in the same folder as your `connector-runtime-(application|bundle)-x-y-z(-with-dependencies).jar` resides.
+Save the following as `application.yaml` in the same folder as your `connector-runtime-(application|bundle)-x-y-z(-with-dependencies).jar`.
 
 ```yaml
 server:
@@ -585,11 +598,11 @@ camunda:
   </TabItem>
 </Tabs>
 
-More information about the configuration of the Connectors can be found in the [component configuration page](/self-managed/components/connectors/connectors-configuration.md)
+For more information about the configuration of the Connectors, see [Connectors configuration](/self-managed/components/connectors/connectors-configuration.md)
 
-### Run
+### Run the Connectors
 
-Regardless of whether you downloaded the pre-bundled or the runtime-only version of the Connectors, both behave the same at runtime. They automatically detect and register all connectors available on the classpath during execution. Each connector uses its default configuration as defined via the `@OutboundConnector` or `@InboundConnector` annotations.
+Both the pre-bundled and runtime-only versions of the Connectors behave the same at runtime. They automatically detect and register all connectors available on the classpath during execution. Each connector uses its default configuration as defined by the `@OutboundConnector` or `@InboundConnector` annotations.
 
 Consider the following file structure:
 
@@ -607,45 +620,46 @@ java -cp "/home/user/connectors/*" "io.camunda.connector.runtime.app.ConnectorRu
 
 This starts a Zeebe client, registering the defined connector as a job worker. By default, it connects to a local Zeebe instance at port `26500`.
 
-### Run as Service
+### Run the Connectors as a service
 
-The following has been tested on Ubuntu using [systemd](https://systemd.io/) and the example has to be adjusted to your use cases.
-It's utilizing a file with environment variables but could be abstracted to use a `application.yaml` instead.
+This example shows how to run the Connectors as a [`systemd`](https://systemd.io/) service on Ubuntu. Adjust the paths, user, and group as needed for your environment.
 
-1. Create a `systemd` service called `camunda-connectors.service` and adjust it fit your own paths, user and group in `/etc/systemd/system/camunda-connectors.service`.
+The example uses a file with environment variables, but you can adapt it to use an `application.yaml` instead.
 
-```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/compute/debian/configs/camunda-connectors.service
-```
+1. Create a `systemd` service file named `camunda-connectors.service` and adjust it fit your own paths, user and group in `/etc/systemd/system/camunda-connectors.service`.
 
-2. Change the permissions on `/etc/systemd/system/camunda-connectors.service` to `644`
+   ```bash reference
+   https://github.com/camunda/camunda-deployment-references/blob/main/generic/compute/debian/configs/camunda-connectors.service
+   ```
 
-```bash
-sudo chmod 644 /etc/systemd/system/camunda-connectors.service
-```
+2. Change the permissions on `/etc/systemd/system/camunda-connectors.service` to `644`:
 
-3. Start the new service
+   ```bash
+   sudo chmod 644 /etc/systemd/system/camunda-connectors.service
+   ```
 
-```bash
-sudo systemctl daemon-reload
-sudo systemctl start camunda-connectors.service
-```
+3. Reload `systemd` and start the service:
 
-4. Verify the service status
+   ```bash
+   sudo systemctl daemon-reload
+   sudo systemctl start camunda-connectors.service
+   ```
 
-```bash
-systemctl status camunda-connectors.service
-```
+4. Verify that the service is running:
 
-Logs can be viewed via e.g.
+   ```bash
+   systemctl status camunda-connectors.service
+   ```
+
+View logs with:
 
 ```bash
 journalctl -e -u camunda-connectors
 ```
 
-### Verify
+### Verify the Connectors
 
-The logs of Connectors will contain something like the following indicating a successful start:
+Check the logs for a successful startup message, such as:
 
 ```bash
 2025-08-05T14:49:58.641+02:00  INFO 99856 --- [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 3 endpoints beneath base path '/actuator'
@@ -653,7 +667,7 @@ The logs of Connectors will contain something like the following indicating a su
 2025-08-05T14:49:58.702+02:00  INFO 99856 --- [           main] i.c.c.r.app.ConnectorRuntimeApplication  : Started ConnectorRuntimeApplication in 1.286 seconds (process running for 1.386)
 ```
 
-You can use the actuator endpoint to check the health status of Connectors:
+Check the health status of Connectors with the actuator endpoint:
 
 ```bash
 curl localhost:9090/actuator/health
