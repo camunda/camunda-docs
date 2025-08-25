@@ -55,7 +55,7 @@ In this example, we'll configure a Business Rule Task for fraud detection:
 2. Configure the task with the properties you need. For our example, we will set up a Business Rule Task by setting:
    - Implementation: Choose the implementation type (for example, DMN decision)
    - Called decision: Reference the decision to be invoked
-   - Binding type: Select the version binding strategy
+   - Binding type: Select the [resource binding type](/components/best-practices/modeling/choosing-the-resource-binding-type.md)
    - Result variable: Define where to store the decision result
    - Add any required input/output mappings for your business logic
 
@@ -63,7 +63,7 @@ In this example, we'll configure a Business Rule Task for fraud detection:
 
 ### Step 2: Save the task as a template
 
-1. With your configured task selected, look for the **Save as** button (with template icon) in the properties panel.
+1. With your configured task selected, look for the **Save as** button (with template icon) in the top right corner of the properties panel.
 
    <img src={SaveAsTemplateButtonImg2} alt="Properties panel showing the 'Save as' button with template icon in the Template section, with a blue 'Select' button visible" style={{marginTop: '0', width: '600px'}} />
 
@@ -78,7 +78,7 @@ In this example, we'll configure a Business Rule Task for fraud detection:
 5. You'll see an "Element template saved" notification with an option to **Edit template**.
    <img src={TemplateSavedImg3} alt="Modal dialog titled 'Save element properties as a new template' with name field showing 'Determine fraud rating confidence template' and description field containing template details" style={{marginTop: '0', width: '600px'}} />
 
-### Step 3: Customize and publish your template
+### Step 3: Customize your template
 
 If you want to further customize or publish your template:
 
@@ -97,15 +97,17 @@ If you want to further customize or publish your template:
 
    <img src={FinalizedTemplateImg5} alt="Template editor interface showing JSON configuration on the left and visual preview on the right, with 'Fraud Check Results' section containing configurable template properties for isRefund and isHighFraudRatingConfidence" style={{marginTop: '0', width: '600px'}} />
 
-3. When you're ready to make the template available to your team, click **Publish** to add it to your project or organization's shared resources:
+### Step 4: Publish your template
 
-   If your template references any dependencies, for example, another process or a DMN decision, you will see a warning message
+1. When you're ready to make the template available to your team, click **Publish** to add it to your project or organization's shared resources:
+
+2. If your template references any dependencies, for example, another process or a DMN decision, you will see a warning message
    prompting you to ensure that these dependencies are available in the runtime context where the template will be used.
    The dependencies themselves are not included in the template and must be managed and deployed separately.
 
    <img src={PublishTemplateImg6} alt="Publish template dialog with version fields, description text area, and a warning about decision dependency for the determine-fraud-rating decision" style={{marginTop: '0', width: '800px'}} />
 
-### Step 4: Using your saved templates
+### Step 5: Using your new template
 
 Once you've created and published a template, you can use it in a diagram:
 
@@ -150,7 +152,7 @@ When creating templates from tasks, follow these best practices:
 - **Create focused templates**: Each template should serve a specific purpose.
 - **Hide details**: Only expose the necessary properties in the template to avoid overwhelming users.
 - **Validate template input**: Use [constraints](/components/modeler/desktop-modeler/element-templates/defining-templates.md#constraints) to ensure users provide valid input to the template and receive meaningful error messages.
-- **Manage dependencies**: Ensure that any referenced decisions or variables are available in the context where the template will be used.
+- **Manage dependencies**: Ensure that any referenced decisions or variables are available in the context where the template will be used. Ensure you are using `versionTag` bindings for you dependencies to avoid version conflicts.
 - **Use meaningful parameter names**: When your template has configurable fields, give them clear, descriptive names.
 - **Test your templates**: After creating a template, apply it to a task to ensure it works as expected.
 
