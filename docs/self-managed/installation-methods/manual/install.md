@@ -44,7 +44,7 @@ To install these components, use one of the supported methods:
 
 :::
 
-### Download artifacts
+## Download artifacts
 
 Download the required Camunda 8 artifacts from the following sources.
 
@@ -600,7 +600,7 @@ camunda:
 
 For more information about the configuration of the Connectors, see [Connectors configuration](/self-managed/components/connectors/connectors-configuration.md)
 
-### Run the Connectors
+### Run Connectors
 
 Both the pre-bundled and runtime-only versions of the Connectors behave the same at runtime. They automatically detect and register all connectors available on the classpath during execution. Each connector uses its default configuration as defined by the `@OutboundConnector` or `@InboundConnector` annotations.
 
@@ -620,7 +620,7 @@ java -cp "/home/user/connectors/*" "io.camunda.connector.runtime.app.ConnectorRu
 
 This starts a Zeebe client, registering the defined connector as a job worker. By default, it connects to a local Zeebe instance at port `26500`.
 
-### Run the Connectors as a service
+### Run Connectors as a service
 
 This example shows how to run the Connectors as a [`systemd`](https://systemd.io/) service on Ubuntu. Adjust the paths, user, and group as needed for your environment.
 
@@ -657,7 +657,7 @@ View logs with:
 journalctl -e -u camunda-connectors
 ```
 
-### Verify the Connectors
+### Verify Connectors
 
 Check the logs for a successful startup message, such as:
 
