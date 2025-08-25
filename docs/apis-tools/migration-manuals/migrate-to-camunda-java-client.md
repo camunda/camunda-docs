@@ -113,15 +113,15 @@ The following API classes have been changed in the Camunda Java Client:
 
 The following commands have been renamed in the Camunda Java Client:
 
-| Old                             | New                               |
-| :------------------------------ | :-------------------------------- |
-| `newClockPinCommand()`          | `newPinClockCommand()`            |
-| `newClockResetCommand()`        | `newResetClockCommand()`          |
-| `newUserCreateCommand()`        | `newCreateUserCommand()`          |
-| `newUserTaskAssignCommand()`    | `newAssignUserTaskCommand()`      |
-| `newUserTaskCompleteCommand()`  | `newCompleteUserTaskCommand()`    |
-| `newUserTaskUnassignCommand()`  | `newUnassignUserTaskCommand()`    |
-| `newUserTaskUpdateCommand()`    | `newUpdateUserTaskCommand()`      |
+| Old                            | New                            |
+| :----------------------------- | :----------------------------- |
+| `newClockPinCommand()`         | `newPinClockCommand()`         |
+| `newClockResetCommand()`       | `newResetClockCommand()`       |
+| `newUserCreateCommand()`       | `newCreateUserCommand()`       |
+| `newUserTaskAssignCommand()`   | `newAssignUserTaskCommand()`   |
+| `newUserTaskCompleteCommand()` | `newCompleteUserTaskCommand()` |
+| `newUserTaskUnassignCommand()` | `newUnassignUserTaskCommand()` |
+| `newUserTaskUpdateCommand()`   | `newUpdateUserTaskCommand()`   |
 
 ## Protocol and connection: REST vs gRPC selection
 
