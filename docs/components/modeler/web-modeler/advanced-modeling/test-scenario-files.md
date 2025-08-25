@@ -12,7 +12,7 @@ These files are stored in JSON format and can be created, edited, and managed di
 
 ## Creating a test scenario file
 
-Create a test scenario file by [saving a scenario in Play](../play-your-process.md#save-scenario), or by manually creating a Test scenario file in Web Modeler.
+Create a test scenario file by [saving a scenario in Play](../play-your-process.md#save-scenario), or by manually creating a **test scenario file** in Web Modeler.
 
 ## Manual editing
 
@@ -64,7 +64,7 @@ Test scenario files are organized as follows:
 
 To show the file's scenarios in Play, you first need to link the file to the process.
 
-Add a "processId" field with the process ID of the BPMN process you want to test.
+Add a `processId` field with the process ID of the BPMN process you want to test.
 
 ```json
 {
@@ -74,24 +74,23 @@ Add a "processId" field with the process ID of the BPMN process you want to test
 
 :::note
 Play will only run the first executable process within the BPMN diagram. Ensure the process ID you link to is the first executable process.
+:::
 
 ### Unlinking a process
 
-Remove the "processId" field or set it to null to unlink the file from the process.
-
-### Instructions
+Remove the `processId` field or set it to null to unlink the file from the process.
 
 ## Instructions
 
-### Common Patterns
+### Common patterns
 
 - **Variables**: When specified, variables should be provided as JSON strings
 - **Element IDs**: Reference specific BPMN elements in your process definition
-- **Process Definition IDs**: Identify which process definition to interact with
+- **Process definition IDs**: Identify which process definition to interact with
 
 ---
 
-### Update Variables
+### Update variables
 
 Updates process variables during test execution.
 
@@ -111,7 +110,7 @@ Updates process variables during test execution.
 
 ---
 
-### Create Process Instance
+### Create process instance
 
 Creates a new process instance from a process definition.
 
@@ -133,7 +132,7 @@ Creates a new process instance from a process definition.
 
 ---
 
-### Create Process Instance by Message
+### Create process instance by message
 
 Creates a new process instance by sending a message to a message start event.
 
@@ -157,7 +156,7 @@ Creates a new process instance by sending a message to a message start event.
 
 ---
 
-### Create Process Instance by Signal
+### Create process instance by signal
 
 Creates a new process instance by broadcasting a signal to a signal start event.
 
@@ -181,7 +180,7 @@ Creates a new process instance by broadcasting a signal to a signal start event.
 
 ---
 
-### Complete Job
+### Complete job
 
 Completes a service task job during process execution.
 
@@ -205,7 +204,7 @@ Completes a service task job during process execution.
 
 ---
 
-### Broadcast Signal
+### Broadcast signal
 
 Broadcasts a signal that can be caught by signal intermediate catch events or signal boundary events.
 
@@ -229,7 +228,7 @@ Broadcasts a signal that can be caught by signal intermediate catch events or si
 
 ---
 
-### Complete User Task
+### Complete user task
 
 Completes a user task with optional form data or variables.
 
@@ -251,7 +250,7 @@ Completes a user task with optional form data or variables.
 
 ---
 
-### Publish Message
+### Publish message
 
 Publishes a message that can be caught by message intermediate catch events or message boundary events.
 
@@ -262,7 +261,7 @@ Publishes a message that can be caught by message intermediate catch events or m
 - `messageName` (required): The name of the message to publish
 - `correlationKey` (required): The correlation key used to match the message to the correct process instance
 - `variables` (optional): JSON string containing variables to pass with the message
-- `timeToLive` (optional): How long the message should remain available for correlation, specified in milliseconds as a string (e.g., "300000" for 5 minutes)
+- `timeToLive` (optional): How long the message should remain available for correlation, specified in milliseconds as a string (for example, "300000" for five minutes)
 - `messageId` (optional): Unique identifier for the message to prevent duplicate processing
 
 **Example:**
@@ -281,7 +280,7 @@ Publishes a message that can be caught by message intermediate catch events or m
 
 ---
 
-### Throw Job Error
+### Throw job error
 
 Simulates a job failure by throwing an error during service task execution.
 
@@ -289,7 +288,7 @@ Simulates a job failure by throwing an error during service task execution.
 
 - `type` (required): Must be `"throw-job-error"`
 - `elementId` (required): The ID of the BPMN service task element where the error occurs
-- `errorCode` (required): The error code that will be matched with an error catch event.
+- `errorCode` (required): The error code that will be matched with an error catch event
 - `jobType` (optional): The type of job that failed (useful when multiple job types exist for the same element)
 - `errorMessage` (optional): Human-readable description of the error
 
@@ -307,7 +306,7 @@ Simulates a job failure by throwing an error during service task execution.
 
 ---
 
-### Resolve Incident
+### Resolve incident
 
 Resolves an incident that was created due to a job failure or other process issue.
 
@@ -331,9 +330,9 @@ Resolves an incident that was created due to a job failure or other process issu
 
 ## Usage tips
 
-- Always specify meaningful `elementId` values that match your BPMN diagram
-- Use descriptive test case names to clearly indicate what scenario is being tested
-- Include error scenarios alongside happy path tests
-- Leverage optional `variables` fields to test different data conditions
-- When using correlation keys, ensure they uniquely identify process instances
-- For `timeToLive` values, remember to specify milliseconds as a string (e.g., "60000" for 1 minute, "300000" for 5 minutes)
+- Always specify meaningful `elementId` values that match your BPMN diagram.
+- Use descriptive test case names to clearly indicate what scenario is being tested.
+- Include error scenarios alongside happy path tests.
+- Leverage optional `variables` fields to test different data conditions.
+- When using correlation keys, ensure they uniquely identify process instances.
+- For `timeToLive` values, remember to specify milliseconds as a string (for example, "60000" for one minute, "300000" for five minutes).
