@@ -26,7 +26,7 @@ For documentation on the Orchestration Cluster, Web Modeler and Console separati
 
 This section includes deployment reference architectures for manual setups:
 
-- [Amazon EC2 deployment](/self-managed/installation-methods/helm/cloud-providers/amazon/aws-ec2.md) - a standard production setup with support for high availability.
+- [Amazon EC2 deployment](/self-managed/installation-methods/manual/cloud-providers/amazon/aws-ec2.md) - a standard production setup with support for high availability.
 
 ## Considerations
 
@@ -79,8 +79,8 @@ Any of the following are just suggestions for the minimum viable setup, the sizi
 
 #### Minimum Requirements Per Host
 
-- Modern CPU: 4 cores
-- Memory: 8 GB RAM
+- Modern CPU: 2 cores
+- Memory: 4 GB RAM
 - Storage: 32 GB SSD (**1,000** IOPS recommended; avoid burstable disk types)
 
 Suggested instance types from cloud providers:

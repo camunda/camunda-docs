@@ -36,7 +36,7 @@ const Installation = () => {
       title: "Manual",
       icon: JarIcon,
       description: "Direct installation and configuration using JAR files",
-      link: "/self-managed/installation-methods/manual/manual-install/",
+      link: "/self-managed/installation-methods/manual/install/",
     },
   ];
 
