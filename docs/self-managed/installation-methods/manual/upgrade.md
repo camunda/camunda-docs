@@ -56,7 +56,7 @@ In the current installation directory, delete the `lib/` folder. This prevents o
 2. Merge and adjust any changes in the `application.yaml` file.
 
 :::tip
-You can also unpack Camunda into a separate folder and move files over individually.  
+You can also unpack Camunda into a separate folder and move files over individually.
 
 Be sure to preserve:
 - The `data` folder, which contains Zeebe partition data.  
