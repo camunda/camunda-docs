@@ -971,9 +971,7 @@ module.exports = {
         },
         {
           Deprecated: [
-            {
-              "apis-tools/testing/zeebe-process-test",
-            },
+            "apis-tools/testing/zeebe-process-test",
           ],
         },
       ],
