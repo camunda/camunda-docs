@@ -4,7 +4,7 @@ title: Manage API clients
 description: "Let's create a client and manage our API clients."
 ---
 
-To interact with an Orchestration cluster in the cloud from the outside, every client application must authenticate itself. An **OAuth Flow** is therefore used for authentication:
+To interact with an orchestration cluster in the cloud from the outside, every client application must authenticate itself. An **OAuth Flow** is therefore used for authentication:
 
 ![auth-flow](./img/client-auth.png)
 
