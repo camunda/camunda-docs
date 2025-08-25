@@ -50,7 +50,7 @@ Use CSAP CLI in either:
 
 Use the command `csap setup` will guide you interactively.
 
-- Assuming your [Camunda cluster's API credentials](/components/console/manage-clusters/setup-client-connection-credentials.md) are sourced in your shell environment, this will do the configuration for you:
+- Assuming your [Camunda cluster's API credentials](/components/console/manage-clusters/manage-api-clients.md#create-a-client) are sourced in your shell environment, this will do the configuration for you:
 
 ```shell
 csap setup --for rfc \
@@ -63,6 +63,7 @@ csap setup --for rfc \
 1. Find the matching `.war` archive for the targeted Camunda 8 SaaS version on the [respective GitHub release page](https://github.com/camunda/sap-rfc-connector/releases).  
    The version follows the format `<C8 version major>.<C8 version minor>.<RFC connector version>`.  
    Examples:
+
    - `rfc-8.6.0.war` is the RFC connector in version `0` for C8 SaaS version `8.6`
    - `rfc-8.5.1.war` is the RFC connector in version `1` for C8 SaaS version `8.5`
 
