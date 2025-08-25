@@ -14,5 +14,6 @@ module.exports = {
     {
       Specifications: require("./specifications/sidebar"),
     },
+    "apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-swagger",
   ],
 };
