@@ -309,7 +309,7 @@ Refer to [Configuration of the restapi component](../../../self-managed/componen
 
 ### File extensions
 
-- `.json` files will be parsed as either a Connector template or a Test scenarios file. The operation will fail if the file's contents are not valid for either file type. If the remote repository stores any `.json` files that are not valid Web Modeler files, place them in a subfolder to be automatically ignored by the synchronization process.
+- `.json` files will be parsed as either a Connector template or a test scenario file. The operation will fail if the file's contents are not valid for either file type. If the remote repository stores any `.json` files that are not valid Web Modeler files, place them in a subfolder to be automatically ignored by the synchronization process.
 - Git sync only supports `.md` files that are named exactly `README.md` (case-sensitive). Git sync supports multiple `README.md` files in a single repository (including in subfolders).
 
 ### Synchronization
