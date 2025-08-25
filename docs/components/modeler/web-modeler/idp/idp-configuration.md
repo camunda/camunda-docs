@@ -10,15 +10,6 @@ import CrossImg from '/static/img/icon-list-cross.png';
 
 Configure IDP for your Camunda 8 setup and make sure IDP can access the required components and credentials.
 
-## Known limitations
-
-The current known limitations of IDP are as follows:
-
-| Limitation                                                        | Description                                                                                                                  |
-| :---------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------- |
-| [Microsoft Entra ID](https://docs.azure.cn/en-us/entra/identity/) | Use of Microsoft Entra ID as an OpenID Connect (OIDC) identity provider in Self-Managed is not currently supported with IDP. |
-| [Multi-tenancy](/self-managed/concepts/multi-tenancy.md)          | If multi-tenancy is enabled, IDP can only be used by users who can access the `<default>` tenant.                            |
-
 ## Prerequisites
 
 The following prerequisites are required for IDP:
