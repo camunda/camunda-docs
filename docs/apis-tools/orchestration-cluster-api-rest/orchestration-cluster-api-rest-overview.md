@@ -1,24 +1,36 @@
 ---
 id: orchestration-cluster-api-rest-overview
 title: "Overview"
-description: "Interact with Camunda 8 clusters. Activate jobs and run user task state operations for Camunda user tasks."
+description: "Interact with Camunda 8 clusters programmatically. Start processes, complete user tasks, and manage process instances at scale."
 ---
 
 The Orchestration Cluster REST API lets you interact programmatically with process orchestration capabilities in Camunda 8. You can use it to start, manage, and query process instances. It also lets you complete user tasks, resolve incidents, and manage variables, at scale and with confidence.
 
 You can use this API to:
 
-- Build process-driven applications
-- Integrate Camunda's User Tasks into custom task UIs
-- Start and monitor processes from external systems
+- **Build process-driven applications** - Create applications that orchestrate business processes and integrate with your existing systems
+- **Integrate User Tasks into custom UIs** - Build custom task management interfaces that connect to Camunda's user task engine  
+- **Start and monitor processes from external systems** - Trigger process instances and track their progress from any application or service
+
+## Key features
 
 This API is designed to make it easy to [find resources](./orchestration-cluster-api-rest-data-fetching.md#advanced-search-filters) with a consistent experience, while ensuring all endpoints are secure with [authentication](./orchestration-cluster-api-rest-authentication.md) and fine-grained [resource authorization](/components/identity/authorization.md).
 
-We're committed to delivering high performance and reliability with our APIs. This API is part of the Camunda 8 [public API](/reference/public-api.md) and is covered by our SemVer stability guarantees (except for clearly marked alpha endpoints).
+Key capabilities include:
+
+- **Full process lifecycle management** - Deploy, start, and monitor BPMN processes
+- **User task operations** - Assign, complete, and manage human tasks  
+- **Variable management** - Read and update process variables
+- **Incident resolution** - Handle and resolve process incidents
+- **Advanced search and filtering** - Query process data with powerful search capabilities
+
+:::info Public API
+This API is part of the Camunda 8 [public API](/reference/public-api.md) and is covered by our SemVer stability guarantees (except for clearly marked alpha endpoints). This means you can rely on backward compatibility for production use.
+:::
 
 To learn more about the Orchestration Cluster, see [What is the Orchestration Cluster?](/components/orchestration-cluster.md).
 
-Ready to dive in? Head to **[Getting started](#getting-started)** section below to make your first API call.
+Ready to get started? Follow the steps below to make your first API call.
 
 ## Getting started
 
@@ -32,11 +44,36 @@ This section helps you get up and running in minutes. To begin using the Orchest
 - **Authentication**
   - For local development, authentication is optional. For production or shared environments, authentication is required. See [Authentication](./orchestration-cluster-api-rest-authentication.md) for supported methods and setup instructions.
 - **A client to send API requests**
-  - Use the [Postman Collection](https://www.postman.com/camundateam/camunda-8-postman/collection/apl78x9/camunda-8-api-rest) for quick testing, or interact programmatically using the [Java Client](/apis-tools/java-client/getting-started.md) or [Spring SDK](/apis-tools/spring-zeebe-sdk/getting-started.md).
+  - Quick testing: Use the [Postman Collection](https://www.postman.com/camundateam/camunda-8-postman/collection/apl78x9/camunda-8-api-rest) 
+  - Programmatic access: Use the [Java Client](/apis-tools/java-client/getting-started.md) or [Spring SDK](/apis-tools/spring-zeebe-sdk/getting-started.md)
+  - Custom client: [Download the OpenAPI spec](https://github.com/camunda/camunda/blob/main/zeebe/gateway-protocol/src/main/proto/rest-api.yaml) to generate your own client
 
-Once you’re set up, try your first call using [Postman](https://www.postman.com/camundateam/camunda-8-postman/request/en495q6/get-cluster-typology) or curl: [Get cluster topology](./specifications/get-topology.api.mdx) to confirm your setup is working.
+### Test your connection
 
-## Explore the API
+Once you're set up, verify your connection works by making your first API call:
+
+**Using curl:**
+```bash
+curl ${BASE_URL}/topology
+```
+
+**Using Postman:** 
+Try the [Get cluster topology](https://www.postman.com/camundateam/camunda-8-postman/request/en495q6/get-cluster-typology) request or browse the full collection.
+
+This request should return information about your cluster topology, confirming your setup is working correctly.
+
+### Try your first workflow
+
+If you're just getting started with process automation, try this simple workflow:
+
+1. **Model a process** - Create a simple BPMN process with a user task using [Camunda Modeler](https://camunda.com/download/modeler/)
+2. **Deploy the process** - Use [`POST /deployments`](./specifications/create-deployment.api.mdx) to deploy your BPMN file
+3. **Start a process instance** - Use [`POST /process-instances`](./specifications/create-process-instance.api.mdx) to create a new process instance
+4. **Complete a user task** - Use [`POST /user-tasks/{userTaskKey}/completion`](./specifications/complete-user-task.api.mdx) to complete the task
+
+For a complete walkthrough with code examples, see our [Getting Started Tutorial](/guides/getting-started-example.md).
+
+### Explore the API
 
 - Visit the [interactive Orchestration Cluster REST API Explorer](./specifications/orchestration-cluster-rest-api.info.mdx) to:
   - Browse available endpoints
@@ -44,36 +81,38 @@ Once you’re set up, try your first call using [Postman](https://www.postman.co
   - Check code samples
 - Prefer code-first? [Download the OpenAPI spec](https://github.com/camunda/camunda/blob/main/zeebe/gateway-protocol/src/main/proto/rest-api.yaml) to generate your own client or inspect the full schema.
 
-If you're just getting started, try these next steps:
+### Authentication
 
-- Model a process definition with a user task and deploy using Modeler
-- Start a process instance: [`POST /process-instances`](./specifications/create-process-instance.api.mdx)
-- Complete a user task: [`POST /user-tasks/:userTaskKey/completion`](./specifications/complete-user-task.api.mdx)
-- Or check [this complete e2e guide](/guides/getting-started-example.md) to implement process automation solutions using Java and Spring Clients.
+Authentication for the Orchestration Cluster REST API depends on your environment and how you deploy Camunda 8. 
 
-## Authorize your requests
+**Supported authentication methods:**
+- No Authentication - For local development only
+- Basic Authentication - Username/password for simple setups  
+- OIDC Access Tokens - OAuth2/OIDC for production environments
 
-Authentication for the Orchestration Cluster REST API depends on your environment and how you deploy Camunda 8. Supported authentication methods include No Authentication (for local development), Basic Authentication, OIDC Access Tokens.
+**Quick reference:**
+- See the [Authentication support matrix](./orchestration-cluster-api-rest-authentication.md#authentication-support-matrix) for details on which methods are supported for each deployment type
+- For production security, OIDC with X.509 client certificates is supported in Self-Managed environments. See [OIDC with X.509](./orchestration-cluster-api-rest-authentication.md#oidc-with-x509-client-certificates)
+- If you're using the Java or Spring clients, token management is handled automatically. See [client authentication configuration](../spring-zeebe-sdk/getting-started.md#configuring-the-camunda-8-connection)
 
-- See the [Authentication support matrix](./orchestration-cluster-api-rest-authentication.md#authentication-support-matrix) for details on which authentication methods are supported for each distribution (C8 Run, Docker Compose, Helm/Kubernetes, SaaS).
-- For advanced security, OIDC with X.509 client certificates is supported in Self-Managed environments and handled by the Java client. See [OIDC with X.509](./orchestration-cluster-api-rest-authentication.md#oidc-with-x509-client-certificates).
+For detailed authentication setup, follow the step-by-step guide in [Authentication](./orchestration-cluster-api-rest-authentication.md) based on your deployment type.
 
-When authentication is enabled, all API requests must include a valid access token. These tokens are short-lived and must be refreshed periodically depending on your client configuration. If you're using the Java or Spring clients, token handling can be [configured easily](../spring-zeebe-sdk/getting-started.md#configuring-the-camunda-8-connection).
+## API Reference
 
-To learn how to authenticate, follow the step-by-step guide in [Authentication](./orchestration-cluster-api-rest-authentication.md) based on your setup (SaaS or Self-Managed).
+This section covers the technical details and conventions you need to understand when working with the Orchestration Cluster REST API.
 
-## Context paths
+### Base URLs
 
-### SaaS
+#### SaaS
 
 In the Camunda Console, go to your cluster, and in the Cluster Details, find your **Region Id** and **Cluster Id**. Use this pattern as your `${BASE_URL}`:
 `https://${REGION_ID}.zeebe.camunda.io/${CLUSTER_ID}/v2/`
 
-### Self-Managed
+#### Self-Managed
 
-Use the host and path defined in your Zeebe Gateway [configuration](/self-managed/installation-methods/helm/configure/ingress-setup.md). If you’re using the default setup, the `${BASE_URL}` is: `http://localhost:8080/v2/`
+Use the host and path defined in your Zeebe Gateway [configuration](/self-managed/installation-methods/helm/configure/ingress-setup.md). If you're using the default setup, the `${BASE_URL}` is: `http://localhost:8080/v2/`
 
-## Versioning
+### Versioning
 
 Camunda uses semantic versioning (SemVer) to ensure that API changes are predictable and compatible. This helps you safely upgrade without unexpected breaking changes.
 
@@ -84,8 +123,6 @@ Camunda versions the entire API rather than individual endpoints. If a breaking 
 :::note
 Adding new endpoints or attributes to existing responses is **not** considered a breaking change.
 :::
-
-## API structure and conventions
 
 ### Request size limits
 

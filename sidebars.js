@@ -926,7 +926,6 @@ module.exports = {
             "apis-tools/java-client/getting-started",
             "apis-tools/java-client/job-worker",
             "apis-tools/java-client/logging",
-            "apis-tools/java-client/zeebe-process-test",
             {
               Examples: [
                 "apis-tools/java-client-examples/index",
@@ -968,6 +967,15 @@ module.exports = {
             "apis-tools/testing/assertions",
             "apis-tools/testing/utilities",
             "apis-tools/testing/connectors",
+          ],
+        },
+        {
+          Deprecated: [
+            {
+              "Zeebe Process Test": [
+                "apis-tools/testing/zeebe-process-test",
+              ],
+            },
           ],
         },
       ],
