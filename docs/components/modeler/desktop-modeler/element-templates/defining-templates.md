@@ -101,7 +101,7 @@ Versioning is an important cornerstone of template evolution. Review the [upstre
 
 ## Template compatibility
 
-Define [template compatibility](https://github.com/bpmn-io/element-templates/blob/main/docs/LIFE_CYCLE.md#compatibility) with execution platforms (Camunda orchestration cluster versions) and related components (such as Web Modeler) using the `engines` property.
+Define [template compatibility](https://github.com/bpmn-io/element-templates/blob/main/docs/LIFE_CYCLE.md#compatibility) with execution platforms (Camunda Orchestration Cluster versions) and related components (such as Web Modeler) using the `engines` property.
 
 This property is a dictionary object, where the execution platform names are the keys, and the [semantic version](https://semver.org/) ranges are the values.
 

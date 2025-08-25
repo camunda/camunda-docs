@@ -79,7 +79,7 @@ click ZeebeRest "../../../zeebe-api-rest/zeebe-api-rest-overview"
 
 Follow these resources to learn more about the individual components:
 
-- Learn how to use the [Orchestration cluster API](/apis-tools/orchestration-cluster-api-rest/specifications/assign-user-task.api.mdx) for task, variable, and form retrieval, and to run operations on Camunda user tasks.
+- Learn how to use the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/specifications/assign-user-task.api.mdx) for task, variable, and form retrieval, and to run operations on Camunda user tasks.
 - Familiarize yourself with the [Tasklist API](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md) to run operations on Job worker-based user tasks.
 - Understand how to design, embed, and customize [forms](/apis-tools/frontend-development/03-forms/01-introduction-to-forms.md).
 - Understand how this architecture fits into the overall Camunda architecture with the [Java greenfield stack](/components/best-practices/architecture/deciding-about-your-stack.md).
