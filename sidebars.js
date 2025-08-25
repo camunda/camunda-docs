@@ -208,6 +208,7 @@ module.exports = {
                 "components/modeler/web-modeler/advanced-modeling/form-linking",
                 "components/modeler/web-modeler/advanced-modeling/publish-public-processes",
                 "components/modeler/web-modeler/advanced-modeling/process-documentation-with-readme-files",
+                "components/modeler/web-modeler/advanced-modeling/test-scenario-files",
                 {
                   "AI features": [
                     "components/modeler/web-modeler/advanced-modeling/refactoring-suggestions",
