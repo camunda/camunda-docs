@@ -44,13 +44,11 @@ Also back up any locally modified configuration files (for example, copy `applic
 
 ### 1. Stop Camunda
 
-Gracefully stop Camunda on the machine you want to upgrade before replacing files.  
-Because upgrades replace files in-place, leaving the system running can cause errors during the upgrade.
+Gracefully stop Camunda on the machine you want to upgrade before replacing files. Because upgrades replace files in-place, leaving the system running can cause errors during the upgrade.
 
 ### 2. Prepare a clean target directory
 
-In the current installation directory, delete the `lib/` folder.  
-This prevents orphaned JAR files from causing class version conflicts and wasting disk space.
+In the current installation directory, delete the `lib/` folder. This prevents orphaned JAR files from causing class version conflicts and wasting disk space.
 
 ### 3. Apply the upgrade
 
@@ -76,8 +74,7 @@ For minor upgrades, the `config` folder may also need to be merged with upstream
 
 ## Repeat for all installations
 
-Repeat the steps in [Run the upgrade](#run-the-upgrade) for all manual Camunda installations that are part of the same Orchestration Cluster Identity.
-The same approach applies when upgrading connectors.
+Repeat the steps in [run the upgrade](#run-the-upgrade) for all manual Camunda installations that are part of the same orchestration cluster. The same approach applies when upgrading connectors.
 
 ## Roll back
 
