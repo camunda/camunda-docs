@@ -6,27 +6,25 @@ description: "Interact with Camunda 8 clusters programmatically. Start processes
 
 The Orchestration Cluster REST API lets you interact programmatically with process orchestration capabilities in Camunda 8. You can use it to start, manage, and query process instances. It also lets you complete user tasks, resolve incidents, and manage variables, at scale and with confidence.
 
-You can use this API to:
+**You can use this API to:**
 
-- **Build process-driven applications** - Create applications that orchestrate business processes and integrate with your existing systems
-- **Integrate User Tasks into custom UIs** - Build custom task management interfaces that connect to Camunda's user task engine  
-- **Start and monitor processes from external systems** - Trigger process instances and track their progress from any application or service
+- Build process-driven applications - Create applications that orchestrate business processes and integrate with your existing systems
+- Integrate User Tasks into custom UIs - Build custom task management interfaces that connect to Camunda's user task engine  
+- Start and monitor processes from external systems - Trigger process instances and track their progress from any application or service
 
 ## Key features
 
 This API is designed to make it easy to [find resources](./orchestration-cluster-api-rest-data-fetching.md#advanced-search-filters) with a consistent experience, while ensuring all endpoints are secure with [authentication](./orchestration-cluster-api-rest-authentication.md) and fine-grained [resource authorization](/components/identity/authorization.md).
 
-Key capabilities include:
+**Key capabilities include:**
 
-- **Full process lifecycle management** - Deploy, start, and monitor BPMN processes
-- **User task operations** - Assign, complete, and manage human tasks  
-- **Variable management** - Read and update process variables
-- **Incident resolution** - Handle and resolve process incidents
-- **Advanced search and filtering** - Query process data with powerful search capabilities
+- Full process lifecycle management - Deploy, start, and monitor BPMN processes
+- User task operations - Assign, complete, and manage human tasks  
+- Variable management - Read and update process variables
+- Incident resolution - Handle and resolve process incidents
+- Advanced search and filtering - Query process data with powerful search capabilities
 
-:::info Public API
 This API is part of the Camunda 8 [public API](/reference/public-api.md) and is covered by our SemVer stability guarantees (except for clearly marked alpha endpoints). This means you can rely on backward compatibility for production use.
-:::
 
 To learn more about the Orchestration Cluster, see [What is the Orchestration Cluster?](/components/orchestration-cluster.md).
 
@@ -41,12 +39,26 @@ This section helps you get up and running in minutes. To begin using the Orchest
 - **A Camunda 8 Orchestration Cluster**
   - For local development, use [C8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) or [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md). These expose the API without requiring credentials or tokens by default.
   - For production or advanced development, use [Helm/Kubernetes](/self-managed/installation-methods/helm/install.md) or [Manual installation](/self-managed/installation-methods/manual/install.md).
-- **Authentication**
-  - For local development, authentication is optional. For production or shared environments, authentication is required. See [Authentication](./orchestration-cluster-api-rest-authentication.md) for supported methods and setup instructions.
 - **A client to send API requests**
   - Quick testing: Use the [Postman Collection](https://www.postman.com/camundateam/camunda-8-postman/collection/apl78x9/camunda-8-api-rest) 
   - Programmatic access: Use the [Java Client](/apis-tools/java-client/getting-started.md) or [Spring SDK](/apis-tools/spring-zeebe-sdk/getting-started.md)
   - Custom client: [Download the OpenAPI spec](https://github.com/camunda/camunda/blob/main/zeebe/gateway-protocol/src/main/proto/rest-api.yaml) to generate your own client
+
+### Authentication
+
+Authentication for the Orchestration Cluster REST API depends on your environment and how you deploy Camunda 8.
+
+**Supported authentication methods:**
+- No Authentication - For local development only
+- Basic Authentication - Username/password for simple setups
+- OIDC Access Tokens - OAuth2/OIDC for production environments
+
+**Quick reference:**
+- See the [Authentication support matrix](./orchestration-cluster-api-rest-authentication.md#authentication-support-matrix) for details on which methods are supported for each deployment type
+- For production security, OIDC with X.509 client certificates is supported in Self-Managed environments. See [OIDC with X.509](./orchestration-cluster-api-rest-authentication.md#oidc-with-x509-client-certificates)
+- If you're using the Java or Spring clients, token management is handled automatically. See [client authentication configuration](../spring-zeebe-sdk/getting-started.md#configuring-the-camunda-8-connection)
+
+For detailed authentication setup, follow the step-by-step guide in [Authentication](./orchestration-cluster-api-rest-authentication.md) based on your deployment type.
 
 ### Test your connection
 
@@ -80,22 +92,6 @@ For a complete walkthrough with code examples, see our [Getting Started Tutorial
   - See request and response examples
   - Check code samples
 - Prefer code-first? [Download the OpenAPI spec](https://github.com/camunda/camunda/blob/main/zeebe/gateway-protocol/src/main/proto/rest-api.yaml) to generate your own client or inspect the full schema.
-
-### Authentication
-
-Authentication for the Orchestration Cluster REST API depends on your environment and how you deploy Camunda 8. 
-
-**Supported authentication methods:**
-- No Authentication - For local development only
-- Basic Authentication - Username/password for simple setups  
-- OIDC Access Tokens - OAuth2/OIDC for production environments
-
-**Quick reference:**
-- See the [Authentication support matrix](./orchestration-cluster-api-rest-authentication.md#authentication-support-matrix) for details on which methods are supported for each deployment type
-- For production security, OIDC with X.509 client certificates is supported in Self-Managed environments. See [OIDC with X.509](./orchestration-cluster-api-rest-authentication.md#oidc-with-x509-client-certificates)
-- If you're using the Java or Spring clients, token management is handled automatically. See [client authentication configuration](../spring-zeebe-sdk/getting-started.md#configuring-the-camunda-8-connection)
-
-For detailed authentication setup, follow the step-by-step guide in [Authentication](./orchestration-cluster-api-rest-authentication.md) based on your deployment type.
 
 ## API Reference
 
