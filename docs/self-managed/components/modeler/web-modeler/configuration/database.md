@@ -4,7 +4,11 @@ title: "Database"
 description: "Read details on how to connect Web Modeler with a database."
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 This page describes advanced database connection configuration for Web Modeler. For a general guide on how to set up Web Modeler's database connection, visit [the configuration overview](configuration.md#database).
+Web Modeler supports multiple database vendors. PostgreSQL will be used by default.
 
 ## Configuring SSL for the database connection
 
@@ -74,7 +78,81 @@ instance, in addition to the adjustments described [above](#running-web-modeler-
 2. Modify the `SPRING_DATASOURCE_USERNAME` environment variable to match the database user you configured for AWS IAM authentication as described in the [Amazon Aurora documentation](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.DBAccounts.html#UsingWithRDS.IAMDBAuth.DBAccounts.PostgreSQL).
 3. Remove the `SPRING_DATASOURCE_PASSWORD` environment variable.
 
-## Using a custom database schema
+## Alternative database vendors
 
-Without configuration, Web Modeler uses the default schema of the database user, typically `public`.
-To use a custom schema, set the `SPRING_DATASOURCE_HIKARI_SCHEMA` environment variable to the desired schema name.
+### Oracle
+
+As the Oracle driver is not provided by default in each of the Camunda 8 distributions, you must download the driver and supply it for the application to load.
+
+1. Download the appropriate Oracle driver: https://download.oracle.com/otn-pub/otn_software/jdbc/237/ojdbc17.jar.
+2. If you are using docker or kubernetes, ensure that the folder with the library is properly mounted as a volume at this location: `/driver-lib`. It will be automatically loaded by the application.
+
+<Tabs groupId="oracle-config" defaultValue="envVars" queryString values={
+[
+{label: 'Environment variables', value: 'envVars' },
+{label: 'values.yaml', value: 'valuesYaml' },
+{label: 'application.yaml', value: 'applicationYaml' },
+]}>
+
+<TabItem value="envVars">
+```sh
+SPRING_DATASOURCE_URL="jdbc:oracle:thin:@//[DB_HOST]:[DB_PORT]/[DB_NAME]"
+```
+</TabItem>
+<TabItem value="valuesYaml">
+```yaml
+webModeler:
+  externalDatabase:
+    enabled: true
+    url: 'jdbc:oracle:thin:@//[DB_HOST]:[DB_PORT]/[DB_NAME]'
+  extraVolumeMounts:
+    - name: oracle-driver
+      mountPath: /driver-lib
+  extraVolumes:
+    - name: oracle-driver
+      hostPath:
+        path: /path/to/your/oracle/driver
+        type: Directory
+```
+</TabItem>
+<TabItem value="applicationYaml">
+```yaml
+spring:
+  datasource:
+    url: jdbc:oracle:thin:@//[DB_HOST]:[DB_PORT]/[DB_NAME]
+```
+</TabItem>
+</Tabs>
+
+### MSSQL
+
+The MSSQL driver is provided by default like the PostgreSQL driver, so no additional steps are necessary to provide the driver.
+
+<Tabs groupId="mssql-config" defaultValue="envVars" queryString values={
+[
+{label: 'Environment variables', value: 'envVars' },
+{label: 'values.yaml', value: 'valuesYaml' },
+{label: 'application.yaml', value: 'applicationYaml' },
+]}>
+
+<TabItem value="envVars">
+```sh
+SPRING_DATASOURCE_URL="jdbc:sqlserver://[DB_HOST]:[DB_PORT];databaseName=[DB_NAME]"
+```
+</TabItem>
+<TabItem value="valuesYaml">
+```yaml
+webModeler:
+  externalDatabase:
+    enabled: true
+    url: 'jdbc:sqlserver://[DB_HOST]:[DB_PORT];databaseName=[DB_NAME]'
+```
+</TabItem>
+<TabItem value="applicationYaml">
+```yaml
+spring:
+  datasource:
+    url: jdbc:sqlserver://[DB_HOST]:[DB_PORT];databaseName=[DB_NAME]
+```
+</TabItem>
+</Tabs>
