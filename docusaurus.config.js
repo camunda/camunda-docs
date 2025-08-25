@@ -470,7 +470,7 @@ module.exports = {
       // These keys are for our new standalone algolia instance!
       apiKey: "68db7725a8410eace68419c29385ad1e",
       appId: "6KYF3VMCXZ",
-      indexName: "camunda",
+      indexName: "camunda-v2",
       placeholder: "Search Camunda 8 docs",
     },
     languageTabs: [
