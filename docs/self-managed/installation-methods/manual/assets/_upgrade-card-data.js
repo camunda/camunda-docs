@@ -7,24 +7,24 @@ import IconArrow from "./icon-arrow.png";
 // Backup and Restore overview cards data
 export const overviewCards = [
   {
-    link: "#plan",
-    title: "Plan",
+    link: "#upgrade-plan",
+    title: "Upgrade plan",
     image: IconGear,
     description:
-      "Identify your current version, determine the target version, and confirm the upgrade path and required changes.",
+      "Identify your current version, choose the target version, and confirm the upgrade path and required changes.",
   },
   {
     link: "#back-up",
     title: "Back up",
     image: IconCloud,
     description:
-      "Create a backup. This involves backing up the Orchestration Cluster.",
+      "Take a full backup of your Orchestration cluster, including data and configuration files.",
   },
   {
-    link: "#execute",
-    title: "Execute",
+    link: "#run-the-upgrade",
+    title: "Run the upgrade",
     image: IconArrow,
     description:
-      "Execute the upgrade by stopping Camunda, downloading the new version, merging files and configs, and starting Camunda again.",
+      "Stop Camunda, unpack the new version, merge configuration changes, and restart Camunda.",
   },
 ];
