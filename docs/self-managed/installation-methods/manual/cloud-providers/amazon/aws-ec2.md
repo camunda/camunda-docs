@@ -315,7 +315,7 @@ ssh -J admin@${BASTION_HOST} admin@${CAMUNDA_IP}
 
 ## 2. Deploy Camunda 8
 
-The following example installation uses scripts, based on the previous terraform installation, to deploy and configure Camunda 8, which you can adapt to your own settings. Alternatively, refer to the [manual installation instructions](/self-managed/installation-methods/manual/install.md) to perform the base installation and configuration manually.
+The following example uses scripts from the Terraform installation to deploy and configure Camunda 8. You can adapt these scripts to your own environment. Alternatively, use the [manual installation instructions](/self-managed/installation-methods/manual/install.md) to perform the base installation and configuration.
 
 ### Configure and run the installation procedure
 
