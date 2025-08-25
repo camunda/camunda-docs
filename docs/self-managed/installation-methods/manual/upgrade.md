@@ -52,7 +52,7 @@ In the current installation directory, delete the `lib/` folder. This prevents o
 
 ### 3. Apply the upgrade
 
-1. Download and unpack the new Camunda version archive over the old version folder.  
+1. Download and unpack the new Camunda version archive over the old version folder.
 2. Merge and adjust any changes in the `application.yaml` file.
 
 :::tip
