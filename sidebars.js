@@ -1202,7 +1202,7 @@ module.exports = {
               label: "Cloud providers",
               link: {
                 type: "doc",
-                id: "self-managed/installation-methods/helm/cloud-providers/overview",
+                id: "self-managed/installation-methods/helm/cloud-providers/index",
               },
               items: [
                 {
