@@ -59,8 +59,9 @@ In the current installation directory, delete the `lib/` folder. This prevents o
 You can also unpack Camunda into a separate folder and move files over individually.
 
 Be sure to preserve:
-- The `data` folder, which contains Zeebe partition data.  
-- The `config` folder, which may include custom configuration files.  
+
+- The `data` folder, which contains Zeebe partition data.
+- The `config` folder, which may include custom configuration files.
 
 For minor upgrades, the `config` folder may also need to be merged with upstream changes.
 :::
