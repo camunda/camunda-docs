@@ -60,9 +60,9 @@ The following dependency types are provisioned at runtime using the [Orchestrati
 | [BPMN tasks](/components/modeler/bpmn/bpmn.md)                        | Used in call activities     |
 | [DMN decisions](/components/modeler/dmn/dmn.md)                       | Used in business rule tasks |
 
-To deploy dependencies, send a [POST request](/apis-tools/orchestration-cluster-api-rest/specifications/create-deployment.api.mdx) with the files. Works for SaaS, self-managed, and local development.
+To deploy dependencies, send a [POST request](/apis-tools/orchestration-cluster-api-rest/specifications/create-deployment.api.mdx) with the files. This works for SaaS, self-managed, and local development.
 
-## Make templates available in Web Modeler
+## Making templates available in Web Modeler
 
 The pipeline can make templates available in Web Modeler using the [Web Modeler API](/apis-tools/web-modeler-api/index.md):
 
@@ -95,12 +95,16 @@ Pagination is enforced for all `search` endpoints. Ensure you retrieve all relev
 3. **Create or update files**: For each repository file, execute the appropriate request based on whether it needs to be [created](https://modeler.camunda.io/swagger-ui/index.html#/Files/createFile) or [updated](https://modeler.camunda.io/swagger-ui/index.html#/Files/patchFile).
 4. **Publish versions**: For each file, determine if a new version is needed and publish it to the project using the [Versions](https://modeler.camunda.io/swagger-ui/index.html#/Versions) resource. This makes the templates available to BPMN diagrams inside the project.
 
-## Make templates available in Desktop Modeler
+## Making templates available in Desktop Modeler
 
 To set up your local environment:
 
 - Access the VCS repository containing the templates.
-- Choose how to [configure them](/components/modeler/desktop-modeler/element-templates/configuring-templates.md) depending on your needs.
+- Choose how to [configure them](/components/modeler/desktop-modeler/element-templates/configuring-templates.md) depending on your needs. If your templates are reused across multiple projects, configuring them globally will make it easier to maintain. For project specific templates, consider making them available only for the that project to avoid exposing templates to projects that should not be using them.
+
+:::note
+If you are the templates creator/maintainer, make sure to include a `README` file in your **VCS repository** that contemplates the different aspects required to use your templates. For example, which secrets need to be configured, which BPMN process or forms need to be deployed before hand and link.
+:::
 
 ## Next steps
 
