@@ -4,8 +4,10 @@ title: Helm chart upgrade
 description: "Upgrade to a more recent version of the Camunda Helm charts, and view configuration changes between versions."
 ---
 
+import { HelmChartValuesFileBitnamiLegacyLink } from "@site/src/components/CamundaDistributions";
+
 :::note
-When upgrading to a new version of the Camunda 8 Helm charts, we recommend updating to the **latest patch** release of the next **major** version of the chart.
+When upgrading to a new version of the Camunda 8 Helm charts, it must be a sequential upgrade from the **latest patch version of the current release** to the **latest patch version of the next release** of the chart.
 
 For example, if the current Helm chart version is 10.x.x, and the latest next major version is 11.0.1, the recommended upgrade is to 11.0.1 (not 11.0.0).
 :::
@@ -32,3 +34,9 @@ helm search repo camunda/camunda-platform --versions
 ### Helm CLI version
 
 Use the recommended Helm CLI version for your Helm chart when upgrading. The Helm CLI version for each chart can be found on the [chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
+
+## Upgrade notes
+
+### Bitname Docker repository rename
+
+As of [August 28th, 2025, the Bitnami Docker repository renamed](https://github.com/bitnami/containers/issues/83267) from "[bitnami](https://hub.docker.com/u/bitnami)" to "[bitnamilegacy](https://hub.docker.com/u/bitnamilegacy)". Camunda Helm charts already updated with the Bitnami Docker repository, however, if you still use a Camunda Helm chart with the old names, you can use <HelmChartValuesFileBitnamiLegacyLink/>.
