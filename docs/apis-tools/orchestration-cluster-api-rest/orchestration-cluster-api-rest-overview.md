@@ -4,6 +4,9 @@ title: "Overview"
 description: "Interact with Camunda 8 clusters. Activate jobs and run user task state operations for Camunda user tasks."
 ---
 
+import ApiGrid from './react-components/\_api-card';
+import { apiExplorationCards } from './react-components/\_api-card-data';
+
 The Orchestration Cluster REST API lets you interact programmatically with process orchestration capabilities in Camunda 8. You can use it to start, manage, and query process instances. It also lets you complete user tasks, resolve incidents, and manage variables, at scale and with confidence.
 
 You can use this API to:
@@ -32,17 +35,13 @@ This section helps you get up and running in minutes. To begin using the Orchest
 - **Authentication**
   - For local development, authentication is optional. For production or shared environments, authentication is required. See [Authentication](./orchestration-cluster-api-rest-authentication.md) for supported methods and setup instructions.
 - **A client to send API requests**
-  - Use the [Postman Collection](https://www.postman.com/camundateam/camunda-8-postman/collection/apl78x9/camunda-8-api-rest) for quick testing, or interact programmatically using the [Java Client](/apis-tools/java-client/index.md) or [Spring SDK](/apis-tools/spring-zeebe-sdk/getting-started.md).
+  - Use [Swagger](../orchestration-cluster-api-rest-swagger) for quick testing, or interact programmatically using the [Java Client](/apis-tools/java-client/index.md) or [Spring SDK](/apis-tools/spring-zeebe-sdk/getting-started.md).
 
 Once you’re set up, try your first call using [Postman](https://www.postman.com/camundateam/camunda-8-postman/request/en495q6/get-cluster-typology) or curl: [Get cluster topology](./specifications/get-topology.api.mdx) to confirm your setup is working.
 
-## Explore the API
+## Explore the Orchestration Cluster API
 
-- Visit the [interactive Orchestration Cluster REST API Explorer](./specifications/orchestration-cluster-api.info.mdx) to:
-  - Browse available endpoints
-  - See request and response examples
-  - Check code samples
-- Prefer code-first? [Download the OpenAPI spec](https://github.com/camunda/camunda/blob/main/zeebe/gateway-protocol/src/main/proto/rest-api.yaml) to generate your own client or inspect the full schema.
+<ApiGrid items={apiExplorationCards} />
 
 If you're just getting started, try these next steps:
 
