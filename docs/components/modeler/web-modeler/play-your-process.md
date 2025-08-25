@@ -127,7 +127,7 @@ To save a scenario:
 
 1. Execute a path in your process.
 1. Click **Save scenario** in the process instance header.
-1. A new Test scenarios file will be saved in the same Web Modeler folder as the process.
+1. A new [test scenario file](advanced-modeling/test-scenario-files.md) will be saved in the same Web Modeler folder as the process.
 
 ![Save a scenario](img/play-save-scenario.png)
 
@@ -145,7 +145,7 @@ Scenario coverage is calculated as the percentage of flow nodes in your process 
 ![Scenario coverage](img/play-coverage.png)
 
 :::warning
-Scenario coverage will not display as expected if you edit or remove the "metadata" field in the Test scenarios file.
+Scenario coverage will not display as expected if you edit or remove the "metadata" field in the [test scenario file](advanced-modeling/test-scenario-files.md).
 :::
 
 ### Run scenario
