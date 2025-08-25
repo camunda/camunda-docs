@@ -25,10 +25,10 @@ The term "public API" refers to the SemVer definition of stable interfaces, not 
 
 The following components are officially part of the Camunda 8 public API:
 
-- [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md): The primary interface for interacting with the orchestration cluster.
+- [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md): The primary interface for interacting with the Orchestration Cluster.
 - [Camunda Process Test](/apis-tools/testing/getting-started.md): Testing library to test BPMN processes and process applications.
-- [Camunda Java client](/apis-tools/java-client/index.md): Java Client to interact with Orchestration Cluster API and Zeebe gRPC.
-- [Camunda Spring Boot SDK](/apis-tools/spring-zeebe-sdk/getting-started.md): Spring Boot Client to interact with Orchestration Cluster API and Zeebe gRPC.
+- [Camunda Java client](/apis-tools/java-client/index.md): Java Client to interact with Orchestration Cluster REST API and Zeebe gRPC.
+- [Camunda Spring Boot SDK](/apis-tools/spring-zeebe-sdk/getting-started.md): Spring Boot Client to interact with Orchestration Cluster REST API and Zeebe gRPC.
 
 ## What is not included in the public API
 

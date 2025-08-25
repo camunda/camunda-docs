@@ -435,7 +435,7 @@ In a manual setup, you can simply stop all components.
 If you are using the Camunda Helm chart with an embedded Elasticsearch, you can achieve this by (for example) disabling all other components in the `values.yml`.
 
 ```yaml
-elsaticsearch:
+elasticsearch:
   enabled: true
 
 connectors:
@@ -685,7 +685,7 @@ core:
    ...
 
 # assuming you're using the inbuilt Elasticsearch, otherwise should be set to false
-elsaticsearch:
+elasticsearch:
    enabled: true
 
 connectors:
