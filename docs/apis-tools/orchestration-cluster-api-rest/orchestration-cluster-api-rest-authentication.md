@@ -59,6 +59,12 @@ curl --user username:password \
      http://localhost:8080/v2/topology
 ```
 
+:::note
+Basic Authentication only supports a very small number of API requests per second, and may not be suitable for production use.
+Please see
+[Camunda components troubleshooting](/self-managed/operational-guides/troubleshooting.md)
+:::
+
 ## OIDC Access Token Authentication using Client Credentials
 
 OIDC Access Token Authentication is the recommended method for production and required for SaaS. You must obtain an Access Token and pass it as an OAuth 2.0 Bearer Token in the `Authorization` header of each request.
