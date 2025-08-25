@@ -108,7 +108,7 @@ Refer to the [advanced Identity configuration guide](./identity.md) for addition
 
 ### Camunda Client
 
-Web Modeler uses the [Camunda Java client](/apis-tools/java-client/index.md) to connect to Zeebe.
+Web Modeler uses the [Camunda Java client](/apis-tools/java-client/getting-started.md) to connect to Zeebe.
 To customize the client configuration, you can provide optional environment variables.
 
 | Environment variable            | Description                                                                                              | Example value                    | Default Value                |

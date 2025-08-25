@@ -454,7 +454,7 @@ This will add the name of the variable to the joint list of variables to fetch.
 
 #### Using `@VariablesAsType`
 
-You can also use your own class into which the process variables are mapped to (comparable to `getVariablesAsType()` in the [Java client API](/apis-tools/java-client/index.md)). Therefore, use the `@VariablesAsType` annotation. In the example below, `MyProcessVariables` refers to your own class:
+You can also use your own class into which the process variables are mapped to (comparable to `getVariablesAsType()` in the [Java client API](/apis-tools/java-client/getting-started.md)). Therefore, use the `@VariablesAsType` annotation. In the example below, `MyProcessVariables` refers to your own class:
 
 ```java
 @JobWorker(type = "foo")

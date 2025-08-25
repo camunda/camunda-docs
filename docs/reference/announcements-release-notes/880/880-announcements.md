@@ -305,7 +305,7 @@ The Camunda Spring Boot SDK is based on Spring Boot 3.5, see [version compatibil
 
 ### Deprecated: Zeebe Process Test
 
-With the **8.8 release**, Camunda announces the **deprecation of [Zeebe Process Test](../../../apis-tools/java-client/zeebe-process-test.md)**.
+With the **8.8 release**, Camunda announces the **deprecation of [Zeebe Process Test](../../../apis-tools/testing/zeebe-process-test.md)**.
 
 It is superseded by [Camunda Process Test](../../../apis-tools/testing/getting-started.md) going forward.
 
