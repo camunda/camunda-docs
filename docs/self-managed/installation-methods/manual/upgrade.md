@@ -35,7 +35,7 @@ For Docker or Kubernetes upgrades, see the respective guides.
 
 Take a full backup before upgrading. See the [backup procedure](/self-managed/operational-guides/backup-restore/backup.md) for steps.
 
-- **Patch upgrades**: A backup is recommended, although component upgrades are usually straightforward.  
+- **Patch upgrades**: A backup is recommended, although component upgrades are usually straightforward.
 - **Minor upgrades**: A backup is strongly recommended because schema or configuration changes may be involved, and there is no direct way to roll back without one.
 
 Also back up any locally modified configuration files (for example, copy `application.yaml` to `application.yaml.bak`).
