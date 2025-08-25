@@ -2,7 +2,7 @@
 
 openapi: "3.0.3"
 info:
-  title: Orchestration Cluster REST API
+  title: Orchestration Cluster API
   version: "0.1"
   description: API for communicating with a Camunda 8 cluster.
   license:
@@ -528,7 +528,9 @@ paths:
         - Tenant
       operationId: assignUserToTenant
       summary: Assign a user to a tenant
-      description: Assign a single user to a specified tenant.
+      description: |
+        Assign a user to the specified tenant.
+        The user can then access tenant data and perform authorized actions.
       parameters:
         - name: tenantId
           in: path
@@ -563,9 +565,9 @@ paths:
       tags:
         - Tenant
       operationId: unassignUserFromTenant
-      summary: Unassigns a user from a tenant
+      summary: Unassign a user from a tenant
       description: |
-        Unassigns the user from a specified tenant without deleting the user.
+        Unassigns the user from the specified tenant.
         The user can no longer access tenant data.
       parameters:
         - name: tenantId
@@ -712,7 +714,9 @@ paths:
         - Tenant
       operationId: assignClientToTenant
       summary: Assign a client to a tenant
-      description: Assign a client to a specified tenant.
+      description: |
+        Assign the client to the specified tenant.
+        The client can then access tenant data and perform authorized actions.
       parameters:
         - name: tenantId
           in: path
@@ -749,7 +753,7 @@ paths:
       operationId: unassignClientFromTenant
       summary: Unassign a client from a tenant
       description: |
-        Unassigns the client from a specified tenant.
+        Unassigns the client from the specified tenant.
         The client can no longer access tenant data.
       parameters:
         - name: tenantId
@@ -889,7 +893,9 @@ paths:
         - Tenant
       operationId: assignGroupToTenant
       summary: Assign a group to a tenant
-      description: Assign a single group to a specified tenant.
+      description: |
+        Assigns a group to a specified tenant.
+        Group members (users, clients) can then access tenant data and perform authorized actions.
       parameters:
         - name: tenantId
           in: path
@@ -927,7 +933,7 @@ paths:
       operationId: unassignGroupFromTenant
       summary: Unassign a group from a tenant
       description: |
-        Unassigns a single group from a specified tenant without deleting the group.
+        Unassigns a group from a specified tenant.
         Members of the group (users, clients) will no longer have access to the tenant's data - except they are assigned directly to the tenant.
       parameters:
         - name: tenantId
@@ -966,7 +972,9 @@ paths:
         - Tenant
       operationId: assignRoleToTenant
       summary: Assign a role to a tenant
-      description: Assign a single role to a specified tenant.
+      description: |
+        Assigns a role to a specified tenant.
+        Users, Clients or Groups, that have the role assigned, will get access to the tenant's data and can perform actions according to their authorizations.
       parameters:
         - name: tenantId
           in: path
@@ -1003,7 +1011,7 @@ paths:
       operationId: unassignRoleFromTenant
       summary: Unassign a role from a tenant
       description: |
-        Unassigns a single role from a specified tenant without deleting the role..
+        Unassigns a role from a specified tenant.
         Users, Clients or Groups, that have the role assigned, will no longer have access to the tenant's data - except they are assigned directly to the tenant.
       parameters:
         - name: tenantId
@@ -2577,7 +2585,7 @@ paths:
         "500":
           $ref: "#/components/responses/InternalServerError"
 
-  /decision-instances/{decisionInstanceId}:
+  /decision-instances/{decisionEvaluationInstanceKey}:
     get:
       tags:
         - Decision instance
@@ -2586,10 +2594,10 @@ paths:
       description: |
         Returns a decision instance.
       parameters:
-        - name: decisionInstanceId
+        - name: decisionEvaluationInstanceKey
           in: path
           required: true
-          description: The assigned ID of the decision instance, which acts as a unique identifier for this decision instance.
+          description: The assigned key of the evaluated decision instance, which acts as a unique identifier for this decision instance.
           schema:
             type: string
       responses:
@@ -2608,7 +2616,7 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "404":
           description: >
-            The decision instance with the given ID was not found.
+            The decision instance with the given key was not found.
             More details are provided in the response body.
           content:
             application/problem+json:
@@ -3054,7 +3062,8 @@ paths:
       operationId: assignRoleToUser
       summary: Assign a role to a user
       description: |
-        Assigns a role to a user.
+        Assigns the specified role to the user.
+        The user will inherit the authorizations associated with this role.
       parameters:
         - name: roleId
           in: path
@@ -3136,7 +3145,8 @@ paths:
       operationId: assignRoleToClient
       summary: Assign a role to a client
       description: |
-        Assigns a role to a client.
+        Assigns the specified role to the client.
+        The client will inherit the authorizations associated with this role.
       parameters:
         - name: roleId
           in: path
@@ -3179,7 +3189,8 @@ paths:
       operationId: unassignRoleFromClient
       summary: Unassign a role from a client
       description: |
-        Unassigns a role from a client.
+        Unassigns the specified role from the client.
+        The client will no longer inherit the authorizations associated with this role.
       parameters:
         - name: roleId
           in: path
@@ -3250,7 +3261,8 @@ paths:
       operationId: assignRoleToGroup
       summary: Assign a role to a group
       description: |
-        Assigns a role to a group.
+        Assigns the specified role to the group.
+        Every member of the group (user or client) will inherit the authorizations associated with this role.
       parameters:
         - name: roleId
           in: path
@@ -3293,7 +3305,8 @@ paths:
       operationId: unassignRoleFromGroup
       summary: Unassign a role from a group
       description: |
-        Unassigns a role from a group.
+        Unassigns the specified role from the group.
+        All group members (user or client) no longer inherit the authorizations associated with this role.
       parameters:
         - name: roleId
           in: path
@@ -3799,7 +3812,8 @@ paths:
       operationId: assignUserToGroup
       summary: Assign a user to a group
       description: |
-        Assigns a user to a group.
+        Assigns a user to a group, making the user a member of the group.
+        Group members inherit the group authorizations, roles, and tenant assignments.
       parameters:
         - name: groupId
           in: path
@@ -3843,6 +3857,7 @@ paths:
       summary: Unassign a user from a group
       description: |
         Unassigns a user from a group.
+        The user is removed as a group member, with associated authorizations, roles, and tenant assignments no longer applied.
       parameters:
         - name: groupId
           in: path
@@ -3878,9 +3893,10 @@ paths:
       tags:
         - Group
       operationId: assignClientToGroup
-      summary: Assign a client to a group.
+      summary: Assign a client to a group
       description: |
-        Assigns a client to a group.
+        Assigns a client to a group, making it a member of the group.
+        Members of the group inherit the group authorizations, roles, and tenant assignments.
       parameters:
         - name: groupId
           in: path
@@ -3924,6 +3940,7 @@ paths:
       summary: Unassign a client from a group
       description: |
         Unassigns a client from a group.
+        The client is removed as a group member, with associated authorizations, roles, and tenant assignments no longer applied.
       parameters:
         - name: groupId
           in: path
@@ -4741,7 +4758,7 @@ paths:
           $ref: "#/components/responses/InternalServerError"
         "503":
           $ref: "#/components/responses/ServiceUnavailable"
-    patch:
+    put:
       tags:
         - User
       operationId: updateUser
@@ -4789,7 +4806,7 @@ paths:
         - Setup
       operationId: createAdminUser
       summary: Create admin user
-      description: Creates a new user and assign the admin role to it.
+      description: Creates a new user and assigns the admin role to it. This endpoint is only usable when users are managed in the Orchestration Cluster and while no user is assigned to the admin role.
       requestBody:
         content:
           application/json:
@@ -5638,8 +5655,9 @@ components:
           allOf:
             - $ref: "#/components/schemas/StringFilterProperty"
         tenantId:
-          type: string
           description: Tenant ID of this user task.
+          allOf:
+            - $ref: "#/components/schemas/StringFilterProperty"
         processDefinitionId:
           type: string
           description: The ID of the process definition.
@@ -6449,6 +6467,8 @@ components:
           description: The process definition key.
           allOf:
             - $ref: "#/components/schemas/BasicStringFilterProperty"
+        tags:
+          $ref: "#/components/schemas/TagSet"
     ProcessInstanceFilter:
       description: Process instance search filter.
       allOf:
@@ -6546,6 +6566,8 @@ components:
         parentElementInstanceKey:
           type: string
           description: The parent element instance key.
+        tags:
+          $ref: "#/components/schemas/TagSet"
     ProcessInstanceStateEnum:
       description: Process instance states
       enum:
@@ -6774,6 +6796,13 @@ components:
           description: The end date of this element instance.
           allOf:
             - $ref: "#/components/schemas/DateTimeFilterProperty"
+        elementInstanceScopeKey:
+          type: string
+          description:
+            The scope key of this element instance. If provided with a process instance
+            key it will return element instances that are immediate children of the process
+            instance. If provided with an element instance key it will return element instances that
+            are immediate children of the element instance.
     ElementInstanceSearchQueryResult:
       type: object
       allOf:
@@ -7106,7 +7135,6 @@ components:
           enum:
             - messageSubscriptionKey
             - processDefinitionId
-            - processDefinitionKey
             - processInstanceKey
             - elementId
             - elementInstanceKey
@@ -7145,10 +7173,6 @@ components:
           description: The process definition ID associated with this message subscription.
           allOf:
             - $ref: "#/components/schemas/StringFilterProperty"
-        processDefinitionKey:
-          description: The process definition key associated with this message subscription.
-          allOf:
-            - $ref: "#/components/schemas/BasicStringFilterProperty"
         processInstanceKey:
           description: The process instance key associated with this message subscription.
           allOf:
@@ -7371,9 +7395,12 @@ components:
         - READ_DECISION_INSTANCE
         - READ_PROCESS_DEFINITION
         - READ_DECISION_DEFINITION
+        - READ_USAGE_METRIC
         - UPDATE
         - UPDATE_PROCESS_INSTANCE
         - UPDATE_USER_TASK
+        - CANCEL_PROCESS_INSTANCE
+        - MODIFY_PROCESS_INSTANCE
         - DELETE
         - DELETE_PROCESS
         - DELETE_DRD
@@ -7388,7 +7415,7 @@ components:
         - MAPPING_RULE
         - MESSAGE
         - BATCH
-        - APPLICATION
+        - COMPONENT
         - SYSTEM
         - TENANT
         - RESOURCE
@@ -7398,7 +7425,7 @@ components:
         - GROUP
         - USER
         - ROLE
-        - USAGE_METRIC
+        - DOCUMENT
     OwnerTypeEnum:
       description: The type of the owner of permissions.
       enum:
@@ -7676,8 +7703,8 @@ components:
         email:
           description: The email of the user.
           type: string
-        authorizedApplications:
-          description: The applications the user is authorized to use.
+        authorizedComponents:
+          description: The web components the user is authorized to use.
           type: array
           items:
             type: string
@@ -9171,6 +9198,7 @@ components:
         - BPMN_ELEMENT
         - EXECUTION_LISTENER
         - TASK_LISTENER
+        - AD_HOC_SUB_PROCESS
     JobListenerEventTypeEnum:
       description: The listener event type of the job.
       enum:
@@ -9502,6 +9530,10 @@ components:
           description: The unique key identifying the decision requirements graph that the decision which was evaluated is part of.
           type: string
         decisionInstanceKey:
+          description: Deprecated, please refer to `decisionEvaluationKey`.
+          type: string
+          deprecated: true
+        decisionEvaluationKey:
           description: The unique key identifying this decision evaluation.
           type: string
         evaluatedDecisions:
@@ -9545,6 +9577,9 @@ components:
             $ref: "#/components/schemas/EvaluatedDecisionInputItem"
         decisionDefinitionKey:
           description: The unique key identifying the decision which was evaluate.
+          type: string
+        decisionEvaluationInstanceKey:
+          description: The unique key identifying this decision evaluation instance.
           type: string
     MatchedDecisionRuleItem:
       type: object
@@ -9600,8 +9635,8 @@ components:
             - decisionDefinitionName
             - decisionDefinitionType
             - decisionDefinitionVersion
-            - decisionInstanceId
-            - decisionInstanceKey
+            - decisionEvaluationInstanceKey
+            - decisionEvaluationKey
             - elementInstanceKey
             - evaluationDate
             - evaluationFailure
@@ -9631,9 +9666,9 @@ components:
       description: Decision instance search filter.
       type: object
       properties:
-        decisionInstanceId:
+        decisionEvaluationInstanceKey:
           type: string
-          description: The ID of the decision instance.
+          description: The key of the evaluated decision instance.
         state:
           $ref: "#/components/schemas/DecisionInstanceStateEnum"
         evaluationFailure:
@@ -9658,10 +9693,10 @@ components:
         tenantId:
           type: string
           description: The tenant ID of the decision instance.
-        decisionInstanceKey:
+        decisionEvaluationKey:
           type: string
           description: |
-            The key of the decision instance. Note that this is not the unique identifier of the entity itself; the `decisionInstanceId` serves as the primary identifier.
+            The key of the decision instance. Note that this is not the unique identifier of the entity itself; the `decisionEvaluationInstanceKey` serves as the primary identifier.
         processDefinitionKey:
           type: string
           description: The key of the process definition.
@@ -9690,9 +9725,9 @@ components:
     DecisionInstanceResult:
       type: object
       properties:
-        decisionInstanceId:
+        decisionEvaluationInstanceKey:
           type: string
-          description: The ID of the decision instance.
+          description: The key of the evaluated decision instance.
         state:
           $ref: "#/components/schemas/DecisionInstanceStateEnum"
         evaluationDate:
@@ -9720,9 +9755,9 @@ components:
         tenantId:
           type: string
           description: The tenant ID of the decision instance.
-        decisionInstanceKey:
+        decisionEvaluationKey:
           type: string
-          description: The key of the decision instance. Note that this is not the unique identifier of the entity itself; the `decisionInstanceId` serves as the primary identifier.
+          description: The key of the decision instance. Note that this is not the unique identifier of the entity itself; the `decisionEvaluationInstanceKey` serves as the primary identifier.
         processDefinitionKey:
           type: string
           description: The key of the process definition.
@@ -10135,6 +10170,8 @@ components:
         tenantId:
           description: The tenant ID of the process definition.
           type: string
+        tags:
+          $ref: "#/components/schemas/TagSet"
         operationReference:
           $ref: "#/components/schemas/OperationReference"
         startInstructions:
@@ -10252,6 +10289,8 @@ components:
             The unique identifier of the created process instance; to be used wherever a request
             needs a process instance key (e.g. CancelProcessInstanceRequest).
           type: string
+        tags:
+          $ref: "#/components/schemas/TagSet"
     ProcessInstanceMigrationBatchOperationRequest:
       type: object
       properties:
@@ -10797,6 +10836,8 @@ components:
         batchOperationKey:
           description: The key (or operate legacy ID) of the batch operation.
           type: string
+        operationType:
+          $ref: "#/components/schemas/BatchOperationTypeEnum"
         itemKey:
           description: Key of the item, e.g. a process instance key.
           type: string
@@ -10851,6 +10892,20 @@ components:
       required:
         - sourceElementId
         - targetElementId
+    Tag:
+      type: string
+      description: A tag. Needs to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.
+      minLength: 1
+      maxLength: 100
+      pattern: '^[A-Za-z][A-Za-z0-9_\-:.]{0,99}$'
+      example: "business_key:1234"
+    TagSet:
+      description: List of tags
+      type: array
+      items:
+        $ref: "#/components/schemas/Tag"
+      uniqueItems: true
+      maxItems: 10
   responses:
     InternalServerError:
       description: >
@@ -10861,6 +10916,10 @@ components:
             $ref: "#/components/schemas/ProblemDetail"
     Unauthorized:
       description: The request lacks valid authentication credentials.
+      headers:
+        WWW-Authenticate:
+          schema:
+            type: string
       content:
         application/problem+json:
           schema:
@@ -10893,3 +10952,6 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
+    basicAuth:
+      type: http
+      scheme: basic
