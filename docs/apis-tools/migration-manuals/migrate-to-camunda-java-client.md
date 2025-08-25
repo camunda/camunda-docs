@@ -111,7 +111,17 @@ The following API classes have been changed in the Camunda Java Client:
 | `ZeebeClientConfiguration`      | `CamundaClientConfiguration`      |
 | `ZeebeFuture`                   | `CamundaFuture`                   |
 
-The command `newUserCreateCommand()` is changed to `newCreateUserCommand()` in CamundaClient.
+The following commands have been renamed in the Camunda Java Client:
+
+| Old                            | New                            |
+| :----------------------------- | :----------------------------- |
+| `newClockPinCommand()`         | `newPinClockCommand()`         |
+| `newClockResetCommand()`       | `newResetClockCommand()`       |
+| `newUserCreateCommand()`       | `newCreateUserCommand()`       |
+| `newUserTaskAssignCommand()`   | `newAssignUserTaskCommand()`   |
+| `newUserTaskCompleteCommand()` | `newCompleteUserTaskCommand()` |
+| `newUserTaskUnassignCommand()` | `newUnassignUserTaskCommand()` |
+| `newUserTaskUpdateCommand()`   | `newUpdateUserTaskCommand()`   |
 
 ## Protocol and connection: REST vs gRPC selection
 
