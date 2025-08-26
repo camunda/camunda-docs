@@ -1105,17 +1105,7 @@ module.exports = {
       },
       items: [
         "self-managed/reference-architecture/kubernetes",
-        {
-          type: "category",
-          label: "Manual",
-          link: {
-            type: "doc",
-            id: "self-managed/reference-architecture/manual",
-          },
-          items: [
-            "self-managed/installation-methods/helm/cloud-providers/amazon/aws-ec2",
-          ],
-        },
+        "self-managed/reference-architecture/manual",
       ],
     },
     {
@@ -1305,7 +1295,26 @@ module.exports = {
           ],
         },
         "self-managed/installation-methods/docker/docker",
-        "self-managed/installation-methods/manual/manual-install",
+        {
+          type: "category",
+          label: "Manual",
+          items: [
+            "self-managed/installation-methods/manual/install",
+            {
+              type: "category",
+              label: "Cloud providers",
+              items: [
+                {
+                  type: "category",
+                  label: "Amazon",
+                  items: [
+                    "self-managed/installation-methods/manual/cloud-providers/amazon/aws-ec2",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
       ],
     },
     {
