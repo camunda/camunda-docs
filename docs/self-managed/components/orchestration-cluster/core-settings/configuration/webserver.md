@@ -37,6 +37,13 @@ For the orchestration cluster to validate whether these operations are allowed (
   - **Cause**: Users will not have tenant authorizations.
   - **Solution**: Enable multi-tenancy in both the component and Identity to allow tenant-specific data access.
 
+### Explaining the `authentication-refresh-interval` property
+
+When a user logs in, we determine their associations at once (membership in roles, groups, tenants; application authorizations) and put them into the web session.
+When these associations change (e.g. user is removed from a group; authorizations change), then this is not reflected in this cached state until the next refresh interval comes.
+The default interval is 30 seconds but can be configured via `camunda.security.authentication.authentication-refresh-interval` property to a higher/lower value if needed considering a trade-off between the extra load for session refresh and the criticality of having sync authentications.
+The property format is ISO8601 duration, example: `PT10M` for 10 minutes. For more information on ISO8601 duration format, refer to [ISO8601](https://en.wikipedia.org/wiki/ISO_8601#Durations).
+
 ## Notes
 
 - The same context-path and security configuration patterns apply across most Camunda 8 Self-Managed components.

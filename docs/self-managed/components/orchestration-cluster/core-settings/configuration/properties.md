@@ -31,17 +31,17 @@ The following configurations apply to all components within the Orchestration Cl
   </TabItem>
   <TabItem value="application.yaml" label="application.yaml">
 
-| Application.yaml property                                         | Description                                                                                                                 | Default value         |
-| ----------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------- |
-| `camunda.security.authentication.method`                          | The authentication method to use. Options: `basic`, `oidc`.                                                                 | `basic`               |
-| `camunda.security.authentication.authentication-refresh-interval` | The interval at which the memberships (groups, roles, tenants, component authorizations) are refreshed for logged in users. | `PT30S`               |
-| `camunda.security.authentication.unprotected-api`                 | If the API can be used without authentication.                                                                              | `false`               |
-| `camunda.security.authorizations.enabled`                         | If authorizations are enabled.                                                                                              | `true`                |
-| `camunda.security.multi-tenancy.checks-enabled`                   | Enables multi-tenancy checks. This requires the API to be protected.                                                        | `false`               |
-| `camunda.security.multi-tenancy.api-enabled`                      | Enables the multi-tenancy API and UI independently from multi-tenancy checks.                                               | `true`                |
-| `camunda.security.id-validation-pattern`                          | A Java regular expression that validates the user-defined identifiers of Identity-related entities.                         | `^[a-zA-Z0-9_@.+-]+$` |
-| `camunda.persistent.sessions.enabled`                             | Stores session data in secondary storage so users stay logged in across cluster nodes.                                      | `true`                |
-| `spring.profiles.active`                                          | **Note:** This property will be deprecated as additional authentication methods become available.                           | `consolidated-auth`   |
+| Application.yaml property                                         | Description                                                                                                                                                                                                                                                                                                                      | Default value         |
+| ----------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- |
+| `camunda.security.authentication.method`                          | The authentication method to use. Options: `basic`, `oidc`.                                                                                                                                                                                                                                                                      | `basic`               |
+| `camunda.security.authentication.authentication-refresh-interval` | The interval at which the memberships (groups, roles, tenants, component authorizations) are refreshed for logged in users. Find more details in [webserver and security](/docs/self-managed/components/orchestration-cluster/core-settings/configuration/webserver.md#explaining-the-authentication-refresh-interval-property). | `PT30S`               |
+| `camunda.security.authentication.unprotected-api`                 | If the API can be used without authentication.                                                                                                                                                                                                                                                                                   | `false`               |
+| `camunda.security.authorizations.enabled`                         | If authorizations are enabled.                                                                                                                                                                                                                                                                                                   | `true`                |
+| `camunda.security.multi-tenancy.checks-enabled`                   | Enables multi-tenancy checks. This requires the API to be protected.                                                                                                                                                                                                                                                             | `false`               |
+| `camunda.security.multi-tenancy.api-enabled`                      | Enables the multi-tenancy API and UI independently from multi-tenancy checks.                                                                                                                                                                                                                                                    | `true`                |
+| `camunda.security.id-validation-pattern`                          | A Java regular expression that validates the user-defined identifiers of Identity-related entities.                                                                                                                                                                                                                              | `^[a-zA-Z0-9_@.+-]+$` |
+| `camunda.persistent.sessions.enabled`                             | Stores session data in secondary storage so users stay logged in across cluster nodes.                                                                                                                                                                                                                                           | `true`                |
+| `spring.profiles.active`                                          | **Note:** This property will be deprecated as additional authentication methods become available.                                                                                                                                                                                                                                | `consolidated-auth`   |
 
   </TabItem>
   <TabItem value="helm" label="Helm values">
@@ -58,13 +58,6 @@ The following configurations apply to all components within the Orchestration Cl
 
   </TabItem>
 </Tabs>
-
-### Explaining the `authentication-refresh-interval` property
-
-When a user logs in, we determine their associations at once (membership in roles, groups, tenants; application authorizations) and put them into the web session.
-When these associations change (e.g. user is removed from a group; authorizations change), then this is not reflected in this cached state until the next refresh interval comes.
-The default interval is 30 seconds but can be configured via `camunda.security.authentication.authentication-refresh-interval` property to a higher/lower value if needed considering a trade-off between the extra load for session refresh and the criticality of having sync authentications.
-The property format is ISO8601 duration, example: `PT10M` for 10 minutes. For more information on ISO8601 duration format, refer to [ISO8601](https://en.wikipedia.org/wiki/ISO_8601#Durations).
 
 ## Initialization
 
