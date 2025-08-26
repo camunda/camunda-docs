@@ -119,24 +119,27 @@ The following table lists all resources that support authorization in Camunda 8 
 
 ## Security considerations
 
-Certain permissions grant powerful capabilities and should be assigned with caution. It is critical to ensure that only trusted users are granted these permissions to maintain the security and integrity of your system.
+Certain permissions grant powerful capabilities and should be assigned with caution. It is critical to ensure that only trusted users and clients are granted these permissions to maintain the security and integrity of your system.
 
 ### Resource CREATE permission (deployment)
 
 Granting `CREATE` permission on the **Resource** is equivalent to allowing remote code execution. When a user deploys a BPMN model, it can contain executable code in script tasks, service tasks, or listeners that will be run by the process engine.
 
-Only grant this permission to users who are fully trusted to deploy and execute code in your environment.
+Only grant this permission to users and clients who are fully trusted to deploy and execute code in your environment.
 
 ### User CREATE/UPDATE permissions
 
-The `CREATE` and `UPDATE` permissions for **User** resources are highly sensitive. When a user's password is set or changed via Identity, there are no security controls enforced, such as password complexity policies.
+The `CREATE` and `UPDATE` permissions for the **User** resource are highly sensitive. When a user's password is set or changed via Identity, there are no security controls enforced, such as password complexity policies.
 
 This permission should only be assigned to trusted administrators.
 
 ### System access permissions
 
-Permissions that control system access are particularly security-sensitive. This includes any `CREATE`, `UPDATE`, or `DELETE` permissions on the following resources:
+Permissions that control system access are particularly security-sensitive.
+This includes CRUD operations to the following resources:
 
+- **System**
+- **User**
 - **Group**
 - **Role**
 - **Mapping rule**
