@@ -43,7 +43,7 @@ Before configuring Camunda, you must first prepare your IdP:
 5. Note the **client ID**, **client secret**, and **issuer URI** as these are required during Camunda configuration.
 
 :::note
-For most IdPs, the default claim for the username is `sub` (subject). If you want to use a different claim (for example, `preferred_username` or `email`), [configure](./configuration.md#oidc-configuration) your IdP to include it in the token, and update the Camunda configuration.
+For most IdPs, the default claim for the username is `sub` (subject). If you want to use a different claim (for example, `preferred_username` or `email`), [configure](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#oidc-configuration) your IdP to include it in the token, and update the Camunda configuration.
 :::
 
 ### Step 2: Choose Your deployment and configuration Method
@@ -224,7 +224,7 @@ global.security.authentication.oidc.groupsClaim: <YOUR_GROUPSCLAIM>
 
 ### (Optional) Step 9: Mapping rules
 
-You can use mapping rules for advanced scenarios, such as mapping IdP claims to Camunda roles, authorizations, or tenants. See [configuration reference](./configuration.md) for more information on how to define mapping rules.
+You can use mapping rules for advanced scenarios, such as mapping IdP claims to Camunda roles, authorizations, or tenants. See [configuration reference](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md) for more information on how to define mapping rules.
 
 ## Machine-to-machine (M2M) API access
 
@@ -423,6 +423,6 @@ private static final String clusterRestLocal = "http://localhost:8080";
 
 ## Further resources
 
-- [OIDC configuration reference](./configuration.md)
+- [OIDC configuration reference](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md)
 - [OpenID Connect (OIDC) overview](https://openid.net/connect/)
 - [Camunda authentication and authorization](../../../../components/concepts/access-control/authorizations.md)
