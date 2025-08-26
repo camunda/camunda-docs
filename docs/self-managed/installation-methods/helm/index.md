@@ -10,7 +10,7 @@ import { HelmChartInstall } from "@site/src/components/CamundaDistributions";
 :::note
 The `13.0.0-alpha4.1` Helm chart released with Camunda 8.8.0-alpha4 introduces a new default setup to support the 8.8 [Identity management updates](/reference/announcements-release-notes/880/880-release-notes.md#identity-management-updates-saasself-managed). Currently, this setup is limited to the following components:
 
-- The Orchestration core (Zeebe, Operate, Tasklist, and Orchestration cluster Identity)
+- The Orchestration core (Zeebe, Operate, Tasklist, and Orchestration Cluster Identity)
 - Connectors
 
 This temporary limitation will be resolved in subsequent alpha releases.
@@ -256,7 +256,7 @@ These enterprise images:
 To access the private registry, create a Kubernetes `docker-registry` secret using your Camunda Enterprise credentials:
 
 ```shell
-kubectl create secret docker-registry camunda-registry-secret \
+kubectl create secret docker-registry registry-camunda-cloud \
   --docker-server=registry.camunda.cloud \
   --docker-username=<your-username> \
   --docker-password=<your-password> \
@@ -281,7 +281,7 @@ This file includes a reference to the `commonVendorPullSecrets` parameter, which
 
 :::
 
-By default, the secret name `camunda-registry-secret` is used. You can override this using the `--set` flag, a custom `values-enterprise.yaml` file, or any other [Helm value override mechanism](https://helm.sh/docs/chart_template_guide/values_files/#using-helm-install--f).
+By default, the secret name `registry-camunda-cloud` is used. You can override this using the `--set` flag, a custom `values-enterprise.yaml` file, or any other [Helm value override mechanism](https://helm.sh/docs/chart_template_guide/values_files/#using-helm-install--f).
 
 Use the following command to install Camunda with enterprise vendor images and your registry secret:
 

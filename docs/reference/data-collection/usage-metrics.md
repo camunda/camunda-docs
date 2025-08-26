@@ -4,9 +4,11 @@ title: "Usage metrics"
 description: "Learn about the three main usage metrics that impact Camunda 8 pricing."
 ---
 
-There are three main usage metrics that have an impact on Camunda 8 pricing. It is important to understand these definitions, their impact on billing, and how to retrieve them.
+There are three main usage metrics that have an impact on Camunda 8 pricing.
 
 ## Definition of metrics
+
+It is important to understand these definitions, their impact on billing, and how to retrieve them.
 
 ### Root process instance
 
@@ -22,7 +24,7 @@ The number of **task users** (TU) that have served as assignees.
 
 ## Retrieve metrics in SaaS
 
-On Camunda 8 SaaS an **Owner** or **Admin** of an organization can retrieve the information from the **Billing** page.
+In Camunda 8 SaaS an **Owner** or **Admin** of an organization can retrieve the information from the **Billing** page.
 
 You can access the **Billing** page by selecting **Organization Management** in the Camunda Console navigation bar.
 
