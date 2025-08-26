@@ -122,6 +122,12 @@ global.security.authentication.oidc.scope: ["openid"]
 
 - **Username claim**: By default, the `sub` (subject) claim from the token is used as the username. If you want to use a different claim (such as `preferred_username` or `email`), ensure your IdP includes it in the token and set the `username-claim` property accordingly. You can use a [JSONPath expression](https://www.rfc-editor.org/rfc/rfc9535.html) to locate the username claim in the token (for example, `$['camundaorg']['username']`).
 
+:::info
+If you're using Web Modeler and want to allow deployments to the Orchestration Cluster from there (with the [`BEARER_TOKEN` authentication](/self-managed/components/modeler/web-modeler/configuration/configuration.md#available-authentication-methods)),
+you need to make the cluster accept the token passed by Web Modeler.
+To do so, include the Web Modeler UI's token audience in the configured list of audiences.
+:::
+
 #### Example IdP configuration
 
 The following examples use HELM values notation. You can also apply these using application.yaml or environment variables shown above.
