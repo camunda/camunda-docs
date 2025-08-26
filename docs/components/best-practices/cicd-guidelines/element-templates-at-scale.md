@@ -1,13 +1,13 @@
 ---
 id: element-templates-at-scale
 title: "Element templates at scale"
-description: "Learn how to provision element templates at runtime and make them available at design time across your Web Modeler organization."
+description: "Learn how to provision element templates at runtime and make them available at design time across your Web Modeler organization and Desktop Modeler."
 ---
 
 To effectively manage large libraries of reusable building blocks ([element templates](/components/concepts/element-templates.md)), you can create a pipeline that:
 
 - Provisions the [dependencies of element templates](/components/modeler/element-templates/element-template-with-dependencies.md) to required clusters.
-- Makes templates available at design time to multiple Web Modeler projects within an organization.
+- Makes templates available at design time to multiple Web Modeler [shared projects](/guides/use-shared-project-for-organization-wide-collaboration.md) within an organization or using .
 
 ![Pipeline goal](./img/pipeline-goal.png)
 
@@ -57,10 +57,12 @@ The following dependency types are provisioned at runtime using the [Orchestrati
 | --------------------------------------------------------------------- | --------------------------- |
 | [Camunda forms](/components/modeler/forms/camunda-forms-reference.md) | Used in user tasks          |
 | [RPA scripts](/components/rpa/overview.md)                            | Used in service tasks       |
-| [BPMN tasks](/components/modeler/bpmn/bpmn.md)                        | Used in call activities     |
+| [BPMN processes](/components/modeler/bpmn/bpmn.md)                    | Used in call activities     |
 | [DMN decisions](/components/modeler/dmn/dmn.md)                       | Used in business rule tasks |
 
 To deploy dependencies, send a [POST request](/apis-tools/orchestration-cluster-api-rest/specifications/create-deployment.api.mdx) with the files. This works for SaaS, self-managed, and local development.
+
+When referencing a dependency such as a form we recommend using a `versionTag` as your [binding type](/components/best-practices/modeling/choosing-the-resource-binding-type.md#supported-binding-types), as this option ensures that the right version of the target resource is always used.
 
 ## Making templates available in Web Modeler
 
