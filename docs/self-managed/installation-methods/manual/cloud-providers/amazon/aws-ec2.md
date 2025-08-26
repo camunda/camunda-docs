@@ -24,8 +24,8 @@ You may refer to this [example calculation](https://calculator.aws/#/estimate?id
 
 The architecture outlined below describes a standard three-node deployment, distributed across three [availability zones](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html) within a single AWS region. It includes a managed OpenSearch domain deployed under the same conditions. This approach ensures high availability and redundancy in case of a zone failure.
 
-<!-- The following diagram should be exported as an image and as a PDF from the sources https://miro.com/app/board/uXjVL-6SrPc=/ --->
-<!-- To export: click on the frame > "Export Image" > as PDF and as JPG (low res), then save it in the ./assets/ folder --->
+<!-- The following diagram should be exported as an image and as a PDF from the sources https://miro.com/app/board/uXjVL-6SrPc=/ -->
+<!-- To export: click on the frame > "Export Image" > as PDF and as JPG (low res), then save it in the ./assets/ folder -->
 
 _Infrastructure diagram for a 3-node EC2 architecture (click the image to view the PDF version)_
 
@@ -314,6 +314,8 @@ ssh -J admin@${BASTION_HOST} admin@${CAMUNDA_IP}
 ```
 
 ## 2. Deploy Camunda 8
+
+The following example uses scripts from the Terraform installation to deploy and configure Camunda 8. You can adapt these scripts to your own environment. Alternatively, use the [manual installation instructions](/self-managed/installation-methods/manual/install.md) to perform the base installation and configuration.
 
 ### Configure and run the installation procedure
 
