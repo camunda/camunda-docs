@@ -140,22 +140,22 @@ schema is created, settings may be adjusted directly in the Elasticsearch templa
 to indices created after adjustment.
 
 :::note
-From 8.6.25 you can opt-in to applying schema-related configuration updates on restart. See [Dynamic schema settings updates](#dynamic-schema-settings-updates-8625).
+From version 8.6.25, you can opt in to applying schema-related configuration updates on restart. See [Dynamic schema settings updates](#dynamic-schema-settings-updates-8625).
 :::
 
 #### Dynamic schema settings updates (8.6.25+)
 
 Configure Operate to update certain schema-related settings each time it starts by enabling:
 
-| Name                                               | Description                                         | Default value |
-| -------------------------------------------------- | --------------------------------------------------- | ------------- |
-| camunda.operate.elasticsearch.updateSchemaSettings | Enables dynamic updates for schema-related settings | false         |
+| Name                                                 | Description                                         | Default value |
+| ---------------------------------------------------- | --------------------------------------------------- | ------------- |
+| `camunda.operate.elasticsearch.updateSchemaSettings` | Enables dynamic updates for schema-related settings | `false`       |
 
-Behavior when enabled:
+**Behavior when enabled**
 
-- numberOfReplicas: Updated for existing indices and future indices.
-- numberOfShards: Updated in index templates and indices created after the change.
-- A restart is required after changing any of the schema configuration values.
+- `numberOfReplicas`: Updated for existing indices and future indices.
+- `numberOfShards`: Updated in index templates and indices created after the change.
+- A restart is required after changing any schema configuration values.
 
 #### A snippet from application.yml
 
@@ -215,22 +215,22 @@ schema is created, settings may be adjusted directly in the OpenSearch template,
 to indices created after adjustment.
 
 :::note
-From 8.6.25 you can opt-in to applying schema-related configuration on restart. See [Dynamic schema settings updates (OpenSearch)](#dynamic-schema-settings-updates-opensearch-8625).
+From version 8.6.25, you can opt in to applying schema-related configuration on restart. See [Dynamic schema settings updates (OpenSearch)](#dynamic-schema-settings-updates-opensearch-8625).
 :::
 
 #### Dynamic schema settings updates (OpenSearch, 8.6.25+)
 
 Configure Operate to update certain schema-related settings each time it starts by enabling:
 
-| Name                                            | Description                                         | Default value |
-| ----------------------------------------------- | --------------------------------------------------- | ------------- |
-| camunda.operate.opensearch.updateSchemaSettings | Enables dynamic updates for schema-related settings | false         |
+| Name                                              | Description                                         | Default value |
+| ------------------------------------------------- | --------------------------------------------------- | ------------- |
+| `camunda.operate.opensearch.updateSchemaSettings` | Enables dynamic updates for schema-related settings | `false`       |
 
-Behavior when enabled:
+**Behavior when enabled**
 
-- numberOfReplicas: Updated for existing indices and future indices.
-- numberOfShards: Updated in index templates and indices created after the change.
-- A restart is required after changing any of the schema configuration values.
+- `numberOfReplicas`: Updated for existing indices and future indices.
+- `numberOfShards`: Updated in index templates and indices created after the change.
+- A restart is required after changing any schema configuration values.
 
 #### A snippet from application.yml
 
