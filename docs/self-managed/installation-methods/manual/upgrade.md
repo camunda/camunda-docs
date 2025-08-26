@@ -63,7 +63,7 @@ Be sure to preserve:
 - The `data` folder, which contains Zeebe partition data.
 - The `config` folder, which may include custom configuration files.
 
-For minor upgrades, the `config` folder may also need to be merged with upstream changes.
+For upgrades, the `config` folder may also need to be merged with upstream changes.
 :::
 
 ### 4. Start Camunda
