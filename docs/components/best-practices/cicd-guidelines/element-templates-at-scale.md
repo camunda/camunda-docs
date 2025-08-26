@@ -37,7 +37,7 @@ For simplicity, this guide assumes:
 
 Secrets are required to authenticate the pipeline with your cluster and Web Modeler:
 
-- **SaaS**: Use the [Administration API](docs/apis-tools/administration-api/administration-api-reference.md) or [Console UI](/components/console/manage-clusters/manage-secrets.md) to configure secrets.
+- **SaaS**: Use the [Administration API](/apis-tools/administration-api/administration-api-reference.md) or [Console UI](/components/console/manage-clusters/manage-secrets.md) to configure secrets.
 - **Self-Managed/local development**: Configure secrets outside the pipeline. See [connector secrets](/self-managed/components/connectors/connectors-configuration.md#secrets).
 
 ### Job Workers
