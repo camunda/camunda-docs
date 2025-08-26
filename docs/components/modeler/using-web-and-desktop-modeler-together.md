@@ -76,3 +76,5 @@ Yes. Camunda recommends maintaining a dedicated version control repository for e
 ### How should I manage multiple versions of the same element template?
 
 In Desktop Modeler, each version must be stored in a separate file (for example, `element-template-v1.json` and `element-template-v2.json`). Otherwise, the template will appear as [missing](/components/modeler/desktop-modeler/element-templates/using-templates.md#missing-templates). Web Modeler, however, supports [versioning](/components/modeler/desktop-modeler/element-templates/defining-templates.md#template-versioning) in a single file and allows you to [publish](/components/connectors/manage-connector-templates.md#manage-published-connector-templates) new versions directly.
+
+When referencing a dependency such as a form we recommend using a `versionTag` as your [binding type](/components/best-practices/modeling/choosing-the-resource-binding-type.md#supported-binding-types), as this option ensures that the right version of the target resource is always used.
