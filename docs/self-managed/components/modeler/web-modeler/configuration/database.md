@@ -78,14 +78,14 @@ instance, in addition to the adjustments described [above](#running-web-modeler-
 2. Modify the `SPRING_DATASOURCE_USERNAME` environment variable to match the database user you configured for AWS IAM authentication as described in the [Amazon Aurora documentation](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.DBAccounts.html#UsingWithRDS.IAMDBAuth.DBAccounts.PostgreSQL).
 3. Remove the `SPRING_DATASOURCE_PASSWORD` environment variable.
 
-## Alternative database vendors
+## Using alternative database vendors
 
 ### Oracle
 
 As the Oracle driver is not provided by default in each of the Camunda 8 distributions, you must download the driver and supply it for the application to load.
 
 1. Download the appropriate Oracle driver: https://download.oracle.com/otn-pub/otn_software/jdbc/237/ojdbc17.jar.
-2. If you are using docker or kubernetes, ensure that the folder with the library is properly mounted as a volume at this location: `/driver-lib`. It will be automatically loaded by the application.
+2. If you are using Docker or Kubernetes, ensure that the folder with the library is properly mounted as a volume at this location: `/driver-lib`. It will be automatically loaded by the application.
 
 <Tabs groupId="oracle-config" defaultValue="envVars" queryString values={
 [
@@ -102,17 +102,31 @@ SPRING_DATASOURCE_URL="jdbc:oracle:thin:@//[DB_HOST]:[DB_PORT]/[DB_NAME]"
 <TabItem value="valuesYaml">
 ```yaml
 webModeler:
-  externalDatabase:
-    enabled: true
-    url: 'jdbc:oracle:thin:@//[DB_HOST]:[DB_PORT]/[DB_NAME]'
-  extraVolumeMounts:
-    - name: oracle-driver
-      mountPath: /driver-lib
-  extraVolumes:
-    - name: oracle-driver
-      hostPath:
-        path: /path/to/your/oracle/driver
-        type: Directory
+  restapi:
+    externalDatabase:
+      enabled: true
+      url: 'jdbc:oracle:thin:@//[DB_HOST]:[DB_PORT]/[DB_NAME]'
+    extraVolumeMounts:
+      - name: oracle-driver
+        mountPath: /driver-lib
+    extraVolumes:
+      - name: oracle-driver
+        emptyDir: {}
+    initContainers:
+      - name: fetch-jdbc-drivers
+        image: alpine:3.22.1
+        imagePullPolicy: "Always"
+        command:
+          [
+            "sh",
+            "-c",
+            "wget https://download.oracle.com/otn-pub/otn_software/jdbc/237/ojdbc17.jar -O /driver-lib/ojdbc.jar",
+          ]
+        volumeMounts:
+          - name: oracle-driver
+            mountPath: /driver-lib
+        securityContext:
+          runAsUser: 1001
 ```
 </TabItem>
 <TabItem value="applicationYaml">
@@ -126,7 +140,7 @@ spring:
 
 ### MSSQL
 
-The MSSQL driver is provided by default like the PostgreSQL driver, so no additional steps are necessary to provide the driver.
+The MSSQL driver is provided by default, so no additional steps are necessary to provide the driver.
 
 <Tabs groupId="mssql-config" defaultValue="envVars" queryString values={
 [
@@ -143,9 +157,10 @@ SPRING_DATASOURCE_URL="jdbc:sqlserver://[DB_HOST]:[DB_PORT];databaseName=[DB_NAM
 <TabItem value="valuesYaml">
 ```yaml
 webModeler:
-  externalDatabase:
-    enabled: true
-    url: 'jdbc:sqlserver://[DB_HOST]:[DB_PORT];databaseName=[DB_NAME]'
+    restapi:
+      externalDatabase:
+        enabled: true
+        url: 'jdbc:sqlserver://[DB_HOST]:[DB_PORT];databaseName=[DB_NAME]'
 ```
 </TabItem>
 <TabItem value="applicationYaml">
