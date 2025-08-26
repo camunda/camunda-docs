@@ -4,14 +4,16 @@ title: "Deploy an EKS cluster with Terraform"
 description: "Deploy an Amazon Kubernetes Cluster (EKS) with a Terraform module for a quick Camunda 8 setup."
 ---
 
+<!-- (!) Note: Please ensure that this guide maintains a consistent structure and presentation style throughout, similar to the ROSA HCP Terraform setup. The user should have a similar experience when reading both guides. -->
+
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-This guide offers a detailed tutorial for deploying an Amazon Web Services (AWS) Elastic Kubernetes Service (EKS) cluster, tailored explicitly for deploying Camunda 8 and using Terraform, a popular Infrastructure as Code (IaC) tool.
+This guide provides a detailed tutorial for deploying an [Amazon Web Services (AWS) Elastic Kubernetes Service (EKS) cluster](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html), specifically tailored for deploying Camunda 8 using Terraform, a widely-used Infrastructure as Code (IaC) tool.
 
-It is recommended to use this guide for building a robust and sustainable infrastructure over time. However, for a quicker trial or proof of concept, using the [eksctl](./eksctl.md) method may suffice.
+We recommend this guide for building a robust and sustainable infrastructure. However, if you are looking for a quicker trial or proof of concept, or if your needs aren't fully met by our module, consider using the [eksctl](./eksctl.md) method.
 
-This guide is designed to help leverage the power of Infrastructure as Code (IaC) to streamline and reproduce a cloud infrastructure setup. By walking through the essentials of setting up an Amazon EKS cluster, configuring AWS IAM permissions, and integrating a PostgreSQL database and an OpenSearch domain (as an alternative to Elasticsearch), this guide explains how to use Terraform with AWS, making it accessible even to those new to Terraform or IaC concepts. It utilizes AWS-managed services when available, providing these as an optional convenience that you can choose to use or not.
+This guide aims to help you leverage IaC to streamline and reproduce your cloud infrastructure setup. While it covers the essentials for deploying an EKS cluster, for more advanced use cases, please refer to the official [Amazon EKS Documentation](https://docs.aws.amazon.com/eks/latest/userguide/).
 
 :::tip
 
@@ -36,17 +38,17 @@ If you are completely new to Terraform and the idea of IaC, read through the [Te
   - Request increases if needed via the AWS console ([guide](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html)), costs are only for resources used.
 - This guide uses GNU/Bash for all the shell commands listed.
 
-For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file in the repository. It contains an up-to-date list of versions that we also use for testing.
+For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/feature/eks-vpn-option/.tool-versions) file in the repository. It contains an up-to-date list of versions that we also use for testing.
 
 ### Considerations
 
-This setup provides an essential foundation for beginning with Camunda 8, though it's not tailored for optimal performance. It's a good initial step for preparing a production environment by incorporating [IaC tooling](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/infrastructure-as-code).
+This setup provides a foundational starting point for working with Camunda 8, though it is not optimized for peak performance. It serves as a solid initial step in preparing a production environment by leveraging [Infrastructure as Code (IaC) tools](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/infrastructure-as-code).
 
-Terraform can be opaque in the beginning. If you solely want to get an understanding for what is happening, you may try out the [eksctl guide](./eksctl.md) to understand what resources are created and how they interact with each other.
+Terraform can initially appear complex. If you're new to it, you might want to start by considering trying out the [eksctl guide](./eksctl.md). This guide will show you what resources are created and how they interact with each other.
 
-To try out Camunda 8 or develop against it, consider signing up for our [SaaS offering](https://camunda.com/platform/). If you already have an Amazon EKS cluster, consider skipping to the [Helm guide](./eks-helm.md).
+For testing Camunda 8 or developing against it, you might consider signing up for our [SaaS offering](https://camunda.com/platform/). If you already have an Amazon EKS cluster, you can skip ahead to the [Helm setup guide](./eks-helm.md).
 
-For the simplicity of this guide, certain best practices will be provided with links to additional documents, enabling you to explore the topic in more detail.
+To keep this guide concise, we provide links to additional documentation covering best practices, allowing you to explore each topic in greater depth.
 
 The following security considerations were made for ease of adoption and development and should be reassessed before deploying to production. These items were generated by [Trivy](https://trivy.dev/) and can be easily referenced using their IDs in the [aqua vulnerability database](https://avd.aquasec.com/).
 
@@ -73,7 +75,7 @@ This also makes it easy to extend and customize the codebase to fit your needs. 
 
 :::danger Cost management
 
-Following this guide will incur costs on your Cloud provider account, namely for the managed Kubernetes service, running Kubernetes nodes in EC2, Elastic Block Storage (EBS), and Route53. More information can be found on [AWS](https://aws.amazon.com/eks/pricing/) and their [pricing calculator](https://calculator.aws/#/) as the total cost varies per region.
+Following this guide will incur costs on your cloud provider account, specifically for the managed Kubernetes service, running Kubernetes nodes in EC2, Elastic Block Storage (EBS), and Route 53. For more details, refer to [AWS EKS pricing](https://aws.amazon.com/eks/pricing/) and the [AWS Pricing Calculator](https://calculator.aws/#/) as total costs vary by region.
 
 :::
 
@@ -104,8 +106,8 @@ Following this tutorial and steps will result in:
 
 - An Amazon EKS Kubernetes cluster running with four nodes ready for Camunda 8 installation.
 - The [EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) is installed and configured, which is used by the Camunda 8 Helm chart to create [persistent volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/).
-- A [managed Aurora PostgreSQL 15.x](https://aws.amazon.com/rds/postgresql/) instance to be used by the Camunda platform.
-- A [managed OpenSearch domain](https://aws.amazon.com/opensearch-service/) created and configured for use with the Camunda platform.
+- (optional) A [managed Aurora PostgreSQL 15.x](https://aws.amazon.com/rds/postgresql/) instance to be used by the Camunda platform.
+- (optional) A [managed OpenSearch domain](https://aws.amazon.com/opensearch-service/) created and configured for use with the Camunda platform.
 - (optional) [IAM Roles for Service Accounts](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) (IRSA) configured.
   - This simplifies the setup by not relying on explicit credentials, but instead allows creating a mapping between IAM roles and Kubernetes service accounts based on a trust relationship. A [blog post](https://aws.amazon.com/blogs/containers/diving-into-iam-roles-for-service-accounts/) by AWS visualizes this on a technical level.
   - This allows a Kubernetes service account to temporarily impersonate an AWS IAM role to interact with AWS services like S3, RDS, or Route53 without supplying explicit credentials.
@@ -114,7 +116,7 @@ Following this tutorial and steps will result in:
 
 ### Obtain a copy of the reference architecture
 
-The first step is to download a copy of the reference architecture from the [GitHub repository](https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region/). This material will be used throughout the rest of this documentation. The reference architectures are versioned using the same Camunda versions (`stable/8.x`).
+The first step is to download a copy of the reference architecture from the [GitHub repository](https://github.com/camunda/camunda-deployment-references/blob/feature/eks-vpn-option/aws/kubernetes/eks-single-region/). This material will be used throughout the rest of this documentation. The reference architectures are versioned using the same Camunda versions (`stable/8.x`).
 
 The provided reference architecture repository allows you to directly reuse and extend the existing Terraform example base. This sample implementation is flexible to extend to your own needs without the potential limitations of a Terraform module maintained by a third party.
 
@@ -122,14 +124,14 @@ The provided reference architecture repository allows you to directly reuse and 
    <TabItem value="standard" label="Standard" default>
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region/procedure/get-your-copy.sh
+https://github.com/camunda/camunda-deployment-references/blob/feature/eks-vpn-option/aws/kubernetes/eks-single-region/procedure/get-your-copy.sh
 ```
 
    </TabItem>
    <TabItem value="irsa" label="IRSA">
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region-irsa/procedure/get-your-copy.sh
+https://github.com/camunda/camunda-deployment-references/blob/feature/eks-vpn-option/aws/kubernetes/eks-single-region-irsa/procedure/get-your-copy.sh
 ```
 
    </TabItem>
@@ -187,25 +189,25 @@ Now, follow these steps to create the S3 bucket with versioning enabled:
 2. Run the following command to create an S3 bucket for storing your Terraform state. Make sure to use a unique bucket name and set the `AWS_REGION` environment variable beforehand:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/s3-bucket/s3-bucket-creation.sh
+   https://github.com/camunda/camunda-deployment-references/blob/feature/eks-vpn-option/aws/common/procedure/s3-bucket/s3-bucket-creation.sh
    ```
 
 3. Enable versioning on the S3 bucket to track changes and protect the state file from accidental deletions or overwrites:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/s3-bucket/s3-bucket-versioning.sh
+   https://github.com/camunda/camunda-deployment-references/blob/feature/eks-vpn-option/aws/common/procedure/s3-bucket/s3-bucket-versioning.sh
    ```
 
 4. Secure the bucket by blocking public access:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/s3-bucket/s3-bucket-private.sh
+   https://github.com/camunda/camunda-deployment-references/blob/feature/eks-vpn-option/aws/common/procedure/s3-bucket/s3-bucket-private.sh
    ```
 
 5. Verify versioning is enabled on the bucket:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/s3-bucket/s3-bucket-verify.sh
+   https://github.com/camunda/camunda-deployment-references/blob/feature/eks-vpn-option/aws/common/procedure/s3-bucket/s3-bucket-verify.sh
    ```
 
 This S3 bucket will now securely store your Terraform state files with versioning enabled.
@@ -217,43 +219,57 @@ Once your authentication is set up, you can initialize your Terraform project. T
 Configure the backend and download the necessary provider plugins:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/s3-bucket/s3-bucket-tf-init.sh
+https://github.com/camunda/camunda-deployment-references/blob/feature/eks-vpn-option/aws/common/procedure/s3-bucket/s3-bucket-tf-init.sh
 ```
 
 Terraform will connect to the S3 bucket to manage the state file, ensuring remote and persistent storage.
 
 ### EKS cluster module setup
 
-This module establishes the foundational configuration for AWS access and Terraform.
+This module sets up the foundational configuration for AWS access and Terraform usage.
 
-We will utilize [Terraform modules](https://developer.hashicorp.com/terraform/language/modules), which allow us to abstract resources into reusable components, streamlining our infrastructure management and following Terraform best practices.
+We will leverage [Terraform modules](https://developer.hashicorp.com/terraform/language/modules), which allow us to abstract resources into reusable components, simplifying infrastructure management.
 
-The reference architecture comes with an example module implementation of the [EKS cluster](https://github.com/camunda/camunda-deployment-references/blob/main/aws/modules/eks-cluster/) and offers a robust starting point for deploying an EKS cluster. It is highly recommended to review this module prior to implementation to understand its structure and capabilities.
+The [Camunda-provided module](https://github.com/camunda/camunda-deployment-references/tree/feature/eks-vpn-option/aws/modules/eks-cluster/) is publicly available and serves as a robust starting point for deploying an Amazon EKS cluster. It is highly recommended to review this module before implementation to understand its structure and capabilities.
 
 The module will be locally sourced, meaning within your cloned repository you can do any adjustment required for the EKS module and it will directly affect the setup.
 
 #### Set up the EKS cluster module
 
-1. The `cluster.tf` in your chosen reference is containing a basic setup referencing a local Terraform module with the cluster basics. The following shows said file, which you can within your cloned setup adjust to your needs.
+1. Ensure you are in the [reference architecture directory of the cloned repository](#obtain-a-copy-of-the-reference-architecture).
+
+   From the reference architecture directory, verify the layout and enter the cluster module:
+
+   ```bash
+      cd ./aws/kubernetes/eks-single-region(-irsa)/terraform/
+
+      ls
+      # Example output:
+      # cluster  vpn
+
+      cd cluster
+   ```
+
+1. Review the `cluster.tf` which contains a basic setup referencing a local Terraform module with the cluster basics. The following shows said file, which you can within your cloned setup adjust to your needs.
 
    <Tabs groupId="env">
    <TabItem value="standard" label="Standard" default>
 
    ```hcl reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region/cluster.tf
+   https://github.com/camunda/camunda-deployment-references/blob/feature/eks-vpn-option/aws/kubernetes/eks-single-region/terraform/cluster/cluster.tf
    ```
 
    </TabItem>
    <TabItem value="irsa" label="IRSA">
 
    ```hcl reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region-irsa/cluster.tf
+   https://github.com/camunda/camunda-deployment-references/blob/feature/eks-vpn-option/aws/kubernetes/eks-single-region-irsa/terraform/cluster/cluster.tf
    ```
 
    </TabItem>
    </Tabs>
 
-2. Configure user access to the cluster. By default, the user who creates the Amazon EKS cluster has administrative access.
+1. Configure user access to the cluster. By default, the user who creates the Amazon EKS cluster has administrative access.
 
    <details>
      <summary>Grant cluster access to other users</summary>
@@ -262,6 +278,7 @@ The module will be locally sourced, meaning within your cloned repository you ca
    If you want to grant access to other users, you can configure this by using the `access_entries` input.
 
    Amazon EKS access management is divided into two distinct layers:
+
    - The **first layer** involves **AWS IAM permissions**, which allow basic Amazon EKS functionalities such as interacting with the Amazon EKS UI and generating EKS access through the AWS CLI. The module handles this part for you by creating the necessary IAM roles and policies.
 
    - The **second layer** controls **cluster access** within Kubernetes, defining the user's permissions inside the cluster (for example, policy association). This can be configured directly through the module's `access_entries` input.
@@ -288,6 +305,7 @@ The module will be locally sourced, meaning within your cloned repository you ca
    ```
 
    In this configuration:
+
    - Replace `principal_arn` with the ARN of the IAM user or role.
    - Use `policy_associations` to define policies for fine-grained access control.
 
@@ -296,7 +314,18 @@ The module will be locally sourced, meaning within your cloned repository you ca
    </p>
    </details>
 
-3. Customize the cluster setup. The module offers various input options that allow you to further customize the cluster configuration. For a comprehensive list of available options and detailed usage instructions, refer to the [EKS module documentation](https://github.com/camunda/camunda-deployment-references/blob/main/aws/modules/eks-cluster/README.md).
+1. Customize the cluster setup. The module offers various input options that allow you to further customize the cluster configuration. For a comprehensive list of available options and detailed usage instructions, refer to the [EKS module documentation](https://github.com/camunda/camunda-deployment-references/blob/feature/eks-vpn-option/aws/modules/eks-cluster/README.md).
+
+   :::note Private cluster
+
+   By default, this cluster is accessible from the internet.
+   If you prefer to restrict access, set `private_vpc = true`. This will create a private cluster that is only accessible through the [private subnets](https://docs.aws.amazon.com/vpc/latest/userguide/configure-subnets.html) of your VPC. Optionally, you can still expose a public ingress using the `expose_public_elb` variable of the eks module.
+
+   ⚠️ Since private subnets are not reachable from the internet, you'll need to establish a connection between your network and the cluster. This can be done using a [bastion host](https://docs.aws.amazon.com/mwaa/latest/userguide/tutorials-private-network-bastion.html) or a Client VPN.
+
+   The [next section](#vpn-module-setup) will guide you through setting up an [AWS VPN Endpoint](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/cvpn-getting-started.html), which allows secure access to the private cluster.
+
+   :::
 
 ### PostgreSQL module setup
 
@@ -306,20 +335,34 @@ If you don't want to use this module, you can skip this section. However, you ma
 
 If you choose not to use this module, you must either provide a managed PostgreSQL service or use the internal deployment by the Camunda Helm chart in Kubernetes.
 
-Additionally, you must delete the `db.tf` file within your chosen reference as it will otherwise create the resources.
+Additionally, you must delete the `db.tf` file within the `terraform/cluster` directory of your chosen reference as it will otherwise create the resources.
 :::
 
 We separated the cluster and PostgreSQL modules to offer you more customization options.
 
 #### Set up the Aurora PostgreSQL module
 
-1. The `db.tf` in your chosen reference is containing a basic Aurora PostgreSQL setup referencing a local Terraform module. The following shows said file, which you can within your cloned setup adjust to your needs.
+1. Ensure you are in the [reference architecture directory of the cloned repository](#obtain-a-copy-of-the-reference-architecture).
+
+   From the reference architecture directory, verify the layout and enter the cluster module, the PostgreSQL file is contained in the cluster module for simplicity:
+
+   ```bash
+      cd ./aws/kubernetes/eks-single-region(-irsa)/terraform/
+
+      ls
+      # Example output:
+      # cluster  vpn
+
+      cd cluster
+   ```
+
+1. The `db.tf` in your chosen reference contains a basic Aurora PostgreSQL setup referencing a local Terraform module. The following shows said file, which you can within your cloned setup adjust to your needs.
 
    <Tabs groupId="env">
      <TabItem value="standard" label="Standard" default>
 
    ```hcl reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region/db.tf
+   https://github.com/camunda/camunda-deployment-references/blob/feature/eks-vpn-option/aws/kubernetes/eks-single-region/terraform/cluster/db.tf
    ```
 
      </TabItem>
@@ -331,16 +374,16 @@ We separated the cluster and PostgreSQL modules to offer you more customization 
    Using IRSA is optional. If preferred, you can continue using traditional password-based authentication for database access.
    :::
 
-   If you choose to use IRSA, you’ll need to take note of the **IAM role** created for Aurora and the **AWS Account ID**, as these will be used later to annotate the Kubernetes service account.
+   If you choose to use IRSA, you'll need to take note of the **IAM role** created for Aurora and the **AWS Account ID**, as these will be used later to annotate the Kubernetes service account.
 
    ##### Aurora IRSA role and policy
 
    The Aurora module uses outputs from the EKS cluster module to configure the IRSA role and policy. Below are the required parameters:
 
-   Here’s how to define the IAM role trust policy and access policy for Aurora:
+   Here's how to define the IAM role trust policy and access policy for Aurora:
 
    ```hcl reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region-irsa/db.tf
+   https://github.com/camunda/camunda-deployment-references/blob/feature/eks-vpn-option/aws/kubernetes/eks-single-region-irsa/terraform/cluster/db.tf
    ```
 
    Once the IRSA configuration is complete, ensure you **record the IAM role name** (from the `iam_aurora_role_name` configuration), it is required to annotate the Kubernetes service account in the next step.
@@ -348,7 +391,7 @@ We separated the cluster and PostgreSQL modules to offer you more customization 
    </TabItem>
    </Tabs>
 
-2. Customize the Aurora cluster setup through various input options. Refer to the [Aurora module documentation](https://github.com/camunda/camunda-deployment-references/blob/main/aws/modules/aurora/README.md) for more details on other customization options.
+1. Customize the Aurora cluster setup through various input options. Refer to the [Aurora module documentation](https://github.com/camunda/camunda-deployment-references/blob/feature/eks-vpn-option/aws/modules/aurora/README.md) for more details on other customization options.
 
 ### OpenSearch module setup
 
@@ -358,7 +401,7 @@ If you don't want to use this module, you can skip this section. However, you ma
 
 If you choose not to use this module, you'll need to either provide a managed Elasticsearch or OpenSearch service or use the internal deployment by the Camunda Helm chart in Kubernetes.
 
-Additionally, you must delete the `opensearch.tf` file within your chosen reference as it will otherwise create the resources.
+Additionally, you must delete the `opensearch.tf` file within the `terraform/cluster` directory of your chosen reference as it will otherwise create the resources.
 :::
 
 The OpenSearch module creates an OpenSearch domain intended for Camunda platform. OpenSearch is a powerful alternative to Elasticsearch. For more information on using OpenSearch with Camunda, refer to the [Camunda documentation](/self-managed/installation-methods/helm/configure/database/using-existing-opensearch.md).
@@ -371,7 +414,21 @@ Using Amazon OpenSearch Service requires [setting up a new Camunda installation]
 
 #### Set up the OpenSearch domain module
 
-1. The `opensearch.tf` in your chosen reference is containing a basic AWS OpenSearch setup referencing a local Terraform module. The following shows said file, which you can within your cloned setup adjust to your needs.
+1. Ensure you are in the [reference architecture directory of the cloned repository](#obtain-a-copy-of-the-reference-architecture).
+
+   From the reference architecture directory, verify the layout and enter the cluster module, the OpenSearch file is contained in the cluster module for simplicity:
+
+   ```bash
+      cd ./aws/kubernetes/eks-single-region(-irsa)/terraform/
+
+      ls
+      # Example output:
+      # cluster  vpn
+
+      cd cluster
+   ```
+
+1. The `opensearch.tf` in your chosen reference contains a basic AWS OpenSearch setup referencing a local Terraform module. The following shows said file, which you can within your cloned setup adjust to your needs.
 
    <Tabs groupId="env">
      <TabItem value="standard" label="Standard" default>
@@ -383,7 +440,7 @@ Using Amazon OpenSearch Service requires [setting up a new Camunda installation]
    :::
 
    ```hcl reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region/opensearch.tf
+   https://github.com/camunda/camunda-deployment-references/blob/feature/eks-vpn-option/aws/kubernetes/eks-single-region/terraform/cluster/opensearch.tf
    ```
 
      </TabItem>
@@ -396,7 +453,7 @@ Using Amazon OpenSearch Service requires [setting up a new Camunda installation]
    Using IRSA is optional. If you prefer, you can continue using password-based access to your OpenSearch domain.
    :::
 
-   If you choose to use IRSA, you’ll need to take note of the **IAM role name** created for OpenSearch and the **AWS Account ID**, as these will be required later to annotate the Kubernetes service account.
+   If you choose to use IRSA, you'll need to take note of the **IAM role name** created for OpenSearch and the **AWS Account ID**, as these will be required later to annotate the Kubernetes service account.
 
    ##### OpenSearch IRSA role and policy
 
@@ -405,7 +462,7 @@ Using Amazon OpenSearch Service requires [setting up a new Camunda installation]
    Here's an example of how to define the IAM role trust policy and access policy for OpenSearch, this configuration will deploy an OpenSearch domain with advanced security enabled:
 
    ```hcl reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region-irsa/opensearch.tf
+   https://github.com/camunda/camunda-deployment-references/blob/feature/eks-vpn-option/aws/kubernetes/eks-single-region-irsa/terraform/cluster/opensearch.tf
    ```
 
    Once the IRSA configuration is complete, ensure you **record the IAM role name** (from the `iam_opensearch_role_name` configuration), it is required to annotate the Kubernetes service account in the next step.
@@ -415,7 +472,7 @@ Using Amazon OpenSearch Service requires [setting up a new Camunda installation]
    </TabItem>
    </Tabs>
 
-2. Customize the cluster setup using various input options. For a full list of available parameters, see the [OpenSearch module documentation](https://github.com/camunda/camunda-deployment-references/blob/main/aws/modules/opensearch/README.md).
+1. Customize the cluster setup using various input options. For a full list of available parameters, see the [OpenSearch module documentation](https://github.com/camunda/camunda-deployment-references/blob/feature/eks-vpn-option/aws/modules/opensearch/README.md).
 
 :::tip
 
@@ -423,15 +480,9 @@ The instance type `m7i.large.search` in the above example is a suggestion, and c
 
 :::
 
-### Define outputs
+### Execution: creation of the EKS cluster, PostgreSQL and OpenSearch domain
 
-**Terraform** allows you to define outputs, which make it easier to retrieve important values generated during execution, such as database endpoints and other necessary configurations for Helm setup.
-
-Each module definition set up in the reference contains an output definition at the end of the file. You can adjust them to your needs.
-
-Outputs allow you to easily reference the **cert-manager** ARN, **external-dns** ARN, and the endpoints for both **PostgreSQL** and **OpenSearch** in subsequent steps or scripts, streamlining your deployment process.
-
-### Execution
+Now that the `cluster` module (including EKS, PostgreSQL, and OpenSearch) is configured, you can use Terraform to plan and create all of these resources.
 
 :::note Secret management
 
@@ -441,10 +492,20 @@ We strongly recommend managing sensitive information such as the OpenSearch, Aur
 
 1. Open a terminal in the chosen reference folder where `config.tf` and other `.tf` files are.
 
-2. Preform a final initialization for anything changed throughout the guide:
+   ```bash
+      cd ./aws/kubernetes/eks-single-region(-irsa)/terraform/
+
+      ls
+      # Example output:
+      # cluster  vpn
+
+      cd cluster
+   ```
+
+2. Perform a final initialization for anything changed throughout the guide:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/s3-bucket/s3-bucket-tf-init.sh#L7
+   https://github.com/camunda/camunda-deployment-references/blob/feature/eks-vpn-option/aws/common/procedure/s3-bucket/s3-bucket-tf-init.sh#L7
    ```
 
 3. Plan the configuration files:
@@ -461,7 +522,147 @@ We strongly recommend managing sensitive information such as the OpenSearch, Aur
 
 Terraform will now create the Amazon EKS cluster with all the necessary configurations. The completion of this process may require approximately 20-30 minutes for each component.
 
+#### Define outputs
+
+**Terraform** allows you to define outputs, which make it easier to retrieve important values generated during execution, such as database endpoints and other necessary configurations for Helm setup.
+
+Each module definition set up in the reference contains an output definition at the end of the file. You can adjust them to your needs.
+
+Outputs allow you to easily reference the **cert-manager** ARN, **external-dns** ARN, and the endpoints for both **PostgreSQL** and **OpenSearch** in subsequent steps or scripts, streamlining your deployment process.
+
+### VPN module setup
+
+This section guides you through setting up an AWS VPN Endpoint to access a private cluster.
+
+This step is **optional** and only necessary if you have configured a **private cluster**.
+
+Using a VPN offers a flexible and secure way to connect to the private subnets within your VPC. It can be used either by a user to access cluster resources or to enable cross-site communications via [PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/what-is-privatelink.html). This module focuses on user access.
+
+<!-- The following diagram should be exported as an image and as a PDF from the sources https://miro.com/app/board/uXjVL-6SrPc=/ --->
+<!-- To export: click on the frame > "Export Image" > as PDF and as JPG (low res), then save it in the ./assets/ folder --->
+
+_Infrastructure diagram for a single region EKS setup with VPN (click on the image to open the PDF version)_
+[![Infrastructure Diagram EKS Single-Region VPN](./assets/eks-single-region-vpn.jpg)](./assets/eks-single-region-vpn.pdf)
+
+AWS VPN technology is compatible with OpenVPN clients. It uses [x509 certificates](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/mutual.html) for mutual authentication and source verification.
+The encryption provided by these certificates ensures that traffic can securely transit over the internet to the AWS VPN endpoint, which performs NAT and routes the traffic directly into the private subnets. This VPN endpoint thus becomes the sole access point to the private cluster.
+
+#### Retrieve the VPC cluster ID
+
+To create the VPN Endpoint in your cluster's VPC, you need to retrieve the VPC ID using [Terraform outputs](https://developer.hashicorp.com/terraform/language/values/outputs) from the [EKS cluster module](#eks-cluster-module-setup). Follow these steps:
+
+1. Ensure you are in the [reference architecture directory of the cloned repository](#obtain-a-copy-of-the-reference-architecture): `./aws/kubernetes/eks-single-region/terraform/`.
+   Navigate to the `cluster` module directory inside your reference architecture repository, for example:
+
+   ```bash
+   ls
+   # Example output:
+   # cluster vpn
+
+   cd cluster
+   ```
+
+2. Export the [VPC ID](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/vpc) to an environment variable:
+
+   ```bash
+   export CLUSTER_VPC_ID="$(terraform output -raw vpc_id)"
+   echo "CLUSTER_VPC_ID=$CLUSTER_VPC_ID"
+   ```
+
+#### Set up the VPN module
+
+From the parent directory containing your cluster module, go to the `vpn` directory which holds the VPN endpoint configuration.
+
+This setup creates a Certificate Authority (CA) for AWS VPN to perform encryption and mutual client authentication. For simplicity, the CA and generated certificates are stored in the project’s Terraform state (`tfstate`). You may customize this as needed.
+
+Start by reviewing the `config.tf` file that configures the S3 backend for Terraform state management:
+
+```hcl reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/eks-vpn-option/aws/kubernetes/eks-single-region/terraform/vpn/config.tf
+```
+
+Then, review `vpn.tf`, which describes the VPC Client Endpoint configuration:
+
+```hcl reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/eks-vpn-option/aws/openshift/rosa-hcp-single-region/terraform/vpn/vpn.tf
+```
+
+This VPN Client Endpoint follows [AWS best practices and constraints](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/what-is-best-practices.html):
+
+- Uses a client CIDR range that does not overlap with the VPC CIDR or any manually added VPN route table routes.
+- Implements [split-tunnel routing](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/split-tunnel-vpn.html), so only traffic destined for the VPC goes through the VPN, minimizing bandwidth use.
+- Supports IPv4 only and is bound to the VPC’s private subnets.
+
+1. Set your Terraform state key and initialize Terraform with the S3 [backend](#create-an-s3-bucket-for-terraform-state-management) and download necessary provider plugins:
+
+   ```bash
+   export S3_TF_BUCKET_KEY_VPN="camunda-terraform/vpn.tfstate"
+
+   echo "Storing cluster terraform state in s3://$S3_TF_BUCKET_NAME/$S3_TF_BUCKET_KEY_VPN"
+
+   terraform init -backend-config="bucket=$S3_TF_BUCKET_NAME" -backend-config="key=$S3_TF_BUCKET_KEY_VPN" -backend-config="region=$S3_TF_BUCKET_REGION"
+   ```
+
+   Terraform will connect to the S3 bucket to manage the state file, ensuring remote and persistent storage.
+
+2. For each client connecting to the cluster, assign a unique name in `client_key_names` to simplify certificate revocation.
+
+3. By default, VPN access is allowed from any IP address. You may restrict access by adjusting the `vpn_allowed_cidr_blocks` variable.
+
+4. Network designs vary; please review and adjust the configuration to fit your topology.
+
+5. Customize the VPN module by referring to the [VPN module documentation](https://github.com/camunda/camunda-deployment-references/blob/feature/eks-vpn-option/aws/modules/vpn/README.md).
+
+#### Outputs
+
+The module stores certificates and VPN client configurations in the Terraform state. The next section explains how to retrieve and use client configurations.
+
+#### Execution
+
+1. Generate a Terraform plan for the VPN Client Endpoint configuration.
+   This will use the private subnets of the designated VPC:
+
+   ```bash
+   # describe what will be created
+   terraform plan -out vpn.plan \
+    -var vpc_id="$CLUSTER_VPC_ID"
+   ```
+
+2. Review and apply the plan to create the resources:
+
+   ```bash
+   terraform apply vpn.plan     # creates the resources
+   ```
+
+Creation of the VPN Client Endpoint typically takes about 10 minutes. After completion, the client configurations will be available in the Terraform output `vpn_client_configs`.
+
 ## 2. Preparation for Camunda 8 installation
+
+### Access to the private network using the VPN
+
+This section applies if you have previously created a private cluster and want to access it using the [VPN module configured earlier](#vpn-module-setup).
+
+1. Navigate to the VPN module directory (`vpn`):
+
+   ```bash
+   pwd
+
+   # Example output:
+   # ./camunda-deployment-references/aws/kubernetes/eks-single-region(-irsa)/terraform/vpn/
+   ```
+
+2. Generate your client’s VPN configuration file. This file is compatible with [OpenVPN (ovpn)](https://openvpn.net/) format:
+
+   ```bash reference
+   https://github.com/camunda/camunda-deployment-references/blob/feature/eks-vpn-option/aws/common/procedure/vpn/gather-vpn-config.sh
+   ```
+
+3. Import the generated configuration file (`my-client.ovpn`) into an OpenVPN client:
+
+   - _(preferred)_ [Official AWS VPN Client](https://docs.aws.amazon.com/vpn/latest/clientvpn-user/connect-aws-client-vpn-connect.html)
+   - [Other OpenVPN Clients](https://docs.aws.amazon.com/vpn/latest/clientvpn-user/connect.html)
+
+4. Once the VPN client is connected, you will have secure access to the VPC’s private network.
 
 ### Access the created EKS cluster
 
@@ -498,7 +699,7 @@ The following commands will export the required outputs as environment variables
   <TabItem value="standard" label="Standard" default>
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region/procedure/export-helm-values.sh
+https://github.com/camunda/camunda-deployment-references/blob/feature/eks-vpn-option/aws/kubernetes/eks-single-region/procedure/export-helm-values.sh
 ```
 
   </TabItem>
@@ -506,7 +707,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
   <TabItem value="irsa" label="IRSA">
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region-irsa/procedure/export-helm-values.sh
+https://github.com/camunda/camunda-deployment-references/blob/feature/eks-vpn-option/aws/kubernetes/eks-single-region-irsa/procedure/export-helm-values.sh
 ```
 
 :::note IRSA users
@@ -537,7 +738,7 @@ The choice depends on your infrastructure setup and security preferences. In thi
 1. In your terminal, set the necessary environment variables that will be substituted in the setup manifest:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region/procedure/vars-create-db.sh
+   https://github.com/camunda/camunda-deployment-references/blob/feature/eks-vpn-option/aws/kubernetes/eks-single-region/procedure/vars-create-db.sh
    ```
 
    A **Kubernetes job** will connect to the database and create the necessary users with the required privileges. The script installs the necessary dependencies and runs SQL commands to create the IRSA user and assign it the correct roles and privileges.
@@ -548,7 +749,7 @@ The choice depends on your infrastructure setup and security preferences. In thi
      <TabItem value="standard" label="Standard" default>
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region/procedure/create-setup-db-secret.sh
+   https://github.com/camunda/camunda-deployment-references/blob/feature/eks-vpn-option/aws/kubernetes/eks-single-region/procedure/create-setup-db-secret.sh
    ```
 
    This command creates a secret named `setup-db-secret` and dynamically populates it with the values from your environment variables.
@@ -566,7 +767,7 @@ The choice depends on your infrastructure setup and security preferences. In thi
    <TabItem value="irsa" label="IRSA">
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region-irsa/procedure/create-setup-db-secret.sh
+   https://github.com/camunda/camunda-deployment-references/blob/feature/eks-vpn-option/aws/kubernetes/eks-single-region-irsa/procedure/create-setup-db-secret.sh
    ```
 
    This command creates a secret named `setup-db-secret` and dynamically populates it with the values from your environment variables.
@@ -592,14 +793,14 @@ The choice depends on your infrastructure setup and security preferences. In thi
    <TabItem value="standard">
 
    ```yaml reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region/setup-postgres-create-db.yml
+   https://github.com/camunda/camunda-deployment-references/blob/feature/eks-vpn-option/aws/kubernetes/eks-single-region/setup-postgres-create-db.yml
    ```
 
    </TabItem>
    <TabItem value="irsa">
 
    ```yaml reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region-irsa/setup-postgres-create-db.yml
+   https://github.com/camunda/camunda-deployment-references/blob/feature/eks-vpn-option/aws/kubernetes/eks-single-region-irsa/setup-postgres-create-db.yml
    ```
 
    </TabItem>
@@ -659,7 +860,7 @@ The standard installation comes already pre-configured, and no additional steps 
 1. In your terminal, set the necessary environment variables that will be substituted in the setup manifest:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region-irsa/procedure/vars-create-os.sh
+   https://github.com/camunda/camunda-deployment-references/blob/feature/eks-vpn-option/aws/kubernetes/eks-single-region-irsa/procedure/vars-create-os.sh
    ```
 
    A **Kubernetes job** will connect to the OpenSearch dommain and configure it.
@@ -667,7 +868,7 @@ The standard installation comes already pre-configured, and no additional steps 
 1. Create a secret that references the environment variables:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region-irsa/procedure/create-setup-os-secret.sh
+   https://github.com/camunda/camunda-deployment-references/blob/feature/eks-vpn-option/aws/kubernetes/eks-single-region-irsa/procedure/create-setup-os-secret.sh
    ```
 
    This command creates a secret named `setup-os-secret` and dynamically populates it with the values from your environment variables.
@@ -683,7 +884,7 @@ The standard installation comes already pre-configured, and no additional steps 
 1. Save the following manifest to a file, for example, `setup-opensearch-fgac.yml`.
 
    ```yaml reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region-irsa/setup-opensearch-fgac.yml
+   https://github.com/camunda/camunda-deployment-references/blob/feature/eks-vpn-option/aws/kubernetes/eks-single-region-irsa/setup-opensearch-fgac.yml
    ```
 
 1. Apply the manifest:
@@ -762,6 +963,7 @@ Export `REMOTE_HOST`, `REMOTE_PORT`, and `LOCAL_PORT` with the component-specifi
    [socat](http://www.dest-unreach.org/socat/) (_SOcket CAT_) is a command-line tool that relays data between two network endpoints.
 
    In this command:
+
    - `tcp-listen:$REMOTE_PORT,fork,reuseaddr` listens on the specified port in the pod and can handle multiple connections.
    - `tcp-connect:$REMOTE_HOST:$REMOTE_PORT` forwards all incoming traffic to the internal component endpoint.
 

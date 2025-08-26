@@ -217,6 +217,7 @@ To set up a ROSA cluster, certain prerequisites must be configured on your AWS a
 4. Enable ROSA on your AWS account via the [AWS Console](https://console.aws.amazon.com/rosa/).
 
 5. Enable HCP ROSA on [AWS Marketplace](https://docs.openshift.com/rosa/cloud_experts_tutorials/cloud-experts-rosa-hcp-activation-and-account-linking-tutorial.html):
+
    - Navigate to the ROSA console: [AWS ROSA Console](https://console.aws.amazon.com/rosa).
    - Choose **Get started**.
    - On the **Verify ROSA prerequisites** page, select **I agree to share my contact information with Red Hat**.
@@ -487,10 +488,11 @@ This section applies if you have previously created a private cluster and want t
 2. Generate your client’s VPN configuration file. This file is compatible with [OpenVPN (ovpn)](https://openvpn.net/) format:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/aws/openshift/rosa-hcp-single-region/procedure/gather-vpn-config.sh
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/vpn/gather-vpn-config.sh
    ```
 
 3. Import the generated configuration file (`my-client.ovpn`) into an OpenVPN client:
+
    - _(preferred)_ [Official AWS VPN Client](https://docs.aws.amazon.com/vpn/latest/clientvpn-user/connect-aws-client-vpn-connect.html)
    - [Other OpenVPN Clients](https://docs.aws.amazon.com/vpn/latest/clientvpn-user/connect.html)
 
@@ -543,10 +545,11 @@ You can access the created OpenShift cluster using the following steps:
 6. Create a project for Camunda using `oc`:
 
    ```shell
-   oc new-project camunda
+   export CAMUNDA_NAMESPACE="camunda"
+   oc new-project "$CAMUNDA_NAMESPACE"
    ```
 
-   In the remainder of the guide, the `camunda` namespace part of the camunda project will be referenced to create the required resources in the Kubernetes cluster, such as secrets or one-time setup jobs.
+   In the remainder of the guide, we reference the `CAMUNDA_NAMESPACE` variable as the namespace to create some required resources in the Kubernetes cluster, such as secrets or one-time setup jobs.
 
 ## 3. Install Camunda 8 using the Helm chart
 
