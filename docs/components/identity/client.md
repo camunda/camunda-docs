@@ -48,10 +48,10 @@ If authorizations are disabled, your client will have full access based on the s
 
 ## Manage clients on Self-Managed
 
-Configuring a client application in a Self-Managed environment with OIDC involves two main stages:
+Configuring a client application in a [Self-Managed environment with OIDC](/self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md) involves two main stages:
 
 1. Registering your client application with your identity provider to obtain client credentials.
-2. Configuring authorizations for the client in Camunda 8 Identity to grant the necessary permissions.
+2. Configuring authorizations for the client in the Orchestration Cluster Identity to grant the necessary permissions.
 
 The following steps will guide you through this process.
 
