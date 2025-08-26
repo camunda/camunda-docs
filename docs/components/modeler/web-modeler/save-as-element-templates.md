@@ -19,7 +19,7 @@ With the **Save as template** feature, you can convert any supported task into a
 
 ## Supported task types
 
-The **Save as template** feature is available for the following task types:
+The **Save as template** feature is available for the following BPMN activity types:
 
 - Service task
 - User task
@@ -42,24 +42,24 @@ Configure your task with the desired properties, save it as a template, and opti
 Before saving a task as a template:
 
 - Ensure the task is properly configured with the desired properties.
-- Resolve any validation errors on the task (the **Save as template** button is disabled if errors are present).
+- Resolve any validation errors on the task. The **Save as template** button is disabled if errors are present.
 
 ### Step 1: Configure your task
 
 First, configure your task with all the necessary properties you want to include in your template.  
 The configuration depends on your task type and use case.
 
-In this example, we'll configure a Business Rule Task for fraud detection:
+In this example, we'll configure a business rule task for fraud detection:
 
 1. Select a task in your BPMN diagram.
-2. Configure the task with the properties you need. For example, set up a Business Rule Task by defining:
+2. Configure the task with the properties you need. For example, set up a business rule task by defining:
    - **Implementation**: Choose the implementation type (for example, DMN decision).
    - **Called decision**: Reference the decision to be invoked.
-   - **Binding type**: Select the [resource binding type](/components/best-practices/modeling/choosing-the-resource-binding-type.md).
+   - **Binding type**: Select the [resource binding type](/components/best-practices/modeling/choosing-the-resource-binding-type.md). We recommend using `versionTag` to ensure that the template always references a compatible resource version.
    - **Result variable**: Define where to store the decision result.
    - Add any required input/output mappings for your business logic.
 
-   <img src={BusinessRuleTaskImg1} alt="Web Modeler interface showing a configured Business Rule Task named 'Determine fraud rating confidence' with properties panel displaying DMN decision configuration, decision ID, and binding settings" style={{marginTop: '0', width: '600px'}} />
+   <img src={BusinessRuleTaskImg1} alt="Web Modeler interface showing a configured business rule task named 'Determine fraud rating confidence' with properties panel displaying DMN decision configuration, decision ID, and binding settings" style={{marginTop: '0', width: '600px'}} />
 
 ### Step 2: Save the task as a template
 
