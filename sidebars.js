@@ -45,6 +45,12 @@ module.exports = {
         "components/concepts/processes",
         "components/concepts/process-applications",
         "components/concepts/element-templates",
+        {
+          "Access control": [
+            "components/concepts/access-control/access-control-overview",
+            "components/concepts/access-control/authorizations",
+          ],
+        },
         "components/concepts/job-workers",
         "components/concepts/execution-listeners",
         {
@@ -67,12 +73,6 @@ module.exports = {
         "components/concepts/outbound-connectors-job-workers",
         "components/concepts/backups",
         "components/concepts/resource-deletion",
-        {
-          "Access control": [
-            "components/concepts/access-control/access-control-overview",
-            "components/concepts/access-control/authorizations",
-          ],
-        },
       ],
     },
     {
