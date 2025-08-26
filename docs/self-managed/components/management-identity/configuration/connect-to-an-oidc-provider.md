@@ -1,6 +1,7 @@
 ---
 id: connect-to-an-oidc-provider
-title: "Connect to an OpenID Connect provider"
+title: "Connect Management Identity to an identity provider"
+sidebar_label: Connect to an identity provider
 description: "To enable a smoother integration with your existing systems, connect to an OpenID Connect provider"
 ---
 

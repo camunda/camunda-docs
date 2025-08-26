@@ -68,7 +68,7 @@ On the top of the form, a header shows the title of the task to work on, and the
 
 At the bottom of the form there is a button with which you can complete the task.
 
-To the right of the task, you find additional information about the task, such as the [due date](/components/modeler/bpmn/user-tasks/user-tasks.md#scheduling) of the task, or the [user groups that can work on this task](/components/concepts/access-control/user-task-access-restrictions.md).
+To the right of the task, you find additional information about the task, such as the [due date](/components/modeler/bpmn/user-tasks/user-tasks.md#scheduling) of the task, or the [user groups that can work on this task](/components/tasklist/user-task-access-restrictions.md).
 
 Potential extensions are dependent on your use case. You can consider adding more buttons to the bottom of the panel to indicate different task outcomes such as "approve" or "reject", or you could add a list of attachments to the right panel.
 
@@ -155,7 +155,7 @@ Task applications are not limited to web applications to be worked on desktops. 
 You learned the basic concepts of a task application. Your possible next steps are:
 
 - Learn how to [embed or customize Camunda Forms](/apis-tools/frontend-development/03-forms/01-introduction-to-forms.md) to render tailored forms that can be designed by business users.
-- Learn how to utilize [Orchestration cluster APIs](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) to query and execute tasks in your task application, and to enrich it with process execution data.
+- Learn how to utilize the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) to query and execute tasks in your task application, and to enrich it with process execution data.
 
 <!--
 TODO Section to be added once pages are available

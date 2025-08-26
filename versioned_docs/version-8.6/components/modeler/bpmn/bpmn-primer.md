@@ -115,9 +115,7 @@ The following is an introduction to BPMN 2.0, its elements, and their execution 
 
 ## Modeling BPMN diagrams
 
-The best tool for modeling BPMN diagrams for Zeebe is [Modeler](../about-modeler.md).
-
-![overview](./assets/modeler.gif)
+The best tool for modeling BPMN diagrams for Zeebe is [Modeler](../about-modeler.md). Learn more by [modeling your first diagram](/components/modeler/web-modeler/model-your-first-diagram.md).
 
 - [Download page](https://camunda.com/download/modeler/)
 - [Source code repository](https://github.com/camunda/camunda-modeler)
@@ -212,9 +210,7 @@ Refer to the [events](events.md) section on which types of events are currently 
 
 ### Subprocesses: Grouping elements
 
-**Subprocesses** are element containers that allow defining common functionality. For example, we can attach an event to a subprocess's border:
-
-![payload](./assets/sub-process.gif)
+[**Subprocesses**](/components/modeler/bpmn/subprocesses.md) are element containers that allow defining common functionality. For example, you can attach an event to a subprocess's border.
 
 When the event is triggered, the subprocess is interrupted, regardless which of its elements is currently active.
 

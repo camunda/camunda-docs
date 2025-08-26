@@ -56,7 +56,7 @@ The `server` configuration allows you to configure the main REST server. Below a
 
 | Field   | Description                                                                                                                                                                       | Example value |
 | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| enabled | If true, enables compression of responses for the Orchestration cluster REST API. This setting can also be overridden using the environment variable `SERVER_COMPRESION_ENABLED`. | false         |
+| enabled | If true, enables compression of responses for the Orchestration Cluster REST API. This setting can also be overridden using the environment variable `SERVER_COMPRESION_ENABLED`. | false         |
 
 #### server.ssl
 
@@ -64,7 +64,7 @@ Allows you to configure the SSL security for the REST server.
 
 | Field                   | Description                                                                                                                                                                     | Example value |
 | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| enabled                 | If true, enables TLS for the Orchestration cluster REST API. This setting can also be overridden using the environment variable `SERVER_SSL_ENABLED`.                           | false         |
+| enabled                 | If true, enables TLS for the Orchestration Cluster REST API. This setting can also be overridden using the environment variable `SERVER_SSL_ENABLED`.                           | false         |
 | certificate             | The path to a PEM encoded certificate. This setting can also be overridden using the environment variable `SERVER_SSL_CERTIFICATE`.                                             |               |
 | certificate-private-key | The path to a PKCS1 or PKCS8 private key for the configured certificate. This setting can also be overridden using the environment variable `SERVER_SSL_CERTIFICATEPRIVATEKEY`. |               |
 
