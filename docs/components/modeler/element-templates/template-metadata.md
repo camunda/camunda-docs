@@ -4,7 +4,9 @@ title: Template metadata
 description: "Learn about template metadata fields like name, ID, description, keywords, versioning, and JSON schema compatibility."
 ---
 
-## JSON schema compatibility
+The metadata of an element template contains important information about the template itself, such as its name, description, version, compatibility with different Camunda versions, and the schema that is used to validate the template itself.
+
+## JSON schema
 
 The application uses the `$schema` property to ensure compatibility for a given element template. You find [the latest supported versions here](https://www.npmjs.com/package/@camunda/zeebe-element-templates-json-schema).
 
@@ -18,7 +20,25 @@ For example, given the following `$schema` definition, the application takes `0.
 
 The JSON schema versioning is backward-compatible, meaning that all versions including or below the current one are supported.
 
-## Template versioning
+## Name, Description, Keywords
+
+The `name` key defines the name of the template. It's displayed in the element template selection modal and in the properties panel on the right side of the screen (after applying an element template).
+The `description` key is optional and provides additional information about the template. It's also shown in the element template selection modal and in the properties panel (after applying an element template).
+The `keywords` key is an optional list of keywords that can help users find this template. Keywords are used for search and filtering but are not displayed in the UI.
+
+```json
+{
+  ...,
+  "name": "Template 1",
+  "description": "some description",
+  "keywords": [
+    "search alias",
+    "create action"
+  ]
+}
+```
+
+## Version
 
 To support [template evolution](https://github.com/bpmn-io/element-templates/blob/main/docs/LIFE_CYCLE.md#overview), maintain a `version` property on your templates:
 
@@ -35,7 +55,9 @@ Once a template with a new `version` is available to users, the editor tooling s
 Versioning is an important cornerstone of template evolution. Review the [upstream documentation](https://github.com/bpmn-io/element-templates/blob/main/docs/LIFE_CYCLE.md#overview) to understand foundations of our upgrade mechanism, and foundations on how the element template life cycle works.
 :::
 
-## Template compatibility
+The template `id` and `version` together form a unique identifier for a template. Two templates can have the same `id` if their `version` is different.
+
+## Engine compatibility
 
 Define [template compatibility](https://github.com/bpmn-io/element-templates/blob/main/docs/LIFE_CYCLE.md#compatibility) with execution platforms (Camunda Orchestration Cluster versions) and related components (such as Web Modeler) using the `engines` property.
 
@@ -90,3 +112,20 @@ Currently, element templates may be used on the following BPMN elements:
 - `bpmn:SequenceFlow` (for maintaining `condition`)
 - `bpmn:Process`
 - `bpmn:Event`
+
+The `appliesTo` array specifies the BPMN types the template can be applied to. It will only be shown for these types of elements in the modeler.
+The `elementType` object is optional. If you configure `elementType` on a template, the element is replaced with the specified type when a user applies the template.
+Some properties require a specific BPMN type to work correctly. In that case they will require a certain `elementType` to be set by the template.
+Such constraints are checked based on the element template schema and by the modeler when it loads the templates.
+
+```json
+{
+  ...,
+  "appliesTo": [
+    "bpmn:Task"
+  ],
+  "elementType": {
+    "value": "bpmn:ServiceTask"
+  }
+}
+```
