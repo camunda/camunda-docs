@@ -51,7 +51,6 @@ This section helps you get up and running in minutes. To begin using the Orchest
 
 ### Authentication
 
-
 Authentication for the Orchestration Cluster REST API depends on your environment and how you deploy Camunda 8.
 
 **Supported authentication methods:**
