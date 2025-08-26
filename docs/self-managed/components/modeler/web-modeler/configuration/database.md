@@ -157,10 +157,10 @@ SPRING_DATASOURCE_URL="jdbc:sqlserver://[DB_HOST]:[DB_PORT];databaseName=[DB_NAM
 <TabItem value="valuesYaml">
 ```yaml
 webModeler:
-    restapi:
-      externalDatabase:
-        enabled: true
-        url: 'jdbc:sqlserver://[DB_HOST]:[DB_PORT];databaseName=[DB_NAME]'
+  restapi:
+    externalDatabase:
+      enabled: true
+      url: 'jdbc:sqlserver://[DB_HOST]:[DB_PORT];databaseName=[DB_NAME]'
 ```
 </TabItem>
 <TabItem value="applicationYaml">
