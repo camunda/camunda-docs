@@ -403,7 +403,7 @@ Follow the example in the [Orchestration Cluster REST API documentation](/apis-t
 ### Upgrade Camunda 8
 
 :::info Direct upgrade not supported
-Upgrading directly from Camunda 8.6 to 8.7 is not supported and cannot be performed.
+Upgrading directly from Camunda 8.7 to 8.8 is not supported and cannot be performed.
 :::
 
 To update to a new patch release, follow this recommended approach:
@@ -435,3 +435,11 @@ When using AWS, you can utilize [S3](https://aws.amazon.com/s3/) for backing up 
 ## Troubleshooting
 
 For troubleshooting assistance, consult the [operational guides troubleshooting documentation](/self-managed/operational-guides/troubleshooting.md).
+
+## Next Steps
+
+After setting up your cluster, many users typically do the following:
+
+- [Connect to an identity provider](/self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md) – integrate with an external identity system for authentication.
+- [Secure cluster communication](/self-managed/components/orchestration-cluster/zeebe/security/secure-cluster-communication.md) – protect traffic between cluster nodes.
+- [Secure client communication](/self-managed/components/orchestration-cluster/zeebe/security/secure-client-communication.md) – ensure secure communication between clients and the cluster.
