@@ -15,24 +15,24 @@ Report security vulnerabilities to Camunda immediately, following the instructio
 To learn more about security at Camunda, including our security policy, security issue management, and more, see [Camunda.com/security](https://camunda.com/security).
 :::
 
-### Notice 25
+## Notice 25
 
-#### Publication date
+### Publication date
 
-Aug 20th, 2025
+August 27th, 2025
 
-#### Products affected
+### Products affected
 
 - Camunda Tasklist
 - Camunda Zeebe
 - Camunda Operate
 - Camunda Optimize
 
-#### Impact
+### Impact
 
 The embedded Apache Tomcat was affected by [CVE-2025-48989](https://nvd.nist.gov/vuln/detail/CVE-2025-48989) which made Tomcat vulnerable to the MadeYouReset attack.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using:
 
@@ -41,7 +41,7 @@ You are using:
 - Operate 8.7.0 - 8.7.10 or 8.6.0 - 8.6.24 or 8.5.0 - 8.5.18
 - Optimize 8.7.0 - 8.7.7 or 8.6.0 - 8.6.14
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain the fix:
 
@@ -50,13 +50,13 @@ Camunda has provided the following releases which contain the fix:
 - Operate 8.7.11, 8.6.25, 8.5.19
 - Optimize 8.7.8, 8.6.15
 
-### Notice 24
+## Notice 24
 
-#### Publication date
+### Publication date
 
-Aug 20th, 2025
+August 27th, 2025
 
-#### Products affected
+### Products affected
 
 - Camunda Tasklist
 - Camunda Zeebe
@@ -64,11 +64,11 @@ Aug 20th, 2025
 - Camunda Identity
 - Camunda Optimize
 
-#### Impact
+### Impact
 
 The embedded Netty was affected by [CVE-2025-55163](https://nvd.nist.gov/vuln/detail/CVE-2025-55163) which allows malformed HTTP/2 control frames usage that results in resource exhaustion and distributed denial of service.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using:
 
@@ -78,7 +78,7 @@ You are using:
 - Identity 8.7.0 - 8.7.5 or 8.6.0 - 8.6.18 or 8.5.0 - 8.5.19
 - Optimize 8.7.0 - 8.7.7 or 8.6.0 - 8.6.14
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain the fix:
 
@@ -88,7 +88,7 @@ Camunda has provided the following releases which contain the fix:
 - Identity 8.7.6, 8.6.19, 8.5.20
 - Optimize 8.7.8, 8.6.15
 
-### Notice 23
+## Notice 23
 
 ### Publication date
 
