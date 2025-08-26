@@ -1549,7 +1549,6 @@ module.exports = {
               },
               items: [
                 "self-managed/components/orchestration-cluster/identity/overview",
-                "self-managed/components/orchestration-cluster/identity/configuration",
                 "self-managed/components/orchestration-cluster/identity/connect-external-identity-provider",
                 "self-managed/components/orchestration-cluster/identity/manage-tenants",
                 {
