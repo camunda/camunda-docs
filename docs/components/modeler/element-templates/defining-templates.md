@@ -4,55 +4,10 @@ title: Defining templates
 description: "Learn about JSON schema compatibility, supported BPMN types, defining template properties, and more."
 ---
 
-Templates are defined in template descriptor files as a JSON array:
+An Element template is defined in template descriptor files as a JSON object.
+The JSON object typically contains the following properties:
 
-```json
-[
-  {
-    "$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema/resources/schema.json",
-    "name": "Template 1",
-    "id": "sometemplate",
-    "description": "some description",
-    "keywords": [
-      "search alias",
-      "create action"
-    ],
-    "version": 1,
-    "engines": {
-      "camunda": "^8.6"
-    },
-    "appliesTo": [
-      "bpmn:Task"
-    ],
-    "elementType": {
-      "value": "bpmn:ServiceTask"
-    },
-    "properties": [
-      ...
-    ]
-  },
-  {
-    "name": "Template 2",
-    ...
-  }
-]
-```
-
-As seen in the code snippet, a template consists of a number of important components:
-
-- `$schema : String`: URI pointing towards the [JSON schema](https://json-schema.org/) which defines the structure of the element template `.json` file. Element template schemas are maintained in the [element templates JSON schema](https://github.com/camunda/element-templates-json-schema) repository. Following the [JSON schema](https://json-schema.org/) standard, you may use them for validation or to get assistance (e.g., auto-completion) when working with them in your favorite IDE.
-
-:::note
-
-The `$schema` attribute is **required** for Camunda 8 element templates.
-:::
-
-Example:
-
-```json
-"$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema/resources/schema.json"
-```
-
+- `$schema : String`: URI pointing towards the [JSON schema](https://json-schema.org/) which defines the structure of the element template `.json` file. Element template schemas are maintained in the [element templates JSON schema](https://github.com/camunda/element-templates-json-schema) repository.
 - `name : String`: Name of the template. Shown in the element template selection modal and in the properties panel on the right side of the screen (after applying an element template).
 - `id : String`: ID of the template.
 - `description : String`: Optional description of the template. Shown in the element template selection modal and in the properties panel (after applying an element template).
@@ -62,15 +17,69 @@ Example:
 - `engines : Object`: Optional dictionary of environments [compatible with the template](./template-metadata.md#template-compatibility). Environment version is specified with semantic versions range.
 - `appliesTo : Array<String>`: List of BPMN types the template can be applied to.
 - `elementType : Object`: Optional type of the element. If you configure `elementType` on a template, the element is replaced with the specified type when a user applies the template.
-- `properties : Array<Object>`: List of properties of the template.
+- `properties : Array<Object>`: List of properties of the template. These properties are applied to the BPMN element when the template is applied. Each property can be configured with a number of options, such as type, binding, constraints, and more.
+
+Below you find a simple example of an element template:
+
+```json
+{
+  "$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema/resources/schema.json",
+  "name": "Template 1",
+  "id": "sometemplate",
+  "description": "some description",
+  "keywords": ["search alias", "create action"],
+  "version": 1,
+  "engines": {
+    "camunda": "^8.6"
+  },
+  "appliesTo": ["bpmn:Task"],
+  "elementType": {
+    "value": "bpmn:ServiceTask"
+  },
+  "properties": [
+    {
+      "label": "Some Property",
+      "type": "String",
+      "binding": {
+        "type": "property",
+        "name": "someProperty"
+      }
+    }
+  ]
+}
+```
+
+## Creating multiple templates in one file
+
+You can define multiple templates in one JSON file by wrapping them in an array. Templates defined in such a way are only supported by Desktop Modeler.
+
+```json
+[
+  {
+    ...
+    "name": "Template 1",
+    "id": "sometemplate",
+    "description": "some description",
+    ...
+  },
+  {
+    ...
+    "name": "Template 2",
+    "id": "anothertemplate",
+    "description": "another description",
+    ...
+  }
+]
+```
 
 ## Creating and editing connector templates
 
-Connector templates are a specific type of element template. You can edit them with visual preview and edit support like formatting, code completion, and error highlighting in [Web Modeler](/components/connectors/manage-connector-templates.md).
+Connector templates are a specific type of element template. Just like element templates, you can edit them it the text editor of your choice
+or with visual preview and edit support like formatting, code completion, and error highlighting in [Web Modeler](/components/connectors/manage-connector-templates.md).
 
 ## Further reading
 
 For detailed information about specific aspects of template development, see:
 
 - **[Template Metadata](./template-metadata.md)** - Learn about template identification fields like name, ID, description, keywords, versioning, JSON schema compatibility, engine compatibility, and supported BPMN types
-- **[Template Properties](./template-properties.md)** - Master template properties including types, bindings, constraints, and advanced features
+- **[Template Properties](./template-properties.md)** - The properties array is the heart of the element template. Here you can define what properties should be applied to the BPMN element and how these properties should be shown and validated in the properties panel.
