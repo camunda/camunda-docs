@@ -6,13 +6,13 @@ description: Define shareable, low-code tests for your BPMN processes
 
 <span class="badge badge--cloud">Camunda 8 only</span>
 
-Test scenario files allow you to define shareable, low-code tests for your BPMN processes.
+Test scenario files let you define shareable, low-code tests for your BPMN processes.
 
-These files are stored in JSON format and can be created, edited, and managed directly within Web Modeler. You can also download these files or synchronize them with your Git repository using Git Sync.
+They are stored in JSON format and can be created, edited, and managed directly in Web Modeler. You can also download these files or synchronize them with your Git repository using Git Sync.
 
-## Creating a test scenario file
+## Create a test scenario file
 
-Create a test scenario file by [saving a scenario in Play](../play-your-process.md#save-scenario), or by manually creating a **test scenario file** in Web Modeler.
+You can create a test scenario file by [saving a scenario in Play](../play-your-process.md#save-scenario), or by manually creating a **test scenario file** in Web Modeler.
 
 ## Manual editing
 
@@ -49,22 +49,26 @@ Test scenario files are organized as follows:
 }
 ```
 
-**Top-level fields:**
+**Top-level fields**
 
-- `processId` (required): The ID of the BPMN process definition that these test cases will execute against
-- `testCases` (required): Array of test case objects
+| Field       | Required | Description                                                       |
+| ----------- | -------- | ----------------------------------------------------------------- |
+| `processId` | Yes      | The ID of the BPMN process definition the test cases run against. |
+| `testCases` | Yes      | An array of test case objects.                                    |
 
-**Test case fields:**
+**Test case fields**
 
-- `name` (optional): Descriptive name for the test case scenario
-- `instructions` (required): Array of instruction objects that define the test steps
-- `metadata` (optional): Used by Play to show coverage and process instance information. Camunda does not recommend editing this field.
+| Field          | Required | Description                                                                                                |
+| -------------- | -------- | ---------------------------------------------------------------------------------------------------------- |
+| `name`         | No       | A descriptive name for the test case scenario.                                                             |
+| `instructions` | Yes      | An array of instruction objects that define the test steps.                                                |
+| `metadata`     | No       | Used by Play to show coverage and process instance details. Camunda does not recommend editing this field. |
 
-### Linking a process (processId)
+### Link a process (`processId`)
 
-To show the file's scenarios in Play, you first need to link the file to the process.
+To display the file's scenarios in Play, you must first link the file to a process.
 
-Add a `processId` field with the process ID of the BPMN process you want to test.
+Add a `processId` field with the process ID of the BPMN process you want to test:
 
 ```json
 {
@@ -73,31 +77,31 @@ Add a `processId` field with the process ID of the BPMN process you want to test
 ```
 
 :::note
-Play will only run the first executable process within the BPMN diagram. Ensure the process ID you link to is the first executable process.
+Play runs only the first executable process within the BPMN diagram. Make sure the process ID you link is the first executable process.
 :::
 
-### Unlinking a process
+### Unlink a process
 
-Remove the `processId` field or set it to null to unlink the file from the process.
+To unlink the file from a process, remove the `processId` field or set it to `null`.
 
 ## Instructions
 
 ### Common patterns
 
-- **Variables**: When specified, variables should be provided as JSON strings
-- **Element IDs**: Reference specific BPMN elements in your process definition
-- **Process definition IDs**: Identify which process definition to interact with
-
----
+- **Variables**: Provide variables as JSON strings.
+- **Element IDs**: Reference specific BPMN elements in your process definition.
+- **Process definition IDs**: Identify which process definition to interact with.
 
 ### Update variables
 
 Updates process variables during test execution.
 
-**Fields:**
+**Fields**
 
-- `type` (required): Must be `"update-variables"`
-- `variables` (required): JSON string containing the variables to update
+| Field       | Required | Description                                       |
+| ----------- | -------- | ------------------------------------------------- |
+| `type`      | Yes      | Must be `"update-variables"`.                     |
+| `variables` | Yes      | A JSON string containing the variables to update. |
 
 **Example:**
 
@@ -108,17 +112,17 @@ Updates process variables during test execution.
 }
 ```
 
----
-
 ### Create process instance
 
 Creates a new process instance from a process definition.
 
-**Fields:**
+**Fields**
 
-- `type` (required): Must be `"create-process-instance"`
-- `processDefinitionId` (required): The ID of the process definition to instantiate
-- `variables` (optional): JSON string containing initial process variables
+| Field                 | Required | Description                                         |
+| --------------------- | -------- | --------------------------------------------------- |
+| `type`                | Yes      | Must be `"create-process-instance"`.                |
+| `processDefinitionId` | Yes      | The ID of the process definition to instantiate.    |
+| `variables`           | No       | A JSON string containing initial process variables. |
 
 **Example:**
 
@@ -130,18 +134,18 @@ Creates a new process instance from a process definition.
 }
 ```
 
----
-
 ### Create process instance by message
 
 Creates a new process instance by sending a message to a message start event.
 
-**Fields:**
+**Fields**
 
-- `type` (required): Must be `"create-process-instance-by-message"`
-- `processDefinitionId` (required): The ID of the process definition to instantiate
-- `messageName` (required): The name of the message that triggers the process start
-- `variables` (optional): JSON string containing initial process variables
+| Field                 | Required | Description                                              |
+| --------------------- | -------- | -------------------------------------------------------- |
+| `type`                | Yes      | Must be `"create-process-instance-by-message"`.          |
+| `processDefinitionId` | Yes      | The ID of the process definition to instantiate.         |
+| `messageName`         | Yes      | The name of the message that triggers the process start. |
+| `variables`           | No       | A JSON string containing initial process variables.      |
 
 **Example:**
 
@@ -154,18 +158,18 @@ Creates a new process instance by sending a message to a message start event.
 }
 ```
 
----
-
 ### Create process instance by signal
 
 Creates a new process instance by broadcasting a signal to a signal start event.
 
-**Fields:**
+**Fields**
 
-- `type` (required): Must be `"create-process-instance-by-signal"`
-- `processDefinitionId` (required): The ID of the process definition to instantiate
-- `signalName` (required): The name of the signal that triggers the process start
-- `variables` (optional): JSON string containing initial process variables
+| Field                 | Required | Description                                             |
+| --------------------- | -------- | ------------------------------------------------------- |
+| `type`                | Yes      | Must be `"create-process-instance-by-signal"`.          |
+| `processDefinitionId` | Yes      | The ID of the process definition to instantiate.        |
+| `signalName`          | Yes      | The name of the signal that triggers the process start. |
+| `variables`           | No       | A JSON string containing initial process variables.     |
 
 **Example:**
 
@@ -178,18 +182,18 @@ Creates a new process instance by broadcasting a signal to a signal start event.
 }
 ```
 
----
-
 ### Complete job
 
 Completes a service task job during process execution.
 
-**Fields:**
+**Fields**
 
-- `type` (required): Must be `"complete-job"`
-- `jobType` (required): The task's job type (also known as task definition type)
-- `elementId` (required): The ID of the BPMN element (service task) to complete
-- `variables` (optional): JSON string containing variables to set when completing the job
+| Field       | Required | Description                                                        |
+| ----------- | -------- | ------------------------------------------------------------------ |
+| `type`      | Yes      | Must be `"complete-job"`.                                          |
+| `jobType`   | Yes      | The task’s job type (also called the task definition type).        |
+| `elementId` | Yes      | The ID of the BPMN element (service task) to complete.             |
+| `variables` | No       | A JSON string containing variables to set when completing the job. |
 
 **Example:**
 
@@ -202,18 +206,18 @@ Completes a service task job during process execution.
 }
 ```
 
----
-
 ### Broadcast signal
 
 Broadcasts a signal that can be caught by signal intermediate catch events or signal boundary events.
 
-**Fields:**
+**Fields**
 
-- `type` (required): Must be `"broadcast-signal"`
-- `elementId` (required): The ID of the BPMN element that will catch the signal
-- `signalName` (required): The name of the signal to broadcast
-- `variables` (optional): JSON string containing variables to pass with the signal
+| Field        | Required | Description                                                 |
+| ------------ | -------- | ----------------------------------------------------------- |
+| `type`       | Yes      | Must be `"broadcast-signal"`.                               |
+| `elementId`  | Yes      | The ID of the BPMN element that will catch the signal.      |
+| `signalName` | Yes      | The name of the signal to broadcast.                        |
+| `variables`  | No       | A JSON string containing variables to pass with the signal. |
 
 **Example:**
 
@@ -226,17 +230,17 @@ Broadcasts a signal that can be caught by signal intermediate catch events or si
 }
 ```
 
----
-
 ### Complete user task
 
 Completes a user task with optional form data or variables.
 
-**Fields:**
+**Fields**
 
-- `type` (required): Must be `"complete-user-task"`
-- `elementId` (required): The ID of the BPMN user task element to complete
-- `variables` (optional): JSON string containing form data or variables to submit
+| Field       | Required | Description                                                |
+| ----------- | -------- | ---------------------------------------------------------- |
+| `type`      | Yes      | Must be `"complete-user-task"`.                            |
+| `elementId` | Yes      | The ID of the BPMN user task element to complete.          |
+| `variables` | No       | A JSON string containing form data or variables to submit. |
 
 **Example:**
 
@@ -248,21 +252,21 @@ Completes a user task with optional form data or variables.
 }
 ```
 
----
-
 ### Publish message
 
 Publishes a message that can be caught by message intermediate catch events or message boundary events.
 
-**Fields:**
+**Fields**
 
-- `type` (required): Must be `"publish-message"`
-- `elementId` (required): The ID of the BPMN element that will catch the message
-- `messageName` (required): The name of the message to publish
-- `correlationKey` (required): The correlation key used to match the message to the correct process instance
-- `variables` (optional): JSON string containing variables to pass with the message
-- `timeToLive` (optional): How long the message should remain available for correlation, specified in milliseconds as a string (for example, "300000" for five minutes)
-- `messageId` (optional): Unique identifier for the message to prevent duplicate processing
+| Field            | Required | Description                                                                                                                    |
+| ---------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `type`           | Yes      | Must be `"publish-message"`.                                                                                                   |
+| `elementId`      | Yes      | The ID of the BPMN element that will catch the message.                                                                        |
+| `messageName`    | Yes      | The name of the message to publish.                                                                                            |
+| `correlationKey` | Yes      | The correlation key used to match the message to the correct process instance.                                                 |
+| `variables`      | No       | A JSON string containing variables to pass with the message.                                                                   |
+| `timeToLive`     | No       | How long the message should remain available for correlation, in milliseconds as a string (e.g., `"300000"` for five minutes). |
+| `messageId`      | No       | Unique identifier for the message to prevent duplicate processing.                                                             |
 
 **Example:**
 
@@ -278,19 +282,19 @@ Publishes a message that can be caught by message intermediate catch events or m
 }
 ```
 
----
-
 ### Throw job error
 
 Simulates a job failure by throwing an error during service task execution.
 
-**Fields:**
+**Fields**
 
-- `type` (required): Must be `"throw-job-error"`
-- `elementId` (required): The ID of the BPMN service task element where the error occurs
-- `errorCode` (required): The error code that will be matched with an error catch event
-- `jobType` (optional): The type of job that failed (useful when multiple job types exist for the same element)
-- `errorMessage` (optional): Human-readable description of the error
+| Field          | Required | Description                                                                              |
+| -------------- | -------- | ---------------------------------------------------------------------------------------- |
+| `type`         | Yes      | Must be `"throw-job-error"`.                                                             |
+| `elementId`    | Yes      | The ID of the BPMN service task element where the error occurs.                          |
+| `errorCode`    | Yes      | The error code that will be matched with an error catch event.                           |
+| `jobType`      | No       | The type of job that failed (useful when multiple job types exist for the same element). |
+| `errorMessage` | No       | Human-readable description of the error.                                                 |
 
 **Example:**
 
@@ -304,17 +308,17 @@ Simulates a job failure by throwing an error during service task execution.
 }
 ```
 
----
-
 ### Resolve incident
 
-Resolves an incident that was created due to a job failure or other process issue.
+Resolves an incident that was created due to a job failure or another process issue.
 
-**Fields:**
+**Fields**
 
-- `type` (required): Must be `"resolve-incident"`
-- `elementId` (required): The ID of the BPMN element where the incident occurred
-- `hasJob` (required): Boolean indicating whether the incident is related to a job that should be retried after resolution
+| Field       | Required | Description                                                                                          |
+| ----------- | -------- | ---------------------------------------------------------------------------------------------------- |
+| `type`      | Yes      | Must be `"resolve-incident"`.                                                                        |
+| `elementId` | Yes      | The ID of the BPMN element where the incident occurred.                                              |
+| `hasJob`    | Yes      | Boolean indicating whether the incident is related to a job that should be retried after resolution. |
 
 **Example:**
 
@@ -326,13 +330,11 @@ Resolves an incident that was created due to a job failure or other process issu
 }
 ```
 
----
-
 ## Usage tips
 
-- Always specify meaningful `elementId` values that match your BPMN diagram.
-- Use descriptive test case names to clearly indicate what scenario is being tested.
-- Include error scenarios alongside happy path tests.
-- Leverage optional `variables` fields to test different data conditions.
-- When using correlation keys, ensure they uniquely identify process instances.
-- For `timeToLive` values, remember to specify milliseconds as a string (for example, "60000" for one minute, "300000" for five minutes).
+- Always use meaningful `elementId` values that match your BPMN diagram.
+- Give test cases descriptive names to clearly indicate the scenario being tested.
+- Include error scenarios along with happy path tests.
+- Use optional `variables` fields to test different data conditions.
+- Ensure correlation keys uniquely identify process instances.
+- Specify `timeToLive` values in milliseconds as a string (e.g., `"60000"` for one minute, `"300000"` for five minutes).

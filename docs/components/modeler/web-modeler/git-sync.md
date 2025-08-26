@@ -64,7 +64,6 @@ Refer to the [GitHub documentation](https://docs.github.com/en/enterprise-server
 2. Select the **GitHub** tile (if not already selected), located at the top of the modal.
 
 3. Provide the following information in the **Configure GitHub** modal:
-
    - **Client ID:** Found in your GitHub App's settings page. You can also use Application ID as an alternative. (If you are using GitHub Enterprise Server 3.13 or prior, Application ID is required.)
    - **Installation ID:** Found in the URL of your GitHub App's installation page.
    - **GitHub API Base URL:** (optional - _**SaaS only**_) The base URL of your GitHub installation's REST API. Only necessary for GitHub Enterprise instances, refer to the [GitHub documentation](https://docs.github.com/en/enterprise-server@3.15/rest/enterprise-admin?apiVersion=2022-11-28#endpoint-urls) and choose your correct Enterprise Server version. If left empty, Web Modeler uses the default GitHub Cloud REST API URL (`https://api.github.com`).
@@ -121,7 +120,6 @@ If you're using a self-hosted GitLab instance, ensure the environment variable `
 2. In the modal, select the **GitLab** tile at the top.
 
 3. In the **Configure GitLab** modal, provide the following information:
-
    - **Access token:** The project, group, or personal access token you generated.
    - **Project ID:** The ID copied from your GitLab project settings.
    - **Repository URL:** The base URL of the repository you want to sync with (e.g., `https://gitlab.com/camunda/example-repo`). The URL must not include the `.git` extension or a folder path.
@@ -176,7 +174,6 @@ When using Web Modeler Self-Managed with a self-hosted Azure DevOps Server insta
 2. Select the **Azure** tile, located at the top of the modal.
 
 3. Provide the following information in the **Configure Azure** modal:
-
    - **Application (client) ID:** Can be found on the applications registration page.
    - **Directory (tenant) ID:** Your Microsoft Entra tenant unique identifier. Can also be found on the applications registration page.
    - **Private Key:** The private key used to generate the certificate in PEM format.
@@ -223,7 +220,6 @@ Web Modeler currently only supports Bitbucket Cloud.
 2. Select the **Bitbucket** tile at the top of the modal.
 
 3. Fill in the **Configure Bitbucket** modal with the following information:
-
    - **Access token:** The repository, project, or workspace access token you generated.
    - **Repository URL:** The base URL of the repository you want to sync with, e.g., `https://bitbucket.org/camunda-worksapce/my-repository`. The URL must not include the `.git` extension or any folder path.
    - **Branch name:** The branch to use for merging and managing changes.
@@ -309,8 +305,8 @@ Refer to [Configuration of the restapi component](../../../self-managed/componen
 
 ### File extensions
 
-- `.json` files will be parsed as either a Connector template or a test scenario file. The operation will fail if the file's contents are not valid for either file type. If the remote repository stores any `.json` files that are not valid Web Modeler files, place them in a subfolder to be automatically ignored by the synchronization process.
-- Git sync only supports `.md` files that are named exactly `README.md` (case-sensitive). Git sync supports multiple `README.md` files in a single repository (including in subfolders).
+- `.json` files are parsed as either a Connector template or a test scenario file. The operation will fail if the file contents are not valid for either type. If the remote repository contains any `.json` files that are not valid Web Modeler files, place them in a subfolder so they are automatically ignored during synchronization.
+- Git Sync only supports `.md` files named exactly `README.md` (case-sensitive). Multiple `README.md` files are supported in a single repository, including in subfolders.
 
 ### Synchronization
 
