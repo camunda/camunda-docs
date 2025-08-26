@@ -43,9 +43,9 @@ Camunda recommends storing shared templates in a separate VCS repository:
 
 ### Project element templates
 
-| Desktop Modeler                                                                                                                                                                                      | Web Modeler                                                                                                                                  |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| Discovers templates from multiple directories if a `.process-application` file exists. <br></br>If no `.process-application` file exists, only templates in `.camunda/element-templates` are loaded. | Processes templates from a single folder. <br></br>If working with a project (not a process application), templates must first be published. |
+| Desktop Modeler                                                                                                                                                                                          | Web Modeler                                                                                                                                  |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| Discovers [local element templates](/components/modeler/desktop-modeler/element-templates/configuring-templates.md#global-templates) are loaded from the `.camunda/element-templates` folder if present. | Processes templates from a single folder. <br></br>If working with a project (not a process application), templates must first be published. |
 
 :::note
 
