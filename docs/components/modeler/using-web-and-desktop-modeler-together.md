@@ -1,10 +1,10 @@
 ---
-id: modelers-interoperability
-title: Modelers interoperability
+id: using-web-and-desktop-modeler-together
+title: Using Web and Desktop Modeler together
 description: "Understand the implications of using Web Modeler and Desktop Modeler for modeling process diagrams."
 ---
 
-If your team uses both [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md) and [Desktop Modeler](/components/modeler/desktop-modeler/index.md) to develop [process applications](/components/concepts/process-applications.md) with [GitSync](/components/modeler/web-modeler/git-sync.md), there are a few considerations to ensure both modelers work together transparently.
+If your team uses both [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md) and [Desktop Modeler](/components/modeler/desktop-modeler/index.md) to develop [process applications](/components/concepts/process-applications.md) with [Git sync](/components/modeler/web-modeler/git-sync.md), there are a few considerations to ensure both modelers work together transparently.
 
 ## Process applications
 
@@ -50,14 +50,14 @@ Camunda recommends storing shared templates in a separate VCS repository:
 :::note
 
 - If starting in **Desktop Modeler**, use a single folder for your process application. This makes project templates available in both modelers without extra work.
-- If starting in **Web Modeler**, manually create a `.process-application` file after cloning the repository so Desktop Modeler can correctly recognize the project.
+- If starting in **Web Modeler**, manually create an empty `.process-application` file after cloning the repository so Desktop Modeler can correctly recognize the project.
   :::
 
 ### Handling multiple template versions
 
-| Desktop Modeler                                                                                                                                                                                                                                                                                                                | Web Modeler                                                                                                                                                                             |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Detects versions based on separate files. To support multiple versions, maintain different files with distinct names (e.g., `element-template-v1.json`, `element-template-v2.json`). Otherwise, templates may appear as [missing](/components/modeler/desktop-modeler/element-templates/using-templates.md#missing-templates). | Supports evolving a single template file. Simply update the file and [publish](/components/connectors/manage-connector-templates.md#manage-published-connector-templates) new versions. |
+| Desktop Modeler                                                                                                                                                                                                                                                                                                                | Web Modeler                                                                                                                                                                                                                                                                                |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Detects versions based on separate files. To support multiple versions, maintain different files with distinct names (e.g., `element-template-v1.json`, `element-template-v2.json`). Otherwise, templates may appear as [missing](/components/modeler/desktop-modeler/element-templates/using-templates.md#missing-templates). | Supports evolving a single template file. Simply update the file and [publish](/components/connectors/manage-connector-templates.md#manage-published-connector-templates) new [versions](/components/modeler/desktop-modeler/element-templates/defining-templates.md#template-versioning). |
 
 :::warning
 If you rely on Desktop Modeler, you must create separate files for each template version. Web Modeler alone does not have this limitation.
@@ -75,4 +75,4 @@ Yes. Camunda recommends maintaining a dedicated version control repository for e
 
 ### How should I manage multiple versions of the same element template?
 
-In Desktop Modeler, each version must be stored in a separate file (for example, `element-template-v1.json` and `element-template-v2.json`). Otherwise, the template will appear as [missing](/components/modeler/desktop-modeler/element-templates/using-templates.md#missing-templates). Web Modeler, however, supports versioning in a single file and allows you to [publish](/components/connectors/manage-connector-templates.md#manage-published-connector-templates) new versions directly.
+In Desktop Modeler, each version must be stored in a separate file (for example, `element-template-v1.json` and `element-template-v2.json`). Otherwise, the template will appear as [missing](/components/modeler/desktop-modeler/element-templates/using-templates.md#missing-templates). Web Modeler, however, supports [versioning](/components/modeler/desktop-modeler/element-templates/defining-templates.md#template-versioning) in a single file and allows you to [publish](/components/connectors/manage-connector-templates.md#manage-published-connector-templates) new versions directly.

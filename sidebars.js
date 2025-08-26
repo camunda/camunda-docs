@@ -322,7 +322,7 @@ module.exports = {
         require("./docs/components/modeler/forms/sidebar-schema"),
         require("./docs/components/modeler/element-templates/sidebar-schema"),
         "components/modeler/data-handling",
-        "components/modeler/modelers-interoperability",
+        "components/modeler/using-web-and-desktop-modeler-together",
         require("./docs/components/modeler/reference/sidebar-schema"),
       ],
     },
