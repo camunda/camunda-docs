@@ -49,6 +49,7 @@ module.exports = {
           "Access control": [
             "components/concepts/access-control/access-control-overview",
             "components/concepts/access-control/authorizations",
+            "components/concepts/access-control/connect-to-identity-provider",
           ],
         },
         "components/concepts/job-workers",
@@ -409,6 +410,7 @@ module.exports = {
             "components/identity/group",
             "components/identity/role",
             "components/identity/authorization",
+            "components/identity/client",
           ],
         },
       ],

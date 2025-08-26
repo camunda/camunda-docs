@@ -50,7 +50,7 @@ Authorization applies only to these orchestration components. It does not apply 
 
 2. **Owners**
 
-   - Types include users, groups, roles, mapping rules and clients.
+   - Types include users, groups, roles, clients and mapping rules.
    - Authorizations can be assigned to any type of owner.
 
 3. **Permissions**

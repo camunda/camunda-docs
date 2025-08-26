@@ -102,40 +102,10 @@ To remove roles from a group:
 
 The role is removed from the group. Users in the group will lose the permissions that were granted through that role.
 
-## Manage mapping rules
-
-:::note
-[Mapping rules](/self-managed/concepts/mapping-rules.md) are only available in Self-Managed deployments with OIDC authentication.
-:::
-
-### Assign mapping rules to a group
-
-To assign a mapping rule to a group:
-
-1. Log in to Identity in your cluster, and click on the **Groups** tab.
-2. Click on the group you want to assign mapping rules to.
-3. Click on the **Mapping rules** tab.
-4. Click on the **Assign mapping rule** button.
-5. Search for the ID of the mapping rule you want to assign to the group, and click on the **Assign mapping rule** button.
-
-The mapping rule is assigned to the group.
-
-### Remove mapping rules from a group
-
-To remove a mapping rule from a group:
-
-1. Log in to Identity in your cluster, and click on the **Groups** tab.
-2. Click on the group you want to remove mapping rules from.
-3. Click on the **Mapping rules** tab.
-4. Click on the **Remove** button next to the mapping rule you want to remove from the group.
-5. Confirm the removal by clicking on the **Remove** button in the confirmation dialog.
-
-The mapping rule is removed from the group.
-
 ## Manage clients
 
 :::note
-This feature is only available in SaaS or in Self-Managed deployments with OIDC authentication.
+In Self-Managed deployment, [client management](client.md) is only available for OIDC authentication.
 :::
 
 ### Assign client to a group
@@ -161,3 +131,35 @@ To remove a client from a group:
 5. Confirm the removal by clicking on the **Remove** button in the confirmation dialog.
 
 The client is removed from the group.
+
+## Manage mapping rules
+
+<span class="badge badge--platform">Camunda 8 Self-Managed only</span>
+
+:::note
+[Mapping rules](/self-managed/concepts/mapping-rules.md) are only available for OIDC authentication.
+:::
+
+### Assign mapping rules to a group
+
+To assign a mapping rule to a group:
+
+1. Log in to Identity in your cluster, and click on the **Groups** tab.
+2. Click on the group you want to assign mapping rules to.
+3. Click on the **Mapping rules** tab.
+4. Click on the **Assign mapping rule** button.
+5. Search for the ID of the mapping rule you want to assign to the group, and click on the **Assign mapping rule** button.
+
+The mapping rule is assigned to the group.
+
+### Remove mapping rules from a group
+
+To remove a mapping rule from a group:
+
+1. Log in to Identity in your cluster, and click on the **Groups** tab.
+2. Click on the group you want to remove mapping rules from.
+3. Click on the **Mapping rules** tab.
+4. Click on the **Remove** button next to the mapping rule you want to remove from the group.
+5. Confirm the removal by clicking on the **Remove** button in the confirmation dialog.
+
+The mapping rule is removed from the group.

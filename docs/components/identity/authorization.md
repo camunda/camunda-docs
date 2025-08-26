@@ -6,7 +6,7 @@ description: "Learn how to manage authorizations to an orchestration cluster."
 
 An authorization grants permissions to an **owner** to perform actions on a specific **resource**.
 
-- The **owner** is the entity that receives permissions, such as a [user](user.md), [group](group.md), [role](role.md), or [mapping rule](/self-managed/components/orchestration-cluster/identity/mapping-rules/managing-mapping-rules.md).
+- The **owner** is the entity that receives permissions, such as a [user](user.md), [group](group.md), [role](role.md), [client](client.md), or [mapping rule](/self-managed/components/orchestration-cluster/identity/mapping-rules/managing-mapping-rules.md).
 - The **resource** is the object that the permissions apply to, like a process definition or a decision instance.
 
 Each authorization specifies which actions (e.g., `READ`, `UPDATE`, `DELETE`) the owner is allowed to perform on the resource.
@@ -20,7 +20,7 @@ To create a new authorization:
 1. Log in to Identity in your cluster, and click on the **Authorizations** tab.
 2. Select a resource type from the list on the left, and click **Create authorization**.
 3. Provide the following information:
-   - **Owner type**: The entity to which you want to assign permissions, such as a User, Group, Role, or Mapping rule.
+   - **Owner type**: The entity to which you want to assign permissions, such as a User, Group, Role, Client, or Mapping rule.
    - **Owner ID**: The unique ID of the owner.
    - **Resource type**: The selected resource type from the list of [available resources](/components/concepts/access-control/authorizations.md#available-resources).
    - **Resource ID**: The ID of the resource. Use `*` to grant permissions for all resources of the selected type.
