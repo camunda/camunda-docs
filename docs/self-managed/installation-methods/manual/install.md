@@ -46,7 +46,7 @@ To install these components, use one of the supported methods:
 
 ## Download artifacts
 
-Download the required Camunda 8 artifacts from the following sources.
+Download the required Camunda 8 artifacts from the following sources. Make sure that all artifacts use the same minor version to ensure compatibility.
 
 Orchestration cluster:
 
