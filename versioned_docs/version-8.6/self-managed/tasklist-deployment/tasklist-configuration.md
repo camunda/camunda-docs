@@ -125,11 +125,29 @@ ELS schema is created, settings may be adjusted directly in the ELS template:
 - Changes to `camunda.tasklist.elasticsearch.numberOfShards` will not be applied to existing indices and index templates.
 - Changes to `camunda.tasklist.elasticsearch.numberOfReplicas` will be applied to existing indices and index templates.
 
-:::warning
-
-Due to a known [bug](https://github.com/camunda/camunda/issues/31238), changes to `camunda.tasklist.elasticsearch.numberOfReplicas` are currently not applied to index templates.
-
+:::note
+From 8.6.25 you can opt-in to applying the configured priority update on restart. See [Dynamic schema settings updates](#dynamic-schema-settings-updates-8625).
 :::
+
+### Dynamic schema settings updates (8.6.25+)
+
+Configure Operate to update certain schema-related settings each time it starts by enabling:
+
+| Name                                               | Description                                         | Default value |
+| -------------------------------------------------- | --------------------------------------------------- | ------------- |
+| camunda.operate.elasticsearch.updateSchemaSettings | Enables dynamic updates for schema-related settings | false         |
+
+For OpenSearch:
+
+| Name                                            | Description                                         | Default value |
+| ----------------------------------------------- | --------------------------------------------------- | ------------- |
+| camunda.operate.opensearch.updateSchemaSettings | Enables dynamic updates for schema-related settings | false         |
+
+Behavior when enabled:
+
+- numberOfReplicas: Updated for existing indices and future indices.
+- numberOfShards: Updated in index templates and indices created after the change.
+- A restart is required after changing any of the schema configuration values.
 
 ### Snippet from application.yml
 
