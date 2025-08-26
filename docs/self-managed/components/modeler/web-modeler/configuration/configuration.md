@@ -32,7 +32,8 @@ The available configuration options depend on the version of the cluster:
 - [Common configuration (all cluster versions)](#common-configuration-all-cluster-versions)
 - [Additional configuration for cluster versions >= 8.8](#additional-configuration-for-cluster-versions--88)
 - [Additional configuration for cluster versions < 8.8](#additional-configuration-for-cluster-versions--88-1)
-  :::
+
+:::
 
 #### Common configuration (all cluster versions)
 
