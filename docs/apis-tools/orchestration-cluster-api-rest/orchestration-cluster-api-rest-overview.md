@@ -4,6 +4,9 @@ title: "Overview"
 description: "Interact with Camunda 8 clusters programmatically. Start processes, complete user tasks, and manage process instances at scale."
 ---
 
+import ApiGrid from './react-components/\_api-card';
+import { apiExplorationCards } from './react-components/\_api-card-data';
+
 The Orchestration Cluster REST API lets you interact programmatically with process orchestration capabilities in Camunda 8. You can use it to start, manage, and query process instances. It also lets you complete user tasks, resolve incidents, and manage variables, at scale and with confidence.
 
 **You can use this API to:**
@@ -40,11 +43,14 @@ This section helps you get up and running in minutes. To begin using the Orchest
   - For local development, use [C8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) or [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md). These expose the API without requiring credentials or tokens by default.
   - For production or advanced development, use [Helm/Kubernetes](/self-managed/installation-methods/helm/install.md) or [Manual installation](/self-managed/installation-methods/manual/install.md).
 - **A client to send API requests**
-  - Quick testing: Use the [Postman Collection](https://www.postman.com/camundateam/camunda-8-postman/collection/apl78x9/camunda-8-api-rest)
+
+  - Quick testing: Use the [Swagger](../orchestration-cluster-api-rest-swagger)
   - Programmatic access: Use the [Java Client](/apis-tools/java-client/getting-started.md) or [Spring SDK](/apis-tools/spring-zeebe-sdk/getting-started.md)
   - Custom client: [Download the OpenAPI spec](https://github.com/camunda/camunda/blob/main/zeebe/gateway-protocol/src/main/proto/rest-api.yaml) to generate your own client
+  - Universal Client: [Postman Collection](https://www.postman.com/camundateam/camunda-8-postman/collection/apl78x9/camunda-8-api-rest)
 
 ### Authentication
+
 
 Authentication for the Orchestration Cluster REST API depends on your environment and how you deploy Camunda 8.
 
