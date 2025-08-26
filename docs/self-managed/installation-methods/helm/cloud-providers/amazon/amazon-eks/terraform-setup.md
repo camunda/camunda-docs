@@ -584,7 +584,7 @@ https://github.com/camunda/camunda-deployment-references/blob/feature/eks-vpn-op
 Then, review `vpn.tf`, which describes the VPC Client Endpoint configuration:
 
 ```hcl reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/eks-vpn-option/aws/openshift/rosa-hcp-single-region/terraform/vpn/vpn.tf
+https://github.com/camunda/camunda-deployment-references/blob/feature/eks-vpn-option/aws/kubernetes/eks-single-region/terraform/vpn/vpn.tf
 ```
 
 This VPN Client Endpoint follows [AWS best practices and constraints](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/what-is-best-practices.html):
