@@ -1537,6 +1537,7 @@ module.exports = {
                 },
               ],
             },
+            "self-managed/components/orchestration-cluster/configuration-mapping",
           ],
         },
         {

@@ -1,0 +1,182 @@
+.config-table-wrapper {
+  margin-top: 1rem;
+  overflow-x: auto;
+}
+
+.config-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.config-table th,
+.config-table td {
+  padding: 0.55rem 0.6rem;
+  border-top: 1px solid var(--ifm-table-border-color, #ddd);
+  vertical-align: top;
+}
+
+.config-table thead th {
+  border-bottom: 2px solid var(--ifm-color-emphasis-300, #ccc);
+  background: var(--ifm-table-head-background, var(--ifm-color-emphasis-100));
+  text-align: left;
+}
+
+.config-table-name a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+
+.config-table-icon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+@media (max-width: 700px) {
+  .config-table th:nth-child(2),
+  .config-table td:nth-child(2) {
+    display: none; /* hide description on very small screens */
+  }
+}
+
+.config-input {
+  padding-top: 10px;
+}
+
+.config-input-box {
+  border-radius: 3px;
+  height: 28px;
+  border: 1px solid #cacaca;
+  min-width: 240px;
+  padding-left: 6px;
+  margin-right: 20px;
+}
+
+.config-no-results {
+  padding-top: 20px;
+  margin-bottom: 10px;
+  color: red;
+}
+
+.config-no-results-list {
+  padding-top: 0px;
+  color: red;
+}
+
+.filter-badges {
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.badge--default {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 4px;
+  background-color: #eee;
+  cursor: pointer;
+  margin-right: 10px;
+  font-size: 85%;
+  font-weight: var(--ifm-font-weight-bold);
+  line-height: 1;
+  color: #616161;
+}
+[data-theme="dark"] .badge--default {
+  color: #999;
+  background-color: #3f3f3f;
+}
+
+.badge--1-to-1 {
+  background-color: var(--ifm-color-success);
+  color: #fff;
+  margin-top: 10px;
+}
+[data-theme="dark"] .badge--1-to-1 {
+  background-color: #005d5d;
+  color: #bae6ff;
+}
+[data-theme="dark"] .badge--unsupported {
+  background-color: #9a4e00;
+  color: #e1d9cd;
+}
+
+.badge--unsupported {
+  background-color: #ff8b00;
+  color: #fff;
+  margin-top: 10px;
+}
+[data-theme="dark"] .badge--double-configuration {
+  background-color: #0ba7b9;
+  color: #e1d9cd;
+}
+
+.badge--double-configuration {
+  background-color: #0ba7b9;
+  color: #fff;
+  margin-top: 10px;
+}
+
+.badge--default:hover {
+  background-color: #ddd;
+}
+[data-theme="dark"] .badge--default:hover {
+  background-color: #555;
+}
+
+.badge--active {
+  background-color: #007bff;
+  color: #fff;
+}
+[data-theme="dark"] .badge--active {
+  background-color: #007bff;
+  color: #fff;
+}
+.badge--active:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.badge--active--1-to-1,
+.badge--active--1-to-1:hover {
+  background-color: #007bff !important;
+  color: #fff !important;
+}
+[data-theme="dark"] .badge--active--1-to-1 {
+  background-color: #007bff;
+  color: #fff;
+}
+.badge--active--unsupported,
+.badge--active--unsupported:hover {
+  background-color: #007bff !important;
+  color: #fff !important;
+}
+[data-theme="dark"] .badge--active--unsupported {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.badge--active--double-configuration,
+.badge--active--double-configuration:hover {
+  background-color: #007bff !important;
+  color: #fff !important;
+}
+[data-theme="dark"] .badge--active--double-configuration {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.config-type .badge:nth-of-type(1) {
+  margin-left: 0;
+  margin-bottom: 5px;
+  margin-top: 0;
+}
+.config-legacy-list {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+.config-legacy-list li {
+  margin: 0;
+  list-style: disc;
+  line-height: 1.8;
+}
