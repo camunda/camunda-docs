@@ -58,5 +58,3 @@ Zeebe applies ILM updates correctly via configuration, but cluster UIs do not. F
 ## OpenSearch
 
 OpenSearch does not support the Elasticsearch ILM policy but instead uses Index State Management (ISM). The same `archiver` settings can be used to enable ISM. Refer to the [AWS documentation](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/ism.html) for OpenSearch-specific configuration guidance.
-
-As of version 8.4, Orchestration Cluster components are compatible with [Amazon OpenSearch](https://aws.amazon.com/de/opensearch-service/) 2.5.x. Using OpenSearch requires setting up a new Camunda installation; migration from previous versions or Elasticsearch environments is not supported.

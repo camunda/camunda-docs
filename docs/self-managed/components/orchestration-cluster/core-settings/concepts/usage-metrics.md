@@ -75,5 +75,3 @@ This endpoint allows reconciliation of users across multiple cluster components 
 - Monitor overall cluster activity by combining process, decision, and task metrics.
 - Track trends over time to understand resource usage and user engagement.
 - Integrate metrics into dashboards or automation scripts for centralized monitoring.
-
-Although metrics are internally provided by different cluster components, they are exposed uniformly via the cluster’s management port.
