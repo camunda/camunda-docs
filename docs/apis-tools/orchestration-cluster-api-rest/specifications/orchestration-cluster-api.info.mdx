@@ -1,6 +1,6 @@
 ---
-id: orchestration-cluster-rest-api
-title: "Orchestration Cluster REST API"
+id: orchestration-cluster-api
+title: "Orchestration Cluster API"
 description: "API for communicating with a Camunda 8 cluster."
 sidebar_label: Introduction
 sidebar_position: 0
@@ -17,7 +17,7 @@ import Export from "@theme/ApiExplorer/Export";
 <Heading
   as={"h1"}
   className={"openapi__heading"}
-  children={"Orchestration Cluster REST API"}
+  children={"Orchestration Cluster API"}
 ></Heading>
 
 API for communicating with a Camunda 8 cluster.
@@ -45,6 +45,22 @@ API for communicating with a Camunda 8 cluster.
             <tr>
               <th>Bearer format:</th>
               <td>JWT</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </TabItem>
+    <TabItem label={"HTTP: Basic Auth"} value={"basicAuth"}>
+      <div>
+        <table>
+          <tbody>
+            <tr>
+              <th>Security Scheme Type:</th>
+              <td>http</td>
+            </tr>
+            <tr>
+              <th>HTTP Authorization Scheme:</th>
+              <td>basic</td>
             </tr>
           </tbody>
         </table>

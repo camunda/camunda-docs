@@ -209,11 +209,11 @@ Orchestration Cluster Identity provides several advantages:
 
 The impact of these changes and what action you need to take depends on your deployment type. For example:
 
-| Area                              | Impact                                                                                                                                                                                                                            |
-| :-------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Authorization                     | The new [authorization](/components/concepts/access-control/authorizations.md) model introduces fine-grained access control for Orchestration Cluster resources, replacing the previous model.                                    |
-| Roles, tenants, and mapping rules | Now managed within Orchestration Cluster Identity, replacing the previous Management Identity setup.                                                                                                                              |
-| User Task authorizations          | [User Task access restrictions](/components/concepts/access-control/user-task-access-restrictions.md) only apply to the Tasklist v1 API. After switching to the v2 API with Tasklist, user task access restrictions do not apply. |
+| Area                              | Impact                                                                                                                                                                                                             |
+| :-------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Authorization                     | The new [authorization](/components/concepts/access-control/authorizations.md) model introduces fine-grained access control for Orchestration Cluster resources, replacing the previous model.                     |
+| Roles, tenants, and mapping rules | Now managed within Orchestration Cluster Identity, replacing the previous Management Identity setup.                                                                                                               |
+| User Task authorizations          | [User Task access restrictions](/components/tasklist/user-task-access-restrictions.md) only apply to the Tasklist v1 API. After switching to the v2 API with Tasklist, user task access restrictions do not apply. |
 
 Each deployment type has a clear upgrade path and migration guidance to help administrators transition from Camunda 8.7 to Camunda 8.8.
 
