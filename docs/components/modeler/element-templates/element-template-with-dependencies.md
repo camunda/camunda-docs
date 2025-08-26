@@ -8,11 +8,10 @@ When creating element templates, you may want to link to a particular resource l
 
 Element templates can depend on:
 
-- Resources:
-  - [Camunda forms](/components/modeler/forms/camunda-forms-reference.md): used in user tasks.
-  - [RPA scripts](/components/rpa/overview.md): Used in service tasks.
-  - [BPMN tasks](/components/modeler/bpmn/bpmn.md): used in call activities.
-  - [DMN decisions](/components/modeler/dmn/dmn.md): used in business rule tasks.
+- [Camunda forms](/components/modeler/forms/camunda-forms-reference.md): used in user tasks.
+- [RPA scripts](/components/rpa/overview.md): used in service tasks.
+- [BPMN process](/components/modeler/bpmn/bpmn.md): used in a call activity.
+- [DMN decisions](/components/modeler/dmn/dmn.md): used in business rule tasks.
 - [Call activities](/components/modeler/bpmn/call-activities/call-activities.md): this may introduce nested dependencies (For example, a called process may depend on other processes and/or dependencies).
 - [Job workers](/components/concepts/job-workers.md): used to provide behavior for a particular service task like a flow-node in a BPMN diagram: A message send event, a send task, a service task, a business rule task, a custom connector runtime.
 - Secrets: used in connector elements to access sensitive values (see [secrets in self-managed](/self-managed/components/connectors/connectors-configuration.md#secrets) and [secrets in SaaS](/components/console/manage-clusters/manage-secrets.md)).
