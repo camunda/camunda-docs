@@ -96,7 +96,7 @@ For a complete walkthrough with code examples, see our [Getting Started Tutorial
 
 ### Explore the API
 
-- Visit the [interactive Orchestration Cluster REST API Explorer](./specifications/orchestration-cluster-rest-api.info.mdx) to:
+- Visit the [interactive Orchestration Cluster REST API Explorer](./specifications/orchestration-cluster-api.info.mdx) to:
   - Browse available endpoints
   - See request and response examples
   - Check code samples
