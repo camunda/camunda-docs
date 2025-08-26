@@ -5,15 +5,13 @@ description: "Let's take a deeper look at job workers to handle jobs."
 keywords: ["backpressure", "back-pressure", "back pressure"]
 ---
 
-# Job Workers
-
 **Job workers are the backbone of process automation in Camunda 8.** They handle automated tasks (service tasks) in your BPMN processes by continuously polling for available jobs and executing your business logic when jobs become available.
 
-This guide covers everything you need to know about implementing and configuring job workers with the Camunda Java Client, from basic concepts to advanced features like streaming, metrics, and multi-tenancy.
+This guide covers everything you need to know about implementing and configuring job workers with the Camunda Java Client, from basic concepts to advanced features such as streaming, metrics, and multi-tenancy.
 
 ## Quick start
 
-Before diving into the details, here's a simple example of creating a job worker:
+Before diving into the details, here is a simple example of creating a job worker:
 
 ```java
 try (final JobWorker workerRegistration = client.newWorker()
@@ -51,7 +49,7 @@ For a complete walkthrough, see the [getting started guide](getting-started.md).
 A job worker is a service that:
 
 - **Polls for jobs** of a specific type from the Camunda cluster
-- **Executes your business logic** when jobs are activated  
+- **Executes your business logic** when jobs are activated
 - **Reports job completion or failure** back to the cluster
 - **Handles retries and error scenarios** automatically
 
