@@ -1442,9 +1442,11 @@ module.exports = {
                     "self-managed/components/orchestration-cluster/core-settings/configuration/logging",
                   ],
                 },
-                // {
-                //   Concepts: [],
-                // },
+                {
+                  Concepts: [
+                    "self-managed/components/orchestration-cluster/core-settings/concepts/elasticsearch-and-opensearch",
+                  ],
+                },
                 // {
                 //   Migration: [],
                 // },
