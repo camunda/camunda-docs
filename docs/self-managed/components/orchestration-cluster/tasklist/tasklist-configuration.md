@@ -107,57 +107,7 @@ camunda.tasklist:
 
 ## Monitoring and health probes
 
-Tasklist includes the [Spring Boot Actuator](https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html#production-ready) inside, which
-provides the number of monitoring possibilities (e.g. health check (http://localhost:9600/actuator/health) and metrics (http://localhost:9600/actuator/prometheus) endpoints).
-
-Tasklist uses the following Actuator configuration by default:
-
-```yaml
-# disable default health indicators:
-# https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html#production-ready-health-indicators
-management.health.defaults.enabled: false
-
-# enable Kubernetes health groups:
-# https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html#production-ready-kubernetes-probes
-management.endpoint.health.probes.enabled: true
-
-# enable health check and metrics endpoints
-management.endpoints.web.exposure.include: health, prometheus, loggers, usage-metrics, backups
-```
-
-With this configuration, the following endpoints are available for use out of the box:
-
-`<server>:9600/actuator/prometheus` Prometheus metrics
-
-`<server>:9600/actuator/health/liveness` Liveness probe
-
-`<server>:9600/actuator/health/readiness` Readiness probe
-
-### Example snippets to use Tasklist probes in Kubernetes
-
-For details to set Kubernetes probes parameters, see [Kubernetes configure probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#configure-probes).
-
-#### Readiness probe as yaml config
-
-```yaml
-readinessProbe:
-  httpGet:
-    path: /actuator/health/readiness
-    port: 9600
-  initialDelaySeconds: 30
-  periodSeconds: 30
-```
-
-#### Liveness probe as yaml config
-
-```yaml
-livenessProbe:
-  httpGet:
-    path: /actuator/health/liveness
-    port: 9600
-  initialDelaySeconds: 30
-  periodSeconds: 30
-```
+See the [core settings documentation](/self-managed/components/orchestration-cluster/core-settings/concepts/monitoring.md).
 
 ## Logging
 
@@ -221,23 +171,4 @@ camunda:
 
 ## Backups
 
-You must configure the following on your chosen database:
-
-- [Elasticsearch snapshot repository](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshot-restore.html)
-- [OpenSearch snapshot repository](https://docs.opensearch.org/docs/latest/tuning-your-cluster/availability-and-recovery/snapshots/snapshot-restore/)
-
-Tasklist is configured with the snapshot repository name to trigger database snapshots. This is important for coherent backups.
-
-:::info
-Learn more about the procedure and the need to trigger it through Camunda components in the [backup guide](/self-managed/operational-guides/backup-restore/backup-and-restore.md).
-:::
-
-Tasklist must be configured with the repository name:
-
-| Name                                   | Description                      | Default value |
-| -------------------------------------- | -------------------------------- | ------------- |
-| camunda.tasklist.backup.repositoryName | ES / OS snapshot repository name | -             |
-
-:::warning breaking change
-Configuring Operate and Tasklist with different repository names will potentially create multiple backups in different repositories. Therefore, use the same `repositoryName` for both components.
-:::
+See the [core settings documentation](/self-managed/components/orchestration-cluster/core-settings/concepts/backups.md).
