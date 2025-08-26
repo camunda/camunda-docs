@@ -71,9 +71,6 @@ module.exports = {
           "Access control": [
             "components/concepts/access-control/access-control-overview",
             "components/concepts/access-control/authorizations",
-            "components/concepts/access-control/connect-to-identity-provider",
-            "components/concepts/access-control/user-groups",
-            "components/concepts/access-control/user-task-access-restrictions",
           ],
         },
       ],
@@ -391,10 +388,12 @@ module.exports = {
           },
           items: [
             "components/tasklist/userguide/using-tasklist",
+            "components/tasklist/api-versions",
             "components/tasklist/userguide/managing-tasks",
             "components/tasklist/userguide/using-filters",
             "components/tasklist/userguide/defining-task-priorities",
             "components/tasklist/userguide/starting-processes",
+            "components/tasklist/user-task-access-restrictions",
             "components/tasklist/userguide/tasklist-localization",
           ],
         },
@@ -640,6 +639,7 @@ module.exports = {
           "Manage your organization": [
             "components/console/manage-organization/organization-settings",
             "components/console/manage-organization/manage-users",
+            "components/console/manage-organization/manage-user-groups",
             "components/console/manage-organization/view-organization-activity",
             "components/console/manage-organization/enable-alpha-features",
             "components/console/manage-organization/usage-history",
