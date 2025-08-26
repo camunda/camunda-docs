@@ -8,6 +8,32 @@ description: "Let's take a closer look at security notices, reporting vulnerabil
 
 Camunda publishes security notices after fixes are available.
 
+### Notice 26
+
+#### Publication date
+
+August 27th, 2025
+
+#### Products affected
+
+- Camunda Optimize
+
+#### Impact
+
+Optimize was affected by [CVE-2025-53864](https://nvd.nist.gov/vuln/detail/CVE-2025-53864) which allows a remote attacker to cause a denial of service via a deeply nested JSON object supplied in a JWT claim set, because of uncontrolled recursion.
+
+#### How to determine if the installation is affected
+
+You are using:
+
+- Optimize 8.7.0 - 8.7.7 or 8.6.0 - 8.6.14
+
+#### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Optimize 8.7.8, 8.6.15
+
 ### Notice 25
 
 #### Publication date
