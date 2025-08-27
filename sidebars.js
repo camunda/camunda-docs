@@ -236,17 +236,9 @@ module.exports = {
             "components/modeler/desktop-modeler/use-connectors",
             "components/modeler/desktop-modeler/variables",
             {
-              type: "category",
-              label: "Element templates",
-              link: {
-                type: "doc",
-                id: "components/modeler/desktop-modeler/element-templates/about-templates",
-              },
-              items: [
+              "Element templates": [
                 "components/modeler/desktop-modeler/element-templates/configuring-templates",
                 "components/modeler/desktop-modeler/element-templates/using-templates",
-                "components/modeler/desktop-modeler/element-templates/defining-templates",
-                "components/modeler/desktop-modeler/element-templates/additional-resources",
               ],
             },
             {
@@ -326,6 +318,7 @@ module.exports = {
         require("./docs/components/modeler/dmn/sidebar-schema"),
         require("./docs/components/modeler/feel/sidebar-schema"),
         require("./docs/components/modeler/forms/sidebar-schema"),
+        require("./docs/components/modeler/element-templates/sidebar-schema"),
         "components/modeler/data-handling",
         require("./docs/components/modeler/reference/sidebar-schema"),
       ],
