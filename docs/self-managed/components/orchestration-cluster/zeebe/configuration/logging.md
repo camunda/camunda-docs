@@ -25,8 +25,8 @@ The log level for the Orchestration Cluster is controlled via the `CAMUNDA_LOG_L
 Additionally, it configures three possible [appenders](https://logging.apache.org/log4j/2.x/manual/appenders.html) (outputs):
 
 - `RollingFile`: A [rolling file appender](https://logging.apache.org/log4j/2.x/manual/appenders/rolling-file.html), which prints out to a file
-  compressed archive, and a new one is started. **This is enabled by default. You can disable it by setting the environment variable
-  `CAMUNDA_LOG_FILE_APPENDER_ENABLED=false`**.
+  compressed archive, and a new one is started. **This is disabled by default. You can enable it by setting the environment variable
+  `CAMUNDA_LOG_FILE_APPENDER_ENABLED=true`**.
 - `Stackdriver`: will output using the [Console Appender](https://logging.apache.org/log4j/2.x/manual/appenders.html#ConsoleAppender), configured to
   print out JSON logs which conform to the [expected Stackdriver format](https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry).
   **This is not enabled by default, and you can select it by setting `ZEEBE_LOG_APPENDER=Stackdriver`.**
@@ -43,6 +43,29 @@ The following environment variables can be used to set the log level for individ
 - `ZEEBE_LOG_LEVEL`: Sets the level for anything under `io.camunda.zeebe` (Zeebe related logs).
 - `ATOMIX_LOG_LEVEL`: Sets the level for anything clustering or raft related.
 - `ES_LOG_LEVEL`: Sets the level for anything under `org.elasticsearch`.
+
+#### RDBMS Exporter - Sensible data
+
+:::warning
+If you enable the following loggers, sensitive data may be exposed in your logs.
+:::
+
+By default, we set all loggers that could log sensitive information (variable values, ...) to INFO level.
+To enable debug logging for these loggers, it is not enough to enable logging via ZEEBE_LOG_LEVEL or config/log4j2.xml.
+
+You have to use the following environment variables.
+
+For exported Records:
+
+```
+logging.level.io.camunda.exporter.rdbms.RdbmsExporter=TRACE
+```
+
+For executed SQLs + Parameters:
+
+```
+logging.level.io.camunda.db.rdbms.sql=DEBUG
+```
 
 ## Change log level dynamically
 
