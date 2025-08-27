@@ -100,7 +100,7 @@ camunda.rpa.zeebe.worker-tags=default,playwright
 
 ## Installation and setup guide
 
-An RPA worker acts as a specialized job worker designed to run outside the main Camunda orchestration cluster.
+An RPA worker acts as a specialized job worker designed to run outside the main Camunda Orchestration Cluster.
 
 ### Prerequisites
 

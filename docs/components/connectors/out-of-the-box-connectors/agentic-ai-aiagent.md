@@ -166,15 +166,22 @@ To use an Azure OpenAI model, you must first deploy it in the Azure AI Foundry p
 
 Select this option to use [Google Vertex AI](https://cloud.google.com/vertex-ai) models.
 
-| Field          | Required | Description                                                                                                                        |
-| -------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| **Project ID** | Yes      | The Google Cloud project ID.                                                                                                       |
-| **Location**   | Yes      | The [region](https://cloud.google.com/vertex-ai/docs/general/locations#feature-availability) where AI inference should take place. |
+| Field              | Required | Description                                                                                                                        |
+| ------------------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| **Project ID**     | Yes      | The Google Cloud project ID.                                                                                                       |
+| **Region**         | Yes      | The [region](https://cloud.google.com/vertex-ai/docs/general/locations#feature-availability) where AI inference should take place. |
+| **Authentication** | Yes      | Select the authentication type to use for connecting to Google Cloud.                                                              |
 
-:::note
-Only [Application Default Credentials (ADC)](https://cloud.google.com/docs/authentication/provide-credentials-adc) are currently supported. As a result, the Google Vertex AI provider is only available in Self-Managed or hybrid environments.
+Two authentication methods are currently supported:
 
-To set up ADC in a local development environment, follow the instructions [here](https://cloud.google.com/docs/authentication/set-up-adc-local-dev-environment).
+- **Service Account Credentials**: Authenticate using a [service account](https://cloud.google.com/iam/docs/service-account-overview) key in JSON format.
+- **Application Default Credentials (ADC)**: Authenticate using the default credentials available in your environment.  
+  This method is only supported in Self-Managed or hybrid environments.  
+  To set up ADC in a local development environment, follow the instructions [here](https://cloud.google.com/docs/authentication/set-up-adc-local-dev-environment).
+
+:::info
+For more information about Google Vertex AI models, see the [Vertex AI documentation](https://cloud.google.com/vertex-ai/generative-ai/docs/models).
+:::
 
 #### OpenAI
 

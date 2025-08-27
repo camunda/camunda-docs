@@ -1,5 +1,5 @@
 ---
-title: "Camunda 8.8 APIs & tools upgrade guide"
+title: "Camunda 8.8 APIs & tools migration guide"
 description: "Plan and execute an update from Camunda 8.7 to 8.8. Includes architectural highlights, prerequisites, and breaking changes relevant for developers."
 ---
 
@@ -15,7 +15,7 @@ This guide focuses on the API and SDK transitions required in an upgrade from Ca
 
 Camunda 8.8 introduces a significant architectural evolution that impacts both infrastructure deployment and application integration:
 
-- A new [orchestration cluster](/components/whats-new-in-88.md#orchestration-cluster) architecture.
+- A new [Orchestration Cluster](/components/whats-new-in-88.md#orchestration-cluster) architecture.
 - Unified APIs for a more consistent developer experience.
 - Updated authentication models.
 - Deprecation of several legacy components.
@@ -70,9 +70,9 @@ The [Camunda Java Client](/apis-tools/java-client/index.md) is now the official 
 - The Camunda Java Client is a drop-in replacement for Zeebe Java Client, however, Zeebe Java Client is still available.
 - Zeebe Java Client is deprecated with 8.8 and will be removed with 8.10. This allows you to plan and transition to the Camunda Java Client without immediate pressure, allowing for a smoother migration process.
 
-<!-- :::info
-For more information, see the update guide.
-::: -->
+:::info
+For more information on upgrading and migrating, see [migrate to Camunda Java Client](migrate-to-camunda-java-client.md).
+:::
 
 ### Camunda Spring SDK
 
@@ -101,9 +101,10 @@ For more information, see the update guide.
 | 8.9     | Continued support for both ZPT and CPT.                                                |
 | 8.10    | ZPT will be removed completely. You must have migrated your tests to CPT by this time. |
 
-<!-- :::info
-For more information, see the update guide.
-::: -->
+:::info
+For more information on upgrading and migrating,
+see [migrate to Camunda Process Test](migrate-to-camunda-process-test.md).
+:::
 
 ### Camunda user tasks
 
@@ -127,6 +128,6 @@ Check the Orchestration Cluster API on User Tasks for more information on how to
 
 Ready to upgrade and migrate? Complete the following steps:
 
-1. **Coordinate your platform and development teams**: Ensure your orchestration cluster is upgraded to 8.8 before upgrading your application clients.
+1. **Coordinate your platform and development teams**: Ensure your Orchestration Cluster is upgraded to 8.8 before upgrading your application clients.
 
 2. **Review migration guides**: Coming soon: Links to detailed guides on each component migration.

@@ -2,7 +2,7 @@
 id: c8run
 title: "Developer quickstart – Camunda 8 Run"
 sidebar_label: "Camunda 8 Run"
-description: "This quickstart guides application developers through deploying Camunda 8 Self-Managed to a local Orchestration cluster using Camunda 8 Run."
+description: "This quickstart guides application developers through deploying Camunda 8 Self-Managed to a local orchestration cluster using Camunda 8 Run."
 ---
 
 import Tabs from "@theme/Tabs";
@@ -17,7 +17,7 @@ Camunda 8 Run allows you to install and start a simplified, single-application C
 
 Camunda 8 Run includes the following:
 
-- Orchestration cluster
+- Orchestration Cluster
 - Connectors
 - Elasticsearch
 
@@ -95,7 +95,7 @@ These web interfaces are available at:
 
 The following components do not have a web interface, but their endpoints are useful for additional configuration:
 
-- **Orchestration Cluster API:** http://localhost:8080/v2/
+- **Orchestration Cluster REST API:** http://localhost:8080/v2/
 - **Inbound Connectors API:** http://localhost:8085/
 - **Zeebe API (gRPC):** http://localhost:26500/
 - **Metrics (Prometheus):** http://localhost:9600/actuator/prometheus
@@ -147,6 +147,8 @@ To enforce API authentication and work with authorizations, you must enable thes
 camunda.security:
   authentication.unprotected-api: false
   authorizations.enabled: true
+  initialization.default-roles.admin.users:
+    - "username"
 ```
 
 Place the above `application.yaml` into your root `/c8run` folder, provide it to Camunda 8 Run at startup using the `--config` [flag](#configuration-options):

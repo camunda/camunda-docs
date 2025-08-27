@@ -19,6 +19,165 @@ These release notes identify the new features included in 8.8, including [alpha 
 | ---------------------- | ---------------------------- | ------------ | ------------ | ------------ |
 | 14 October 2025        | 13 April 2027                | -            | -            | -            |
 
+:::info 8.8 resources
+
+- See [release announcements](/reference/announcements-release-notes/880/880-announcements.md) to learn more about supported environment changes and breaking changes or deprecations.
+- See [What's new in Camunda 8.8](/components/whats-new-in-88.md) for important changes to consider when planning your upgrade from Camunda 8.7.
+- Refer to the [quality board](https://github.com/orgs/camunda/projects/187/views/15) for an overview of known bugs by component and severity.
+
+:::
+
+## 8.8.0-alpha7
+
+| Release date   | Changelog(s)                                                                                                                                                                               | Blog                                                                                |
+| :------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------- |
+| 12 August 2025 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.8.0-alpha7)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.8.0-alpha7)</li></ul> | [Release blog](https://camunda.com/blog/2025/08/camunda-alpha-release-august-2025/) |
+
+### Camunda 8 API <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects APIs">API</span>
+
+Development continues on the single unified Camunda 8 REST API that consolidates multiple fragmented APIs into a single, coherent interface, simplifying development and improving clarity across Camunda components.
+
+<!-- https://github.com/camunda/product-hub/issues/2243 -->
+
+### Camunda 8 Run supports 8.8 architecture <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Developer">Developer</span>
+
+Camunda 8 Run now includes Identity, allowing all core applications to run locally in configurations similar to production. This simplifies local development by enabling multiple user authentications and credentials.
+
+<!-- https://github.com/camunda/product-hub/issues/2641 -->
+
+### Connectors <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span> {#connectorsalpha7}
+
+#### AI Agent connector
+
+- **Hybrid mode/customization**: The AI Agent connector can now be [customized](../../../components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization.md) in hybrid mode. This includes an API to define custom memory storage backends apart from the provided ones.
+- **Added model provider support**: Added support for Azure OpenAI and Google Vertex AI models.
+
+To learn more, see [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
+
+<!-- https://github.com/camunda/camunda-docs/pull/6173 -->
+<!-- https://github.com/camunda/camunda-docs/pull/6221 -->
+
+#### Azure Blob Storage connector
+
+Use the new Azure Blob Storage connector to store and retrieve documents within Camunda workflows using Azure Blob Storage. This enables seamless document management directly within processes, improves efficiency, and reduces the need for custom integrations.
+
+To learn more, see [Azure Blob Storage connector](/components/connectors/out-of-the-box-connectors/azure-blob-storage.md).
+
+<!-- https://github.com/camunda/product-hub/issues/2713 -->
+
+#### CSV connector
+
+Use the new CSV connector for SaaS to read, filter, transform, and write CSV data within processes. This reduces technical debt, accelerates development, and broadens integration capabilities with native support for this universal data format.
+
+To learn more, see [CSV connector](/components/connectors/out-of-the-box-connectors/csv.md).
+
+<!-- https://github.com/camunda/product-hub/issues/2851 -->
+
+#### Google Cloud storage connector
+
+Use the new Google Cloud storage connector for easy document storage and retrieval directly within Camunda workflows, streamlining document management without custom development.
+
+To learn more, see [Google Cloud storage connector](/components/connectors/out-of-the-box-connectors/google-cloud-storage.md).
+
+<!-- https://github.com/camunda/product-hub/issues/2712 -->
+
+#### MCP Client connector (early access) <span class="badge badge--medium" title="This feature is in early access">early access</span>
+
+Use the new MCP Client connector to allow Camunda processes and AI agents to auto-discover and invoke external tools, eliminating hardwired connectors and enabling dynamic, metadata-driven tool integration.
+
+To learn more, see [MCP client](../../../components/early-access/alpha/mcp-client/mcp-client.md).
+
+:::note
+The MCP Client connector is released as an [early access alpha feature](/components/early-access/alpha/alpha-features.md) to allow you to test and participate in development by sharing feedback before general availability, and is subject to alpha feature limitations.
+:::
+
+<!-- https://github.com/camunda/product-hub/issues/2900 -->
+
+#### Vector database connector
+
+Improvements are made to the Vector database connector as follows:
+
+- Updated the OpenSearch vector store to support non-AWS managed instances.
+- Added support for OpenAI embedding models.
+
+To learn more, see [vector database connector](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md).
+
+<!-- https://github.com/camunda/camunda-docs/pull/6047 -->
+
+#### Fetch latest process definitions
+
+The connectors runtime is optimized by fetching only the latest process definition versions from the Orchestration Cluster. This reduces CPU consumption and improves deployment performance, particularly in environments with frequent CI/CD-generated process versions.
+
+<!-- https://github.com/camunda/product-hub/issues/2572 -->
+
+#### Unlock element template fields
+
+[Element template management](/components/connectors/manage-connector-templates.md) is now more flexible for developers and DevOps teams.
+
+- You can assign custom semantic IDs and use an intuitive versioning scheme, ensuring templates are portable and retain stable references across different environments.
+- Template names and file names can be managed independently, and you can quickly import templates using copy and paste, git sync, or CI/CD pipeline.
+- Safeguards now notify you of ID or version conflicts to prevent accidental overwrites when publishing templates.
+
+<!-- https://github.com/camunda/product-hub/issues/2860 -->
+
+### Run process segment <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects APIs">API</span>
+
+This feature allows developers to manually execute and test individual tasks or segments (connectors, RPA bots, IDP extractions) without running full processes, improving debugging and development efficiency.
+
+To learn more, see [run process segment](/components/concepts/process-instance-creation.md#run-process-segment)
+
+<!-- https://github.com/camunda/product-hub/issues/2453 -->
+
+### Intelligent document processing (IDP) form extraction <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects IDP">IDP</span>
+
+You can use form-based structured document extraction to capture data from structured documents.
+
+- For example, you can use this extraction method for documents with a consistent layout, such as invoices, tax forms (for example, W-2s, VAT declarations), and loan or insurance applications.
+- Projects can be shared organization-wide, enhancing accessibility to extraction capabilities.
+
+To learn more, see [extract structured data](/components/modeler/web-modeler/idp/idp-structured-extraction.md).
+
+<!-- https://github.com/camunda/product-hub/issues/2707 -->
+
+### Migration to Orchestration Cluster Identity support <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Security">Security</span>
+
+Allows smooth migration from Camunda 8.7 to 8.8 by transferring tenants, roles, and authorizations to the new Orchestration Cluster Identity, minimizing manual administration effort during upgrade.
+
+<!-- https://github.com/camunda/product-hub/issues/2449 -->
+
+### RPA multi-file script support <span class="badge badge--long" title="This feature affects RPA">RPA</span>
+
+Robotic process automation (RPA) now supports multi-file script support, allowing you to organize scripts modularly, reuse common automation components, and integrate existing Robot Framework scripts. The execution engine fully supports multi-file scripts and linked resources, improving scalability, maintainability, and flexibility for enterprise automation projects.
+
+<!-- https://github.com/camunda/product-hub/issues/2710 -->
+
+### User task listener metadata and filtering <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span>
+
+With this release, user task listener jobs are improved as follows:
+
+- Task metadata is now directly embedded in the task listener jobs' properties instead of being exposed as custom headers. This includes attributes such as `assignee`, `dueDate` or `userTaskKey`.
+- User tasks can now be filtered using partial user task states to understand the current lifecycle state of the user task fully.
+
+These improvements simplify job worker development, reduce errors, and enable better observability of the user task lifecycle.
+
+<!-- https://github.com/camunda/product-hub/issues/2993 -->
+
+### Unified configuration for the Orchestration Cluster <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+
+Simplifies configuration by consolidating Operate, Tasklist, and Identity profiles into a unified Camunda 8 Orchestration Cluster application, reducing duplication and complexity for easier deployment and management.
+
+<!-- https://github.com/camunda/product-hub/issues/2486 -->
+
+### Zeebe-managed resilient batch operations <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Zeebe">Zeebe</span>
+
+All batch operations, such as canceling or resolving incidents in bulk, are now handled by Zeebe instead of Operate.
+
+- This change ensures region failovers in the multi-region setup no longer risk losing critical batch commands.
+- Users will initiate and manage batch operations through the Orchestration Cluster REST API and the Operate UI, but the underlying processing occurs within Zeebe.
+- By moving batch operations to the core engine, multi-region deployments gain reliability and resilience.
+
+<!-- https://github.com/camunda/product-hub/issues/2420 -->
+
 ## 8.8.0-alpha6
 
 | Release date | Changelog(s)                                                                                                                                                                               | Blog                                                                              |
@@ -36,16 +195,16 @@ Camunda 8 now supports integration with [Atlassian Bitbucket Cloud](https://bitb
 
 To learn more, see [Git sync](/components/modeler/web-modeler/git-sync.md?platform=bitbucket).
 
-### Camunda 8 REST API renamed to Orchestration Cluster API <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects APIs">API</span>
+### Camunda 8 REST API renamed to Orchestration Cluster REST API <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects APIs">API</span>
 
 <!-- https://github.com/camunda/product-hub/issues/2793 -->
 
-The Camunda 8 REST API is now called the **Orchestration Cluster API**.
+The Camunda 8 REST API is now called the **Orchestration Cluster REST API**.
 
-- This name better reflects its role as a unified REST API for interacting with entities in a [Camunda 8 orchestration cluster](/reference/glossary.md#orchestration-cluster), such as processes, tasks, and variables.
+- This name better reflects its role as a unified REST API for interacting with entities in a [Camunda 8 Orchestration Cluster](/reference/glossary.md#orchestration-cluster), such as processes, tasks, and variables.
 - The functionality and structure of the API remain unchanged. The name change improves clarity and onboarding across Camunda documentation and resources.
 
-To learn more, see [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
+To learn more, see [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
 
 ### Connectors <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span> {#connectorsalpha6}
 
@@ -113,7 +272,7 @@ A new Singapore (ap-southeast-1) region is now available for SaaS clusters on Am
 
 To learn more about supported SaaS regions, see [regions](/reference/regions.md).
 
-### Tasklist uses the Orchestration Cluster API <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span>
+### Tasklist uses the Orchestration Cluster REST API <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span>
 
 <!-- https://github.com/camunda/product-hub/issues/2516 -->
 
@@ -248,26 +407,26 @@ Camunda’s new Identity service enhances authentication and authorization for S
 
 #### Identity management for SaaS clusters <span class="badge badge--long" title="This feature affects SaaS">SaaS</span>
 
-[Orchestration cluster Identity](/components/identity/identity-introduction.md) is now available for SaaS clusters. Starting with this alpha version, you can manage groups, roles, and authorizations at the cluster level.
+[Orchestration Cluster Identity](/components/identity/identity-introduction.md) is now available for SaaS clusters. Starting with this alpha version, you can manage groups, roles, and authorizations at the cluster level.
 
 The following known limitations apply for this alpha version release:
 
 | Known limitation                      | Description                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | :------------------------------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Authorizations                        | <p><ul><li><p>Before enabling authorization checks in the cluster settings, users must assign themselves to the admin role in Identity for the Orchestration cluster.</p><p>**Note:** As authorizations are disabled by default, no changes are required for initial access.</p></li><li><p>Authorizations cannot be assigned to users via the UI, only to groups.</p></li><li><p>Authorizations are not correctly loaded in the UI.</p></li></ul></p> |
-| Navigation, Notifications, and Logout | <p><ul><li><p>Links to the other Camunda components in the Orchestration cluster web applications (Operate, Tasklist, Identity) do not currently work.</p></li><li><p>SaaS notifications are not displayed in Orchestration cluster components.</p></li><li><p>Log out from Orchestration cluster web applications is not fully functional.</p></li></ul></p>                                                                                          |
+| Authorizations                        | <p><ul><li><p>Before enabling authorization checks in the cluster settings, users must assign themselves to the admin role in Identity for the Orchestration Cluster.</p><p>**Note:** As authorizations are disabled by default, no changes are required for initial access.</p></li><li><p>Authorizations cannot be assigned to users via the UI, only to groups.</p></li><li><p>Authorizations are not correctly loaded in the UI.</p></li></ul></p> |
+| Navigation, Notifications, and Logout | <p><ul><li><p>Links to the other Camunda components in the Orchestration Cluster web applications (Operate, Tasklist, Identity) do not currently work.</p></li><li><p>SaaS notifications are not displayed in Orchestration Cluster components.</p></li><li><p>Log out from Orchestration Cluster web applications is not fully functional.</p></li></ul></p>                                                                                          |
 | Documentation                         | Documentation is incomplete.                                                                                                                                                                                                                                                                                                                                                                                                                           |
 
 #### Identity management for Helm Chart setups <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-[Orchestration cluster Identity](/self-managed/components/orchestration-cluster/identity/overview.md) is now available for OIDC setups in [Helm chart deployments](/self-managed/installation-methods/helm/install.md). Starting with this alpha version, you can configure the Orchestration cluster components to use the identity provider (IdP) of your choice and enable single sign-on (SSO).
+[Orchestration Cluster Identity](/self-managed/components/orchestration-cluster/identity/overview.md) is now available for OIDC setups in [Helm chart deployments](/self-managed/installation-methods/helm/install.md). Starting with this alpha version, you can configure the Orchestration Cluster components to use the identity provider (IdP) of your choice and enable single sign-on (SSO).
 
 The following known limitations apply for this alpha version release:
 
 | Known limitation | Description                                                                                                                                                              |
 | :--------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Authorizations   | <p><ul><li><p>Authorizations cannot be assigned to users via the UI, only to groups.</p></li><li><p>Authorizations are not correctly loaded in the UI.</p></li></ul></p> |
-| Logout           | Log out from Orchestration cluster web applications is not fully functional.                                                                                             |
+| Logout           | Log out from Orchestration Cluster web applications is not fully functional.                                                                                             |
 | Documentation    | Documentation is incomplete.                                                                                                                                             |
 
 <!-- https://github.com/camunda/product-hub/issues/2222 -->
@@ -286,9 +445,9 @@ This feature introduces an offline installer package for the Camunda [RPA](/comp
 
 <!-- https://github.com/camunda/product-hub/issues/2786 -->
 
-### Tasklist frontend application migration to use Orchestration cluster REST API <span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span>
+### Tasklist frontend application migration to use Orchestration Cluster REST API <span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span>
 
-The Tasklist frontend application is transitioning from the soon-to-be-deprecated Tasklist V1 API to the unified Orchestration cluster REST API.
+The Tasklist frontend application is transitioning from the soon-to-be-deprecated Tasklist V1 API to the unified Orchestration Cluster REST API.
 
 - This ensures Tasklist remains fully compatible with Camunda 8’s new RDBMS support while continuing to work seamlessly with Elasticsearch and OpenSearch.
 - You can expect consistent functionality across different data layers, improved performance, and access to new platform features - all without losing existing capabilities or disrupting task management workflows.
@@ -430,11 +589,12 @@ To learn more about this connector, see [HubSpot connector](/components/connecto
 
 ### Camunda Spring Boot SDK for the C8 REST API
 
-A Spring Boot SDK is provided for the Orchestration cluster REST API to unify process management, user tasks, and identity features under a single dedicated starter. This simplifies the interaction between a Spring Boot application and Camunda 8, allowing you to:
+A Spring Boot SDK is provided for the Orchestration Cluster REST API to unify process management, user tasks, and identity features under a single dedicated starter. This simplifies the interaction between a Spring Boot application and Camunda 8, allowing you to:
 
 - Easily integrate process entity management and queries within your workflows.
 - Seamlessly configure endpoints and authentication via Spring Boot auto-configuration, minimizing boilerplate code.
 - Rely on an official, standardized approach to guarantee consistency and reduce maintenance costs when upgrading.
+- Based on Spring Boot 3.5 ([version compatibility matrix](/apis-tools/spring-zeebe-sdk/getting-started.md#version-compatibility)).
 
 To learn more about this feature, see the [Camunda Spring Boot SDK](/apis-tools/spring-zeebe-sdk/getting-started.md).
 
@@ -454,7 +614,7 @@ The [Identity service](/self-managed/components/management-identity/what-is-iden
 
 #### Cluster-level identity management
 
-Identity settings will be configured at the orchestration cluster level, allowing each cluster to have unique OIDC configurations. This cluster-specific setup empowers organizations to assign different identity providers (IdPs) across clusters, offering improved control over permissions and user group mappings, resulting in a more streamlined and efficient configuration experience.
+Identity settings will be configured at the Orchestration Cluster level, allowing each cluster to have unique OIDC configurations. This cluster-specific setup empowers organizations to assign different identity providers (IdPs) across clusters, offering improved control over permissions and user group mappings, resulting in a more streamlined and efficient configuration experience.
 
 For SaaS customers, identity management in Camunda 8.8 remains consistent with Camunda 8.7, allowing the attachment of a single IdP per organization. However, cluster-level identity capabilities are provided for SaaS as well as Self-Managed. This means that user groups, roles, and access permissions can now be managed at the cluster level, giving SaaS customers the same granular access control as in Self-Managed environments.
 
@@ -500,9 +660,9 @@ To learn more about this feature, see [user task listeners](/components/concepts
 
 <!-- https://github.com/camunda/product-hub/issues/2126 -->
 
-### Orchestration cluster REST API Query API <span class="badge badge--medium" title="This feature affects APIs">API</span>
+### Orchestration Cluster REST API Query API <span class="badge badge--medium" title="This feature affects APIs">API</span>
 
-You can now use a single Query API in the Orchestration cluster REST API to find process and decision data instead of using multiple component APIs.
+You can now use a single Query API in the Orchestration Cluster REST API to find process and decision data instead of using multiple component APIs.
 
 For example, send a request to the [Search decision definitions](/apis-tools/orchestration-cluster-api-rest/specifications/search-decision-definitions.api.mdx) endpoint to search for decision definitions.
 
@@ -518,7 +678,7 @@ New Query API endpoints are added as follows:
 - User tasks
 - Variables
 
-To learn more about these endpoints, see the [Orchestration cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md#query-api) documentation.
+To learn more about these endpoints, see the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md#query-api) documentation.
 
 ### Amazon OpenSearch Optimize support <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span>
 
@@ -554,6 +714,6 @@ Camunda backups have been improved and made easier to use. The web application b
 
 ### Connector Runtime <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span>
 
-#### Spring SDK and Orchestration cluster REST API Migration
+#### Spring SDK and Orchestration Cluster REST API Migration
 
-The Connectors experience is enhanced with the migration from the Spring Zeebe to the Orchestration cluster REST API, and the removal of dependency on the Operate client.
+The Connectors experience is enhanced with the migration from the Spring Zeebe to the Orchestration Cluster REST API, and the removal of dependency on the Operate client.
