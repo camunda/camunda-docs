@@ -82,8 +82,8 @@ If you want to further customize or publish your template:
 
 1. Click **Edit template** from the notification to open the template editor.
 2. The template editor allows you to:
-   - Modify template properties and [bindings](/components/modeler/desktop-modeler/element-templates/defining-templates.md#bindings).
-   - Set up validation and [constraints](/components/modeler/desktop-modeler/element-templates/defining-templates.md#constraints) for user input.
+   - Modify template properties and [bindings](/components/modeler/element-templates/defining-templates.md#bindings).
+   - Set up validation and [constraints](/components/modeler/element-templates/defining-templates.md#constraints) for user input.
    - Configure template groups and categories.
 
    <img src={EditTemplateImg4} alt="Green notification banner displaying 'Element template saved' with an 'Edit template' button, shown over the Web Modeler interface" style={{marginTop: '0', width: '600px'}} />
@@ -126,7 +126,7 @@ When you save a task as a template, Web Modeler automatically converts the task'
 
 Only properties supported by element templates are included. Unsupported properties remain visible in the properties panel after you apply the template.
 
-For a list of supported properties, see the [element templates reference](/components/modeler/desktop-modeler/element-templates/defining-templates.md#defining-template-properties).
+For a list of supported properties, see the [element templates reference](/components/modeler/element-templates/defining-templates.md#defining-template-properties).
 
 ## When template creation is unavailable
 
@@ -145,13 +145,13 @@ When creating templates from tasks:
 
 - **Create focused templates**: Each template should serve a clear purpose.
 - **Hide details**: Expose only the necessary properties.
-- **Validate input**: Use [constraints](/components/modeler/desktop-modeler/element-templates/defining-templates.md#constraints) to enforce valid input and provide meaningful errors.
+- **Validate input**: Use [constraints](/components/modeler/element-templates/defining-templates.md#constraints) to enforce valid input and provide meaningful errors.
 - **Manage dependencies**: Ensure referenced decisions or variables exist in the runtime environment. Use `versionTag` bindings for dependencies to avoid version conflicts.
 - **Use meaningful parameter names**: Give configurable fields descriptive names.
 - **Test your templates**: Apply them to a task to confirm they work as expected.
 
 ## Related topics
 
-- [Element templates reference](/components/modeler/desktop-modeler/element-templates/about-templates.md)
+- [Element templates reference](/components/modeler/element-templates/about-templates.md)
 - [Custom connectors](/components/connectors/custom-built-connectors/create-connector-from-rest.md)
 - [Task types](/components/modeler/bpmn/tasks.md)
