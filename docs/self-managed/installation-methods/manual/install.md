@@ -725,7 +725,7 @@ curl localhost:9090/actuator/health
   </summary>
 </details>
 
-## Next Steps
+## Next steps
 
 After setting up your cluster, many users typically do the following:
 
