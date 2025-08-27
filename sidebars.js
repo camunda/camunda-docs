@@ -1297,6 +1297,7 @@ module.exports = {
           label: "Manual",
           items: [
             "self-managed/installation-methods/manual/install",
+            "self-managed/installation-methods/manual/upgrade",
             {
               type: "category",
               label: "Cloud providers",
