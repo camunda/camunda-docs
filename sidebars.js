@@ -1399,35 +1399,6 @@ module.exports = {
             {
               Keycloak: [
                 "self-managed/components/components-upgrade/keycloak/keycloak-update",
-                ],
-            },
-           ],
-        },
-          Modeler: [
-            {
-              "Web Modeler": [
-                "self-managed/components/modeler/web-modeler/overview",
-                {
-                  Configuration: [
-                    "self-managed/components/modeler/web-modeler/configuration/configuration",
-                    "self-managed/components/modeler/web-modeler/configuration/database",
-                    "self-managed/components/modeler/web-modeler/configuration/identity",
-                    "self-managed/components/modeler/web-modeler/configuration/logging",
-                    "self-managed/components/modeler/web-modeler/configuration/ssl",
-                  ],
-                  Troubleshooting: [
-                    "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-database-connection",
-                    "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection",
-                    "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-missing-data",
-                    "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-proxy-configuration",
-                    "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-other-problems",
-                  ],
-                },
-              ],
-            },
-            {
-              "Desktop Modeler": [
-                "self-managed/components/modeler/desktop-modeler/deploy-to-self-managed",
               ],
             },
           ],
@@ -1728,18 +1699,22 @@ module.exports = {
                 "self-managed/components/optimize/migration-update/camunda-8/3.9-preview-1-to-3.9",
                 "self-managed/components/optimize/migration-update/camunda-8/3.8-to-3.9-preview-1",
                 "self-managed/components/optimize/migration-update/camunda-8/3.7-to-3.8",
-      ],
-    },
-    {
-      type: "category",
-      label: "Upgrade to Camunda 8.8",
-      link: {
-        type: "doc",
-        id: "self-managed/update/administrators/admin-upgrade-overview",
-      },
-      items: [
-        "self-managed/update/administrators/prepare-for-admin-upgrade",
-        "self-managed/update/administrators/run-admin-upgrade",
+              ],
+            },
+            {
+              type: "category",
+              label: "Upgrade to Camunda 8.8",
+              link: {
+                type: "doc",
+                id: "self-managed/update/administrators/admin-upgrade-overview",
+              },
+              items: [
+                "self-managed/update/administrators/prepare-for-admin-upgrade",
+                "self-managed/update/administrators/run-admin-upgrade",
+              ],
+            },
+          ],
+        },
       ],
     },
   ],
