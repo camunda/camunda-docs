@@ -323,7 +323,7 @@ The module will be locally sourced, meaning within your cloned repository you ca
 
    ⚠️ Since private subnets are not reachable from the internet, you'll need to establish a connection between your network and the cluster. This can be done using a [bastion host](https://docs.aws.amazon.com/mwaa/latest/userguide/tutorials-private-network-bastion.html) or a Client VPN.
 
-   The [next section](#vpn-module-setup) will guide you through setting up an [AWS VPN Endpoint](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/cvpn-getting-started.html), which allows secure access to the private cluster.
+   The [VPN module setup section](#vpn-module-setup) will guide you through setting up an [AWS VPN Endpoint](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/cvpn-getting-started.html), which allows secure access to the private cluster.
 
    :::
 
