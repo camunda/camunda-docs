@@ -7,7 +7,7 @@ description: "Learn how to provision element templates at runtime and make them 
 To effectively manage large libraries of reusable building blocks ([element templates](/components/concepts/element-templates.md)), you can create a pipeline that:
 
 - Provisions the [dependencies of element templates](/components/modeler/element-templates/element-template-with-dependencies.md) to required clusters.
-- Makes templates available at design time to multiple Web Modeler [shared projects](/guides/use-shared-project-for-organization-wide-collaboration.md) within an organization or using .
+- Makes templates available at design time to multiple Web Modeler [shared projects](/components/modeler/web-modeler/use-shared-project-for-organization-wide-collaboration.md) within an organization.
 
 ![Pipeline goal](./img/pipeline-goal.png)
 
@@ -102,10 +102,10 @@ Pagination is enforced for all `search` endpoints. Ensure you retrieve all relev
 To set up your local environment:
 
 - Access the VCS repository containing the templates.
-- Choose how to [configure them](/components/modeler/desktop-modeler/element-templates/configuring-templates.md) depending on your needs. If your templates are reused across multiple projects, configuring them globally will make it easier to maintain. For project specific templates, consider making them available only for the that project to avoid exposing templates to projects that should not be using them.
+- Choose how to [configure them](/components/modeler/desktop-modeler/element-templates/configuring-templates.md) depending on your needs. If your templates are reused across multiple projects, configuring them globally will make it easier to maintain. For project-specific templates, consider making them available only for that project to avoid exposing templates to projects that should not be using them.
 
 :::note
-If you are the templates creator/maintainer, include a `README` file in your **VCS repository** that contemplates the different aspects required to use your templates. For example, which secrets need to be configured and which BPMN process or forms need to be deployed in advance.
+If you are the template creator/maintainer, include a `README` file in your **repository** that lists the requirements for using your templates -- for example, which dependencies need to be provisioned in advance.
 :::
 
 ## Next steps
