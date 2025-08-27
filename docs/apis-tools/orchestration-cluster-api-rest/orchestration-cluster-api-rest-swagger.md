@@ -68,6 +68,7 @@ Click the **Authorize** button in Swagger UI to manually configure authenticatio
 3. Click **Authorize** to apply
 
 **To obtain a Bearer token:**
+
 - **SaaS**: Follow the [OIDC Access Token Authentication guide](./orchestration-cluster-api-rest-authentication.md#oidc-access-token-authentication-using-client-credentials) for SaaS
 - **Self-Managed**: Follow the [OIDC Access Token Authentication guide](./orchestration-cluster-api-rest-authentication.md#oidc-access-token-authentication-using-client-credentials) for Self-Managed
 
@@ -122,16 +123,19 @@ Control Swagger UI access through the Camunda Console:
 Configure Swagger UI availability using environment variables:
 
 **Enable Swagger UI (default):**
+
 ```bash
 CAMUNDA_REST_SWAGGER_ENABLED=true
 ```
 
 **Disable Swagger UI:**
+
 ```bash
 CAMUNDA_REST_SWAGGER_ENABLED=false
 ```
 
 **Alternative property format:**
+
 ```yaml
 camunda:
   rest:
