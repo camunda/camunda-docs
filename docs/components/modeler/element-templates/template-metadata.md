@@ -42,7 +42,7 @@ Versioning is an important cornerstone of template evolution. Review the [upstre
 The template `id` and `version` together form a unique identifier for a template. Two templates can have the same `id` if their `version` is different.
 If `id` and `version` are the same for two templates, the tooling considers them to be the same template.
 
-## Discoverability: Name, Description, Keywords, Icon, Documentation Reference
+## Discoverability: `name`, `description`, `keywords`, `icon`, Documentation Reference, and Category
 
 These keys define the user-facing metadata of the template. They help the template users to discover and understand the purpose of the template.
 They are shown when selecting a template and when the template has been applied to an element.
@@ -51,6 +51,8 @@ They are shown when selecting a template and when the template has been applied 
 - `description` key is optional and provides additional information about the template.
 - `keywords` key is an optional list of keywords that can help users find this template. Keywords are used for search and filtering but are not displayed in the UI.
 - `icon` key is an optional icon configuration for the template. The icon source, must be a valid HTTP(s) or data URL.
+- `documentationRef` key is an optional URL pointing to a template documentation. It is shown in the properties panel (after applying an element template).
+- `category` key is an optional category configuration for the template. The category is shown in the element template selection modal. A category must have an `id` and a `name`.
 
 ```json
 {
@@ -60,11 +62,20 @@ They are shown when selecting a template and when the template has been applied 
   "keywords": [
     "search alias",
     "create action"
-  ]
+  ],
+  "icon": {
+    "contents": "data:image/png;base64,iVBORw0KGgoAAAANSUhEU...Jggg=="
+  },
+  "documentationRef": "https://example.com/docs/template-1",
+  "category": {
+    "id": "custom-templates",
+    "name": "Custom Templates"
+  },
+  ...
 }
 ```
 
-## Engine compatibility: engines
+## Engine compatibility: `engines`
 
 Define [template compatibility](https://github.com/bpmn-io/element-templates/blob/main/docs/LIFE_CYCLE.md#compatibility) with execution platforms (Camunda Orchestration Cluster versions) and related components (such as Web Modeler) using the `engines` property.
 
@@ -111,7 +122,7 @@ If no `engines` are specified, a template is considered compatible with any exec
 Review the [upstream documentation](https://github.com/bpmn-io/element-templates/blob/main/docs/LIFE_CYCLE.md#overview) to learn more about template evolution and the life cycle.
 :::
 
-## Supported BPMN types: appliesTo and elementType
+## Supported BPMN types: `appliesTo` and `elementType`
 
 Currently, element templates may be used on the following BPMN elements:
 
@@ -136,3 +147,43 @@ Such constraints are checked based on the element template schema and by the mod
   }
 }
 ```
+
+## Grouping properties: `groups`
+
+You can define `groups` to organize custom fields into:
+
+```json
+{
+   ...,
+  "groups": [
+    {
+      "id": "definition",
+      "label": "Task definition",
+      "openByDefault": true
+    },
+    {
+      "id": "request",
+      "label": "Request payload"
+    },
+    {
+      "id": "result",
+      "label": "Result mapping"
+    },
+    {
+      "id": "authentication",
+      "label": "Authentication",
+      "tooltip": "Optional authentication settings"
+    }
+  ],
+  "properties": [
+    ...
+  ]
+}
+```
+
+Groups can have the following attributes:
+
+- `id`: Unique identifier of the group
+- `label`: Label of the group
+- `tooltip`: Tooltip for the group (optional)
+- `openByDefault`: Whether the group will be expanded in the properties panel (optional, default: `false`)
