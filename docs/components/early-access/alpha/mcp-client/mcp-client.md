@@ -67,7 +67,7 @@ sequenceDiagram
 
 ### Tool discovery
 
-To mark an activity tool as a gateway tool definition, the agent expects an [extension property](../../../modeler/desktop-modeler/element-templates/defining-templates.md#zeebeproperty) named `io.camunda.agenticai.gateway.type` with the value `mcpClient`. This is automatically applied by the provided [MCP connectors](#mcp-connectors), but it also allows for more advanced use cases—such as tool calling with [human-in-the-loop](#human-in-the-loop) interaction—when added to other activities, like an intermediate event.
+To mark an activity tool as a gateway tool definition, the agent expects an [extension property](../../../modeler/element-templates/defining-templates.md#zeebeproperty) named `io.camunda.agenticai.gateway.type` with the value `mcpClient`. This is automatically applied by the provided [MCP connectors](#mcp-connectors), but it also allows for more advanced use cases—such as tool calling with [human-in-the-loop](#human-in-the-loop) interaction—when added to other activities, like an intermediate event.
 
 When the AI agent connector [resolves its available tools](../../../connectors/out-of-the-box-connectors/agentic-ai-aiagent-example.md#tool-resolution), it also resolves gateway tool definitions. If required by the gateway tool type, it initiates a tool discovery feedback loop through the ad-hoc sub-process.
 

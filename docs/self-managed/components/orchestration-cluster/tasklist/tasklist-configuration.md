@@ -397,6 +397,11 @@ camunda:
 
 ## Allow non-self assignment
 
+:::info
+The `allow-non-self-assignment` flag controls the behavior of the deprecated [Tasklist API](/apis-tools/tasklist-api-rest/specifications/assign-task.api.mdx).
+It has no implication on the [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/tutorial.md). Please refer to [access control](/components/concepts/access-control/authorizations.md#available-resources) to manage what operations can be performed by a given user or application.
+:::
+
 :::danger
 This disables an intentional security mechanism and should only be used in development environments with no Identity installed.
 :::

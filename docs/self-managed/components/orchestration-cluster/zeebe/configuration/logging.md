@@ -3,7 +3,7 @@ id: logging
 title: "Logging"
 ---
 
-The Camunda 8 orchestration cluster uses Log4j2 framework for logging. In the distribution and the Docker image, find the default log configuration file
+The Camunda 8 Orchestration Cluster uses Log4j2 framework for logging. In the distribution and the Docker image, find the default log configuration file
 in `config/log4j2.xml`.
 
 ## Default logging configuration
@@ -19,7 +19,7 @@ It configures the [log level](https://logging.apache.org/log4j/2.x/manual/custom
 For more information, see the documentation on [log levels](../../../../operational-guides/monitoring/log-levels.md).
 :::
 
-The log level for the Orchestration cluster is controlled via the `CAMUNDA_LOG_LEVEL` environment variable (for example, `CAMUNDA_LOG_LEVEL=DEBUG`, or
+The log level for the Orchestration Cluster is controlled via the `CAMUNDA_LOG_LEVEL` environment variable (for example, `CAMUNDA_LOG_LEVEL=DEBUG`, or
 `CAMUNDA_LOG_LEVEL=ERROR`). The log levels for individual components can be set using additional [environment variables](#component-log-levels).
 
 Additionally, it configures three possible [appenders](https://logging.apache.org/log4j/2.x/manual/appenders.html) (outputs):

@@ -1,0 +1,83 @@
+name: Update Release Links
+
+on:
+  schedule:
+    # Run nightly at 2 AM UTC
+    - cron: "0 2 * * *"
+  workflow_dispatch: # Allow manual triggering
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update-release-links:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run release links update
+        id: update-links
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          npm run update-release-links
+
+          # Check if there are any changes
+          if git diff --quiet; then
+            echo "No changes detected"
+            echo "changes_detected=false" >> $GITHUB_OUTPUT
+          else
+            echo "Changes detected"
+            echo "changes_detected=true" >> $GITHUB_OUTPUT
+            
+            # Get list of changed files
+            CHANGED_FILES=$(git diff --name-only | tr '\n' ' ')
+            echo "changed_files=${CHANGED_FILES}" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create Pull Request
+        if: steps.update-links.outputs.changes_detected == 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "docs: update release links in release notes"
+          title: "🔗 Auto-update release links in release notes"
+          body: |
+            This PR was automatically created by the nightly release links update automation.
+
+            ## Changes
+
+            The script has updated the following files with missing release links:
+            ${{ steps.update-links.outputs.changed_files }}
+
+            ## What was updated
+
+            - ✅ Fetched latest stable releases from camunda/camunda and camunda/connectors repositories
+            - ✅ Excluded alpha releases and pre-releases
+            - ✅ Updated release notes files where changelog links were missing or incomplete
+
+            ---
+
+            🤖 This PR was created automatically. If you have any questions about the automation, please check the [update-release-links.js script](./hacks/update-release-links.js).
+          branch: auto/update-release-links
+          delete-branch: true
+
+      - name: Log automation result
+        run: |
+          if [ "${{ steps.update-links.outputs.changes_detected }}" == "true" ]; then
+            echo "✅ Release links update automation completed successfully. PR created."
+          else
+            echo "ℹ️ No updates needed. All release links are up to date."
+          fi

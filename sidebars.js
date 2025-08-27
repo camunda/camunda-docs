@@ -9,6 +9,7 @@ module.exports = {
       },
       items: [
         "guides/getting-started-example",
+        "guides/getting-started-agentic-orchestration",
         "guides/orchestrate-human-tasks",
         "guides/orchestrate-apis",
       ],
@@ -43,6 +44,7 @@ module.exports = {
         "components/concepts/clusters",
         "components/concepts/processes",
         "components/concepts/process-applications",
+        "components/concepts/element-templates",
         "components/concepts/job-workers",
         "components/concepts/execution-listeners",
         {
@@ -69,8 +71,6 @@ module.exports = {
           "Access control": [
             "components/concepts/access-control/access-control-overview",
             "components/concepts/access-control/authorizations",
-            "components/concepts/access-control/user-groups",
-            "components/concepts/access-control/user-task-access-restrictions",
           ],
         },
       ],
@@ -119,8 +119,8 @@ module.exports = {
             id: "components/modeler/web-modeler/idp/idp-document-extraction",
           },
           items: [
-            // "components/modeler/web-modeler/idp/idp-structured-extraction",
             "components/modeler/web-modeler/idp/idp-unstructured-extraction",
+            "components/modeler/web-modeler/idp/idp-structured-extraction",
           ],
         },
         // "components/modeler/web-modeler/idp/idp-document-automation",
@@ -206,6 +206,7 @@ module.exports = {
                 "components/modeler/web-modeler/advanced-modeling/form-linking",
                 "components/modeler/web-modeler/advanced-modeling/publish-public-processes",
                 "components/modeler/web-modeler/advanced-modeling/process-documentation-with-readme-files",
+                "components/modeler/web-modeler/advanced-modeling/test-scenario-files",
                 {
                   "AI features": [
                     "components/modeler/web-modeler/advanced-modeling/refactoring-suggestions",
@@ -235,17 +236,9 @@ module.exports = {
             "components/modeler/desktop-modeler/use-connectors",
             "components/modeler/desktop-modeler/variables",
             {
-              type: "category",
-              label: "Element templates",
-              link: {
-                type: "doc",
-                id: "components/modeler/desktop-modeler/element-templates/about-templates",
-              },
-              items: [
+              "Element templates": [
                 "components/modeler/desktop-modeler/element-templates/configuring-templates",
                 "components/modeler/desktop-modeler/element-templates/using-templates",
-                "components/modeler/desktop-modeler/element-templates/defining-templates",
-                "components/modeler/desktop-modeler/element-templates/additional-resources",
               ],
             },
             {
@@ -325,13 +318,14 @@ module.exports = {
         require("./docs/components/modeler/dmn/sidebar-schema"),
         require("./docs/components/modeler/feel/sidebar-schema"),
         require("./docs/components/modeler/forms/sidebar-schema"),
+        require("./docs/components/modeler/element-templates/sidebar-schema"),
         "components/modeler/data-handling",
         require("./docs/components/modeler/reference/sidebar-schema"),
       ],
     },
     {
       type: "category",
-      label: "Orchestration cluster",
+      label: "Orchestration Cluster",
       link: {
         type: "doc",
         id: "components/orchestration-cluster",
@@ -388,10 +382,12 @@ module.exports = {
           },
           items: [
             "components/tasklist/userguide/using-tasklist",
+            "components/tasklist/api-versions",
             "components/tasklist/userguide/managing-tasks",
             "components/tasklist/userguide/using-filters",
             "components/tasklist/userguide/defining-task-priorities",
             "components/tasklist/userguide/starting-processes",
+            "components/tasklist/user-task-access-restrictions",
             "components/tasklist/userguide/tasklist-localization",
           ],
         },
@@ -637,6 +633,7 @@ module.exports = {
           "Manage your organization": [
             "components/console/manage-organization/organization-settings",
             "components/console/manage-organization/manage-users",
+            "components/console/manage-organization/manage-user-groups",
             "components/console/manage-organization/view-organization-activity",
             "components/console/manage-organization/enable-alpha-features",
             "components/console/manage-organization/usage-history",
@@ -792,6 +789,22 @@ module.exports = {
         },
       ],
     },
+    {
+      type: "category",
+      label: "Camunda 8 SaaS",
+      link: {
+        type: "doc",
+        id: "components/saas/saas",
+      },
+      items: [
+        "reference/regions",
+        "reference/camunda-help-center",
+        "reference/auto-updates",
+        "reference/status",
+        "reference/saas-ip-addresses",
+      ],
+    },
+    "reference/glossary",
   ],
   "APIs & Tools": [
     "apis-tools/working-with-apis-tools",
@@ -929,6 +942,7 @@ module.exports = {
           "Camunda Spring Boot Starter": [
             "apis-tools/spring-zeebe-sdk/getting-started",
             "apis-tools/spring-zeebe-sdk/configuration",
+            "apis-tools/spring-zeebe-sdk/properties-reference",
           ],
         },
         "apis-tools/node-js-sdk",
@@ -963,7 +977,10 @@ module.exports = {
       },
       items: [
         "apis-tools/migration-manuals/migrate-to-camunda-api",
+        "apis-tools/migration-manuals/migrate-to-camunda-java-client",
         "apis-tools/migration-manuals/migrate-to-camunda-user-tasks",
+        "apis-tools/migration-manuals/migrate-component-apis",
+        "apis-tools/migration-manuals/migrate-to-camunda-process-test",
       ],
     },
   ],
@@ -971,7 +988,7 @@ module.exports = {
     "reference/overview",
     {
       type: "category",
-      label: "Announcements and release notes",
+      label: "Release announcements and release notes",
       link: {
         type: "doc",
         id: "reference/announcements-release-notes/overview",
@@ -1028,16 +1045,11 @@ module.exports = {
         "reference/announcements-release-notes/release-policy",
       ],
     },
-    "reference/supported-environments",
-    "reference/public-api",
-    "reference/contact",
-    "reference/dependencies",
-    "reference/camunda-help-center",
-    "reference/auto-updates",
-    "reference/status",
-    "reference/licenses",
     "reference/notices",
-    "reference/regions",
+    "reference/licenses",
+    "reference/public-api",
+    "reference/supported-environments",
+    "reference/dependencies",
     {
       type: "category",
       label: "Data collection",
@@ -1047,7 +1059,8 @@ module.exports = {
       },
       items: ["reference/data-collection/usage-metrics"],
     },
-    "reference/glossary",
+
+    "reference/contact",
   ],
   "Self-Managed": [
     "self-managed/about-self-managed",
@@ -1083,17 +1096,7 @@ module.exports = {
       },
       items: [
         "self-managed/reference-architecture/kubernetes",
-        {
-          type: "category",
-          label: "Manual",
-          link: {
-            type: "doc",
-            id: "self-managed/reference-architecture/manual",
-          },
-          items: [
-            "self-managed/installation-methods/helm/cloud-providers/amazon/aws-ec2",
-          ],
-        },
+        "self-managed/reference-architecture/manual",
       ],
     },
     {
@@ -1283,7 +1286,27 @@ module.exports = {
           ],
         },
         "self-managed/installation-methods/docker/docker",
-        "self-managed/installation-methods/manual/manual-install",
+        {
+          type: "category",
+          label: "Manual",
+          items: [
+            "self-managed/installation-methods/manual/install",
+            "self-managed/installation-methods/manual/upgrade",
+            {
+              type: "category",
+              label: "Cloud providers",
+              items: [
+                {
+                  type: "category",
+                  label: "Amazon",
+                  items: [
+                    "self-managed/installation-methods/manual/cloud-providers/amazon/aws-ec2",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
       ],
     },
     {
@@ -1354,35 +1377,11 @@ module.exports = {
           label: "Configure flow control",
           id: "self-managed/operational-guides/configure-flow-control/configure-flow-control",
         },
+        "self-managed/concepts/no-secondary-storage",
       ],
     },
     {
       Components: [
-        {
-          type: "category",
-          label: "Components upgrade",
-          link: {
-            type: "doc",
-            id: "self-managed/components/components-upgrade/introduction",
-          },
-          items: [
-            "self-managed/components/components-upgrade/870-to-880",
-            "self-managed/components/components-upgrade/860-to-870",
-            "self-managed/components/components-upgrade/850-to-860",
-            "self-managed/components/components-upgrade/840-to-850",
-            "self-managed/components/components-upgrade/830-to-840",
-            {
-              Elasticsearch: [
-                "self-managed/components/components-upgrade/elasticsearch/7-to-8",
-              ],
-            },
-            {
-              Keycloak: [
-                "self-managed/components/components-upgrade/keycloak/keycloak-update",
-              ],
-            },
-          ],
-        },
         {
           Modeler: [
             {
@@ -1415,7 +1414,7 @@ module.exports = {
         },
         {
           type: "category",
-          label: "Orchestration cluster",
+          label: "Orchestration Cluster",
           link: {
             type: "doc",
             id: "self-managed/components/orchestration-cluster/overview",
@@ -1522,6 +1521,7 @@ module.exports = {
               items: [
                 "self-managed/components/orchestration-cluster/identity/overview",
                 "self-managed/components/orchestration-cluster/identity/configuration",
+                "self-managed/components/orchestration-cluster/identity/connect-external-identity-provider",
                 "self-managed/components/orchestration-cluster/identity/manage-tenants",
                 {
                   "Mapping rules": [
@@ -1655,6 +1655,31 @@ module.exports = {
             },
           ],
         },
+        {
+          type: "category",
+          label: "Components update",
+          link: {
+            type: "doc",
+            id: "self-managed/components/components-upgrade/introduction",
+          },
+          items: [
+            "self-managed/components/components-upgrade/870-to-880",
+            "self-managed/components/components-upgrade/860-to-870",
+            "self-managed/components/components-upgrade/850-to-860",
+            "self-managed/components/components-upgrade/840-to-850",
+            "self-managed/components/components-upgrade/830-to-840",
+            {
+              Elasticsearch: [
+                "self-managed/components/components-upgrade/elasticsearch/7-to-8",
+              ],
+            },
+            {
+              Keycloak: [
+                "self-managed/components/components-upgrade/keycloak/keycloak-update",
+              ],
+            },
+          ],
+        },
       ],
     },
     {
@@ -1662,9 +1687,12 @@ module.exports = {
       label: "Upgrade to Camunda 8.8",
       link: {
         type: "doc",
-        id: "self-managed/update/administrators/prepare-for-admin-update",
+        id: "self-managed/update/administrators/admin-upgrade-overview",
       },
-      items: ["self-managed/update/administrators/run-admin-update"],
+      items: [
+        "self-managed/update/administrators/prepare-for-admin-upgrade",
+        "self-managed/update/administrators/run-admin-upgrade",
+      ],
     },
   ],
 };

@@ -34,7 +34,6 @@ To execute the connector, you must ensure all mandatory fields are correctly fil
 Select an authentication type from the **Authentication** dropdown:
 
 1. **Credentials**: Select this option if you have an AWS **Access Key** and **Secret Key**. This method is applicable for both SaaS and Self-Managed users. If you select this option, you must provide the following required fields to use the connector:
-
    - **Access Key**: AWS access key for the user with Textract permissions.
    - **Secret Key**: The corresponding AWS secret key.
 
@@ -59,7 +58,6 @@ Select the desired execution type from the **Execution Type** dropdown:
 - **Real-time**: Use for small files that require immediate text extraction. This method processes the document instantly, allowing you to quickly retrieve the data.
 
   In this mode, you can select the document location using **Document location type** field.
-
   - S3
   - Camunda Document
 
@@ -86,7 +84,6 @@ Select the desired execution type from the **Execution Type** dropdown:
   **Asynchronous** execution offers more flexibility than real-time or polling execution, as it allows you to process documents without waiting for immediate responses. This is particularly useful for larger files or when handling multiple documents simultaneously.
 
   In this mode, you can configure the following optional fields:
-
   - **Client Request Token**: An idempotent token used to identify the start request.
   - **Job Tag**: A tag included in the completion notification, published to the Amazon SNS topic.
   - **KMS Key ID**: The KMS key used to encrypt inference results.
@@ -125,7 +122,7 @@ Specify the **Document Version** if you need to process a specific version of th
 Mandatory only for **Real-time** execution with **Camunda Document** location type.
 
 :::note
-To work with document you must upload them first, [using the Orchestration cluster REST API](/apis-tools/orchestration-cluster-api-rest/specifications/create-document.api.mdx) for example.
+To work with document you must upload them first, [using the Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/specifications/create-document.api.mdx) for example.
 The result of the endpoint must then be assigned to a variable in **Start Process Instance** so you can use the variable in the **Document** field.
 :::
 

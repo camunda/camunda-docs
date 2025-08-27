@@ -656,6 +656,31 @@ h3 .badge:nth-of-type(1) {
   vertical-align: text-top;
 }
 
+/* HTTP Method badges */
+.badge--get,
+.badge--post,
+.badge--delete,
+.badge--patch {
+  color: white;
+  text-transform: uppercase;
+}
+
+.badge--get {
+  background-color: var(--ifm-color-primary);
+}
+
+.badge--post {
+  background-color: var(--openapi-code-green);
+}
+
+.badge--delete {
+  background-color: var(--openapi-code-red);
+}
+
+.badge--patch {
+  background-color: var(--openapi-code-orange);
+}
+
 /* Between mobile and desktop sizes, the nav bar gets a little scrunchy. Scale things down a bit to make more space. */
 @media screen and (min-width: 990px) and (max-width: 1275px) {
   .navbar .navbar__title,
@@ -874,6 +899,13 @@ span.callout + p::after {
 }
 .theme-doc-markdown img.img-500 {
   width: 500px;
+}
+.theme-doc-markdown img.img-100 {
+  width: 90px;
+  border: none;
+  max-height: 90px;
+  margin: 0;
+  padding: 0;
 }
 
 /* Transparent image background */
@@ -1313,6 +1345,47 @@ ul ul .table-of-contents__link--active {
   border-right: 0;
 }
 
+/* Migration table */
+
+.table-migration {
+  width: 100%;
+  table-layout: fixed;
+}
+
+.table-migration thead th {
+  background-color: var(--ifm-table-stripe-background);
+  font-weight: var(--ifm-table-head-font-weight);
+  text-align: left;
+  width: 50%;
+}
+
+.table-migration tbody tr {
+  background-color: transparent;
+}
+
+.table-migration tbody tr:nth-child(even) {
+  background-color: transparent;
+}
+
+.table-migration th,
+.table-migration td {
+  width: 50%;
+}
+
+.table-migration .badge {
+  margin-left: 0;
+  margin-bottom: 0;
+}
+
+.table-migration .badge:not(:first-child) {
+  margin-top: 8px;
+}
+
+.table-migration code {
+  background: transparent;
+  border: none;
+}
+
 /* Glossary page links */
 .alphabet-navigation {
   display: flex;
@@ -1343,4 +1416,55 @@ ul ul .table-of-contents__link--active {
 .letter-link:not(:has(a)) {
   opacity: 0.5;
   cursor: default;
+}
+/* Style for custom Detail collapsbiles - for example used in /docs/reference/announcements-release-notes/860/860-release-notes.md */
+.changelog-dropdown {
+  border: none !important;
+  background: transparent;
+  padding: 0.2rem 0;
+  margin: 0.3rem 0;
+  box-shadow: none;
+}
+
+.changelog-dropdown[open] {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.changelog-dropdown summary {
+  cursor: pointer;
+  font-weight: 600;
+  list-style: none;
+  padding: 0.1rem 0;
+  outline: none;
+}
+
+.changelog-dropdown summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Highlighted labels */
+.label-highlight {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  background-color: #f0f0f0;
+  color: #000;
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.2rem;
+}
+
+.label-highlight.yellow {
+  background-color: #ffd600;
+  color: #000;
+}
+
+.label-highlight.orange {
+  background-color: #fc5d0d;
+  color: #fff;
+}
+
+.label-highlight.red {
+  background-color: #da1e28;
+  color: #fff;
 }

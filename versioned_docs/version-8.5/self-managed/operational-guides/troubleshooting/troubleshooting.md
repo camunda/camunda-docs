@@ -45,6 +45,18 @@ However, according to the official Kubernetes documentation about [Ingress TLS](
 
 Therefore, if you are not using the [ingress-nginx controller](https://github.com/kubernetes/ingress-nginx), ensure you pay attention to TLS configuration of the Ingress controller of your choice. Find more details about the Zeebe Ingress setup in the [Kubernetes platforms supported by Camunda](/self-managed/setup/install.md).
 
+## Zeebe backup with Azure Blob Storage
+
+When using an Azure backup store, requests to the backup API may time out due to [a bug in the Azure SDK](https://github.com/Azure/azure-sdk-for-java/issues/46231).
+
+This issue is caused by a deadlock in the Azure SDK when virtual threads are used. It is more likely to occur on systems with many partitions per broker and limited CPU resources.
+
+To mitigate this, set the following environment variable on your Zeebe brokers to disable virtual threads in the Azure SDK:
+
+```
+AZURE_SDK_SHARED_THREADPOOL_USEVIRTUALTHREADS=false
+```
+
 ## Identity `contextPath`
 
 Camunda 8 Self-Managed can be accessed externally via different methods. One such method is the [combined Ingress setup](self-managed/setup/guides/ingress-setup.md#combined-ingress-setup). In that configuration, Camunda Identity is accessed using a specific path, configured by setting the `contextPath` variable, for example `https://camunda.example.com/identity`.

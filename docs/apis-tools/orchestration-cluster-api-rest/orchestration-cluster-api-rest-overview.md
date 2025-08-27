@@ -4,9 +4,10 @@ title: "Overview"
 description: "Interact with Camunda 8 clusters. Activate jobs and run user task state operations for Camunda user tasks."
 ---
 
-## Welcome to the Camunda Orchestration Cluster API
+import ApiGrid from './react-components/\_api-card';
+import { apiExplorationCards } from './react-components/\_api-card-data';
 
-The Orchestration Cluster API lets you interact programmatically with process orchestration capabilities in Camunda 8. You can use it to start, manage, and query process instances. It also lets you complete user tasks, resolve incidents, and manage variables, at scale and with confidence.
+The Orchestration Cluster REST API lets you interact programmatically with process orchestration capabilities in Camunda 8. You can use it to start, manage, and query process instances. It also lets you complete user tasks, resolve incidents, and manage variables, at scale and with confidence.
 
 You can use this API to:
 
@@ -18,13 +19,13 @@ This API is designed to make it easy to [find resources](./orchestration-cluster
 
 We're committed to delivering high performance and reliability with our APIs. This API is part of the Camunda 8 [public API](/reference/public-api.md) and is covered by our SemVer stability guarantees (except for clearly marked alpha endpoints).
 
-To learn more about orchestration clusters, see [What is an Orchestration Cluster?](/components/orchestration-cluster.md).
+To learn more about the Orchestration Cluster, see [What is the Orchestration Cluster?](/components/orchestration-cluster.md).
 
 Ready to dive in? Head to **[Getting started](#getting-started)** section below to make your first API call.
 
 ## Getting started
 
-This section helps you get up and running in minutes. To begin using the Orchestration Cluster API, you'll need the following:
+This section helps you get up and running in minutes. To begin using the Orchestration Cluster REST API, you'll need the following:
 
 ### Prerequisites
 
@@ -34,17 +35,13 @@ This section helps you get up and running in minutes. To begin using the Orchest
 - **Authentication**
   - For local development, authentication is optional. For production or shared environments, authentication is required. See [Authentication](./orchestration-cluster-api-rest-authentication.md) for supported methods and setup instructions.
 - **A client to send API requests**
-  - Use the [Postman Collection](https://www.postman.com/camundateam/camunda-8-postman/collection/apl78x9/camunda-8-api-rest) for quick testing, or interact programmatically using the [Java Client](/apis-tools/java-client/index.md) or [Spring SDK](/apis-tools/spring-zeebe-sdk/getting-started.md).
+  - Use [Swagger](../orchestration-cluster-api-rest-swagger) for quick testing, or interact programmatically using the [Java Client](/apis-tools/java-client/index.md) or [Spring SDK](/apis-tools/spring-zeebe-sdk/getting-started.md).
 
 Once you’re set up, try your first call using [Postman](https://www.postman.com/camundateam/camunda-8-postman/request/en495q6/get-cluster-typology) or curl: [Get cluster topology](./specifications/get-topology.api.mdx) to confirm your setup is working.
 
-## Explore the API
+## Explore the Orchestration Cluster API
 
-- Visit the [interactive Orchestration Cluster API Explorer](./specifications/orchestration-cluster-rest-api.info.mdx) to:
-  - Browse available endpoints
-  - See request and response examples
-  - Check code samples
-- Prefer code-first? [Download the OpenAPI spec](https://github.com/camunda/camunda/blob/main/zeebe/gateway-protocol/src/main/proto/rest-api.yaml) to generate your own client or inspect the full schema.
+<ApiGrid items={apiExplorationCards} />
 
 If you're just getting started, try these next steps:
 
@@ -55,7 +52,7 @@ If you're just getting started, try these next steps:
 
 ## Authorize your requests
 
-Authentication for the Orchestration Cluster API depends on your environment and how you deploy Camunda 8. Supported authentication methods include No Authentication (for local development), Basic Authentication, OIDC Access Tokens.
+Authentication for the Orchestration Cluster REST API depends on your environment and how you deploy Camunda 8. Supported authentication methods include No Authentication (for local development), Basic Authentication, OIDC Access Tokens.
 
 - See the [Authentication support matrix](./orchestration-cluster-api-rest-authentication.md#authentication-support-matrix) for details on which authentication methods are supported for each distribution (C8 Run, Docker Compose, Helm/Kubernetes, SaaS).
 - For advanced security, OIDC with X.509 client certificates is supported in Self-Managed environments and handled by the Java client. See [OIDC with X.509](./orchestration-cluster-api-rest-authentication.md#oidc-with-x509-client-certificates).
@@ -95,7 +92,7 @@ The default maximum request size for deployment-related requests (such as `POST 
 
 ### Naming conventions
 
-Naming is simple, intuitive, and consistent across the Orchestration Cluster API to reduce friction when working across multiple endpoints.
+Naming is simple, intuitive, and consistent across the Orchestration Cluster REST API to reduce friction when working across multiple endpoints.
 
 The API overall applies the following naming conventions:
 
@@ -126,7 +123,7 @@ Identifiers follow a naming rule in parameters and data attributes alike:
 
 ### HTTP status codes & error handling
 
-The Orchestration Cluster API uses standard HTTP status codes and returns error responses following the [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457) format. This format ensures consistency across endpoints and simplifies error parsing and handling.
+The Orchestration Cluster REST API uses standard HTTP status codes and returns error responses following the [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457) format. This format ensures consistency across endpoints and simplifies error parsing and handling.
 
 Each error response includes the following fields:
 
@@ -153,19 +150,19 @@ Each error response includes the following fields:
 
 ### Date formats
 
-Date values in the Orchestration Cluster API follow the [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339) notation. This includes all requests and responses. The endpoints validate requests and transform responses accordingly.
+Date values in the Orchestration Cluster REST API follow the [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339) notation. This includes all requests and responses. The endpoints validate requests and transform responses accordingly.
 
 ### Variables
 
-Variables in the Orchestration Cluster API are JSON objects, where the `key` defines the variable name and the `value` specifies the variable value.
+Variables in the Orchestration Cluster REST API are JSON objects, where the `key` defines the variable name and the `value` specifies the variable value.
 
 For full details on variable filtering and structure, see [search requests](orchestration-cluster-api-rest-data-fetching.md#variables).
 
 ## What's next?
 
-Now that you're familiar with the Orchestration Cluster API, here are some useful next steps:
+Now that you're familiar with the Orchestration Cluster REST API, here are some useful next steps:
 
 - [Build a Job worker using the Spring SDK](../spring-zeebe-sdk/getting-started.md)
 - [Test your process definitions using Camunda Process Test](../testing/getting-started.md)
-- [Migrate from v1 component REST APIs to the v2 Orchestration Cluster API](../migration-manuals/migrate-to-camunda-api.md)
+- [Migrate from v1 component REST APIs to the v2 Orchestration Cluster REST API](../migration-manuals/migrate-to-camunda-api.md)
 - [Download the OpenAPI spec](https://github.com/camunda/camunda/blob/main/zeebe/gateway-protocol/src/main/proto/rest-api.yaml) to generate a client or explore the raw schema

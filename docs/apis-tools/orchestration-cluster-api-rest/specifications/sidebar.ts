@@ -4,7 +4,7 @@ const sidebar: SidebarsConfig = {
   apisidebar: [
     {
       type: "doc",
-      id: "apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-rest-api",
+      id: "apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api",
     },
     {
       type: "category",
@@ -324,7 +324,7 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/add-user-to-group",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/assign-user-to-group",
           label: "Assign a user to a group",
           className: "api-method put",
         },
@@ -336,7 +336,7 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/add-client-to-group",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/assign-client-to-group",
           label: "Assign a client to a group",
           className: "api-method put",
         },
@@ -715,25 +715,25 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/add-role-to-user",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/assign-role-to-user",
           label: "Assign a role to a user",
           className: "api-method put",
         },
         {
           type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/remove-user-from-role",
-          label: "Unassign a user from a role",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/unassign-role-from-user",
+          label: "Unassign a role from a user",
           className: "api-method delete",
         },
         {
           type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/add-role-to-client",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/assign-role-to-client",
           label: "Assign a role to a client",
           className: "api-method put",
         },
         {
           type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/remove-role-from-client",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/unassign-role-from-client",
           label: "Unassign a role from a client",
           className: "api-method delete",
         },
@@ -745,13 +745,13 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/add-role-to-group",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/assign-role-to-group",
           label: "Assign a role to a group",
           className: "api-method put",
         },
         {
           type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/remove-role-from-group",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/unassign-role-from-group",
           label: "Unassign a role from a group",
           className: "api-method delete",
         },
@@ -763,13 +763,13 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/add-role-to-mapping-rule",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/assign-role-to-mapping-rule",
           label: "Assign a role to a mapping rule",
           className: "api-method put",
         },
         {
           type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/remove-role-from-mapping-rule",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/unassign-role-from-mapping-rule",
           label: "Unassign a role from a mapping rule",
           className: "api-method delete",
         },
@@ -802,6 +802,18 @@ const sidebar: SidebarsConfig = {
           id: "apis-tools/orchestration-cluster-api-rest/specifications/broadcast-signal",
           label: "Broadcast signal",
           className: "api-method post",
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "System",
+      items: [
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-usage-metrics",
+          label: "Get usage metrics",
+          className: "api-method get",
         },
       ],
     },
@@ -841,8 +853,8 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/remove-user-from-tenant",
-          label: "Remove a user from a tenant",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/unassign-user-from-tenant",
+          label: "Unassign a user from a tenant",
           className: "api-method delete",
         },
         {
@@ -877,8 +889,8 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/remove-client-from-tenant",
-          label: "Remove a client from a tenant",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/unassign-client-from-tenant",
+          label: "Unassign a client from a tenant",
           className: "api-method delete",
         },
         {
@@ -889,13 +901,13 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/remove-mapping-rule-from-tenant",
-          label: "Remove a mapping rule from a tenant",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/unassign-mapping-rule-from-tenant",
+          label: "Unassign a mapping rule from a tenant",
           className: "api-method delete",
         },
         {
           type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-mappings-for-tenant",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-mapping-rules-for-tenant",
           label: "Search mapping rules for tenant",
           className: "api-method post",
         },
@@ -907,8 +919,8 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/remove-group-from-tenant",
-          label: "Remove a group from a tenant",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/unassign-group-from-tenant",
+          label: "Unassign a group from a tenant",
           className: "api-method delete",
         },
         {
@@ -919,8 +931,8 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/remove-role-from-tenant",
-          label: "Remove a role from a tenant",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/unassign-role-from-tenant",
+          label: "Unassign a role from a tenant",
           className: "api-method delete",
         },
         {
@@ -963,19 +975,7 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/update-user",
           label: "Update user",
-          className: "api-method patch",
-        },
-      ],
-    },
-    {
-      type: "category",
-      label: "Usage metrics",
-      items: [
-        {
-          type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-usage-metrics",
-          label: "Get usage metrics",
-          className: "api-method get",
+          className: "api-method put",
         },
       ],
     },

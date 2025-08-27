@@ -520,7 +520,7 @@ In a manual setup, you can simply stop all components.
 If you are using the Camunda Helm chart with an embedded Elasticsearch, you can achieve this by (for example) disabling all other components in the `values.yml`.
 
 ```yaml
-elsaticsearch:
+elasticsearch:
   enabled: true
 
 connectors:
@@ -780,7 +780,7 @@ zeebe:
    ...
 
 # assuming you're using the inbuilt Elasticsearch, otherwise should be set to false
-elsaticsearch:
+elasticsearch:
    enabled: true
 
 connectors:
@@ -813,6 +813,8 @@ zeebe:
 If you're not using the Camunda Helm chart, you can use a similar approach natively with Kubernetes to overwrite the command.
 
 The application will exit and restart the pod and will be interpreted by Kubernetes as a `crashloop`. This is an expected behavior. The restore application will not try to restore the state again since the partitions were already restored to the persistent disk.
+
+After removing the temporary restore command or unsetting the `ZEEBE_RESTORE` and related backup ID environment variable to restore Zeebe’s default behavior, you may optionally restart the StatefulSet to ensure the changes take effect immediately otherwise a rolling update is happening. This can be done by [scaling](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_scale/) the StatefulSet down and back up, or by [deleting](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_delete/) the pods so they are recreated with the newly deployed revision.
 
 :::tip
 

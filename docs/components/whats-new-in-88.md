@@ -19,6 +19,26 @@ This documentation is a work in progress and may contain incomplete, placeholder
 
 Camunda 8.8 introduces important architectural changes and enhancements to simplify deployment, improve maintainability, and empower both operations teams and developers.
 
+### Why upgrade to Camunda 8.8?
+
+Upgrading to Camunda 8.8 delivers significant benefits:
+
+<div className="list-tick">
+
+- **Unified platform**: Camunda 8.8 combines core components into a single [Orchestration Cluster](#orchestration-cluster), reducing system complexity, centralizing operations, and simplifying both deployment and maintenance.
+
+- **Enhanced productivity**: This upgrade introduces streamlined [identity and access management](#identity), a consolidated configuration model, and modernized & consolidated [APIs and SDKs](#apis-and-tools), making development, integration, and permission handling faster and more intuitive.
+
+- **Increased efficiency**: The new [unified exporter architecture](#unified-exporter) improves performance with accelerated data visibility in Operate and Tasklist, as well as available via query APIs. It also enables easier operation and administration, and improves resilience when deploying across multiple data centers.
+
+</div>
+
+:::info
+To learn more about the benefits of upgrading to Camunda 8.8, see the blog posts [streamlined deployment with Camunda 8.8](https://camunda.com/blog/2025/03/streamlined-deployment-with-camunda-8-8/) and [introducing enhanced Identity Management in Camunda 8.8](https://camunda.com/blog/2025/03/introducing-enhanced-identity-management-in-camunda-88/).
+:::
+
+### Summary of important changes
+
 Important changes introduced in Camunda 8.8 are summarized as follows:
 
 <table className="table-callout">
@@ -42,7 +62,7 @@ Important changes introduced in Camunda 8.8 are summarized as follows:
 </table>
 
 :::note simple deployment
-The simplest Self-Managed deployment runs as a single Java application or docker container.
+The simplest Camunda 8.8 Self-Managed deployment runs as a single Java application or docker container.
 :::
 
 :::info
@@ -62,7 +82,7 @@ The Orchestration Cluster (previously automation cluster) is now the core compon
 
 ### Zeebe, Operate, Tasklist, and Identity
 
-In Camunda 8.8, Zeebe, Operate, Tasklist, and Identity are consolidated into the Orchestration Cluster application as a single deployable artifact, distributed as a JAR file or Docker container.
+In Camunda 8.8, Zeebe, Operate, Tasklist, and Identity are integrated into the Orchestration Cluster application as a single deployable artifact, distributed as a JAR file or Docker container.
 
 - [Zeebe](../reference/glossary.md#zeebe) is the [workflow engine](../reference/glossary.md#workflow-engine).
 - Operate is used for monitoring and troubleshooting [process instances](../reference/glossary.md#process-instance) running in Zeebe.
@@ -173,25 +193,27 @@ The 8.8 changes to Identity could affect different user roles in your Organizati
 
 Orchestration Cluster Identity provides several advantages:
 
-| Benefit                                         | Description                                                                                                                                                                                                                |
-| :---------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Simplified identity management                  | The split between Orchestration Cluster Identity and Management Identity provides a clearer separation of concerns, making it easier to manage access for Orchestration Cluster components versus Web Modeler and Console. |
-| Unified access management                       | All identity and authorization features for the Orchestration Cluster components are now contained within the Orchestration Cluster, eliminating any dependency on Management Identity when orchestrating processes.       |
-| Simplified deployment and improved availability | Removing the dependency on Management Identity streamlines deployment and increases availability by reducing potential points of failure.                                                                                  |
-| Consistent authorization model                  | The new model offers a unified approach to managing permissions across all Orchestration Cluster resources.                                                                                                                |
-| Enhanced security                               | Granular access controls improve the overall security posture for cluster resources.                                                                                                                                       |
-| Improved performance                            | Authorization checks are handled internally, reducing latency and improving performance.                                                                                                                                   |
-| Flexible Identity Provider integration          | Keycloak is now treated as a standard OIDC provider, making it easier to integrate with other Identity Provider and increasing flexibility for users.                                                                      |
+<div className="list-tick">
+
+- **Simplified identity management**: The split between Orchestration Cluster Identity and Management Identity provides a clearer separation of concerns, making it easier to manage access for Orchestration Cluster components versus Web Modeler and Console.
+- **Unified access management**: All identity and authorization features for the Orchestration Cluster components are now contained within the Orchestration Cluster, eliminating any dependency on Management Identity when orchestrating processes.
+- **Simplified deployment and improved availability**: Removing the dependency on Management Identity streamlines deployment and increases availability by reducing potential points of failure.
+- **Consistent authorization model**: The new model offers a unified approach to managing permissions across all Orchestration Cluster resources.
+- **Enhanced security**: Granular access controls improve the overall security posture for cluster resources.
+- **Improved performance**: Authorization checks are handled internally, reducing latency and improving performance.
+- **Flexible Identity Provider integration**: Keycloak is now treated as a standard OIDC provider, making it easier to integrate with other Identity Provider and increasing flexibility for users.
+
+</div>
 
 ### Impact of Identity changes on your 8.7 deployment
 
 The impact of these changes and what action you need to take depends on your deployment type. For example:
 
-| Area                              | Impact                                                                                                                                                                                                                            |
-| :-------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Authorization                     | The new [authorization](/components/concepts/access-control/authorizations.md) model introduces fine-grained access control for Orchestration Cluster resources, replacing the previous model.                                    |
-| Roles, tenants, and mapping rules | Now managed within Orchestration Cluster Identity, replacing the previous Management Identity setup.                                                                                                                              |
-| User Task authorizations          | [User Task access restrictions](/components/concepts/access-control/user-task-access-restrictions.md) only apply to the Tasklist v1 API. After switching to the v2 API with Tasklist, user task access restrictions do not apply. |
+| Area                              | Impact                                                                                                                                                                                                             |
+| :-------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Authorization                     | The new [authorization](/components/concepts/access-control/authorizations.md) model introduces fine-grained access control for Orchestration Cluster resources, replacing the previous model.                     |
+| Roles, tenants, and mapping rules | Now managed within Orchestration Cluster Identity, replacing the previous Management Identity setup.                                                                                                               |
+| User Task authorizations          | [User Task access restrictions](/components/tasklist/user-task-access-restrictions.md) only apply to the Tasklist v1 API. After switching to the v2 API with Tasklist, user task access restrictions do not apply. |
 
 Each deployment type has a clear upgrade path and migration guidance to help administrators transition from Camunda 8.7 to Camunda 8.8.
 
@@ -224,7 +246,6 @@ After you deploy all Camunda 8 components in a Self-Managed environment, you wil
 - The Identity Migration App that migrates these entities from Management Identity into Orchestration Cluster Identity must be run during your Camunda 8.7 to 8.8 upgrade. Instructions on enabling and configuring the Identity Migration App in the 8.7 to 8.8 migration guide are available for Helm and also docker-compose/bare Java deployments.
 
 - Management Identity, Keycloak and Postgres are no longer needed for an Orchestration Cluster. They are only needed when using Web Modeler, Console or Optimize.
-
   - For the Orchestration Cluster, you can bring your own Identity Provider (for example, Keycloak, Microsoft EntraID, Okta) or use the built-in Basic Authentication method.
 
   - A special setup is no longer required for Keycloak as it is now integrated like any other Identity Provider via OpenID Connect (OIDC). Management Identity relies by default on Keycloak, but you can also configure it to use any OIDC-compatible Identity Provider.
@@ -266,12 +287,12 @@ Changes to [APIs & tools](/apis-tools/working-with-apis-tools.md) in 8.8 are sum
 
 | What's new/changed                                                                                                                   | Description                                                                                                                                                                                                                                                                                                 |
 | :----------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Orchestration Cluster API](#orchestration-cluster)                                                                                  | The unified Orchestration Cluster API replaces the deprecated V1 component APIs, providing a unified interface for managing and interacting with the Orchestration Cluster.                                                                                                                                 |
+| [Orchestration Cluster REST API](#orchestration-cluster)                                                                             | The unified Orchestration Cluster REST API replaces the deprecated V1 component APIs, providing a unified interface for managing and interacting with the Orchestration Cluster.                                                                                                                            |
 | [Camunda Java Client](apis-tools/java-client/index.md)                                                                               | The Camunda Java Client is now the official Java library for connecting to Camunda 8 clusters, automating processes, and implementing job workers. It is designed for Java developers who want to interact programmatically with Camunda 8 via REST or gRPC, and is the successor to the Zeebe Java client. |
 | [Camunda Spring SDK](/apis-tools/spring-zeebe-sdk/getting-started.md)                                                                | The Camunda Spring Boot SDK replaces the Spring Zeebe SDK. The SDK relies on the Camunda Java client, designed to enhance the user experience and introduce new features while maintaining compatibility with existing codebases.                                                                           |
 | [Camunda Process Test](/apis-tools/testing/getting-started.md)                                                                       | Camunda Process Test (CPT) is a Java library to test your BPMN processes and your process application. CPT is the successor of Zeebe Process Test. Our previous testing library is deprecated and will be removed with version 8.10.                                                                        |
 | [Camunda user tasks](/apis-tools/migration-manuals/migrate-to-camunda-user-tasks.md)                                                 | Camunda user tasks replace the deprecated job-based user tasks in Camunda 8.8, providing a more robust and flexible way to handle user tasks within process models.                                                                                                                                         |
-| [Tasklist GraphQL API](/reference/announcements-release-notes/880/880-announcements.md#deprecated-operate-and-tasklist-v1-rest-apis) | The previously deprecated Tasklist GraphQL API is removed in Camunda 8.8. This change is part of the broader architectural evolution towards the Orchestration Cluster API, which provides a more unified and consistent interface for managing tasks and workflows.                                        |
+| [Tasklist GraphQL API](/reference/announcements-release-notes/880/880-announcements.md#deprecated-operate-and-tasklist-v1-rest-apis) | The previously deprecated Tasklist GraphQL API is removed in Camunda 8.8. This change is part of the broader architectural evolution towards the Orchestration Cluster REST API, which provides a more unified and consistent interface for managing tasks and workflows.                                   |
 | [Zeebe gRPC API endpoints](/reference/announcements-release-notes/880/880-announcements.md#deprecated-zeebe-grpc-api-endpoints)      | With the 8.8 release, the gRPC API continues but is being disabled by default starting with 8.10.                                                                                                                                                                                                           |
 
 :::info
@@ -284,7 +305,7 @@ Camunda 8.8 lays the foundation for future releases. Upgrading ensures compatibi
 
 The following guides provide detailed information on how you can upgrade to Camunda 8.8.
 
-| Guide                                                                                   | Description                                                                                                             | Who is this guide for?                                                                                                                                                             |
-| :-------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Self-Managed upgrade guide](/self-managed/update/administrators/prepare-for-update.md) | Evaluate your infrastructure, understand operational changes, and choose the best update strategy for your environment. | Operations and platform administrators of Self-Managed installations.                                                                                                              |
-| [API and SDK upgrade guide](../apis-tools/migration-manuals/index.md)                   | <p>Plan and execute an upgrade from Camunda 8.7 to 8.8, focusing on API and SDK transitions.</p>                        | <p><ul><li>Application developers maintaining Camunda-based solutions in Self-Managed Kubernetes or VM environments.</li><li>Developers using Camunda APIs and SDKs.</li></ul></p> |
+| Guide                                                                           | Description                                                                                                             | Who is this guide for?                                                                                                                                                             |
+| :------------------------------------------------------------------------------ | :---------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Self-Managed upgrade guide](../self-managed/update/administrators/overview.md) | Evaluate your infrastructure, understand operational changes, and choose the best update strategy for your environment. | Operations and platform administrators of Self-Managed installations.                                                                                                              |
+| [API and SDK upgrade guide](../apis-tools/migration-manuals/index.md)           | <p>Plan and execute an upgrade from Camunda 8.7 to 8.8, focusing on API and SDK transitions.</p>                        | <p><ul><li>Application developers maintaining Camunda-based solutions in Self-Managed Kubernetes or VM environments.</li><li>Developers using Camunda APIs and SDKs.</li></ul></p> |
