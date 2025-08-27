@@ -1,0 +1,321 @@
+---
+id: assign-user-to-group
+title: "Assign a user to a group"
+description: "Assigns a user to a group, making the user a member of the group."
+sidebar_label: "Assign a user to a group"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "put api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Assign a user to a group"}
+></Heading>
+
+<MethodEndpoint
+  method={"put"}
+  path={"/groups/{groupId}/users/{username}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Assigns a user to a group, making the user a member of the group.
+Group members inherit the group authorizations, roles, and tenant assignments.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "groupId",
+      in: "path",
+      required: true,
+      description: "The group ID.",
+      schema: { type: "string" },
+    },
+    {
+      name: "username",
+      in: "path",
+      required: true,
+      description: "The user username.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "204": { description: "The user was assigned successfully to the group." },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description:
+        "The group or user with the given ID or username was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "409": {
+      description:
+        "The user with the given ID is already assigned to the group.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "503": {
+      description:
+        "The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

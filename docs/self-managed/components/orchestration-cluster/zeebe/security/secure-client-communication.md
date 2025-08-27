@@ -66,7 +66,7 @@ Without any configuration, the client looks in the system's certificate store fo
 ```java
 public class SecureClient {
     public static void main(final String[] args) {
-        final ZeebeClient client = ZeebeClient.newClientBuilder().caCertificatePath("path/to/certificate").build();
+        final CamundaClient client = CamundaClient.newClientBuilder().caCertificatePath("path/to/certificate").build();
 
         // ...
     }
@@ -80,7 +80,7 @@ To disable TLS in a Java client, use the `.usePlaintext()` option:
 ```java
 public class InsecureClient {
     public static void main(final String[] args) {
-        final ZeebeClient client = ZeebeClient.newClientBuilder().usePlaintext().build();
+        final CamundaClient client = CamundaClient.newClientBuilder().usePlaintext().build();
 
         // ...
     }

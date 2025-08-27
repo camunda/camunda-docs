@@ -890,6 +890,13 @@ span.callout + p::after {
 .theme-doc-markdown img.img-500 {
   width: 500px;
 }
+.theme-doc-markdown img.img-100 {
+  width: 90px;
+  border: none;
+  max-height: 90px;
+  margin: 0;
+  padding: 0;
+}
 
 /* Transparent image background */
 .theme-doc-markdown img.img-transparent {
@@ -1424,4 +1431,30 @@ ul ul .table-of-contents__link--active {
 
 .changelog-dropdown summary::-webkit-details-marker {
   display: none;
+}
+
+/* Highlighted labels */
+.label-highlight {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  background-color: #f0f0f0;
+  color: #000;
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.2rem;
+}
+
+.label-highlight.yellow {
+  background-color: #ffd600;
+  color: #000;
+}
+
+.label-highlight.orange {
+  background-color: #fc5d0d;
+  color: #fff;
+}
+
+.label-highlight.red {
+  background-color: #da1e28;
+  color: #fff;
 }
