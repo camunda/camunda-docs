@@ -988,7 +988,7 @@ security:
 
 ### Console Ping Configuration
 
-This feature enables components like the Zeebe Broker, Tasklist, Operate, and 
+This feature enables components like the Zeebe Broker, Tasklist, Operate, and
 Zeebe Gateway to ping Console with license information.
 
 #### camunda.console.ping
