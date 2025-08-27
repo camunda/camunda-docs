@@ -36,7 +36,7 @@ To maintain compatibility, avoid defining multiple templates in a single file.
 | -------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Templates can be installed as [global templates](/components/modeler/desktop-modeler/element-templates/configuring-templates.md#global-templates). | Templates are [published to the organization](/components/connectors/manage-connector-templates.md#manage-published-connector-templates) for reuse across projects. |
 
-Camunda recommends storing shared templates in a separate VCS repository:
+Camunda recommends storing shared templates in a separate repository:
 
 - **Desktop Modeler**: Copy templates manually into your global directory.
 - **Web Modeler**: Use a CI/CD pipeline to sync templates with your repository via the [Web Modeler API](/apis-tools/web-modeler-api/index.md).
