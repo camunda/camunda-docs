@@ -12,13 +12,15 @@ The JSON object typically contains the following properties:
 - `version : Integer`: Optional property to support [templates versioning and upgrading](./template-metadata.md#template-versioning). If you add a version to a template, it is considered unique based on its ID and version. Two templates can have the same ID if their version is different.
 - `name : String`: Name of the template. Shown in the element template selection modal and in the properties panel on the right side of the screen (after applying an element template).
 - `description : String`: Optional description of the template. Shown in the element template selection modal and in the properties panel (after applying an element template).
-- `keywords: Array<String>`: Optional list of keywords. Can be used to help users find this template. Keywords are used for search and filtering but are not displayed in the UI.
+- `keywords : Array<String>`: Optional list of keywords. Can be used to help users find this template. Keywords are used for search and filtering but are not displayed in the UI.
+- `category : Object`: Optional category configuration for the template. The category is shown in the element template selection modal (if categories are supported by the tooling).
 - `documentationRef : String`: Optional URL pointing to a template documentation. Shown in the properties panel (after applying an element template).
 - `icon : Object`: Optional icon configuration for the template. The icon is shown in the element template selection modal and in the properties panel (after applying an element template).
 - `version : Integer`: Optional property to support [templates versioning and upgrading](./template-metadata.md#template-versioning). If you add a version to a template, it is considered unique based on its ID and version. Two templates can have the same ID if their version is different.
 - `engines : Object`: Optional dictionary of environments [compatible with the template](./template-metadata.md#template-compatibility). Environment version is specified with semantic versions range.
 - `appliesTo : Array<String>`: List of BPMN types the template can be applied to.
 - `elementType : Object`: Optional type of the element. If you configure `elementType` on a template, the element is replaced with the specified type when a user applies the template.
+- `groups : Object`:
 - `properties : Array<Object>`: List of properties of the template. These properties are applied to the BPMN element when the template is applied. Each property can be configured with a number of options, such as type, binding, constraints, and more.
 
 Below you find a simple example of an element template:
