@@ -103,7 +103,7 @@ Replace `<CAMUNDA_CLUSTER_ROLE_ARN>` with the IAM role ARN from Step 1:
 
 ## Step 3: Associate KMS key with Camunda cluster
 
-1. Return to the Camunda Cloud Console.
+1. Return to the Camunda Console.
 2. In the cluster details page, locate the KMS Key ARN input field.
 3. Paste your AWS KMS Key ARN from Step 2.
 4. Confirm and apply the key. The Camunda Operator will provision storage using your BYOK key for:
