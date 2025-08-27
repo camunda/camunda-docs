@@ -20,18 +20,18 @@ As they are never part of any element template, users can configure them indepen
 
 You build your template by adding property objects to the `properties` array. The important keys in a property definition are:
 
-- `label : string`: A descriptive text shown with the property.
-- `type : String | Text | Boolean | Dropdown | Hidden`: Defining the input type in the properties panel.
-- `feel : required | optional | static`: Defines whether the property supports [FEEL](#feel) expressions.
-- `value : string | number | boolean`: An optional default value to be used if the property to be bound is not yet set by the user or if the type is `Hidden`.
-- `generatedValue : object`: An optional configuration to generate a value when the property is applied to an element.
-- `placeholder : string`: An optional placeholder text shown in the input field when it is empty.
-- `binding : object`: An object specifying how the property is mapped to BPMN or Camunda extensions (cf. [bindings](#bindings)).
-- `optional : boolean`: Optional bindings do not persist empty values in the underlying BPMN 2.0 XML.
-- `constraints : object`: A list of editing constraints to apply to the value of the binding.
-- `group : string`: The group that the property belongs to. Todo link to groups section
-- `id : string`: An identifier that can be used to reference the property in conditional properties
-- `condition : object`: A condition that determines when [the property is active](#defining-conditional-properties)
+- `label : String`: A descriptive text shown with the property.
+- `type : "String" | "Text" | "Boolean" | "Dropdown" | "Hidden"`: Defining the input type in the properties panel.
+- `feel : "required" | "optional" | "static"`: Defines whether the property supports [FEEL](#feel) expressions.
+- `value : String | Number | Boolean`: An optional default value to be used if the property to be bound is not yet set by the user or if the type is `Hidden`.
+- `generatedValue : Object`: An optional configuration to generate a value when the property is applied to an element.
+- `placeholder : String`: An optional placeholder text shown in the input field when it is empty.
+- `binding : Object`: An object specifying how the property is mapped to BPMN or Camunda extensions (cf. [bindings](#bindings)).
+- `optional : Boolean`: Optional bindings do not persist empty values in the underlying BPMN 2.0 XML.
+- `constraints : Object`: A list of editing constraints to apply to the value of the binding.
+- `group : String`: The group that the property belongs to. Todo link to groups section
+- `id : String`: An identifier that can be used to reference the property in conditional properties
+- `condition : Object`: A condition that determines when [the property is active](#defining-conditional-properties)
 
 Not all keys and values are compatible with each other. For more information see the documentation below.
 Additionally, if your editor supports JSON schema, these incompatibilities are highlighted while you edit your template.
@@ -41,6 +41,8 @@ If you add multiple properties with equal `binding` objects, the behavior is und
 :::
 
 ## Example
+
+TODO move to own page?
 
 With each template, you define some user-editable fields as well as their mapping to BPMN 2.0 XML, and Camunda extension elements.
 
@@ -131,7 +133,24 @@ The task type is hidden to the user. Properties specified in the template can be
 
 ![Custom Fields](./img/overview.png)
 
-### Generated value
+## Value
+
+The `value` attribute defines a static default value for a property.
+It is used when the property is applied to an element and no user input has been provided yet.
+The value must match the `type` of the property.
+
+```json
+{
+  "type": "Hidden",
+  "value": "http-job-type",
+  "binding": {
+    "type": "zeebe:taskDefinition",
+    "property": "type"
+  }
+}
+```
+
+## Generated value
 
 As an alternative to static `value`, you can use a generated value. The value is generated when a property is applied to an element. Currently, the generated value can be a UUID:
 
@@ -148,26 +167,60 @@ As an alternative to static `value`, you can use a generated value. The value is
 }
 ```
 
-### Types
+## Placeholder
+
+The following property types support the `placeholder` attribute:
+
+- `String`
+- `Text`
+
+The placeholder is displayed when a field is empty:
+
+```json
+...
+  "properties": [
+    {
+      "label": "Web service URL",
+      "type": "String",
+      "binding": { ... },
+      "placeholder": "https://example.com"
+    }
+  ]
+```
+
+## Types
 
 The input types `String`, `Text`, `Number`, `Boolean`, `Dropdown`, and `Hidden` are available. As seen above, `String` maps to a single-line input, while `Text` maps to a multi-line input.
 
-#### Number type
+### String type
+
+The `String` type maps to a single-line input field. By default, this will be persisted as a string in the BPMN. Refer to the [FEEL](#feel) section to use `Strings` as expressions.
+
+### Text type
+
+The `Text` type maps to a multi-line text area. By default, this will be persisted as a string in the BPMN. Refer to the [FEEL](#feel) section to use `Text` as expressions.
+
+### Hidden type
+
+The `Hidden` type is not shown in the properties panel. It is used to set [static](#value) or [generated](#generated-value) values that should not be changed by the user.
+
+### Number type
 
 The `Number` type maps to a number input field. By default, this will be persisted as a string in the BPMN. Refer to the [FEEL](#feel) section to use `Numbers` as expressions.
 
-#### Boolean / checkbox type
+### Boolean / checkbox type
 
 The `Boolean` type maps to a checkbox that can be toggled by the user.
 
 When checked, it maps to `true` in the respective field (refer to [bindings](#bindings)). Additionally, refer to the [FEEL](#feel) section to use `Booleans` as expressions.
 
-#### Dropdown type
+### Dropdown type
 
 The `Dropdown` type allows users to select from a number of pre-defined options that are stored in a custom properties `choices` attribute as `{ name, value }` pairs:
 
 ```json
-...
+{
+  ...,
   "properties": [
     ...
     {
@@ -176,25 +229,38 @@ The `Dropdown` type allows users to select from a number of pre-defined options 
       "type": "Dropdown",
       "value": "get",
       "choices": [
-        { "name": "GET", "value": "get" },
-        { "name": "POST", "value": "post" },
-        { "name": "PATCH", "value": "patch" },
-        { "name": "DELETE", "value": "delete" }
+        {
+          "name": "GET",
+          "value": "get"
+        },
+        {
+          "name": "POST",
+          "value": "post"
+        },
+        {
+          "name": "PATCH",
+          "value": "patch"
+        },
+        {
+          "name": "DELETE",
+          "value": "delete"
+        }
       ],
       "binding": {
         "type": "zeebe:taskHeader",
         "key": "method"
       }
     }
-  ]
-...
+  ],
+  ...
+}
 ```
 
 The resulting properties panel control looks like this:
 
 ![properties panel drop down](./img/field-dropdown.png)
 
-#### FEEL
+## FEEL
 
 The following input types support the `feel` property:
 
@@ -203,7 +269,7 @@ The following input types support the `feel` property:
 - `Number`
 - `Boolean`
 
-##### FEEL required
+### FEEL required
 
 The field will be displayed as a FEEL editor and a visual indication that a FEEL expression is required will be shown:
 
@@ -217,7 +283,7 @@ The field will be displayed as a FEEL editor and a visual indication that a FEEL
   ]
 ```
 
-##### FEEL optional
+### FEEL optional
 
 An indicator to switch to a FEEL expression is shown. When activated, the field will be displayed as a FEEL editor:
 
@@ -233,7 +299,7 @@ An indicator to switch to a FEEL expression is shown. When activated, the field 
 
 For `Boolean` and `Number` fields, the value will always be persisted as a FEEL expression. This ensures that the value will not be interpreted as a string when evaluated in the engine.
 
-##### FEEL static
+### FEEL static
 
 The value of `feel: static` is only valid for `Boolean` and `Number` fields. Similar to [FEEL optional](#feel-optional), the value of the field will be persisted as a FEEL expression. However, there is no toggle to switch to a FEEL editor and ensures only a static value can be entered:
 
@@ -249,13 +315,17 @@ The value of `feel: static` is only valid for `Boolean` and `Number` fields. Sim
 
 For binding types `zeebe:input` and `zeebe:output`, `feel: static` is the value used in case of missing `feel` property.
 
-### Bindings
+## Bindings
 
-The following ways exist to map a custom field to the underlying BPMN 2.0 XML. The **mapping result** in the following section uses `[userInput]` to indicate where the input provided by the user in the `Properties Panel` is set in the BPMN XML. As default or if no user input was given, the value specified in `value` is displayed and used for `[userInput]`. `[]` brackets are used to indicate where the parameters are mapped to in the XML.
+The following ways exist to map a custom field to the underlying BPMN 2.0 XML.
+The **mapping result** in the following section uses `[userInput]` to indicate where the input provided by the user in the `Properties Panel` is set in the BPMN XML.
+As default or if no user input was given, the value specified in `value` is displayed and used for `[userInput]`.
+`[]` brackets are used to indicate where the parameters are mapped to in the XML.
 
-Notice that adherence to the following configuration options is enforced by design. If not adhering, it logs a validation error and ignores the respective element template.
+Notice that adherence to the following configuration options is enforced by design.
+If not adhering, the tooling logs a validation error and ignores the respective element template.
 
-#### `property`
+### `property`
 
 | **Binding `type`**          | `property`                       |
 | --------------------------- | -------------------------------- |
@@ -265,7 +335,7 @@ Notice that adherence to the following configuration options is enforced by desi
 
 Configures a generic BPMN element property.
 
-#### `zeebe:input`
+### `zeebe:input`
 
 | **Binding `type`**          | `zeebe:input`                                                                    |
 | --------------------------- | -------------------------------------------------------------------------------- |
@@ -275,7 +345,7 @@ Configures a generic BPMN element property.
 
 Configures an [input mapping](../../../concepts/variables/#input-mappings).
 
-#### `zeebe:output`
+### `zeebe:output`
 
 | **Binding `type`**          | `zeebe:output`                                                                   |
 | --------------------------- | -------------------------------------------------------------------------------- |
@@ -285,7 +355,7 @@ Configures an [input mapping](../../../concepts/variables/#input-mappings).
 
 Configures an [output mapping](../../../concepts/variables/#output-mappings).
 
-#### `zeebe:taskHeader`
+### `zeebe:taskHeader`
 
 | **Binding `type`**          | `zeebe:taskHeader`                                  |
 | --------------------------- | --------------------------------------------------- |
@@ -295,7 +365,7 @@ Configures an [output mapping](../../../concepts/variables/#output-mappings).
 
 Configures a [task header](../../bpmn/service-tasks/#task-headers).
 
-#### `zeebe:taskDefinition`
+### `zeebe:taskDefinition`
 
 | **Binding `type`**          | `zeebe:taskDefinition`                                                            |
 | --------------------------- | --------------------------------------------------------------------------------- |
@@ -305,7 +375,7 @@ Configures a [task header](../../bpmn/service-tasks/#task-headers).
 
 Configures the [task](../../bpmn/service-tasks/#task-definition) for a service or user task.
 
-#### `zeebe:taskDefinition:type`
+### `zeebe:taskDefinition:type`
 
 :::danger
 `zeebe:taskDefinition:type` is a deprecated binding. Instead, use `zeebe:taskDefinition` with `property=type`.
@@ -319,7 +389,7 @@ Configures the [task](../../bpmn/service-tasks/#task-definition) for a service o
 
 Configures the [task type](../../bpmn/service-tasks/#task-definition) for a service or user task.
 
-#### `zeebe:property`
+### `zeebe:property`
 
 | **Binding `type`**          | `zeebe:property`                                      |
 | --------------------------- | ----------------------------------------------------- |
@@ -329,7 +399,7 @@ Configures the [task type](../../bpmn/service-tasks/#task-definition) for a serv
 
 The `zeebe:property` binding allows you to set any arbitrary property for an outside system. It does not impact execution of the Zeebe engine.
 
-#### `bpmn:Message#property`
+### `bpmn:Message#property`
 
 | **Binding `type`**          | `bpmn:Message#property`                            |
 | --------------------------- | -------------------------------------------------- |
@@ -339,7 +409,7 @@ The `zeebe:property` binding allows you to set any arbitrary property for an out
 
 The `bpmn:Message#property` binding allows you to set properties of a `bpmn:Message` referred to by the templated element. This binding is only valid for templates of events with `bpmn:MessageEventDefinition`, receive tasks, and send tasks.
 
-#### `bpmn:Message#zeebe:subscription#property`
+### `bpmn:Message#zeebe:subscription#property`
 
 | **Binding `type`**          | `bpmn:Message#property`                            |
 | --------------------------- | -------------------------------------------------- |
@@ -355,7 +425,7 @@ The binding name of `correlationKey` is not applicable to message start events o
 
 :::
 
-#### `zeebe:calledElement`
+### `zeebe:calledElement`
 
 | **Binding `type`**          | `zeebe:calledElement`                                                                                          |
 | --------------------------- | -------------------------------------------------------------------------------------------------------------- |
@@ -375,7 +445,7 @@ For `zeebe:calledElement` bindings, variable propagation is not supported. To pr
 
 :::
 
-#### `zeebe:userTask`
+### `zeebe:userTask`
 
 | **Binding `type`**          | `zeebe:userTask`                                                                                                      |
 | --------------------------- | --------------------------------------------------------------------------------------------------------------------- |
@@ -385,7 +455,7 @@ For `zeebe:calledElement` bindings, variable propagation is not supported. To pr
 
 The `zeebe:userTask` binding allows you to configure the implementation type for a templated `bpmn:UserTask`. When present, it sets the task as a Camunda user task; when omitted, the task defaults to a job worker.
 
-#### `zeebe:formDefinition`
+### `zeebe:formDefinition`
 
 | **Binding `type`**          | `zeebe:formDefinition`                                                                                                            |
 | --------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
@@ -406,7 +476,7 @@ Properties `formId` and `externalReference` are mutually exclusive, meaning that
 
 :::
 
-#### `zeebe:assignmentDefinition`
+### `zeebe:assignmentDefinition`
 
 | **Binding `type`**          | `zeebe:assignmentDefinition`                                                                                           |
 | --------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
@@ -422,7 +492,7 @@ When `zeebe:assignmentDefinition` is used, `zeebe:userTask` must be set on the s
 
 :::
 
-#### `zeebe:taskSchedule`
+### `zeebe:taskSchedule`
 
 | **Binding type**         | `zeebe:taskSchedule`                                                                       |
 | ------------------------ | ------------------------------------------------------------------------------------------ |
@@ -437,7 +507,7 @@ When `zeebe:taskSchedule` is used, `zeebe:userTask` must be set on the same elem
 If the template sets a static `value` for any property, it must be defined as an ISO 8601 combined date and time representation.
 :::
 
-#### `zeebe:priorityDefinition`
+### `zeebe:priorityDefinition`
 
 | **Binding type**         | `zeebe:priorityDefinition`                                                                                                             |
 | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
@@ -452,7 +522,7 @@ When `zeebe:priorityDefinition` is used, `zeebe:userTask` must be set on the sam
 If the template sets a static `value` for `priority`, it must be between 0 and 100.
 :::
 
-#### `zeebe:calledDecision`
+### `zeebe:calledDecision`
 
 | **Binding `type`**          | `zeebe:calledDecision`                                                                                                            |
 | --------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
@@ -472,7 +542,7 @@ When `zeebe:calledDecision` is used, `zeebe:taskDefinition` cannot be used on th
 
 :::
 
-#### `zeebe:script`
+### `zeebe:script`
 
 | **Binding `type`**          | `zeebe:script`                                                                         |
 | --------------------------- | -------------------------------------------------------------------------------------- |
@@ -488,45 +558,11 @@ When `zeebe:script` is used, `zeebe:taskDefinition` cannot be used on the same e
 
 :::
 
-### Optional bindings
+## Optional bindings
 
 We support optional bindings that do not persist empty values in the underlying BPMN 2.0 XML.
 
 If a user removes the value in the configured control, it will also remove the mapped element.
-
-```json
-[
-  {
-    "$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema/resources/schema.json",
-    "name": "Task example",
-    "id": "some-template",
-    "appliesTo": ["bpmn:ServiceTask"],
-    "properties": [
-      {
-        "label": "Request",
-        "type": "String",
-        "optional": true,
-        "binding": {
-          "type": "zeebe:input",
-          "name": "request"
-        }
-      },
-      {
-        "label": "Response",
-        "type": "Text",
-        "optional": true,
-        "binding": {
-          "type": "zeebe:output",
-          "source": "response"
-        }
-      }
-    ]
-  }
-]
-```
-
-#### Supported Bindings
-
 The following binding types can be `optional`:
 
 - `zeebe:input`
@@ -534,50 +570,25 @@ The following binding types can be `optional`:
 - `zeebe:taskHeader`
 - `zeebe:property`
 
-### Groups
-
-You can define `groups` to organize custom fields into:
+Example:
 
 ```json
+
 {
-  "$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema/resources/schema.json",
-  "name": "Groups",
-  "id": "group-example",
-  "appliesTo": [
-    "bpmn:ServiceTask"
-  ],
-  "groups": [
-    {
-      "id": "definition",
-      "label": "Task definition",
-      "openByDefault": true
-    },
-    {
-      "id": "request",
-      "label": "Request payload"
-    },
-    {
-      "id": "result",
-      "label": "Result mapping"
-    },
-    {
-      "id": "authentication",
-      "label": "Authentication",
-      "tooltip": "Optional authentication settings"
-    }
-  ],
+  ...,
   "properties": [
-    ...
+    {
+      "label": "Request",
+      "type": "String",
+      "optional": true,
+      "binding": {
+        "type": "zeebe:input",
+        "name": "request"
+      }
+    }
   ]
 }
 ```
-
-Groups can have the following attributes:
-
-- `id`: Unique identifier of the group
-- `label`: Label of the group
-- `tooltip`: Tooltip for the group (optional)
-- `openByDefault`: Whether the group will be expanded in the properties panel (optional, default: `false`)
 
 Associate a field with a group (ID) via the fields `group` key:
 
@@ -602,7 +613,7 @@ Associate a field with a group (ID) via the fields `group` key:
 
 ![Groups](./img/groups.png)
 
-### Constraints
+## Constraints
 
 Custom fields may have a number of constraints associated with them:
 
@@ -611,7 +622,7 @@ Custom fields may have a number of constraints associated with them:
 - `maxLength`: Maximal length for the input
 - `pattern`: Regular expression to match the input against
 
-#### Regular expression
+### Regular expression
 
 Together with the `pattern` constraint, you can define your custom error messages:
 
@@ -632,103 +643,6 @@ Together with the `pattern` constraint, you can define your custom error message
     }
   ]
 ```
-
-### Placeholder
-
-The following property types support the `placeholder` attribute:
-
-- `String`
-- `Text`
-
-The placeholder is displayed when a field is empty:
-
-```json
-...
-  "properties": [
-    {
-      "label": "Web service URL",
-      "type": "String",
-      "binding": { ... },
-      "placeholder": "https://example.com"
-    }
-  ]
-```
-
-### Category
-
-You can define a category to group templates in the element template selection list. The category is defined as an object with `id` and `name` properties.
-
-```json
-[
-  {
-    "name": "REST connector",
-    "id": "io.camunda.examples.RestConnector",
-    "description": "A REST API invocation task.",
-    "appliesTo": ["bpmn:ServiceTask"],
-    "category": {
-      "id": "connectors",
-      "name": "Connectors"
-    },
-    "properties": [
-      ...
-    ]
-  }
-]
-```
-
-:::note
-The category is optional. If not defined, the template will be displayed in the **Templates** section.
-:::
-
-### Icons
-
-It is possible to define custom icons to update the visual appearance of elements after applying an element template.
-
-```json
-[
-  {
-    "name": "Template 1",
-    "id": "sometemplate",
-    "appliesTo": [
-      "bpmn:ServiceTask"
-    ],
-    "icon": {
-      "contents": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 22 22' fill='none'%3E%3Ccircle cx='11' cy='11' r='9' fill='black'/%3E%3Ctext x='6.9' y='14.9' fill='white' style='font-family: Arial; font-size: 10px;'%3EM%3C/text%3E%3C/svg%3E"
-    },
-    "properties": [
-      ...
-    ]
-  }
-]
-```
-
-![Icons](./img/icons.png)
-
-:::tip
-The icon contents must be a valid [data](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs) or HTTP(s) URL. We recommend using square icons as they get rendered 18x18 pixels on the canvas and 32x32 pixels in the properties panel.
-:::
-
-### Display all entries
-
-Per default, the element template defines the visible entries of the properties panel. All other property controls are hidden. If you want to bring all the default entries back, it is possible to use the `entriesVisible` property.
-
-```json
-[
-  {
-    "name": "Template 1",
-    "id": "sometemplate",
-    "entriesVisible": true,
-    "appliesTo": [
-      "bpmn:ServiceTask"
-    ],
-    "properties": [
-      ...
-    ]
-  }
-]
-```
-
-![Display default entries](./img/entries-visible.png)
 
 ## Defining conditional properties
 
@@ -820,3 +734,25 @@ There are three possible comparison operators:
     },
   ]
 ```
+
+## Display all entries
+
+Per default, the element template defines the visible entries of the properties panel. All other property controls are hidden. If you want to bring all the default entries back, it is possible to use the `entriesVisible` property.
+
+```json
+[
+  {
+    "name": "Template 1",
+    "id": "sometemplate",
+    "entriesVisible": true,
+    "appliesTo": [
+      "bpmn:ServiceTask"
+    ],
+    "properties": [
+      ...
+    ]
+  }
+]
+```
+
+![Display default entries](./img/entries-visible.png)
