@@ -194,7 +194,7 @@ Setting the `contextPath` in the Helm chart for Optimize will not overwrite the 
 If you are defining the `contextPath` for Operate in the Camunda Helm chart:
 
 ```bash
-core:
+orchestration:
    contextPath: /core
 ```
 

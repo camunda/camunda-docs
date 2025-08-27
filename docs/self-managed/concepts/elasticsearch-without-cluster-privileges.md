@@ -256,7 +256,7 @@ The following Helm values are needed to disable the schema manager in the Camund
 
 ```yaml
 # Helm chart values file.
-core:
+orchestration:
   env:
     - name: CAMUNDA_DATABASE_SCHEMAMANAGER_CREATESCHEMA
       value: "false"
@@ -281,7 +281,7 @@ If the application configurations are managed directly and do not rely on the He
 ```yaml
 # Helm chart values file.
 
-core:
+orchestration:
   configuration |
     [...] # Any other custom config.
     camunda.database:
