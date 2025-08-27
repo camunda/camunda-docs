@@ -4,39 +4,19 @@ title: Manage API clients
 description: "Let's create a client and manage our API clients."
 ---
 
-To interact with an orchestration cluster in the cloud from the outside, every client application must authenticate itself. An **OAuth Flow** is therefore used for authentication:
+To interact with an orchestration cluster from the outside, every client application must authenticate itself. An **OAuth Flow** is therefore used for authentication:
 
 ![auth-flow](./img/client-auth.png)
 
-The application authenticates itself with OAuth service using `Client Id` and `Client Secret`, OAuth service validates this information and returns an access token, and the application can then use this access token to interact with Zeebe in the cloud.
+The application authenticates itself with OAuth service using `Client Id` and `Client Secret`, OAuth service validates this information and returns an access token, and the application can then use this access token to interact with an orchestration cluster.
 
 The client configuration is shown at the bottom of the cluster detail view. Create a new client and all necessary information is displayed.
 
-For the `Client Id` and `Client Secret`, a client application can request an access token at the authentication URL (**Steps 1 and 2**). The access token is necessary to interact with Zeebe in the cloud (**Step 3**).
+For the `Client Id` and `Client Secret`, a client application can request an access token at the authentication URL (**Steps 1 and 2**). The access token is necessary to interact with an orchestration cluster (**Step 3**).
 
 :::note
 Access tokens have a validity period that can be found in the access token. After this time, a new access token must be requested.
 :::
-
-## Rate limiting
-
-The OAuth service rate limits about one request per second for all clients with the same source IP address.
-
-:::note
-All token requests count toward the rate limit, whether they are successful or not. If any client is running with an expired or invalid API key, that client will continually make token requests. That client will therefore exceed the rate limit for that IP address, and may block valid token requests from completing.
-:::
-
-The officially offered [client libraries](/apis-tools/working-with-apis-tools.md#official-camunda-clients-and-sdks) (as well as the Node.js and Spring clients) have already integrated with the auth routine, handle obtaining and refreshing an access token, and make use of a local cache.
-
-If too many token requests are executed from the same source IP address in a short time, all token requests from that source IP address are blocked for a certain time. Since the access tokens have a 24-hour validity period, they must be cached on the client side, reused while still valid, and refreshed via a new token request once the validity period has expired.
-
-When the rate limit is triggered, the client will receive an HTTP 429 response. Note the following workarounds:
-
-- Cache the token as it is still valid for 24 hours. The official SDKs already do this by default.
-- Keep the SDK up to date. We have noted issues in older versions of the Java SDK which did not correctly cache the token.
-- Given the rate limit applies to clients with the same source IP address, be mindful of:
-  - Unexpected clients running within your infrastructure.
-  - Updating all clients to use a current API key if you delete an API key and create a new one.
 
 ## Create a client
 
@@ -79,3 +59,23 @@ Depending on the scopes granted to these client credentials, the following varia
 - `CAMUNDA_TASKLIST_BASE_URL`: The base URL for Tasklist.
 - `CAMUNDA_OPERATE_BASE_URL`: The base URL for Operate.
 - `CAMUNDA_OPTIMIZE_BASE_URL`: The base URL for Optimize.
+
+## Rate limiting
+
+The OAuth service rate limits about one request per second for all clients with the same source IP address.
+
+:::note
+All token requests count toward the rate limit, whether they are successful or not. If any client is running with an expired or invalid API key, that client will continually make token requests. That client will therefore exceed the rate limit for that IP address, and may block valid token requests from completing.
+:::
+
+The officially offered [client libraries](/apis-tools/working-with-apis-tools.md#official-camunda-clients-and-sdks) (as well as the Node.js and Spring clients) have already integrated with the auth routine, handle obtaining and refreshing an access token, and make use of a local cache.
+
+If too many token requests are executed from the same source IP address in a short time, all token requests from that source IP address are blocked for a certain time. Since the access tokens have a 24-hour validity period, they must be cached on the client side, reused while still valid, and refreshed via a new token request once the validity period has expired.
+
+When the rate limit is triggered, the client will receive an HTTP 429 response. Note the following workarounds:
+
+- Cache the token as it is still valid for 24 hours. The official SDKs already do this by default.
+- Keep the SDK up to date. We have noted issues in older versions of the Java SDK which did not correctly cache the token.
+- Given the rate limit applies to clients with the same source IP address, be mindful of:
+  - Unexpected clients running within your infrastructure.
+  - Updating all clients to use a current API key if you delete an API key and create a new one.
