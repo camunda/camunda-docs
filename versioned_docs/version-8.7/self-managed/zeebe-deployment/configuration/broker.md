@@ -988,7 +988,8 @@ security:
 
 ### Console Ping Configuration
 
-This feature enables components like Broker, Tasklist, Operate, and Gateway to ping Console with license information.
+This feature enables components like the Zeebe Broker, Tasklist, Operate, and 
+Zeebe Gateway to ping Console with license information.
 
 #### camunda.console.ping
 
@@ -1010,7 +1011,7 @@ This feature enables components like Broker, Tasklist, Operate, and Gateway to p
 ```yaml
 camunda:
   console:
-    ping: 
+    ping:
       enabled: true
       endpoint: https://console.endpoint.com
       clusterId: test_cluster_id
