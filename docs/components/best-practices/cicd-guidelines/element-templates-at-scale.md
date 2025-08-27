@@ -105,7 +105,7 @@ To set up your local environment:
 - Choose how to [configure them](/components/modeler/desktop-modeler/element-templates/configuring-templates.md) depending on your needs. If your templates are reused across multiple projects, configuring them globally will make it easier to maintain. For project specific templates, consider making them available only for the that project to avoid exposing templates to projects that should not be using them.
 
 :::note
-If you are the templates creator/maintainer, make sure to include a `README` file in your **VCS repository** that contemplates the different aspects required to use your templates. For example, which secrets need to be configured, which BPMN process or forms need to be deployed before hand and link.
+If you are the templates creator/maintainer, include a `README` file in your **VCS repository** that contemplates the different aspects required to use your templates. For example, which secrets need to be configured and which BPMN process or forms need to be deployed in advance.
 :::
 
 ## Next steps
