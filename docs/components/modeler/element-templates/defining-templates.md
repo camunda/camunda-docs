@@ -8,11 +8,13 @@ An Element template is defined in template descriptor files as a JSON object.
 The JSON object typically contains the following properties:
 
 - `$schema : String`: URI pointing towards the [JSON schema](https://json-schema.org/) which defines the structure of the element template `.json` file. Element template schemas are maintained in the [element templates JSON schema](https://github.com/camunda/element-templates-json-schema) repository.
-- `name : String`: Name of the template. Shown in the element template selection modal and in the properties panel on the right side of the screen (after applying an element template).
 - `id : String`: ID of the template.
+- `version : Integer`: Optional property to support [templates versioning and upgrading](./template-metadata.md#template-versioning). If you add a version to a template, it is considered unique based on its ID and version. Two templates can have the same ID if their version is different.
+- `name : String`: Name of the template. Shown in the element template selection modal and in the properties panel on the right side of the screen (after applying an element template).
 - `description : String`: Optional description of the template. Shown in the element template selection modal and in the properties panel (after applying an element template).
 - `keywords: Array<String>`: Optional list of keywords. Can be used to help users find this template. Keywords are used for search and filtering but are not displayed in the UI.
 - `documentationRef : String`: Optional URL pointing to a template documentation. Shown in the properties panel (after applying an element template).
+- `icon : Object`: Optional icon configuration for the template. The icon is shown in the element template selection modal and in the properties panel (after applying an element template).
 - `version : Integer`: Optional property to support [templates versioning and upgrading](./template-metadata.md#template-versioning). If you add a version to a template, it is considered unique based on its ID and version. Two templates can have the same ID if their version is different.
 - `engines : Object`: Optional dictionary of environments [compatible with the template](./template-metadata.md#template-compatibility). Environment version is specified with semantic versions range.
 - `appliesTo : Array<String>`: List of BPMN types the template can be applied to.
