@@ -38,6 +38,8 @@ Templates are defined in template descriptor files as a JSON array:
 ]
 ```
 
+If your templates descriptor defines a single template, you can just create a JSON object. Take into account that WebModeler does not support loading JSON arrays.
+
 As seen in the code snippet, a template consists of a number of important components:
 
 - `$schema : String`: URI pointing towards the [JSON schema](https://json-schema.org/) which defines the structure of the element template `.json` file. Element template schemas are maintained in the [element templates JSON schema](https://github.com/camunda/element-templates-json-schema) repository. Following the [JSON schema](https://json-schema.org/) standard, you may use them for validation or to get assistance (e.g., auto-completion) when working with them in your favorite IDE.
@@ -81,6 +83,11 @@ For example, given the following `$schema` definition, the application takes `0.
 ```
 
 The JSON schema versioning is backward-compatible, meaning that all versions including or below the current one are supported.
+
+:::important
+
+Web Modeler ONLY support the latest version of the JSON schema. The `$schema` value will be overriden to match the latest one.
+:::
 
 ## Template versioning
 
