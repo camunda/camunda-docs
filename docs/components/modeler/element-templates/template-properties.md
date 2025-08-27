@@ -40,100 +40,9 @@ Additionally, if your editor supports JSON schema, these incompatibilities are h
 If you add multiple properties with equal `binding` objects, the behavior is undefined.
 :::
 
-## Example
+For a comprehensive example showing how to create a REST connector template with all the concepts covered in this documentation, see the [complete template example](./template-example.md) page.
 
-TODO move to own page?
-
-With each template, you define some user-editable fields as well as their mapping to BPMN 2.0 XML, and Camunda extension elements.
-
-Let us consider the following example that defines a template for invoking a REST API via a service task:
-
-```json
-{
-  "$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema/resources/schema.json",
-  "name": "REST connector",
-  "id": "io.camunda.examples.RestConnector",
-  "description": "A REST API invocation task.",
-  "appliesTo": ["bpmn:ServiceTask"],
-  "properties": [
-    {
-      "type": "Hidden",
-      "value": "http",
-      "binding": {
-        "type": "zeebe:taskDefinition",
-        "property": "type"
-      }
-    },
-    {
-      "label": "REST Endpoint URL",
-      "description": "Specify the url of the REST API to talk to.",
-      "type": "String",
-      "binding": {
-        "type": "zeebe:taskHeader",
-        "key": "url"
-      },
-      "constraints": {
-        "notEmpty": true,
-        "pattern": {
-          "value": "^https?://.*",
-          "message": "Must be http(s) URL."
-        }
-      }
-    },
-    {
-      "label": "REST Method",
-      "description": "Specify the HTTP method to use.",
-      "type": "Dropdown",
-      "value": "get",
-      "choices": [
-        { "name": "GET", "value": "get" },
-        { "name": "POST", "value": "post" },
-        { "name": "PATCH", "value": "patch" },
-        { "name": "DELETE", "value": "delete" }
-      ],
-      "binding": {
-        "type": "zeebe:taskHeader",
-        "key": "method"
-      }
-    },
-    {
-      "label": "Request Body",
-      "description": "Data to send to the endpoint.",
-      "value": "",
-      "type": "String",
-      "optional": true,
-      "binding": {
-        "type": "zeebe:input",
-        "name": "body"
-      }
-    },
-    {
-      "label": "Result Variable",
-      "description": "Name of variable to store the response data in.",
-      "value": "response",
-      "type": "String",
-      "optional": true,
-      "binding": {
-        "type": "zeebe:output",
-        "source": "= body"
-      }
-    }
-  ]
-}
-```
-
-The example defines five custom fields, each mapped to different technical properties:
-
-- The task type `http` is mapped to the `type` property of a `zeebe:taskDefinition` element in BPMN 2.0 XML.
-- The `REST Endpoint URL` and `REST Method` are mapped to `task headers`.
-- The `Request Body` is mapped to a local variable via an `input parameter`.
-- The `Result Variable` is mapped into a process variable via an `output parameter`.
-
-The task type is hidden to the user. Properties specified in the template can be edited through the properties panel as shown in the following screenshot:
-
-![Custom Fields](./img/overview.png)
-
-## Value
+## Setting a default value: `value`
 
 The `value` attribute defines a static default value for a property.
 It is used when the property is applied to an element and no user input has been provided yet.
@@ -150,7 +59,7 @@ The value must match the `type` of the property.
 }
 ```
 
-## Generated value
+## Generating a value: `generatedValue`
 
 As an alternative to static `value`, you can use a generated value. The value is generated when a property is applied to an element. Currently, the generated value can be a UUID:
 
@@ -167,7 +76,7 @@ As an alternative to static `value`, you can use a generated value. The value is
 }
 ```
 
-## Placeholder
+## Setting a text placeholder: `placeholder`
 
 The following property types support the `placeholder` attribute:
 
@@ -188,33 +97,33 @@ The placeholder is displayed when a field is empty:
   ]
 ```
 
-## Types
+## Setting the input type: `type`
 
 The input types `String`, `Text`, `Number`, `Boolean`, `Dropdown`, and `Hidden` are available. As seen above, `String` maps to a single-line input, while `Text` maps to a multi-line input.
 
-### String type
+### String input type
 
 The `String` type maps to a single-line input field. By default, this will be persisted as a string in the BPMN. Refer to the [FEEL](#feel) section to use `Strings` as expressions.
 
-### Text type
+### Text input type
 
 The `Text` type maps to a multi-line text area. By default, this will be persisted as a string in the BPMN. Refer to the [FEEL](#feel) section to use `Text` as expressions.
 
-### Hidden type
+### Hidden input type
 
 The `Hidden` type is not shown in the properties panel. It is used to set [static](#value) or [generated](#generated-value) values that should not be changed by the user.
 
-### Number type
+### Number input type
 
 The `Number` type maps to a number input field. By default, this will be persisted as a string in the BPMN. Refer to the [FEEL](#feel) section to use `Numbers` as expressions.
 
-### Boolean / checkbox type
+### Boolean / checkbox input type
 
 The `Boolean` type maps to a checkbox that can be toggled by the user.
 
 When checked, it maps to `true` in the respective field (refer to [bindings](#bindings)). Additionally, refer to the [FEEL](#feel) section to use `Booleans` as expressions.
 
-### Dropdown type
+### Dropdown input type
 
 The `Dropdown` type allows users to select from a number of pre-defined options that are stored in a custom properties `choices` attribute as `{ name, value }` pairs:
 
@@ -260,7 +169,7 @@ The resulting properties panel control looks like this:
 
 ![properties panel drop down](./img/field-dropdown.png)
 
-## FEEL
+## Adding FEEL editor support: `feel`
 
 The following input types support the `feel` property:
 
@@ -315,7 +224,7 @@ The value of `feel: static` is only valid for `Boolean` and `Number` fields. Sim
 
 For binding types `zeebe:input` and `zeebe:output`, `feel: static` is the value used in case of missing `feel` property.
 
-## Bindings
+## Binding an input to a BPMN or Camunda element property: `binding`
 
 The following ways exist to map a custom field to the underlying BPMN 2.0 XML.
 The **mapping result** in the following section uses `[userInput]` to indicate where the input provided by the user in the `Properties Panel` is set in the BPMN XML.
@@ -558,7 +467,7 @@ When `zeebe:script` is used, `zeebe:taskDefinition` cannot be used on the same e
 
 :::
 
-## Optional bindings
+## Preventing persisting empty values: `optional`
 
 We support optional bindings that do not persist empty values in the underlying BPMN 2.0 XML.
 
@@ -613,7 +522,7 @@ Associate a field with a group (ID) via the fields `group` key:
 
 ![Groups](./img/groups.png)
 
-## Constraints
+## Validating user input: `constraints`
 
 Custom fields may have a number of constraints associated with them:
 
@@ -622,9 +531,10 @@ Custom fields may have a number of constraints associated with them:
 - `maxLength`: Maximal length for the input
 - `pattern`: Regular expression to match the input against
 
-### Regular expression
+### Validating against a regex: `pattern`
 
-Together with the `pattern` constraint, you can define your custom error messages:
+Set `pattern` to a regular expression to ensure the user's input matches the pattern.
+Together with the `pattern` constraint, you can define your custom error message:
 
 ```json
 ...
@@ -644,7 +554,7 @@ Together with the `pattern` constraint, you can define your custom error message
   ]
 ```
 
-## Defining conditional properties
+## Showing properties conditionally: `condition`
 
 Properties may have a condition which determines when they should be active, depending on the value of another property. When property is **active**, it is displayed in the properties panel, and its value is serialized in the XML. If a property is **not active**, it is not displayed, and its value is removed from the XML.
 
@@ -735,7 +645,7 @@ There are three possible comparison operators:
   ]
 ```
 
-## Display all entries
+## Displaying all entries: `entriesVisible`
 
 Per default, the element template defines the visible entries of the properties panel. All other property controls are hidden. If you want to bring all the default entries back, it is possible to use the `entriesVisible` property.
 
