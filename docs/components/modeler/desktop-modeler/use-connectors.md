@@ -37,5 +37,5 @@ For full control over the building blocks offered by Desktop Modeler, download e
 ## Additional resources
 
 - [About Camunda 8 connectors](../../connectors/out-of-the-box-connectors/available-connectors-overview.md)
-- [About Element Templates](/components/modeler/element-templates/about-templates.md)
+- [About element templates](/components/modeler/element-templates/about-templates.md)
 - [Desktop Modeler flags](./flags/flags.md#disable-connector-templates)
