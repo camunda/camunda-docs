@@ -32,10 +32,9 @@ module.exports = {
   ],
   Components: [
     "components/components-overview",
-    "components/whats-new-in-88",
     {
       type: "category",
-      label: "Concepts",
+      label: "Camunda basics",
       link: {
         type: "doc",
         id: "components/concepts/concepts-overview",
@@ -77,83 +76,162 @@ module.exports = {
     },
     {
       type: "category",
-      label: "Agentic orchestration",
+      label: "Features and integrations",
       link: {
         type: "doc",
-        id: "components/agentic-orchestration/agentic-orchestration",
+        id: "components/features-integrations/features-integrations",
       },
       items: [
-        "components/agentic-orchestration/ao-design",
-        "components/agentic-orchestration/ai-agents",
-      ],
-    },
-    {
-      type: "category",
-      label: "Document handling",
-      link: {
-        type: "doc",
-        id: "components/document-handling/getting-started",
-      },
-      items: [
-        "components/document-handling/use-cases",
-        "components/document-handling/upload-document-to-bpmn-process",
-        "components/document-handling/display-and-download-document",
-        "components/document-handling/send-document-to-external-system-via-connector",
-      ],
-    },
-    {
-      type: "category",
-      label: "Intelligent document processing (IDP)",
-      link: {
-        type: "doc",
-        id: "components/modeler/web-modeler/idp",
-      },
-      items: [
-        "components/modeler/web-modeler/idp/idp-configuration",
-        "components/modeler/web-modeler/idp/idp-applications",
         {
           type: "category",
-          label: "Document extraction",
+          label: "Agentic orchestration",
           link: {
             type: "doc",
-            id: "components/modeler/web-modeler/idp/idp-document-extraction",
+            id: "components/agentic-orchestration/agentic-orchestration",
           },
           items: [
-            "components/modeler/web-modeler/idp/idp-unstructured-extraction",
-            "components/modeler/web-modeler/idp/idp-structured-extraction",
+            "components/agentic-orchestration/ao-design",
+            "components/agentic-orchestration/ai-agents",
           ],
         },
-        // "components/modeler/web-modeler/idp/idp-document-automation",
         {
           type: "category",
-          label: "Integrate IDP into your processes",
+          label: "Document handling",
           link: {
             type: "doc",
-            id: "components/modeler/web-modeler/idp/idp-integrate",
+            id: "components/document-handling/getting-started",
           },
-          items: ["components/modeler/web-modeler/idp/idp-example"],
+          items: [
+            "components/document-handling/use-cases",
+            "components/document-handling/upload-document-to-bpmn-process",
+            "components/document-handling/display-and-download-document",
+            "components/document-handling/send-document-to-external-system-via-connector",
+          ],
         },
-        "components/modeler/web-modeler/idp/idp-key-concepts",
-        "components/modeler/web-modeler/idp/idp-reference",
-      ],
-    },
-    {
-      type: "category",
-      label: "Robotic Process Automation (RPA)",
-      link: {
-        type: "doc",
-        id: "components/rpa/overview",
-      },
-      items: [
-        "components/rpa/getting-started",
-        "components/rpa/production",
         {
-          type: "link",
-          label: "RPA library specifications",
-          href: "https://camunda.github.io/rpa-python-libraries/",
+          type: "category",
+          label: "Intelligent document processing (IDP)",
+          link: {
+            type: "doc",
+            id: "components/modeler/web-modeler/idp",
+          },
+          items: [
+            "components/modeler/web-modeler/idp/idp-configuration",
+            "components/modeler/web-modeler/idp/idp-applications",
+            {
+              type: "category",
+              label: "Document extraction",
+              link: {
+                type: "doc",
+                id: "components/modeler/web-modeler/idp/idp-document-extraction",
+              },
+              items: [
+                "components/modeler/web-modeler/idp/idp-unstructured-extraction",
+                "components/modeler/web-modeler/idp/idp-structured-extraction",
+              ],
+            },
+            // "components/modeler/web-modeler/idp/idp-document-automation",
+            {
+              type: "category",
+              label: "Integrate IDP into your processes",
+              link: {
+                type: "doc",
+                id: "components/modeler/web-modeler/idp/idp-integrate",
+              },
+              items: ["components/modeler/web-modeler/idp/idp-example"],
+            },
+            "components/modeler/web-modeler/idp/idp-key-concepts",
+            "components/modeler/web-modeler/idp/idp-reference",
+          ],
+        },
+        {
+          type: "category",
+          label: "Robotic Process Automation (RPA)",
+          link: {
+            type: "doc",
+            id: "components/rpa/overview",
+          },
+          items: [
+            "components/rpa/getting-started",
+            "components/rpa/production",
+            {
+              type: "link",
+              label: "RPA library specifications",
+              href: "https://camunda.github.io/rpa-python-libraries/",
+            },
+          ],
+        },
+        {
+          type: "category",
+          label: "Camunda integrations",
+          link: {
+            type: "doc",
+            id: "components/camunda-integrations/overview",
+          },
+          items: [
+            {
+              type: "category",
+              label: "SAP",
+              link: {
+                type: "doc",
+                id: "components/camunda-integrations/sap/sap-integration",
+              },
+              items: [
+                "components/camunda-integrations/sap/odata-connector",
+                "components/camunda-integrations/sap/rfc-connector",
+                "components/camunda-integrations/sap/btp-plugin",
+                "components/camunda-integrations/sap/csap-cli",
+              ],
+            },
+          ],
+        },
+        {
+          type: "category",
+          label: "Early access",
+          link: {
+            type: "doc",
+            id: "components/early-access/overview",
+          },
+          items: [
+            {
+              type: "category",
+              label: "Alpha features",
+              link: {
+                type: "doc",
+                id: "components/early-access/alpha/alpha-features",
+              },
+              items: [
+                {
+                  type: "category",
+                  label: "BPMN Copilot",
+                  link: {
+                    type: "doc",
+                    id: "components/early-access/alpha/bpmn-copilot/bpmn-copilot",
+                  },
+                  items: [
+                    "components/early-access/alpha/bpmn-copilot/bpmn-copilot",
+                  ],
+                },
+                "components/early-access/alpha/feel-copilot/feel-copilot",
+                {
+                  type: "category",
+                  label: "MCP Client",
+                  link: {
+                    type: "doc",
+                    id: "components/early-access/alpha/mcp-client/mcp-client",
+                  },
+                  items: [
+                    "components/early-access/alpha/mcp-client/mcp-remote-client-connector",
+                    "components/early-access/alpha/mcp-client/mcp-client-connector",
+                  ],
+                },
+              ],
+            },
+          ],
         },
       ],
     },
+
     {
       type: "category",
       label: "Modeler",
@@ -679,6 +757,21 @@ module.exports = {
     },
     {
       type: "category",
+      label: "Camunda 8 SaaS",
+      link: {
+        type: "doc",
+        id: "components/saas/saas",
+      },
+      items: [
+        "reference/regions",
+        "reference/camunda-help-center",
+        "reference/auto-updates",
+        "reference/status",
+        "reference/saas-ip-addresses",
+      ],
+    },
+    {
+      type: "category",
       label: "Best Practices",
       link: {
         type: "doc",
@@ -719,89 +812,6 @@ module.exports = {
             "components/best-practices/operations/reporting-about-processes",
           ],
         },
-      ],
-    },
-    {
-      type: "category",
-      label: "Camunda integrations",
-      link: {
-        type: "doc",
-        id: "components/camunda-integrations/overview",
-      },
-      items: [
-        {
-          type: "category",
-          label: "SAP",
-          link: {
-            type: "doc",
-            id: "components/camunda-integrations/sap/sap-integration",
-          },
-          items: [
-            "components/camunda-integrations/sap/odata-connector",
-            "components/camunda-integrations/sap/rfc-connector",
-            "components/camunda-integrations/sap/btp-plugin",
-            "components/camunda-integrations/sap/csap-cli",
-          ],
-        },
-      ],
-    },
-    {
-      type: "category",
-      label: "Early access",
-      link: {
-        type: "doc",
-        id: "components/early-access/overview",
-      },
-      items: [
-        {
-          type: "category",
-          label: "Alpha features",
-          link: {
-            type: "doc",
-            id: "components/early-access/alpha/alpha-features",
-          },
-          items: [
-            {
-              type: "category",
-              label: "BPMN Copilot",
-              link: {
-                type: "doc",
-                id: "components/early-access/alpha/bpmn-copilot/bpmn-copilot",
-              },
-              items: [
-                "components/early-access/alpha/bpmn-copilot/bpmn-copilot",
-              ],
-            },
-            "components/early-access/alpha/feel-copilot/feel-copilot",
-            {
-              type: "category",
-              label: "MCP Client",
-              link: {
-                type: "doc",
-                id: "components/early-access/alpha/mcp-client/mcp-client",
-              },
-              items: [
-                "components/early-access/alpha/mcp-client/mcp-remote-client-connector",
-                "components/early-access/alpha/mcp-client/mcp-client-connector",
-              ],
-            },
-          ],
-        },
-      ],
-    },
-    {
-      type: "category",
-      label: "Camunda 8 SaaS",
-      link: {
-        type: "doc",
-        id: "components/saas/saas",
-      },
-      items: [
-        "reference/regions",
-        "reference/camunda-help-center",
-        "reference/auto-updates",
-        "reference/status",
-        "reference/saas-ip-addresses",
       ],
     },
     "reference/glossary",
@@ -999,9 +1009,10 @@ module.exports = {
           label: "8.8",
           link: {
             type: "doc",
-            id: "reference/announcements-release-notes/880/880-announcements",
+            id: "components/whats-new-in-88",
           },
           items: [
+            "components/whats-new-in-88",
             "reference/announcements-release-notes/880/880-announcements",
             "reference/announcements-release-notes/880/880-release-notes",
           ],
