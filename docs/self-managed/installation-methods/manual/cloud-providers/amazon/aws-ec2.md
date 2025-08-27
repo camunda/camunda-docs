@@ -424,7 +424,7 @@ When using AWS, you can utilize [S3](https://aws.amazon.com/s3/) for backing up 
 
 For troubleshooting assistance, consult the [operational guides troubleshooting documentation](/self-managed/operational-guides/troubleshooting.md).
 
-## Next Steps
+## Next steps
 
 After setting up your cluster, many users typically do the following:
 
