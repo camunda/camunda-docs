@@ -199,6 +199,12 @@ module.exports = {
                 "components/modeler/web-modeler/play-your-process",
               ],
             },
+            {
+              "Element templates": [
+                "components/modeler/web-modeler/element-templates/manage-element-templates",
+                "components/modeler/web-modeler/element-templates/using-templates-in-web-modeler",
+              ],
+            },
             "components/modeler/web-modeler/camunda-marketplace",
             "components/modeler/web-modeler/versions",
             "components/modeler/web-modeler/token-simulation",
