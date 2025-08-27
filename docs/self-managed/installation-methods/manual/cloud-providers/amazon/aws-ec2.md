@@ -406,19 +406,7 @@ Follow the example in the [Orchestration Cluster REST API documentation](/apis-t
 Upgrading directly from Camunda 8.7 to 8.8 is not supported and cannot be performed.
 :::
 
-To update to a new patch release, follow this recommended approach:
-
-1. Remove the `lib` folder. This ensures outdated dependencies from previous versions are fully removed.
-2. Overwrite the remaining files with those from the downloaded patch release package.
-3. Restart Camunda 8.
-
-You can automate this process using the `all-in-one-install.sh` script, which:
-
-- Detects an existing Camunda 8 installation.
-- Deletes the `lib` folder to clear outdated dependencies.
-- Overwrites files with the updated version.
-- Regenerates configuration files.
-- Restarts the application to apply updates.
+For manual installations, see the [upgrade guide](/self-managed/installation-methods/manual/upgrade.md) for detailed instructions.
 
 ### Monitoring
 
