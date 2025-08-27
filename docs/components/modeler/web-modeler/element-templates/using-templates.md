@@ -82,3 +82,5 @@ If diagram element supports being used as a template, a _Save as_ clickable link
 The template can be further customized by [editing the templates](/components/connectors/manage-connector-templates.md).
 
 Also, it needs to be published before it can be used.
+
+Find more information about this functionality [here](./save-as-element-templates.md)
