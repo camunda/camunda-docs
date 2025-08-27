@@ -30,7 +30,7 @@ The **Save as template** feature is available for the following BPMN activity ty
 - Manual task
 - Call activity
 
-You cannot create a template for the [undefined task type](../../bpmn/undefined-tasks).
+You cannot create a template for the [undefined task type](../../../bpmn/undefined-tasks).
 
 ## Create an element template from a task
 

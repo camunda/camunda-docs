@@ -86,7 +86,7 @@ The JSON schema versioning is backward-compatible, meaning that all versions inc
 
 :::important
 
-Web Modeler ONLY support the latest version of the JSON schema. The `$schema` value will be overriden to match the latest one.
+Web Modeler only support the latest version of the JSON schema hosted at `https://unpkg.com`. The element template `$schema` value will always be automatically updated to `https://unpkg.com/@camunda/zeebe-element-templates-json-schema/resources/schema.json`.
 :::
 
 ## Template versioning
