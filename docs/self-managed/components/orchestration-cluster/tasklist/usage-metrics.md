@@ -5,9 +5,7 @@ description: "Tasklist provides usage metrics under usage-metrics Actuator endpo
 ---
 
 :::warning Deprecated endpoint
-With the 8.8 release, Camunda announces the deprecation of the following tasklist usage metrics endpoint.
-Scheduled for removal in the 8.9 release.
-Please use the new endpoint instead [/v2/system/usage-metrics](../../../../apis-tools/orchestration-cluster-api-rest/specifications/get-usage-metrics.api.mdx)
+With the 8.8 release, Camunda announces the deprecation of the following Tasklist usage metrics endpoint. This is scheduled for removal in the 8.9 release. Use the new endpoint, [/v2/system/usage-metrics](../../../../apis-tools/orchestration-cluster-api-rest/specifications/get-usage-metrics.api.mdx).
 :::
 
 Tasklist provides usage metrics under `usage-metrics` Actuator endpoint. It is exposed on management port, which can be configured via `management.server.port` configuration parameter (default: 8080).
@@ -36,5 +34,5 @@ Sample response:
 ```
 
 :::warning Breaking change
-Assignees list removed from response
+Assignees list removed from response.
 :::
