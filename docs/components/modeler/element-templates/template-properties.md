@@ -4,11 +4,47 @@ title: Template properties
 description: "Learn how to define template properties including types, bindings, constraints, and advanced features."
 ---
 
-## Defining template properties
+The `properties` array is where you define what properties should be applied to the BPMN element and how these properties should be shown and validated in the properties panel.
+Element templates use `bindings` to map properties to BPMN 2.0 XML and Camunda extension elements.
+Only bindings that are supported by the element template schema can be set by an element template. You can find the full list of supported bindings in the [bindings](#bindings) section.
+All BPMN 2.0 XML and Camunda extension elements properties that the element template schema can define bindings for are hidden by default.
+The template author must explicitly make them user configurable to show them in the properties panel once the user has applied the template.
+
+:::note
+Some properties, such as, execution listeners, task listeners, element documentation, and multi-instance configurations cannot be set by element templates.
+They are situational and require knowledge of the process context to be used.
+As they are never part of any element template, users can configure them independently of the applied template.
+:::
+
+## What is part of a property?
+
+You build your template by adding property objects to the `properties` array. The important keys in a property definition are:
+
+- `label : string`: A descriptive text shown with the property.
+- `type : String | Text | Boolean | Dropdown | Hidden`: Defining the input type in the properties panel.
+- `feel : required | optional | static`: Defines whether the property supports [FEEL](#feel) expressions.
+- `value : string | number | boolean`: An optional default value to be used if the property to be bound is not yet set by the user or if the type is `Hidden`.
+- `generatedValue : object`: An optional configuration to generate a value when the property is applied to an element.
+- `placeholder : string`: An optional placeholder text shown in the input field when it is empty.
+- `binding : object`: An object specifying how the property is mapped to BPMN or Camunda extensions (cf. [bindings](#bindings)).
+- `optional : boolean`: Optional bindings do not persist empty values in the underlying BPMN 2.0 XML.
+- `constraints : object`: A list of editing constraints to apply to the value of the binding.
+- `group : string`: The group that the property belongs to. Todo link to groups section
+- `id : string`: An identifier that can be used to reference the property in conditional properties
+- `condition : object`: A condition that determines when [the property is active](#defining-conditional-properties)
+
+Not all keys and values are compatible with each other. For more information see the documentation below.
+Additionally, if your editor supports JSON schema, these incompatibilities are highlighted while you edit your template.
+
+:::note
+If you add multiple properties with equal `binding` objects, the behavior is undefined.
+:::
+
+## Example
 
 With each template, you define some user-editable fields as well as their mapping to BPMN 2.0 XML, and Camunda extension elements.
 
-Let us consider the following example that defines a template for a mail sending task:
+Let us consider the following example that defines a template for invoking a REST API via a service task:
 
 ```json
 {
@@ -94,19 +130,6 @@ The example defines five custom fields, each mapped to different technical prope
 The task type is hidden to the user. Properties specified in the template can be edited through the properties panel as shown in the following screenshot:
 
 ![Custom Fields](./img/overview.png)
-
-As seen in the example, the important attributes in a property definition are:
-
-- `label`: A descriptive text shown with the property.
-- `type`: Defining the visual appearance in the properties panel (may be any of `String`, `Text`, `Boolean`, `Dropdown` or `Hidden`).
-- `value`: An optional default value to be used if the property to be bound is not yet set.
-- `binding`: Specifying how the property is mapped to BPMN or Camunda extensions (cf. [bindings](#bindings)).
-- `constraints`: A list of editing constraints to apply to the template.
-
-In addition, fields can be activated conditionally via these properties:
-
-- `id`: An identifier that can be used to reference the property in conditional properties
-- `condition`: A condition that determines when [the property is active](#defining-conditional-properties)
 
 ### Generated value
 
