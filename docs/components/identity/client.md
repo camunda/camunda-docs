@@ -7,9 +7,9 @@ description: "Learn how to configure and manage client access to an orchestratio
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-Clients are applications that interact with the Camunda 8 orchestration cluster through its APIs. Managing client access involves configuring your identity provider and Camunda 8 to ensure your client applications have the necessary permissions to perform their tasks.
+Clients are applications that interact with an orchestration cluster through its APIs. Managing clients involves configuring their access to a cluster so client applications have the permissions they need.
 
-This guide describes how to manage client access when using an [external OpenID Connect (OIDC) provider](../concepts/access-control/connect-to-identity-provider.md) for authentication. This is supported for both SaaS and Self-Managed deployments.
+This guide describes how to manage client access in SaaS and in Self-Managed environments that use an [external OpenID Connect (OIDC) provider](../concepts/access-control/connect-to-identity-provider.md) for authentication.
 
 <Tabs groupId="deployment" defaultValue="saas" queryString values={
 [
