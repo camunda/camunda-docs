@@ -149,6 +149,10 @@ Examples:
 | `result: {"status": "Ok", "transactionId": "t-789"}` | **source:** `=result.status`<br/>**target:** `paymentStatus`<br/>**source:** `=result.transactionId`<br/>**target:** `transactionId` | `paymentStatus: "Ok"`<br/>`transactionId: "t-789"` |
 | `status: "Ok"`<br/>`transactionId: "t-789"`          | **source:** `=transactionId`<br/>**target:** `order.transactionId`                                                                   | `order: {"transactionId": "t-789"}`                |
 
+::note
+The source expression has to be in the same context as the target to be used. Otherwise, use the full access path should be used.
+:::
+
 ## Next steps
 
 - [Access variables](/components/modeler/feel/language-guide/feel-variables.md#access-variable)
