@@ -45,7 +45,7 @@ Camunda recommends storing shared templates in a separate VCS repository:
 
 | Desktop Modeler                                                                                                                                                                                          | Web Modeler                                                                                                                                  |
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| Discovers [local element templates](/components/modeler/desktop-modeler/element-templates/configuring-templates.md#global-templates) are loaded from the `.camunda/element-templates` folder if present. | Processes templates from a single folder. <br></br>If working with a project (not a process application), templates must first be published. |
+| [Local element templates](/components/modeler/desktop-modeler/element-templates/configuring-templates.md#global-templates) are loaded from the `.camunda/element-templates` folder if present. | Processes templates from a single folder. <br></br>If working with a project (not a process application), templates must first be published. |
 
 :::note
 
