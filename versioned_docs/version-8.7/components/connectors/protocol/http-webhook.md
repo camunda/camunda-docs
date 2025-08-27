@@ -157,6 +157,12 @@ You can still use HTTP Webhook connector in Desktop Modeler, or with your Camund
 In that case, HTTP Webhook connector deployments and URLs will not be displayed in Modeler.
 :::
 
+For self-managed installations using the desktop modeler, the webhook URL format is:
+
+`http(s)://<base URL>/<contextPath>/inbound/<webhook ID>`
+
+If no `contextPath` is specified in the Helm chart, it must be omitted from the URL.
+
 ### Example
 
 Give a use-case when you need to configure a GitHub webhook with an **HTTP Webhook connector** in such a way that: (1) your BPMN process starts on every opened PR, and (2) the PR URL is exposed as a process variable.
