@@ -77,6 +77,7 @@ and process values).
 | createTemplate                | If `true` missing indexes will be created automatically.                                                                                                                                                   | `true`       |
 | numberOfShards                | The number of [shards](https://opensearch.org/docs/latest/install-and-configure/configuring-opensearch/index-settings/#static-index-level-index-settings) used for each new record index created.          | 3            |
 | numberOfReplicas              | The number of shard [replicas](https://opensearch.org/docs/latest/install-and-configure/configuring-opensearch/index-settings/#dynamic-index-level-index-settings) used for each new record index created. | 0            |
+| templatePriority              | The [priority](https://docs.opensearch.org/latest/im-plugin/index-templates) used for the index templates created by the exporter. This is only available for 8.7.11 and later versions                    | 20           |
 | command                       | If `true` command records will be exported                                                                                                                                                                 | `false`      |
 | event                         | If `true` event records will be exported                                                                                                                                                                   | `true`       |
 | rejection                     | If `true` rejection records will be exported                                                                                                                                                               | `false`      |
@@ -276,7 +277,6 @@ signed using trusted root certificate authorities.
 
 1.  First, create a new custom trust store which contains the same data as the default one, using PKCS12 format. To do so, find the
     location of the default `cacerts` trust store:
-
     - On Linux systems, find it at `$JAVA_HOME/lib/security/cacerts`.
     - For macOS, find it under `$(/usr/libexec/java_home)/jre/lib/security/cacerts`.
 
@@ -308,7 +308,6 @@ signed using trusted root certificate authorities.
     ```
 
     Then, specify the following properties when running the application:
-
     - `javax.net.ssl.trustStore`: must be set to the path of your custom trust store.
     - `javax.net.ssl.trustStorePassword`: set to your trust store password.
 

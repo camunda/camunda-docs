@@ -44,6 +44,7 @@ module.exports = {
         "components/concepts/clusters",
         "components/concepts/processes",
         "components/concepts/process-applications",
+        "components/concepts/element-templates",
         "components/concepts/job-workers",
         "components/concepts/execution-listeners",
         {
@@ -70,9 +71,6 @@ module.exports = {
           "Access control": [
             "components/concepts/access-control/access-control-overview",
             "components/concepts/access-control/authorizations",
-            "components/concepts/access-control/connect-to-identity-provider",
-            "components/concepts/access-control/user-groups",
-            "components/concepts/access-control/user-task-access-restrictions",
           ],
         },
       ],
@@ -391,10 +389,12 @@ module.exports = {
           },
           items: [
             "components/tasklist/userguide/using-tasklist",
+            "components/tasklist/api-versions",
             "components/tasklist/userguide/managing-tasks",
             "components/tasklist/userguide/using-filters",
             "components/tasklist/userguide/defining-task-priorities",
             "components/tasklist/userguide/starting-processes",
+            "components/tasklist/user-task-access-restrictions",
             "components/tasklist/userguide/tasklist-localization",
           ],
         },
@@ -640,6 +640,7 @@ module.exports = {
           "Manage your organization": [
             "components/console/manage-organization/organization-settings",
             "components/console/manage-organization/manage-users",
+            "components/console/manage-organization/manage-user-groups",
             "components/console/manage-organization/view-organization-activity",
             "components/console/manage-organization/enable-alpha-features",
             "components/console/manage-organization/usage-history",
@@ -1102,17 +1103,7 @@ module.exports = {
       },
       items: [
         "self-managed/reference-architecture/kubernetes",
-        {
-          type: "category",
-          label: "Manual",
-          link: {
-            type: "doc",
-            id: "self-managed/reference-architecture/manual",
-          },
-          items: [
-            "self-managed/installation-methods/helm/cloud-providers/amazon/aws-ec2",
-          ],
-        },
+        "self-managed/reference-architecture/manual",
       ],
     },
     {
@@ -1302,7 +1293,27 @@ module.exports = {
           ],
         },
         "self-managed/installation-methods/docker/docker",
-        "self-managed/installation-methods/manual/manual-install",
+        {
+          type: "category",
+          label: "Manual",
+          items: [
+            "self-managed/installation-methods/manual/install",
+            "self-managed/installation-methods/manual/upgrade",
+            {
+              type: "category",
+              label: "Cloud providers",
+              items: [
+                {
+                  type: "category",
+                  label: "Amazon",
+                  items: [
+                    "self-managed/installation-methods/manual/cloud-providers/amazon/aws-ec2",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
       ],
     },
     {

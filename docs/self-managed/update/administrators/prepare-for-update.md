@@ -94,7 +94,7 @@ The following table provides a high-level overview of the impact of these change
 <tr>
     <td>User task authorizations</td>
     <td><span className="label-highlight orange">Medium</span></td>
-    <td>[User task access restrictions](/components/concepts/access-control/user-task-access-restrictions.md) only apply to the Tasklist v1 API. After switching to the v2 API with Tasklist, user task access restrictions do not apply.</td>
+    <td>[User task access restrictions](/components/tasklist/user-task-access-restrictions.md) only apply to the Tasklist v1 API. After switching to the v2 API with Tasklist, user task access restrictions do not apply.</td>
 </tr>
 <tr>
     <td>Identity via Keycloak</td>
