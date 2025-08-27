@@ -1,6 +1,7 @@
 ---
 id: migrate-to-camunda-process-test
 title: Migrate to Camunda Process Test
+sidebar_label: "Camunda Process Test"
 description: "Learn how to migrate from Zeebe Process Test to Camunda Process Test"
 ---
 
