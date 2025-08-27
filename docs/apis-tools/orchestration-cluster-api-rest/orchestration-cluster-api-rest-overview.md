@@ -51,7 +51,7 @@ This section helps you get up and running in minutes. To begin using the Orchest
 
 ### Authentication
 
-Authentication for the Orchestration Cluster REST API depends on your environment and how you deploy Camunda 8.
+Authentication for the Orchestration Cluster REST API depends on your environment and how you deploy Camunda 8. Authenticate your Client requests based on your setup.
 
 **Supported authentication methods**
 
@@ -95,12 +95,7 @@ For a complete walkthrough with code examples, see our [Getting Started Tutorial
 
 ### Explore the API
 
-- Visit the [interactive Orchestration Cluster REST API Explorer](./specifications/orchestration-cluster-api.info.mdx) to:
-  - Browse available endpoints
-  - See request and response examples
-  - Check code samples
-
-- Prefer code-first? [Download the OpenAPI spec](https://github.com/camunda/camunda/blob/main/zeebe/gateway-protocol/src/main/proto/rest-api.yaml) to generate your own client or inspect the full schema.
+<ApiGrid items={apiExplorationCards} />
 
 ## API reference
 

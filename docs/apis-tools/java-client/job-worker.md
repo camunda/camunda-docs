@@ -19,13 +19,13 @@ try (final JobWorker workerRegistration = client.newWorker()
         .handler(new EmailJobHandler())
         .open()) {
 
-        System.out.println("Job worker opened and receiving jobs of type: " + jobType);
+    System.out.println("Job worker opened and receiving jobs of type: " + jobType);
 
-// Keep the worker running
-Thread.sleep(Duration.ofMinutes(10));
-        } catch (InterruptedException e) {
-        throw new RuntimeException(e);
-            }
+    // Keep the worker running
+    Thread.sleep(Duration.ofMinutes(10));
+} catch (InterruptedException e) {
+    throw new RuntimeException(e);
+}
 
 private static class EmailJobHandler implements JobHandler {
     @Override
