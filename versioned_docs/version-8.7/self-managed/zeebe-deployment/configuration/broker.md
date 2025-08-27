@@ -988,13 +988,12 @@ security:
 
 ### Console Ping Configuration
 
-This feature enables components like the Zeebe Broker, Tasklist, Operate, and
-Zeebe Gateway to ping Console with license information.
+This feature enables components like the Zeebe Broker, Tasklist, Operate, and Zeebe Gateway to ping Console with license information.
 
 #### camunda.console.ping
 
 | Field                        | Description                                                                                                                                                                            | Example value                  |
-|------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------|
+| ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------ |
 | `enabled`                    | Enables or disables the ping to console feature. Disabled by default. This setting can also be overridden using the environment variable `CAMUNDA_CONSOLE_PING_ENABLED`                | `true`                         |
 | `endpoint`                   | Endpoint where pings should be sent. This setting can also be overridden using the environment variable `CAMUNDA_CONSOLE_PING_ENDPOINT`.                                               | `https://console.endpoint.com` |
 | `clusterId`                  | Unique cluster ID included in the ping <br/>payload. This setting can also be overridden using the environment variable `CAMUNDA_CONSOLE_PING_CLUSTERID`.                              | `test_cluster_id`              |
