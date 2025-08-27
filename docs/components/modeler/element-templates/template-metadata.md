@@ -6,7 +6,7 @@ description: "Learn about template metadata fields like name, ID, description, k
 
 The metadata of an element template contains important information about the template itself, such as its name, description, version, compatibility with different Camunda versions, and the schema that is used to validate the template itself.
 
-## Validation: JSON schema
+## Validation: `$schema`
 
 The application uses the `$schema` property to ensure compatibility for a given element template. You find [the latest supported versions here](https://www.npmjs.com/package/@camunda/zeebe-element-templates-json-schema).
 
@@ -20,7 +20,7 @@ For example, given the following `$schema` definition, the application takes `0.
 
 The JSON schema versioning is backward-compatible, meaning that all versions including or below the current one are supported.
 
-## Identification: Id and Version
+## Identification: `id` and `version`
 
 The `id` key defines the ID of the template. Templates with the same `id` and different versions offer an upgrade path.
 To support [template evolution](https://github.com/bpmn-io/element-templates/blob/main/docs/LIFE_CYCLE.md#overview), maintain a `version` property on your templates:
@@ -42,17 +42,18 @@ Versioning is an important cornerstone of template evolution. Review the [upstre
 The template `id` and `version` together form a unique identifier for a template. Two templates can have the same `id` if their `version` is different.
 If `id` and `version` are the same for two templates, the tooling considers them to be the same template.
 
-## Discoverability: `name`, `description`, `keywords`, `icon`, Documentation Reference, and Category
+## Discoverability: `name`, `description`, `keywords`, `icon`, `documentationRef`, and `category`
 
 These keys define the user-facing metadata of the template. They help the template users to discover and understand the purpose of the template.
 They are shown when selecting a template and when the template has been applied to an element.
 
-- `name` key defines the name of the template.
-- `description` key is optional and provides additional information about the template.
-- `keywords` key is an optional list of keywords that can help users find this template. Keywords are used for search and filtering but are not displayed in the UI.
-- `icon` key is an optional icon configuration for the template. The icon source, must be a valid HTTP(s) or data URL.
-- `documentationRef` key is an optional URL pointing to a template documentation. It is shown in the properties panel (after applying an element template).
-- `category` key is an optional category configuration for the template. The category is shown in the element template selection modal. A category must have an `id` and a `name`.
+- `name : String` key defines the name of the template.
+- `description : String` key is optional and provides additional information about the template.
+- `keywords : Array<String>` key is an optional list of keywords that can help users find this template. Keywords are used for search and filtering but are not displayed in the UI.
+- `icon : Object` key is an optional icon configuration for the template. The icon contents must be a valid [data](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs) or HTTP(s) URL. We recommend using square icons as they get rendered 18x18 pixels on the canvas and 32x32 pixels in the properties panel.
+- `documentationRef : String` key is an optional URL pointing to a template documentation. It is shown in the properties panel (after applying an element template).
+- `category : Object` key is an optional category configuration for the template. You can define a category to group templates in the element template selection list. The category is defined as an object with `id` and `name` properties.
+  A category must have an `id` and a `name`. The category is optional. If not defined, the template will be displayed in the **Templates** section.
 
 ```json
 {
@@ -64,7 +65,7 @@ They are shown when selecting a template and when the template has been applied 
     "create action"
   ],
   "icon": {
-    "contents": "data:image/png;base64,iVBORw0KGgoAAAANSUhEU...Jggg=="
+    "contents": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 22 22' fill='none'%3E%3Ccircle cx='11' cy='11' r='9' fill='black'/%3E%3Ctext x='6.9' y='14.9' fill='white' style='font-family: Arial; font-size: 10px;'%3EM%3C/text%3E%3C/svg%3E"
   },
   "documentationRef": "https://example.com/docs/template-1",
   "category": {
@@ -187,3 +188,5 @@ Groups can have the following attributes:
 - `label`: Label of the group
 - `tooltip`: Tooltip for the group (optional)
 - `openByDefault`: Whether the group will be expanded in the properties panel (optional, default: `false`)
+
+A property can be assigned to a group by specifying the `group` key to the groups `id` value on the property.
