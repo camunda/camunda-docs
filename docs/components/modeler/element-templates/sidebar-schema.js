@@ -12,6 +12,7 @@ module.exports = {
       items: [
         "components/modeler/element-templates/template-metadata",
         "components/modeler/element-templates/template-properties",
+        "components/modeler/element-templates/template-example",
       ],
     },
     "components/modeler/element-templates/additional-resources",
