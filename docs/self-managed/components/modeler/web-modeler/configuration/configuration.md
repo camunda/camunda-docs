@@ -54,6 +54,7 @@ To add additional clusters, increment the `0` value for each variable (`CAMUNDA_
 ### Database
 
 Web Modeler currently supports PostgreSQL, Oracle, and MSSQL as persistent data storage.
+
 :::info Oracle driver
 The Oracle driver is not provided by default and must be downloaded and supplied for the application to load.
 Refer to the [Oracle database configuration section](database.md#oracle) for details.
