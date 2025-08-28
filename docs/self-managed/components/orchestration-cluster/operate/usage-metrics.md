@@ -5,7 +5,7 @@ description: "Operate provides usage metrics under usage-metrics Actuator endpoi
 ---
 
 :::warning Deprecated endpoints
-With the 8.8 release, Camunda announces the deprecation of the following Operate usage metrics endpoint. This is scheduled for removal in the 8.9 release. Use the new endpoint, [/v2/system/usage-metrics](../../../../apis-tools/orchestration-cluster-api-rest/specifications/get-usage-metrics.api.mdx).
+With the 8.8 release, Camunda announces the deprecation of the following Operate usage metrics endpoints. Scheduled for removal in the 8.10 release. Use the new endpoint, [/v2/system/usage-metrics](../../../../apis-tools/orchestration-cluster-api-rest/specifications/get-usage-metrics.api.mdx).
 :::
 
 Operate provides usage metrics under `usage-metrics` Actuator endpoint. It is exposed on management port that can be configured via `management.server.port` configuration parameter (default: 8080).

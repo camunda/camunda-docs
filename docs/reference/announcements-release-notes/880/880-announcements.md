@@ -336,4 +336,4 @@ Assignees list removed from response.
 
 These endpoints are superseded by [usage metrics endpoint](../../../apis-tools/orchestration-cluster-api-rest/specifications/get-usage-metrics.api.mdx).
 
-Operate and Tasklist usage metrics endpoints are **scheduled for removal in the 8.9 release**.
+Operate and Tasklist usage metrics endpoints are **scheduled for removal in the 8.10 release**.
