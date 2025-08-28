@@ -8,7 +8,7 @@ description: "Migrate running Camunda 7 process instances to Camunda 8 while pre
 Migrate currently running process instances. Running means that these process instances in Camunda 7 are not yet ended and currently wait in some [wait-state](https://docs.camunda.org/manual/latest/user-guide/process-engine/transactions-in-processes/#wait-states). This state is persisted in the database and a corresponding data entry needs to be created in Camunda 8, so that the process instance can continue from that state in the new solution.
 
 :::info
-Camunda is developing the Data Migrator with a first release of the runtime instance migration mode planned for **Camunda 8.8 (October 2025)**. You can already use existing alpha releases. Iterative improvements will follow. You can check the current state and track progress in the [Github repository](https://github.com/camunda/c7-data-migrator/).
+Camunda is developing the Data Migrator with a first release of the runtime instance migration mode planned for **Camunda 8.8 (October 2025)**. You can already use existing alpha releases. Iterative improvements will follow. You can check the current state and track progress in the [GitHub repository](https://github.com/camunda/c7-data-migrator/).
 :::
 
 ## Requirements and limitations

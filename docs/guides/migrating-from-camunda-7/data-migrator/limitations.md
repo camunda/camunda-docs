@@ -24,7 +24,7 @@ This page provides an overview of the current limitations of the Camunda 7 to Ca
 
 - Proper handling and intercepting of variables is currently only supported for the Runtime Data Migrator.
 - [Unsupported Camunda 7 types](../variables#unsupported-types)
-- [Camunda 8 variable name restrictions](https://docs.camunda.io/docs/next/components/concepts/variables/#variable-values)
+- [Camunda 8 variable name restrictions](/components/concepts/variables.md#variable-values)
   - Variables that do not follow the restrictions will cause issues in FEEL expression evaluation.
 - Variables set into the scope of embedded sub-processes are not supported yet and will be ignored.
   - See https://github.com/camunda/camunda-bpm-platform/issues/5235
@@ -37,7 +37,7 @@ Some BPMN elements and configurations supported in Camunda 7 are not supported i
 
 ### Elements supported in C7 but not supported in C8
 
-Please refer to the [documentation](https://docs.camunda.io/docs/next/components/modeler/bpmn/bpmn-coverage/) for more details on element support in C8 and adjust your models accordingly before migration.
+Please refer to the [documentation](/components/modeler/bpmn/bpmn.md#bpmn-coverage/) for more details on element support in C8 and adjust your models accordingly before migration.
 
 ### Start Events
 
@@ -75,7 +75,7 @@ C8 does not support [asynchronous continuation before or after](https://docs.cam
 ### Message events
 
 - Only message catch and throw events are supported for migration.
-- Depending on your implementation, you may need to add [a correlation variable](https://docs.camunda.io/docs/components/modeler/bpmn/message-events/#messages) to the instance pre-migration.
+- Depending on your implementation, you may need to add [a correlation variable](/components/modeler/bpmn/message-events/message-events.md#messages) to the instance pre-migration.
 
 ### Message and signal start events
 
@@ -108,11 +108,11 @@ Processes with active multi-instance elements can currently not be migrated. We 
 
 ### Timer events
 
-- Timer start events: prior to migration, you must ensure that your process has at least one [none start event](https://docs.camunda.io/docs/8.6/components/modeler/bpmn/none-events/#none-start-events). Processes that only have a timer start event cannot be migrated.
+- Timer start events: prior to migration, you must ensure that your process has at least one [none start event](/components/modeler/bpmn/none-events/none-events.md#none-start-events). Processes that only have a timer start event cannot be migrated.
 - If your model contains timer events (start and other), you must ensure that no timers fire during the migration process.
-  - Timers with [date](https://docs.camunda.io/docs/next/components/modeler/bpmn/timer-events/#time-date): ensure the date lies outside the migration time frame
-  - Timers with [durations](https://docs.camunda.io/docs/next/components/modeler/bpmn/timer-events/#time-duration): ensure the duration is significantly longer than the migration time frame
-  - Timers with [cycles](https://docs.camunda.io/docs/next/components/modeler/bpmn/timer-events/#time-cycle): ensure the cycle is significantly longer than the migration time frame and/or use a start time that lies outside the migration time frame
+  - Timers with [date](/components/modeler/bpmn/timer-events/timer-events.md#time-date): ensure the date lies outside the migration time frame
+  - Timers with [durations](/components/modeler/bpmn/timer-events/timer-events.md#time-duration): ensure the duration is significantly longer than the migration time frame
+  - Timers with [cycles](/components/modeler/bpmn/timer-events/timer-events.md#time-cycle)): ensure the cycle is significantly longer than the migration time frame and/or use a start time that lies outside the migration time frame
 - Note that during deployment and/or migration, the timers may be restarted. If business logic requires you to avoid resetting timer cycles/duration, you need to apply a workaround:
   - Timers with cycles:
     - Add a start time to your cycle definition that is equal to the moment in time when the currently running C7 timer is next due
