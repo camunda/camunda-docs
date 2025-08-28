@@ -4,11 +4,18 @@ title: Template properties
 description: "Learn how to define template properties including types, bindings, constraints, and advanced features."
 ---
 
-The `properties` array is where you define what properties should be applied to the BPMN element and how these properties should be shown and validated in the properties panel.
-Element templates use `bindings` to map properties to BPMN 2.0 XML and Camunda extension elements.
-Only bindings that are supported by the element template schema can be set by an element template. You can find the full list of supported bindings in the [bindings](#bindings) section.
-All BPMN 2.0 XML and Camunda extension elements properties that the element template schema can define bindings for are hidden by default.
-The template author must explicitly make them user configurable to show them in the properties panel once the user has applied the template.
+The `properties` array is where you define what properties should be applied to the BPMN element and how the properties panel will present these properties to the user when the template is applied.
+The underlying concept is very simple:
+
+1. You will create one property object for each property that should be defined by the template.
+2. Each property object contains keys to define how the property is presented and how its value can be changed by the user.
+3. Each property object contains one `binding` object that specifies how the property is mapped to BPMN 2.0 XML.
+
+Element templates can only set properties that can be described by bindings supported by the element template schema.
+You can find the full list of supported bindings in the [bindings](#binding-an-input-to-a-bpmn-or-camunda-element-property-binding) section.
+
+When the user applies a template, the properties panel hides all BPMN 2.0 XML and Camunda extension elements properties that can be defined by bindings in an element template.
+The template author must explicitly make the properties user configurable to show them in the properties panel once the user has applied the template.
 
 :::note
 Some properties, such as, execution listeners, task listeners, element documentation, and multi-instance configurations cannot be set by element templates.
