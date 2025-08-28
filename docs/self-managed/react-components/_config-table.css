@@ -37,7 +37,7 @@
 @media (max-width: 700px) {
   .config-table th:nth-child(2),
   .config-table td:nth-child(2) {
-    display: none; /* hide description on very small screens */
+    display: table-cell !important;
   }
 }
 
@@ -49,9 +49,19 @@
   border-radius: 3px;
   height: 28px;
   border: 1px solid #cacaca;
-  min-width: 240px;
+  min-width: 300px;
   padding-left: 6px;
   margin-right: 20px;
+  margin-bottom: 0px;
+}
+
+@media (max-width: 730px) {
+  .config-input-box {
+    margin-bottom: 20px; /* space below input on small screens */
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
 }
 
 .config-no-results {
@@ -179,4 +189,15 @@
   margin: 0;
   list-style: disc;
   line-height: 1.8;
+}
+
+.config-type-badges .badge,
+.config-table td .badge {
+  white-space: nowrap; /* prevent wrapping */
+  display: inline-flex;
+  align-items: center;
+}
+/* Optional: ensure long hyphenated types don't break */
+.config-type-badges .badge {
+  word-break: keep-all;
 }

@@ -1,31 +1,24 @@
 import "./_config-table.css";
 import React, { useState } from "react";
-import { configs } from "./_config-table-data.js"; // assume each item may now have 'types' array (see note below)
+import { configs } from "./_config-table-data.js"; // assume each item may now have 'types' array
 
-const TYPE_OPTIONS = ["Unsupported", "1-to-1", "Double-configuration"]; // extend if needed
+const TYPE_OPTIONS = ["1-to-1", "Double-configuration"]; // extend if needed
 
 const SearchableTable = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  // Maintain a Set of selected type filters (empty = show all)
-  const [selectedTypes, setSelectedTypes] = useState(new Set());
+  // SINGLE selection (null = All)
+  const [selectedType, setSelectedType] = useState(null);
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
 
-  const toggleType = (type) => {
-    setSelectedTypes((prev) => {
-      const next = new Set(prev);
-      if (next.has(type)) {
-        next.delete(type);
-      } else {
-        next.add(type);
-      }
-      return next;
-    });
+  // Select (or deselect if clicking the same)
+  const chooseType = (type) => {
+    setSelectedType((prev) => (prev === type ? null : type));
   };
 
-  const clearTypes = () => setSelectedTypes(new Set());
+  const clearType = () => setSelectedType(null);
 
   const filteredConnectors = configs.filter((config) => {
     const search = searchTerm.toLowerCase();
@@ -46,8 +39,7 @@ const SearchableTable = () => {
       config.name.toLowerCase().includes(search) ||
       legacyArray.some((l) => l.toLowerCase().includes(search));
 
-    const matchesTypeFilter =
-      selectedTypes.size === 0 || typeArray.some((t) => selectedTypes.has(t));
+    const matchesTypeFilter = !selectedType || typeArray.includes(selectedType);
 
     return matchesSearchTerm && matchesTypeFilter;
   });
@@ -56,41 +48,37 @@ const SearchableTable = () => {
     <div className="config-input">
       <input
         type="text"
-        placeholder="Find a configuration property"
+        placeholder="Find a configuration key"
         value={searchTerm}
         onChange={handleSearch}
         className="config-input-box"
-        aria-label="Search configuration properties"
+        aria-label="Search configuration keys"
       />
 
       <div
         className="filter-badges"
         role="toolbar"
-        aria-label="Filter configuration properties by type"
+        aria-label="Filter configuration keys by type"
       >
         <span
           role="button"
           tabIndex={0}
-          className={`badge--default ${selectedTypes.size === 0 ? "badge--active" : ""}`}
-          onClick={clearTypes}
-          onKeyDown={(e) =>
-            (e.key === "Enter" || e.key === " ") && clearTypes()
-          }
+          className={`badge--default ${!selectedType ? "badge--active" : ""}`}
+          onClick={clearType}
+          onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && clearType()}
           title="Show all types"
+          aria-pressed={!selectedType}
         >
           All
         </span>
         {TYPE_OPTIONS.map((t) => {
-          const active = selectedTypes.has(t);
-          // map to existing color classes you already defined
+          const active = selectedType === t;
           const classSuffix =
-            t === "Unsupported"
-              ? "unsupported"
-              : t === "1-to-1"
-                ? "1-to-1"
-                : t === "Double-configuration"
-                  ? "double-configuration"
-                  : "default";
+            t === "1-to-1"
+              ? "1-to-1"
+              : t === "Double-configuration"
+                ? "double-configuration"
+                : "default";
           return (
             <span
               key={t}
@@ -99,9 +87,9 @@ const SearchableTable = () => {
               className={`badge--default ${
                 active ? `badge--active--${classSuffix}` : ""
               }`}
-              onClick={() => toggleType(t)}
+              onClick={() => chooseType(t)}
               onKeyDown={(e) =>
-                (e.key === "Enter" || e.key === " ") && toggleType(t)
+                (e.key === "Enter" || e.key === " ") && chooseType(t)
               }
               aria-pressed={active}
             >
@@ -116,9 +104,9 @@ const SearchableTable = () => {
           <table className="config-table">
             <thead>
               <tr>
-                <th>8.8</th>
-                <th>8.7 and earlier</th>
-                <th>Mapping type</th>
+                <th>New key (8.8)</th>
+                <th>Legacy key(s) (8.7 and earlier)</th>
+                <th>Type</th>
               </tr>
             </thead>
             <tbody>
@@ -178,13 +166,12 @@ const SearchableTable = () => {
       ) : (
         <div>
           <p className="config-no-results">
-            Sorry, no configuration properties were found matching those
-            filters.
+            Sorry, no configuration keys were found matching those filters.
           </p>
           <ul className="config-no-results-list">
             <li>Check your spelling.</li>
             <li>Try a different search term.</li>
-            <li>Clear or adjust the type filters.</li>
+            <li>Clear or change the type filter.</li>
           </ul>
         </div>
       )}

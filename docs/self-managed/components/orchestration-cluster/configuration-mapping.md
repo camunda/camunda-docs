@@ -1,39 +1,37 @@
 ---
 id: configuration-mapping
-title: "8.8 configuration mapping"
-description: "Configuration mapping information for Camunda 8.7 properties to Camunda 8.8"
+title: "8.8 configuration key changes"
+description: "Configuration key changes and backwards compatibility information for new Camunda 8.8 keys and legacy keys."
+hide_table_of_contents: true
 ---
 
 import SearchableTable from '../../react-components/\_config-table.js';
 
 Orchestration Cluster component configuration changes that apply when upgrading to Camunda 8.8.
 
-## About Camunda 8.8 unified configuration
+## About Camunda 8.8 unified configuration keys
 
 Camunda 8.8 introduces a [unified configuration for Orchestration Cluster components](/components/whats-new-in-88.md) allowing you to define cluster and component behavior in a single, centralized configuration system.
 
-This means some configuration properties have changed or are replaced with new properties.
+This means some configuration keys have changed or are replaced with new keys. For example, the new `camunda.system.cpu-thread-count` key replaces the `zeebe.broker.threads.cpuThreadCount` legacy key.
 
-For example, the new `camunda.system.cpu-thread-count` property replaces `zeebe.broker.threads.cpuThreadCount`.
+Backwards compatibility between legacy keys and new keys in 8.8 as follows:
 
-As a result, you will need to...
+| Type                                                                                                           | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| :------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <span className="badge badge--1-to-1">1-to-1</span>                                                            | <p>Backwards compatibility is supported.</p><p><ul><li><p>If you have defined the new key, it is used.</p></li><li>If you have not defined the new key, the legacy key is used (if you have defined it).</li></ul></p>                                                                                                                                                                                                                                                                         |
+| <span className="badge badge--double-configuration" style={{whiteSpace: 'nowrap'}}>Double-configuration</span> | <p>Backwards compatibility is **not** supported.</p><p><ul><li><p>Applies if a legacy configuration is defined with values that match either the new configuration default values, or the new configuration custom values.</p></li><li><p>If the legacy configuration value and the new configuration value match, the legacy key is accepted, even if it is not supported.</p></li><li><p>If the values do not match, the application will not start and an error is shown.</p></li></ul></p> |
 
 :::note
-The remaining unified configuration properties are planned for Camunda 8.9, and will not be delivered in Camunda 8.8.
+Any remaining unified configuration keys not listed here are planned for delivery in Camunda 8.9.
 :::
 
-### Mapping types
+## 8.8 and legacy configuration keys
 
-Make sure you have read and understood the following terms before using the following configuration changes table:
+The following table summarizes backwards compatibility between legacy keys and new keys introduced in 8.8.
 
-| Mapping type                                                                                                   | Description                                                                                                                                                                                                                                                                          |
-| :------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <span className="badge badge--1-to-1">1-to-1</span>                                                            | <p>A 1:1 mapping exists for the property.</p><p><ul><li>If you have defined it, the 8.8 property is used.</li><li>If you have not defined the 8.8 property, the legacy property is used if you have defined it. You are warned that the legacy property is deprecated.</li></ul></p> |
-| <span className="badge badge--unsupported">Unsupported</span>                                                  | <p>Explain</p>                                                                                                                                                                                                                                                                       |
-| <span className="badge badge--double-configuration" style={{whiteSpace: 'nowrap'}}>Double-configuration</span> | <p>Explain</p>                                                                                                                                                                                                                                                                       |
-
-## 8.8 configuration property mappings
-
-The following table summarizes the configuration mappings between Camunda 8.8 and 8.7 and earlier.
+:::caution recommended actions
+Camunda recommends you replace the existing legacy key(s) with the new key.
+:::
 
 <SearchableTable />
