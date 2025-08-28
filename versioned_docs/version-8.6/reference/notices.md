@@ -8,6 +8,32 @@ description: "Let's take a closer look at security notices, reporting vulnerabil
 
 Camunda publishes security notices after fixes are available.
 
+### Notice 27
+
+#### Publication date
+
+August 27, 2025
+
+#### Products affected
+
+- Camunda Optimize
+
+#### Impact
+
+Optimize's email functionality was affected by [CVE-2025-7962](https://nvd.nist.gov/vuln/detail/CVE-2025-7962), which allowed for SMTP injection by providing forged email recipient addresses that could lead to malicious content being sent to arbitrary recipients.
+
+#### How to determine if the installation is affected
+
+You are using:
+
+- Optimize 8.7.0 - 8.7.7 or 8.6.0 - 8.6.14
+
+#### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Optimize 8.7.8, 8.6.15
+
 ### Notice 26
 
 #### Publication date

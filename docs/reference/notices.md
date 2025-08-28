@@ -15,27 +15,27 @@ Report security vulnerabilities to Camunda immediately, following the instructio
 To learn more about security at Camunda, including our security policy, security issue management, and more, see [Camunda.com/security](https://camunda.com/security).
 :::
 
-### Notice 27
+## Notice 27
 
-#### Publication date
+### Publication date
 
 August 27, 2025
 
-#### Products affected
+### Products affected
 
 - Camunda Optimize
 
-#### Impact
+### Impact
 
 Optimize's email functionality was affected by [CVE-2025-7962](https://nvd.nist.gov/vuln/detail/CVE-2025-7962), which allowed for SMTP injection by providing forged email recipient addresses that could lead to malicious content being sent to arbitrary recipients.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using:
 
 - Optimize 8.7.0 - 8.7.7 or 8.6.0 - 8.6.14
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain the fix:
 
