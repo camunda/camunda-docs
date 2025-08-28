@@ -18,25 +18,27 @@ As they are never part of any element template, users can configure them indepen
 
 ## What is part of a property?
 
-You build your template by adding property objects to the `properties` array. The important keys in a property definition are:
+You build your template by adding property objects to the `properties` array.
+The keys in a property definition are listed below, `[optional]` keys are marked with square brackets:
 
-- `label : String`: A descriptive text shown with the property.
+- `[label : String]`: A descriptive text shown with the property.
 - `type : "String" | "Text" | "Boolean" | "Dropdown" | "Hidden"`: Defining the input type in the properties panel.
-- `feel : "required" | "optional" | "static"`: Defines whether the property supports [FEEL](#feel) expressions.
-- `value : String | Number | Boolean`: An optional default value to be used if the property to be bound is not yet set by the user or if the type is `Hidden`.
-- `generatedValue : Object`: An optional configuration to generate a value when the property is applied to an element.
-- `placeholder : String`: An optional placeholder text shown in the input field when it is empty.
+- `[feel : "required" | "optional" | "static"]`: Defines whether the property supports [FEEL](#feel) expressions.
+- `[value : String | Number | Boolean]`: An optional default value to be used if the property to be bound is not yet set by the user or if the type is `Hidden`.
+- `[generatedValue : Object]`: An optional configuration to generate a value when the property is applied to an element.
+- `[placeholder : String]`: An optional placeholder text shown in the input field when it is empty.
 - `binding : Object`: An object specifying how the property is mapped to BPMN or Camunda extensions (cf. [bindings](#bindings)).
-- `optional : Boolean`: Optional bindings do not persist empty values in the underlying BPMN 2.0 XML.
-- `constraints : Object`: A list of editing constraints to apply to the value of the binding.
-- `group : String`: The group that the property belongs to.
-- `id : String`: An identifier that can be used to reference the property in conditional properties
-- `condition : Object`: A condition that determines when [the property is active](#defining-conditional-properties)
+- `[optional : Boolean]`: Optional bindings do not persist empty values in the underlying BPMN 2.0 XML.
+- `[constraints : Object]`: A list of editing constraints to apply to the value of the binding.
+- `[group : String]`: The group that the property belongs to.
+- `[id : String]`: An identifier that can be used to reference the property in conditional properties
+- `[condition : Object]`: A condition that determines when [the property is active](#defining-conditional-properties)
 
-Not all keys and values are compatible with each other. For more information see the documentation below.
-Additionally, if your editor supports JSON schema, these incompatibilities are highlighted while you edit your template.
+Not all keys and values are compatible with each other, some keys require other keys to be set, even if the other key is generally optional.
+For more information see the documentation below.
+If your editor supports JSON schema, these incompatibilities or missing keys are highlighted while you edit your template.
 
-The `properties` array contains a list of property objects that define what properties should be applied to the BPMN element and how these properties should be shown and validated in the properties panel.
+All property objects are defined inside the `properties` array:
 
 ```json
 {
