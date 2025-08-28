@@ -907,7 +907,7 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-mapping-rules-for-tenant",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-mappings-for-tenant",
           label: "Search mapping rules for tenant",
           className: "api-method post",
         },

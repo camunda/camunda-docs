@@ -7,8 +7,7 @@ description: Learn how to modify BPMN elements with Connector templates to creat
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-**Connector templates** are JSON configuration files, which customize how a BPMN element is shown,
-and how it can be configured by process developers. Connector templates are a specific kind of [element template](/components/modeler/desktop-modeler/element-templates/about-templates.md).
+**Connector templates** are JSON configuration files that customize how a BPMN element is shown and how it can be configured by process developers. Connector templates are a specific type of [element template](/components/modeler/desktop-modeler/element-templates/about-templates.md).
 
 Before developing one, you'll need to decide what you would like to achieve with your Connector. Currently, the options are:
 
