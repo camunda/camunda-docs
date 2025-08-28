@@ -444,46 +444,6 @@ final ProcessInstanceEvent processInstanceEvent = client.newCreateInstanceComman
 
 This creates a new instance of your process. The `bpmnProcessId` should match the Process ID from your BPMN file, and you can pass initial variables as a Map.
 
-**Implement a job worker:**
-
-```java
-final String jobType = "send-email";
-
-try (final JobWorker workerRegistration = client.newWorker()
-        .jobType(jobType)
-        .handler(new EmailJobHandler())
-        .timeout(Duration.ofSeconds(10))
-        .open()) {
-
-    System.out.println("Job worker opened and receiving jobs of type: " + jobType);
-
-    // Keep the worker running
-    Thread.sleep(Duration.ofMinutes(10));
-} catch (InterruptedException e) {
-    throw new RuntimeException(e);
-}
-
-private static class EmailJobHandler implements JobHandler {
-    @Override
-    public void handle(final JobClient client, final ActivatedJob job) {
-        // Extract variables from the job
-        final Map<String, Object> variables = job.getVariablesAsMap();
-
-        // Perform your business logic here
-        System.out.println("Processing job: " + job.getType());
-        System.out.println("Variables: " + variables);
-
-        // Complete the job (or use client.newFailCommand() if something goes wrong)
-        client.newCompleteCommand(job.getKey())
-            .variables(Map.of("emailSent", true))
-            .send()
-            .join();
-    }
-}
-```
-
-Job workers handle automated tasks in your processes. Each worker subscribes to specific job types and processes them as they become available.
-
 For a comprehensive example demonstrating these steps, see the [DeployAndComplete example](https://github.com/camunda-community-hub/camunda-8-examples/blob/main/camunda-client-plain-java/src/main/java/io/camunda/example/e2e/process/DeployAndComplete.java) in the Camunda 8 examples repository. This example illustrates a complete workflow from process deployment to job completion.
 
 ## Key features and capabilities

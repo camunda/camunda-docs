@@ -927,19 +927,6 @@ module.exports = {
             "apis-tools/java-client/getting-started",
             "apis-tools/java-client/job-worker",
             "apis-tools/java-client/logging",
-            {
-              Examples: [
-                "apis-tools/java-client-examples/index",
-                "apis-tools/java-client-examples/process-deploy",
-                "apis-tools/java-client-examples/process-instance-create",
-                "apis-tools/java-client-examples/process-instance-create-nonblocking",
-                "apis-tools/java-client-examples/process-instance-create-with-result",
-                "apis-tools/java-client-examples/decision-evaluate",
-                "apis-tools/java-client-examples/job-worker-open",
-                "apis-tools/java-client-examples/data-pojo",
-                "apis-tools/java-client-examples/cluster-topology-request",
-              ],
-            },
           ],
         },
         {
