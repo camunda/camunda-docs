@@ -132,8 +132,11 @@ Currently, element templates may be used on the following BPMN elements:
 - `bpmn:Process`
 - `bpmn:Event`
 
-The `appliesTo` array specifies the BPMN types the template can be applied to. It will only be shown for these types of elements in the modeler.
-The `elementType` object is optional. If you configure `elementType` on a template, the element is replaced with the specified type when a user applies the template.
+- `appliesTo : Array<String>`: specifies the BPMN types the template can be applied to. It will only be shown for these types of elements in the modeler.
+- The `elementType : Object` (optional): If you configure `elementType` on a template, the element is replaced with the specified type when a user applies the template.
+  - `value : String`: The BPMN type to set the element to when the template is applied.
+  - `eventDefinition: String` (optional): You must set this key to `"bpmn:MessageEventDefinition"` if you are templating any message event. Otherwise, this key can be ignored.
+
 Some properties require a specific BPMN type to work correctly. In that case they will require a certain `elementType` to be set by the template.
 Such constraints are checked based on the element template schema and by the modeler when it loads the templates.
 
