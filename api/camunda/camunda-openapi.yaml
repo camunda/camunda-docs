@@ -6215,6 +6215,9 @@ components:
         tenantId:
           type: string
           description: The unique ID for the tenant.
+          minLength: 1
+          maxLength: 256
+          pattern: ^[A-Za-z0-9_@.+-]+$
         name:
           type: string
           description: The name of the tenant.
@@ -8713,7 +8716,6 @@ components:
       type: object
       required:
         - username
-        - authorizedComponents
         - tenants
         - groups
         - roles
@@ -10494,7 +10496,6 @@ components:
       type: object
       required:
         - totalItems
-        - hasMoreTotalItems
       properties:
         totalItems:
           description: Total items matching the criteria.
@@ -10852,7 +10853,7 @@ components:
           allOf:
             - $ref: "#/components/schemas/DecisionEvaluationKey"
             - description: |
-                The key of the decision instance. Note that this is not the unique identifier of the entity itself; the `decisionInstanceId` serves as the primary identifier.
+                The key of the parent decision evaluation. Note that this is not the identifier of an individual decision instance; the `decisionEvaluationInstanceKey` is the identifier for a decision instance.
         processDefinitionKey:
           allOf:
             - $ref: "#/components/schemas/ProcessDefinitionKey"
@@ -11047,7 +11048,6 @@ components:
           nullable: true
       required:
         - name
-        - correlationKey
     MessagePublicationResult:
       description: The message key of the published message.
       type: object
@@ -12181,13 +12181,13 @@ components:
     TenantId:
       allOf:
         - $ref: "#/components/schemas/CamundaKey"
-          example: customer-service
+        - example: customer-service
           format: TenantId
           description: The unique identifier of the tenant.
     Username:
       allOf:
         - $ref: "#/components/schemas/CamundaKey"
-          example: swillis
+        - example: swillis
           format: Username
           description: The unique name of a user.
     OperationMetadata:
