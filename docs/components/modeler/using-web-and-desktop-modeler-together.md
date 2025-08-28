@@ -63,7 +63,7 @@ Camunda recommends storing shared templates in a separate repository:
 :::note
 
 - If starting in **Desktop Modeler**, use a single folder for your process application. This makes project templates available in both modelers without extra work.
-- If starting in **Web Modeler**, after cloning the repository manually create an empty JSON object `{}` in a file named `.process-application` so Desktop Modeler can correctly recognize the project.
+- If starting in **Web Modeler**, after cloning the repository manually create an empty JSON object `{}` in a file named `.process-application` in the root directory of your project/repository so Desktop Modeler can correctly recognize the project.
   :::
 
 ### Handling multiple template versions
