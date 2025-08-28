@@ -17,8 +17,7 @@ The element template object typically contains the following properties, `[optio
 - [`[documentationRef : String]`](./template-metadata.md#discoverability-name-description-keywords-icon-documentationref-and-category): URL pointing to a template documentation. Shown in the properties panel (after applying an element template).
 - [`[icon : Object]`](./template-metadata.md#discoverability-name-description-keywords-icon-documentationref-and-category): Sets the template's icon. The icon is shown in the element template selection modal and in the properties panel (after applying an element template).
 - [`[engines : Object]`](./template-metadata.md#engine-compatibility-engines): Dictionary of environments [compatible with the template](./template-metadata.md#template-compatibility). Environment version is specified with semantic versions range.
-- [`appliesTo : Array<String>`](./template-metadata.md#supported-bpmn-types-appliesto-and-elementtype): List of BPMN types the template can be applied to.
-- [`[elementType : Object]`](./template-metadata.md#supported-bpmn-types-appliesto-and-elementtype): Sets teh type of the element. The element is replaced with the specified type when a user applies the template.
+- [`[elementType : Object]`](./template-metadata.md#supported-bpmn-types-appliesto-and-elementtype): Sets the type of the element. The element is replaced with the specified type when a user applies the template.
 - [`[groups : Object]`](./template-metadata.md#grouping-properties-groups): Defines groups of properties. Groups are shown in the properties panel (after applying an element template).
 - [`properties : Array<Object>`](./template-properties.md): List of properties of the template. These properties are applied to the BPMN element when the template is applied. Each property can be configured with a number of options, such as type, binding, constraints, and more.
 
