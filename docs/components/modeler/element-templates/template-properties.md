@@ -29,7 +29,7 @@ You build your template by adding property objects to the `properties` array. Th
 - `binding : Object`: An object specifying how the property is mapped to BPMN or Camunda extensions (cf. [bindings](#bindings)).
 - `optional : Boolean`: Optional bindings do not persist empty values in the underlying BPMN 2.0 XML.
 - `constraints : Object`: A list of editing constraints to apply to the value of the binding.
-- `group : String`: The group that the property belongs to. Todo link to groups section
+- `group : String`: The group that the property belongs to.
 - `id : String`: An identifier that can be used to reference the property in conditional properties
 - `condition : Object`: A condition that determines when [the property is active](#defining-conditional-properties)
 
@@ -871,6 +871,13 @@ Together with the `pattern` constraint, you can define your custom error message
     }
   ]
 ```
+
+:::warning
+When a template exposes a property to a user, the template is responsible to show all validation errors in the properties panel.
+That includes missing compliance with BPMN and Zeebe schema constraints. Thus, you should use `notEmpty` where necessary.
+
+The Modeler's problems panel will show errors for invalid properties, regardless of a template being applied or not.
+:::
 
 ## Showing properties conditionally: `condition`
 
