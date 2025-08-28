@@ -47,7 +47,7 @@ The runtime migration typically follows these phases:
 ### 1. Preparation phase
 
 - Stop C7 process execution to avoid starting new instances during migration.
-- Migrate BPMN models using the [Migration Analyzer & Diagram Converter](../migration-tooling#migration-analyzer--diagram-converter).
+- Migrate BPMN models using the [Migration Analyzer & Diagram Converter](/guides/migrating-from-camunda-7/migration-tooling.md#migration-analyzer--diagram-converter).
 - Add required `migrator` execution listeners to None Start Events in C8 models.
 - Adjust C8 models to comply with migration limitations.
 - Test migrated models in a C8 environment.
