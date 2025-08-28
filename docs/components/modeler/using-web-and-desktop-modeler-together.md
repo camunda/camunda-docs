@@ -4,7 +4,20 @@ title: Using Web and Desktop Modeler together
 description: "Understand the implications of using Web Modeler and Desktop Modeler for modeling process diagrams."
 ---
 
-If your team uses both [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md) and [Desktop Modeler](/components/modeler/desktop-modeler/index.md) to develop [process applications](/components/concepts/process-applications.md) with [Git sync](/components/modeler/web-modeler/git-sync.md), there are a few considerations to ensure both modelers work together transparently.
+[Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md) and [Desktop Modeler](/components/modeler/desktop-modeler/index.md) are both tools for designing [BPMN](/components/modeler/bpmn/bpmn.md) diagrams, but they serve different purposes and shine in different scenarios.
+
+Web Modeler is great for collaborative, cloud-based process modeling. It allows teams to work together in real-time, manage versions, and store models centrally. It's especially useful when you're working in distributed teams or want tight integration with the Camunda SaaS platform.
+
+Desktop Modeler, on the other hand, is ideal for local development, technical modeling, and full offline control. It supports advanced customization, scripting, and deployment to self-managed Camunda engines, making it a go-to tool for developers.
+
+Using both tools together allows you to combine the best of both worlds:
+
+- Start collaboratively in Web Modeler, capturing business requirements and designing high-level processes with stakeholders.
+- Then switch to Desktop Modeler for more technical refinement, such as adding execution details, scripts, or testing locally.
+
+This workflow bridges the gap between business users and developers, ensuring smooth handoffs and better alignment across the team.
+
+When using [Git sync](/components/modeler/web-modeler/git-sync.md) to keep your project in sync between Web Modeler and your local environment, there are a few considerations to ensure both modelers work together transparently.
 
 ## Process applications
 
@@ -43,14 +56,14 @@ Camunda recommends storing shared templates in a separate repository:
 
 ### Project element templates
 
-| Desktop Modeler                                                                                                                                                                                | Web Modeler                                                                                                                                  |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Local element templates](/components/modeler/desktop-modeler/element-templates/configuring-templates.md#global-templates) are loaded from the `.camunda/element-templates` folder if present. | Processes templates from a single folder. <br></br>If working with a project (not a process application), templates must first be published. |
+| Desktop Modeler                                                                                                                                                                               | Web Modeler                                                                                                                                  |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Local element templates](/components/modeler/desktop-modeler/element-templates/configuring-templates.md#local-templates) are loaded from the `.camunda/element-templates` folder if present. | Processes templates from a single folder. <br></br>If working with a project (not a process application), templates must first be published. |
 
 :::note
 
 - If starting in **Desktop Modeler**, use a single folder for your process application. This makes project templates available in both modelers without extra work.
-- If starting in **Web Modeler**, manually create an empty JSON object `{}` in a file named `.process-application` after cloning the repository so Desktop Modeler can correctly recognize the project.
+- If starting in **Web Modeler**, after cloning the repository manually create an empty JSON object `{}` in a file named `.process-application` so Desktop Modeler can correctly recognize the project.
   :::
 
 ### Handling multiple template versions
