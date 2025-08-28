@@ -786,6 +786,8 @@ module.exports = {
             // },
           ],
         },
+        "components/camunda-integrations/servicenow/servicenow-integration",
+        // NOTE: The above should be removed once items are added to the complete section below.
         // {
         //   type: "category",
         //   label: "ServiceNow",

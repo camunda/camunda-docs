@@ -33,7 +33,7 @@ This documentation is intended for:
 
 This section of the documentation covers:
 
-- [Prerequisites](./sap-prerequisites.md) for running the integration.
+- [Prerequisites](./prerequisites.md) for running the integration.
 - **Integration modules**: What each SAP module does and how they fit into Camunda workflows.
 - **Setup guidance**: How to configure and deploy integration modules using the [CSAP CLI](./csap-cli.md).
 - **Module-specific documentation**:

@@ -9,7 +9,7 @@ Before setting up the SAP integration, ensure you have the following in place:
 ## Camunda setup
 
 - **Camunda 8.5+**
-  - Works with both [Camunda SaaS](/guides/what-is-camunda-saas.md) and [Self-Managed](/self-managed/introduction.md) deployments.
+  - Works with both Camunda SaaS and Self-Managed deployments.
   - For Self-Managed: Ensure outbound connectivity from your environment to SAP BTP.
   - For SaaS: Configure [hybrid connectors](/components/connectors/use-connectors-in-hybrid-mode.md) to securely connect to SAP systems.
 
