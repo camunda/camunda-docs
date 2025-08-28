@@ -39,7 +39,7 @@ To maintain compatibility, avoid defining multiple templates in a single file.
 Camunda recommends storing shared templates in a separate repository:
 
 - **Desktop Modeler**: Copy templates manually into your global directory.
-- **Web Modeler**: Use a CI/CD pipeline to sync templates with your repository via the [Web Modeler API](/apis-tools/web-modeler-api/index.md).
+- **Web Modeler**: Use a [CI/CD pipeline](/components/best-practices/cicd-guidelines/element-templates-at-scale.md) to sync templates with your repository via the [Web Modeler API](/apis-tools/web-modeler-api/index.md).
 
 ### Project element templates
 
