@@ -17,7 +17,7 @@ import ReplaceViaUploadImg from './img/connector-templates/replace-via-upload.pn
 
 You can create and manage [element templates](/components/concepts/element-templates.md) just as any other asset in a Web Modeler project.
 
-## Create a element template
+## Create an element template
 
 To create a new element template, follow the steps described in [Generate an element template](/components/connectors/custom-built-connectors/connector-template-generator.md#generate-a-connector-template).
 
@@ -35,7 +35,7 @@ The components of the editor interface are as follows:
   :::info
   Starting with 8.8, the following properties are not managed by Web Modeler anymore, and you can freely edit them:
   - `name`: Human-friendly name shown when selecting a template and in the properties panel after the template has been applied. The value can be different from the file name.
-  - `id`: Identifier of the template. Changing this value creates a new template. We recommend setting a meaningful value (e.g. "PaymentConnector", "CreateUserTemplate").
+  - `id`: Identifier of the template. Changing this value creates a new template. We recommend setting a meaningful value (for example, "PaymentConnector", "CreateUserTemplate").
   - `version`: Integer-based version number. Combined with the `id`, it defines a unique template version. When [publishing](#publish-a-connector-template) a new version, you need to update the version number manually.
 
   The value of the `$schema` property is still fixed; manual changes will not be saved.
@@ -50,9 +50,9 @@ The components of the editor interface are as follows:
 
 On every valid change, the template is saved automatically. If there are errors in the JSON file, the template will not be saved. Ensure all [errors are resolved](#fixing-template-problems) for the template to save successfully.
 
-## Publish a element template
+## Publish an element template
 
-After finalizing your connector, click **Publish to project** to activate it within the project context. In the modal that opens:
+After finalizing your element template, click **Publish to project** to activate it within the project context. In the modal that opens:
 
 - Update the version number if necessary. You don't need to change it for the initial version or if you have updated it already in the template editor.
   The value entered here is saved to the `version` property in the JSON.
@@ -70,7 +70,7 @@ You cannot publish a new version if:
 Web Modeler also shows a warning if the template ID has changed since the last published version.
 You can still publish the new version in this case.
 
-As a [user with elevated access](/components/modeler/web-modeler/collaboration.md#elevated-access), you can publish a element template version within the organization context, enabling all organization members to use it in their diagrams.
+As a [user with elevated access](/components/modeler/web-modeler/collaboration.md#elevated-access), you can publish an element template version within the organization context, enabling all organization members to use it in their diagrams.
 To do so, click **Publish > Publish to organization** on the editor screen or promote a template version via the [versions list](#versioning-connector-templates).
 
 <img src={PublishToOrganizationFromEditorImg} width="482px" alt="Publish to organization from the editor page" style={{ verticalAlign: "top" }} />
@@ -78,7 +78,7 @@ To do so, click **Publish > Publish to organization** on the editor screen or pr
 
 ### Manage published element templates
 
-After publishing, a element template version can be applied across all models within the same project or organization, depending on its publication status. You can review the publication status of template versions in the [versions list](#versioning-connector-templates).
+After publishing, an element template version can be applied across all models within the same project or organization, depending on its publication status. You can review the publication status of template versions in the [versions list](#versioning-connector-templates).
 
 On the Web Modeler home page, you can find an overview of all shared resources within your organization.
 
@@ -86,7 +86,7 @@ On the Web Modeler home page, you can find an overview of all shared resources w
 
 - View additional details about the published version.
 - Open the resource's versions list (if they are in [super-user mode](/components/modeler/web-modeler/collaboration.md#super-user-mode) or are a [project admin or editor](/components/modeler/web-modeler/collaboration.md#access-rights-and-permissions) of the resource's project).
-- Unpublish a element template directly from this view.
+- Unpublish an element template directly from this view.
 
 ![Manage published templates - elevated access](img/connector-templates/manage-connector-templates-org-privileges.png)
 
@@ -101,7 +101,7 @@ Organization members without special organization permissions can:
 
 You can version your element templates [similar to diagrams](/components/modeler/web-modeler/versions.md).
 
-If you publish a new version of a element template and an older version is already being used in diagrams, the user can either:
+If you publish a new version of an element template and an older version is already being used in diagrams, the user can either:
 
 - [Update the diagram elements](/components/modeler/desktop-modeler/element-templates/using-templates.md#updating-templates) to use the most recent version of the element template. You cannot undo this action.
 - Continue using the older version of the element template in their diagrams.
