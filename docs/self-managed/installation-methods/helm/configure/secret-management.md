@@ -9,11 +9,11 @@ This guide provides an overview for configuring and managing secrets when using 
 
 ## Secret configuration patterns
 
-The Helm chart now supports two patterns for secret management:
+The Helm chart supports different patterns for secret management depending on your Camunda version:
 
-### New pattern (recommended)
+### New pattern (Camunda 8.8+, recommended)
 
-The new pattern uses a structured `secret:` configuration under components with three options:
+Starting with Camunda 8.8, the new pattern uses a structured `secret:` configuration under components with three options:
 
 - `inlineSecret`: Plain-text value for non-production usage
 - `existingSecret`: Reference to an existing Kubernetes Secret name
@@ -30,9 +30,9 @@ component:
       existingSecretKey: "secret-key"
 ```
 
-### Legacy pattern (deprecated)
+### Legacy pattern (Camunda 8.7 and below)
 
-The legacy pattern uses direct `existingSecret` and `existingSecretKey` fields. These are deprecated but still supported for backward compatibility.
+For Camunda 8.7 and earlier versions, the legacy pattern uses direct `existingSecret` and `existingSecretKey` fields. These are deprecated in 8.8+ but still supported for backward compatibility.
 
 ### Bitnami subchart pattern
 
@@ -49,7 +49,7 @@ The following Bitnami subchart configurations are available:
 
 These secrets are used by Camunda applications and must be configured manually when using external secrets.
 
-### Secrets using the new pattern
+### Secrets using the new pattern (Camunda 8.8+)
 
 | **Secret**                              | **Chart values key**                        | **Purpose**                                             |
 | --------------------------------------- | ------------------------------------------- | ------------------------------------------------------- |
@@ -61,7 +61,7 @@ These secrets are used by Camunda applications and must be configured manually w
 | **OAuth Client Secret (Orchestration)** | `global.identity.auth.orchestration.secret` | OAuth client secret for Orchestration Cluster           |
 | **OAuth Client Secret (Optimize)**      | `global.identity.auth.optimize.secret`      | OAuth client secret for Optimize                        |
 
-### Secrets using Bitnami subchart patterns
+### Secrets using Bitnami subchart patterns (all versions)
 
 | **Secret**                          | **Chart values key**                              | **Purpose**                                       |
 | ----------------------------------- | ------------------------------------------------- | ------------------------------------------------- |
@@ -79,7 +79,7 @@ These secrets are used by Camunda applications and must be configured manually w
 
 These secrets are necessary when integrating Camunda with third-party services.
 
-### Secrets using the new pattern
+### Secrets using the new pattern (Camunda 8.8+)
 
 | **Secret**                                | **Chart values key**                         | **Purpose**                                                              |
 | ----------------------------------------- | -------------------------------------------- | ------------------------------------------------------------------------ |
@@ -93,9 +93,12 @@ These secrets are necessary when integrating Camunda with third-party services.
 
 ## How to configure secrets
 
-Secrets can be configured in two ways: inline in your `values.yaml` file for non-production use, or by referencing externally created Kubernetes Secrets for production.
+Secrets can be configured in different ways depending on your Camunda version:
 
-### Method 1: Inline secrets (non-production only)
+- **Camunda 8.8+**: Use the new structured `secret:` pattern with `inlineSecret` for non-production or external Kubernetes Secrets for production
+- **Camunda 8.7 and below**: Use the legacy pattern with direct `existingSecret` fields
+
+### Method 1: Inline secrets (Camunda 8.8+, non-production only)
 
 For development or testing environments, provide secrets directly in your `values.yaml` using the `inlineSecret` field:
 
@@ -111,9 +114,9 @@ identity:
       inlineSecret: "demo-password"
 ```
 
-### Method 2: External Kubernetes secrets (recommended)
+### Method 2: External Kubernetes secrets (recommended for all versions)
 
-For production environments, create a Kubernetes Secret and reference it from your `values.yaml`.
+For production environments, create a Kubernetes Secret and reference it from your `values.yaml`. This method works for both Camunda 8.8+ (with new pattern) and 8.7 and below (with legacy pattern).
 
 #### Step 1: Create the secret
 
@@ -189,9 +192,9 @@ webModelerPostgresql:
 
 For additional details on Identity secrets during installation, visit the [installation guide](/self-managed/installation-methods/helm/install.md#create-identity-secrets).
 
-## Migration from legacy pattern
+## Migration from legacy pattern (8.7 → 8.8+)
 
-If you are using the legacy secret management pattern, migrate to the new structured `secret:` pattern for better consistency and future compatibility. The legacy fields are deprecated but will remain functional during the transition period.
+If you are upgrading from Camunda 8.7 or earlier and using the legacy secret management pattern, migrate to the new structured `secret:` pattern available in Camunda 8.8+ for better consistency and future compatibility. The legacy fields are deprecated in 8.8+ but will remain functional during the transition period.
 
 ### Scenario 1: Migrating an external secret reference
 
