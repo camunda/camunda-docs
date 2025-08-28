@@ -459,10 +459,6 @@ For a comprehensive example demonstrating these steps, see the [DeployAndComplet
 
 - [Job worker implementation](job-worker.md) – Build workers to handle automated tasks
 - [Process testing](../testing/getting-started.md) – Test your processes with Camunda Process Test
-
-**Explore examples**
-
-- [Java client examples](../java-client-examples/index.md) – Real-world code samples for common scenarios
 - [Getting Started Tutorial](../../guides/getting-started-example.md) – Complete walkthrough with Modeler, Operate, and Spring SDK
 
 **Advanced topics**

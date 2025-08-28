@@ -224,7 +224,7 @@ You could even report the wrong diagram patterns together with examples to resol
 
 #### Unit and integration tests
 
-For unit tests, select a test framework suitable for your environment. If working with Java, the [camunda-process-test](/apis-tools/testing/getting-started.md) library is an excellent option. Alternatively, employ the [Java client](/apis-tools/java-client/getting-started.md) with JUnit for testing your BPMN and [DMN diagrams](/apis-tools/java-client-examples/decision-evaluate.md) in dev or preview environments. Similar testing can be performed using [community-built clients](/apis-tools/community-clients/index.md).
+For unit tests, select a test framework suitable for your environment. If working with Java, the [camunda-process-test](/apis-tools/testing/getting-started.md) library is an excellent option. Alternatively, employ the [Java client](/apis-tools/java-client/getting-started.md) with JUnit for testing your BPMN and DMN diagrams in dev or preview environments. Similar testing can be performed using [community-built clients](/apis-tools/community-clients/index.md).
 
 ### Review stage
 

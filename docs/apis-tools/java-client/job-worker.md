@@ -93,13 +93,9 @@ For example, imagine you have 10 process instances and a single job worker confi
 
 If streaming is enabled (via `streamEnabled`), it will also open a long-living stream over which jobs will be pushed without having to be polled. In such cases, a worker will only buffer up to `maxJobsActive` jobs at the same time. You can then estimate its memory usage as `maxJobsActive` times the max message size.
 
-## Example usage
-
-- [Open a job worker](../java-client-examples/job-worker-open.md)
-
 ## Backoff configuration
 
-When a poll fails with an error response, the job worker applies a backoff strategy. It waits for some time, after which it polls again for more jobs. This gives a Zeebe cluster some time to recover from a failure. In some cases, you may want to configure this backoff strategy to better fit your situation.
+- [Open a job worker](../java-client-examples/job-worker-open.md)
 
 The retry delay (i.e. the time the job worker waits after an error before the next poll for new jobs) is provided by the [`BackoffSupplier`](https://github.com/camunda/camunda/blob/main/clients/java/src/main/java/io/camunda/client/api/worker/BackoffSupplier.java). You can replace it using the `.backoffSupplier()` method on the [`JobWorkerBuilder`](https://github.com/camunda/camunda/blob/main/clients/java/src/main/java/io/camunda/client/api/worker/JobWorkerBuilderStep1.java).
 
