@@ -13,7 +13,7 @@ export const configs = [
     types: ["1-to-1"],
   },
   {
-    name: "data.secondary-storage.type: 'elasticsearch'",
+    name: "data.secondary-storage.type",
     legacy: [
       "camunda.database.type",
       "camunda.operate.database",
