@@ -21,7 +21,7 @@ The Camunda Java Client is a comprehensive library enabling Java developers to:
 - **Implement job workers** to handle automated tasks within your processes
 - **Query and manage process data** via the Orchestration Cluster API
 
-It supports both REST and gRPC protocols, handles authentication automatically, and provides robust error handling with retry mechanisms.
+It supports both REST and gRPC protocols, authentication setup, and provides robust error handling with retry mechanisms.
 
 :::info Migration from Zeebe Java Client
 **The Camunda Java Client replaces the Zeebe Java Client as of version 8.8.**
@@ -30,7 +30,7 @@ It supports both REST and gRPC protocols, handles authentication automatically, 
 - The Zeebe Java Client will be **removed in version 8.10**
 - **Migrate before upgrading to 8.10** to avoid breaking changes
 
-See our [migration guide](/reference/announcements-release-notes/880/880-announcements.md#camunda-java-client-and-camunda-spring-boot-sdk) for details.
+See our [migration guide](../migration-manuals/migrate-to-camunda-java-client.md) for details.
 :::
 
 ## What can you build with it?
@@ -87,13 +87,10 @@ private static final String CAMUNDA_REST_ADDRESS = "[Address of the Orchestratio
 
 public static void main(String[] args) {
 
-    CredentialsProvider credentialsProvider = new NoopCredentialsProvider();
-
     try (CamundaClient client = CamundaClient.newClientBuilder()
             .grpcAddress(URI.create(CAMUNDA_GRPC_ADDRESS))
-            .usePlaintext()
             .restAddress(URI.create(CAMUNDA_REST_ADDRESS))
-            .credentialsProvider(credentialsProvider)
+            .usePlaintext()
             .build()) {
 
         // Test the connection
@@ -150,6 +147,9 @@ public static void main(String[] args) {
     try (CamundaClient client = CamundaClient.newClientBuilder()
             .grpcAddress(URI.create(CAMUNDA_GRPC_ADDRESS))
             .restAddress(URI.create(CAMUNDA_REST_ADDRESS))
+            // uncomment to use an unencrypted transport (plain http)
+            // we advise to use encrypted connections to not leak credentials
+            // .usePlaintext()
             .credentialsProvider(credentialsProvider)
             .build()) {
 
@@ -163,7 +163,7 @@ public static void main(String[] args) {
 **What this code does**
 
 1. **Sets up username/password authentication** – Configures the client to use basic credentials.
-2. **Builds a secure client** – Establishes an encrypted connection to the cluster.
+2. **Builds a secure client** – Establishes an encrypted connection to the cluster (default).
 3. **Connects to both APIs** – Configures access to the Zeebe gRPC and Orchestration Cluster REST APIs.
 4. **Tests the connection** – Verifies authentication by requesting cluster topology information.
 
@@ -229,7 +229,7 @@ public static void main(String[] args) {
 **What this code does**
 
 1. **Sets up OAuth2 authentication** – Configures the client to use OAuth tokens from your identity provider.
-2. **Builds a secure client** – Establishes an encrypted connection to your self-managed cluster.
+2. **Builds a secure client** – Establishes an encrypted connection to your self-managed cluster (default).
 3. **Connects to both APIs** – Configures access to the Zeebe gRPC and Orchestration Cluster REST APIs.
 4. **Tests the connection** – Verifies OAuth authentication by requesting cluster topology information.
 
