@@ -1,7 +1,7 @@
 ---
-id: configuration
-title: "Configuration"
-description: "Learn about the Identity configuration options available in your orchestration cluster."
+id: properties
+title: "All properties"
+description: "Learn about the Identity configuration properties available in your Orchestration Cluster."
 ---
 
 import Tabs from '@theme/Tabs';
@@ -12,59 +12,77 @@ As a Spring Boot application, the Orchestration Cluster supports standard
 
 The following configurations apply to all components within the Orchestration Cluster.
 
+## Authentication
+
 <!-- Updates must be made to ALL tables below. Tables are sorted alphabetically by property name. -->
 <Tabs>
   <TabItem value="env" label="Environment variables" default>
   
-| Environment variable                                            | Description                                                                                                                 | Default value         |
-|-----------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------| --------------------- |
-| `CAMUNDA_SECURITY_AUTHENTICATION_METHOD`                        | The authentication method to use. Options: `basic`, `oidc`.                                                                 | `basic`               |
-| `CAMUNDA_SECURITY_AUTHENTICATION_AUTHENTICATIONREFRESHINTERVAL` | The interval at which the memberships (groups, roles, tenants, component authorizations) are refreshed for logged in users. | `PT30S`               |
-| `CAMUNDA_SECURITY_AUTHENTICATION_UNPROTECTEDAPI`                | If the API can be used without authentication.                                                                              | `false`               |
-| `CAMUNDA_SECURITY_AUTHORIZATIONS_ENABLED`                       | If authorizations are enabled.                                                                                              | `true`                |
-| `CAMUNDA_SECURITY_MULTITENANCY_CHECKSENABLED`                   | Enables multi-tenancy checks. This requires the API to be protected.                                                        | `false`               |
-| `CAMUNDA_SECURITY_MULTITENANCY_APIENABLED`                      | Enables the multi-tenancy API and UI independently from multi-tenancy checks.                                               | `true`                |
-| `CAMUNDA_SECURITY_IDVALIDATIONPATTERN`                          | A Java regular expression that validates the user-defined identifiers of Identity-related entities.                         | `^[a-zA-Z0-9_@.+-]+$` |
-| `CAMUNDA_PERSISTENT_SESSIONS_ENABLED`                           | Stores session data in secondary storage so users stay logged in across cluster nodes.                                      | `true`                |
-| `SPRING_PROFILES_ACTIVE`                                        | **Note:** This property will be deprecated as additional authentication methods become available.                           | `consolidated-auth`   |
+| Environment variable                                            | Description                                                                                                                                                                                                                                                                                                              | Default value         |
+|-----------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| --------------------- |
+| `CAMUNDA_SECURITY_AUTHENTICATION_METHOD`                        | The authentication method to use. Options: `basic`, `oidc`.                                                                                                                                                                                                                                                              | `basic`               |
+| `CAMUNDA_SECURITY_AUTHENTICATION_AUTHENTICATIONREFRESHINTERVAL` | The interval at which the memberships (groups, roles, tenants, component authorizations) are refreshed for logged in users. Find more details in [webserver and security](/self-managed/components/orchestration-cluster/core-settings/configuration/webserver.md#propagation-of-membership-changes-to-active-sessions). | `PT30S`               |
+| `CAMUNDA_SECURITY_AUTHENTICATION_UNPROTECTEDAPI`                | If the API can be used without authentication.                                                                                                                                                                                                                                                                           | `false`               |
+| `CAMUNDA_SECURITY_AUTHORIZATIONS_ENABLED`                       | If authorizations are enabled.                                                                                                                                                                                                                                                                                           | `true`                |
+| `CAMUNDA_SECURITY_IDVALIDATIONPATTERN`                          | A Java regular expression that validates the user-defined identifiers of Identity-related entities.                                                                                                                                                                                                                      | `^[a-zA-Z0-9_@.+-]+$` |
+| `CAMUNDA_PERSISTENT_SESSIONS_ENABLED`                           | Stores session data in secondary storage so users stay logged in across cluster nodes.                                                                                                                                                                                                                                   | `true`                |
+| `SPRING_PROFILES_ACTIVE`                                        | **Note:** This property will be deprecated as additional authentication methods become available.                                                                                                                                                                                                                        | `consolidated-auth`   |
 
   </TabItem>
   <TabItem value="application.yaml" label="application.yaml">
 
-| Application.yaml property                                         | Description                                                                                                                 | Default value         |
-| ----------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------- |
-| `camunda.security.authentication.method`                          | The authentication method to use. Options: `basic`, `oidc`.                                                                 | `basic`               |
-| `camunda.security.authentication.authentication-refresh-interval` | The interval at which the memberships (groups, roles, tenants, component authorizations) are refreshed for logged in users. | `PT30S`               |
-| `camunda.security.authentication.unprotected-api`                 | If the API can be used without authentication.                                                                              | `false`               |
-| `camunda.security.authorizations.enabled`                         | If authorizations are enabled.                                                                                              | `true`                |
-| `camunda.security.multi-tenancy.checks-enabled`                   | Enables multi-tenancy checks. This requires the API to be protected.                                                        | `false`               |
-| `camunda.security.multi-tenancy.api-enabled`                      | Enables the multi-tenancy API and UI independently from multi-tenancy checks.                                               | `true`                |
-| `camunda.security.id-validation-pattern`                          | A Java regular expression that validates the user-defined identifiers of Identity-related entities.                         | `^[a-zA-Z0-9_@.+-]+$` |
-| `camunda.persistent.sessions.enabled`                             | Stores session data in secondary storage so users stay logged in across cluster nodes.                                      | `true`                |
-| `spring.profiles.active`                                          | **Note:** This property will be deprecated as additional authentication methods become available.                           | `consolidated-auth`   |
+| Application.yaml property                                         | Description                                                                                                                                                                                                                                                                                                              | Default value         |
+| ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------- |
+| `camunda.security.authentication.method`                          | The authentication method to use. Options: `basic`, `oidc`.                                                                                                                                                                                                                                                              | `basic`               |
+| `camunda.security.authentication.authentication-refresh-interval` | The interval at which the memberships (groups, roles, tenants, component authorizations) are refreshed for logged in users. Find more details in [webserver and security](/self-managed/components/orchestration-cluster/core-settings/configuration/webserver.md#propagation-of-membership-changes-to-active-sessions). | `PT30S`               |
+| `camunda.security.authentication.unprotected-api`                 | If the API can be used without authentication.                                                                                                                                                                                                                                                                           | `false`               |
+| `camunda.security.authorizations.enabled`                         | If authorizations are enabled.                                                                                                                                                                                                                                                                                           | `true`                |
+| `camunda.security.id-validation-pattern`                          | A Java regular expression that validates the user-defined identifiers of Identity-related entities.                                                                                                                                                                                                                      | `^[a-zA-Z0-9_@.+-]+$` |
+| `camunda.persistent.sessions.enabled`                             | Stores session data in secondary storage so users stay logged in across cluster nodes.                                                                                                                                                                                                                                   | `true`                |
+| `spring.profiles.active`                                          | **Note:** This property will be deprecated as additional authentication methods become available.                                                                                                                                                                                                                        | `consolidated-auth`   |
 
   </TabItem>
   <TabItem value="helm" label="Helm values">
 
-| Helm value key                                                 | Description                                                                                                                 | Default value |
-| -------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| `global.security.authentication.method`                        | The authentication method to use. Options: `basic`, `oidc`.                                                                 | `basic`       |
-| `global.security.authentication.authenticationRefreshInterval` | The interval at which the memberships (groups, roles, tenants, component authorizations) are refreshed for logged in users. | `PT30S`       |
-| `global.security.authentication.unprotectedApi`                | If the API can be used without authentication.                                                                              | `false`       |
-| `global.security.authorizations.enabled`                       | If authorizations are enabled.                                                                                              | `true`        |
-| `global.security.multiTenancy.checksEnabled`                   | Enables multi-tenancy checks. This requires the API to be protected.                                                        | `false`       |
-| `global.security.multiTenancy.apiEnabled`                      | Enables the multi-tenancy API and UI independently from multi-tenancy checks.                                               | `true`        |
-| `global.persistent.sessions.enabled`                           | Stores session data in secondary storage so users stay logged in across cluster nodes.                                      | `true`        |
+| Helm value key                                                 | Description                                                                                                                                                                                                                                                                                                              | Default value |
+| -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
+| `global.security.authentication.method`                        | The authentication method to use. Options: `basic`, `oidc`.                                                                                                                                                                                                                                                              | `basic`       |
+| `global.security.authentication.authenticationRefreshInterval` | The interval at which the memberships (groups, roles, tenants, component authorizations) are refreshed for logged in users. Find more details in [webserver and security](/self-managed/components/orchestration-cluster/core-settings/configuration/webserver.md#propagation-of-membership-changes-to-active-sessions). | `PT30S`       |
+| `global.security.authentication.unprotectedApi`                | If the API can be used without authentication.                                                                                                                                                                                                                                                                           | `false`       |
+| `global.security.authorizations.enabled`                       | If authorizations are enabled.                                                                                                                                                                                                                                                                                           | `true`        |
+| `global.persistent.sessions.enabled`                           | Stores session data in secondary storage so users stay logged in across cluster nodes.                                                                                                                                                                                                                                   | `true`        |
 
   </TabItem>
 </Tabs>
 
-### Explaining the `authentication-refresh-interval` property
+## Multi-Tenancy
 
-When a user logs in, we determine their associations at once (membership in roles, groups, tenants; application authorizations) and put them into the web session.
-When these associations change (e.g. user is removed from a group; authorizations change), then this is not reflected in this cached state until the next refresh interval comes.
-The default interval is 30 seconds but can be configured via `camunda.security.authentication.authentication-refresh-interval` property to a higher/lower value if needed considering a trade-off between the extra load for session refresh and the criticality of having sync authentications.
-The property format is ISO8601 duration, example: `PT10M` for 10 minutes. For more information on ISO8601 duration format, refer to [ISO8601](https://en.wikipedia.org/wiki/ISO_8601#Durations).
+<Tabs>
+  <TabItem value="env" label="Environment variables" default>
+  
+| Environment variable                                            | Description                                                                    | Default value |
+|-----------------------------------------------------------------|------------------------------------------------------------------------------- | ------------- |
+| `CAMUNDA_SECURITY_MULTITENANCY_CHECKSENABLED`                   | Enables multi-tenancy checks. This requires the API to be protected.           | `false`       |
+| `CAMUNDA_SECURITY_MULTITENANCY_APIENABLED`                      | Enables the multi-tenancy API and UI independently from multi-tenancy checks.  | `true`        |
+
+  </TabItem>
+  <TabItem value="application.yaml" label="application.yaml">
+
+| Application.yaml property                       | Description                                                                   | Default value |
+| ----------------------------------------------- | ----------------------------------------------------------------------------- | ------------- |
+| `camunda.security.multi-tenancy.checks-enabled` | Enables multi-tenancy checks. This requires the API to be protected.          | `false`       |
+| `camunda.security.multi-tenancy.api-enabled`    | Enables the multi-tenancy API and UI independently from multi-tenancy checks. | `true`        |
+
+  </TabItem>
+  <TabItem value="helm" label="Helm values">
+
+| Helm value key                               | Description                                                                   | Default value |
+| -------------------------------------------- | ----------------------------------------------------------------------------- | ------------- |
+| `global.security.multiTenancy.checksEnabled` | Enables multi-tenancy checks. This requires the API to be protected.          | `false`       |
+| `global.security.multiTenancy.apiEnabled`    | Enables the multi-tenancy API and UI independently from multi-tenancy checks. | `true`        |
+
+  </TabItem>
+</Tabs>
 
 ## Initialization
 
@@ -268,23 +286,7 @@ script-src-attr 'none'.
 
 ## CSRF Protection
 
-Cross-Site Request Forgery (CSRF) is a type of malicious exploit where unauthorized commands are
-transmitted from a user that the web application trusts. In a CSRF attack, an attacker tricks a victim's
-browser into making unwanted requests to a web application where the victim is authenticated.
-
-For a comprehensive understanding of CSRF attacks and prevention methods, refer to the
-[MDN Web Docs on CSRF](https://developer.mozilla.org/en-US/docs/Glossary/CSRF).
-
-### How CSRF protection works in Camunda
-
-- **Token generation**: A unique CSRF token is generated and stored in a secure, HTTP-only cookie named `X-CSRF-TOKEN`.
-- **Token validation**: For state-changing requests (POST, PUT, DELETE, etc.), the server validates that the CSRF token
-  in the request header `X-CSRF-TOKEN` matches the one in the cookie.
-- **Safe methods**: GET, HEAD, TRACE, and OPTIONS requests are considered safe and don't require CSRF validation.
-
-### Configuration
-
-The following variables are used to configure CSRF protection.
+The following variables are used to configure [Cross-Site Request Forgery (CSRF)](/self-managed/components/orchestration-cluster/core-settings/configuration/csrf-protection.md) protection.
 The CSRF protection only applies in the context of a session-based authentication. You don't need to provide
 CSRF tokens when using OIDC or Basic authentication methods.
 
@@ -315,25 +317,3 @@ CSRF tokens when using OIDC or Basic authentication methods.
 :::caution
 Disabling CSRF protection is not recommended for production environments as it leaves your application vulnerable to cross-site request forgery attacks.
 :::
-
-### Protected vs unprotected paths
-
-#### Protected paths (require CSRF token)
-
-- `/api/**` – API endpoints (except specifically excluded paths)
-- `/v1/**`, `/v2/**` – Versioned API endpoints
-- All state-changing operations (POST, PUT, DELETE, PATCH)
-
-#### Unprotected paths (no CSRF token required)
-
-- `/actuator/**` – Health and monitoring endpoints
-- `/v2/license` – Public license endpoint
-- `/error` – Error handling
-- Authentication endpoints (`/login`, `/logout`)
-- Safe HTTP methods (GET, HEAD, OPTIONS, TRACE)
-
-### Security considerations
-
-- Always use HTTPS in production to prevent token interception.
-- Consider additional security headers configured in the security settings.
-- Regularly review and update the list of unprotected paths.
