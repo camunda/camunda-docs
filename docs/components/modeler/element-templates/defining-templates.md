@@ -62,14 +62,14 @@ You can define multiple templates in one JSON file by wrapping them in an array.
   {
     ...
     "name": "Template 1",
-    "id": "sometemplate",
+    "id": "some-template-id",
     "description": "some description",
     ...
   },
   {
     ...
     "name": "Template 2",
-    "id": "anothertemplate",
+    "id": "another-template-id",
     "description": "another description",
     ...
   }
@@ -87,3 +87,4 @@ For detailed information about specific aspects of template development, see:
 
 - **[Template Metadata](./template-metadata.md)** - Learn about template identification fields like name, ID, description, keywords, versioning, JSON schema compatibility, engine compatibility, and supported BPMN types
 - **[Template Properties](./template-properties.md)** - The properties array is the heart of the element template. Here you can define what properties should be applied to the BPMN element and how these properties should be shown and validated in the properties panel.
+- **[Example Template](./template-example.md)** - A complete example showing how to create a REST connector element template.
