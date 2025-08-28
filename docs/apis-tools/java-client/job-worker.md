@@ -95,7 +95,7 @@ If streaming is enabled (via `streamEnabled`), it will also open a long-living s
 
 ## Backoff configuration
 
-- [Open a job worker](../java-client-examples/job-worker-open.md)
+When a poll fails with an error response, the job worker applies a backoff strategy. It waits for some time, after which it polls again for more jobs. This gives a Zeebe cluster some time to recover from a failure. In some cases, you may want to configure this backoff strategy to better fit your situation.
 
 The retry delay (i.e. the time the job worker waits after an error before the next poll for new jobs) is provided by the [`BackoffSupplier`](https://github.com/camunda/camunda/blob/main/clients/java/src/main/java/io/camunda/client/api/worker/BackoffSupplier.java). You can replace it using the `.backoffSupplier()` method on the [`JobWorkerBuilder`](https://github.com/camunda/camunda/blob/main/clients/java/src/main/java/io/camunda/client/api/worker/JobWorkerBuilderStep1.java).
 
@@ -252,7 +252,7 @@ It's also possible to set an overall timeout - so called `streamTimeout` - which
 
 #### Backfilling
 
-Even with streaming enabled, job workers still occasionally poll the cluster for jobs. Due to implementation constraints, when a job is made activate-able, it is pushed out only if there exists a stream for it; if not, it remains untouched. Even if a stream is created afterwards, it remains untouched. However, if a stream exists, then streaming is always prioritized over polling.
+Even with streaming enabled, job workers still occasionally poll the cluster for jobs. Due to implementation constraints, when a job is made activate-able, it is pushed out only if there exists a stream for it; if not, it remains untouched. However, if a stream exists, then streaming is always prioritized over polling.
 
 This ensures polling will not activate any new jobs, and the worker will back off and poll less often as long as it receives empty responses overtime.
 
