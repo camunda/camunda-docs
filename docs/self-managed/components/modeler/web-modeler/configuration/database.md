@@ -97,6 +97,8 @@ As the Oracle driver is not provided by default in each of the Camunda 8 distrib
 <TabItem value="envVars">
 ```sh
 SPRING_DATASOURCE_URL="jdbc:oracle:thin:@//[DB_HOST]:[DB_PORT]/[DB_NAME]"
+SPRING_DATASOURCE_USERNAME="[DB_USER]"
+SPRING_DATASOURCE_PASSWORD="[DB_PASSWORD]"
 ```
 </TabItem>
 <TabItem value="valuesYaml">
@@ -105,7 +107,9 @@ webModeler:
   restapi:
     externalDatabase:
       enabled: true
-      url: 'jdbc:oracle:thin:@//[DB_HOST]:[DB_PORT]/[DB_NAME]'
+      url: "jdbc:oracle:thin:@//[DB_HOST]:[DB_PORT]/[DB_NAME]"
+      user: "[DB_USER]"
+      password: "[DB_PASSWORD]"
     extraVolumeMounts:
       - name: oracle-driver
         mountPath: /driver-lib
@@ -134,6 +138,8 @@ webModeler:
 spring:
   datasource:
     url: jdbc:oracle:thin:@//[DB_HOST]:[DB_PORT]/[DB_NAME]
+    username: [DB_USER]
+    password: [DB_PASSWORD]
 ```
 </TabItem>
 </Tabs>
@@ -152,6 +158,8 @@ The MSSQL driver is provided by default, so no additional steps are necessary to
 <TabItem value="envVars">
 ```sh
 SPRING_DATASOURCE_URL="jdbc:sqlserver://[DB_HOST]:[DB_PORT];databaseName=[DB_NAME]"
+SPRING_DATASOURCE_USERNAME="[DB_USER]"
+SPRING_DATASOURCE_PASSWORD="[DB_PASSWORD]"
 ```
 </TabItem>
 <TabItem value="valuesYaml">
@@ -160,7 +168,9 @@ webModeler:
   restapi:
     externalDatabase:
       enabled: true
-      url: 'jdbc:sqlserver://[DB_HOST]:[DB_PORT];databaseName=[DB_NAME]'
+      url: "jdbc:sqlserver://[DB_HOST]:[DB_PORT];databaseName=[DB_NAME]"
+      user: "[DB_USER]"
+      password: "[DB_PASSWORD]"
 ```
 </TabItem>
 <TabItem value="applicationYaml">
@@ -168,6 +178,8 @@ webModeler:
 spring:
   datasource:
     url: jdbc:sqlserver://[DB_HOST]:[DB_PORT];databaseName=[DB_NAME]
+    username: [DB_USER]
+    password: [DB_PASSWORD]
 ```
 </TabItem>
 </Tabs>
