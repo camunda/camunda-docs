@@ -24,8 +24,8 @@ You may refer to this [example calculation](https://calculator.aws/#/estimate?id
 
 The architecture outlined below describes a standard three-node deployment, distributed across three [availability zones](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html) within a single AWS region. It includes a managed OpenSearch domain deployed under the same conditions. This approach ensures high availability and redundancy in case of a zone failure.
 
-<!-- The following diagram should be exported as an image and as a PDF from the sources https://miro.com/app/board/uXjVL-6SrPc=/ --->
-<!-- To export: click on the frame > "Export Image" > as PDF and as JPG (low res), then save it in the ./assets/ folder --->
+<!-- The following diagram should be exported as an image and as a PDF from the sources https://miro.com/app/board/uXjVL-6SrPc=/ -->
+<!-- To export: click on the frame > "Export Image" > as PDF and as JPG (low res), then save it in the ./assets/ folder -->
 
 _Infrastructure diagram for a 3-node EC2 architecture (click the image to view the PDF version)_
 
@@ -315,6 +315,8 @@ ssh -J admin@${BASTION_HOST} admin@${CAMUNDA_IP}
 
 ## 2. Deploy Camunda 8
 
+The following example uses scripts from the Terraform installation to deploy and configure Camunda 8. You can adapt these scripts to your own environment. Alternatively, use the [manual installation instructions](/self-managed/installation-methods/manual/install.md) to perform the base installation and configuration.
+
 ### Configure and run the installation procedure
 
 1. Navigate to the procedure directory:
@@ -401,22 +403,10 @@ Follow the example in the [Orchestration Cluster REST API documentation](/apis-t
 ### Upgrade Camunda 8
 
 :::info Direct upgrade not supported
-Upgrading directly from Camunda 8.6 to 8.7 is not supported and cannot be performed.
+Upgrading directly from Camunda 8.7 to 8.8 is not supported and cannot be performed.
 :::
 
-To update to a new patch release, follow this recommended approach:
-
-1. Remove the `lib` folder. This ensures outdated dependencies from previous versions are fully removed.
-2. Overwrite the remaining files with those from the downloaded patch release package.
-3. Restart Camunda 8.
-
-You can automate this process using the `all-in-one-install.sh` script, which:
-
-- Detects an existing Camunda 8 installation.
-- Deletes the `lib` folder to clear outdated dependencies.
-- Overwrites files with the updated version.
-- Regenerates configuration files.
-- Restarts the application to apply updates.
+For manual installations, see the [upgrade guide](/self-managed/installation-methods/manual/upgrade.md) for detailed instructions.
 
 ### Monitoring
 
@@ -433,3 +423,11 @@ When using AWS, you can utilize [S3](https://aws.amazon.com/s3/) for backing up 
 ## Troubleshooting
 
 For troubleshooting assistance, consult the [operational guides troubleshooting documentation](/self-managed/operational-guides/troubleshooting.md).
+
+## Next steps
+
+After setting up your cluster, many users typically do the following:
+
+- [Connect to an identity provider](/self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md) – integrate with an external identity system for authentication.
+- [Secure cluster communication](/self-managed/components/orchestration-cluster/zeebe/security/secure-cluster-communication.md) – protect traffic between cluster nodes.
+- [Secure client communication](/self-managed/components/orchestration-cluster/zeebe/security/secure-client-communication.md) – ensure secure communication between clients and the cluster.

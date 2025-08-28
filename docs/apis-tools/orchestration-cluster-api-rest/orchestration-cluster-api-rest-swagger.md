@@ -33,7 +33,7 @@ Swagger UI can be accessed from a running orchestration cluster.
 
 ### Self-Managed
 
-Use the host and path defined in your Zeebe Gateway [configuration](../../self-managed/installation-methods/helm/configure/ingress-setup.md).  
+Use the host and path defined in your Zeebe Gateway [configuration](../../self-managed/installation-methods/helm/configure/ingress-setup.md).
 
 - Default `${BASE_URL}`: `http://localhost:8080/`
 - Append the suffix: `/swagger-ui/index.html`
@@ -56,7 +56,7 @@ You can enable or disable Swagger through the Camunda Console:
 
 ### Self-Managed
 
-In Self-Managed deployments, Swagger UI is controlled with the environment variable:  
+In Self-Managed deployments, Swagger UI is controlled with the environment variable:
 
-- `camunda.rest.swagger.enabled` or  
+- `camunda.rest.swagger.enabled` or
 - `CAMUNDA_REST_SWAGGER_ENABLED`

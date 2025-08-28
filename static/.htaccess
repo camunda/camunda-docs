@@ -148,10 +148,13 @@ RewriteRule ^optimize/3.11.0/self-managed/(.*)$ /docs/8.3/self-managed/$1 [R=301
 #   8.8: content moves introduced prior to the release of version 8.8.
 #---------------------------------------------------------------------------------
 
+# Orchestration cluster restructure
+RewriteRule ^docs/next/self-managed/components/orchestration-cluster/identity/configuration/?$ /docs/next/self-managed/components/orchestration-cluster/core-settings/configuration/properties/ [R=301,L]
+
 # Self-Managed Restructure
 # Setup
 RewriteRule ^docs/next/self-managed/setup/deploy/amazon/amazon-eks/?$ /docs/next/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/ [R=301,L]
-RewriteRule ^docs/next/self-managed/setup/deploy/amazon/aws-ec2/?$ /docs/next/self-managed/installation-methods/helm/cloud-providers/amazon/aws-ec2/ [R=301,L]
+RewriteRule ^docs/next/self-managed/setup/deploy/amazon/aws-ec2/?$ /docs/next/self-managed/installation-methods/manual/cloud-providers/amazon/aws-ec2/ [R=301,L]
 RewriteRule ^docs/next/self-managed/setup/deploy/amazon/openshift/?$ /docs/next/self-managed/installation-methods/helm/cloud-providers/amazon/openshift/ [R=301,L]
 RewriteRule ^docs/next/self-managed/setup/deploy/azure/microsoft-aks/?$ /docs/next/self-managed/installation-methods/helm/cloud-providers/azure/microsoft-aks/ [R=301,L]
 RewriteRule ^docs/next/self-managed/setup/deploy/gcp/?$ /docs/next/self-managed/installation-methods/helm/cloud-providers/gcp/ [R=301,L]
@@ -207,9 +210,9 @@ RewriteRule ^docs/next/self-managed/setup/install/?$ /docs/next/self-managed/ins
 RewriteRule ^docs/next/self-managed/operational-guides/troubleshooting/diagnostics/?$ /docs/next/self-managed/installation-methods/helm/operational-tasks/diagnostics/ [R=301,L]
 RewriteRule ^docs/next/self-managed/operational-guides/multi-region/dual-region-operational-procedure/?$ /docs/next/self-managed/installation-methods/helm/operational-tasks/dual-region-operational-procedure/ [R=301,L]
 RewriteRule ^docs/next/self-managed/setup/upgrade/?$ /docs/next/self-managed/installation-methods/helm/upgrade/upgrade/ [R=301,L]
-RewriteRule ^docs/next/self-managed/setup/deploy/local/manual/?$ /docs/next/self-managed/installation-methods/manual/manual-install/ [R=301,L]
-RewriteRule ^docs/next/self-managed/setup/guides/installing-payment-example/?$ /docs/next/self-managed/installation-methods/manual/manual-install/ [R=301,L]
-RewriteRule ^docs/next/self-managed/setup/guides/using-existing-keycloak/?$ /docs/next/self-managed/installation-methods/manual/manual-install/ [R=301,L]
+RewriteRule ^docs/next/self-managed/setup/deploy/local/manual/?$ /docs/next/self-managed/installation-methods/manual/install/ [R=301,L]
+RewriteRule ^docs/next/self-managed/setup/guides/installing-payment-example/?$ /docs/next/self-managed/installation-methods/manual/install/ [R=301,L]
+RewriteRule ^docs/next/self-managed/setup/guides/using-existing-keycloak/?$ /docs/next/self-managed/installation-methods/manual/install/ [R=301,L]
 # Quickstart guides
 RewriteRule ^docs/next/self-managed/setup/deploy/local/local-kubernetes-cluster/?$ /docs/next/self-managed/quickstart/administrator-quickstart/ [R=301,L]
 RewriteRule ^docs/next/self-managed/setup/deploy/local/c8run/?$ /docs/next/self-managed/quickstart/developer-quickstart/c8run/ [R=301,L]
