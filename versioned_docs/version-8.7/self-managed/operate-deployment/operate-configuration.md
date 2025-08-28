@@ -254,7 +254,7 @@ schema is created, settings may be adjusted directly in the OpenSearch template,
 to indices created after adjustment.
 
 :::note
-From 8.7.11 you can opt-in to re-applying schema-related configuration (replicas, and template priority) on restart. See [Dynamic schema settings updates (OpenSearch)](#dynamic-schema-settings-updates-opensearch-8711).
+From 8.7.11 you can opt-in to applying schema-related configuration on restart. See [dynamic schema settings updates (OpenSearch)](#dynamic-schema-settings-updates-opensearch-8711).
 :::
 
 #### Settings for index templates priority
@@ -278,7 +278,7 @@ This feature is only available for Operate 8.7.11 and later versions.
 :::
 
 :::note
-From 8.7.11 you can opt-in to applying the configured priority update on restart. See [Dynamic schema settings updates](#dynamic-schema-settings-updates-8711).
+From 8.7.11 you can opt-in to applying the configured priority update on restart. See [dynamic schema settings updates (OpenSearch)](#dynamic-schema-settings-updates-opensearch-8711).
 :::
 
 #### Dynamic schema settings updates (OpenSearch, 8.7.11+)

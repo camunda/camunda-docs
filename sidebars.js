@@ -45,6 +45,13 @@ module.exports = {
         "components/concepts/processes",
         "components/concepts/process-applications",
         "components/concepts/element-templates",
+        {
+          "Access control": [
+            "components/concepts/access-control/access-control-overview",
+            "components/concepts/access-control/authorizations",
+            "components/concepts/access-control/connect-to-identity-provider",
+          ],
+        },
         "components/concepts/job-workers",
         "components/concepts/execution-listeners",
         {
@@ -67,12 +74,6 @@ module.exports = {
         "components/concepts/outbound-connectors-job-workers",
         "components/concepts/backups",
         "components/concepts/resource-deletion",
-        {
-          "Access control": [
-            "components/concepts/access-control/access-control-overview",
-            "components/concepts/access-control/authorizations",
-          ],
-        },
       ],
     },
     {
@@ -171,6 +172,7 @@ module.exports = {
             "components/modeler/web-modeler/git-sync",
             "components/modeler/web-modeler/import-diagram",
             "components/modeler/web-modeler/fix-problems-in-your-diagram",
+            "components/modeler/web-modeler/save-as-element-templates",
             "components/modeler/web-modeler/run-or-publish-your-process",
             "components/modeler/web-modeler/integrate-web-modeler-in-ci-cd",
             {
@@ -206,6 +208,7 @@ module.exports = {
                 "components/modeler/web-modeler/advanced-modeling/form-linking",
                 "components/modeler/web-modeler/advanced-modeling/publish-public-processes",
                 "components/modeler/web-modeler/advanced-modeling/process-documentation-with-readme-files",
+                "components/modeler/web-modeler/advanced-modeling/test-scenario-files",
                 {
                   "AI features": [
                     "components/modeler/web-modeler/advanced-modeling/refactoring-suggestions",
@@ -235,17 +238,9 @@ module.exports = {
             "components/modeler/desktop-modeler/use-connectors",
             "components/modeler/desktop-modeler/variables",
             {
-              type: "category",
-              label: "Element templates",
-              link: {
-                type: "doc",
-                id: "components/modeler/desktop-modeler/element-templates/about-templates",
-              },
-              items: [
+              "Element templates": [
                 "components/modeler/desktop-modeler/element-templates/configuring-templates",
                 "components/modeler/desktop-modeler/element-templates/using-templates",
-                "components/modeler/desktop-modeler/element-templates/defining-templates",
-                "components/modeler/desktop-modeler/element-templates/additional-resources",
               ],
             },
             {
@@ -325,6 +320,7 @@ module.exports = {
         require("./docs/components/modeler/dmn/sidebar-schema"),
         require("./docs/components/modeler/feel/sidebar-schema"),
         require("./docs/components/modeler/forms/sidebar-schema"),
+        require("./docs/components/modeler/element-templates/sidebar-schema"),
         "components/modeler/data-handling",
         require("./docs/components/modeler/reference/sidebar-schema"),
       ],
@@ -409,6 +405,7 @@ module.exports = {
             "components/identity/group",
             "components/identity/role",
             "components/identity/authorization",
+            "components/identity/client",
           ],
         },
       ],
@@ -640,13 +637,13 @@ module.exports = {
             "components/console/manage-organization/organization-settings",
             "components/console/manage-organization/manage-users",
             "components/console/manage-organization/manage-user-groups",
+            "components/console/manage-organization/external-sso",
             "components/console/manage-organization/view-organization-activity",
             "components/console/manage-organization/enable-alpha-features",
             "components/console/manage-organization/usage-history",
             "components/console/manage-organization/usage-alerts",
             "components/console/manage-organization/advanced-search",
             "components/console/manage-organization/switch-organization",
-            "components/console/manage-organization/external-sso",
             "components/console/manage-organization/delete-account",
           ],
         },
@@ -723,6 +720,9 @@ module.exports = {
           Operations: [
             "components/best-practices/operations/versioning-process-definitions",
             "components/best-practices/operations/reporting-about-processes",
+          ],
+          "CI/CD guidelines": [
+            "components/best-practices/cicd-guidelines/element-templates-at-scale",
           ],
         },
       ],
@@ -973,9 +973,9 @@ module.exports = {
       },
       items: [
         "apis-tools/migration-manuals/migrate-to-camunda-api",
+        "apis-tools/migration-manuals/migrate-component-apis",
         "apis-tools/migration-manuals/migrate-to-camunda-java-client",
         "apis-tools/migration-manuals/migrate-to-camunda-user-tasks",
-        "apis-tools/migration-manuals/migrate-component-apis",
         "apis-tools/migration-manuals/migrate-to-camunda-process-test",
       ],
     },
@@ -1287,6 +1287,7 @@ module.exports = {
           label: "Manual",
           items: [
             "self-managed/installation-methods/manual/install",
+            "self-managed/installation-methods/manual/upgrade",
             {
               type: "category",
               label: "Cloud providers",
@@ -1416,6 +1417,31 @@ module.exports = {
           },
           items: [
             {
+              type: "category",
+              label: "Core settings and features",
+              link: {
+                type: "doc",
+                id: "self-managed/components/orchestration-cluster/core-settings/overview",
+              },
+              items: [
+                {
+                  Configuration: [
+                    "self-managed/components/orchestration-cluster/core-settings/configuration/properties",
+                    "self-managed/components/orchestration-cluster/core-settings/configuration/csrf-protection",
+                    "self-managed/components/orchestration-cluster/core-settings/configuration/licensing",
+                    "self-managed/components/orchestration-cluster/core-settings/configuration/webserver",
+                    "self-managed/components/orchestration-cluster/core-settings/configuration/logging",
+                  ],
+                },
+                // {
+                //   Concepts: [],
+                // },
+                // {
+                //   Migration: [],
+                // },
+              ],
+            },
+            {
               Zeebe: [
                 {
                   "Zeebe Gateway": [
@@ -1428,7 +1454,6 @@ module.exports = {
                 {
                   Configuration: [
                     "self-managed/components/orchestration-cluster/zeebe/configuration/configuration",
-                    "self-managed/components/orchestration-cluster/zeebe/configuration/logging",
                     "self-managed/components/orchestration-cluster/zeebe/configuration/gateway-health-probes",
                     "self-managed/components/orchestration-cluster/zeebe/configuration/environment-variables",
                     "self-managed/components/orchestration-cluster/zeebe/configuration/fixed-partitioning",
@@ -1515,7 +1540,6 @@ module.exports = {
               },
               items: [
                 "self-managed/components/orchestration-cluster/identity/overview",
-                "self-managed/components/orchestration-cluster/identity/configuration",
                 "self-managed/components/orchestration-cluster/identity/connect-external-identity-provider",
                 "self-managed/components/orchestration-cluster/identity/manage-tenants",
                 {

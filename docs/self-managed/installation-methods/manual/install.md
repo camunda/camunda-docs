@@ -387,7 +387,7 @@ Once you've downloaded the Orchestration cluster distribution, extract it into a
 3. Update the configuration in `config/application.yaml`, or export the environment variables.
 4. Navigate to `bin` folder.
 5. Run `camunda.sh` (Linux/macOS) or `camunda.bat` (Windows).
-6. Open [http://localhost:8080](http://localhost:8080). On first access, you’ll be asked to create an admin user unless [Identity](/self-managed/components/orchestration-cluster/identity/configuration.md) is configured with OIDC or a similar option.
+6. Open [http://localhost:8080](http://localhost:8080). On first access, you’ll be asked to create an admin user unless [Identity](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md) is configured with OIDC or a similar option.
 
 :::note
 Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and issue warnings in the logs. These warnings don’t affect startup or functionality, except that Web Modeler is limited to five users. To obtain a license, visit the [Camunda Enterprise page](https://camunda.com/platform/camunda-platform-enterprise-contact/).
@@ -724,3 +724,11 @@ curl localhost:9090/actuator/health
 
   </summary>
 </details>
+
+## Next steps
+
+After setting up your cluster, many users typically do the following:
+
+- [Connect to an identity provider](/self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md) – integrate with an external identity system for authentication.
+- [Secure cluster communication](/self-managed/components/orchestration-cluster/zeebe/security/secure-cluster-communication.md) – protect traffic between cluster nodes.
+- [Secure client communication](/self-managed/components/orchestration-cluster/zeebe/security/secure-client-communication.md) – ensure secure communication between clients and the cluster.

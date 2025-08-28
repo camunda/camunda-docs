@@ -62,7 +62,7 @@ Example:
 
 ## Creating and editing Connector templates
 
-Connector templates are a specific kind of element template. You can edit them with visual preview and edit support like formatting, code completion, and error highlighting in [Web Modeler](/components/connectors/manage-connector-templates.md).
+Connector templates are a specific type of element template. You can edit them with visual preview and edit support like formatting, code completion, and error highlighting in [Web Modeler](/components/connectors/manage-connector-templates.md).
 
 ## JSON schema compatibility
 
